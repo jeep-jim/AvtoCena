@@ -13,12 +13,12 @@ import {
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
 
 function offer(market: string, make: string, model: string, year: number) {
-  return { market, make, model, year } as any;
+  return { market, make, model, year, fuel: "petrol", powertrainKind: "combustion" } as any;
 }
 
 test("inventory quota is twenty per market + exact model + year", () => {
   assert.equal(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, 20);
-  assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, 100);
+  assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, 20);
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper|2022");
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2025)), "korea|hyundai|casper|2025");
   assert.notEqual(
@@ -32,14 +32,14 @@ test("inventory quota is twenty per market + exact model + year", () => {
   assert.equal(catalogExactModelKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper");
 });
 
-test("Japanese sold-auction inventory keeps up to one hundred unique lots per model-year", () => {
+test("Japan obeys the same twenty-listing model-year ceiling", () => {
   const rows = Array.from({ length: 115 }, (_, index) => ({
     ...offer("japan", "Toyota", "Aqua", 2024),
     id: `aqua-${index}`,
   }));
   const result = enforceCatalogModelYearQuota(rows);
-  assert.equal(result.rows.length, 100);
-  assert.equal(result.removed.length, 15);
+  assert.equal(result.rows.length, 20);
+  assert.equal(result.removed.length, 95);
 });
 
 test("homepage showcase prefers different makes and exact models without losing freshness order", () => {
@@ -98,13 +98,13 @@ test("canonical publication caps normalized model-year buckets and preserves qua
   assert.equal(result.rows.filter((row: any) => row.year === 2024).length, 3);
 });
 
-test("an untouched market keeps every hash-protected row while newcomers respect its occupied quota", () => {
+test("protected rows get priority but cannot bypass the owner hard ceiling", () => {
   const protectedRows = Array.from({ length: 22 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `live-${index}` }));
   const newcomers = Array.from({ length: 3 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `new-${index}` }));
   const protectedIds = new Set(protectedRows.map((row) => row.id));
   const result = enforceCatalogModelYearQuota([...protectedRows, ...newcomers], { protectedIds });
-  assert.deepEqual(result.rows.map((row: any) => row.id), protectedRows.map((row) => row.id));
-  assert.deepEqual(result.removed.map((row: any) => row.id), newcomers.map((row) => row.id));
+  assert.deepEqual(result.rows.map((row: any) => row.id), protectedRows.slice(0, 20).map((row) => row.id));
+  assert.equal(result.removed.length, 5);
 });
 
 test("coverage-first bounded output represents every discovered model-year before taking seconds", () => {

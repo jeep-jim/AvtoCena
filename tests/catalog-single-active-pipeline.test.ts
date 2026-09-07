@@ -49,7 +49,7 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(queue, /europe/);
   assert.match(queue, /georgia/);
   assert.doesNotMatch(queue, /kyrgyzstan|Кыргызстан/);
-  assert.match(queue, /japan/);
+  assert.doesNotMatch(queue, /^  japan:/m);
   assert.match(reusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(reusable, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
   // Two photos is the general admission floor; collectors still prefer up to 30
@@ -60,15 +60,13 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(reusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
 });
 
-test("weekly Japan accumulation preserves source cursors while retaining 30 days", () => {
+test("the five-market queue excludes Japan and stops before collection during the pause", () => {
   const queue = text("catalog-v3-sequential-queue.yml");
-  const japanJob = queue.match(/\n  japan:\n([\s\S]*?)\n  korea:/)?.[1] || "";
-  assert.match(japanJob, /retention_ms: "2592000000"/);
-  assert.match(japanJob, /target_per_source: "30000"/);
-  assert.match(japanJob, /target_per_market: "30000"/);
-  assert.match(japanJob, /maximum_per_market: "30000"/);
-  assert.match(japanJob, /reset_cursor: false/);
-  assert.doesNotMatch(japanJob, /reset_cursor: true/);
+  assert.doesNotMatch(queue, /^  japan:|run_japan|market: japan/m);
+  assert.match(queue, /CATALOG_PRODUCTION_WRITES_PAUSED/);
+  assert.match(queue, /process\.exit\(1\)/);
+  assert.equal((queue.match(/needs\.plan\.result == 'success'/g) || []).length, 5);
+  assert.equal((queue.match(/retention_ms: "1209600000"/g) || []).length, 5);
 });
 
 test("Japan marker pushes continue accumulation while explicit dispatch remains the reset path", () => {

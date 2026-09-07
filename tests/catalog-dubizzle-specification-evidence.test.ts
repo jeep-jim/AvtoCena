@@ -9,6 +9,21 @@ import {
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const source = new DubizzleUaeExactAdapter();
+
+test('Dubizzle stops on the first refusal without trying another region or Algolia', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    for (const status of [200, 401, 403, 429]) {
+      let requests = 0;
+      globalThis.fetch = async () => {
+        requests++;
+        return new Response('<title>Pardon Our Interruption</title>', { status });
+      };
+      await assert.rejects(() => source.fetchPage('1'), /dubizzle_exact_blocked_/);
+      assert.equal(requests, 1);
+    }
+  } finally { globalThis.fetch = originalFetch; }
+});
 const uuid = "0123456789abcdef0123456789abcdef";
 const url = `https://uae.dubizzle.com/en/motors/used-cars/toyota/camry/2026/9/1/exact-car---${uuid}/`;
 

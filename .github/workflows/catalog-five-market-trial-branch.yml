@@ -1,0 +1,44 @@
+name: First common five-market trial v1
+on:
+  push:
+    branches: [feat/catalog-europe-kcar-generation-canary-20260907]
+    paths: [.github/workflows/catalog-five-market-trial-branch.yml]
+permissions:
+  contents: read
+concurrency:
+  group: catalog-five-market-trial
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        market: [korea, europe, china, uae, georgia]
+    env:
+      TRIAL_MARKET: ${{ matrix.market }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --test tests/catalog-five-market-restart-check.test.ts tests/catalog-pilot-bridge.test.ts tests/catalog-trial-snapshot.test.ts
+      - name: Collect every required source sequentially within this market
+        run: node --import tsx scripts/catalog-five-market-trial.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: five-market-trial-${{ matrix.market }}
+          path: five-market-trial/${{ matrix.market }}/
+          retention-days: 14

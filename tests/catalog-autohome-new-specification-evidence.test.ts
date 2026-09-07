@@ -27,6 +27,7 @@ function configMarkup(specId: string, energy: string, engine: string, hp: string
         {
           name: "发动机",
           paramitems: [
+            { id: 999, name: "排量(mL)", valueitems: configValue(specId, "1498") },
             { id: 1150, name: "发动机", valueitems: configValue(specId, engine) },
             { id: 1294, name: "最大马力(Ps)", valueitems: configValue(specId, hp) },
             { id: 1185, name: "最大功率(kW)", valueitems: configValue(specId, kw) },
@@ -73,7 +74,7 @@ test("Autohome promotes only a consistent combustion specification", async () =>
     assert.equal(images.length, 5);
     assert.equal(offer.fuel, "petrol");
     assert.equal(offer.powertrainKind, "combustion");
-    assert.equal(offer.engineCc, 1500);
+    assert.equal(offer.engineCc, 1498);
     assert.equal(offer.powerHp, 107);
     assert.equal(offer.powerKw, 78.5);
     assert.equal(offer.powerDataConfidence, "source_exact");
@@ -118,7 +119,7 @@ test("Autohome classifies light and range-extender hybrids without promoting pea
   });
   assert.equal(lightHybrid.fuel.value, "hybrid");
   assert.equal(lightHybrid.powertrainKind.value, "other_hybrid");
-  assert.equal(lightHybrid.engineCc.value, 2000);
+  assert.equal(lightHybrid.engineCc.value, undefined);
   assert.equal(lightHybrid.powerHp.status, "missing");
   assert.equal(lightHybrid.powerKw.status, "missing");
 
@@ -147,4 +148,13 @@ test("Autohome derives the missing combustion unit only from one exact named uni
   assert.equal(fromKw.powerKw.value, 110);
   assert.equal(fromKw.powerHp.value, 149.6);
   assert.equal(fromKw.powerHp.status, "exact");
+});
+
+
+test("Autohome exact displacement requires explicit cc and rejects conflicting fields", () => {
+  assert.equal(autohomeNewSpecificationEvidence({ engine: "1.5T" }).engineCc.value, undefined);
+  assert.equal(autohomeNewSpecificationEvidence({ engine: "1.5T", displacementCcValues: ["1498 cc"] }).engineCc.value, 1498);
+  assert.equal(autohomeNewSpecificationEvidence({ engine: "1499 cc", displacementCcValues: ["1498 cc"] }).engineCc.status, "conflict");
+  assert.equal(autohomeNewSpecificationEvidence({ displacementCcValues: ["1498 cc", "1998 cc"] }).engineCc.status, "conflict");
+  assert.equal(autohomeNewSpecificationEvidence({ displacementCcValues: ["1498-1998 cc"] }).engineCc.value, undefined);
 });

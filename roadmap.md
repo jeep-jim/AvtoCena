@@ -1504,3 +1504,986 @@ Production-результат ещё должен быть подтверждё�
 - **DubiCars:** EV peak `313 HP` доказан, но certified/utilization/30-minute power нет; ICE exact cc/power нет. Gallery window содержит лишние UUID относительно source `image_count=11/14`, поэтому gallery evidence пока contaminated и не повышается до exact.
 - **Вердикт этапа:** ни один из 4 источников не получает `exact_catalog`; у всех `publishAllowed=false`. Текущий public generation, manifest, Object Storage, cleanup и production catalog не менялись.
 - **Следующий основной блок:** не лечить эти четыре бесконечно. Перейти к partial-signal группе `carvector_japan_stat_open`, `chngoodcar_china_candidate`, `iautos_china_candidate`, `exportcar_japan_candidate` и применить тот же read-only source-bound field contract. К strongest-группе возвращаться только при наличии конкретного разрешённого route/evidence, способного закрыть оставшееся поле без inference.
+
+### 40.27. Guangdong Good Car: exact passenger ICE adapter только в no-write режиме
+
+- **Дата checkpoint:** 2026-09-03. Продолжение partial-signal исследования после 40.26; production не изменялся.
+- **Классификационный результат:** `chngoodcar_china_candidate` имеет `class=exact_catalog` только как доказанную способность источника давать exact-поля для ограниченного offer-level ICE scope. `publishAllowed=false`; sourceId намеренно не добавлен в `REQUIRED_CATALOG_SOURCES.china` и production allowlist.
+- **Реализация:** на ветке `feat/chngoodcar-exact-adapter-v1-20260903` создан стандартный `CatalogSourceAdapter` `apps/web/lib/catalog/chngoodcar-exact-source.ts`, regression-тест `tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts`, no-write runner `scripts/catalog-source-chngoodcar-exact-dry-run-v1.ts` и read-only workflow `.github/workflows/catalog-source-chngoodcar-exact-dry-run-v1.yml`.
+- **Exact gate v1:** USD принимается только по явной CarsList-оси `价格(US $)` плюс совпадение list/detail title и цены; detail обязан дать production date/year, mileage, точные `排量 (ml)` и `功率 (kw)`, combustion fuel, подтверждённый passenger body и не менее пяти listing-bound фото до `猜你喜欢`. kW сохраняется как source-exact provenance; `powerHp = round(kW / 0.73549875)`. EV/hybrid, unknown body, неизвестная make/model identity, неполная галерея или parity failure блокируются.
+- **Первый green намеренно не принят:** run `33756537493` был `success` (`8/8` tests, typecheck, parsed `14`, accepted ICE `7`, electrified blocked `1`; artifact `9893690091`, digest `sha256:f89660f119c1806b64d5095b515bf699d56e44b1a4295d332a49f98ccf9c0a21`), но ручной разбор artifact обнаружил `douyin.png` в gallery и ложное `drive=付款方式` у автобусной карточки. Это зафиксировано как дефект, а не скрыто зелёным CI.
+- **Исправление после ручного аудита:** social/UI assets исключены из gallery; transmission/drive ограничены whitelist точных source values; v1 scope сужен до passenger body (`轿车/SUV/MPV/两厢车/三厢车/旅行车/跑车`); добавлены fail-closed regression checks для social gallery, body gate и electrified offers.
+- **Финальный no-write run:** `33757087189`, head `aae2f3540c58d05d23c56b79aa6dba2db43ceb75` — `success`; `9/9` tests, typecheck, live dry-run и no-write envelope зелёные. Artifact `9893932333`, digest `sha256:ad370395949557f958184458bbf0a370e16445928dbb3c67ee05e3be5e576288`. Homepage discovery увидел `32` offer links, detail parsed `14`, exact passenger ICE accepted `3`, electrified blocked `1`, body-gate blocked `6`, ещё `4` passenger ICE отклонены оставшимися exact gates; `failures=[]`.
+- **Accepted sample:** Hyundai Elantra `2057736003732369408` — `2022-01`, `42000 km`, `1500 ml`, `84.5 kW → 115 hp`, `9950 USD`, 10 фото; Mazda CX-50 `2049753443165270016` — `2023-10`, `15000 km`, `2000 ml`, `114 kW → 155 hp`, `23600 USD`, 20 фото; MG5 `1988133087980023808` — `2025-09`, `0 km`, `1495 ml`, `95 kW → 129 hp`, `8800 USD`, 10 фото. Все три combustion/passenger и прошли list/detail parity.
+- **Ручной source spot-check:** Mazda detail независимо совпал по title/price/body/date/mileage/engine/power/transmission/fuel/drive; MG5 detail совпал по тем же полям. Текущая homepage повторно подтвердила Hyundai list identity `9950 / 2022-01 / 42000km`. CarsList явно показывает `价格(US $)`. Независимый web-cache Hyundai detail в момент ручной проверки не открылся, поэтому он не записан как отдельная полная web-detail сверка.
+- **Safety boundary подтверждён:** `productionWrites=false`, `classificationMutations=false`, `publishAllowedMutations=false`, `objectStorageWrites=false`, `catalogGenerationWrites=false`, `productionAllowlisted=false`. Public generation, manifest, current China data, cleanup и production writers не затронуты.
+- **Оставшийся блокер:** v1 обнаруживает bounded набор current offers с public homepage, а CarsList использует как явный currency contract. Полная CarsList discovery/pagination ещё не реализована и не доказана. Поэтому production promotion запрещён до отдельного pagination/readiness, no-write scale run и ручного offer-level spot-check на расширенной выборке.
+- **Следующий безопасный шаг:** оставить `publishAllowed=false` и China production registry без изменений; реализовать/доказать полный CarsList discovery/pagination в отдельной ветке, затем снова прогнать exact no-write scale. Только после этого отдельно решать, добавлять ли `chngoodcar_china_candidate` в production source registry.
+
+### 40.28. Guangdong Good Car: доказана полная CarsList pagination, production всё ещё закрыт
+
+- **Дата checkpoint:** 2026-09-04. Продолжение 40.27. Этот этап не включал источник в production и не менял действующий China catalog.
+- **Реальный discovery contract доказан, а не угадан:** `GET /Home/CarsList` используется для anti-forgery token/cookie и явного `价格(US $)`, затем source-declared `POST /Car/SearchCarList` с `Hot=false`, `DefaultSort=1`, `PriceSort=0`, `MileageSort=0`, `YearSort=0`, `pageindex`, `pagesize=15`. URL вида `?page=2` и непроверенный внутренний API не используются.
+- **Full-list exhaustion:** финальный run `33824559065`, head `e817b82a4bd7f94596ebb0adcdb492ffb52c2590` — `success`; artifact `9919508699`, digest `sha256:db9875b88c09de5b3abbb6217a66a4428c937b00476df4229c8336dc7a9c6a71`.
+- **Полный индекс источника на момент run:** source total `1434`; пройдены `96/96` страниц; `1434/1434` raw numeric IDs; total min/max `1434/1434`, drift `0`; duplicate raw IDs `0`; valid identity IDs `1426`, duplicate identity IDs `0`; `8` строк отклонены как `non_usd_currency`.
+- **Стратифицированный detail audit:** страницы `1, 20, 39, 58, 77, 96`; accepted exact passenger ICE после всех gates — `24`; rejected passenger ICE — `32`; blocked non-passenger — `1`; accepted makes: `现代`, `马自达`, `大众`, `比亚迪`, `宝马`, `奥迪`, `丰田`, `日产`, `长安`, `起亚`. Все sampled detail pages health-green, `failures=[]`.
+- **Цена fail-closed:** первый full run `33777919699` специально не был принят, потому что Mazda CX-5 с exact list/detail parity имела source price `100 USD`. Цена не исправлялась и не заменялась рыночной оценкой. Для modern rows (2020+) source price `<2000 USD` теперь создаёт manual-price-review reject. В финальном run эта Mazda (`2049030561644670976`) заблокирована, исходные `100 USD` сохранены как evidence.
+- **Exact-version conflict ledger — reject-only, без подмены source fields:** Toyota Prado 2016 3.5 TX (`diesel` vs Autohome spec 23948 gasoline); BYD Song MAX 2018 1.5T 6-seat (`SUV` vs spec 33704 `MPV`); Toyota Camry 2012 尊瑞 2.5HG (`汽油` vs spec 12931 hybrid); Geely Xingyue 2019 300T 探星者 (`汽油` vs spec 39287 `汽油+48V轻混系统`, matching 1477 cc / 130 kW); VW 朗行 2017 180TSI DSG舒适版 (`轿车` vs spec 29388 `两厢车`, matching 1.2T / 81 kW). External references только блокируют точный конфликт и никогда не заполняют/переписывают Good Car.
+- **Финальная выборка реально поймала 4 reference conflicts:** Song MAX page 20, Xingyue page 39, Camry page 58, Langxing page 77. Prado не находился на шести sampled pages, но его narrow regression rule остаётся активным. Reference regression после последних правок — `7/7` pass.
+- **Five-page confirmation после финальных conflict tests:** run `33824474523` — `success`; 75 raw rows, 73 valid identity, 50 joined details, 15 accepted, 3 identity-electrified blocked, 1 verified reference conflict blocked, `failures=[]`; artifact `9919467819`, digest `sha256:703fd9c5495150e726a1dd33a31ba68ee8a3db0acf8f8eb5765f397fff9647ab`.
+- **Identity normalization:** добавлен отдельный regression для дублирующего `汽车` после exact make (например `吉利汽车 / 汽车 星越`), без общего fuzzy-переименования моделей.
+- **Safety boundary подтверждён:** `productionWrites=false`, `classificationMutations=false`, `publishAllowedMutations=false`, `objectStorageWrites=false`, `catalogGenerationWrites=false`, `productionAllowlisted=false`; `publishAllowed=false`; текущие public generation/manifest/Object Storage/cleanup/publication не затронуты.
+- **Документ evidence:** `docs/catalog-source-chngoodcar-pagination-v1-evidence.md` содержит route contract, историю intentional failures, final runs, artifact/digest и точные safety boundaries.
+- **Вердикт:** Good Car доказан как массовый public CarsList source с реальной server-side pagination и стабильным inventory `1434` rows на момент проверки. Это усиливает source-level `exact_catalog`, но не превращает все `1434` строк в готовые карточки: offer-level exact gate обязателен для каждой машины.
+- **Следующий безопасный шаг:** слить этот pagination/exhaustion research-пакет только в родительскую audit-ветку после полного PR CI; оставить Good Car вне production allowlist и `publishAllowed=false`; затем продолжить квалификацию остальных источников/рынков. Любое production promotion Good Car — отдельное решение после общего six-market no-write readiness.
+
+### 40.29. Guangdong Good Car: post-40.28 price-review refinement
+
+- **Дата checkpoint:** 2026-09-04. Раздел 40.28 остаётся неизменным историческим checkpoint для run `33824559065` (`24 accepted / 1 manual-price-review`). Этот пункт фиксирует следующий более строгий gate после ручного аудита accepted sample.
+- **Новая обнаруженная аномалия:** Good Car offer `1432600975113187328`, `马自达 昂克赛拉 2017款 三厢 1.5L 自动舒适型 国V`, имеет согласованный list/detail source price `93900 USD`. Независимая exact-version проверка использована только как основание для manual review; исходная цена `93900` не заменяется, не пересчитывается и не подменяется рыночным значением.
+- **Fail-closed исправление:** в `apps/web/lib/catalog/chngoodcar-price-review.ts` добавлен narrow reason `verified_exact_version_extreme_price_outlier_manual_review`. В `tests/catalog-source-chngoodcar-price-review-v1.test.ts` закреплено, что exact offer блокируется reviewed-adapter, а `sourcePrice/listPrice=93900` остаются без изменений.
+- **Повторный полный proof после regression lock:** run `33825326173`, head `04b292fc5ebb45038fbeb1bbf77ada52c2f9d38a` — `success`; artifact `9919781133`, digest `sha256:0c84dc88d9fb0363dd8b027a38d243f1be44ccb607b463407a83f527be6d1610`.
+- **Полный CarsList inventory снова подтверждён:** source total `1434`, `96/96` страниц, `1434` unique raw IDs, `1426` valid identity IDs, total без drift и без duplicate IDs. Stratified detail pages: `1,20,39,58,77,96`.
+- **Итог более строгого sample gate:** exact passenger ICE accepted `23`; rejected passenger ICE `32`; blocked non-passenger `1`; blocked independently verified reference conflicts `4`; blocked manual-price-review `2`; `failures=[]`.
+- **Две price-review строки:** Mazda CX-5 `2049030561644670976` — source `100 USD`, reason `modern_offer_in_source_under_2000_usd_band`; Mazda3/Axela `1432600975113187328` — source `93900 USD`, reason `verified_exact_version_extreme_price_outlier_manual_review`. Обе исходные цены сохраняются как evidence и не используются для автоматического exact допуска.
+- **Проверки:** новый high-price regression, существующий low-price regression, identity normalization, CarsList contract, paginated exact, reference-conflict suites, typecheck, полный 96-page exhaustion и no-write envelope — green.
+- **Safety boundary неизменён:** `productionWrites=false`, `classificationMutations=false`, `publishAllowedMutations=false`, `objectStorageWrites=false`, `catalogGenerationWrites=false`, `productionAllowlisted=false`, source `publishAllowed=false`. Public China generation, manifest, Object Storage, cleanup и publication не менялись.
+- **Следующий шаг:** завершить PR `#829` только в родительскую audit-ветку `chore/source-partial-field-audit-v1-20260903` после полного PR CI. Good Car не добавлять в production China allowlist; production promotion разрешён только отдельным решением после общего six-market no-write readiness. После merge этого research-пакета продолжить квалификацию остальных источников/рынков.
+
+### 40.30. KB ChaChaCha Korea: access-policy qualification останавливает автоматический crawl
+
+- **Дата checkpoint:** 2026-09-04. Следующий новый candidate после закрытия Good Car pagination-пакета.
+- **Цель:** до исследования detail/pagination отдельно проверить, разрешён ли сам публичный маршрут для автоматического каталога. KB ранее был `research_pending`/list-only candidate с полезными public search signals, но без доказанного permitted automated route.
+- **Bounded probe:** run `33826631629`, head `5be42c80545baa4ce79e0a7425128322d061fb76` — `success`; artifact `9920244140`, digest `sha256:4f4c66bb38a28870c4b8fce53e5cc9313397f148f4a2a52d81574d7254fa265f`.
+- **Жёсткий request envelope:** ровно `2` HTTP-запроса — `robots.txt` и registry-declared `https://www.kbchachacha.com/public/search/main.kbc`; `detailRequests=0`, `paginationRequests=0`, `externalScriptRequests=0`, raw bodies не сохранялись.
+- **Live access facts:** `robots.txt=200`, observed robots policy для registry route разрешает доступ; public search page также `200`. Но в **видимом официальном public HTML** обнаружен явный запрет несанкционированного scraping/automation. Robots allowance не трактуется как отдельное разрешение при наличии такого ограничения самого сайта.
+- **Решение:** `kbchachacha_korea_candidate -> class=lead_only`, `publishAllowed=false`. Текущий scope — только ручной поиск/reference navigation; automated inventory ingestion, pagination/detail crawl и публикация карточек из этого public route запрещены в нашем движке.
+- **Важно:** это не означает, что данные KB плохие. Источник отклонён именно как текущий автоматический ingestion route. Requalification возможна при появлении официально разрешённого API, partner/dealer feed или письменного разрешения на автоматическое использование.
+- **После permitted-access requalification:** заново доказать offer identity/direct URL, KRW price, body, fuel/powertrain, exact engineCc, exact power, mileage и listing-bound gallery. Public-page scraping нельзя использовать как обход.
+- **Safety:** `productionWrites=false`, `publishAllowedMutations=false`, `objectStorageWrites=false`, `catalogGenerationWrites=false`, production catalog/generation/manifest/cleanup не менялись.
+- **Evidence:** `docs/catalog-source-kbchachacha-access-policy-v1-evidence.md` и `data/catalog/source-partial-classification-v1.json`.
+- **Следующий шаг:** не тратить запросы на KB без разрешённого data route; продолжить квалификацию следующего `research_pending` source, сохраняя тот же no-write/source-permission-first порядок.
+
+## 40.31 — WorldAuto Georgia: technical field contract proven, commercial reuse blocked; Japan paused
+
+Дата: 2026-09-04.
+
+Ветка исследования: `chore/worldauto-detail-route-probe-v1-20260904`. Production/publication writes не выполнялись.
+
+Что подтверждено по WorldAuto Georgia:
+
+- permission-first/no-write цепочка завершена успешными runs: `33854811320`, `33855034005`, `33855980435`, `33856160338`, `33856330429`, `33856502011`, `33856667630`;
+- frontend самого WorldAuto объявляет `GET /search/sell/car/get` и backend base URL `https://worldauto-backend-production.up.railway.app`; скрытые endpoint'ы не угадывались;
+- один bounded no-param GET к source-declared search endpoint вернул `200 application/json`; пагинация и detail crawl не запускались;
+- из первого сбалансированного offer-object доказаны id, 10 фото, Toyota Land Cruiser Prado, 2021, price 45000, Diesel, 2.8, 204, Automatic, AWD, mileage 0, Batumi;
+- официальный UI WorldAuto показывает тот же образец как `45000$` и маркирует цены продажи в долларах;
+- технически источник близок к exact contract, но это **не даёт права публикации**.
+
+Решающая причина остановки WorldAuto:
+
+- официальный public footer WorldAuto указывает, что content страницы, включая images, vehicle descriptions/details, является собственностью `worldauto.ge`; коммерческое reuse лицами, отличными от seller, запрещено, при использовании материалов требуется ссылка;
+- поэтому для коммерческого каталога AvtoCena WorldAuto переводится в `lead_only`, `publishAllowed=false`; автоматический reuse/republication прекращён;
+- все одноразовые WorldAuto qualification workflows после снятия доказательств удалены, чтобы обычные push не запускали новые запросы;
+- повторно открывать автоматизацию WorldAuto можно только после явно разрешённого API/partner feed либо письменного разрешения на commercial data reuse/republication.
+
+### Japan — пауза по указанию владельца
+
+Япония сейчас **не входит в активную очередь qualification**. Старые Japan ledger entries остаются только историей исследования. Экспериментальные Japan branches не вливать в активный source path и новые Japan probes не запускать. Возвращаться к Японии только после нахождения кандидата, который реально отдаёт уже завершённые/отыгранные аукционные лоты под требуемый exact contract, и после явного возобновления рынка владельцем. На текущем подтверждённом состоянии такого источника в проекте нет; fixed-price/export-stock SBT/TCV/BE FORWARD не доказывают completed-auction coverage.
+
+### Следующее действие после 40.31
+
+Продолжать только non-Japan `research_pending` источники, строго permission-first/no-write. Приоритет — кандидат, который по уже собранным данным ближе всего к exact contract; не расширять WorldAuto и не возвращаться к Japan до снятия указанных блокеров.
+
+## 40.32 — AutoScout24 Europe: official terms block automated query and commercial database reuse
+
+Дата: 2026-09-04.
+
+Ветка: `chore/autoscout24-access-field-audit-v1-20260904`.
+
+- Следующий non-Japan candidate после WorldAuto проверен **сначала по source permission**, до технического crawl.
+- Consumer GTC AutoScout24 (effective 01.04.2024), section 8.2: automated queries via scripts/search software or similar bypass of the provided online search masks are not permitted.
+- Section 8.3: queried data may not be used to build a separate database, for commercial data exploitation/provision, or linked/integrated with other databases/meta-databases.
+- Dealer/company GTC (effective 01.04.2025) likewise prohibits automated database querying by software and copying database contents to other websites/media unless it is the dealer's own content.
+- Поэтому ранее полученные formal/exact-looking baseline rows не дают права строить automated adapter: `autoscout_europe_open -> lead_only`, `publishAllowed=false`.
+- Scope сейчас: только manual public reference/link-out. Повторная qualification возможна только через официальный API/feed/agreement или письменное разрешение, которое явно покрывает automated query + commercial database reuse/republication.
+- После проверки условий **не запускались** AutoScout24 list/detail/API crawler probes; обходов ограничений не делалось. Production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.32
+
+Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала официальные access/reuse terms; только если они не блокируют автоматизацию — bounded no-write technical field qualification.
+
+## 40.33 — mobile.de Europe: public scraping blocked; official partner Search-API is the permitted path
+
+Дата: 2026-09-04.
+
+Ветка: `chore/mobilede-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового technical crawl.
+- Current Professional Domain GTC mobile.de (valid from 01.04.2026), Article 11: vehicle search должен идти через предоставленные search screens; unauthorized search tools, extraction/reuse, data mining, robots, grabbing, scraping и аналогичные технологии запрещены.
+- Public-domain GTC содержит тот же core restriction для public marketplace.
+- Поэтому `mobile_de_open -> lead_only`, `publishAllowed=false`; public-page crawler/list/detail qualification не запускать.
+- Важный положительный сигнал: mobile.de публикует официальные Search-API GTC. Это не public permission: Search-API предназначен для API PARTNER и работает в рамках API Partner Agreement/Partner Application.
+- Значит правильный следующий путь для mobile.de — официальный partner/API agreement, а не scraping. После получения разрешённого API scope можно заново делать exact field qualification именно на API.
+- После чтения terms automated mobile.de inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе.
+
+### Следующее действие после 40.33
+
+Продолжить следующий non-Japan `research_pending` source: сначала official access/reuse terms, затем bounded no-write technical qualification только если terms допускают автоматизацию.
+
+## 40.34 — La Centrale Europe: public database is consultation-only; automated reuse blocked
+
+Дата: 2026-09-04.
+
+Ветка: `chore/lacentrale-access-policy-v1-20260904`.
+
+- Следующий non-Japan candidate проверен source-permission-first до нового technical crawl.
+- Official La Centrale CGU, Article 5: site/content разрешены только для strictly personal use; reproduction/representation/diffusion требуют prior written and express authorization.
+- Database data предоставляются публике только для pure consultation. Extraction/reuse, выходящие за то, что исключительно и строго необходимо для pure consultation, без prior written approval выходят за normal-use conditions.
+- Поэтому `lacentrale_europe_candidate -> lead_only`, `publishAllowed=false`. Public list/detail/API crawler qualification не запускать, AvtoCena catalog не строить/обновлять из публичной La Centrale database.
+- Повторно открывать exact technical qualification только после письменного разрешения Groupe La Centrale либо official data/API/partner feed, который явно покрывает automated commercial use, retention и republication.
+- После permission check автоматические inventory requests к La Centrale не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.34
+
+Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала official access/reuse conditions; только если они не блокируют автоматизацию — bounded no-write technical field qualification.
+
+## 40.35 — AutoUncle Europe: public scraping requires permission; official B2B API is the candidate path
+
+Дата: 2026-09-04.
+
+Ветка: `chore/autouncle-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового public inventory crawl.
+- Official AutoUncle Terms of Service, last updated 27 November 2024, section 4: users agree not to scrape or collect data without permission.
+- Поэтому `autouncle_europe_candidate -> lead_only`, `publishAllowed=false`; public-site list/detail crawler не запускать без разрешения.
+- Положительный путь найден: AutoUncle официально предлагает B2B Automotive API для enterprise integrations с API key, market valuation, deal rating, sales-time forecast и live comparables. Это кандидат на разрешённую интеграцию, но не public-site permission.
+- Exact technical qualification AutoUncle возобновлять только через API/enterprise agreement либо письменное разрешение, которое явно покрывает AvtoCena use case, нужные поля, retention и republication.
+- После terms check public inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.35
+
+Продолжить следующий non-Japan `research_pending` source: official access/reuse conditions first; если permission path не закрыт — bounded no-write technical qualification.
+
+## 40.36 — YallaMotor UAE: public automated collection expressly prohibited
+
+Дата: 2026-09-04.
+
+Ветка: `chore/yallamotor-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового technical crawl.
+- Official YallaMotor Terms of Service, clause 7: запрещены robot/spider/scraper/other automated means для доступа к YallaMotor и collection content **for any purpose**, а также copy/download content. Ограниченное исключение дано search engines и non-commercial public archives, но не сайтам с classified listings.
+- Terms также запрещают copy/distribute/reproduce/sell/lease/assign/rent/sublicense platform/content; hyperlink permission описана только для non-commercial use.
+- Поэтому `yallamotor_uae_candidate -> lead_only`, `publishAllowed=false`; public list/detail/API crawler не запускать и listing content не переиспользовать в коммерческом AvtoCena catalog по текущему public route.
+- Возобновлять exact technical qualification только после official API/feed/partner agreement либо written authorization, которое явно покрывает automated collection, retention и republication.
+- После terms check YallaMotor inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца.
+
+### Следующее действие после 40.36
+
+Продолжить следующий non-Japan `research_pending` source с official access/reuse check до технических запросов.
+
+## 40.37 — Japan qualification pause is machine-readable and must be honored by every new source probe
+
+Дата: 2026-09-04.
+
+Чтобы пауза Японии больше не зависела только от текста/контекста чата, она закреплена в qualification registry и decision ledger:
+
+- `pausedMarkets` содержит `japan`;
+- `marketControls.japan.status = paused_by_owner`;
+- `automatedQualificationAllowed=false`;
+- каждая Japan candidate row помечена `qualificationPaused=true`;
+- новые source-qualification probes обязаны исключать рынки из `pausedMarkets`;
+- resume condition: сначала найден и доказан кандидат с **completed/played auction lots** под exact contract, затем отдельное явное указание владельца возобновить Japan qualification;
+- fixed-price/export-stock источники не считаются выполнением этого условия.
+
+Это не меняет production catalog и не запускает/останавливает production parser само по себе; это guard именно текущего research/qualification трека.
+
+### Следующее действие после 40.37
+
+Продолжать только non-Japan source qualification.
+
+## 40.37 — Bobaedream Korea: commercial reuse requires prior consent
+
+Дата: 2026-09-04.
+
+- После закрепления machine-readable паузы Japan продолжена только non-Japan qualification.
+- Следующий приоритетный кандидат — Bobaedream Korea, потому что предыдущий read-only field audit уже доказал identity, make/model/year, KRW price, fuel, exact engineCc и powerHp; оставались body и listing-bound gallery.
+- До нового crawl проверены официальные Terms of Service Bobaedream: Article 11 запрещает без предварительного согласия компании использовать service для коммерческой деятельности и отдельно запрещает без предварительного согласия копировать/воспроизводить/изменять/переводить/публиковать/иным способом использовать или передавать третьим лицам информацию, полученную через service.
+- Поэтому дальнейший автоматический detail/gallery crawl из public route остановлен до появления явно разрешённого канала данных.
+- Решение: `bobaedream_korea_candidate -> lead_only`, `publishAllowed=false`.
+- Requalification возможна только после письменного разрешения либо official API/partner feed, который явно покрывает automated commercial ingestion/republication; после этого отдельно доказать canonical body, gallery>=5 и list/detail parity.
+- Japan остаётся на паузе; все Japan candidates имеют `qualificationPaused=true`.
+- Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
+
+## 40.38 — CARS24 UAE: current Terms explicitly block scraping and commercial reuse
+
+Дата: 2026-09-04.
+
+- После Bobaedream продолжена только non-Japan permission-first qualification.
+- По CARS24 UAE новый crawl не запускался: сначала проверены актуальные официальные Terms of Use, обновлённые 21.05.2026.
+- Terms прямо запрещают без prior written authorization копировать, воспроизводить, распространять, mirror/scrape/exploit/republish/license/commercially use vehicle listings, pricing data и другой Website content; также отдельно запрещены bots/crawlers/spiders/scrapers/automated tools без authorization.
+- Поэтому public-site automated ingestion для AvtoCena остановлен до разрешённого data route.
+- Решение: `cars24_uae_candidate -> lead_only`, `publishAllowed=false`.
+- Предыдущий field audit остаётся полезным только как историческая техническая evidence: offer-local identity/year/body/fuel и 15 listing-id-bound images были видны, но price binding, engine units и power оставались незакрыты.
+- Requalification — только через prior written authorization либо явно разрешённый API/feed; затем заново доказать price, engine units, power и list/detail parity.
+- Japan по-прежнему paused machine-readable; production/Object Storage/generation/manifest/cleanup не менялись.
+
+## 40.39 — CarSwitch UAE: listing contract is strong, but offer-bound power is absent
+
+Дата: 2026-09-04.
+
+- Japan не трогался: machine-readable pause остаётся на всех Japan candidates.
+- CarSwitch проверен не через догадки маршрутов, а через текущий `robots.txt` и объявленный им `/sitemap/detail_pages.xml`. В sitemap найдено 4770 detail URL; после одного stale 404 второй source-declared URL оказался живым.
+- Успешный live-detail run: `33865783957`, artifact `9933926874`, digest `sha256:43d5a97a9d9c905ecf5f014af56edd0c0708590897ce8f8d3917dafce402d6e3`. Образец: Peugeot 3008 ACTIVE 2024, listing `661285`, AED 64,900, 16,428 km.
+- Listing-bound JSON-LD на этом detail содержит: make/model/year, `bodyType=SUV`, `fuelType=Petrol`, `engineDisplacement=1.6`, `driveWheelConfiguration=2WD`, `vehicleTransmission=Automatic`, mileage, listing VIN-like identity, AED offer price и 10 изображений. В публичной карточке тот же двигатель подписан как 1.6L.
+- Чтобы не спутать общий SEO/editorial content с полями конкретной машины, выполнен отдельный same-offer scan: run `33866026252`, artifact `9934001368`, digest `sha256:c5fcf1aef30ef1774e2920fa0a99ce2387977d783dbc7ee6ad5de11dd5d82c09`.
+- Результат power scan: в listing-bound Car/Product JSON-LD нет поля мощности; в пяти контекстах примерно по 24 KB вокруг id `661285` — `0` power keys и `0` числовых HP/BHP/PS/kW; в visible detail — также `0` числовых power values. В полном captured HTML есть generic HP/BHP упоминания, но это статьи/новые модели и другие машины, не текущий offer, поэтому использовать их нельзя.
+- Предыдущий audit `33731051049` уже показывал ту же системную проблему: хорошие identity/price/body/fuel/gallery, но нет source-bound powerHp.
+- Решение: `carswitch_uae_candidate -> lead_only`, `publishAllowed=false`. CarSwitch нельзя использовать как самостоятельный exact source для полного расчёта, пока мощность не появится на том же offer/listing в разрешённом source-declared route. Model-page/external power inference запрещён.
+- Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan шаг: MyAuto Georgia — сначала access-policy, только потом detail/field probe.
+
+## 40.40 — MyAuto Georgia: rules routes challenge automation; permission remains unproven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- По MyAuto Georgia сначала проверен только access-policy, без inventory/detail crawl.
+- Run `33866428112`: `robots.txt=200`; `/en/rules` robots не запрещён, но GitHub Actions получил `403` challenge. Artifact `9934139585`, digest `sha256:fd0c546bda1c42feff9c0fe537f20bb50d6ae1e38cbc5f43eb0e3994ed9e6040`. Ровно 2 запроса, detail/API/pagination = 0.
+- Чтобы не застревать на одной локали, bounded v2 проверил только два уже известные официальные rules routes: `/ka/rules` и `/ru/rules`. Run `33866663248` завершился success; оба маршрута robots-allowed, но оба дали `403 Just a moment...`. Artifact `9934222620`, digest `sha256:4c8c8755e0980e7648ace22195442b65ffd118e2083889eb47cd2971cacd6c80`. Ровно 3 запроса: robots + две rules pages; detail/API/pagination = 0.
+- Это не доказывает запрет MyAuto на данные и не доказывает разрешение. Точный вывод: текущий automation runner не может прочитать official rules без challenge, а positive permission на automated commercial ingestion/reuse не доказан.
+- Решение: `myauto_georgia_list` остаётся `research_pending`, `publishAllowed=false`, с blocker `automation_access_and_reuse_permission_unproven_rules_routes_challenged`. Новые MyAuto inventory/detail probes не запускать, пока не найден явно разрешённый API/partner feed/written authorization либо source-declared route, доступный без обхода challenge и разрешающий нужное использование.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: AutoPapa Georgia, снова начиная с access-policy.
+
+## 40.41 — AutoPapa Georgia: public entry challenges automation; permission remains unproven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После MyAuto без повторных циклов переключились на AutoPapa Georgia.
+- Permission-first run `33866935666`: `https://autopapa.ge/robots.txt` вернул `200 text/plain`, для qualification UA сработал явный `Allow: /`.
+- Следующий и последний запрос в этом probe — public entry `https://autopapa.ge/`; он вернул `403` и title `Just a moment...`. До policy/detail/pagination/API запросов probe не дошёл.
+- Artifact `9934322100`, digest `sha256:8c69679f74afa7b7ad248c630ec89d0d876ad2d6c8f2415a764fe046aaf089a9`. Request envelope: ровно 2 запроса; raw bodies не сохранялись.
+- Robots allowance не трактуется как разрешение на коммерческое автоматизированное использование данных. Поскольку source-declared policy route не удалось даже извлечь до challenge, positive permission не доказан.
+- Решение: `autopapa_georgia_open` остаётся `research_pending`, `publishAllowed=false`, blocker `automation_entry_challenged_403_and_permission_unproven`. Не обходить challenge и не запускать detail crawl до явно разрешённого API/partner feed/written authorization либо source-declared accessible route с подходящими условиями.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: Encar Korea — сначала access-policy.
+
+## 40.42 — Encar Korea: official data-partnership path exists; public automation permission is not proven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- Encar проверен строго до listing/detail crawl. Run `33867243950` — success, artifact `9934443189`, digest `sha256:b33301b1a78bd2059b5221afa4228f880ce52ba27250ebb06e29be7baa30a628`.
+- Ровно 3 запроса: `fem.encar.com/robots.txt`, официальный `/policy/terms`, официальный `/company/contact-us`. Listing/detail/pagination/API = 0, raw bodies не сохранялись.
+- `robots.txt` вернул 200 и разрешил оба проверяемых official pages. Terms page тоже 200, но статический HTML — в основном shell (видимый текст всего 212 символов), поэтому из него нельзя честно вывести разрешение или запрет automated commercial reuse. Отсутствие запрета в этом shell не считается разрешением.
+- Ключевой результат — официальный Encar Contact Us прямо содержит `시세 / 데이터 제휴`: партнёрство по ценам/данным для сервиса цен на б/у авто и различных transaction-data services; указан отдельный контакт `price@encar.com`. Это реальный permitted-route candidate, а не догадка.
+- Решение: `encar_direct` остаётся `research_pending`, `publishAllowed=false`. Public scraping не начинать; правильный путь — официальный data-partnership/API/feed agreement. После получения доступа повторно квалифицировать exact offer identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: K Car Korea access-policy.
+
+## 40.43 — K Car Korea: official business-partnership route exists; public automation permission is not proven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- K Car проверен только permission-first. Run `33867611733` — success, artifact `9934584165`, digest `sha256:395ab9f4b88a317624e2c1acd0095c7508babfe8aeb98a267f314d8174c3293d`.
+- Action сделал ровно 2 запроса: `https://www.kcar.com/robots.txt` и homepage. Robots вернул `200` и явный `Allow: /`; homepage — `200`. Capture был ограничен 1.8 MB и обрезан до footer, поэтому probe не стал угадывать Terms route и не сделал terms/detail/API/pagination запросов.
+- Отдельной ручной проверкой текущей официальной K Car страницы подтвержден source-declared footer link `이용약관` -> `https://www.kcar.com/ci/atcl/ftAtcl`, а также официальный `사업제휴문의(partnership@kcar.com)`.
+- Crawlable static shell страницы Terms подтверждает, что это официальная поверхность K Car terms/privacy, но не отдаёт достаточно clause text, чтобы честно доказать разрешение public automated commercial ingestion/reuse. Отсутствие видимого запрета не считается разрешением.
+- Решение: `kcar_korea_open` остаётся `research_pending`, `publishAllowed=false`. Preferred permitted route — официальный business partnership `partnership@kcar.com`; после письменного agreement/API/feed заново квалифицировать identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: DubiCars UAE access-policy.
+
+## 40.44 — DubiCars UAE: public scraping/reuse blocked; contracted automatic-feed option exists
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После K Car перешли к следующему non-Japan кандидату — DubiCars UAE — и сначала проверили текущие официальные Terms, без нового listing/detail crawl.
+- Official Terms & Conditions: `https://www.dubicars.com/copyright.html`. В public-use условиях прямо запрещено без express written consent использовать Website/Content для commercial/non-personal purpose, копировать/эксплуатировать Content; отдельно запрещены automated access/download/monitor/copy через scraper/robot/spider и аналогичные процессы. Раздел No Resale отдельно запрещает commercial exploitation и data scraping/mass copying/spidering.
+- Поэтому публичный DubiCars route нельзя использовать как автоматический ingestion source для AvtoCena.
+- В тех же Dealer Terms есть важный легальный путь: в составе подписки Service, в зависимости от package, может присутствовать `link integration with automatic feed from our web site to your web site`. Это не разрешение на scraping; это потенциальный contractual feed/integration, который надо отдельно согласовать под AvtoCena.
+- Предыдущий read-only field audit остаётся технической историей: stable details на 2/2, identity/year/price/body/fuel доказаны; engineCc/powerHp и listing-bound gallery>=5 на sample оставались незакрыты.
+- Решение: `dubicars_uae_exact -> lead_only`, `publishAllowed=false`. Requalification только через express written consent либо signed DubiCars feed/API/integration agreement, после чего заново доказать engineCc, powerHp, gallery и list/detail parity на разрешённом маршруте.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: AutoMarket UAE access-policy.
+
+## 40.45 — AutoMarket UAE: public home is reachable, but automation/reuse permission is not proven
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused по решению владельца.
+- После DubiCars перешли к AutoMarket UAE строго permission-first/no-write: run 33937794266.
+- Probe сделал только два запроса: официальный robots.txt и публичную главную страницу AutoMarket. Оба ответа — HTTP 200; listing/detail/pagination/API запросов не было, production/Object Storage/catalog generation не менялись.
+- В ограниченном HTML главной страницы не найдено ни одной source-declared ссылки Terms / Privacy / Legal / Policy. Это не является разрешением на автоматический коммерческий сбор или повторное использование данных.
+- Решение: `automarket_uae_candidate` остаётся `research_pending`, `publishAllowed=false`. Автоматический inventory/detail/API crawl запрещён, пока нет явно разрешённого API/feed/partner agreement или письменного разрешения AutoMarket для AvtoCena.
+- Следующий non-Japan кандидат: Dubizzle UAE — сначала access-policy, затем только при разрешённом маршруте проверка exact-field contract.
+
+## 40.46 — Dubizzle UAE: official Terms block scraping/database reuse; strict exact contract already failed
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После AutoMarket перешли к Dubizzle UAE. Нового inventory/detail crawl не запускали: сначала перечитаны текущие официальные Dubizzle Platform Terms of Use.
+- Terms (effective 2024-11-01) запрещают коммерческую эксплуатацию Platform/Content и отдельно запрещают manual/software/script/robot/spider/bot/crawler scraping, создание collection/database/directory из контента и обход robot-exclusion headers.
+- Технический exact-контракт Dubizzle уже был слабым независимо от правового барьера: предыдущий strict baseline просмотрел 9,883 rows и получил 0 exact cards, потому что engine/power часто приходят диапазонами или неполными значениями.
+- Решение: `dubizzle_uae_open` -> `lead_only`, `publishAllowed=false`. Public-site automated ingestion/republication запрещён; повторная техническая квалификация возможна только через явно разрешённый Dubizzle API/feed/partner agreement или письменное разрешение.
+- Production catalog, Object Storage, generation/manifest и пользовательский сайт не менялись.
+- Следующий шаг: Che168 China — заново квалифицировать под текущий strict exact-card contract, начиная с access-policy/permission-first и без production writes.
+
+## 40.47 — Che168 China: source-declared Autohome terms block commercial reuse of public content
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Dubizzle начата China requalification с Che168 строго permission-first/no-write. Run 33938070816 запросил только `robots.txt` и публичную главную Che168: оба HTTP 200; detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В коротком HTML главной source-declared legal link не отдался, поэтому никакой detail crawl автоматически не продолжался. Отдельно проверена текущая публичная Che168 mobile listing surface: footer прямо обозначает Che168 как used-car trading platform Autohome и содержит ссылку `法律声明` на официальный Autohome Legal Statement.
+- Официальные Autohome service terms запрещают для коммерческих целей копировать, продавать, перепродавать или использовать любую часть сервиса/доступа к нему; rights statement также запрещает без письменного разрешения копирование, linking/illegal use и republication произведений/контента Autohome.
+- Решение: `autohome_used_china_open` (Che168) -> `lead_only`, `publishAllowed=false`. Публичный Che168 нельзя использовать как автоматический коммерческий источник каталога. Повторная exact-field qualification допустима только через явно разрешённый Autohome/Che168 API/feed/data-partnership или письменное разрешение.
+- Следующий China кандидат: Dongchedi — сначала access-policy/permission-first, без listing/detail/API crawl до доказанного разрешённого маршрута.
+
+## 40.48 — Dongchedi China: public permission is unproven; official business platform also blocks unauthorized robots
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Che168 проверен Dongchedi строго permission-first/no-write. Run 33938264745 сделал только два запроса: `robots.txt` и публичную главную `dongchedi.com`; оба HTTP 200. Detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В ограниченном HTML публичной главной source-declared legal/privacy/user-agreement link не обнаружен. Поэтому отсутствие запрета не трактуется как разрешение: автоматический коммерческий сбор публичного каталога остаётся недоказанным и не запускается.
+- Отдельно подтверждена официальная `懂车帝企业开放平台` (Dongchedi Enterprise Open Platform) для business users. Это потенциальный договорной контактный путь, но не готовое разрешение на наш use case: её официальный service agreement прямо запрещает robot/spider/crawler/other automated access/login и без разрешения оператора запрещает robot/spider monitoring/copying/dissemination/display/mirroring содержимого сервиса.
+- Официальный contact этой business platform: `open.dongchedi@bytedance.com`.
+- Решение: `dongchedi_china_open` остаётся `research_pending`, `publishAllowed=false`. Не запускать public listing/detail/API crawl. Возвращаться к технической exact-field qualification только после явно разрешённого Dongchedi agreement/feed/API/data route с правами на AvtoCena collection, retention и republication.
+- Следующий China кандидат: Guazi — permission-first/no-write.
+
+## 40.49 — Guazi China: official user agreement expressly blocks scraping/content reuse without written permission
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Dongchedi проверен Guazi строго permission-first/no-write. Run 33938425009 сделал только два запроса: `robots.txt` (HTTP 200) и публичную главную; главная отдала HTTP 200 после redirect на `en.guazi.com`. Listing/detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В ограниченном HTML redirect-страницы legal link не обнаружен, поэтому никакой inventory crawl автоматически не продолжался.
+- Отдельно проверен текущий официальный `瓜子二手车用户使用协议` на `guazi.com/shiyongxieyi.html`. Agreement охватывает сайт Guazi и его mobile sites/apps и прямо говорит: без явного специального письменного разрешения Guazi нельзя полностью или частично копировать, распространять, показывать, зеркалировать, загружать/скачивать, перепечатывать, цитировать, линковать, `抓取` (scrape) или иным способом использовать информационный контент сайта.
+- Решение: `guazi_china_open` -> `lead_only`, `publishAllowed=false`. Публичный Guazi не используется для автоматического коммерческого каталога. Возврат к технической qualification — только после explicit written permission либо authorized API/feed/partner agreement с правами на AvtoCena collection, retention и republication.
+- Следующий China шаг: Autohome new cars — применить и проверить тот же current Autohome legal/service contract отдельно к `autohome_new_china_open`, без публичного crawl.
+
+## 40.50 — Autohome new cars China: current official terms require written authorization for commercial/automated reuse
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Guazi отдельно закрыт `autohome_new_china_open`. Новый public crawl не запускался: для `autohome.com.cn` уже есть прямой актуальный официальный legal/service contract, поэтому лишние listing/detail запросы не нужны.
+- Текущий официальный Autohome Legal Statement распространяется на online services/содержимое Autohome. В нём указано, что работы/контент сайтов Autohome нельзя без письменной авторизации копировать, линковать, незаконно использовать, перепубликовывать или зеркалировать; service terms также запрещают для коммерческих целей копировать, продавать, перепродавать или эксплуатировать любую часть/использование/доступ к сервису.
+- Текущий официальный Autohome User Service Agreement дополнительно говорит, что commercial use требует предварительного письменного разрешения, а неавторизованное использование контента/сервиса включает операции через robot/spider и аналогичные программы/устройства.
+- Решение: `autohome_new_china_open` -> `lead_only`, `publishAllowed=false`. Public Autohome new-car pages не используются как автоматический коммерческий источник.
+- После этой записи non-Japan registry policy-triage доведён до текущих кандидатов. Следующий практический этап — единственный уже доказанный `exact_catalog` кандидат `chngoodcar_china_candidate`: dedicated adapter + deterministic kW→powerHp provenance/test + полный no-write ICE dry-run + ручной spot-check карточек и listing-bound gallery. Публикация по-прежнему запрещена до прохождения всех блокеров.
+
+
+## 40.51 — AutoMarket checkpoint recovered; Good Car commercial-use permission gate blocks promotion
+
+Дата: 2026-09-06. Ветка: `chore/chngoodcar-access-policy-v1-20260906`.
+
+- **Исходная точка уточнена по GitHub:** переданная записка заканчивалась DubiCars, но фактическая цепочка уже дошла до `c29236342681b7b0d02c76226597a745dd48a421` и 40.50. AutoMarket: probe `33937794266` и checkpoint `33937903549` — success; последующие решения Dubizzle/Che168/Dongchedi/Guazi/Autohome сохранены. Запись 40.45 не выполняется заново.
+- **AutoMarket evidence проверено:** run `34018339034` скачал и проверил оригинальный artifact `9960753326`, digest `sha256:0c7906119350fdfbf619d6e3fe45e81d80cdd1ec0f1c6240e451ea81e9910516`. В нём ровно 2 запроса, robots/home HTTP 200, home 83 462 байта, legal links 0. К AutoMarket в этой сессии новых запросов не было. Сохранён исходный JSON-report; отсутствовавшие в старом artifact robots size/type и home truncation state не выдумывались. Статус остаётся `research_pending`, `publishAllowed=false`.
+- **Устаревший next исправлен:** 40.50 и registry предлагали заново писать Good Car adapter, хотя 40.27–40.29 и текущий код уже содержат adapter, kW→hp regression, pagination/exhaustion и ручные проверки. Их не переписывали и не запускали повторный inventory crawl.
+- **Новый Good Car access-policy probe:** run `34018339034`, SHA `02043d467e0fb265fe31f97f33ff31c7bb4083a6` — success. Artifact `9984636447`, digest `sha256:20aede5df0c68c6fbfeff428891b228aec8f440b3a07c75910689b505496cecd`. Ровно 3 GET: robots 404, home 200, одна source-declared policy 200. Homepage объявляет `注册协议` → `https://www.chngoodcar.com/Home/Qualification?id=4` и `隐私政策` → id=3; открыт только id=4. Отсутствующий robots не означает лицензию на коммерческие данные.
+- **Проверка конкретного пункта:** первые bounded snippets перекрывали начало privacy-раздела; это не признано отсутствием запрета. После ручного чтения той же официальной страницы выполнено только подтверждение robots + того же id=4, без home/list/detail/API: run `34018481311`, SHA `154537a7395e6d6b9428bd2823a9c87fd6497906` — success; artifact `9984681878`, digest `sha256:89e34f6e57bbb378bf235503421ae97f8cbd3a38c966ebdae480f5cad12632c7`. Live artifact сохранил пункт `七 / 1.4`: коммерческое использование информации, включая копирование показанных сайтом данных для коммерческих целей, требует предварительного письменного разрешения Good Car. Первоначальный report не переписывался.
+- **Решение research ledger:** `chngoodcar_china_candidate → lead_only`, `publishAllowed=false`. Историческая техническая способность `exact_catalog` только для прошедших ICE offers сохранена отдельно в `technicalQualification`; она не является разрешением на коммерческое переиспользование. До письменного разрешения/явно согласованного data agreement новые inventory/detail/API/scale пробы не запускать. EV/Hybrid не квалифицированы автоматически.
+- **Что изменено:** только research registry, partial decision ledger, накопительный roadmap, bounded evidence JSON, исследовательский probe/checkpoint и временный workflow. Тест request envelope выполняется без сети: 13 проверок, включая robots deny, redirects, cross-origin policy robots, failed-attempt accounting, запрещённые route kinds и точный коммерческий пункт после длинного privacy-префикса.
+- **Safety:** productionWrites=false, publishAllowedMutations=false, у всех candidates publishAllowed=false; Japan controls и строки byte-equivalent по JSON. Production catalog/Object Storage/generation/manifest/cleanup, production allowlist, adapters и deploy не менялись. Workflow имеет только contents:read/actions:read и не получает production credentials. Сверены push/workflow_run triggers: новые изменения запускают только исследовательский workflow.
+- **Следующий non-Japan источник:** iAutos China — отдельная permission-first проверка; прежний lead_only был основан на missing source-bound полях и login boundary. Соглашения с поставщиками не заключались, сообщения никому не отправлялись. Checkpoint должен пройти без новых внешних source-запросов; после success удалить одноразовый workflow и сохранить scripts/evidence.
+
+- **Checkpoint завершён:** run `34018708715`, SHA `2becf8698f17c8bcb5ba25b73ae4ee851081c572` — success; artifact `9984756654`, digest `sha256:bea2733c4c3c73d5aa6467d98c33ab368f9e30e9444372038a4dcef32c56f965`. Проверены 33 candidates, `publishAllowed=true` — 0, неизменность прочих источников/Japan controls, append-only roadmap и allowlist изменённых файлов. Source requests checkpoint — 0. После успешного checkpoint одноразовый workflow удалён; script и bounded evidence сохранены.
+
+
+## 40.52 — iAutos China: public home reachable; commercial reuse permission remains unproven
+
+Дата: 2026-09-06. Ветка: `chore/iautos-access-policy-v1-20260906`, база `949f4f0c7e3cdea653651094c14a88b1446084b5` после successful Good Car checkpoint.
+
+- **Задача:** перейти к следующему источнику после 40.51 и проверить iAutos только permission-first. Прежний `lead_only` был основан на отсутствии доказанных source-bound fuel/power/gallery и login boundary configuration route; эти факты не сбрасывались.
+- **Реальный probe:** run `34018844475`, SHA `1d08116da0f74894fbd9da28d3e8dd2f4a206592` — success. Artifact `9984794280`, digest `sha256:429e35cbfe96fae48108ce09c048861b4f1a05801fb92cdc7493aa597b404d4d`; bounded JSON сохранён в `data/catalog/source-access-policy-evidence/iautos-20260906.json`.
+- **Ровно 2 GET:** `https://m.iautos.cn/robots.txt` — HTTP 200 text/plain, 282 байта; `https://m.iautos.cn/` — HTTP 200 text/html, 51 425 байт, без truncation. Для homepage robots не дал запрета. В полученном статическом HTML source-declared legal/policy anchors — 0, поэтому policy requests — 0; listing/detail/API/pagination/redirect-following/Japan requests — 0.
+- **Решение:** `iautos_china_candidate` остаётся `lead_only`, `publishAllowed=false`. К прежним field/login blockers добавлен `permission_unproven`. Отсутствие legal link не объявляется запретом самого iAutos и не считается разрешением. Без официального permission/API/feed agreement коммерческий crawl не продолжать.
+- **Границы:** переиспользован только bounded исследовательский runner с фиксированными registry ID/origin для Good Car и iAutos; чужие origin/ID отвергаются до запроса. Good Car confirmation mode для iAutos недоступен. Offline safety suite — 15 проверок; боевые adapters, allowlist, production files и все Japan controls не изменены. Сохранены `productionWrites=false`, `publishAllowedMutations=false`, `publishAllowed=false` у всех 33 candidates.
+- **Следующий исследовательский шаг:** опубликованный scope официального Encar price/data partnership: проверить, описаны ли inventory fields, права на фотографии, хранение и перепубликацию. Это только изучение разрешённого договорного пути; dataset/API requests до доказанного разрешения запрещены. Контакты поставщикам не отправлены, договоры не подписаны. Закрытые public routes не перезапускать. Чисто технического field-proof больше недостаточно для `exact_catalog` без permission gate.
+- **Завершение:** checkpoint выполняется без live source requests; после success одноразовый workflow удалить, scripts и bounded evidence оставить. Production catalog/Object Storage/generation/manifest/cleanup и deploy не менялись.
+
+- **Checkpoint завершён:** run `34018993427`, SHA `e701bd163d4deb544950bd0d67dfd09e33a09e5b` — success; artifact `9984839643`, digest `sha256:b5ac4ed73b58b2e5bd5a0a161c05e30085f2f594ed5c46ba401b6a557e6b4d7f`. Проверены все 33 candidates, ноль `publishAllowed=true`, полная неизменность остальных source rows и Japan controls относительно базы, append-only roadmap и точный allowlist файлов. Checkpoint сделал 0 source requests. Одноразовый workflow после успеха удалён; scripts и evidence сохранены.
+
+
+## 40.53 — Новое решение владельца: восстановление сохранённого каталога и связанный выбор модификации
+
+Дата: 2026-09-06. Ветка: `feat/catalog-modification-recovery-v1-20260906`, база `2c7aa77f97d495b2d27ec3f296788ed2bafd917a`.
+
+- Владелец утвердил ремонт существующих неяпонских данных и отдельный пользовательский выбор проверенной модификации. Покупка базы не является предварительным условием. Работающие адаптеры и расчёты сохраняются; поиск новых источников вторичен и не должен создавать тысячи пустых карточек.
+- Цель — не менее 80% автоматически рассчитанных карточек в принятом неяпонском каталоге. Около 10 тысяч — пример допустимого масштаба, не измеренный результат и не обещание. Пользовательские сценарии не засчитываются как автоматически подтверждённые расчёты.
+- Утверждён контракт `docs/catalog-modification-recovery-v1.md`: цена при доказанных данных; «Выбрать модификацию» только при наличии проверенных совместимых вариантов; остальные — внутренняя очередь. Выбор объединяет топливо/двигатель/мощность одной версии, не меняет источник или общий каталог и не обучает базу автоматически.
+- Создан bounded GET-only аудит текущих сохранённых чанков пяти неяпонских рынков. Он не вызывает парсеры, не читает японские чанки и не пишет в Object Storage. Отчёт отличает старую видимую сумму от полноты доказательств характеристик. Результаты ещё не получены; production-готовность не заявлена.
+- `productionWrites=false`, `publishAllowedMutations=false`, все source `publishAllowed=false`. Japan pause и source-policy blockers сохранены. Расписания, production catalog, generation/manifest и cleanup не изменяются.
+- Следующий шаг: успешный baseline, реализация выбора/изолированного расчёта/квоты рассчитанных карточек, профильные проверки и повторный no-write отчёт.
+
+
+### 40.54. Связанный выбор модификации и восстановление сохранённых полей (2026-09-06, staging)
+
+Ветка `feat/catalog-modification-recovery-v1-20260906`. Baseline run `34022530987` — success, commit `5e6f220bd212a85286879d1c0e7bd74baaa5f26b`, artifact `9985983871`. Проверка сохранённых внутренних полей: run `34022935071` — success, commit `b0bae73dbc76a47f8d3de63e7633189e224bd68d`, artifact `9986113215`.
+
+В сохранённой публичной generation `gen_1788253861283_69bb1d29` прочитано 16 054 неяпонских карточки: Korea 2 840, China 3 092, UAE 4 647, Europe 5 259, Georgia 216. Старая видимая сумма не является доказательством характеристик. В публичных записях не классифицировано происхождение топлива/объёма; это не означает, что все автомобили фактически неверны. Внутренние записи сохранили часть исходных полей и позволяют отдельное восстановление.
+
+Добавлены связанный выбор топлива/объёма/модификации, проверка variant ID на сервере, изолированный полный сценарий без подмены исходного объявления, отсутствие цены до выбора, запрет цены сценария в каталоге/SEO/избранном и исключение карточек без суммы из бюджетных фильтров. После дедупликации действует предел одной карточки с выбором на четыре автоматические в каждом рынке. Режим пересборки `modificationRecovery` требует явного включения и отклоняет непроверенные сохранённые строки.
+
+Новая автоматическая привязка неяпонской модификации не использует победителя по score или legacy averages: требуется связь исходного объявления/документа с проверенным variant ID. Review-записи не становятся фактами. Маркетинговая запись «1.5L» при повторном чтении сохранённого Autohome не доказывает точное число см³.
+
+Локально: typecheck и Next build — success; 31 проверка нового и существующего расчётного поведения — pass. Полный dry-run восстановления по внутренним чанкам и проверка GitHub для нового кода ещё ожидаются; число пригодных машин и достижение 80% на данном checkpoint НЕ объявлены.
+
+Production/catalog/Object Storage/generation/manifest/schedules/cleanup не изменялись. `productionWrites=false`, `publishAllowedMutations=false`, все source `publishAllowed=false`. Японские чанки и источники не запрашивались. Evidence: `data/catalog/research/saved-recovery-{baseline,evidence}-v1-20260906.json`.
+
+
+### 40.55. Подтверждённый dry-run и свежий курс без записи в production (2026-09-06)
+
+Run `34023813470` — success (67 tests, typecheck, Next build, полный GET-only аудит). Сохранённый внутренний набор сопоставлен с 16 054 публичными неяпонскими карточками; пропавших внутренних записей нет. Технический отбор дал 5 594 автоматических расчёта, 0 селекторов. Этот run использовал старый cache курсов и не объявлялся готовой публикацией.
+
+Run `34024268007` — success, commit `c66e2818ac429cd9af2dfe92a83b3a4df7200165`, artifact `9986563980`. Повтор с одним GET официального XML ЦБ: HTTP 200, дата курса 05.09.2026, 9 519 bytes, SHA-256 `24aba886ae68b15d001e8caaa14f29b1b05cfd723a61c2c195f28ab29e7ccf9e`. Все расчёты используют этот снимок только в памяти; cache Object Storage не менялся. 5 594 расчёта подтверждены повторно: Europe 4 083, Korea 1 511. Цель 80% выполнена только для отобранного технического набора; восстановление всех рынков и коммерческий допуск НЕ подтверждены. China/UAE/Georgia пока не получили допуска в новый набор; это не вывод о фактической ошибочности каждого исходного объявления.
+
+Новые суммы блокируются, если официальный курс старше четырёх дней. Сохраняются доказанные сведения о топливе даже при неизвестной архитектуре гибрида; несовместимая бензиновая/дизельная модификация не предлагается вместо гибрида. Новый селектор не повышает source/review записи до verified. В существующем справочнике недостаточно проверенных полных неяпонских вариантов, поэтому 0 реальных карточек получили выбор: нельзя выдать успешные synthetic tests за готовое покрытие.
+
+Draft PR #831: https://github.com/jeep-jim/AvtoCena/pull/831 . Проверены неизменность всех 33 source rows, partial registry и паузы Японии. Production, изображения, generation/manifest, расписания и cleanup не изменены. Локальная визуальная browser-проверка не завершена: Chromium отсутствовал, его bounded download не удался; временный UI harness удалён. Сборка и функциональные проверки изоляции проходят.
+
+Следующая bounded проверка расширяет восстановление AutoScout только на сохранённые structured listing rows с одинаковыми source IDs и подтверждённой привязкой фотографий; доступ к detail не является обязательным, если listing сам предоставляет точные поля. Новых запросов к автомобильным площадкам нет. Затем сохранить последний отчёт и удалить one-shot workflow; парсеры не размораживать.
+
+
+### 40.56. Финальный no-write отчёт: 6 319 технических расчётов, 0 реальных селекторов (2026-09-06)
+
+Run `34024932984` — **success**, commit `b9e6e65b48a69293fd5334ae2766a678a63b0c36`. Успешны code-checks (профильные тесты, typecheck, Next build) и saved-audit. Artifact `9986770190`, ZIP SHA-256 `2163c8aca9649c2fdb73f4a15490480aca49f0e35af26fa29a7215c1df4e3117`; полный ограниченный отчёт сохранён в `data/catalog/research/saved-recovery-final-v1-20260906.json`.
+
+После восстановления точных полей из сохранённых source-bound AutoScout listing rows технический набор вырос с 5 594 до **6 319**: Europe **4 808**, Korea **1 511**. Исходный знаменатель — **16 054** неяпонские карточки; восстановлено 39,36% этого набора. Доля автоматических расчётов в сокращённом наборе — 100%, но это не 80% восстановления исходного каталога и не допуск к production. China/UAE/Georgia пока не прошли новый gate; исходные записи не удалены и не объявлены поголовно неверными.
+
+Существующий справочник содержит 43 434 неяпонских variant rows, из них статус verified имеют только 5, review — 18 940; сами эти статусы ещё не означают совместимость или полноту каждого поля. **Ни одна реальная карточка не получила допустимого селектора**. Синтетические тесты подтверждают механизм выбора и расчёта, но не заменяют доказанное справочное покрытие. Восстановление также выявило потерю гибридного типа топлива в старой обработке: такие строки больше не пересчитываются как обычный бензин без доказанной архитектуры и нужной мощности.
+
+Сделано 120 GET: 119 чтений сохранённых объектов и 1 запрос ЦБ с курсом 05.09.2026. Автомобильные источники/Japan requests — 0, denied requests — 0, failures — 0; повторное чтение manifest подтвердило тот же снимок. Никаких записей в production, Object Storage, фото, generation/manifest; расписания и cleanup не запускались. Все 33 source rows и partial registry сохранены, publishAllowed=true — 0, Japan pause сохранена.
+
+После успешного no-write checkpoint одноразовый workflow удалён; script и evidence оставлены. Новый набор контрактных тестов добавлен в обычный CI. Исправлен устаревший тест квалификации: исторический deferred audit не требует, чтобы источник навсегда оставался research_pending после более позднего обоснованного lead_only/rejected; публикация по-прежнему запрещена. Итоговый обычный PR CI проверяется отдельно после этого commit.
+
+Следующий содержательный шаг — восстановить точный объём и происхождение полей прежде всего у сохранённых китайских предложений, затем доказать совместимые варианты для частых неполных моделей. Десятки тысяч review/observed строк автоматически не повышать. Перед выпуском остаются browser-проверка выбора, независимые контрольные расчёты, актуальность объявлений и разрешённый путь источников. Draft PR #831 сохраняется; productionReleaseReady=false.
+
+
+**Общий CI подтверждён:** run `34025558568`, commit `1818f0b0120e79a23e00b241f9a6a4aa1f8f2b08` — success после согласования прежних UI-contract assertions с допущенным селектором. Все тестовые этапы, web/engine typecheck и Next build успешны. Artifacts: `web-typecheck-log` — `9986947473`, `production-build-log` — `9986960315`. Одноразовый no-write workflow уже удалён в commit `5117ee560a824416e45abc273ba7aec2b1240be6`; это завершённый checkpoint кода и отчёта, не разрешение release. Source rows, partial registry, Japan pause и production freeze проверены относительно исходной базы и не изменены.
+
+### 40.57. Китай: восстановление только привязанных сохранённых полей (2026-09-06)
+
+Начат следующий этап после финального отчёта 40.56. Для сохранённых `autohome_used_china_open` строк допускается повторно классифицировать только fuel и мощность из retained detail, когда `listing.infoid`, `detail.infoid` и `sourceOfferId` совпадают и ранее сохранён `detailIdentityVerified=true`. Объём восстанавливается только из явного значения с единицей `cc/cm3/cm³`; обозначение `1.5L/2.0L` не округляется до `1500/2000 см³`.
+
+Добавлен отдельный one-shot no-write workflow для повторного измерения всего сохранённого неяпонского набора. Он не обращается к автомобильным площадкам, не читает Japan, не записывает Object Storage/production/generation/manifest и не меняет source permissions. До terminal run никакое увеличение числа рассчитанных китайских карточек не заявляется.
+
+
+### 40.58. Локальная проверка перед продолжением китайского аудита (2026-09-06)
+
+Восстановлен checkpoint `bf294520`. Владелец поручил завершить тесты и предложил вскоре перезапустить рынки кроме Японии; в этом проходе парсеры не запускались. Push ветки отклонён автоматической проверкой разрешений: требуется явное разрешение владельца на передачу кода в `jeep-jim/AvtoCena`. Обход отказа не выполнялся, серверный GET-only audit не запускался.
+
+Полный первоначальный запуск выявил 39 сбоев; локальная копия оказалась неполной. Восстановлено 5 566 файлов из соседних локальных checkout только при совпадении Git blob hash с HEAD. Последовательный повтор: 1 035 проверок, 1 007 pass, 28 fail. Ошибки партнёрских выплат в последовательном прогоне не повторились. Среди оставшихся проблем — отсутствующий `source-field-audit-v1-summary.json`, несовпадения контрактов UI/source policy и проверки catalog storage/справочника. Их происхождение относительно базовой ветки ещё не установлено; готовность полного CI не заявляется.
+
+Найдена новая ошибка восстановления Che168: диапазон `1500–2000 cc` мог превращаться в точные `2000 cc`. Добавлен отказ от диапазонов/неравенств, проверка непустого sourceOfferId и корректное чтение `cm³`. После исправления 54 профильные проверки восстановления, Che168, расчётов и текущего pipeline прошли; typecheck успешен. Production build до follow-up исправления успешен, повтор после исправления отслеживается отдельно. Отчёт: `data/catalog/research/local-recovery-tests-v1-20260906.json`.
+
+Дальше: разрешённый push ветки и серверный аудит сохранённых данных, разбор оставшихся тестовых сбоев, browser-приёмка выбора и проверка допуска источников. Только после этого готовить контролируемый перезапуск пяти неяпонских рынков с отдельным отчётом результата каждого рынка. Production, Object Storage, source permissions, Japan pause, расписания и cleanup не менялись.
+
+Повторный production build после исправления диапазонов завершён успешно. Ограничения workflow/source policy относительно `bf294520` не изменены.
+
+
+### 40.59. Дорожная карта: было → есть → следующие этапы (2026-09-06)
+
+**Разрешение владельца.** В текущем диалоге владелец явно разрешил push рабочей ветки `feat/catalog-china-saved-evidence-v1-20260906` в `jeep-jim/AvtoCena` для серверной проверки без изменения рабочего каталога. Предыдущий отказ автоматического контроля относится к прошлой попытке; разрешение теперь получено. Это не выполненный перезапуск парсеров или production deploy.
+
+| Этап | Что было | Что есть | Что будем делать |
+| --- | --- | --- | --- |
+| Качество исходного каталога | Сохранённые суммы не доказывали правильность топлива, объёма и мощности; встречались модельные средние, диапазоны и потеря гибридного типа | Проверен исходный набор из 16 054 неяпонских карточек; отчёт 40.56 подтвердил 6 319 технических расчётов: Европа 4 808, Корея 1 511 | Повторить измерение после китайского исправления, сохранить исходный знаменатель и причины отказов по рынкам |
+| Китай / Che168 | Сохранённые detail-поля не восстанавливались новым механизмом | Совпадение listing/detail/sourceOfferId обязательно; fuel и мощность привязаны к объявлению; точные см³ не выводятся из литровой маркировки; диапазоны и пустые ID отклоняются | Измерить результат на всех 3 092 сохранённых китайских карточках; прирост до отчёта не объявлять |
+| Выбор модификации | Не было связанного изолированного сценария | Механизм выбора и расчёта реализован; реальных допустимых селекторов в последнем отчёте 0 | Добавлять только подтверждённые совместимые версии, проверить интерфейс в браузере и изоляцию расчёта от общего каталога |
+| Тесты | Неполная локальная копия и параллельный запуск дали 39 сбоев | После восстановления файлов последовательный прогон: 1 007 pass / 28 fail; после правки Che168: 54/54 профильных теста, typecheck и build успешны | Разобрать все 28 сбоев, отличить устаревшие контракты от дефектов и проблем данных, повторить полный контроль |
+| ОАЭ и Грузия | Данные не получили допуска в восстановленный технический набор | Исходные записи сохранены; результат по ним не объявлен ошибочным поголовно | Разобрать недостающие доказательства характеристик и привязку полей, затем повторить измерение |
+| Допуск источников | Сбор и публикация заморожены | Source permissions не расширены, source publishAllowed остаётся false | Проверить разрешённый способ доступа и готовность каждого источника до запуска |
+| Перезапуск рынков | Парсеры на паузе | В этом этапе перезапусков и записей рабочего каталога нет | После проверок подготовить контролируемый запуск Китая, Кореи, Европы, ОАЭ и Грузии, с отчётом каждого рынка; Япония исключена |
+
+**Порядок выхода к новому каталогу:** (1) push и серверный no-write audit; (2) устранение тестовых блокеров; (3) доказанные модификации и browser-приёмка; (4) проверка расчётов, актуальности объявлений и допуска источников; (5) контролируемый сбор пяти рынков с проверкой до публикации; (6) оценка результата и решение о регулярном расписании. Цель — минимум 80% автоматически рассчитанных карточек в принятом наборе после отбора и дедупликации. Доля 6 319 / 16 054 = 39,36% относится к восстановлению исходного набора и не подменяется этой целью. Около 10 тысяч машин — ориентир владельца, не обещанный результат.
+
+**Критерии приёмки нового прохода:** по каждому рынку показать число собранных, отклонённых, автоматически рассчитанных и требующих выбора карточек; причины отказов; доказательства объёма/мощности/топлива; согласованность списка и карточки; фото и ссылку источника; полноту цены и отсутствие подстановок мощности; результаты тестов. Отдельно подтвердить неизменность паузы Японии.
+
+
+### 40.60. Ветка опубликована; китайский аудит завершён, прирост расчётов — 0 (2026-09-06)
+
+**Публикация кода.** Обычный git push не прошёл из-за отсутствия HTTPS credentials в локальной среде. С явным разрешением владельца та же версия опубликована через подключённый GitHub API в `feat/catalog-china-saved-evidence-v1-20260906`: remote commit `a0a8f4720758241bf971fac518d96decaaa1529d`. Его tree SHA `e842b3418204c2544c14077db3f188fd80955b05` точно совпадает с локальным `021147d7` (включает исправления `bf294520` и `b0b686b0`). Разные commit SHA обусловлены способом публикации, файлы идентичны.
+
+**Серверный результат.** [Run 34034721225](https://github.com/jeep-jim/AvtoCena/actions/runs/34034721225): оба job — code-checks и saved-audit — success. Серверные профильные тесты, typecheck и build прошли. Artifact `9989822070`, SHA-256 ZIP `ac86357b816d19bc293e0cea167e8b1f3fb6c79012c2337f83c0186f5d39a35b`; скачанный архив проверен по этому digest. Полный отчёт: `data/catalog/research/china-saved-recovery-v1-20260906.json`.
+
+| Рынок | Проверено сохранённых карточек | Допущено автоматических технических расчётов |
+| --- | ---: | ---: |
+| Европа | 5 259 | 4 808 |
+| Корея | 2 840 | 1 511 |
+| Китай | 3 092 | 0 |
+| ОАЭ | 4 647 | 0 |
+| Грузия | 216 | 0 |
+| Всего | 16 054 | 6 319 |
+
+По Китаю `sourceEvidenceRestored` вырос с 517 до 1 322 (+805). Это восстановление доказательств отдельных полей, а не готовых расчётов. Полных спецификаций и допустимых расчётов осталось 0. В блокерах: 1 319 `engine_cc_missing`, 1 766 `engineCc:unclassified_field_provenance`, 1 642 `fuelPowertrain:unclassified_field_provenance`; причины пересекаются, их нельзя суммировать как число машин. Новых допустимых селекторов также 0. Доля восстановленного исходного набора остаётся 6 319 / 16 054 = 39,36%; productionReleaseReady=false.
+
+Аудит завершён с `complete=true`, failures=0, deniedRequests=0; выполнено 120 GET, sourceRequests=0, japanRequests=0. Курс ЦБ от 05.09.2026 подтверждён текущим ответом. Записей рабочего каталога и Object Storage нет. После успешной проверки одноразовый workflow удаляется; script и отчёты сохраняются.
+
+**Актуальные локальные тесты.** Недостающие исходные `source-field-audit-v1-summary.json` и `catalog-source-field-audit-v1-evidence.md` восстановлены из опубликованного commit; пять тестов квалификации источников прошли. Полный последовательный повтор после исправления Che168: 1 039 tests / 1 012 pass / 27 fail. Это актуальный результат вместо 1 035 / 1 007 / 28 из раздела 40.58. Полный набор всё ещё не зелёный; успешный ограниченный серверный job его не заменяет.
+
+**Что делаем следующим.** (1) Разобрать 27 оставшихся сбоев без ослабления требований к цене и доказательствам; (2) получить точные см³ и подтверждённую модификацию для частых китайских моделей, не округляя литровую маркировку; (3) восстановить доказательства по ОАЭ и Грузии; (4) проверить пользовательский выбор в браузере и независимые контрольные расчёты; (5) подтвердить разрешённый доступ и актуальность источников; (6) подготовить контролируемый перезапуск пяти рынков кроме Японии и оценку качества до публикации. Массовый перезапуск на текущем checkpoint пока не объявлен готовым и не выполнялся.
+
+
+### 40.61. Закрыты 27 сбоев полного тестового набора (2026-09-06)
+
+**Было:** штатный полный прогон после восстановления исходных файлов давал 1 039 тестов: 1 012 pass, 27 fail. Ограниченный серверный job проверял только профильный набор, типы и сборку, поэтому не доказывал исправность всех тестов.
+
+**Подтверждённые исправления кода:**
+- `catalog-apply-partial-classification-v1.mjs` перестал требовать ровно четыре решения при фактических 25. Проверяются непустой набор, уникальность sourceId, допустимый class, совпадение рынка и publishAllowed=false. Объект evidence сохраняется полностью, дата не откатывается на 03.09, актуальный план не заменяется старой инструкцией по Good Car. Пауза берётся из обоих реестров; строки приостановленных рынков остаются без изменений, попытка изменить их class отклоняется. Скрипт записи реестра не запускался; проверялась чистая функция на копиях данных.
+- Публичное китайское имя больше не содержит явную заглушку «未知厂商» и аналогичные обозначения unknown. Известная марка по-прежнему может восстанавливаться по точному исходному тексту; неизвестная не выдумывается.
+
+**Что было устаревшим в тестах:** старые ожидания требовали Good Car exact_catalog вопреки более позднему ограничению коммерческого использования, legacy source IDs, отсутствие повторного detail-запроса AutoPapa при известной мощности (хотя текущий detail подтверждает цену), priority без итоговой суммы, автомобили 2015 года в неяпонском наборе, DTO без актуальной серверной аттестации и прежние текст/CSS/UI-контракты. Тест sourceNames конфликтовал с более новым тестом identity-master: структурированное safe=true имя допускается для идентичности, сырые строки и safe=false не допускаются; это не подтверждает технические поля модификации. Проверка размера справочника ошибочно считала, что V2 обязан увеличивать число моделей, хотя V2 заменяет legacy-семейства покрытых брендов. Проверки актуализированы по существующему коду и соседним действующим контрактам; адаптеры, тарифы, квоты, источники и рыночные workflow ради тестов не изменялись.
+
+**Тест хранения:** вместо запрещённого sourceId=test и японских однотипных строк сверх действующей квоты используются 501 синтетическая европейская source-bound запись, распределённая по моделям и годам. Проверяется ровно два чанка, первый ровно 500 строк, поиск и чтение индекса. Тест выполняется во временном локальном каталоге с очисткой. Публикационных запретов это не отменяет.
+
+**Есть сейчас:** `npm test` завершился 1 040/1 040 pass, fail=0, skipped=0 (90,658 секунды); добавлен один негативный тест валидации решений. `npm run typecheck` и `npm run build` — success. Полный штатный набор `tests/*.test.ts` выполняется последовательно: тесты бизнес-настроек используют общее локальное хранилище и раньше конфликтовали при одновременном запуске. В обычный CI добавлен обязательный шаг `npm test`, прежние профильные проверки сохранены. Вложенные `.mjs`-наборы этим штатным npm-командным glob не охватываются; они не объявляются пройденными. Полный разбор групп: `data/catalog/research/full-regression-repair-v1-20260906.json`.
+
+**Границы:** production/Object Storage/каталог/источники/варианты справочника/пауза Японии/расписания/cleanup не менялись. Нового чтения автомобильных площадок и перезапуска парсеров не было. Последний измеренный аудит остаётся run 34034721225: 6 319/16 054 автоматических технических расчётов, China/UAE/Georgia — 0 допущенных, селекторов — 0. Успех тестов не добавляет машин и не означает готовность всех рынков к публикации.
+
+**Дальше:** подтвердить этот checkpoint полным CI на GitHub; затем точные характеристики и связанные модификации Китая, восстановление доказательств ОАЭ/Грузии, browser-приёмка выбора, независимые контрольные расчёты, актуальность объявлений и разрешённый доступ. После этого — подготовка контролируемого перезапуска пяти неяпонских рынков и отчёт до публикации.
+
+
+### 40.62. CI выявил живой health-check в тесте; тестовый прогон переведён в offline (2026-09-06)
+
+Draft PR [#832](https://github.com/jeep-jim/AvtoCena/pull/832) создан поверх recovery-ветки PR #831. Первый CI [34036645381](https://github.com/jeep-jim/AvtoCena/actions/runs/34036645381), remote commit `4f6f7f9fe2b95ba738ba4f6a605d01d8159459df` (tree локального `78c272ed`), дал 1 039/1 040 pass. Единственное падение — старый тест подключения AutoPapa ожидал статический health-текст. В GitHub Actions адаптер обёрнут Yandex-мостом, поэтому healthCheck сделал диагностическое чтение и вернул `Yandex autopapa bridge page 1: 9`. Это фактически выполненное диагностическое обращение, а не офлайн-fixture; не считать этот CI прогоном с нулевым доступом к источникам. Число запросов внутри серверного обработчика и возможные изменения сервисных кэшей по CI-логу не установлены. Рыночные workflow сбора и публикации не запускались, пауза Японии не менялась.
+
+Тест заменён проверкой нормализации синтетической AutoPapa-записи: sourceId/sourceOfferId, происхождение year, отсутствие выдуманной мощности и ноль fetch-вызовов. В штатный npm test добавлен preload `tests/helpers/offline-fetch.mjs`: глобальный fetch по умолчанию отвергает реальные запросы, сетевые сценарии должны устанавливать явный fixture/mock. Это изменение тестовой среды, не производственных адаптеров.
+
+Повтор локально с `GITHUB_ACTIONS=true npm test`: 1 040 tests / 1 040 pass / fail=0 / skipped=0, 117,155 секунды. Проверка типов успешна. Production-код не менялся после успешной локальной сборки из 40.61. Follow-up remote commit `fd62dc7576f52c1cbccb438f367b7c69d4167ac7` (tree локального `e656cd5f`) опубликован; повторный CI [34036928775](https://github.com/jeep-jim/AvtoCena/actions/runs/34036928775) проверяется отдельно.
+
+
+### 40.63. Полный CI зелёный — итог этапа и дальнейший план (2026-09-06)
+
+Повторный [CI 34036928775](https://github.com/jeep-jim/AvtoCena/actions/runs/34036928775) на code commit `fd62dc7576f52c1cbccb438f367b7c69d4167ac7` завершился **success**, job `101496587514`. Успешны полный штатный регрессионный набор, все обязательные профильные проверки, валидация automation scripts, web/engine typecheck и production build. Финальная запись отчёта меняет только документацию и JSON результатов; подтверждённый код указан отдельным SHA.
+
+| Направление | Было | Есть сейчас | Будем делать |
+| --- | --- | --- | --- |
+| Тесты | 27 сбоев из 1 039 | Локально 1 040/1 040; полный CI и профильные проверки успешны | Сохранять полный набор обязательным в CI |
+| Ошибки кода | Жёсткое требование четырёх решений; неизвестная китайская марка попадала в публичное имя | Валидация текущих решений с сохранением evidence и пауз; фильтрация явных unknown-заглушек | Проверять новые источники по тем же контрактам |
+| Изоляция тестов | Живой health-check проявился только на GitHub | Fixture вместо запроса; обычный fetch полного npm test блокируется по умолчанию | Явные mock-ответы для сетевых сценариев |
+| Китай | Недостаточно подтверждённых характеристик | Восстановлены отдельные поля 1 322 карточек, готовых расчётов по последнему аудиту 0 | Найти точные см³ и связанные модификации, повторить аудит |
+| ОАЭ и Грузия | Нет допущенных технических расчётов в сохранённом аудите | Причины неполноты остаются открытыми | Восстановить доказательства и проверить контрольные расчёты |
+| Каталог | 6 319 / 16 054 технических расчётов | Последний измеренный результат не изменился; тесты не означают прирост карточек | Сравнить качество и полноту после следующего сбора |
+| Перезапуск | Пять неяпонских рынков ожидают проверки готовности | Рыночные workflow не запускались; Япония остаётся на паузе | Проверить доступ, актуальность, UI и расчёты; затем контролируемый запуск Европы, Кореи, Китая, ОАЭ и Грузии с отчётом до публикации |
+
+Изменения опубликованы в рабочей ветке и представлены в draft [PR #832](https://github.com/jeep-jim/AvtoCena/pull/832); merge и production deployment этим этапом не выполнялись. Подробные результаты и причина первого CI-сбоя: `data/catalog/research/full-regression-repair-v1-20260906.json`.
+
+
+### 40.64. Китай: найден пропуск точного объёма в загрузчике справочника (2026-09-06)
+
+Проверен сохранённый частичный Autohome snapshot от 22.08.2026: 17 924 записи, 17 914 уникальных specId. Поле engineCc отсутствует во всех записях; engineLiters заполнено в 11 436, enginePowerHp в 12 573, enginePowerKw в 17 804. Это статистика справочника, не число объявлений и не прирост расчётов. SHA-256 каждого входного чанка и ограничения зафиксированы в `data/catalog/research/china-reference-displacement-audit-v1-20260906.json`.
+
+В `catalog-download-autohome-china-core.mjs` обнаружено, что toVariant сохраняет литры из строки двигателя, но не читает отдельный параметр точного объёма. Добавлен чистый extractor `scripts/lib/autohome-displacement.mjs`: принимает только целое значение 300–10000 из явно подписанного поля 排量(mL/cc/cm3/cm³), сохраняет ID параметра, название и сырой текст. Диапазоны, альтернативы, конфликтующие дубли и литровые обозначения не получают engineCc. Статус source_explicit обозначает лишь явно указанное поле, не официальную верификацию.
+
+Проверка: 12/12 профильных тестов (3 новых и 9 существующих recovery), node --check загрузчика успешен. Полный CI предыдущего этапа не объявляется проверкой этих новых изменений. Загрузчик не запускался; исходный snapshot, compiled corpus, production и пауза Японии не менялись. В этом этапе сетевых обращений к автомобильным источникам нет.
+
+**Было → есть → дальше:** загрузчик терял возможность сохранить точные см³ → извлечение подготовлено и проверено на синтетических полях → получить допустимым способом config evidence по связанным specId, проверить рынок/год/модификацию и точные характеристики, затем повторить аудит сохранённых объявлений. Старые литровые значения не пересчитываются в выдуманные см³. Дополнительно выявлены повторяющиеся specId; до импорта нужно проверить совпадение или конфликт их данных. Массовый перезапуск остаётся следующим этапом после проверки готовности.
+
+
+### 40.65. Китай: устранено округление в компиляторе; проверены повторные specId (2026-09-06)
+
+[CI 34037647982](https://github.com/jeep-jim/AvtoCena/actions/runs/34037647982) предыдущей правки `d362ca7fbfb1e8691a1f8bf1e5a772c20ec1d377` завершился success. При проверке следующего звена выявлен fallback в directFacts компилятора: engineLiters умножался на 1000 и округлялся. Для sourceId=autohome-china этот fallback удалён: явное engineCc сохраняется, литровая маркировка оставляет точный объём пустым. Остальные источники и Япония этой правкой не изменяются. Существующий compiled corpus не пересобирался; исправление относится к следующей сборке, а не к уже опубликованным данным.
+
+Тест вызывает фактическую чистую функцию directFacts в изолированном VM без запуска записывающей части скрипта. Проверены литровые обозначения 1.5/1.6/2/3 и сохранение явных 1498 см³. Вместе с extraction/recovery: 13/13 pass; node --check компилятора success.
+
+Проверены 10 повторяющихся specId исходного snapshot: у двух отличаются название/серия/дата/URL, у восьми дополнительно расходятся энергия, строка двигателя и мощность. Они не объявляются идентичными дублями и не объединяются автоматически. Полный список ID и различающихся полей добавлен в `data/catalog/research/china-reference-displacement-audit-v1-20260906.json`. Наличие specId само по себе не доказывает однозначную модификацию.
+
+В действующем source-qualification-v1 Autohome/Che168 имеют lead_only, publishAllowed=false; автоматический коммерческий сбор требует разрешённого API/feed/партнёрского доступа или письменного разрешения. Автоматического сбора не выполнялось. Следующий шаг — подтверждённый канал характеристик и проверка привязки модификаций с учётом конфликтующих ID. Прирост расчётов пока не измерен; последний результат 6 319/16 054 остаётся прежним. Production, массовые парсеры и пауза Японии не менялись.
+
+
+### 40.66. Пакет исправлений Китая и разбор готовности ОАЭ/Грузии (2026-09-06)
+
+Вместо одиночной правки выполнен связанный пакет: адаптер новых Autohome, восстановление сохранённых полей, защита компилятора от конфликтующих specId, изолированная сборка до/после, разбор сохранённых данных и допуска источников ОАЭ/Грузии, полный тестовый прогон/типы/build. Машинный отчёт: `data/catalog/research/non-japan-recovery-batch-v1-20260906.json`.
+
+| Задача | Было | Сделано и проверено | Осталось |
+| --- | --- | --- | --- |
+| Точный объём в адаптере | Строка 1.5T давала 1500 см³ | Удалена подстановка; читаются явно подписанные параметры объёма секции двигателя конкретного specId; конфликтующие значения отклоняются | Получить разрешённым каналом исходные точные параметры |
+| Сохранённые поля | Recovery не читал новый массив точного объёма | Восстанавливаются согласованные значения; проверяется связь listing/config/sourceOfferId; конфликт со строкой двигателя не проходит | Повторить измерение на данных с новыми доказательствами |
+| Повторные specId | Конфликт-проверка зависела от канонической модели, расхождения между сериями могли разделяться | Проверка Autohome specId выполняется до привязки к модели; конфликтующие ID целиком исключаются из следующих runtime-сборок, исходные строки сохраняются | Разрешить 10 конфликтов по подтверждённым документам |
+| Проверка компилятора | Изменения предыдущих этапов ещё не измерялись в сборке | Две изолированные сборки success; после правки в очереди 10 конфликтов specId; итоговые варианты и их хеши по рынкам совпали до/после | Корпус репозитория пока не заменён; это не обновление каталога |
+| ОАЭ | В прежнем аудите 4 647 строк, 0 принятых расчётов | Разделены проблемы Dubizzle (проверить точные raw-поля) и DubiCars (в показанных образцах нет исходного технического payload); ограничения источников сохранены | Подтвердить топливо/объём/мощность и разрешённый канал данных |
+| Грузия | В прежнем аудите 216 строк, 0 принятых расчётов | В образцах MyAuto/AutoPapa обнаружены округлённые объёмы и модельное обогащение; они не повышены до source_exact | Исходные единицы объёма, мощность и достоверная привязка к объявлению |
+
+**Проверки:** полный штатный npm test — 1 046/1 046 pass, fail=0, skipped=0 (78,526 с); typecheck и production build success. После старта полного набора добавлен один тест saved recovery, поэтому дополнительно отдельно проверен весь его файл: 10/10 pass. Не складывать пересекающиеся тестовые наборы. Новый CI должен проверить окончательный состав ветки.
+
+**Границы измерения:** сведения ОАЭ/Грузии взяты из сохранённого аудита 34034721225, а не нового сбора. Разбор образцов не доказывает отсутствие payload во всех строках. В source-qualification-v1 у Dubizzle/DubiCars статус lead_only, у MyAuto/AutoPapa research_pending; автоматический сбор пока не квалифицирован. Реестры разрешений не изменялись. Production, Object Storage, расписания и пауза Японии не менялись; sourceRequests=0. Последний измеренный результат каталога остаётся 6 319/16 054, прирост не объявляется.
+
+**Следующий крупный этап:** разрешённые источники точных характеристик и устранение конфликтов модификаций; затем измерение восстановленных карточек, browser-приёмка выбора и независимые контрольные расчёты. Контролируемый перезапуск пяти рынков готовится по фактической готовности источников; Япония исключена.
+
+
+**Финальная серверная проверка пакета 40.66:** [CI 34039140044](https://github.com/jeep-jim/AvtoCena/actions/runs/34039140044), job 101502577500, code commit `ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff` — success. Полный окончательный набор 1 047/1 047 pass, все обязательные профильные проверки, web/engine typecheck и production build прошли. Изменения доступны в draft [PR #832](https://github.com/jeep-jim/AvtoCena/pull/832). Эта финальная запись меняет только отчёт и roadmap; код подтверждён указанным SHA. Merge/deploy и перезапуск рыночных workflow не выполнялись.
+
+
+### 40.67. Условия перезапуска по рынкам и официальные каналы данных (2026-09-06)
+
+Подготовлены `docs/catalog-market-restart-readiness-v1.md` и воспроизводимый `scripts/catalog-market-restart-readiness.mjs`. Скрипт выполнен успешно, отчёт `data/catalog/research/market-restart-readiness-v1-20260906.json` содержит SHA-256 входов и отдельные списки условий пробного сбора и публикации. Это отчёт, не переключатель паузы и не автоматический допуск.
+
+**Сейчас к перезапуску не объявлен готовым ни один рынок.** По реестру нет ни одного exact_catalog + publishAllowed=true в пяти рынках. Исправленный код прошёл CI 34039140044, но допуск источников, фактический runner, новые объявления, browser-приёмка и независимые контрольные расчёты этим не подтверждаются. Европа и Корея имеют сохранённые технические расчёты; Китай/ОАЭ/Грузия остаются без принятых расчётов в последнем измерении.
+
+Проверены официальные страницы: [mobile.de APIs](https://services.mobile.de/manual/index.html) подтверждает Search API и необходимость активации API account (dealer account — собственный inventory); [Encar Contact Us](https://fem.encar.com/company/contact-us) подтверждает маршрут партнёрства по данным price@encar.com. Наличие документации/контакта не означает выдачу доступа АвтоЦене. Письма и заявки не отправлялись, платные услуги не подключались.
+
+**Далее:** подтвердить доступ хотя бы к одному подходящему источнику на рынок, связать его с исправленным runner, выполнить ограниченный сбор отдельно от каталога, проверить характеристики/актуальность/расчёты/интерфейс. Только после этого можно сообщить о готовности конкретного рынка и переходить к его контролируемому перезапуску. Старый показатель 6319/16054 не подменяет цель 80% в новом принятом наборе. Пауза и данные Японии не менялись.
+
+
+### 40.68. Уточнение владельца и реальные публичные пробы пяти рынков (2026-09-06)
+
+Владелец уточнил: продолжаем существующий способ публичного сбора, без заявок на API-партнёрство. Обязательное партнёрство как общий предварительный блокер пробного прохода из 40.67 отменено. Исторические source qualification решения сохранены как история; они не заменяют проверку технической доступности и не повышены до publishAllowed. Пауза публикации и Япония не менялись.
+
+Проверен прежний путь в `catalog-live-recovery-market.mjs` и `catalog-live-recovery-direct-exact.mjs`: прямые адаптеры, затем нормализация, справочник и расчёт. Наличие большого каталога объясняется этим сбором, но само количество не подтверждает правильность характеристик.
+
+Создан и выполнен `catalog-public-listing-pilot.mjs`: максимум один GET на выбранный источник за проход; без cookie/authorization, деталей, загрузки фото, публикации или обхода проверки. При 401/403/429, redirect или маркере challenge — остановка. Маркер в HTML сам по себе не доказывает полноценную CAPTCHA, поэтому результат обозначает консервативную остановку.
+
+| Рынок | Фактический результат | Следующий технический шаг |
+| --- | --- | --- |
+| Европа / mobile.de | HTTP 200, 21 строка; во втором проходе 20/20 нормализованных образцов классифицированы адаптером как exact по году/топливу/объёму/мощности | Проверить детали, фото, актуальный расчёт и list/detail parity; затем ограниченный проход без публикации |
+| Китай / Che168 | HTTP 200, 24 строки; у 20 образцов отсутствуют точные engineCc/powerHp, у 7 нет необходимой подтверждённой мощности электрифицированной установки | Привязанные детали и доказанные характеристики; не восполнять по литровой маркировке |
+| Корея / Encar | Единственный GET api.encar.com/search/car/list/mobile вернул 404 HTML | Проверить актуальность существующего маршрута; KCar POST в этом GET-only проходе не тестировался |
+| ОАЭ / Dubizzle | Первый GET HTTP 200; следующий запрос адаптера остановлен нашим лимитом | Разобрать требуемый следующий шаг; это не доказанная блокировка площадки |
+| Грузия / AutoPapa | HTTP 200, маркер challenge в HTML, проход остановлен | Проверить характер ответа; без обхода проверки или авторизации |
+
+Всего выполнено 7 запросов: первый проход — четыре рынка, второй — Европа/Китай/Корея. Результаты: `public-listing-pilot-v1-20260906.json` и `public-listing-spec-pilot-v1-20260906.json`; технические образцы без фото/контактов продавцов включены во второй отчёт. Повторно к остановленным UAE/Georgia не обращались. Это пробы списка, не массовый сбор и не расчёт принятых карточек. Число успешно рассчитанных новых машин пока не измерялось.
+
+`catalog-market-restart-readiness.mjs` теперь включает результаты публичных проб и не требует официального API-партнёрства как обязательного условия. Исправленная модель не развёрнута в production этим этапом. Следующий приоритет — полноценная проверка небольшого европейского набора, затем детали Китая и техническое восстановление остальных маршрутов.
+
+
+### 40.69. Детали, расчёты и повторная диагностика пяти рынков (2026-09-06)
+
+**Было:** пробы списков без новых проверенных расчётов; Encar 404; характер ответов ОАЭ/Грузии не установлен. **Сделано:** ограниченный диагностический runner деталей и расчётов, исправление точности Che168, различение контактной reCAPTCHA и настоящей страницы проверки, полный тестовый прогон. Сводный отчёт: `data/catalog/research/non-japan-detail-diagnostic-v1-20260906.json`, исходные отчёты и SHA256 перечислены внутри.
+
+| Рынок | Есть по фактическому проходу | Дальше перед перезапуском |
+| --- | --- | --- |
+| Европа / mobile.de | Список + 3 детали HTTP 200; 3 estimated-расчёта; галереи 11/23/23 URL | Расширенный набор без публикации, актуальность, list/detail parity, сверка production-настроек |
+| Корея / KCar | Публичный search POST и 7 detail GET — HTTP 200; 3 estimated-расчёта, галереи 30/28/30 URL | Расширенный проход KCar; отдельно восстановить Encar, его 404 не исправлен этим этапом |
+| Китай / Che168 | Дважды список + 3 детали HTTP 200, галереи 18/20/24 URL; 0 принятых расчётов | Получить привязанные точные см³/мощность, включая требуемую мощность электрифицированных установок |
+| ОАЭ | Dubizzle возвращает HTTP 200 с Incapsula iframe / Request unsuccessful; DubiCars ограниченный проход завершился тайм-аутом первого запроса | Диагностика доступности независимого DubiCars и его detail fanout; блок Dubizzle не обходился |
+| Грузия / AutoPapa | После исправления ложного captcha-маркера список + 3 детали HTTP 200; 0 принятых расчётов | Подтверждённые характеристики и безопасное получение галерей |
+
+В Che168 удалено превращение 1.5L/2.0L/3.0T в точные см³; добавлены явные mL и корректное распознавание cm³. Конфликтующие литровые обозначения остаются конфликтом. Первоначальный китайский отчёт получен до этой правки; повторный `china-georgia-detail-postfix-pilot-v1-20260906.json` — после неё. Недостаточные характеристики не допускаются к расчёту.
+
+В первоначальном проходе AutoPapa source_urls_only не предотвратил локальное скачивание 6 изображений: они заняли бюджет после первой детали. Это выявленное ограничение runner, а не три проверенные детали. Добавлен явный запрет запросов изображений; повторный проход получил все 3 HTML-детали, без image GET. Временный локальный cache удалён; Object Storage и production не изменялись. Контактный скрипт reCAPTCHA сам по себе больше не считается блокировкой; видимая проверка/Incapsula iframe по-прежнему останавливает диагностику.
+
+У всех 6 европейских/корейских расчётов сумма breakdown совпадает с итогом. Курсы ЦБ от 05.09.2026; настройки расчёта взяты из локального репозитория. Это проверка целостности estimated-расчёта, не независимая проверка таможенных правил и не подтверждение production-тарифов. Первоначальный общий отчёт не записал currencyRequests, хотя запрос выполнен; последующие отчёты сохраняют счётчик.
+
+**Проверки:** npm test — 1050/1050 pass, fail=0, skipped=0; typecheck success; production build success; синтаксис обоих runner проверен. Полный удалённый CI нового commit на момент записи ещё не подтверждён.
+
+**Будем делать:** 1) довести Европу и KCar до расширенной приёмки на свежих объявлениях и проверить production-конфигурацию; 2) восстановить маршрут Encar; 3) закрыть точные характеристики Китая/Грузии; 4) получить измеримый проход DubiCars. Массовый перезапуск всех рынков пока не готов. Merge/deploy и публикация каталога не выполнялись, Япония исключена. Старый показатель 6319/16054 не изменён и не заменён результатом малой выборки.
+
+### 40.70. Полный проход оставшихся пяти задач и исправления источников (2026-09-06)
+
+**Было:** 6 небольших локальных расчётов, Encar считался кандидатом на исправление URL, Китай/ОАЭ/Грузия без расчётов. **Сделано за один проход:** расширенные живые проверки всех пяти рынков; read-only сверка настроек Object Storage; исправлены Che168, DubiCars, AutoPapa и классификация блокировки Encar. Сводный отчёт: `data/catalog/research/non-japan-complete-pass-v1-20260906.json`. Исходные отчёты, SHA256 и результаты расследования доступны в research.
+
+| Рынок | Измерено | Что реально улучшено | Осталось до публикации |
+| --- | --- | --- | --- |
+| Европа / mobile.de | 20 проверенных, 19 рассчитанных; все 2020+; у 17 из 20 ≥5 фото | Расширенная проверка без расхождения года/топлива/см³/л.с./цены между списком и деталями | Учитывать галерею при отборе; завершить приёмку и развёртывание исправленной ветки |
+| Корея / KCar | 11 нормализованных из прохода с 20 detail GET; 10 рассчитанных. После ограничения 2020+: 7 рассчитанных из 8 | Подтверждён публичный путь KCar; все 11 галерей ≥5 фото; list/detail поля совпали | Один гибрид без сертифицированной мощности; Encar остаётся отдельным блокером |
+| Китай / Che168 | 20 деталей: 13 расчётов; 11 машин 2020+, из них 5 рассчитаны, 4 укладываются в 15 млн ₽ | Таблица страницы привязывается одновременно к carId и initialSpecId; точные mL и hp читаются из секции Engine. Старый API давал только литры | Электрифицированные установки без 30-минутной мощности; фильтр года/цены; сверка логистики с Object Storage |
+| ОАЭ / DubiCars | После ремонта 20 проверенных, 0 рассчитанных; у всех ≥5 фото | Характеристики читаются из item-specifications после описания. Цена ограничена title-bar; «Price on request» больше не получает цену соседней машины | Точные см³ отсутствуют или даны литрами; у 5 нет мощности; у части электрифицированных машин нет сертифицированной мощности |
+| Грузия / AutoPapa | 10 деталей HTTP 200, 10 галерей ≥5 фото, 0 расчётов | Режим source_urls_only теперь действительно возвращает ссылки без image GET; литры не выдаются за точные см³ | У всех 10 нет точного объёма; у 8 нет мощности |
+
+**Encar:** публичный JS текущего сайта по-прежнему содержит `/search/car/list/mobile`. Фактический HTTP 404 — HTML с meta refresh на `/has_been_cr_blocked_AWS.html`. Это доступ к ответу, а не доказанный устаревший маршрут. Добавлены распознавание блока и запрет повторов blocked-ошибок. Cookie/Authorization не использовались, проверка не обходилась. Публичные JS не исполнялись для извлечения данных. Ветка Encar не объявлена исправной.
+
+**Che168:** дополнительно проверяются совпадение топлива таблицы и API, повторные конфликтующие метрики и совместимость литрового обозначения с точными см³. Литровое обозначение используется только для выявления противоречия, не для вычисления объёма. JSON в RSC разбирается через JSON.parse; чужая машина/модификация/повторный неоднозначный компонент отклоняются. `Model Name` сохраняется как исходное свидетельство, перевод комплектации не объявляется независимо проверенным.
+
+**Настройки:** workflows 34043717015 и 34044354748 успешно прочитали два объекта без записей. В прочитанном markets.json найдена активная конфигурация Китая; для Europe/Korea/UAE/Georgia действуют значения по умолчанию resolver. По полям, реально участвующим в цене, четыре рынка совпали с локальными настройками; contractInitialPaymentRub отличается, но итоговой формулой не используется. У Китая отличается logisticsRub. Это сверка Object Storage + кода ветки; override-переменные развёрнутого контейнера не аттестованы. Повтор расчётов с прочитанными настройками подготовлен отдельно; его результат фиксируется следующим дополнением.
+
+**Важные границы измерения:** сумма breakdown совпала со всеми 42 исходными расчётами (19+10+13). Это не 42 новых пригодных карточки: 3 старых KCar, 8 старых китайских машин, китайская машина дороже 15 млн и недостаточные галереи должны отсеиваться. Первый расширенный UAE-отчёт получен до исправления цены и разметки — его цены не используются. Новый проход Китая/Грузии/ОАЭ сделал 41/11/29 запросов соответственно; в Китае один запрос не завершился ответом. Сертифицированную мощность не заменяли пиковой.
+
+**Проверки:** npm test — 1057/1057 pass, fail=0, skipped=0; typecheck и build success. После дополнительной защиты Che168 от противоречия литров/см³ — 12 профильных тестов pass; итоговый remote CI ещё предстоит подтвердить. Пять старых ожиданий тестов исправлены: округлённый объём и цена после блока рекомендаций теперь остаются неподтверждёнными. В диагностике добавлено сохранение промежуточного отчёта после каждого образца и рынка, чтобы сбой не терял весь проход.
+
+**Есть / будем делать:** техническая диагностика всех пяти направлений выполнена. Общий перезапуск пока заблокирован отсутствующими исходными характеристиками ОАЭ/Грузии, сертифицированной мощностью части Китая и блокировкой Encar. Европа и KCar — кандидаты для следующей контролируемой коллекции с полноценными фильтрами; Китай получил рабочий путь точных характеристик для части объявлений. Это не публикация. Пауза рынка, Object Storage, каталог, расписания и Япония не изменены; только два read-only workflow сверки настроек запущены в рабочей ветке.
+
+### 40.71. Сверка 42 расчётов с Object Storage и проверка среды GitHub (2026-09-06)
+
+Read-only workflow **34044950813 — success**: повторены все 42 расчёта с теми же ценами автомобиля и таможенными компонентами, но с настройками из Object Storage. Европа 19/19 и KCar 10/10 — разница 0 ₽; Китай 13/13 — разница −100 000 ₽ из-за logisticsRub. Исходные публичные/локальные отчёты не переписаны: результат вынесен в `production-settings-replay-v1-20260906.json`. Ни одного объекта настроек не изменяли. Это сверка коммерческой части формулы, не повторная независимая проверка таможенных ставок.
+
+После совместного фильтра года 2020+, цены ≤15 млн ₽ и галереи ≥5 фото остаются **16 европейских, 7 KCar и 4 китайских образца**. Они ещё не объявлены опубликованным или полностью принятым каталогом. Для Европы отдельная проблема трёх малых галерей сохранена в отчёте.
+
+Push исправления Che168 автоматически запустил существующий `Catalog V6 · Che168 Global exact readiness`, который собирает небольшой набор локально в runner без публикации. Его контракт дополнительно требует буквально сохранённую строку `detail.engine`. Поэтому исходная строка API сохранена рядом с расширенным доказательством таблицы; 12 профильных тестов прошли. Дополнительно запущена ограниченная проверка Европы/KCar в GitHub Actions: по 10 образцов, до 35 запросов, без секретов, image GET и записи каталога. Результаты этих проверок и CI дописываются ниже после завершения.
+
+**Итог удалённых проверок:** runtime commit `20b7f2676990d586cd3f51a388628fcc7914a520`: CI **34045116840 — success**, полный набор **1057/1057**, fail=0, skipped=0, типы и production build прошли. Che168 **34045114260 — success**, выходной набор 3 карточки, problems=[]; это source-only проверка, не допуск публикации и не проверка полного расчёта. Europe/KCar **34045114273 — success**: критерии год/цена/галерея/расчёт прошли соответственно 9/10 и 7/10 образцов. Машинные отчёты `hosted-europe-pilot`, `hosted-korea-pilot`, `hosted-che168-readiness`, `complete-pass-ci` сохранены в research с суффиксом v1-20260906.
+
+Рабочая ветка и PR #832 обновлены; после проверенного runtime-кода добавлены результаты и синхронизирован advisory-отчёт готовности (только чтение локальных отчётов). Все пять технических направлений пройдены. **Готовность к общему массовому перезапуску не объявлена:** Europe/KCar могут переходить к следующей изолированной коллекции; Китай — только с подтверждёнными параметрами и фактическими расходами; Encar/UAE/Georgia требуют названных выше источниковых данных. Публикация и расписания остаются на паузе, Япония исключена.
+
+
+### 40.72. Настраиваемые расходы CRM и расширение измерений перед перезапуском
+
+Уточнение владельца: коммерческие расходы задаются в CRM. Для Китая активная логистика **150 000 ₽**, тогда как локальное значение по умолчанию — **250 000 ₽**. Разница итогов **−100 000 ₽** в 13 проверенных китайских расчётах является ожидаемым применением активной настройки, а не дефектом. Настройку 150 000 ₽ сохраняем. Подтверждение: `data/catalog/research/configurable-costs-review-v1-20260906.json` и предыдущий read-only replay.
+
+Проверен путь настроек: CRM использует `resolveEffectiveMarketVersion`, карточки — `resolveCatalogMarketConfig`. Оба сохраняют явные значения, включая 0. Отсутствие отдельной сохранённой записи рынка не означает выключенный рынок: действует средний профиль; корейский `market_korea_system_average_v2` на скриншоте соответствует этому коду. Сохранение настроек инвалидирует кэш; в других процессах срок кэша — до минуты.
+
+Добавлены проверки: изменение только логистики меняет только её строку и итог; входная конфигурация не изменяется; нулевые расходы сохраняются. Из отчёта готовности убрано требование устранять ожидаемую разницу конфигураций.
+
+Следующий измерительный этап реализован: до 3 страниц и 40 подробных проверок каждого из Европы, KCar и Китая; максимум 100 запросов на источник. Отдельно учитываются строки списка, потери внутри адаптера, дубликаты, не проверенные из-за лимита строки, год, расчёт и галерея. Эти числа нельзя выдавать за долю готовности всего каталога. MyAuto получил режим ссылок на фотографии без загрузок и отдельный тест. Расширенные локальные проверки запущены; результаты и окончательный статус тестов записываются следующим пунктом после завершения.
+
+Япония исключена. Производственные настройки, рабочий каталог, публикация и расписания парсеров не изменены.
+
+### 40.73. Итог расширенного прохода 6–7 сентября: 119 проверок, ответы GitHub и точная причина ограничения Китая
+
+**Было:** предыдущие небольшие выборки подтвердили 42 технических расчёта; локальная разница китайских цен была связана с расходами CRM. Готовность всех рынков к общей публикации не была доказана.
+
+**Получили за этот проход:** локально проверены 119 карточек из нескольких страниц трёх источников, выполнены 96 расчётов. Во всех 96 сумма строк равна итогу. 80 карточек одновременно прошли проверку расчёта, года, цены до 15 млн ₽ и количества ссылок в галерее не менее 5. Это ограниченная выборка в порядке источника, **не 80% готовности всего каталога** и не новые опубликованные автомобили.
+
+| Рынок / источник | Локальная расширенная проверка | Независимый запуск в GitHub / оставшаяся задача |
+|---|---|---|
+| Европа / mobile.de | 48 строк списка; 7 отклонены адаптером; проверены 40 из 41 возвращённой; 40 расчётов; 37 прошли все фильтры | GitHub: 39/40 расчётов, 36 прошли все фильтры. Выборки отличаются во времени. Следом — приёмка в среде будущего запуска с актуальными расходами CRM и проверкой отображения |
+| Корея / KCar | 60 строк списка; 21 отклонена адаптером; проверены 39; 33 расчёта; 29 прошли все фильтры | GitHub подтвердил 33 расчёта и 29 прошедших фильтры. Для анализа покрытия сохраняем также 21 отклонённую строку; это не Encar |
+| Китай / Che168 Global | 48 строк; проверены 40; 23 расчёта; 14 прошли все фильтры. 13 отказов из-за характеристик, 4 таймаута | GitHub: 0/40 полных расчётов. Диагностика доказала: HTML отдаёт HTTP 200 со скриптом проверки браузера, без таблицы параметров; публичное carinfo API работает. Требуется измерить получение таблицы в среде будущего запуска |
+| ОАЭ / CarSwitch | Список 15 строк, 3 подробные карточки с галереями доступны; полных расчётов 0 | Исправлено извлечение топлива из привязанного JSON-LD; на сохранённой странице MG RX5 топливо подтверждено. «1.5» без единицы не превращается в 1500 см³; мощности нет. Ранее DubiCars также не дал достаточных точных характеристик |
+| Грузия / MyAuto, AutoPapa | MyAuto: первый запрос списка HTTP 403, дальнейшие сетевые запросы остановлены | Ранее AutoPapa дал 10 галерей, но не полные расчёты: литровая маркировка и недостаток мощности. Для полноценных цен нужны подтверждённые характеристики из привязанного источника |
+
+**Исправлено дополнительно:**
+
+- Распознаётся скриптовая проверка Che168 по совместным признакам `window.solveChallenge` и `EO-Bot-Js-Token`; код её не исполняет и не принимает cookie. Диагностический проход останавливает запросы. Сам адаптер перестаёт повторять запросы к заблокированной странице параметров в пределах экземпляра и сохраняет доступные данные публичного API с явной причиной отсутствия таблицы. HTTP 401/403/429 страницы также прекращают её повторы.
+- Мощность Che168 корректно читается из явных форматов `245 horsepower`, `208hpL4`, `381HP L6`. Литровая маркировка по-прежнему не подтверждает точные см³.
+- CarSwitch отклоняет противоречащие друг другу JSON-LD одной карточки; данные рекомендованных автомобилей не становятся её характеристиками.
+- MyAuto поддерживает диагностический режим ссылок на фото без их загрузки.
+- В отчёте готовности учитываются новые измерения и уточнение владельца: **логистика Китая 150 000 ₽ — правильная активная настройка**, её отличие от локального fallback не является ошибкой или отдельным препятствием к запуску.
+
+**Проверки:** CI `34068496519` подтвердил 1065/1065 тестов, typecheck и production build перед последним исправлением форматов мощности и обнаружения проверки браузера. После этих изменений локально прошли 17 профильных тестов и typecheck. **Окончательный CI `34069103033` на runtime-коммите `16a37c41` прошёл: 1068/1068 тестов, ошибок 0, typecheck и production build успешны.** Финальная hosted-диагностика `34069101475` остановилась после 3 запросов на первой скриптовой проверке браузера, как и предусмотрено исправлением. Исторический успешный workflow Che168 проверяет сохранность полей и галерей, но **не требует полного расчёта цены**; поэтому его зелёный статус не отменяет отказ китайского расчётного пилота.
+
+**Что будем делать перед общим перезапуском:** завершить приёмку Европы/KCar на том коде и в той среде, где будут работать парсеры; для Китая подтвердить доступность таблицы характеристик в этой же среде; для ОАЭ/Грузии закрыть точные см³ и мощность; затем измерить свежесть, отбраковку и долю автоматических расчётов полного нового поколения, проверить карточки/каталог и только после этого принимать решение о публикации. Общую готовность пока не объявляем. Япония исключена, действующий каталог, CRM-настройки и производственные расписания не изменены.
+
+Доказательства и точные счётчики: `data/catalog/research/non-japan-multipage-outcome-v1-20260907.json`; исходные локальные и hosted-отчёты перечислены в его `inputs` с SHA-256. Изменения сохранены в рабочей ветке PR #832.
+
+### 40.74 — KCar: причины потерь, публичный расчёт и дополнительные источники ОАЭ/Грузии (2026-09-07)
+
+**Было.** В последнем трёхстраничном проходе KCar: 60 строк → 39 принятых → 33 расчёта → 29 машин с допустимым годом, ценой и галереей. Причины 21 отказа адаптера не раскрывались. Для ОАЭ/Грузии перечисленные ранее массовые источники не давали полного набора точных параметров.
+
+**Сделано в рабочей ветке.**
+
+- Добавлены причины отказов KCar и обезличенные примеры с идентификатором, модельным годом и исходной датой. Повторный проход воспроизвёл прежние числа и установил: все 21 отказ — сравнение `regModelyr` и года в `mfgDt` как одного поля. Все 29 подходящих карточек прошли дополнительно `enrichOfferForDisplay`, публичные фильтры и проекцию; цена карточки совпала с ценой детали, сумма строк — с итогом.
+- Модельный год и календарный год KCar разделены. Для возраста каталога используется год исходной даты, модельный сохраняется отдельно; MY2020 с датой 2019 не проходит фильтр 2020+. Исходное поле даты для расчёта сохранено. Неверный формат/несуществующий день не заменяются модельным годом. Регрессионные проверки охватывают это поведение и сохранение проверок идентичности.
+- Пилот теперь проверяет цены после обогащения отображения и построения публичной проекции. Успешная сумма сама по себе больше не означает прохождение приёмки карточки. Локальный запрос списка Европы в этом проходе завершился тайм-аутом; это не доказательство недоступности источника.
+- Добавлен экспериментальный адаптер Porsche Finder для региональных страниц ОАЭ и Грузии. Читает только JSON из HTML, связывает одну запись по ID/URL с JSON-LD, ценой, валютой и идентичностью; проверяет таблицу двигателя и мощность в сводке. Только ДВС, точные см³, реальные фотографии; литры, конфликт мощности, чужая цена, дублированный ID и визуализации исключены. Первая сохранённая карточка ОАЭ: `7062DL`, 1984 см³, 265 л.с., 219000 AED, пять связанных URL фото. Это кандидат, ещё не включённый в production-набор.
+- В сетевом пилоте Porsche: ОАЭ — тайм-аут списка; Грузия — остановка на HTTP 429 на 11-м запросе. После этого новых запросов Porsche не выполняем. Полный проход/готовность источника не заявлены. Исправлено сохранение уже принятых деталей при будущей остановке; отдельно учитываются непросмотренные строки.
+- Подготовлена приёмка Europe/KCar в GitHub с проверкой публичной цены; Китай с уже установленной browser challenge в этот повтор не включён. Настраиваемая логистика Китая 150000 ₽ остаётся корректным активным значением; её не заменяли fallback 250000 ₽.
+
+**Проверки и остаток.** Локальный typecheck и полный набор 1075/1075 тестов прошли, fail 0. GitHub-приёмка запускается на этом checkpoint; окончательные результаты будут записаны следующим пунктом после завершения. Экспериментальный Porsche остаётся вне production-registry до подтверждённого прохода. Для Китая нужен рабочий путь точных параметров из среды исполнения. Для всех рынков требуется отдельная приёмка записи/публикации перед массовым обновлением; в этом этапе нет merge/deploy, перезапуска парсеров, записи каталога или Object Storage. Япония исключена.
+
+### 40.75 — измеренный прирост KCar и исправление публичного фильтра Европы (2026-09-07)
+
+GitHub runtime `cbce5c6db515d0e36f3d4d22a44ef3bb1b47e013`: CI `34070847829` завершился success (1075 тестов, typecheck, production build). В пилоте `34070845805` KCar прошёл приёмку: 3 страницы, 63 запроса, все 60 строк приняты, 53 расчёта, 54 машины допустимого года и 47 прошедших все публичные проверки. Отказов из-за ложного конфликта года — 0 вместо 21; количество подходящих карточек выросло с 29 до 47. Семь оставшихся строк требуют подтверждённой 30-минутной мощности; точные параметры не подменялись.
+
+Европейский job того же пилота намеренно остался красным: 40/40 расчётов и 37 машин с достаточной галереей, но 0 прошло проверку качества публичной карточки. Следующий локальный диагностический запрос установил причину: `semantic_bodyType_ambiguous`, исходные значения `OffRoad` и `SUV/Geländewagen/Pickup, Jahreswagen`. Источник отдаёт категорию вместе с состоянием автомобиля; это не две конфликтующие формы кузова.
+
+Исправлен разбор известных суффиксов состояния и соответствие категории `SUV/Geländewagen/Pickup` исходной широкой категории `offroad`. Не присваиваем конкретный SUV/pickup. `Limousine` остаётся неоднозначной, а OffRoad против Coupé — конфликтом. Добавлен регрессионный тест; 16 целевых тестов прошли. Пилот сохраняет сведения о причине отклонения качества, количестве годных изображений и исходных значениях кузова. Финальная проверка исправленной Европы и нового runtime следует после этого checkpoint.
+
+Дополнение к 40.75: расширенная проверка обнаружила `Van/Minibus` и `EstateCar` как подписи тех же исходных категорий Van и Kombi; добавлены явные соответствия. Отдельно исправлено правило качества необязательного поля кузова: неоднозначная категория допускается только при пустом `bodyType`. Это соответствует существующему допуску отсутствующего кузова и не подставляет седан/хэтчбек. Любой назначенный кузов при неоднозначном свидетельстве, конфликт кузовов и неоднозначные расчётные параметры по-прежнему блокируют карточку. Полный положительный и отрицательные случаи покрыты регрессионным тестом. Повторный пилот на предыдущем checkpoint показал свежие, уже изменившиеся объявления: KCar 55/60 расчётов, 49 подходящих карточек; Европа 39/40 расчётов и 14 карточек до исправления необязательного кузова. Эти числа не выдаются за сравнение одного замороженного набора.
+
+### 40.76 — итог прохода: 95 расчётов, 86 подходящих карточек, полный CI 1077/1077 (2026-09-07)
+
+**Окончательный проверенный runtime:** `9d6a74aa6c1e6c030eb4dd4331fdc7ffdd81b1a3` (локальный `0d75d3202457ef153d40264e4f8c2410b281e9af`, одинаковое Git tree). CI [34071475448](https://github.com/jeep-jim/AvtoCena/actions/runs/34071475448), job `101589512672`: success; 1077/1077 тестов, fail 0, typecheck и production build passed, 55 страниц. Последующие изменения — документы, отчёты и консультативный readiness script.
+
+Финальный публичный пилот [34071473326](https://github.com/jeep-jim/AvtoCena/actions/runs/34071473326) прошёл оба job:
+
+| Источник | Исходных строк | Отказов адаптера | Проверено деталей | Полных расчётов | Прошли все публичные фильтры |
+|---|---:|---:|---:|---:|---:|
+| mobile.de | 48 | 7 | 40 | 40 | 37 |
+| KCar | 60 | 0 | 60 | 55 | 49 |
+| Всего | 108 | 7 | 100 | 95 | 86 |
+
+Одна европейская нормализованная строка осталась вне лимита. Три европейских объявления имеют менее пяти изображений. Из KCar шесть машин вне допустимого года; у пяти не хватает обязательной подтверждённой мощности (для части также остаётся неоднозначный объём). Эти строки не включены в число подходящих карточек. Во всех 95 расчётах сумма строк равна итогу, цена публичной проекции равна цене детали; расхождений — 0. Пилот применяет реальное обогащение отображения и правила качества. Это проверка ограниченного набора с URL галерей, а не визуальная проверка загруженных фотографий и не приёмка полного inventory.
+
+**Было → есть.** KCar до исправления ложного конфликта календарного/модельного года терял 21/60 строк и давал 29 подходящих карточек; первый исправленный проход дал 47, финальная обновившаяся выборка — 49. Европейские карточки сначала все отклонялись из-за свидетельства кузова; исправлены подписи исходных категорий/состояния и допуск отсутствующего необязательного кузова без выдумывания его формы. В финале 37 карточек прошли полный программный фильтр.
+
+**Остальные рынки.** ОАЭ: экспериментальный Porsche Finder дал сохранённую связанную карточку 7062DL (1984 см³, 265 л.с., 219000 AED, пять URL фотографий), полный replay 8 600 059 ₽ с точной суммой строк. Новый источник не включён в production-registry. Его список ОАЭ локально завершился тайм-аутом; грузинский проход остановился на HTTP 429, поэтому массовая пригодность не подтверждена. Китай: ранее доказанная проверка браузера на странице параметров GitHub остаётся; новых запросов обхода/исполнения скриптов нет. Настройка логистики Китая 150000 ₽ сохранена и не считается ошибкой.
+
+**Дальше по приоритету.**
+
+1. Для mobile.de и KCar — ограниченная генерация в среде будущего production-запуска на проверенном коде: фактическая загрузка/качество изображений, актуальность/снятые объявления, дедупликация, активные расходы CRM и сохранённый откат. Готовность этих источников к следующему этапу не равна исправности всех источников Европы/Кореи.
+2. Китай — получить достаточные точные параметры по рабочему публичному пути в среде исполнения либо из сохранённых данных с действующей строгой привязкой; не заменять их литровыми округлениями/пиковой мощностью.
+3. ОАЭ/Грузия — довести кандидатный публичный источник до подтверждённого ограниченного прохода. Одиночный Porsche replay и видимость страницы поисковиком не засчитывать как рабочий массовый сбор.
+4. После приёмки свежего набора и решения о публикации — поэтапное обновление выбранных рынков. Общий массовый перезапуск пяти рынков пока не готов. Япония остаётся исключённой.
+
+Переписан актуальный документ `docs/catalog-market-restart-readiness-v1.md`; исторические сведения сохранены в roadmap. Сводка `non-japan-public-display-outcome-v1-20260907.json` содержит финальные цифры, остаток, CI и SHA-256 входных отчётов. `catalog-market-restart-readiness.mjs` читает новый результат; выполнены синтаксическая проверка и воспроизведение отчёта. Изменения сохраняются в рабочей ветке PR832. Merge/deploy, запись каталога/Object Storage и массовый перезапуск не выполнялись.
+
+### 40.77 — приёмка изолированной генерации Europe/KCar: подготовка (2026-09-07)
+
+Продолжение после PR832 (`47bc4a38107d70cf29fb793c64edb66361cdd58f`), отдельная ветка `feat/catalog-europe-kcar-generation-canary-20260907`. Предыдущие 95 расчётов и 86 карточек не подтверждали декодирование фотографий, актуальные настройки CRM или сохранение/чтение каталога.
+
+Добавлен `scripts/catalog-generation-canary.mjs`: одна страница выбранного источника, максимум 16 рассматриваемых строк и восемь принятых машин. Считывает фактические `markets/markets.json`, `fees/exchange-rates.json` и manifest из рабочего Object Storage; фиксирует ETag/хеши, версию активных расходов и исходный manifest для будущего отката. При отсутствии рабочего CRM нет подмены данными checkout. После расчёта — до пяти уникальных декодированных фотографий не меньше 640×400, повторная проверка деталей, полный штатный serializer, чтение карточки/детали, суммы и версии CRM, локальный откат и восстановление. Генерация и изображения проходят запись/чтение с SHA-256 исключительно под `catalog/canaries/<run-attempt>/<market>/`; действующий manifest, изображения и поколения не записываются. Сетевые запросы имеют отдельные лимиты; 401/403/429/challenge останавливают сбор. Никаких запросов к японским источникам.
+
+В KCar добавлен явный `refreshOffer`: заново получает детали, проверяет идентичность и активный статус, перечитывает цену/характеристики и собирает галерею. Существующий `fetchImages` может использовать сохранённые ссылки и сам по себе не является проверкой актуальности. Регрессии проверяют изменённую цену, неактивное объявление и чужой ID; отдельно покрыты ограничения записи, изменение CRM и несовпадение сохранённых цен.
+
+Начальная проверка: 15 профильных тестов passed. Полный npm test/typecheck и GitHub canary выполняются; окончательные результаты будут записаны после завершения. Массовые workflow и центральная пауза остаются прежними. Этот canary не переключает публичный каталог и не является запуском кода внутри deployed web container: используется GitHub runner с теми же входами Object Storage, что у рыночных workflow.
+
+### 40.78 — найдены два реальных дефекта загрузки фотографий и различие CRM (2026-09-07)
+
+Первый canary `34073374535` на `0898ae9f06e82f82c10f2683f0a04977368f7b05` завершился до запросов к источникам: проверочный скрипт требовал сохранённую активную версию CRM для Europe/Korea. В рабочем `markets/markets.json` присутствуют только China/Japan; это не повод копировать локальные настройки или запрещать предусмотренный продуктом предварительный профиль. Canary исправлен: использует фактический snapshot и штатный `resolveEffectiveMarketVersion`, отдельно указывает `rawActiveVersion=null`, `profileSource=runtime_average_defaults`, `provisional=true`. Europe: `market_europe_system_average_v2`, Korea: `market_korea_system_average_v2`. Рабочие настройки не редактировались.
+
+Второй canary [34073513611](https://github.com/jeep-jim/AvtoCena/actions/runs/34073513611) установил:
+
+- **Europe:** 16 рассмотренных машин посчитались, но все остановились на `image_url_host_not_allowed`; загрузок изображений было 0. Адаптер mobile.de принимал identity-bound галереи `img.classistatic.de/api/v1/mo-prod/images/`, а бинарный загрузчик не знал этот CDN. Добавлен только точный HTTPS-хост с конкретным путём; другой хост, поддомен, маршрут, нестандартный порт и URL с credentials не принимаются.
+- **KCar:** 16 рассмотренных строк: 13 с расчётом не получили принятых фото, две без обязательных характеристик и одна вне допустимого года. Все 104 ответа фото были HTTP 200. Отдельный запрос к той же публичной фотографии подтвердил `Content-Type: image/jpg`, JPEG 780×520, 125517 байт. Фото визуально просмотрено: реальное изображение автомобиля. Исправлен пропуск узкого MIME-алиаса `image/jpg` → `image/jpeg`; HTML по-прежнему отклоняется. Новый тест декодирует JPEG, сохраняет результат и проверяет бинарный checksum.
+
+Оба вторых job завершились failure без записи в рабочий каталог и без диагностических Object Storage writes. Это обнаруженные ошибки, а не успешная приёмка. SHA-256 исходных отчётов: Europe `c48b2629a51f1d35aa75af83a1986b11d358320fc4e7bcaf17ef3e5c7eb08cdf`, Korea `a5a6346278fc9a7dfccd15f837fda656bd6ea01331a8ce3b5c27dab12588fe5e`. Исходная рабочая генерация: `gen_1788253861283_69bb1d29`.
+
+Исправления отправлены в [PR833](https://github.com/jeep-jim/AvtoCena/pull/833), поверх PR832; новый runtime `3e30bd78f0a17c6461346b3ac446b59a087079c8`. Профильный набор после исправления фото: 27/27 passed. Предыдущий runtime проверен полным CI `34073516406` (success), однако это не подмена окончательного CI нового runtime. Финальные результаты следующего запуска будут записаны отдельным пунктом.
+
+### 40.79 — запись и откат проверены; AVIF исправлен; визуальные замечания остаются (2026-09-07)
+
+На runtime `3e30bd78f0a17c6461346b3ac446b59a087079c8` оба job [34073795968](https://github.com/jeep-jim/AvtoCena/actions/runs/34073795968) прошли: Европа 15 рассмотренных → 8 сохранённых карточек, KCar 11 → 8. У каждого по пять записанных изображений; штатные правила показывают все пять. Проверены реальные байты, неизменность source gallery после повторного чтения деталей, дедупликация, штатный serializer, цены после чтения, локальный откат и восстановление.
+
+Разбор европейских отказов выявил ещё один дефект: 45 HTTP 200 ответов имели MIME `image/avif`, не допущенный бинарным загрузчиком. Добавлено декодирование AVIF с обязательным преобразованием в WebP; повреждённый AVIF и HTML отклоняются. Профильный набор 27/27 passed. В последующем проходе Европы [34074192666](https://github.com/jeep-jim/AvtoCena/actions/runs/34074192666), runtime `944f2ae1f5493a164685619d88ad65e4de192d04`, получено 8/8 технически принятых карточек и 40 изображений. Этот изменившийся набор содержал 39 JPEG и один WebP; live AVIF в нём отсутствует, его обработка подтверждена regression fixture, а не выдуманным числом живых декодирований.
+
+**Итог технической приёмки:** последняя Европа + KCar = 16 карточек, 80 сохранённых изображений, у всех цены карточки/детали и сумма строк/итог совпали. Для этих двух проходов 119 + 142 = 261 диагностический объект записан и перечитан с SHA-256 в `catalog/canaries/<run-attempt>/<market>/`; отчёты также сохранены под своими префиксами. Рабочий manifest, CRM и exchange-rates до/после совпали по ETag и хешу; production catalog writes = 0. Публикация и удалённый откат не выполнялись. Локальный откат отдельно доказал исчезновение новых карточек и восстановление целевого набора.
+
+**Визуальная приёмка не объявлена завершённой.** Контактные листы построены из именно сохранённых объектов. В Europe обнаружены рекламные обложки и рекламные панели в галереях; у KCar EC61387808 четыре почти одинаковых вида приборов. Более ранняя Europe 38449215943136 требует дополнительной проверки соответствия изображения и заявленной модели; повторный публичный VIP-запрос сохранил тот же ID/заголовок/галерею, другая модель не подставлялась. Пять разных хешей не равны пяти полезным ракурсам. Отдельная очередь визуальных замечаний записана в итоговом JSON; массовая публикация остаётся not_ready.
+
+**Проверки:** финальный [CI 34074195855](https://github.com/jeep-jim/AvtoCena/actions/runs/34074195855) — success, 1083/1083 тестов, fail 0, typecheck и production build passed, 55 страниц. Git tree проверенного runtime `772f03a6c9ca6cfb11e11977cf9ff99deb8c22f9`; локальный code commit `83ac05d7` имеет то же дерево. Последующий checkpoint обновляет только документацию, результаты и advisory readiness script.
+
+**Следующий проход:** автоматизированный отсев рекламных панелей/обложек, полезное разнообразие галереи и проверка спорной привязки; browser-приёмка списка/детали и только затем проверенная схема переключения поколения. Настройки Europe/Korea остаются штатными предварительными средними профилями из фактического рабочего состояния — не выдавать их за активные персональные настройки CRM. Параллельных заявок на доступ нет, Китай/ОАЭ/Грузия сохраняют прежний остаток. Япония исключена, общий перезапуск пяти рынков не выполнялся. Всё представлено в PR833 поверх PR832.
+
+
+### 40.80 — восстановлен контракт хранения фотографий ссылками; предыдущий canary не соответствует архитектуре (2026-09-07)
+
+Владелец уточнил обязательную исходную схему: постоянное хранение автомобиля и галереи в JSON-чанках, фотографии — исходными URL; регулярная актуализация и очистка, без создания полного собственного фотоархива. Предыдущий canary 40.77–40.79 нарушил этот контракт: явно вызывал legacy `cacheImageFromUrl`, обходя source URL gallery wrappers. Флаг `CATALOG_IMAGE_STORAGE_MODE=source_urls_only` в нём был выставлен, но низкоуровневый loader его не проверял. Это ошибка реализации проверки, а не доказательство необходимости менять архитектуру владельца. Старые результаты остаются историческими доказательствами расчёта/serializer, но не принимаются как готовность требуемого пути изображений.
+
+Исправлено: loader в `source_urls_only` и при отсутствии настройки возвращает исходный URL без сетевого запроса и без чтения/записи файлового кэша. Неизвестный режим не разрешает скачивание; старый бинарный путь требует явного `binary`, который активная цепочка не использует. Из PR убраны добавленные конвертации JPEG/AVIF; точная проверка допустимого CDN-адреса сохранена. Canary хранит только URL, перепроверяет их принадлежность свежей галерее и совпадение после сериализации; image requests, binary writes и доступ к image-source-cache запрещены. Разрешены только диагностические JSON. Проверки цены, рабочих настроек, KCar freshness и локального отката сохранены. Метаданные URL не объявляются доказательством визуальной чистоты, размеров или декодирования фото.
+
+Аудит доставки: `CatalogCard`/`VehicleGallery` используют обычные img с исходными адресами и отложенной загрузкой; `catalogImageDeliveryUrl` не переписывает эти адреса на внешний прокси. `/api/catalog/images/[imageId]` читает ранее сохранённые объекты и задаёт браузерный immutable cache, но не является прокси произвольных source URL. Отдельная действующая инфраструктура image proxy в этом проходе не подтверждена. Два HEAD-запроса без тел изображений: mobile.de CDN — HTTP 200, Cache-Control max-age=2592000, X-Cache Hit from cloudfront; KCar — HTTP 200, max-age=43200. Это наблюдение двух URL, не гарантия всех источников. Кэш снижает повторные запросы; один прокси без кэша концентрирует запросы на своём IP и не гарантирует отсутствие блокировки. Основание: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching и https://nginx.org/en/docs/http/ngx_http_proxy_module.html . Новый прокси не включается без подтверждённой необходимости и замеров.
+
+Очередь V3 передавала 1209600000 мс (14 дней) пяти рынкам, но отдельный V3-запуск и publisher default сохраняли 259200000 мс (3 дня). Исправлены default V3 и fallback publisher на 14 дней. Это не жёсткое удаление каждой строки на 15-й день: существующий outage grace сохраняет данные при неполном обновлении; cron сбора и очистки сейчас отсутствуют из-за аварийной паузы. Пауза и Япония не менялись.
+
+Подготовлено адресное удаление только копий, созданных этим PR: 148 WebP, 14914620 байт, по точным ключам трёх тестовых проходов и их сохранённым отчётам; также три соответствующих GitHub artifacts. Общий cleanup/перечисление bucket/удаление live данных не разрешаются. Отдельный тест исполняет реальный cleanup с подставным HTTP: неверный отчёт даёт ноль DELETE, корректные отчёты — только 148 известных изображений и три соответствующих artifact. Результат фактического удаления и новой URL-only генерации будет добавлен после завершения GitHub-прохода.
+
+Локально после восстановления URL-only: 1084/1084 тестов и typecheck прошли; затем добавлен дополнительный тест ограниченной очистки, его отдельный набор 8/8 passed. Итоговый CI обновлённого кода ожидается. Никакой публикации или merge этого этапа не выполняется.
+
+
+### 40.81 — URL-only генерация принята; тестовые фото удалены (2026-09-07)
+
+Первый исправленный запуск `34076630213` на `69796e6340f9496038a2f74b5f8f66b04aacc4fc` подготовил по восемь карточек, затем запрет любых `putBinary` остановил штатный `catalog/public/feeds/openai-products.csv.gz`. Это сжатый текстовый CSV-фид, не фотография. Ограничение уточнено только для этого точного ключа: обязательные MIME application/gzip, распаковка с лимитом, CSV-заголовок; изображения и произвольные бинарные объекты запрещены. Проверочный тест принимает текстовый фид и отклоняет изображение/другой ключ/неправильное содержание. Промежуточный CI прошёл, но успешная URL-only генерация относится к следующему runtime.
+
+**Окончательная приёмка:** [34076908088](https://github.com/jeep-jim/AvtoCena/actions/runs/34076908088), runtime `ec0536f9b77bcd8881f064c06039a51d48c077c6`, git tree `2d9ac1260e4e50a53259fad0611824d6d8dddc6a`.
+
+| Источник | Рассмотрено | Сохранено/перечитано | Исходных URL фото | Image GET | Записей фото |
+|---|---:|---:|---:|---:|---:|
+| mobile.de | 8 | 8 | 40 | 0 | 0 |
+| KCar | 8 | 8 | 40 | 0 | 0 |
+
+Все 16 карточек сохранили исходные URL, совпали цена списка/детали, сумма строк/итог и версия расходов; повторное чтение источников и локальный откат прошли. 40 + 41 = 81 диагностический объект перечитан с SHA-256: 79 JSON и два сжатых текстовых CSV-фида. Image archive writes = 0; декодирование/размеры/визуальная приёмка не заявляются. Рабочие manifest, CRM и курсы совпали до/после. Архивы нового прохода содержат JSON и текстовый фид, фотографий в них нет. Полный итог и все 80 исходных URL сохранены в `non-japan-source-url-generation-outcome-v1-20260907.json`.
+
+**Очистка своей ошибки:** job `101604959790` в том же запуске проверил три старых отчёта, удалил 148 записанных этим PR WebP (58 Europe v3 + 50 KCar v3 + 40 Europe v4; суммарный размер объектов по отчётам 14914620 байт), затем HEAD подтвердил отсутствие всех 148 ключей. Удалены и повторно проверены как отсутствующие три соответствующих GitHub artifact: 10001391217, 10001412782, 10001519426. Изображения не скачивались для удаления, общий bucket не перечислялся, live catalog deletes = 0. JSON-отчёты сохранены. Локально удалены 160 собственных файлов/архивов/файлов кэша; пользовательское вложение не затронуто. Результат — `canary-image-copy-removal-outcome-v1-20260907.json`.
+
+**CI:** [34076910568](https://github.com/jeep-jim/AvtoCena/actions/runs/34076910568), success, 1085/1085 тестов, fail 0, typecheck и production build passed, 55 страниц. Последующий commit меняет только отчёты, документацию и advisory readiness script; его выполнение и синтаксис проверены отдельно.
+
+**Экспертный вывод и остаток:** сохраняем исходную схему JSON + source URL. По проверенному коду браузер получает внешние фото напрямую; это не трафик посетителей через единый серверный IP. Отдельный действующий внешний image proxy не подтверждён; его нельзя считать уже работающей защитой от блокировки. CDN/браузерное кэширование подтверждено HEAD только двух фотографий. Прокси с ограниченным кэшем — отдельное решение при подтверждённой необходимости, не автоматическая замена текущей доставки. Перед общим запуском остаются визуальные замечания, browser-приёмка, источники China/UAE/Georgia и единый недельный регламент: основные V3 defaults теперь 14 дней, но в старых неосновных V2/V4/recovery путях и CATALOG_RETENTION_MS ещё есть 3 дня. Никакой cron, общий cleanup, merge или deploy не включён. Япония исключена.
+
+
+### 40.82 — единое хранение, ранняя пауза очереди и проверенные URL-исключения (2026-09-07)
+
+По просьбе владельца продолжена подготовка общего перезапуска. Все найденные неяпонские offer-retention defaults в runtime, V2/V3/V4, recovery и republish приведены к 1209600000 мс (14 дней). Отдельные 30 дней Японии и три дня временного staging не менялись. Общая очередь теперь содержит ровно пять рынков, исключает Японию и проверяет центральную паузу до начала дорогостоящего сбора. Недельная периодичность подготовлена как регламент; cron и автоматическая очистка не включались.
+
+В старом `auto-georgia-enriched-source.ts` закрыт самостоятельный путь загрузки фотографий: режим ссылок и отсутствие настройки дают только source URL без fetch/кэша; пустые бинарные ID не схлопывают разные фотографии. Этот старый адаптер не входит в разрешённый грузинский production-набор, но больше не обходит контракт хранения при отдельном вызове.
+
+В `source-gallery-review-v1.json` записаны семь точных URL из ранее выполненной визуальной проверки: четыре рекламных изображения и три повторяющихся вида приборов. Они отфильтровываются при сборе и отображении, включая другие размеры того же файла. Две карточки mobile.de удержаны из-за спорной галереи; их марка/модель не подменялись. KCar gallery-version обновлена для однократного обновления старого порядка. Это небольшой список проверенных исключений, не автоматический классификатор любых новых фотографий. Браузерная политика запретила локальный preview; визуальная приёмка остаётся открытой.
+
+Dubizzle в свежем проходе вернул HTTP 200 с заголовком `Pardon Our Interruption`. Общий detector прежде не распознал этот заголовок, а адаптер продолжил шесть маршрутов. Исправлены оба уровня: первый отказ завершает проход, региональные/Algolia повторы после challenge запрещены. Регрессионный тест проверяет ровно один запрос при challenge/401/403/429. Изменения представлены в PR833.
+
+### 40.83 — свежая проверка 12 разрешённых источников и реальных production-мостов (2026-09-07)
+
+Выполнены четыре ограниченных прохода: [34078772508](https://github.com/jeep-jim/AvtoCena/actions/runs/34078772508), [34079320397](https://github.com/jeep-jim/AvtoCena/actions/runs/34079320397), [34079770507](https://github.com/jeep-jim/AvtoCena/actions/runs/34079770507), [34080098189](https://github.com/jeep-jim/AvtoCena/actions/runs/34080098189). Для каждого взяты фактические CRM/курсы; manifest, CRM и курсы проверены неизменными до/после. Сбор последовательный и ограниченный страницами/запросами; Япония исключена. Сетевые и локальные файловые guards не разрешают фотоархив или публикацию.
+
+Результат mobile.de: 39/40 расчётов, AutoScout24: 16/18, KCar: 37/39. **92 расчёта; во всех 92 совпали цена карточки/детали и сумма расходов/итог.** 84 карточки прошли исходные правила. После локального применения двух удержаний и URL-исключений остаются 82; это replay метаданных, не свежая сохранённая генерация. Проверки имеют разные лимиты и не образуют долю приёмки всего каталога.
+
+В первой проверке зарегистрированных Encar/Guazi/MyAuto собственный сетевой envelope не пропустил их уже существующие серверные мосты, поэтому нулевой результат не был отказом площадок. Допуск исправлен только для трёх точных одностраничных GET. Через штатный путь Encar вернул 20 машин, MyAuto сначала 10, затем 11; Guazi сообщил source challenge. После обнаружения пропущенного диагностикой Knowledge CORE сделан отдельный повтор: точные модификации/мощность всё ещё не определены, Encar 0/20, MyAuto 0/11. Для Encar исходные модели не связаны с CORE; у MyAuto модели связаны, но variantId отсутствует и поля не применены. Предположительная мощность не подставлялась.
+
+Китай: Che168 — список 24 строк, challenge на странице точных параметров после первой детали; 23 дальнейшие попытки обработки остановлены guard. Autohome new — 20 рассмотренных из 104 строк, неполные/неоднозначные параметры, последние четыре детали за пределом 50 запросов. Dongchedi — отключённый адаптер, нового сетевого результата нет. Guazi — challenge через production-мост. ОАЭ: DubiCars 17 карточек без фиксированной исходной цены и с неполными точными параметрами; Dubizzle — challenge. Грузия: AutoPapa — 403, MyAuto доступен через штатный мост, но точные расчётные данные не подтверждены. Дополнительный Porsche Finder вернул 429 для обеих стран, разрешённый source allowlist не менялся.
+
+Полный остаток и воспроизводимая сводка находятся в `docs/catalog-market-restart-readiness-v1.md`, `five-market-restart-outcome-v1-20260907.json`, исходные JSON — `data/catalog/research/restart-20260907/`. Фотографии остались ссылками; JSON-мост сбора не объявляется прокси посетительских фотографий. Внутренние upstream-запросы развёрнутого моста отдельно не наблюдались. Активный каталог не переключён, merge/deploy и массовая очистка не выполнялись. Полный запуск требует устранения перечисленных пробелов, визуальной приёмки, свежей изолированной генерации/отката и только затем активации недельной очереди. Дата готовности пока не подтверждена.
+
+**Финальная проверка кода:** [CI 34080100070](https://github.com/jeep-jim/AvtoCena/actions/runs/34080100070), runtime `2bb4e3e0cec76594ee8b7c06c9794f66be8f031b`, tree `4ed02a61708ee782f0ec0365774dcf4ef2b218d3`: 1092/1092 тестов, fail 0, typecheck и production build passed, 55 страниц. Следующий checkpoint содержит только отчёты, документацию и offline advisory scripts.
+
+### 40.84 — исправлена привязка Encar и потеря доказательств MyAuto; измерен дефицит проверенных вариантов (2026-09-07)
+
+В `knowledge-core` подключён существующий resolver канонических названий и безопасных алиасов. Для Encar используются английские названия из привязанной к исходной строке `detail.category`, при совпадении ID строки и марки/модели списка и детали. Убирается только явный суффикс поколения; широкая группа Encar не подменяет модель. Регрессия сохраняет Grand Cherokee отдельно от Cherokee, отклоняет чужую строку/категорию и не заполняет мощность только по найденной модели. Коды комплектации и JATO остаются ключами поиска, а не доказательством характеристик. Названия источника сохранены.
+
+MyAuto: у `prepareMyAuto` терялась `semanticEvidence` product snapshot, а generic-нормализация могла оставить старое значение объёма. Прямой адаптер и recovery теперь используют одну подготовку после нормализации, передают происхождение полей и сохраняют неоднозначность/конфликт. Целое значение `engine_volume` само по себе не доказывает точный объём; принимается явное согласованное `engine_cc`. Исправлен и режим по умолчанию: галерея MyAuto остаётся ссылками, если `CATALOG_IMAGE_STORAGE_MODE` не задан, а также при пробелах/регистре значения. Ни одного файла фотографий для этой работы не загружалось.
+
+Отдельная сохранённая свежая Encar-fixture дала 11/20 распознанных моделей. Последующий [проход 34081598611](https://github.com/jeep-jim/AvtoCena/actions/runs/34081598611) на runtime `b2ee62dc744f9541b29f044e415645a94c1c4acb` получил другую выборку: **Encar 20 объявлений, 10 связей моделей, 0 точных расчётов; MyAuto 8 объявлений, 8 связей моделей, 0 точных расчётов**. В каждом job — один запрос к заранее настроенному JSON-мосту; его upstream отдельно не наблюдался. Рабочие manifest/CRM/курсы совпали до/после, configurationMismatches пуст. В deployed MyAuto всё ещё старый контракт без productSemanticEvidence: локальное исправление требует развёртывания и следующей живой приёмки. Прямой product API вернул 403; повторных прямых запросов не было.
+
+Ключевой пробел теперь измерен: CORE содержит 18 941 V2-запись review, 24 489 source_observed и 261 verified. Среди verified — Japan 256, Europe 2, Global 2, United Kingdom 1. У всех 18 связанных строк нового прохода нет verified-вариантов. Ни статус research, ни единственный подходящий по объёму кандидат не повышались до точной модификации. Проверенный статус также не заменяет field-level evidence, применимость рынка и связь конкретного объявления.
+
+Добавлена воспроизводимая очередь `restart-knowledge-link-gaps-v1-20260907.json`: 94 нерассчитанные строки последних проверок 12 источников, 76 в допустимом годовом окне, 47 с найденной моделью; у всех 47 нет проверенных вариантов. Это очередь по ограниченным выборкам, включая остановленную по сетевому лимиту обработку, а не доля всего inventory. Генератор `scripts/catalog-audit-restart-knowledge-links.mjs` работает offline после `catalog-summarize-restart-checks.mjs` и `catalog-market-restart-readiness.mjs`. В общей сводке остаются 92 проверенных расчёта/совпадения цен и 82 карточки после ранее записанных удержаний галерей; нового прироста расчётов нет.
+
+Следующая обязательная работа: официальные применимые характеристики и точная связь комплектации Encar/MyAuto с вариантом, доступные полные параметры Китая, фиксированные цены/параметры ОАЭ, затем развёртывание исправленного runtime, визуальная и изолированная генерационная приёмка с откатом. Общая публикация, недельное расписание и Япония остаются на паузе. Точная дата общего запуска не установлена.
+
+**Финальная проверка кода:** [CI 34081601642](https://github.com/jeep-jim/AvtoCena/actions/runs/34081601642), runtime `b2ee62dc744f9541b29f044e415645a94c1c4acb`, tree `b3b74e5123fafd05c2976fc6e447786a26d974aa`: 1096/1096 тестов, fail 0, typecheck и production build passed, 55 страниц. Следующий checkpoint содержит только отчёты, документацию и offline advisory scripts.
+
+
+### 40.85 — первый общий прогон пяти рынков завершён: 913 объявлений, 255 расчётов, 231 кандидат (2026-09-07)
+
+По прямому поручению владельца выполнен [общий запуск 34083757152](https://github.com/jeep-jim/AvtoCena/actions/runs/34083757152) всех 12 зарегистрированных адаптеров, без Японии и без публикации. Лимит на источник: 200 рассмотренных объявлений, пять страниц, 350 запросов с паузой 1 секунда. Собственный диагностический guard первоначально не разрешал уже используемые мосты AutoPapa/Dubizzle; до источников запросы не дошли. Исправлены только точные существующие GET-маршруты; [дополнение 34084620827](https://github.com/jeep-jim/AvtoCena/actions/runs/34084620827) получило 42 AutoPapa и 124 Dubizzle, по пять успешных запросов к мосту. Первый запуск дополнения не стартовал из-за YAML-имени с двоеточием; кавычки исправлены, следующий запуск success. Отказы источников не обходились альтернативным egress.
+
+Получено 1069 строк, удалено 70 повторов идентификатора; 999 нормализованных, 86 за пределом рассмотрения. Рассмотрено 913, допустимый год у 831. Европа 190 → 167 полных расчётов → 155 карточек после правил и дублей; Корея 187 → 88 → 76; Китай 224 → 0; ОАЭ 238 → 0; Грузия 74 → 0. Из 255 расчётов 243 проходят год, 232 — диагностические фильтры; один точный дубль mobile.de удалён штатной дедупликацией. **Итог 231 кандидат, а не опубликованный объём каталога.** Прежние 92/95 расчётов в эту сводку не включены.
+
+Офлайн-пересчёт 255 snapshot подтвердил сумму расходов, конвертацию валюты, зачёт обеспечительного платежа и неизменность итога при отображении. 253 цены совпадают с показанными карточкой/деталью; две дорогие AutoScout-карточки штатно скрыты обеими проекциями. Ошибок арифметики нет. Все полные расчёты пока используют штатные предварительные средние расходы: активные индивидуальные профили Европы/Кореи в рабочей CRM отсутствуют. Production manifest/CRM/курсы до/после не изменились. Изображения не скачивались, в чанках только URL. Upstream-трафик deployed-мостов отдельно не наблюдался.
+
+Сохранились ограничения: мощности Encar/AutoPapa/MyAuto, точные объёмы DubiCars, диапазоны Dubizzle, сертифицированные мощности гибридов; MyAuto ещё требует развёртывания подготовленного исправления evidence. Китай: Che168 остановлен защитой после первой детали; Autohome new достиг 350 запросов, 84 обработки деталей ограничены бюджетом; Guazi challenge; Dongchedi — отключённая реализация без сетевого запроса. Ограниченный проход не доказывает полный доступный объём рынка.
+
+Отчёт: `docs/catalog-first-five-market-trial-20260907.md`; исходные JSON, чанки, SHA-256 Actions-архивов, `summary.json` и список кандидатов: `data/catalog/research/five-market-trial-20260907/`. Воспроизводится `scripts/catalog-summarize-five-market-trial.mjs`. Текущий readiness-документ обновлён, старые результаты помечены историческими.
+
+### 40.86 — жизненный цикл 14/30 дней и удаление проданных доведены до публикации (2026-09-07)
+
+Уточнение владельца зафиксировано в `data/catalog/refresh-policy-v1.json`: пять рынков — переобход каждые 7 дней, данные 14 дней от последнего наблюдения, недельная очистка; Япония — новые объявления каждые 14 дней, аукционная история 30 дней, очистка примерно ежемесячно. Япония в текущем прогоне исключена, расписания не активированы.
+
+Исправлены четыре разных причины нарушения этого контракта: старое firstSeen/sourcePublishedAt больше не удаляет снова увиденное активное объявление; запуск импортера и repricing не обновляют lastSeenAt без источника; sold/removed передаются в generation report до publisher и не возвращаются из предыдущего каталога; неявная отсрочка 2× убрана. Для KCar точная ошибка sold от detail также создаёт подтверждённое снятие. Более новое активное наблюдение может восстановить переопубликованное объявление, старая отметка sold не перебивает его. Отметки проверяются по рынку, зарегистрированному источнику и двум идентификаторам. Сетевая ошибка не является доказательством продажи; истёкшая непроверенная запись исключается по возрасту.
+
+Исправлены основной V3 writer, импортёр, recovery/raw/scale/fresh writers и прежний rebuild; default grow-only Korea отключён. Даже явно включённый legacy grow-mode не оживляет sold и записи старше срока. Уборщик source-candidates больше не удаляет чанки через три дня: используются 14/30 дней по рынку. Текущая опубликованная генерация защищена; уборка технических лишних копий/кешей остаётся отдельной процедурой.
+
+Runtime `85128965458abefb2d58f358da2ab22a5021a1c9`, tree `d9000414e007e15124e78d2bbdd8abefc5d2c618`. Локальная проверка: 1106 общих тестов + новая функциональная регрессия storage 1/1; typecheck, production build, 55 страниц passed.  Изменения отправлены в PR833; merge/deploy, очистка production и переключение manifest не выполнялись.
+
+Остаток до общего запуска с публикацией: реальные настройки расходов рынков, применимые точные спецификации, развёртывание исправленного MyAuto, визуальная и изолированная генерационная приёмка с откатом; затем недельная очередь. Первый общий диагностический опыт уже получен, но полного обхода всех страниц с записью нового каталога ещё не было. Дата массовой публикации не выдумывается.
+
+
+**Проверка в GitHub завершена:** [CI 34085131358](https://github.com/jeep-jim/AvtoCena/actions/runs/34085131358), runtime `85128965458abefb2d58f358da2ab22a5021a1c9`, tree `d9000414e007e15124e78d2bbdd8abefc5d2c618`: success, 1107/1107 общих тестов, fail 0, typecheck и production build passed, 55 страниц. Последующий checkpoint меняет только результаты, документы и офлайн-агрегатор.
+
+
+### 40.87 — восстановлены ограничения ассортимента; 231 кандидат уточнён до 206 (2026-09-07)
+
+Владелец уточнил: CRM не трогать и не ждать новых расходов как условия сбора. После сохранения расходов штатный движок применит их; этот механизм не менялся. Сохраняются 14 дней / недельный обход пяти рынков, Япония 30 дней / сбор раз в 14 дней / месячная очистка, фото только URL.
+
+Обнаружены реальные отклонения: Япония имела исключение 100 на модель/год, общий env мог поднять 20 до 100, защищённые прежние строки обходили потолок. Исправлен единый жёсткий максимум 20, суммарно по сайтам на рынок+марку+модель+год. Основной V2-селектор применяет квоту и чередует модели; регрессия со 100 Camry и семью другими моделями в лимите десять сохраняет восемь моделей. Гибриды/EV/неизвестный тип не засчитываются в группу обычных ДВС ≤160 л.с.; исправлены основной отбор, витрина и public priority. 80% — цель при наличии предложения, дефицит отражается численно. Годы уже были 2020+/2010+; действующий потолок 15 млн ₽ сохранён и ограничивает legacy-параметры селектора.
+
+Повторно разобрана та же выборка, нового общего парсинга не было. В прежних 155 европейских кандидатах оказалось 45 Golf 2026: оставлено 20. Теперь Европа 130 кандидатов/54 модели, Корея 76/36 моделей; всего 206. Максимальная группа модель/год: Европа 20, Корея 5. Обычные ДВС ≤160 л.с.: Европа 121/130, Корея 7/76; суммарно 128/206 = 62,1%. Прежние 231 не были окончательной проверкой ассортимента, это исправлено в readiness и основном отчёте.
+
+Выявлена незавершённая полнота описания: у всех 130 европейских кандидатов snapshot не содержит привод, у 104 — точный кузов. У 76 корейских эти поля заполнены. Один дополнительный VIP GET mobile.de для ID 448617864 подтвердил отсутствие ведущей оси в атрибутах; SmallCar/Kleinwagen не объявляется точной формой кузова, Verbrennungsmotor не принимается за привод. Сохранены нужные атрибуты без контактов и фотофайлов.
+
+Офлайн-проверка ручного выбора по существующему CORE: из 682 ранее не принятых строк 0 получили проверенные варианты выбора; 1 автоматически квалифицируемый ранее отсеянный дубль, 681 blocked. Наличие UI «Выбрать модификацию» не заменяет недостающие применимые варианты. Новые фиктивные модификации не создавались. Для дополнительных китайских источников записаны Taocheche и AutoZHEN: поиск нашёл объявления, прямые чтения не подтвердили стабильный полный контракт. Allowlist не расширен без квалификации, платная база и ИИ не подключались.
+
+Отчёт `docs/catalog-assortment-audit-20260907.md`, воспроизводимый `scripts/catalog-audit-trial-assortment.mjs`, `assortment-audit.json` с очередью недостающих полей, точный mobile witness и список источников-кандидатов. Локально 1111/1111 тестов, typecheck и production build (55 страниц) passed. До готового каталога остаются доказанные кузов/привод Европы, точные спецификации/варианты других источников и другой состав корейской выборки. CRM не блокирует эту работу. Production, расписания и Япония не запускались.
+
+
+### 40.88 — завершение ограничено пригодным каталогом, снята зависимость от двух сайтов (2026-09-07)
+
+Владелец остановил расширение задачи: важны заполненные и точно рассчитанные объявления, объём не является условием запуска. Новые источники и полное восстановление каждой площадки не должны задерживать выпуск пригодной части. CRM, Япония, хранение URL фотографий и расписание/сроки 14/30 дней не менялись. Обещание исправить все рынки за два часа не дано: таких данных нет.
+
+В основном V3-валидаторе действительно оставался default двух продуктивных источников на рынок (его reusable workflow не переопределял). Для пяти рынков установлен один; японское значение два сохранено. Убрано отдельное требование свежих пригодных строк от каждого грузинского источника. Все обязательные адаптеры должны быть попытаны, сбои источников видны в диагностике, непустой пригодный результат обязателен. Пустой рынок не перезаписывает существующую генерацию.
+
+В основной publisher добавлена проверка полноты кузова, привода и коробки: до расчёта/квоты и после V2-нормализации, которая может удалить противоречивый кузов. Пустые значения и явные заглушки исключаются с причиной description_<field>_missing. Это проверка полноты, не новое доказательство достоверности; штатные проверки происхождения, характеристик, фото и расчётов сохранены. Старые и новые строки проходят один auditCandidate. Это изменение основного V3-пути, не заявление о переделке всех legacy publishers.
+
+Проверки: 1113 общих тестов до последнего изменения source-validator; после него 21 целевой тест, включая новую функциональную проверку настоящего validator subprocess: одна продуктивная площадка проходит, пустой результат и непопытанный обязательный источник блокируются. Typecheck прошёл. Новый production build не запускался, UI не менялся. Предыдущий checkpoint 704269 прошёл GitHub CI 34087267834.
+
+Граница готовности: сохранённая выборка всё ещё 206 кандидатов после ассортимента, из них 76 корейских с заполненными кузовом/приводом/коробкой; это не новая публикация и не подтверждение общего объёма рынка. В Европе этих полей недостаточно; Китай/ОАЭ/Грузия не дали полных расчётов в первом общем прогоне. Доработка данных остаётся открытой. Настройки выпуска теперь позволяют выпускать пригодный результат независимо от целевого объёма и второго сайта. Merge/deploy, новый сбор, переключение каталога и cron в этом checkpoint не выполнялись.
+
+
+### 40.89 — владелец разрешил запуск пригодного каталога и нового сбора (2026-09-07)
+
+После обрыва чата владелец подтвердил: сохранить пригодные объявления, собрать новые по исправленным условиям пяти рынков и опубликовать результат. PR833 head 6e781924 прошёл CI 34095030269; его база — промежуточная ветка, main b5573a51 не содержит накопленные исправления (341 commit ahead, behind 0).
+
+Подготовлен узкий допуск основному V3 publisher: пять неяпонских рынков, обязательные обе функции проверки и передача всех остальных рынков для сохранения. Общая блокировка legacy writers и modification recovery остаётся. Очередь допускает ручной запуск этих пяти рынков; автоматические расписания и cleanup не включаются до результата первого прохода. CRM, JSON-чанки, URL фотографий и сроки 14/30 дней не изменены.
+
+Для явно разрешённого уменьшения непригодного каталога V3 передаёт существующий CATALOG_ALLOW_PUBLIC_COLLAPSE=1 только неяпонским рынкам. Исправлена несогласованность: beforePublishValidate тоже использует непустой минимум при этом явном режиме, а не прежние 10% старого каталога. Нулевой пригодный результат по-прежнему блокирует переключение рынка; остальные рынки проходят проверки сохранения.
+
+Статус этой записи: подготовка к CI, публикация и новый сбор ещё не выполнены. Итоговые runs и результаты должны быть записаны после исполнения.

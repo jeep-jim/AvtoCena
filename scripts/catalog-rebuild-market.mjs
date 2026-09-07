@@ -1,3 +1,4 @@
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogOfferConfirmedWithdrawn, observeCatalogOffer, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
@@ -106,7 +107,7 @@ function uniqueImages(images) {
 }
 
 function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return catalogOfferFreshness(offer);
 }
 
 function deadlineReached() {
@@ -211,8 +212,9 @@ async function checkpointIfNeeded(force = false) {
 
 async function prepareCandidate(input, source, origin) {
   if (deadlineReached()) return null;
-  let offer = cleanOffer({ ...input });
-  if (!offer || offer.market !== market || !offer.id) return null;
+  let offer = cleanOffer(preserveCatalogOfferObservation(input));
+  if (!offer || offer.market !== market || !offer.id || !catalogOfferWithinRetention(offer)) return null;
+  if (market !== "japan" && offer.status !== "active") return null;
 
   let images = uniqueImages(offer.images || []);
   if (images.length < minimumImages && source?.fetchImages && !deadlineReached()) {
@@ -230,7 +232,7 @@ async function prepareCandidate(input, source, origin) {
 
   offer = cleanOffer({
     ...offer,
-    status: "active",
+    status: market === "japan" ? "active" : offer.status,
     images,
     operational: {
       ...offer.operational,
@@ -269,7 +271,7 @@ const [internalRows, publicRows] = await Promise.all([
 ]);
 const restoredMap = new Map();
 for (const offer of [...publicRows, ...internalRows]
-  .filter((offer) => offer && offer.market === market && ["active", "stale"].includes(String(offer.status || "")))
+  .filter((offer) => offer && offer.market === market && offer.status === "active" && catalogOfferWithinRetention(offer))
   .sort((left, right) => freshness(right) - freshness(left) || Number(right.images?.length || 0) - Number(left.images?.length || 0))) {
   if (!restoredMap.has(offer.id)) restoredMap.set(offer.id, offer);
   if (restoredMap.size >= seedScanLimit) break;
@@ -350,7 +352,16 @@ async function processSourcePage(state) {
   for (const raw of rows) {
     let base = null;
     try { base = state.source.normalizeOffer(raw); } catch { base = null; }
-    if (!base || base.market !== market || !base.id || offers.has(base.id) || batchIds.has(base.id)) continue;
+    if (!base || base.market !== market || !base.id) continue;
+    if (catalogOfferConfirmedWithdrawn(base)) {
+      offers.delete(base.id);
+      report.confirmedWithdrawals ||= [];
+      report.confirmedWithdrawals.push({ id: base.id, sourceId: base.sourceId, sourceOfferId: base.sourceOfferId, market, status: base.status, observedAt: new Date().toISOString() });
+      continue;
+    }
+    base = observeCatalogOffer(base, new Date().toISOString());
+    if (offers.has(base.id)) offers.set(base.id, observeCatalogOffer(offers.get(base.id), base.operational.lastSeenAt));
+    if (offers.has(base.id) || batchIds.has(base.id)) continue;
     batchIds.add(base.id);
     normalizedRows.push(base);
   }

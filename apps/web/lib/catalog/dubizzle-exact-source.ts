@@ -453,6 +453,9 @@ async function requestAlgolia(page: number) {
         signal: controller.signal,
       });
       const text = await response.text();
+      if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(text.slice(0, 8_000))) {
+        throw new Error(`dubizzle_exact_blocked_${response.status}_imperva_or_challenge`);
+      }
       if (!response.ok) throw new Error(`dubizzle_algolia_http_${response.status}`);
       const payload = JSON.parse(text) as { hits?: unknown[]; page?: number; nbPages?: number };
       const rows = (Array.isArray(payload.hits) ? payload.hits : [])
@@ -467,6 +470,7 @@ async function requestAlgolia(page: number) {
       };
     } catch (error) {
       lastError = String((error as Error)?.message || error);
+      if (/blocked|pilot_stop_|pilot_challenge_stop|pilot_source_stopped|pilot_request_outside_envelope/.test(lastError)) throw error;
     } finally {
       clearTimeout(timer);
     }
@@ -504,7 +508,10 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
       } catch (error) {
         const message = String((error as Error)?.message || error);
         lastError = message;
-        if (/blocked|http_/.test(message)) continue;
+        // A source refusal ends this pass; alternate regions or search hosts
+        // must not turn a challenge into a sequence of more source requests.
+        if (/blocked|pilot_stop_|pilot_challenge_stop|pilot_source_stopped|pilot_request_outside_envelope/.test(message)) throw error;
+        if (/http_/.test(message)) continue;
         throw error;
       }
     }

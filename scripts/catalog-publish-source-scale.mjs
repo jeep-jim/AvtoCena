@@ -1,3 +1,5 @@
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
+const { catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -51,7 +53,7 @@ function imageKey(image) {
 }
 
 function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return catalogOfferFreshness(offer);
 }
 
 function qualityOrder(left, right) {
@@ -295,7 +297,8 @@ async function runWithConcurrency(items, concurrency, worker) {
 async function auditCandidate(sourceOffer, market) {
   try {
     if (!sourceOffer?.id || sourceOffer?.market !== market || isCommercial(sourceOffer)) return { offer: null, reason: "commercial_or_identity" };
-    let offer = normalizeVehicleOfferSpecs({ ...sourceOffer, status: "active", images: uniqueImages(sourceOffer.images) });
+    if (!catalogOfferWithinRetention(sourceOffer) || (market !== "japan" && sourceOffer.status !== "active")) return { offer: null, reason: "retention_or_status" };
+    let offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(sourceOffer), status: market === "japan" ? "active" : sourceOffer.status, images: uniqueImages(sourceOffer.images) });
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
@@ -331,12 +334,13 @@ const marketReports = {};
 
 for (const market of markets) {
   const generation = await readGenerationFiles(market);
+  const withdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
   let publicRows = [];
   try { publicRows = await readMarketOffers(market); } catch { publicRows = []; }
 
   const retainedById = new Map();
   for (const offer of [...publicRows, ...internalRows]
-    .filter((row) => row?.market === market && ["active", "stale"].includes(String(row?.status || "")) && freshness(row) >= cutoff)
+    .filter((row) => row?.market === market && row.status === "active" && catalogOfferWithinRetention(row) && !catalogOfferWithdrawnByReport(row, withdrawals))
     .sort((left, right) => freshness(left) - freshness(right))) {
     retainedById.set(offer.id, mergeOfferVersions(offer, retainedById.get(offer.id)));
   }
@@ -344,7 +348,7 @@ for (const market of markets) {
   const generatedById = new Map();
   const generatedOrigins = new Map();
   let galleriesAccumulated = 0;
-  const generationRows = [...generation.offers].sort((left, right) => {
+  const generationRows = generation.offers.filter((offer) => !catalogOfferWithdrawnByReport(offer, withdrawals)).sort((left, right) => {
     const leftFresh = String(left?.operational?.galleryRebuiltFrom || "") === "fresh_listing" ? 1 : 0;
     const rightFresh = String(right?.operational?.galleryRebuiltFrom || "") === "fresh_listing" ? 1 : 0;
     return leftFresh - rightFresh || freshness(left) - freshness(right);

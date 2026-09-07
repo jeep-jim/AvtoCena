@@ -8,7 +8,9 @@ const { hasAllowedCatalogSourceProvenance, isCatalogMarketSourceAllowed, isCredi
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { catalogRetentionDecision, catalogSourceRefreshStates } = await import("../apps/web/lib/catalog/source-retention.ts");
+const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
+const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -23,10 +25,9 @@ const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PE
 const targetPerMarket = Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000));
 const maximumPerMarket = Math.max(targetPerMarket, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 100_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const defaultRetentionMs = Math.max(60_000, Number(process.env.CATALOG_DEFAULT_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
-const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
-const currentRetentionOverrideMs = Math.max(0, Number(process.env.CATALOG_OFFER_RETENTION_MS || 0));
-const outageGraceMultiplier = Math.max(1, Math.min(4, Number(process.env.CATALOG_SOURCE_OUTAGE_RETENTION_MULTIPLIER || 2)));
+const defaultRetentionMs = catalogMarketRetentionMs("korea");
+const japanRetentionMs = catalogMarketRetentionMs("japan");
+const outageGraceMultiplier = 1;
 const minimumPublicRetentionRatio = Math.max(0.01, Math.min(1, Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.10)));
 const allowPublicCollapse = process.env.CATALOG_ALLOW_PUBLIC_COLLAPSE === "1";
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
@@ -40,7 +41,7 @@ const v2Policy = {
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
   priorityMaxPowerHp,
   priorityMaxTotalRub,
-  hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 100_000_000)),
+  hardMaxTotalRub: Math.min(15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
   lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -65,8 +66,7 @@ if (configuredMarkets.length !== 1) {
 }
 
 function retentionForMarket(marketId) {
-  if (marketId === market && currentRetentionOverrideMs > 0) return Math.max(60_000, currentRetentionOverrideMs);
-  return marketId === "japan" ? japanRetentionMs : defaultRetentionMs;
+  return catalogMarketRetentionMs(marketId);
 }
 
 const retentionMs = retentionForMarket(market);
@@ -154,13 +154,7 @@ function uniqueImages(images) {
 }
 
 function freshness(offer) {
-  return Date.parse(String(
-    offer?.updatedAt
-      || offer?.operational?.fullRebuildAt
-      || offer?.operational?.sourcePublishedAt
-      || offer?.firstSeenAt
-      || "",
-  )) || 0;
+  return catalogOfferFreshness(offer);
 }
 
 function stableJsonValue(value) {
@@ -282,10 +276,14 @@ async function runWithConcurrency(items, concurrency, worker) {
 async function auditCandidate(sourceOffer) {
   try {
     if (!sourceOffer?.id || sourceOffer?.market !== market || isCommercial(sourceOffer)) return { offer: null, reason: "commercial_or_identity" };
-    let offer = normalizeVehicleOfferSpecs({ ...sourceOffer, status: "active", images: uniqueImages(sourceOffer.images) });
+    if (market !== "japan" && sourceOffer.status !== "active") return { offer: null, reason: "source_not_active" };
+    if (!catalogOfferWithinRetention(sourceOffer)) return { offer: null, reason: "retention_expired" };
+    let offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(sourceOffer), status: market === "japan" ? "active" : sourceOffer.status, images: uniqueImages(sourceOffer.images) });
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
+    const descriptionReason = catalogDescriptionRejectionReason(offer);
+    if (descriptionReason) return { offer: null, reason: descriptionReason };
     offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
     const calculationStatus = String(offer.calculationStatus || "");
     const calculationPending = calculationStatus === "needs_data"
@@ -314,11 +312,12 @@ await acquirePublishLock();
 try {
 const generation = await readGenerationFiles();
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
+const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
 let currentMarketRows = [];
 try { currentMarketRows = await readMarketOffers(market); } catch { currentMarketRows = []; }
 const retentionDecisions = new Map();
 const currentRetainedRows = currentMarketRows.filter((row) => {
-  if (!["active", "stale"].includes(String(row?.status || ""))) return false;
+  if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
     offer: row,
     retentionMs,
@@ -330,14 +329,14 @@ const currentRetainedRows = currentMarketRows.filter((row) => {
 });
 const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
 const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
-const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "outage_grace_expired").length;
+const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "unverified_retention_expired").length;
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - freshness(right))) {
-  candidatesById.set(offer.id, mergeOfferVersions({ ...offer, status: "active" }, candidatesById.get(offer.id)));
+  candidatesById.set(offer.id, mergeOfferVersions(preserveCatalogOfferObservation(offer), candidatesById.get(offer.id)));
 }
 for (const offer of generation.offers.sort((left, right) => freshness(left) - freshness(right))) {
-  if (!offer?.id) continue;
+  if (!offer?.id || catalogOfferWithdrawnByReport(offer, confirmedWithdrawals)) continue;
   candidatesById.set(offer.id, mergeOfferVersions(offer, candidatesById.get(offer.id)));
 }
 
@@ -387,7 +386,15 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
 // remaining market capacity instead of being discarded by a power-mix quota.
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 const selectedMarketOffersById = new Map();
-for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
+for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
+  // Check after V2 normalization, which may clear a contradictory body value.
+  const reason = catalogDescriptionRejectionReason(offer);
+  if (reason) {
+    rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
+    continue;
+  }
+  selectedMarketOffersById.set(String(offer.id), offer);
+}
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
@@ -461,7 +468,7 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
 const allOffers = [...unique.values()];
 const previousRetainedCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
-const minimumSafePublicCount = previousPublicCount >= 100
+const minimumSafePublicCount = !allowPublicCollapse && previousPublicCount >= 100
   ? Math.max(1, Math.ceil(previousPublicCount * minimumPublicRetentionRatio))
   : 1;
 const catastrophicPublicCollapse = previousPublicCount >= 100
@@ -478,6 +485,7 @@ if (regressionBlocked) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     manifest = await persistCatalogOffers(allOffers, {
+      productionRefreshMarket: market,
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
         const failures = [];
@@ -546,6 +554,7 @@ const report = {
   authoritativeExpiredCount,
   outageGraceExpiredCount,
   sourceRefreshStates,
+  confirmedWithdrawals: [...confirmedWithdrawals.values()],
   targetPerSource,
   targetPerMarket,
   maximumPerMarket,

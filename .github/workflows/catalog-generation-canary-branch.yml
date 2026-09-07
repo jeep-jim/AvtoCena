@@ -1,0 +1,80 @@
+name: Europe and KCar source URL generation acceptance v6
+on:
+  push:
+    branches: [feat/catalog-europe-kcar-generation-canary-20260907]
+    paths:
+      - .github/workflows/catalog-generation-canary-branch.yml
+permissions:
+  contents: read
+concurrency:
+  group: catalog-isolated-canary-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        market: [europe, korea]
+    env:
+      CANARY_MARKET: ${{ matrix.market }}
+      CANARY_OUTPUT: canary-${{ matrix.market }}
+      CANARY_TARGET: '8'
+      CANARY_SAMPLE_LIMIT: '16'
+      CANARY_IMAGE_LIMIT: '8'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify isolation, freshness and production pause
+        run: node --import tsx --test tests/catalog-generation-canary.test.ts tests/catalog-canary-cleanup-scope.test.ts tests/catalog-production-pause.test.ts
+      - name: Read production settings and round-trip an isolated generation
+        run: node --import tsx scripts/catalog-generation-canary.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: generation-canary-${{ matrix.market }}
+          path: canary-${{ matrix.market }}
+          if-no-files-found: warn
+          retention-days: 14
+  remove_test_image_copies:
+    needs: canary
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: write
+    env:
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Remove only the 148 recorded PR833 test images and their old artifact copies
+        run: node --import tsx scripts/catalog-remove-canary-image-copies.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: canary-image-copy-removal-report
+          path: canary-image-copy-removal-report.json
+          retention-days: 14

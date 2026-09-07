@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { myAutoProductSnapshotFromInfo } from "../apps/web/lib/catalog/myauto-list-source";
+import { applyMyAutoProductSpecifications, myAutoProductSnapshotFromInfo, myAutoListSource } from "../apps/web/lib/catalog/myauto-list-source";
+import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 test("MyAuto exact product metadata can build a full listing-bound gallery even when the list card has no image", () => {
   const snapshot = myAutoProductSnapshotFromInfo({
@@ -15,8 +16,8 @@ test("MyAuto exact product metadata can build a full listing-bound gallery even 
   assert.equal(snapshot?.galleryUrls.length, 15);
   assert.equal(snapshot?.galleryUrls[0], "https://static.tnet.ge/myauto/photos/7/4/6/1/0/large/123016475_1.jpg?v=0");
   assert.equal(snapshot?.galleryUrls[14], "https://static.tnet.ge/myauto/photos/7/4/6/1/0/large/123016475_15.jpg?v=0");
-  assert.equal(snapshot?.engineCc, 1500);
-  assert.equal(snapshot?.semanticEvidence.engineCc.status, "exact");
+  assert.equal(snapshot?.engineCc, undefined);
+  assert.equal(snapshot?.semanticEvidence.engineCc.status, "ambiguous");
 });
 
 test("MyAuto exact product metadata never crosses listing identity", () => {
@@ -35,7 +36,7 @@ test("MyAuto product snapshot accepts only explicit horsepower fields and bounde
     power: 85,
     power_hp: 116,
   }, "123016475");
-  assert.equal(snapshot?.engineCc, 1500);
+  assert.equal(snapshot?.engineCc, undefined);
   assert.equal(snapshot?.powerHp, 116);
 
   const unsafe = myAutoProductSnapshotFromInfo({
@@ -50,6 +51,24 @@ test("MyAuto product snapshot accepts only explicit horsepower fields and bounde
   assert.equal(unsafe?.powerHp, undefined);
   assert.equal(unsafe?.semanticEvidence.engineCc.status, "ambiguous");
   assert.equal(unsafe?.semanticEvidence.powerHp.status, "ambiguous");
+});
+
+test("MyAuto shared recovery preparation preserves exact evidence and clears coarse legacy displacement", () => {
+  const base = { car_id: 123016475, photo: "7/4/6/1/0", pic_number: 6, photo_ver: 0 };
+  const snapshot = myAutoProductSnapshotFromInfo({ ...base, engine_cc: 1498, power_hp: 116 }, "123016475");
+  const offer = { sourceOfferId: "123016475", engineCc: 1500, powertrainKind: "combustion",
+    operational: { semanticEvidence: { engineCc: { status: "missing" }, powerHp: { status: "missing" } } } } as any;
+  applyMyAutoProductSpecifications(offer, snapshot);
+  assert.equal(offer.engineCc, 1498);
+  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "exact");
+  applyMyAutoProductSpecifications(offer,
+    myAutoProductSnapshotFromInfo({ ...base, engine_volume: 1500 }, "123016475"));
+  assert.equal(offer.engineCc, undefined);
+  assert.equal(offer.powerHp, undefined);
+  assert.equal(offer.powerKw, undefined);
+  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "ambiguous");
+  assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "missing");
 });
 
 test("MyAuto product snapshot refuses conflicting structured metrics", () => {
@@ -68,4 +87,38 @@ test("MyAuto product snapshot refuses conflicting structured metrics", () => {
   assert.equal(snapshot.powerHp, undefined);
   assert.equal(snapshot.semanticEvidence.engineCc.status, "conflict");
   assert.equal(snapshot.semanticEvidence.powerHp.status, "conflict");
+});
+
+
+test("MyAuto source URL mode enriches exact product data without fetching or caching images", async () => {
+  const previousFetch = globalThis.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  const requests: string[] = [];
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+    requests.push(url);
+    assert.equal(url, "https://api2.myauto.ge/en/products/123016475");
+    return new Response(JSON.stringify({ data: { info: {
+      car_id: 123016475, photo: "7/4/6/1/0", pic_number: 6, photo_ver: 0,
+      engine_cc: 1498, power_hp: 116,
+    } } }), { headers: { "content-type": "application/json" } });
+  };
+  try {
+    for (const mode of [undefined, "source_urls_only", " SOURCE_URLS_ONLY "]) {
+      if (mode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE;
+      else process.env.CATALOG_IMAGE_STORAGE_MODE = mode;
+      const offer = { sourceId: "myauto_georgia_list", sourceOfferId: "123016475", powertrainKind: "combustion", operational: { raw: {} } } as any;
+      const images = await myAutoListSource.fetchImages(offer);
+      assert.equal(images.length, 6);
+      assert.equal(offer.engineCc, 1498);
+      assert.equal(offer.powerHp, 116);
+      assert.ok(images.every(image => image.url.includes("123016475_") && image.size === 0 && image.objectKey === ""));
+    }
+    assert.equal(requests.length, 3);
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE;
+    else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
+  }
 });

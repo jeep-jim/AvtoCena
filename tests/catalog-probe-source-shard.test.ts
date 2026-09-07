@@ -119,9 +119,9 @@ test("Japan rollout includes only the five approved auction/catalog sources", ()
   assert.doesNotMatch(sequentialQueue, /^\s*schedule:\s*$/m);
   assert.doesNotMatch(sequentialQueue, /cron: "17 21 \* \* \*"/);
   assert.match(sequentialQueue, /Production collection is intentionally paused/);
-  assert.match(sequentialQueue, /01\|08\|15\|22/);
-  assert.match(sequentialQueue, /target_per_market: "30000"/);
-  assert.match(sequentialQueue, /retention_ms: "2592000000"/);
+  assert.doesNotMatch(sequentialQueue, /run_japan|market: japan/);
+  assert.match(sequentialQueue, /target_per_market: "10000"/);
+  assert.match(sequentialQueue, /retention_ms: "1209600000"/);
 });
 
 test("listing photos stay source-bound and detail enrichment continues to preferred depth", () => {
@@ -210,7 +210,7 @@ test("Catalog V2 caps every production stage and preserves the 100000-offer targ
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(collectBlock, /timeout-minutes: 45/);

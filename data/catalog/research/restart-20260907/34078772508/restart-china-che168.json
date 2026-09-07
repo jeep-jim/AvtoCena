@@ -1,0 +1,1564 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:14:12.298Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 100,
+  "sampleLimit": 40,
+  "pageLimit": 2,
+  "markets": [
+    {
+      "market": "china",
+      "requests": [
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 18713,
+            "sha256": "de145b4066dab873f2196ba759c0e87c3d400729c488579d6f217b142d0250c4",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/carinfo/59754526",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 3625,
+            "sha256": "3914258d846efedab429830b2355332cdb3d5368daa1cdeaa70243d0e66c05da",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://global.che168.com",
+          "path": "/en/detail/59754526",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html",
+          "bodyEvidence": {
+            "bytes": 29181,
+            "sha256": "34fad79e41b978ea19b42dc911248179a5cddfe57b92ee752a3808deb958fb2f",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "autohome_used_china_open",
+      "listingRows": 24,
+      "normalizedRows": 24,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "59754526",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 30340,
+            "sourceCurrency": "USD"
+          },
+          "images": 18,
+          "sourceUrl": "https://global.che168.com/en/detail/59754526",
+          "galleryUrls": [
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M03/A0/FA/1400x0_c42_autohomecar__Chto52qW-f-AFBtAAAtXFVDVDBk686.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M02/A0/DE/1400x0_c42_autohomecar__ChxpVWqW-f-AfhbQAAo9byMwu1Q327.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M08/A0/DF/1400x0_c42_autohomecar__ChxpVmqW-gCAMOAMAAo0syIbt_g297.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M07/A0/DE/1400x0_c42_autohomecar__ChxpVWqW-gGAE2WAAAr7ksrPZWk322.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M08/A0/DE/1400x0_c42_autohomecar__ChxpVWqW-gKAFHeQAAmpcZ_1cbA586.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M07/A0/DF/1400x0_c42_autohomecar__ChxpVmqW-gKABzTHAAdA5Y1Vv8Q588.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M02/A0/DE/1400x0_c42_autohomecar__ChxpVWqW-gOAJv4zAAVbt8f58ts993.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M00/A0/DE/1400x0_c42_autohomecar__ChxpVWqW-gOAf-rSAAfjkh5Qc34639.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M02/A0/DF/1400x0_c42_autohomecar__ChxpVWqW-gSAdOWwAAr9pzneuQU201.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M0A/A0/DF/1400x0_c42_autohomecar__ChxpVmqW-gWAKsX9AAsjWQLHsRY067.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M01/A0/FB/1400x0_c42_autohomecar__Chto52qW-gWAMlKKAAk3N9J77L8073.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M09/A0/FB/1400x0_c42_autohomecar__Chto52qW-gaAMdVUAAwGi1-7Ryw414.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M06/A0/DF/1400x0_c42_autohomecar__ChxpVmqW-geAAfroAAjitQEv7FU974.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M03/A0/DF/1400x0_c42_autohomecar__ChxpVWqW-giAVAWsAAgvs42U37g295.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M08/A0/FB/1400x0_c42_autohomecar__Chto52qW-gmAUESdAAd6peuyTRw834.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M00/A0/DF/1400x0_c42_autohomecar__ChxpVWqW-gqAMVwXAAkz68jzFno648.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M06/A0/FB/1400x0_c42_autohomecar__Chto52qW-gqAeaf_AAgY890hsk8830.jpg.webp",
+            "https://erscglobal2.autoimg.cn/escimg/auto/g33/M09/A0/E0/1400x0_c42_autohomecar__ChxpVmqW-guAVk9cAAbHwb6XcXM924.jpg.webp"
+          ],
+          "sourceWitness": {
+            "detailId": 59754526,
+            "specId": 36921,
+            "apiEngine": "2.0T 245 horsepower L4",
+            "apiFuel": "Gasoline",
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "che168_global_listing_and_carinfo",
+                "value": 2019,
+                "rawValues": [
+                  "2019",
+                  "2019"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "che168_global_listing_and_carinfo",
+                "value": "petrol",
+                "rawValues": [
+                  "Gasoline"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "che168_global_carinfo",
+                "rawValues": [
+                  "2.0T 245 horsepower L4"
+                ],
+                "status": "missing"
+              },
+              "powerHp": {
+                "source": "che168_global_carinfo",
+                "value": 245,
+                "rawValues": [
+                  "2.0T 245 horsepower L4"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 2,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "powerHp": 245,
+            "sourcePrice": 30340,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": [
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "59769656",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 103330,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 103330,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59282752",
+          "yearAllowed": false,
+          "before": {
+            "year": 2018,
+            "fuel": "petrol",
+            "sourcePrice": 9090,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2018,
+            "fuel": "petrol",
+            "sourcePrice": 9090,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59817902",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "hybrid",
+            "sourcePrice": 51650,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "hybrid",
+            "sourcePrice": 51650,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59129957",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 19610,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 19610,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59806624",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "hybrid",
+            "sourcePrice": 23990,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "hybrid",
+            "sourcePrice": 23990,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "58626842",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": 49860,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": 49860,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59748754",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": 40860,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": 40860,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59442681",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": 42260,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "sourcePrice": 42260,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59654620",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "sourcePrice": 33260,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "sourcePrice": 33260,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59722906",
+          "yearAllowed": false,
+          "before": {
+            "year": 2018,
+            "fuel": "petrol",
+            "sourcePrice": 21100,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2018,
+            "fuel": "petrol",
+            "sourcePrice": 21100,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59627482",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "hybrid",
+            "sourcePrice": 45570,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "hybrid",
+            "sourcePrice": 45570,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59203886",
+          "yearAllowed": false,
+          "before": {
+            "year": 2015,
+            "fuel": "petrol",
+            "sourcePrice": 14720,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2015,
+            "fuel": "petrol",
+            "sourcePrice": 14720,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59691786",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 9250,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 9250,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59211013",
+          "yearAllowed": false,
+          "before": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 19460,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2019,
+            "fuel": "petrol",
+            "sourcePrice": 19460,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59747871",
+          "yearAllowed": false,
+          "before": {
+            "year": 2015,
+            "fuel": "petrol",
+            "sourcePrice": 3940,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2015,
+            "fuel": "petrol",
+            "sourcePrice": 3940,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59819041",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "hybrid",
+            "sourcePrice": 46820,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "hybrid",
+            "sourcePrice": 46820,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59681818",
+          "yearAllowed": true,
+          "before": {
+            "year": 2024,
+            "fuel": "hybrid",
+            "sourcePrice": 97220,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "fuel": "hybrid",
+            "sourcePrice": 97220,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59737522",
+          "yearAllowed": true,
+          "before": {
+            "year": 2024,
+            "fuel": "petrol",
+            "sourcePrice": 574540,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "fuel": "petrol",
+            "sourcePrice": 574540,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59574597",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": 24160,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "sourcePrice": 24160,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59659799",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 48610,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 48610,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59230161",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": 33140,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "sourcePrice": 33140,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59749892",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 67790,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 67790,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "59779524",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "electric",
+            "sourcePrice": 25360,
+            "sourceCurrency": "USD"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "electric",
+            "sourcePrice": 25360,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 24,
+          "diagnostics": {
+            "listingRows": 24,
+            "rejectedRows": 0
+          },
+          "health": {
+            "ok": true,
+            "message": "Che168 Global API page=1/169 items=24 total=4042",
+            "checkedAt": "2026-09-07T03:14:13.323Z",
+            "httpStatus": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "Che168 Global API page=1/169 items=24 total=4042",
+        "checkedAt": "2026-09-07T03:14:13.323Z",
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8"
+      },
+      "stopped": true,
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": 24,
+        "adapterRejectedRows": 0,
+        "adapterUnexaminedRows": 0,
+        "returnedRows": 24,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 24,
+        "unexaminedRows": 0,
+        "examined": 24,
+        "calculated": 0,
+        "allowedYearExamined": 14,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 1,
+          "pilot_request_outside_envelope": 23
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "59754526",
+          "make": "Lexus",
+          "model": "RC",
+          "year": 2019,
+          "powerHp": 245,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59769656",
+          "make": "BMW",
+          "model": "7 Series",
+          "year": 2026,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59282752",
+          "make": "Acura",
+          "model": "TLX-L",
+          "year": 2018,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59817902",
+          "make": "BMW",
+          "model": "X5",
+          "year": 2022,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59129957",
+          "make": "Infiniti",
+          "model": "Q60",
+          "year": 2019,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59806624",
+          "make": "Audi",
+          "model": "Q7 New Energy",
+          "year": 2019,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "58626842",
+          "make": "Mercedes-Benz",
+          "model": "E-Class (Import)",
+          "year": 2021,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59748754",
+          "make": "Mercedes-Benz",
+          "model": "GLC AMG",
+          "year": 2022,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59442681",
+          "make": "Audi",
+          "model": "S4",
+          "year": 2023,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59654620",
+          "make": "Audi",
+          "model": "A6 (Import)",
+          "year": 2020,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59722906",
+          "make": "Jaguar",
+          "model": "XJ",
+          "year": 2018,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59627482",
+          "make": "Audi",
+          "model": "Q8",
+          "year": 2019,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59203886",
+          "make": "MINI",
+          "model": "JCW",
+          "year": 2015,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59691786",
+          "make": "Peugeot",
+          "model": "508",
+          "year": 2019,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59211013",
+          "make": "Volkswagen",
+          "model": "Beetle",
+          "year": 2019,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59747871",
+          "make": "Peugeot",
+          "model": "308S",
+          "year": 2015,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59819041",
+          "make": "Buick",
+          "model": "Century",
+          "year": 2023,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59681818",
+          "make": "Lexus",
+          "model": "GX",
+          "year": 2024,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59737522",
+          "make": "Rolls-Royce",
+          "model": "Ghost",
+          "year": 2024,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59574597",
+          "make": "Jaguar",
+          "model": "F-PACE",
+          "year": 2021,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59659799",
+          "make": "Volkswagen",
+          "model": "ID.ERA",
+          "year": 2026,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59230161",
+          "make": "BMW",
+          "model": "X4",
+          "year": 2022,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59749892",
+          "make": "ZEEKR",
+          "model": "9X",
+          "year": 2025,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59779524",
+          "make": "Avatr",
+          "model": "12",
+          "year": 2023,
+          "fuel": "electric",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "not_applicable",
+              "reason": "electric_vehicle",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "stopped_by_source_response"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+  "businessSettings": {
+    "china": {
+      "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "profileSource": "production_crm_version",
+      "provisional": false,
+      "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+      "effectiveExpenses": {
+        "topAvtoCommissionRub": 90000,
+        "securityDepositRub": 160000,
+        "contractInitialPaymentRub": 250000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 80000,
+        "logisticsRub": 150000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

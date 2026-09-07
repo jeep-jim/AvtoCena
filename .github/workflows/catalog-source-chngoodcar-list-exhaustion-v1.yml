@@ -1,0 +1,70 @@
+name: Catalog source qualification · Good Car full list exhaustion v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/chngoodcar-carslist-pagination-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-chngoodcar-list-exhaustion-v1.yml"
+      - "scripts/catalog-source-chngoodcar-list-exhaustion-v1.ts"
+      - "tests/catalog-source-chngoodcar-list-exhaustion-v1.test.ts"
+      - "apps/web/lib/catalog/chngoodcar-carslist.ts"
+      - "apps/web/lib/catalog/chngoodcar-paginated-exact-source.ts"
+      - "apps/web/lib/catalog/chngoodcar-reference-conflicts.ts"
+      - "apps/web/lib/catalog/chngoodcar-exact-source.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-chngoodcar-list-exhaustion-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exhaust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify list-exhaustion sampling contract
+        run: node --import tsx --test tests/catalog-source-chngoodcar-list-exhaustion-v1.test.ts
+      - name: Verify existing Good Car exact contracts
+        run: |
+          node --import tsx --test tests/catalog-source-chngoodcar-carslist-client-v1.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts
+      - name: Type-check Good Car full-list integration
+        run: npm run typecheck
+      - name: Exhaust full CarsList and stratify exact detail samples without production writes
+        env:
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+          CATALOG_CHNGOODCAR_LIST_EXHAUSTION_MAX_PAGES: "110"
+          CATALOG_CHNGOODCAR_LIST_EXHAUSTION_SAMPLE_PAGES: "6"
+          CATALOG_CHNGOODCAR_LIST_EXHAUSTION_DELAY_MS: "150"
+        run: node --import tsx -e "import('./scripts/catalog-source-chngoodcar-list-exhaustion-v1.ts').then((m) => m.runGoodCarListExhaustion())"
+      - name: Verify full-list no-write envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-list-exhaustion-v1.json','utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','productionAllowlisted']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (p.sourceClass !== 'exact_catalog') throw new Error(`sourceClass ${p.sourceClass}`);
+          if (p.sourcePublishAllowed !== false) throw new Error('sourcePublishAllowed');
+          if (p.requestedPageCount !== p.expectedPageCount) throw new Error(`not exhausted ${p.requestedPageCount}/${p.expectedPageCount}`);
+          if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`failures ${p.failures}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-chngoodcar-list-exhaustion-v1
+          path: catalog-source-chngoodcar-list-exhaustion-v1.json
+          if-no-files-found: warn
+          retention-days: 7

@@ -38,7 +38,7 @@ env:
   CATALOG_REBUILD_TARGET_PER_MARKET: "10000"
   CATALOG_PUBLISH_TARGET_PER_MARKET: "10000"
   CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
-  CATALOG_DEFAULT_RETENTION_MS: "259200000"
+  CATALOG_DEFAULT_RETENTION_MS: "1209600000"
   CATALOG_JAPAN_RETENTION_MS: "2592000000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "5"
@@ -71,7 +71,7 @@ jobs:
           }
           if (!allowed.has(market)) throw new Error(`republish_market_invalid:${market}`);
           if (!/^\d+$/.test(runId)) throw new Error(`republish_run_id_invalid:${runId}`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `market=${market}\nrun_id=${runId}\nretention_ms=${market === 'japan' ? '2592000000' : '259200000'}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `market=${market}\nrun_id=${runId}\nretention_ms=${market === 'japan' ? '2592000000' : '1209600000'}\n`);
           NODE
 
   publish:

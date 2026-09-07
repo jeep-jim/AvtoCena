@@ -1,55 +1,526 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-06",
   "mode": "six_market_source_discovery_no_write",
   "productionWrites": false,
-  "markets": ["korea", "china", "japan", "uae", "europe", "georgia"],
-  "allowedClasses": ["research_pending", "exact_catalog", "lead_only", "rejected"],
-  "candidates": [
-    { "market": "korea", "sourceId": "encar_direct", "label": "Encar", "url": "https://www.encar.com/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
-    { "market": "korea", "sourceId": "kcar_korea_open", "label": "K Car", "url": "https://www.kcar.com/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
-
-    { "market": "china", "sourceId": "autohome_used_china_open", "label": "Che168", "url": "https://www.che168.com/", "class": "research_pending", "publishAllowed": false, "evidence": "requires requalification under the new contract" },
-    { "market": "china", "sourceId": "dongchedi_china_open", "label": "Dongchedi", "url": "https://www.dongchedi.com/", "class": "research_pending", "publishAllowed": false, "evidence": "current public used-car route redirects to login-required" },
-    { "market": "china", "sourceId": "guazi_china_open", "label": "Guazi", "url": "https://www.guazi.com/", "class": "research_pending", "publishAllowed": false, "evidence": "current public route returns a Tencent EdgeOne JavaScript challenge" },
-    { "market": "china", "sourceId": "autohome_new_china_open", "label": "Autohome new cars", "url": "https://www.autohome.com.cn/", "class": "research_pending", "publishAllowed": false, "evidence": "requires requalification under the new contract" },
-
-    { "market": "japan", "sourceId": "jpauc_japan_past_open", "label": "JPAuc completed auctions", "url": "https://jpauc.com/auction/past", "class": "research_pending", "publishAllowed": false, "evidence": "guest rows expose identity/gallery but not a proven positive final price" },
-    { "market": "japan", "sourceId": "carvector_japan_stat_open", "label": "CarVector auction statistics", "url": "https://carvector.com/stat", "class": "research_pending", "publishAllowed": false, "evidence": "auction-history evidence only; standalone public card is forbidden" },
-    { "market": "japan", "sourceId": "prestige_japan_auctions_open", "label": "Prestige Japan auctions", "url": "https://prestigemotorsport.com.au/auctions/", "class": "research_pending", "publishAllowed": false, "evidence": "current detail route is robots-disallowed and the public flow is challenge-protected" },
-    { "market": "japan", "sourceId": "auctiondatasearch_japan_open", "label": "Auction Data Search", "url": "https://www.auctiondatasearch.jp/", "class": "research_pending", "publishAllowed": false, "evidence": "current search/statistics routes redirect to login" },
-    { "market": "japan", "sourceId": "jpcenter_japan_catalog_open", "label": "JP Center", "url": "https://jp.center/", "class": "research_pending", "publishAllowed": false, "evidence": "guest loader lacks identity-bound final price and complete photo access" },
-
-    { "market": "uae", "sourceId": "dubizzle_uae_open", "label": "Dubizzle", "url": "https://uae.dubizzle.com/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline scanned 9883 rows; strict exact result was zero because engine/power are commonly ranges or incomplete" },
-    { "market": "uae", "sourceId": "dubicars_uae_exact", "label": "DubiCars", "url": "https://www.dubicars.com/", "class": "research_pending", "publishAllowed": false, "evidence": "field audit run 33731051049: stable details on 2/2; identity/year/price/body/fuel proven, but ICE sample lacks exact engineCc/powerHp, EV sample lacks required certified power, and gallery>=5 is not listing-bound on either sample" },
-
-    { "market": "europe", "sourceId": "mobile_de_open", "label": "mobile.de", "url": "https://www.mobile.de/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline exposed Limousine-to-sedan false positive; fixed locally and awaiting rerun" },
-    { "market": "europe", "sourceId": "autoscout_europe_open", "label": "AutoScout24", "url": "https://www.autoscout24.com/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline produced formal exact rows; manual semantic qualification is still required" },
-
-    { "market": "georgia", "sourceId": "myauto_georgia_list", "label": "MyAuto", "url": "https://www.myauto.ge/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
-    { "market": "georgia", "sourceId": "autopapa_georgia_open", "label": "AutoPapa", "url": "https://autopapa.ge/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
-
-    { "market": "korea", "sourceId": "kbchachacha_korea_candidate", "label": "KB ChaChaCha", "url": "https://www.kbchachacha.com/public/search/main.kbc", "class": "research_pending", "publishAllowed": false, "evidence": "official marketplace and indexed detail example expose year, mileage, fuel, body and exact displacement; live access and price/detail identity still require probe" },
-    { "market": "korea", "sourceId": "bobaedream_korea_candidate", "label": "Bobaedream", "url": "https://www.bobaedream.co.kr/mycar/mycar_list.php", "class": "research_pending", "publishAllowed": false, "evidence": "field audit run 33731051049: stable details on 2/2; identity, make/model/year, listing price in KRW, fuel, exact engineCc and powerHp proven; canonical body type and listing-bound gallery>=5 remain unproven" },
-
-    { "market": "china", "sourceId": "chngoodcar_china_candidate", "label": "Guangdong Good Car", "url": "https://www.chngoodcar.com/", "class": "research_pending", "publishAllowed": false, "evidence": "public export inventory exposes model/version, year-month, mileage and price; exact detail fields and access stability still require probe" },
-    { "market": "china", "sourceId": "iautos_china_candidate", "label": "iAutos", "url": "https://m.iautos.cn/", "class": "research_pending", "publishAllowed": false, "evidence": "public used-car marketplace exists; listing identity, exact fields, price and gallery contract still require probe" },
-
-    { "market": "japan", "sourceId": "beforward_japan_candidate", "label": "BE FORWARD", "url": "https://www.beforward.jp/", "class": "research_pending", "publishAllowed": false, "evidence": "public fixed-price export stock advertises multiple photos; exact specification completeness and stable detail access still require probe" },
-    { "market": "japan", "sourceId": "exportcar_japan_candidate", "label": "ExportCar", "url": "https://exportcar.jp/auto/", "class": "research_pending", "publishAllowed": false, "evidence": "public site exposes auction results and fixed-price stock sections; final-price and detail-field access still require probe" },
-    { "market": "japan", "sourceId": "japaneseusedcars_japan_candidate", "label": "JapaneseUsedCars", "url": "https://japaneseusedcars.com/estimates-data/", "class": "research_pending", "publishAllowed": false, "evidence": "public site exposes auctions, fixed-price cars, price data and car specs sections; vehicle-level access still requires probe" },
-    { "market": "japan", "sourceId": "sbtjapan_japan_candidate", "label": "SBT Japan", "url": "https://www.sbtjapan.com/used-cars", "class": "research_pending", "publishAllowed": false, "evidence": "public fixed-price inventory exposes stock, body, year and price filters; exact detail fields and gallery identity still require probe" },
-    { "market": "japan", "sourceId": "tcv_japan_candidate", "label": "TCV", "url": "https://www.tc-v.com/allmakeslist/", "class": "research_pending", "publishAllowed": false, "evidence": "public Japanese used-car marketplace exists; source-bound price/specification/gallery completeness still requires probe" },
-
-    { "market": "uae", "sourceId": "carswitch_uae_candidate", "label": "CarSwitch", "url": "https://carswitch.com/uae/used-cars/search", "class": "research_pending", "publishAllowed": false, "evidence": "field audit run 33731051049: stable details on 2/2; identity/model/year/price AED/body/fuel and 10-image JSON-LD gallery proven; engine displacement is source-bound but unitless (1.5/5.7), and source-bound powerHp is missing" },
-    { "market": "uae", "sourceId": "yallamotor_uae_candidate", "label": "YallaMotor", "url": "https://uae.yallamotor.com/used-cars", "class": "research_pending", "publishAllowed": false, "evidence": "public inventory exposes AED price and some exact engine/power descriptions; structured detail consistency still requires probe" },
-    { "market": "uae", "sourceId": "automarket_uae_candidate", "label": "AutoMarket UAE", "url": "https://www.automarket.ae/uae/cars/used", "class": "research_pending", "publishAllowed": false, "evidence": "public used-car inventory exposes price and engine-capacity facets; offer-level exact fields still require probe" },
-    { "market": "uae", "sourceId": "cars24_uae_candidate", "label": "CARS24 UAE", "url": "https://www.cars24.ae/", "class": "research_pending", "publishAllowed": false, "evidence": "field audit run 33731051049: stable details on 2/2; offer-local make/model/year/body/fuel and 15 listing-id-bound images proven; visible AED price is not yet bound to the offer object, engine displacement is unitless (1.5/1.8), and powerHp is missing" },
-
-    { "market": "europe", "sourceId": "lacentrale_europe_candidate", "label": "La Centrale", "url": "https://www.lacentrale.fr/", "class": "research_pending", "publishAllowed": false, "evidence": "official marketplace exposes verified listings, price, fuel and canonical body categories; detail-level engine and power proof still require probe" },
-    { "market": "europe", "sourceId": "autouncle_europe_candidate", "label": "AutoUncle", "url": "https://www.autouncle.co.uk/en-gb/used-cars", "class": "research_pending", "publishAllowed": false, "evidence": "public aggregator exposes live listing prices and identifies engine capacity/power as comparison attributes; original-offer identity and duplication risk require probe" },
-
-    { "market": "georgia", "sourceId": "worldauto_georgia_candidate", "label": "WorldAuto", "url": "https://worldauto.ge/en/search/car", "class": "research_pending", "publishAllowed": false, "evidence": "public Georgia inventory states that listings contain year, mileage, engine size, power, drive and price; detail and gallery identity still require probe" }
+  "markets": [
+    "korea",
+    "china",
+    "japan",
+    "uae",
+    "europe",
+    "georgia"
   ],
-  "next": "continue read-only source-bound probes for the four strongest candidates: Bobaedream body/gallery; CarSwitch engine unit/power; CARS24 offer-bound price/engine unit/power; DubiCars ICE engine/power/gallery and EV certified power; keep research_pending until evidence is complete"
+  "allowedClasses": [
+    "research_pending",
+    "exact_catalog",
+    "lead_only",
+    "rejected"
+  ],
+  "candidates": [
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "label": "Encar",
+      "url": "https://www.encar.com/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Run 33867243950 proved an official Encar price/data partnership route (시세 / 데이터 제휴; price@encar.com) while the public terms shell did not prove automated commercial reuse permission. Public crawling remains blocked; official partnership/feed is the preferred permitted path.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#encar_direct",
+      "useScope": "do not automate public inventory crawling until permission is explicit; prioritize Encar official price/data partnership route for a permitted feed/API contract",
+      "permittedRouteCandidate": "official_price_data_partnership_price@encar.com",
+      "qualificationBlocker": "public_automation_permission_unproven_use_official_data_partnership_route"
+    },
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "label": "K Car",
+      "url": "https://www.kcar.com/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Run 33867611733 kept the public probe bounded (robots + home only). Current official K Car pages expose the terms surface and 사업제휴문의(partnership@kcar.com), but no positive automated commercial reuse permission is proven. Public crawling stays blocked; official partnership/feed is the preferred permitted route.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#kcar_korea_open",
+      "useScope": "do not automate public inventory crawling while automated commercial reuse permission is unproven; prioritize K Car official business-partnership route for a permitted feed/API/data agreement",
+      "permittedRouteCandidate": "official_business_partnership_partnership@kcar.com",
+      "qualificationBlocker": "public_automation_permission_unproven_use_official_business_partnership_route"
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "label": "Che168",
+      "url": "https://www.che168.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Permission-first run 33938070816 kept Che168 to robots.txt + public home only (both HTTP 200; zero detail/API requests). Current public Che168 mobile listing pages identify the service as an Autohome used-car trading platform and expose the official Autohome Legal Statement. That source-declared statement forbids copying/selling/reselling/exploiting any part of the service for commercial purposes and forbids unauthorized copying/linking/illegal use/republication of Autohome site works.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autohome_used_china_open",
+      "useScope": "manual public reference only; no automated commercial inventory ingestion/republication from public Che168/Autohome pages. Requalify only through an explicitly authorized Autohome/Che168 API, data feed, partner agreement or written permission covering AvtoCena use.",
+      "qualificationBlocker": "commercial_copy_resale_exploitation_and_unlicensed_content_reuse_prohibited_by_source_declared_autohome_terms"
+    },
+    {
+      "market": "china",
+      "sourceId": "dongchedi_china_open",
+      "label": "Dongchedi",
+      "url": "https://www.dongchedi.com/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Permission-first run 33938264745: robots.txt and public Dongchedi home returned HTTP 200; exactly two requests were made and no source-declared legal link was exposed in the bounded home HTML, so public automated commercial reuse permission remains unproven. A separate official Dongchedi Enterprise Open Platform exists for business users, but its own service agreement expressly prohibits robot/spider/crawler/other automated access and unauthorized robot/spider monitoring, copying, dissemination, display or mirroring of service content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dongchedi_china_open",
+      "useScope": "manual public reference only while permission for public automated commercial inventory reuse is unproven; do not crawl public listing/detail/API routes. Any future automated use must come from an explicit Dongchedi agreement/authorized business data route that specifically covers AvtoCena.",
+      "permittedRouteCandidate": "official_dongchedi_enterprise_open_platform_contact_open.dongchedi@bytedance.com",
+      "qualificationBlocker": "public_automation_permission_unproven_and_official_enterprise_platform_terms_prohibit_robots_without_operator_permission"
+    },
+    {
+      "market": "china",
+      "sourceId": "guazi_china_open",
+      "label": "Guazi",
+      "url": "https://www.guazi.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Permission-first run 33938425009 made only robots.txt + public Guazi home requests; robots returned HTTP 200 and the home resolved HTTP 200 to en.guazi.com, with zero listing/detail/pagination/API requests. Separately, the current official Guazi Used Car User Usage Agreement defines the covered Guazi web/mobile services and states that without explicit special written permission no entity or person may copy, disseminate, display, mirror, upload/download, reprint, quote, link, scrape or otherwise use site information content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#guazi_china_open",
+      "useScope": "manual public reference only; no automated public-site collection, scraping, copying or republication. Requalify only through explicit Guazi written permission or an authorized API/feed/partner agreement whose scope covers AvtoCena.",
+      "qualificationBlocker": "official_guazi_user_agreement_requires_explicit_special_written_permission_for_scraping_copying_linking_and_other_content_use"
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "label": "Autohome new cars",
+      "url": "https://www.autohome.com.cn/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Current official Autohome Legal Statement and User Service Agreement apply to Autohome online services and content. The Legal Statement says Autohome site works may not be copied, linked, illegally used, republished or mirrored without written authorization and its service terms prohibit copying/selling/reselling/exploiting any part/use/access of the service for commercial purposes. The current User Service Agreement additionally states commercial use requires prior written authorization and forbids unauthorized use including robot/spider operations on Autohome content/services.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autohome_new_china_open",
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from public Autohome new-car pages. Requalify only through written Autohome authorization or an explicitly permitted API/feed/data-partnership route covering AvtoCena.",
+      "qualificationBlocker": "current_autohome_terms_require_written_authorization_for_commercial_use_and_prohibit_unauthorized_robot_spider_content_operations"
+    },
+    {
+      "market": "japan",
+      "sourceId": "jpauc_japan_past_open",
+      "label": "JPAuc completed auctions",
+      "url": "https://jpauc.com/auction/past",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "guest rows expose identity/gallery but not a proven positive final price",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "carvector_japan_stat_open",
+      "label": "CarVector auction statistics",
+      "url": "https://carvector.com/stat",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "The audited public sample is a Statistics page for Hitachi EX55UR-3 heavy machinery, exposes incomplete offer fields and <=2 image identities, and fails the standalone exact-card contract.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#carvector_japan_stat_open",
+      "useScope": "auction-history/reference support only; never a standalone public catalog card under the current route",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "prestige_japan_auctions_open",
+      "label": "Prestige Japan auctions",
+      "url": "https://prestigemotorsport.com.au/auctions/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "current detail route is robots-disallowed and the public flow is challenge-protected",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "auctiondatasearch_japan_open",
+      "label": "Auction Data Search",
+      "url": "https://www.auctiondatasearch.jp/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "current search/statistics routes redirect to login",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "jpcenter_japan_catalog_open",
+      "label": "JP Center",
+      "url": "https://jp.center/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "guest loader lacks identity-bound final price and complete photo access",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubizzle_uae_open",
+      "label": "Dubizzle",
+      "url": "https://uae.dubizzle.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official Dubizzle Platform Terms of Use (effective 2024-11-01) prohibit commercial exploitation of Platform/Content and prohibit manual/software/script/robot/spider/crawler scraping or compiling a collection/database/directory from Platform Content. Independently, the previous strict baseline scanned 9,883 rows and produced zero exact cards because engine/power are commonly ranges or incomplete.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dubizzle_uae_open",
+      "useScope": "manual public reference only; no automated public-site scraping, database compilation, commercial exploitation or republication. Requalify only through an explicitly permitted Dubizzle API/feed/partner agreement or written authorization, then re-test exact offer fields.",
+      "qualificationBlocker": "public_scraping_database_compilation_and_commercial_exploitation_prohibited_plus_exact_engine_power_contract_failed"
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "label": "DubiCars",
+      "url": "https://www.dubicars.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Current official DubiCars Terms prohibit public-site commercial reuse, scraping/robots, mass copying and spidering without express consent. Dealer Terms separately advertise a contractual automatic-feed integration as a possible package feature; only such an explicitly permitted agreement/feed can be requalified for AvtoCena.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dubicars_uae_exact",
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, mass copying or commercial reuse without express written consent. Requalify only through a DubiCars-contracted feed/API/integration whose agreement explicitly covers AvtoCena use.",
+      "permittedRouteCandidate": "contracted_dubicars_automatic_feed_or_api_subject_to_explicit_agreement",
+      "qualificationBlocker": "public_scraping_and_commercial_reuse_prohibited_contractual_feed_requires_explicit_scope"
+    },
+    {
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "label": "mobile.de",
+      "url": "https://www.mobile.de/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Current official mobile.de GTC prohibit unauthorized automated search tools, extraction/reuse, data mining, robots, grabbing and scraping on the public marketplace; official Search-API access exists only for API partners under an API Partner Agreement.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#mobile_de_open",
+      "useScope": "manual public reference/link-out only; no public-page automated extraction/reuse; requalify only through an official mobile.de Search-API/partner agreement or written permission that explicitly covers AvtoCena use"
+    },
+    {
+      "market": "europe",
+      "sourceId": "autoscout_europe_open",
+      "label": "AutoScout24",
+      "url": "https://www.autoscout24.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official AutoScout24 Consumer GTC sections 8.2/8.3 prohibit automated queries and building/commercially exploiting or integrating queried data as another database; Dealer GTC also prohibits automated database querying and republication of other dealers content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autoscout_europe_open",
+      "useScope": "manual public reference/link-out only; no automated inventory ingestion, database building, commercial data exploitation or republication without an explicitly permitted AutoScout24 API/feed/agreement or written authorization"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "label": "MyAuto",
+      "url": "https://www.myauto.ge/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Permission-first probes 33866428112 and 33866663248: robots did not disallow the official rules routes, but /en/rules, /ka/rules and /ru/rules all returned 403 challenge pages to GitHub Actions. No positive automated commercial ingestion/reuse permission is proven, so inventory crawling remains blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#myauto_georgia_list",
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not start inventory/detail crawling from the challenged public route",
+      "qualificationBlocker": "automation_access_and_reuse_permission_unproven_rules_routes_challenged"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "autopapa_georgia_open",
+      "label": "AutoPapa",
+      "url": "https://autopapa.ge/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Permission-first run 33866935666: robots.txt explicitly allowed /, but the public AutoPapa entry returned HTTP 403 Just a moment challenge to GitHub Actions before any policy/detail request. No positive automated commercial ingestion/reuse permission is proven.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autopapa_georgia_open",
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not crawl inventory/detail pages from the challenged public route",
+      "qualificationBlocker": "automation_entry_challenged_403_and_permission_unproven"
+    },
+    {
+      "market": "korea",
+      "sourceId": "kbchachacha_korea_candidate",
+      "label": "KB ChaChaCha",
+      "url": "https://www.kbchachacha.com/public/search/main.kbc",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Run 33826631629: robots allows registry search route and public page returns 200, but the visible official public HTML explicitly prohibits unauthorized scraping/automation; probe stopped after exactly robots.txt + registry page with zero detail/pagination/script requests.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#kbchachacha_korea_candidate",
+      "useScope": "manual public search/reference only; no automated ingestion until an explicitly permitted API, partner feed or written authorization is available"
+    },
+    {
+      "market": "korea",
+      "sourceId": "bobaedream_korea_candidate",
+      "label": "Bobaedream",
+      "url": "https://www.bobaedream.co.kr/mycar/mycar_list.php",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official Bobaedream Terms Article 11 requires prior company consent for commercial activity using the service and for copying/using/providing information obtained through the service; public automated commercial ingestion is therefore blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#bobaedream_korea_candidate",
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from the public site without prior Bobaedream consent or an explicitly permitted API/partner feed"
+    },
+    {
+      "market": "china",
+      "sourceId": "chngoodcar_china_candidate",
+      "label": "Guangdong Good Car",
+      "url": "https://www.chngoodcar.com/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Permission-first discovery run 34018339034 and same-policy confirmation run 34018481311 prove source-declared Good Car Registration Agreement section VII 1.4 requires prior written approval for commercial copying/use of displayed information. Historical ICE exact-field and pagination proofs remain recorded in roadmap 40.27-40.29; they do not authorize AvtoCena commercial reuse.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#chngoodcar_china_candidate",
+      "exactScope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
+      "blockersBeforePublication": [
+        "obtain prior written Good Car approval explicitly covering AvtoCena automated commercial collection, retention, photos and republication",
+        "after permission is obtained, revalidate the existing adapter through the expressly permitted route and run the offer-level ICE exact gates",
+        "retain source-bound values and reject electrified offers without required certified power, identity conflicts and unreviewed price outliers",
+        "publication requires a separate owner decision; productionWrites and publishAllowed remain false"
+      ],
+      "technicalQualification": {
+        "class": "exact_catalog",
+        "scope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
+        "evidenceRuns": [
+          33757087189,
+          33825326173
+        ],
+        "evidenceSections": [
+          "40.27",
+          "40.28",
+          "40.29"
+        ],
+        "note": "Historical technical capability only. The dedicated adapter, deterministic kW-to-hp tests and pagination proof already exist; do not rebuild them from scratch. Current commercial reuse remains blocked."
+      },
+      "useScope": "manual public reference only; no new automated commercial inventory/detail/API collection or republication until prior written Good Car approval or an expressly authorized data agreement covers AvtoCena",
+      "qualificationBlocker": "source_declared_registration_agreement_7_1_4_requires_prior_written_approval_for_commercial_information_copying",
+      "accessPolicy": {
+        "status": "prior_written_approval_required",
+        "officialTermsUrl": "https://www.chngoodcar.com/Home/Qualification?id=4",
+        "section": "VII / 1.4",
+        "permissionProven": false,
+        "probeRun": 34018339034,
+        "confirmationRun": 34018481311,
+        "evidenceFile": "data/catalog/source-access-policy-evidence/chngoodcar-20260906-confirmation.json"
+      }
+    },
+    {
+      "market": "china",
+      "sourceId": "iautos_china_candidate",
+      "label": "iAutos",
+      "url": "https://m.iautos.cn/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login. Permission-first run 34018844475: robots and mobile home are reachable (HTTP 200), but no source-declared legal/policy link was detected in the captured home HTML. Automated commercial reuse permission remains unproven; prior field-based lead_only blockers remain.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#iautos_china_candidate",
+      "useScope": "manual public reference only; no automated commercial inventory/detail/API collection or republication while permission is unproven; prior exact-field gaps and login boundary remain",
+      "qualificationBlocker": "public_automation_permission_unproven_and_source_bound_fuel_power_gallery_incomplete",
+      "accessPolicyEvidence": {
+        "probeRun": 34018844475,
+        "artifactId": 9984794280,
+        "artifactDigest": "sha256:429e35cbfe96fae48108ce09c048861b4f1a05801fb92cdc7493aa597b404d4d",
+        "evidenceFile": "data/catalog/source-access-policy-evidence/iautos-20260906.json",
+        "robots": "HTTP 200 text/plain; 282 bytes; no disallow match for the public homepage",
+        "home": "HTTP 200 text/html; 51,425 captured bytes; not truncated",
+        "sourceDeclaredLegalLinks": 0,
+        "permissionProven": false,
+        "meaning": "No legal/policy anchor was found in the captured static homepage. This proves neither blanket prohibition nor permission for automated commercial reuse.",
+        "boundary": "Exactly 2 GET requests: robots and home. No redirects followed; policy/listing/detail/API/pagination/Japan requests = 0. No raw HTML retained."
+      }
+    },
+    {
+      "market": "japan",
+      "sourceId": "beforward_japan_candidate",
+      "label": "BE FORWARD",
+      "url": "https://www.beforward.jp/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "public fixed-price export stock advertises multiple photos; exact specification completeness and stable detail access still require probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "exportcar_japan_candidate",
+      "label": "ExportCar",
+      "url": "https://exportcar.jp/auto/",
+      "class": "rejected",
+      "publishAllowed": false,
+      "evidence": "The known vehicle-like public URL repeatedly returns a generic Auto Auctions shell with no bound vehicle fields or listing gallery; no usable exact or lead identity is proven on this route.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#exportcar_japan_candidate",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "japaneseusedcars_japan_candidate",
+      "label": "JapaneseUsedCars",
+      "url": "https://japaneseusedcars.com/estimates-data/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "public site exposes auctions, fixed-price cars, price data and car specs sections; vehicle-level access still requires probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "sbtjapan_japan_candidate",
+      "label": "SBT Japan",
+      "url": "https://www.sbtjapan.com/used-cars",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "public fixed-price inventory exposes stock, body, year and price filters; exact detail fields and gallery identity still require probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "japan",
+      "sourceId": "tcv_japan_candidate",
+      "label": "TCV",
+      "url": "https://www.tc-v.com/allmakeslist/",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "public Japanese used-car marketplace exists; source-bound price/specification/gallery completeness still requires probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
+    },
+    {
+      "market": "uae",
+      "sourceId": "carswitch_uae_candidate",
+      "label": "CarSwitch",
+      "url": "https://carswitch.com/uae/used-cars/search",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Runs 33865783957 and 33866026252 prove a strong source-bound CarSwitch detail contract (identity/year/AED price/body/fuel/1.6L engine/drive/transmission/10 images), but the same offer has no source-bound power field; unrelated generic HP mentions elsewhere on the page cannot satisfy the exact-card contract.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#carswitch_uae_candidate",
+      "useScope": "public reference/search support only; do not publish a fully calculated AvtoCena card from CarSwitch alone because exact source-bound offer power is not proven"
+    },
+    {
+      "market": "uae",
+      "sourceId": "yallamotor_uae_candidate",
+      "label": "YallaMotor",
+      "url": "https://uae.yallamotor.com/used-cars",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official YallaMotor Terms clause 7 expressly prohibits robot/spider/scraper/other automated access and content collection for any purpose; limited exceptions do not cover classified-listing websites.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#yallamotor_uae_candidate",
+      "useScope": "manual public reference only; no automated public-site collection/republication; YallaMotor terms also limit hyperlink permission to non-commercial use unless separately authorized"
+    },
+    {
+      "market": "uae",
+      "sourceId": "automarket_uae_candidate",
+      "label": "AutoMarket UAE",
+      "url": "https://www.automarket.ae/uae/cars/used",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "evidence": "Permission-first run 33937794266: robots.txt and the public AutoMarket UAE home page both returned HTTP 200; the bounded home HTML exposed no source-declared Terms/Privacy/Legal/Policy link. No positive automated commercial ingestion/reuse permission is proven, so inventory/detail/API crawling remains blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#automarket_uae_candidate",
+      "useScope": "manual public reference only while automated commercial access/reuse permission remains unproven; do not crawl listing/detail/API routes until AutoMarket supplies an explicitly permitted API/feed/partner agreement or written authorization",
+      "qualificationBlocker": "automation_and_commercial_reuse_permission_unproven_no_source_declared_legal_link_on_home",
+      "accessPolicyEvidence": {
+        "probeRun": 33937794266,
+        "checkpointRun": 33937903549,
+        "artifactId": 9960753326,
+        "artifactDigest": "sha256:0c7906119350fdfbf619d6e3fe45e81d80cdd1ec0f1c6240e451ea81e9910516",
+        "artifactVerifiedInRun": 34018339034,
+        "evidenceFile": "data/catalog/source-access-policy-evidence/automarket-20260905.json",
+        "newAutoMarketRequests": 0
+      }
+    },
+    {
+      "market": "uae",
+      "sourceId": "cars24_uae_candidate",
+      "label": "CARS24 UAE",
+      "url": "https://www.cars24.ae/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Current official CARS24 UAE Terms explicitly prohibit scraping/automated tools and commercial reuse/republication of listings, pricing data and site content without prior written authorization.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#cars24_uae_candidate",
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, listing/pricing reuse or republication without prior written CARS24 authorization or an explicitly permitted data feed/API"
+    },
+    {
+      "market": "europe",
+      "sourceId": "lacentrale_europe_candidate",
+      "label": "La Centrale",
+      "url": "https://www.lacentrale.fr/",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official La Centrale CGU Article 5 says site/database data is for strictly personal/pure consultation use; extraction/reuse and reproduction beyond that require prior written authorization.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#lacentrale_europe_candidate",
+      "useScope": "manual public reference only; do not automate extraction/reuse or republish La Centrale public database contents without prior written authorization or an official permitted data/API/partner feed"
+    },
+    {
+      "market": "europe",
+      "sourceId": "autouncle_europe_candidate",
+      "label": "AutoUncle",
+      "url": "https://www.autouncle.co.uk/en-gb/used-cars",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Official AutoUncle Terms of Service section 4 prohibits scraping or collecting data without permission; AutoUncle separately offers an official B2B automotive API for authorized enterprise integrations.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autouncle_europe_candidate",
+      "useScope": "manual public reference only; no public-site scraping or data collection without permission; requalify only through an AutoUncle-authorized API/enterprise agreement or written permission covering the AvtoCena use case"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "worldauto_georgia_candidate",
+      "label": "WorldAuto",
+      "url": "https://worldauto.ge/en/search/car",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "evidence": "Technical offer-bound core fields are strong on the source-declared search API, but official WorldAuto public pages prohibit non-seller commercial reuse of page content; automated AvtoCena publication is blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#worldauto_georgia_candidate",
+      "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
+    }
+  ],
+  "next": "Continue saved non-Japan recovery from confirmed run 34024932984 / draft PR 831: 6319 of 16054 rows pass the technical calculation gate (Europe 4808, Korea 1511), zero real modification selectors. Prioritize listing-bound exact China engine displacement and provenance, then evidence-backed compatible variants for frequently occurring incomplete models; do not promote review/observed reference rows or use rounded liters as exact cc. Validate browser interaction before release. Source commercial permission, listing freshness and independent calculation spot checks remain separate gates. No production writes, publishing, cleanup, schedule resume or Japan work.",
+  "pausedMarkets": [
+    "japan"
+  ],
+  "marketControls": {
+    "japan": {
+      "status": "paused_by_owner",
+      "since": "2026-09-04",
+      "automatedQualificationAllowed": false,
+      "productionPublicationAllowedByThisResearchTrack": false,
+      "resumeCondition": "only after an owner-approved candidate proves completed/played auction lots under the exact data contract, followed by explicit owner instruction to resume Japan qualification",
+      "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
+    }
+  },
+  "publishAllowedMutations": false,
+  "recoveryProgram": {
+    "version": 1,
+    "ownerDecisionDate": "2026-09-06",
+    "mode": "saved_catalog_repair_no_write",
+    "markets": [
+      "korea",
+      "china",
+      "uae",
+      "europe",
+      "georgia"
+    ],
+    "minimumAutomaticCalculatedShare": 0.8,
+    "manualScenarioCountsAsAutomatic": false,
+    "databasePurchaseRequired": false,
+    "contract": "docs/catalog-modification-recovery-v1.md",
+    "productionWrites": false,
+    "publishAllowedMutations": false,
+    "checkpoint": {
+      "runId": 34024932984,
+      "commit": "b9e6e65b48a69293fd5334ae2766a678a63b0c36",
+      "artifactId": 9986770190,
+      "artifactSha256": "2163c8aca9649c2fdb73f4a15490480aca49f0e35af26fa29a7215c1df4e3117",
+      "evidence": "data/catalog/research/saved-recovery-final-v1-20260906.json",
+      "publicGenerationId": "gen_1788253861283_69bb1d29",
+      "inputNonJapanRows": 16054,
+      "technicalAutomaticRows": 6319,
+      "technicalAutomaticByMarket": {
+        "korea": 1511,
+        "china": 0,
+        "uae": 0,
+        "europe": 4808,
+        "georgia": 0
+      },
+      "realSelectionRows": 0,
+      "technicalSubsetAutomaticShare": 1,
+      "sourceInventoryRecoveryShare": 0.39360906939080603,
+      "productionReleaseReady": false,
+      "sourceRequests": 0,
+      "japanRequests": 0,
+      "currencyRateDate": "2026-09-05",
+      "remaining": [
+        "missing_source_bound_specs_and_exact_engine_cc",
+        "insufficient_verified_compatible_reference_variants",
+        "browser_interaction_not_verified",
+        "source_permission_and_inventory_freshness_not_requalified",
+        "independent_calculation_spot_checks_pending"
+      ],
+      "ciRunId": 34025558568,
+      "ciCommit": "1818f0b0120e79a23e00b241f9a6a4aa1f8f2b08",
+      "ciConclusion": "success",
+      "draftPullRequest": 831,
+      "temporaryWorkflowRemoved": true,
+      "workflowRemovalCommit": "5117ee560a824416e45abc273ba7aec2b1240be6"
+    }
+  }
 }

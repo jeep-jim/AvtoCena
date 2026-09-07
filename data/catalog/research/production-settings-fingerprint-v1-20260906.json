@@ -1,0 +1,193 @@
+{
+  "checkedAt": "2026-09-06T16:06:20.034Z",
+  "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides.",
+  "markets": [
+    {
+      "activeHash": null,
+      "calculationFieldHashes": {
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "currency": "87ef325635aa32dd785d818665ee8fe141d7fae0566c7ea09701c82a524452ba",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "3bb78535cc9555ff19fe3556aaa41c78a0a45c64d49ba2bc564507648a8e77a1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "logisticsRub": "95b088a8f8966bd6ec5e2742936f8ecf24ad5416474986fa5a2af6496979c299",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb"
+      },
+      "configVersion": null,
+      "effectiveFrom": null,
+      "estimatedFields": [
+        "securityDepositRub",
+        "topAvtoCommissionRub",
+        "exportExpensesRub",
+        "logisticsRub",
+        "brokerRub",
+        "svhRub",
+        "laboratoryRub",
+        "sbktsRub",
+        "eptsRub",
+        "rfDeliveryRub",
+        "otherFixedExpensesRub"
+      ],
+      "market": "europe",
+      "resolvedCalculationHash": "2f3ad8ad0ff40b00aa2112640dbd3084f7300ac5dae113100a0a4e521f69639e"
+    },
+    {
+      "activeHash": null,
+      "calculationFieldHashes": {
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "currency": "4143405c2726e710098fa18a6101b87b3d8a00eac390aa06bd7456fa844ec19c",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "265f10e1bf87701b7aa597c197b6a25b0984777f3443a289d7a92aedd31fddcf",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "logisticsRub": "f5b32f00fe05eee941f38440cb4208f97bd5af9e5613e7386d60666548060d23",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb"
+      },
+      "configVersion": null,
+      "effectiveFrom": null,
+      "estimatedFields": [
+        "securityDepositRub",
+        "topAvtoCommissionRub",
+        "exportExpensesRub",
+        "logisticsRub",
+        "brokerRub",
+        "svhRub",
+        "laboratoryRub",
+        "sbktsRub",
+        "eptsRub",
+        "rfDeliveryRub",
+        "otherFixedExpensesRub"
+      ],
+      "market": "korea",
+      "resolvedCalculationHash": "7f94de60ceb0634985dfae23393093befb75d5ed549d6a37005ae73e199242af"
+    },
+    {
+      "activeHash": "ef1282b33c204ee045405263197507c49094e7fe418c66b738301d5b7f087f77",
+      "calculationFieldHashes": {
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "contractInitialPaymentRub": "f5b32f00fe05eee941f38440cb4208f97bd5af9e5613e7386d60666548060d23",
+        "currency": "8e06735c89d493d78ff5f12b2e47a5f055f1334b7a540bd6c58345195ee9c153",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "47b25095a0fe135a688b20614771dbb445ad5e27e9cd4f2c2089c5af216e305b",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "logisticsRub": "89d295d75a9717e8c0bdd71076b638ad12dd95bf6621a5bf4541ca24d185d522",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "securityDepositRub": "cb0b20f98ee49533666fadc53dd6702a19d66e14ea2bb2bdc2474e305e40ada3",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb"
+      },
+      "configVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "effectiveFrom": "2026-08-20T10:09:12.511Z",
+      "estimatedFields": [],
+      "market": "china",
+      "resolvedCalculationHash": "567635f9855551f433263931742503ea1da76083d0f0fb5e1eab88fe805899ad"
+    },
+    {
+      "activeHash": null,
+      "calculationFieldHashes": {
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "currency": "a02a8fac8fe645256291b77c9781bda64b7963e2dbe47eb7639fb259af96c6b4",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "logisticsRub": "7ae410ba957c79d1650a1cbcbb9acfa1e6d23944dc91d1676e70dba7c6551b76",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb"
+      },
+      "configVersion": null,
+      "effectiveFrom": null,
+      "estimatedFields": [
+        "securityDepositRub",
+        "topAvtoCommissionRub",
+        "exportExpensesRub",
+        "logisticsRub",
+        "brokerRub",
+        "svhRub",
+        "laboratoryRub",
+        "sbktsRub",
+        "eptsRub",
+        "rfDeliveryRub",
+        "otherFixedExpensesRub"
+      ],
+      "market": "uae",
+      "resolvedCalculationHash": "9d049b84d7f25390672be8ac199473edc1ce724d0c420ab654fb42c3fcceec28"
+    },
+    {
+      "activeHash": null,
+      "calculationFieldHashes": {
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "currency": "967aad6ecdf16cc40f2828ac7ca095b80731641aa7f751a3e6657f246297eb0a",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "60734f174b2035e5b2ba85fef8c648cc0cb18c5995b419d3cd1c025c5b09d0c7",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "logisticsRub": "c3c8204aec16162abf29b505bfdc8fe2b911b95b4a351da1664b0ac8a6771f6b",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb"
+      },
+      "configVersion": null,
+      "effectiveFrom": null,
+      "estimatedFields": [
+        "securityDepositRub",
+        "topAvtoCommissionRub",
+        "exportExpensesRub",
+        "logisticsRub",
+        "brokerRub",
+        "svhRub",
+        "laboratoryRub",
+        "sbktsRub",
+        "eptsRub",
+        "rfDeliveryRub",
+        "otherFixedExpensesRub"
+      ],
+      "market": "georgia",
+      "resolvedCalculationHash": "659aaa6605ad7b84297e74782077a4b69a991b6a026bfd1ba7708b9b3fda86d2"
+    }
+  ],
+  "productionWrites": false,
+  "reads": [
+    {
+      "found": true,
+      "hash": "5d91519b09be25a2c6e37d11094eb7315d70423404d20a6043a329641a292a29",
+      "path": "markets/markets.json"
+    },
+    {
+      "found": true,
+      "hash": "e8bbea7a970e18e1aae7389f23163c3e3c7d40a3c440b00c5198272b3e35a928",
+      "path": "settings/site-business.json"
+    }
+  ],
+  "site": {
+    "activeVersionId": "site_business_v2_e13de083-c45e-4904-9384-299f523413c3"
+  },
+  "storageDriver": "object",
+  "workflowRun": 34044354748
+}

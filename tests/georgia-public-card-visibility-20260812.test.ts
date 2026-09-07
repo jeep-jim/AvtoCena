@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { hasCredibleOfferContent, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
+import { hasCredibleOfferContent, isCrediblePublicOffer, isRenderablePublicCatalogOffer } from "../apps/web/lib/catalog/offer-quality";
 
 function georgiaOffer(sourceId?: string) {
   return {
@@ -35,10 +35,16 @@ function georgiaOffer(sourceId?: string) {
   } as any;
 }
 
-test("server-vetted Georgia public DTO remains visible after sourceId is omitted", () => {
+test("only a V3 attested priced Georgia DTO can omit private source provenance", () => {
   const dto = georgiaOffer();
   assert.equal(dto.sourceId, undefined);
-  assert.equal(isCrediblePublicOffer(dto), true);
+  assert.equal(isCrediblePublicOffer(dto), false);
+  assert.equal(isRenderablePublicCatalogOffer(dto), false);
+  const attested = { ...dto, cardProjectionVersion: 3, publicSpecificationVerified: true,
+    calculationStatus: "ready", publicVisibleRub: 2068397 };
+  assert.equal(isRenderablePublicCatalogOffer(attested), true);
+  assert.equal(isRenderablePublicCatalogOffer({ ...attested, publicSpecificationVerified: false }), false);
+  assert.equal(isRenderablePublicCatalogOffer({ ...attested, calculationStatus: "preliminary_power_pending" }), false);
 });
 
 test("server-side full offer validation still enforces Georgia canonical sources", () => {

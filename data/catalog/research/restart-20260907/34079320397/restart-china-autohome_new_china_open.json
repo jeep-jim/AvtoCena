@@ -1,0 +1,3824 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:23:35.233Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "china",
+      "requests": [
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/price/list-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=gb2312",
+          "bodyEvidence": {
+            "bytes": 515374,
+            "sha256": "e77f42e7b3936b49d91c12f52b4c781bc435ec2763fe15b02442dcb0cf785b2d",
+            "title": "",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/74645/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183228,
+            "sha256": "6290756c1e70363f2b62859fd362274d6685501b990eab453b5c086aa07afd69",
+            "title": "【图】钛7 2025款 200KM两驱Max版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/74645.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 485709,
+            "sha256": "40f603638940259dcc3870eafb4a0c033f0f134a1f979b40cc59b77f17020986",
+            "title": "【钛7 2025款 200KM两驱Max版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-74645-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 170710,
+            "sha256": "172c6949ae2b54a798ec390c2fc9be7082f69524ba31d60a4af28f65a1ac1cdc",
+            "title": "钛72025款 200KM两驱Max版汽车图片大全-钛72025款 200KM两驱Max版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73546/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183180,
+            "sha256": "4b4d506612674384dfcc9d58c32c4a8e7ce886fa6cd858ab38fafc3b3f30d357",
+            "title": "【图】钛7 2025款 135KM两驱Pro版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73546.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 483655,
+            "sha256": "d190ca396189c0773a58999e70157b7fa17cc07126d46db88103d3964ae586e1",
+            "title": "【钛7 2025款 135KM两驱Pro版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-73546-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 168696,
+            "sha256": "143c8c5968ea11e964e2b3a89265e051e3cf9026c205fdb8d2135ad26b3e8fec",
+            "title": "钛72025款 135KM两驱Pro版汽车图片大全-钛72025款 135KM两驱Pro版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/78551/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 177451,
+            "sha256": "a506d008fdb45cefcea7735b9fac92a67693b54d09a0dfe80eb60ff4fed3d22b",
+            "title": "【图】钛7 2026款 315KM 两驱Max版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/78551.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 510131,
+            "sha256": "90aa53bdd410895aaae00bae248d08086477d5bcfccf75a52c0226c4dbed0c19",
+            "title": "【钛7 2026款 315KM 两驱Max版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-78551-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 165911,
+            "sha256": "5aad86784781817932b2eb63899e6dc39d60980aa4f613f46cb69ca014a621ec",
+            "title": "钛72026款 315KM 两驱Max版汽车图片大全-钛72026款 315KM 两驱Max版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/74646/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183138,
+            "sha256": "a3e7a1e3a452f2959bda2796a32ec4a12b4196bb7f2d209b0c353a279025ee44",
+            "title": "【图】钛7 2025款 190KM四驱Max版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/74646.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 483704,
+            "sha256": "0a1754aa6a79847c41f7556df44a1721790b40d1924d80e13e1609a8367cc289",
+            "title": "【钛7 2025款 190KM四驱Max版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-74646-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 170047,
+            "sha256": "44018b6dd27ff27ea3f5545d3100e398eeb0f1b33ece372ca69ad42ec91b1e95",
+            "title": "钛72025款 190KM四驱Max版汽车图片大全-钛72025款 190KM四驱Max版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/78891/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183259,
+            "sha256": "59199b7ef64c482f9218e913c919fe1baf88739c71431d0ee1cb728c0c9d4679",
+            "title": "【图】钛7 2026款 300KM 四驱Ultra版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/78891.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 512361,
+            "sha256": "823f37a83ae7ebc3acb21b2be15fe51d124747edeaf21b2769242a3187956208",
+            "title": "【钛7 2026款 300KM 四驱Ultra版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-78891-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 167368,
+            "sha256": "8f60f007537862019c945149fc7c34d35570afb711cdd9abf638b49ad365535e",
+            "title": "钛72026款 300KM 四驱Ultra版汽车图片大全-钛72026款 300KM 四驱Ultra版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73386/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183209,
+            "sha256": "3a6dcd79b5a016ac5682cc194be1d28f90d46fc7db10c1d4d0b8266d3a6f8a94",
+            "title": "【图】钛7 2025款 190KM四驱Ultra版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73386.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 485733,
+            "sha256": "1f8b289d54383ef05bd91e0aa90bba9fc862d327588bb5ac1f9a3ed81c5457d6",
+            "title": "【钛7 2025款 190KM四驱Ultra版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-73386-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 207088,
+            "sha256": "5d9be1598e907a7cf6aa54a3525390a324c5a18fbd31481aa86b3a9a56d2f130",
+            "title": "钛72025款 190KM四驱Ultra版汽车图片大全-钛72025款 190KM四驱Ultra版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/76557/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183969,
+            "sha256": "5233e3848e326c85c68ea9383015675584edf47dd87ba0305b86237ce575f6a2",
+            "title": "【图】钛7 2026款 EV 755KM 后驱闪充版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/76557.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 511183,
+            "sha256": "662eb7d8c87fd54304200d757bf09dcb0dbad112d366d7950d7c76cc10d70515",
+            "title": "【钛7 2026款 EV 755KM 后驱闪充版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-76557-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 171575,
+            "sha256": "166c4521c9f7089a976359f77f7b5ff825bb3691111cbd58c45bf80590cd4c7f",
+            "title": "钛72026款 EV 755KM 后驱闪充版汽车图片大全-钛72026款 EV 755KM 后驱闪充版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/77686/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183269,
+            "sha256": "0c972b8467eebf3031ebe4a5d8e7ed71fcff4c464d879c17cd53696ce0533cfc",
+            "title": "【图】钛7 2026款 EV 675KM 后驱闪充版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/77686.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 510551,
+            "sha256": "1ebe03b4e8fd5975d6982358d11028072abbc0a23238c412554e2a7dc0f277a2",
+            "title": "【钛7 2026款 EV 675KM 后驱闪充版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-77686-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 175931,
+            "sha256": "f764cfbf3492252528532a9a422e60bdb7165e865aef662367162735b241d3c6",
+            "title": "钛72026款 EV 675KM 后驱闪充版汽车图片大全-钛72026款 EV 675KM 后驱闪充版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/76837/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 183247,
+            "sha256": "85e1dd7f2beae594ff224240ac455271b2937e5fba4579506d8c1584889c4351",
+            "title": "【图】钛7 2026款 EV 675KM 四驱闪充版报价_图片_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/76837.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 510035,
+            "sha256": "f493c60433993d8d2424bb122c694109458310910b874738442061ab5aab718f",
+            "title": "【钛7 2026款 EV 675KM 四驱闪充版参数配置表】价格单_方程豹_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-8171-76837-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 176603,
+            "sha256": "76f37a2f3e4593935848418a20ceea21d2a93a73f71472cc58d424902eb372de",
+            "title": "钛72026款 EV 675KM 四驱闪充版汽车图片大全-钛72026款 EV 675KM 四驱闪充版高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73298/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 178952,
+            "sha256": "bf14b5378ffcdcb72d4c51d08970487352723bb6d2cc9f965e1677c8de587f4a",
+            "title": "【图】奥迪A6L 2026款 40 TFSI 豪华动感型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73298.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 589752,
+            "sha256": "61fcbb602c68a45d343edfafc02e87cca4834a22164c33df940ee8d900ed45fa",
+            "title": "【奥迪A6L 2026款 40 TFSI 豪华动感型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-73298-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 188629,
+            "sha256": "a40db6a930ce611a2303f572dfae4a2275d5b64d0e140dec92bf7b6c70f7062d",
+            "title": "奥迪A6L2026款 40 TFSI 豪华动感型汽车图片大全-奥迪A6L2026款 40 TFSI 豪华动感型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/77007/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179590,
+            "sha256": "4070909970a31e6e5bcc19604285c2b77c49a3255b71d80d3cc59a611c592054",
+            "title": "【图】奥迪A6L 2026款 2.0T 臻选型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/77007.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 587515,
+            "sha256": "536a7e58c98d9bb379c78289087a71bbafe845c33c3d4f214f1b344c2264a22d",
+            "title": "【奥迪A6L 2026款 2.0T 臻选型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-77007-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 192461,
+            "sha256": "b93986507f36f08268f91fc419242f71672c7e9274bcdc798f14c5fbd06e9ad1",
+            "title": "奥迪A6L2026款 2.0T 臻选型汽车图片大全-奥迪A6L2026款 2.0T 臻选型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73300/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179817,
+            "sha256": "b5c517f864e25693eaded9a66180b04be9152ffb380fb9277e3b6f004b556f73",
+            "title": "【图】奥迪A6L 2026款 45 TFSI quattro 臻选动感型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73300.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 591708,
+            "sha256": "183a0117c541824f739a00549e76e577ba6d37c38174f696f946c283d3813a74",
+            "title": "【奥迪A6L 2026款 45 TFSI quattro 臻选动感型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-73300-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 191126,
+            "sha256": "895b88c2563d739a2ca84ca03b62f23c032333bdc3798d6cc5a4d80064e6bf69",
+            "title": "奥迪A6L2026款 45 TFSI quattro 臻选动感型汽车图片大全-奥迪A6L2026款 45 TFSI quattro 臻选动感型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73301/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179349,
+            "sha256": "fffbf29441dcff45adf13759a030d3bd67fab9eb8d6d757df1efc1a4ccd9a1d4",
+            "title": "【图】奥迪A6L 2026款 45 TFSI quattro 臻选动感型+尊享包报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73301.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 590406,
+            "sha256": "faef66901420932f9f9330ddc29c580281463c24763b1bce19e94993348fbb43",
+            "title": "【奥迪A6L 2026款 45 TFSI quattro 臻选动感型+尊享包参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-73301-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 187946,
+            "sha256": "9cd69db729eb34d3d4576f5506072c0e00cc43478ba79f9ed83d5fbcab06376e",
+            "title": "奥迪A6L2026款 45 TFSI quattro 臻选动感型+尊享包汽车图片大全-奥迪A6L2026款 45 TFSI quattro 臻选动感型+尊享包高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73299/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179711,
+            "sha256": "bd70c0943c3c15ed2f4dd9564c114e25519c5f62fee3aed4af348f3c8fed0910",
+            "title": "【图】奥迪A6L 2026款 45 TFSI 臻选动感型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/73299.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 588813,
+            "sha256": "3e7492d81e952bf2b589895cd8721213453a285baeb29da59e6efba6f046369c",
+            "title": "【奥迪A6L 2026款 45 TFSI 臻选动感型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-73299-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 192432,
+            "sha256": "913f58941e9547e710f8f260f5e6b7bcbccc1f318e25034ae6114b418cbf942e",
+            "title": "奥迪A6L2026款 45 TFSI 臻选动感型汽车图片大全-奥迪A6L2026款 45 TFSI 臻选动感型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/76524/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179707,
+            "sha256": "2bfc9e0d6df1bde14db6cfd192e3b242ba627cb34aefabd1e1663045a40d8ae7",
+            "title": "【图】奥迪A6L 2026款 2.0T quattro 尊享型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/76524.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 589581,
+            "sha256": "7dcefd2737381e8978f962c903b1fcd93bf02b51b8ef2897f2a6a726deecaf1a",
+            "title": "【奥迪A6L 2026款 2.0T quattro 尊享型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-76524-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 216134,
+            "sha256": "cc584de06206f05b2759df9fe85ee9ac54b2836bfa823b91b5f2355085888219",
+            "title": "奥迪A6L2026款 2.0T quattro 尊享型汽车图片大全-奥迪A6L2026款 2.0T quattro 尊享型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/75152/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 179592,
+            "sha256": "03a9c566d8a9085ac552e0e66d3a3c408a317851692679edb997893f9d4bd808",
+            "title": "【图】奥迪A6L 2026款 2.0T 尊享型报价_图片_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://car.autohome.com.cn",
+          "path": "/config/spec/75152.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyEvidence": {
+            "bytes": 587926,
+            "sha256": "20b3e0e02fa77d1093895c7a2f41e3eb707839191135dde3ee9c02e1c1c8d572",
+            "title": "【奥迪A6L 2026款 2.0T 尊享型参数配置表】价格单_奥迪_汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/cars/imglist-x-x-18-75152-x-x-x-x-x-1.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "bodyEvidence": {
+            "bytes": 193792,
+            "sha256": "73ef97ad0f548f3e5c68e2a839c098cbec5fed22c7eb8d6daea26ea490c79c3a",
+            "title": "奥迪A6L2026款 2.0T 尊享型汽车图片大全-奥迪A6L2026款 2.0T 尊享型高清大图-汽车之家",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        },
+        {
+          "origin": "https://www.autohome.com.cn",
+          "path": "/spec/73302/",
+          "method": "GET",
+          "status": null
+        }
+      ],
+      "sourceId": "autohome_new_china_open",
+      "listingRows": 104,
+      "normalizedRows": 104,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "74645",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "sourcePrice": 189800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/74645/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/6E/07/autohomecar__ChxpWGkNaMWAC5_vACvSJnNUzDo303.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/7C/4F/autohomecar__ChxpVWkNaMCAXfJ9ACq2FJQ1koQ679.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/7C/4F/autohomecar__ChxpVWkNaMCANnTQACsoFx4WSE0388.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/7C/5C/autohomecar__Chto52kNaMGALboqACrdQAv9kv0611.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/7C/4F/autohomecar__ChxpVWkNaMCAW8MWACZdzDgKwUE084.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/7C/4F/autohomecar__ChxpVmkNaL6AQLmeACRfOmGAYLE662.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/6D/FB/autohomecar__ChxpV2kNaMKAKmtLACy-0J0uREo053.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/7C/4F/autohomecar__ChxpVmkNaL-AW59tACReNENumVs894.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/1B/0A/autohomecar__ChtpWGoXZVSAHUhxAFQ3F3x9-rU643.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/1D/5C/autohomecar__ChxpV2oXZVOAVzNHAFINmxu2QV0161.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/07/67/autohomecar__Chto52jwitaAM9KHACOP8oU36YU947.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/07/55/autohomecar__ChxpVWjwitaABDazAB9WFRK2Cys962.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/FF/93/autohomecar__ChxpWGjwivaAG6QkACJjiL0wB70545.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/07/56/autohomecar__ChxpVWjwiteATfRiAB5Ubjf3HrA058.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/FF/93/autohomecar__ChxpWGjwiviAYFhNACUi3goPTfQ976.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/FF/8A/autohomecar__ChxpV2jwiu6AYt7eACmVfN9BVdM334.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/FF/94/autohomecar__ChxpWGjwixWAYPsbAC2EBco8_dQ034.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/FF/8A/autohomecar__ChxpV2jwiviAEgtfACr511TzTOw214.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/07/5C/autohomecar__ChxpVmjwixOAXMnZAC1qKL2vHY0336.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/FF/89/autohomecar__ChxpV2jwiuOACaowAB-Sx1A8osU509.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/FF/4F/autohomecar__ChxpV2jwiBmAB1yaABynxRRn5rk555.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/FF/4E/autohomecar__ChxpWGjwiAyASiLIACUKjazLRks719.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/FF/4D/autohomecar__ChxpWGjwh_uAGvYHABu4sVANJS0503.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/FF/57/autohomecar__ChxpWGjwiByAcbVlAC1FFRdWRac304.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/07/2E/autohomecar__Chto52jwiDuAR6_vACXfODB8b7E771.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/FF/3A/autohomecar__ChtpWGjwiAyAfUFgAB3DrxhqkEM200.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/07/2F/autohomecar__Chto52jwiEaAZ_8wACAB2-xZFyA545.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/FF/55/autohomecar__ChxpWGjwiBOAHBHBACC_tjXGzVU164.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/FF/39/autohomecar__ChtpWGjwiAGASGitAB5O0DnUM5k217.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/FF/4E/autohomecar__ChxpV2jwiBaAPubQACP6cmwnWv8706.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2025,
+                "rawValues": [
+                  "2025"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 189800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "73546",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "sourcePrice": 179800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73546/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/72/77/autohomecar__ChxpV2j4alSANOWXACZkzIF42T4661.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/72/77/autohomecar__ChxpV2j4alKAeGrhACf-kPR4vl8723.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/72/80/autohomecar__ChxpWGj4alSAJxLRACh6Dwtq3Wo539.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/72/80/autohomecar__ChxpWGj4alSAG2WoACitjwTQBXA612.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/7D/01/autohomecar__Chto52j4alSAanBcACiQYaxwymk557.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/72/77/autohomecar__ChxpV2j4alSAczVxACMxOPz-m4M688.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/7C/F4/autohomecar__ChxpVmj4alSAZtBsAC1QFYdp69E339.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/72/77/autohomecar__ChxpV2j4alSAZs7OACWao4tIVBc675.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/93/6F/autohomecar__ChxpVWjTrLKAVlmIAFv_wq0uuQo203.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/93/70/autohomecar__ChxpVWjTrLWAd7AnAF4D2PkC7_w661.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/2B/90/autohomecar__Chto52jfb8yAZwjcACZYiQbV5KA511.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/2B/80/autohomecar__ChxpVmjfb8mAPqg8ACJhbkt4mW4348.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/2B/7D/autohomecar__ChxpVWjfb8uAMQ3KACCXkcc7gjQ987.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/2B/7E/autohomecar__ChxpVWjfb9GAVVQTACFO9I1jY2A517.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/2B/80/autohomecar__ChxpVmjfb96AUsZfACXTbjpZzls461.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/2B/91/autohomecar__Chto52jfb9GAGpnKACfLJZ-7yh0852.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/2B/7E/autohomecar__ChxpVWjfb92ACV9NACoXRfXeaRM988.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/2B/7D/autohomecar__ChxpVWjfb8qAXnpoACLouJrzTUg444.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/2B/80/autohomecar__ChxpVmjfb9qAELUcACeIX9wLO-w518.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/2B/92/autohomecar__Chto52jfb-6AP_eJACvzGomAsr8891.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/20/FD/autohomecar__ChtpWGjfbeuAXEV8ACYKcGf4V4o037.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/20/FE/autohomecar__ChtpWGjfbfCAXRwLACjX41o5fsM334.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/21/10/autohomecar__ChxpWGjfbdmAIirqAB3Eqn0DaOQ487.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/2B/7A/autohomecar__Chto52jfbdaAPwVJAB4RZYCBUuY184.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/20/FF/autohomecar__ChtpWGjfbgeAGipvACZ7ljyO3dc043.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/21/0A/autohomecar__ChxpV2jfbfiAUaeSACNDNMr_vfo416.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/20/FE/autohomecar__ChtpWGjfbf-AV8sUACk6e3ekHFI550.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/2B/69/autohomecar__ChxpVmjfbdiAT1VQAByjxIU_8bc486.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/2B/68/autohomecar__ChxpVWjfbh6AAeDmACLEPgXFrfY512.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/21/0B/autohomecar__ChxpV2jfbguAPuJJACFTSc0CrLo931.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2025,
+                "rawValues": [
+                  "2025"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 179800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "78551",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 195800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/78551/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/68/3F/autohomecar__ChxpVWqTcFKAbvL8ADGM9i2yaIo146.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/68/3F/autohomecar__ChxpVmqTcFOAAoKPAC8qqYhdOmM535.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/68/3F/autohomecar__ChxpVWqTcFOASpeKADFasEggAkU979.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/68/5A/autohomecar__Chto52qTcFOAR1DbADEijCldXIE101.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/68/5A/autohomecar__Chto52qTcFOAYHPZADW3RNy1Xso038.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/68/3F/autohomecar__ChxpVWqTcFOAeihyADIh9dSIQ38506.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/68/3F/autohomecar__ChxpVmqTcFOAX3oaADIyENFhYXw945.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/68/3F/autohomecar__ChxpVmqTcFKAHH1KAC9samANBVY164.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/71/FC/autohomecar__ChxpVmqUAcCAdBA6AClR3zV6FZE601.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/6C/FE/autohomecar__ChxpV2qUAcCAFrooACklCbtdsBk330.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/86/76/autohomecar__ChxpVmqVRwuAF6tCACdhYEYKUrw760.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/86/91/autohomecar__Chto52qVRwuAF1r7AC6i0y-WXro760.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/86/92/autohomecar__Chto52qVRw6ADe43ACrmD5O_yow992.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M03/86/75/autohomecar__ChxpVWqVRw2AFwMBAB3EJJLSV4w466.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/86/91/autohomecar__Chto52qVRwyAXgwgAC3k9BurGc8461.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/86/91/autohomecar__Chto52qVRwuAHEAfACCiQjx1BbY618.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/81/C1/autohomecar__ChxpWGqVRxuAJUEcACZ4q1Wx_rw339.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/86/76/autohomecar__ChxpVmqVRwyAKflKACMfCQMtuvA860.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/86/76/autohomecar__ChxpVmqVRw6AI3KfACzVmWg7Iss440.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/86/76/autohomecar__ChxpVmqVRw6AZVDdACW_qRi5Vuw782.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/81/B6/autohomecar__ChxpV2qVRyaAOblzACkEjfpFb7M434.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/7E/97/autohomecar__ChtpWGqVRyKAdNJIACJX18rfJ9I130.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/86/77/autohomecar__ChxpVWqVRyGAR_8RACQGCmTIllk087.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/86/93/autohomecar__Chto52qVRyaATuVLAC4fFvTnCjQ223.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/81/B6/autohomecar__ChxpV2qVRySABWYWACWP2g3MA_o023.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/81/B6/autohomecar__ChxpV2qVRySAWs7dACYmtlHc8uY114.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/7E/97/autohomecar__ChtpWGqVRySATPqoACPEKkOtTzY398.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/7E/97/autohomecar__ChtpWGqVRyOAFtsvACxqJowDaGo773.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/81/C1/autohomecar__ChxpWGqVRySAJHniACFn9rLC8d8473.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/81/C1/autohomecar__ChxpWGqVRySAQO5cACJwIpmry5c872.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 195800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "74646",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "sourcePrice": 206800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/74646/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/37/4F/autohomecar__ChxpVmmizkiAI6VPADJAjauXkAo982.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/37/4F/autohomecar__ChxpVmmizjyAZ-F3AC5rk1HLjUo969.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/37/4F/autohomecar__ChxpVmmizkyAXZ4FAGD1qYEmVK8090.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/37/4D/autohomecar__ChxpVWmizkyACHy6AF_NDIaWRmc839.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/48/EE/autohomecar__ChxpVWmlKvSAcDtaAA93A6dyj4850.jpeg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/4A/DB/autohomecar__ChxpWGmlKvqAcpUuAA0NBSfoSlc02.jpeg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/48/EE/autohomecar__ChxpVWmlKv-AScKLAA7eVqD5h4842.jpeg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/38/D2/autohomecar__ChxpV2mizkKANNY1ADB25zeKcd0514.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/FE/27/autohomecar__Chto52kYQZSAYT8eABe7huVRK4M581.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/FE/19/autohomecar__ChxpVmkYQZSAMbAKABdp7zePyhE645.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/62/03/autohomecar__ChxpVmj2TiuAcUrGABwkQPc1GGo243.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/58/51/autohomecar__ChxpWGj2TiuAP40VABkn7YAV12w247.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/62/03/autohomecar__ChxpVmj2TiCAJLSRABf5y-fI_6U488.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/58/49/autohomecar__ChxpV2j2TimAFn-kABjGVal6R-0447.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/62/00/autohomecar__ChxpVWj2TiOAfofPABwU-ScZlgg070.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/62/11/autohomecar__Chto52j2TimAfMwoABj7sfFIJwU653.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/58/49/autohomecar__ChxpV2j2TiaAYWdwACMbSPI6fqI650.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/62/11/autohomecar__Chto52j2TiKAPZUtABvlw6UuCyk847.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/61/FF/autohomecar__ChxpVWj2ThmAK_GhABQLSOPoi54594.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/62/02/autohomecar__ChxpVmj2ThmAYcOuABRZ0iv_L7s747.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/58/49/autohomecar__ChxpV2j2TjaATpezABWuqMUc5JQ587.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/62/04/autohomecar__ChxpVmj2TjeAEB-JABq2PYp5EPU461.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/58/49/autohomecar__ChxpV2j2TjeAZlymABkOeuHpvdM466.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/58/51/autohomecar__ChxpWGj2TjSAAu8MABHWn_3XcvA539.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/62/01/autohomecar__ChxpVWj2TjeACVhtABSTNsLjP1I598.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/58/3D/autohomecar__ChtpWGj2TjaATSZ5ABPE58C4qcc962.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/62/04/autohomecar__ChxpVmj2TjaAD1NNABRxvbmm04o455.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/62/01/autohomecar__ChxpVWj2TjuAT7NCABfOIt58ZaU798.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/62/05/autohomecar__ChxpVmj2TkSAHX5DABnXyxMAW8Y302.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/62/13/autohomecar__Chto52j2TkKALVlOAB7x5giyQ8U120.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2025,
+                "rawValues": [
+                  "2025"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 206800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "78891",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 225800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/78891/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/86/7B/autohomecar__Chto52qVRb-AKwrqACeCGSAIZiw166.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/81/A8/autohomecar__ChxpWGqVRb6ASzotACW3RJP8Ifo064.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/86/7A/autohomecar__Chto52qVRb-AYDqQACgPrbx7rKY270.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/7E/7D/autohomecar__ChtpWGqVRbyAVjcoACafrE96pjw506.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/86/5F/autohomecar__ChxpVWqVRb2AXnMRACfXv1AAAgA326.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/81/9C/autohomecar__ChxpV2qVRb6ANGivACXn-90Bwsg711.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/7E/7E/autohomecar__ChtpWGqVRb6ARX3gAClNlsS81Jc360.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/81/A8/autohomecar__ChxpWGqVRb6AULMnACctgIoprvY756.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/EC/81/autohomecar__ChxpVWqLso-AWdYoAEzA0W9rYzU419.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/EC/81/autohomecar__ChxpVWqLso6AdHulAC1XBSAyV4k850.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/86/7B/autohomecar__Chto52qVRcmABmZDACQFw44kK90767.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/81/9E/autohomecar__ChxpV2qVRc2ANgp0ACrBBfNUqhw972.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/86/5F/autohomecar__ChxpVWqVRcyAaL4eACldA0G1g98168.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/81/9E/autohomecar__ChxpV2qVRc2AfGdXACtuh7t1wYA206.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/86/60/autohomecar__ChxpVmqVRcuAA0phACvbgz458Xg396.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/81/9E/autohomecar__ChxpV2qVRc2AXRYjACqQFFictP4876.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/86/60/autohomecar__ChxpVmqVRcqAEbPQACL4gmUyYC0783.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M07/81/A9/autohomecar__ChxpWGqVRcyAXyySACipLl_egWE903.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/86/5F/autohomecar__ChxpVmqVRciAKrnFACxhWv7adZU704.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/7E/7F/autohomecar__ChtpWGqVRciALyH9ACnDakVwBBs203.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/7E/80/autohomecar__ChtpWGqVRdWAcEsBAB5GJL0KE-I237.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/7E/80/autohomecar__ChtpWGqVRdeAOnm_ACWNAgVppMw923.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/81/AA/autohomecar__ChxpWGqVRdqAZVpeACiy8fsSu5U616.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/7E/80/autohomecar__ChtpWGqVRdqAUwsaACV_PdCiXwo468.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/81/AA/autohomecar__ChxpWGqVRdiAa18-ACxPX_XEFiM318.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/7E/80/autohomecar__ChtpWGqVRdqAEIP-ACxKzUsr_ck736.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/86/60/autohomecar__ChxpVmqVRdeAXaSEACdE5RyKKEM583.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/81/AA/autohomecar__ChxpWGqVRdiAJxs6ACu35e1wdS0520.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/86/7C/autohomecar__Chto52qVRduAM9zSAC1hBM46EXE418.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/86/7C/autohomecar__Chto52qVRd6AJ6qiACvRSEmv7ac802.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 225800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "73386",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "sourcePrice": 219800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73386/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/54/F9/autohomecar__ChxpVWkJxKGAGuNiABqnLVxVOxA794.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/54/F9/autohomecar__ChxpVmkJxKCAfAPvABnhadiIWa0133.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/55/06/autohomecar__Chto52kJxKGARkMUABZExkhioMo232.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/55/06/autohomecar__Chto52kJxKKAIcMGABhAJVKna9I400.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/54/F9/autohomecar__ChxpVWkJxKKAf6YeABx8_od3uvQ558.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/54/F9/autohomecar__ChxpVWkJxKKAamnmABRzRtS1N-E245.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/55/06/autohomecar__Chto52kJxKKAdiQxABby6lless0655.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/55/06/autohomecar__Chto52kJxJ-ANW0GABJwjjNnhqI772.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/55/06/autohomecar__Chto52kJxJ-AGlMLABHfMEahY4c821.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/54/F9/autohomecar__ChxpVWkJxKKAAt0aABYB5iqlQ7g423.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/29/1E/autohomecar__ChxpVmiDLS6AVIXmACK55mqtOcU163.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/29/3E/autohomecar__ChxpVWiDLS2AP9kaACImwjBwd-s512.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/29/1E/autohomecar__ChxpVmiDLSyAaT0TACNDWSdSEG4397.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/29/3D/autohomecar__ChxpVWiDLSuATb1QACHjgEw09Zc106.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/29/1E/autohomecar__ChxpVmiDLSuACar6AB7N8-FOBtk645.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/29/1E/autohomecar__ChxpVmiDLSqAax-DAB6YXcR_u20724.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/29/35/autohomecar__Chto52iDLSmAGvfVACMtuf0VBXE134.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/29/35/autohomecar__Chto52iDLSiAO1lNACGuqC31gbU872.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/29/1E/autohomecar__ChxpVmiDLSiAFM3KABy5es-E9rs512.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M03/29/1E/autohomecar__ChxpVmiDLSeAVCjWAB-YO1K-O1o549.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/45/25/autohomecar__ChxpVWnrGLuAR_K6ADvAhXGw3HI253.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/45/26/autohomecar__ChxpVmnrGLuAVvAOADlOpa2e1hI482.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/45/26/autohomecar__ChxpVmnrGLuAZUHaADc0VkN2ANw129.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/45/3A/autohomecar__Chto52nrGLuAC3_7AB0OAo6HKHI278.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/45/3A/autohomecar__Chto52nrGLuAe1k4ABrhlYLQ5pM490.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/45/25/autohomecar__ChxpVWnrGLuAUbJzAB2cRaoDRYw328.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/3E/B8/autohomecar__ChxpWGnrGN-AG-WqAB2TxMaCOaE408.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/45/2A/autohomecar__ChxpVWnrGOCAVqmDACPTk7AK2jw459.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/3E/B1/autohomecar__ChxpV2nrGN-AKbW2AB9QmSKk4jg759.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/45/3F/autohomecar__Chto52nrGOGAVod0ACbCd4cQg7U465.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2025,
+                "rawValues": [
+                  "2025"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "插电式混合动力"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "1.5T 156马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "156"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "115"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "sourcePrice": 219800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "76557",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 209800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/76557/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g33/M04/32/E9/autohomecar__Chto52oxHpiABZ0uACNGdDnI6lI271.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/32/D6/autohomecar__ChxpVmoxHpiAN54CAB5LBDerdaI109.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/32/D5/autohomecar__ChxpVWoxHpiAN5pxACLLUihi3pQ536.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/32/D5/autohomecar__ChxpVWoxHpiAXeKNACISMNfrBuk754.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/32/E9/autohomecar__Chto52oxHpiAKeErACHknU5SYDY596.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/32/E9/autohomecar__Chto52oxHpiATT1VAB5vHyyLxYg420.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M04/32/E9/autohomecar__Chto52oxHpiABos1ACGPQATZ4f4549.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/32/D5/autohomecar__ChxpVWoxHpiAMizyACH4USw3iSU318.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/D2/CC/autohomecar__ChxpV2oP7ESARUntAB09oqJ4MWA977.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/D7/98/autohomecar__Chto52oP7EqACBLoAEhAaDV1zQ8550.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/CA/A8/autohomecar__ChxpVWpxZcSAVZI9AB3FpkBvkv4507.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/CA/AC/autohomecar__ChxpVWpxZgOAITxuACxSQ6cdySM207.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/C6/D6/autohomecar__ChxpWGpxZgOACsJCAC2rlo3T-_Q767.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/CA/A8/autohomecar__ChxpVWpxZb-ACIFVAChvBFVmHA0354.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/CA/AC/autohomecar__ChxpVWpxZgeAHPTPACq7GKObSJo003.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/CA/AA/autohomecar__ChxpVWpxZeSAO8XOACEGXMDGFwM261.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/CA/A9/autohomecar__ChxpVmpxZbyARAtdACK8m1UFlEE546.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/CA/AA/autohomecar__ChxpVWpxZd2AdS9JAB2t5YMu_Po925.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/CA/AA/autohomecar__ChxpVWpxZeKAf5bCAB5f6Xzz6BY153.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/CA/C1/autohomecar__Chto52pxZbqAHx3ZACEscxJ4qFU282.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/C3/D9/autohomecar__ChtpWGpxZCOAJ-e4ACiVafJklu4242.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/C6/B5/autohomecar__ChxpV2pxZD-ARdxxAB7HnsSxn78848.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/CA/96/autohomecar__ChxpVmpxZBOAQ9qgAC6EWP6_uIQ370.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/CA/AE/autohomecar__Chto52pxZC-AID8MAB1LDjOX3eU167.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/C6/B7/autohomecar__ChxpV2pxZGSARIsLAB6m8FGJjHk435.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/CA/98/autohomecar__ChxpVWpxZISASnguAC4QTCJhuHU050.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/C6/BF/autohomecar__ChxpWGpxZDaAIBv6ACSANccbEkQ900.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/CA/98/autohomecar__ChxpVWpxZI2AOI7aACSzDHd8Bfs489.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/CA/96/autohomecar__ChxpVWpxZFiAS2trACWWSonfkAc065.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/C6/BF/autohomecar__ChxpWGpxZD6AP3pfACItR4nOG9M669.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "electric",
+            "sourcePrice": 209800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "77686",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 199800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/77686/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/A0/0D/autohomecar__Chto52o7egiAVPoDABuGK1ramuo296.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/A0/07/autohomecar__ChxpWGo7ekKAGRykACgXQpmXJ3Y871.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/A0/0F/autohomecar__Chto52o7emyAR9XOAC55xxC_qC0099.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/9F/FD/autohomecar__ChxpVmo7emyAPeibACvcvKTus4k042.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/9F/FB/autohomecar__ChxpVmo7egeAWb7oAB1Ln760vG8346.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/9F/FE/autohomecar__ChxpVmo7enSAUlgPAChHFyFkqeA425.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/A0/0D/autohomecar__Chto52o7egWASxxUABu5V5WXKCI640.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/A0/0E/autohomecar__Chto52o7ehCATdzmAB0BtKAwC00140.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/D7/24/autohomecar__ChxpVmpyrHuADmYwAFgjhG6luGc453.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/D7/24/autohomecar__ChxpVmpyrHyAS595AFIFJjkqdyY208.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/0B/57/autohomecar__ChxpWGoVngyAPzwzACjijnPSIfw872.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/08/FE/autohomecar__ChtpWGoVngqAZiZuACQ5PHfTVpE972.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/08/FE/autohomecar__ChtpWGoVnguAAgtdACMeUm0N1Ps109.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/10/BF/autohomecar__ChxpVmoVngqAbz75ACOA_eEcycQ891.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/0B/4F/autohomecar__ChxpV2oVngyASo3dAERs0LXTNbM935.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/0B/4F/autohomecar__ChxpV2oVngyAekqYADtoRJie9dw341.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/0B/57/autohomecar__ChxpWGoVnguAUPUpAD7G6_AyDOw769.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/10/D4/autohomecar__Chto52oVng-AeheXAERY3OTlQQ4863.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/0B/4F/autohomecar__ChxpV2oVnguAQVLuADvka1ORREY087.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/10/C0/autohomecar__ChxpVmoVng2AYvGAAEjCbTcEV6w664.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/0B/50/autohomecar__ChxpV2oVnhyADa2SAEJ8vY1o9B8264.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/08/FE/autohomecar__ChtpWGoVnh6ATiJbAELIQo62Wbw712.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/0B/58/autohomecar__ChxpWGoVniWAFLoVAE3HMlOAcT0744.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/0B/50/autohomecar__ChxpV2oVniWANjRQAEpuGpuqS5I543.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/0B/58/autohomecar__ChxpWGoVnhmAQpfbADyA1SUDnEU305.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/10/D4/autohomecar__Chto52oVniGACDBjAEEsKCJ2iVE431.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/0B/50/autohomecar__ChxpV2oVnhuADG_4AC6UmWLBPW4597.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/0B/58/autohomecar__ChxpWGoVnhiASn0jADaXKAj_-i8063.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/0B/50/autohomecar__ChxpV2oVnhmADSxSACT0hbT8Ohk515.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/08/FE/autohomecar__ChtpWGoVniGAAOz8AE4QWpFQaPo297.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "electric",
+            "sourcePrice": 199800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "76837",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 239800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/76837/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/45/46/autohomecar__ChxpV2pi08mAICrvAC_HglOcxIs220.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/45/46/autohomecar__ChxpV2pi08mAUt1sAC7ZycsfMy0076.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/45/50/autohomecar__ChxpWGpi08mAY25zADA7H3mFKhw776.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/45/46/autohomecar__ChxpV2pi08mAOnJAACD15U6hcwE752.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/42/6C/autohomecar__ChtpWGpi08mARuSrACql-93maLM593.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M07/42/6C/autohomecar__ChtpWGpi08iAHkfvAC0BFz8PQkc418.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/47/3B/autohomecar__ChxpVmpi08mAca_nACm1KF75Pfw208.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/47/39/autohomecar__ChxpVWpi08mAcVieACB79OAqC6s097.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/48/49/autohomecar__ChxpVWnrTEuAZ_68AB4fs6SllG0076.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M04/48/4B/autohomecar__ChxpVmnrTFSAFRaXADgbncXVFOA52.jpeg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/47/30/autohomecar__ChxpVWpi0u6ADW4TAC6v2hSJnro231.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/47/32/autohomecar__ChxpVmpi0u6AbTFpAEjtz3Vik8U961.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/47/32/autohomecar__ChxpVmpi0u6AWT_hAEBlsSy7BfY151.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/45/3F/autohomecar__ChxpWGpi0u6ABmRlAEIhiOjuOIE118.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/47/30/autohomecar__ChxpVWpi0u6AFIEqACbCywzPM5E390.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/47/30/autohomecar__ChxpVWpi0u6ARi43ACXm2FHkxE0773.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/42/5A/autohomecar__ChtpWGpi0u-AfJH1ACIy4xgxdUA211.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/45/3F/autohomecar__ChxpWGpi0u-ATLg4ACfJhzEqsNU307.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/45/3F/autohomecar__ChxpWGpi0vCAfzQlACTi-WpfbfA150.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/42/5A/autohomecar__ChtpWGpi0u-AIbUBACH9Bt6YwXg849.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/42/5A/autohomecar__ChtpWGpi0vWARlK0ACL0EUZZLj0665.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/45/35/autohomecar__ChxpV2pi0vWATNTgACjNhKB0R-U717.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/47/4A/autohomecar__Chto52pi0vqAIyABAC9_wVlnU4g107.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/47/32/autohomecar__ChxpVmpi0vWAW3RfACUqlp4-hiY603.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/45/35/autohomecar__ChxpV2pi0vWARsgLAB9hDHn9PLQ474.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/42/5B/autohomecar__ChtpWGpi0vWAEkB0AB7TsloLLqM512.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/47/32/autohomecar__ChxpVmpi0veAbO9ZACh8WvIHrH4376.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/47/31/autohomecar__ChxpVWpi0vWAVgLhACS7e5_Q4K8796.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/47/49/autohomecar__Chto52pi0veAd4OBABRxKtIxSOo054.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/47/31/autohomecar__ChxpVWpi0veAaR8WACoFsmoy0yA274.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "electric",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "纯电动"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "electric",
+            "sourcePrice": 239800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "73298",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 427900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73298/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/48/32/autohomecar__ChxpVmkIkF6AOomcAC2RmgP381Y213.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/3A/AB/autohomecar__ChxpV2kIkF6AFakVACfWKOTjsXE866.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/48/32/autohomecar__ChxpVWkIkFyATqGHACtIeuDfAvw355.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/48/32/autohomecar__ChxpVmkIkFyAdDh8AC3tBWRTIIs059.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/3A/B5/autohomecar__ChxpWGkIkFyAB6NfAC1WtTtRn2U156.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M07/3A/B5/autohomecar__ChxpWGkIkF6AIxlIACeeHB2oAoY710.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/48/3F/autohomecar__Chto52kIkF6AAa1PACupOh7XVVk283.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/3A/B5/autohomecar__ChxpWGkIkF-AEtmcACy8mg9Fstc756.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/3C/B5/autohomecar__ChxpVWkxG7WAeGFYACoFthB7Ndw832.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/3A/C3/autohomecar__ChxpV2kxG7KAK3RRACOoyTsVtVQ033.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/3A/C4/autohomecar__ChxpV2kxG7SADjmgACIN2q5O_j8304.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/3C/B6/autohomecar__ChxpVWkxG7aAc5VuACOY1RTSBHg698.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/3C/C3/autohomecar__Chto52kxG7WAQyJdACbMdFMITpc752.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/3C/B5/autohomecar__ChxpVWkxG7WAMaGGACqi9gQuGsQ913.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/3C/C4/autohomecar__Chto52kxG7eAYJPOACk3HIVJGOU245.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/3C/B6/autohomecar__ChxpVmkxG7eAdUhZACKPbi-OeG4992.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/3A/9F/autohomecar__ChtpWGkxG7eABd1RACTn4JeXA-s777.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/3A/C8/autohomecar__ChxpV2kxG7yAeYbuACQZKIvoDeE403.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/3A/A1/autohomecar__ChtpWGkxG9-AC3jtAChLrM-Zzlg862.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/3A/CA/autohomecar__ChxpV2kxG92AKT8LACqsMW1uTmw429.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/3C/B7/autohomecar__ChxpVmkxG9-AIb01ACp6iC0p2sk208.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/3A/D5/autohomecar__ChxpWGkxG-GAA27AACkZYoUEbWY731.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/3A/A1/autohomecar__ChtpWGkxG-GAV1WoACDwqv_OxoU135.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M04/3A/D4/autohomecar__ChxpWGkxG96AM1GBACU6bVxjVuA184.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/3A/A1/autohomecar__ChtpWGkxG9-AVoJ2ACrWb-J-CNE996.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/3A/CA/autohomecar__ChxpV2kxG-KAFiCEACAC18v0Jso147.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/3A/A1/autohomecar__ChtpWGkxG-KARpuCACh7LoppsD8696.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/3C/C5/autohomecar__Chto52kxG92AOMZaAB9u9KcqYK4493.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/3A/AE/autohomecar__ChxpV2kIkPmAaNLQACw5t1xAi94013.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/3A/A1/autohomecar__ChtpWGkIkOeABBXQACYsQpAHcnA082.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 190马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 190,
+                "rawValues": [
+                  "190"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 140,
+                "rawValues": [
+                  "140"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 190,
+            "sourcePrice": 427900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "77007",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 336900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/77007/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/4C/DB/autohomecar__ChxpVmozYVOASf-EABfNaUs3maQ418.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/4C/DB/autohomecar__ChxpVmozYVKACyt_ABncnjbHRZg864.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/4A/F4/autohomecar__ChxpV2ozYVGAL2r2ABoKF_2JIHY610.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/4C/EE/autohomecar__Chto52ozYVCALc55ABWlzGzhndw060.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/4C/EF/autohomecar__Chto52ozYVOANRTtABbLA5SKXPY885.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/48/79/autohomecar__ChtpWGozYV2ARt3CABWIJEDMSqI645.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/4A/F4/autohomecar__ChxpV2ozYWGAfcqoABml1OZgiIs337.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/4C/EF/autohomecar__Chto52ozYVOAHT6XABd_tlAk4dc398.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/C1/AE/autohomecar__ChxpV2onhteAVOutAF4e2mVmC5s636.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/C3/32/autohomecar__ChxpVWonhtWAD9NRAGSBItgnoPo696.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/60/C9/autohomecar__ChxpV2oERX6Ab-UnADEkGOdel7s240.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/60/C9/autohomecar__ChxpV2oERX2ASEbKACqME6S7gJE933.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M04/61/E1/autohomecar__ChxpVmoERX6AMuIrACqC5wE8uhs032.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/61/E0/autohomecar__ChxpVWoERX2AYpQeAC1wbj2RrLI171.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/61/F7/autohomecar__Chto52oERXyAJcFTACHaF9Ze31Y919.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/5E/9E/autohomecar__ChtpWGoERX2ANX1VACHhFEXwgFE594.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/61/E1/autohomecar__ChxpVmoERXyASYb4AB8q3IzzAMQ540.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/5E/9E/autohomecar__ChtpWGoERXyAJPqjAChCpuoIFPk688.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/60/D1/autohomecar__ChxpWGoERX2AKuKYACOF1XAfcOQ926.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/60/C9/autohomecar__ChxpV2oERX-AfCFaAD0bvvJuxic553.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/5E/9F/autohomecar__ChtpWGoERY6AQ5ZXACr8nRxI8VE009.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M04/61/E0/autohomecar__ChxpVWoERYyAIVUUACydBvVN-14548.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/5E/9E/autohomecar__ChtpWGoERYyAT9y4AC0PdkusEZY831.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/61/F7/autohomecar__Chto52oERZGAfCl3ADuvvcZNptw147.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/5E/9E/autohomecar__ChtpWGoERYmATnrWACGb9RDicEs219.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/61/E1/autohomecar__ChxpVmoERZGAPIFQAD0dNTJdldA510.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/60/D2/autohomecar__ChxpWGoERYyAX_J3ACJOomB-Nic679.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/60/CA/autohomecar__ChxpV2oERYmAPkyPACSC09WlrT8094.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/61/E1/autohomecar__ChxpVmoERY2AfvuuACXcBy71CvI681.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/60/D4/autohomecar__ChxpWGoERe2ADyThADFwI0uhaHI003.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 204马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 204,
+                "rawValues": [
+                  "204"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 150,
+                "rawValues": [
+                  "150"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 204,
+            "sourcePrice": 336900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "73300",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 479900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73300/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/85/BB/autohomecar__ChtpWGkPUnWACKGFADKxKbC4TrA547.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/85/D4/autohomecar__ChxpWGkPUnaASXI_ADFGG5oC9M0129.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/85/D4/autohomecar__ChxpWGkPUneAJn_uADHroCYLbEk585.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/85/D4/autohomecar__ChxpWGkPUneAHfEXAC5HRAgLIbQ642.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/85/BB/autohomecar__ChtpWGkPUneAB-LMAC7__c9-QN8143.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/85/BB/autohomecar__ChtpWGkPUnaAPCbhAC0IQXQ-V_s071.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/85/D4/autohomecar__ChxpWGkPUneAaHmqAC00OMEpm60413.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/85/C8/autohomecar__ChxpV2kPUneAKdmXACwkmaYCv4g573.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/ED/D0/autohomecar__ChxpV2kB_jmARdg-ACMKnuu-cfE352.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/F9/54/autohomecar__ChxpVmkB_juAaIC3AB8NVzqiymY942.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/3A/E6/autohomecar__ChxpWGkxHRqAPLtfACnFXKaD4EU670.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/3A/DB/autohomecar__ChxpV2kxHRiAAVs6ACSgnzo8rXo569.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/3C/C2/autohomecar__ChxpVmkxHRyAXyJKACWF6qsFOng031.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M01/3C/C2/autohomecar__ChxpVWkxHR-AIPemACOQIIXgNGQ743.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0B/3A/E6/autohomecar__ChxpWGkxHR2AXtLMACfO0VDE2-w731.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/3A/E6/autohomecar__ChxpWGkxHRyAIndFACLsjqPU-lY224.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/3C/C2/autohomecar__ChxpVmkxHR6ADJhHACKFy6uOU9s794.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/3A/DB/autohomecar__ChxpV2kxHR6AN3ifACPorQCFbgc082.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/3C/D0/autohomecar__Chto52kxHSGAAICBACSLZSqTnXU180.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0A/3C/C2/autohomecar__ChxpVmkxHSWAQNfDACmQUqaHUbc249.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/3C/C4/autohomecar__ChxpVWkxHUWAMq2eACY5bgHQzVU186.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/3C/D2/autohomecar__Chto52kxHUKAO5IJACmaHnf7XZc846.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/3C/C4/autohomecar__ChxpVmkxHUKAbo-YACdd7oRfFZ8905.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/3C/C4/autohomecar__ChxpVWkxHUWABc6SACFGnvCliY0934.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/3C/D2/autohomecar__Chto52kxHUSADbS1ACHaUfd_zvE815.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/3C/D2/autohomecar__Chto52kxHUOAEDf4ACBwf4HOvlE230.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/3C/D2/autohomecar__Chto52kxHUSAEsGdACtepxBGC7g962.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M02/3C/C5/autohomecar__ChxpVWkxHUaAWqRcACafGK903qo406.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/3C/D2/autohomecar__Chto52kxHUSAMav6ACnDnaX7aG8155.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/3C/C5/autohomecar__ChxpVWkxHUaAH-BdACZS5-BVoJw033.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 245马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 245,
+                "rawValues": [
+                  "245"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 180,
+                "rawValues": [
+                  "180"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 245,
+            "sourcePrice": 479900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "73301",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 499800,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73301/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/DC/07/autohomecar__ChxpV2kAmoCAWhEeACwRPhkTME0267.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/DC/07/autohomecar__ChxpV2kAmoKABXK9ACnYpVVA88k848.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/DB/FB/autohomecar__ChtpWGkAmoOAROWjACxdLP82iU0930.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/DC/08/autohomecar__ChxpV2kAmoOAfiIRACSqYBU7R2s562.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/DB/FB/autohomecar__ChtpWGkAmoGAMAOlACqbhlA5e_o308.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/DC/11/autohomecar__ChxpWGkAmoCACE5HACkfcAMkCTo501.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M09/DC/11/autohomecar__ChxpWGkAmoKAX0sIAC2sdTgSt0U705.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M08/DB/FB/autohomecar__ChtpWGkAmoGAQ2YJACZqCn4B4Us703.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M05/34/0E/autohomecar__ChxpVmlHYgGAJaZDAC7MkHUVNDE373.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/34/0D/autohomecar__ChxpVWlHYf-AI93PACaGdtnn-ZY513.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/34/1B/autohomecar__Chto52lHYgSATCNUACmDzFPOU30071.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/34/0E/autohomecar__ChxpVmlHYfyAWk98ACW6dw0RSUk623.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/34/0D/autohomecar__ChxpVWlHYgCARnutAC5Jxf_pCig733.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/34/0D/autohomecar__ChxpVmlHYfeAA3lpACHde_r31LA225.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/34/0C/autohomecar__ChxpVWlHYfqAO__AACJO8Y-Onvs402.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/34/0C/autohomecar__ChxpVWlHYfaAXnE_ACMDw5tM92Q410.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/34/1A/autohomecar__Chto52lHYfWAbaznAB3m8zZ99xQ449.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M04/34/1A/autohomecar__Chto52lHYf2AWStvACZ9IGDG7Ek989.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M00/32/66/autohomecar__ChtpWGlHYjKADGoGACQ7XMiShSk670.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/32/A7/autohomecar__ChxpV2lHYi2AAIaTACVo3QeOmT8073.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/32/AF/autohomecar__ChxpWGlHYiiAed-6ACM29O0GJ68772.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/32/A6/autohomecar__ChxpV2lHYieALV_ZACMOxPsIsaE683.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/32/AF/autohomecar__ChxpWGlHYiqAZIwBACLLhn3joVA765.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/32/AE/autohomecar__ChxpWGlHYiaATOW9AB9ARuUHTC0614.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M02/32/A7/autohomecar__ChxpV2lHYjSAR_O1ACuvxpBPXn0687.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M08/32/65/autohomecar__ChtpWGlHYiaAN_RdABtgRgCSKnE525.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/32/AE/autohomecar__ChxpWGlHYiaAe_q7ACCqhzJ3A_s169.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/32/B0/autohomecar__ChxpWGlHYj2ADYBzACevG0wJQu4669.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/DC/10/autohomecar__ChtpWGkAmw6AIRa_ACOZJJUfaL0581.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/DC/1E/autohomecar__ChxpV2kAmxeAFNNIACYWtyUkTXg104.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 245马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 245,
+                "rawValues": [
+                  "245"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 180,
+                "rawValues": [
+                  "180"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 245,
+            "sourcePrice": 499800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "73299",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 454900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/73299/",
+          "galleryUrls": [
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/FA/2E/autohomecar__ChxpV2kC5mmAfU76ACHx55vKuqM841.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/FA/21/autohomecar__ChtpWGkC5maAP-LFACEzytJPMBk379.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/FA/3A/autohomecar__ChxpWGkC5m6ADrwEACJ3LGEdI_c957.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/FA/37/autohomecar__ChxpWGkC5maACvKGACGMVwzdTmA904.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/FA/21/autohomecar__ChtpWGkC5mWAKqZpACIbndwBT-8074.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/FA/2D/autohomecar__ChxpV2kC5maAHUs9ACIkNkrNrl4044.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/FA/20/autohomecar__ChtpWGkC5mSALvQ6ACPsUrZ8EfI324.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/FA/37/autohomecar__ChxpWGkC5mWAPTPXACBREL2HTd8563.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/FD/17/autohomecar__ChxpVWkCQ6SAGGdiAD3ACBtxiCA44.jpeg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/E9/7E/autohomecar__ChxpVWkAwqaAJPGdABgMbR1bqIE654.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/9C/24/autohomecar__ChxpVmk6njuAN23FAC6smssgbTw475.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/9C/24/autohomecar__ChxpVWk6njmAeh6cAC0PJdcly6E397.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M03/9C/24/autohomecar__ChxpVWk6njiAHEDGACq-kpZiY9s175.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M03/9C/24/autohomecar__ChxpVWk6njaAFKPZAC21PWcB9sc836.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/9C/24/autohomecar__ChxpVmk6njSAPabuAC2vGJ2-vEg744.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/9C/24/autohomecar__ChxpVmk6njGAUX7SACkDlyfv4qA277.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/9C/24/autohomecar__ChxpVmk6njCAKP-vACidSeA5oWs028.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/9C/23/autohomecar__ChxpVWk6ni2AQmeYACmoyGyVfcQ807.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M05/9C/31/autohomecar__Chto52k6niyANLIJACXvxDqSldI889.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/9C/23/autohomecar__ChxpVWk6niuAXhquACGSvZivKwQ745.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M03/99/BB/autohomecar__ChxpV2k6ndiAQpzDACsNPXz3TbY628.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M06/99/C4/autohomecar__ChxpWGk6ndaAadxXACvuGIrwNnU138.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M07/99/C4/autohomecar__ChxpWGk6ndSABEvrACETavVzuBI675.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/99/BA/autohomecar__ChxpV2k6ndKAD4SJAC2sO6PgTNg152.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/99/BA/autohomecar__ChxpV2k6ndCAHP2qACZyUkXJb60065.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/99/C3/autohomecar__ChxpWGk6nc6AJT_eACeocvxjDQ8752.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/99/BA/autohomecar__ChxpV2k6ncyAWsDeACUdVVkBfJ8879.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M0A/99/C3/autohomecar__ChxpWGk6ncqAFEaxACNkRo9KVW8318.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/99/90/autohomecar__ChtpWGk6ncmAVYhfACLqwgg6_4Q287.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M09/99/8F/autohomecar__ChtpWGk6nceALbqaACnOzE7UgTA541.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 245马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 245,
+                "rawValues": [
+                  "245"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 180,
+                "rawValues": [
+                  "180"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 245,
+            "sourcePrice": 454900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "76524",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 403900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 10,
+          "sourceUrl": "https://www.autohome.com.cn/spec/76524/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g34/M01/D2/5E/autohomecar__ChxpV2mzxpSAD8mFACqpTCYAXnU916.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M09/CD/48/autohomecar__Chto52mzxp-ATC17ACrEFoaPE6A389.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M06/CD/38/autohomecar__ChxpVWmzxqyALmVkACmrMcNmC5k017.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M07/D2/5B/autohomecar__ChxpWGmzxk6ADZVZACOL0EUU-pM910.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/D1/D4/autohomecar__ChtpWGmzxnyAWmsiACmTIp2Uu1w886.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M00/CD/38/autohomecar__ChxpVWmzxqiARwg3AB90rI8JLmI758.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/CD/33/autohomecar__ChxpVWmzxk-ABo70ACSfMi464Gw697.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M02/D2/54/autohomecar__ChxpV2mzxlWALn6pACIXY4J8trk174.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/CD/3B/autohomecar__ChxpVmmzxr6AY2gsACszSc--RmE589.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M00/CD/32/autohomecar__ChxpVWmzxkKAKxhQABrfTx7Cuug789.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "hybrid",
+                "rawValues": [
+                  "油电混合"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "other_hybrid",
+                "rawValues": [
+                  "油电混合"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 272马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "272"
+                ],
+                "status": "missing"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "rawValues": [
+                  "200"
+                ],
+                "status": "missing"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "hybrid",
+            "sourcePrice": 403900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel"
+          ]
+        },
+        {
+          "sourceOfferId": "75152",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 367900,
+            "sourceCurrency": "CNY"
+          },
+          "images": 30,
+          "sourceUrl": "https://www.autohome.com.cn/spec/75152/",
+          "galleryUrls": [
+            "https://car3.autoimg.cn/cardfs/product/g34/M0A/BC/63/autohomecar__ChtpWGoNoryAQLkeAHuIfXzo7S4281.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/BE/BD/autohomecar__ChxpWGoNosiATna2AIRFl40e7Ac237.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/BE/BD/autohomecar__ChxpWGoNosaAesxfAIJw5c-B-7g353.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M08/C0/9B/autohomecar__Chto52oNosaAI3i-AIVSZ6xsXQ0763.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/C0/86/autohomecar__ChxpVmoNosaAZQ6rAIQVt7YRu78184.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M02/C0/86/autohomecar__ChxpVmoNosaAaSsNAIYe_WK1T0k841.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M01/BE/B4/autohomecar__ChxpV2oNosCAGv4kAIPyYy_nQQ8378.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/BE/BD/autohomecar__ChxpWGoNoseAfgcEAIp1G0eXzMM777.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/9F/96/autohomecar__ChxpVWojyE2AF67qAEVm9EuJ1lM498.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/9F/AB/autohomecar__Chto52ojyE-ABnI8AETMVZY-ynI756.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M07/63/7F/autohomecar__ChtpWGoekkGAMQw3ABk56-u3YDo623.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M06/69/BD/autohomecar__Chto52oekkGAMYW6ADhTbqSDedI219.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/69/BD/autohomecar__Chto52oekkGACxAzAD8kEW5Ch8Y135.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M04/65/D8/autohomecar__ChxpWGoekkGAfI4DACIf4uIb5N0617.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M05/65/D1/autohomecar__ChxpV2oekkCAMhw3ABUU7ILXyeg202.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g34/M05/63/7F/autohomecar__ChtpWGoekkGAblmvABTQpL3Ud3c162.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M00/63/7F/autohomecar__ChtpWGoekkOAJM9FAB8OGzWyl8E023.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M03/69/A9/autohomecar__ChxpVmoekkGADNTCAB3EuKLY_WE111.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M03/65/D8/autohomecar__ChxpWGoekkCASDsGABeFThhxArY947.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M06/65/D1/autohomecar__ChxpV2oekkGAaNzEABtmHvMfzoI349.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M0B/69/BE/autohomecar__Chto52oekk2AQvQWABxYW_C8PDk465.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g34/M0B/65/D1/autohomecar__ChxpV2oekk2AbhAqABiRf53SMoQ686.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0B/69/AA/autohomecar__ChxpVmoekkyAEX_6ABqp3YoaMdA904.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M07/69/AA/autohomecar__ChxpVmoekkyAdvFhABiaqWY40kE421.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M01/69/BE/autohomecar__Chto52oekkyAWChqABgQv7rug-o602.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/69/BD/autohomecar__Chto52oekkmAdc-rABfuLe3-Juo378.jpg",
+            "https://car3.autoimg.cn/cardfs/product/g33/M07/69/A9/autohomecar__ChxpVWoekkmAJP35ABS3iD5Yg0E988.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M08/69/A9/autohomecar__ChxpVWoekkmAD4A5ABUBSuqemj0016.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M0A/69/A9/autohomecar__ChxpVmoekkmADUPMABzIdBdce7A289.jpg",
+            "https://car2.autoimg.cn/cardfs/product/g33/M09/69/A9/autohomecar__ChxpVWoekkmAL76RABboBGw1PUg650.jpg"
+          ],
+          "sourceWitness": {
+            "boundParameters": null,
+            "semanticEvidence": {
+              "year": {
+                "source": "autohome_listing_and_detail_year",
+                "value": 2026,
+                "rawValues": [
+                  "2026"
+                ],
+                "status": "exact"
+              },
+              "fuel": {
+                "source": "autohome_named_energy_type",
+                "value": "petrol",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "powertrainKind": {
+                "source": "autohome_named_energy_type",
+                "value": "combustion",
+                "rawValues": [
+                  "汽油"
+                ],
+                "status": "exact"
+              },
+              "engineCc": {
+                "source": "autohome_named_engine",
+                "rawValues": [
+                  "2.0T 272马力 L4"
+                ],
+                "status": "ambiguous"
+              },
+              "powerHp": {
+                "source": "autohome_engine_section_max_power",
+                "value": 272,
+                "rawValues": [
+                  "272"
+                ],
+                "status": "exact"
+              },
+              "powerKw": {
+                "source": "autohome_engine_section_max_power",
+                "value": 200,
+                "rawValues": [
+                  "200"
+                ],
+                "status": "exact"
+              }
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 3,
+          "after": {
+            "year": 2026,
+            "fuel": "petrol",
+            "powerHp": 272,
+            "sourcePrice": 367900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": [
+            "fuel",
+            "powerHp"
+          ]
+        },
+        {
+          "sourceOfferId": "73302",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 558900,
+            "sourceCurrency": "CNY"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 1,
+          "after": {
+            "year": 2026,
+            "sourcePrice": 558900,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "76525",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 480700,
+            "sourceCurrency": "CNY"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2026,
+            "sourcePrice": 480700,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "77192",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 175800,
+            "sourceCurrency": "CNY"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2026,
+            "sourcePrice": 175800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "77191",
+          "yearAllowed": true,
+          "before": {
+            "year": 2026,
+            "sourcePrice": 159800,
+            "sourceCurrency": "CNY"
+          },
+          "error": "pilot_request_outside_envelope",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2026,
+            "sourcePrice": 159800,
+            "sourceCurrency": "CNY"
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 104,
+          "diagnostics": null,
+          "health": {
+            "ok": true,
+            "message": "Autohome new exact list page=1 items=104",
+            "checkedAt": "2026-09-07T03:23:36.842Z",
+            "httpStatus": 200,
+            "contentType": "text/html; charset=gb2312"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "Autohome new exact list page=1 items=104",
+        "checkedAt": "2026-09-07T03:23:36.842Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=gb2312"
+      },
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 104,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 104,
+        "unexaminedRows": 84,
+        "examined": 20,
+        "detailWorkBlocked": 4,
+        "calculated": 0,
+        "allowedYearExamined": 20,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 16,
+          "pilot_request_outside_envelope": 4
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "74645",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2025,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73546",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2025,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "78551",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2026,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "74646",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2025,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "78891",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2026,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73386",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2025,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "76557",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2026,
+          "fuel": "electric",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "77686",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2026,
+          "fuel": "electric",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "76837",
+          "make": "方程豹",
+          "model": "钛7",
+          "year": 2026,
+          "fuel": "electric",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73298",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 190,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "77007",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 204,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73300",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 245,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73301",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 245,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73299",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 245,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "76524",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "75152",
+          "make": "奥迪",
+          "model": "奥迪A6L",
+          "year": 2026,
+          "powerHp": 272,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "73302",
+          "make": "",
+          "model": "",
+          "year": 2026,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "76525",
+          "make": "",
+          "model": "",
+          "year": 2026,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "77192",
+          "make": "",
+          "model": "",
+          "year": 2026,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "77191",
+          "make": "",
+          "model": "",
+          "year": 2026,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+  "businessSettings": {
+    "china": {
+      "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+      "profileSource": "production_crm_version",
+      "provisional": false,
+      "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+      "effectiveExpenses": {
+        "topAvtoCommissionRub": 90000,
+        "securityDepositRub": 160000,
+        "contractInitialPaymentRub": 250000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 80000,
+        "logisticsRub": 150000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

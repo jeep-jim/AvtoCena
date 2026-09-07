@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+const { catalogOfferFreshness, catalogMarketRetentionMs, catalogOfferConfirmedWithdrawn, observeCatalogOffer, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { needsSourceDetailFactRefresh } = await import("../apps/web/lib/catalog/importer-impl.ts");
@@ -31,7 +32,7 @@ const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUI
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
 const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
 const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100_000));
-const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
+const retentionMs = catalogMarketRetentionMs(market);
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 100_000));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 1_000_000));
 const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 1_000));
@@ -68,7 +69,7 @@ function images(list) {
   }
   return result;
 }
-function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
+function firstSeen(offer) { return catalogOfferFreshness(offer); }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
 function hasVerifiedAutoPapaPrice(offer) {
   if (String(offer?.sourceId || "") !== "autopapa_georgia_open") return true;
@@ -121,6 +122,14 @@ const detailSuccessBySource = new Map(sourceIds.map((id) => [id, 0]));
 const detailDeferredBySource = new Map(sourceIds.map((id) => [id, 0]));
 const errors = [];
 const sourceReports = [];
+const confirmedWithdrawals = new Map();
+function recordWithdrawal(offer, status = offer.status) {
+  const observedAt = new Date().toISOString();
+  confirmedWithdrawals.set(offer.id, { id: offer.id, sourceId: offer.sourceId, sourceOfferId: offer.sourceOfferId, market, status, observedAt });
+  retained.get(offer.sourceId)?.delete(offer.id);
+  fresh.get(offer.sourceId)?.delete(offer.id);
+  reject("source_confirmed_withdrawn");
+}
 const rejections = {};
 let pages = 0;
 let seen = 0;
@@ -180,6 +189,7 @@ function report(stopReason = "running") {
       candidateCount: offers.length, publishEligibleCount: classification.publishEligible,
       candidateRejectionReasons: classification.reasons, candidatePoolsLoaded, candidatePoolsPersisted,
       retentionMs, pages, seen, normalized, knowledgeEnriched, detailEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
+      confirmedWithdrawals: [...confirmedWithdrawals.values()],
       imageStats: {
         minimum: imageCounts.length ? Math.min(...imageCounts) : 0,
         maximum: imageCounts.length ? Math.max(...imageCounts) : 0,
@@ -235,8 +245,8 @@ for (const sourceId of sourceIds) {
     const rows = await readChunkedDataJson(candidatePath(sourceId), []);
     const bucket = retained.get(sourceId);
     for (const row of rows.sort(quality)) {
-      if (!row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
-      const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+      if (!row?.id || row.status !== "active" || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+      const offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(row), images: images(row.images) });
       if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) {
         bucket.set(offer.id, offer);
         candidatePoolsLoaded++;
@@ -255,8 +265,8 @@ for (const row of [...publicRows, ...internalRows].sort(quality)) {
   const sourceId = String(row?.sourceId || "");
   const bucket = retained.get(sourceId);
   if (!bucket || !row?.id || !catalogRetainedOfferBelongsToPartition(row.id, partitionFor(sourceId))
-    || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
-  const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+    || row.status !== "active" || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+  const offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(row), images: images(row.images) });
   if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) bucket.set(offer.id, offer);
 }
 await checkpoint("retention_loaded");
@@ -309,18 +319,24 @@ async function prepare(base, source) {
   const mandatoryPhotoMissing = gallery.length < minimumImages;
   const priorityGalleryMissing = gallery.length < preferredImages && isMassMarketPriority(offer);
   const detailFactsNeeded = needsSourceDetailFactRefresh(offer) && !hasVerifiedAutoPapaPrice(offer);
-  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded;
+  const detailNeeded = typeof source?.refreshOffer === "function" || mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded;
   let detailDeferredForOffer = false;
 
   if (detailNeeded && source?.fetchImages && !expired()) {
     if (reserveDetail(String(offer.sourceId))) {
       try {
-        const detailedImages = (await source.fetchImages(offer)) || [];
+        const detailedImages = typeof source.refreshOffer === "function"
+          ? (offer = await source.refreshOffer(offer)).images || []
+          : (await source.fetchImages(offer)) || [];
         offer = normalizeVehicleOfferSpecs(offer);
         gallery = images([...gallery, ...detailedImages]);
         detailEnriched++;
         detailSuccessBySource.set(String(offer.sourceId), Number(detailSuccessBySource.get(String(offer.sourceId)) || 0) + 1);
       } catch (error) {
+        if (sourceId === "kcar_korea_open" && String(error?.message || "") === `kcar_exact_detail_sold_${offer.sourceOfferId}`) {
+          recordWithdrawal(offer, "sold");
+          return null;
+        }
         addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery_detail", error: String(error?.message || error) });
       }
     } else {
@@ -328,6 +344,12 @@ async function prepare(base, source) {
       detailDeferredForOffer = true;
       detailDeferredBySource.set(String(offer.sourceId), Number(detailDeferredBySource.get(String(offer.sourceId)) || 0) + 1);
     }
+  }
+
+  if (offer.status !== "active" || catalogOfferConfirmedWithdrawn(offer)) {
+    if (catalogOfferConfirmedWithdrawn(offer)) recordWithdrawal(offer);
+    else reject("source_not_active");
+    return null;
   }
 
   if (sourceId === "autopapa_georgia_open" && !hasVerifiedAutoPapaPrice(offer)) { reject("source_detail_price"); return null; }
@@ -379,7 +401,13 @@ async function fetchOne(state) {
   for (const raw of rows) {
     let base = null;
     try { base = state.source.normalizeOffer(raw); } catch { base = null; }
-    if (!base?.id || base.market !== market || base.sourceId !== state.sourceId || bucket.has(base.id) || batch.has(base.id)) continue;
+    if (!base?.id || base.market !== market || base.sourceId !== state.sourceId) continue;
+    if (catalogOfferConfirmedWithdrawn(base)) {
+      recordWithdrawal(base);
+      continue;
+    }
+    if (base.status !== "active" || bucket.has(base.id) || batch.has(base.id)) continue;
+    base = observeCatalogOffer(base, new Date().toISOString());
     batch.add(base.id); bases.push(base); normalized++;
     if (bases.length >= targetPerSource - bucket.size) break;
   }

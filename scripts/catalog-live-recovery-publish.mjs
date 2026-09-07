@@ -1,3 +1,5 @@
+const { catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
 
@@ -19,7 +21,7 @@ const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET |
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
-const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
+const retentionMs = catalogMarketRetentionMs(market);
 const retentionCutoff = Date.now() - retentionMs;
 const configuredMinPreviousRatio = Number(process.env.RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO || 0);
 const minPreviousRatio = Number.isFinite(configuredMinPreviousRatio)
@@ -169,14 +171,10 @@ function publicExistingStillValid(offer) {
     && publishableCalculation(offer)
     && isCatalogOfferBusinessLiquid(offer);
 }
-function freshness(offer) {
-  return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
-}
-function withinRetention(offer) {
-  const timestamp = freshness(offer);
-  return timestamp > 0 && timestamp >= retentionCutoff;
-}
+function freshness(offer) { return catalogOfferFreshness(offer); }
+function withinRetention(offer) { return catalogOfferWithinRetention(offer); }
 function normalizeVisible(raw) {
+  raw = preserveCatalogOfferObservation(raw);
   const op = raw?.operational || {};
   const sourceRaw = op?.raw || {};
   const exactPhoto = sourceRaw.recoveryExactPhotoIdentity === true;
@@ -186,7 +184,7 @@ function normalizeVisible(raw) {
   return normalizeVehicleOfferSpecs({
     ...raw,
     ...identity,
-    status: "active",
+    status: raw.market === "japan" ? "active" : raw.status || "active",
     images: credibleCatalogImages(raw?.images || []).slice(0, 30),
     operational: {
       ...op,
@@ -241,7 +239,8 @@ function applyPerModelYearCap(rows, rejected) {
 }
 
 const payload = JSON.parse(await fs.readFile(input, "utf8"));
-const sourceRows = Array.isArray(payload?.offers) ? payload.offers : [];
+const confirmedWithdrawals = catalogConfirmedWithdrawalIndex([payload], market);
+  const sourceRows = (Array.isArray(payload?.offers) ? payload.offers : []).filter((offer) => !catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) && catalogOfferWithinRetention(offer));
 const rejected = {};
 function reject(reason) { rejected[reason] = Number(rejected[reason] || 0) + 1; }
 
@@ -265,11 +264,11 @@ let previousMarket = [];
 try { previousMarket = await readMarketOffers(market); } catch { previousMarket = []; }
 const candidates = new Map();
 const retainedPreviousMarket = [];
-for (const offer of await repriceRowsWithCurrentRates(previousMarket)) {
+for (const offer of await repriceRowsWithCurrentRates(previousMarket.filter((offer) => !catalogOfferWithdrawnByReport(offer, confirmedWithdrawals)))) {
   const year = Number(offer?.year || 0);
   if (!offer?.id || !["active", "stale"].includes(String(offer?.status || ""))) continue;
   if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
-  if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
+  if (catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) || !withinRetention(offer) || !publicExistingStillValid(offer)) continue;
   candidates.set(offer.id, offer);
   retainedPreviousMarket.push(offer);
 }

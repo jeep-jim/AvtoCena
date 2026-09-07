@@ -1,13 +1,10 @@
 import type { VehicleOffer } from "./types";
 
+// Owner hard ceiling: environment settings may narrow it, never raise it.
 const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL_YEAR || 20);
 export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredMaxOffersPerModelYear)
-  ? Math.max(1, Math.min(100, Math.floor(configuredMaxOffersPerModelYear)))
-  : 20;
-const configuredJapanMaxOffersPerModelYear = Number(process.env.CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR || 100);
-export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredJapanMaxOffersPerModelYear)
-  ? Math.max(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, Math.min(100, Math.floor(configuredJapanMaxOffersPerModelYear)))
-  : 100;
+  ? Math.max(1, Math.min(20, Math.floor(configuredMaxOffersPerModelYear))) : 20;
+export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
 export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
@@ -20,9 +17,14 @@ function positivePowerHp(value: unknown) {
   return Number.isFinite(power) && power > 0 && power <= 2_500 ? power : 0;
 }
 
-function isShowcaseLowPower(row: { powerHp?: unknown }) {
+export function isCatalogCombustionLowPower(row: { powerHp?: unknown; fuel?: unknown; powertrainKind?: unknown }, maximum = 160) {
+  const kind = clean(row.powertrainKind);
+  const fuel = clean(row.fuel);
+  if (/hybrid|electric|battery|phev|hev|mhev|гибрид|электр/.test(`${kind} ${fuel}`)) return false;
+  if (kind && kind !== "combustion") return false;
+  if (!kind && !/petrol|gasoline|diesel|lpg|cng|бензин|дизель|газ/.test(fuel)) return false;
   const power = positivePowerHp(row.powerHp);
-  return power > 0 && power <= CATALOG_SHOWCASE_MAX_POWER_HP;
+  return power > 0 && power <= Math.min(CATALOG_SHOWCASE_MAX_POWER_HP, maximum);
 }
 
 /**
@@ -65,22 +67,10 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   const counts = new Map<string, number>();
   const kept: T[] = [];
   const removed: T[] = [];
-  for (const row of rows) {
+  for (const row of [...rows].sort((a, b) => Number(options.protectedIds?.has(String(b.id)) === true) - Number(options.protectedIds?.has(String(a.id)) === true))) {
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
-    // Historical auction lots are individually sold vehicles, not duplicated
-    // dealer stock. A global 20-card showcase cap silently removed thousands of
-    // valid JPAuc lots on every weekly Japan refresh. Keep a bounded 100-card
-    // Japan bucket while the normal six-market diversity cap remains at 20.
-    const limit = key.startsWith("japan|")
-      ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR
-      : CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
-    const protectedRow = options.protectedIds?.has(String(row?.id || "")) === true;
-    if (protectedRow) {
-      if (key) counts.set(key, count + 1);
-      kept.push(row);
-      continue;
-    }
+    const limit = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
     if (!key || count >= limit) {
       removed.push(row);
       continue;
@@ -99,7 +89,7 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
  * share is satisfied. Inside each pool we still prefer a new make first, then a
  * new exact model, and finally duplicate models, preserving the caller's order.
  */
-export function selectCatalogShowcaseDiversity<T extends { market?: unknown; make?: unknown; model?: unknown; powerHp?: unknown }>(
+export function selectCatalogShowcaseDiversity<T extends { market?: unknown; make?: unknown; model?: unknown; powerHp?: unknown; fuel?: unknown; powertrainKind?: unknown }>(
   rows: readonly T[],
   limit: number,
 ) {
@@ -133,14 +123,25 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
       append(row);
       if (selected.length >= target) return;
     }
+    // Round-robin exact models, so many Camry years cannot exhaust the slots.
+    const buckets = new Map<string, T[]>();
     for (const row of pool) {
       if (selectedRows.has(row)) continue;
-      append(row);
-      if (selected.length >= target) return;
+      const key = catalogExactModelKey(row as Partial<VehicleOffer>);
+      buckets.set(key, [...(buckets.get(key) || []), row]);
+    }
+    for (let round = 0; selected.length < target; round++) {
+      let added = false;
+      for (const bucket of buckets.values()) {
+        if (!bucket[round]) continue;
+        append(bucket[round]); added = true;
+        if (selected.length >= target) return;
+      }
+      if (!added) break;
     }
   };
 
-  const lowPowerRows = rows.filter(isShowcaseLowPower);
+  const lowPowerRows = rows.filter(row => isCatalogCombustionLowPower(row));
   const requestedLowPower = Math.ceil(boundedLimit * CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE);
   const lowPowerTarget = Math.min(requestedLowPower, lowPowerRows.length);
   fillDiverse(lowPowerRows, lowPowerTarget);

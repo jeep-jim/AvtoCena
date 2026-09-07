@@ -1,0 +1,116 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:21:05.085Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "korea",
+      "requests": [],
+      "sourceId": "encar_direct",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "status": "blocked_or_failed",
+      "error": "pilot_request_outside_envelope",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+  "businessSettings": {
+    "korea": {
+      "rawActiveVersion": null,
+      "effectiveVersion": "market_korea_system_average_v2",
+      "profileSource": "runtime_average_defaults",
+      "provisional": true,
+      "effectiveHash": "c5d5dc8cd2f72c8e6f3443dd65af6fdf422d962ea2100fd89db35c2e7a6e6235",
+      "effectiveExpenses": {
+        "securityDepositRub": 110000,
+        "topAvtoCommissionRub": 90000,
+        "contractInitialPaymentRub": 200000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 70000,
+        "logisticsRub": 250000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

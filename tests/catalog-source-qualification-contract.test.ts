@@ -54,7 +54,7 @@ test("qualification contract requires both source-level and offer-level proof", 
   assert.match(roadmap, /Не продолжать бесконечное точечное лечение прежних площадок/);
 });
 
-test("field-audit checkpoint remains no-write and does not silently promote candidates", () => {
+test("historical field audit stays no-write while later restrictive decisions remain valid", () => {
   assert.equal(fieldAuditSummary.productionWrites, false);
   assert.equal(fieldAuditSummary.classificationMutations, false);
   assert.equal(fieldAuditSummary.publishAllowedMutations, false);
@@ -67,9 +67,11 @@ test("field-audit checkpoint remains no-write and does not silently promote cand
   for (const sourceId of auditedSourceIds) {
     const candidate = ledger.candidates.find((row: any) => row.sourceId === sourceId);
     assert.ok(candidate, `missing candidate ${sourceId}`);
-    assert.equal(candidate.class, "research_pending");
+    // Later permission checkpoints can restrict a candidate without rewriting
+    // the earlier deferred audit. None of those decisions authorizes publication.
+    assert.ok(["research_pending", "lead_only", "rejected"].includes(candidate.class));
     assert.equal(candidate.publishAllowed, false);
-    assert.match(candidate.evidence, /field audit run 33731051049/);
+    assert.ok(String(candidate.evidence || "").length >= 12);
   }
 
   assert.match(fieldAuditEvidence, /classificationDecision=deferred/);
@@ -77,4 +79,15 @@ test("field-audit checkpoint remains no-write and does not silently promote cand
   assert.match(fieldAuditEvidence, /CarSwitch/);
   assert.match(fieldAuditEvidence, /CARS24 UAE/);
   assert.match(fieldAuditEvidence, /DubiCars/);
+});
+
+
+test("owner recovery decision cannot lift source or production permissions", () => {
+  assert.equal(ledger.publishAllowedMutations, false);
+  assert.equal(ledger.recoveryProgram.mode, "saved_catalog_repair_no_write");
+  assert.equal(ledger.recoveryProgram.minimumAutomaticCalculatedShare, 0.8);
+  assert.equal(ledger.recoveryProgram.manualScenarioCountsAsAutomatic, false);
+  assert.equal(ledger.recoveryProgram.databasePurchaseRequired, false);
+  assert.equal(ledger.recoveryProgram.markets.includes("japan"), false);
+  assert.equal(ledger.pausedMarkets.includes("japan"), true);
 });

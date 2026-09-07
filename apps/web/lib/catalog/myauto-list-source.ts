@@ -133,7 +133,15 @@ export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, exp
   if (expectedPhoto && photo !== expectedPhoto) return null;
   const galleryUrls = buildMyAutoLargePhotoUrls({ id, photo, count: info.pic_number, version: info.photo_ver });
   if (!galleryUrls.length) return null;
-  const engineCc = exactMetricEvidence([info.engine_volume, info.engine_cc], 300, 10_000);
+  const explicitCc = exactMetricEvidence([info.engine_cc], 300, 10_000);
+  const volume = exactMetricEvidence([info.engine_volume], 300, 10_000);
+  // Product engine_volume is also used for coarse engine-size labels. An
+  // integer such as 2000 does not prove a precise 2000 cc displacement.
+  const engineCc: MyAutoMetricEvidence = explicitCc.status !== "missing"
+    ? explicitCc.status === "exact" && volume.status === "exact" && explicitCc.value !== volume.value
+      ? { rawValues: [...explicitCc.rawValues, ...volume.rawValues], status: "conflict" }
+      : explicitCc
+    : volume.status === "missing" ? volume : { rawValues: volume.rawValues, status: "ambiguous" };
   const powerHp = exactMetricEvidence([info.power_hp, info.horsepower], 20, 2_500);
   return {
     galleryUrls,
@@ -141,6 +149,40 @@ export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, exp
     powerHp: powerHp.status === "exact" ? powerHp.value : undefined,
     semanticEvidence: { engineCc, powerHp },
   };
+}
+
+/** Both the direct collector and the existing recovery bridge use this evidence. */
+export function applyMyAutoProductSpecifications(offer: VehicleOffer, snapshot: MyAutoProductSnapshot | null) {
+  const productEvidence = snapshot?.semanticEvidence || {
+    engineCc: exactMetricEvidence([], 300, 10_000),
+    powerHp: exactMetricEvidence([], 20, 2_500),
+  };
+  const engineEvidence = offer.powertrainKind === "electric" && productEvidence.engineCc.status === "exact"
+    ? { ...productEvidence.engineCc, value: undefined, status: "conflict" as const }
+    : productEvidence.engineCc;
+  offer.engineCc = engineEvidence.status === "exact" ? engineEvidence.value : undefined;
+  if (productEvidence.powerHp.status === "exact" && productEvidence.powerHp.value) {
+    offer.powerHp = productEvidence.powerHp.value;
+    offer.powerKw = Math.round(productEvidence.powerHp.value * 0.73549875 * 10) / 10;
+    offer.powerDataConfidence = "source_exact";
+    offer.powerDataSource = "MyAuto product API";
+  } else {
+    offer.powerHp = undefined;
+    offer.powerKw = undefined;
+    offer.icePowerKw = undefined;
+    offer.utilizationPowerKw = undefined;
+    offer.powerDataConfidence = undefined;
+    offer.powerDataSource = undefined;
+  }
+  offer.operational = {
+    ...(offer.operational || {}),
+    semanticEvidence: {
+      ...((offer.operational as any)?.semanticEvidence || {}),
+      engineCc: { source: "myauto_product_api", ...engineEvidence },
+      powerHp: { source: "myauto_product_api", ...productEvidence.powerHp },
+    },
+  };
+  return offer;
 }
 
 async function fetchMyAutoProductSnapshot(id: string, expectedPhoto?: string) {
@@ -372,34 +414,9 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       .filter((url) => Boolean(parseMyAutoListingImageUrl(url, sourceId)));
     const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
     const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(() => null);
-    const productEvidence = snapshot?.semanticEvidence || {
-      engineCc: exactMetricEvidence([], 300, 10_000),
-      powerHp: exactMetricEvidence([], 20, 2_500),
-    };
-    const engineEvidence = offer.powertrainKind === "electric" && productEvidence.engineCc.status === "exact"
-      ? { ...productEvidence.engineCc, value: undefined, status: "conflict" as const }
-      : productEvidence.engineCc;
-    offer.engineCc = engineEvidence.status === "exact" ? engineEvidence.value : undefined;
-    if (productEvidence.powerHp.status === "exact" && productEvidence.powerHp.value) {
-      offer.powerHp = productEvidence.powerHp.value;
-      offer.powerKw = Math.round(productEvidence.powerHp.value * 0.73549875 * 10) / 10;
-      offer.powerDataConfidence = "source_exact";
-      offer.powerDataSource = "MyAuto product API";
-    } else {
-      offer.powerHp = undefined;
-      offer.powerKw = undefined;
-      offer.icePowerKw = undefined;
-      offer.utilizationPowerKw = undefined;
-      offer.powerDataConfidence = undefined;
-      offer.powerDataSource = undefined;
-    }
+    applyMyAutoProductSpecifications(offer, snapshot);
     offer.operational = {
       ...(offer.operational || {}),
-      semanticEvidence: {
-        ...((offer.operational as any)?.semanticEvidence || {}),
-        engineCc: { source: "myauto_product_api", ...engineEvidence },
-        powerHp: { source: "myauto_product_api", ...productEvidence.powerHp },
-      },
       raw: {
         ...((offer.operational?.raw as Record<string, unknown> | undefined) || {}),
         productSnapshotIdentityVerified: Boolean(snapshot),
@@ -408,6 +425,9 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
     const exactGallery = snapshot?.galleryUrls || [];
     const urls = exactGallery.length ? exactGallery : listingUrls;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    if ((process.env.CATALOG_IMAGE_STORAGE_MODE || "source_urls_only").trim().toLowerCase() === "source_urls_only") {
+      return urls.slice(0, limit).map(url => ({ id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" }));
+    }
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit)) {
       const image = await cacheImageFromUrl(url, "georgia", { headers: { ...HEADERS, referer: offer.operational.sourceUrl || "https://www.myauto.ge/en/main" } }).catch(() => null);

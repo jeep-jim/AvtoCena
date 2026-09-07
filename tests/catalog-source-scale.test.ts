@@ -47,7 +47,7 @@ const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpe
 test("source-scale catalog supports 100000 verified offers per source and market", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 100_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 100_000);
-  assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
+  assert.equal(CATALOG_RETENTION_MS, 14 * 24 * 60 * 60 * 1_000);
   assert.match(rebuildScript, /minimumMarketTarget/);
   assert.match(rebuildScript, /targetPerSource/);
   assert.match(publishScript, /targetPerMarket/);
@@ -73,7 +73,7 @@ test("Catalog V2 uses canonical sources, 100000 capacity and progressive galleri
   assert.match(workflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_V2_HARD_MAX_TOTAL_RUB: "100000000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);

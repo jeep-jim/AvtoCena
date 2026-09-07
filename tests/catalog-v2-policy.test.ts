@@ -206,3 +206,42 @@ test("incomplete calculation remains eligible inventory but cannot masquerade as
   assert.equal(selected.selected.length, 1);
   assert.equal(selected.lowPowerCount, 0);
 });
+
+
+test("hybrids, EVs and unknown engines never count as the cheap combustion power group", () => {
+  for (const patch of [
+    { fuel: "hybrid", powertrainKind: "other_hybrid" },
+    { fuel: "hybrid", powertrainKind: "series_hybrid" },
+    { fuel: "electric", powertrainKind: "electric" },
+    { fuel: "hybrid", powertrainKind: "combustion" },
+    { fuel: undefined, powertrainKind: "unknown" },
+  ] as Partial<VehicleOffer>[]) {
+    const row = offer("electrified", { ...patch, powerHp: 150 });
+    assert.equal(isCatalogLowPowerOffer(row), false);
+    assert.equal(classifyCatalogV2Offer(row).tier, "recent");
+    assert.equal(classifyCatalogV2Offer(row).eligible, true);
+  }
+});
+
+test("one hundred Camry rows cannot crowd seven other available models out of a limited market", () => {
+  const rows = [
+    ...Array.from({ length: 100 }, (_, i) => offer(`camry-${i}`, { make: "Toyota", model: "Camry", year: 2020 + i % 5 })),
+    ...["Corolla", "Yaris", "RAV4", "Prius", "Auris", "Avensis", "C-HR"].map(model => offer(model, { make: "Toyota", model })),
+  ];
+  const result = selectCatalogV2MarketOffers(rows, policy({ maximumPerMarket: 10 }));
+  assert.equal(new Set(result.selected.map(row => row.model)).size, 8);
+  assert.equal(result.selected.filter(row => row.model === "Camry").length, 3);
+});
+
+test("market selection caps each model-year across different source websites", () => {
+  const rows = Array.from({ length: 80 }, (_, i) => offer(`same-${i}`, { sourceId: i % 2 ? "encar_direct" : "kcar_korea_open" }));
+  const result = selectCatalogV2MarketOffers(rows);
+  assert.equal(result.selected.length, 20);
+  assert.equal(result.rejected.model_year_quota, 60);
+});
+
+test("public price ceiling remains fifteen million even if a legacy caller supplies a higher cap", () => {
+  const row = offer("luxury", { totalRub: 15_000_001 });
+  assert.equal(classifyCatalogV2Offer(row).reason, "hard_price_cap");
+  assert.equal(classifyCatalogV2Offer(row, policy({ hardMaxTotalRub: 100_000_000 })).reason, "hard_price_cap");
+});

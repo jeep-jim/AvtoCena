@@ -48,7 +48,7 @@ test("DubiCars exact specs own make, model and trim instead of marketing h1 text
   assert.equal(row.make, "Nissan");
   assert.equal(row.model, "Patrol");
   assert.equal(row.trim, "LE T1 5.6L");
-  assert.equal(row.engineCc, 5600);
+  assert.equal(row.engineCc, undefined);
   assert.equal(row.powerHp, 400);
   assert.equal(row.price, 215_000);
   assert.equal(row.images.length, 2);
@@ -160,7 +160,7 @@ test("Catalog V2 probes every configured slot but always crawls mandatory source
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(probe, /requiredSourceIdsForShard/);
   assert.match(probe, /sourceIdsForRebuildList = \[\.\.\.new Set\(\[\.\.\.requiredSourceIdsForShard, \.\.\.activeSourceIds\]\)\]/);
   assert.match(probe, /sourceIdsForRebuild = sourceIdsForRebuildList\.join/);
@@ -197,7 +197,7 @@ test("priority galleries preserve listing photos and enrich detail progressively
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
   assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"/);
-  assert.match(rebuild, /const detailNeeded = mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
+  assert.match(rebuild, /const detailNeeded = typeof source\?\.refreshOffer === "function" \|\| mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
   assert.match(rebuild, /reserveDetail/);
   assert.match(rebuild, /detailDeferredBySource/);
   assert.match(rebuild, /source\.fetchImages\(offer\)/);

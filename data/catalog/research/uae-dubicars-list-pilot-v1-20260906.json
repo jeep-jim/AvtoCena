@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:30:45.760Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": false,
+  "pricesCalculated": false,
+  "maxRequestsPerSource": 1,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/uae/used",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "sourceId": "dubicars_uae_exact",
+      "status": "blocked_or_failed",
+      "error": "dubicars_current_zero"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "First listing response only, not a complete collection or calculation acceptance test. Network/proxy errors do not prove source unavailability."
+}

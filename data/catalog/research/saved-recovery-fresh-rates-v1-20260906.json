@@ -1,0 +1,4514 @@
+{
+  "version": 1,
+  "phase": "saved_recovery_dry_run",
+  "checkedAt": "2026-09-06T09:18:45.090Z",
+  "commit": "c66e2818ac429cd9af2dfe92a83b3a4df7200165",
+  "productionWrites": false,
+  "publishAllowedMutations": false,
+  "sourceRequests": 0,
+  "japanRequests": 0,
+  "generationId": "gen_1788253861283_69bb1d29",
+  "generationUpdatedAt": "2026-09-01T09:11:01.283Z",
+  "markets": {
+    "korea": {
+      "manifestCount": 2840,
+      "readRows": 2840,
+      "uniqueRows": 2840,
+      "legacyPriced": 2840,
+      "evidenceComplete": 0,
+      "evidenceCompleteAndPriced": 0,
+      "expired": 0,
+      "states": {
+        "year:exact:valid_source_year": 2840,
+        "fuelPowertrain:ambiguous:unclassified_field_provenance": 2840,
+        "engineCc:ambiguous:unclassified_field_provenance": 2713,
+        "powerHp:exact:usable_peak_power": 1899,
+        "certifiedPower:not_applicable:combustion_vehicle": 2713,
+        "powerHp:ambiguous:non_exact_power_provenance": 941,
+        "engineCc:not_applicable:electric_vehicle": 127,
+        "certifiedPower:exact:usable_certified_30min_power": 127
+      },
+      "blockers": {
+        "no_existing_specification_blocker": 2840
+      },
+      "samples": [
+        {
+          "id": "b16e511a14a897a232c9da07",
+          "sourceId": "kcar_korea_open",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "year": 2026,
+          "sourcePrice": 15200000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 998,
+          "powerHp": 76,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "c77f1f861f1d048fb1f9b610",
+          "sourceId": "kcar_korea_open",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "year": 2026,
+          "sourcePrice": 17500000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 998,
+          "powerHp": 76,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "62cbf7b61fc84ab0c5ef834b",
+          "sourceId": "kcar_korea_open",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "year": 2026,
+          "sourcePrice": 17900000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 998,
+          "powerHp": 76,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "947ee8982f576268a98ac5ed",
+          "sourceId": "kcar_korea_open",
+          "make": "Kia",
+          "model": "Ray",
+          "year": 2026,
+          "sourcePrice": 19500000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 998,
+          "powerHp": 76,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "558d6dfbdb240ef61337571a",
+          "sourceId": "kcar_korea_open",
+          "make": "Hyundai",
+          "model": "Avante (CN7)",
+          "year": 2026,
+          "sourcePrice": 25800000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1598,
+          "powerHp": 123,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "90a279b9d47a3016805ea379",
+          "sourceId": "kcar_korea_open",
+          "make": "Renault",
+          "model": "QM6 F/L",
+          "year": 2026,
+          "sourcePrice": 26500000,
+          "sourceCurrency": "KRW",
+          "fuel": "lpg",
+          "powertrainKind": "combustion",
+          "engineCc": 1998,
+          "powerHp": 140,
+          "powerDataSource": "kcar_exact_detail_rvo_hrspow",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "8514f261de877be05d5cd487",
+          "sourceId": "encar_direct",
+          "make": "Kia",
+          "model": "Niro",
+          "year": 2026,
+          "sourcePrice": 28300000,
+          "sourceCurrency": "KRW",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1580,
+          "powerHp": 105,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "f938a4d3942d97cb21371a4f",
+          "sourceId": "encar_direct",
+          "make": "Hyundai",
+          "model": "Casper",
+          "year": 2026,
+          "sourcePrice": 31500000,
+          "sourceCurrency": "KRW",
+          "fuel": "electric",
+          "powertrainKind": "electric",
+          "powerHp": 115.6,
+          "powerDataSource": "KBA_registration_data:KBA:8252/AMA",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "not_applicable",
+              "reason": "electric_vehicle",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "exact",
+              "reason": "usable_certified_30min_power",
+              "provenance": "source_evidence"
+            }
+          }
+        }
+      ]
+    },
+    "china": {
+      "manifestCount": 3092,
+      "readRows": 3092,
+      "uniqueRows": 3092,
+      "legacyPriced": 2995,
+      "evidenceComplete": 0,
+      "evidenceCompleteAndPriced": 0,
+      "expired": 0,
+      "states": {
+        "year:exact:valid_source_year": 3092,
+        "fuelPowertrain:ambiguous:unclassified_field_provenance": 2947,
+        "engineCc:ambiguous:unclassified_field_provenance": 3085,
+        "powerHp:exact:usable_peak_power": 2889,
+        "certifiedPower:not_applicable:combustion_vehicle": 3085,
+        "powerHp:ambiguous:non_exact_power_provenance": 106,
+        "fuelPowertrain:missing:fuel_or_powertrain_missing": 145,
+        "powerHp:conflict:powertrain_identity_conflict": 97,
+        "engineCc:not_applicable:electric_vehicle": 7,
+        "certifiedPower:exact:usable_certified_30min_power": 7
+      },
+      "blockers": {
+        "no_existing_specification_blocker": 2995,
+        "powertrain_identity_conflict": 97
+      },
+      "samples": [
+        {
+          "id": "2fa4bc18a1ca3c17551818ee",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "K5",
+          "year": 2026,
+          "sourcePrice": 47800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 120,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "9b3fb107e4ef80b900f7879a",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "K5",
+          "year": 2026,
+          "sourcePrice": 51800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 120,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "31b565a83621f71af68bab3e",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "K5",
+          "year": 2026,
+          "sourcePrice": 52800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 120,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "5e165e44d8d54acbac2232aa",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "K5",
+          "year": 2026,
+          "sourcePrice": 55800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 120,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "242fbce8f9aaa2562b63f169",
+          "sourceId": "autohome_used_china_open",
+          "make": "Nissan",
+          "model": "SYLPHY",
+          "year": 2026,
+          "sourcePrice": 8320,
+          "sourceCurrency": "USD",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 135,
+          "powerDataSource": "Che168 Global carinfo API",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "435f197a38a5d5fc8f64fc40",
+          "sourceId": "autohome_new_china_open",
+          "make": "Wuling",
+          "model": "Xing Chi",
+          "year": 2026,
+          "sourcePrice": 56800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1500,
+          "powerHp": 99,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "4a0a9233bf8e1ef80d5f1ced",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "K5",
+          "year": 2026,
+          "sourcePrice": 56800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 120,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "73fc99eb6e9fa5a08378ba62",
+          "sourceId": "autohome_new_china_open",
+          "make": "Changan",
+          "model": "V5",
+          "year": 2026,
+          "sourcePrice": 57800,
+          "sourceCurrency": "CNY",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1600,
+          "powerHp": 122,
+          "powerDataSource": "Autohome exact config: engine-section maximum power",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ]
+    },
+    "uae": {
+      "manifestCount": 4647,
+      "readRows": 4647,
+      "uniqueRows": 4647,
+      "legacyPriced": 4638,
+      "evidenceComplete": 0,
+      "evidenceCompleteAndPriced": 0,
+      "expired": 0,
+      "states": {
+        "year:exact:valid_source_year": 4647,
+        "fuelPowertrain:ambiguous:unclassified_field_provenance": 4639,
+        "engineCc:ambiguous:unclassified_field_provenance": 4646,
+        "powerHp:ambiguous:non_exact_power_provenance": 4531,
+        "certifiedPower:not_applicable:combustion_vehicle": 4646,
+        "powerHp:exact:usable_peak_power": 107,
+        "fuelPowertrain:missing:fuel_or_powertrain_missing": 8,
+        "powerHp:conflict:powertrain_identity_conflict": 9,
+        "engineCc:not_applicable:electric_vehicle": 1,
+        "certifiedPower:exact:usable_certified_30min_power": 1
+      },
+      "blockers": {
+        "no_existing_specification_blocker": 4638,
+        "powertrain_identity_conflict": 9
+      },
+      "samples": [
+        {
+          "id": "4decc0f52a16f7ddb4485e80",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Suzuki",
+          "model": "Celerio",
+          "year": 2026,
+          "sourcePrice": 36990,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "6bf8c91f9704aa729b7823b3",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "sourcePrice": 45000,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1499,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "6d77add7a9dc9279da3f1be0",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Suzuki",
+          "model": "Swift",
+          "year": 2026,
+          "sourcePrice": 45000,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1499,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "382528a78c67084ca39d8e60",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Suzuki",
+          "model": "Carry",
+          "year": 2026,
+          "sourcePrice": 45000,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1500,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "d86e5c04a31d855e8c0d01d3",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "sourcePrice": 47000,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1499,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "e66881e6b5725ae9c06d4f4a",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Nissan",
+          "model": "Magnite",
+          "year": 2026,
+          "sourcePrice": 47500,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1499,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "088b1ecde91d94ec4a88ca22",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Nissan",
+          "model": "Magnite",
+          "year": 2026,
+          "sourcePrice": 47500,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1499,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "01093a5e52f677aff1a590da",
+          "sourceId": "dubizzle_uae_open",
+          "make": "Nissan",
+          "model": "Sunny",
+          "year": 2026,
+          "sourcePrice": 43000,
+          "sourceCurrency": "AED",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 1999,
+          "powerHp": 99,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ]
+    },
+    "europe": {
+      "manifestCount": 5259,
+      "readRows": 5259,
+      "uniqueRows": 5259,
+      "legacyPriced": 5259,
+      "evidenceComplete": 0,
+      "evidenceCompleteAndPriced": 0,
+      "expired": 0,
+      "states": {
+        "year:exact:valid_source_year": 5259,
+        "fuelPowertrain:ambiguous:unclassified_field_provenance": 5259,
+        "engineCc:ambiguous:unclassified_field_provenance": 5256,
+        "powerHp:exact:usable_peak_power": 5257,
+        "certifiedPower:not_applicable:combustion_vehicle": 5256,
+        "powerHp:ambiguous:non_exact_power_provenance": 2,
+        "engineCc:not_applicable:electric_vehicle": 3,
+        "certifiedPower:exact:usable_certified_30min_power": 3
+      },
+      "blockers": {
+        "no_existing_specification_blocker": 5259
+      },
+      "samples": [
+        {
+          "id": "86805caa73f4c7d6948e6463",
+          "sourceId": "autoscout_europe_open",
+          "make": "Fiat",
+          "model": "Panda",
+          "year": 2026,
+          "sourcePrice": 8950,
+          "sourceCurrency": "EUR",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 69,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "876c0664f4c30937bfeeb43d",
+          "sourceId": "autoscout_europe_open",
+          "make": "Fiat",
+          "model": "Panda",
+          "year": 2026,
+          "sourcePrice": 8950,
+          "sourceCurrency": "EUR",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 69,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "e5146a6799eaf2160f50e68e",
+          "sourceId": "autoscout_europe_open",
+          "make": "Fiat",
+          "model": "Panda",
+          "year": 2026,
+          "sourcePrice": 8950,
+          "sourceCurrency": "EUR",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 69,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "3d25b8e538fadca54c47d003",
+          "sourceId": "autoscout_europe_open",
+          "make": "Renault",
+          "model": "Kangoo",
+          "year": 2026,
+          "sourcePrice": 13500,
+          "sourceCurrency": "EUR",
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "engineCc": 1461,
+          "powerHp": 116,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "49d0280e02383574e1008994",
+          "sourceId": "autoscout_europe_open",
+          "make": "Renault",
+          "model": "Kangoo",
+          "year": 2026,
+          "sourcePrice": 13500,
+          "sourceCurrency": "EUR",
+          "fuel": "diesel",
+          "powertrainKind": "combustion",
+          "engineCc": 1461,
+          "powerHp": 95,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "079397e9c2199f102c17ca60",
+          "sourceId": "autoscout_europe_open",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "sourcePrice": 13950,
+          "sourceCurrency": "EUR",
+          "fuel": "lpg",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 68,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "f2b4668f474c098c3ec969ef",
+          "sourceId": "autoscout_europe_open",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "sourcePrice": 13950,
+          "sourceCurrency": "EUR",
+          "fuel": "lpg",
+          "powertrainKind": "combustion",
+          "engineCc": 999,
+          "powerHp": 68,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "431b38f7ead325a3174bb6f5",
+          "sourceId": "autoscout_europe_open",
+          "make": "Dacia",
+          "model": "Jogger",
+          "year": 2026,
+          "sourcePrice": 15950,
+          "sourceCurrency": "EUR",
+          "fuel": "lpg",
+          "powertrainKind": "combustion",
+          "engineCc": 1199,
+          "powerHp": 122,
+          "powerDataSource": "AutoScout24 vehicleDetails",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ]
+    },
+    "georgia": {
+      "manifestCount": 216,
+      "readRows": 216,
+      "uniqueRows": 216,
+      "legacyPriced": 216,
+      "evidenceComplete": 0,
+      "evidenceCompleteAndPriced": 0,
+      "expired": 0,
+      "states": {
+        "year:exact:valid_source_year": 216,
+        "fuelPowertrain:ambiguous:unclassified_field_provenance": 216,
+        "engineCc:ambiguous:unclassified_field_provenance": 215,
+        "powerHp:ambiguous:non_exact_power_provenance": 161,
+        "certifiedPower:not_applicable:combustion_vehicle": 215,
+        "powerHp:exact:usable_peak_power": 55,
+        "engineCc:not_applicable:electric_vehicle": 1,
+        "certifiedPower:exact:usable_certified_30min_power": 1
+      },
+      "blockers": {
+        "no_existing_specification_blocker": 216
+      },
+      "samples": [
+        {
+          "id": "9f1115bb936345fba656dd82",
+          "sourceId": "myauto_georgia_list",
+          "make": "Mazda",
+          "model": "CX-30",
+          "year": 2026,
+          "sourcePrice": 72191,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2000,
+          "powerHp": 156,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "ba96b0935200c921a1c5728f",
+          "sourceId": "myauto_georgia_list",
+          "make": "Toyota",
+          "model": "Corolla",
+          "year": 2025,
+          "sourcePrice": 39971,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2000,
+          "powerHp": 94,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "b9788782671a7cf5efb2ec29",
+          "sourceId": "myauto_georgia_list",
+          "make": "Hyundai",
+          "model": "Kona",
+          "year": 2025,
+          "sourcePrice": 46241,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2000,
+          "powerHp": 149,
+          "powerDataSource": "https://www.drom.ru/catalog/hyundai/kona/specs/engine_capacity/",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "3badfeefe32a74581e5f1467",
+          "sourceId": "myauto_georgia_list",
+          "make": "Kia",
+          "model": "Sportage",
+          "year": 2025,
+          "sourcePrice": 53620,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2500,
+          "powerHp": 150,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "256ad63476e9069a576ef19e",
+          "sourceId": "myauto_georgia_list",
+          "make": "MINI",
+          "model": "Countryman",
+          "year": 2025,
+          "sourcePrice": 70538,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2000,
+          "powerHp": 150,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "f0f768e8f016076edf27e8a8",
+          "sourceId": "myauto_georgia_list",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2025,
+          "sourcePrice": 66698,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2500,
+          "powerHp": 148,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "add935c760f6abc97e10a05f",
+          "sourceId": "myauto_georgia_list",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2025,
+          "sourcePrice": 70538,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2500,
+          "powerHp": 148,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "id": "663e0bc46fed69ea86978c89",
+          "sourceId": "myauto_georgia_list",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2025,
+          "sourcePrice": 75852,
+          "sourceCurrency": "GEL",
+          "fuel": "petrol",
+          "powertrainKind": "combustion",
+          "engineCc": 2500,
+          "powerHp": 148,
+          "powerDataSource": "power_scenario:knowledge_reference",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "ambiguous",
+              "reason": "non_exact_power_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "failures": [],
+  "reads": [
+    {
+      "key": "catalog/manifest.json",
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "bodyHash": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0001.json",
+      "etag": "\"d102f3c3bd205ac97893b699c0f71444\"",
+      "bodyHash": "de9dd5a2a0afed96539a2f94290e226169381feeb9fcd20ae7e1d81cd44a13c3"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0002.json",
+      "etag": "\"2a93c4653ac2c0d05f65544d4eace4e0\"",
+      "bodyHash": "41a9a50409b9a04dc84abcc1e165b3bd26546577bfbcbc5d2fdcd6f5a0864522"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0003.json",
+      "etag": "\"52aa71f2b271e311ca554ef0f4efc89e\"",
+      "bodyHash": "e21914b35e6066053525ae1fe673b7b7378ac1f7233af0113ebb540225a1b986"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0004.json",
+      "etag": "\"813f56fd320b1f72b583effaeb7960cc\"",
+      "bodyHash": "6cb1e441f20d5469c2321331a7b7a61930a46caa48482a0c6578aba45c6df1bd"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0005.json",
+      "etag": "\"d142eaafe7c32b274cb2da178ba8a47c\"",
+      "bodyHash": "180805f15eab8234da8941a7ff05c7decd2adda11cfd06979defa771ae1e952f"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/korea/chunk-0006.json",
+      "etag": "\"32d67347fd4f890d7a0cf4fee6864b40\"",
+      "bodyHash": "81c13436a1e1d4dbd4c59be712778e45b868c29a0ebe656bd881ad93a9246b98"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0001.json",
+      "etag": "\"7d6ae387e261c5de113d07599aa70728\"",
+      "bodyHash": "f77138b029257d8458927d66a7e15012cd91412926b120ced6bc004b5fe8884a"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0002.json",
+      "etag": "\"ed86aad3ac1e01db2adebfec09eb82f6\"",
+      "bodyHash": "6e971027965f2f4199e3d0a0edd1f23de8325e1edecd2ffd2865c8a2e4fefcd4"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0003.json",
+      "etag": "\"450859f46ba34d41de02400095a8d1bd\"",
+      "bodyHash": "34c095b899c0fa33782bd3cf1fea56feba7841a1f002c65607720781028ecb76"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0004.json",
+      "etag": "\"c75fde5554df8f1dcd82f03ac41274af\"",
+      "bodyHash": "becf5deb87c7d2fc8b4b9b20caa1f6e39ab3aa34f272f659200987d543d760c6"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0005.json",
+      "etag": "\"8602185ea70f6dad2c3ce27a9ca9a8b8\"",
+      "bodyHash": "5527f9e0c9949d687a047171f8ed04e1f8bcf2e8249f9a2c26696faa50cd02ff"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0006.json",
+      "etag": "\"fe862cf700c809582a3a5075daadfaea\"",
+      "bodyHash": "fa9ef7c52fd78d47c711c72c4e4046dfe61a10f656cffe800c4f41e7ff539197"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/china/chunk-0007.json",
+      "etag": "\"31f8a9fc2f21e050cc1e7a4584f497f7\"",
+      "bodyHash": "8467ad596a54a01a9fdf5a6fd7bbde715f79dce7b01a7943c3f6f93389202bc0"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0001.json",
+      "etag": "\"5b772f4453050016ccc4b2437358cbc3\"",
+      "bodyHash": "615b02f9aac75532652f8f51fe2cee668b13306866985f1c22fd1360cecb23af"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0002.json",
+      "etag": "\"4c3ecb7362c770ad4e34743784752a10\"",
+      "bodyHash": "169cc175b35e0cd83b10833868532bb9f9f60370b7c6b86d192b12a5d96beb9c"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0003.json",
+      "etag": "\"bc951386018e04025a24605161b861e2\"",
+      "bodyHash": "c017e2aa82e14e2c55be4f56990580715891faaa408a1b69f8f7bc3861e6b8f9"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0004.json",
+      "etag": "\"848a51b4853c1f6726d7c55f69a9c6af\"",
+      "bodyHash": "e1762f4b3e0c6ca273e48b38599fce65f00e605bb3628ec34f23ef2ec2b80c5e"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0005.json",
+      "etag": "\"bf2c6337614c2d82d1076013ca35784a\"",
+      "bodyHash": "e407d823edd3a300bf8f19e25359686c85d00802fa2e2bab839ef55cf732c83c"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0006.json",
+      "etag": "\"e98c01da5cc62d8e445de26c63ac398e\"",
+      "bodyHash": "7b5987bc3aada145cc6608a7c3c8e961350cefecd31d960894c53e605eaec95e"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0007.json",
+      "etag": "\"46f43c24fb79caa7609f82cef517e434\"",
+      "bodyHash": "580fa91deec464e4be18c1db6d676aa03647a715f81fe547bc18ec630e162694"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0008.json",
+      "etag": "\"944ce6a7713db7c4a5c9eb2856f0d81d\"",
+      "bodyHash": "0bfbdc9653961c161670fe99fe6afe95767c2be2042a0a45ffe11e9976089a6e"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0009.json",
+      "etag": "\"6b6f12a2174ad394020988325a9aa15c\"",
+      "bodyHash": "0cab9e1acac120d6c72ae087a258e4c3a0d14d8797ee09bf713b12857f7e674c"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/uae/chunk-0010.json",
+      "etag": "\"605de4362fa98ad7cce5d9b7b7528aaf\"",
+      "bodyHash": "e466396789a8d808689df18df19ffcd0bacb1c0e41d0769edce90e0d4fbdb94c"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0001.json",
+      "etag": "\"defb9713a871b85c3b0be120efe729a8\"",
+      "bodyHash": "6e53956957a74a2d993568d21f98d05a5c856fd5884832114f0b7dff40fc9408"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0002.json",
+      "etag": "\"07ef67e74a7b829eb541243d60f2a126\"",
+      "bodyHash": "61006ffe5ae39098ef07ff0f5fb652879aa0c9f6128fe383808a472be2645be7"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0003.json",
+      "etag": "\"42b82849a188cf8c81d5362f3664f328\"",
+      "bodyHash": "41f9e65be366e526137beb333cafda436643fb1524c3f02de5be7b59c55037fa"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0004.json",
+      "etag": "\"b22df411948889ccd69a35a750ff6858\"",
+      "bodyHash": "bf975814d29af72aacecd135ed3e2d0d8382ea896e540a752e2c42badf08c354"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0005.json",
+      "etag": "\"99841dfe2683ebcf38f4c943bb6b8930\"",
+      "bodyHash": "1f88424e9c8c1e00aff94c481e2a11416eaad7ac80a3e7f22ef93310905845bf"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0006.json",
+      "etag": "\"ba38d15723e2cd2085e4ea64dfb6dde5\"",
+      "bodyHash": "30e2f32385afeec399bedb61295042df46505fa15bb5a1b549346876f712e12b"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0007.json",
+      "etag": "\"7864b2987583485398c8147c78761bf3\"",
+      "bodyHash": "4d98a4dd412579d0e9d9c53155e50cc0f2cfa846b096d5cf5346bef117c50419"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0008.json",
+      "etag": "\"6634a1f80fe5d891c69bf99b36f41d9a\"",
+      "bodyHash": "4ce5fbd9f2a8e8aebeb602e0d336ce520763335c5f7869f78433b5a9be7b2d30"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0009.json",
+      "etag": "\"8db1f3423b3305af2b4f5bc3b8f8976a\"",
+      "bodyHash": "c5690c73c00e897d92ede2af4f02b12523629f27b7559af7e3c5f5e4d8d839b7"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0010.json",
+      "etag": "\"7c517b50e51c898c40e6512939dcc479\"",
+      "bodyHash": "6c5f677056e5003564c5280f8a7abbdde92525ab68593485004e499dca3d3c87"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/europe/chunk-0011.json",
+      "etag": "\"d0985840a948134f0c00bc8bc0e1af10\"",
+      "bodyHash": "f637394b05b1a4ce2e8e90bcd316d219ecaa64fe0127cd69ac6321c9dd947210"
+    },
+    {
+      "key": "catalog/generations/gen_1788253861283_69bb1d29/offers/georgia/chunk-0001.json",
+      "etag": "\"902fdbcfa5b3dff05adac29bb18497d5\"",
+      "bodyHash": "fb1c2d4a5d472d5bbc20df1ed561007adb3f54938850da116a584d323e401339"
+    },
+    {
+      "key": "catalog/internal/manifest.json",
+      "etag": "\"c4a5a42480679f048df3045c24f83bb0\"",
+      "bodyHash": "6ebb9de407828f99d7fe48ae6be585fbaa3d243fca09bc2701304615dbbb0c84"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "bodyHash": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    },
+    {
+      "key": "markets/markets.json",
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "bodyHash": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    {
+      "key": "catalog/internal/offers/kcar_korea_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"01196c862ea2515f9666a8246e3d06d4\"",
+      "bodyHash": "47d8036ed7eb8af6291905d91c42ee39364aad52d042afb26b1e1d8672dbb45a"
+    },
+    {
+      "key": "catalog/internal/offers/kcar_korea_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"d71e5dc4f370a829c136741f207484d1\"",
+      "bodyHash": "c0b3a46c1d8ad71b70a4d1b3ac76aad80c824de58ae26020008671e903dffea2"
+    },
+    {
+      "key": "catalog/internal/offers/kcar_korea_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"d0f6024d06a01a1f1af88b1c25e4698c\"",
+      "bodyHash": "b73b68e273bf72dee1a6dc1966fe3195a0712638362bff1b3effe9e99fe4ed3e"
+    },
+    {
+      "key": "catalog/internal/offers/kcar_korea_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"3e43055e5c97edf4b240d9741d8a262d\"",
+      "bodyHash": "62b1cc74c4d4042e4bb0f7b6a0749469d9225f4dd2087ad4d1758d335edf6f8c"
+    },
+    {
+      "key": "catalog/internal/offers/kcar_korea_open/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"fd4dbacadf9ca5228a86326fa45a8f21\"",
+      "bodyHash": "ee6bd49839e5170ab95ace2c61a3ebe79216dae1289891793b57c896bb3fe001"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"e4306eda6ad7cfc7b0ed645439dd5a5a\"",
+      "bodyHash": "a8778604373f317e99be701c59c9a1872e68fcf84f24a77b6d4a15557f19a053"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"d2ad20a173a6128ec194917dc32a0eaa\"",
+      "bodyHash": "4ea79f71a0103ca4721eb91fb6c488ca3e464755178c0f3f16a3a16621c79110"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"7e9fb410bb672a7a1484accca413600d\"",
+      "bodyHash": "49d5dfe1721ee8a711eaf22b837fa20d9cfcb216a599a2c8e648afffe9015746"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"70f784065ef157bba4311a9453e98c5b\"",
+      "bodyHash": "1303f0729f1fb0086ee4489c7b83124b32fc31aea695705b849219472f2498d6"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"c5a9897c6c0139ba55b6a50eb98c9f87\"",
+      "bodyHash": "cea9e4ce695a36ee33e3a6989f17c8a6ffbb3418cd1b3e2a21eee336d9198562"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0006.json",
+      "etag": "\"0e37e238aa040f9dbf8f6075e7f0b200\"",
+      "bodyHash": "8bb63cb6155f67017748cc77e7ad36a955965b4803197de9809fea1a12dfdc66"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0007.json",
+      "etag": "\"5d1333a14d76c6df82f43aa4841a18b7\"",
+      "bodyHash": "aa9781fbb81c10fd8773f677105dd7797af5b62b0765191f1cc74dbe4815b883"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0008.json",
+      "etag": "\"5e1a1113a53c6a9375a1388a5b6b4552\"",
+      "bodyHash": "3b21fb050fc7e4f9f30917d1c181fc9c1c32b55a66eeba65ea4d9fe73fa53c74"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0009.json",
+      "etag": "\"079196d345c0c8eb04160f60faf101a5\"",
+      "bodyHash": "6601b3d7e189bc3e21046f2432002d81cfdb643f6331d8039f3bc6c949f1e33d"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0010.json",
+      "etag": "\"9ff2944c12baef5e0408f70138055d5e\"",
+      "bodyHash": "3a5bbe316819890b56ab39402a342bf14233c5e912448cb31a56d0ae86101c53"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0011.json",
+      "etag": "\"ae263da5157d9e9780cbf37691d5d2ec\"",
+      "bodyHash": "aab4776abd76e7c6bc3be4f14dce835ca5199598c8defbe3414729cb6574ea3e"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0012.json",
+      "etag": "\"774912261921ec6722f57577dafa5900\"",
+      "bodyHash": "946a3503029bc9be6d94a322cc0620892855f317ed1dbfd102782be91c671eff"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0013.json",
+      "etag": "\"26f45291f03c0f8c4f69c2a60c3ba4a2\"",
+      "bodyHash": "cbe2f6679221648190a41637da0e38ef31cd64e4bfbf494051d926a2846c4219"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0014.json",
+      "etag": "\"9ae61ecc1ac6997b5ff3d85a71feeb9b\"",
+      "bodyHash": "641c56266bc2ea604c6108a3d5685af8808a7af70a9b7e0dc2b7edfafb720c92"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0015.json",
+      "etag": "\"e0a54862f345118a9d0afb066fd7283c\"",
+      "bodyHash": "57e27d497d29f295352372f9ff970c4913528da2b0048ffdff5a907ceb2b78e2"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0016.json",
+      "etag": "\"17714952aac11d92ab9fde9f2785fd8e\"",
+      "bodyHash": "fcd9c5e04fece4eef345e37cf17561b130748ed567c48de041498eca6a4c815d"
+    },
+    {
+      "key": "catalog/internal/offers/encar_direct/gen_1788253861283_69bb1d29-chunk-0017.json",
+      "etag": "\"9b589a16fd63c72cf39a32760c73a657\"",
+      "bodyHash": "24c6b095a0714ed2519e77c447bdfe8f3312f2dd60452746bd3d6b0ba44e85f1"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"5bc117d8b3645301dd280c0357942a45\"",
+      "bodyHash": "dee4d83773b8815417c3d058108dac6d5d99b291830f3d50dd68d0606b283aa9"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"54628c100f66de90efd79fe79968a064\"",
+      "bodyHash": "0300c1905b7fe05d7edd5d85a2db08e5b47b092e60ddcb11b4e807d1d74ac746"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"b6f07f6e658aa851683e778dd94c9677\"",
+      "bodyHash": "b93fecb152070c7c6c66f4ca9050c276549d5dfff4a37a5cc47fd3cc9a854c46"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"73bffdc2195cfb943beb341e72605e95\"",
+      "bodyHash": "0d28bd5a49cc58e6660463c2eea8a6e8a13cf666ce9e9782b620610b7e55ff76"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"604cedc8ea0081e53ba30ce970c50c88\"",
+      "bodyHash": "08da7abe756c724c7bcd6dfbf952e8a3f3b10c6eb5d1e42770f67a71197afad7"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0006.json",
+      "etag": "\"96ae829e4422a1b58075956d911d05dd\"",
+      "bodyHash": "47e14f66e35fcc327edb0f25808f9c32010d286207f1f02f6b1cdb1a266d619a"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0007.json",
+      "etag": "\"a3e52c6d2314f42d05d688089c9bf960\"",
+      "bodyHash": "1415d631e2cc1a5e8b34b922ffd30dd7c04fb586fdbd5e7ffc981fe8cc2ff628"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0008.json",
+      "etag": "\"c81c7ae2a3ab7a18372218dccff18137\"",
+      "bodyHash": "a7625210452bf44018e527239e120b6d13b46d60b017908a4bf0805d0066e512"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_new_china_open/gen_1788253861283_69bb1d29-chunk-0009.json",
+      "etag": "\"dbd517627ee8dd3d96a4269b0b62c7f0\"",
+      "bodyHash": "3df68671982054cb86b1bf9921965d5c39d12fcc530ddb7a4d2603116132ea04"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_used_china_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"909faf8931e58f32765496c6fcf7a674\"",
+      "bodyHash": "9fc749302ce7b0950c9e4ffcd4ec4049b5802a9e3d0f031665561a3db8ddb072"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_used_china_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"85442d45126f15931df6ef6fba82574b\"",
+      "bodyHash": "c8e17462c807b2b08dea7933f53abda724071bfb53aed4bc2bae4946b8ba1909"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_used_china_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"c1ce6228cc4040e23a64a557dc69eb30\"",
+      "bodyHash": "9a8954e71561499ddb148e55667e88afecf80c32f034231531ca87a537fdbf77"
+    },
+    {
+      "key": "catalog/internal/offers/autohome_used_china_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"b83273063593f88f89367340e50f97ea\"",
+      "bodyHash": "b9960acbc64240477eb9f17cf860fe83bedc10db450f10c19ff4893ebd5cf813"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"2144758d1239b35656f4fca6e6aa2bad\"",
+      "bodyHash": "fa030d49a150908e93a6d8fcade1d14254f1af33f15ad3885265b097de4ba80e"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"9260fde4b85f1a90dd0af27f42c3310d\"",
+      "bodyHash": "97584fe0d5ae220b81286db901366f0e0889e0af3b7ce670061ce2e4282cec81"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"82c37d7b1a23c99d4f6b2161d8e44716\"",
+      "bodyHash": "45c233a76d9324f1d0c67e291ce112a31541a5874e33aaf67173b31bd87176ce"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"49669ba0194c3cb98874f72be9c20f3c\"",
+      "bodyHash": "f33e276566c39dd9498d9ce1685a19f2d3626376d0fa9275404786f632eae75f"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"ac2919a063b87a9e6dfdc247f14c0da6\"",
+      "bodyHash": "585e0f8eb3dddc9ef8481132671f83ed4b29be36a350ab3e150258f68d597a68"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0006.json",
+      "etag": "\"15a8eae636888d70b6a938ccc9f0d7ed\"",
+      "bodyHash": "87dd6a73b4e413cde67de2e27d75c5c3c4d8ce45b8694b6bf79ff572945930dc"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0007.json",
+      "etag": "\"432c1efb88aed1e9b4ad1df41230e820\"",
+      "bodyHash": "82784561af7a449ab7e9f9ae43c678d534a45fdcf1613018cf0218b883b358d1"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0008.json",
+      "etag": "\"8de54f60d44dfc15f0098cbeda21fb38\"",
+      "bodyHash": "553b1f1d09dca944e9036c0d55b90acb1d7d4b59ef04198e70f2dec844ebc9c9"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0009.json",
+      "etag": "\"b1f6f7963620bb75b3eb75fe166bc792\"",
+      "bodyHash": "bda7b6883dffd16f6fc1bf69e40de5460528f0f2bc42b20ec1e1b720e22a766f"
+    },
+    {
+      "key": "catalog/internal/offers/dubizzle_uae_open/gen_1788253861283_69bb1d29-chunk-0010.json",
+      "etag": "\"ec24c95e5e7e0688b66a7de1b58e1f1a\"",
+      "bodyHash": "3e18a891ec1a98316ad3b2bf16a4ccb66c94e4f4d12d828f05e2ce902eb5c8a8"
+    },
+    {
+      "key": "catalog/internal/offers/dubicars_uae_exact/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"02215d8edb7a6c73e793c71f7e5d5d56\"",
+      "bodyHash": "8102a85c8b5404b66c688560a16eab2de745f962d750264e62df10562981fef8"
+    },
+    {
+      "key": "catalog/internal/offers/dubicars_uae_exact/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"dbb660513a43ae71dba508f5ee7d330b\"",
+      "bodyHash": "4d16a650b5e3568d171ba6d0e19c8244501c991149ef9069565a2f39270582f4"
+    },
+    {
+      "key": "catalog/internal/offers/dubicars_uae_exact/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"9c02df6d97689adf0687176311d9fe56\"",
+      "bodyHash": "a5d19d14f1cb0bfe7fc6a26b51ff8edd4b600c93a9ec3f5b43a240efa474749d"
+    },
+    {
+      "key": "catalog/internal/offers/dubicars_uae_exact/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"985d2aca3f62838afd7d66d2af035015\"",
+      "bodyHash": "8bb5135a7b29866143f215cab87bdcbb20c47199228143426cbc1898fee5b908"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"e10643b748c866a76de3432b9cf86bfb\"",
+      "bodyHash": "30917235219400a577429e8fb2634c057e2b6b7dfa6180c1df88e26fbc8a78f7"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"b2ed8bc45044ed03c327e2c7e4d9d4e4\"",
+      "bodyHash": "2e8befd476fa35c6f75b184ef527258a65f6a68e79db02b48271013f30ba5889"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"f31331a6b18906a45b6c0ade68c90f20\"",
+      "bodyHash": "47aae8a7840ae6d004ea4a2f95354ade4ab8ef2ae3fd802895ba2acb6d7a208e"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"713c33f5e6dcd97c1842bb2a7f06cd5f\"",
+      "bodyHash": "f14bc58e2d020f0842c353bcee1aed6d900564ab7f93a3349af0f3bda2ef1169"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"6a402fafd0f629704aee471903d252ac\"",
+      "bodyHash": "8bcd7ca750f4ab10e9ec8e77555ac51574865e283e38dc51d0a32ee5266e32b9"
+    },
+    {
+      "key": "catalog/internal/offers/autoscout_europe_open/gen_1788253861283_69bb1d29-chunk-0006.json",
+      "etag": "\"244987625c5b918c98f222d6b2a4793a\"",
+      "bodyHash": "b90af552e3a36880a125da1f7ad5d416514372f1e076f68ebc7c6e53d7b6e184"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"9f479cd93aed4561d556d9cf679b4658\"",
+      "bodyHash": "92a5563ce97c3dea6de852f9d70f8c66f616ad11ac1f0325fabd88a3710dfc62"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"267aa510c53f94e4c56f7a494bd2d858\"",
+      "bodyHash": "34e06b8d5aec0de1e4e25bd2d14670c06a4b01044ea1c0286d3f74dec8f988b6"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0003.json",
+      "etag": "\"228c892395dd68dc7a4137d73bc456a3\"",
+      "bodyHash": "392b10334e48e0bcb48019e5f9f318532a2ee063672683e4527a5264763bbf09"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0004.json",
+      "etag": "\"3c642473857331f67a806c5b93d4ea02\"",
+      "bodyHash": "2696bc5e874cb2f7946ae61259aa59b39163f56f177e06f1daa1bef88f92d612"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0005.json",
+      "etag": "\"839283567309b9a96d0d5c13eaba7f81\"",
+      "bodyHash": "e839678b8b55947055efb9faf58765d60126b57c30f6685ba46ed9b5fec87b54"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0006.json",
+      "etag": "\"5922952cb1aa0fc032e20150e0abe6ff\"",
+      "bodyHash": "49dbabb027264ce9eb26f619f571e48b7dc8cceea7517fb8810220c16f0ebb90"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0007.json",
+      "etag": "\"9ba16e5029a97bd5b637732e948e367d\"",
+      "bodyHash": "b5290616073ef31b7a56c6f2e23535530ad92bb61c0947d12aa120ec4113b2ad"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0008.json",
+      "etag": "\"7bc4d39c0ce368b9cc116850894560ed\"",
+      "bodyHash": "4fff687a871a8c05d2c95ae38c736e3a5adff6ef1aa4416633d4b4ecd019bddc"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0009.json",
+      "etag": "\"c0426736b1dedfd42557be5d7666103e\"",
+      "bodyHash": "c5132437047a40930e978bac177c08367b2a38d6874f825b10a7dc390335f865"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0010.json",
+      "etag": "\"8b0c4f5e5b97f15f294187f934c9d952\"",
+      "bodyHash": "508b0f308f15cbc0076724d5c5bd045ff95e1284e8e1c358ee5bfe04e6503197"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0011.json",
+      "etag": "\"7a4acb711cc5c48568558451439ca052\"",
+      "bodyHash": "5a68c80312f3ee78ae0ff91e76b23e64ae9aa3c904a2d19be5ed044d023285eb"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0012.json",
+      "etag": "\"524be3d3067ab12129fc49793feaae8e\"",
+      "bodyHash": "e84a40e40ed1307bc480e1341495d442d7243d6e568767f81dc4f931f588af8e"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0013.json",
+      "etag": "\"4ca321acb9ef6d4cb89ef183cdec4ce9\"",
+      "bodyHash": "ec8e94e6a05e73bd1a2e38a6d1091a7243c9f9b12a41c5d48231ddfb61c431e0"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0014.json",
+      "etag": "\"a96d8950ffc96011ee9b253b386828f8\"",
+      "bodyHash": "44cb512c3eed6ca8f79be6d9fa944bf5ba629171bb029038201202f7aa49238c"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0015.json",
+      "etag": "\"45629c31e7f3be7d551b13a24120e6ed\"",
+      "bodyHash": "b375a63584d7274a4fb45c19c0be1f23ea2a0a048008b9c27ecd1bf8c05d21be"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0016.json",
+      "etag": "\"344d68104350d5aeffb32bb0ebd4e3e7\"",
+      "bodyHash": "e2cd5a94ad959f125e13460cdd45b68fce1d2ece3d6f9e39fa45079f75b2a114"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0017.json",
+      "etag": "\"d885b50d11ce1859ea806c94f7aaccaa\"",
+      "bodyHash": "2370b74927843f58b6159003d7bd36adfc147a0c24c4b07dba027b24aa9cb424"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0018.json",
+      "etag": "\"fed9a843cb9ec695cc0d4e0d45360281\"",
+      "bodyHash": "ea8964ffeeb8109571ab91b213aec5141e2d65222277d9fc6e3f0b0e5ccad1b4"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0019.json",
+      "etag": "\"f605cda7c922865d2aae57864237f587\"",
+      "bodyHash": "4c15486c1cdec47d82afd7e32f034a218d2c7984724429003c29004338675acc"
+    },
+    {
+      "key": "catalog/internal/offers/mobile_de_open/gen_1788253861283_69bb1d29-chunk-0020.json",
+      "etag": "\"22bbcea066ce3dfea045770db817a5fd\"",
+      "bodyHash": "81275745cae3a3e0de4f4c3c0e69dd85ee5780fc3f295bd94a843854389d2c52"
+    },
+    {
+      "key": "catalog/internal/offers/myauto_georgia_list/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"dacee5de9dfccbdd386bd837736efead\"",
+      "bodyHash": "aacb08ba2bcce327c906c0980b1ed71e23c40f803f21c181244b236925be5965"
+    },
+    {
+      "key": "catalog/internal/offers/myauto_georgia_list/gen_1788253861283_69bb1d29-chunk-0002.json",
+      "etag": "\"77e7fdd3b618e9bb105ec2a941b566a6\"",
+      "bodyHash": "4d56738a5ee37531243e38401de700315debd7c5bf086520b7439f433c4c5597"
+    },
+    {
+      "key": "catalog/internal/offers/autopapa_georgia_open/gen_1788253861283_69bb1d29-chunk-0001.json",
+      "etag": "\"8caf7df08022b67c60222dacb8d4a1aa\"",
+      "bodyHash": "f732f1487666c2bcad540496bcfd0a42a435f324dfda13db1367506d13941974"
+    },
+    {
+      "key": "catalog/internal/manifest.json",
+      "etag": "\"c4a5a42480679f048df3045c24f83bb0\"",
+      "bodyHash": "6ebb9de407828f99d7fe48ae6be585fbaa3d243fca09bc2701304615dbbb0c84"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "bodyHash": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    }
+  ],
+  "limits": {
+    "maxHttpRequests": 1500,
+    "concurrency": 1,
+    "samplePerMarket": 8
+  },
+  "limitation": "Saved evidence only. No fresh source availability check and no independent verification of all customs formula results; legacy displayed totals are not automatically confirmed.",
+  "internalEvidence": {
+    "kcar_korea_open": {
+      "market": "korea",
+      "available": true,
+      "totalCount": 2368,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "b16e511a14a897a232c9da07",
+          "make": "Kia",
+          "model": "더 뉴 모닝 (JA)",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceTitle",
+            "detailIdentityVerified",
+            "fieldIdentityVerified",
+            "photoIdentityVerified",
+            "vehiclePhotoVerified",
+            "sourceExactFields",
+            "vin",
+            "knowledgeCore",
+            "gallerySafetyMode",
+            "galleryImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryVerified",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "sourceExactFields",
+            "sourceApi",
+            "listingApi",
+            "gallerySafetyMode",
+            "rawFuelType",
+            "rawStatus",
+            "images",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "detailIdentityVerified": true,
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "기아",
+            "encyclopediaIdentity.rawModel": "더 뉴 모닝 (JA)",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.makeSource": "safe_alias",
+            "encyclopediaIdentity.modelSource": "unresolved",
+            "raw.rawFuelType": "001",
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 76
+          }
+        },
+        {
+          "id": "c77f1f861f1d048fb1f9b610",
+          "make": "Kia",
+          "model": "더 뉴 모닝 (JA)",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceTitle",
+            "detailIdentityVerified",
+            "fieldIdentityVerified",
+            "photoIdentityVerified",
+            "vehiclePhotoVerified",
+            "sourceExactFields",
+            "vin",
+            "raw",
+            "knowledgeCore",
+            "gallerySafetyMode",
+            "galleryImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryVerified",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity"
+          ],
+          "rawKeys": [
+            "sourceExactFields",
+            "sourceApi",
+            "listingApi",
+            "gallerySafetyMode",
+            "rawFuelType",
+            "rawStatus",
+            "images",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "detailIdentityVerified": true,
+            "photoIdentityVerified": true,
+            "raw.rawFuelType": "001",
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 76,
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "기아",
+            "encyclopediaIdentity.rawModel": "더 뉴 모닝 (JA)",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.makeSource": "safe_alias",
+            "encyclopediaIdentity.modelSource": "unresolved"
+          }
+        }
+      ],
+      "readRows": 2368
+    },
+    "encar_direct": {
+      "market": "korea",
+      "available": true,
+      "totalCount": 8342,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "8514f261de877be05d5cd487",
+          "make": "Kia",
+          "model": "Niro",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "vin",
+            "frameNumber",
+            "galleryVerified",
+            "photoIdentityVerified",
+            "galleryImageCount",
+            "galleryRefreshedAt",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "offer",
+            "detail",
+            "powertrainSafety",
+            "vehicleKnowledgeModel",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "kia/niro",
+            "knowledgeCore.variantId": "source/b8e643b2c2807f027cc0fad9",
+            "knowledgeCore.variantStatus": "source_observed",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "기아",
+            "encyclopediaIdentity.rawModel": "디 올 뉴 니로",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.canonicalModelId": "kia/niro",
+            "encyclopediaIdentity.makeSource": "presentation:canonical",
+            "encyclopediaIdentity.modelSource": "presentation:canonical",
+            "raw.offer.Model": "디 올 뉴 니로",
+            "raw.offer.ModelGroup": "니로",
+            "raw.offer.FuelType": "가솔린+전기",
+            "raw.offer.Year": 202507,
+            "raw.offer.FormYear": "2026",
+            "raw.detail.category.modelCd": "163",
+            "raw.detail.category.modelName": "디 올 뉴 니로",
+            "raw.detail.category.yearMonth": "202507",
+            "raw.detail.category.formYear": "2026",
+            "raw.detail.category.modelGroupCd": "061",
+            "raw.detail.category.modelGroupName": "니로",
+            "raw.detail.category.modelGroupEnglishName": "Niro",
+            "raw.detail.advertisement.directInspected": false,
+            "raw.detail.spec.type": "CAR",
+            "raw.detail.spec.mileage": 22783,
+            "raw.detail.spec.displacement": 1580,
+            "raw.detail.spec.transmissionName": "오토",
+            "raw.detail.spec.fuelCd": "006",
+            "raw.detail.spec.fuelName": "가솔린+전기",
+            "raw.detail.spec.colorName": "흰색",
+            "raw.detail.spec.seatCount": 5,
+            "raw.detail.spec.tradeType": "D",
+            "raw.detail.spec.bodyName": "SUV",
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.vehicleKnowledgeModel.id": "kia/niro",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.8,
+            "raw.vehicleKnowledgeModel.popularityDecile": 3,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 105,
+            "raw.vehicleKnowledgeModel.yearFrom": 2016,
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 105
+          }
+        },
+        {
+          "id": "f938a4d3942d97cb21371a4f",
+          "make": "Hyundai",
+          "model": "Casper",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "vin",
+            "frameNumber",
+            "galleryVerified",
+            "photoIdentityVerified",
+            "galleryImageCount",
+            "galleryRefreshedAt",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "현대",
+            "encyclopediaIdentity.rawModel": "캐스퍼 일렉트릭",
+            "encyclopediaIdentity.canonicalBrandId": "hyundai",
+            "encyclopediaIdentity.makeSource": "safe_alias",
+            "encyclopediaIdentity.modelSource": "unresolved",
+            "raw.powertrainSafety.correctedTo": "electric",
+            "raw.powertrainSafety.reason": "identity_bound_electrified_name",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 115.6
+          }
+        }
+      ],
+      "readRows": 8342
+    },
+    "autohome_new_china_open": {
+      "market": "china",
+      "available": true,
+      "totalCount": 4374,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "9bffea6fc624cce333582373",
+          "make": "鑫源汽车",
+          "model": "鑫源T3",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "raw",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity"
+          ],
+          "rawKeys": [
+            "listing",
+            "configFields",
+            "configSpecId",
+            "specPageTitle",
+            "galleryUrl",
+            "legacyGalleryUrl",
+            "exactProductImages",
+            "exactGalleryImageCount",
+            "detailIdentityVerified",
+            "photoIdentityVerified",
+            "powerFieldPolicy",
+            "electrifiedPowerPolicy",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "raw.listing.specId": "1021952",
+            "raw.listing.year": 2026,
+            "raw.configFields.engine": "1.5L 110马力 L4",
+            "raw.configFields.engineMaxHp": "110",
+            "raw.configFields.engineMaxKw": "81",
+            "raw.configSpecId": "1021952",
+            "raw.specPageTitle": "【图】鑫源T3 2026款 1.5L 标准型 栏板单排 2.7米后单轮报价_图片_鑫源汽车_汽车之家",
+            "raw.detailIdentityVerified": true,
+            "raw.photoIdentityVerified": false,
+            "raw.powerFieldPolicy": "section_bound_engine_motor_system_fields_v2",
+            "raw.electrifiedPowerPolicy": "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power",
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 110,
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": false,
+            "encyclopediaIdentity.rawMake": "鑫源汽车",
+            "encyclopediaIdentity.rawModel": "鑫源T3",
+            "encyclopediaIdentity.makeSource": "unresolved",
+            "encyclopediaIdentity.modelSource": "unresolved"
+          }
+        },
+        {
+          "id": "6b0b0c1891556045403b2fd4",
+          "make": "鑫源汽车",
+          "model": "鑫源T3",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "raw",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity"
+          ],
+          "rawKeys": [
+            "listing",
+            "configFields",
+            "configSpecId",
+            "specPageTitle",
+            "galleryUrl",
+            "legacyGalleryUrl",
+            "exactProductImages",
+            "exactGalleryImageCount",
+            "detailIdentityVerified",
+            "photoIdentityVerified",
+            "powerFieldPolicy",
+            "electrifiedPowerPolicy",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "raw.listing.specId": "1021954",
+            "raw.listing.year": 2026,
+            "raw.configFields.engine": "1.5L 110马力 L4",
+            "raw.configFields.engineMaxHp": "110",
+            "raw.configFields.engineMaxKw": "81",
+            "raw.configSpecId": "1021954",
+            "raw.specPageTitle": "【图】鑫源T3 2026款 1.5L 标准型 栏板单排 3.1米后单轮报价_图片_鑫源汽车_汽车之家",
+            "raw.detailIdentityVerified": true,
+            "raw.photoIdentityVerified": true,
+            "raw.powerFieldPolicy": "section_bound_engine_motor_system_fields_v2",
+            "raw.electrifiedPowerPolicy": "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power",
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 110,
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "鑫源汽车",
+            "encyclopediaIdentity.rawModel": "鑫源T3",
+            "encyclopediaIdentity.makeSource": "unresolved",
+            "encyclopediaIdentity.modelSource": "unresolved"
+          }
+        }
+      ],
+      "readRows": 4374
+    },
+    "autohome_used_china_open": {
+      "market": "china",
+      "available": true,
+      "totalCount": 1737,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "242fbce8f9aaa2562b63f169",
+          "make": "Nissan",
+          "model": "Sylphy",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "sourceCity",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "listing",
+            "detail",
+            "detailIdentityVerified",
+            "photoIdentityVerified",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "nissan/sylphy",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Nissan",
+            "encyclopediaIdentity.rawModel": "Sylphy",
+            "encyclopediaIdentity.canonicalBrandId": "nissan",
+            "encyclopediaIdentity.canonicalModelId": "nissan/sylphy",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.listing.brandname": "Nissan",
+            "raw.listing.specname": "2026 1.6L CVT Comfort Edition",
+            "raw.listing.fuelname": "Gasoline",
+            "raw.detail.brandid": 63,
+            "raw.detail.brandname": " Nissan",
+            "raw.detail.specid": 76613,
+            "raw.detail.specname": " 2026 1.6L CVT Comfort Edition",
+            "raw.detail.yearname": "2026.02",
+            "raw.detail.fuelname": "Gasoline",
+            "raw.detail.engine": "1.6L 135HP L4",
+            "raw.detailIdentityVerified": false,
+            "raw.photoIdentityVerified": false,
+            "raw.vehicleKnowledgeModel.id": "nissan/sylphy",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 140.6,
+            "raw.vehicleKnowledgeModel.popularityDecile": 5,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 135
+          }
+        },
+        {
+          "id": "5934a57db162c4dfb1191448",
+          "make": "Nissan",
+          "model": "Teana",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "sourceCity",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "listing",
+            "detail",
+            "detailIdentityVerified",
+            "photoIdentityVerified",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "nissan/teana",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Nissan",
+            "encyclopediaIdentity.rawModel": "Teana",
+            "encyclopediaIdentity.canonicalBrandId": "nissan",
+            "encyclopediaIdentity.canonicalModelId": "nissan/teana",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.listing.brandname": "Nissan",
+            "raw.listing.specname": "2026 Model 2.0L Base Trim",
+            "raw.listing.fuelname": "Gasoline",
+            "raw.detail.brandid": 63,
+            "raw.detail.brandname": " Nissan",
+            "raw.detail.specid": 75719,
+            "raw.detail.specname": " 2026 Model 2.0L Base Trim",
+            "raw.detail.yearname": "2025.11",
+            "raw.detail.fuelname": "Gasoline",
+            "raw.detail.engine": "2.0L 156hp L4",
+            "raw.detailIdentityVerified": true,
+            "raw.photoIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "nissan/teana",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 140.6,
+            "raw.vehicleKnowledgeModel.popularityDecile": 5,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 156
+          }
+        }
+      ],
+      "readRows": 1737
+    },
+    "dubizzle_uae_open": {
+      "market": "uae",
+      "available": true,
+      "totalCount": 4965,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "4decc0f52a16f7ddb4485e80",
+          "make": "Suzuki",
+          "model": "Celerio",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "photoIdentityVerified",
+            "knowledgeCore",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "images",
+            "detailIdentityVerified",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "semanticFieldPolicy",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "suzuki/celerio",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Suzuki",
+            "encyclopediaIdentity.rawModel": "Celerio",
+            "encyclopediaIdentity.canonicalBrandId": "suzuki",
+            "encyclopediaIdentity.canonicalModelId": "suzuki/celerio",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Suzuki",
+            "raw.parsed.model": "Celerio",
+            "raw.parsed.year": 2026,
+            "raw.parsed.fuel": "Petrol",
+            "raw.detailIdentityVerified": true,
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "suzuki/celerio",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 140.7,
+            "raw.vehicleKnowledgeModel.popularityDecile": 4,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 99
+          }
+        },
+        {
+          "id": "6bf8c91f9704aa729b7823b3",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "photoIdentityVerified",
+            "knowledgeCore",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "images",
+            "detailIdentityVerified",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "semanticFieldPolicy",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "kia/picanto",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Kia",
+            "encyclopediaIdentity.rawModel": "Picanto",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.canonicalModelId": "kia/picanto",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Kia",
+            "raw.parsed.model": "Picanto",
+            "raw.parsed.year": 2026,
+            "raw.parsed.fuel": "Petrol",
+            "raw.detailIdentityVerified": true,
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "kia/picanto",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.9,
+            "raw.vehicleKnowledgeModel.popularityDecile": 2,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 67,
+            "raw.vehicleKnowledgeModel.yearFrom": 2010,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 99
+          }
+        }
+      ],
+      "readRows": 4965
+    },
+    "dubicars_uae_exact": {
+      "market": "uae",
+      "available": true,
+      "totalCount": 1665,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "ca8deab2cc8efc73e1eab8ef",
+          "make": "Suzuki",
+          "model": "Jimny",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "suzuki/jimny",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Suzuki",
+            "encyclopediaIdentity.rawModel": "Jimny",
+            "encyclopediaIdentity.canonicalBrandId": "suzuki",
+            "encyclopediaIdentity.canonicalModelId": "suzuki/jimny",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.vehicleKnowledgeModel.id": "suzuki/jimny",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 140.7,
+            "raw.vehicleKnowledgeModel.popularityDecile": 4,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 101
+          }
+        },
+        {
+          "id": "9a5ad2c483f42d0045e1afbf",
+          "make": "Volkswagen",
+          "model": "T-Roc",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "volkswagen/t-roc",
+            "knowledgeCore.variantId": "volkswagen/t-roc/drom-generation-1/facelift-1/drom-78cc6d701fde1bf33a72",
+            "knowledgeCore.variantStatus": "review",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Volkswagen",
+            "encyclopediaIdentity.rawModel": "T-Roc",
+            "encyclopediaIdentity.canonicalBrandId": "volkswagen",
+            "encyclopediaIdentity.canonicalModelId": "volkswagen/t-roc",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.vehicleKnowledgeModel.id": "volkswagen/t-roc",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.9,
+            "raw.vehicleKnowledgeModel.popularityDecile": 2,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 150,
+            "raw.vehicleKnowledgeModel.yearFrom": 2017,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 147
+          }
+        }
+      ],
+      "readRows": 1665
+    },
+    "autoscout_europe_open": {
+      "market": "europe",
+      "available": true,
+      "totalCount": 2754,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "86805caa73f4c7d6948e6463",
+          "make": "Fiat",
+          "model": "Panda",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "photoIdentityVerified",
+            "knowledgeCore",
+            "photoResolutionVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "searchImages",
+            "listingBoundSearchImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "detailImages",
+            "listingBoundImages",
+            "photoResolutionVerified",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "fiat/panda",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Fiat",
+            "encyclopediaIdentity.rawModel": "Panda",
+            "encyclopediaIdentity.canonicalBrandId": "fiat",
+            "encyclopediaIdentity.canonicalModelId": "fiat/panda",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Fiat",
+            "raw.parsed.model": "Panda",
+            "raw.parsed.year": 2026,
+            "raw.parsed.engineCc": 999,
+            "raw.parsed.powerKw": 51,
+            "raw.parsed.powerHp": 69,
+            "raw.parsed.fuel": "Electric/Gasoline",
+            "raw.parsed.raw.vehicle.make": "Fiat",
+            "raw.parsed.raw.vehicle.model": "Panda",
+            "raw.parsed.raw.vehicle.modelGroup": "Panda",
+            "raw.parsed.raw.vehicle.modelId": 1746,
+            "raw.parsed.raw.vehicle.modelVersionInput": "APERTI AD AGOSTO",
+            "raw.parsed.raw.vehicle.fuel": "Electric/Gasoline",
+            "raw.parsed.raw.vehicle.engineDisplacementInCCM": "999 cc",
+            "raw.parsed.raw.tracking.fuelType": "2",
+            "raw.parsed.raw.tracking.modelTaxonomy": "[make_id:28, model_group_id:200526, variant_id:, generation_id:, motortype_id:, trim_id:];",
+            "raw.listingBoundSearchImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "fiat/panda",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.8,
+            "raw.vehicleKnowledgeModel.popularityDecile": 3,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 75,
+            "raw.vehicleKnowledgeModel.yearFrom": 2008,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.listingBoundImages": true,
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 69
+          }
+        },
+        {
+          "id": "876c0664f4c30937bfeeb43d",
+          "make": "Fiat",
+          "model": "Panda",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactDetail",
+            "exactFields",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "photoIdentityVerified",
+            "knowledgeCore",
+            "photoResolutionVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "searchImages",
+            "listingBoundSearchImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "detailImages",
+            "listingBoundImages",
+            "photoResolutionVerified",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "fiat/panda",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Fiat",
+            "encyclopediaIdentity.rawModel": "Panda",
+            "encyclopediaIdentity.canonicalBrandId": "fiat",
+            "encyclopediaIdentity.canonicalModelId": "fiat/panda",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Fiat",
+            "raw.parsed.model": "Panda",
+            "raw.parsed.year": 2026,
+            "raw.parsed.engineCc": 999,
+            "raw.parsed.powerKw": 51,
+            "raw.parsed.powerHp": 69,
+            "raw.parsed.fuel": "Electric/Gasoline",
+            "raw.parsed.raw.vehicle.make": "Fiat",
+            "raw.parsed.raw.vehicle.model": "Panda",
+            "raw.parsed.raw.vehicle.modelGroup": "Panda",
+            "raw.parsed.raw.vehicle.modelId": 1746,
+            "raw.parsed.raw.vehicle.modelVersionInput": "APERTI AD AGOSTO",
+            "raw.parsed.raw.vehicle.fuel": "Electric/Gasoline",
+            "raw.parsed.raw.vehicle.engineDisplacementInCCM": "999 cc",
+            "raw.parsed.raw.tracking.fuelType": "2",
+            "raw.parsed.raw.tracking.modelTaxonomy": "[make_id:28, model_group_id:200526, variant_id:, generation_id:, motortype_id:, trim_id:];",
+            "raw.listingBoundSearchImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "fiat/panda",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.8,
+            "raw.vehicleKnowledgeModel.popularityDecile": 3,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 75,
+            "raw.vehicleKnowledgeModel.yearFrom": 2008,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.listingBoundImages": true,
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 69
+          }
+        }
+      ],
+      "readRows": 2754
+    },
+    "mobile_de_open": {
+      "market": "europe",
+      "available": true,
+      "totalCount": 10000,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "be5212a27f0126aa0a416b2a",
+          "make": "Kia",
+          "model": "Picanto",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactFields",
+            "exactDetail",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "srp",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "vip",
+            "images",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "vehicleKnowledgeVariant",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "kia/picanto",
+            "knowledgeCore.variantId": "kia/picanto/drom-generation-3/facelift-1/drom-decf43833d36670b5fae",
+            "knowledgeCore.variantStatus": "review",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Kia",
+            "encyclopediaIdentity.rawModel": "Picanto",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.canonicalModelId": "kia/picanto",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Kia",
+            "raw.parsed.model": "Picanto",
+            "raw.parsed.year": 2026,
+            "raw.parsed.engineCc": 998,
+            "raw.parsed.powerKw": 46,
+            "raw.parsed.powerHp": 63,
+            "raw.parsed.fuel": "Benzin",
+            "raw.parsed.raw.make": "Kia",
+            "raw.parsed.raw.model": "Picanto",
+            "raw.srp.make": "Kia",
+            "raw.srp.model": "Picanto",
+            "raw.vehicleKnowledgeModel.id": "kia/picanto",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.9,
+            "raw.vehicleKnowledgeModel.popularityDecile": 2,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 67,
+            "raw.vehicleKnowledgeModel.yearFrom": 2010,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.vip.makeKey": "Kia",
+            "raw.vip.modelKey": "Picanto",
+            "raw.vip.financePlan.offer.yearlyMileage": 10000,
+            "raw.vip.make": "Kia",
+            "raw.vip.model": "Picanto",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.vehicleKnowledgeVariant.id": "drom_32aefaca4a3ab93ade7d4a5e",
+            "raw.vehicleKnowledgeVariant.sourceType": "drom_catalog",
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 63
+          }
+        },
+        {
+          "id": "1078a629d4394ce207134472",
+          "make": "Volkswagen",
+          "model": "Taigo",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourceTitle",
+            "exactFields",
+            "exactDetail",
+            "exactPhotos",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "photoIdentityVerified",
+            "fullRebuildAt",
+            "gallerySourceImageCount",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "parsed",
+            "srp",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "vip",
+            "images",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "publicPriority"
+          ],
+          "fields": {
+            "knowledgeCore.modelId": "volkswagen/taigo",
+            "knowledgeCore.variantId": "volkswagen/taigo/drom-generation-1/drom-9a64d394c5aa22999d47",
+            "knowledgeCore.variantStatus": "review",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "photoIdentityVerified": true,
+            "encyclopediaIdentity.rawMake": "Volkswagen",
+            "encyclopediaIdentity.rawModel": "Taigo",
+            "encyclopediaIdentity.canonicalBrandId": "volkswagen",
+            "encyclopediaIdentity.canonicalModelId": "volkswagen/taigo",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Volkswagen",
+            "raw.parsed.model": "Taigo",
+            "raw.parsed.year": 2026,
+            "raw.parsed.engineCc": 999,
+            "raw.parsed.powerKw": 70,
+            "raw.parsed.powerHp": 95,
+            "raw.parsed.fuel": "Benzin",
+            "raw.parsed.raw.make": "Volkswagen",
+            "raw.parsed.raw.model": "Taigo",
+            "raw.srp.make": "Volkswagen",
+            "raw.srp.model": "Taigo",
+            "raw.vehicleKnowledgeModel.id": "volkswagen/taigo",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.9,
+            "raw.vehicleKnowledgeModel.popularityDecile": 2,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 110,
+            "raw.vehicleKnowledgeModel.yearFrom": 2021,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.vip.makeKey": "Volkswagen",
+            "raw.vip.modelKey": "Taigo",
+            "raw.vip.financePlan.offer.yearlyMileage": 10000,
+            "raw.vip.make": "Volkswagen",
+            "raw.vip.model": "Taigo",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 95
+          }
+        }
+      ],
+      "readRows": 10000
+    },
+    "myauto_georgia_list": {
+      "market": "georgia",
+      "available": true,
+      "totalCount": 632,
+      "sampledRows": 500,
+      "samples": [
+        {
+          "id": "9f1115bb936345fba656dd82",
+          "make": "Mazda",
+          "model": "CX-30",
+          "year": 2026,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourcePublishedAt",
+            "raw",
+            "photoIdentityVerified",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "gallerySourceImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity"
+          ],
+          "rawKeys": [
+            "images",
+            "parsed",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "myAutoListPhotoIdentityPresent",
+            "myAutoProductCarId",
+            "myAutoProductPhoto",
+            "myAutoProductPhotoVersion",
+            "myAutoProductPictureCount",
+            "myAutoProductEngineCc",
+            "myAutoProductPowerHp",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "recoveryExactSourceUrl",
+            "recoveryExactPhotoIdentity",
+            "recoveryCalculatedRub",
+            "recoveryPreliminaryPowerPending",
+            "recoveryBodySourceOnly",
+            "publicPriority"
+          ],
+          "fields": {
+            "raw.parsed.make": "Mazda",
+            "raw.parsed.model": "CX-30",
+            "raw.parsed.year": 2026,
+            "raw.parsed.fuel": "Petrol",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.myAutoListPhotoIdentityPresent": true,
+            "raw.myAutoProductEngineCc": 2000,
+            "raw.vehicleKnowledgeModel.id": "mazda/cx-30",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 143.9,
+            "raw.vehicleKnowledgeModel.popularityDecile": 2,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 156,
+            "raw.vehicleKnowledgeModel.yearFrom": 2019,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.recoveryExactPhotoIdentity": true,
+            "raw.recoveryPreliminaryPowerPending": false,
+            "raw.publicPriority.ageYears": 0,
+            "raw.publicPriority.powerHp": 156,
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "mazda/cx-30",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Mazda",
+            "encyclopediaIdentity.rawModel": "CX-30",
+            "encyclopediaIdentity.canonicalBrandId": "mazda",
+            "encyclopediaIdentity.canonicalModelId": "mazda/cx-30",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical"
+          }
+        },
+        {
+          "id": "ba96b0935200c921a1c5728f",
+          "make": "Toyota",
+          "model": "Corolla",
+          "year": 2025,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourcePublishedAt",
+            "photoIdentityVerified",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "gallerySourceImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "images",
+            "parsed",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "myAutoListPhotoIdentityPresent",
+            "myAutoProductCarId",
+            "myAutoProductPhoto",
+            "myAutoProductPhotoVersion",
+            "myAutoProductPictureCount",
+            "myAutoProductEngineCc",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "recoveryExactSourceUrl",
+            "recoveryExactPhotoIdentity",
+            "recoveryCalculatedRub",
+            "recoveryPreliminaryPowerPending",
+            "recoveryBodySourceOnly",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "toyota/corolla",
+            "knowledgeCore.variantId": "toyota/corolla/japan-2019/eea-mod-d58ebd691c3a3cdea16c",
+            "knowledgeCore.variantStatus": "review",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Toyota",
+            "encyclopediaIdentity.rawModel": "Corolla",
+            "encyclopediaIdentity.canonicalBrandId": "toyota",
+            "encyclopediaIdentity.canonicalModelId": "toyota/corolla",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Toyota",
+            "raw.parsed.model": "Corolla",
+            "raw.parsed.year": 2025,
+            "raw.parsed.fuel": "Petrol",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.myAutoListPhotoIdentityPresent": true,
+            "raw.myAutoProductEngineCc": 2000,
+            "raw.vehicleKnowledgeModel.id": "toyota/corolla",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 141,
+            "raw.vehicleKnowledgeModel.popularityDecile": 1,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 94,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.recoveryExactPhotoIdentity": true,
+            "raw.recoveryPreliminaryPowerPending": false,
+            "raw.publicPriority.ageYears": 1,
+            "raw.publicPriority.powerHp": 94
+          }
+        }
+      ],
+      "readRows": 632
+    },
+    "autopapa_georgia_open": {
+      "market": "georgia",
+      "available": true,
+      "totalCount": 96,
+      "sampledRows": 96,
+      "samples": [
+        {
+          "id": "3f832d535ca6f6dc00739024",
+          "make": "Lexus",
+          "model": "UX",
+          "year": 2024,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourcePublishedAt",
+            "raw",
+            "photoIdentityVerified",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "gallerySourceImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity"
+          ],
+          "rawKeys": [
+            "images",
+            "parsed",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "autoPapaDetailPriceVerified",
+            "autoPapaDetailPriceUsd",
+            "autoPapaDetailPriceAuthority",
+            "autoPapaSellerDeclaredPriceUsd",
+            "autoPapaStructuredPriceUsd",
+            "autoPapaListPriceUsd",
+            "autoPapaDetailPowerHp",
+            "powertrainSafety",
+            "recoveryExactSourceUrl",
+            "recoveryExactPhotoIdentity",
+            "recoveryCalculatedRub",
+            "recoveryPreliminaryPowerPending",
+            "recoveryBodySourceOnly",
+            "normalizedCatalogModel",
+            "originalCatalogTitle",
+            "vehicleKnowledgeModel",
+            "publicPriority"
+          ],
+          "fields": {
+            "raw.parsed.make": "Lexus",
+            "raw.parsed.model": "UX250h",
+            "raw.parsed.year": 2024,
+            "raw.parsed.engineCc": 2000,
+            "raw.parsed.fuel": "hybrid",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.powertrainSafety.correctedTo": "other_hybrid",
+            "raw.powertrainSafety.reason": "identity_bound_electrified_name",
+            "raw.recoveryExactPhotoIdentity": true,
+            "raw.recoveryPreliminaryPowerPending": true,
+            "raw.normalizedCatalogModel": "UX250h",
+            "raw.vehicleKnowledgeModel.id": "lexus/ux",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 140.7,
+            "raw.vehicleKnowledgeModel.popularityDecile": 4,
+            "raw.publicPriority.ageYears": 2,
+            "raw.publicPriority.powerHp": 152.3,
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "lexus/ux",
+            "knowledgeCore.variantId": "source/17b9d3b73e0cdde51af1ebab",
+            "knowledgeCore.variantStatus": "source_observed",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Lexus",
+            "encyclopediaIdentity.rawModel": "UX250h",
+            "encyclopediaIdentity.canonicalBrandId": "lexus",
+            "encyclopediaIdentity.canonicalModelId": "lexus/ux",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "safe_alias"
+          }
+        },
+        {
+          "id": "64638b272644c0bbb44ff5a2",
+          "make": "Kia",
+          "model": "Sportage",
+          "year": 2023,
+          "operationalKeys": [
+            "sourceUrl",
+            "sourceVenueName",
+            "sourcePublishedAt",
+            "photoIdentityVerified",
+            "galleryVerified",
+            "galleryImageCount",
+            "gallerySafetyMode",
+            "galleryStoredAs",
+            "knowledgeCore",
+            "gallerySourceImageCount",
+            "galleryRefreshedAt",
+            "fullRebuildAt",
+            "galleryPreferredCount",
+            "galleryPreferredReached",
+            "galleryEnrichmentStatus",
+            "galleryRebuiltFrom",
+            "seoEligible",
+            "encyclopediaIdentity",
+            "raw"
+          ],
+          "rawKeys": [
+            "images",
+            "parsed",
+            "listingBoundImages",
+            "photoIdentityVerified",
+            "detailIdentityVerified",
+            "autoPapaDetailPriceVerified",
+            "autoPapaDetailPriceUsd",
+            "autoPapaDetailPriceAuthority",
+            "autoPapaStructuredPriceUsd",
+            "autoPapaListPriceUsd",
+            "vehicleKnowledgeModel",
+            "powertrainSafety",
+            "recoveryExactSourceUrl",
+            "recoveryExactPhotoIdentity",
+            "recoveryCalculatedRub",
+            "recoveryPreliminaryPowerPending",
+            "recoveryBodySourceOnly",
+            "normalizedCatalogModel",
+            "originalCatalogTitle",
+            "publicPriority"
+          ],
+          "fields": {
+            "photoIdentityVerified": true,
+            "knowledgeCore.modelId": "kia/sportage",
+            "knowledgeCore.modelImageBinaryVerified": false,
+            "encyclopediaIdentity.rawMake": "Kia",
+            "encyclopediaIdentity.rawModel": "Sportage",
+            "encyclopediaIdentity.canonicalBrandId": "kia",
+            "encyclopediaIdentity.canonicalModelId": "kia/sportage",
+            "encyclopediaIdentity.makeSource": "canonical",
+            "encyclopediaIdentity.modelSource": "canonical",
+            "raw.parsed.make": "Kia",
+            "raw.parsed.model": "Sportage",
+            "raw.parsed.year": 2023,
+            "raw.parsed.engineCc": 2500,
+            "raw.parsed.fuel": "petrol",
+            "raw.listingBoundImages": true,
+            "raw.photoIdentityVerified": true,
+            "raw.detailIdentityVerified": true,
+            "raw.vehicleKnowledgeModel.id": "kia/sportage",
+            "raw.vehicleKnowledgeModel.matchedBy": "model",
+            "raw.vehicleKnowledgeModel.score": 141,
+            "raw.vehicleKnowledgeModel.popularityDecile": 1,
+            "raw.vehicleKnowledgeModel.representativePowerHp": 150,
+            "raw.powertrainSafety.correctedTo": "combustion",
+            "raw.powertrainSafety.reason": "explicit_combustion_fuel_and_engine",
+            "raw.recoveryExactPhotoIdentity": true,
+            "raw.recoveryPreliminaryPowerPending": false,
+            "raw.normalizedCatalogModel": "Sportage",
+            "raw.publicPriority.ageYears": 3,
+            "raw.publicPriority.powerHp": 150
+          }
+        }
+      ],
+      "readRows": 96
+    }
+  },
+  "currencyEvidence": {
+    "url": "https://www.cbr.ru/scripts/XML_daily.asp",
+    "documentation": "https://www.cbr.ru/development/sxml/",
+    "status": 200,
+    "finalUrl": "https://www.cbr.ru/scripts/XML_daily.asp",
+    "contentType": "application/xml; charset=windows-1251",
+    "bytes": 9519,
+    "bodyHash": "24aba886ae68b15d001e8caaa14f29b1b05cfd723a61c2c195f28ab29e7ccf9e",
+    "rateDate": "2026-09-05",
+    "currencies": [
+      "GEL",
+      "AED",
+      "USD",
+      "EUR",
+      "CNY",
+      "KRW"
+    ],
+    "fresh": true
+  },
+  "pricingSnapshot": {
+    "ratesUpdatedAt": "2026-09-06T09:19:09.578Z",
+    "liveRatesRequested": true
+  },
+  "unrestoredBindingSamples": {
+    "encar_direct": [
+      {
+        "id": "8514f261de877be05d5cd487",
+        "sourceOfferId": "42427375"
+      },
+      {
+        "id": "f938a4d3942d97cb21371a4f",
+        "sourceOfferId": "42585553"
+      }
+    ],
+    "autohome_new_china_open": [
+      {
+        "id": "2fa4bc18a1ca3c17551818ee",
+        "sourceOfferId": "1022897",
+        "exactDetail": true
+      },
+      {
+        "id": "9b3fb107e4ef80b900f7879a",
+        "sourceOfferId": "1022903",
+        "exactDetail": true
+      }
+    ],
+    "autohome_used_china_open": [
+      {
+        "id": "242fbce8f9aaa2562b63f169",
+        "sourceOfferId": "59344270",
+        "detailInfoId": 59344270,
+        "listingInfoId": 59344270,
+        "exactDetail": false,
+        "detailIdentityVerified": false
+      },
+      {
+        "id": "5934a57db162c4dfb1191448",
+        "sourceOfferId": "59609193",
+        "detailInfoId": 59609193,
+        "listingInfoId": 59609193,
+        "exactDetail": true,
+        "detailIdentityVerified": true
+      }
+    ],
+    "dubizzle_uae_open": [
+      {
+        "id": "4decc0f52a16f7ddb4485e80",
+        "sourceOfferId": "a5feb2ce41eb4bd590fd2d2ac4bfa273",
+        "parsedId": "a5feb2ce41eb4bd590fd2d2ac4bfa273",
+        "exactDetail": true,
+        "detailIdentityVerified": true,
+        "parsedFuel": "Petrol"
+      },
+      {
+        "id": "6bf8c91f9704aa729b7823b3",
+        "sourceOfferId": "4ec7dcd1cbae44998d8afb41ce23ea6c",
+        "parsedId": "4ec7dcd1cbae44998d8afb41ce23ea6c",
+        "exactDetail": true,
+        "detailIdentityVerified": true,
+        "parsedFuel": "Petrol"
+      }
+    ],
+    "dubicars_uae_exact": [
+      {
+        "id": "ca8deab2cc8efc73e1eab8ef",
+        "sourceOfferId": "1011653"
+      },
+      {
+        "id": "9a5ad2c483f42d0045e1afbf",
+        "sourceOfferId": "993764"
+      }
+    ],
+    "autoscout_europe_open": [
+      {
+        "id": "d8199aa9fe8549a0dfec7cf5",
+        "sourceOfferId": "db47bd1a-c857-4e46-9d70-b66b20e83c1e",
+        "parsedId": "db47bd1a-c857-4e46-9d70-b66b20e83c1e",
+        "exactDetail": false,
+        "detailIdentityVerified": false,
+        "parsedEngine": 1495,
+        "parsedFuel": "Gasoline",
+        "parsedPower": 116
+      },
+      {
+        "id": "8b22200c06469c3353add697",
+        "sourceOfferId": "643ff0df-a365-4d8e-af9e-170cf84ade23",
+        "parsedId": "643ff0df-a365-4d8e-af9e-170cf84ade23",
+        "exactDetail": false,
+        "detailIdentityVerified": false,
+        "parsedEngine": 1499,
+        "parsedFuel": "Gasoline",
+        "parsedPower": 139
+      }
+    ],
+    "mobile_de_open": [
+      {
+        "id": "52f244f7ca39b9872f740fd2",
+        "sourceOfferId": "454972668",
+        "exactDetail": true
+      },
+      {
+        "id": "97fcb94cfda853232c66875c",
+        "sourceOfferId": "41071146453376",
+        "exactDetail": true
+      }
+    ],
+    "myauto_georgia_list": [
+      {
+        "id": "9f1115bb936345fba656dd82",
+        "sourceOfferId": "123180194",
+        "parsedId": "123180194",
+        "parsedFuel": "Petrol"
+      },
+      {
+        "id": "ba96b0935200c921a1c5728f",
+        "sourceOfferId": "123125549",
+        "parsedId": "123125549",
+        "parsedFuel": "Petrol"
+      }
+    ],
+    "autopapa_georgia_open": [
+      {
+        "id": "64638b272644c0bbb44ff5a2",
+        "sourceOfferId": "954136",
+        "parsedId": "954136",
+        "detailIdentityVerified": true,
+        "parsedEngine": 2500,
+        "parsedFuel": "petrol"
+      },
+      {
+        "id": "122be20034775de1a9261b02",
+        "sourceOfferId": "942921",
+        "parsedId": "942921",
+        "detailIdentityVerified": true,
+        "parsedEngine": 1500
+      }
+    ]
+  },
+  "recovery": {
+    "korea": {
+      "matchedSavedRows": 2840,
+      "sourceEvidenceRestored": 1545,
+      "specificationComplete": 1528,
+      "recalculated": 1511,
+      "automaticBeforeDedup": 1511,
+      "selectorBeforeDedup": 0,
+      "missingInternal": 0,
+      "changedFuel": 0,
+      "changedEngineCc": 0,
+      "changedPowerHp": 17,
+      "blockers": {
+        "powerHp:peak_power_missing": 17,
+        "certifiedPower:certified_30min_power_missing": 17,
+        "listing_identity_photo_price_or_calculation_gate": 17,
+        "fuelPowertrain:unclassified_field_provenance": 1295,
+        "engineCc:unclassified_field_provenance": 1185,
+        "powerHp:non_exact_power_provenance": 941
+      },
+      "examples": [
+        {
+          "id": "b16e511a14a897a232c9da07",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "status": "automatic",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "recovered": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "reasons": []
+        },
+        {
+          "id": "c77f1f861f1d048fb1f9b610",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "status": "automatic",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "recovered": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "reasons": []
+        },
+        {
+          "id": "62cbf7b61fc84ab0c5ef834b",
+          "make": "Kia",
+          "model": "Morning (JA)",
+          "status": "automatic",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "recovered": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "reasons": []
+        },
+        {
+          "id": "947ee8982f576268a98ac5ed",
+          "make": "Kia",
+          "model": "Ray",
+          "status": "automatic",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "recovered": {
+            "fuel": "petrol",
+            "engineCc": 998,
+            "powerHp": 76
+          },
+          "reasons": []
+        }
+      ],
+      "accepted": 1511,
+      "automaticAccepted": 1511,
+      "selectorAccepted": 0,
+      "automaticShare": 1
+    },
+    "china": {
+      "matchedSavedRows": 3092,
+      "sourceEvidenceRestored": 517,
+      "specificationComplete": 0,
+      "recalculated": 0,
+      "automaticBeforeDedup": 0,
+      "selectorBeforeDedup": 0,
+      "missingInternal": 0,
+      "changedFuel": 49,
+      "changedEngineCc": 516,
+      "changedPowerHp": 7,
+      "blockers": {
+        "fuelPowertrain:unclassified_field_provenance": 2447,
+        "engineCc:unclassified_field_provenance": 2569,
+        "engineCc:engine_cc_missing": 516,
+        "fuelPowertrain:fuel_or_powertrain_missing": 176,
+        "certifiedPower:certified_30min_power_missing": 49,
+        "powerHp:non_exact_power_provenance": 80,
+        "powerHp:powertrain_identity_conflict": 93,
+        "powerHp:peak_power_missing": 1
+      },
+      "examples": [
+        {
+          "id": "2fa4bc18a1ca3c17551818ee",
+          "make": "Changan",
+          "model": "K5",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "powerHp": 120
+          },
+          "recovered": {
+            "powerHp": 120
+          },
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance"
+          ]
+        },
+        {
+          "id": "9b3fb107e4ef80b900f7879a",
+          "make": "Changan",
+          "model": "K5",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "powerHp": 120
+          },
+          "recovered": {
+            "powerHp": 120
+          },
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance"
+          ]
+        },
+        {
+          "id": "31b565a83621f71af68bab3e",
+          "make": "Changan",
+          "model": "K5",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "powerHp": 120
+          },
+          "recovered": {
+            "powerHp": 120
+          },
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance"
+          ]
+        },
+        {
+          "id": "5e165e44d8d54acbac2232aa",
+          "make": "Changan",
+          "model": "K5",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "powerHp": 120
+          },
+          "recovered": {
+            "powerHp": 120
+          },
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance"
+          ]
+        }
+      ],
+      "accepted": 0,
+      "automaticAccepted": 0,
+      "selectorAccepted": 0,
+      "automaticShare": null
+    },
+    "uae": {
+      "matchedSavedRows": 4647,
+      "sourceEvidenceRestored": 0,
+      "specificationComplete": 0,
+      "recalculated": 0,
+      "automaticBeforeDedup": 0,
+      "selectorBeforeDedup": 0,
+      "missingInternal": 0,
+      "changedFuel": 0,
+      "changedEngineCc": 0,
+      "changedPowerHp": 0,
+      "blockers": {
+        "fuelPowertrain:unclassified_field_provenance": 4639,
+        "engineCc:unclassified_field_provenance": 4646,
+        "powerHp:non_exact_power_provenance": 4531,
+        "powerHp:powertrain_identity_conflict": 9,
+        "fuelPowertrain:fuel_or_powertrain_missing": 8
+      },
+      "examples": [
+        {
+          "id": "4decc0f52a16f7ddb4485e80",
+          "make": "Suzuki",
+          "model": "Celerio",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 999,
+            "powerHp": 99
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "6bf8c91f9704aa729b7823b3",
+          "make": "Kia",
+          "model": "Picanto",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1499,
+            "powerHp": 99
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "6d77add7a9dc9279da3f1be0",
+          "make": "Suzuki",
+          "model": "Swift",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1499,
+            "powerHp": 99
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "382528a78c67084ca39d8e60",
+          "make": "Suzuki",
+          "model": "Carry",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 1500,
+            "powerHp": 99
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        }
+      ],
+      "accepted": 0,
+      "automaticAccepted": 0,
+      "selectorAccepted": 0,
+      "automaticShare": null
+    },
+    "europe": {
+      "matchedSavedRows": 5259,
+      "sourceEvidenceRestored": 4195,
+      "specificationComplete": 4083,
+      "recalculated": 4083,
+      "automaticBeforeDedup": 4083,
+      "selectorBeforeDedup": 0,
+      "missingInternal": 0,
+      "changedFuel": 84,
+      "changedEngineCc": 30,
+      "changedPowerHp": 17,
+      "blockers": {
+        "fuelPowertrain:fuel_or_powertrain_missing": 83,
+        "certifiedPower:certified_30min_power_missing": 82,
+        "fuelPowertrain:unclassified_field_provenance": 1064,
+        "engineCc:unclassified_field_provenance": 1061,
+        "engineCc:engine_cc_missing": 30,
+        "powerHp:non_exact_power_provenance": 1,
+        "powerHp:peak_power_missing": 1
+      },
+      "examples": [
+        {
+          "id": "86805caa73f4c7d6948e6463",
+          "make": "Fiat",
+          "model": "Panda",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "recovered": {
+            "fuel": "hybrid",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "reasons": [
+            "fuelPowertrain:fuel_or_powertrain_missing",
+            "certifiedPower:certified_30min_power_missing"
+          ]
+        },
+        {
+          "id": "876c0664f4c30937bfeeb43d",
+          "make": "Fiat",
+          "model": "Panda",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "recovered": {
+            "fuel": "hybrid",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "reasons": [
+            "fuelPowertrain:fuel_or_powertrain_missing",
+            "certifiedPower:certified_30min_power_missing"
+          ]
+        },
+        {
+          "id": "e5146a6799eaf2160f50e68e",
+          "make": "Fiat",
+          "model": "Panda",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "recovered": {
+            "fuel": "hybrid",
+            "engineCc": 999,
+            "powerHp": 69
+          },
+          "reasons": [
+            "fuelPowertrain:fuel_or_powertrain_missing",
+            "certifiedPower:certified_30min_power_missing"
+          ]
+        },
+        {
+          "id": "3d25b8e538fadca54c47d003",
+          "make": "Renault",
+          "model": "Kangoo",
+          "status": "automatic",
+          "previous": {
+            "fuel": "diesel",
+            "engineCc": 1461,
+            "powerHp": 116
+          },
+          "recovered": {
+            "fuel": "diesel",
+            "engineCc": 1461,
+            "powerHp": 116
+          },
+          "reasons": []
+        }
+      ],
+      "accepted": 4083,
+      "automaticAccepted": 4083,
+      "selectorAccepted": 0,
+      "automaticShare": 1
+    },
+    "georgia": {
+      "matchedSavedRows": 216,
+      "sourceEvidenceRestored": 0,
+      "specificationComplete": 0,
+      "recalculated": 0,
+      "automaticBeforeDedup": 0,
+      "selectorBeforeDedup": 0,
+      "missingInternal": 0,
+      "changedFuel": 0,
+      "changedEngineCc": 0,
+      "changedPowerHp": 0,
+      "blockers": {
+        "fuelPowertrain:unclassified_field_provenance": 216,
+        "engineCc:unclassified_field_provenance": 215,
+        "powerHp:non_exact_power_provenance": 161
+      },
+      "examples": [
+        {
+          "id": "9f1115bb936345fba656dd82",
+          "make": "Mazda",
+          "model": "CX-30",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "powerHp": 156
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "ba96b0935200c921a1c5728f",
+          "make": "Toyota",
+          "model": "Corolla",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "powerHp": 94
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "b9788782671a7cf5efb2ec29",
+          "make": "Hyundai",
+          "model": "Kona",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "powerHp": 149
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        },
+        {
+          "id": "3badfeefe32a74581e5f1467",
+          "make": "Kia",
+          "model": "Sportage",
+          "status": "blocked",
+          "previous": {
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "powerHp": 150
+          },
+          "recovered": {},
+          "reasons": [
+            "fuelPowertrain:unclassified_field_provenance",
+            "engineCc:unclassified_field_provenance",
+            "powerHp:non_exact_power_provenance"
+          ]
+        }
+      ],
+      "accepted": 0,
+      "automaticAccepted": 0,
+      "selectorAccepted": 0,
+      "automaticShare": null
+    }
+  },
+  "recoveryTotals": {
+    "input": 16054,
+    "accepted": 5594,
+    "automatic": 5594,
+    "selectors": 0,
+    "duplicatesRemoved": 0,
+    "identityRejected": 0,
+    "qualityRejected": 0,
+    "priceOutliers": 0,
+    "modelQuotaRemoved": 0,
+    "selectorQuotaRemoved": 0,
+    "publishAllowed": false,
+    "productionReleaseReady": false,
+    "automaticShare": 1
+  },
+  "requestCount": 120,
+  "deniedRequests": 0,
+  "currencyRequestCount": 1,
+  "complete": true
+}

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { persistCatalogOffers } from "../apps/web/lib/catalog/storage";
+import { persistCatalogOffers, isCatalogProductionRefreshAllowed } from "../apps/web/lib/catalog/storage";
 
 test("catalog production collection, cleanup and publication remain paused during specification repair", () => {
   const queue = fs.readFileSync(".github/workflows/catalog-v3-sequential-queue.yml", "utf8");
@@ -27,16 +27,33 @@ test("Object Storage publication fails before any catalog write", async () => {
   }
 });
 
-test("future six-market refreshes retain non-Japan listings for fourteen days", () => {
+test("future five-market refreshes retain listings for fourteen days", () => {
   const queue = fs.readFileSync(".github/workflows/catalog-v3-sequential-queue.yml", "utf8");
   const retentionValues = [...queue.matchAll(/retention_ms:\s*"(\d+)"/g)].map((match) => match[1]);
 
   assert.deepEqual(retentionValues, [
-    "2592000000",
     "1209600000",
     "1209600000",
     "1209600000",
     "1209600000",
     "1209600000",
   ]);
+});
+
+
+test("approved V3 refresh requires a non-Japan market, preservation and both validation gates", () => {
+  const options: any = { productionRefreshMarket: "korea", preservePublicOffersByMarket: {
+    china: [], japan: [], uae: [], europe: [], georgia: []
+  }, beforePersistValidate() {}, beforePublishValidate() {} };
+  assert.equal(isCatalogProductionRefreshAllowed(options), true);
+  for (const market of ["japan", "kyrgyzstan", "", undefined]) {
+    assert.equal(isCatalogProductionRefreshAllowed({ ...options, productionRefreshMarket: market }), false);
+  }
+  for (const key of ["beforePersistValidate", "beforePublishValidate", "preservePublicOffersByMarket"]) {
+    assert.equal(isCatalogProductionRefreshAllowed({ ...options, [key]: undefined }), false);
+  }
+  assert.equal(isCatalogProductionRefreshAllowed({ ...options, modificationRecovery: true }), false);
+  assert.equal(isCatalogProductionRefreshAllowed({ ...options, appendPublicOffersByMarket: {} }), false);
+  const missingJapan = { ...options.preservePublicOffersByMarket }; delete missingJapan.japan;
+  assert.equal(isCatalogProductionRefreshAllowed({ ...options, preservePublicOffersByMarket: missingJapan }), false);
 });

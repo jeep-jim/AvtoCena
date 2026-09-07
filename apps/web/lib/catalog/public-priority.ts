@@ -1,6 +1,8 @@
+import { isCatalogCombustionLowPower } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
 import { isCatalogPowerScenario } from "./power-scenario";
 import { catalogPowerSanity } from "./power-sanity";
+import { hasModificationSelection, isModificationScenario } from "./modification-contract";
 
 export type CatalogPublicPriority = {
   eligible: boolean;
@@ -250,6 +252,9 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
+  if (offer?.market !== "japan" && (offer?.modificationSelection || isModificationScenario(offer)
+    || offer?.calculationSnapshot?.powerScenario?.source === "customer_input"
+    || offer?.recoveryQualification?.status === "blocked")) return 0;
   // Never trust a legacy projected amount without re-checking the underlying
   // calculation contract. Unfinished calculations may remain visible as
   // inventory, but they never expose a delivered price.
@@ -324,6 +329,8 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
 
   if (japanAuction && !japanAuctionSoldIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "japan_auction_sold_identity_unverified", ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
+  if (isModificationScenario(offer)) return { ...base, eligible: false, tier: 99, reason: "personal_scenario", calculated: false, visibleRub: 0 };
+  if (hasModificationSelection(offer) && sourcePriced) return { ...base, eligible: true, tier: 8, reason: "selection_required", calculated: false, preliminary: false, visibleRub: 0 };
 
   // The public catalog is a delivered-price product, not an internal inventory
   // browser. Keep source-priced rows with unfinished customs inputs in internal
@@ -346,7 +353,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
 
   const recent = ageYears <= maximumAgeYears;
-  const economicalPower = powerHp > 0 && powerHp <= maximumPowerHp;
+  const economicalPower = isCatalogCombustionLowPower(offer, maximumPowerHp);
   const popular = popularityDecile <= popularDecile;
   const preferredPrice = rawTotalRub <= preferredMaximumRub;
   let tier = preferredPrice ? 6 : 7;

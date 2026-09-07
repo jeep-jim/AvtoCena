@@ -1,3 +1,5 @@
+const { catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -23,7 +25,8 @@ const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET |
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
-const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
+const retentionMs = catalogMarketRetentionMs("korea");
+const retentionByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, catalogMarketRetentionMs(market)]));
 const retentionCutoff = Date.now() - retentionMs;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {
@@ -114,18 +117,13 @@ function exactSourceBound(offer) {
     && raw.recoveryBodySourceOnly === true;
 }
 function canonicalPublic(offer) {
-  return hasCredibleOfferContent({ ...offer, status: "active" });
+  return hasCredibleOfferContent({ ...offer, status: offer.market === "japan" ? "active" : offer.status || "active" });
 }
 function publicExistingStillValid(offer) {
   return canonicalPublic(offer) && publishableCalculation(offer) && isCatalogOfferBusinessLiquid(offer);
 }
-function freshness(offer) {
-  return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
-}
-function withinRetention(offer) {
-  const timestamp = freshness(offer);
-  return timestamp > 0 && timestamp >= retentionCutoff;
-}
+function freshness(offer) { return catalogOfferFreshness(offer); }
+function withinRetention(offer) { return catalogOfferWithinRetention(offer); }
 
 function quality(a, b) {
   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
@@ -139,12 +137,13 @@ function quality(a, b) {
 }
 
 function normalizeVisible(raw) {
+  raw = preserveCatalogOfferObservation(raw);
   const op = raw?.operational || {};
   const sourceRaw = op?.raw || {};
   const exactPhoto = sourceRaw.recoveryExactPhotoIdentity === true;
   return normalizeVehicleOfferSpecs({
     ...raw,
-    status: "active",
+    status: raw.market === "japan" ? "active" : raw.status || "active",
     images: credibleCatalogImages(raw?.images || []).slice(0, 30),
     operational: {
       ...op,
@@ -198,7 +197,8 @@ const retainedPreviousByMarket = new Map();
 for (const market of markets) {
   const input = path.join(inputDir, `catalog-rebuild-${market}.json`);
   const payload = JSON.parse(await fs.readFile(input, "utf8"));
-  const sourceRows = Array.isArray(payload?.offers) ? payload.offers : [];
+  const confirmedWithdrawals = catalogConfirmedWithdrawalIndex([payload], market);
+  const sourceRows = (Array.isArray(payload?.offers) ? payload.offers : []).filter((offer) => !catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) && catalogOfferWithinRetention(offer));
   const incoming = new Map();
   const rejected = {};
   const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
@@ -221,11 +221,11 @@ for (const market of markets) {
   previousPublicCountByMarket[market] = previous.length;
   const candidates = new Map();
   const retainedPrevious = [];
-  for (const offer of await repriceRowsWithCurrentRates(previous)) {
+  for (const offer of await repriceRowsWithCurrentRates(previous.filter((offer) => !catalogOfferWithdrawnByReport(offer, confirmedWithdrawals)))) {
     const year = Number(offer?.year || 0);
     if (!offer?.id || !["active", "stale"].includes(String(offer?.status || ""))) continue;
     if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
-    if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
+    if (catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) || !withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
     retainedPrevious.push(offer);
   }
@@ -303,7 +303,7 @@ for (const market of markets) {
     calculatedCount: rows.filter(exactCalculation).length,
     preliminaryCount: rows.filter(isPreliminaryPowerPendingCalculation).length,
     minYear: catalogMinYearForMarket(market),
-    retentionMs,
+    retentionMs: catalogMarketRetentionMs(market),
     rateRepriced,
     rateRepriceFailed,
     officialRateDate: String(currentRates.get("EUR")?.rateDate || ""),
@@ -331,7 +331,7 @@ if (dryRun) {
     markets,
     dryRun: true,
     published: false,
-    retentionMs,
+    retentionMs: catalogMarketRetentionMs(market),
     minImagesPerOffer,
     preserveUntouchedExact,
     byMarket: marketReports,
@@ -410,6 +410,7 @@ const report = {
   published: true,
   generationId: manifest.generationId,
   retentionMs,
+  retentionByMarket,
   rateRepriced,
   rateRepriceFailed,
   officialRateDate: String(currentRates.get("EUR")?.rateDate || ""),

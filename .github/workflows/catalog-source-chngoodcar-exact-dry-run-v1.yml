@@ -1,0 +1,62 @@
+name: Catalog source qualification · Good Car exact adapter dry-run v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/chngoodcar-exact-adapter-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-chngoodcar-exact-dry-run-v1.yml"
+      - "apps/web/lib/catalog/chngoodcar-exact-source.ts"
+      - "tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts"
+      - "scripts/catalog-source-chngoodcar-exact-dry-run-v1.ts"
+      - "data/catalog/source-partial-classification-v1.json"
+      - "apps/web/lib/catalog/required-catalog-sources.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-chngoodcar-exact-dry-run-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Unit-test Good Car exact fail-closed adapter
+        run: node --import tsx --test tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts
+      - name: Type-check adapter integration
+        run: npm run typecheck
+      - name: Live exact dry-run without production writes
+        env:
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+          CATALOG_CHNGOODCAR_MAX_DETAILS_PER_RUN: "24"
+        run: node --import tsx -e "import('./scripts/catalog-source-chngoodcar-exact-dry-run-v1.ts').then((m) => m.runGoodCarExactDryRun())"
+      - name: Verify no-write evidence envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-exact-dry-run-v1.json', 'utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','productionAllowlisted']) {
+            if (p[key] !== false) throw new Error(`${key} must remain false`);
+          }
+          if (p.sourceClass !== 'exact_catalog') throw new Error('sourceClass');
+          if (p.sourcePublishAllowed !== false) throw new Error('sourcePublishAllowed');
+          if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`dry-run failures: ${p.failures}`);
+          if (!Array.isArray(p.normalizedSamples) || p.normalizedSamples.length < 2) throw new Error('normalizedSamples');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-chngoodcar-exact-dry-run-v1
+          path: catalog-source-chngoodcar-exact-dry-run-v1.json
+          if-no-files-found: warn
+          retention-days: 7

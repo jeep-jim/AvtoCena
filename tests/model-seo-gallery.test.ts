@@ -12,13 +12,12 @@ test("model page exposes sourced generation photos without replacing listing pho
   assert.match(layout, /rel="nofollow noopener noreferrer"/);
 });
 
-test("model page adds customer-facing SEO content and FAQ structured data", () => {
-  assert.match(layout, /"@type": "FAQPage"/);
-  assert.match(layout, /Описание и характеристики/);
-  assert.match(layout, /характеристики и расчёт стоимости/);
-  assert.match(layout, /Годы выпуска/);
-  assert.match(layout, /Тип топлива/);
-  assert.match(layout, /Рассчитать/);
-  assert.doesNotMatch(layout, /Автосопоставление включено/);
-  assert.doesNotMatch(layout, /стоит в очереди базы знаний/);
+test("model gallery cannot invent family specifications or FAQ structured data", () => {
+  assert.doesNotMatch(layout, /"@type": "FAQPage"/);
+  assert.doesNotMatch(layout, /representativePowerHp/);
+  assert.match(layout, /if \(!brand\) return children/);
+  assert.match(layout, /if \(!model\) return children/);
+  assert.match(layout, /media\?\.images\?\.length/);
+  assert.match(layout, /media\.sourceUrl/);
+  assert.doesNotMatch(layout, /Автосопоставление включено|стоит в очереди базы знаний/);
 });

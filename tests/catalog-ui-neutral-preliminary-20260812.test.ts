@@ -44,8 +44,8 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
 });
 
-test("pending source-priced cards stay out of the public grid", () => {
-  assert.match(catalogCard, /if \(!visibleRub\) return null/);
+test("pending cards require an admitted modification selector to enter the public grid", () => {
+  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired\) return null/);
   assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
 });
 

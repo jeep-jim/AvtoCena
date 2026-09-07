@@ -225,9 +225,8 @@ function engineEvidence(rawValue: string | string[] | undefined): DubicarsEviden
   const values: number[] = [];
   for (const raw of rawValues) {
     if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return { rawValues, status: "ambiguous" };
-    const liters = raw.match(/^([0-9]+(?:[.,][0-9]+)?)\s*l(?:itre|iter)?s?$/i);
-    const cc = raw.match(/^([0-9][0-9, ]{2,7})\s*(?:cc|cm3|cm³)$/i);
-    const value = liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : integer(cc?.[1]);
+    const cc = raw.match(/^([0-9][0-9, ]{2,7})\s*(?:cc|cm3|cm³|mL)$/i);
+    const value = integer(cc?.[1]);
     if (!value || value < 300 || value > 10_000) return { rawValues, status: "ambiguous" };
     values.push(value);
   }
@@ -296,8 +295,10 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
   );
   const title = rawTitle.replace(/\s+(?:19|20)\d{2}\s+for sale.*$/i, "").trim();
   const parsedName = makeModel(title);
-  const specsPlain = specificationText(fullPlain);
-  const pageYear = Number(specsPlain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
+  const highlightsPlain = specificationText(fullPlain);
+  const specificationSection = markup.match(/<section\b[^>]*\bid=["']item-specifications["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  const specsPlain = specificationSection ? clean(specificationSection) : highlightsPlain;
+  const pageYear = Number(highlightsPlain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
   const urlYear = yearFromUrl(url);
   const yearEvidence = exactYearEvidence(pageYear, urlYear);
   if (yearEvidence.status !== "exact") return null;
@@ -316,10 +317,12 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
   // DubiCars detail pages contain prices from recommendation cards after the
   // primary listing. The listing-specific enquiry link carries Price: 0 when
   // the seller selected "Price on request"; never borrow a neighbour's price.
-  const parsedPrice = listingExplicitlyHasNoPrice(markup)
+  const primaryMarkup = markup.match(/<section\b[^>]*\bid=["']title-bar["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  const primaryPlain = primaryMarkup ? clean(primaryMarkup) : fullPlain.split(/\b(?:Similar cars|People also viewed|Recommended cars)\b/i)[0];
+  const parsedPrice = listingExplicitlyHasNoPrice(markup) || /price on request/i.test(primaryPlain)
     ? { price: undefined, currency: undefined }
-    : price(fullPlain);
-  const mileageKm = integer(specsPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]);
+    : price(primaryPlain);
+  const mileageKm = integer(highlightsPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]);
   const engineRaw = labelValues(specsPlain, ["Engine capacity"], stops);
   const powerRaw = labelValues(specsPlain, ["Horsepower"], stops);
   const fuelRaw = labelValues(specsPlain, ["Fuel Type", "Fuel"], stops);
@@ -441,6 +444,10 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     const row = offer.operational.raw as DubicarsCurrentRow;
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(4, Number.isFinite(requested) ? requested : 30));
+    if (process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only") {
+      return row.images.slice(0, limit).map(url => ({ id: "", url, objectKey: "", checksum: "", size: 0,
+        mimeType: /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : "image/jpeg" }));
+    }
     const cached: CatalogImage[] = [];
     for (let index = 0; index < row.images.length && cached.length < limit; index += 4) {
       const batch = await Promise.all(row.images.slice(index, index + 4).map((imageUrl) =>

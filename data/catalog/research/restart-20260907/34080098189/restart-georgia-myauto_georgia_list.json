@@ -1,0 +1,1777 @@
+{
+  "version": 4,
+  "completed": true,
+  "checkedAt": "2026-09-07T03:35:42.625Z",
+  "productionWrites": false,
+  "existingProductionBridgeAllowed": true,
+  "bridgeUpstreamTrafficObserved": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 50,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "georgia",
+      "requests": [
+        {
+          "origin": "https://avtocena.com",
+          "path": "/api/internal/georgia-recovery-e2f913",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json",
+          "bodyEvidence": {
+            "bytes": 156471,
+            "sha256": "84a172c2d7dee51d8ef9b9d1f7bf0dc00ac81f7ab431d2720125e85fefeeecb4",
+            "rscPushCount": 0,
+            "hasSpecTable": false,
+            "hasBoundSpecId": false,
+            "hasCarId": false,
+            "hasFlightContentType": false
+          }
+        }
+      ],
+      "sourceId": "myauto_georgia_list",
+      "listingRows": 11,
+      "normalizedRows": 11,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [
+        {
+          "sourceOfferId": "123142070",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 31351,
+            "sourceCurrency": "GEL"
+          },
+          "images": 7,
+          "sourceUrl": "https://myauto.ge/en/pr/123142070/for-sale-%D0%A1rossover-toyota-chr-2020-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_1.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_2.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_3.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_4.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_5.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_6.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/7/0/2/4/1/large/123142070_7.jpg?v=4"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 31351,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "toyota/c-hr",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 27,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 31351,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "122612474",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 54865,
+            "sourceCurrency": "GEL"
+          },
+          "images": 13,
+          "sourceUrl": "https://myauto.ge/en/pr/122612474/for-sale-jeep-subaru-forester-2025-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_1.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_2.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_3.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_4.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_5.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_6.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_7.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_8.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_9.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_10.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_11.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_12.jpg?v=9",
+            "https://static.tnet.ge/myauto/photos/7/4/2/1/6/large/122612474_13.jpg?v=9"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2025,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 54865,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "subaru/forester",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 17,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 54865,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123268392",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 3000,
+            "sourcePrice": 287386,
+            "sourceCurrency": "GEL"
+          },
+          "images": 10,
+          "sourceUrl": "https://myauto.ge/en/pr/123268392/for-sale-sedan-land-rover-range-rover-2023-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_1.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_2.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_3.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_4.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_5.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_6.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_7.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_8.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_9.jpg?v=5",
+            "https://static.tnet.ge/myauto/photos/9/3/8/6/2/large/123268392_10.jpg?v=5"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 3000,
+            "sourcePrice": 287386,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "land-rover/range-rover",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 147,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 3000,
+            "sourcePrice": 287386,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123226862",
+          "yearAllowed": true,
+          "before": {
+            "year": 2024,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 52252,
+            "sourceCurrency": "GEL"
+          },
+          "images": 15,
+          "sourceUrl": "https://myauto.ge/en/pr/123226862/for-sale-jeep-kia-sportage-2024-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_1.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_2.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_3.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_4.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_5.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_6.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_7.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_8.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_9.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_10.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_11.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_12.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_13.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_14.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/8/6/2/2/large/123226862_15.jpg?v=1"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2024,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 52252,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "kia/sportage",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 176,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 52252,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123026618",
+          "yearAllowed": true,
+          "before": {
+            "year": 2022,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 22991,
+            "sourceCurrency": "GEL"
+          },
+          "images": 15,
+          "sourceUrl": "https://myauto.ge/en/pr/123026618/for-sale-jeep-subaru-outback-2022-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_1.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_2.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_3.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_4.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_5.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_6.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_7.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_8.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_9.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_10.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_11.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_12.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_13.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_14.jpg?v=8",
+            "https://static.tnet.ge/myauto/photos/1/6/6/2/0/large/123026618_15.jpg?v=8"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2022,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 22991,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "subaru/outback",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 9,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "fuel": "petrol",
+            "engineCc": 2500,
+            "sourcePrice": 22991,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123272688",
+          "yearAllowed": true,
+          "before": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "engineCc": 2500,
+            "sourcePrice": 66621,
+            "sourceCurrency": "GEL"
+          },
+          "images": 12,
+          "sourceUrl": "https://myauto.ge/en/pr/123272688/for-sale-sedan-toyota-camry-2025-hybrid-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_1.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_2.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_3.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_4.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_5.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_6.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_7.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_8.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_9.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_10.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_11.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/8/6/2/7/2/large/123272688_12.jpg?v=1"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "engineCc": 2500,
+            "sourcePrice": 66621,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "toyota/camry",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 18,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "fuel": "hybrid",
+            "engineCc": 2500,
+            "sourcePrice": 66621,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123262275",
+          "yearAllowed": true,
+          "before": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 18288,
+            "sourceCurrency": "GEL"
+          },
+          "images": 15,
+          "sourceUrl": "https://myauto.ge/en/pr/123262275/for-sale-sedan-nissan-versa-2021-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_1.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_2.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_3.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_4.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_5.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_6.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_7.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_8.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_9.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_10.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_11.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_12.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_13.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_14.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/7/2/2/6/2/large/123262275_15.jpg?v=0"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 18288,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "nissan/versa",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 2,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "fuel": "petrol",
+            "engineCc": 1600,
+            "sourcePrice": 18288,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123127847",
+          "yearAllowed": true,
+          "before": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 57477,
+            "sourceCurrency": "GEL"
+          },
+          "images": 12,
+          "sourceUrl": "https://myauto.ge/en/pr/123127847/for-sale-jeep-hyundai-kona-2023-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_1.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_2.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_3.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_4.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_5.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_6.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_7.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_8.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_9.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_10.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_11.jpg?v=4",
+            "https://static.tnet.ge/myauto/photos/4/8/7/2/1/large/123127847_12.jpg?v=4"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 57477,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "hyundai/kona",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 84,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 57477,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123268002",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 3500,
+            "sourcePrice": 4290,
+            "sourceCurrency": "GEL"
+          },
+          "images": 12,
+          "sourceUrl": "https://myauto.ge/en/pr/123268002/for-sale-jeep-lexus-rx-450-2020-hybrid-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_1.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_2.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_3.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_4.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_5.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_6.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_7.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_8.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_9.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_10.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_11.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/0/0/8/6/2/large/123268002_12.jpg?v=1"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 3500,
+            "sourcePrice": 4290,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "lexus/rx",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 2,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 3500,
+            "sourcePrice": 4290,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123262263",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 1800,
+            "sourcePrice": 24820,
+            "sourceCurrency": "GEL"
+          },
+          "images": 9,
+          "sourceUrl": "https://myauto.ge/en/pr/123262263/for-sale-sedan-toyota-prius-2020-hybrid-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_1.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_2.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_3.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_4.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_5.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_6.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_7.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_8.jpg?v=1",
+            "https://static.tnet.ge/myauto/photos/6/2/2/6/2/large/123262263_9.jpg?v=1"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 1800,
+            "sourcePrice": 24820,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "toyota/prius",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 0,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "hybrid",
+            "engineCc": 1800,
+            "sourcePrice": 24820,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "123255903",
+          "yearAllowed": true,
+          "before": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 47027,
+            "sourceCurrency": "GEL"
+          },
+          "images": 7,
+          "sourceUrl": "https://myauto.ge/en/pr/123255903/for-sale-jeep-lexus-nx-300-2020-petrol-geo",
+          "galleryUrls": [
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_1.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_2.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_3.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_4.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_5.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_6.jpg?v=0",
+            "https://static.tnet.ge/myauto/photos/0/9/5/5/2/large/123255903_7.jpg?v=0"
+          ],
+          "sourceFields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "calculationInput": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 47027,
+            "sourceCurrency": "GEL"
+          },
+          "knowledgeEnrichment": {
+            "version": 1,
+            "source": "vehicle-encyclopedia-v2",
+            "modelId": "lexus/nx",
+            "generationId": null,
+            "variantId": null,
+            "score": null,
+            "fieldsApplied": [],
+            "sourceCorpusConnected": true,
+            "sourceIdentityCount": 1,
+            "sourceConflictCount": 141,
+            "modelImageCandidates": [],
+            "modelImageBinaryVerified": false
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "fuel": "petrol",
+            "engineCc": 2000,
+            "sourcePrice": 47027,
+            "sourceCurrency": "GEL"
+          },
+          "changedFields": []
+        }
+      ],
+      "pages": [
+        {
+          "cursor": "1",
+          "returnedRows": 11,
+          "diagnostics": null,
+          "health": {
+            "ok": true,
+            "message": "Yandex myauto bridge page 1: 11",
+            "checkedAt": "2026-09-07T03:35:47.229Z",
+            "httpStatus": 200,
+            "contentType": "application/json"
+          }
+        }
+      ],
+      "sourceHealth": {
+        "ok": true,
+        "message": "Yandex myauto bridge page 1: 11",
+        "checkedAt": "2026-09-07T03:35:47.229Z",
+        "httpStatus": 200,
+        "contentType": "application/json"
+      },
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 11,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 11,
+        "unexaminedRows": 0,
+        "examined": 11,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 11,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 11
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "samples": [
+        {
+          "sourceOfferId": "123142070",
+          "make": "Toyota",
+          "model": "C-HR",
+          "year": 2020,
+          "engineCc": 2000,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "122612474",
+          "make": "Subaru",
+          "model": "Forester",
+          "year": 2025,
+          "engineCc": 2500,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123268392",
+          "make": "Land Rover",
+          "model": "Range Rover",
+          "year": 2023,
+          "engineCc": 3000,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123226862",
+          "make": "Kia",
+          "model": "Sportage",
+          "year": 2024,
+          "engineCc": 1600,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123026618",
+          "make": "Subaru",
+          "model": "Outback",
+          "year": 2022,
+          "engineCc": 2500,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123272688",
+          "make": "Toyota",
+          "model": "Camry",
+          "year": 2025,
+          "engineCc": 2500,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123262275",
+          "make": "Nissan",
+          "model": "Versa",
+          "year": 2021,
+          "engineCc": 1600,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123127847",
+          "make": "Hyundai",
+          "model": "Kona",
+          "year": 2023,
+          "engineCc": 2000,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123268002",
+          "make": "Lexus",
+          "model": "RX",
+          "year": 2020,
+          "engineCc": 3500,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123262263",
+          "make": "Toyota",
+          "model": "Prius",
+          "year": 2020,
+          "engineCc": 1800,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "123255903",
+          "make": "Lexus",
+          "model": "NX",
+          "year": 2020,
+          "engineCc": 2000,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "unclassified_field_provenance",
+              "provenance": "stored_unclassified"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Fresh bounded source-order sample against production CRM and rates; missing CRM profiles use the actual provisional runtime default. No publication, image download or storage mutation. Diagnostic alternatives do not become approved catalog sources automatically.",
+  "calculationPreparation": "knowledge_core_then_certified_power_then_verified_specifications",
+  "currencyRequests": 0,
+  "imageRequestsBlocked": 0,
+  "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+  "businessSettings": {
+    "georgia": {
+      "rawActiveVersion": null,
+      "effectiveVersion": "market_georgia_system_average_v2",
+      "profileSource": "runtime_average_defaults",
+      "provisional": true,
+      "effectiveHash": "9f23470a6c88cc5fc87502fcde4e147be93f6995be4b7fb349712e32dcc71d06",
+      "effectiveExpenses": {
+        "securityDepositRub": 110000,
+        "topAvtoCommissionRub": 90000,
+        "contractInitialPaymentRub": 200000,
+        "exchangeRateReservePercent": 2,
+        "exportExpensesRub": 50000,
+        "logisticsRub": 180000,
+        "brokerRub": 35000,
+        "svhRub": 35000,
+        "laboratoryRub": 15000,
+        "sbktsRub": 35000,
+        "eptsRub": 35000,
+        "rfDeliveryRub": 120000,
+        "otherFixedExpensesRub": 0
+      }
+    }
+  },
+  "productionInputsUnchanged": true,
+  "storageRequests": [
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    },
+    {
+      "key": "catalog/manifest.json",
+      "method": "GET"
+    },
+    {
+      "key": "markets/markets.json",
+      "method": "GET"
+    },
+    {
+      "key": "fees/exchange-rates.json",
+      "method": "GET"
+    }
+  ],
+  "productionBaseline": {
+    "catalog/manifest.json": {
+      "etag": "\"e9273393415fdc23936ee345bb00652d\"",
+      "sha256": "584435be64a253d99fd7c49dfaf56e73c3137118ecc8a5c12eebc2f2a08fc3c7"
+    },
+    "markets/markets.json": {
+      "etag": "\"19d121881eced830ecab4af105a02735\"",
+      "sha256": "c6f08d649326fbcfca4aad499fe3aa805c70788fe8f01cd4ca9e3777bb561e87"
+    },
+    "fees/exchange-rates.json": {
+      "etag": "\"02388041e5d450fbcb435c3e34d2de6c\"",
+      "sha256": "898972ebaa11e57f071a0fb3bd0d5521c2a11f6e3eef448f37fed1760e37e980"
+    }
+  },
+  "configurationMismatches": []
+}

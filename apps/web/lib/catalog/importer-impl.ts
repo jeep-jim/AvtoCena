@@ -8,6 +8,7 @@ import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
 import { getSourcePolicy, policyAllowsRun, updatePolicyAfterRun } from "./policy";
 import type { CatalogImage, CatalogMarket, VehicleOffer } from "./types";
+import { catalogOfferFreshness, catalogMarketRetentionMs, catalogOfferConfirmedWithdrawn, preserveCatalogOfferObservation } from "./refresh-policy";
 
 export type CatalogImportOptions = {
   sourceIds?: string[];
@@ -162,13 +163,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     : lock);
 
   const storedOffers = await readAllOffersForMaintenance();
-  const existing = new Map(storedOffers.map((offer) => {
-    const operational = offer.operational as any;
-    if (!operational?.lastSeenAt) {
-      offer.operational = { ...offer.operational, lastSeenAt: startedAt } as any;
-    }
-    return [offer.id, offer] as const;
-  }));
+  const existing = new Map(storedOffers.map((offer) => [offer.id, preserveCatalogOfferObservation(offer)] as const));
 
   const refreshedByMarket = Object.fromEntries(PUBLIC_MARKETS.map((market) => [market, 0])) as Record<CatalogMarket, number>;
   const report: any = {
@@ -280,6 +275,11 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               break;
             }
 
+            if (catalogOfferConfirmedWithdrawn(normalized)) {
+              existing.delete(normalized.id);
+              seen.add(normalized.id);
+              continue;
+            }
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             const refreshSourceOrder = needsSourceOrderedGalleryRefresh(previous);
@@ -388,10 +388,9 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       if (sourceOk && sourceExhausted && !stoppedByLimit && scan.offersSeen > 0) {
         const previousSourceCount = [...existing.values()].filter((offer) => offer.sourceId === source.sourceId).length;
         if (!(previousSourceCount >= 10000 && scan.offersSeen <= 100)) {
-          const graceMs = Number(process.env.CATALOG_STALE_GRACE_MS || 172_800_000);
           const now = Date.now();
           for (const offer of existing.values()) {
-            if (offer.sourceId === source.sourceId && (offer.operational as any)?.lastSeenScanCycleId !== scan.scanCycleId && now - Date.parse(offer.updatedAt) > graceMs) {
+            if (offer.sourceId === source.sourceId && (offer.operational as any)?.lastSeenScanCycleId !== scan.scanCycleId && now - catalogOfferFreshness(offer) > catalogMarketRetentionMs(offer.market)) {
               offer.status = "stale";
               report.expired++;
             }
@@ -400,12 +399,11 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
     }
 
-    const retentionMs = Number(process.env.CATALOG_OFFER_RETENTION_MS || 172_800_000);
     const now = Date.now();
     for (const offer of existing.values()) {
       if (offer.status !== "active") continue;
-      const lastSeenAt = Date.parse(String((offer.operational as any)?.lastSeenAt || ""));
-      if (Number.isFinite(lastSeenAt) && now - lastSeenAt > retentionMs) {
+      const lastSeenAt = catalogOfferFreshness(offer);
+      if (!lastSeenAt || now - lastSeenAt > catalogMarketRetentionMs(offer.market)) {
         offer.status = "stale";
         report.expired++;
         continue;

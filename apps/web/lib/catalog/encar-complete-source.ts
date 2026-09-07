@@ -100,7 +100,8 @@ function engineCcValue(value: unknown, key = "") {
     ? Number(String(match?.[1] || "").replace(/\s/g, "").replace(",", "."))
     : metricNumber(match?.[1] || "");
   if (!parsed) return undefined;
-  const cc = liters ? parsed * 1_000 : parsed;
+  if (liters) return undefined; // Litre labels do not prove exact displacement.
+  const cc = parsed;
   return cc >= 300 && cc <= 10_000 ? Math.round(cc) : undefined;
 }
 
@@ -221,6 +222,7 @@ function urlImage(url: string): CatalogImage {
 }
 
 function retryableEncarError(error: unknown) {
+  if ((error as any)?.blocked) return false;
   const message = String((error as any)?.message || error || "").toLowerCase();
   return Boolean(
     (error as any)?.temporary

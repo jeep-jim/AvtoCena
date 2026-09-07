@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-07",
+  "productionAllowlistChanged": false,
+  "candidates": [
+    {
+      "market": "china",
+      "name": "Taocheche",
+      "url": "https://beta.m.taocheche.com/cars",
+      "officialProductPage": "https://app.yiche.com/taocheapp/",
+      "discovery": "Public search indexed stock listings with model/year/mileage/price.",
+      "directRead": "web open timed out",
+      "qualification": "not_qualified",
+      "needed": [
+        "listing-bound detailed specifications",
+        "exact source price",
+        "same-car source gallery",
+        "bounded repeatable pagination"
+      ]
+    },
+    {
+      "market": "china",
+      "name": "AutoZHEN",
+      "url": "https://www.autozhen.com/",
+      "discovery": "Public search indexed stock listings.",
+      "directRead": "web open redirected to https://dev-autozhen.chezhency.com/ and returned no readable detail",
+      "qualification": "not_qualified",
+      "needed": [
+        "production endpoint identity",
+        "listing-bound parameters and prices",
+        "same-car source gallery",
+        "bounded repeatable pagination"
+      ]
+    }
+  ],
+  "restriction": "Discovery alone is not source acceptance; no new source is used for production calculations, no bought feed and no AI enrichment."
+}

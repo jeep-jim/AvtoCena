@@ -84,14 +84,19 @@ test("CSV parser detects delimiter, quoted fields and BOM", () => {
   assert.equal(rows[0].model, "Prius, Hybrid");
 });
 
-test("catalog generation chunks stay under 500 and search loads indexed chunks only", async () => {
+test("catalog generation chunks stay under 500 and search loads indexed chunks only", async (t) => {
+  const cwd = process.cwd();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-catalog-chunks-"));
+  fs.mkdirSync(path.join(dir, "data"));
+  process.chdir(dir);
+  t.after(() => { process.chdir(cwd); resetJsonStorageForTests(); fs.rmSync(dir, { recursive: true, force: true }); });
   resetJsonStorageForTests();
   const now = new Date().toISOString();
   const gallery = Array.from({ length: 5 }, (_, index) => ({
     ...image,
     id: `img${index + 1}`,
     url: `/api/catalog/images/img${index + 1}`,
-    objectKey: `catalog/images/japan/${index + 1}.jpg`,
+    objectKey: `catalog/images/europe/${index + 1}.jpg`,
     checksum: `checksum-${index + 1}`,
     size: 100_000,
     width: 1200,
@@ -99,24 +104,25 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
   }));
   const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({
     id: `o${i}`,
-    sourceId: "test",
+    sourceId: "mobile_de_open",
     sourceOfferId: `${i}`,
-    market: "japan",
-    offerType: "auction",
+    market: "europe",
+    offerType: "fixed",
     status: "active",
     make: "Toyota",
-    model: i % 2 ? "Prius" : "Aqua",
-    year: 2020 + (i % 4),
-    sourcePrice: 1000000,
-    sourceCurrency: "JPY",
+    model: ["Corolla", "Camry", "RAV4", "Yaris", "C-HR"][i % 5],
+    year: 2020 + (Math.floor(i / 5) % 6),
+    sourcePrice: 10000,
+    sourceCurrency: "EUR",
     priceMode: "fixed",
     images: gallery.map((item) => ({
       ...item,
       id: `${item.id}-${i}`,
-      objectKey: `catalog/images/japan/${i}-${item.id}.jpg`,
+      objectKey: `catalog/images/europe/${i}-${item.id}.jpg`,
       checksum: `${item.checksum}-${i}`,
     })),
     totalRub: 1500000 + i,
+    fuel: "petrol",
     powertrainKind: "combustion",
     engineCc: 1_798,
     powerHp: 122,
@@ -128,22 +134,21 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
     },
     firstSeenAt: now,
     updatedAt: now,
-    operational: { sourceUrl: `https://example.com/japan/${i}` },
+    operational: { sourceUrl: `https://suchen.mobile.de/fahrzeuge/details.html?id=${i}`, photoIdentityVerified: true },
   }));
   await persistCatalogOffers(offers);
   const manifest = await readDataJson<any>("catalog/manifest.json", {});
   assert.ok(manifest.generationId.startsWith("gen_"));
-  const firstChunkPath = String(manifest.markets.japan.chunks[0]).startsWith("catalog/")
-    ? manifest.markets.japan.chunks[0]
-    : `catalog/generations/${manifest.generationId}/offers/japan/${manifest.markets.japan.chunks[0]}.json`;
+  const firstChunkPath = String(manifest.markets.europe.chunks[0]).startsWith("catalog/")
+    ? manifest.markets.europe.chunks[0]
+    : `catalog/generations/${manifest.generationId}/offers/europe/${manifest.markets.europe.chunks[0]}.json`;
   const firstChunk = await readDataJson<any[]>(firstChunkPath, []);
-  assert.ok(firstChunk.length <= 500);
-  const japanArchive = await readDataJson<any>("catalog/japan-auction-history/manifest.json", {});
-  assert.equal(japanArchive.retentionDays, 30);
-  assert.equal(japanArchive.count, offers.length);
-  const result = await searchOffers({ market: "japan", make: "Toyota", model: "Prius", sort: "totalRub", pageSize: 10 });
+  assert.equal(manifest.markets.europe.count, offers.length);
+  assert.equal(manifest.markets.europe.chunks.length, 2);
+  assert.equal(firstChunk.length, CATALOG_CHUNK_SIZE);
+  const result = await searchOffers({ market: "europe", make: "Toyota", model: "Corolla", sort: "totalRub", pageSize: 10 });
   assert.equal(result.items.length, 10);
-  assert.ok(result.usedIndexShards.some((p: string) => p.includes("projection/japan")));
+  assert.ok(result.usedIndexShards.some((p: string) => p.includes("projection/europe")));
   assert.equal(await getOffer("missing"), null);
 });
 
@@ -158,10 +163,12 @@ test("image cache rejects HTML instead of image", async () => {
   finally { (global as any).fetch = original; }
 });
 
-test("image source cache reuses the stored Object Storage image without downloading the origin twice", async () => {
+test("explicit legacy binary mode: image source cache reuses the stored Object Storage image without downloading the origin twice", async () => {
   const cwd = process.cwd();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-source-cache-"));
   const originalFetch = global.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "binary";
   let sourceDownloads = 0;
   fs.mkdirSync(path.join(dir, "data"));
   process.chdir(dir);
@@ -188,6 +195,7 @@ test("image source cache reuses the stored Object Storage image without download
     assert.equal(reusedReplacement?.objectKey, replaced?.objectKey);
     assert.equal(sourceDownloads, 2);
   } finally {
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
     (global as any).fetch = originalFetch;
     process.chdir(cwd);
     resetJsonStorageForTests();
@@ -196,10 +204,12 @@ test("image source cache reuses the stored Object Storage image without download
   }
 });
 
-test("valid catalog photos are resized and stored as webp", async () => {
+test("explicit legacy binary mode: valid catalog photos are resized and stored as webp", async () => {
   const cwd = process.cwd();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-optimization-"));
   const originalFetch = global.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "binary";
   const png = await sharp({ create: { width: 32, height: 24, channels: 3, background: { r: 220, g: 30, b: 30 } } }).png().toBuffer();
   fs.mkdirSync(path.join(dir, "data"));
   process.chdir(dir);
@@ -213,6 +223,7 @@ test("valid catalog photos are resized and stored as webp", async () => {
     assert.ok(Number(optimized?.width) <= 1600);
     assert.ok(Number(optimized?.height) <= 1200);
   } finally {
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
     (global as any).fetch = originalFetch;
     process.chdir(cwd);
     resetJsonStorageForTests();
@@ -317,7 +328,9 @@ test("Encar list cover is preserved when detail gallery is absent", async () => 
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
-    assert.ok(seenUrls.some((url) => url.includes(listCover)));
+    assert.ok(images[0].url.includes(listCover));
+    assert.equal(images[0].objectKey, "");
+    assert.equal(seenUrls.some((url) => url.includes(listCover)), false);
     assert.equal(offer!.engineCc, 1999);
   } finally {
     (global as any).fetch = original;
@@ -399,7 +412,7 @@ test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
 });
 
 
-test("Encar sample image limit stops downloading after configured maximum", async () => {
+test("Encar source URL gallery respects the maximum without downloading photos", async () => {
   resetJsonStorageForTests();
   const originalFetch = global.fetch;
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
@@ -420,7 +433,8 @@ test("Encar sample image limit stops downloading after configured maximum", asyn
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
-    assert.equal(imageUrls.length, 1);
+    assert.equal(imageUrls.length, 0);
+    assert.ok(images[0].url.endsWith(cover));
   } finally {
     if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER; else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
     (global as any).fetch = originalFetch;

@@ -8,8 +8,8 @@ const detail = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]
 const knowledge = fs.readFileSync(new URL("../apps/web/lib/catalog/vehicle-knowledge.ts", import.meta.url), "utf8");
 const sync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 test("mass-market catalog is applied to production code", () => {
-  assert.match(rebuild, /catalogPublicPriority\(offer\)\.eligible/);
-  assert.match(publish, /priority_\$\{priority.reason\}/);
+  assert.match(rebuild, /classifyCatalogV2Offer\(offer\)\.eligible/);
+  assert.match(publish, /v2_\$\{priority.reason\}/);
   assert.match(publish, /compareCatalogPublicPriority/);
   assert.match(card, /catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(detail, /catalogOfferVisibleRub\(raw\)/);

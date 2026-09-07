@@ -404,7 +404,8 @@ function publicChinaMake(offer: any) {
     if (brand) return brand;
   }
 
-  return nativeSourceIdentity(offer?.make);
+  const nativeMake = nativeSourceIdentity(offer?.make);
+  return /^(?:未知(?:厂商|品牌)?|其他|unknown|other)$/i.test(nativeMake) ? "" : nativeMake;
 }
 
 function publicChinaModel(offer: any) {

@@ -1,0 +1,175 @@
+{
+  "checkedAt": "2026-09-07T00:42:55.283Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "sourceRequests": 0,
+  "rateRequests": 1,
+  "sourceUrl": "https://finder.porsche.com/xa/en-XA/details/porsche-macan-preowned-7062DL",
+  "sourceOfferId": "7062DL",
+  "engineCc": 1984,
+  "powerHp": 265,
+  "year": 2022,
+  "productionDate": null,
+  "imageUrls": 5,
+  "sourcePrice": 219000,
+  "sourceCurrency": "AED",
+  "calculationStatus": "estimated",
+  "totalRub": 8600059,
+  "breakdown": [
+    {
+      "id": "car",
+      "title": "Цена автомобиля",
+      "amountRub": 5053319,
+      "kind": "car",
+      "amountType": "manual",
+      "source": "vehicle",
+      "note": "Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: 5163319 ₽"
+    },
+    {
+      "id": "security-deposit",
+      "title": "Обеспечительный платёж",
+      "amountRub": 110000,
+      "kind": "deposit",
+      "amountType": "fixed",
+      "source": "market_config",
+      "note": "Засчитывается в стоимость автомобиля"
+    },
+    {
+      "id": "topavto-commission",
+      "title": "Комиссия Автодилера",
+      "amountRub": 90000,
+      "kind": "commission",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "export",
+      "title": "Экспортные расходы",
+      "amountRub": 120000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "logistics",
+      "title": "Логистика",
+      "amountRub": 450000,
+      "kind": "logistics",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "broker",
+      "title": "Брокер",
+      "amountRub": 35000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "svh",
+      "title": "СВХ",
+      "amountRub": 35000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "laboratory",
+      "title": "Лаборатория",
+      "amountRub": 15000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "sbkts",
+      "title": "СБКТС",
+      "amountRub": 35000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "epts",
+      "title": "ЭПТС",
+      "amountRub": 35000,
+      "kind": "service",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "rf-delivery",
+      "title": "Доставка по РФ",
+      "amountRub": 120000,
+      "kind": "logistics",
+      "amountType": "fixed",
+      "source": "market_config"
+    },
+    {
+      "id": "customs",
+      "title": "Таможенная пошлина",
+      "amountRub": 560074,
+      "kind": "customs",
+      "amountType": "calculated",
+      "source": "calculated",
+      "note": "Включая таможенное оформление, акциз и НДС, если они применимы"
+    },
+    {
+      "id": "utilization-fee",
+      "title": "Утилизационный сбор",
+      "amountRub": 1838400,
+      "kind": "customs",
+      "amountType": "calculated",
+      "source": "calculated"
+    },
+    {
+      "id": "exchange-reserve",
+      "title": "Резерв на изменение курса",
+      "amountRub": 103266,
+      "kind": "reserve",
+      "amountType": "percent",
+      "source": "market_config",
+      "note": "2% от стоимости авто"
+    }
+  ],
+  "breakdownMatchesTotal": true,
+  "currencyRate": {
+    "currency": "AED",
+    "cbrRate": 23.5768,
+    "nominal": 1,
+    "effectiveRate": 23.5768,
+    "rateDate": "2026-09-05",
+    "fetchedAt": "2026-09-07T00:42:55.278Z",
+    "rateSource": "cbr_live",
+    "sourcePrice": 219000,
+    "sourcePriceRub": 5163319
+  },
+  "eurRate": {
+    "currency": "EUR",
+    "cbrRate": 100.5693,
+    "nominal": 1,
+    "effectiveRate": 100.5693,
+    "rateDate": "2026-09-05",
+    "fetchedAt": "2026-09-07T00:42:55.278Z",
+    "rateSource": "cbr_live",
+    "sourcePrice": 1,
+    "sourcePriceRub": 101
+  },
+  "visiblePriceByCalculationContract": 8600059,
+  "priority": {
+    "eligible": true,
+    "tier": 7,
+    "reason": "calculated_above_preferred_price",
+    "visibleRub": 8600059,
+    "ageYears": 4,
+    "powerHp": 265,
+    "popularityDecile": 10,
+    "calculated": true,
+    "preliminary": false,
+    "imageCount": 5,
+    "japanAuction": false
+  },
+  "sourceAllowedForPublication": false,
+  "limitation": "Replay of sanitized same-listing data captured 2026-09-07; no source freshness claim, no image body validation. Repository business profile. Experimental source is not enabled in production source registry. Model year and first registration do not prove exact production date."
+}

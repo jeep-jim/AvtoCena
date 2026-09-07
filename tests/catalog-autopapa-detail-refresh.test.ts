@@ -23,13 +23,15 @@ test("AutoPapa combustion rows with missing power still request exact detail fac
   assert.equal(needsSourceDetailFactRefresh(offer({ calculationStatus: "estimated", powerHp: undefined })), true);
 });
 
-test("already powered AutoPapa combustion rows do not force an extra detail request", () => {
-  assert.equal(needsSourceDetailFactRefresh(offer({ calculationStatus: "estimated", powerHp: 147 })), false);
+test("already powered AutoPapa rows still refresh the live asking price", () => {
+  assert.equal(needsSourceDetailFactRefresh(offer({ calculationStatus: "estimated", powerHp: 147 })), true);
 });
 
-test("electrified AutoPapa rows never use the seller peak-power detail refresh gate", () => {
+test("electrified AutoPapa rows refresh price without treating peak power as certified power", () => {
   for (const powertrainKind of ["electric", "series_hybrid", "other_hybrid"] as const) {
-    assert.equal(needsSourceDetailFactRefresh(offer({ powertrainKind })), false);
+    const row = offer({ powertrainKind });
+    assert.equal(needsSourceDetailFactRefresh(row), true);
+    assert.equal(row.power30MinKw, undefined);
   }
 });
 

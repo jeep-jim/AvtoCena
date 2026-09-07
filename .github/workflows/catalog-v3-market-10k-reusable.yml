@@ -12,7 +12,7 @@ on:
       retention_ms:
         required: false
         type: string
-        default: "259200000"
+        default: "1209600000"
       target_per_source:
         required: false
         type: string
@@ -76,7 +76,7 @@ env:
   CATALOG_PUBLISH_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
   CATALOG_PUBLISH_MAX_PER_MARKET: ${{ inputs.maximum_per_market }}
   CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
-  CATALOG_DEFAULT_RETENTION_MS: "259200000"
+  CATALOG_DEFAULT_RETENTION_MS: "1209600000"
   CATALOG_JAPAN_RETENTION_MS: "2592000000"
   # Two photos is only the general admission floor; collectors still pursue 30.
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"
@@ -212,6 +212,8 @@ jobs:
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
+      # Owner accepts a smaller verified catalog; empty publication stays blocked.
+      CATALOG_ALLOW_PUBLIC_COLLAPSE: ${{ inputs.market != 'japan' && '1' || '0' }}
       CATALOG_ENCYCLOPEDIA_IDENTITY_MASTER: "1"
       CATALOG_IDENTITY_PREPARE_CONCURRENCY: "24"
       # Keep the writer lease alive during a legitimate long atomic publish,

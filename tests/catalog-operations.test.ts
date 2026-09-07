@@ -65,7 +65,8 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(japanRecovery, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR/);
   const livePublisher = fs.readFileSync("scripts/catalog-live-recovery-publish.mjs", "utf8");
   assert.match(livePublisher, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR/);
-  assert.match(livePublisher, /offer\?\.auctionDate/);
+  assert.match(livePublisher, /catalogOfferFreshness\(offer\)/);
+  assert.match(livePublisher, /catalogMarketRetentionMs\(market\)/);
 
   const reindexWorkflow = fs.readFileSync(".github/workflows/catalog-reindex-vehicle-knowledge.yml", "utf8");
   const reindex = fs.readFileSync("scripts/catalog-reindex-vehicle-knowledge.mjs", "utf8");

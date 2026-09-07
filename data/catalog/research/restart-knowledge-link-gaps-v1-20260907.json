@@ -1,0 +1,3176 @@
+{
+  "version": 1,
+  "advisoryOnly": true,
+  "productionWrites": false,
+  "input": {
+    "path": "data/catalog/research/five-market-restart-outcome-v1-20260907.json",
+    "sha256": "f6369197662459141054d1e65c8fcf81464c031396533e3727346bcc5ffa8d5f"
+  },
+  "statusCounts": {
+    "vehicle-encyclopedia-v2:review": 18941,
+    "knowledge-source-corpus:source_observed": 24489,
+    "vehicle-encyclopedia-v2:verified": 261
+  },
+  "verifiedByMarket": {
+    "Europe": 2,
+    "Global": 2,
+    "Japan": 256,
+    "United Kingdom": 1
+  },
+  "sourceChecks": [
+    {
+      "sourceId": "autohome_new_china_open",
+      "examined": 20,
+      "unresolvedCalculations": 20,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "autohome_used_china_open",
+      "examined": 24,
+      "unresolvedCalculations": 24,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "dongchedi_china_open",
+      "examined": 0,
+      "unresolvedCalculations": 0,
+      "error": "dongchedi_public_inventory_requires_login_or_permitted_partner_feed",
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "guazi_china_open",
+      "examined": 0,
+      "unresolvedCalculations": 0,
+      "error": "yandex_bridge_http_503_guazi_1_guazi_source_blocked_bot_challenge",
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "autoscout_europe_open",
+      "examined": 18,
+      "unresolvedCalculations": 2,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "mobile_de_open",
+      "examined": 40,
+      "unresolvedCalculations": 1,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "autopapa_georgia_open",
+      "examined": 0,
+      "unresolvedCalculations": 0,
+      "error": "pilot_stop_http_403",
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "myauto_georgia_list",
+      "examined": 8,
+      "unresolvedCalculations": 8,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "encar_direct",
+      "examined": 20,
+      "unresolvedCalculations": 20,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "kcar_korea_open",
+      "examined": 39,
+      "unresolvedCalculations": 2,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "dubicars_uae_exact",
+      "examined": 17,
+      "unresolvedCalculations": 17,
+      "error": null,
+      "upstreamBridgeTrafficObserved": false
+    },
+    {
+      "sourceId": "dubizzle_uae_open",
+      "examined": 0,
+      "unresolvedCalculations": 0,
+      "error": "dubizzle_exact_blocked_200_imperva_or_challenge:pilot_request_outside_envelope",
+      "upstreamBridgeTrafficObserved": false
+    }
+  ],
+  "totals": {
+    "unresolvedCalculations": 94,
+    "inYearWindow": 76,
+    "resolvedModels": 47,
+    "resolvedModelsWithNoVerifiedVariants": 47
+  },
+  "limitations": [
+    "Counts describe the checked source-order samples, not market-wide coverage.",
+    "Verified status alone does not prove field-level completeness, specification-market applicability or a listing-to-variant link.",
+    "No inference of peak or regulatory 30-minute power; unprocessed rows after a network stop are not complete specification checks.",
+    "The deployed bridge can be older than collector code; its derived engine scalar is not original field provenance."
+  ],
+  "queue": [
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73298",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73298/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 190,
+        "sourcePrice": 427900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73299",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73299/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 245,
+        "sourcePrice": 454900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73300",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73300/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 245,
+        "sourcePrice": 479900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73301",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73301/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 245,
+        "sourcePrice": 499800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73302",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": null,
+      "model": null,
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "sourcePrice": 558900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73386",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73386/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "hybrid",
+        "sourcePrice": 219800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "73546",
+      "sourceUrl": "https://www.autohome.com.cn/spec/73546/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "hybrid",
+        "sourcePrice": 179800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "74645",
+      "sourceUrl": "https://www.autohome.com.cn/spec/74645/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "hybrid",
+        "sourcePrice": 189800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "74646",
+      "sourceUrl": "https://www.autohome.com.cn/spec/74646/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "hybrid",
+        "sourcePrice": 206800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "75152",
+      "sourceUrl": "https://www.autohome.com.cn/spec/75152/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 272,
+        "sourcePrice": 367900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "76524",
+      "sourceUrl": "https://www.autohome.com.cn/spec/76524/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "sourcePrice": 403900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "76525",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": null,
+      "model": null,
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "sourcePrice": 480700,
+        "sourceCurrency": "CNY"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "76557",
+      "sourceUrl": "https://www.autohome.com.cn/spec/76557/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "electric",
+        "sourcePrice": 209800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "76837",
+      "sourceUrl": "https://www.autohome.com.cn/spec/76837/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "electric",
+        "sourcePrice": 239800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "77007",
+      "sourceUrl": "https://www.autohome.com.cn/spec/77007/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "奥迪",
+      "model": "奥迪A6L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "petrol",
+        "powerHp": 204,
+        "sourcePrice": 336900,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "77191",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": null,
+      "model": null,
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "sourcePrice": 159800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "77192",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": null,
+      "model": null,
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "sourcePrice": 175800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "77686",
+      "sourceUrl": "https://www.autohome.com.cn/spec/77686/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "electric",
+        "sourcePrice": 199800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "78551",
+      "sourceUrl": "https://www.autohome.com.cn/spec/78551/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "sourcePrice": 195800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "sourceOfferId": "78891",
+      "sourceUrl": "https://www.autohome.com.cn/spec/78891/",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "yearAllowed": true,
+      "make": "方程豹",
+      "model": "钛7",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "sourcePrice": 225800,
+        "sourceCurrency": "CNY"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "58626842",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Mercedes-Benz",
+      "model": "E-Class (Import)",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "sourcePrice": 49860,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59230161",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "X4",
+      "modelId": "bmw/x4",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "sourcePrice": 33140,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 99,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59442681",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Audi",
+      "model": "S4",
+      "modelId": "audi/s4",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "sourcePrice": 42260,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 29,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59574597",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Jaguar",
+      "model": "F-PACE",
+      "modelId": "jaguar/f-pace",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "sourcePrice": 24160,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 106,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59654620",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Audi",
+      "model": "A6 (Import)",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "hybrid",
+        "sourcePrice": 33260,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59659799",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Volkswagen",
+      "model": "ID.ERA",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "sourcePrice": 48610,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59681818",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Lexus",
+      "model": "GX",
+      "modelId": "lexus/gx",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2024,
+        "fuel": "hybrid",
+        "sourcePrice": 97220,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 12,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59737522",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Rolls-Royce",
+      "model": "Ghost",
+      "modelId": "rolls-royce/ghost",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2024,
+        "fuel": "petrol",
+        "sourcePrice": 574540,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 44,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59748754",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Mercedes-Benz",
+      "model": "GLC AMG",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "sourcePrice": 40860,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59749892",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "ZEEKR",
+      "model": "9X",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "hybrid",
+        "sourcePrice": 67790,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59769656",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "7 Series",
+      "modelId": "bmw/7-series",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "sourcePrice": 103330,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 28,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59779524",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Avatr",
+      "model": "12",
+      "modelId": "avatr/12",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "electric",
+        "sourcePrice": 25360,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59817902",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "X5",
+      "modelId": "bmw/x5",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "hybrid",
+        "sourcePrice": 51650,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 135,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59819041",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": true,
+      "make": "Buick",
+      "model": "Century",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "hybrid",
+        "sourcePrice": 46820,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "europe",
+      "sourceId": "autoscout_europe_open",
+      "sourceOfferId": "21168edf-1e30-4efd-8b75-c5156cc76428",
+      "sourceUrl": "https://www.autoscout24.com/offers/toyota-mirai-advanced-hud-navi-jbl-el-sitze-pano-dach-360-hydrogen-blue-cat_ma70mo21098-21168edf-1e30-4efd-8b75-c5156cc76428",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-europe-autoscout_europe_open.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Mirai",
+      "modelId": "toyota/mirai",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "powerHp": 182,
+        "sourcePrice": 18880,
+        "sourceCurrency": "EUR"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "fuelPowertrain": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        },
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 17,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "europe",
+      "sourceId": "autoscout_europe_open",
+      "sourceOfferId": "5a58cf03-8a49-4803-bacb-43d61fcc3bbf",
+      "sourceUrl": "https://www.autoscout24.com/offers/audi-a3-a3-sportback-phev-40-tfsi-e-s-tronic-led-navi-carplay-electric-gasoline-blue-cat_ma9mo1624-5a58cf03-8a49-4803-bacb-43d61fcc3bbf",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-europe-autoscout_europe_open.json",
+      "yearAllowed": true,
+      "make": "Audi",
+      "model": "A3",
+      "modelId": "audi/a3",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "hybrid",
+        "engineCc": 1395,
+        "powerHp": 204,
+        "sourcePrice": 16790,
+        "sourceCurrency": "EUR"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 147,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "1010541",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-twin-turbo-35l-engine-full-option-new-arrival-1010541.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 409,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "1011773",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-twin-turbo-35l-engine-2022-model-full-option-1011773.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 409,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "1015750",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-lc300-2022-model-full-option-1015750.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 271,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "799868",
+      "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-adventure-2021-facelifted-2024-gr-monster-design-full-option-top-of-the-range-799868.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 3,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "894947",
+      "sourceUrl": "https://www.dubicars.com/2023-toyota-prado-vxr-2023-model-full-option-black-exterior-very-clean-and-perfect-condition-new-fresh-import-894947.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Prado",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "896643",
+      "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-2021-facelifted-2025-gr-sport-gcc-in-excellent-condition-896643.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 3,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "901014",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-33l-diesel-engine-full-option-top-of-the-range-901014.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "diesel",
+        "powerHp": 302,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "920087",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-2022-model-full-option-very-clean-and-perfect-condition-920087.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "961283",
+      "sourceUrl": "https://www.dubicars.com/2020-toyota-land-cruiser-gxr-2020-model-facelift-to-lc300-2025-shape-exterior-and-interior-both-car-is-very-clean-and-perfect-961283.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "963056",
+      "sourceUrl": "https://www.dubicars.com/2023-toyota-land-cruiser-963056.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "powerHp": 301,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "963999",
+      "sourceUrl": "https://www.dubicars.com/2021-toyota-hilux-sglx-adv-28l-963999.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Hilux",
+      "modelId": "toyota/hilux",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "diesel",
+        "powerHp": 201,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 3,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "964472",
+      "sourceUrl": "https://www.dubicars.com/2020-toyota-prado-964472.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Prado",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "diesel",
+        "powerHp": 201,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "965084",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-prado-28l-965084.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Prado",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "diesel",
+        "powerHp": 201,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "965411",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-land-cruiser-gxr-vxr-35l-965411.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 409,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "968288",
+      "sourceUrl": "https://www.dubicars.com/2023-toyota-land-cruiser-2023-model-gxr-twin-turbo-35l-engine-full-option-very-perfect-condition-968288.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "976037",
+      "sourceUrl": "https://www.dubicars.com/2024-toyota-land-cruiser-2024-model-vxr-twin-turbo-35l-engine-full-option-red-and-black-interior-inside-very-clean-and-perfe-976037.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "modelId": "toyota/land-cruiser",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2024,
+        "fuel": "petrol",
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 91,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceOfferId": "994482",
+      "sourceUrl": "https://www.dubicars.com/2022-toyota-prado-994482.html",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Prado",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "powerHp": 271,
+        "sourcePrice": null,
+        "sourceCurrency": null
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "explicit_semantic_ambiguity",
+          "provenance": "source_evidence"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40672260",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40672260",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "벤츠",
+      "model": "GLE-클래스 W167",
+      "modelId": "mercedes-benz/gle",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "diesel",
+        "engineCc": 2925,
+        "sourcePrice": 58000000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 128,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "013",
+        "modelCd": "085",
+        "gradeCd": "003",
+        "jatoVehicleId": "775152320201103"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40704487",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40704487",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "볼보",
+      "model": "XC40",
+      "modelId": "volvo/xc40",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "engineCc": 1969,
+        "sourcePrice": 32900000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 201,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40736686",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40736686",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "카니발 4세대",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "diesel",
+        "engineCc": 2151,
+        "sourcePrice": 24900000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "002",
+        "modelCd": "154",
+        "gradeCd": "005",
+        "jatoVehicleId": "819940320200818"
+      },
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40994130",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40994130",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "스포티지 5세대",
+      "modelId": "kia/sportage",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "diesel",
+        "engineCc": 1998,
+        "sourcePrice": 23500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 166,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "002",
+        "modelCd": "160",
+        "gradeCd": "003",
+        "gradeDetailCd": "002",
+        "jatoVehicleId": "827351620210706"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41090918",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41090918",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "카니발 4세대",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "engineCc": 3470,
+        "sourcePrice": 37500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "002",
+        "modelCd": "154",
+        "gradeCd": "019",
+        "jatoVehicleId": "827437820230701"
+      },
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41125336",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41125336",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "제네시스",
+      "model": "GV80",
+      "modelId": "genesis/gv80",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "diesel",
+        "engineCc": 2996,
+        "sourcePrice": 62800000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 26,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41142769",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41142769",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "스포티지 5세대",
+      "modelId": "kia/sportage",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "engineCc": 1598,
+        "sourcePrice": 18500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 166,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "002",
+        "modelCd": "160",
+        "gradeCd": "001",
+        "gradeDetailCd": "001",
+        "jatoVehicleId": "827351520210706"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41157164",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41157164",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "K8 하이브리드",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "hybrid",
+        "engineCc": 1598,
+        "sourcePrice": 18500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        },
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41198413",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41198413",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "스포티지 5세대",
+      "modelId": "kia/sportage",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "diesel",
+        "engineCc": 1998,
+        "sourcePrice": 20300000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 166,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "002",
+        "modelCd": "160",
+        "gradeCd": "003",
+        "gradeDetailCd": "002",
+        "jatoVehicleId": "827351620210706"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41199973",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41199973",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "링컨",
+      "model": "네비게이터 4세대",
+      "modelId": "lincoln/navigator",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "petrol",
+        "engineCc": 3495,
+        "sourcePrice": 45500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 14,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "044",
+        "modelCd": "005",
+        "gradeCd": "011"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41217630",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41217630",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "벤츠",
+      "model": "E-클래스 W213",
+      "modelId": "mercedes-benz/e-class",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "engineCc": 2999,
+        "sourcePrice": 54000000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 213,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "013",
+        "modelCd": "072",
+        "gradeCd": "033",
+        "jatoVehicleId": "810837620201201"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41435566",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41435566",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "X3M (G01)",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "engineCc": 2993,
+        "sourcePrice": 66900000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "012",
+        "modelCd": "071",
+        "gradeCd": "002",
+        "jatoVehicleId": "820280620210101"
+      },
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "sourceOfferId": "EC61377810",
+      "sourceUrl": "https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=EC61377810",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-korea-kcar.json",
+      "yearAllowed": true,
+      "make": "현대",
+      "model": "더 뉴 그랜저 하이브리드",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "hybrid",
+        "engineCc": 2359,
+        "powerHp": 159,
+        "sourcePrice": 29500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "sourceOfferId": "EC61381054",
+      "sourceUrl": "https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=EC61381054",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-korea-kcar.json",
+      "yearAllowed": true,
+      "make": "기아",
+      "model": "K8 하이브리드",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "hybrid",
+        "engineCc": 1598,
+        "powerHp": 180,
+        "sourcePrice": 23500000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "sourceOfferId": "462342342",
+      "sourceUrl": "https://suchen.mobile.de/auto-inserat/volkswagen-caddy-maxi-style-maxi-ehybrid-alu-klima-appc-fulda/462342342.html?ref=srp&refId=424cfda5-7e8d-b05f-23aa-8be4d3048cd7&searchId=424cfda5-7e8d-b05f-23aa-8be4d3048cd7&type=topAd",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-europe-mobile.json",
+      "yearAllowed": true,
+      "make": "Volkswagen",
+      "model": "Caddy Maxi",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2026,
+        "fuel": "hybrid",
+        "engineCc": 1498,
+        "powerHp": 116,
+        "sourcePrice": 40990,
+        "sourceCurrency": "EUR"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "certifiedPower": {
+          "state": "missing",
+          "reason": "certified_30min_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "122887106",
+      "sourceUrl": "https://myauto.ge/en/pr/122887106/for-sale-%D0%A1rossover-bmw-x5-2025-diesel-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "X5",
+      "modelId": "bmw/x5",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2025,
+        "fuel": "diesel",
+        "engineCc": 3000,
+        "sourcePrice": 234873,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 135,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123123245",
+      "sourceUrl": "https://myauto.ge/en/pr/123123245/for-sale-sedan-toyota-camry-2021-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Toyota",
+      "model": "Camry",
+      "modelId": "toyota/camry",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2021,
+        "fuel": "petrol",
+        "engineCc": 2500,
+        "sourcePrice": 85432,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 60,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123127847",
+      "sourceUrl": "https://myauto.ge/en/pr/123127847/for-sale-jeep-hyundai-kona-2023-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Hyundai",
+      "model": "Kona",
+      "modelId": "hyundai/kona",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "petrol",
+        "engineCc": 2000,
+        "sourcePrice": 57477,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 183,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123208883",
+      "sourceUrl": "https://myauto.ge/en/pr/123208883/for-sale-sedan-alfa-romeo-giulia-2020-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "modelId": "alfa-romeo/giulia",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "petrol",
+        "engineCc": 2000,
+        "sourcePrice": 38667,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 111,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123241158",
+      "sourceUrl": "https://myauto.ge/en/pr/123241158/for-sale-sedan-hyundai-elantra-2022-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Hyundai",
+      "model": "Elantra",
+      "modelId": "hyundai/elantra",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2022,
+        "fuel": "petrol",
+        "engineCc": 2000,
+        "sourcePrice": 33703,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 155,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123263847",
+      "sourceUrl": "https://myauto.ge/en/pr/123263847/for-sale-universal-lexus-ux-250-h-2024-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Lexus",
+      "model": "UX",
+      "modelId": "lexus/ux",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2024,
+        "fuel": "petrol",
+        "engineCc": 2000,
+        "sourcePrice": 55910,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 39,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123273144",
+      "sourceUrl": "https://myauto.ge/en/pr/123273144/for-sale-jeep-bmw-x5-2020-petrol-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "BMW",
+      "model": "X5",
+      "modelId": "bmw/x5",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2020,
+        "fuel": "petrol",
+        "engineCc": 3000,
+        "sourcePrice": 82297,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 135,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "sourceOfferId": "123275331",
+      "sourceUrl": "https://myauto.ge/en/pr/123275331/for-sale-jeep-land-rover-defender-110-2023-diesel-geo",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "yearAllowed": true,
+      "make": "Land Rover",
+      "model": "Defender",
+      "modelId": "land-rover/defender",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2023,
+        "fuel": "diesel",
+        "engineCc": 2000,
+        "sourcePrice": 137162,
+        "sourceCurrency": "GEL"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "ambiguous",
+          "reason": "unclassified_field_provenance",
+          "provenance": "stored_unclassified"
+        },
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 213,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59129957",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Infiniti",
+      "model": "Q60",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "sourcePrice": 19610,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59203886",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "MINI",
+      "model": "JCW",
+      "modelId": "mini/jcw",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2015,
+        "fuel": "petrol",
+        "sourcePrice": 14720,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 34,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59211013",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Volkswagen",
+      "model": "Beetle",
+      "modelId": "volkswagen/beetle",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "sourcePrice": 19460,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 18,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59282752",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Acura",
+      "model": "TLX-L",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2018,
+        "fuel": "petrol",
+        "sourcePrice": 9090,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59627482",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Audi",
+      "model": "Q8",
+      "modelId": "audi/q8",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "hybrid",
+        "sourcePrice": 45570,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 118,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59691786",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Peugeot",
+      "model": "508",
+      "modelId": "peugeot/508",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "sourcePrice": 9250,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 121,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59722906",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Jaguar",
+      "model": "XJ",
+      "modelId": "jaguar/xj",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2018,
+        "fuel": "petrol",
+        "sourcePrice": 21100,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 5,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59747871",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Peugeot",
+      "model": "308S",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2015,
+        "fuel": "petrol",
+        "sourcePrice": 3940,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59754526",
+      "sourceUrl": "https://global.che168.com/en/detail/59754526",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Lexus",
+      "model": "RC",
+      "modelId": "lexus/rc",
+      "modelIdentityOrigin": "offline_exact_name_lookup",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "powerHp": 245,
+        "sourcePrice": 30340,
+        "sourceCurrency": "USD"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "engineCc": {
+          "state": "missing",
+          "reason": "engine_cc_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 26,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceOfferId": "59806624",
+      "sourceUrl": null,
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "yearAllowed": false,
+      "make": "Audi",
+      "model": "Q7 New Energy",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "hybrid",
+        "sourcePrice": 23990,
+        "sourceCurrency": "USD"
+      },
+      "error": "pilot_request_outside_envelope",
+      "missingFields": {},
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "39463383",
+      "sourceUrl": "https://fem.encar.com/cars/detail/39463383",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "쉐보레(GM대우)",
+      "model": "더 뉴 말리부",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "engineCc": 1998,
+        "sourcePrice": 8090000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40610538",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40610538",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "현대",
+      "model": "그랜저 IG",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2017,
+        "fuel": "diesel",
+        "engineCc": 2199,
+        "sourcePrice": 13800000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40802603",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40802603",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "쉐보레(GM대우)",
+      "model": "더 뉴 트랙스",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2018,
+        "fuel": "petrol",
+        "engineCc": 1362,
+        "sourcePrice": 5990000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "40902785",
+      "sourceUrl": "https://fem.encar.com/cars/detail/40902785",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "포르쉐",
+      "model": "마칸",
+      "modelId": "porsche/macan",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2018,
+        "fuel": "petrol",
+        "engineCc": 2997,
+        "sourcePrice": 58000000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 163,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "015",
+        "modelCd": "013",
+        "gradeCd": "005",
+        "gradeDetailCd": "001",
+        "jatoVehicleId": "763987120170314"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41159793",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41159793",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "아우디",
+      "model": "뉴 A6",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2018,
+        "fuel": "diesel",
+        "engineCc": 1968,
+        "sourcePrice": 14700000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": null,
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41162179",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41162179",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "르노코리아(삼성)",
+      "model": "QM6",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2017,
+        "fuel": "diesel",
+        "engineCc": 1995,
+        "sourcePrice": 12300000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "005",
+        "modelCd": "066",
+        "gradeCd": "007",
+        "jatoVehicleId": "773726720170301"
+      },
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41216750",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41216750",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "쉐보레(GM대우)",
+      "model": "올란도",
+      "modelId": null,
+      "modelIdentityOrigin": "unresolved",
+      "calculationInput": {
+        "year": 2015,
+        "fuel": "diesel",
+        "engineCc": 1998,
+        "sourcePrice": 4200000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 0,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "003",
+        "modelCd": "072",
+        "gradeCd": "003",
+        "gradeDetailCd": "002",
+        "jatoVehicleId": "735304020150401"
+      },
+      "nextEvidence": "Resolve the exact source model boundary before looking up specifications."
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "sourceOfferId": "41234942",
+      "sourceUrl": "https://fem.encar.com/cars/detail/41234942",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "yearAllowed": false,
+      "make": "현대",
+      "model": "팰리세이드",
+      "modelId": "hyundai/palisade",
+      "modelIdentityOrigin": "captured_calculation_preparation",
+      "calculationInput": {
+        "year": 2019,
+        "fuel": "petrol",
+        "engineCc": 3778,
+        "sourcePrice": 21800000,
+        "sourceCurrency": "KRW"
+      },
+      "error": "verified_specifications_required",
+      "missingFields": {
+        "powerHp": {
+          "state": "missing",
+          "reason": "peak_power_missing",
+          "provenance": "none"
+        }
+      },
+      "referenceVariants": 30,
+      "verifiedVariants": 0,
+      "exactVariantLinked": false,
+      "sourceVariantCodes": {
+        "manufacturerCd": "001",
+        "modelCd": "155",
+        "gradeCd": "002",
+        "gradeDetailCd": "002",
+        "jatoVehicleId": "8049270201812111000"
+      },
+      "nextEvidence": "Add officially evidenced applicable variants and bind the exact listing/source grade to one variant."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { hasModificationSelection } from "@/lib/catalog/modification-contract";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogImageDeliveryUrl, rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
@@ -30,7 +31,8 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 }
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
-  const normalizedOffer = normalizeVehicleOfferSpecs(offer);
+  const selectionRequired = hasModificationSelection(offer);
+  const normalizedOffer = selectionRequired ? offer : normalizeVehicleOfferSpecs(offer);
   const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
   const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
@@ -50,7 +52,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   // Defence in depth for an older immutable generation during deployment: the
   // publication gate removes these rows permanently on the next market write,
   // while the card renderer hides them immediately.
-  if (!visibleRub) return null;
+  if (!visibleRub && !selectionRequired) return null;
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,
@@ -80,7 +82,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           </div>
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
-          <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
+          {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>

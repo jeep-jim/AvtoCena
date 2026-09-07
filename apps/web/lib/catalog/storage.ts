@@ -1,3 +1,6 @@
+import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
+import { prepareModificationRecovery } from "./modification-recovery";
+import { catalogOfferWithinRetention } from "./refresh-policy";
 import crypto from "node:crypto";
 import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
@@ -24,6 +27,9 @@ const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 // workflow cannot bypass the freeze with repository secrets. A reviewed code
 // change is required to resume Object Storage writes.
 export const CATALOG_PRODUCTION_WRITES_PAUSED = true;
+// Owner-approved restart: only the V3 single-market publisher may refresh these
+// markets, with both validation callbacks and exact preservation of all others.
+export const CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = ["korea", "china", "uae", "europe", "georgia"];
 function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
   return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
 }
@@ -106,6 +112,8 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
   /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
   /^(.+\.)?mobile\.de$/i,
+  // Exact CDN used by the identity-bound mobile.de consumer gallery.
+  /^img\.classistatic\.de$/i,
   /^(.+\.)?otomoto\.pl$/i,
   /^(.+\.)?olxcdn\.com$/i,
   /^(.+\.)?lacentrale\.fr$/i,
@@ -150,6 +158,7 @@ export type CatalogSearchProjection = {
   fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string;
+  modificationSelection?: VehicleOffer["modificationSelection"]; recoveryQualification?: VehicleOffer["recoveryQualification"];
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string; powerScenario?: any; powerRequiresConfirmation?: boolean; customs?: { utilizationPowerKw?: number } } | null; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
@@ -368,7 +377,7 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker:
   return results;
 }
 
-function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection {
+export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection {
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
@@ -378,6 +387,7 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource,
+    modificationSelection: offer.modificationSelection, recoveryQualification: offer.recoveryQualification,
     sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: {
       currencyRate: offer.calculationSnapshot?.currencyRate,
@@ -395,12 +405,12 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
     && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
-    && catalogOfferVisibleRub(row) > 0
-    && !catalogRequiredSpecificationRejectionReason(row);
+    && (hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
+    && !catalogRequiredSpecificationRejectionReason(row)));
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
-  return catalogOfferVisibleRub(offer) > 0
-    && !catalogRequiredSpecificationRejectionReason(offer);
+  return hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
+    && !catalogRequiredSpecificationRejectionReason(offer));
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   const imageUrl = String(row.cardImageUrl || "");
@@ -583,13 +593,16 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
     if (!canonicalMatch && !literalMatch) return false;
   }
-  if (params.hasPrice) { const value = Number(row.totalRub || 0) > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
+  const filterPrice = hasModificationSelection(row) ? 0 : Number(row.totalRub || 0);
+  if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
+  if (params.hasPrice) { const value = filterPrice > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
   if (params.budgetFrom && projectionNumber(row.totalRub, 0) < params.budgetFrom) return false;
   if (params.budgetTo && projectionNumber(row.totalRub, Infinity) > params.budgetTo) return false;
   if (params.yearFrom && Number(row.year || 0) < params.yearFrom) return false;
   if (params.yearTo && Number(row.year || 0) > params.yearTo) return false;
   if (params.mileageFrom && projectionNumber(row.mileageKm, 0) < params.mileageFrom) return false;
   if (params.mileageTo && projectionNumber(row.mileageKm, Infinity) > params.mileageTo) return false;
+  if ((params.engineFrom || params.engineTo) && !(Number(row.engineCc) > 0)) return false;
   if (params.engineFrom && projectionNumber(row.engineCc, 0) < params.engineFrom) return false;
   if (params.engineTo && projectionNumber(row.engineCc, Infinity) > params.engineTo) return false;
   if (params.powerFrom || params.powerTo) {
@@ -613,8 +626,9 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
 export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
-  return rows.sort((a, b) => sort === "totalRub" ? projectionNumber(a.totalRub, Infinity) - projectionNumber(b.totalRub, Infinity)
-    : sort === "totalRubDesc" ? projectionNumber(b.totalRub, -Infinity) - projectionNumber(a.totalRub, -Infinity)
+  const price = (row: CatalogSearchProjection, missing: number) => !hasModificationSelection(row) && Number(row.totalRub) > 0 ? Number(row.totalRub) : missing;
+  return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
+    : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
         : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
       : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
@@ -895,6 +909,9 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
 }
 
 export type PersistCatalogOptions = {
+  productionRefreshMarket?: CatalogMarket;
+  // Explicit staging mode; production remains frozen and needs a reviewed rebuild.
+  modificationRecovery?: boolean;
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
   beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
   // Recovery writers may preserve already-published markets byte-for-byte while
@@ -906,12 +923,23 @@ export type PersistCatalogOptions = {
   // ties, which makes routine collection genuinely grow-only.
   appendPublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
 };
+export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions): boolean {
+  const market = options.productionRefreshMarket;
+  const preserved = options.preservePublicOffersByMarket || {};
+  return Boolean(market && CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market)
+    && !options.modificationRecovery && !options.appendPublicOffersByMarket
+    && typeof options.beforePersistValidate === "function"
+    && typeof options.beforePublishValidate === "function"
+    && !Object.prototype.hasOwnProperty.call(preserved, market)
+    && MARKETS.filter((other) => other !== market).every((other) => Array.isArray(preserved[other]))
+    && Object.keys(preserved).every((other) => MARKETS.includes(other as CatalogMarket)));
+}
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
-  if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object") {
+  if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object" && !isCatalogProductionRefreshAllowed(options)) {
     throw new Error("catalog_production_writes_paused");
   }
   const storage = getJsonStorage();
-  const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
+  const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "").split(",").map((value) => value.trim()).filter(Boolean));
   const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};
   const appendPublicOffersByMarket = options.appendPublicOffersByMarket || {};
   const preservedMarketKeys = Object.keys(preservedPublicOffersByMarket);
@@ -936,10 +964,11 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
     for (const offer of current) {
       if (exactPreserveMarkets.has(offer.market)) continue;
-      if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
+      if (!growOnlyMarkets.has(String(offer.market)) || offer.status !== "active" || !catalogOfferWithinRetention(offer) || !hasCredibleOfferContent(offer)) continue;
       const incoming = merged.get(offer.id);
+      if (incoming && incoming.status !== "active") continue;
       if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
-        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore({ ...offer, status: "active" }));
+        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
         merged.set(offer.id, restored);
       }
     }
@@ -947,6 +976,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   } else {
     nextOffers = normalized;
   }
+  if (options.modificationRecovery) nextOffers = await Promise.all(nextOffers.map(prepareModificationRecovery));
   const publicOffers = nextOffers.filter((offer) => !exactPreserveMarkets.has(offer.market) && !protectedPublicIds.has(String(offer.id)) && isPublicOffer(offer));
   for (const [market, rows] of Object.entries(preservedPublicOffersByMarket)) {
     for (const offer of rows || []) {
@@ -978,7 +1008,12 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
   const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds);
-  const publishedOffers = canonicalPublic.offers;
+  const publishedOffers = options.modificationRecovery
+    ? limitModificationInventory(canonicalPublic.offers, catalogOfferVisibleRub)
+    : canonicalPublic.offers;
+  if (options.modificationRecovery && publishedOffers.some(o => o.market !== "japan" && !o.recoveryQualification)) {
+    throw new Error("recovery_cannot_carry_unqualified_preserved_rows");
+  }
   if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
@@ -1080,7 +1115,11 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
   // by the caller; only that market's own refresh may revalidate them.
   const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) && hasAllowedCatalogSourceProvenance(offer));
   const mutableRows = storedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
-  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
+  const identityRows = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
+  // Canonical display aliases can change a selector's identity binding. Resolve
+  // it again against the canonical model instead of carrying unrelated options.
+  const identifiedOffers = await Promise.all(identityRows.map(offer => offer.modificationSelection
+    ? prepareModificationRecovery(offer) : offer));
   const qualityRejected = identifiedOffers.filter((offer) => !isPublicOffer(offer));
   const qualityEligibleOffers = identifiedOffers.filter(isPublicOffer);
   const identityRejected = qualityEligibleOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));
@@ -1515,7 +1554,18 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
 }
 
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
-export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
+export function assertSafeImageUrl(rawUrl: string) {
+  const parsed = new URL(rawUrl);
+  if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked");
+  if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked");
+  if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed");
+  if (parsed.hostname.toLowerCase() === "img.classistatic.de"
+    && (parsed.protocol !== "https:" || parsed.port || parsed.username || parsed.password
+      || !/^\/api\/v1\/mo-prod\/images\/[^/]+/.test(parsed.pathname))) {
+    throw new Error("image_url_path_not_allowed");
+  }
+  return parsed.toString();
+}
 
 async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
   if (IMAGE_OPTIMIZATION_DISABLED) return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
@@ -1535,6 +1585,18 @@ async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
 
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
   let safeUrl: string; try { safeUrl = assertSafeImageUrl(url); } catch { return null; }
+  // The catalog stores source URLs. Enforce that contract here as well as in
+  // gallery wrappers: a legacy adapter must not silently fetch/store binaries.
+  // Unconfigured callers also use URLs; an empty environment is not opt-in.
+  const mode = String(process.env.CATALOG_IMAGE_STORAGE_MODE || "source_urls_only").trim().toLowerCase();
+  if (mode === "source_urls_only") {
+    const extension = new URL(safeUrl).pathname.match(/\.(jpe?g|png|webp|avif)$/i)?.[1]?.toLowerCase();
+    const mimeType = extension === "jpg" || extension === "jpeg" ? "image/jpeg" : extension ? `image/${extension}` : "";
+    return { id: "", url: safeUrl, objectKey: "", checksum: "", size: 0, mimeType };
+  }
+  // Old maintenance code can explicitly request binary storage. Unknown values
+  // must not silently opt into downloads. Active collectors never enable this.
+  if (mode !== "binary") return null;
   try {
     const existing = await cachedImageForSource(safeUrl);
     if (existing) return existing;

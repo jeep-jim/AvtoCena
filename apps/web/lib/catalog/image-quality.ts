@@ -1,3 +1,5 @@
+import { reviewedCatalogImageExclusion } from "./source-gallery-review";
+
 type CatalogImageLike = {
   id?: unknown;
   url?: unknown;
@@ -158,7 +160,8 @@ export function catalogImageScore(image: CatalogImageLike) {
 }
 
 export function isLikelyVehicleImage(image: CatalogImageLike) {
-  return Boolean(text(image?.url || image?.objectKey)) && hasImageEvidence(image) && catalogImageScore(image) >= 0;
+  return Boolean(text(image?.url || image?.objectKey)) && !reviewedCatalogImageExclusion(image?.url)
+    && hasImageEvidence(image) && catalogImageScore(image) >= 0;
 }
 
 export function rankedCatalogImageUrls(offer: any) {

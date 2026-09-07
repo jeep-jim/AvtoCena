@@ -203,8 +203,8 @@ test("current DubiCars parser keeps exact specs even when recommendation copy ap
   assert.equal(row?.make, "Voyah");
   assert.match(row?.model || "", /^Free/);
   assert.equal(row?.year, 2025);
-  assert.equal(row?.price, 129_000);
-  assert.equal(row?.currency, "AED");
+  assert.equal(row?.price, undefined);
+  assert.equal(row?.currency, undefined);
   assert.equal(row?.images.length, 5);
 });
 
@@ -214,7 +214,7 @@ test("current DubiCars parser uses the exact listing URL year when the page year
   assert.equal(row?.make, "Toyota");
   assert.match(row?.model || "", /^Highlander/);
   assert.equal(row?.year, 2023);
-  assert.equal(row?.price, 148_000);
+  assert.equal(row?.price, undefined);
   assert.equal(row?.images.length, 5);
 });
 

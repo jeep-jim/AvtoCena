@@ -7,7 +7,8 @@ const page = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
 
 test("redesigned desktop filters keep their own nested layout", () => {
   assert.match(filters, /ac-range-input-box/);
-  assert.match(filters, /Введите «от» и\/или «до»/);
+  assert.match(filters, /aria-label=\{`\$\{title\}: от`\}/);
+  assert.match(filters, /aria-label=\{`\$\{title\}: до`\}/);
   assert.doesNotMatch(filters, /type="range"/);
   assert.doesNotMatch(page, /ac-advanced-fields>div\{display:contents!important\}/);
   assert.doesNotMatch(page, /\.ac-advanced-fields\{display:grid!important/);

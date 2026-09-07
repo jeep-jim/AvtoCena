@@ -61,6 +61,8 @@ export type VehicleOffer = {
   utilizationPowerKw?: number;
   powerDataConfidence?: PowerDataConfidence;
   powerDataSource?: string;
+  modificationSelection?: import("./modification-contract").CatalogModificationSelection;
+  recoveryQualification?: { version: 1; status: "automatic" | "selection_required" | "blocked"; reasons: string[] };
   color?: string;
   vin?: string;
   frameNumber?: string;
@@ -95,7 +97,7 @@ export type VehicleOffer = {
 };
 
 export type PublicVehicleOffer = Omit<VehicleOffer, "operational" | "vin" | "frameNumber">;
-export type CatalogFetchResult = { items: unknown[]; nextCursor?: string | null; finished?: boolean; count?: number; health?: SourceRunHealth };
+export type CatalogFetchResult = { items: unknown[]; nextCursor?: string | null; finished?: boolean; count?: number; health?: SourceRunHealth; diagnostics?: { listingRows: number; rejectedRows: number; failedDetailRows?: number; unexaminedRows?: number; rejectionReasons?: Record<string, number>; rejectionSamples?: Array<{ sourceOfferId: string; reason: string; modelYear?: string; manufactureDate?: string }> } };
 export type SourceRunHealth = { ok: boolean; message: string; checkedAt: string; httpStatus?: number; contentType?: string; blocked?: boolean };
 export type CatalogSourcePolicy = {
   sourceId: string;

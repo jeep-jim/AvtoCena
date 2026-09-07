@@ -1,0 +1,43 @@
+name: Catalog source apply partial classification 2026-09-03
+
+on:
+  push:
+    branches:
+      - chore/source-partial-field-audit-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-apply-partial-classification-20260903.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify classification decision before mutation
+        run: node --import tsx --test tests/catalog-apply-partial-classification-v1.test.ts
+      - name: Apply evidence-backed ledger classes
+        run: node scripts/catalog-apply-partial-classification-v1.mjs
+      - name: Verify only intended ledger fields changed
+        run: node --import tsx --test tests/catalog-apply-partial-classification-v1.test.ts
+      - name: Commit classification ledger checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo 'No ledger changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/catalog/source-qualification-v1.json
+          git commit -m 'Classify partial-signal sources from stored evidence'
+          git push origin HEAD:chore/source-partial-field-audit-v1-20260903

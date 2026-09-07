@@ -11,6 +11,8 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 import { applyCatalogPowerScenario, readCatalogPowerScenario, resolveCatalogPowerScenario } from "./power-scenario";
+import { isCalculableModificationOption, withoutDeliveredPrice, type CatalogModificationOption } from "./modification-contract";
+import { specificationEvidenceComplete } from "./modification-matching";
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -175,20 +177,20 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
   return isElectrifiedKind(offer?.powertrainKind) && isPreliminaryPowerPendingCalculation(offer);
 }
 
-async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number): Promise<VehicleOffer> {
-  const coreEnriched = await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
+async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false): Promise<VehicleOffer> {
+  const coreEnriched = resolvedModification ? input : await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
   const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
     ? positive(coreEnriched.powerHp)
     : 0;
   const canonical = discardRepresentativeModelPowerForCustoms(coreEnriched);
-  const certified = await enrichOfferWithCertifiedPower(canonical);
-  const known = await enrichOfferWithPowerKnowledge(certified);
-  const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
+  const certified = resolvedModification ? canonical : await enrichOfferWithCertifiedPower(canonical);
+  const known = resolvedModification ? certified : await enrichOfferWithPowerKnowledge(certified);
+  const normalized = resolvedModification ? known : preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
   const electrified = isElectrifiedKind(normalized.powertrainKind);
   const exactOffer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
     ? { ...normalized, utilizationPowerKw: undefined } as VehicleOffer
     : normalized;
-  const scenario = resolveCatalogPowerScenario(exactOffer, { requestedHp: requestedPowerHp, representativeHp: representativePowerHp || undefined });
+  const scenario = resolvedModification ? null : resolveCatalogPowerScenario(exactOffer, { requestedHp: requestedPowerHp, representativeHp: representativePowerHp || undefined });
   const offer = scenario ? applyCatalogPowerScenario(exactOffer, scenario) : exactOffer;
   const powerScenario = readCatalogPowerScenario(offer);
 
@@ -421,6 +423,43 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
 
 export async function calculateOfferWithUserPowerScenario(input: VehicleOffer, horsepower: number): Promise<VehicleOffer> {
   return calculateOfferWithRussiaCustomsInternal(input, false, horsepower);
+}
+
+/** Called only after the server resolves an allowed variant ID for this listing. */
+export async function calculateOfferWithResolvedModification(input: VehicleOffer, option: CatalogModificationOption): Promise<VehicleOffer> {
+  if (input.market === "japan" || !isCalculableModificationOption(option)) throw new Error("invalid_modification_option");
+  const clean = withoutDeliveredPrice(input);
+  const conditional: VehicleOffer = {
+    ...clean, engineCc: option.engineCc, engineType: undefined,
+    fuel: option.fuel, powertrainKind: option.powertrainKind,
+    powerHp: option.powerHp, powerKw: option.powerKw, icePowerKw: option.icePowerKw,
+    power30MinKw: option.power30MinKw, power30MinKwByMotor: undefined, utilizationPowerKw: undefined,
+    transmission: option.transmission, drive: option.drive,
+    powerDataConfidence: "documented", powerDataSource: `conditional_modification:${option.id}`,
+    calculationSnapshot: { modificationScenario: { version: 1, source: "customer_selection", variantId: option.id,
+      evidenceIds: option.evidenceIds, requiresConfirmation: true } },
+  };
+  const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(conditional, false, undefined, true));
+  return { ...result, calculationSnapshot: { ...result.calculationSnapshot,
+    modificationScenario: conditional.calculationSnapshot.modificationScenario } };
+}
+
+export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer): Promise<VehicleOffer> {
+  if (input.market === "japan" || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
+  return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true));
+}
+
+export function requireFreshRecoveryRates(offer: VehicleOffer, now = Date.now()): VehicleOffer {
+  const snapshot = offer.calculationSnapshot || {};
+  const rates = [snapshot.currencyRate, snapshot.eurRate];
+  const fresh = rates.every(rate => {
+    const date = Date.parse(String(rate?.rateDate || ""));
+    return isOfficialCustomsCurrencyRate(rate) && Number.isFinite(date)
+      && now - date <= 4 * 86400000 && date - now <= 86400000;
+  });
+  if (fresh || !(Number(offer.totalRub) > 0)) return offer;
+  return { ...withoutDeliveredPrice(offer), calculationStatus: "needs_currency_rate",
+    calculationSnapshot: { ...snapshot, breakdown: [], pricingConfidence: "unavailable", missing: ["fresh_official_currency_rates"] } };
 }
 
 // Recovery imports may publish a clearly marked lower bound when an exact sold
