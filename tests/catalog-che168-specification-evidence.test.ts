@@ -175,3 +175,15 @@ test("Che168 litre-only details do not manufacture exact displacement", () => {
   assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "1.5L 1498 cc 150 hp" }).engineCc.value, 1498);
   assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "2.4L 1498 cc 150 hp" }).engineCc.status, "conflict");
 });
+
+
+test("Che168 accepts explicit horsepower words and compact cylinder suffixes without inventing displacement", () => {
+  for (const [label, hp] of [["2.0T 245 horsepower L4", 245], ["2.4L208hpL4", 208], ["3.0T381HP L6", 381]] as const) {
+    const evidence = che168GlobalSpecificationEvidence({ detailEngine: label });
+    assert.equal(evidence.powerHp.value, hp);
+    assert.equal(evidence.powerHp.status, "exact");
+    assert.equal(evidence.engineCc.value, undefined);
+  }
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "99999 horsepower" }).powerHp.value, undefined);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "245 horsepower / 208 hp" }).powerHp.status, "conflict");
+});

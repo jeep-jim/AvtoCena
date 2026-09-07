@@ -41,6 +41,10 @@ globalThis.fetch = async (input, init = {}) => {
       rscPushCount: (body.match(/self\.__next_f\.push/g) || []).length,
       hasSpecTable: body.includes('ssrSpecParam'), hasBoundSpecId: body.includes('initialSpecId'),
       hasCarId: body.includes('carId'), hasFlightContentType: /text\/x-component/.test(event.contentType || '') };
+    if (process.env.PILOT_CAPTURE_FIRST_HTML === '1' && /text\/html/.test(event.contentType || '') && !active.capturedHtml) {
+      event.bodyEvidence.capturedPublicHtml = body.slice(0, 65000);
+      active.capturedHtml = true;
+    }
   }
   if (publicResponseChallenge(body)) { active.stopped = true; throw new Error('pilot_challenge_stop'); }
   return response;

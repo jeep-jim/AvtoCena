@@ -145,7 +145,7 @@ function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che16
     if (new Set(litreLabels).size > 1) return { rawValues, status: "conflict" };
     if (values.length && litreLabels.some(litres => values.some(cc => Math.abs(cc / 1_000 - litres) > 0.051))) return { rawValues, status: "conflict" };
   } else {
-    for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*(?:hp|ps|bhp)\b/gi)) {
+    for (const match of raw.matchAll(/(?<![\d.])(\d{2,4}(?:[.,]\d+)?)\s*(?:horsepower|hp|ps|bhp)(?=\b|[LVIW]\d)/gi)) {
       const value = Number(match[1].replace(",", "."));
       if (Number.isFinite(value) && value >= 20 && value <= 2_500) values.push(rounded(value));
     }
