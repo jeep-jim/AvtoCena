@@ -27,9 +27,10 @@ test("retired markets cannot re-enter public reads from an older generation", ()
   assert.match(catalogPageSource, /redirect\("\/cars"\)/);
 });
 
-test("the production queue has no seventh market job", () => {
+test("the refresh queue has exactly five markets and excludes paused Japan", () => {
   assert.doesNotMatch(queueWorkflow, /kyrgyzstan|Кыргызстан|mashina\.kg/i);
-  assert.equal((queueWorkflow.match(/^  [a-z][a-z0-9_-]+:\s*$/gm) || []).filter((line) => /korea|china|japan|uae|europe|georgia/.test(line)).length, 6);
+  assert.equal((queueWorkflow.match(/^  [a-z][a-z0-9_-]+:\s*$/gm) || []).filter((line) => /korea|china|japan|uae|europe|georgia/.test(line)).length, 5);
+  assert.doesNotMatch(queueWorkflow, /^  japan:/m);
 });
 
 test("retired inventory is removed by one serialized byte-stable publication", () => {

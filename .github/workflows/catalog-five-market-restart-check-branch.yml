@@ -1,4 +1,4 @@
-name: Fresh five-market restart diagnostics v1
+name: Remaining approved-source restart diagnostics v2
 on:
   push:
     branches: [feat/catalog-europe-kcar-generation-canary-20260907]
@@ -18,20 +18,19 @@ jobs:
       max-parallel: 1
       matrix:
         include:
-          - { market: korea, source: kcar }
-          - { market: europe, source: mobile }
-          - { market: china, source: che168 }
-          - { market: uae, source: dubizzle }
-          - { market: georgia, source: autopapa }
-          - { market: uae, source: porsche }
-          - { market: georgia, source: porsche }
+          - { market: korea, source: encar_direct }
+          - { market: europe, source: autoscout_europe_open }
+          - { market: china, source: dongchedi_china_open }
+          - { market: china, source: guazi_china_open }
+          - { market: china, source: autohome_new_china_open }
+          - { market: uae, source: dubicars_uae_exact }
+          - { market: georgia, source: myauto_georgia_list }
     env:
       PILOT_MARKETS: ${{ matrix.market }}
-      PILOT_UAE_SOURCE: ${{ matrix.source }}
-      PILOT_GEORGIA_SOURCE: ${{ matrix.source }}
-      PILOT_SAMPLE_LIMIT: '40'
-      PILOT_PAGE_LIMIT: '2'
-      PILOT_REQUEST_LIMIT: '100'
+      PILOT_REGISTERED_SOURCE_ID: ${{ matrix.source }}
+      PILOT_SAMPLE_LIMIT: '20'
+      PILOT_PAGE_LIMIT: '1'
+      PILOT_REQUEST_LIMIT: '50'
       PILOT_TIMEOUT_MS: '20000'
       PILOT_REQUEST_INTERVAL_MS: '1000'
       PILOT_RESPONSE_EVIDENCE: '1'

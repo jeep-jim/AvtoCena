@@ -7,6 +7,6 @@ export function publicResponseChallenge(body) {
   const title = visible.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '';
   return /has_been_cr_blocked[^"<>\s]*\.html/i.test(visible)
     || /<iframe\b[^>]*src=["\'][^"\']*\/_Incapsula_Resource\b/i.test(visible)
-    || /captcha|access denied|security check|just a moment|访问验证|安全验证/i.test(title)
+    || /captcha|access denied|security check|just a moment|pardon our interruption|访问验证|安全验证/i.test(title)
     || /verify (?:that )?you are human|complete the security check|确认您是真人/i.test(visible.replace(/<[^>]+>/g, ' '));
 }

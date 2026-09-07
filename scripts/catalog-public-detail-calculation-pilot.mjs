@@ -69,6 +69,16 @@ const sources = [
   process.env.PILOT_UAE_SOURCE === 'porsche' ? ['uae', 'porsche-finder-source', 'porscheFinderUaeSource', ['finder.porsche.com']] : process.env.PILOT_UAE_SOURCE === 'carswitch' ? ['uae', 'carswitch-exact-source', 'carswitchUaeExactSource', ['carswitch.com']] : process.env.PILOT_UAE_SOURCE === 'dubicars' ? ['uae', 'dubicars-current-source', 'dubicarsUaeCurrentSource', ['dubicars.com']] : ['uae', 'dubizzle-exact-source', 'dubizzleUaeExactSource', ['dubizzle.com']],
   process.env.PILOT_GEORGIA_SOURCE === 'porsche' ? ['georgia', 'porsche-finder-source', 'porscheFinderGeorgiaSource', ['finder.porsche.com']] : process.env.PILOT_GEORGIA_SOURCE === 'myauto' ? ['georgia', 'myauto-list-source', 'myAutoListSource', ['myauto.ge']] : ['georgia', 'autopapa-georgia-source', 'autoPapaGeorgiaSource', ['autopapa.ge']],
 ];
+let registeredSource;
+if (process.env.PILOT_REGISTERED_SOURCE_ID) {
+  const { REQUIRED_CATALOG_SOURCES } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
+  const { catalogImportSources } = await import('../apps/web/lib/catalog/importer.ts');
+  registeredSource = catalogImportSources.find(source => source.sourceId === process.env.PILOT_REGISTERED_SOURCE_ID && source.market !== 'japan');
+  const contract = registeredSource && REQUIRED_CATALOG_SOURCES[registeredSource.market].find(source => source.sourceId === registeredSource.sourceId);
+  if (!contract) throw new Error('pilot_registered_source_forbidden');
+  const host = new URL(contract.canonicalUrl).hostname.replace(/^www\./, '');
+  sources.splice(0, sources.length, [registeredSource.market, null, null, [host]]);
+}
 const report = { version: 3, completed: false, checkedAt: new Date().toISOString(), productionWrites: false,
   japanRequests: 0, detailsRequested: true, pricesCalculated: true, maxRequestsPerSource: requestLimit, sampleLimit, pageLimit, markets: [],
   limitation: 'Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.' };
@@ -92,7 +102,7 @@ const { calculateOfferWithVerifiedSpecifications } = await import('../apps/web/l
 for (const [market, module, name, hosts] of sources.filter(([market]) => requestedMarkets.has(market))) {
   active = { market, hosts, requests: [] };
   try {
-    const source = (await import(`../apps/web/lib/catalog/${module}.ts`))[name];
+    const source = registeredSource || (await import(`../apps/web/lib/catalog/${module}.ts`))[name];
     active.sourceId = source.sourceId;
     const offers = [];
     const seen = new Set();

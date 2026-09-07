@@ -12,7 +12,7 @@ test("sequential queue keeps explicit operator triggers while automatic scheduli
   assert.doesNotMatch(queue, /cron: "17 21 \* \* \*"/);
   assert.match(queue, /Production collection is intentionally paused/);
   assert.match(queue, /push:[\s\S]*branches:[\s\S]*- main[\s\S]*paths:[\s\S]*\.github\/catalog-v3-run-all/);
-  assert.match(queue, /github\.event_name \}\}" = "push"/);
+  assert.match(queue, /CATALOG_PRODUCTION_WRITES_PAUSED/);
   assert.doesNotMatch(queue, /workflow_run:/);
   assert.doesNotMatch(queue, /gh workflow run/);
 });

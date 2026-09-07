@@ -38,3 +38,14 @@ test('invalid pilot bounds cannot disable network limits', () => {
   assert.equal(boundedPilotInteger('3.9', 8, 100), 3);
   assert.equal(boundedPilotInteger('-2', 8, 100), 1);
 });
+
+test('public admission includes credibility, projection and price parity, with blocked detail work visible', () => {
+  const row = { yearAllowed: true, totalRub: 2_000_000, calculationStatus: 'calculated', images: 5,
+    publicDisplay: { credible: true, eligible: true, projectionCanRender: true, pricesAgree: true, breakdownMatchesTotal: true } };
+  const summary = summarizePilotMarket({ details: [row,
+    ...Object.keys(row.publicDisplay).map(key => ({ ...row, publicDisplay: { ...row.publicDisplay, [key]: false } })),
+    { yearAllowed: true, error: 'pilot_request_outside_envelope' }] });
+  assert.equal(summary.calculated, 6);
+  assert.equal(summary.passingAllFilters, 1);
+  assert.equal(summary.detailWorkBlocked, 1);
+});

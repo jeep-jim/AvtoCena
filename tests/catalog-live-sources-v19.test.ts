@@ -160,7 +160,7 @@ test("Catalog V2 probes every configured slot but always crawls mandatory source
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(probe, /requiredSourceIdsForShard/);
   assert.match(probe, /sourceIdsForRebuildList = \[\.\.\.new Set\(\[\.\.\.requiredSourceIdsForShard, \.\.\.activeSourceIds\]\)\]/);
   assert.match(probe, /sourceIdsForRebuild = sourceIdsForRebuildList\.join/);

@@ -31,7 +31,7 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketWorkflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(marketWorkflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
   assert.match(marketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
-  assert.match(marketWorkflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(marketWorkflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(marketWorkflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(marketWorkflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(marketWorkflow, /group: catalog-live-daily-working-markets/);

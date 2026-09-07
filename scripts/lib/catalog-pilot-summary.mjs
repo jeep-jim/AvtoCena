@@ -10,6 +10,9 @@ export function summarizePilotMarket(market) {
   // "estimated" describes the commercial profile, not missing vehicle inputs.
   const calculated = row => ['calculated', 'estimated'].includes(row.calculationStatus) && row.totalRub > 0 && !row.error;
   const passing = row => calculated(row) && row.totalRub <= 15_000_000 && row.images >= 5;
+  const publicAccepted = row => passing(row) && (!row.publicDisplay || row.publicDisplay.credible
+    && row.publicDisplay.eligible && row.publicDisplay.projectionCanRender
+    && row.publicDisplay.pricesAgree && row.publicDisplay.breakdownMatchesTotal);
   const knownDenominator = pages.length > 0 && pages.every(page => Number.isInteger(page.diagnostics?.listingRows));
   const failures = {};
   for (const row of details) {
@@ -28,10 +31,11 @@ export function summarizePilotMarket(market) {
     uniqueNormalizedRows: market.normalizedRows || 0,
     unexaminedRows: Math.max(0, (market.normalizedRows || 0) - details.length),
     examined: details.length,
+    detailWorkBlocked: details.filter(row => /pilot_(?:request_outside_envelope|source_stopped|stop_http_|challenge_stop)/.test(row.error || '')).length,
     calculated: details.filter(calculated).length,
     allowedYearExamined: allowed.length,
     allowedYearCalculated: allowed.filter(calculated).length,
-    passingAllFilters: allowed.filter(passing).length,
+    passingAllFilters: allowed.filter(publicAccepted).length,
     failures,
     limitation: 'Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.',
   };

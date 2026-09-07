@@ -55,7 +55,7 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
   assert.match(workflow, /max-parallel: 5/);
   assert.match(workflow, /timeout-minutes: 120/);
@@ -65,7 +65,7 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("six-market sequential queue remains explicit but automatic runs stay paused during specification repair", () => {
+test("five-market sequential queue remains explicit but automatic runs stay paused during specification repair", () => {
   assert.equal(marketFiles.length, 6);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
@@ -76,18 +76,14 @@ test("six-market sequential queue remains explicit but automatic runs stay pause
   assert.doesNotMatch(sequentialQueue, /^\s*schedule:\s*$/m);
   assert.doesNotMatch(sequentialQueue, /cron: "17 21 \* \* \*"/);
   assert.match(sequentialQueue, /Production collection is intentionally paused/);
-  assert.match(sequentialQueue, /01\|08\|15\|22/);
-  assert.match(sequentialQueue, /needs: \[plan, japan\]/);
-  assert.match(sequentialQueue, /needs: korea/);
-  assert.match(sequentialQueue, /needs: china/);
-  assert.match(sequentialQueue, /needs: uae/);
-  assert.match(sequentialQueue, /needs: europe/);
-  assert.match(sequentialQueue, /georgia:[\s\S]*needs: europe/);
-  assert.match(sequentialQueue, /if: always\(\)/);
-  assert.match(sequentialQueue, /retention_ms: "2592000000"/);
+  assert.doesNotMatch(sequentialQueue, /run_japan|market: japan/);
+  assert.match(sequentialQueue, /korea:[\s\S]*needs: plan/);
+  for (const previous of ["korea", "china", "uae", "europe"]) {
+    assert.ok(sequentialQueue.includes(`needs: [plan, ${previous}]`));
+  }
+  assert.equal((sequentialQueue.match(/needs\.plan\.result == 'success'/g) || []).length, 5);
   assert.equal((sequentialQueue.match(/retention_ms: "1209600000"/g) || []).length, 5);
-  assert.match(sequentialQueue, /target_per_market: "30000"/);
-  assert.match(sequentialQueue, /market: japan[\s\S]*priority_target: "24000"/);
+  assert.equal((sequentialQueue.match(/target_per_market: "10000"/g) || []).length, 5);
   assert.equal((sequentialQueue.match(/priority_target: "8000"/g) || []).length, 5);
   assert.match(market10kReusable, /CATALOG_V2_PRIORITY_TARGET: \$\{\{ inputs\.priority_target \}\}/);
   assert.match(market10kReusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);

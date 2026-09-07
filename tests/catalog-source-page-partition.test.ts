@@ -54,5 +54,5 @@ test("Japan workflows keep five collectors without binding them to a forbidden s
   const sequential = readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
   assert.match(reusable, /CATALOG_REBUILD_PAGE_PARTITION_COUNT: \$\{\{ inputs\.page_partition_count \}\}/);
   assert.match(japan, /page_partition_count: "5"/);
-  assert.match(sequential, /market: japan[\s\S]*page_partition_count: "5"/);
+  assert.doesNotMatch(sequential, /market: japan/);
 });
