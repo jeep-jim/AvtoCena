@@ -194,7 +194,7 @@ test("K Car exact detail classifies fuel, displacement and horsepower provenance
   assert.equal(evidence.powerKw.status, "missing");
 });
 
-test("K Car rejects conflicting years, ambiguous metrics and mismatched EV power units", () => {
+test("K Car separates model and calendar years, rejects ambiguous metrics and mismatched EV units", () => {
   const evidence = kcarSpecificationEvidence({
     regModelYear: "2024",
     manufactureDate: "20230115",
@@ -203,7 +203,9 @@ test("K Car rejects conflicting years, ambiguous metrics and mismatched EV power
     engineDisplacement: "2.0",
     horsepower: "150-200",
   });
-  assert.equal(evidence.year.status, "conflict");
+  assert.equal(evidence.year.status, "exact");
+  assert.equal(evidence.year.value, 2023);
+  assert.equal(evidence.modelYear.value, 2024);
   assert.equal(evidence.engineCc.status, "ambiguous");
   assert.equal(evidence.powerHp.status, "conflict");
   assert.equal(evidence.powerKw.status, "conflict");

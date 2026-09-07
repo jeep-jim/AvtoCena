@@ -1,0 +1,60 @@
+name: Europe and KCar public display acceptance v4 (no publication)
+on:
+  push:
+    branches: [feat/catalog-china-saved-evidence-v1-20260906]
+    paths:
+      - .github/workflows/catalog-europe-kcar-public-pilot-branch.yml
+permissions:
+  contents: read
+jobs:
+  pilot:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - market: europe
+            sample: '40'
+            pages: '2'
+          - market: korea
+            sample: '60'
+            pages: '3'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      PILOT_MARKETS: ${{ matrix.market }}
+      PILOT_SAMPLE_LIMIT: ${{ matrix.sample }}
+      PILOT_PAGE_LIMIT: ${{ matrix.pages }}
+      PILOT_REQUEST_LIMIT: '100'
+      PILOT_TIMEOUT_MS: '30000'
+      PILOT_PUBLIC_DISPLAY_AUDIT: '1'
+      PILOT_REPORT: public-pilot-${{ matrix.market }}.json
+      JSON_STORAGE_DRIVER: local
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe public details and calculations without storage writes
+        run: node --import tsx scripts/catalog-public-detail-calculation-pilot.mjs
+      - name: Require a calculated sample with a usable gallery and allowed year
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync(process.env.PILOT_REPORT, 'utf8'));
+          const market = report.markets.find(row => row.market === process.env.PILOT_MARKETS);
+          const samples = market?.details || [];
+          const passing = samples.filter(row => row.yearAllowed && row.totalRub > 0 && row.totalRub <= 15000000 && row.images >= 5
+            && row.publicDisplay?.credible && row.publicDisplay?.eligible && row.publicDisplay?.projectionCanRender);
+          const inconsistent = samples.filter(row => row.publicDisplay && (!row.publicDisplay.pricesAgree || !row.publicDisplay.breakdownMatchesTotal));
+          console.log(JSON.stringify({ market: process.env.PILOT_MARKETS, samples: samples.length, passing: passing.length, summary: market?.summary, productionWrites: report.productionWrites }));
+          if (!report.completed || report.productionWrites || !passing.length || inconsistent.length) process.exit(1);
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-pilot-${{ matrix.market }}
+          path: public-pilot-${{ matrix.market }}.json
+          retention-days: 14

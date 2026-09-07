@@ -94,8 +94,8 @@ export function autoPapaSpecificationEvidence(input: {
   const fuel = exactValuesEvidence(fuels, fuels.map(canonicalSourceFuel));
   let engineCc = exactValuesEvidence(engines, engines.map((raw) => {
     if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return undefined;
-    const match = raw.match(/^([0-9]+(?:[.,][0-9]+)?)\s*l$/i);
-    const value = match ? Math.round(Number(match[1].replace(",", ".")) * 1_000) : undefined;
+    const match = raw.match(/^([0-9][0-9, ]{2,7})\s*(?:cc|cm3|cm³|mL)$/i);
+    const value = match ? Number(match[1].replace(/[, ]/g, "")) : undefined;
     return value && value >= 300 && value <= 10_000 ? value : undefined;
   }));
   if (fuel.status === "exact" && fuel.value === "electric" && engineCc.status === "exact") engineCc = { rawValues: engineCc.rawValues, status: "conflict" };
@@ -430,6 +430,9 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
           if ((offer.images || []).length >= limit) return offer.images.slice(0, limit);
         }
       }
+    }
+    if (process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only") {
+      return urls.slice(0, limit).map(url => ({ id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" }));
     }
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit)) {

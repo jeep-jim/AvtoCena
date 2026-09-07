@@ -1,3 +1,4 @@
+import { che168BoundPageParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
 import crypto from "node:crypto";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -135,16 +136,16 @@ function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che16
 
   const values: number[] = [];
   if (field === "engineCc") {
-    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/gi)) {
+    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³|mL)(?![a-z0-9³])/gi)) {
       const value = integer(match[1]);
       if (value && value >= 300 && value <= 10_000) values.push(value);
     }
-    for (const match of raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)) {
-      const value = Number(match[1].replace(",", "."));
-      if (Number.isFinite(value) && value >= 0.3 && value <= 10) values.push(Math.round(value * 1_000));
-    }
+    // Litres can reveal conflicting labels, but never attest exact cc.
+    const litreLabels = [...raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)].map(match => Number(match[1].replace(",", ".")));
+    if (new Set(litreLabels).size > 1) return { rawValues, status: "conflict" };
+    if (values.length && litreLabels.some(litres => values.some(cc => Math.abs(cc / 1_000 - litres) > 0.051))) return { rawValues, status: "conflict" };
   } else {
-    for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*(?:hp|ps|bhp)\b/gi)) {
+    for (const match of raw.matchAll(/(?<![\d.])(\d{2,4}(?:[.,]\d+)?)\s*(?:horsepower|hp|ps|bhp)(?=\b|[LVIW]\d)/gi)) {
       const value = Number(match[1].replace(",", "."));
       if (Number.isFinite(value) && value >= 20 && value <= 2_500) values.push(rounded(value));
     }
@@ -223,6 +224,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   market = "china" as const;
   accessMode = "public_json" as const;
   private readonly deviceId = crypto.randomUUID();
+  private parameterPageBlocked: string | null = null;
 
   private params(extra: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -266,6 +268,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       nextCursor: finished ? null : String(page + 1),
       finished,
       count: items.length,
+      diagnostics: { listingRows: Array.isArray(result.carlist) ? result.carlist.length : 0, rejectedRows: (Array.isArray(result.carlist) ? result.carlist.length : 0) - items.length },
       health: {
         ok: items.length > 0,
         message: `Che168 Global API page=${page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
@@ -365,13 +368,41 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const title = text(detail.carname) || offer.sourceTitle;
     const detailYear = yearOf(detail);
     const price = positiveNumber(detail.price);
+    let pageParameters: ReturnType<typeof che168BoundPageParameters> = null;
+    // Public page carries a table bound to both this listing and this spec ID.
+    if (Number(detail.specid) > 0 && !this.parameterPageBlocked) {
+      const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
+      if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
+      if (response?.ok) {
+        const markup = await response.text();
+        if (che168BrowserChallenge(markup)) this.parameterPageBlocked = "browser_challenge";
+        else pageParameters = che168BoundPageParameters(markup, id, Number(detail.specid));
+      }
+    }
+    let detailEngine = text(detail.engine);
+    const tableFuel = pageParameters?.fuelValues.map(canonicalSourceFuel).filter(Boolean) || [];
+    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => fuel === canonicalSourceFuel(detail.fuelname));
+    if (pageParameters && tableFuelConsistent) {
+      if (pageParameters.engineCc.status === "exact") detailEngine += ` ${pageParameters.engineCc.value} cc`;
+      if (pageParameters.powerHp.status === "exact") detailEngine += ` ${pageParameters.powerHp.value} hp`;
+    }
     const evidence = che168GlobalSpecificationEvidence({
       listingYear: offer.year,
       detailYear,
       listingFuel: ((offer.operational?.raw as any)?.listing as Che168GlobalListRow | undefined)?.fuelname,
       detailFuel: detail.fuelname,
-      detailEngine: detail.engine,
+      detailEngine,
     });
+    if (pageParameters && !tableFuelConsistent) evidence.fuel = { rawValues: [String(detail.fuelname || ""), ...pageParameters.fuelValues], status: "conflict" };
+    if (pageParameters && tableFuelConsistent) {
+      if (pageParameters.engineCc.status === "conflict") evidence.engineCc = pageParameters.engineCc;
+      if (pageParameters.powerHp.status === "conflict") evidence.powerHp = pageParameters.powerHp;
+    }
+    // Preserve the literal API witness alongside the combined parameter evidence.
+    // Source-only collectors verify this exact original text, not a rewritten label.
+    for (const field of ["engineCc", "powerHp"] as const) {
+      evidence[field].rawValues = [...new Set([text(detail.engine), ...evidence[field].rawValues].filter(Boolean))];
+    }
     const gallery = exactGallery(detail);
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
     const verifiedGallery = gallery.length >= minimum;
@@ -425,10 +456,10 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         ...((offer.operational as any)?.semanticEvidence || {}),
         year: { source: "che168_global_listing_and_carinfo", ...evidence.year },
         fuel: { source: "che168_global_listing_and_carinfo", ...evidence.fuel },
-        engineCc: { source: "che168_global_carinfo", ...evidence.engineCc },
-        powerHp: { source: "che168_global_carinfo", ...evidence.powerHp },
+        engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },
+        powerHp: { source: pageParameters && tableFuelConsistent ? "che168_global_carinfo_and_bound_parameters" : "che168_global_carinfo", ...evidence.powerHp },
       },
-      raw: { listing: (offer.operational?.raw as any)?.listing, detail, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
+      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters, boundPageStatus: this.parameterPageBlocked || (pageParameters ? "bound_parameters_received" : "parameters_unavailable"), detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
     };
     const engineEvidenceReady = offer.powertrainKind === "electric" || evidence.engineCc.status === "exact";
     if (evidence.year.status !== "exact" || evidence.fuel.status !== "exact" || !engineEvidenceReady || evidence.powerHp.status !== "exact") {

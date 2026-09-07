@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "productionChanged": false,
+  "japanRequests": 0,
+  "scope": "Bounded diagnostic; not restart acceptance",
+  "runs": [
+    {
+      "path": "data/catalog/research/china-georgia-detail-postfix-pilot-v1-20260906.json",
+      "sha256": "3c6eb2107922228ab0a72acf25c04ccb94c31b3044ac24dbe1a329a2b6a18b90",
+      "markets": [
+        {
+          "market": "china",
+          "requests": 4,
+          "listingRows": 24,
+          "error": null,
+          "prices": []
+        },
+        {
+          "market": "georgia",
+          "requests": 4,
+          "listingRows": 10,
+          "error": null,
+          "prices": []
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/georgia-detail-calculation-pilot-v1-20260906.json",
+      "sha256": "7c91c67f5fd16cbfdf51294b87b0f4391097b4fd58c572f09bf6f5ceb2ae72dc",
+      "markets": [
+        {
+          "market": "georgia",
+          "requests": 8,
+          "listingRows": 10,
+          "error": null,
+          "prices": []
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/korea-detail-calculation-pilot-v1-20260906.json",
+      "sha256": "ac534e4761847d92d33aae5b8923ef9856802fafc416e737343ff9237358bf41",
+      "markets": [
+        {
+          "market": "korea",
+          "requests": 8,
+          "listingRows": 3,
+          "error": null,
+          "prices": [
+            {
+              "sourceOfferId": "EC61367794",
+              "totalRub": 8946009,
+              "breakdownMatches": true
+            },
+            {
+              "sourceOfferId": "EC61369851",
+              "totalRub": 6421289,
+              "breakdownMatches": true
+            },
+            {
+              "sourceOfferId": "EC61372482",
+              "totalRub": 5177229,
+              "breakdownMatches": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/public-detail-calculation-pilot-v1-20260906.json",
+      "sha256": "2ec014096acd583655cf0533d321a93ca7e944a07b3faa74633df197915518aa",
+      "markets": [
+        {
+          "market": "europe",
+          "requests": 4,
+          "listingRows": 21,
+          "error": null,
+          "prices": [
+            {
+              "sourceOfferId": "40976383280480",
+              "totalRub": 4235056,
+              "breakdownMatches": true
+            },
+            {
+              "sourceOfferId": "459064079",
+              "totalRub": 4983387,
+              "breakdownMatches": true
+            },
+            {
+              "sourceOfferId": "458664790",
+              "totalRub": 4676756,
+              "breakdownMatches": true
+            }
+          ]
+        },
+        {
+          "market": "china",
+          "requests": 4,
+          "listingRows": 24,
+          "error": null,
+          "prices": []
+        },
+        {
+          "market": "uae",
+          "requests": 6,
+          "listingRows": null,
+          "error": "dubizzle_exact_blocked_200_imperva_or_challenge:pilot_request_outside_envelope",
+          "prices": []
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/uae-dubicars-detail-pilot-v1-20260906.json",
+      "sha256": "1b1f4abb9449939c211b81ac70258a3af50b921d4d46b9ba709cbb063af91f0d",
+      "markets": [
+        {
+          "market": "uae",
+          "requests": 1,
+          "listingRows": null,
+          "error": "The operation was aborted due to timeout",
+          "prices": []
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/uae-dubicars-list-pilot-v1-20260906.json",
+      "sha256": "2724e4ab22350e1f3da62c34d1f2cd7f0fdb2cdc170f288eb877c9b7dc8645bb",
+      "markets": [
+        {
+          "market": "uae",
+          "requests": 1,
+          "listingRows": null,
+          "error": "dubicars_current_zero",
+          "prices": []
+        }
+      ]
+    },
+    {
+      "path": "data/catalog/research/china-georgia-detail-postfix-pilot-v1-20260906.json",
+      "sha256": "3c6eb2107922228ab0a72acf25c04ccb94c31b3044ac24dbe1a329a2b6a18b90",
+      "markets": [
+        {
+          "market": "china",
+          "requests": 4,
+          "listingRows": 24,
+          "detailsAttempted": 3,
+          "pricedSamples": 0
+        },
+        {
+          "market": "georgia",
+          "requests": 4,
+          "listingRows": 10,
+          "detailsAttempted": 3,
+          "pricedSamples": 0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Six European/Korean estimated calculations use local repository settings, not verified production tariffs.",
+    "Initial China run predates litre precision fix.",
+    "Initial Georgia run fetched only one detail and six images into local cache; later detail attempts exhausted budget. Image network guard added afterwards.",
+    "DubiCars one-request pilot cannot exercise adapter detail fanout; subsequent eight-request pilot timed out on first request.",
+    "Dubizzle HTTP 200 was an Incapsula block page. AutoPapa contact-form reCAPTCHA script was a false positive.",
+    "Encar route remains unresolved; Korean successful samples use KCar."
+  ],
+  "validation": {
+    "tests": 1050,
+    "passed": 1050,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": "passed",
+    "build": "passed"
+  }
+}

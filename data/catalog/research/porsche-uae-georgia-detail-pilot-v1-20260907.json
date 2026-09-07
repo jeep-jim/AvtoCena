@@ -1,0 +1,167 @@
+{
+  "version": 3,
+  "completed": true,
+  "checkedAt": "2026-09-07T00:38:35.956Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 25,
+  "sampleLimit": 20,
+  "pageLimit": 1,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/xa/en-XA/search",
+          "method": "GET",
+          "status": null
+        }
+      ],
+      "sourceId": "porsche_finder_uae_public",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "status": "blocked_or_failed",
+      "error": "The operation was aborted due to timeout",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    },
+    {
+      "market": "georgia",
+      "requests": [
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-panamera-4s-ehybrid-preowned-OG9GNO",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-718-boxster-s-preowned-50LR7W",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-911-gt3-preowned-NKWMMV",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-cayenne-turbo-preowned-K5W89G",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-911-gt3-with-touring-package-preowned-509ZZM",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-cayenne-turbo-gt-preowned-3K4RP8",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-taycan-4-preowned-XZDVPG",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-cayenne-preowned-W39VVQ",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-911-gt3-with-touring-package-preowned-440OG5",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://finder.porsche.com",
+          "path": "/ge/en-GE/details/porsche-panamera-4-platinum-edition-preowned-G73X50",
+          "method": "GET",
+          "status": 429,
+          "contentType": "text/html; charset=utf-8"
+        }
+      ],
+      "sourceId": "porsche_finder_georgia_public",
+      "listingRows": 0,
+      "normalizedRows": 0,
+      "normalizationRejected": 0,
+      "duplicates": 0,
+      "details": [],
+      "pages": [],
+      "stopped": true,
+      "status": "blocked_or_failed",
+      "error": "pilot_stop_http_429",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      }
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

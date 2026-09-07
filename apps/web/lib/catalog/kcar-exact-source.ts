@@ -103,8 +103,19 @@ export function kcarSpecificationEvidence(input: {
   engineDisplacement?: unknown;
   horsepower?: unknown;
 }) {
-  const manufactureYear = clean(input.manufactureDate).match(/^(19\d{2}|20\d{2})/)?.[1];
-  const year = structuredIntegerEvidence([input.regModelYear, manufactureYear], 1900, new Date().getUTCFullYear() + 1);
+  // regModelyr is a model year, not a second assertion of the calendar year
+  // in mfgDt. Preserve both; a next-model-year car can have an earlier date.
+  const modelYear = structuredIntegerEvidence([input.regModelYear], 1900, new Date().getUTCFullYear() + 1);
+  const rawDate = clean(input.manufactureDate);
+  const date = rawDate.match(/^(19\d{2}|20\d{2})(0[1-9]|1[0-2])(?:(0[1-9]|[12]\d|3[01]))?$/);
+  const validDay = !date?.[3] || new Date(Date.UTC(Number(date[1]), Number(date[2]) - 1, Number(date[3]))).getUTCMonth() + 1 === Number(date[2]);
+  const calendarYear = rawDate
+    ? date && validDay ? structuredIntegerEvidence([date[1]], 1900, new Date().getUTCFullYear())
+      : { rawValues: [rawDate], status: "ambiguous" as const }
+    : { rawValues: [], status: "missing" as const };
+  // Calendar year controls catalog age. Keep model year as separate provenance
+  // so the recovery cannot make a 2019-dated, MY2020 vehicle pass the 2020 gate.
+  const year = rawDate ? calendarYear : modelYear;
   const fuel = kcarFuelEvidence(input.fuelName);
   const rawFuelType = clean(input.rawFuelType);
   const electricPowerUnit = rawFuelType === "009" || rawFuelType === "013";
@@ -120,7 +131,7 @@ export function kcarSpecificationEvidence(input: {
   const powerKw = electricPowerUnit && unitMatchesFuel
     ? peakPower
     : { rawValues: peakPower.rawValues, status: unitMatchesFuel ? "missing" : "conflict" as KCarEvidenceStatus };
-  return { year, fuel, engineCc, powerHp, powerKw };
+  return { year, modelYear, fuel, engineCc, powerHp, powerKw };
 }
 
 function powertrainKindForFuel(fuel: string | undefined) {
@@ -258,10 +269,12 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
 }
 
-function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
+export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, onReject: (reason: string) => void = () => {}): Row | null {
+  const reject = (reason: string): null => { onReject(reason); return null; };
   const rvo = data?.rvo || {};
   const id = clean(rvo.carCd);
-  if (!id || id !== clean(meta.carCd) || clean(rvo.statCd) !== "CAR_STATUS010") return null;
+  if (!id || id !== clean(meta.carCd)) return reject("detail_identity_mismatch");
+  if (clean(rvo.statCd) !== "CAR_STATUS010") return reject("not_active");
 
   const make = clean(rvo.mnuftrNm);
   const model = clean(rvo.modelNm);
@@ -289,13 +302,19 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
   const sourcePrice = Number.isFinite(sourcePriceManwon) && sourcePriceManwon > 0 ? Math.round(sourcePriceManwon * 10_000) : 0;
   const images = exactVehicleGallery(data, id);
 
-  if (!make || !model || !trim || !year || !fuel || !transmission || !drive || !bodyType || !sourcePrice || (!powerHp && !powerKw) || images.length < 5) return null;
-  if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return null;
-  if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return null;
+  if (!make || !model || !trim) return reject("missing_vehicle_identity");
+  if (!year) return reject(`year_${evidence.year.status}`);
+  if (!fuel) return reject(`fuel_${evidence.fuel.status}`);
+  if (!transmission || !drive || !bodyType) return reject("missing_vehicle_description");
+  if (!sourcePrice) return reject("missing_source_price");
+  if (!powerHp && !powerKw) return reject("missing_exact_peak_power");
+  if (images.length < 5) return reject("insufficient_bound_gallery");
+  if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return reject("list_detail_make_mismatch");
+  if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return reject("list_detail_model_mismatch");
   const listPrice = positiveInt(meta.prc);
-  if (listPrice && listPrice !== Math.round(sourcePriceManwon)) return null;
+  if (listPrice && listPrice !== Math.round(sourcePriceManwon)) return reject("list_detail_price_mismatch");
   const listMileage = positiveInt(meta.milg);
-  if (listMileage && mileageKm && listMileage !== mileageKm) return null;
+  if (listMileage && mileageKm && listMileage !== mileageKm) return reject("list_detail_mileage_mismatch");
 
   return {
     id,
@@ -359,15 +378,24 @@ class KCarExactSource implements CatalogSourceAdapter {
     const metas = (Array.isArray(root?.rows) ? root.rows : []) as KCarListRow[];
     const total = Number(root?.totalCnt || 0);
     const rows: Row[] = [];
+    let failedDetailRows = 0;
+    const rejectionReasons: Record<string, number> = {};
+    const rejectionSamples: Array<{ sourceOfferId: string; reason: string; modelYear?: string; manufactureDate?: string }> = [];
+    const reject = (carCd: string, reason: string, data?: KCarDetailData) => {
+      rejectionReasons[reason] = (rejectionReasons[reason] || 0) + 1;
+      rejectionSamples.push({ sourceOfferId: carCd, reason,
+        modelYear: clean(data?.rvo?.regModelyr) || undefined, manufactureDate: clean(data?.rvo?.mfgDt) || undefined });
+    };
     const batchSize = Math.max(1, Math.min(4, Number(process.env.CATALOG_SOURCE_DETAIL_BATCH_SIZE || 2)));
     const batchDelay = Math.max(0, Math.min(5_000, Number(process.env.CATALOG_SOURCE_BATCH_DELAY_MS || 400)));
 
     for (let index = 0; index < metas.length; index += batchSize) {
       const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
         const carCd = clean(meta.carCd);
-        if (!carCd) return null;
+        if (!carCd) { reject(carCd, "missing_list_identity"); return null; }
         const data = await fetchExactDetailData(carCd).catch(() => null);
-        return data ? parseExactDetail(meta, data) : null;
+        if (!data) { failedDetailRows += 1; reject(carCd, "detail_request_failed"); }
+        return data ? parseKcarExactDetail(meta, data, reason => reject(carCd, reason, data)) : null;
       }));
       rows.push(...batch.filter(Boolean) as Row[]);
       if (index + batchSize < metas.length) await sleep(batchDelay);
@@ -379,6 +407,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       nextCursor: finished ? null : String(page + 1),
       finished,
       count: rows.length,
+      diagnostics: { listingRows: metas.length, rejectedRows: metas.length - rows.length, failedDetailRows, rejectionReasons, rejectionSamples },
       health: {
         ok: metas.length > 0,
         message: `K Car exact page ${page}: ${rows.length}/${metas.length}; total=${total || "unknown"}`,
@@ -449,13 +478,15 @@ class KCarExactSource implements CatalogSourceAdapter {
         sourceExactFields: fields,
         vin: row.vin,
         semanticEvidence: {
-          year: { source: "kcar_exact_detail_rvo", ...row.semanticEvidence.year },
+          year: { source: "kcar_exact_detail_rvo_calendar_year", ...row.semanticEvidence.year },
           fuel: { source: "kcar_exact_detail_rvo", ...row.semanticEvidence.fuel },
           engineCc: { source: "kcar_exact_detail_rvo_engdispmnt", ...row.semanticEvidence.engineCc },
           powerHp: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerHp },
           powerKw: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerKw },
         },
         raw: {
+          sourceModelYear: row.semanticEvidence.modelYear?.value,
+          sourceCalendarDate: row.productionDate,
           sourceExactFields: fields,
           sourceApi: `${API_BASE}/bc/car-info-detail-of-ng`,
           listingApi: `${API_BASE}/bc/search/list/drct`,

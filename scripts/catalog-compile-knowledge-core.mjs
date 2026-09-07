@@ -1,3 +1,4 @@
+import { chinaSpecConflicts } from "./lib/china-spec-conflicts.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -117,7 +118,8 @@ function evidenceYear(row) {
 function directFacts(row) {
   const powertrainKind = normalizedPowertrain(row);
   const engineLiters = positive(row.engineLiters);
-  const engineCc = positive(row.engineCc) || (engineLiters ? Math.round(engineLiters * 1000) : null);
+  // Autohome marketing litres do not attest exact displacement.
+  const engineCc = positive(row.engineCc) || (row.sourceId !== "autohome-china" && engineLiters ? Math.round(engineLiters * 1000) : null);
   const directPowerKw = positive(row.powerKw);
   const systemPowerKw = positive(row.systemPowerKw);
   const motorTotalKw = positive(row.motorTotalKw);
@@ -271,6 +273,13 @@ for (const item of evidenceFamilies) {
   for (const name of await listJson(denominatorRoot, item.pattern)) evidenceFiles.push({ ...item, name });
 }
 
+const chinaEvidenceRows = [];
+for (const file of evidenceFiles) {
+  const payload = await readJson(path.join(denominatorRoot, file.name));
+  for (const row of payload.records || []) if (row.sourceId === "autohome-china") chinaEvidenceRows.push(row);
+}
+const chinaConflicts = chinaSpecConflicts(chinaEvidenceRows);
+const quarantinedChinaSpecs = new Set(chinaConflicts.map(row => row.specId));
 const identityState = new Map();
 let evidenceRows = 0;
 let canonicallyLinkedEvidence = 0;
@@ -310,7 +319,10 @@ for (const file of evidenceFiles) {
 }
 
 const conflictFieldsByIdentity = new Map();
-const sourceConflicts = [...canonicalTargetConflicts];
+const sourceConflicts = [...canonicalTargetConflicts, ...chinaConflicts.map(row => ({
+  kind: "source_spec_identity_conflict", sourceId: "autohome-china", ...row,
+  disposition: "all_rows_for_spec_withheld_from_runtime",
+}))];
 const sourceConflictCountsByModel = new Map();
 for (const [identityKey, state] of identityState) {
   const fields = Object.keys(state.conflicts).sort();
@@ -336,6 +348,7 @@ const variantGroups = new Map();
 for (const file of evidenceFiles) {
   const payload = await readJson(path.join(denominatorRoot, file.name));
   for (const row of payload.records || []) {
+    if (row.sourceId === "autohome-china" && quarantinedChinaSpecs.has(clean(row.specId))) continue;
     const modelId = evidenceModelIdentity(row, file.family, masterByExactIdentity);
     if (!modelId || !v2ModelIds.has(modelId)) continue;
     const year = evidenceYear(row);

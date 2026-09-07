@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { myAutoProductSnapshotFromInfo } from "../apps/web/lib/catalog/myauto-list-source";
+import { myAutoProductSnapshotFromInfo, myAutoListSource } from "../apps/web/lib/catalog/myauto-list-source";
 
 test("MyAuto exact product metadata can build a full listing-bound gallery even when the list card has no image", () => {
   const snapshot = myAutoProductSnapshotFromInfo({
@@ -68,4 +68,34 @@ test("MyAuto product snapshot refuses conflicting structured metrics", () => {
   assert.equal(snapshot.powerHp, undefined);
   assert.equal(snapshot.semanticEvidence.engineCc.status, "conflict");
   assert.equal(snapshot.semanticEvidence.powerHp.status, "conflict");
+});
+
+
+test("MyAuto source URL mode enriches exact product data without fetching or caching images", async () => {
+  const previousFetch = globalThis.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  const requests: string[] = [];
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+    requests.push(url);
+    assert.equal(url, "https://api2.myauto.ge/en/products/123016475");
+    return new Response(JSON.stringify({ data: { info: {
+      car_id: 123016475, photo: "7/4/6/1/0", pic_number: 6, photo_ver: 0,
+      engine_cc: 1498, power_hp: 116,
+    } } }), { headers: { "content-type": "application/json" } });
+  };
+  try {
+    const offer = { sourceId: "myauto_georgia_list", sourceOfferId: "123016475", powertrainKind: "combustion", operational: { raw: {} } } as any;
+    const images = await myAutoListSource.fetchImages(offer);
+    assert.equal(requests.length, 1);
+    assert.equal(images.length, 6);
+    assert.equal(offer.engineCc, 1498);
+    assert.equal(offer.powerHp, 116);
+    assert.ok(images.every(image => image.url.includes("123016475_") && image.size === 0 && image.objectKey === ""));
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE;
+    else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
+  }
 });

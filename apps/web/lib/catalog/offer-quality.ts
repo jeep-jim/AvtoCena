@@ -277,6 +277,11 @@ export function catalogSemanticEvidenceRejectionReason(offer: Partial<VehicleOff
   if (!evidence || typeof evidence !== "object") return "";
   for (const [field, value] of Object.entries(evidence as Record<string, any>)) {
     const status = clean(value?.status).toLowerCase();
+    // Body shape is optional display/filter metadata. An ambiguous source
+    // bucket may remain unassigned, as a missing body already can. Never show
+    // that bucket as an exact body, and never waive pricing-field ambiguity or
+    // contradictory source evidence.
+    if (field === "bodyType" && status === "ambiguous" && !clean(offer?.bodyType)) continue;
     if (status === "conflict" || status === "ambiguous") return `semantic_${field}_${status}`;
   }
   return "";

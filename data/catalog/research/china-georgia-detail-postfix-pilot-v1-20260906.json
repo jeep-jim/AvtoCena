@@ -1,0 +1,502 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:38:27.075Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 8,
+  "markets": [
+    {
+      "market": "china",
+      "requests": [
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        },
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/carinfo/59754526",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        },
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/carinfo/59769656",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        },
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/carinfo/59282752",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        }
+      ],
+      "sourceId": "autohome_used_china_open",
+      "listingRows": 24,
+      "normalizedRows": 3,
+      "details": [
+        {
+          "sourceOfferId": "59754526",
+          "images": 18,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        },
+        {
+          "sourceOfferId": "59769656",
+          "images": 20,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        },
+        {
+          "sourceOfferId": "59282752",
+          "images": 24,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        }
+      ],
+      "samples": [
+        {
+          "sourceOfferId": "59754526",
+          "make": "Lexus",
+          "model": "RC",
+          "year": 2019,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59769656",
+          "make": "BMW",
+          "model": "7 Series",
+          "year": 2026,
+          "powerHp": 381,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "59282752",
+          "make": "Acura",
+          "model": "TLX-L",
+          "year": 2018,
+          "powerHp": 208,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "georgia",
+      "requests": [
+        {
+          "origin": "https://autopapa.ge",
+          "path": "/en/usd/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://autopapa.ge",
+          "path": "/en/usd/lexus/LX-600/959885",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://autopapa.ge",
+          "path": "/en/usd/jeep/grand-cherokee/959884",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        },
+        {
+          "origin": "https://autopapa.ge",
+          "path": "/en/usd/toyota/rav-4/959882",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        }
+      ],
+      "sourceId": "autopapa_georgia_open",
+      "listingRows": 10,
+      "normalizedRows": 3,
+      "details": [
+        {
+          "sourceOfferId": "959885",
+          "images": 0,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        },
+        {
+          "sourceOfferId": "959884",
+          "images": 0,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        },
+        {
+          "sourceOfferId": "959882",
+          "images": 0,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required"
+        }
+      ],
+      "samples": [
+        {
+          "sourceOfferId": "959885",
+          "make": "Lexus",
+          "model": "LX600",
+          "year": 2024,
+          "engineCc": 3400,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "959884",
+          "make": "Jeep",
+          "model": "Grand Cherokee",
+          "year": 2021,
+          "engineCc": 3600,
+          "powerHp": 300,
+          "fuel": "petrol",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "exact",
+              "reason": "usable_peak_power",
+              "provenance": "source_evidence"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "959882",
+          "make": "Toyota",
+          "model": "RAV 4",
+          "year": 2022,
+          "engineCc": 2500,
+          "fuel": "hybrid",
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "exact",
+              "reason": "usable_fuel_powertrain",
+              "provenance": "source_evidence"
+            },
+            "engineCc": {
+              "state": "exact",
+              "reason": "usable_engine_cc",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "missing",
+              "reason": "certified_30min_power_missing",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Up to three details per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

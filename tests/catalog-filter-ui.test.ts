@@ -39,7 +39,8 @@ test("catalog filters use direct range inputs, quick presets and a real mobile b
   assert.match(source, /placeholder="Не важно"/);
   assert.match(source, /Быстрый выбор/);
   assert.match(source, /до 3 млн/);
-  assert.match(source, /Введите «от» и\/или «до»/);
+  assert.match(source, /aria-label=\{`\$\{title\}: от`\}/);
+  assert.match(source, /aria-label=\{`\$\{title\}: до`\}/);
   assert.doesNotMatch(source, /type="range"/);
   assert.doesNotMatch(source, /ac-dual-range/);
   assert.match(source, /ac-mobile-filter-backdrop fixed inset-0[^\n]*flex items-end/);
@@ -68,9 +69,10 @@ test("the single public catalog search route owns filtered facets and live rates
   assert.match(route, /hasPrice/);
 });
 
-test("preliminary electrified cards show a compact 30-minute-power status", () => {
+test("cards show documented power labels and hide unpriced rows unless a qualified selector exists", () => {
   const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
-  assert.match(card, /thirtyMinutePowerMissing = isElectrified && !powerDisplay/);
-  assert.match(card, /30 мин: уточняется/);
-  assert.match(card, /Максимальная 30-минутная мощность уточняется по официальному документу/);
+  assert.match(card, /catalogPowerDisplay\(normalizedOffer\)/);
+  assert.match(card, /powerDisplay\.thirtyMinuteLabel/);
+  assert.match(card, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(card, /hasModificationSelection\(offer\)/);
 });

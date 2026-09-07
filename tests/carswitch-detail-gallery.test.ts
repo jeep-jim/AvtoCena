@@ -152,3 +152,28 @@ test("CarSwitch retries a transient 202 listing shell before parsing", async () 
     else process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS = originalDelay;
   }
 });
+
+
+test("CarSwitch bound detail restores fuel but never turns a unitless engine label into exact cc", async () => {
+  const adapter = new CarSwitchUaeExactAdapter();
+  const offer = adapter.normalizeOffer(parseCarSwitchExactListing(listingMarkup)[0]);
+  assert.ok(offer);
+  const enrichedMarkup = detailMarkup.replace('"name":"Nissan Patrol SE Platinum 2024 4.0",', '"name":"Nissan Patrol SE Platinum 2024 4.0", "vehicleEngine":{"fuelType":"Petrol","engineDisplacement":"4.0"},');
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(enrichedMarkup, { headers: { "content-type": "text/html" } });
+  try {
+    await adapter.fetchImages(offer);
+    assert.equal(offer.fuel, "petrol");
+    assert.equal(offer.powertrainKind, "combustion");
+    assert.equal(offer.engineCc, undefined);
+    assert.equal(offer.powerHp, undefined);
+    assert.equal((offer.operational as any).semanticEvidence.engineCc.status, "ambiguous");
+    assert.equal((offer.operational as any).semanticEvidence.fuel.status, "exact");
+  } finally { globalThis.fetch = previousFetch; }
+});
+
+test("CarSwitch refuses contradictory primary JSON-LD entities instead of selecting the first price", () => {
+  const url = "https://carswitch.com/abudhabi/used-car/nissan/patrol/2024/858598";
+  assert.ok(parseCarSwitchExactDetail(detailMarkup + detailMarkup, url));
+  assert.equal(parseCarSwitchExactDetail(detailMarkup + detailMarkup.replace('"209000"', '"220000"'), url), null);
+});

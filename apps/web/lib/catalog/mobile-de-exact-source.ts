@@ -161,15 +161,19 @@ function fuelEvidence(listing: unknown, detail: unknown): MobileDeFuelEvidence {
 }
 
 function exactMobileDeBody(value: unknown) {
-  const normalized = clean(value).toLowerCase();
+  // VIP appends the sale condition to the category. It is not another body.
+  // Keep the coarse mobile.de OffRoad bucket; do not infer an exact SUV/pickup.
+  const normalized = clean(value).toLowerCase()
+    .replace(/,\s*(?:gebrauchtfahrzeug|jahreswagen|neufahrzeug|tageszulassung|vorführfahrzeug)$/, "");
+  if (normalized === "suv/geländewagen/pickup") return "offroad";
   if (/^(?:cabrio|cabriolet|roadster)$/.test(normalized)) return "convertible";
   if (/^(?:coupé|coupe)$/.test(normalized)) return "coupe";
-  if (/^(?:kombi|estate|station wagon)$/.test(normalized)) return "wagon";
+  if (/^(?:kombi|estate|estatecar|station wagon)$/.test(normalized)) return "wagon";
   if (/^(?:suv|crossover)$/.test(normalized)) return "suv";
   if (/^(?:geländewagen|offroad)$/.test(normalized)) return "offroad";
   if (/^(?:pickup|pick-up)$/.test(normalized)) return "pickup";
   if (/^(?:minivan|mpv)$/.test(normalized)) return "minivan";
-  if (normalized === "van") return "van";
+  if (normalized === "van" || normalized === "van/minibus") return "van";
   if (normalized === "hatchback") return "hatchback";
   if (/^(?:sedan|saloon)$/.test(normalized)) return "sedan";
   // mobile.de's German "Limousine" bucket is not a reliable sedan shape.
@@ -454,7 +458,8 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     const api = `${SRP_API}?url=${encodeURIComponent(classic)}`;
     const { response, json } = await getJson(api);
     const result = json?.searchResults || {};
-    const items = (Array.isArray(result?.items) ? result.items : [])
+    const listingRows = Array.isArray(result?.items) ? result.items : [];
+    const items = listingRows
       .map(rowFromItem)
       .filter((row: MobileDeExactRow | null): row is MobileDeExactRow =>
         Boolean(row),
@@ -472,6 +477,7 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
       nextCursor: nextState ? JSON.stringify(nextState) : null,
       finished: !nextState,
       count: Number(result?.numResultsTotal || items.length),
+      diagnostics: { listingRows: listingRows.length, rejectedRows: listingRows.length - items.length },
       health: {
         ok: response.ok && items.length > 0,
         message: `mobile.de BFF ${shard.label} page=${state.page}/${shardPageLimit} parsed=${items.length} total=${Number(result?.numResultsTotal || 0)}`,

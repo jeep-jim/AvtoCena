@@ -1,0 +1,2512 @@
+{
+  "version": 1,
+  "advisoryOnly": true,
+  "productionWrites": false,
+  "workflowDispatches": 0,
+  "inputs": [
+    {
+      "path": "data/catalog/source-qualification-v1.json",
+      "sha256": "6df32eedae1f8d7dfe5820bfd55b09247529f0c69f9ebd4cf65ef331adc0252d"
+    },
+    {
+      "path": "data/catalog/research/china-saved-recovery-v1-20260906.json",
+      "sha256": "496d10df41b7fc275ff65ff96c87d716e98620ee6e8b22534ab8e0f983d013d6"
+    },
+    {
+      "path": "data/catalog/research/non-japan-recovery-batch-v1-20260906.json",
+      "sha256": "4f2c3bb47bca04511d70ceae72a9c2f37f84db78bbe908834e60cd19f1b90026"
+    },
+    {
+      "path": "data/catalog/research/public-listing-pilot-v1-20260906.json",
+      "sha256": "85a47b38083d224dc6b599f257ff51f303b4a84ddb774165701ba5391cbaec16"
+    },
+    {
+      "path": "data/catalog/research/public-listing-spec-pilot-v1-20260906.json",
+      "sha256": "1bf284d8547f1608554359d7d66b79da99fd831207a709c19cb2ca6a28e13b07"
+    },
+    {
+      "path": "data/catalog/research/non-japan-complete-pass-v1-20260906.json",
+      "sha256": "d9cdb3be15d14f4dd2d696b52c6fb82e1586ec1cb20a82fcd0c849eb12882716"
+    },
+    {
+      "path": "data/catalog/research/configurable-costs-review-v1-20260906.json",
+      "sha256": "c9fd1558c9ff4bcf2a299c38d6b213bdb9dfe9773ce359c574e62efc66fe0b4e"
+    },
+    {
+      "path": "data/catalog/research/non-japan-multipage-outcome-v1-20260907.json",
+      "sha256": "a3c70fce175c1e5c2bc0d9721573e20800b1bf7ded0976fa70b250abdc1803ce"
+    },
+    {
+      "path": "data/catalog/research/non-japan-public-display-outcome-v1-20260907.json",
+      "sha256": "71bc0b15e05de42f28e2dbea0e9a99b2d6da1891fcac8d57e8ddb52a40bb068a"
+    }
+  ],
+  "auditCheckedAt": "2026-09-06T12:59:54.341Z",
+  "previousBaselineValidation": {
+    "runId": 34039140044,
+    "jobId": 101502577500,
+    "commit": "ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff",
+    "conclusion": "success",
+    "fullSuite": "success",
+    "profileChecks": "success",
+    "typecheck": "success",
+    "productionBuild": "success",
+    "tests": 1047,
+    "passCount": 1047,
+    "fail": 0
+  },
+  "codeValidation": {
+    "runId": 34071475448,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/34071475448",
+    "jobId": 101589512672,
+    "runtimeCommit": "9d6a74aa6c1e6c030eb4dd4331fdc7ffdd81b1a3",
+    "conclusion": "success",
+    "tests": {
+      "total": 1077,
+      "passed": 1077,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete regression suite",
+        "conclusion": "success"
+      },
+      {
+        "name": "Customs tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog modification recovery contract tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog calculation integrity tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "CRM market defaults and live pricing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "CRM market settings save tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Full six-market pricing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Price trend direction tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog UI state tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Yandex Metrika installation tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog image quality tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Public image proxy tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog source-scale tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog production hardening tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog market preflight parity tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog model-year inventory quota tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Japan auction statistics tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Japan Prestige partition rotation tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog live sources v23 tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Guazi China RU listing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "MyAuto Georgia listing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Georgia canonical recovery tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog probe v23 tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog publication gate tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Open source model normalization tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Power normalization and public truth tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Public 30-minute power display tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Estimated EV publication tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Vehicle Knowledge CORE and model search tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Live offer display enrichment tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Current read-model and AI product feed tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Drom generation and horsepower parser tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Single active catalog pipeline tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Validate catalog automation scripts",
+        "conclusion": "success"
+      },
+      {
+        "name": "Web typecheck diagnostics",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload web typecheck log",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on web typecheck errors",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Engine typecheck",
+        "conclusion": "success"
+      },
+      {
+        "name": "Production build diagnostics",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload production build log",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on production build errors",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "previousMultipageValidation": {
+    "checkedAt": "2026-09-07T00:17:55.228Z",
+    "runId": 34069103033,
+    "jobId": 101583045088,
+    "remoteRuntimeCommit": "16a37c41b9db07a03ec25884bfc3f59c15fbb1aa",
+    "localRuntimeCommit": "d56ba579",
+    "conclusion": "success",
+    "tests": 1068,
+    "passed": 1068,
+    "failed": 0,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "logEvidence": [
+      "2026-09-07T00:14:50.9489409Z ℹ tests 1068",
+      "2026-09-07T00:14:50.9489848Z ℹ pass 1068",
+      "2026-09-07T00:16:19.3117796Z  ✓ Compiled successfully",
+      "2026-09-07T00:16:19.3118701Z    Generating static pages (0/55) ...",
+      "2026-09-07T00:16:19.3118949Z    Generating static pages (13/55) ",
+      "2026-09-07T00:16:19.3119193Z    Generating static pages (27/55) ",
+      "2026-09-07T00:16:19.3119424Z    Generating static pages (41/55) ",
+      "2026-09-07T00:16:19.3119698Z  ✓ Generating static pages (55/55)"
+    ]
+  },
+  "previousCompletePassValidation": {
+    "fullTests": 1057,
+    "passed": 1057,
+    "failed": 0,
+    "skipped": 0,
+    "build": "success",
+    "typecheck": "success",
+    "finalChinaCompatibilityTargetedTests": 12,
+    "remoteCi": {
+      "run": 34045116840,
+      "commit": "20b7f2676990d586cd3f51a388628fcc7914a520",
+      "conclusion": "success",
+      "report": "data/catalog/research/complete-pass-ci-v1-20260906.json"
+    }
+  },
+  "configurationReview": {
+    "version": 1,
+    "checkedAt": "2026-09-06T23:56:22.317805+00:00",
+    "productionWrites": false,
+    "classification": "expected_active_crm_configuration",
+    "publicationBlocker": false,
+    "ownerEvidence": "CRM screenshot and owner clarification in this conversation: commercial costs are configurable.",
+    "china": {
+      "activeLogisticsRub": 150000,
+      "repositoryFallbackLogisticsRub": 250000,
+      "expectedDeltaRub": -100000,
+      "replayedCalculations": 13,
+      "allDeltasExpected": true,
+      "action": "Preserve the active owner setting; do not overwrite with repository fallback."
+    },
+    "otherMarkets": "Missing stored market records may resolve to active system average profiles; they do not establish that a market is disabled.",
+    "sources": [
+      {
+        "path": "data/catalog/research/production-settings-replay-v1-20260906.json",
+        "sha256": "be495c57fd2a3edb8f1c6f9e34627029b2947e9ff5d77e98fce2fcb9b277fa4c"
+      },
+      {
+        "path": "apps/web/lib/effective-market-settings.ts"
+      },
+      {
+        "path": "apps/web/lib/catalog/estimated-market-config.ts"
+      },
+      {
+        "path": "tests/catalog-configurable-market-costs.test.ts"
+      }
+    ],
+    "remaining": "Verify new inventory with current effective CRM settings. Vehicle evidence gaps and publication readiness are separate from commercial cost overrides.",
+    "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides."
+  },
+  "limitation": "Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.",
+  "markets": [
+    {
+      "market": "europe",
+      "publicProbe": {
+        "market": "europe",
+        "requests": [
+          {
+            "origin": "https://www.mobile.de",
+            "path": "/consumer/api/search/srp",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        ],
+        "sourceId": "mobile_de_open",
+        "listingRows": 21,
+        "normalizedRows": 20,
+        "samples": [
+          {
+            "sourceOfferId": "447928424",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "459064079",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "458664790",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "457257304",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43069464351904",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "446564888",
+            "make": "Volkswagen",
+            "model": "Taigo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "455124671",
+            "make": "Volkswagen",
+            "model": "Taigo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "460632484",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "459258316",
+            "make": "Volkswagen",
+            "model": "T-Roc",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "41955792087008",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "443578799",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "38449215943136",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "462266636",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43606400937312",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43791727900896",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 80,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "42371257278336",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43127038801440",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "451170199",
+            "make": "Volkswagen",
+            "model": "Caddy",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43234575008704",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43234552630208",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          }
+        ],
+        "status": "listing_received"
+      },
+      "detailProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "sourceRequests": 21,
+        "returnedRows": 21,
+        "normalizedExamined": 20,
+        "calculated": 19,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 20,
+        "calculatedEligibleYear": 19,
+        "calculatedEligibleYearUnder15m": 19,
+        "galleryAtLeast5": 17,
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 16
+      },
+      "latestMultipageProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "local": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 7,
+          "returnedRows": 41,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 41,
+          "unexaminedRows": 1,
+          "examined": 40,
+          "calculated": 40,
+          "allowedYearExamined": 40,
+          "allowedYearCalculated": 40,
+          "passingAllFilters": 37,
+          "failures": {},
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 42,
+        "hosted": {
+          "adapterRejectedRows": 7,
+          "allowedYearCalculated": 39,
+          "allowedYearExamined": 40,
+          "calculated": 39,
+          "duplicateRows": 0,
+          "examined": 40,
+          "failures": {
+            "verified_specifications_required": 1
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 2,
+          "passingAllFilters": 36,
+          "returnedRows": 41,
+          "sourceListingRows": 48,
+          "unexaminedRows": 1,
+          "uniqueNormalizedRows": 41
+        },
+        "hostedConclusion": "success",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestPublicDisplayProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "workflowRun": 34071473326,
+        "jobId": 101589507007,
+        "summary": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 7,
+          "adapterUnexaminedRows": 0,
+          "returnedRows": 41,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 41,
+          "unexaminedRows": 1,
+          "examined": 40,
+          "calculated": 40,
+          "allowedYearExamined": 40,
+          "allowedYearCalculated": 40,
+          "passingAllFilters": 37,
+          "failures": {},
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "publicPassing": 37,
+        "publicPassingIds": [
+          "451744731",
+          "459064079",
+          "458664790",
+          "457257304",
+          "43069464351904",
+          "446564888",
+          "455124671",
+          "460632484",
+          "459258316",
+          "41955792087008",
+          "443578799",
+          "38449215943136",
+          "462266636",
+          "43606400937312",
+          "43791727900896",
+          "42371257278336",
+          "451170199",
+          "42198612604288",
+          "43580237930592",
+          "43628747367488",
+          "42198608680064",
+          "461674923",
+          "457574973",
+          "449466779",
+          "460041678",
+          "461598079",
+          "41136820982720",
+          "460527541",
+          "43297441941536",
+          "42062249805248",
+          "456416112",
+          "461321871",
+          "460815881",
+          "39506203398944",
+          "40965480858848",
+          "449359467",
+          "40417165108000"
+        ],
+        "displayInconsistencies": []
+      },
+      "latestRemaining": [
+        "Deploy the tested branch through an explicit deployment/publication decision, then verify a bounded production-environment canary with a rollback generation.",
+        "The final sample has three galleries with fewer than five URLs; validate image bodies and full fresh inventory before mass publication.",
+        "This proves mobile.de only; AutoScout24 and the rest of the required source set are not attested by this pilot."
+      ],
+      "savedInput": 5259,
+      "savedAutomatic": 4808,
+      "savedRecoveryShare": 0.914242251378589,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "mobile_de_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autoscout_europe_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "lacentrale_europe_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autouncle_europe_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "measured_without_publication",
+        "remaining": [
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:fuel_or_powertrain_missing": 274,
+        "certifiedPower:certified_30min_power_missing": 276,
+        "engineCc:engine_cc_missing": 36,
+        "powerHp:peak_power_missing": 2,
+        "fuelPowertrain:unclassified_field_provenance": 139,
+        "engineCc:unclassified_field_provenance": 139
+      }
+    },
+    {
+      "market": "korea",
+      "publicProbe": {
+        "market": "korea",
+        "requests": [
+          {
+            "origin": "https://api.encar.com",
+            "path": "/search/car/list/mobile",
+            "method": "GET",
+            "status": 404,
+            "contentType": "text/html"
+          }
+        ],
+        "sourceId": "encar_direct",
+        "status": "blocked_or_failed",
+        "error": "non_json_response status=404 content-type=text/html url=[url] bodyPreview=<!DOCTYPE html> <html> <head> <meta http-equiv=\"refresh\" content=\"0; url=[url] /> </head> <body></body> </html> "
+      },
+      "detailProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "sourceRequests": 21,
+        "returnedRows": 11,
+        "normalizedExamined": 11,
+        "calculated": 10,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 8,
+        "calculatedEligibleYear": 7,
+        "calculatedEligibleYearUnder15m": 7,
+        "galleryAtLeast5": 11,
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 7
+      },
+      "latestMultipageProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "local": {
+          "pages": 3,
+          "sourceListingRows": 60,
+          "adapterRejectedRows": 21,
+          "returnedRows": 39,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 39,
+          "unexaminedRows": 0,
+          "examined": 39,
+          "calculated": 33,
+          "allowedYearExamined": 35,
+          "allowedYearCalculated": 29,
+          "passingAllFilters": 29,
+          "failures": {
+            "verified_specifications_required": 6
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 63,
+        "hosted": {
+          "adapterRejectedRows": 21,
+          "allowedYearCalculated": 29,
+          "allowedYearExamined": 35,
+          "calculated": 33,
+          "duplicateRows": 0,
+          "examined": 39,
+          "failures": {
+            "verified_specifications_required": 6
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 3,
+          "passingAllFilters": 29,
+          "returnedRows": 39,
+          "sourceListingRows": 60,
+          "unexaminedRows": 0,
+          "uniqueNormalizedRows": 39
+        },
+        "hostedConclusion": "success",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestPublicDisplayProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "workflowRun": 34071473326,
+        "jobId": 101589506940,
+        "summary": {
+          "pages": 3,
+          "sourceListingRows": 60,
+          "adapterRejectedRows": 0,
+          "adapterUnexaminedRows": 0,
+          "returnedRows": 60,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 60,
+          "unexaminedRows": 0,
+          "examined": 60,
+          "calculated": 55,
+          "allowedYearExamined": 54,
+          "allowedYearCalculated": 49,
+          "passingAllFilters": 49,
+          "failures": {
+            "verified_specifications_required": 5
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "publicPassing": 49,
+        "publicPassingIds": [
+          "EC61366045",
+          "EC61369793",
+          "EC61367794",
+          "EC61369851",
+          "EC61371688",
+          "EC61387808",
+          "EC61382017",
+          "EC61387815",
+          "EC61369784",
+          "EC61392289",
+          "EC61380267",
+          "EC61379924",
+          "EC61381709",
+          "EC61374972",
+          "EC61382760",
+          "EC61391821",
+          "EC61387991",
+          "EC61382837",
+          "EC61386337",
+          "EC61389150",
+          "EC61379952",
+          "EC61375137",
+          "EC61382945",
+          "EC61379758",
+          "EC61371939",
+          "EC61388370",
+          "EC61386401",
+          "EC61377666",
+          "EC61390848",
+          "EC61389077",
+          "EC61372327",
+          "EC61380673",
+          "EC61377663",
+          "EC61389110",
+          "EC61374971",
+          "EC61386273",
+          "EC61385966",
+          "EC61377814",
+          "EC61381046",
+          "EC61389108",
+          "EC61395009",
+          "EC61399140",
+          "EC61396283",
+          "EC61396119",
+          "EC61392911",
+          "EC61392643",
+          "EC61392452",
+          "EC61394723",
+          "EC61285039"
+        ],
+        "displayInconsistencies": []
+      },
+      "latestRemaining": [
+        "KCar final pilot: five rows still lack certified power inputs; six are older than the catalog year floor.",
+        "Encar access-block response remains separate from KCar success.",
+        "Validate the production-environment canary, image bodies, freshness, deduplication and rollback before mass publication."
+      ],
+      "savedInput": 2840,
+      "savedAutomatic": 1511,
+      "savedRecoveryShare": 0.5320422535211268,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "encar_direct",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "kcar_korea_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "kbchachacha_korea_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "bobaedream_korea_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "measured_without_publication",
+        "remaining": [
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "powerHp:peak_power_missing": 17,
+        "certifiedPower:certified_30min_power_missing": 17,
+        "listing_identity_photo_price_or_calculation_gate": 17,
+        "fuelPowertrain:unclassified_field_provenance": 1295,
+        "engineCc:unclassified_field_provenance": 1185,
+        "powerHp:non_exact_power_provenance": 941
+      }
+    },
+    {
+      "market": "china",
+      "publicProbe": {
+        "market": "china",
+        "requests": [
+          {
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/search",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        ],
+        "sourceId": "autohome_used_china_open",
+        "listingRows": 24,
+        "normalizedRows": 20,
+        "samples": [
+          {
+            "sourceOfferId": "59754526",
+            "make": "Lexus",
+            "model": "RC",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59769656",
+            "make": "BMW",
+            "model": "7 Series",
+            "year": 2026,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59282752",
+            "make": "Acura",
+            "model": "TLX-L",
+            "year": 2018,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59822381",
+            "make": "Lexus",
+            "model": "RX",
+            "year": 2020,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59818392",
+            "make": "Land Rover",
+            "model": "Range Rover",
+            "year": 2022,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59748754",
+            "make": "Mercedes-Benz",
+            "model": "GLC AMG",
+            "year": 2022,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59129957",
+            "make": "Infiniti",
+            "model": "Q60",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "58626842",
+            "make": "Mercedes-Benz",
+            "model": "E-Class (Import)",
+            "year": 2021,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59817902",
+            "make": "BMW",
+            "model": "X5",
+            "year": 2022,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59442681",
+            "make": "Audi",
+            "model": "S4",
+            "year": 2023,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59737522",
+            "make": "Rolls-Royce",
+            "model": "Ghost",
+            "year": 2024,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59627482",
+            "make": "Audi",
+            "model": "Q8",
+            "year": 2019,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59654620",
+            "make": "Audi",
+            "model": "A6 (Import)",
+            "year": 2020,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59722906",
+            "make": "Jaguar",
+            "model": "XJ",
+            "year": 2018,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59747871",
+            "make": "Peugeot",
+            "model": "308S",
+            "year": 2015,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59203886",
+            "make": "MINI",
+            "model": "JCW",
+            "year": 2015,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59681818",
+            "make": "Lexus",
+            "model": "GX",
+            "year": 2024,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59691786",
+            "make": "Peugeot",
+            "model": "508",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59211013",
+            "make": "Volkswagen",
+            "model": "Beetle",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59574597",
+            "make": "Jaguar",
+            "model": "F-PACE",
+            "year": 2021,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          }
+        ],
+        "status": "listing_received"
+      },
+      "detailProbe": {
+        "market": "china",
+        "sourceId": "autohome_used_china_open",
+        "sourceRequests": 41,
+        "returnedRows": 24,
+        "normalizedExamined": 20,
+        "calculated": 13,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 11,
+        "calculatedEligibleYear": 5,
+        "calculatedEligibleYearUnder15m": 4,
+        "galleryAtLeast5": 20,
+        "fieldChanges": [
+          "engineCc",
+          "powerHp"
+        ],
+        "calculatedEligibleYearUnder15mGallery5": 4
+      },
+      "latestMultipageProbe": {
+        "market": "china",
+        "sourceId": "autohome_used_china_open",
+        "local": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 0,
+          "returnedRows": 48,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 48,
+          "unexaminedRows": 8,
+          "examined": 40,
+          "calculated": 23,
+          "allowedYearExamined": 29,
+          "allowedYearCalculated": 15,
+          "passingAllFilters": 14,
+          "failures": {
+            "verified_specifications_required": 13,
+            "The operation was aborted due to timeout": 4
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 78,
+        "hosted": {
+          "adapterRejectedRows": 0,
+          "allowedYearCalculated": 0,
+          "allowedYearExamined": 27,
+          "calculated": 0,
+          "duplicateRows": 0,
+          "examined": 40,
+          "failures": {
+            "verified_specifications_required": 40
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 2,
+          "passingAllFilters": 0,
+          "returnedRows": 48,
+          "sourceListingRows": 48,
+          "unexaminedRows": 8,
+          "uniqueNormalizedRows": 48
+        },
+        "hostedConclusion": "failure",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestPublicDisplayProbe": {
+        "market": "china",
+        "status": "previous_challenge_block_remains"
+      },
+      "latestRemaining": [
+        "GitHub receives a browser challenge for the HTML specification table; public API alone lacks required exact parameters.",
+        "Do not execute challenge scripts or reuse challenge cookies. Saved exact evidence remains usable only under the existing binding contract.",
+        "Owner-configured logistics 150000 RUB is expected; do not replace it with repository fallback 250000 RUB."
+      ],
+      "savedInput": 3092,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "autohome_used_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "dongchedi_china_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "guazi_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autohome_new_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "chngoodcar_china_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "iautos_china_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "measured_without_publication",
+        "remaining": [
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 1642,
+        "engineCc:unclassified_field_provenance": 1766,
+        "engineCc:engine_cc_missing": 1319,
+        "fuelPowertrain:fuel_or_powertrain_missing": 176,
+        "certifiedPower:certified_30min_power_missing": 51,
+        "powerHp:non_exact_power_provenance": 53,
+        "powerHp:powertrain_identity_conflict": 93,
+        "powerHp:peak_power_missing": 32
+      }
+    },
+    {
+      "market": "uae",
+      "publicProbe": {
+        "market": "uae",
+        "requests": [
+          {
+            "origin": "https://uae.dubizzle.com",
+            "path": "/en/motors/used-cars/",
+            "method": "GET",
+            "status": 200,
+            "contentType": "text/html; charset=UTF-8"
+          }
+        ],
+        "sourceId": "dubizzle_uae_open",
+        "status": "blocked_or_failed",
+        "error": "pilot_request_outside_envelope"
+      },
+      "detailProbe": {
+        "market": "uae",
+        "sourceId": "dubicars_uae_exact",
+        "sourceRequests": 29,
+        "returnedRows": 21,
+        "normalizedExamined": 20,
+        "calculated": 0,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 20,
+        "calculatedEligibleYear": 0,
+        "calculatedEligibleYearUnder15m": 0,
+        "galleryAtLeast5": 20,
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 0
+      },
+      "latestMultipageProbe": null,
+      "latestPublicDisplayProbe": {
+        "market": "uae",
+        "status": "experimental_same_listing_replay",
+        "sourceOfferId": "7062DL",
+        "replayTotalRub": 8600059,
+        "sourceAllowedForPublication": false
+      },
+      "latestRemaining": [
+        "Porsche Finder is experimental and excluded from production registry; one same-listing replay calculates successfully but is not a completed fresh collection.",
+        "UAE list timed out; the shared Porsche source later returned HTTP 429 in the Georgia pilot and further requests stopped.",
+        "Existing broad sources still lack exact cc/power for the measured offers."
+      ],
+      "savedInput": 4647,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "dubizzle_uae_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "dubicars_uae_exact",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "carswitch_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "yallamotor_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "automarket_uae_candidate",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "cars24_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "measured_without_publication",
+        "remaining": [
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 4639,
+        "engineCc:unclassified_field_provenance": 4646,
+        "powerHp:non_exact_power_provenance": 4531,
+        "powerHp:powertrain_identity_conflict": 9,
+        "fuelPowertrain:fuel_or_powertrain_missing": 8
+      }
+    },
+    {
+      "market": "georgia",
+      "publicProbe": {
+        "market": "georgia",
+        "requests": [
+          {
+            "origin": "https://autopapa.ge",
+            "path": "/en/usd/search",
+            "method": "GET",
+            "status": 200,
+            "contentType": "text/html; charset=utf-8"
+          }
+        ],
+        "sourceId": "autopapa_georgia_open",
+        "status": "blocked_or_failed",
+        "error": "pilot_challenge_stop"
+      },
+      "detailProbe": {
+        "market": "georgia",
+        "sourceId": "autopapa_georgia_open",
+        "sourceRequests": 11,
+        "returnedRows": 10,
+        "normalizedExamined": 10,
+        "calculated": 0,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 10,
+        "calculatedEligibleYear": 0,
+        "calculatedEligibleYearUnder15m": 0,
+        "galleryAtLeast5": 10,
+        "fieldChanges": [
+          "powerHp"
+        ],
+        "calculatedEligibleYearUnder15mGallery5": 0
+      },
+      "latestMultipageProbe": null,
+      "latestPublicDisplayProbe": {
+        "market": "georgia",
+        "status": "stopped_http_429"
+      },
+      "latestRemaining": [
+        "Porsche Finder returned HTTP 429; the bounded source run is not accepted.",
+        "MyAuto previously returned 403; AutoPapa samples lack exact cc/power.",
+        "Need a working public source with sufficient bound technical fields and real gallery evidence."
+      ],
+      "savedInput": 216,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "myauto_georgia_list",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autopapa_georgia_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "worldauto_georgia_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "measured_without_publication",
+        "remaining": [
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 216,
+        "engineCc:unclassified_field_provenance": 215,
+        "powerHp:non_exact_power_provenance": 161
+      }
+    }
+  ],
+  "japan": {
+    "status": "excluded_by_owner",
+    "includedInPilot": false
+  }
+}

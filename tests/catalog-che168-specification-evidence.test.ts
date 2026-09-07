@@ -33,7 +33,7 @@ function listing(overrides: Record<string, unknown> = {}) {
 function detail(overrides: Record<string, unknown> = {}) {
   return {
     ...listing(),
-    engine: "2.0 L 173 hp",
+    engine: "1998 cc 173 hp",
     gearbox: "Automatic",
     drivingmode: "FWD",
     structure: "Sedan",
@@ -51,13 +51,13 @@ test("Che168 carinfo accepts one explicit engine and power value", () => {
     detailYear: 2024,
     listingFuel: "Gasoline",
     detailFuel: "Gasoline",
-    detailEngine: "2.0 L 127 kW (173 hp)",
+    detailEngine: "1998 cc 127 kW (173 hp)",
   });
   assert.equal(evidence.fuel.status, "exact");
   assert.equal(evidence.year.status, "exact");
   assert.equal(evidence.fuel.value, "petrol");
   assert.equal(evidence.engineCc.status, "exact");
-  assert.equal(evidence.engineCc.value, 2000);
+  assert.equal(evidence.engineCc.value, 1998);
   assert.equal(evidence.powerHp.status, "exact");
   assert.ok(Math.abs(Number(evidence.powerHp.value) - 173) <= 1);
 });
@@ -116,7 +116,7 @@ test("Che168 exact carinfo preserves field provenance", async () => {
   try {
     const images = await source.fetchImages(offer!);
     assert.equal(images.length, 5);
-    assert.equal(offer!.engineCc, 2000);
+    assert.equal(offer!.engineCc, 1998);
     assert.equal(offer!.powerHp, 173);
     assert.equal(offer!.powerDataConfidence, "source_exact");
     assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
@@ -165,4 +165,25 @@ test("Che168 workflows validate canonical provenance instead of raw fuel spellin
   const strictWorkflow = fs.readFileSync(".github/workflows/catalog-v6-che168-strict-ladder.yml", "utf8");
   assert.match(strictWorkflow, /unsafe_fuel_promoted/);
   assert.match(strictWorkflow, /push:\n\s+branches: \[main\]/);
+});
+
+
+test("Che168 litre-only details do not manufacture exact displacement", () => {
+  for (const detailEngine of ["1.5L 150 hp", "2.0 L 173 hp", "3.0T"]) {
+    assert.equal(che168GlobalSpecificationEvidence({ detailEngine }).engineCc.value, undefined);
+  }
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "1.5L 1498 cc 150 hp" }).engineCc.value, 1498);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "2.4L 1498 cc 150 hp" }).engineCc.status, "conflict");
+});
+
+
+test("Che168 accepts explicit horsepower words and compact cylinder suffixes without inventing displacement", () => {
+  for (const [label, hp] of [["2.0T 245 horsepower L4", 245], ["2.4L208hpL4", 208], ["3.0T381HP L6", 381]] as const) {
+    const evidence = che168GlobalSpecificationEvidence({ detailEngine: label });
+    assert.equal(evidence.powerHp.value, hp);
+    assert.equal(evidence.powerHp.status, "exact");
+    assert.equal(evidence.engineCc.value, undefined);
+  }
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "99999 horsepower" }).powerHp.value, undefined);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "245 horsepower / 208 hp" }).powerHp.status, "conflict");
 });

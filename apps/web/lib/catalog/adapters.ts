@@ -67,6 +67,7 @@ async function fetchPublicJson(url: string, init: RequestInit = {}) {
   const diagnostic = `status=${res.status} content-type=${contentType || "unknown"} url=${url} bodyPreview=${bodyPreview}`;
   if ([401, 403].includes(res.status)) throw blockError(`blocked_${res.status} ${diagnostic}`, res.status);
   if (res.status === 429) throw blockError(`rate_limited_429 ${diagnostic}`, 429);
+  if (/has_been_cr_blocked[^"<>\s]*\.html/i.test(body.slice(0, 500))) throw blockError(`encar_access_block_page ${diagnostic}`, res.status);
   if (BLOCK_RE.test(body.slice(0, 500))) throw blockError(`html_challenge_instead_of_json ${diagnostic}`, res.status);
   if (!contentType.includes("json")) throw new Error(`non_json_response ${diagnostic}`);
   if (!res.ok) throw new Error(`http_${res.status} ${diagnostic}`);

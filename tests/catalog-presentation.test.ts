@@ -51,7 +51,7 @@ test("Korean Inspiration trim is not corrupted by the shorter Ray model token", 
   assert.equal(translateCatalogText("더 뉴 기아 레이 EV"), "Kia Ray EV");
 });
 
-test("Korea presentation preserves verified native model identity when no canonical translation exists", () => {
+test("Korea public presentation withholds unmapped native labels without inventing a translation", () => {
   const tasman = presentCatalogOffer({
     id: "korea-tasman",
     market: "korea",
@@ -62,8 +62,8 @@ test("Korea presentation preserves verified native model identity when no canoni
     images: [],
   });
   assert.equal(tasman.makeLabel, "Kia");
-  assert.equal(tasman.modelLabel, "타스만");
-  assert.match(tasman.title, /^Kia 타스만/);
+  assert.equal(tasman.modelLabel, "");
+  assert.equal(forbiddenSourceScript.test(tasman.title), false);
 
   const dolphin = presentCatalogOffer({
     id: "korea-byd-dolphin",
@@ -74,8 +74,8 @@ test("Korea presentation preserves verified native model identity when no canoni
     images: [],
   });
   assert.equal(dolphin.makeLabel, "BYD");
-  assert.equal(dolphin.modelLabel, "돌핀");
-  assert.equal(dolphin.title, "BYD 돌핀");
+  assert.equal(dolphin.modelLabel, "");
+  assert.equal(dolphin.title, "BYD");
 });
 
 test("China presentation never exposes internal AutoHome series ids as model names", () => {
