@@ -157,6 +157,14 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
               apiEngine: raw.detail?.engine, apiFuel: raw.detail?.fuelname,
               boundParameters: raw.boundPageParameters || null, semanticEvidence: offer.operational?.semanticEvidence };
           }
+          if (process.env.PILOT_RESPONSE_EVIDENCE === '1' && source.sourceId === 'myauto_georgia_list') {
+            const raw = offer.operational?.raw || {};
+            item.sourceWitness = { productId: raw.myAutoProductCarId,
+              productEngineCc: raw.myAutoProductEngineCc, productPowerHp: raw.myAutoProductPowerHp,
+              productSemanticEvidence: raw.myAutoProductSemanticEvidence || null,
+              semanticEvidence: offer.operational?.semanticEvidence || null,
+              limitation: 'Existing deployed bridge may predate shared product evidence preparation; derived scalar alone is not exact evidence.' };
+          }
           item.sourceFields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
           // Match collection's knowledge preparation before the exact-evidence
           // gate. Representative guesses and unresolved variants still fail it.

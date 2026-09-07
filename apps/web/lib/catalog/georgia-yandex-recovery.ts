@@ -2,7 +2,7 @@ import { autoPapaExactDetailFacts, autoPapaGeorgiaSource } from "./autopapa-geor
 import { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { credibleCatalogImages, isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "./offer-quality";
-import { myAutoListSource, myAutoProductSnapshotFromInfo, parseMyAutoListingImageUrl } from "./myauto-list-source";
+import { applyMyAutoProductSpecifications, myAutoListSource, myAutoProductSnapshotFromInfo, parseMyAutoListingImageUrl } from "./myauto-list-source";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { findVehicleModel, findVehicleVariant } from "./vehicle-knowledge";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
@@ -151,10 +151,8 @@ async function prepareMyAuto(offer: VehicleOffer) {
   if (!snapshot) throw new Error("myauto_product_identity");
   const urls = snapshot.galleryUrls;
 
-  return normalizeVehicleOfferSpecs({
+  const prepared = normalizeVehicleOfferSpecs({
     ...offer,
-    engineCc: Number(offer.engineCc || 0) > 0 ? offer.engineCc : snapshot.engineCc,
-    powerHp: Number(offer.powerHp || 0) > 0 ? offer.powerHp : snapshot.powerHp,
     images: credibleCatalogImages(urls.map(imageRecord)).slice(0, 30),
     operational: {
       ...offer.operational,
@@ -175,9 +173,13 @@ async function prepareMyAuto(offer: VehicleOffer) {
         myAutoProductPictureCount: Number(info.pic_number),
         myAutoProductEngineCc: snapshot.engineCc || null,
         myAutoProductPowerHp: snapshot.powerHp || null,
+        myAutoProductSemanticEvidence: snapshot.semanticEvidence,
       },
     },
   });
+  // Apply after legacy normalization so rounded/raw fallback values cannot
+  // overwrite the product's explicit missing, ambiguous or conflicting facts.
+  return applyMyAutoProductSpecifications(prepared, snapshot);
 }
 
 async function prepareAutoPapa(offer: VehicleOffer) {
