@@ -468,7 +468,7 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
 const allOffers = [...unique.values()];
 const previousRetainedCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
-const minimumSafePublicCount = previousPublicCount >= 100
+const minimumSafePublicCount = !allowPublicCollapse && previousPublicCount >= 100
   ? Math.max(1, Math.ceil(previousPublicCount * minimumPublicRetentionRatio))
   : 1;
 const catastrophicPublicCollapse = previousPublicCount >= 100
@@ -485,6 +485,7 @@ if (regressionBlocked) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     manifest = await persistCatalogOffers(allOffers, {
+      productionRefreshMarket: market,
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
         const failures = [];

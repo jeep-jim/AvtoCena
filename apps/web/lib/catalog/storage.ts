@@ -27,6 +27,9 @@ const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 // workflow cannot bypass the freeze with repository secrets. A reviewed code
 // change is required to resume Object Storage writes.
 export const CATALOG_PRODUCTION_WRITES_PAUSED = true;
+// Owner-approved restart: only the V3 single-market publisher may refresh these
+// markets, with both validation callbacks and exact preservation of all others.
+export const CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = ["korea", "china", "uae", "europe", "georgia"];
 function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
   return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
 }
@@ -906,6 +909,7 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
 }
 
 export type PersistCatalogOptions = {
+  productionRefreshMarket?: CatalogMarket;
   // Explicit staging mode; production remains frozen and needs a reviewed rebuild.
   modificationRecovery?: boolean;
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
@@ -919,8 +923,19 @@ export type PersistCatalogOptions = {
   // ties, which makes routine collection genuinely grow-only.
   appendPublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
 };
+export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions): boolean {
+  const market = options.productionRefreshMarket;
+  const preserved = options.preservePublicOffersByMarket || {};
+  return Boolean(market && CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market)
+    && !options.modificationRecovery && !options.appendPublicOffersByMarket
+    && typeof options.beforePersistValidate === "function"
+    && typeof options.beforePublishValidate === "function"
+    && !Object.prototype.hasOwnProperty.call(preserved, market)
+    && MARKETS.filter((other) => other !== market).every((other) => Array.isArray(preserved[other]))
+    && Object.keys(preserved).every((other) => MARKETS.includes(other as CatalogMarket)));
+}
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
-  if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object") {
+  if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object" && !isCatalogProductionRefreshAllowed(options)) {
     throw new Error("catalog_production_writes_paused");
   }
   const storage = getJsonStorage();

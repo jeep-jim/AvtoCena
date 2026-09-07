@@ -212,6 +212,8 @@ jobs:
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
+      # Owner accepts a smaller verified catalog; empty publication stays blocked.
+      CATALOG_ALLOW_PUBLIC_COLLAPSE: ${{ inputs.market != 'japan' && '1' || '0' }}
       CATALOG_ENCYCLOPEDIA_IDENTITY_MASTER: "1"
       CATALOG_IDENTITY_PREPARE_CONCURRENCY: "24"
       # Keep the writer lease alive during a legitimate long atomic publish,
