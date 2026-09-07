@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { catalogRetentionDecision, catalogSourceRefreshStates } from "../apps/web/lib/catalog/source-retention";
+import { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } from "../apps/web/lib/catalog/source-retention";
 
 const DAY = 24 * 60 * 60 * 1000;
 const now = Date.UTC(2026, 7, 21, 16, 0, 0);
@@ -18,20 +18,20 @@ test("a healthy completed live source may expire rows beyond normal retention", 
   const states = catalogSourceRefreshStates([{
     report: { sources: [{ sourceId: "encar_direct", mode: "live", pages: 120, freshSaved: 4200, restoredSaved: 100, stopReason: "source_cycle_finished" }] },
   }]);
-  const result = catalogRetentionDecision({ offer: offer("encar_direct", 4), now, retentionMs: 3 * DAY, sourceStates: states });
+  const result = catalogRetentionDecision({ offer: offer("encar_direct", 15), now, retentionMs: 14 * DAY, sourceStates: states });
   assert.equal(states.encar_direct.authoritative, true);
   assert.equal(result.retain, false);
   assert.equal(result.reason, "expired_after_authoritative_refresh");
 });
 
-test("source error protects an otherwise-live row for a bounded outage grace", () => {
+test("source error cannot extend the owner retention or prove a sale", () => {
   const states = catalogSourceRefreshStates([{
     report: { sources: [{ sourceId: "encar_direct", mode: "live", pages: 2, freshSaved: 0, restoredSaved: 1200, stopReason: "source_errors" }] },
   }]);
-  const result = catalogRetentionDecision({ offer: offer("encar_direct", 4), now, retentionMs: 3 * DAY, sourceStates: states });
+  const result = catalogRetentionDecision({ offer: offer("encar_direct", 15), now, retentionMs: 14 * DAY, sourceStates: states });
   assert.equal(states.encar_direct.authoritative, false);
-  assert.equal(result.retain, true);
-  assert.equal(result.reason, "source_outage_grace");
+  assert.equal(result.retain, false);
+  assert.equal(result.reason, "unverified_retention_expired");
 });
 
 test("zero-fresh cycle is not proof that all listings disappeared", () => {
@@ -41,15 +41,15 @@ test("zero-fresh cycle is not proof that all listings disappeared", () => {
   assert.equal(states.encar_direct.authoritative, false);
 });
 
-test("outage grace is bounded and eventually expires stale rows", () => {
-  const result = catalogRetentionDecision({ offer: offer("encar_direct", 7), now, retentionMs: 3 * DAY, sourceStates: {} });
+test("non-Japan rows expire at fourteen days even without a fresh source report", () => {
+  const result = catalogRetentionDecision({ offer: offer("encar_direct", 15), now, retentionMs: 14 * DAY, sourceStates: {} });
   assert.equal(result.retain, false);
-  assert.equal(result.reason, "outage_grace_expired");
+  assert.equal(result.reason, "unverified_retention_expired");
 });
 
-test("Japan 30-day retention gets a bounded 60-day outage grace", () => {
+test("Japan thirty-day retention is not silently doubled", () => {
   const japanOffer = { ...offer("jpcenter_japan_catalog_open", 45), market: "japan" as const };
   const result = catalogRetentionDecision({ offer: japanOffer, now, retentionMs: 30 * DAY, sourceStates: {} });
-  assert.equal(result.retain, true);
-  assert.equal(result.reason, "source_outage_grace");
+  assert.equal(result.retain, false);
+  assert.equal(result.reason, "unverified_retention_expired");
 });

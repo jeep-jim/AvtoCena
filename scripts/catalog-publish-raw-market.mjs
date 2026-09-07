@@ -1,3 +1,5 @@
+const { catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -15,7 +17,7 @@ const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v4-input";
 const reportFile = process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-raw-market-publish-report.json";
 const market = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",")[0]?.trim();
 const maximumPerMarket = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000)));
-const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 14 * 24 * 60 * 60 * 1_000));
+const retentionMs = catalogMarketRetentionMs(market);
 const currentYear = new Date().getFullYear();
 const priorityYear = currentYear - 6;
 
@@ -25,9 +27,7 @@ function clean(value) { return String(value ?? "").replace(/\s+/g, " ").trim(); 
 function title(offer) {
   return clean(offer?.sourceTitle || offer?.operational?.sourceTitle || [offer?.make, offer?.model, offer?.trim].filter(Boolean).join(" "));
 }
-function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
-}
+function freshness(offer) { return catalogOfferFreshness(offer); }
 function imageKey(image) { return String(image?.url || image?.id || image?.objectKey || ""); }
 function uniqueImages(images) {
   const result = [];
@@ -42,10 +42,11 @@ function uniqueImages(images) {
   return result;
 }
 function normalizeRaw(offer) {
+  offer = preserveCatalogOfferObservation(offer);
   return normalizeVehicleOfferSpecs({
     ...offer,
     sourceTitle: title(offer),
-    status: "active",
+    status: offer.market === "japan" ? "active" : offer.status || "active",
     images: uniqueImages(offer?.images),
     totalRub: null,
     calculationSnapshot: undefined,
@@ -69,7 +70,7 @@ function order(left, right) {
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
 function validRetained(offer, cutoff) {
-  return isCrediblePublicOffer(offer) && freshness(offer) >= cutoff;
+  return isCrediblePublicOffer(offer) && catalogOfferWithinRetention(offer);
 }
 function mergeById(rows) {
   const result = new Map();
@@ -89,16 +90,19 @@ try {
 } catch {}
 
 const rawOffers = [];
+const generationPayloads = [];
 const readErrors = [];
 for (const filename of filenames.sort()) {
   try {
     const payload = JSON.parse(await fs.readFile(path.join(inputDir, filename), "utf8"));
+    generationPayloads.push(payload);
     if (Array.isArray(payload?.offers)) rawOffers.push(...payload.offers);
   } catch (error) {
     readErrors.push({ filename, error: String(error?.message || error) });
   }
 }
 
+const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generationPayloads, market);
 const rejected = {};
 const incomingById = new Map();
 for (const row of rawOffers) {
@@ -108,7 +112,7 @@ for (const row of rawOffers) {
       rejected.identity = Number(rejected.identity || 0) + 1;
       continue;
     }
-    if (!isCrediblePublicOffer(offer)) {
+    if (catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) || !catalogOfferWithinRetention(offer) || !isCrediblePublicOffer(offer)) {
       rejected.quality = Number(rejected.quality || 0) + 1;
       continue;
     }
@@ -127,7 +131,7 @@ try { currentExisting = await readMarketOffers(market); } catch (error) {
 
 const retainedCurrent = currentExisting
   .map(normalizeRaw)
-  .filter((offer) => validRetained(offer, cutoff));
+  .filter((offer) => !catalogOfferWithdrawnByReport(offer, confirmedWithdrawals) && validRetained(offer, cutoff));
 const accumulatedCurrent = mergeById([...retainedCurrent, ...incomingById.values()]);
 const selected = [...accumulatedCurrent.values()].sort(order).slice(0, maximumPerMarket);
 

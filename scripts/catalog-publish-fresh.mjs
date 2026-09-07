@@ -1,3 +1,4 @@
+const { catalogOfferFreshness, catalogOfferWithinRetention, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -27,7 +28,7 @@ function specScore(offer) {
 }
 
 function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return catalogOfferFreshness(offer);
 }
 
 function qualityOrder(left, right) {
@@ -37,7 +38,7 @@ function qualityOrder(left, right) {
 }
 
 function auditCandidate(sourceOffer, market, selectedIds, imageOwners) {
-  if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer)) return null;
+  if (!catalogOfferWithinRetention(sourceOffer) || (market !== "japan" && sourceOffer.status !== "active") || sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer)) return null;
   const localSeen = new Set();
   const images = [];
   for (const image of Array.isArray(sourceOffer.images) ? sourceOffer.images : []) {
@@ -48,7 +49,7 @@ function auditCandidate(sourceOffer, market, selectedIds, imageOwners) {
     if (owner && owner !== sourceOffer.id) continue;
     images.push(image);
   }
-  const offer = { ...sourceOffer, status: "active", images };
+  const offer = { ...preserveCatalogOfferObservation(sourceOffer), status: market === "japan" ? "active" : sourceOffer.status, images };
   if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) return null;
   return offer;
 }

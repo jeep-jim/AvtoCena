@@ -197,7 +197,7 @@ test("priority galleries preserve listing photos and enrich detail progressively
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
   assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"/);
-  assert.match(rebuild, /const detailNeeded = mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
+  assert.match(rebuild, /const detailNeeded = typeof source\?\.refreshOffer === "function" \|\| mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
   assert.match(rebuild, /reserveDetail/);
   assert.match(rebuild, /detailDeferredBySource/);
   assert.match(rebuild, /source\.fetchImages\(offer\)/);

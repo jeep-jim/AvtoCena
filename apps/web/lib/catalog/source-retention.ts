@@ -1,4 +1,7 @@
 import type { VehicleOffer } from "./types";
+import { catalogOfferConfirmedWithdrawn, catalogOfferFreshness } from "./refresh-policy";
+import { isAllowedCatalogSourceId } from "./required-catalog-sources";
+export { catalogOfferFreshness } from "./refresh-policy";
 
 export type CatalogSourceRefreshState = {
   sourceId: string;
@@ -14,8 +17,27 @@ export type CatalogSourceRefreshState = {
 type GenerationPayload = {
   report?: {
     sources?: Array<Record<string, unknown>>;
+    confirmedWithdrawals?: Array<Record<string, unknown>>;
   };
 };
+
+export function catalogConfirmedWithdrawalIndex(payloads: GenerationPayload[], market: VehicleOffer["market"]) {
+  const index = new Map<string, Record<string, unknown>>();
+  if (market === "japan") return index;
+  for (const payload of payloads) for (const row of payload.report?.confirmedWithdrawals || []) {
+    if (row.market !== market || !row.id || !row.sourceOfferId || !isAllowedCatalogSourceId(market, row.sourceId)
+      || !["sold", "removed"].includes(String(row.status)) || !Number.isFinite(Date.parse(String(row.observedAt)))) continue;
+    const previous = index.get(String(row.id));
+    if (!previous || Date.parse(String(row.observedAt)) > Date.parse(String(previous.observedAt))) index.set(String(row.id), row);
+  }
+  return index;
+}
+
+export function catalogOfferWithdrawnByReport(offer: Partial<VehicleOffer>, index: Map<string, Record<string, unknown>>) {
+  const row = index.get(String(offer.id));
+  return Boolean(row && row.market === offer.market && row.sourceId === offer.sourceId && row.sourceOfferId === offer.sourceOfferId
+    && Date.parse(String(row.observedAt)) >= catalogOfferFreshness(offer));
+}
 
 function positiveInt(value: unknown) {
   const parsed = Number(value);
@@ -66,16 +88,6 @@ export function catalogSourceRefreshStates(payloads: GenerationPayload[]) {
   return Object.fromEntries([...grouped.entries()].sort(([left], [right]) => left.localeCompare(right)));
 }
 
-export function catalogOfferFreshness(offer: Partial<VehicleOffer>) {
-  return Date.parse(String(
-    offer.updatedAt
-      || offer.operational?.fullRebuildAt
-      || offer.operational?.sourcePublishedAt
-      || offer.firstSeenAt
-      || "",
-  )) || 0;
-}
-
 export function catalogRetentionDecision(args: {
   offer: Partial<VehicleOffer>;
   now?: number;
@@ -85,14 +97,14 @@ export function catalogRetentionDecision(args: {
 }) {
   const now = Number(args.now || Date.now());
   const retentionMs = Math.max(60_000, Number(args.retentionMs || 0));
-  const multiplier = Math.max(1, Math.min(4, Number(args.outageGraceMultiplier || 2)));
   const freshness = catalogOfferFreshness(args.offer);
   const ageMs = freshness > 0 ? Math.max(0, now - freshness) : Number.MAX_SAFE_INTEGER;
   const sourceId = String(args.offer.sourceId || "");
   const sourceState = args.sourceStates[sourceId];
+  if (catalogOfferConfirmedWithdrawn(args.offer)) return { retain: false, reason: "confirmed_withdrawn", ageMs, sourceId, sourceState };
   if (ageMs <= retentionMs) return { retain: true, reason: "within_retention", ageMs, sourceId, sourceState };
   if (sourceState?.authoritative) return { retain: false, reason: "expired_after_authoritative_refresh", ageMs, sourceId, sourceState };
-  const outageGraceMs = retentionMs * multiplier;
-  if (ageMs <= outageGraceMs) return { retain: true, reason: "source_outage_grace", ageMs, sourceId, sourceState };
-  return { retain: false, reason: "outage_grace_expired", ageMs, sourceId, sourceState };
+  // The owner's 14/30-day contract has no implicit doubled retention. Expiry
+  // after an outage means unverified age, never evidence that a car was sold.
+  return { retain: false, reason: "unverified_retention_expired", ageMs, sourceId, sourceState };
 }

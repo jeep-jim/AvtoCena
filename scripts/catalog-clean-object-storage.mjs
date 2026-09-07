@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+const { catalogCandidateObjectExpired } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 
@@ -173,8 +174,7 @@ if (!publicGeneration || !generationIds.length) {
   });
   const stagingCutoff = Date.now() - STAGING_RETENTION_MS;
   const staleSourceCandidateObjects = sourceCandidateObjects.filter((object) => {
-    const modifiedAt = objectAge(object.lastModified);
-    return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
+    return catalogCandidateObjectExpired(String(object.key || ""), String(object.lastModified || ""));
   });
   // Active brand projections are rewritten by every publication. A projection
   // untouched for three days belongs to a brand with no current public offers.

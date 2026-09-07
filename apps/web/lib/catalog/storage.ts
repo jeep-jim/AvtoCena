@@ -1,5 +1,6 @@
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
 import { prepareModificationRecovery } from "./modification-recovery";
+import { catalogOfferWithinRetention } from "./refresh-policy";
 import crypto from "node:crypto";
 import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
@@ -923,7 +924,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     throw new Error("catalog_production_writes_paused");
   }
   const storage = getJsonStorage();
-  const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
+  const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "").split(",").map((value) => value.trim()).filter(Boolean));
   const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};
   const appendPublicOffersByMarket = options.appendPublicOffersByMarket || {};
   const preservedMarketKeys = Object.keys(preservedPublicOffersByMarket);
@@ -948,10 +949,11 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
     for (const offer of current) {
       if (exactPreserveMarkets.has(offer.market)) continue;
-      if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
+      if (!growOnlyMarkets.has(String(offer.market)) || offer.status !== "active" || !catalogOfferWithinRetention(offer) || !hasCredibleOfferContent(offer)) continue;
       const incoming = merged.get(offer.id);
+      if (incoming && incoming.status !== "active") continue;
       if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
-        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore({ ...offer, status: "active" }));
+        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
         merged.set(offer.id, restored);
       }
     }
