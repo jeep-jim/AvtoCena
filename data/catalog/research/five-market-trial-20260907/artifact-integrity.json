@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "artifacts": [
+    {
+      "runId": "34083757152",
+      "id": 10004635747,
+      "name": "five-market-trial-uae",
+      "digest": "sha256:6bb527f33f00b0ed3d1b7354b32712fb34933eb8235d29b4f1d1407c004e29ac",
+      "digestVerified": true,
+      "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f"
+    },
+    {
+      "runId": "34083757152",
+      "id": 10004635152,
+      "name": "five-market-trial-china",
+      "digest": "sha256:697e75be020e63d556f13a770dac2ecd1916c6d4e450ff290432cdac03316c43",
+      "digestVerified": true,
+      "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f"
+    },
+    {
+      "runId": "34083757152",
+      "id": 10004605547,
+      "name": "five-market-trial-georgia",
+      "digest": "sha256:0bc9b05aaf16a4b0c01b5a105ae7297c7aeba5ead57e0388a79ba2b8a6d609eb",
+      "digestVerified": true,
+      "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f"
+    },
+    {
+      "runId": "34083757152",
+      "id": 10004581367,
+      "name": "five-market-trial-europe",
+      "digest": "sha256:00fe445701f770e85471bdae491a46872a8d73add442d3bc6901c562da08728a",
+      "digestVerified": true,
+      "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f"
+    },
+    {
+      "runId": "34083757152",
+      "id": 10004568976,
+      "name": "five-market-trial-korea",
+      "digest": "sha256:54f08eefd1cde5479bc33430919fa8a8f4665fa5a6de3a18836cbe69404118c7",
+      "digestVerified": true,
+      "codeSha": "4ac1b8324ec3dbf2a853f92f89e741611f6ef80f"
+    },
+    {
+      "runId": "34084620827",
+      "id": 10004794751,
+      "name": "five-market-trial-georgia",
+      "digest": "sha256:3e2be0de9843512c215e517e72e93ab9013f1cc12c2a341919ada094be82aa8d",
+      "digestVerified": true,
+      "codeSha": "0f336ade40a71f866a7ed14bfd5869875b625ba9"
+    },
+    {
+      "runId": "34084620827",
+      "id": 10004791088,
+      "name": "five-market-trial-uae",
+      "digest": "sha256:4b4e9f6069cd44bef292d5efb0ffea49d9f0126df0cb9b45ac43d210b76b086a",
+      "digestVerified": true,
+      "codeSha": "0f336ade40a71f866a7ed14bfd5869875b625ba9"
+    }
+  ],
+  "normalization": "Only JSON whitespace changed; values and array order preserved. No photographs fetched.",
+  "files": [
+    {
+      "path": "34083757152/china/autohome_new_china_open/offers-0001.json",
+      "originalSha256": "c6323485c7231a402d8a19d85a1e6855d5cfa0f2543570ef409857e8c1c24cd3",
+      "storedSha256": "7dabe65571c9dd9c0a484da2776ff021392b9201030a82f2f86b8eab04a5694e",
+      "originalBytes": 1217733,
+      "storedBytes": 846230
+    },
+    {
+      "path": "34083757152/china/autohome_new_china_open/report.json",
+      "originalSha256": "f3c526624aff780e4b960a7c8fe97c2c28f422b4aebf5928cf92e01deb983a68",
+      "storedSha256": "ebe1d47a9cdc381e034a6eab4bc263f99723aebd8df41cb08718fb7bfcd8d09e",
+      "originalBytes": 1397562,
+      "storedBytes": 901758
+    },
+    {
+      "path": "34083757152/china/autohome_used_china_open/offers-0001.json",
+      "originalSha256": "d7d67c633f4a3c99cc9298929b099a6929b18f86f6c8adb30c9e2342511aeda9",
+      "storedSha256": "1da14c7738c839033d4b0d870ec376ce16a083c222b4e0a8b8c8052ae7fab039",
+      "originalBytes": 42601,
+      "storedBytes": 29525
+    },
+    {
+      "path": "34083757152/china/autohome_used_china_open/report.json",
+      "originalSha256": "b685011a44d1a991b8b32ccee59859b062097ac7012a211ab222d6f92c1a45e0",
+      "storedSha256": "fc3ba58924c6bc2ddf81e694e5ee229d87b5617ff7bf64eeb8abac9435dd366c",
+      "originalBytes": 50402,
+      "storedBytes": 29320
+    },
+    {
+      "path": "34083757152/china/dongchedi_china_open/report.json",
+      "originalSha256": "78b2372d74a99a3f9c929cd43ffd7334ce3bd2ce9e7b48de522a7943bce72d86",
+      "storedSha256": "df720e8d959e0472c0208f2ff540727e5f1078d10045298495931c58b5ae140f",
+      "originalBytes": 4049,
+      "storedBytes": 3194
+    },
+    {
+      "path": "34083757152/china/guazi_china_open/report.json",
+      "originalSha256": "fdd22fd83357491c561e2cd7378961c555a19eb33de58d807c443e88e64a2814",
+      "storedSha256": "ba7390e185871021fb9aa9b01610fd231080439cbc8d0e61aa685b773b15ab12",
+      "originalBytes": 4598,
+      "storedBytes": 3537
+    },
+    {
+      "path": "34083757152/china/manifest.json",
+      "originalSha256": "05ef95ba6a04584246949a42f594a12ec7efb26d25cd361e75eade16fc12e4b4",
+      "storedSha256": "2f3b9c39eef38f1d3883028f6e98db29e3940d894741bf337705b9d93824bf5b",
+      "originalBytes": 813,
+      "storedBytes": 617
+    },
+    {
+      "path": "34083757152/europe/autoscout_europe_open/offers-0001.json",
+      "originalSha256": "468b2d8dba9800c5c8f939429b2d50598a6aefaa72e20a653a29b0fd7c5cbbcd",
+      "storedSha256": "07c578b932c913297d64490b482cab9ce2fe9fe68f93d4c75628d5832230f853",
+      "originalBytes": 1611919,
+      "storedBytes": 1200201
+    },
+    {
+      "path": "34083757152/europe/autoscout_europe_open/report.json",
+      "originalSha256": "3e69587bd20eacb5ad218241b4c8edbd8cac9751964d3ff13eceb826be4db7d6",
+      "storedSha256": "33f4d32d2f47bdaa81f3f31a362983f456e408fea5d189e8979b490cc8f38bc5",
+      "originalBytes": 1200199,
+      "storedBytes": 804952
+    },
+    {
+      "path": "34083757152/europe/manifest.json",
+      "originalSha256": "a6329cdea12cd844f85126467b1a45b39b12b56860093218b66bbbe59e0ff402",
+      "storedSha256": "37793be76cbdfa03c59ef3f29f45575be3127c5d1d77e920993c8c8f415bd8aa",
+      "originalBytes": 480,
+      "storedBytes": 368
+    },
+    {
+      "path": "34083757152/europe/mobile_de_open/offers-0001.json",
+      "originalSha256": "b2b94a027241d3f33e15837169f1929522a646dc160066643409de570b1c8204",
+      "storedSha256": "9bd73b313e27051fecabb28c6e88768b1355784798f03777a84c910c7055265e",
+      "originalBytes": 1913471,
+      "storedBytes": 1410559
+    },
+    {
+      "path": "34083757152/europe/mobile_de_open/report.json",
+      "originalSha256": "b84796695666b6551d2539dd1ae664d977f92e4534c5ea1ac2cd561a630e2713",
+      "storedSha256": "4d0db52eb7fceb9076ad1d477925d9fca3e3d3c18c1e613d204dfe628981800d",
+      "originalBytes": 1379106,
+      "storedBytes": 869516
+    },
+    {
+      "path": "34083757152/georgia/autopapa_georgia_open/report.json",
+      "originalSha256": "cc7b4a53dc5945698708b0d921bba2675775aec7de53cb829975f9a5f3400316",
+      "storedSha256": "f42fc88e0902589c7ef8ed16e016fecd9a1995373a787784d529acb245290bdf",
+      "originalBytes": 3948,
+      "storedBytes": 3093
+    },
+    {
+      "path": "34083757152/georgia/manifest.json",
+      "originalSha256": "7027f46f594a1ae47a1db53d549509bfa746a2ad1da7fa719052c5d2473b52d2",
+      "storedSha256": "04c64080b39e57872d13db3af227547480e3c5cbf14b8f0801627514daacd3ea",
+      "originalBytes": 491,
+      "storedBytes": 379
+    },
+    {
+      "path": "34083757152/georgia/myauto_georgia_list/offers-0001.json",
+      "originalSha256": "261d8bc46ca1e1ffb4c31b6b5d2c495fd1f534287f467f0d18c5cc332af2297f",
+      "storedSha256": "18a99200c4204091d708d1c67a24df56420b9d167508f25be0355b81d0c5534e",
+      "originalBytes": 537094,
+      "storedBytes": 398857
+    },
+    {
+      "path": "34083757152/georgia/myauto_georgia_list/report.json",
+      "originalSha256": "157386029f3eb39db1a0756a46cac2dd4380e19dcf428806dcba94263987a72a",
+      "storedSha256": "1c92a08cc59fa2b58b8dc52fae5874e76f068e655ca550321cf2752f9650f66e",
+      "originalBytes": 226884,
+      "storedBytes": 136759
+    },
+    {
+      "path": "34083757152/korea/encar_direct/offers-0001.json",
+      "originalSha256": "ce3d7331eb0f68afc8b6059a80c0db7e6027a2ec35a38d0434966f816b65b548",
+      "storedSha256": "fbf5a58514fceac4ca88ff2f61b0613175916e70bc50741dc8b02d990b5f2df1",
+      "originalBytes": 709809,
+      "storedBytes": 471077
+    },
+    {
+      "path": "34083757152/korea/encar_direct/report.json",
+      "originalSha256": "4a387fc5f2de70db02f7902136a57d2bad81772b8b94c82593281a48ed1f6255",
+      "storedSha256": "8ed701cf3efcbb2340b9cee028d6545d4851b761d37d8c3747b177003fe267dd",
+      "originalBytes": 599348,
+      "storedBytes": 381081
+    },
+    {
+      "path": "34083757152/korea/kcar_korea_open/offers-0001.json",
+      "originalSha256": "2b9741dd10ec6c7f57a3af1253b318c47ac2f48be77092e5133ac775ff8e02e7",
+      "storedSha256": "a55e383284b04d2986233887ae0383dedb467ddada064069bb103959948f22eb",
+      "originalBytes": 1947192,
+      "storedBytes": 1401142
+    },
+    {
+      "path": "34083757152/korea/kcar_korea_open/report.json",
+      "originalSha256": "bcca004784a28e930446435108817fe36970965595d8a41a037a763dab2ced0a",
+      "storedSha256": "3ff684cdecf73f44d527cf985311034fe43b3e6ef63c0cc9df01c65547c18365",
+      "originalBytes": 1300951,
+      "storedBytes": 823247
+    },
+    {
+      "path": "34083757152/korea/manifest.json",
+      "originalSha256": "75d8d50ad4786079263457b21789ac2bc6622bd75bf46fdf9f5edfe355182c6c",
+      "storedSha256": "bbdc6f328c8d8a5fe7b2c812a93dfd73c38943d7044f822dd31e4e3112cc06dd",
+      "originalBytes": 463,
+      "storedBytes": 351
+    },
+    {
+      "path": "34083757152/uae/dubicars_uae_exact/offers-0001.json",
+      "originalSha256": "fb958e7653ab77228021d57e71228d3cd0e8ae2221d2b03f523a4031619f225a",
+      "storedSha256": "fd5da38baa9d7a34df01456a3b78563ec1ebd7ff6abb12f93622fd116be86216",
+      "originalBytes": 1187910,
+      "storedBytes": 841519
+    },
+    {
+      "path": "34083757152/uae/dubicars_uae_exact/report.json",
+      "originalSha256": "269b32b02179a7a10497e9d6ed5e9adf5f644e2895f5d0c2648ae90bc5295c3a",
+      "storedSha256": "7643484e2780864e98ae4aea3509a949416362550ce31bec05f22a3168fdfe9d",
+      "originalBytes": 1058916,
+      "storedBytes": 752106
+    },
+    {
+      "path": "34083757152/uae/dubizzle_uae_open/report.json",
+      "originalSha256": "de6227eae00cc6cf260cbd730b8e02ac538d0871db3c7fbd54d2b6cc299707ca",
+      "storedSha256": "480b9184b2cbf2df7d4a8970b1ed29e4542fd9c829280e21669a8fd9ce48c5c4",
+      "originalBytes": 3933,
+      "storedBytes": 3078
+    },
+    {
+      "path": "34083757152/uae/manifest.json",
+      "originalSha256": "7959c392fdb7927b295edca5eac5688b6129417c5d2036a6a6e4c9d958d85cee",
+      "storedSha256": "381eaaf48374143c37c66e0c5e8cfc10d22ef66c687f1ffe21d76ac6944cf820",
+      "originalBytes": 477,
+      "storedBytes": 365
+    },
+    {
+      "path": "34084620827/georgia/autopapa_georgia_open/offers-0001.json",
+      "originalSha256": "27555d96aa9ad770b40ca528b0bbe7f10cb52f94e400657f8ff4ee7d7e3163c1",
+      "storedSha256": "99f6ed76d2b820fb2d479de26fed5e38b6d52019ec2c7063241c0d19cd487dda",
+      "originalBytes": 736275,
+      "storedBytes": 541212
+    },
+    {
+      "path": "34084620827/georgia/autopapa_georgia_open/report.json",
+      "originalSha256": "6cad2a03117c2bf4fdc8e76f05a93ca4cafeb1f72c6588b0877fedb52aed1911",
+      "storedSha256": "73f507c0c80e99644a202aba1099add7cac39e4bc6d428ce36d1a47d1d356fe5",
+      "originalBytes": 253321,
+      "storedBytes": 157936
+    },
+    {
+      "path": "34084620827/georgia/manifest.json",
+      "originalSha256": "17908e32f66e0ba9e17c7024805c0c073783f1aacd59856c80e8fe39652b677d",
+      "storedSha256": "6090070edbaa17a37290c3c89f19fa1003cfcc2a0a8ea0c6aca9d2e94f10c4a3",
+      "originalBytes": 334,
+      "storedBytes": 264
+    },
+    {
+      "path": "34084620827/uae/dubizzle_uae_open/offers-0001.json",
+      "originalSha256": "39e7a1cb4ac8fe2c1c14ca3a79a0dbbf35f2e98029935573775ad059fb265bd5",
+      "storedSha256": "7b699d767f7bb85fbb1f54d6a219f7b617b34ecadb3d60e78e0478d0a592a3b8",
+      "originalBytes": 827082,
+      "storedBytes": 580860
+    },
+    {
+      "path": "34084620827/uae/dubizzle_uae_open/report.json",
+      "originalSha256": "010388e95726b9717482c2cfe14565f45bdb7de9f83a65e6d18cfcd1f4a37f14",
+      "storedSha256": "7d022505705bb0a116522b73fb0909b4f3f5573e7c29cc5d248585fa7dc367e7",
+      "originalBytes": 811279,
+      "storedBytes": 538075
+    },
+    {
+      "path": "34084620827/uae/manifest.json",
+      "originalSha256": "04d6957c14d3b7d3d6b53fe2f7996d3fd91623a56c4bcb66676498b97cef626a",
+      "storedSha256": "549b53e70d33133bf82704cede15e35b6b0b8bb86a280e8cc77559cea0beac4b",
+      "originalBytes": 322,
+      "storedBytes": 252
+    }
+  ]
+}
