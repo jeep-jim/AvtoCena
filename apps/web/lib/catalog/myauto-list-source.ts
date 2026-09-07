@@ -408,6 +408,9 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
     const exactGallery = snapshot?.galleryUrls || [];
     const urls = exactGallery.length ? exactGallery : listingUrls;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    if (process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only") {
+      return urls.slice(0, limit).map(url => ({ id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" }));
+    }
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit)) {
       const image = await cacheImageFromUrl(url, "georgia", { headers: { ...HEADERS, referer: offer.operational.sourceUrl || "https://www.myauto.ge/en/main" } }).catch(() => null);

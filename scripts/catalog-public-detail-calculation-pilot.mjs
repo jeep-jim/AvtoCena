@@ -1,13 +1,15 @@
 import { publicResponseChallenge } from "./lib/public-response-challenge.mjs";
 import fs from 'node:fs/promises';
+import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
 
 // Bounded public listing and detail diagnostic; no image downloads or publication.
 // KCar's existing public search POST is allowed only on its exact search route.
 process.env.JSON_STORAGE_DRIVER = 'local';
 process.env.CATALOG_IMAGE_STORAGE_MODE = 'source_urls_only';
 const fetchOriginal = globalThis.fetch;
-const sampleLimit = Math.max(1, Math.min(50, Number(process.env.PILOT_SAMPLE_LIMIT || 3)));
-const requestLimit = Math.max(1, Math.min(100, Number(process.env.PILOT_REQUEST_LIMIT || 8)));
+const sampleLimit = boundedPilotInteger(process.env.PILOT_SAMPLE_LIMIT, 3, 50);
+const pageLimit = boundedPilotInteger(process.env.PILOT_PAGE_LIMIT, 1, 5);
+const requestLimit = boundedPilotInteger(process.env.PILOT_REQUEST_LIMIT, 8, 100);
 const timeoutMs = Math.max(1000, Math.min(45000, Number(process.env.PILOT_TIMEOUT_MS || 15000)));
 process.env.CATALOG_SOURCE_RETRY_ATTEMPTS = '1';
 process.env.CATALOG_ENCAR_DIRECT_LIST_RETRIES = '1';
@@ -40,11 +42,11 @@ const sources = [
   process.env.PILOT_KOREA_SOURCE === 'encar' ? ['korea', 'encar-complete-source', 'encarCompleteSource', ['encar.com']] : ['korea', 'kcar-exact-source', 'kcarKoreaExactSource', ['kcar.com']],
   ['europe', 'mobile-de-exact-source', 'mobileDeExactSource', ['mobile.de']],
   ['china', 'che168-global-exact-source', 'che168GlobalExactSource', ['che168.com']],
-  process.env.PILOT_UAE_SOURCE === 'dubicars' ? ['uae', 'dubicars-current-source', 'dubicarsUaeCurrentSource', ['dubicars.com']] : ['uae', 'dubizzle-exact-source', 'dubizzleUaeExactSource', ['dubizzle.com']],
-  ['georgia', 'autopapa-georgia-source', 'autoPapaGeorgiaSource', ['autopapa.ge']],
+  process.env.PILOT_UAE_SOURCE === 'carswitch' ? ['uae', 'carswitch-exact-source', 'carswitchUaeExactSource', ['carswitch.com']] : process.env.PILOT_UAE_SOURCE === 'dubicars' ? ['uae', 'dubicars-current-source', 'dubicarsUaeCurrentSource', ['dubicars.com']] : ['uae', 'dubizzle-exact-source', 'dubizzleUaeExactSource', ['dubizzle.com']],
+  process.env.PILOT_GEORGIA_SOURCE === 'myauto' ? ['georgia', 'myauto-list-source', 'myAutoListSource', ['myauto.ge']] : ['georgia', 'autopapa-georgia-source', 'autoPapaGeorgiaSource', ['autopapa.ge']],
 ];
-const report = { version: 2, completed: false, checkedAt: new Date().toISOString(), productionWrites: false,
-  japanRequests: 0, detailsRequested: true, pricesCalculated: true, maxRequestsPerSource: requestLimit, sampleLimit, markets: [],
+const report = { version: 3, completed: false, checkedAt: new Date().toISOString(), productionWrites: false,
+  japanRequests: 0, detailsRequested: true, pricesCalculated: true, maxRequestsPerSource: requestLimit, sampleLimit, pageLimit, markets: [],
   limitation: 'Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.' };
 const outputPath = process.env.PILOT_REPORT || 'data/catalog/research/public-detail-calculation-pilot-v1-20260906.json';
 async function checkpoint(snapshot = report) {
@@ -63,43 +65,71 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
   try {
     const source = (await import(`../apps/web/lib/catalog/${module}.ts`))[name];
     active.sourceId = source.sourceId;
-    const result = await source.fetchPage('1');
-    active.listingRows = result.items?.length || 0;
-    active.sourceHealth = result.health || null;
-    const offers = (result.items || []).slice(0, sampleLimit).map(row => source.normalizeOffer(row)).filter(Boolean);
-    active.normalizedRows = offers.length;
+    const offers = [];
+    const seen = new Set();
+    const seenCursors = new Set();
+    let cursor = '1';
+    active.listingRows = 0;
+    active.normalizedRows = 0;
+    active.normalizationRejected = 0;
+    active.duplicates = 0;
     active.details = [];
-    for (const offer of offers) {
-      const before = { year: offer.year, fuel: offer.fuel, engineCc: offer.engineCc, powerHp: offer.powerHp, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency };
-      const item = { sourceOfferId: offer.sourceOfferId, yearAllowed: isCatalogYearAllowed(offer.year, market), before };
-      const detailRequestStart = active.requests.length;
-      try {
-        offer.images = await source.fetchImages(offer);
-        item.images = offer.images.length;
-        item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
-        const priced = await calculateOfferWithVerifiedSpecifications(offer);
-        item.totalRub = priced.totalRub;
-        item.calculationStatus = priced.calculationStatus;
-        item.breakdown = priced.calculationSnapshot?.breakdown;
-        item.currencyRate = priced.calculationSnapshot?.currencyRate;
-        item.eurRate = priced.calculationSnapshot?.eurRate;
-      } catch (error) { item.error = String(error?.message || 'error').replace(/https?:\/\/\S+/g, '[url]').slice(0, 250); }
-      item.detailNetworkRequests = active.requests.length - detailRequestStart;
-      item.after = Object.fromEntries(Object.keys(before).map(key => [key, offer[key]]));
-      item.changedFields = Object.keys(before).filter(key => before[key] !== offer[key]);
-      active.details.push(item);
-      await checkpoint({ ...report, currencyRequests, markets: [...report.markets, { ...active, hosts: undefined }] });
-      if (active.stopped) break;
+    active.pages = [];
+    for (let page = 0; page < pageLimit; page += 1) {
+      if (active.stopped || active.requests.length >= requestLimit || offers.length >= sampleLimit) break;
+      if (seenCursors.has(cursor)) { active.stopReason = 'repeated_cursor'; break; }
+      seenCursors.add(cursor);
+      const result = await source.fetchPage(cursor);
+      const rows = result.items || [];
+      active.listingRows += rows.length;
+      active.sourceHealth = result.health || null;
+      active.pages.push({ cursor, returnedRows: rows.length, diagnostics: result.diagnostics || null, health: result.health || null });
+      for (const row of rows) {
+        const offer = source.normalizeOffer(row);
+        if (!offer) { active.normalizationRejected += 1; continue; }
+        const identity = `${offer.sourceId}:${offer.sourceOfferId}`;
+        if (seen.has(identity)) { active.duplicates += 1; continue; }
+        seen.add(identity);
+        active.normalizedRows += 1;
+        if (offers.length >= sampleLimit || active.stopped || active.requests.length >= requestLimit) continue;
+        offers.push(offer);
+        const before = { year: offer.year, fuel: offer.fuel, engineCc: offer.engineCc, powerHp: offer.powerHp, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency };
+        const item = { sourceOfferId: offer.sourceOfferId, yearAllowed: isCatalogYearAllowed(offer.year, market), before };
+        const detailRequestStart = active.requests.length;
+        try {
+          offer.images = await source.fetchImages(offer);
+          item.images = offer.images.length;
+          item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
+          const priced = await calculateOfferWithVerifiedSpecifications(offer);
+          item.totalRub = priced.totalRub;
+          item.calculationStatus = priced.calculationStatus;
+          item.breakdown = priced.calculationSnapshot?.breakdown;
+          item.currencyRate = priced.calculationSnapshot?.currencyRate;
+          item.eurRate = priced.calculationSnapshot?.eurRate;
+        } catch (error) { item.error = String(error?.message || 'error').replace(/https?:\/\/\S+/g, '[url]').slice(0, 250); }
+        item.detailNetworkRequests = active.requests.length - detailRequestStart;
+        item.after = Object.fromEntries(Object.keys(before).map(key => [key, offer[key]]));
+        item.changedFields = Object.keys(before).filter(key => before[key] !== offer[key]);
+        // Details may correct the listing year; acceptance uses the final evidence.
+        item.yearAllowed = isCatalogYearAllowed(offer.year, market);
+        active.details.push(item);
+        active.summary = summarizePilotMarket(active);
+        await checkpoint({ ...report, currencyRequests, markets: [...report.markets, { ...active, hosts: undefined }] });
+      }
+      if (result.finished || !result.nextCursor) { active.stopReason = 'source_finished'; break; }
+      cursor = result.nextCursor;
     }
+    active.summary = summarizePilotMarket(active);
     active.samples = offers.map(offer => ({ sourceOfferId: offer.sourceOfferId, make: offer.make, model: offer.model,
       year: offer.year, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: offer.fuel,
       fields: Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)])),
     }));
-    active.status = active.listingRows ? 'listing_received' : 'no_listing_rows';
+    active.status = active.stopped ? 'stopped_by_source_response' : active.listingRows ? 'listing_received' : 'no_listing_rows';
   } catch (error) {
     active.status = 'blocked_or_failed';
     active.error = String(error?.message || 'unknown_error').replace(/https?:\/\/\S+/g, '[url]').slice(0, 300);
   }
+  active.summary = summarizePilotMarket(active);
   delete active.hosts;
   report.markets.push(active);
   await checkpoint();

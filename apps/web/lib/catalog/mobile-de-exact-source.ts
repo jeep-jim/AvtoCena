@@ -454,7 +454,8 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     const api = `${SRP_API}?url=${encodeURIComponent(classic)}`;
     const { response, json } = await getJson(api);
     const result = json?.searchResults || {};
-    const items = (Array.isArray(result?.items) ? result.items : [])
+    const listingRows = Array.isArray(result?.items) ? result.items : [];
+    const items = listingRows
       .map(rowFromItem)
       .filter((row: MobileDeExactRow | null): row is MobileDeExactRow =>
         Boolean(row),
@@ -472,6 +473,7 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
       nextCursor: nextState ? JSON.stringify(nextState) : null,
       finished: !nextState,
       count: Number(result?.numResultsTotal || items.length),
+      diagnostics: { listingRows: listingRows.length, rejectedRows: listingRows.length - items.length },
       health: {
         ok: response.ok && items.length > 0,
         message: `mobile.de BFF ${shard.label} page=${state.page}/${shardPageLimit} parsed=${items.length} total=${Number(result?.numResultsTotal || 0)}`,

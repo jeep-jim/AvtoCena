@@ -27,6 +27,10 @@
     {
       "path": "data/catalog/research/non-japan-complete-pass-v1-20260906.json",
       "sha256": "d9cdb3be15d14f4dd2d696b52c6fb82e1586ec1cb20a82fcd0c849eb12882716"
+    },
+    {
+      "path": "data/catalog/research/configurable-costs-review-v1-20260906.json",
+      "sha256": "c9fd1558c9ff4bcf2a299c38d6b213bdb9dfe9773ce359c574e62efc66fe0b4e"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -57,6 +61,40 @@
       "conclusion": "success",
       "report": "data/catalog/research/complete-pass-ci-v1-20260906.json"
     }
+  },
+  "configurationReview": {
+    "version": 1,
+    "checkedAt": "2026-09-06T23:56:22.317805+00:00",
+    "productionWrites": false,
+    "classification": "expected_active_crm_configuration",
+    "publicationBlocker": false,
+    "ownerEvidence": "CRM screenshot and owner clarification in this conversation: commercial costs are configurable.",
+    "china": {
+      "activeLogisticsRub": 150000,
+      "repositoryFallbackLogisticsRub": 250000,
+      "expectedDeltaRub": -100000,
+      "replayedCalculations": 13,
+      "allDeltasExpected": true,
+      "action": "Preserve the active owner setting; do not overwrite with repository fallback."
+    },
+    "otherMarkets": "Missing stored market records may resolve to active system average profiles; they do not establish that a market is disabled.",
+    "sources": [
+      {
+        "path": "data/catalog/research/production-settings-replay-v1-20260906.json",
+        "sha256": "be495c57fd2a3edb8f1c6f9e34627029b2947e9ff5d77e98fce2fcb9b277fa4c"
+      },
+      {
+        "path": "apps/web/lib/effective-market-settings.ts"
+      },
+      {
+        "path": "apps/web/lib/catalog/estimated-market-config.ts"
+      },
+      {
+        "path": "tests/catalog-configurable-market-costs.test.ts"
+      }
+    ],
+    "remaining": "Verify new inventory with current effective CRM settings. Vehicle evidence gaps and publication readiness are separate from commercial cost overrides.",
+    "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides."
   },
   "limitation": "Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.",
   "markets": [
@@ -846,7 +884,7 @@
         "remaining": [
           "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
-          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -930,7 +968,7 @@
         "remaining": [
           "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
-          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1710,7 +1748,7 @@
         "remaining": [
           "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
-          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1806,7 +1844,7 @@
         "remaining": [
           "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
-          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1886,7 +1924,7 @@
         "remaining": [
           "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
-          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
+          "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
       },
       "catalogPublication": {

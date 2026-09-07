@@ -359,6 +359,7 @@ class KCarExactSource implements CatalogSourceAdapter {
     const metas = (Array.isArray(root?.rows) ? root.rows : []) as KCarListRow[];
     const total = Number(root?.totalCnt || 0);
     const rows: Row[] = [];
+    let failedDetailRows = 0;
     const batchSize = Math.max(1, Math.min(4, Number(process.env.CATALOG_SOURCE_DETAIL_BATCH_SIZE || 2)));
     const batchDelay = Math.max(0, Math.min(5_000, Number(process.env.CATALOG_SOURCE_BATCH_DELAY_MS || 400)));
 
@@ -367,6 +368,7 @@ class KCarExactSource implements CatalogSourceAdapter {
         const carCd = clean(meta.carCd);
         if (!carCd) return null;
         const data = await fetchExactDetailData(carCd).catch(() => null);
+        if (!data) failedDetailRows += 1;
         return data ? parseExactDetail(meta, data) : null;
       }));
       rows.push(...batch.filter(Boolean) as Row[]);
@@ -379,6 +381,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       nextCursor: finished ? null : String(page + 1),
       finished,
       count: rows.length,
+      diagnostics: { listingRows: metas.length, rejectedRows: metas.length - rows.length, failedDetailRows },
       health: {
         ok: metas.length > 0,
         message: `K Car exact page ${page}: ${rows.length}/${metas.length}; total=${total || "unknown"}`,

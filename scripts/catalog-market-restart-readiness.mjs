@@ -19,12 +19,14 @@ const specPilot = await read('data/catalog/research/public-listing-spec-pilot-v1
 const probes = new Map([...pilot.markets, ...specPilot.markets].map(row => [row.market, row]));
 const completePass = await read('data/catalog/research/non-japan-complete-pass-v1-20260906.json');
 const detailProbes = new Map(completePass.markets.map(row => [row.market, row]));
+const configurationReview = await read('data/catalog/research/configurable-costs-review-v1-20260906.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
   codeValidation: completePass.validation,
+  configurationReview,
   limitation: 'Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.',
   markets: markets.map(market => {
     const saved = audit.recovery[market];
@@ -42,7 +44,7 @@ const report = {
       controlledPilot: { status: detailProbes.has(market) ? 'measured_without_publication' : 'not_ready', remaining: [
         'Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.',
         'Keep the measured adapter and source identifiers fixed for the next isolated collection.',
-        'Close the measured missing fields and business-settings differences before approving publication; preserve the production pause.',
+        'Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause.',
       ] },
       catalogPublication: { status: 'not_ready', remaining: [
         'Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.',

@@ -267,6 +267,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       nextCursor: finished ? null : String(page + 1),
       finished,
       count: items.length,
+      diagnostics: { listingRows: Array.isArray(result.carlist) ? result.carlist.length : 0, rejectedRows: (Array.isArray(result.carlist) ? result.carlist.length : 0) - items.length },
       health: {
         ok: items.length > 0,
         message: `Che168 Global API page=${page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,

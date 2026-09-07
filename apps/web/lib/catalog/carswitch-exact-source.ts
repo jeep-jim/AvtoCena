@@ -1,3 +1,4 @@
+import { canonicalSourceFuel } from "./powertrain-safety";
 import { isCatalogYearAllowed } from "./offer-quality";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
@@ -62,6 +63,8 @@ export type CarSwitchExactRow = {
   currency: "AED";
   images: string[];
   vin?: string;
+  sourceFuel?: string;
+  sourceEngineDisplacement?: string;
 };
 
 function clean(value: unknown) {
@@ -192,6 +195,9 @@ function rowFromEntity(entity: Record<string, unknown>, identity: NonNullable<Re
     currency: "AED",
     images,
     vin: clean(entity.vehicleIdentificationNumber) || undefined,
+    sourceFuel: clean((entity.vehicleEngine as any)?.fuelType) || undefined,
+    sourceEngineDisplacement: typeof (entity.vehicleEngine as any)?.engineDisplacement === "string"
+      ? clean((entity.vehicleEngine as any).engineDisplacement) : undefined,
   };
 }
 
@@ -226,6 +232,7 @@ export function parseCarSwitchExactListing(markup: string): CarSwitchExactRow[] 
 export function parseCarSwitchExactDetail(markup: string, expectedSourceUrl: string): CarSwitchExactRow | null {
   const expected = exactIdentity(expectedSourceUrl);
   if (!expected) return null;
+  const candidates: CarSwitchExactRow[] = [];
   for (const script of jsonScripts(markup)) {
     const decoded = decodeJsonScript(script);
     if (!decoded) continue;
@@ -233,10 +240,13 @@ export function parseCarSwitchExactDetail(markup: string, expectedSourceUrl: str
       const identity = exactIdentity(clean(entity.url));
       if (!identity || identity.id !== expected.id || identity.sourceUrl !== expected.sourceUrl) continue;
       const row = rowFromEntity(entity, expected, 2);
-      if (row) return row;
+      if (row) candidates.push(row);
     }
   }
-  return null;
+  // Repeated identical entities are harmless; contradictory entities for the
+  // same detail URL must not make the first script silently authoritative.
+  const unique = new Map(candidates.map(row => [JSON.stringify(row), row]));
+  return unique.size === 1 ? [...unique.values()][0] : null;
 }
 
 async function request(url: string, referer = LIST_URL) {
@@ -325,6 +335,15 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     offer.mileageKm = detail.mileageKm || offer.mileageKm;
     offer.trim = detail.trim || offer.trim;
     const op = offer.operational as any;
+    const fuel = canonicalSourceFuel(detail.sourceFuel);
+    offer.fuel = fuel || undefined;
+    offer.powertrainKind = fuel === "electric" ? "electric" : ["hybrid", "phev", "hev", "mhev", "erev", "reev"].includes(fuel || "") ? "other_hybrid" : fuel ? "combustion" : "unknown";
+    op.semanticEvidence = {
+      ...(op.semanticEvidence || {}),
+      fuel: { source: "carswitch_exact_detail_vehicleEngine_fuelType", rawValues: detail.sourceFuel ? [detail.sourceFuel] : [], status: fuel ? "exact" : detail.sourceFuel ? "ambiguous" : "missing", value: fuel || undefined },
+      // Current source emits strings such as "1.5", with no precise cc unit.
+      engineCc: { source: "carswitch_exact_detail_vehicleEngine_engineDisplacement", rawValues: detail.sourceEngineDisplacement ? [detail.sourceEngineDisplacement] : [], status: detail.sourceEngineDisplacement ? "ambiguous" : "missing" },
+    };
     op.exactDetail = true;
     op.exactFields = true;
     op.exactPhotos = true;
