@@ -173,7 +173,7 @@ function exactMobileDeBody(value: unknown) {
   if (/^(?:geländewagen|offroad)$/.test(normalized)) return "offroad";
   if (/^(?:pickup|pick-up)$/.test(normalized)) return "pickup";
   if (/^(?:minivan|mpv)$/.test(normalized)) return "minivan";
-  if (normalized === "van") return "van";
+  if (normalized === "van" || normalized === "van/minibus") return "van";
   if (normalized === "hatchback") return "hatchback";
   if (/^(?:sedan|saloon)$/.test(normalized)) return "sedan";
   // mobile.de's German "Limousine" bucket is not a reliable sedan shape.

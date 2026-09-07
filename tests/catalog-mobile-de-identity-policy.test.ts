@@ -223,6 +223,7 @@ test("Mobile.de VIP category plus sale condition agrees with the SRP OffRoad buc
   assert.equal(evidence.value, "offroad");
   assert.deepEqual(evidence.rawValues, ["OffRoad", "SUV/Geländewagen/Pickup, Jahreswagen"]);
   assert.equal(mobileDeBodyEvidence(["Cabrio", "Cabrio, Gebrauchtfahrzeug"]).value, "convertible");
+  assert.equal(mobileDeBodyEvidence(["Van", "Van/Minibus, Tageszulassung"]).value, "van");
   assert.equal(mobileDeBodyEvidence(["OffRoad", "Coupé, Neufahrzeug"]).status, "conflict");
   assert.equal(mobileDeBodyEvidence(["Limousine, Gebrauchtfahrzeug"]).status, "ambiguous");
   assert.equal(mobileDeBodyEvidence(["SUV/Geländewagen/Pickup, unknown"]).status, "ambiguous");
