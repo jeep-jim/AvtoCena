@@ -35,6 +35,10 @@
     {
       "path": "data/catalog/research/non-japan-multipage-outcome-v1-20260907.json",
       "sha256": "a3c70fce175c1e5c2bc0d9721573e20800b1bf7ded0976fa70b250abdc1803ce"
+    },
+    {
+      "path": "data/catalog/research/non-japan-public-display-outcome-v1-20260907.json",
+      "sha256": "71bc0b15e05de42f28e2dbea0e9a99b2d6da1891fcac8d57e8ddb52a40bb068a"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -52,6 +56,214 @@
     "fail": 0
   },
   "codeValidation": {
+    "runId": 34071475448,
+    "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/34071475448",
+    "jobId": 101589512672,
+    "runtimeCommit": "9d6a74aa6c1e6c030eb4dd4331fdc7ffdd81b1a3",
+    "conclusion": "success",
+    "tests": {
+      "total": 1077,
+      "passed": 1077,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete regression suite",
+        "conclusion": "success"
+      },
+      {
+        "name": "Customs tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog modification recovery contract tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog calculation integrity tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "CRM market defaults and live pricing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "CRM market settings save tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Full six-market pricing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Price trend direction tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog UI state tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Yandex Metrika installation tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog image quality tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Public image proxy tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog source-scale tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog production hardening tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog market preflight parity tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog model-year inventory quota tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Japan auction statistics tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Japan Prestige partition rotation tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog live sources v23 tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Guazi China RU listing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "MyAuto Georgia listing tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Georgia canonical recovery tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog probe v23 tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Catalog publication gate tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Open source model normalization tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Power normalization and public truth tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Public 30-minute power display tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Estimated EV publication tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Vehicle Knowledge CORE and model search tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Live offer display enrichment tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Current read-model and AI product feed tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Drom generation and horsepower parser tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Single active catalog pipeline tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Validate catalog automation scripts",
+        "conclusion": "success"
+      },
+      {
+        "name": "Web typecheck diagnostics",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload web typecheck log",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on web typecheck errors",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Engine typecheck",
+        "conclusion": "success"
+      },
+      {
+        "name": "Production build diagnostics",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload production build log",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on production build errors",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "previousMultipageValidation": {
     "checkedAt": "2026-09-07T00:17:55.228Z",
     "runId": 34069103033,
     "jobId": 101583045088,
@@ -924,7 +1136,76 @@
         "hostedWorkflowRun": 34068494914,
         "allLocalBreakdownsMatch": true
       },
-      "latestRemaining": "Repeat final acceptance in the intended deployment environment with active CRM config, inventory freshness and list/detail display checks before publication.",
+      "latestPublicDisplayProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "workflowRun": 34071473326,
+        "jobId": 101589507007,
+        "summary": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 7,
+          "adapterUnexaminedRows": 0,
+          "returnedRows": 41,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 41,
+          "unexaminedRows": 1,
+          "examined": 40,
+          "calculated": 40,
+          "allowedYearExamined": 40,
+          "allowedYearCalculated": 40,
+          "passingAllFilters": 37,
+          "failures": {},
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "publicPassing": 37,
+        "publicPassingIds": [
+          "451744731",
+          "459064079",
+          "458664790",
+          "457257304",
+          "43069464351904",
+          "446564888",
+          "455124671",
+          "460632484",
+          "459258316",
+          "41955792087008",
+          "443578799",
+          "38449215943136",
+          "462266636",
+          "43606400937312",
+          "43791727900896",
+          "42371257278336",
+          "451170199",
+          "42198612604288",
+          "43580237930592",
+          "43628747367488",
+          "42198608680064",
+          "461674923",
+          "457574973",
+          "449466779",
+          "460041678",
+          "461598079",
+          "41136820982720",
+          "460527541",
+          "43297441941536",
+          "42062249805248",
+          "456416112",
+          "461321871",
+          "460815881",
+          "39506203398944",
+          "40965480858848",
+          "449359467",
+          "40417165108000"
+        ],
+        "displayInconsistencies": []
+      },
+      "latestRemaining": [
+        "Deploy the tested branch through an explicit deployment/publication decision, then verify a bounded production-environment canary with a rollback generation.",
+        "The final sample has three galleries with fewer than five URLs; validate image bodies and full fresh inventory before mass publication.",
+        "This proves mobile.de only; AutoScout24 and the rest of the required source set are not attested by this pilot."
+      ],
       "savedInput": 5259,
       "savedAutomatic": 4808,
       "savedRecoveryShare": 0.914242251378589,
@@ -954,7 +1235,7 @@
       "controlledPilot": {
         "status": "measured_without_publication",
         "remaining": [
-          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
           "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
@@ -1055,7 +1336,90 @@
         "hostedWorkflowRun": 34068494914,
         "allLocalBreakdownsMatch": true
       },
-      "latestRemaining": "Same final acceptance; preserve 21/60 upstream adapter rejections in coverage accounting. Encar is not the working KCar adapter.",
+      "latestPublicDisplayProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "workflowRun": 34071473326,
+        "jobId": 101589506940,
+        "summary": {
+          "pages": 3,
+          "sourceListingRows": 60,
+          "adapterRejectedRows": 0,
+          "adapterUnexaminedRows": 0,
+          "returnedRows": 60,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 60,
+          "unexaminedRows": 0,
+          "examined": 60,
+          "calculated": 55,
+          "allowedYearExamined": 54,
+          "allowedYearCalculated": 49,
+          "passingAllFilters": 49,
+          "failures": {
+            "verified_specifications_required": 5
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "publicPassing": 49,
+        "publicPassingIds": [
+          "EC61366045",
+          "EC61369793",
+          "EC61367794",
+          "EC61369851",
+          "EC61371688",
+          "EC61387808",
+          "EC61382017",
+          "EC61387815",
+          "EC61369784",
+          "EC61392289",
+          "EC61380267",
+          "EC61379924",
+          "EC61381709",
+          "EC61374972",
+          "EC61382760",
+          "EC61391821",
+          "EC61387991",
+          "EC61382837",
+          "EC61386337",
+          "EC61389150",
+          "EC61379952",
+          "EC61375137",
+          "EC61382945",
+          "EC61379758",
+          "EC61371939",
+          "EC61388370",
+          "EC61386401",
+          "EC61377666",
+          "EC61390848",
+          "EC61389077",
+          "EC61372327",
+          "EC61380673",
+          "EC61377663",
+          "EC61389110",
+          "EC61374971",
+          "EC61386273",
+          "EC61385966",
+          "EC61377814",
+          "EC61381046",
+          "EC61389108",
+          "EC61395009",
+          "EC61399140",
+          "EC61396283",
+          "EC61396119",
+          "EC61392911",
+          "EC61392643",
+          "EC61392452",
+          "EC61394723",
+          "EC61285039"
+        ],
+        "displayInconsistencies": []
+      },
+      "latestRemaining": [
+        "KCar final pilot: five rows still lack certified power inputs; six are older than the catalog year floor.",
+        "Encar access-block response remains separate from KCar success.",
+        "Validate the production-environment canary, image bodies, freshness, deduplication and rollback before mass publication."
+      ],
       "savedInput": 2840,
       "savedAutomatic": 1511,
       "savedRecoveryShare": 0.5320422535211268,
@@ -1085,7 +1449,7 @@
       "controlledPilot": {
         "status": "measured_without_publication",
         "remaining": [
-          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
           "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
@@ -1873,7 +2237,15 @@
         "hostedWorkflowRun": 34068494914,
         "allLocalBreakdownsMatch": true
       },
-      "latestRemaining": "Public API works. GitHub detail HTML is an HTTP 200 browser challenge. Source-bound parameter tables work in the local sample; exact enrichment must be measured in the intended deployment environment. No challenge solving or cookie adoption.",
+      "latestPublicDisplayProbe": {
+        "market": "china",
+        "status": "previous_challenge_block_remains"
+      },
+      "latestRemaining": [
+        "GitHub receives a browser challenge for the HTML specification table; public API alone lacks required exact parameters.",
+        "Do not execute challenge scripts or reuse challenge cookies. Saved exact evidence remains usable only under the existing binding contract.",
+        "Owner-configured logistics 150000 RUB is expected; do not replace it with repository fallback 250000 RUB."
+      ],
       "savedInput": 3092,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1913,7 +2285,7 @@
       "controlledPilot": {
         "status": "measured_without_publication",
         "remaining": [
-          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
           "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
@@ -1971,7 +2343,18 @@
         "calculatedEligibleYearUnder15mGallery5": 0
       },
       "latestMultipageProbe": null,
-      "latestRemaining": "CarSwitch: 3 detail/gallery reads, no complete calculations; exact fuel recovered on one captured detail replay, precise cc and power still missing. Earlier DubiCars sample also lacked exact specifications.",
+      "latestPublicDisplayProbe": {
+        "market": "uae",
+        "status": "experimental_same_listing_replay",
+        "sourceOfferId": "7062DL",
+        "replayTotalRub": 8600059,
+        "sourceAllowedForPublication": false
+      },
+      "latestRemaining": [
+        "Porsche Finder is experimental and excluded from production registry; one same-listing replay calculates successfully but is not a completed fresh collection.",
+        "UAE list timed out; the shared Porsche source later returned HTTP 429 in the Georgia pilot and further requests stopped.",
+        "Existing broad sources still lack exact cc/power for the measured offers."
+      ],
       "savedInput": 4647,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -2011,7 +2394,7 @@
       "controlledPilot": {
         "status": "measured_without_publication",
         "remaining": [
-          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
           "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]
@@ -2068,7 +2451,15 @@
         "calculatedEligibleYearUnder15mGallery5": 0
       },
       "latestMultipageProbe": null,
-      "latestRemaining": "MyAuto first list request returned 403 and probe stopped. Earlier AutoPapa details lacked precise cc and usually power.",
+      "latestPublicDisplayProbe": {
+        "market": "georgia",
+        "status": "stopped_http_429"
+      },
+      "latestRemaining": [
+        "Porsche Finder returned HTTP 429; the bounded source run is not accepted.",
+        "MyAuto previously returned 403; AutoPapa samples lack exact cc/power.",
+        "Need a working public source with sufficient bound technical fields and real gallery evidence."
+      ],
       "savedInput": 216,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -2093,7 +2484,7 @@
       "controlledPilot": {
         "status": "measured_without_publication",
         "remaining": [
-          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.",
           "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
           "Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause."
         ]

@@ -21,12 +21,14 @@ const completePass = await read('data/catalog/research/non-japan-complete-pass-v
 const detailProbes = new Map(completePass.markets.map(row => [row.market, row]));
 const configurationReview = await read('data/catalog/research/configurable-costs-review-v1-20260906.json');
 const multipagePass = await read('data/catalog/research/non-japan-multipage-outcome-v1-20260907.json');
+const publicDisplayPass = await read('data/catalog/research/non-japan-public-display-outcome-v1-20260907.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
-  codeValidation: multipagePass.validation,
+  codeValidation: publicDisplayPass.validation,
+  previousMultipageValidation: multipagePass.validation,
   previousCompletePassValidation: completePass.validation,
   configurationReview,
   limitation: 'Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.',
@@ -38,7 +40,8 @@ const report = {
       publicProbe: probes.get(market) || null,
       detailProbe: detailProbes.get(market) || null,
       latestMultipageProbe: multipagePass.markets.find(row => row.market === market) || null,
-      latestRemaining: multipagePass.remaining[market],
+      latestPublicDisplayProbe: publicDisplayPass.markets.find(row => row.market === market) || null,
+      latestRemaining: publicDisplayPass.remaining[market],
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
@@ -46,7 +49,7 @@ const report = {
       publicationQualifiedSources: sources.filter(source => source.class === 'exact_catalog' && source.publishAllowed === true).map(source => source.sourceId),
       sourceDecisions: sources.map(source => ({ sourceId: source.sourceId, class: source.class, publishAllowed: source.publishAllowed })),
       controlledPilot: { status: detailProbes.has(market) ? 'measured_without_publication' : 'not_ready', remaining: [
-        'Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.',
+        'Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.',
         'Keep the measured adapter and source identifiers fixed for the next isolated collection.',
         'Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause.',
       ] },

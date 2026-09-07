@@ -1,0 +1,208 @@
+{
+  "runId": 34071475448,
+  "url": "https://github.com/jeep-jim/AvtoCena/actions/runs/34071475448",
+  "jobId": 101589512672,
+  "runtimeCommit": "9d6a74aa6c1e6c030eb4dd4331fdc7ffdd81b1a3",
+  "conclusion": "success",
+  "tests": {
+    "total": 1077,
+    "passed": 1077,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm ci",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete regression suite",
+      "conclusion": "success"
+    },
+    {
+      "name": "Customs tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog modification recovery contract tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog calculation integrity tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "CRM market defaults and live pricing tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "CRM market settings save tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Full six-market pricing tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Price trend direction tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog UI state tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Yandex Metrika installation tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog image quality tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Public image proxy tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog source-scale tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog production hardening tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog market preflight parity tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog model-year inventory quota tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Japan auction statistics tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Japan Prestige partition rotation tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog live sources v23 tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Guazi China RU listing tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "MyAuto Georgia listing tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Georgia canonical recovery tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog probe v23 tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Catalog publication gate tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Open source model normalization tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Power normalization and public truth tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Public 30-minute power display tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Estimated EV publication tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Vehicle Knowledge CORE and model search tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Live offer display enrichment tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Current read-model and AI product feed tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Drom generation and horsepower parser tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Single active catalog pipeline tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Validate catalog automation scripts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Web typecheck diagnostics",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upload web typecheck log",
+      "conclusion": "success"
+    },
+    {
+      "name": "Fail on web typecheck errors",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Engine typecheck",
+      "conclusion": "success"
+    },
+    {
+      "name": "Production build diagnostics",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upload production build log",
+      "conclusion": "success"
+    },
+    {
+      "name": "Fail on production build errors",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ]
+}
