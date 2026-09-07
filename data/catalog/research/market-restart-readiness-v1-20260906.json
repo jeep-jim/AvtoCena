@@ -50,7 +50,7 @@
     },
     {
       "path": "data/catalog/research/five-market-restart-outcome-v1-20260907.json",
-      "sha256": "6e5ac789d56c293d28de96de9eb1e92457b2ec3bba244fddc424647155c9ecbb"
+      "sha256": "f6369197662459141054d1e65c8fcf81464c031396533e3727346bcc5ffa8d5f"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -68,10 +68,10 @@
     "fail": 0
   },
   "codeValidation": {
-    "ciJobId": 101613640468,
-    "ciRunId": 34080100070,
-    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34080100070",
-    "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+    "ciJobId": 101617785225,
+    "ciRunId": 34081601642,
+    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34081601642",
+    "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
     "conclusion": "success",
     "productionBuild": {
       "pages": 55,
@@ -80,9 +80,9 @@
     "subsequentCheckpoint": "Reports, documentation and offline advisory scripts only; no collector/pricing/gallery runtime changes.",
     "tests": {
       "failed": 0,
-      "passed": 1092
+      "passed": 1096
     },
-    "treeSha": "4ed02a61708ee782f0ec0365774dcf4ef2b218d3",
+    "treeSha": "b3b74e5123fafd05c2976fc6e447786a26d974aa",
     "typecheck": "passed"
   },
   "freshRestartTotals": {
@@ -1534,6 +1534,12 @@
             "engineCc:engine_cc_missing": 1
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 16,
             "equalCardDetailAndBreakdown": 16
@@ -1608,6 +1614,12 @@
             "certifiedPower:certified_30min_power_missing": 1
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 39,
             "equalCardDetailAndBreakdown": 39
@@ -2073,9 +2085,9 @@
         {
           "market": "korea",
           "sourceId": "encar_direct",
-          "runId": 34080098189,
-          "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
-          "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-korea-encar_direct.json",
+          "runId": 34081598611,
+          "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
+          "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
           "status": "listing_received",
           "error": null,
           "sourceRequests": 1,
@@ -2108,6 +2120,12 @@
             "certifiedPower:certified_30min_power_missing": 1
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 20,
+            "modelResolved": 10,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 10
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -2182,6 +2200,12 @@
             "certifiedPower:certified_30min_power_missing": 2
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 37,
             "equalCardDetailAndBreakdown": 37
@@ -2225,7 +2249,7 @@
         }
       ],
       "latestRemaining": [
-        "Complete exact power evidence for Encar; KCar has fresh exact calculations. Validate gallery diversity and displayed cards."
+        "Encar now resolves source-bound model families, but exact power and applicable verified source-linked variants remain missing; KCar has fresh exact calculations. Validate gallery diversity and displayed cards."
       ],
       "savedInput": 2840,
       "savedAutomatic": 1511,
@@ -3090,6 +3114,12 @@
             "certifiedPower:certified_30min_power_missing": 10
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3165,6 +3195,12 @@
             "engineCc:engine_cc_missing": 1
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3235,6 +3271,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3305,6 +3347,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3491,6 +3539,12 @@
             "powerHp:peak_power_missing": 7
           },
           "missingSourcePrices": 17,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3561,6 +3615,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3631,6 +3691,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3807,6 +3873,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3847,9 +3919,9 @@
         {
           "market": "georgia",
           "sourceId": "myauto_georgia_list",
-          "runId": 34080098189,
-          "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
-          "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-georgia-myauto_georgia_list.json",
+          "runId": 34081598611,
+          "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
+          "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
           "status": "listing_received",
           "error": null,
           "sourceRequests": 1,
@@ -3861,28 +3933,33 @@
             "sourceListingRows": null,
             "adapterRejectedRows": null,
             "adapterUnexaminedRows": null,
-            "returnedRows": 11,
+            "returnedRows": 8,
             "duplicateRows": 0,
             "normalizationRejected": 0,
-            "uniqueNormalizedRows": 11,
+            "uniqueNormalizedRows": 8,
             "unexaminedRows": 0,
-            "examined": 11,
+            "examined": 8,
             "detailWorkBlocked": 0,
             "calculated": 0,
-            "allowedYearExamined": 11,
+            "allowedYearExamined": 8,
             "allowedYearCalculated": 0,
             "passingAllFilters": 0,
             "failures": {
-              "verified_specifications_required": 11
+              "verified_specifications_required": 8
             },
             "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
           },
           "missingFields": {
-            "engineCc:unclassified_field_provenance": 11,
-            "powerHp:peak_power_missing": 11,
-            "certifiedPower:certified_30min_power_missing": 3
+            "engineCc:unclassified_field_provenance": 8,
+            "powerHp:peak_power_missing": 8
           },
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 8,
+            "modelResolved": 8,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 8
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3953,6 +4030,12 @@
           },
           "missingFields": {},
           "missingSourcePrices": 0,
+          "knowledge": {
+            "preparedRows": 0,
+            "modelResolved": 0,
+            "variantResolved": 0,
+            "verifiedVariantsMissing": 0
+          },
           "priceParity": {
             "calculated": 0,
             "equalCardDetailAndBreakdown": 0
@@ -3992,7 +4075,7 @@
         }
       ],
       "latestRemaining": [
-        "MyAuto provides source rows but exact displacement provenance and power remain to be verified; AutoPapa returned 403."
+        "MyAuto product-evidence propagation and coarse-volume rejection are repaired in code; deployed bridge still returns the old evidence contract. Exact displacement, power and applicable verified source-linked variants remain required. AutoPapa returned 403."
       ],
       "savedInput": 216,
       "savedAutomatic": 0,

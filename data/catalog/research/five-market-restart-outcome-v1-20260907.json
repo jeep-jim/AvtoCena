@@ -5,7 +5,7 @@
   "inputs": [
     {
       "path": "data/catalog/research/restart-code-validation-v1-20260907.json",
-      "sha256": "a267a2b0d7c9e97a7cd1ebd8105dc1317c680d30b43da3e2bfafd0cc7d2f7c30"
+      "sha256": "57d3bacda1360bff4d6e82b7e98656542ccd47563251b160a3fde2ffc5cd943d"
     },
     {
       "path": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
@@ -101,13 +101,23 @@
       "path": "data/catalog/research/restart-20260907/34080098189/restart-korea-encar_direct.json",
       "sha256": "82f6f3dac98f0c72c33a130a52d0e8f2ab28d86fe97961dd7632e78d09367a3c",
       "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
+      "sha256": "acbc983e8f2c63f0d9bf5b734e23949b74f2d8d88d6151680bffe3c22ba27669",
+      "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
+      "sha256": "a2c71013923edea7ae5a4e0055d46b9e5294ddac987135c682627ba0ad3d822f",
+      "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb"
     }
   ],
   "validation": {
-    "ciJobId": 101613640468,
-    "ciRunId": 34080100070,
-    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34080100070",
-    "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+    "ciJobId": 101617785225,
+    "ciRunId": 34081601642,
+    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34081601642",
+    "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
     "conclusion": "success",
     "productionBuild": {
       "pages": 55,
@@ -116,9 +126,9 @@
     "subsequentCheckpoint": "Reports, documentation and offline advisory scripts only; no collector/pricing/gallery runtime changes.",
     "tests": {
       "failed": 0,
-      "passed": 1092
+      "passed": 1096
     },
-    "treeSha": "4ed02a61708ee782f0ec0365774dcf4ef2b218d3",
+    "treeSha": "b3b74e5123fafd05c2976fc6e447786a26d974aa",
     "typecheck": "passed"
   },
   "sources": [
@@ -162,6 +172,12 @@
         "certifiedPower:certified_30min_power_missing": 10
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -237,6 +253,12 @@
         "engineCc:engine_cc_missing": 1
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -307,6 +329,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -377,6 +405,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -453,6 +487,12 @@
         "engineCc:engine_cc_missing": 1
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 16,
         "equalCardDetailAndBreakdown": 16
@@ -527,6 +567,12 @@
         "certifiedPower:certified_30min_power_missing": 1
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 39,
         "equalCardDetailAndBreakdown": 39
@@ -605,6 +651,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -645,9 +697,9 @@
     {
       "market": "georgia",
       "sourceId": "myauto_georgia_list",
-      "runId": 34080098189,
-      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
-      "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-georgia-myauto_georgia_list.json",
+      "runId": 34081598611,
+      "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-georgia-myauto_georgia_list.json",
       "status": "listing_received",
       "error": null,
       "sourceRequests": 1,
@@ -659,28 +711,33 @@
         "sourceListingRows": null,
         "adapterRejectedRows": null,
         "adapterUnexaminedRows": null,
-        "returnedRows": 11,
+        "returnedRows": 8,
         "duplicateRows": 0,
         "normalizationRejected": 0,
-        "uniqueNormalizedRows": 11,
+        "uniqueNormalizedRows": 8,
         "unexaminedRows": 0,
-        "examined": 11,
+        "examined": 8,
         "detailWorkBlocked": 0,
         "calculated": 0,
-        "allowedYearExamined": 11,
+        "allowedYearExamined": 8,
         "allowedYearCalculated": 0,
         "passingAllFilters": 0,
         "failures": {
-          "verified_specifications_required": 11
+          "verified_specifications_required": 8
         },
         "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
       },
       "missingFields": {
-        "engineCc:unclassified_field_provenance": 11,
-        "powerHp:peak_power_missing": 11,
-        "certifiedPower:certified_30min_power_missing": 3
+        "engineCc:unclassified_field_provenance": 8,
+        "powerHp:peak_power_missing": 8
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 8,
+        "modelResolved": 8,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 8
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -751,6 +808,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -791,9 +854,9 @@
     {
       "market": "korea",
       "sourceId": "encar_direct",
-      "runId": 34080098189,
-      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
-      "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-korea-encar_direct.json",
+      "runId": 34081598611,
+      "codeSha": "b2ee62dc744f9541b29f044e415645a94c1c4acb",
+      "reportPath": "data/catalog/research/restart-20260907/34081598611/restart-korea-encar_direct.json",
       "status": "listing_received",
       "error": null,
       "sourceRequests": 1,
@@ -826,6 +889,12 @@
         "certifiedPower:certified_30min_power_missing": 1
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 20,
+        "modelResolved": 10,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 10
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -900,6 +969,12 @@
         "certifiedPower:certified_30min_power_missing": 2
       },
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 37,
         "equalCardDetailAndBreakdown": 37
@@ -980,6 +1055,12 @@
         "powerHp:peak_power_missing": 7
       },
       "missingSourcePrices": 17,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -1050,6 +1131,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -1120,6 +1207,12 @@
       },
       "missingFields": {},
       "missingSourcePrices": 0,
+      "knowledge": {
+        "preparedRows": 0,
+        "modelResolved": 0,
+        "variantResolved": 0,
+        "verifiedVariantsMissing": 0
+      },
       "priceParity": {
         "calculated": 0,
         "equalCardDetailAndBreakdown": 0
@@ -1182,7 +1275,7 @@
       "Repeat isolated generation acceptance after reviewed image exclusions and validate displayed galleries; mobile.de and AutoScout24 have fresh exact calculations."
     ],
     "korea": [
-      "Complete exact power evidence for Encar; KCar has fresh exact calculations. Validate gallery diversity and displayed cards."
+      "Encar now resolves source-bound model families, but exact power and applicable verified source-linked variants remain missing; KCar has fresh exact calculations. Validate gallery diversity and displayed cards."
     ],
     "china": [
       "Che168 parameters are challenged; Autohome new-car specifications remain ambiguous/incomplete; Guazi reports a source challenge; Dongchedi is a disabled adapter with no live probe."
@@ -1191,7 +1284,7 @@
       "Dubizzle returned a challenge; sampled DubiCars rows have no fixed source price and insufficient exact displacement/power."
     ],
     "georgia": [
-      "MyAuto provides source rows but exact displacement provenance and power remain to be verified; AutoPapa returned 403."
+      "MyAuto product-evidence propagation and coarse-volume rejection are repaired in code; deployed bridge still returns the old evidence contract. Exact displacement, power and applicable verified source-linked variants remain required. AutoPapa returned 403."
     ],
     "publication": [
       "Obtain >=80% exact automatic calculations on an accepted deduplicated fresh inventory and qualify every required source.",

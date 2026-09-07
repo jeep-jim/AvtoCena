@@ -39,6 +39,10 @@ for (const runId of (await fs.readdir(root)).sort((a, b) => Number(a) - Number(b
         sourceRequests: market.requests.length, bridgeUsed: (market.requests || []).some(row => row.origin === 'https://avtocena.com'),
         upstreamBridgeTrafficObserved: false, calculationPreparation: report.calculationPreparation || 'source_evidence_only',
         summary, missingFields: missing, missingSourcePrices: details.filter(row => !row.after?.sourcePrice).length,
+        knowledge: { preparedRows: details.filter(row => row.knowledgeEnrichment).length,
+          modelResolved: details.filter(row => row.knowledgeEnrichment?.modelId).length,
+          variantResolved: details.filter(row => row.knowledgeEnrichment?.variantId).length,
+          verifiedVariantsMissing: details.filter(row => row.knowledgeEnrichment?.variantResolution?.reason === 'verified_variants_missing').length },
         priceParity: { calculated: priced.length, equalCardDetailAndBreakdown: priced.filter(row => row.publicDisplay?.pricesAgree && row.publicDisplay.breakdownMatchesTotal).length },
         reviewReplay: { publicBeforeReview: publicRows.length, publicAfterReview: reviewedRows.length,
           heldOfferIds: publicRows.filter(row => reviewedCatalogGalleryHold({ sourceId: market.sourceId, sourceOfferId: row.sourceOfferId })).map(row => row.sourceOfferId),
@@ -66,10 +70,10 @@ const report = { version: 1, checkedAt: '2026-09-07', advisoryOnly: true, inputs
     'Known image exclusions are a small prior-review list, not a general automatic image classifier.'],
   remaining: {
     europe: ['Repeat isolated generation acceptance after reviewed image exclusions and validate displayed galleries; mobile.de and AutoScout24 have fresh exact calculations.'],
-    korea: ['Complete exact power evidence for Encar; KCar has fresh exact calculations. Validate gallery diversity and displayed cards.'],
+    korea: ['Encar now resolves source-bound model families, but exact power and applicable verified source-linked variants remain missing; KCar has fresh exact calculations. Validate gallery diversity and displayed cards.'],
     china: ['Che168 parameters are challenged; Autohome new-car specifications remain ambiguous/incomplete; Guazi reports a source challenge; Dongchedi is a disabled adapter with no live probe.'],
     uae: ['Dubizzle returned a challenge; sampled DubiCars rows have no fixed source price and insufficient exact displacement/power.'],
-    georgia: ['MyAuto provides source rows but exact displacement provenance and power remain to be verified; AutoPapa returned 403.'],
+    georgia: ['MyAuto product-evidence propagation and coarse-volume rejection are repaired in code; deployed bridge still returns the old evidence contract. Exact displacement, power and applicable verified source-linked variants remain required. AutoPapa returned 403.'],
     publication: ['Obtain >=80% exact automatic calculations on an accepted deduplicated fresh inventory and qualify every required source.',
       'Complete displayed gallery/list/detail acceptance, deploy the verified runtime, validate an isolated generation and rollback.',
       'Then explicitly activate publication and the weekly five-market schedule with fourteen-day retention; preserve Japan exclusion.'] } };
