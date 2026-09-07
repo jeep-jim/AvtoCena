@@ -1,5 +1,6 @@
 import { publicResponseChallenge } from "./lib/public-response-challenge.mjs";
 import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
 import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
 
 // Bounded public listing and detail diagnostic; no image downloads or publication.
@@ -34,6 +35,13 @@ globalThis.fetch = async (input, init = {}) => {
   if ([401, 403, 429].includes(response.status)) { active.stopped = true; throw new Error(`pilot_stop_http_${response.status}`); }
   if (response.status >= 300 && response.status < 400) throw new Error('pilot_redirect_requires_review');
   const body = await response.clone().text();
+  if (process.env.PILOT_RESPONSE_EVIDENCE === '1') {
+    event.bodyEvidence = { bytes: Buffer.byteLength(body), sha256: crypto.createHash('sha256').update(body).digest('hex'),
+      title: body.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]?.slice(0, 180),
+      rscPushCount: (body.match(/self\.__next_f\.push/g) || []).length,
+      hasSpecTable: body.includes('ssrSpecParam'), hasBoundSpecId: body.includes('initialSpecId'),
+      hasCarId: body.includes('carId'), hasFlightContentType: /text\/x-component/.test(event.contentType || '') };
+  }
   if (publicResponseChallenge(body)) { active.stopped = true; throw new Error('pilot_challenge_stop'); }
   return response;
 };
@@ -99,6 +107,12 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
         try {
           offer.images = await source.fetchImages(offer);
           item.images = offer.images.length;
+          if (process.env.PILOT_RESPONSE_EVIDENCE === '1' && market === 'china') {
+            const raw = offer.operational?.raw || {};
+            item.sourceWitness = { detailId: raw.detail?.infoid, specId: raw.detail?.specid,
+              apiEngine: raw.detail?.engine, apiFuel: raw.detail?.fuelname,
+              boundParameters: raw.boundPageParameters || null, semanticEvidence: offer.operational?.semanticEvidence };
+          }
           item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
           const priced = await calculateOfferWithVerifiedSpecifications(offer);
           item.totalRub = priced.totalRub;
