@@ -22,12 +22,15 @@ const detailProbes = new Map(completePass.markets.map(row => [row.market, row]))
 const configurationReview = await read('data/catalog/research/configurable-costs-review-v1-20260906.json');
 const multipagePass = await read('data/catalog/research/non-japan-multipage-outcome-v1-20260907.json');
 const publicDisplayPass = await read('data/catalog/research/non-japan-public-display-outcome-v1-20260907.json');
+const generationCanary = await read('data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
-  codeValidation: publicDisplayPass.validation,
+  codeValidation: generationCanary.validation,
+  previousPublicDisplayValidation: publicDisplayPass.validation,
+  visualReview: generationCanary.visualReview,
   previousMultipageValidation: multipagePass.validation,
   previousCompletePassValidation: completePass.validation,
   configurationReview,
@@ -41,15 +44,17 @@ const report = {
       detailProbe: detailProbes.get(market) || null,
       latestMultipageProbe: multipagePass.markets.find(row => row.market === market) || null,
       latestPublicDisplayProbe: publicDisplayPass.markets.find(row => row.market === market) || null,
-      latestRemaining: publicDisplayPass.remaining[market],
+      latestGenerationCanary: generationCanary.markets.find(row => row.market === market) || null,
+      latestRemaining: generationCanary.remaining[market] || publicDisplayPass.remaining[market],
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
       // This is a registry qualification count, not evidence of working credentials.
       publicationQualifiedSources: sources.filter(source => source.class === 'exact_catalog' && source.publishAllowed === true).map(source => source.sourceId),
       sourceDecisions: sources.map(source => ({ sourceId: source.sourceId, class: source.class, publishAllowed: source.publishAllowed })),
-      controlledPilot: { status: detailProbes.has(market) ? 'measured_without_publication' : 'not_ready', remaining: [
-        'Use latestPublicDisplayProbe and latestRemaining; report calculation, allowed year, card quality and source-response stops separately.',
+      controlledPilot: { status: generationCanary.markets.some(row => row.market === market && row.technicalAcceptance)
+        ? 'isolated_generation_verified_visual_review_open' : detailProbes.has(market) ? 'measured_without_publication' : 'not_ready', remaining: [
+        'Use latestGenerationCanary, visualReview and latestRemaining. Technical persistence acceptance is not visual publication acceptance.',
         'Keep the measured adapter and source identifiers fixed for the next isolated collection.',
         'Close the measured missing vehicle fields; apply active CRM costs. Owner-confirmed China logistics difference is expected configuration, not a defect. Preserve the production pause.',
       ] },
