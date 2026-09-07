@@ -499,6 +499,22 @@ class KCarExactSource implements CatalogSourceAdapter {
     };
   }
 
+  // Explicit freshness check. fetchImages may legitimately use a saved gallery,
+  // so it is not sufficient to attest that a previously fetched offer is active.
+  async refreshOffer(offer: VehicleOffer): Promise<VehicleOffer> {
+    if (offer.sourceId !== this.sourceId || offer.market !== this.market || !clean(offer.sourceOfferId)) {
+      throw new Error("kcar_refresh_source_identity_required");
+    }
+    const data = await fetchExactDetailData(offer.sourceOfferId);
+    let rejection = "invalid_detail";
+    const row = parseKcarExactDetail({ carCd: offer.sourceOfferId }, data, reason => { rejection = reason; });
+    const refreshed = row ? this.normalizeOffer(row) : null;
+    if (!refreshed) throw new Error(`kcar_refresh_${rejection}`);
+    refreshed.firstSeenAt = offer.firstSeenAt || refreshed.firstSeenAt;
+    refreshed.images = await this.fetchImages(refreshed);
+    return refreshed;
+  }
+
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational?.raw || {}) as any;
     const previousMode = clean(offer.operational?.gallerySafetyMode || raw.gallerySafetyMode);
