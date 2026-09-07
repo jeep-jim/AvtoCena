@@ -1,4 +1,4 @@
-name: Non-Japan multipage public pilot (no publication)
+name: Europe and KCar public display acceptance (no publication)
 on:
   push:
     branches: [feat/catalog-china-saved-evidence-v1-20260906]
@@ -11,15 +11,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        market: [europe, korea, china]
+        include:
+          - market: europe
+            sample: '40'
+            pages: '2'
+          - market: korea
+            sample: '60'
+            pages: '3'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
       PILOT_MARKETS: ${{ matrix.market }}
-      PILOT_SAMPLE_LIMIT: '40'
-      PILOT_PAGE_LIMIT: '3'
+      PILOT_SAMPLE_LIMIT: ${{ matrix.sample }}
+      PILOT_PAGE_LIMIT: ${{ matrix.pages }}
       PILOT_REQUEST_LIMIT: '100'
-      PILOT_TIMEOUT_MS: '15000'
+      PILOT_TIMEOUT_MS: '30000'
+      PILOT_PUBLIC_DISPLAY_AUDIT: '1'
       PILOT_REPORT: public-pilot-${{ matrix.market }}.json
       JSON_STORAGE_DRIVER: local
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
@@ -39,9 +46,11 @@ jobs:
           const report = JSON.parse(fs.readFileSync(process.env.PILOT_REPORT, 'utf8'));
           const market = report.markets.find(row => row.market === process.env.PILOT_MARKETS);
           const samples = market?.details || [];
-          const passing = samples.filter(row => row.yearAllowed && row.totalRub > 0 && row.totalRub <= 15000000 && row.images >= 5);
+          const passing = samples.filter(row => row.yearAllowed && row.totalRub > 0 && row.totalRub <= 15000000 && row.images >= 5
+            && row.publicDisplay?.credible && row.publicDisplay?.eligible && row.publicDisplay?.projectionCanRender);
+          const inconsistent = samples.filter(row => row.publicDisplay && (!row.publicDisplay.pricesAgree || !row.publicDisplay.breakdownMatchesTotal));
           console.log(JSON.stringify({ market: process.env.PILOT_MARKETS, samples: samples.length, passing: passing.length, summary: market?.summary, productionWrites: report.productionWrites }));
-          if (!report.completed || report.productionWrites || !passing.length) process.exit(1);
+          if (!report.completed || report.productionWrites || !passing.length || inconsistent.length) process.exit(1);
           JS
       - uses: actions/upload-artifact@v4
         if: always()

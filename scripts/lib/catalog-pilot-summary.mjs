@@ -21,6 +21,7 @@ export function summarizePilotMarket(market) {
     pages: pages.length,
     sourceListingRows: knownDenominator ? pages.reduce((sum, page) => sum + page.diagnostics.listingRows, 0) : null,
     adapterRejectedRows: knownDenominator ? pages.reduce((sum, page) => sum + page.diagnostics.rejectedRows, 0) : null,
+    adapterUnexaminedRows: knownDenominator ? pages.reduce((sum, page) => sum + (page.diagnostics.unexaminedRows || 0), 0) : null,
     returnedRows: market.listingRows || 0,
     duplicateRows: market.duplicates || 0,
     normalizationRejected: market.normalizationRejected || 0,

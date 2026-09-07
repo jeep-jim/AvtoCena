@@ -8,7 +8,7 @@ import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-s
 process.env.JSON_STORAGE_DRIVER = 'local';
 process.env.CATALOG_IMAGE_STORAGE_MODE = 'source_urls_only';
 const fetchOriginal = globalThis.fetch;
-const sampleLimit = boundedPilotInteger(process.env.PILOT_SAMPLE_LIMIT, 3, 50);
+const sampleLimit = boundedPilotInteger(process.env.PILOT_SAMPLE_LIMIT, 3, 80);
 const pageLimit = boundedPilotInteger(process.env.PILOT_PAGE_LIMIT, 1, 5);
 const requestLimit = boundedPilotInteger(process.env.PILOT_REQUEST_LIMIT, 8, 100);
 const timeoutMs = Math.max(1000, Math.min(45000, Number(process.env.PILOT_TIMEOUT_MS || 15000)));
@@ -51,8 +51,8 @@ const sources = [
   process.env.PILOT_KOREA_SOURCE === 'encar' ? ['korea', 'encar-complete-source', 'encarCompleteSource', ['encar.com']] : ['korea', 'kcar-exact-source', 'kcarKoreaExactSource', ['kcar.com']],
   ['europe', 'mobile-de-exact-source', 'mobileDeExactSource', ['mobile.de']],
   ['china', 'che168-global-exact-source', 'che168GlobalExactSource', ['che168.com']],
-  process.env.PILOT_UAE_SOURCE === 'carswitch' ? ['uae', 'carswitch-exact-source', 'carswitchUaeExactSource', ['carswitch.com']] : process.env.PILOT_UAE_SOURCE === 'dubicars' ? ['uae', 'dubicars-current-source', 'dubicarsUaeCurrentSource', ['dubicars.com']] : ['uae', 'dubizzle-exact-source', 'dubizzleUaeExactSource', ['dubizzle.com']],
-  process.env.PILOT_GEORGIA_SOURCE === 'myauto' ? ['georgia', 'myauto-list-source', 'myAutoListSource', ['myauto.ge']] : ['georgia', 'autopapa-georgia-source', 'autoPapaGeorgiaSource', ['autopapa.ge']],
+  process.env.PILOT_UAE_SOURCE === 'porsche' ? ['uae', 'porsche-finder-source', 'porscheFinderUaeSource', ['finder.porsche.com']] : process.env.PILOT_UAE_SOURCE === 'carswitch' ? ['uae', 'carswitch-exact-source', 'carswitchUaeExactSource', ['carswitch.com']] : process.env.PILOT_UAE_SOURCE === 'dubicars' ? ['uae', 'dubicars-current-source', 'dubicarsUaeCurrentSource', ['dubicars.com']] : ['uae', 'dubizzle-exact-source', 'dubizzleUaeExactSource', ['dubizzle.com']],
+  process.env.PILOT_GEORGIA_SOURCE === 'porsche' ? ['georgia', 'porsche-finder-source', 'porscheFinderGeorgiaSource', ['finder.porsche.com']] : process.env.PILOT_GEORGIA_SOURCE === 'myauto' ? ['georgia', 'myauto-list-source', 'myAutoListSource', ['myauto.ge']] : ['georgia', 'autopapa-georgia-source', 'autoPapaGeorgiaSource', ['autopapa.ge']],
 ];
 const report = { version: 3, completed: false, checkedAt: new Date().toISOString(), productionWrites: false,
   japanRequests: 0, detailsRequested: true, pricesCalculated: true, maxRequestsPerSource: requestLimit, sampleLimit, pageLimit, markets: [],
@@ -64,6 +64,10 @@ async function checkpoint(snapshot = report) {
 }
 const requestedMarkets = new Set(String(process.env.PILOT_MARKETS || 'europe,china,uae').split(','));
 const { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } = await import('../apps/web/lib/catalog/specification-evidence-audit.ts');
+const { enrichOfferForDisplay, catalogPricingSpecificationsChanged } = await import('../apps/web/lib/catalog/display-enrichment.ts');
+const { catalogPublicPriority, catalogOfferVisibleRub } = await import('../apps/web/lib/catalog/public-priority.ts');
+const { searchProjectionFromOffer, projectionCanRenderCard } = await import('../apps/web/lib/catalog/storage.ts');
+const { isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
 const { isCatalogYearAllowed } = await import('../apps/web/lib/catalog/offer-quality.ts');
 const { getJsonStorage } = await import('../apps/web/lib/data.ts');
 const storage = getJsonStorage();
@@ -100,7 +104,9 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
         if (seen.has(identity)) { active.duplicates += 1; continue; }
         seen.add(identity);
         active.normalizedRows += 1;
-        if (offers.length >= sampleLimit || active.stopped || active.requests.length >= requestLimit) continue;
+        // A network stop does not discard already fetched detail data. The fetch
+        // guard still forbids subsequent requests, including inside fetchImages.
+        if (offers.length >= sampleLimit) continue;
         offers.push(offer);
         const before = { year: offer.year, fuel: offer.fuel, engineCc: offer.engineCc, powerHp: offer.powerHp, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency };
         const item = { sourceOfferId: offer.sourceOfferId, yearAllowed: isCatalogYearAllowed(offer.year, market), before };
@@ -121,6 +127,22 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
           item.breakdown = priced.calculationSnapshot?.breakdown;
           item.currencyRate = priced.calculationSnapshot?.currencyRate;
           item.eurRate = priced.calculationSnapshot?.eurRate;
+          if (process.env.PILOT_PUBLIC_DISPLAY_AUDIT === '1') {
+            const displayed = await enrichOfferForDisplay(structuredClone(priced));
+            const priority = catalogPublicPriority(displayed);
+            const projection = searchProjectionFromOffer(displayed);
+            const detailRub = catalogOfferVisibleRub(displayed);
+            const cardRub = catalogOfferVisibleRub(projection);
+            const breakdownSumRub = (displayed.calculationSnapshot?.breakdown || []).reduce((sum, line) => sum + Number(line.amountRub || 0), 0);
+            item.publicDisplay = { calculationStatus: displayed.calculationStatus, totalRub: displayed.totalRub,
+              businessConfigVersion: displayed.calculationSnapshot?.businessConfigVersion,
+              priceDeltaFromCalculationRub: Number(displayed.totalRub || 0) - Number(priced.totalRub || 0),
+              pricingSpecificationsChanged: catalogPricingSpecificationsChanged(priced, displayed),
+              credible: isCrediblePublicOffer(displayed), eligible: priority.eligible, reason: priority.reason,
+              detailRub, cardRub, pricesAgree: detailRub === cardRub,
+              projectionCanRender: projectionCanRenderCard(projection),
+              breakdownSumRub, breakdownMatchesTotal: breakdownSumRub === displayed.totalRub };
+          }
         } catch (error) { item.error = String(error?.message || 'error').replace(/https?:\/\/\S+/g, '[url]').slice(0, 250); }
         item.detailNetworkRequests = active.requests.length - detailRequestStart;
         item.after = Object.fromEntries(Object.keys(before).map(key => [key, offer[key]]));

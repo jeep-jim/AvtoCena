@@ -97,7 +97,7 @@ export type VehicleOffer = {
 };
 
 export type PublicVehicleOffer = Omit<VehicleOffer, "operational" | "vin" | "frameNumber">;
-export type CatalogFetchResult = { items: unknown[]; nextCursor?: string | null; finished?: boolean; count?: number; health?: SourceRunHealth; diagnostics?: { listingRows: number; rejectedRows: number; failedDetailRows?: number } };
+export type CatalogFetchResult = { items: unknown[]; nextCursor?: string | null; finished?: boolean; count?: number; health?: SourceRunHealth; diagnostics?: { listingRows: number; rejectedRows: number; failedDetailRows?: number; unexaminedRows?: number; rejectionReasons?: Record<string, number>; rejectionSamples?: Array<{ sourceOfferId: string; reason: string; modelYear?: string; manufactureDate?: string }> } };
 export type SourceRunHealth = { ok: boolean; message: string; checkedAt: string; httpStatus?: number; contentType?: string; blocked?: boolean };
 export type CatalogSourcePolicy = {
   sourceId: string;
