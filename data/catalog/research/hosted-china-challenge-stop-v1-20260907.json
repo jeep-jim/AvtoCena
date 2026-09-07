@@ -1,0 +1,260 @@
+{
+  "workflowRun": 34069101475,
+  "jobId": 101583040527,
+  "runtimeCommit": "16a37c41b9db07a03ec25884bfc3f59c15fbb1aa",
+  "conclusion": "diagnostic_completed_not_calculation_ready",
+  "report": {
+    "version": 3,
+    "completed": true,
+    "checkedAt": "2026-09-07T00:13:38.764Z",
+    "productionWrites": false,
+    "japanRequests": 0,
+    "detailsRequested": true,
+    "pricesCalculated": true,
+    "maxRequestsPerSource": 8,
+    "sampleLimit": 3,
+    "pageLimit": 1,
+    "markets": [
+      {
+        "market": "china",
+        "requests": [
+          {
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/search",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8",
+            "bodyEvidence": {
+              "bytes": 18661,
+              "sha256": "7c14d82ea51cba8979092b8b383d50006ba780738333c843afcdf10bbe291194",
+              "rscPushCount": 0,
+              "hasSpecTable": false,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false
+            }
+          },
+          {
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/carinfo/59754526",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8",
+            "bodyEvidence": {
+              "bytes": 3625,
+              "sha256": "c1ff0132bd9f23239f7422e6a95f93afabe926800864726c0b8477ccaa984264",
+              "rscPushCount": 0,
+              "hasSpecTable": false,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false
+            }
+          },
+          {
+            "origin": "https://global.che168.com",
+            "path": "/en/detail/59754526",
+            "method": "GET",
+            "status": 200,
+            "contentType": "text/html",
+            "bodyEvidence": {
+              "bytes": 29181,
+              "sha256": "68ee85b111a2f9c95ba5904e413991ea481da2113ea1f27902b0b3784b15d7be",
+              "rscPushCount": 0,
+              "hasSpecTable": false,
+              "hasBoundSpecId": false,
+              "hasCarId": false,
+              "hasFlightContentType": false
+            }
+          }
+        ],
+        "sourceId": "autohome_used_china_open",
+        "listingRows": 24,
+        "normalizedRows": 24,
+        "normalizationRejected": 0,
+        "duplicates": 0,
+        "details": [
+          {
+            "sourceOfferId": "59754526",
+            "yearAllowed": false,
+            "before": {
+              "year": 2019,
+              "fuel": "petrol",
+              "sourcePrice": 30340,
+              "sourceCurrency": "USD"
+            },
+            "images": 18,
+            "sourceWitness": {
+              "detailId": 59754526,
+              "specId": 36921,
+              "apiEngine": "2.0T 245 horsepower L4",
+              "apiFuel": "Gasoline",
+              "boundParameters": null,
+              "semanticEvidence": {
+                "year": {
+                  "source": "che168_global_listing_and_carinfo",
+                  "value": 2019,
+                  "rawValues": [
+                    "2019",
+                    "2019"
+                  ],
+                  "status": "exact"
+                },
+                "fuel": {
+                  "source": "che168_global_listing_and_carinfo",
+                  "value": "petrol",
+                  "rawValues": [
+                    "Gasoline"
+                  ],
+                  "status": "exact"
+                },
+                "engineCc": {
+                  "source": "che168_global_carinfo",
+                  "rawValues": [
+                    "2.0T 245 horsepower L4"
+                  ],
+                  "status": "missing"
+                },
+                "powerHp": {
+                  "source": "che168_global_carinfo",
+                  "value": 245,
+                  "rawValues": [
+                    "2.0T 245 horsepower L4"
+                  ],
+                  "status": "exact"
+                }
+              }
+            },
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            },
+            "error": "verified_specifications_required",
+            "detailNetworkRequests": 2,
+            "after": {
+              "year": 2019,
+              "fuel": "petrol",
+              "powerHp": 245,
+              "sourcePrice": 30340,
+              "sourceCurrency": "USD"
+            },
+            "changedFields": [
+              "powerHp"
+            ]
+          }
+        ],
+        "pages": [
+          {
+            "cursor": "1",
+            "returnedRows": 24,
+            "diagnostics": {
+              "listingRows": 24,
+              "rejectedRows": 0
+            },
+            "health": {
+              "ok": true,
+              "message": "Che168 Global API page=1/166 items=24 total=3970",
+              "checkedAt": "2026-09-07T00:13:40.368Z",
+              "httpStatus": 200,
+              "contentType": "application/json; charset=utf-8"
+            }
+          }
+        ],
+        "sourceHealth": {
+          "ok": true,
+          "message": "Che168 Global API page=1/166 items=24 total=3970",
+          "checkedAt": "2026-09-07T00:13:40.368Z",
+          "httpStatus": 200,
+          "contentType": "application/json; charset=utf-8"
+        },
+        "stopped": true,
+        "summary": {
+          "pages": 1,
+          "sourceListingRows": 24,
+          "adapterRejectedRows": 0,
+          "returnedRows": 24,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 24,
+          "unexaminedRows": 23,
+          "examined": 1,
+          "calculated": 0,
+          "allowedYearExamined": 0,
+          "allowedYearCalculated": 0,
+          "passingAllFilters": 0,
+          "failures": {
+            "verified_specifications_required": 1
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "samples": [
+          {
+            "sourceOfferId": "59754526",
+            "make": "Lexus",
+            "model": "RC",
+            "year": 2019,
+            "powerHp": 245,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          }
+        ],
+        "status": "stopped_by_source_response"
+      },
+      {
+        "market": "korea",
+        "status": "not_attempted",
+        "reason": "Not selected for this run; no inference about source availability."
+      }
+    ],
+    "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+    "currencyRequests": 0
+  }
+}

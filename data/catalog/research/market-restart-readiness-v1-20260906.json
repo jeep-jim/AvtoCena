@@ -31,6 +31,10 @@
     {
       "path": "data/catalog/research/configurable-costs-review-v1-20260906.json",
       "sha256": "c9fd1558c9ff4bcf2a299c38d6b213bdb9dfe9773ce359c574e62efc66fe0b4e"
+    },
+    {
+      "path": "data/catalog/research/non-japan-multipage-outcome-v1-20260907.json",
+      "sha256": "a3c70fce175c1e5c2bc0d9721573e20800b1bf7ded0976fa70b250abdc1803ce"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -48,6 +52,29 @@
     "fail": 0
   },
   "codeValidation": {
+    "checkedAt": "2026-09-07T00:17:55.228Z",
+    "runId": 34069103033,
+    "jobId": 101583045088,
+    "remoteRuntimeCommit": "16a37c41b9db07a03ec25884bfc3f59c15fbb1aa",
+    "localRuntimeCommit": "d56ba579",
+    "conclusion": "success",
+    "tests": 1068,
+    "passed": 1068,
+    "failed": 0,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "logEvidence": [
+      "2026-09-07T00:14:50.9489409Z ℹ tests 1068",
+      "2026-09-07T00:14:50.9489848Z ℹ pass 1068",
+      "2026-09-07T00:16:19.3117796Z  ✓ Compiled successfully",
+      "2026-09-07T00:16:19.3118701Z    Generating static pages (0/55) ...",
+      "2026-09-07T00:16:19.3118949Z    Generating static pages (13/55) ",
+      "2026-09-07T00:16:19.3119193Z    Generating static pages (27/55) ",
+      "2026-09-07T00:16:19.3119424Z    Generating static pages (41/55) ",
+      "2026-09-07T00:16:19.3119698Z  ✓ Generating static pages (55/55)"
+    ]
+  },
+  "previousCompletePassValidation": {
     "fullTests": 1057,
     "passed": 1057,
     "failed": 0,
@@ -853,6 +880,51 @@
         "fieldChanges": [],
         "calculatedEligibleYearUnder15mGallery5": 16
       },
+      "latestMultipageProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "local": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 7,
+          "returnedRows": 41,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 41,
+          "unexaminedRows": 1,
+          "examined": 40,
+          "calculated": 40,
+          "allowedYearExamined": 40,
+          "allowedYearCalculated": 40,
+          "passingAllFilters": 37,
+          "failures": {},
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 42,
+        "hosted": {
+          "adapterRejectedRows": 7,
+          "allowedYearCalculated": 39,
+          "allowedYearExamined": 40,
+          "calculated": 39,
+          "duplicateRows": 0,
+          "examined": 40,
+          "failures": {
+            "verified_specifications_required": 1
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 2,
+          "passingAllFilters": 36,
+          "returnedRows": 41,
+          "sourceListingRows": 48,
+          "unexaminedRows": 1,
+          "uniqueNormalizedRows": 41
+        },
+        "hostedConclusion": "success",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestRemaining": "Repeat final acceptance in the intended deployment environment with active CRM config, inventory freshness and list/detail display checks before publication.",
       "savedInput": 5259,
       "savedAutomatic": 4808,
       "savedRecoveryShare": 0.914242251378589,
@@ -937,6 +1009,53 @@
         "fieldChanges": [],
         "calculatedEligibleYearUnder15mGallery5": 7
       },
+      "latestMultipageProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "local": {
+          "pages": 3,
+          "sourceListingRows": 60,
+          "adapterRejectedRows": 21,
+          "returnedRows": 39,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 39,
+          "unexaminedRows": 0,
+          "examined": 39,
+          "calculated": 33,
+          "allowedYearExamined": 35,
+          "allowedYearCalculated": 29,
+          "passingAllFilters": 29,
+          "failures": {
+            "verified_specifications_required": 6
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 63,
+        "hosted": {
+          "adapterRejectedRows": 21,
+          "allowedYearCalculated": 29,
+          "allowedYearExamined": 35,
+          "calculated": 33,
+          "duplicateRows": 0,
+          "examined": 39,
+          "failures": {
+            "verified_specifications_required": 6
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 3,
+          "passingAllFilters": 29,
+          "returnedRows": 39,
+          "sourceListingRows": 60,
+          "unexaminedRows": 0,
+          "uniqueNormalizedRows": 39
+        },
+        "hostedConclusion": "success",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestRemaining": "Same final acceptance; preserve 21/60 upstream adapter rejections in coverage accounting. Encar is not the working KCar adapter.",
       "savedInput": 2840,
       "savedAutomatic": 1511,
       "savedRecoveryShare": 0.5320422535211268,
@@ -1707,6 +1826,54 @@
         ],
         "calculatedEligibleYearUnder15mGallery5": 4
       },
+      "latestMultipageProbe": {
+        "market": "china",
+        "sourceId": "autohome_used_china_open",
+        "local": {
+          "pages": 2,
+          "sourceListingRows": 48,
+          "adapterRejectedRows": 0,
+          "returnedRows": 48,
+          "duplicateRows": 0,
+          "normalizationRejected": 0,
+          "uniqueNormalizedRows": 48,
+          "unexaminedRows": 8,
+          "examined": 40,
+          "calculated": 23,
+          "allowedYearExamined": 29,
+          "allowedYearCalculated": 15,
+          "passingAllFilters": 14,
+          "failures": {
+            "verified_specifications_required": 13,
+            "The operation was aborted due to timeout": 4
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+        },
+        "localSourceRequests": 78,
+        "hosted": {
+          "adapterRejectedRows": 0,
+          "allowedYearCalculated": 0,
+          "allowedYearExamined": 27,
+          "calculated": 0,
+          "duplicateRows": 0,
+          "examined": 40,
+          "failures": {
+            "verified_specifications_required": 40
+          },
+          "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory.",
+          "normalizationRejected": 0,
+          "pages": 2,
+          "passingAllFilters": 0,
+          "returnedRows": 48,
+          "sourceListingRows": 48,
+          "unexaminedRows": 8,
+          "uniqueNormalizedRows": 48
+        },
+        "hostedConclusion": "failure",
+        "hostedWorkflowRun": 34068494914,
+        "allLocalBreakdownsMatch": true
+      },
+      "latestRemaining": "Public API works. GitHub detail HTML is an HTTP 200 browser challenge. Source-bound parameter tables work in the local sample; exact enrichment must be measured in the intended deployment environment. No challenge solving or cookie adoption.",
       "savedInput": 3092,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1803,6 +1970,8 @@
         "fieldChanges": [],
         "calculatedEligibleYearUnder15mGallery5": 0
       },
+      "latestMultipageProbe": null,
+      "latestRemaining": "CarSwitch: 3 detail/gallery reads, no complete calculations; exact fuel recovered on one captured detail replay, precise cc and power still missing. Earlier DubiCars sample also lacked exact specifications.",
       "savedInput": 4647,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1898,6 +2067,8 @@
         ],
         "calculatedEligibleYearUnder15mGallery5": 0
       },
+      "latestMultipageProbe": null,
+      "latestRemaining": "MyAuto first list request returned 403 and probe stopped. Earlier AutoPapa details lacked precise cc and usually power.",
       "savedInput": 216,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,

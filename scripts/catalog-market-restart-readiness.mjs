@@ -20,12 +20,14 @@ const probes = new Map([...pilot.markets, ...specPilot.markets].map(row => [row.
 const completePass = await read('data/catalog/research/non-japan-complete-pass-v1-20260906.json');
 const detailProbes = new Map(completePass.markets.map(row => [row.market, row]));
 const configurationReview = await read('data/catalog/research/configurable-costs-review-v1-20260906.json');
+const multipagePass = await read('data/catalog/research/non-japan-multipage-outcome-v1-20260907.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
-  codeValidation: completePass.validation,
+  codeValidation: multipagePass.validation,
+  previousCompletePassValidation: completePass.validation,
   configurationReview,
   limitation: 'Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.',
   markets: markets.map(market => {
@@ -35,6 +37,8 @@ const report = {
       market,
       publicProbe: probes.get(market) || null,
       detailProbe: detailProbes.get(market) || null,
+      latestMultipageProbe: multipagePass.markets.find(row => row.market === market) || null,
+      latestRemaining: multipagePass.remaining[market],
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
