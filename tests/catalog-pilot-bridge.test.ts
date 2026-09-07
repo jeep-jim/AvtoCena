@@ -13,3 +13,15 @@ test('production bridge diagnostics admit only three exact one-page read routes'
   assert.equal(isExistingPilotBridgeRequest(new URL('https://avtocena.com/api/internal/guazi-egress-b8c4d1?page=1'), 'GET', 'guazi_china_open'), true);
   assert.equal(isExistingPilotBridgeRequest(new URL('https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=1&startPage=1'), 'GET', 'myauto_georgia_list'), true);
 });
+
+test('common trial admits only explicitly budgeted bridge pages, without extra queries', () => {
+  const route = 'https://avtocena.com/api/internal/encar-egress-71b8e4?page=';
+  assert.equal(isExistingPilotBridgeRequest(new URL(route + '3'), 'GET', 'encar_direct', 3), true);
+  for (const tail of ['4', '03', '0', '6', '3&page=2', '3&publish=1']) {
+    assert.equal(isExistingPilotBridgeRequest(new URL(route + tail), 'GET', 'encar_direct', 3), false);
+  }
+  const georgia = new URL('https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=1&startPage=5');
+  assert.equal(isExistingPilotBridgeRequest(georgia, 'GET', 'myauto_georgia_list', 5), true);
+  georgia.searchParams.set('pages', '5');
+  assert.equal(isExistingPilotBridgeRequest(georgia, 'GET', 'myauto_georgia_list', 5), false);
+});

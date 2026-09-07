@@ -2,6 +2,8 @@ import { publicResponseChallenge } from "./lib/public-response-challenge.mjs";
 import { isExistingPilotBridgeRequest } from './lib/catalog-pilot-bridge.mjs';
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
+import path from 'node:path';
+import { catalogTrialSnapshot } from './lib/catalog-trial-snapshot.mjs';
 import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
 
 // Bounded public listing and detail diagnostic; no image downloads or publication.
@@ -9,9 +11,10 @@ import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-s
 process.env.JSON_STORAGE_DRIVER = 'local';
 process.env.CATALOG_IMAGE_STORAGE_MODE = 'source_urls_only';
 const fetchOriginal = globalThis.fetch;
-const sampleLimit = boundedPilotInteger(process.env.PILOT_SAMPLE_LIMIT, 3, 80);
+const trial = process.env.PILOT_TRIAL_PROFILE === 'five_market_v1';
+const sampleLimit = boundedPilotInteger(process.env.PILOT_SAMPLE_LIMIT, 3, trial ? 200 : 80);
 const pageLimit = boundedPilotInteger(process.env.PILOT_PAGE_LIMIT, 1, 5);
-const requestLimit = boundedPilotInteger(process.env.PILOT_REQUEST_LIMIT, 8, 100);
+const requestLimit = boundedPilotInteger(process.env.PILOT_REQUEST_LIMIT, 8, trial ? 350 : 100);
 const timeoutMs = Math.max(1000, Math.min(45000, Number(process.env.PILOT_TIMEOUT_MS || 15000)));
 process.env.CATALOG_SOURCE_RETRY_ATTEMPTS = '1';
 process.env.CATALOG_ENCAR_DIRECT_LIST_RETRIES = '1';
@@ -27,7 +30,7 @@ globalThis.fetch = async (input, init = {}) => {
   }
   const method = init.method || (input instanceof Request ? input.method : 'GET');
   const bridgeRequest = process.env.PILOT_ALLOW_EXISTING_BRIDGE === '1'
-    && isExistingPilotBridgeRequest(url, method, process.env.PILOT_REGISTERED_SOURCE_ID);
+    && isExistingPilotBridgeRequest(url, method, process.env.PILOT_REGISTERED_SOURCE_ID, trial ? pageLimit : 1);
   if (url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && method === 'GET' && currencyRequests++ === 0) return fetchOriginal(url, { redirect: 'error', signal: AbortSignal.timeout(timeoutMs) });
   if (!active || active.stopped || active.requests.length >= requestLimit || (method !== 'GET' && !(method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct'))
     || url.protocol !== 'https:' || url.username || url.password || url.port || (!bridgeRequest && !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`)))) {
@@ -114,6 +117,7 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
     const source = registeredSource || (await import(`../apps/web/lib/catalog/${module}.ts`))[name];
     active.sourceId = source.sourceId;
     const offers = [];
+    const snapshots = [];
     const seen = new Set();
     const seenCursors = new Set();
     let cursor = '1';
@@ -146,6 +150,7 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
         const before = { year: offer.year, fuel: offer.fuel, engineCc: offer.engineCc, powerHp: offer.powerHp, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency };
         const item = { sourceOfferId: offer.sourceOfferId, yearAllowed: isCatalogYearAllowed(offer.year, market), before };
         const detailRequestStart = active.requests.length;
+        let preparedOffer;
         try {
           offer.images = await source.fetchImages(offer);
           item.images = offer.images.length;
@@ -170,10 +175,12 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
           // gate. Representative guesses and unresolved variants still fail it.
           const calculationInput = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(
             await enrichOfferWithKnowledgeCore(structuredClone(offer))));
+          preparedOffer = calculationInput;
           item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(calculationInput, field)]));
           item.calculationInput = Object.fromEntries(Object.keys(before).map(key => [key, calculationInput[key]]));
           item.knowledgeEnrichment = calculationInput.operational?.knowledgeCore || null;
           const priced = await calculateOfferWithVerifiedSpecifications(calculationInput);
+          preparedOffer = priced;
           item.totalRub = priced.totalRub;
           item.calculationStatus = priced.calculationStatus;
           item.breakdown = priced.calculationSnapshot?.breakdown;
@@ -207,6 +214,14 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
         // Details may correct the listing year; acceptance uses the final evidence.
         item.yearAllowed = isCatalogYearAllowed(offer.year, market);
         active.details.push(item);
+        if (trial && process.env.PILOT_SNAPSHOT_DIR) {
+          snapshots.push(catalogTrialSnapshot(preparedOffer || offer));
+          await fs.mkdir(process.env.PILOT_SNAPSHOT_DIR, { recursive: true });
+          for (let index = 0; index < snapshots.length; index += 500) {
+            await fs.writeFile(path.join(process.env.PILOT_SNAPSHOT_DIR, `offers-${String(index / 500 + 1).padStart(4, '0')}.json`),
+              JSON.stringify(snapshots.slice(index, index + 500), null, 2) + '\n');
+          }
+        }
         active.summary = summarizePilotMarket(active);
         await checkpoint({ ...report, currencyRequests, markets: [...report.markets, { ...active, hosts: undefined }] });
       }
