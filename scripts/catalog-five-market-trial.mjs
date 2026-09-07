@@ -8,7 +8,9 @@ if (!['korea', 'china', 'uae', 'europe', 'georgia'].includes(market)) throw new 
 const root = path.resolve('five-market-trial', market);
 await fs.mkdir(root, { recursive: true });
 const sources = [];
-for (const source of REQUIRED_CATALOG_SOURCES[market]) {
+const selectedSource = process.env.TRIAL_SOURCE_ID;
+if (selectedSource && !REQUIRED_CATALOG_SOURCES[market].some(source => source.sourceId === selectedSource)) throw new Error('trial_source_forbidden');
+for (const source of REQUIRED_CATALOG_SOURCES[market].filter(source => !selectedSource || source.sourceId === selectedSource)) {
   const directory = path.join(root, source.sourceId);
   await fs.mkdir(directory, { recursive: true });
   const report = path.join(directory, 'report.json');

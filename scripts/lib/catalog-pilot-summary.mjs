@@ -31,7 +31,7 @@ export function summarizePilotMarket(market) {
     uniqueNormalizedRows: market.normalizedRows || 0,
     unexaminedRows: Math.max(0, (market.normalizedRows || 0) - details.length),
     examined: details.length,
-    detailWorkBlocked: details.filter(row => /pilot_(?:request_outside_envelope|source_stopped|stop_http_|challenge_stop)/.test(row.error || '')).length,
+    detailWorkBlocked: details.filter(row => /pilot_(?:request_outside_envelope|request_budget_exhausted|source_stopped|stop_http_|challenge_stop)/.test(row.error || '')).length,
     calculated: details.filter(calculated).length,
     allowedYearExamined: allowed.length,
     allowedYearCalculated: allowed.filter(calculated).length,

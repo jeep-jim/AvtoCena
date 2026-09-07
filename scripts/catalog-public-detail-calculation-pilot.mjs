@@ -32,7 +32,9 @@ globalThis.fetch = async (input, init = {}) => {
   const bridgeRequest = process.env.PILOT_ALLOW_EXISTING_BRIDGE === '1'
     && isExistingPilotBridgeRequest(url, method, process.env.PILOT_REGISTERED_SOURCE_ID, trial ? pageLimit : 1);
   if (url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && method === 'GET' && currencyRequests++ === 0) return fetchOriginal(url, { redirect: 'error', signal: AbortSignal.timeout(timeoutMs) });
-  if (!active || active.stopped || active.requests.length >= requestLimit || (method !== 'GET' && !(method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct'))
+  if (active?.stopped) throw new Error('pilot_source_stopped');
+  if (active?.requests.length >= requestLimit) throw new Error('pilot_request_budget_exhausted');
+  if (!active || (method !== 'GET' && !(method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct'))
     || url.protocol !== 'https:' || url.username || url.password || url.port || (!bridgeRequest && !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`)))) {
     throw new Error('pilot_request_outside_envelope');
   }
