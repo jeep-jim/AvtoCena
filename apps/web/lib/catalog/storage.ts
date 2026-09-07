@@ -1107,13 +1107,15 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _skipDisplayIdentityMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exactPreserveMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
   // Keep source/internal objects immutable. Mutable rows receive the same
   // deterministic V2 + source-translation identity used by cards.
   // A one-market writer must not rename, reprice or delete another market.
   // Protected rows were read from the active public generation and hash-gated
   // by the caller; only that market's own refresh may revalidate them.
   const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) && hasAllowedCatalogSourceProvenance(offer));
+  const exactPreservedRows = protectedRows.filter((offer) => exactPreserveMarkets.has(offer.market));
+  const appendProtectedRows = protectedRows.filter((offer) => !exactPreserveMarkets.has(offer.market));
   const mutableRows = storedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
   const identityRows = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
   // Canonical display aliases can change a selector's identity binding. Resolve
@@ -1127,9 +1129,11 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
   const priceOutliers = findCatalogPriceOutliers(identityEligibleOffers);
   const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id).filter((id) => !protectedPublicIds.has(String(id))));
   const priceFilteredOffers = identityEligibleOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
-  const deduplicated = deduplicatePublicCatalogOffers([...protectedRows, ...priceFilteredOffers], { protectedIds: protectedPublicIds });
+  const deduplicated = deduplicatePublicCatalogOffers([...appendProtectedRows, ...priceFilteredOffers], { protectedIds: protectedPublicIds });
   const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
-  return { offers: quota.rows, qualityRejected, identityRejected, priceOutliers, deduplicated, quota };
+  // Other markets are immutable snapshots, not candidates for this refresh.
+  // Deduplication and model-year quotas apply only to the market being rebuilt.
+  return { offers: [...exactPreservedRows, ...quota.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota };
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
