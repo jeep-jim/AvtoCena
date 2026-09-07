@@ -161,7 +161,11 @@ function fuelEvidence(listing: unknown, detail: unknown): MobileDeFuelEvidence {
 }
 
 function exactMobileDeBody(value: unknown) {
-  const normalized = clean(value).toLowerCase();
+  // VIP appends the sale condition to the category. It is not another body.
+  // Keep the coarse mobile.de OffRoad bucket; do not infer an exact SUV/pickup.
+  const normalized = clean(value).toLowerCase()
+    .replace(/,\s*(?:gebrauchtfahrzeug|jahreswagen|neufahrzeug|tageszulassung|vorführfahrzeug)$/, "");
+  if (normalized === "suv/geländewagen/pickup") return "offroad";
   if (/^(?:cabrio|cabriolet|roadster)$/.test(normalized)) return "convertible";
   if (/^(?:coupé|coupe)$/.test(normalized)) return "coupe";
   if (/^(?:kombi|estate|station wagon)$/.test(normalized)) return "wagon";

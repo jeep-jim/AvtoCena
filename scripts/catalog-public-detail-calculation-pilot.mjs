@@ -67,7 +67,7 @@ const { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } = await impo
 const { enrichOfferForDisplay, catalogPricingSpecificationsChanged } = await import('../apps/web/lib/catalog/display-enrichment.ts');
 const { catalogPublicPriority, catalogOfferVisibleRub } = await import('../apps/web/lib/catalog/public-priority.ts');
 const { searchProjectionFromOffer, projectionCanRenderCard } = await import('../apps/web/lib/catalog/storage.ts');
-const { isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
+const { isCrediblePublicOffer, catalogSemanticEvidenceRejectionReason, credibleCatalogImages, hasAllowedCatalogSourceProvenance } = await import('../apps/web/lib/catalog/offer-quality.ts');
 const { isCatalogYearAllowed } = await import('../apps/web/lib/catalog/offer-quality.ts');
 const { getJsonStorage } = await import('../apps/web/lib/data.ts');
 const storage = getJsonStorage();
@@ -138,7 +138,12 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
               businessConfigVersion: displayed.calculationSnapshot?.businessConfigVersion,
               priceDeltaFromCalculationRub: Number(displayed.totalRub || 0) - Number(priced.totalRub || 0),
               pricingSpecificationsChanged: catalogPricingSpecificationsChanged(priced, displayed),
-              credible: isCrediblePublicOffer(displayed), eligible: priority.eligible, reason: priority.reason,
+              credible: isCrediblePublicOffer(displayed),
+              credibilityEvidence: { sourceAllowed: hasAllowedCatalogSourceProvenance(displayed),
+                semanticRejection: catalogSemanticEvidenceRejectionReason(displayed),
+                credibleImageCount: credibleCatalogImages(displayed.images).length,
+                bodyType: displayed.bodyType, bodyEvidence: displayed.operational?.semanticEvidence?.bodyType },
+              eligible: priority.eligible, reason: priority.reason,
               detailRub, cardRub, pricesAgree: detailRub === cardRub,
               projectionCanRender: projectionCanRenderCard(projection),
               breakdownSumRub, breakdownMatchesTotal: breakdownSumRub === displayed.totalRub };
