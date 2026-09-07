@@ -1551,9 +1551,7 @@ export function assertSafeImageUrl(rawUrl: string) {
 }
 
 async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
-  // AVIF is admitted only after a successful decode to the normalized WebP
-  // format, including when legacy JPEG/PNG optimization has been disabled.
-  if (IMAGE_OPTIMIZATION_DISABLED && sourceMimeType !== "image/avif") return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
+  if (IMAGE_OPTIMIZATION_DISABLED) return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
   try {
     const result = await sharp(input, { failOn: "warning", limitInputPixels: 40_000_000 })
       .rotate()
@@ -1562,7 +1560,6 @@ async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
       .toBuffer({ resolveWithObject: true });
     return { data: result.data, mimeType: "image/webp", extension: "webp", width: result.info.width, height: result.info.height };
   } catch {
-    if (sourceMimeType === "image/avif") throw new Error("catalog_avif_decode_failed");
     // A malformed but browser-decodable source image must not make the whole
     // market publication fail. Keep the already size-bounded original.
     return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
@@ -1571,6 +1568,18 @@ async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
 
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
   let safeUrl: string; try { safeUrl = assertSafeImageUrl(url); } catch { return null; }
+  // The catalog stores source URLs. Enforce that contract here as well as in
+  // gallery wrappers: a legacy adapter must not silently fetch/store binaries.
+  // Unconfigured callers also use URLs; an empty environment is not opt-in.
+  const mode = String(process.env.CATALOG_IMAGE_STORAGE_MODE || "source_urls_only").trim().toLowerCase();
+  if (mode === "source_urls_only") {
+    const extension = new URL(safeUrl).pathname.match(/\.(jpe?g|png|webp|avif)$/i)?.[1]?.toLowerCase();
+    const mimeType = extension === "jpg" || extension === "jpeg" ? "image/jpeg" : extension ? `image/${extension}` : "";
+    return { id: "", url: safeUrl, objectKey: "", checksum: "", size: 0, mimeType };
+  }
+  // Old maintenance code can explicitly request binary storage. Unknown values
+  // must not silently opt into downloads. Active collectors never enable this.
+  if (mode !== "binary") return null;
   try {
     const existing = await cachedImageForSource(safeUrl);
     if (existing) return existing;
@@ -1586,10 +1595,8 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
           break;
         }
         if (!res || !res.ok) return null;
-        // KCar serves valid JPEGs as image/jpg. Normalize that narrow alias;
-        // HTML and arbitrary binary responses remain outside the raster gate.
-        const mimeType = (res.headers.get("content-type") || "").split(";", 1)[0].trim().toLowerCase().replace(/^image\/jpg$/, "image/jpeg");
-        if (!/^image\/(jpeg|png|webp|avif)$/.test(mimeType)) return null;
+        const mimeType = (res.headers.get("content-type") || "").split(";", 1)[0].trim().toLowerCase();
+        if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
         const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null;
         const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
         const optimized = await optimizeCatalogImage(buf, mimeType);

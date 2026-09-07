@@ -19,8 +19,42 @@ export function assertCanaryObjectRequest(url, method, endpoint, bucket, configu
   const key = decoded.slice(root.length);
   if (key.split('/').some(part => !part || part === '.' || part === '..' || part.includes('\\'))) throw new Error('canary_object_key_blocked');
   if (method === 'GET' && PRODUCTION_INPUTS.includes(key)) return key;
-  if (key.startsWith(prefix) && ['GET', 'PUT'].includes(method)) return key;
+  if (key.startsWith(prefix) && ['GET', 'PUT'].includes(method)) {
+    assertCanaryJsonKey(key.slice(prefix.length));
+    return key;
+  }
   throw new Error('canary_object_request_blocked');
+}
+
+export function assertCanaryJsonKey(key) {
+  if (!/\.json$/.test(key) || key.split('/').some(part => !part || part === '.' || part === '..' || part.includes('\\'))
+    || /(?:^|\/)(?:images|image-source-cache)(?:\/|$)/.test(key)) throw new Error('canary_non_json_or_image_write_blocked');
+  return key;
+}
+
+export function assertCanarySourceRequest(url, method, market, galleryUrls = new Set()) {
+  const host = market === 'korea' ? 'kcar.com' : market === 'europe' ? 'mobile.de' : '';
+  if (!host || url.protocol !== 'https:' || url.username || url.password || url.port
+    || !(url.hostname === host || url.hostname.endsWith(`.${host}`))) throw new Error('canary_source_host_blocked');
+  if (galleryUrls.has(url.href) || /\.(?:jpe?g|png|webp|avif|gif|svg)(?:$|\/)/i.test(url.pathname)
+    || /^(?:img|image|images)\./i.test(url.hostname)) throw new Error('canary_image_request_blocked');
+  if (method !== 'GET' && !(market === 'korea' && method === 'POST'
+    && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct')) throw new Error('canary_source_method_blocked');
+}
+
+export function assertSourceUrlGallery(images, expectedUrls) {
+  if (!Array.isArray(images) || !images.length) throw new Error('canary_source_gallery_missing');
+  const urls = images.map(image => {
+    const url = new URL(image.url);
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password
+      || image.objectKey || image.id || image.checksum || Number(image.size || 0) !== 0
+      || /\/api\/catalog\/images\//.test(url.pathname)) throw new Error('canary_stored_image_in_source_url_mode');
+    return url.href;
+  });
+  if (new Set(urls).size !== urls.length || expectedUrls && JSON.stringify(urls) !== JSON.stringify(expectedUrls)) {
+    throw new Error('canary_source_gallery_parity_failed');
+  }
+  return urls;
 }
 
 export function assertProductionInputsUnchanged(before, after) {

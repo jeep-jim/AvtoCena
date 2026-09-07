@@ -163,10 +163,12 @@ test("image cache rejects HTML instead of image", async () => {
   finally { (global as any).fetch = original; }
 });
 
-test("image source cache reuses the stored Object Storage image without downloading the origin twice", async () => {
+test("explicit legacy binary mode: image source cache reuses the stored Object Storage image without downloading the origin twice", async () => {
   const cwd = process.cwd();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-source-cache-"));
   const originalFetch = global.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "binary";
   let sourceDownloads = 0;
   fs.mkdirSync(path.join(dir, "data"));
   process.chdir(dir);
@@ -193,6 +195,7 @@ test("image source cache reuses the stored Object Storage image without download
     assert.equal(reusedReplacement?.objectKey, replaced?.objectKey);
     assert.equal(sourceDownloads, 2);
   } finally {
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
     (global as any).fetch = originalFetch;
     process.chdir(cwd);
     resetJsonStorageForTests();
@@ -201,10 +204,12 @@ test("image source cache reuses the stored Object Storage image without download
   }
 });
 
-test("valid catalog photos are resized and stored as webp", async () => {
+test("explicit legacy binary mode: valid catalog photos are resized and stored as webp", async () => {
   const cwd = process.cwd();
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-optimization-"));
   const originalFetch = global.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "binary";
   const png = await sharp({ create: { width: 32, height: 24, channels: 3, background: { r: 220, g: 30, b: 30 } } }).png().toBuffer();
   fs.mkdirSync(path.join(dir, "data"));
   process.chdir(dir);
@@ -218,6 +223,7 @@ test("valid catalog photos are resized and stored as webp", async () => {
     assert.ok(Number(optimized?.width) <= 1600);
     assert.ok(Number(optimized?.height) <= 1200);
   } finally {
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
     (global as any).fetch = originalFetch;
     process.chdir(cwd);
     resetJsonStorageForTests();
@@ -322,7 +328,9 @@ test("Encar list cover is preserved when detail gallery is absent", async () => 
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
-    assert.ok(seenUrls.some((url) => url.includes(listCover)));
+    assert.ok(images[0].url.includes(listCover));
+    assert.equal(images[0].objectKey, "");
+    assert.equal(seenUrls.some((url) => url.includes(listCover)), false);
     assert.equal(offer!.engineCc, 1999);
   } finally {
     (global as any).fetch = original;
@@ -404,7 +412,7 @@ test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
 });
 
 
-test("Encar sample image limit stops downloading after configured maximum", async () => {
+test("Encar source URL gallery respects the maximum without downloading photos", async () => {
   resetJsonStorageForTests();
   const originalFetch = global.fetch;
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
@@ -425,7 +433,8 @@ test("Encar sample image limit stops downloading after configured maximum", asyn
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
-    assert.equal(imageUrls.length, 1);
+    assert.equal(imageUrls.length, 0);
+    assert.ok(images[0].url.endsWith(cover));
   } finally {
     if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER; else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
     (global as any).fetch = originalFetch;

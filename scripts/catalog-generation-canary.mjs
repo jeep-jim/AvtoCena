@@ -1,11 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
-import sharp from 'sharp';
 import { publicResponseChallenge } from './lib/public-response-challenge.mjs';
 import { boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
-  assertStoredCardParity, sha256, jsonHash } from './lib/catalog-generation-canary.mjs';
+  assertStoredCardParity, assertCanaryJsonKey, assertCanarySourceRequest, assertSourceUrlGallery, sha256, jsonHash } from './lib/catalog-generation-canary.mjs';
 
 const repoRoot = process.cwd();
 const market = process.env.CANARY_MARKET;
@@ -18,21 +17,20 @@ const imageLimit = boundedPilotInteger(process.env.CANARY_IMAGE_LIMIT, 8, 10);
 const endpoint = process.env.YC_OBJECT_STORAGE_ENDPOINT || 'https://storage.yandexcloud.net';
 const bucket = process.env.YC_OBJECT_STORAGE_BUCKET;
 const storagePrefix = (process.env.YC_OBJECT_STORAGE_PREFIX || '').replace(/^\/+|\/+$/g, '');
-const report = { version: 1, market, runId, codeSha: process.env.GITHUB_SHA || null,
+const report = { version: 2, imageStorageMode: 'source_urls_only', binaryImageRequests: 0, binaryImageWrites: 0, market, runId, codeSha: process.env.GITHUB_SHA || null,
   startedAt: new Date().toISOString(), completed: false, accepted: false, productionPublication: false,
   productionCatalogWrites: 0, diagnosticObjectWrites: 0, japanRequests: 0,
   environment: 'GitHub runner with production storage inputs; local generation and isolated object round-trip',
   sourceRequests: [], imageRequests: [], storageRequests: [], rows: [], limits: { target, sampleLimit, imageLimit },
   limitations: ['Bounded source-order sample, not full inventory readiness.',
     'The live catalog is not switched. Rollback is exercised only in the isolated local catalog.',
-    'Image decoding and dimensions are automated; visual review is a separate check.'] };
+    'Only source-bound gallery URL metadata is checked; image bytes, dimensions and visual quality are not certified.'] };
 await fs.mkdir(output, { recursive: true });
 const checkpoint = () => fs.writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
 const originalFetch = globalThis.fetch;
 const imageUrls = new Set();
 let sourceStopped = false;
 let currencyRequests = 0;
-const sourceHost = market === 'korea' ? 'kcar.com' : 'mobile.de';
 const writeKeys = new Set();
 let temp;
 const errorText = error => String(error?.message || error).replace(/https?:\/\/\S+/g, '[url]').slice(0, 250);
@@ -44,18 +42,20 @@ globalThis.fetch = async (input, init = {}) => {
   if (url.origin === new URL(endpoint).origin) {
     const key = assertCanaryObjectRequest(url, method, endpoint, bucket, storagePrefix, prefix);
     report.storageRequests.push({ key, method });
-    if (method === 'PUT') report.diagnosticObjectWrites++;
+    if (method === 'PUT') {
+      if (!/^application\/json(?:;|$)/i.test(headers.get('content-type') || '')) throw new Error('canary_non_json_content_type_blocked');
+      report.diagnosticObjectWrites++;
+    }
     return originalFetch(input, init);
   }
   if (headers.has('authorization') || headers.has('cookie') || url.protocol !== 'https:') throw new Error('canary_public_credentials_or_protocol_blocked');
   if (url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && method === 'GET' && currencyRequests++ === 0) {
     return originalFetch(url, { headers, redirect: 'error', signal: AbortSignal.timeout(30000) });
   }
-  const isImage = imageUrls.has(url.href);
-  if (sourceStopped || method !== 'GET' && !(market === 'korea' && method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct')) throw new Error('canary_source_stopped_or_method_blocked');
-  const events = isImage ? report.imageRequests : report.sourceRequests;
-  if (events.length >= (isImage ? 160 : 70)) throw new Error('canary_request_budget_exhausted');
-  if (!isImage && !(url.hostname === sourceHost || url.hostname.endsWith(`.${sourceHost}`))) throw new Error('canary_source_host_blocked');
+  if (sourceStopped) throw new Error('canary_source_stopped');
+  assertCanarySourceRequest(url, method, market, imageUrls);
+  const events = report.sourceRequests;
+  if (events.length >= 70) throw new Error('canary_request_budget_exhausted');
   const event = { url: url.href, method, at: new Date().toISOString() };
   events.push(event);
   const response = await originalFetch(url, { ...init, headers, redirect: 'manual', signal: AbortSignal.timeout(30000) });
@@ -63,30 +63,9 @@ globalThis.fetch = async (input, init = {}) => {
   event.contentType = response.headers.get('content-type');
   if ([401, 403, 429].includes(response.status)) { sourceStopped = true; throw new Error(`canary_stop_http_${response.status}`); }
   if (response.status >= 300 && response.status < 400) throw new Error('canary_redirect_requires_review');
-  if (isImage) {
-    if (!response.ok) return response;
-    if (!/^image\/(jpe?g|png|webp|avif)(?:;|$)/i.test(response.headers.get('content-type') || '')) {
-      event.error = 'canary_image_not_raster';
-      throw new Error(event.error);
-    }
-    const reader = response.body.getReader();
-    const chunks = []; let bytes = 0;
-    try {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        bytes += value.byteLength;
-        if (bytes > 8_000_000) { await reader.cancel(); throw new Error('canary_image_too_large'); }
-        chunks.push(value);
-      }
-    } finally { reader.releaseLock(); }
-    const data = Buffer.concat(chunks);
-    const decoder = sharp(data, { failOn: 'warning', limitInputPixels: 40_000_000 });
-    const metadata = await decoder.metadata();
-    await decoder.stats(); // Fully decode; a valid header alone is insufficient.
-    if (!(metadata.width >= 640 && metadata.height >= 400)) throw new Error('canary_image_below_dimensions');
-    Object.assign(event, { bytes, sha256: sha256(data), width: metadata.width, height: metadata.height, decoded: true });
-    return new Response(data, { status: response.status, headers: { 'content-type': response.headers.get('content-type') } });
+  if (/^image\//i.test(response.headers.get('content-type') || '')) {
+    await response.body?.cancel();
+    throw new Error('canary_unexpected_image_response_blocked');
   }
   const body = await response.clone().text();
   event.sha256 = sha256(body);
@@ -159,13 +138,14 @@ try {
     if (!original) continue;
     local[method] = async (key, ...args) => {
       if (Array.isArray(key) || !key.startsWith('catalog/') || key.includes('..') || key.includes('\\')
-        || readOnlyCatalog.has(key.split('/')[1]) || method.startsWith('delete')) throw new Error('canary_local_write_blocked');
+        || readOnlyCatalog.has(key.split('/')[1]) || method !== 'writeJson') throw new Error('canary_local_write_blocked');
+      assertCanaryJsonKey(key);
       writeKeys.add(key);
       return original(key, ...args);
     };
   }
   const { persistCatalogOffers, getOffer, searchOffers, searchProjectionFromOffer, projectionCanRenderCard,
-    cacheImageFromUrl, assertSafeImageUrl, resetCatalogReadCachesForTests, CATALOG_PRODUCTION_WRITES_PAUSED } = await import('../apps/web/lib/catalog/storage.ts');
+    assertSafeImageUrl, resetCatalogReadCachesForTests, CATALOG_PRODUCTION_WRITES_PAUSED } = await import('../apps/web/lib/catalog/storage.ts');
   if (!CATALOG_PRODUCTION_WRITES_PAUSED) throw new Error('canary_requires_production_pause');
   const { calculateOfferWithVerifiedSpecifications } = await import('../apps/web/lib/catalog/customs-pricing.ts');
   const { enrichOfferForDisplay } = await import('../apps/web/lib/catalog/display-enrichment.ts');
@@ -200,28 +180,24 @@ try {
       if (!isCatalogYearAllowed(offer.year, market)) throw new Error('canary_year_not_allowed');
       offer = await auditOffer(offer);
       row.beforeRefresh = { price: offer.sourcePrice, totalRub: offer.totalRub, year: offer.year };
-      const cached = []; const originalUrls = [];
+      const selected = []; const originalUrls = [];
       for (const candidate of offer.images.slice(0, imageLimit)) {
-        if (sourceStopped) break;
         const url = assertSafeImageUrl(candidate.url);
         imageUrls.add(new URL(url).href);
-        const image = await cacheImageFromUrl(url, market);
-        if (!image || !image.width || !image.height) { row.images.push({ url, accepted: false }); continue; }
-        if (cached.some(previous => previous.checksum === image.checksum)) { row.images.push({ url, accepted: false, duplicate: true }); continue; }
-        cached.push(image); originalUrls.push(url);
-        await fs.mkdir(path.dirname(path.join(output, image.objectKey)), { recursive: true });
-        await fs.copyFile(path.join(dataRoot, image.objectKey), path.join(output, image.objectKey));
-        row.images.push({ url, accepted: true, checksum: image.checksum, width: image.width, height: image.height, size: image.size });
-        if (cached.length >= 5) break;
+        if (originalUrls.includes(url)) continue;
+        assertSourceUrlGallery([candidate]);
+        selected.push(candidate); originalUrls.push(url);
+        row.images.push({ url, accepted: true, evidence: 'source_bound_gallery_url' });
+        if (selected.length >= 5) break;
       }
-      if (cached.length < 5) throw new Error('canary_fewer_than_five_decoded_images');
+      if (selected.length < 5) throw new Error('canary_fewer_than_five_source_image_urls');
       // A new KCar request refreshes status, price and characteristics, not only
       // gallery links. mobile.de fetchImages already re-reads the identity-bound VIP.
       if (market === 'korea') offer = await source.refreshOffer(offer);
       else offer.images = await source.fetchImages(offer);
       const currentUrls = new Set(offer.images.map(image => image.url));
-      if (originalUrls.some(url => !currentUrls.has(url))) throw new Error('canary_gallery_changed_during_download');
-      offer.images = cached;
+      if (originalUrls.some(url => !currentUrls.has(url))) throw new Error('canary_gallery_changed_during_refresh');
+      offer.images = selected;
       offer = await auditOffer(offer);
       row.refreshedAt = new Date().toISOString();
       Object.assign(row, { accepted: true, id: offer.id, year: offer.year, sourcePrice: offer.sourcePrice,
@@ -244,10 +220,8 @@ try {
     const card = stored.items.find(row => row.id === expected.id);
     const detail = await getOffer(expected.id);
     report.storedCards.push(assertStoredCardParity(detail, card, expected, effective.id, catalogOfferVisibleRub));
-    for (const image of detail.images) {
-      const bytes = await local.getBinary(image.objectKey);
-      if (bytes.checksum !== image.checksum) throw new Error('canary_local_image_checksum_mismatch');
-    }
+    assertSourceUrlGallery(detail.images, assertSourceUrlGallery(expected.images));
+    if (card.cardImageUrl && !expected.images.some(image => image.url === card.cardImageUrl)) throw new Error('canary_card_source_image_url_changed');
   }
   await local.writeJson('catalog/manifest.json', first);
   resetCatalogReadCachesForTests();
@@ -264,14 +238,14 @@ try {
   for (const key of [...writeKeys].sort()) {
     const data = await fs.readFile(path.join(dataRoot, key));
     const remoteKey = `${prefix}${key}`;
-    const mime = key.endsWith('.json') ? 'application/json' : key.endsWith('.webp') ? 'image/webp' : 'application/octet-stream';
-    const storedObject = await objectStorage.putBinary(remoteKey, data, mime, { ifNoneMatch: '*' });
+    assertCanaryJsonKey(key);
+    await objectStorage.writeJson(remoteKey, JSON.parse(data.toString('utf8')), { ifNoneMatch: '*' });
     const roundTrip = await objectStorage.getBinary(remoteKey);
-    if (storedObject.checksum !== sha256(data) || roundTrip.checksum !== sha256(data)) throw new Error('canary_object_roundtrip_mismatch');
+    if (roundTrip.checksum !== sha256(data)) throw new Error('canary_object_roundtrip_mismatch');
     report.files.push({ key: remoteKey, sha256: sha256(data), bytes: data.length });
     if (report.files.length % 20 === 0) await checkpoint();
-    // Keep a small reviewable artifact, including the actual decoded photographs.
-    if (key.startsWith('catalog/images/') || key === 'catalog/manifest.json' || key.startsWith('catalog/public/')) {
+    // The review artifact contains JSON only, retaining the original source URLs.
+    if (key === 'catalog/manifest.json' || key.startsWith('catalog/public/')) {
       await fs.mkdir(path.dirname(path.join(output, key)), { recursive: true });
       await fs.writeFile(path.join(output, key), data);
     }
@@ -284,7 +258,7 @@ try {
   await checkpoint();
   await objectStorage.writeJson(`${prefix}report.json`, report, { ifNoneMatch: '*' });
   console.log(JSON.stringify({ market, accepted: true, examined: report.rows.length, stored: report.storedCards.length,
-    decodedImages: report.imageRequests.filter(row => row.decoded).length, diagnosticObjects: report.files.length,
+    sourceImageUrls: report.storedCards.reduce((count, row) => count + row.images, 0), binaryImageRequests: 0, binaryImageWrites: 0, diagnosticObjects: report.files.length,
     isolatedRollbackPassed: report.rollback.isolatedRollbackPassed, productionInputsUnchanged: true }));
 } catch (error) {
   report.accepted = false;

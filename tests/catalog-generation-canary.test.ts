@@ -3,50 +3,65 @@ import test from 'node:test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import sharp from 'sharp';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
-  assertStoredCardParity } from '../scripts/lib/catalog-generation-canary.mjs';
+  assertStoredCardParity, assertCanaryJsonKey, assertCanarySourceRequest, assertSourceUrlGallery } from '../scripts/lib/catalog-generation-canary.mjs';
 import { kcarKoreaExactSource } from '../apps/web/lib/catalog/kcar-exact-source';
 import { assertSafeImageUrl, cacheImageFromUrl } from '../apps/web/lib/catalog/storage';
 import { resetJsonStorageForTests, getJsonStorage } from '../apps/web/lib/data';
 
-test('the binary loader decodes KCar JPEG and mobile.de AVIF but rejects HTML and invalid AVIF', async () => {
+test('source URL mode never fetches images or reads/writes binary caches, including unset mode', async () => {
   const originalFetch = globalThis.fetch;
   const originalCwd = process.cwd();
   const originalDriver = process.env.JSON_STORAGE_DRIVER;
-  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'kcar-image-mime-'));
+  const originalMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'catalog-source-url-'));
   await fs.mkdir(path.join(temp, 'data'));
-  const jpeg = await sharp({ create: { width: 780, height: 520, channels: 3, background: '#426680' } }).jpeg().toBuffer();
-  let sourceBytes = jpeg;
-  let contentType = 'image/jpg';
-  globalThis.fetch = async () => new Response(sourceBytes, { headers: { 'content-type': contentType } });
+  globalThis.fetch = async () => { throw new Error('unexpected_image_fetch'); };
   process.chdir(temp); process.env.JSON_STORAGE_DRIVER = 'local'; resetJsonStorageForTests();
+  const storage = getJsonStorage();
+  const methods = ['readJson', 'readJsonWithMeta', 'writeJson', 'getBinary', 'putBinary', 'binaryExists'] as const;
+  const originals = new Map(methods.map(name => [name, storage[name]]));
+  let calls = 0;
+  for (const name of methods) (storage as any)[name] = async () => { calls++; throw new Error('unexpected_image_storage_access'); };
   try {
-    const image = await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/good.jpg', 'korea');
-    assert.ok(image);
-    assert.equal(image.width, 780);
-    assert.equal(image.height, 520);
-    const stored = await getJsonStorage().getBinary!(image.objectKey);
-    assert.equal(stored.checksum, image.checksum);
-    assert.equal((await sharp(stored.data).metadata()).format, 'webp');
-    contentType = 'text/html';
-    assert.equal(await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/bad.jpg', 'korea'), null);
-    contentType = 'image/avif';
-    sourceBytes = await sharp(jpeg).avif({ effort: 0 }).toBuffer();
-    const avif = await cacheImageFromUrl('https://img.classistatic.de/api/v1/mo-prod/images/test-avif', 'europe');
-    assert.ok(avif);
-    assert.equal(avif.mimeType, 'image/webp');
-    assert.equal(avif.width, 780);
-    const avifStored = await getJsonStorage().getBinary!(avif.objectKey);
-    assert.equal((await sharp(avifStored.data).metadata()).format, 'webp');
-    sourceBytes = Buffer.from('not an AVIF image');
-    assert.equal(await cacheImageFromUrl('https://img.classistatic.de/api/v1/mo-prod/images/test-invalid-avif', 'europe'), null);
+    for (const mode of ['source_urls_only', undefined]) {
+      if (mode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE;
+      else process.env.CATALOG_IMAGE_STORAGE_MODE = mode;
+      for (const url of ['https://img.kcar.com/gallery/source.jpg', 'https://img.classistatic.de/api/v1/mo-prod/images/source?rule=mo-1024.jpg']) {
+        const image = await cacheImageFromUrl(url, url.includes('kcar') ? 'korea' : 'europe');
+        assert.ok(image);
+        assert.deepEqual(assertSourceUrlGallery([image]), [url]);
+        assert.equal(image.width, undefined);
+      }
+    }
+    process.env.CATALOG_IMAGE_STORAGE_MODE = 'mistyped-mode';
+    assert.equal(await cacheImageFromUrl('https://img.kcar.com/gallery/a.jpg', 'korea'), null);
+    assert.equal(calls, 0);
+    assert.deepEqual(await fs.readdir(path.join(temp, 'data')), []);
+    assert.equal(await cacheImageFromUrl('https://127.0.0.1/a.jpg', 'europe'), null);
   } finally {
+    for (const [name, method] of originals) (storage as any)[name] = method;
     globalThis.fetch = originalFetch; process.chdir(originalCwd); resetJsonStorageForTests();
-    if (originalDriver === undefined) delete process.env.JSON_STORAGE_DRIVER;
-    else process.env.JSON_STORAGE_DRIVER = originalDriver;
+    if (originalDriver === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = originalDriver;
+    if (originalMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = originalMode;
     await fs.rm(temp, { recursive: true, force: true });
   }
+});
+
+test('canary refuses image fetches and non-JSON writes and rejects stored or changed galleries', () => {
+  assertCanarySourceRequest(new URL('https://api.kcar.com/bc/search/list/drct'), 'POST', 'korea');
+  assertCanarySourceRequest(new URL('https://www.mobile.de/consumer-api/search'), 'GET', 'europe');
+  for (const url of ['https://img.kcar.com/gallery/a.jpg', 'https://www.kcar.com/image/a.webp', 'https://www.kcar.com/bound-image']) {
+    assert.throws(() => assertCanarySourceRequest(new URL(url), 'GET', 'korea', new Set(['https://www.kcar.com/bound-image'])), /image_request_blocked/);
+  }
+  for (const key of ['catalog/images/korea/a.webp', 'catalog/images/hidden.json', 'catalog/image-source-cache/a.json', 'catalog/public/a.bin', 'catalog/../a.json']) assert.throws(() => assertCanaryJsonKey(key), /blocked/);
+  assertCanaryJsonKey('catalog/public/generation/chunk-0001.json');
+  const image = { url: 'https://img.kcar.com/photo.jpg', objectKey: '', id: '', checksum: '', size: 0 };
+  assert.deepEqual(assertSourceUrlGallery([image]), [image.url]);
+  for (const extra of [{ objectKey: 'catalog/images/a.webp' }, { size: 123 }, { checksum: 'abc' }, { url: 'data:image/jpeg;base64,abc' }]) {
+    assert.throws(() => assertSourceUrlGallery([{ ...image, ...extra }]), /stored_image/);
+  }
+  assert.throws(() => assertSourceUrlGallery([image], ['https://img.kcar.com/other.jpg']), /parity/);
 });
 
 test('mobile.de gallery CDN is admitted only at its exact HTTPS vehicle image route', () => {
@@ -73,7 +88,7 @@ test('canary object writes cannot touch the production pointer, settings or othe
     for (const method of ['PUT', 'DELETE', 'POST']) assert.throws(() => check(key, method), /blocked/);
   }
   assert.equal(check(`${prefix}catalog/manifest.json`, 'PUT'), `${prefix}catalog/manifest.json`);
-  for (const key of ['catalog/generations/active/offers.json', 'catalog/images/korea/a.webp', 'catalog/canaries/other/korea/report.json']) {
+  for (const key of ['catalog/generations/active/offers.json', 'catalog/images/korea/a.webp', 'catalog/canaries/other/korea/report.json', `${prefix}catalog/images/korea/a.webp`, `${prefix}catalog/image-source-cache/a.json`]) {
     assert.throws(() => check(key, 'PUT'), /blocked/);
   }
   assert.throws(() => check(`${prefix}a?delete=1`, 'GET'), /blocked/);
