@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
+import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
-  assertStoredCardParity, assertCanaryJsonKey, assertCanarySourceRequest, assertSourceUrlGallery } from '../scripts/lib/catalog-generation-canary.mjs';
+  assertStoredCardParity, assertCanaryJsonKey, assertCanaryTextFeed, CANARY_TEXT_FEED_KEY, assertCanarySourceRequest, assertSourceUrlGallery } from '../scripts/lib/catalog-generation-canary.mjs';
 import { kcarKoreaExactSource } from '../apps/web/lib/catalog/kcar-exact-source';
 import { assertSafeImageUrl, cacheImageFromUrl } from '../apps/web/lib/catalog/storage';
 import { resetJsonStorageForTests, getJsonStorage } from '../apps/web/lib/data';
@@ -56,6 +57,11 @@ test('canary refuses image fetches and non-JSON writes and rejects stored or cha
   }
   for (const key of ['catalog/images/korea/a.webp', 'catalog/images/hidden.json', 'catalog/image-source-cache/a.json', 'catalog/public/a.bin', 'catalog/../a.json']) assert.throws(() => assertCanaryJsonKey(key), /blocked/);
   assertCanaryJsonKey('catalog/public/generation/chunk-0001.json');
+  const feed = gzipSync('\uFEFFid,title,description,link,image_link,availability,price,brand,identifier_exists,google_product_category\n');
+  assertCanaryTextFeed(CANARY_TEXT_FEED_KEY, feed, 'application/gzip');
+  assert.throws(() => assertCanaryTextFeed('catalog/images/photo.gz', feed, 'application/gzip'), /blocked/);
+  assert.throws(() => assertCanaryTextFeed(CANARY_TEXT_FEED_KEY, gzipSync('image bytes'), 'application/gzip'), /invalid_text_feed/);
+  assert.throws(() => assertCanaryTextFeed(CANARY_TEXT_FEED_KEY, feed, 'image/webp'), /blocked/);
   const image = { url: 'https://img.kcar.com/photo.jpg', objectKey: '', id: '', checksum: '', size: 0 };
   assert.deepEqual(assertSourceUrlGallery([image]), [image.url]);
   for (const extra of [{ objectKey: 'catalog/images/a.webp' }, { size: 123 }, { checksum: 'abc' }, { url: 'data:image/jpeg;base64,abc' }]) {

@@ -1,8 +1,10 @@
 import crypto from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
 
 export const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
 export const jsonHash = value => sha256(JSON.stringify(value));
 export const PRODUCTION_INPUTS = ['catalog/manifest.json', 'markets/markets.json', 'fees/exchange-rates.json'];
+export const CANARY_TEXT_FEED_KEY = 'catalog/public/feeds/openai-products.csv.gz';
 
 export function canaryPrefix(runId, market) {
   if (!/^[a-zA-Z0-9_-]{1,80}$/.test(runId) || !['europe', 'korea'].includes(market)) throw new Error('invalid_canary_identity');
@@ -20,7 +22,7 @@ export function assertCanaryObjectRequest(url, method, endpoint, bucket, configu
   if (key.split('/').some(part => !part || part === '.' || part === '..' || part.includes('\\'))) throw new Error('canary_object_key_blocked');
   if (method === 'GET' && PRODUCTION_INPUTS.includes(key)) return key;
   if (key.startsWith(prefix) && ['GET', 'PUT'].includes(method)) {
-    assertCanaryJsonKey(key.slice(prefix.length));
+    if (key.slice(prefix.length) !== CANARY_TEXT_FEED_KEY) assertCanaryJsonKey(key.slice(prefix.length));
     return key;
   }
   throw new Error('canary_object_request_blocked');
@@ -30,6 +32,13 @@ export function assertCanaryJsonKey(key) {
   if (!/\.json$/.test(key) || key.split('/').some(part => !part || part === '.' || part === '..' || part.includes('\\'))
     || /(?:^|\/)(?:images|image-source-cache)(?:\/|$)/.test(key)) throw new Error('canary_non_json_or_image_write_blocked');
   return key;
+}
+
+export function assertCanaryTextFeed(key, data, mimeType) {
+  if (key !== CANARY_TEXT_FEED_KEY || mimeType !== 'application/gzip') throw new Error('canary_binary_write_blocked');
+  const text = gunzipSync(data, { maxOutputLength: 2_000_000 }).toString('utf8');
+  if (!text.startsWith('\uFEFFid,title,description,link,image_link,availability,price,brand,identifier_exists,')
+    || /\u0000|data:image\/|\/api\/catalog\/images\//i.test(text)) throw new Error('canary_invalid_text_feed');
 }
 
 export function assertCanarySourceRequest(url, method, market, galleryUrls = new Set()) {

@@ -4,7 +4,7 @@ import os from 'node:os';
 import { publicResponseChallenge } from './lib/public-response-challenge.mjs';
 import { boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
-  assertStoredCardParity, assertCanaryJsonKey, assertCanarySourceRequest, assertSourceUrlGallery, sha256, jsonHash } from './lib/catalog-generation-canary.mjs';
+  assertStoredCardParity, assertCanaryJsonKey, assertCanaryTextFeed, CANARY_TEXT_FEED_KEY, assertCanarySourceRequest, assertSourceUrlGallery, sha256, jsonHash } from './lib/catalog-generation-canary.mjs';
 
 const repoRoot = process.cwd();
 const market = process.env.CANARY_MARKET;
@@ -43,7 +43,8 @@ globalThis.fetch = async (input, init = {}) => {
     const key = assertCanaryObjectRequest(url, method, endpoint, bucket, storagePrefix, prefix);
     report.storageRequests.push({ key, method });
     if (method === 'PUT') {
-      if (!/^application\/json(?:;|$)/i.test(headers.get('content-type') || '')) throw new Error('canary_non_json_content_type_blocked');
+      if (key === `${prefix}${CANARY_TEXT_FEED_KEY}`) assertCanaryTextFeed(CANARY_TEXT_FEED_KEY, init.body, headers.get('content-type'));
+      else if (!/^application\/json(?:;|$)/i.test(headers.get('content-type') || '')) throw new Error('canary_non_json_content_type_blocked');
       report.diagnosticObjectWrites++;
     }
     return originalFetch(input, init);
@@ -138,8 +139,9 @@ try {
     if (!original) continue;
     local[method] = async (key, ...args) => {
       if (Array.isArray(key) || !key.startsWith('catalog/') || key.includes('..') || key.includes('\\')
-        || readOnlyCatalog.has(key.split('/')[1]) || method !== 'writeJson') throw new Error('canary_local_write_blocked');
-      assertCanaryJsonKey(key);
+        || readOnlyCatalog.has(key.split('/')[1]) || !['writeJson', 'putBinary'].includes(method)) throw new Error(`canary_local_write_blocked:${method}:${key}`);
+      if (method === 'putBinary') assertCanaryTextFeed(key, args[0], args[1]);
+      else assertCanaryJsonKey(key);
       writeKeys.add(key);
       return original(key, ...args);
     };
@@ -238,13 +240,18 @@ try {
   for (const key of [...writeKeys].sort()) {
     const data = await fs.readFile(path.join(dataRoot, key));
     const remoteKey = `${prefix}${key}`;
-    assertCanaryJsonKey(key);
-    await objectStorage.writeJson(remoteKey, JSON.parse(data.toString('utf8')), { ifNoneMatch: '*' });
+    if (key === CANARY_TEXT_FEED_KEY) {
+      assertCanaryTextFeed(key, data, 'application/gzip');
+      await objectStorage.putBinary(remoteKey, data, 'application/gzip', { ifNoneMatch: '*' });
+    } else {
+      assertCanaryJsonKey(key);
+      await objectStorage.writeJson(remoteKey, JSON.parse(data.toString('utf8')), { ifNoneMatch: '*' });
+    }
     const roundTrip = await objectStorage.getBinary(remoteKey);
     if (roundTrip.checksum !== sha256(data)) throw new Error('canary_object_roundtrip_mismatch');
     report.files.push({ key: remoteKey, sha256: sha256(data), bytes: data.length });
     if (report.files.length % 20 === 0) await checkpoint();
-    // The review artifact contains JSON only, retaining the original source URLs.
+    // Metadata includes the existing compressed CSV text feed; never image files.
     if (key === 'catalog/manifest.json' || key.startsWith('catalog/public/')) {
       await fs.mkdir(path.dirname(path.join(output, key)), { recursive: true });
       await fs.writeFile(path.join(output, key), data);
@@ -252,6 +259,7 @@ try {
   }
   assertProductionInputsUnchanged(before, await readInputs());
   report.productionInputsUnchanged = true;
+  report.compressedTextFeedObjects = report.files.filter(file => file.key.endsWith(CANARY_TEXT_FEED_KEY)).length;
   report.accepted = true;
   report.completed = true;
   report.finishedAt = new Date().toISOString();
