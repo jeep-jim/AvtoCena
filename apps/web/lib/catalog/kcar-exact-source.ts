@@ -1,3 +1,4 @@
+import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import crypto from "node:crypto";
 import { canonicalSourceFuel } from "./powertrain-safety";
 import { stableOfferId } from "./storage";
@@ -219,7 +220,7 @@ async function fetchExactDetailData(carCd: string) {
   return data;
 }
 
-export const KCAR_EXTERIOR_FIRST_GALLERY_MODE = "kcar_exterior_cover_vr_extra_exact_car_id_v3";
+export const KCAR_EXTERIOR_FIRST_GALLERY_MODE = "kcar_exterior_cover_vr_extra_exact_car_id_v4";
 
 function splitImageList(value: unknown) {
   return clean(value)
@@ -266,7 +267,8 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   // K Car's v_src_show begins with interior/detail frames. Its separately typed
   // exterior cover (and 360-degree exterior frames when present) must lead the
   // customer gallery; cabin, wheels and diagnostics belong after the body.
-  return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
+  return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])]
+    .filter(url => !reviewedCatalogImageExclusion(url)).slice(0, 30);
 }
 
 export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, onReject: (reason: string) => void = () => {}): Row | null {

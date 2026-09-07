@@ -1,4 +1,5 @@
 import { hasModificationSelection } from "./modification-contract";
+import { reviewedCatalogGalleryHold } from "./source-gallery-review";
 import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
 import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
@@ -273,6 +274,8 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
 }
 
 export function catalogSemanticEvidenceRejectionReason(offer: Partial<VehicleOffer> | any) {
+  const galleryHold = reviewedCatalogGalleryHold(offer);
+  if (galleryHold) return galleryHold;
   const evidence = offer?.operational?.semanticEvidence;
   if (!evidence || typeof evidence !== "object") return "";
   for (const [field, value] of Object.entries(evidence as Record<string, any>)) {
@@ -308,6 +311,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
  * quality checks against a compact card row.
  */
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
+  if (reviewedCatalogGalleryHold(offer)) return false;
   if (hasModificationSelection(offer)) return offer?.recoveryQualification?.status === "selection_required";
   if (Number(offer?.cardProjectionVersion || 0) >= 3) {
     return offer?.publicSpecificationVerified === true

@@ -1,3 +1,4 @@
+import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import { canonicalSourceModelIdentity } from "./open-source-normalizer";
 import {
   hasCredibleCatalogIdentity,
@@ -707,7 +708,7 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
       ...new Set(
         (Array.isArray(ad?.galleryImages) ? ad.galleryImages : [])
           .map(largestGalleryUrl)
-          .filter(Boolean),
+          .filter((url) => url && !reviewedCatalogImageExclusion(url)),
       ),
     ].slice(
       0,

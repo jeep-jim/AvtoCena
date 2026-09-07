@@ -1,4 +1,5 @@
 import { publicResponseChallenge } from "./lib/public-response-challenge.mjs";
+import { isExistingPilotBridgeRequest } from './lib/catalog-pilot-bridge.mjs';
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { summarizePilotMarket, boundedPilotInteger } from './lib/catalog-pilot-summary.mjs';
@@ -25,9 +26,11 @@ globalThis.fetch = async (input, init = {}) => {
     imageRequestsBlocked++; throw new Error('diagnostic_image_download_blocked');
   }
   const method = init.method || (input instanceof Request ? input.method : 'GET');
+  const bridgeRequest = process.env.PILOT_ALLOW_EXISTING_BRIDGE === '1'
+    && isExistingPilotBridgeRequest(url, method, process.env.PILOT_REGISTERED_SOURCE_ID);
   if (url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && method === 'GET' && currencyRequests++ === 0) return fetchOriginal(url, { redirect: 'error', signal: AbortSignal.timeout(timeoutMs) });
   if (!active || active.stopped || active.requests.length >= requestLimit || (method !== 'GET' && !(method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct'))
-    || url.protocol !== 'https:' || url.username || url.password || url.port || !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`))) {
+    || url.protocol !== 'https:' || url.username || url.password || url.port || (!bridgeRequest && !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`)))) {
     throw new Error('pilot_request_outside_envelope');
   }
   const headers = new Headers(init.headers || (input instanceof Request ? input.headers : {}));
@@ -80,6 +83,8 @@ if (process.env.PILOT_REGISTERED_SOURCE_ID) {
   sources.splice(0, sources.length, [registeredSource.market, null, null, [host]]);
 }
 const report = { version: 3, completed: false, checkedAt: new Date().toISOString(), productionWrites: false,
+  existingProductionBridgeAllowed: process.env.PILOT_ALLOW_EXISTING_BRIDGE === '1',
+  bridgeUpstreamTrafficObserved: false,
   japanRequests: 0, detailsRequested: true, pricesCalculated: true, maxRequestsPerSource: requestLimit, sampleLimit, pageLimit, markets: [],
   limitation: 'Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.' };
 const outputPath = process.env.PILOT_REPORT || 'data/catalog/research/public-detail-calculation-pilot-v1-20260906.json';

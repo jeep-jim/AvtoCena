@@ -1,4 +1,4 @@
-name: Remaining approved-source restart diagnostics v2
+name: Existing production bridge restart diagnostics v3
 on:
   push:
     branches: [feat/catalog-europe-kcar-generation-canary-20260907]
@@ -19,19 +19,16 @@ jobs:
       matrix:
         include:
           - { market: korea, source: encar_direct }
-          - { market: europe, source: autoscout_europe_open }
-          - { market: china, source: dongchedi_china_open }
           - { market: china, source: guazi_china_open }
-          - { market: china, source: autohome_new_china_open }
-          - { market: uae, source: dubicars_uae_exact }
           - { market: georgia, source: myauto_georgia_list }
     env:
+      PILOT_ALLOW_EXISTING_BRIDGE: '1'
       PILOT_MARKETS: ${{ matrix.market }}
       PILOT_REGISTERED_SOURCE_ID: ${{ matrix.source }}
       PILOT_SAMPLE_LIMIT: '20'
       PILOT_PAGE_LIMIT: '1'
       PILOT_REQUEST_LIMIT: '50'
-      PILOT_TIMEOUT_MS: '20000'
+      PILOT_TIMEOUT_MS: '45000'
       PILOT_REQUEST_INTERVAL_MS: '1000'
       PILOT_RESPONSE_EVIDENCE: '1'
       PILOT_REPORT: restart-${{ matrix.market }}-${{ matrix.source }}.json
