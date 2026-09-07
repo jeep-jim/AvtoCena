@@ -1,8 +1,57 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import sharp from 'sharp';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
   assertStoredCardParity } from '../scripts/lib/catalog-generation-canary.mjs';
 import { kcarKoreaExactSource } from '../apps/web/lib/catalog/kcar-exact-source';
+import { assertSafeImageUrl, cacheImageFromUrl } from '../apps/web/lib/catalog/storage';
+import { resetJsonStorageForTests, getJsonStorage } from '../apps/web/lib/data';
+
+test('the binary loader decodes KCar image/jpg and still rejects a text/html response', async () => {
+  const originalFetch = globalThis.fetch;
+  const originalCwd = process.cwd();
+  const originalDriver = process.env.JSON_STORAGE_DRIVER;
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'kcar-image-mime-'));
+  await fs.mkdir(path.join(temp, 'data'));
+  const jpeg = await sharp({ create: { width: 780, height: 520, channels: 3, background: '#426680' } }).jpeg().toBuffer();
+  let contentType = 'image/jpg';
+  globalThis.fetch = async () => new Response(jpeg, { headers: { 'content-type': contentType } });
+  process.chdir(temp); process.env.JSON_STORAGE_DRIVER = 'local'; resetJsonStorageForTests();
+  try {
+    const image = await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/good.jpg', 'korea');
+    assert.ok(image);
+    assert.equal(image.width, 780);
+    assert.equal(image.height, 520);
+    const stored = await getJsonStorage().getBinary!(image.objectKey);
+    assert.equal(stored.checksum, image.checksum);
+    assert.equal((await sharp(stored.data).metadata()).format, 'webp');
+    contentType = 'text/html';
+    assert.equal(await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/bad.jpg', 'korea'), null);
+  } finally {
+    globalThis.fetch = originalFetch; process.chdir(originalCwd); resetJsonStorageForTests();
+    if (originalDriver === undefined) delete process.env.JSON_STORAGE_DRIVER;
+    else process.env.JSON_STORAGE_DRIVER = originalDriver;
+    await fs.rm(temp, { recursive: true, force: true });
+  }
+});
+
+test('mobile.de gallery CDN is admitted only at its exact HTTPS vehicle image route', () => {
+  const url = 'https://img.classistatic.de/api/v1/mo-prod/images/abc-123?rule=mo-1024.jpg';
+  assert.equal(assertSafeImageUrl(url), url);
+  for (const rejected of [
+    'https://img.classistatic.de/other/photo.jpg',
+    'https://img.classistatic.de/api/v1/mo-prod/images/',
+    'https://fake.img.classistatic.de/api/v1/mo-prod/images/abc',
+    'https://img.classistatic.de.evil.test/api/v1/mo-prod/images/abc',
+    'http://img.classistatic.de/api/v1/mo-prod/images/abc',
+    'https://img.classistatic.de:8443/api/v1/mo-prod/images/abc',
+    'https://user:password@img.classistatic.de/api/v1/mo-prod/images/abc',
+    'https://127.0.0.1/photo.jpg',
+  ]) assert.throws(() => assertSafeImageUrl(rejected), /image_url_/);
+});
 
 test('canary object writes cannot touch the production pointer, settings or other runs', () => {
   const prefix = canaryPrefix('123-1', 'korea');

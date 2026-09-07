@@ -108,6 +108,8 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
   /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
   /^(.+\.)?mobile\.de$/i,
+  // Exact CDN used by the identity-bound mobile.de consumer gallery.
+  /^img\.classistatic\.de$/i,
   /^(.+\.)?otomoto\.pl$/i,
   /^(.+\.)?olxcdn\.com$/i,
   /^(.+\.)?lacentrale\.fr$/i,
@@ -1535,7 +1537,18 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
 }
 
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
-export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
+export function assertSafeImageUrl(rawUrl: string) {
+  const parsed = new URL(rawUrl);
+  if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked");
+  if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked");
+  if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed");
+  if (parsed.hostname.toLowerCase() === "img.classistatic.de"
+    && (parsed.protocol !== "https:" || parsed.port || parsed.username || parsed.password
+      || !/^\/api\/v1\/mo-prod\/images\/[^/]+/.test(parsed.pathname))) {
+    throw new Error("image_url_path_not_allowed");
+  }
+  return parsed.toString();
+}
 
 async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
   if (IMAGE_OPTIMIZATION_DISABLED) return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
@@ -1570,7 +1583,9 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
           break;
         }
         if (!res || !res.ok) return null;
-        const mimeType = (res.headers.get("content-type") || "").split(";", 1)[0].trim().toLowerCase();
+        // KCar serves valid JPEGs as image/jpg. Normalize that narrow alias;
+        // HTML and arbitrary binary responses remain outside the raster gate.
+        const mimeType = (res.headers.get("content-type") || "").split(";", 1)[0].trim().toLowerCase().replace(/^image\/jpg$/, "image/jpeg");
         if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
         const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null;
         const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;

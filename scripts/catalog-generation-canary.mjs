@@ -60,11 +60,15 @@ globalThis.fetch = async (input, init = {}) => {
   events.push(event);
   const response = await originalFetch(url, { ...init, headers, redirect: 'manual', signal: AbortSignal.timeout(30000) });
   event.status = response.status;
+  event.contentType = response.headers.get('content-type');
   if ([401, 403, 429].includes(response.status)) { sourceStopped = true; throw new Error(`canary_stop_http_${response.status}`); }
   if (response.status >= 300 && response.status < 400) throw new Error('canary_redirect_requires_review');
   if (isImage) {
     if (!response.ok) return response;
-    if (!/^image\/(jpeg|png|webp)(?:;|$)/i.test(response.headers.get('content-type') || '')) throw new Error('canary_image_not_raster');
+    if (!/^image\/(jpe?g|png|webp)(?:;|$)/i.test(response.headers.get('content-type') || '')) {
+      event.error = 'canary_image_not_raster';
+      throw new Error(event.error);
+    }
     const reader = response.body.getReader();
     const chunks = []; let bytes = 0;
     try {
@@ -133,7 +137,7 @@ try {
   await fs.mkdir(path.join(dataRoot, 'catalog'), { recursive: true });
   const readOnlyCatalog = new Set();
   for (const entry of await fs.readdir(path.join(repoRoot, 'data/catalog'), { withFileTypes: true })) {
-    if (['research', 'imports', 'manifest.json', 'generations', 'internal', 'public', 'images', 'canaries', 'japan-auction-history'].includes(entry.name)) continue;
+    if (['research', 'imports', 'manifest.json', 'generations', 'internal', 'public', 'images', 'image-source-cache', 'canaries', 'japan-auction-history'].includes(entry.name)) continue;
     readOnlyCatalog.add(entry.name);
     await fs.symlink(path.join(repoRoot, 'data/catalog', entry.name), path.join(dataRoot, 'catalog', entry.name));
   }
