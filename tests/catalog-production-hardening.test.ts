@@ -161,7 +161,7 @@ test("recovery preservation gates keep untouched markets byte-stable and canonic
   assert.match(recoveryPublisher, /function stableJsonValue/);
 });
 
-test("standard one-market publisher expires stale target rows, reapplies quality policy, and canonicalizes every market deterministically", () => {
+test("standard one-market publisher expires stale target rows, reapplies quality policy, and preserves untouched markets during canonicalization", () => {
   assert.match(standardMarketPublisher, /readAllOffersForMaintenance/);
   assert.match(standardMarketPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket/);
   assert.match(standardMarketPublisher, /beforePersistValidate\(publicOffers\)/);
@@ -185,7 +185,7 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(storage, /beforePublishValidate\?:/);
   assert.match(storage, /appendPublicOffersByMarket\?:/);
   assert.match(storage, /protectedPublicIds/);
-  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.protectedRows, \.\.\.priceFilteredOffers\], \{ protectedIds: protectedPublicIds \}\)/);
+  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.appendProtectedRows, \.\.\.priceFilteredOffers\], \{ protectedIds: protectedPublicIds \}\)/);
   assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
   assert.doesNotMatch(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: currentMarketRows \}/);
   assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
