@@ -1,0 +1,1202 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-07",
+  "advisoryOnly": true,
+  "inputs": [
+    {
+      "path": "data/catalog/research/restart-code-validation-v1-20260907.json",
+      "sha256": "a267a2b0d7c9e97a7cd1ebd8105dc1317c680d30b43da3e2bfafd0cc7d2f7c30"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "sha256": "2889b66fce60b78354fb099440a41341c12b5d01d7752c10a6800db0cdd47659",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-europe-mobile.json",
+      "sha256": "c02fabbf0edaccc01fdcca6b3785f593ed9e48190d9164766dcae28a741231bf",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-georgia-autopapa.json",
+      "sha256": "b29fc398d87e9e3cf40b90dd6ef91e9b851865d392eece2957fa4420c89c85fe",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-georgia-porsche.json",
+      "sha256": "e5fd7d39aa29d9c7e4e32d70ed4a526b839b4b4a5308312ce46f43ce47e494fa",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-korea-kcar.json",
+      "sha256": "42c3ee2c5fb77a91fbdb458692503b89396860d01d7b67b3415644fa528bcf39",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-uae-dubizzle.json",
+      "sha256": "2df6536eb3f455236445eeca1c1ad5d89f4e594a27dd0e4274633d82f43b83d0",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34078772508/restart-uae-porsche.json",
+      "sha256": "2118a3483e8be2273587eeb227fe5156056b58239d506610b5241c19647d700f",
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "sha256": "2b3b3e324202793939cf4f52fdcfe334c917f9914e112e94448a487635e920d0",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-china-dongchedi_china_open.json",
+      "sha256": "8c8510689dbfea03ef0609a56e0fbf6bd85b334b05297ad41a3f06062a49e148",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-china-guazi_china_open.json",
+      "sha256": "fd9e26575725c38cefb3829f86da9d68fa95bdf05dcf2a62a2d2816841761cd8",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-europe-autoscout_europe_open.json",
+      "sha256": "052f0c7368c1d3e482e44c4a5cf5e52f57b7eff6e0c4978fd1adbeb15fcd45db",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-georgia-myauto_georgia_list.json",
+      "sha256": "0829f2a9513b5acaf1823d655cb8de23db9ccc1f496267541c502414a88d6f2b",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-korea-encar_direct.json",
+      "sha256": "028b0a88df61b54505d27580bb8d5a68ff4757cd6c21bf54733db854a9a94086",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "sha256": "a2148422470445af984785b0a11f654edbe7beb80229da62085f8140e159dd2b",
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079770507/restart-china-guazi_china_open.json",
+      "sha256": "4f616b87bffdaa71285bac6baf2c780696b11331a9274370968dfea0483e536e",
+      "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079770507/restart-georgia-myauto_georgia_list.json",
+      "sha256": "72f4be20d04244d48b09e0dd2be4cf1366a2ace100632d0be169ec753ae69fbb",
+      "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34079770507/restart-korea-encar_direct.json",
+      "sha256": "29c84938148b4d0d67ca2b3812d133d0d4f227e2e37c023672b4d5d509b74717",
+      "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34080098189/restart-georgia-myauto_georgia_list.json",
+      "sha256": "48b128207df5eeb7b93fd6a56d9d21b5161b8bfa36efa3147aed7dd363907778",
+      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b"
+    },
+    {
+      "path": "data/catalog/research/restart-20260907/34080098189/restart-korea-encar_direct.json",
+      "sha256": "82f6f3dac98f0c72c33a130a52d0e8f2ab28d86fe97961dd7632e78d09367a3c",
+      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b"
+    }
+  ],
+  "validation": {
+    "ciJobId": 101613640468,
+    "ciRunId": 34080100070,
+    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34080100070",
+    "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+    "conclusion": "success",
+    "productionBuild": {
+      "pages": 55,
+      "status": "passed"
+    },
+    "subsequentCheckpoint": "Reports, documentation and offline advisory scripts only; no collector/pricing/gallery runtime changes.",
+    "tests": {
+      "failed": 0,
+      "passed": 1092
+    },
+    "treeSha": "4ed02a61708ee782f0ec0365774dcf4ef2b218d3",
+    "typecheck": "passed"
+  },
+  "sources": [
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "runId": 34079320397,
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-autohome_new_china_open.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 50,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 104,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 104,
+        "unexaminedRows": 84,
+        "examined": 20,
+        "detailWorkBlocked": 4,
+        "calculated": 0,
+        "allowedYearExamined": 20,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 16,
+          "pilot_request_outside_envelope": 4
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "engineCc:explicit_semantic_ambiguity": 16,
+        "powerHp:peak_power_missing": 10,
+        "certifiedPower:certified_30min_power_missing": 10
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "profileSource": "production_crm_version",
+        "provisional": false,
+        "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+        "effectiveExpenses": {
+          "topAvtoCommissionRub": 90000,
+          "securityDepositRub": 160000,
+          "contractInitialPaymentRub": 250000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 80000,
+          "logisticsRub": 150000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-china-che168.json",
+      "status": "stopped_by_source_response",
+      "error": null,
+      "sourceRequests": 3,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": 24,
+        "adapterRejectedRows": 0,
+        "adapterUnexaminedRows": 0,
+        "returnedRows": 24,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 24,
+        "unexaminedRows": 0,
+        "examined": 24,
+        "detailWorkBlocked": 23,
+        "calculated": 0,
+        "allowedYearExamined": 14,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 1,
+          "pilot_request_outside_envelope": 23
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "engineCc:engine_cc_missing": 1
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "profileSource": "production_crm_version",
+        "provisional": false,
+        "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+        "effectiveExpenses": {
+          "topAvtoCommissionRub": 90000,
+          "securityDepositRub": 160000,
+          "contractInitialPaymentRub": 250000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 80000,
+          "logisticsRub": 150000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "china",
+      "sourceId": "dongchedi_china_open",
+      "runId": 34079320397,
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-china-dongchedi_china_open.json",
+      "status": "blocked_or_failed",
+      "error": "dongchedi_public_inventory_requires_login_or_permitted_partner_feed",
+      "sourceRequests": 0,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "profileSource": "production_crm_version",
+        "provisional": false,
+        "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+        "effectiveExpenses": {
+          "topAvtoCommissionRub": 90000,
+          "securityDepositRub": 160000,
+          "contractInitialPaymentRub": 250000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 80000,
+          "logisticsRub": 150000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "china",
+      "sourceId": "guazi_china_open",
+      "runId": 34079770507,
+      "codeSha": "3d2306f9e8877ee8119d0d45222ef046af67026c",
+      "reportPath": "data/catalog/research/restart-20260907/34079770507/restart-china-guazi_china_open.json",
+      "status": "blocked_or_failed",
+      "error": "yandex_bridge_http_503_guazi_1_guazi_source_blocked_bot_challenge",
+      "sourceRequests": 1,
+      "bridgeUsed": true,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "effectiveVersion": "market_china_v2_61cdb8b9-b2ce-4582-a6cf-3b5abb0b28c6",
+        "profileSource": "production_crm_version",
+        "provisional": false,
+        "effectiveHash": "5fabcc5b097a8b5b8d8728bf51a3f2b544cde89b71c11977e2218e7e06835561",
+        "effectiveExpenses": {
+          "topAvtoCommissionRub": 90000,
+          "securityDepositRub": 160000,
+          "contractInitialPaymentRub": 250000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 80000,
+          "logisticsRub": 150000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "europe",
+      "sourceId": "autoscout_europe_open",
+      "runId": 34079320397,
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-europe-autoscout_europe_open.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 19,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 18,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 18,
+        "unexaminedRows": 0,
+        "examined": 18,
+        "detailWorkBlocked": 0,
+        "calculated": 16,
+        "allowedYearExamined": 18,
+        "allowedYearCalculated": 16,
+        "passingAllFilters": 15,
+        "failures": {
+          "verified_specifications_required": 2
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "certifiedPower:certified_30min_power_missing": 1,
+        "fuelPowertrain:explicit_semantic_ambiguity": 1,
+        "engineCc:engine_cc_missing": 1
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 16,
+        "equalCardDetailAndBreakdown": 16
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 15,
+        "publicAfterReview": 15,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_europe_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "87f58491502908787d7f3afc7a868f24b1e347bb142792511d6a0d15d8dc328e",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 100000,
+          "logisticsRub": 350000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-europe-mobile.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 42,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 2,
+        "sourceListingRows": 48,
+        "adapterRejectedRows": 7,
+        "adapterUnexaminedRows": 0,
+        "returnedRows": 41,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 41,
+        "unexaminedRows": 1,
+        "examined": 40,
+        "detailWorkBlocked": 0,
+        "calculated": 39,
+        "allowedYearExamined": 40,
+        "allowedYearCalculated": 39,
+        "passingAllFilters": 36,
+        "failures": {
+          "verified_specifications_required": 1
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "certifiedPower:certified_30min_power_missing": 1
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 39,
+        "equalCardDetailAndBreakdown": 39
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 36,
+        "publicAfterReview": 34,
+        "heldOfferIds": [
+          "43069464351904",
+          "38449215943136"
+        ],
+        "excludedGalleryUrls": [
+          "https://img.classistatic.de/api/v1/mo-prod/images/61/61655b0f-2b2c-44bb-b51f-2d2914ec3ead?rule=mo-1600",
+          "https://img.classistatic.de/api/v1/mo-prod/images/d6/d6e46581-c178-4d2e-8136-e607f0d3d6d0?rule=mo-1600",
+          "https://img.classistatic.de/api/v1/mo-prod/images/75/75e784b2-398d-4ccc-a697-5f28616278a7?rule=mo-1600",
+          "https://img.classistatic.de/api/v1/mo-prod/images/13/13c017d6-d86c-4f06-836d-aa179f09a487?rule=mo-1600"
+        ],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_europe_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "87f58491502908787d7f3afc7a868f24b1e347bb142792511d6a0d15d8dc328e",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 100000,
+          "logisticsRub": 350000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "georgia",
+      "sourceId": "autopapa_georgia_open",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-georgia-autopapa.json",
+      "status": "blocked_or_failed",
+      "error": "pilot_stop_http_403",
+      "sourceRequests": 1,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_georgia_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "9f23470a6c88cc5fc87502fcde4e147be93f6995be4b7fb349712e32dcc71d06",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 50000,
+          "logisticsRub": 180000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "runId": 34080098189,
+      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+      "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-georgia-myauto_georgia_list.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 1,
+      "bridgeUsed": true,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "knowledge_core_then_certified_power_then_verified_specifications",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 11,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 11,
+        "unexaminedRows": 0,
+        "examined": 11,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 11,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 11
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "engineCc:unclassified_field_provenance": 11,
+        "powerHp:peak_power_missing": 11,
+        "certifiedPower:certified_30min_power_missing": 3
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_georgia_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "9f23470a6c88cc5fc87502fcde4e147be93f6995be4b7fb349712e32dcc71d06",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 50000,
+          "logisticsRub": 180000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "georgia",
+      "sourceId": "porsche_finder_georgia_public",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-georgia-porsche.json",
+      "status": "blocked_or_failed",
+      "error": "pilot_stop_http_429",
+      "sourceRequests": 1,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_georgia_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "9f23470a6c88cc5fc87502fcde4e147be93f6995be4b7fb349712e32dcc71d06",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 50000,
+          "logisticsRub": 180000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "runId": 34080098189,
+      "codeSha": "2bb4e3e0cec76594ee8b7c06c9794f66be8f031b",
+      "reportPath": "data/catalog/research/restart-20260907/34080098189/restart-korea-encar_direct.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 1,
+      "bridgeUsed": true,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "knowledge_core_then_certified_power_then_verified_specifications",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 20,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 20,
+        "unexaminedRows": 0,
+        "examined": 20,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 12,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 20
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "powerHp:peak_power_missing": 20,
+        "certifiedPower:certified_30min_power_missing": 1
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_korea_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "c5d5dc8cd2f72c8e6f3443dd65af6fdf422d962ea2100fd89db35c2e7a6e6235",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 70000,
+          "logisticsRub": 250000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-korea-kcar.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 42,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 2,
+        "sourceListingRows": 40,
+        "adapterRejectedRows": 1,
+        "adapterUnexaminedRows": 0,
+        "returnedRows": 39,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 39,
+        "unexaminedRows": 0,
+        "examined": 39,
+        "detailWorkBlocked": 0,
+        "calculated": 37,
+        "allowedYearExamined": 35,
+        "allowedYearCalculated": 33,
+        "passingAllFilters": 33,
+        "failures": {
+          "verified_specifications_required": 2
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "certifiedPower:certified_30min_power_missing": 2
+      },
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 37,
+        "equalCardDetailAndBreakdown": 37
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 33,
+        "publicAfterReview": 33,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [
+          "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_1_hq.jpg",
+          "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_2_hq.jpg",
+          "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_3_hq.jpg"
+        ],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_korea_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "c5d5dc8cd2f72c8e6f3443dd65af6fdf422d962ea2100fd89db35c2e7a6e6235",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 70000,
+          "logisticsRub": 250000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "runId": 34079320397,
+      "codeSha": "5207c6b480bef28ff029e96024bd67385b624f09",
+      "reportPath": "data/catalog/research/restart-20260907/34079320397/restart-uae-dubicars_uae_exact.json",
+      "status": "listing_received",
+      "error": null,
+      "sourceRequests": 31,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 1,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 17,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 17,
+        "unexaminedRows": 0,
+        "examined": 17,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 17,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {
+          "verified_specifications_required": 17
+        },
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {
+        "engineCc:explicit_semantic_ambiguity": 10,
+        "engineCc:engine_cc_missing": 7,
+        "powerHp:peak_power_missing": 7
+      },
+      "missingSourcePrices": 17,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_uae_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "85fb77b6115aaed696ed8270ea173920cbae4cb2ced88b11d5f962153c553b38",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 120000,
+          "logisticsRub": 450000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubizzle_uae_open",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-uae-dubizzle.json",
+      "status": "blocked_or_failed",
+      "error": "dubizzle_exact_blocked_200_imperva_or_challenge:pilot_request_outside_envelope",
+      "sourceRequests": 6,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_uae_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "85fb77b6115aaed696ed8270ea173920cbae4cb2ced88b11d5f962153c553b38",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 120000,
+          "logisticsRub": 450000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    },
+    {
+      "market": "uae",
+      "sourceId": "porsche_finder_uae_public",
+      "runId": 34078772508,
+      "codeSha": "7c62bffea97a3688d0fac7c0157abd0ccb58cc44",
+      "reportPath": "data/catalog/research/restart-20260907/34078772508/restart-uae-porsche.json",
+      "status": "blocked_or_failed",
+      "error": "pilot_stop_http_429",
+      "sourceRequests": 1,
+      "bridgeUsed": false,
+      "upstreamBridgeTrafficObserved": false,
+      "calculationPreparation": "source_evidence_only",
+      "summary": {
+        "pages": 0,
+        "sourceListingRows": null,
+        "adapterRejectedRows": null,
+        "adapterUnexaminedRows": null,
+        "returnedRows": 0,
+        "duplicateRows": 0,
+        "normalizationRejected": 0,
+        "uniqueNormalizedRows": 0,
+        "unexaminedRows": 0,
+        "examined": 0,
+        "detailWorkBlocked": 0,
+        "calculated": 0,
+        "allowedYearExamined": 0,
+        "allowedYearCalculated": 0,
+        "passingAllFilters": 0,
+        "failures": {},
+        "limitation": "Source-order bounded sample. Adapter rejections, duplicates, unexamined rows and year exclusions are separate. This is not the acceptance ratio of a full fresh inventory."
+      },
+      "missingFields": {},
+      "missingSourcePrices": 0,
+      "priceParity": {
+        "calculated": 0,
+        "equalCardDetailAndBreakdown": 0
+      },
+      "reviewReplay": {
+        "publicBeforeReview": 0,
+        "publicAfterReview": 0,
+        "heldOfferIds": [],
+        "excludedGalleryUrls": [],
+        "limitation": "Saved source URL metadata replay, not a new visual review or stored-generation acceptance."
+      },
+      "productionInputsUnchanged": true,
+      "configurationMismatches": [],
+      "businessSettings": {
+        "rawActiveVersion": null,
+        "effectiveVersion": "market_uae_system_average_v2",
+        "profileSource": "runtime_average_defaults",
+        "provisional": true,
+        "effectiveHash": "85fb77b6115aaed696ed8270ea173920cbae4cb2ced88b11d5f962153c553b38",
+        "effectiveExpenses": {
+          "securityDepositRub": 110000,
+          "topAvtoCommissionRub": 90000,
+          "contractInitialPaymentRub": 200000,
+          "exchangeRateReservePercent": 2,
+          "exportExpensesRub": 120000,
+          "logisticsRub": 450000,
+          "brokerRub": 35000,
+          "svhRub": 35000,
+          "laboratoryRub": 15000,
+          "sbktsRub": 35000,
+          "eptsRub": 35000,
+          "rfDeliveryRub": 120000,
+          "otherFixedExpensesRub": 0
+        }
+      },
+      "clientImageResponses": 0
+    }
+  ],
+  "productionSourceCount": 12,
+  "productionPublication": false,
+  "allMarketRestartReady": false,
+  "imageStorageMode": "source_urls_only",
+  "photoArchiveCreated": false,
+  "japanIncluded": false,
+  "totals": {
+    "calculated": 92,
+    "matchingPrices": 92,
+    "publicBeforeReview": 84,
+    "publicAfterReview": 82
+  },
+  "limitations": [
+    "Bounded source-order checks, not a full fresh collection or a single comparable acceptance denominator.",
+    "Older source-only failures are not evidence that every possible exact Knowledge CORE enrichment failed.",
+    "Fixed production bridges expose their JSON result; their upstream request counts are not observed by the runner.",
+    "Local preview was blocked by browser policy; full visual and deployed UI acceptance remains open.",
+    "Known image exclusions are a small prior-review list, not a general automatic image classifier."
+  ],
+  "remaining": {
+    "europe": [
+      "Repeat isolated generation acceptance after reviewed image exclusions and validate displayed galleries; mobile.de and AutoScout24 have fresh exact calculations."
+    ],
+    "korea": [
+      "Complete exact power evidence for Encar; KCar has fresh exact calculations. Validate gallery diversity and displayed cards."
+    ],
+    "china": [
+      "Che168 parameters are challenged; Autohome new-car specifications remain ambiguous/incomplete; Guazi reports a source challenge; Dongchedi is a disabled adapter with no live probe."
+    ],
+    "uae": [
+      "Dubizzle returned a challenge; sampled DubiCars rows have no fixed source price and insufficient exact displacement/power."
+    ],
+    "georgia": [
+      "MyAuto provides source rows but exact displacement provenance and power remain to be verified; AutoPapa returned 403."
+    ],
+    "publication": [
+      "Obtain >=80% exact automatic calculations on an accepted deduplicated fresh inventory and qualify every required source.",
+      "Complete displayed gallery/list/detail acceptance, deploy the verified runtime, validate an isolated generation and rollback.",
+      "Then explicitly activate publication and the weekly five-market schedule with fourteen-day retention; preserve Japan exclusion."
+    ]
+  }
+}

@@ -24,12 +24,14 @@ const multipagePass = await read('data/catalog/research/non-japan-multipage-outc
 const publicDisplayPass = await read('data/catalog/research/non-japan-public-display-outcome-v1-20260907.json');
 const previousBinaryCanary = await read('data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json');
 const generationCanary = await read('data/catalog/research/non-japan-source-url-generation-outcome-v1-20260907.json');
+const freshRestart = await read('data/catalog/research/five-market-restart-outcome-v1-20260907.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
-  codeValidation: generationCanary.validation,
+  codeValidation: freshRestart.validation || generationCanary.validation,
+  freshRestartTotals: freshRestart.totals,
   imageStorageMode: generationCanary.imageStorageMode,
   ownerImageStorageContractAcceptance: generationCanary.ownerImageStorageContractAcceptance,
   previousBinaryCanaryValidation: previousBinaryCanary.validation,
@@ -49,7 +51,8 @@ const report = {
       latestMultipageProbe: multipagePass.markets.find(row => row.market === market) || null,
       latestPublicDisplayProbe: publicDisplayPass.markets.find(row => row.market === market) || null,
       latestGenerationCanary: generationCanary.markets.find(row => row.market === market) || null,
-      latestRemaining: generationCanary.remaining[market] || publicDisplayPass.remaining[market],
+      freshSourceChecks: freshRestart.sources.filter(row => row.market === market),
+      latestRemaining: freshRestart.remaining[market],
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
