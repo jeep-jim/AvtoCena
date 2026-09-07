@@ -10,15 +10,16 @@ import { kcarKoreaExactSource } from '../apps/web/lib/catalog/kcar-exact-source'
 import { assertSafeImageUrl, cacheImageFromUrl } from '../apps/web/lib/catalog/storage';
 import { resetJsonStorageForTests, getJsonStorage } from '../apps/web/lib/data';
 
-test('the binary loader decodes KCar image/jpg and still rejects a text/html response', async () => {
+test('the binary loader decodes KCar JPEG and mobile.de AVIF but rejects HTML and invalid AVIF', async () => {
   const originalFetch = globalThis.fetch;
   const originalCwd = process.cwd();
   const originalDriver = process.env.JSON_STORAGE_DRIVER;
   const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'kcar-image-mime-'));
   await fs.mkdir(path.join(temp, 'data'));
   const jpeg = await sharp({ create: { width: 780, height: 520, channels: 3, background: '#426680' } }).jpeg().toBuffer();
+  let sourceBytes = jpeg;
   let contentType = 'image/jpg';
-  globalThis.fetch = async () => new Response(jpeg, { headers: { 'content-type': contentType } });
+  globalThis.fetch = async () => new Response(sourceBytes, { headers: { 'content-type': contentType } });
   process.chdir(temp); process.env.JSON_STORAGE_DRIVER = 'local'; resetJsonStorageForTests();
   try {
     const image = await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/good.jpg', 'korea');
@@ -30,6 +31,16 @@ test('the binary loader decodes KCar image/jpg and still rejects a text/html res
     assert.equal((await sharp(stored.data).metadata()).format, 'webp');
     contentType = 'text/html';
     assert.equal(await cacheImageFromUrl('https://img.kcar.com/canary-mime-test/bad.jpg', 'korea'), null);
+    contentType = 'image/avif';
+    sourceBytes = await sharp(jpeg).avif({ effort: 0 }).toBuffer();
+    const avif = await cacheImageFromUrl('https://img.classistatic.de/api/v1/mo-prod/images/test-avif', 'europe');
+    assert.ok(avif);
+    assert.equal(avif.mimeType, 'image/webp');
+    assert.equal(avif.width, 780);
+    const avifStored = await getJsonStorage().getBinary!(avif.objectKey);
+    assert.equal((await sharp(avifStored.data).metadata()).format, 'webp');
+    sourceBytes = Buffer.from('not an AVIF image');
+    assert.equal(await cacheImageFromUrl('https://img.classistatic.de/api/v1/mo-prod/images/test-invalid-avif', 'europe'), null);
   } finally {
     globalThis.fetch = originalFetch; process.chdir(originalCwd); resetJsonStorageForTests();
     if (originalDriver === undefined) delete process.env.JSON_STORAGE_DRIVER;

@@ -1,4 +1,4 @@
-name: Europe and KCar isolated generation acceptance v3
+name: Europe isolated generation AVIF acceptance v4
 on:
   push:
     branches: [feat/catalog-europe-kcar-generation-canary-20260907]
@@ -16,7 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        market: [europe, korea]
+        # KCar completed on 3e30bd78. This pass resolves the observed AVIF gap in Europe.
+        market: [europe]
     env:
       CANARY_MARKET: ${{ matrix.market }}
       CANARY_OUTPUT: canary-${{ matrix.market }}

@@ -65,7 +65,7 @@ globalThis.fetch = async (input, init = {}) => {
   if (response.status >= 300 && response.status < 400) throw new Error('canary_redirect_requires_review');
   if (isImage) {
     if (!response.ok) return response;
-    if (!/^image\/(jpe?g|png|webp)(?:;|$)/i.test(response.headers.get('content-type') || '')) {
+    if (!/^image\/(jpe?g|png|webp|avif)(?:;|$)/i.test(response.headers.get('content-type') || '')) {
       event.error = 'canary_image_not_raster';
       throw new Error(event.error);
     }
