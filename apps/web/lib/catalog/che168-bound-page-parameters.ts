@@ -1,4 +1,8 @@
 // Read JSON data emitted by the public detail page; never execute page scripts.
+export function che168BrowserChallenge(markup: string) {
+  return /window\.solveChallenge\s*\(/.test(markup) && /EO-Bot-Js-Token/.test(markup);
+}
+
 type Metric = { value?: number; rawValues: string[]; status: 'exact' | 'missing' | 'conflict' | 'ambiguous' };
 function metric(values: unknown[], minimum: number, maximum: number): Metric {
   const rawValues = [...new Set(values.map(String).map(value => value.trim()).filter(value => value && value !== '-'))];

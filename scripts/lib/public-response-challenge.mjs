@@ -1,5 +1,7 @@
 /** Embedded reCAPTCHA for a contact form is not a blocked listing page. */
 export function publicResponseChallenge(body) {
+  // Some HTTP 200 challenge pages consist entirely of executable script.
+  if (/window\.solveChallenge\s*\(/.test(String(body)) && /EO-Bot-Js-Token/.test(String(body))) return true;
   const visible = String(body).replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
   const title = visible.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '';

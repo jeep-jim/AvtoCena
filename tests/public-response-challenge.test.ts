@@ -11,3 +11,9 @@ test('visible access challenges still stop the pilot', () => {
   assert.equal(publicResponseChallenge('<meta http-equiv="refresh" content="0; url=/has_been_cr_blocked_AWS.html">'), true);
   assert.equal(publicResponseChallenge('<iframe src="/_Incapsula_Resource?incident=example"></iframe>'), true);
 });
+
+
+test('script-only HTTP 200 browser challenge is detected without executing it', () => {
+  assert.equal(publicResponseChallenge('<html><script>window.solveChallenge("fixture");document.cookie="EO-Bot-Js-Token=fixture"</script></html>'), true);
+  assert.equal(publicResponseChallenge('<script>window.solveChallenge = function() {};</script><main>Vehicle listing</main>'), false);
+});

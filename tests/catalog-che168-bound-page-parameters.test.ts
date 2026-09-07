@@ -41,3 +41,27 @@ test('Che168 adapter uses its bound page table and retains provenance', async ()
     assert.equal((offer.operational as any).semanticEvidence.engineCc.source,'che168_global_identity_bound_parameters');
   } finally { globalThis.fetch = originalFetch; }
 });
+
+
+test('Che168 stops parameter page requests after a browser challenge while retaining public API evidence', async () => {
+  const source = new Che168GlobalExactAdapter();
+  const raw = { infoid:59282752, brandname:'Acura', seriesname:'Acura TLX-L', specname:'2021 2.4L', regdate:'2021-01', fuelname:'Gasoline', price:12000 };
+  const offer = source.normalizeOffer(raw)!;
+  const originalFetch = globalThis.fetch;
+  const calls: string[] = [];
+  globalThis.fetch = async input => {
+    calls.push(String(input).includes('/api/') ? 'public_api' : 'parameter_page');
+    return String(input).includes('/api/')
+      ? new Response(JSON.stringify({returncode:0,result:{...raw,specid:32677,engine:'2.4L208hpL4'}}),{status:200})
+      : new Response('<script>window.solveChallenge("fixture");document.cookie="EO-Bot-Js-Token=fixture"</script>',{status:200});
+  };
+  try {
+    await source.fetchImages(offer);
+    await source.fetchImages(offer);
+    assert.deepEqual(calls,['public_api','parameter_page','public_api']);
+    assert.equal(offer.engineCc,undefined);
+    assert.equal(offer.powerHp,208);
+    assert.equal((offer.operational.raw as any).boundPageStatus,'browser_challenge');
+    assert.equal(offer.calculationStatus,'needs_data');
+  } finally { globalThis.fetch = originalFetch; }
+});

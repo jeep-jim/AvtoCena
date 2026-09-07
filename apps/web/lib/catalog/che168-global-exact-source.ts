@@ -1,4 +1,4 @@
-import { che168BoundPageParameters } from "./che168-bound-page-parameters";
+import { che168BoundPageParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
 import crypto from "node:crypto";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -224,6 +224,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   market = "china" as const;
   accessMode = "public_json" as const;
   private readonly deviceId = crypto.randomUUID();
+  private parameterPageBlocked: string | null = null;
 
   private params(extra: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -369,9 +370,14 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const price = positiveNumber(detail.price);
     let pageParameters: ReturnType<typeof che168BoundPageParameters> = null;
     // Public page carries a table bound to both this listing and this spec ID.
-    if (Number(detail.specid) > 0) {
+    if (Number(detail.specid) > 0 && !this.parameterPageBlocked) {
       const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
-      if (response?.ok) pageParameters = che168BoundPageParameters(await response.text(), id, Number(detail.specid));
+      if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
+      if (response?.ok) {
+        const markup = await response.text();
+        if (che168BrowserChallenge(markup)) this.parameterPageBlocked = "browser_challenge";
+        else pageParameters = che168BoundPageParameters(markup, id, Number(detail.specid));
+      }
     }
     let detailEngine = text(detail.engine);
     const tableFuel = pageParameters?.fuelValues.map(canonicalSourceFuel).filter(Boolean) || [];
@@ -453,7 +459,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },
         powerHp: { source: pageParameters && tableFuelConsistent ? "che168_global_carinfo_and_bound_parameters" : "che168_global_carinfo", ...evidence.powerHp },
       },
-      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
+      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters, boundPageStatus: this.parameterPageBlocked || (pageParameters ? "bound_parameters_received" : "parameters_unavailable"), detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
     };
     const engineEvidenceReady = offer.powertrainKind === "electric" || evidence.engineCc.status === "exact";
     if (evidence.year.status !== "exact" || evidence.fuel.status !== "exact" || !engineEvidenceReady || evidence.powerHp.status !== "exact") {

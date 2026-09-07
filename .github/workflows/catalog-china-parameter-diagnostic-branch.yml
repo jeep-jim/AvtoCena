@@ -16,7 +16,6 @@ jobs:
       PILOT_REQUEST_LIMIT: '8'
       PILOT_TIMEOUT_MS: '15000'
       PILOT_RESPONSE_EVIDENCE: '1'
-      PILOT_CAPTURE_FIRST_HTML: '1'
       PILOT_REPORT: china-parameter-diagnostic.json
     steps:
       - uses: actions/checkout@v4
