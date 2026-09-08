@@ -1,3 +1,10 @@
+## 2026-09-08 — Theme polish for grades and specifications (owner screenshots)
+
+- Preserve the existing dark-theme grade palette in both themes: white text on violet/red badges; dark brown on amber. The sanction badge follows the same rule.
+- Restore a white surface for the desktop “Все характеристики” disclosure in light mode; retain its position and expansion behavior.
+- Replace the underlined research link with a full-width rounded control: the purple/white Alice mark matching the owner's reference and “Уточнить характеристики с ИИ”. The destination remains the existing identity-based Yandex search; this does not add an AI integration or automatically trust search answers.
+- Collection workflows, offer data, pricing rules and the mobile specifications sheet are unchanged by this visual patch.
+
 # АвтоЦена — постоянный roadmap и техническое задание
 
 > Последнее обновление: 2026-09-08

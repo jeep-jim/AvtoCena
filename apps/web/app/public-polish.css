@@ -367,6 +367,36 @@ html[data-theme="light"] .ac-partner-modal textarea::placeholder {
   }
 }
 @media (min-width: 1200px) { .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+
+/* Grade colors belong to the badge, not the page theme. */
+html body .ac-page-copy .ac-japan-badge {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html body .ac-page-copy .ac-japan-badge--amber {
+  color: #352500 !important;
+  -webkit-text-fill-color: #352500 !important;
+}
+
+/* These controls need their own visible surface in both themes. */
+html[data-theme="light"] .ac-specifications-trigger {
+  background: #fff !important;
+}
+.ac-vehicle-research-link {
+  background: var(--ac-surface-2);
+  color: var(--ac-text);
+  text-decoration: none;
+}
+html[data-theme="light"] .ac-vehicle-research-link {
+  background: #fff;
+}
+.ac-vehicle-research-link:hover {
+  background: var(--ac-surface-3);
+}
+.ac-vehicle-research-link img {
+  filter: none;
+  opacity: 1;
+}
 @media (max-width: 767px) {
   .ac-market-rail { grid-auto-columns: minmax(232px, 72vw) !important; }
   .ac-result-rail { margin-right:-1rem; padding-right:1rem; }
