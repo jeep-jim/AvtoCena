@@ -178,7 +178,7 @@ export function jpaucIdentityGalleryEvidence(raw: JpaucRawRow) {
       && clean(raw?.lot)
       && clean(raw?.maker)
       && clean(raw?.model)
-      && Number(raw?.year || 0) >= 2011
+      && Number(raw?.year || 0) >= 2010
       && Number(raw?.year || 0) <= new Date().getUTCFullYear() + 1
       && detailUrl.startsWith(`${PAST}/detail/${encodeURIComponent(dataId)}`)
       && imageIdentityMatches,

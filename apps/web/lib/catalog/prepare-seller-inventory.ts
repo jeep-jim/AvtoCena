@@ -11,8 +11,8 @@ import { restoreSavedSourceEvidence } from "./saved-source-recovery";
 export async function prepareSellerInventory(input: VehicleOffer): Promise<VehicleOffer | null> {
   if (isJapanAuctionOffer(input) && !japanAuctionSoldPriceVerified(input)) return null;
   const original = restoreSavedSourceEvidence(structuredClone(input));
-  if (input.market !== "japan" && specificationEvidenceComplete(original)) {
-    const calculated = await calculateOfferWithVerifiedSpecifications(original);
+  if (specificationEvidenceComplete(original)) {
+    const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated)) {
       delete calculated.catalogPricingMode; delete calculated.sellerPriceRub;
       return calculated;

@@ -114,7 +114,7 @@ jobs:
         with:
           pattern: catalog-intake-*
           path: catalog-intake-input
-      - run: node scripts/catalog-intake-to-publication.mjs
+      - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Publish each market with preservation of other markets
         shell: bash
         run: |

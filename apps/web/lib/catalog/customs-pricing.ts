@@ -1,4 +1,5 @@
 import { getActiveMarketVersion } from "../business-settings";
+import { japanAuctionSoldPriceVerified } from "./public-priority";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
@@ -444,8 +445,8 @@ export async function calculateOfferWithResolvedModification(input: VehicleOffer
     modificationScenario: conditional.calculationSnapshot.modificationScenario } };
 }
 
-export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer): Promise<VehicleOffer> {
-  if (input.market === "japan" || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
+export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer, includeVerifiedJapanAuction = false): Promise<VehicleOffer> {
+  if ((input.market === "japan" && (!includeVerifiedJapanAuction || !japanAuctionSoldPriceVerified(input))) || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
   return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true));
 }
 

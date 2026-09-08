@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import {createReadStream} from 'node:fs';
 import readline from 'node:readline';
 import path from 'node:path';
+import {joinJapanInventory} from '../apps/web/lib/catalog/japan-inventory-join.ts';
 const root=process.env.CATALOG_INTAKE_INPUT_DIR || 'catalog-intake-input';
 const out=process.env.CATALOG_REBUILD_INPUT_DIR || 'catalog-intake-publish';
 await fs.mkdir(out,{recursive:true});
@@ -17,7 +18,9 @@ for(const market of ['korea','china','uae','europe','georgia','japan']) {
    if(offer?.id && offer.market===market)rows.set(offer.id,offer);
   }
  }
- const offers=[...rows.values()];
+ const joined=market==='japan'?joinJapanInventory([...rows.values()]):null;
+ const offers=joined?.offers || [...rows.values()];
+ if(joined)console.log(JSON.stringify({market,join:joined.report}));
  await fs.writeFile(path.join(out,`catalog-rebuild-${market}.json`),JSON.stringify({market,count:offers.length,offers}));
  console.log(JSON.stringify({market,uniqueObservations:offers.length}));
 }
