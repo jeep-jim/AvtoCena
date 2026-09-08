@@ -73,6 +73,6 @@ test("cards show documented power labels and hide unpriced rows unless a qualifi
   const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
   assert.match(card, /catalogPowerDisplay\(normalizedOffer\)/);
   assert.match(card, /powerDisplay\.thirtyMinuteLabel/);
-  assert.match(card, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(card, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.match(card, /hasModificationSelection\(offer\)/);
 });

@@ -1,12 +1,6 @@
 name: Catalog · Six-market source intake
 on:
   workflow_dispatch:
-  push:
-    branches: [feat/catalog-full-specifications]
-    paths:
-      - .github/workflows/catalog-source-intake.yml
-      - scripts/catalog-source-intake.mjs
-      - scripts/lib/catalog-source-intake.mjs
 permissions:
   contents: read
 concurrency:
@@ -24,6 +18,7 @@ jobs:
     env:
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
       CATALOG_INTAKE_TIME_MS: '2400000'
+      CATALOG_SOURCE_INVENTORY_MODE: '1'
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
       CATALOG_SOURCE_TIMEOUT_MS: '25000'
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only

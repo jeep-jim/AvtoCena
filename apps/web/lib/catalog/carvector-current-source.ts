@@ -1,3 +1,4 @@
+import { namedTechnicalGroups } from "./source-table-capture";
 import { canonicalSourceFuel } from "./powertrain-safety";
 import { stableOfferId } from "./storage";
 import type {
@@ -363,6 +364,9 @@ export class CarvectorJapanExactAdapter implements CatalogSourceAdapter {
         sourcePublishedAt: auctionDate,
         exactDetail: true,
         sourceOnlyFieldsPreserved: true,
+        sourceSpecifications:{version:1,sourceId:this.sourceId,sourceOfferId,specificationId:sourceOfferId,sourceUrl,capturedAt:now,
+          groups:namedTechnicalGroups(Object.fromEntries(Object.entries(row).filter(([key])=>/^(?:make|model|chassis|modification|year|engine|engineVolume|enginePower|fuel|mileage|transmission|transmissionType|drive|color|rate|equipment|options|specifications)$/.test(key))),"Параметры CarVector")},
+        specificationCollection:{status:"received",kind:"listing_fields"},
         auctionResultPriceVerified: true,
         auctionPriceKind: "published_result",
         semanticEvidence,

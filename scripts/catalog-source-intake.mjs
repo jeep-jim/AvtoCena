@@ -8,11 +8,13 @@ process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
 const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
 const {REQUIRED_CATALOG_SOURCES}=await import('../apps/web/lib/catalog/required-catalog-sources.ts');
 const {sourceListingSnapshot}=await import('../apps/web/lib/catalog/source-listing-snapshot.ts');
+const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit.ts');
 const directory=`catalog-intake-${market}`;
 await fs.mkdir(directory,{recursive:true});
 const states=REQUIRED_CATALOG_SOURCES[market].map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
 const startedAt=new Date().toISOString();
-const deadline=Date.now()+Math.min(45*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+let observationWrite = Promise.resolve();
+const deadline=Date.now()+Math.min(150*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
 async function checkpoint() {
@@ -23,10 +25,11 @@ async function checkpoint() {
 await checkpoint();
 while(Date.now()<deadline && states.some(s=>!s.done)) {
   for(const state of states) {
-    await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:1000,
+    await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:1000,detailConcurrency:4,
       minYear:market==='japan'?2010:new Date().getUTCFullYear()-6,
       snapshot:sourceListingSnapshot,checkpoint,
-      writeObservation:row=>fs.appendFile(path.join(directory,`${state.sourceId}.jsonl`),JSON.stringify(row)+'\n')});
+      specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
+      writeObservation:row=>(observationWrite=observationWrite.then(()=>fs.appendFile(path.join(directory,`${state.sourceId}.jsonl`),JSON.stringify(row)+'\n')))});
   }
 }
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}

@@ -1,3 +1,6 @@
+const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
+const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
+const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-price-contract.ts");
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
@@ -282,6 +285,13 @@ async function auditCandidate(sourceOffer) {
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
+    if (sellerInventory) {
+      const prepared = await prepareSellerInventory(offer);
+      if (!prepared) return {offer:null,reason:"source_inventory_unqualified"};
+      const priority = classifyCatalogV2Offer(prepared,v2Policy);
+      if (!priority.eligible) return {offer:null,reason:`v2_${priority.reason}`};
+      return {offer:prepared,reason:"ok"};
+    }
     const descriptionReason = catalogDescriptionRejectionReason(offer);
     if (descriptionReason) return { offer: null, reason: descriptionReason };
     offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
@@ -388,7 +398,7 @@ const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2P
 const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   // Check after V2 normalization, which may clear a contradictory body value.
-  const reason = catalogDescriptionRejectionReason(offer);
+  const reason = isSellerPricedOffer(offer) ? "" : catalogDescriptionRejectionReason(offer);
   if (reason) {
     rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
     continue;
@@ -559,6 +569,12 @@ const report = {
   targetPerMarket,
   maximumPerMarket,
   selectedMarketCount: selectedMarketOffers.length,
+  specificationCoverage: {
+    recordsWithNamedGroups: canonicalTargetPreview.offers.filter(offer=>offer.operational?.sourceSpecifications?.groups?.length).length,
+    namedFields: canonicalTargetPreview.offers.reduce((sum,offer)=>sum+(offer.operational?.sourceSpecifications?.groups || []).reduce((n,group)=>n+group.items.length,0),0),
+    sellerPriceOnly: canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
+    note:"Named groups may be listing fields; their presence is not proof of a complete manufacturer specification.",
+  },
   publishedMarketCount,
   addedCount: publishedMarketCount - previousPublicCount,
   shortage: Math.max(0, targetPerMarket - publishedMarketCount),

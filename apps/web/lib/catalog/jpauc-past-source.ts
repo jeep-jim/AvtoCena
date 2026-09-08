@@ -1,3 +1,4 @@
+import { namedTechnicalGroups } from "./source-table-capture";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
 export type JpaucRawRow = {
@@ -337,6 +338,9 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       auctionName: row.location || undefined, auctionDate: row.date || undefined, lotNumber: row.lot || undefined, auctionGrade: row.auctionGrade || undefined,
       sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? jpaucPhotoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
       operational: {
+        sourceSpecifications: {version:1,sourceId:this.sourceId,sourceOfferId:row.dataId,specificationId:row.dataId,sourceUrl:row.detailUrl,capturedAt:now,
+          groups:namedTechnicalGroups({"Марка":row.maker,"Модель":row.model,"Комплектация":row.grade,"Год":row.year,"Объём, см³":row.engineCc,"Код кузова":row.modelCode,"КПП":row.shift,"Пробег, км":row.mileageKm,"Цвет":row.color,"Оценка аукциона":row.auctionGrade},"Параметры аукциона JPAuc")},
+        specificationCollection: {status:"received",kind:"listing_fields"},
         sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 3, historicalAuction: true,
         semanticEvidence: {
           year: { source: "jpauc_past_listing_year", ...semanticEvidence.year },

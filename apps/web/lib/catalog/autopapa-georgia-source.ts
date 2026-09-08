@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -261,6 +262,13 @@ export function autoPapaExactDetailFacts(offer: Partial<VehicleOffer>, markup: s
 export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: string, responseUrl: string) {
   const facts = autoPapaExactDetailFacts(offer, markup, responseUrl);
   if (!facts) return null;
+  const text = plain(markup);
+  const start = text.search(/\bBody\s+Type\s*:/i);
+  const end = text.indexOf("Car description",start);
+  const bounded = start >= 0 ? text.slice(start,end>start?end:start+1800) : "";
+  const labels = ["Body Type","Year","Mileage","Engine","Engine capacity","Fuel Type","Fuel","Power","Transmission","Gearbox","Drive","Drive Type","Steering Wheel","Steering","Color","Doors","Seats","Airbags","VIN"];
+  const pattern = new RegExp(`\\b(${labels.join("|")})\\s*:\\s*(.*?)(?=\\s+(?:${labels.join("|")})\\s*:|$)`,"gi");
+  captureSourceTable(offer,namedTechnicalGroups([...bounded.matchAll(pattern)].map(match=>({name:match[1],value:match[2].trim()})),"Параметры AutoPapa"),"listing_fields");
   const raw = typeof offer.operational?.raw === "object" && offer.operational.raw
     ? offer.operational.raw as Record<string, unknown>
     : {};

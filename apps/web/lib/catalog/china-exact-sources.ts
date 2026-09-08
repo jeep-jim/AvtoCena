@@ -1,4 +1,6 @@
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
+import { captureSourceTable } from "./source-table-capture";
+import { htmlTechnicalGroups } from "./source-html-specifications";
 
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -296,13 +298,17 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const sourceUrl = String(offer.operational?.sourceUrl || "");
     if (!sourceUrl || !this.detailPattern.test(sourceUrl)) return [];
-    const { html } = await getHtml(sourceUrl, this.baseUrl);
+    const { html, response } = await getHtml(sourceUrl, this.baseUrl);
+    if (this.detailId(sourceUrl) !== offer.sourceOfferId || this.detailId(response.url || sourceUrl) !== offer.sourceOfferId) throw Error("detail_identity_mismatch");
+    this.validateListResponse(html,response);
     const pageText = clean(html);
     const title = clean(offer.sourceTitle || offer.operational?.sourceTitle || "");
     const identityWords = title.replace(/^(?:Grade\s*[SABCD]\s*)?Used\s+/i, "").split(/\s+/).filter((x) => x.length >= 2).slice(0, 3);
     if (identityWords.length && !identityWords.some((key) => pageText.toLowerCase().includes(key.toLowerCase()))) return [];
 
-    const urls = imageUrls(this.gallerySlice(html), sourceUrl, this.imageHostPattern);
+    const primary = this.gallerySlice(html);
+    captureSourceTable(offer,htmlTechnicalGroups(primary));
+    const urls = imageUrls(primary, sourceUrl, this.imageHostPattern);
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
     const verified = urls.length >= minimum;
     offer.operational = { ...(offer.operational || {}), photoIdentityVerified: verified, galleryVerified: verified, galleryImageCount: urls.length,

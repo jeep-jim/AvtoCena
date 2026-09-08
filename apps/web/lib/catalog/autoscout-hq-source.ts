@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { AutoScoutEuropeExactAdapter, type AutoScoutExactRow } from "./autoscout-exact-source-base";
 import type { CatalogImage, VehicleOffer } from "./types";
 
@@ -76,6 +77,16 @@ export class AutoScoutHqAdapter extends AutoScoutEuropeExactAdapter {
     const response = await fetch(sourceUrl, { headers: HEADERS, redirect: "follow", signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))) });
     const markup = await response.text();
     if (!response.ok) throw new Error(`autoscout_detail_http_${response.status}:${sourceOfferId}`);
+    const nextScript = markup.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/i);
+    let detail: any = null;
+    try { detail = JSON.parse(nextScript?.[1] || "{}").props?.pageProps?.listingDetails; } catch {}
+    if (detail && clean(detail.id || detail.listingId || detail.uuid) === sourceOfferId) {
+      captureSourceTable(offer, [
+        ...namedTechnicalGroups(detail.vehicle || detail.vehicleDetails, "Автомобиль"),
+        ...namedTechnicalGroups(detail.attributes || detail.technicalData || detail.specifications, "Технические характеристики"),
+        ...namedTechnicalGroups(detail.equipment || detail.equipmentCategories || detail.features, "Оснащение"),
+      ]);
+    }
     const urls = parseAutoScoutDetailGallery(markup, sourceOfferId, Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
     if (urls.length < 5) return [];
     const previousRaw = offer.operational?.raw && typeof offer.operational.raw === "object" ? offer.operational.raw as Record<string, unknown> : {};

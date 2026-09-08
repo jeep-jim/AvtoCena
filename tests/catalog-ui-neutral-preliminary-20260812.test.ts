@@ -45,7 +45,7 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
 });
 
 test("pending cards require an admitted modification selector to enter the public grid", () => {
-  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
 });
 

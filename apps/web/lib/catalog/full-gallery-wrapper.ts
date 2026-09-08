@@ -114,8 +114,10 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
 
     const listingUrls = sourceGalleryUrls(offer);
     let detailed: CatalogImage[] = [];
-    if ((isCarused || listingUrls.length < limit) && original) {
-      detailed = await original(offer).catch(() => [] as CatalogImage[]);
+    const inventory = process.env.CATALOG_SOURCE_INVENTORY_MODE === "1";
+    if ((inventory || isCarused || listingUrls.length < limit) && original) {
+      // In inventory collection, detail failures must reach the source report.
+      detailed = inventory ? await original(offer) : await original(offer).catch(() => [] as CatalogImage[]);
     }
 
     // For Carused, the exact detail parser is authoritative. Search/list markup

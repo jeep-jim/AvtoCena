@@ -4,6 +4,8 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { parseCatalogHorsepowerToken } from "./power-sanity";
 import { isCatalogYearAllowed } from "./offer-quality";
 import { canonicalSourceFuel } from "./powertrain-safety";
+import { captureSourceTable } from "./source-table-capture";
+import { htmlTechnicalGroups } from "./source-html-specifications";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 type DubicarsEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
@@ -36,6 +38,7 @@ export type DubicarsCurrentRow = {
   color?: string;
   images: string[];
   semanticEvidence?: DubicarsSpecificationEvidence;
+  specificationGroups?: import("./source-specifications").SourceSpecificationSnapshot["groups"];
 };
 
 const HEADERS = {
@@ -354,6 +357,11 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
     color,
     images: photos,
     semanticEvidence,
+    specificationGroups: [
+      {name:"Параметры DubiCars",items:stops.filter(name=>name!=="Location").flatMap(name=>labelValues(specsPlain,[name],stops).map(value=>({name,value})))},
+      ...htmlTechnicalGroups(specificationSection || ""),
+      ...htmlTechnicalGroups(markup.match(/<section\b[^>]*\bid=["']item-features["'][^>]*>([\s\S]*?)<\/section>/i)?.[1] || ""),
+    ].filter(group=>group.items.length),
   };
 }
 
@@ -437,6 +445,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
       normalized.icePowerKw = undefined;
       normalized.utilizationPowerKw = undefined;
     }
+    if (row.specificationGroups) captureSourceTable(normalized,row.specificationGroups,"listing_fields");
     return normalized;
   }
 

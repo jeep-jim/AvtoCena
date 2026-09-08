@@ -1,3 +1,4 @@
+import { captureSourceTable } from "./source-table-capture";
 import { stableOfferId } from "./storage";
 import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
@@ -365,6 +366,7 @@ function parseList(markup: string, pageUrl: string): DubizzleExactRow[] {
 const DETAIL_LABELS = [
   "Body Type", "Fuel Type", "Transmission Type", "Drive Type", "Drive", "Engine Capacity", "Engine Size",
   "Horsepower", "Power", "Mileage", "Kilometers", "Colour", "Color", "Doors", "Seats",
+  "Interior Color", "Exterior Color", "Trim", "Steering Side", "No. of Cylinders", "Seating Capacity", "Seller type", "Warranty", "Target Market",
 ];
 function overviewText(markup: string) {
   const text = plain(markup);
@@ -578,6 +580,8 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
       const responseUrl = response.url || row.sourceUrl;
       if (detailId(responseUrl) !== String(offer.sourceOfferId || "")) throw new Error(`dubizzle_exact_detail_identity_${offer.sourceOfferId}`);
       const fields = parseDubizzleLabelBoundDetailFields(markup);
+      const overview = overviewText(markup);
+      captureSourceTable(offer,[{name:"Характеристики объявления",items:DETAIL_LABELS.map(name=>({name,value:labelValue(overview,name)})).filter(item=>item.value)}],"listing_fields");
       const previousEvidence = ((offer.operational as any)?.semanticEvidence || {}) as Record<string, DubizzleEvidence<any>>;
       const detailEvidence = fields.semanticEvidence || dubizzleSpecificationEvidence({});
       let engineCc = combineEvidence(previousEvidence.engineCc, detailEvidence.engineCc);

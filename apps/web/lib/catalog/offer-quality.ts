@@ -1,3 +1,4 @@
+import { isSellerPricedOffer } from "./seller-price-contract";
 import { hasModificationSelection } from "./modification-contract";
 import { reviewedCatalogGalleryHold } from "./source-gallery-review";
 import type { CatalogImage, VehicleOffer } from "./types";
@@ -285,6 +286,7 @@ export function catalogSemanticEvidenceRejectionReason(offer: Partial<VehicleOff
     // that bucket as an exact body, and never waive pricing-field ambiguity or
     // contradictory source evidence.
     if (field === "bodyType" && status === "ambiguous" && !clean(offer?.bodyType)) continue;
+    if (isSellerPricedOffer(offer) && ["engineCc", "powerHp", "powerKw", "fuel", "powertrainKind", "fuelPowertrain", "certifiedPower", "utilizationPowerKw"].includes(field)) continue;
     if (status === "conflict" || status === "ambiguous") return `semantic_${field}_${status}`;
   }
   return "";
@@ -312,6 +314,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
  */
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
   if (reviewedCatalogGalleryHold(offer)) return false;
+  if (isSellerPricedOffer(offer)) return Number(offer.cardProjectionVersion || 0) >= 3 || isCrediblePublicOffer(offer);
   if (hasModificationSelection(offer)) return offer?.recoveryQualification?.status === "selection_required";
   if (Number(offer?.cardProjectionVersion || 0) >= 3) {
     return offer?.publicSpecificationVerified === true

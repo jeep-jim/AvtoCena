@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { encarNonCashContractReason } from "./encar-sale-contract";
@@ -409,6 +410,13 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       return [];
     }
     mergeEncarCompleteDetail(offer, detail);
+    const vehicle = detail?.vehicle || detail?.Vehicle || detail;
+    const declaredId = String(vehicle?.vehicleId || vehicle?.id || offer.sourceOfferId);
+    if (declaredId === String(offer.sourceOfferId)) captureSourceTable(offer, [
+      ...namedTechnicalGroups(vehicle.spec || vehicle.specification || vehicle.specifications, "Технические характеристики"),
+      ...namedTechnicalGroups(vehicle.category, "Модификация"),
+      ...namedTechnicalGroups(vehicle.options || vehicle.equipment, "Оснащение"),
+    ]);
     const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);
     const gallery = detailUrls.slice(0, limit).map(urlImage);
     const verified = gallery.length >= minimum;

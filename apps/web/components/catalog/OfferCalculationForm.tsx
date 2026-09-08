@@ -11,10 +11,11 @@ export type OfferCalculationDraft = {
 
 // UI contract only: the caller must validate the scenario with the pricing engine.
 // It deliberately has no access to the saved offer or catalog storage.
-export function OfferCalculationForm({ initial = {}, onCalculate, onManager, pending = false, error = "", researchIdentity }: {
+export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", researchIdentity }: {
   initial?: Partial<OfferCalculationDraft>;
   onCalculate: (draft: OfferCalculationDraft) => void;
   onManager?: () => void;
+  onDraftChange?: () => void;
   pending?: boolean;
   error?: string;
   researchIdentity?: VehicleResearchIdentity;
@@ -35,7 +36,7 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, pen
     <h2 id={`${id}-title`} className="text-xl font-black tracking-tight">Рассчитать под ключ</h2>
     <p className="mt-1 text-sm leading-5 text-[var(--ac-muted)]">Знаете характеристики? Укажите их для расчёта.</p>
     {researchIdentity ? <VehicleResearchLink identity={researchIdentity} /> : null}
-    <form className="mt-4" onSubmit={event => {
+    <form className="mt-4" onChange={onDraftChange} onSubmit={event => {
       event.preventDefault();
       onCalculate({ ...draft, engineCc: electric ? "" : draft.engineCc,
         hybridKind: hybrid ? draft.hybridKind : "", icePowerKw: hybrid ? draft.icePowerKw : "",
