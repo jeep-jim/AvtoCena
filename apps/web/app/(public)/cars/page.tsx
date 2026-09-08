@@ -81,7 +81,9 @@ function businessPriority(offer: any) {
   const affordable = rub > 0 && rub <= PRIORITY_MAX_RUB;
   const lowPower = power > 0 && power <= PRIORITY_MAX_POWER_HP;
   const recent = year >= PRIORITY_MIN_YEAR;
-  let score = 0;
+  // Source-only rubles cannot outrank a completed delivered quote merely
+  // because customs and delivery have not been added to them.
+  let score = Number(offer?.totalRub) > 0 ? 100_000 : 0;
   if (affordable) score += 1_600;
   if (lowPower) score += 1_600;
   if (recent) score += 800;

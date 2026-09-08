@@ -1,6 +1,7 @@
 const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
 const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-price-contract.ts");
+const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catalog/publication-price-preservation.ts");
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
@@ -276,6 +277,7 @@ async function runWithConcurrency(items, concurrency, worker) {
   return results;
 }
 
+let retainedPublishedIds = new Set();
 async function auditCandidate(sourceOffer) {
   try {
     if (!sourceOffer?.id || sourceOffer?.market !== market || isCommercial(sourceOffer)) return { offer: null, reason: "commercial_or_identity" };
@@ -286,7 +288,8 @@ async function auditCandidate(sourceOffer) {
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
     if (sellerInventory) {
-      const prepared = await prepareSellerInventory(offer);
+      const prepared = await prepareSellerInventory(retainedPublishedIds.has(sourceOffer.id) ? sourceOffer : offer,
+        {preservePublishedPrice:retainedPublishedIds.has(sourceOffer.id)});
       if (!prepared) return {offer:null,reason:"source_inventory_unqualified"};
       const priority = classifyCatalogV2Offer(prepared,v2Policy);
       if (!priority.eligible) return {offer:null,reason:`v2_${priority.reason}`};
@@ -321,6 +324,13 @@ async function auditCandidate(sourceOffer) {
 await acquirePublishLock();
 try {
 const generation = await readGenerationFiles();
+// A failed/empty source collection is not a request to reinterpret all of the
+// market's existing immutable records as newly collected seller inventory.
+if (sellerInventory && !generation.offers.length) {
+  await fs.writeFile(reportFile, JSON.stringify({market, published:false, previousManifestPreserved:true,
+    skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
+  throw new Error(`catalog_no_fresh_source_offers:${market}`);
+}
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
 let currentMarketRows = [];
@@ -338,6 +348,8 @@ const currentRetainedRows = currentMarketRows.filter((row) => {
   return decision.retain;
 });
 const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
+const freshIds = new Set(generation.offers.map(offer => offer.id));
+retainedPublishedIds = new Set(currentRetainedRows.filter(offer => !freshIds.has(offer.id)).map(offer => offer.id));
 const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
 const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "unverified_retention_expired").length;
 
@@ -442,6 +454,7 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
+if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 
@@ -498,6 +511,7 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
+        if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, publicOffers.filter(offer => offer.market === market));
         const failures = [];
         for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
           if (otherMarket === market) continue;
@@ -510,6 +524,7 @@ if (regressionBlocked) {
         if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
       },
       beforePublishValidate(publishedOffers) {
+        if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, publishedOffers.filter(offer => offer.market === market));
         const failures = [];
         for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
           const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);

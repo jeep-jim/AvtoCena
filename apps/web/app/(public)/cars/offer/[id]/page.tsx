@@ -1,4 +1,4 @@
-import { isSellerPricedOffer, sellerPriceLabel } from "@/lib/catalog/seller-price-contract";
+import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
 import { OfferManualCalculation } from "@/components/catalog/OfferManualCalculation";
 import { OfferSpecificationsDisclosure } from "@/components/catalog/OfferSpecificationsDisclosure";
@@ -400,7 +400,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
-          {sellerPricing ? <SellerPrice sellerPriceRub={offer.sellerPriceRub!} label={sellerPriceLabel(offer)} sourceLabel={`${offer.sourcePrice} ${offer.sourceCurrency} · курс на ${offer.calculationSnapshot?.currencyRate?.rateDate || ""}`} /> : selectionRequired
+          {sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <ModificationSelector key={offer.id} options={offer.modificationSelection!.options} selectedId={selectedModification ? query.modificationId : undefined} scenarioRub={modificationRub} failed={Boolean(query.modificationId && !selectedModification)} />
             : japanAuction
             ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
@@ -411,7 +411,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
-              {sellerPricing ? <OfferManualCalculation offerId={offer.id} year={offer.year} researchIdentity={{make:offer.make,model:offer.model,trim:offer.trim,year:offer.year,market:offer.market,powertrainKind:offer.powertrainKind}}/> : !selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
+              {sellerPricing ? <OfferManualCalculation offerId={offer.id} year={offer.year} /> : !selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
               <VehicleResearchLink identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
               <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />

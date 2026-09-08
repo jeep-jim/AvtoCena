@@ -8,8 +8,12 @@ import { hasCredibleOfferContent } from "./offer-quality";
 import { withoutDeliveredPrice } from "./modification-contract";
 import { restoreSavedSourceEvidence } from "./saved-source-recovery";
 
-export async function prepareSellerInventory(input: VehicleOffer): Promise<VehicleOffer | null> {
+export async function prepareSellerInventory(input: VehicleOffer, options: { preservePublishedPrice?: boolean } = {}): Promise<VehicleOffer | null> {
   if (isJapanAuctionOffer(input) && !japanAuctionSoldPriceVerified(input)) return null;
+  // A published quote is already complete. Its compact record intentionally
+  // omits some raw source evidence; replaying it as a new intake row erased
+  // valid calculations and specifications during the weekly refresh.
+  if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0) return structuredClone(input);
   const original = restoreSavedSourceEvidence(structuredClone(input));
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
