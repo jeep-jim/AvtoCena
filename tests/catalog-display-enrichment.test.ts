@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { sanitizeDubizzleStoredRangeMetrics } from "../apps/web/lib/catalog/dubizzle-exact-source";
+import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
 import { catalogPricingSpecificationsChanged, enrichOfferForDisplay } from "../apps/web/lib/catalog/display-enrichment";
 
 test("a knowledge power correction invalidates the stored customs price", () => {
@@ -155,4 +157,37 @@ test("frozen Dubizzle bucket boundaries are removed only with retained range evi
   });
   assert.equal(exactCoincidence.engineCc, 1499);
   assert.equal(exactCoincidence.powerHp, 99);
+});
+
+test("Swift GLX bucket interiors never survive as exact power, displacement or old pricing", async () => {
+  const offer = {
+    id: "9b8958287db01ba3fef50bf8", sourceId: "dubizzle_uae_open", sourceOfferId: "swift-glx",
+    market: "uae", make: "Suzuki", model: "Swift", trim: "GLX", year: 2024,
+    generation: "suzuki/swift/japan-2023", engineCc: 1373, powerHp: 140,
+    powerKw: 102.97, icePowerKw: 102.97, utilizationPowerKw: 102.97,
+    powerDataConfidence: "reference", powerDataSource: "vehicle-knowledge:drom_f1e86718d9701240befdaed7",
+    powertrainKind: "combustion", fuel: "petrol", sourcePrice: 39500, sourceCurrency: "AED",
+    totalRub: 2376520, publicVisibleRub: 2376520, publicSpecificationVerified: true, cardProjectionVersion: 3,
+    calculationStatus: "ready", calculationSnapshot: { powerRequiresConfirmation: false }, images: [],
+    operational: { raw: { parsed: { rawText: JSON.stringify({ details: {
+      "Engine Capacity (cc)": { en: { value: "1000 - 1499 cc" } }, Horsepower: { en: { value: "100 - 199 HP" } },
+    } }) } } },
+  } as any;
+  assert.equal(catalogOfferVisibleRub(offer), 0, "legacy compact attestation must not bypass provenance");
+  const safe = sanitizeDubizzleStoredRangeMetrics(offer);
+  for (const field of ["engineCc", "powerHp", "powerKw", "icePowerKw", "utilizationPowerKw", "calculationSnapshot"]) assert.equal(safe[field], undefined, field);
+  assert.equal(safe.totalRub, null);
+  assert.equal(safe.publicSpecificationVerified, false);
+  const enriched = await enrichOfferForDisplay(offer);
+  assert.equal(enriched.engineCc, undefined);
+  assert.equal(enriched.powerHp, undefined);
+  assert.equal(catalogOfferVisibleRub(enriched), 0);
+  assert.equal(offer.powerHp, 140, "do not mutate the stored input");
+
+  const documented = { ...offer, powerDataSource: "seller document", powerDataConfidence: "documented",
+    operational: { ...offer.operational, semanticEvidence: {
+      engineCc: { source: "seller document", status: "exact", value: 1373 },
+      powerHp: { source: "seller document", status: "exact", value: 140 },
+    } } };
+  assert.equal(sanitizeDubizzleStoredRangeMetrics(documented), documented, "independent exact evidence survives a category bucket");
 });

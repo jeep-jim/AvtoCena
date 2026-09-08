@@ -9,10 +9,12 @@ export function EditablePowerTile({
   currentHp,
   requiresConfirmation,
   scenarioSource,
+  powerDataConfidence,
 }: {
   currentHp: number;
   requiresConfirmation: boolean;
   scenarioSource?: string | null;
+  powerDataConfidence?: string;
   fullWidth?: boolean;
 }) {
   const router = useRouter();
@@ -30,7 +32,7 @@ export function EditablePowerTile({
       status: "Нужно уточнить",
       hint: "Мощность не нашли. Выберите точное значение, если знаете его — цена пересчитается.",
     }
-    : scenarioSource === "knowledge_reference"
+    : scenarioSource === "knowledge_reference" || (!scenarioSource && powerDataConfidence === "reference")
       ? {
         status: "Из базы модели",
         hint: "Используем справочное значение. Можно уточнить мощность именно этого автомобиля.",
@@ -46,8 +48,8 @@ export function EditablePowerTile({
             hint: "Цена пересчитана по выбранной мощности. Перед покупкой значение нужно подтвердить по документам.",
           }
           : {
-            status: requiresConfirmation ? "Нужно уточнить" : "Мощность найдена",
-            hint: requiresConfirmation
+            status: requiresConfirmation || powerDataConfidence === "estimated" ? "Нужно уточнить" : "Мощность найдена",
+            hint: requiresConfirmation || powerDataConfidence === "estimated"
               ? "Выберите точную мощность — цена сразу пересчитается."
               : "При необходимости мощность можно изменить и посмотреть другой расчёт.",
           };

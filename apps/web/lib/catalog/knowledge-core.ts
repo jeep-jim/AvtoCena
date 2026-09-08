@@ -353,7 +353,34 @@ function applyTrustedVariant(offer: VehicleOffer, variant: KnowledgeCoreVariant,
   return next as VehicleOffer;
 }
 
+/** Old heuristic references must not survive as source facts on a new pass. */
+export function sanitizeLegacyKnowledgeSpecifications<T extends VehicleOffer>(offer: T): T {
+  if (offer.market === "japan" || !/^vehicle-knowledge:|^vehicle-model-representative:/.test(String(offer.powerDataSource || ""))) return offer;
+  const evidence = (offer.operational as any)?.semanticEvidence || {};
+  const exact = (field: "engineCc" | "powerHp") => ["exact", "verified"].includes(evidence[field]?.status)
+    && Number(evidence[field]?.value) > 0 && Number(evidence[field]?.value) === Number(offer[field]);
+  const dropPower = !exact("powerHp");
+  const dropEngine = !exact("engineCc");
+  if (!dropPower && !dropEngine) return { ...offer, powerDataConfidence: "source_exact", powerDataSource: evidence.powerHp.source } as T;
+  return {
+    ...offer,
+    engineCc: dropEngine ? undefined : offer.engineCc,
+    powerHp: dropPower ? undefined : offer.powerHp,
+    powerKw: dropPower ? undefined : offer.powerKw,
+    icePowerKw: dropPower ? undefined : offer.icePowerKw,
+    utilizationPowerKw: dropPower ? undefined : offer.utilizationPowerKw,
+    powerDataConfidence: dropPower ? undefined : "source_exact",
+    powerDataSource: dropPower ? undefined : evidence.powerHp.source,
+    totalRub: null,
+    calculationSnapshot: undefined,
+    calculationStatus: "needs_data",
+    publicSpecificationVerified: false,
+    publicVisibleRub: undefined,
+  } as T;
+}
+
 export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer: T): Promise<T> {
+  offer = sanitizeLegacyKnowledgeSpecifications(offer);
   const index = await readKnowledgeCoreIndex();
   let current: VehicleOffer = offer;
   let matched = false;

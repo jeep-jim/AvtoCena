@@ -162,6 +162,9 @@ export function classifySpecificationEvidence(
     const guard = evidenceGuard(offer, ["powerHp", "powerKw", "peakPower"], ["powerHp", "powerKw"]);
     if (guard) return guard;
     const sanity = catalogPowerSanity(offer);
+    if (sanity.reason === "unconfirmed_legacy_knowledge_power") return {
+      state: "ambiguous", reason: "non_exact_power_provenance", provenance: "stored_unclassified",
+    };
     if (sanity.suspicious) return { state: "conflict", reason: sanity.reason, provenance: provenance(offer, ["powerHp", "powerKw", "peakPower"], ["powerHp", "powerKw"]) };
     if (!positive(offer.powerHp, 2_500) && !positive(offer.powerKw, 2_000)) return { state: "missing", reason: "peak_power_missing", provenance: "none" };
     const fieldProvenance = powerProvenance(offer, ["powerHp", "powerKw", "peakPower"], ["powerHp", "powerKw"]);

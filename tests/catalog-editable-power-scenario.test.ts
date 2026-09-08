@@ -91,6 +91,9 @@ test("existing power control remains available alongside linked modification sel
 
 
 test("customer-entered horsepower stays visible as an on-page preliminary calculation", () => {
+  assert.match(offerPage, /powerDataConfidence=\{raw.powerDataConfidence\}/);
+  assert.match(editableTile, /powerDataConfidence === "reference"/);
+  assert.match(editableTile, /powerDataConfidence === "estimated"/);
   assert.match(offerPage, /const customerScenarioRub = safeRequestedPowerHp/);
   assert.match(offerPage, /powerScenario\?\.source === "customer_input"/);
   assert.match(offerPage, /customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);

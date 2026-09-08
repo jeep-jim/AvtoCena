@@ -144,14 +144,6 @@ function rangedMetric(value: unknown) {
     || /\d\s*\+\s*(?:cc|cm3|cm³|hp|ps|bhp)?\s*$/i.test(text);
 }
 
-function rangeUpperBound(value: unknown) {
-  if (!rangedMetric(value)) return undefined;
-  const numbers = [...String(value ?? "").matchAll(/[0-9][0-9, .]*/g)]
-    .map((match) => integer(match[0]))
-    .filter((item): item is number => Boolean(item));
-  return numbers.at(-1);
-}
-
 function storedAlgoliaDetail(offer: Partial<VehicleOffer>, key: string) {
   const rawText = String((offer.operational as any)?.raw?.parsed?.rawText || "");
   if (!rawText) return undefined;
@@ -167,11 +159,9 @@ function storedAlgoliaDetail(offer: Partial<VehicleOffer>, key: string) {
 }
 
 /**
- * Older frozen generations contain the right edge of an Algolia filter bucket
- * as though it were an exact vehicle specification. Keep the listing readable,
- * but remove the stored metric only when its own retained source payload proves
- * that the value came from that range. A coincidentally genuine 1,499 cc or
- * 99 hp value without range evidence is deliberately left untouched.
+ * A retained filter bucket cannot substantiate any exact value, including an
+ * interior value filled by old model knowledge. Preserve an independent exact
+ * field only when its semantic evidence explicitly supports the stored value.
  */
 export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer: T): T {
   if (offer.sourceId !== "dubizzle_uae_open") return offer;
@@ -180,8 +170,10 @@ export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer
   const evidence = (offer.operational as any)?.semanticEvidence || {};
   const retainedAmbiguous = (field: string) => evidence?.[field]?.source === "dubizzle_retained_algolia"
     && evidence?.[field]?.status === "ambiguous";
-  const dropEngine = retainedAmbiguous("engineCc") || rangeUpperBound(engineRaw) === Number(offer.engineCc || 0);
-  const dropPower = retainedAmbiguous("powerHp") || rangeUpperBound(powerRaw) === Number(offer.powerHp || 0);
+  const independentlyExact = (field: "engineCc" | "powerHp") => ["exact", "verified"].includes(evidence[field]?.status)
+    && Number(evidence[field]?.value) > 0 && Number(evidence[field]?.value) === Number(offer[field]);
+  const dropEngine = retainedAmbiguous("engineCc") || (rangedMetric(String(engineRaw || "")) && !independentlyExact("engineCc"));
+  const dropPower = retainedAmbiguous("powerHp") || (rangedMetric(String(powerRaw || "")) && !independentlyExact("powerHp"));
   if (!dropEngine && !dropPower) return offer;
   const retainedRaw = typeof offer.operational?.raw === "object" && offer.operational.raw
     ? offer.operational.raw as Record<string, any>
@@ -193,9 +185,16 @@ export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer
     ...offer,
     engineCc: dropEngine ? undefined : offer.engineCc,
     powerHp: dropPower ? undefined : offer.powerHp,
+    powerKw: dropPower ? undefined : offer.powerKw,
+    icePowerKw: dropPower ? undefined : offer.icePowerKw,
+    utilizationPowerKw: dropPower ? undefined : offer.utilizationPowerKw,
     powerDataConfidence: dropPower ? undefined : offer.powerDataConfidence,
     powerDataSource: dropPower ? undefined : offer.powerDataSource,
     calculationStatus: "needs_data",
+    totalRub: null,
+    calculationSnapshot: undefined,
+    publicSpecificationVerified: false,
+    publicVisibleRub: undefined,
     operational: {
       ...(offer.operational || {}),
       // Downstream normalization must not rediscover a substring such as
@@ -207,8 +206,8 @@ export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer
       },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
-        ...(dropEngine ? { engineCc: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: engineRaw } } : {}),
-        ...(dropPower ? { powerHp: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: powerRaw } } : {}),
+        ...(dropEngine ? { engineCc: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: engineRaw ?? evidence.engineCc?.rawValue } } : {}),
+        ...(dropPower ? { powerHp: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: powerRaw ?? evidence.powerHp?.rawValue } } : {}),
       },
     },
   } as T;
