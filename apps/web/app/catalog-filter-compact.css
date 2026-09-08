@@ -1,8 +1,30 @@
 /* Compact advanced catalog filters: simple two-field ranges and anchored choices. */
 
 .ac-catalog-filter-panel .ac-advanced-fields {
-  padding: 10px !important;
-  border-radius: 16px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+html body .ac-catalog-filter-panel {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] body :is(.ac-catalog-filter-panel, .ac-mobile-filter-sheet)
+  :is(.ac-filter-control, .ac-range-input-box, .ac-sort-control, .ac-filter-settings) {
+  background: #fff !important;
+  border: 1px solid #dce1e8 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] body .ac-mobile-filter-sheet { background: #fff !important; }
+
+.ac-filter-quick-row > * { min-width: 0; }
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .ac-filter-quick-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .ac-catalog-filter-panel .ac-advanced-fields > div[class*="items-end"][class*="justify-between"],
@@ -22,7 +44,7 @@
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  padding: 7px 4px 3px !important;
+  padding: 7px 0 3px !important;
   min-width: 0 !important;
 }
 
@@ -370,8 +392,8 @@ html[data-theme="light"] .ac-filter-chip {
   }
 
   .ac-catalog-filter-panel .ac-range-card + .ac-range-card {
-    border-left: 1px solid var(--ac-border) !important;
-    padding-left: 10px !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
   }
 
   .ac-catalog-filter-panel .ac-range-card {

@@ -26,13 +26,13 @@ export function ModificationSelector({ options, selectedId, scenarioRub = 0, fai
   const fuelOptions = [...new Set(options.map(option => option.fuel))];
   const engineOptions = [...new Set(options.filter(option => option.fuel === fuel).map(option => String(option.engineCc || 0)))];
   const variants = options.filter(option => option.fuel === fuel && String(option.engineCc || 0) === engine);
-  const control = "mt-2 w-full min-w-0 rounded-xl border border-white/15 bg-[#303d50] px-3 py-3 text-sm font-bold text-white disabled:opacity-45";
+  const control = "ac-calculation-input mt-1.5 w-full min-w-0 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 py-3 text-sm font-bold text-[var(--ac-text)] disabled:opacity-45";
 
-  return <section id="modification-selector" aria-labelledby="modification-title" className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
-    {variant && variant === selectedId && !pending && scenarioRub > 0 ? <div className="mb-4"><p className="text-xs font-bold text-white/65">Расчёт по выбранной модификации</p><p className="mt-2 text-3xl font-black">{scenarioRub.toLocaleString("ru-RU")} ₽</p></div> : null}
-    <h2 id="modification-title" className="font-black">Выбрать модификацию</h2>
-    <p className="mt-2 text-xs leading-5 text-white/65">В объявлении недостаточно характеристик. Выберите версию для расчёта. Соответствие этому автомобилю нужно подтвердить по документам.</p>
-    <fieldset disabled={pending} className="mt-3 min-w-0 space-y-3">
+  return <section id="modification-selector" aria-labelledby="modification-title" className="min-w-0 text-[var(--ac-text)]">
+    {variant && variant === selectedId && !pending && scenarioRub > 0 ? <div className="mb-4"><p className="text-xs font-bold text-[var(--ac-muted)]">Расчёт по вашим данным</p><p className="mt-2 text-3xl font-black">{scenarioRub.toLocaleString("ru-RU")} ₽</p></div> : null}
+    <h2 id="modification-title" className="text-xl font-black">Рассчитать под ключ</h2>
+    <p className="mt-1 text-sm leading-5 text-[var(--ac-muted)]">Знаете модификацию? Выберите её для расчёта.</p>
+    <fieldset disabled={pending} className="mt-4 grid min-w-0 grid-cols-2 gap-3">
       <label className="block text-xs font-bold">Тип топлива
         <select className={control} value={fuel} onChange={event => { setFuel(event.target.value); setEngine(""); setVariant(""); update(""); }}>
           <option value="">Выберите тип топлива</option>
@@ -45,7 +45,7 @@ export function ModificationSelector({ options, selectedId, scenarioRub = 0, fai
           {engineOptions.map(value => <option key={value} value={value}>{value === "0" ? "Электромотор" : `${Number(value).toLocaleString("ru-RU")} см³`}</option>)}
         </select>
       </label>
-      <label className="block text-xs font-bold">Модификация и мощность
+      <label className="col-span-2 block text-xs font-bold">Модификация и мощность
         <select className={control} disabled={!engine} value={variant} onChange={event => { setVariant(event.target.value); update(event.target.value); }}>
           <option value="">Выберите модификацию</option>
           {variants.map(option => <option key={option.id} value={option.id}>{option.label} · {option.powerHp} л.с. · {option.market}</option>)}
@@ -53,6 +53,7 @@ export function ModificationSelector({ options, selectedId, scenarioRub = 0, fai
       </label>
       {variant ? <button type="button" className="text-xs underline" onClick={() => { setFuel(""); setEngine(""); setVariant(""); update(""); }}>Сбросить выбор</button> : null}
     </fieldset>
-    <p role="status" aria-live="polite" className="mt-3 text-xs text-white/65">{pending ? "Пересчитываем…" : failed ? "Расчёт недоступен: проверьте выбранную версию или попробуйте позже." : selected ? "Расчёт по выбранной вами версии. Характеристики объявления сохранены." : "Итоговая стоимость появится после выбора модификации."}</p>
+    <p role="status" aria-live="polite" className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{pending ? "Пересчитываем…" : failed ? "Не удалось рассчитать. Попробуйте ещё раз или обратитесь к менеджеру." : selected ? "Расчёт по вашим данным. Менеджер подтвердит характеристики и стоимость." : "Цена под ключ появится после выбора."}</p>
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--ac-border)] pt-3 text-sm"><span className="text-[var(--ac-muted)]">Не уверены?</span><button type="button" data-offer-action="lead" className="min-h-10 font-bold underline decoration-red-400 underline-offset-4">Расчёт у менеджера →</button></div>
   </section>;
 }

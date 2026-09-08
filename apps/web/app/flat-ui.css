@@ -98,7 +98,6 @@ html:not([data-theme="light"]):not([data-theme="light"]) body .ac-public-header{
 
 /* Панели на главной/каталоге — тот же оттенок, что у верхнего фильтра. */
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-filter-panel,
-html:not([data-theme="light"]):not([data-theme="light"]) body .ac-catalog-filter-panel,
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-currency-rates-strip,
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-brand-rail,
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-executor-block,

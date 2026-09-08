@@ -1,4 +1,5 @@
 "use client";
+import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
 
@@ -26,6 +27,7 @@ export function PreliminaryPrice({
   highlightElectrified?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const tapActivation = useTapActivation();
   const [desktopHover, setDesktopHover] = useState(false);
   // Match the server on the first client render. Reading `document` here used
   // to change inline colors before hydration and forced React to rebuild the
@@ -100,6 +102,7 @@ export function PreliminaryPrice({
   return (
     <div
       ref={rootRef}
+      {...tapActivation}
       className={`relative ${panel ? "ac-price-trend-panel ac-preliminary-price-panel cursor-pointer rounded-[1.35rem] p-4 pr-16 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}
       style={panel ? { background: panelBackground, backgroundColor: panelBackground } : undefined}
       role={panel ? "button" : undefined}
@@ -131,11 +134,6 @@ export function PreliminaryPrice({
           style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)", color: "var(--ac-text)" }}
           onMouseEnter={() => { if (desktopHover) setOpen(true); }}
           onMouseLeave={() => { if (desktopHover) setOpen(false); }}
-          onTouchEnd={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            setOpen((current) => !current);
-          }}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
