@@ -1,3 +1,6 @@
+import { OfferSpecificationsDisclosure } from "@/components/catalog/OfferSpecificationsDisclosure";
+import { offerSpecificationGroups } from "@/lib/catalog/offer-specification-groups";
+import { assessJapanExportRestriction } from "@/lib/catalog/japan-export-restriction";
 import { ModificationSelector } from "@/components/catalog/ModificationSelector";
 import { hasModificationSelection, withoutDeliveredPrice } from "@/lib/catalog/modification-contract";
 import { calculateSelectedModification, conditionalModificationRub } from "@/lib/catalog/modification-recovery";
@@ -302,8 +305,10 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
   if (!visibleRub && !selectionRequired) redirect("/cars");
+  const specificationGroups = offerSpecificationGroups(offer);
   const o = {
     ...presented,
+    japanExportRestriction: assessJapanExportRestriction(offer),
     totalRub: visibleRub || null,
     previousTotalRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.previousTotalRub : null,
     priceDeltaRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.priceDeltaRub : null,
@@ -315,7 +320,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const auctionAt = new Date(o.auctionDate || "");
   const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
   const favoriteRub = catalogOfferVisibleRub(publicOffer(offer));
-  const snapshot = { id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : offer.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, href: `/cars/offer/${o.id}` };
+  const snapshot = { id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : offer.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
@@ -386,6 +391,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
+          <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} />
           {!selectionRequired ? <OfferCreditCalculator /> : null}
         </div>
 
@@ -405,6 +411,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
               <VehicleResearchLink identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
             </div>
+            <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             {!selectionRequired && visibleRub > 0 ? <div className="mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">

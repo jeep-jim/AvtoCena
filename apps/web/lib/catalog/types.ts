@@ -70,6 +70,7 @@ export type VehicleOffer = {
   auctionDate?: string;
   lotNumber?: string;
   auctionGrade?: string;
+  japanExportRestriction?: import("./japan-export-restriction").JapanExportRestriction;
   sourcePrice: number | null;
   sourceCurrency: string | null;
   priceMode: PriceMode;

@@ -24,6 +24,8 @@ type Favorite = {
   market?: string;
   marketLabel?: string;
   auctionDate?: string;
+  auctionGrade?: string;
+  japanExportRestriction?: import("@/lib/catalog/japan-export-restriction").JapanExportRestriction;
   href?: string;
 };
 

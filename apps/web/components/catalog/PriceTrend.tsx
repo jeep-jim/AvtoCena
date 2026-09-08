@@ -3,7 +3,8 @@ import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
-import { Gavel } from "lucide-react";
+import { AuctionCardPrice } from "./AuctionCardPrice";
+import type { JapanExportRestriction } from "../../lib/catalog/japan-export-restriction";
 
 export type RateHistoryPoint = { date: string; effectiveRate: number };
 export type PublicCurrencyRate = {
@@ -21,6 +22,8 @@ type ChartPoint = RateHistoryPoint;
 type PriceLike = {
   market?: string | null;
   auctionDate?: string | null;
+  auctionGrade?: string | null;
+  japanExportRestriction?: JapanExportRestriction;
   totalRub?: number | null;
   previousTotalRub?: number | null;
   priceDeltaRub?: number | null;
@@ -480,73 +483,11 @@ function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyI
   return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} compact light={light} statusLabel={currencyDriven ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает изменение полного сохранённого расчёта. Влияние курса указано отдельно.</div>}<span className={tailClass} /></div>;
 }
 
-function AuctionGavelIcon({ className = "" }: { className?: string }) {
-  return <Gavel className={className} strokeWidth={2.5} aria-hidden="true" />;
-}
-
-export function AuctionResultPrice({
-  offer,
-  label = "Завершённый аукцион",
-  priceClassName = "text-[22px]",
-  className = "",
-  panel = false,
-  dense = false,
-}: {
-  offer: PriceLike;
-  label?: string;
-  priceClassName?: string;
-  className?: string;
-  panel?: boolean;
-  dense?: boolean;
+export function AuctionResultPrice({ offer, label = "Завершённый аукцион", priceClassName = "text-[22px]", className = "", panel = false, dense = false }: {
+  offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const totalRub = Number(offer.totalRub || 0);
-  const auctionDate = String(offer.auctionDate || "").trim();
-  const dateLabel = auctionDate && !Number.isNaN(Date.parse(auctionDate))
-    ? new Date(auctionDate).toLocaleDateString("ru-RU")
-    : "";
-
-  useEffect(() => {
-    if (!open) return;
-    const close = (event: PointerEvent) => { if (!rootRef.current?.contains(event.target as Node)) setOpen(false); };
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
-    document.addEventListener("pointerdown", close);
-    window.addEventListener("keydown", escape);
-    return () => {
-      document.removeEventListener("pointerdown", close);
-      window.removeEventListener("keydown", escape);
-    };
-  }, [open]);
-
-  return <div ref={rootRef} className={`relative ${panel ? "ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}>
-    <div className="flex min-w-0 items-center justify-between gap-2">
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>
-    </div>
-    <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-      <div className={`ac-price ac-price--flat min-w-0 font-black leading-none tracking-[-0.05em] text-[var(--ac-text)] ${totalRub ? "whitespace-nowrap" : "break-words"} ${priceClassName}`}>
-        {totalRub ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
-      </div>
-      <button
-        type="button"
-        aria-label="Что означает завершённый аукционный лот"
-        aria-expanded={open}
-        className="ac-offer-auction-gavel relative flex shrink-0 items-center rounded-xl bg-[#11151d] p-1.5 outline-none transition focus-visible:ring-2 focus-visible:ring-white/50"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
-        onClick={(event) => { event.preventDefault(); event.stopPropagation(); setOpen((current) => !current); }}
-      >
-        <AuctionGavelIcon className={dense ? "h-5 w-5 sm:h-6 sm:w-6" : "h-7 w-7"} />
-      </button>
-    </div>
-    {open ? <div
-      role="tooltip"
-      className={`absolute right-0 z-[400] w-[min(390px,calc(100vw-48px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4 text-left text-xs font-bold leading-5 text-[var(--ac-text)] shadow-[0_20px_65px_rgba(0,0,0,.35)] ${panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]"}`}
-      onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
-    >
-      Завершённый аукционный лот{dateLabel ? ` от ${dateLabel}` : ""}. Показана стоимость под ключ, рассчитанная по цене продажи и курсу, сохранённому для этого лота. Текущий курс её не изменяет.
-    </div> : null}
+  return <div className={`relative ${panel ? "ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}>
+    <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
   </div>;
 }
 

@@ -10,21 +10,21 @@ const LABELS: Record<string, string> = {
   "Height (mm)": "Высота, мм", "Wheelbase (mm)": "Колёсная база, мм",
 };
 
-// Placement is intentionally left to the approved detail-page layout.
 // Unknown labels and source values are preserved, never guessed or run as HTML.
-export function OfferAllSpecifications({ snapshot }: { snapshot?: SourceSpecificationSnapshot }) {
-  if (!snapshot?.groups.length) return null;
+export function OfferAllSpecifications({ snapshot, groups = snapshot?.groups || [], showHeading = true, sourceUrl }: { snapshot?: SourceSpecificationSnapshot; groups?: SourceSpecificationSnapshot["groups"]; showHeading?: boolean; sourceUrl?: string }) {
+  if (!groups.length) return <p className="text-sm text-[var(--ac-muted)]">Источник пока не предоставил характеристики.</p>;
   return <section className="min-w-0 text-[var(--ac-text)]" aria-label="Все характеристики">
-    <h2 className="text-xl font-black">Все характеристики</h2>
-    <p className="mt-1 text-xs text-[var(--ac-muted)]">По данным источника. Указанные параметры уточняются перед покупкой.</p>
-    {snapshot.groups.map((group, groupIndex) => <div key={groupIndex} className="mt-6 min-w-0">
+    {showHeading ? <h2 className="text-xl font-black">Все характеристики</h2> : null}
+    <p className="mt-1 text-xs text-[var(--ac-muted)]">Данные объявления и подтверждённые параметры. Перед покупкой уточним по документам.</p>
+    {groups.map((group, groupIndex) => <div key={groupIndex} className="mt-6 min-w-0">
       <h3 className="text-base font-bold">{LABELS[group.name] || group.name}</h3>
-      <dl className="mt-2 grid min-w-0 gap-x-8 md:grid-cols-2">
+      <dl className="mt-2 grid min-w-0 gap-x-8 xl:grid-cols-2">
         {group.items.map((item, itemIndex) => <div key={itemIndex} className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-3 border-b border-[var(--ac-border)] py-3 text-sm leading-5">
           <dt className="break-words text-[var(--ac-muted)]">{LABELS[item.name] || item.name}</dt>
           <dd className="min-w-0 break-words font-medium">{item.value.trim() && item.value.trim() !== "-" ? item.value : "Не указано"}</dd>
         </div>)}
       </dl>
     </div>)}
+    {sourceUrl && /^https?:\/\//i.test(sourceUrl) ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#ef3340] underline underline-offset-4">Открыть объявление источника ↗</a> : null}
   </section>;
 }
