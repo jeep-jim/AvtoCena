@@ -64,7 +64,7 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl }
   const content = <OfferAllSpecifications groups={groups} showHeading={false} sourceUrl={sourceUrl} />;
 
   if (mode === "desktop") return <details className="group/specs mt-6 hidden min-w-0 xl:block">
-    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 [&::-webkit-details-marker]:hidden">
+    <summary className="ac-specifications-trigger flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 [&::-webkit-details-marker]:hidden">
       <span className="flex items-center gap-2.5"><CarFront className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span>
       <ChevronDown className="h-5 w-5 transition-transform group-open/specs:rotate-180" aria-hidden="true" />
     </summary>
