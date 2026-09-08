@@ -1,7 +1,10 @@
-requestedAt=2026-09-07
-reason=owner-approved five-market refresh after PR833 and verified deployment 39efa1a9
+requestedAt=2026-09-08
+reason=owner-requested fixes and continued five-market parsing after PR836
 markets=korea,china,uae,europe,georgia
-policy=retain suitable existing inventory within retention; collect fresh; publish only accepted nonempty markets
-ci=34096085334
-deploy=34096458515
+policy=retain suitable inventory within retention; collect fresh; publish only accepted nonempty markets
+fix=c0c70b73d90820fd25351cdcc054ea93a50d9e22
+ci=34174368616
+verification=1119 regression tests passed; typechecks and production build passed
 japan=excluded
+crm=unchanged
+monitoring=no repeated market polling
