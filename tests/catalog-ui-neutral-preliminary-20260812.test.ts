@@ -59,7 +59,7 @@ test("Japanese auction cards retain historical pricing with source badges instea
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
-  assert.match(offerPage, /Продано на торгах[^\n]+auctionDateLabel \|\| updatedDate[^\n]+sourceUrl \? <a href=\{sourceUrl\}[^\n]+\{updatedTime\}<\/a>/);
+  assert.match(offerPage, /Продано на торгах[^\n]+auctionDateLabel \|\| updatedDate[^\n]+sourceUrl \? <a href=\{sourceUrl\}[^\n]+aria-label="Открыть результат аукциона"[^\n]+>↗<\/a>/);
   assert.doesNotMatch(offerPage, /Завершённый лот\{auctionDateLabel/);
 });
 

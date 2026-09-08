@@ -320,9 +320,9 @@ html:not([data-theme="light"]) .ac-range-input-box.is-filled input {
 }
 
 .ac-filter-clear--desktop {
-  position: absolute;
-  right: 16px;
-  bottom: 10px;
+  position: relative;
+  display: block;
+  margin: 8px 0 0 auto;
   z-index: 3;
 }
 

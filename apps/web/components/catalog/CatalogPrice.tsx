@@ -1,8 +1,9 @@
-import { isSellerPricedOffer, sellerPriceLabel } from "@/lib/catalog/seller-price-contract";
+import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { isCatalogPowerScenario } from "@/lib/catalog/power-scenario";
+import { SellerPrice } from "./SellerPrice";
 
 export function CatalogPrice({
   offer,
@@ -15,11 +16,7 @@ export function CatalogPrice({
   dense?: boolean;
   priceClassName?: string;
 }) {
-  if (isSellerPricedOffer(offer)) return <div className="ac-price-trend relative min-w-0 text-[var(--ac-text)]">
-    <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold`}>{sellerPriceLabel(offer)}</div>
-    <div className={`mt-1 whitespace-nowrap font-black tracking-tight ${priceClassName}`}>{Math.round(offer.sellerPriceRub).toLocaleString("ru-RU")} ₽</div>
-    <div className="mt-1 text-[10px] text-[var(--ac-muted)]">Без доставки и платежей</div>
-  </div>;
+  if (isSellerPricedOffer(offer)) return <SellerPrice offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = String(offer?.market || "").toLowerCase() === "japan"
     || /япони/i.test(String(offer?.marketLabel || ""));

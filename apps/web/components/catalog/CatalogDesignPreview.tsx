@@ -34,7 +34,7 @@ export function CatalogDesignPreview() {
           <p className="mt-3 text-sm leading-6 text-[var(--ac-muted)]">Для расчёта под ключ нужно уточнить характеристики автомобиля.</p>
         </div>
         <div className="min-w-0">
-          <SellerPrice sellerPriceRub={821284} sourceLabel="39 500 AED · пример пересчёта" />
+          <SellerPrice offer={{sellerPriceRub:821284,sourcePrice:39500,sourceCurrency:"AED",market:"uae"}} />
           <div className="mt-5"><OfferCalculationForm initial={{ year: "2024" }} researchIdentity={{ make: "Suzuki", model: "Swift", trim: "GLX", year: 2024, market: "uae" }} onCalculate={() => setNotice("Макет: параметры заполнены. Расчётный движок будет подключён отдельно.")} onManager={() => setNotice("Макет: здесь открывается существующая форма заявки менеджеру.")} /></div>
           <OfferSpecificationsDisclosure groups={demoGroups} title="Suzuki Swift GLX" mode="mobile" />
           {notice ? <p role="status" className="mt-3 text-sm text-[var(--ac-muted)]">{notice}</p> : null}

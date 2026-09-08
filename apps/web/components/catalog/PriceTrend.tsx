@@ -577,8 +577,8 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
     role={panel && canShowRate ? "button" : undefined}
     tabIndex={panel && canShowRate ? 0 : undefined}
     aria-label={panel && canShowRate ? `Показать курс ${currency} и полный расчёт` : undefined}
-    onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
-    onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
+    onClick={panel ? (event) => { event.preventDefault(); event.stopPropagation(); openSheet(); } : undefined}
+    onKeyDown={panel ? (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openSheet(); } } : undefined}
   >
     <div className="flex min-w-0 items-center justify-between gap-2"><div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>{trend ? <span className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`} title={trendTitle}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span> : null}</div>
     <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
