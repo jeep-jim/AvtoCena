@@ -3,6 +3,7 @@ const { catalogOfferFreshness, catalogMarketRetentionMs, catalogOfferConfirmedWi
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { needsSourceDetailFactRefresh } = await import("../apps/web/lib/catalog/importer-impl.ts");
+const { sourceListingSnapshot } = await import("../apps/web/lib/catalog/source-listing-snapshot.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
@@ -32,6 +33,7 @@ const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUI
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
 const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
 const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100_000));
+const collectFullDetails = process.env.CATALOG_COLLECT_FULL_DETAILS !== "0";
 const retentionMs = catalogMarketRetentionMs(market);
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 100_000));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 1_000_000));
@@ -117,6 +119,14 @@ const liveSourceIds = ignoreProbe
 const sourceIds = retentionSourceIds;
 const retained = new Map(sourceIds.map((id) => [id, new Map()]));
 const fresh = new Map(sourceIds.map((id) => [id, new Map()]));
+// Preserve source observations independently of the old priced-offer gate.
+// Stored in the checkpoint artifact only; existing publishers read `offers`.
+const sourceListings = new Map(sourceIds.map((id) => [id, new Map()]));
+function retainSourceListing(offer, stage) {
+  const bucket = sourceListings.get(offer.sourceId);
+  if (!bucket || (!bucket.has(offer.id) && bucket.size >= targetPerSource)) return;
+  bucket.set(offer.id, sourceListingSnapshot(offer, stage));
+}
 const detailReservations = new Map(sourceIds.map((id) => [id, 0]));
 const detailSuccessBySource = new Map(sourceIds.map((id) => [id, 0]));
 const detailDeferredBySource = new Map(sourceIds.map((id) => [id, 0]));
@@ -128,6 +138,7 @@ function recordWithdrawal(offer, status = offer.status) {
   confirmedWithdrawals.set(offer.id, { id: offer.id, sourceId: offer.sourceId, sourceOfferId: offer.sourceOfferId, market, status, observedAt });
   retained.get(offer.sourceId)?.delete(offer.id);
   fresh.get(offer.sourceId)?.delete(offer.id);
+  sourceListings.get(offer.sourceId)?.delete(offer.id);
   reject("source_confirmed_withdrawn");
 }
 const rejections = {};
@@ -182,7 +193,7 @@ function report(stopReason = "running") {
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
       version: 42, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
-      detailLimitPerSource, maxPagesPerSource, maxTotalPages, maxEmptyPages, maxSourceErrors,
+      detailLimitPerSource, collectFullDetails, maxPagesPerSource, maxTotalPages, maxEmptyPages, maxSourceErrors,
       detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
       detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending, galleriesAccumulated,
       priorityMaxTotalRub, priorityMaxPowerHp, priorityMinYear, priorityOffers,
@@ -198,10 +209,12 @@ function report(stopReason = "running") {
       },
       publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id && classifyCatalogV2Offer(offer).eligible).length])),
       candidatesBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
+      sourceListingsBySource: counts(sourceListings),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
       rejectionReasons: rejections, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, stopReason,
     },
     offers,
+    sourceListings: [...sourceListings.values()].flatMap(bucket => [...bucket.values()]),
   };
 }
 async function checkpoint(stopReason = "running") {
@@ -301,26 +314,20 @@ async function prepare(base, source) {
   if (!offer?.id || offer.market !== market || !sourceIds.includes(String(offer.sourceId || ""))) { reject("identity"); return null; }
   if (commercial.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject("commercial"); return null; }
 
-  const powerBeforeKnowledge = Number(offer.powerHp || 0);
-  try {
-    offer = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
-    if (!powerBeforeKnowledge && Number(offer.powerHp || 0)) knowledgeEnriched++;
-  } catch (error) {
-    addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "knowledge", error: String(error?.message || error) });
-  }
 
   if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   let gallery = images(offer.images);
 
-  offer = await calculateSafely(offer, "calculation_before_detail");
   const powertrainKind = String(offer.powertrainKind || "");
   const combustionSpecsMissing = !["electric", "series_hybrid"].includes(powertrainKind) && !Number(offer.engineCc || 0);
   const criticalSpecsMissing = !Number(offer.powerHp || 0) || combustionSpecsMissing || !String(offer.fuel || "").trim();
   const mandatoryPhotoMissing = gallery.length < minimumImages;
   const priorityGalleryMissing = gallery.length < preferredImages && isMassMarketPriority(offer);
   const detailFactsNeeded = needsSourceDetailFactRefresh(offer) && !hasVerifiedAutoPapaPrice(offer);
-  const detailNeeded = typeof source?.refreshOffer === "function" || mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded;
+  const fullParametersMissing = sourceId === "autohome_used_china_open" && !offer.operational?.sourceSpecifications?.groups?.length;
+  const detailNeeded = typeof source?.refreshOffer === "function" || mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded || fullParametersMissing || collectFullDetails;
   let detailDeferredForOffer = false;
+  let detailFetched = false;
 
   if (detailNeeded && source?.fetchImages && !expired()) {
     if (reserveDetail(String(offer.sourceId))) {
@@ -328,6 +335,7 @@ async function prepare(base, source) {
         const detailedImages = typeof source.refreshOffer === "function"
           ? (offer = await source.refreshOffer(offer)).images || []
           : (await source.fetchImages(offer)) || [];
+        detailFetched = true;
         offer = normalizeVehicleOfferSpecs(offer);
         gallery = images([...gallery, ...detailedImages]);
         detailEnriched++;
@@ -352,6 +360,8 @@ async function prepare(base, source) {
     return null;
   }
 
+  // Retain the detailed observation even if images or pricing later reject it.
+  if (detailFetched) retainSourceListing({ ...offer, images: gallery }, "detail");
   if (sourceId === "autopapa_georgia_open" && !hasVerifiedAutoPapaPrice(offer)) { reject("source_detail_price"); return null; }
   if (gallery.length < minimumImages) { reject(detailDeferredForOffer ? "images_detail_budget" : "images"); return null; }
   const now = new Date().toISOString();
@@ -362,6 +372,14 @@ async function prepare(base, source) {
       galleryPreferredReached: gallery.length >= preferredImages, galleryEnrichmentStatus: gallery.length >= preferredImages ? "preferred" : detailDeferredForOffer ? "deferred" : "partial",
       galleryRebuiltFrom: previous ? "retention_plus_fresh_listing" : "fresh_listing", seoEligible: true },
   });
+  const powerBeforeKnowledge = Number(offer.powerHp || 0);
+  try {
+    offer = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
+    if (!powerBeforeKnowledge && Number(offer.powerHp || 0)) knowledgeEnriched++;
+  } catch (error) {
+    addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "knowledge", error: String(error?.message || error) });
+  }
+
   offer = await calculateSafely(offer, "calculation_after_detail");
   if (!isCrediblePublicOffer(offer)) { reject("quality"); return null; }
   return offer;
@@ -408,6 +426,7 @@ async function fetchOne(state) {
     }
     if (base.status !== "active" || bucket.has(base.id) || batch.has(base.id)) continue;
     base = observeCatalogOffer(base, new Date().toISOString());
+    retainSourceListing(base, "listing");
     batch.add(base.id); bases.push(base); normalized++;
     if (bases.length >= targetPerSource - bucket.size) break;
   }

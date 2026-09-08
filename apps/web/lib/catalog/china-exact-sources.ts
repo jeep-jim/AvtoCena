@@ -109,12 +109,15 @@ export function guaziSpecificationEvidence(input: {
 }): GuaziSpecificationEvidence {
   const years = unique([input.listingYear, ...identityYears(input.title), ...identityYears(input.detailUrl)]);
   const engines = unique([...titleEngineTokens(input.title), ...urlEngineTokens(input.detailUrl)]);
+  const nominalEngine = exactEvidence(engines, engines.map(exactEngine));
   const missing = <T>(): GuaziEvidence<T> => ({ rawValues: [], status: "missing" });
   return {
     year: exactEvidence(years, years.map(exactYear)),
     fuel: missing<string>(),
     powertrainKind: missing<string>(),
-    engineCc: exactEvidence(engines, engines.map(exactEngine)),
+    // '1.5L' in a title is a nominal class, not evidence of exactly 1500 cc.
+    // Keep contradictory labels visible, but never promote rounding to exact cc.
+    engineCc: nominalEngine.status === "exact" ? { rawValues: engines, status: "ambiguous" } : nominalEngine,
     powerHp: missing<number>(),
     powerKw: missing<number>(),
   };

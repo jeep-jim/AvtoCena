@@ -183,7 +183,7 @@ test("probe keeps mandatory sources in network work while optional sources still
   assert.doesNotMatch(rebuildScript, /const allSources/);
 });
 
-test("rebuild calculates first and progressively opens detail without exhausting the run", () => {
+test("rebuild collects source details before calculating within its request budget", () => {
   assert.match(rebuildScript, /retention_loaded/);
   assert.match(rebuildScript, /readMarketOffers/);
   assert.match(rebuildScript, /readAllOffersForMaintenance/);
@@ -191,7 +191,8 @@ test("rebuild calculates first and progressively opens detail without exhausting
   assert.match(rebuildScript, /storage\.readJson/);
   assert.match(rebuildScript, /storage\.writeJson/);
   assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithKnowledgeCore\(offer\)\)/);
-  assert.match(rebuildScript, /calculateSafely\(offer, "calculation_before_detail"\)/);
+  assert.doesNotMatch(rebuildScript, /calculateSafely\(offer, "calculation_before_detail"\)/);
+  assert.ok(rebuildScript.indexOf('retainSourceListing({ ...offer, images: gallery }') < rebuildScript.indexOf('calculateSafely(offer, "calculation_after_detail")'));
   assert.match(rebuildScript, /detailLimitPerSource/);
   assert.match(rebuildScript, /reserveDetail/);
   assert.match(rebuildScript, /detailDeferredBySource/);

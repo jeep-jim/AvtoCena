@@ -91,6 +91,7 @@ export type VehicleOffer = {
     raw?: unknown;
     vin?: string;
     frameNumber?: string;
+    sourceSpecifications?: import("./source-specifications").SourceSpecificationSnapshot;
     lastSeenScanCycleId?: string;
     [key: string]: unknown;
   };

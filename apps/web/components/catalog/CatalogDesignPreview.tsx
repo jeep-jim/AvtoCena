@@ -7,6 +7,7 @@ import { SellerPrice } from "./SellerPrice";
 import { PriceTrend } from "./PriceTrend";
 import { PreliminaryPrice } from "./PreliminaryPrice";
 import { PublicHeader } from "../layout/PublicHeader";
+import { OfferAllSpecifications } from "./OfferAllSpecifications";
 
 // Development-only visual fixture. No inventory, pricing or lead requests.
 export function CatalogDesignPreview() {
@@ -27,9 +28,15 @@ export function CatalogDesignPreview() {
         </div>
         <div className="min-w-0">
           <SellerPrice sellerPriceRub={821284} sourceLabel="39 500 AED · пример пересчёта" />
-          <div className="mt-5"><OfferCalculationForm initial={{ year: "2024" }} onCalculate={() => setNotice("Макет: параметры заполнены. Расчётный движок будет подключён отдельно.")} onManager={() => setNotice("Макет: здесь открывается существующая форма заявки менеджеру.")} /></div>
+          <div className="mt-5"><OfferCalculationForm initial={{ year: "2024" }} researchIdentity={{ make: "Suzuki", model: "Swift", trim: "GLX", year: 2024, market: "uae" }} onCalculate={() => setNotice("Макет: параметры заполнены. Расчётный движок будет подключён отдельно.")} onManager={() => setNotice("Макет: здесь открывается существующая форма заявки менеджеру.")} /></div>
           {notice ? <p role="status" className="mt-3 text-sm text-[var(--ac-muted)]">{notice}</p> : null}
         </div>
+      </div>
+      <div className="mt-10">
+        <OfferAllSpecifications snapshot={{ version: 1, sourceId: "demo", sourceOfferId: "demo", specificationId: "demo", sourceUrl: "", capturedAt: "2026-09-08", groups: [
+          { name: "Основные характеристики · пример", items: [{ name: "Модификация", value: "GLX" }, { name: "Тип топлива", value: "Бензин" }] },
+          { name: "Двигатель · пример неполных данных", items: [{ name: "Мощность", value: "-" }, { name: "Рабочий объём, см³", value: "-" }] },
+        ] }} />
       </div>
       <section className="mt-20 grid gap-8 border-t border-[var(--ac-border)] pt-8 md:grid-cols-2" aria-label="Проверка нажатия и прокрутки">
         <PriceTrend panel label="Ориентир стоимости" offer={{ market: "uae", totalRub: 2376520, sourcePrice: 39500, sourceCurrency: "AED", calculationSnapshot: { currencyRate: { currency: "AED", effectiveRate: 20.79, previousEffectiveRate: 20.8, rateDelta: -0.01, rateDate: "2026-09-08" } } }} />

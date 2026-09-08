@@ -369,14 +369,19 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const detailYear = yearOf(detail);
     const price = positiveNumber(detail.price);
     let pageParameters: ReturnType<typeof che168BoundPageParameters> = null;
+    let parameterStatus = Number(detail.specid) > 0 ? "not_requested" : "spec_id_missing";
     // Public page carries a table bound to both this listing and this spec ID.
     if (Number(detail.specid) > 0 && !this.parameterPageBlocked) {
       const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
+      parameterStatus = response ? `http_${response.status}` : "request_failed";
       if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
       if (response?.ok) {
         const markup = await response.text();
         if (che168BrowserChallenge(markup)) this.parameterPageBlocked = "browser_challenge";
-        else pageParameters = che168BoundPageParameters(markup, id, Number(detail.specid));
+        else {
+          pageParameters = che168BoundPageParameters(markup, id, Number(detail.specid));
+          parameterStatus = pageParameters ? (pageParameters.groups.length ? "received" : "empty_table") : "identity_bound_table_not_found";
+        }
       }
     }
     let detailEngine = text(detail.engine);
@@ -452,6 +457,16 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       photoIdentityVerified: verifiedGallery,
       gallerySafetyMode: "che168_global_carinfo_catepiclist_v1",
       galleryStoredAs: "json_urls",
+      sourceSpecifications: pageParameters ? {
+        version: 1, sourceId: this.sourceId, sourceOfferId: id,
+        specificationId: String(pageParameters.specId), sourceUrl: sourceUrl(id),
+        capturedAt: new Date().toISOString(), groups: pageParameters.groups,
+      } : undefined,
+      specificationCollection: {
+        status: this.parameterPageBlocked || parameterStatus,
+        groupCount: pageParameters?.groups.length || 0,
+        fieldCount: pageParameters?.groups.reduce((total, group) => total + group.items.length, 0) || 0,
+      },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
         year: { source: "che168_global_listing_and_carinfo", ...evidence.year },
