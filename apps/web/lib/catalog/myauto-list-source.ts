@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -46,6 +47,7 @@ export type MyAutoListingImageIdentity = {
 };
 
 export type MyAutoProductSnapshot = {
+  specificationGroups?: import("./source-specifications").SourceSpecificationSnapshot["groups"];
   galleryUrls: string[];
   engineCc?: number;
   powerHp?: number;
@@ -147,6 +149,11 @@ export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, exp
     galleryUrls,
     engineCc: engineCc.status === "exact" ? engineCc.value : undefined,
     powerHp: powerHp.status === "exact" ? powerHp.value : undefined,
+    specificationGroups: [
+      ...namedTechnicalGroups(info.specifications || info.attributes, "Технические характеристики"),
+      ...namedTechnicalGroups(info.options || info.features, "Оснащение"),
+      ...namedTechnicalGroups(Object.fromEntries(Object.entries(info).filter(([key]) => /^(?:engine_.*|power_hp|horsepower|fuel.*|gear.*|drive.*|wheel.*|door.*|seat.*|color.*|airbag.*|abs|esp|climate.*|conditioner.*|leather.*|heated.*|cruise.*|parking.*|sunroof.*|turbo.*)$/i.test(key))), "Параметры объявления"),
+    ],
     semanticEvidence: { engineCc, powerHp },
   };
 }
@@ -415,6 +422,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
     const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
     const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(() => null);
     applyMyAutoProductSpecifications(offer, snapshot);
+    if (snapshot?.specificationGroups) captureSourceTable(offer,snapshot.specificationGroups);
     offer.operational = {
       ...(offer.operational || {}),
       raw: {

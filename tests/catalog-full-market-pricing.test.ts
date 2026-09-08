@@ -83,7 +83,7 @@ test("does not present an unverified hybrid preview as certified 30-minute power
 
 test("converts source prices to rubles before power and utilization checks", () => {
   const rateAt = customsPricing.indexOf("const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency)");
-  const utilizationAt = customsPricing.indexOf("const utilizationProblem = exactUtilizationPowerProblem(offer)");
+  const utilizationAt = customsPricing.indexOf("const utilizationProblem = userParameters ? null : exactUtilizationPowerProblem(offer)");
   const powerAt = customsPricing.indexOf("if (!electrified && !positive(offer.powerHp)");
   assert.ok(rateAt >= 0 && utilizationAt > rateAt && powerAt > rateAt);
   assert.match(customsPricing, /currencyRate: rate/);

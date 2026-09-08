@@ -13,7 +13,7 @@ test("catalog card never bypasses the validated public ruble price", () => {
   assert.doesNotMatch(card, /exactTotalRub\s*\|\|/);
   assert.doesNotMatch(card, /Number\(o\.totalRub\s*\|\|\s*0\)/);
   assert.match(card, /totalRub: visibleRub \|\| null/);
-  assert.match(card, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(card, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.doesNotMatch(card, /function sourceMoney/);
   assert.doesNotMatch(card, /Цена в объявлении/);
   assert.doesNotMatch(card, /Цена торгов/);
@@ -22,7 +22,7 @@ test("catalog card never bypasses the validated public ruble price", () => {
   assert.doesNotMatch(card, /ориентир под ключ/);
   assert.match(offerPage, /const visibleRub = modificationRub \|\| customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
   assert.match(offerPage, /conditionalModificationRub\(/);
-  assert.match(offerPage, /if \(!visibleRub && !selectionRequired\) redirect\("\/cars"\)/);
+  assert.match(offerPage, /if \(!visibleRub && !selectionRequired && !sellerPricing\) redirect\("\/cars"\)/);
   assert.doesNotMatch(offerPage, /exactTotalRub\s*\|\|/);
 });
 

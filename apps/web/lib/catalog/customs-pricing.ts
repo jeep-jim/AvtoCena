@@ -1,4 +1,5 @@
 import { getActiveMarketVersion } from "../business-settings";
+import { japanAuctionSoldPriceVerified } from "./public-priority";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
@@ -177,7 +178,7 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
   return isElectrifiedKind(offer?.powertrainKind) && isPreliminaryPowerPendingCalculation(offer);
 }
 
-async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false): Promise<VehicleOffer> {
+async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
   const coreEnriched = resolvedModification ? input : await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
   const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
     ? positive(coreEnriched.powerHp)
@@ -267,7 +268,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   // is not automatically added to the customs value. Keep it visible in the
   // audit snapshot but calculate the customs base from the vehicle value itself.
   const customsValueRub = rate.sourcePriceRub;
-  const motor30MinKnown = documentedMotorPower(offer) > 0;
+  const motor30MinKnown = documentedMotorPower(offer) > 0 || (userParameters && positive(offer.power30MinKw) > 0);
   const customs = calculateRussiaCustomsForIndividual({
     customsValueRub,
     eurRateRub: Number(eurRate.effectiveRate || 0),
@@ -298,7 +299,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
-  const utilizationProblem = exactUtilizationPowerProblem(offer);
+  const utilizationProblem = userParameters ? null : exactUtilizationPowerProblem(offer);
   const combinedMissing = [...new Set([
     ...(utilizationProblem?.missing || []),
     ...(Array.isArray(customs.missing) ? customs.missing : []),
@@ -444,8 +445,8 @@ export async function calculateOfferWithResolvedModification(input: VehicleOffer
     modificationScenario: conditional.calculationSnapshot.modificationScenario } };
 }
 
-export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer): Promise<VehicleOffer> {
-  if (input.market === "japan" || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
+export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer, includeVerifiedJapanAuction = false): Promise<VehicleOffer> {
+  if ((input.market === "japan" && (!includeVerifiedJapanAuction || !japanAuctionSoldPriceVerified(input))) || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
   return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true));
 }
 
@@ -467,4 +468,16 @@ export function requireFreshRecoveryRates(offer: VehicleOffer, now = Date.now())
 // Regular imports keep the stricter default above and remain unpublished.
 export async function calculateOfferWithPreliminaryPowerPricing(input: VehicleOffer): Promise<VehicleOffer> {
   return calculateOfferWithRussiaCustomsInternal(input, true);
+}
+
+/** Ephemeral scenario: validated customer inputs never become catalog evidence. */
+export async function calculateOfferWithCustomerParameters(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+  const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
+    catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
+    powerDataConfidence: "estimated", powerDataSource: "customer_input",
+    utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: undefined,
+    calculationSnapshot: {}, operational: { ...input.operational, raw: undefined } };
+  const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
+  if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) return null;
+  return {totalRub:result.totalRub,breakdown:result.calculationSnapshot?.breakdown || [],rateDate:result.calculationSnapshot?.currencyRate?.rateDate};
 }

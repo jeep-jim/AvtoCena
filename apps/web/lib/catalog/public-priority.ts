@@ -1,3 +1,4 @@
+import { isSellerPricedOffer } from "./seller-price-contract";
 import { isCatalogCombustionLowPower } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
 import { isCatalogPowerScenario } from "./power-scenario";
@@ -252,6 +253,7 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
+  if (isSellerPricedOffer(offer)) return 0;
   if (offer?.market !== "japan" && catalogPowerSanity(offer).suspicious) return 0;
   if (offer?.market !== "japan" && (offer?.modificationSelection || isModificationScenario(offer)
     || offer?.calculationSnapshot?.powerScenario?.source === "customer_input"
@@ -332,6 +334,8 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
   if (isModificationScenario(offer)) return { ...base, eligible: false, tier: 99, reason: "personal_scenario", calculated: false, visibleRub: 0 };
   if (hasModificationSelection(offer) && sourcePriced) return { ...base, eligible: true, tier: 8, reason: "selection_required", calculated: false, preliminary: false, visibleRub: 0 };
+
+  if (isSellerPricedOffer(offer)) return { ...base, eligible: true, tier: 8, reason: "seller_price", calculated: false, preliminary: false, visibleRub: 0 };
 
   // The public catalog is a delivered-price product, not an internal inventory
   // browser. Keep source-priced rows with unfinished customs inputs in internal

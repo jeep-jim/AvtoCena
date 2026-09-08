@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
@@ -446,6 +447,8 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     };
   }
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const savedFields = (offer.operational?.raw as any)?.fields;
+    if ((offer.operational?.raw as any)?.detailIdentityVerified) captureSourceTable(offer,namedTechnicalGroups(savedFields,"Данные аукционного листа"),"listing_fields");
     const raw = offer.operational?.raw && typeof offer.operational.raw === "object" ? offer.operational.raw as Record<string, unknown> : {};
     const urls = [...new Set((Array.isArray(raw.images) ? raw.images : [])
       .map((value: unknown) => clean(value))

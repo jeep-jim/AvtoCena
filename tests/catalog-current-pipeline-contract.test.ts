@@ -22,7 +22,7 @@ test("V3 keeps the two-photo general admission contract while source-specific ga
 });
 
 test("unpriced inventory needs an admitted modification selector to render", () => {
-  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.match(catalogCard, /hasModificationSelection\(offer\)/);
   assert.match(catalogCard, /Выбрать модификацию/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);

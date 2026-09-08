@@ -2,6 +2,7 @@ import { hasModificationSelection } from "@/lib/catalog/modification-contract";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogImageDeliveryUrl, rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
+import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
@@ -32,7 +33,8 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
   const selectionRequired = hasModificationSelection(offer);
-  const normalizedOffer = selectionRequired ? offer : normalizeVehicleOfferSpecs(offer);
+  const sellerPricing = isSellerPricedOffer(offer);
+  const normalizedOffer = selectionRequired || sellerPricing ? offer : normalizeVehicleOfferSpecs(offer);
   const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
   const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
@@ -52,7 +54,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   // Defence in depth for an older immutable generation during deployment: the
   // publication gate removes these rows permanently on the next market write,
   // while the card renderer hides them immediately.
-  if (!visibleRub && !selectionRequired) return null;
+  if (!visibleRub && !selectionRequired && !sellerPricing) return null;
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,
@@ -60,10 +62,11 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
   };
   const snapshot = {
+    catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: offer.calculationStatus, catalogKind: offer.catalogKind,
     id: o.id, title: o.title, price: visibleRub || null, totalRub: visibleRub || null, previousTotalRub: displayOffer.previousTotalRub,
     priceDeltaRub: displayOffer.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice,
     sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl, year: o.year,
-    mileageKm: o.mileageKm, market: normalizedOffer.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, href,
+    mileageKm: o.mileageKm, market: normalizedOffer.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href,
   };
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";

@@ -25,6 +25,8 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  catalogPricingMode?: "seller";
+  sellerPriceRub?: number;
   id: string;
   sourceId: string;
   sourceOfferId: string;
@@ -70,6 +72,7 @@ export type VehicleOffer = {
   auctionDate?: string;
   lotNumber?: string;
   auctionGrade?: string;
+  japanExportRestriction?: import("./japan-export-restriction").JapanExportRestriction;
   sourcePrice: number | null;
   sourceCurrency: string | null;
   priceMode: PriceMode;
@@ -91,6 +94,7 @@ export type VehicleOffer = {
     raw?: unknown;
     vin?: string;
     frameNumber?: string;
+    sourceSpecifications?: import("./source-specifications").SourceSpecificationSnapshot;
     lastSeenScanCycleId?: string;
     [key: string]: unknown;
   };

@@ -1,6 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
+import { VehicleResearchLink } from "./VehicleResearchLink";
+import type { VehicleResearchIdentity } from "../../lib/catalog/vehicle-research-link";
 
 export type OfferCalculationDraft = {
   year: string; engineCc: string; powerHp: string; fuel: string;
@@ -9,12 +11,14 @@ export type OfferCalculationDraft = {
 
 // UI contract only: the caller must validate the scenario with the pricing engine.
 // It deliberately has no access to the saved offer or catalog storage.
-export function OfferCalculationForm({ initial = {}, onCalculate, onManager, pending = false, error = "" }: {
+export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", researchIdentity }: {
   initial?: Partial<OfferCalculationDraft>;
   onCalculate: (draft: OfferCalculationDraft) => void;
   onManager?: () => void;
+  onDraftChange?: () => void;
   pending?: boolean;
   error?: string;
+  researchIdentity?: VehicleResearchIdentity;
 }) {
   const id = useId();
   const [draft, setDraft] = useState<OfferCalculationDraft>({
@@ -31,7 +35,8 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, pen
   return <section aria-labelledby={`${id}-title`} className="ac-calculation-form min-w-0 text-[var(--ac-text)]">
     <h2 id={`${id}-title`} className="text-xl font-black tracking-tight">Рассчитать под ключ</h2>
     <p className="mt-1 text-sm leading-5 text-[var(--ac-muted)]">Знаете характеристики? Укажите их для расчёта.</p>
-    <form className="mt-4" onSubmit={event => {
+    {researchIdentity ? <VehicleResearchLink identity={researchIdentity} /> : null}
+    <form className="mt-4" onChange={onDraftChange} onSubmit={event => {
       event.preventDefault();
       onCalculate({ ...draft, engineCc: electric ? "" : draft.engineCc,
         hybridKind: hybrid ? draft.hybridKind : "", icePowerKw: hybrid ? draft.icePowerKw : "",

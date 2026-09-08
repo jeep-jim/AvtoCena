@@ -1,3 +1,5 @@
+import { isSellerPricedOffer } from "./seller-price-contract";
+import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
 import { prepareModificationRecovery } from "./modification-recovery";
 import { catalogOfferWithinRetention } from "./refresh-policy";
@@ -155,15 +157,17 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  catalogPricingMode?: "seller"; sellerPriceRub?: number;
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
   fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string;
+  japanExportRestriction?: VehicleOffer["japanExportRestriction"];
   modificationSelection?: VehicleOffer["modificationSelection"]; recoveryQualification?: VehicleOffer["recoveryQualification"];
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string; powerScenario?: any; powerRequiresConfirmation?: boolean; customs?: { utilizationPowerKw?: number } } | null; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -382,9 +386,10 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
+    catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
-    transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
+    transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), japanExportRestriction: assessJapanExportRestriction(offer), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource,
@@ -406,11 +411,11 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
     && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
-    && (hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
+    && (isSellerPricedOffer(row) || hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
     && !catalogRequiredSpecificationRejectionReason(row)));
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
-  return hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
+  return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
     && !catalogRequiredSpecificationRejectionReason(offer));
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
@@ -927,7 +932,8 @@ export type PersistCatalogOptions = {
 export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions): boolean {
   const market = options.productionRefreshMarket;
   const preserved = options.preservePublicOffersByMarket || {};
-  return Boolean(market && CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market)
+  const weeklyInventory = process.env.CATALOG_SELLER_INVENTORY === "1" && market && MARKETS.includes(market);
+  return Boolean(market && (CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market) || weeklyInventory)
     && !options.modificationRecovery && !options.appendPublicOffersByMarket
     && typeof options.beforePersistValidate === "function"
     && typeof options.beforePublishValidate === "function"

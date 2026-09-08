@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import { canonicalSourceModelIdentity } from "./open-source-normalizer";
 import {
@@ -761,6 +762,7 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
         detailIdentityVerified: true,
       },
     };
+    captureSourceTable(offer, [...namedTechnicalGroups(Object.fromEntries(attrs), "Технические характеристики"), ...namedTechnicalGroups(ad.features, "Оснащение")]);
     return urls.map(image);
   }
 

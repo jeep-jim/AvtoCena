@@ -1,3 +1,5 @@
+import { retainNamedSpecificationGroups } from "./source-specifications";
+
 // Read JSON data emitted by the public detail page; never execute page scripts.
 export function che168BrowserChallenge(markup: string) {
   return /window\.solveChallenge\s*\(/.test(markup) && /EO-Bot-Js-Token/.test(markup);
@@ -38,6 +40,7 @@ export function che168BoundPageParameters(markup: string, infoid: string, specid
   const values = (rows: any[], name: RegExp) => rows.filter(row => name.test(String(row.name))).map(row => row.value);
   return {
     sourceOfferId: infoid, specId: specid,
+    groups: retainNamedSpecificationGroups(record.ssrSpecParam),
     modelNames: values(basicRows, /^Model Name$/i).map(String),
     fuelValues: [...new Set(values([...basicRows, ...engineRows], /^Energy Type$/i).map(String))],
     engineCc: metric(values(engineRows, /^Displacement \((?:mL|cc|cm3|cm³)\)$/i), 300, 10000),

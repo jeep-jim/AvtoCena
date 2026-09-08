@@ -9,7 +9,7 @@ test("Guazi listing identity recovers compact and decimal engine displacement", 
   assert.equal(listingEngineCc("https://en.guazi.com/products/buick-e4-2023-00l-white-40100km-at-2wd-5-seats-j3shshfxpy.html"), undefined);
 });
 
-test("Guazi exact normalized offer keeps listing-bound engine displacement", () => {
+test("Guazi normalized offer keeps nominal displacement out of exact engine cc", () => {
   const offer = guaziChinaExactSource.normalizeOffer({
     id: "skoda-superb-2024-14l-gray-5699km-at-2wd-5-seats-mg5wftcmmz",
     detailUrl: "https://en.guazi.com/products/skoda-superb-2024-14l-gray-5699km-at-2wd-5-seats-mg5wftcmmz.html",
@@ -22,13 +22,13 @@ test("Guazi exact normalized offer keeps listing-bound engine displacement", () 
   });
   assert.ok(offer);
   assert.equal(offer?.sourceId, "guazi_china_open");
-  assert.equal(offer?.engineCc, 1_400);
+  assert.equal(offer?.engineCc, undefined);
   assert.equal(offer?.operational?.sourceUrl, "https://en.guazi.com/products/skoda-superb-2024-14l-gray-5699km-at-2wd-5-seats-mg5wftcmmz.html");
   assert.equal(offer?.fuel, undefined);
   assert.equal(offer?.powertrainKind, "unknown");
   assert.equal(offer?.powerHp, undefined);
   assert.equal(classifySpecificationEvidence(offer!, "year").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "exact");
+  assert.equal(guaziSpecificationEvidence({ title: "Used Skoda Superb 2024 1.4L" }).engineCc.status, "ambiguous");
   assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "missing");
   assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "missing");
 });

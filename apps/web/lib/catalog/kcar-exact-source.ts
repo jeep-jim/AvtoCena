@@ -1,3 +1,4 @@
+import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import crypto from "node:crypto";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -13,6 +14,7 @@ type KCarListRow = {
 };
 
 type KCarDetailData = {
+  [key: string]: any;
   photoList?: Array<Record<string, any>>;
   outerPhotoList?: Array<Record<string, any>>;
   rvo?: Record<string, any>;
@@ -20,6 +22,7 @@ type KCarDetailData = {
 };
 
 type Row = {
+  specificationGroups?: import("./source-specifications").SourceSpecificationSnapshot["groups"];
   id: string;
   url: string;
   title: string;
@@ -272,6 +275,7 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
 }
 
 export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, onReject: (reason: string) => void = () => {}): Row | null {
+  const inventory = process.env.CATALOG_SOURCE_INVENTORY_MODE === "1";
   const reject = (reason: string): null => { onReject(reason); return null; };
   const rvo = data?.rvo || {};
   const id = clean(rvo.carCd);
@@ -306,11 +310,11 @@ export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, on
 
   if (!make || !model || !trim) return reject("missing_vehicle_identity");
   if (!year) return reject(`year_${evidence.year.status}`);
-  if (!fuel) return reject(`fuel_${evidence.fuel.status}`);
-  if (!transmission || !drive || !bodyType) return reject("missing_vehicle_description");
+  if (!inventory && !fuel) return reject(`fuel_${evidence.fuel.status}`);
+  if (!inventory && (!transmission || !drive || !bodyType)) return reject("missing_vehicle_description");
   if (!sourcePrice) return reject("missing_source_price");
-  if (!powerHp && !powerKw) return reject("missing_exact_peak_power");
-  if (images.length < 5) return reject("insufficient_bound_gallery");
+  if (!inventory && !powerHp && !powerKw) return reject("missing_exact_peak_power");
+  if (images.length < (inventory ? 2 : 5)) return reject("insufficient_bound_gallery");
   if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return reject("list_detail_make_mismatch");
   if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return reject("list_detail_model_mismatch");
   const listPrice = positiveInt(meta.prc);
@@ -342,6 +346,11 @@ export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, on
     images,
     rawFuelType,
     rawStatus: clean(rvo.statCdNm || rvo.statCd),
+    specificationGroups: [
+      ...namedTechnicalGroups(Object.fromEntries(Object.entries(rvo).filter(([key]) => /^(?:mnuftrNm|modelNm|grd.*Nm|regModelyr|mfgDt|milg|engdispmnt|hrspow|fuelType.*|trnsmsn.*|drvg.*|carctgr|extrColor.*|.*Opt.*|.*option.*)$/i.test(key))), "Параметры K Car"),
+      ...namedTechnicalGroups(data.optionList || data.carOptionList || data.options, "Оснащение"),
+      ...namedTechnicalGroups(data.specifications || data.specification, "Технические характеристики"),
+    ],
     semanticEvidence: evidence,
   };
 }
@@ -422,8 +431,9 @@ class KCarExactSource implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as Row;
-    if (!row?.id || !row.make || !row.model || !row.trim || !row.year || !row.sourcePrice || !row.sourceCurrency || row.images.length < 5) return null;
-    if (!row.powerHp && !row.powerKw) return null;
+    const inventory = process.env.CATALOG_SOURCE_INVENTORY_MODE === "1";
+    if (!row?.id || !row.make || !row.model || !row.trim || !row.year || !row.sourcePrice || !row.sourceCurrency || row.images.length < (inventory ? 2 : 5)) return null;
+    if (!inventory && !row.powerHp && !row.powerKw) return null;
     const now = new Date().toISOString();
     const fields = [
       "make", "model", "trim", "year", "sourcePrice", "sourceCurrency",
@@ -478,6 +488,7 @@ class KCarExactSource implements CatalogSourceAdapter {
         photoIdentityVerified: true,
         vehiclePhotoVerified: true,
         sourceExactFields: fields,
+        sourceSpecifications: row.specificationGroups?.length ? {version:1,sourceId:this.sourceId,sourceOfferId:row.id,specificationId:row.id,sourceUrl:row.url,capturedAt:now,groups:row.specificationGroups} : undefined,
         vin: row.vin,
         semanticEvidence: {
           year: { source: "kcar_exact_detail_rvo_calendar_year", ...row.semanticEvidence.year },
@@ -529,6 +540,8 @@ class KCarExactSource implements CatalogSourceAdapter {
       if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
       const data = await fetchExactDetailData(carCd);
       const rebuilt = exactVehicleGallery(data, carCd);
+      const detailRow = parseKcarExactDetail({carCd},data);
+      if (detailRow?.specificationGroups) captureSourceTable(offer,detailRow.specificationGroups);
       if (rebuilt.length < 5) {
         // An active 2D listing can contain detail/cabin photos and dealer
         // credentials but no source-verified full-body image. Do not publish it

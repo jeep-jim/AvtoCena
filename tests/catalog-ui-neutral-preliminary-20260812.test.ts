@@ -45,28 +45,17 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
 });
 
 test("pending cards require an admitted modification selector to enter the public grid", () => {
-  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired\) return null/);
+  assert.match(catalogCard, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return null/);
   assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
 });
 
-test("Japanese auction microcards use a neutral historical price and non-navigating plain gavel", () => {
+test("Japanese auction cards retain historical pricing with source badges instead of a gavel", () => {
   assert.match(catalogPrice, /japanAuction/);
   assert.match(catalogPrice, /AuctionCardPrice/);
-  assert.match(auctionCardPrice, /import \{ Gavel \} from "lucide-react"/);
-  assert.match(auctionCardPrice, /bg-transparent/);
-  assert.doesNotMatch(auctionCardPrice, /bg-\[#ef3340\]/);
-  assert.match(auctionCardPrice, /bottom-\[calc\(100%\+10px\)\]/);
-  assert.match(auctionCardPrice, /Завершённый аукционный лот/);
-  assert.match(auctionCardPrice, /Текущий курс её не изменяет/);
-  assert.match(auctionCardPrice, /event\.preventDefault\(\)/);
-  assert.match(auctionCardPrice, /event\.stopPropagation\(\)/);
-  assert.match(priceSheetCss, /\.ac-auction-gavel[^}]+background:\s*transparent !important/s);
+  assert.match(auctionCardPrice, /JapanAuctionBadges/);
+  assert.doesNotMatch(auctionCardPrice, /Gavel|onClick/);
   assert.match(priceTrend, /export function AuctionResultPrice/);
-  assert.match(priceTrend, /ac-offer-auction-gavel/);
-  assert.doesNotMatch(priceTrend, /ac-offer-auction-gavel[^\n]+bg-\[#ef3340\]/);
-  assert.doesNotMatch(priceTrend, /ac-offer-auction-gavel[^\n]+\btext-white\b/);
-  assert.match(priceSheetCss, /\.ac-offer-auction-gavel[^}]+background:\s*#11151d !important[^}]+color:\s*#fff !important/s);
-  assert.match(priceSheetCss, /\.ac-offer-auction-gavel > svg\s*\{[^}]+color:\s*#fff !important;[^}]+stroke:\s*#fff !important;/s);
+  assert.match(priceTrend, /<AuctionCardPrice offer=\{offer\}/);
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
@@ -80,8 +69,6 @@ test("catalog helper popovers preserve card rounding and currency opens only on 
   assert.doesNotMatch(priceTrend, /onMouseEnter=\{\(\) => \{ if \(canShowRate && desktopHover\) setPopoverOpen\(true\); \}\}/);
   assert.doesNotMatch(priceTrend, /onMouseLeave=\{\(\) => \{ if \(desktopHover\) setPopoverOpen\(false\); \}\}/);
   assert.match(priceTrend, /if \(desktopHover\) setPopoverOpen\(\(current\) => !current\); else openSheet\(\);/);
-  assert.match(auctionCardPrice, /bottom-\[calc\(100%\+10px\)\]/);
-  assert.match(auctionCardPrice, /onClickCapture=\{\(event\) => \{[^}]+swallowClick\(event\);[^}]+setOpen\(\(current\) => !current\);/s);
 });
 
 test("saved total changes are not mislabeled as currency impact", () => {
