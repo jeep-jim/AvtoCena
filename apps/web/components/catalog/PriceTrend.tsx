@@ -487,7 +487,7 @@ export function AuctionResultPrice({ offer, label = "Завершённый ау
   offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean;
 }) {
   return <div className={`relative ${panel ? "ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}>
-    <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
+    <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} interactiveGrade={panel} />
   </div>;
 }
 

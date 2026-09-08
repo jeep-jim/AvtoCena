@@ -309,7 +309,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
   if (!visibleRub && !selectionRequired && !sellerPricing) redirect("/cars");
-  const specificationGroups = offerSpecificationGroups(offer);
+  const specificationGroups = offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel });
   const o = {
     ...presented,
     japanExportRestriction: assessJapanExportRestriction(offer),
@@ -419,11 +419,10 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             {!selectionRequired && visibleRub > 0 ? <div className="mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
-                <span className="block whitespace-nowrap">Продано на торгах{auctionDateLabel || updatedDate ? ` ${auctionDateLabel || updatedDate}` : ""}{updatedTime ? " в " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
-                <span className="mt-1 block">Цена сохранена как ориентир по результату аукциона.</span>
+                <span className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5"><span>Продано на торгах</span><span>{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-inherit" aria-label="Открыть результат аукциона" title={updatedTime ? `Время: ${updatedTime}` : "Объявление источника"}>↗</a> : null}</span>
               </p> : <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
-                <span className="block whitespace-nowrap">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
-                <span className="mt-1 block xl:whitespace-nowrap">Возможность покупки и финальную стоимость подтвердит менеджер.</span>
+                <span className="block">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
+                <span className="mt-1 block">Возможность покупки и финальную стоимость подтвердит менеджер.</span>
               </p>}
             </div>
             <OfferDesktopActions />
