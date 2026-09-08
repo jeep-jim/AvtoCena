@@ -15,13 +15,12 @@ export function OfferAllSpecifications({ snapshot, groups = snapshot?.groups || 
   if (!groups.length) return <p className="text-sm text-[var(--ac-muted)]">Источник пока не предоставил характеристики.</p>;
   return <section className="min-w-0 text-[var(--ac-text)]" aria-label="Все характеристики">
     {showHeading ? <h2 className="text-xl font-black">Все характеристики</h2> : null}
-    <p className="mt-1 text-xs text-[var(--ac-muted)]">Данные объявления и подтверждённые параметры. Перед покупкой уточним по документам.</p>
-    {groups.map((group, groupIndex) => <div key={groupIndex} className="mt-6 min-w-0">
-      <h3 className="text-base font-bold">{LABELS[group.name] || group.name}</h3>
+    {groups.map((group, groupIndex) => <div key={groupIndex} className="mt-6 min-w-0 first:mt-0">
+      <h3 className="text-[13px] font-black uppercase tracking-[0.08em]">{LABELS[group.name] || group.name}</h3>
       <dl className="mt-2 grid min-w-0 gap-x-8 xl:grid-cols-2">
-        {group.items.map((item, itemIndex) => <div key={itemIndex} className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-3 border-b border-[var(--ac-border)] py-3 text-sm leading-5">
+        {group.items.map((item, itemIndex) => <div key={itemIndex} className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-3 border-b border-[var(--ac-border)] py-2.5 text-[13px] leading-5">
           <dt className="break-words text-[var(--ac-muted)]">{LABELS[item.name] || item.name}</dt>
-          <dd className="min-w-0 break-words font-medium">{item.value.trim() && item.value.trim() !== "-" ? item.value : "Не указано"}</dd>
+          <dd className="min-w-0 break-words text-right font-semibold">{item.value.trim() && item.value.trim() !== "-" ? item.value : "Не указано"}</dd>
         </div>)}
       </dl>
     </div>)}

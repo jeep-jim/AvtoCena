@@ -84,8 +84,8 @@ function driveValue(value: unknown) {
   return /привод/i.test(normalized) ? normalized : `${normalized} привод`;
 }
 
-function SpecTile({ label, value, icon, info, fullWidth = false }: SpecItem & { fullWidth?: boolean }) {
-  return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5" style={fullWidth ? { gridColumn: "1 / -1" } : undefined}>
+function SpecTile({ label, value, icon, info, fullWidth = false, desktopOnly = false }: SpecItem & { fullWidth?: boolean; desktopOnly?: boolean }) {
+  return <div aria-label={`${label}: ${value}`} className={`ac-offer-spec-tile ${desktopOnly ? "ac-spec-desktop-only" : ""} relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5`} style={fullWidth ? { gridColumn: "1 / -1" } : undefined}>
     <SpecIcon name={icon} />
     <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
     {info ? <details className="group static z-30 ml-auto shrink-0">
@@ -378,8 +378,9 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const nonEditableSpecs = specs.filter((spec) => selectionRequired
     ? !["Мощность", "Двигатель", "Топливо", "30-минутная мощность", "Силовая установка"].includes(spec.label)
     : spec.label !== "Мощность");
-  const primarySpecs = nonEditableSpecs.slice(0, Math.min(4, nonEditableSpecs.length));
-  const secondarySpecs = nonEditableSpecs.slice(primarySpecs.length);
+  const compactSpecs = nonEditableSpecs.filter((spec) => spec.label !== "Кузов");
+  const primarySpecs = compactSpecs.slice(0, 4);
+  const secondarySpecs = [...compactSpecs.slice(4), ...nonEditableSpecs.filter((spec) => spec.label === "Кузов")];
 
   return <main data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -409,9 +410,9 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
               {!selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
               <VehicleResearchLink identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
-              {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
+              {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} desktopOnly={spec.label === "Кузов"} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
+              <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             </div>
-            <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             {!selectionRequired && visibleRub > 0 ? <div className="mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
@@ -447,6 +448,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       html[data-theme="light"] .ac-offer-page .ac-spec-info-popover{background:#fff!important;border-color:rgba(30,36,48,.14)!important;color:#394150!important}
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-price-panel.is-down{background:#cfe5d8!important}
+      @media (max-width:1279px){html body .ac-offer-page .ac-spec-desktop-only{display:none!important}html body .ac-offer-page .ac-offer-spec-grid:has(>.ac-spec-desktop-only:only-child){display:none!important}}
       @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}.ac-offer-page .ac-offer-spec-tile:nth-child(odd) .ac-spec-info-popover{left:0!important;right:auto!important}.ac-offer-page .ac-offer-spec-tile:nth-child(even) .ac-spec-info-popover{left:auto!important;right:0!important}}
     ` }} />
   </main>;

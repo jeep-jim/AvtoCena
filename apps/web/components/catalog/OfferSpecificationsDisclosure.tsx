@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
-import { ChevronDown, ChevronRight, ListFilter, X } from "lucide-react";
+import { ChevronDown, ChevronRight, CarFront, X } from "lucide-react";
 import { OfferAllSpecifications } from "./OfferAllSpecifications";
 import { useTapActivation } from "./useTapActivation";
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
@@ -63,18 +63,18 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl }
   };
   const content = <OfferAllSpecifications groups={groups} showHeading={false} sourceUrl={sourceUrl} />;
 
-  if (mode === "desktop") return <details className="group/specs mt-6 hidden min-w-0 border-y border-[var(--ac-border)] xl:block">
-    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 py-4 text-base font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 [&::-webkit-details-marker]:hidden">
-      <span className="flex items-center gap-2.5"><ListFilter className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span>
+  if (mode === "desktop") return <details className="group/specs mt-6 hidden min-w-0 xl:block">
+    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 [&::-webkit-details-marker]:hidden">
+      <span className="flex items-center gap-2.5"><CarFront className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span>
       <ChevronDown className="h-5 w-5 transition-transform group-open/specs:rotate-180" aria-hidden="true" />
     </summary>
-    <div className="pb-6">{content}</div>
+    <div className="px-1 pb-5 pt-4">{content}</div>
   </details>;
 
   return <>
     <button ref={triggerRef} type="button" {...tap} onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}
-      className="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl px-3 text-left text-sm font-bold text-[var(--ac-text)] outline-none transition hover:bg-[var(--ac-surface-2)] focus-visible:ring-2 focus-visible:ring-red-400 xl:hidden">
-      <span className="flex items-center gap-2.5"><ListFilter className="h-4 w-4 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span><ChevronRight className="h-4 w-4" aria-hidden="true" />
+      className="ac-offer-spec-tile flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.1rem] bg-[var(--ac-surface-2)] px-4 text-left text-sm font-bold text-[var(--ac-text)] outline-none transition hover:bg-[var(--ac-surface-2)] focus-visible:ring-2 focus-visible:ring-red-400 xl:hidden">
+      <span className="flex items-center gap-2.5"><CarFront className="h-4 w-4 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span><ChevronRight className="h-4 w-4" aria-hidden="true" />
     </button>
     {open && typeof document !== "undefined" ? createPortal(<dialog ref={dialogRef} aria-labelledby={headingId} onCancel={(event) => { event.preventDefault(); close(); }}
       className="fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-[var(--ac-text)] outline-none backdrop:bg-black/65 backdrop:backdrop-blur-md">
@@ -87,7 +87,7 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl }
               <button type="button" autoFocus onClick={close} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] outline-none focus-visible:ring-2 focus-visible:ring-red-400" aria-label="Закрыть характеристики"><X className="h-5 w-5" aria-hidden="true" /></button>
             </div>
           </div>
-          <div className="min-h-0 overflow-y-auto overscroll-contain px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-4">{content}</div>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-4">{content}</div>
         </div>
       </div>
     </dialog>, document.body) : null}

@@ -12,6 +12,8 @@ export function offerSpecificationGroups(offer: VehicleOffer): SourceSpecificati
   add(basic, "Марка", offer.make); add(basic, "Модель", offer.model); add(basic, "Комплектация", offer.trim);
   if (offer.year > 1900) add(basic, "Год в объявлении", offer.year);
   if (typeof offer.mileageKm === "number" && offer.mileageKm >= 0) add(basic, "Пробег, км", offer.mileageKm);
+  const bodies: Record<string, string> = { sedan: "Седан", hatchback: "Хэтчбек", wagon: "Универсал", suv: "Внедорожник", crossover: "Кроссовер", minivan: "Минивэн", coupe: "Купе", convertible: "Кабриолет", pickup: "Пикап", van: "Фургон" };
+  if (offer.bodyType && bodies[offer.bodyType]) add(basic, "Кузов", bodies[offer.bodyType]);
   if (basic.length) groups.push({ name: "Об автомобиле", items: basic });
   const verified: typeof basic = [];
   if (classifySpecificationEvidence(offer, "engineCc").state === "exact") add(verified, "Рабочий объём, см³", offer.engineCc);
