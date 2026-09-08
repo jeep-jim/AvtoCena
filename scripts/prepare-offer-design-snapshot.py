@@ -54,7 +54,6 @@ assert column.tag == 'div' and column.get('class') == 'min-w-0'
 mount = etree.Element('div', id='specifications-desktop')
 column.insert(2, mount)
 body = root.xpath('//*[@aria-label="Кузов: Хэтчбек"]')[0]
-body.set('class', body.get('class') + ' ac-spec-desktop-only')
 stack = body.getparent().getparent()
 assert 'ac-offer-spec-stack' in stack.get('class')
 stack.append(etree.Element('div', id='specifications-mobile', attrib={'class':'xl:hidden'}))
@@ -64,7 +63,7 @@ gavel.getparent().replace(gavel, etree.Element('div', id='auction-badges'))
 for node in root.xpath('//input | //select | //textarea'):
     node.set('disabled','disabled')
 style = etree.Element('style')
-style.text = '''@media(max-width:1279px){html body .ac-offer-page .ac-spec-desktop-only{display:none!important}html body .ac-offer-page .ac-offer-spec-grid:has(>.ac-spec-desktop-only:only-child){display:none!important}}'''
+style.text = ''
 root.find('head').append(style)
 root.find('head').append(etree.Element('meta', name='robots', content='noindex,nofollow'))
 assert len(root.xpath('//*[@id="specifications-desktop"]')) == 1
