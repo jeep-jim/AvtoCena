@@ -97,6 +97,17 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Refuse a production crawl while publication is paused
+        env:
+          REQUESTED_CATALOG_MARKET: ${{ inputs.market }}
+        run: |
+          node --import tsx --input-type=module -e '
+            const { CATALOG_PRODUCTION_WRITES_PAUSED, CATALOG_PRODUCTION_REFRESH_MARKETS } = await import("./apps/web/lib/catalog/storage.ts");
+            if (CATALOG_PRODUCTION_WRITES_PAUSED && !CATALOG_PRODUCTION_REFRESH_MARKETS.includes(process.env.REQUESTED_CATALOG_MARKET)) {
+              console.error("Production refresh is paused during the seller-price catalog transition. Do not start a replacement crawl.");
+              process.exit(1);
+            }
+          '
       - run: |
           node --check scripts/catalog-probe-source-shard.mjs
           node --check scripts/catalog-rebuild-source-shard.mjs

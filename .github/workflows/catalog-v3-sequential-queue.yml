@@ -8,8 +8,8 @@ on:
     paths:
       - ".github/catalog-v3-run-all"
   # Production collection is intentionally paused for automatic scheduling.
-  # The owner approved a manual five-market restart on 2026-09-07.
-  # Legacy writers remain frozen; only the preserving V3 publisher is enabled.
+  # The owner revoked the five-market restart on 2026-09-08.
+  # All production writers remain frozen during the seller-price transition.
   # Resume cadence after acceptance: weekly; retention fourteen days; no Japan.
 
 permissions:
@@ -34,7 +34,7 @@ jobs:
           node --import tsx --input-type=module -e '
             const { CATALOG_PRODUCTION_WRITES_PAUSED, CATALOG_PRODUCTION_REFRESH_MARKETS } = await import("./apps/web/lib/catalog/storage.ts");
             if (CATALOG_PRODUCTION_WRITES_PAUSED && !["korea", "china", "uae", "europe", "georgia"].every(market => CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market))) {
-              console.error("Production refresh is paused. Run catalog-five-market-restart-check-branch.yml for fresh diagnostics.");
+              console.error("Production refresh is paused during the seller-price catalog transition. Do not start a replacement crawl.");
               process.exit(1);
             }
           '

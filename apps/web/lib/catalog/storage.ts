@@ -27,9 +27,10 @@ const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 // workflow cannot bypass the freeze with repository secrets. A reviewed code
 // change is required to resume Object Storage writes.
 export const CATALOG_PRODUCTION_WRITES_PAUSED = true;
-// Owner-approved restart: only the V3 single-market publisher may refresh these
-// markets, with both validation callbacks and exact preservation of all others.
-export const CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = ["korea", "china", "uae", "europe", "georgia"];
+// Owner stopped the old five-market collection on 2026-09-08. Reopening requires
+// the seller-price catalog contract and an explicit reviewed restart. This
+// protects runs using this revision; it cannot cancel a run on an older commit.
+export const CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = [];
 function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
   return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
 }
