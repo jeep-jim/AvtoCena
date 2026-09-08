@@ -252,6 +252,7 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
+  if (offer?.market !== "japan" && catalogPowerSanity(offer).suspicious) return 0;
   if (offer?.market !== "japan" && (offer?.modificationSelection || isModificationScenario(offer)
     || offer?.calculationSnapshot?.powerScenario?.source === "customer_input"
     || offer?.recoveryQualification?.status === "blocked")) return 0;

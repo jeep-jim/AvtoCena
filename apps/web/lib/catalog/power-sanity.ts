@@ -62,6 +62,9 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   const explicitSource = clean((offer as any).powerDataSource);
   const scenarioProvenance = [explicitSource, scenarioSource].filter(Boolean);
   const powerHp = positive(candidate);
+  if (offer.market !== "japan" && /^(?:vehicle-knowledge|vehicle-model-representative):/.test(explicitSource)) {
+    return { powerHp: powerHp || undefined, suspicious: true, reason: "unconfirmed_legacy_knowledge_power" };
+  }
   const kind = clean(offer.powertrainKind);
   const namedKind = namedElectrifiedPowertrainKind(offer);
   if (namedKind && kind === "combustion") {

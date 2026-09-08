@@ -1,4 +1,21 @@
 import test from "node:test";
+import { sanitizeLegacyKnowledgeSpecifications } from "../apps/web/lib/catalog/knowledge-core";
+
+test("legacy reference facts are withdrawn even when the original range payload is absent", () => {
+  const offer = { market: "uae", powerDataSource: "vehicle-knowledge:old-heuristic", powerDataConfidence: "reference",
+    engineCc: 1373, powerHp: 140, powerKw: 102.97, icePowerKw: 102.97, utilizationPowerKw: 102.97,
+    totalRub: 2376520, calculationStatus: "ready", calculationSnapshot: { powerRequiresConfirmation: false } } as any;
+  const safe = sanitizeLegacyKnowledgeSpecifications(offer);
+  for (const field of ["engineCc", "powerHp", "powerKw", "icePowerKw", "utilizationPowerKw", "calculationSnapshot"]) assert.equal(safe[field], undefined);
+  assert.equal(safe.totalRub, null);
+  const japan = { ...offer, market: "japan" };
+  assert.equal(sanitizeLegacyKnowledgeSpecifications(japan), japan);
+  const exact = { ...offer, powerDataSource: "seller detail", powerDataConfidence: "source_exact" };
+  assert.equal(sanitizeLegacyKnowledgeSpecifications(exact), exact);
+  const sourcedEngine = { ...offer, operational: { semanticEvidence: { engineCc: { source: "detail", status: "exact", value: 1373 } } } };
+  assert.equal(sanitizeLegacyKnowledgeSpecifications(sourcedEngine).engineCc, 1373);
+  assert.equal(sanitizeLegacyKnowledgeSpecifications(sourcedEngine).powerHp, undefined);
+});
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";

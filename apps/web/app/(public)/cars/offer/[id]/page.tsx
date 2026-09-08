@@ -400,7 +400,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
-              {!selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
+              {!selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
             </div>
             {!selectionRequired && visibleRub > 0 ? <div className="mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
