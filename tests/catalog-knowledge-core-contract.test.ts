@@ -1,5 +1,6 @@
 import test from "node:test";
 import { sanitizeLegacyKnowledgeSpecifications } from "../apps/web/lib/catalog/knowledge-core";
+import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 
 test("legacy reference facts are withdrawn even when the original range payload is absent", () => {
   const offer = { market: "uae", powerDataSource: "vehicle-knowledge:old-heuristic", powerDataConfidence: "reference",
@@ -15,6 +16,13 @@ test("legacy reference facts are withdrawn even when the original range payload 
   const sourcedEngine = { ...offer, operational: { semanticEvidence: { engineCc: { source: "detail", status: "exact", value: 1373 } } } };
   assert.equal(sanitizeLegacyKnowledgeSpecifications(sourcedEngine).engineCc, 1373);
   assert.equal(sanitizeLegacyKnowledgeSpecifications(sourcedEngine).powerHp, undefined);
+  const sourcedBoth = { ...sourcedEngine, operational: { semanticEvidence: {
+    ...sourcedEngine.operational.semanticEvidence, powerHp: { source: "detail", status: "exact", value: 140 },
+  } } };
+  const normalized = sanitizeLegacyKnowledgeSpecifications(normalizeVehicleOfferSpecs(sourcedBoth));
+  assert.equal(normalized.powerHp, 140);
+  assert.equal(normalized.powerDataConfidence, "source_exact");
+  assert.equal(normalized.powerDataSource, "detail");
 });
 import assert from "node:assert/strict";
 import fs from "node:fs";

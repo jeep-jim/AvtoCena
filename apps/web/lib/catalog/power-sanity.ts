@@ -62,7 +62,10 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   const explicitSource = clean((offer as any).powerDataSource);
   const scenarioProvenance = [explicitSource, scenarioSource].filter(Boolean);
   const powerHp = positive(candidate);
-  if (offer.market !== "japan" && /^(?:vehicle-knowledge|vehicle-model-representative):/.test(explicitSource)) {
+  const powerEvidence = (offer.operational as any)?.semanticEvidence?.powerHp;
+  const independentExactPower = ["exact", "verified"].includes(powerEvidence?.status)
+    && positive(powerEvidence?.value) === powerHp && powerHp > 0;
+  if (offer.market !== "japan" && /^(?:vehicle-knowledge|vehicle-model-representative):/.test(explicitSource) && !independentExactPower) {
     return { powerHp: powerHp || undefined, suspicious: true, reason: "unconfirmed_legacy_knowledge_power" };
   }
   const kind = clean(offer.powertrainKind);

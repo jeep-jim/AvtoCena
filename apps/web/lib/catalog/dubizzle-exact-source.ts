@@ -206,8 +206,8 @@ export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer
       },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
-        ...(dropEngine ? { engineCc: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: engineRaw } } : {}),
-        ...(dropPower ? { powerHp: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: powerRaw } } : {}),
+        ...(dropEngine ? { engineCc: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: engineRaw ?? evidence.engineCc?.rawValue } } : {}),
+        ...(dropPower ? { powerHp: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: powerRaw ?? evidence.powerHp?.rawValue } } : {}),
       },
     },
   } as T;
