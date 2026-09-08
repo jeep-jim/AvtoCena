@@ -1,3 +1,7 @@
+## 2026-09-08 — Compact auction grade trigger
+
+- Removed the chevron from the grade badge, increased its corner radius, and placed “Таблица” above it. The combined label and badge still open the existing grade guide.
+
 ## 2026-09-08 — Auction guide, consistent body labels, mobile status, collection recovery
 
 ### Implemented
