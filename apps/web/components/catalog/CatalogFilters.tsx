@@ -349,13 +349,13 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "year") setSortDirection("desc");
   };
   return <>
-    <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
+    <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(180px,.58fr)] items-center gap-2.5">
+      <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
@@ -387,7 +387,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-filter-settings:hover,.ac-filter-settings.is-active{background:var(--ac-surface-3);color:#ff353d}
       .ac-filter-settings:active{transform:scale(.98)}
       .ac-advanced-fields{background:transparent}
-      .ac-range-fields-shell{background:var(--ac-surface-2);border:1px solid var(--ac-border);border-radius:1.35rem;padding:13px 14px 14px}
+      .ac-range-fields-shell{background:transparent;border:0;padding:0}
       .ac-range-card{background:var(--ac-surface)}
       .ac-filter-chip{background:var(--ac-surface-2)}
       .ac-filter-chip:hover{background:var(--ac-surface-3)}
@@ -402,7 +402,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-range-input-box input::placeholder{color:var(--ac-muted);opacity:.72;font-weight:700}
       .ac-range-input-box small{flex:none;padding-right:9px;color:var(--ac-muted);font-size:10px;font-weight:800;white-space:nowrap}
       .ac-range-preset{color:var(--ac-muted)}
-      .ac-mobile-filter-section{margin-top:12px;padding:12px;border-radius:20px;background:var(--ac-surface-2)}
+      .ac-mobile-filter-section{margin-top:16px;padding:0;background:transparent}
       .ac-mobile-filter-section__title{margin:0 0 9px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-muted)}
       @media(max-width:1023px){
         .ac-mobile-filter-sheet .ac-filter-control,.ac-mobile-filter-sheet .ac-sort-control{min-height:52px;height:52px;border-radius:15px}

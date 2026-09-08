@@ -102,8 +102,10 @@ test("mobile offer controls remain tappable", () => {
   assert.doesNotMatch(priceSheetCss, /@media \(max-width: 1023px\)[\\s\\S]+\\.ac-price-trend-panel\s*\{[\\s\\S]+pointer-events:\s*none !important/);
   assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
   assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
-  assert.match(preliminaryPrice, /onTouchEnd=\{\(event\) => \{/);
-  assert.match(priceTrend, /onTouchEnd=\{panel \? \(event\) =>/);
+  assert.match(preliminaryPrice, /\.\.\.tapActivation/);
+  assert.match(priceTrend, /\.\.\.tapActivation/);
+  assert.doesNotMatch(preliminaryPrice, /onTouchEnd=/);
+  assert.doesNotMatch(priceTrend, /onTouchEnd=\{panel/);
   assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(item\.city\); \}\}/);
   assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(city\); \}\}/);
 });

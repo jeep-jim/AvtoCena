@@ -1,4 +1,5 @@
 "use client";
+import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
@@ -550,6 +551,7 @@ export function AuctionResultPrice({
 }
 
 export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false, highlightElectrified = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean; highlightElectrified?: boolean }) {
+  const tapActivation = useTapActivation();
   const currency = String(offer.sourceCurrency || offer.calculationSnapshot?.currencyRate?.currency || "").toUpperCase();
   const [liveRate, setLiveRate] = useState<LiveRate | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -629,11 +631,11 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
 
   return <div
     ref={panelRoot}
+    {...tapActivation}
     className={`relative ${panel ? `ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)] ${canShowRate ? "cursor-pointer" : ""}` : ""} ${stateClass} ${className}`}
     role={panel && canShowRate ? "button" : undefined}
     tabIndex={panel && canShowRate ? 0 : undefined}
     aria-label={panel && canShowRate ? `Показать курс ${currency} и полный расчёт` : undefined}
-    onTouchEnd={panel ? (event) => { if (canShowRate) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
   >
@@ -647,14 +649,6 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"}`}
         aria-expanded={canShowRate ? popoverOpen || sheetOpen : undefined}
         className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${canShowRate ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
-        onPointerDown={(event) => {
-          if (!canShowRate) return;
-          if (!panel && !desktopHover) return;
-          if (event.pointerType === "mouse" && desktopHover) return;
-          event.preventDefault();
-          event.stopPropagation();
-          openSheet();
-        }}
         onClick={(event) => {
           if (!canShowRate) return;
           if (!panel && !desktopHover) return;

@@ -211,7 +211,6 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         }
 
         html:not([data-theme="light"]) body .ac-filter-panel,
-        html:not([data-theme="light"]) body .ac-catalog-filter-panel,
         html:not([data-theme="light"]) body .ac-mobile-rates,
         html:not([data-theme="light"]) body .ac-executor-block,
         html:not([data-theme="light"]) body .ac-home-market-rail,
@@ -275,7 +274,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         .ac-filter-option { color: rgba(255,255,255,.8); }
         .ac-filter-option:hover { background: rgba(255,255,255,.07); color: #fff; }
         .ac-filter-option.is-active { background: #ff353d; color: #fff; }
-        .ac-catalog-filter-panel { background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important; }
+        .ac-catalog-filter-panel { background: transparent !important; }
         .ac-advanced-toggle { color: rgba(255,255,255,.55); background: rgba(255,255,255,.035); }
         .ac-advanced-toggle:hover { color: #fff; background: rgba(255,255,255,.065); }
         .ac-advanced-fields { background: rgba(0,0,0,.16); }
@@ -309,7 +308,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         html[data-theme="light"] .ac-filter-option { color: #303744; }
         html[data-theme="light"] .ac-filter-option:hover { background: #e8ecf2; color: #20252f; }
         html[data-theme="light"] .ac-filter-option.is-active { background: #ff353d; color: #fff; }
-        html[data-theme="light"] .ac-catalog-filter-panel { background: rgba(255,255,255,.72) !important; }
+        html[data-theme="light"] .ac-catalog-filter-panel { background: transparent !important; }
         html[data-theme="light"] .ac-advanced-toggle { color: #596274; background: #e8ebf1; }
         html[data-theme="light"] .ac-advanced-toggle:hover { color: #20252f; background: #dfe4eb; }
         html[data-theme="light"] .ac-advanced-fields { background: #eef1f5; }
