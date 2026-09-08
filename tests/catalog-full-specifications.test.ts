@@ -2,6 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { retainNamedSpecificationGroups } from '../apps/web/lib/catalog/source-specifications';
 import { vehicleResearchUrl } from '../apps/web/lib/catalog/vehicle-research-link';
+import { offerSpecificationGroups } from '../apps/web/lib/catalog/offer-specification-groups';
+import { catalogBodyName } from '../apps/web/lib/catalog/presentation';
+
+test('short and full body labels agree without overwriting original source rows', () => {
+  const offer: any = {market:'korea', make:'Renault',model:'QM6',bodyType:'suv',sourceId:'kcar',sourceOfferId:'123', operational:{sourceSpecifications:{sourceId:'kcar',sourceOfferId:'123',groups:[{name:'Источник',items:[{name:'Body',value:'SUV'}]}]}}};
+  const before = structuredClone(offer);
+  const groups = offerSpecificationGroups(offer);
+  assert.equal(groups[0].items.find(row=>row.name==='Кузов')?.value, catalogBodyName(offer.bodyType,offer));
+  assert.equal(offerSpecificationGroups(offer,{bodyLabel:'Минивэн'})[0].items.find(row=>row.name==='Кузов')?.value,'Минивэн');
+  assert.equal(groups.at(-1)?.items[0].value,'SUV');
+  assert.deepEqual(offer,before);
+});
 
 test('technical snapshot keeps units, duplicate contradictory values, empty, zero and false without stringifying objects', () => {
   const groups = retainNamedSpecificationGroups([{ name:'Engine', paramitems:[

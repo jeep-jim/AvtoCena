@@ -2,8 +2,9 @@ import type { VehicleOffer } from "./types";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { classifySpecificationEvidence } from "./specification-evidence-audit";
 import { auctionGradeLabel, assessJapanExportRestriction, japanRestrictionDescription } from "./japan-export-restriction";
+import { catalogBodyName } from "./presentation";
 
-export function offerSpecificationGroups(offer: VehicleOffer): SourceSpecificationSnapshot["groups"] {
+export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
   const groups: SourceSpecificationSnapshot["groups"] = [];
   const basic: Array<{name: string; value: string}> = [];
   const add = (items: typeof basic, name: string, value: unknown) => {
@@ -12,8 +13,8 @@ export function offerSpecificationGroups(offer: VehicleOffer): SourceSpecificati
   add(basic, "Марка", offer.make); add(basic, "Модель", offer.model); add(basic, "Комплектация", offer.trim);
   if (offer.year > 1900) add(basic, "Год в объявлении", offer.year);
   if (typeof offer.mileageKm === "number" && offer.mileageKm >= 0) add(basic, "Пробег, км", offer.mileageKm);
-  const bodies: Record<string, string> = { sedan: "Седан", hatchback: "Хэтчбек", wagon: "Универсал", suv: "Внедорожник", crossover: "Кроссовер", minivan: "Минивэн", coupe: "Купе", convertible: "Кабриолет", pickup: "Пикап", van: "Фургон" };
-  if (offer.bodyType && bodies[offer.bodyType]) add(basic, "Кузов", bodies[offer.bodyType]);
+  const bodyLabel = display?.bodyLabel ?? catalogBodyName(offer.bodyType, offer);
+  if (bodyLabel && bodyLabel !== "уточняется") add(basic, "Кузов", bodyLabel);
   if (basic.length) groups.push({ name: "Об автомобиле", items: basic });
   const verified: typeof basic = [];
   if (classifySpecificationEvidence(offer, "engineCc").state === "exact") add(verified, "Рабочий объём, см³", offer.engineCc);

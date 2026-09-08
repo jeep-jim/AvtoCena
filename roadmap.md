@@ -1,3 +1,21 @@
+## 2026-09-08 — Auction guide, consistent body labels, mobile status, collection recovery
+
+### Implemented
+- PR840 preserved grade colors across themes, restored the light specifications control, and introduced the Alice research button.
+- Auction detail grade now opens a themed explanation table with colored grade chips, close button, backdrop and Escape. Descriptions are a general guide with a source link; venue rules and auction sheets take precedence. Catalog cards keep non-interactive badges to avoid controls nested inside links.
+- Full and short body labels use the same presentation label. Original source table values are retained; no car is reclassified from its photo.
+- Alice SVG has a transparent background. Sold-auction status uses a wrapping date plus source arrow; the redundant explanatory line is removed.
+- Fixed publication JSONL reader: Node readline split valid JSON strings at literal U+2028. The LF-only UTF-8 reader preserves those source descriptions; invalid JSON still fails explicitly. Verified against all 35,020 mobile.de observation records / 17,510 unique IDs without skipping records.
+
+- Publication handoff uses existing 500-offer market shards so full technical tables are not serialized as a single >512 MiB JSON string; all source rows and fields are retained.
+
+### Current collection and next action
+- Run 34219592160 completed collection but failed publication before writing markets at invalid_checkpoint_line:europe:mobile_de_open.jsonl. The source artifact itself is valid.
+- Saved unique IDs by source, before cross-source deduplication/publication eligibility: Europe mobile.de 17,510 + AutoScout24 3,476; Korea Encar 1,350 + K Car 2,169; China used 2,622 + new 1,866; UAE DubiCars 679; Georgia MyAuto 23 + AutoPapa 3,864; Japan 0.
+- Named tables are not present for every source. Japan's two open sources timed out; other named sources still have login/anti-bot limitations. These results do NOT meet the requested 10,000 per market/full-coverage target.
+- After this UI deployment, reuse artifacts from 34219592160 with the corrected reader and resume publication, preserving other markets. This avoids repeating completed source requests. Scheduled weekly runs still perform fresh collection; artifact reuse applies only to this deployment marker.
+- Remaining work: validate actual published counts, fill source coverage/technical-table gaps, and resolve Japan's open-source timeouts. No claim of completed 60,000-car catalog.
+
 ## 2026-09-08 — Theme polish for grades and specifications (owner screenshots)
 
 - Preserve the existing dark-theme grade palette in both themes: white text on violet/red badges; dark brown on amber. The sanction badge follows the same rule.

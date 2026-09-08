@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       run: ${{ steps.policy.outputs.run }}
+      reuse_run_id: ${{ steps.policy.outputs.reuse_run_id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,11 +35,15 @@ jobs:
           const changed = process.env.EVENT_NAME === 'workflow_run'
             ? execFileSync('git',['diff','--name-only','HEAD^','HEAD'],{encoding:'utf8'}).split('\n') : [];
           const run = process.env.EVENT_NAME !== 'workflow_run' || changed.includes('.github/market-runs/weekly-six-market-catalog.json');
+          const marker = process.env.EVENT_NAME === 'workflow_run' && run ? JSON.parse(fs.readFileSync('.github/market-runs/weekly-six-market-catalog.json','utf8')) : {};
+          const reuse = marker.reuseRunId || '';
+          if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${run}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`reuse_run_id=${reuse}\n`);
           JS
   collect:
     needs: plan
-    if: needs.plan.outputs.run == 'true'
+    if: needs.plan.outputs.run == 'true' && needs.plan.outputs.reuse_run_id == ''
     runs-on: ubuntu-latest
     timeout-minutes: 175
     strategy:
@@ -111,9 +116,18 @@ jobs:
           cache: npm
       - run: npm ci
       - uses: actions/download-artifact@v4
+        if: needs.plan.outputs.reuse_run_id == ''
         with:
           pattern: catalog-intake-*
           path: catalog-intake-input
+      - name: Restore collected observations without repeating source requests
+        uses: actions/download-artifact@v4
+        if: needs.plan.outputs.reuse_run_id != ''
+        with:
+          pattern: catalog-intake-*
+          path: catalog-intake-input
+          run-id: ${{ needs.plan.outputs.reuse_run_id }}
+          github-token: ${{ github.token }}
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Publish each market with preservation of other markets
         shell: bash
