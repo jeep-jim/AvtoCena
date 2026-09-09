@@ -2,7 +2,7 @@ import { retainNamedSpecificationGroups } from "./source-specifications";
 
 // Read JSON data emitted by the public detail page; never execute page scripts.
 export function che168BrowserChallenge(markup: string) {
-  return /window\.solveChallenge\s*\(/.test(markup) && /EO-Bot-Js-Token/.test(markup);
+  return (/window\.solveChallenge\s*\(/.test(markup) && /EO-Bot-Js-Token/.test(markup)) || /<title[^>]*>\s*Security Verification\s*<\/title>/i.test(markup);
 }
 
 type Metric = { value?: number; rawValues: string[]; status: 'exact' | 'missing' | 'conflict' | 'ambiguous' };
@@ -33,17 +33,42 @@ export function che168BoundPageParameters(markup: string, infoid: string, specid
   }
   if (records.length !== 1 || Number(records[0].initialSpecId) !== specid) return null;
   const record = records[0];
-  const engineRows = record.ssrSpecParam.filter((group: any) => /^Engine$/i.test(String(group.name)))
+  return parametersFromRecord(record, infoid, specid);
+}
+function parametersFromRecord(record: any, infoid: string, specid: number) {
+  const engineRows = record.ssrSpecParam.filter((group: any) => /^(?:Engine|Двигатель)$/i.test(String(group.name)))
     .flatMap((group: any) => Array.isArray(group.paramitems) ? group.paramitems : []);
-  const basicRows = record.ssrSpecParam.filter((group: any) => /^Basic Specifications$/i.test(String(group.name)))
+  const basicRows = record.ssrSpecParam.filter((group: any) => /^(?:Basic Specifications|Основные параметры)$/i.test(String(group.name)))
     .flatMap((group: any) => Array.isArray(group.paramitems) ? group.paramitems : []);
   const values = (rows: any[], name: RegExp) => rows.filter(row => name.test(String(row.name))).map(row => row.value);
   return {
     sourceOfferId: infoid, specId: specid,
     groups: retainNamedSpecificationGroups(record.ssrSpecParam),
-    modelNames: values(basicRows, /^Model Name$/i).map(String),
-    fuelValues: [...new Set(values([...basicRows, ...engineRows], /^Energy Type$/i).map(String))],
-    engineCc: metric(values(engineRows, /^Displacement \((?:mL|cc|cm3|cm³)\)$/i), 300, 10000),
-    powerHp: metric(values(engineRows, /^Maximum horsepower \((?:Ps|hp)\)$/i), 20, 2500),
+    modelNames: values(basicRows, /^(?:Model Name|Название модели)$/i).map(String),
+    fuelValues: [...new Set(values([...basicRows, ...engineRows], /^(?:Energy Type|Тип топлива)$/i).map(String))],
+    engineCc: metric(values(engineRows, /^(?:Displacement \((?:mL|cc|cm3|cm³)\)|Объ[её]м двигателя \((?:мл|см³)\))$/i), 300, 10000),
+    powerHp: metric(values(engineRows, /^(?:Maximum horsepower \((?:Ps|hp)\)|максимальная мощность \(л[.,]с[.,]\))$/i), 20, 2500),
   };
+}
+
+/** The caller binds infoid → specid using the identity-checked carinfo response. */
+export function che168BoundApiParameters(parameters: any, options: any, infoid: string, specid: number) {
+  if (!/^\d+$/.test(infoid) || !Number.isInteger(specid) || specid <= 0
+    || Number(parameters?.returncode) !== 0 || Number(parameters?.result?.specid) !== specid
+    || !Array.isArray(parameters.result.paramtypeitems)) return null;
+  const value = (row: any) => {
+    const main = row.value == null ? "" : String(row.value);
+    const details = (Array.isArray(row.sublist) ? row.sublist : []).map((item: any) =>
+      [item.subname, item.subvalue].filter(v => v !== undefined && v !== null && v !== "").join(": "));
+    return [...new Set([main, ...details].filter(Boolean))].join(" / ");
+  };
+  const groups = parameters.result.paramtypeitems.map((group: any) => ({
+    name: group.name, paramitems: (group.paramitems || []).map((row: any) => ({name: row.name, value: value(row)})),
+  }));
+  if (Number(options?.returncode) === 0) for (const group of options?.result?.configtypeitems || []) {
+    groups.push({name: group.name, paramitems: (group.configitems || []).flatMap((row: any) =>
+      (row.valueitems || []).filter((item: any) => Number(item.specid) === specid)
+        .map((item: any) => ({name: row.name, value: value(item)})))});
+  }
+  return parametersFromRecord({ssrSpecParam: groups}, infoid, specid);
 }

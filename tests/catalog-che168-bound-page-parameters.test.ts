@@ -70,7 +70,7 @@ test('Che168 stops parameter page requests after a browser challenge while retai
   try {
     await source.fetchImages(offer);
     await source.fetchImages(offer);
-    assert.deepEqual(calls,['public_api','parameter_page','public_api']);
+    assert.deepEqual(calls,['public_api','public_api','public_api','parameter_page','public_api']);
     assert.equal(offer.engineCc,undefined);
     assert.equal(offer.powerHp,208);
     assert.equal((offer.operational.raw as any).boundPageStatus,'browser_challenge');
@@ -78,4 +78,32 @@ test('Che168 stops parameter page requests after a browser challenge while retai
     assert.equal((offer.operational.specificationCollection as any).status, 'browser_challenge');
     assert.equal(offer.calculationStatus,'needs_data');
   } finally { globalThis.fetch = originalFetch; }
+});
+
+
+test('Che168 direct specification API restores exact cc and retains options for the linked spec only', async () => {
+  const {readFileSync} = await import('node:fs');
+  const {che168BoundApiParameters} = await import('../apps/web/lib/catalog/che168-bound-page-parameters');
+  const parameters=JSON.parse(readFileSync(new URL('./fixtures/che168-specparam-74703.json',import.meta.url),'utf8'));
+  const options=JSON.parse(readFileSync(new URL('./fixtures/che168-specconfig-74703.json',import.meta.url),'utf8'));
+  const result=che168BoundApiParameters(parameters,options,'59769656',74703)!;
+  assert.equal(result.engineCc.value,2998);
+  assert.equal(result.powerHp.value,381);
+  assert.ok(result.groups.some(group=>group.items.some(item=>item.value.includes('Tire pressure display'))));
+  assert.equal(che168BoundApiParameters(parameters,options,'59769656',74704),null);
+  const altered=structuredClone(options);
+  altered.result.configtypeitems=[{name:'Foreign',configitems:[{name:'Wrong option',valueitems:[{specid:123,value:'wrong'}]}]}];
+  assert.ok(!che168BoundApiParameters(parameters,altered,'59769656',74703)!.groups.some(group=>group.name==='Foreign'));
+});
+
+
+test('Che168 Russian specification API keeps exact units and matches English evidence', async () => {
+ const {readFileSync}=await import('node:fs');
+ const {che168BoundApiParameters}=await import('../apps/web/lib/catalog/che168-bound-page-parameters');
+ const params=JSON.parse(readFileSync(new URL('./fixtures/che168-specparam-74703-ru.json',import.meta.url),'utf8'));
+ const config=JSON.parse(readFileSync(new URL('./fixtures/che168-specconfig-74703-ru.json',import.meta.url),'utf8'));
+ const result=che168BoundApiParameters(params,config,'59769656',74703)!;
+ assert.equal(result.engineCc.value,2998);assert.equal(result.powerHp.value,381);
+ assert.ok(result.groups.some(group=>group.name==='Пассивная безопасность'));
+ assert.equal(result.fuelValues[0],'Бензин+48V мягкая гибридная система');
 });
