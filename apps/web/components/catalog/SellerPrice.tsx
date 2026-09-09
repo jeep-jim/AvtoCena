@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { CurrencyRatesSheet, RateDirectionIcon, type PublicCurrencyRate } from "./PriceTrend";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import { sellerPriceLabel } from "../../lib/catalog/seller-price-contract";
@@ -40,6 +40,12 @@ function SellerPriceHelp() {
  const [open,setOpen]=useState(false);
  const id=useId();
  const panel=useRef<HTMLDivElement>(null);
+ useEffect(()=>{
+  const node=panel.current;
+  const sync=()=>setOpen(Boolean(node?.matches(":popover-open")));
+  node?.addEventListener("toggle",sync);
+  return ()=>node?.removeEventListener("toggle",sync);
+ },[]);
  function position(event: React.MouseEvent<HTMLButtonElement>) {
   const rect=event.currentTarget.getBoundingClientRect();
   const width=Math.min(430,window.innerWidth-32);
@@ -47,7 +53,7 @@ function SellerPriceHelp() {
  }
  return <>
   <button type="button" popoverTarget={id} onClick={position} aria-label="Почему указана только цена продавца" aria-expanded={open} className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black" style={{background:"var(--ac-surface-3)",border:"1px solid rgba(103,113,130,.45)",color:"var(--ac-text)"}}>?</button>
-  <div ref={panel} id={id} popover="auto" onToggle={e=>setOpen(e.newState==="open")} className="fixed inset-auto m-0 w-[min(430px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-xs font-bold leading-5 text-[var(--ac-text)] shadow-2xl">
+  <div ref={panel} id={id} popover="auto" className="fixed inset-auto m-0 w-[min(430px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-xs font-bold leading-5 text-[var(--ac-text)] shadow-2xl">
    Указана только цена автомобиля у продавца, без доставки и обязательных платежей. Для полного расчёта не хватает подтверждённых параметров. Уточните их в плитках ниже — стоимость пересчитается автоматически. Финальные данные подтвердит менеджер.
    <button type="button" popoverTarget={id} popoverTargetAction="hide" className="mt-3 block min-h-11 w-full rounded-xl bg-[var(--ac-surface)]">Понятно</button>
   </div>

@@ -26,16 +26,19 @@ function Tile({label,value,icon,children,wide=false}:{label:string;value:string;
   node.style.setProperty("--editor-top",`${Math.min(rect.bottom+8,Math.max(80,window.innerHeight-340))}px`);
  }
  useEffect(()=>{
+  const node=panel.current;
+  const sync=()=>setOpen(Boolean(node?.matches(":popover-open")));
+  node?.addEventListener("toggle",sync);
   window.addEventListener("resize",position);
   window.visualViewport?.addEventListener("resize",position);
   window.visualViewport?.addEventListener("scroll",position);
-  return ()=>{window.removeEventListener("resize",position);window.visualViewport?.removeEventListener("resize",position);window.visualViewport?.removeEventListener("scroll",position);};
+  return ()=>{node?.removeEventListener("toggle",sync);window.removeEventListener("resize",position);window.visualViewport?.removeEventListener("resize",position);window.visualViewport?.removeEventListener("scroll",position);};
  },[]);
  return <div className={`min-w-0 rounded-2xl bg-[var(--ac-surface-2)] ${wide?"col-span-2":""}`}>
   <button ref={trigger} type="button" popoverTarget={id} onClick={position} aria-expanded={open} aria-label={`${label}: ${value}`} className="flex min-h-12 w-full items-center gap-3 py-3 pl-4 pr-5 text-left">
    <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{value}</span><ChevronDown aria-hidden size={16} className={`ml-2 shrink-0 text-[var(--ac-muted)] transition-transform ${open?"rotate-180":""}`}/>
   </button>
-  <div ref={panel} id={id} popover="auto" role="dialog" aria-label={label} onToggle={e=>setOpen(e.newState==="open")} className="ac-parameter-popover rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)] shadow-2xl">
+  <div ref={panel} id={id} popover="auto" role="dialog" aria-label={label} className="ac-parameter-popover rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)] shadow-2xl">
    <div className="mb-3 flex items-center justify-between gap-3"><span className="text-sm font-bold">{label}</span><button type="button" popoverTarget={id} popoverTargetAction="hide" aria-label={`Закрыть: ${label}`} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface)]"><X size={18}/></button></div>
    <div className="space-y-3">{children}</div>
   </div>
