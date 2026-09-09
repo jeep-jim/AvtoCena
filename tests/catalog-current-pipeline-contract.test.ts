@@ -49,7 +49,7 @@ test("catalog overview recovers cards from the active projection when its showca
   assert.match(catalogPage, /fallback\?\.items \|\| \[\]/);
 });
 
-test("visible calculation release gate rejects all incomplete public inventory", () => {
+test("visible calculation release gate rejects unsafe pending inventory and retains the verified seller exception", () => {
   assert.match(visibleAudit, /unsafePendingVisiblePrices/);
   assert.match(visibleAudit, /unpricedPublicCards/);
   assert.match(visibleAudit, /catalogOfferVisibleRub\(offer\)/);
@@ -60,7 +60,7 @@ test("visible calculation release gate rejects all incomplete public inventory",
   assert.match(visibleAudit, /&& unpricedPublicCards\.length === 0/);
   assert.match(visibleAudit, /&& invalidSpecifications\.length === 0/);
   assert.match(visibleAudit, /&& preliminary === 0/);
-  assert.match(visibleAudit, /&& needsData === 0/);
+  assert.match(visibleAudit, /&& blockingNeedsData === 0/);
 });
 
 test("model sitemap shards stay comfortably below production gateway response limits", () => {
