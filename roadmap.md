@@ -3150,3 +3150,10 @@ CI 34320629281: три теста требовали удалённый Editable
 ### Проверка PR852 и совместимость popover
 
 Все 1165 тестов прошли; production build и typecheck успешны. Служебный reindex 34327651212 успешен. В React 18 toggle у div/popover подключён нативным слушателем, чтобы aria-expanded и поворот стрелки отражали фактическое открытие/закрытие (включая Escape и нажатие снаружи). Исторический workflow Che168 Global readiness отключён: push trigger снят, job явно retired/skipped. Остальные согласованные источники не меняются. Живой пересчёт одного поля на PR851 проверен и тестовое изменение сброшено.
+
+### 2026-09-09 — Attached parameter editors and light theme corrections
+- Restored parameter dropdowns as a continuation of each tile, with absolute overlay content and a fixed collapsed footprint. Outside click / Escape close the editor. Removed separate popup headings and mobile sheets for parameter editing.
+- Light theme: editor borders use the same `--ac-border` token as the internal divider; selects and calculation/specification disclosure controls receive matching borders. Seller currency button uses the existing surface/background and border palette.
+- Expanded Russian display translations for actual ZX 1949 motorhome specification labels, equipment and trim. Damaged source labels are explicitly marked incomplete rather than reconstructed by guesswork; their rows and original source data remain retained. This is not a claim that upstream obfuscated Che168 labels have been repaired or every language/source fully translated.
+- Typecheck and four targeted specification tests passed. Production build checked separately before merge. No collection restart, source publication, image upload or storage cleanup performed for these interface changes.
+

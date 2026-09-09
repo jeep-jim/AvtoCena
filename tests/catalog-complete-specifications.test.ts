@@ -28,3 +28,15 @@ test('fresh K Car evidence is not replayed through the obsolete horsepower witne
  assert.equal(result.powerHp,150);assert.equal(result.operational.semanticEvidence.engineCc.status,'missing');
  assert.notEqual(result,input);assert.equal(JSON.stringify(input),before);
 });
+
+ test('motorhome specifications translate equipment and trim without inventing damaged fields',()=>{
+ const raw=[{name:'外观/防盗',items:[{name:'外置淋浴',value:'标配'},{name:'车型',value:'2024款 远征版 2.3T 基础款 4座'},{name:'厂',value:'汽车'},{name:'形式',value:'—'},{name:'材料',value:'—'}]},{name:'车外灯光',items:[{name:'自 应远近光',value:'○'},{name:'刹车辅助(EBA/BAS/BA等)',value:'1'}]}];
+ const original=JSON.stringify(raw),view=displaySpecificationGroups(raw);
+ assert.equal(untranslatedSpecificationFields(raw).length,0);
+ assert.equal(view[0].items[0].name,'Наружный душ');
+ assert.match(view[0].items[1].value,/2024 г./);
+ assert.match(view[0].items[2].name,/неполное в источнике/);
+ assert.equal(view[0].items.length,5);
+ assert.equal(view[1].items[1].value,'1');
+ assert.equal(JSON.stringify(raw),original);
+ });
