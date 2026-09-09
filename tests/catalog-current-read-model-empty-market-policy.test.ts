@@ -85,10 +85,11 @@ test("homepage route actively backfills a manifest-present market when its showc
   assert.match(homeRouteSource, /catalog_home_market_recovery_failed/);
 });
 
-test("editable power is structurally full-width rather than sharing a spec-grid row", () => {
+test("inline parameters replace the separate power control and duplicated form", () => {
   assert.match(offerPageSource, /const nonEditableSpecs = specs\.filter/);
   assert.match(offerPageSource, /ac-offer-spec-stack/);
-  assert.match(offerPageSource, /<EditablePowerTile currentHp=\{editablePowerHp\}[^>]* fullWidth \/>/);
+  assert.match(offerPageSource, /<InlineOfferParameters/);
+  assert.doesNotMatch(offerPageSource, /<OfferManualCalculation|<EditablePowerTile/);
   assert.doesNotMatch(offerPageSource, /spec\.label === "Мощность" \? <EditablePowerTile/);
 });
 

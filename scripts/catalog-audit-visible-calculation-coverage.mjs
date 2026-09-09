@@ -4,6 +4,8 @@ const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/cat
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
+const { isVerifiedSellerOnlyForAudit } = await import("../apps/web/lib/catalog/visible-audit-policy.ts");
+
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
 
@@ -106,6 +108,7 @@ const unresolvedModels = new Map();
 const invalidReady = [];
 const readyUnclassified = [];
 const invalidSpecifications = [];
+const sellerOnlySpecifications = [];
 const unsafePendingVisiblePrices = [];
 const unpricedPublicCards = [];
 const fallbackPowerCards = [];
@@ -127,7 +130,9 @@ for (const offer of visible) {
   visibleModels.add(pairKey);
   increment(statusCounts, status);
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
-  if (specificationRejection) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
+  const verifiedSellerOnly = isVerifiedSellerOnlyForAudit(offer);
+  if (verifiedSellerOnly && specificationRejection) sellerOnlySpecifications.push({id:offer.id,market,reason:specificationRejection});
+  if (specificationRejection && !verifiedSellerOnly) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
   if (specificationRejection === "unconfirmed_power_scenario") fallbackPowerCards.push({ id: offer.id, market, make: offer.make, model: offer.model, powerDataSource: offer.powerDataSource || null });
   if (specificationRejection === "unproven_exact_100_hp") unprovenExact100Cards.push({ id: offer.id, market, make: offer.make, model: offer.model });
 
@@ -201,7 +206,7 @@ for (const offer of visible) {
   const pendingOrIncomplete = Boolean(specificationRejection)
     || ["needs_data", "needs_power_data", "preliminary_power_pending"].includes(status);
   const visibleRub = catalogOfferVisibleRub(offer);
-  if (visibleRub <= 0) {
+  if (visibleRub <= 0 && !verifiedSellerOnly) {
     marketRow.unpricedPublic++;
     unpricedPublicCards.push({
       id: offer.id,
@@ -248,6 +253,7 @@ const report = {
     auctionStart,
     invalidReady: invalidReady.length,
     invalidSpecifications: invalidSpecifications.length,
+    sellerOnlyIncomplete: sellerOnlySpecifications.length,
     unsafePendingVisiblePrices: unsafePendingVisiblePrices.length,
     unpricedPublicCards: unpricedPublicCards.length,
     fallback100PublicCount: fallbackPowerCards.length,
@@ -258,6 +264,7 @@ const report = {
   byMarket: Object.fromEntries([...byMarket.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
   invalidReady: invalidReady.slice(0, SAMPLE_LIMIT),
   invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
+  sellerOnlySpecifications: sellerOnlySpecifications.slice(0,SAMPLE_LIMIT),
   unsafePendingVisiblePrices: unsafePendingVisiblePrices.slice(0, SAMPLE_LIMIT),
   unpricedPublicCards: unpricedPublicCards.slice(0, SAMPLE_LIMIT),
   fallbackPowerCards: fallbackPowerCards.slice(0, SAMPLE_LIMIT),

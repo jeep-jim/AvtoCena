@@ -1,3 +1,4 @@
+import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { NextResponse } from "next/server";
 import { getOfferFromCurrentShard } from "@/lib/catalog/storage";
@@ -5,7 +6,7 @@ import { validateCustomerParameters } from "@/lib/catalog/customer-parameters";
 import { calculateOfferWithCustomerParameters } from "@/lib/catalog/customs-pricing";
 export async function POST(request: Request, {params}:{params:{id:string}}) {
   const headers = {"Cache-Control":"no-store"};
-  if (request.headers.get("origin") && request.headers.get("origin") !== new URL(request.url).origin) return NextResponse.json({error:"Недопустимый источник запроса"},{status:403,headers});
+  if (!isCalculationOriginAllowed(request)) return NextResponse.json({error:"Недопустимый источник запроса"},{status:403,headers});
   const body = await request.text();
   if (body.length > 4096) return NextResponse.json({error:"Слишком большой запрос"},{status:413,headers});
   let parameters;
