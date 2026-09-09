@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { CalendarDays, ChevronDown, Fuel, Zap, X } from "lucide-react";
+import { CalendarDays, ChevronDown, Fuel, Zap } from "lucide-react";
 import { validateCustomerParameters } from "../../lib/catalog/customer-parameters";
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
@@ -13,35 +13,22 @@ function EngineIcon() {
  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>;
 }
 function Tile({label,value,icon,children,wide=false}:{label:string;value:string;icon:ReactNode;children:ReactNode;wide?:boolean}) {
- const id=useId(), panel=useRef<HTMLDivElement>(null), trigger=useRef<HTMLButtonElement>(null);
+ const ref=useRef<HTMLDetailsElement>(null);
  const [open,setOpen]=useState(false);
- function position() {
-  const rect=trigger.current?.getBoundingClientRect(), node=panel.current;
-  if(!rect||!node)return;
-  const width=Math.min(340,window.innerWidth-32);
-  const viewport=window.visualViewport;
-  node.style.setProperty("--editor-bottom",`${16+Math.max(0,window.innerHeight-(viewport?.height||window.innerHeight)-(viewport?.offsetTop||0))}px`);
-  node.style.setProperty("--editor-mobile-height",`${(viewport?.height||window.innerHeight)*0.65}px`);
-  node.style.setProperty("--editor-left",`${Math.max(16,Math.min(rect.left,window.innerWidth-width-16))}px`);
-  node.style.setProperty("--editor-top",`${Math.min(rect.bottom+8,Math.max(80,window.innerHeight-340))}px`);
- }
  useEffect(()=>{
-  const node=panel.current;
-  const sync=()=>setOpen(Boolean(node?.matches(":popover-open")));
-  node?.addEventListener("toggle",sync);
-  window.addEventListener("resize",position);
-  window.visualViewport?.addEventListener("resize",position);
-  window.visualViewport?.addEventListener("scroll",position);
-  return ()=>{node?.removeEventListener("toggle",sync);window.removeEventListener("resize",position);window.visualViewport?.removeEventListener("resize",position);window.visualViewport?.removeEventListener("scroll",position);};
- },[]);
- return <div className={`min-w-0 rounded-2xl bg-[var(--ac-surface-2)] ${wide?"col-span-2":""}`}>
-  <button ref={trigger} type="button" popoverTarget={id} onClick={position} aria-expanded={open} aria-label={`${label}: ${value}`} className="flex min-h-12 w-full items-center gap-3 py-3 pl-4 pr-5 text-left">
-   <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{value}</span><ChevronDown aria-hidden size={16} className={`ml-2 shrink-0 text-[var(--ac-muted)] transition-transform ${open?"rotate-180":""}`}/>
-  </button>
-  <div ref={panel} id={id} popover="auto" role="dialog" aria-label={label} className="ac-parameter-popover rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)] shadow-2xl">
-   <div className="mb-3 flex items-center justify-between gap-3"><span className="text-sm font-bold">{label}</span><button type="button" popoverTarget={id} popoverTargetAction="hide" aria-label={`Закрыть: ${label}`} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface)]"><X size={18}/></button></div>
-   <div className="space-y-3">{children}</div>
-  </div>
+  if(!open)return;
+  const close=(event:PointerEvent)=>{if(!ref.current?.contains(event.target as Node) && ref.current)ref.current.open=false;};
+  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape" && ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus();}};
+  document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);
+  return ()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};
+ },[open]);
+ return <div className={`relative min-w-0 ${wide?"col-span-2":""}`} style={{height:50,zIndex:open?60:undefined}}>
+  <details ref={ref} onToggle={e=>setOpen(e.currentTarget.open)} className="ac-attached-editor group absolute inset-x-0 top-0 overflow-hidden rounded-2xl border border-transparent bg-[var(--ac-surface-2)]">
+   <summary aria-label={`${label}: ${value}`} className="flex min-h-12 cursor-pointer list-none items-center gap-3 py-3 pl-4 pr-5 text-left [&::-webkit-details-marker]:hidden">
+    <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
+   </summary>
+   <div className="ac-attached-editor-body space-y-3 overflow-y-auto border-t border-[var(--ac-border)] p-4" style={{maxHeight:"min(360px,55dvh)",overscrollBehavior:"contain"}}>{children}</div>
+  </details>
  </div>;
 }
 export function InlineOfferParameters({offerId,initial,price,children}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode}) {
@@ -94,8 +81,8 @@ export function InlineOfferParameters({offerId,initial,price,children}:{offerId:
     {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
    </Tile>:null}
   </div>
-  {result?.breakdown?.length?<details className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">Структура расчёта по вашим параметрам</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}</dt><dd>{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
+  {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">Структура расчёта по вашим параметрам</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}</dt><dd>{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
   {children}
-  <style>{`.ac-parameter-popover{position:fixed;inset:auto;margin:0;left:var(--editor-left,16px);top:var(--editor-top,80px);width:min(340px,calc(100vw - 32px));max-height:calc(100dvh - 100px);overflow:auto;overscroll-behavior:contain}.ac-parameter-popover input{font-size:16px}.ac-parameter-popover::backdrop{background:transparent}@media(max-width:639px){.ac-parameter-popover{left:16px;right:16px;top:auto;bottom:var(--editor-bottom,16px);width:auto;max-height:var(--editor-mobile-height,65dvh);padding-bottom:max(16px,env(safe-area-inset-bottom))}.ac-parameter-popover::backdrop{background:rgba(0,0,0,.25)}}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select,.ac-parameter-popover select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}`}</style>
+  <style>{`html[data-theme="light"] .ac-inline-parameters select{border:1px solid var(--ac-border)}html[data-theme="light"] .ac-attached-editor{border-color:var(--ac-border)}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}`}</style>
  </div>;
 }
