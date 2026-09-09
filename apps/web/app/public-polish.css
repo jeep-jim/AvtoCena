@@ -369,6 +369,7 @@ html[data-theme="light"] .ac-partner-modal textarea::placeholder {
 @media (min-width: 1200px) { .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); } }
 
 /* Grade colors belong to the badge, not the page theme. */
+.ac-grade-guide-chip--green { background: #20a85e; color: #fff; }
 .ac-grade-guide-chip--violet { background: #7751d2; color: #fff; }
 .ac-grade-guide-chip--amber { background: #f5ad29; color: #352500; }
 .ac-grade-guide-chip--red { background: #be3545; color: #fff; }
