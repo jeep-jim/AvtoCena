@@ -126,3 +126,25 @@ test('Che168 Russian range-extender label preserves series hybrid and exact ICE 
   assert.equal((offer.operational.semanticEvidence as any).fuel.status,'exact');
  } finally {globalThis.fetch=originalFetch;}
 });
+
+test('Che168 stops requesting options after denial while retaining available parameters', async () => {
+ const source=new Che168GlobalExactAdapter();
+ const originalFetch=globalThis.fetch;let optionsCalls=0;
+ globalThis.fetch=async input=>{
+  const url=new URL(String(input));
+  if(url.pathname.endsWith('/specconfig')){optionsCalls++;return new Response('denied',{status:403});}
+  assert.ok(url.pathname.endsWith('/specparam'));
+  return new Response(JSON.stringify({returncode:0,result:{specid:Number(url.searchParams.get('specid')),paramtypeitems:data.ssrSpecParam}}),{status:200});
+ };
+ try {
+  for(const id of [59282752,59282753]){
+   const raw={infoid:id,brandname:'Acura',seriesname:'TLX-L',regdate:'2021-01',fuelname:'Gasoline',price:12000,specid:id,engine:'2.4L 208hp'};
+   const offer=source.normalizeOffer(raw)!;
+   offer.operational={...offer.operational,exactDetail:true,raw:{detail:raw}};
+   await source.refreshSavedSpecifications(offer);
+   assert.equal(offer.engineCc,2356);
+   assert.equal(offer.operational.specificationCollection?.status,'received_api_parameters_only');
+  }
+  assert.equal(optionsCalls,1);
+ } finally {globalThis.fetch=originalFetch;}
+});

@@ -232,6 +232,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   private readonly deviceId = crypto.randomUUID();
   private parameterPageBlocked: string | null = null;
   private specificationApiBlocked = false;
+  private specificationOptionsBlocked = false;
   private specificationCache = new Map<number, Promise<{parameters: any; options: any}>>();
 
   private params(extra: Record<string, string | number> = {}) {
@@ -373,7 +374,10 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     if (existing) return existing;
     const task = (async () => {
       const parameters = await this.getJson<any>(`${API_BASE}/api/v1/specparam?${this.params({specid:specId,language:"ru"})}`);
-      const options = await this.getJson<any>(`${API_BASE}/api/v1/specconfig?${this.params({specid:specId,language:"ru"})}`).catch(() => null);
+      const options = this.specificationOptionsBlocked ? null : await this.getJson<any>(`${API_BASE}/api/v1/specconfig?${this.params({specid:specId,language:"ru"})}`).catch(error => {
+        if (/http_(401|403|429)/.test(String(error))) this.specificationOptionsBlocked = true;
+        return null;
+      });
       return {parameters:{returncode:0,result:parameters.result},options:options ? {returncode:0,result:options.result} : null};
     })();
     if (this.specificationCache.size >= 512) this.specificationCache.delete(this.specificationCache.keys().next().value!);
