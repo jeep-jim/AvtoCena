@@ -107,3 +107,22 @@ test('Che168 Russian specification API keeps exact units and matches English evi
  assert.ok(result.groups.some(group=>group.name==='Пассивная безопасность'));
  assert.equal(result.fuelValues[0],'Бензин+48V мягкая гибридная система');
 });
+
+test('Che168 Russian range-extender label preserves series hybrid and exact ICE metrics', async () => {
+ const source=new Che168GlobalExactAdapter();
+ const raw={infoid:59659799,brandname:'Volkswagen',seriesname:'ID.ERA',specname:'2026',regdate:'2026-04',fuelname:'Range Extender',price:48610};
+ const offer=source.normalizeOffer(raw)!;
+ const originalFetch=globalThis.fetch;
+ globalThis.fetch=async input=>new Response(JSON.stringify({returncode:0,result:String(input).includes('/carinfo/')
+  ? {...raw,specid:76842,engine:'Range Extender 143hp'}
+  : {specid:76842,paramtypeitems:[
+   {name:'Основные параметры',paramitems:[{name:'Тип топлива',value:'Продлённый запас хода'},{name:'Электродвигатель (л,с,)',value:'517'}]},
+   {name:'Двигатель',paramitems:[{name:'Объем двигателя (мл)',value:'1498'},{name:'максимальная мощность (л,с,)',value:'143'}]},
+  ]}}),{status:200});
+ try {
+  await source.fetchImages(offer);
+  assert.equal(offer.fuel,'hybrid');assert.equal(offer.powertrainKind,'series_hybrid');
+  assert.equal(offer.engineCc,1498);assert.equal(offer.powerHp,143);
+  assert.equal((offer.operational.semanticEvidence as any).fuel.status,'exact');
+ } finally {globalThis.fetch=originalFetch;}
+});

@@ -163,10 +163,16 @@ function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che16
   return { value: unique[0], rawValues, status: "exact" };
 }
 
+function che168Fuel(value: unknown) {
+  // Literal Russian label returned by Che168 specparam for Range Extender.
+  const label = text(value);
+  return canonicalSourceFuel(/^Продл[её]нный запас хода$/i.test(label) ? 'Range Extender' : label);
+}
+
 function fuelEvidence(...raw: unknown[]): Che168FuelEvidence {
   const rawValues = [...new Set(raw.map(text).filter(Boolean))];
   if (!rawValues.length) return { rawValues, status: "missing" };
-  const canonical = rawValues.map(canonicalSourceFuel);
+  const canonical = rawValues.map(che168Fuel);
   if (canonical.some((value) => !value)) return { rawValues, status: "ambiguous" };
   const unique = [...new Set(canonical as string[])];
   if (unique.length !== 1) return { rawValues, status: "conflict" };
@@ -422,8 +428,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       }
     }
     let detailEngine = text(detail.engine);
-    const tableFuel = pageParameters?.fuelValues.map(canonicalSourceFuel).filter(Boolean) || [];
-    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => fuel === canonicalSourceFuel(detail.fuelname));
+    const tableFuel = pageParameters?.fuelValues.map(che168Fuel) || [];
+    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => Boolean(fuel) && fuel === che168Fuel(detail.fuelname));
     if (pageParameters && tableFuelConsistent) {
       if (pageParameters.engineCc.status === "exact") detailEngine += ` ${pageParameters.engineCc.value} cc`;
       if (pageParameters.powerHp.status === "exact") detailEngine += ` ${pageParameters.powerHp.value} hp`;
