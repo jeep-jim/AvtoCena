@@ -3157,3 +3157,10 @@ CI 34320629281: три теста требовали удалённый Editable
 - Expanded Russian display translations for actual ZX 1949 motorhome specification labels, equipment and trim. Damaged source labels are explicitly marked incomplete rather than reconstructed by guesswork; their rows and original source data remain retained. This is not a claim that upstream obfuscated Che168 labels have been repaired or every language/source fully translated.
 - Typecheck and four targeted specification tests passed. Production build checked separately before merge. No collection restart, source publication, image upload or storage cleanup performed for these interface changes.
 
+
+
+### 2026-09-09 — Readable light selects and unambiguous numeric controls
+- Light-theme select/option text now explicitly uses --ac-text, including native option menus. Numeric inputs retain manual entry and datalist suggestions; browser spin buttons are hidden to prevent two competing arrow controls.
+- Prior attached overlay editors, matching light borders, seller currency background and expanded Russian display translations remain in place.
+- Typecheck passed. Live public market-counts read: generation gen_1788936097096_2c96d1ed, updatedAt 2026-09-09T06:41:37.096Z; Korea 1224, China 5366, Japan 10190, UAE 1694, Europe 5258, Georgia 3968; total 27700. These are published inventory counts, not verified calculation coverage.
+- Deploy 34333293883 installed release 1bc050a successfully; subsequent warmup failed on an Autocatalog route download timeout (30 s), so visible calculation audit was skipped. Health confirms the installed release. No collection restart, schedule change, or Object Storage mutation performed.
