@@ -424,7 +424,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-mobile-filter-section__title{margin:0 0 9px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-muted)}
       @media(max-width:1023px){
         .ac-mobile-filter-sheet .ac-filter-control,.ac-mobile-filter-sheet .ac-sort-control{min-height:52px;height:52px;border-radius:15px}
-        .ac-mobile-filter-sheet .ac-filter-dropdown{position:static!important;max-height:320px;inset:auto!important;margin-top:6px;background:var(--ac-surface-3);box-shadow:none!important;border:1px solid var(--ac-border)!important}
+        .ac-mobile-filter-sheet .ac-filter-dropdown{position:static!important;max-height:none!important;inset:auto!important;margin-top:6px;background:var(--ac-surface-3);box-shadow:none!important;border:1px solid var(--ac-border)!important}
         .ac-mobile-filter-sheet .relative:has(>.ac-filter-dropdown){z-index:auto!important}
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option{background:transparent}
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option.is-active{background:rgba(255,53,61,.12);color:#ff5962}
