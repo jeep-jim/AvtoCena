@@ -8,6 +8,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
 const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
 const {REQUIRED_CATALOG_SOURCES}=await import('../apps/web/lib/catalog/required-catalog-sources.ts');
 const {sourceListingSnapshot}=await import('../apps/web/lib/catalog/source-listing-snapshot.ts');
+const {untranslatedSpecificationFields}=await import('../apps/web/lib/catalog/specification-display.ts');
 const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit.ts');
 const directory=`catalog-intake-${market}`;
 await fs.mkdir(directory,{recursive:true});
@@ -28,6 +29,7 @@ while(Date.now()<deadline && states.some(s=>!s.done)) {
     await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:1000,detailConcurrency:4,
       minYear:market==='japan'?2010:new Date().getUTCFullYear()-6,
       snapshot:sourceListingSnapshot,checkpoint,
+      translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
       writeObservation:row=>(observationWrite=observationWrite.then(()=>fs.appendFile(path.join(directory,`${state.sourceId}.jsonl`),JSON.stringify(row)+'\n')))});
   }

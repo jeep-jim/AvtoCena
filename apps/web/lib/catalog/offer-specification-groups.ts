@@ -1,3 +1,4 @@
+import { displaySpecificationGroups } from "./specification-display";
 import type { VehicleOffer } from "./types";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { classifySpecificationEvidence } from "./specification-evidence-audit";
@@ -42,5 +43,5 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
     const privateIdentifier = /\bvin\b|vehicle identification|(?:frame|chassis)\s*(?:number|no\b)|номер\s*(?:кузова|рамы|шасси)|车架号/i;
     groups.push(...snapshot.groups.map(group => ({ ...group, items: group.items.filter(item => !privateIdentifier.test(item.name)) })).filter(group => group.items.length));
   }
-  return groups;
+  return displaySpecificationGroups(groups);
 }

@@ -52,3 +52,5 @@ jobs:
         with:
           name: catalog-publication-diagnosis
           path: catalog-diagnosis-*.json
+
+# Recheck complete-price candidates after optional-description filtering was removed.

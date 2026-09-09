@@ -35,6 +35,13 @@ export async function collectSourcePage(state, options) {
       const groups = offer.operational?.sourceSpecifications?.groups;
       state.withNamedTables += Boolean(groups?.length);
       state.namedFields += (groups || []).reduce((sum, group) => sum + group.items.length, 0);
+      const collectionStatus = offer.operational?.specificationCollection?.status || 'not_reported';
+      state.tableStatuses[collectionStatus] = (state.tableStatuses[collectionStatus] || 0) + 1;
+      const untranslated = options.translationReport?.(groups || []) || [];
+      state.untranslatedFields += untranslated.length;
+      for (const item of untranslated.slice(0,10)) {
+        if(state.untranslatedSamples.length<30 && !state.untranslatedSamples.some(row=>row.name===item.name)) state.untranslatedSamples.push(item);
+      }
       const kind = offer.operational?.specificationCollection?.kind || 'unclassified';
       if (groups?.length) state.tableKinds[kind] = (state.tableKinds[kind] || 0) + 1;
       else state.withoutNamedTable++;
@@ -62,7 +69,7 @@ export async function collectSourcePage(state, options) {
 export function intakeState(source, required) {
   return {source,sourceId:required.sourceId,sourceUrl:required.canonicalUrl,role:required.role,cursor:null,
     seen:new Set(),cursors:new Set(),pages:0,listingRows:0,duplicates:0,normalizationFailures:0,outsideAge:0,withdrawn:0,
-    detailAttempts:0,withImages:0,withNamedTables:0,namedFields:0,withoutNamedTable:0,tableKinds:{},fieldEvidence:{},errors:[],done:!source,stopReason:source?'running':'adapter_missing'};
+    detailAttempts:0,withImages:0,withNamedTables:0,namedFields:0,withoutNamedTable:0,tableKinds:{},tableStatuses:{},untranslatedFields:0,untranslatedSamples:[],fieldEvidence:{},errors:[],done:!source,stopReason:source?'running':'adapter_missing'};
 }
 export function intakeSummary(state) {
   const {source,seen,cursors,...rest} = state;

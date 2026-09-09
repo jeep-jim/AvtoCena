@@ -411,7 +411,7 @@ const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2P
 const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   // Check after V2 normalization, which may clear a contradictory body value.
-  const reason = isSellerPricedOffer(offer) ? "" : catalogDescriptionRejectionReason(offer);
+  const reason = sellerInventory ? "" : catalogDescriptionRejectionReason(offer);
   if (reason) {
     rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
     continue;
@@ -462,6 +462,11 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
   calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
   sellerOnly:canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
   rejectionReasons,
+  beforeCanonicalCalculated:selectedMarketOffers.filter(hasExactCalculation).length,
+  identityRejected:canonicalTargetPreview.identityRejected.length,
+  outlierRejected:canonicalTargetPreview.priceOutliers.length,
+  duplicateRejected:canonicalTargetPreview.deduplicated.removed?.length,
+  quotaRejected:canonicalTargetPreview.quota.removed.length,
   canonicalRejections:canonicalTargetPreview.qualityRejected.reduce((out,offer)=>{ const key=String(offer.calculationStatus);out[key]=(out[key]||0)+1;return out;},{}),
   lostRetained:currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).slice(0,10).map(offer=>({id:offer.id,sourceId:offer.sourceId,status:offer.calculationStatus})),
 };

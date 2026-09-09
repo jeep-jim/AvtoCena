@@ -1,3 +1,5 @@
+import { captureSourceTable } from "./source-table-capture";
+import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { stableOfferId } from "./storage";
 import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
@@ -310,6 +312,31 @@ function exactConfigFields(config: any, specId: string): ExactConfigFields {
     marketDate: anySection([{ id: 8453 }, { re: /上市/ }]),
   };
 }
+/** Keep every named field for this spec only, including explicit missing/optional values. */
+export function parseAutohomeSpecificationGroups(markup: string, specId: string): SourceSpecificationSnapshot["groups"] {
+  const groups: SourceSpecificationSnapshot["groups"] = [];
+  for (const variable of ["config", "option"]) {
+    const payload = extractJsonObject(markup, `var ${variable} =`);
+    const sections = variable === "config" ? payload?.result?.paramtypeitems : payload?.result?.configtypeitems;
+    for (const section of Array.isArray(sections) ? sections : []) {
+      const name = clean(section.name || section.typename || section.title);
+      if (!name) continue;
+      const items: Array<{name:string;value:string}> = [];
+      for (const parameter of section.paramitems || section.configitems || []) {
+        const label = clean(parameter.name);
+        if (!label) continue;
+        for (const value of parameter.valueitems || []) {
+          if (String(value.specid) !== specId) continue;
+          const main = clean(value.value);
+          const details = (value.sublist || []).map((row:any)=>clean(row.subvalue)).filter(Boolean);
+          items.push({name:label,value:[main,...details.filter((text:string)=>text!==main)].filter(Boolean).join(" / ") || "—"});
+        }
+      }
+      if (items.length) groups.push({name,items});
+    }
+  }
+  return groups;
+}
 export function parseAutohomeExactConfigFields(markup: string, specId: string): ExactConfigFields | null {
   const config = extractJsonObject(markup, "var config =");
   return config ? exactConfigFields(config, specId) : null;
@@ -432,6 +459,8 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
       powerHp: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerHp },
       powerKw: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerKw },
     }, raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: exactGalleryUrl || listing?.galleryUrl, legacyGalleryUrl: listing?.galleryUrl, exactProductImages: gallery, exactGalleryImageCount: exactGallery.length, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v3_semantic_evidence", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
+    captureSourceTable(offer, parseAutohomeSpecificationGroups(configPage.body, specId));
+    if (offer.operational?.sourceSpecifications) offer.operational.sourceSpecifications.specificationId = specId;
     return gallery.map(image);
   }
 
