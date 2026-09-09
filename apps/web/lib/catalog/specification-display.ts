@@ -42,7 +42,7 @@ const phrases: Record<string,string> = {
 };
 const exact: Record<string,string> = {
   Engine:"Двигатель", Body:"Кузов", Dimensions:"Размеры", Transmission:"Коробка передач", Safety:"Безопасность", Equipment:"Оснащение", Features:"Оснащение",
-  Make:"Марка", Model:"Модель", Year:"Год в объявлении", Mileage:"Пробег, км", Fuel:"Топливо", "Fuel type":"Топливо", "Body type":"Кузов",
+  Seats:"Число мест", Option:"Опция", Make:"Марка", Model:"Модель", Year:"Год в объявлении", Mileage:"Пробег, км", Fuel:"Топливо", "Fuel type":"Топливо", "Body type":"Кузов",
   "Displacement mL":"Рабочий объём, см³", "Engine capacity":"Рабочий объём", "Engine displacement":"Рабочий объём", "Power PS":"Мощность, л.с.", "Power kW":"Мощность, кВт",
   petrol:"Бензин", gasoline:"Бензин", diesel:"Дизель", electric:"Электромобиль", hybrid:"Гибрид", automatic:"Автоматическая", manual:"Механическая",
   true:"Есть", false:"Нет", "●":"Стандартное оснащение", "○":"Опция", "-":"—",

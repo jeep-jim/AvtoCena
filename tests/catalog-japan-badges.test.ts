@@ -53,9 +53,9 @@ test("all specifications are listing-bound and exclude inferred/manual power and
     groups: [{ name: "Equipment", items: [{ name: "Seats", value: "0" }, { name: "Option", value: "-" }, { name: "VIN", value: "PRIVATE" }] }],
   } } });
   const groups = offerSpecificationGroups(offer);
-  assert.ok(groups.some(group => group.name === "Equipment"));
+  assert.ok(groups.some(group => group.name === "Оснащение"));
   assert.equal(JSON.stringify(groups).includes("PRIVATE"), false);
   assert.equal(groups.flatMap(group => group.items).some(item => item.name === "Мощность, л.с."), false);
   offer.operational.sourceSpecifications!.sourceOfferId = "another-listing";
-  assert.equal(offerSpecificationGroups(offer).some(group => group.name === "Equipment"), false);
+  assert.equal(offerSpecificationGroups(offer).some(group => group.name === "Оснащение"), false);
 });
