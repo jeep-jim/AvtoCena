@@ -171,7 +171,7 @@ function listRows(markup: string, listUrl: string) {
     if (!cardMatch || !isAllowedCatalogSourceUrl("china", "autohome_used_china_open", detailUrl)) continue;
     const card = cardMatch[0];
     const plain = clean(card);
-    if (!/万公里|公里/.test(plain) || !/[0-9.]+\s*万/.test(plain)) continue;
+    if (!/[0-9.]+\s*万/.test(plain)) continue;
     const title = clean(anchor[2]) || clean(card.match(/<h[1-5][^>]*>([\s\S]*?)<\/h[1-5]>/i)?.[1]) || clean(card.match(/<img[^>]+alt=["']([^"']+)/i)?.[1]);
     const derived = deriveMakeModel(title);
     const registrationYear = Number(plain.match(/万公里\s*[／/|]\s*((?:19|20)\d{2})[-年]/)?.[1]);
@@ -195,20 +195,33 @@ export class Che168DealerAdapter implements CatalogSourceAdapter {
   market = "china" as const;
   accessMode = "public_html" as const;
 
+  private exhaustedDealers = new Set<string>();
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
-    const cursorPage = Math.max(1, Number(cursor || 1));
-    const dealerId = DEALERS[(cursorPage - 1) % DEALERS.length];
-    const page = Math.floor((cursorPage - 1) / DEALERS.length) + 1;
-    const urls = page === 1
-      ? [`https://dealers.che168.com/shop/dealer/v2/carlist/${dealerId}.html`, `https://dealers.che168.com/shop/dealer/${dealerId}.html`]
-      : [`https://dealers.che168.com/shop/dealer/v2/carlist/${dealerId}-${page}.html`, `https://dealers.che168.com/shop/dealer/${dealerId}-${page}.html`];
-    for (const listUrl of urls) {
-      const result = await fetchMarkup(listUrl).catch(() => null);
-      if (!result?.response.ok) continue;
-      const rows = listRows(result.markup, listUrl);
-      if (rows.length) return { items: rows, nextCursor: String(cursorPage + 1), finished: false, count: rows.length };
+    let cursorPage = Math.max(1, Number(cursor || 1));
+    for (let checked = 0; checked < DEALERS.length; checked++, cursorPage++) {
+      const dealerId = DEALERS[(cursorPage - 1) % DEALERS.length];
+      if (this.exhaustedDealers.has(dealerId)) continue;
+      const page = Math.floor((cursorPage - 1) / DEALERS.length) + 1;
+      const urls = page === 1
+        ? [`https://dealers.che168.com/shop/dealer/v2/carlist/${dealerId}.html`, `https://dealers.che168.com/shop/dealer/${dealerId}.html`]
+        : [`https://dealers.che168.com/shop/dealer/v2/carlist/${dealerId}-${page}.html`, `https://dealers.che168.com/shop/dealer/${dealerId}-${page}.html`];
+      for (const listUrl of urls) {
+        const result = await fetchMarkup(listUrl);
+        if ([401,403,429].includes(result.response.status) || /captcha|cf-chl|access denied/i.test(result.markup)) {
+          return {items:[],finished:true,nextCursor:null,health:{ok:false,blocked:true,message:`che168_access_${result.response.status}`,checkedAt:new Date().toISOString()}};
+        }
+        if (!result.response.ok && result.response.status !== 404) throw new Error(`che168_list_http_${result.response.status}`);
+        if (!result.response.ok) continue;
+        const rows = listRows(result.markup, listUrl);
+        if (rows.length) return {items:rows,nextCursor:String(cursorPage+1),finished:false,count:rows.length};
+      }
+      // An empty dealer must not prevent collecting the other independent dealers.
+      this.exhaustedDealers.add(dealerId);
     }
-    throw new Error(`che168_dealer_zero_${dealerId}_${page}`);
+    const finished=this.exhaustedDealers.size===DEALERS.length;
+    return {items:[],nextCursor:finished?null:String(cursorPage),finished,count:0,
+      health:{ok:true,message:`domestic dealer coverage ${DEALERS.length}; exhausted ${this.exhaustedDealers.size}`,checkedAt:new Date().toISOString()}};
   }
 
   mapStatus(): OfferStatus { return "active"; }

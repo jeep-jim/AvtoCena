@@ -233,11 +233,11 @@ test("one hundred Camry rows cannot crowd seven other available models out of a 
   assert.equal(result.selected.filter(row => row.model === "Camry").length, 3);
 });
 
-test("market selection caps each model-year across different source websites", () => {
+test("market selection retains broad model-year inventory across source websites", () => {
   const rows = Array.from({ length: 80 }, (_, i) => offer(`same-${i}`, { sourceId: i % 2 ? "encar_direct" : "kcar_korea_open" }));
   const result = selectCatalogV2MarketOffers(rows);
-  assert.equal(result.selected.length, 20);
-  assert.equal(result.rejected.model_year_quota, 60);
+  assert.equal(result.selected.length, 80);
+  assert.equal(result.rejected.model_year_quota || 0, 0);
 });
 
 test("public price ceiling remains fifteen million even if a legacy caller supplies a higher cap", () => {

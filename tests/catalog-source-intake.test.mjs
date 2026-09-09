@@ -29,3 +29,14 @@ test('blocked listing is not processed',async()=>{
  const f=fixture({first:{items:[offer],health:{blocked:true}}});
  await collectSourcePage(f.state,f.options);assert.equal(f.rows.length,0);assert.equal(f.state.stopReason,'blocked');
 });
+test('a transient list timeout retries the same cursor without replaying stored rows',async()=>{
+ const f=fixture({first:{items:[offer]}});const fetch=f.state.source.fetchPage;let calls=0;
+ f.state.source.fetchPage=async c=>{if(++calls===1)throw Error('source_timeout');return fetch(c)};
+ await collectSourcePage(f.state,f.options);assert.equal(f.state.done,false);
+ await collectSourcePage(f.state,f.options);assert.equal(f.state.seen.size,1);assert.equal(f.state.listFailures,1);
+});
+test('access denial is never retried as a transient timeout',async()=>{
+ const f=fixture({});let calls=0;f.state.source.fetchPage=async()=>{calls++;throw Error('http_403')};
+ await collectSourcePage(f.state,f.options);await collectSourcePage(f.state,f.options);
+ assert.equal(calls,1);assert.equal(f.state.stopReason,'blocked');
+});

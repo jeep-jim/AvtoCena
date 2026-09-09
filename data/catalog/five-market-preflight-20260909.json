@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-09-09T09:58:08Z",
+  "scope": "one listing page per required non-Japan source; current execution environment only",
+  "publicationWrites": false,
+  "sources": [
+    {
+      "sourceId": "dongchedi_china_open",
+      "market": "china",
+      "error": "dongchedi_public_inventory_requires_login_or_permitted_partner_feed"
+    },
+    {
+      "sourceId": "autopapa_georgia_open",
+      "market": "georgia",
+      "rows": 10,
+      "nextCursor": true,
+      "health": {
+        "ok": true,
+        "message": "AutoPapa Georgia parsed 10",
+        "checkedAt": "2026-09-09T09:57:25.382Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=utf-8"
+      }
+    },
+    {
+      "sourceId": "mobile_de_open",
+      "market": "europe",
+      "rows": 21,
+      "nextCursor": true,
+      "health": {
+        "ok": true,
+        "message": "mobile.de BFF power_001_085_2026 page=1/25 parsed=21 total=25633",
+        "checkedAt": "2026-09-09T09:57:26.498Z",
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8"
+      },
+      "diagnostics": {
+        "listingRows": 26,
+        "rejectedRows": 5
+      }
+    },
+    {
+      "sourceId": "autoscout_europe_open",
+      "market": "europe",
+      "rows": 19,
+      "nextCursor": true,
+      "health": {
+        "ok": true,
+        "message": "AutoScout24 exact Next data parsed 19; collector year>=2020 accepted=19",
+        "checkedAt": "2026-09-09T09:57:26.547Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=utf-8"
+      }
+    },
+    {
+      "sourceId": "dubizzle_uae_open",
+      "market": "uae",
+      "error": "This operation was aborted"
+    },
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "error": "This operation was aborted"
+    },
+    {
+      "sourceId": "autohome_used_china_open",
+      "market": "china",
+      "error": "This operation was aborted"
+    },
+    {
+      "sourceId": "guazi_china_open",
+      "market": "china",
+      "error": "guazi_source_blocked_bot_challenge"
+    },
+    {
+      "sourceId": "autohome_new_china_open",
+      "market": "china",
+      "rows": 93,
+      "nextCursor": true,
+      "health": {
+        "ok": true,
+        "message": "Autohome new exact list page=1 items=93",
+        "checkedAt": "2026-09-09T09:57:33.662Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=gb2312"
+      }
+    },
+    {
+      "sourceId": "encar_direct",
+      "market": "korea",
+      "error": "encar_access_block_page status=404 content-type=text/html url=https://api.encar.com/search/car/list/mobile?count=true&q=%28And.Hidden.N._.CarType.A.%29&sr=%7CMobileModifiedDate%7C0%7C50&inav=%7CMetadata%7CSort "
+    },
+    {
+      "sourceId": "myauto_georgia_list",
+      "market": "georgia",
+      "error": "myauto_list_routes_failed:www.myauto.ge/en/main:403:6150|myauto.ge/en/main:403:6124|https://www.myauto.ge/en/main?page=1:This operation was aborted|https://myauto.ge/en/main?page=1:This operation was aborted"
+    },
+    {
+      "sourceId": "kcar_korea_open",
+      "market": "korea",
+      "rows": 20,
+      "nextCursor": true,
+      "health": {
+        "ok": true,
+        "message": "K Car exact page 1: 20/20; total=7473",
+        "checkedAt": "2026-09-09T09:58:07.309Z",
+        "httpStatus": 200,
+        "contentType": "application/json"
+      },
+      "diagnostics": {
+        "listingRows": 20,
+        "rejectedRows": 0,
+        "failedDetailRows": 0,
+        "rejectionReasons": {},
+        "rejectionSamples": []
+      }
+    }
+  ]
+}

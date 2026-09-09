@@ -8,6 +8,7 @@ await fs.mkdir(out,{recursive:true});
 for(const market of ['korea','china','uae','europe','georgia','japan']) {
  const directory=path.join(root,`catalog-intake-${market}`);
  let files=[];try{files=await fs.readdir(directory);}catch{continue;}
+ let report;try{report=JSON.parse(await fs.readFile(path.join(directory,"report.json"),"utf8"));}catch{}
  const rows=new Map();
  for(const file of files.filter(f=>f.endsWith('.jsonl'))) {
   for await(const observation of readCheckpointJsonl(path.join(directory,file))) {
@@ -24,7 +25,7 @@ for(const market of ['korea','china','uae','europe','georgia','japan']) {
  for(let offset=0;offset<Math.max(offers.length,1);offset+=shardSize) {
   const batch=offers.slice(offset,offset+shardSize);
   const suffix=String(Math.floor(offset/shardSize)+1).padStart(4,'0');
-  await fs.writeFile(path.join(out,`catalog-rebuild-${market}-${suffix}.json`),JSON.stringify({market,count:batch.length,offers:batch}));
+  await fs.writeFile(path.join(out,`catalog-rebuild-${market}-${suffix}.json`),JSON.stringify({market,count:batch.length,offers:batch,...(offset===0&&report?{report:{...report,sources:report.sources.map(source=>({...source,mode:"live",freshSaved:source.observations||0}))}}:{})}));
  }
  console.log(JSON.stringify({market,uniqueObservations:offers.length}));
 }

@@ -1,10 +1,11 @@
 import type { VehicleOffer } from "./types";
 
-// Owner hard ceiling: environment settings may narrow it, never raise it.
-const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL_YEAR || 20);
+// Broad inventory is bounded by the market/storage budget, not a 20-row model bucket.
+// Japan remains on its previous limit until final auction prices are qualified.
+const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL_YEAR || 100000);
 export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredMaxOffersPerModelYear)
-  ? Math.max(1, Math.min(20, Math.floor(configuredMaxOffersPerModelYear))) : 20;
-export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+  ? Math.max(1, Math.min(100000, Math.floor(configuredMaxOffersPerModelYear))) : 100000;
+export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = 20;
 export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
 export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
@@ -30,7 +31,7 @@ export function isCatalogCombustionLowPower(row: { powerHp?: unknown; fuel?: unk
 /**
  * Public inventory diversity is bounded per market + canonical make + exact
  * model + model year. Different years of the same model must never compete for
- * the same 20-card bucket.
+ * the same model-year bucket.
  */
 export function catalogModelYearQuotaKey(
   offer: Pick<VehicleOffer, "market" | "make" | "model" | "year"> | Partial<VehicleOffer>,
@@ -70,7 +71,7 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   for (const row of [...rows].sort((a, b) => Number(options.protectedIds?.has(String(b.id)) === true) - Number(options.protectedIds?.has(String(a.id)) === true))) {
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
-    const limit = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+    const limit = row.market === "japan" ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR : CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
     if (!key || count >= limit) {
       removed.push(row);
       continue;
@@ -154,7 +155,7 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
  * the output before other discovered years get represented. Every discovered
  * model-year receives one turn before any bucket receives a second turn, then
  * the process repeats. Rows inside one bucket can still be ranked by source
- * quality via `compare`. A bucket can never exceed the shared 20-card quota.
+ * quality via `compare`. A bucket can never exceed the configured inventory quota.
  */
 export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOffer>>(
   rows: readonly T[],
@@ -175,7 +176,7 @@ export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOff
 
   const orderedBuckets = [...buckets.entries()]
     .sort(([a], [b]) => a.localeCompare(b, "en"))
-    .map(([, bucket]) => [...bucket].sort(compare).slice(0, CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
+    .map(([, bucket]) => [...bucket].sort(compare).slice(0, bucket[0]?.market === "japan" ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR : CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
   const selected: T[] = [];
   for (let round = 0; selected.length < boundedLimit; round++) {
     let added = false;
