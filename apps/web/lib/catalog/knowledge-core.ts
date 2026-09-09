@@ -6,6 +6,7 @@ import { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } fro
 import { resolveKnowledgeModelIdentity } from "./knowledge-model-identity";
 import { enrichOfferWithVehicleKnowledge } from "./vehicle-knowledge";
 import { compatibleModificationOptions } from "./modification-matching";
+import { matchEncarInspectionVariant } from "./encar-inspection";
 
 export type KnowledgeCoreVariant = {
   id: string;
@@ -410,9 +411,11 @@ export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer
     const linked = offer.market !== "japan" && identity?.sourceOfferId === offer.sourceOfferId
       && ["source_variant_id", "document_variant_id"].includes(identity?.proof)
       ? compatibleModificationOptions(offer, variants, modelId || "").find(x => x.id === identity.variantId) : null;
+    const inspectionVariant = matchEncarInspectionVariant(offer, variants, modelId || "");
     const match = offer.market === "japan"
       ? (variants.length ? matchCoreVariant(variants, offer) : null)
-      : linked ? { variant: variants.find(x => x.id === linked.id)!, score: 100 } : null;
+      : linked ? { variant: variants.find(x => x.id === linked.id)!, score: 100 }
+      : inspectionVariant ? {variant: inspectionVariant, score: 100} : null;
     if (match) {
       current = applyTrustedVariant(offer, match.variant, match.score);
       current = {
