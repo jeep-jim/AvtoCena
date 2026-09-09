@@ -253,21 +253,21 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
                 <td className="px-4 py-3 text-right font-black">{sourceRate ? rub(sourceRate.sourcePriceRub) : "—"}</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-black">2. Мощность</td>
-                <td className="px-4 py-3 text-white/62">Приводит мощность к юридически используемым кВт. Для EV/EREV берёт подтверждённую 30-минутную мощность, а не пик.</td>
-                <td className="px-4 py-3 text-white/45">{formulaForPower(powertrainKind, powerHp, icePowerKw, power30MinKw)}</td>
+                <td className="px-4 py-3 font-black">{vehicleCategory === "N1" ? "2. Категория и масса" : "2. Мощность"}</td>
+                <td className="px-4 py-3 text-white/62">{vehicleCategory === "N1" ? "Для грузового утильсбора использует полную разрешённую массу, а не легковую мощностную льготу." : "Приводит мощность к юридически используемым кВт. Для EV/EREV берёт подтверждённую 30-минутную мощность, а не пик."}</td>
+                <td className="px-4 py-3 text-white/45">{vehicleCategory === "N1" ? "N1 · полная масса по документам" : formulaForPower(powertrainKind, powerHp, icePowerKw, power30MinKw)}</td>
                 <td className="px-4 py-3 text-right font-black">{vehicleCategory === "N1" ? `${number(grossVehicleWeightKg)} кг · по полной массе` : utilizationPowerKw ? `${number(utilizationPowerKw, 5)} кВт` : "нужны данные"}</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-black">3. Возраст</td>
                 <td className="px-4 py-3 text-white/62">Определяет юридическую дату производства и возрастную группу на дату расчёта.</td>
                 <td className="px-4 py-3 text-white/45">{productionDate}</td>
-                <td className="px-4 py-3 text-right font-black">{customs?.productionReferenceDate || "—"} · {customs?.ageBand || "—"}</td>
+                <td className="px-4 py-3 text-right font-black">{customs?.productionReferenceDate || "—"} · {vehicleCategory === "N1" ? `ТН ВЭД ${customs?.tariffCode || "—"}` : customs?.ageBand === "up_to_3_years" ? "до 3 лет включительно" : customs?.ageBand === "from_3_to_5_years" ? "свыше 3 до 5 лет" : customs?.ageBand === "over_5_years" ? "старше 5 лет" : "—"}</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-black">4. Утильсбор</td>
-                <td className="px-4 py-3 text-white/62">Выбирает строку таблицы 2026 по типу силовой установки, объёму ДВС, мощности и возрасту.</td>
-                <td className="px-4 py-3 text-white/45">коэффициент {customs?.utilizationCoefficient !== undefined ? number(customs.utilizationCoefficient, 4) : "—"} × 20 000 ₽</td>
+                <td className="px-4 py-3 text-white/62">{vehicleCategory === "N1" ? "Выбирает коэффициент N1 2026 по полной разрешённой массе и возрасту." : "Выбирает строку таблицы 2026 по типу силовой установки, объёму ДВС, мощности и возрасту."}</td>
+                <td className="px-4 py-3 text-white/45">коэффициент {customs?.utilizationCoefficient !== undefined ? number(customs.utilizationCoefficient, 4) : "—"} × {vehicleCategory === "N1" ? "150 000" : "20 000"} ₽</td>
                 <td className="px-4 py-3 text-right font-black">{customs?.utilizationFeeRub !== undefined ? rub(customs.utilizationFeeRub) : "—"}</td>
               </tr>
               <tr>
