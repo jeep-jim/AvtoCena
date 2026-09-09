@@ -3177,3 +3177,16 @@ User authorized a new single fresh collection after checking causes of low cover
 - New catalog-five-market-full-rebuild.yml runs once on the committed request marker: korea/china/uae/europe/georgia, up to 210 minutes collection each, max 2000 pages / 100000 observations per source, source URL images only, sequential market publication. Existing Japan is preserved, not recollected; verified final-price auction coverage has not been established.
 - Before every market publication, inventory the complete bucket and require room below 50 GB for estimated additional data (8x input, minimum 1 GB) plus 5 GB headroom. This is a conservative estimate, not a byte-exact prediction. No deletion. Insufficient reserve stops publication while retaining collected artifacts.
 - Validation: typecheck passed; full suite ran 1170 tests (1167 initially passed). Three failures concerned the new missing-mileage fixture and obsolete 20-card expectations; corrected and rerun successfully in the affected suites. Added/passed retry and storage reserve tests; five-market YAML validated. Do not infer that blocked sources or all calculations are fixed.
+
+
+### 2026-09-09 — Причины отказа ручного расчёта
+- API сохраняет причины из движка вместо общей ошибки: неизвестная категория M1/N1, неподдерживаемый тариф N1, недостающие параметры или курсы.
+- Карточка получает понятное русское объяснение через существующий блок ошибки; ручной ввод не меняет каталог и не подменяет категорию автомобиля.
+- Грузовой тариф N1 не реализован этой правкой. Текущий сбор пяти рынков не перезапускается.
+
+### Текущий этап — 2026-09-09T12:07:24.744591+00:00
+- Пользователь явно разрешил отправку исправлений в jeep-jim/AvtoCena и публикацию. Предыдущая попытка отправки была остановлена автоматической проверкой разрешений; код не считался опубликованным.
+- Ручной расчёт: исправлена передача причин отказа в API и существующий блок карточки. Проверены обычный легковой расчёт, неизвестная категория пикапа и N1; 8 тестов прошли, typecheck прошёл. Полный тариф N1 остаётся отдельной незавершённой задачей; M1 автоматически не подставляется.
+- Сбор https://github.com/jeep-jim/AvtoCena/actions/runs/34338186281: на момент проверки задания Китая, Европы и ОАЭ завершены успешно; Корея и Грузия продолжают сбор. Публикация нового каталога ещё не началась. Успех задания не подтверждает полноту всех источников или количество рассчитанных машин.
+- Япония исключена из нового прохода до подтверждения конечных аукционных цен. Расписание не включено. Активный сбор не отменялся и не перезапускался.
+- Следующий контроль: после публикации сравнить количество автомобилей по рынкам и источникам, полноту характеристик, долю расчётов и причины отказов; проверить фактический объём Object Storage и резерв до лимита 50 ГБ.

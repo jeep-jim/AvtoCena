@@ -5,7 +5,7 @@ import { isSellerPricedOffer } from "../apps/web/lib/catalog/seller-price-contra
 import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
 import { searchProjectionFromOffer, projectionCanRenderCard, isCatalogProductionRefreshAllowed } from "../apps/web/lib/catalog/storage";
 import { validateCustomerParameters } from "../apps/web/lib/catalog/customer-parameters";
-import { calculateOfferWithCustomerParameters } from "../apps/web/lib/catalog/customs-pricing";
+import { calculateOfferWithCustomerParameters, calculateOfferWithCustomerParametersDetailed } from "../apps/web/lib/catalog/customs-pricing";
 import { LocalJsonStorage } from "../apps/web/lib/data";
 import { resetCatalogRateCache } from "../apps/web/lib/catalog/rates";
 
@@ -38,6 +38,19 @@ test("manual calculation uses the pricing engine without mutating the published 
   const result=await calculateOfferWithCustomerParameters(input,validateCustomerParameters({year:2021,engineCc:1598,powerHp:150,fuel:"petrol"}));
   assert.ok(result && result.totalRub>input.sellerPriceRub);
   assert.equal(JSON.stringify(input),before);assert.equal(catalogOfferVisibleRub(input),0);
+  for (const vehicleCategory of [undefined, "N1"] as const) {
+   const pickup={...input,make:"Isuzu",model:"TAGA H",bodyType:"Пикап",vehicleCategory};
+   const original=JSON.stringify(pickup);
+   const blocked=await calculateOfferWithCustomerParametersDetailed(pickup,validateCustomerParameters({year:2021,productionMonth:5,engineCc:1598,powerHp:200,fuel:"diesel"}));
+   assert.equal(blocked.ok,false);
+   if (!blocked.ok) {
+    assert.ok(blocked.missing.includes(vehicleCategory ? "n1_customs_tariff" : "vehicle_category"));
+    assert.match(blocked.error,vehicleCategory ? /пока не поддерживается/ : /подтвердить категорию M1\/N1/);
+   }
+   assert.equal(JSON.stringify(pickup),original);
+   assert.equal(await calculateOfferWithCustomerParameters(pickup,validateCustomerParameters({year:2021,engineCc:1598,powerHp:200,fuel:"diesel"})),null);
+  }
+
  } finally {read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
 
