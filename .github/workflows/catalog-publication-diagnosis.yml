@@ -54,3 +54,4 @@ jobs:
           path: catalog-diagnosis-*.json
 
 # Recheck complete-price candidates after optional-description filtering was removed.
+# Recheck direct adapter evidence instead of legacy replay.

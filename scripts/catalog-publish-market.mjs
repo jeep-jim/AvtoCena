@@ -288,7 +288,7 @@ async function auditCandidate(sourceOffer) {
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
     if (sellerInventory) {
-      const prepared = await prepareSellerInventory(retainedPublishedIds.has(sourceOffer.id) ? sourceOffer : offer,
+      const prepared = await prepareSellerInventory(sourceOffer,
         {preservePublishedPrice:retainedPublishedIds.has(sourceOffer.id)});
       if (!prepared) return {offer:null,reason:"source_inventory_unqualified"};
       const priority = classifyCatalogV2Offer(prepared,v2Policy);

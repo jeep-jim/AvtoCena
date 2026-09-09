@@ -18,3 +18,13 @@ test('display translates technical labels and deduplicates identical rows withou
  assert.equal(untranslatedSpecificationFields(raw).length,0);
  assert.equal(untranslatedSpecificationFields([{name:'未知参数',items:[{name:'未知',value:'x'}]}]).length,1);
 });
+
+
+test('fresh K Car evidence is not replayed through the obsolete horsepower witness name',async()=>{
+ const {inventorySourceEvidence}=await import('../apps/web/lib/catalog/prepare-seller-inventory');
+ const semantic=Object.fromEntries(['year','fuel','engineCc','powerHp'].map(field=>[field,{status:field==='engineCc'?'missing':'exact',source:'kcar_exact_detail_rvo'}]));
+ const input:any={sourceId:'kcar_korea_open',sourceOfferId:'one',market:'korea',fuel:'petrol',powertrainKind:'combustion',powerHp:150,powerKw:110.3,powerDataConfidence:'source_exact',powerDataSource:'kcar_exact_detail_rvo_hrspow_kw',operational:{detailIdentityVerified:true,fieldIdentityVerified:true,sourceExactFields:['fuel','powerHp'],semanticEvidence:semantic}};
+ const before=JSON.stringify(input),result=inventorySourceEvidence(input);
+ assert.equal(result.powerHp,150);assert.equal(result.operational.semanticEvidence.engineCc.status,'missing');
+ assert.notEqual(result,input);assert.equal(JSON.stringify(input),before);
+});
