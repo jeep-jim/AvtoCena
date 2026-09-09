@@ -58,7 +58,7 @@ test("year-only production uses the legal 1 July reference date", () => {
     importedAt,
   });
   assert.equal(result.status, "ready");
-  assert.equal(result.ageEstimated, false);
+  assert.equal(result.ageEstimated, true);
   assert.deepEqual(result.possibleAgeBands, ["up_to_3_years"]);
   assert.equal(result.productionReferenceDate, "2023-07-01");
   assert.equal(result.productionReferenceBasis, "year_midpoint");
@@ -312,7 +312,7 @@ test("N1 and unclassified pickups fail closed instead of receiving an M1 tariff"
   });
   assert.equal(n1.status, "needs_data");
   assert.equal(n1.totalCustomsRub, undefined);
-  assert.ok(n1.missing.includes("n1_customs_tariff"));
+  assert.ok(n1.missing.includes("gross_vehicle_weight_kg"));
   assert.equal(unknownPickup.vehicleCategory, "unknown");
   assert.equal(unknownPickup.totalCustomsRub, undefined);
   assert.ok(unknownPickup.missing.includes("vehicle_category"));

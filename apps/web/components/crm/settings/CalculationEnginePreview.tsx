@@ -1,10 +1,8 @@
+import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
-import { isOfficialCustomsCurrencyRate } from "@/lib/catalog/customs-pricing";
+import { calculateCustomerParameterScenario, isOfficialCustomsCurrencyRate } from "@/lib/catalog/customs-pricing";
 import { resolveCatalogMarketConfig } from "@/lib/catalog/estimated-market-config";
-import { convertToRub } from "@/lib/catalog/rates";
-import { calculateAvtocenaFromBusinessConfig } from "../../../../../packages/engine/src/calculation/calculateAvtocena";
 import {
-  calculateRussiaCustomsForIndividual,
   utilizationPowerKwForInput,
   type RussiaPowertrainKind,
 } from "../../../../../packages/engine/src/calculation/russiaCustomsV2";
@@ -91,46 +89,42 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
   const requestedKind = first(query.calcPowertrain) as RussiaPowertrainKind;
   const powertrainKind = POWERTRAINS.some((item) => item.value === requestedKind) ? requestedKind : "combustion";
 
-  const [sourceRate, eurRate] = await Promise.all([
-    convertToRub(sourcePrice, currency).catch(() => null),
-    convertToRub(1, "EUR").catch(() => null),
-  ]);
+  const vehicleCategory = first(query.calcCategory) === "N1" ? "N1" : "M1";
+  const fuel = first(query.calcFuel) === "diesel" ? "diesel" : "petrol";
+  const grossVehicleWeightKg = num(query,"calcGrossWeight",0);
+  const calculationDate = first(query.calcDate) || new Date().toISOString().slice(0,10);
+  const transportRaw = first(query.calcBorderTransport);
+  const transportToBorderRub = transportRaw === "" ? Number(resolved.config.logisticsRub || 0) : Number(transportRaw);
+  const customsInput = {
+    engineCc: powertrainKind === "electric" ? undefined : engineCc || undefined,
+    powerHp: powerHp || undefined, icePowerKw:icePowerKw || undefined,
+    power30MinKw:power30MinKw || undefined, powertrainKind, productionDate,
+    fuel:powertrainKind === "combustion" ? fuel : powertrainKind === "electric" ? "electric" : "hybrid",
+    vehicleCategory, grossVehicleWeightKg, n1IceFuel:fuel,
+    transportToBorderRub, customsCalculationDate:calculationDate, personalUseEligible:true,
+  } as const;
+  const inputErrors: string[] = [];
+  for (const key of ["calcSourcePrice","calcEngineCc","calcPowerHp","calcIcePowerKw","calcPower30MinKw","calcGrossWeight","calcBorderTransport"]) {
+    const raw = first(query[key]);
+    if (raw && (!Number.isFinite(Number(raw)) || Number(raw) < 0 || (key === "calcSourcePrice" && Number(raw) === 0))) inputErrors.push(`Некорректное значение: ${key}`);
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(calculationDate) || !Number.isFinite(Date.parse(calculationDate)) || new Date(calculationDate).toISOString().slice(0,10) !== calculationDate) inputErrors.push("Укажите существующую дату расчёта");
+  const preview = inputErrors.length ? {totalRub:null,calculationSnapshot:{missing:inputErrors,warnings:inputErrors}} : await calculateCustomerParameterScenario({id:"crm-preview",market:marketId,sourcePrice,sourceCurrency:currency} as any,customsInput);
+  const snapshot: any = preview.calculationSnapshot || {};
+  const sourceRate = snapshot.currencyRate;
+  const eurRate = snapshot.eurRate;
   const sourceRateExact = Boolean(sourceRate && isOfficialCustomsCurrencyRate(sourceRate));
   const eurRateExact = Boolean(eurRate && isOfficialCustomsCurrencyRate(eurRate));
-
-  const customsInput = {
-    customsValueRub: Number(sourceRate?.sourcePriceRub || 0),
-    eurRateRub: Number(eurRate?.effectiveRate || 0),
-    engineCc: powertrainKind === "electric" ? undefined : engineCc || undefined,
-    powerHp: powerHp || undefined,
-    icePowerKw: icePowerKw || undefined,
-    power30MinKw: power30MinKw || undefined,
-    powertrainKind,
-    productionDate,
-    fuel: powertrainKind === "combustion" ? "petrol" : powertrainKind,
-    vehicleCategory: "M1" as const,
-    personalUseEligible: true,
-  };
-
-  const utilizationPowerKw = utilizationPowerKwForInput(customsInput);
-  const customs = sourceRateExact && eurRateExact && sourceRate?.sourcePriceRub
-    ? calculateRussiaCustomsForIndividual(customsInput)
-    : null;
-  const business = customs?.status === "ready" && Number(customs.totalCustomsRub) > 0
-    ? calculateAvtocenaFromBusinessConfig({
-        marketId: marketId as any,
-        marketConfig: resolved.config,
-        sourcePriceRub: Number(sourceRate?.sourcePriceRub || 0),
-        customsRub: Number(customs.knownCustomsRub),
-        utilizationFeeRub: Number(customs.utilizationFeeRub),
-      })
-    : null;
+  const customs = snapshot.customs;
+  const utilizationPowerKw = vehicleCategory === "N1" ? undefined : utilizationPowerKwForInput({...customsInput,customsValueRub:0,eurRateRub:0});
+  const business = preview.totalRub && customs?.status === "ready" && snapshot.priceIncludesAllCustoms === true
+    ? {totalRub:preview.totalRub,breakdown:expandCustomsBreakdown(snapshot.breakdown || [],customs)} : null;
 
   const marketExtras = business
     ? Math.max(0, business.totalRub - Number(sourceRate?.sourcePriceRub || 0) - Number(customs?.totalCustomsRub || 0))
     : 0;
-  const missing = customs?.missing || [];
-  const warnings = [...(customs?.warnings || []), ...resolved.warnings];
+  const missing = [...new Set([...(customs?.missing || []),...(snapshot.missing || [])])];
+  const warnings = snapshot.warnings || [];
 
   return (
     <section className="ac-calc-preview glass mb-4 overflow-hidden rounded-[1.8rem]">
@@ -139,7 +133,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
           <div className="max-w-3xl">
             <div className="mb-2 flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-emerald-400/12 px-2.5 py-1 text-[11px] font-black uppercase tracking-[.08em] text-emerald-300">живой контроль ядра</span>
-              <span className="rounded-full bg-white/8 px-2.5 py-1 text-[11px] font-black text-white/55">RF M1 · 2026</span>
+              <span className="rounded-full bg-white/8 px-2.5 py-1 text-[11px] font-black text-white/55">RF {vehicleCategory} · 2026</span>
               {resolved.estimated ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">коммерческие расходы: средний профиль</span> : null}
             </div>
             <h2 className="text-2xl font-black md:text-3xl">Как сайт считает цену прямо сейчас</h2>
@@ -169,7 +163,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         </label>
         <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
           Дата производства
-          <input name="calcProductionDate" placeholder="2025-01" defaultValue={productionDate} className={inputClass()} />
+          <input name="calcProductionDate" placeholder="ГГГГ-ММ-ДД или ГГГГ-ММ" defaultValue={productionDate} className={inputClass()} />
         </label>
         <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
           Силовая установка
@@ -193,6 +187,11 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
           30-мин. мощность электромоторов, кВт
           <input name="calcPower30MinKw" type="number" min="0" step="0.01" defaultValue={power30MinKw || ""} className={inputClass()} />
         </label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Категория<select name="calcCategory" defaultValue={vehicleCategory} className={inputClass()}><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select></label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Топливо ДВС<select name="calcFuel" defaultValue={fuel} className={inputClass()}><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Полная масса N1, кг<input name="calcGrossWeight" type="number" min="1" max="3500" defaultValue={grossVehicleWeightKg||""} className={inputClass()}/></label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Дата таможенного расчёта<input name="calcDate" type="date" defaultValue={calculationDate} className={inputClass()}/></label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Доставка N1 до границы, ₽<input name="calcBorderTransport" type="number" min="0" defaultValue={transportToBorderRub} className={inputClass()}/><span>Заменяет строку логистики для N1; входит в таможенную стоимость.</span></label>
         <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2 xl:col-span-4">Пересчитать тем же движком, что и сайт</button>
       </form>
 
@@ -203,7 +202,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
           <div className="mt-1 text-xs font-bold text-white/42">{rateSourceLabel(sourceRate?.rateSource)} · {sourceRate?.rateDate || "—"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">таможенная пошлина</div>
+          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">таможенные платежи</div>
           <div className="mt-2 text-2xl font-black">{customs ? rub(customs.knownCustomsRub) : "нужны данные"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">{customs?.ruleVersion || "расчёт заблокирован"}</div>
         </div>
@@ -257,7 +256,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
                 <td className="px-4 py-3 font-black">2. Мощность</td>
                 <td className="px-4 py-3 text-white/62">Приводит мощность к юридически используемым кВт. Для EV/EREV берёт подтверждённую 30-минутную мощность, а не пик.</td>
                 <td className="px-4 py-3 text-white/45">{formulaForPower(powertrainKind, powerHp, icePowerKw, power30MinKw)}</td>
-                <td className="px-4 py-3 text-right font-black">{utilizationPowerKw ? `${number(utilizationPowerKw, 5)} кВт` : "нужны данные"}</td>
+                <td className="px-4 py-3 text-right font-black">{vehicleCategory === "N1" ? `${number(grossVehicleWeightKg)} кг · по полной массе` : utilizationPowerKw ? `${number(utilizationPowerKw, 5)} кВт` : "нужны данные"}</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-black">3. Возраст</td>
@@ -285,7 +284,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               </tr>
               <tr className="bg-red-500/[.07]">
                 <td className="px-4 py-4 text-base font-black">7. Итог</td>
-                <td className="px-4 py-4 text-white/70">Цена карточки = автомобиль + таможенная пошлина + утильсбор + расходы рынка.</td>
+                <td className="px-4 py-4 text-white/70">Цена карточки = автомобиль + таможенные платежи + утильсбор + расходы рынка.</td>
                 <td className="px-4 py-4 text-white/50">без двойного учёта обеспечительного платежа</td>
                 <td className="px-4 py-4 text-right text-lg font-black">{business ? rub(business.totalRub) : "расчёт заблокирован"}</td>
               </tr>

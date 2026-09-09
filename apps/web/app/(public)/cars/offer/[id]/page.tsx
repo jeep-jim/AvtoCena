@@ -1,5 +1,6 @@
+import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { StickyOfferColumn } from "@/components/catalog/StickyOfferColumn";
-import { confirmedProductionMonth } from "@/lib/catalog/production-month";
+import { confirmedProductionMonth, confirmedProductionDay } from "@/lib/catalog/production-month";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
 import { InlineOfferParameters } from "@/components/catalog/InlineOfferParameters";
@@ -172,7 +173,7 @@ function SimilarOffersFallback() {
 type BreakdownLine = { id?: string; title: string; amountRub: number };
 function customerBreakdownTitle(id: string, title: string) {
   if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
-  if (id === "customs") return "Таможенная пошлина";
+  if (id === "customs") return "Таможенные платежи";
   if (id === "utilization-fee") return "Утилизационный сбор";
   return title;
 }
@@ -200,12 +201,12 @@ function priceBreakdown(offer: any): BreakdownLine[] {
         actual.splice(
           combinedIndex,
           1,
-          { id: "customs", title: "Таможенная пошлина", amountRub: knownCustomsRub },
+          { id: "customs", title: "Таможенные платежи", amountRub: knownCustomsRub },
           { id: "utilization-fee", title: "Утилизационный сбор", amountRub: utilizationFeeRub },
         );
       }
     }
-    return actual;
+    return expandCustomsBreakdown(actual,customs);
   }
   const total = Number(offer?.totalRub || 0);
   return total ? [{ id: "total", title: "Стоимость автомобиля", amountRub: total }] : [];
@@ -402,7 +403,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
         </div>
 
         <StickyOfferColumn>
-          <InlineOfferParameters key={offer.id} offerId={offer.id} initial={{year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),engineCc:String(offer.engineCc||""),fuel:offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),hybridKind:offer.powertrainKind||"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
+          <InlineOfferParameters showCommercial={offer.vehicleCategory === "N1" || String(offer.tnVedCode||"").startsWith("8704") || /pickup|pick-up|пикап|truck|commercial|груз|hilux|taga|d-max|l200|tundra|tacoma|ranger|amarok|navara|poer|musso/i.test(`${offer.bodyType||""} ${offer.model||""}`) || offer.calculationSnapshot?.customs?.missing?.includes("vehicle_category")} key={offer.id} offerId={offer.id} initial={{vehicleCategory:offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory||"",grossVehicleWeightKg:String(offer.grossVehicleWeightKg||""),n1IceFuel:offer.n1IceFuel||"",year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),productionDay:confirmedProductionDay(offer),transportToBorderRub:offer.transportToBorderRub == null ? "" : String(offer.transportToBorderRub),engineCc:String(offer.engineCc||""),fuel:offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),hybridKind:offer.powertrainKind||"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold uppercase">Цена продавца</p><p className="mt-2 text-3xl font-black">{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
             ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />

@@ -145,10 +145,8 @@ test("CRM calculation preview uses the same production engines instead of copied
   const preview = fs.readFileSync(new URL("../apps/web/components/crm/settings/CalculationEnginePreview.tsx", import.meta.url), "utf8");
   const page = fs.readFileSync(new URL("../apps/web/app/(crm)/crm/settings/page.tsx", import.meta.url), "utf8");
 
-  assert.match(preview, /calculateRussiaCustomsForIndividual/);
+  assert.match(preview, /calculateCustomerParameterScenario/);
   assert.match(preview, /utilizationPowerKwForInput/);
-  assert.match(preview, /calculateAvtocenaFromBusinessConfig/);
-  assert.match(preview, /convertToRub/);
   assert.match(preview, /isOfficialCustomsCurrencyRate/);
   assert.doesNotMatch(preview, /131\.04/);
   assert.match(page, /CalculationEnginePreview/);

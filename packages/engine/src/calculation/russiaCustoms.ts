@@ -22,7 +22,7 @@ export type RussiaCustomsInput = {
 
 export type RussiaCustomsResult = {
   status: RussiaCustomsStatus;
-  ruleVersion: "rf_personal_m1_2026-01-01";
+  ruleVersion: "rf_personal_m1_2026-01-01" | "rf_n1_8704_2026-09-09";
   ageMonths?: number;
   ageBand?: RussiaCustomsAgeBand;
   ageEstimated?: boolean;

@@ -54,6 +54,9 @@ export type VehicleOffer = {
   vehicleCategory?: VehicleCategory;
   tnVedCode?: string;
   grossVehicleWeightKg?: number;
+  transportToBorderRub?: number;
+  customsCalculationDate?: string;
+  n1IceFuel?: "petrol" | "diesel";
   personalUseEligible?: boolean;
   powerHp?: number;
   powerKw?: number;

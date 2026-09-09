@@ -64,7 +64,7 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
   const deposit = configuredValue(current, "securityDepositRub", defaults.securityDepositRub);
   const commission = configuredValue(current, "topAvtoCommissionRub", defaults.topAvtoCommissionRub);
   const complete = hasCompleteActiveProfile(current);
-  const provisional = current?.provisional === false ? false : !complete || Boolean(current?.provisional);
+  const provisional = !complete || Boolean(current?.provisional);
 
   return {
     ...(current || {}),

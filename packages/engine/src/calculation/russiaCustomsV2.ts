@@ -16,6 +16,7 @@ export type RussiaCustomsV2Input = RussiaCustomsInput & {
   vehicleCategory?: RussiaVehicleCategory;
   tnVedCode?: string;
   grossVehicleWeightKg?: number;
+  n1IceFuel?: "petrol" | "diesel";
   bodyType?: string;
   make?: string;
   model?: string;
@@ -23,7 +24,8 @@ export type RussiaCustomsV2Input = RussiaCustomsInput & {
 };
 
 export type RussiaCustomsV2Result = RussiaCustomsResult & {
-  legalRuleRevision: "rf_personal_vehicle_2026-08-20";
+  legalRuleRevision: "rf_personal_vehicle_2026-08-20" | "rf_n1_8704_2026-09-09";
+  tariffCode?: string;
   vehicleCategory: RussiaVehicleCategory;
   vehicleCategoryAssumed: boolean;
   personalUseAssumed: boolean;
@@ -62,6 +64,7 @@ export function legalProductionReference(input: Pick<RussiaCustomsV2Input, "prod
     const month = Number(exact[2]);
     const day = Number(exact[3]);
     if (validDateParts(year, month, day)) return { year, month, day, basis: "exact_date" };
+    return null;
   }
   const compactExact = text.match(/\b((?:19|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\b/);
   if (compactExact) {
@@ -69,12 +72,14 @@ export function legalProductionReference(input: Pick<RussiaCustomsV2Input, "prod
     const month = Number(compactExact[2]);
     const day = Number(compactExact[3]);
     if (validDateParts(year, month, day)) return { year, month, day, basis: "exact_date" };
+    return null;
   }
-  const monthKnown = text.match(/\b((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])\b/)
+  const monthKnown = text.match(/^((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])$/)
     || text.match(/\b((?:19|20)\d{2})(0[1-9]|1[0-2])\b/);
   if (monthKnown) return { year: Number(monthKnown[1]), month: Number(monthKnown[2]), day: 15, basis: "month_midpoint" };
+  if (text && !/^(19|20)\d{2}$/.test(text)) return null;
   const year = Number(input.year || text.match(/\b(?:19|20)\d{2}\b/)?.[0]);
-  if (Number.isFinite(year) && year >= 1900) return { year, month: 7, day: 1, basis: "year_midpoint" };
+  if (Number.isInteger(year) && year >= 1900) return { year, month: 7, day: 1, basis: "year_midpoint" };
   return null;
 }
 
@@ -129,7 +134,7 @@ export function certifiedElectricExcisePowerKw(input: RussiaCustomsV2Input) {
     || positive(input.utilizationPowerKw);
 }
 
-function normalizedCategory(input: RussiaCustomsV2Input) {
+export function normalizedCategory(input: Pick<RussiaCustomsV2Input, "vehicleCategory" | "tnVedCode" | "bodyType" | "make" | "model" | "sourceTitle">) {
   const explicit = String(input.vehicleCategory || "").trim().toUpperCase();
   if (explicit === "M1" || explicit === "N1") return { category: explicit as "M1" | "N1", assumed: false };
   const tnVed = String(input.tnVedCode || "").replace(/\D/g, "");
@@ -190,17 +195,13 @@ function blockedCategoryResult(
 export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input): RussiaCustomsV2Result {
   const importedAt = input.importedAt || new Date();
   const category = normalizedCategory(input);
+  const code = String(input.tnVedCode || "").replace(/\D/g, "");
+  if (input.vehicleCategory === "M1" && code.startsWith("8704")) return blockedCategoryResult(input,"M1","tn_ved_conflict","Категория M1 противоречит грузовому коду ТН ВЭД 8704.",false);
   const personalUseAssumed = input.personalUseEligible === undefined;
   const personalUseEligible = input.personalUseEligible !== false;
 
   if (category.category === "N1") {
-    return blockedCategoryResult(
-      input,
-      "N1",
-      "n1_customs_tariff",
-      "Категория N1 / ТН ВЭД 8704 требует отдельного грузового тарифа и коэффициента утильсбора. Легковой тариф M1 не подставляется.",
-      personalUseAssumed,
-    );
+    return calculateN1Customs(input);
   }
   if (category.category === "unknown") {
     return blockedCategoryResult(
@@ -213,6 +214,8 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
   }
 
   const reference = legalProductionReference(input);
+  if (!reference || !Number.isFinite(importedAt.getTime()) || utcDateOnly(importedAt) < referenceTimestamp(reference)) return blockedCategoryResult(input,"M1","production_date","Дата выпуска должна быть не позже даты ввоза.",personalUseAssumed);
+  if (importedAt.getUTCFullYear() !== 2026) return blockedCategoryResult(input,"M1","tariff_year","Для выбранного года ввоза нужны ставки этого года; таблица расчёта действует в 2026 году.",personalUseAssumed);
   const legalBand = reference ? legalVehicleAgeBand(reference, importedAt) : undefined;
   const kind = powertrainKind(input);
   const electricExcisePowerKw = kind === "electric" ? certifiedElectricExcisePowerKw(input) : undefined;
@@ -231,6 +234,9 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
 
   const result = calculateLegacyRussiaCustomsForIndividual(legacyInput);
   const warnings = [...result.warnings];
+  if (reference && reference.basis !== "exact_date") warnings.push(reference.basis === "month_midpoint"
+    ? "День выпуска неизвестен: для расчёта принято 15-е число указанного месяца. Уточните день перед переходом возрастной границы."
+    : "Месяц выпуска неизвестен: для расчёта принято 1 июля указанного года. Уточните дату перед переходом возрастной границы.");
   if (category.assumed) warnings.push(
     "Категория M1 принята по умолчанию для легкового автомобиля. Для пикапов и коммерческих ТС категория должна быть подтверждена документами.",
   );
@@ -247,13 +253,94 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsV2Input)
     ...(reference ? {
       ageMonths: completedLegalMonths(reference, importedAt),
       ageBand: legalBand,
-      ageEstimated: false,
+      ageEstimated: reference.basis !== "exact_date",
       possibleAgeBands: legalBand ? [legalBand] : [],
       productionReferenceDate: `${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
       productionReferenceBasis: reference.basis,
     } : {}),
     warnings,
   };
+}
+
+
+/** Ordinary complete N1 goods vehicles, direct import, standard EAEU tariff.
+ * Source: EEC group 87 (22.01.2026), pp. 71–86; PP1291 section II rows 5/6.
+ * Category and gross mass are supplied evidence/scenario inputs, never inferred
+ * from a pickup photo, curb weight or the passenger-car 160 hp threshold.
+ */
+function calculateN1Customs(input: RussiaCustomsV2Input): RussiaCustomsV2Result {
+  const date = input.importedAt || new Date();
+  const reference = legalProductionReference(input);
+  const mass = positive(input.grossVehicleWeightKg);
+  const value = positive(input.customsValueRub);
+  const eur = positive(input.eurRateRub);
+  const cc = positive(input.engineCc);
+  const kind = powertrainKind(input);
+  const hybrid = kind === "other_hybrid";
+  const electric = kind === "electric" || kind === "series_hybrid";
+  const fuel = hybrid ? input.n1IceFuel : input.fuel;
+  const diesel = /diesel|дизель/i.test(String(fuel || ""));
+  const spark = /^(petrol|lpg|cng|бензин)$/i.test(String(fuel || ""));
+  const missing: string[] = [];
+  if (!value) missing.push("customs_value");
+  if (!eur) missing.push("eur_rate");
+  if (!reference || !Number.isFinite(date.getTime()) || (reference && utcDateOnly(date) < referenceTimestamp(reference))) missing.push("production_date");
+  if (!mass || mass > 3500) missing.push("gross_vehicle_weight_kg");
+  if (date.getUTCFullYear() !== 2026) missing.push("n1_tariff_year");
+  if (!electric && !cc) missing.push("engine_cc");
+  if (!electric && !diesel && !spark) missing.push(hybrid ? "n1_ice_fuel" : "fuel");
+  const electricKw = sumPower(input.power30MinKwByMotor) || positive(input.power30MinKw);
+  const iceKw = positive(input.icePowerKw);
+  if (hybrid && (!electricKw || !iceKw)) missing.push("n1_hybrid_power");
+  const base = blockedCategoryResult(input,"N1",missing[0] || "n1_parameters", "Укажите параметры грузового расчёта в карточке.",false);
+  base.ruleVersion = "rf_n1_8704_2026-09-09";
+  base.legalRuleRevision = "rf_n1_8704_2026-09-09";
+  if (missing.length || !reference || !mass || !value || !eur) return {...base,missing};
+  const after = (years: number) => utcDateOnly(date) > referenceTimestamp(reference,years);
+  // Customs defines used as >= 3 years; PP1291 uses > 3 years for the higher coefficient.
+  const newForDuty = utcDateOnly(date) < referenceTimestamp(reference,3);
+  const over5 = after(5), over7 = after(7), usedForUtil = after(3);
+  const iceDominant = !hybrid || iceKw! > electricKw!;
+  const prefix = electric ? "870460" : hybrid ? (diesel ? "870441" : "870451") : diesel ? "870421" : "870431";
+  const largeEngine = cc! > (diesel ? 2500 : 2800);
+  let tariffCode: string;
+  let rate = 0.15, minimumEuroPerCc = 0;
+  if (electric) tariffCode = "8704600000";
+  else if (hybrid) {
+    const family = largeEngine ? (newForDuty ? "310" : "390") : (newForDuty ? "910" : "990");
+    tariffCode = prefix + family + (!iceDominant ? "9" : newForDuty ? "1" : over7 ? "1" : over5 ? "2" : "3");
+  } else {
+    const family = largeEngine ? (newForDuty ? "320" : "380") : (newForDuty ? "920" : "980");
+    tariffCode = prefix + family + (newForDuty ? "0" : over7 ? "1" : over5 ? "2" : "9");
+  }
+  if (!electric && iceDominant) {
+    rate = diesel ? 0.10 : newForDuty && largeEngine ? 0.125 : 0.15;
+    if (over7) { rate = 0; minimumEuroPerCc = 1; }
+    else if (diesel && !largeEngine && over5) minimumEuroPerCc = 0.13;
+  }
+  const suppliedCode = String(input.tnVedCode || "").replace(/\D/g, "");
+  // Do not quietly replace conflicting or specialized customs classifications.
+  if (suppliedCode && !tariffCode.startsWith(suppliedCode)) return {...base,missing:["tn_ved_conflict"],warnings:["Код ТН ВЭД не соответствует указанным параметрам грузового автомобиля."]};
+  const importDutyRub = Math.round(Math.max(value * rate, (cc || 0) * minimumEuroPerCc * eur));
+  const vatRub = Math.round((value + importDutyRub) * 0.22);
+  const utilizationCoefficient = mass <= 2500 ? (usedForUtil ? 8.91 : 6.13) : (usedForUtil ? 9.61 : 6.6);
+  const utilizationFeeRub = Math.round(150000 * utilizationCoefficient);
+  const clearance = customsClearanceFeeRub(value);
+  const knownCustomsRub = clearance + importDutyRub + vatRub;
+  return {...base, status:"ready", missing:[], tariffCode,
+    ageMonths:completedLegalMonths(reference,date),ageBand:legalVehicleAgeBand(reference,date),
+    ageEstimated:reference.basis !== "exact_date", productionReferenceBasis:reference.basis,
+    productionReferenceDate:`${reference.year}-${pad(reference.month)}-${pad(reference.day)}`,
+    importDutyRub,vatRub,exciseRub:0,utilizationCoefficient,utilizationFeeRub,knownCustomsRub,
+    totalCustomsRub:knownCustomsRub + utilizationFeeRub,
+    warnings:["Расчёт N1 по стандартному тарифу 8704 для прямого ввоза в РФ; категория, масса и классификация должны соответствовать документам автомобиля."],
+    breakdown:[
+      {id:"customs-clearance",title:"Таможенный сбор за оформление",amountRub:clearance},
+      {id:"import-duty",title:"Ввозная пошлина N1",amountRub:importDutyRub,note:`ТН ВЭД ${tariffCode}; ${rate*100}%${minimumEuroPerCc ? `; минимум ${minimumEuroPerCc} €/см³` : ""}`},
+      {id:"excise",title:"Акциз",amountRub:0,note:"Грузовое транспортное средство 8704"},
+      {id:"vat",title:"НДС 22%",amountRub:vatRub,note:"(Таможенная стоимость + пошлина) × 22%"},
+      {id:"utilization",title:"Утилизационный сбор N1",amountRub:utilizationFeeRub,note:`150 000 ₽ × ${utilizationCoefficient}; полная масса ${mass} кг`},
+    ]};
 }
 
 export { customsClearanceFeeRub, utilizationCoefficient2026, utilizationPowerKwForInput };
