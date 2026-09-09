@@ -11,7 +11,8 @@ export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
   const powerHp = number("powerHp",1,2500);
   const powertrainKind = fuel === "electric" ? "electric" : fuel === "hybrid" ? input.hybridKind : "combustion";
   if (!["electric","combustion","series_hybrid","other_hybrid"].includes(powertrainKind)) throw new Error("Укажите тип гибрида");
-  return {year,fuel,powerHp,powerKw:powerHp * 0.73549875,powertrainKind,
+  const month = input?.productionMonth === "" || input?.productionMonth == null ? undefined : number("productionMonth",1,12,true);
+  return {productionDate: month ? `${year}-${String(month).padStart(2,"0")}` : undefined,year,fuel,powerHp,powerKw:powerHp * 0.73549875,powertrainKind,
     engineCc:fuel === "electric" ? undefined : number("engineCc",300,10000,true),
     power30MinKw:["electric","hybrid"].includes(fuel) ? number("power30MinKw",0.1,2000) : undefined,
     icePowerKw:fuel === "hybrid" ? number("icePowerKw",0.1,2000) : undefined};

@@ -1,10 +1,10 @@
+import { confirmedProductionMonth } from "@/lib/catalog/production-month";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
-import { OfferManualCalculation } from "@/components/catalog/OfferManualCalculation";
+import { InlineOfferParameters } from "@/components/catalog/InlineOfferParameters";
 import { OfferSpecificationsDisclosure } from "@/components/catalog/OfferSpecificationsDisclosure";
 import { offerSpecificationGroups } from "@/lib/catalog/offer-specification-groups";
 import { assessJapanExportRestriction } from "@/lib/catalog/japan-export-restriction";
-import { ModificationSelector } from "@/components/catalog/ModificationSelector";
 import { hasModificationSelection, withoutDeliveredPrice } from "@/lib/catalog/modification-contract";
 import { calculateSelectedModification, conditionalModificationRub } from "@/lib/catalog/modification-recovery";
 import { Suspense, type ReactNode } from "react";
@@ -12,7 +12,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
-import { EditablePowerTile } from "@/components/catalog/EditablePowerTile";
+
 import { VehicleResearchLink } from "@/components/catalog/VehicleResearchLink";
 import { OfferContactActionsStyles, OfferCreditCalculator, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -382,8 +382,9 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const nonEditableSpecs = specs.filter((spec) => selectionRequired
     ? !["Мощность", "Двигатель", "Топливо", "30-минутная мощность", "Силовая установка"].includes(spec.label)
     : spec.label !== "Мощность");
-  const primarySpecs = nonEditableSpecs.slice(0, 4);
-  const secondarySpecs = nonEditableSpecs.slice(4);
+  const displayOnlySpecs = nonEditableSpecs.filter(spec=>!["Год","Двигатель","Топливо","Силовая установка","30-минутная мощность"].includes(spec.label));
+  const primarySpecs = displayOnlySpecs.slice(0, 4);
+  const secondarySpecs = displayOnlySpecs.slice(4);
 
   return <main data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -400,23 +401,22 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
-          {sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
-            ? <ModificationSelector key={offer.id} options={offer.modificationSelection!.options} selectedId={selectedModification ? query.modificationId : undefined} scenarioRub={modificationRub} failed={Boolean(query.modificationId && !selectedModification)} />
+          <InlineOfferParameters key={offer.id} offerId={offer.id} initial={{year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),engineCc:String(offer.engineCc||""),fuel:offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),hybridKind:offer.powertrainKind||"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
+            ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold uppercase">Цена продавца</p><p className="mt-2 text-3xl font-black">{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
             ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
             : preliminaryPricing
             ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />
-            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
+            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}>
           {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
-              {sellerPricing ? <OfferManualCalculation offerId={offer.id} year={offer.year} /> : !selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
               <VehicleResearchLink identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
               <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             </div>
-            {!selectionRequired && visibleRub > 0 ? <div className="mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
+            {!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} /></div> : null}
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
                 <span className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5"><span>Продано на торгах</span><span>{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-inherit" aria-label="Открыть результат аукциона" title={updatedTime ? `Время: ${updatedTime}` : "Объявление источника"}>↗</a> : null}</span>
@@ -427,6 +427,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             </div>
             <OfferDesktopActions />
           </aside>
+          </InlineOfferParameters>
         </div>
       </div>
 

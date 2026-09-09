@@ -3114,3 +3114,12 @@ Run 34096977346, commit 5b3dd6a4028aea5d2720fac490cc1e80603b5ccf, job 1016912074
 - Fix: exact-preserved, source-allowed market snapshots bypass deduplication/quota; mutable and append candidates keep existing filtering. All before-write and before-publication count/hash guards remain. Canonical read-model rebuilds use the same preservation path.
 - Regression: 25 same-model/year duplicate rows from an untouched market must reach beforePublishValidate byte-for-byte; it fails on the original code and passes with the fix. Targeted preservation/quota/dedup tests: 18 passed; typecheck passed.
 - Next: merge after CI, republish Korea from original run 34096977346 artifacts without recrawling. Final live count/audit still unconfirmed. Running five-market queue remains untouched and pinned to its original commit; its later publication failures may require artifact republish too.
+
+
+## 2026-09-09 — параметры прямо в плитках карточки
+
+Повторная форма заменена четырьмя раскрывающимися плитками выпуска/объёма/топлива/мощности во всех карточках. Предзаполнение известных значений, автоматический пересчёт после 600 мс паузы, отмена устаревших ответов, сброс. Основная цена и структура расчёта показывают личный сценарий. Стрелки отстоят от правого края на 20 px, во внутренних списках — 18 px. Алиса остаётся внешней ссылкой. Парсеры и публикация этой веткой не меняются.
+
+Месяц производства передаётся как YYYY-MM без выдуманного дня. Для предзаполнения нужны явные поля производства/подтверждённое свидетельство: legacy productionDate иногда содержит регистрацию и не подходит. Неизвестный месяц остаётся пустым. Исправлен сброс productionDate при ручном расчёте. Для EV/гибридов 30-минутная мощность отдельно от пиковой.
+
+Проверены 8 тестов, TypeScript и production build. Локальная визуальная проверка заблокирована доступом браузера; внешний вид после deployment ещё требуется проверить. Изменение дат в компактных карточках выдачи остаётся отдельным пунктом.
