@@ -266,6 +266,17 @@ if (pickup) {
 
   if (explicitM1) {
     assertProof(customs.vehicleCategory === "M1" && customs.vehicleCategoryAssumed === false, caseFailures, `Explicit M1 pickup category was not preserved: ${candidateLabel(pickup)}`);
+  } else if (explicitCategory === "N1" || tnVed.startsWith("8704")) {
+    assertProof(customs.vehicleCategory === "N1", caseFailures, `N1 pickup was classified as a passenger car: ${candidateLabel(pickup)}`);
+    if (customs.status === "ready") {
+      assertProof(clean(customs.tariffCode).startsWith("8704"), caseFailures, `N1 tariff code is missing: ${candidateLabel(pickup)}`);
+      assertProof(positive(customs.vatRub) > 0 && Number(customs.exciseRub) === 0, caseFailures, `N1 VAT/excise branch is incorrect: ${candidateLabel(pickup)}`);
+      assertProof(positive(customs.utilizationFeeRub) >= 919500, caseFailures, `N1 received a passenger recycling privilege: ${candidateLabel(pickup)}`);
+      assertProof(snapshot.priceIncludesAllCustoms === true && snapshot.priceIncludesUtilizationFee === true && positive(result.totalRub) > 0, caseFailures, `Complete N1 customs did not produce a full quote: ${candidateLabel(pickup)}`);
+    } else {
+      assertProof(Array.isArray(customs.missing) && customs.missing.length > 0, caseFailures, `Incomplete N1 has no missing-input reason: ${candidateLabel(pickup)}`);
+      assertProof(snapshot.priceIncludesAllCustoms !== true && positive(result.totalRub) === 0, caseFailures, `Incomplete N1 received a final quote: ${candidateLabel(pickup)}`);
+    }
   } else {
     const blockedByMissingPower = clean(result.calculationStatus) === "needs_power_data"
       && positive(result.powerHp || pickup.powerHp) === 0
@@ -273,7 +284,7 @@ if (pickup) {
     assertProof(customs.status !== "ready", caseFailures, `Pickup without explicit M1 became customs-ready: ${candidateLabel(pickup)}`);
     assertProof(snapshot.priceIncludesAllCustoms !== true, caseFailures, `Pickup without explicit M1 claims all customs included: ${candidateLabel(pickup)}`);
     assertProof(positive(result.totalRub) === 0, caseFailures, `Pickup without explicit M1 received a public final total: ${candidateLabel(pickup)}`);
-    const expectedMissing = explicitCategory === "N1" || tnVed.startsWith("8704") ? "n1_customs_tariff" : "vehicle_category";
+    const expectedMissing = "vehicle_category";
     const categoryBlocked = customs.status === "needs_data"
       && Array.isArray(customs.missing)
       && customs.missing.includes(expectedMissing);
