@@ -40,3 +40,9 @@ test('fresh K Car evidence is not replayed through the obsolete horsepower witne
  assert.equal(view[1].items[1].value,'1');
  assert.equal(JSON.stringify(raw),original);
  });
+
+test('partially damaged Chinese labels are repaired after phrase translation',()=>{
+ const rows=[{name:'发动机',items:[{name:'发动机型',value:'—'},{name:'车身 控制(ESC/ESP/DSC等)',value:'1'}]}];
+ assert.equal(untranslatedSpecificationFields(rows).length,0);
+ assert.equal(displaySpecificationGroups(rows)[0].items[0].name,'Модель двигателя');
+});

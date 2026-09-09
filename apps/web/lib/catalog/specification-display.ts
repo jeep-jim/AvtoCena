@@ -221,6 +221,7 @@ export function translateSpecificationText(value:string) {
     .replace(/(\d+)挡(?:自动|Автоматическая)/g,"$1-ступенчатая АКПП")
     .replace(/\(个\)/g,", шт.").replace(/\(人\)/g,", чел.");
   for(const [source,target] of ordered) result=result.split(source).join(target);
+  if (Object.hasOwn(exact,result)) return exact[result];
   return result.replace(/等(?=\))/g," и аналоги");
 }
 export function displaySpecificationGroups(groups:SourceSpecificationSnapshot["groups"]):SourceSpecificationSnapshot["groups"] {
