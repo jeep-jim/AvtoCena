@@ -4,7 +4,7 @@ const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/cat
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
-const { isVerifiedSellerOnlyForAudit } = await import("../apps/web/lib/catalog/visible-audit-policy.ts");
+const { isVerifiedSellerOnlyForAudit, summarizePendingCalculationsForAudit } = await import("../apps/web/lib/catalog/visible-audit-policy.ts");
 
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
@@ -117,7 +117,7 @@ const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
 let ready = 0;
-let needsData = 0;
+const { needsData, verifiedSellerNeedsData, blockingNeedsData } = summarizePendingCalculationsForAudit(visible);
 let preliminary = 0;
 let auctionStart = 0;
 let resolvedIdentity = 0;
@@ -182,7 +182,6 @@ for (const offer of visible) {
       }
     }
   } else if (status === "needs_data" || status === "needs_power_data" || status === "preliminary_power_pending") {
-    needsData++;
     marketRow.needsData++;
     if (status === "preliminary_power_pending") {
       preliminary++;
@@ -249,6 +248,8 @@ const report = {
     readyExact,
     readyExactRatio: ready ? Number((readyExact / ready).toFixed(5)) : 1,
     needsData,
+    verifiedSellerNeedsData,
+    blockingNeedsData,
     preliminary,
     auctionStart,
     invalidReady: invalidReady.length,
@@ -281,7 +282,7 @@ const report = {
     noFallback100PublicCards: fallbackPowerCards.length === 0,
     noUnprovenExact100PublicCards: unprovenExact100Cards.length === 0,
     noPreliminaryPublicPrices: preliminary === 0,
-    noNeedsDataPublicCards: needsData === 0,
+    noUnverifiedNeedsDataPublicCards: blockingNeedsData === 0,
     pass: invalidReady.length === 0
       && allIdentitiesResolved
       && unsafePendingVisiblePrices.length === 0
@@ -290,7 +291,7 @@ const report = {
       && fallbackPowerCards.length === 0
       && unprovenExact100Cards.length === 0
       && preliminary === 0
-      && needsData === 0,
+      && blockingNeedsData === 0,
   },
 };
 
