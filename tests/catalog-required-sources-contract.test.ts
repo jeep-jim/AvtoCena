@@ -101,3 +101,13 @@ test("retired and malformed persisted markets fail closed without crashing publi
   assert.equal(isAllowedCatalogSourceId("korea", "encar_direct"), true);
   assert.equal(isAllowedCatalogSourceId("china", "encar_direct"), false);
 });
+
+
+test("Che168 export and lookalike hosts cannot enter domestic collection or publication", () => {
+ for (const host of ["global.che168.com","globalapi.che168.com","che168.com.evil.test","other.che168.com"]) {
+  assert.equal(isAllowedCatalogSourceUrl("china","autohome_used_china_open",`https://${host}/en/detail/59848501`),false);
+ }
+ for (const host of ["www.che168.com","che168.com","m.che168.com","dealers.che168.com"]) {
+  assert.equal(isAllowedCatalogSourceUrl("china","autohome_used_china_open",`https://${host}/dealer/1/59848501.html`),true);
+ }
+});

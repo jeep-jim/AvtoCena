@@ -1,4 +1,5 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
+import { isAllowedCatalogSourceUrl } from "./required-catalog-sources";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
@@ -87,7 +88,8 @@ async function fetchMarkup(url: string, referer?: string) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
   try {
-    const response = await fetch(url, { headers: { ...HEADERS, referer: referer || "https://www.che168.com/" }, redirect: "follow", signal: controller.signal });
+    if (!isAllowedCatalogSourceUrl("china", "autohome_used_china_open", url)) throw new Error("che168_non_domestic_url");
+    const response = await fetch(url, { headers: { ...HEADERS, referer: referer || "https://www.che168.com/" }, redirect: "error", signal: controller.signal });
     const bytes = await response.arrayBuffer();
     return { response, markup: decode(bytes, response.headers.get("content-type") || "") };
   } finally { clearTimeout(timer); }
@@ -105,7 +107,7 @@ function deriveMakeModel(rawTitle: string) {
 }
 
 function priceCny(value: string) {
-  const match = value.match(/(?:￥|¥)?\s*([0-9]+(?:[.,][0-9]+)?)\s*万(?:元)?/i);
+  const match = value.match(/(?:￥|¥)?\s*([0-9]+(?:[.,][0-9]+)?)\s*万(?:元)?(?!公里)/i);
   if (!match) return undefined;
   const number = Number(match[1].replace(",", "."));
   return Number.isFinite(number) && number > 0 ? Math.round(number * 10_000) : undefined;
@@ -120,10 +122,10 @@ function mileage(value: string) {
 
 function specValues(value: string) {
   const liters = numeric(value.match(/([0-9]+(?:[.,][0-9]+)?)\s*[LT]\b/i)?.[1]);
-  const engineCc = numeric(value.match(/([0-9][0-9, ]{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]) || (liters ? Math.round(liters * 1000) : undefined);
+  const engineCc = numeric(value.match(/([0-9][0-9, ]{2,5})\s*(?:cc|cm3|cm³|毫升)/i)?.[1]);
   const powerHp = numeric(value.match(/([0-9]{2,4})\s*(?:马力|hp|ps)/i)?.[1]);
   const powerKw = numeric(value.match(/([0-9]{2,4})\s*kW\b/i)?.[1]);
-  const fuel = /纯电|EV/i.test(value) ? "electric" : /增程/i.test(value) ? "range_extender" : /插电|PHEV/i.test(value) ? "phev" : /混动|双擎|hybrid/i.test(value) ? "hybrid" : /柴油|diesel/i.test(value) ? "diesel" : "petrol";
+  const fuel = /纯电|EV/i.test(value) ? "electric" : /增程/i.test(value) ? "range_extender" : /插电|PHEV/i.test(value) ? "phev" : /混动|双擎|hybrid/i.test(value) ? "hybrid" : /柴油|diesel/i.test(value) ? "diesel" : /汽油|petrol|gasoline/i.test(value) ? "petrol" : "";
   const transmission = /手动|MT\b/i.test(value) ? "manual" : /CVT|无级/i.test(value) ? "cvt" : /DCT|双离合|机器人/i.test(value) ? "robot" : /自动|AT\b/i.test(value) ? "automatic" : "";
   const drive = /四驱|AWD|4WD/i.test(value) ? "4wd" : /后驱|RWD/i.test(value) ? "rwd" : /前驱|FWD/i.test(value) ? "fwd" : /两驱|2WD/i.test(value) ? "2wd" : "";
   const bodyType = /MPV|商务车/i.test(value) ? "minivan" : /SUV|越野/i.test(value) ? "suv" : /旅行/i.test(value) ? "wagon" : /两厢/i.test(value) ? "hatchback" : /跑车|Coupe/i.test(value) ? "coupe" : /轿车|三厢/i.test(value) ? "sedan" : "";
@@ -163,11 +165,11 @@ function listRows(markup: string, listUrl: string) {
     const detailUrl = absoluteUrl(anchor[1], listUrl);
     if (!detailUrl || seen.has(detailUrl) || /(?:carlist|videolist|shop\/dealer\/?$|index_|javascript:)/i.test(detailUrl)) continue;
     if (!/(?:che168\.com).*(?:dealer|car|spec|detail|ershouche).*(?:\d{6,})/i.test(detailUrl)) continue;
-    const previousIndex = index ? anchors[index - 1].index || 0 : 0;
-    const nextIndex = index + 1 < anchors.length ? anchors[index + 1].index || markup.length : markup.length;
-    const start = Math.max(previousIndex, (anchor.index || 0) - 3_500);
-    const end = Math.min(nextIndex + 3_500, (anchor.index || 0) + 10_000);
-    const card = markup.slice(start, end);
+    // A listing card is the boundary: never borrow a neighbour's price/specs.
+    const cardMatch = [...markup.matchAll(/<li\b[^>]*>[\s\S]*?<\/li>/gi)].find(match =>
+      (match.index || 0) <= (anchor.index || 0) && (match.index || 0) + match[0].length > (anchor.index || 0));
+    if (!cardMatch || !isAllowedCatalogSourceUrl("china", "autohome_used_china_open", detailUrl)) continue;
+    const card = cardMatch[0];
     const plain = clean(card);
     if (!/万公里|公里/.test(plain) || !/[0-9.]+\s*万/.test(plain)) continue;
     const title = clean(anchor[2]) || clean(card.match(/<h[1-5][^>]*>([\s\S]*?)<\/h[1-5]>/i)?.[1]) || clean(card.match(/<img[^>]+alt=["']([^"']+)/i)?.[1]);
@@ -181,7 +183,7 @@ function listRows(markup: string, listUrl: string) {
     seen.add(detailUrl);
     rows.push({
       id, detailUrl, title: derived.title, make: derived.make, model: derived.model, year,
-      mileageKm: mileage(plain), price: priceCny(plain), images: cardImages(card, listUrl),
+      mileageKm: mileage(plain), price: priceCny(clean(card.match(/<([a-z][a-z0-9]*)\b[^>]*class=["'][^"']*\bprice\b[^"']*["'][^>]*>([\s\S]*?)<\/\1>/i)?.[2] || "")), images: cardImages(card, listUrl),
       city: clean(plain.match(/[／/|]\s*([\u4e00-\u9fff]{2,8})\s*[0-9.]+\s*万/)?.[1]), ...specs,
     });
   }
@@ -250,3 +252,33 @@ export class Che168DealerAdapter implements CatalogSourceAdapter {
 }
 
 export const che168DealerExactSource = new Che168DealerAdapter();
+
+/** Domestic Che168 collection; never falls back to the export API. */
+export class DomesticChe168Adapter extends Che168DealerAdapter {
+ sourceId = "autohome_used_china_open";
+ normalizeOffer(raw: unknown): VehicleOffer | null {
+  const offer=super.normalizeOffer(raw), row=raw as DealerRow;
+  if (!offer || !isAllowedCatalogSourceUrl("china",this.sourceId,row.detailUrl)) return null;
+  // Do not promote the model's nominal 1.5L label to an exact 1500 cm³.
+  offer.engineCc=row.engineCc;
+  offer.powerHp=row.powerHp;
+  offer.fuel=row.fuel;
+  offer.operational.semanticEvidence={
+   engineCc:{source:"che168_domestic_listing",status:row.engineCc?"exact":"missing",value:row.engineCc,rawValues:[]},
+   powerHp:{source:"che168_domestic_listing",status:row.powerHp?"exact":"missing",value:row.powerHp,rawValues:[]},
+  };
+  return offer;
+ }
+ async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+  const row = offer.operational.raw as DealerRow;
+  if (!isAllowedCatalogSourceUrl("china",this.sourceId,row.detailUrl)) throw new Error("che168_non_domestic_url");
+  // Preserve only photographs bound to this listing. Unknown detail schemas
+  // must not turn neighbouring cars into the gallery or trigger blob uploads.
+  return [...new Set(row.images || [])].slice(0,30).map(url=>({id:"",url,objectKey:"",checksum:"",size:0,mimeType:"image/jpeg"}));
+ }
+ async healthCheck() {
+  try { const page=await this.fetchPage(); return {ok:page.items.length>0,message:"Che168 domestic dealer listings",checkedAt:new Date().toISOString()}; }
+  catch(error) { return {ok:false,message:String(error),checkedAt:new Date().toISOString()}; }
+ }
+}
+export const domesticChe168Source = new DomesticChe168Adapter();

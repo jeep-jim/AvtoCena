@@ -31,7 +31,7 @@ import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { prestigeJapanExactSource } from "./prestige-japan-exact-source";
 import { guaziChinaExactSource } from "./china-exact-sources";
-import { che168GlobalExactSource } from "./che168-global-exact-source";
+import { domesticChe168Source } from "./che168-dealer-source";
 import { autohomeNewExactSource } from "./autohome-new-exact-source";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { mobileDeExactSource } from "./mobile-de-exact-source";
@@ -103,7 +103,7 @@ const completeSources = [
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   prepareSource(carvectorJapanCurrentSource),
   guaziCollectionSource,
-  che168GlobalExactSource,
+  domesticChe168Source,
   autohomeNewExactSource,
   prestigeJapanExactSource,
   autoscoutEuropeExactSource,

@@ -1,3 +1,4 @@
+import { StickyOfferColumn } from "@/components/catalog/StickyOfferColumn";
 import { confirmedProductionMonth } from "@/lib/catalog/production-month";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
@@ -386,7 +387,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const primarySpecs = displayOnlySpecs.slice(0, 4);
   const secondarySpecs = displayOnlySpecs.slice(4);
 
-  return <main data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
+  return <main data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
@@ -400,7 +401,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
         </div>
 
-        <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
+        <StickyOfferColumn>
           <InlineOfferParameters key={offer.id} offerId={offer.id} initial={{year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),engineCc:String(offer.engineCc||""),fuel:offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),hybridKind:offer.powertrainKind||"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold uppercase">Цена продавца</p><p className="mt-2 text-3xl font-black">{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
@@ -428,7 +429,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <OfferDesktopActions />
           </aside>
           </InlineOfferParameters>
-        </div>
+        </StickyOfferColumn>
       </div>
 
       <OfferMobileActions />

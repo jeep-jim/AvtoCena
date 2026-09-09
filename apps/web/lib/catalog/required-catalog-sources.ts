@@ -82,6 +82,7 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
   try {
     const actual = new URL(String(urlValue || ""));
     const canonical = new URL(allowed.canonicalUrl);
+    if (market === "china" && id === "autohome_used_china_open" && !["che168.com", "www.che168.com", "m.che168.com", "dealers.che168.com"].includes(actual.hostname.toLowerCase())) return false;
     return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);
   } catch {
     return false;
