@@ -1,13 +1,7 @@
-name: Catalog V6 · Che168 Global exact readiness
+name: Retired · Che168 Global readiness
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-che168-exact-readiness.yml"
-      - "apps/web/lib/catalog/che168-global-exact-source.ts"
-      - "apps/web/lib/catalog/importer.ts"
-      - "scripts/catalog-simple-source-market.mjs"
 
 permissions:
   contents: read
@@ -18,6 +12,9 @@ concurrency:
 
 jobs:
   readiness:
+    # Global is not an approved substitute for domestic Che168. Keep historical
+    # checks readable, but never execute this retired collector.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
