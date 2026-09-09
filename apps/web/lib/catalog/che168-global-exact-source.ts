@@ -1,4 +1,4 @@
-import { che168BoundPageParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
+import { che168BoundPageParameters, che168BoundApiParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
 import crypto from "node:crypto";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -163,10 +163,16 @@ function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che16
   return { value: unique[0], rawValues, status: "exact" };
 }
 
+function che168Fuel(value: unknown) {
+  // Literal Russian label returned by Che168 specparam for Range Extender.
+  const label = text(value);
+  return canonicalSourceFuel(/^Продл[её]нный запас хода$/i.test(label) ? 'Range Extender' : label);
+}
+
 function fuelEvidence(...raw: unknown[]): Che168FuelEvidence {
   const rawValues = [...new Set(raw.map(text).filter(Boolean))];
   if (!rawValues.length) return { rawValues, status: "missing" };
-  const canonical = rawValues.map(canonicalSourceFuel);
+  const canonical = rawValues.map(che168Fuel);
   if (canonical.some((value) => !value)) return { rawValues, status: "ambiguous" };
   const unique = [...new Set(canonical as string[])];
   if (unique.length !== 1) return { rawValues, status: "conflict" };
@@ -225,6 +231,9 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   accessMode = "public_json" as const;
   private readonly deviceId = crypto.randomUUID();
   private parameterPageBlocked: string | null = null;
+  private specificationApiBlocked = false;
+  private specificationOptionsBlocked = false;
+  private specificationCache = new Map<number, Promise<{parameters: any; options: any}>>();
 
   private params(extra: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -360,8 +369,36 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     return result;
   }
 
+  private specificationTables(specId: number) {
+    const existing = this.specificationCache.get(specId);
+    if (existing) return existing;
+    const task = (async () => {
+      const parameters = await this.getJson<any>(`${API_BASE}/api/v1/specparam?${this.params({specid:specId,language:"ru"})}`);
+      const options = this.specificationOptionsBlocked ? null : await this.getJson<any>(`${API_BASE}/api/v1/specconfig?${this.params({specid:specId,language:"ru"})}`).catch(error => {
+        if (/http_(401|403|429)/.test(String(error))) this.specificationOptionsBlocked = true;
+        return null;
+      });
+      return {parameters:{returncode:0,result:parameters.result},options:options ? {returncode:0,result:options.result} : null};
+    })();
+    if (this.specificationCache.size >= 512) this.specificationCache.delete(this.specificationCache.keys().next().value!);
+    this.specificationCache.set(specId, task);
+    return task;
+  }
+
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const detail = await this.fetchDetail(offer);
+    return this.enrichDetail(offer, await this.fetchDetail(offer));
+  }
+
+  async refreshSavedSpecifications(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const detail = (offer.operational?.raw as any)?.detail as Che168GlobalDetail | undefined;
+    if (offer.sourceId !== this.sourceId || !offer.operational?.exactDetail
+      || String(detail?.infoid) !== String(offer.sourceOfferId) || !detail?.specid) {
+      throw new Error("che168_saved_detail_identity_unverified");
+    }
+    return this.enrichDetail(offer, detail);
+  }
+
+  private async enrichDetail(offer: VehicleOffer, detail: Che168GlobalDetail): Promise<CatalogImage[]> {
     const id = String(offer.sourceOfferId);
     const make = text(detail.brandname) || offer.make;
     const model = modelOf(make, text(detail.seriesname)) || offer.model;
@@ -370,8 +407,18 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const price = positiveNumber(detail.price);
     let pageParameters: ReturnType<typeof che168BoundPageParameters> = null;
     let parameterStatus = Number(detail.specid) > 0 ? "not_requested" : "spec_id_missing";
+    if (Number(detail.specid) > 0 && !this.specificationApiBlocked) {
+      try {
+        const tables = await this.specificationTables(Number(detail.specid));
+        pageParameters = che168BoundApiParameters(tables.parameters, tables.options, id, Number(detail.specid));
+        if (pageParameters) parameterStatus = tables.options ? "received_api" : "received_api_parameters_only";
+      } catch (error) {
+        parameterStatus = "specification_api_unavailable";
+        if (/http_(401|403|429)/.test(String(error))) this.specificationApiBlocked = true;
+      }
+    }
     // Public page carries a table bound to both this listing and this spec ID.
-    if (Number(detail.specid) > 0 && !this.parameterPageBlocked) {
+    if (!pageParameters && Number(detail.specid) > 0 && !this.parameterPageBlocked && !this.specificationApiBlocked) {
       const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
       parameterStatus = response ? `http_${response.status}` : "request_failed";
       if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
@@ -385,8 +432,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       }
     }
     let detailEngine = text(detail.engine);
-    const tableFuel = pageParameters?.fuelValues.map(canonicalSourceFuel).filter(Boolean) || [];
-    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => fuel === canonicalSourceFuel(detail.fuelname));
+    const tableFuel = pageParameters?.fuelValues.map(che168Fuel) || [];
+    const tableFuelConsistent = tableFuel.length > 0 && tableFuel.every(fuel => Boolean(fuel) && fuel === che168Fuel(detail.fuelname));
     if (pageParameters && tableFuelConsistent) {
       if (pageParameters.engineCc.status === "exact") detailEngine += ` ${pageParameters.engineCc.value} cc`;
       if (pageParameters.powerHp.status === "exact") detailEngine += ` ${pageParameters.powerHp.value} hp`;
@@ -463,7 +510,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         capturedAt: new Date().toISOString(), groups: pageParameters.groups,
       } : undefined,
       specificationCollection: {
-        status: this.parameterPageBlocked || parameterStatus,
+        status: pageParameters ? parameterStatus : this.parameterPageBlocked || parameterStatus,
+        language: parameterStatus.startsWith("received_api") ? "ru" : "en",
         groupCount: pageParameters?.groups.length || 0,
         fieldCount: pageParameters?.groups.reduce((total, group) => total + group.items.length, 0) || 0,
       },
@@ -474,7 +522,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },
         powerHp: { source: pageParameters && tableFuelConsistent ? "che168_global_carinfo_and_bound_parameters" : "che168_global_carinfo", ...evidence.powerHp },
       },
-      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters, boundPageStatus: this.parameterPageBlocked || (pageParameters ? "bound_parameters_received" : "parameters_unavailable"), detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
+      raw: { listing: (offer.operational?.raw as any)?.listing, detail, boundPageParameters: pageParameters ? {...pageParameters,groups:undefined} : null, boundPageStatus: this.parameterPageBlocked || (pageParameters ? "bound_parameters_received" : "parameters_unavailable"), detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
     };
     const engineEvidenceReady = offer.powertrainKind === "electric" || evidence.engineCc.status === "exact";
     if (evidence.year.status !== "exact" || evidence.fuel.status !== "exact" || !engineEvidenceReady || evidence.powerHp.status !== "exact") {
