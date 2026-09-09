@@ -321,7 +321,8 @@ async function auditCandidate(sourceOffer) {
   }
 }
 
-await acquirePublishLock();
+const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+if (!dryRun) await acquirePublishLock();
 try {
 const generation = await readGenerationFiles();
 // A failed/empty source collection is not a request to reinterpret all of the
@@ -454,6 +455,19 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
+const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
+const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  generated:generation.offers.length, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
+  selected:selected.length, canonical:canonicalTargetPreview.offers.length,
+  calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
+  sellerOnly:canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
+  rejectionReasons,
+  canonicalRejections:canonicalTargetPreview.qualityRejected.reduce((out,offer)=>{ const key=String(offer.calculationStatus);out[key]=(out[key]||0)+1;return out;},{}),
+  lostRetained:currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).slice(0,10).map(offer=>({id:offer.id,sourceId:offer.sourceId,status:offer.calculationStatus})),
+};
+await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
+console.log(JSON.stringify(preflight));
+if (dryRun) process.exit(0);
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
