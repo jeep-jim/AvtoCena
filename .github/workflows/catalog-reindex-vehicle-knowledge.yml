@@ -52,7 +52,9 @@ jobs:
         run: |
           node --import tsx --input-type=module <<'JS'
           import fs from 'node:fs';
-          import { CATALOG_PRODUCTION_WRITES_PAUSED } from './apps/web/lib/catalog/storage.ts';
+          import storage from './apps/web/lib/catalog/storage.ts';
+          const { CATALOG_PRODUCTION_WRITES_PAUSED } = storage;
+          if (typeof CATALOG_PRODUCTION_WRITES_PAUSED !== 'boolean') throw new Error('Missing production write policy');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `allowed=${!CATALOG_PRODUCTION_WRITES_PAUSED}\n`);
           if (CATALOG_PRODUCTION_WRITES_PAUSED) console.log('Production reindex skipped: active publication policy pauses legacy writes.');
           JS
