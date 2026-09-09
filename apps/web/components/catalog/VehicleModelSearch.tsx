@@ -223,10 +223,21 @@ function useCatalogFilterDependentUi() {
       if (frame) return;
       frame = window.requestAnimationFrame(refresh);
     };
-    const delayedRefresh = () => window.setTimeout(requestRefresh, 260);
+    let delay = 0;
+    const delayedRefresh = (event: Event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!target?.closest(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")) return;
+      window.clearTimeout(delay);
+      delay = window.setTimeout(requestRefresh, 260);
+    };
 
     refresh();
-    const observer = new MutationObserver(requestRefresh);
+    const observer = new MutationObserver((records) => {
+      if (records.some(record => {
+        const target = record.target instanceof Element ? record.target : record.target.parentElement;
+        return Boolean(target?.closest(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")) || Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(".ac-catalog-filter-panel, .ac-mobile-filter-sheet") || node.querySelector(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")));
+      })) requestRefresh();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener("input", delayedRefresh, true);
     document.addEventListener("change", delayedRefresh, true);
@@ -236,6 +247,7 @@ function useCatalogFilterDependentUi() {
 
     return () => {
       catalogFilterDependentUiMounted = false;
+      window.clearTimeout(delay);
       facetController?.abort();
       observer.disconnect();
       document.removeEventListener("input", delayedRefresh, true);

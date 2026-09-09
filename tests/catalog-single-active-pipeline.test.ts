@@ -17,7 +17,7 @@ function writesCatalogMarkets(source: string) {
   return /catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
-test("only the owner-approved weekly six-market writer has a schedule; legacy writers stay paused", () => {
+test("catalog writers stay unscheduled until the five-market publication is qualified", () => {
   const scheduledWriters = fs.readdirSync(root)
     .filter((name) => /^catalog.*\.ya?ml$/i.test(name))
     .filter((name) => {
@@ -25,7 +25,7 @@ test("only the owner-approved weekly six-market writer has a schedule; legacy wr
       return hasSchedule(source) && writesCatalogMarkets(source);
     })
     .sort();
-  assert.deepEqual(scheduledWriters, ["catalog-weekly-six-markets.yml"]);
+  assert.deepEqual(scheduledWriters, []);
 
   // Cleanup is paused too, so the frozen catalog cannot lose generations while
   // the new two-week retention contract is being repaired and verified.
