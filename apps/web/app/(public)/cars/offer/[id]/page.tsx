@@ -1,6 +1,6 @@
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { SellerPrice } from "@/components/catalog/SellerPrice";
-import { OfferManualCalculation } from "@/components/catalog/OfferManualCalculation";
+import { OfferSpecificationResearch } from "@/components/catalog/OfferSpecificationResearch";
 import { OfferSpecificationsDisclosure } from "@/components/catalog/OfferSpecificationsDisclosure";
 import { offerSpecificationGroups } from "@/lib/catalog/offer-specification-groups";
 import { assessJapanExportRestriction } from "@/lib/catalog/japan-export-restriction";
@@ -13,7 +13,6 @@ import { redirect } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { EditablePowerTile } from "@/components/catalog/EditablePowerTile";
-import { VehicleResearchLink } from "@/components/catalog/VehicleResearchLink";
 import { OfferContactActionsStyles, OfferCreditCalculator, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
@@ -411,8 +410,8 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
               <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
-              {sellerPricing ? <OfferManualCalculation offerId={offer.id} year={offer.year} /> : !selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
-              <VehicleResearchLink identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
+              {!sellerPricing && !selectionRequired ? <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} powerDataConfidence={raw.powerDataConfidence} scenarioSource={powerScenario?.source || null} fullWidth /> : null}
+              <OfferSpecificationResearch offerId={offer.id} manual={sellerPricing} identity={{ make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : typeof offer.operational?.modelCode === "string" ? offer.operational.modelCode : undefined }} />
               {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
               <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             </div>

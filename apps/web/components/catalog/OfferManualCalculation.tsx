@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { OfferCalculationForm, type OfferCalculationDraft } from "./OfferCalculationForm";
 import type { VehicleResearchIdentity } from "../../lib/catalog/vehicle-research-link";
-export function OfferManualCalculation({offerId,year,researchIdentity}:{offerId:string;year:number;researchIdentity?:VehicleResearchIdentity}) {
+export function OfferManualCalculation({offerId,year,researchIdentity,initial,preview=false}:{offerId:string;year:number;researchIdentity?:VehicleResearchIdentity;initial?:Partial<OfferCalculationDraft>;preview?:boolean}) {
   const [pending,setPending]=useState(false), [error,setError]=useState("");
   const [result,setResult]=useState<{totalRub:number}|null>(null);
   async function calculate(draft:OfferCalculationDraft) {
@@ -16,8 +16,8 @@ export function OfferManualCalculation({offerId,year,researchIdentity}:{offerId:
     finally {setPending(false);}
   }
   return <div className="py-3">
-    <p className="mb-3 text-sm text-[var(--ac-muted)]">Точных данных для автоматического расчёта недостаточно.</p>
-    <OfferCalculationForm initial={{year:String(year)}} researchIdentity={researchIdentity} onCalculate={calculate} onDraftChange={()=>{setResult(null);setError("");}} pending={pending} error={error}/>
+    <p className="mb-3 text-sm text-[var(--ac-muted)]">{preview ? "Проверьте подставленные параметры перед расчётом. Это личный сценарий, общая база не изменится." : "Точных данных для автоматического расчёта недостаточно."}</p>
+    <OfferCalculationForm initial={{year:String(year),...initial}} researchIdentity={researchIdentity} onCalculate={calculate} onDraftChange={()=>{setResult(null);setError("");}} pending={pending} error={error}/>
     {result ? <div role="status" className="mt-4 border-t border-[var(--ac-border)] pt-4"><p className="text-xs font-bold text-[var(--ac-muted)]">По вашим данным · ориентир под ключ</p><p className="mt-1 text-3xl font-black">{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Характеристики и итоговую стоимость подтвердит менеджер.</p></div>:null}
   </div>;
 }
