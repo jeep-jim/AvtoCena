@@ -6,17 +6,6 @@ function setImportant(element: HTMLElement, property: string, value: string) {
   element.style.setProperty(property, value, "important");
 }
 
-function clearAdaptiveStyle(element: HTMLElement) {
-  for (const property of ["position", "left", "right", "top", "bottom", "width", "max-height", "overflow-y", "z-index", "margin"]) {
-    element.style.removeProperty(property);
-  }
-  const list = element.querySelector<HTMLElement>(":scope > .ac-hide-scrollbar");
-  list?.style.removeProperty("max-height");
-  list?.style.removeProperty("overflow-y");
-  delete element.dataset.acAdaptive;
-  delete element.dataset.acDropDirection;
-}
-
 function compactRangeCopy() {
   document.querySelectorAll<HTMLInputElement>(".ac-catalog-filter-panel .ac-range-input-box input, .ac-mobile-filter-sheet .ac-range-input-box input").forEach((input) => {
     const aria = input.getAttribute("aria-label") || "";
@@ -97,21 +86,10 @@ function closeRangeMenus(except?: HTMLElement) {
   });
 }
 
-function positionRangeMenu(menu: HTMLElement, box: HTMLElement) {
-  const rect = box.getBoundingClientRect();
-  const sheet = box.closest<HTMLElement>(".ac-mobile-filter-sheet");
-  const scrollHost = sheet ? box.closest<HTMLElement>(".ac-mobile-filter-sheet > .ac-hide-scrollbar") : null;
-  const boundary = (scrollHost || sheet)?.getBoundingClientRect();
-  const topBoundary = boundary ? Math.max(8, boundary.top + 5) : 8;
-  const bottomBoundary = boundary ? Math.min(window.innerHeight - 8, boundary.bottom - 5) : window.innerHeight - 8;
-  const gap = 5;
-  const below = Math.max(0, bottomBoundary - rect.bottom - gap);
-  const above = Math.max(0, rect.top - topBoundary - gap);
-  const desired = Math.min(286, Math.max(92, menu.scrollHeight || 220));
-  const openUp = below < Math.min(desired, 170) && above > below;
-  const available = Math.max(92, openUp ? above : below);
-  setImportant(menu, "max-height", `${Math.min(desired, available)}px`);
-  menu.classList.toggle("is-up", openUp);
+function positionRangeMenu(menu: HTMLElement) {
+  // Fixed downward flow: no measurement/flip after the first painted frame.
+  menu.classList.remove("is-up");
+  setImportant(menu, "max-height", "220px");
 }
 
 function ensureRangeFieldMenu(box: HTMLElement, title: string) {
@@ -172,7 +150,7 @@ function ensureRangeFieldMenu(box: HTMLElement, title: string) {
       closeRangeMenus(menu);
       menu.classList.toggle("is-open", willOpen);
       toggle?.setAttribute("aria-expanded", willOpen ? "true" : "false");
-      if (willOpen) window.requestAnimationFrame(() => positionRangeMenu(menu!, box));
+      if (willOpen) positionRangeMenu(menu);
     });
   }
 }
@@ -271,7 +249,8 @@ function updateMobileCloseAction(sheet: HTMLElement) {
   close.dataset.acMobileClose = "1";
   const apply = mobileHasSelectedParameter(sheet);
   close.classList.toggle("ac-mobile-apply", apply);
-  close.textContent = apply ? "✓" : "×";
+  const caption = apply ? "✓" : "×";
+  if (close.textContent !== caption) close.textContent = caption;
   close.setAttribute("aria-label", apply ? "Применить и закрыть" : "Закрыть");
   close.setAttribute("title", apply ? "Применить" : "Закрыть");
 }
@@ -328,7 +307,7 @@ function ensureClearControls() {
 }
 
 function decorateCatalogCounts() {
-  document.querySelectorAll<HTMLElement>(".ac-catalog-page *").forEach((element) => {
+  document.querySelectorAll<HTMLElement>(".ac-catalog-page p, .ac-catalog-page h1, .ac-catalog-page h2, .ac-catalog-page [data-catalog-count]").forEach((element) => {
     if (element.dataset.acCountPulse === "1") return;
     const ownText = Array.from(element.childNodes)
       .filter((node) => node.nodeType === Node.TEXT_NODE)
@@ -346,54 +325,6 @@ function decorateCatalogCounts() {
   });
 }
 
-function positionMobileDropdown(dropdown: HTMLElement) {
-  const sheet = dropdown.closest<HTMLElement>(".ac-mobile-filter-sheet");
-  if (!sheet || window.innerWidth >= 1024) {
-    if (dropdown.dataset.acAdaptive === "1") clearAdaptiveStyle(dropdown);
-    return;
-  }
-
-  const anchor = dropdown.parentElement as HTMLElement | null;
-  if (!anchor) return;
-  const scrollHost = anchor.closest<HTMLElement>(".ac-mobile-filter-sheet > .ac-hide-scrollbar");
-  const anchorRect = anchor.getBoundingClientRect();
-  const boundaryRect = (scrollHost || sheet).getBoundingClientRect();
-  const viewportTop = Math.max(8, boundaryRect.top + 6);
-  const viewportBottom = Math.min(window.innerHeight - 8, boundaryRect.bottom - 6);
-  const gap = 6;
-  const below = Math.max(0, viewportBottom - anchorRect.bottom - gap);
-  const above = Math.max(0, anchorRect.top - viewportTop - gap);
-  const measured = Math.max(120, Math.min(380, dropdown.scrollHeight || 320));
-  const openUp = below < Math.min(measured, 210) && above > below;
-  const available = Math.max(112, openUp ? above : below);
-  const maxHeight = Math.min(measured, available, 380);
-
-  dropdown.dataset.acAdaptive = "1";
-  dropdown.dataset.acDropDirection = openUp ? "up" : "down";
-  setImportant(dropdown, "position", "absolute");
-  setImportant(dropdown, "left", "0");
-  setImportant(dropdown, "right", "0");
-  setImportant(dropdown, "width", "100%");
-  setImportant(dropdown, "max-height", `${Math.round(maxHeight)}px`);
-  setImportant(dropdown, "overflow-y", "hidden");
-  setImportant(dropdown, "z-index", "10090");
-  setImportant(dropdown, "margin", "0");
-  if (openUp) {
-    setImportant(dropdown, "top", "auto");
-    setImportant(dropdown, "bottom", `calc(100% + ${gap}px)`);
-  } else {
-    setImportant(dropdown, "bottom", "auto");
-    setImportant(dropdown, "top", `calc(100% + ${gap}px)`);
-  }
-
-  const list = dropdown.querySelector<HTMLElement>(":scope > .ac-hide-scrollbar");
-  if (list) {
-    const hasSearch = Boolean(dropdown.querySelector(":scope > div:not(.ac-hide-scrollbar) input"));
-    setImportant(list, "max-height", `${Math.max(86, Math.round(maxHeight - (hasSearch ? 56 : 12)))}px`);
-    setImportant(list, "overflow-y", "auto");
-  }
-}
-
 export function CatalogFilterUiEnhancer() {
   useEffect(() => {
     let frame = 0;
@@ -403,8 +334,6 @@ export function CatalogFilterUiEnhancer() {
       decorateRangeControls();
       decorateFieldStates();
       ensureClearControls();
-      decorateCatalogCounts();
-      document.querySelectorAll<HTMLElement>(".ac-mobile-filter-sheet .ac-filter-dropdown").forEach(positionMobileDropdown);
     };
     const requestRefresh = () => {
       if (frame) return;
@@ -416,14 +345,21 @@ export function CatalogFilterUiEnhancer() {
       closeRangeMenus();
     };
 
+    decorateCatalogCounts();
     refresh();
-    const observer = new MutationObserver(requestRefresh);
+    const observer = new MutationObserver((records) => {
+      // Observe mounts, but ignore unrelated card/image/loading mutations.
+      if (records.some(record => {
+        const target = record.target instanceof Element ? record.target : record.target.parentElement;
+        if (target?.closest(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")) return true;
+        return Array.from(record.addedNodes).some(node => node instanceof Element && (node.matches(".ac-catalog-filter-panel, .ac-mobile-filter-sheet") || node.querySelector(".ac-catalog-filter-panel, .ac-mobile-filter-sheet")));
+      })) requestRefresh();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener("input", requestRefresh, true);
     document.addEventListener("change", requestRefresh, true);
     document.addEventListener("pointerdown", closeMenus, true);
     window.addEventListener("resize", requestRefresh);
-    window.addEventListener("scroll", requestRefresh, true);
 
     return () => {
       observer.disconnect();
@@ -431,7 +367,6 @@ export function CatalogFilterUiEnhancer() {
       document.removeEventListener("change", requestRefresh, true);
       document.removeEventListener("pointerdown", closeMenus, true);
       window.removeEventListener("resize", requestRefresh);
-      window.removeEventListener("scroll", requestRefresh, true);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);

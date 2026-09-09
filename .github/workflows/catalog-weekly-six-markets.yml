@@ -1,7 +1,7 @@
 name: Catalog · Weekly six-market collection and publication
 on:
-  schedule:
-    - cron: '0 18 * * 0'
+  # Schedule held after partial five-market publication; Japan feed is not qualified.
+  # Previous window: Sunday 18:00 UTC. Restore only after all market gates pass.
   workflow_dispatch:
   workflow_run:
     workflows: [Deploy to Yandex Cloud]

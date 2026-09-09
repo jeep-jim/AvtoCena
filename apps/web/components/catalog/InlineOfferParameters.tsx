@@ -5,9 +5,20 @@ import { validateCustomerParameters } from "../../lib/catalog/customer-parameter
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
 const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
-function Field({label,value,change,options=[],min,max}:{label:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number}) {
+function Field({label,value,change,options=[],min,max,searchQuery}:{label:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
- return <label className="block text-xs font-semibold">{label}<input aria-label={label} type="number" inputMode="decimal" value={value} min={min} max={max} step="any" list={id} onChange={e=>change(e.target.value)} className="mt-2 min-h-11 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 text-sm text-[var(--ac-text)]"/><datalist id={id}>{options.map(n=><option key={n} value={n}/>)}</datalist></label>;
+ const [choosing,setChoosing]=useState(false);
+ return <div className="text-xs font-semibold">
+  <label htmlFor={id}>{label}</label>
+  <div className="mt-2 flex min-h-11 overflow-hidden rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)]">
+   <input id={id} aria-label={label} type="number" inputMode="decimal" value={value} min={min} max={max} step="any" onFocus={()=>setChoosing(true)} onChange={e=>change(e.target.value)} className="min-w-0 flex-1 bg-transparent px-3 py-2 text-base text-[var(--ac-text)]"/>
+   {options.length ? <button type="button" aria-label={`Выбрать: ${label}`} aria-expanded={choosing} aria-controls={`${id}-choices`} onClick={()=>setChoosing(!choosing)} className="min-h-11 min-w-11 shrink-0 px-3"><ChevronDown size={16} aria-hidden/></button> : null}
+   {searchQuery ? <a href={`https://yandex.ru/search/?text=${encodeURIComponent(searchQuery)}`} target="_blank" rel="noopener noreferrer" aria-label={`Найти: ${label}`} title="Найти в Яндексе с Алисой. Проверьте источник и модификацию." className="flex min-h-11 min-w-11 shrink-0 items-center justify-center"><img src="/brands/alice.svg" alt="" width={22} height={22}/></a> : null}
+  </div>
+  {choosing && options.length ? <div id={`${id}-choices`} className="mt-2 grid max-h-44 grid-cols-2 gap-1 overflow-y-auto" aria-label={`Варианты: ${label}`}>
+   {options.map(n=><button key={n} type="button" aria-pressed={value===String(n)} onClick={()=>{change(String(n));setChoosing(false);}} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-2 text-left text-sm">{n.toLocaleString("ru-RU")}</button>)}
+  </div> : null}
+ </div>;
 }
 function EngineIcon() {
  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>;
@@ -31,7 +42,7 @@ function Tile({label,value,icon,children,wide=false}:{label:string;value:string;
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean}) {
+export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext=""}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
@@ -54,7 +65,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId]);
- const field=(key:string,label:string,options:number[]=[],min?:number,max?:number)=><Field label={label} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max}/>;
+ const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string)=><Field label={label} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
  return <div className={`ac-inline-parameters ${dirty?"ac-personal-parameters":""}`}>
   {!dirty?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
    <p className="text-xs font-bold uppercase tracking-widest">По вашим параметрам</p>
@@ -73,6 +84,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
    </Tile>
    <Tile label="Объём двигателя" value={draft.fuel==="electric"?"Без ДВС":draft.engineCc?`${Number(draft.engineCc).toLocaleString("ru-RU")} см³`:"Указать объём"} icon={<EngineIcon/>}>
     {draft.fuel==="electric"?<p className="text-xs">Для электромобиля объём ДВС не требуется.</p>:field("engineCc","Объём, см³",[660,998,1197,1498,1598,1998,2498,2998],300,10000)}
+    {draft.fuel!=="electric" ? <p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите точный объём или введите свой. Например, 1,5 л в названии не заменяет объём в см³ из документов.</p> : null}
    </Tile>
    <Tile label="Топливо" value={fuels.find(([key])=>key===draft.fuel)?.[1]||"Указать топливо"} icon={<Fuel size={16}/>}>
     {fuels.map(([key,label])=><button type="button" key={key} aria-pressed={draft.fuel===key} onClick={()=>change("fuel",key)} className="block min-h-10 w-full rounded-lg px-3 text-left text-xs hover:bg-[var(--ac-surface)]">{label}</button>)}
@@ -81,12 +93,15 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
    <Tile label="Мощность" value={draft.powerHp?`${draft.powerHp} л.с.`:"Указать мощность"} icon={<Zap size={16}/>}>
     {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
    </Tile>
-   {showCommercial ? <Tile wide label="Категория и масса" value={draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
+   {showCommercial ? <Tile wide label="Категория и масса" value={draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : isPickup ? "M1 · Легковой (Пикап)" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     <p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС. N1 — грузовой расчёт по ТН ВЭД 8704. Выбор применяется только к вашему расчёту.</p>
-    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">M1 · Легковой</option></select></label>
+    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">{isPickup ? "M1 · Легковой (Пикап)" : "M1 · Легковой"}</option></select></label>
     {draft.vehicleCategory === "N1" ? <>
-      {field("grossVehicleWeightKg","Полная разрешённая масса, кг",[],1,3500)}
-      {field("transportToBorderRub","Доставка до границы РФ, ₽",[],0,10000000)}
+      {field("grossVehicleWeightKg","Полная разрешённая масса, кг",[2500,2800,3000,3200,3500],1,3500,`${researchContext} ${draft.year} ${draft.engineCc} см³ ${draft.fuel} полная разрешённая максимальная масса GVWR кг технические характеристики`)}
+      <p className="text-xs leading-5 text-[var(--ac-muted)]">В списке примеры значений, а не характеристики этого авто. Выберите или введите массу из документов; значок Алисы поможет найти данные вашей модификации.</p>
+      {field("transportToBorderRub","Доставка до границы РФ, ₽",[],0,10000000,`${researchContext} доставка автомобиля до границы России стоимость перевозки маршрут`)}
+      <div className="flex flex-wrap gap-2"><button type="button" aria-pressed={!draft.transportToBorderRub} onClick={()=>change("transportToBorderRub","")} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-3 text-xs">По настройкам рынка</button><button type="button" aria-pressed={draft.transportToBorderRub==="0"} onClick={()=>change("transportToBorderRub","0")} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-3 text-xs">Уже включена в цену · 0 ₽</button></div>
+      <p className="text-xs leading-5 text-[var(--ac-muted)]">Или введите сумму из предложения перевозчика. Результат поиска — ориентир, не подтверждённый тариф.</p>
       <p className="text-xs leading-5 text-[var(--ac-muted)]">Доставка входит в таможенную стоимость N1 и заменяет строку логистики в этом расчёте. Пустое поле — расходы рынка; 0 — доставка включена в цену.</p>
       <p className="text-xs leading-5 text-[var(--ac-muted)]">Максимальная масса с людьми и грузом (GVWR). Снаряжённая масса и грузоподъёмность не подходят.</p>
       {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}

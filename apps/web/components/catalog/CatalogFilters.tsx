@@ -258,6 +258,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const electricOnly = draft.fuel === "electric";
 
   useEffect(() => {
+    if (mobileOpen) return;
     setDraft(draftFromInitial(initial));
     const nextSort = initialSort(initial.sort || "");
     setSortKey(nextSort.key);
@@ -265,6 +266,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [formKey]);
 
   useEffect(() => {
+    if (mobileOpen) return; // Apply the complete mobile selection once the sheet closes.
     const nextInitial = draftFromInitial(initial);
     const initialSorting = initialSort(initial.sort || "");
     const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
@@ -274,7 +276,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       router.replace(nextQuery ? `/cars?${nextQuery}` : "/cars", { scroll: false });
     }, 180);
     return () => window.clearTimeout(timer);
-  }, [draft, sortKey, sortDirection, formKey, initial, router]);
+  }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
 
   useEffect(() => {
     if (!electricOnly) { setElectricFacets(null); return; }
@@ -285,11 +287,27 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
   useEffect(() => {
     if (!mobileOpen) return;
-    const old = document.body.style.overflow;
+    const body = document.body;
+    const html = document.documentElement;
+    const scrollY = window.scrollY;
+    const saved = { overflow: body.style.overflow, position: body.style.position, top: body.style.top, width: body.style.width, htmlOverflow: html.style.overflow, scrollBehavior: html.style.scrollBehavior };
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setMobileOpen(false); };
-    document.body.style.overflow = "hidden";
+    // Fixed body also stops background scrolling in mobile Safari.
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    html.style.overflow = "hidden";
     window.addEventListener("keydown", escape);
-    return () => { document.body.style.overflow = old; window.removeEventListener("keydown", escape); };
+    return () => {
+      body.style.overflow = saved.overflow; body.style.position = saved.position;
+      body.style.top = saved.top; body.style.width = saved.width;
+      html.style.overflow = saved.htmlOverflow;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = saved.scrollBehavior;
+      window.removeEventListener("keydown", escape);
+    };
   }, [mobileOpen]);
 
   const activeFacets = electricOnly ? electricFacets || facets : facets;
@@ -367,9 +385,9 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
     <button type="button" onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
-    {mobileOpen ? <div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
+    {mobileOpen ? <div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black uppercase tracking-[.15em] text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
-      <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto px-4 pb-4">
+      <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
@@ -406,7 +424,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-mobile-filter-section__title{margin:0 0 9px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-muted)}
       @media(max-width:1023px){
         .ac-mobile-filter-sheet .ac-filter-control,.ac-mobile-filter-sheet .ac-sort-control{min-height:52px;height:52px;border-radius:15px}
-        .ac-mobile-filter-sheet .ac-filter-dropdown{position:static!important;inset:auto!important;margin-top:6px;background:var(--ac-surface-3);box-shadow:none!important;border:1px solid var(--ac-border)!important}
+        .ac-mobile-filter-sheet .ac-filter-dropdown{position:static!important;max-height:320px;inset:auto!important;margin-top:6px;background:var(--ac-surface-3);box-shadow:none!important;border:1px solid var(--ac-border)!important}
         .ac-mobile-filter-sheet .relative:has(>.ac-filter-dropdown){z-index:auto!important}
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option{background:transparent}
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option.is-active{background:rgba(255,53,61,.12);color:#ff5962}

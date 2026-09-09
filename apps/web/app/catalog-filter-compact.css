@@ -516,28 +516,23 @@ html[data-theme="light"] .ac-filter-chip {
     height: 38px !important;
   }
 
-  /* Dropdown stays attached to the pressed control; only direction changes. */
-  html body .ac-mobile-filter-sheet .relative:has(> .ac-filter-dropdown[data-ac-adaptive="1"]) {
-    z-index: 10080 !important;
-    overflow: visible !important;
+  /* Mobile choices grow down inside the sheet from their first frame. */
+  .ac-mobile-filter-sheet .ac-range-input-box--menu {
+    height: auto !important;
+    min-height: 44px;
+    flex-wrap: wrap;
+    overflow: hidden;
   }
-
-  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-adaptive="1"] {
-    margin: 0 !important;
-    border: 1px solid var(--ac-border) !important;
-    border-radius: 15px !important;
-    background: var(--ac-surface-3) !important;
-    box-shadow: 0 14px 34px rgba(0,0,0,.24) !important;
-    overflow: hidden !important;
+  .ac-mobile-filter-sheet .ac-range-input-box--menu > input { min-height: 44px; flex: 1 1 calc(100% - 44px); width: calc(100% - 44px); }
+  .ac-mobile-filter-sheet .ac-range-value-toggle { min-height: 44px; width: 44px; flex-basis: 44px; }
+  .ac-mobile-filter-sheet .ac-range-value-menu {
+    position: static;
+    flex: 0 0 100%;
+    max-height: 220px;
+    box-shadow: none;
+    margin-top: 4px;
   }
-
-  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="up"] {
-    transform-origin: bottom center !important;
-  }
-
-  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="down"] {
-    transform-origin: top center !important;
-  }
+  .ac-mobile-filter-sheet .ac-filter-dropdown .ac-hide-scrollbar { overscroll-behavior: contain; }
 
   /* Lists remain scrollable when truly needed, but no visible inner scrollbar. */
   .ac-mobile-filter-sheet .ac-filter-dropdown,
