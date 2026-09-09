@@ -1,3 +1,5 @@
+import { calculateRussiaCustomsForIndividual as publicEngine } from "../packages/engine/src/index";
+import { validateMarketVersion } from "../apps/web/lib/settings-validation";
 import { expandCustomsBreakdown } from "../apps/web/lib/catalog/customs-breakdown";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -109,4 +111,16 @@ test('N1 electric calculation does not request passenger utilization power',()=>
  const params=validateCustomerParameters({year:2025,fuel:'electric',vehicleCategory:'N1',grossVehicleWeightKg:3200});
  assert.equal(params.power30MinKw,undefined);
  assert.equal(calc({...base,...params,productionDate:'2025-01-01'}).status,'ready');
+});
+
+
+test('package entry point uses the N1-aware engine',()=>{
+ assert.equal(publicEngine(base).totalCustomsRub,calc(base).totalCustomsRub);
+ assert.equal(publicEngine(base).vehicleCategory,'N1');
+});
+
+test('CRM rejects malformed supplied costs and dates instead of silently using defaults',()=>{
+ const good={status:'active',currency:'EUR',securityDepositRub:100,topAvtoCommissionRub:100,active:true};
+ for(const patch of [{logisticsRub:-1},{brokerRub:'oops'},{percentExpenses:[{id:'x',title:'X',percent:-5}]},{effectiveFrom:'invalid-date'}]) assert.equal(validateMarketVersion({...good,...patch}).ok,false);
+ assert.equal(validateMarketVersion({...good,logisticsRub:0}).ok,true);
 });
