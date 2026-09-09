@@ -475,7 +475,7 @@ export async function calculateOfferWithCustomerParameters(input: VehicleOffer, 
   const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
     catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
     powerDataConfidence: "estimated", powerDataSource: "customer_input",
-    utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: undefined,
+    utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: parameters.productionDate,
     calculationSnapshot: {}, operational: { ...input.operational, raw: undefined } };
   const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
   if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) return null;
