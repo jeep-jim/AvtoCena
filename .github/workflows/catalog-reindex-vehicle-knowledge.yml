@@ -47,6 +47,15 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Check production write policy
+        id: write_policy
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import { CATALOG_PRODUCTION_WRITES_PAUSED } from './apps/web/lib/catalog/storage.ts';
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `allowed=${!CATALOG_PRODUCTION_WRITES_PAUSED}\n`);
+          if (CATALOG_PRODUCTION_WRITES_PAUSED) console.log('Production reindex skipped: active publication policy pauses legacy writes.');
+          JS
       - name: Check object storage configuration
         shell: bash
         run: |
@@ -69,10 +78,13 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
       - name: Build missing certified 30-minute power queue
+        if: steps.write_policy.outputs.allowed == 'true'
         run: npm run catalog:power-reference-queue
       - name: Recanonicalize and reprice current catalog
+        if: steps.write_policy.outputs.allowed == 'true'
         run: npm run catalog:reindex-vehicle-knowledge
       - name: Probe external catalog sources (non-blocking after atomic publication)
+        if: steps.write_policy.outputs.allowed == 'true'
         continue-on-error: true
         run: npm run catalog:smoke
       - name: Mark production reprice success
@@ -82,7 +94,8 @@ jobs:
         shell: bash
         run: |
           run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-          description='RF live proof 3/3 + production reprice passed'
+          description='RF live proof passed; reindex paused by policy'
+          if [ '${{ steps.write_policy.outputs.allowed }}' = 'true' ]; then description='RF live proof + production reprice passed'; fi
           payload="$(jq -nc --arg url "$run_url" --arg description "$description" '{state:"success",context:"catalog/reindex",description:$description,target_url:$url}')"
           curl -fsS -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \

@@ -73,7 +73,7 @@ test("an electrified horsepower scenario cannot replace certified 30-minute powe
 });
 
 test("existing power control remains available alongside linked modification selection", () => {
-  assert.match(offerPage, /EditablePowerTile/);
+  assert.match(offerPage, /InlineOfferParameters/);
   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
   assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string \}>/);
   assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
@@ -91,12 +91,12 @@ test("existing power control remains available alongside linked modification sel
 
 
 test("customer-entered horsepower stays visible as an on-page preliminary calculation", () => {
-  assert.match(offerPage, /powerDataConfidence=\{raw.powerDataConfidence\}/);
+  assert.match(offerPage, /powerHp:powerScenario\?\.source==="fallback_100"\?"":String\(safePowerHp/);
   assert.match(editableTile, /powerDataConfidence === "reference"/);
   assert.match(editableTile, /powerDataConfidence === "estimated"/);
   assert.match(offerPage, /const customerScenarioRub = safeRequestedPowerHp/);
   assert.match(offerPage, /powerScenario\?\.source === "customer_input"/);
   assert.match(offerPage, /customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
-  assert.match(offerPage, /scenarioSource=\{powerScenario\?\.source \|\| null\} fullWidth/);
+  assert.match(offerPage, /<InlineOfferParameters/);
   assert.match(editableTile, /style=\{\{ gridColumn: "1 \/ -1" \}\}/);
 });
