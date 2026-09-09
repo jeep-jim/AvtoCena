@@ -1,7 +1,7 @@
 name: Catalog · Six-market quality rebuild
 on:
   push:
-    branches: [fix/catalog-complete-specifications-20260909]
+    branches: [fix/encar-inspection-engine-20260909]
     paths: ['.github/workflows/catalog-six-market-quality-rebuild.yml']
 permissions:
   contents: read
@@ -72,7 +72,7 @@ jobs:
         with:
           name: catalog-intake-${{ matrix.market }}
           path: catalog-intake-${{ matrix.market }}/
-          retention-days: 14
+          retention-days: 3
   publish:
     needs: [plan, collect]
     if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled'
@@ -88,7 +88,7 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_SELLER_INVENTORY: '1'
-      CATALOG_PUBLICATION_DRY_RUN: '1'
+      CATALOG_PUBLICATION_DRY_RUN: '0'
       CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
       CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
       CATALOG_REBUILD_TARGET_PER_SOURCE: '100000'
@@ -126,7 +126,7 @@ jobs:
           run-id: ${{ needs.plan.outputs.reuse_run_id }}
           github-token: ${{ github.token }}
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
-      - name: Audit candidate markets without production publication
+      - name: Publish markets through calculation and retention guards
         shell: bash
         run: |
           failures=0

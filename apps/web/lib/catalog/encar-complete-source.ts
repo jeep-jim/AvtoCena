@@ -3,6 +3,7 @@ import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from ".
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { encarNonCashContractReason } from "./encar-sale-contract";
 import { canonicalSourceFuel } from "./powertrain-safety";
+import { parseEncarInspection } from "./encar-inspection";
 import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 const ENCAR_HEADERS = {
@@ -359,6 +360,25 @@ export function mergeEncarCompleteDetail(offer: VehicleOffer, detail: any) {
 }
 
 export class EncarCompleteAdapter extends EncarDirectAdapter {
+  private inspectionBlocked = false;
+
+  private async captureInspection(offer: VehicleOffer) {
+    if (this.inspectionBlocked || !/^\d+$/.test(String(offer.sourceOfferId))) return;
+    const url = `https://www.encar.com/md/sl/mdsl_regcar.do?method=inspectionViewNew&carid=${offer.sourceOfferId}`;
+    try {
+      await pacedDetail(async () => {
+        const response = await fetch(url, {headers: {...ENCAR_HEADERS, accept: 'text/html'}, redirect: 'error', signal: AbortSignal.timeout(20_000)});
+        if ([401,403,429].includes(response.status)) this.inspectionBlocked = true;
+        if (!response.ok) return;
+        const html = new TextDecoder(/(?:euc-kr|cp949)/i.test(response.headers.get('content-type') || '') ? 'euc-kr' : 'utf-8').decode(await response.arrayBuffer());
+        if (/has_been_cr_blocked|<title[^>]*>\s*Security Verification/i.test(html)) {this.inspectionBlocked = true;return;}
+        const inspection = parseEncarInspection(html, offer);
+        if (!inspection) return;
+        (offer.operational as any).inspection = {...inspection, sourceUrl: url, capturedAt: new Date().toISOString()};
+        (offer.operational as any).semanticEvidence.engineCode = {source: 'encar_identity_bound_inspection', status: 'exact', value: inspection.engineCode};
+      });
+    } catch { /* Optional document failure does not discard the listing. */ }
+  }
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const maxAttempts = Math.max(1, Math.min(8, Number(process.env.CATALOG_ENCAR_DIRECT_LIST_RETRIES || 5)));
     let lastError: unknown;
@@ -410,12 +430,14 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       return [];
     }
     mergeEncarCompleteDetail(offer, detail);
+    await this.captureInspection(offer);
     const vehicle = detail?.vehicle || detail?.Vehicle || detail;
     const declaredId = String(vehicle?.vehicleId || vehicle?.id || offer.sourceOfferId);
     if (declaredId === String(offer.sourceOfferId)) captureSourceTable(offer, [
       ...namedTechnicalGroups(vehicle.spec || vehicle.specification || vehicle.specifications, "Технические характеристики"),
       ...namedTechnicalGroups(vehicle.category, "Модификация"),
       ...namedTechnicalGroups(vehicle.options || vehicle.equipment, "Оснащение"),
+      ...((offer.operational as any)?.inspection?.engineCode ? [{name: 'Диагностический лист', items: [{name: 'Код двигателя', value: (offer.operational as any).inspection.engineCode}]}] : []),
     ]);
     const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);
     const gallery = detailUrls.slice(0, limit).map(urlImage);

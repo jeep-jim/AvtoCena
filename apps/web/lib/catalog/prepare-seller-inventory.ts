@@ -7,6 +7,7 @@ import { catalogOfferVisibleRub, isJapanAuctionOffer, japanAuctionSoldPriceVerif
 import { hasCredibleOfferContent } from "./offer-quality";
 import { withoutDeliveredPrice } from "./modification-contract";
 import { restoreSavedSourceEvidence } from "./saved-source-recovery";
+import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 
 /** Modern adapter evidence is authoritative; legacy replay must not erase it. */
 export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
@@ -26,7 +27,9 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   // omits some raw source evidence; replaying it as a new intake row erased
   // valid calculations and specifications during the weekly refresh.
   if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0) return structuredClone(input);
-  const original = inventorySourceEvidence(input);
+  const source = inventorySourceEvidence(input);
+  const original = source.sourceId === 'encar_direct' && (source.operational as any)?.inspection?.identityVerified
+    ? await enrichOfferWithKnowledgeCore(source) : source;
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated)) {
