@@ -13,7 +13,7 @@ jobs:
   diagnose:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -46,6 +46,8 @@ jobs:
           run-id: ${{ github.event.workflow_run.id || 34248468346 }}
           github-token: ${{ github.token }}
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
+      - name: Refresh Che168 tables from its specification API
+        run: node --import tsx scripts/catalog-refresh-che168-specifications.mjs
       - name: Diagnose six markets without publication
         run: |
           for market in korea china uae europe georgia japan; do
@@ -55,7 +57,11 @@ jobs:
         if: always()
         with:
           name: catalog-publication-diagnosis
-          path: catalog-diagnosis-*.json
+          retention-days: 3
+          path: |
+            catalog-diagnosis-*.json
+            che168-specification-refresh.json
+            catalog-intake-publish/catalog-rebuild-china*.json
 
 # Recheck complete-price candidates after optional-description filtering was removed.
 # Recheck direct adapter evidence instead of legacy replay.

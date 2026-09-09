@@ -5,11 +5,14 @@ const directory=process.env.CATALOG_REBUILD_INPUT_DIR || 'catalog-intake-publish
 const source=new Che168GlobalExactAdapter();
 const report={productionWrites:false,sourceId:source.sourceId,processed:0,received:0,beforeExactCc:0,afterExactCc:0,beforeExactHp:0,afterExactHp:0,namedFields:0,errors:[]};
 let blocked=false;
+const deadline=Date.now()+75*60*1000;
+let timeLimitReached=false;
 for(const file of (await fs.readdir(directory)).filter(file=>/^catalog-rebuild-china.*\.json$/.test(file)).sort()) {
  const filename=path.join(directory,file);const data=JSON.parse(await fs.readFile(filename,'utf8'));
  for(const offer of data.offers || []) {
   if(offer.sourceId!==source.sourceId || !offer.operational?.raw?.detail)continue;
   if(blocked)break;
+  if(Date.now()>=deadline){timeLimitReached=true;break;}
   report.processed++;
   report.beforeExactCc+=Number(offer.operational?.semanticEvidence?.engineCc?.status==='exact');
   report.beforeExactHp+=Number(offer.operational?.semanticEvidence?.powerHp?.status==='exact');
@@ -28,9 +31,15 @@ for(const file of (await fs.readdir(directory)).filter(file=>/^catalog-rebuild-c
   }
   report.afterExactCc+=Number(offer.operational?.semanticEvidence?.engineCc?.status==='exact');
   report.afterExactHp+=Number(offer.operational?.semanticEvidence?.powerHp?.status==='exact');
+  if(report.processed%25===0){
+   await fs.writeFile(filename,JSON.stringify(data));
+   await fs.writeFile('che168-specification-refresh.json',JSON.stringify({...report,blocked,timeLimitReached},null,2));
+   console.log(JSON.stringify({processed:report.processed,received:report.received,afterExactCc:report.afterExactCc,afterExactHp:report.afterExactHp}));
+  }
  }
  await fs.writeFile(filename,JSON.stringify(data));
  await fs.writeFile('che168-specification-refresh.json',JSON.stringify({...report,blocked},null,2));
- if(blocked)break;
+ if(blocked||timeLimitReached)break;
 }
-console.log(JSON.stringify({...report,blocked}));
+await fs.writeFile('che168-specification-refresh.json',JSON.stringify({...report,blocked,timeLimitReached},null,2));
+console.log(JSON.stringify({...report,blocked,timeLimitReached}));
