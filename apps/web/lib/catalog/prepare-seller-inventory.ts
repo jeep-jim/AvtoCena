@@ -8,13 +8,25 @@ import { hasCredibleOfferContent } from "./offer-quality";
 import { withoutDeliveredPrice } from "./modification-contract";
 import { restoreSavedSourceEvidence } from "./saved-source-recovery";
 
+/** Modern adapter evidence is authoritative; legacy replay must not erase it. */
+export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
+  const op:any=input.operational || {};
+  const semantic=op.semanticEvidence || {};
+  const sourceBound=op.exactDetail === true || (op.detailIdentityVerified === true && op.fieldIdentityVerified === true);
+  const declared=["year","fuel","engineCc","powerHp"].every(field=>
+    typeof semantic[field]?.source === "string" && semantic[field].source.length > 0
+    && ["exact","missing","ambiguous","conflict","not_applicable"].includes(semantic[field]?.status));
+  const copy=structuredClone(input);
+  return sourceBound && declared ? copy : restoreSavedSourceEvidence(copy);
+}
+
 export async function prepareSellerInventory(input: VehicleOffer, options: { preservePublishedPrice?: boolean } = {}): Promise<VehicleOffer | null> {
   if (isJapanAuctionOffer(input) && !japanAuctionSoldPriceVerified(input)) return null;
   // A published quote is already complete. Its compact record intentionally
   // omits some raw source evidence; replaying it as a new intake row erased
   // valid calculations and specifications during the weekly refresh.
   if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0) return structuredClone(input);
-  const original = restoreSavedSourceEvidence(structuredClone(input));
+  const original = inventorySourceEvidence(input);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated)) {

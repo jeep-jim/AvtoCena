@@ -288,7 +288,7 @@ async function auditCandidate(sourceOffer) {
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
     if (sellerInventory) {
-      const prepared = await prepareSellerInventory(retainedPublishedIds.has(sourceOffer.id) ? sourceOffer : offer,
+      const prepared = await prepareSellerInventory(sourceOffer,
         {preservePublishedPrice:retainedPublishedIds.has(sourceOffer.id)});
       if (!prepared) return {offer:null,reason:"source_inventory_unqualified"};
       const priority = classifyCatalogV2Offer(prepared,v2Policy);
@@ -321,7 +321,8 @@ async function auditCandidate(sourceOffer) {
   }
 }
 
-await acquirePublishLock();
+const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+if (!dryRun) await acquirePublishLock();
 try {
 const generation = await readGenerationFiles();
 // A failed/empty source collection is not a request to reinterpret all of the
@@ -410,7 +411,7 @@ const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2P
 const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   // Check after V2 normalization, which may clear a contradictory body value.
-  const reason = isSellerPricedOffer(offer) ? "" : catalogDescriptionRejectionReason(offer);
+  const reason = sellerInventory ? "" : catalogDescriptionRejectionReason(offer);
   if (reason) {
     rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
     continue;
@@ -454,6 +455,24 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
+const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
+const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  generated:generation.offers.length, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
+  selected:selected.length, canonical:canonicalTargetPreview.offers.length,
+  calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
+  sellerOnly:canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
+  rejectionReasons,
+  beforeCanonicalCalculated:selectedMarketOffers.filter(hasExactCalculation).length,
+  identityRejected:canonicalTargetPreview.identityRejected.length,
+  outlierRejected:canonicalTargetPreview.priceOutliers.length,
+  duplicateRejected:canonicalTargetPreview.deduplicated.removed?.length,
+  quotaRejected:canonicalTargetPreview.quota.removed.length,
+  canonicalRejections:canonicalTargetPreview.qualityRejected.reduce((out,offer)=>{ const key=String(offer.calculationStatus);out[key]=(out[key]||0)+1;return out;},{}),
+  lostRetained:currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).slice(0,10).map(offer=>({id:offer.id,sourceId:offer.sourceId,status:offer.calculationStatus})),
+};
+await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
+console.log(JSON.stringify(preflight));
+if (dryRun) process.exit(0);
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
