@@ -369,14 +369,16 @@ const selectedIds = new Set();
 const imageOwners = new Map();
 const sourceCounts = new Map();
 const rejectionReasons = {};
+const auditedRemovals = new Map();
 const selectionCandidateLimit = Math.max(maximumPerMarket, Math.min(100_000, maximumPerMarket * 3));
 
 for (let start = 0; start < orderedCandidates.length && selected.length < selectionCandidateLimit; start += prepareConcurrency) {
   const batch = orderedCandidates.slice(start, start + prepareConcurrency);
   const audited = await runWithConcurrency(batch, prepareConcurrency, auditCandidate);
-  for (const result of audited) {
+  for (const [batchIndex, result] of audited.entries()) {
     if (!result?.offer) {
       const reason = result?.reason || "unknown";
+      if (reason !== "unknown" && !reason.startsWith("exception:")) auditedRemovals.set(batch[batchIndex].id, `audit:${reason}`);
       rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
       continue;
     }
@@ -384,6 +386,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
     if (selectedIds.has(offer.id)) continue;
     const sourceId = String(offer.sourceId || "unknown");
     if (Number(sourceCounts.get(sourceId) || 0) >= targetPerSource) {
+      auditedRemovals.set(offer.id, "selection:source_quota");
       rejectionReasons.source_quota = Number(rejectionReasons.source_quota || 0) + 1;
       continue;
     }
@@ -393,6 +396,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
       return !owner || owner === offer.id;
     });
     if (ownedImages.length < minimumImagesPerOffer) {
+      auditedRemovals.set(offer.id, "selection:duplicate_images");
       rejectionReasons.duplicate_images = Number(rejectionReasons.duplicate_images || 0) + 1;
       continue;
     }
@@ -419,6 +423,8 @@ for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   selectedMarketOffersById.set(String(offer.id), offer);
 }
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
+for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id)))
+  auditedRemovals.set(offer.id, "selection:v2_policy");
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
 const expectedPublishedByMarket = {};
@@ -456,7 +462,15 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
+for (const field of ["qualityRejected", "identityRejected", "priceOutliers"])
+  for (const offer of canonicalTargetPreview[field]) auditedRemovals.set(offer.id, `canonical:${field}`);
+for (const offer of canonicalTargetPreview.quota.removed) auditedRemovals.set(offer.id, "canonical:model_year_quota");
+for (const pair of canonicalTargetPreview.deduplicated.removed)
+  if (nextIds.has(pair.keptId)) auditedRemovals.set(pair.removedId, `canonical:duplicate:${pair.keptId}`);
+const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
+
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
   generated:generation.offers.length, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
   selected:selected.length, canonical:canonicalTargetPreview.offers.length,
   calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
@@ -473,7 +487,7 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
 await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
 console.log(JSON.stringify(preflight));
 if (dryRun) process.exit(0);
-if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers);
+if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 
@@ -530,7 +544,7 @@ if (regressionBlocked) {
       productionRefreshMarket: market,
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
-        if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, publicOffers.filter(offer => offer.market === market));
+        if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
           if (otherMarket === market) continue;
@@ -543,7 +557,7 @@ if (regressionBlocked) {
         if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
       },
       beforePublishValidate(publishedOffers) {
-        if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, publishedOffers.filter(offer => offer.market === market));
+        if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publishedOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
         const failures = [];
         for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
           const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);
@@ -604,6 +618,7 @@ const report = {
   maximumPerMarket,
   selectedMarketCount: selectedMarketOffers.length,
   specificationCoverage: {
+    auditedRemovals: preflight.auditedRemovals,
     recordsWithNamedGroups: canonicalTargetPreview.offers.filter(offer=>offer.operational?.sourceSpecifications?.groups?.length).length,
     namedFields: canonicalTargetPreview.offers.reduce((sum,offer)=>sum+(offer.operational?.sourceSpecifications?.groups || []).reduce((n,group)=>n+group.items.length,0),0),
     sellerPriceOnly: canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,

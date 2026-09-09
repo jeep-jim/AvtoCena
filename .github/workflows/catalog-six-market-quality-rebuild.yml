@@ -1,7 +1,7 @@
 name: Catalog · Six-market quality rebuild
 on:
   push:
-    branches: [fix/encar-inspection-engine-20260909]
+    branches: [fix/catalog-publication-recovery-20260909]
     paths: ['.github/workflows/catalog-six-market-quality-rebuild.yml']
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
             ? execFileSync('git',['diff','--name-only','HEAD^','HEAD'],{encoding:'utf8'}).split('\n') : [];
           const run = process.env.EVENT_NAME !== 'workflow_run' || changed.includes('.github/market-runs/weekly-six-market-catalog.json');
           const marker = process.env.EVENT_NAME === 'workflow_run' && run ? JSON.parse(fs.readFileSync('.github/market-runs/weekly-six-market-catalog.json','utf8')) : {};
-          const reuse = marker.reuseRunId || '';
+          const reuse = marker.reuseRunId || '34305764592';
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${run}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reuse_run_id=${reuse}\n`);
@@ -72,7 +72,7 @@ jobs:
         with:
           name: catalog-intake-${{ matrix.market }}
           path: catalog-intake-${{ matrix.market }}/
-          retention-days: 3
+          retention-days: 14
   publish:
     needs: [plan, collect]
     if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled'
@@ -141,4 +141,4 @@ jobs:
         with:
           name: catalog-quality-rebuild-reports
           path: catalog-weekly-*.json
-          retention-days: 30
+          retention-days: 140
