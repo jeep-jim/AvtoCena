@@ -1,7 +1,9 @@
-import { getActiveMarketVersion } from "../business-settings";
+import { expandCustomsBreakdown } from "./customs-breakdown";
+import { confirmedProductionValue } from "./production-month";
+import { getEffectiveMarketVersion } from "../effective-market-settings";
 import { japanAuctionSoldPriceVerified } from "./public-priority";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
-import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
+import { calculateRussiaCustomsForIndividual, normalizedCategory } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { enrichOfferWithExplicitEngineDisplacement } from "./explicit-engine-displacement";
 import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
@@ -51,25 +53,7 @@ export function discardRepresentativeModelPowerForCustoms<T extends VehicleOffer
   } as T;
 }
 
-const activeMarketVersionCache = new Map<string, { pending: Promise<any>; expiresAt: number }>();
-
-function getCalculationMarketVersion(market: string) {
-  const key = String(market || "").trim();
-  const now = Date.now();
-  const cached = activeMarketVersionCache.get(key);
-  if (cached && cached.expiresAt > now) return cached.pending;
-  const ttlMs = Math.max(1_000, Number(process.env.CATALOG_MARKET_CONFIG_CACHE_MS || 10_000));
-  const entry = {
-    expiresAt: now + ttlMs,
-    pending: Promise.resolve(null) as Promise<any>,
-  };
-  entry.pending = getActiveMarketVersion(key).catch((error) => {
-      if (activeMarketVersionCache.get(key) === entry) activeMarketVersionCache.delete(key);
-      throw error;
-  });
-  activeMarketVersionCache.set(key, entry);
-  return entry.pending;
-}
+const getCalculationMarketVersion = getEffectiveMarketVersion;
 
 function transportToBorderRub(offer: VehicleOffer) {
   const raw: any = offer.operational?.raw || {};
@@ -79,12 +63,12 @@ function transportToBorderRub(offer: VehicleOffer) {
     || positive(raw.customsTransportRub);
 }
 
-function customsValueSnapshot(rate: any, borderTransportRub: number, customsValueRub: number) {
+function customsValueSnapshot(rate: any, borderTransportRub: number, customsValueRub: number, commercial = false) {
   return {
     vehiclePriceRub: rate.sourcePriceRub,
     transportToBorderRub: borderTransportRub,
-    transportExcludedFromCustomsValueRub: borderTransportRub,
-    transportIncludedInCustomsValue: false,
+    transportExcludedFromCustomsValueRub: commercial ? 0 : borderTransportRub,
+    transportIncludedInCustomsValue: commercial,
     totalRub: customsValueRub,
   };
 }
@@ -233,7 +217,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   // Missing ordinary combustion power still blocks a calculated public price.
   // Electrified vehicles are different: missing short-term/utilization power may
   // produce a clearly marked preliminary lower-bound instead of disappearing.
-  if (!electrified && !positive(offer.powerHp) && !allowCombustionPreliminary) {
+  if (!electrified && !positive(offer.powerHp) && !allowCombustionPreliminary && normalizedCategory(offer).category !== "N1") {
     return {
       ...offer,
       totalRub: null,
@@ -263,14 +247,28 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     };
   }
 
-  const borderTransportRub = transportToBorderRub(offer);
-  // For an individual's personal-use vehicle, transport/insurance to the border
-  // is not automatically added to the customs value. Keep it visible in the
-  // audit snapshot but calculate the customs base from the vehicle value itself.
-  const customsValueRub = rate.sourcePriceRub;
+  const configured: any = await getCalculationMarketVersion(offer.market);
+  const market = resolveCatalogMarketConfig(offer.market, configured);
+  const commercial = normalizedCategory(offer).category === "N1";
+  const enteredTransport = offer.transportToBorderRub;
+  const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;
+  const borderTransportRub = commercial
+    ? hasEnteredTransport ? enteredTransport : transportToBorderRub(offer) || Number(market.config.logisticsRub || 0)
+    : transportToBorderRub(offer);
+  // Goods imports include pre-border transport. In an N1 customer scenario this
+  // replaces the logistics line, so it is not added twice to the delivered total.
+  const customsValueRub = rate.sourcePriceRub + (commercial ? borderTransportRub : 0);
+  if (commercial) {
+    market.config = {...market.config,logisticsRub:borderTransportRub};
+    if (!hasEnteredTransport) {
+      market.estimated = true;
+      market.warnings.push("Доставка до границы для N1 принята из расходов рынка; уточните сумму в карточке.");
+    }
+  }
   const motor30MinKnown = documentedMotorPower(offer) > 0 || (userParameters && positive(offer.power30MinKw) > 0);
-  const customs = calculateRussiaCustomsForIndividual({
+  const customsInput = {
     customsValueRub,
+    importedAt: userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`) : undefined,
     eurRateRub: Number(eurRate.effectiveRate || 0),
     engineCc: offer.engineCc,
     powerHp: offer.powerHp,
@@ -284,22 +282,22 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         ? offer.utilizationPowerKw
         : undefined,
     powertrainKind: offer.powertrainKind,
-    productionDate: offer.productionDate,
+    productionDate: userParameters ? offer.productionDate : confirmedProductionValue(offer) || undefined,
     year: offer.year,
     fuel: offer.fuel,
     vehicleCategory: offer.vehicleCategory,
     tnVedCode: offer.tnVedCode,
     grossVehicleWeightKg: offer.grossVehicleWeightKg,
+    n1IceFuel: offer.n1IceFuel,
     bodyType: offer.bodyType,
     make: offer.make,
     model: offer.model,
     sourceTitle: customsVehicleIdentityEvidence(input, offer),
     personalUseEligible: offer.personalUseEligible,
-  });
+  };
+  const customs = calculateRussiaCustomsForIndividual(customsInput);
 
-  const configured: any = await getCalculationMarketVersion(offer.market);
-  const market = resolveCatalogMarketConfig(offer.market, configured);
-  const utilizationProblem = userParameters ? null : exactUtilizationPowerProblem(offer);
+  const utilizationProblem = userParameters || commercial ? null : exactUtilizationPowerProblem(offer);
   const combinedMissing = [...new Set([
     ...(utilizationProblem?.missing || []),
     ...(Array.isArray(customs.missing) ? customs.missing : []),
@@ -327,7 +325,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         eurRate,
         sourcePriceRub: rate.sourcePriceRub,
         customs,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
+        customsInput,
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
         customsCompleteness: "needs_data",
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "preliminary",
@@ -356,7 +355,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         ...pendingSnapshot,
         eurRate,
         customs,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
+        customsInput,
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
         customsCompleteness: customs.status,
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "unavailable",
@@ -396,7 +396,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       eurRate,
       sourcePriceRub: rate.sourcePriceRub,
       customs,
-      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
+      customsInput,
+      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
       customsCompleteness: customs.status,
       pricingConfidence: priceEstimated ? "estimated" : "exact",
       estimatedMarketFields: market.estimatedFields,
@@ -471,19 +472,23 @@ export async function calculateOfferWithPreliminaryPowerPricing(input: VehicleOf
 }
 
 /** Ephemeral scenario: validated customer inputs never become catalog evidence. */
-export async function calculateOfferWithCustomerParametersDetailed(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+export async function calculateCustomerParameterScenario(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
   const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
     catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
     powerDataConfidence: "estimated", powerDataSource: "customer_input",
     utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: parameters.productionDate,
     calculationSnapshot: {}, operational: { ...input.operational, raw: undefined } };
-  const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
+  return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
+}
+
+export async function calculateOfferWithCustomerParametersDetailed(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+  const result = await calculateCustomerParameterScenario(input, parameters);
   if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) {
     const snapshot = result.calculationSnapshot;
     const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
     return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
   }
-  return {ok: true as const, calculation: {totalRub:result.totalRub,breakdown:result.calculationSnapshot?.breakdown || [],rateDate:result.calculationSnapshot?.currencyRate?.rateDate}};
+  return {ok: true as const, calculation: {totalRub:result.totalRub,breakdown:expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
 }
 
 /** Preserve the nullable contract used by existing integrations. */
@@ -493,7 +498,7 @@ export async function calculateOfferWithCustomerParameters(input: VehicleOffer, 
 }
 
 export function customerCalculationFailureMessage(missing: string[]): string {
-  if (missing.includes("vehicle_category")) return "Параметры приняты. Для пикапа или коммерческого автомобиля нужно подтвердить категорию M1/N1 по документам. Одного объёма, мощности и даты выпуска недостаточно. Передайте документы менеджеру для проверки категории.";
+  if (missing.includes("vehicle_category")) return "Выберите категорию в блоке «Категория и масса»: M1 — легковой или N1 — грузовой. Для N1 укажите полную разрешённую массу по документам — расчёт появится здесь.";
   if (missing.includes("n1_customs_tariff")) return "Параметры приняты. Для категории N1 нужен отдельный расчёт пошлины и утильсбора. Автоматический расчёт этой категории пока не поддерживается. Обратитесь к менеджеру за расчётом.";
   const labels: Record<string, string> = {
     source_currency_rate: "курс валюты исходной цены", official_source_currency_rate: "официальный курс валюты исходной цены",
@@ -501,9 +506,10 @@ export function customerCalculationFailureMessage(missing: string[]): string {
     customs_value: "стоимость для таможенного расчёта", production_date: "дата выпуска", engine_cc: "объём двигателя",
     power_hp: "мощность двигателя", powertrain_kind: "тип силовой установки",
     certified_30_minute_power_kw: "подтверждённая 30-минутная мощность", electric_excise_power_kw: "мощность электродвигателя для расчёта акциза",
+    gross_vehicle_weight_kg: "полная разрешённая масса N1 до 3500 кг", n1_ice_fuel: "топливо ДВС гибрида", n1_hybrid_power: "мощность ДВС и 30-минутная мощность электромоторов", tn_ved_conflict: "согласованные код ТН ВЭД и характеристики", tariff_year: "ставки на выбранный год ввоза", n1_tariff_year: "ставки N1 на выбранный год ввоза", fuel: "топливо двигателя",
     utilization_coefficient: "коэффициент утильсбора"
   };
   const reasons = [...new Set(missing.map(key => labels[key]).filter(Boolean))];
-  return reasons.length ? `Для полного расчёта нужны: ${reasons.join("; ")}. Уточните доступные параметры в карточке. Если данные уже указаны, обратитесь к менеджеру.`
+  return reasons.length ? `Для полного расчёта нужны: ${reasons.join("; ")}. Уточните доступные параметры в карточке. После заполнения расчёт обновится автоматически.`
     : "Параметры приняты, но полный расчёт пока недоступен. Обратитесь к менеджеру для проверки исходной цены и условий ввоза.";
 }

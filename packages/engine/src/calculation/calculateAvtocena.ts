@@ -74,13 +74,9 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   addLine(lines, { id: "epts", title: "ЭПТС", amountRub: numberOrZero(config.eptsRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "rf-delivery", title: input.deliveryCity ? `Доставка по РФ: ${input.deliveryCity}` : "Доставка по РФ", amountRub: numberOrZero(input.cityDeliveryRub ?? config.rfDeliveryRub), kind: "logistics", amountType: "fixed", source: input.cityDeliveryRub ? "manager" : "market_config" });
   addLine(lines, {
-    id: "customs",
-    title: "Таможенная пошлина",
-    amountRub: numberOrZero(input.customsRub),
-    kind: "customs",
-    amountType: "calculated",
-    source: "calculated",
-    note: "Включая таможенное оформление, акциз и НДС, если они применимы",
+    id:"customs",title:"Таможенные платежи",amountRub:numberOrZero(input.customsRub),
+    kind:"customs",amountType:"calculated",source:"calculated",
+    note:"Пошлина, таможенное оформление, акциз и НДС, если применимы",
   });
   addLine(lines, {
     id: "utilization-fee",

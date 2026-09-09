@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { CalendarDays, ChevronDown, Fuel, Zap } from "lucide-react";
+import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
 import { validateCustomerParameters } from "../../lib/catalog/customer-parameters";
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
-const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",engineCc:"объём двигателя",powerHp:"мощность",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС"};
+const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
 function Field({label,value,change,options=[],min,max}:{label:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number}) {
  const id=useId();
  return <label className="block text-xs font-semibold">{label}<input aria-label={label} type="number" inputMode="decimal" value={value} min={min} max={max} step="any" list={id} onChange={e=>change(e.target.value)} className="mt-2 min-h-11 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 text-sm text-[var(--ac-text)]"/><datalist id={id}>{options.map(n=><option key={n} value={n}/>)}</datalist></label>;
@@ -31,9 +31,9 @@ function Tile({label,value,icon,children,wide=false}:{label:string;value:string;
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode}) {
+export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean}) {
  const [draft,setDraft]=useState(initial),[pending,setPending]=useState(false),[error,setError]=useState("");
- const [result,setResult]=useState<{totalRub:number;breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
+ const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
  const dirty=JSON.stringify(draft)!==JSON.stringify(initial);
  function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:""}:{})}));}
@@ -60,12 +60,16 @@ export function InlineOfferParameters({offerId,initial,price,children}:{offerId:
    <p className="text-xs font-bold uppercase tracking-widest">По вашим параметрам</p>
    {result?<p className="mt-2 text-3xl font-black">{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p>:<p className="mt-3 text-sm">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</p>}
    {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">Ориентир под ключ. Данные и стоимость требуют подтверждения.</p>:null}
+   {result?.customs?.productionReferenceDate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Дата выпуска в расчёте: {result.customs.productionReferenceDate}{result.customs.productionReferenceBasis !== "exact_date" ? " · условная дата, уточните по документам" : ""}. Тариф: {result.customs.vehicleCategory === "N1" ? `N1 · ТН ВЭД ${result.customs.tariffCode || "8704"}` : result.customs.ageBand === "up_to_3_years" ? "до 3 лет" : result.customs.ageBand === "from_3_to_5_years" ? "3–5 лет" : "старше 5 лет"}.</p> : null}
    <button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>
   </div>}
   <div className="mt-4 grid grid-cols-2 items-start gap-2.5">
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     {field("year","Год выпуска",Array.from({length:30},(_,i)=>new Date().getFullYear()-i),1990,new Date().getFullYear()+1)}
+    {field("productionDay","День выпуска (если известен)",[],1,31)}
     <label className="block text-xs font-semibold">Месяц выпуска<select aria-label="Месяц выпуска" className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3" value={draft.productionMonth||""} onChange={e=>change("productionMonth",e.target.value)}><option value="">Неизвестен</option>{Array.from({length:12},(_,i)=><option key={i+1} value={i+1}>{String(i+1).padStart(2,"0")}</option>)}</select></label>
+    <label className="block text-xs font-semibold">Дата таможенного расчёта<input aria-label="Дата таможенного расчёта" type="date" value={draft.customsCalculationDate||""} onChange={e=>change("customsCalculationDate",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"/></label>
+    <p className="text-xs leading-5 text-[var(--ac-muted)]">Без даты расчёт на сегодня. Для M1: до 3 лет включительно, свыше 3 до 5 включительно, старше 5. Если день неизвестен — 15-е число; если месяц неизвестен — 1 июля.</p>
    </Tile>
    <Tile label="Объём двигателя" value={draft.fuel==="electric"?"Без ДВС":draft.engineCc?`${Number(draft.engineCc).toLocaleString("ru-RU")} см³`:"Указать объём"} icon={<EngineIcon/>}>
     {draft.fuel==="electric"?<p className="text-xs">Для электромобиля объём ДВС не требуется.</p>:field("engineCc","Объём, см³",[660,998,1197,1498,1598,1998,2498,2998],300,10000)}
@@ -77,7 +81,18 @@ export function InlineOfferParameters({offerId,initial,price,children}:{offerId:
    <Tile label="Мощность" value={draft.powerHp?`${draft.powerHp} л.с.`:"Указать мощность"} icon={<Zap size={16}/>}>
     {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
    </Tile>
-   {["electric","hybrid"].includes(draft.fuel)?<Tile wide label="30-минутная мощность" value={draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<Zap size={16}/>}>
+   {showCommercial ? <Tile wide label="Категория и масса" value={draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
+    <p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС. N1 — грузовой расчёт по ТН ВЭД 8704. Выбор применяется только к вашему расчёту.</p>
+    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">M1 · Легковой</option></select></label>
+    {draft.vehicleCategory === "N1" ? <>
+      {field("grossVehicleWeightKg","Полная разрешённая масса, кг",[],1,3500)}
+      {field("transportToBorderRub","Доставка до границы РФ, ₽",[],0,10000000)}
+      <p className="text-xs leading-5 text-[var(--ac-muted)]">Доставка входит в таможенную стоимость N1 и заменяет строку логистики в этом расчёте. Пустое поле — расходы рынка; 0 — доставка включена в цену.</p>
+      <p className="text-xs leading-5 text-[var(--ac-muted)]">Максимальная масса с людьми и грузом (GVWR). Снаряжённая масса и грузоподъёмность не подходят.</p>
+      {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
+    </> : null}
+   </Tile> : null}
+   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile wide label="30-минутная мощность" value={draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<Zap size={16}/>}>
     {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
    </Tile>:null}
   </div>

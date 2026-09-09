@@ -1,4 +1,7 @@
-import { getOffer } from "@/lib/catalog/storage";
+import { applyActiveBusinessPricing, applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
+import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
+import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
+import { getOffer as getStoredOffer } from "@/lib/catalog/storage";
 import { searchOffers } from "@/lib/catalog/storage";
 import { publicOffer } from "@/lib/catalog/storage";
 import {
@@ -8,6 +11,11 @@ import {
   vehicleKnowledgeCompact,
 } from "@/lib/catalog/vehicle-knowledge";
 import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
+
+async function getOffer(id: string) {
+  const offer = await getStoredOffer(id);
+  return offer ? applyActiveBusinessPricing(offer) : null;
+}
 
 export const dynamic = "force-dynamic";
 
@@ -240,7 +248,7 @@ async function callTool(name: string, args: Record<string, any>) {
       page: 1,
       pageSize: limit,
     });
-    const items = result.items.map(offerForAi);
+    const items = (await applyActiveBusinessPricingBatch(result.items)).map(offerForAi);
     return toolResult(
       { generationId: result.generationId, total: result.total, items },
       `АвтоЦена нашла ${result.total} актуальных предложений; возвращено ${items.length}.`,
@@ -271,12 +279,14 @@ async function callTool(name: string, args: Record<string, any>) {
           note: clean(line?.note) || null,
         })).filter((line: any) => line.amountRub !== 0)
       : [];
-    const totalRub = Number((offer as any).totalRub || 0) || null;
+    const totalRub = catalogOfferVisibleRub(offer) || null;
     const structured = {
       offerId,
       totalRub,
       calculationStatus: clean((offer as any).calculationStatus) || "unknown",
-      breakdown,
+      breakdown: expandCustomsBreakdown(breakdown,snapshot?.customs),
+      customs: snapshot?.customs || null,
+      rateDate: snapshot?.currencyRate?.rateDate || null,
       url: catalogOfferUrl(offerId),
       updatedAt: clean((offer as any).updatedAt),
     };

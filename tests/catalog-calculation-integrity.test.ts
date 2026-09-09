@@ -58,7 +58,7 @@ test("customs duty and utilization fee are separate lines without changing the t
       .filter((line) => line.id === "customs" || line.id === "utilization-fee")
       .map((line) => [line.id, line.title, line.amountRub]),
     [
-      ["customs", "Таможенная пошлина", 420_000],
+      ["customs", "Таможенные платежи", 420_000],
       ["utilization-fee", "Утилизационный сбор", 131_040],
     ],
   );

@@ -44,12 +44,25 @@ test("manual calculation uses the pricing engine without mutating the published 
    const blocked=await calculateOfferWithCustomerParametersDetailed(pickup,validateCustomerParameters({year:2021,productionMonth:5,engineCc:1598,powerHp:200,fuel:"diesel"}));
    assert.equal(blocked.ok,false);
    if (!blocked.ok) {
-    assert.ok(blocked.missing.includes(vehicleCategory ? "n1_customs_tariff" : "vehicle_category"));
-    assert.match(blocked.error,vehicleCategory ? /пока не поддерживается/ : /подтвердить категорию M1\/N1/);
+    assert.ok(blocked.missing.includes(vehicleCategory ? "gross_vehicle_weight_kg" : "vehicle_category"));
+    assert.match(blocked.error,vehicleCategory ? /масс/ : /Выберите категорию/);
    }
    assert.equal(JSON.stringify(pickup),original);
    assert.equal(await calculateOfferWithCustomerParameters(pickup,validateCustomerParameters({year:2021,engineCc:1598,powerHp:200,fuel:"diesel"})),null);
   }
+
+  const pickup={...input,make:"Isuzu",model:"TAGA H",bodyType:"Пикап"};
+  const pickupBefore=JSON.stringify(pickup);
+  const calculated=await calculateOfferWithCustomerParametersDetailed(pickup,validateCustomerParameters({year:2021,productionMonth:5,productionDay:12,engineCc:1598,powerHp:143,fuel:"diesel",vehicleCategory:"N1",grossVehicleWeightKg:3200,transportToBorderRub:50000,customsCalculationDate:"2026-09-09"}));
+  assert.equal(calculated.ok,true);
+  if(calculated.ok) {
+   assert.equal(calculated.calculation.customs.vehicleCategory,"N1");
+   assert.equal(calculated.calculation.customs.customsValueRub,1000000);
+   assert.equal(calculated.calculation.customs.productionReferenceDate,"2021-05-12");
+   assert.equal(calculated.calculation.breakdown.find((line:any)=>line.id==="logistics")?.amountRub,50000);
+   assert.equal(calculated.calculation.breakdown.reduce((sum:number,line:any)=>sum+line.amountRub,0),calculated.calculation.totalRub);
+  }
+  assert.equal(JSON.stringify(pickup),pickupBefore);
 
  } finally {read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });

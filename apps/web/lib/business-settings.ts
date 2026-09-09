@@ -23,15 +23,14 @@ function statusForEffectiveFrom(effectiveFrom?: string, active = true) {
 function chooseEffectiveVersion(versions: any[] = [], asOf = new Date()) {
   const now = asOf.getTime();
   return versions
-    .filter((version) => version.status !== "draft" && version.status !== "archived" && effectiveTime(version.effectiveFrom) <= now)
+    .filter((version) => version.active !== false && version.status !== "draft" && version.status !== "archived" && effectiveTime(version.effectiveFrom) <= now)
     .sort((a, b) => effectiveTime(b.effectiveFrom) - effectiveTime(a.effectiveFrom) || Number(b.version || 0) - Number(a.version || 0))[0] || null;
 }
 
 export function selectActiveMarketVersion(market: any, asOf = new Date()) {
   if (!market) return null;
-  return chooseEffectiveVersion(market.versions || [], asOf)
-    || market.versions?.find((version: any) => version.id === market.activeVersionId)
-    || null;
+  const selected = chooseEffectiveVersion(market.versions || [], asOf);
+  return selected?.status === "scheduled" ? {...selected, status:"active"} : selected;
 }
 
 

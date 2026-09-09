@@ -52,6 +52,15 @@ export function validateMarketVersion(version: any) {
 
   const errors: string[] = [];
   if (!currency) errors.push("currency_required");
+  for (const field of ["topAvtoCommissionRub","securityDepositRub","contractInitialPaymentRub","exchangeRateReservePercent","exportExpensesRub","logisticsRub","brokerRub","svhRub","laboratoryRub","sbktsRub","eptsRub","rfDeliveryRub","otherFixedExpensesRub"]) {
+    if (version?.[field] != null && version[field] !== "" && nullableNumber(version[field]) === null) errors.push(`${field}_invalid`);
+  }
+  if (version?.effectiveFrom && !Number.isFinite(Date.parse(version.effectiveFrom))) errors.push("effective_from_invalid");
+  if (version?.percentExpenses != null && !Array.isArray(version.percentExpenses)) errors.push("percent_expenses_invalid");
+  for (const expense of Array.isArray(version?.percentExpenses) ? version.percentExpenses : []) {
+    if (!expense || nullableNumber(expense.percent) === null || !cleanText(expense.id) || !cleanText(expense.title)) errors.push("percent_expense_invalid");
+  }
+
   if (version?.status === "active") {
     if (nullableNumber(version?.securityDepositRub) === null) errors.push("security_deposit_required_for_active");
     if (nullableNumber(version?.topAvtoCommissionRub) === null) errors.push("commission_required_for_active");
