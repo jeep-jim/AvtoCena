@@ -471,13 +471,39 @@ export async function calculateOfferWithPreliminaryPowerPricing(input: VehicleOf
 }
 
 /** Ephemeral scenario: validated customer inputs never become catalog evidence. */
-export async function calculateOfferWithCustomerParameters(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+export async function calculateOfferWithCustomerParametersDetailed(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
   const scenario: VehicleOffer = { ...withoutDeliveredPrice(input), ...parameters,
     catalogPricingMode: undefined, sellerPriceRub: undefined, modificationSelection: undefined, recoveryQualification: undefined,
     powerDataConfidence: "estimated", powerDataSource: "customer_input",
     utilizationPowerKw: undefined, power30MinKwByMotor: undefined, productionDate: parameters.productionDate,
     calculationSnapshot: {}, operational: { ...input.operational, raw: undefined } };
   const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(scenario, false, undefined, true, true));
-  if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) return null;
-  return {totalRub:result.totalRub,breakdown:result.calculationSnapshot?.breakdown || [],rateDate:result.calculationSnapshot?.currencyRate?.rateDate};
+  if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) {
+    const snapshot = result.calculationSnapshot;
+    const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
+    return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
+  }
+  return {ok: true as const, calculation: {totalRub:result.totalRub,breakdown:result.calculationSnapshot?.breakdown || [],rateDate:result.calculationSnapshot?.currencyRate?.rateDate}};
+}
+
+/** Preserve the nullable contract used by existing integrations. */
+export async function calculateOfferWithCustomerParameters(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+  const result = await calculateOfferWithCustomerParametersDetailed(input, parameters);
+  return result.ok ? result.calculation : null;
+}
+
+export function customerCalculationFailureMessage(missing: string[]): string {
+  if (missing.includes("vehicle_category")) return "Параметры приняты. Для пикапа или коммерческого автомобиля нужно подтвердить категорию M1/N1 по документам. Одного объёма, мощности и даты выпуска недостаточно. Передайте документы менеджеру для проверки категории.";
+  if (missing.includes("n1_customs_tariff")) return "Параметры приняты. Для категории N1 нужен отдельный расчёт пошлины и утильсбора. Автоматический расчёт этой категории пока не поддерживается. Обратитесь к менеджеру за расчётом.";
+  const labels: Record<string, string> = {
+    source_currency_rate: "курс валюты исходной цены", official_source_currency_rate: "официальный курс валюты исходной цены",
+    official_eur_rate: "официальный курс евро", eur_rate: "курс евро", fresh_official_currency_rates: "актуальные официальные курсы валют",
+    customs_value: "стоимость для таможенного расчёта", production_date: "дата выпуска", engine_cc: "объём двигателя",
+    power_hp: "мощность двигателя", powertrain_kind: "тип силовой установки",
+    certified_30_minute_power_kw: "подтверждённая 30-минутная мощность", electric_excise_power_kw: "мощность электродвигателя для расчёта акциза",
+    utilization_coefficient: "коэффициент утильсбора"
+  };
+  const reasons = [...new Set(missing.map(key => labels[key]).filter(Boolean))];
+  return reasons.length ? `Для полного расчёта нужны: ${reasons.join("; ")}. Уточните доступные параметры в карточке. Если данные уже указаны, обратитесь к менеджеру.`
+    : "Параметры приняты, но полный расчёт пока недоступен. Обратитесь к менеджеру для проверки исходной цены и условий ввоза.";
 }
