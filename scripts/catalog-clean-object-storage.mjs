@@ -75,15 +75,16 @@ async function readLiveImageKeys(generationIds, internalManifest, includeInterna
   const keys = new Set();
   for (const generationId of generationIds) {
     if (!generationId) continue;
-    const index = await readDataJson(`catalog/generations/${generationId}/indexes/images-by-id.json`, { imagesById: {} }).catch(() => ({ imagesById: {} }));
-    for (const image of Object.values(index?.imagesById || {})) {
+    const index = await readDataJson(`catalog/generations/${generationId}/indexes/images-by-id.json`, null);
+    if (!index || !index.imagesById || typeof index.imagesById !== "object") throw new Error(`storage_cleanup_image_index_unreadable_${generationId}`);
+    for (const image of Object.values(index.imagesById)) {
       const objectKey = String(image?.objectKey || "").trim();
       if (objectKey) keys.add(objectKey);
     }
   }
   if (!includeInternal) return keys;
   const internalChunks = [...new Set(Object.values(internalManifest?.sources || {}).flatMap((source) => Array.isArray(source?.chunks) ? source.chunks : []))];
-  const internalLists = await mapWithConcurrency(internalChunks, Math.min(DELETE_CONCURRENCY, 16), (chunk) => readDataJson(String(chunk), []).catch(() => []));
+  const internalLists = await mapWithConcurrency(internalChunks, Math.min(DELETE_CONCURRENCY, 16), async (chunk) => { const rows = await readDataJson(String(chunk), null); if (!Array.isArray(rows)) throw new Error(`storage_cleanup_internal_chunk_unreadable_${chunk}`); return rows; });
   for (const offers of internalLists) collectOfferImageKeys(keys, offers);
   return keys;
 }
@@ -146,7 +147,7 @@ if (!publicGeneration || !generationIds.length) {
     discoveredGenerations: generationIds.length,
   };
   await fs.writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
-  await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);
+  if (!DRY_RUN) await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);
   console.log(JSON.stringify(report, null, 2));
   process.exitCode = 1;
 } else {
@@ -308,7 +309,7 @@ if (!publicGeneration || !generationIds.length) {
     errors: [...inventoryErrors, ...errors].slice(0, 500),
   };
   await fs.writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
-  await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);
+  if (!DRY_RUN) await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);
   console.log(JSON.stringify(report, null, 2));
   if (blocked || errors.length) process.exitCode = 1;
 }
