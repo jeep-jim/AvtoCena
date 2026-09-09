@@ -3114,3 +3114,14 @@ Run 34096977346, commit 5b3dd6a4028aea5d2720fac490cc1e80603b5ccf, job 1016912074
 - Fix: exact-preserved, source-allowed market snapshots bypass deduplication/quota; mutable and append candidates keep existing filtering. All before-write and before-publication count/hash guards remain. Canonical read-model rebuilds use the same preservation path.
 - Regression: 25 same-model/year duplicate rows from an untouched market must reach beforePublishValidate byte-for-byte; it fails on the original code and passes with the fix. Targeted preservation/quota/dedup tests: 18 passed; typecheck passed.
 - Next: merge after CI, republish Korea from original run 34096977346 artifacts without recrawling. Final live count/audit still unconfirmed. Running five-market queue remains untouched and pinned to its original commit; its later publication failures may require artifact republish too.
+
+
+## 2026-09-09 — восстановление публикации после quality rebuild #2
+
+Run 34305764592 сохранил все шесть intake-артефактов. Корея опубликована (1224 карточки, 1220 рассчитанных), остальные рынки остановлены catalog_delivered_price_regression. Новых корейских наблюдений всего 6: это отдельная нерешённая проблема сбора.
+
+Исправление: в seller-inventory допускается переход к проверенной цене продавца без фиктивного delivered total. Для Японии этот переход не разрешён. Удаления требуют явной причины по ID из аудита/политики отбора/canonical-проверок; исключения обработки и необъяснимые потери блокируются. Полный список причин включён в отчёт. Проверки записи/публикации сравнивают с подготовленным canonical-набором без разрешений на дальнейшее удаление. Защита остальных рынков и аварийного падения количества остаётся.
+
+Шесть regression-тестов, TypeScript и проверка синтаксиса прошли. Recovery workflow использует артефакты 34305764592 без повторного обращения к источникам. Успех публикации ещё необходимо подтвердить по результатам запуска.
+
+Платный AI-поиск отменён пользователем; PR848 закрыт без слияния. Отображать дату выпуска YYYY/MM г. при подтверждённом месяце, иначе YYYY г.; регистрация не заменяет производство. Эти изменения даты ещё не реализованы.
