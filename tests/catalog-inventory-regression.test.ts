@@ -37,3 +37,23 @@ test("auction type and grade survive projection independently of calculation rea
   assert.equal(row.catalogKind,"auction_result");assert.equal(row.auctionGrade,"4.5");
   assert.equal(sellerPriceLabel(row),"Цена на завершённых торгах");
 });
+
+test("owner-approved seller transition requires an exact source-price conversion",()=>{
+  const old=priced();
+  const seller={...old,totalRub:null,catalogPricingMode:"seller",calculationStatus:"needs_data",sellerPriceRub:1500000,
+    calculationSnapshot:{currencyRate:{rateSource:"cbr",currency:"RUB",sourcePrice:1500000,effectiveRate:1}}};
+  assert.doesNotThrow(()=>assertNoDeliveredPriceRegression([old],[seller],{allowSellerTransition:true}));
+  assert.throws(()=>assertNoDeliveredPriceRegression([old],[{...seller,sellerPriceRub:42}],{allowSellerTransition:true}),/regression/);
+  assert.throws(()=>assertNoDeliveredPriceRegression([{...old,market:"japan"}],[{...seller,market:"japan"}],{allowSellerTransition:true}),/regression/);
+});
+
+test("only recorded pipeline exclusions may remove retained rows",()=>{
+  const old=priced();
+  assert.doesNotThrow(()=>assertNoDeliveredPriceRegression([old],[],{auditedRemovals:new Map([[old.id,"canonical:identityRejected"]])}));
+  for(const reason of ["", "missing", "audit:exception:timeout"])
+    assert.throws(()=>assertNoDeliveredPriceRegression([old],[],{auditedRemovals:new Map([[old.id,reason]])}),/regression/);
+  assert.throws(()=>assertNoDeliveredPriceRegression([{...old,totalRub:null}],[]),/regression/);
+  assert.throws(()=>assertNoDeliveredPriceRegression([old],[{...old,market:"china"}]),/regression/);
+  // No removal exceptions are carried into the write/publish checks.
+  assert.throws(()=>assertNoDeliveredPriceRegression([old],[],{allowSellerTransition:true}),/regression/);
+});

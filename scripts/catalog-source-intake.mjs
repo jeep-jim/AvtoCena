@@ -15,7 +15,7 @@ await fs.mkdir(directory,{recursive:true});
 const states=REQUIRED_CATALOG_SOURCES[market].map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
 const startedAt=new Date().toISOString();
 let observationWrite = Promise.resolve();
-const deadline=Date.now()+Math.min(150*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+const deadline=Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
 async function checkpoint() {
@@ -26,7 +26,7 @@ async function checkpoint() {
 await checkpoint();
 while(Date.now()<deadline && states.some(s=>!s.done)) {
   for(const state of states) {
-    await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:1000,detailConcurrency:4,
+    await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:2000,detailConcurrency:4,
       minYear:market==='japan'?2010:new Date().getUTCFullYear()-6,
       snapshot:sourceListingSnapshot,checkpoint,
       translationReport:groups=>untranslatedSpecificationFields(groups),
@@ -36,5 +36,7 @@ while(Date.now()<deadline && states.some(s=>!s.done)) {
 }
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
 report.completedAt=new Date().toISOString();
+report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>({sourceId:s.sourceId,reason:s.stopReason}));
+report.qualityStatus=report.partialSources.length?"partial":"configured_routes_finished";
 await checkpoint();
 console.log(JSON.stringify({...report,sources:states.map(intakeSummary)}));

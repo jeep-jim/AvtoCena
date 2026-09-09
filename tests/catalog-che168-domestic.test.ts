@@ -24,3 +24,15 @@ test('domestic Che168 binds CNY price to its own listing and never requests Glob
   assert.equal(requests.length,1);
  } finally {globalThis.fetch=oldFetch;}
 });
+
+test('empty first dealer does not terminate remaining dealer inventory',async()=>{
+ const previous=globalThis.fetch;
+ const urls:string[]=[];
+ globalThis.fetch=async(input:any)=>{
+  const url=String(input);urls.push(url);
+  const body=url.includes('429115')?'<li><a href="https://www.che168.com/dealer/123/59848501.html">奇瑞 Tiggo 2021</a><span>2021年</span><div class="price">2.88万</div></li>':'<ul></ul>';
+  return new Response(body);
+ };
+ try{const page=await new DomesticChe168Adapter().fetchPage();assert.equal(page.items.length,1);assert.equal(page.nextCursor,'3');assert.ok(urls.some(u=>u.includes('429115')));}
+ finally{globalThis.fetch=previous;}
+});

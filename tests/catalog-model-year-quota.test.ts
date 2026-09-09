@@ -16,8 +16,8 @@ function offer(market: string, make: string, model: string, year: number) {
   return { market, make, model, year, fuel: "petrol", powertrainKind: "combustion" } as any;
 }
 
-test("inventory quota is twenty per market + exact model + year", () => {
-  assert.equal(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, 20);
+test("broad inventory removes the legacy 20-row ceiling while Japan stays unchanged", () => {
+  assert.equal(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, 100000);
   assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, 20);
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper|2022");
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2025)), "korea|hyundai|casper|2025");
@@ -66,7 +66,7 @@ test("homepage showcase uses different models of the same make before duplicate 
   assert.deepEqual(selectCatalogShowcaseDiversity(rows, 3).map((row: any) => row.id), ["wrv-new", "accord", "stepwgn"]);
 });
 
-test("different years can each retain twenty cards for the same model", () => {
+test("different years retain all valid cards for the same model", () => {
   const rows = [
     ...Array.from({ length: 25 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2022), id: `22-${index}` })),
     ...Array.from({ length: 25 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2025), id: `25-${index}` })),
@@ -80,9 +80,9 @@ test("different years can each retain twenty cards for the same model", () => {
     counts.set(key, count + 1);
     selected.push(row);
   }
-  assert.equal(selected.filter((row) => row.year === 2022).length, 20);
-  assert.equal(selected.filter((row) => row.year === 2025).length, 20);
-  assert.equal(selected.length, 40);
+  assert.equal(selected.filter((row) => row.year === 2022).length, 25);
+  assert.equal(selected.filter((row) => row.year === 2025).length, 25);
+  assert.equal(selected.length, 50);
 });
 
 test("canonical publication caps normalized model-year buckets and preserves quality order", () => {
@@ -91,20 +91,20 @@ test("canonical publication caps normalized model-year buckets and preserves qua
     ...Array.from({ length: 3 }, (_, index) => ({ ...offer("china", "Toyota", "Hiace", 2024), id: `hiace-old-${index}` })),
   ];
   const result = enforceCatalogModelYearQuota(rows);
-  assert.equal(result.rows.length, 23);
-  assert.equal(result.removed.length, 5);
+  assert.equal(result.rows.length, 28);
+  assert.equal(result.removed.length, 0);
   assert.deepEqual(result.rows.slice(0, 3).map((row: any) => row.id), ["hiace-0", "hiace-1", "hiace-2"]);
-  assert.equal(result.rows.filter((row: any) => row.year === 2025).length, 20);
+  assert.equal(result.rows.filter((row: any) => row.year === 2025).length, 25);
   assert.equal(result.rows.filter((row: any) => row.year === 2024).length, 3);
 });
 
-test("protected rows get priority but cannot bypass the owner hard ceiling", () => {
+test("protected rows get priority without dropping valid newcomers", () => {
   const protectedRows = Array.from({ length: 22 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `live-${index}` }));
   const newcomers = Array.from({ length: 3 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `new-${index}` }));
   const protectedIds = new Set(protectedRows.map((row) => row.id));
   const result = enforceCatalogModelYearQuota([...protectedRows, ...newcomers], { protectedIds });
-  assert.deepEqual(result.rows.map((row: any) => row.id), protectedRows.slice(0, 20).map((row) => row.id));
-  assert.equal(result.removed.length, 5);
+  assert.deepEqual(result.rows.map((row: any) => row.id), [...protectedRows, ...newcomers].map((row) => row.id));
+  assert.equal(result.removed.length, 0);
 });
 
 test("coverage-first bounded output represents every discovered model-year before taking seconds", () => {

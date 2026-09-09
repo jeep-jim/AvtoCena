@@ -7,7 +7,19 @@ export async function collectSourcePage(state, options) {
   if (state.cursors.has(cursorKey)) { state.done = true; state.stopReason = 'cursor_loop'; return; }
   let page;
   try { page = await state.source.fetchPage(state.cursor); }
-  catch (error) { state.done = true; state.stopReason = 'list_failed'; state.errors.push({stage:'list',message:String(error?.message || error)}); await checkpoint(); return; }
+  catch (error) {
+    const message=String(error?.message || error);
+    const blocked=error?.blocked || /(?:401|403|429|captcha|bot.?challenge|access.?block)/i.test(message);
+    const transient=!blocked && /timeout|timed.?out|abort|network|fetch failed|econnreset|http[_: ]5\d\d/i.test(message);
+    state.listFailures=(state.listFailures || 0)+1;
+    state.consecutiveListFailures=(state.consecutiveListFailures || 0)+1;
+    state.done=!transient || state.consecutiveListFailures>=3 || Date.now()>=deadline;
+    state.stopReason=state.done?(blocked?'blocked':'list_failed'):'retry_pending';
+    if(state.errors.length<30)state.errors.push({stage:'list',message});
+    await checkpoint();return;
+  }
+  state.consecutiveListFailures=0;
+  state.stopReason='running';
   if (page.health?.blocked) { state.done = true; state.stopReason = 'blocked'; state.health = page.health; await checkpoint(); return; }
   state.cursors.add(cursorKey); state.pages++; state.listingRows += page.items?.length || 0;
   state.health = page.health; state.diagnostics = page.diagnostics;
