@@ -37,6 +37,7 @@ export type DubicarsCurrentRow = {
   bodyType?: string;
   color?: string;
   images: string[];
+  photoIdentityVerified?: boolean;
   semanticEvidence?: DubicarsSpecificationEvidence;
   specificationGroups?: import("./source-specifications").SourceSpecificationSnapshot["groups"];
 };
@@ -356,8 +357,15 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
   const driveRaw = labelValue(specsPlain, ["Drive type", "Drive Train"], stops);
   const bodyRaw = labelValue(specsPlain, ["Vehicle type", "Body Style"], stops);
   const color = labelValue(specsPlain, ["Color", "Exterior color"], stops);
-  const photos = images(markup, url);
+  const primaryGallery = markup.match(/<section\b[^>]*\bid=["']car-images-slider["'][^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  const canonicalTag = [...markup.matchAll(/<link\b[^>]*>/gi)]
+    .map(match => match[0]).find(tag => /\brel=["']canonical["']/i.test(tag));
+  const canonicalUrl = canonicalTag?.match(/\bhref=["']([^"']+)["']/i)?.[1];
+  const photos = images(primaryGallery || markup, url);
   if (!photos.length) return null;
+  const photoIdentityVerified = Boolean(primaryGallery && canonicalUrl && absoluteUrl(canonicalUrl, url) === url
+    && /-\d{5,}\.html$/.test(new URL(url).pathname)
+    && photos.every(photo => /(?:^|\.)dubicars\.com$/i.test(new URL(photo).hostname)));
 
   return {
     id: url.match(/-(\d{5,})\.html/i)?.[1] || url,
@@ -378,6 +386,7 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
     bodyType: normalizeBody(bodyRaw),
     color,
     images: photos,
+    photoIdentityVerified,
     semanticEvidence,
     specificationGroups: [
       {name:"Параметры DubiCars",items:stops.filter(name=>name!=="Location").flatMap(name=>labelValues(specsPlain,[name],stops).map(value=>({name,value})))},
@@ -446,6 +455,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
       operational: {
         sourceUrl: row.url,
         sourceVenueName: "DubiCars UAE",
+        photoIdentityVerified: row.photoIdentityVerified === true,
         semanticEvidence: {
           year: { source: "dubicars_detail_and_url_year", ...semanticEvidence.year },
           fuel: { source: "dubicars_detail_fuel_type", ...semanticEvidence.fuel },
