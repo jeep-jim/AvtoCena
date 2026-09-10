@@ -5,6 +5,7 @@ const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catal
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
+import { hashRows } from "./lib/catalog-row-hash.mjs";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
@@ -159,21 +160,6 @@ function uniqueImages(images) {
 
 function freshness(offer) {
   return catalogOfferFreshness(offer);
-}
-
-function stableJsonValue(value) {
-  if (Array.isArray(value)) return value.map(stableJsonValue);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableJsonValue(value[key])]));
-  }
-  return value;
-}
-
-function hashRows(rows) {
-  const canonical = [...rows]
-    .sort((left, right) => String(left?.id || "").localeCompare(String(right?.id || "")))
-    .map(stableJsonValue);
-  return crypto.createHash("sha256").update(JSON.stringify(canonical)).digest("hex");
 }
 
 function qualityOrder(left, right) {
@@ -585,7 +571,7 @@ if (regressionBlocked) {
 
 const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId,
-  marketId === market ? (nextPublicCount || selectedMarketOffers.length) : Number(preservedByMarket[marketId] || 0),
+  marketId === market ? (manifest ? nextPublicCount : previousPublicCount) : Number(preservedByMarket[marketId] || 0),
 ]));
 const publishedMarketCount = Number(byMarket[market] || 0);
 const calculatedCount = canonicalTargetPreview.offers.filter((offer) => hasExactCalculation(offer)).length;

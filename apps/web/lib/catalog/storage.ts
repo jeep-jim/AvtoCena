@@ -1146,7 +1146,12 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
-  return canonicalizePublicCatalogOffers(storedOffers);
+  // Match persistence's knowledge/specification normalization before auditing
+  // rejections. Otherwise a row can pass preview and disappear during the
+  // writer's later normalization, leaving no per-ID removal evidence.
+  const normalized = await Promise.all(storedOffers.map(async offer =>
+    normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
+  return canonicalizePublicCatalogOffers(normalized);
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {

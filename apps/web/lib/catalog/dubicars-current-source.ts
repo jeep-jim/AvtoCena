@@ -135,6 +135,28 @@ function listingExplicitlyHasNoPrice(markup: string) {
   return Number(decoded.replace(/[^0-9]/g, "")) === 0;
 }
 
+function listingStructuredPrice(markup: string, url: string) {
+  const matches: Array<{ price: number; currency: string }> = [];
+  for (const script of markup.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      const document = JSON.parse(script[1]);
+      const nodes = Array.isArray(document) ? document : document['@graph'] || [document];
+      for (const node of nodes) {
+        const types = [node['@type']].flat();
+        if (!types.some(type => ['Car', 'Vehicle', 'Product'].includes(type))) continue;
+        if (node.url !== url || node['@id'] !== `${url}#car`) continue;
+        const offer = node.offers;
+        if (offer?.['@type'] !== 'Offer' || offer['@id'] !== `${url}#offer`) continue;
+        const value = Number(offer.price), currency = String(offer.priceCurrency || '');
+        const maximum = currency === 'USD' ? 2_000_000 : ['AED', 'SAR'].includes(currency) ? 10_000_000 : 0;
+        if (Number.isFinite(value) && value >= 1_000 && value <= maximum) matches.push({ price: value, currency });
+      }
+    } catch { /* Malformed/unbound structured data is not price evidence. */ }
+  }
+  return matches.length && matches.every(item => item.price === matches[0].price && item.currency === matches[0].currency)
+    ? matches[0] : { price: undefined, currency: undefined };
+}
+
 function labelValues(plain: string, labels: string[], stops: string[]) {
   const labelPattern = labels.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const stopPattern = stops.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
@@ -324,7 +346,7 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
   const primaryPlain = primaryMarkup ? clean(primaryMarkup) : fullPlain.split(/\b(?:Similar cars|People also viewed|Recommended cars)\b/i)[0];
   const parsedPrice = listingExplicitlyHasNoPrice(markup) || /price on request/i.test(primaryPlain)
     ? { price: undefined, currency: undefined }
-    : price(primaryPlain);
+    : (() => { const visible = price(primaryPlain); return visible.price ? visible : listingStructuredPrice(markup, url); })();
   const mileageKm = integer(highlightsPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]);
   const engineRaw = labelValues(specsPlain, ["Engine capacity"], stops);
   const powerRaw = labelValues(specsPlain, ["Horsepower"], stops);

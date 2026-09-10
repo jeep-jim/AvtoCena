@@ -4,6 +4,17 @@ import test from "node:test";
 
 const workflow = fs.readFileSync(".github/workflows/catalog-republish-market-artifacts.yml", "utf8");
 
+test('five-market push reads its own reuse marker instead of starting another crawl', () => {
+  const source = fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml', 'utf8');
+  const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
+  assert.match(script, /EVENT_NAME === 'push'/);
+  assert.match(script, /readFileSync\('\.github\/market-runs\/five-market-full-rebuild\.json'/);
+  assert.doesNotMatch(script, /weekly-six-market-catalog/);
+  assert.match(source, /run-id: \$\{\{ needs\.plan\.outputs\.reuse_run_id \}\}/);
+  assert.match(source, /const allowed = \['korea','china','uae','europe','georgia'\]/);
+  assert.match(source, /fromJSON\(needs\.plan\.outputs\.collect_markets\)/);
+});
+
 test("collected market artifacts can be republished without another source crawl", () => {
   assert.match(workflow, /\.github\/market-runs\/republish-artifacts/);
   assert.match(workflow, /permissions:\n  actions: read\n  contents: read/);
