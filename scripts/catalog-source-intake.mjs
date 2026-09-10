@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intake-checkpoint.mjs';
-import { collectSourcePage, intakeState, intakeSummary } from './lib/catalog-source-intake.mjs';
+import { collectSourceStates, intakeState, intakeSummary } from './lib/catalog-source-intake.mjs';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
 process.env.CATALOG_REBUILD_MARKET=market;
@@ -28,22 +28,27 @@ const startedAt=new Date().toISOString();
 const deadline=Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
-async function checkpoint() {
+let checkpointQueue = Promise.resolve();
+let lastProgressAt = 0;
+function checkpoint() {
+ return checkpointQueue = checkpointQueue.then(async () => {
   const value={...report,updatedAt:new Date().toISOString(),sources:states.map(intakeSummary)};
   await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(value,null,2));
   await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));
+  if (Date.now()-lastProgressAt >= 60000 || report.completedAt) {
+    lastProgressAt=Date.now();
+    console.log(JSON.stringify({stage:'intake_progress',market,at:value.updatedAt,
+      sources:value.sources.map(s=>({sourceId:s.sourceId,pages:s.pages,uniqueOffers:s.observations,withImages:s.withImages,stopReason:s.stopReason}))}));
+  }
+ });
 }
 await checkpoint();
-while(Date.now()<deadline && states.some(s=>!s.done)) {
-  for(const state of states) {
-    await collectSourcePage(state,{market,deadline,maxRows:100000,maxPages:2000,detailConcurrency:4,
+await collectSourceStates(states,state=>({market,deadline,maxRows:100000,maxPages:2000,detailConcurrency:4,
       minYear:market==='japan'?2010:new Date().getUTCFullYear()-6,
       snapshot:sourceListingSnapshot,checkpoint,
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
-      writeObservation:writers.get(state.sourceId)});
-  }
-}
+      writeObservation:writers.get(state.sourceId)}));
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
 report.completedAt=new Date().toISOString();
 report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>({sourceId:s.sourceId,reason:s.stopReason}));

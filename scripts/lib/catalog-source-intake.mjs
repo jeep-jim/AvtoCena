@@ -1,5 +1,14 @@
 import { createHash } from 'node:crypto';
 
+// Independent sites must not wait for the slowest site's detail page. Each
+// source still has exactly one pagination loop and its own bounded workers.
+export async function collectSourceStates(states, optionsForState, collect = collectSourcePage) {
+  await Promise.all(states.map(async state => {
+    const options = optionsForState(state);
+    while (!state.done && Date.now() < options.deadline) await collect(state, options);
+  }));
+}
+
 // Collection is separate from publication: incomplete records are retained.
 export async function collectSourcePage(state, options) {
   const { snapshot, writeObservation, checkpoint, deadline, maxRows, maxPages, minYear, specificationReport } = options;
