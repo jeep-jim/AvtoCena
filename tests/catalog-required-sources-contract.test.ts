@@ -34,6 +34,7 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
   ],
   japan: [
+    ["drom_japan_stat", "https://www.drom.ru/world/japan/"],
     ["jpauc_japan_past_open", "https://jpauc.com/auction/past"],
     ["carvector_japan_stat_open", "https://carvector.com/stat"],
     ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
@@ -42,9 +43,9 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
   ],
 };
 
-test("the 17 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
+test("the 18 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 17);
+  assert.equal(total, 18);
   assert.deepEqual(Object.keys(REQUIRED_CATALOG_SOURCES).sort(), ["china", "europe", "georgia", "japan", "korea", "uae"]);
 
   for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {

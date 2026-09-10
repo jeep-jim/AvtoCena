@@ -17,7 +17,7 @@ function writesCatalogMarkets(source: string) {
   return /catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
-test("catalog writers stay unscheduled until the five-market publication is qualified", () => {
+test("only the owner-approved seller inventory workflows are scheduled under one publication lock", () => {
   const scheduledWriters = fs.readdirSync(root)
     .filter((name) => /^catalog.*\.ya?ml$/i.test(name))
     .filter((name) => {
@@ -25,7 +25,14 @@ test("catalog writers stay unscheduled until the five-market publication is qual
       return hasSchedule(source) && writesCatalogMarkets(source);
     })
     .sort();
-  assert.deepEqual(scheduledWriters, []);
+  assert.deepEqual(scheduledWriters, ['catalog-five-market-full-rebuild.yml','catalog-japan-drom-refresh.yml']);
+  for(const name of scheduledWriters){
+    const source=text(name);
+    assert.match(source,/group: catalog-six-market-quality-rebuild/);
+    assert.match(source,/cancel-in-progress: false/);
+    assert.match(source,/CATALOG_SELLER_INVENTORY: '1'/);
+    assert.match(source,/catalog-storage-preflight/);
+  }
 
   // Cleanup is paused too, so the frozen catalog cannot lose generations while
   // the new two-week retention contract is being repaired and verified.

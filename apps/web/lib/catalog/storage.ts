@@ -1,3 +1,4 @@
+import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
@@ -765,17 +766,17 @@ export async function readMarketOffers(market: string) {
   const chunks: string[] = manifest.markets?.[market]?.chunks || [];
   return readOfferLists(chunks.map((chunk) => storedOfferChunkPath(manifest.generationId, market, chunk)));
 }
-export async function readAllOffersForMaintenance() {
+export async function readAllOffersForMaintenance(options: { excludeMarket?: CatalogMarket } = {}) {
   const [manifest, japanArchive] = await Promise.all([
     readDataJson<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} }),
     readDataJson<JapanAuctionArchiveManifest | null>(JAPAN_ARCHIVE_MANIFEST_PATH, null),
   ]);
   const chunks: string[] = [
-    ...Object.values<any>(manifest.sources || {}).flatMap((source) => source.chunks || []),
-    ...(Array.isArray(japanArchive?.chunks) ? japanArchive.chunks : []),
+    ...Object.entries<any>(manifest.sources || {}).filter(([sourceId]) => !options.excludeMarket || !REQUIRED_CATALOG_SOURCES[options.excludeMarket].some(source => source.sourceId === sourceId)).flatMap(([, source]) => source.chunks || []),
+    ...(options.excludeMarket !== "japan" && Array.isArray(japanArchive?.chunks) ? japanArchive.chunks : []),
   ];
   const rows = await readOfferLists([...new Set(chunks)]);
-  return [...new Map(rows.map((offer) => [offer.id, offer])).values()];
+  return [...new Map(rows.filter(offer => offer.market !== options.excludeMarket).map((offer) => [offer.id, offer])).values()];
 }
 export const readAllOffers = readAllOffersForMaintenance;
 async function facetsFromProjection(generationId: string, rows: CatalogSearchProjection[], params: CatalogSearchParams, hasFilters: boolean): Promise<CatalogFacets> {
@@ -973,9 +974,9 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     ...Object.values(preservedPublicOffersByMarket),
     ...Object.values(appendPublicOffersByMarket),
   ].flatMap((rows) => rows || []).map((offer) => String(offer?.id || "")).filter(Boolean));
-  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
+  const normalized = await mapWithConcurrency(nextOffers, 12, async (offer) => exactPreserveMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
     ? offer
-    : normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
+    : normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer)));
   if (growOnlyMarkets.size) {
     const current = await readAllOffersForMaintenance();
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));

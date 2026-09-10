@@ -49,3 +49,15 @@ test("verified Japan auction calculates automatically only in the explicitly ena
   assert.equal(result.calculationSnapshot?.customs?.status,"ready");assert.equal(JSON.stringify(offer),before);
  } finally {read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
+
+test('Drom enriches only an exact lot and keeps its own sold price and provenance',()=>{
+ const [jp]=pair();
+ const drom:any={...structuredClone(jp),id:'drom-lot',sourceId:'drom_japan_stat',sourceOfferId:'8493500',sourcePrice:1800000,images:[{url:'https://s.auto.drom.ru/own-lot.jpg'}],operational:{...jp.operational,sourceUrl:'https://www.drom.ru/world/japan/bmw/330i/8493500/',raw:{nominalEngineCc:1998}}};
+ const result=joinJapanInventory([drom,jp]);
+ assert.equal(result.report.joined,1);assert.equal(result.offers[0].sourcePrice,1800000);assert.equal(result.offers[0].images.length,4);assert.equal(result.offers[0].operational.sourceUrl,drom.operational.sourceUrl);
+ for(const change of [{auctionName:'USS Nagoya'},{mileageKm:12346},{lotNumber:'90'},{year:2021}])assert.equal(joinJapanInventory([drom,{...jp,...change}]).report.joined,0);
+ const bad=structuredClone(jp);(bad.operational.raw as any).listingImage=(bad.operational.raw as any).listingImage.replace('bid=89','bid=90');assert.equal(joinJapanInventory([drom,bad]).report.joined,0);
+ assert.equal(joinJapanInventory([drom,jp,{...jp,sourceOfferId:'another'}]).report.ambiguous,1);
+ const injected=structuredClone(jp);injected.images=[{url:'https://unrelated.example/photo.jpg'}] as any;
+ assert.ok(joinJapanInventory([drom,injected]).offers[0].images.every(img=>!img.url.includes('unrelated')));
+});

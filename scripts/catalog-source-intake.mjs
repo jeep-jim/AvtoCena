@@ -14,7 +14,10 @@ const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/spec
 const directory=`catalog-intake-${market}`;
 await fs.mkdir(directory,{recursive:true});
 if ((await fs.readdir(directory)).some(name=>name.endsWith('.jsonl'))) throw Error('intake_output_not_empty');
-const states=REQUIRED_CATALOG_SOURCES[market].map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
+const selectedSourceIds=(process.env.CATALOG_INTAKE_SOURCE_IDS||'').split(',').filter(Boolean);
+if(selectedSourceIds.some(id=>!REQUIRED_CATALOG_SOURCES[market].some(source=>source.sourceId===id)))throw Error('intake_source_not_approved');
+const selectedSources=REQUIRED_CATALOG_SOURCES[market].filter(source=>!selectedSourceIds.length||selectedSourceIds.includes(source.sourceId));
+const states=selectedSources.map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
 if (process.env.CATALOG_INTAKE_RESUME === '1') {
   const {getJsonStorage}=await import('../apps/web/lib/data.ts');
   const saved=await getJsonStorage().readJson(`catalog/intake-cursors/v1/${market}.json`,null);
