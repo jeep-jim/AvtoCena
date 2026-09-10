@@ -462,3 +462,6 @@ textarea::placeholder {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
+
+@keyframes ac-browser-sheet-enter { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: no-preference) { .ac-browser-sheet { animation: ac-browser-sheet-enter 220ms ease-out; } }
