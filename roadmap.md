@@ -3396,3 +3396,10 @@ PR #872 принят: edf9cc80579f5b0fb47ffbeb598529bfb3537649. Публикац
 - Ссылка «Открыть в Яндексе ↗» перенесена из подвала к заголовку; на узком экране переносится без перекрытия кнопки закрытия. Переход завершает сессию, ссылка исключена из жеста перетаскивания шапки.
 - Убраны внешняя обводка, разделители и сплошной фон вокруг нижней формы. Поле сохраняет собственный фон, кнопка отправки — логотип Алисы на прозрачном фоне; при доступной отправке непустого вопроса логотип становится ярче.
 - Десктопный сценарий и жизненный цикл облачных сессий сохранены. TypeScript: `npx tsc --noEmit -p apps/web/tsconfig.json` — успешно. Визуальная проверка на телефоне после публикации остаётся необходимой.
+
+
+### 2026-09-10 — Japan: owner-requested Drom-only publication
+
+Owner reports broken legacy Japan links and unsuitable auction prices. The production source allowlist and scheduled intake now contain only `drom_japan_stat`; retired JPAuc and other Japanese sources cannot survive retention or restoration. Reuse collected artifacts from run `34444487911`, with no new source requests. Drom accepts only sold results (`lot.priceYen`, schema Offer JPY, «Продан за»), never starting bids. Existing manual calculation remains available when specifications are missing.
+
+Before this cleanup, generation `gen_1789030080567_b856cc5d` published 9343 Japan cards (1311 Drom, 8032 retained JPAuc). Read-only audit `34461967383` passed, but that does not establish current validity of legacy source pages. This cleanup publication and live route verification are pending; do not report a new count until their final logs are checked.
