@@ -1,3 +1,4 @@
+import {diagnosis} from './errors.mjs';
 export class SessionError extends Error {constructor(code,status=400){super(code);this.status=status;}}
 export class Sessions {
  constructor({open,now=Date.now,max=2,leaseMs=20000,idleMs=90000,lifeMs=600000}={}) {
@@ -20,7 +21,7 @@ export class Sessions {
    s.browser=browser;
    await browser.start(prompt);
    if(this.rows.get(id)===s)s.state='ready';
-  }catch(e){if(this.rows.get(id)===s){s.state='failed';s.error=['provider_blocked','composer_missing','provider_unavailable'].includes(e.message)?e.message:'browser_start_failed';await s.browser?.close().catch(()=>{});s.browser=null;this.permits.delete(s);}else this.permits.delete(s);}})();
+  }catch(e){this.lastFailure={...(e.diagnostic||diagnosis('unknown',e)),at:this.now()};console.error(JSON.stringify({event:'browser_start_failure',...this.lastFailure}));if(this.rows.get(id)===s){s.state='failed';s.error=['provider_blocked','composer_missing','provider_unavailable'].includes(e.message)?e.message:'browser_start_failed';await s.browser?.close().catch(()=>{});s.browser=null;this.permits.delete(s);}else this.permits.delete(s);}})();
   this.pending.add(task);task.finally(()=>this.pending.delete(task));return this.public(s);
  }
  public(s){return {id:s.id,state:s.state,error:s.error,expiresAt:s.started+this.lifeMs};}
