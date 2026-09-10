@@ -12,7 +12,7 @@ const storage = getJsonStorage();
 let createdId = "", activated = false, attempted = false;
 function yc(args: string[]) {
  try {return JSON.parse(execFileSync(process.env.YC_BIN || "yc", [...args, "--folder-id", folder, "--format", "json"], {encoding: "utf8", timeout: 240000, stdio: ["ignore", "pipe", "pipe"]}));}
- catch (e: any) { const stderr = String(e.stderr || ""); const code = stderr.match(/(?:code = |code: )([A-Za-z_]+)/)?.[1] || "command_failed"; throw Error(`YC ${args.slice(0,3).join(" ")}: ${code}${args[0] === "vpc" ? ": " + stderr.slice(0, 2500) : ""}`); }
+ catch (e: any) { const stderr = String(e.stderr || ""); const code = stderr.match(/(?:code = |code: )([A-Za-z_]+)/)?.[1] || "command_failed"; throw Error(`YC ${args.slice(0,3).join(" ")}: ${code}${(args[0] === "vpc" || (args[0] === "compute" && ["stop", "delete"].includes(args[2]))) ? ": " + stderr.slice(0, 2500) : ""}`); }
 }
 function summary(message: string) {console.log(message); if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, message + "\n");}
 async function main() {
@@ -23,7 +23,9 @@ async function main() {
  let existing = instances.filter(v => v.name === name);
  if (process.env.REPLACE_FAILED_PILOT_ID && existing.length) {
   const failed = existing[0];
-  if (existing.length !== 1 || prior || failed.id !== process.env.REPLACE_FAILED_PILOT_ID || failed.status !== "STOPPED" || failed.labels?.app !== "avtocena-browser" || failed.labels?.run !== process.env.REPLACE_FAILED_PILOT_RUN) throw Error("failed_pilot_replacement_guard");
+  if (existing.length !== 1 || prior || failed.id !== process.env.REPLACE_FAILED_PILOT_ID || !["STOPPED", "RUNNING", "STOPPING"].includes(failed.status) || failed.labels?.app !== "avtocena-browser" || failed.labels?.run !== process.env.REPLACE_FAILED_PILOT_RUN) throw Error("failed_pilot_replacement_guard");
+  if (failed.status !== "STOPPED") yc(["compute", "instance", "stop", "--id", failed.id]);
+  if (yc(["compute", "instance", "get", "--id", failed.id]).status !== "STOPPED") throw Error("failed_pilot_not_stopped");
   yc(["compute", "instance", "delete", "--id", failed.id]);
   summary(`Removed stopped unactivated pilot ${failed.id} before replacement.`);
   existing = [];
