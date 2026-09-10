@@ -3414,3 +3414,14 @@ Before this cleanup, generation `gen_1789030080567_b856cc5d` published 9343 Japa
 - Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34465259564/job/102832219761 . The workflow stopped the VM at 10:19:44 UTC and did not enable public runtime. Stopped disk storage still exists and may be billed.
 - Fixes prepared in PR 886: allow the web proxy 35 seconds for a send operation whose worker navigation may take 25 seconds (heartbeat/close timeouts unchanged); retain mobile pointer gestures using touch-none; log only categorical probe rejection details.
 - This is not a completed embedded Alice integration. Do not enable based on health alone or bypass provider checks. A supported provider integration or approved embedding is needed for a reliable in-site answer experience.
+
+
+## 2026-09-10 — Experimental manual Yandex page in mobile sheet
+
+Owner approved a reversible trial of the original Yandex page with human interaction and the external free-tab fallback retained.
+
+- Mobile sheet: 80dvh; pointer taps, manual drag gestures, scroll buttons and input into the selected page field. The normal question field retains vehicle context; explicit page-input mode fills the focused field. Alice SVG send icon and transparent footer retained. Desktop unchanged.
+- CAPTCHA is displayed for the user to complete manually. Explicit access-denied pages still close the session. No automated solving, challenge clicking or identity spoofing.
+- Pointer coordinates and path lengths are validated by both API and worker. Session ownership, Chromium sandbox, destination allowlist and network isolation remain. Password entry is not relayed; account sign-in uses the external link.
+- Existing close/hide/freeze/pagehide/offline cleanup and 20-second lease, 90-second idle and 10-minute lifetime remain, including while a challenge is visible.
+- Local verification: 16 worker tests and web TypeScript passed. Cloud page visibility and a real Alice response remain unverified until the deployment probe and the owner's manual test.
