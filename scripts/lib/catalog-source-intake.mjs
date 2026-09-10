@@ -25,6 +25,8 @@ export async function collectSourcePage(state, options) {
   if (page.health?.blocked) { state.done = true; state.stopReason = 'blocked'; state.health = page.health; await checkpoint(); return; }
   state.cursors.add(cursorKey); state.pages++; state.listingRows += page.items?.length || 0;
   state.health = page.health; state.diagnostics = page.diagnostics;
+  // This is the source's reported count, not a claim of complete coverage.
+  if (Number.isFinite(Number(page.count))) state.sourceReportedCount = Number(page.count);
   let pageComplete = true;
   let nextRaw = 0;
   const rawRows = page.items || [];
@@ -94,7 +96,7 @@ export async function collectSourcePage(state, options) {
   await checkpoint();
 }
 export function intakeState(source, required) {
-  return {source,sourceId:required.sourceId,sourceUrl:required.canonicalUrl,role:required.role,cursor:null,
+  return {source,sourceId:required.sourceId,sourceUrl:required.canonicalUrl,role:required.role,cursor:null,initialCursor:null,
     seen:new Set(),cursors:new Set(),pages:0,listingRows:0,duplicates:0,normalizationFailures:0,outsideAge:0,withdrawn:0,
     detailAttempts:0,withImages:0,withNamedTables:0,namedFields:0,withoutNamedTable:0,tableKinds:{},tableStatuses:{},untranslatedFields:0,untranslatedSamples:[],fieldEvidence:{},errors:[],done:!source,stopReason:source?'running':'adapter_missing'};
 }

@@ -1,0 +1,12 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { publishedIntakeCheckpoint } from './lib/catalog-intake-checkpoint.mjs';
+const market=process.env.CATALOG_REBUILD_MARKETS;
+if (!['korea','china','uae','europe','georgia'].includes(market)) throw Error('invalid_cursor_market');
+const root=process.env.CATALOG_INTAKE_INPUT_DIR || 'catalog-intake-input';
+const intake=JSON.parse(await fs.readFile(path.join(root,`catalog-intake-${market}`,'report.json'),'utf8'));
+const publication=JSON.parse(await fs.readFile(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8'));
+const checkpoint=publishedIntakeCheckpoint(intake,publication);
+const {getJsonStorage}=await import('../apps/web/lib/data.ts');
+await getJsonStorage().writeJson(`catalog/intake-cursors/v1/${market}.json`,checkpoint);
+console.log(JSON.stringify({market,generationId:checkpoint.generationId,cursorCommitted:true}));
