@@ -12,7 +12,7 @@ const storage = getJsonStorage();
 let createdId = "", activated = false, attempted = false;
 function yc(args: string[]) {
  try {return JSON.parse(execFileSync(process.env.YC_BIN || "yc", [...args, "--folder-id", folder, "--format", "json"], {encoding: "utf8", timeout: 240000, stdio: ["ignore", "pipe", "pipe"]}));}
- catch (e: any) { const stderr = String(e.stderr || ""); const code = stderr.match(/(?:code = |code: )([A-Za-z_]+)/)?.[1] || "command_failed"; throw Error(`YC ${args.slice(0,3).join(" ")}: ${code}`); }
+ catch (e: any) { const stderr = String(e.stderr || ""); const code = stderr.match(/(?:code = |code: )([A-Za-z_]+)/)?.[1] || "command_failed"; throw Error(`YC ${args.slice(0,3).join(" ")}: ${code}${args[0] === "vpc" ? ": " + stderr.slice(0, 2500) : ""}`); }
 }
 function summary(message: string) {console.log(message); if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, message + "\n");}
 async function main() {
