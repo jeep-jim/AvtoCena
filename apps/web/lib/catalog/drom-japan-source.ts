@@ -8,7 +8,7 @@ const clean=(v:unknown)=>String(v??'').replace(/\s+/g,' ').trim();
 const number=(v:unknown)=>Number(clean(v).replace(/[^0-9]/g,'')) || undefined;
 function lotUrl(value:unknown) {
  const u=new URL(String(value),BASE);
- if(u.origin!==BASE || !/^\/world\/japan\/[a-z0-9_-]+\/[a-z0-9_-]+\/\d+\/$/.test(u.pathname))throw Error('drom_invalid_lot_url');
+ if(u.origin!==BASE || !/^\/world\/japan\/[a-z0-9_+-]+\/[a-z0-9_+-]+\/\d+\/$/.test(u.pathname))throw Error('drom_invalid_lot_url');
  return u;
 }
 export function dromModule(html:string,name:string):any {
