@@ -32,5 +32,14 @@ jobs:
             for(const args of [['compute','instance','list'],['vpc','subnet','list'],['vpc','security-group','list']]) {
               const result=run(args); console.log(JSON.stringify({operation:args.join(' '),ok:result.ok,error:result.error,count:result.ok&&Array.isArray(result.value)?result.value.length:null}));
             }
+            const instances=run(['compute','instance','list']);
+            for(const vm of (instances.ok?instances.value:[]).filter(v=>v.name==='avtocena-browser-pilot')) {
+              console.log(JSON.stringify({pilotId:vm.id,status:vm.status,createdAt:vm.created_at}));
+              try {
+                const serial=cp.execFileSync(yc,['compute','instance','get-serial-port-output','--id',vm.id,'--port','1','--folder-id','b1g9vq73onqb7dp5hgqg'],{encoding:'utf8',timeout:40000,stdio:['ignore','pipe','pipe']});
+                const lines=serial.split(/\r?\n/).filter(l=>/error|failed|denied|cloud-init|docker|iptables|avtocena-browser/i.test(l)&& !/PRIVATE KEY|BROWSER_WORKER_KEY|access_token|AUTH_SECRET|password|token|worker.env/i.test(l));
+                console.log(lines.slice(-35).map(l=>l.replace(/[a-f0-9]{48,}/g,'[redacted]')).join('\n').slice(-6500));
+              } catch {console.log('Serial output unavailable');}
+            }
           } finally {fs.rmSync(file,{force:true});}
           JS
