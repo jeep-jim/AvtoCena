@@ -3458,3 +3458,13 @@ Owner approved a reversible trial of the original Yandex page with human interac
 - Deployment 34470324053 completed its Serverless Container deployment step. On the freshly loaded BAW M7 offer f5a71ab88bd987740e5eaf13, the research link has target=_blank and rel=noopener noreferrer. An actual click opened a new Yandex tab with the vehicle-specific query and left the AvtoCena offer open. The test browser was challenged by Yandex; absence of CAPTCHA is not promised.
 - Cloud runtime remains disabled and exact pilot VM stopped (operation 34469994421). No cloud session is started by the restored link.
 - Remaining separate failures: Honda Fit offer 81f6d7d4308c77d1b5f320ee changed from initial streamed content to the page error boundary, including after its Retry button. This card has not been verified healthy. The broader deployment warmup is still pending at time of this record; do not interpret button verification as full catalog health.
+
+
+
+### 2026-09-10 — Restore owner-requested 80/20 public assortment
+
+Europe exposed 20081 cards while the user's <=160 hp filter returned 7949 (~39.6%). Root cause: low-power share was only a ranking target; selection filled all remaining capacity. Seller-inventory publication now caps the non-low-power public pool at floor(lowPowerCount / 4), after canonical identity, deduplication and model-year quotas. Unknown horsepower counts against the 20% allowance; EV/hybrid membership matches the public filter using certified utilization power, never short peak power. Japan is fully exempt from the 80/20 power mix by explicit owner instruction, including high and unknown horsepower. Sanctions are a separate display/filter concern, never this power quota.
+
+Non-public rows remain in internal source chunks and reenter the next refresh candidate pool, so public assortment limits do not delete collected inventory. Existing-market rebalance uses no fresh source requests and preserves every other market byte-for-byte for each atomic publication. Three ratio/unknown/market-isolation tests pass locally. Production rebalance and final market counts are pending.
+
+Latest Europe scope: immediate rebalance only publishes Europe from retained source inventory; no fresh collection is launched. Future non-Japan publications apply the same ratio. Within Europe's 20% extra allowance, lower verified delivered prices rank before more expensive quotes; seller-only amounts are not treated as cheap delivered prices. Japan remains exempt. Prior PR 885 CI passed, but roadmap conflict prevented merging; refreshed against current main with all Alice changes preserved. New CI and actual publication counts pending.
