@@ -13,6 +13,21 @@ const gallery = Array.from({ length: 5 }, (_, index) =>
   `<img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/${index + 1}2345678-abcd-1234-abcd-123456789abc.jpg" />`,
 ).join("\n");
 
+test('DubiCars reads a listing-bound structured price when the title bar uses a currency icon', () => {
+  const structured = (target = url, value = '15803', currency = 'USD') => `<script type="application/ld+json">${JSON.stringify({ '@graph': [{
+    '@type': ['Product', 'Car'], '@id': `${target}#car`, url: target,
+    offers: { '@type': 'Offer', '@id': `${target}#offer`, price: value, priceCurrency: currency },
+  }] })}</script>`;
+  const page = '<section id="title-bar"><h1>Toyota Camry V6</h1><span>15,803</span></section><div>Model year 2024</div>' + gallery;
+  assert.equal(parseDubicarsCurrentListing(page + structured(), url)?.price, 15803);
+  assert.equal(parseDubicarsCurrentListing(page + structured(), url)?.currency, 'USD');
+  assert.equal(parseDubicarsCurrentListing(page + structured('https://www.dubicars.com/other.html'), url)?.price, undefined);
+  assert.equal(parseDubicarsCurrentListing(page + structured(url, '0'), url)?.price, undefined);
+  assert.equal(parseDubicarsCurrentListing(page + structured(url, '15803', 'UNKNOWN'), url)?.price, undefined);
+  assert.equal(parseDubicarsCurrentListing(page + structured() + structured(url, '18000'), url)?.price, undefined);
+  assert.equal(parseDubicarsCurrentListing(page.replace('15,803', 'Price on request') + structured(), url)?.price, undefined);
+});
+
 function detail(specifications: string, after = "") {
   return `<h1>Toyota Camry V6 3.5L</h1>
     <div>AED 145,000</div>

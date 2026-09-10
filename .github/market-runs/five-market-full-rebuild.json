@@ -1,1 +1,16 @@
-{"requestedAt":"2026-09-09","markets":["korea","china","uae","europe","georgia"],"japanExcludedReason":"final auction prices not qualified","mode":"fresh-source-collection"}
+{
+  "requestedAt": "2026-09-10",
+  "markets": [
+    "korea",
+    "china",
+    "uae",
+    "europe",
+    "georgia"
+  ],
+  "japanExcludedReason": "separate feed qualification",
+  "mode": "reuse-collected-with-uae-price-parser-refresh",
+  "reuseRunId": "34338186281",
+  "refreshMarkets": [
+    "uae"
+  ]
+}
