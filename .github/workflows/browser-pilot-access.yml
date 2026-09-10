@@ -57,3 +57,27 @@ jobs:
             if (!response.ok || body.enabled !== true) process.exitCode = 1;
           })().catch(() => { console.error('Public pilot availability failed'); process.exitCode = 1; });
           JS
+      - name: Verify one real session and always close it
+        run: |
+          node <<'JS'
+          const {randomUUID}=require('crypto');
+          (async()=>{
+            const endpoint='https://avtocena.com/api/browser-pilot', origin='https://avtocena.com';
+            const initial=await fetch(endpoint,{signal:AbortSignal.timeout(15000)});
+            const cookie=initial.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');
+            const available=await initial.json();if(!available.enabled)throw Error('pilot_disabled');
+            const id=randomUUID(), started=Date.now();
+            async function post(action){const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Origin:origin,Cookie:cookie},body:JSON.stringify({action,id,...(action==='create'?{offerId:'f5a71ab88bd987740e5eaf13'}:{})}),signal:AbortSignal.timeout(20000)});return {status:r.status,body:await r.json()};}
+            try {
+              let r=await post('create');console.log(JSON.stringify({action:'create',status:r.status,state:r.body.state,error:r.body.error}));
+              if(r.status>=400)throw Error(r.body.error||'create_failed');
+              for(let i=0;i<25;i++){
+                await new Promise(resolve=>setTimeout(resolve,2000));r=await post('heartbeat');
+                console.log(JSON.stringify({action:'heartbeat',elapsedMs:Date.now()-started,status:r.status,state:r.body.state,error:r.body.error}));
+                if(r.body.state==='ready')return;
+                if(r.status>=400||r.body.state==='failed')throw Error(r.body.error||'session_failed');
+              }
+              throw Error('session_readiness_timeout');
+            } finally {const r=await post('close');console.log(JSON.stringify({action:'close',status:r.status,closed:r.body.closed}));}
+          })().catch(e=>{console.error(e.message);process.exitCode=1;});
+          JS
