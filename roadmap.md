@@ -3436,3 +3436,12 @@ Owner approved a reversible trial of the original Yandex page with human interac
 - Public site probe at 10:54 UTC: enabled=true, create HTTP 200, ready at 6380 ms, close HTTP 200 / closed=true. Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34456280594/job/102842522018 .
 - Web release d13b12ac8c78d3ed9e06717c32f1734acd267c92 was confirmed live at 10:47:47 UTC. The broader deploy workflow 34467621826 then failed at the Autocatalog route warmup (curl timeout 28); this is a separate unresolved route issue, not a successful all-site verification.
 - Owner test: open a vehicle on a phone, choose “Уточнить характеристики с ИИ”, interact with the displayed challenge manually; use page-input mode for a focused native field. The header external Yandex link remains available. UI still needs owner's phone feedback.
+
+
+### 2026-09-10 — Restore direct Yandex research after owner trial
+
+- Owner screenshots confirm an actual Alice answer appeared, but repeated CAPTCHA, blurry frames and latency make the cloud-browser trial unsuitable for public use.
+- Restore the research button to a plain Yandex link opening a new tab on mobile and desktop. Preserve the vehicle-specific query, Alice logo and button styling. No sheet, popup interception or cloud session is started by this button.
+- Keep the experimental browser implementation dormant for possible future uses. Stop only the identified trial VM fhmvvsmoc6vpu3jbbhkc and disable its encrypted runtime via a separately guarded operation; verify the operation log before calling shutdown complete.
+- Google AI Mode supports search and follow-up questions and lists Russia as available (https://support.google.com/websearch/answer/16011537?hl=ru), but a supported free embedded public chat was not verified. Gemini's web app does not list Russia (https://support.google.com/gemini/answer/13575153?hl=en). No provider migration is introduced.
+- Separate outstanding issue: earlier web deployment passed release health but failed Autocatalog route warmup with curl timeout 28. This rollback does not claim to fix that route.
