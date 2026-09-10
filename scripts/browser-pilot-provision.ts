@@ -9,7 +9,7 @@ import {callBrowser} from "../apps/web/lib/browser-pilot/worker";
 const folder = "b1g9vq73onqb7dp5hgqg", name = "avtocena-browser-pilot";
 const dir = mkdtempSync(join(tmpdir(), "browser-pilot-"));
 const storage = getJsonStorage();
-let createdId = "", activated = false;
+let createdId = "", activated = false, attempted = false;
 function yc(args: string[]) {
  try {return JSON.parse(execFileSync(process.env.YC_BIN || "yc", [...args, "--folder-id", folder, "--format", "json"], {encoding: "utf8", timeout: 240000, stdio: ["ignore", "pipe", "pipe"]}));}
  catch (e: any) { const stderr = String(e.stderr || ""); const code = stderr.match(/(?:code = |code: )([A-Za-z_]+)/)?.[1] || "command_failed"; throw Error(`YC ${args.slice(0,3).join(" ")}: ${code}`); }
@@ -45,6 +45,8 @@ async function main() {
  const workerEnv = `BROWSER_WORKER_KEY=${shared}\nRELEASE_SHA=${process.env.GITHUB_SHA}\nPILOT_EXPIRES_AT=${expiresAt}\n`;
  const startup = `#!/bin/bash
 set -euo pipefail
+systemctl daemon-reload
+systemctl enable --now avtocena-browser-expiry.timer
 # Metadata credentials stay on the host; browsers cannot contact metadata or private networks.
 iptables -I DOCKER-USER -i docker0 -d 169.254.0.0/16 -j DROP
 iptables -I DOCKER-USER -i docker0 -d 10.0.0.0/8 -j DROP
@@ -54,7 +56,6 @@ curl -fsS --max-time 10 -H 'Metadata-Flavor: Google' http://169.254.169.254/comp
 docker pull ${process.env.IMAGE}
 docker logout cr.yandex >/dev/null
 systemctl enable --now avtocena-browser.service
-systemctl enable --now avtocena-browser-expiry.timer
 `;
  const unit = `[Unit]
 After=docker.service network-online.target
@@ -80,7 +81,8 @@ WantedBy=multi-user.target
   write("/etc/systemd/system/avtocena-browser-expiry.timer", `[Timer]\nOnCalendar=${new Date(expiresAt).toISOString().replace("T"," ").slice(0,19)} UTC\nPersistent=true\n[Install]\nWantedBy=timers.target\n`, "0644")
  ], runcmd: [["systemctl","enable","--now","docker"], ["bash","/opt/avtocena-browser/start.sh"]]};
  const metadata = join(dir,"cloud-init.json"); writeFileSync(metadata,"#cloud-config\n"+JSON.stringify(cloud),{mode:0o600});
- const vm = yc(["compute","instance","create","--name",name,"--zone",subnet.zone_id,"--platform","standard-v3","--cores","2","--core-fraction","100","--memory","8GB","--service-account-id","ajekvv7ulcilmppf8qj3","--create-boot-disk","image-family=ubuntu-2204-lts,image-folder-id=standard-images,size=30,type=network-ssd,auto-delete=true","--network-interface",`subnet-id=${subnet.id},nat-ip-version=ipv4,security-group-ids=${group.id}`,"--metadata-from-file",`user-data=${metadata}`,"--labels","app=avtocena-browser,pilot=true"]);
+ attempted = true;
+ const vm = yc(["compute","instance","create","--name",name,"--zone",subnet.zone_id,"--platform","standard-v3","--cores","2","--core-fraction","100","--memory","8GB","--service-account-id","ajekvv7ulcilmppf8qj3","--create-boot-disk","image-family=ubuntu-2204-lts,image-folder-id=standard-images,size=30,type=network-ssd,auto-delete=true","--network-interface",`subnet-id=${subnet.id},nat-ip-version=ipv4,security-group-ids=${group.id}`,"--metadata-from-file",`user-data=${metadata}`,"--labels",`app=avtocena-browser,pilot=true,run=${process.env.GITHUB_RUN_ID}`]);
  createdId = vm.id;
  const ip = vm.network_interfaces?.[0]?.primary_v4_address?.one_to_one_nat?.address;
  if (!ip) throw Error("pilot_public_ip_missing");
@@ -93,4 +95,4 @@ WantedBy=multi-user.target
  await storage.writeJson("browser-pilot/runtime.json", encryptConfig(config,process.env.AUTH_SECRET), {ifNoneMatch:"*"});
  activated=true; summary(`Pilot enabled. Worker ${process.env.GITHUB_SHA}; max 2 sessions, 20s lease, 90s idle, 10min lifetime. No automatic renewal after 7 days.`);
 }
-main().catch(error=>{summary(String(error.message)); if(createdId&&!activated){try{yc(["compute","instance","stop","--id",createdId]);summary("Failed pilot VM stopped; disk remains for review.");}catch{summary(`ATTENTION: stop pilot VM ${createdId} in Yandex Cloud; automatic cleanup failed.`);}}process.exitCode=1;}).finally(()=>rmSync(dir,{recursive:true,force:true}));
+main().catch(error=>{summary(String(error.message)); if(attempted&&!createdId){try{const vm=yc(["compute","instance","get","--name",name]);if(vm.labels?.run===process.env.GITHUB_RUN_ID)createdId=vm.id;}catch{}} if(createdId&&!activated){try{yc(["compute","instance","stop","--id",createdId]);summary("Failed pilot VM stopped; disk remains for review.");}catch{summary(`ATTENTION: stop pilot VM ${createdId} in Yandex Cloud; automatic cleanup failed.`);}}process.exitCode=1;}).finally(()=>rmSync(dir,{recursive:true,force:true}));
