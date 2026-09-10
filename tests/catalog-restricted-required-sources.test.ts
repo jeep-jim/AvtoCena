@@ -18,7 +18,7 @@ const expected = [
 test("access-constrained required sources fail closed instead of reporting a successful empty page", async () => {
   for (const [source, reason] of expected) {
     assert.equal(source.accessMode, "partner_feed");
-    assert.equal(catalogImportSources.find((candidate) => candidate.sourceId === source.sourceId), source);
+    assert.equal(catalogImportSources.find((candidate) => candidate.sourceId === source.sourceId), source.market === "japan" ? undefined : source);
 
     const health = await source.healthCheck();
     assert.equal(health.ok, false);

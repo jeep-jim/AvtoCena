@@ -55,11 +55,7 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     ["dongchedi_china_open", "https://www.dongchedi.com/"],
     ["guazi_china_open", "https://www.guazi.com/"],
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
-    ["jpauc_japan_past_open", "https://jpauc.com/auction/past"],
-    ["carvector_japan_stat_open", "https://carvector.com/stat"],
-    ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
-    ["auctiondatasearch_japan_open", "https://www.auctiondatasearch.jp/"],
-    ["jpcenter_japan_catalog_open", "https://jp.center/"],
+    ["drom_japan_stat", "https://www.drom.ru/world/japan/"],
   ];
   for (const [sourceId, canonicalUrl] of required) {
     assert.match(requiredSources, new RegExp(sourceId));
@@ -92,15 +88,10 @@ test("GitHub collection keeps Dubizzle mandatory and uses the production egress 
   assert.match(yandexBridge, /yandex_bridge_http_\$\{response\.status\}_\$\{kind\}_\$\{page\}/);
 });
 
-test("Japan rollout includes only the five approved auction/catalog sources", () => {
-  for (const sourceId of [
-    "jpauc_japan_past_open",
-    "carvector_japan_stat_open",
-    "prestige_japan_auctions_open",
-    "auctiondatasearch_japan_open",
-    "jpcenter_japan_catalog_open",
-  ]) {
-    assert.match(requiredSources, new RegExp(sourceId));
+test("Japan rollout permits only Drom sold results", () => {
+  assert.match(requiredSources, /drom_japan_stat/);
+  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
+    assert.doesNotMatch(requiredSources, new RegExp(sourceId));
   }
   assert.doesNotMatch(probe, /japantransit_japan_stat_open|auctions22_japan_past_open|jpauc_japan_current_open|auctions22_japan_upcoming_open/);
   assert.match(probe, /configuredApproved = configured\.filter\(\(sourceId\) => requiredSourceIds\.includes\(sourceId\)\)/);
