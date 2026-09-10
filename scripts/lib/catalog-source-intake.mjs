@@ -25,6 +25,11 @@ export async function collectSourcePage(state, options) {
   if (page.health?.blocked) { state.done = true; state.stopReason = 'blocked'; state.health = page.health; await checkpoint(); return; }
   state.cursors.add(cursorKey); state.pages++; state.listingRows += page.items?.length || 0;
   state.health = page.health; state.diagnostics = page.diagnostics;
+  state.upstreamListingRows = (state.upstreamListingRows || 0) + Number(page.diagnostics?.listingRows ?? page.items?.length ?? 0);
+  for(const [reason,count] of Object.entries(page.diagnostics?.rejectionReasons || {})) {
+    state.upstreamRejections ||= {};
+    state.upstreamRejections[reason] = (state.upstreamRejections[reason] || 0) + Number(count || 0);
+  }
   // This is the source's reported count, not a claim of complete coverage.
   if (Number.isFinite(Number(page.count))) state.sourceReportedCount = Number(page.count);
   let pageComplete = true;

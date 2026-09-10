@@ -8,6 +8,10 @@ type BridgePayload = {
   sourceId?: string;
   market?: string;
   count?: number;
+  sourceReportedCount?: number;
+  upstreamCount?: number;
+  outsideAge?: number;
+  rejectedDetailCount?: number;
   partial?: boolean;
   nextCursor?: string | null;
   finished?: boolean;
@@ -112,7 +116,12 @@ export function withGithubYandexSourceBridge<T extends CatalogSourceAdapter>(sou
         items: offers,
         nextCursor,
         finished: payload.finished === true,
-        count: Number(payload.count || offers.length),
+        count: Number(payload.sourceReportedCount ?? payload.count ?? offers.length),
+        ...(kind === 'encar' ? {diagnostics: {
+          listingRows: Number(payload.upstreamCount ?? offers.length),
+          rejectedRows: Number(payload.outsideAge || 0) + Number(payload.rejectedDetailCount || 0),
+          rejectionReasons: {outside_age: Number(payload.outsideAge || 0), detail_unqualified: Number(payload.rejectedDetailCount || 0)},
+        }} : {}),
         health: {
           ok: offers.length > 0,
           message: `Yandex ${kind} bridge page ${page}: ${offers.length}`,
