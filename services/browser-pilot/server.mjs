@@ -14,7 +14,7 @@ const server=https.createServer({cert:fs.readFileSync('/run/browser/cert.pem'),k
   if(req.method!=='POST'||req.url!=='/v1')throw new SessionError('not_found',404);
   let chunks=[],size=0;for await(const chunk of req){size+=chunk.length;if(size>8192)throw new SessionError('body_too_large',413);chunks.push(chunk);}
   const body=JSON.parse(Buffer.concat(chunks).toString());
-  if(body.action==='health'){res.end(JSON.stringify({ok:true,active:sessions.rows.size,uptimeMs:Date.now()-started,release:process.env.RELEASE_SHA||'',maxSessions:2}));return;}
+  if(body.action==='health'){res.end(JSON.stringify({ok:true,active:sessions.rows.size,uptimeMs:Date.now()-started,release:process.env.RELEASE_SHA||'',maxSessions:2,lastFailure:sessions.lastFailure||null}));return;}
   if(!/^[a-f0-9]{64}$/.test(body.owner)||!/^[a-f0-9-]{36}$/.test(body.id))throw new SessionError('invalid_session');
   let result;
   if(body.action==='create'){
