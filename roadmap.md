@@ -3451,3 +3451,10 @@ Owner approved a reversible trial of the original Yandex page with human interac
 
 - Shutdown operation succeeded: https://github.com/jeep-jim/AvtoCena/actions/runs/34469994421/job/102847403101 . Encrypted runtime disabled at 11:12:27 UTC; exact VM fhmvvsmoc6vpu3jbbhkc verified STOPPED at 11:12:57.940 UTC. Browser processes/sessions terminate with the VM. No replacement VM created. Disk retained and remains billable; code retained for future experiments.
 - PR 889 passed full CI (34469921147) and merged as e090e038ed77659a7afed7e50c3467ae77a92447. Direct Yandex link is restored in source; site deployment 34470324053 must be verified separately before reporting the public rollout complete.
+
+
+### 2026-09-10 — Public direct-link verification
+
+- Deployment 34470324053 completed its Serverless Container deployment step. On the freshly loaded BAW M7 offer f5a71ab88bd987740e5eaf13, the research link has target=_blank and rel=noopener noreferrer. An actual click opened a new Yandex tab with the vehicle-specific query and left the AvtoCena offer open. The test browser was challenged by Yandex; absence of CAPTCHA is not promised.
+- Cloud runtime remains disabled and exact pilot VM stopped (operation 34469994421). No cloud session is started by the restored link.
+- Remaining separate failures: Honda Fit offer 81f6d7d4308c77d1b5f320ee changed from initial streamed content to the page error boundary, including after its Retry button. This card has not been verified healthy. The broader deployment warmup is still pending at time of this record; do not interpret button verification as full catalog health.
