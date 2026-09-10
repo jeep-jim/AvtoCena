@@ -21,6 +21,8 @@ function identity(offer:VehicleOffer) {
 /** Pure merge of two collected records. No request, fuzzy match or inferred power. */
 export function joinJapanInventory(input:VehicleOffer[]) {
  const evidence=new Map<string,VehicleOffer[]>();
+ const media=new Map<string,VehicleOffer[]>();
+ for(const row of input)if(row.sourceId==="jpauc_japan_past_open"){const key=identity(row);if(key)media.set(key,[...(media.get(key)||[]),row]);}
  for(const row of input) {
   if(row.market!=="japan" || row.sourceId!=="carvector_japan_stat_open" || row.auctionResult!=="sold" || row.auctionPriceKind!=="published_result"
     || !(Number(row.sourcePrice)>0) || row.sourceCurrency!=="JPY")continue;
@@ -28,6 +30,19 @@ export function joinJapanInventory(input:VehicleOffer[]) {
  }
  let joined=0,ambiguous=0;
  const offers=input.map(original=>{
+  if(original.sourceId==="drom_japan_stat") {
+   const matches=(media.get(identity(original))||[]).filter(row=>identity(original)
+    && row.operational?.raw && jpaucIdentityGalleryEvidence(row.operational.raw as JpaucRawRow).ok
+    && Number(row.engineCc)>0 && Number(row.engineCc)===Number((original.operational?.raw as any)?.nominalEngineCc)
+    && row.mileageKm!=null && original.mileageKm!=null && row.mileageKm===original.mileageKm
+    && row.images?.length);
+   const unique=[...new Map(matches.map(row=>[row.sourceOfferId,row])).values()];
+   if(unique.length!==1){if(unique.length>1)ambiguous++;return original;}
+   const donor=unique[0],result=structuredClone(original);
+   result.images=[...new Map([...result.images,...jpaucPhotoVariants((donor.operational.raw as JpaucRawRow).listingImage).map(url=>({id:"",url,objectKey:"",checksum:"",size:0,mimeType:"image/jpeg"}))].map(img=>[img.url,img])).values()];
+   result.operational.raw={...(result.operational.raw as Record<string,unknown>),additionalMediaSourceUrl:donor.operational.sourceUrl,additionalMediaSourceId:donor.sourceOfferId,exactJoinFields:["auctionDate","auctionVenue","lotNumber","make","model","year","chassis","nominalEngineCc","mileageKm"]};
+   joined++;return result;
+  }
   if(original.market!=="japan" || original.sourceId!=="jpauc_japan_past_open")return original;
   const raw=original.operational?.raw as JpaucRawRow;
   if(!raw || !jpaucIdentityGalleryEvidence(raw).ok || !/^(?:sold|продан|落札)$/i.test(String(raw.sourceStatus).trim()))return original;

@@ -7,9 +7,11 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const COOKIE = "ac_browser_pilot";
 const json = (error: string, status: number) => NextResponse.json({error}, {status, headers: {"Cache-Control": "no-store"}});
-export async function GET() {
+export async function GET(request: NextRequest) {
  const config = await browserConfig();
- return NextResponse.json({enabled: Boolean(config?.enabled && config.expiresAt > Date.now()), maxSessions: 2, idleSeconds: 90, maxMinutes: 10}, {headers: {"Cache-Control": "no-store"}});
+ const response = NextResponse.json({enabled: Boolean(config?.enabled && config.expiresAt > Date.now()), maxSessions: 2, idleSeconds: 90, maxMinutes: 10}, {headers: {"Cache-Control": "no-store"}});
+ if (!/^[a-f0-9]{64}$/.test(request.cookies.get(COOKIE)?.value || "")) response.cookies.set(COOKIE, randomBytes(32).toString("hex"), {httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/api/browser-pilot", maxAge: 86400});
+ return response;
 }
 export async function POST(request: NextRequest) {
  const origin = process.env.NODE_ENV === "production" ? "https://avtocena.com" : new URL(request.url).origin;

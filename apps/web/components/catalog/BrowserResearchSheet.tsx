@@ -67,6 +67,11 @@ export function BrowserResearchSheet({offerId, title, fallback, onClose}: {offer
   }
   void (async () => {
    try {
+    // Establish ownership before launch so an early close can cancel creation.
+    const availability = await fetch(ENDPOINT, {signal: abort.signal, cache: "no-store"});
+    const available = await availability.json();
+    if (disposed) return;
+    if (!availability.ok || !available.enabled) { fail("pilot_unavailable"); return; }
     const res = await post("create");
     if (disposed) { beacon(); return; }
     const body = await res.json(); if (!res.ok) { fail(body.error); return; }
