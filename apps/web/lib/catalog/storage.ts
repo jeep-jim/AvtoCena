@@ -720,6 +720,7 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   const modelKeys = await projectionModelKeys(filters);
   const counts = new Map<string, number>();
   const models = new Map<string, Set<string>>();
+  const modelsByBrand = new Map<string, Map<string, CatalogBrandSummaryModel>>();
   for (const row of rows) {
     if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;
     const make = cleanFacet(row.make);
@@ -730,6 +731,13 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
       const set = models.get(make) || new Set<string>();
       set.add(model.toLocaleLowerCase("ru-RU"));
       models.set(make, set);
+      const byModel = modelsByBrand.get(make) || new Map<string, CatalogBrandSummaryModel>();
+      const key = model.toLocaleLowerCase("ru-RU");
+      const entry = byModel.get(key) || { model, count: 0, marketCounts: {} };
+      entry.count++;
+      entry.marketCounts[row.market] = (entry.marketCounts[row.market] || 0) + 1;
+      byModel.set(key, entry);
+      modelsByBrand.set(make, byModel);
     }
   }
   const ordered = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"));
@@ -737,6 +745,7 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
     generationId,
     counts: Object.fromEntries(ordered),
     modelCounts: Object.fromEntries(ordered.map(([make]) => [make, models.get(make)?.size || 0])),
+    modelsByBrand: Object.fromEntries([...modelsByBrand].map(([make, entries]) => [make, [...entries.values()]])),
   };
 }
 

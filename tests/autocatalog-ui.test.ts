@@ -15,7 +15,7 @@ test("public vehicle knowledge is presented as a live Autocatalog with a legacy 
   assert.match(page, />Автокаталог</);
   assert.match(page, /readCatalogBrandDirectory/);
   assert.match(page, /readCatalogBrandCounts/);
-  assert.match(page, /readBrandModelDirectory/);
+  assert.match(page, /readLiveCanonicalModelCounts/);
   assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);
   assert.match(directory, /Марки с автомобилями/);
   assert.match(directory, /brand\.aliases/);

@@ -1,3 +1,4 @@
+import { canonicalModelCounters, type LiveModelCount } from "./canonical-model-counters";
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
@@ -96,12 +97,10 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
   return slugify(idTail || model.model);
 }
 
-const readKnowledge = cache(async () => {
-  const [canonicalModels, sourceModels, variants, references] = await Promise.all([
+const readDirectoryModels = cache(async () => {
+  const [canonicalModels, sourceModels] = await Promise.all([
     readEncyclopediaKnowledgeModels(),
     readSourceBackedEncyclopediaModels(),
-    readEncyclopediaKnowledgeVariants(),
-    readVehiclePowerKnowledge(),
   ]);
   // Unknown live parser strings must never create public/SEO model entities.
   // V2/runtime models are authoritative for canonical identity. Source-master
@@ -124,8 +123,34 @@ const readKnowledge = cache(async () => {
       canonicalModelId: canonical.id,
     } : canonical);
   }
-  return { models: [...byIdentity.values()] as CatalogModelDirectoryItem[], variants, references };
+  return [...byIdentity.values()] as CatalogModelDirectoryItem[];
 });
+
+const readKnowledge = cache(async () => {
+  const [models, variants, references] = await Promise.all([
+    readDirectoryModels(), readEncyclopediaKnowledgeVariants(), readVehiclePowerKnowledge(),
+  ]);
+  return { models, variants, references };
+});
+
+// The all-brand landing page needs counts, not every variant/technical table.
+// Use the same canonical aliases as brand pages and a single live projection.
+export async function readLiveCanonicalModelCounts(live: Record<string, LiveModelCount[]>) {
+  const models = await readDirectoryModels();
+  const byMake = new Map<string, CatalogModelDirectoryItem[]>();
+  for (const model of models) {
+    if (model.active === false) continue;
+    const make = canonicalCatalogBrand(model.make);
+    const bucket = byMake.get(make) || [];
+    bucket.push(model); byMake.set(make, bucket);
+  }
+  const liveByMake = new Map<string, LiveModelCount[]>();
+  for (const [rawMake, rows] of Object.entries(live)) {
+    const make = canonicalCatalogBrand(rawMake);
+    liveByMake.set(make, [...(liveByMake.get(make) || []), ...rows]);
+  }
+  return new Map([...liveByMake].map(([make, rows]) => [make, canonicalModelCounters(byMake.get(make) || [], rows).size]));
+}
 
 function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
   const trustedVariants = variants.filter(trustedVariant);
@@ -165,22 +190,7 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
     list.push(row);
     referencesByModel.set(key, list);
   }
-  const modelByAlias = new Map<string, VehicleKnowledgeModel | null>();
-  for (const model of models) {
-    for (const value of [model.model, ...(model.aliases || [])]) {
-      const key = vehicleKnowledgeCompact(value);
-      if (!key) continue;
-      const current = modelByAlias.get(key);
-      if (current && current.id !== model.id) modelByAlias.set(key, null);
-      else if (current === undefined) modelByAlias.set(key, model);
-    }
-  }
-  const counters = new Map<string, { count: number; marketCounts: Record<string, number> }>();
-  for (const item of live.models) {
-    const recognized = modelByAlias.get(vehicleKnowledgeCompact(item.model));
-    if (!recognized) continue;
-    counters.set(recognized.id, { count: item.count, marketCounts: item.marketCounts });
-  }
+  const counters = canonicalModelCounters(models, live.models);
 
   const directoryModels = models.map((model) => {
     const count = counters.get(model.id) || { count: 0, marketCounts: {} };
