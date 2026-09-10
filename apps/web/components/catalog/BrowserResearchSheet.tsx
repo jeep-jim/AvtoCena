@@ -11,13 +11,13 @@ const ERRORS: Record<string, string> = {
  provider_blocked: "Яндекс ограничил доступ из облачного браузера. Сессия завершена.",
  composer_missing: "Интерфейс Алисы изменился. Сейчас можно открыть поиск по ссылке ниже.",
  session_not_found: "Сессия завершена из-за отсутствия активности или связи.",
- pilot_unavailable: "Облачное окно сейчас недоступно. Можно открыть поиск в Яндексе.",
+ pilot_unavailable: "Чат пока недоступен.",
  browser_start_failed: "Не удалось запустить браузер. Попробуйте позже.",
 };
 export function BrowserResearchSheet({offerId, title, fallback, onClose}: {offerId: string; title: string; fallback: string; onClose: () => void}) {
  const dialog = useRef<HTMLDialogElement>(null), session = useRef<string | null>(null), dead = useRef(false);
  const controller = useRef<AbortController | null>(null), imageUrl = useRef<string | null>(null), commandBusy = useRef(false);
- const [status, setStatus] = useState("Открываем Алису и передаём вопрос об автомобиле…");
+ const [status, setStatus] = useState("Открываем Алису…");
  const [frame, setFrame] = useState<string | null>(null), [ready, setReady] = useState(false), [text, setText] = useState(""), [sending, setSending] = useState(false);
  const stopRef = useRef<() => void>(() => {}), drag = useRef<number | null>(null), imageTouch = useRef<number | null>(null);
  function close() { stopRef.current(); onClose(); }
@@ -28,7 +28,7 @@ export function BrowserResearchSheet({offerId, title, fallback, onClose}: {offer
    const res = await fetch(ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({action, id: session.current, ...payload}), signal: controller.current?.signal});
    if (dead.current) return false;
    if (!res.ok) { const body = await res.json(); if (body.error === "browser_busy") { setStatus("Алиса обновляет ответ. Повторите действие через секунду."); return false; } throw Error(body.error); }
-   setStatus("Ответы Алисы нужно проверять по источникам."); return true;
+   setStatus(""); return true;
   } catch (error) { if (!dead.current) { setStatus(ERRORS[(error as Error).message] || "Связь с браузером прервалась. Сессия завершена."); stopRef.current(); } return false; }
   finally { commandBusy.current = false; }
  }
@@ -59,7 +59,7 @@ export function BrowserResearchSheet({offerId, title, fallback, onClose}: {offer
    try {
     if (!commandBusy.current) {
      const res = await post("frame");
-     if (res.ok) { const blob = await res.blob(); if (!disposed) { const url = URL.createObjectURL(blob); const old = imageUrl.current; imageUrl.current = url; setFrame(url); setReady(true); setStatus("Ответы Алисы нужно проверять по источникам."); if (old) URL.revokeObjectURL(old); } }
+     if (res.ok) { const blob = await res.blob(); if (!disposed) { const url = URL.createObjectURL(blob); const old = imageUrl.current; imageUrl.current = url; setFrame(url); setReady(true); setStatus(""); if (old) URL.revokeObjectURL(old); } }
      else { const body = await res.json(); if (!["browser_starting", "browser_busy", "frame_rate_limit"].includes(body.error)) fail(body.error); }
     }
    } catch { if (!disposed) fail("session_not_found"); }
@@ -92,9 +92,7 @@ export function BrowserResearchSheet({offerId, title, fallback, onClose}: {offer
    </div>
    <footer className="shrink-0 space-y-2 border-t border-[var(--ac-border)] px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
     {ready && <div className="flex items-center gap-2 text-xs"><button type="button" onClick={() => void send("Покажи реальные фотографии кузова этой модели и укажи источники. Не выдавай фото примеров за фото конкретного лота.")} disabled={sending} className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">Фото кузова</button><button type="button" aria-label="Прокрутить ответ вверх" onClick={() => void command("scroll", {delta: -450})} className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">↑</button><button type="button" aria-label="Прокрутить ответ вниз" onClick={() => void command("scroll", {delta: 450})} className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">↓</button></div>}
-    <form onSubmit={submit} className="flex gap-2"><input aria-label="Уточняющий вопрос Алисе" placeholder="Уточните вопрос" value={text} onChange={e => setText(e.target.value)} maxLength={2500} disabled={!ready || sending} className="min-w-0 flex-1 rounded-full bg-[var(--ac-surface-2)] px-4 py-3 text-sm outline-violet-500" /><button type="submit" disabled={!ready || sending || !text.trim()} aria-label="Отправить вопрос" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] disabled:opacity-40"><img src="/brands/alice.svg" alt="" aria-hidden="true" width={26} height={26} className="h-[26px] w-[26px]" /></button></form>
-    <p role="status" className="text-[11px] text-[var(--ac-muted)]">{status}</p>
-    <p className="text-[11px] text-[var(--ac-muted)]">Вопрос и ссылка на карточку передаются Яндексу. Сессия: до 10 минут, бездействие — 90 секунд.</p>
+    <form onSubmit={submit} data-no-route-loader="true" className="flex gap-2"><input aria-label="Уточняющий вопрос Алисе" placeholder="Уточните вопрос" value={text} onChange={e => setText(e.target.value)} maxLength={2500} disabled={!ready || sending} className="min-w-0 flex-1 rounded-full bg-[var(--ac-surface-2)] px-4 py-3 text-sm outline-violet-500" /><button type="submit" disabled={!ready || sending || !text.trim()} aria-label="Отправить вопрос" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] disabled:opacity-40"><img src="/brands/alice.svg" alt="" aria-hidden="true" width={26} height={26} className="h-[26px] w-[26px]" /></button></form>
     {!ready && <a href={fallback} target="_blank" rel="noopener noreferrer" onClick={close} className="inline-block text-xs text-violet-500 underline">Открыть поиск в Яндексе ↗</a>}
    </footer>
   </section>
