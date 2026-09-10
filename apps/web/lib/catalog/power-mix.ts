@@ -20,11 +20,11 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   const low=bucket.filter(row=>catalogPowerBand(row)==="low");
   const other=bucket.filter(row=>catalogPowerBand(row)!=="low");
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
-  // The owner explicitly requested keeping Drom's manually calculated inventory.
-  // With no qualified horsepower, report this as unmet, never as 80% low-power.
-  if(market==="japan" && low.length===0 && unknown===bucket.length){
+  // Owner explicitly excludes Japan from the 80/20 policy: keep every Drom
+  // sold-result candidate regardless of power; sanctions are a separate flag.
+  if(market==="japan"){
    selected.push(...bucket);
-   report[market]={low:0,high:0,unknown,published:bucket.length,targetMet:false,reason:"manual_drom_power_unqualified"};
+   report[market]={low:low.length,high:other.length-unknown,unknown,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
    continue;
   }
   if(bucket.length && !low.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);

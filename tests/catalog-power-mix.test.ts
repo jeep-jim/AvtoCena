@@ -17,8 +17,8 @@ test("unknown power uses the 20 percent allowance and each market is independent
  assert.equal(catalogPowerBand({...row("ev",400),powertrainKind:"electric",utilizationPowerKw:100}),"low");
  assert.equal(catalogPowerBand({...row("hev",100),powertrainKind:"other_hybrid",utilizationPowerKw:150}),"high");
 });
-test("Drom manual inventory is explicitly unqualified, never counted as low power",()=>{
- const result=selectCatalogPowerMix([row("drom",undefined,"japan")]);
- assert.equal(result.rows.length,1);assert.equal((result.report.japan as any).targetMet,false);
+test("Japan is exempt at every horsepower, including unknown power",()=>{
+ const result=selectCatalogPowerMix([row("drom",undefined,"japan"),row("j-low",100,"japan"),row("j-high",500,"japan")]);
+ assert.equal(result.rows.length,3);assert.equal((result.report.japan as any).exempt,true);
  assert.throws(()=>selectCatalogPowerMix([row("high",300)]),/no_qualified_low_power/);
 });
