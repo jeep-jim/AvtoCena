@@ -31,7 +31,7 @@ jobs:
       - run: docker build -t browser-pilot-test services/browser-pilot
       - name: Verify Chromium sandbox without visiting external sites
         run: |
-          docker run --rm --init --memory 2g --shm-size 512m --security-opt seccomp=services/browser-pilot/seccomp_profile.json --cap-drop ALL --read-only --tmpfs /tmp:rw,nosuid,size=536870912 --tmpfs /home/browser:rw,nosuid,uid=1001,gid=1001,size=16777216 browser-pilot-test node --input-type=module -e 'import {chromium} from "playwright"; const b=await chromium.launch({chromiumSandbox:true,timeout:15000}); await b.close(); console.log("Sandbox launch and cleanup passed");'
+          docker run --rm --init --memory 2g --shm-size 512m --security-opt seccomp=services/browser-pilot/seccomp_profile.json --cap-drop ALL --cap-add SYS_CHROOT --read-only --tmpfs /tmp:rw,nosuid,size=536870912 --tmpfs /home/browser:rw,nosuid,uid=1001,gid=1001,size=16777216 browser-pilot-test node --input-type=module -e 'import {chromium} from "playwright"; const b=await chromium.launch({chromiumSandbox:true,timeout:15000}); await b.close(); console.log("Sandbox launch and cleanup passed");'
   provision:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: validate

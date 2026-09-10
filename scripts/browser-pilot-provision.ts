@@ -62,7 +62,7 @@ Requires=docker.service
 [Service]
 Restart=on-failure
 RestartSec=5
-ExecStart=/usr/bin/docker run --rm --init --name avtocena-browser --dns 77.88.8.8 --memory 6g --cpus 2 --pids-limit 512 --shm-size 512m --security-opt seccomp=/opt/avtocena-browser/seccomp.json --cap-drop ALL --read-only --tmpfs /tmp:rw,nosuid,size=536870912 --tmpfs /home/browser:rw,nosuid,uid=1001,gid=1001,size=16777216 -p 8443:8443 --env-file /opt/avtocena-browser/worker.env -v /opt/avtocena-browser/tls:/run/browser:ro ${process.env.IMAGE}
+ExecStart=/usr/bin/docker run --rm --init --name avtocena-browser --dns 77.88.8.8 --memory 6g --cpus 2 --pids-limit 512 --shm-size 512m --security-opt seccomp=/opt/avtocena-browser/seccomp.json --cap-drop ALL --cap-add SYS_CHROOT --read-only --tmpfs /tmp:rw,nosuid,size=536870912 --tmpfs /home/browser:rw,nosuid,uid=1001,gid=1001,size=16777216 -p 8443:8443 --env-file /opt/avtocena-browser/worker.env -v /opt/avtocena-browser/tls:/run/browser:ro ${process.env.IMAGE}
 ExecStop=/usr/bin/docker stop -t 15 avtocena-browser
 TimeoutStopSec=25
 [Install]
