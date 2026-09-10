@@ -86,7 +86,7 @@ async function main() {
   "--rule", "direction=egress,protocol=udp,port=53,v4-cidrs=0.0.0.0/0"]);
  const certPath = join(dir, "cert.pem"), keyPath = join(dir, "key.pem");
  execFileSync("openssl", ["req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", keyPath, "-out", certPath, "-days", "8", "-subj", "/CN=browser-pilot.internal", "-addext", "subjectAltName=DNS:browser-pilot.internal"], {stdio: "ignore"});
- const shared = randomBytes(48).toString("hex"), expiresAt = retainedExpiry || Date.now() + 7 * 86400000;
+ const shared = randomBytes(48).toString("hex"), expiresAt = Math.min(retainedExpiry || Infinity, Date.now() + 2 * 3600000);
  console.log(`::add-mask::${shared}`);
  const releaseSha = process.env.IMAGE.split(":").at(-1)!;
  const workerEnv = `BROWSER_WORKER_KEY=${shared}\nRELEASE_SHA=${releaseSha}\nPILOT_EXPIRES_AT=${expiresAt}\n`;
@@ -160,7 +160,7 @@ WantedBy=multi-user.target
  // Verify the actual browser session before making the pilot available.
  const probeOwner = randomBytes(32).toString("hex"), probeId = randomUUID();
  try {
-  const started = await callBrowser(config,{action:"create",owner:probeOwner,id:probeId,prompt:"Уточни тип двигателя BAW M7. Карточка: https://avtocena.com/cars/offer/f5a71ab88bd987740e5eaf13 . Если данных недостаточно, так и скажи."});
+  const started = await callBrowser(config,{action:"create",owner:probeOwner,id:probeId,prompt:"Карточка: https://avtocena.com/cars/offer/81f6d7d4308c77d1b5f320ee . Вопрос: Honda Fit BASIC 2022 характеристики двигателя. Проверь точную модификацию и приведи источники."});
   if(started.status!==200){
    const failure=JSON.parse(started.data.toString());
    summary("Probe request rejected: "+JSON.stringify({status:started.status,error:/^[a-z_]+$/.test(failure.error)?failure.error:"unknown"}));
@@ -179,13 +179,21 @@ WantedBy=multi-user.target
    }
   }
   if(!ready)throw Error("pilot_browser_probe_timeout");
+  for(let i=0;i<3;i++){await new Promise(r=>setTimeout(r,3000));await callBrowser(config,{action:"heartbeat",owner:probeOwner,id:probeId});}
   const frame=await callBrowser(config,{action:"frame",owner:probeOwner,id:probeId});
   if(frame.status!==200||frame.data.length<100)throw Error("pilot_frame_probe_failed");
-  summary("Actual browser session reached ready and returned a frame.");
+  const state=JSON.parse((await callBrowser(config,{action:"heartbeat",owner:probeOwner,id:probeId})).data.toString());
+  summary("Manual trial page type: "+state.view);
+  console.log("MANUAL_PROBE_FRAME_BASE64="+frame.data.toString("base64"));
+  summary("Page frame verified; no CAPTCHA interaction or successful Alice answer claimed.");
  } finally {await callBrowser(config,{action:"close",owner:probeOwner,id:probeId}).catch(()=>{});}
+ const gone=await callBrowser(config,{action:"heartbeat",owner:probeOwner,id:probeId});
+ const healthAfter=JSON.parse((await callBrowser(config,{action:"health"})).data.toString());
+ if(gone.status!==410||healthAfter.active!==0)throw Error("manual_probe_cleanup_failed");
+ summary("Probe closed: active sessions 0; closed session returns 410.");
  // Publish only an encrypted envelope. No worker key, chat or screenshot in the bucket.
  await storage.writeJson("browser-pilot/runtime.json", encryptConfig(config,process.env.AUTH_SECRET), replacementEtag ? {ifMatch:replacementEtag} : {ifNoneMatch:"*"});
- activated=true; summary(`Pilot enabled. Worker ${process.env.GITHUB_SHA}; max 2 sessions, 20s lease, 90s idle, 10min lifetime. No automatic renewal after 7 days.`);
+ activated=true; summary(`Pilot enabled. Worker ${process.env.GITHUB_SHA}; max 2 sessions, 20s lease, 90s idle, 10min lifetime. Experimental VM expires within 2 hours; no automatic renewal.`);
 }
 main().catch(error=>{summary(String(error.message)); if(attempted&&!createdId){try{const vm=yc(["compute","instance","get","--name",name]);if(vm.labels?.run===process.env.GITHUB_RUN_ID)createdId=vm.id;}catch{}} if(createdId&&!activated){try{
  const serial=execFileSync(process.env.YC_BIN||"yc",["compute","instance","get-serial-port-output","--id",createdId,"--port","1","--folder-id",folder],{encoding:"utf8",timeout:40000,stdio:["ignore","pipe","pipe"],maxBuffer:4000000});
