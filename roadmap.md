@@ -3403,3 +3403,14 @@ PR #872 принят: edf9cc80579f5b0fb47ffbeb598529bfb3537649. Публикац
 Owner reports broken legacy Japan links and unsuitable auction prices. The production source allowlist and scheduled intake now contain only `drom_japan_stat`; retired JPAuc and other Japanese sources cannot survive retention or restoration. Reuse collected artifacts from run `34444487911`, with no new source requests. Drom accepts only sold results (`lot.priceYen`, schema Offer JPY, «Продан за»), never starting bids. Existing manual calculation remains available when specifications are missing.
 
 Before this cleanup, generation `gen_1789030080567_b856cc5d` published 9343 Japan cards (1311 Drom, 8032 retained JPAuc). Read-only audit `34461967383` passed, but that does not establish current validity of legacy source pages. This cleanup publication and live route verification are pending; do not report a new count until their final logs are checked.
+
+
+## 2026-09-10 10:19 UTC — Alice cloud search blocked; pilot remains disabled
+
+- Priority: Alice before further market changes. Mobile sheet keeps the header fallback link, transparent composer, Alice send icon and immediate lifecycle cleanup.
+- Original Yandex search replaced separate-chat submission (PR 884). The cloud browser now starts successfully with the Chromium sandbox enabled.
+- The first synthetic probe was invalid because its prompt omitted the required AvtoCena card URL. Corrected that test and restarted only the existing VM fhmdp6lj05f294t1js2d; no new VM was created.
+- Authenticated health passed at 10:19:03 UTC. The corrected request then failed at stage check with provider_blocked at 10:19:20 UTC: the page matched the CAPTCHA-path or access-restriction text check. The diagnostic does not distinguish which alternative matched; no answer screenshot was obtained and no successful refinement is claimed.
+- Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34465259564/job/102832219761 . The workflow stopped the VM at 10:19:44 UTC and did not enable public runtime. Stopped disk storage still exists and may be billed.
+- Fixes prepared in PR 886: allow the web proxy 35 seconds for a send operation whose worker navigation may take 25 seconds (heartbeat/close timeouts unchanged); retain mobile pointer gestures using touch-none; log only categorical probe rejection details.
+- This is not a completed embedded Alice integration. Do not enable based on health alone or bypass provider checks. A supported provider integration or approved embedding is needed for a reliable in-site answer experience.
