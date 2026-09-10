@@ -13,13 +13,14 @@ export type OfferCalculationDraft = {
 
 // UI contract only: the caller must validate the scenario with the pricing engine.
 // It deliberately has no access to the saved offer or catalog storage.
-export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", researchIdentity }: {
+export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", offerId, researchIdentity }: {
   initial?: Partial<OfferCalculationDraft>;
   onCalculate: (draft: OfferCalculationDraft) => void;
   onManager?: () => void;
   onDraftChange?: () => void;
   pending?: boolean;
   error?: string;
+  offerId?: string;
   researchIdentity?: VehicleResearchIdentity;
 }) {
   const id = useId();
@@ -37,7 +38,7 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
   return <section aria-labelledby={`${id}-title`} className="ac-calculation-form min-w-0 text-[var(--ac-text)]">
     <h2 id={`${id}-title`} className="text-xl font-black tracking-tight">Рассчитать под ключ</h2>
     <p className="mt-1 text-sm leading-5 text-[var(--ac-muted)]">Знаете характеристики? Укажите их для расчёта.</p>
-    {researchIdentity ? <VehicleResearchLink identity={researchIdentity} /> : null}
+    {researchIdentity ? <VehicleResearchLink offerId={offerId} identity={researchIdentity} /> : null}
     <form className="mt-4" onChange={onDraftChange} onSubmit={event => {
       event.preventDefault();
       onCalculate({ ...draft, engineCc: electric ? "" : draft.engineCc,
