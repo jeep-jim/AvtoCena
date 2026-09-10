@@ -3445,3 +3445,9 @@ Owner approved a reversible trial of the original Yandex page with human interac
 - Keep the experimental browser implementation dormant for possible future uses. Stop only the identified trial VM fhmvvsmoc6vpu3jbbhkc and disable its encrypted runtime via a separately guarded operation; verify the operation log before calling shutdown complete.
 - Google AI Mode supports search and follow-up questions and lists Russia as available (https://support.google.com/websearch/answer/16011537?hl=ru), but a supported free embedded public chat was not verified. Gemini's web app does not list Russia (https://support.google.com/gemini/answer/13575153?hl=en). No provider migration is introduced.
 - Separate outstanding issue: earlier web deployment passed release health but failed Autocatalog route warmup with curl timeout 28. This rollback does not claim to fix that route.
+
+
+### 2026-09-10 11:13 UTC — Browser trial stopped; direct-link rollback validated
+
+- Shutdown operation succeeded: https://github.com/jeep-jim/AvtoCena/actions/runs/34469994421/job/102847403101 . Encrypted runtime disabled at 11:12:27 UTC; exact VM fhmvvsmoc6vpu3jbbhkc verified STOPPED at 11:12:57.940 UTC. Browser processes/sessions terminate with the VM. No replacement VM created. Disk retained and remains billable; code retained for future experiments.
+- PR 889 passed full CI (34469921147) and merged as e090e038ed77659a7afed7e50c3467ae77a92447. Direct Yandex link is restored in source; site deployment 34470324053 must be verified separately before reporting the public rollout complete.
