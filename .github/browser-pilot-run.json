@@ -1,1 +1,4 @@
-{"pilot":"alice-mobile-sheet","maxSessions":2,"expiresAfterDays":7,"requestedBy":"owner"}
+{
+  "requestedAt": "2026-09-10T07:31:00Z",
+  "reason": "Owner granted Compute and VPC roles; provision bounded pilot with dedicated network"
+}

@@ -30,8 +30,16 @@ async function main() {
  }
  if (prior) throw Error("stale_runtime_config_requires_review");
  const subnets = yc(["vpc", "subnet", "list"]) as any[];
- const subnet = subnets.find(v => v.zone_id === "ru-central1-a") || subnets.find(v => v.zone_id === "ru-central1-d");
- if (!subnet) throw Error("no_existing_subnet_in_supported_zone");
+ let subnet = subnets.find(v => v.zone_id === "ru-central1-a") || subnets.find(v => v.zone_id === "ru-central1-d");
+ if (!subnet) {
+  const networks = (yc(["vpc", "network", "list"]) as any[]).filter(v => v.name === name);
+  if (networks.length > 1) throw Error("ambiguous_pilot_network");
+  const network = networks[0] || yc(["vpc", "network", "create", "--name", name, "--labels", "app=avtocena-browser,pilot=true"]);
+  if (networks[0] && network.labels?.app !== "avtocena-browser") throw Error("existing_network_not_owned_by_pilot");
+  if (subnets.some(v => v.network_id === network.id)) throw Error("pilot_network_has_unsupported_subnets");
+  subnet = yc(["vpc", "subnet", "create", "--name", name + "-a", "--network-id", network.id, "--zone", "ru-central1-a", "--range", "10.203.0.0/24", "--labels", "app=avtocena-browser,pilot=true"]);
+  summary("Created dedicated pilot network and subnet in ru-central1-a.");
+ }
  summary(`Preflight: Compute and VPC readable. Zone ${subnet.zone_id}. Fixed pilot: one VM, 2 vCPU, 8 GiB, 30 GB disk, two sessions; no autoscaling.`);
  const groups = yc(["vpc", "security-group", "list"]) as any[];
  let group = groups.find(v => v.name === name && v.network_id === subnet.network_id);
