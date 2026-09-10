@@ -1,4 +1,4 @@
-name: Diagnose and repair existing browser pilot
+name: Inspect Chromium launch failure on existing stopped pilot
 on:
   push:
     branches: [ops/pilot-session-diagnostics]
@@ -31,13 +31,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node --test services/browser-pilot/test/*.test.mjs
-      - uses: yc-actions/yc-cr-login@v3
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-      - name: Build and push browser service
-        run: |
-          docker build -t "$IMAGE" services/browser-pilot
-          docker push "$IMAGE"
       - name: Install Yandex Cloud CLI
         run: |
           curl -fsSL --max-time 60 https://storage.yandexcloud.net/yandexcloud-yc/install.sh -o "$RUNNER_TEMP/yc-install.sh"
@@ -51,7 +44,7 @@ jobs:
           "$YC_BIN" config profile create browser-pilot
           "$YC_BIN" config set service-account-key "$RUNNER_TEMP/browser-yc-key.json"
       - name: Provision bounded pilot and publish encrypted configuration
-        run: node --import tsx scripts/browser-pilot-provision.ts
+        run: node --import tsx scripts/browser-pilot-launch-diagnostic.ts
       - name: Remove temporary credentials
         if: always()
         run: rm -f "$RUNNER_TEMP/browser-yc-key.json"
