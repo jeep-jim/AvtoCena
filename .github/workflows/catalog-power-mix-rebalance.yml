@@ -45,6 +45,7 @@ jobs:
       - name: Rebalance existing inventory without source collection
         shell: bash
         run: |
+          mkdir -p "$CATALOG_REBUILD_INPUT_DIR"
           failures=0
           for market in europe; do
             node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
