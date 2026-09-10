@@ -1,4 +1,4 @@
-name: Repair browser namespace prerequisite and verify live session
+name: Open original Yandex search page in bounded browser pilot
 on:
   push:
     branches: [ops/pilot-session-diagnostics]
@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      REPAIR_PILOT_ID: fhmnab4dh59v5dnvn2u2
+      REPAIR_PILOT_ID: fhm2ev50adrv197aq8r9
       REPAIR_CONFIG_INSTANCE_ID: fhmv7518i3h0gvtu1seb
-      REPAIR_FAILED_RUN: '34460686037'
+      REPAIR_FAILED_RUN: '34461883042'
       REPAIR_RELEASE_SHA: 93c6f711482f263df85150919fd2f08a88d3f6f4
-      IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-browser:8d0af4687b54fc078d82ff5db3897e5da9edab5a
+      IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-browser:${{ github.sha }}
       AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -33,6 +33,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node --test services/browser-pilot/test/*.test.mjs
+      - uses: yc-actions/yc-cr-login@v3
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      - name: Build and push updated browser service
+        run: |
+          docker build -t "$IMAGE" services/browser-pilot
+          docker push "$IMAGE"
       - name: Install Yandex Cloud CLI
         run: |
           curl -fsSL --max-time 60 https://storage.yandexcloud.net/yandexcloud-yc/install.sh -o "$RUNNER_TEMP/yc-install.sh"

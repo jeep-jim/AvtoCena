@@ -160,7 +160,7 @@ WantedBy=multi-user.target
  // Verify the actual browser session before making the pilot available.
  const probeOwner = randomBytes(32).toString("hex"), probeId = randomUUID();
  try {
-  const started = await callBrowser(config,{action:"create",owner:probeOwner,id:probeId,prompt:"Уточни тип двигателя BAW M7. Карточка: https://avtocena.com/cars/offer/f5a71ab88bd987740e5eaf13 . Если данных недостаточно, так и скажи."});
+  const started = await callBrowser(config,{action:"create",owner:probeOwner,id:probeId,prompt:"Honda Fit BASIC 2022 характеристики двигателя мощность объём тип топлива рынок Японии"});
   if(started.status!==200)throw Error("probe_create_failed");
   let ready=false;
   for(let i=0;i<25;i++){
