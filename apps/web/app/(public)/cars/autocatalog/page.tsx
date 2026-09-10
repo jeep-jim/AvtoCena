@@ -4,7 +4,7 @@ import { AutocatalogBrandDirectory, type AutocatalogBrandItem } from "@/componen
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
-import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
+import { readLiveCanonicalModelCounts } from "@/lib/catalog/model-directory";
 import { readCatalogBrandCounts } from "@/lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
@@ -12,11 +12,11 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Автокаталог — марки и модели в продаже | АвтоЦена",
-  description: "Автокаталог АвтоЦена: марки и модели, для которых сейчас есть автомобили с рассчитанной стоимостью.",
+  description: "Автокаталог АвтоЦена: марки и модели с ценой продавца или расчётом стоимости с доставкой.",
   alternates: { canonical: "/cars/autocatalog" },
   openGraph: {
     title: "Автокаталог АвтоЦена",
-    description: "Марки и модели с актуальными предложениями из семи рынков.",
+    description: "Марки и модели с предложениями из шести рынков.",
     url: "/cars/autocatalog",
     type: "website",
   },
@@ -32,6 +32,7 @@ export default async function AutocatalogPage() {
     readCatalogBrandCounts().catch(() => ({
       counts: {} as Record<string, number>,
       modelCounts: {} as Record<string, number>,
+      modelsByBrand: {},
     })),
   ]);
 
@@ -46,10 +47,7 @@ export default async function AutocatalogPage() {
   // actually render; this keeps the headline and every brand tile in parity
   // with the following page instead of advertising hundreds of trim strings.
   const liveBrands = brands.filter((brand) => (liveCounts.get(brand.name) || 0) > 0);
-  const canonicalModelCounts = new Map(await Promise.all(liveBrands.map(async (brand) => [
-    brand.name,
-    (await readBrandModelDirectory(brand.name)).filter((model) => model.count > 0).length,
-  ] as const)));
+  const canonicalModelCounts = await readLiveCanonicalModelCounts(live.modelsByBrand);
 
   const directory: AutocatalogBrandItem[] = liveBrands.map((brand) => ({
     name: brand.name,
@@ -75,7 +73,7 @@ export default async function AutocatalogPage() {
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Только актуальное</div>
           <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.05em] md:text-7xl">Автокаталог</h1>
           <p className="mt-4 max-w-3xl text-sm font-semibold leading-6 text-[var(--ac-muted)] md:text-base">
-            Здесь только марки и модели, у которых сейчас есть автомобили с рассчитанной ценой. Сырые названия источников и пустые справочные карточки скрыты.
+            Выбирайте автомобили по марке и модели. Если данных для полной стоимости не хватает, указана цена продавца — недостающие параметры можно уточнить в карточке.
           </p>
         </div>
         <div className="flex flex-wrap gap-2 text-xs font-black md:max-w-sm md:justify-end">
