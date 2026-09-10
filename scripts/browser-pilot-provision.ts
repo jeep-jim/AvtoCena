@@ -161,7 +161,11 @@ WantedBy=multi-user.target
  const probeOwner = randomBytes(32).toString("hex"), probeId = randomUUID();
  try {
   const started = await callBrowser(config,{action:"create",owner:probeOwner,id:probeId,prompt:"Уточни тип двигателя BAW M7. Карточка: https://avtocena.com/cars/offer/f5a71ab88bd987740e5eaf13 . Если данных недостаточно, так и скажи."});
-  if(started.status!==200)throw Error("probe_create_failed");
+  if(started.status!==200){
+   const failure=JSON.parse(started.data.toString());
+   summary("Probe request rejected: "+JSON.stringify({status:started.status,error:/^[a-z_]+$/.test(failure.error)?failure.error:"unknown"}));
+   throw Error("probe_create_failed");
+  }
   let ready=false;
   for(let i=0;i<25;i++){
    await new Promise(resolve=>setTimeout(resolve,2000));

@@ -17,7 +17,7 @@ export function callBrowser(config: BrowserConfig, body: Record<string, unknown>
    response.on("error", reject);
    response.on("end", () => resolve({status: response.statusCode || 502, data: Buffer.concat(chunks), type: response.headers["content-type"] === "image/jpeg" ? "image/jpeg" : "application/json"}));
   });
-  const timer = setTimeout(() => request.destroy(Error("browser_timeout")), 12000);
+  const timer = setTimeout(() => request.destroy(Error("browser_timeout")), body.action === "send" ? 35000 : 12000);
   request.on("close", () => clearTimeout(timer)); request.on("error", reject); request.end(bytes);
  });
 }
