@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      REPAIR_PILOT_ID: fhmvpm7rpunl3cq83q4u
+      REPAIR_PILOT_ID: fhmnab4dh59v5dnvn2u2
       REPAIR_CONFIG_INSTANCE_ID: fhmv7518i3h0gvtu1seb
-      REPAIR_FAILED_RUN: '34456492229'
+      REPAIR_FAILED_RUN: '34460686037'
       REPAIR_RELEASE_SHA: 93c6f711482f263df85150919fd2f08a88d3f6f4
       IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-browser:8d0af4687b54fc078d82ff5db3897e5da9edab5a
       AUTH_SECRET: ${{ secrets.AUTH_SECRET }}

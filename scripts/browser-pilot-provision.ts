@@ -28,6 +28,12 @@ async function main() {
   if (old.instanceId !== (process.env.REPAIR_CONFIG_INSTANCE_ID || process.env.REPAIR_PILOT_ID) || vm.id !== process.env.REPAIR_PILOT_ID || vm.labels?.app !== "avtocena-browser" || old.releaseSha !== process.env.REPAIR_RELEASE_SHA || old.expiresAt <= Date.now()) throw Error("repair_identity_guard");
   if(vm.status==="STOPPED" && !old.enabled && process.env.REPAIR_FAILED_RUN && vm.labels?.run===process.env.REPAIR_FAILED_RUN) {
    summary("Replacing the explicitly identified stopped diagnostic VM.");
+   const metadata = yc(["compute","instance","get","--id",vm.id,"--full"]).metadata?.["user-data"];
+   if (metadata) {
+    const cloud = JSON.parse(metadata.replace(/^#cloud-config\s*/, ""));
+    const firewall = cloud.write_files?.find((entry: any) => entry.path === "/opt/avtocena-browser/firewall.sh");
+    if (firewall) summary("Previous non-secret firewall script: " + JSON.stringify(firewall.content));
+   }
   } else {
    if(vm.id!==old.instanceId)throw Error("repair_config_instance_mismatch");
    const health = await callBrowser(old, {action:"health"});
@@ -135,7 +141,7 @@ WantedBy=multi-user.target
   write("/opt/avtocena-browser/tls/key.pem", readFileSync(keyPath,"utf8"), "0400"),
   write("/opt/avtocena-browser/seccomp.json", readFileSync("services/browser-pilot/seccomp_profile.json","utf8"), "0444"),
   write("/opt/avtocena-browser/start.sh", startup, "0700"),
-  write("/opt/avtocena-browser/firewall.sh", '#!/bin/bash\nset -euo pipefail\nfor cidr in 169.254.0.0/16 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16; do\n iptables -C DOCKER-USER -i docker0 -d "$cidr" -j DROP 2>/dev/null || iptables -I DOCKER-USER -i docker0 -d "$cidr" -j DROP\ndone\n', "0700"),
+  write("/opt/avtocena-browser/firewall.sh", '#!/bin/bash\nset -euo pipefail\n' + ['169.254.0.0/16','10.0.0.0/8','172.16.0.0/12','192.168.0.0/16'].map(cidr => `iptables -C DOCKER-USER -i docker0 -d ${cidr} -j DROP 2>/dev/null || iptables -I DOCKER-USER -i docker0 -d ${cidr} -j DROP`).join('\n') + '\n', "0700"),
   write("/etc/systemd/system/avtocena-browser.service", unit, "0644"),
   write("/etc/systemd/system/avtocena-browser-expiry.service", "[Service]\nType=oneshot\nExecStart=/usr/sbin/poweroff\n", "0644"),
   write("/etc/systemd/system/avtocena-browser-expiry.timer", `[Timer]\nOnCalendar=${new Date(expiresAt).toISOString().replace("T"," ").slice(0,19)} UTC\nPersistent=true\n[Install]\nWantedBy=timers.target\n`, "0644")
