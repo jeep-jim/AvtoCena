@@ -38,7 +38,7 @@ jobs:
               try {
                 const serial=cp.execFileSync(yc,['compute','instance','get-serial-port-output','--id',vm.id,'--port','1','--folder-id','b1g9vq73onqb7dp5hgqg'],{encoding:'utf8',timeout:40000,stdio:['ignore','pipe','pipe']});
                 const lines=serial.split(/\r?\n/).filter(l=>/error|failed|denied|cloud-init|docker|iptables|avtocena-browser/i.test(l)&& !/PRIVATE KEY|BROWSER_WORKER_KEY|access_token|AUTH_SECRET|password|token|worker.env/i.test(l));
-                console.log(lines.filter(l=>/error|failed|denied|chown|unknown|write_files|No such file/i.test(l)).slice(-35).map(l=>l.replace(/[a-f0-9]{48,}/g,'[redacted]')).join('\n').slice(-6500));
+                console.log(lines.slice(-35).map(l=>l.replace(/[a-f0-9]{48,}/g,'[redacted]')).join('\n').slice(-6500));
               } catch {console.log('Serial output unavailable');}
             }
           } finally {fs.rmSync(file,{force:true});}
