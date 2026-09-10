@@ -2,9 +2,13 @@ import type { VehicleOffer } from "./types";
 
 /** Unknown power is never evidence for the <=160 hp pool. */
 export function catalogPowerBand(offer: Partial<VehicleOffer>) {
- const power=Number(offer.powerHp);
+ const certified=Number(offer.utilizationPowerKw);
+ const kind=String(offer.powertrainKind||"").toLowerCase();
+ const fuel=String(offer.fuel||"").toLowerCase();
+ const alternative=["electric","series_hybrid","other_hybrid"].includes(kind)||/electric|hybrid|phev|hev|bev|электро|гибрид/.test(fuel);
+ const power=Number.isFinite(certified)&&certified>0 ? certified*1.35962 : alternative ? 0 : Number(offer.powerHp);
  if(!Number.isFinite(power)||power<=0||power>2500)return "unknown";
- return power<=160 ? "low" : "high";
+ return power<=160.01 ? "low" : "high";
 }
 
 /** Public assortment only: callers retain the complete source inventory. */
