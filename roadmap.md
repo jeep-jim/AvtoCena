@@ -3403,3 +3403,10 @@ PR #872 принят: edf9cc80579f5b0fb47ffbeb598529bfb3537649. Публикац
 Owner reports broken legacy Japan links and unsuitable auction prices. The production source allowlist and scheduled intake now contain only `drom_japan_stat`; retired JPAuc and other Japanese sources cannot survive retention or restoration. Reuse collected artifacts from run `34444487911`, with no new source requests. Drom accepts only sold results (`lot.priceYen`, schema Offer JPY, «Продан за»), never starting bids. Existing manual calculation remains available when specifications are missing.
 
 Before this cleanup, generation `gen_1789030080567_b856cc5d` published 9343 Japan cards (1311 Drom, 8032 retained JPAuc). Read-only audit `34461967383` passed, but that does not establish current validity of legacy source pages. This cleanup publication and live route verification are pending; do not report a new count until their final logs are checked.
+
+
+### 2026-09-10 — Restore owner-requested 80/20 public assortment
+
+Europe exposed 20081 cards while the user's <=160 hp filter returned 7949 (~39.6%). Root cause: low-power share was only a ranking target; selection filled all remaining capacity. Seller-inventory publication now caps the non-low-power public pool at floor(lowPowerCount / 4), after canonical identity, deduplication and model-year quotas. Unknown horsepower counts against the 20% allowance; numeric <=160 hp is not treated as a customs-power certification for EV/hybrids. Drom-only Japan with entirely unknown power is explicitly reported as target-unmet manual inventory and retained per the owner's separate instruction.
+
+Non-public rows remain in internal source chunks and reenter the next refresh candidate pool, so public assortment limits do not delete collected inventory. Existing-market rebalance uses no fresh source requests and preserves every other market byte-for-byte for each atomic publication. Three ratio/unknown/market-isolation tests pass locally. Production rebalance and final market counts are pending.

@@ -1,3 +1,4 @@
+import { selectCatalogPowerMix } from "./power-mix";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
@@ -778,6 +779,13 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
   const rows = await readOfferLists([...new Set(chunks)]);
   return [...new Map(rows.filter(offer => offer.market !== options.excludeMarket).map((offer) => [offer.id, offer])).values()];
 }
+/** Preserve the non-public assortment reserve for the next market refresh. */
+export async function readMarketMaintenanceOffers(market: CatalogMarket) {
+  const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, {sources:{}});
+  const approved = new Set(REQUIRED_CATALOG_SOURCES[market].map(source => source.sourceId));
+  const chunks = Object.entries<any>(manifest.sources || {}).filter(([id]) => approved.has(id)).flatMap(([,source]) => source.chunks || []);
+  return (await readOfferLists([...new Set<string>(chunks)])).filter(offer => offer.market === market);
+}
 export const readAllOffers = readAllOffersForMaintenance;
 async function facetsFromProjection(generationId: string, rows: CatalogSearchProjection[], params: CatalogSearchParams, hasFilters: boolean): Promise<CatalogFacets> {
   if (!hasFilters) {
@@ -1151,7 +1159,10 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
   const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
   // Other markets are immutable snapshots, not candidates for this refresh.
   // Deduplication and model-year quotas apply only to the market being rebuilt.
-  return { offers: [...exactPreservedRows, ...quota.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota };
+  const powerMix = process.env.CATALOG_SELLER_INVENTORY === "1"
+    ? selectCatalogPowerMix(quota.rows)
+    : { rows: quota.rows, removed: [] as VehicleOffer[], report: {} };
+  return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix };
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {

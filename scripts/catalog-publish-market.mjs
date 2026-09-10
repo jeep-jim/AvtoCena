@@ -17,7 +17,7 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -309,7 +309,7 @@ try {
 const generation = await readGenerationFiles();
 // A failed/empty source collection is not a request to reinterpret all of the
 // market's existing immutable records as newly collected seller inventory.
-if (sellerInventory && !generation.offers.length) {
+if (sellerInventory && !generation.offers.length && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
   await fs.writeFile(reportFile, JSON.stringify({market, published:false, previousManifestPreserved:true,
     skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
   throw new Error(`catalog_no_fresh_source_offers:${market}`);
@@ -318,8 +318,11 @@ const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
 let currentMarketRows = [];
 try { currentMarketRows = await readMarketOffers(market); } catch { currentMarketRows = []; }
+const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market) : [];
+const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
+for (const row of currentMarketRows) existingInventory.set(row.id,row);
 const retentionDecisions = new Map();
-const currentRetainedRows = currentMarketRows.filter((row) => {
+const currentRetainedRows = [...existingInventory.values()].filter((row) => {
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
     offer: row,
@@ -449,9 +452,11 @@ for (const field of ["qualityRejected", "identityRejected", "priceOutliers"])
 for (const offer of canonicalTargetPreview.quota.removed) auditedRemovals.set(offer.id, "canonical:model_year_quota");
 for (const pair of canonicalTargetPreview.deduplicated.removed)
   if (nextIds.has(pair.keptId)) auditedRemovals.set(pair.removedId, `canonical:duplicate:${pair.keptId}`);
+for (const offer of canonicalTargetPreview.powerMix.removed) auditedRemovals.set(offer.id, "canonical:power_mix_80_20");
 const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  powerMix: canonicalTargetPreview.powerMix.report,
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
   generated:generation.offers.length, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
   selected:selected.length, canonical:canonicalTargetPreview.offers.length,
@@ -482,6 +487,8 @@ const previousSourceCounts = countSources(currentMarketRows);
 generation.offers.length = 0;
 currentRetainedRows.length = 0;
 currentMarketRows = [];
+reserveRows.length = 0;
+existingInventory.clear();
 orderedCandidates.length = 0;
 selected.length = 0;
 v2Selection.selected.length = 0;
@@ -629,6 +636,7 @@ const report = {
     note:"Named groups may be listing fields; their presence is not proof of a complete manufacturer specification.",
   },
   publishedMarketCount,
+  powerMix: canonicalTargetPreview.powerMix.report,
   addedCount: publishedMarketCount - previousPublicCount,
   shortage: Math.max(0, targetPerMarket - publishedMarketCount),
   total: Object.values(byMarket).reduce((sum, count) => sum + Number(count || 0), 0),
