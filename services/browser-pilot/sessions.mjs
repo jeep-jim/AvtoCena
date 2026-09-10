@@ -24,7 +24,7 @@ export class Sessions {
   }catch(e){this.lastFailure={...(e.diagnostic||diagnosis('unknown',e)),at:this.now()};console.error(JSON.stringify({event:'browser_start_failure',...this.lastFailure}));if(this.rows.get(id)===s){s.state='failed';s.error=['provider_blocked','composer_missing','provider_unavailable'].includes(e.message)?e.message:'browser_start_failed';await s.browser?.close().catch(()=>{});s.browser=null;this.permits.delete(s);}else this.permits.delete(s);}})();
   this.pending.add(task);task.finally(()=>this.pending.delete(task));return this.public(s);
  }
- public(s){return {id:s.id,state:s.state,error:s.error,expiresAt:s.started+this.lifeMs};}
+ public(s){return {id:s.id,state:s.state,error:s.error,view:s.browser?.info?.().view||'page',expiresAt:s.started+this.lifeMs};}
  get(owner,id){const s=this.rows.get(id);if(!s||s.owner!==owner)throw new SessionError('session_not_found',410);return s;}
  heartbeat(owner,id){const s=this.get(owner,id);s.heartbeat=this.now();return this.public(s);}
  async close(owner,id) {
@@ -42,6 +42,8 @@ export class Sessions {
    }
    s.activity=this.now();
    if(action==='send')await s.browser.send(payload.text);
+   else if(action==='interact')await s.browser.interact(payload.points);
+   else if(action==='input')await s.browser.input(payload.text,payload.submit);
    else if(action==='scroll')await s.browser.scroll(payload.delta);
    else throw new SessionError('invalid_action');
    return this.public(s);
