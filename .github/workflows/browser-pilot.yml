@@ -71,6 +71,7 @@ jobs:
           YC_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         run: |
           node -e 'require("fs").writeFileSync(process.env.RUNNER_TEMP+"/browser-yc-key.json",process.env.YC_CREDENTIALS,{mode:0o600})'
+          "$YC_BIN" config profile create browser-pilot
           "$YC_BIN" config set service-account-key "$RUNNER_TEMP/browser-yc-key.json"
       - name: Provision bounded pilot and publish encrypted configuration
         run: node --import tsx scripts/browser-pilot-provision.ts
