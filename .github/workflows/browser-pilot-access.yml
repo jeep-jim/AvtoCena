@@ -43,3 +43,17 @@ jobs:
             }
           } finally {fs.rmSync(file,{force:true});}
           JS
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check public pilot availability
+        run: |
+          node <<'JS'
+          (async () => {
+            const response = await fetch('https://avtocena.com/api/browser-pilot', {signal: AbortSignal.timeout(30000)});
+            const body = await response.json();
+            console.log(JSON.stringify({status: response.status, enabled: body.enabled, maxSessions: body.maxSessions, idleSeconds: body.idleSeconds, maxMinutes: body.maxMinutes}));
+            if (!response.ok || body.enabled !== true) process.exitCode = 1;
+          })().catch(() => { console.error('Public pilot availability failed'); process.exitCode = 1; });
+          JS
