@@ -26,7 +26,8 @@ async function prepare(raw: unknown) {
     offer.images = images;
     offer.status = "active";
     return offer as VehicleOffer;
-  } catch {
+  } catch (error) {
+    if ((error as any)?.blocked || /(?:http[_: ](?:401|403|429)|captcha|bot.?challenge)/i.test(String((error as Error)?.message || error))) throw error;
     return null;
   }
 }
@@ -34,11 +35,13 @@ async function prepare(raw: unknown) {
 async function pool<T, R>(rows: T[], limit: number, worker: (row: T) => Promise<R>) {
   const output = new Array<R>(rows.length);
   let cursor = 0;
+  let stopped = false;
   await Promise.all(Array.from({ length: Math.min(limit, rows.length) }, async () => {
-    while (true) {
+    while (!stopped) {
       const index = cursor++;
       if (index >= rows.length) return;
-      output[index] = await worker(rows[index]);
+      try { output[index] = await worker(rows[index]); }
+      catch (error) { stopped = true; throw error; }
     }
   }));
   return output;
@@ -50,7 +53,14 @@ export async function GET(request: Request) {
   const startedAt = Date.now();
   try {
     const result = await source.fetchPage(pageCursor(page));
-    const prepared = await pool(result.items || [], 4, prepare);
+    // Match intake's six-year window before expensive detail/inspection reads.
+    // Previously ~40% of the completed detail requests were discarded by intake.
+    const minimumYear = new Date().getUTCFullYear() - 6;
+    const eligible = (result.items || []).filter(raw => {
+      const offer = source.normalizeOffer(raw);
+      return !offer || !Number.isFinite(offer.year) || offer.year >= minimumYear;
+    });
+    const prepared = await pool(eligible, 4, prepare);
     const offers = prepared.filter((offer): offer is VehicleOffer => Boolean(offer));
     return NextResponse.json({
       mode: "yandex_fixed_encar_source_bridge",
@@ -59,6 +69,9 @@ export async function GET(request: Request) {
       page,
       count: offers.length,
       upstreamCount: Array.isArray(result.items) ? result.items.length : 0,
+      sourceReportedCount: result.count,
+      outsideAge: (result.items || []).length - eligible.length,
+      rejectedDetailCount: eligible.length - offers.length,
       nextCursor: result.finished ? null : String(page + 1),
       finished: Boolean(result.finished),
       offers,
@@ -75,6 +88,7 @@ export async function GET(request: Request) {
       offers: [],
       error: String((error as Error)?.message || error).slice(0, 300),
       causeCode: String(cause?.code || ""),
+      blocked: Boolean((error as any)?.blocked || /(?:http[_: ](?:401|403|429)|captcha|bot.?challenge)/i.test(String((error as Error)?.message || error))),
       durationMs: Date.now() - startedAt,
     }, { status: 502, headers: { "cache-control": "no-store" } });
   }
