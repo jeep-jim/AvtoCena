@@ -145,7 +145,8 @@ test("non-whitelisted source ids and source links are rejected centrally", () =>
   assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), false);
   assert.equal(isAllowedCatalogSourceId("korea", "kbchachacha_korea_open"), false);
   assert.equal(isAllowedCatalogSourceId("europe", "otomoto_europe_exact"), false);
-  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), true);
+  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), false);
+  assert.equal(isAllowedCatalogSourceUrl("japan", "drom_japan_stat", "https://www.drom.ru/world/japan/honda/fit/8504718/"), true);
   assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://www.goo-net-exchange.com/usedcars/TOYOTA/SIENTA/123/"), false);
   assert.equal(isAllowedCatalogSourceUrl("china", "guazi_china_open", "https://en.guazi.com/products/test.html"), true);
   assert.match(offerQuality, /hasAllowedCatalogSourceProvenance/);
@@ -158,12 +159,10 @@ test("non-whitelisted source ids and source links are rejected centrally", () =>
   assert.match(postPersistAudit, /Source provenance is a global production invariant/);
 });
 
-test("Japan production registry contains only the five owner-approved sources", () => {
+test("Japan production registry contains only Drom sold results", () => {
   const ids = new Set(catalogImportSources.filter((source) => source.market === "japan").map((source) => source.sourceId));
-  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
-    assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
-  }
-  for (const sourceId of ["goonet_japan_exact", "goonet_japan", "japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {
+  assert.deepEqual([...ids], ["drom_japan_stat"]);
+  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open", "goonet_japan_exact", "goonet_japan", "japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {
     assert.equal(ids.has(sourceId), false, `${sourceId} must not be registered`);
   }
   assert.match(carsPage, /Аукционная статистика/);

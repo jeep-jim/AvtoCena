@@ -41,13 +41,10 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "guazi_china_open", label: "Guazi", canonicalUrl: "https://www.guazi.com/", role: "primary", required: true, anchor: true },
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
+  // Owner decision 2026-09-10: publish only Drom sold results. Retired
+  // auction rows must not be retained or restored by subsequent refreshes.
   japan: [
     { sourceId: "drom_japan_stat", label: "Drom completed auctions", canonicalUrl: "https://www.drom.ru/world/japan/", role: "auction_history", required: true, anchor: true },
-    { sourceId: "jpauc_japan_past_open", label: "JPAuc completed auctions", canonicalUrl: "https://jpauc.com/auction/past", role: "auction_history", required: true, anchor: true },
-    { sourceId: "carvector_japan_stat_open", label: "CarVector auction statistics", canonicalUrl: "https://carvector.com/stat", role: "auction_history", required: true, anchor: true },
-    { sourceId: "prestige_japan_auctions_open", label: "Prestige Japan auctions", canonicalUrl: "https://prestigemotorsport.com.au/auctions/", role: "auction_history", required: true, anchor: true },
-    { sourceId: "auctiondatasearch_japan_open", label: "Auction Data Search", canonicalUrl: "https://www.auctiondatasearch.jp/", role: "auction_history", required: true, anchor: true },
-    { sourceId: "jpcenter_japan_catalog_open", label: "JP Center", canonicalUrl: "https://jp.center/", role: "primary", required: true, anchor: true },
   ],
 };
 

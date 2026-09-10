@@ -119,7 +119,6 @@ test("uses the configured V3 two-photo admission contract across live source mar
       { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD", operational: { sourceUrl: "https://autopapa.ge/en/car/100", photoIdentityVerified: true } },
       { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY", operational: { sourceUrl: "https://www.autohome.com.cn/100/", photoIdentityVerified: true } },
       { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR", operational: { sourceUrl: "https://www.mobile.de/auto-inserat/100.html", photoIdentityVerified: true } },
-      { ...rawOffer, market: "japan", sourceId: "jpauc_japan_past_open", sourceCurrency: "JPY", operational: { sourceUrl: "https://jpauc.com/auction/past/100", photoIdentityVerified: true } },
     ];
     for (const offer of liveMarkets) {
       assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);
@@ -187,12 +186,12 @@ test("rejects Goo-net dealer-gallery fallback when no exact listing identity exi
   ], 3), []);
 });
 
-test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
+test("keeps a Drom Japan projection visible with one ranked cover", () => {
   const japanProjection = {
     ...rawOffer,
     id: "japan-projection-card",
-    sourceId: "jpcenter_japan_catalog_open",
-    sourceOfferId: "JP-CENTER-100",
+    sourceId: "drom_japan_stat",
+    sourceOfferId: "8504718",
     sourceTitle: undefined,
     market: "japan",
     make: "Toyota",
@@ -201,12 +200,13 @@ test("keeps a server-validated compact Japan projection visible with one ranked 
     sourceCurrency: "JPY",
     images: rawOffer.images.slice(0, 1),
     cardProjectionVersion: 1,
-    operational: { sourceUrl: "https://jp.center/car/JP-CENTER-100", photoIdentityVerified: true },
+    operational: { sourceUrl: "https://www.drom.ru/world/japan/honda/fit/8504718/", photoIdentityVerified: true },
   };
   assert.equal(isCrediblePublicOffer(japanProjection as any), true);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, sourceId: undefined } as any), false);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, operational: { sourceUrl: "https://www.goo-net-exchange.com/usedcars/TOYOTA/COROLLA/100/" } } as any), false);
-  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), true);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, images: [] } as any), false);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
@@ -226,8 +226,8 @@ test("business liquidity remains a ranking signal but does not override Japan's 
   const olderJapan = {
     ...rawOffer,
     market: "japan",
-    sourceId: "jpauc_japan_past_open",
-    operational: { sourceUrl: "https://jpauc.com/auction/past/older-100", photoIdentityVerified: true },
+    sourceId: "drom_japan_stat",
+    operational: { sourceUrl: "https://www.drom.ru/world/japan/toyota/crown/8504718/", photoIdentityVerified: true },
     year: new Date().getFullYear() - 7,
     fuel: "petrol",
     powerHp: 220,

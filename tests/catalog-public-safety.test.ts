@@ -271,7 +271,7 @@ test("mandatory source offer is hidden until its exact-card photo identity is ve
   })), true);
 });
 
-test("JPAuc may publish its verified three source photos", () => {
+test("retired JPAuc cannot publish even with verified source photos", () => {
   const offer = sourceOffer({
     sourceId: "jpauc_japan_past_open",
     market: "japan",
@@ -284,7 +284,7 @@ test("JPAuc may publish its verified three source photos", () => {
       raw: { detailIdentityVerified: true },
     },
   });
-  assert.equal(hasCredibleOfferContent(offer), true);
+  assert.equal(hasCredibleOfferContent(offer), false);
 });
 
 test("same-model peer median rejects a tenfold price parse without hiding legitimate peers", () => {
