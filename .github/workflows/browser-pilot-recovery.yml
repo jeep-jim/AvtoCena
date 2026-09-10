@@ -44,6 +44,8 @@ jobs:
         run: node --import tsx scripts/browser-pilot-provision.ts
         env:
           GITHUB_SHA: 7e2ee5922de17e5be140e00c1a119fddcbb2c7e5
+          REPLACE_FAILED_PILOT_ID: fhmtjnb4uin8qks2f23a
+          REPLACE_FAILED_PILOT_RUN: "34451137856"
       - name: Remove temporary credentials
         if: always()
         run: rm -f "$RUNNER_TEMP/browser-yc-key.json"

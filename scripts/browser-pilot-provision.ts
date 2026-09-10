@@ -20,7 +20,14 @@ async function main() {
  if (!process.env.IMAGE || !/^cr\.yandex\/crp73he0q1blh1mujo4s\/avtocena-browser:[a-f0-9]{40}$/.test(process.env.IMAGE)) throw Error("invalid_image");
  const prior = await storage.readJson<Envelope | null>("browser-pilot/runtime.json", null);
  const instances = yc(["compute", "instance", "list"]) as any[];
- const existing = instances.filter(v => v.name === name);
+ let existing = instances.filter(v => v.name === name);
+ if (process.env.REPLACE_FAILED_PILOT_ID && existing.length) {
+  const failed = existing[0];
+  if (existing.length !== 1 || prior || failed.id !== process.env.REPLACE_FAILED_PILOT_ID || failed.status !== "STOPPED" || failed.labels?.app !== "avtocena-browser" || failed.labels?.run !== process.env.REPLACE_FAILED_PILOT_RUN) throw Error("failed_pilot_replacement_guard");
+  yc(["compute", "instance", "delete", "--id", failed.id]);
+  summary(`Removed stopped unactivated pilot ${failed.id} before replacement.`);
+  existing = [];
+ }
  if (existing.length) {
   if (existing.length !== 1 || !prior) throw Error("existing_pilot_requires_review_no_duplicate_created");
   const config = decryptConfig(prior, process.env.AUTH_SECRET);
@@ -54,6 +61,7 @@ async function main() {
  const workerEnv = `BROWSER_WORKER_KEY=${shared}\nRELEASE_SHA=${process.env.GITHUB_SHA}\nPILOT_EXPIRES_AT=${expiresAt}\n`;
  const startup = `#!/bin/bash
 set -euo pipefail
+chown 1001:1001 /opt/avtocena-browser/tls/key.pem
 systemctl daemon-reload
 systemctl enable --now avtocena-browser-expiry.timer
 # Metadata credentials stay on the host; browsers cannot contact metadata or private networks.
@@ -82,7 +90,7 @@ WantedBy=multi-user.target
  const cloud = {package_update: true, packages: ["docker.io", "python3", "curl"], write_files: [
   write("/opt/avtocena-browser/worker.env", workerEnv),
   write("/opt/avtocena-browser/tls/cert.pem", readFileSync(certPath,"utf8"), "0444"),
-  write("/opt/avtocena-browser/tls/key.pem", readFileSync(keyPath,"utf8"), "0400", "1001:1001"),
+  write("/opt/avtocena-browser/tls/key.pem", readFileSync(keyPath,"utf8"), "0400"),
   write("/opt/avtocena-browser/seccomp.json", readFileSync("services/browser-pilot/seccomp_profile.json","utf8"), "0444"),
   write("/opt/avtocena-browser/start.sh", startup, "0700"),
   write("/etc/systemd/system/avtocena-browser.service", unit, "0644"),
