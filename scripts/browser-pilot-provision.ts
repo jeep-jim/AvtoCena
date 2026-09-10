@@ -45,7 +45,8 @@ async function main() {
  let group = groups.find(v => v.name === name && v.network_id === subnet.network_id);
  if (!group) group = yc(["vpc", "security-group", "create", "--name", name, "--network-id", subnet.network_id,
   "--rule", "direction=ingress,port=8443,protocol=tcp,v4-cidrs=0.0.0.0/0",
-  "--rule", "direction=egress,protocol=any,v4-cidrs=0.0.0.0/0"]);
+  "--rule", "direction=egress,protocol=tcp,port=any,v4-cidrs=0.0.0.0/0",
+  "--rule", "direction=egress,protocol=udp,port=53,v4-cidrs=0.0.0.0/0"]);
  const certPath = join(dir, "cert.pem"), keyPath = join(dir, "key.pem");
  execFileSync("openssl", ["req", "-x509", "-newkey", "rsa:2048", "-nodes", "-keyout", keyPath, "-out", certPath, "-days", "8", "-subj", "/CN=browser-pilot.internal", "-addext", "subjectAltName=DNS:browser-pilot.internal"], {stdio: "ignore"});
  const shared = randomBytes(48).toString("hex"), expiresAt = Date.now() + 7 * 86400000;
