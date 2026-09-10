@@ -1,3 +1,4 @@
+import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
@@ -311,7 +312,7 @@ const CURRENT_ALL_MARKETS_PROJECTION = "all";
 // which timed out detail reads and surfaced as a 404. Hash the complete stable ID
 // so every source is distributed uniformly across the 256 bounded read shards.
 export function currentOfferShardName(id: string) {
-  return crypto.createHash("sha256").update(String(id || "unknown")).digest("hex").slice(0, 2);
+  return detailHash(id).slice(0, 2);
 }
 function currentOfferShardPath(id: string) { return `catalog/public/offers/${currentOfferShardName(id)}.json`; }
 const CURRENT_FACETS_PATH = "catalog/public/facets.json";
@@ -480,7 +481,7 @@ const currentProjectionCache = new Map<string, { expiresAt: number; promise: Pro
 const currentBrandProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
-const currentOfferShardCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: VehicleOffer[] }> }>();
+const currentOfferShardCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string } & DetailShard<VehicleOffer>> }>();
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
 let offerLocationIndexCache: Promise<{ byId: Record<string, OfferLocation> }> | null = null;
@@ -545,12 +546,11 @@ async function readCurrentBrandSummary() {
   currentBrandSummaryCache = { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise };
   return promise;
 }
-async function readCurrentOfferShard(id: string) {
-  const key = currentOfferShardName(id);
+async function readDetailShardObject(key: string, file: string) {
   const now = Date.now();
   const current = currentOfferShardCache.get(key);
   if (current && current.expiresAt > now) return current.promise;
-  const promise = readDataJson<{ generationId: string; items: VehicleOffer[] }>(currentOfferShardPath(id), { generationId: "", items: [] })
+  const promise = readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(file, { generationId: "", items: [] })
     .catch((error) => { currentOfferShardCache.delete(key); throw error; });
   currentOfferShardCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });
   while (currentOfferShardCache.size > 64) {
@@ -559,6 +559,19 @@ async function readCurrentOfferShard(id: string) {
     currentOfferShardCache.delete(oldest);
   }
   return promise;
+}
+async function readCurrentOfferShard(id: string) {
+  const hash=detailHash(id);
+  let depth=2;
+  let shard=await readDetailShardObject(hash.slice(0,depth),currentOfferShardPath(id));
+  const generationId=shard.generationId;
+  while(shard.children) {
+    if (++depth > 64 || !generationId) throw Error('invalid_detail_shard_tree');
+    const prefix=hash.slice(0,depth);
+    shard=await readDetailShardObject(`${generationId}:${prefix}`,detailShardPath(generationId,prefix));
+    if(shard.generationId !== generationId) return {generationId:'',items:[]};
+  }
+  return shard;
 }
 export async function getOfferFromCurrentShard(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
@@ -898,20 +911,15 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
   // Verify every public ID while reading each physical shard only once. A
   // representative proves that the object exists, but not that every projected
   // card was written into it.
-  const offersByCurrentShard = new Map<string, VehicleOffer[]>();
-  for (const offer of offers) {
-    const shard = currentOfferShardName(offer.id);
-    offersByCurrentShard.set(shard, [...(offersByCurrentShard.get(shard) || []), offer]);
-  }
-  await mapWithConcurrency([...offersByCurrentShard.entries()], 12, async ([shardName, expectedOffers]) => {
-    const shard = await readDataJson<{ generationId: string; items: VehicleOffer[] }>(
-      `catalog/public/offers/${shardName}.json`,
-      { generationId: "", items: [] },
-    );
-    const actualIds = new Set((shard.items || []).map((item) => item.id));
-    const missing = expectedOffers.find((offer) => !actualIds.has(offer.id));
-    if (shard.generationId !== generationId || missing) {
-      throw new Error(`catalog_current_offer_shard_not_ready:${missing?.market || "all"}:${missing?.id || shardName}:${shard.generationId}:${generationId}`);
+  const expectedShards=boundedDetailShards(offers,CATALOG_CHUNK_SIZE);
+  await mapWithConcurrency([...expectedShards.entries()], 12, async ([prefix, expected]) => {
+    const shard=await readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(
+      detailShardPath(generationId,prefix),{generationId:'',items:[]});
+    const ids=new Set((shard.items || []).map(item=>item.id));
+    const missing=expected.items.find(offer=>!ids.has(offer.id));
+    if(shard.generationId!==generationId || Boolean(shard.children)!==Boolean(expected.children)
+      || (shard.items || []).length!==expected.items.length || missing || ids.size>CATALOG_CHUNK_SIZE) {
+      throw Error(`catalog_current_offer_shard_not_ready:${prefix}:${generationId}`);
     }
   });
 }
@@ -1182,7 +1190,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
   const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();
   const allProjectionItems: CatalogSearchProjection[] = [];
-  const offersByShard = new Map<string, VehicleOffer[]>();
+  const offersByShard = boundedDetailShards(offers.map(compactPublicStorageOffer), CATALOG_CHUNK_SIZE);
   for (const offer of offers) {
     const market = String(offer.market || "");
     if (market) {
@@ -1193,8 +1201,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
       const brandKey = catalogBrandReadModelKey(make);
       if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);
     }
-    const shard = currentOfferShardName(offer.id);
-    offersByShard.set(shard, [...(offersByShard.get(shard) || []), compactPublicStorageOffer(offer)]);
+
   }
 
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
@@ -1213,8 +1220,11 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     ...offersByShard.keys(),
     ...(previousAllProjection.items || []).map((row) => currentOfferShardName(row.id)),
   ]);
-  await mapWithConcurrency([...offerShardsToWrite], 12, (shard) =>
-    writeJsonAtomic(`catalog/public/offers/${shard}.json`, { generationId, items: offersByShard.get(shard) || [] }, false));
+  // Children are immutable and complete before their mutable root advertises them.
+  await mapWithConcurrency([...offersByShard.entries()].filter(([prefix])=>prefix.length>2),12,([prefix,shard])=>
+    writeJsonAtomic(detailShardPath(generationId,prefix),{generationId,...shard},false));
+  await mapWithConcurrency([...offerShardsToWrite].filter(prefix=>prefix.length===2), 12, (prefix) =>
+    writeJsonAtomic(detailShardPath(generationId,prefix), { generationId, ...(offersByShard.get(prefix) || {items:[]}) }, false));
   const aiProductFeed = await publishAiProductFeed({ generationId, items: allProjectionItems });
 
   return {
