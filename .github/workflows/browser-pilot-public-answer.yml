@@ -1,0 +1,20 @@
+name: Verify Alice answer through the public website
+on:
+  push:
+    branches: [ops/pilot-public-answer]
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-browser-pilot
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify synthetic response, followup and terminal close
+        run: node scripts/browser-pilot-public-probe.mjs
