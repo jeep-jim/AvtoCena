@@ -515,6 +515,15 @@ const regressionBlocked = expectedPublishedByMarket[market] <= 0
 let manifest = null;
 let publicationError = "";
 let nextPublicCount = 0;
+let publishedSourceCounts = {};
+
+function countSources(rows) {
+  return rows.reduce((counts, offer) => {
+    const source = String(offer.sourceId || 'unknown');
+    counts[source] = (counts[source] || 0) + 1;
+    return counts;
+  }, {});
+}
 
 if (regressionBlocked) {
   publicationError = `catalog_public_regression_guard:${market}:${expectedPublishedByMarket[market]}:${minimumSafePublicCount}`;
@@ -554,6 +563,7 @@ if (regressionBlocked) {
           if (hashRows(rows) !== expectedHash) failures.push(`${currentMarket}:hash`);
         }
         nextPublicCount = publishedOffers.filter((offer) => String(offer?.market || "") === market).length;
+        publishedSourceCounts = countSources(publishedOffers.filter(offer => offer.market === market));
         if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
       },
     });
@@ -611,8 +621,10 @@ const report = {
   total: Object.values(byMarket).reduce((sum, count) => sum + Number(count || 0), 0),
   byMarket,
   byMarketAndSource: {
-    [market]: Object.fromEntries([...sourceCounts.entries()].sort(([left], [right]) => left.localeCompare(right))),
+    [market]: manifest ? publishedSourceCounts : countSources(currentMarketRows),
   },
+  selectedCandidatesBySource: Object.fromEntries(sourceCounts),
+  calculationCoverageScope: "canonical_candidates",
   marketQuality: {
     [market]: {
       target: targetPerMarket,
