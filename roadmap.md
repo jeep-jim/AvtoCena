@@ -3425,3 +3425,14 @@ Owner approved a reversible trial of the original Yandex page with human interac
 - Pointer coordinates and path lengths are validated by both API and worker. Session ownership, Chromium sandbox, destination allowlist and network isolation remain. Password entry is not relayed; account sign-in uses the external link.
 - Existing close/hide/freeze/pagehide/offline cleanup and 20-second lease, 90-second idle and 10-minute lifetime remain, including while a challenge is visible.
 - Local verification: 16 worker tests and web TypeScript passed. Cloud page visibility and a real Alice response remain unverified until the deployment probe and the owner's manual test.
+
+
+### 2026-09-10 10:54 UTC — Manual trial deployed and ready for owner test
+
+- PR 887 merged; CI and Browser pilot checks passed. A real sandboxed Chromium fixture verified pointer clicks and focused-field text input without external requests.
+- Cloud deployment run 34467365953 succeeded. Replaced the exact stopped test VM fhmdp6lj05f294t1js2d with one test VM fhmvvsmoc6vpu3jbbhkc, release a9d3dfe330d0049f6da0ada37d79618930256d03. No second concurrent pilot VM. Automatic VM shutdown and runtime expiry: 2026-09-10T12:46:06.522Z (two-hour trial, no renewal).
+- The cloud screenshot visibly shows Yandex's interactive “Я не робот” challenge. It is now displayed rather than converted to a startup failure. No challenge was clicked or solved by the automated probe; an Alice answer after human completion is NOT yet verified.
+- Direct worker probe cleanup verified active=0 and HTTP 410 for the closed session.
+- Public site probe at 10:54 UTC: enabled=true, create HTTP 200, ready at 6380 ms, close HTTP 200 / closed=true. Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34456280594/job/102842522018 .
+- Web release d13b12ac8c78d3ed9e06717c32f1734acd267c92 was confirmed live at 10:47:47 UTC. The broader deploy workflow 34467621826 then failed at the Autocatalog route warmup (curl timeout 28); this is a separate unresolved route issue, not a successful all-site verification.
+- Owner test: open a vehicle on a phone, choose “Уточнить характеристики с ИИ”, interact with the displayed challenge manually; use page-input mode for a focused native field. The header external Yandex link remains available. UI still needs owner's phone feedback.
