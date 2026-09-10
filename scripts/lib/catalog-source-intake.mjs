@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 // Collection is separate from publication: incomplete records are retained.
 export async function collectSourcePage(state, options) {
   const { snapshot, writeObservation, checkpoint, deadline, maxRows, maxPages, minYear, specificationReport } = options;
@@ -26,6 +28,7 @@ export async function collectSourcePage(state, options) {
   let pageComplete = true;
   let nextRaw = 0;
   const rawRows = page.items || [];
+  const pageIds = [];
   async function worker() {
    while (nextRaw < rawRows.length && !state.done) {
     const raw = rawRows[nextRaw++];
@@ -33,6 +36,7 @@ export async function collectSourcePage(state, options) {
     let offer;
     try { offer = state.source.normalizeOffer(raw); } catch { state.normalizationFailures++; continue; }
     if (!offer?.id || offer.sourceId !== state.sourceId || offer.market !== options.market) { state.normalizationFailures++; continue; }
+    pageIds.push(String(offer.id));
     if (state.seen.has(offer.id)) { state.duplicates++; continue; }
     if (Number.isFinite(offer.year) && offer.year < minYear) { state.outsideAge++; continue; }
     if (['withdrawn','deleted','inactive','removed','stale'].includes(offer.status) || (offer.status==='sold' && state.role!=='auction_history')) { state.withdrawn++; continue; }
@@ -72,6 +76,17 @@ export async function collectSourcePage(state, options) {
   }
   }
   await Promise.all(Array.from({length:Math.min(rawRows.length,Math.max(1,Math.min(4,Number(options.detailConcurrency || 1))))},worker));
+  if (pageComplete && pageIds.length) {
+    const signature = createHash('sha256').update(JSON.stringify([...new Set(pageIds)].sort())).digest('hex');
+    state.repeatedPages = signature === state.lastPageSignature ? (state.repeatedPages || 0) + 1 : 0;
+    state.lastPageSignature = signature;
+    if (state.repeatedPages >= 2 && page.nextCursor) {
+      state.done = true;
+      state.stopReason = 'repeated_page';
+      await checkpoint();
+      return;
+    }
+  }
   if (pageComplete) {
     state.cursor = page.nextCursor ?? null;
     if (!state.cursor) { state.done = true; state.stopReason = 'source_finished'; }
