@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intake-checkpoint.mjs';
 import { collectSourcePage, intakeState, intakeSummary } from './lib/catalog-source-intake.mjs';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
@@ -12,9 +13,15 @@ const {untranslatedSpecificationFields}=await import('../apps/web/lib/catalog/sp
 const {classifySpecificationEvidence}=await import('../apps/web/lib/catalog/specification-evidence-audit.ts');
 const directory=`catalog-intake-${market}`;
 await fs.mkdir(directory,{recursive:true});
+if ((await fs.readdir(directory)).some(name=>name.endsWith('.jsonl'))) throw Error('intake_output_not_empty');
 const states=REQUIRED_CATALOG_SOURCES[market].map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
+if (process.env.CATALOG_INTAKE_RESUME === '1') {
+  const {getJsonStorage}=await import('../apps/web/lib/data.ts');
+  const saved=await getJsonStorage().readJson(`catalog/intake-cursors/v1/${market}.json`,null);
+  for(const state of states) if(state.source) restoreIntakeCursor(state,saved);
+}
+const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(directory,state.sourceId)]));
 const startedAt=new Date().toISOString();
-let observationWrite = Promise.resolve();
 const deadline=Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
@@ -31,7 +38,7 @@ while(Date.now()<deadline && states.some(s=>!s.done)) {
       snapshot:sourceListingSnapshot,checkpoint,
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
-      writeObservation:row=>(observationWrite=observationWrite.then(()=>fs.appendFile(path.join(directory,`${state.sourceId}.jsonl`),JSON.stringify(row)+'\n')))});
+      writeObservation:writers.get(state.sourceId)});
   }
 }
 for(const state of states) if(!state.done) {state.done=true;state.stopReason='time_budget';}
