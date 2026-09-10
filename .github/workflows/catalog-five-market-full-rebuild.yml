@@ -143,6 +143,8 @@ jobs:
             if ! node --import tsx scripts/catalog-publish-market.mjs; then failures=$((failures + 1)); fi
           done
           test "$failures" -eq 0
+      - name: Audit the active catalog after all market publications
+        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -150,4 +152,5 @@ jobs:
           path: |
             catalog-weekly-*.json
             catalog-storage-preflight.json
+            catalog-visible-calculation-coverage.json
           retention-days: 140

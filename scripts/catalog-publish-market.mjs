@@ -6,6 +6,7 @@ import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
 import { hashRows } from "./lib/catalog-row-hash.mjs";
+import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicle-scope.mjs";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
@@ -49,7 +50,6 @@ const v2Policy = {
   hardMaxTotalRub: Math.min(15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
   lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
-const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 const publishLockPath = "catalog/import-lock.json";
 const publishOperationId = `catalog_v3_publish_${market}_${crypto.randomUUID()}`;
 const publishLockWaitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
@@ -199,11 +199,6 @@ function mergeOfferVersions(primary, retained) {
       raw: overlayDefined(retainedRaw, primaryRaw),
     },
   };
-}
-
-function isCommercial(offer) {
-  return COMMERCIAL_RE.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)
-    || /^(?:Hino|Mitsubishi Fuso)$/i.test(String(offer?.make || ""));
 }
 
 function hasExactCalculation(offer) {
