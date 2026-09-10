@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import os from "node:os";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const workflow = fs.readFileSync(".github/workflows/catalog-republish-market-artifacts.yml", "utf8");
 
@@ -13,6 +16,28 @@ test('five-market push reads its own reuse marker instead of starting another cr
   assert.match(source, /run-id: \$\{\{ needs\.plan\.outputs\.reuse_run_id \}\}/);
   assert.match(source, /const allowed = \['korea','china','uae','europe','georgia'\]/);
   assert.match(source, /fromJSON\(needs\.plan\.outputs\.collect_markets\)/);
+});
+
+test('a targeted UAE repair collects and publishes only UAE and rejects Japan', () => {
+  const source = fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml', 'utf8');
+  const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'catalog-plan-test-'));
+  try {
+    const markers = path.join(directory, '.github/market-runs');
+    fs.mkdirSync(markers, { recursive: true });
+    const marker = path.join(markers, 'five-market-full-rebuild.json');
+    const output = path.join(directory, 'output');
+    fs.writeFileSync(marker, JSON.stringify({ publishMarkets: ['uae'] }));
+    const run = () => spawnSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: directory, env: { ...process.env, EVENT_NAME: 'push', GITHUB_OUTPUT: output }, encoding: 'utf8',
+    });
+    assert.equal(run().status, 0);
+    const values = fs.readFileSync(output, 'utf8');
+    assert.match(values, /^publish_markets=uae$/m);
+    assert.match(values, /^collect_markets=\["uae"\]$/m);
+    fs.writeFileSync(marker, JSON.stringify({ publishMarkets: ['japan'] }));
+    assert.notEqual(run().status, 0);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
 });
 
 test("collected market artifacts can be republished without another source crawl", () => {

@@ -38,6 +38,18 @@ function detail(specifications: string, after = "") {
     ${gallery}`;
 }
 
+test('DubiCars attests only the canonical detail page primary gallery', () => {
+  const outside = '<img src="https://cdn.dubicars.com/images/ffffff/w_1200x800/vehicle/ffffffff-abcd-1234-abcd-123456789abc.jpg">';
+  const markup = `<link rel="canonical" href="${url}"><h1>Toyota Camry V6</h1><div>Model year 2024 AED 145000</div><section id="car-images-slider">${gallery}</section><section id="similar-cars">${outside}</section>`;
+  const row = parseDubicarsCurrentListing(markup, url)!;
+  assert.equal(row.photoIdentityVerified, true);
+  assert.equal(row.images.length, 5);
+  assert.ok(row.images.every(image => !image.includes('/ffffff/')));
+  assert.equal(source.normalizeOffer(row)?.operational?.photoIdentityVerified, true);
+  assert.equal(parseDubicarsCurrentListing(markup.replace(`href="${url}"`, 'href="https://www.dubicars.com/other-123456.html"'), url)?.photoIdentityVerified, false);
+  assert.equal(parseDubicarsCurrentListing(detail('Fuel Type Petrol'), url)?.photoIdentityVerified, false);
+});
+
 test("DubiCars promotes exact values only from the bounded specification block", () => {
   const row = parseDubicarsCurrentListing(
     detail(

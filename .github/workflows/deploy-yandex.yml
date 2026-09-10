@@ -86,12 +86,13 @@ jobs:
         run: |
           set -euo pipefail
           CURL=(curl -L --max-redirs 3 --retry 5 --retry-delay 5 --retry-all-errors --max-time 30 -fsS)
+          source scripts/lib/curl-complete.sh
 
           echo '1/9 health + exact release'
           expected_sha='${{ github.sha }}'
           release_ready=0
           for attempt in $(seq 1 18); do
-            health_json="$("${CURL[@]}" 'https://avtocena.com/api/health' || true)"
+            health_json="$(fetch_complete 'https://avtocena.com/api/health' || true)"
             live_sha="$(jq -r '.releaseSha // empty' <<<"$health_json" 2>/dev/null || true)"
             if jq -e --arg sha "$expected_sha" '.ok == true and .service == "avtocena-web" and .releaseSha == $sha' <<<"$health_json" >/dev/null 2>&1; then
               echo "release ready on attempt $attempt: $live_sha"
@@ -104,21 +105,21 @@ jobs:
           test "$release_ready" -eq 1
 
           echo '2/9 public catalog'
-          catalog_json="$("${CURL[@]}" 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
+          catalog_json="$(fetch_complete 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
           offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"
           test -n "$offer_id"
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars'
-          "${CURL[@]}" -o /dev/null "https://avtocena.com/cars/offer/$offer_id"
+          fetch_complete 'https://avtocena.com/cars' > /dev/null
+          fetch_complete "https://avtocena.com/cars/offer/$offer_id" > /dev/null
 
           echo '2b/9 Autocatalog routes'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/autocatalog'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota/model/land-cruiser-250'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/bentley'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/bentley/model/continental-gt'
+          fetch_complete 'https://avtocena.com/cars/autocatalog' > /dev/null
+          fetch_complete 'https://avtocena.com/cars/brand/toyota' > /dev/null
+          fetch_complete 'https://avtocena.com/cars/brand/toyota/model/land-cruiser-250' > /dev/null
+          fetch_complete 'https://avtocena.com/cars/brand/bentley' > /dev/null
+          fetch_complete 'https://avtocena.com/cars/brand/bentley/model/continental-gt' > /dev/null
 
           echo '3/9 OpenAI crawler rules'
-          robots="$("${CURL[@]}" 'https://avtocena.com/robots.txt')"
+          robots="$(fetch_complete 'https://avtocena.com/robots.txt')"
           grep -qi '^User-agent: OAI-SearchBot$' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/sitemap.xml' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/cars/models-sitemap.xml' <<<"$robots"
@@ -126,23 +127,23 @@ jobs:
 
           echo '4/9 sitemaps'
           echo '4a root sitemap'
-          root_sitemap="$("${CURL[@]}" 'https://avtocena.com/sitemap.xml')"
+          root_sitemap="$(fetch_complete 'https://avtocena.com/sitemap.xml')"
           grep -q 'https://avtocena.com/cars/autocatalog' <<<"$root_sitemap"
           echo '4b model sitemap index'
-          model_sitemap_index="$("${CURL[@]}" 'https://avtocena.com/cars/models-sitemap.xml')"
+          model_sitemap_index="$(fetch_complete 'https://avtocena.com/cars/models-sitemap.xml')"
           grep -q '<sitemapindex' <<<"$model_sitemap_index"
           grep -q 'https://avtocena.com/cars/models-sitemap/0.xml' <<<"$model_sitemap_index"
           echo '4c model sitemap shard 0'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/models-sitemap/0.xml'
+          fetch_complete 'https://avtocena.com/cars/models-sitemap/0.xml' > /dev/null
           echo '4d offer sitemap index'
-          sitemap_index="$("${CURL[@]}" 'https://avtocena.com/cars/sitemap.xml')"
+          sitemap_index="$(fetch_complete 'https://avtocena.com/cars/sitemap.xml')"
           grep -q '<sitemapindex' <<<"$sitemap_index"
           grep -q 'https://avtocena.com/cars/sitemap/0.xml' <<<"$sitemap_index"
           echo '4e offer sitemap shard 0'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/sitemap/0.xml'
+          fetch_complete 'https://avtocena.com/cars/sitemap/0.xml' > /dev/null
 
           echo '5/9 llms guide'
-          llms="$("${CURL[@]}" 'https://avtocena.com/llms.txt')"
+          llms="$(fetch_complete 'https://avtocena.com/llms.txt')"
           grep -q '# АвтоЦена' <<<"$llms"
 
           echo '6/9 OpenAI product feed'
@@ -157,7 +158,7 @@ jobs:
           rm -f "$feed_gz" "$feed_csv"
 
           echo '7/9 MCP initialize'
-          mcp_init="$("${CURL[@]}" \
+          mcp_init="$(fetch_complete \
             -H 'content-type: application/json' \
             -H 'accept: application/json, text/event-stream' \
             -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"avtocena-deploy-check","version":"1.0.0"}}}' \
@@ -165,7 +166,7 @@ jobs:
           jq -e '.result.serverInfo.name == "avtocena"' <<<"$mcp_init" >/dev/null
 
           echo '8/9 MCP tools'
-          mcp_tools="$("${CURL[@]}" \
+          mcp_tools="$(fetch_complete \
             -H 'content-type: application/json' \
             -H 'accept: application/json, text/event-stream' \
             -H 'mcp-protocol-version: 2025-06-18' \
@@ -176,7 +177,7 @@ jobs:
           jq -e '.result.tools | map(.name) | index("get_vehicle_specs") != null' <<<"$mcp_tools" >/dev/null
 
           echo '9/9 live MCP search'
-          mcp_search="$("${CURL[@]}" \
+          mcp_search="$(fetch_complete \
             -H 'content-type: application/json' \
             -H 'accept: application/json, text/event-stream' \
             -H 'mcp-protocol-version: 2025-06-18' \

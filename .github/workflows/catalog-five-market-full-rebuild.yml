@@ -17,6 +17,7 @@ jobs:
       run: ${{ steps.policy.outputs.run }}
       reuse_run_id: ${{ steps.policy.outputs.reuse_run_id }}
       collect_markets: ${{ steps.policy.outputs.collect_markets }}
+      publish_markets: ${{ steps.policy.outputs.publish_markets }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +34,10 @@ jobs:
           const reuse = marker.reuseRunId || '';
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
           const allowed = ['korea','china','uae','europe','georgia'];
-          const collect = reuse ? (marker.refreshMarkets || []) : allowed;
+          const publish = marker.publishMarkets || allowed;
+          if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
+          const collect = reuse ? (marker.refreshMarkets || []) : publish;
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_markets=${publish.join(' ')}\n`);
           if (!Array.isArray(collect) || collect.some(market => !allowed.includes(market)) || new Set(collect).size !== collect.length) throw Error('invalid_refresh_markets');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`collect_markets=${JSON.stringify(collect)}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`run=${run}\n`);
@@ -133,10 +137,12 @@ jobs:
       - name: Check bucket reserve without deleting objects
         run: node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Publish markets through calculation and retention guards
+        env:
+          CATALOG_PUBLISH_MARKETS: ${{ needs.plan.outputs.publish_markets }}
         shell: bash
         run: |
           failures=0
-          for market in korea china uae europe georgia; do
+          for market in $CATALOG_PUBLISH_MARKETS; do
             node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"

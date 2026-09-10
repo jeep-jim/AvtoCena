@@ -1,16 +1,12 @@
 {
   "requestedAt": "2026-09-10",
+  "mode": "uae-primary-gallery-proof-refresh",
+  "publishMarkets": [
+    "uae"
+  ],
   "markets": [
-    "korea",
-    "china",
-    "uae",
-    "europe",
-    "georgia"
+    "uae"
   ],
   "japanExcludedReason": "separate feed qualification",
-  "mode": "reuse-collected-with-uae-price-parser-refresh",
-  "reuseRunId": "34338186281",
-  "refreshMarkets": [
-    "uae"
-  ]
+  "previousFiveMarketRun": "34425725371"
 }
