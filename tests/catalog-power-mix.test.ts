@@ -22,3 +22,11 @@ test("Japan is exempt at every horsepower, including unknown power",()=>{
  assert.equal(result.rows.length,3);assert.equal((result.report.japan as any).exempt,true);
  assert.throws(()=>selectCatalogPowerMix([row("high",300)]),/no_qualified_low_power/);
 });
+
+test("Europe prefers an affordable delivered total over a newer expensive car or seller-only price",()=>{
+ const quote=(id:string,price:number)=>({...row(id,300),cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:price,totalRub:price,calculationStatus:"ready",powertrainKind:"combustion",engineCc:2000});
+ const rows=[...Array.from({length:4},(_,i)=>row("low"+i,150)),quote("expensive",12000000),{...row("seller",350),catalogPricingMode:"seller",sellerPriceRub:1000000},quote("affordable",3500000)];
+ const result=selectCatalogPowerMix(rows);
+ assert.ok(result.rows.some(r=>r.id==="affordable"));
+ assert.ok(!result.rows.some(r=>r.id==="expensive"||r.id==="seller"));
+});

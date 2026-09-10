@@ -3405,8 +3405,66 @@ Owner reports broken legacy Japan links and unsuitable auction prices. The produ
 Before this cleanup, generation `gen_1789030080567_b856cc5d` published 9343 Japan cards (1311 Drom, 8032 retained JPAuc). Read-only audit `34461967383` passed, but that does not establish current validity of legacy source pages. This cleanup publication and live route verification are pending; do not report a new count until their final logs are checked.
 
 
+## 2026-09-10 10:19 UTC — Alice cloud search blocked; pilot remains disabled
+
+- Priority: Alice before further market changes. Mobile sheet keeps the header fallback link, transparent composer, Alice send icon and immediate lifecycle cleanup.
+- Original Yandex search replaced separate-chat submission (PR 884). The cloud browser now starts successfully with the Chromium sandbox enabled.
+- The first synthetic probe was invalid because its prompt omitted the required AvtoCena card URL. Corrected that test and restarted only the existing VM fhmdp6lj05f294t1js2d; no new VM was created.
+- Authenticated health passed at 10:19:03 UTC. The corrected request then failed at stage check with provider_blocked at 10:19:20 UTC: the page matched the CAPTCHA-path or access-restriction text check. The diagnostic does not distinguish which alternative matched; no answer screenshot was obtained and no successful refinement is claimed.
+- Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34465259564/job/102832219761 . The workflow stopped the VM at 10:19:44 UTC and did not enable public runtime. Stopped disk storage still exists and may be billed.
+- Fixes prepared in PR 886: allow the web proxy 35 seconds for a send operation whose worker navigation may take 25 seconds (heartbeat/close timeouts unchanged); retain mobile pointer gestures using touch-none; log only categorical probe rejection details.
+- This is not a completed embedded Alice integration. Do not enable based on health alone or bypass provider checks. A supported provider integration or approved embedding is needed for a reliable in-site answer experience.
+
+
+## 2026-09-10 — Experimental manual Yandex page in mobile sheet
+
+Owner approved a reversible trial of the original Yandex page with human interaction and the external free-tab fallback retained.
+
+- Mobile sheet: 80dvh; pointer taps, manual drag gestures, scroll buttons and input into the selected page field. The normal question field retains vehicle context; explicit page-input mode fills the focused field. Alice SVG send icon and transparent footer retained. Desktop unchanged.
+- CAPTCHA is displayed for the user to complete manually. Explicit access-denied pages still close the session. No automated solving, challenge clicking or identity spoofing.
+- Pointer coordinates and path lengths are validated by both API and worker. Session ownership, Chromium sandbox, destination allowlist and network isolation remain. Password entry is not relayed; account sign-in uses the external link.
+- Existing close/hide/freeze/pagehide/offline cleanup and 20-second lease, 90-second idle and 10-minute lifetime remain, including while a challenge is visible.
+- Local verification: 16 worker tests and web TypeScript passed. Cloud page visibility and a real Alice response remain unverified until the deployment probe and the owner's manual test.
+
+
+### 2026-09-10 10:54 UTC — Manual trial deployed and ready for owner test
+
+- PR 887 merged; CI and Browser pilot checks passed. A real sandboxed Chromium fixture verified pointer clicks and focused-field text input without external requests.
+- Cloud deployment run 34467365953 succeeded. Replaced the exact stopped test VM fhmdp6lj05f294t1js2d with one test VM fhmvvsmoc6vpu3jbbhkc, release a9d3dfe330d0049f6da0ada37d79618930256d03. No second concurrent pilot VM. Automatic VM shutdown and runtime expiry: 2026-09-10T12:46:06.522Z (two-hour trial, no renewal).
+- The cloud screenshot visibly shows Yandex's interactive “Я не робот” challenge. It is now displayed rather than converted to a startup failure. No challenge was clicked or solved by the automated probe; an Alice answer after human completion is NOT yet verified.
+- Direct worker probe cleanup verified active=0 and HTTP 410 for the closed session.
+- Public site probe at 10:54 UTC: enabled=true, create HTTP 200, ready at 6380 ms, close HTTP 200 / closed=true. Evidence: https://github.com/jeep-jim/AvtoCena/actions/runs/34456280594/job/102842522018 .
+- Web release d13b12ac8c78d3ed9e06717c32f1734acd267c92 was confirmed live at 10:47:47 UTC. The broader deploy workflow 34467621826 then failed at the Autocatalog route warmup (curl timeout 28); this is a separate unresolved route issue, not a successful all-site verification.
+- Owner test: open a vehicle on a phone, choose “Уточнить характеристики с ИИ”, interact with the displayed challenge manually; use page-input mode for a focused native field. The header external Yandex link remains available. UI still needs owner's phone feedback.
+
+
+### 2026-09-10 — Restore direct Yandex research after owner trial
+
+- Owner screenshots confirm an actual Alice answer appeared, but repeated CAPTCHA, blurry frames and latency make the cloud-browser trial unsuitable for public use.
+- Restore the research button to a plain Yandex link opening a new tab on mobile and desktop. Preserve the vehicle-specific query, Alice logo and button styling. No sheet, popup interception or cloud session is started by this button.
+- Keep the experimental browser implementation dormant for possible future uses. Stop only the identified trial VM fhmvvsmoc6vpu3jbbhkc and disable its encrypted runtime via a separately guarded operation; verify the operation log before calling shutdown complete.
+- Google AI Mode supports search and follow-up questions and lists Russia as available (https://support.google.com/websearch/answer/16011537?hl=ru), but a supported free embedded public chat was not verified. Gemini's web app does not list Russia (https://support.google.com/gemini/answer/13575153?hl=en). No provider migration is introduced.
+- Separate outstanding issue: earlier web deployment passed release health but failed Autocatalog route warmup with curl timeout 28. This rollback does not claim to fix that route.
+
+
+### 2026-09-10 11:13 UTC — Browser trial stopped; direct-link rollback validated
+
+- Shutdown operation succeeded: https://github.com/jeep-jim/AvtoCena/actions/runs/34469994421/job/102847403101 . Encrypted runtime disabled at 11:12:27 UTC; exact VM fhmvvsmoc6vpu3jbbhkc verified STOPPED at 11:12:57.940 UTC. Browser processes/sessions terminate with the VM. No replacement VM created. Disk retained and remains billable; code retained for future experiments.
+- PR 889 passed full CI (34469921147) and merged as e090e038ed77659a7afed7e50c3467ae77a92447. Direct Yandex link is restored in source; site deployment 34470324053 must be verified separately before reporting the public rollout complete.
+
+
+### 2026-09-10 — Public direct-link verification
+
+- Deployment 34470324053 completed its Serverless Container deployment step. On the freshly loaded BAW M7 offer f5a71ab88bd987740e5eaf13, the research link has target=_blank and rel=noopener noreferrer. An actual click opened a new Yandex tab with the vehicle-specific query and left the AvtoCena offer open. The test browser was challenged by Yandex; absence of CAPTCHA is not promised.
+- Cloud runtime remains disabled and exact pilot VM stopped (operation 34469994421). No cloud session is started by the restored link.
+- Remaining separate failures: Honda Fit offer 81f6d7d4308c77d1b5f320ee changed from initial streamed content to the page error boundary, including after its Retry button. This card has not been verified healthy. The broader deployment warmup is still pending at time of this record; do not interpret button verification as full catalog health.
+
+
+
 ### 2026-09-10 — Restore owner-requested 80/20 public assortment
 
 Europe exposed 20081 cards while the user's <=160 hp filter returned 7949 (~39.6%). Root cause: low-power share was only a ranking target; selection filled all remaining capacity. Seller-inventory publication now caps the non-low-power public pool at floor(lowPowerCount / 4), after canonical identity, deduplication and model-year quotas. Unknown horsepower counts against the 20% allowance; EV/hybrid membership matches the public filter using certified utilization power, never short peak power. Japan is fully exempt from the 80/20 power mix by explicit owner instruction, including high and unknown horsepower. Sanctions are a separate display/filter concern, never this power quota.
 
 Non-public rows remain in internal source chunks and reenter the next refresh candidate pool, so public assortment limits do not delete collected inventory. Existing-market rebalance uses no fresh source requests and preserves every other market byte-for-byte for each atomic publication. Three ratio/unknown/market-isolation tests pass locally. Production rebalance and final market counts are pending.
+
+Latest Europe scope: immediate rebalance only publishes Europe from retained source inventory; no fresh collection is launched. Future non-Japan publications apply the same ratio. Within Europe's 20% extra allowance, lower verified delivered prices rank before more expensive quotes; seller-only amounts are not treated as cheap delivered prices. Japan remains exempt. Prior PR 885 CI passed, but roadmap conflict prevented merging; refreshed against current main with all Alice changes preserved. New CI and actual publication counts pending.

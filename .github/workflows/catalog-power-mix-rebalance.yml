@@ -1,4 +1,4 @@
-name: Rebalance existing public inventory to 80 percent low power
+name: Rebalance Europe public inventory to 80 percent low power
 on:
   push:
     branches: [main]
@@ -40,11 +40,13 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Verify assortment ratio and Japan exemption
+        run: node --import tsx --test tests/catalog-power-mix.test.ts
       - name: Rebalance existing inventory without source collection
         shell: bash
         run: |
           failures=0
-          for market in europe korea china uae georgia; do
+          for market in europe; do
             node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-power-mix-$market.json"

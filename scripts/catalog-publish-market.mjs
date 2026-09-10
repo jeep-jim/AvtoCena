@@ -393,9 +393,8 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
   }
 }
 
-// Retained rows already entered candidatesById and passed the same audit as fresh
-// rows. Priority only controls ordering; valid fallback inventory fills the
-// remaining market capacity instead of being discarded by a power-mix quota.
+// Retained rows pass the same audit as fresh intake. V2 first orders eligible
+// inventory; the canonical public stage below then enforces the non-Japan mix.
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {

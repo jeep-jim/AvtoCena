@@ -2,6 +2,7 @@ import https from 'node:https';
 import fs from 'node:fs';
 import {timingSafeEqual} from 'node:crypto';
 import {Sessions,SessionError} from './sessions.mjs';
+import {validatePoints} from './controls.mjs';
 import {openAlice} from './alice.mjs';
 const key=process.env.BROWSER_WORKER_KEY;if(!key||key.length<40)throw Error('worker_key_required');
 const sessions=new Sessions({open:openAlice,max:2});
@@ -23,10 +24,14 @@ const server=https.createServer({cert:fs.readFileSync('/run/browser/cert.pem'),k
    result=sessions.create(body.owner,body.id,body.prompt);
   }else if(body.action==='close')result=await sessions.close(body.owner,body.id);
   else if(body.action==='heartbeat')result=sessions.heartbeat(body.owner,body.id);
-  else result=await sessions.act(body.owner,body.id,body.action,body);
+  else {
+   if(body.action==='interact'){try{validatePoints(body.points);}catch{throw new SessionError('invalid_pointer');}}
+   if(body.action==='input'&&(typeof body.text!=='string'||!body.text.trim()||body.text.length>2500||typeof body.submit!=='boolean'))throw new SessionError('invalid_message');
+   result=await sessions.act(body.owner,body.id,body.action,body);}
   if(Buffer.isBuffer(result)){res.setHeader('Content-Type','image/jpeg');res.end(result);}
   else{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(result));}
- }catch(e){res.statusCode=e.status||500;res.setHeader('Content-Type','application/json');res.end(JSON.stringify({error:e instanceof SessionError?e.message:'worker_request_failed'}));}
+ }catch(e){const recoverable=['input_not_focused','sensitive_input','invalid_pointer','invalid_message'].includes(e.message);
+  res.statusCode=e.status||(recoverable?400:500);res.setHeader('Content-Type','application/json');res.end(JSON.stringify({error:e instanceof SessionError||recoverable?e.message:'worker_request_failed'}));}
 });
 server.requestTimeout=15000;server.headersTimeout=10000;server.listen(8443,'0.0.0.0');
 const timer=setInterval(()=>sessions.sweep().catch(()=>{}),1000);timer.unref();

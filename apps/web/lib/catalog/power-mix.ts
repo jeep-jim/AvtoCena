@@ -1,4 +1,5 @@
 import type { VehicleOffer } from "./types";
+import { catalogOfferVisibleRub } from "./public-priority";
 
 /** Unknown power is never evidence for the <=160 hp pool. */
 export function catalogPowerBand(offer: Partial<VehicleOffer>) {
@@ -29,8 +30,10 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   }
   if(bucket.length && !low.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
   const allowance=Math.floor(low.length/4);
-  // Keep the existing price/quality order within each band. Unknown power uses
-  // the same 20% allowance as >160 hp, so it cannot inflate the low-power share.
+  // Europe: fill the limited extra pool with the least expensive verified
+  // delivered totals first. Seller-only prices are not comparable to totals.
+  // Unknown power still uses the 20% allowance, never the low-power pool.
+  if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
   const keptOther=other.slice(0,allowance);
   const kept=new Set<T>([...low,...keptOther]);
   selected.push(...bucket.filter(row=>kept.has(row)));
