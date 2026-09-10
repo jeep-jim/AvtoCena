@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import {readCheckpointJsonl} from './lib/read-checkpoint-jsonl.mjs';
 import path from 'node:path';
+import {convertMarketOnDisk} from './lib/catalog-disk-conversion.mjs';
 import {joinJapanInventory} from '../apps/web/lib/catalog/japan-inventory-join.ts';
 const root=process.env.CATALOG_INTAKE_INPUT_DIR || 'catalog-intake-input';
 const out=process.env.CATALOG_REBUILD_INPUT_DIR || 'catalog-intake-publish';
@@ -9,6 +10,10 @@ for(const market of ['korea','china','uae','europe','georgia','japan']) {
  const directory=path.join(root,`catalog-intake-${market}`);
  let files=[];try{files=await fs.readdir(directory);}catch{continue;}
  let report;try{report=JSON.parse(await fs.readFile(path.join(directory,"report.json"),"utf8"));}catch{}
+ if(market!=='japan') {
+  console.log(JSON.stringify(await convertMarketOnDisk({market,directory,files,out,report})));
+  continue;
+ }
  const rows=new Map();
  for(const file of files.filter(f=>f.endsWith('.jsonl')).sort()) {
   for await(const observation of readCheckpointJsonl(path.join(directory,file))) {
