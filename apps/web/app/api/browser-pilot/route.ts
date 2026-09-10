@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
  const payload: Record<string, unknown> = {action: body.action, id: body.id, owner};
  try {
   if (body.action === "create") {
-   if (typeof body.offerId !== "string" || !/^[a-zA-Z0-9_-]{1,160}$/.test(body.offerId)) return json("invalid_offer", 400);
+   if (typeof body.offerId !== "string" || !/^[a-zA-Z0-9_:-]{1,160}$/.test(body.offerId)) return json("invalid_offer", 400);
    const offer = await getOffer(body.offerId); if (!offer) return json("offer_not_found", 404);
    payload.prompt = browserResearchPrompt(offer.id, {make: offer.make, model: offer.model, year: offer.year, trim: offer.trim, market: offer.market, powertrainKind: offer.powertrainKind, chassisCode: typeof offer.operational?.chassisCode === "string" ? offer.operational.chassisCode : undefined});
   }
