@@ -1,11 +1,11 @@
-name: Catalog · Five-market full rebuild
+name: Catalog · Japan Drom sold auctions
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 18 * * 0"
+    - cron: "0 18 * * 2,5"
   push:
     branches: [main]
-    paths: ['.github/market-runs/five-market-full-rebuild.json']
+    paths: ['.github/market-runs/japan-drom-refresh.json']
 permissions:
   contents: read
   actions: read
@@ -33,10 +33,10 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           const run = ['push','schedule','workflow_dispatch'].includes(process.env.EVENT_NAME);
-          const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync('.github/market-runs/five-market-full-rebuild.json','utf8')) : {};
+          const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync('.github/market-runs/japan-drom-refresh.json','utf8')) : {};
           const reuse = marker.reuseRunId || '';
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
-          const allowed = ['korea','china','uae','europe','georgia'];
+          const allowed = ['japan'];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
           const collect = reuse ? (marker.refreshMarkets || []) : publish;
@@ -53,7 +53,7 @@ jobs:
     timeout-minutes: 240
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 1
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:
@@ -66,7 +66,8 @@ jobs:
       YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-      CATALOG_INTAKE_TIME_MS: '12600000'
+      CATALOG_INTAKE_TIME_MS: '3600000'
+      CATALOG_INTAKE_SOURCE_IDS: drom_japan_stat,jpauc_japan_past_open
       CATALOG_SOURCE_INVENTORY_MODE: '1'
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
       CATALOG_SOURCE_TIMEOUT_MS: '25000'

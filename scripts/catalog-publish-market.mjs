@@ -235,7 +235,8 @@ async function readGenerationFiles() {
       const parsed = JSON.parse(await fs.readFile(filename, "utf8"));
       if (!Array.isArray(parsed?.offers)) throw new Error("generation_offers_missing");
       if (parsed.market && parsed.market !== market) throw new Error(`generation_market_mismatch_${parsed.market}`);
-      payloads.push(parsed);
+      const {offers: shardOffers, ...metadata} = parsed;
+      payloads.push(metadata);
       offers.push(...parsed.offers);
     } catch (error) {
       errors.push({ filename, error: String(error?.message || error) });
@@ -472,7 +473,20 @@ if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canon
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 
-const currentInternal = await readAllOffersForMaintenance();
+// Keep counts for the report, then release consumed candidates before loading
+// maintenance state. Technical tables are retained in selected offers in full.
+const generatedCandidateCount = generation.offers.length;
+const retainedCandidateCount = currentRetainedRows.length;
+const previousPublicCount = currentMarketRows.length;
+const previousSourceCounts = countSources(currentMarketRows);
+generation.offers.length = 0;
+currentRetainedRows.length = 0;
+currentMarketRows = [];
+orderedCandidates.length = 0;
+selected.length = 0;
+v2Selection.selected.length = 0;
+candidatesById.clear();
+const currentInternal = await readAllOffersForMaintenance({excludeMarket: market});
 if (!Array.isArray(currentInternal)) throw new Error("catalog_maintenance_state_invalid");
 const otherMarketInternal = currentInternal.filter((offer) => String(offer?.market || "") !== market);
 // Internal maintenance rows obey the same provenance policy as exact public
@@ -503,8 +517,7 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
   for (const offer of rows) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 }
 const allOffers = [...unique.values()];
-const previousRetainedCount = currentRetainedRows.length;
-const previousPublicCount = currentMarketRows.length;
+const previousRetainedCount = retainedCandidateCount;
 const minimumSafePublicCount = !allowPublicCollapse && previousPublicCount >= 100
   ? Math.max(1, Math.ceil(previousPublicCount * minimumPublicRetentionRatio))
   : 1;
@@ -621,7 +634,7 @@ const report = {
   total: Object.values(byMarket).reduce((sum, count) => sum + Number(count || 0), 0),
   byMarket,
   byMarketAndSource: {
-    [market]: manifest ? publishedSourceCounts : countSources(currentMarketRows),
+    [market]: manifest ? publishedSourceCounts : previousSourceCounts,
   },
   selectedCandidatesBySource: Object.fromEntries(sourceCounts),
   calculationCoverageScope: "canonical_candidates",
@@ -630,8 +643,8 @@ const report = {
       target: targetPerMarket,
       targetReached: publishedMarketCount >= targetPerMarket,
       shortage: Math.max(0, targetPerMarket - publishedMarketCount),
-      generatedCandidates: generation.offers.length,
-      retainedCandidates: currentRetainedRows.length,
+      generatedCandidates: generatedCandidateCount,
+      retainedCandidates: retainedCandidateCount,
       previousRetainedCount,
       previousPublicCount,
       nextPublicCount,

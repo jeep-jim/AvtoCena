@@ -1,0 +1,77 @@
+{
+  "sourceUrl": "https://www.drom.ru/world/japan/toyota/vitz/8493500/",
+  "module": {
+    "lot": {
+      "lotId": 8493500,
+      "equipment": "JEWELA",
+      "image": {
+        "src": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580_76511db2e2efb996f108e6443b689c3b2f93df10.jpg",
+        "src2x": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580x2_76511db2e2efb996f108e6443b689c3b2f93df10.jpg",
+        "original": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/76511db2e2efb996f108e6443b689c3b2f93df10.jpg"
+      },
+      "priceYen": 308000,
+      "auctionName": "TAA Kyushu",
+      "frameMark": "NSP130",
+      "transmission": "АКПП (FAT)",
+      "engineVolume": "1 300 см³",
+      "enginePower": "95 л.с.",
+      "mileage": "52 000 км",
+      "auctionEvaluation": "4",
+      "color": "BROWN",
+      "calculationForbiddenStartYear": null
+    },
+    "pageMeta": {
+      "title": "Купить Toyota Vitz 2013 года | Лот: 4088 от 08.09.2026 TAA Kyushu – авто с аукционов Японии без пробега по РФ",
+      "lotTitle": "Toyota Vitz NSP130 2013 года"
+    }
+  },
+  "car": {
+    "@context": "https://schema.org",
+    "@type": "Car",
+    "name": "Toyota Vitz",
+    "bodyType": "NSP130",
+    "brand": {
+      "@type": "Brand",
+      "name": "Toyota"
+    },
+    "color": "BROWN",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580_76511db2e2efb996f108e6443b689c3b2f93df10.jpg"
+    },
+    "description": "Лот 4088: Toyota Vitz 2013 без пробега по РФ в комплектации JEWELA с аукционов Японии. Оценка на аукционе TAA Kyushu: 4. Объем: 1 300 см. Дата аукциона: 08.09.2026",
+    "productionDate": "2013",
+    "vehicleTransmission": "АКПП (FAT)",
+    "vehicleEngine": {
+      "@type": "EngineSpecification",
+      "engineDisplacement": "1 300 куб. см"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": 308000,
+        "priceCurrency": "JPY"
+      },
+      {
+        "@type": "Offer",
+        "price": 865000,
+        "priceCurrency": "RUB"
+      }
+    ],
+    "additionalProperty": {
+      "@type": "PropertyValue",
+      "name": "Options",
+      "value": "JEWELA"
+    },
+    "mileageFromOdometer": {
+      "@type": "QuantitativeValue",
+      "value": "52000",
+      "unitCode": "KMT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4,
+      "reviewCount": 1
+    }
+  }
+}
