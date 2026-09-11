@@ -42,14 +42,14 @@ function Tile({label,value,icon,children,wide=false}:{label:string;value:string;
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext=""}:{offerId:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false}:{offerId:string;autoCalculate?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
  const dirty=JSON.stringify(draft)!==JSON.stringify(initial);
  function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:""}:{})}));}
  useEffect(()=>{
-  if(!dirty){setPending(false);setError("");setResult(null);return;}
+  if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
   try{validateCustomerParameters(draft);}catch(e){setPending(false);const message=e instanceof Error?e.message:"Проверьте параметры";setError(message.replace(/Проверьте поле (\w+)/,(_,key)=>`Укажите корректно ${names[key]||key}`));return;}
   const controller=new AbortController();
@@ -64,16 +64,18 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
    finally{if(!controller.signal.aborted && version===revision.current)setPending(false);}
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
- },[draft,dirty,offerId]);
+ },[draft,dirty,offerId,autoCalculate]);
+ const showCalculation=dirty || Boolean(result);
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string)=><Field label={label} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
- return <div className={`ac-inline-parameters ${dirty?"ac-personal-parameters":""}`}>
-  {!dirty?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
-   <p className="text-xs font-bold uppercase tracking-widest">По вашим параметрам</p>
+ return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
+  {!showCalculation?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
+   <p className="text-xs font-bold uppercase tracking-widest">{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>
    {result?<p className="mt-2 text-3xl font-black">{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p>:<p className="mt-3 text-sm">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</p>}
-   {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">Ориентир под ключ. Данные и стоимость требуют подтверждения.</p>:null}
+   {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">{dirty?"Ориентир под ключ. Данные и стоимость требуют подтверждения.":"Рассчитано автоматически по данным объявления. Данные и стоимость требуют подтверждения."}</p>:null}
    {result?.customs?.productionReferenceDate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Дата выпуска в расчёте: {result.customs.productionReferenceDate}{result.customs.productionReferenceBasis !== "exact_date" ? " · условная дата, уточните по документам" : ""}. Тариф: {result.customs.vehicleCategory === "N1" ? `N1 · ТН ВЭД ${result.customs.tariffCode || "8704"}` : result.customs.ageBand === "up_to_3_years" ? "до 3 лет" : result.customs.ageBand === "from_3_to_5_years" ? "3–5 лет" : "старше 5 лет"}.</p> : null}
-   <button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>
+   {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
   </div>}
+  {!dirty && autoCalculate && !result ? <p role="status" className="mt-2 text-xs text-[var(--ac-muted)]">{pending?"Рассчитываем по данным объявления…":error}</p> : null}
   <div className="mt-4 grid grid-cols-2 items-start gap-2.5">
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     {field("year","Год выпуска",Array.from({length:30},(_,i)=>new Date().getFullYear()-i),1990,new Date().getFullYear()+1)}
@@ -111,7 +113,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
     {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
    </Tile>:null}
   </div>
-  {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">Структура расчёта по вашим параметрам</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}</dt><dd>{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
+  {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">{dirty?"Структура расчёта по вашим параметрам":"Структура цены"}</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}</dt><dd>{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
   {children}
   <style>{`.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}`}</style>
  </div>;
