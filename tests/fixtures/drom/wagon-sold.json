@@ -1,0 +1,134 @@
+{
+  "sourceUrl": "https://www.drom.ru/world/japan/suzuki/wagon_r/8506933/",
+  "module": {
+    "lot": {
+      "lotId": 8506933,
+      "equipment": "FX",
+      "image": {
+        "src": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580_8d88add0ab1670b75b53b0ef8efaf8d1dcc9a629.jpg",
+        "src2x": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580x2_8d88add0ab1670b75b53b0ef8efaf8d1dcc9a629.jpg",
+        "original": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/8d88add0ab1670b75b53b0ef8efaf8d1dcc9a629.jpg"
+      },
+      "priceYen": 1033000,
+      "auctionName": "LAA Shikoku",
+      "frameMark": "MH85S",
+      "transmission": "АКПП (DA)",
+      "engineVolume": "660 см³",
+      "enginePower": "49 л.с.",
+      "mileage": "8 000 км",
+      "auctionEvaluation": "5",
+      "color": "WHITE",
+      "totalPriceInRussia": {
+        "currency": "RUB",
+        "value": "1174000"
+      },
+      "calculationUrl": "https://www.drom.ru/world/calculator/japan/?price=1033000&currency=YEN&vehicleAge=UNDER_3&engineType=DIESEL_OR_GASOLINE&engineVolumeInCubicCentimeters=660&engineHorsePower=49",
+      "calculationForbiddenStartYear": null,
+      "averagePrice": {
+        "titleParts": {
+          "firm": "Suzuki",
+          "model": "Wagon R",
+          "year": 2024,
+          "auctionEvaluation": "5"
+        },
+        "calculatedByLots": 394,
+        "data": [
+          {
+            "totalPriceInRussia": {
+              "currency": "RUB",
+              "value": "1170000"
+            },
+            "averagePrice": {
+              "currency": "YEN",
+              "value": "1028000"
+            },
+            "mileageRange": {
+              "from": null,
+              "to": 10
+            },
+            "mileageRangeUrl": "https://www.drom.ru/world/japan/suzuki/wagon_r/?evaluation=5&mileageTo=10500&yearFrom=2023"
+          },
+          {
+            "totalPriceInRussia": {
+              "currency": "RUB",
+              "value": "1135000"
+            },
+            "averagePrice": {
+              "currency": "YEN",
+              "value": "996000"
+            },
+            "mileageRange": {
+              "from": 10,
+              "to": 20
+            },
+            "mileageRangeUrl": "https://www.drom.ru/world/japan/suzuki/wagon_r/?evaluation=5&mileageFrom=10501&mileageTo=20500&yearFrom=2023"
+          },
+          {
+            "totalPriceInRussia": {
+              "currency": "RUB",
+              "value": "1074000"
+            },
+            "averagePrice": {
+              "currency": "YEN",
+              "value": "924000"
+            },
+            "mileageRange": {
+              "from": 20,
+              "to": 60
+            },
+            "mileageRangeUrl": "https://www.drom.ru/world/japan/suzuki/wagon_r/?evaluation=5&mileageFrom=20501&mileageTo=60500&yearFrom=2023"
+          }
+        ]
+      }
+    }
+  },
+  "car": {
+    "@context": "https://schema.org",
+    "@type": "Car",
+    "name": "Suzuki Wagon R",
+    "bodyType": "MH85S",
+    "brand": {
+      "@type": "Brand",
+      "name": "Suzuki"
+    },
+    "color": "WHITE",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://s.auto.drom.ru/i24321/foreignimport/japan_auction_images/gen580_8d88add0ab1670b75b53b0ef8efaf8d1dcc9a629.jpg"
+    },
+    "description": "Лот 5020: Suzuki Wagon R 2024 без пробега по РФ в комплектации FX с аукционов Японии. Оценка на аукционе LAA Shikoku: 5. Объем: 660 см. Дата аукциона: 09.09.2026",
+    "productionDate": "2024",
+    "vehicleTransmission": "АКПП (DA)",
+    "vehicleEngine": {
+      "@type": "EngineSpecification",
+      "engineDisplacement": "660 куб. см"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": 1033000,
+        "priceCurrency": "JPY"
+      },
+      {
+        "@type": "Offer",
+        "price": 1174000,
+        "priceCurrency": "RUB"
+      }
+    ],
+    "additionalProperty": {
+      "@type": "PropertyValue",
+      "name": "Options",
+      "value": "FX"
+    },
+    "mileageFromOdometer": {
+      "@type": "QuantitativeValue",
+      "value": "8000",
+      "unitCode": "KMT"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 5,
+      "reviewCount": 1
+    }
+  }
+}

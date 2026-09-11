@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import type { CatalogSourceAdapter, CatalogFetchResult, CatalogImage, VehicleOffer, SourceRunHealth } from './types';
+import { enrichDromJapanSpecifications } from './drom-japan-specifications';
 import { namedTechnicalGroups } from './source-table-capture';
 
 const BASE='https://www.drom.ru';
@@ -53,15 +54,21 @@ export function dromDetail(html:string,url:string):VehicleOffer {
  if(!images.length || !schemaImage || !fingerprint(images[0].url) || fingerprint(images[0].url)!==fingerprint(schemaImage))throw Error('drom_image_identity_conflict');
  const now=new Date().toISOString(),sourceOfferId=String(lot.lotId);
  const ev=(status:string,value?:unknown)=>({status,value,source:url,rawValues:value==null?[]:[value]});
- // Auction displacement is nominal; fuel and certified power are not supplied.
- // Preserve source labels for manual selection without inventing exact inputs.
- return {id:createHash('sha256').update(`${SOURCE}:${sourceOfferId}`).digest('hex').slice(0,24),sourceId:SOURCE,sourceOfferId,market:'japan',offerType:'auction',status:'active',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',priceMode:'fixed',sourceTitle:clean(car.name),make,model,year,trim:clean(lot.equipment)||undefined,generation:clean(lot.frameMark),mileageKm:number(lot.mileage),transmission:clean(lot.transmission),color:clean(lot.color),powertrainKind:'unknown',sourcePrice:price,sourceCurrency:'JPY',auctionName:clean(lot.auctionName),auctionDate,lotNumber,auctionGrade:clean(lot.auctionEvaluation),images,calculationStatus:'needs_data',firstSeenAt:now,updatedAt:now,totalRub:null,
+ // Retain explicit lot power. Exact displacement and fuel come from matching catalog variants.
+ const powerHp = Number(clean(lot.enginePower).match(/^(\d+)\s*л\.с\.$/)?.[1]) || undefined;
+ return {id:createHash('sha256').update(`${SOURCE}:${sourceOfferId}`).digest('hex').slice(0,24),sourceId:SOURCE,sourceOfferId,market:'japan',offerType:'auction',status:'active',catalogKind:'auction_result',auctionResult:'sold',auctionPriceKind:'published_result',priceMode:'fixed',sourceTitle:clean(car.name),make,model,year,trim:clean(lot.equipment)||undefined,generation:clean(lot.frameMark),mileageKm:number(lot.mileage),transmission:clean(lot.transmission),color:clean(lot.color),powerHp,powertrainKind:'unknown',sourcePrice:price,sourceCurrency:'JPY',auctionName:clean(lot.auctionName),auctionDate,lotNumber,auctionGrade:clean(lot.auctionEvaluation),images,calculationStatus:'needs_data',firstSeenAt:now,updatedAt:now,totalRub:null,
  operational:{sourceUrl:url,sourceVenueName:clean(lot.auctionName),sourcePublishedAt:auctionDate,modelCode:clean(lot.frameMark),exactDetail:true,detailIdentityVerified:true,fieldIdentityVerified:true,photoIdentityVerified:true,galleryVerified:true,
- semanticEvidence:{year:ev('exact',year),engineCc:ev('ambiguous',lot.engineVolume),powerHp:ev(lot.enginePower?'ambiguous':'missing',lot.enginePower),fuel:ev('missing'),powertrainKind:ev('missing')},
+ semanticEvidence:{year:ev('exact',year),engineCc:ev('ambiguous',lot.engineVolume),powerHp:ev(powerHp?'exact':'missing',powerHp),fuel:ev('missing'),powertrainKind:ev('missing')},
  sourceSpecifications:{version:1,sourceId:SOURCE,sourceOfferId,specificationId:sourceOfferId,sourceUrl:url,capturedAt:now,groups:namedTechnicalGroups({Год:year,Кузов:lot.frameMark,Комплектация:lot.equipment,'Объём на аукционе':lot.engineVolume,'Мощность на странице':lot.enginePower,Пробег:lot.mileage,КПП:lot.transmission,Цвет:lot.color,Аукцион:lot.auctionName,Оценка:lot.auctionEvaluation},'Параметры лота')},specificationCollection:{status:'received',kind:'listing_fields'},
  raw:{finalPriceJpy:price,modelCode:lot.frameMark,nominalEngineCc:number(lot.engineVolume),listingBoundImages:true,photoIdentityVerified:true,recoveryExactSourceUrl:true,recoveryExactPhotoIdentity:true,dromLotId:sourceOfferId,sourcePriceField:'lot.priceYen; schema Offer JPY; Продан за'}}};
 }
 export class DromJapanAdapter implements CatalogSourceAdapter {
+ private catalogCache = new Map<string, Promise<string>>();
+ private catalogMarkup = (url:string) => {
+  let result=this.catalogCache.get(url);
+  if(!result){result=markup(url);this.catalogCache.set(url,result);}
+  return result;
+ };
  sourceId=SOURCE; market='japan' as const; accessMode='public_html' as const;
  async fetchPage(cursor?:string|null):Promise<CatalogFetchResult>{
   const page=Math.max(1,Number(cursor)||1);if(!Number.isInteger(page)||page>1000)throw Error('drom_invalid_page');
@@ -76,7 +83,7 @@ export class DromJapanAdapter implements CatalogSourceAdapter {
     const row=d.lots[next++],u=lotUrl(row.url);
     if(String(row.lotId)!==u.pathname.split('/').at(-2))throw Error('drom_list_id_conflict');
     const html=await markup(u.toString()); // Access/network failure retries the same page.
-    try {items.push(dromDetail(html,u.toString()));}
+    try {items.push(await enrichDromJapanSpecifications(dromDetail(html,u.toString()),this.catalogMarkup));}
     catch(e){const reason=String((e as Error).message);rejectionReasons[reason]=(rejectionReasons[reason]||0)+1;}
    }} catch(e){stopped=true;throw e;}
   }));

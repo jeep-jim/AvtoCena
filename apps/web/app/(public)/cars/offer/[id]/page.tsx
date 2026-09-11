@@ -288,7 +288,9 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     : initialVisibleRub > 0
       ? normalizedEnrichedOffer
       : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
-  const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
+  const sourceUrl = enrichedOffer.sourceId === "drom_japan_stat"
+    ? undefined
+    : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = selectionRequired || sellerPricing ? publicOffer(pricedOffer) : normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
   const presented = presentCatalogOffer(raw);
   const powerScenario = readCatalogPowerScenario(raw);
