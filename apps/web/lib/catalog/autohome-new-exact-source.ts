@@ -396,7 +396,7 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutohomeNewListRow;
-    if (!row?.specId || !row.trimTitle || !row.year || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
+    if (!row?.specId || !row.trimTitle || !row.year || row.year < 2025 || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
     const semanticEvidence = autohomeNewSpecificationEvidence({ listingYear: row.year });
     if (semanticEvidence.year.status !== "exact") return null;
     const now = new Date().toISOString();

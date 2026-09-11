@@ -183,7 +183,7 @@ function listRows(markup: string, listUrl: string) {
     seen.add(detailUrl);
     rows.push({
       id, detailUrl, title: derived.title, make: derived.make, model: derived.model, year,
-      mileageKm: mileage(plain), price: priceCny(clean(card.match(/<([a-z][a-z0-9]*)\b[^>]*class=["'][^"']*\bprice\b[^"']*["'][^>]*>([\s\S]*?)<\/\1>/i)?.[2] || "")), images: cardImages(card, listUrl),
+      mileageKm: mileage(plain), price: priceCny(clean(card.match(/<([a-z][a-z0-9]*)\b[^>]*class=["'][^"']*(?:price|报价|售价)[^"']*["'][^>]*>([\s\S]*?)<\/\1>/i)?.[2] || "")), images: cardImages(card, listUrl),
       city: clean(plain.match(/[／/|]\s*([\u4e00-\u9fff]{2,8})\s*[0-9.]+\s*万/)?.[1]), ...specs,
     });
   }
@@ -269,6 +269,24 @@ export const che168DealerExactSource = new Che168DealerAdapter();
 /** Domestic Che168 collection; never falls back to the export API. */
 export class DomesticChe168Adapter extends Che168DealerAdapter {
  sourceId = "autohome_used_china_open";
+ async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+  // Traverse the domestic nationwide inventory before the dealer seed list.
+  // A denied/challenged route stops collection; no Global/export substitution.
+  if (cursor?.startsWith('dealer:')) {
+   const page=await super.fetchPage(cursor.slice(7));
+   return {...page,nextCursor:page.nextCursor?`dealer:${page.nextCursor}`:null};
+  }
+  const page=Math.max(1,Number(String(cursor || 'national:1').replace('national:','')) || 1);
+  const url=`https://www.che168.com/china/a0_0msdgscncgpi1ltocsp${page}exx0/`;
+  const {response,markup}=await fetchMarkup(url);
+  if ([401,403,429].includes(response.status) || /captcha|cf-chl|access denied|Security Verification|window\.solveChallenge/i.test(markup)) {
+   return {items:[],finished:true,nextCursor:null,health:{ok:false,blocked:true,message:`che168_national_access_${response.status}`,checkedAt:new Date().toISOString()}};
+  }
+  if (!response.ok && response.status!==404) throw Error(`che168_national_http_${response.status}`);
+  const items=response.ok?listRows(markup,url):[];
+  return {items,finished:false,nextCursor:items.length?`national:${page+1}`:'dealer:1',count:items.length,
+   health:{ok:true,message:`Che168 domestic national page=${page} listings=${items.length}`,checkedAt:new Date().toISOString()}};
+ }
  normalizeOffer(raw: unknown): VehicleOffer | null {
   const offer=super.normalizeOffer(raw), row=raw as DealerRow;
   if (!offer || !isAllowedCatalogSourceUrl("china",this.sourceId,row.detailUrl)) return null;
@@ -277,9 +295,19 @@ export class DomesticChe168Adapter extends Che168DealerAdapter {
   offer.powerHp=row.powerHp;
   offer.fuel=row.fuel;
   offer.operational.semanticEvidence={
+   year:{source:'che168_domestic_listing',status:'exact',value:row.year},
+   fuel:{source:'che168_domestic_listing',status:offer.fuel?'exact':'missing',value:offer.fuel},
+   powertrainKind:{source:'che168_domestic_listing',status:offer.powertrainKind && offer.powertrainKind!=='unknown'?'exact':'missing',value:offer.powertrainKind},
    engineCc:{source:"che168_domestic_listing",status:row.engineCc?"exact":"missing",value:row.engineCc,rawValues:[]},
    powerHp:{source:"che168_domestic_listing",status:row.powerHp?"exact":"missing",value:row.powerHp,rawValues:[]},
   };
+  offer.operational.exactDetail=false;
+  // listRows extracts each gallery only from the <li> containing this URL.
+  // Record that binding so the publication gate can distinguish it from an
+  // unscoped page gallery. Empty galleries never receive an attestation.
+  offer.operational.photoIdentityVerified=Boolean(row.images?.length);
+  offer.operational.gallerySafetyMode='che168_domestic_listing_bound';
+  if(row.powerHp){offer.powerDataSource='che168_domestic_listing';offer.powerDataConfidence='source_exact';}
   return offer;
  }
  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {

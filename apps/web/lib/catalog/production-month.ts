@@ -4,7 +4,12 @@ export function confirmedProductionValue(offer:any) {
  const raw=offer?.operational?.raw;
  const candidate=evidence?.status==="exact" && evidence?.source && /manufactur|production|produced|出厂/i.test(String(evidence.source))
   ? evidence.value : raw?.manufacturedate || raw?.producedate;
- return String(candidate || "");
+ const value=String(candidate || "");
+ const match=value.match(/^((?:19|20)\d{2})(?:[-/.](0?[1-9]|1[0-2])(?:[-/.](0?[1-9]|[12]\d|3[01]))?)?$/);
+ // A registration date or a date from another model year must not change age.
+ if (!match || Number(match[1])!==Number(offer.year)) return "";
+ if (match[3] && new Date(Date.UTC(Number(match[1]),Number(match[2])-1,Number(match[3]))).getUTCMonth()!==Number(match[2])-1) return "";
+ return value.replace(/[/.]/g,'-');
 }
 export function confirmedProductionMonth(offer:any):string {
  const match=confirmedProductionValue(offer).match(/^((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])(?:[-/.]\d{1,2})?$/);
