@@ -27,3 +27,30 @@ export function enrichOfferWithSourceTableDisplacement<T extends VehicleOffer>(o
   return {...offer,engineCc:values[0],operational:{...offer.operational,semanticEvidence:{...semantic,
     engineCc:{status:'exact',value:values[0],source:`source_table:${snapshot.sourceId}:${snapshot.sourceOfferId}:${snapshot.specificationId}`,rawValues:labels}}}};
 }
+
+/** Prefill a pickup scenario only from an explicit total mass, never curb weight. */
+export function enrichOfferWithSourceTableParameters<T extends VehicleOffer>(input:T):T {
+  const offer=enrichOfferWithSourceTableDisplacement(input);
+  const snapshot=offer.operational?.sourceSpecifications;
+  const evidence:any=offer.operational?.semanticEvidence || {};
+  const pickup=/pickup|pick-up|пикап|皮卡|픽업/i.test(String(offer.bodyType||""));
+  if (!pickup || (offer.vehicleCategory && offer.vehicleCategory !== "unknown" && offer.vehicleCategory !== "N1")
+    || String(offer.tnVedCode||"").startsWith("8703")
+    || evidence.grossVehicleWeightKg?.status === "conflict" || evidence.vehicleCategory?.status === "conflict") return offer;
+  let mass=Number(offer.grossVehicleWeightKg)||0;
+  if (!mass && snapshot?.sourceId === offer.sourceId && snapshot?.sourceOfferId === offer.sourceOfferId) {
+    const values:number[]=[];
+    for (const group of snapshot.groups) for (const item of group.items) {
+      const label=item.name.normalize("NFKC");
+      if (!/最大允许总质量|最大总质量|总质量|차량총중량|총중량|полная.*масса|разреш[её]нная.*масса|gross.*(?:weight|mass)|gvwr/i.test(label)) continue;
+      if (!/kg|кг|킬로그램|千克/i.test(label)) continue;
+      const raw=item.value.normalize("NFKC").trim().replace(/(?<=\d)[ ,](?=\d{3}(?:\D|$))/g,"");
+      if (!/^\d{3,5}(?:\s*(?:kg|кг|킬로그램|千克))?$/i.test(raw)) continue;
+      values.push(Number(raw.match(/^\d+/)?.[0]));
+    }
+    const unique=[...new Set(values)];
+    if(unique.length===1)mass=unique[0];
+  }
+  if (!(mass>=1000 && mass<=3500)) return offer;
+  return {...offer,grossVehicleWeightKg:mass,vehicleCategory:"N1"};
+}
