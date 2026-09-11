@@ -1,3 +1,4 @@
+import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { hasModificationSelection } from "@/lib/catalog/modification-contract";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogImageDeliveryUrl, rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
@@ -18,7 +19,7 @@ function MileageIcon({ dense = false }: { dense?: boolean }) {
 
 function EngineIcon({ dense = false, fuel = false, electric = false }: { dense?: boolean; fuel?: boolean; electric?: boolean }) {
   const className = dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5";
-  if (electric) return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="6" width="14" height="12" rx="3" stroke="currentColor" strokeWidth="1.8" /><path d="M18 10h2v4h-2M8 10h6M8 14h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><path d="m12.5 8.5-3 4h2l-.5 3 3.5-4.5h-2z" fill="currentColor" /></svg>;
+  if (electric) return <ElectricMotorIcon className={className} />;
   if (fuel) return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h8v18H6V3Zm8 4h2.2L19 10v7.2a1.8 1.8 0 0 0 3.6 0V9.5L20 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M8.5 6h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>;
   return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>;
 }

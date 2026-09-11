@@ -1,3 +1,4 @@
+import { translatedSpecificationGroups } from "@/lib/catalog/specification-translation-storage";
 import { enrichOfferWithSourceTableParameters } from "@/lib/catalog/source-table-displacement";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { StickyOfferColumn } from "@/components/catalog/StickyOfferColumn";
@@ -315,7 +316,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
   if (!visibleRub && !selectionRequired && !sellerPricing) redirect("/cars");
-  const specificationGroups = offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel });
+  const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel }));
   const o = {
     ...presented,
     japanExportRestriction: assessJapanExportRestriction(offer),

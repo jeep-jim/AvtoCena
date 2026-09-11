@@ -1,4 +1,6 @@
 "use client";
+
+import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
 import { validateCustomerParameters } from "../../lib/catalog/customer-parameters";
@@ -109,7 +111,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
       {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
     </> : null}
    </Tile> : null}
-   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile wide label="30-минутная мощность" value={draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<Zap size={16}/>}>
+   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile wide label="30-минутная мощность" value={draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
     {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
    </Tile>:null}
   </div>

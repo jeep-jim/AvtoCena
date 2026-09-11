@@ -1,0 +1,46 @@
+name: Catalog Russian descriptions
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/catalog-translate-descriptions.yml']
+  workflow_run:
+    workflows: ['Catalog · Five-market full rebuild']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: catalog-russian-descriptions
+  cancel-in-progress: false
+jobs:
+  translate:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      TRANSLATION_CHARACTER_BUDGET: '100000'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Translate missing descriptions and persist display cache
+        run: npx tsx scripts/catalog-translate-descriptions.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-translation-report
+          path: catalog-translation-report.json
+          retention-days: 14
