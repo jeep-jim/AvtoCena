@@ -6,6 +6,18 @@ import test from 'node:test';
 import { getJsonStorage, resetJsonStorageForTests } from '../apps/web/lib/data';
 import { CATALOG_CHUNK_SIZE, iterateOffersForMaintenance, persistInternalCatalog } from '../apps/web/lib/catalog/storage';
 
+test('publisher releases consumed input but keeps the separate retention regression baseline', () => {
+  const source = fs.readFileSync('scripts/catalog-publish-market.mjs', 'utf8');
+  const audit = source.indexOf('const audited = await runWithConcurrency');
+  assert.ok(source.indexOf('reserveRows.length = 0;') < audit);
+  assert.ok(source.indexOf('generation.offers.length = 0;') < audit);
+  assert.ok(source.indexOf('candidatesById.clear();') < audit);
+  assert.match(source, /const generatedCandidateCount = generation.offers.length;/);
+  assert.match(source, /generated:generatedCandidateCount/);
+  assert.match(source, /orderedCandidates\[index\] = null/);
+  assert.ok(source.indexOf('currentRetainedRows.length = 0;') > source.indexOf('assertNoDeliveredPriceRegression(currentRetainedRows'));
+});
+
 test('streaming preservation retains full raw records, fills public gaps and commits only after every chunk succeeds', async () => {
   const cwd = process.cwd();
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'avtocena-internal-stream-'));

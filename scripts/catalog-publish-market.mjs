@@ -342,6 +342,10 @@ const currentRetainedRows = [...existingInventory.values()].filter((row) => {
   retentionDecisions.set(String(row.id || ""), decision);
   return decision.retain;
 });
+// Public rows already replaced their internal duplicates in currentRetainedRows.
+// Do not retain the superseded raw payloads until the end of publication.
+reserveRows.length = 0;
+existingInventory.clear();
 const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
 const freshIds = new Set(generation.offers.map(offer => offer.id));
 retainedPublishedIds = new Set(currentRetainedRows.filter(offer => !freshIds.has(offer.id)).map(offer => offer.id));
@@ -358,6 +362,9 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
 }
 
 const orderedCandidates = [...candidatesById.values()].sort(qualityOrder);
+const generatedCandidateCount = generation.offers.length;
+generation.offers.length = 0;
+candidatesById.clear();
 logPublicationMemory("candidates_merged");
 const selected = [];
 const selectedIds = new Set();
@@ -401,6 +408,9 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
     sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
     for (const image of ownedImages) imageOwners.set(imageKey(image), offer.id);
   }
+  // Audited clones now live in selected; the consumed input is no longer needed.
+  // Preserve array length for reporting and retain the separate regression baseline.
+  for (let index = start; index < Math.min(start + prepareConcurrency, orderedCandidates.length); index++) orderedCandidates[index] = null;
 }
 
 // Retained rows pass the same audit as fresh intake. V2 first orders eligible
@@ -467,7 +477,7 @@ const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
   powerMix: canonicalTargetPreview.powerMix.report,
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
-  generated:generation.offers.length, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
+  generated:generatedCandidateCount, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
   selected:selected.length, canonical:canonicalTargetPreview.offers.length,
   calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
   sellerOnly:canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
@@ -490,7 +500,6 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 
 // Keep counts for the report, then release consumed candidates before loading
 // maintenance state. Technical tables are retained in selected offers in full.
-const generatedCandidateCount = generation.offers.length;
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
