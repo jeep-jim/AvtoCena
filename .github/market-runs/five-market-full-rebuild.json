@@ -1,14 +1,13 @@
 {
-  "requestedAt": "2026-09-11T20:42:00Z",
-  "mode": "owner-requested-korea-next-single-market",
+  "mode": "owner-requested-uae-next-single-market",
   "publishMarkets": [
-    "korea"
+    "uae"
   ],
-  "resetCursors": true,
+  "reason": "Owner-approved sequential queue: Korea run 34646131319 completed publication and final audit 0 invalidReady, but source coverage and automatic calculation remain incomplete. Start only UAE with DubiCars and Dubizzle, fresh cursors and unchanged volume limits. Preserve all other markets and Japan. No guessing horsepower, no bypass of source blocks or quality/retention/storage gates. Europe and Georgia follow as separate supervised cycles.",
   "remainingMarkets": [
-    "uae",
     "europe",
     "georgia"
   ],
-  "reason": "Owner-approved sequential queue: China publication 34635344405 completed with final audit 0 invalidReady but source coverage remains incomplete. Start only Korea with both Encar and KCar, fresh cursors and unchanged volume limits. Preserve all other markets. Do not guess missing horsepower or weaken calculation, retention and storage gates. Remaining UAE, Europe, Georgia are supervised separate runs, not a concurrent batch."
+  "requestedAt": "2026-09-11T23:12:00Z",
+  "resetCursors": true
 }
