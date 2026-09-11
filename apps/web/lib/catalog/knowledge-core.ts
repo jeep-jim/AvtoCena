@@ -323,7 +323,12 @@ function applyTrustedVariant(offer: VehicleOffer, variant: KnowledgeCoreVariant,
       const currentHp = positive(next.powerHp);
       if (!currentHp || Math.abs(currentHp - candidateHp) > Math.max(8, candidateHp * 0.08)) {
         next.powerHp = candidateHp;
-        if (positive(variant.powerKw)) next.powerKw = positive(variant.powerKw);
+        next.powerKw = positive(variant.powerKw) || Number((candidateHp * 0.73549875).toFixed(5));
+        // The previous kW/utilization values belonged to the replaced rating.
+        if (next.powertrainKind === 'combustion') {
+          next.icePowerKw = next.powerKw;
+          next.utilizationPowerKw = next.powerKw;
+        }
         next.powerDataSource = `encyclopedia_v2:${variant.id}`;
         next.powerDataConfidence = variant.status === "verified" ? "verified" : "source_exact";
         applied.push("powerHp");

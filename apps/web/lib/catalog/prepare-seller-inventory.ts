@@ -9,6 +9,7 @@ import { hasCredibleOfferContent } from "./offer-quality";
 import { withoutDeliveredPrice } from "./modification-contract";
 import { restoreSavedSourceEvidence } from "./saved-source-recovery";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
+import { sourceInventoryInScope } from './source-inventory-scope';
 
 /** Modern adapter evidence is authoritative; legacy replay must not erase it. */
 export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
@@ -23,14 +24,18 @@ export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
 }
 
 export async function prepareSellerInventory(input: VehicleOffer, options: { preservePublishedPrice?: boolean } = {}): Promise<VehicleOffer | null> {
+  if (!sourceInventoryInScope(input)) return null;
   if (isJapanAuctionOffer(input) && !japanAuctionSoldPriceVerified(input)) return null;
   // A published quote is already complete. Its compact record intentionally
   // omits some raw source evidence; replaying it as a new intake row erased
   // valid calculations and specifications during the weekly refresh.
-  if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0) return structuredClone(input);
+  if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0 && input.catalogPricingMode !== 'seller') {
+    if (!input.calculationSnapshot?.customsInput && !input.calculationSnapshot?.customs?.productionReferenceDate) return structuredClone(input);
+    const {applyActiveBusinessPricing} = await import('./live-business-pricing');
+    return applyActiveBusinessPricing(structuredClone(input));
+  }
   const source = enrichOfferWithSourceTableParameters(inventorySourceEvidence(input));
-  const original = source.sourceId === 'encar_direct' && (source.operational as any)?.inspection?.identityVerified
-    ? await enrichOfferWithKnowledgeCore(source) : source;
+  const original = await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated)) {

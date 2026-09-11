@@ -1,5 +1,6 @@
 import { expandCustomsBreakdown } from "./customs-breakdown";
 import { confirmedProductionValue } from "./production-month";
+import { synchronizeCombustionPower } from "./combustion-power-consistency";
 import { getEffectiveMarketVersion } from "../effective-market-settings";
 import { japanAuctionSoldPriceVerified } from "./public-priority";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
@@ -170,7 +171,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   const canonical = discardRepresentativeModelPowerForCustoms(coreEnriched);
   const certified = resolvedModification ? canonical : await enrichOfferWithCertifiedPower(canonical);
   const known = resolvedModification ? certified : await enrichOfferWithPowerKnowledge(certified);
-  const normalized = resolvedModification ? known : preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
+  const normalized = synchronizeCombustionPower(resolvedModification ? known : preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer);
   const electrified = isElectrifiedKind(normalized.powertrainKind);
   const exactOffer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
     ? { ...normalized, utilizationPowerKw: undefined } as VehicleOffer

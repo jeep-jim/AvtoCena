@@ -1,4 +1,5 @@
 import { confirmedProductionValue } from "./production-month";
+import { synchronizeCombustionPower } from "./combustion-power-consistency";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../effective-market-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
@@ -78,6 +79,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
 }
 
 export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(offer: T, configured: any): T {
+  offer = synchronizeCombustionPower(offer);
   const market = String(offer.market || "") as CatalogMarket;
   if (!market) return offer;
   // Japan contains completed auction results. Their published price is a
@@ -95,7 +97,9 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   // Replay the exact inputs saved by the shared engine: a tariff anniversary or
   // changed N1 freight costs must not leave the previous customs amount frozen.
   if (snapshot.customsInput && snapshot.customs?.status === "ready" && !snapshot.missing?.length && snapshot.priceIncludesAllCustoms !== false) {
-    const inputs = {...snapshot.customsInput, customsValueRub:snapshotSourcePriceRub(offer), importedAt:new Date()};
+    const inputs = {...snapshot.customsInput, customsValueRub:snapshotSourcePriceRub(offer), importedAt:new Date(),
+      ...(offer.powertrainKind === 'combustion' && offer.utilizationPowerKw === offer.powerKw && offer.powerKw
+        ? {powerHp:offer.powerHp,powerKw:offer.powerKw,icePowerKw:offer.icePowerKw,utilizationPowerKw:offer.utilizationPowerKw} : {})};
     const commercial = inputs.vehicleCategory === "N1" || String(inputs.tnVedCode || "").replace(/\D/g, "").startsWith("8704");
     if (commercial) inputs.customsValueRub = snapshotSourcePriceRub(offer) + Number(resolved.config.logisticsRub || 0);
     const customs = calculateRussiaCustomsForIndividual(inputs);

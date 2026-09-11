@@ -1,13 +1,15 @@
 {
-  "requestedAt": "2026-09-11T05:10:00Z",
-  "mode": "republish-korea-china-with-seller-inventory-and-pickup-parameters",
+  "requestedAt": "2026-09-11T08:10:00Z",
+  "mode": "refresh-approved-sources-and-recalculate",
   "reuseRunId": "34474059061",
   "publishMarkets": [
     "korea",
     "china",
     "uae",
-    "georgia"
+    "georgia",
+    "europe"
   ],
-  "refreshMarkets": [],
-  "reason": "Retry unfinished markets with seller inventory policy and bounded maintenance lock wait; Japan schedule paused, Europe preserved"
+  "refreshMarkets": ["china", "korea", "uae", "georgia", "europe"],
+  "resetCursors": true,
+  "reason": "Fresh pass of every approved non-Japan source; domestic Che168 gallery provenance and national pagination, Autohome new 2025+ only, consistent ICE power and publication-time pricing. Japan remains unchanged."
 }

@@ -18,7 +18,7 @@ function Field({label,value,change,options=[],min,max,searchQuery}:{label:string
    {searchQuery ? <a href={`https://yandex.ru/search/?text=${encodeURIComponent(searchQuery)}`} target="_blank" rel="noopener noreferrer" aria-label={`Найти: ${label}`} title="Найти в Яндексе с Алисой. Проверьте источник и модификацию." className="flex min-h-11 min-w-11 shrink-0 items-center justify-center"><img src="/brands/alice.svg" alt="" width={22} height={22}/></a> : null}
   </div>
   {choosing && options.length ? <div id={`${id}-choices`} className="mt-2 grid grid-cols-2 gap-1" aria-label={`Варианты: ${label}`}>
-   {options.map(n=><button key={n} type="button" aria-pressed={value===String(n)} onClick={()=>{change(String(n));setChoosing(false);}} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-2 text-left text-sm">{n.toLocaleString("ru-RU")}</button>)}
+   {options.map(n=><button key={n} type="button" aria-pressed={value===String(n)} onClick={()=>{change(String(n));setChoosing(false);}} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-2 text-left text-sm">{n.toLocaleString("ru-RU",{useGrouping:!/^Год/i.test(label)})}</button>)}
   </div> : null}
  </div>;
 }
@@ -45,11 +45,11 @@ function Tile({label,value,icon,children,wide=false}:{label:string;value:string;
  </div>;
 }
 export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false}:{offerId:string;autoCalculate?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
- const [draft,setDraft]=useState(initial),[pending,setPending]=useState(false),[error,setError]=useState("");
+ const [draft,setDraft]=useState(()=>isPickup?{...initial,vehicleCategory:'N1'}:initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
  const dirty=JSON.stringify(draft)!==JSON.stringify(initial);
- function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:""}:{})}));}
+ function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:""}:{})}));}
  useEffect(()=>{
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
@@ -98,8 +98,8 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
     {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
    </Tile>
    {showCommercial ? <Tile wide label="Категория и масса" value={draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : isPickup ? "M1 · Легковой (Пикап)" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
-    <p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС. N1 — грузовой расчёт по ТН ВЭД 8704. Выбор применяется только к вашему расчёту.</p>
-    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">{isPickup ? "M1 · Легковой (Пикап)" : "M1 · Легковой"}</option></select></label>
+    {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
+    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">M1 · Легковой</option></select></label></> : <p className="text-xs text-[var(--ac-muted)]">Для пикапа применяется расчёт N1. Полную массу берём из характеристик автомобиля.</p>}
     {draft.vehicleCategory === "N1" ? <>
       {field("grossVehicleWeightKg","Полная разрешённая масса, кг",[2500,2800,3000,3200,3500],1,3500,`${researchContext} ${draft.year} ${draft.engineCc} см³ ${draft.fuel} полная разрешённая максимальная масса GVWR кг технические характеристики`)}
       <p className="text-xs leading-5 text-[var(--ac-muted)]">В списке примеры значений, а не характеристики этого авто. Выберите или введите массу из документов; значок Алисы поможет найти данные вашей модификации.</p>

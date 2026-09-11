@@ -17,11 +17,11 @@ test('pickup total mass prefills editable N1 scenario, with existing category pr
  assert.equal(parameters({...o,bodyType:'SUV'}).vehicleCategory,undefined);
  assert.equal(parameters({...o,tnVedCode:'8703'}).vehicleCategory,undefined);
 });
-test('curb mass, payload, missing mass and mismatched or conflicting totals never infer N1',()=>{
+test('pickup defaults N1 without inventing gross mass from curb mass, payload or unbound tables',()=>{
  const o=fixture();o.bodyType='Пикап';o.operational.sourceSpecifications.groups.push({name:'车身',items:[{name:'整备质量(kg)',value:'1800'},{name:'最大载重质量(kg)',value:'485'}]});
- assert.equal(parameters(o).vehicleCategory,undefined);
+ assert.equal(parameters(o).vehicleCategory,'N1');assert.equal(parameters(o).grossVehicleWeightKg,undefined);
  const items=o.operational.sourceSpecifications.groups[1].items;items.push({name:'总质量(kg)',value:'3000'},{name:'gross vehicle weight (kg)',value:'3200'});
- assert.equal(parameters(o).vehicleCategory,undefined);
+ assert.equal(parameters(o).grossVehicleWeightKg,undefined);
  items.pop();o.operational.sourceSpecifications.sourceOfferId='other';
- assert.equal(parameters(o).vehicleCategory,undefined);
+ assert.equal(parameters(o).grossVehicleWeightKg,undefined);
 });

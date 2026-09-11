@@ -5,6 +5,7 @@ const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/off
 const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const { isVerifiedSellerOnlyForAudit, summarizePendingCalculationsForAudit } = await import("../apps/web/lib/catalog/visible-audit-policy.ts");
+const { combustionPowerMismatch } = await import('../apps/web/lib/catalog/combustion-power-consistency.ts');
 
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
@@ -28,6 +29,8 @@ function totalThirtyMinuteKw(offer) {
 }
 
 function exactPowerState(offer, requireExactProvenance = false, specificationRejection = catalogRequiredSpecificationRejectionReason(offer)) {
+  if (combustionPowerMismatch(offer)) return {exactEnoughForReady:false,reasons:['combustion_hp_kw_mismatch'],
+    powerDataConfidence:offer.powerDataConfidence || null,powerDataSource:offer.powerDataSource || null,totalThirtyMinuteKw:null};
   const scenarioSource = clean(offer?.powerDataSource);
   // Keep the audit and the writer/read-model on one fail-closed specification
   // contract. A combustion knowledge_reference is an explicitly estimated,

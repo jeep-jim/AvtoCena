@@ -51,6 +51,6 @@ export function enrichOfferWithSourceTableParameters<T extends VehicleOffer>(inp
     const unique=[...new Set(values)];
     if(unique.length===1)mass=unique[0];
   }
-  if (!(mass>=1000 && mass<=3500)) return offer;
+  if (!(mass>=1000 && mass<=3500)) return mass > 3500 ? offer : {...offer,vehicleCategory:'N1'};
   return {...offer,grossVehicleWeightKg:mass,vehicleCategory:"N1"};
 }

@@ -1,5 +1,7 @@
 const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
+const { sourceInventoryInScope } = await import('../apps/web/lib/catalog/source-inventory-scope.ts');
+const { requiredCatalogSourceIds } = await import('../apps/web/lib/catalog/required-catalog-sources.ts');
 const { isSellerPricedOffer } = await import("../apps/web/lib/catalog/seller-price-contract.ts");
 const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catalog/publication-price-preservation.ts");
 import fs from "node:fs/promises";
@@ -262,6 +264,7 @@ async function runWithConcurrency(items, concurrency, worker) {
 let retainedPublishedIds = new Set();
 async function auditCandidate(sourceOffer) {
   try {
+    if (!sourceInventoryInScope(sourceOffer)) return {offer:null,reason:'source_inventory_scope'};
     if (!sourceOffer?.id || sourceOffer?.market !== market || isCommercial(sourceOffer)) return { offer: null, reason: "commercial_or_identity" };
     if (market !== "japan" && sourceOffer.status !== "active") return { offer: null, reason: "source_not_active" };
     if (!catalogOfferWithinRetention(sourceOffer)) return { offer: null, reason: "retention_expired" };
@@ -644,6 +647,14 @@ const report = {
     [market]: manifest ? publishedSourceCounts : previousSourceCounts,
   },
   selectedCandidatesBySource: Object.fromEntries(sourceCounts),
+  sourceCoverage: requiredCatalogSourceIds(market).map(sourceId=>({sourceId,
+    observed:Boolean(sourceRefreshStates[sourceId]?.observed),
+    collected:Number(sourceRefreshStates[sourceId]?.freshSaved || 0),
+    published:Number((manifest ? publishedSourceCounts : previousSourceCounts)[sourceId] || 0),
+    stopReasons:sourceRefreshStates[sourceId]?.stopReasons || ['not_observed']})),
+  sourceCoverageComplete: requiredCatalogSourceIds(market).every(sourceId=>
+    sourceRefreshStates[sourceId]?.observed && Number(publishedSourceCounts[sourceId] || 0)>0
+    && sourceRefreshStates[sourceId]?.stopReasons?.every(reason=>reason==='source_finished')),
   calculationCoverageScope: "canonical_candidates",
   marketQuality: {
     [market]: {
