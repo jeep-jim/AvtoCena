@@ -1,8 +1,5 @@
 {
-  "reuseRunId": "34444487911",
-  "refreshMarkets": [],
-  "publishMarkets": [
-    "japan"
-  ],
-  "reason": "Owner requested Drom-only sold-results cleanup; reuse observations, no new collection"
+  "refreshMarkets": ["japan"],
+  "publishMarkets": ["japan"],
+  "reason": "2026-09-11 owner request: fresh Japan sold lots with verified catalog specifications; temporary Drom before Aleado"
 }

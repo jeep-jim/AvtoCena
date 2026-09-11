@@ -11,7 +11,7 @@ const fixture=JSON.parse(fs.readFileSync('tests/fixtures/drom/vitz-sold.json','u
 const html=(f=fixture)=>`Продан за<script type="application/ld+json">${JSON.stringify(f.car)}</script><script data-drom-module="auction-statistics-lot">${JSON.stringify(f.module)}</script>`;
 test('Drom price is JPY sold price, one lot photograph, no invented technical inputs',()=>{
  const o=dromDetail(html(),fixture.sourceUrl);
- assert.equal(o.sourcePrice,308000);assert.equal(o.auctionGrade,'4');assert.equal(o.auctionDate,'2026-09-08');assert.equal(o.images.length,1);assert.equal(o.engineCc,undefined);assert.equal(o.powerHp,undefined);assert.equal(o.fuel,undefined);assert.equal(japanAuctionSoldPriceVerified(o),true);
+ assert.equal(o.sourcePrice,308000);assert.equal(o.auctionGrade,'4');assert.equal(o.auctionDate,'2026-09-08');assert.equal(o.images.length,1);assert.equal(o.engineCc,undefined);assert.equal(o.powerHp,95);assert.equal(o.fuel,undefined);assert.equal(japanAuctionSoldPriceVerified(o),true);
  const single=structuredClone(fixture);single.car.offers=single.car.offers.find((o:any)=>o.priceCurrency==='JPY');assert.equal(dromDetail(html(single),single.sourceUrl).sourcePrice,308000);
  for(const change of ['id','price','image','sold']){
   const f=structuredClone(fixture);
