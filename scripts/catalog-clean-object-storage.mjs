@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
 const { catalogCandidateObjectExpired } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
@@ -72,20 +73,21 @@ function collectOfferImageKeys(keys, offers) {
 }
 
 async function readLiveImageKeys(generationIds, internalManifest, includeInternal) {
-  const keys = new Set();
-  for (const generationId of generationIds) {
-    if (!generationId) continue;
-    const index = await readDataJson(`catalog/generations/${generationId}/indexes/images-by-id.json`, null);
-    if (!index || !index.imagesById || typeof index.imagesById !== "object") throw new Error(`storage_cleanup_image_index_unreadable_${generationId}`);
-    for (const image of Object.values(index.imagesById)) {
-      const objectKey = String(image?.objectKey || "").trim();
-      if (objectKey) keys.add(objectKey);
-    }
-  }
+  const { keys, deferredGenerations } = await readProtectedImageReferences({
+    generationIds,
+    requiredGenerationIds: [publicGeneration, previousManifest?.generationId].filter(Boolean),
+    imageObjects,
+    readJson: readDataJson,
+  });
+  imageCleanupDeferredGenerations.push(...deferredGenerations);
   if (!includeInternal) return keys;
   const internalChunks = [...new Set(Object.values(internalManifest?.sources || {}).flatMap((source) => Array.isArray(source?.chunks) ? source.chunks : []))];
-  const internalLists = await mapWithConcurrency(internalChunks, Math.min(DELETE_CONCURRENCY, 16), async (chunk) => { const rows = await readDataJson(String(chunk), null); if (!Array.isArray(rows)) throw new Error(`storage_cleanup_internal_chunk_unreadable_${chunk}`); return rows; });
-  for (const offers of internalLists) collectOfferImageKeys(keys, offers);
+  // Keep only one full raw chunk resident during maintenance.
+  for (const chunk of internalChunks) {
+    const offers = await readDataJson(String(chunk), null);
+    if (!Array.isArray(offers)) throw new Error(`storage_cleanup_internal_chunk_unreadable_${chunk}`);
+    collectOfferImageKeys(keys, offers);
+  }
   return keys;
 }
 
@@ -128,6 +130,7 @@ const generationIds = [...new Set(generationObjects.map((object) => generationId
 const publicGeneration = String(publicManifest?.generationId || "");
 const internalGeneration = String(internalManifest?.generationId || "");
 const previousManifest = await readDataJson("catalog/previous-manifest.json", null);
+const imageCleanupDeferredGenerations = [];
 const protectedGenerations = new Set([
   publicGeneration,
   ...(previousManifest?.generationId ? [String(previousManifest.generationId)] : []),
@@ -241,6 +244,8 @@ if (!publicGeneration || !generationIds.length) {
     currentPublicGeneration: publicGeneration,
     currentInternalGeneration: internalGeneration || null,
     protectedGenerations: [...protectedGenerations],
+    imageCleanupDeferred: imageCleanupDeferredGenerations.length > 0,
+    imageCleanupDeferredGenerations,
     candidateGenerations,
     discovered: {
       catalogObjects: catalogObjects.length,

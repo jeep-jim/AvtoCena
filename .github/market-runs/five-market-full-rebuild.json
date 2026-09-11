@@ -1,15 +1,17 @@
 {
-  "requestedAt": "2026-09-11T16:55:10.368Z",
-  "mode": "owner-requested-single-market-night-collection",
+  "requestedAt": "2026-09-11T18:45:00Z",
+  "mode": "china-republish-after-conservative-cleanup-fix",
+  "reuseRunId": "34625240872",
+  "refreshMarkets": [],
   "publishMarkets": [
     "china"
   ],
-  "resetCursors": true,
+  "resetCursors": false,
   "remainingMarkets": [
     "korea",
     "uae",
     "europe",
     "georgia"
   ],
-  "reason": "Owner explicitly requests sequential fresh collection starting China, then Korea, UAE, Europe and Georgia. All approved China sources are attempted independently with existing volume limits; access blocks stop the affected source and remain visible, not bypassed or mislabeled successful coverage. Preserve all other markets and all quality/storage/retention gates. Previous recovery 34606219332 is cancelled after confirmed UAE/Georgia publications; do not rerun that three-market batch."
+  "reason": "Republish only China from the completed intake of 34625240872 after repairing cleanup handling of incomplete protected staging generations. Do not recollect blocked sources. Preserve all existing image objects when staging references are unknown; current/rollback manifests and internal chunks remain fail-closed. Continue the owner queue with Korea only after this run has finished and been assessed."
 }
