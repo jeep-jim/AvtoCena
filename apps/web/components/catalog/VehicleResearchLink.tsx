@@ -3,7 +3,7 @@
 import { useState, type MouseEvent } from "react";
 import { vehicleResearchUrl, type VehicleResearchIdentity } from "../../lib/catalog/vehicle-research-link";
 
-export function VehicleResearchLink({ identity }: { identity: VehicleResearchIdentity }) {
+export function VehicleResearchLink({ identity }: { identity: VehicleResearchIdentity; offerId?: string }) {
   const [opened, setOpened] = useState(false);
   const href = vehicleResearchUrl(identity);
   if (!href) return null;
