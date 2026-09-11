@@ -127,8 +127,10 @@ const generationIds = [...new Set(generationObjects.map((object) => generationId
   .sort((left, right) => generationTimestamp(right) - generationTimestamp(left));
 const publicGeneration = String(publicManifest?.generationId || "");
 const internalGeneration = String(internalManifest?.generationId || "");
+const previousManifest = await readDataJson("catalog/previous-manifest.json", null);
 const protectedGenerations = new Set([
   publicGeneration,
+  ...(previousManifest?.generationId ? [String(previousManifest.generationId)] : []),
   ...(!EMERGENCY && internalGeneration ? [internalGeneration] : []),
   ...(!EMERGENCY ? generationIds.slice(0, KEEP_GENERATIONS) : []),
 ].filter(Boolean));

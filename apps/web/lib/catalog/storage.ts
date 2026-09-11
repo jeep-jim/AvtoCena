@@ -1079,6 +1079,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);
     try {
+      if (current.found && current.value?.generationId && current.value.generationId !== generationId) await storage.writeJson("catalog/previous-manifest.json", current.value);
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
       resetCatalogReadCachesForTests();
       return manifest;

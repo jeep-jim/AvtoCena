@@ -145,6 +145,8 @@ jobs:
           pattern: catalog-intake-*
           path: catalog-intake-input
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
+      - name: Reclaim expired storage under the publication lock
+        run: node --import tsx scripts/catalog-storage-maintenance.mjs
       - name: Check bucket reserve without deleting objects
         run: node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Publish markets through calculation and retention guards
@@ -171,6 +173,9 @@ jobs:
         with:
           name: catalog-quality-rebuild-reports
           path: |
+            catalog-storage-maintenance.json
+            catalog-storage-preview.json
+            catalog-storage-cleanup-report.json
             catalog-weekly-*.json
             catalog-storage-preflight.json
             catalog-visible-calculation-coverage.json

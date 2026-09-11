@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+const script=fileURLToPath(new URL('../scripts/catalog-storage-maintenance.mjs',import.meta.url));
+const loader=fileURLToPath(new URL('../node_modules/tsx/dist/loader.mjs',import.meta.url));
+async function setup(){const root=await fs.mkdtemp(path.join(os.tmpdir(),'storage-maintenance-'));const put=async(key:string,value:any)=>{const p=path.join(root,'data',key);await fs.mkdir(path.dirname(p),{recursive:true});await fs.writeFile(p,JSON.stringify(value));};
+ const ids=['gen_1600000000000_old','gen_1600000001000_expired','gen_1600000002000_new','gen_1600000003000_live'];
+ for(const id of ids)await put(`catalog/generations/${id}/indexes/images-by-id.json`,{imagesById:{}});
+ await put('catalog/manifest.json',{generationId:ids[3],markets:{korea:{count:2,chunks:[]}}});
+ await put('catalog/previous-manifest.json',{generationId:ids[0],markets:{}});
+ await put('catalog/internal/manifest.json',{generationId:ids[3],sources:{}});
+ await put('crm/leads.json',{keep:true});return {root,put,ids};}
+const run=(root:string)=>spawnSync(process.execPath,['--import',loader,script],{cwd:root,env:{...process.env,JSON_STORAGE_DRIVER:'local'},encoding:'utf8'});
+test('maintenance deletes expired copies but keeps current, previous, newest and noncatalog data',async()=>{const {root,ids}=await setup();try{const r=run(root);assert.equal(r.status,0,r.stderr);await assert.rejects(fs.access(path.join(root,'data/catalog/generations',ids[1],'indexes/images-by-id.json')));for(const id of [ids[0],ids[2],ids[3]])await fs.access(path.join(root,'data/catalog/generations',id,'indexes/images-by-id.json'));await fs.access(path.join(root,'data/crm/leads.json'));const report=JSON.parse(await fs.readFile(path.join(root,'catalog-storage-maintenance.json'),'utf8'));assert.equal(report.ok,true);assert.equal(report.marketCounts.korea,2);assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).lockedUntil,'');}finally{await fs.rm(root,{recursive:true,force:true});}});
+test('active publisher lock prevents cleanup and remains owned by publisher',async()=>{const {root,put,ids}=await setup();try{await put('catalog/import-lock.json',{operationId:'publisher',lockedUntil:new Date(Date.now()+600000).toISOString()});const r=run(root);assert.notEqual(r.status,0);for(const id of ids)await fs.access(path.join(root,'data/catalog/generations',id,'indexes/images-by-id.json'));assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).operationId,'publisher');}finally{await fs.rm(root,{recursive:true,force:true});}});
+test('unreadable live image index fails before deleting and releases lock',async()=>{const {root,ids}=await setup();try{await fs.unlink(path.join(root,'data/catalog/generations',ids[3],'indexes/images-by-id.json'));const r=run(root);assert.notEqual(r.status,0);await fs.access(path.join(root,'data/catalog/generations',ids[1],'indexes/images-by-id.json'));assert.equal(JSON.parse(await fs.readFile(path.join(root,'data/catalog/import-lock.json'),'utf8')).lockedUntil,'');}finally{await fs.rm(root,{recursive:true,force:true});}});

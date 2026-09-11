@@ -3,9 +3,15 @@ run-name: Catalog storage cleanup · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  # Automatic deletion is paused together with catalog collection/publication.
-  # Cleanup may be restored only after the new two-week retention contract and
-  # the rebuilt six-market generations have been verified in production.
+  schedule:
+    - cron: "0 17 * * *"
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/storage-maintenance.json']
+  workflow_run:
+    workflows: ['Catalog · Five-market full rebuild']
+    types: [completed]
+    branches: [main]
 
 permissions:
   actions: write
@@ -59,7 +65,7 @@ jobs:
       - name: Validate cleanup script
         run: node --check scripts/catalog-clean-object-storage.mjs
       - name: Clean expired catalog objects safely
-        run: timeout --signal=TERM --kill-after=120s 13800s npx tsx scripts/catalog-clean-object-storage.mjs
+        run: timeout --signal=TERM --kill-after=120s 13800s npx tsx scripts/catalog-storage-maintenance.mjs
       - name: Write cleanup summary
         if: always()
         shell: bash
@@ -77,7 +83,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: catalog-storage-cleanup-report
-          path: catalog-storage-cleanup-report.json
+          path: |
+            catalog-storage-preview.json
+            catalog-storage-cleanup-report.json
+            catalog-storage-maintenance.json
           if-no-files-found: warn
           compression-level: 9
           retention-days: 14
