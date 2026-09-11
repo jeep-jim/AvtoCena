@@ -162,7 +162,8 @@ test("recovery preservation gates keep untouched markets byte-stable and canonic
 });
 
 test("standard one-market publisher expires stale target rows, reapplies quality policy, and preserves untouched markets during canonicalization", () => {
-  assert.match(standardMarketPublisher, /readAllOffersForMaintenance/);
+  assert.match(standardMarketPublisher, /iterateOffersForMaintenance/);
+  assert.match(standardMarketPublisher, /preservedInternalOffers: preservedInternalOffers\(\)/);
   assert.match(standardMarketPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket/);
   assert.match(standardMarketPublisher, /beforePersistValidate\(publicOffers\)/);
   assert.match(standardMarketPublisher, /beforePublishValidate\(publishedOffers\)/);

@@ -787,6 +787,25 @@ export async function readMarketMaintenanceOffers(market: CatalogMarket) {
   return (await readOfferLists([...new Set<string>(chunks)])).filter(offer => offer.market === market);
 }
 export const readAllOffers = readAllOffersForMaintenance;
+/** Maintenance-only stream: never materialize every other market's raw payloads. */
+export async function* iterateOffersForMaintenance(options: { excludeMarket: CatalogMarket }) {
+  const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, { sources: {} });
+  const excludedSources = new Set(REQUIRED_CATALOG_SOURCES[options.excludeMarket].map(source => source.sourceId));
+  const seenPaths = new Set<string>();
+  for (const [sourceId, source] of Object.entries<any>(manifest.sources || {})) {
+    if (excludedSources.has(sourceId)) continue;
+    for (const path of source.chunks || []) {
+      if (seenPaths.has(path)) continue;
+      seenPaths.add(path);
+      const rows = await readDataJson<VehicleOffer[] | null>(path, null);
+      if (!Array.isArray(rows)) throw new Error(`catalog_maintenance_chunk_missing:${path}`);
+      if (rows.some(row => !row?.id || row.sourceId !== sourceId || !MARKETS.includes(row.market))) {
+        throw new Error(`catalog_maintenance_chunk_invalid:${path}`);
+      }
+      yield rows.filter(row => row.market !== options.excludeMarket);
+    }
+  }
+}
 async function facetsFromProjection(generationId: string, rows: CatalogSearchProjection[], params: CatalogSearchParams, hasFilters: boolean): Promise<CatalogFacets> {
   if (!hasFilters) {
     return {
@@ -824,23 +843,38 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
   return facetsFromProjection(generationId, rows, params, hasFilters);
 }
 
-async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[]) {
+export async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[], preserved?: AsyncIterable<VehicleOffer[]>) {
   const now = new Date().toISOString();
   const sources: Record<string, { count: number; chunks: string[]; updatedAt: string }> = {};
   const bySource = new Map<string, VehicleOffer[]>();
+  const seenIds = new Set<string>();
+  async function flush(sourceId: string) {
+    const list = bySource.get(sourceId) || [];
+    if (!list.length) return;
+    const source = sources[sourceId] ||= { count: 0, chunks: [], updatedAt: now };
+    const file = `catalog/internal/offers/${sourceId}/${generationId}-${chunkName(source.chunks.length + 1)}.json`;
+    await writeJsonAtomic(file, list);
+    source.chunks.push(file);
+    source.count += list.length;
+    bySource.set(sourceId, []);
+  }
+  async function append(offer: VehicleOffer) {
+    if (offer.market === "japan" || seenIds.has(offer.id)) return;
+    if (!hasAllowedCatalogSourceProvenance(offer)) return;
+    seenIds.add(offer.id);
+    const buffer = bySource.get(offer.sourceId) || [];
+    buffer.push(offer);
+    bySource.set(offer.sourceId, buffer);
+    if (buffer.length >= CATALOG_CHUNK_SIZE) await flush(offer.sourceId);
+  }
   // Completed Japanese auctions live in their own bounded monthly archive.
   // Repeating them in every internal generation was one of the main sources of
   // Object Storage growth.
-  for (const offer of offers) if (offer.market !== "japan") bySource.set(offer.sourceId, [...(bySource.get(offer.sourceId) || []), offer]);
-  for (const [sourceId, list] of bySource) {
-    const chunks: string[] = [];
-    for (let i = 0; i < list.length; i += CATALOG_CHUNK_SIZE) {
-      const file = `catalog/internal/offers/${sourceId}/${generationId}-${chunkName(chunks.length + 1)}.json`;
-      chunks.push(file);
-      await writeJsonAtomic(file, list.slice(i, i + CATALOG_CHUNK_SIZE));
-    }
-    sources[sourceId] = { count: list.length, chunks, updatedAt: now };
-  }
+  // Full preserved internal records win over their compact public counterparts.
+  // Missing public records are appended below, keeping the internal superset.
+  if (preserved) for await (const rows of preserved) for (const offer of rows) await append(offer);
+  for (const offer of offers) await append(offer);
+  for (const sourceId of bySource.keys()) await flush(sourceId);
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} });
     try { await storage.writeJson(INTERNAL_MANIFEST_PATH, { generationId, updatedAt: now, sources }, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" }); return; }
@@ -943,6 +977,7 @@ export type PersistCatalogOptions = {
   // rebuilding only their target market. Those rows are trusted only because
   // the caller has already read and hash-validated the current public market.
   preservePublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
+  preservedInternalOffers?: AsyncIterable<VehicleOffer[]>;
   // A normal market refresh may append canonical newcomers while keeping every
   // already-published row byte-stable. Protected rows win duplicate and quota
   // ties, which makes routine collection genuinely grow-only.
@@ -1045,7 +1080,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   const now = new Date().toISOString();
   const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
   const sourceAllowedInternalOffers = nextOffers.filter(hasAllowedCatalogSourceProvenance);
-  await persistInternalCatalog(storage, generationId, sourceAllowedInternalOffers);
+  await persistInternalCatalog(storage, generationId, sourceAllowedInternalOffers, options.preservedInternalOffers);
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of publishedOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
