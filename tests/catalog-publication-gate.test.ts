@@ -52,11 +52,11 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketPublisher, /!isCatalogMarketSourceAllowed\(offer\)/);
   assert.match(marketPublisher, /purgedForbiddenPublicByMarket/);
   assert.match(marketPublisher, /purgedForbiddenInternalByMarket/);
-  assert.match(marketPublisher, /const forbiddenInternal = otherMarketInternal\.filter/);
-  assert.match(marketPublisher, /const preservedInternal = otherMarketInternal\.filter/);
-  assert.match(marketPublisher, /const forbiddenInternal = otherMarketInternal\.filter\(\(offer\) => !isCatalogMarketSourceAllowed\(offer\)[\s\S]*!isCatalogYearAllowed\(offer\?\.year, offer\?\.market\)/);
-  assert.match(marketPublisher, /const preservedInternal = otherMarketInternal\.filter\(\(offer\) => isCatalogMarketSourceAllowed\(offer\)[\s\S]*isCatalogYearAllowed\(offer\?\.year, offer\?\.market\)/);
-  assert.match(marketPublisher, /const invalidInternal = preservedInternal\.filter[\s\S]*return !offer\?\.id \|\| !PUBLIC_CATALOG_MARKETS\.includes\(otherMarket\)/);
+  assert.match(marketPublisher, /for await \(const rows of iterateOffersForMaintenance\(\{ excludeMarket: market \}\)\)/);
+  assert.match(marketPublisher, /!isCatalogMarketSourceAllowed\(offer\) \|\| !isCatalogYearAllowed\(offer.year, offer.market\)/);
+  assert.match(marketPublisher, /purgedForbiddenInternalByMarket\[offer.market\]\+\+;\s+continue;/);
+  assert.match(marketPublisher, /!offer.id \|\| !PUBLIC_CATALOG_MARKETS.includes\(offer.market\).*catalog_preserved_internal_gate_failed/);
+  assert.match(marketPublisher, /preservedInternalOffers: preservedInternalOffers\(\)/);
   assert.match(marketPublisher, /const preservedRows = rows\.filter/);
   assert.match(marketPublisher, /preservedPublicRowsByMarket\[otherMarket\] = preservedRows/);
 });

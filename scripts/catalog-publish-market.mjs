@@ -19,7 +19,7 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, iterateOffersForMaintenance, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -307,9 +307,15 @@ async function auditCandidate(sourceOffer) {
 }
 
 const dryRun = process.env.CATALOG_PUBLICATION_DRY_RUN === "1";
+function logPublicationMemory(stage) {
+  const { rss, heapUsed, external } = process.memoryUsage();
+  console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
+}
 if (!dryRun) await acquirePublishLock();
 try {
+logPublicationMemory("before_intake");
 const generation = await readGenerationFiles();
+logPublicationMemory("intake_loaded");
 // A failed/empty source collection is not a request to reinterpret all of the
 // market's existing immutable records as newly collected seller inventory.
 if (sellerInventory && !generation.offers.length && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
@@ -319,9 +325,9 @@ if (sellerInventory && !generation.offers.length && process.env.CATALOG_REBALANC
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
-let currentMarketRows = [];
-try { currentMarketRows = await readMarketOffers(market); } catch { currentMarketRows = []; }
+let currentMarketRows = await readMarketOffers(market);
 const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market) : [];
+logPublicationMemory("target_reserve_loaded");
 const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
 for (const row of currentMarketRows) existingInventory.set(row.id,row);
 const retentionDecisions = new Map();
@@ -352,6 +358,7 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
 }
 
 const orderedCandidates = [...candidatesById.values()].sort(qualityOrder);
+logPublicationMemory("candidates_merged");
 const selected = [];
 const selectedIds = new Set();
 const imageOwners = new Map();
@@ -475,6 +482,7 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
 };
 await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
 console.log(JSON.stringify({...preflight,auditedRemovals:preflight.auditedRemovals.slice(0,5)}));
+logPublicationMemory("preflight_complete");
 if (dryRun) process.exit(0);
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
@@ -495,29 +503,28 @@ orderedCandidates.length = 0;
 selected.length = 0;
 v2Selection.selected.length = 0;
 candidatesById.clear();
-const currentInternal = await readAllOffersForMaintenance({excludeMarket: market});
-if (!Array.isArray(currentInternal)) throw new Error("catalog_maintenance_state_invalid");
-const otherMarketInternal = currentInternal.filter((offer) => String(offer?.market || "") !== market);
 // Internal maintenance rows obey the same provenance policy as exact public
 // preservation. A removed source/domain must not survive into the next
 // generation, while malformed rows from still-approved sources remain a hard
 // stop instead of being silently discarded.
-const forbiddenInternal = otherMarketInternal.filter((offer) => !isCatalogMarketSourceAllowed(offer)
-  || !isCatalogYearAllowed(offer?.year, offer?.market));
-const preservedInternal = otherMarketInternal.filter((offer) => isCatalogMarketSourceAllowed(offer)
-  && isCatalogYearAllowed(offer?.year, offer?.market));
-const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
-  marketId,
-  forbiddenInternal.filter((offer) => String(offer?.market || "") === marketId).length,
-]));
-const invalidInternal = preservedInternal.filter((offer) => {
-  const otherMarket = String(offer?.market || "");
-  return !offer?.id || !PUBLIC_CATALOG_MARKETS.includes(otherMarket);
-});
-if (invalidInternal.length) throw new Error(`catalog_preserved_internal_gate_failed:${invalidInternal.length}`);
+const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map(id => [id, 0]));
+async function* preservedInternalOffers() {
+  for await (const rows of iterateOffersForMaintenance({ excludeMarket: market })) {
+    const allowed = [];
+    for (const offer of rows) {
+      if (!isCatalogMarketSourceAllowed(offer) || !isCatalogYearAllowed(offer.year, offer.market)) {
+        purgedForbiddenInternalByMarket[offer.market]++;
+        continue;
+      }
+      if (!offer.id || !PUBLIC_CATALOG_MARKETS.includes(offer.market)) throw new Error("catalog_preserved_internal_gate_failed");
+      allowed.push(offer);
+    }
+    yield allowed;
+  }
+}
 
 const unique = new Map();
-for (const offer of [...preservedInternal, ...selectedMarketOffers]) {
+for (const offer of selectedMarketOffers) {
   if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 }
 // Keep the internal maintenance state a superset of every exact public row,
@@ -552,8 +559,10 @@ if (regressionBlocked) {
 } else if (selectedMarketOffers.length > 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
+      preservedInternalOffers: preservedInternalOffers(),
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
