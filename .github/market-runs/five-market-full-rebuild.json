@@ -1,15 +1,12 @@
 {
-  "requestedAt": "2026-09-11T08:10:00Z",
-  "mode": "refresh-approved-sources-and-recalculate",
-  "reuseRunId": "34474059061",
+  "requestedAt": "2026-09-11T08:40:00Z",
+  "mode": "reprice-conflicting-power-from-fresh-collection",
+  "reuseRunId": "34578209190",
   "publishMarkets": [
     "korea",
-    "china",
-    "uae",
-    "georgia",
-    "europe"
+    "uae"
   ],
-  "refreshMarkets": ["china", "korea", "uae", "georgia", "europe"],
-  "resetCursors": true,
-  "reason": "Fresh pass of every approved non-Japan source; domestic Che168 gallery provenance and national pagination, Autohome new 2025+ only, consistent ICE power and publication-time pricing. Japan remains unchanged."
+  "refreshMarkets": [],
+  "resetCursors": false,
+  "reason": "Republish fresh Korea/UAE artifacts after the current five-market collection, preventing unresolved combustion hp/kW conflicts from retaining ready prices. Preserve China, Georgia, Europe and Japan; keep all quality checks enabled."
 }
