@@ -50,3 +50,32 @@ test('national access denial does not fall back to another route',async()=>{
  try {const p=await new DomesticChe168Adapter().fetchPage();assert.equal(p.health?.blocked,true);assert.equal(p.nextCursor,null);assert.equal(requests,1);}
  finally {globalThis.fetch=previous;}
 });
+
+for (const marker of ['EO_Bot_Ssid', '__tst_status']) {
+ for (const cursor of [undefined, 'dealer:1']) {
+  test(`HTTP 200 ${marker} challenge stops ${cursor || 'national'} without fallback`, async () => {
+   const previous = globalThis.fetch;
+   let requests = 0;
+   globalThis.fetch = async () => {
+    requests++;
+    return new Response(`<script>/* ${marker}: browser access check */</script>`, {status: 200});
+   };
+   try {
+    const page = await new DomesticChe168Adapter().fetchPage(cursor);
+    assert.equal(page.health?.blocked, true);
+    assert.equal(page.health?.ok, false);
+    assert.equal(page.finished, true);
+    assert.equal(page.nextCursor, null);
+    assert.deepEqual(page.items, []);
+    assert.equal(requests, 1);
+   } finally { globalThis.fetch = previous; }
+  });
+ }
+}
+
+test('domestic health check preserves blocked classification', async () => {
+ const previous = globalThis.fetch;
+ globalThis.fetch = async () => new Response('<script>/* EO_Bot_Ssid */</script>');
+ try { assert.equal((await new DomesticChe168Adapter().healthCheck()).blocked, true); }
+ finally { globalThis.fetch = previous; }
+});

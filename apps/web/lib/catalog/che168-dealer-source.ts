@@ -35,6 +35,13 @@ const DEALERS = [
   "617832", "429115", "610278", "127018", "510139", "515780", "602177", "640574", "601372", "551072", "97866", "514850",
 ];
 
+// A successful HTTP response can still contain only an access challenge.
+// Never execute it or treat it as an empty national inventory.
+function isChe168AccessBlocked(status: number, markup: string): boolean {
+  return [401, 403, 429].includes(status)
+    || /captcha|cf-chl|access denied|Security Verification|window\.solveChallenge|EO_Bot_Ssid|__tst_status/i.test(markup);
+}
+
 const BAD_IMAGE = /(?:qrcode|qr-code|qr_|weixin|wechat|scan|download|app|logo|icon|avatar|profile|placeholder|default|banner|sprite|tracking|pixel|captcha)/i;
 
 const BRAND_PATTERNS: Array<[RegExp, string]> = [
@@ -208,7 +215,7 @@ export class Che168DealerAdapter implements CatalogSourceAdapter {
         : [`https://dealers.che168.com/shop/dealer/v2/carlist/${dealerId}-${page}.html`, `https://dealers.che168.com/shop/dealer/${dealerId}-${page}.html`];
       for (const listUrl of urls) {
         const result = await fetchMarkup(listUrl);
-        if ([401,403,429].includes(result.response.status) || /captcha|cf-chl|access denied/i.test(result.markup)) {
+        if (isChe168AccessBlocked(result.response.status, result.markup)) {
           return {items:[],finished:true,nextCursor:null,health:{ok:false,blocked:true,message:`che168_access_${result.response.status}`,checkedAt:new Date().toISOString()}};
         }
         if (!result.response.ok && result.response.status !== 404) throw new Error(`che168_list_http_${result.response.status}`);
@@ -279,7 +286,7 @@ export class DomesticChe168Adapter extends Che168DealerAdapter {
   const page=Math.max(1,Number(String(cursor || 'national:1').replace('national:','')) || 1);
   const url=`https://www.che168.com/china/a0_0msdgscncgpi1ltocsp${page}exx0/`;
   const {response,markup}=await fetchMarkup(url);
-  if ([401,403,429].includes(response.status) || /captcha|cf-chl|access denied|Security Verification|window\.solveChallenge/i.test(markup)) {
+  if (isChe168AccessBlocked(response.status, markup)) {
    return {items:[],finished:true,nextCursor:null,health:{ok:false,blocked:true,message:`che168_national_access_${response.status}`,checkedAt:new Date().toISOString()}};
   }
   if (!response.ok && response.status!==404) throw Error(`che168_national_http_${response.status}`);
@@ -318,7 +325,7 @@ export class DomesticChe168Adapter extends Che168DealerAdapter {
   return [...new Set(row.images || [])].slice(0,30).map(url=>({id:"",url,objectKey:"",checksum:"",size:0,mimeType:"image/jpeg"}));
  }
  async healthCheck() {
-  try { const page=await this.fetchPage(); return {ok:page.items.length>0,message:"Che168 domestic dealer listings",checkedAt:new Date().toISOString()}; }
+  try { const page=await this.fetchPage(); return {message:"Che168 domestic dealer listings",checkedAt:new Date().toISOString(),...page.health,ok:page.items.length>0 && page.health?.ok!==false}; }
   catch(error) { return {ok:false,message:String(error),checkedAt:new Date().toISOString()}; }
  }
 }

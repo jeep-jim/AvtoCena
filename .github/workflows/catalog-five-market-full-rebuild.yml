@@ -38,7 +38,7 @@ jobs:
           const reuse = marker.reuseRunId || '';
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
-          const allowed = ['korea','china','uae','europe','georgia'];
+          const allowed = ['china','korea','uae','georgia','europe'];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
           const collect = reuse ? (marker.refreshMarkets || []) : publish;
@@ -55,7 +55,8 @@ jobs:
     timeout-minutes: 240
     strategy:
       fail-fast: false
-      max-parallel: 5
+      # Keep source collectors concurrent inside one market, not five markets.
+      max-parallel: 1
       matrix:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:

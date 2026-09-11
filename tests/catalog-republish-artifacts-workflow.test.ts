@@ -7,6 +7,31 @@ import { spawnSync } from "node:child_process";
 
 const workflow = fs.readFileSync(".github/workflows/catalog-republish-market-artifacts.yml", "utf8");
 
+test('full rebuild collects one market at a time without reducing source capacity or cancelling active runs', () => {
+ const source = fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml', 'utf8');
+ const collect = source.slice(source.indexOf('\n  collect:'), source.indexOf('\n  publish:'));
+ assert.match(collect, /max-parallel: 1\b/);
+ assert.doesNotMatch(collect, /max-parallel: [2-9]/);
+ assert.match(source, /group: catalog-six-market-quality-rebuild\n  cancel-in-progress: false/);
+ assert.match(source, /CATALOG_REBUILD_TARGET_PER_SOURCE: '100000'/);
+ assert.match(source, /CATALOG_PUBLISH_MAX_PER_MARKET: '100000'/);
+ assert.match(collect, /timeout-minutes: 240/);
+});
+
+test('scheduled default plan starts with China and preserves all five markets', () => {
+ const source = fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml', 'utf8');
+ const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
+ const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'catalog-sequential-plan-'));
+ try {
+  const output = path.join(directory, 'output');
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script], {
+   cwd: directory, env: {...process.env, EVENT_NAME: 'schedule', GITHUB_OUTPUT: output}, encoding: 'utf8',
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(fs.readFileSync(output, 'utf8'), /^collect_markets=\["china","korea","uae","georgia","europe"\]$/m);
+ } finally { fs.rmSync(directory, {recursive: true, force: true}); }
+});
+
 test('five-market push reads its own reuse marker instead of starting another crawl', () => {
   const source = fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml', 'utf8');
   const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
@@ -14,7 +39,7 @@ test('five-market push reads its own reuse marker instead of starting another cr
   assert.match(script, /readFileSync\('\.github\/market-runs\/five-market-full-rebuild\.json'/);
   assert.doesNotMatch(script, /weekly-six-market-catalog/);
   assert.match(source, /run-id: \$\{\{ needs\.plan\.outputs\.reuse_run_id \}\}/);
-  assert.match(source, /const allowed = \['korea','china','uae','europe','georgia'\]/);
+  assert.match(source, /const allowed = \['china','korea','uae','georgia','europe'\]/);
   assert.match(source, /fromJSON\(needs\.plan\.outputs\.collect_markets\)/);
 });
 
