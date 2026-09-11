@@ -3,15 +3,15 @@ import fs from "node:fs";
 import test from "node:test";
 import { persistCatalogOffers, isCatalogProductionRefreshAllowed } from "../apps/web/lib/catalog/storage";
 
-test("catalog production collection, cleanup and publication remain paused during specification repair", () => {
+test("legacy production writers remain paused while approved storage maintenance is scheduled", () => {
   const queue = fs.readFileSync(".github/workflows/catalog-v3-sequential-queue.yml", "utf8");
   const cleanup = fs.readFileSync(".github/workflows/catalog-storage-cleanup.yml", "utf8");
   const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
   const reusable = fs.readFileSync(".github/workflows/catalog-v3-market-10k-reusable.yml", "utf8");
 
   assert.doesNotMatch(queue, /^\s*schedule:\s*$/m);
-  assert.doesNotMatch(cleanup, /^\s*schedule:\s*$/m);
-  assert.doesNotMatch(cleanup, /^\s*push:\s*$/m);
+  assert.match(cleanup, /^\s*schedule:\s*$/m);
+  assert.match(cleanup, /catalog-storage-maintenance\.mjs/);
   assert.match(storage, /export const CATALOG_PRODUCTION_WRITES_PAUSED = true/);
   assert.match(storage, /CATALOG_PRODUCTION_WRITES_PAUSED && process\.env\.JSON_STORAGE_DRIVER === "object"/);
   assert.match(storage, /catalog_production_writes_paused/);
