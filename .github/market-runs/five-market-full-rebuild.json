@@ -1,17 +1,14 @@
 {
-  "requestedAt": "2026-09-11T18:45:00Z",
-  "mode": "china-republish-after-conservative-cleanup-fix",
-  "reuseRunId": "34625240872",
-  "refreshMarkets": [],
+  "requestedAt": "2026-09-11T20:42:00Z",
+  "mode": "owner-requested-korea-next-single-market",
   "publishMarkets": [
-    "china"
+    "korea"
   ],
-  "resetCursors": false,
+  "resetCursors": true,
   "remainingMarkets": [
-    "korea",
     "uae",
     "europe",
     "georgia"
   ],
-  "reason": "Republish only China from the completed intake of 34625240872 after repairing cleanup handling of incomplete protected staging generations. Do not recollect blocked sources. Preserve all existing image objects when staging references are unknown; current/rollback manifests and internal chunks remain fail-closed. Continue the owner queue with Korea only after this run has finished and been assessed."
+  "reason": "Owner-approved sequential queue: China publication 34635344405 completed with final audit 0 invalidReady but source coverage remains incomplete. Start only Korea with both Encar and KCar, fresh cursors and unchanged volume limits. Preserve all other markets. Do not guess missing horsepower or weaken calculation, retention and storage gates. Remaining UAE, Europe, Georgia are supervised separate runs, not a concurrent batch."
 }
