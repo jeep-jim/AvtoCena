@@ -19,10 +19,10 @@ export function SellerPrice({ offer, panel = true, dense = false, label, priceCl
   const priceLabel = sellerPriceLabel(offer);
   return <div className={panel ? "relative ac-offer-price-panel ac-price-trend-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)]" : "ac-price-trend relative min-w-0 text-[var(--ac-text)]"}>
     <div className="flex min-w-0 items-center justify-between gap-1">
-      {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black`}>{label}</div> : null}
+      {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label font-black`}>{label}</div> : null}
       <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold uppercase tracking-wider text-[var(--ac-muted)]`}>{priceLabel}{!panel && japan ? <span className="ml-1 normal-case tracking-normal"> · без доставки и платежей</span> : null}</div>
     </div>
-    <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "flex-wrap" : ""}`}>
+    <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "flex-wrap" : "min-h-[22px] sm:min-h-[26px]"}`}>
       <span className={`ac-price ac-price--flat whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
       {panel ? <SellerPriceHelp /> : !japan ? <span className="shrink-0 text-right text-[8px] leading-[10px] text-[var(--ac-muted)] sm:text-[10px] sm:leading-[11px]">Без доставки<br/>и платежей</span> : null}
       {japan ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
