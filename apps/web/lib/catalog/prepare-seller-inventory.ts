@@ -10,6 +10,7 @@ import { withoutDeliveredPrice } from "./modification-contract";
 import { restoreSavedSourceEvidence } from "./saved-source-recovery";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 import { sourceInventoryInScope } from './source-inventory-scope';
+import { combustionPowerMismatch } from './combustion-power-consistency';
 
 /** Modern adapter evidence is authoritative; legacy replay must not erase it. */
 export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
@@ -30,15 +31,16 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   // omits some raw source evidence; replaying it as a new intake row erased
   // valid calculations and specifications during the weekly refresh.
   if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0 && input.catalogPricingMode !== 'seller') {
-    if (!input.calculationSnapshot?.customsInput && !input.calculationSnapshot?.customs?.productionReferenceDate) return structuredClone(input);
+    if (!input.calculationSnapshot?.customsInput && !input.calculationSnapshot?.customs?.productionReferenceDate && !combustionPowerMismatch(input)) return structuredClone(input);
     const {enrichOfferForDisplay} = await import('./display-enrichment');
-    return enrichOfferForDisplay(structuredClone(input));
+    const repriced = await enrichOfferForDisplay(structuredClone(input));
+    if (!combustionPowerMismatch(repriced)) return repriced;
   }
   const source = enrichOfferWithSourceTableParameters(inventorySourceEvidence(input));
   const original = await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
-    if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated)) {
+    if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated) && !combustionPowerMismatch(calculated)) {
       delete calculated.catalogPricingMode; delete calculated.sellerPriceRub;
       return calculated;
     }
