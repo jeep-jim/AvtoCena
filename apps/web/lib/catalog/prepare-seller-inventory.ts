@@ -31,8 +31,8 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   // valid calculations and specifications during the weekly refresh.
   if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0 && input.catalogPricingMode !== 'seller') {
     if (!input.calculationSnapshot?.customsInput && !input.calculationSnapshot?.customs?.productionReferenceDate) return structuredClone(input);
-    const {applyActiveBusinessPricing} = await import('./live-business-pricing');
-    return applyActiveBusinessPricing(structuredClone(input));
+    const {enrichOfferForDisplay} = await import('./display-enrichment');
+    return enrichOfferForDisplay(structuredClone(input));
   }
   const source = enrichOfferWithSourceTableParameters(inventorySourceEvidence(input));
   const original = await enrichOfferWithKnowledgeCore(source);
