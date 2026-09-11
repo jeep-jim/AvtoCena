@@ -34,10 +34,10 @@ test("only the owner-approved seller inventory workflows are scheduled under one
     assert.match(source,/catalog-storage-preflight/);
   }
 
-  // Cleanup is paused too, so the frozen catalog cannot lose generations while
-  // the new two-week retention contract is being repaired and verified.
+  // Owner-approved maintenance uses the same object lock without publishing markets.
   const cleanup = text("catalog-storage-cleanup.yml");
-  assert.equal(hasSchedule(cleanup), false);
+  assert.equal(hasSchedule(cleanup), true);
+  assert.match(cleanup, /catalog-storage-maintenance\.mjs/);
   assert.equal(writesCatalogMarkets(cleanup), false);
 });
 

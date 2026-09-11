@@ -79,7 +79,7 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 
 test("removed offers redirect to the live catalog instead of stranding search visitors on 404", () => {
   const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
-  assert.match(offerPage, /if \(!offer\) redirect\("\/cars"\)/);
+  assert.match(offerPage, /if \(!storedOffer\) redirect\("\/cars"\)/);
   assert.match(offerPage, /if \(!visibleRub && !selectionRequired && !sellerPricing\) redirect\("\/cars"\)/);
   assert.doesNotMatch(offerPage, /notFound\(\)/);
   assert.doesNotMatch(offerPage, /!offer \|\| !isCrediblePublicOffer\(offer\)/);

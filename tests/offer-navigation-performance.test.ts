@@ -166,7 +166,7 @@ test("offer actions render in stable page slots without hydration portals", () =
 });
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
-  assert.match(page, /if \(!offer\) redirect\("\/cars"\)/);
+  assert.match(page, /if \(!storedOffer\) redirect\("\/cars"\)/);
   assert.match(page, /if \(!visibleRub && !selectionRequired && !sellerPricing\) redirect\("\/cars"\)/);
   assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
