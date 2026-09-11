@@ -160,6 +160,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  status?: VehicleOffer["status"];
   catalogKind?: VehicleOffer["catalogKind"];
   catalogPricingMode?: "seller"; sellerPriceRub?: number;
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
@@ -390,7 +391,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
-    catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
+    status: offer.status, catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), japanExportRestriction: assessJapanExportRestriction(offer), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,

@@ -6,6 +6,7 @@ const page = fs.readFileSync("apps/web/app/(public)/cars/offer/[id]/page.tsx", "
 const layout = fs.readFileSync("apps/web/app/(public)/cars/offer/[id]/layout.tsx", "utf8");
 const loading = fs.readFileSync("apps/web/app/(public)/cars/offer/[id]/loading.tsx", "utf8");
 const data = fs.readFileSync("apps/web/lib/catalog/offer-page-data.ts", "utf8");
+const presentationState = fs.readFileSync("apps/web/lib/catalog/offer-presentation-state.ts", "utf8");
 const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
 const preloader = fs.readFileSync("apps/web/components/layout/RoutePreloader.tsx", "utf8");
 const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
@@ -45,8 +46,10 @@ test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /async function resilientOfferLookup/);
   assert.match(data, /return getOffer\(id\)/);
   assert.match(data, /cache\(\(id: string\) => resilientOfferLookup\(id\)\)/);
-  assert.match(page, /getOfferForPage\(id\)/);
-  assert.match(layout, /getOfferForPage\(id\)/);
+  assert.match(page, /getOfferPresentationForPage\(id\)/);
+  assert.match(layout, /getOfferPresentationForPage\(id\)/);
+  assert.match(data, /getOfferPresentationForPage = cache\(async/);
+  assert.match(data, /return stored \? resolveOfferPresentation\(stored\) : null/);
 });
 
 test("offer navigation stays visibly pending and warms only the intended offer", () => {
@@ -142,12 +145,12 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
-  assert.match(page, /isJapanCatalogOfferId\(id\)/);
-  assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
-  assert.match(page, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
-  assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
-  assert.match(page, /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
-  assert.doesNotMatch(page, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
+  assert.match(data, /isJapanCatalogOfferId\(id\)/);
+  assert.match(data, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(data, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(layout, /const offer = resolved\?\.raw/);
+  assert.match(presentationState, /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
+  assert.doesNotMatch(presentationState, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
   assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
@@ -166,7 +169,7 @@ test("offer actions render in stable page slots without hydration portals", () =
 });
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
-  assert.match(page, /if \(!storedOffer\) redirect\("\/cars"\)/);
+  assert.match(page, /if \(!state\) redirect\("\/cars"\)/);
   assert.match(page, /if \(!visibleRub && !selectionRequired && !sellerPricing\) redirect\("\/cars"\)/);
   assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);

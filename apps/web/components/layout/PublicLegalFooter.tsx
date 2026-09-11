@@ -9,19 +9,20 @@ const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
 const INTERNAL_ROUTE_PREFIXES = ["/crm", "/login", "/api"];
 
 const marketLinks = [
-  { href: "/cars?market=japan", label: "Автомобили из Японии" },
-  { href: "/cars?market=china", label: "Автомобили из Китая" },
-  { href: "/cars?market=korea", label: "Автомобили из Кореи" },
-  { href: "/cars?market=uae", label: "Автомобили из ОАЭ" },
-  { href: "/cars?market=europe", label: "Автомобили из Европы" },
-  { href: "/cars?market=georgia", label: "Автомобили из Грузии" },
+  { href: "/cars/japan", label: "Автомобили из Японии" },
+  { href: "/cars/china", label: "Автомобили из Китая" },
+  { href: "/cars/korea", label: "Автомобили из Кореи" },
+  { href: "/cars/uae", label: "Автомобили из ОАЭ" },
+  { href: "/cars/europe", label: "Автомобили из Европы" },
+  { href: "/cars/georgia", label: "Автомобили из Грузии" },
 ];
 
 const budgetLinks = [
-  { href: "/results?budget=1500000", label: "Авто до 1,5 млн ₽" },
-  { href: "/results?budget=2000000", label: "Авто до 2 млн ₽" },
-  { href: "/results?budget=3000000", label: "Авто до 3 млн ₽" },
-  { href: "/results?budget=5000000", label: "Авто до 5 млн ₽" },
+  { href: "/cars/budget/1000000", label: "Авто до 1 млн ₽" },
+  { href: "/cars/budget/1500000", label: "Авто до 1,5 млн ₽" },
+  { href: "/cars/budget/2000000", label: "Авто до 2 млн ₽" },
+  { href: "/cars/budget/3000000", label: "Авто до 3 млн ₽" },
+  { href: "/cars/budget/5000000", label: "Авто до 5 млн ₽" },
 ];
 
 function isPublicPath(pathname: string) {
@@ -126,6 +127,7 @@ export function PublicLegalFooter() {
           <FooterLinkGroup title="Разделы" links={[
             { href: "/", label: "Главная" },
             { href: "/cars", label: "Каталог автомобилей" },
+            { href: "/how-pricing-works", label: "Как устроен расчёт" },
             { href: "/favorites", label: "Избранные автомобили" },
             { href: "/dealers", label: "🚗 АвтоДилерам" },
             { href: "/login", label: "Вход для сотрудников" },

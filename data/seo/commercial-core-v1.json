@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-11",
+  "locale": "ru-RU",
+  "status": "editorial-intent-core-not-measured-demand",
+  "searchVolume": null,
+  "frequencySource": null,
+  "validationRequired": [
+    "Yandex Wordstat by service region",
+    "Google Search Console query and page export",
+    "Yandex Webmaster query export",
+    "SERP intent and actual inventory review"
+  ],
+  "clusters": [
+    {
+      "id": "market-china",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars/china",
+      "indexing": "index",
+      "adStatus": "hold-until-source-and-lead-acceptance",
+      "keywords": [
+        "купить авто из Китая",
+        "авто из Китая под ключ",
+        "машины из Китая с доставкой в Россию",
+        "авто из Китая цены",
+        "заказать автомобиль из Китая",
+        "автомобиль из Китая с растаможкой"
+      ]
+    },
+    {
+      "id": "market-korea",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars/korea",
+      "indexing": "index",
+      "adStatus": "hold-until-source-and-lead-acceptance",
+      "keywords": [
+        "купить авто из Кореи",
+        "авто из Кореи под ключ",
+        "автомобили из Кореи с пробегом",
+        "заказать машину из Кореи",
+        "машины из Кореи цены",
+        "авто из Кореи с доставкой"
+      ]
+    },
+    {
+      "id": "market-uae",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars/uae",
+      "indexing": "index",
+      "adStatus": "hold-until-source-and-lead-acceptance",
+      "keywords": [
+        "купить авто из ОАЭ",
+        "авто из Дубая под ключ",
+        "автомобили из Эмиратов цены",
+        "заказать машину из Дубая",
+        "авто из ОАЭ с растаможкой",
+        "доставка авто из Эмиратов"
+      ]
+    },
+    {
+      "id": "market-georgia",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars/georgia",
+      "indexing": "index",
+      "adStatus": "hold-until-source-and-lead-acceptance",
+      "keywords": [
+        "купить авто из Грузии",
+        "машины из Грузии под ключ",
+        "автомобили из Грузии цены",
+        "авто из Грузии с доставкой",
+        "заказать машину из Грузии",
+        "авто из Грузии с растаможкой"
+      ]
+    },
+    {
+      "id": "market-europe",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars/europe",
+      "indexing": "index",
+      "adStatus": "hold-until-source-and-lead-acceptance",
+      "keywords": [
+        "купить авто из Европы",
+        "автомобили из Европы под заказ",
+        "авто из Германии цены",
+        "машины из Европы с пробегом",
+        "авто из Европы с доставкой",
+        "стоимость ввоза авто из Европы"
+      ]
+    },
+    {
+      "id": "market-japan",
+      "intent": "auction-research",
+      "priority": "P1",
+      "landing": "/cars/japan",
+      "indexing": "index",
+      "adStatus": "hold-sold-lots-not-stock",
+      "keywords": [
+        "авто из Японии цены",
+        "статистика аукционов Японии",
+        "цены проданных авто Япония",
+        "стоимость авто из Японии под ключ",
+        "аукционные цены автомобилей Япония",
+        "бюджет покупки авто из Японии"
+      ]
+    },
+    {
+      "id": "budget-1000000",
+      "intent": "budget-selection",
+      "priority": "P1",
+      "landing": "/cars/budget/1000000",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "авто до 1 млн рублей",
+        "купить машину до 1 млн",
+        "авто под ключ до 1 млн",
+        "иномарка до 1 млн с доставкой",
+        "авто из за границы до 1 млн",
+        "подобрать автомобиль до 1 млн"
+      ]
+    },
+    {
+      "id": "budget-1500000",
+      "intent": "budget-selection",
+      "priority": "P1",
+      "landing": "/cars/budget/1500000",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "авто до 1,5 млн рублей",
+        "купить машину до 1,5 млн",
+        "авто под ключ до 1,5 млн",
+        "иномарка до 1,5 млн с доставкой",
+        "авто из за границы до 1,5 млн",
+        "подобрать автомобиль до 1,5 млн"
+      ]
+    },
+    {
+      "id": "budget-2000000",
+      "intent": "budget-selection",
+      "priority": "P1",
+      "landing": "/cars/budget/2000000",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "авто до 2 млн рублей",
+        "купить машину до 2 млн",
+        "авто под ключ до 2 млн",
+        "иномарка до 2 млн с доставкой",
+        "авто из за границы до 2 млн",
+        "подобрать автомобиль до 2 млн"
+      ]
+    },
+    {
+      "id": "budget-3000000",
+      "intent": "budget-selection",
+      "priority": "P1",
+      "landing": "/cars/budget/3000000",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "авто до 3 млн рублей",
+        "купить машину до 3 млн",
+        "авто под ключ до 3 млн",
+        "иномарка до 3 млн с доставкой",
+        "авто из за границы до 3 млн",
+        "подобрать автомобиль до 3 млн"
+      ]
+    },
+    {
+      "id": "budget-5000000",
+      "intent": "budget-selection",
+      "priority": "P1",
+      "landing": "/cars/budget/5000000",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "авто до 5 млн рублей",
+        "купить машину до 5 млн",
+        "авто под ключ до 5 млн",
+        "иномарка до 5 млн с доставкой",
+        "авто из за границы до 5 млн",
+        "подобрать автомобиль до 5 млн"
+      ]
+    },
+    {
+      "id": "china-used",
+      "intent": "used-inventory",
+      "priority": "P1",
+      "landing": "/cars/china",
+      "indexing": "same-market-canonical",
+      "adStatus": "hold-until-domestic-che168-publication",
+      "keywords": [
+        "бу авто из Китая",
+        "купить автомобиль с пробегом из Китая",
+        "подержанные машины из Китая",
+        "Che168 авто из Китая",
+        "че168 автомобили цены",
+        "бу китайские автомобили под ключ"
+      ]
+    },
+    {
+      "id": "china-new",
+      "intent": "new-inventory",
+      "priority": "P1",
+      "landing": "/cars/china",
+      "indexing": "same-market-canonical",
+      "adStatus": "hold-model-catalog-is-not-stock",
+      "keywords": [
+        "новые авто из Китая",
+        "купить новый автомобиль из Китая",
+        "новые китайские машины под заказ",
+        "авто 2025 из Китая",
+        "авто 2026 из Китая",
+        "новый автомобиль из Китая цена под ключ"
+      ]
+    },
+    {
+      "id": "korea-encar",
+      "intent": "source-inventory",
+      "priority": "P1",
+      "landing": "/cars/korea",
+      "indexing": "same-market-canonical",
+      "adStatus": "hold-until-published-source-check",
+      "keywords": [
+        "авто с Encar",
+        "энкар авто из Кореи",
+        "купить авто с энкар",
+        "Encar стоимость доставки в Россию",
+        "K Car авто из Кореи",
+        "корейские автомобили с историей осмотров"
+      ]
+    },
+    {
+      "id": "electric",
+      "intent": "powertrain-selection",
+      "priority": "P2",
+      "landing": "/cars?fuel=electric",
+      "indexing": "noindex-follow-filter",
+      "adStatus": "hold-until-30-minute-power-and-leads-verified",
+      "keywords": [
+        "купить электромобиль из Китая",
+        "электромобиль из Кореи под ключ",
+        "электромобили цены с доставкой",
+        "электромобиль из за границы",
+        "стоимость ввоза электромобиля",
+        "подобрать электромобиль по бюджету"
+      ]
+    },
+    {
+      "id": "hybrid",
+      "intent": "powertrain-selection",
+      "priority": "P2",
+      "landing": "/cars?fuel=hybrid",
+      "indexing": "noindex-follow-filter",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "купить гибрид из Китая",
+        "гибрид из Кореи под ключ",
+        "гибридные автомобили цены",
+        "авто гибрид с доставкой",
+        "стоимость ввоза гибрида",
+        "подобрать гибридный автомобиль"
+      ]
+    },
+    {
+      "id": "calculation",
+      "intent": "commercial-investigation",
+      "priority": "P1",
+      "landing": "/how-pricing-works",
+      "indexing": "index",
+      "adStatus": "hold-informational-page-not-purchase-offer",
+      "keywords": [
+        "рассчитать авто под ключ",
+        "стоимость ввоза автомобиля",
+        "цена авто с доставкой и растаможкой",
+        "что входит в цену авто под ключ",
+        "полная стоимость автомобиля из за границы",
+        "расчёт покупки авто из за рубежа"
+      ]
+    },
+    {
+      "id": "generic-import",
+      "intent": "commercial-import",
+      "priority": "P1",
+      "landing": "/cars",
+      "indexing": "index",
+      "adStatus": "hold-until-lead-acceptance",
+      "keywords": [
+        "автомобили под заказ",
+        "купить авто из за границы",
+        "авто под ключ цены",
+        "подбор автомобиля под бюджет",
+        "машины с доставкой в Россию",
+        "каталог автомобилей под заказ"
+      ]
+    },
+    {
+      "id": "pickup",
+      "intent": "body-selection",
+      "priority": "P2",
+      "landing": null,
+      "indexing": "candidate-no-page-created",
+      "adStatus": "hold-until-documented-mass-and-filter",
+      "keywords": [
+        "пикап из Китая под ключ",
+        "купить пикап из ОАЭ",
+        "пикапы с пробегом под заказ",
+        "стоимость ввоза пикапа",
+        "пикап до 3 5 тонн купить",
+        "подобрать пикап из за границы"
+      ]
+    },
+    {
+      "id": "local-delivery",
+      "intent": "delivery-geo",
+      "priority": "P2",
+      "landing": null,
+      "indexing": "candidate-no-city-doorways",
+      "adStatus": "hold-until-service-geography-confirmed",
+      "keywords": [
+        "авто под заказ Новокузнецк",
+        "авто из Кореи Новокузнецк",
+        "доставка авто из Китая Новокузнецк",
+        "автомобили под ключ Кемеровская область",
+        "заказать автомобиль Кузбасс",
+        "авто из за границы с доставкой в Новокузнецк"
+      ]
+    }
+  ],
+  "modelExpansion": {
+    "canonicalPattern": "/cars/brand/{existing-brand-slug}/model/{existing-model-slug}",
+    "rules": [
+      "Expand only existing public model URLs with inventory or substantive specifications.",
+      "Do not create automatic city x brand x model x budget doorway combinations.",
+      "Each phrase maps to one canonical intent; synonyms belong on the same page."
+    ],
+    "templates": [
+      "купить {марка} {модель}",
+      "{марка} {модель} цена под ключ",
+      "{марка} {модель} из {рынок}",
+      "{марка} {модель} с доставкой в Россию",
+      "{марка} {модель} {год} стоимость ввоза",
+      "подобрать {марка} {модель} с пробегом"
+    ],
+    "examplesForDemandValidationOnly": [
+      "Toyota Corolla",
+      "Toyota Rush",
+      "Honda Fit",
+      "Honda Vezel",
+      "Suzuki Wagon R",
+      "Kia K5",
+      "Hyundai Avante",
+      "BMW X3",
+      "BYD Song"
+    ],
+    "searchVolume": null
+  },
+  "advertising": {
+    "enabled": false,
+    "conversionAcceptance": "A confirmed server-side lead delivery event, not merely a button click.",
+    "negativeCandidatesByGroup": {
+      "vehiclePurchase": [
+        "вакансии",
+        "работа водителем",
+        "скачать игру",
+        "обои на телефон",
+        "игрушечная",
+        "разборка",
+        "купить запчасти",
+        "ремонт двигателя"
+      ],
+      "newOnly": [
+        "бу",
+        "с пробегом"
+      ],
+      "usedOnly": [
+        "новый без пробега"
+      ]
+    },
+    "neverApplyGloballyWithoutSearchTermReview": [
+      "бу",
+      "новый",
+      "цена",
+      "отзывы",
+      "растаможка",
+      "аукцион",
+      "доставка"
+    ],
+    "utmTemplate": "utm_source={platform}&utm_medium=cpc&utm_campaign={market_intent}&utm_content={creative}&utm_term={keyword}",
+    "launchGates": [
+      "Fresh source publication and catalog audit accepted",
+      "No historical sold lot advertised as available",
+      "Preview, detail and feed price agree for promoted offers",
+      "Forms, consent and Telegram/server delivery accepted",
+      "Only verified contact details and service geography"
+    ]
+  }
+}
