@@ -1,3 +1,4 @@
+import { enrichOfferWithSourceTableDisplacement } from "./source-table-displacement";
 import { specificationEvidenceComplete } from "./modification-matching";
 import type { VehicleOffer } from "./types";
 import { convertToRub } from "./rates";
@@ -27,7 +28,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   // omits some raw source evidence; replaying it as a new intake row erased
   // valid calculations and specifications during the weekly refresh.
   if (options.preservePublishedPrice && catalogOfferVisibleRub(input) > 0) return structuredClone(input);
-  const source = inventorySourceEvidence(input);
+  const source = enrichOfferWithSourceTableDisplacement(inventorySourceEvidence(input));
   const original = source.sourceId === 'encar_direct' && (source.operational as any)?.inspection?.identityVerified
     ? await enrichOfferWithKnowledgeCore(source) : source;
   if (specificationEvidenceComplete(original)) {
