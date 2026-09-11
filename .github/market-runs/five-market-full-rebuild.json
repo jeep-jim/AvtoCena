@@ -1,12 +1,13 @@
 {
-  "requestedAt": "2026-09-11T08:40:00Z",
-  "mode": "reprice-conflicting-power-from-fresh-collection",
+  "requestedAt": "2026-09-11T13:37:59.505Z",
+  "mode": "resume-unpublished-markets-with-streamed-preservation",
   "reuseRunId": "34578209190",
   "publishMarkets": [
-    "korea",
-    "uae"
+    "uae",
+    "georgia",
+    "europe"
   ],
   "refreshMarkets": [],
   "resetCursors": false,
-  "reason": "Republish fresh Korea/UAE artifacts after the current five-market collection, preventing unresolved combustion hp/kW conflicts from retaining ready prices. Preserve China, Georgia, Europe and Japan; keep all quality checks enabled."
+  "reason": "PR912 streams untouched internal records. PR911 run34579634666 published Korea gen_1789129318608_0507a7e0 then failed reading an AutoPapa internal chunk during UAE. Resume only UAE, Georgia and Europe from existing five-market artifacts; preserve Korea, China and Japan. Keep every quality, retention, calculation and storage gate enabled."
 }
