@@ -15,6 +15,10 @@ test("product feed keeps the full eligible snapshot and a Google-compatible head
         model: 'Model "S"',
         year: 2026,
         totalRub: 4_200_000,
+        publicVisibleRub: 4_200_000,
+        cardProjectionVersion: 3,
+        publicSpecificationVerified: true,
+        calculationStatus: 'ready',
         cardImageUrl: "/images/car-1.webp",
       },
       {
@@ -34,6 +38,8 @@ test("product feed keeps the full eligible snapshot and a Google-compatible head
   assert.match(csv, /"car-1"/);
   assert.match(csv, /Model ""S""/);
   assert.doesNotMatch(csv, /car-without-price/);
+  assert.match(csv, /preorder/);
+  assert.doesNotMatch(csv, /in_stock/);
 });
 
 test("Object Storage download URL is a bounded SigV4 presigned GET", async () => {

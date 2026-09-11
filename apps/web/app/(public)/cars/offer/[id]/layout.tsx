@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";
 import { money } from "@/lib/avtocena";
 import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
-import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { getOfferPresentationForPage } from "@/lib/catalog/offer-page-data";
+import { discoveryPrice, discoveryDescription } from '@/lib/catalog/discovery-policy';
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
@@ -20,7 +21,8 @@ function offerStructuredData(id: string, offer: any) {
   const model = clean(presented.modelLabel || offer.model);
   const displayTitle = clean(presented.title) || [make, model, offer.trim, offer.year].filter(Boolean).join(" ");
   const canonical = catalogOfferUrl(id);
-  const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
+  const state = discoveryPrice(offer);
+  const totalRub = state.deliveredRub;
   const mileageKm = Number(offer.mileageKm || 0);
   const engineCc = Number(offer.engineCc || 0);
   const safePowerHp = publicCatalogPowerHp(offer);
@@ -34,6 +36,7 @@ function offerStructuredData(id: string, offer: any) {
     "@id": canonical,
     url: canonical,
     name: displayTitle,
+    description: discoveryDescription(offer, displayTitle, catalogMarketLabel(offer.market)),
     image: images.length ? images : undefined,
     brand: make ? { "@type": "Brand", name: make } : undefined,
     model: model || undefined,
@@ -53,12 +56,12 @@ function offerStructuredData(id: string, offer: any) {
       value: Math.round(mileageKm),
       unitCode: "KMT",
     } : undefined,
-    offers: totalRub > 0 ? {
+    offers: state.feedEligible ? {
       "@type": "Offer",
       url: canonical,
       price: Math.round(totalRub),
       priceCurrency: "RUB",
-      availability: "https://schema.org/InStock",
+      availability: "https://schema.org/PreOrder",
       seller: {
         "@type": "Organization",
         name: "АвтоЦена",
@@ -74,8 +77,8 @@ function safeJsonLd(value: unknown) {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const storedOffer = await getOfferForPage(id);
-  const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
+  const resolved = await getOfferPresentationForPage(id);
+  const offer = resolved?.raw;
   if (!offer) {
     return {
       title: "Автомобиль под заказ — АвтоЦена",
@@ -89,11 +92,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const model = clean(presented.modelLabel);
   const displayTitle = clean(presented.title) || [make, model].filter(Boolean).join(" ");
   const year = Number(offer.year || 0);
-  const title = `${displayTitle}${year ? ` ${year}` : ""} — цена автомобиля под ключ`;
-  const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
+  const state = discoveryPrice(offer);
+  const title = `${displayTitle}${year ? ` ${year}` : ""} — ${state.label.toLowerCase()}`;
   const market = catalogMarketLabel(offer.market);
-  const priceText = totalRub > 0 ? `${money(totalRub)} ₽` : "рассчитывается";
-  const description = `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Полный расчёт под ключ включает автомобиль, логистику, таможенные платежи, оформление и доставку по РФ.`;
+  const description = discoveryDescription(offer, `${displayTitle}${year ? ` ${year}` : ''}`, market);
   const canonical = `/cars/offer/${encodeURIComponent(id)}`;
 
   return {
@@ -107,14 +109,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       url: canonical,
       images: offer.images?.[0]?.url ? [{ url: offer.images[0].url, alt: displayTitle || `${make} ${model}` }] : undefined,
     },
-    robots: { index: true, follow: true },
+    robots: { index: !state.inactive, follow: true },
   };
 }
 
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const storedOffer = await getOfferForPage(id);
-  const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
+  const resolved = await getOfferPresentationForPage(id);
+  const offer = resolved?.raw;
   const structuredData = offer ? offerStructuredData(id, offer) : null;
 
   return <>

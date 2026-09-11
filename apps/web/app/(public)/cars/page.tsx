@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { commercialCatalogMeta, marketLanding, COMMERCIAL_BUDGETS, budgetLabel } from '@/lib/seo/commercial-catalog';
 import { redirect } from "next/navigation";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { readCatalogOverview } from "@/lib/catalog/overview";
@@ -15,6 +16,10 @@ import type { CatalogMarket } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+export async function generateMetadata({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  return commercialCatalogMeta(await searchParams || {});
+}
 
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
 function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
@@ -278,7 +283,9 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
             {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
           </span>)}
         </nav>
-        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : "Каталог автомобилей"}</h1>
+        <h1 className="text-[30px] font-black leading-tight tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : selectedMarket && marketLanding(selectedMarket) ? `Автомобили из ${marketLanding(selectedMarket).country}` : common.budgetTo && COMMERCIAL_BUDGETS.some(value => value === common.budgetTo) ? `Автомобили до ${budgetLabel(common.budgetTo)}` : "Каталог автомобилей"}</h1>
+        {selectedMarket && marketLanding(selectedMarket) ? <p className="mt-3 text-sm leading-6 text-[var(--ac-muted)]">{marketLanding(selectedMarket).note}</p> : null}
+        {common.budgetTo ? <p className="mt-3 text-sm leading-6 text-[var(--ac-muted)]">Подбор по сохранённой оценке ввоза. Перед заказом проверьте текущий расчёт в карточке; проданные японские лоты служат только ориентиром бюджета. <Link href="/how-pricing-works" className="underline">Что входит в цену</Link></p> : null}
         <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">Найдено: {total}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>

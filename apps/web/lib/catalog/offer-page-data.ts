@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
-import { getOffer } from "./storage";
+import { getOffer, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId } from "./storage";
+import { resolveOfferPresentation } from './offer-presentation-state';
 
 // The offer id is stable across catalog generations. Keep a short shared cache
 // so a route prefetch warms the actual offer for the following click, including
@@ -30,3 +31,10 @@ async function resilientOfferLookup(id: string) {
 
 // Metadata and the page render also share the lookup inside one request.
 export const getOfferForPage = cache((id: string) => resilientOfferLookup(id));
+
+export const getOfferPresentationForPage = cache(async (id: string) => {
+  const stored = isJapanCatalogOfferId(id)
+    ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
+    : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
+  return stored ? resolveOfferPresentation(stored) : null;
+});

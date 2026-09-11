@@ -11,10 +11,12 @@ import {
   vehicleKnowledgeCompact,
 } from "@/lib/catalog/vehicle-knowledge";
 import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
+import { resolveOfferPresentation } from '@/lib/catalog/offer-presentation-state';
+import { discoveryPrice } from '@/lib/catalog/discovery-policy';
 
 async function getOffer(id: string) {
   const offer = await getStoredOffer(id);
-  return offer ? applyActiveBusinessPricing(offer) : null;
+  return offer ? (await resolveOfferPresentation(offer)).pricedOffer : null;
 }
 
 export const dynamic = "force-dynamic";
@@ -182,7 +184,8 @@ function offerForAi(offer: any) {
   const images = Array.isArray(item.images)
     ? item.images.map((image: any) => absoluteAvtocenaUrl(image?.url)).filter(Boolean).slice(0, 12)
     : [];
-  const totalRub = Number(item.totalRub || 0);
+  const pricing = discoveryPrice(item);
+  const totalRub = pricing.deliveredRub;
 
   return {
     id: clean(item.id),
@@ -204,6 +207,10 @@ function offerForAi(offer: any) {
     power30MinKw: Number(item.power30MinKw || 0) || null,
     utilizationPowerKw: Number(item.utilizationPowerKw || 0) || null,
     priceRub: totalRub > 0 ? totalRub : null,
+    priceKind: pricing.kind,
+    priceLabel: pricing.label,
+    sellerPriceRub: pricing.sellerRub || null,
+    availability: pricing.archived ? 'historical_record' : pricing.inactive ? 'unavailable' : 'requires_supplier_confirmation',
     sourcePrice: Number(item.sourcePrice || 0) || null,
     sourceCurrency: clean(item.sourceCurrency) || null,
     calculationStatus: clean(item.calculationStatus) || "unknown",
@@ -251,7 +258,7 @@ async function callTool(name: string, args: Record<string, any>) {
     const items = (await applyActiveBusinessPricingBatch(result.items)).map(offerForAi);
     return toolResult(
       { generationId: result.generationId, total: result.total, items },
-      `АвтоЦена нашла ${result.total} актуальных предложений; возвращено ${items.length}.`,
+      `АвтоЦена нашла ${result.total} записей каталога; возвращено ${items.length}. Проверяйте priceKind: auction_result — завершённые торги, seller — цена без ввоза, import_estimate — оценка ввоза. Точный текущий расчёт запрашивайте через get_import_calculation.`,
     );
   }
 
@@ -283,6 +290,8 @@ async function callTool(name: string, args: Record<string, any>) {
     const structured = {
       offerId,
       totalRub,
+      priceKind: discoveryPrice(offer).kind,
+      availability: discoveryPrice(offer).archived ? 'historical_record' : 'requires_supplier_confirmation',
       calculationStatus: clean((offer as any).calculationStatus) || "unknown",
       breakdown: expandCustomsBreakdown(breakdown,snapshot?.customs),
       customs: snapshot?.customs || null,
@@ -434,7 +443,7 @@ export async function POST(request: Request) {
       protocolVersion,
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: "avtocena", title: "АвтоЦена", version: SERVER_VERSION },
-      instructions: "Используй АвтоЦену для живых предложений автомобилей, цены под ключ и структурированных характеристик. Не заполняй отсутствующие значения догадками. Для EV/PHEV при вопросах о мощности предпочитай power30MinKw и utilizationPowerKw, когда они есть. Для стоимости конкретного предложения используй get_import_calculation.",
+      instructions: "АвтоЦена содержит предложения под заказ и статистику завершённых торгов. Проверяй priceKind и availability: auction_result не продаётся; sellerPriceRub не включает ввоз. Не заполняй отсутствующие значения догадками. Для EV/PHEV не подменяй power30MinKw пиковой мощностью. Для текущего расчёта конкретной машины используй get_import_calculation; поисковые цены являются снимком. Наличие у продавца подтверждает менеджер.",
     });
   }
 

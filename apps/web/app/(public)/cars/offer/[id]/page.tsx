@@ -30,7 +30,7 @@ import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
-import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { getOfferPresentationForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
@@ -264,33 +264,22 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  const storedOffer = isJapanCatalogOfferId(id)
-    ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
-    : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
+  const state = await getOfferPresentationForPage(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
-  if (!storedOffer) redirect("/cars");
-  const offer = enrichOfferWithSourceTableParameters(storedOffer);
-
-  const sellerPricing = isSellerPricedOffer(offer);
-  const selectionRequired = hasModificationSelection(offer);
+  if (!state) redirect("/cars");
+  const { offer, sellerPricing, selectionRequired, enrichedOffer, normalizedEnrichedOffer } = state;
   const selectedModification = selectionRequired && query.modificationId
     ? await calculateSelectedModification(offer, query.modificationId) : null;
-  const enrichedOffer = selectionRequired || sellerPricing ? offer : await enrichOfferForDisplay(offer);
   // Normalize while the trusted immutable identity evidence is still present.
   // publicOffer deliberately removes operational fields; running it first used
   // to erase resolver-backed variants such as UX250h before powertrain safety
   // could correct the stale combustion classification.
-  const normalizedEnrichedOffer: any = selectionRequired || sellerPricing ? enrichedOffer : normalizeVehicleOfferSpecs(enrichedOffer);
-  const initialPublic: any = publicOffer(normalizedEnrichedOffer);
-  const initialVisibleRub = catalogOfferVisibleRub(initialPublic);
-  const pricedOffer = sellerPricing ? normalizedEnrichedOffer : selectionRequired ? selectedModification || withoutDeliveredPrice(offer) : safeRequestedPowerHp
+  const pricedOffer = sellerPricing ? normalizedEnrichedOffer : selectionRequired ? selectedModification || state.pricedOffer : safeRequestedPowerHp
     ? await calculateOfferWithUserPowerScenario(normalizedEnrichedOffer as any, safeRequestedPowerHp)
-    : initialVisibleRub > 0
-      ? normalizedEnrichedOffer
-      : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
+    : state.pricedOffer;
   const sourceUrl = enrichedOffer.sourceId === "drom_japan_stat"
     ? undefined
     : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
@@ -316,7 +305,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
   if (!visibleRub && !selectionRequired && !sellerPricing) redirect("/cars");
-  const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel }));
+  const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(pricedOffer, { bodyLabel: presented.bodyLabel }));
   const o = {
     ...presented,
     japanExportRestriction: assessJapanExportRestriction(offer),
@@ -461,4 +450,17 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}.ac-offer-page .ac-offer-spec-tile:nth-child(odd) .ac-spec-info-popover{left:0!important;right:auto!important}.ac-offer-page .ac-offer-spec-tile:nth-child(even) .ac-spec-info-popover{left:auto!important;right:0!important}}
     ` }} />
   </main>;
+}
+// Page metadata receives query parameters; layouts do not. Shared request cache keeps
+// the base quote identical while custom calculation URLs stay out of the index.
+import { generateMetadata as baseOfferMetadata } from './layout';
+export async function generateMetadata({ params, searchParams }: {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const metadata = await baseOfferMetadata({ params });
+  const query = await searchParams || {};
+  return query.powerHp || query.modificationId
+    ? { ...metadata, robots: { index: false, follow: true } }
+    : metadata;
 }

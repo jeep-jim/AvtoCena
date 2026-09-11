@@ -1,4 +1,5 @@
 import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
+import { COMMERCIAL_MARKETS, COMMERCIAL_BUDGETS } from '@/lib/seo/commercial-catalog';
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +16,6 @@ function urlEntry(url: string, changefreq: string, priority: number) {
   return [
     "  <url>",
     `    <loc>${xmlEscape(url)}</loc>`,
-    `    <lastmod>${new Date().toISOString()}</lastmod>`,
     `    <changefreq>${changefreq}</changefreq>`,
     `    <priority>${priority}</priority>`,
     "  </url>",
@@ -29,6 +29,9 @@ export async function GET() {
     urlEntry(baseUrl, "daily", 1),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
     urlEntry(`${baseUrl}/cars/autocatalog`, "daily", 0.9),
+    urlEntry(`${baseUrl}/how-pricing-works`, "monthly", 0.7),
+    ...Object.keys(COMMERCIAL_MARKETS).map(market => urlEntry(`${baseUrl}/cars/${market}`, 'weekly', 0.9)),
+    ...COMMERCIAL_BUDGETS.map(budget => urlEntry(`${baseUrl}/cars/budget/${budget}`, 'weekly', 0.8)),
     ...brands.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),
   ];
 

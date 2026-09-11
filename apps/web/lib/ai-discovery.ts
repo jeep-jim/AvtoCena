@@ -1,11 +1,13 @@
 import { gzipSync } from "node:zlib";
 import { getJsonStorage, readDataJson } from "./data";
 import type { CatalogSearchProjection } from "./catalog/storage";
+import { discoveryPrice } from './catalog/discovery-policy';
 
 export const AVTOCENA_PUBLIC_ORIGIN = "https://avtocena.com";
 export const AI_CATALOG_PROJECTION_PATH = "catalog/public/projection/all.json";
-export const AI_PRODUCT_FEED_PATH = "catalog/public/feeds/openai-products.csv.gz";
-export const AI_PRODUCT_FEED_METADATA_PATH = "catalog/public/feeds/openai-products.json";
+// Versioned objects prevent an older in-flight publisher overwriting this contract.
+export const AI_PRODUCT_FEED_PATH = "catalog/public/feeds/openai-products-v2.csv.gz";
+export const AI_PRODUCT_FEED_METADATA_PATH = "catalog/public/feeds/openai-products-v2.json";
 export const AI_PRODUCT_FEED_HEADER = [
   "id",
   "title",
@@ -87,12 +89,12 @@ export function aiCatalogDescription(item: CatalogSearchProjection) {
     Number(item.power30MinKw || 0) > 0 ? `30-минутная мощность: ${Number(item.power30MinKw)} кВт` : "",
   ].filter(Boolean);
 
-  return `${parts.join("; ")}. Стоимость указана по расчёту АвтоЦены под ключ и должна подтверждаться в актуальной карточке автомобиля.`.slice(0, 5000);
+  return `${parts.join("; ")}. Оценка ввоза под ключ на момент обновления: ${item.updatedAt || 'дата не указана'}. Автомобиль под заказ, не на складе АвтоЦены; наличие у продавца и итоговая стоимость требуют подтверждения в актуальной карточке.`.slice(0, 5000);
 }
 
 
 export type AiProductFeedMetadata = {
-  version: 1;
+  version: 2;
   generationId: string;
   updatedAt: string;
   objectPath: string;
@@ -108,16 +110,16 @@ function csvCell(value: unknown) {
 
 export function buildAiProductFeed(projection: AiCatalogProjection) {
   const rows = projection.items
-    .filter((item) => Number(item.totalRub || item.publicVisibleRub || 0) > 0 && Boolean(item.cardImageUrl))
+    .filter((item) => discoveryPrice(item).feedEligible && Boolean(item.cardImageUrl))
     .map((item) => {
-      const priceRub = Math.round(Number(item.totalRub || item.publicVisibleRub || 0));
+      const priceRub = discoveryPrice(item).deliveredRub;
       return [
         item.id,
         aiCatalogTitle(item).slice(0, 150),
         aiCatalogDescription(item).slice(0, 5000),
         catalogOfferUrl(item.id),
         absoluteAvtocenaUrl(item.cardImageUrl),
-        "in_stock",
+        "preorder",
         `${priceRub} RUB`,
         item.make,
         "no",
@@ -138,7 +140,7 @@ export async function publishAiProductFeed(projection: AiCatalogProjection): Pro
   const built = buildAiProductFeed(projection);
   const stored = await storage.putBinary(AI_PRODUCT_FEED_PATH, built.data, "application/gzip");
   const metadata: AiProductFeedMetadata = {
-    version: 1,
+    version: 2,
     generationId: projection.generationId,
     updatedAt: new Date().toISOString(),
     objectPath: AI_PRODUCT_FEED_PATH,
@@ -156,6 +158,6 @@ export async function ensureAiProductFeed(projection: AiCatalogProjection): Prom
   const current = await storage.readJson<AiProductFeedMetadata | null>(AI_PRODUCT_FEED_METADATA_PATH, null);
   const currentObjectExists = current?.objectPath === AI_PRODUCT_FEED_PATH
     && Boolean(await storage.binaryExists?.(AI_PRODUCT_FEED_PATH).catch(() => false));
-  if (current?.version === 1 && current.generationId === projection.generationId && currentObjectExists) return current;
+  if (current?.version === 2 && current.generationId === projection.generationId && currentObjectExists) return current;
   return publishAiProductFeed(projection);
 }
