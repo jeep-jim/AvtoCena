@@ -1,11 +1,13 @@
 {
-  "requestedAt": "2026-09-11T04:45:00Z",
+  "requestedAt": "2026-09-11T05:10:00Z",
   "mode": "republish-korea-china-with-seller-inventory-and-pickup-parameters",
   "reuseRunId": "34474059061",
   "publishMarkets": [
     "korea",
-    "china"
+    "china",
+    "uae",
+    "georgia"
   ],
   "refreshMarkets": [],
-  "reason": "Restore unknown-power seller inventory, extract exact source engine displacement and pickup gross mass; preserve other markets"
+  "reason": "Retry unfinished markets with seller inventory policy and bounded maintenance lock wait; Japan schedule paused, Europe preserved"
 }

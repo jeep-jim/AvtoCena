@@ -1,8 +1,7 @@
 name: Catalog · Japan Drom sold auctions
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 18 * * 2,5"
+  # Paused pending Aleado supplier connection; manual dispatch remains available.
   push:
     branches: [main]
     paths: ['.github/market-runs/japan-drom-refresh.json']

@@ -25,7 +25,7 @@ test("only the owner-approved seller inventory workflows are scheduled under one
       return hasSchedule(source) && writesCatalogMarkets(source);
     })
     .sort();
-  assert.deepEqual(scheduledWriters, ['catalog-five-market-full-rebuild.yml','catalog-japan-drom-refresh.yml']);
+  assert.deepEqual(scheduledWriters, ['catalog-five-market-full-rebuild.yml']);
   for(const name of scheduledWriters){
     const source=text(name);
     assert.match(source,/group: catalog-six-market-quality-rebuild/);

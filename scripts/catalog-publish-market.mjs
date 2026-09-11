@@ -471,7 +471,7 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
   lostRetained:currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).slice(0,10).map(offer=>({id:offer.id,sourceId:offer.sourceId,status:offer.calculationStatus})),
 };
 await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
-console.log(JSON.stringify(preflight));
+console.log(JSON.stringify({...preflight,auditedRemovals:preflight.auditedRemovals.slice(0,5)}));
 if (dryRun) process.exit(0);
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
@@ -691,7 +691,7 @@ const report = {
 };
 
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
-console.log(JSON.stringify(report, null, 2));
+console.log(JSON.stringify(report, (key,value)=>key==="auditedRemovals" && Array.isArray(value) ? {count:value.length,sample:value.slice(0,5)} : value, 2));
 if (!report.published) process.exitCode = 1;
 } finally {
   await releasePublishLock();

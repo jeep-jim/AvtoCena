@@ -5,10 +5,21 @@ const lockPath='catalog/import-lock.json';
 const operationId=`storage-maintenance-${crypto.randomUUID()}`;
 // Longer than the bounded workflow; an interrupted runner eventually unlocks.
 const ttl=5*60*60*1000;
-await mutateDataJson(lockPath,{lockedUntil:''},current=>{
-  if(Date.parse(current?.lockedUntil||'')>Date.now())throw Error('catalog_publish_locked: storage maintenance deferred');
-  return {operationId,operationType:'catalog_storage_maintenance',lockedUntil:new Date(Date.now()+ttl).toISOString(),startedAt:new Date().toISOString()};
-});
+const waitMs=Math.max(0,Number(process.env.CATALOG_STORAGE_LOCK_WAIT_MS ?? 2700000));
+const deadline=Date.now()+waitMs;
+for (;;) {
+  try {
+    await mutateDataJson(lockPath,{lockedUntil:''},current=>{
+      if(Date.parse(current?.lockedUntil||'')>Date.now())throw Error('catalog_publish_locked: storage maintenance deferred');
+      return {operationId,operationType:'catalog_storage_maintenance',lockedUntil:new Date(Date.now()+ttl).toISOString(),startedAt:new Date().toISOString()};
+    });
+    break;
+  } catch(error) {
+    if(!String(error?.message||error).startsWith('catalog_publish_locked:') || Date.now()>=deadline)throw error;
+    console.log('Storage maintenance waiting for active catalog operation');
+    await new Promise(resolve=>setTimeout(resolve,Math.min(15000,deadline-Date.now())));
+  }
+}
 try {
   // Dry preview always precedes deletion using the same protected-object rules.
   process.env.CATALOG_STORAGE_EMERGENCY='false';
