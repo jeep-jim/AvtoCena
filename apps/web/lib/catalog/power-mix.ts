@@ -19,26 +19,29 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
  for(const [market,bucket] of groups){
   const low=bucket.filter(row=>catalogPowerBand(row)==="low");
-  const other=bucket.filter(row=>catalogPowerBand(row)!=="low");
+  const sellerUnknown=bucket.filter(row=>catalogPowerBand(row)==="unknown" && row.catalogPricingMode==="seller");
+  const sellerUnknownSet=new Set(sellerUnknown);
+  const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !sellerUnknownSet.has(row));
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
   // Owner explicitly excludes Japan from the 80/20 policy: keep every Drom
   // sold-result candidate regardless of power; sanctions are a separate flag.
   if(market==="japan"){
    selected.push(...bucket);
-   report[market]={low:low.length,high:other.length-unknown,unknown,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
+   report[market]={low:low.length,high:other.length-unknown,unknown:unknown+sellerUnknown.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
    continue;
   }
-  if(bucket.length && !low.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
+  if(bucket.length && !low.length && !sellerUnknown.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
   const allowance=Math.floor(low.length/4);
   // Europe: fill the limited extra pool with the least expensive verified
   // delivered totals first. Seller-only prices are not comparable to totals.
-  // Unknown power still uses the 20% allowance, never the low-power pool.
+  // Seller inventory with unknown power remains available for parameter entry.
+  // It is not evidence for either the low-power or high-power assortment.
   if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
   const keptOther=other.slice(0,allowance);
-  const kept=new Set<T>([...low,...keptOther]);
+  const kept=new Set<T>([...low,...keptOther,...sellerUnknown]);
   selected.push(...bucket.filter(row=>kept.has(row)));
   removed.push(...other.slice(allowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length,published:kept.size,held:other.length-keptOther.length,targetMet:true};
+  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,published:kept.size,held:other.length-keptOther.length,targetMet:true};
  }
  return {rows:selected,removed,report};
 }

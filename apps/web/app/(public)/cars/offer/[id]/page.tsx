@@ -1,4 +1,4 @@
-import { enrichOfferWithSourceTableDisplacement } from "@/lib/catalog/source-table-displacement";
+import { enrichOfferWithSourceTableParameters } from "@/lib/catalog/source-table-displacement";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { StickyOfferColumn } from "@/components/catalog/StickyOfferColumn";
 import { confirmedProductionMonth, confirmedProductionDay } from "@/lib/catalog/production-month";
@@ -271,7 +271,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) redirect("/cars");
-  const offer = enrichOfferWithSourceTableDisplacement(storedOffer);
+  const offer = enrichOfferWithSourceTableParameters(storedOffer);
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);

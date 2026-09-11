@@ -30,3 +30,12 @@ test("Europe prefers an affordable delivered total over a newer expensive car or
  assert.ok(result.rows.some(r=>r.id==="affordable"));
  assert.ok(!result.rows.some(r=>r.id==="expensive"||r.id==="seller"));
 });
+
+test("unknown-power seller inventory does not disappear into the calculated assortment quota",()=>{
+ const sellers=Array.from({length:100},(_,i)=>({...row("s"+i,undefined,"korea"),catalogPricingMode:"seller"}));
+ const result=selectCatalogPowerMix([...sellers,...Array.from({length:4},(_,i)=>row("l"+i,150,"korea")),row("h",250,"korea"),row("h2",300,"korea")]);
+ assert.equal(result.rows.length,105);assert.equal(result.removed.length,1);
+ assert.equal((result.report.korea as any).sellerUnknownExempt,100);
+ assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,4);
+ assert.equal(selectCatalogPowerMix(sellers).rows.length,100);
+});

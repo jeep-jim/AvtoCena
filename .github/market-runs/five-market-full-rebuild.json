@@ -1,1 +1,11 @@
-{"requestedAt": "2026-09-11T04:10:00Z", "mode": "publish-retained-five-market-collection-after-storage-maintenance", "reuseRunId": "34474059061", "publishMarkets": ["europe", "korea", "china", "uae", "georgia"], "refreshMarkets": [], "reason": "Complete the retained successful collection after fixing storage maintenance; preserve Japan"}
+{
+  "requestedAt": "2026-09-11T04:45:00Z",
+  "mode": "republish-korea-china-with-seller-inventory-and-pickup-parameters",
+  "reuseRunId": "34474059061",
+  "publishMarkets": [
+    "korea",
+    "china"
+  ],
+  "refreshMarkets": [],
+  "reason": "Restore unknown-power seller inventory, extract exact source engine displacement and pickup gross mass; preserve other markets"
+}
