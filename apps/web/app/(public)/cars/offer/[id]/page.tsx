@@ -1,3 +1,4 @@
+import { enrichOfferWithSourceTableDisplacement } from "@/lib/catalog/source-table-displacement";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { StickyOfferColumn } from "@/components/catalog/StickyOfferColumn";
 import { confirmedProductionMonth, confirmedProductionDay } from "@/lib/catalog/production-month";
@@ -262,14 +263,15 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  const offer = isJapanCatalogOfferId(id)
+  const storedOffer = isJapanCatalogOfferId(id)
     ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
     : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
-  if (!offer) redirect("/cars");
+  if (!storedOffer) redirect("/cars");
+  const offer = enrichOfferWithSourceTableDisplacement(storedOffer);
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);

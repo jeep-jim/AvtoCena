@@ -1,9 +1,10 @@
 name: Catalog storage inventory audit
-run-name: Catalog storage cleanup · ${{ github.sha }}
+run-name: Catalog storage inventory · ${{ github.sha }}
 
 on:
+  workflow_dispatch:
   push:
-    branches: [fix/catalog-source-fields-storage-20260909]
+    branches: [main]
     paths: ['.github/workflows/catalog-storage-inventory-audit.yml']
 
 permissions:
@@ -19,7 +20,7 @@ concurrency:
 
 jobs:
   cleanup:
-    name: Remove expired generations and orphan images
+    name: Inventory storage and preview safe cleanup
     runs-on: ubuntu-latest
     timeout-minutes: 240
     env:
@@ -57,7 +58,7 @@ jobs:
           fi
       - name: Validate cleanup script
         run: node --check scripts/catalog-clean-object-storage.mjs
-      - name: Clean expired catalog objects safely
+      - name: Preview expired catalog objects without deletion
         run: timeout --signal=TERM --kill-after=120s 13800s npx tsx scripts/catalog-clean-object-storage.mjs
       - name: Write cleanup summary
         if: always()
