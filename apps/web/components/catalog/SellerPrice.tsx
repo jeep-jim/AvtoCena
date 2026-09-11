@@ -18,14 +18,16 @@ export function SellerPrice({ offer, panel = true, dense = false, label, priceCl
   const japan = offer.market === "japan";
   const priceLabel = sellerPriceLabel(offer);
   return <div className={panel ? "relative ac-offer-price-panel ac-price-trend-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)]" : "ac-price-trend relative min-w-0 text-[var(--ac-text)]"}>
-    {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black`}>{label}</div> : null}
-    <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold uppercase tracking-wider text-[var(--ac-muted)]`}>{priceLabel}</div>
-    <div className="mt-1.5 flex min-w-0 flex-wrap items-end justify-between gap-2">
+    <div className="flex min-w-0 items-center justify-between gap-1">
+      {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black`}>{label}</div> : null}
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold uppercase tracking-wider text-[var(--ac-muted)]`}>{priceLabel}{!panel && japan ? <span className="ml-1 normal-case tracking-normal"> · без доставки и платежей</span> : null}</div>
+    </div>
+    <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "flex-wrap" : ""}`}>
       <span className={`ac-price ac-price--flat whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
-      {panel ? <SellerPriceHelp /> : null}
+      {panel ? <SellerPriceHelp /> : !japan ? <span className="shrink-0 text-right text-[8px] leading-[10px] text-[var(--ac-muted)] sm:text-[10px] sm:leading-[11px]">Без доставки<br/>и платежей</span> : null}
       {japan ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
     </div>
-    <p className="mt-2 text-[10px] text-[var(--ac-muted)]">Без доставки и платежей</p>
+    {panel ? <p className="mt-2 text-[10px] text-[var(--ac-muted)]">Без доставки и платежей</p> : null}
     {panel ? <style>{`html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}`}</style> : null}
     {panel && rate?.effectiveRate ? <>
       <button type="button" {...tap} onClick={()=>setOpen(true)} className="ac-seller-currency mt-3 flex min-h-10 w-full items-center justify-between gap-3 rounded-xl bg-white/5 px-3 py-2 text-left text-xs font-bold" aria-label={`Показать курс ${offer.sourceCurrency}`}>

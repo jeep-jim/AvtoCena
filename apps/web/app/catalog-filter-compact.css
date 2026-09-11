@@ -7,6 +7,7 @@
 }
 
 html body .ac-catalog-filter-panel {
+  position: relative;
   border: 0 !important;
   border-radius: 0 !important;
   padding: 0 !important;
@@ -320,9 +321,11 @@ html:not([data-theme="light"]) .ac-range-input-box.is-filled input {
 }
 
 .ac-filter-clear--desktop {
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: block;
-  margin: 8px 0 0 auto;
+  margin: 0;
   z-index: 3;
 }
 
