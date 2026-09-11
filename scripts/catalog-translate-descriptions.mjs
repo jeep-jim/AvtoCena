@@ -50,6 +50,7 @@ async function main() {
   // Bound stored data to the scanned active inventory; never modify source offers.
   const cache = Object.fromEntries([...wanted].filter(([key, source]) => previous[key]?.source === source && validTranslation(source, previous[key].text)).map(([key]) => [key, previous[key]]));
   const missing = [...wanted].filter(([key]) => !cache[key]);
+  report.pending = missing.length;
   const budget = Math.max(0, Math.min(200_000, Number(process.env.TRANSLATION_CHARACTER_BUDGET || 100_000)));
   if (!Number.isFinite(budget)) throw new Error("translation_budget_invalid");
   let token;
@@ -65,7 +66,7 @@ async function main() {
       const [key, source] = batch[i];
       const text = result.translations[i]?.text;
       if (typeof text === "string" && validTranslation(source, text)) {
-        cache[key] = { source, text }; report.translated++;
+        cache[key] = { source, text }; report.translated++; report.pending--;
         if (report.samples.length < 10) report.samples.push({ source, text });
       } else report.rejected++;
     }
