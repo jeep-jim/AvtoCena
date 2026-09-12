@@ -15,34 +15,25 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install playwright==1.55.0
-      - name: Wait for this production deployment
+      - name: Confirm this production deployment
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p artifacts
           python - <<'PY'
-          import json, os, time, urllib.request
+          import json, os, urllib.request
           from pathlib import Path
-          sha='8594340505cd23577cf801ff2b7fca2d28e04078'
-          url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs?head_sha='+sha+'&per_page=10'
-          for attempt in range(48):
-              req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
-              with urllib.request.urlopen(req,timeout=30) as response: data=json.load(response)
-              runs=[r for r in data['workflow_runs'] if r['path']=='.github/workflows/deploy-yandex.yml']
-              if runs:
-                  run=runs[0]
-                  print(run['id'],run['status'],run.get('conclusion'),flush=True)
-                  if run['status']=='completed':
-                      assert run['conclusion']=='success', 'Production deployment failed'
-                      Path('artifacts/deploy.json').write_text(json.dumps({k:run[k] for k in ['id','html_url','head_sha','status','conclusion']},indent=2))
-                      break
-              time.sleep(10)
-          else: raise RuntimeError('Deployment did not finish in the verification window')
+          url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/34685679604'
+          req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as response: run=json.load(response)
+          assert run['head_sha']=='8594340505cd23577cf801ff2b7fca2d28e04078'
+          assert run['status']=='completed' and run['conclusion']=='success'
+          Path('artifacts/deploy.json').write_text(json.dumps({k:run[k] for k in ['id','html_url','head_sha','status','conclusion']},indent=2))
           PY
       - name: Check catalog, similar previews and unchanged detail power
         run: |
           python - <<'PY'
-          import json, shutil
+          import json, shutil, traceback
           from pathlib import Path
           from playwright.sync_api import sync_playwright
           origin='https://avtocena.com'
@@ -65,7 +56,11 @@ jobs:
                           assert response and response.status==200
                           chips=page.locator('article [data-recycling-power-chip="true"]')
                           chips.first.wait_for(state='visible',timeout=60000)
-                          page.wait_for_function('''() => {const el=document.querySelector('.ac-public-header');return el && [...el.querySelectorAll('button')].some(b=>Object.keys(b).some(k=>k.startsWith('__reactProps$')));}''',timeout=45000)
+                          if paired_expected is not None:
+                              page.wait_for_function('''() => {const el=document.querySelector('.ac-inline-parameters summary[aria-label^="Мощность:"]');return el && Object.keys(el).some(k=>k.startsWith('__reactProps$'));}''',timeout=45000)
+                          else:
+                              page.wait_for_function('''() => {const el=document.querySelector('article [data-recycling-power-chip="true"]')?.closest('a');return el && Object.keys(el).some(k=>k.startsWith('__reactProps$'));}''',timeout=45000)
+                          page.wait_for_timeout(1000)
                           cookie=page.locator('[role="dialog"][aria-labelledby="avtocena-cookie-title"]')
                           if cookie.is_visible():
                               cookie.get_by_role('button',name='Понятно',exact=True).click()
@@ -74,7 +69,8 @@ jobs:
                               for width in [320,390,1280]:
                                   page.set_viewport_size({'width':width,'height':900})
                                   page.evaluate('(theme)=>document.documentElement.dataset.theme=theme',theme)
-                                  page.wait_for_timeout(150)
+                                  page.wait_for_timeout(250)
+                                  chips.first.wait_for(state='visible',timeout=45000)
                                   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), (name,theme,width,'page overflow')
                                   rail_results=[]
                                   for chip in chips.all()[:10]:
@@ -98,17 +94,17 @@ jobs:
                                       assert all(data[k] for k in ['singleRow','singleLabelLine','noVerticalOverflow','belowPrice','reachable']), (name,theme,width,data)
                                       assert '118 кВт' in data['text'], data
                                       rail_results.append(data)
-                                  assert rail_results
+                                  assert rail_results, (name,theme,width,'preview rows not ready')
                                   detail_label=None
                                   if paired_expected is not None:
                                       summary=page.locator('.ac-inline-parameters summary[aria-label^="Мощность:"]')
+                                      summary.wait_for(state='visible')
                                       assert summary.locator('[data-recycling-power="paired"]').count()==int(paired_expected)
                                       detail_label=summary.inner_text()
                                       if paired_expected:
                                           assert '160 л.с.' in detail_label and '118 кВт' in detail_label
                                           assert summary.evaluate('''el=>{const a=el.getBoundingClientRect();return [...el.querySelectorAll('[data-recycling-power] > span')].every(x=>{const b=x.getBoundingClientRect();return b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1;});}''')
                                       else: assert '150 л.с.' in detail_label
-                                  # Scroll the card, not the clipped chip, to keep the rail at its initial position.
                                   chips.first.locator('xpath=ancestor::article').scroll_into_view_if_needed()
                                   chips.first.evaluate('el=>el.parentElement.scrollLeft=0')
                                   page.screenshot(path=f'artifacts/{name}-{theme}-{width}.png')
@@ -117,7 +113,7 @@ jobs:
                                   Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
                                   print(json.dumps(result,ensure_ascii=False),flush=True)
                       except Exception as error:
-                          Path('artifacts/failure.json').write_text(json.dumps({'page':name,'theme':theme,'width':width,'error':str(error),'pageErrors':errors},ensure_ascii=False,indent=2))
+                          Path('artifacts/failure.json').write_text(json.dumps({'page':name,'theme':theme,'width':width,'error':str(error),'traceback':traceback.format_exc(),'pageErrors':errors},ensure_ascii=False,indent=2))
                           page.screenshot(path='artifacts/failure.png')
                           raise
                       finally: context.close()
