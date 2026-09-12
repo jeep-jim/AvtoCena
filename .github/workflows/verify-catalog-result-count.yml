@@ -1,0 +1,136 @@
+name: Verify published catalog result counter
+on:
+  push:
+    branches: [verify/catalog-result-count-20260912]
+    paths: ['.github/workflows/verify-catalog-result-count.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright==1.55.0
+      - name: Confirm exact production deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p artifacts
+          python - <<'PY'
+          import json, os, time, urllib.request
+          from pathlib import Path
+          sha='68af62690b97bb4e6a1ae3e3d6f3a8eeb442f845'
+          url='https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs?head_sha='+sha+'&per_page=10'
+          for attempt in range(48):
+              req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+              with urllib.request.urlopen(req,timeout=30) as response: data=json.load(response)
+              runs=[r for r in data['workflow_runs'] if r['path']=='.github/workflows/deploy-yandex.yml']
+              if runs:
+                  run=runs[0]
+                  print(run['id'],run['status'],run.get('conclusion'),flush=True)
+                  if run['status']=='completed':
+                      assert run['conclusion']=='success', 'Production deployment failed'
+                      Path('artifacts/deploy.json').write_text(json.dumps({k:run[k] for k in ['id','html_url','head_sha','status','conclusion']},indent=2))
+                      break
+              time.sleep(10)
+          else: raise RuntimeError('Production deployment still pending')
+          PY
+      - name: Check real counts in both themes and five screen widths
+        run: |
+          python - <<'PY'
+          import json, re, shutil
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          origin='https://avtocena.com'
+          paths=[('catalog','/cars'),('filtered','/cars?market=china&make=Volkswagen&model=T-Roc'),('empty','/cars?make=Volkswagen&model=__counter_no_match__'),('home','/')]
+          results=[]
+          def formatted(n): return format(n,',').replace(',','\u00a0')
+          with sync_playwright() as p:
+              browser=p.chromium.launch(executable_path=shutil.which('google-chrome') or shutil.which('chromium'),headless=True,args=['--no-sandbox'])
+              try:
+                  for name,path in paths:
+                      context=browser.new_context(viewport={'width':390,'height':900},service_workers='block')
+                      page=context.new_page(); errors=[]; theme='dark'; width=390
+                      page.on('pageerror',lambda e: errors.append(str(e)))
+                      # Read-only: do not send leads, analytics or calculation writes.
+                      page.route('**/*',lambda route: route.continue_() if route.request.method in ['GET','HEAD'] else route.abort())
+                      try:
+                          response=page.goto(origin+path,wait_until='domcontentloaded',timeout=90000)
+                          assert response and response.status==200,(name,'HTTP')
+                          page.wait_for_function('''() => {const h=document.querySelector('.ac-public-header');return h&&[...h.querySelectorAll('button')].some(b=>Object.keys(b).some(k=>k.startsWith('__reactProps$')));}''',timeout=60000)
+                          page.wait_for_timeout(500)
+                          cookie=page.locator('[role="dialog"][aria-labelledby="avtocena-cookie-title"]')
+                          if cookie.is_visible():
+                              cookie.get_by_role('button',name='Понятно',exact=True).click()
+                              cookie.wait_for(state='hidden')
+                          if name=='home':
+                              page.wait_for_function("() => [...document.querySelectorAll('#form span')].some(e=>/Нашли [0-9]/.test(e.textContent))",timeout=60000)
+                          else:
+                              page.locator('[data-catalog-result-count]').wait_for(state='visible',timeout=45000)
+                          for theme in ['dark','light']:
+                              for width in [320,390,768,1280,1920]:
+                                  page.set_viewport_size({'width':width,'height':900})
+                                  page.evaluate('(theme)=>{localStorage.setItem("avtocena_theme",theme);document.documentElement.dataset.theme=theme;window.scrollTo(0,0)}',theme)
+                                  page.wait_for_timeout(180)
+                                  if name=='home':
+                                      dot=page.locator('#form .ac-pulse-dot--status').first
+                                      count=dot.locator('..')
+                                      text=count.inner_text(); m=re.search(r'Нашли\s+([\d\s\u00a0]+)\s+вариантов',text)
+                                      assert m,(name,text)
+                                      raw=int(re.sub(r'\s','',m.group(1)))
+                                      assert m.group(1).strip()==formatted(raw),(name,raw,text)
+                                      market_values=page.locator('.ac-home-page h3 > span:last-child').all_text_contents()
+                                      for value in market_values:
+                                          if value.strip().startswith('·'):
+                                              number=value.strip()[1:].strip()
+                                              n=int(re.sub(r'\s','',number))
+                                              assert number==formatted(n),(name,'market formatting',value)
+                                  else:
+                                      count=page.locator('[data-catalog-result-count]')
+                                      assert count.count()==1,(name,'duplicate counter')
+                                      assert count.is_visible(),(name,theme,width,'hidden count')
+                                      raw=int(count.get_attribute('data-catalog-result-count'))
+                                      text=count.inner_text()
+                                      assert count.locator('[data-catalog-result-value]').inner_text()==formatted(raw),(name,raw,text)
+                                      assert 'Найдено:' in text
+                                      if name=='empty': assert raw==0,('expected empty search',raw)
+                                      markets=page.locator('[data-catalog-market-count]')
+                                      market_sum=0
+                                      for market in markets.all():
+                                          value=int(market.get_attribute('data-catalog-market-count')); market_sum+=value
+                                          assert market.inner_text().strip()=='· '+formatted(value),(name,'market format',market.inner_text())
+                                      assert market_sum==raw,(name,'total vs market sum',raw,market_sum)
+                                      dot=count.locator('.ac-pulse-dot--status')
+                                  assert count.is_visible() and dot.is_visible(),(name,theme,width,'missing counter or dot')
+                                  geometry=count.evaluate('''el=>{const b=el.getBoundingClientRect();const h=document.querySelector('.ac-public-header').getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,headerBottom:h.bottom,viewport:innerWidth};}''')
+                                  assert geometry['left']>=-1 and geometry['right']<=width+1,(name,theme,width,geometry)
+                                  if name!='home': assert geometry['top']>=geometry['headerBottom']-1 and geometry['bottom']<900,(name,'counter hidden by header',geometry)
+                                  dot_style=dot.locator(':scope > span').evaluate('el=>({background:getComputedStyle(el).backgroundColor,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})')
+                                  assert dot_style['background']=='rgb(255, 53, 61)' and dot_style['width']>=8 and dot_style['height']>=8,(name,theme,width,dot_style)
+                                  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(name,theme,width,'page overflow')
+                                  if name=='catalog' and width in [390,1280]: page.screenshot(path=f'artifacts/catalog-{theme}-{width}.png')
+                                  if name=='empty' and width==390: page.screenshot(path=f'artifacts/empty-{theme}-{width}.png')
+                                  if name=='home' and width==390: page.screenshot(path=f'artifacts/home-{theme}-{width}.png')
+                                  result={'page':name,'theme':theme,'width':width,'count':raw,'text':text,'visible':True,'redDot':True,'groupedThousands':True,'pageOverflow':False,'pageErrors':list(errors)}
+                                  results.append(result)
+                                  Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+                                  print(json.dumps(result,ensure_ascii=False),flush=True)
+                      except Exception as e:
+                          Path('artifacts/failure.json').write_text(json.dumps({'page':name,'theme':theme,'width':width,'error':str(e),'pageErrors':errors},ensure_ascii=False,indent=2))
+                          page.screenshot(path='artifacts/failure.png')
+                          Path('artifacts/failure.html').write_text(page.content())
+                          raise
+                      finally: context.close()
+              finally: browser.close()
+          assert len(results)==40
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-result-count-live
+          path: artifacts
+          retention-days: 7
