@@ -24,7 +24,9 @@ const checkPage = async () => {
 try {
   const {chromium}=await import(pathToFileURL(process.env.CHE168_PLAYWRIGHT_MODULE).href);
   // Default browser identity and network. No stealth plugins, proxy, imported cookies or credentials.
-  browser=await chromium.launch({headless:true,chromiumSandbox:true});
+  // Ubuntu's installed Chrome has its normal AppArmor sandbox profile; the downloaded
+  // headless-shell build cannot start its sandbox on the hosted Ubuntu 24 runner.
+  browser=await chromium.launch({channel:'chrome',headless:true,chromiumSandbox:true});
   const context=await browser.newContext();
   page=await context.newPage();
   page.setDefaultTimeout(25000);

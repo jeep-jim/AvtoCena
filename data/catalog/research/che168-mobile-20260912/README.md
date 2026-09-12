@@ -25,6 +25,8 @@ The current cloud browser can render these mobile pages. An ordinary HTTP GET fr
 
 `che168-mobile-canary.yml` performs one bounded, read-only qualification from a normal GitHub runner, preserving DOM/table artifacts. It has no production secrets, publish step, schedule, imported credentials, stealth settings or alternative network route. It stops on errors or access challenges. Three captures are a transport test, never catalog acceptance or a reduction of production collection limits. Do not turn this probe into a full crawl before its artifacts demonstrate usable bound listings.
 
+The first canary run 34674242537 failed before opening a page: the downloaded Chromium headless shell could not start its sandbox on Ubuntu 24. Artifact 10291493885 contains the launch error, not a Che168 access response. The corrected probe selects preinstalled Chrome, whose Ubuntu sandbox profile is supplied normally; it does not disable AppArmor or Chromium sandboxing. See Chromium's [sandbox explanation](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md).
+
 The existing domestic HTTP registry/publisher and all quality gates remain unchanged.
 
 ## Other requested sources
