@@ -1,4 +1,4 @@
-import { selectCatalogPowerMix } from "./power-mix";
+import { selectCatalogPublicationMix } from "./china-source-share";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
@@ -1195,10 +1195,8 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
   const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
   // Other markets are immutable snapshots, not candidates for this refresh.
   // Deduplication and model-year quotas apply only to the market being rebuilt.
-  const powerMix = process.env.CATALOG_SELLER_INVENTORY === "1"
-    ? selectCatalogPowerMix(quota.rows)
-    : { rows: quota.rows, removed: [] as VehicleOffer[], report: {} };
-  return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix };
+  const { powerMix, sourceShare } = selectCatalogPublicationMix(quota.rows, process.env.CATALOG_SELLER_INVENTORY === "1");
+  return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix, sourceShare };
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {

@@ -54,8 +54,8 @@ test("Autohome promotes only a consistent combustion specification", async () =>
   const offer = source.normalizeOffer({
     specId,
     seriesId: "8148",
-    trimTitle: "2025款 1.5T 手动版",
-    year: 2025,
+    trimTitle: "2026款 1.5T 手动版",
+    year: 2026,
     priceWan: 12.5,
     sourcePriceCny: 125_000,
     sourceUrl: `https://www.autohome.com.cn/spec/${specId}/`,
@@ -67,7 +67,7 @@ test("Autohome promotes only a consistent combustion specification", async () =>
     const url = String(input);
     if (url.includes("/config/spec/")) return new Response(configMarkup(specId, "汽油", "1.5T 107马力 L4", "107", "78.5"), { status: 200 });
     if (url.includes("/cars/imglist-")) return new Response(galleryMarkup(specId), { status: 200 });
-    return new Response("<title>【图】测试车型 2025款 1.5T 手动版报价_图片_测试品牌_汽车之家</title>", { status: 200 });
+    return new Response("<title>【图】测试车型 2026款 1.5T 手动版报价_图片_测试品牌_汽车之家</title>", { status: 200 });
   };
   try {
     const images = await source.fetchImages(offer);
