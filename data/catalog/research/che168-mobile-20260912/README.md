@@ -7,7 +7,7 @@ Two observed listings and their named parameter panels were captured:
 | infoid | Cash CNY | Registration (not manufacture) | Odometer | Exact cc | Source PS / kW | Photos | Named rows |
 |---|---:|---|---:|---:|---|---:|---:|
 | 58328510, Lavida 2023 1.5L | 76,800 | 2023-05 | 29,000 km | 1,498 | 110 / 81 | 16 | 172 |
-| 59859616, BMW X5 2023 30Li | 428,000 | 2024-07 | 24,000 km | 1,998 | 258 / 190 | 23 | 176 |
+| 59859616, BMW X5 2023 30Li | 428,000 | 2024-07 | 24,000 km | 1,998 | 258 / 190 | 23 | 205 |
 
 The BMW source says petrol + 48V mild hybrid. Its published ICE power is not evidence for all utilization inputs. Neither capture establishes manufacturing date through a named production-date field. Both parser results remain `needs_data`, `totalRub=null`; no production calculations/publication were performed.
 
@@ -16,8 +16,8 @@ The Lavida search displayed 919 results. This is the site's count, not collected
 The `.json` files contain actual DOM captures, with tracking parameters removed from the identity URL. The `.dom.html.gz` files preserve the full rendered DOM, including recommendations; the parser only consumes the bound table and gallery. No photo binaries are stored. Initial single-string DOM reads were truncated by the browser transport; the committed files were recaptured in 50,000-character chunks, then checked against the DOM length.
 
 Uncompressed UTF-8 DOM evidence:
-- 58328510: 1,081,609 bytes, SHA256 `de84b5367f78a9bcdafc3e295b59588e5f06e6b9519805e033916383f6157334`.
-- 59859616: 1,176,541 bytes, SHA256 `76c7b726c06dda34d4a2d8233cd19f26d34d39558645b4d111848dda068db0f8`.
+- 58328510: 1,071,219 bytes, SHA256 `dfa81fbafb7e2132b058c7ee9bd4cf70b771a7664b405d28be48fdc231a6fa0d`.
+- 59859616: 1,215,475 bytes, SHA256 `41c9dd2c46d87e5648d280819bf25448b48276456022a90ca4de566ebeb72574`.
 
 ## Transport qualification still required
 
@@ -36,3 +36,5 @@ Dongchedi's own homepage menu exposes a longer `/usedcar/x-...` route. Ordinary 
 Guazi's domestic list/detail can be read through search extraction, but direct browsing of its Chinese buy URL redirected to `en.guazi.com`. Search-extracted domestic finance prices must not become cash prices or a claim of working production collection.
 
 No current same-car domestic/Global Che168 price pair was verified. The owner's conditional permission to consider Global is not satisfied.
+
+The BMW panel lazy-renders lower sections: the first capture had 176 rows; after ordinary panel scrolling it has 205, including seats, audio and climate. The updated capture retains those additional rows. Lavida has 172 rows including its final climate section.

@@ -51,7 +51,19 @@ try {
     await page.getByText(/^\d+(?:\.\d+)?[LT]$/).first().click();
     await page.getByText('车型名称',{exact:true}).waitFor();
     await checkPage();
-    const capture={...await page.evaluate(captureCheMobileDom),capturedAt:new Date().toISOString()};
+    // The parameter panel lazy-renders its lower rows; do not stop at the engine section.
+    const parameterPane=page.locator('div.r-150rngu').filter({hasText:/^牌照信息标配/});
+    await parameterPane.hover();
+    let tableScrollComplete=false;
+    for(let step=0;step<8;step++) {
+      await page.mouse.wheel(0,18000);
+      await page.waitForTimeout(400);
+      await checkPage();
+      const end=await parameterPane.evaluate(e=>e.scrollTop+e.clientHeight>=e.scrollHeight-4);
+      if(end){tableScrollComplete=true;break;}
+    }
+    if(!tableScrollComplete)throw Error('parameter_table_scroll_incomplete');
+    const capture={...await page.evaluate(captureCheMobileDom),capturedAt:new Date().toISOString(),tableScrollComplete};
     const parsed=parseChe168MobileRecord(capture,id);
     await writeFile(`${out}/${id}.json`,JSON.stringify(capture,null,2));
     await saveDom(id);

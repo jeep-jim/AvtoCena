@@ -46,4 +46,7 @@ test('rejects gallery contamination and keeps every source table row', () => {
   assert.throws(()=>parseChe168MobileRecord(a,'58328510'));
   const b=fixture('58328510'); const r=parseChe168MobileRecord(b,'58328510');
   assert.deepEqual(r.tableRows,b.rows); assert.deepEqual(r.raw,b);
+  const bmw=parseChe168MobileRecord(fixture('59859616'),'59859616');
+  assert.equal(bmw.tableRows.length,205);
+  assert.ok(bmw.tableRows.some(([label])=>label==='车内PM2.5过滤装置'));
 });
