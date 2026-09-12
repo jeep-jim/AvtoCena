@@ -49,10 +49,10 @@ jobs:
           node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts "${related[@]}"
       - name: Check published T-Roc inputs against the new presentation helper
         run: |
-          node --import tsx --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import assert from 'node:assert/strict';
-          import { recyclingPowerInfo } from './apps/web/lib/catalog/recycling-power.ts';
+          node --import tsx --input-type=commonjs <<'JS'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const { recyclingPowerInfo } = require('./apps/web/lib/catalog/recycling-power.ts');
           const path = 'artifacts/recycling-power/production-input.json';
           if (fs.existsSync(path)) {
             const rows = JSON.parse(fs.readFileSync(path, 'utf8'));
