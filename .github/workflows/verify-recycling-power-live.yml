@@ -9,29 +9,23 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 12
     steps:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip install playwright==1.55.0
-      - name: Wait for the exact production deployment
+      - name: Confirm exact production deployment
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           python - <<'PY'
-          import json, os, time, urllib.request
-          url = 'https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/34674352291'
-          for attempt in range(48):
-              req=urllib.request.Request(url,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
-              with urllib.request.urlopen(req,timeout=30) as response: data=json.load(response)
-              print(data['status'],data.get('conclusion'),flush=True)
-              assert data['head_sha']=='2b44f5b0a5bd36fca7b0442a851cf7b6d39ff051'
-              if data['status']=='completed':
-                  assert data['conclusion']=='success', 'Production deployment did not succeed'
-                  break
-              time.sleep(15)
-          else: raise RuntimeError('Deployment still running; live verification not completed')
+          import json, os, urllib.request
+          req=urllib.request.Request('https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs/34674352291',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=30) as response: data=json.load(response)
+          assert data['head_sha']=='2b44f5b0a5bd36fca7b0442a851cf7b6d39ff051'
+          assert data['status']=='completed' and data['conclusion']=='success'
+          print('Exact production deployment: success')
           PY
       - name: Read-only mobile and desktop checks on actual T-Roc pages
         run: |
@@ -48,25 +42,31 @@ jobs:
               browser=p.chromium.launch(executable_path=chrome,headless=True,args=['--no-sandbox'])
               try:
                   for name,id,borderline in cars:
-                      for theme in ['dark','light']:
-                          for width in [320,390,1280]:
-                              page=browser.new_page(viewport={'width':width,'height':900},device_scale_factor=1)
-                              errors=[]
-                              failed=[]
-                              page.on('pageerror',lambda e: errors.append(str(e)))
-                              page.on('requestfailed',lambda r: failed.append({'url':r.url,'error':r.failure}))
-                              # No calculations, leads, profile or persistent writes are sent.
-                              page.route('**/*',lambda route: route.continue_() if route.request.method in ['GET','HEAD'] else route.abort())
-                              try:
-                                  response=page.goto('https://avtocena.com/cars/offer/'+id,wait_until='domcontentloaded',timeout=90000)
-                                  assert response and response.status==200
-                                  summary=page.locator('.ac-inline-parameters summary[aria-label^="Мощность:"]')
-                                  summary.wait_for(state='visible',timeout=45000)
-                                  # The label is server-rendered. Native details can open before
-                                  # Next has hydrated; keyboard callbacks require that hydration.
-                                  page.wait_for_function('''() => {const el=document.querySelector('.ac-inline-parameters summary[aria-label^="Мощность:"]');return el && Object.keys(el).some(k=>k.startsWith('__reactProps$'));}''',timeout=45000)
+                      page=browser.new_page(viewport={'width':320,'height':900},device_scale_factor=1)
+                      errors=[]
+                      failed=[]
+                      page.on('pageerror',lambda e: errors.append(str(e)))
+                      page.on('requestfailed',lambda r: failed.append({'url':r.url,'error':r.failure}))
+                      # No calculations, leads, profile or persistent writes are sent.
+                      page.route('**/*',lambda route: route.continue_() if route.request.method in ['GET','HEAD'] else route.abort())
+                      theme='dark'; width=320
+                      try:
+                          response=page.goto('https://avtocena.com/cars/offer/'+id,wait_until='domcontentloaded',timeout=90000)
+                          assert response and response.status==200
+                          summary=page.locator('.ac-inline-parameters summary[aria-label^="Мощность:"]')
+                          summary.wait_for(state='visible',timeout=45000)
+                          # SSR labels precede React hydration and its keyboard callbacks.
+                          page.wait_for_function('''() => {const el=document.querySelector('.ac-inline-parameters summary[aria-label^="Мощность:"]');return el && Object.keys(el).some(k=>k.startsWith('__reactProps$'));}''',timeout=45000)
+                          page.wait_for_timeout(500)
+                          cookie=page.locator('[role="dialog"][aria-labelledby="avtocena-cookie-title"]')
+                          if cookie.is_visible():
+                              cookie.get_by_role('button',name='Понятно',exact=True).click()
+                              cookie.wait_for(state='hidden')
+                          for theme in ['dark','light']:
+                              for width in [320,390,1280]:
+                                  page.set_viewport_size({'width':width,'height':900})
                                   page.evaluate('(theme)=>{document.documentElement.dataset.theme=theme}',theme)
-                                  page.wait_for_timeout(400)
+                                  page.wait_for_timeout(200)
                                   paired=summary.locator('[data-recycling-power="paired"]')
                                   assert paired.count()==(1 if borderline else 0), (name,theme,width,summary.inner_text())
                                   label=summary.inner_text()
@@ -94,6 +94,8 @@ jobs:
                                   assert 'мощность в кВт' in help.inner_text()
                                   if borderline: assert '118 кВт > 117,68 кВт' in help.inner_text()
                                   if name=='white' and width in [390,1280]: page.screenshot(path=f'artifacts/fee-{theme}-{width}.png')
+                                  help.locator(':scope > summary').click()
+                                  outer.locator(':scope > summary').click()
                                   previews=[]
                                   for chip in page.locator('[data-recycling-power-chip="true"]').all():
                                       info=chip.evaluate('el=>{const a=el.closest("article");const p=a.querySelector(".ac-price-trend");const c=el.getBoundingClientRect();const b=a.getBoundingClientRect();return {text:el.innerText,withinCard:c.left>=b.left-1&&c.right<=b.right+1,belowPrice:!p||c.top>=p.getBoundingClientRect().bottom-1};}')
@@ -101,18 +103,17 @@ jobs:
                                       previews.append(info)
                                   assert previews, 'Expected the other 160/118 T-Roc in similar offers'
                                   if name=='white':
-                                      chip=page.locator('[data-recycling-power-chip="true"]').first
-                                      chip.scroll_into_view_if_needed()
+                                      page.locator('[data-recycling-power-chip="true"]').first.scroll_into_view_if_needed()
                                       page.screenshot(path=f'artifacts/previews-{theme}-{width}.png')
-                                  results.append({'car':name,'theme':theme,'width':width,'powerLabel':label,'pairedExpected':borderline,'pageOverflow':False,'feeHelpWorks':True,'previewChips':len(previews),'pageErrors':errors})
+                                  results.append({'car':name,'theme':theme,'width':width,'powerLabel':label,'pairedExpected':borderline,'pageOverflow':False,'feeHelpWorks':True,'previewChips':len(previews),'pageErrors':list(errors)})
                                   Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
                                   print(json.dumps(results[-1],ensure_ascii=False),flush=True)
-                              except Exception as error:
-                                  Path('artifacts/failure.json').write_text(json.dumps({'car':name,'theme':theme,'width':width,'error':str(error),'pageErrors':errors,'requestFailures':failed},ensure_ascii=False,indent=2))
-                                  page.screenshot(path='artifacts/failure.png')
-                                  Path('artifacts/failure.html').write_text(page.content())
-                                  raise
-                              finally: page.close()
+                      except Exception as error:
+                          Path('artifacts/failure.json').write_text(json.dumps({'car':name,'theme':theme,'width':width,'error':str(error),'pageErrors':errors,'requestFailures':failed},ensure_ascii=False,indent=2))
+                          page.screenshot(path='artifacts/failure.png')
+                          Path('artifacts/failure.html').write_text(page.content())
+                          raise
+                      finally: page.close()
               finally: browser.close()
           assert len(results)==18
           PY
