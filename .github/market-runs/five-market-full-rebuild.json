@@ -1,13 +1,12 @@
 {
-  "mode": "owner-requested-uae-next-single-market",
+  "mode": "owner-requested-europe-next-single-market",
   "publishMarkets": [
-    "uae"
+    "europe"
   ],
-  "reason": "Owner-approved sequential queue: Korea run 34646131319 completed publication and final audit 0 invalidReady, but source coverage and automatic calculation remain incomplete. Start only UAE with DubiCars and Dubizzle, fresh cursors and unchanged volume limits. Preserve all other markets and Japan. No guessing horsepower, no bypass of source blocks or quality/retention/storage gates. Europe and Georgia follow as separate supervised cycles.",
+  "reason": "Owner-approved sequential queue: UAE 34657420245 completed publication and final audit with 0 invalidReady but both sources stopped blocked. Start only fresh Europe with mobile.de and AutoScout, unchanged limits and quality/retention/storage gates. Preserve other markets including Japan. Georgia follows as its own supervised cycle; no simultaneous market runs.",
   "remainingMarkets": [
-    "europe",
     "georgia"
   ],
-  "requestedAt": "2026-09-11T23:12:00Z",
+  "requestedAt": "2026-09-12T00:24:00Z",
   "resetCursors": true
 }
