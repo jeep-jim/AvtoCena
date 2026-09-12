@@ -1,0 +1,63 @@
+name: Review inline recycling power UI
+on:
+  push:
+    branches: [fix/inline-recycling-power-20260912]
+    paths:
+      - '.github/workflows/ui-recycling-power-review.yml'
+      - 'scripts/apply-recycling-power-ui.py'
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Apply guarded source edits on this branch only
+        run: python3 scripts/apply-recycling-power-ui.py
+      - run: npm ci
+      - name: Typecheck existing application and engine
+        run: npm run typecheck
+      - name: Test source power and customer parameter boundaries
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts
+      - name: Install isolated browser test dependency
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Check both themes and six desktop/mobile widths
+        run: node tests/browser/recycling-power-smoke.mjs
+      - name: Record tested source changes and update review branch
+        run: |
+          mkdir -p artifacts/recycling-power
+          git diff --check
+          git diff --binary > artifacts/recycling-power/applied.patch
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('roadmap.md')
+          note = '''## 2026-09-12 — Мощность в кВт без наложений на цену
+          - Пограничные M1 с ДВС: `160 л.с. / 118 кВт` внутри существующего чипа и поля мощности. Стрелка курса не изменена.
+          - Пояснение добавлено в раскрытие мощности и существующую структуру цены; N1, EV и гибриды не классифицируются по этому предупреждению.
+          - Форма сохраняет исходные кВт при смене года/объёма; редактирование л.с. очищает прежние кВт, сброс возвращает исходные данные.
+          - Проверки ветки: TypeScript, тесты порога и параметров, изолированный браузерный стенд компонентов в двух темах на 320/360/390/414/768/1280 px. Тарифные коэффициенты не менялись.
+          - Статус публикации подтверждается отдельно по деплою и живым карточкам.
+
+          '''
+          path.write_text(note + path.read_text())
+          PY
+          rm .github/workflows/ui-recycling-power-review.yml scripts/apply-recycling-power-ui.py
+          git add apps/web/components/catalog/CatalogCard.tsx apps/web/components/catalog/InlineOfferParameters.tsx 'apps/web/app/(public)/cars/offer/[id]/page.tsx' apps/web/lib/catalog/customer-parameters.ts apps/web/lib/catalog/combustion-power-consistency.ts packages/engine/src/calculation/russiaCustoms.ts roadmap.md .github/workflows/ui-recycling-power-review.yml scripts/apply-recycling-power-ui.py
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix(catalog): embed exact kW inside existing power chips and controls'
+          git push origin HEAD:fix/inline-recycling-power-20260912
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recycling-power-ui-review
+          path: artifacts/recycling-power
+          retention-days: 7
