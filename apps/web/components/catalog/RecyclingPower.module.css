@@ -1,0 +1,20 @@
+.value { display: inline-flex; min-width: 0; max-width: 100%; flex-wrap: wrap; align-items: baseline; column-gap: .18em; line-height: 1.2; }
+.unit { white-space: nowrap; }
+.warningText { color: #ffc46a !important; -webkit-text-fill-color: #ffc46a !important; }
+.warningChip { max-width: 100%; flex-shrink: 1; white-space: normal; box-shadow: inset 0 0 0 1px rgba(255,180,70,.55); background-color: rgba(255,180,70,.08) !important; }
+.wrapChips { flex-wrap: wrap !important; overflow: visible !important; white-space: normal !important; }
+.powerTile { column-gap: 6px !important; padding-left: 10px !important; padding-right: 10px !important; }
+.powerTile > svg:last-child { margin-left: 0 !important; width: 12px; }
+.warningTile { box-shadow: inset 0 0 0 1px rgba(255,180,70,.55); }
+.powerTile .value { font-size: 11px; }
+.feeHelp { min-width: 0; width: 100%; margin-top: 3px; color: var(--ac-text); }
+.feeHelp > summary { display: flex; align-items: center; gap: 7px; min-height: 40px; cursor: pointer; list-style: none; font-size: 11px; line-height: 1.35; }
+.feeHelp > summary::-webkit-details-marker { display: none; }
+.feeHelp > summary:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 6px; }
+.question { flex: none; display: inline-flex; width: 19px; height: 19px; align-items: center; justify-content: center; border: 1px solid currentColor; border-radius: 50%; font-weight: 800; }
+.explanation { min-width: 0; font-size: 12px; font-weight: 500; line-height: 1.5; color: var(--ac-muted); overflow-wrap: anywhere; }
+.explanation p { margin: 0 0 8px; }
+.explanation a { color: var(--ac-text); text-decoration: underline; text-underline-offset: 3px; }
+:global(html[data-theme="light"]) .warningText { color: #884500 !important; -webkit-text-fill-color: #884500 !important; }
+:global(html[data-theme="light"]) .warningChip, :global(html[data-theme="light"]) .warningTile { box-shadow: inset 0 0 0 1px rgba(158,83,0,.55); background-color: rgba(255,183,68,.10) !important; }
+@media (min-width: 640px) { .powerTile .value { font-size: 12px; } }

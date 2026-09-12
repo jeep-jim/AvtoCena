@@ -1,12 +1,15 @@
 "use client";
 
+import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
+import { RecyclingPowerLabel, RecyclingPowerExplanation, RecyclingFeeHelp } from "./RecyclingPower";
+import powerStyles from "./RecyclingPower.module.css";
 import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
 import { validateCustomerParameters } from "../../lib/catalog/customer-parameters";
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
-const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
+const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
 function Field({label,value,change,options=[],min,max,searchQuery}:{label:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
  const [choosing,setChoosing]=useState(false);
@@ -25,20 +28,19 @@ function Field({label,value,change,options=[],min,max,searchQuery}:{label:string
 function EngineIcon() {
  return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>;
 }
-function Tile({label,value,icon,children,wide=false}:{label:string;value:string;icon:ReactNode;children:ReactNode;wide?:boolean}) {
+function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{label:string;value:string;valueNode?:ReactNode;warning?:boolean;icon:ReactNode;children:ReactNode;wide?:boolean}) {
  const ref=useRef<HTMLDetailsElement>(null);
  const [open,setOpen]=useState(false);
  useEffect(()=>{
-  if(!open)return;
-  const close=(event:PointerEvent)=>{if(!ref.current?.contains(event.target as Node) && ref.current)ref.current.open=false;};
-  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape" && ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus();}};
-  document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);
-  return ()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};
- },[open]);
+  const close=(event:MouseEvent)=>{if(ref.current?.open && !ref.current.contains(event.target as Node))ref.current.open=false;};
+  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape" && ref.current?.open){ref.current.open=false;ref.current.querySelector("summary")?.focus();}};
+  document.addEventListener("click",close);document.addEventListener("keydown",escape);
+  return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);};
+ },[]);
  return <div className={`relative min-w-0 ${wide?"col-span-2":""}`} style={{height:50,zIndex:open?60:undefined}}>
   <details ref={ref} onToggle={e=>setOpen(e.currentTarget.open)} className="ac-attached-editor group absolute inset-x-0 top-0 overflow-hidden rounded-2xl bg-[var(--ac-surface-2)]">
-   <summary aria-label={`${label}: ${value}`} className="flex h-12 cursor-pointer list-none items-center gap-3 py-2 pl-4 pr-4 text-left [&::-webkit-details-marker]:hidden">
-    <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
+   <summary aria-label={`${label}: ${value}`} className={`flex h-12 cursor-pointer list-none items-center gap-3 py-2 pl-4 pr-4 text-left [&::-webkit-details-marker]:hidden ${valueNode ? powerStyles.powerTile : ""} ${warning ? powerStyles.warningTile : ""}`}>
+    <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{valueNode ?? value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
    </summary>
    <div className="ac-attached-editor-body space-y-3 overflow-y-auto p-4" style={{maxHeight:"min(360px,55dvh)",overscrollBehavior:"contain"}}>{children}</div>
   </details>
@@ -49,7 +51,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
  const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
  const dirty=JSON.stringify(draft)!==JSON.stringify(initial);
- function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:""}:{})}));}
+ function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="powerHp"?{powerKw:""}:{}),...(key==="powerKw" && Number(value)>0?{powerHp:String(Math.round(Number(value)/0.73549875))}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
@@ -68,6 +70,9 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate]);
  const showCalculation=dirty || Boolean(result);
+ const powerInfo = recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
+ const powerLabel = draft.powerHp ? `${draft.powerHp} л.с.` : "Указать мощность";
+ const pairedPower = Boolean(powerInfo?.borderline);
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string)=><Field label={label} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {!showCalculation?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
@@ -94,8 +99,13 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
     {fuels.map(([key,label])=><button type="button" key={key} aria-pressed={draft.fuel===key} onClick={()=>change("fuel",key)} className="block min-h-10 w-full rounded-lg px-3 text-left text-xs hover:bg-[var(--ac-surface)]">{label}</button>)}
     {draft.fuel==="hybrid"?<label className="block text-xs">Тип гибрида<select aria-label="Тип гибрида" value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите тип</option><option value="series_hybrid">Последовательный</option><option value="other_hybrid">Другой гибрид</option></select></label>:null}
    </Tile>
-   <Tile label="Мощность" value={draft.powerHp?`${draft.powerHp} л.с.`:"Указать мощность"} icon={<Zap size={16}/>}>
+   <Tile label="Мощность" value={`${powerLabel}${pairedPower && powerInfo ? ` / ${powerInfo.kwLabel}` : ""}`} valueNode={pairedPower ? <RecyclingPowerLabel hpLabel={powerLabel} info={powerInfo} showKw /> : undefined} warning={pairedPower} icon={<Zap size={16}/>}>
+    {powerInfo?.borderline ? <RecyclingPowerExplanation info={powerInfo} /> : null}
     {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
+    {!["electric","hybrid"].includes(draft.fuel) ? <>
+      {field("powerKw","Мощность, кВт (если известна)",[],0.1,2000)}
+      <p className="text-xs leading-5 text-[var(--ac-muted)]">Если кВт указаны, расчёт использует их без округления до л.с. Изменение л.с. очищает прежние кВт. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p>
+    </> : null}
    </Tile>
    {showCommercial ? <Tile wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
@@ -115,7 +125,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
     {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
    </Tile>:null}
   </div>
-  {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">{dirty?"Структура расчёта по вашим параметрам":"Структура цены"}</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}</dt><dd>{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
+  {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">{dirty?"Структура расчёта по вашим параметрам":"Структура цены"}</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <RecyclingFeeHelp info={powerInfo} /> : null}</dt><dd className="shrink-0 whitespace-nowrap">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
   {children}
   <style>{`.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}`}</style>
  </div>;
