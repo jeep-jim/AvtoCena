@@ -52,52 +52,67 @@ jobs:
                           for width in [320,390,1280]:
                               page=browser.new_page(viewport={'width':width,'height':900},device_scale_factor=1)
                               errors=[]
+                              failed=[]
                               page.on('pageerror',lambda e: errors.append(str(e)))
+                              page.on('requestfailed',lambda r: failed.append({'url':r.url,'error':r.failure}))
                               # No calculations, leads, profile or persistent writes are sent.
                               page.route('**/*',lambda route: route.continue_() if route.request.method in ['GET','HEAD'] else route.abort())
-                              response=page.goto('https://avtocena.com/cars/offer/'+id,wait_until='domcontentloaded',timeout=90000)
-                              assert response and response.status==200
-                              summary=page.locator('.ac-inline-parameters summary[aria-label^="Мощность:"]')
-                              summary.wait_for(state='visible',timeout=45000)
-                              page.evaluate('(theme)=>{document.documentElement.dataset.theme=theme}',theme)
-                              page.wait_for_timeout(400)
-                              paired=summary.locator('[data-recycling-power="paired"]')
-                              assert paired.count()==(1 if borderline else 0), (name,theme,width,summary.inner_text())
-                              label=summary.inner_text()
-                              if borderline: assert '160 л.с.' in label and '118 кВт' in label and '/' in label
-                              else: assert '150 л.с.' in label
-                              summary.scroll_into_view_if_needed()
-                              assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), (name,theme,width,'page overflow')
-                              if borderline:
-                                  bounds=summary.evaluate('el=>{const a=el.getBoundingClientRect();return [...el.querySelectorAll("[data-recycling-power] > span")].map(x=>{const b=x.getBoundingClientRect();return b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1;})}')
-                                  assert all(bounds),(name,theme,width,'clipped paired label')
-                              page.screenshot(path=f'artifacts/{name}-{theme}-{width}.png')
-                              if borderline:
-                                  summary.click()
-                                  body=summary.locator('..').locator('.ac-attached-editor-body')
-                                  assert '118 кВт > 117,68 кВт' in body.inner_text()
-                                  page.keyboard.press('Escape')
-                                  assert not summary.evaluate('el=>el.parentElement.open')
-                              outer=page.locator('.ac-original-calculation details.ac-offer-breakdown')
-                              if outer.count()==0: outer=page.locator('.ac-original-calculation details').first
-                              outer.locator(':scope > summary').click()
-                              help=outer.locator('[data-recycling-fee-help]')
-                              help.wait_for(state='visible')
-                              help.locator(':scope > summary').click()
-                              assert help.evaluate('el=>el.open')
-                              assert 'мощность в кВт' in help.inner_text()
-                              if borderline: assert '118 кВт > 117,68 кВт' in help.inner_text()
-                              if name=='white' and width in [390,1280]: page.screenshot(path=f'artifacts/fee-{theme}-{width}.png')
-                              previews=[]
-                              for chip in page.locator('[data-recycling-power-chip="true"]').all():
-                                  info=chip.evaluate('el=>{const a=el.closest("article");const p=a.querySelector(".ac-price-trend");const c=el.getBoundingClientRect();const b=a.getBoundingClientRect();return {text:el.innerText,withinCard:c.left>=b.left-1&&c.right<=b.right+1,belowPrice:!p||c.top>=p.getBoundingClientRect().bottom-1};}')
-                                  assert info['withinCard'] and info['belowPrice'], info
-                                  previews.append(info)
-                              assert previews, 'Expected the other 160/118 T-Roc in similar offers'
-                              results.append({'car':name,'theme':theme,'width':width,'powerLabel':label,'pairedExpected':borderline,'pageOverflow':False,'feeHelpWorks':True,'previewChips':len(previews),'pageErrors':errors})
-                              Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
-                              print(json.dumps(results[-1],ensure_ascii=False),flush=True)
-                              page.close()
+                              try:
+                                  response=page.goto('https://avtocena.com/cars/offer/'+id,wait_until='domcontentloaded',timeout=90000)
+                                  assert response and response.status==200
+                                  summary=page.locator('.ac-inline-parameters summary[aria-label^="Мощность:"]')
+                                  summary.wait_for(state='visible',timeout=45000)
+                                  # The label is server-rendered. Native details can open before
+                                  # Next has hydrated; keyboard callbacks require that hydration.
+                                  page.wait_for_function('''() => {const el=document.querySelector('.ac-inline-parameters summary[aria-label^="Мощность:"]');return el && Object.keys(el).some(k=>k.startsWith('__reactProps$'));}''',timeout=45000)
+                                  page.evaluate('(theme)=>{document.documentElement.dataset.theme=theme}',theme)
+                                  page.wait_for_timeout(400)
+                                  paired=summary.locator('[data-recycling-power="paired"]')
+                                  assert paired.count()==(1 if borderline else 0), (name,theme,width,summary.inner_text())
+                                  label=summary.inner_text()
+                                  if borderline: assert '160 л.с.' in label and '118 кВт' in label and '/' in label
+                                  else: assert '150 л.с.' in label
+                                  summary.scroll_into_view_if_needed()
+                                  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), (name,theme,width,'page overflow')
+                                  if borderline:
+                                      bounds=summary.evaluate('el=>{const a=el.getBoundingClientRect();return [...el.querySelectorAll("[data-recycling-power] > span")].map(x=>{const b=x.getBoundingClientRect();return b.left>=a.left-1&&b.right<=a.right+1&&b.top>=a.top-1&&b.bottom<=a.bottom+1;})}')
+                                      assert all(bounds),(name,theme,width,'clipped paired label')
+                                  page.screenshot(path=f'artifacts/{name}-{theme}-{width}.png')
+                                  if borderline:
+                                      summary.click()
+                                      body=summary.locator('..').locator('.ac-attached-editor-body')
+                                      assert '118 кВт > 117,68 кВт' in body.inner_text()
+                                      page.keyboard.press('Escape')
+                                      assert not summary.evaluate('el=>el.parentElement.open'), 'Escape did not close hydrated editor'
+                                  outer=page.locator('.ac-original-calculation details.ac-offer-breakdown')
+                                  if outer.count()==0: outer=page.locator('.ac-original-calculation details').first
+                                  outer.locator(':scope > summary').click()
+                                  help=outer.locator('[data-recycling-fee-help]')
+                                  help.wait_for(state='visible')
+                                  help.locator(':scope > summary').click()
+                                  assert help.evaluate('el=>el.open')
+                                  assert 'мощность в кВт' in help.inner_text()
+                                  if borderline: assert '118 кВт > 117,68 кВт' in help.inner_text()
+                                  if name=='white' and width in [390,1280]: page.screenshot(path=f'artifacts/fee-{theme}-{width}.png')
+                                  previews=[]
+                                  for chip in page.locator('[data-recycling-power-chip="true"]').all():
+                                      info=chip.evaluate('el=>{const a=el.closest("article");const p=a.querySelector(".ac-price-trend");const c=el.getBoundingClientRect();const b=a.getBoundingClientRect();return {text:el.innerText,withinCard:c.left>=b.left-1&&c.right<=b.right+1,belowPrice:!p||c.top>=p.getBoundingClientRect().bottom-1};}')
+                                      assert info['withinCard'] and info['belowPrice'], info
+                                      previews.append(info)
+                                  assert previews, 'Expected the other 160/118 T-Roc in similar offers'
+                                  if name=='white':
+                                      chip=page.locator('[data-recycling-power-chip="true"]').first
+                                      chip.scroll_into_view_if_needed()
+                                      page.screenshot(path=f'artifacts/previews-{theme}-{width}.png')
+                                  results.append({'car':name,'theme':theme,'width':width,'powerLabel':label,'pairedExpected':borderline,'pageOverflow':False,'feeHelpWorks':True,'previewChips':len(previews),'pageErrors':errors})
+                                  Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+                                  print(json.dumps(results[-1],ensure_ascii=False),flush=True)
+                              except Exception as error:
+                                  Path('artifacts/failure.json').write_text(json.dumps({'car':name,'theme':theme,'width':width,'error':str(error),'pageErrors':errors,'requestFailures':failed},ensure_ascii=False,indent=2))
+                                  page.screenshot(path='artifacts/failure.png')
+                                  Path('artifacts/failure.html').write_text(page.content())
+                                  raise
+                              finally: page.close()
               finally: browser.close()
           assert len(results)==18
           PY
