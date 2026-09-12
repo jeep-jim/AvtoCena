@@ -21,12 +21,49 @@ jobs:
           node-version: '22'
           cache: npm
       - name: Apply guarded source edits on this branch only
-        run: python3 scripts/apply-recycling-power-ui.py
+        run: |
+          python3 scripts/apply-recycling-power-ui.py
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/components/catalog/InlineOfferParameters.tsx')
+          text = path.read_text()
+          edits = [
+            ('  if(!open)return;\n', ''),
+            ('if(!ref.current?.contains(event.target as Node) && ref.current)', 'if(ref.current?.open && !ref.current.contains(event.target as Node))'),
+            ('if(event.key==="Escape" && ref.current){', 'if(event.key==="Escape" && ref.current?.open){'),
+            (' },[open]);', ' },[]);'),
+          ]
+          for old, new in edits:
+              if text.count(old) != 1:
+                  raise RuntimeError('Editor event anchor changed: ' + old)
+              text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
       - run: npm ci
       - name: Typecheck existing application and engine
         run: npm run typecheck
-      - name: Test source power and customer parameter boundaries
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts
+      - name: Test source power and related customer and customs regressions
+        run: |
+          mapfile -t related < <(find tests -maxdepth 1 -type f \( -name '*customer*test.ts' -o -name '*combustion*test.ts' -o -name '*russia-customs*test.ts' \) | sort)
+          printf '%s\n' "${related[@]}"
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts "${related[@]}"
+      - name: Check published T-Roc inputs against the new presentation helper
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          import { recyclingPowerInfo } from './apps/web/lib/catalog/recycling-power.ts';
+          const path = 'artifacts/recycling-power/production-input.json';
+          if (fs.existsSync(path)) {
+            const rows = JSON.parse(fs.readFileSync(path, 'utf8'));
+            for (const row of rows) {
+              const info = recyclingPowerInfo(row);
+              if (row.powerHp === 160 && row.powerKw === 118) assert.equal(info?.borderline, true);
+              if (row.powerHp === 150 && row.powerKw === 110) assert.equal(info?.borderline, false);
+            }
+            console.log('Verified public source inputs:', rows.length);
+          }
+          JS
       - name: Install isolated browser test dependency
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
@@ -45,6 +82,7 @@ jobs:
           - Пограничные M1 с ДВС: `160 л.с. / 118 кВт` внутри существующего чипа и поля мощности. Стрелка курса не изменена.
           - Пояснение добавлено в раскрытие мощности и существующую структуру цены; N1, EV и гибриды не классифицируются по этому предупреждению.
           - Форма сохраняет исходные кВт при смене года/объёма; редактирование л.с. очищает прежние кВт, сброс возвращает исходные данные.
+          - Закрытие редактора не перехватывает первый тап на сбросе; Escape работает без ожидания события toggle.
           - Проверки ветки: TypeScript, тесты порога и параметров, изолированный браузерный стенд компонентов в двух темах на 320/360/390/414/768/1280 px. Тарифные коэффициенты не менялись.
           - Статус публикации подтверждается отдельно по деплою и живым карточкам.
 
