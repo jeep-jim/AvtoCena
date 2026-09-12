@@ -48,7 +48,7 @@ type CoefficientRow = { maxKw: number; newVehicle: number; usedVehicle: number }
 const UTILIZATION_BASE_RUB = 20_000;
 const VAT_RATE_2026 = 0.22;
 const EV_IMPORT_DUTY_RATE = 0.15;
-const PERSONAL_COMBUSTION_LIMIT_KW = 117.68;
+export const PERSONAL_COMBUSTION_LIMIT_KW = 117.68;
 const PERSONAL_COMBUSTION_LIMIT_CC = 3_000;
 const PERSONAL_ELECTRIC_LIMIT_KW = 58.84;
 

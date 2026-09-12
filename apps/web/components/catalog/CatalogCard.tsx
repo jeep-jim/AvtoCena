@@ -1,3 +1,6 @@
+import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
+import { RecyclingPowerLabel } from "./RecyclingPower";
+import powerStyles from "./RecyclingPower.module.css";
 import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { hasModificationSelection } from "@/lib/catalog/modification-contract";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
@@ -42,6 +45,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
   const powerScenario = readCatalogPowerScenario(normalizedOffer);
+  const powerInfo = powerScenario ? null : recyclingPowerInfo(normalizedOffer);
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
@@ -87,7 +91,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
           {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
-          <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
+          <div className={`${powerInfo?.borderline ? powerStyles.wrapChips : ""} flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
             {powerScenario
@@ -95,7 +99,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
               : isElectrified && o.powerKw
               ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerKw} кВт</span></span>
               : o.powerHp
-              ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
+              ? <span className={`${tagClass} ${powerInfo?.borderline ? powerStyles.warningChip : ""}`} title={powerInfo?.reason} data-recycling-power-chip={powerInfo?.borderline || undefined}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={`${o.powerHp} л.с.`} info={powerInfo} showKw={Boolean(powerInfo?.borderline)} /></span>
               : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}
