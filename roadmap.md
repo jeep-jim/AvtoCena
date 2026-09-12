@@ -1,3 +1,13 @@
+## 2026-09-12 — Европа опубликована и проверена; следующий отдельный рынок — Грузия
+
+- Europe full rebuild [34661713161](https://github.com/jeep-jim/AvtoCena/actions/runs/34661713161) завершён SUCCESS: collect 103465449664, publish 103469606357. Публикация 01:18:04 UTC, поколение `gen_1789175112106_f45d4013`, cursor committed.
+- Europe published **16 794**: mobile.de 9 969, AutoScout 6 825; ready 12 830, needs_data 3 964. Fresh collected: mobile.de 17 518 / source_finished; AutoScout 3 444 / list_failed. sourceCoverageComplete=false: зелёный цикл не означает полный охват.
+- Финальный аудит 01:18:10 UTC: total 43 331, ready 13 951, needs_data 29 380, invalidReady **0**, invalidSpecifications **0**. Остальные рынки: China 3 193, Korea 12 908, UAE 451, Georgia 8 138, Japan 1 847.
+- Maintenance 00:58:39 UTC ДО публикации: deleted 206, bytes 15 229 505 495 → 11 726 811 078; защищены текущий UAE и rollback Korea. Это не измерение размера после публикации.
+- Marker запрашивает только свежую Georgia: AutoPapa и MyAuto внутри рынка одновременно, resetCursors=true, без reuseRunId. Лимиты, проверки расчётов, сохранение raw/таблиц, retention и storage gates не ослаблены; Япония не меняется. remainingMarkets=[] — только документация, не автоматическая цепочка.
+- [PR922](https://github.com/jeep-jim/AvtoCena/pull/922) merged `143ac724a2ab66446b6a738ec92ee396aacbef79` после полного CI 34666343457 SUCCESS на exact head f1e731c209bdb13b0a98af93ed104c431f67661e. Постоянная заглушка Dongchedi заменена обычным публичным запросом. Поддержка JSON-LD проверена синтетическими fixtures, не реальным доступным inventory payload. Che168 возвращает access challenge; Dongchedi /usedcar перенаправляет на login-required. Доступ и массовый China сбор НЕ восстановлены.
+- Причина UAE 451 также включает собственную квоту: 1 456 кандидатов после identity → минус 1 005 power_mix_80_20. У 235 сопоставленных свежих исключённых подтверждено source powerHp >160; это не доказательство актуальности/полного расчёта всех 1 005. Квота была прямо запрошена владельцем; здесь не отключается. Китай/ОАЭ и SEO PR917 остаются незавершёнными.
+
 ## 2026-09-12 — Dongchedi: реальный запрос вместо заглушки; проверены Che168 и потери ОАЭ
 
 - По прямому поручению владельца из production registry убрана постоянная заглушка Dongchedi. Новый адаптер делает обычный GET публичного `/usedcar`, без авторизации, выполнения JavaScript, cookies и альтернативных маршрутов после отказа. Login redirect и реальный challenge дают blocked; пустая/неизвестная HTML-схема даёт ошибку парсера, не успешный пустой рынок. Поддержка стандартных JSON-LD Car/Vehicle с URL конкретного usedcar и ценой CNY проверена только синтетическими контрактными тестами, НЕ успешным живым сбором Dongchedi.

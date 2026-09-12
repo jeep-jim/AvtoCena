@@ -1,12 +1,10 @@
 {
-  "mode": "owner-requested-europe-next-single-market",
+  "mode": "owner-requested-georgia-next-single-market",
   "publishMarkets": [
-    "europe"
-  ],
-  "reason": "Owner-approved sequential queue: UAE 34657420245 completed publication and final audit with 0 invalidReady but both sources stopped blocked. Start only fresh Europe with mobile.de and AutoScout, unchanged limits and quality/retention/storage gates. Preserve other markets including Japan. Georgia follows as its own supervised cycle; no simultaneous market runs.",
-  "remainingMarkets": [
     "georgia"
   ],
-  "requestedAt": "2026-09-12T00:24:00Z",
+  "reason": "Owner-approved sequential queue: Europe 34661713161 completed publication and final audit with 0 invalidReady. Start only fresh Georgia with AutoPapa and MyAuto, unchanged limits and quality/retention/storage gates. Preserve all other markets including Japan. China access and UAE assortment losses remain unresolved and are not accepted as complete coverage.",
+  "remainingMarkets": [],
+  "requestedAt": "2026-09-12T02:08:37.119Z",
   "resetCursors": true
 }
