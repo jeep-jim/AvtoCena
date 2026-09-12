@@ -51,13 +51,6 @@ class RestrictedRequiredSourceAdapter implements CatalogSourceAdapter {
   }
 }
 
-export const dongchediRestrictedSource = new RestrictedRequiredSourceAdapter({
-  sourceId: "dongchedi_china_open",
-  market: "china",
-  reason: "dongchedi_public_inventory_requires_login_or_permitted_partner_feed",
-  observedHttpStatus: 200,
-});
-
 export const auctionDataSearchRestrictedSource = new RestrictedRequiredSourceAdapter({
   sourceId: "auctiondatasearch_japan_open",
   market: "japan",
@@ -80,7 +73,6 @@ export const prestigeJapanRestrictedSource = new RestrictedRequiredSourceAdapter
 });
 
 export const restrictedRequiredSources: CatalogSourceAdapter[] = [
-  dongchediRestrictedSource,
   auctionDataSearchRestrictedSource,
   jpCenterRestrictedSource,
   prestigeJapanRestrictedSource,

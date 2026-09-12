@@ -3,13 +3,11 @@ import test from "node:test";
 import { catalogImportSources } from "../apps/web/lib/catalog/importer";
 import {
   auctionDataSearchRestrictedSource,
-  dongchediRestrictedSource,
   jpCenterRestrictedSource,
   prestigeJapanRestrictedSource,
 } from "../apps/web/lib/catalog/restricted-required-sources";
 
 const expected = [
-  [dongchediRestrictedSource, "dongchedi_public_inventory_requires_login_or_permitted_partner_feed"],
   [auctionDataSearchRestrictedSource, "auctiondatasearch_search_and_statistics_require_login_or_permitted_partner_feed"],
   [jpCenterRestrictedSource, "jpcenter_exact_vehicle_price_and_full_gallery_require_login_or_permitted_partner_feed"],
   [prestigeJapanRestrictedSource, "prestige_exact_auction_details_are_robots_disallowed_and_turnstile_blocked_partner_feed_required"],
