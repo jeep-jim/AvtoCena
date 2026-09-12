@@ -42,7 +42,10 @@ await page.keyboard.press('Escape');assert.equal(await summary.evaluate(el=>el.p
 await page.getByText('Структура цены',{exact:true}).click();const help=page.locator('[data-recycling-fee-help] > summary').first();await help.focus();await page.keyboard.press('Enter');assert.equal(await help.evaluate(el=>el.parentElement.open),true);
 await page.locator('summary[aria-label^="Дата выпуска:"]').click();await page.getByRole('spinbutton',{name:'Год выпуска',exact:true}).fill('2025');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'118');
 await summary.click();await page.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'');assert.equal(await summary.locator('[data-recycling-power="paired"]').count(),0);
-await page.getByRole('button',{name:'Вернуть исходные данные'}).click();assert.equal(await summary.locator('[data-recycling-power="paired"]').count(),1);
+await page.getByRole('button',{name:'Вернуть исходные данные'}).click();
+// A click dispatches the React update; wait for the committed DOM, not just the event.
+await summary.locator('[data-recycling-power="paired"]').waitFor({state:'visible',timeout:5000});
+assert.equal(await summary.locator('[data-recycling-power="paired"]').count(),1);
 assert.deepEqual(errors,[]);metrics.push({theme,width,overflow:false,arrowOverlap:false,pairedPowerVisible:true,yearEditPreservesKw:true,hpEditClearsKw:true,resetRestoresKw:true});await page.close();
 }
 fs.writeFileSync(`${out}/results.json`,JSON.stringify(metrics,null,2));console.log(JSON.stringify({cases:metrics.length,results:metrics},null,2));
