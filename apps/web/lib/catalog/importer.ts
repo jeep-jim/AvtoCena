@@ -42,6 +42,7 @@ import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
 import { restrictedRequiredSources } from "./restricted-required-sources";
+import { dongchediPublicSource } from "./dongchedi-public-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
@@ -117,6 +118,7 @@ const completeSources = [
   kcarKoreaExactSource,
   kbChaChaChaExactSource,
   ...restrictedRequiredSources,
+  dongchediPublicSource,
 ];
 
 for (const replacement of completeSources) {
