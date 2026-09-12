@@ -1,0 +1,215 @@
+{
+  "validatedAt": "2026-09-12T10:05:16.698Z",
+  "unique": 29,
+  "acceptedEvidence": 16,
+  "rejectedEvidence": 13,
+  "published": 0,
+  "ready": 0,
+  "accepted": [
+    {
+      "id": "58265100",
+      "price": 85800,
+      "cc": 1395,
+      "hp": 150,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "58328510",
+      "price": 76800,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "58869635",
+      "price": 76600,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "58930544",
+      "price": 95800,
+      "cc": 1395,
+      "hp": 150,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59150223",
+      "price": 136800,
+      "cc": 1498,
+      "hp": 160,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59167276",
+      "price": 189800,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59217800",
+      "price": 68000,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59384755",
+      "price": 79800,
+      "cc": 1498,
+      "hp": 160,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59446032",
+      "price": 166800,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59520388",
+      "price": 83900,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59548353",
+      "price": 92800,
+      "cc": 1395,
+      "hp": 150,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59712290",
+      "price": 82800,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59838189",
+      "price": 158000,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59859616",
+      "price": 428000,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "utilization_power_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59875559",
+      "price": 83800,
+      "cc": 1395,
+      "hp": 150,
+      "reasons": [
+        "production_date_unconfirmed",
+        "publication_calculation_not_run"
+      ]
+    },
+    {
+      "id": "59880672",
+      "price": 69800,
+      "reasons": [
+        "production_date_unconfirmed",
+        "engine_cc_missing",
+        "publication_calculation_not_run"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "id": "58826081",
+      "reason": "che168_mobile_table_unbound"
+    },
+    {
+      "id": "59119079",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59251062",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59256314",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59289992",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59462179",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59520531",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59818878",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59838423",
+      "reason": "che168_mobile_table_unbound"
+    },
+    {
+      "id": "59846189",
+      "reason": "che168_mobile_gallery_unbound"
+    },
+    {
+      "id": "59851546",
+      "reason": "che168_mobile_table_unbound"
+    },
+    {
+      "id": "59883742",
+      "reason": "che168_mobile_title_mismatch"
+    },
+    {
+      "id": "59891163",
+      "reason": "che168_mobile_cash_price_unconfirmed"
+    }
+  ]
+}
