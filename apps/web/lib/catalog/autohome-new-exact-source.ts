@@ -1,4 +1,5 @@
 import { captureSourceTable } from "./source-table-capture";
+import { AUTOHOME_NEW_MIN_YEAR } from "./source-inventory-scope";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { stableOfferId } from "./storage";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -396,7 +397,7 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutohomeNewListRow;
-    if (!row?.specId || !row.trimTitle || !row.year || row.year < 2025 || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
+    if (!row?.specId || !row.trimTitle || !row.year || row.year < AUTOHOME_NEW_MIN_YEAR || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
     const semanticEvidence = autohomeNewSpecificationEvidence({ listingYear: row.year });
     if (semanticEvidence.year.status !== "exact") return null;
     const now = new Date().toISOString();

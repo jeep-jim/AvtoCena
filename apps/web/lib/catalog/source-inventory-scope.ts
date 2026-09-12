@@ -1,6 +1,6 @@
 import type { VehicleOffer } from './types';
 
-export const AUTOHOME_NEW_MIN_YEAR = 2025;
+export const AUTOHOME_NEW_MIN_YEAR = 2026;
 
 /** Autohome is a new-model catalog, never the used-car inventory of China. */
 export function sourceInventoryInScope(offer: Partial<VehicleOffer>): boolean {

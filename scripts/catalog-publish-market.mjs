@@ -472,9 +472,11 @@ for (const offer of canonicalTargetPreview.quota.removed) auditedRemovals.set(of
 for (const pair of canonicalTargetPreview.deduplicated.removed)
   if (nextIds.has(pair.keptId)) auditedRemovals.set(pair.removedId, `canonical:duplicate:${pair.keptId}`);
 for (const offer of canonicalTargetPreview.powerMix.removed) auditedRemovals.set(offer.id, "canonical:power_mix_80_20");
+for (const offer of canonicalTargetPreview.sourceShare.removed) auditedRemovals.set(offer.id, "canonical:autohome_2026_share_10_percent");
 const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
+  sourceShare: canonicalTargetPreview.sourceShare.report,
   powerMix: canonicalTargetPreview.powerMix.report,
   auditedRemovals: currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).map(offer=>({id:offer.id,reason:auditedRemovals.get(offer.id)||"unexplained"})),
   generated:generatedCandidateCount, retained:currentRetainedRows.length, candidates:orderedCandidates.length,
@@ -656,6 +658,7 @@ const report = {
     note:"Named groups may be listing fields; their presence is not proof of a complete manufacturer specification.",
   },
   publishedMarketCount,
+  sourceShare: canonicalTargetPreview.sourceShare.report,
   powerMix: canonicalTargetPreview.powerMix.report,
   addedCount: publishedMarketCount - previousPublicCount,
   shortage: Math.max(0, targetPerMarket - publishedMarketCount),

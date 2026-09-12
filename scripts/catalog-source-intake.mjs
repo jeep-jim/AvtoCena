@@ -7,6 +7,7 @@ if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw 
 process.env.CATALOG_REBUILD_MARKET=market;
 process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
 const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
+const {AUTOHOME_NEW_MIN_YEAR}=await import('../apps/web/lib/catalog/source-inventory-scope.ts');
 const {REQUIRED_CATALOG_SOURCES}=await import('../apps/web/lib/catalog/required-catalog-sources.ts');
 const {sourceListingSnapshot}=await import('../apps/web/lib/catalog/source-listing-snapshot.ts');
 const {untranslatedSpecificationFields}=await import('../apps/web/lib/catalog/specification-display.ts');
@@ -44,7 +45,7 @@ function checkpoint() {
 }
 await checkpoint();
 await collectSourceStates(states,state=>({market,deadline,maxRows:100000,maxPages:2000,detailConcurrency:4,
-      minYear:state.sourceId==='autohome_new_china_open'?2025:market==='japan'?2010:new Date().getUTCFullYear()-6,
+      minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
       snapshot:sourceListingSnapshot,checkpoint,
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
