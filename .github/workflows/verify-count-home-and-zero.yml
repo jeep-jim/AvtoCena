@@ -1,0 +1,99 @@
+name: Verify home and zero-result counters
+on:
+  push:
+    branches: [verify/catalog-result-count-20260912]
+    paths: ['.github/workflows/verify-count-home-and-zero.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright==1.55.0
+      - name: Read-only additional count checks (prior no-match timeout remains recorded)
+        run: |
+          mkdir -p artifacts
+          python - <<'PY'
+          import json, re, shutil, urllib.request
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          with urllib.request.urlopen('https://avtocena.com/api/health',timeout=20) as r: health=json.load(r)
+          assert health.get('ok') is True and health.get('releaseSha')=='68af62690b97bb4e6a1ae3e3d6f3a8eeb442f845',health
+          Path('artifacts/health.json').write_text(json.dumps(health,indent=2))
+          # Run 34688731261 passed 20 catalog/filtered UI cases, then the unrecognized-model
+          # request timed out. This supplements that result; it does not change the old result.
+          pages=[('home','https://avtocena.com/'),('zero','https://avtocena.com/cars?market=china&budget=1')]
+          results=[]; failures=[]
+          def formatted(n): return format(n,',').replace(',','\u00a0')
+          with sync_playwright() as p:
+              browser=p.chromium.launch(executable_path=shutil.which('google-chrome') or shutil.which('chromium'),headless=True,args=['--no-sandbox'])
+              try:
+                  for name,url in pages:
+                      print('CHECK',name,url,flush=True)
+                      context=browser.new_context(viewport={'width':390,'height':900},service_workers='block')
+                      page=context.new_page(); errors=[]
+                      page.on('pageerror',lambda e: errors.append(str(e)))
+                      page.route('**/*',lambda route: route.continue_() if route.request.method in ['GET','HEAD'] else route.abort())
+                      try:
+                          response=page.goto(url,wait_until='domcontentloaded',timeout=45000)
+                          assert response and response.status==200,(name,'HTTP')
+                          page.wait_for_function('''() => {const h=document.querySelector('.ac-public-header');return h&&[...h.querySelectorAll('button')].some(b=>Object.keys(b).some(k=>k.startsWith('__reactProps$')));}''',timeout=30000)
+                          page.wait_for_timeout(600)
+                          cookie=page.locator('[role="dialog"][aria-labelledby="avtocena-cookie-title"]')
+                          if cookie.is_visible(): cookie.get_by_role('button',name='Понятно',exact=True).click()
+                          for theme in ['dark','light']:
+                              for width in [320,390,768,1280,1920]:
+                                  page.set_viewport_size({'width':width,'height':900})
+                                  page.evaluate('(theme)=>{document.documentElement.dataset.theme=theme;window.scrollTo(0,0)}',theme)
+                                  page.wait_for_timeout(180)
+                                  if name=='home':
+                                      dot=page.locator('#form .ac-pulse-dot--status').first
+                                      count=dot.locator('..'); text=count.inner_text()
+                                      match=re.search(r'Нашли\s+([\d\s\u00a0]+)\s+вариантов',text)
+                                      assert match, text
+                                      raw=int(re.sub(r'\s','',match.group(1)))
+                                      assert match.group(1).strip()==formatted(raw),text
+                                      for value in page.locator('.ac-home-page h3 > span:last-child').all_text_contents():
+                                          if value.strip().startswith('·'):
+                                              number=value.strip()[1:].strip()
+                                              assert number==formatted(int(re.sub(r'\s','',number))),value
+                                  else:
+                                      count=page.locator('[data-catalog-result-count]')
+                                      assert count.count()==1
+                                      raw=int(count.get_attribute('data-catalog-result-count'))
+                                      text=count.inner_text()
+                                      assert raw==0 and count.locator('[data-catalog-result-value]').inner_text()=='0',text
+                                      dot=count.locator('.ac-pulse-dot--status')
+                                  assert count.is_visible() and dot.is_visible(),(name,theme,width,'visibility')
+                                  geometry=count.evaluate('el=>{const b=el.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom};}')
+                                  assert geometry['left']>=-1 and geometry['right']<=width+1,(name,theme,width,geometry)
+                                  if name=='zero':
+                                      header=page.locator('.ac-public-header').bounding_box()
+                                      assert geometry['top']>=header['y']+header['height']-1 and geometry['bottom']<900,geometry
+                                  style=dot.locator(':scope > span').evaluate('el=>({color:getComputedStyle(el).backgroundColor,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})')
+                                  assert style['color']=='rgb(255, 53, 61)' and style['width']>=8 and style['height']>=8,style
+                                  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),(name,theme,width,'overflow')
+                                  if width in [390,1280]: page.screenshot(path=f'artifacts/{name}-{theme}-{width}.png',timeout=15000)
+                                  item={'page':name,'theme':theme,'width':width,'count':raw,'text':text,'redDot':True,'visible':True,'groupedThousands':True,'pageErrors':list(errors)}
+                                  results.append(item)
+                                  Path('artifacts/results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+                                  print(json.dumps(item,ensure_ascii=False),flush=True)
+                      except Exception as e:
+                          failures.append({'page':name,'error':str(e),'pageErrors':errors})
+                          Path('artifacts/failures.json').write_text(json.dumps(failures,ensure_ascii=False,indent=2))
+                          try: page.screenshot(path=f'artifacts/failure-{name}.png',timeout=5000)
+                          except Exception: pass
+                      finally: context.close()
+              finally: browser.close()
+          assert not failures and len(results)==20,failures
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-counter-home-zero
+          path: artifacts
+          retention-days: 7
