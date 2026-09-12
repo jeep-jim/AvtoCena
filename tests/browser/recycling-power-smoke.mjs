@@ -28,11 +28,25 @@ await page.route('**/api/catalog/offer/qa-118/calculate',async route=>{requests.
 await page.goto(`${origin}/?theme=${theme}`);await page.locator('[data-recycling-power="paired"]').first().waitFor();
 assert.equal(await page.locator('[data-recycling-power="paired"]').count(),3);
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`page overflow ${theme}/${width}`);
-for(const unit of await page.locator('[data-recycling-power="paired"] > span').all()){
-const b=await unit.boundingBox();assert.ok(b&&b.x>=-1&&b.x+b.width<=width+1,`power text clipped ${theme}/${width}`);
+// Detail power stays fully visible. Preview overflow is intentionally clipped by its rail.
+for(const unit of await page.locator('summary [data-recycling-power="paired"] > span').all()){
+const b=await unit.boundingBox();assert.ok(b&&b.x>=-1&&b.x+b.width<=width+1,`detail power text clipped ${theme}/${width}`);
 }
 for(const chip of await page.locator('[data-recycling-power-chip]').all()){
 const boxes=await chip.evaluate(el=>{const a=el.closest('article').querySelector('[data-price-arrow]').getBoundingClientRect();const b=el.getBoundingClientRect();return {arrowBottom:a.bottom,chipTop:b.top};});assert.ok(boxes.chipTop>=boxes.arrowBottom,`arrow overlap ${theme}/${width}`);
+const rail=await chip.evaluate(el=>{
+  const row=el.parentElement; const style=getComputedStyle(row);
+  const tops=[...row.children].map(child=>child.getBoundingClientRect().top);
+  const units=[...el.querySelectorAll('[data-recycling-power] > span')].map(child=>child.getBoundingClientRect());
+  const singleLine=Math.max(...tops)-Math.min(...tops)<1 && Math.abs(units[0].top-units[1].top)<1;
+  row.scrollLeft=row.scrollWidth;
+  const reachable=el.getBoundingClientRect().right<=row.getBoundingClientRect().right+1;
+  row.scrollLeft=0;
+  return {wrap:style.flexWrap,overflow:style.overflowX,singleLine,reachable,noVerticalOverflow:row.scrollHeight<=row.clientHeight+1};
+});
+assert.equal(rail.wrap,'nowrap',`preview chips wrapped ${theme}/${width}`);
+assert.equal(rail.overflow,'auto',`preview rail differs from ordinary chips ${theme}/${width}`);
+assert.ok(rail.singleLine&&rail.reachable&&rail.noVerticalOverflow,`preview chip geometry ${theme}/${width}: ${JSON.stringify(rail)}`);
 }
 const summary=page.locator('summary[aria-label^="Мощность:"]');
 const s=await summary.boundingBox();const text=await summary.locator('[data-recycling-power]').boundingBox();assert.ok(s&&text&&text.y>=s.y&&text.y+text.height<=s.y+s.height,`power tile height overflow ${theme}/${width}`);
@@ -46,7 +60,7 @@ await page.getByRole('button',{name:'Вернуть исходные данны�
 // A click dispatches the React update; wait for the committed DOM, not just the event.
 await summary.locator('[data-recycling-power="paired"]').waitFor({state:'visible',timeout:5000});
 assert.equal(await summary.locator('[data-recycling-power="paired"]').count(),1);
-assert.deepEqual(errors,[]);metrics.push({theme,width,overflow:false,arrowOverlap:false,pairedPowerVisible:true,yearEditPreservesKw:true,hpEditClearsKw:true,resetRestoresKw:true});await page.close();
+assert.deepEqual(errors,[]);metrics.push({theme,width,overflow:false,arrowOverlap:false,previewSingleLine:true,previewOverflowClipped:true,detailPowerVisible:true,yearEditPreservesKw:true,hpEditClearsKw:true,resetRestoresKw:true});await page.close();
 }
 fs.writeFileSync(`${out}/results.json`,JSON.stringify(metrics,null,2));console.log(JSON.stringify({cases:metrics.length,results:metrics},null,2));
 }finally{await browser.close();await new Promise(r=>server.close(r));}
