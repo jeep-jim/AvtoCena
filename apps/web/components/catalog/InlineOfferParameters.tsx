@@ -3,6 +3,7 @@
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel, RecyclingPowerExplanation, RecyclingFeeHelp } from "./RecyclingPower";
 import powerStyles from "./RecyclingPower.module.css";
+import editorStyles from "./InlineParameterPanels.module.css";
 import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
@@ -30,19 +31,43 @@ function EngineIcon() {
 }
 function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{label:string;value:string;valueNode?:ReactNode;warning?:boolean;icon:ReactNode;children:ReactNode;wide?:boolean}) {
  const ref=useRef<HTMLDetailsElement>(null);
- const [open,setOpen]=useState(false);
+ const id=useId();
+ const closeAndFocus=()=>{
+  if(ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus();}
+ };
  useEffect(()=>{
+  // Close on click, never pointerdown/focusin: collapsing before pointerup can
+  // move an outside reset button and swallow the customer's first activation.
   const close=(event:MouseEvent)=>{if(ref.current?.open && !ref.current.contains(event.target as Node))ref.current.open=false;};
-  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape" && ref.current?.open){ref.current.open=false;ref.current.querySelector("summary")?.focus();}};
+  const escape=(event:KeyboardEvent)=>{
+   if(event.key==="Escape" && ref.current?.open){event.preventDefault();ref.current.open=false;ref.current.querySelector("summary")?.focus();}
+  };
   document.addEventListener("click",close);document.addEventListener("keydown",escape);
   return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);};
  },[]);
- return <div className={`relative min-w-0 ${wide?"col-span-2":""}`} style={{height:50,zIndex:open?60:undefined}}>
-  <details ref={ref} onToggle={e=>setOpen(e.currentTarget.open)} className="ac-attached-editor group absolute inset-x-0 top-0 overflow-hidden rounded-2xl bg-[var(--ac-surface-2)]">
-   <summary aria-label={`${label}: ${value}`} className={`flex h-12 cursor-pointer list-none items-center gap-3 py-2 pl-4 pr-4 text-left [&::-webkit-details-marker]:hidden ${valueNode ? powerStyles.powerTile : ""} ${warning ? powerStyles.warningTile : ""}`}>
+ return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`}>
+  <details ref={ref} data-parameter-editor className={`${editorStyles.editor} ac-attached-editor group rounded-2xl bg-[var(--ac-surface-2)]`}>
+   <summary id={`${id}-trigger`} aria-controls={`${id}-panel`} aria-label={`${label}: ${value}`} onClick={event=>{
+    event.preventDefault();
+    const current=ref.current;
+    if(!current)return;
+    const next=!current.open;
+    if(next){
+     current.closest("[data-parameter-editor-grid]")?.querySelectorAll<HTMLDetailsElement>("details[data-parameter-editor][open]").forEach(other=>{if(other!==current)other.open=false;});
+    }
+    current.open=next;
+   }} className={`flex h-12 cursor-pointer list-none items-center gap-3 py-2 pl-4 pr-4 text-left [&::-webkit-details-marker]:hidden ${valueNode ? powerStyles.powerTile : ""} ${warning ? powerStyles.warningTile : ""}`}>
     <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{valueNode ?? value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
    </summary>
-   <div className="ac-attached-editor-body space-y-3 overflow-y-auto p-4" style={{maxHeight:"min(360px,55dvh)",overscrollBehavior:"contain"}}>{children}</div>
+   <div id={`${id}-panel`} data-parameter-panel role="region" aria-labelledby={`${id}-trigger`} className={editorStyles.panel}>
+    <div className={editorStyles.panelHeader}>
+     <span className="text-sm font-bold">{label}</span>
+     <button type="button" className={editorStyles.close} aria-label={`Закрыть: ${label}`} onClick={closeAndFocus}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+     </button>
+    </div>
+    <div className={`${editorStyles.body} ac-attached-editor-body space-y-3 overflow-y-auto p-4`}>{children}</div>
+   </div>
   </details>
  </div>;
 }
@@ -83,7 +108,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
    {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
   </div>}
   {!dirty && autoCalculate && !result ? <p role="status" className="mt-2 text-xs text-[var(--ac-muted)]">{pending?"Рассчитываем по данным объявления…":error}</p> : null}
-  <div className="mt-4 grid grid-cols-2 items-start gap-2.5">
+  <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     {field("year","Год выпуска",Array.from({length:30},(_,i)=>new Date().getFullYear()-i),1990,new Date().getFullYear()+1)}
     {field("productionDay","День выпуска (если известен)",[],1,31)}
