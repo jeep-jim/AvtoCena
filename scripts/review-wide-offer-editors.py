@@ -15,14 +15,14 @@ fragment = '''function Tile({label,value,valueNode,warning=false,icon,children,w
   if(ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus();}
  };
  useEffect(()=>{
-  // Click keeps the first outside tap available to the reset button.
+  // Close on click, never pointerdown/focusin: collapsing before pointerup can
+  // move an outside reset button and swallow the customer's first activation.
   const close=(event:MouseEvent)=>{if(ref.current?.open && !ref.current.contains(event.target as Node))ref.current.open=false;};
   const escape=(event:KeyboardEvent)=>{
    if(event.key==="Escape" && ref.current?.open){event.preventDefault();ref.current.open=false;ref.current.querySelector("summary")?.focus();}
   };
-  const blur=(event:FocusEvent)=>{if(ref.current?.open && !ref.current.contains(event.target as Node))ref.current.open=false;};
-  document.addEventListener("click",close);document.addEventListener("keydown",escape);document.addEventListener("focusin",blur);
-  return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);document.removeEventListener("focusin",blur);};
+  document.addEventListener("click",close);document.addEventListener("keydown",escape);
+  return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);};
  },[]);
  return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`}>
   <details ref={ref} data-parameter-editor className={`${editorStyles.editor} ac-attached-editor group rounded-2xl bg-[var(--ac-surface-2)]`}>
