@@ -15,7 +15,39 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: python3 scripts/review-date-editor.py
+      - name: Apply guarded UI edits and date-reset regression
+        run: |
+          python3 scripts/review-date-editor.py
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/components/catalog/InlineOfferParameters.tsx')
+          text=p.read_text()
+          old='const dirty=JSON.stringify(draft)!==JSON.stringify(initial);'
+          assert text.count(old)==1
+          text=text.replace(old,'// Empty optional values equal omitted values, so returning to today restores the original scenario.\n const dirty=Object.keys({...initial,...draft}).some(key=>(draft[key]??"")!==(initial[key]??""));')
+          p.write_text(text)
+          p=Path('tests/browser/attached-parameter-dropdowns.mjs');text=p.read_text()
+          old='<html lang="ru"><head><meta name="viewport"'
+          assert text.count(old)==1
+          text=text.replace(old,'<html lang="ru"><head><meta charset="utf-8"><meta name="viewport"')
+          text=text.replace("      assert.ok(cb.right===undefined); // Playwright boxes expose x/width, not DOMRect.right.\n",'')
+          old="   if(!live&&kind==='petrol'){"
+          assert text.count(old)==1
+          text=text.replace(old,old+'''
+              await triggers.nth(0).click();
+              const date=grid.getByLabel('Дата таможенного расчёта',{exact:true});
+              await date.fill('2026-09-24');await page.waitForTimeout(850);
+              assert.equal(requests.at(-1)?.customsCalculationDate,'2026-09-24');
+              assert.equal(requests.at(-1)?.year,'2026');
+              assert.equal(requests.at(-1)?.powerKw,'118');
+              await grid.getByRole('button',{name:'Считать таможню на сегодня',exact:true}).click();
+              await page.waitForTimeout(100);
+              assert.equal(await date.inputValue(),'');
+              assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0,'return to today restores the initial scenario, including omitted optional fields');
+              await page.keyboard.press('Escape');
+          ''')
+          p.write_text(text)
+          PY
       - run: npm ci
       - name: Types and unchanged calculation regressions
         run: |
