@@ -17,6 +17,11 @@ test('six-year China boundary uses month; production takes precedence over regis
   const row = offer({year:2020,operational:{registrationDate:'2021-01',raw:{detail:{infoid:123,manufacturedate:'2020-08'}}}});
   assert.equal(chinaInventoryAgeDecision(row,now).eligible,false);
   assert.equal(chinaInventoryAgeDecision(row,now).basis,'manufacture_month');
+  row.operational.raw.detail.manufacturedate='2020-08-01 00:00:00';
+  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false,'timestamp must not fall back to newer registration');
+  row.operational.raw.detail.manufacturedate='2020-09-01 00:00:00';
+  assert.equal(chinaInventoryAgeDecision(row,now).eligible,true);
+  assert.equal(chinaInventoryAgeDecision(offer({year:2019,operational:{registrationDate:'2021.09'}}),now).eligible,true,'old trim year does not discard an age-qualified detail candidate');
   assert.equal(chinaInventoryAgeDecision(offer({year:2020}),now).eligible,false);
   assert.equal(chinaInventoryAgeDecision(offer({year:2021}),now).eligible,true);
   assert.equal(chinaInventoryAgeDecision(offer({market:'japan',year:2010}),now).eligible,true);

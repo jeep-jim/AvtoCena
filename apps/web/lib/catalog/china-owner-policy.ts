@@ -6,12 +6,16 @@ export function catalogHardPriceCap(offer?: Partial<VehicleOffer>) {
   return offer?.market === 'china' ? CHINA_MAX_TOTAL_RUB : 15_000_000;
 }
 
-function monthIndex(value: unknown) {
-  const match = String(value || '').trim().match(/^((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])(?:[-/.](0?[1-9]|[12]\d|3[01]))?$/);
+export function chinaSourceProductionDate(value: unknown) {
+  const match = String(value || '').trim().match(/^((?:19|20)\d{2})[-/.](0?[1-9]|1[0-2])(?:[-/.](0?[1-9]|[12]\d|3[01]))?(?:[ T]00:00:00(?:\.000)?Z?)?$/);
   if (!match) return undefined;
   const year = Number(match[1]), month = Number(match[2]);
   if (match[3] && new Date(Date.UTC(year, month - 1, Number(match[3]))).getUTCMonth() !== month - 1) return undefined;
-  return year * 12 + month - 1;
+  return `${year}-${String(month).padStart(2,'0')}${match[3] ? `-${String(Number(match[3])).padStart(2,'0')}` : ''}`;
+}
+function monthIndex(value: unknown) {
+  const date = chinaSourceProductionDate(value);
+  return date ? Number(date.slice(0,4)) * 12 + Number(date.slice(5,7)) - 1 : undefined;
 }
 
 /** Inventory age uses the source's date, never a guessed model-year month.

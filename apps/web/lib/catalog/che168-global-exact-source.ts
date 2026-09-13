@@ -1,5 +1,6 @@
 import { che168BoundPageParameters, che168BoundApiParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
 import crypto from "node:crypto";
+import { chinaSourceProductionDate } from "./china-owner-policy";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -441,9 +442,12 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       if (pageParameters.engineCc.status === "exact") detailEngine += ` ${pageParameters.engineCc.value} cc`;
       if (pageParameters.powerHp.status === "exact") detailEngine += ` ${pageParameters.powerHp.value} hp`;
     }
+    const manufactureDate = chinaSourceProductionDate(detail.manufacturedate || detail.producedate);
+    const manufactureYear = manufactureDate ? Number(manufactureDate.slice(0,4)) : undefined;
     const evidence = che168GlobalSpecificationEvidence({
-      listingYear: offer.year,
-      detailYear,
+      // Model-year labels describe a trim; a bound manufacturing date describes this car.
+      listingYear: manufactureYear || offer.year,
+      detailYear: manufactureYear || detailYear,
       listingFuel: ((offer.operational?.raw as any)?.listing as Che168GlobalListRow | undefined)?.fuelname,
       detailFuel: detail.fuelname,
       detailEngine,
@@ -467,7 +471,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     offer.sourceTitle = title;
     offer.trim = text(detail.specname) || offer.trim;
     if (evidence.year.status === "exact" && evidence.year.value) offer.year = evidence.year.value;
-    offer.productionDate = text(detail.manufacturedate || detail.producedate) || offer.productionDate;
+    offer.productionDate = manufactureDate || offer.productionDate;
     offer.mileageKm = integer(detail.mileage) || offer.mileageKm;
     offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
     offer.powertrainKind = powertrainKindForFuel(offer.fuel, ...evidence.fuel.rawValues);
@@ -521,8 +525,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
-        productionDate: {source: "che168_global_carinfo_manufacturedate", status: text(detail.manufacturedate || detail.producedate) ? "exact" : "missing", value: text(detail.manufacturedate || detail.producedate)},
-        year: { source: "che168_global_listing_and_carinfo", ...evidence.year },
+        productionDate: {source: "che168_global_carinfo_manufacturedate", status: manufactureDate ? "exact" : "missing", value: manufactureDate},
+        year: { source: manufactureDate ? "che168_global_carinfo_manufacturedate" : "che168_global_listing_and_carinfo", ...evidence.year },
         fuel: { source: "che168_global_listing_and_carinfo", ...evidence.fuel },
         engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },
         powerHp: { source: pageParameters && tableFuelConsistent ? "che168_global_carinfo_and_bound_parameters" : "che168_global_carinfo", ...evidence.powerHp },
