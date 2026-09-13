@@ -12,14 +12,14 @@ import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicl
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { hasAllowedCatalogSourceProvenance, isCatalogMarketSourceAllowed, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, iterateOffersForMaintenance, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -505,6 +505,11 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
+const replaceInternalSourceIds = new Set([
+  ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
+  ...generation.offers.map(offer => String(offer?.sourceId || "")),
+  ...Object.keys(sourceRefreshStates),
+].filter(Boolean));
 generation.offers.length = 0;
 currentRetainedRows.length = 0;
 currentMarketRows = [];
@@ -514,25 +519,7 @@ orderedCandidates.length = 0;
 selected.length = 0;
 v2Selection.selected.length = 0;
 candidatesById.clear();
-// Internal maintenance rows obey the same provenance policy as exact public
-// preservation. A removed source/domain must not survive into the next
-// generation, while malformed rows from still-approved sources remain a hard
-// stop instead of being silently discarded.
 const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map(id => [id, 0]));
-async function* preservedInternalOffers() {
-  for await (const rows of iterateOffersForMaintenance({ excludeMarket: market })) {
-    const allowed = [];
-    for (const offer of rows) {
-      if (!isCatalogMarketSourceAllowed(offer) || !isCatalogYearAllowed(offer.year, offer.market)) {
-        purgedForbiddenInternalByMarket[offer.market]++;
-        continue;
-      }
-      if (!offer.id || !PUBLIC_CATALOG_MARKETS.includes(offer.market)) throw new Error("catalog_preserved_internal_gate_failed");
-      allowed.push(offer);
-    }
-    yield allowed;
-  }
-}
 
 const unique = new Map();
 for (const offer of selectedMarketOffers) {
@@ -573,7 +560,10 @@ if (regressionBlocked) {
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
-      preservedInternalOffers: preservedInternalOffers(),
+      // Internal chunks are immutable and the manifest protects referenced
+      // paths. Replace only this market's sources and reuse every untouched
+      // source entry without a full read/rewrite cycle.
+      replaceInternalSourceIds,
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});
