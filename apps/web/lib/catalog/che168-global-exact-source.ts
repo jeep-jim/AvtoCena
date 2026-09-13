@@ -86,6 +86,25 @@ type SearchResult = {
   carlist?: Che168GlobalListRow[];
 };
 
+type BrandPartition = { id: string; name: string };
+
+function che168BrandPartitions(payload: unknown) {
+  const found = new Map<string, BrandPartition>();
+  const visit = (value: unknown, depth = 0) => {
+    if (depth > 8 || value == null) return;
+    if (Array.isArray(value)) { for (const item of value) visit(item, depth + 1); return; }
+    if (typeof value !== "object") return;
+    const row = value as Record<string, unknown>;
+    const id = text(row.brandid ?? row.brandId ?? row.bid ?? row.id);
+    if (/^\d+$/.test(id)) found.set(id, { id, name: text(row.brandname ?? row.brandName ?? row.name ?? row.label) });
+    for (const child of Object.values(row)) if (child && typeof child === "object") visit(child, depth + 1);
+  };
+  visit(payload);
+  const preferred = /toyota|honda|nissan|volkswagen|mazda|hyundai|kia|suzuki|chevrolet|ford|geely|chery|changan|haval|gac|wuling/i;
+  return [...found.values()].sort((a, b) => Number(!preferred.test(a.name)) - Number(!preferred.test(b.name))
+    || a.name.localeCompare(b.name, "en") || Number(a.id) - Number(b.id));
+}
+
 function text(value: unknown) {
   return String(value ?? "").replace(/\s+/g, " ").trim();
 }
@@ -239,6 +258,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   private specificationApiBlocked = false;
   private specificationOptionsBlocked = false;
   private specificationCache = new Map<number, Promise<{parameters: any; options: any}>>();
+  private brandPartitionsPromise: Promise<BrandPartition[]> | null = null;
 
   private params(extra: Record<string, string | number> = {}) {
     const params = new URLSearchParams({
@@ -269,29 +289,72 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     return { response, result: parsed.result };
   }
 
+  private brandPartitions() {
+    if (!this.brandPartitionsPromise) this.brandPartitionsPromise = (async () => {
+      const params = this.params({ language: "en" });
+      try {
+        const { result } = await this.getJson<unknown>(`${API_BASE}/api/v1/brand?${params.toString()}`);
+        const partitions = che168BrandPartitions(result);
+        if (partitions.length) return partitions;
+      } catch {
+        // The unpartitioned full-inventory lane remains a safe fallback. Its
+        // health report makes the reduced coverage explicit if brand discovery
+        // is temporarily unavailable.
+      }
+      return [{ id: "", name: "all" }];
+    })();
+    return this.brandPartitionsPromise;
+  }
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
-    const page = Math.max(1, Number(cursor || 1));
-    const params = this.params({ pageindex: page, pagesize: PAGE_SIZE, sort: 0, vehicle_list: FULL_INVENTORY_LIST });
-    const url = `${API_BASE}/api/v1/search?${params.toString()}`;
-    const { response, result } = await this.getJson<SearchResult>(url);
-    const items = Array.isArray(result.carlist) ? result.carlist.filter((row) => Number(row?.infoid) > 0) : [];
-    const pageCount = Math.max(0, Number(result.pagecount || 0));
-    const totalCount = Math.max(0, Number(result.totalcount || 0));
-    const finished = !items.length || (pageCount > 0 && page >= pageCount);
-    return {
-      items,
-      nextCursor: finished ? null : String(page + 1),
-      finished,
-      count: totalCount || items.length,
-      diagnostics: { listingRows: Array.isArray(result.carlist) ? result.carlist.length : 0, rejectedRows: (Array.isArray(result.carlist) ? result.carlist.length : 0) - items.length },
-      health: {
-        ok: items.length > 0,
-        message: `Che168 Global full inventory page=${page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
-        checkedAt: new Date().toISOString(),
-        httpStatus: response.status,
-        contentType: response.headers.get("content-type") || "",
-      },
-    };
+    const partitions = await this.brandPartitions();
+    let state = { version: 2, brandIndex: 0, page: 1 };
+    if (cursor?.trim().startsWith("{")) {
+      try {
+        const parsed = JSON.parse(cursor);
+        if (Number(parsed?.version) === 2) state = {
+          version: 2,
+          brandIndex: Math.max(0, Number(parsed.brandIndex || 0)),
+          page: Math.max(1, Number(parsed.page || 1)),
+        };
+      } catch { /* restart safely from the first partition */ }
+    }
+    while (state.brandIndex < partitions.length) {
+      const partition = partitions[state.brandIndex];
+      const params = this.params({ pageindex: state.page, pagesize: PAGE_SIZE, sort: 0, vehicle_list: FULL_INVENTORY_LIST });
+      if (partition.id) params.set("brandid", partition.id);
+      const url = `${API_BASE}/api/v1/search?${params.toString()}`;
+      const { response, result } = await this.getJson<SearchResult>(url);
+      const listed = Array.isArray(result.carlist) ? result.carlist : [];
+      const items = listed.filter((row) => Number(row?.infoid) > 0);
+      const pageCount = Math.max(0, Number(result.pagecount || 0));
+      const totalCount = Math.max(0, Number(result.totalcount || 0));
+      const partitionFinished = !items.length || (pageCount > 0 && state.page >= pageCount);
+      const next = partitionFinished
+        ? { version: 2, brandIndex: state.brandIndex + 1, page: 1 }
+        : { version: 2, brandIndex: state.brandIndex, page: state.page + 1 };
+      const finished = next.brandIndex >= partitions.length;
+      if (items.length) return {
+        items,
+        nextCursor: finished ? null : JSON.stringify(next),
+        finished,
+        count: totalCount || items.length,
+        diagnostics: { listingRows: listed.length, rejectedRows: listed.length - items.length },
+        health: {
+          ok: true,
+          message: `Che168 Global full inventory brand=${partition.name || partition.id || "all"} (${state.brandIndex + 1}/${partitions.length}) page=${state.page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
+          checkedAt: new Date().toISOString(),
+          httpStatus: response.status,
+          contentType: response.headers.get("content-type") || "",
+        },
+      };
+      state = next;
+    }
+    return { items: [], finished: true, nextCursor: null, count: 0, health: {
+      ok: true,
+      message: `Che168 Global full inventory exhausted ${partitions.length} brand partitions`,
+      checkedAt: new Date().toISOString(),
+    } };
   }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
