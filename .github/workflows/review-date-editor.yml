@@ -1,0 +1,61 @@
+name: Review date editor clarity and mobile calendar
+on:
+  push:
+    branches: [fix/date-editor-clarity-20260913]
+    paths: ['scripts/review-date-editor.py', '.github/workflows/review-date-editor.yml', 'apps/web/components/catalog/CalculationDateControl.tsx']
+permissions:
+  contents: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: python3 scripts/review-date-editor.py
+      - run: npm ci
+      - name: Types and unchanged calculation regressions
+        run: |
+          npm run typecheck
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts tests/russia-customs.test.ts
+      - name: Production build
+        run: npm run build
+      - name: Browser dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/date-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          node "$RUNNER_TEMP/date-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - name: Chromium responsive date and dropdown checks
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/date-browser/node_modules/playwright/index.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+          mv artifacts/attached-parameters-local artifacts/date-chromium
+      - name: WebKit responsive date and dropdown checks
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/date-browser/node_modules/playwright/index.mjs
+          PARAMETER_BROWSER: webkit
+        run: |
+          node tests/browser/attached-parameter-dropdowns.mjs
+          mv artifacts/attached-parameters-local artifacts/date-webkit
+      - name: Commit reviewed UI changes on this branch only
+        run: |
+          test "${GITHUB_REF}" = refs/heads/fix/date-editor-clarity-20260913
+          git diff --check
+          git diff > artifacts/date-editor.patch
+          cp apps/web/components/catalog/InlineOfferParameters.tsx artifacts/InlineOfferParameters.tsx
+          cp apps/web/components/catalog/InlineParameterPanels.module.css artifacts/InlineParameterPanels.module.css
+          rm scripts/review-date-editor.py .github/workflows/review-date-editor.yml
+          git config user.name 'jeep-jim'
+          git config user.email '173029176+jeep-jim@users.noreply.github.com'
+          git add apps/web/components/catalog/InlineOfferParameters.tsx apps/web/components/catalog/InlineParameterPanels.module.css 'apps/web/app/(public)/cars/offer/[id]/page.tsx' tests/browser/attached-parameters-fixture.tsx tests/browser/attached-parameter-dropdowns.mjs roadmap.md scripts/review-date-editor.py .github/workflows/review-date-editor.yml
+          git commit -m 'fix(ui): clarify calculation date and preserve labelled seller price until quote is ready'
+          git push origin HEAD:refs/heads/fix/date-editor-clarity-20260913
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: date-editor-review
+          path: artifacts
+          retention-days: 7
