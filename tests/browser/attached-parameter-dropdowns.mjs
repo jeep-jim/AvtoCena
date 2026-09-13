@@ -40,10 +40,19 @@ async function geometry(page,trigger,panel,grid){
  const g=await grid.boundingBox(),t=await trigger.boundingBox(),b=await panel.boundingBox();
  assert.ok(g&&t&&b);
  assert.ok(Math.abs(b.x-g.x)<2&&Math.abs(b.width-g.width)<2,`must span exactly both columns ${JSON.stringify({g,t,b})}`);
- assert.ok(b.y-t.y-t.height>=-1&&b.y-t.y-t.height<=3,`dropdown must touch selected tile, not bottom of grid ${JSON.stringify({g,t,b})}`);
+ const spacing=await trigger.evaluate(el=>{
+  const tile=el.closest('[data-parameter-editor]').parentElement;
+  const rowGap=parseFloat(getComputedStyle(tile.parentElement).rowGap);
+  const pseudo=getComputedStyle(el,'::after');
+  const triggerBottom=el.getBoundingClientRect().bottom;
+  return {rowGap,tileBottom:tile.getBoundingClientRect().bottom,bridgeTop:triggerBottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:triggerBottom-parseFloat(pseudo.bottom)};
+ });
+ assert.ok(spacing.rowGap>0,'the original tile spacing must remain positive');
+ assert.ok(Math.abs(b.y-spacing.tileBottom-spacing.rowGap)<1,`dropdown must leave the same gap as the tiles, not touch its neighbour ${JSON.stringify({g,t,b,spacing})}`);
+ assert.ok(spacing.bridgeTop<=t.y+t.height+1&&spacing.bridgeBottom>=b.y,'only the active trigger must remain visually connected to its dropdown');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no page overflow');
  assert.ok(await panel.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'no panel horizontal overflow');
- return {width:b.width,height:b.height,anchorGap:b.y-t.y-t.height};
+ return {width:b.width,height:b.height,anchorGap:b.y-t.y-t.height,tileGap:b.y-spacing.tileBottom,rowGap:spacing.rowGap};
 }
 try{
  for(const [kind,url] of pages){
