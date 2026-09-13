@@ -1,0 +1,29 @@
+/* Scoped to the offer editor. Catalog cards, counts and prices are unchanged. */
+.grid { position: relative; isolation: isolate; z-index: 70; }
+.tile { height: 50px; position: static; }
+.editor { position: static !important; overflow: visible !important; }
+.editor > summary { border-radius: 1rem; }
+.editor[open] > summary { box-shadow: inset 0 0 0 1px var(--ac-muted); }
+.editor > summary:focus-visible { outline: 2px solid var(--ac-public-accent, #ff4650); outline-offset: 2px; }
+.editor:not([open]) > .panel { display: none; }
+.panel {
+ position: absolute;
+ inset-inline: 0;
+ top: calc(100% + 8px);
+ z-index: 80;
+ display: flex;
+ flex-direction: column;
+ min-width: 0;
+ max-height: min(420px, 65dvh);
+ overflow: hidden;
+ border: 1px solid var(--ac-border);
+ border-radius: 1rem;
+ background: var(--ac-surface-2);
+ color: var(--ac-text);
+ box-shadow: 0 12px 28px rgba(0,0,0,.22);
+}
+.panelHeader { display: flex; flex: none; min-height: 48px; align-items: center; justify-content: space-between; gap: 12px; padding-left: 16px; padding-right: 4px; border-bottom: 1px solid var(--ac-border); }
+.close { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--ac-muted); cursor: pointer; }
+.close:hover, .close:focus-visible { color: var(--ac-text); background: var(--ac-surface); }
+.close:focus-visible { outline: 2px solid var(--ac-public-accent, #ff4650); outline-offset: -3px; }
+.body { min-height: 0; overflow-x: hidden; overscroll-behavior: contain; overflow-wrap: anywhere; -webkit-overflow-scrolling: touch; }
