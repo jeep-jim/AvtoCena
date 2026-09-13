@@ -102,8 +102,6 @@
   html body .ac-mobile-filter-sheet .ac-range-card:has(.ac-range-value-menu.is-open) { position: relative; z-index: 480; }
   html body .ac-mobile-filter-sheet .ac-range-input-box--menu {
     flex-wrap: nowrap !important;
-    height: 44px !important;
-    min-height: 44px !important;
     overflow: visible !important;
   }
   html body .ac-mobile-filter-sheet .ac-range-value-menu {
