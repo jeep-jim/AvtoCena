@@ -49,7 +49,7 @@ const v2Policy = {
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
   priorityMaxPowerHp,
   priorityMaxTotalRub,
-  hardMaxTotalRub: Math.min(15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
+  hardMaxTotalRub: Math.min(market === "china" ? 16_000_000 : 15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || (market === "china" ? 16_000_000 : 15_000_000))),
   lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
 const publishLockPath = "catalog/import-lock.json";

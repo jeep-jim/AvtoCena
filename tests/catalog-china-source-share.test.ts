@@ -45,7 +45,8 @@ test('both public policies hold with seller unknowns, several sources and Japan'
     ...Array.from({length:25},(_,i)=>auto('a'+i))];
   const result=selectCatalogPublicationMix(rows,true);
   assert.ok(result.rows.includes(japan));
-  assert.equal(result.rows.filter(r=>r.id.startsWith('s')).length,30);
+  assert.equal(result.rows.filter(r=>r.id.startsWith('s')).length,2);
+  assert.ok(result.rows.filter(r=>r.market==='china' && catalogPowerBand(r)==='low').length / result.rows.filter(r=>r.market==='china').length >= 0.8);
   assert.ok(result.sourceShare.report.china.actualShare<=0.1);
   const band=result.powerMix.report.china as any;
   assert.ok(band.low>=4*band.high);

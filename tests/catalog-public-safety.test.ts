@@ -39,7 +39,7 @@ function images(count: number) {
 function sourceOffer(overrides: Record<string, unknown> = {}) {
   return {
     id: "offer-1",
-    sourceId: "dongchedi_china_open",
+    sourceId: "autohome_used_china_open",
     sourceOfferId: "source-1",
     market: "china",
     status: "active",
@@ -51,7 +51,7 @@ function sourceOffer(overrides: Record<string, unknown> = {}) {
     sourcePrice: 55000,
     sourceCurrency: "CNY",
     images: images(5),
-    operational: { sourceUrl: "https://www.dongchedi.com/usedcar/123", raw: {} },
+    operational: { sourceUrl: "https://global.che168.com/en/detail/123", raw: {} },
     ...overrides,
   } as any;
 }
@@ -264,7 +264,7 @@ test("mandatory source offer is hidden until its exact-card photo identity is ve
   assert.equal(hasCredibleOfferContent(sourceOffer()), false);
   assert.equal(hasCredibleOfferContent(sourceOffer({
     operational: {
-      sourceUrl: "https://www.dongchedi.com/usedcar/123",
+      sourceUrl: "https://global.che168.com/en/detail/123",
       photoIdentityVerified: true,
       raw: { detailIdentityVerified: true },
     },

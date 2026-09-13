@@ -54,7 +54,7 @@ export async function collectSourcePage(state, options) {
     if (!offer?.id || offer.sourceId !== state.sourceId || offer.market !== options.market) { state.normalizationFailures++; continue; }
     pageIds.push(String(offer.id));
     if (state.seen.has(offer.id)) { state.duplicates++; continue; }
-    if (Number.isFinite(offer.year) && offer.year < minYear) { state.outsideAge++; continue; }
+    if (options.inventoryAgeEligible ? !options.inventoryAgeEligible(offer) : Number.isFinite(offer.year) && offer.year < minYear) { state.outsideAge++; continue; }
     if (['withdrawn','deleted','inactive','removed','stale'].includes(offer.status) || (offer.status==='sold' && state.role!=='auction_history')) { state.withdrawn++; continue; }
     state.seen.add(offer.id);
     await writeObservation(snapshot(offer,'listing'));

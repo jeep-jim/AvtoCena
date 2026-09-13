@@ -36,9 +36,7 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "autopapa_georgia_open", label: "AutoPapa", canonicalUrl: "https://autopapa.ge/", role: "primary", required: true, anchor: true },
   ],
   china: [
-    { sourceId: "autohome_used_china_open", label: "Che168", canonicalUrl: "https://www.che168.com/", role: "primary", required: true, anchor: true },
-    { sourceId: "dongchedi_china_open", label: "Dongchedi", canonicalUrl: "https://www.dongchedi.com/", role: "primary", required: true, anchor: true },
-    { sourceId: "guazi_china_open", label: "Guazi", canonicalUrl: "https://www.guazi.com/", role: "primary", required: true, anchor: true },
+    { sourceId: "autohome_used_china_open", label: "Che168 Global", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
   // Owner decision 2026-09-10: publish only Drom sold results. Retired
@@ -80,7 +78,7 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
   try {
     const actual = new URL(String(urlValue || ""));
     const canonical = new URL(allowed.canonicalUrl);
-    if (market === "china" && id === "autohome_used_china_open" && !["che168.com", "www.che168.com", "m.che168.com", "dealers.che168.com"].includes(actual.hostname.toLowerCase())) return false;
+    if (market === "china" && id === "autohome_used_china_open" && !["global.che168.com"].includes(actual.hostname.toLowerCase())) return false;
     return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);
   } catch {
     return false;

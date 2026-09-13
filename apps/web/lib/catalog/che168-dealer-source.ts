@@ -1,5 +1,10 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
-import { isAllowedCatalogSourceUrl } from "./required-catalog-sources";
+// Dormant domestic adapter keeps its transport boundary independently of the
+// owner-selected production registry (currently Global).
+function isAllowedCatalogSourceUrl(_market: string, _source: string, value: unknown) {
+  try { const url = new URL(String(value)); return /^https?:$/.test(url.protocol) && ["che168.com","www.che168.com","m.che168.com","dealers.che168.com"].includes(url.hostname); }
+  catch { return false; }
+}
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 

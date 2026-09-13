@@ -9,6 +9,18 @@ import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const source = new Che168GlobalExactAdapter();
+test('Che168 bound manufacture date takes precedence over model-year labels',async()=>{
+ const adapter=new Che168GlobalExactAdapter();
+ const offer=adapter.normalizeOffer(listing({specname:'2019 Luxury',carname:'Toyota Camry 2019',regdate:'2021.09'}))!;
+ const originalFetch=globalThis.fetch;
+ globalThis.fetch=async()=>new Response(JSON.stringify({returncode:0,result:detail({specname:'2019 Luxury',carname:'Toyota Camry 2019',regdate:'2021.09',manufacturedate:'2020-12-01 00:00:00'})}),{status:200});
+ try {
+  await adapter.fetchImages(offer);
+  assert.equal(offer.year,2020);assert.equal(offer.productionDate,'2020-12-01');
+  assert.equal((offer.operational?.semanticEvidence as any).year.status,'exact');
+  assert.equal((offer.operational?.raw as any).detail.manufacturedate,'2020-12-01 00:00:00');
+ }finally{globalThis.fetch=originalFetch;}
+});
 
 const che168WorkflowPaths = [
   ".github/workflows/catalog-v6-che168-exact-readiness.yml",

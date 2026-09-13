@@ -9,6 +9,15 @@ function fixture(pages,detail=async()=>[]) {
  return {state,rows,options};
 }
 const offer={id:'one',sourceId:'test',market:'china',year:2024,status:'active',sourcePrice:10000,powerHp:undefined};
+test('source month policy can retain an older trim year for exact detail collection',async()=>{
+ const f=fixture({first:{items:[{...offer,year:2019}]}});
+ f.options.inventoryAgeEligible=()=>true;
+ await collectSourcePage(f.state,f.options);
+ assert.equal(f.state.detailAttempts,1);assert.equal(f.state.outsideAge,0);
+ const excluded=fixture({first:{items:[offer]}});excluded.options.inventoryAgeEligible=()=>false;
+ await collectSourcePage(excluded.state,excluded.options);
+ assert.equal(excluded.state.detailAttempts,0);assert.equal(excluded.state.outsideAge,1);
+});
 test('keeps incomplete listings, follows cursor, deduplicates across pages',async()=>{
  const f=fixture({first:{items:[offer],nextCursor:'next'},next:{items:[offer,{...offer,id:'two'}]}});
  await collectSourcePage(f.state,f.options);await collectSourcePage(f.state,f.options);

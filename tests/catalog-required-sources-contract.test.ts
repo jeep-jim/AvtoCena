@@ -28,9 +28,7 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
     ["autopapa_georgia_open", "https://autopapa.ge/"],
   ],
   china: [
-    ["autohome_used_china_open", "https://www.che168.com/"],
-    ["dongchedi_china_open", "https://www.dongchedi.com/"],
-    ["guazi_china_open", "https://www.guazi.com/"],
+    ["autohome_used_china_open", "https://global.che168.com/"],
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
   ],
   japan: [
@@ -38,9 +36,9 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
   ],
 };
 
-test("the 13 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
+test("the 11 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 13);
+  assert.equal(total, 11);
   assert.deepEqual(Object.keys(REQUIRED_CATALOG_SOURCES).sort(), ["china", "europe", "georgia", "japan", "korea", "uae"]);
 
   for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {
@@ -96,11 +94,11 @@ test("retired and malformed persisted markets fail closed without crashing publi
 });
 
 
-test("Che168 export and lookalike hosts cannot enter domestic collection or publication", () => {
- for (const host of ["global.che168.com","globalapi.che168.com","che168.com.evil.test","other.che168.com"]) {
+test("Only owner-approved Global host can enter the Che168 production slot", () => {
+ for (const host of ["www.che168.com","m.che168.com","globalapi.che168.com","che168.com.evil.test","other.che168.com"]) {
   assert.equal(isAllowedCatalogSourceUrl("china","autohome_used_china_open",`https://${host}/en/detail/59848501`),false);
  }
- for (const host of ["www.che168.com","che168.com","m.che168.com","dealers.che168.com"]) {
+ for (const host of ["global.che168.com"]) {
   assert.equal(isAllowedCatalogSourceUrl("china","autohome_used_china_open",`https://${host}/dealer/1/59848501.html`),true);
  }
 });
