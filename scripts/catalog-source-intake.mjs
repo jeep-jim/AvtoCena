@@ -28,6 +28,7 @@ if (process.env.CATALOG_INTAKE_RESUME === '1') {
 const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(directory,state.sourceId)]));
 const startedAt=new Date().toISOString();
 const deadline=Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
 let checkpointQueue = Promise.resolve();
@@ -45,7 +46,7 @@ function checkpoint() {
  });
 }
 await checkpoint();
-await collectSourceStates(states,state=>({market,deadline,maxRows:100000,maxPages:2000,detailConcurrency:4,
+await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSource,maxPages:2000,detailConcurrency:4,
       minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
       inventoryAgeEligible:market==='china' && state.sourceId==='autohome_used_china_open' ? offer=>chinaInventoryAgeDecision(offer).eligible : undefined,
       snapshot:sourceListingSnapshot,checkpoint,
