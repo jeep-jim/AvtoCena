@@ -1,0 +1,110 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import http from 'node:http';
+import { build } from 'esbuild';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const live = process.env.LIVE_ORIGIN || '';
+const out = `artifacts/attached-parameters-${live ? 'live' : 'local'}`;
+fs.mkdirSync(out,{recursive:true});
+let server, origin=live;
+if(!live){
+ await build({entryPoints:['tests/browser/attached-parameters-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
+ const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'];
+ const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
+ const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
+ const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ fs.writeFileSync(`${out}/app.css`,css.css);
+ const html=`<!doctype html><html lang="ru"><head><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
+ server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));origin=`http://127.0.0.1:${server.address().port}`;
+}
+let pages=[['petrol','/?kind=petrol'],['hybrid','/?kind=hybrid'],['n1','/?kind=n1']];
+if(live){
+ const response=await fetch(`${origin}/api/catalog/search?market=georgia&fuel=hybrid&pageSize=3`,{signal:AbortSignal.timeout(45000)});
+ assert.ok(response.ok,'hybrid discovery must use actual public data');
+ const data=await response.json();
+ const hybrid=data.items?.find(o=>o.id);
+ assert.ok(hybrid,'a real hybrid offer is required for verification');
+ pages=[['petrol','/cars/offer/15691a619182935d97aa25c7'],['hybrid','/cars/offer/'+hybrid.id]];
+ fs.writeFileSync(`${out}/live-pages.json`,JSON.stringify(pages,null,2));
+}
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
+const results=[];
+function save(){fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));}
+async function geometry(page,trigger,panel,grid){
+ const g=await grid.boundingBox(),t=await trigger.boundingBox(),b=await panel.boundingBox();
+ assert.ok(g&&t&&b);
+ assert.ok(Math.abs(b.x-g.x)<2&&Math.abs(b.width-g.width)<2,`must span exactly both columns ${JSON.stringify({g,t,b})}`);
+ assert.ok(b.y-t.y-t.height>=-1&&b.y-t.y-t.height<=3,`dropdown must touch selected tile, not bottom of grid ${JSON.stringify({g,t,b})}`);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no page overflow');
+ assert.ok(await panel.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'no panel horizontal overflow');
+ return {width:b.width,height:b.height,anchorGap:b.y-t.y-t.height};
+}
+try{
+ for(const [kind,url] of pages){
+  const context=await browser.newContext({viewport:{width:390,height:900},serviceWorkers:'block'});
+  const page=await context.newPage();const errors=[],requests=[];
+  page.on('pageerror',e=>errors.push(String(e)));
+  if(live) await page.route('**/*',route=>['GET','HEAD'].includes(route.request().method())?route.continue():route.abort());
+  else await page.route('**/api/catalog/offer/qa-attached/calculate',async route=>{requests.push(route.request().postDataJSON());await route.fulfill({json:{totalRub:4333490,customs:{vehicleCategory:kind==='n1'?'N1':'M1'},breakdown:[{id:'utilization-fee',title:'Утилизационный сбор',amountRub:900000}]}});});
+  let theme='dark',width=390,index=-1;
+  try{
+   const response=await page.goto(origin+url,{waitUntil:'domcontentloaded',timeout:90000});assert.equal(response.status(),200);
+   const grid=page.locator('[data-parameter-editor-grid]');await grid.waitFor({state:'visible',timeout:60000});
+   await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');return el&&Object.keys(el).some(k=>k.startsWith('__reactProps$'));});
+   const cookie=page.locator('[aria-labelledby="avtocena-cookie-title"]');
+   if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Понятно',exact:true}).click();
+   const triggers=grid.locator('[data-parameter-editor] > summary');
+   for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
+    await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
+    const original=await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);}));
+    const metrics=[];
+    for(index=0;index<await triggers.count();index++){
+     await page.keyboard.press('Escape');
+     const trigger=triggers.nth(index);await trigger.click();
+     const panel=grid.locator('[data-parameter-editor][open] > [data-parameter-panel]');await panel.waitFor({state:'visible'});
+     assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1);
+     const box=await geometry(page,trigger,panel,grid);
+     assert.deepEqual(await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);})),original,'opening must not move closed controls');
+     assert.equal(await panel.getByRole('button',{name:/^Закрыть:/}).count(),0,'no separate panel header');
+     if(index===0){
+      const fields=panel.locator('[data-parameter-date-fields] > label').filter({has:page.locator('select,input')});
+      const positions=await fields.evaluateAll(els=>els.slice(0,3).map(e=>e.getBoundingClientRect()));
+      assert.equal(positions.length,3);assert.ok(Math.max(...positions.map(p=>p.y))-Math.min(...positions.map(p=>p.y))<1,'date must have three columns');
+      assert.ok(positions[0].x<positions[1].x&&positions[1].x<positions[2].x);
+      assert.ok(box.height<=245,`compact date height: ${box.height}`);
+      for(const el of await panel.locator('[data-parameter-date-fields] select,[data-parameter-date-fields] input').all())assert.ok(await el.evaluate(x=>{const a=x.getBoundingClientRect(),b=x.closest('[data-parameter-panel]').getBoundingClientRect();return a.left>=b.left&&a.right<=b.right;}));
+     }
+     if(index===2){
+      const buttons=panel.locator('[data-parameter-fuel-choices] > button');assert.equal(await buttons.count(),6);
+      const boxes=await buttons.evaluateAll(els=>els.map(e=>e.getBoundingClientRect()));
+      for(let row=0;row<3;row++){assert.ok(Math.abs(boxes[row*2].y-boxes[row*2+1].y)<1);assert.ok(boxes[row*2].x<boxes[row*2+1].x);}
+      assert.ok(box.height<=275,`fuel must be 3 short rows, not a tall list: ${box.height}`);
+      assert.ok(await panel.locator('.ac-attached-editor-body').evaluate(el=>el.scrollHeight<=el.clientHeight+1),'fuel options should not need scrolling');
+     }
+     if(width===390||width===1280){
+      const r=await trigger.boundingBox();await page.evaluate(y=>scrollTo(0,Math.max(0,scrollY+y-145)),r.y);
+      await page.screenshot({path:`${out}/${kind}-${theme}-${width}-${index}.png`});
+     }
+     metrics.push({index,...box});
+     await trigger.click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'repeat click closes');
+    }
+    results.push({mode:live?'live':'fixture',kind,theme,width,attached:true,columns:true,panels:metrics,pageErrors:[...errors]});save();
+   }
+   if(!live&&kind==='petrol'){
+    await triggers.nth(0).click();await grid.getByLabel('Год выпуска',{exact:true}).selectOption('2025');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'118');
+    await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'');
+    await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+    await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
+    await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+   }
+   if(!live)assert.deepEqual(errors,[]);
+  }catch(error){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({kind,url,theme,width,index,error:String(error),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw error;}finally{await context.close();}
+ }
+ assert.equal(results.length,pages.length*12);console.log(JSON.stringify({mode:live?'live':'fixture',cases:results.length,openings:results.reduce((n,r)=>n+r.panels.length,0),passed:true}));
+}finally{save();await browser.close();if(server)await new Promise(r=>server.close(r));}
