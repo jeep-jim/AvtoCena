@@ -10,6 +10,10 @@ const API_BASE = "https://globalapi.che168.com";
 const SITE_BASE = "https://global.che168.com";
 const APP_ID = "2046";
 const PAGE_SIZE = 24;
+// Che168 exposes the complete dealer inventory through vehicle_list=1.
+// vehicle_list=0 is only the much smaller promoted/certified lane and cannot
+// represent the available Global inventory on its own.
+const FULL_INVENTORY_LIST = 1;
 const HEADERS = {
   accept: "application/json,text/plain,*/*",
   "accept-language": "en-US,en;q=0.9,zh-CN;q=0.7",
@@ -267,7 +271,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
-    const params = this.params({ pageindex: page, pagesize: PAGE_SIZE, sort: 0, vehicle_list: 0 });
+    const params = this.params({ pageindex: page, pagesize: PAGE_SIZE, sort: 0, vehicle_list: FULL_INVENTORY_LIST });
     const url = `${API_BASE}/api/v1/search?${params.toString()}`;
     const { response, result } = await this.getJson<SearchResult>(url);
     const items = Array.isArray(result.carlist) ? result.carlist.filter((row) => Number(row?.infoid) > 0) : [];
@@ -282,7 +286,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       diagnostics: { listingRows: Array.isArray(result.carlist) ? result.carlist.length : 0, rejectedRows: (Array.isArray(result.carlist) ? result.carlist.length : 0) - items.length },
       health: {
         ok: items.length > 0,
-        message: `Che168 Global API page=${page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
+        message: `Che168 Global full inventory page=${page}/${pageCount || "?"} items=${items.length} total=${totalCount}`,
         checkedAt: new Date().toISOString(),
         httpStatus: response.status,
         contentType: response.headers.get("content-type") || "",

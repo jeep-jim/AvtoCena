@@ -15,6 +15,8 @@ test('full rebuild collects one market at a time without reducing source capacit
  assert.match(source, /group: catalog-six-market-quality-rebuild\n  cancel-in-progress: false/);
  assert.match(source, /CATALOG_REBUILD_TARGET_PER_SOURCE: '100000'/);
  assert.match(source, /CATALOG_PUBLISH_MAX_PER_MARKET: '100000'/);
+ assert.match(source, /CATALOG_INTAKE_MAX_ROWS_PER_SOURCE: \$\{\{ matrix\.market == 'china' && '20000' \|\| '100000' \}\}/);
+ assert.match(fs.readFileSync('scripts/catalog-source-intake.mjs', 'utf8'), /CATALOG_INTAKE_MAX_ROWS_PER_SOURCE/);
  assert.match(collect, /timeout-minutes: 240/);
 });
 

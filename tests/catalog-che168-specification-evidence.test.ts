@@ -9,6 +9,30 @@ import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const source = new Che168GlobalExactAdapter();
+
+test("Che168 collection uses the full dealer inventory lane", async () => {
+  const adapter = new Che168GlobalExactAdapter();
+  const originalFetch = globalThis.fetch;
+  let requestedUrl = "";
+  globalThis.fetch = async (input) => {
+    requestedUrl = String(input);
+    return new Response(JSON.stringify({
+      returncode: 0,
+      result: { totalcount: 237251, pagecount: 9886, carlist: [listing()] },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const page = await adapter.fetchPage();
+    const url = new URL(requestedUrl);
+    assert.equal(url.searchParams.get("vehicle_list"), "1");
+    assert.equal(page.count, 237251);
+    assert.equal(page.finished, false);
+    assert.match(String(page.health?.message), /full inventory/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('Che168 bound manufacture date takes precedence over model-year labels',async()=>{
  const adapter=new Che168GlobalExactAdapter();
  const offer=adapter.normalizeOffer(listing({specname:'2019 Luxury',carname:'Toyota Camry 2019',regdate:'2021.09'}))!;
