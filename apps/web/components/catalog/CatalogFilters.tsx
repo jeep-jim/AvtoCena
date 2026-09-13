@@ -1,5 +1,6 @@
 "use client";
 
+import "./MobileCatalogDropdowns.css";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
