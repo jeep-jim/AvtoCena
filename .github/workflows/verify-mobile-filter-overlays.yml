@@ -1,0 +1,98 @@
+name: Verify mobile catalog filter overlays
+on:
+  push:
+    branches: [fix/mobile-catalog-overlay-menus-20260913, main]
+    paths:
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'apps/web/components/catalog/MobileCatalogDropdowns.css'
+      - 'tests/browser/mobile-filter-*'
+      - '.github/workflows/verify-mobile-filter-overlays.yml'
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Attach stylesheet on review branch only
+        if: github.ref == 'refs/heads/fix/mobile-catalog-overlay-menus-20260913'
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          p=Path('apps/web/components/catalog/CatalogFilters.tsx')
+          s=p.read_text()
+          addition='import "./MobileCatalogDropdowns.css";'
+          if addition not in s:
+            assert subprocess.check_output(['git','hash-object',str(p)],text=True).strip()=='de2b9168a0ca6f5a90b8d3dc961efeef705ac7e8','Source changed: review it first'
+            anchor='import Link from "next/link";'
+            assert s.count(anchor)==1
+            p.write_text(s.replace(anchor,addition+'\n'+anchor))
+          PY
+      - run: npm ci
+      - name: TypeScript and catalog UI regressions
+        run: |
+          npm run typecheck
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts tests/russia-customs.test.ts
+      - name: Production build
+        run: npm run build
+      - name: Isolated browser dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/filter-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          "$RUNNER_TEMP/filter-browser/node_modules/.bin/playwright" install --with-deps webkit
+      - name: Chromium overlays, closed-layout parity and selections
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/mobile-filter-overlays.mjs
+      - name: WebKit mobile overlays and selections
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
+          FILTER_BROWSER: webkit
+        run: node tests/browser/mobile-filter-overlays.mjs
+      - name: Record reviewed import and roadmap on the review branch only
+        if: github.ref == 'refs/heads/fix/mobile-catalog-overlay-menus-20260913'
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('roadmap.md')
+          heading='## 2026-09-13 — Выпадающие фильтры мобильного каталога без сдвига плиток'
+          s=p.read_text()
+          if heading not in s:
+            p.write_text(heading+'\n- В мобильной шторке кузов, коробка, топливо и привод раскрываются поверх соседних строк на ширину двух колонок. Отступ и соединение с активной плиткой сохранены.\n- Выбор марки, поиск модели и диапазоны не увеличивают высоту строк при раскрытии; длинные списки прокручиваются внутри.\n- Карточка автомобиля, десктоп, значения фильтров и расчёты не менялись. До публикации проверяются Chromium/WebKit, размеры и выбор значений. Статус живой проверки фиксируется в PR.\n\n'+s)
+          PY
+          git add apps/web/components/catalog/CatalogFilters.tsx roadmap.md
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix(ui): enable verified mobile catalog dropdown stylesheet'
+            git push origin HEAD:refs/heads/fix/mobile-catalog-overlay-menus-20260913
+          fi
+      - name: Confirm exact published release
+        if: github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          let ready=false;
+          for(let n=0;n<36;n++){
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){fs.mkdirSync('artifacts/mobile-filter-release',{recursive:true});fs.writeFileSync('artifacts/mobile-filter-release/health.json',JSON.stringify(d,null,2));ready=true;break;}}catch(e){console.log(String(e));}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          if(!ready)throw Error('Exact release not confirmed');
+          JS
+      - name: Published catalog, both themes and mobile plus desktop
+        if: github.ref == 'refs/heads/main'
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
+          LIVE_ORIGIN: https://avtocena.com
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/mobile-filter-overlays.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-filter-overlays
+          path: artifacts/mobile-filter-*
+          retention-days: 7
