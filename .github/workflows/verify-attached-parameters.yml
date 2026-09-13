@@ -1,0 +1,69 @@
+name: Verify attached compact parameter dropdowns
+on:
+  push:
+    branches: [fix/attached-compact-parameters-20260913, main]
+    paths:
+      - 'apps/web/components/catalog/InlineOfferParameters.tsx'
+      - 'apps/web/components/catalog/InlineParameterPanels.module.css'
+      - 'tests/browser/attached-parameter*'
+      - '.github/workflows/verify-attached-parameters.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: TypeScript and power/customs regressions
+        run: |
+          npm run typecheck
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/recycling-power-ui.test.ts tests/russia-customs.test.ts
+      - name: Production build
+        run: npm run build
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/parameter-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Test attachment and compact content with the real component and public styles
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/parameter-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - name: Wait for the exact published release
+        if: github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          let ready=false;
+          for(let i=0;i<36;i++){
+            try{
+              const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});
+              const data=await r.json();
+              if(data.ok&&data.releaseSha===process.env.EXPECTED_RELEASE){
+                fs.mkdirSync('artifacts/attached-parameters-live',{recursive:true});
+                fs.writeFileSync('artifacts/attached-parameters-live/release.json',JSON.stringify(data,null,2));
+                ready=true;break;
+              }
+              console.log('Waiting for requested release',data.releaseSha);
+            }catch(e){console.log(String(e));}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          if(!ready)throw new Error('Requested release not confirmed; live verification did not run');
+          JS
+      - name: Check published petrol and hybrid pages without submitting forms
+        if: github.ref == 'refs/heads/main'
+        env:
+          LIVE_ORIGIN: https://avtocena.com
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/parameter-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: attached-parameter-dropdowns
+          path: artifacts/attached-parameters-*
+          retention-days: 7

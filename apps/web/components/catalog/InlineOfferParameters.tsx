@@ -11,17 +11,17 @@ import { validateCustomerParameters } from "../../lib/catalog/customer-parameter
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
 const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
-function Field({label,value,change,options=[],min,max,searchQuery}:{label:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
+function Field({label,caption,value,change,options=[],min,max,searchQuery}:{label:string;caption?:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
  const [choosing,setChoosing]=useState(false);
- return <div className="text-xs font-semibold">
-  <label htmlFor={id}>{label}</label>
+ return <div className="min-w-0 text-xs font-semibold">
+  <label htmlFor={id}>{caption || label}</label>
   <div className="ac-parameter-input mt-2 flex min-h-11 overflow-hidden rounded-xl bg-[var(--ac-surface)]">
    <input id={id} aria-label={label} type="number" inputMode="decimal" value={value} min={min} max={max} step="any" onFocus={()=>setChoosing(true)} onChange={e=>change(e.target.value)} className="min-w-0 flex-1 border-0 bg-transparent px-3 py-2 text-base text-[var(--ac-text)] outline-none"/>
    {options.length ? <button type="button" aria-label={`Выбрать: ${label}`} aria-expanded={choosing} aria-controls={`${id}-choices`} onClick={()=>setChoosing(!choosing)} className="min-h-11 min-w-11 shrink-0 px-3"><ChevronDown size={16} aria-hidden/></button> : null}
    {searchQuery ? <a href={`https://yandex.ru/search/?text=${encodeURIComponent(searchQuery)}`} target="_blank" rel="noopener noreferrer" aria-label={`Найти: ${label}`} title="Найти в Яндексе с Алисой. Проверьте источник и модификацию." className="flex min-h-11 min-w-11 shrink-0 items-center justify-center"><img src="/brands/alice.svg" alt="" width={22} height={22}/></a> : null}
   </div>
-  {choosing && options.length ? <div id={`${id}-choices`} className="mt-2 grid grid-cols-2 gap-1" aria-label={`Варианты: ${label}`}>
+  {choosing && options.length ? <div id={`${id}-choices`} className={editorStyles.presets} aria-label={`Варианты: ${label}`}>
    {options.map(n=><button key={n} type="button" aria-pressed={value===String(n)} onClick={()=>{change(String(n));setChoosing(false);}} className="min-h-11 rounded-lg bg-[var(--ac-surface)] px-2 text-left text-sm">{n.toLocaleString("ru-RU",{useGrouping:!/^Год/i.test(label)})}</button>)}
   </div> : null}
  </div>;
@@ -32,12 +32,8 @@ function EngineIcon() {
 function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{label:string;value:string;valueNode?:ReactNode;warning?:boolean;icon:ReactNode;children:ReactNode;wide?:boolean}) {
  const ref=useRef<HTMLDetailsElement>(null);
  const id=useId();
- const closeAndFocus=()=>{
-  if(ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus();}
- };
  useEffect(()=>{
-  // Close on click, never pointerdown/focusin: collapsing before pointerup can
-  // move an outside reset button and swallow the customer's first activation.
+  // Closing on click preserves the first activation of an outside reset button.
   const close=(event:MouseEvent)=>{if(ref.current?.open && !ref.current.contains(event.target as Node))ref.current.open=false;};
   const escape=(event:KeyboardEvent)=>{
    if(event.key==="Escape" && ref.current?.open){event.preventDefault();ref.current.open=false;ref.current.querySelector("summary")?.focus();}
@@ -45,7 +41,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   document.addEventListener("click",close);document.addEventListener("keydown",escape);
   return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);};
  },[]);
- return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`}>
+ return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`} data-full-width={wide || undefined}>
   <details ref={ref} data-parameter-editor className={`${editorStyles.editor} ac-attached-editor group rounded-2xl bg-[var(--ac-surface-2)]`}>
    <summary id={`${id}-trigger`} aria-controls={`${id}-panel`} aria-label={`${label}: ${value}`} onClick={event=>{
     event.preventDefault();
@@ -60,13 +56,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
     <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{valueNode ?? value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
    </summary>
    <div id={`${id}-panel`} data-parameter-panel role="region" aria-labelledby={`${id}-trigger`} className={editorStyles.panel}>
-    <div className={editorStyles.panelHeader}>
-     <span className="text-sm font-bold">{label}</span>
-     <button type="button" className={editorStyles.close} aria-label={`Закрыть: ${label}`} onClick={closeAndFocus}>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
-     </button>
-    </div>
-    <div className={`${editorStyles.body} ac-attached-editor-body space-y-3 overflow-y-auto p-4`}>{children}</div>
+    <div className={`${editorStyles.body} ac-attached-editor-body`}>{children}</div>
    </div>
   </details>
  </div>;
@@ -98,7 +88,9 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
  const powerInfo = recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
  const powerLabel = draft.powerHp ? `${draft.powerHp} л.с.` : "Указать мощность";
  const pairedPower = Boolean(powerInfo?.borderline);
- const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string)=><Field label={label} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
+ const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
+ const currentYear = new Date().getFullYear();
+ const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {!showCalculation?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
    <p className="text-xs font-bold uppercase tracking-widest">{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>
@@ -110,27 +102,33 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
   {!dirty && autoCalculate && !result ? <p role="status" className="mt-2 text-xs text-[var(--ac-muted)]">{pending?"Рассчитываем по данным объявления…":error}</p> : null}
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
-    {field("year","Год выпуска",Array.from({length:30},(_,i)=>new Date().getFullYear()-i),1990,new Date().getFullYear()+1)}
-    {field("productionDay","День выпуска (если известен)",[],1,31)}
-    <label className="block text-xs font-semibold">Месяц выпуска<select aria-label="Месяц выпуска" className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3" value={draft.productionMonth||""} onChange={e=>change("productionMonth",e.target.value)}><option value="">Неизвестен</option>{Array.from({length:12},(_,i)=><option key={i+1} value={i+1}>{String(i+1).padStart(2,"0")}</option>)}</select></label>
-    <label className="block text-xs font-semibold">Дата таможенного расчёта<input aria-label="Дата таможенного расчёта" type="date" value={draft.customsCalculationDate||""} onChange={e=>change("customsCalculationDate",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"/></label>
-    <p className="text-xs leading-5 text-[var(--ac-muted)]">Без даты расчёт на сегодня. Для M1: до 3 лет включительно, свыше 3 до 5 включительно, старше 5. Если день неизвестен — 15-е число; если месяц неизвестен — 1 июля.</p>
+    <div className={editorStyles.dateFields} data-parameter-date-fields>
+     <label>Год<select aria-label="Год выпуска" value={draft.year||""} onChange={e=>change("year",e.target.value)}><option value="">—</option>{draft.year && !yearOptions.includes(Number(draft.year)) ? <option value={draft.year}>{draft.year}</option> : null}{yearOptions.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
+     <label>Месяц<select aria-label="Месяц выпуска" value={draft.productionMonth||""} onChange={e=>change("productionMonth",e.target.value)}><option value="">—</option>{Array.from({length:12},(_,i)=><option key={i+1} value={i+1}>{String(i+1).padStart(2,"0")}</option>)}</select></label>
+     <label>День<input aria-label="День выпуска (если известен)" type="number" inputMode="numeric" min={1} max={31} step={1} placeholder="—" value={draft.productionDay||""} onChange={e=>change("productionDay",e.target.value)}/></label>
+     <label className={editorStyles.calculationDate}>Дата расчёта<input aria-label="Дата таможенного расчёта" type="date" value={draft.customsCalculationDate||""} onChange={e=>change("customsCalculationDate",e.target.value)}/></label>
+     <span className={editorStyles.dateHint}>Пусто — на сегодня</span>
+    </div>
+    <p className={editorStyles.note}>Месяц и день укажите, если они известны.</p>
+    <details className={editorStyles.help}><summary>Как учитывается дата</summary><p>Без даты расчёт на сегодня. Для M1: до 3 лет включительно, свыше 3 до 5 включительно, старше 5. Если день неизвестен — 15-е число; если месяц неизвестен — 1 июля.</p></details>
    </Tile>
    <Tile label="Объём двигателя" value={draft.fuel==="electric"?"Без ДВС":draft.engineCc?`${Number(draft.engineCc).toLocaleString("ru-RU")} см³`:"Указать объём"} icon={<EngineIcon/>}>
     {draft.fuel==="electric"?<p className="text-xs">Для электромобиля объём ДВС не требуется.</p>:field("engineCc","Объём, см³",[660,998,1197,1498,1598,1998,2498,2998],300,10000)}
-    {draft.fuel!=="electric" ? <p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите точный объём или введите свой. Например, 1,5 л в названии не заменяет объём в см³ из документов.</p> : null}
+    {draft.fuel!=="electric" ? <p className={editorStyles.note}>Выберите точный объём или введите свой. Например, 1,5 л в названии не заменяет объём в см³ из документов.</p> : null}
    </Tile>
    <Tile label="Топливо" value={fuels.find(([key])=>key===draft.fuel)?.[1]||"Указать топливо"} icon={<Fuel size={16}/>}>
-    {fuels.map(([key,label])=><button type="button" key={key} aria-pressed={draft.fuel===key} onClick={()=>change("fuel",key)} className="block min-h-10 w-full rounded-lg px-3 text-left text-xs hover:bg-[var(--ac-surface)]">{label}</button>)}
-    {draft.fuel==="hybrid"?<label className="block text-xs">Тип гибрида<select aria-label="Тип гибрида" value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите тип</option><option value="series_hybrid">Последовательный</option><option value="other_hybrid">Другой гибрид</option></select></label>:null}
+    <div className={editorStyles.fuelChoices} data-parameter-fuel-choices>
+     {fuels.map(([key,label])=><button type="button" key={key} aria-pressed={draft.fuel===key} onClick={()=>change("fuel",key)}>{label}</button>)}
+    </div>
+    {draft.fuel==="hybrid"?<label className={editorStyles.hybridField}>Тип гибрида<select aria-label="Тип гибрида" value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите тип</option><option value="series_hybrid">Последовательный</option><option value="other_hybrid">Другой гибрид</option></select></label>:null}
    </Tile>
    <Tile label="Мощность" value={`${powerLabel}${pairedPower && powerInfo ? ` / ${powerInfo.kwLabel}` : ""}`} valueNode={pairedPower ? <RecyclingPowerLabel hpLabel={powerLabel} info={powerInfo} showKw /> : undefined} warning={pairedPower} icon={<Zap size={16}/>}>
-    {powerInfo?.borderline ? <RecyclingPowerExplanation info={powerInfo} /> : null}
-    {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
-    {!["electric","hybrid"].includes(draft.fuel) ? <>
-      {field("powerKw","Мощность, кВт (если известна)",[],0.1,2000)}
-      <p className="text-xs leading-5 text-[var(--ac-muted)]">Если кВт указаны, расчёт использует их без округления до л.с. Изменение л.с. очищает прежние кВт. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p>
-    </> : null}
+    <div className={editorStyles.twoColumns}>
+     {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
+     {!["electric","hybrid"].includes(draft.fuel) ? field("powerKw","Мощность, кВт (если известна)",[],0.1,2000,undefined,"Мощность, кВт") : null}
+    </div>
+    {powerInfo?.borderline ? <details className={editorStyles.help}><summary>Почему повышенный утильсбор?</summary><RecyclingPowerExplanation info={powerInfo} /></details> : null}
+    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. Изменение л.с. очищает прежние кВт. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
    </Tile>
    {showCommercial ? <Tile wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
@@ -147,7 +145,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
     </> : null}
    </Tile> : null}
    {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile wide label="30-минутная мощность" value={draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
-    {field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000)}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000):null}
+    <div className={editorStyles.twoColumns}>{field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000,undefined,"30 минут, кВт")}{draft.fuel==="hybrid"?field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000,undefined,"ДВС, кВт"):null}</div>
    </Tile>:null}
   </div>
   {result?.breakdown?.length?<details className="ac-offer-breakdown mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4"><summary className="cursor-pointer pr-4 font-bold">{dirty?"Структура расчёта по вашим параметрам":"Структура цены"}</summary><dl className="mt-3 space-y-2 text-xs">{result.breakdown.map((row,i)=><div key={`${row.id}-${i}`} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <RecyclingFeeHelp info={powerInfo} /> : null}</dt><dd className="shrink-0 whitespace-nowrap">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>)}</dl></details>:null}
