@@ -1,0 +1,125 @@
+/* Mobile catalog sheet only. Keep offer editors and desktop filters unchanged. */
+@media (max-width: 1023px) {
+  html body .ac-mobile-filter-sheet { --ac-mobile-menu-gap: 10px; }
+  html body .ac-mobile-filter-sheet .ac-mobile-secondary-grid { --ac-mobile-menu-gap: 7px; }
+
+  html body .ac-mobile-filter-sheet .relative:has(> .ac-filter-dropdown) {
+    position: relative !important;
+    z-index: 500 !important;
+    overflow: visible !important;
+  }
+  html body .ac-mobile-filter-sheet .relative:has(> .ac-filter-dropdown) > .ac-filter-control {
+    position: relative;
+    z-index: 2;
+    border-radius: 13px 13px 0 0 !important;
+    border-bottom-color: transparent !important;
+    background: var(--ac-surface-2) !important;
+  }
+  /* Only the selected control is connected; leave the normal gap below its neighbour. */
+  html body .ac-mobile-filter-sheet .relative:has(> .ac-filter-dropdown)::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    height: calc(var(--ac-mobile-menu-gap) + 2px);
+    box-sizing: border-box;
+    border-inline: 1px solid var(--ac-border);
+    background: var(--ac-surface-2);
+    pointer-events: none;
+  }
+  html body .ac-mobile-filter-sheet .relative > .ac-filter-dropdown {
+    position: absolute !important;
+    inset: auto !important;
+    top: calc(100% + var(--ac-mobile-menu-gap)) !important;
+    left: 0 !important;
+    right: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-sizing: border-box;
+    z-index: 1 !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    border: 1px solid var(--ac-border) !important;
+    border-radius: 0 0 13px 13px !important;
+    background: var(--ac-surface-2) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+    overflow: hidden !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-advanced-select-row > .relative > .ac-filter-dropdown {
+    width: calc(200% + var(--ac-mobile-menu-gap)) !important;
+    border-radius: 0 13px 13px 13px !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-advanced-select-row > .relative:nth-child(even) > .ac-filter-dropdown {
+    left: auto !important;
+    right: 0 !important;
+    border-radius: 13px 0 13px 13px !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-advanced-select-row > .ac-mobile-secondary-span > .ac-filter-dropdown {
+    width: 100% !important;
+    border-radius: 0 0 13px 13px !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-filter-dropdown > .ac-hide-scrollbar {
+    max-height: min(320px, 46dvh) !important;
+    min-height: 0;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  html body .ac-mobile-filter-sheet .ac-advanced-select-row .ac-filter-dropdown > .ac-hide-scrollbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 8px;
+    align-content: start;
+  }
+  html body .ac-mobile-filter-sheet .ac-advanced-select-row .ac-filter-option:first-child { grid-column: 1 / -1; }
+  html body .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option {
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--ac-text);
+    background: var(--ac-surface) !important;
+    overflow-wrap: anywhere;
+  }
+  html body .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option.is-active {
+    border-color: var(--ac-public-accent, #ff4650);
+    background: color-mix(in srgb, var(--ac-public-accent, #ff4650) 12%, var(--ac-surface)) !important;
+    color: var(--ac-public-accent, #ff4650);
+  }
+  html body .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option:focus-visible {
+    outline: 2px solid var(--ac-public-accent, #ff4650);
+    outline-offset: -2px;
+  }
+  /* Numeric range choices also overlay the next row; the two inputs never grow. */
+  html body .ac-mobile-filter-sheet .ac-range-card:has(.ac-range-value-menu.is-open) { position: relative; z-index: 480; }
+  html body .ac-mobile-filter-sheet .ac-range-input-box--menu {
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-range-value-menu {
+    position: absolute !important;
+    inset: auto !important;
+    top: calc(100% + 6px) !important;
+    left: 0 !important;
+    right: auto !important;
+    width: calc(200% + 8px) !important;
+    max-height: min(220px, 38dvh) !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    box-sizing: border-box;
+    border-radius: 12px !important;
+    background: var(--ac-surface-2) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18) !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-range-input-wrap:nth-child(2) .ac-range-value-menu { left: auto !important; right: 0 !important; }
+  html body .ac-mobile-filter-sheet .ac-range-value-menu.is-open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  html body .ac-mobile-filter-sheet .ac-range-value-option { min-height: 40px; padding: 6px; white-space: normal; }
+}
