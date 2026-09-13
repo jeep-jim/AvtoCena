@@ -64,3 +64,43 @@ test('streaming preservation retains full raw records, fills public gaps and com
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+test('one-market persistence reuses immutable chunks for untouched source IDs', async () => {
+  const cwd = process.cwd();
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'avtocena-internal-references-'));
+  const driver = process.env.JSON_STORAGE_DRIVER;
+  fs.mkdirSync(path.join(directory, 'data'));
+  process.chdir(directory);
+  process.env.JSON_STORAGE_DRIVER = 'local';
+  resetJsonStorageForTests();
+  const row = (id: string, sourceId: string, market: string): any => ({
+    id,
+    sourceId,
+    market,
+    operational: {
+      sourceUrl: sourceId === 'encar_direct'
+        ? `https://fem.encar.com/cars/detail/${id}`
+        : `https://global.che168.com/en/detail/${id}`,
+    },
+  });
+  try {
+    const storage = getJsonStorage();
+    await persistInternalCatalog(storage, 'gen_old', [row('kr-1', 'encar_direct', 'korea')]);
+    const before: any = await storage.readJson('catalog/internal/manifest.json', null);
+    const oldChunks = [...before.sources.encar_direct.chunks];
+    await persistInternalCatalog(storage, 'gen_new', [
+      row('kr-public', 'encar_direct', 'korea'),
+      row('cn-1', 'autohome_used_china_open', 'china'),
+    ], undefined, new Set(['autohome_used_china_open']));
+    const after: any = await storage.readJson('catalog/internal/manifest.json', null);
+    assert.deepEqual(after.sources.encar_direct.chunks, oldChunks);
+    assert.equal(after.sources.encar_direct.count, 1);
+    assert.equal(after.sources.autohome_used_china_open.count, 1);
+    assert.match(after.sources.autohome_used_china_open.chunks[0], /gen_new/);
+  } finally {
+    process.chdir(cwd);
+    if (driver === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = driver;
+    resetJsonStorageForTests();
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});

@@ -16,6 +16,10 @@ test("Che168 collection uses the full dealer inventory lane", async () => {
   let requestedUrl = "";
   globalThis.fetch = async (input) => {
     requestedUrl = String(input);
+    if (requestedUrl.includes('/api/v1/brand')) return new Response(JSON.stringify({
+      returncode: 0,
+      result: { brands: [{ brandid: 7, brandname: 'Toyota' }] },
+    }), { status: 200, headers: { "content-type": "application/json" } });
     return new Response(JSON.stringify({
       returncode: 0,
       result: { totalcount: 237251, pagecount: 9886, carlist: [listing()] },
@@ -25,12 +29,38 @@ test("Che168 collection uses the full dealer inventory lane", async () => {
     const page = await adapter.fetchPage();
     const url = new URL(requestedUrl);
     assert.equal(url.searchParams.get("vehicle_list"), "1");
+    assert.equal(url.searchParams.get("brandid"), "7");
     assert.equal(page.count, 237251);
     assert.equal(page.finished, false);
     assert.match(String(page.health?.message), /full inventory/);
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("Che168 advances across brand partitions instead of stopping at the global 10k window", async () => {
+  const adapter = new Che168GlobalExactAdapter();
+  const originalFetch = globalThis.fetch;
+  const searches: URL[] = [];
+  globalThis.fetch = async (input) => {
+    const url = new URL(String(input));
+    if (url.pathname.endsWith('/brand')) return new Response(JSON.stringify({ returncode: 0, result: { brands: [
+      { brandid: 10, brandname: 'Toyota' }, { brandid: 20, brandname: 'Volkswagen' },
+    ] } }), { status: 200 });
+    searches.push(url);
+    const brand = url.searchParams.get('brandid');
+    const page = Number(url.searchParams.get('pageindex'));
+    const rows = page === 1 ? [listing({ infoid: brand === '10' ? 10 : 20 })] : [];
+    return new Response(JSON.stringify({ returncode: 0, result: { totalcount: 1, pagecount: 1, carlist: rows } }), { status: 200 });
+  };
+  try {
+    const first = await adapter.fetchPage();
+    assert.equal(first.finished, false);
+    const second = await adapter.fetchPage(first.nextCursor);
+    assert.equal(second.finished, true);
+    assert.deepEqual(searches.map(url => url.searchParams.get('brandid')), ['10', '20']);
+    assert.ok(searches.every(url => url.searchParams.get('vehicle_list') === '1'));
+  } finally { globalThis.fetch = originalFetch; }
 });
 
 test('Che168 bound manufacture date takes precedence over model-year labels',async()=>{
