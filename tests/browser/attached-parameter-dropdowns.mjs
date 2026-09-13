@@ -6,7 +6,7 @@ import { build } from 'esbuild';
 import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
-const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const { chromium, webkit } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const live = process.env.LIVE_ORIGIN || '';
 const out = `artifacts/attached-parameters-${live ? 'live' : 'local'}`;
 fs.mkdirSync(out,{recursive:true});
@@ -19,11 +19,11 @@ if(!live){
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
  const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
- const html=`<!doctype html><html lang="ru"><head><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
+ const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
  await new Promise(r=>server.listen(0,'127.0.0.1',r));origin=`http://127.0.0.1:${server.address().port}`;
 }
-let pages=[['petrol','/?kind=petrol'],['hybrid','/?kind=hybrid'],['n1','/?kind=n1']];
+let pages=[['petrol','/?kind=petrol'],['hybrid','/?kind=hybrid'],['n1','/?kind=n1'],['missing-hybrid','/?kind=missing-hybrid']];
 if(live){
  const response=await fetch(`${origin}/api/catalog/search?market=georgia&fuel=hybrid&pageSize=3`,{signal:AbortSignal.timeout(45000)});
  assert.ok(response.ok,'hybrid discovery must use actual public data');
@@ -33,7 +33,7 @@ if(live){
  pages=[['petrol','/cars/offer/15691a619182935d97aa25c7'],['hybrid','/cars/offer/'+hybrid.id]];
  fs.writeFileSync(`${out}/live-pages.json`,JSON.stringify(pages,null,2));
 }
-const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
+const browser=process.env.PARAMETER_BROWSER==='webkit' ? await webkit.launch({headless:true}) : await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
 function save(){fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));}
 async function geometry(page,trigger,panel,grid){
@@ -82,6 +82,13 @@ try{
      assert.deepEqual(await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);})),original,'opening must not move closed controls');
      assert.equal(await panel.getByRole('button',{name:/^Закрыть:/}).count(),0,'no separate panel header');
      if(index===0){
+      const control=panel.locator('[data-calculation-date-control]');
+      const icon=control.locator('[data-calculation-calendar]');
+      assert.equal(await icon.count(),1);assert.ok(await icon.isVisible(),'calendar visible in every viewport');
+      const cb=await control.boundingBox(),ib=await icon.boundingBox();
+      assert.ok(Math.abs(cb.x+cb.width-ib.x-ib.width-12)<1,'calendar keeps 12px right inset');
+      assert.equal(await control.locator('input').evaluate(e=>getComputedStyle(e).backgroundImage),'none','date input must not inherit a select arrow');
+
       const fields=panel.locator('[data-parameter-date-fields] > label').filter({has:page.locator('select,input')});
       const positions=await fields.evaluateAll(els=>els.slice(0,3).map(e=>e.getBoundingClientRect()));
       assert.equal(positions.length,3);assert.ok(Math.max(...positions.map(p=>p.y))-Math.min(...positions.map(p=>p.y))<1,'date must have three columns');
@@ -106,11 +113,43 @@ try{
     results.push({mode:live?'live':'fixture',kind,theme,width,attached:true,columns:true,panels:metrics,pageErrors:[...errors]});save();
    }
    if(!live&&kind==='petrol'){
+    await triggers.nth(0).click();
+    const date=grid.getByLabel('Дата таможенного расчёта',{exact:true});
+    await date.fill('2026-09-24');await page.waitForTimeout(850);
+    assert.equal(requests.at(-1)?.customsCalculationDate,'2026-09-24');
+    assert.equal(requests.at(-1)?.year,'2026');
+    assert.equal(requests.at(-1)?.powerKw,'118');
+    await grid.getByRole('button',{name:'Считать таможню на сегодня',exact:true}).click();
+    await page.waitForTimeout(100);
+    assert.equal(await date.inputValue(),'');
+    assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0,'return to today restores the initial scenario, including omitted optional fields');
+    await page.keyboard.press('Escape');
+
     await triggers.nth(0).click();await grid.getByLabel('Год выпуска',{exact:true}).selectOption('2025');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'118');
     await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'');
     await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
     await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
     await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+   }
+   if(!live && kind==='missing-hybrid'){
+    await page.keyboard.press('Escape');await triggers.nth(0).click();
+    const date=grid.getByLabel('Дата таможенного расчёта',{exact:true});
+    assert.equal(await date.inputValue(),'');
+    assert.ok(await grid.locator('[data-calculation-date-control]').getByText('Сегодня',{exact:true}).isVisible());
+    await date.fill('2026-09-24');await page.waitForTimeout(750);
+    assert.equal(await grid.getByLabel('Год выпуска',{exact:true}).inputValue(),'2026','calculation date cannot overwrite production year');
+    assert.equal(requests.length,0,'missing power must not produce a guessed quote');
+    assert.ok(await page.locator('.ac-offer-price-panel').getByText('Цена продавца',{exact:true}).isVisible(),'seller price must remain labelled and visible');
+    assert.match(await page.locator('[data-parameter-calculation-status]').innerText(),/Мощность/);
+    assert.equal(await date.inputValue(),'2026-09-24','date is saved even though the quote is blocked by power');
+    await grid.getByRole('button',{name:'Считать таможню на сегодня',exact:true}).click();
+    assert.equal(await date.inputValue(),'','today clears the override, not fixes a stale date');
+    await page.keyboard.press('Escape');await triggers.nth(3).click();
+    await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);
+    assert.equal(requests.at(-1)?.customsCalculationDate,'');
+    assert.ok(await page.locator('.ac-offer-price-panel').getByText('По вашим параметрам',{exact:true}).isVisible());
+    await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await page.waitForTimeout(100);
+    assert.ok(await page.locator('.ac-offer-price-panel').getByText('Цена продавца',{exact:true}).isVisible());
    }
    if(!live)assert.deepEqual(errors,[]);
   }catch(error){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({kind,url,theme,width,index,error:String(error),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw error;}finally{await context.close();}

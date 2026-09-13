@@ -4,6 +4,7 @@ import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel, RecyclingPowerExplanation, RecyclingFeeHelp } from "./RecyclingPower";
 import powerStyles from "./RecyclingPower.module.css";
 import editorStyles from "./InlineParameterPanels.module.css";
+import { CalculationDateControl } from "./CalculationDateControl";
 import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
@@ -11,6 +12,14 @@ import { validateCustomerParameters } from "../../lib/catalog/customer-parameter
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
 const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
+function parameterErrorText(error: unknown, draft: ParameterDraft) {
+ const message=error instanceof Error?error.message:"Проверьте параметры";
+ const key=message.match(/^Проверьте поле (\w+)$/)?.[1];
+ if(!key)return message;
+ const tile=({powerHp:"Мощность",powerKw:"Мощность",power30MinKw:"30-минутная мощность",icePowerKw:"30-минутная мощность",year:"Дата выпуска",productionMonth:"Дата выпуска",productionDay:"Дата выпуска",engineCc:"Объём двигателя"} as Record<string,string>)[key];
+ const missing=draft[key]==null || String(draft[key]).trim()==="";
+ return `${missing?"Для расчёта под ключ заполните":"Проверьте"} ${names[key]||key}${tile?` в поле «${tile}»`:""}.`;
+}
 function Field({label,caption,value,change,options=[],min,max,searchQuery}:{label:string;caption?:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
  const [choosing,setChoosing]=useState(false);
@@ -61,16 +70,17 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false}:{offerId:string;autoCalculate?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(()=>isPickup?{...initial,vehicleCategory:'N1'}:initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
- const dirty=JSON.stringify(draft)!==JSON.stringify(initial);
+ // Empty optional values equal omitted values, so returning to today restores the original scenario.
+ const dirty=Object.keys({...initial,...draft}).some(key=>(draft[key]??"")!==(initial[key]??""));
  function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="powerHp"?{powerKw:""}:{}),...(key==="powerKw" && Number(value)>0?{powerHp:String(Math.round(Number(value)/0.73549875))}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
-  try{validateCustomerParameters(draft);}catch(e){setPending(false);const message=e instanceof Error?e.message:"Проверьте параметры";setError(message.replace(/Проверьте поле (\w+)/,(_,key)=>`Укажите корректно ${names[key]||key}`));return;}
+  try{validateCustomerParameters(draft);}catch(e){setPending(false);setError(parameterErrorText(e,draft));return;}
   const controller=new AbortController();
   const timer=setTimeout(async()=>{
    setPending(true);
@@ -85,6 +95,8 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate]);
  const showCalculation=dirty || Boolean(result);
+ // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.
+ const keepSellerPrice=sourcePriceOnly && !result;
  const powerInfo = recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
  const powerLabel = draft.powerHp ? `${draft.powerHp} л.с.` : "Указать мощность";
  const pairedPower = Boolean(powerInfo?.borderline);
@@ -92,24 +104,27 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
  const currentYear = new Date().getFullYear();
  const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
-  {!showCalculation?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
+  {!showCalculation || keepSellerPrice?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
    <p className="text-xs font-bold uppercase tracking-widest">{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>
    {result?<p className="mt-2 text-3xl font-black">{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p>:<p className="mt-3 text-sm">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</p>}
    {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">{dirty?"Ориентир под ключ. Данные и стоимость требуют подтверждения.":"Рассчитано автоматически по данным объявления. Данные и стоимость требуют подтверждения."}</p>:null}
    {result?.customs?.productionReferenceDate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Дата выпуска в расчёте: {result.customs.productionReferenceDate}{result.customs.productionReferenceBasis !== "exact_date" ? " · условная дата, уточните по документам" : ""}. Тариф: {result.customs.vehicleCategory === "N1" ? `N1 · ТН ВЭД ${result.customs.tariffCode || "8704"}` : result.customs.ageBand === "up_to_3_years" ? "до 3 лет" : result.customs.ageBand === "from_3_to_5_years" ? "3–5 лет" : "старше 5 лет"}.</p> : null}
    {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
   </div>}
-  {!dirty && autoCalculate && !result ? <p role="status" className="mt-2 text-xs text-[var(--ac-muted)]">{pending?"Рассчитываем по данным объявления…":error}</p> : null}
+  {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <div className="mt-2 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>
+   <p role="status">{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p>
+   {keepSellerPrice && dirty ? <button type="button" className="mt-1 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button> : null}
+  </div> : null}
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>
      <label>Год<select aria-label="Год выпуска" value={draft.year||""} onChange={e=>change("year",e.target.value)}><option value="">—</option>{draft.year && !yearOptions.includes(Number(draft.year)) ? <option value={draft.year}>{draft.year}</option> : null}{yearOptions.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
      <label>Месяц<select aria-label="Месяц выпуска" value={draft.productionMonth||""} onChange={e=>change("productionMonth",e.target.value)}><option value="">—</option>{Array.from({length:12},(_,i)=><option key={i+1} value={i+1}>{String(i+1).padStart(2,"0")}</option>)}</select></label>
      <label>День<input aria-label="День выпуска (если известен)" type="number" inputMode="numeric" min={1} max={31} step={1} placeholder="—" value={draft.productionDay||""} onChange={e=>change("productionDay",e.target.value)}/></label>
-     <label className={editorStyles.calculationDate}>Дата расчёта<input aria-label="Дата таможенного расчёта" type="date" value={draft.customsCalculationDate||""} onChange={e=>change("customsCalculationDate",e.target.value)}/></label>
-     <span className={editorStyles.dateHint}>Пусто — на сегодня</span>
+     <CalculationDateControl value={draft.customsCalculationDate||""} onChange={value=>change("customsCalculationDate",value)} />
+     <span className={editorStyles.dateHint}>{draft.customsCalculationDate ? <button type="button" className={editorStyles.todayButton} aria-label="Считать таможню на сегодня" onClick={()=>change("customsCalculationDate","")}>На сегодня</button> : "По умолчанию"}</span>
     </div>
-    <p className={editorStyles.note}>Месяц и день укажите, если они известны.</p>
+    <p className={editorStyles.note}>Вверху — выпуск авто по документам. Ниже — дата, на которую считаем его возраст.</p>
     <details className={editorStyles.help}><summary>Как учитывается дата</summary><p>Без даты расчёт на сегодня. Для M1: до 3 лет включительно, свыше 3 до 5 включительно, старше 5. Если день неизвестен — 15-е число; если месяц неизвестен — 1 июля.</p></details>
    </Tile>
    <Tile label="Объём двигателя" value={draft.fuel==="electric"?"Без ДВС":draft.engineCc?`${Number(draft.engineCc).toLocaleString("ru-RU")} см³`:"Указать объём"} icon={<EngineIcon/>}>

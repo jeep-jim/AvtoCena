@@ -4,6 +4,7 @@ on:
     branches: [fix/attached-compact-parameters-20260913, fix/parameter-dropdown-gap-20260913, main]
     paths:
       - 'apps/web/components/catalog/InlineOfferParameters.tsx'
+      - 'apps/web/components/catalog/CalculationDateControl.tsx'
       - 'apps/web/components/catalog/InlineParameterPanels.module.css'
       - 'tests/browser/attached-parameter*'
       - '.github/workflows/verify-attached-parameters.yml'
