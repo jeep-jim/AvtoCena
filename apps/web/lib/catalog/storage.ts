@@ -843,9 +843,32 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
   return facetsFromProjection(generationId, rows, params, hasFilters);
 }
 
-export async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[], preserved?: AsyncIterable<VehicleOffer[]>) {
+export async function persistInternalCatalog(
+  storage: ReturnType<typeof getJsonStorage>,
+  generationId: string,
+  offers: VehicleOffer[],
+  preserved?: AsyncIterable<VehicleOffer[]>,
+  replaceSourceIds: ReadonlySet<string> = new Set(),
+) {
   const now = new Date().toISOString();
+  const currentManifest = replaceSourceIds.size
+    ? await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} })
+    : null;
+  // Source chunks are immutable. A one-market refresh can therefore keep the
+  // exact chunk references for untouched source IDs instead of downloading and
+  // uploading every retained record again. The internal manifest protects all
+  // referenced chunks from cleanup, regardless of the generation in their path.
   const sources: Record<string, { count: number; chunks: string[]; updatedAt: string }> = {};
+  for (const [sourceId, entry] of Object.entries(currentManifest?.value?.sources || {})) {
+    if (replaceSourceIds.has(sourceId)) continue;
+    const value = entry as { count?: unknown; chunks?: unknown; updatedAt?: unknown };
+    if (!Number.isInteger(Number(value.count)) || Number(value.count) < 0
+      || !Array.isArray(value.chunks) || value.chunks.some((path) => typeof path !== "string" || !path.startsWith(`catalog/internal/offers/${sourceId}/`))) {
+      throw new Error(`catalog_internal_manifest_source_invalid:${sourceId}`);
+    }
+    sources[sourceId] = { count: Number(value.count), chunks: [...value.chunks], updatedAt: String(value.updatedAt || now) };
+  }
+  const preservedSourceIds = new Set(Object.keys(sources));
   const bySource = new Map<string, VehicleOffer[]>();
   const seenIds = new Set<string>();
   async function flush(sourceId: string) {
@@ -859,6 +882,7 @@ export async function persistInternalCatalog(storage: ReturnType<typeof getJsonS
     bySource.set(sourceId, []);
   }
   async function append(offer: VehicleOffer) {
+    if (preservedSourceIds.has(offer.sourceId)) return;
     if (offer.market === "japan" || seenIds.has(offer.id)) return;
     if (!hasAllowedCatalogSourceProvenance(offer)) return;
     seenIds.add(offer.id);
@@ -978,6 +1002,7 @@ export type PersistCatalogOptions = {
   // the caller has already read and hash-validated the current public market.
   preservePublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
   preservedInternalOffers?: AsyncIterable<VehicleOffer[]>;
+  replaceInternalSourceIds?: ReadonlySet<string>;
   // A normal market refresh may append canonical newcomers while keeping every
   // already-published row byte-stable. Protected rows win duplicate and quota
   // ties, which makes routine collection genuinely grow-only.
@@ -1080,7 +1105,13 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   const now = new Date().toISOString();
   const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
   const sourceAllowedInternalOffers = nextOffers.filter(hasAllowedCatalogSourceProvenance);
-  await persistInternalCatalog(storage, generationId, sourceAllowedInternalOffers, options.preservedInternalOffers);
+  await persistInternalCatalog(
+    storage,
+    generationId,
+    sourceAllowedInternalOffers,
+    options.preservedInternalOffers,
+    options.replaceInternalSourceIds,
+  );
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of publishedOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
