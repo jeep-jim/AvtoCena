@@ -1,3 +1,4 @@
+import { chinaInventoryAgeDecision, catalogHardPriceCap } from "./china-owner-policy";
 import { enforceCatalogModelYearQuota, isCatalogCombustionLowPower, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
 
@@ -22,7 +23,7 @@ export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   recentMaxAgeYears: 15,
   priorityMaxPowerHp: 160,
   priorityMaxTotalRub: 6_000_000,
-  hardMaxTotalRub: 15_000_000,
+  hardMaxTotalRub: 16_000_000,
   lowPowerMinShare: 0.8,
 };
 
@@ -67,10 +68,11 @@ export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: Ca
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
   if (!offer.id || !offer.make || !offer.model || !offer.market) return { tier: "rejected", eligible: false, reason: "identity" };
   const year = number(offer.year), ageYears = currentAge(year), powerHp = number(offer.powerHp), totalRub = number(offer.totalRub), popularity = popularityDecile(offer);
+  if (offer.market === "china" && !chinaInventoryAgeDecision(offer).eligible) return { tier: "rejected", eligible: false, reason: "china_age_month", ageYears, powerHp, totalRub };
   const minimumYear = offer.market === "japan" ? 2010 : 2020;
   if (!year || year < minimumYear || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
-  if (totalRub !== undefined && totalRub > Math.min(15_000_000, options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  if (totalRub !== undefined && totalRub > Math.min(catalogHardPriceCap(offer), options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {
     if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
     return isCatalogPriorityOffer(offer, options)

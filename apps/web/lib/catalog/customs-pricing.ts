@@ -1,3 +1,4 @@
+import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { expandCustomsBreakdown } from "./customs-breakdown";
 import { confirmedProductionValue } from "./production-month";
 import { synchronizeCombustionPower } from "./combustion-power-consistency";
@@ -209,6 +210,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     };
   }
 
+  const sourcePriceAdjustment = che168GlobalPriceAdjustment(offer, rate.sourcePriceRub);
+  const adjustmentInput = sourcePriceAdjustment ? { manualAdjustmentRub: sourcePriceAdjustment.adjustmentRub, manualAdjustmentReason: sourcePriceAdjustment.label } : {};
   const pendingSnapshot = {
     ...(offer.calculationSnapshot || {}),
     currencyRate: rate,
@@ -306,6 +309,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   if ((electrified || allowCombustionPreliminary) && onlyPowerDependentMissing(combinedMissing) && positive(customs.knownCustomsRub) > 0) {
     const calculation = calculateAvtocenaFromBusinessConfig({
+      ...adjustmentInput,
       marketId: offer.market,
       marketConfig: market.config,
       sourcePriceRub: rate.sourcePriceRub,
@@ -322,6 +326,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       totalRub: calculation.totalRub,
       calculationSnapshot: {
         ...calculation.snapshot,
+        sourcePriceAdjustment,
         currencyRate: rate,
         eurRate,
         sourcePriceRub: rate.sourcePriceRub,
@@ -342,7 +347,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         powerSource: offer.powerDataSource,
         certified30MinutePowerMissing: combinedMissing.includes("certified_30_minute_power_kw"),
         vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
-        warnings: [...market.warnings, ...customs.warnings, ...(utilizationProblem ? [utilizationProblem.warning] : []), warning],
+        warnings: [...market.warnings, ...customs.warnings, ...(sourcePriceAdjustment ? [sourcePriceAdjustment.warning] : []), ...(utilizationProblem ? [utilizationProblem.warning] : []), warning],
       },
       calculationStatus: "preliminary_power_pending",
     };
@@ -371,6 +376,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   }
 
   const calculation = calculateAvtocenaFromBusinessConfig({
+    ...adjustmentInput,
     marketId: offer.market,
     marketConfig: market.config,
     sourcePriceRub: rate.sourcePriceRub,
@@ -380,8 +386,9 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const powerEstimated = Boolean(powerScenario) || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const customsAssumed = customs.personalUseAssumed || customs.vehicleCategoryAssumed;
-  const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || customsAssumed || offer.priceMode === "estimated";
+  const priceEstimated = Boolean(sourcePriceAdjustment) || market.estimated || powerEstimated || customs.ageEstimated || customsAssumed || offer.priceMode === "estimated";
   const warnings = [
+    ...(sourcePriceAdjustment ? [sourcePriceAdjustment.warning] : []),
     ...market.warnings,
     ...customs.warnings,
     ...(powerScenario ? [`Предварительный сценарий мощности: ${powerScenario.horsepower} л.с. Значение влияет на утильсбор и должно быть подтверждено по документам автомобиля.`] : powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
@@ -393,6 +400,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     totalRub: calculation.totalRub,
     calculationSnapshot: {
       ...calculation.snapshot,
+      sourcePriceAdjustment,
       currencyRate: rate,
       eurRate,
       sourcePriceRub: rate.sourcePriceRub,

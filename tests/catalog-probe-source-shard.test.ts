@@ -51,9 +51,7 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     ["autoscout_europe_open", "https://www.autoscout24.com/"],
     ["myauto_georgia_list", "https://www.myauto.ge/"],
     ["autopapa_georgia_open", "https://autopapa.ge/"],
-    ["autohome_used_china_open", "https://www.che168.com/"],
-    ["dongchedi_china_open", "https://www.dongchedi.com/"],
-    ["guazi_china_open", "https://www.guazi.com/"],
+    ["autohome_used_china_open", "https://global.che168.com/"],
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
     ["drom_japan_stat", "https://www.drom.ru/world/japan/"],
   ];

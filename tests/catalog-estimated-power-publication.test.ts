@@ -51,7 +51,7 @@ function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
     },
     firstSeenAt: "2026-07-25T00:00:00.000Z",
     updatedAt: "2026-07-25T00:00:00.000Z",
-    operational: { sourceUrl: "https://www.che168.com/123", raw: {} },
+    operational: { sourceUrl: "https://global.che168.com/en/detail/123", raw: {} },
     ...rest,
   } as VehicleOffer;
 }

@@ -1,10 +1,10 @@
 {
-  "mode": "owner-requested-georgia-next-single-market",
+  "mode": "owner-approved-che168-global-relaunch",
   "publishMarkets": [
-    "georgia"
+    "china"
   ],
-  "reason": "Owner-approved sequential queue: Europe 34661713161 completed publication and final audit with 0 invalidReady. Start only fresh Georgia with AutoPapa and MyAuto, unchanged limits and quality/retention/storage gates. Preserve all other markets including Japan. China access and UAE assortment losses remain unresolved and are not accepted as complete coverage.",
+  "resetCursors": true,
   "remainingMarkets": [],
-  "requestedAt": "2026-09-12T02:08:37.119Z",
-  "resetCursors": true
+  "requestedAt": "2026-09-13T03:20:42.471893+00:00",
+  "reason": "Owner 2026-09-13 explicitly approves Che168 Global plus new Autohome 2026+ at <=10%. Fresh China only. 72-month age with source month; 80% <=160hp including unknowns in remaining 20%; <=16M RUB. Original USD retained, owner 2% car-price adjustment separate from unchanged customs base. Preserve other markets, raw/chunks, and all audit/storage/shrink gates."
 }

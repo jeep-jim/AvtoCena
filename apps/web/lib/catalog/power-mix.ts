@@ -19,7 +19,7 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
  for(const [market,bucket] of groups){
   const low=bucket.filter(row=>catalogPowerBand(row)==="low");
-  const sellerUnknown=bucket.filter(row=>catalogPowerBand(row)==="unknown" && row.catalogPricingMode==="seller");
+  const sellerUnknown=market === "china" ? [] : bucket.filter(row=>catalogPowerBand(row)==="unknown" && row.catalogPricingMode==="seller");
   const sellerUnknownSet=new Set(sellerUnknown);
   const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !sellerUnknownSet.has(row));
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
@@ -30,7 +30,7 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
    report[market]={low:low.length,high:other.length-unknown,unknown:unknown+sellerUnknown.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
    continue;
   }
-  if(bucket.length && !low.length && !sellerUnknown.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
+  if(market !== "china" && bucket.length && !low.length && !sellerUnknown.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
   const allowance=Math.floor(low.length/4);
   // Europe: fill the limited extra pool with the least expensive verified
   // delivered totals first. Seller-only prices are not comparable to totals.
@@ -41,7 +41,7 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   const kept=new Set<T>([...low,...keptOther,...sellerUnknown]);
   selected.push(...bucket.filter(row=>kept.has(row)));
   removed.push(...other.slice(allowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,published:kept.size,held:other.length-keptOther.length,targetMet:true};
+  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
  }
  return {rows:selected,removed,report};
 }

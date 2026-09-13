@@ -249,10 +249,11 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   private async getJson<T>(url: string, referer = `${SITE_BASE}/en/used-cars`) {
     const response = await fetch(url, {
       headers: { ...HEADERS, referer },
-      redirect: "follow",
+      redirect: "error",
       signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
     });
     const body = await response.text();
+    if (che168BrowserChallenge(body)) throw new Error("che168_global_bot_challenge");
     if (!response.ok) throw new Error(`che168_global_http_${response.status}:${url}`);
     let parsed: ApiEnvelope<T>;
     try { parsed = JSON.parse(body) as ApiEnvelope<T>; }
@@ -276,7 +277,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       items,
       nextCursor: finished ? null : String(page + 1),
       finished,
-      count: items.length,
+      count: totalCount || items.length,
       diagnostics: { listingRows: Array.isArray(result.carlist) ? result.carlist.length : 0, rejectedRows: (Array.isArray(result.carlist) ? result.carlist.length : 0) - items.length },
       health: {
         ok: items.length > 0,
@@ -315,6 +316,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       mileageKm: integer(row?.mileage),
       fuel: evidence.fuel.status === "exact" ? evidence.fuel.value : undefined,
       powertrainKind: powertrainKindForFuel(evidence.fuel.status === "exact" ? evidence.fuel.value : undefined, row?.fuelname),
+      productionDate: undefined,
       sourcePrice: price,
       sourceCurrency: "USD",
       priceMode: "fixed",
@@ -328,6 +330,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         sourceVenueName: "Che168 Global",
         sourceTitle: title,
         sourceCity: text(row?.cname) || undefined,
+        registrationDate: text(row.regdate),
         exactDetail: false,
         exactFields: true,
         exactPhotos: false,
@@ -496,6 +499,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       sourceVenueName: "Che168 Global",
       sourceTitle: title,
       sourceCity: text(detail.cname) || offer.operational?.sourceCity,
+      registrationDate: text(detail.regdate),
       exactDetail: true,
       exactFields: true,
       exactPhotos: verifiedGallery,
@@ -517,6 +521,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
+        productionDate: {source: "che168_global_carinfo_manufacturedate", status: text(detail.manufacturedate || detail.producedate) ? "exact" : "missing", value: text(detail.manufacturedate || detail.producedate)},
         year: { source: "che168_global_listing_and_carinfo", ...evidence.year },
         fuel: { source: "che168_global_listing_and_carinfo", ...evidence.fuel },
         engineCc: { source: pageParameters && tableFuelConsistent ? "che168_global_identity_bound_parameters" : "che168_global_carinfo", ...evidence.engineCc },

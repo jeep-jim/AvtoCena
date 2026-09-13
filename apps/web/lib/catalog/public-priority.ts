@@ -1,3 +1,4 @@
+import { catalogHardPriceCap } from "./china-owner-policy";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { isCatalogCombustionLowPower } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
@@ -212,15 +213,16 @@ export function japanAuctionSoldPriceVerified(offer: Partial<VehicleOffer> | any
     && Math.abs(sourcePriceJpy - finalPriceJpy) <= 1;
 }
 
-function publicPriceLimits() {
-  // The preferred limit only affects ordering. The 15M ceiling is a product
+function publicPriceLimits(offer?: Partial<VehicleOffer>) {
+  const hardMaximumRub = catalogHardPriceCap(offer);
+  // The preferred limit only affects ordering. The market ceiling is a product
   // invariant for a displayed delivered price. Inventory with an unfinished
   // calculation can still be shown, but it receives no public delivered total.
   const requestedPreferredRub = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_RUB || 8_000_000);
-  const requestedAbsoluteRub = Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB);
+  const requestedAbsoluteRub = Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || hardMaximumRub);
   const absoluteMaximumRub = Math.min(
-    CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB,
-    Math.max(1_000_000, Number.isFinite(requestedAbsoluteRub) ? requestedAbsoluteRub : CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB),
+    hardMaximumRub,
+    Math.max(1_000_000, Number.isFinite(requestedAbsoluteRub) ? requestedAbsoluteRub : hardMaximumRub),
   );
   const preferredMaximumRub = Math.min(
     absoluteMaximumRub,
@@ -238,7 +240,7 @@ export function catalogOfferCarPriceRub(offer: Partial<VehicleOffer> | any) {
 export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer> | any) {
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return "";
-  const { absoluteMaximumRub } = publicPriceLimits();
+  const { absoluteMaximumRub } = publicPriceLimits(offer);
   if (totalRub > absoluteMaximumRub) return "above_public_price_limit";
   const carPriceRub = catalogOfferCarPriceRub(offer);
   const requestedRatio = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO || CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO);
@@ -265,7 +267,7 @@ export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
   const pricingConfidence = String(offer?.calculationSnapshot?.pricingConfidence || "");
   const attestedProjectionRub = attestedPublicProjectionRub(offer);
   if (attestedProjectionRub) {
-    const { absoluteMaximumRub } = publicPriceLimits();
+    const { absoluteMaximumRub } = publicPriceLimits(offer);
     return attestedProjectionRub <= absoluteMaximumRub ? attestedProjectionRub : 0;
   }
   const projectionVersion = Number(offer?.cardProjectionVersion || 0);
@@ -278,12 +280,12 @@ export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
   if (catalogPublicEconomicRejectionReason(offer)) return 0;
   const projectedVisibleRub = Math.round(positive(offer?.publicVisibleRub, 1_000_000_000));
   if (projectedVisibleRub) {
-    const { absoluteMaximumRub } = publicPriceLimits();
+    const { absoluteMaximumRub } = publicPriceLimits(offer);
     return projectedVisibleRub <= absoluteMaximumRub ? projectedVisibleRub : 0;
   }
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return 0;
-  const { absoluteMaximumRub } = publicPriceLimits();
+  const { absoluteMaximumRub } = publicPriceLimits(offer);
   return totalRub <= absoluteMaximumRub ? totalRub : 0;
 }
 
@@ -321,7 +323,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   const powerHp = offerPowerHp(offer);
   const popularityDecile = knowledgePopularityDecile(offer);
   const imageCount = Array.isArray(offer?.images) ? offer.images.length : 0;
-  const { preferredMaximumRub } = publicPriceLimits();
+  const { preferredMaximumRub } = publicPriceLimits(offer);
   const maximumPowerHp = Math.max(50, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
   const maximumAgeYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
   const popularDecile = Math.max(1, Math.min(10, Number(process.env.CATALOG_PRIORITY_POPULARITY_DECILE || 5)));

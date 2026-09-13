@@ -8,8 +8,8 @@ const car = { '@type':'Car', url:'https://www.dongchedi.com/usedcar/12345678',
   image:['https://p3.dcarimg.com/car-one.jpg'],offers:{price:80000,priceCurrency:'CNY'} };
 const jsonld = (value:unknown) => `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
 
-test('production registry uses the public reader rather than the permanent restriction stub', () => {
-  assert.equal(catalogImportSources.find(s=>s.sourceId==='dongchedi_china_open'),dongchediPublicSource);
+test('Dongchedi public reader remains testable but is retired from owner Global-only production', () => {
+  assert.equal(catalogImportSources.find(s=>s.sourceId==='dongchedi_china_open'),undefined);
   assert.equal(dongchediPublicSource.accessMode,'public_html');
 });
 test('live login redirect stops after exactly one request, without following or authenticating', async () => {
