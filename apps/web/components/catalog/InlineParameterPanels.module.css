@@ -1,18 +1,19 @@
 /* Only offer parameter editors: no catalog/card/price layout changes. */
-.grid { --parameter-gap: 10px; position: relative; isolation: isolate; z-index: 70; column-gap: var(--parameter-gap); }
+.grid { --parameter-gap: 10px; position: relative; isolation: isolate; z-index: 70; column-gap: var(--parameter-gap); row-gap: var(--parameter-gap); }
 .tile { height: 50px; position: relative; }
 .tile:has(> .editor[open]) { z-index: 90; }
 .editor { position: static !important; overflow: visible !important; }
 .editor > summary { position: relative; border-radius: 1rem; }
 .editor[open] { border-radius: 1rem 1rem 0 0; box-shadow: none !important; }
 .editor[open] > summary { z-index: 2; border-radius: 1rem 1rem 0 0; background: var(--ac-surface-2); }
-/* Join the menu to its trigger across the existing 2px tile reserve. */
-.editor[open] > summary::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 4px; background: var(--ac-surface-2); pointer-events: none; }
+/* Keep the normal gap below the adjacent tile; only the active trigger joins its menu. */
+.editor[open] > summary::after { content: ""; position: absolute; left: 0; right: 0; bottom: calc(-1 * var(--parameter-gap) - 3px); height: calc(var(--parameter-gap) + 4px); background: var(--ac-surface-2); pointer-events: none; }
+:global(html[data-theme="light"]) .editor[open] > summary::after { left: -1px; right: -1px; border-inline: 1px solid var(--ac-border); }
 .editor > summary:focus-visible { outline: 2px solid var(--ac-public-accent, #ff4650); outline-offset: 2px; }
 .editor:not([open]) > .panel { display: none; }
 .panel {
  position: absolute;
- top: 100%;
+ top: calc(100% + var(--parameter-gap));
  left: 0;
  width: calc(200% + var(--parameter-gap));
  box-sizing: border-box;
