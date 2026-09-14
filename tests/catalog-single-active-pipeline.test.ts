@@ -41,6 +41,27 @@ test("only the owner-approved seller inventory workflows are scheduled under one
   assert.equal(writesCatalogMarkets(cleanup), false);
 });
 
+test("owner-approved recurring schedule stays five-market only and keeps Japan manual", () => {
+  const rebuild = text("catalog-five-market-full-rebuild.yml");
+  const cleanup = text("catalog-storage-cleanup.yml");
+  const japan = text("catalog-japan-drom-refresh.yml");
+
+  assert.match(rebuild, /^\s{4}- cron: "0 18 \* \* 0"$/m);
+  assert.equal((rebuild.match(/^\s{4}- cron:/gm) || []).length, 1);
+  assert.match(rebuild, /const allowed = \['china','korea','uae','georgia','europe'\]/);
+  assert.doesNotMatch(rebuild, /const allowed = \[[^\n]*japan/);
+  assert.doesNotMatch(japan, /^\s{2}schedule\s*:/m);
+  assert.doesNotMatch(japan, /^\s{4}-\s*cron\s*:/m);
+
+  assert.match(cleanup, /^\s{4}- cron: "0 17 \* \* \*"$/m);
+  assert.equal((cleanup.match(/^\s{4}- cron:/gm) || []).length, 1);
+  for (const workflow of [rebuild, cleanup]) {
+    const retentionDays = [...workflow.matchAll(/retention-days:\s*(\d+)/g)].map((match) => Number(match[1]));
+    assert.ok(retentionDays.length > 0);
+    assert.deepEqual([...new Set(retentionDays)], [14]);
+  }
+});
+
 test("saved Knowledge CORE source corpus cannot restart its multi-hour crawl on a schedule", () => {
   const source = text("knowledge-source-snapshot.yml");
   assert.doesNotMatch(source, /^\s{2}schedule\s*:/m);
