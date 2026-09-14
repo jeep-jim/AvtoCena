@@ -1,0 +1,200 @@
+import crypto from "node:crypto";
+import {
+  appendChunkedDataJson,
+  readChunkedDataJson,
+  updateChunkedDataJson,
+  mutateDataJson,
+} from "./data";
+import { readCrmUsers } from "./crm-users";
+import { getTelegramRuntimeConfig } from "./telegram-config";
+import { botAdmin } from "./crm-access";
+
+export async function telegramSend(
+  token: string,
+  chatId: string,
+  text: string,
+  keyboard?: any,
+) {
+  const response = await fetch(
+    `https://api.telegram.org/bot${token}/sendMessage`,
+    {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text.slice(0, 4000),
+        disable_web_page_preview: true,
+        ...(keyboard ? { reply_markup: Array.isArray(keyboard) ? { inline_keyboard: keyboard } : keyboard } : {}),
+      }),
+      signal: AbortSignal.timeout(5000),
+      cache: "no-store",
+    },
+  );
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result?.ok)
+    throw Error(`telegram_delivery_${response.status}`);
+  return result.result;
+}
+export function leadNotice(lead: any) {
+  return [
+    "📩 Новая заявка · АвтоЦена",
+    lead.name || lead.telegramDisplayName || "Клиент",
+    lead.phone ? `Телефон: ${lead.phone}` : "",
+    lead.telegram ? `Telegram: @${lead.telegram}` : "",
+    lead.car || lead.offerTitle || "Подбор автомобиля",
+    lead.city || "",
+    lead.budgetRub
+      ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
+      : "",
+    lead.comment || "",
+    `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+const QUEUE = "telegram/crm-outbox.json";
+export async function enqueueMessage(input: {
+  id: string;
+  chatId: string;
+  text: string;
+  leadId: string;
+  audience: "admin" | "customer";
+  keyboard?: any;
+}) {
+  return appendChunkedDataJson(QUEUE, {
+    ...input,
+    createdAt: new Date().toISOString(),
+    status: "pending",
+    attempts: 0,
+    nextAttemptAt: 0,
+  });
+}
+export async function flushCrmNotifications(limit = 2) {
+  const config = await getTelegramRuntimeConfig();
+  if (!config?.token) return { sent: 0, configured: false };
+  // A lease prevents overlapping browser, webhook and worker drains.
+  const leaseId = crypto.randomUUID();
+  let acquired = false;
+  await mutateDataJson(
+    "telegram/crm-outbox-lease.json",
+    { id: "", until: 0 },
+    (lease) => {
+      acquired = false;
+      if (lease.until > Date.now()) return lease;
+      acquired = true;
+      return { id: leaseId, until: Date.now() + 90_000 };
+    },
+  );
+  if (!acquired) return { sent: 0, busy: true };
+  let sent = 0;
+  try {
+    const users = await readCrmUsers();
+    const admins = users.filter(
+      (user) =>
+        user.status !== "disabled" &&
+        ["owner", "admin"].includes(user.role) &&
+        user.telegramId,
+    );
+    const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+    // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
+    for (const lead of leads
+      .filter(
+        (lead) =>
+          lead.notificationRequestedAt &&
+          !lead.notificationsQueuedAt &&
+          !lead.archivedAt,
+      )
+      .slice(0, 5)) {
+      if (!admins.length) continue;
+      for (const user of admins)
+        await enqueueMessage({
+          id: `new_${lead.id}_${user.id}`,
+          chatId: String(user.telegramId),
+          leadId: lead.id,
+          audience: "admin",
+          text: leadNotice(lead),
+          keyboard: [
+            [
+              {
+                text: "Открыть заявку",
+                url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
+              },
+            ],
+            [
+              {
+                text: "Ответить клиенту",
+                callback_data: `crm:reply:${lead.id}`,
+              },
+            ],
+          ],
+        });
+      await updateChunkedDataJson<any>(
+        "leads/leads.json",
+        lead.id,
+        (stored) => ({
+          ...stored,
+          notificationsQueuedAt: new Date().toISOString(),
+        }),
+      );
+    }
+    const queue = await readChunkedDataJson<any>(QUEUE, []);
+    for (const item of queue
+      .filter(
+        (item) =>
+          item.status !== "sent" &&
+          item.status !== "cancelled" &&
+          Number(item.nextAttemptAt || 0) <= Date.now(),
+      )
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+      .slice(0, limit)) {
+      const lead = leads.find((lead) => lead.id === item.leadId);
+      const allowed =
+        item.audience === "admin"
+          ? Boolean(await botAdmin(item.chatId)) && !lead?.archivedAt
+          : String(lead?.telegramChatId || "") === item.chatId;
+      if (!allowed) {
+        await updateChunkedDataJson<any>(QUEUE, item.id, (row) => ({
+          ...row,
+          status: "cancelled",
+        }));
+        continue;
+      }
+      try {
+        const message = await telegramSend(
+          config.token,
+          item.chatId,
+          item.text,
+          item.keyboard,
+        );
+        await updateChunkedDataJson<any>(QUEUE, item.id, (row) => ({
+          ...row,
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          messageId: message.message_id,
+          lastError: "",
+        }));
+        sent++;
+      } catch {
+        await updateChunkedDataJson<any>(QUEUE, item.id, (row) => ({
+          ...row,
+          status: "pending",
+          attempts: Number(row.attempts || 0) + 1,
+          nextAttemptAt:
+            Date.now() +
+            Math.min(
+              3600000,
+              30000 * 2 ** Math.min(7, Number(row.attempts || 0)),
+            ),
+          lastError: "Не доставлено, повтор запланирован",
+        }));
+      }
+    }
+    return { sent, configured: true };
+  } finally {
+    await mutateDataJson(
+      "telegram/crm-outbox-lease.json",
+      { id: "", until: 0 },
+      (lease) => (lease.id === leaseId ? { id: "", until: 0 } : lease),
+    );
+  }
+}

@@ -1,7 +1,8 @@
+import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { ClientCreateForm } from "@/components/crm/ClientCreateForm";
 import { readChunkedDataJson } from "@/lib/data";
-import { getAuthUsers } from "@/lib/auth";
+import { getAuthUsers, getCurrentUser } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,9 @@ function managerName(managers: any[], id?: string) {
 }
 
 export default async function CrmClientsPage() {
-  const clients = await readChunkedDataJson<any>("clients/clients.json", []);
+  const user=await getCurrentUser();
+  const activeClientIds = new Set((await readChunkedDataJson<any>("leads/leads.json",[])).filter(activeLead).map(lead=>lead.clientId));
+  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client) && activeClientIds.has(client.id));
   const managers = getAuthUsers();
 
   return (

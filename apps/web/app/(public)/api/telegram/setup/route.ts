@@ -16,8 +16,8 @@ function normalizeUsername(value: unknown) {
   return String(value || "").trim().replace(/^@+/, "").toLowerCase();
 }
 
-function adminAllowed() {
-  const user = getCurrentUser();
+async function adminAllowed() {
+  const user = await getCurrentUser();
   return Boolean(user && isAdminRole(user.role));
 }
 
@@ -85,7 +85,7 @@ function publicWebhookUrl(value: unknown) {
 }
 
 export async function GET() {
-  if (!adminAllowed()) return failure("forbidden", "", "auth", 403);
+  if (!(await adminAllowed())) return failure("forbidden", "", "auth", 403);
   const config = await getTelegramPublicConfig();
   return NextResponse.json({ ok: true, ...config }, {
     headers: { "cache-control": "no-store" },
@@ -93,7 +93,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  if (!adminAllowed()) return failure("forbidden", "", "auth", 403);
+  if (!(await adminAllowed())) return failure("forbidden", "", "auth", 403);
 
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;
   const incomingToken = String(body.token || "").trim();

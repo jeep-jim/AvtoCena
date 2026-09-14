@@ -1,3 +1,5 @@
+import { handleCrmBotUpdate } from "@/lib/crm-bot";
+import { enqueueMessage, flushCrmNotifications } from "@/lib/crm-notifications";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
@@ -8,7 +10,6 @@ import {
   updateChunkedDataJson,
 } from "@/lib/data";
 import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
-import { handlePrivateEmployeeLoginStart } from "@/lib/telegram-employee-login";
 import { handlePublicBotUpdate } from "@/lib/telegram-public-bot";
 
 export const runtime = "nodejs";
@@ -98,7 +99,8 @@ async function handlePrivateLeadStart(update: any, token: string) {
   const now = new Date();
   const lead = leads.find((candidate) => candidate.telegramBindTokenHash === tokenHash
     && candidate.telegramBindExpiresAt
-    && Date.parse(candidate.telegramBindExpiresAt) > now.getTime());
+    && Date.parse(candidate.telegramBindExpiresAt) > now.getTime()
+    || (candidate.telegramLastBindHash === tokenHash && String(candidate.telegramUserId || "") === String(message.from?.id)));
   const chatId = String(message.chat.id);
 
   if (!lead) {
@@ -114,18 +116,16 @@ async function handlePrivateLeadStart(update: any, token: string) {
   const telegramUserId = String(message.from?.id || message.chat.id);
   const telegramDisplayName = [message.from?.first_name, message.from?.last_name].filter(Boolean).join(" ").trim();
 
-  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", lead.id, (stored) => ({
-    ...stored,
-    updatedAt: boundAt,
-    telegramChatId: chatId,
-    telegramUserId,
-    telegramUsername: telegramUsername || stored.telegramUsername || stored.telegram || "",
-    telegramDisplayName: telegramDisplayName || stored.telegramDisplayName || "",
-    telegramBoundAt: boundAt,
-    telegramDeliveryStatus: "connected",
-    telegramBindTokenHash: "",
-    telegramBindExpiresAt: "",
-  })) || lead;
+  let claimed=false;
+  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", lead.id, (stored) => {
+    claimed=false;
+    if(stored.telegramLastBindHash===tokenHash && String(stored.telegramUserId || "")===telegramUserId){claimed=true;return stored;}
+    if(stored.telegramBindTokenHash!==tokenHash || !(Date.parse(stored.telegramBindExpiresAt || "")>Date.now()))return stored;
+    claimed=true;
+    return {...stored,updatedAt:boundAt,telegramChatId:chatId,telegramUserId,telegramUsername:telegramUsername || "",telegramDisplayName,
+      telegramBoundAt:boundAt,telegramDeliveryStatus:"connected",telegramLastBindHash:tokenHash,telegramBindTokenHash:"",telegramBindExpiresAt:""};
+  });
+  if(!claimed)return true;
 
   if (lead.clientId) {
     await updateChunkedDataJson<any>("clients/clients.json", lead.clientId, (client) => ({
@@ -149,29 +149,13 @@ async function handlePrivateLeadStart(update: any, token: string) {
     text: telegramUsername ? `@${telegramUsername}` : telegramDisplayName || telegramUserId,
   });
 
-  await telegramCall(token, "sendMessage", {
-    chat_id: chatId,
-    text: "✅ Telegram подключён к вашей заявке в АвтоЦене. Ниже отправляю сохранённые варианты и расчёты. Менеджер сможет продолжить общение здесь.",
-    disable_web_page_preview: true,
-  });
-
-  const offers = Array.isArray(updatedLead.selectedOffers) ? updatedLead.selectedOffers.slice(0, 5) : [];
-  if (offers.length) {
-    for (const [index, offer] of offers.entries()) {
-      await telegramCall(token, "sendMessage", {
-        chat_id: chatId,
-        text: customerOfferMessage(offer, index, offers.length),
-        disable_web_page_preview: true,
-      });
-    }
-  } else {
-    await telegramCall(token, "sendMessage", {
-      chat_id: chatId,
-      text: updatedLead.car
-        ? `Запрос: ${updatedLead.car}\n\nМенеджер проверит варианты и отправит расчёт сюда.`
-        : "Менеджер проверит вашу заявку и отправит расчёт сюда.",
-    });
-  }
+  const offers = Array.isArray(updatedLead.selectedOffers) ? updatedLead.selectedOffers.slice(0,5) : [];
+  await enqueueMessage({id:`bound_${lead.id}`,chatId,leadId:lead.id,audience:"customer",text:[
+    "Заявка получена. Telegram подключён. Менеджер проверит автомобиль и ответит здесь. Можно написать дополнительные пожелания.",
+    ...offers.map((offer:any,index:number)=>customerOfferMessage(offer,index,offers.length)),
+    !offers.length ? updatedLead.car || "Запрос на подбор автомобиля" : ""
+  ].filter(Boolean).join("\n\n")});
+  try {await flushCrmNotifications(2);}catch{console.error("crm_bound_notification_pending");}
 
   return true;
 }
@@ -223,7 +207,7 @@ export async function POST(request: Request) {
   try {
     urlSecret = new URL(request.url).searchParams.get("key") || "";
   } catch {}
-  if (expectedSecret && headerSecret !== expectedSecret && urlSecret !== expectedSecret) {
+  if (!expectedSecret || (headerSecret !== expectedSecret && urlSecret !== expectedSecret)) {
     return NextResponse.json({ ok: false }, { status: 403 });
   }
   if (!token) return NextResponse.json({ ok: true, ignored: "telegram_not_configured" });
@@ -232,12 +216,27 @@ export async function POST(request: Request) {
   if (!update) return NextResponse.json({ ok: true, ignored: "invalid_update" });
 
   try {
-    if (await handlePrivateEmployeeLoginStart(update, token)) {
-      return NextResponse.json({ ok: true, handled: "employee_login_confirmed" });
-    }
-  } catch (error) {
-    console.error("telegram_employee_login_failed", error);
-    return NextResponse.json({ ok: true, warning: "employee_login_processing_failed" });
+    const updateId=Number(update.update_id);
+    if (!Number.isSafeInteger(updateId) || updateId < 0) return NextResponse.json({ok:false},{status:400});
+    const path=`telegram/crm-updates/${updateId}.json`;
+    const lease=crypto.randomUUID();let acquired=false;let done=false;
+    await mutateDataJson(path,{lease:"",until:0,done:false},stored=>{
+      acquired=false;done=stored.done;if(done || stored.until>Date.now())return stored;
+      acquired=true;return {lease,until:Date.now()+120000,done:false};
+    });
+    if(done)return NextResponse.json({ok:true,duplicate:true});
+    if(!acquired)return NextResponse.json({ok:false,retry:true},{status:503});
+    try {
+      if(await handleCrmBotUpdate(update,token)){
+        await mutateDataJson(path,{lease:"",until:0,done:false},stored=>({...stored,done:true,until:0}));
+        if(update.callback_query?.id)await fetch(`https://api.telegram.org/bot${token}/answerCallbackQuery`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({callback_query_id:update.callback_query.id}),signal:AbortSignal.timeout(2000)}).catch(()=>null);
+        try {await flushCrmNotifications(2);} catch {console.error("crm_notification_retry_pending");}
+        return NextResponse.json({ok:true,handled:"crm_product_bot"});
+      }
+    } finally {await mutateDataJson(path,{lease:"",until:0,done:false},stored=>stored.lease===lease ? {...stored,until:0}:stored);}
+  } catch {
+    console.error("crm_bot_processing_retry");
+    return NextResponse.json({ok:false,retry:true},{status:503});
   }
 
   try {
@@ -246,7 +245,7 @@ export async function POST(request: Request) {
     }
   } catch (error) {
     console.error("telegram_lead_start_failed", error);
-    return NextResponse.json({ ok: true, warning: "lead_start_processing_failed" });
+    return NextResponse.json({ ok: false, retry:true },{status:503});
   }
 
   try {

@@ -22,7 +22,7 @@ function redirectToSettings(state: "saved" | "error", message = "") {
 }
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) {
     const search = new URLSearchParams({ next: "/crm/settings#markets", error: "auth_required" });
     return relativeRedirect(`/login?${search.toString()}`);

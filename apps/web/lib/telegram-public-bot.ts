@@ -127,7 +127,7 @@ function offerCardText(offer: any, prefix = "🚘") {
   return [
     `${prefix} ${offerTitle(offer)}`,
     meta,
-    price ? `Под ключ: ${price}` : "",
+    price ? `Ориентир стоимости: ${price}` : "Расчёт уточнит менеджер",
     specs,
   ].filter(Boolean).join("\n");
 }
@@ -153,11 +153,10 @@ function requestSiteUrl() {
 function mainReplyKeyboard() {
   return {
     keyboard: [
-      [BUTTON_CARS, BUTTON_CALCULATE],
-      [BUTTON_CATALOG, BUTTON_SUBSCRIPTIONS],
-      [BUTTON_REQUEST, BUTTON_FAVORITES],
-      [BUTTON_OSAGO, BUTTON_CREDIT],
-      [BUTTON_SITE],
+      [BUTTON_CARS, BUTTON_CATALOG],
+      [BUTTON_REQUEST, "📩 Мои обращения"],
+      [BUTTON_SUBSCRIPTIONS, BUTTON_SITE],
+
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -195,6 +194,10 @@ async function ensureBotProfile(token: string) {
   await Promise.allSettled([
     telegramCall(token, "setMyCommands", {
       commands: [
+        { command: "start", description: "Начать работу" },
+        { command: "request", description: "Связаться с менеджером" },
+        { command: "my", description: "Мои обращения" },
+        { command: "admin", description: "Для сотрудников компании" },
         { command: "menu", description: "Главное меню АвтоЦены" },
         { command: "cars", description: "Подобрать авто по бюджету" },
         { command: "subscriptions", description: "Мои подписки" },
@@ -205,7 +208,7 @@ async function ensureBotProfile(token: string) {
       short_description: "Подбор и расчёт автомобилей под ключ по вашему бюджету.",
     }),
     telegramCall(token, "setMyDescription", {
-      description: "АвтоЦена подбирает реальные автомобили из 6 рынков, показывает рассчитанную стоимость под ключ и помогает следить за новыми вариантами.",
+      description: "Каталог автомобилей, ориентир стоимости и помощь менеджера. Выберите автомобиль на avtocena.com или отправьте запрос на подбор.",
     }),
     telegramCall(token, "setChatMenuButton", { menu_button: { type: "commands" } }),
   ]);
@@ -258,7 +261,7 @@ async function sendWelcome(token: string, chatId: string, firstName = "") {
     "",
     "Подбор и расчёт автомобилей под ваш бюджет прямо в Telegram.",
     "",
-    "• реальные предложения из 6 рынков",
+    "• автомобили из каталога АвтоЦены",
     "• стоимость под ключ",
     "• подписки на модели и бюджет",
     "• переход к полной карточке и расчёту на avtocena.com",

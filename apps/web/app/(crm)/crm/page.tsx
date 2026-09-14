@@ -1,3 +1,6 @@
+import { readCrmUsers } from "@/lib/crm-users";
+import { leadStatusLabel } from "@/lib/crm";
+import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson, readDataJson } from "@/lib/data";
@@ -8,12 +11,12 @@ import { getActiveDirectPartnerPayout } from "@/lib/business-settings";
 export const dynamic = "force-dynamic";
 
 export default async function CrmPage() {
-  const user = getCurrentUser();
-  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
-  const clients = await readChunkedDataJson<any>("clients/clients.json", []);
+  const user = await getCurrentUser();
+  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(lead=>canSeeLead(user,lead) && activeLead(lead));
+  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client) && leads.some(lead=>lead.clientId===client.id));
   const partners = await readDataJson<any[]>("partners/partners.json", []);
   const deals = await readDataJson<any[]>("deals/deals.json", []);
-  const managers = getAuthUsers().filter((item) => isCrmRole(item.role));
+  const managers = (await readCrmUsers()).filter((item) => item.status !== "disabled" && isCrmRole(item.role));
   const myLeads = leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
   const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
   const directPayout = await getActiveDirectPartnerPayout();
@@ -39,7 +42,7 @@ export default async function CrmPage() {
               <div key={lead.id} className="rounded-2xl bg-white/7 px-4 py-3">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="font-black">{lead.name || lead.phone || lead.telegram || "Новый лид"}</div>
-                  <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-black text-red-100">{lead.status || "new"}</span>
+                  <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-black text-red-100">{leadStatusLabel(lead.status)}</span>
                 </div>
                 <div className="mt-1 text-sm font-bold text-white/48">{lead.car || "Авто не выбрано"} · {lead.source || "site"}</div>
               </div>

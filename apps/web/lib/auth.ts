@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import fs from "node:fs";
 import path from "node:path";
-import { getDataRoot } from "./data";
+import { getDataRoot, readDataJson } from "./data";
 
 export const AUTH_COOKIE_NAME = "avtocena_session";
 export const AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 14;
@@ -21,12 +21,15 @@ export type AuthUser = {
   partnerCode?: string;
   updatedAt?: string;
   lastLoginAt?: string;
+  sessionVersion?: number;
 };
 
 type SessionPayload = AuthUser & { exp: number };
 
 function authSecret() {
-  return process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "avtocena-dev-secret-change-me";
+  const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+  if (!secret && process.env.NODE_ENV === "production") throw new Error("auth_secret_required");
+  return secret || "avtocena-dev-secret-change-me";
 }
 
 function base64url(input: string | Buffer) {
@@ -76,6 +79,7 @@ export function createSessionCookie(user: AuthUser) {
     partnerCode: user.partnerCode,
     updatedAt: user.updatedAt,
     lastLoginAt: user.lastLoginAt,
+    sessionVersion: user.sessionVersion || 0,
     exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS,
   };
 
@@ -100,9 +104,6 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
     const payload = JSON.parse(fromBase64url(encodedPayload)) as SessionPayload;
     if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000) || payload.status === "disabled") return null;
 
-    const storedUser = getAuthUsers().find((user) => user.id === payload.id && user.status !== "disabled");
-    if (storedUser) return { ...payload, ...storedUser };
-
     const { exp: _exp, ...signedUser } = payload;
     return signedUser;
   } catch {
@@ -110,9 +111,18 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
   }
 }
 
-export function getCurrentUser() {
-  const raw = cookies().get(AUTH_COOKIE_NAME)?.value;
-  return verifySessionCookie(raw);
+export async function getCurrentUser(): Promise<AuthUser | null> {
+  const signed = verifySessionCookie(cookies().get(AUTH_COOKIE_NAME)?.value);
+  if (!signed) return null;
+  const users = await readDataJson<AuthUser[]>("auth/users.json", getAuthUsers());
+  return resolveSessionUser(signed, users);
+}
+
+export function resolveSessionUser(signed: AuthUser, users: AuthUser[]): AuthUser | null {
+  const current = users.find((user) => user.id === signed.id);
+  if (!current || current.status === "disabled" || (current.sessionVersion || 0) !== (signed.sessionVersion || 0)) return null;
+  const { accessKeyHash: _key, botBindHash: _bind, botBindExpiresAt: _expires, ...safe } = current as AuthUser & {accessKeyHash?:string;botBindHash?:string;botBindExpiresAt?:string};
+  return safe;
 }
 
 export function isCrmRole(role?: string | null) {

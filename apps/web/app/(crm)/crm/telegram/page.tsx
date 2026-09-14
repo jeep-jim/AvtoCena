@@ -7,7 +7,7 @@ import { getTelegramPublicConfig } from "@/lib/telegram-config";
 export const dynamic = "force-dynamic";
 
 export default async function CrmTelegramPage() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user) redirect("/login?next=/crm/telegram");
   if (!isAdminRole(user.role)) redirect("/crm");
 

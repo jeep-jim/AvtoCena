@@ -1,3 +1,4 @@
+import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { NextResponse } from "next/server";
 import { appendChunkedDataJson, generateId, readChunkedDataJson } from "@/lib/data";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
@@ -12,18 +13,18 @@ function numberOrNull(value: unknown) {
 }
 
 export async function GET() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!user || !isCrmRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
   const clients = await readChunkedDataJson<any>("clients/clients.json", []);
-  return NextResponse.json({ ok: true, clients });
+  return NextResponse.json({ ok: true, clients:clients.filter(client=>canSeeLead(user,client)) });
 }
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!user || !isCrmRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
@@ -62,7 +63,7 @@ export async function POST(request: Request) {
       city: clean(body.city),
       comment,
       createdByManagerId: user.id,
-      assignedManagerId: clean(body.assignedManagerId) || user.id,
+      assignedManagerId: (user.role === "manager" ? user.id : clean(body.assignedManagerId) || user.id),
       source: clean(body.source) || "manual"
     });
 
@@ -86,7 +87,7 @@ export async function POST(request: Request) {
       source: clean(body.source) || "manual",
       partnerRef: clean(body.partnerRef),
       createdByManagerId: user.id,
-      assignedManagerId: clean(body.assignedManagerId) || user.id
+      assignedManagerId: (user.role === "manager" ? user.id : clean(body.assignedManagerId) || user.id)
     });
 
     if (!event) event = await appendChunkedDataJson("activity/feed.json", {
