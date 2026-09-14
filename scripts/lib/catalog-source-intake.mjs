@@ -21,7 +21,7 @@ export async function collectSourcePage(state, options) {
   catch (error) {
     const message=String(error?.message || error);
     const blocked=error?.blocked || /(?:401|403|429|captcha|bot.?challenge|access.?block)/i.test(message);
-    const transient=!blocked && /timeout|timed.?out|abort|network|fetch failed|econnreset|http[_: ]5\d\d/i.test(message);
+    const transient=!blocked && /timeout|timed.?out|abort|network|fetch failed|econnreset|http[_: ]5\d\d|transient(?:[_: ]status)?[_: ]202/i.test(message);
     state.listFailures=(state.listFailures || 0)+1;
     state.consecutiveListFailures=(state.consecutiveListFailures || 0)+1;
     state.done=!transient || state.consecutiveListFailures>=3 || Date.now()>=deadline;
