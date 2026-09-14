@@ -1,11 +1,11 @@
 {
-  "mode": "owner-approved-uae-georgia-parser-recovery",
+  "mode": "owner-approved-uae-georgia-parser-recovery-final",
   "publishMarkets": [
     "uae",
     "georgia"
   ],
   "resetCursors": true,
   "remainingMarkets": [],
-  "requestedAt": "2026-09-14T04:26:00.000000+00:00",
-  "reason": "Owner approved one verification pass after restoring the live CarSwitch UAE adapter to the production allowlist and forcing finite UAE/Georgia seller inventories to restart from page 1 on every approved refresh. Collect and publish only UAE and Georgia, preserve every other market byte-stably, do not collect or modify Japan, and keep all source, image, calculation, regression, storage and post-publish quality gates unchanged."
+  "requestedAt": "2026-09-14T06:54:29.000000+00:00",
+  "reason": "Owner approved exactly one final verification pass from main after merged PR #941 and #942. Collect and publish only UAE and Georgia with fresh cursors, verify CarSwitch continues beyond page 3 and AutoPapa beyond page 105 or finishes normally, preserve every other market byte-stably, do not collect or modify Japan, do not reuse a prior run, and keep all source, image, calculation, regression, storage and post-publish quality gates unchanged."
 }
