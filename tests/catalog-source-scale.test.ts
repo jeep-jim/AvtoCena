@@ -142,7 +142,7 @@ test("production source registry exactly matches the owner-approved allowlist", 
 test("non-whitelisted source ids and source links are rejected centrally", () => {
   assert.equal(isAllowedCatalogSourceId("japan", "goonet_japan_exact"), false);
   assert.equal(isAllowedCatalogSourceId("japan", "japantransit_japan_stat_open"), false);
-  assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), false);
+  assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), true);
   assert.equal(isAllowedCatalogSourceId("korea", "kbchachacha_korea_open"), false);
   assert.equal(isAllowedCatalogSourceId("europe", "otomoto_europe_exact"), false);
   assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), false);
@@ -247,11 +247,12 @@ test("dormant expansion adapters never enter the production importer", () => {
   const ids = new Set(catalogImportSources.map((source) => source.sourceId));
   for (const sourceId of [
     "autowini_korea_open", "kbchachacha_korea_open", "bobaedream_korea_open",
-    "yallamotor_uae_open", "carswitch_uae_open",
+    "yallamotor_uae_open",
     "japantransit_japan_stat_open", "otomoto_europe_exact",
   ]) {
     assert.equal(ids.has(sourceId), false, `${sourceId} must remain outside production`);
   }
+  assert.equal(ids.has("carswitch_uae_open"), true, "CarSwitch is the live approved UAE recovery source");
 });
 
 test("bootstrap replacements follow current regional public routes", () => {

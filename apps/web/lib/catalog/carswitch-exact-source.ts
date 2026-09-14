@@ -107,6 +107,19 @@ function jsonScripts(markup: string) {
     .filter(Boolean);
 }
 
+function visibleText(markup: string) {
+  return markup
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function isCarSwitchEmptyListing(markup: string) {
+  return /\b(?:no cars match your search|no cars were found)\b/i.test(visibleText(markup));
+}
+
 function decodeJsonScript(script: string) {
   try {
     return JSON.parse(script.replace(/&quot;/gi, '"').replace(/&amp;/gi, "&"));
@@ -292,7 +305,18 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     const url = `${LIST_URL}&page=${page}`;
     const { response, markup } = await request(url);
     const items = parseCarSwitchExactListing(markup);
-    if (!items.length) throw new Error(`carswitch_exact_parsed_zero_status_${response.status}_bytes_${markup.length}`);
+    if (!items.length) {
+      if (isCarSwitchEmptyListing(markup)) {
+        return {
+          items: [],
+          nextCursor: null,
+          finished: true,
+          count: 0,
+          health: { ok: true, message: `CarSwitch exact inventory finished at page ${page}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
+        };
+      }
+      throw new Error(`carswitch_exact_parsed_zero_status_${response.status}_bytes_${markup.length}`);
+    }
     return {
       items,
       nextCursor: String(page + 1),
