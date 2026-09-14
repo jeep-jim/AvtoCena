@@ -52,6 +52,14 @@ test('a source-declared transient HTTP 202 shell retries the same cursor',async(
  await collectSourcePage(f.state,f.options);
  assert.equal(f.state.seen.size,1);assert.equal(f.state.listFailures,1);assert.equal(calls,2);
 });
+test('a Yandex bridge non-JSON 5xx response retries the same cursor',async()=>{
+ const f=fixture({first:{items:[offer]}});const fetch=f.state.source.fetchPage;let calls=0;
+ f.state.source.fetchPage=async c=>{if(++calls===1)throw Error('yandex_bridge_non_json_500_autopapa_105');return fetch(c)};
+ await collectSourcePage(f.state,f.options);
+ assert.equal(f.state.done,false);assert.equal(f.state.stopReason,'retry_pending');assert.equal(f.state.cursor,null);
+ await collectSourcePage(f.state,f.options);
+ assert.equal(f.state.seen.size,1);assert.equal(f.state.listFailures,1);assert.equal(calls,2);
+});
 test('access denial is never retried as a transient timeout',async()=>{
  const f=fixture({});let calls=0;f.state.source.fetchPage=async()=>{calls++;throw Error('http_403')};
  await collectSourcePage(f.state,f.options);await collectSourcePage(f.state,f.options);
