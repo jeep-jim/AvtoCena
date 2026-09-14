@@ -15,6 +15,17 @@ export function TelegramSetupForm({initialStatus}: {initialStatus: TelegramStatu
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [network, setNetwork] = useState<Array<{name: string; ok: boolean; detail: string; durationMs: number}>>([]);
+  async function checkNetwork() {
+    setBusy(true); setError(""); setNetwork([]);
+    try {
+      const response = await fetch("/api/telegram/setup?diagnostics=network", {cache: "no-store", signal: AbortSignal.timeout(15000)});
+      const result = await response.json();
+      if (!response.ok || !result.ok) throw Error("Не удалось проверить сеть сервера.");
+      setNetwork(result.checks);
+    } catch { setError("Не удалось проверить сеть сервера."); }
+    finally { setBusy(false); }
+  }
   async function perform(reconnect: boolean) {
     setBusy(true); setError(""); setMessage("");
     try {
@@ -48,9 +59,11 @@ export function TelegramSetupForm({initialStatus}: {initialStatus: TelegramStatu
         <p className="text-sm text-[var(--ac-muted)]">Для переподключения используется сохранённый токен. Повторно вводить его не нужно. Ожидающие сообщения не удаляются.</p>
         <button disabled={busy} type="submit" className="rounded-xl bg-[#229ED9] p-4 font-bold text-white disabled:opacity-50">Переподключить бота</button>
         <button disabled={busy} type="button" onClick={()=>void perform(false)} className="rounded-xl border p-4 font-bold disabled:opacity-50">Проверить состояние</button>
+        <button disabled={busy} type="button" onClick={()=>void checkNetwork()} className="rounded-xl border p-4 font-bold disabled:opacity-50">Проверить сеть сервера</button>
       </form>
       {error && <p role="alert" className="mt-4 rounded-xl bg-red-500/15 p-4">{error}</p>}
       {message && <p role="status" className="mt-4 rounded-xl bg-emerald-500/15 p-4">{message}</p>}
+      {network.length > 0 && <ul className="mt-4 space-y-2 text-sm" aria-label="Диагностика сети">{network.map(item => <li key={item.name}>{item.name}: {item.ok ? "Соединение установлено" : "Ошибка"} — {item.detail} ({item.durationMs} мс)</li>)}</ul>}
     </section>
     <section className="glass rounded-3xl p-6">
       <h2 className="text-xl font-black">Доставка сообщений</h2>
