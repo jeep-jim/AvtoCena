@@ -14,13 +14,13 @@ function json(value: FormDataEntryValue | null, fallback: unknown) {
 }
 
 export async function GET() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   return NextResponse.json({ ok: true, networks: getCpaNetworks() });
 }
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   upsertCpaNetworkDraft({

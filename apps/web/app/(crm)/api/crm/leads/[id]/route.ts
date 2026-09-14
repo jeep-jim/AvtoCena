@@ -27,7 +27,7 @@ export async function PATCH(
   request: Request,
   context: { params: { id: string } }
 ) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!user || !isCrmRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
@@ -43,7 +43,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
   }
 
-  const managers = (await readCrmUsers()).filter((candidate) => isCrmRole(candidate.role));
+  const managers = (await readCrmUsers()).filter((candidate) => candidate.status !== "disabled" && isCrmRole(candidate.role));
   const manager = requestedManagerId
     ? managers.find((candidate) => candidate.id === requestedManagerId)
     : null;
@@ -74,7 +74,7 @@ export async function PATCH(
   const now = new Date().toISOString();
   const nextStatus = requestedStatus || existingLead.status || "new";
   const nextManagerId = admin
-    ? (requestedManagerId || existingLead.assignedManagerId || null)
+    ? (Object.prototype.hasOwnProperty.call(body,"assignedManagerId") ? requestedManagerId || null : existingLead.assignedManagerId || null)
     : (existingLead.assignedManagerId || user.id);
   const statusChanged = nextStatus !== (existingLead.status || "new");
   const managerChanged = nextManagerId !== (existingLead.assignedManagerId || null);
@@ -84,13 +84,17 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "reason_required" }, { status: 400 });
   }
 
-  if (!statusChanged && !managerChanged && !note) {
+  const archiveChanged = typeof body.archived === "boolean" && body.archived !== Boolean(existingLead.archivedAt);
+  if (archiveChanged && !admin) return NextResponse.json({ok:false,error:"archive_forbidden"},{status:403});
+  if (archiveChanged && body.archived && !note) return NextResponse.json({ok:false,error:"reason_required"},{status:400});
+  if (!statusChanged && !managerChanged && !note && !archiveChanged) {
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
   }
 
   const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => ({
     ...lead,
     updatedAt: now,
+    ...(archiveChanged ? {archivedAt:body.archived ? now : "",archivedByUserId:user.id,archiveReason:body.archived ? note : ""} : {}),
     status: nextStatus,
     assignedManagerId: nextManagerId,
     rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate"

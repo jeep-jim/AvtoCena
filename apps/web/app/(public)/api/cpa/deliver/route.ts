@@ -13,7 +13,7 @@ function hasDeliverySecret(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!isAdminRole(user?.role) && !hasDeliverySecret(request)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }

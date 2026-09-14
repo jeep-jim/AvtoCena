@@ -4,7 +4,7 @@ import { createDirectPartnerPayoutVersion, createPartnerPayoutVersion } from "@/
 import { canEditBusinessSettings, cleanText, nullableNumber } from "@/lib/settings-validation";
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   const amount = nullableNumber(form.get("amountRub"));

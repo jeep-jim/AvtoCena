@@ -1,3 +1,5 @@
+"use client";
+import { usePathname } from "next/navigation";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 function ChatIcon() {
@@ -9,9 +11,12 @@ function PhoneIcon() {
 }
 
 function ActionButtons({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {
+  const pathname=usePathname();
+  const offerId=pathname.startsWith("/cars/offer/") ? pathname.split("/")[3] : "";
+  const messengerUrl=`https://t.me/avtocena_bot?start=${offerId ? `offer_${encodeURIComponent(offerId)}` : "request"}`;
   const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-2 text-[12px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-3 sm:text-sm md:px-12 md:text-base xl:h-14";
   return <div className={`grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    <button type="button" data-offer-action="messenger" className={`${buttonClass} bg-[#00A2E8]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><ChatIcon /></span><span className="whitespace-nowrap">Чат в мессенджере</span></button>
+    <a href={messengerUrl} target="_blank" rel="noreferrer" data-offer-action="messenger" className={`${buttonClass} bg-[#00A2E8]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><ChatIcon /></span><span className="whitespace-nowrap">Чат в мессенджере</span></a>
     <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку</span></button>
   </div>;
 }

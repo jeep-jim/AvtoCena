@@ -1,3 +1,4 @@
+import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson } from "@/lib/data";
 import { getCurrentUser } from "@/lib/auth";
@@ -10,9 +11,10 @@ function dateLabel(value?: string) {
 }
 
 export default async function CrmFeedPage() {
-  const user = getCurrentUser();
-  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).map((lead) => ({
+  const user = await getCurrentUser();
+  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(lead=>canSeeLead(user,lead) && activeLead(lead)).map((lead) => ({
     id: lead.id,
+    clientId: lead.clientId,
     createdAt: lead.createdAt,
     type: "lead",
     title: lead.name || lead.phone || lead.telegram || "Новая заявка",
@@ -20,7 +22,7 @@ export default async function CrmFeedPage() {
     source: lead.source || "site",
     managerId: lead.assignedManagerId || lead.createdByManagerId
   }));
-  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).map((client) => ({
+  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client) && leads.some(lead=>lead.clientId===client.id)).map((client) => ({
     id: client.id,
     createdAt: client.createdAt,
     type: "client",

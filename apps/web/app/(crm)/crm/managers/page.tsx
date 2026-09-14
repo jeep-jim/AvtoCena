@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
-import { isCrmRole } from "@/lib/auth";
+import { getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
 import { readChunkedDataJson } from "@/lib/data";
 import { defaultManagerAvatar } from "@/lib/default-avatars";
@@ -14,6 +15,7 @@ const roleInfo: Record<string, { label: string; access: string }> = {
 };
 
 export default async function CrmManagersPage() {
+  const actor=await getCurrentUser();if(!actor)redirect("/login");if(!isAdminRole(actor.role))redirect(`/crm/managers/${actor.id}`);
   const [allUsers, leads, clients] = await Promise.all([
     readCrmUsers(),
     readChunkedDataJson<any>("leads/leads.json", []),
@@ -27,7 +29,7 @@ export default async function CrmManagersPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-black">Роли в системе</h2>
-            <p className="mt-2 text-sm font-bold leading-6 text-white/48">До первого входа сотрудник получает фирменную аватарку. После подтверждения Telegram она автоматически заменяется фотографией профиля.</p>
+            <p className="mt-2 text-sm font-bold leading-6 text-white/48">Добавьте сотрудника по Telegram username, выдайте персональный ключ. После входа он подключит Telegram в своей карточке. Владельцы и администраторы получают служебные заявки.</p>
           </div>
           <Link href="/crm/managers/new" className="rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white">Добавить сотрудника</Link>
         </div>
@@ -43,7 +45,7 @@ export default async function CrmManagersPage() {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {managers.map((manager) => {
-          const managerLeads = leads.filter((lead) => lead.assignedManagerId === manager.id || lead.createdByManagerId === manager.id);
+          const managerLeads = leads.filter((lead) => !lead.archivedAt && (lead.assignedManagerId === manager.id || lead.createdByManagerId === manager.id));
           const managerClients = clients.filter((client) => client.assignedManagerId === manager.id || client.createdByManagerId === manager.id);
           const info = roleInfo[manager.role] || { label: manager.role, access: "Индивидуальные права" };
           const avatar = manager.avatarUrl || defaultManagerAvatar(manager.id || manager.telegramUsername);

@@ -15,6 +15,7 @@ type LeadActionsProps = {
   currentManagerId?: string | null;
   managers: ManagerOption[];
   canAssignManagers?: boolean;
+  archived?: boolean;
 };
 
 export function LeadActions({
@@ -23,6 +24,7 @@ export function LeadActions({
   currentManagerId,
   managers,
   canAssignManagers = false,
+  archived = false,
 }: LeadActionsProps) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
@@ -33,6 +35,13 @@ export function LeadActions({
   const [error, setError] = useState("");
   const requiresReason = status === "rejected" || status === "duplicate";
   const currentManagerName = managers.find((manager) => manager.id === assignedManagerId)?.displayName || "Вы";
+
+  async function archive() {
+    const reason=archived ? "Восстановлена из архива" : window.prompt("Причина архивации", "Тест");
+    if(!reason?.trim())return;
+    setLoading(true);setError("");
+    try {const response=await fetch(`/api/crm/leads/${encodeURIComponent(leadId)}`,{method:"PATCH",headers:{"content-type":"application/json"},body:JSON.stringify({archived:!archived,note:reason})});if(!response.ok)throw Error();router.refresh();}catch{setError("Не удалось изменить архив. Повторите попытку.");}finally{setLoading(false);}
+  }
 
   async function save() {
     setSaved(false);
@@ -129,6 +138,8 @@ export function LeadActions({
       >
         {loading ? "Сохраняем..." : "Сохранить"}
       </button>
+
+      {canAssignManagers && <button disabled={loading} onClick={archive} className="rounded-xl border border-[var(--ac-border)] px-4 py-2 text-xs font-bold md:col-span-4">{archived ? "Восстановить заявку" : "Убрать в архив"}</button>}
 
       {(saved || error) && (
         <div className={`text-xs font-bold md:col-span-4 ${error ? "text-red-200" : "text-green-200"}`}>

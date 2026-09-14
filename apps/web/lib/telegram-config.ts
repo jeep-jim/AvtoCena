@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { readDataJson, writeDataJson } from "@/lib/data";
+import { readDataJson, writeDataJson } from "./data";
 
 const TELEGRAM_CONFIG_PATH = "settings/telegram.json";
 const TELEGRAM_BOT_USERNAME = "avtocena_bot";

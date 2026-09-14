@@ -14,7 +14,7 @@ function redirectWithState(request: Request, path: string, state: "saved" | "err
 }
 
 export async function POST(request: Request) {
-  const actor = getCurrentUser();
+  const actor = await getCurrentUser();
   if (!actor || !isAdminRole(actor.role)) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", "/crm/managers");
@@ -52,7 +52,12 @@ export async function POST(request: Request) {
       const current = users.find((item) => item.id === userId);
       if (!current) throw new Error("Сотрудник не найден");
       if (current.role === "owner" && actor.role !== "owner") throw new Error("Изменить владельца может только владелец");
-      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, updatedAt: new Date().toISOString() } : item);
+      if (actor.id === userId && (status === "disabled" || role !== current.role)) throw new Error("Нельзя отключить или понизить собственный доступ");
+      const identityChanged = current.telegramUsername !== telegramUsername;
+      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId,
+        sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.role !== role || item.status !== status ? 1 : 0),
+        ...(identityChanged ? {telegramId:"",botBindHash:"",botBindExpiresAt:""} : {}),
+        updatedAt: new Date().toISOString() } : item);
     });
 
     return redirectWithState(request, `/crm/managers/${encodeURIComponent(savedId)}`, "saved");

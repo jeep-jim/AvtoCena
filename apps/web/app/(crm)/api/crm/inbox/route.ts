@@ -1,3 +1,4 @@
+import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
 import { readChunkedDataJson } from "@/lib/data";
@@ -5,12 +6,12 @@ import { readChunkedDataJson } from "@/lib/data";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !isCrmRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
-  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(activeLead);
   const visible = isAdminRole(user.role)
     ? leads
     : leads.filter((lead) => lead.assignedManagerId === user.id || lead.createdByManagerId === user.id);

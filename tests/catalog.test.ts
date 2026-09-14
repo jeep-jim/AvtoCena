@@ -300,7 +300,7 @@ test("Che168 fetchPage reads result.carlist and uses brand endpoint", async () =
 
 test("public GET leads is closed without CRM session", async () => {
   const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/api/leads/route.ts", "utf-8"));
-  assert.match(source, /isCrmRole\(user\?\.role\)/);
+  assert.match(source, /!user \|\| !isCrmRole\(user\.role\)/);
   assert.match(source, /status: 401/);
 });
 
@@ -386,9 +386,9 @@ test("importer refreshes lock during page, vehicle, image and generation process
 });
 
 test("lead route restores missing client and retries failed CPA without resending sent CPA", async () => {
-  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/api/leads/route.ts", "utf-8"));
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/lead-intake.ts", "utf-8"));
   assert.match(source, /existingClients/);
-  assert.match(source, /existingClient \|\| await appendChunkedDataJson\("clients\/clients\.json"/);
+  assert.match(source, /existingClient\s*\|\|\s*\(?await appendChunkedDataJson\("clients\/clients\.json"/);
   assert.match(source, /new Set\(\["pending", "failed", "waiting_config"\]\)/);
   assert.match(source, /cpaRetryStatuses\.has\(cpaEvent\.deliveryStatus\) && retryDue/);
   assert.doesNotMatch(source, /deliveryStatus === "sent"[\s\S]*deliverCpaEvent/);

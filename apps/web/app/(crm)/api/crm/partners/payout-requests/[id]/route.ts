@@ -28,7 +28,7 @@ export async function PATCH(
   request: Request,
   context: { params: { id: string } },
 ) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !isAdminRole(user.role)) {
     return NextResponse.json({ ok: false, error: "admin_required" }, { status: 403 });
   }

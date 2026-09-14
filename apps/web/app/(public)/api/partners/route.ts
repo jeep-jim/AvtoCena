@@ -89,7 +89,7 @@ async function notifyTelegram(record: PartnerRecord) {
 }
 
 export async function GET() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!isCrmRole(user?.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });

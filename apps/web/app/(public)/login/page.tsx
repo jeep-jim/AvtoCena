@@ -19,8 +19,7 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/crm";
   const errorCode = firstParam(params.error) || "";
-  const telegramConfig = await getTelegramPublicConfig();
-  const botUsername = telegramConfig.configured ? String(telegramConfig.username || "") : "";
+  const botUsername = "";
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen text-white">
@@ -28,10 +27,6 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
 
       <section className="mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl place-items-center px-4 py-8 md:px-8 md:py-10">
         <div className="w-full max-w-[460px]">
-          <Link href="/dealers" className="ac-login-dealers mb-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#e31b23] px-4 text-sm font-black text-white transition hover:bg-[#c91820]">
-            <span aria-hidden="true" className="text-base leading-none">🚗</span>
-            <span>АвтоДилерам</span>
-          </Link>
           <LoginForm nextPath={nextPath} errorCode={errorCode} botUsername={botUsername} />
         </div>
       </section>

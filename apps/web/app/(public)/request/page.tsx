@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 
@@ -27,6 +27,7 @@ export default function RequestPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
+  const operationRef=useRef("");
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     const digits = phone.replace(/\D/g, "");
@@ -65,11 +66,12 @@ export default function RequestPage() {
           utmCampaign: "public_bot_request",
           pageUrl: window.location.href,
           referrer: document.referrer,
-          operationId: crypto.randomUUID(),
+          operationId: operationRef.current || (operationRef.current=crypto.randomUUID()),
         }),
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result?.ok) throw new Error(String(result?.error || "request_failed"));
+      operationRef.current="";
       setStatus("success");
       setMessage("Заявка отправлена. Менеджер АвтоЦены свяжется с вами.");
     } catch {

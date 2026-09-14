@@ -43,7 +43,7 @@ function imageExtension(type: string) {
 }
 
 export async function POST(request: Request) {
-  const actor = getCurrentUser();
+  const actor = await getCurrentUser();
   if (!actor || !isAdminRole(actor.role)) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", "/crm/dealers");

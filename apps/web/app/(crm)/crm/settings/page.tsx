@@ -16,7 +16,7 @@ function first(value?: string | string[]) {
 export default async function CrmSettingsPage({ searchParams }: { searchParams?: Promise<SearchParams> }) {
   const query: SearchParams = (await searchParams) || {};
   const markets = await getEffectiveMarketsWithDefaults();
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const canEdit = canEditBusinessSettings(user?.role);
   const state = first(query.state);
   const message = first(query.message);
