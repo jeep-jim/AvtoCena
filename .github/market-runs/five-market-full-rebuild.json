@@ -1,10 +1,11 @@
 {
-  "mode": "owner-approved-che168-global-full-inventory",
+  "mode": "owner-approved-uae-georgia-parser-recovery",
   "publishMarkets": [
-    "china"
+    "uae",
+    "georgia"
   ],
   "resetCursors": true,
   "remainingMarkets": [],
-  "requestedAt": "2026-09-13T09:44:00.000000+00:00",
-  "reason": "Owner 2026-09-13 requires one replacement China run after fixing the Che168 global-result window and publication timeout. Traverse the complete dealer inventory by brand, targeting 20000 unique age-eligible Global offers. Keep Autohome new 2026+ at <=10%, China 80% <=160hp with unknown/high power in the remaining 20%, exact 72-month age, <=16M RUB, and the separate one-time owner -2% Global car-price adjustment without changing seller price or customs base. Reuse immutable internal chunks for untouched sources, preserve every other market, and do not collect or modify Japan."
+  "requestedAt": "2026-09-14T04:26:00.000000+00:00",
+  "reason": "Owner approved one verification pass after restoring the live CarSwitch UAE adapter to the production allowlist and forcing finite UAE/Georgia seller inventories to restart from page 1 on every approved refresh. Collect and publish only UAE and Georgia, preserve every other market byte-stably, do not collect or modify Japan, and keep all source, image, calculation, regression, storage and post-publish quality gates unchanged."
 }
