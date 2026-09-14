@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
+import { checkTelegramNetwork, telegramNetworkError } from "@/lib/telegram-network";
 import {
   resolveTelegramWebhookSecret,
   expectedTelegramBotUsername,
@@ -42,8 +43,8 @@ async function telegramRequest<T>(token: string, method: string, body?: Record<s
       cache: "no-store",
       signal: AbortSignal.timeout(10_000),
     });
-  } catch {
-    throw new TelegramApiError(method, 0, "Не удалось связаться с Telegram API");
+  } catch (error) {
+    throw new TelegramApiError(method, 0, `Не удалось связаться с Telegram API: ${telegramNetworkError(error)}`);
   }
 
   const payload = await response.json().catch(() => null) as {
@@ -84,8 +85,11 @@ function publicWebhookUrl(value: unknown) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (!(await adminAllowed())) return failure("forbidden", "", "auth", 403);
+  if (new URL(request.url).searchParams.get("diagnostics") === "network") {
+    return NextResponse.json({ok: true, checks: await checkTelegramNetwork()}, {headers: {"cache-control": "no-store"}});
+  }
   const config = await getTelegramPublicConfig();
   const runtime = await getTelegramRuntimeConfig();
   if (!runtime) return failure("telegram_not_configured", "Токен бота недоступен", "config", 503);
