@@ -94,6 +94,11 @@ export function deriveTelegramWebhookSecret(username = TELEGRAM_BOT_USERNAME) {
     .digest("hex");
 }
 
+export function resolveTelegramWebhookSecret(username = TELEGRAM_BOT_USERNAME) {
+  return String(process.env.TELEGRAM_WEBHOOK_SECRET || "").trim()
+    || deriveTelegramWebhookSecret(username);
+}
+
 async function readStoredTelegramConfig() {
   const stored = await readDataJson<StoredTelegramConfig | null>(TELEGRAM_CONFIG_PATH, null);
   if (!stored || stored.version !== 1 || !stored.encryptedToken) return null;
@@ -118,8 +123,7 @@ export async function getTelegramRuntimeConfig(): Promise<TelegramRuntimeConfig 
   if (!token) return null;
 
   const username = envUsername || normalizeUsername(stored?.username) || TELEGRAM_BOT_USERNAME;
-  const webhookSecret = String(process.env.TELEGRAM_WEBHOOK_SECRET || "").trim()
-    || deriveTelegramWebhookSecret(username);
+  const webhookSecret = resolveTelegramWebhookSecret(username);
 
   return {
     token,

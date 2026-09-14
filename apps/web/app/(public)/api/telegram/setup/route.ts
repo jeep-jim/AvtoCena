@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import {
-  deriveTelegramWebhookSecret,
+  resolveTelegramWebhookSecret,
   expectedTelegramBotUsername,
   getTelegramPublicConfig,
   getTelegramRuntimeConfig,
@@ -87,9 +87,21 @@ function publicWebhookUrl(value: unknown) {
 export async function GET() {
   if (!(await adminAllowed())) return failure("forbidden", "", "auth", 403);
   const config = await getTelegramPublicConfig();
-  return NextResponse.json({ ok: true, ...config }, {
-    headers: { "cache-control": "no-store" },
-  });
+  const runtime = await getTelegramRuntimeConfig();
+  if (!runtime) return failure("telegram_not_configured", "Токен бота недоступен", "config", 503);
+  try {
+    const info = await telegramRequest<{url?: string; pending_update_count?: number; last_error_date?: number; last_error_message?: string}>(runtime.token, "getWebhookInfo");
+    return NextResponse.json({
+      ok: true, ...config,
+      checkedAt: new Date().toISOString(),
+      webhookMatches: info.url === deliveryWebhookUrl(telegramWebhookUrl(), runtime.webhookSecret),
+      pendingUpdateCount: Number(info.pending_update_count || 0),
+      telegramLastError: String(info.last_error_message || "").slice(0, 300),
+      telegramLastErrorAt: info.last_error_date ? new Date(info.last_error_date * 1000).toISOString() : "",
+    }, {headers: {"cache-control": "no-store"}});
+  } catch (error) {
+    return failure("telegram_webhook_status_failed", error instanceof TelegramApiError ? error.description : "Не удалось проверить Telegram", "getWebhookInfo");
+  }
 }
 
 export async function POST(request: Request) {
@@ -137,7 +149,7 @@ export async function POST(request: Request) {
   const webhookUrl = telegramWebhookUrl();
   let webhookSecret = "";
   try {
-    webhookSecret = deriveTelegramWebhookSecret(actualUsername);
+    webhookSecret = resolveTelegramWebhookSecret(actualUsername);
     await saveTelegramRuntimeConfig({
       token,
       clientSecret: clientSecret || undefined,
@@ -215,6 +227,7 @@ export async function POST(request: Request) {
       ok: true,
       ...publicConfig,
       webhookMatches: true,
+      checkedAt: new Date().toISOString(),
       telegramLastErrorAt: webhook?.last_error_date ? new Date(webhook.last_error_date * 1000).toISOString() : "",
       telegramLastError: webhook?.last_error_message ? String(webhook.last_error_message).slice(0, 300) : "",
     }, { headers: { "cache-control": "no-store" } });

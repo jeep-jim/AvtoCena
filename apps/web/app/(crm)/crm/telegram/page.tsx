@@ -17,7 +17,7 @@ export default async function CrmTelegramPage() {
     <CrmShell
       activeHref="/crm/telegram"
       title="Telegram"
-      subtitle="Вход сотрудников, клиентские расчёты и мгновенные уведомления CRM через одного бота АвтоЦены."
+      subtitle="Клиентские обращения и закрытые уведомления команды через бота АвтоЦены."
     >
       <TelegramSetupForm initialStatus={telegram} />
     </CrmShell>
