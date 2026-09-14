@@ -131,7 +131,7 @@ for (const replacement of completeSources) {
 // Hard production allowlist: dormant adapters may exist in source modules, but
 // they can never reach collection or retention unless explicitly listed in
 // REQUIRED_CATALOG_SOURCES for that market. This also removes previously added
-// unapproved expansion sources such as CarSwitch, KB ChaChaCha and OTOMOTO.
+// unapproved expansion sources such as KB ChaChaCha and OTOMOTO.
 for (let index = catalogImportSources.length - 1; index >= 0; index--) {
   const source = catalogImportSources[index];
   if (source.market === "multi" || !isAllowedCatalogSourceId(source.market, source.sourceId)) {

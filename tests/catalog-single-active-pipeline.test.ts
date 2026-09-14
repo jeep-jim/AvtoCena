@@ -53,6 +53,11 @@ test("owner-approved recurring schedule stays five-market only and keeps Japan m
   assert.doesNotMatch(japan, /^\s{2}schedule\s*:/m);
   assert.doesNotMatch(japan, /^\s{4}-\s*cron\s*:/m);
 
+  // Finite seller inventories must always start from the newest page during
+  // their weekly refresh; Japan remains outside this workflow entirely.
+  assert.match(rebuild, /matrix\.market == 'uae' \|\| matrix\.market == 'georgia'/);
+  assert.match(rebuild, /CATALOG_INTAKE_RESUME:.*&& '0' \|\| '1'/);
+
   assert.match(cleanup, /^\s{4}- cron: "0 17 \* \* \*"$/m);
   assert.equal((cleanup.match(/^\s{4}- cron:/gm) || []).length, 1);
   for (const workflow of [rebuild, cleanup]) {

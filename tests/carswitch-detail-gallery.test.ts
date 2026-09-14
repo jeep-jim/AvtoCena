@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   CarSwitchUaeExactAdapter,
+  isCarSwitchEmptyListing,
   parseCarSwitchExactDetail,
   parseCarSwitchExactListing,
 } from "../apps/web/lib/catalog/carswitch-exact-source";
@@ -89,6 +90,24 @@ test("CarSwitch keeps a one-image exact listing as discovery input", () => {
   assert.ok(offer);
   assert.equal(offer.operational?.galleryVerified, false);
   assert.equal(offer.operational?.photoIdentityVerified, false);
+});
+
+test("CarSwitch distinguishes a real empty result page from a parser regression", async () => {
+  assert.equal(isCarSwitchEmptyListing(`<script>window.i18n={empty:"No cars match your search"}</script><main>24 cars</main>`), false);
+  assert.equal(isCarSwitchEmptyListing(`<main><h2>No cars match your search</h2><p>Try adjusting your filters.</p></main>`), true);
+
+  const adapter = new CarSwitchUaeExactAdapter();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(`<script>window.i18n={empty:"No cars match your search"}</script><main><h2>No cars match your search</h2></main>`, {
+    status: 200,
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
+  try {
+    const page = await adapter.fetchPage("150");
+    assert.equal(page.finished, true);
+    assert.equal(page.nextCursor, null);
+    assert.deepEqual(page.items, []);
+  } finally { globalThis.fetch = originalFetch; }
 });
 
 test("CarSwitch exact detail parser binds the gallery to the same vehicle URL", () => {
