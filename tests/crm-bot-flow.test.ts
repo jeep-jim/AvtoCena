@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { claimCrmNotices, authorizeCrmNotice, completeCrmNotice } from "../apps/web/lib/crm-relay";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -103,8 +104,12 @@ test("customer request, private admin notification, reply confirmation, retry an
     const notices = sent.filter((item) =>
       item.text.startsWith("📩 Новая заявка"),
     );
-    assert.equal(notices.length, 1);
-    assert.equal(notices[0].chat_id, "202");
+    assert.equal(notices.length, 0); // Admin delivery runs outside the site.
+    const external = await claimCrmNotices();
+    assert.equal(external.length, 1);
+    assert.equal(external[0].chatId, "202");
+    assert.equal(await authorizeCrmNotice(external[0].id, external[0].token), true);
+    assert.equal(await completeCrmNotice(external[0].id, external[0].token, 999), true);
     await handleCrmBotUpdate(callback(404, `cust:chat:${lead.id}`), "token");
     assert.match(sent.at(-1).text, /недоступно/);
     await handleCrmBotUpdate(callback(202, `crm:reply:${lead.id}`), "token");

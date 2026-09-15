@@ -1,8 +1,6 @@
 name: CRM Telegram runner connectivity
 on:
-  push:
-    branches: [fix/crm-github-delivery-20260915]
-    paths: [.github/workflows/crm-telegram-probe.yml]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

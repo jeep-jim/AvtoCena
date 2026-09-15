@@ -88,59 +88,13 @@ export async function flushCrmNotifications(limit = 2) {
   if (!acquired) return { sent: 0, busy: true };
   let sent = 0;
   try {
-    const users = await readCrmUsers();
-    const admins = users.filter(
-      (user) =>
-        user.status !== "disabled" &&
-        ["owner", "admin"].includes(user.role) &&
-        user.telegramId,
-    );
+    await queueCrmAdminNotifications();
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
-    // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
-    for (const lead of leads
-      .filter(
-        (lead) =>
-          lead.notificationRequestedAt &&
-          !lead.notificationsQueuedAt &&
-          !lead.archivedAt,
-      )
-      .slice(0, 5)) {
-      if (!admins.length) continue;
-      for (const user of admins)
-        await enqueueMessage({
-          id: `new_${lead.id}_${user.id}`,
-          chatId: String(user.telegramId),
-          leadId: lead.id,
-          audience: "admin",
-          text: leadNotice(lead),
-          keyboard: [
-            [
-              {
-                text: "Открыть заявку",
-                url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
-              },
-            ],
-            [
-              {
-                text: "Ответить клиенту",
-                callback_data: `crm:reply:${lead.id}`,
-              },
-            ],
-          ],
-        });
-      await updateChunkedDataJson<any>(
-        "leads/leads.json",
-        lead.id,
-        (stored) => ({
-          ...stored,
-          notificationsQueuedAt: new Date().toISOString(),
-        }),
-      );
-    }
     const queue = await readChunkedDataJson<any>(QUEUE, []);
     for (const item of queue
       .filter(
         (item) =>
+          item.audience !== "admin" &&
           item.status !== "sent" &&
           item.status !== "cancelled" &&
           Number(item.nextAttemptAt || 0) <= Date.now(),
@@ -197,4 +151,56 @@ export async function flushCrmNotifications(limit = 2) {
       (lease) => (lease.id === leaseId ? { id: "", until: 0 } : lease),
     );
   }
+}
+
+export async function queueCrmAdminNotifications() {
+    const users = await readCrmUsers();
+    const admins = users.filter(
+      (user) =>
+        user.status !== "disabled" &&
+        ["owner", "admin"].includes(user.role) &&
+        user.telegramId,
+    );
+    const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+    // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
+    for (const lead of leads
+      .filter(
+        (lead) =>
+          lead.notificationRequestedAt &&
+          !lead.notificationsQueuedAt &&
+          !lead.archivedAt,
+      )
+      .slice(0, 5)) {
+      if (!admins.length) continue;
+      for (const user of admins)
+        await enqueueMessage({
+          id: `new_${lead.id}_${user.id}`,
+          chatId: String(user.telegramId),
+          leadId: lead.id,
+          audience: "admin",
+          text: leadNotice(lead),
+          keyboard: [
+            [
+              {
+                text: "Открыть заявку",
+                url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
+              },
+            ],
+            [
+              {
+                text: "Ответить клиенту",
+                callback_data: `crm:reply:${lead.id}`,
+              },
+            ],
+          ],
+        });
+      await updateChunkedDataJson<any>(
+        "leads/leads.json",
+        lead.id,
+        (stored) => ({
+          ...stored,
+          notificationsQueuedAt: new Date().toISOString(),
+        }),
+      );
+    }
 }
