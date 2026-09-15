@@ -39,7 +39,7 @@ export async function claimCrmNotices() {
     // Internal notes and conversation history are never included.
     const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(l => l.id === row.leadId);
     notices.push({id: row.id, token, chatId: String(row.chatId),
-      audience: "group", text: leadNotice(lead).slice(0, 4000),
+      audience: "group", text: leadNotice(lead, row.followupOperationId ? lead.followups?.find((entry: any) => entry.operationId === row.followupOperationId) : undefined).slice(0, 4000),
       url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(row.leadId)}`});
   }
   return notices;
