@@ -1,3 +1,4 @@
+import { pollingEnabled } from "@/lib/crm-polling";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { checkTelegramNetwork, telegramNetworkError } from "@/lib/telegram-network";
@@ -110,6 +111,8 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   if (!(await adminAllowed())) return failure("forbidden", "", "auth", 403);
+
+  if (await pollingEnabled()) return failure("polling_active", "Бот обслуживается внешним воркером; webhook отключён", "transport", 409);
 
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;
   const incomingToken = String(body.token || "").trim();

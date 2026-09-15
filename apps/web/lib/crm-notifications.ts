@@ -1,3 +1,4 @@
+import { pollingEnabled } from "./crm-polling";
 import crypto from "node:crypto";
 import {
   appendChunkedDataJson,
@@ -70,6 +71,7 @@ export async function enqueueMessage(input: {
   });
 }
 export async function flushCrmNotifications(limit = 2) {
+  if (process.env.CRM_BOT_POLL_WORKER !== "1" && await pollingEnabled()) return { sent: 0, external: true };
   const config = await getTelegramRuntimeConfig();
   if (!config?.token) return { sent: 0, configured: false };
   // A lease prevents overlapping browser, webhook and worker drains.
