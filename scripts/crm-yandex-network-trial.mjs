@@ -29,9 +29,12 @@ const subnetReply=await get('https://vpc.api.cloud.yandex.net/vpc/v1/subnets?fol
 const subnets=(subnetReply.subnets||[]).filter(x=>x.networkId===nid);
 if(network.name!=='avtocena-browser-pilot'||!vm.networkInterfaces?.some(x=>x.primaryV4Address?.address&&subnets.some(s=>s.id===x.subnetId)))throw Error('network_identity_missing');
 const zr=await get('https://compute.api.cloud.yandex.net/compute/v1/zones');
-const zones=(zr.zones||[]).filter(x=>x.status==='UP').map(x=>x.id);
+// Public Russia zones from Yandex geo-scope documentation (2026-06-16).
+const documentedZones=['ru-central1-a','ru-central1-b','ru-central1-d','ru-central1-e'];
+const up=(zr.zones||[]).filter(x=>x.status==='UP').map(x=>x.id);
+const zones=documentedZones.filter(x=>up.includes(x));
 console.log('Network preflight '+JSON.stringify({zones,subnetZones:subnets.map(x=>x.zoneId),oldRevision:old.id,vmStatus:vm.status}));
-if(zones.length<3 || zones.some(x=>!['ru-central1-a','ru-central1-b','ru-central1-d'].includes(x)))throw Error('unexpected_zones');
+if(zones.length!==documentedZones.length)throw Error('documented_zone_unavailable');
 function range(cidr){const [ip,bits]=cidr.split('/'), n=ip.split('.').reduce((a,b)=>(a*256)+Number(b),0), width=2**(32-Number(bits));const lo=Math.floor(n/width)*width;return [lo,lo+width-1];}
 const existing=subnets.flatMap(x=>x.v4CidrBlocks||[]).map(range);
 const created=[];
