@@ -160,6 +160,14 @@ export async function flushCrmNotifications(limit = 2) {
 export async function queueCrmAdminNotifications() {
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
     const queue = await readChunkedDataJson<any>(QUEUE, []);
+    // A recipient correction moves only unfinished notices and revokes old claims.
+    for (const item of queue.filter(row => row.audience === "group" &&
+      !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId)) {
+      await updateChunkedDataJson<any>(QUEUE, item.id, row =>
+        row.audience === "group" && !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId
+          ? {...row, chatId: groupTarget.chatId, relayHash: "", relayUntil: 0, lastAckHash: "", nextAttemptAt: 0}
+          : row);
+    }
     const pendingLegacy = new Set(queue.filter(row => row.audience === "admin" && !["sent", "cancelled"].includes(row.status)).map(row => row.leadId));
     // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
     for (const lead of leads
