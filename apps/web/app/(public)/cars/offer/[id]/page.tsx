@@ -395,7 +395,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const primarySpecs = displayOnlySpecs.slice(0, 4);
   const secondarySpecs = displayOnlySpecs.slice(4);
 
-  return <main data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
+  return <main data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} data-offer-id={o.id} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">

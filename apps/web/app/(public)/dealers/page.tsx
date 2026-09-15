@@ -1,3 +1,4 @@
+import {PhoneInput} from "@/components/leads/PhoneInput";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -142,7 +143,7 @@ export default async function DealersLandingPage({ searchParams }: { searchParam
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Компания<input required name="companyName" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="Название компании" /></label>
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Город<input required name="city" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="Город работы" /></label>
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Ваше имя<input required name="contactName" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="Имя руководителя" /></label>
-            <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Телефон<input required name="phone" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="+7 999 000-00-00" /></label>
+            <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Телефон<PhoneInput name="phone" required /></label>
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Telegram<input name="telegram" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="@username" /></label>
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42">Сотрудников<input name="teamSize" type="number" min="1" className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black text-white outline-none focus:bg-white/[.1]" placeholder="Количество менеджеров" /></label>
             <label className="grid gap-2 text-xs font-black uppercase tracking-[.1em] text-white/42 md:col-span-2">С какими рынками работаете<textarea name="markets" rows={3} className="rounded-2xl bg-white/[.07] px-4 py-3.5 text-sm font-black normal-case tracking-normal text-white outline-none focus:bg-white/[.1]" placeholder="Япония, Китай, Корея, ОАЭ, Европа..." /></label>

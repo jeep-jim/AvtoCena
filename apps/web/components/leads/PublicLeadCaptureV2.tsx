@@ -3,6 +3,9 @@
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import {PhoneInput} from "./PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
+import {ShareLinkButton} from "@/components/catalog/ShareLinkButton";
 import { captureAttributionFromBrowser } from "@/lib/attribution";
 
 type FavoriteLeadItem = {
@@ -38,13 +41,6 @@ function cleanText(value: unknown) {
 
 function newUuid() {
   try { return crypto.randomUUID(); } catch { return `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
-}
-
-function isPlausiblePhone(value: string) {
-  const digits = value.replace(/\D/g, "");
-  if (digits.length < 10 || digits.length > 15) return false;
-  if ((digits.startsWith("7") || digits.startsWith("8")) && digits.length !== 11) return false;
-  return true;
 }
 
 function readFavorites(): FavoriteLeadItem[] {
@@ -139,33 +135,39 @@ function FieldLabel({ children }: { children: ReactNode }) {
 function ContactChoice({ value, onChange }: { value: ContactPreference; onChange: (value: ContactPreference) => void }) {
   return <div className="rounded-2xl bg-[var(--ac-surface-2)] p-2"><div className="grid grid-cols-2 gap-2">
     <button type="button" onClick={() => onChange("call")} className={`min-h-11 rounded-xl px-3 text-sm font-black ${value === "call" ? "ac-colored-button bg-red-500" : "text-[var(--ac-muted)]"}`}>Позвонить</button>
-    <button type="button" onClick={() => onChange("message")} className={`min-h-11 rounded-xl px-3 text-sm font-black ${value === "message" ? "ac-colored-button bg-red-500" : "text-[var(--ac-muted)]"}`}>Написать в чат</button>
+    <button type="button" onClick={() => onChange("message")} className={`min-h-11 rounded-xl px-3 text-sm font-black ${value === "message" ? "ac-colored-button bg-red-500" : "text-[var(--ac-muted)]"}`}>Написать мне</button>
   </div></div>;
 }
 
-function MessengerFields({ messenger, setMessenger, contact, setContact }: { messenger: MessengerKind; setMessenger: (value: MessengerKind) => void; contact: string; setContact: (value: string) => void }) {
-  return <div className="grid gap-3 md:grid-cols-[220px_minmax(0,1fr)]">
+function MessengerFields({ messenger, setMessenger, contact, setContact, kind, setKind }: { messenger: MessengerKind; setMessenger: (value: MessengerKind) => void; contact: string; setContact: (value: string) => void; kind: "phone" | "username"; setKind: (value: "phone" | "username") => void }) {
+  return <div className="grid gap-3">
     <div><FieldLabel>Мессенджер</FieldLabel><div className="grid h-[52px] grid-cols-2 gap-1 rounded-2xl bg-[var(--ac-surface-2)] p-1">
       <button type="button" onClick={() => setMessenger("telegram")} className={`rounded-xl text-sm font-black ${messenger === "telegram" ? "ac-colored-button bg-[#229ED9]" : "text-[var(--ac-muted)]"}`}>Telegram</button>
       <button type="button" onClick={() => setMessenger("max")} className={`rounded-xl text-sm font-black ${messenger === "max" ? "ac-colored-button bg-[#7B61FF]" : "text-[var(--ac-muted)]"}`}>MAX</button>
     </div></div>
-    <label className="block min-w-0"><FieldLabel>{messenger === "telegram" ? "Telegram" : "MAX"}</FieldLabel><input value={contact} onChange={(event) => setContact(event.target.value)} placeholder={messenger === "telegram" ? "@username или номер" : "Имя/номер в MAX"} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
+    <fieldset><legend className="mb-2 text-sm font-bold">Как вас найти?</legend><div className="flex flex-wrap gap-5">{(["phone", "username"] as const).map(value => <label key={value} className="flex items-center gap-2 text-sm font-bold"><input type="radio" name="messenger-contact-kind" value={value} checked={kind === value} onChange={() => setKind(value)} className="h-4 w-4 accent-red-500" />{value === "phone" ? "Телефон" : "Никнейм"}</label>)}</div></fieldset>
+    <label className="block"><FieldLabel>{kind === "phone" ? "Телефон аккаунта" : "Никнейм"}</FieldLabel>{kind === "phone" ? <PhoneInput value={contact} onChange={setContact} /> : <input value={contact} onChange={event => setContact(event.target.value)} placeholder="@username" autoComplete="off" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" />}</label>
+    <p className="text-xs leading-relaxed text-[var(--ac-muted)]">{kind === "phone" ? "Укажите номер, к которому привязан аккаунт. Разрешите находить вас по номеру в настройках мессенджера." : "Укажите свой никнейм в выбранном мессенджере. Если не знаете его, выберите телефон."}</p>
   </div>;
 }
 
 function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; favorites: FavoriteLeadItem[]; onClose: () => void }) {
   const panelRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: "" }));
+  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: "" }));
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
   const [messenger, setMessenger] = useState<MessengerKind>("telegram");
-  const [messengerContact, setMessengerContact] = useState("");
+  const [messengerContact, setMessengerContact] = useState("+7");
+  const [messengerContactKind, setMessengerContactKind] = useState<"phone" | "username">("phone");
+  const [offerPreview] = useState<FavoriteLeadItem | null>(() => {
+    if (request.mode !== "offer") return null;
+    try { const data=JSON.parse(document.querySelector<HTMLElement>("main[data-offer-preview]")?.dataset.offerPreview || "null"); return data?.id === request.offerId ? data : null; } catch {return null;}
+  });
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [consent, setConsent] = useState(false);
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [carFocused, setCarFocused] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [telegramStartUrl, setTelegramStartUrl] = useState("");
 
   const isFavorites = request.mode === "favorites";
   const isOffer = request.mode === "offer";
@@ -209,10 +211,12 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
     if (isFavorites && !selectedIds.length) return "Выберите хотя бы один автомобиль из Избранного.";
     if (contactPreference === "call") {
       if (!cleanText(form.phone)) return "Укажите телефон для звонка.";
-      if (!isPlausiblePhone(form.phone)) return "Проверьте номер телефона: введите корректный номер не короче 10 цифр.";
+      if (!normalizeRuPhone(form.phone)) return "Проверьте номер телефона: нужно 10 цифр после +7.";
     } else if (!cleanText(messengerContact)) {
       return `Укажите контакт в ${messenger === "telegram" ? "Telegram" : "MAX"}.`;
     }
+    if (contactPreference === "message" && messengerContactKind === "phone" && !normalizeRuPhone(messengerContact)) return "Проверьте телефон аккаунта: нужно 10 цифр после +7.";
+    if (contactPreference === "message" && messengerContactKind === "username" && !/^@?[A-Za-z][A-Za-z0-9_]{3,63}$/.test(cleanText(messengerContact))) return "Укажите никнейм латиницей или выберите телефон.";
     if (!isOffer && !isFavorites && !cleanText(form.car)) return "Укажите интересующий автомобиль.";
     if (!isOffer && !isFavorites && budgetRub <= 0) return "Укажите бюджет.";
     if (!consent) return "Нужно дать согласие на обработку персональных данных для отправки заявки.";
@@ -223,19 +227,22 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
     event.preventDefault();
     const validation = validate();
     if (validation) { setStatus("error"); setMessage(validation); return; }
-    setStatus("sending"); setMessage(""); setTelegramStartUrl("");
+    setStatus("sending"); setMessage("");
 
     const operation = operationIdFor(request, selectedIds);
     const carText = isFavorites ? selectedFavorites.map((item) => cleanText(item.title) || item.id).join("; ") : cleanText(form.car);
-    const telegram = contactPreference === "message" && messenger === "telegram" ? cleanText(messengerContact) : "";
-    const max = contactPreference === "message" && messenger === "max" ? cleanText(messengerContact) : "";
+    const contact = messengerContactKind === "phone" ? normalizeRuPhone(messengerContact) : cleanText(messengerContact);
+    const telegram = contactPreference === "message" && messenger === "telegram" ? contact : "";
+    const max = contactPreference === "message" && messenger === "max" ? contact : "";
 
     try {
       const response = await fetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         offerId: isOffer ? request.offerId : "",
         name: cleanText(form.name),
-        phone: contactPreference === "call" ? cleanText(form.phone) : "",
+        phone: contactPreference === "call" ? normalizeRuPhone(form.phone) : messengerContactKind === "phone" ? contact : "",
+        contactInputVersion: "ru-v1",
+        messengerContactKind: contactPreference === "message" ? messengerContactKind : "",
         telegram,
         max,
         city: cleanText(form.city),
@@ -254,12 +261,8 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
       const json = await response.json().catch(() => ({}));
       if (!response.ok || !json?.ok) throw new Error(json?.error || "Не удалось отправить заявку");
       clearOperationId(operation.key);
-      const startUrl = typeof json?.telegramStartUrl === "string" ? json.telegramStartUrl : "";
-      setTelegramStartUrl(startUrl);
       setStatus("success");
-      setMessage(startUrl
-        ? "Заявка принята. Откройте Telegram и нажмите Start — бот сразу отправит сохранённые варианты и расчёты, а менеджер продолжит общение там."
-        : `Заявка принята. Менеджер ${contactPreference === "message" ? "напишет вам" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
+      setMessage(`Заявка принята. Менеджер ${contactPreference === "message" ? "напишет вам в выбранный мессенджер" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
     } catch (error) {
       setStatus("error");
       setMessage((error as Error)?.message || "Ошибка сети. Повторная отправка не создаст дубль заявки.");
@@ -279,16 +282,16 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
             <button type="button" disabled={status === "sending"} onClick={onClose} className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>
           </header>
 
-          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p>{telegramStartUrl ? <a href={telegramStartUrl} target="_blank" rel="noreferrer" className="ac-colored-button mt-4 inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#229ED9] px-5 py-3 text-sm font-black text-white">Открыть Telegram →</a> : null}</div> : <form onSubmit={submit} className="mt-6 grid gap-4">
+          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
             <div className="grid gap-3 md:grid-cols-2"><label className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><input value={form.city} onChange={(event) => setField("city", event.target.value)} autoComplete="address-level2" placeholder="Например, Москва" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label><label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 
-            <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); setTelegramStartUrl(""); }} />
-            {contactPreference === "message" ? <MessengerFields messenger={messenger} setMessenger={setMessenger} contact={messengerContact} setContact={setMessengerContact} /> : <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><input type="tel" value={form.phone} onChange={(event) => setField("phone", event.target.value)} autoComplete="tel" inputMode="tel" placeholder="+7 999 000-00-00" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>}
+            <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); }} />
+            {contactPreference === "message" ? <MessengerFields messenger={messenger} setMessenger={setMessenger} contact={messengerContact} setContact={setMessengerContact} kind={messengerContactKind} setKind={value => {setMessengerContactKind(value);setMessengerContact(value === "phone" ? "+7" : "");}} /> : <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><PhoneInput value={form.phone} onChange={value => setField("phone", value)} /></label>}
 
             {!isFavorites && !isOffer ? <div className="grid gap-3 md:grid-cols-2"><label className="relative block min-w-0"><FieldLabel>Интересующее авто</FieldLabel><input value={form.car} onChange={(event) => setField("car", event.target.value)} onFocus={() => setCarFocused(true)} onBlur={() => window.setTimeout(() => setCarFocused(false), 120)} placeholder="Например, Toyota RAV4" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" autoComplete="off" />{carFocused && suggestions.length ? <div className="absolute left-0 right-0 top-[calc(100%+7px)] z-30 max-h-56 overflow-y-auto rounded-2xl bg-[var(--ac-surface-3)] p-2 shadow-2xl">{suggestions.map((item, index) => { const label = cleanText(item.label) || [item.make, item.model].map(cleanText).filter(Boolean).join(" "); return <button key={item.id || `${label}-${index}`} type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => { setField("car", label); setSuggestions([]); setCarFocused(false); }} className="block min-h-10 w-full rounded-xl px-3 py-2 text-left text-sm font-bold text-[var(--ac-text)] hover:bg-white/[.07]">{label}</button>; })}</div> : null}<span className="mt-1.5 block text-[11px] font-semibold leading-4 text-[var(--ac-muted)]">Можно выбрать подсказку или написать любую марку и модель вручную.</span></label><label className="block min-w-0"><FieldLabel>Бюджет</FieldLabel><div className="relative"><input value={formatBudgetInput(form.budget)} onChange={(event) => setField("budget", event.target.value.replace(/\D/g, ""))} inputMode="numeric" placeholder="Например, 3 000 000" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 pr-10 outline-none" /><span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-black text-[var(--ac-muted)]">₽</span></div></label></div> : null}
 
-            {isOffer ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-[11px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Интересующее авто</div><div className="mt-1.5 text-sm font-black text-[var(--ac-text)]">{cleanText(form.car) || "Автомобиль из открытой карточки"}</div></div> : null}
+            {isOffer ? <div className="flex items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-3">{offerPreview?.imageUrl ? <img src={offerPreview.imageUrl} alt="Выбранный автомобиль" className="h-20 w-24 shrink-0 rounded-xl object-cover" /> : <span className="flex h-20 w-24 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-3)]" aria-hidden="true">🚘</span>}<div className="min-w-0"><div className="text-sm font-black">{offerPreview?.title || cleanText(form.car) || "Автомобиль из открытой карточки"}</div><div className="mt-1 text-xs text-[var(--ac-muted)]">{[offerPreview?.marketLabel, offerPreview?.year].filter(Boolean).join(" · ")}</div>{Number(offerPreview?.totalRub) > 0 ? <div className="mt-1 text-sm font-bold">{formatRub(Number(offerPreview?.totalRub))}</div> : null}</div></div> : null}
 
             <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input ac-lead-comment w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 
@@ -317,7 +320,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
 }
 
 function FavoritesPinnedActions({ onLead }: { onLead: () => void }) {
-  return <div data-ac-favorites-bar className="fixed inset-x-0 bottom-0 z-[9000] border-t border-white/10 bg-[var(--ac-surface)] px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl md:left-1/2 md:right-auto md:bottom-5 md:w-[min(720px,calc(100vw-40px))] md:-translate-x-1/2 md:rounded-[1.6rem] md:border md:p-3"><div className="mx-auto grid max-w-3xl grid-cols-2 gap-2.5"><button type="button" onClick={onLead} data-offer-action="messenger" className="ac-colored-button inline-flex items-center justify-center h-14 min-w-0 rounded-[1.25rem] bg-[#00A2E8] px-3 text-[13px] font-black leading-none sm:text-sm">Чат по выбранным авто</button><button type="button" onClick={onLead} className="ac-colored-button inline-flex items-center justify-center h-14 min-w-0 rounded-[1.25rem] bg-[#22B14C] px-3 text-[13px] font-black leading-none sm:text-sm">Оставить заявку</button></div></div>;
+  return <div data-ac-favorites-bar className="fixed inset-x-0 bottom-0 z-[9000] border-t border-white/10 bg-[var(--ac-surface)] px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl md:left-1/2 md:right-auto md:bottom-5 md:w-[min(720px,calc(100vw-40px))] md:-translate-x-1/2 md:rounded-[1.6rem] md:border md:p-3"><div className="mx-auto grid max-w-3xl grid-cols-2 gap-2.5"><button type="button" onClick={onLead} className="ac-colored-button inline-flex items-center justify-center h-14 min-w-0 rounded-[1.25rem] bg-[#22B14C] px-3 text-[13px] font-black leading-none sm:text-sm">Оставить заявку</button><ShareLinkButton className="ac-colored-button inline-flex min-h-14 items-center justify-center rounded-[1.25rem] bg-[#00A2E8] px-3 text-sm font-black" /></div></div>;
 }
 
 export function PublicLeadCaptureV2() {

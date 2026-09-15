@@ -1,3 +1,4 @@
+import {normalizeRuPhone} from "./ru-phone";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
@@ -12,7 +13,6 @@ import { deliverCpaEvent } from "./cpa-gateway";
 import { getBusinessSettingsSnapshot } from "./business-settings";
 import { getCurrentUser, isCrmRole } from "./auth";
 import { readCrmUsers } from "./crm-users";
-import { getTelegramRuntimeConfig } from "./telegram-config";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -139,24 +139,6 @@ async function buildSelectedOfferSnapshot(offerId: string) {
   };
 }
 
-function telegramBindFor(botUsername: string) {
-  const token = crypto.randomBytes(18).toString("base64url");
-  const hash = crypto.createHash("sha256").update(token).digest("hex");
-  const expiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
-  return {
-    token,
-    hash,
-    expiresAt,
-    startUrl: `https://t.me/${botUsername}?start=lead_${token}`,
-  };
-}
-
-function formatRub(value: unknown) {
-  const number = Number(value);
-  return Number.isFinite(number) && number > 0
-    ? `${new Intl.NumberFormat("ru-RU").format(Math.round(number))} ₽`
-    : "";
-}
 
 export async function createLead(
   request: Request,
@@ -173,7 +155,10 @@ export async function createLead(
 
   const crmUser =
     currentUser && isCrmRole(currentUser.role) && clean(body.source, 160) === "manual_crm" ? currentUser : null;
-  const phone = clean(body.phone, 80);
+  const rawPhone = clean(body.phone, 80);
+  const phone = rawPhone ? normalizeRuPhone(rawPhone) || rawPhone : "";
+  if (body.contactInputVersion === "ru-v1" && rawPhone && !normalizeRuPhone(rawPhone)) return NextResponse.json({ok:false,error:"Номер должен содержать 10 цифр после +7."}, {status:400});
+  if (body.contactInputVersion === "ru-v1" && body.messengerContactKind === "phone" && !normalizeRuPhone(rawPhone)) return NextResponse.json({ok:false,error:"Укажите полный телефон аккаунта."}, {status:400});
   const telegram =
     telegramContact(body.telegram) || telegramContact(body.telegramUsername);
   const max = clean(body.max, 160);
@@ -317,21 +302,7 @@ export async function createLead(
           client.id === duplicate?.clientId,
       )
     : null;
-  const telegramRuntime =
-    !crmUser &&
-    !trustedTelegramId &&
-    contactPreference === "message" &&
-    messenger === "telegram"
-      ? await getTelegramRuntimeConfig().catch(() => null)
-      : null;
-  const botUsername = telegramContact(telegramRuntime?.username || "");
-  const telegramBind =
-    !crmUser &&
-    contactPreference === "message" &&
-    messenger === "telegram" &&
-    botUsername
-      ? telegramBindFor(botUsername)
-      : null;
+  // Website forms collect a contact for the manager; never redirect to a bot.
 
   const consentSnapshot =
     personalDataConsentVersion || personalDataConsentText
@@ -372,6 +343,7 @@ export async function createLead(
     comment,
     contactPreference,
     messenger,
+    messengerContactKind: clean(body.messengerContactKind, 20),
     pageUrl,
     referrer,
     ...consentSnapshot,
@@ -440,6 +412,7 @@ export async function createLead(
     comment,
     contactPreference,
     messenger,
+    messengerContactKind: clean(body.messengerContactKind, 20),
     pageUrl,
     referrer,
     ...consentSnapshot,
@@ -482,27 +455,14 @@ export async function createLead(
       Array.isArray((calculationSnapshot as any).breakdown)
         ? (calculationSnapshot as any).breakdown
         : [],
-    telegramBindTokenHash: telegramBind?.hash || "",
-    telegramBindExpiresAt: telegramBind?.expiresAt || "",
-    telegramDeliveryStatus: telegramBind ? "awaiting_start" : "",
+    telegramBindTokenHash: "",
+    telegramBindExpiresAt: "",
+    telegramDeliveryStatus: "",
   };
   let lead =
     duplicate || (await appendChunkedDataJson("leads/leads.json", leadPayload));
 
-  if (duplicate && telegramBind) {
-    lead =
-      (await updateChunkedDataJson<any>(
-        "leads/leads.json",
-        duplicate.id,
-        (stored) => ({
-          ...stored,
-          updatedAt: createdAt,
-          telegramBindTokenHash: telegramBind.hash,
-          telegramBindExpiresAt: telegramBind.expiresAt,
-          telegramDeliveryStatus: "awaiting_start",
-        }),
-      )) || duplicate;
-  }
+
 
   try {
     if (!duplicate) {
@@ -568,6 +528,6 @@ export async function createLead(
     recovered: Boolean(duplicate),
     duplicate: Boolean(duplicate),
     selectedOfferCount: selectedOfferSnapshots.length,
-    telegramStartUrl: telegramBind?.startUrl || "",
+    telegramStartUrl: "",
   });
 }

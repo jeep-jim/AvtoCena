@@ -1,24 +1,16 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { ShareLinkButton } from "./ShareLinkButton";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
-
-function ChatIcon() {
-  return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5.5 5.25h13A2.25 2.25 0 0 1 20.75 7.5v8A2.25 2.25 0 0 1 18.5 17.75h-7.25L6 21v-3.25h-.5a2.25 2.25 0 0 1-2.25-2.25v-8A2.25 2.25 0 0 1 5.5 5.25Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /><circle cx="8" cy="11.5" r=".85" fill="currentColor" /><circle cx="12" cy="11.5" r=".85" fill="currentColor" /><circle cx="16" cy="11.5" r=".85" fill="currentColor" /></svg>;
-}
 
 function PhoneIcon() {
   return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.15 3.75 10 8.35 8.3 10.1a14.9 14.9 0 0 0 5.6 5.6l1.75-1.7 4.6 2.85c.5.3.7.92.48 1.46-.56 1.38-1.83 2.3-3.31 2.4C10.08 21.13 2.87 13.92 3.29 6.58c.1-1.48 1.02-2.75 2.4-3.31.54-.22 1.16-.02 1.46.48Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
 function ActionButtons({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {
-  const pathname=usePathname();
-  const offerId=pathname.startsWith("/cars/offer/") ? pathname.split("/")[3] : "";
-  const messengerUrl=`https://t.me/avtocena_bot?start=${offerId ? `chat_${encodeURIComponent(offerId)}` : "request"}`;
   const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-2 text-[12px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-3 sm:text-sm md:px-12 md:text-base xl:h-14";
   return <div className={`grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    <a href={messengerUrl} target="_blank" rel="noreferrer" data-offer-action="messenger" className={`${buttonClass} bg-[#00A2E8]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><ChatIcon /></span><span className="whitespace-nowrap">Чат в мессенджере</span></a>
     <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку</span></button>
-    <p className="col-span-full text-xs leading-relaxed text-[var(--ac-muted)]">Запуская бота, вы передаёте менеджеру обращение по этому автомобилю и соглашаетесь на обработку Telegram-контакта для ответа. Ответ может прийти с задержкой.</p>
+    <ShareLinkButton className={`${buttonClass} bg-[#00A2E8]`} />
   </div>;
 }
 
