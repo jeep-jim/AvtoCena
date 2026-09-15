@@ -12,7 +12,7 @@ on:
       operation:
         description: "Deliver and poll, check credentials, or enable the external bot"
         type: choice
-        options: [deliver, notify, check, check-group, setup-webhook, enable-polling]
+        options: [deliver, notify, check, check-group, setup-webhook, enable-polling, enable-events]
         default: deliver
 permissions:
   contents: read
@@ -43,11 +43,15 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_WEBHOOK_SECRET: ${{ secrets.TELEGRAM_WEBHOOK_SECRET }}
+          TELEGRAM_BOT_USERNAME: ${{ vars.TELEGRAM_BOT_USERNAME }}
           OPERATION: ${{ inputs.operation || 'deliver' }}
           ACCEPTANCE_RUN: ${{ github.event_name == 'workflow_run' && '1' || '0' }}
         run: |
           set -euo pipefail
-          if [ "$OPERATION" = "notify" ]; then
+          if [ "$OPERATION" = "enable-events" ]; then
+            node --import tsx scripts/crm-enable-events.ts
+          elif [ "$OPERATION" = "notify" ]; then
             node scripts/crm-telegram-delivery.mjs deliver
           elif [ "$OPERATION" = "enable-polling" ]; then
             node --import tsx scripts/crm-telegram-poll.ts enable-polling
