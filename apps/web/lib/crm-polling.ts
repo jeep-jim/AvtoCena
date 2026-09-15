@@ -2,13 +2,22 @@ import crypto from "node:crypto";
 import { mutateDataJson, readDataJson } from "./data";
 
 export const POLL_STATE = "telegram/crm-polling.json";
-type State = { enabled: boolean; offset: number; lease: string; until: number };
+type State = { enabled: boolean; offset: number; lease: string; until: number; eventDriven?: boolean };
 const initial: State = { enabled: false, offset: 0, lease: "", until: 0 };
 export async function pollingEnabled() {
   return (await readDataJson<State>(POLL_STATE, initial)).enabled;
 }
 export async function enablePolling() {
-  await mutateDataJson<State>(POLL_STATE, initial, state => ({ ...state, enabled: true }));
+  await mutateDataJson<State>(POLL_STATE, initial, state => ({ ...state, enabled: true, eventDriven: false }));
+}
+export async function eventDrivenEnabled() {
+  return Boolean((await readDataJson<State>(POLL_STATE, initial)).eventDriven);
+}
+export async function setEventDrivenMode(enabled: boolean) {
+  await mutateDataJson<State>(POLL_STATE, initial, state => {
+    if (state.until > Date.now()) throw Error("poller_busy");
+    return {...state, enabled: true, eventDriven: enabled};
+  });
 }
 
 // One bounded batch. Offset advances only after the existing handler succeeds.
@@ -16,6 +25,7 @@ export async function enablePolling() {
 export async function pollBatch(
   getUpdates: (offset: number) => Promise<any[]>,
   handle: (update: any) => Promise<void>,
+  advanceOffset = true,
 ) {
   const lease = crypto.randomUUID();
   let acquired = false;
@@ -23,7 +33,7 @@ export async function pollBatch(
   await mutateDataJson<State>(POLL_STATE, initial, state => {
     acquired = false;
     if (!state.enabled || state.until > Date.now()) return state;
-    acquired = true; offset = state.offset;
+    acquired = true; offset = advanceOffset ? state.offset : 0;
     return { ...state, lease, until: Date.now() + 180_000 };
   });
   if (!acquired) return { processed: 0, inactiveOrBusy: true };
@@ -59,10 +69,10 @@ export async function pollBatch(
             receipt.lease === lease ? { ...receipt, until: 0 } : receipt);
         }
       }
-      offset = update.update_id + 1;
+      offset = advanceOffset ? update.update_id + 1 : 0;
       await mutateDataJson<State>(POLL_STATE, initial, state => {
         if (state.lease !== lease) throw Error("poll_lease_lost");
-        return { ...state, offset, until: Date.now() + 180_000 };
+        return { ...state, offset: advanceOffset ? offset : state.offset, until: Date.now() + 180_000 };
       });
       processed++;
     }

@@ -1,6 +1,7 @@
 import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
-import { enablePolling, pollingEnabled, pollBatch } from "../apps/web/lib/crm-polling";
+import { enablePolling, pollingEnabled, pollBatch, eventDrivenEnabled } from "../apps/web/lib/crm-polling";
+import {pendingCrmEvents} from "../apps/web/lib/crm-incoming-events";
 import { handleCrmBotUpdate } from "../apps/web/lib/crm-bot";
 import { flushCrmNotifications, telegramSend } from "../apps/web/lib/crm-notifications";
 
@@ -38,10 +39,11 @@ export async function runPolling() {
     ] });
   }
   const info = await telegram("getWebhookInfo");
-  if (info?.url) throw Error("webhook_still_active");
+  const eventDriven = await eventDrivenEnabled();
+  if (info?.url && !eventDriven) throw Error("webhook_still_active");
   process.env.CRM_BOT_POLL_WORKER = "1";
   const result = await pollBatch(
-    offset => telegram("getUpdates", { offset, limit: 8, timeout: process.env.CRM_SERVICE_MODE === "1" ? 15 : 0,
+    offset => eventDriven ? pendingCrmEvents(offset) : telegram("getUpdates", { offset, limit: 8, timeout: process.env.CRM_SERVICE_MODE === "1" ? 15 : 0,
       allowed_updates: ["message", "callback_query"] }),
     async update => {
       const handled = await handlePrivateLeadStart(update, token) || await handleCrmBotUpdate(update, token);
@@ -58,6 +60,7 @@ export async function runPolling() {
         await telegram("answerCallbackQuery", { callback_query_id: update.callback_query.id }).catch(() => null);
       }
     },
+    !eventDriven,
   );
   await flushCrmNotifications(3);
   console.log(`Telegram polling: processed=${result.processed}, inactiveOrBusy=${result.inactiveOrBusy}`);
