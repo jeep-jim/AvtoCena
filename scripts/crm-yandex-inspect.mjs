@@ -32,3 +32,8 @@ for(const origin of ['https://avtocena.com','https://bbaohms2ccpm3vb4e73t.contai
  console.log('NETWORK_CHECK '+JSON.stringify({origin,status:r.status,ok:d.ok,releaseSha:d.releaseSha,polling:d.polling,checks:d.checks,bot:d.bot}));
  }catch{console.log('NETWORK_CHECK '+JSON.stringify({origin,error:'request_failed'}));}
 }
+
+for (const [kind, suffix] of [['networks','networks'],['subnets','subnets']]) {
+ const d = await get('https://vpc.api.cloud.yandex.net/vpc/v1/'+suffix+'?folderId='+folder);
+ console.log('VPC '+JSON.stringify({kind,resources:(d[kind]||[]).map(x=>({id:x.id,name:x.name,networkId:x.networkId,zoneId:x.zoneId,routeTableId:x.routeTableId}))}));
+}
