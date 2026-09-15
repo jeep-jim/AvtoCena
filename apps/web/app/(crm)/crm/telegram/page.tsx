@@ -18,7 +18,7 @@ export default async function CrmTelegramPage() {
       subtitle="Клиентские обращения и закрытые уведомления команды через бота АвтоЦены."
     >
       <section className="glass rounded-2xl p-6">
-        <h2 className="text-xl font-black">Заявки в группе «TopAvto Планета»</h2>
+        <h2 className="text-xl font-black">Заявки в группе «Заявки TopAvto»</h2>
         <p className="mt-3">Заявки с сайта и подтверждённые обращения из бота сохраняются в CRM и отправляются в закрытую группу. Их видят все участники группы.</p>
         <p className="mt-3">Добавляйте сотрудников в группу через Telegram. Для входа в CRM используйте логин и персональный ключ — привязка Telegram не нужна.</p>
         <p className="mt-3">Личный диалог клиента остаётся в боте. Сообщения команды в группе клиентам не отправляются.</p>

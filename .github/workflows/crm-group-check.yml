@@ -1,7 +1,7 @@
 name: CRM approved group verification
 on:
   push:
-    branches: [fix/crm-group-inbox-20260915]
+    branches: [fix/crm-context-delivery-20260915]
   workflow_dispatch:
 permissions:
   contents: read

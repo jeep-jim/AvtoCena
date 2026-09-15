@@ -1,3 +1,4 @@
+import { readCatalogOverview } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
@@ -1558,6 +1559,17 @@ function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number) 
 export async function readHomeCatalogSnapshot(perMarket = 6) {
   const manifest = await readManifest();
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
+  const overview = await readCatalogOverview().catch(() => null);
+  if (overview?.generationId === manifest.generationId && MARKETS.every(market => {
+    const count = Number(manifest.markets?.[market]?.count || 0);
+    const summary = overview.markets[market];
+    return summary && summary.total === count && summary.items.length >= Math.min(limit, count);
+  })) {
+    const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
+    return {generationId: manifest.generationId, marketCounts,
+      total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
+      items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit))};
+  }
   const currentProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
   if (currentProjection.generationId === manifest.generationId) {
     const rawProjectionRows = currentProjection.items || [];

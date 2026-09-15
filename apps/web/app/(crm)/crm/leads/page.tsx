@@ -320,7 +320,7 @@ export default async function CrmLeadsPage({
                       {notifications.length
                         ? `${notifications.filter((item) => item.status === "sent").length} доставлено из ${notifications.length}`
                         : lead.notificationRequestedAt
-                          ? "Ожидается подключение администратора / отправка"
+                          ? "Ожидает отправки в группу"
                           : "Историческая заявка"}
                     </div>
                     {lead.archivedAt && (

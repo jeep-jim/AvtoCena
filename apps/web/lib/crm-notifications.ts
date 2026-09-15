@@ -43,6 +43,8 @@ export function leadNotice(lead: any) {
     lead.phone ? `Телефон: ${lead.phone}` : "",
     lead.telegram ? `Telegram: @${lead.telegram}` : "",
     lead.car || lead.offerTitle || "Подбор автомобиля",
+    ...(Array.isArray(lead.selectedOffers) ? lead.selectedOffers.slice(0, 5).map((offer: any, index: number) => `${index + 1}. ${String(offer.title || "Автомобиль").slice(0, 180)}\nhttps://avtocena.com/cars/offer/${encodeURIComponent(String(offer.id || offer.offerId || ""))}`) : []),
+    !lead.selectedOffers?.length && lead.offerId ? `https://avtocena.com/cars/offer/${encodeURIComponent(lead.offerId)}` : "",
     lead.city || "",
     lead.budgetRub
       ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
@@ -158,6 +160,14 @@ export async function flushCrmNotifications(limit = 2) {
 export async function queueCrmAdminNotifications() {
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
     const queue = await readChunkedDataJson<any>(QUEUE, []);
+    // A recipient correction moves only unfinished notices and revokes old claims.
+    for (const item of queue.filter(row => row.audience === "group" &&
+      !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId)) {
+      await updateChunkedDataJson<any>(QUEUE, item.id, row =>
+        row.audience === "group" && !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId
+          ? {...row, chatId: groupTarget.chatId, relayHash: "", relayUntil: 0, lastAckHash: "", nextAttemptAt: 0}
+          : row);
+    }
     const pendingLegacy = new Set(queue.filter(row => row.audience === "admin" && !["sent", "cancelled"].includes(row.status)).map(row => row.leadId));
     // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
     for (const lead of leads

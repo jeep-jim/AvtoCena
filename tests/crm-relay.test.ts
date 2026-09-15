@@ -21,7 +21,7 @@ test("group relay needs no staff binding, preserves leases, excludes internal no
     await writeDataJson("leads/leads.json", [{id: "lead_test", name: "PRIVATE_NAME", phone: "PRIVATE_PHONE", comment: "CUSTOMER_COMMENT", internalNote: "PRIVATE_NOTE", notificationRequestedAt: new Date().toISOString()}]);
     const [first, second] = await Promise.all([claimCrmNotices(), claimCrmNotices()]);
     const claims = [...first, ...second];
-    assert.equal(claims.length, 1);
+    assert.equal(claims.length, 1, JSON.stringify(await readChunkedDataJson<any>("telegram/crm-outbox.json", [])));
     assert.deepEqual(new Set(claims.map(c => c.chatId)), new Set([groupTarget.chatId]));
     assert.match(claims[0].text, /PRIVATE_PHONE/);
     assert.doesNotMatch(JSON.stringify(claims), /PRIVATE_NOTE/);
@@ -74,6 +74,34 @@ test("migration sends pending legacy lead once to the group and leaves completed
     const rows = await readChunkedDataJson<any>("telegram/crm-outbox.json", []);
     assert.equal(rows.find(r => r.id === "legacy").status, "cancelled");
     assert.equal(rows.filter(r => r.audience === "group").length, 1);
+  } finally {
+    process.chdir(cwd);
+    if (driver === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = driver;
+    resetJsonStorageForTests(); fs.rmSync(tmp, {recursive: true, force: true});
+  }
+});
+
+test("recipient correction revokes old claims and preserves sent history", async () => {
+  const cwd = process.cwd(), driver = process.env.JSON_STORAGE_DRIVER;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "crm-recipient-"));
+  fs.mkdirSync(path.join(tmp, "data")); process.chdir(tmp);
+  process.env.JSON_STORAGE_DRIVER = "local"; resetJsonStorageForTests();
+  try {
+    const stamp = new Date().toISOString();
+    await writeDataJson("leads/leads.json", [{id: "pending"}, {id: "history"}]);
+    await writeDataJson("telegram/crm-outbox.json", [
+      {id: "pending", leadId: "pending", audience: "group", chatId: "-4844138368", status: "pending", createdAt: stamp, relayHash: "old", relayUntil: Date.now()+60000},
+      {id: "history", leadId: "history", audience: "group", chatId: "-4844138368", status: "sent", createdAt: stamp},
+    ]);
+    const claims = await claimCrmNotices();
+    assert.equal(claims.length, 1, JSON.stringify(await readChunkedDataJson<any>("telegram/crm-outbox.json", [])));
+    assert.equal(claims[0].chatId, groupTarget.chatId);
+    assert.equal(await authorizeCrmNotice("pending", "old"), false);
+    assert.equal(await authorizeCrmNotice("pending", claims[0].token), true);
+    assert.deepEqual(await claimCrmNotices(), []);
+    const history = (await readChunkedDataJson<any>("telegram/crm-outbox.json", [])).find(row => row.id === "history");
+    assert.equal(history.status, "sent");
+    assert.equal(history.chatId, "-4844138368");
   } finally {
     process.chdir(cwd);
     if (driver === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = driver;
