@@ -160,6 +160,26 @@ test("customer request, private admin notification, reply confirmation, retry an
     const count = sent.length;
     await flushCrmNotifications(5);
     assert.equal(sent.length, count);
+    // A disclosed direct chat creates a lead without a confirmation callback.
+    const direct = message(505, "/start chat_direct-car");
+    await handleCrmBotUpdate(direct, "token");
+    const directLeads = await readChunkedDataJson<any>("leads/leads.json", []);
+    const directLead = directLeads.find(row => row.telegramUserId === "505");
+    assert.ok(directLead);
+    assert.equal(directLead.offerId, "direct-car");
+    assert.equal(directLead.telegramChatId, "505");
+    assert.match(directLead.pageUrl, /cars\/offer\/direct-car$/);
+    assert.match(sent.at(-1).text, /Ваше обращение передано менеджеру/);
+    assert.match(sent.at(-1).text, /cars\/offer\/direct-car/);
+    assert.ok(!JSON.stringify(sent.at(-1)).includes("cust:confirm"));
+    await handleCrmBotUpdate(direct, "token"); // retry of same delivery
+    await handleCrmBotUpdate(message(505, "/start chat_direct-car"), "token"); // repeated opening
+    assert.equal((await readChunkedDataJson<any>("leads/leads.json", [])).length, directLeads.length);
+    await handleCrmBotUpdate(message(505, "Есть ли подогрев сидений?"), "token");
+    assert.equal((await readDataJson<any>("telegram/crm-dialogs/505.json", {})).leadId, directLead.id);
+    assert.ok((await readChunkedDataJson<any>("telegram/crm-messages.json", [])).some(row => row.leadId === directLead.id && row.text === "Есть ли подогрев сидений?"));
+    await handleCrmBotUpdate(callback(606, `cust:chat:${directLead.id}`), "token");
+    assert.match(sent.at(-1).text, /недоступно/);
   } finally {
     globalThis.fetch = fetchOriginal;
     process.chdir(cwd);

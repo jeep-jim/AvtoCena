@@ -172,6 +172,60 @@ async function confirmPrompt(token: string, id: string, dialog: Dialog) {
     ],
   );
 }
+async function submitCustomerRequest(token: string, id: string, from: any, dialog: Dialog, automatic = false) {
+    const response = await createLead(
+      new Request(`${SITE}/api/leads`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          operationId: dialog.requestId,
+          offerId: dialog.offerId || "",
+          pageUrl: dialog.offerId ? `${SITE}/cars/offer/${encodeURIComponent(dialog.offerId)}` : `${SITE}/request`,
+          name: [from.first_name, from.last_name].filter(Boolean).join(" "),
+          telegram: String(from.username || ""),
+          comment: dialog.description,
+          car: dialog.description,
+          contactPreference: "message",
+          messenger: "telegram",
+          personalDataConsent: true,
+          personalDataConsentVersion: automatic ? "telegram-chat-start-v1" : "telegram-request-v1",
+          source: "telegram_bot",
+        }),
+      }),
+      null,
+      id,
+    );
+    const result = await response.json();
+    if (!response.ok || !result.ok) throw Error("bot_lead_not_saved");
+    await updateChunkedDataJson<any>(
+      "leads/leads.json",
+      result.leadId,
+      (lead) => ({
+        ...lead,
+        telegramUserId: id,
+        telegramChatId: id,
+        telegramDisplayName: [from.first_name, from.last_name]
+          .filter(Boolean)
+          .join(" "),
+        telegramBindTokenHash: "",
+        telegramBindExpiresAt: "",
+        telegramDeliveryStatus: "connected",
+      }),
+    );
+    await updateChunkedDataJson<any>(
+      "clients/clients.json",
+      result.clientId,
+      (client) => ({ ...client, telegramUserId: id, telegramChatId: id }),
+    );
+    await saveDialog(id, { mode: "conversation", leadId: result.leadId });
+    await telegramSend(
+      token,
+      id,
+      automatic ? `${dialog.description || "Автомобиль"}\n${SITE}/cars/offer/${encodeURIComponent(dialog.offerId || "")}\n\nВаше обращение передано менеджеру. Напишите вопрос по этому автомобилю или дождитесь ответа менеджера.` : "Заявка получена. Менеджер проверит автомобиль и ответит в этом чате. Дополнения можно написать следующим сообщением.",
+      customerKeyboard,
+    );
+}
+
 export async function handleCrmBotUpdate(
   update: any,
   token: string,
@@ -361,6 +415,24 @@ export async function handleCrmBotUpdate(
     );
     return true;
   }
+  // Only new chat_ links carry the website's automatic-submission disclosure.
+  // Old offer_ links and pasted URLs retain their explicit confirmation flow.
+  const chatStart = text.match(/^\/start(?:@avtocena_bot)?\s+chat_([A-Za-z0-9_-]{1,59})$/i);
+  if (chatStart) {
+    const offerId = chatStart[1];
+    const existing = (await ownLeads(id)).find(lead => lead.offerId === offerId);
+    if (existing) {
+      await saveDialog(id, {mode: "conversation", leadId: existing.id});
+      await telegramSend(token, id, `${existing.car || "Выбранный автомобиль"}\n${SITE}/cars/offer/${encodeURIComponent(offerId)}\n\nОбращение по этому автомобилю уже открыто. Напишите вопрос или дождитесь ответа менеджера.`, customerKeyboard);
+      return true;
+    }
+    const offer = await getOffer(offerId).catch(() => null);
+    const description = offer ? [offer.make, offer.model, offer.trim, offer.year].filter(Boolean).join(" ") : "Автомобиль по ссылке";
+    await submitCustomerRequest(token, id, from, {
+      offerId, description, requestId: `chat_${id}_${update.update_id}`,
+    }, true);
+    return true;
+  }
   const offerStart = text.match(/^\/start(?:@avtocena_bot)?\s+offer_([A-Za-z0-9_-]{1,100})$/i) || text.match(/https:\/\/avtocena\.com\/cars\/offer\/([A-Za-z0-9_-]{1,100})(?=[\s/?#]|$)/i);
   if (offerStart) {
     const offer = await getOffer(offerStart[1]).catch(() => null) || {id: offerStart[1], make: "Автомобиль по ссылке", model: "", trim: "", year: null, totalRub: null};
@@ -419,57 +491,7 @@ export async function handleCrmBotUpdate(
       );
       return true;
     }
-    const response = await createLead(
-      new Request(`${SITE}/api/leads`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          operationId: dialog.requestId,
-          offerId: dialog.offerId || "",
-          pageUrl: dialog.offerId ? `${SITE}/cars/offer/${encodeURIComponent(dialog.offerId)}` : `${SITE}/request`,
-          name: [from.first_name, from.last_name].filter(Boolean).join(" "),
-          telegram: String(from.username || ""),
-          comment: dialog.description,
-          car: dialog.description,
-          contactPreference: "message",
-          messenger: "telegram",
-          personalDataConsent: true,
-          personalDataConsentVersion: "telegram-request-v1",
-          source: "telegram_bot",
-        }),
-      }),
-      null,
-      id,
-    );
-    const result = await response.json();
-    if (!response.ok || !result.ok) throw Error("bot_lead_not_saved");
-    await updateChunkedDataJson<any>(
-      "leads/leads.json",
-      result.leadId,
-      (lead) => ({
-        ...lead,
-        telegramUserId: id,
-        telegramChatId: id,
-        telegramDisplayName: [from.first_name, from.last_name]
-          .filter(Boolean)
-          .join(" "),
-        telegramBindTokenHash: "",
-        telegramBindExpiresAt: "",
-        telegramDeliveryStatus: "connected",
-      }),
-    );
-    await updateChunkedDataJson<any>(
-      "clients/clients.json",
-      result.clientId,
-      (client) => ({ ...client, telegramUserId: id, telegramChatId: id }),
-    );
-    await saveDialog(id, { mode: "conversation", leadId: result.leadId });
-    await telegramSend(
-      token,
-      id,
-      "Заявка получена. Менеджер проверит автомобиль и ответит в этом чате. Дополнения можно написать следующим сообщением.",
-      customerKeyboard,
-    );
+    await submitCustomerRequest(token, id, from, dialog);
     return true;
   }
   if (text === "/my" || text === "📩 Мои обращения" || data === "cust:my") {
