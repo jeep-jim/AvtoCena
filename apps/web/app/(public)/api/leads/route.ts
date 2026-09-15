@@ -4,6 +4,7 @@ import { readChunkedDataJson } from "@/lib/data";
 import { createLead } from "@/lib/lead-intake";
 import { canSeeLead } from "@/lib/crm-visibility";
 import { flushCrmNotifications } from "@/lib/crm-notifications";
+import { requestCrmDelivery } from "@/lib/crm-dispatch";
 export async function GET() {
   const user = await getCurrentUser();
   if (!user || !isCrmRole(user.role))
@@ -19,6 +20,9 @@ export async function GET() {
 export async function POST(request: Request) {
   const response = await createLead(request, await getCurrentUser());
   if (response.ok) {
+    // Await a bounded wake-up: a detached promise can be frozen by serverless.
+    // The saved lead is already durable; a failed wake-up never fails intake.
+    await requestCrmDelivery();
     try {
       await flushCrmNotifications(2);
     } catch {
