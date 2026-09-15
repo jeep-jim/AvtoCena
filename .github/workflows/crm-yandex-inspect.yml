@@ -1,0 +1,21 @@
+name: CRM Yandex infrastructure diagnosis
+on:
+  push:
+    branches: [fix/crm-yandex-runtime-20260915]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read existing Yandex resources without changing configuration
+        env:
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: node scripts/crm-yandex-inspect.mjs

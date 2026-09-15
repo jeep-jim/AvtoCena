@@ -1,3 +1,5 @@
+import { checkTelegramNetwork, telegramNetworkError } from "@/lib/telegram-network";
+import { request as httpsRequest } from "node:https";
 import { pollingEnabled } from "@/lib/crm-polling";
 import { NextResponse } from "next/server";
 import { crmRelayAuthorized, claimCrmNotices, authorizeCrmNotice, completeCrmNotice } from "@/lib/crm-relay";
@@ -10,6 +12,26 @@ export async function POST(request: Request) {
     return reply({ok: false}, 403);
   const body = await request.json().catch(() => null);
   try {
+    if (body?.action === "network") {
+      const config = await getTelegramRuntimeConfig();
+      const botCheck = async () => {
+        if (!config?.token) return {ok:false, detail:"not_configured"};
+        const started = Date.now();
+        try {
+          const result = await new Promise<any>((resolve, reject) => {
+            const req = httpsRequest(`https://api.telegram.org/bot${config.token}/getMe`, {method:"POST", family:4, signal:AbortSignal.timeout(8000), headers:{"content-type":"application/json"}}, res => {
+              let text = "";
+              res.on("data", chunk => {text += chunk; if(text.length > 16000) req.destroy();});
+              res.on("end", () => {try {resolve(JSON.parse(text));} catch {reject(new Error("invalid_json"));}});
+              res.on("error", reject);
+            }); req.on("error", reject); req.end("{}");
+          });
+          return {ok:result.ok === true && result.result?.username?.toLowerCase() === "avtocena_bot", durationMs:Date.now()-started};
+        } catch(error) {return {ok:false, detail:telegramNetworkError(error), durationMs:Date.now()-started};}
+      };
+      const [checks, bot] = await Promise.all([checkTelegramNetwork(), botCheck()]);
+      return reply({ok:true, releaseSha:process.env.AVTOCENA_RELEASE_SHA, polling:await pollingEnabled(), checks, bot});
+    }
     if (body?.action === "claim") return reply({ok: true, notices: await claimCrmNotices()});
     if (body?.action === "webhook") {
       if (await pollingEnabled()) return reply({ok: false, error: "polling_active"}, 409);
