@@ -1,0 +1,31 @@
+name: Diagnose deployed Encar egress probe
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for deployed route and print result
+        shell: bash
+        run: |
+          set +e
+          url="https://avtocena.com/api/internal/encar-egress-71b8e4"
+          for n in $(seq 1 30); do
+            code=$(curl -L -sS --max-time 70 -o /tmp/probe.json -w '%{http_code}' "$url")
+            echo "attempt=$n http=$code"
+            if [ "$code" = "200" ]; then
+              cat /tmp/probe.json
+              exit 0
+            fi
+            head -c 500 /tmp/probe.json 2>/dev/null || true
+            echo
+            sleep 10
+          done
+          exit 1
