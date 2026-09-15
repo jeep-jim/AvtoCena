@@ -72,7 +72,7 @@ export async function bindLink(user: AuthUser, botUsername: string) {
               ...stored,
               botBindHash: digest(token),
               botBindExpiresAt: new Date(
-                Date.now() + 15 * 60_000,
+                Date.now() + 24 * 60 * 60_000,
               ).toISOString(),
             }
           : stored,

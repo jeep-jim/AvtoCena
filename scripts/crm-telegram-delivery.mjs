@@ -38,7 +38,7 @@ async function main() {
     let message;
     try {
       message = await telegram('sendMessage', {chat_id: notice.chatId, text: notice.text, disable_web_page_preview: true,
-        reply_markup: {inline_keyboard: [[{text: 'Открыть заявку', url: notice.url}]]}});
+        reply_markup: {inline_keyboard: [[{text: 'Заявки в боте', callback_data: 'crm:inbox'}], [{text: 'Открыть CRM', url: notice.url}]]}});
     } catch {
       await relay({action: 'ack', ...reference});
       failed++;

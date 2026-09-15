@@ -1,3 +1,4 @@
+import { pollingEnabled } from "@/lib/crm-polling";
 import { NextResponse } from "next/server";
 import { crmRelayAuthorized, claimCrmNotices, authorizeCrmNotice, completeCrmNotice } from "@/lib/crm-relay";
 import { getTelegramRuntimeConfig, telegramWebhookUrl } from "@/lib/telegram-config";
@@ -11,6 +12,7 @@ export async function POST(request: Request) {
   try {
     if (body?.action === "claim") return reply({ok: true, notices: await claimCrmNotices()});
     if (body?.action === "webhook") {
+      if (await pollingEnabled()) return reply({ok: false, error: "polling_active"}, 409);
       const config = await getTelegramRuntimeConfig();
       if (!config) return reply({ok: false}, 503);
       return reply({ok: true, url: `${telegramWebhookUrl()}?key=${encodeURIComponent(config.webhookSecret)}`, secret: config.webhookSecret});

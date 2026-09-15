@@ -1,3 +1,4 @@
+import { pollingEnabled } from "@/lib/crm-polling";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getTelegramRuntimeConfig, saveTelegramRuntimeConfig, telegramWebhookUrl } from "@/lib/telegram-config";
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   }
 
+  if (await pollingEnabled()) return NextResponse.json({ ok: false, error: "polling_active" }, { status: 409 });
   const config = await getTelegramRuntimeConfig();
   if (!config?.token || !config.webhookSecret) {
     return NextResponse.json({ ok: false, error: "telegram_not_configured" }, { status: 503 });

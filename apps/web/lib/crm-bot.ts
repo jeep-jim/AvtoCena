@@ -198,11 +198,12 @@ export async function handleCrmBotUpdate(
       : {};
   const staffStart = text.match(/^\/start\s+staff_([A-Za-z0-9_-]{24,64})$/);
   if (staffStart) {
-    const bound = await bindStaff(
+    const newlyBound = await bindStaff(
       staffStart[1],
       id,
       String(from.username || ""),
     );
+    const bound = newlyBound || actor;
     await telegramSend(
       token,
       id,
@@ -301,26 +302,36 @@ export async function handleCrmBotUpdate(
       );
       return true;
     }
-    if (data === "crm:inbox" || text === "/inbox") {
+    if (data.startsWith("crm:view:")) {
+      const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(row => row.id === data.slice(9) && !row.archivedAt);
+      await telegramSend(token, id, lead ? `${leadNotice(lead)}\nСтатус: ${leadStatusLabel(lead.status)}` : "Заявка недоступна.", lead ? [
+        [{ text: "Ответить клиенту", callback_data: `crm:reply:${lead.id}` }],
+        [{ text: "Открыть CRM", url: `${SITE}/crm/leads?id=${encodeURIComponent(lead.id)}` }],
+        [{ text: "К списку", callback_data: "crm:inbox" }],
+      ] : adminKeyboard);
+      return true;
+    }
+    if (data === "crm:inbox" || /^crm:inbox:\d+$/.test(data) || text === "/inbox") {
       const leads = (await readChunkedDataJson<any>("leads/leads.json", []))
         .filter((lead) => !lead.archivedAt)
-        .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
-        .slice(0, 8);
+        .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+      const page = Math.min(Math.max(0, Number(data.split(":")[2]) || 0), Math.max(0, Math.ceil(leads.length / 8) - 1));
       await telegramSend(
         token,
         id,
         leads.length
-          ? "Последние обращения. Для полной обработки откройте CRM."
+          ? `Общая очередь: ${leads.length}. Страница ${page + 1}. Выберите заявку.`
           : "Активных заявок пока нет.",
-        leads.map((lead) => [
+        [...leads.slice(page * 8, page * 8 + 8).map((lead) => [
           {
             text: `${lead.name || "Клиент"} · ${lead.car || "Подбор"}`.slice(
               0,
               60,
             ),
-            url: `${SITE}/crm/leads?id=${encodeURIComponent(lead.id)}`,
+            callback_data: `crm:view:${lead.id}`,
           },
-        ]),
+        ]), ...(page > 0 ? [[{ text: "Назад", callback_data: `crm:inbox:${page - 1}` }]] : []),
+        ...((page + 1) * 8 < leads.length ? [[{ text: "Далее", callback_data: `crm:inbox:${page + 1}` }]] : [])],
       );
       return true;
     }
