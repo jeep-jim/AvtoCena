@@ -16,5 +16,6 @@ jobs:
           node-version: 24
       - name: Read existing Yandex resources without changing configuration
         env:
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
           YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         run: node scripts/crm-yandex-inspect.mjs

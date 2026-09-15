@@ -23,3 +23,12 @@ for(const [kind,url] of hosts){
  console.log(JSON.stringify({revisions:(rev.revisions||[]).slice(0,2).map(x=>({id:x.id,status:x.status,networkId:x.networkId,resources:x.resources,executionTimeout:x.executionTimeout,provisionPolicy:x.provisionPolicy,connectivity:x.connectivity}))}));
  }
 }
+
+const relayKey=crypto.createHmac('sha256',process.env.AUTH_ACCESS_KEY||'').update('avtocena:crm-notification-relay:v1').digest('hex');
+for(const origin of ['https://avtocena.com','https://bbaohms2ccpm3vb4e73t.containers.yandexcloud.net']){
+ try{
+ const r=await fetch(origin+'/api/internal/crm/relay',{method:'POST',headers:{'content-type':'application/json','x-crm-relay-key':relayKey},body:JSON.stringify({action:'network'}),signal:AbortSignal.timeout(25000)});
+ const d=await r.json();
+ console.log('NETWORK_CHECK '+JSON.stringify({origin,status:r.status,ok:d.ok,releaseSha:d.releaseSha,polling:d.polling,checks:d.checks,bot:d.bot}));
+ }catch{console.log('NETWORK_CHECK '+JSON.stringify({origin,error:'request_failed'}));}
+}
