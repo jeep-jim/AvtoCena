@@ -1,0 +1,24 @@
+name: CRM Yandex existing VPC trial
+on:
+  push:
+    branches: [fix/crm-yandex-network-trial-20260915]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-production
+  cancel-in-progress: false
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test existing VPC with rollback on failure
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+        run: node scripts/crm-yandex-network-trial.mjs
