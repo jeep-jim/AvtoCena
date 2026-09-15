@@ -96,8 +96,8 @@ function selectedOfferTitle(offer: any) {
 }
 
 async function buildSelectedOfferSnapshot(offerId: string) {
-  const offer = await getOffer(offerId);
-  if (!offer) return null;
+  const offer = await getOffer(offerId).catch(() => null);
+  if (!offer) return { id: offerId, offerId, title: "Автомобиль по ссылке", href: `https://avtocena.com/cars/offer/${encodeURIComponent(offerId)}`, image: "", market: "", marketLabel: "", make: "", model: "", trim: "", year: null, mileageKm: null, engineCc: null, powerHp: null, power30MinKw: null, fuel: "", transmission: "", drive: "", bodyType: "", totalRub: null, sourcePrice: null, calculationSnapshot: null, breakdown: [], updatedAt: "" };
   const title = selectedOfferTitle(offer);
   const calculationSnapshot =
     offer.calculationSnapshot && typeof offer.calculationSnapshot === "object"
@@ -172,7 +172,7 @@ export async function createLead(
     : ((await request.json().catch(() => ({}))) as Record<string, unknown>);
 
   const crmUser =
-    currentUser && isCrmRole(currentUser.role) ? currentUser : null;
+    currentUser && isCrmRole(currentUser.role) && clean(body.source, 160) === "manual_crm" ? currentUser : null;
   const phone = clean(body.phone, 80);
   const telegram =
     telegramContact(body.telegram) || telegramContact(body.telegramUsername);

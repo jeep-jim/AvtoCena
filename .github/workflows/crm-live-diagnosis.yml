@@ -1,7 +1,6 @@
 name: CRM live delivery and latency diagnosis
 on:
-  push:
-    branches: [fix/crm-context-delivery-20260915]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

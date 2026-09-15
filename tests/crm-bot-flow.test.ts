@@ -89,6 +89,10 @@ test("customer request, private admin notification, reply confirmation, retry an
     ]);
     await handleCrmBotUpdate(message(101, "/admin"), "token");
     assert.match(sent.at(-1).text, /Заявки команды находятся в закрытой группе/);
+    await handleCrmBotUpdate(message(101, "https://avtocena.com/cars/offer/missing-car\nтест"), "token");
+    assert.ok(sent.some(item => item.text.includes("https://avtocena.com/cars/offer/missing-car")));
+    const context = await readDataJson<any>("telegram/crm-dialogs/101.json", {});
+    assert.equal(context.offerId, "missing-car");
     await handleCrmBotUpdate(message(101, "/request"), "token");
     await handleCrmBotUpdate(
       message(101, "Toyota, 2 млн, Новокузнецк"),

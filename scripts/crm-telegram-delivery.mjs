@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import crypto from 'node:crypto';
 import groupTarget from '../apps/web/lib/crm-group-target.json' with { type: 'json' };
 import { verifyGroupTarget } from './lib/crm-group-target.mjs';
@@ -5,7 +6,7 @@ import { verifyGroupTarget } from './lib/crm-group-target.mjs';
 // Never print request/response bodies, errors with URLs, tokens, or chat IDs.
 const token = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
 const secret = process.env.AUTH_ACCESS_KEY || '';
-const operation = process.argv[2] || 'deliver';
+const operation = process.env.CRM_SERVICE_MODE === '1' ? 'deliver' : process.argv[2] || 'deliver';
 const relayKey = secret ? crypto.createHmac('sha256', secret).update('avtocena:crm-notification-relay:v1').digest('hex') : '';
 async function post(url, body, headers = {}) {
   const response = await fetch(url, {method: 'POST', redirect: 'error', headers: {'content-type': 'application/json', ...headers}, body: JSON.stringify(body), signal: AbortSignal.timeout(15000)});
@@ -15,7 +16,7 @@ async function post(url, body, headers = {}) {
 }
 const telegram = (method, body = {}) => post(`https://api.telegram.org/bot${token}/${method}`, body);
 const relay = body => post('https://avtocena.com/api/internal/crm/relay', body, {'x-crm-relay-key': relayKey});
-async function main() {
+export async function runDelivery() {
   if (!token || !secret) throw Error('configuration_missing');
   if (!['deliver', 'check', 'setup-webhook', 'check-group'].includes(operation)) throw Error('operation_invalid');
   const me = await telegram('getMe');
@@ -62,4 +63,4 @@ async function main() {
   console.log(`Delivery batch: sent=${sent}, failed=${failed}, claimed=${notices.length}`);
   if (failed) throw Error('delivery_incomplete');
 }
-main().catch(() => { console.error('CRM Telegram worker failed. Check configuration and service availability; private details omitted.'); process.exitCode = 1; });
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runDelivery().catch(() => { console.error('CRM Telegram worker failed. Check configuration and service availability; private details omitted.'); process.exitCode = 1; });

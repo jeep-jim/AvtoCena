@@ -1,3 +1,4 @@
+import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
 import { enablePolling, pollingEnabled, pollBatch } from "../apps/web/lib/crm-polling";
 import { handleCrmBotUpdate } from "../apps/web/lib/crm-bot";
@@ -7,14 +8,14 @@ const token = (process.env.TELEGRAM_BOT_TOKEN || "").trim();
 async function telegram(method: string, body: unknown = {}) {
   const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
     method: "POST", redirect: "error", headers: { "content-type": "application/json" },
-    body: JSON.stringify(body), signal: AbortSignal.timeout(15_000),
+    body: JSON.stringify(body), signal: AbortSignal.timeout(25_000),
   });
   const result = await response.json();
   if (!response.ok || !result?.ok) throw Error("telegram_failed");
   return result.result;
 }
-async function main() {
-  const operation = process.argv[2] || "poll";
+export async function runPolling() {
+  const operation = process.env.CRM_SERVICE_MODE === "1" ? "poll" : process.argv[2] || "poll";
   if (!["poll", "enable-polling"].includes(operation)) throw Error("invalid_operation");
   if (process.env.JSON_STORAGE_DRIVER !== "object" || !token ||
       !process.env.AUTH_SECRET || !process.env.YC_OBJECT_STORAGE_BUCKET ||
@@ -40,13 +41,12 @@ async function main() {
   if (info?.url) throw Error("webhook_still_active");
   process.env.CRM_BOT_POLL_WORKER = "1";
   const result = await pollBatch(
-    offset => telegram("getUpdates", { offset, limit: 8, timeout: 0,
+    offset => telegram("getUpdates", { offset, limit: 8, timeout: process.env.CRM_SERVICE_MODE === "1" ? 15 : 0,
       allowed_updates: ["message", "callback_query"] }),
     async update => {
       const handled = await handlePrivateLeadStart(update, token) || await handleCrmBotUpdate(update, token);
       const message = update.message;
       if (!handled && message?.chat?.type === "private" && String(message.chat.id) === String(message.from?.id)) {
-        await telegramSend(token, String(message.chat.id), "Меню АвтоЦены обновлено.", { remove_keyboard: true });
         await telegramSend(token, String(message.chat.id), "АвтоЦена — подбор и расчёт автомобиля. Откройте сайт или отправьте запрос менеджеру.", [
           [{ text: "Открыть сайт", url: "https://avtocena.com" }],
           [{ text: "Заказать расчёт", callback_data: "cust:new" }],
@@ -62,7 +62,7 @@ async function main() {
   await flushCrmNotifications(3);
   console.log(`Telegram polling: processed=${result.processed}, inactiveOrBusy=${result.inactiveOrBusy}`);
 }
-main().catch(() => {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runPolling().catch(() => {
   console.error("Telegram polling failed; queue retained, private details omitted");
   process.exitCode = 1;
 });

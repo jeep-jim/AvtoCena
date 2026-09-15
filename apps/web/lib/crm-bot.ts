@@ -361,18 +361,9 @@ export async function handleCrmBotUpdate(
     );
     return true;
   }
-  const offerStart = text.match(/^\/start\s+offer_([A-Za-z0-9_-]{1,100})$/);
+  const offerStart = text.match(/^\/start(?:@avtocena_bot)?\s+offer_([A-Za-z0-9_-]{1,100})$/i) || text.match(/https:\/\/avtocena\.com\/cars\/offer\/([A-Za-z0-9_-]{1,100})(?=[\s/?#]|$)/i);
   if (offerStart) {
-    const offer = await getOffer(offerStart[1]);
-    if (!offer) {
-      await telegramSend(
-        token,
-        id,
-        "Объявление уже недоступно. Можем подобрать похожий автомобиль.",
-        customerKeyboard,
-      );
-      return true;
-    }
+    const offer = await getOffer(offerStart[1]).catch(() => null) || {id: offerStart[1], make: "Автомобиль по ссылке", model: "", trim: "", year: null, totalRub: null};
     const description = [offer.make, offer.model, offer.trim, offer.year]
       .filter(Boolean)
       .join(" ");
@@ -435,6 +426,7 @@ export async function handleCrmBotUpdate(
         body: JSON.stringify({
           operationId: dialog.requestId,
           offerId: dialog.offerId || "",
+          pageUrl: dialog.offerId ? `${SITE}/cars/offer/${encodeURIComponent(dialog.offerId)}` : `${SITE}/request`,
           name: [from.first_name, from.last_name].filter(Boolean).join(" "),
           telegram: String(from.username || ""),
           comment: dialog.description,

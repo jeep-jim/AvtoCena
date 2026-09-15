@@ -43,6 +43,8 @@ export function leadNotice(lead: any) {
     lead.phone ? `Телефон: ${lead.phone}` : "",
     lead.telegram ? `Telegram: @${lead.telegram}` : "",
     lead.car || lead.offerTitle || "Подбор автомобиля",
+    ...(Array.isArray(lead.selectedOffers) ? lead.selectedOffers.slice(0, 5).map((offer: any, index: number) => `${index + 1}. ${String(offer.title || "Автомобиль").slice(0, 180)}\nhttps://avtocena.com/cars/offer/${encodeURIComponent(String(offer.id || offer.offerId || ""))}`) : []),
+    !lead.selectedOffers?.length && lead.offerId ? `https://avtocena.com/cars/offer/${encodeURIComponent(lead.offerId)}` : "",
     lead.city || "",
     lead.budgetRub
       ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
