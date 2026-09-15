@@ -1,5 +1,7 @@
+async function main() {
 // A continuously supervised process, not a replacement for the shared DB or lease.
 process.env.CRM_SERVICE_MODE = "1";
+if (process.env.JSON_STORAGE_DRIVER !== "object" || ["AUTH_SECRET", "AUTH_ACCESS_KEY", "TELEGRAM_BOT_TOKEN", "YC_OBJECT_STORAGE_BUCKET", "YC_OBJECT_STORAGE_ACCESS_KEY_ID", "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"].some(key => !process.env[key])) throw Error("configuration_missing");
 const {runPolling} = await import("./crm-telegram-poll");
 const {runDelivery} = await import("./crm-telegram-delivery.mjs");
 let stop = false;
@@ -16,3 +18,6 @@ while (!stop && Date.now() < deadline) {
   }
   await new Promise(resolve => setTimeout(resolve, 2000));
 }
+
+}
+main().catch(() => {console.error("Bot service stopped; check configuration");process.exitCode=1;});
