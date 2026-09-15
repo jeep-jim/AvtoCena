@@ -1,3 +1,10 @@
+/** A single instruction for managers, without exposing form implementation fields. */
+export function leadContactAction(lead: any) {
+  const contact = leadContact(lead);
+  const action = contact.channel === "call" ? "Позвонить" : `Написать в ${contact.label}`;
+  return `${action}: ${contact.value || "контакт не указан"}${contact.detail ? ` (${contact.detail})` : ""}`;
+}
+
 /** The selected channel is authoritative, including messenger accounts found by phone. */
 export function leadContact(lead: any) {
   const messenger = lead.contactPreference === "message" ? lead.messenger : !lead.contactPreference ? lead.messenger || (lead.telegram ? "telegram" : lead.max ? "max" : "") : "";

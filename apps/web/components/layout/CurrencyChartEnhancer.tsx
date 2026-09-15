@@ -2,21 +2,6 @@
 
 import { useEffect } from "react";
 
-function markerBefore(node: HTMLElement, name: string) {
-  const selector = `[data-ac-order-marker="${name}"]`;
-  const existing = document.querySelector<HTMLElement>(selector);
-  if (existing) return existing;
-  const marker = document.createElement("span");
-  marker.hidden = true;
-  marker.dataset.acOrderMarker = name;
-  node.parentElement?.insertBefore(marker, node);
-  return marker;
-}
-
-function nextTo(marker: HTMLElement | null, node: HTMLElement | null) {
-  return Boolean(marker && node && marker.nextElementSibling === node);
-}
-
 export function CurrencyChartEnhancer() {
   useEffect(() => {
     const style = document.createElement("style");
@@ -175,35 +160,11 @@ export function CurrencyChartEnhancer() {
     document.getElementById(style.id)?.remove();
     document.head.appendChild(style);
 
-    const media = window.matchMedia("(max-width:1023px)");
     let frame = 0;
 
     const arrange = () => {
-      document.querySelectorAll<HTMLElement>('button[aria-label="Как работает подбор по бюджету"]').forEach((button) => {
-        button.parentElement?.classList.add("ac-budget-label");
-      });
-
       document.querySelectorAll<HTMLElement>("[data-ac-rate-segment]").forEach((node) => node.remove());
 
-      const home = document.querySelector<HTMLElement>(".ac-home-page");
-      if (!home) return;
-      const executorBlock = home.querySelector<HTMLElement>(".ac-executor-block");
-      const executorGrid = executorBlock?.parentElement;
-      const mobileRate = [...home.querySelectorAll<HTMLElement>(".ac-currency-rates-strip")]
-        .find((node) => node.classList.contains("lg:hidden") || String(node.className).includes("lg:hidden"));
-      const brandRail = home.querySelector<HTMLElement>(".ac-brand-rail");
-      if (!executorGrid || !mobileRate || !brandRail) return;
-
-      const rateMarker = markerBefore(mobileRate, "home-mobile-rate");
-      const brandMarker = markerBefore(brandRail, "home-brand-original");
-
-      if (media.matches) {
-        if (executorGrid.nextElementSibling !== mobileRate) executorGrid.after(mobileRate);
-        if (!nextTo(rateMarker, brandRail)) rateMarker.after(brandRail);
-      } else {
-        if (!nextTo(rateMarker, mobileRate)) rateMarker.after(mobileRate);
-        if (!nextTo(brandMarker, brandRail)) brandMarker.after(brandRail);
-      }
     };
 
     const schedule = () => {
@@ -213,12 +174,10 @@ export function CurrencyChartEnhancer() {
 
     const observer = new MutationObserver(schedule);
     observer.observe(document.body, { childList: true, subtree: true });
-    media.addEventListener?.("change", schedule);
     schedule();
 
     return () => {
       observer.disconnect();
-      media.removeEventListener?.("change", schedule);
       window.cancelAnimationFrame(frame);
       style.remove();
     };

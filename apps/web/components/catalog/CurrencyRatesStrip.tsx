@@ -9,6 +9,7 @@ type Props = {
   rates?: PublicCurrencyRate[];
   variant?: Variant;
   className?: string;
+  showHeading?: boolean;
 };
 
 const DISPLAY_RATES: Record<Variant, Array<[string, number]>> = {
@@ -49,7 +50,7 @@ function displayRate(rate: PublicCurrencyRate | undefined, amount: number, showR
   return showRuble ? `${formatted} ₽` : formatted;
 }
 
-export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", className = "" }: Props) {
+export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", className = "", showHeading = false }: Props) {
   const [loadedRates, setLoadedRates] = useState<PublicCurrencyRate[]>(suppliedRates || []);
   const [open, setOpen] = useState(false);
   const [initialCurrency, setInitialCurrency] = useState("JPY");
@@ -57,8 +58,8 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
 
   useEffect(() => {
-    if (variant === "desktop") setTodayLabel(new Intl.DateTimeFormat("ru-RU").format(new Date()));
-  }, [variant]);
+    if (variant === "desktop" || showHeading) setTodayLabel(new Intl.DateTimeFormat("ru-RU").format(new Date()));
+  }, [variant, showHeading]);
 
   useEffect(() => {
     if (suppliedRates?.length) {
@@ -105,7 +106,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
 
   return <>
     <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
-      {variant === "desktop" ? <div className="mb-3 flex items-baseline gap-3"><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в Рублях</span></div> : null}
+      {variant === "desktop" || showHeading ? <div className={variant === "desktop" ? "mb-3 flex items-baseline gap-3" : "mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"}><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в Рублях</span></div> : null}
       <div
         className={rail}
         style={{ WebkitOverflowScrolling: "touch" }}

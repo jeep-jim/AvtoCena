@@ -6,7 +6,7 @@ import path from 'node:path';
 import {createLead} from '../apps/web/lib/lead-intake';
 import {readChunkedDataJson, resetJsonStorageForTests, updateChunkedDataJson} from '../apps/web/lib/data';
 import {leadContact} from '../apps/web/lib/lead-contact';
-import {leadNotice} from '../apps/web/lib/crm-notifications';
+import {followupText, leadNotice} from '../apps/web/lib/crm-notifications';
 import {claimCrmNotices, completeCrmNotice} from '../apps/web/lib/crm-relay';
 
 test('same-browser offer followups are atomic and isolated from generic requests and other clients', async () => {
@@ -51,4 +51,27 @@ test('messenger telephone and username contacts are explicitly labelled without 
     const username=leadContact({...phone,phone:'',messengerContactKind:'username',[messenger]:'@test_user'}); assert.equal(username.value,'@test_user'); assert.match(username.text,/никнейм/);
   }
   assert.equal(leadContact({contactPreference:'call',phone:'+79999999999'}).href,'tel:+79999999999');
+});
+
+test('followups state one contact action instead of internal field transitions', () => {
+  const entry = {
+    comment: 'Свяжитесь вечером', contactPreference: 'message', messenger: 'telegram',
+    messengerContactKind: 'phone', phone: '+79999999999', telegram: '+79999999999',
+    changes: {
+      contactPreference: {before: 'call', after: 'message'},
+      messenger: {before: '', after: 'telegram'},
+      messengerContactKind: {before: '', after: 'phone'},
+      telegram: {before: '', after: '+79999999999'},
+    },
+  };
+  const original = structuredClone(entry);
+  assert.equal(followupText(entry), 'Свяжитесь вечером\nНаписать в Telegram: +79999999999 (телефон аккаунта)');
+  const notice = leadNotice({id: 'fixture', name: 'Клиент'}, entry);
+  assert.equal(notice.split('Написать в Telegram:').length - 1, 1);
+  assert.doesNotMatch(notice, /Способ связи|Мессенджер:|Тип контакта|не указан →/);
+  assert.equal(followupText({...entry, changes: {}}), 'Свяжитесь вечером');
+  assert.equal(followupText({...entry, comment: '', messenger: 'max', max: '@test_user', phone: '', messengerContactKind: 'username'}), 'Написать в MAX: @test_user (никнейм)');
+  assert.equal(followupText({...entry, comment: '', contactPreference: 'call', phone: '+78888888888'}), 'Позвонить: +78888888888');
+  assert.equal(followupText({comment: '', changes: {name: {before: 'max', after: 'call'}}}), 'Имя: max → call');
+  assert.deepEqual(entry, original);
 });

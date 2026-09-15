@@ -97,7 +97,7 @@ function clearOperationId(key: string) {
   try { window.sessionStorage.removeItem(key); } catch { /* ignore */ }
 }
 
-function GenericLeadBanner({ kind, onOpen }: { kind: HostKind; onOpen: () => void }) {
+export function GenericLeadBanner({ kind, onOpen }: { kind: HostKind; onOpen?: () => void }) {
   const headline = kind === "brand" ? "Не нашли нужную комплектацию?" : "Не нашли нужный автомобиль?";
   return (
     <section className="ac-lead-capture-banner mt-8 grid gap-4 rounded-[1.7rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-6">
@@ -108,7 +108,7 @@ function GenericLeadBanner({ kind, onOpen }: { kind: HostKind; onOpen: () => voi
       </div>
       <div className="ac-lead-banner-action grid min-w-0 grid-cols-[58px_minmax(0,1fr)] items-end gap-2.5 md:grid-cols-[64px_190px] md:gap-3">
         <img src="/avatars/manager-red.webp" alt="" className="ac-lead-banner-manager h-[62px] w-[58px] self-end object-contain object-bottom md:h-[72px] md:w-16" />
-        <button type="button" onClick={onOpen} className="avto-button ac-colored-button min-h-[52px] min-w-0 rounded-2xl px-4 py-3.5 text-sm font-black md:text-base">Оставить заявку</button>
+        <button type="button" data-home-lead={kind === "home" ? "home_lead_banner" : undefined} onClick={onOpen} className="avto-button ac-colored-button min-h-[52px] min-w-0 rounded-2xl px-4 py-3.5 text-sm font-black md:text-base">Оставить запрос</button>
       </div>
     </section>
   );
@@ -346,9 +346,10 @@ export function PublicLeadCaptureV2() {
   useEffect(() => {
     const click = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
-      if (!target?.closest("[data-home-lead]" ) || window.location.pathname !== "/") return;
+      const trigger = target?.closest("[data-home-lead]");
+      if (!trigger || window.location.pathname !== "/") return;
       event.preventDefault();
-      setRequest({mode: "generic", source: "home_calculation_request", car: ""});
+      setRequest({mode: "generic", source: trigger.getAttribute("data-home-lead") === "home_lead_banner" ? "home_lead_banner" : "home_calculation_request", car: ""});
     };
     document.addEventListener("click", click);
     return () => document.removeEventListener("click", click);
@@ -359,7 +360,6 @@ export function PublicLeadCaptureV2() {
     const mount = () => {
       if (cancelled) return;
       const targets: Array<{ kind: HostKind; parent: HTMLElement | null }> = [];
-      if (pathname === "/") targets.push({ kind: "home", parent: document.querySelector<HTMLElement>("main.ac-home-page > div.mx-auto") });
       if (/^\/cars\/brand\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "brand", parent: document.querySelector<HTMLElement>("main.ac-brand-catalog-page > section") });
       if (/^\/cars\/offer\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "offer", parent: document.querySelector<HTMLElement>("main.ac-offer-page > section") });
       if (!targets.length) { setHosts([]); return; }
