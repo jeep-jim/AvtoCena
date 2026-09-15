@@ -68,7 +68,7 @@ test("customer request, private admin notification, reply confirmation, retry an
     },
   });
   try {
-    assert.equal(await handleCrmBotUpdate({message: {chat: {id: -2697164330, type: "group"}, from: {id: 202}, text: "/request"}}, "token"), false);
+    assert.equal(await handleCrmBotUpdate({message: {chat: {id: -1002697164330, type: "group"}, from: {id: 202}, text: "/request"}}, "token"), false);
     assert.equal(sent.length, 0);
     await writeDataJson("auth/users.json", [
       {
@@ -113,7 +113,7 @@ test("customer request, private admin notification, reply confirmation, retry an
     assert.equal(notices.length, 0); // Admin delivery runs outside the site.
     const external = await claimCrmNotices();
     assert.equal(external.length, 1);
-    assert.equal(external[0].chatId, "-2697164330");
+    assert.equal(external[0].chatId, "-1002697164330");
     assert.equal(await authorizeCrmNotice(external[0].id, external[0].token), true);
     assert.equal(await completeCrmNotice(external[0].id, external[0].token, 999), true);
     await handleCrmBotUpdate(callback(404, `cust:chat:${lead.id}`), "token");
