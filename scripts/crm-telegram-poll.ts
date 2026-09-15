@@ -2,8 +2,8 @@ import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
 import { enablePolling, pollingEnabled, pollBatch, eventDrivenEnabled } from "../apps/web/lib/crm-polling";
 import {pendingCrmEvents} from "../apps/web/lib/crm-incoming-events";
-import { handleCrmBotUpdate } from "../apps/web/lib/crm-bot";
-import { flushCrmNotifications, telegramSend } from "../apps/web/lib/crm-notifications";
+import { handleCrmBotUpdate, sendCustomerWelcome } from "../apps/web/lib/crm-bot";
+import { flushCrmNotifications } from "../apps/web/lib/crm-notifications";
 
 const token = (process.env.TELEGRAM_BOT_TOKEN || "").trim();
 async function telegram(method: string, body: unknown = {}) {
@@ -31,12 +31,16 @@ export async function runPolling() {
     // Existing updates are preserved. Set server-side guard before removing webhook.
     await enablePolling();
     await telegram("deleteWebhook", { drop_pending_updates: false });
+  }
+  if (operation === "enable-polling" || process.env.ACCEPTANCE_RUN === "1") {
     await telegram("setMyCommands", { commands: [
-      { command: "menu", description: "Главное меню" },
-      { command: "request", description: "Заказать расчёт" },
-      { command: "my", description: "Мои обращения" },
-      { command: "site", description: "Открыть сайт" },
+      { command: "catalog", description: "Перейти в каталог" },
+      { command: "request", description: "Оставить заявку" },
     ] });
+    await telegram("setMyDescription", { description: "АвтоЦена — выбор автомобилей из-за рубежа и расчёт стоимости. Посмотрите каталог или оставьте заявку на сайте — менеджер свяжется с вами." });
+    await telegram("setMyShortDescription", { short_description: "Каталог автомобилей и заявки на расчёт на avtocena.com." });
+    await telegram("setChatMenuButton", { menu_button: { type: "commands" } });
+    console.log("Public bot welcome and two-command menu configured");
   }
   const info = await telegram("getWebhookInfo");
   const eventDriven = await eventDrivenEnabled();
@@ -49,11 +53,7 @@ export async function runPolling() {
       const handled = await handlePrivateLeadStart(update, token) || await handleCrmBotUpdate(update, token);
       const message = update.message;
       if (!handled && message?.chat?.type === "private" && String(message.chat.id) === String(message.from?.id)) {
-        await telegramSend(token, String(message.chat.id), "АвтоЦена — подбор и расчёт автомобиля. Откройте сайт или отправьте запрос менеджеру.", [
-          [{ text: "Открыть сайт", url: "https://avtocena.com" }],
-          [{ text: "Оставить заявку", url: "https://avtocena.com/request" }],
-          [{ text: "Мои обращения", callback_data: "cust:my" }],
-        ]);
+        await sendCustomerWelcome(token, String(message.chat.id));
       }
       if (update.callback_query?.id) {
         // Old callbacks may have expired while waiting for a scheduled run.

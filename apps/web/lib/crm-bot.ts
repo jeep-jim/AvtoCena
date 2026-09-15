@@ -36,12 +36,13 @@ const adminKeyboard = [
   [{ text: "Открыть CRM", url: `${SITE}/crm` }],
 ];
 const customerKeyboard = [
-  [{ text: "Мои обращения", callback_data: "cust:my" }],
-  [
-    { text: "Подобрать автомобиль", url: `${SITE}/cars` },
-    { text: "Оставить заявку", url: `${SITE}/request` },
-  ],
+  [{ text: "Перейти в каталог", url: `${SITE}/cars` }],
+  [{ text: "Оставить заявку", url: `${SITE}/request` }],
 ];
+export async function sendCustomerWelcome(token: string, id: string) {
+  await telegramSend(token, id, "Добро пожаловать в АвтоЦену! 🚗\n\nМы помогаем выбрать автомобиль из-за рубежа и рассчитать его стоимость. На сайте можно посмотреть автомобили и оставить заявку менеджеру.");
+  await telegramSend(token, id, "Обращения принимаем через форму на сайте. Выберите автомобиль в каталоге или оставьте заявку на подбор. Укажите удобный способ связи — менеджер свяжется с вами.", customerKeyboard);
+}
 async function saveDialog(id: string, value: Dialog) {
   await mutateDataJson<Dialog>(dialogPath(id), {}, () => ({
     ...value,
@@ -171,6 +172,10 @@ export async function handleCrmBotUpdate(
   let text = String(update?.message?.text || "").trim();
   text = ({"📥 Заявки":"/inbox","👥 Команда":"/team","🌐 Открыть CRM":"/admin"} as Record<string,string>)[text] || text;
   const data = String(callback?.data || "");
+  if (/^\/(?:start|menu|catalog|cars|site|request)(?:@avtocena_bot)?(?:\s|$)/i.test(text) || ["cust:new", "cust:confirm", "cust:my"].includes(data) || text === "/my" || text === "📝 Оставить заявку" || text === "📩 Мои обращения") {
+    await sendCustomerWelcome(token, id);
+    return true;
+  }
   const actor = await botAdmin(id);
   if (/^\/start(?:@avtocena_bot)?(?:\s|$)/i.test(text) && !/^\/start\s+staff_/.test(text) || text === "/request" || text === "📝 Оставить заявку" || ["cust:new", "cust:confirm"].includes(data) || /https:\/\/avtocena\.com\/cars\/offer\//i.test(text)) {
     const offerId = text.match(/(?:chat_|offer_|cars\/offer\/)([A-Za-z0-9_-]{1,100})/)?.[1];
