@@ -29,6 +29,20 @@ jobs:
                   print("Bot identity mismatch")
                   raise SystemExit(1)
               print("Telegram getMe OK: @avtocena_bot")
+              request = urllib.request.Request("https://api.telegram.org/bot" + token + "/getWebhookInfo", data=b"{}", headers={"Content-Type": "application/json"})
+              with urllib.request.urlopen(request, timeout=15) as response:
+                  info = json.load(response)
+              if not info.get("ok"):
+                  raise ValueError("webhook_info_failed")
+              result = info.get("result", {})
+              from urllib.parse import urlsplit
+              target = urlsplit(result.get("url", ""))
+              import re
+              error = str(result.get("last_error_message", ""))
+              status = re.search(r"\\b[45]\\d{2}\\b", error)
+              category = ("http_" + status.group(0)) if status else ("timeout" if "timed out" in error.lower() or "timeout" in error.lower() else ("other" if error else "none"))
+              print(json.dumps({"webhook_host": target.hostname, "webhook_path": target.path, "pending_update_count": result.get("pending_update_count", 0), "last_error_date": result.get("last_error_date"), "last_error_category": category, "timeout_kind": next((label for label in ["Connection timed out", "Read timeout expired", "Connection refused", "SSL error"] if label.lower() in error.lower()), "unspecified")}))
+
           except Exception:
               print("Telegram getMe failed; credentials and response omitted")
               raise SystemExit(1)
