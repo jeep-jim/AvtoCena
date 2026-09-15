@@ -2,6 +2,8 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import {PhoneInput} from "@/components/leads/PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 
 const CONSENT_VERSION = "telegram-request-v1-2026-08-14";
@@ -18,7 +20,7 @@ function formatBudgetInput(value: string) {
 
 export default function RequestPage() {
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+7");
   const [city, setCity] = useState("");
   const [car, setCar] = useState("");
   const [budget, setBudget] = useState("");
@@ -32,7 +34,7 @@ export default function RequestPage() {
     event.preventDefault();
     const digits = phone.replace(/\D/g, "");
     const budgetRub = Number(budget.replace(/\D/g, "")) || 0;
-    if (!cleanText(name) || digits.length < 10 || !cleanText(city) || !cleanText(car)) {
+    if (!cleanText(name) || !normalizeRuPhone(phone) || !cleanText(city) || !cleanText(car)) {
       setStatus("error");
       setMessage("Заполните имя, город, автомобиль и корректный телефон.");
       return;
@@ -51,7 +53,8 @@ export default function RequestPage() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           name: cleanText(name),
-          phone: cleanText(phone),
+          phone: normalizeRuPhone(phone),
+          contactInputVersion: "ru-v1",
           city: cleanText(city),
           car: cleanText(car),
           budgetRub: budgetRub || undefined,
@@ -104,7 +107,7 @@ export default function RequestPage() {
             <form onSubmit={submit} className="mt-7 grid gap-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <label className="grid gap-1.5 text-sm font-black">Имя<input value={name} onChange={(event) => setName(event.target.value)} placeholder="Как к вам обращаться" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
-                <label className="grid gap-1.5 text-sm font-black">Телефон<input value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="+7 999 000-00-00" inputMode="tel" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
+                <label className="grid gap-1.5 text-sm font-black">Телефон<PhoneInput value={phone} onChange={setPhone} /></label>
                 <label className="grid gap-1.5 text-sm font-black">Город<input value={city} onChange={(event) => setCity(event.target.value)} placeholder="Например, Новокузнецк" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
                 <label className="grid gap-1.5 text-sm font-black">Бюджет, ₽<input value={budget} onChange={(event) => setBudget(formatBudgetInput(event.target.value))} placeholder="2 000 000" inputMode="numeric" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
               </div>

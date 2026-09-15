@@ -1,4 +1,6 @@
 "use client";
+import {PhoneInput} from "@/components/leads/PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
@@ -183,7 +185,7 @@ function LeadDialog({
   favorites: FavoriteLeadItem[];
   onClose: () => void;
 }) {
-  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: "" }));
+  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: "" }));
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
   const [messenger, setMessenger] = useState<MessengerKind>("telegram");
   const [messengerContact, setMessengerContact] = useState("");
@@ -359,7 +361,7 @@ function LeadDialog({
                 <label className="block min-w-0"><FieldLabel>{messenger === "telegram" ? "Telegram" : "MAX"}</FieldLabel><input value={messengerContact} onChange={(event) => setMessengerContact(event.target.value)} placeholder={messenger === "telegram" ? "@username или номер" : "Имя/номер в MAX"} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
               </div>
             ) : (
-              <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><input type="tel" value={form.phone} onChange={(event) => setField("phone", event.target.value)} autoComplete="tel" inputMode="tel" placeholder="+7 999 000-00-00" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
+              <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><PhoneInput value={form.phone} onChange={value => setField("phone", value)} /></label>
             )}
 
             {!isFavorites && !isOffer ? (

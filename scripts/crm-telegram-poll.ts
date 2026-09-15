@@ -51,7 +51,7 @@ export async function runPolling() {
       if (!handled && message?.chat?.type === "private" && String(message.chat.id) === String(message.from?.id)) {
         await telegramSend(token, String(message.chat.id), "АвтоЦена — подбор и расчёт автомобиля. Откройте сайт или отправьте запрос менеджеру.", [
           [{ text: "Открыть сайт", url: "https://avtocena.com" }],
-          [{ text: "Заказать расчёт", callback_data: "cust:new" }],
+          [{ text: "Оставить заявку", url: "https://avtocena.com/request" }],
           [{ text: "Мои обращения", callback_data: "cust:my" }],
         ]);
       }
