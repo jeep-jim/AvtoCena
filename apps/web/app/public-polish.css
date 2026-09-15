@@ -50,15 +50,22 @@
   filter: none !important;
 }
 
-/* The homepage catalogue CTA stays black in both themes and at every width. */
+/* A muted graphite CTA fits both homepage themes. */
+.ac-home-page { --ac-home-cta: #3b475b; --ac-home-cta-hover: #48566c; }
+html[data-theme="light"] .ac-home-page { --ac-home-cta: #465267; --ac-home-cta-hover: #39455a; }
 .ac-home-page #form .avto-button,
 .ac-home-page #form .avto-button:hover,
 .ac-home-page #form .avto-button:focus-visible,
 .ac-home-page #form .avto-button:active {
-  background: #000 !important;
-  border-color: #000 !important;
+  background: var(--ac-home-cta) !important;
+  border-color: var(--ac-home-cta) !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
+}
+.ac-home-page #form .avto-button:hover,
+.ac-home-page #form .avto-button:focus-visible {
+  background: var(--ac-home-cta-hover) !important;
+  border-color: var(--ac-home-cta-hover) !important;
 }
 
 /* Price state is explicit: red up, green down, neutral when unchanged. */

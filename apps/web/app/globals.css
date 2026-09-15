@@ -412,6 +412,22 @@ textarea::placeholder {
 }
 
 /* CRM controls are intentionally flat: no glow or button shadows. */
+.crm-root .crm-followup-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  aspect-ratio: 1;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #2387df !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
 .crm-root button,
 .crm-root a {
   box-shadow: none !important;

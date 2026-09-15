@@ -228,7 +228,10 @@ export default async function CrmLeadsPage({
                 </div>
                 <div className="text-right text-xs text-[var(--ac-muted)]">
                   {date(lead.createdAt)}
-                  <div className="mt-2 font-bold">{lead.followups?.length ? `Дополнений: ${lead.followups.length} · ` : ""}Открыть ↓</div>
+                  <div className="mt-2 flex items-center justify-end gap-2 font-bold">
+                    {lead.followups?.length ? <span className="crm-followup-count" aria-label={`Дополнений: ${lead.followups.length}`} title={`Дополнений: ${lead.followups.length}`}>{lead.followups.length}</span> : null}
+                    <span>Открыть ↓</span>
+                  </div>
                 </div>
               </summary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">

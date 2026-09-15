@@ -1,4 +1,4 @@
-import {leadContact} from "./lead-contact";
+import {leadContact, leadContactAction} from "./lead-contact";
 import { pollingEnabled } from "./crm-polling";
 import crypto from "node:crypto";
 import {
@@ -37,16 +37,20 @@ export async function telegramSend(
     throw Error(`telegram_delivery_${response.status}`);
   return result.result;
 }
-export function followupText(entry: any) {
-  const labels: Record<string, string> = {phone: "Телефон", telegram: "Telegram", max: "MAX", contactPreference: "Способ связи", messenger: "Мессенджер", messengerContactKind: "Тип контакта", name: "Имя", city: "Город"};
-  const values: Record<string, string> = {call: "Звонок", message: "Сообщение", phone: "Телефон аккаунта", username: "Никнейм", telegram: "Telegram", max: "MAX"};
-  return [entry.comment, ...Object.entries(entry.changes || {}).map(([key, change]: [string, any]) => `${labels[key] || key}: ${values[change.before] || change.before || "не указан"} → ${values[change.after] || change.after || "не указан"}`)].filter(Boolean).join("\n") || "Повторное обращение через форму";
+export function followupText(entry: any, includeContact = true) {
+  const changes = entry.changes || {};
+  const contactChanged = ["phone", "telegram", "max", "contactPreference", "messenger", "messengerContactKind"].some(key => key in changes);
+  const details = Object.entries({name: "Имя", city: "Город"}).flatMap(([key, label]) => {
+    const change = changes[key];
+    return change ? [`${label}: ${change.before || "не указан"} → ${change.after || "не указан"}`] : [];
+  });
+  return [entry.comment, includeContact && contactChanged ? leadContactAction(entry) : "", ...details].filter(Boolean).join("\n") || (includeContact ? "Повторное обращение через форму" : "");
 }
 export function leadNotice(lead: any, entry?: any) {
   return [
     `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} №${String(lead.id).slice(0, 100)} · АвтоЦена`,
     lead.name || lead.telegramDisplayName || "Клиент",
-    leadContact(entry || lead.initialContact || lead).text,
+    entry ? leadContactAction(entry) : leadContact(lead.initialContact || lead).text,
     lead.car || lead.offerTitle || "Подбор автомобиля",
     ...(Array.isArray(lead.selectedOffers) ? lead.selectedOffers.slice(0, 5).map((offer: any, index: number) => `${index + 1}. ${String(offer.title || "Автомобиль").slice(0, 180)}\nhttps://avtocena.com/cars/offer/${encodeURIComponent(String(offer.id || offer.offerId || ""))}`) : []),
     !lead.selectedOffers?.length && lead.offerId ? `https://avtocena.com/cars/offer/${encodeURIComponent(lead.offerId)}` : "",
@@ -54,7 +58,7 @@ export function leadNotice(lead: any, entry?: any) {
     lead.budgetRub
       ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
       : "",
-    String(entry ? followupText(entry) : lead.comment || "").slice(0, 2000),
+    String(entry ? followupText(entry, false) : lead.comment || "").slice(0, 2000),
     `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
   ]
     .filter(Boolean)

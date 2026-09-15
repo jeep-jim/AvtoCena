@@ -70,15 +70,10 @@
   filter: none !important;
 }
 
-/* On the homepage the rates sit immediately under TopAvto, then brands, then cars. */
+/* Keep homepage brands before cars; mobile rates follow the whole catalogue. */
 .ac-home-page section:has(> .ac-brand-rail) {
   display: flex !important;
   flex-direction: column !important;
-}
-.ac-home-page section:has(> .ac-brand-rail) > .ac-currency-rates-strip {
-  order: 0;
-  margin-top: 0 !important;
-  margin-bottom: 1rem !important;
 }
 .ac-home-page section:has(> .ac-brand-rail) > div:first-child {
   order: 1;
