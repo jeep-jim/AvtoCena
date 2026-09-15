@@ -1,4 +1,6 @@
 "use client";
+import {PhoneInput} from "@/components/leads/PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -11,7 +13,7 @@ export function ClientCreateForm() {
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     fio: "",
-    phone: "",
+    phone: "+7",
     telegram: "",
     city: "",
     car: "",
@@ -28,18 +30,19 @@ export function ClientCreateForm() {
     setError("");
     setSent(false);
 
-    if (!form.fio.trim() && !form.phone.trim() && !form.telegram.trim()) {
+    if (!form.fio.trim() && !normalizeRuPhone(form.phone) && !form.telegram.trim()) {
       setError("Укажите ФИО, телефон или Telegram клиента.");
       return;
     }
 
+    if (form.phone !== "+7" && form.phone && !normalizeRuPhone(form.phone)) {setError("Проверьте телефон: нужно 10 цифр после +7.");return;}
     setLoading(true);
 
     try {
       const response = await fetch("/api/crm/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, operationId: operationIdRef.current })
+        body: JSON.stringify({ ...form, phone: normalizeRuPhone(form.phone), operationId: operationIdRef.current })
       });
 
       if (!response.ok) {
@@ -48,7 +51,7 @@ export function ClientCreateForm() {
       }
 
       setSent(true);
-      setForm({ fio: "", phone: "", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
+      setForm({ fio: "", phone: "+7", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
       operationIdRef.current = crypto.randomUUID();
       router.refresh();
     } catch (error) {
@@ -65,7 +68,7 @@ export function ClientCreateForm() {
 
       <div className="mt-5 grid gap-3 md:grid-cols-2">
         <input value={form.fio} onChange={(event) => update("fio", event.target.value)} placeholder="ФИО клиента" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold md:col-span-2" />
-        <input value={form.phone} onChange={(event) => update("phone", event.target.value)} placeholder="Телефон" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
+        <PhoneInput value={form.phone} onChange={value => update("phone", value)} />
         <input value={form.telegram} onChange={(event) => update("telegram", event.target.value)} placeholder="Telegram" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Город" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.budgetRub} onChange={(event) => update("budgetRub", event.target.value)} placeholder="Бюджет, ₽" inputMode="numeric" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />

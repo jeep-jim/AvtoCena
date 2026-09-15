@@ -1,4 +1,6 @@
 "use client";
+import {PhoneInput} from "@/components/leads/PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
@@ -42,7 +44,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
 
   const [form, setForm] = useState({
     name: "",
-    phone: "",
+    phone: "+7",
     city: "",
     comment: "",
   });
@@ -97,7 +99,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
     event.preventDefault();
     setError("");
 
-    if (!form.phone.trim()) {
+    if (!normalizeRuPhone(form.phone)) {
       setError("Укажите телефон, чтобы менеджер смог связаться.");
       return;
     }
@@ -118,7 +120,8 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
         },
         body: JSON.stringify({
           name: form.name,
-          phone: form.phone,
+          phone: normalizeRuPhone(form.phone),
+          contactInputVersion: "ru-v1",
           city: form.city,
           comment: form.comment,
           carId: car.id,
@@ -213,12 +216,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                         placeholder="Ваше имя"
                         className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
-                      <input
-                        value={form.phone}
-                        onChange={(event) => update("phone", event.target.value)}
-                        placeholder="Телефон"
-                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
-                      />
+                      <PhoneInput value={form.phone} onChange={value => update("phone", value)} />
                       <input
                         value={form.city}
                         onChange={(event) => update("city", event.target.value)}

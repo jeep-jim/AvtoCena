@@ -11,6 +11,6 @@ export function PhoneInput({value: controlled, onChange, className = "", name, r
     <span className="mr-2 shrink-0" aria-hidden="true">+7</span>
     <input type="tel" required={required} pattern="[0-9]{10}" aria-label="Номер телефона, код страны +7" value={national} onChange={event => change(`+7${phoneNational(event.target.value)}`)}
       onPaste={event => {event.preventDefault(); change(`+7${phoneNational(event.clipboardData.getData("text"))}`);}}
-      autoComplete="tel-national" inputMode="tel" placeholder="999 000 00 00" className="min-w-0 w-full bg-transparent outline-none" />
+      style={{color:"var(--ac-text)", WebkitTextFillColor:"var(--ac-text)"}} autoComplete="tel-national" inputMode="tel" placeholder="999 000 00 00" className="min-w-0 w-full bg-transparent outline-none" />
   </div>;
 }

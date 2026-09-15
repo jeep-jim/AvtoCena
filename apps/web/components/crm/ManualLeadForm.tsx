@@ -1,4 +1,6 @@
 "use client";
+import {PhoneInput} from "@/components/leads/PhoneInput";
+import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,7 +21,7 @@ export function ManualLeadForm() {
   const [success, setSuccess] = useState("");
   const [form, setForm] = useState({
     name: "",
-    phone: "",
+    phone: "+7",
     telegram: "",
     city: "",
     budgetRub: "",
@@ -41,11 +43,12 @@ export function ManualLeadForm() {
       setError("Укажите имя клиента.");
       return;
     }
-    if (!form.phone.trim() && !form.telegram.trim()) {
+    if (!normalizeRuPhone(form.phone) && !form.telegram.trim()) {
       setError("Укажите телефон или Telegram.");
       return;
     }
 
+    if (form.phone !== "+7" && form.phone && !normalizeRuPhone(form.phone)) {setError("Проверьте телефон: нужно 10 цифр после +7.");return;}
     setLoading(true);
     try {
       const offerId = offerIdFromInput(form.offer);
@@ -55,7 +58,7 @@ export function ManualLeadForm() {
         body: JSON.stringify({
           source: "manual_crm",
           name: form.name.trim(),
-          phone: form.phone.trim() || undefined,
+          phone: normalizeRuPhone(form.phone) || undefined,
           telegram: form.telegram.trim() || undefined,
           city: form.city.trim() || undefined,
           budgetRub: form.budgetRub ? Number(form.budgetRub) : undefined,
@@ -73,7 +76,7 @@ export function ManualLeadForm() {
       setSuccess(result?.duplicate ? "Такая заявка уже была создана." : "Заявка создана.");
       setForm({
         name: "",
-        phone: "",
+        phone: "+7",
         telegram: "",
         city: "",
         budgetRub: "",
@@ -111,7 +114,7 @@ export function ManualLeadForm() {
 
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             <input value={form.name} onChange={(e) => field("name", e.target.value)} placeholder="Имя клиента *" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
-            <input value={form.phone} onChange={(e) => field("phone", e.target.value)} placeholder="Телефон" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
+            <PhoneInput value={form.phone} onChange={value => field("phone", value)} />
             <input value={form.telegram} onChange={(e) => field("telegram", e.target.value)} placeholder="Telegram @username" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
             <input value={form.city} onChange={(e) => field("city", e.target.value)} placeholder="Город" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
             <input value={form.budgetRub} onChange={(e) => field("budgetRub", e.target.value.replace(/[^0-9]/g, ""))} inputMode="numeric" placeholder="Бюджет, ₽" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
