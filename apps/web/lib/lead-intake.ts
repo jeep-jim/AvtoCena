@@ -178,9 +178,13 @@ export async function createLead(
   const personalDataConsent = truthy(
     body.personalDataConsent ?? body.consentPersonalData,
   );
-  const requestedPrimaryOfferId = clean(body.offerId, 200);
+  const entrySource = clean(body.source, 160);
+  let entryPath = "";
+  try { entryPath = new URL(clean(body.pageUrl, 1500) || request.headers.get("referer") || "").pathname; } catch {}
+  const genericRequest = body.requestMode === "generic" || entrySource.startsWith("home_") || entrySource === "telegram_bot_site_request" || entrySource === "offer_lead_banner" || entryPath === "/";
+  const requestedPrimaryOfferId = genericRequest ? "" : clean(body.offerId, 200);
   const selectedOfferIds = normalizeSelectedOfferIds(
-    body.selectedOfferIds,
+    genericRequest ? [] : body.selectedOfferIds,
     requestedPrimaryOfferId,
   );
   const selectedOfferSnapshots = (
@@ -267,8 +271,8 @@ export async function createLead(
     )
     .digest("hex")
     .slice(0, 40);
-  const clientId = operationId ? `client_${operationId}` : makeId("client");
-  const leadId = operationId ? `lead_${operationId}` : makeId("lead");
+  let clientId = operationId ? `client_${operationId}` : makeId("client");
+  let leadId = operationId ? `lead_${operationId}` : makeId("lead");
   const attribution = normalizeAttribution(body.attribution, body);
   const source = clean(body.source, 160) || (crmUser ? "manual_crm" : "site");
   const market = clean(body.market, 120) || primaryOffer?.market || "";
@@ -281,7 +285,7 @@ export async function createLead(
     clean(body.referrer, 1500) || clean(request.headers.get("referer"), 1500);
   const calculationSnapshot =
     primaryOffer?.calculationSnapshot ||
-    (body.calculationSnapshot && typeof body.calculationSnapshot === "object"
+    (!genericRequest && body.calculationSnapshot && typeof body.calculationSnapshot === "object"
       ? body.calculationSnapshot
       : null);
   const existingClients = await readChunkedDataJson<any>(
@@ -289,9 +293,20 @@ export async function createLead(
     [],
   );
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const token = clean(body.submissionThreadToken, 100);
+  const identity = currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
+  const threadKey = !crmUser && !trustedTelegramId && identity && primaryOfferId && selectedOfferIds.length === 1
+    ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}`).digest("hex") : "";
+  if (threadKey) {
+    const previous = existingLeads.filter(lead => lead.threadKey === threadKey).sort((a,b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0];
+    const closed = previous && (previous.archivedAt || ["completed", "rejected", "duplicate", "delivered"].includes(previous.status));
+    const suffix = closed ? crypto.createHash("sha256").update(`${threadKey}:${previous.id}`).digest("hex") : "";
+    leadId = previous && !closed ? previous.id : `lead_thread_${suffix || threadKey}`;
+    clientId = previous?.clientId || `client_thread_${threadKey}`;
+  }
   const duplicate = operationId
     ? existingLeads.find(
-        (lead) => lead.operationId === operationId || lead.id === leadId,
+        (lead) => lead.operationId === operationId || lead.followups?.some((entry: any) => entry.operationId === operationId),
       )
     : null;
   const existingClient = operationId
@@ -375,6 +390,8 @@ export async function createLead(
   const leadPayload = {
     id: leadId,
     operationId,
+    threadKey,
+    initialContact: {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)},
     createdAt,
     updatedAt: createdAt,
     notificationRequestedAt: createdAt,
@@ -418,7 +435,7 @@ export async function createLead(
     ...consentSnapshot,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
     selectedOffers: selectedOfferSnapshots,
-    carId: primaryOfferId || clean(body.carId, 200),
+    carId: genericRequest ? "" : primaryOfferId || clean(body.carId, 200),
     offerId: primaryOfferId,
     offerUrl: primaryOffer?.href || "",
     offerTitle: primaryOffer?.title || "",
@@ -459,13 +476,27 @@ export async function createLead(
     telegramBindExpiresAt: "",
     telegramDeliveryStatus: "",
   };
-  let lead =
-    duplicate || (await appendChunkedDataJson("leads/leads.json", leadPayload));
+  let lead: any = duplicate || (await appendChunkedDataJson("leads/leads.json", leadPayload));
+  const followup = Boolean(threadKey && lead.operationId !== operationId);
+  if (followup && !duplicate) {
+    lead = await updateChunkedDataJson<any>("leads/leads.json", lead.id, stored => {
+      if (stored.followups?.some((entry: any) => entry.operationId === operationId)) return stored;
+      const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
+      const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
+      const entry = {operationId, createdAt, comment, changes, ...contactFields, source, ...consentSnapshot};
+      return {...stored, ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+    });
+  }
+  if (threadKey) {
+    // A retried request repairs a failed client update; an older concurrent write cannot overwrite newer contact data.
+    const contactRevision = `${lead.createdAt}:${String(lead.followups?.length || 0).padStart(10, "0")}`;
+    await updateChunkedDataJson<any>("clients/clients.json", client.id, stored => String(stored.contactRevision || "") > contactRevision ? stored : ({...stored, fio: lead.name, city: lead.city, phone: lead.phone, telegram: lead.telegram, max: lead.max, contactPreference: lead.contactPreference, messenger: lead.messenger, messengerContactKind: lead.messengerContactKind, contactRevision, updatedAt: lead.updatedAt}));
+  }
 
 
 
   try {
-    if (!duplicate) {
+    if (!duplicate && !followup) {
       await appendChunkedDataJson("activity/feed.json", {
         id: operationId ? `event_${operationId}` : makeId("event"),
         operationId,
@@ -491,7 +522,7 @@ export async function createLead(
     console.error("crm_activity_write_pending");
   }
   try {
-    if (!duplicate && !crmUser) {
+    if (!duplicate && !followup && !crmUser) {
       const cpaEvent = await appendChunkedDataJson("cpa/events.json", {
         id: operationId ? `cpa_${operationId}` : makeId("cpa"),
         operationId,
@@ -525,6 +556,7 @@ export async function createLead(
     ok: true,
     leadId: lead.id,
     clientId: client.id,
+    appended: followup,
     recovered: Boolean(duplicate),
     duplicate: Boolean(duplicate),
     selectedOfferCount: selectedOfferSnapshots.length,
