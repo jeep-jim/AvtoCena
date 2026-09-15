@@ -80,42 +80,38 @@ export async function bindLink(user: AuthUser, botUsername: string) {
   );
   return `https://t.me/${botUsername}?start=staff_${token}`;
 }
-export async function bindStaff(
-  token: string,
-  telegramId: string,
-  username: string,
-) {
-  let result: AuthUser | null = null;
-  await mutateDataJson<StaffUser[]>(
-    "auth/users.json",
-    getAuthUsers(),
-    (users) => {
-      result = null;
-      return users.map((user) => {
-        if (
-          user.status === "disabled" ||
-          !user.botBindHash ||
-          !keyMatches(token, user.botBindHash) ||
-          !(Date.parse(user.botBindExpiresAt || "") > Date.now())
-        )
-          return user;
-        if (
-          normalizeTelegramUsername(username) !==
-            normalizeTelegramUsername(user.telegramUsername) ||
-          (user.telegramId && String(user.telegramId) !== telegramId)
-        )
-          return user;
-        result = {
-          ...user,
-          telegramId,
-          botBindHash: "",
-          botBindExpiresAt: "",
-        } as StaffUser;
-        return result;
-      });
-    },
-  );
-  return result;
+export type StaffBindReason = "invalid_link" | "expired" | "disabled" | "username_mismatch" | "different_account";
+export const staffBindMessages: Record<StaffBindReason, string> = {
+  invalid_link: "Эта ссылка больше не действует: она заменена, уже использована или не найдена. Откройте свою карточку в CRM и создайте одну новую ссылку. До ответа бота не создавайте следующую.",
+  expired: "Срок ссылки истёк. Создайте новую ссылку в своей карточке CRM и откройте бота по ней.",
+  disabled: "Доступ сотрудника отключён. Обратитесь к владельцу CRM.",
+  username_mismatch: "Telegram username этого аккаунта не совпадает с вашей карточкой CRM. Проверьте username в настройках Telegram и в своей карточке; затем создайте новую ссылку.",
+  different_account: "Сотрудник уже подключён к другому Telegram-аккаунту. Обратитесь к владельцу CRM; эта ссылка не может заменить подключённый аккаунт.",
+};
+export async function bindStaffResult(token: string, telegramId: string, username: string) {
+  let user: AuthUser | null = null;
+  let reason: StaffBindReason = "invalid_link";
+  await mutateDataJson<StaffUser[]>("auth/users.json", getAuthUsers(), users => {
+    user = null;
+    reason = "invalid_link";
+    return users.map(stored => {
+      if (!stored.botBindHash || !keyMatches(token, stored.botBindHash)) return stored;
+      if (stored.status === "disabled") { reason = "disabled"; return stored; }
+      if (!(Date.parse(stored.botBindExpiresAt || "") > Date.now())) { reason = "expired"; return stored; }
+      if (normalizeTelegramUsername(username) !== normalizeTelegramUsername(stored.telegramUsername)) {
+        reason = "username_mismatch"; return stored;
+      }
+      if (stored.telegramId && String(stored.telegramId) !== telegramId) {
+        reason = "different_account"; return stored;
+      }
+      user = { ...stored, telegramId, botBindHash: "", botBindExpiresAt: "" } as StaffUser;
+      return user;
+    });
+  });
+  return { user, reason };
+}
+export async function bindStaff(token: string, telegramId: string, username: string) {
+  return (await bindStaffResult(token, telegramId, username)).user;
 }
 export async function botAdmin(telegramId: string) {
   const users = await readDataJson<StaffUser[]>(

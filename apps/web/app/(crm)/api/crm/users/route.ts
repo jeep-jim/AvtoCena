@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAuthUsers, getCurrentUser, isAdminRole, normalizeTelegramUsername, type AuthUser, type UserRole } from "@/lib/auth";
 import { generateId, mutateDataJson } from "@/lib/data";
+import { staffIdentityChanged, staffRedirect } from "@/lib/crm-staff-save";
 
 function clean(value: FormDataEntryValue | null, max = 200) {
   return String(value || "").trim().slice(0, max);
@@ -10,7 +11,7 @@ function redirectWithState(request: Request, path: string, state: "saved" | "err
   const url = new URL(path, request.url);
   url.searchParams.set("state", state);
   if (message) url.searchParams.set("message", message.slice(0, 180));
-  return NextResponse.redirect(url, { status: 303 });
+  return staffRedirect(url.pathname + url.search);
 }
 
 export async function POST(request: Request) {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", "/crm/managers");
     login.searchParams.set("error", "auth_required");
-    return NextResponse.redirect(login, { status: 303 });
+    return staffRedirect(login.pathname + login.search);
   }
 
   let returnPath = "/crm/managers";
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
       if (!current) throw new Error("Сотрудник не найден");
       if (current.role === "owner" && actor.role !== "owner") throw new Error("Изменить владельца может только владелец");
       if (actor.id === userId && (status === "disabled" || role !== current.role)) throw new Error("Нельзя отключить или понизить собственный доступ");
-      const identityChanged = current.telegramUsername !== telegramUsername;
+      const identityChanged = staffIdentityChanged(current.telegramUsername, telegramUsername);
       return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId,
         sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.role !== role || item.status !== status ? 1 : 0),
         ...(identityChanged ? {telegramId:"",botBindHash:"",botBindExpiresAt:""} : {}),

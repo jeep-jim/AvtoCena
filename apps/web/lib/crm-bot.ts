@@ -1,7 +1,8 @@
 import crypto from "node:crypto";
 import { type AuthUser, getAuthUsers, normalizeTelegramUsername } from "./auth";
 import {
-  bindStaff,
+  bindStaffResult,
+  staffBindMessages,
   botAdmin,
   issueStaffKey,
   type StaffUser,
@@ -198,18 +199,18 @@ export async function handleCrmBotUpdate(
       : {};
   const staffStart = text.match(/^\/start\s+staff_([A-Za-z0-9_-]{24,64})$/);
   if (staffStart) {
-    const newlyBound = await bindStaff(
+    const binding = await bindStaffResult(
       staffStart[1],
       id,
       String(from.username || ""),
     );
-    const bound = newlyBound || actor;
+    const bound = binding.user || actor;
     await telegramSend(
       token,
       id,
       bound
         ? "Telegram подключён. Роль и доступ определяются вашей учётной записью АвтоЦены."
-        : "Ссылка истекла или аккаунт не совпадает. Создайте новую ссылку из своей карточки в CRM.",
+        : staffBindMessages[binding.reason],
     );
     if (bound && ["owner", "admin"].includes((bound as AuthUser).role))
       await adminMenu(token, id);
