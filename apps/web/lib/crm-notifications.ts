@@ -1,3 +1,4 @@
+import {leadContact} from "./lead-contact";
 import { pollingEnabled } from "./crm-polling";
 import crypto from "node:crypto";
 import {
@@ -36,12 +37,16 @@ export async function telegramSend(
     throw Error(`telegram_delivery_${response.status}`);
   return result.result;
 }
-export function leadNotice(lead: any) {
+export function followupText(entry: any) {
+  const labels: Record<string, string> = {phone: "Телефон", telegram: "Telegram", max: "MAX", contactPreference: "Способ связи", messenger: "Мессенджер", messengerContactKind: "Тип контакта", name: "Имя", city: "Город"};
+  const values: Record<string, string> = {call: "Звонок", message: "Сообщение", phone: "Телефон аккаунта", username: "Никнейм", telegram: "Telegram", max: "MAX"};
+  return [entry.comment, ...Object.entries(entry.changes || {}).map(([key, change]: [string, any]) => `${labels[key] || key}: ${values[change.before] || change.before || "не указан"} → ${values[change.after] || change.after || "не указан"}`)].filter(Boolean).join("\n") || "Повторное обращение через форму";
+}
+export function leadNotice(lead: any, entry?: any) {
   return [
-    `📩 Новая заявка №${String(lead.id).slice(0, 100)} · АвтоЦена`,
+    `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} №${String(lead.id).slice(0, 100)} · АвтоЦена`,
     lead.name || lead.telegramDisplayName || "Клиент",
-    lead.phone ? `Телефон: ${lead.phone}` : "",
-    lead.telegram ? `Telegram: @${lead.telegram}` : "",
+    leadContact(entry || lead.initialContact || lead).text,
     lead.car || lead.offerTitle || "Подбор автомобиля",
     ...(Array.isArray(lead.selectedOffers) ? lead.selectedOffers.slice(0, 5).map((offer: any, index: number) => `${index + 1}. ${String(offer.title || "Автомобиль").slice(0, 180)}\nhttps://avtocena.com/cars/offer/${encodeURIComponent(String(offer.id || offer.offerId || ""))}`) : []),
     !lead.selectedOffers?.length && lead.offerId ? `https://avtocena.com/cars/offer/${encodeURIComponent(lead.offerId)}` : "",
@@ -49,7 +54,7 @@ export function leadNotice(lead: any) {
     lead.budgetRub
       ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
       : "",
-    String(lead.comment || "").slice(0, 1200),
+    String(entry ? followupText(entry) : lead.comment || "").slice(0, 2000),
     `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
   ]
     .filter(Boolean)
@@ -63,6 +68,7 @@ export async function enqueueMessage(input: {
   leadId: string;
   audience: "admin" | "group" | "customer";
   keyboard?: any;
+  followupOperationId?: string;
 }) {
   return appendChunkedDataJson(QUEUE, {
     ...input,
@@ -168,6 +174,7 @@ export async function queueCrmAdminNotifications() {
           ? {...row, chatId: groupTarget.chatId, relayHash: "", relayUntil: 0, lastAckHash: "", nextAttemptAt: 0}
           : row);
     }
+    const initialQueued = new Set(queue.filter(row => row.audience === "group" && !row.followupOperationId).map(row => row.leadId));
     const pendingLegacy = new Set(queue.filter(row => row.audience === "admin" && !["sent", "cancelled"].includes(row.status)).map(row => row.leadId));
     // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
     for (const lead of leads
@@ -194,6 +201,7 @@ export async function queueCrmAdminNotifications() {
             ],
           ],
         });
+      initialQueued.add(lead.id);
       await updateChunkedDataJson<any>(
         "leads/leads.json",
         lead.id,
@@ -204,4 +212,12 @@ export async function queueCrmAdminNotifications() {
         }),
       );
     }
+    for (const lead of leads.filter(lead => !lead.archivedAt && initialQueued.has(lead.id) && lead.followups?.length)) {
+      for (const entry of lead.followups) {
+        const id = `group_${lead.id}_${entry.operationId}`;
+        if (queue.some(row => row.id === id)) continue;
+        await enqueueMessage({id, chatId: groupTarget.chatId, leadId: lead.id, audience: "group", followupOperationId: entry.operationId, text: leadNotice(lead, entry), keyboard: [[{text: "Открыть заявку", url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`}]]});
+      }
+    }
+
 }
