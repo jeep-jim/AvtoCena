@@ -2,12 +2,16 @@ name: CRM Telegram delivery retries
 on:
   schedule:
     - cron: "*/5 * * * *"
+  workflow_run:
+    workflows: ["Deploy to Yandex Cloud"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       operation:
         description: "Deliver and poll, check credentials, or enable the external bot"
         type: choice
-        options: [deliver, check, setup-webhook, enable-polling]
+        options: [deliver, check, check-group, setup-webhook, enable-polling]
         default: deliver
 permissions:
   contents: read
@@ -44,8 +48,10 @@ jobs:
             node --import tsx scripts/crm-telegram-poll.ts enable-polling
             node scripts/crm-telegram-delivery.mjs deliver
           elif [ "$OPERATION" = "deliver" ]; then
-            node --import tsx scripts/crm-telegram-poll.ts poll
+            poll_status=0
+            node --import tsx scripts/crm-telegram-poll.ts poll || poll_status=$?
             node scripts/crm-telegram-delivery.mjs deliver
+            exit "$poll_status"
           else
             node scripts/crm-telegram-delivery.mjs "$OPERATION"
           fi

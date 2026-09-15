@@ -1,0 +1,21 @@
+name: CRM approved group verification
+on:
+  push:
+    branches: [fix/crm-group-inbox-20260915]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact private group and bot membership without sending
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+        run: node scripts/crm-telegram-delivery.mjs check-group

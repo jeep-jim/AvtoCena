@@ -6,7 +6,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 
-test("runner sends one short notice, retries only ack, and does not log sensitive responses", () => {
+test("runner verifies the group, sends one notice, retries only ack, and does not log sensitive responses", () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "crm-worker-"));
   const fixture = path.join(tmp, "fixture.mjs");
   fs.writeFileSync(fixture, `
@@ -16,14 +16,16 @@ test("runner sends one short notice, retries only ack, and does not log sensitiv
     globalThis.fetch = async (url, init) => {
       const body=JSON.parse(init.body);
       assert.equal(init.redirect, 'error');
-      if (url.includes('/getMe')) return Response.json({ok:true,result:{is_bot:true,username:'avtocena_bot'}});
+      if (url.includes('/getMe')) return Response.json({ok:true,result:{is_bot:true,username:'avtocena_bot',id:77}});
+      if (url.includes('/getChatMember')) return Response.json({ok:true,result:{status:'member',user:{id:77}}});
+      if (url.includes('/getChat')) return Response.json({ok:true,result:{id:-4844138368,title:'TopAvto Планета',type:'group'}});
       if (url.includes('/sendMessage')) {
-        sends++; assert.equal(sends,1); assert.equal(body.chat_id,'PRIVATE_CHAT');
+        sends++; assert.equal(sends,1); assert.equal(body.reply_markup.inline_keyboard.length, 1); assert.ok(body.reply_markup.inline_keyboard[0][0].url); assert.equal(body.chat_id,'-4844138368');
         return Response.json({ok:true,result:{message_id:123}});
       }
       assert.equal(url,'https://avtocena.com/api/internal/crm/relay');
       assert.equal(init.headers['x-crm-relay-key'], crypto.createHmac('sha256','PRIVATE_MASTER').update('avtocena:crm-notification-relay:v1').digest('hex'));
-      if (body.action==='claim') return Response.json({ok:true,notices:[{id:'job',token:'PRIVATE_LEASE',chatId:'PRIVATE_CHAT',text:'New request',url:'https://avtocena.com/crm/leads?id=test'}]});
+      if (body.action==='claim') return Response.json({ok:true,notices:[{audience:'group',id:'job',token:'PRIVATE_LEASE',chatId:'-4844138368',text:'New request',url:'https://avtocena.com/crm/leads?id=test'}]});
       if (body.action==='authorize') return Response.json({ok:true,allowed:process.env.REVOKED!=='yes'});
       if (body.action==='ack') {
         acks++; assert.equal(body.messageId,123);

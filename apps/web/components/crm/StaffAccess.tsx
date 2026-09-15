@@ -4,7 +4,6 @@ export function StaffAccess({
   userId,
   canManage = false,
   self = false,
-  connected = false,
 }: {
   userId: string;
   canManage?: boolean;
@@ -12,7 +11,6 @@ export function StaffAccess({
   connected?: boolean;
 }) {
   const [key, setKey] = useState("");
-  const [url, setUrl] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   async function action(kind: string) {
@@ -35,7 +33,7 @@ export function StaffAccess({
     setKey("");
     try {
       const response = await fetch(
-        kind === "bind" ? "/api/crm/telegram-bind" : "/api/crm/access",
+        "/api/crm/access",
         {
           method: "POST",
           headers: { "content-type": "application/json" },
@@ -46,11 +44,8 @@ export function StaffAccess({
       if (!response.ok)
         throw Error(result.error || "Не удалось выполнить действие");
       setKey(result.key || "");
-      setUrl(result.url || "");
       setMessage(
-        kind === "bind"
-          ? "Откройте бота и нажмите Start. Ссылка действует 24 часа. До ответа бота не создавайте новую ссылку: она отменяет предыдущую. После ответа обновите страницу CRM."
-          : kind === "issue"
+        kind === "issue"
             ? "Скопируйте ключ сейчас: повторно он не показывается. Если заменили свой ключ, войдите с ним заново."
             : "Доступ отключён.",
       );
@@ -62,11 +57,9 @@ export function StaffAccess({
   }
   return (
     <section className="glass mt-5 rounded-2xl p-5">
-      <h2 className="text-xl font-black">Доступ и Telegram</h2>
+      <h2 className="text-xl font-black">Доступ в CRM</h2>
       <p className="my-3 text-sm text-[var(--ac-muted)]">
-        {connected ? "Telegram подключён." : "Telegram ещё не подключён."}{" "}
-        Внутренние заявки доступны владельцам и администраторам. Обычные
-        пользователи бота их не видят.
+        Вход по логину и персональному ключу. Заявки направляются в закрытую группу команды; подключать личный Telegram не требуется.
       </p>
       <div className="flex flex-wrap gap-2">
         {canManage && (
@@ -88,15 +81,6 @@ export function StaffAccess({
               </button>
             )}
           </>
-        )}
-        {self && (
-          <button
-            disabled={busy}
-            onClick={() => action("bind")}
-            className="rounded-xl bg-[#229ED9] px-4 py-3 text-sm font-bold text-white"
-          >
-            Подключить мой Telegram
-          </button>
         )}
       </div>
       {message && (
@@ -123,16 +107,6 @@ export function StaffAccess({
             Копировать
           </button>
         </div>
-      )}
-      {url && (
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-4 inline-block font-bold underline"
-        >
-          Открыть бота →
-        </a>
       )}
     </section>
   );

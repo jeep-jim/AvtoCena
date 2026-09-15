@@ -86,7 +86,7 @@ test("customer request, private admin notification, reply confirmation, retry an
       },
     ]);
     await handleCrmBotUpdate(message(101, "/admin"), "token");
-    assert.match(sent.at(-1).text, /Служебный доступ не подключён/);
+    assert.match(sent.at(-1).text, /Заявки команды находятся в закрытой группе/);
     await handleCrmBotUpdate(message(101, "/request"), "token");
     await handleCrmBotUpdate(
       message(101, "Toyota, 2 млн, Новокузнецк"),
@@ -107,7 +107,7 @@ test("customer request, private admin notification, reply confirmation, retry an
     assert.equal(notices.length, 0); // Admin delivery runs outside the site.
     const external = await claimCrmNotices();
     assert.equal(external.length, 1);
-    assert.equal(external[0].chatId, "202");
+    assert.equal(external[0].chatId, "-4844138368");
     assert.equal(await authorizeCrmNotice(external[0].id, external[0].token), true);
     assert.equal(await completeCrmNotice(external[0].id, external[0].token, 999), true);
     await handleCrmBotUpdate(callback(404, `cust:chat:${lead.id}`), "token");
