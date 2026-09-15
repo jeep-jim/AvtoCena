@@ -194,14 +194,8 @@ async function ensureBotProfile(token: string) {
   await Promise.allSettled([
     telegramCall(token, "setMyCommands", {
       commands: [
-        { command: "start", description: "Начать работу" },
-        { command: "request", description: "Связаться с менеджером" },
-        { command: "my", description: "Мои обращения" },
-        { command: "admin", description: "Для сотрудников компании" },
-        { command: "menu", description: "Главное меню АвтоЦены" },
-        { command: "cars", description: "Подобрать авто по бюджету" },
-        { command: "subscriptions", description: "Мои подписки" },
-        { command: "site", description: "Открыть avtocena.com" },
+        { command: "catalog", description: "Перейти в каталог" },
+        { command: "request", description: "Оставить заявку" },
       ],
     }),
     telegramCall(token, "setMyShortDescription", {
