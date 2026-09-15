@@ -16,6 +16,7 @@ import {
   issueStaffKey,
   bindLink,
   bindStaff,
+  bindStaffResult,
   botAdmin,
 } from "../apps/web/lib/crm-access";
 import { filterLeads } from "../apps/web/lib/crm-visibility";
@@ -119,7 +120,24 @@ test("numeric Telegram identity is bound by a one-time authenticated link; keys 
     assert.equal(await botAdmin("12345"), null);
     const url = await bindLink(admin, "avtocena_bot");
     const token = new URL(url).searchParams.get("start")!.slice(6);
-    assert.equal(await bindStaff(token, "12345", "another_user"), null);
+    assert.equal((await bindStaffResult(token, "12345", "another_user")).reason, "username_mismatch");
+    assert.equal((await bindStaffResult("invalid", "12345", "admin_test")).reason, "invalid_link");
+    const savedUsers = await readDataJson<any[]>("auth/users.json", []);
+    const savedAdmin = savedUsers.find(u => u.id === "admin");
+    const expires = savedAdmin.botBindExpiresAt;
+    savedAdmin.botBindExpiresAt = "2000-01-01T00:00:00Z";
+    await writeDataJson("auth/users.json", savedUsers);
+    assert.equal((await bindStaffResult(token, "12345", "admin_test")).reason, "expired");
+    savedAdmin.botBindExpiresAt = expires;
+    savedAdmin.telegramId = "99999";
+    await writeDataJson("auth/users.json", savedUsers);
+    assert.equal((await bindStaffResult(token, "12345", "admin_test")).reason, "different_account");
+    savedAdmin.telegramId = "";
+    savedAdmin.status = "disabled";
+    await writeDataJson("auth/users.json", savedUsers);
+    assert.equal((await bindStaffResult(token, "12345", "admin_test")).reason, "disabled");
+    savedAdmin.status = "active";
+    await writeDataJson("auth/users.json", savedUsers);
     assert.ok(await bindStaff(token, "12345", "admin_test"));
     assert.equal(await bindStaff(token, "12345", "admin_test"), null);
     assert.equal((await botAdmin("12345"))?.id, "admin");
