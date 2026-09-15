@@ -4,8 +4,7 @@ import { AutocatalogBrandDirectory, type AutocatalogBrandItem } from "@/componen
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
-import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
-import { readCatalogBrandCounts } from "@/lib/catalog/storage";
+import { readAutocatalogCounts } from "@/lib/catalog/model-directory";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -29,10 +28,7 @@ function clean(value: unknown) {
 export default async function AutocatalogPage() {
   const [brands, live] = await Promise.all([
     readCatalogBrandDirectory(),
-    readCatalogBrandCounts().catch(() => ({
-      counts: {} as Record<string, number>,
-      modelCounts: {} as Record<string, number>,
-    })),
+    readAutocatalogCounts(),
   ]);
 
   const liveCounts = new Map<string, number>();
@@ -41,15 +37,10 @@ export default async function AutocatalogPage() {
     liveCounts.set(make, (liveCounts.get(make) || 0) + Number(rawCount || 0));
   }
 
-  // Raw marketplace model strings are useful search facets, but they are not
-  // encyclopedia entities. Count only canonical models that the brand page can
-  // actually render; this keeps the headline and every brand tile in parity
-  // with the following page instead of advertising hundreds of trim strings.
+  // Canonical identities are counted in one projection pass, without loading
+  // full variant/reference summaries for every brand on the landing page.
   const liveBrands = brands.filter((brand) => (liveCounts.get(brand.name) || 0) > 0);
-  const canonicalModelCounts = new Map(await Promise.all(liveBrands.map(async (brand) => [
-    brand.name,
-    (await readBrandModelDirectory(brand.name)).filter((model) => model.count > 0).length,
-  ] as const)));
+  const canonicalModelCounts = new Map(Object.entries(live.canonicalModelCounts));
 
   const directory: AutocatalogBrandItem[] = liveBrands.map((brand) => ({
     name: brand.name,
