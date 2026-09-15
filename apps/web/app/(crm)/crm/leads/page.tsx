@@ -1,4 +1,6 @@
 import Link from "next/link";
+import {LeadContact} from "@/components/crm/LeadContact";
+import {followupText} from "@/lib/crm-notifications";
 import { redirect } from "next/navigation";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { LeadActions } from "@/components/crm/LeadActions";
@@ -201,10 +203,7 @@ export default async function CrmLeadsPage({
                     {lead.name || lead.telegramDisplayName || "Клиент"}
                   </div>
                   <div className="mt-1 truncate text-sm text-[var(--ac-muted)]">
-                    {lead.phone ||
-                      (lead.telegram
-                        ? `@${lead.telegram}`
-                        : "Контакт в Telegram")}
+                    <LeadContact lead={lead} />
                   </div>
                 </div>
                 <div className="col-span-2 min-w-0 md:col-span-1">
@@ -229,7 +228,7 @@ export default async function CrmLeadsPage({
                 </div>
                 <div className="text-right text-xs text-[var(--ac-muted)]">
                   {date(lead.createdAt)}
-                  <div className="mt-2 font-bold">Открыть ↓</div>
+                  <div className="mt-2 font-bold">{lead.followups?.length ? `Дополнений: ${lead.followups.length} · ` : ""}Открыть ↓</div>
                 </div>
               </summary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">
@@ -286,26 +285,7 @@ export default async function CrmLeadsPage({
                       )}
                     </div>
                     <div className="my-4 flex flex-wrap gap-3 text-sm font-bold">
-                      {lead.phone && (
-                        <a
-                          href={`tel:${String(lead.phone).replace(/[^+0-9]/g, "")}`}
-                          className="underline"
-                        >
-                          Позвонить
-                        </a>
-                      )}
-                      {/^[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(
-                        lead.telegram || "",
-                      ) && (
-                        <a
-                          href={`https://t.me/${lead.telegram}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="underline"
-                        >
-                          Telegram клиента
-                        </a>
-                      )}
+                      <LeadContact lead={lead} interactive />
                       <span>{lead.city}</span>
                     </div>
                     {lead.comment && (
@@ -334,6 +314,7 @@ export default async function CrmLeadsPage({
                     <h2 className="mb-3 font-black">История и переписка</h2>
                     <div className="max-h-80 space-y-2 overflow-y-auto">
                       {[
+                        ...(lead.followups || []).map((entry: any) => ({text: followupText(entry), createdAt: entry.createdAt, author: "Клиент · дополнение из формы"})),
                         ...(lead.statusHistory || []).map((entry: any) => ({
                           text: `Статус: ${leadStatusLabel(entry.status)}${entry.note ? ` · ${entry.note}` : ""}`,
                           createdAt: entry.changedAt,
