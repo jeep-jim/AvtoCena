@@ -1,7 +1,8 @@
 name: CRM Telegram delivery retries
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    # Avoid the busiest round-minute slots. GitHub still does not guarantee timing.
+    - cron: "2-59/5 * * * *"
   workflow_run:
     workflows: ["Deploy to Yandex Cloud"]
     types: [completed]
@@ -49,13 +50,17 @@ jobs:
             node --import tsx scripts/crm-telegram-poll.ts enable-polling
             node scripts/crm-telegram-delivery.mjs deliver
           elif [ "$OPERATION" = "deliver" ]; then
+            # Website notices must not wait behind slow customer update handling.
+            delivery_status=0
+            node scripts/crm-telegram-delivery.mjs deliver || delivery_status=$?
             poll_status=0
             node --import tsx scripts/crm-telegram-poll.ts poll || poll_status=$?
             node scripts/crm-telegram-delivery.mjs deliver
             if [ "$ACCEPTANCE_RUN" = "1" ]; then
               CRM_SERVICE_RUN_SECONDS=120 node --import tsx scripts/crm-bot-service.ts
             fi
-            exit "$poll_status"
+            if [ "$poll_status" != "0" ]; then exit "$poll_status"; fi
+            exit "$delivery_status"
           else
             node scripts/crm-telegram-delivery.mjs "$OPERATION"
           fi
