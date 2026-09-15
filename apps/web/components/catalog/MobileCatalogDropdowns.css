@@ -121,5 +121,15 @@
   }
   html body .ac-mobile-filter-sheet .ac-range-input-wrap:nth-child(2) .ac-range-value-menu { left: auto !important; right: 0 !important; }
   html body .ac-mobile-filter-sheet .ac-range-value-menu.is-open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  html body .ac-mobile-filter-sheet .ac-range-value-menu.is-up {
+    top: auto !important;
+    bottom: calc(100% + 6px) !important;
+  }
+  html body .ac-mobile-filter-sheet .ac-range-value-menu {
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
   html body .ac-mobile-filter-sheet .ac-range-value-option { min-height: 40px; padding: 6px; white-space: normal; }
 }

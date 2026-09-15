@@ -87,9 +87,31 @@ function closeRangeMenus(except?: HTMLElement) {
 }
 
 function positionRangeMenu(menu: HTMLElement) {
-  // Fixed downward flow: no measurement/flip after the first painted frame.
-  menu.classList.remove("is-up");
-  setImportant(menu, "max-height", "220px");
+  const sheet = menu.closest<HTMLElement>(".ac-mobile-filter-sheet");
+  if (!sheet || !window.matchMedia("(max-width: 1023px)").matches) {
+    menu.classList.remove("is-up");
+    setImportant(menu, "max-height", "220px");
+    return;
+  }
+  const anchor = menu.parentElement!.getBoundingClientRect();
+  const viewport = window.visualViewport;
+  let top = viewport?.offsetTop ?? 0;
+  let bottom = top + (viewport?.height ?? window.innerHeight);
+  // Respect the sheet's clipped scrolling area as well as the visible screen.
+  for (let parent = menu.parentElement; parent; parent = parent.parentElement) {
+    if (/(auto|scroll|hidden|clip)/.test(getComputedStyle(parent).overflowY)) {
+      const bounds = parent.getBoundingClientRect();
+      top = Math.max(top, bounds.top);
+      bottom = Math.min(bottom, bounds.bottom);
+    }
+    if (parent === sheet) break;
+  }
+  const above = Math.max(0, anchor.top - top - 8);
+  const below = Math.max(0, bottom - anchor.bottom - 8);
+  const desired = Math.min(220, (viewport?.height ?? window.innerHeight) * .38);
+  const up = below < desired && above > below;
+  menu.classList.toggle("is-up", up);
+  setImportant(menu, "max-height", `${Math.min(desired, up ? above : below)}px`);
 }
 
 function ensureRangeFieldMenu(box: HTMLElement, title: string) {
@@ -345,6 +367,15 @@ export function CatalogFilterUiEnhancer() {
       closeRangeMenus();
     };
 
+    const closeOnSheetScroll = (event: Event) => {
+      const target = event.target;
+      if (target instanceof Element && target.closest(".ac-mobile-filter-sheet") && !target.closest(".ac-range-value-menu")) closeRangeMenus();
+    };
+    const closeOnViewportChange = () => closeRangeMenus();
+    document.addEventListener("scroll", closeOnSheetScroll, { capture: true, passive: true });
+    window.addEventListener("resize", closeOnViewportChange);
+    window.visualViewport?.addEventListener("resize", closeOnViewportChange);
+    window.visualViewport?.addEventListener("scroll", closeOnViewportChange);
     decorateCatalogCounts();
     refresh();
     const observer = new MutationObserver((records) => {
@@ -363,6 +394,10 @@ export function CatalogFilterUiEnhancer() {
 
     return () => {
       observer.disconnect();
+      document.removeEventListener("scroll", closeOnSheetScroll, true);
+      window.removeEventListener("resize", closeOnViewportChange);
+      window.visualViewport?.removeEventListener("resize", closeOnViewportChange);
+      window.visualViewport?.removeEventListener("scroll", closeOnViewportChange);
       document.removeEventListener("input", requestRefresh, true);
       document.removeEventListener("change", requestRefresh, true);
       document.removeEventListener("pointerdown", closeMenus, true);
