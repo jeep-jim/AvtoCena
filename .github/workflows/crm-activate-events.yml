@@ -1,0 +1,39 @@
+name: Activate CRM incoming events
+on:
+  push:
+    branches: [fix/crm-activate-events-20260915]
+permissions:
+  contents: read
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Wait for verified release and request activation
+        env:
+          CRM_GITHUB_DISPATCH_TOKEN: ${{ secrets.CRM_GITHUB_DISPATCH_TOKEN }}
+        run: |
+          node <<'NODE'
+          (async () => {
+            const expected = "133994c581dff55551987d00f72f8f975b00fd64";
+            let ready = false;
+            for (let attempt = 0; attempt < 36; attempt++) {
+              try {
+                const response = await fetch("https://bbaohms2ccpm3vb4e73t.containers.yandexcloud.net/api/health", {signal: AbortSignal.timeout(15000)});
+                const health = await response.json();
+                if (response.ok && health.releaseSha === expected) { ready = true; break; }
+              } catch {}
+              await new Promise(resolve => setTimeout(resolve, 10000));
+            }
+            if (!ready) throw Error("Expected deployment is not ready; activation was not requested");
+            const token = process.env.CRM_GITHUB_DISPATCH_TOKEN;
+            if (!token) throw Error("Dispatch credential missing");
+            const response = await fetch("https://api.github.com/repos/jeep-jim/AvtoCena/actions/workflows/crm-telegram-delivery.yml/dispatches", {
+              method: "POST", redirect: "error", signal: AbortSignal.timeout(15000),
+              headers: {Accept: "application/vnd.github+json", Authorization: "Bearer " + token, "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28"},
+              body: JSON.stringify({ref: "main", inputs: {operation: "enable-events"}})
+            });
+            if (response.status !== 204 && response.status !== 200) throw Error("Activation dispatch rejected: " + response.status);
+            console.log("Verified release; activation dispatch accepted");
+          })().catch(error => {console.error(error.message); process.exitCode = 1;});
+          NODE
