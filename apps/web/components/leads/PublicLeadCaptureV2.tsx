@@ -43,6 +43,15 @@ function newUuid() {
   try { return crypto.randomUUID(); } catch { return `${Date.now()}-${Math.random().toString(36).slice(2)}`; }
 }
 
+function threadToken() {
+  const key = "avtocena_lead_thread_v1";
+  try {
+    let token = localStorage.getItem(key);
+    if (!token) { token = crypto.randomUUID(); localStorage.setItem(key, token); }
+    return token;
+  } catch { return ""; }
+}
+
 function readFavorites(): FavoriteLeadItem[] {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(FAVORITES_KEY) || "[]");
@@ -238,6 +247,9 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
     try {
       const response = await fetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
+        requestMode: request.mode,
+        submissionThreadToken: isOffer ? threadToken() : "",
+        pageUrl: window.location.href,
         offerId: isOffer ? request.offerId : "",
         name: cleanText(form.name),
         phone: contactPreference === "call" ? normalizeRuPhone(form.phone) : messengerContactKind === "phone" ? contact : "",
@@ -329,6 +341,19 @@ export function PublicLeadCaptureV2() {
   const [favorites, setFavorites] = useState<FavoriteLeadItem[]>([]);
   const [request, setRequest] = useState<LeadRequest | null>(null);
 
+  useEffect(() => { setRequest(null); }, [pathname]);
+
+  useEffect(() => {
+    const click = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target?.closest("[data-home-lead]" ) || window.location.pathname !== "/") return;
+      event.preventDefault();
+      setRequest({mode: "generic", source: "home_calculation_request", car: ""});
+    };
+    document.addEventListener("click", click);
+    return () => document.removeEventListener("click", click);
+  }, []);
+
   useEffect(() => {
     let cancelled = false; let frame = 0; const created: HTMLElement[] = [];
     const mount = () => {
@@ -374,9 +399,9 @@ export function PublicLeadCaptureV2() {
   useEffect(() => {
     if (!pathname.startsWith("/cars/offer/")) return;
     const offerId = decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || ""); if (!offerId) return;
-    const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-offer-action='lead']"); if (!button) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-offer-page h1"); setRequest({ mode: "offer", source: "catalog_offer_request", offerId, car: cleanText(heading?.textContent) }); };
+    const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-offer-action='lead']"); if (!button || window.location.pathname !== pathname) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-offer-page h1"); setRequest({ mode: "offer", source: "catalog_offer_request", offerId, car: cleanText(heading?.textContent) }); };
     document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);
   }, [pathname]);
 
-  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const car = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\s+под ключ$/i, "") : host.kind === "offer" ? cleanText(document.querySelector<HTMLElement>("main.ac-offer-page h1")?.textContent) : ""; setRequest(host.kind === "offer" ? {mode:"offer", source:"offer_lead_banner", offerId:decodeURIComponent(pathname.split("/")[3] || ""), car} : { mode: "generic", source: `${host.kind}_lead_banner`, car }); }} />, host.node))}{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
+  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const car = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\s+под ключ$/i, "") : host.kind === "offer" ? cleanText(document.querySelector<HTMLElement>("main.ac-offer-page h1")?.textContent) : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car: host.kind === "brand" ? car : "" }); }} />, host.node))}{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
 }
