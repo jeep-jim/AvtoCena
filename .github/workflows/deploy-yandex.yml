@@ -70,6 +70,7 @@ jobs:
             AVTOCENA_RELEASE_SHA=${{ github.sha }}
             AUTH_SECRET=${{ secrets.AUTH_SECRET }}
             AUTH_ACCESS_KEY=${{ secrets.AUTH_ACCESS_KEY }}
+            CRM_GITHUB_DISPATCH_TOKEN=${{ secrets.CRM_GITHUB_DISPATCH_TOKEN }}
             DADATA_API_KEY=${{ vars.DADATA_API_KEY }}
             TELEGRAM_BOT_USERNAME=${{ vars.TELEGRAM_BOT_USERNAME }}
             TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}

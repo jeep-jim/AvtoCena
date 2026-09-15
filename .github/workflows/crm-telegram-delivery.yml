@@ -12,7 +12,7 @@ on:
       operation:
         description: "Deliver and poll, check credentials, or enable the external bot"
         type: choice
-        options: [deliver, check, check-group, setup-webhook, enable-polling]
+        options: [deliver, notify, check, check-group, setup-webhook, enable-polling]
         default: deliver
 permissions:
   contents: read
@@ -29,6 +29,7 @@ jobs:
         with:
           node-version: 24
       - name: Install worker dependencies
+        if: inputs.operation != 'notify'
         run: npm ci --ignore-scripts
       - name: Process bot commands and deliver CRM notices from GitHub
         env:
@@ -46,7 +47,9 @@ jobs:
           ACCEPTANCE_RUN: ${{ github.event_name == 'workflow_run' && '1' || '0' }}
         run: |
           set -euo pipefail
-          if [ "$OPERATION" = "enable-polling" ]; then
+          if [ "$OPERATION" = "notify" ]; then
+            node scripts/crm-telegram-delivery.mjs deliver
+          elif [ "$OPERATION" = "enable-polling" ]; then
             node --import tsx scripts/crm-telegram-poll.ts enable-polling
             node scripts/crm-telegram-delivery.mjs deliver
           elif [ "$OPERATION" = "deliver" ]; then
