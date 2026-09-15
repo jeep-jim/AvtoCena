@@ -1,0 +1,37 @@
+name: CRM Telegram runner connectivity
+on:
+  push:
+    branches: [fix/crm-github-delivery-20260915]
+    paths: [.github/workflows/crm-telegram-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check Telegram HTTPS from runner without credentials
+        run: |
+          curl -4 -sS -I --connect-timeout 10 --max-time 20 https://api.telegram.org/ -o /dev/null -w 'Telegram HTTPS status=%{http_code} connect=%{time_connect}s total=%{time_total}s\n'
+      - name: Check configured bot identity without logging credentials
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+          if not token:
+              print("Bot token is not configured in GitHub Secrets")
+              raise SystemExit(1)
+          try:
+              request = urllib.request.Request("https://api.telegram.org/bot" + token + "/getMe", data=b"{}", headers={"Content-Type": "application/json"})
+              with urllib.request.urlopen(request, timeout=15) as response:
+                  body = json.load(response)
+              if not body.get("ok") or body.get("result", {}).get("username", "").lower() != "avtocena_bot":
+                  print("Bot identity mismatch")
+                  raise SystemExit(1)
+              print("Telegram getMe OK: @avtocena_bot")
+          except Exception:
+              print("Telegram getMe failed; credentials and response omitted")
+              raise SystemExit(1)
+          PY
