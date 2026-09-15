@@ -4,6 +4,8 @@ on:
     branches: [fix/mobile-catalog-overlay-menus-20260913, main]
     paths:
       - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'apps/web/components/catalog/CatalogFilterUiEnhancer.tsx'
+      - 'apps/web/app/(public)/layout.tsx'
       - 'apps/web/components/catalog/MobileCatalogDropdowns.css'
       - 'tests/browser/mobile-filter-*'
       - '.github/workflows/verify-mobile-filter-overlays.yml'
