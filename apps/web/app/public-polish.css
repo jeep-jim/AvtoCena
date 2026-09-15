@@ -50,6 +50,17 @@
   filter: none !important;
 }
 
+/* The homepage catalogue CTA stays black in both themes and at every width. */
+.ac-home-page #form .avto-button,
+.ac-home-page #form .avto-button:hover,
+.ac-home-page #form .avto-button:focus-visible,
+.ac-home-page #form .avto-button:active {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
 /* Price state is explicit: red up, green down, neutral when unchanged. */
 .ac-price--up,
 .is-up .ac-price-trend-delta,
