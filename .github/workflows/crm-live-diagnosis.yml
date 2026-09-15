@@ -1,0 +1,27 @@
+name: CRM live delivery and latency diagnosis
+on:
+  push:
+    branches: [fix/crm-context-delivery-20260915]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Deliver existing queued requests to the verified group
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+        run: node scripts/crm-telegram-delivery.mjs deliver
+      - name: Measure public response times without customer data
+        if: always()
+        run: |
+          for path in /api/health / /cars /cars/offer/cc381d2b7f2ccdcfa1cb2c6f; do
+            echo "Route $path"
+            curl --max-time 40 -sS -o /dev/null -w 'code=%{http_code} dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} first=%{time_starttransfer} total=%{time_total}\n' "https://avtocena.com$path" || true
+          done
