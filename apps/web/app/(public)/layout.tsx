@@ -1,3 +1,4 @@
+import "../../components/catalog/MobileCatalogDropdowns.css";
 import "../flat-ui.css";
 import "../public-regression-fixes.css";
 import "../public-price-sheet-fix.css";
