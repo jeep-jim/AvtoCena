@@ -1,9 +1,10 @@
+import { countCanonicalCatalogModels } from "./canonical-model-counts";
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
 import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
-import { readCatalogBrandModelCounts } from "./storage";
+import { readCatalogBrandModelCounts, readCurrentPublicCatalogProjection } from "./storage";
 import {
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
@@ -96,12 +97,10 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
   return slugify(idTail || model.model);
 }
 
-const readKnowledge = cache(async () => {
-  const [canonicalModels, sourceModels, variants, references] = await Promise.all([
+const readDirectoryModels = cache(async () => {
+  const [canonicalModels, sourceModels] = await Promise.all([
     readEncyclopediaKnowledgeModels(),
     readSourceBackedEncyclopediaModels(),
-    readEncyclopediaKnowledgeVariants(),
-    readVehiclePowerKnowledge(),
   ]);
   // Unknown live parser strings must never create public/SEO model entities.
   // V2/runtime models are authoritative for canonical identity. Source-master
@@ -124,7 +123,19 @@ const readKnowledge = cache(async () => {
       canonicalModelId: canonical.id,
     } : canonical);
   }
-  return { models: [...byIdentity.values()] as CatalogModelDirectoryItem[], variants, references };
+  return [...byIdentity.values()] as CatalogModelDirectoryItem[];
+});
+
+const readKnowledge = cache(async () => {
+  const [models, variants, references] = await Promise.all([
+    readDirectoryModels(), readEncyclopediaKnowledgeVariants(), readVehiclePowerKnowledge(),
+  ]);
+  return {models, variants, references};
+});
+
+export const readAutocatalogCounts = cache(async () => {
+  const [models, projection] = await Promise.all([readDirectoryModels(), readCurrentPublicCatalogProjection()]);
+  return countCanonicalCatalogModels(models, projection.rows);
 });
 
 function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
