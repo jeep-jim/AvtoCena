@@ -1,4 +1,6 @@
 import crypto from 'node:crypto';
+import groupTarget from '../apps/web/lib/crm-group-target.json' with { type: 'json' };
+import { verifyGroupTarget } from './lib/crm-group-target.mjs';
 
 // Never print request/response bodies, errors with URLs, tokens, or chat IDs.
 const token = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
@@ -15,7 +17,7 @@ const telegram = (method, body = {}) => post(`https://api.telegram.org/bot${toke
 const relay = body => post('https://avtocena.com/api/internal/crm/relay', body, {'x-crm-relay-key': relayKey});
 async function main() {
   if (!token || !secret) throw Error('configuration_missing');
-  if (!['deliver', 'check', 'setup-webhook'].includes(operation)) throw Error('operation_invalid');
+  if (!['deliver', 'check', 'setup-webhook', 'check-group'].includes(operation)) throw Error('operation_invalid');
   const me = await telegram('getMe');
   if (me.result?.username?.toLowerCase() !== 'avtocena_bot' || me.result?.is_bot !== true) throw Error('bot_mismatch');
   console.log('Telegram bot identity verified');
@@ -29,16 +31,20 @@ async function main() {
     console.log('Webhook configured; pending updates preserved');
     return;
   }
+  await verifyGroupTarget(telegram, me.result, groupTarget);
+  console.log('Approved private group identity and bot membership verified');
+  if (operation === 'check-group') return;
   const {notices} = await relay({action: 'claim'});
   let sent = 0, failed = 0;
   for (const notice of notices) {
+    if (notice.audience !== 'group' || String(notice.chatId) !== groupTarget.chatId) throw Error('recipient_mismatch');
     const reference = {id: notice.id, token: notice.token};
     const permission = await relay({action: 'authorize', ...reference});
     if (!permission.allowed) continue;
     let message;
     try {
       message = await telegram('sendMessage', {chat_id: notice.chatId, text: notice.text, disable_web_page_preview: true,
-        reply_markup: {inline_keyboard: [[{text: 'Заявки в боте', callback_data: 'crm:inbox'}], [{text: 'Открыть CRM', url: notice.url}]]}});
+        reply_markup: {inline_keyboard: [[{text: 'Открыть CRM', url: notice.url}]]}});
     } catch {
       await relay({action: 'ack', ...reference});
       failed++;

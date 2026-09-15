@@ -1,7 +1,8 @@
 import crypto from "node:crypto";
 import { readChunkedDataJson, updateChunkedDataJson } from "./data";
-import { botAdmin, digest, keyMatches } from "./crm-access";
-import { queueCrmAdminNotifications } from "./crm-notifications";
+import { digest, keyMatches } from "./crm-access";
+import groupTarget from "./crm-group-target.json";
+import { leadNotice, queueCrmAdminNotifications } from "./crm-notifications";
 
 const QUEUE = "telegram/crm-outbox.json";
 const LEASE_MS = 5 * 60_000;
@@ -13,14 +14,14 @@ export function crmRelayAuthorized(supplied: string, secret: string) {
   return Boolean(expected && /^[a-f0-9]{64}$/.test(supplied) && crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(supplied)));
 }
 async function allowed(item: any) {
-  if (item.audience !== "admin" || !/^\d{1,20}$/.test(String(item.chatId))) return false;
+  if (item.audience !== "group" || String(item.chatId) !== groupTarget.chatId) return false;
   const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(l => l.id === item.leadId);
-  return Boolean(lead && !lead.archivedAt && await botAdmin(String(item.chatId)));
+  return Boolean(lead && !lead.archivedAt);
 }
 export async function claimCrmNotices() {
   await queueCrmAdminNotifications();
   const candidates = (await readChunkedDataJson<any>(QUEUE, []))
-    .filter(item => item.audience === "admin" && !["sent", "cancelled"].includes(item.status)
+    .filter(item => ["group", "admin"].includes(item.audience) && !["sent", "cancelled"].includes(item.status)
       && Number(item.nextAttemptAt || 0) <= Date.now() && Number(item.relayUntil || 0) <= Date.now())
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt)).slice(0, 3);
   const notices = [];
@@ -34,9 +35,11 @@ export async function claimCrmNotices() {
       return {...current, relayHash: digest(token), lastAckHash: "", relayUntil: Date.now() + LEASE_MS};
     });
     if (!row || !keyMatches(token, row.relayHash)) continue;
-    // Do not export customer names, contacts, notes, snapshots, or queued text.
+    // Only the explicitly approved group receives the public submission fields.
+    // Internal notes and conversation history are never included.
+    const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(l => l.id === row.leadId);
     notices.push({id: row.id, token, chatId: String(row.chatId),
-      text: `📩 Новая заявка №${row.leadId}. Откройте CRM для просмотра.`,
+      audience: "group", text: leadNotice(lead).slice(0, 4000),
       url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(row.leadId)}`});
   }
   return notices;

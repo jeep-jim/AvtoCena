@@ -1,8 +1,6 @@
 import crypto from "node:crypto";
 import { type AuthUser, getAuthUsers, normalizeTelegramUsername } from "./auth";
 import {
-  bindStaffResult,
-  staffBindMessages,
   botAdmin,
   issueStaffKey,
   type StaffUser,
@@ -199,21 +197,7 @@ export async function handleCrmBotUpdate(
       : {};
   const staffStart = text.match(/^\/start\s+staff_([A-Za-z0-9_-]{24,64})$/);
   if (staffStart) {
-    const binding = await bindStaffResult(
-      staffStart[1],
-      id,
-      String(from.username || ""),
-    );
-    const bound = binding.user || actor;
-    await telegramSend(
-      token,
-      id,
-      bound
-        ? "Telegram подключён. Роль и доступ определяются вашей учётной записью АвтоЦены."
-        : staffBindMessages[binding.reason],
-    );
-    if (bound && ["owner", "admin"].includes((bound as AuthUser).role))
-      await adminMenu(token, id);
+    await telegramSend(token, id, "Привязка Telegram больше не требуется. Войдите в CRM по логину и персональному ключу. Новые заявки поступают в закрытую группу команды.");
     return true;
   }
   if (
@@ -224,7 +208,7 @@ export async function handleCrmBotUpdate(
       await telegramSend(
         token,
         id,
-        "Служебный доступ не подключён. Если вы сотрудник, войдите на сайт по персональному ключу и подключите свой Telegram в карточке команды.",
+        "Заявки команды находятся в закрытой группе. Для работы в CRM войдите на сайт по логину и персональному ключу.",
       );
       return true;
     }

@@ -1,10 +1,7 @@
 import { redirect } from "next/navigation";
 import { CrmShell } from "@/components/crm/CrmShell";
-import { TelegramSetupForm } from "@/components/crm/TelegramSetupForm";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
-import { getTelegramPublicConfig } from "@/lib/telegram-config";
 
-import { pollingEnabled } from "@/lib/crm-polling";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +10,6 @@ export default async function CrmTelegramPage() {
   if (!user) redirect("/login?next=/crm/telegram");
   if (!isAdminRole(user.role)) redirect("/crm");
 
-  const external = await pollingEnabled();
-  const telegram = external ? null : await getTelegramPublicConfig();
 
   return (
     <CrmShell
@@ -22,15 +17,14 @@ export default async function CrmTelegramPage() {
       title="Telegram"
       subtitle="Клиентские обращения и закрытые уведомления команды через бота АвтоЦены."
     >
-      {external ? (
-        <section className="glass rounded-2xl p-6">
-          <h2 className="text-xl font-black">Бот работает через GitHub</h2>
-          <p className="mt-3">Команды и уведомления обрабатываются очередью. Ответ может прийти с задержкой: GitHub запускает обработчик по расписанию.</p>
-          <p className="mt-3">Подключение сотрудника выполняется в его собственной карточке после входа по ключу. Общие заявки доступны подключённым владельцам и администраторам. Клиенты видят только свои обращения.</p>
-          <a className="mt-5 inline-block font-bold underline" href={`/crm/managers/${encodeURIComponent(user.id)}`}>Открыть мою карточку и подключить Telegram →</a>
-          <p className="mt-3 text-sm text-[var(--ac-muted)]">Повторная настройка webhook и проверка сети сервера для этого режима не требуются. Включённый режим сам по себе не подтверждает доставку заявки.</p>
-        </section>
-      ) : telegram ? <TelegramSetupForm initialStatus={telegram} /> : null}
+      <section className="glass rounded-2xl p-6">
+        <h2 className="text-xl font-black">Заявки в группе «TopAvto Планета»</h2>
+        <p className="mt-3">Заявки с сайта и подтверждённые обращения из бота сохраняются в CRM и отправляются в закрытую группу. Их видят все участники группы.</p>
+        <p className="mt-3">Добавляйте сотрудников в группу через Telegram. Для входа в CRM используйте логин и персональный ключ — привязка Telegram не нужна.</p>
+        <p className="mt-3">Личный диалог клиента остаётся в боте. Сообщения команды в группе клиентам не отправляются.</p>
+        <p className="mt-3 text-sm text-[var(--ac-muted)]">Уведомления отправляются очередью, поэтому возможна задержка. Сохранённая заявка доступна в CRM сразу после приёма.</p>
+        <a className="mt-5 inline-block font-bold underline" href="/crm/leads">Открыть заявки →</a>
+      </section>
     </CrmShell>
   );
 }
