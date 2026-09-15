@@ -47,3 +47,36 @@ test("group relay needs no staff binding, preserves leases, excludes internal no
     resetJsonStorageForTests(); fs.rmSync(tmp, {recursive: true, force: true});
   }
 });
+
+test("migration sends pending legacy lead once to the group and leaves completed history alone", async () => {
+  const cwd = process.cwd(), driver = process.env.JSON_STORAGE_DRIVER;
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "crm-group-migration-"));
+  fs.mkdirSync(path.join(tmp, "data")); process.chdir(tmp);
+  process.env.JSON_STORAGE_DRIVER = "local"; resetJsonStorageForTests();
+  try {
+    const stamp = new Date().toISOString();
+    await writeDataJson("leads/leads.json", [
+      {id: "pending", notificationRequestedAt: stamp, notificationsQueuedAt: stamp},
+      {id: "history", notificationRequestedAt: stamp, notificationsQueuedAt: stamp},
+      {id: "archived", notificationRequestedAt: stamp, archivedAt: stamp},
+    ]);
+    await writeDataJson("telegram/crm-outbox.json", [
+      {id: "legacy", leadId: "pending", audience: "admin", chatId: "111", status: "pending", createdAt: stamp},
+      {id: "complete", leadId: "history", audience: "admin", chatId: "111", status: "sent", createdAt: stamp},
+    ]);
+    const notices = await claimCrmNotices();
+    assert.equal(notices.length, 1);
+    assert.equal(notices[0].chatId, groupTarget.chatId);
+    assert.equal(notices[0].id, "group_pending");
+    assert.equal(await completeCrmNotice(notices[0].id, notices[0].token, 123), true);
+    assert.equal(await completeCrmNotice(notices[0].id, notices[0].token, 123), true);
+    assert.deepEqual(await claimCrmNotices(), []);
+    const rows = await readChunkedDataJson<any>("telegram/crm-outbox.json", []);
+    assert.equal(rows.find(r => r.id === "legacy").status, "cancelled");
+    assert.equal(rows.filter(r => r.audience === "group").length, 1);
+  } finally {
+    process.chdir(cwd);
+    if (driver === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = driver;
+    resetJsonStorageForTests(); fs.rmSync(tmp, {recursive: true, force: true});
+  }
+});

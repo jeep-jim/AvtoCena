@@ -68,6 +68,8 @@ test("customer request, private admin notification, reply confirmation, retry an
     },
   });
   try {
+    assert.equal(await handleCrmBotUpdate({message: {chat: {id: -4844138368, type: "group"}, from: {id: 202}, text: "/request"}}, "token"), false);
+    assert.equal(sent.length, 0);
     await writeDataJson("auth/users.json", [
       {
         id: "staff",
