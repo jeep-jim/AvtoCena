@@ -3,7 +3,8 @@ import crypto from 'node:crypto';
 import groupTarget from '../apps/web/lib/crm-group-target.json' with { type: 'json' };
 import { verifyGroupTarget } from './lib/crm-group-target.mjs';
 
-// Never print request/response bodies, errors with URLs, tokens, or chat IDs.
+// Never print request/response bodies, errors with URLs or tokens.
+// Explicit check-group diagnostics expose only recipient identity metadata.
 const token = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
 const secret = process.env.AUTH_ACCESS_KEY || '';
 const operation = process.env.CRM_SERVICE_MODE === '1' ? 'deliver' : process.argv[2] || 'deliver';
@@ -11,7 +12,10 @@ const relayKey = secret ? crypto.createHmac('sha256', secret).update('avtocena:c
 async function post(url, body, headers = {}) {
   const response = await fetch(url, {method: 'POST', redirect: 'error', headers: {'content-type': 'application/json', ...headers}, body: JSON.stringify(body), signal: AbortSignal.timeout(15000)});
   const result = await response.json();
-  if (!response.ok || !result.ok) throw Error('request_failed');
+  if (!response.ok || !result.ok) {
+    if (operation === 'check-group') console.log(JSON.stringify({checkErrorCode: result.error_code, migrationChatId: result.parameters?.migrate_to_chat_id || null}));
+    throw Error('request_failed');
+  }
   return result;
 }
 const telegram = (method, body = {}) => post(`https://api.telegram.org/bot${token}/${method}`, body);
@@ -31,6 +35,11 @@ export async function runDelivery() {
     if (info.result?.url !== config.url) throw Error('webhook_mismatch');
     console.log('Webhook configured; pending updates preserved');
     return;
+  }
+  if (operation === 'check-group') {
+    const {result: chat} = await telegram('getChat', {chat_id: groupTarget.chatId});
+    const {result: member} = await telegram('getChatMember', {chat_id: groupTarget.chatId, user_id: me.result.id});
+    console.log(JSON.stringify({groupId: chat.id, groupTitle: chat.title, groupType: chat.type, public: Boolean(chat.username || chat.active_usernames?.length), botStatus: member.status, canSend: chat.permissions?.can_send_messages ?? null}));
   }
   await verifyGroupTarget(telegram, me.result, groupTarget);
   console.log('Approved private group identity and bot membership verified');
