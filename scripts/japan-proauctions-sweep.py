@@ -76,7 +76,7 @@ def main():
                 try:body=get(url)
                 except Exception as e:
                     report['errors'].append({'url':url,'error':str(e)});report['stopReason']='request_error_checkpointed';break
-                links=list(dict.fromkeys(urllib.parse.urljoin(BASE,a) for a in re.findall(r'href=["\\\'](/statistika/[^"\\\']+/\\d+\\.html)["\\\']',body)))
+                links=list(dict.fromkeys(urllib.parse.urljoin(BASE,a['href']) for a in BeautifulSoup(body,'html.parser').select('a[href]') if a['href'].startswith('/statistika/') and a['href'].endswith('.html') and a['href'].rsplit('/',1)[-1][:-5].isdigit()))
                 report['pages']+=1
                 pending=[u for u in links if u not in done]
                 if not pending:report['stopReason']='no_new_detail_links';break
