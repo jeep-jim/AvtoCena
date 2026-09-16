@@ -190,6 +190,13 @@ jobs:
           jq -e '.result.structuredContent.items | length >= 1' <<<"$mcp_search" >/dev/null
           jq -e '.result.structuredContent.items[0].url | startswith("https://avtocena.com/cars/offer/")' <<<"$mcp_search" >/dev/null
 
+      - name: Verify SmartCaptcha keys in active production revision
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.SMARTCAPTCHA_CLIENT_KEY }}
+          SMARTCAPTCHA_SERVER_KEY: ${{ secrets.SMARTCAPTCHA_SERVER_KEY }}
+        run: node scripts/verify-smartcaptcha-deployment.mjs
+
       - name: Audit every visible catalog calculation
         id: visible_calculation_audit
         env:

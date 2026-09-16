@@ -57,7 +57,7 @@ function applyBrowserTheme(theme: Theme) {
     icon.dataset.avtocenaThemeIcon = "true";
     document.head.appendChild(icon);
   }
-  icon.href = theme === "light" ? "/favicon-dark.svg" : "/favicon-light.svg";
+  icon.href = "/favicon-light.svg";
   window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
 }
 

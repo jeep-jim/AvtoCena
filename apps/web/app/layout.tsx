@@ -14,14 +14,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon-light.svg", media: "(prefers-color-scheme: dark)" },
-      { url: "/favicon-dark.svg", media: "(prefers-color-scheme: light)" },
-      { url: "/favicon.ico" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-light.svg", type: "image/svg+xml", sizes: "any" },
     ],
-    apple: [
-      { url: "/apple-touch-icon-light.png", media: "(prefers-color-scheme: dark)" },
-      { url: "/apple-touch-icon-dark.png", media: "(prefers-color-scheme: light)" },
-    ],
+    apple: [{ url: "/apple-touch-icon-light.png", sizes: "180x180" }],
   },
   openGraph: {
     title: "АвтоЦена",
