@@ -22,11 +22,16 @@ test('unsafe delivered quote becomes a bound seller quote without changing saved
  assert.equal(catalogOfferVisibleRub(clean),0);assert.equal(original.powerHp,34);assert.equal(original.totalRub,3900000);
  assert.deepEqual(safePublicPricing(clean),clean);
 });
-test('mismatched, stale or missing conversion never manufactures a seller quote',()=>{
- for(const patch of [{sourcePrice:1},{currency:'USD'},{rateSource:'fallback_env'},{rateDate:'2000-01-01'},{effectiveRate:0}]){
+test('mismatched, invalid or future conversion never manufactures a seller quote',()=>{
+ for(const patch of [{sourcePrice:1},{currency:'USD'},{rateSource:'fallback_env'},{rateDate:'invalid'},{rateDate:'2100-01-01'},{effectiveRate:0}]){
   const row=fixture();Object.assign(row.calculationSnapshot.currencyRate,patch);
   const clean=safePublicPricing(row);assert.equal(isSellerPricedOffer(clean),false);assert.equal(catalogOfferVisibleRub(clean),0);
  }
+});
+test('historical bound conversion retains its date so display repricing can refresh it',()=>{
+ const row=fixture();row.calculationSnapshot.currencyRate.rateDate='2026-09-11';
+ const clean=safePublicPricing(row);assert.equal(isSellerPricedOffer(clean),true);
+ assert.equal(clean.calculationSnapshot.currencyRate.rateDate,'2026-09-11');
 });
 test('rejected horsepower cannot leak through raw source specification groups',()=>{
  for(const row of [fixture(),safePublicPricing(fixture())]){
