@@ -336,8 +336,8 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
   const auctionAt = new Date(o.auctionDate || "");
   const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
-  const favoriteRub = catalogOfferVisibleRub(publicOffer(offer));
-  const snapshot = { catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: offer.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : offer.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: `/cars/offer/${o.id}` };
+  const favoriteRub = catalogOfferVisibleRub(initialPublic);
+  const snapshot = { catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: initialPublic.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : initialPublic.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
@@ -399,7 +399,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const primarySpecs = displayOnlySpecs.slice(0, 4);
   const secondarySpecs = displayOnlySpecs.slice(4);
 
-  return <main data-offer-id={o.id} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
+  return <main data-offer-id={o.id} data-offer-price-rub={sellerPricing ? offer.sellerPriceRub : visibleRub || undefined} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">

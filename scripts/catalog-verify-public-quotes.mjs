@@ -25,9 +25,10 @@ try {
       assert.ok(encoded,`Offer page unavailable: ${row.id}`);
       const preview=JSON.parse(decode(encoded));
       const expected=Number(row.catalogPricingMode==='seller'?row.sellerPriceRub:row.publicVisibleRub || row.totalRub);
-      const result={market,id:row.id,listRub:expected,detailRub:preview.totalRub,equal:expected===preview.totalRub,hasImage:Boolean(preview.imageUrl)};
+      const detailRub=Number(html.match(/data-offer-price-rub="([^"]+)"/)?.[1]);
+      const result={market,id:row.id,listRub:expected,detailRub,equal:expected===detailRub,hasImage:Boolean(preview.imageUrl)};
       report.quotes.push(result);
-      assert.equal(preview.totalRub,expected,`List/detail mismatch: ${row.id}`);
+      assert.equal(detailRub,expected,`List/detail mismatch: ${row.id}`);
       assert.ok(preview.imageUrl,`Missing photo: ${row.id}`);
     }
   }
