@@ -1,0 +1,36 @@
+name: Japan Sferacar list collection
+on:
+  push:
+    branches: [ops/japan-free-sweep-20260916]
+    paths: [.github/workflows/japan-sferacar-sweep.yml]
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install beautifulsoup4
+      - name: Verify list parser
+        run: |
+          python - <<'PY'
+          import importlib.util,pathlib
+          spec=importlib.util.spec_from_file_location('collector','scripts/japan-sferacar-sweep.py')
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          rows,links=m.parse(pathlib.Path('data/japan-free-discovery/additional/sferacar.html').read_text(),'https://sferacar.ru/auktsiony/')
+          assert len(rows)==12,len(rows)
+          h=next(r for r in rows if r['sourceId']=='1881217155')
+          assert h['priceJpy']==581000 and h['startPriceJpy']==20000,h
+          assert len(h['imageUrls'])==3,h
+          assert h['engineCc']==1300 and h['year']==2017,h
+          assert links
+          print({'records':len(rows),'example':h})
+          PY
+      - run: python scripts/japan-sferacar-sweep.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-sferacar-results
+          path: japan-sferacar-results
+          retention-days: 14
