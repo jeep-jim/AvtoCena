@@ -1,0 +1,25 @@
+[
+  {
+    "source": "proauctions",
+    "url": "https://demo.pro-auctions.ru/statistika/?page=1",
+    "status": 200,
+    "bytes": 405283
+  },
+  {
+    "source": "japantransit",
+    "url": "https://japantransit.ru/",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "source": "jpcenter",
+    "url": "https://jp.center/",
+    "status": 200,
+    "bytes": 133787
+  },
+  {
+    "source": "auctiondatasearch",
+    "url": "https://auctiondatasearch.jp/",
+    "status": 200,
+    "bytes": 33704
+  }
+]
