@@ -1,3 +1,4 @@
+import { compactRepricedProjection } from "./compact-pricing-snapshot";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { withReplayInputs } from "./pricing-replay-inputs";
 import { synchronizeCombustionPower } from "./combustion-power-consistency";
@@ -165,6 +166,6 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(offer)))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
-  const repriced = ratedOffers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
+  const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));
   return await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
 }

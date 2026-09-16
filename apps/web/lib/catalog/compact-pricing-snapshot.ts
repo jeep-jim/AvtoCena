@@ -20,3 +20,14 @@ export function compactPricingSnapshot(offer: VehicleOffer) {
       productionReferenceDate: c.productionReferenceDate, missing: c.missing } : undefined,
   };
 }
+
+/** Keep list responses compact after replay; the full ledger belongs to detail. */
+export function compactRepricedProjection<T extends Partial<VehicleOffer>>(offer: T): T {
+  if (offer.market === 'japan' || Number((offer as any).cardProjectionVersion) < 3 || !(offer as any).cardProjectionVersion) return offer;
+  const s = offer.calculationSnapshot;
+  return {...offer, calculationSnapshot: {
+    currencyRate: s?.currencyRate, pricingConfidence: s?.pricingConfidence,
+    powerScenario: s?.powerScenario, powerRequiresConfirmation: s?.powerRequiresConfirmation,
+    ...compactPricingSnapshot(offer as VehicleOffer),
+  }} as T;
+}

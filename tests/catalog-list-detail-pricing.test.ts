@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { compactPricingSnapshot } from '../apps/web/lib/catalog/compact-pricing-snapshot';
+import { compactPricingSnapshot, compactRepricedProjection } from '../apps/web/lib/catalog/compact-pricing-snapshot';
 import { repriceOfferWithBusinessConfig } from '../apps/web/lib/catalog/live-business-pricing';
 import { calculateRussiaCustomsForIndividual as customs } from '../packages/engine/src/calculation/russiaCustomsV2';
 import { CATALOG_MARKET_DEFAULTS } from '../apps/web/lib/catalog/estimated-market-config';
@@ -43,4 +43,14 @@ test('invalid replay inputs clear stale projected totals; Japan keeps its snapsh
   assert.equal(resultJp.totalRub,japan.totalRub);
   assert.deepEqual(resultJp.calculationSnapshot,japan.calculationSnapshot);
   assert.deepEqual(compactPricingSnapshot(japan),{});
+});
+
+test('list replay does not send full calculation ledgers to every browser card',()=>{
+  const quote=repriceOfferWithBusinessConfig(compact(fixture('korea')),CATALOG_MARKET_DEFAULTS.korea);
+  const lean=compactRepricedProjection(quote);
+  assert.equal(lean.totalRub,quote.totalRub);
+  assert.equal(lean.publicVisibleRub,quote.publicVisibleRub);
+  assert.equal(lean.calculationSnapshot.breakdown,undefined);
+  assert.ok(lean.calculationSnapshot.customsInput);
+  assert.ok(JSON.stringify(lean).length<JSON.stringify(quote).length);
 });
