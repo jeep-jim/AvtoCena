@@ -1,4 +1,5 @@
 """Public ProAuctions statistics collector, research only."""
+import concurrent.futures
 import datetime as dt, hashlib, json, os, pathlib, re, time, urllib.request, urllib.error, urllib.parse
 from bs4 import BeautifulSoup
 BASE='https://demo.pro-auctions.ru'
@@ -38,7 +39,7 @@ def parse(body,url):
 def main():
     root=pathlib.Path('japan-proauctions-results');root.mkdir(exist_ok=True)
     deadline=time.monotonic()+int(os.getenv('SWEEP_SECONDS','10800'))
-    pending=[];done=set();part=0;page=1;buffer=[]
+    pending=[];done=set();part=0;page=int(os.getenv("START_PAGE","1"));buffer=[]
     report={'source':'proauctions','pages':0,'details':0,'statisticsCandidates':0,'errors':[],'stopReason':''}
     cp=root/'checkpoint.json'
     if cp.exists():
@@ -55,18 +56,27 @@ def main():
             return r.read(3000000).decode('utf-8','replace')
     try:
         while time.monotonic()<deadline:
-            url=pending[0] if pending else f'{BASE}/statistika/?page={page}'
-            try:body=get(url)
-            except Exception as e:
-                report['errors'].append({'url':url,'error':str(e)});report['stopReason']='request_error_checkpointed';break
             if pending:
-                row=parse(body,url)
-                if not row['year'] or not row['title']:
-                    report['stopReason']='unexpected_detail_markup';break
-                pending.pop(0);done.add(url);buffer.append(row);report['details']+=1
-                report['statisticsCandidates']+=int(row['statisticsCandidate'])
+                batch=pending[:2]
+                def fetch_one(url):
+                    try:return url,get(url),None
+                    except Exception as e:return url,None,str(e)
+                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+                    for url,body,error in pool.map(fetch_one,batch):
+                        if error:
+                            report['errors'].append({'url':url,'error':error});report['stopReason']='request_error_checkpointed';continue
+                        row=parse(body,url)
+                        if not row['year'] or not row['title']:
+                            report['stopReason']='unexpected_detail_markup';continue
+                        pending.remove(url);done.add(url);buffer.append(row);report['details']+=1
+                        report['statisticsCandidates']+=int(row['statisticsCandidate'])
+                if report['stopReason']:break
             else:
-                links=list(dict.fromkeys(urllib.parse.urljoin(BASE,a) for a in re.findall(r'href=["\'](/statistika/[^"\']+/\d+\.html)["\']',body)))
+                url=f'{BASE}/statistika/?page={page}'
+                try:body=get(url)
+                except Exception as e:
+                    report['errors'].append({'url':url,'error':str(e)});report['stopReason']='request_error_checkpointed';break
+                links=list(dict.fromkeys(urllib.parse.urljoin(BASE,a) for a in re.findall(r'href=["\\\'](/statistika/[^"\\\']+/\\d+\\.html)["\\\']',body)))
                 report['pages']+=1
                 pending=[u for u in links if u not in done]
                 if not pending:report['stopReason']='no_new_detail_links';break
