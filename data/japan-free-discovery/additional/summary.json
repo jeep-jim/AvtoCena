@@ -1,8 +1,14 @@
 [
   {
-    "source": "sferacar",
-    "url": "https://sferacar.ru/auktsiony/",
+    "source": "sfera-stat",
+    "url": "https://sferacar.ru/statistika/",
     "status": 200,
-    "bytes": 418781
+    "bytes": 581878
+  },
+  {
+    "source": "sfera-page2",
+    "url": "https://sferacar.ru/auktsiony/?page=2&ajax=1",
+    "status": 200,
+    "bytes": 399834
   }
 ]
