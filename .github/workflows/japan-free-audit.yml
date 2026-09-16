@@ -1,0 +1,48 @@
+name: Japan saved records audit
+on:
+  push:
+    branches: [ops/japan-free-sweep-20260916]
+    paths: [.github/workflows/japan-free-audit.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 35079001913
+          pattern: japan-free-*
+          path: audit-input/main
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 35079213542
+          name: japan-free-carvector
+          path: audit-input/carvector-all
+      - run: |
+          python - <<'PY'
+          import pathlib,json,collections
+          sources={}
+          for p in pathlib.Path('audit-input').rglob('part-*.json'):
+            if 'aggregate' in str(p): continue
+            for r in json.loads(p.read_text()):
+              sources.setdefault(r['source'],{})[r['sourceId']]=r
+          result={}
+          for source,items in sources.items():
+            rows=list(items.values())
+            result[source]={'unique':len(rows),'fields':dict(collections.Counter(k for r in rows for k,v in r.items() if v)),'statuses':dict(collections.Counter(str(r.get('statusRaw')) for r in rows)),'reviewReasons':dict(collections.Counter(str(r.get('reviewReason')) for r in rows)),'detailErrors':dict(collections.Counter(str(r.get('detailError')) for r in rows)),'samples':rows[:3]}
+          p=pathlib.Path('data/japan-free-discovery/saved-records-audit.json')
+          p.write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          print(json.dumps({s:{k:v for k,v in r.items() if k!='samples'} for s,r in result.items()},ensure_ascii=False))
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/japan-free-discovery/saved-records-audit.json
+          git commit -m "Record exact Japan saved-record audit"
+          git pull --rebase origin ops/japan-free-sweep-20260916
+          git push origin HEAD:ops/japan-free-sweep-20260916
