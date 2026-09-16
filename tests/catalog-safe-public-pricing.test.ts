@@ -5,6 +5,7 @@ import { isSellerPricedOffer } from '../apps/web/lib/catalog/seller-price-contra
 import { offerSpecificationGroups } from '../apps/web/lib/catalog/offer-specification-groups';
 import { catalogOfferVisibleRub } from '../apps/web/lib/catalog/public-priority';
 import { searchProjectionFromOffer, projectionCanRenderCard } from '../apps/web/lib/catalog/storage';
+import { applyActiveBusinessPricing, repriceOfferWithBusinessConfig } from '../apps/web/lib/catalog/live-business-pricing';
 
 function fixture(): any {
  return {market:'korea',sourceId:'kcar_korea_open',sourceOfferId:'one',make:'Genesis',model:'G80',year:2023,
@@ -60,4 +61,19 @@ test('search cards retain seller price but never old horsepower or delivered-pri
  assert.equal(projection.powerHp,undefined);assert.equal(projection.totalRub,null);
  assert.equal(projection.publicSpecificationVerified,false);assert.equal(projection.sellerPriceRub,1800000);
  assert.equal(projectionCanRenderCard(projection),true);
+});
+test('seller rate refresh updates the currency conversion without resurrecting customs or rejected power',async()=>{
+ for(const market of ['korea','japan']) {
+  const input=fixture();input.market=market;input.sourceCurrency='RUB';input.sourcePrice=1000000;
+  input.calculationSnapshot.currencyRate={currency:'RUB',sourcePrice:1000000,effectiveRate:1,rateSource:'cbr',rateDate:'2026-09-11'};
+  const clean=safePublicPricing(input);const result=await applyActiveBusinessPricing(clean);
+  assert.equal(result.sellerPriceRub,1000000);assert.equal(result.totalRub,null);
+  assert.equal(result.powerHp,undefined);assert.equal(result.calculationSnapshot.customs,undefined);
+  assert.equal(result.calculationSnapshot.currencyRate.rateDate,new Date().toISOString().slice(0,10));
+  assert.equal(input.powerHp,34);
+ }
+});
+test('business replay itself cannot revive an unsafe saved customs total',()=>{
+ const clean=repriceOfferWithBusinessConfig(fixture(),{});
+ assert.equal(clean.totalRub,null);assert.equal(isSellerPricedOffer(clean),true);
 });
