@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { createMarketVersion } from "@/lib/business-settings";
 import { writeDataJson } from "@/lib/data";
 import { invalidateEffectiveMarketsCache } from "@/lib/effective-market-settings";
+import { marketPaymentFields } from "@/lib/market-payment-fields";
 import { booleanFromForm, canEditBusinessSettings, cleanText, nullableNumber } from "@/lib/settings-validation";
 
 function parseJsonField(value: FormDataEntryValue | null, fallback: unknown) {
@@ -31,11 +32,7 @@ export async function POST(request: Request) {
   try {
     const form = await request.formData();
     const marketId = cleanText(form.get("marketId"), 40);
-    const topAvtoCommissionRub = nullableNumber(form.get("topAvtoCommissionRub"));
-    const enteredInitialPayment = nullableNumber(form.get("contractInitialPaymentRub"));
-    const contractInitialPaymentRub = enteredInitialPayment ?? (marketId === "japan" ? 70_000 : 250_000);
-    if (topAvtoCommissionRub === null || contractInitialPaymentRub < topAvtoCommissionRub) throw new Error("Первый платёж не может быть меньше комиссии");
-    const securityDepositRub = contractInitialPaymentRub - topAvtoCommissionRub;
+    const { topAvtoCommissionRub, securityDepositRub, contractInitialPaymentRub } = marketPaymentFields(form, marketId);
 
     const version = await createMarketVersion(marketId, {
       name: cleanText(form.get("name"), 120),

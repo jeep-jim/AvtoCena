@@ -1,3 +1,4 @@
+import { MarketPaymentFields } from "./MarketPaymentFields";
 import {
   MarketStructuredFields,
   CpaStructuredFields,
@@ -198,18 +199,7 @@ export function BusinessSettingsPanel({
                       name="currency"
                       defaultValue={version.currency}
                     />
-                    <Field
-                      label="Комиссия ₽"
-                      name="topAvtoCommissionRub"
-                      type="number"
-                      defaultValue={version.topAvtoCommissionRub}
-                    />
-                    <Field
-                      label="Первый платёж ₽"
-                      name="contractInitialPaymentRub"
-                      type="number"
-                      defaultValue={version.contractInitialPaymentRub}
-                    />
+                    <MarketPaymentFields key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
                     <Field
                       label="Резерв курса %"
                       name="exchangeRateReservePercent"
