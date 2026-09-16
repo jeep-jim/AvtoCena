@@ -14,7 +14,7 @@ jobs:
       - run: |
           python - <<'PY'
           import urllib.request,pathlib,json,concurrent.futures
-          urls={'proauctions-detail':'https://demo.pro-auctions.ru/statistika/suzuki/swift/30164101.html','japantransit':'https://japantransit.ru/','jpcenter':'https://jp.center/','auctiondatasearch':'https://auctiondatasearch.jp/'}
+          urls={'proauctions-detail':'https://demo.pro-auctions.ru/statistika/suzuki/swift/30164101.html','japantransit':'https://japantransit.ru/','jpcenter':'https://jp.center/','auctiondatasearch-statistics':'https://auctiondatasearch.jp/statistics/'}
           root=pathlib.Path('data/japan-free-discovery/additional');root.mkdir(exist_ok=True)
           def fetch(item):
             name,url=item
