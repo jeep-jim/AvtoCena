@@ -126,6 +126,7 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
     powertrainKind: "combustion",
     engineCc: 1_798,
     powerHp: 122,
+    powerDataConfidence: 'source_exact', powerDataSource: 'synthetic_exact_fixture',
     calculationStatus: "ready",
     calculationSnapshot: {
       customs: { status: "ready" },
@@ -134,7 +135,8 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
     },
     firstSeenAt: now,
     updatedAt: now,
-    operational: { sourceUrl: `https://suchen.mobile.de/fahrzeuge/details.html?id=${i}`, photoIdentityVerified: true },
+    operational: { sourceUrl: `https://suchen.mobile.de/fahrzeuge/details.html?id=${i}`, photoIdentityVerified: true,
+      semanticEvidence: {fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1798},powerHp:{status:'exact',value:122}} },
   }));
   await persistCatalogOffers(offers);
   const manifest = await readDataJson<any>("catalog/manifest.json", {});
