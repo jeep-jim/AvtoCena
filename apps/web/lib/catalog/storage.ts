@@ -5,6 +5,7 @@ import { selectCatalogPublicationMix } from "./china-source-share";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
+import { safePublicPricing } from "./safe-public-pricing";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
 import { prepareModificationRecovery } from "./modification-recovery";
@@ -174,7 +175,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -390,6 +391,7 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker:
 }
 
 export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection {
+  offer = safePublicPricing(offer);
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
@@ -417,16 +419,19 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
+  row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
     && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
     && (isSellerPricedOffer(row) || hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
     && !catalogRequiredSpecificationRejectionReason(row)));
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
+  offer = safePublicPricing(offer);
   return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
     && !catalogRequiredSpecificationRejectionReason(offer));
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
+  row = safePublicPricing(row);
   const imageUrl = String(row.cardImageUrl || "");
   return {
     ...row, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
@@ -611,6 +616,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
   return projectionNumber(row.powerHp, 0);
 }
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  row = safePublicPricing(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
   if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
