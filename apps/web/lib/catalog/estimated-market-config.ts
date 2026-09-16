@@ -8,6 +8,7 @@ export type EstimatedMarketResolution = {
 };
 
 type MarketDefaults = {
+  serviceBundleVersion: number;
   currency: string;
   securityDepositRub: number;
   topAvtoCommissionRub: number;
@@ -25,12 +26,12 @@ type MarketDefaults = {
 };
 
 export const CATALOG_MARKET_DEFAULTS: Record<CatalogMarket, MarketDefaults> = {
-  japan: { currency: "JPY", securityDepositRub: 31_000, topAvtoCommissionRub: 39_000, exportExpensesRub: 100_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-45" },
-  china: { currency: "CNY", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 80_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "14-30" },
-  korea: { currency: "KRW", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 70_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-40" },
-  uae: { currency: "AED", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 120_000, logisticsRub: 450_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-45" },
-  europe: { currency: "EUR", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 100_000, logisticsRub: 350_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-60" },
-  georgia: { currency: "GEL", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 50_000, logisticsRub: 180_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "20-40" },
+  japan: { serviceBundleVersion: 1, currency: "JPY", securityDepositRub: 31_000, topAvtoCommissionRub: 39_000, exportExpensesRub: 100_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-45" },
+  china: { serviceBundleVersion: 1, currency: "CNY", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 80_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "14-30" },
+  korea: { serviceBundleVersion: 1, currency: "KRW", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 70_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-40" },
+  uae: { serviceBundleVersion: 1, currency: "AED", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 120_000, logisticsRub: 450_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-45" },
+  europe: { serviceBundleVersion: 1, currency: "EUR", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 100_000, logisticsRub: 350_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-60" },
+  georgia: { serviceBundleVersion: 1, currency: "GEL", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 50_000, logisticsRub: 180_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 50_000, sbktsRub: 0, eptsRub: 0, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "20-40" },
 };
 
 function envAmount(market: CatalogMarket, field: string, fallback: number) {
@@ -62,12 +63,14 @@ export function resolveCatalogMarketConfig(market: CatalogMarket, configured: an
 
   const config = {
     ...source,
+    serviceBundleVersion: source.serviceBundleVersion || ([source.laboratoryRub,source.sbktsRub,source.eptsRub].every(value => value == null) ? 1 : undefined),
     id: source.id || `catalog_estimate_${market}_v2`,
     version: Number(source.version || 2),
     status: "active",
     active: true,
     effectiveFrom: source.effectiveFrom || "2026-07-27T00:00:00.000Z",
     currency: source.currency || defaults.currency,
+    contractInitialPaymentRub: source.contractInitialPaymentRub ?? (market === "japan" ? 70_000 : 250_000),
     securityDepositRub: value("securityDepositRub"),
     topAvtoCommissionRub: value("topAvtoCommissionRub"),
     exportExpensesRub: value("exportExpensesRub"),

@@ -46,8 +46,7 @@ function configuredValue(current: any, field: string, fallback: number) {
 
 function defaultInitialPayment(marketId: MarketId, deposit: number, commission: number) {
   if (marketId === "japan") return 70_000;
-  if (marketId === "china") return 250_000;
-  return Math.max(200_000, deposit + commission);
+  return Math.max(250_000, deposit + commission);
 }
 
 function hasCompleteActiveProfile(current: any) {
@@ -68,6 +67,7 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
 
   return {
     ...(current || {}),
+    serviceBundleVersion: current?.serviceBundleVersion || ([current?.laboratoryRub,current?.sbktsRub,current?.eptsRub].every(value => value == null) ? 1 : undefined),
     id: complete ? current.id : `market_${marketId}_system_average_v2`,
     version: complete ? Number(current.version || 1) : Math.max(2, Number(current?.version || 0) + 1),
     status: "active",

@@ -7,8 +7,8 @@ import { catalogPowerDisplay } from "../apps/web/lib/catalog/power-display";
 import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 
 const markets: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
-const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub", "sbktsRub", "eptsRub", "rfDeliveryRub"];
-const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"];
+const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub", "rfDeliveryRub"];
+const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "rf-delivery", "customs"];
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
@@ -61,9 +61,7 @@ test("keeps the Japan contract payment at 70,000 rubles", () => {
     sourcePriceRub: 1_000_000,
     customsRub: 500_000,
   });
-  const contractPayment = calculation.breakdown
-    .filter((line) => line.id === "security-deposit" || line.id === "topavto-commission")
-    .reduce((sum, line) => sum + line.amountRub, 0);
+  const contractPayment = Number(calculation.snapshot.marketConfig.securityDepositRub) + Number(calculation.snapshot.marketConfig.topAvtoCommissionRub);
   assert.equal(contractPayment, 70_000);
 });
 

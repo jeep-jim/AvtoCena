@@ -26,6 +26,7 @@ export type MarketBusinessConfig = {
   effectiveFrom?: string;
   currency?: string;
   topAvtoCommissionRub?: number | null;
+  serviceBundleVersion?: number;
   securityDepositRub?: number | null;
   contractInitialPaymentRub?: number | null;
   exchangeRateReservePercent?: number | null;
@@ -57,6 +58,7 @@ export type BusinessCalculationInput = {
 };
 
 export type BusinessCalculationLine = {
+  includedServices?: string[];
   id: string;
   title: string;
   amountRub: number;

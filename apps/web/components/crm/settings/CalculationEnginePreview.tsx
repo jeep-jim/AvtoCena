@@ -285,7 +285,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               <tr className="bg-red-500/[.07]">
                 <td className="px-4 py-4 text-base font-black">7. Итог</td>
                 <td className="px-4 py-4 text-white/70">Цена карточки = автомобиль + таможенные платежи + утильсбор + расходы рынка.</td>
-                <td className="px-4 py-4 text-white/50">без двойного учёта обеспечительного платежа</td>
+                <td className="px-4 py-4 text-white/50">Автомобиль + все расходы</td>
                 <td className="px-4 py-4 text-right text-lg font-black">{business ? rub(business.totalRub) : "расчёт заблокирован"}</td>
               </tr>
             </tbody>

@@ -43,7 +43,7 @@ test("a legacy draft becomes a usable provisional profile without overwriting en
   assert.equal(resolved.status, "active");
   assert.equal(resolved.active, true);
   assert.equal(resolved.topAvtoCommissionRub, 95_000);
-  assert.equal(resolved.securityDepositRub, 110_000);
+  assert.equal(resolved.securityDepositRub, 160_000);
   assert.equal(resolved.provisional, true);
 });
 
@@ -101,7 +101,8 @@ test("visible offer is repriced from current CRM values without changing customs
   assert.equal(result.priceMode, "estimated");
   const deposit = result.calculationSnapshot.breakdown.find((line: any) => line.id === "security-deposit");
   const car = result.calculationSnapshot.breakdown.find((line: any) => line.id === "car");
-  assert.equal(Number(deposit.amountRub) + Number(car.amountRub), 1_000_000);
+  assert.equal(Number(car.amountRub), 1_000_000);
+  assert.equal(deposit, undefined);
 });
 
 test("completed Japanese auction keeps its historical published total", () => {

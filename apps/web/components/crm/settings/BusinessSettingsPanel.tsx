@@ -144,7 +144,7 @@ export function BusinessSettingsPanel({
                   <StatCard label="Рынок" value={marketLabel(market)} />
                   <StatCard label="Валюта" value={version.currency || "—"} />
                   <StatCard
-                    label="Обеспечительный"
+                    label="Аванс за автомобиль"
                     value={
                       version.securityDepositRub
                         ? `${money(version.securityDepositRub)} ₽`
@@ -199,12 +199,6 @@ export function BusinessSettingsPanel({
                       defaultValue={version.currency}
                     />
                     <Field
-                      label="Обеспечительный ₽"
-                      name="securityDepositRub"
-                      type="number"
-                      defaultValue={version.securityDepositRub}
-                    />
-                    <Field
                       label="Комиссия ₽"
                       name="topAvtoCommissionRub"
                       type="number"
@@ -247,22 +241,10 @@ export function BusinessSettingsPanel({
                       defaultValue={version.svhRub}
                     />
                     <Field
-                      label="Лаборатория ₽"
+                      label="Лаборатория, СБКТС, ЭПТС ₽"
                       name="laboratoryRub"
                       type="number"
                       defaultValue={version.laboratoryRub}
-                    />
-                    <Field
-                      label="СБКТС ₽"
-                      name="sbktsRub"
-                      type="number"
-                      defaultValue={version.sbktsRub}
-                    />
-                    <Field
-                      label="ЭПТС ₽"
-                      name="eptsRub"
-                      type="number"
-                      defaultValue={version.eptsRub}
                     />
                     <Field
                       label="Доставка РФ ₽"
