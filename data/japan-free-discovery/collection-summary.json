@@ -1,0 +1,362 @@
+{
+  "generatedAt": "2026-09-16T12:22:51.163416+00:00",
+  "qualifiedSoldCandidates": 107,
+  "reviewRecords": 4063,
+  "duplicates": 0,
+  "publicationReady": false,
+  "sources": [
+    {
+      "source": "prestige",
+      "startedAt": "2026-09-16T09:22:27.842Z",
+      "pages": 0,
+      "rows": 0,
+      "accepted": 0,
+      "review": 0,
+      "duplicates": 0,
+      "errors": [
+        "Error: prestige_japan_exact_http_403:https://prestigemotorsport.com.au/auctions/:Just a moment... Enable JavaScript and cookies to continue\n    at request (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/prestige-japan-exact-source.ts:282:31)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async PrestigeJapanExactSource.fetchPage (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/prestige-japan-exact-source.ts:384:19)\n    at async <anonymous> (/home/runner/work/AvtoCena/AvtoCena/scripts/japan-free-adapter-sweep.mjs:38:18)"
+      ],
+      "stopReason": "source_error",
+      "finishedAt": "2026-09-16T09:22:27.979Z",
+      "unique": 0
+    },
+    {
+      "source": "carvector",
+      "startedAt": "2026-09-16T09:22:37.449Z",
+      "pages": 3,
+      "rows": 135,
+      "accepted": 0,
+      "review": 135,
+      "duplicates": 0,
+      "errors": [],
+      "stopReason": "source_exhausted",
+      "finishedAt": "2026-09-16T09:22:42.147Z",
+      "cursor": "3",
+      "unique": 135
+    },
+    {
+      "source": "jpauc",
+      "startedAt": "2026-09-16T09:22:36.460Z",
+      "pages": 164,
+      "rows": 1640,
+      "accepted": 0,
+      "review": 1640,
+      "duplicates": 0,
+      "errors": [
+        "TimeoutError: The operation was aborted due to timeout"
+      ],
+      "stopReason": "source_error",
+      "finishedAt": "2026-09-16T11:06:52.633Z",
+      "cursor": "165",
+      "unique": 1640
+    },
+    {
+      "source": "tokai",
+      "startedAt": "2026-09-16T09:22:25.345003+00:00",
+      "pages": 5958,
+      "details": 2271,
+      "accepted": 0,
+      "review": 2271,
+      "duplicates": 0,
+      "errors": [
+        {
+          "url": "https://tokai-auto.ru/honda/step-wagon/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/outlander-phev/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/rx/?body%5B0%5D=AALH16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/nx/?body%5B0%5D=AYZ10&body%5B1%5D=AYZ15",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/nissan/vanette-van/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mazda/bongo-brawny-van/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d5/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/toyota/kluger/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/ux/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/nx/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/rx/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/bmw/x5-series/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mercedes-benz/glb/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/toyota/avensis-wagon/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/honda/accord-wagon/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mazda/atenza-wagon/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/lancer-van/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/subaru/legacy-outback/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/lexus/lx/",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/honda/n-box/?auc_id=1882529835",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/honda/freed/?auc_id=1882431596",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/honda/n-box/?auc_id=1882415054",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/daihatsu/mira-es/?auc_id=1882431541",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d5/?auc_id=1882431636",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d2/?auc_id=1882431532",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d2/?auc_id=1882414845",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d5/?auc_id=1882414231",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/mitsubishi/delica-d5/?auc_id=1882383165",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/toyota/tan/?grade=159556",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://tokai-auto.ru/toyota/tan/?grade=301",
+          "error": "HTTP Error 404: Not Found"
+        }
+      ],
+      "stopReason": "time_budget_checkpointed",
+      "pending": 57086,
+      "finishedAt": "2026-09-16T12:22:26.662090+00:00"
+    },
+    {
+      "source": "jptrade",
+      "startedAt": "2026-09-16T09:22:26.867321+00:00",
+      "pages": 312,
+      "details": 124,
+      "accepted": 107,
+      "review": 17,
+      "duplicates": 0,
+      "errors": [
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=nissan diesel (ud)",
+          "error": "URL can't contain control characters. '/stat/?marka_name=nissan diesel (ud)' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=land rover",
+          "error": "URL can't contain control characters. '/stat/?marka_name=land rover' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=alfa romeo",
+          "error": "URL can't contain control characters. '/stat/?marka_name=alfa romeo' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla fielder&year_from=2016&year_to=2016",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla fielder&year_from=2016&year_to=2016' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla fielder&kuzov=nke165g",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla fielder&kuzov=nke165g' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=daihatsu&model_name=mira e:s&year_from=2025&year_to=2025",
+          "error": "URL can't contain control characters. '/stat/?marka_name=daihatsu&model_name=mira e:s&year_from=2025&year_to=2025' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=daihatsu&model_name=mira e:s&kuzov=la350s",
+          "error": "URL can't contain control characters. '/stat/?marka_name=daihatsu&model_name=mira e:s&kuzov=la350s' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=mark x zio&year_from=2009&year_to=2009",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=mark x zio&year_from=2009&year_to=2009' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=mark x zio&kuzov=ana10",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=mark x zio&kuzov=ana10' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=audi&model_name=a7 sportback&year_from=2018&year_to=2018",
+          "error": "URL can't contain control characters. '/stat/?marka_name=audi&model_name=a7 sportback&year_from=2018&year_to=2018' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=audi&model_name=a7 sportback&kuzov=f2dlzs",
+          "error": "URL can't contain control characters. '/stat/?marka_name=audi&model_name=a7 sportback&kuzov=f2dlzs' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=suzuki&model_name=alto turbo rs&year_from=2015&year_to=2015",
+          "error": "URL can't contain control characters. '/stat/?marka_name=suzuki&model_name=alto turbo rs&year_from=2015&year_to=2015' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=suzuki&model_name=alto turbo rs&kuzov=ha36s",
+          "error": "URL can't contain control characters. '/stat/?marka_name=suzuki&model_name=alto turbo rs&kuzov=ha36s' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=mitsubishi&model_name=ek space custom&year_from=2016&year_to=2016",
+          "error": "URL can't contain control characters. '/stat/?marka_name=mitsubishi&model_name=ek space custom&year_from=2016&year_to=2016' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=mitsubishi&model_name=ek space custom&kuzov=b11a",
+          "error": "URL can't contain control characters. '/stat/?marka_name=mitsubishi&model_name=ek space custom&kuzov=b11a' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=subaru&model_name=pleo plus",
+          "error": "URL can't contain control characters. '/stat/?marka_name=subaru&model_name=pleo plus' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=subaru&model_name=pleo plus&year_from=2020&year_to=2020",
+          "error": "URL can't contain control characters. '/stat/?marka_name=subaru&model_name=pleo plus&year_from=2020&year_to=2020' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=subaru&model_name=pleo plus&kuzov=la350f",
+          "error": "URL can't contain control characters. '/stat/?marka_name=subaru&model_name=pleo plus&kuzov=la350f' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla rumion&year_from=2010&year_to=2010",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla rumion&year_from=2010&year_to=2010' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla rumion&kuzov=zre152n",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla rumion&kuzov=zre152n' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=townace truck&year_from=2014&year_to=2014",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=townace truck&year_from=2014&year_to=2014' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=townace truck&kuzov=s412u",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=townace truck&kuzov=s412u' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=pixis epoch&year_from=2022&year_to=2022",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=pixis epoch&year_from=2022&year_to=2022' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=pixis epoch&kuzov=la350a",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=pixis epoch&kuzov=la350a' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=alphard g",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=alphard g' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=alphard hybrid",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=alphard hybrid' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=alphard v",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=alphard v' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=altezza gita",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=altezza gita' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=camry gracia",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=camry gracia' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=camry gracia sedan",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=camry gracia sedan' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=camry gracia station wagon",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=camry gracia station wagon' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=camry solara",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=camry solara' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=carina ed",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=carina ed' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=carina van",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=carina van' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla axio",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla axio' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla cross",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla cross' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla fielder",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla fielder' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla hatchback",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla hatchback' (found at least ' ')"
+        },
+        {
+          "url": "https://jptrade.ru/stat/?marka_name=toyota&model_name=corolla ii",
+          "error": "URL can't contain control characters. '/stat/?marka_name=toyota&model_name=corolla ii' (found at least ' ')"
+        }
+      ],
+      "stopReason": "consecutive_transport_errors",
+      "pending": 10923,
+      "finishedAt": "2026-09-16T09:36:25.316725+00:00"
+    }
+  ],
+  "discoveryOnly": {
+    "cyprus": "HTTP 403",
+    "jpcarshub": "exact JPY hammer price not established; not promoted"
+  }
+}
