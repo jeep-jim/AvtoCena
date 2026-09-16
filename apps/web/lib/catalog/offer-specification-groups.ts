@@ -4,6 +4,7 @@ import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { classifySpecificationEvidence } from "./specification-evidence-audit";
 import { auctionGradeLabel, assessJapanExportRestriction, japanRestrictionDescription } from "./japan-export-restriction";
 import { catalogBodyName } from "./presentation";
+import { catalogPowerSanity } from "./power-sanity";
 
 export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
   const groups: SourceSpecificationSnapshot["groups"] = [];
@@ -41,7 +42,10 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
   if (snapshot?.sourceId === offer.sourceId && snapshot.sourceOfferId === offer.sourceOfferId) {
     // Match the existing public DTO privacy boundary while retaining model/chassis codes.
     const privateIdentifier = /\bvin\b|vehicle identification|(?:frame|chassis)\s*(?:number|no\b)|номер\s*(?:кузова|рамы|шасси)|车架号/i;
-    groups.push(...snapshot.groups.map(group => ({ ...group, items: group.items.filter(item => !privateIdentifier.test(item.name)) })).filter(group => group.items.length));
+    const rejectedPower = catalogPowerSanity(offer).suspicious || (offer.operational as any)?.powerSanity?.rejected;
+    const powerField = /hrspow|horsepower|\b(?:power|hp|bhp|ps|kw)\b|мощност|л\.\s*с\.|кВт|출력|마력|功率|马力/i;
+    groups.push(...snapshot.groups.map(group => ({ ...group, items: group.items.filter(item => !privateIdentifier.test(item.name)
+      && !(rejectedPower && powerField.test(item.name))) })).filter(group => group.items.length));
   }
   return displaySpecificationGroups(groups);
 }
