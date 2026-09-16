@@ -62,10 +62,12 @@ export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
+  const [cookieBannerOpen, setCookieBannerOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
   const closeCookieNotice = useCallback(() => {
     setCookieOpen(false);
+    setCookieBannerOpen(false);
     try { window.localStorage.setItem(COOKIE_NOTICE_STORAGE_KEY, "1"); } catch { /* storage can be unavailable */ }
   }, []);
 
@@ -73,7 +75,10 @@ export function PublicLegalFooter() {
     if (!publicPath) return;
     try {
       if (!window.localStorage.getItem(COOKIE_NOTICE_STORAGE_KEY)) {
-        const frame = window.requestAnimationFrame(() => setCookieOpen(true));
+        const frame = window.requestAnimationFrame(() => {
+          if (window.matchMedia("(max-width: 767px)").matches) setCookieBannerOpen(true);
+          else setCookieOpen(true);
+        });
         return () => window.cancelAnimationFrame(frame);
       }
     } catch { /* footer remains usable */ }
@@ -143,6 +148,66 @@ export function PublicLegalFooter() {
           </nav>
         </div>
       </footer>
+
+      {cookieBannerOpen && !cookieOpen ? (
+        <aside className="ac-cookie-banner" aria-label="Уведомление о cookie">
+          <p>Используем cookie для работы сайта и сохранения ваших настроек.</p>
+          <div className="ac-cookie-banner-actions">
+            <button type="button" className="ac-cookie-banner-details" onClick={() => setCookieOpen(true)}>Подробнее</button>
+            <button type="button" className="ac-cookie-banner-close" onClick={closeCookieNotice}>Закрыть</button>
+          </div>
+        </aside>
+      ) : null}
+      <style>{`
+        .ac-cookie-banner {
+          position: fixed;
+          z-index: 10090;
+          left: max(12px, env(safe-area-inset-left));
+          right: max(12px, env(safe-area-inset-right));
+          bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+          max-width: 520px;
+          margin-inline: auto;
+          padding: 14px 16px 10px;
+          border-radius: 18px;
+          background: #174b83 !important;
+          color: #ffffff !important;
+          box-shadow: 0 8px 28px rgba(10, 30, 60, .24);
+        }
+        .ac-cookie-banner p {
+          margin: 0;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          font-size: 13px;
+          line-height: 1.5;
+          font-weight: 500;
+        }
+        .ac-cookie-banner-actions { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+        .ac-cookie-banner button {
+          min-height: 44px;
+          padding: 8px 14px;
+          border: 0;
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        .ac-cookie-banner-details {
+          margin-left: -8px;
+          padding-inline: 8px !important;
+          background: transparent !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+        .ac-cookie-banner-close {
+          margin-left: auto;
+          background: #ffffff !important;
+          color: #174b83 !important;
+          -webkit-text-fill-color: #174b83 !important;
+        }
+        .ac-cookie-banner button:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+      `}</style>
 
       {cookieOpen ? (
         <div className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="avtocena-cookie-title" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCookieNotice(); }}>
