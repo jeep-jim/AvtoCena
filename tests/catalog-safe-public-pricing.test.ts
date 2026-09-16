@@ -77,3 +77,12 @@ test('business replay itself cannot revive an unsafe saved customs total',()=>{
  const clean=repriceOfferWithBusinessConfig(fixture(),{});
  assert.equal(clean.totalRub,null);assert.equal(isSellerPricedOffer(clean),true);
 });
+test('old attested compact quotes retain the full audit rejection even after raw evidence was dropped',()=>{
+ const row=fixture();Object.assign(row,{id:'b923ba40a0055a4bb5665398',market:'uae',updatedAt:'2026-09-01T00:00:00Z',cardProjectionVersion:3,
+  powerHp:103,powerKw:75.75,icePowerKw:75.75,utilizationPowerKw:75.75,powerDataSource:'manufacturer_official'});
+ delete row.operational;
+ const clean=safePublicPricing(row);assert.equal(clean.totalRub,null);assert.equal(clean.engineCc,undefined);
+ assert.equal(clean.fuel,undefined);assert.equal(isSellerPricedOffer(clean),true);
+ const refreshed={...row,updatedAt:'2026-09-17T00:00:00Z'};
+ assert.equal(safePublicPricing(refreshed),refreshed);
+});
