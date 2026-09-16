@@ -17,6 +17,10 @@ jobs:
           python - <<'PY'
           import urllib.request,json,pathlib,concurrent.futures
           urls={
+            'jptrade-js':'https://jptrade.ru/netcat_template/template/jptrade/js/scripts.js?v=26.03.26',
+            'jptrade-new-js':'https://jptrade.ru/netcat_template/template/jptrade/js/scripts_new.js?v=16.09.26',
+            'tokai-js':'https://tokai-auto.ru/netcat_template/template/10/js/scripts_custom1.js',
+            'tokai-dev-js':'https://tokai-auto.ru/netcat_template/template/10/js/dev.js?111',
             'jptrade':'https://jptrade.ru/stat/',
             'jptrade-detail':'https://jptrade.ru/stat/30124028',
             'tokai':'https://tokai-auto.ru/statistika/',
