@@ -5,6 +5,7 @@ import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from '../ap
 import { catalogPowerSanity } from '../apps/web/lib/catalog/power-sanity.ts';
 import { combustionPowerMismatch } from '../apps/web/lib/catalog/combustion-power-consistency.ts';
 import { isSellerPricedOffer } from '../apps/web/lib/catalog/seller-price-contract.ts';
+import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing.ts';
 import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceUrl } from '../apps/web/lib/catalog/required-catalog-sources.ts';
 
 const storage = getJsonStorage();
@@ -24,7 +25,7 @@ const report = {checkedAt: new Date().toISOString(), generationId: manifest.gene
 const inc = (obj, key) => { obj[key] = (obj[key] || 0) + 1; };
 const samples = new Map();
 for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
-  const stats = {rows:0, uniqueIds:0, uniqueSourceIds:0, sources:{}, issues:{}, evidence:{}, powerProvenance:{}, chunks:0};
+  const stats = {rows:0, uniqueIds:0, uniqueSourceIds:0, sources:{}, issues:{}, evidence:{}, powerProvenance:{}, chunks:0, safety:{changed:0, sellerPriceAvailable:0, deliveredQuotesRemoved:0}};
   const seen = new Set(), sourceIds = new Set();
   report.markets[market] = stats;
   for (const chunk of manifest.markets?.[market]?.chunks || []) {
@@ -35,6 +36,12 @@ for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
     stats.chunks++;
     for (const row of rows) {
       stats.rows++;
+      const safe = safePublicPricing(row);
+      if (safe !== row) {
+        stats.safety.changed++;
+        if (isSellerPricedOffer(safe)) stats.safety.sellerPriceAvailable++;
+        if (row.totalRub > 0 && !(safe.totalRub > 0)) stats.safety.deliveredQuotesRemoved++;
+      }
       const reasons=[];
       if (seen.has(row.id)) reasons.push('duplicate_id');
       seen.add(row.id);
@@ -86,7 +93,7 @@ for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
   await fs.writeFile(`${out}/summary.json`,JSON.stringify(report,null,2));
 }
 // Sampling is diagnostic; an inaccessible source is never classified as sold.
-for(const pool of samples.values())for(const row of pool){
+for(const pool of (process.env.AUDIT_SKIP_SOURCE_SAMPLES === '1' ? [] : samples.values()))for(const row of pool){
   const result={id:row.id,market:row.market,sourceId:row.sourceId,sourceOfferId:row.sourceOfferId,sourceUrl:row.sourceUrl};
   try{
     if(!isAllowedCatalogSourceUrl(row.market,row.sourceId,row.sourceUrl))throw Error('missing_or_unapproved_source_url');
