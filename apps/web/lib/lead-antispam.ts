@@ -41,7 +41,7 @@ export async function guardLead(request: Request, body: Record<string, unknown>,
   const visitor = leadVisitor(request).id;
   const identities = [`visitor:${visitor}`, ...contacts.filter(Boolean).map(c => `contact:${c.toLowerCase()}`)];
   const {captchaToken, ...payload} = body;
-  const fingerprint = hash(JSON.stringify(payload) + (body.operationId ? "" : crypto.randomUUID()));
+  const fingerprint = hash(JSON.stringify([offers, payload]) + (body.operationId ? "" : crypto.randomUUID()));
   let verified = false;
   try {
     for (const identity of [...new Set(identities)]) {

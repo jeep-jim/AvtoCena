@@ -34,6 +34,8 @@ test('persisted reservations serialize parallel requests; retries, contact ident
     assert.equal(results.filter(r=>r===null).length,2);
     assert.equal(results.filter(r=>r?.status===429).length,1);
     assert.equal(await submit('one'),null);
+    assert.equal(await guardLead(request,body('one'),['b'],['+79999999999']),null);
+    assert.equal((await guardLead(request,body('different-context'),['c'],['+79999999999']))?.status,429);
     assert.equal((await submit('one',{comment:'changed'}))?.status,429);
     const blocked=await guardLead(new Request('https://avtocena.com/api/leads'),body('new-browser'),['a'],['+79999999999']);
     assert.equal(blocked?.status,429);
