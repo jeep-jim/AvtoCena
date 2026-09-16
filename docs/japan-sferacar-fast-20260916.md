@@ -9,3 +9,6 @@ Potential pagination cap: need examine result and actual filter partitions befor
 ProAuctions additional run https://github.com/jeep-jim/AvtoCena/actions/runs/35107336571 starts page201 with2workers; original35105995247 continues frompage1. Dedupe overlapping sourceIDs when merging. Both stop and checkpoint on errors including429; no proxy or access-control bypass.
 scripts/japan-proauctions-sweep.py now supports START_PAGE and2worker batches. Original run uses its original commit (single-worker).
 No production changes.
+
+## Verified follow-up
+Initial fast ProAuctions run35107336571 had an overescaped detail-link regex and collected0. Fixed using BeautifulSoup DOM links. Corrected run35107480445 stopped on first listing with HTTP403 and saved checkpoint; do not call it active or successful collection. Public probe page201 separately had64 link occurrences, showing pagination content exists but access differs between requests. No evasion/retry escalation performed. Original ProAuctions run and Sferacar collection remain separate.
