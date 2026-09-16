@@ -15,7 +15,7 @@ const listing = (overrides: Partial<VehicleOffer> = {}) => ({
 
 test("owner cadence and retention apply to every market without a global Japan override", () => {
   for (const market of ["korea", "europe", "china", "uae", "georgia"]) {
-    assert.deepEqual(catalogMarketLifecycle(market), { retentionDays: 14, refreshIntervalDays: 7, cleanupIntervalDays: 7 });
+    assert.deepEqual(catalogMarketLifecycle(market), { retentionDays: 14, refreshIntervalDays: 3, cleanupIntervalDays: 7 });
     assert.equal(catalogMarketRetentionMs(market), 14 * DAY);
   }
   assert.deepEqual(catalogMarketLifecycle("japan"), { retentionDays: 30, refreshIntervalDays: 14, cleanupIntervalDays: 30 });

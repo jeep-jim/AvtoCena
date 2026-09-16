@@ -1,3 +1,4 @@
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
 import { readDataJson } from "@/lib/data";
 import { convertToRub } from "@/lib/catalog/rates";
@@ -261,5 +262,6 @@ export async function GET(request: Request) {
   const extras: Record<string, unknown> = {};
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
-  return NextResponse.json({ ok: true, ...result, ...extras }, { headers: { "Cache-Control": "no-store, max-age=0" } });
+  const items = await applyActiveBusinessPricingBatch(result.items);
+  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }

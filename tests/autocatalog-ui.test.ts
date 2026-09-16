@@ -77,10 +77,10 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
   assert.doesNotMatch(modelLayout, /readVehicleKnowledgeVariants|Описание и характеристики|Мощность|Тип топлива|Привод/);
 });
 
-test("removed offers redirect to the live catalog instead of stranding search visitors on 404", () => {
+test("removed offers explain availability and offer catalog navigation", () => {
   const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
-  assert.match(offerPage, /if \(!storedOffer\) redirect\("\/cars"\)/);
-  assert.match(offerPage, /if \(!visibleRub && !selectionRequired && !sellerPricing\) redirect\("\/cars"\)/);
+  assert.match(offerPage, /if \(!storedOffer\) return <UnavailableOffer/);
+  assert.match(offerPage, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
   assert.doesNotMatch(offerPage, /notFound\(\)/);
   assert.doesNotMatch(offerPage, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(offerPage, /function MissingOffer/);

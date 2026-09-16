@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { applyEncyclopediaDisplayIdentityBatch } from "@/lib/catalog/display-identity";
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { readHomeCatalogSnapshot, searchOffers } from "@/lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +30,7 @@ export async function GET() {
         rows.push(row as any);
       }
     }
-    const items = await applyEncyclopediaDisplayIdentityBatch(rows);
+    const items = await applyActiveBusinessPricingBatch(rows);
     return NextResponse.json({ ...result, items }, {
       headers: { "Cache-Control": "no-store, max-age=0" },
     });

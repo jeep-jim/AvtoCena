@@ -10,7 +10,7 @@ test("home page supplies a bounded server snapshot and recovers from storage err
   assert.match(page, /readHomeCatalogSnapshot\(6\)\.catch/);
   assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0 \}/);
   assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
-  assert.match(page, /initialOffers=\{catalog.items\}/);
+  assert.match(page, /initialOffers=\{pricedItems\}/);
   assert.match(page, /initialMarketCounts=\{catalog.marketCounts\}/);
   assert.match(page, /initialCount=\{catalog.total\}/);
 });

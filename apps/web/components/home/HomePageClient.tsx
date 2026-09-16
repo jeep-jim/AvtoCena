@@ -209,7 +209,11 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
 
   useEffect(() => {
     let cancelled = false;
+    let inFlight = false;
+    let lastLoadedAt = initialOffers.length ? Date.now() : 0;
     const loadCatalog = async () => {
+      if (inFlight || document.visibilityState === "hidden" || Date.now() - lastLoadedAt < 55_000) return;
+      inFlight = true;
       const stamp = Date.now();
       try {
         const [catalogPayload, makePayload] = await Promise.all([
@@ -241,7 +245,14 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
         setCatalogStatus("ready");
       } catch { if (!cancelled) setCatalogStatus((current) => current === "loading" ? "error" : current); }
+      finally { inFlight = false; lastLoadedAt = Date.now(); }
     };
+    if (initialOffers.length) {
+      void fetch('/api/catalog/models?scope=makes&limit=500', { cache: 'no-store' })
+        .then(response => response.ok ? response.json() : null)
+        .then(payload => { if (!cancelled && Array.isArray(payload?.items)) setKnowledgeMakes(payload.items.map((item: any) => String(item.value || item.label || '')).filter(Boolean)); })
+        .catch(() => {});
+    }
     loadCatalog(); const interval = window.setInterval(loadCatalog, 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
     return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };

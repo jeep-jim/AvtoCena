@@ -1,3 +1,4 @@
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { customerPriceBreakdown } from "@/lib/catalog/customer-price-breakdown";
 import { recyclingPowerInfo, type RecyclingPowerInfo } from "@/lib/catalog/recycling-power";
 import { RecyclingFeeHelp } from "@/components/catalog/RecyclingPower";
@@ -16,7 +17,8 @@ import { hasModificationSelection, withoutDeliveredPrice } from "@/lib/catalog/m
 import { calculateSelectedModification, conditionalModificationRub } from "@/lib/catalog/modification-recovery";
 import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { UnavailableOffer } from "@/components/catalog/UnavailableOffer";
+import { unavailableOfferRecord } from "@/lib/catalog/offer-availability";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 
@@ -41,7 +43,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getUnavailableOffer, getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -148,8 +150,8 @@ async function SimilarOffers({ current }: { current: any }) {
       searchOffers({ market: current.market, make: current.make, model: familyModel, pageSize: 48, sort: "updatedAt" }),
       searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
     ]);
-    const modelRows = modelResult.items.filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
-    const marketRows = marketResult.items.filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
+    const modelRows = (await applyActiveBusinessPricingBatch(modelResult.items)).filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
+    const marketRows = (await applyActiveBusinessPricingBatch(marketResult.items)).filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
     marketTotal = Math.max(0, Number(marketResult.total || 0));
     sameModel = modelRows.slice(0, 4);
     const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
@@ -275,7 +277,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
-  if (!storedOffer) redirect("/cars");
+  if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
   const offer = enrichOfferWithSourceTableParameters(storedOffer);
 
   const sellerPricing = isSellerPricedOffer(offer);
@@ -319,7 +321,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // one last chance to finish an older stored row. If that still cannot produce
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
-  if (!visibleRub && !selectionRequired && !sellerPricing) redirect("/cars");
+  if (!visibleRub && !selectionRequired && !sellerPricing) return <UnavailableOffer offer={unavailableOfferRecord(offer)} calculationUnavailable />;
   const specificationGroups = await translatedSpecificationGroups(offerSpecificationGroups(offer, { bodyLabel: presented.bodyLabel }));
   const o = {
     ...presented,

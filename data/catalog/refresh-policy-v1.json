@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-07",
-  "nonJapan": { "retentionDays": 14, "refreshIntervalDays": 7, "cleanupIntervalDays": 7 },
+  "updatedAt": "2026-09-16",
+  "nonJapan": { "retentionDays": 14, "refreshIntervalDays": 3, "cleanupIntervalDays": 7 },
   "japan": { "retentionDays": 30, "refreshIntervalDays": 14, "cleanupIntervalDays": 30 },
   "activeListingExpiryBasis": "last_confirmed_source_observation",
   "japanArchiveExpiryBasis": "auction_or_source_event_date",

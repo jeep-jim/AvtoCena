@@ -108,7 +108,8 @@ function formatDelta(value: number) {
 }
 
 function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {
-  if (!liveRate) return offer;
+  // Never relabel a saved quote with a rate that did not calculate its total.
+  if (offer.calculationSnapshot?.currencyRate?.effectiveRate || !liveRate) return offer;
   const stored = offer.calculationSnapshot?.currencyRate || {};
   const liveEffective = Number(liveRate.effectiveRate || 0);
   const storedEffective = Number(stored.effectiveRate || 0);
@@ -332,7 +333,7 @@ function DetailRow({ label, value, muted, valueClassName = "" }: { label: string
   return <div className="flex min-w-0 items-end gap-2"><span className={`shrink-0 ${muted}`}>{label}</span><span className="mb-[3px] min-w-3 flex-1 border-b border-dotted border-current opacity-35" aria-hidden="true" /><span className={`shrink-0 whitespace-nowrap ${valueClassName}`}>{value}</span></div>;
 }
 
-function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact = false, statusLabel = "Пересчитали по актуальному курсу" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; light?: boolean; compact?: boolean; statusLabel?: string }) {
+function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact = false, statusLabel = "Изменение курса в сохранённом расчёте" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; light?: boolean; compact?: boolean; statusLabel?: string }) {
   const currency = String(rate.currency || "").toUpperCase();
   const history = normalizedHistory(rate);
   const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
@@ -480,7 +481,7 @@ function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyI
   const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
   const panelClass = light ? "border-[#dfe3ea] bg-[#f8f9fb] text-[#151922] shadow-[0_20px_65px_rgba(34,40,52,.22)]" : "border-white/10 bg-[#11141c] text-white shadow-[0_20px_65px_rgba(0,0,0,.55)]";
   const tailClass = panel ? `absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-l border-t ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}` : `absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}`;
-  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} compact light={light} statusLabel={currencyDriven ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает изменение полного сохранённого расчёта. Влияние курса указано отдельно.</div>}<span className={tailClass} /></div>;
+  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} compact light={light} statusLabel={currencyDriven ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает изменение полного сохранённого расчёта. Влияние курса указано отдельно.</div>}<span className={tailClass} /></div>;
 }
 
 export function AuctionResultPrice({ offer, label = "Завершённый аукцион", priceClassName = "text-[22px]", className = "", panel = false, dense = false }: {
@@ -505,11 +506,11 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const panelRoot = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!currency || currency === "RUB") return;
+    if (!currency || currency === "RUB" || offer.calculationSnapshot?.currencyRate?.effectiveRate) return;
     let active = true;
     void loadLiveRates().then((rates) => { if (active) setLiveRate(rates[currency] || null); });
     return () => { active = false; };
-  }, [currency]);
+  }, [currency, offer.calculationSnapshot?.currencyRate?.effectiveRate]);
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
     const sync = () => { setDesktopHover(media.matches); if (!media.matches) setPopoverOpen(false); };
@@ -607,6 +608,6 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         }}
       ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
-    {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} statusLabel={trendUsesCurrency ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} /> : null}
+    {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} statusLabel={trendUsesCurrency ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} /> : null}
   </div>;
 }

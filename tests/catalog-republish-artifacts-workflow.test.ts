@@ -5,6 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
+function stageScheduleHelper(directory: string) {
+ fs.mkdirSync(path.join(directory, 'scripts/lib'), {recursive:true});
+ fs.copyFileSync('scripts/lib/catalog-refresh-schedule.mjs', path.join(directory, 'scripts/lib/catalog-refresh-schedule.mjs'));
+}
+
 const workflow = fs.readFileSync(".github/workflows/catalog-republish-market-artifacts.yml", "utf8");
 
 test('full rebuild collects one market at a time without reducing source capacity or cancelling active runs', () => {
@@ -25,7 +30,8 @@ test('scheduled default plan starts with China and preserves all five markets', 
  const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'catalog-sequential-plan-'));
  try {
-  const output = path.join(directory, 'output');
+  stageScheduleHelper(directory);
+ const output = path.join(directory, 'output');
   const result = spawnSync(process.execPath, ['--input-type=module', '-e', script], {
    cwd: directory, env: {...process.env, EVENT_NAME: 'schedule', GITHUB_OUTPUT: output}, encoding: 'utf8',
   });
@@ -50,6 +56,7 @@ test('a targeted UAE repair collects and publishes only UAE and rejects Japan', 
   const script = source.match(/node --input-type=module <<'JS'\n([\s\S]*?)\n\s+JS/)![1];
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'catalog-plan-test-'));
   try {
+    stageScheduleHelper(directory);
     const markers = path.join(directory, '.github/market-runs');
     fs.mkdirSync(markers, { recursive: true });
     const marker = path.join(markers, 'five-market-full-rebuild.json');
@@ -80,4 +87,17 @@ test("collected market artifacts can be republished without another source crawl
   assert.match(workflow, /timeout-minutes: 120/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_TTL_MS: "1800000"/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"/);
+});
+
+test('each publication has a separate budget while downloads and writes remain market-scoped and sequential',()=>{
+ const source=fs.readFileSync('.github/workflows/catalog-five-market-full-rebuild.yml','utf8');
+ const publish=source.slice(source.indexOf('\n  publish:'));
+ assert.match(publish,/timeout-minutes: 360/);
+ assert.match(publish,/max-parallel: 1/);
+ assert.match(publish,/fail-fast: false/);
+ assert.match(publish,/pattern: catalog-intake-\$\{\{ matrix.market \}\}/);
+ assert.match(publish,/contains\(fromJSON\(needs.plan.outputs.collect_markets\), matrix.market\)/);
+ assert.match(publish,/catalog-storage-maintenance/);
+ assert.match(publish,/catalog-storage-preflight/);
+ assert.match(publish,/catalog-audit-visible-calculation-coverage/);
 });

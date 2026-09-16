@@ -46,7 +46,8 @@ test("owner-approved recurring schedule stays five-market only and keeps Japan m
   const cleanup = text("catalog-storage-cleanup.yml");
   const japan = text("catalog-japan-drom-refresh.yml");
 
-  assert.match(rebuild, /^\s{4}- cron: "0 18 \* \* 0"$/m);
+  assert.match(rebuild, /^\s{4}- cron: "0 18 \* \* \*"$/m);
+  assert.match(rebuild, /catalogRefreshDue\(\)/);
   assert.equal((rebuild.match(/^\s{4}- cron:/gm) || []).length, 1);
   assert.match(rebuild, /const allowed = \['china','korea','uae','georgia','europe'\]/);
   assert.doesNotMatch(rebuild, /const allowed = \[[^\n]*japan/);
