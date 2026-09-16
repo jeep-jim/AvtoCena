@@ -1,0 +1,55 @@
+[
+  {
+    "source": "jptrade",
+    "url": "https://jptrade.ru/stat/",
+    "status": 200,
+    "bytes": 181356
+  },
+  {
+    "source": "jptrade-detail",
+    "url": "https://jptrade.ru/stat/30124028",
+    "status": 200,
+    "bytes": 156070
+  },
+  {
+    "source": "tokai",
+    "url": "https://tokai-auto.ru/statistika/",
+    "status": 200,
+    "bytes": 278116
+  },
+  {
+    "source": "tokai-detail",
+    "url": "https://tokai-auto.ru/toyota/copen/?auc_id=1882655979",
+    "status": 200,
+    "bytes": 105787
+  },
+  {
+    "source": "prestige",
+    "url": "https://prestigemotorsport.com.au/auctions/",
+    "status": 200,
+    "bytes": 295368
+  },
+  {
+    "source": "jpauc",
+    "url": "https://jpauc.com/auction/past",
+    "status": 200,
+    "bytes": 11480
+  },
+  {
+    "source": "carvector",
+    "url": "https://carvector.com/stat/",
+    "status": 200,
+    "bytes": 568271
+  },
+  {
+    "source": "jpcarshub",
+    "url": "https://jpcarshub.co.nz/history-cars",
+    "status": 200,
+    "bytes": 16908
+  },
+  {
+    "source": "cyprus",
+    "url": "https://buycarincyprus.com.cy/stats/cars/toyota/aqua/",
+    "error": "HTTP Error 403: Forbidden"
+  }
+]
