@@ -1,0 +1,40 @@
+name: Japan ProAuctions public collection
+on:
+  push:
+    branches: [ops/japan-free-sweep-20260916]
+    paths: [.github/workflows/japan-proauctions-sweep.yml]
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install beautifulsoup4
+      - name: Verify parser against saved public detail
+        run: |
+          python - <<'PY'
+          import importlib.util,pathlib
+          spec=importlib.util.spec_from_file_location('collector','scripts/japan-proauctions-sweep.py')
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          body=pathlib.Path('data/japan-free-discovery/additional/proauctions-detail.html').read_text()
+          row=m.parse(body,'https://demo.pro-auctions.ru/statistika/suzuki/swift/30164101.html')
+          assert row['priceJpy']==199000,row
+          assert row['year']==2012,row
+          assert row['auctionDate']=='2026-09-15',row
+          assert row['engineCc']==1600 and row['powerHp']==136,row
+          assert len(row['imageUrls'])==2 and len(row['auctionSheetUrls'])==1,row
+          assert row['publicationReady'] is False
+          print(row)
+          PY
+      - name: Collect statistics with saved checkpoints
+        env:
+          SWEEP_SECONDS: '10800'
+        run: python scripts/japan-proauctions-sweep.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-proauctions-results
+          path: japan-proauctions-results
+          retention-days: 14
