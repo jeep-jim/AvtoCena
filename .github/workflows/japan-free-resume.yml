@@ -1,0 +1,30 @@
+name: Japan checkpoint continuation
+on:
+  push:
+    branches: [ops/japan-free-sweep-20260916]
+    paths: [.github/workflows/japan-free-resume.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 35079001913
+          name: japan-free-jptrade
+          path: japan-free-results
+      - name: Resume saved queue
+        env:
+          SWEEP_SECONDS: '10800'
+        run: python scripts/japan-free-html-sweep.py jptrade
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-free-jptrade-resumed
+          path: japan-free-results
+          retention-days: 14
