@@ -1,6 +1,7 @@
 import { catalogPowerSanity } from './power-sanity';
 import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from './specification-evidence-audit';
 import { combustionPowerMismatch } from './combustion-power-consistency';
+import { auditedQuoteRejections } from './audited-quote-quarantine';
 
 /** Reuse only a bound, dated CBR conversion; never substitute a delivered quote. */
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
@@ -9,6 +10,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   // projection, and do not mistake absent projection metadata for a conflict.
   const rejected = new Set(!input.cardProjectionVersion && input.operational ? SPECIFICATION_AUDIT_FIELDS.filter(field =>
     ['ambiguous', 'conflict'].includes(classifySpecificationEvidence(input, field).state)) : []);
+  for (const field of auditedQuoteRejections(input)) rejected.add(field);
   const powerRejected = sanity.suspicious || rejected.has('powerHp') || rejected.has('certifiedPower') || combustionPowerMismatch(input);
   if (!powerRejected && !rejected.size) return input;
   const rate = input.calculationSnapshot?.currencyRate;
