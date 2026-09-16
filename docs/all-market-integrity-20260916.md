@@ -18,6 +18,7 @@ Counts overlap and are not counts of distinct broken cars. A missing/ambiguous f
 - Reject KCar hrspow as exact technical evidence at ingestion, recovery and public reading. Never invent replacement hp.
 - Normalize away rejected hp and dependent kW/utilization fields; remove the detail tile's default 100 hp.
 - Public read safety converts conflicting/unclassified technical records to seller pricing using only the record's own bound CBR conversion. It removes delivered totals, compact price attestations and customs replay inputs. With no valid bound conversion it cannot invent a RUB quote.
+- The 914 rejected priced IDs also carry a dated audit quarantine for old compact projections which omit raw semantic evidence. A newer record refresh supersedes this snapshot; current full-record validation remains active.
 - Preserve the historical conversion date for selection, then refresh seller currency in the normal display pricing path; seller quotes never become delivered prices.
 - Keep exact independent evidence intact. Suppress rejected power in raw source specification groups as well as primary tiles.
 - Preserve immutable records for audit. Existing production-write freeze remains in place.
