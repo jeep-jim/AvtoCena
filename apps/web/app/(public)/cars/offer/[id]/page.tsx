@@ -1,4 +1,4 @@
-import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
+import { applyActiveBusinessPricing, applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { customerPriceBreakdown } from "@/lib/catalog/customer-price-breakdown";
 import { recyclingPowerInfo, type RecyclingPowerInfo } from "@/lib/catalog/recycling-power";
 import { RecyclingFeeHelp } from "@/components/catalog/RecyclingPower";
@@ -278,7 +278,8 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
-  const offer = safePublicPricing(enrichOfferWithSourceTableParameters(storedOffer));
+  const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(storedOffer));
+  const offer = safeOffer.catalogPricingMode === 'seller' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);
