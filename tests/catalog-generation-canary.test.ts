@@ -137,6 +137,8 @@ test('persisted card audit rejects price drift, wrong CRM version and malformed 
 
 test('KCar refresh re-reads active state, price and exact specifications instead of its cached gallery', async () => {
   const originalFetch = globalThis.fetch;
+  const oldInventory = process.env.CATALOG_SOURCE_INVENTORY_MODE;
+  process.env.CATALOG_SOURCE_INVENTORY_MODE = '1';
   const oldAttempts = process.env.CATALOG_SOURCE_RETRY_ATTEMPTS;
   process.env.CATALOG_SOURCE_RETRY_ATTEMPTS = '1';
   const base = 'https://img.kcar.com/3dcarpicture/2026/07/081/61390500_1';
@@ -159,6 +161,7 @@ test('KCar refresh re-reads active state, price and exact specifications instead
     assert.equal(fresh.sourcePrice, 19_000_000);
     assert.equal(fresh.year, 2022);
     assert.equal(fresh.engineCc, 1598);
+    assert.equal(fresh.powerHp, undefined);
     assert.equal(fresh.firstSeenAt, old.firstSeenAt);
     assert.ok(fresh.images.length >= 5);
     detail.rvo.statCd = 'SOLD';
@@ -169,6 +172,8 @@ test('KCar refresh re-reads active state, price and exact specifications instead
     assert.equal(requests, 3);
   } finally {
     globalThis.fetch = originalFetch;
+    if (oldInventory === undefined) delete process.env.CATALOG_SOURCE_INVENTORY_MODE;
+    else process.env.CATALOG_SOURCE_INVENTORY_MODE = oldInventory;
     if (oldAttempts === undefined) delete process.env.CATALOG_SOURCE_RETRY_ATTEMPTS;
     else process.env.CATALOG_SOURCE_RETRY_ATTEMPTS = oldAttempts;
   }
