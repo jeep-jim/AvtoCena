@@ -1,0 +1,1208 @@
+$(function(){
+
+	/* --- 13.08.2026: защита от «вечного» индикатора загрузки ---------------------
+	   Индикатор (класс load у body) включается в 10 местах скрипта, а обработчиков
+	   ошибок здесь не было вовсе, поэтому любой сбой запроса оставлял его крутиться
+	   навсегда. Отдельный случай: .load() на ПУСТОЙ коллекции вообще не отправляет
+	   запрос и не вызывает колбэк — так зависал фильтр на мобильной главной.        */
+	$(document).ajaxError(function () {
+		$('body').removeClass('load');
+	});
+
+	var jptLoaderIdleTicks = 0;
+	setInterval(function () {
+		if ( !$('body').hasClass('load') || $.active > 0 ) {
+			jptLoaderIdleTicks = 0;   // индикатора нет либо запрос ещё идёт — не мешаем
+			return;
+		}
+		// индикатор висит, активных запросов нет — снять его уже некому
+		if ( ++jptLoaderIdleTicks >= 2 ) {
+			jptLoaderIdleTicks = 0;
+			$('body').removeClass('load');
+		}
+	}, 5000);
+
+
+
+	// Burger:
+	$("#burger").click(function(){
+		mainMenu = $(".header_main__menu");
+		mainMenu.slideDown();
+		$("body").addClass("overflow");
+		$(this).css('display', 'none');
+		$("#burger-close").css('display', 'block');
+		$("div.header_main div.header_main__wrap div.header_main__right.menu").css("display", "block");
+	})
+
+	$("#burger-close").click(function(){
+		mainMenu = $(".header_main__menu");
+		mainMenu.slideUp();
+		$("body").removeClass("overflow");
+		$("#burger").css('display', 'block');
+		$(this).css('display', 'none');
+		$("div.header_main div.header_main__wrap div.header_main__right.menu").css("display", "none");
+	})
+
+
+	// Hide arrows in main menu:
+	$(".header_main__menu").find('span.title').each(function(){
+		if ( $(this).next("ul").length ) {
+
+		} else {
+			$(this).find("span.arrow").hide();
+		}
+	})
+
+
+	// Slide down/up arrows in main menu:
+	$(".header_main__menu div.col span.title span.arrow").click(function(){
+		subMenu = $(this).closest("li").find("ul");
+		if ( subMenu.is(":hidden") ) {
+			subMenu.slideDown();
+			$(this).addClass("act");
+		} else {
+			subMenu.slideUp();
+			$(this).removeClass("act");
+		}
+	});
+
+	/*  костыль для калькулятора Китая:
+	if ( $('span.total_new_rub').length ) {
+		price = $('span.total_new_rub').html();
+		$('span.new_price_top').html(price);
+	}
+	*/
+
+
+	// Блок расчёт цены (моб, главная):
+	function filter_form_main() {
+		let marka_name = $('[name="marka_name"]').val();
+		let model_name = $('[name="model_name"]').val();
+		let year_from = $('[name="year_from"]').val();
+		let year_to = $('[name="year_to"]').val();
+		let param_str = '';
+		if (marka_name) param_str += '&marka_name=' + marka_name;
+		if (model_name) param_str += '&model_name=' + model_name;
+		if (year_from) param_str += '&year_from=' + year_from;
+		if (year_to) param_str += '&year_to=' + year_to;
+		if (param_str) param_str = param_str.replace('&', '?');
+		window.location.href = '/stat/' + param_str;
+	}
+
+	$('#filter-form-main').submit(function(e) {
+		e.preventDefault();
+		filter_form_main();
+		
+		return false;
+	});
+
+
+	$(document).on('click', '.bt_fb_fix .bt_title', function() {
+		$('.bt_fb_fix').toggleClass('opened');
+	});
+	$(document).on('click', '.close_fb_fix', function() {
+		$('.bt_fb_fix').removeClass('opened');
+	});
+
+	/*$('body').on('change', '.filter_marka', function() {
+		$('body').addClass('load');
+		let marka_name = $(this).val();
+		marka_name = marka_name.replace(/ /g, '%20');
+
+		$.get('/netcat/modules/default/', 'isNaked=1&action=get_model&marka_name=' + marka_name, function(data) {
+			$('.filter_model').html(data).removeAttr('disabled');
+			$('body').removeClass('load');
+		});
+
+	});*/
+
+
+	// Форма заявки:
+
+
+    
+    /*
+	$("button.form_btn_call").on("click", function(e){
+		form = $(this).closest("form.form_name");
+		text = $.trim($(this).text());
+		form.find("input[name='typesubmit']").val(text);
+		form.find('.forma_result').hide();
+	});
+
+	$("button.form_btn_wa").on("click", function(e){
+		form = $(this).closest("form.form_name");
+		text = $.trim($(this).find("span").text());
+		form.find("input[name='typesubmit']").val(text);
+		form.find('.forma_result').hide();
+	});
+    */
+    
+    
+    
+    // fix обычной формы для мобильных
+    if (screen.width < 991) {
+        if (!$('.feedback_form').hasClass('fixed_mobi')) {
+            $('body').on('click', '.feedback_form input, .feedback_form select, .feedback_form button', function(){
+                $('.feedback_form').addClass('fixed_mobi');
+            });
+        }
+    }
+    // закрыть - fix обычной формы для мобильных
+    $('body').on('click', '.fixed_mobi_close span', function(){
+        $('.feedback_form').removeClass('fixed_mobi');
+        console.log('qwerty');
+    });
+
+
+    
+    
+    // выбор предпочтительного типа связи
+    $('body').on('click', '.type_contact_but_wrap button', function(){
+        let type_contact = $(this).find('span').text();
+        $(this).closest("form.form_name").find('input[name="typesubmit"]').val(type_contact);
+    });
+    
+
+	setTimeout(function(){
+		$('.form_name [name="name"]').val('5');
+	}, 3000);
+
+
+	$(document).on('submit', '.feedback_form form', function(e) {
+		console.log('submit feedback_form');
+
+		feedback_form = $(this).closest('div.feedback_form');
+
+		feedback_form.find('.forma_result').hide();   
+		
+		var name = feedback_form.find("input[name='name'").val();
+		var phone = feedback_form.find("input[name='phone'").val();
+		var url = feedback_form.find("input[name='url'").val();            
+		var type = feedback_form.find("input[name='type'").val();   
+		var typesubmit = feedback_form.find("input[name='typesubmit'").val();  
+		var auto_info = feedback_form.find('div.auto_info_str').text();
+
+		var user_name = feedback_form.find("[name='user_name'").val();
+		var user_comm = feedback_form.find("[name='user_comm'").val();
+		var user_price = feedback_form.find("[name='user_price'").val();
+        
+        
+        // whatsapp и telegram из настроек сайта
+        let whatsapp = feedback_form.find('.forma_result').data('whatsapp');
+        let whatsapp_clear = whatsapp.replace(/\D/g,'');
+        
+        let telegram = feedback_form.find('.forma_result').data('telegram');
+        
+        let phone_main = feedback_form.find('.forma_result').data('phone-main');
+        let phone_main_clear = phone_main.replace(/\D/g,'');
+        
+        // текст при успешной отправке
+        let forma_result_text = 'Если вы не получите ответ в течение дня, пожалуйста, позвоните <a href="tel:'+phone_main_clear+'" target="_blank">'+phone_main+'</a> <br>Либо напишите в WhatsApp <a href="https://wa.me/'+whatsapp_clear+'" target="_blank">+'+whatsapp+'</a> или Telеgram <a href="https://t.me/'+telegram+'" target="_blank">https://t.me/'+telegram+'</a> <br>Будем рады сотрудничать с Вами!';
+
+
+		if (name == '5') {
+            
+			//grecaptcha.ready(function () {
+				//grecaptcha.execute("6LdJCBInAAAAAPR2m8G1eHUzuE3r852CTIz8peuk", {action: 'request'}).then(function (token) {
+                    
+					$.ajax({ 
+						type: 'POST',
+						url: '/order.php',
+						data: {
+							'phone': phone, 
+							'name': name, 
+							'type': type, 
+							'url': url,
+							'token': '',
+							'typesubmit': typesubmit,
+							'auto_info': auto_info,
+							'user_name': user_name,
+							'user_comm': user_comm,
+							'user_price': user_price
+						},
+						dataType: 'json',
+						success: function(data){
+							if(data.result == 'success'){
+                                feedback_form.addClass('success');
+								feedback_form.find('.forma_caption').html('Запрос отправлен!');
+								feedback_form.find('.zapros_form_title').html('');
+								feedback_form.find('.forma_result').html(forma_result_text); 
+								feedback_form.find('.forma_result').css("display", "block");
+								feedback_form.find('.conf_str').hide();
+								feedback_form.find('span.error').hide();
+								feedback_form.find('form.form_name').hide();
+                                feedback_form.find('.agree_box').hide();
+                                
+								
+								ym(7497955,'reachGoal','ordernew'); 
+								ym(94631909,'reachGoal','order_new'); 
+								
+							} else {                     
+								for (var errorField in data.text_error) {
+									feedback_form.find('.'+errorField+' span').html(data.text_error[errorField]);
+									// показываем текст ошибок
+									feedback_form.find('.'+errorField+' span').slideDown('slow');
+									// обводим инпуты красным цветом
+									feedback_form.find('.'+errorField+' input').addClass('error_input'); 
+									feedback_form.find('.forma_result').html('Ошибка заполнения');  
+								}                                              
+							}
+						}
+					}); 
+                    
+				//});
+			//});
+            
+		}
+
+		e.preventDefault();
+		return false;
+
+	});
+
+
+	setTimeout(function(){
+		
+		$('.zapros_js').fancybox();
+
+		$('.zapros_js').on('click', function(e){
+		   e.preventDefault();
+		   $('#form_name, .conf_str').show();
+		   $('#forma_result').hide();
+		   let marka = $(this).data('marka');
+		   let model = $(this).data('model');
+		   let year = $(this).data('year');
+		   let price = $(this).data('price-rub');
+		   let title = $(this).data('title');
+		   if(price) price = ' ~'+ price;
+		   let auto_info_str = marka+' '+model+' '+year+' '+price;
+		   $('.zapros_form .auto_info_str').html('<span>'+auto_info_str+'</span>'); // для старой формы
+           
+           $('.quiz_form_wrap.quiz_modal .auto_info_input').val(auto_info_str); // для квиз-формы
+           $('.quiz2_form_wrap.quiz_modal .auto_info_input').val(auto_info_str); // для новой квиз-формы
+
+		   
+		   if (title && title != 'undefined') {
+		   		$('h2.forma_caption').text(title);
+		   }
+
+		});
+
+		$('.raschet_zapros_js').fancybox();
+
+		$('.raschet_zapros_js').on('click', function(e){
+		   e.preventDefault();
+		   $('.calc_overlay').hide();
+		   $('#form_name, .conf_str').show();
+		   $('#forma_result').hide();
+		   $('body').removeClass('overflow');
+
+		});
+	 }, 1000);
+
+
+	setTimeout(function() {
+
+		//окно с расчётом
+		$(document).on('click', '.js_calc', function(e){
+
+			e.preventDefault();
+			
+			let sub = $(this).data('sub');
+			console.log('sub:' + sub);
+
+			let lot = $(this).data('lot');
+			let auction = $(this).data('auction');
+			let auction_date = $(this).data('auction_date');
+
+			let action = $(this).data('action');
+			let price = $(this).data('price');
+			let year = $(this).data('year');
+			let v = $(this).data('v');
+			let m = $(this).data('m');
+			let p = $(this).data('p');
+			let fiz = $(this).data('fiz');
+			let currency = $(this).data('currency');
+			let show_currency = $(this).data('show_currency');
+			let showbutton = $(this).data('showbutton');
+			
+			let price_rub = $(this).data('price-rub');
+			if(price_rub) price_rub = ' ~'+ price_rub;
+            
+            
+            // марка
+            let marka = $(this).data('marka');
+
+            // модель
+            let model = $(this).data('model');
+            
+
+			$('.calc_lot_car d').html(marka+' '+model+' '+year);
+			$('.auto_info_str').html('<span>'+marka+' '+model+' '+year+' '+price_rub+'</span>');
+			
+
+
+			if (sub==='japancars') {
+				
+				params = 'isNaked=1&action='+action+'&price='+price+'&year='+year+'&v='+v+'&m='+m+'&p='+p+'&fiz='+fiz+'&currency='+currency+'&show_currency='+show_currency+'&showbutton='+showbutton;
+
+			} else if (sub==='chinaused') {
+
+				params = 'isNaked=1&action='+action+'&price='+price+'&year='+year+'&v='+v+'&m='+m+'&p='+p+'&fiz='+fiz+'&currency='+currency+'&show_currency='+show_currency+'&showbutton='+showbutton+'&china=used';
+
+			} else if (sub==='motostat' || sub==='aucmoto') {
+
+				params = 'isNaked=1&action='+action+'&price='+price+'&year='+year+'&v='+v+'&m='+m+'&p='+p+'&fiz='+fiz+'&currency='+currency+'&show_currency='+show_currency+'&showbutton='+showbutton+'&moto_japan=1';
+
+			} else {
+
+				params = 'isNaked=1&action='+action+'&price='+price+'&year='+year+'&v='+v+'&m='+m+'&p='+p+'&fiz='+fiz+'&currency='+currency+'&show_currency='+show_currency+'&showbutton='+showbutton;
+
+			}
+            
+            
+            
+            if (marka) params += '&marka='+marka;
+			if (model) params += '&model='+model;
+			
+
+			// санкционность
+			let calc_is_sanction_lot = $(this).data('is_sanction_lot');
+			if(calc_is_sanction_lot) params += '&is_sanction_lot='+calc_is_sanction_lot;
+			
+			// id лота
+			let mess_id = $(this).data('mess_id');
+			if(mess_id) params += '&mess_id='+mess_id;
+            
+            
+            // новый утиль
+            let pw_util = $(this).data('pw-util');
+			if (pw_util) params += '&pw_util='+pw_util;
+            
+            let kwt_util = $(this).data('kwt-util');
+			if (kwt_util) params += '&kwt_util='+kwt_util;
+			
+            // тип топлива
+            let engine_type = $(this).data('engine_type');
+			if (engine_type) params += '&engine_type='+engine_type;
+            
+             // для пикапов
+            let is_pickup = $(this).data('is_pickup');
+			if (is_pickup) params += '&is_pickup='+is_pickup;
+            
+            
+			//console.log(params);
+            
+            
+			$.get('/netcat/modules/default/', params, function(data){
+				$('.calc_box').html(data);
+				$('.calc_head .calc_lot d').text(lot);
+				$('.calc_head .calc_auc d').text(auction);
+				$('.calc_head .calc_date d').text(auction_date);
+				$('.calc_overlay').css('display','flex');
+				$('body').addClass('overflow');
+			});  
+            
+            
+
+		});
+        
+        
+
+		$(document).on('click', '.calc_overlay', function(e){
+			if (e.target !== this)
+			return;
+			$('.calc_overlay').css('display','none');
+			$('.auto_info_str').html('');
+			$('body').removeClass('overflow');
+		});
+        
+		$(document).on('click', '.calc_modal .close_btn', function(e){
+			$('.calc_overlay').css('display','none');
+			$('.auto_info_str').html('');
+			$('body').removeClass('overflow');
+		});
+
+
+		$('#button_clear').click(function(e){
+			e.preventDefault();
+			console.log('reset');
+			filter_form_reset();
+		})
+
+		function filter_form_reset(sub = false) {
+			console.log('sub: ' + sub);
+			
+			// $('.filter_form select').select2();
+			// $('.filter_form select').defaults.reset();
+
+			$('.filter_form select').val('').change();
+
+			$('[name="year_from"]').val();
+			$('[name="year_to"]').val();
+			$('[name="volume_from"]').val();
+			$('[name="volume_to"]').val();
+			$('[name="mileage_from"]').val();
+			$('[name="mileage_to"]').val();
+			$('[name="kuzov"]').val();
+
+			$('[name="rate[]"]').val();
+			$('[name="finish_from"]').val();
+			$('[name="finish_to"]').val();
+			
+			if (sub=='chinaused') {
+				$('[name="grade[]"]').val();  // china
+				$('[name="eng_type"]').val(); // china
+			}
+			
+			$('.tag_model_wrap').html(''); // moto
+		}
+		
+		
+
+
+		// фильтры 
+		$('#filter-form').submit(function(e) {
+			if ( $(this).hasClass('autonal') || $(this).hasClass('popular') ) {
+				return true;
+			} else {
+				e.preventDefault();
+				$('body').addClass('load');
+
+				if ( $(this).closest('.filter_form').hasClass('japancars') ) {
+					sub = 'japancars';
+				} else if ($(this).closest('.filter_form').hasClass('japanauc')) {
+					sub = 'japanauc';
+				} else if ($(this).closest('.filter_form').hasClass('japan-stock')) {
+					sub = 'japan-stock';
+				} else if ($(this).closest('.filter_form').hasClass('chinaused')) {
+					sub = 'chinaused';
+				} else if ($(this).closest('.filter_form').hasClass('motonal')) {
+					sub = 'motonal';
+				} else if ($(this).closest('.filter_form').hasClass('motostat')) {
+					sub = 'motostat';
+				} else if ($(this).closest('.filter_form').hasClass('aucmoto')) {
+					sub = 'aucmoto';
+				} else {
+					sub = '';
+				}
+				console.log('sub type filter_form(): ' + sub);
+				filter_form(sub); 
+			}
+		});
+
+
+
+	    // фильтры оработка
+		function filter_form(sub = false){
+			
+			let param_str='';
+
+			let marka_name = $('[name="marka_name"]').val();
+				 marka_name = marka_name.replace(/ /g,'%20');
+				 marka_name = marka_name.replace(/&/g,'%26');
+			let model_name = $('[name="model_name"]').val();
+				 model_name = model_name.replace(/ /g,'%20');
+				 model_name = model_name.replace(/&/g,'%26');
+			let year_from = $('[name="year_from"]').val();
+			let year_to = $('[name="year_to"]').val();
+			let volume_from = $('[name="volume_from"]').val();
+			let volume_to = $('[name="volume_to"]').val();
+			let mileage_from = $('[name="mileage_from"]').val();
+			let mileage_to = $('[name="mileage_to"]').val();
+			let finish_from = $('[name="finish_from"]').val();
+			let finish_to = $('[name="finish_to"]').val();
+			
+			let kuzov = $('[name="kuzov[]"]').val();
+			let grade = $('[name="grade[]"]').val(); // china
+			let eng_type = $('[name="eng_type"]').val(); // china	
+			
+  			let sort = $('[name="sort"]').val();
+			let no_sanctions = $('[name="no_sanctions"]:checked').val();
+			
+			let motot = $('[name="motot"]:checked').val();
+			
+			let lot = $('[name="lot"]').val();
+			let serial = $('[name="serial"]').val();
+			let rate = $('[name="rate[]"]').val();
+
+			let is_no_hybrid = $('[name="is_no_hybrid"]:checked').val();
+			
+           
+ 
+			if( marka_name != '' ) param_str += '&marka_name=' + marka_name;
+			if( model_name != ''  ) param_str += '&model_name=' + model_name;
+			if( year_from != '' ) param_str += '&year_from=' + year_from;
+			if( year_to != '' ) param_str += '&year_to=' + year_to;
+			if( volume_from != '' ) param_str += '&volume_from=' + volume_from;
+			if( volume_to != '' ) param_str += '&volume_to=' + volume_to;
+			if( mileage_from != '' ) param_str += '&mileage_from=' + mileage_from;
+			if( mileage_to != '' ) param_str += '&mileage_to=' + mileage_to;
+	
+			if( kuzov != '' && kuzov !== undefined ) param_str += '&kuzov=' + kuzov;
+			if( motot != ''  && motot !== undefined ) param_str += '&motot=' + motot;
+			
+			
+			if( lot != '' && lot !== undefined ) param_str += '&lot=' + lot;
+			if( serial != '' &&  serial !== undefined ) param_str += '&serial=' + serial;
+			
+			if( eng_type != '' && eng_type !== undefined ) param_str += '&eng_type=' + eng_type; 
+			if( grade != ''  && grade !== undefined ) param_str += '&grade=' + grade; // china
+			
+			if( rate != ''  && rate !== undefined ) param_str += '&rate=' + rate; 
+			
+		    if( finish_from != '' && finish_from !== undefined ) param_str += '&finish_from=' + finish_from;
+			if( finish_to != '' && finish_to !== undefined ) param_str += '&finish_to=' + finish_to;
+
+			if( no_sanctions == 1 ) param_str += '&no_sanctions=1'; // japan
+			
+			
+			if( sort != '' ) param_str += '&sort=' + sort;
+
+
+			if( is_no_hybrid != '' && is_no_hybrid !== undefined ) param_str += '&is_no_hybrid=' + is_no_hybrid;
+            
+            
+            let min_util_sw = $('[name="min_util_sw"]').val(); 
+            let min_util = $('[name="min_util"]:checked').val(); // льготный утильсбор
+            
+			if (min_util_sw) param_str += '&min_util_sw=1'; 
+            if (min_util) param_str += '&min_util=1'; 
+            
+            
+			
+			// доп категории для мото
+			let tag_model_arr = [];
+			if( $('[name="tag_model[]"]:checked').val() ){
+				
+				$('[name="tag_model[]"]:checked').each(function(){
+					tag_model_arr.push($(this).val());
+				});
+				
+				if(tag_model_arr[0]) param_str += '&tag_model='+tag_model_arr.join(',');
+			}
+			
+
+			if(param_str) {
+				param_str = '?' + param_str;
+				param_str = param_str.replace('?&','?');
+				param_str = param_str.replace(/ /g,'%20');
+			}
+			
+            console.log(param_str);
+		
+			if (sub=='japancars') {
+				//window.location.href = '/stat/'+param_str+'#results';
+				window.location.href = '/stat/'+param_str;
+				
+			} else if (sub=='japanauc') {
+				window.location.href = '/auktsiony-yaponii-on-line/'+param_str;
+				
+			} else if (sub=='japan-stock') {
+				window.location.href = '/japan-stock/'+param_str;
+
+			} else if (sub=='chinaused') {
+				
+				let model_qty =	$('[name="model_name"] option:selected').data('model-qty');
+				let cc = $('.filter_col_model').data('cc');
+				let percent_lot =	$('.filter_col_model').data('percent-lot');
+				let limit_lot =	$('.filter_col_model').data('limit-lot');
+				
+				let curpose = '';
+					 curpos = Math.round((model_qty / limit_lot) * (percent_lot / 100)) * limit_lot;
+				
+				let get_page_lot = 'on';
+				if( param_str.includes('year') ) get_page_lot = 'off';
+				if( param_str.includes('volume') ) get_page_lot = 'off';	
+				if( param_str.includes('mileage') ) get_page_lot = 'off';	
+				if( param_str.includes('grade') ) get_page_lot = 'off';
+				if( param_str.includes('kuzov') ) get_page_lot = 'off';
+				if( param_str.includes('eng_type') ) get_page_lot = 'off';
+				if( param_str.includes('finish') ) get_page_lot = 'off';
+				if( param_str.includes('sort') ) get_page_lot = 'off';
+		
+				
+				if(marka_name && model_name && model_qty && cc && percent_lot && limit_lot && curpos && get_page_lot=='on') {
+					param_str += '&cur_cc=' + cc;
+					param_str += '&curpos=' + curpos;
+				}
+				window.location.href = '/chinacar/'+param_str;
+				
+			} else if (sub=='motonal') {
+				window.location.href = '/mototsikly-v-nalichii/'+param_str;
+				
+			} else if (sub=='motostat') {
+				window.location.href = '/stat-moto/'+param_str;
+				
+			} else if (sub=='aucmoto') {
+				window.location.href = '/auc-moto/'+param_str;
+				
+			} else {
+
+			}
+			$('body').removeClass('load');
+			 //console.log(param_str); 
+		}
+
+
+
+
+		
+		$('.filter_form select').select2();
+        
+
+		$('.filter_form select#Model').select2({
+			placeholder: 'Модель',
+		});
+		
+		$('.filter_kuzov').select2({
+			placeholder: 'Кузов',
+			formatNoMatches: function () { return "Выберите модель"; },
+			"language": {
+				"noResults": function(){
+					return "Выберите модель";
+				}
+			}
+		});
+
+		$('.filter_grade').select2({
+			placeholder: 'Комплектация',
+			formatNoMatches: function () { return "Выберите модель"; },
+			"language": {
+				"noResults": function(){
+					return "Выберите модель";
+				}
+			}
+		});
+
+
+		$('#rate').select2({
+			placeholder: 'Аукционная оценка'
+		});
+		
+		$('.numberMask').on('input', function() {
+			$(this).val($(this).val().replace(/[^\d]/g, ''))
+		});
+		
+		$('body').on('click', '.filter__btn', function() {
+			$('body').addClass('load');
+		});
+
+
+
+
+		$('body').on('change', '.filter_marka', function() {
+			$('body').addClass('load');
+			
+            let marka_name = $(this).val();
+			marka_name = marka_name.replace(/ /g, '%20');
+			let no_sanctions = ($('[name="no_sanctions"]').is(':checked')) ? 1 : 0;
+			
+
+			if ( $(this).hasClass('japan') ) {
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_model&marka_name='+marka_name+'&no_sanctions='+no_sanctions, function(data){
+					$('.filter_model').html(data);	
+                    $('body').removeClass('load');
+				});
+			}
+			
+			// для аукционов японии
+			if ( $(this).hasClass('japan_auc') ) {
+				$('.filter_model').load('/auktsiony-yaponii-on-line/?marka_name='+marka_name+'&no_sanctions='+no_sanctions+' .filter_model >* ', function(){
+					$('.filter_model').val("");
+					$('body').removeClass('load');
+				});
+			}
+			
+			// для стока японии
+			if ( $(this).hasClass('japan-stock') ) {
+				$('.filter_model').load('/japan-stock/?isnaked=1&marka_name='+marka_name+'&no_sanctions='+no_sanctions+' .filter_model >* ', function(){
+					$('.filter_model').val("");
+					$('body').removeClass('load');
+				});
+			}
+
+			if ( $(this).hasClass('chinaused') ) {
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_model&marka_name='+marka_name+'&china=used', function(data){
+					$('.filter_model').html(data);
+                    $('body').removeClass('load');
+				});
+			}
+
+			if ( $(this).hasClass('motostat') ) {
+				$.get('/netcat/modules/default/', 'isNaked=1&moto_japan=1&action=get_model&marka_name='+marka_name, function(data){
+					$('.filter_model').html(data);
+					$('body').removeClass('load');
+				});
+			}
+
+			if ( $(this).hasClass('aucmoto') ) {
+				$.get('/netcat/modules/default/', 'isNaked=1&moto_japan=1&auc=1&action=get_model&marka_name='+marka_name, function(data){
+						$('.filter_model').html(data);
+						$('body').removeClass('load');
+				});
+			}
+
+			if ($(this).hasClass('popular')) {
+				
+				$.get('/netcat/modules/default/', 'isNaked=1&popular=1&action=get_model&marka_name='+marka_name, function(data){
+						$('.filter_model').html(data);
+						$('body').removeClass('load');
+				});
+				
+
+			}
+
+			// Индикатор выше включается до проверки классов: если у поля не оказалось
+			// ни одного известного, запрос никто не отправит и снять его будет некому.
+			if ( !$(this).is('.japan,.japan_auc,.japan-stock,.chinaused,.motostat,.aucmoto,.popular') ) {
+				$('body').removeClass('load');
+			}
+
+			$('.filter_model').removeAttr("disabled");
+			
+			$('.tag_model_wrap').html(''); // moto
+
+			
+		});
+		
+		
+		
+        
+		/*
+        $('.filter_model').on('select2:select', function (e) {
+            console.log('change');
+            let data = e.params.data;
+            change_model(data.id);
+
+            $(this).val(data.id).change();
+            $('.filter_model').trigger('change.select2');
+        });
+		*/
+		
+		
+		$('body').on('change', '.filter_model', function() {
+			let val = $(this).val();
+			change_model(val);
+		});
+		
+		
+
+        function change_model(val) {
+            console.log('change model');
+            
+            
+            let form_data = $('.filter_form form').serialize();
+                form_data = form_data.replace(/ /g, '%20');
+			
+            let marka_name = $('.filter_marka').val();
+				marka_name = marka_name.replace(/ /g, '%20');
+				
+			let model_name = $('.filter_model').val();
+				model_name = model_name.replace(/ /g, '%20');
+
+
+            // для статистики японии
+			if ( $('.filter_marka').hasClass('japan') ) {        
+                // Целевой блок есть только на странице статистики. На мобильной главной
+                // форма имеет класс mobile_main, и догружать в неё нечего (полей оценки
+                // и кузова там нет), поэтому индикатор включаем только при наличии цели.
+                if ( $('.filter_form.japancars .filter__row').length ) {
+                $('body').addClass('load');
+
+                let get_url = '/stat/?isNaked=1';
+                if (form_data) get_url += '&'+form_data;
+                get_url = get_url.replace('&rate%5B%5D=','&rate=');
+                get_url = get_url.replace(/&rate%5B%5D=/g,',');
+                
+                //console.log(get_url);
+
+                $('.filter_form.japancars .filter__row').load(get_url + ' .filter_form.japancars .filter__row >* ', function(){
+                    $('body').removeClass('load');
+                    
+                    $('.filter_form select').select2();
+                    
+                    $('#rate').select2({
+                        placeholder: 'Аукционная оценка'
+                    });
+                    $('#kuzov').select2({
+                        placeholder: 'Кузов'
+                    });
+                    
+                 }); 
+                }
+                
+			}
+			
+	
+			// для аукционов японии
+			if ( $('.filter_marka').hasClass('japan_auc') ) {
+				if ( $('.filter_kuzov').length ) {
+				$('body').addClass('load');
+				
+				//let get_url = '/auktsiony-yaponii-on-line/?marka_name='+marka_name+'&model_name='+model_name;
+                
+                let get_url = '/auktsiony-yaponii-on-line/?isNaked=1';
+                if (form_data) get_url += '&'+form_data;
+				
+				$('.filter_kuzov').load(get_url + ' .filter_kuzov >* ', function(){
+					$('.filter_kuzov').val("");
+					$('body').removeClass('load');
+					
+					//console.log(get_url);
+				});
+				}
+			}
+			
+
+			// для японского стока
+			if ( $('.filter_marka').hasClass('japan-stock') ) {
+				if ( $('.filter_kuzov').length ) {
+				$('body').addClass('load');
+				
+				let get_url = '/japan-stock/?marka_name='+marka_name+'&model_name='+model_name;
+				
+				$('.filter_kuzov').load(get_url + ' .filter_kuzov >* ', function(){
+					$('.filter_kuzov').val("");
+					$('body').removeClass('load');
+					
+					//console.log(get_url);
+				});
+				}
+			}
+			
+
+
+			// China used:
+			if ( $('.filter_marka').hasClass('chinaused') ) {
+                $('body').addClass('load');
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_kuzov&marka_name='+marka_name+'&model_name='+model_name+'&china=used', function(data){
+						$('.filter_kuzov').html(data);
+						$('body').removeClass('load');
+				});
+				
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_grade&marka_name='+marka_name+'&model_name='+model_name+'&china=used', function(data){
+						$('.filter_grade').html(data);
+						$('body').removeClass('load');
+				});
+			}
+			
+			
+			// мото статистика и аукционы
+			if( $('.filter_marka').hasClass('aucmoto') || $('.filter_marka').hasClass('motostat') ){
+				$('.tag_model_wrap').html('');
+				
+				let get_url = '/stat-moto/';
+				if($('.filter_marka').hasClass('aucmoto')) get_url = '/auc-moto/';
+				
+				get_url += '?marka_name='+marka_name+'&model_name='+model_name;
+				get_url = get_url.replace(/ /g, '%20');
+				
+				//console.log(get_url);
+				
+				$('.tag_model_wrap').load(get_url+' .tag_model_wrap >* '); // moto
+			}
+			
+			
+        }
+
+
+
+        
+		$('body').on('change', '.filter_model', function() {
+            /*let marka_name = $('.filter_marka').val();
+				marka_name = marka_name.replace(/ /g, '%20');
+			let model_name = $(this).val();
+				model_name = model_name.replace(/ /g, '%20');
+
+			if ( $(this).hasClass('japan') ) {
+                $('body').addClass('load');
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_kuzov&marka_name='+marka_name+'&model_name='+model_name, function(data){
+					$('.filter_kuzov').html(data);
+					$('body').removeClass('load');
+				});
+			}
+
+			// China used:
+			if ( $(this).hasClass('chinaused') ) {
+                $('body').addClass('load');
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_kuzov&marka_name='+marka_name+'&model_name='+model_name+'&china=used', function(data){
+						$('.filter_kuzov').html(data);
+						$('body').removeClass('load');
+				});
+				
+				$.get('/netcat/modules/default/', 'isNaked=1&action=get_grade&marka_name='+marka_name+'&model_name='+model_name+'&china=used', function(data){
+						$('.filter_grade').html(data);
+						$('body').removeClass('load');
+				});
+			}*/
+			
+		});
+		
+		$('body').on('change', 'input[name="no_sanctions"]', function() {
+			$('.filter_marka').trigger('change');
+			$('.filter_kuzov').html("<option value=''>Модель</option>");
+		});
+		
+		//сортировка
+		$('body').on('click', '.sort_form a', function(e) {
+			e.preventDefault();
+			let sort = $(this).data('sort');
+			$('[name="sort"]').val(sort);
+			filter_form($(this).find('.js_calc').data('sub').val());
+		});
+		
+		
+		$('#sort').change(function() {
+			this.form.submit();
+		});
+
+
+
+		
+		//дополнительные фильтры
+		$('body').on('click', '.filter_dop_but span', function() {
+			$(this).closest('.filter_form').toggleClass('active');
+			if( $('.filter_form').hasClass('active') ) $('.filter_dop_but span').text('Скрыть фильтры');
+			else $('.filter_dop_but span').text('Больше фильтров');
+		});
+		if( $('.filter_form').hasClass('active') ) $('.filter_dop_but span').text('Скрыть фильтры');
+		
+		//переход в лот по клику на карточку (кроме заголовка, фото, кнопки расчёта, ссылки на кузов)
+		$('.stats_list_item .item_td.item_desc').on('click', function(e){
+			let lot_url = $(this).closest('.stats_list_item').data('href');
+			if( $(e.target).parent().hasClass('calc_but')===false && $(e.target).parent().is('a')===false && $(e.target).is('a')===false && lot_url ) {
+				$("<a>").prop({target: "_blank", href: lot_url})[0].click();
+			}
+		});
+
+
+		jQuery('.podborsubmit').click(function(){
+			var val1 = String(jQuery('#price_from').val());
+			var val2 = String(jQuery('#price_to').val());
+			var price_from = val1.replace(/\s+/g, '');
+			var price_to = val2.replace(/\s+/g, '');
+			jQuery('#price_from').val(price_from);
+			jQuery('#price_to').val(price_to);
+			return true;
+		});
+		
+
+	}, 300);
+
+	// прокрутка до списка лотов при выборе марки/модели
+	document.addEventListener("DOMContentLoaded", function() {
+	  
+		if (window.location.search) {
+
+		var listElement = document.getElementById('lotList');
+		   
+		if (listElement) {
+			window.scrollTo({
+				top: listElement.offsetTop,
+				left: 0,
+				behavior: 'smooth'
+			  });
+			}
+		}
+
+	});
+
+
+
+
+
+
+
+
+
+	// Калькуляторы в карточке авто:
+
+	$(document).on('click', '.calc_tab span:not(.disable)', function() {
+		$('.calc_tab').removeClass('active');
+		$(this).addClass('active');
+		$('.calc_wrap, .calc_constr').removeClass('active');
+		if ($(this).hasClass('tab_1')) $('.calc_wrap').addClass('active');
+		if ($(this).hasClass('tab_2')) $('.calc_constr').addClass('active');
+	});
+
+	
+	$(document).on('input', '.calc_form input', function() {
+		let calc_price = $('.calc_form .calc_price').val();
+		let calc_year = $('.calc_form .calc_year').val();
+		let calc_eng_v = $('.calc_form .calc_eng_v').val();
+        
+        let calc_m = '';
+		
+		// Китай
+		if ( $(this).closest('div.calc_form').hasClass('china') ) {
+			//console.log('china calc');
+			calc_m = $('.calc_form .calc_m').val();
+			calc_p = $('.calc_form .calc_p').val();
+			
+			let eng_type_label = 'Объём см³';
+			
+			// электрокар
+			if( $('.china .is_electro').is(':checked') ) {
+				calc_m = 'e';
+				calc_p = calc_eng_v;
+				eng_type_label = 'Мощность (кВт)';
+			}
+			$('.calc_eng_v').closest('label').find('span').text(eng_type_label);
+			
+			params = 'isNaked=1&action=calc_result&price='+calc_price+'&year='+calc_year+'&v='+calc_eng_v+'&m='+calc_m+'&p='+calc_p+'&show_currency=1&currency=CNY&china=used';
+			
+		} else if ( $(this).closest('div.calc_form').hasClass('moto') ) {
+			params = 'isNaked=1&action=calc_result&price=' + calc_price + '&year=' + calc_year + '&v=' + calc_eng_v + '&show_currency=1&moto_japan=1';	
+			
+		} else {
+			//console.log('calc');
+			params = 'isNaked=1&action=calc_result&price=' + calc_price + '&year=' + calc_year + '&v=' + calc_eng_v + '&show_currency=1';	
+		}
+		
+
+		// санкционность
+		let calc_is_sanction_lot = $('.calc_form .is_sanction_lot').val();
+		if(calc_is_sanction_lot) params += '&is_sanction_lot='+calc_is_sanction_lot;
+		
+		// id лота
+		let mess_id = $('.calc_form .mess_id').val();
+		if(mess_id) params += '&mess_id='+mess_id;
+		
+        
+        /*
+		$.get('/netcat/modules/default/', params, function(data) {
+            //console.log(params);
+            
+			$('.calc_box').html(data);
+		}).done(function() {
+            
+			if ( $('body').find('span.total_new_rub').length ) {
+				console.log('find');
+				price = $('body').find('span.total_new_rub').html();
+				$('body').find('span.new_price_top').html(price);
+			}
+		});
+        */
+        
+        
+        let page = location.href;
+        let get_params = 'calc_price=' + calc_price + '&calc_year=' + calc_year + '&calc_eng_v=' + calc_eng_v;
+        if (calc_m) get_params += '&calc_m='+calc_m;
+        let get_url = page;
+        if (get_url.indexOf('?') !== -1) get_url += '&' + get_params;
+        else get_url += '?' + get_params;
+        
+        $('.calc_box').load(get_url+' .calc_box > * ', function(){
+            //console.log(get_url);
+        });
+        
+	});
+	
+	
+	// выбор электрокара в калькулятрое китая
+	$('body').on('change', '.calc_form [name="is_electro"]', function(){
+		$('.calc_form [name="calc_price"]').trigger('input');
+	});
+
+
+
+	/* Доставка: */
+
+	if ($("#calcDeliveryCity").length && $("#calcDeliveryType").length) {
+		var cityId = $("#calcDeliveryCity").val();
+		var typeId = $("#calcDeliveryType").val();
+
+		$("#calcDeliveryCity").change(function() {
+			cityId = $(this).val();
+			calcDelivery(cityId, typeId);
+		})
+		$("#calcDeliveryType").change(function() {
+			typeId = $(this).val();
+			calcDelivery(cityId, typeId);
+		})
+
+
+		calcDelivery(cityId, typeId);
+	}
+
+
+	function calcDelivery(cityId, typeId) {
+
+		var deliveryPrice = 0;
+		var deliveryTime = "";
+		var deliveryDayTitles = ["день", "дня", "дней"];
+		var deliveryDay = 0;
+
+		if (cityId) {
+			deliveryPrice = deliveryPrices[cityId][typeId];
+			
+			deliveryDay = deliveryPrices[cityId][4].split('-').pop();
+
+			deliveryTime = "Срок доставки в г. " + deliveryPrices[cityId][0] + " " + deliveryPrices[cityId][4] + " " + declOfNum(Number(deliveryDay), deliveryDayTitles);
+
+		}
+
+		deliveryPrice = new Intl.NumberFormat('ru-RU', {
+			maximumSignificantDigits: 3,
+			style: 'currency',
+			currency: 'RUB'
+		}).format(deliveryPrice);
+
+		$("#calc-delivery-price").html(deliveryPrice);
+		
+		//$(".calc-delivery__time").html(deliveryTime);
+		$(".calc-delivery__time").html('');
+
+	}
+
+	function declOfNum(n, titles) {
+		return titles[n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20) ? 1 : 2];
+	}
+	
+
+	$('div.catalog__row.faq div.catalog__item span.catalog__name').click(function(e){
+		catalog__txt = $(this).closest('div.catalog__item').find('.catalog__txt');
+		if (catalog__txt.is(':hidden')) {
+			catalog__txt.slideDown("slow", function() {
+				catalog__txt.css('display', 'block');
+			} );
+		} else {
+			catalog__txt.slideUp();
+		}
+		e.preventDefault();
+	});
+
+
+	// комплектации:
+	setTimeout(function(){
+		 $('.compl_box_zag').on('click', function(){
+			  $(this).closest('.compl_box').toggleClass('active');
+		 });
+		 if( $(window).width() < 992 ) $('.compl_wrap .compl_box.active').eq(1).removeClass('active');
+	}, 1000);
+
+
+	$('.moto_variants').on('click', 'div.item', function(){
+		box = $(this).closest('.moto_variants');
+		box.find('div.item').removeClass('active');
+		$(this).addClass('active');
+	});
+
+
+});
+
+
+/*
+	window.addEventListener("load", function(){
+	    const page_url = window.location.href;
+		if( page_url.includes("#results") ) {
+			console.log('go to #results last');
+			document.getElementById("results").scrollIntoView({
+            	behavior: 'smooth'
+        	});
+		}
+	});
+*/
+
+

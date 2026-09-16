@@ -1,0 +1,306 @@
+$(function () {
+    // console.log('scripts old');
+
+    //$('.lazy').Lazy();
+    $('.lazy').each(function() {
+        $(this).attr('src', $(this).data('src'));
+    });
+    
+    
+    $('.phone_input').mask('+7 (000) 000-00-00', {placeholder: "+7"});
+    
+    jQuery.event.special.touchstart = {
+        setup: function( _, ns, handle ) {
+            this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
+        }
+    };
+    jQuery.event.special.touchmove = {
+        setup: function( _, ns, handle ) {
+            this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+        }
+    };
+    jQuery.event.special.wheel = {
+        setup: function( _, ns, handle ){
+            this.addEventListener("wheel", handle, { passive: true });
+        }
+    };
+    jQuery.event.special.mousewheel = {
+        setup: function( _, ns, handle ){
+            this.addEventListener("mousewheel", handle, { passive: true });
+        }
+    };
+
+
+
+
+
+    var screenWidth = screen.width; //ширина экрана
+
+    /*
+     *  Полифил для SVG в IE
+     */
+
+    //svg4everybody();
+
+    /*
+     *  Mobile-menu
+     */
+
+    $('.main-menu__btn').click(function () {
+        $(this).toggleClass('active');
+        $('.headerbar .main-menu').slideToggle();
+    });
+
+    $('#searchSpecTech').submit(function () {
+        $('#searchSpecTech select, #searchSpecTech input').each(function(){
+            if( !$(this).val().trim() ){
+                $(this).prop('disabled',true);
+            }
+        });
+    });    
+
+    if($('.js-example-basic-multiple').length > 0){
+        $('.js-example-basic-multiple').select2({
+            placeholder: 'Оценка',
+            closeOnSelect: true
+        });
+    }
+    
+    
+
+    $('.sort__toggle').click(function(event) {
+        field = $(this).attr('field');
+        console.log(field);
+        if( $(this).hasClass('active') ){
+            if( $(this).hasClass('up') ){
+                sortstat = field+' desc';
+            }else{
+                sortstat = field+' asc';
+            }
+        }else{
+            sortstat = field+' desc';
+        }
+        $('input[name="sortstat"]').val(sortstat);
+        $('.filter_form form').submit();
+    });
+
+    // $(document).click( function(event){
+    //     if($(event.target).closest(".main-menu").length) return;
+    //     if($(event.target).closest(".main-menu__btn").length ) return;
+    //     $(".main-menu").fadeOut("slow");
+    //     event.stopPropagation();
+    // });
+
+    if (screenWidth < 992) {
+        $('.main-menu__toggle').click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass('open').siblings('ul').slideToggle();
+        });
+        $('main img:not(.social-image)').css({
+            width: '100%',
+            height: 'auto'
+        });
+    }
+
+    if (screenWidth < 500) {
+
+        $('main iframe').attr({
+            width: '300',
+            height: '195'
+        });
+    }
+
+    /*
+     *  Select
+     */
+
+    $('.form-select__input').click(function () {
+        $(this).siblings('.form-select__list').slideToggle();
+    });
+
+    $('.form-select__list li').click(function () {
+        $(this).parent().siblings('.form-select__input').html($(this).html()).addClass('select');
+        $(this).parent().siblings('input').val($(this).attr('data-value'));
+        $(this).parent().slideUp();
+    });
+
+    if (screenWidth < 670) {
+
+        var h = $('.top').css('height');
+        console.log(h);
+        $('.headerbar .main-menu').css('top', h);
+
+        //$("a:contains('Аукционы on-line')").attr('href', 'https://auc.jptrade.ru/aj_neo?classic ');
+        //$("a:contains('Статистика')").attr('href', 'https://auc.jptrade.ru/st?classic ');
+    }
+
+
+});
+
+
+    if($(".yt_carousel").length > 0) {
+        $(".yt_carousel").not('.slick-initialized').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            centerMode: true,
+            prevArrow:
+              $('.yt_prev'),
+            nextArrow:
+              $('.yt_next'),
+            responsive: [
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                  variableWidth: true,
+                },
+              },
+            ],
+        });
+    }
+    
+    if($(".yt_carousel1").length > 0) {
+        $(".yt_carousel1").not('.slick-initialized').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            centerMode: true,
+            prevArrow:
+              $('.yt_prev1'),
+            nextArrow:
+              $('.yt_next1'),
+            responsive: [
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                  variableWidth: true,
+                },
+              },
+            ],
+        });
+    }
+    
+    if($(".ytnew_carousel").length > 0) {
+        $(".ytnew_carousel").not('.slick-initialized').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            centerMode: true,
+            prevArrow:
+              $('.ytnew_prev'),
+            nextArrow:
+              $('.ytnew_next'),
+            responsive: [
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                },
+              },
+              {
+                breakpoint: 576,
+                settings: {
+                  slidesToShow: 1,
+                  variableWidth: true,
+                },
+              },
+            ],
+        });
+    }
+    
+    
+    
+    if( $(window).width() < 576 ) {
+        
+        $(".stats_list.list_lot").addClass('lot_carousel');
+        $(".stats_list.list_lot .stats_list_banner").remove();
+ /*
+        $(".lot_carousel").not('.slick-initialized').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: false,
+            autoplay: false,
+            autoplaySpeed: 5000,
+            speed: 800,
+            centerMode: true,
+            prevArrow: $('.lot_prev'),
+            nextArrow: $('.lot_next'),
+            variableWidth: true,
+            swipe: false
+        });
+  */
+     }
+    
+ 
+ $(".faq__header").on("click", function () {
+    $(this)
+      .toggleClass("open")
+      .siblings(".faq__text")
+      .slideToggle()
+      .parents(".faq__item")
+      .siblings(".faq__item")
+      .find(".faq__header")
+      .removeClass("open")
+      .siblings(".faq__text")
+      .slideUp();
+    $(this)
+      .parents(".faq__col")
+      .siblings(".faq__col")
+      .find(".faq__header")
+      .removeClass("open")
+      .siblings(".faq__text")
+      .slideUp();
+  });
+  
+// Вопросы-ответы
+    $('.faq-question').click(function(){
+        let this_answer = $(this).next('.faq-answer');
+        $('.faq-question').not(this).removeClass('active');
+        $(this).toggleClass('active');
+        $('.faq-holder').find('.faq-answer').not(this_answer).slideUp();
+        $(this_answer).slideToggle();
+    });
+
+
+let filter = document.getElementById('filter-form'),
+    filterBtn = document.getElementById('button_clear');
+    
+    if (filter && filterBtn) {
+    filterBtn.addEventListener('click', function() {
+      filter.reset();
+      let formElements = filter.elements;
+      for (let i = 0; i < formElements.length; i++) {
+          let element = formElements[i];
+          if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
+              element.value = '';
+          }
+      }
+    });
+  }

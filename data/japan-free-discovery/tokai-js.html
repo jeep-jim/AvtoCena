@@ -1,0 +1,2493 @@
+$(document).on('beforeClose.fb', function( e, instance, slide ) {
+    $('.videoBlock').slick('slickGoTo', slide.index);
+});
+
+GlobalCityUrl = '';
+
+$(document).ready(function() {
+     document.querySelectorAll('.tab').forEach(tab => {
+                      tab.addEventListener('click', () => {
+                        // Убираем активность у всех
+                        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+                        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+
+                        // Добавляем активность текущей
+                        tab.classList.add('active');
+                        document.getElementById(tab.dataset.tab).classList.add('active');
+                      });
+                    });
+    $(".toggle-theme").on("click", function(e){
+        e.preventDefault();
+        if (!$.cookie('theme') || $.cookie('theme')=="light") {
+            $.cookie('theme', 'dark', { expires: 365, path: '/' });
+            $("body").addClass("dark");
+        } else {
+            $.cookie('theme', 'light', { expires: 365, path: '/' });
+            $("body").removeClass("dark");
+        }
+    })
+
+    $("body").on("click", ".js-modal-show", function (e) {
+        e.preventDefault();
+        var currentModal = $(this).attr("href");
+        var car = $(this).data('car');
+        if (car!='undefined') {
+            $(currentModal).find('input[name=f_Marka]').val(car);
+        }
+        $(currentModal).fadeIn(500);
+        $("body").css("overflow", "hidden");
+    });
+
+      /*
+     *  Tabbar
+     */
+
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 60) {
+        $(".tabbar").addClass("open");
+      } else {
+        $(".tabbar").removeClass("open");
+      }
+    });
+
+    $(document).on('click', '.page_navigation_list a', function() {
+        const hash = $(this).attr('href');
+        
+        if ($(hash).length) {
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top-90
+            }, 900, 'swing');
+        }
+    });
+
+    $(document).on('click', '.car-media__colors span', function() {
+        $('.car-media__colors span').removeClass('active');
+        $(this).addClass('active');
+        $('.car-media__panorama iframe').attr('src', $(this).data('url'));
+        console.log('click');
+    });
+
+    $(document).on('click', '.image-tabs-head a', function(e) {
+        e.preventDefault();
+        let block = $(this).closest('.car-media'),
+            tab = block.find('.image-tab-one[data-type="' + $(this).data('type') + '"]'),
+            tabVr = $('.car-media__panorama .vr-tab-one[data-type="' + $(this).data('type') + '"]');
+        block.find('.image-tabs-head a').removeClass('active');
+        block.find('.image-tab-one').removeClass('active');
+        $(this).addClass('active');
+        tab.addClass('active');
+
+        if ($(this).closest('.image-tabs-head').hasClass('js-tabs-panorama')) {
+            $('.car-media__panorama .vr-tab-one').removeClass('active');
+            tabVr.addClass('active');
+            block.find('.car-media__colors.image-tab-one.active span').eq(0).trigger('click');
+        }
+        if ($(this).closest('.image-tabs-head').hasClass('js-tabs-images')) {
+            let images = tab.find('.car-media__img');
+            $('.car-media__carousel').slick('destroy').html('');
+            images.each(function() {
+                $('.car-media__carousel').append('<a class="car-media__bigimg" href="'+ $(this).attr('data-src') +'" data-fancybox="car-media"><img src="'+ $(this).attr('data-src') +'" alt=""></a>');
+            });
+            $(".car-media__carousel").slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: false,
+                autoplay: false,
+                autoplaySpeed: 4000,
+                fade: false,
+                arrows: false,
+                asNavFor: ".car-media__thumbs",
+            });
+        }
+    });
+
+    function view_add_mob() {
+        var add_mob = $.cookie('add_mob');
+        if(add_mob != 1){
+            $(".add_mob_fix").addClass("opened");
+        }
+    }
+    $(".add_mob_fix .close_fb_fix").click(function(){
+        $(".add_mob_fix").removeClass("opened");
+        $.cookie('add_mob', "1", {expires: 365, path: '/'}); 
+    })
+
+    setTimeout(view_add_mob, 10000);
+
+    $(".add_compare").click(function(){
+        var action = $(this).data("action");
+        if(action == 'add') {
+            var rec = $(this).data('rec');
+            var recs = $.cookie('recs2');
+            //console.log(rec + "" + recs);
+            if(recs) {
+               recs = JSON.parse(recs);
+                if(recs.indexOf(rec) < 0){
+                    recs.push(rec);
+                }
+            }else{
+                recs = [rec];
+            }
+            $.cookie('recs2', JSON.stringify(recs), {expires: 30, path: '/'}); 
+            $(this).html('<svg><use href="/netcat_template/template/10/img/icons/sprite.svg#list-outline"></use></svg>');
+            $(this).data("action","link");
+        } else {
+            $(location).attr('href', "/katalog-komplektatsiy/?compare=1");
+        }
+    })
+
+    $(".type-elem").click(function(){
+        $("#moto-type option[value='" + $(this).data('val') + "']").attr('selected', true).prop('selected', true).closest('select').change();
+        $(".type-elem").removeClass('selected');
+        $(this).addClass('selected');
+    })
+
+    $(document).on('click', ".del_compare", function(){
+		console.log('111');
+        var rec = $(this).data('rec');
+        var recs = $.cookie('recs2');
+        if(recs) {
+            recs = JSON.parse(recs);
+            var i = recs.indexOf(rec);
+            if(recs.indexOf(rec) >= 0){
+                recs.splice(recs.indexOf(rec),1);
+            }
+        }
+        if(recs.length <= 0){
+            document.location.href="/katalog-komplektatsiy/";
+        }
+        $.cookie('recs2', JSON.stringify(recs), {expires: 30, path: '/'}); 
+        location.href = "/katalog-komplektatsiy/?compare=1";
+		
+		return false;
+    })
+
+	$(document).on('click', '.type_blog_elem',  function(){
+		if( $(this).attr('loaded') == '0' ){
+			loadBlogTabType( this );
+		}
+	});
+
+    $(document).on('change', '.status-dogovor',  function(){
+        var status = $(this).val(),
+            dogovor = $(this).closest('.itemDogovor').data('dogovor');
+        action("/netcat/modules/default/", "&action=change_status_dogovor&dogovor=" + dogovor + "&status=" + status, ".ajax_result");
+    });
+
+    $('.have').hover(function() {
+        /* Stuff to do when the mouse enters the element */
+        $('ul.third-dropdown').show();
+    }, function() {
+        /* Stuff to do when the mouse leaves the element */
+    });
+    $('.third-dropdown').mouseleave(function(event) {
+       
+        $(this).slideUp(400);   
+    });
+
+
+    $(document).on('click', '.overlay',  function(){
+        $('.overlay').hide();
+    });
+
+    $(document).on('click', '.js-del-dogovor-bt',  function(){
+        var dogovor = $(this).data('dogovor');
+        $('.dialog-del-dogovor').data('dogovor', dogovor).find('.js-dogovor-title').html($(this).closest('.itemDogovor').find('.lkItemName').html());
+        $('.dialog-del-dogovor').fadeIn();
+    });
+
+    $(document).on('click', '.js-del-dogovor-no',  function(){
+        $('.dialog-del-dogovor').fadeOut();
+    });
+    $(document).on('click', '.js-del-dogovor-yes',  function(){
+        var dogovor = $('.dialog-del-dogovor').data('dogovor');
+        $('.dogovor_' + dogovor).fadeOut();
+        action( '/netcat/modules/default/','&action=del_dogovor_lk&dogovor=' + dogovor, '.ajax_result' );
+        $('.dialog-del-dogovor').fadeOut();
+    });
+
+    function discharge(elem){
+      $(elem).val(String($(elem).val().replace(/[^0-9.]/g,'')).replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+      //$(elem).val($(elem).val());
+    }
+    $('.number-price').each(function(){
+        discharge(this);
+    })    
+    $('.number-price').keyup(function(){
+      discharge(this);
+    });
+
+    $('#price_from, #price_to').each(function(){
+        discharge(this);
+    })    
+    $('#price_from, #price_to').keyup(function(){
+      discharge(this);
+    });
+
+    $('.js-number-value').each(function(){
+        discharge(this);
+    })
+    $('.js-number-value').keyup(function(){
+        discharge(this);
+    });
+
+    $('#filter').submit(function(){
+        $('.js-number-value').each(function(){
+            $(this).val($(this).val().replace(/\D/g, ""));
+        });
+    });
+
+
+
+    $('.videoBlock').slick({
+        infinite: false,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        dots: true,
+        arrows: false,
+        responsive: [
+                {
+                    breakpoint: 991,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    }
+                },
+                {
+                    breakpoint: 575,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                }
+            ]
+    });
+    
+    
+    
+    $(document).on('click', '.js-sort-elem',  function(){
+        $('.js-sort-elem').not($(this)).removeClass('active').removeClass('sort-up');
+        var sort;
+        sort = $(this).data('sort');
+        if ($(this).hasClass('active')) {
+            $(this).toggleClass('sort-up');
+        } else {
+            $(this).removeClass('sort-up');
+            $(this).addClass('active');
+        }
+        
+        if ($(this).hasClass('sort-up')) {
+            sort = sort + 'up';
+        }
+        $('[name="sort"]').val(sort).change();
+        $(this).closest('.banner').find('form').submit();
+    });
+
+
+    /*
+    *   Запрет ввода кроме цифр
+    */
+
+    $('.numberMask').on('input', function() {
+      $(this).val($(this).val().replace(/[^\d]/g, ''))
+    });
+
+    $('[name="f_KodOrganPass"]').mask("999-999");
+    $('[name="f_Passport"]').mask("9999 999999");
+    $('[name="f_DatePass"]').mask("99.99.9999");
+    $('[name="f_DateR"]').mask("99.99.9999");
+
+
+    // //подгрузка городов в форме
+    // $('body').on('click', '.city-search a',  function(){
+    //     let city = $(this).attr('setcity');
+    //     if (!city) city = '';
+    //     action( '/netcat/modules/default/','&action=setcity&city='+city, '.city-reload' )
+    //     return false;
+    //
+    // });
+    //
+    // //поиск города в форме
+    // $('body').on('keyup', '.ajaxFindCity', function(){
+    //     let src_str = $(this).val();
+    //     action('/netcat/modules/default/','&action=findCity&q='+src_str, '.city-search__list');
+	// });
+    
+
+
+
+    $(document).on('click', '.bt_fb_fix .bt_title',  function(){
+        $('.bt_fb_fix').toggleClass('opened');
+    });
+    $(document).on('click', '.close_fb_fix',  function(){
+        $('.bt_fb_fix').removeClass('opened');
+    });
+
+    $(document).on('change', '#agree-fb',  function(){
+        if( $(this).prop('checked') ){
+            $('#fb_auto .modal__btn').prop('disabled', false);
+        }else{
+            $('#fb_auto .modal__btn').prop('disabled', true);
+        }
+    });
+
+    $(document).on('click', '.type_auto_list_v2',  function(){
+        var type = $(this).attr('typename');
+        $('[name="model_f"]').val('all');
+        $('[name="type"]').val(type).change();
+        $('.type_auto_list_v2').removeClass('active');
+		
+		$('.hits__link').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $(document).on('click', '.listAuto_v2 .showMoreAuto',  function(e){
+        e.preventDefault();
+        loadPopularAutoOnFilter_v2(true);
+    });
+    
+    
+
+    $(document).on('submit', '.city-search form',  function(){
+        return false;
+    });
+
+    // $("img.lazy").lazyload();
+
+    
+	$(window).resize(function(){
+      //console.log( $('.dopmenu').offset().left+' '+$('.topmenu').width()+' '+$('.show_elems').width() );
+      
+      var isAndroid = /(android)/i.test(navigator.userAgent);
+      if(!isAndroid){
+      
+      $('.parent_menu').each(function (index, elp){
+          $(elp).find('.show_elems li').removeClass('hidden');
+          $(elp).find('.show_elems li').removeClass('hidden_tmp');
+          $(elp).find('.more-dropdown li').addClass('hidden');
+
+          if( $(elp).find('.show_elems').width() > $(elp).width() ){
+          
+            $(elp).find('.dopmenu').css("display","inline-block");
+
+            $(elp).find(".show_elems li").each(function (index, el){
+                if ( $(el).offset().left+$(el).width() > $(el).closest('.parent_menu').offset().left+$(el).closest('.parent_menu').width() - $(el).closest('.parent_menu').find('.dopmenu').width() ){
+                    $(el).addClass('hidden_tmp');
+                }
+            });
+
+            $(elp).find(".show_elems li").each(function (index, el){
+                if ( $(el).hasClass('hidden_tmp') ){
+                    $(elp).find('.more-dropdown li:eq('+(index)+')').removeClass('hidden');
+                    $(el).addClass('hidden');
+                }
+            });
+           
+          }else{
+            $(elp).find('.dopmenu').hide();
+          }
+          $(elp).addClass('loaded');
+        });
+
+        if( $(window).height() > $('body').height() ){
+            $('.footer').css("margin-top",$(window).height() - $('body').height()+40 ); 
+        }
+        
+        }
+        
+    });
+
+    
+
+    $(window).resize();
+
+	$(document).on('click', '.navbar__private.js-modal-show, .advert__btn.js-modal-show',  function(){
+		setTimeout(function(){ $('[name="AUTH_USERT"]').focus();  }, 100);
+	});
+
+	$(document).on('click', '.type_auto_list',  function(){
+		$(this).closest('.blockPopular').find('.type_auto_list').removeClass('active');
+		$(this).addClass('active');
+
+
+		$(this).closest('.blockPopular').find( '.listAuto' ).removeClass('active');
+		if( $(this).attr('type') == 'all' ){
+
+			$(this).closest('.blockPopular').find( '.list_auto_all' ).addClass('active');
+
+		}else{
+			
+			$(this).closest('.blockPopular').find( '.list_auto_' + $(this).attr('type') ).addClass('active');
+			if( $(this).attr('loaded') == '0' ){
+				loadPopularAutoType( this );
+			}
+
+		}
+		ost = $(this).closest('.blockPopular').find('.type_auto_list.active').attr('totalrows');
+        count_page = $(this).closest('.blockPopular').attr('count_page');
+		if( ost > count_page ){
+			ost = count_page;
+		}
+		if( ost > 0 ){
+			$(this).closest('.blockPopular').find('.showMoreAuto span').html( 'Показать ещё ' + ost + ' ' + sklonenie(ost, ['модель', 'модели', 'моделей']) );
+			$(this).closest('.blockPopular').find('.showMoreAuto').show();
+		}else{
+			$(this).closest('.blockPopular').find('.showMoreAuto').hide();
+		}
+		
+    });
+	$(document).on('click', '.tooltip__close',  function(){
+	    $(this).closest('.tooltip__modal').fadeOut();
+	});
+
+    $(document).on('keydown', '.numbePin',  function(eventObject){
+    	//alert( 'Код - '+ eventObject.which );
+    	if( eventObject.which == 8 ){
+    		if( !$(this).val() ){
+    			if( parseInt( $(this).attr('pin') ) > 1 ){
+		    		$('[pin="'+( parseInt( $(this).attr('pin') ) - 1 )+'"]').focus().val('');
+		    		console.log( '[pin="'+( parseInt( $(this).attr('pin') ) - 1 )+'"]' );
+		    	}
+    		}
+    	}else{
+	    	pinVal = $(this).val();
+		    pinVal = pinVal.replace(/[^0-9]/g,'');
+
+		    //console.log( pinVal.length );
+
+		    if( pinVal.length > 0 ){
+		    	if( pinVal.length > 1){
+		    		pinVal = pinVal.slice(0,1);
+		    		$(this).val(pinVal);
+		    	}
+                $('[pin="'+( parseInt( $(this).attr('pin') ) + 1 )+'"]').focus().val('');
+		    }
+
+		}
+    });
+
+
+
+    $(document).on('change', '[name="AutoOut"]',  function(){
+        if ($(this).prop('checked')) {
+            var send = 'yes';
+        } else {
+            var send = 'no';
+        }
+        action( '/netcat/modules/default/','&action=send_auto&message=' + $(this).data('message') + '&send=' + send, '.ajax_result' );
+    });
+
+    $(document).on('click', '.numbePin',  function(eventObject){
+        $(this).val('');
+    });
+
+    $(document).on('keyup', '.numbePin',  function(eventObject){
+
+        if( eventObject.which != 8 ){
+            pinVal = $(this).val();
+            pinVal = pinVal.replace(/[^0-9]/g,'');
+
+            //console.log( pinVal.length );
+
+            if( pinVal.length > 0 ){
+                if( pinVal.length > 1){
+                    pinVal = pinVal.slice(0,1);
+                    $(this).val(pinVal);
+                }
+
+                if( parseInt( $(this).attr('pin') ) < 4 ){
+                    $('[pin="'+( parseInt( $(this).attr('pin') ) + 1 )+'"]').focus().val('');
+                    console.log( '[pin="'+( parseInt( $(this).attr('pin') ) + 1 )+'"]' );
+                }else{
+                    codeVal = '' + $('.numbePin[pin="1"]').val() + $('.numbePin[pin="2"]').val() + $('.numbePin[pin="3"]').val() + $('.numbePin[pin="4"]').val();
+            
+                    if( codeVal.length == 4 ){
+                        $('[name="AUTH_PW"]').val( codeVal );
+                        $('#authFormLogin').submit();           
+                    }
+                }
+            }else{
+                $(this).val('');
+            }
+        }
+    	
+    });
+
+    // $(document).on('change', '.coreanForm select[name="marka_name"]',  function(){
+    //     $('#car-model, #car-badge, #car-fueltype, #car-transmission').val();
+    //     action( '/netcat/modules/default/filter_carean_auto.php','&action=get_models&marka='+$('select[name="marka_name"]').val(), '#car-model', 'reloadModels' );
+    // });
+    //
+    // $(document).on('change', '.coreanForm select[name="model_name"]',  function(){
+    //     $('#car-badge, #car-fueltype, #car-transmission').val();
+    //     action( '/netcat/modules/default/filter_carean_auto.php','&action=get_badge&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-badge', '#car-badge' );
+    //     action( '/netcat/modules/default/filter_carean_auto.php','&action=get_fueltype&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-fueltype', '#car-fueltype' );
+    //     action( '/netcat/modules/default/filter_carean_auto.php','&action=get_transmission&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-transmission', '#car-transmission' );
+    // });
+
+    // $(document).on('change', '.onlineForm select[name="model_name"]',  function(){
+    // 	table = $(this).closest('form').attr('table');
+    //     $('#kuzov, #color, #car-rating, #fyear0, #fyear1, #fv0, #fv1').val();
+    //     action( '/netcat/modules/default/','&action=get_kuzov&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#kuzov', '#kuzov' );
+    //     action( '/netcat/modules/default/','&action=get_color&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#color', '#color' );
+    //     action( '/netcat/modules/default/','&action=get_rate&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-rating', '#car-rating' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_year&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear0', '#fyear0' );
+    //     action( '/netcat/modules/default/','&action=get_year&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear1', '#fyear1' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_v&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv0', '#fv0' );
+    //     action( '/netcat/modules/default/','&action=get_v&table=main&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv1', '#fv1' );
+    //
+    //
+    // });
+
+    // $(document).on('change', '.statForm select[name="model_name"]',  function(){
+    //     table = $(this).closest('form').attr('table');
+    //     $('#kuzov, #car-rating, #fyear0, #fyear1, #fv0, #fv1, #car-grade, #car-pokolenie').val('');
+    //     action( '/netcat/modules/default/','&action=get_kuzov&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#kuzov', '#kuzov' );
+    //     action( '/netcat/modules/default/','&action=get_pokolenie&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-pokolenie', '#car-pokolenie' );
+    //     action( '/netcat/modules/default/','&action=get_rate&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-rating', '#car-rating' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_year&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear0', '#fyear0' );
+    //     action( '/netcat/modules/default/','&action=get_year&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear1', '#fyear1' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_v&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv0', '#fv0' );
+    //     action( '/netcat/modules/default/','&action=get_v&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv1', '#fv1' );
+    //
+    //     $('#car-grade').html('');
+    //
+    // });
+
+    // $(document).on('change', '.statForm select#kuzov',  function(){
+    //     table = $(this).closest('form').attr('table');
+    //     $('#car-grade').val('');
+    //     action( '/netcat/modules/default/','&action=get_grade&table=Message129&marka='+$('select[name="marka_name"]').val()+'&model='+$('select[name="model_name"]').val()+'&kuzov='+$(this).val(), '#car-grade', '#car-grade' );
+    //
+    // });
+
+    
+
+    // $(document).on('change', '.statFormMoto select[name="model_name"]',  function(){
+    //     table = $(this).closest('form').attr('table');
+    //     $('#kuzov, #car-rating, #fyear0, #fyear1, #fv0, #fv1, #car-grade').val('');
+    //     action( '/netcat/modules/default/','&action=get_rate_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-rating', '#car-rating' );
+    //     action( '/netcat/modules/default/','&action=get_grade_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#car-grade', '#car-grade' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_year_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear0', '#fyear0' );
+    //     action( '/netcat/modules/default/','&action=get_year_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fyear1', '#fyear1' );
+    //
+    //     action( '/netcat/modules/default/','&action=get_v_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv0', '#fv0' );
+    //     action( '/netcat/modules/default/','&action=get_v_moto&table=Message347&marka='+$('select[name="marka_name"]').val()+'&model='+$(this).val(), '#fv1', '#fv1' );
+    //
+    // });
+
+    // $(document).on('submit', '#formstatfilter',  function(){
+    //     $('#formstatfilter select, #formstatfilter input').each(function(e){
+    //         if( !$(this).val() ){
+    //             $(this).prop('disabled',true);
+    //         }
+    //     });
+    //     $("#price_from").val($("#price_from").val().replace(/[^0-9.]/g,''));
+    //     $("#price_to").val($("#price_to").val().replace(/[^0-9.]/g,''));
+    //
+    // });
+
+    // $(document).on('submit', '#formstatfilterMoto',  function(){
+    //     $('#formstatfilterMoto select, #formstatfilterMoto input').each(function(e){
+    //         if( !$(this).val() ){
+    //             $(this).prop('disabled',true);
+    //         }
+    //         if ($('[name="sort"]').val() == 'dateauc') {
+    //             $('[name="sort"]').prop('disabled',true);
+    //         }
+    //     });
+    //     $("#price_from").val($("#price_from").val().replace(/[^0-9.]/g,''));
+    //     $("#price_to").val($("#price_to").val().replace(/[^0-9.]/g,''));
+    //
+    // });
+
+
+
+    // $(document).on('submit', '.onlineForm',  function(){
+    //     $('.onlineForm select, .onlineForm input').each(function(e){
+    //         if( !$(this).val() ){
+    //             $(this).prop('disabled',true);
+    //         }
+    //     });
+    //
+    // });
+
+
+    $(document).on('click', '.deleteAutoLk',  function(){    	
+        action( '/netcat/modules/default/','&action=del_dogovor&itemid='+$(this).attr('itemid'), '.ajax_result' );
+    });
+
+     /*$(document).on('keyup', '[name="AUTH_USERT"]',  function(){
+     	telVal = $(this).val();
+	     telVal = telVal.replace(/[^0-9]/g,'');
+	     if( telVal.length == 11 ){
+	     	$('[name="AUTH_USER"]').val( telVal );
+	         console.log( telVal );
+	         $(this).closest('form').find('button').click();
+	         action('netcat/modules/default/lk/newPass.php', '&AUTH_USER='+telVal+'&from_uri='+$('[name="from_uri"]').val()+'&marka='+$('#authFormLogin [name="marka"]').val()+'&model='+$('#authFormLogin [name="model"]').val()+'&cityv='+$('#authFormLogin [name="cityv"]').val(), '.resultAuthForm');
+	
+	     }
+     });*/
+     $(document).on('change', '[name="AUTH_USERT"]',  function(){
+     	$(this).keyup();
+     });
+
+
+
+
+
+
+    $(document).on('keyup','[name="AUTH_USERT"]',function(){
+        telVal=$(this).val();
+        token=$(this).closest('form').find('input[name="form_token"]').val();
+        telVal=telVal.replace(/[^0-9]/g,'');
+        if(telVal.length==11){
+            $('[name="AUTH_USER"]').val(telVal);
+            console.log(telVal);
+            console.log(token);
+            $(this).closest('form').find('button').click();
+            action('/netcat/modules/default/lk/newPass.php','&AUTH_USER='+telVal+'&form_token='+token+'&from_uri='+$('[name="from_uri"]').val()+'&marka='+$('#authFormLogin [name="marka"]').val()+'&model='+$('#authFormLogin [name="model"]').val()+'&cityv='+$('#authFormLogin [name="cityv"]').val(),'.resultAuthForm')
+        }
+    });
+
+
+
+
+
+
+    $(document).on('keyup', '[name="lkuserF"]',  function(){
+            action( '/netcat/modules/default/','&action=findUserDog&q='+$(this).val(), '.resultLkuserF' );
+    });
+    $(document).on('click', '[name="lkuserF"]',  function(){
+            action( '/netcat/modules/default/','&action=findUserDog&q='+$(this).val(), '.resultLkuserF' );
+    });
+
+    // $(document).on('click', '.sel-bt-pokolenie',  function(){
+    //     init_pokolenie();
+    //     $('.sel-cont-pokolenie').addClass('opened');
+    // });
+
+    // $(document).on('click', '.elem-pok',  function(){
+    //     $('#car-pokolenie').val($(this).data('id'));
+    //     $('.sel-cont-pokolenie').removeClass('opened');
+    //     init_pokolenie();
+    // });
+
+    // $(document).on('click', '.tabDost',  function(){
+    // 	$('.tabDost').removeClass('active');
+    // 	$(this).addClass('active');
+    // 	$('.tabsDostCont').removeClass('active');
+    // 	$('.tab'+ $(this).attr('tab') ).addClass('active');
+    // });
+
+    $(document).on('click', '.goToStep',  function(){
+        step = $(this).attr('step');
+        itemid = $(this).attr('itemid');
+        action( '/netcat/modules/default/','&action=go_to_step&step='+step+'&itemid='+itemid, '.ajax_result' );
+    });
+    
+
+
+
+    $(document).on('change', '#formServisBody input, #formServisBody textarea',  function(){
+    	AjaxForm('.ajax_result', 'formServisBody');
+    });
+
+    
+    $(document).on('submit', '#formServisBody',  function(){   
+    	$('[name="posting"]').val('1');
+        AjaxForm('.ajax_result', 'formServisBody');
+        return false;
+    });
+
+
+    $(document).on('submit', '#fb_auto',  function(){   
+        $('#fb_auto [name="TypeMes"]').val('Заказ авто');
+        AjaxForm('.ajax_result', 'fb_auto');
+        return false;
+    });
+
+
+    $(document).on('submit', '#form_calc_tax',  function(){ 
+        var posting = 1;
+        $( '#form_calc_tax input[type="text"]' ).removeClass('red');
+        $( '#form_calc_tax input[type="text"]' ).each(function(){
+            if( !( $(this).attr('name') == 'f_PW' && $('[name="toplivo"]:checked').val() == 'electro' ) ) {
+                if( !$(this).val() ){
+                    $(this).addClass('red');
+                    posting = 0;
+                }
+            }            
+        });
+        if( posting ){
+            AjaxForm('.calc_tax_result', 'form_calc_tax');
+            return false;
+        }
+        return false;
+    });
+
+
+    $('#js-modal-private .modal__btn').click(function (e) {
+        if( $('[name="AUTH_USERT"]').val() && $('#agree').prop('checked') ){
+            e.preventDefault();
+            $('[pin="1"]').focus();
+            $('#js-modal-private').hide();
+            $('#js-modal-sms').fadeIn();
+        }
+        return false;
+    });
+
+    function set_uri( url ){
+        history.pushState( null, null, GlobalCityUrl+url );
+        action( '/netcat/modules/default/', '&action=findCity&q=&uri='+url, '.city-search__row' );
+        $('.ajaxFindCity').attr('uri', url );
+        $('.city-search__header a:nth-child(1)').attr('href', '/moskva'+url );
+        $('.city-search__header a:nth-child(2)').attr('href', '/sankt-peterburg'+url );
+    }
+
+
+    $(document).on('change', '.selSostAuto input[name="condition"]',  function(){
+	   	url = $(this).closest('.selSostAuto').attr('href');        
+	   	action( url, '&getSost=1', '.ajaxCont54' );
+        set_uri( url );
+
+	});
+
+	$(document).on('change', '.selComplAuto input[name="equipment"]',  function(){
+	   	url = $(this).closest('.selComplAuto').attr('href');
+        action( url, '&getSost=1', '.ajaxCont54' );
+        set_uri( url );
+	});
+
+
+    $(document).on('submit', '.client_add_form',  function(){
+        AjaxForm('.add_client_result', 'client_add_form');
+        return false;
+    });
+
+    $(document).on('submit', '#dogovor_form',  function(){
+        AjaxForm('.dogovor_form_result', 'dogovor_form');
+        return false;
+    });
+
+    $(document).on('click', '.addUserBt',  function(){
+        $('.client_add_form').fadeIn(300);
+        
+    });
+
+
+    
+	
+    // $('.list_auto_pohoje .popular__row').slick({
+    //     infinite: false,
+    //     slidesToShow: 4,
+    //     slidesToScroll: 4,
+    //     dots: true,
+    //     arrows: false,
+    //     responsive: [
+    //             {
+    //                 breakpoint: 767,
+    //                 settings: {
+    //                     slidesToShow: 2,
+    //                     slidesToScroll: 2,
+    //                 }
+    //             }
+    //         ]
+    // });
+
+    // $('#comp-statistic-list').slick({
+    //     infinite: true,
+    //     slidesToShow: 4,
+    //     slidesToScroll: 4,
+    //     dots: true,
+    //     arrows: false,
+    //     responsive: [
+    //             {
+    //                 breakpoint: 767,
+    //                 settings: {
+    //                     slidesToShow: 1,
+    //                     slidesToScroll: 1,
+    //                 }
+    //             }
+    //         ]
+    // });
+
+
+    // if( $(window).width() <= 575 ){
+    //     $('.list_lot_8').slick({
+    //         infinite: false,
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //         dots: true,
+    //         arrows: false
+    //     });
+    //     $('#item-full-gallery').slick({
+    //         infinite: false,
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //         dots: true,
+    //         arrows: false
+    //     });
+    // }
+
+     if( $(window).width() <= 718 ){
+        $('.videoBlock1.main-paggge').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            arrows: false,
+            responsive: [
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            infinite: true,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                        }
+                    }
+                ]
+        });
+
+     }
+
+
+
+
+    $('.videoGal').mousemove(function(){
+      $('.videoGal').unbind('click');
+      $('.videoGal').unbind('mousedown');
+    });
+
+    
+
+    //  /*
+    //  *  Carousels
+    //  */
+    // if( typeof curSlidePok !== 'undefined' ){
+    //
+	//     $('.info').slick({
+	//         slidesToShow: 2,
+	//         slidesToScroll: 1,
+	//         infinite: false,
+	//         dots: false,
+	//         //initialSlide: curSlidePok,
+	//         focusOnSelect: true,
+	//         asNavFor: '.images',
+	//         prevArrow: '<button class="prev" type="button"><svg><use href="/netcat_template/template/pro_auction/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+	//         nextArrow: '<button class="next" type="button"><svg><use href="/netcat_template/template/pro_auction/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+	//         responsive: [
+	//             {
+	//                 breakpoint: 768,
+	//                 settings: {
+	//                     slidesToShow: 1
+	//                 }
+	//             }
+	//         ]
+	//     });
+    //     setTimeout(" $('.info').slick('slickGoTo', curSlidePok, true); ", 500);
+    //
+    //
+    //     $('.info1').slick({
+    //         slidesToShow: 2,
+    //         slidesToScroll: 1,
+    //         infinite: false,
+    //         dots: true,
+    //         //initialSlide: curSlidePok,
+    //         focusOnSelect: true,
+    //         prevArrow: '<button class="prev" type="button"><svg><use href="/netcat_template/template/pro_auction/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+    //         nextArrow: '<button class="next" type="button"><svg><use href="/netcat_template/template/pro_auction/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+    //         responsive: [
+    //             {
+    //                 breakpoint: 768,
+    //                 settings: {
+    //                     slidesToShow: 1
+    //                 }
+    //             }
+    //         ]
+    //     });
+    //     setTimeout(" $('.info1').slick('slickGoTo', curSlidePok, true); ", 500);
+    //
+    //
+    //
+    //
+    //     nochange = 1;
+	//     $('.info').on('afterChange', function(event, slick, currentSlide){
+    //         if( !nochange ){
+    // 	    	price = $('.info .slick-slide[data-slick-index="'+currentSlide+'"] .item').attr('price');
+    // 	    	href = $('.info .slick-slide[data-slick-index="'+currentSlide+'"] .item').attr('href');
+    // 	    	$( '.carousel__price' ).html( price );
+    // 	    	action( href, '&getSost=1', '.ajaxCont54' );
+    //             set_uri( href );
+    //         }
+    //         nochange = 0;
+	//     });
+    //     nochange = 0;
+    //     $('.info2 .item').on('click', function(event, slick, currentSlide){
+    //         $('.info2 .item').removeClass('active');
+    //         $(this).addClass('active');
+    //         if( !nochange ){
+    //             price = $('.info2 .item.active').attr('price');
+    //             href = $('.info2 .item.active').attr('href');
+    //             $( '.carousel__price' ).html( price );
+    //             action( href, '&getSost=1', '.ajaxCont54' );
+    //             set_uri( href );
+    //         }
+    //         nochange = 0;
+    //     });
+    //
+    //
+    //
+	//     $('.images').slick({
+	//         infinite: false,
+	//         slidesToShow: 1,
+	//         slidesToScroll: 1,
+	//         dots: false,
+	//         initialSlide: curSlidePok,
+	//         arrows: false,
+	//         asNavFor: '.info'
+	//     });
+    //
+	// }
+
+
+
+
+    $(document).on('click', '.info1 .item',  function(){
+        //window.location = $(this).attr('href');
+        var a = document.createElement('a');
+          a.target="_blank";
+          a.href=$(this).attr('href');
+          a.click();
+    });
+
+    $(document).on('keyup', '.blockPopular .filters input.upd',  function(){
+        $(this).closest('.blockPopular').find('[name="marka"]').val('all');
+        loadPopularAutoOnFilter_v2();
+    });
+    $(document).on('change', '.blockPopular .filters input.upd',  function(){
+        $(this).closest('.blockPopular').find('[name="marka"]').val('all');
+        loadPopularAutoOnFilter_v2();
+    });
+    $(document).on('click', '.blockPopular .filters input.upd',  function(){
+        $(this).closest('.blockPopular').find('[name="marka"]').val('all');
+        loadPopularAutoOnFilter_v2();
+    });
+
+
+
+    $(document).on('submit', '#authFormLogin',  function(){
+    	AjaxForm('.resultAuthForm', 'authFormLogin');
+    	return false;
+    });
+
+    $(document).on('keyup, change', '.listAuto.active .filters_old input.upd',  function(){
+        console.log('!@!@');
+        $(this).closest('.blockPopular').find('.popular_model_elem').removeClass('active');
+        $(this).closest('.blockPopular').find('.popular_model_elem[data-value="all"]').addClass('active').removeClass('disabled');
+    	loadPopularAutoOnFilter( $(this).closest('.blockPopular') )
+    });
+
+    $(document).on('click', '.listAuto.active .popular_model_elem',  function(){
+        $(this).parent().find('.popular_model_elem').removeClass('active');
+        $(this).addClass('active');
+        
+        loadPopularAutoOnFilter( $(this).closest('.blockPopular') )
+    });
+
+    $(document).on('click', '.listAuto_v2.active .popular_model_elem',  function(){
+		console.log('dsfds');
+        $(this).parent().find('.popular_model_elem').removeClass('active');
+        $(this).addClass('active');
+        
+        $('[name="model_f"]').val($(this).data('value'));
+        loadPopularAutoOnFilter_v2()
+		
+		return false;
+    });
+
+    $(document).on('change', '.filterAutoOnMain .markaAuto',  function(){
+    	marka = $(this).val();
+    	$('.filterAutoOnMain .modelAuto').prop('disabled',true);
+    	$('.filterAutoOnMain .modelAuto').val('');
+    	if( marka ){
+    		action('/netcat/modules/default/', '&action=get_models&marka='+marka, '.filterAutoOnMain .modelAuto', 'reloadModels');
+    		$('.search__btn').prop('disabled', false);
+    	}else{
+    		$('.search__btn').prop('disabled', true);
+    	}
+    });
+
+    $(document).on('click', '.bt-send-dogovor',  function(){
+        action('/netcat/modules/default/', '&action=senddogovor&dogovor=' + $(this).data('dogovor'), '.ajax_result');
+    });
+
+    $(document).on('change', '.onlineForm .markaAuto',  function(){
+    	marka = $(this).val();
+    	$('.onlineForm .modelAuto').prop('disabled',true);
+    	$('.onlineForm .modelAuto').val('');
+    	if( marka ){
+    		action('/netcat/modules/default/', '&action=get_models&marka='+marka, '.onlineForm .modelAuto', 'reloadModels');
+    	}
+    });
+
+    $(document).on('change', '.statForm .markaAuto',  function(){
+        marka = $(this).val();
+        $('.statForm .modelAuto').prop('disabled',true);
+        $('.statForm .modelAuto').val('');
+        $('#kuzov, #car-rating, #fyear0, #fyear1, #fv0, #fv1, #car-grand').val('');
+        if( marka ){
+            action('/netcat/modules/default/', '&action=get_models&marka='+marka, '.statForm .modelAuto', 'reloadModels');
+        }
+    });
+
+    // $(document).on('change', '.statFormMoto select[name="moto_type"]',  function(){
+    //     table = $(this).closest('form').attr('table');
+    //     $('#car-brand, #car-model, #kuzov, #car-rating, #fyear0, #fyear1, #fv0, #fv1, #car-grade').val('');
+    //     action( '/netcat/modules/default/','&action=get_marka_moto&table=Message347&type='+$(this).val(), '#car-brand', '#car-brand' );
+    //     $(".type-elem").removeClass('selected');
+    //     $(".type-elem[data-val='" + $(this).val() + "']").addClass('selected');
+    // });
+
+    // $(document).on('change', '.statFormMoto .markaAuto',  function(){
+    //     marka = $(this).val();
+    //     $('.statFormMoto .modelAuto').prop('disabled',true);
+    //     $('.statFormMoto .modelAuto').val('');
+    //     $('#kuzov, #car-rating, #fyear0, #fyear1, #fv0, #fv1').val('');
+    //
+    //     if ($(this).closest('form').attr('id') == 'formonlinefilterMoto') {
+    //         var table = 'bike';
+    //     } else {
+    //         var table = 'Message347';
+    //     }
+    //     if( marka ){
+    //         action('/netcat/modules/default/', '&action=get_models_moto&marka='+marka + '&type='+$('#moto-type').val() + '&table=' + table, '.statFormMoto .modelAuto', 'reloadModels');
+    //     }
+    // });
+
+
+
+
+    $(document).on('change', '#dogovorAddForm .markaAuto',  function(){
+    	marka = $(this).val();
+    	$('#dogovorAddForm .modelAuto').prop('disabled',true);
+    	$('#dogovorAddForm .modelAuto').val('');
+    	if( marka ){
+    		action('/netcat/modules/default/', '&action=get_models&marka='+marka, '#dogovorAddForm .modelAuto', 'reloadModels');
+    	}
+    });
+    
+    $(document).on('click', '.helperInput div',  function(){
+    	action('/netcat/modules/default/', '&action=getParamsModel&marka='+$('#car-brand').val()+'&model='+$('#car-model').val(), '.ajax_result');
+    	$(this).parent().prev().val( $(this).text() );
+    });
+
+    $(document).on('change', '#dogovorAddForm .modelAuto',  function(){
+    	action('/netcat/modules/default/', '&action=getParamsModel&marka='+$('#car-brand').val()+'&model='+$('#car-model').val(), '.ajax_result');
+    });
+
+    $('[name="f_Pokolenie"]').focus(function(){
+		if( $(this).hasAttr('helper') ){
+			$(this).after("<div class='helperInput pok'></div>");
+			$('.helperInput.pok').html( $(this).attr('helper') );
+		}
+	});
+
+	$('[name="f_Pokolenie"]').focusout(function(){	    
+	    setTimeout(function(){ 
+	    	$('[name="f_Pokolenie"]').each(function(){
+	    		if( !$(this).is( ":focus" ) ){
+					$(this).next('.helperInput').remove(); 
+				}
+	    	});
+	    	
+	    }, 500);
+	});
+
+
+    $('input[name="f_DvigType"]').focus(function(){
+        if( $(this).hasAttr('helper') ){
+            $(this).after("<div class='helperInput type'></div>");
+            $('.helperInput.type').html( $(this).attr('helper') );
+        }
+    });
+
+    $('input[name="f_DvigType"]').focusout(function(){      
+        setTimeout(function(){ 
+            $('input[name="f_DvigType"]').each(function(){
+                if( !$(this).is( ":focus" ) ){
+                    $(this).next('.helperInput').remove(); 
+                }
+            });
+            
+        }, 500);
+    });
+
+    $('[name="lkuserF"]').focusout(function(){      
+        setTimeout(function(){ 
+                chkUserF();            
+        }, 500);
+    });
+
+    $(document).on('change', '.filterAutoOnMain .modelAuto, .filterAutoOnMain .priceAuto',  function(){
+    	AjaxForm('.ajax_result', 'filterAutoInMainForm');
+    });
+
+    $(document).on('submit', '#filterAutoInMainForm',  function(){
+    	AjaxForm('.ajax_result', 'filterAutoInMainForm', '&go=1');
+    	return false;
+    });
+
+    $(document).on('submit', '.formByManager form',  function(){
+        chkUserF();
+    });
+
+    
+
+    $(document).on('submit', '#formPayDogovor',  function(){
+        AjaxForm('.ajax_result', 'formPayDogovor');
+        return false;
+    });
+    
+    $(document).on('submit', '#dogovorAddForm',  function(){
+    	AjaxForm('.formAddresult', 'dogovorAddForm');
+    	return false;
+    });
+
+    $(document).on('submit', '#formSendPass',  function(){
+    	$('.imgPassOnSite').addClass('white');
+        $(this).addClass('loading');
+    	setTimeout(function(){ AjaxFormPost('.formSendPassResult', 'formSendPass' ); }, 100);;
+    	return false;
+    });
+
+    $(document).on('submit', '#formSendDog',  function(){    	
+        $(this).addClass('loading');
+    	setTimeout(function(){ AjaxFormPost('.formSendDogResult', 'formSendDog' ); }, 100);;
+    	return false;
+    });
+
+    $(document).on('submit', '#formSendOrder',  function(){       
+        $(this).addClass('loading');
+        setTimeout(function(){ AjaxFormPost('.formSendOrderResult', 'formSendOrder' ); }, 100);;
+        return false;
+    });
+
+    
+    $(document).on('click', '.dogovorGet',  function(){
+    	if( !$(this).hasClass('unactive') ){
+	    	action('/netcat/modules/default/', '&action=getDogovorPdf&message='+$(this).attr('message')+'&stamp='+$(this).data('stamp'), '.ajax_result');
+	    }
+    });
+
+    $(document).on('click', '.js-dogovor-ready',  function(){
+        action('/netcat/modules/default/', '&action=fixDogovor&message='+$(this).attr('message'), '.js-result-fix');
+    });
+
+    $(document).on('click', '.js-order-ready',  function(){
+        action('/netcat/modules/default/', '&action=fixOrder&message='+$(this).attr('message'), '.js-result-fix');
+    });
+
+	$(document).on('click', '.priceTabElem',  function(){
+		if( !$(this).hasClass('disabled') ){
+	    	$('.priceTabElemCont, .priceTabElem').removeClass('active');
+	    	$(this).addClass('active');
+	    	$( '.' + $(this).attr('tab') ).addClass('active');
+	    }
+    });
+
+
+    $(document).on('click', '.imagesDogSkanList .oneImgCont .delete',  function(){
+	    action('/netcat/modules/default/', '&action=delImg&message='+$(this).closest('.oneImgCont').attr('message')+'&fileid='+$(this).closest('.oneImgCont').attr('fileid'), '.ajax_result');
+	    $(this).closest('.oneImgCont').fadeOut(500);
+        return false;
+    });
+
+    $(document).on('click', '.imagesPassSkanList .oneImgCont .delete',  function(){
+        action('/netcat/modules/default/', '&action=delImg1&message='+$(this).closest('.oneImgCont').attr('message')+'&fileid='+$(this).closest('.oneImgCont').attr('fileid'), '.ajax_result');
+        $(this).closest('.oneImgCont').fadeOut(500);
+        return false;
+    });
+
+    $(document).on('click', '.imagesOrderSkanList .oneImgCont .delete',  function(){
+        action('/netcat/modules/default/', '&action=delImgOrder&message='+$(this).closest('.oneImgCont').attr('message')+'&fileid='+$(this).closest('.oneImgCont').attr('fileid'), '.ajax_result');
+        $(this).closest('.oneImgCont').fadeOut(500);
+        return false;
+    });
+
+
+
+
+
+    
+
+
+
+
+
+
+    $(document).on('click', '.showMoreAuto',  function(e){
+        e.preventDefault();
+		$('[name="model_f"]').val('');
+        count_page = $(this).closest('.blockPopular').attr('count_page');
+    	curTab = $(this).closest('.blockPopular').find('.type_auto_list.active');
+		loadPopularAutoOnFilter ( $(this).closest('.blockPopular'), true );
+		ost = curTab.attr( 'totalrows') - count_page;
+		if( ost < 0 ){
+			ost = 0;
+		}
+		curTab.attr( 'totalrows', ost );
+		if( ost > count_page ){
+			ost = count_page;
+		}
+		if( ost > 0 && 1==2 ){
+			$(this).find('span').html( 'Показать ещё ' + ost + ' ' + sklonenie(ost, ['модель', 'модели', 'моделей']) );
+			$(this).show();
+			curTab.attr( 'page', parseInt( curTab.attr( 'page' ) ) + 1 );
+		}else{
+			$('.showMoreAuto').hide();
+		}
+		$('.showMoreAuto').hide();
+    });
+
+     /*
+     *  Price range slider
+     */
+
+
+    $('.js-range-slider').each(function( i, e ){
+    	const cc = $(e).closest('.blockPopular').attr('cc');
+    	$('.cc_'+cc+' .js-range-slider').ionRangeSlider({
+	          type: "double",
+	          min: $(this).attr('minp'),
+	          max: $(this).attr('maxp'),
+	          from: $(this).attr('minp'),
+	          to: $(this).attr('maxp'),
+	          step: 10000,
+	          onFinish: function (data) {
+	              changePrice( '.cc_'+$(e).closest('.blockPopular').attr('cc')+' .js-range-slider' );
+	          }
+	      });
+    });
+
+    // $('.tabs-nav-js a').click(function (e) {
+    //     e.preventDefault();
+    //     let link = $(this).attr('href');
+    //
+    //     $(this).parent('li').addClass('active').siblings('li').removeClass('active');
+    //     $(link).addClass('active').fadeIn().siblings('.tab').hide().removeClass('active');
+    //
+    //     if( $(this).closest('.tabs-nav-js').hasClass('blogListOnMain') ){
+    //     	typeBlog = $(this).attr('typeblog');
+    //     }
+    //     $(document).scroll();
+    // });
+
+    // $('.bayAutoOkJS').click(function (e) {
+    // 	$('.js-modal-close').click();
+    //     var destination = $('.filterAutoOnMain').offset().top;
+	// 	$('html, body').animate({ scrollTop: destination }, 600);
+    // });
+
+    $('.js-modal-close').click(function (e) {
+    	history.pushState('', document.title, window.location.pathname);
+    });
+
+
+    // $('.carpicker__other').click(function (e) {
+    // 	$('.carpicker__col').removeClass( 'hidden-xs' );
+    // 	return false;
+    // });
+
+    // $('.carousel__btn').click(function (e) {
+    //     var destination = $('.ajaxCont54').offset().top;
+	// 	$('html, body').animate({ scrollTop: destination }, 600);
+	// 	return false;
+    // });
+
+    // $('#payArsenalForm').submit(function(){
+    //     AjaxFormArsenalPay('.payArsenalFormResult', 'payArsenalForm');
+    //     return false;
+    // });
+
+
+
+    $(window).resize(function() {
+
+        if( $(window).width() <= 991 ){
+            if( $("div").is(".FormServRight .contServPriceIn") ){
+                $('.FormServRightMob').append( $('.FormServRight .contServPriceIn') );
+
+
+            }else{
+
+            }
+        }else{
+            if( $("div").is(".FormServRightMob .contServPriceIn") ){
+                $('.FormServRight').append( $('.FormServRightMob .contServPriceIn') );
+            }else{
+
+            }
+        }
+    });
+    $(window).resize();
+
+
+    $(document).on('click', '.pagination_ajax a', function(){
+        url = $(this).data('href');
+        $(this).addClass('wait');
+        action(url, '', $(this).closest('.buy__row') );          
+    });
+
+    $(document).on('click', '.btReSendSms', function(){
+        action('/newPass.php', '&AUTH_USER='+$('[name="AUTH_USERT"]').val(), '.resultAuthForm');          
+    });
+
+
+    // if( $(window).width() <= 575 ){
+    //     $(document).on('click', '.tooltip', function(){
+    //         get_calc_ajax( this );
+    //         $('.calc_info_mobile').html( $(this).find('.tooltip__modal').html() ).addClass('tooltip__modal').show();
+    //     });
+    // }
+
+    // if( !$('.buy__row').hasClass('list_lot_8') || $(window).width() > 575 ){
+    //     $('.tooltip').hover(
+    //         function () {
+    //             get_calc_ajax( this );
+    //             $(this).find('.tooltip__modal').fadeIn();
+    //         },
+    //         function () {
+    //             $(this).find('.tooltip__modal').fadeOut();
+    //         },
+    //     200);
+    // }
+
+    
+    $(document).on('click', '.order-rezerv',  function(){
+        orId = $(this).attr('data-order-id');        
+
+        jQuery.ajax({
+            url: '/lk/orders/rezerv/',
+            type: 'POST',
+            dataType: 'json',
+            data: '?isNaked=1&orId=' + orId,
+            success: function (response) {                
+                if(response.phone){
+                    jQuery('#order'+ orId +' > .phone').html('<p><b>Телефон</b>: ' + response.phone + '</p>');
+                    jQuery('#order'+ orId ).addClass('my');
+                    jQuery('#order'+ orId +' > .navbar__auctions').css('display', 'none');
+                }
+                if(response.CountAnswer){
+                    jQuery('.orders-count').html(response.CountAnswer);
+                    if(response.GoUp){   
+                        jQuery('.orders-count').addClass('alert');                    
+                        $('body,html').animate({
+                                scrollTop: 0
+                            }, 500);
+                            return false;
+                      
+                    }
+                }
+
+            },
+             error: function (response) {  
+                jQuery('.orders-count').html('Проблема передачи данных').addClass('alert');
+                $('body,html').animate({
+                                scrollTop: 0
+                            }, 500);
+                            return false;
+            }
+        });
+        
+        return false;
+       
+    });
+
+    $('.reviews__more').click(function (e) {
+        //e.preventDefault();
+        $(this).closest('.otzBlock').find('.reviews__text').addClass('opened');
+        $(this).hide();
+        return false;
+    });
+
+    $('.reviews__text').each(function(){
+    	if( $(this).height() < $(this).find('p').height() ){
+    		$(this).closest('.otzBlock').find('.reviews__more').show();
+    	}
+    });
+
+    $('.return').click(function (e) {
+        e.preventDefault();
+        $('#js-modal-sms').hide();
+        $('#js-modal-private').fadeIn();
+    });
+
+    // $(document).on('click', '.autoTypeLnk',  function(){
+	//    	url = $(this).attr('href');
+	//    	if( $("div").is("[cc='16']") ){
+	//    		selTypeAuto( url );
+	//    		return false;
+	//    	}
+	// });
+
+    if( $("div").is("[cc='16']") ){	
+    	url = window.location.hash;
+    	if( url ){
+    		//console.log( url );
+		    setTimeout(selTypeAuto, 100, decodeURI(url) );
+		}
+	}
+	setTimeout(loadImages, 100);
+
+	setTimeout(loadPopularAuto, 4000);
+	setTimeout(loadBlogTabs, 4000);
+    //setTimeout(loadDaysAuc, 4000);
+	setTimeout(loadImages, 4000, 'data-src-load');
+
+    hover_marki();
+    init_pokolenie();
+
+    // if ($('#catalog-podbor-form').length) {
+    //     //$('[name="min_year"]').change();
+    // }
+});
+
+function FindFile() { document.getElementById('my_hidden_file').click(); }  
+function LoadFile() { document.getElementById('my_hidden_load').click(); } 
+
+
+function FindFile1() { document.getElementById('my_hidden_file1').click(); }  
+function LoadFile1() { document.getElementById('my_hidden_load1').click(); } 
+
+$.fn.hasAttr = function(name) {  
+   return this.attr(name) !== undefined;
+};
+
+
+var target = document.getElementById("my_hidden_file");
+if( target ){
+    target.addEventListener("dragenter", function(event) {
+      $('#my_hidden_file').closest('.hiddenInput1').addClass('active');
+    }, false);
+    target.addEventListener("drop", function(event) {
+      $('#my_hidden_file').closest('.hiddenInput1').removeClass('active');
+    }, false);
+    target.addEventListener("dragleave", function(event) {
+      $('#my_hidden_file').closest('.hiddenInput1').removeClass('active');
+    }, false);
+}
+
+
+let images = document.querySelectorAll('.cont-images-auto img');
+if (images.length) {
+    let
+        count = images.length,
+        slide = 0;
+
+    setInterval(function () {
+        images.forEach((image, index) => {
+            image.classList.add("d-none");
+            if (slide === index) {
+                image.classList.remove("d-none");
+            }
+        });
+        if (slide >= count - 1) {
+            slide = 0;
+        } else {
+            slide++;
+        }
+    }, 150);
+
+
+}
+
+
+
+function AjaxFormArsenalPay(result_id, form_id) {
+    if (!jQuery("#" + form_id).attr('white')) {
+        jQuery("#" + form_id).attr('white', '1');
+            jQuery.ajax({
+                url: jQuery("#" + form_id).attr('action'), //Адрес подгружаемой страницы
+                type: jQuery("#" + form_id).attr('method'), //Тип запроса
+                dataType: 'html', //Тип данных
+                data: jQuery("#" + form_id).serialize() + '&isNaked=1',
+                success: function (response) { //Если все нормально
+                    jQuery(result_id).html(response);
+
+                    jQuery("#" + form_id).removeAttr('white');
+                },
+                error: function (response) { //Если ошибка
+                    jQuery("#" + form_id).removeAttr('white');
+                }
+            });        
+        jQuery(result_id).html('<div class="load"><div class="loading"></div></div>');
+    }
+    return false;
+}
+
+    
+
+
+function AjaxFormPost(result_id, form_id ) {
+    if (!jQuery("#" + form_id).attr('white')) {
+        jQuery("#" + form_id).attr('white', '1');
+
+            var formData = new FormData( $("#" + form_id)[0] );
+
+            jQuery.ajax({
+                url: jQuery("#" + form_id).attr('action')+'&isNaked=1', //Адрес подгружаемой страницы
+                type: 'POST', //Тип запроса
+                //dataType: 'html', //Тип данных
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) { //Если все нормально
+                    jQuery(result_id).html(response);
+                    //alert(response);
+                    jQuery("#" + form_id).removeAttr('white');
+                },
+                error: function (response) { //Если ошибка
+                    jQuery(result_id).html('Ошибка при отправке формы');
+                    jQuery("#" + form_id).removeAttr('white');
+                }
+            });
+    }
+    return false;
+}
+
+
+
+
+function selTypeAuto( url ){
+	TypeAuto = url.replace('/#', '');
+	TypeAuto = TypeAuto.replace('#', '');
+	//console.log( TypeAuto );
+	var destination = $('.cc_16').offset().top;
+	$('html, body').animate({ scrollTop: destination }, 600);
+	$('.type_auto_list[typename="'+TypeAuto+'"]').click();
+}
+
+function changePrice( elem ) {
+	var str = $(elem).val();
+	var arr = str.split(';');
+
+	$(elem).closest('.filters').find('[name="min_price"]').val(arr[0]);
+	$(elem).closest('.filters').find('[name="max_price"]').val(arr[1]);
+	loadPopularAutoOnFilter_v2();
+	//loadPopularAutoOnFilter( $(elem).closest('.blockPopular') );
+}
+
+function AjaxForm(result_id, form_id, dop_get = '') {
+    if (!jQuery("#" + form_id).attr('white')) {
+        jQuery("#" + form_id).attr('white', '1');
+
+            jQuery.ajax({
+                url: jQuery("#" + form_id).attr('action'),
+                type: jQuery("#" + form_id).attr('method'),
+                dataType: 'html',
+                data: jQuery("#" + form_id).serialize() + '&isNaked=1' + dop_get,
+                success: function (response) {
+                    console.log(response);
+                    jQuery(result_id).html(response);
+                    jQuery("#" + form_id).removeAttr('white');
+                },
+                error: function (response) {
+                    jQuery("#" + form_id).removeAttr('white');
+                }
+            });
+        
+        jQuery(result_id).html('<div class="load"><div class="loading"></div></div>');
+    }
+    return false;
+}
+
+function AjaxFormEdit() {
+    var form_sel = ".dialog-edit #adminForm",
+        result_id = '.cont-edit';
+    if (!jQuery(form_sel).attr('white')) {
+        jQuery(form_sel).attr('white', '1');
+
+
+            var formData = new FormData( $(form_sel)[0] );
+
+            jQuery.ajax({
+                url: jQuery(form_sel).attr('action'), //Адрес подгружаемой страницы
+                type: 'POST', //Тип запроса
+                //dataType: 'html', //Тип данных
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) { //Если все нормально
+                    jQuery(result_id).html('');
+                    $('.dialog-edit').fadeOut(300);
+                    document.location.reload();
+                    jQuery(form_sel).removeAttr('white');
+                },
+                error: function (response) { //Если ошибка
+                    jQuery(result_id).html('Ошибка при отправке формы');
+                    jQuery(form_sel).removeAttr('white');
+                }
+            });
+        
+        jQuery(result_id).html('<div class="load"><div class="loading"></div></div>');
+    }
+    return false;
+}
+
+function loadPopularAutoOnFilter ( blockPopular, append = false ){
+	chk = '.listAuto.active [name="gibrid"]';
+	if( blockPopular.find(chk).prop('checked') ){
+		gibrid = '&gibrid=1';
+	}else{
+		gibrid = '';
+	}
+
+    model = blockPopular.find( '.listAuto.active .popular_model_elem.active' ).data('value');
+
+    count_page = blockPopular.attr('count_page');
+
+	parentBlock = '.cc_'+blockPopular.attr('cc');
+
+	min_price = blockPopular.find('.listAuto.active [name="min_price"]').val().replace(/[^0-9.]/g,'');
+	max_price = blockPopular.find('.listAuto.active [name="max_price"]').val().replace(/[^0-9.]/g,'');
+
+    min_year = blockPopular.find('.listAuto.active [name="min_year"]').val();
+    max_year = blockPopular.find('.listAuto.active [name="max_year"]').val();
+
+    min_volume = blockPopular.find('.listAuto.active [name="min_volume"]').val();
+    max_volume = blockPopular.find('.listAuto.active [name="max_volume"]').val();
+
+	filter_str = '&filter=1'+gibrid+'&min_price='+min_price+'&max_price='+max_price+'&min_year='+min_year+'&max_year='+max_year+'&min_volume='+min_volume+'&max_volume='+max_volume;
+
+	$this = blockPopular.find('.type_auto_bt_'+ blockPopular.find('.listAuto.active').attr('type') );
+	if( append ){
+        console.log('????????????');
+		action_append($($this).closest('.blockPopular').attr('ajaxUrl'), '&TypeAuto='+$($this).attr('typename')+'&page='+( parseInt( $($this).attr( 'page' ) ) * count_page ) + filter_str+$($this).closest('.blockPopular').attr('dop_get'), parentBlock+' .list_auto_' + $($this).attr('type') + ' .inContAuto .popular__row'  );
+	}else{
+        console.log('!!!!!!!!!!!!!!');
+		action($($this).closest('.blockPopular').attr('ajaxUrl'), '&model_f='+ model + '&TypeAuto='+ $($this).attr('typename') + '&type='+ $($this).attr('type') + filter_str+$($this).closest('.blockPopular').attr('dop_get'), parentBlock+' .list_auto_' + $($this).attr('type') + ' .inContAuto .popular__row' );
+	}
+}
+
+function loadPopularAutoOnFilter_v2 (append = false ){
+    var blockPopular = $('.blockPopular'),
+        params = "&" + blockPopular.find('form').serialize(),
+        model_f = $('[name="model_f"]').val();
+    if (model_f == 'all') {
+        var result_cont = '.listAuto_v2';
+    } else {
+        var result_cont = '.listAuto_v2 .popular__row';
+    }
+    if( append ){
+        action_turbo(blockPopular.find('form').attr('action'), params + '&append=1', result_cont);
+    }else{
+		$('.card-sm').remove();
+        action_turbo(blockPopular.find('form').attr('action'), params, result_cont);
+    }
+}
+
+
+
+
+function loadImages( attrSrc = 'data-src' ) {
+  	[].forEach.call(document.querySelectorAll('img['+attrSrc+']'), function(img) {
+		img.setAttribute('src', img.getAttribute(attrSrc));
+		img.onload = function() {
+			img.removeAttribute(attrSrc);
+	  	};
+	});
+}
+
+function sklonenie(number, txt) {
+    var cases = [2, 0, 1, 1, 1, 2];
+    return txt[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+}
+
+// function loadDaysAuc ( ){
+//     $(".ajaxAucGet").each(function (index, el){
+//         dateAuc = $(this).attr('dateauc');
+//         tabid = $(this).attr('id');
+//         action('/auktsiony-yaponii-on-line/ajax/', '&AUCTION_DATE='+dateAuc+'&tabid='+tabid, '#'+tabid+' .buy__row' );
+//     });
+// }
+
+function loadBlogTabs(){
+	$(".type_blog_elem[loaded='0']").each(function (index, el){
+		loadBlogTabType( this );
+	});
+}
+
+function loadBlogTabType( $this, params = '' ){
+	action('/blog/type-blog-load/', '&typeblog='+$($this).attr('typeblog')+params, '#know' + $($this).attr('typeblog') + ' .know__row' );
+	$($this).attr( 'loaded', 1 );
+}
+
+function loadPopularAuto(){
+	$(".type_auto_list[loaded='0']").each(function (index, el){
+		loadPopularAutoType( this );
+	});
+}
+
+function loadPopularAutoType( $this, params = '' ){
+
+	parentBlock = '.cc_'+$($this).closest('.blockPopular').attr('cc');
+    count_page = $($this).closest('.blockPopular').attr('count_page');
+
+	action($($this).closest('.blockPopular').attr('ajaxUrl'), '&TypeAuto='+$($this).attr('typename')+params+$($this).closest('.blockPopular').attr('dop_get'), parentBlock + ' .list_auto_' + $($this).attr('type') );
+	$($this).attr( 'loaded', 1 );
+	ost = $($this).attr( 'totalrows') - count_page;
+	if( ost < 0 ){
+		ost = 0;
+	}
+	$($this).attr( 'totalrows', ost );
+}
+
+function action(res_url, res_data, result, reload = '', isNaked = '1' ) {
+    if (!jQuery(result).attr('white')) {
+        jQuery(result).attr('white', '1');
+        jQuery(result).addClass('white');
+
+        if( res_url == '/auktsiony-yaponii-on-line/ajax/' || res_url == '/netcat/modules/default/' || res_url == '/newPass.php' ){
+        	urlt = res_url;
+        }else{
+        	urlt = GlobalCityUrl + res_url;
+        }
+        //console.log( urlt );
+
+        jQuery.ajax({
+            url: urlt,
+            type: 'GET',
+            data: 'isNaked=' + isNaked + res_data,
+            success: function (data) {
+                jQuery(result).removeAttr('white');
+                jQuery(result).removeClass('white');
+                if (data) {
+                    jQuery(result).html(data);
+                    if( reload == 'reloadModels' ){
+                    	$('.modelAuto').prop('disabled',false);
+                    }else if(reload == '#car-pokolenie') {
+                        $('.sel-cont-pokolenie').removeClass('opened');
+                        init_pokolenie();
+                    }else if(reload) {
+                    }
+                    hover_marki();
+                    setTimeout(loadImages, 100);
+                }
+            }
+        }).done(function () {
+
+            // временно, переписать замену
+            $(".sets-carousel").slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                swipeToSlide: true,
+                infinite: false,
+                dots: false,
+                autoplay: false,
+                autoplaySpeed: 5000,
+                speed: 800,
+                prevArrow:
+                    '<button class="prev" type="button"><svg><use href="/netcat_template/template/10/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+                nextArrow:
+                    '<button class="next" type="button"><svg><use href="/netcat_template/template/10/img/icons/sprite.svg#arrow-forward-sharp"></svg></button>',
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 1,
+                            variableWidth: true,
+                            prevArrow: "",
+                            nextArrow: "",
+                        },
+                    },
+                ],
+            });
+
+        });
+    }
+}
+function action_append(res_url, res_data, result) {
+    if (!jQuery(result).attr('white')) {
+        jQuery(result).attr('white', '1');
+        jQuery(result).addClass('white');
+        if( res_url == '/netcat/modules/default/' ){
+        	urlt = res_url;
+        }else{
+        	urlt = GlobalCityUrl + res_url;
+        }
+        jQuery.ajax({
+            url: urlt,
+            type: 'GET',
+            data: 'isNaked=1' + res_data,
+            success: function (data) {
+                jQuery(result).removeAttr('white');
+                jQuery(result).removeClass('white');
+                if (data) {
+                    jQuery(result).append(data);
+                }
+            }
+        });
+    }
+}
+
+var xhr_action_turbo;
+function action_turbo(res_url, res_data, result, append = false) {
+
+    if (xhr_action_turbo) xhr_action_turbo.abort();
+
+    xhr_action_turbo = $.ajax({
+        url: res_url,
+        type: 'GET',
+        data: 'isNaked=1' + res_data,
+        success: function (data) {
+            if (data) {
+                if (append) {
+                    $(result).append(data);
+                } else {
+					$('.card-sm').remove();
+					//$(data).insertAfter($('.hits__select'));
+                    $(result).html(data);
+                }
+            }
+        }
+    });
+}
+
+function setUserF( userF, userID ){
+        $('[name="lkuser"]').val( userID );
+        $('[name="lkuserF"]').val( userF ).data('val', userF);   
+}
+
+function chkUserF(){
+    if( $('[name="lkuserF"]').val() ){
+        $('[name="lkuserF"]').val( $('[name="lkuserF"]').data('val') );
+    }else{
+        $('[name="lkuser"]').val( '' );
+        $('[name="lkuserF"]').val( '' ).data('val', '');
+    }
+    $('.resultLkuserF').html('');
+}
+function resetTimerSms(){
+    val = parseInt( $('.timerSmsVal').text() );
+    if( val == 180 ){
+        $('.contUvedTimer').show();
+        $('.btReSendSms').hide();
+    }
+    val = val -1;
+    if( val == 0 ){
+        $('.contUvedTimer').hide();
+        $('.btReSendSms').show();
+    }else{
+        $('.timerSmsVal').html( val );
+        setTimeout( resetTimerSms, 1000 );
+    }
+}
+
+function get_calc_ajax( el, detailpage = false ){
+        if( $(el).attr('typeload') == 'ajax' || detailpage ){
+            $(el).attr('typeload','');
+            if ($(el).hasClass('js-moto')) {
+                params = '&onlyauth='+$(el).data('onlyauth')+'&action=get_calc_ajax_moto&f_AUCTION='+$(el).data('auction')+'&f_MARKA_NAME='+$(el).data('marka')+'&f_MODEL_NAME='+$(el).data('model')+'&type='+$(el).data('type')+'&f_FINISH='+$(el).data('finish')+'&f_YEAR='+$(el).data('year')+'&f_ENG_V='+$(el).data('engv')+'&podpiska='+$(el).data('podpiska')+'&uslugi_podpiska='+$(el).data('uslugi_podpiska');
+            } else {
+                params = '&onlyauth='+$(el).data('onlyauth')+'&action=get_calc_ajax&f_AUCTION='+$(el).data('auction')+'&f_MARKA_NAME='+$(el).data('marka')+'&f_MODEL_NAME='+$(el).data('model')+'&type='+$(el).data('type')+'&kuzov='+$(el).data('kuzov')+'&f_FINISH='+$(el).data('finish')+'&f_YEAR='+$(el).data('year')+'&f_ENG_V='+$(el).data('engv')+'&f_PW='+$(el).data('pw')+'&podpiska='+$(el).data('podpiska')+'&uslugi_podpiska='+$(el).data('uslugi_podpiska');
+            }
+            if (detailpage) {
+                params += '&detail=1';
+            }
+            action('/netcat/modules/default/', params, '.calc_ajax_result_'+$(el).data('message') );   
+        }
+    }
+
+var last_kuzov = '';
+function hover_marki() {
+    $('.sumo_kuzov .opt').hover(
+        function (e) {
+            var kur_kuzov = $(this).text();
+            
+            var top = $(this).offset().top,
+                left = $(this).offset().left;
+
+            var target = this.getBoundingClientRect();
+            var x = e.clientX - target.left;
+            var y = e.clientY - target.top;
+            $('.hint-modal').css('left',left + x + 30).css('top',top - 50).html('<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>').show();
+            if (kur_kuzov != last_kuzov) {
+                last_kuzov = kur_kuzov;
+                var marka = $('#car-brand').val(),
+                    model = $('#car-model').val();
+                action('/netcat/modules/default/', '&action=kuzov_info&kuzov=' + kur_kuzov + '&marka=' + marka + '&model=' + model, '.hint-modal' );  
+            } 
+        },
+        function () {
+            $('.hint-modal').hide();
+        },
+    0);
+}
+function updEuroPriceAuto(elem) {
+    var val = $(elem).val().replace(/[^0-9]/g,""),
+        usd = Math.round(val / $(elem).data('curs') / 100) * 100;
+    $('#f_PriceUSD').val(usd);
+}
+
+function init_pokolenie() {
+    var text = $('#car-pokolenie option:selected').text();
+    if (!text) {
+        text = 'Нет вариантов';
+    }
+    $('.sel-bt-pokolenie').html(text);
+    $('.sel-cont-pokolenie').html('');
+    $('#car-pokolenie option').each(function(){
+        var selected = '',
+            name = $(this).data('name'),
+            period = $(this).data('period'),
+            img = $(this).data('img'),
+            id = $(this).data('id'),
+            img_cont = '';
+
+        if ($(this).prop('selected')) {
+            selected = ' selected ';
+        }
+
+        if (img) {
+            img_cont = "<img src=" + img + ">";
+        }
+        if (name) {
+            $('.sel-cont-pokolenie').append("<div class='elem-pok " + selected + "' data-id='" + id + "'><div class='name'>" + name + "</div><div class='period'>" + period + "</div>" + img_cont + "</div>");
+        }
+    });
+}
+
+$(function () {
+
+
+    let screenWidth = screen.width;
+
+    $('form.protect-form').append('<input type="hidden" name="form_token" value="proauction-token" />');
+    
+    
+    //tooltip для whatsapp в шапке
+    $(document).on('click', '.mob_tooltip', function(e){
+        e.preventDefault();
+        $(this).closest('.navbar__contacts').toggleClass('active');
+    });
+    $(document).on('click', '.navbar_tooltip_close', function(e){
+        e.preventDefault();
+        $(this).closest('.navbar__contacts').removeClass('active');
+    });
+    
+    if( $(window).width() > 991 ){
+      $(document).on('mouseenter', '.mob_tooltip', function(e){
+          $(this).closest('.navbar__contacts').addClass('active');
+      });
+      $(document).on('mouseleave', '.navbar_tooltip', function(e){
+          $(this).closest('.navbar__contacts').removeClass('active');
+      });
+    }
+
+    $(".js-menu-btn").on("click", function () {
+        $(".mobile-menu").addClass("open");
+        $("body").toggleClass("noscroll");
+    });
+    
+
+    $('.calc-ajax').submit(function(e) {
+        $.ajax({
+            type: 'post',
+            url: "/netcat/modules/default/classes/calculator/actions/calculate.php",
+            data: $(this).serialize(),
+            success: function (response) {
+                $('#ajax-result').html(response);
+                if (response) {
+                    $('.js-calc-res-only').show();
+                } else {
+                    $('.js-calc-res-only').hide();
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#clc-auto-m').change(function() {
+        let val = $(this).val();
+        if (val == 'be' || val == 'de') {
+            $('#clc-auto-emin').show();
+        } else {
+            $('#clc-auto-emin').hide();
+        }
+
+    });
+
+    $('#clc-auto-y').keyup(function() {
+        let val = parseInt($(this).val()),
+            year = new Date().getFullYear(),
+            age = year - val;
+
+        if (age == 3 || age == 5 || age == 7) {
+            $('#calc-age').html(age);
+            $('#clc-auto-ymin').show();
+        } else {
+            $('#clc-auto-ymin').hide();
+        }
+    });
+
+    $('.js-calc-radio .calc-radio__item').click(function() {
+        let val = $(this).find('input').val();
+        $('#ajax-result').html('');
+        $('.js-calc-res-only').hide();
+        $('.calc-ajax').hide().eq(val).show();
+    });
+
+
+    $('#nselmr').on("change", function (e) {
+        var marka = $(this).val();
+        $("#nselmd").val('').trigger('change');
+        if (marka.length) {
+            $('#nselmd').children().prop("disabled", true);
+            $('#nselmd').children('[data-marka="' + marka + '"]').prop("disabled", false);
+        } else {
+            $('#nselmd').children().prop("disabled", false);
+
+        }
+    });
+
+    function showDefaultModels () {
+        var marka = $('#nselmr').val();
+        $("#nselmd").trigger('change');
+        if (marka.length) {
+            $('#nselmd').children().prop("disabled", true);
+            $('#nselmd').children('[data-marka="' + marka + '"]').prop("disabled", false);
+        } else {
+            $('#nselmd').children().prop("disabled", false);
+        }
+    }
+    
+    if ( $("#nselmd").length ) {
+        showDefaultModels();
+    }
+
+    /*
+    if (screenWidth > 1199) {
+        $(".js-price-popup").hover(
+            function () {
+                let data = $(this).attr('data-calc');
+                calcResult(data, $(this));
+                if (screenWidth - $(this).offset().left < 860) {
+                    $(this).find(".price-breakdown").css({ left: "auto", right: "0" });
+                }
+                $(this).find(".price-breakdown").fadeIn();
+            },
+            function () {
+                $(this).find(".price-breakdown").fadeOut();
+            },
+            400
+        );
+    } else {
+        */
+        $(".js-price-popup").on("click", function () {
+            let data = $(this).attr('data-calc');
+            calcResult(data, $(this));
+            $(this).find(".price-breakdown").fadeIn();
+            $("body").addClass(".noscroll");
+        });
+
+        $(".price-breakdown__close").on("click", function (e) {
+            $(this).parents(".price-breakdown").fadeOut();
+            $("body").removeClass(".noscroll");
+            e.stopPropagation();
+        });
+    // }
+
+    /*
+    if (screenWidth > 1199) {
+        $(document).on({
+            mouseenter: function() {
+                let data = $(this).attr('data-calc');
+                calcResult(data, $(this));
+                if (screenWidth - $(this).offset().left < 860) {
+                    $(this).find(".price-breakdown").css({ left: "auto", right: "0" });
+                }
+                $(this).find(".price-breakdown").fadeIn();
+            },
+            mouseleave: function() {
+                $(this).find(".price-breakdown").fadeOut();
+            }
+        }, '.js-price-popup');
+    
+
+
+
+    } else {
+        $(document).on('click', '.js-price-popup-page', function (e) {
+            let data = $(this).attr('data-calc');
+            calcResult(data, $(this));
+            $(this).find(".price-breakdown").fadeIn();
+            $("body").addClass(".noscroll");
+        });
+
+        $(document).on('click', '.price-breakdown__close-page', function (e) {
+            $(this).parents(".price-breakdown").fadeOut();
+            $("body").removeClass(".noscroll");
+            e.stopPropagation();
+        });
+    }
+    */
+
+    $('.js-toggle-calc').on("click", function (e) {
+        e.preventDefault();
+        let id = parseInt($(this).attr('data-id')),
+            title = $(this).attr('data-title');
+        $('.js-toggle-calc').removeClass('active');
+        $(this).addClass('active');
+        $('.js-calc-title').html(title);
+        $('.calc-text').hide().eq(id).show();
+        $('.js-calc-rez').hide().eq(id).show();
+        if (id) {
+            $('.type_vvoz').show();
+        } else {
+            $('.type_vvoz').hide();
+        }
+    });
+
+    $('.js-toggle-type-calc input').on("change", function (e) {
+        let id= $(this).val();
+        $('.calc-text').hide().eq(id).show();
+        $('.js-calc-rez').hide().eq(id).show();
+    });
+
+    $('a[href="#video-trigger-vk"]').on('click', function() {
+        var oid = $(this).data('oid');
+        var id = $(this).data('id');
+        var videoUrl = 'https://vk.com/video_ext.php?oid=' + oid + '&id=' + id + '&hd=2&autoplay=1';
+    
+        // Установка нового URL в iframe
+        $('#video-iframe').attr('src', videoUrl);
+      });
+
+    $('a[href="#video-trigger"]').on('click', function() {
+        var id = $(this).data('id');
+        var videoUrl = 'https://rutube.ru/play/embed/' + id + '/';
+    
+        // Установка нового URL в iframe
+        $('#video-iframe').attr('src', videoUrl);
+    });
+
+    $(document).on('keyup', '.calx-ajax-form .calc-input-new', function(e) {
+        let form = $(this).closest('form'),
+            val = $(this).val(),
+            block = $(this).closest('.stat-calc-block');
+        val.replace(/\D+/g, '');
+        if (val < 1 || isNaN(val)) {
+            $(this).val(val.replace(/\D+/g, ''));
+            return;
+        }
+        let formData = form.serializeArray();
+        formData.push({name: "html", value: 1});
+        formData.push({name: "ajax", value: 1});
+        $.post("/netcat/modules/default/classes/calculator/actions/calculate.php", formData, function(response) {
+            block.find('#calc-fixed').html(response);
+            let price = block.find('.js-calc-full-price').html(),
+                start_price = block.find('.js-calc-full-price').attr('data-start');
+            block.find('.js-calc-full-price-top').html(price);
+            block.find('.js-calc-price-ru').html(start_price);
+        });
+    });
+
+    $(document).on('keyup', '.calx-ajax-form .calc-input', function(e) {
+        let form = $(this).closest('form'),
+            val = $(this).val();
+        val.replace(/\D+/g, '');
+        if (val < 1 || isNaN(val)) {
+            $(this).val(val.replace(/\D+/g, ''));
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: "/netcat/modules/default/classes/calculator/actions/calculate.php",
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+                form.find('.js-calc-price-ru').html(Math.ceil(response.price_rub).toLocaleString());
+                form.find('.js-calc-full-price').html(Math.ceil(response.totalRub).toLocaleString());
+
+                form.find('.js-calc-full-custom').html(Math.ceil(response.custom).toLocaleString());
+                form.find('.js-calc-full-fees').html(Math.ceil(response.fees).toLocaleString());
+                form.find('.js-calc-full-duty').html(Math.ceil(response.duty).toLocaleString());
+                form.find('.js-calc-full-excise').html(Math.ceil(response.excise).toLocaleString());
+                form.find('.js-calc-full-nds').html(Math.ceil(response.nds).toLocaleString());
+            }
+        });
+    });
+
+    $(document).on('change', '.calx-ajax-form .js-recalc', function(e) {
+        $(this).closest('.calx-ajax-form').find('.calc-input-new').trigger('keyup');
+    });
+
+    $(document).on('click', '.carpicker__save', function (e) {
+        e.preventDefault();
+        $('.filter-history__items').hide();
+        $('.filter-history__loader').addClass('filter-history__loader_active');
+        if ($(this).data('type')) {
+            action('/netcat/modules/default/', '&action=sethistorystat&link=' + encodeURIComponent(window.location.href), '.filter-history__items')
+        } else {
+            action('/netcat/modules/default/', '&action=sethistory&link=' + encodeURIComponent(window.location.href), '.filter-history__items')
+        }
+        setTimeout(function () {
+            $('.filter-history__loader').removeClass('filter-history__loader_active');
+            $('.filter-history__items').show();
+        }, 2000);
+    });
+
+    $(document).on('click', '.filter-history__remove', function (e) {
+        e.preventDefault();
+        const filter_id = $(this).data('id');
+        if (typeof filter_id !== "undefined" && filter_id > 0) {
+            $('.filter-history__items').hide();
+            $('.filter-history__loader').addClass('filter-history__loader_active');
+            if ($(this).data('type')) {
+                action('/netcat/modules/default/', '&action=removehistorystat&id=' + filter_id, '.filter-history__items')
+            } else {
+                action('/netcat/modules/default/', '&action=removehistory&id=' + filter_id, '.filter-history__items')
+            }
+            setTimeout(function () {
+                $('.filter-history__loader').removeClass('filter-history__loader_active');
+                $('.filter-history__items').show();
+            }, 2000);
+        }
+    });
+
+    $(document).on('click', '.filter-history__more', function () {
+        $(this).toggleClass('filter-history__more_active');
+        $('.filter-history__hidden').toggle();
+    });
+
+
+    $(document).on('change', '.js-sort-elem select',  function(){
+        const sort = $(this).val();
+        $('#form-sort').val(sort);
+        $('#formstatfilter').submit();
+    });
+
+
+    $(document).on('click', '.pagination_ajax_new a', function(e){
+        e.preventDefault();
+        let url = $(this).attr('href'),
+        target  = $(this).closest('.section').offset().top;
+        $(this).addClass('wait');
+        action(url, '', $(this).closest('.buy__row') );
+        $("html, body").animate({scrollTop: target}, 500);
+    });
+
+    $(document).on('click', '.pagination_ajax_append a', function(e){
+        e.preventDefault();
+        let block = $(this).closest('.buy__row'),
+            url = $(this).attr('data-url');
+        $(this).closest('.pagination_ajax_append').remove();
+        $.ajax({
+            type: 'get',
+            url: url + '&isNaked=1',
+            success: function (response) {
+                block.append(response);
+                setTimeout(loadImages, 100);
+            }
+        });
+    });
+
+    $('.js-change-blog a').on("click", function (e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        $('.js-change-blog a').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            type: 'get',
+            url: "/blog/blog.html?isNaked=1&nc_ctpl=211&type=" + id,
+            success: function (response) {
+                $('#mainblog').html(response);
+            }
+        });
+
+    });
+
+    $(document).on('click', '.js-order-from-calc', function(e){
+        e.preventDefault();
+        let auto = $(this).closest('.js-list-one-auto').attr('data-auto');
+        if (auto) {
+            $('#js-modal-calc input[name="f_Marka"]').val(auto);
+        }
+        $('.navbar__order .js-modal-show').trigger('click');
+    });
+
+
+    $(document).on('submit', '#fb_auto_new', function(e){
+        e.preventDefault();
+        $('#fb_auto_new [name="TypeMes"]').val('Заказ авто');
+        var form = $(this);
+        $.ajax({
+            type: 'POST',
+            data: form.serialize(),
+            url: "/netcat/add.php",
+            success: function (data) {
+                $(".js-modal").fadeOut(100);
+                $("#js-modal-success").fadeIn(100);
+                form.after(data);
+            }
+        });
+        return false;
+    });
+
+    $('.js-attention').on('click', function(){
+        var date = new Date,
+            id = $(this).attr('data-id');
+        date.setDate(date.getDate() + 30);
+        date = date.toUTCString();
+        document.cookie = id+'=true; path=/; expires=' + date;
+    });
+
+    $('.js-model-show').on('click', function(e){
+        e.preventDefault();
+        $(this).siblings('a').removeClass('hide');
+        $('.show-more').remove();
+    });
+
+
+	
+	const crmInput = $('[name="f_CRM"]');
+	if(crmInput.length) {
+		setTimeout(() => { crmInput.val(555); }, 5000);
+	}
+
+    // load panorama
+    load360();
+
+});
+
+function load360(path = '') {
+    let panorama = $('#panorama');
+    if (panorama.length) {
+        if (!path) {
+            path = panorama.attr('data-url');
+            console.log(path);
+        }
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": path,
+            "autoLoad": true
+        });
+    }
+}
+
+function calcResult(data = '', item) {
+    $.ajax({
+        type: 'post',
+        url: "/netcat/modules/default/classes/calculator/actions/calculate.php",
+        data: data,
+        success: function (response) {
+            item.find('.js-calc-popup').html(response);
+
+        }
+    });
+}
+
+
+function copyToClipboard() {
+    var copytext = document.createElement('input');
+    copytext.value = window.location.href;
+    document.body.appendChild(copytext);
+    copytext.select();
+    document.execCommand('copy');
+    document.body.removeChild(copytext);
+    return false;
+}
+
+
+/**
+ * Отложенная загрузка
+ * @param partial_params
+ * {
+ *  template: '10', - id или ключевое слово макета дизайна
+ *  partial: 'counterCodeHead, counterCodeBody, 123' - ключевые слова врезок или ID инфоблока
+ *  json: 1 - для получения JSON
+ * }
+ * @param partial_block - в конец какого блока добаляем, например .block1 или #block1 или head
+ * @param partial_timeout - пауза в загрузке, миллисекунды
+ */
+function partial_load(partial_params, partial_block, partial_timeout = 3000) {
+    setTimeout(function(){
+        $.ajax({
+            url: '/netcat/partial.php',
+            method: 'get',
+            cache: false,
+            dataType: 'html',
+            data: partial_params,
+            success: function (data) {
+                $(partial_block).append(data);
+            }
+        });
+    }, partial_timeout);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    var widgetItems = document.querySelectorAll('.widget__item');
+
+        widgetItems.forEach(function (widgetItem) {
+            var rating = parseFloat(widgetItem.querySelector('.widgetRate').innerText);
+            var starContainer = widgetItem.querySelector('.widget__rating');
+
+            starContainer.innerHTML = '';
+
+            var basePath = "/netcat_template/template/10/img/icons/sprite.svg#star";
+
+            // Полные звезды
+            var fullStars = Math.floor(rating);
+            // Часть звезды
+            var partialStar = rating - fullStars;
+            // Пустые звезды
+            var emptyStars = Math.floor(5 - rating);
+
+            for (var i = 0; i < fullStars; i++) {
+                appendStar(starContainer, basePath);
+            }
+
+            if (partialStar > 0) {
+                appendStar(starContainer, basePath, partialStar);
+            }
+            for (var i = 0; i < emptyStars; i++) {
+                appendStar(starContainer, basePath, 0);
+            }
+        });
+
+        function appendStar(container, path, fill = 1) {
+            var xmlns = "http://www.w3.org/2000/svg";
+            var svgElem = document.createElementNS(xmlns, "svg");
+            svgElem.setAttribute('class', fill == 1 ? 'star-full' : (fill == 0 ? 'star-empty' : 'star-partial'));
+            var useElem = document.createElementNS(xmlns, "use");
+            useElem.setAttributeNS(null, 'href', path);
+
+            if (fill < 1 && fill > 0) {
+                svgElem.style.overflow = 'hidden';
+                svgElem.style.width = fill * 100 + '%';
+            }
+
+            svgElem.appendChild(useElem);
+            container.appendChild(svgElem);
+        }
+});

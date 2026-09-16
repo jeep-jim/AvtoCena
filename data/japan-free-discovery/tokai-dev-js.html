@@ -1,0 +1,120 @@
+$(function(){
+
+	/* Auth */
+
+	$('.js-show-sms-form').click(function(){
+		$('.new-auth-top').slideUp();
+		$('.protect-form').slideDown();
+	})
+
+	$('.js-show-tg-form').click(function(){
+		$('.new-auth-top').slideDown();
+		$('.protect-form').slideUp();
+	})
+
+	$('.js-modal-show').on('click', function(){
+		var currentModalWindow = $(this).attr("href");
+		console.log(currentModalWindow);
+		var BoxName = $(this).data('title');
+		if (BoxName!='undefined') {
+			$(currentModalWindow).find('.modal__title').html(BoxName);
+		}
+	})
+
+
+  /* Расписание японских аукционов */
+  $('.tab_swicher .dayName').click(function(){
+    let tt = $(this).attr('data-id');
+    $('.tab_swicher .dayName.active').removeClass('active');
+    $(this).addClass('active')
+    $('.days_blocks:not(#days_blocks_'+tt+')').removeClass('active');
+    $('.days_blocks#days_blocks_'+tt).addClass('active')
+  })
+
+  $('.popular_brands .tab_swicher').find('.country:first').addClass('active');
+  $('.popular_brands .popular_brands_tab_cont').find('.popular_brands_blocks:first').addClass('active');
+
+  /* Блок с популярными брендами */
+  $('.tab_swicher .country').click(function(){
+    let tt = $(this).attr('data-id');
+    $('.tab_swicher .country.active').removeClass('active');
+    $(this).addClass('active')
+    $('.popular_brands_blocks:not(#popular_brands_'+tt+')').removeClass('active');
+    $('.popular_brands_blocks#popular_brands_'+tt).addClass('active')
+  })
+
+  $(".jpmap__map .rgn").on("click", function() {
+      let trg = $(this).data("target");
+      $(this).addClass("active").siblings(".rgn").removeClass("active hover");
+      $(".auc-accordion__section." + trg).find(".auc-accordion__text").slideDown();
+      $(".auc-accordion__section." + trg).addClass("active");
+      $(".auc-accordion__section." + trg).siblings(".auc-accordion__section").find(".auc-accordion__text").slideUp();
+      $(".auc-accordion__section." + trg).siblings(".auc-accordion__section").removeClass("active")
+  });
+
+  $(".region-labels__item").hover(function() {
+      let trg = $(this).data("target");
+      $(".rgn." + trg).addClass("hover").siblings(".rgn").removeClass("hover")
+  }, function() {
+      let trg = $(this).data("target");
+      $(".rgn." + trg).removeClass("hover")
+  });
+  
+  $(".region-labels__item").on("click", function() {
+      let trg = $(this).data("target");
+      $(".rgn." + trg).addClass("active").siblings(".rgn").removeClass("active hover");
+      $(".auc-accordion__section." + trg).find(".auc-accordion__text").slideDown();
+      $(".auc-accordion__section." + trg).addClass("active");
+      $(".auc-accordion__section." + trg).siblings(".auc-accordion__section").find(".auc-accordion__text").slideUp();
+      $(".auc-accordion__section." + trg).siblings(".auc-accordion__section").removeClass("active")
+  });
+
+
+	
+
+})
+
+// Для фото
+Fancybox.bind("[data-fancybox]", {});
+
+// Для видео
+Fancybox.bind("[data-fancybox-video]", {
+  Thumbs: false,
+  type: "iframe",
+  fitToView: true,
+  iframe: {
+    css: {
+      width: "100%",
+      height: "auto",   // Высота будет автоматически рассчитываться
+    },
+  },
+  on: {
+    afterLoad: (fancybox, slide) => {
+      if (!slide || !slide.$content) {
+        console.error("Контент не загружен или отсутствует $content.");
+        return;
+      }
+
+      const iframe = slide.$content.querySelector("iframe");
+      if (iframe) {
+        iframe.onload = () => {
+          const aspectRatio = 16 / 9;
+          const maxHeight = window.innerHeight * 0.9; // 90% от высоты экрана
+
+          // Рассчитываем максимальную ширину для iframe с сохранением пропорций
+          const iframeWidth = Math.min(iframe.offsetWidth, maxHeight * aspectRatio);
+          const iframeHeight = iframeWidth / aspectRatio;
+
+          iframe.style.width = `${iframeWidth}px`;
+          iframe.style.height = `${iframeHeight}px`;
+        };
+      }
+    },
+  },
+});
+
+
+
+
+
+

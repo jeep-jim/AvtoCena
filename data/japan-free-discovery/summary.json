@@ -1,5 +1,29 @@
 [
   {
+    "source": "jptrade-js",
+    "url": "https://jptrade.ru/netcat_template/template/jptrade/js/scripts.js?v=26.03.26",
+    "status": 200,
+    "bytes": 8497
+  },
+  {
+    "source": "jptrade-new-js",
+    "url": "https://jptrade.ru/netcat_template/template/jptrade/js/scripts_new.js?v=16.09.26",
+    "status": 200,
+    "bytes": 37658
+  },
+  {
+    "source": "tokai-js",
+    "url": "https://tokai-auto.ru/netcat_template/template/10/js/scripts_custom1.js",
+    "status": 200,
+    "bytes": 89168
+  },
+  {
+    "source": "tokai-dev-js",
+    "url": "https://tokai-auto.ru/netcat_template/template/10/js/dev.js?111",
+    "status": 200,
+    "bytes": 3870
+  },
+  {
     "source": "jptrade",
     "url": "https://jptrade.ru/stat/",
     "status": 200,
@@ -27,7 +51,7 @@
     "source": "prestige",
     "url": "https://prestigemotorsport.com.au/auctions/",
     "status": 200,
-    "bytes": 295368
+    "bytes": 295377
   },
   {
     "source": "jpauc",
