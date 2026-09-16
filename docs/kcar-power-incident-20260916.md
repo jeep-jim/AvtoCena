@@ -15,7 +15,7 @@ Additional live same-ID checks confirm active `EC61407710` (G80 2.5 AWD, 2497 cc
 - Replace the detail tile's fabricated default 100 hp with an unknown label.
 - Independently verified official power remains outside this source-specific quarantine.
 
-This is containment, not corrected specifications. Existing unsafe calculated K Car cards will be omitted by the current public card gate. No guessed hp values or mass data overwrites are part of this patch. Historical records remain available for audit. The stored active/sold state is not repaired by this code change.
+This is containment, not corrected specifications. The follow-up all-market repair converts unsafe quotes to bound seller prices and clears the rejected specifications. If no valid seller conversion exists, the card cannot claim a RUB quote. No guessed hp values or mass data overwrites are part of this patch. Historical records remain available for audit. The stored active/sold state is not repaired by this code change. See `docs/all-market-integrity-20260916.md` for the full stored-record audit and remaining source verification.
 
 ## Verification
 
