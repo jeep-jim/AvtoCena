@@ -38,6 +38,7 @@ import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
+import { safePublicPricing } from "@/lib/catalog/safe-public-pricing";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } from "@/lib/catalog/customs-pricing";
 import { readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
@@ -277,7 +278,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
-  const offer = enrichOfferWithSourceTableParameters(storedOffer);
+  const offer = safePublicPricing(enrichOfferWithSourceTableParameters(storedOffer));
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);
