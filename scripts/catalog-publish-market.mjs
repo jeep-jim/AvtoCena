@@ -1,3 +1,4 @@
+import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
 const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");
 const { sourceInventoryInScope } = await import('../apps/web/lib/catalog/source-inventory-scope.ts');
@@ -512,6 +513,7 @@ const replaceInternalSourceIds = new Set([
 ].filter(Boolean));
 generation.offers.length = 0;
 currentRetainedRows.length = 0;
+const unavailableOffers = currentMarketRows.filter(row => !nextIds.has(row.id)).map(row => unavailableOfferRecord(row, confirmedWithdrawals));
 currentMarketRows = [];
 reserveRows.length = 0;
 existingInventory.clear();
@@ -560,6 +562,7 @@ if (regressionBlocked) {
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
+      unavailableOffers,
       // Internal chunks are immutable and the manifest protects referenced
       // paths. Replace only this market's sources and reuse every untouched
       // source entry without a full read/rewrite cycle.

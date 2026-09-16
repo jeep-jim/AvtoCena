@@ -1,4 +1,6 @@
-import { confirmedProductionValue } from "./production-month";
+import { compactRepricedProjection } from "./compact-pricing-snapshot";
+import { che168GlobalPriceAdjustment } from "./china-owner-policy";
+import { withReplayInputs } from "./pricing-replay-inputs";
 import { synchronizeCombustionPower } from "./combustion-power-consistency";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../effective-market-settings";
@@ -32,25 +34,6 @@ function uniqueText(values: unknown[]) {
   return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
 }
 
-// Older published V2 quotes predate customsInput. Restore only their audited
-// production reference and successful customs evidence; incomplete offers stay incomplete.
-function withReplayInputs<T extends Partial<VehicleOffer>>(offer: T): T {
-  const snapshot = offer.calculationSnapshot;
-  const customs = snapshot?.customs;
-  if (!snapshot || snapshot.customsInput || customs?.status !== "ready" || !customs.productionReferenceDate || snapshot.missing?.length || snapshot.priceIncludesAllCustoms === false) return offer;
-  const productionDate = confirmedProductionValue(offer) || String(offer.year || customs.productionReferenceDate.slice(0,4));
-  return {...offer, calculationSnapshot:{...snapshot,customsInput:{
-    customsValueRub:customs.customsValueRub, eurRateRub:snapshot.eurRate?.effectiveRate,
-    productionDate, engineCc:offer.engineCc, powerHp:offer.powerHp, powerKw:offer.powerKw,
-    icePowerKw:offer.icePowerKw, power30MinKw:offer.power30MinKw, power30MinKwByMotor:offer.power30MinKwByMotor,
-    utilizationPowerKw:customs.utilizationPowerKw, powertrainKind:offer.powertrainKind, fuel:offer.fuel,
-    vehicleCategory:customs.vehicleCategoryAssumed ? undefined : customs.vehicleCategory,
-    bodyType:offer.bodyType,make:offer.make,model:offer.model,tnVedCode:offer.tnVedCode,
-    grossVehicleWeightKg:offer.grossVehicleWeightKg,n1IceFuel:offer.n1IceFuel,
-    personalUseEligible:offer.personalUseEligible,
-  }}} as T;
-}
-
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (String(offer.market || "") === "japan") return offer;
   const sourcePrice = positive(offer.sourcePrice);
@@ -63,7 +46,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
   const [rate,eurRate] = await Promise.all([convertToRub(sourcePrice, sourceCurrency).catch(() => null),convertToRub(1,"EUR").catch(() => null)]);
   const fresh = (item:any) => item && ["cbr","cbr_live"].includes(item.rateSource) && Number.isFinite(Date.parse(item.rateDate)) && Math.abs(Date.now()-Date.parse(item.rateDate)) <= 4*86400000;
   if (!rate && !offer.calculationSnapshot?.customsInput) return offer;
-  if (offer.calculationSnapshot?.customsInput && (!fresh(rate) || !fresh(eurRate))) return {...offer,totalRub:null,calculationStatus:"needs_currency_rate",calculationSnapshot:{...offer.calculationSnapshot,missing:["fresh_official_currency_rates"],priceIncludesAllCustoms:false}} as T;
+  if (offer.calculationSnapshot?.customsInput && (!fresh(rate) || !fresh(eurRate))) return {...offer,totalRub:null,publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:"needs_currency_rate",calculationSnapshot:{...offer.calculationSnapshot,missing:["fresh_official_currency_rates"],priceIncludesAllCustoms:false}} as T;
 
   if (!rate) return offer;
   return {
@@ -108,14 +91,20 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
       warnings:uniqueText([...(snapshot.warnings || []),...customs.warnings]),
       priceIncludesAllCustoms:customs.status === "ready",priceIncludesUtilizationFee:customs.status === "ready"};
     offer = {...offer,calculationSnapshot:snapshot} as T;
-    if (customs.status !== "ready") return {...offer,totalRub:null,calculationStatus:"needs_customs_data"} as T;
+    if (customs.status !== "ready") return {...offer,totalRub:null,publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:"needs_customs_data"} as T;
   }
   if (snapshot.customs?.status !== "ready" || snapshot.priceIncludesAllCustoms === false || snapshot.priceIncludesUtilizationFee === false || snapshot.missing?.length) return offer;
   const sourcePriceRub = snapshotSourcePriceRub(offer);
   const customs = snapshotCustomsParts(offer);
   if (!sourcePriceRub || !customs.total) return offer;
 
+  const savedAdjustment = snapshot.sourcePriceAdjustment;
+  const adjustment = che168GlobalPriceAdjustment(offer, sourcePriceRub)
+    || (market === 'china' && offer.sourceCurrency === 'USD'
+      && savedAdjustment?.policy === 'owner_che168_global_minus_2_percent_20260913'
+      ? {...savedAdjustment, originalCarPriceRub: sourcePriceRub, adjustmentRub: -Math.round(sourcePriceRub * 0.02)} : undefined);
   const calculation = calculateAvtocenaFromBusinessConfig({
+    ...(adjustment ? {manualAdjustmentRub: adjustment.adjustmentRub, manualAdjustmentReason: adjustment.label} : {}),
     marketId: market,
     marketConfig: resolved.config,
     sourcePriceRub,
@@ -130,6 +119,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   return {
     ...offer,
     totalRub: calculation.totalRub,
+    ...(Number((offer as any).cardProjectionVersion) >= 3 ? { publicVisibleRub: calculation.totalRub } : {}),
     previousTotalRub: changed ? previousTotal : offer.previousTotalRub,
     priceDeltaRub: changed ? calculation.totalRub - previousTotal : offer.priceDeltaRub,
     priceChangedAt: changed ? repricedAt : offer.priceChangedAt,
@@ -142,6 +132,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
     calculationSnapshot: {
       ...oldSnapshot,
       ...calculation.snapshot,
+      sourcePriceAdjustment: adjustment,
       currencyRate: oldSnapshot.currencyRate,
       sourcePriceRub: oldSnapshot.sourcePriceRub || oldSnapshot.currencyRate?.sourcePriceRub,
       customs: oldSnapshot.customs,
@@ -175,6 +166,6 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(offer)))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
-  const repriced = ratedOffers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
+  const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));
   return await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
 }

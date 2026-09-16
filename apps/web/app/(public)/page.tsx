@@ -1,3 +1,4 @@
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import HomePageClient from "@/components/home/HomePageClient";
@@ -45,11 +46,16 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     console.error("home_initial_catalog_failed", error);
     return { items: [], marketCounts: {}, total: 0 };
   });
+  const pricedItems = await applyActiveBusinessPricingBatch(catalog.items).catch((error) => {
+    console.error("home_initial_pricing_failed", error);
+    // Preserve the last audited quote if settings storage is temporarily down.
+    return catalog.items;
+  });
   return <>
     <div className={styles.scope}>
       <HomePageClient
         initialCity={fromQuery || fromCookie}
-        initialOffers={catalog.items}
+        initialOffers={pricedItems}
         initialMarketCounts={catalog.marketCounts}
         initialCount={catalog.total}
       />

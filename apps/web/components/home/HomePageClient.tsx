@@ -3,9 +3,10 @@
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+const StableCatalogCard = memo(CatalogCard);
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { GenericLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
@@ -108,14 +109,27 @@ function balancedMarketItems(items: Item[], limit = 6) {
   }
   return output;
 }
-async function loadFuelOffers(fuel: string) {
-  const loadMarket = async (market: string) => {
-    const first = await fetch(`/api/catalog/search?market=${market}&fuel=${encodeURIComponent(fuel)}&pageSize=48&page=1&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json());
-    const pages = Math.max(1, Math.ceil(Number(first?.total || 0) / 48));
-    const rest = pages > 1 ? await Promise.all(Array.from({ length: pages - 1 }, (_, index) => fetch(`/api/catalog/search?market=${market}&fuel=${encodeURIComponent(fuel)}&pageSize=48&page=${index + 2}&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json()))) : [];
-    return [first, ...rest].flatMap((response) => Array.isArray(response?.items) ? response.items : []);
-  };
-  return (await Promise.all(marketIds.map(loadMarket))).flat();
+async function loadFuelOffers(fuel: string, signal: AbortSignal) {
+  // Preserve every page, but do not flood the server when an EV filter opens.
+  const queue = marketIds.map(market => ({market,page:1}));
+  const rows = new Map<string, Map<number, any[]>>();
+  async function worker() {
+    while (queue.length && !signal.aborted) {
+      const {market,page} = queue.shift()!;
+      const response = await fetch(`/api/catalog/search?market=${market}&fuel=${encodeURIComponent(fuel)}&pageSize=48&page=${page}&sort=updatedAt`, {cache:'no-store',signal});
+      if (!response.ok) throw new Error('fuel_catalog_failed');
+      const data = await response.json();
+      const pagesForMarket = rows.get(market) || new Map<number, any[]>();
+      pagesForMarket.set(page, Array.isArray(data?.items) ? data.items : []);
+      rows.set(market, pagesForMarket);
+      if (page === 1) {
+        const pages = Math.max(1,Math.ceil(Number(data?.total || 0)/48));
+        for(let next=2;next<=pages;next++) queue.push({market,page:next});
+      }
+    }
+  }
+  await Promise.all([worker(),worker(),worker()]);
+  return marketIds.flatMap(market => [...(rows.get(market) || new Map()).entries()].sort((a,b) => a[0]-b[0]).flatMap(([,items]) => items));
 }
 function Chevron({ open = false }: { open?: boolean }) { return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 function SlidersIcon() { return <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>; }
@@ -209,7 +223,11 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
 
   useEffect(() => {
     let cancelled = false;
+    let inFlight = false;
+    let lastLoadedAt = initialOffers.length ? Date.now() : 0;
     const loadCatalog = async () => {
+      if (inFlight || document.visibilityState === "hidden" || Date.now() - lastLoadedAt < 55_000) return;
+      inFlight = true;
       const stamp = Date.now();
       try {
         const [catalogPayload, makePayload] = await Promise.all([
@@ -241,7 +259,14 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
         setCatalogStatus("ready");
       } catch { if (!cancelled) setCatalogStatus((current) => current === "loading" ? "error" : current); }
+      finally { inFlight = false; lastLoadedAt = Date.now(); }
     };
+    if (initialOffers.length) {
+      void fetch('/api/catalog/models?scope=makes&limit=500', { cache: 'no-store' })
+        .then(response => response.ok ? response.json() : null)
+        .then(payload => { if (!cancelled && Array.isArray(payload?.items)) setKnowledgeMakes(payload.items.map((item: any) => String(item.value || item.label || '')).filter(Boolean)); })
+        .catch(() => {});
+    }
     loadCatalog(); const interval = window.setInterval(loadCatalog, 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
     return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
@@ -249,8 +274,9 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
   useEffect(() => {
     if (!electricOnly) { setFuelItems(null); return; }
     let cancelled = false;
-    loadFuelOffers("electric").then((rawItems) => { if (cancelled) return; const unique = new Map<string, Item>(); rawItems.forEach((raw) => { const item = toItem(raw); if (item) unique.set(item.id, item); }); setFuelItems([...unique.values()]); }).catch(() => { if (!cancelled) setFuelItems([]); });
-    return () => { cancelled = true; };
+    const controller = new AbortController();
+    loadFuelOffers("electric", controller.signal).then((rawItems) => { if (cancelled) return; const unique = new Map<string, Item>(); rawItems.forEach((raw) => { const item = toItem(raw); if (item) unique.set(item.id, item); }); setFuelItems([...unique.values()]); }).catch(() => { controller.abort(); if (!cancelled) setFuelItems([]); });
+    return () => { cancelled = true; controller.abort(); };
   }, [electricOnly]);
   useEffect(() => { if (!mobileFiltersOpen) return; const old = document.body.style.overflow; document.body.style.overflow = "hidden"; const keydown = (event: KeyboardEvent) => { if (event.key === "Escape") setMobileFiltersOpen(false); }; window.addEventListener("keydown", keydown); return () => { document.body.style.overflow = old; window.removeEventListener("keydown", keydown); }; }, [mobileFiltersOpen]);
   useEffect(() => { if (model && body) setBody(""); }, [model, body]);
@@ -321,7 +347,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
       </div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div></div>
-        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><StableCatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />

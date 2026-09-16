@@ -66,12 +66,17 @@ jobs:
             "${CURL[@]}" -o /dev/null "https://avtocena.com/cars?market=$market"
           done
 
+      - name: Verify list/detail quotes, missing-offer explanation and response timings
+        run: node scripts/catalog-verify-public-quotes.mjs
+
       - name: Upload current read-model parity report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: catalog-current-readmodel-parity-${{ github.event.workflow_run.head_sha }}
-          path: catalog-current-readmodel-parity.json
+          path: |
+            catalog-current-readmodel-parity.json
+            catalog-public-quotes.json
           if-no-files-found: warn
           retention-days: 7
 

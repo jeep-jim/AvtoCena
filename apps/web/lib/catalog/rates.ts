@@ -49,6 +49,10 @@ const FALLBACK_ENV: Record<string, string> = {
 type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string };
 let liveCbrRatesPromise: Promise<Map<string, LiveRate>> | null = null;
 let storedRatesPromise: Promise<any> | null = null;
+const RATE_CACHE_MS = 5 * 60_000;
+let storedRatesExpiresAt = 0;
+let liveRatesExpiresAt = 0;
+let liveRatesRetryAt = 0;
 
 function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
@@ -82,7 +86,8 @@ function cbrXmlDate(xml: string) {
 }
 
 async function readStoredRates() {
-  if (!storedRatesPromise) {
+  if (!storedRatesPromise || Date.now() >= storedRatesExpiresAt) {
+    storedRatesExpiresAt = Date.now() + RATE_CACHE_MS;
     storedRatesPromise = readDataJson<any>("fees/exchange-rates.json", {}).catch((error) => {
       storedRatesPromise = null;
       throw error;
@@ -94,10 +99,13 @@ async function readStoredRates() {
 export function resetCatalogRateCache() {
   storedRatesPromise = null;
   liveCbrRatesPromise = null;
+  storedRatesExpiresAt = liveRatesExpiresAt = liveRatesRetryAt = 0;
 }
 
 async function fetchLiveCbrRates() {
-  if (liveCbrRatesPromise) return liveCbrRatesPromise;
+  if (liveCbrRatesPromise && Date.now() < liveRatesExpiresAt) return liveCbrRatesPromise;
+  if (Date.now() < liveRatesRetryAt) return new Map<string, LiveRate>();
+  liveRatesExpiresAt = Date.now() + RATE_CACHE_MS;
   liveCbrRatesPromise = (async () => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_RATE_TIMEOUT_MS || 12_000));
@@ -124,6 +132,9 @@ async function fetchLiveCbrRates() {
       return result;
     } catch (error) {
       liveCbrRatesPromise = null;
+      // Failed official requests remain failures; only suppress a request storm.
+      // Callers still enforce freshness and never publish a fallback as ready.
+      liveRatesRetryAt = Date.now() + 30_000;
       throw error;
     } finally {
       clearTimeout(timeout);
