@@ -20,7 +20,10 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     && Number(rate.sourcePrice) === price
     && Number.isFinite(price) && price > 0
     && Number.isFinite(effectiveRate) && effectiveRate > 0
-    && Number.isFinite(date) && Math.abs(Date.now() - date) <= 4 * 86400000;
+    // This is the existing historical conversion, not a newly fetched rate.
+    // The normal display repricer refreshes it after the card is selected;
+    // retain its date instead of dropping inventory before repricing can run.
+    && Number.isFinite(date) && date <= Date.now() + 86400000;
   const sellerPriceRub = bound ? Math.round(price * effectiveRate) : undefined;
   return {
     ...input,
