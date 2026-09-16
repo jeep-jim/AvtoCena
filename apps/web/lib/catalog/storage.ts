@@ -6,6 +6,7 @@ import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
+import { confirmedSourceWithdrawalById, isConfirmedSourceWithdrawn } from './confirmed-source-withdrawals';
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { hasModificationSelection, limitModificationInventory } from "./modification-contract";
 import { prepareModificationRecovery } from "./modification-recovery";
@@ -419,6 +420,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
+  if (isConfirmedSourceWithdrawn(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
     && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
@@ -426,6 +428,7 @@ export function projectionCanRenderCard(row: CatalogSearchProjection) {
     && !catalogRequiredSpecificationRejectionReason(row)));
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
+  if (isConfirmedSourceWithdrawn(offer)) return false;
   offer = safePublicPricing(offer);
   return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
     && !catalogRequiredSpecificationRejectionReason(offer));
@@ -483,7 +486,7 @@ export async function getOfferFromCurrentProjection(id: string) {
   }
   if (projection.generationId !== manifest.generationId) return null;
   const row = (projection.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market));
-  return row ? offerDetailFromProjection(row) : null;
+  return row && !isConfirmedSourceWithdrawn(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
@@ -587,7 +590,7 @@ async function readCurrentOfferShard(id: string) {
 export async function getOfferFromCurrentShard(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
-  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market)) || null;
+  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item)) || null;
 }
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
@@ -616,6 +619,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
   return projectionNumber(row.powerHp, 0);
 }
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  if (isConfirmedSourceWithdrawn(row)) return false;
   row = safePublicPricing(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
@@ -1389,7 +1393,7 @@ export async function getOffer(id: string) {
     // Regional cards navigate to a soft 404. If a shard is incomplete, fall
     // through to the immutable generation index instead of returning early.
     const currentOffer = (current.items || []).find((item) => item.id === id);
-    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return currentOffer;
+    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return isConfirmedSourceWithdrawn(currentOffer) ? null : currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1415,7 +1419,7 @@ export async function getOffer(id: string) {
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
-  return offer || readProjectionFallback();
+  return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
 }
 export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));
@@ -1765,6 +1769,8 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
 /** Bounded lookup for a missing page: compact metadata, then one legacy chunk.
  * No source request, full-catalog scan or access-error-to-sold inference. */
 export async function getUnavailableOffer(id: string): Promise<UnavailableOffer | null> {
+  const confirmed = confirmedSourceWithdrawalById(id);
+  if (confirmed) return confirmed;
   const manifest = await readManifest();
   const rows = manifest?.generationId ? await readIndex<UnavailableOffer[]>(manifest.generationId, "unavailable.json", []) : [];
   const row = mergeUnavailableOffers(rows, [], new Set()).find(item => item.id === id);
