@@ -4,6 +4,8 @@ Live first-page Genesis inspection confirms persisted 34, 100, 104, 111, 134 and
 
 `EC61398692` (G80 2.5T, stored 34 hp) now returns a successful K Car response with `이미 판매완료된 차량입니다.` (already sold), without `rvo`. Our detail still displays an active, calculated offer. Therefore current source horsepower cannot be rechecked for this record; do not claim a fresh API response contains 34 hp. A separate freshness repair is necessary.
 
+Additional live same-ID checks confirm active `EC61407710` (G80 2.5 AWD, 2497 cc) returns `hrspow: 100` and `CAR_STATUS010` directly from the K Car API. Therefore at least this wrong published value is faithful extraction of an unreliable source field, not a UI-only issue. `EC61401182` (stored 134 hp) also reports already sold. Active G90 `EC61408822` returns 380 hp; this spot check does not independently verify specifications for the remaining inventory.
+
 ## Containment
 
 - Quarantine the `hrspow` provenance and legacy saved-source K Car power for public hp and delivered prices, including compact V3 attested projections.
