@@ -13,6 +13,9 @@ class Page(HTMLParser):
     def handle_starttag(self, tag, attrs):
         self.tags.append((tag,dict(attrs)))
 
+def normalize_url(url):
+    return urllib.parse.quote(url, safe=":/?&=%#@+;,!~*'()[]$-_.")
+
 def clean(s):
     s=re.sub(r'<(script|style)\b[^>]*>[\s\S]*?</\1>', ' ', s, flags=re.I)
     return re.sub(r'\s+',' ',html.unescape(re.sub('<[^>]+>',' ',s))).strip()
@@ -82,6 +85,19 @@ def main(source):
     deadline=time.monotonic()+int(os.getenv('SWEEP_SECONDS','10800'))
     pending=collections.deque([start]);queued={start};visited=set();identities=set();buffer=[];part=0
     report=dict(source=source,startedAt=dt.datetime.now(dt.timezone.utc).isoformat(),pages=0,details=0,accepted=0,review=0,duplicates=0,errors=[],stopReason='')
+    if (root/'checkpoint.json').exists():
+        checkpoint=json.loads((root/'checkpoint.json').read_text())
+        old=json.loads((root/'summary.json').read_text())
+        report.update(old)
+        report['stopReason']=''
+        report['resumedAt']=dt.datetime.now(dt.timezone.utc).isoformat()
+        visited={normalize_url(u) for u in checkpoint['visited']}
+        retry=[e['url'] for e in old.get('errors',[]) if "control characters" in e.get('error','')]
+        pending=collections.deque(dict.fromkeys(normalize_url(u) for u in retry+checkpoint['pending'] if normalize_url(u) not in visited))
+        queued=set(pending)|visited
+        for saved in root.glob('part-*.json'):
+            part=max(part,int(saved.stem.split('-')[1]))
+            for row in json.loads(saved.read_text()):identities.add((source,row['sourceId']))
     def save():
         nonlocal part,buffer
         if buffer:
@@ -91,7 +107,7 @@ def main(source):
     failures=0
     try:
         while pending and time.monotonic()<deadline:
-            url=pending.popleft()
+            url=normalize_url(pending.popleft())
             if url in visited:continue
             time.sleep(0.75)
             try:
@@ -119,8 +135,9 @@ def main(source):
                         report['accepted' if row['qualifiedSoldCandidate'] else 'review']+=1
                         buffer.append(row)
             for tag,a in Page(markup).tags:
-                if tag!='a' or not a.get('href'):continue
-                target=urllib.parse.urljoin(url,a['href']).split('#')[0]
+                link=a.get('href') if tag=='a' else a.get('data-href')
+                if not link:continue
+                target=normalize_url(urllib.parse.urljoin(url,link).split('#')[0])
                 u=urllib.parse.urlsplit(target)
                 if u.netloc!=urllib.parse.urlsplit(base).netloc:continue
                 if source=='jptrade':allowed=u.path.startswith('/stat/')
