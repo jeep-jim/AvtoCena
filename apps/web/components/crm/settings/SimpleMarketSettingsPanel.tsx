@@ -2,8 +2,7 @@ import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { money } from "@/lib/avtocena";
 
 const paymentFields = [
-  ["securityDepositRub", "Обеспечительный платёж, ₽"],
-  ["contractInitialPaymentRub", "Первоначальный платёж по договору, ₽"],
+  ["contractInitialPaymentRub", "Первый платёж по договору, ₽"],
 ] as const;
 
 const calculationFields = [
@@ -13,9 +12,7 @@ const calculationFields = [
   ["logisticsRub", "Международная логистика, ₽"],
   ["brokerRub", "Брокер, ₽"],
   ["svhRub", "СВХ, ₽"],
-  ["laboratoryRub", "Лаборатория, ₽"],
-  ["sbktsRub", "СБКТС, ₽"],
-  ["eptsRub", "ЭПТС, ₽"],
+  ["laboratoryRub", "Лаборатория, СБКТС, ЭПТС, ₽"],
   ["rfDeliveryRub", "Доставка по России, ₽"],
   ["otherFixedExpensesRub", "Другие расходы, ₽"],
 ] as const;

@@ -31,13 +31,11 @@ export async function POST(request: Request) {
   try {
     const form = await request.formData();
     const marketId = cleanText(form.get("marketId"), 40);
-    const securityDepositRub = nullableNumber(form.get("securityDepositRub"));
     const topAvtoCommissionRub = nullableNumber(form.get("topAvtoCommissionRub"));
     const enteredInitialPayment = nullableNumber(form.get("contractInitialPaymentRub"));
-    const minimumInitialPayment = Number(securityDepositRub || 0) + Number(topAvtoCommissionRub || 0);
-    const contractInitialPaymentRub = enteredInitialPayment === null
-      ? minimumInitialPayment
-      : Math.max(enteredInitialPayment, minimumInitialPayment);
+    const contractInitialPaymentRub = enteredInitialPayment ?? (marketId === "japan" ? 70_000 : 250_000);
+    if (topAvtoCommissionRub === null || contractInitialPaymentRub < topAvtoCommissionRub) throw new Error("Первый платёж не может быть меньше комиссии");
+    const securityDepositRub = contractInitialPaymentRub - topAvtoCommissionRub;
 
     const version = await createMarketVersion(marketId, {
       name: cleanText(form.get("name"), 120),
@@ -53,8 +51,9 @@ export async function POST(request: Request) {
       brokerRub: nullableNumber(form.get("brokerRub")),
       svhRub: nullableNumber(form.get("svhRub")),
       laboratoryRub: nullableNumber(form.get("laboratoryRub")),
-      sbktsRub: nullableNumber(form.get("sbktsRub")),
-      eptsRub: nullableNumber(form.get("eptsRub")),
+      sbktsRub: 0,
+      eptsRub: 0,
+      serviceBundleVersion: 1,
       rfDeliveryRub: nullableNumber(form.get("rfDeliveryRub")),
       otherFixedExpensesRub: nullableNumber(form.get("otherFixedExpensesRub")),
       percentExpenses: parseJsonField(form.get("percentExpenses"), []),

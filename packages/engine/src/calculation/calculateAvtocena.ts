@@ -37,41 +37,21 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   const lines: BusinessCalculationLine[] = [];
   const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
 
-  // Обеспечительный платёж — часть оплаты автомобиля, а не дополнительная услуга.
-  // Показываем его отдельной строкой для прозрачности первого платежа, но вычитаем
-  // из строки цены автомобиля, чтобы не посчитать одну и ту же сумму дважды.
-  const configuredDepositRub = numberOrZero(config.securityDepositRub);
-  const appliedDepositRub = Math.min(carPriceRub, configuredDepositRub);
-  const remainingCarPriceRub = Math.max(0, carPriceRub - appliedDepositRub);
-
+  // The contract advance is a payment stage, not an additional cost.
   addLine(lines, {
-    id: "car",
-    title: "Цена автомобиля",
-    amountRub: remainingCarPriceRub,
-    kind: "car",
-    amountType: "manual",
-    source: "vehicle",
-    note: appliedDepositRub
-      ? `Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: ${carPriceRub} ₽`
-      : undefined,
-  });
-  addLine(lines, {
-    id: "security-deposit",
-    title: "Обеспечительный платёж",
-    amountRub: appliedDepositRub,
-    kind: "deposit",
-    amountType: "fixed",
-    source: "market_config",
-    note: "Засчитывается в стоимость автомобиля",
+    id: "car", title: "Цена автомобиля", amountRub: carPriceRub,
+    kind: "car", amountType: "manual", source: "vehicle",
   });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "broker", title: "Брокер", amountRub: numberOrZero(config.brokerRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "svh", title: "СВХ", amountRub: numberOrZero(config.svhRub), kind: "service", amountType: "fixed", source: "market_config" });
-  addLine(lines, { id: "laboratory", title: "Лаборатория", amountRub: numberOrZero(config.laboratoryRub), kind: "service", amountType: "fixed", source: "market_config" });
-  addLine(lines, { id: "sbkts", title: "СБКТС", amountRub: numberOrZero(config.sbktsRub), kind: "service", amountType: "fixed", source: "market_config" });
-  addLine(lines, { id: "epts", title: "ЭПТС", amountRub: numberOrZero(config.eptsRub), kind: "service", amountType: "fixed", source: "market_config" });
+  addLine(lines, { id: "laboratory", title: "Лаборатория, СБКТС, ЭПТС",
+    includedServices: (Number(config.serviceBundleVersion) >= 1 || [config.laboratoryRub,config.sbktsRub,config.eptsRub].every(value => numberOrZero(value) > 0))
+      ? ["laboratory", "sbkts", "epts"] : undefined,
+    amountRub: numberOrZero(config.laboratoryRub) + numberOrZero(config.sbktsRub) + numberOrZero(config.eptsRub),
+    kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "rf-delivery", title: input.deliveryCity ? `Доставка по РФ: ${input.deliveryCity}` : "Доставка по РФ", amountRub: numberOrZero(input.cityDeliveryRub ?? config.rfDeliveryRub), kind: "logistics", amountType: "fixed", source: input.cityDeliveryRub ? "manager" : "market_config" });
   addLine(lines, {
     id:"customs",title:"Таможенные платежи",amountRub:numberOrZero(input.customsRub),

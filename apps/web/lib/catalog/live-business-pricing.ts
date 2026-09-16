@@ -1,3 +1,4 @@
+import { applyJapanServiceCosts } from "./japan-service-pricing";
 import { compactRepricedProjection } from "./compact-pricing-snapshot";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { withReplayInputs } from "./pricing-replay-inputs";
@@ -65,14 +66,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
   offer = synchronizeCombustionPower(offer);
   const market = String(offer.market || "") as CatalogMarket;
   if (!market) return offer;
-  // Japan contains completed auction results. Their published price is a
-  // historical snapshot and must not move with today's exchange rate.
-  if (market === "japan") return {
-    ...offer,
-    previousTotalRub: null,
-    priceDeltaRub: null,
-    priceChangedAt: undefined,
-  } as T;
+  if (market === "japan") return applyJapanServiceCosts(offer, configured);
   offer = withReplayInputs(offer);
   let snapshot = offer.calculationSnapshot || {};
   const resolved = resolveCatalogMarketConfig(market, configured);

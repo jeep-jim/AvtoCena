@@ -16,7 +16,7 @@ function decode(text) {return text.replace(/&quot;/g,'"').replace(/&#x27;|&#39;/
 try {
   const home=JSON.parse(await read('/api/catalog/home'));
   report.marketCounts=home.marketCounts;
-  for(const market of ['china','korea','uae','georgia','europe']) {
+  for(const market of ['china','korea','uae','georgia','europe','japan']) {
     const rows=home.items.filter(row=>row.market===market && (Number(row.totalRub)>0 || Number(row.sellerPriceRub)>0)).slice(0,2);
     assert.ok(rows.length,`No public quotes for ${market}`);
     for(const row of rows) {
@@ -30,6 +30,14 @@ try {
       report.quotes.push(result);
       assert.equal(detailRub,expected,`List/detail mismatch: ${row.id}`);
       assert.ok(preview.imageUrl,`Missing photo: ${row.id}`);
+      assert.ok(!html.includes('В том числе обеспечительный платёж'),`Obsolete payment hint: ${row.id}`);
+      if(row.catalogPricingMode !== 'seller') {
+        const bundle = html.match(/data-price-line="laboratory" data-price-amount-rub="([^"]+)"/);
+        assert.ok(bundle && Number(bundle[1]) > 0,`Missing combined document cost: ${row.id}`);
+        assert.ok(!/data-price-line="(?:sbkts|epts|security-deposit)"/.test(html),`Duplicate payment lines: ${row.id}`);
+        assert.ok(html.includes('Лаборатория, СБКТС, ЭПТС'));
+        result.serviceBundleRub=Number(bundle[1]);
+      }
     }
   }
   const missing=await read('/cars/offer/unavailable-verification-example');

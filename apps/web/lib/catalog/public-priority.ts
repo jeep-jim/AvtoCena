@@ -72,6 +72,9 @@ function completeCalculation(offer: Partial<VehicleOffer> | any) {
   const positiveIds = new Set(breakdown
     .filter((line: any) => positive(line?.amountRub, 1_000_000_000) > 0)
     .map((line: any) => String(line?.id || "")));
+  const bundle = breakdown.find((line: any) => line.id === "laboratory" && positive(line.amountRub) > 0
+    && ["laboratory", "sbkts", "epts"].every(id => line.includedServices?.includes(id)));
+  if (bundle) { positiveIds.add("sbkts"); positiveIds.add("epts"); }
   return Boolean(
     totalRub
       && ["ready", "estimated", "auction_start", "calculated"].includes(status)

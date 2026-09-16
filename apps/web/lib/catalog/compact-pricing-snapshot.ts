@@ -1,3 +1,4 @@
+import { japanServiceCostBasis } from "./japan-service-pricing";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { withReplayInputs } from "./pricing-replay-inputs";
 import type { VehicleOffer } from './types';
@@ -7,7 +8,11 @@ import type { VehicleOffer } from './types';
 export function compactPricingSnapshot(offer: VehicleOffer) {
   offer = withReplayInputs(offer);
   const s = offer.calculationSnapshot;
-  if (offer.market === 'japan' || !s?.customsInput) return {};
+  if (offer.market === 'japan') {
+    const basis = japanServiceCostBasis(s);
+    return basis ? {serviceCostBasis:basis} : {};
+  }
+  if (!s?.customsInput) return {};
   const c = s.customs;
   return {
     customsInput: s.customsInput, eurRate: s.eurRate, sourcePriceRub: s.sourcePriceRub,

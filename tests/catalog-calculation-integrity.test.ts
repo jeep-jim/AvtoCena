@@ -5,7 +5,7 @@ import { calculateRussiaCustomsForIndividual } from "../packages/engine/src/calc
 
 const importedAt = new Date("2026-07-26T00:00:00.000Z");
 
-test("security deposit is shown but does not increase the full vehicle price twice", () => {
+test("full car price is one cost and the advance is not added to the total", () => {
   const result = calculateAvtocenaFromBusinessConfig({
     marketId: "china",
     sourcePriceRub: 1_000_000,
@@ -18,9 +18,9 @@ test("security deposit is shown but does not increase the full vehicle price twi
   });
 
   assert.equal(result.totalRub, 1_590_000);
-  assert.equal(result.breakdown.find((line) => line.id === "car")?.amountRub, 840_000);
-  assert.equal(result.breakdown.find((line) => line.id === "security-deposit")?.amountRub, 160_000);
-  assert.match(result.breakdown.find((line) => line.id === "security-deposit")?.note || "", /Засчитывается/);
+  assert.equal(result.breakdown.find((line) => line.id === "car")?.amountRub, 1_000_000);
+  assert.equal(result.breakdown.find((line) => line.id === "security-deposit")?.amountRub, undefined);
+  assert.equal(result.breakdown.find((line) => line.id === "car")?.note, undefined);
 });
 
 test("Japan first payment keeps 31k deposit plus 39k commission without double counting", () => {
@@ -37,7 +37,7 @@ test("Japan first payment keeps 31k deposit plus 39k commission without double c
 
   assert.equal(result.totalRub, 1_339_000);
   assert.equal(
-    (result.breakdown.find((line) => line.id === "security-deposit")?.amountRub || 0)
+    (result.snapshot.marketConfig.securityDepositRub || 0)
       + (result.breakdown.find((line) => line.id === "topavto-commission")?.amountRub || 0),
     70_000,
   );

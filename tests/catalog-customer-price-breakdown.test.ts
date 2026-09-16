@@ -17,7 +17,7 @@ test("customer screenshot cases show the complete seller price without adding th
     assert.equal(visible.find(line=>line.id==='car')?.amountRub,price,market);
     assert.ok(!visible.some(line=>line.id==='security-deposit'));
     assert.equal(visible.reduce((sum,line)=>sum+line.amountRub,0),result.totalRub,market);
-    assert.match(visible.find(line=>line.id==='car')?.note || '',/входит в цену/);
+    assert.equal(visible.find(line=>line.id==='car')?.note,undefined);
     assert.equal(JSON.stringify(result),before,'stored snapshot is immutable');
     assert.deepEqual(customerPriceBreakdown(visible),visible,'projection is idempotent');
   }

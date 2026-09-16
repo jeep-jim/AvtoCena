@@ -332,3 +332,16 @@ test("price comparison keeps auction starts separate from fixed-price listings",
   };
   assert.deepEqual(findCatalogPriceOutliers([...fixed, auction]), []);
 });
+
+test('service bundle fulfills all three document costs only with explicit coverage; other gates remain required',()=>{
+ const row=calculatedOffer(3200000);
+ const lines=row.calculationSnapshot.breakdown.filter((l:any)=>!['sbkts','epts'].includes(l.id)).map((l:any)=>l.id==='laboratory'?{...l,amountRub:50000,includedServices:['laboratory','sbkts','epts']}:l);
+ const quote={...row,calculationSnapshot:{...row.calculationSnapshot,breakdown:lines}};
+ assert.equal(catalogOfferVisibleRub(quote),3200000);
+ for(const omitted of ['sbkts','epts']) {
+  const incomplete=lines.map((l:any)=>l.id==='laboratory'?{...l,includedServices:l.includedServices.filter((s:string)=>s!==omitted)}:l);
+  assert.equal(catalogOfferVisibleRub({...quote,calculationSnapshot:{...quote.calculationSnapshot,breakdown:incomplete}}),0);
+ }
+ for(const missing of ['broker','svh','rf-delivery','customs']) assert.equal(catalogOfferVisibleRub({...quote,calculationSnapshot:{...quote.calculationSnapshot,breakdown:lines.filter((l:any)=>l.id!==missing)}}),0);
+ assert.equal(catalogOfferVisibleRub({...quote,calculationSnapshot:{...quote.calculationSnapshot,customs:{status:'needs_data'}}}),0);
+});

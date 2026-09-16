@@ -101,7 +101,7 @@ test("known initial market payments are preserved", async () => {
   const uae = await settings.getActiveMarketVersion("uae");
   assert.equal(japan.securityDepositRub + japan.topAvtoCommissionRub, 70000);
   assert.equal(china.securityDepositRub + china.topAvtoCommissionRub, 250000);
-  assert.equal(uae.securityDepositRub + uae.topAvtoCommissionRub, 200000);
+  assert.equal(uae.securityDepositRub + uae.topAvtoCommissionRub, 250000);
 });
 
 test("direct partner payout future version does not affect current active payout", async () => {
