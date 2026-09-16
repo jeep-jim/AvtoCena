@@ -76,8 +76,7 @@ export function PublicLegalFooter() {
     try {
       if (!window.localStorage.getItem(COOKIE_NOTICE_STORAGE_KEY)) {
         const frame = window.requestAnimationFrame(() => {
-          if (window.matchMedia("(max-width: 767px)").matches) setCookieBannerOpen(true);
-          else setCookieOpen(true);
+          setCookieBannerOpen(true);
         });
         return () => window.cancelAnimationFrame(frame);
       }
