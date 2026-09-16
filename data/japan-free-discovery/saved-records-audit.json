@@ -1,0 +1,848 @@
+{
+  "jptrade": {
+    "unique": 124,
+    "fields": {
+      "source": 124,
+      "sourceUrl": 124,
+      "sourceId": 124,
+      "title": 124,
+      "make": 124,
+      "model": 124,
+      "year": 124,
+      "priceJpy": 124,
+      "statusRaw": 124,
+      "auctionDate": 124,
+      "auctionName": 124,
+      "lotNumber": 124,
+      "engineCc": 111,
+      "mileageKm": 124,
+      "grade": 123,
+      "chassis": 124,
+      "imageUrls": 124,
+      "auctionSheetUrls": 124,
+      "evidenceSha256": 124,
+      "qualifiedSoldCandidate": 107
+    },
+    "statuses": {
+      "продано": 124
+    },
+    "reviewReasons": {
+      "None": 124
+    },
+    "detailErrors": {
+      "None": 124
+    },
+    "samples": [
+      {
+        "source": "jptrade",
+        "sourceUrl": "https://jptrade.ru/stat/30154199",
+        "sourceId": "30154199",
+        "title": "Suzuki Hustler",
+        "make": "Suzuki",
+        "model": "Hustler",
+        "year": 2015.0,
+        "priceJpy": 158000.0,
+        "statusRaw": "продано",
+        "auctionDate": "2026-09-15",
+        "auctionName": "JU Mie",
+        "lotNumber": "16",
+        "engineCc": 660.0,
+        "mileageKm": 212000.0,
+        "grade": "3.5",
+        "chassis": "MR41S",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.1502_25.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.2025_26.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.2552_27.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.3086_28.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.3624_29.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.4148_30.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.4712_31.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164646.2370_32.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164646.3069_33.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164646.3682_34.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164646.4221_35.webp"
+        ],
+        "auctionSheetUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881496972/1789164643.0721_24.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "9d07606c039531301a4c59a4d0e675bfc3c9aea2537297a81e9b8163f44fd501",
+        "qualifiedSoldCandidate": true
+      },
+      {
+        "source": "jptrade",
+        "sourceUrl": "https://jptrade.ru/stat/30150345",
+        "sourceId": "30150345",
+        "title": "Honda N-Box",
+        "make": "Honda",
+        "model": "N-Box",
+        "year": 2018.0,
+        "priceJpy": 591000.0,
+        "statusRaw": "продано",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "lotNumber": "3046",
+        "engineCc": 660.0,
+        "mileageKm": 96000.0,
+        "grade": "4",
+        "chassis": "JF3",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881115663/1789074462.0187_5.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881115663/1789074462.0950_6.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881115663/1789074461.9406_4.webp"
+        ],
+        "auctionSheetUrls": [
+          "/netcat_template/template/jptrade/img/auc_list.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "2f7843c6edab9170d1c052c879ab728486aa16c71c56fb2dc9104cd8d3e5fd91",
+        "qualifiedSoldCandidate": true
+      },
+      {
+        "source": "jptrade",
+        "sourceUrl": "https://jptrade.ru/stat/30150088",
+        "sourceId": "30150088",
+        "title": "Toyota Vitz",
+        "make": "Toyota",
+        "model": "Vitz",
+        "year": 2019.0,
+        "priceJpy": 858000.0,
+        "statusRaw": "продано",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Kyushu",
+        "lotNumber": "2004",
+        "engineCc": 1300.0,
+        "mileageKm": 50000.0,
+        "grade": "4.5",
+        "chassis": "NSP130",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881071263/1789076224.9885_2.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881071263/1789076225.0994_3.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1881071263/1789076224.8799_1.webp"
+        ],
+        "auctionSheetUrls": [
+          "/netcat_template/template/jptrade/img/auc_list.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "6f411f2857273bc1b15de4a533d3440b9da3e5157c7493246b5cecf191c89d73",
+        "qualifiedSoldCandidate": true
+      }
+    ]
+  },
+  "carvector": {
+    "unique": 1735,
+    "fields": {
+      "source": 1735,
+      "sourceId": 1735,
+      "raw": 1735,
+      "sourceUrl": 1735,
+      "priceJpy": 1735,
+      "auctionDate": 1735,
+      "reviewReason": 1735
+    },
+    "statuses": {
+      "None": 1735
+    },
+    "reviewReasons": {
+      "explicit_sold_status_and_gallery_not_verified": 1735
+    },
+    "detailErrors": {
+      "None": 1735
+    },
+    "samples": [
+      {
+        "source": "carvector",
+        "sourceId": "2435f6e3-fa56-4e77-9ebf-acef5f37a5de",
+        "raw": {
+          "__typename": "OfferAuction",
+          "id": "2435f6e3-fa56-4e77-9ebf-acef5f37a5de",
+          "kind": "AUCTION_STATS",
+          "urlPage": {
+            "path": "/stat/toyota/corolla/2435f6e3-fa56-4e77-9ebf-acef5f37a5de",
+            "fullUrl": "/stat/toyota/corolla/2435f6e3-fa56-4e77-9ebf-acef5f37a5de"
+          },
+          "make": {
+            "title": "Toyota",
+            "slug": "toyota"
+          },
+          "model": {
+            "title": "COROLLA",
+            "slug": "corolla"
+          },
+          "chassis": {
+            "title": "ZRE212"
+          },
+          "modification": {
+            "title": "G-X"
+          },
+          "bodyType": {
+            "title": ""
+          },
+          "year": 2020,
+          "power": 140,
+          "seats": 0,
+          "mileage": 71000,
+          "engineVolume": 1800,
+          "transmission": {
+            "title": "FAT"
+          },
+          "transmissionType": {
+            "title": "AT"
+          },
+          "color": {
+            "slug": "white",
+            "title": "White"
+          },
+          "fuel": {
+            "title": ""
+          },
+          "steering": {
+            "title": "Right"
+          },
+          "gear": [
+            {
+              "title": "FF"
+            }
+          ],
+          "equip": "AAC",
+          "serial": "",
+          "images": [],
+          "imagesTotal": 0,
+          "auctionListImages": [],
+          "price": {
+            "USD": 0,
+            "JPY": 0,
+            "EUR": 0,
+            "RUB": 0
+          },
+          "startPrice": {
+            "USD": 1321,
+            "JPY": 200000,
+            "EUR": 1138,
+            "RUB": 108627
+          },
+          "finishPrice": {
+            "USD": 7503,
+            "JPY": 1136000,
+            "EUR": 6463,
+            "RUB": 617002
+          },
+          "averagePrice": {
+            "USD": 7503,
+            "JPY": 1136000,
+            "EUR": 6463,
+            "RUB": 617002
+          },
+          "auction": {
+            "title": "TAA Kinki"
+          },
+          "auctionAt": "2026-09-14T15:00:00Z",
+          "lot": "734",
+          "rate": {
+            "title": "R"
+          },
+          "createdAt": "2026-09-12T08:48:30.056767Z",
+          "updatedAt": "2026-09-15T20:07:05.039757Z",
+          "actions": {
+            "canGetImages": false
+          },
+          "isUss": false,
+          "isEternal": false,
+          "translation": {
+            "isReaded": false,
+            "text": "",
+            "userHasTranslationRequest": false
+          },
+          "dataReady": {
+            "isDataReady": "",
+            "isImagesReady": ""
+          },
+          "_carvectorListUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1"
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1",
+        "priceJpy": 1136000,
+        "auctionDate": "2026-09-14T15:00:00Z",
+        "reviewReason": "explicit_sold_status_and_gallery_not_verified"
+      },
+      {
+        "source": "carvector",
+        "sourceId": "2a843d44-7989-4d37-8b3c-ba0e170f9a33",
+        "raw": {
+          "__typename": "OfferAuction",
+          "id": "2a843d44-7989-4d37-8b3c-ba0e170f9a33",
+          "kind": "AUCTION_STATS",
+          "urlPage": {
+            "path": "/stat/toyota/corolla/2a843d44-7989-4d37-8b3c-ba0e170f9a33",
+            "fullUrl": "/stat/toyota/corolla/2a843d44-7989-4d37-8b3c-ba0e170f9a33"
+          },
+          "make": {
+            "title": "Toyota",
+            "slug": "toyota"
+          },
+          "model": {
+            "title": "COROLLA",
+            "slug": "corolla"
+          },
+          "chassis": {
+            "title": "ZWE211"
+          },
+          "modification": {
+            "title": "HYBRID DOUBLE BAI BE"
+          },
+          "bodyType": {
+            "title": ""
+          },
+          "year": 2020,
+          "power": 98,
+          "seats": 0,
+          "mileage": 16000,
+          "engineVolume": 1800,
+          "transmission": {
+            "title": "FAT"
+          },
+          "transmissionType": {
+            "title": "AT"
+          },
+          "color": {
+            "slug": "pearl",
+            "title": "Pearl"
+          },
+          "fuel": {
+            "title": ""
+          },
+          "steering": {
+            "title": "Right"
+          },
+          "gear": [
+            {
+              "title": "FF"
+            }
+          ],
+          "equip": "AAC",
+          "serial": "",
+          "images": [],
+          "imagesTotal": 0,
+          "auctionListImages": [],
+          "price": {
+            "USD": 0,
+            "JPY": 0,
+            "EUR": 0,
+            "RUB": 0
+          },
+          "startPrice": {
+            "USD": 5284,
+            "JPY": 800000,
+            "EUR": 4551,
+            "RUB": 434509
+          },
+          "finishPrice": {
+            "USD": 11842,
+            "JPY": 1793000,
+            "EUR": 10201,
+            "RUB": 973843
+          },
+          "averagePrice": {
+            "USD": 11426,
+            "JPY": 1730000,
+            "EUR": 9842,
+            "RUB": 939625
+          },
+          "auction": {
+            "title": "CAA Gifu"
+          },
+          "auctionAt": "2026-09-14T15:00:00Z",
+          "lot": "30044",
+          "rate": {
+            "title": "4,5"
+          },
+          "createdAt": "2026-09-12T08:57:50.029655Z",
+          "updatedAt": "2026-09-15T19:54:04.942498Z",
+          "actions": {
+            "canGetImages": false
+          },
+          "isUss": false,
+          "isEternal": false,
+          "translation": {
+            "isReaded": false,
+            "text": "",
+            "userHasTranslationRequest": false
+          },
+          "dataReady": {
+            "isDataReady": "",
+            "isImagesReady": ""
+          },
+          "_carvectorListUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1"
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1",
+        "priceJpy": 1793000,
+        "auctionDate": "2026-09-14T15:00:00Z",
+        "reviewReason": "explicit_sold_status_and_gallery_not_verified"
+      },
+      {
+        "source": "carvector",
+        "sourceId": "44faeab3-eff8-4139-ba01-330afc639f95",
+        "raw": {
+          "__typename": "OfferAuction",
+          "id": "44faeab3-eff8-4139-ba01-330afc639f95",
+          "kind": "AUCTION_STATS",
+          "urlPage": {
+            "path": "/stat/toyota/corolla/44faeab3-eff8-4139-ba01-330afc639f95",
+            "fullUrl": "/stat/toyota/corolla/44faeab3-eff8-4139-ba01-330afc639f95"
+          },
+          "make": {
+            "title": "Toyota",
+            "slug": "toyota"
+          },
+          "model": {
+            "title": "COROLLA",
+            "slug": "corolla"
+          },
+          "chassis": {
+            "title": "ZWE214"
+          },
+          "modification": {
+            "title": "HYBRID S"
+          },
+          "bodyType": {
+            "title": ""
+          },
+          "year": 2020,
+          "power": 98,
+          "seats": 0,
+          "mileage": 189000,
+          "engineVolume": 1800,
+          "transmission": {
+            "title": "FAT"
+          },
+          "transmissionType": {
+            "title": "AT"
+          },
+          "color": {
+            "slug": "white",
+            "title": "White"
+          },
+          "fuel": {
+            "title": ""
+          },
+          "steering": {
+            "title": "Right"
+          },
+          "gear": [
+            {
+              "title": "Fulltime 4WD"
+            }
+          ],
+          "equip": "AAC",
+          "serial": "",
+          "images": [],
+          "imagesTotal": 0,
+          "auctionListImages": [],
+          "price": {
+            "USD": 0,
+            "JPY": 0,
+            "EUR": 0,
+            "RUB": 0
+          },
+          "startPrice": {
+            "USD": 198,
+            "JPY": 30000,
+            "EUR": 171,
+            "RUB": 16294
+          },
+          "finishPrice": {
+            "USD": 5548,
+            "JPY": 840000,
+            "EUR": 4779,
+            "RUB": 456234
+          },
+          "averagePrice": {
+            "USD": 5383,
+            "JPY": 815000,
+            "EUR": 4637,
+            "RUB": 442656
+          },
+          "auction": {
+            "title": "CAA Tokyo"
+          },
+          "auctionAt": "2026-09-14T15:00:00Z",
+          "lot": "90098",
+          "rate": {
+            "title": "3,5"
+          },
+          "createdAt": "2026-09-12T08:49:05.031923Z",
+          "updatedAt": "2026-09-15T20:03:25.052319Z",
+          "actions": {
+            "canGetImages": false
+          },
+          "isUss": false,
+          "isEternal": false,
+          "translation": {
+            "isReaded": false,
+            "text": "",
+            "userHasTranslationRequest": false
+          },
+          "dataReady": {
+            "isDataReady": "",
+            "isImagesReady": ""
+          },
+          "_carvectorListUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1"
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://carvector.com/stat/toyota/corolla?minYear=2010&minPrice=1&minEngineVolume=400&pageSize=50&sortBy=AUCTION_AT_DESC&page=1",
+        "priceJpy": 840000,
+        "auctionDate": "2026-09-14T15:00:00Z",
+        "reviewReason": "explicit_sold_status_and_gallery_not_verified"
+      }
+    ]
+  },
+  "tokai": {
+    "unique": 2271,
+    "fields": {
+      "source": 2271,
+      "sourceUrl": 2271,
+      "sourceId": 2271,
+      "title": 2271,
+      "year": 2271,
+      "priceJpy": 2126,
+      "auctionDate": 2271,
+      "auctionName": 2271,
+      "lotNumber": 2271,
+      "imageUrls": 2271,
+      "auctionSheetUrls": 2271,
+      "evidenceSha256": 2271
+    },
+    "statuses": {
+      "": 2271
+    },
+    "reviewReasons": {
+      "None": 2271
+    },
+    "detailErrors": {
+      "None": 2271
+    },
+    "samples": [
+      {
+        "source": "tokai",
+        "sourceUrl": "https://tokai-auto.ru/daihatsu/hijet-truck/?auc_id=1882530144",
+        "sourceId": "1882530144",
+        "title": "Daihatsu Hijet Truck 2006 • 427528 ₽ под ключ из Японии Надёжный авто с проверенного аукциона JU Shizuoka",
+        "make": null,
+        "model": null,
+        "year": 2006,
+        "priceJpy": 126000.0,
+        "statusRaw": "",
+        "auctionDate": "2026-09-15",
+        "auctionName": "JU Shizuoka",
+        "lotNumber": "203",
+        "engineCc": null,
+        "mileageKm": null,
+        "grade": "",
+        "chassis": "",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882530144/1789412679.0916_7.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882530144/1789412679.1496_8.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882530144/1789412679.2151_9.webp"
+        ],
+        "auctionSheetUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882530144/1789412679.0005_6.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "57a2aaefd5e4c3d92cf8b1f847fdad0752e067fb0af2a61fb049fd4728e77fbc",
+        "qualifiedSoldCandidate": false
+      },
+      {
+        "source": "tokai",
+        "sourceUrl": "https://tokai-auto.ru/daihatsu/hijet-truck/?auc_id=1882529699",
+        "sourceId": "1882529699",
+        "title": "Daihatsu Hijet Truck 2005 • 403462 ₽ под ключ из Японии Надёжный авто с проверенного аукциона TAA Hiroshima",
+        "make": null,
+        "model": null,
+        "year": 2005,
+        "priceJpy": 84000.0,
+        "statusRaw": "",
+        "auctionDate": "2026-09-15",
+        "auctionName": "TAA Hiroshima",
+        "lotNumber": "4333",
+        "engineCc": null,
+        "mileageKm": null,
+        "grade": "",
+        "chassis": "",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882529699/1789420406.3984_2.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882529699/1789420406.4878_3.webp"
+        ],
+        "auctionSheetUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882529699/1789420406.3076_1.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "7ba84b647a8aa8cb3266d1f02b0cb0de89a4c550af29173f71b9cb375790c951",
+        "qualifiedSoldCandidate": false
+      },
+      {
+        "source": "tokai",
+        "sourceUrl": "https://tokai-auto.ru/daihatsu/tanto/?auc_id=1882431685",
+        "sourceId": "1882431685",
+        "title": "Daihatsu Tanto 2014 • 784649 ₽ под ключ из Японии Надёжный авто с проверенного аукциона SAA Sapporo",
+        "make": null,
+        "model": null,
+        "year": 2014,
+        "priceJpy": 582000.0,
+        "statusRaw": "",
+        "auctionDate": "2026-09-15",
+        "auctionName": "SAA Sapporo",
+        "lotNumber": "4065",
+        "engineCc": null,
+        "mileageKm": null,
+        "grade": "",
+        "chassis": "",
+        "imageUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399054.8887_2.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399054.9476_3.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399055.0238_4.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399055.0877_5.webp",
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399055.1434_6.webp"
+        ],
+        "auctionSheetUrls": [
+          "https://jp2.pa-server.ru/auc_auto/2026_09_15/1882431685/1789399054.8148_1.webp"
+        ],
+        "imagesVerified": false,
+        "publicationReady": false,
+        "evidenceSha256": "65fa7f27ce2f4a2fba461cb3b8b6c745b30854a55ac69817f42c8ef77fd8954b",
+        "qualifiedSoldCandidate": false
+      }
+    ]
+  },
+  "jpauc": {
+    "unique": 1640,
+    "fields": {
+      "source": 1640,
+      "sourceId": 1640,
+      "raw": 1640,
+      "sourceUrl": 1640,
+      "statusRaw": 1628,
+      "detailEvidence": 1640,
+      "imageUrls": 1640,
+      "reviewReason": 1640
+    },
+    "statuses": {
+      "available": 883,
+      "unsold": 379,
+      "sold": 362,
+      "": 12,
+      "removed": 4
+    },
+    "reviewReasons": {
+      "auction_date_and_photo_roles_require_review": 1640
+    },
+    "detailErrors": {
+      "None": 1640
+    },
+    "samples": [
+      {
+        "source": "jpauc",
+        "sourceId": "345240919",
+        "raw": {
+          "dataId": "345240919",
+          "r": "1",
+          "rtotal": "78322",
+          "date": "2026-09-10",
+          "location": "Tokyo",
+          "lot": "65055",
+          "maker": "LAMBORGHINI",
+          "model": "URUS",
+          "year": 2026,
+          "grade": "SE",
+          "engineCc": 4000,
+          "modelCode": "ZL40",
+          "shift": "AT",
+          "color": "PEARL",
+          "auctionGrade": "S",
+          "sourceStatus": "available",
+          "startPrice": 0,
+          "listingImage": "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=65055&number=1&h=320",
+          "detailUrl": "https://jpauc.com/auction/past/detail/345240919?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=1&rtotal=78322",
+          "semanticEvidence": {
+            "year": {
+              "value": 2026,
+              "rawValues": [
+                "Year: 2026 SE"
+              ],
+              "status": "exact"
+            },
+            "fuel": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "engineCc": {
+              "value": 4000,
+              "rawValues": [
+                "4,000cc | ZL40"
+              ],
+              "status": "exact"
+            },
+            "powerHp": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "powerKw": {
+              "rawValues": [],
+              "status": "missing"
+            }
+          }
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://jpauc.com/auction/past/detail/345240919?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=1&rtotal=78322",
+        "statusRaw": "available",
+        "priceJpy": null,
+        "detailEvidence": "JPAUC - URUS | (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81274524-1', 'auto'); ga('send', 'pageview'); Sep 16th, 2026. 19:09:04 JST $1 (USD) = ¥159.40 (JPY) Skip to content Login Language English 中文 Spanish Home Car Oneprice Motorbike LHD Prod. Year Car Parts & Accessories Carloto URUS 1/ 78322 Date Location Maker Year CC Shift Color Steering Auc. Grade Status Time Lot No. Model Model Grade Model Code KM Title Start Price End Price Date: 2026-09-10 Location: Tokyo Maker: LAMBORGHINI Year: 2026 CC: 4000cc Shift: AT Color: PEARL Steering: - Auc. Grade: S Status: available Time: 00:00:00 Lot No.: 65055 Model: URUS Model Grade: SE Model Code: ZL40 code KM: 0 km Title: n/a Start Price: ¥ 0 End Price: N/A 1/ 78322 Auction History Last 3 Weeks Average sold price Click Here: How to Read Auction Sheet Auction Sheet Print Inquiry | How to Use OK Bid Request Must Login first OK $(document).ready(function () { $('.car-image').magnificPopup({ gallery: { enabled: true }, type: 'image' }); }); $('.slider-for').slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.slider-nav', autoplay: false }); $('.slider-nav').slick({ slidesToShow: 2.5, slidesToScroll: 1, asNavFor: '.slider-for', dots: false, centerMode: true, focusOnSelect: true }); Number.prototype.formatMoney = function(c, d, t) { var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? \".\" : d, t = t == undefined ? \",\" : t, s = n 3 ? j % 3 : 0; return s + (j ? i.substr(0, j) + t : \"\") + i.substr(j).replace(/(\\d{3})(?=\\d)/g, \"$1\" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : \"\"); }; var is_car_auction_history_opened = false; var is_car_price_history_opened = false; var global_mileage = null; /* global variable: start price */ var g_start_price = 0; function is_the_mileage_group( mileage, mileage_group ) { var mileage_10k_multiplier = 0; var group_multiplier = Math.floor( mileage_group / 10000 ); while ( mileage > 10000 ) { mileage_10k_multiplier++; mileage -= 10000; } return mileage_10k_multiplier == group_multiplier; } function display_bid_warning(message) { $('#bid-input-wrapper').css('background', 'red'); $('#bid-input-wrapper').css('color', 'white'); $('#bid-input-wrapper').css('padding', '10px'); $('#bid-input-wrapper').css('margin-bottom', '10px'); $('#bid-input-wrapper').css('border-radius', '5px'); $('#warning-text').empty().html(message); $('#bid-trigger').attr('disabled', true); } function hide_bid_warning() { $('#bid-input-wrapper').css('background', 'transparent'); $('#bid-input-wrapper').css('color', 'black'); $('#bid-input-wrapper').css('padding', '0'); $('#bid-input-wrapper').css('margin-bottom', '0'); $('#bid-input-wrapper').css('border-radius', '0'); $('#warning-text').empty(); $('#bid-trigger').attr('disabled', false); } $( document ).ready(function() { $(\"#bid_amount\").maskMoney({ thousands: ',', decimal:'.', allowZero: true, prefix: '¥ ', precision: 0 }); $('#bid_amount').keyup(function(e) { var bid_amount = $(this).val(); var bid_amount_int = parseInt(bid_amount.replace(/\\D/g, '')); if (bid_amount_int == 0) { display_bid_warning(\"Minimum bid amount is &yen 5,000!\"); return; } else if (bid_amount_int greater than start price!\"); return; } else if (bid_amount_int % 5000 != 0) { display_bid_warning(\"Bid amount must be multiple of &yen 5,000!\"); return; } else { hide_bid_warning(); } $.post(\"/API/yen-to-customers-currency\", {yen: bid_amount}, function( data ) { $('.customers_currencies').css('display', 'block'); $('.customers_currencies').empty().html(data.on_customers_currency); }); }); $('#close-bid').click(function() { $('#bid').css('display', 'none'); }); $('#close-follow').click(function() { $('#follow').css('display', 'none'); }); $('.carimages').unslider(); if ($(window).width() -- Car history not found -- '); $('#listhistory').toggle('slow'); } else { str = ' '; str += ' Date Auction End Price (¥) Status '; $.each( data, function( i, item ) { str += ' '+ item.lot_date +' ' + item.auct_system_ref + ' ' + item.auction_name +' ' + parseInt(item.end_price_en*1000).formatMoney(0, '.', ',') +' '+ item.result_en +' '; }); str += ' '; $('#listhistory').html(str); $('#listhistory').toggle('slow'); } }); }); $('#price_avg').click( function(e) { e.preventDefault(); var model = $(this).data('model'); var year = $(this).data('year'); var score = ($(this).data('score').toString()).replace(/\\./g,','); var mileage = $(this).data('mileage'); var model_name = $(this).data('model-name'); global_mileage = parseInt(mileage) * 1000; /// Okay, close the car's price history if ( is_car_price_history_opened ) { is_car_price_history_opened = false; $('#listprice').slideUp(); /// Halt here... return; } else { is_car_price_history_opened = true; $('#listprice').slideDown(); } $('#listprice').html('-- Loading data --'); $.getJSON( \"/API/auction/price/\" + model + \"/\" + year + \"/\" + score + \"/\" + model_name ) .done(function( data ) { if (data == null) { $('#listprice').html('-- Car history not found --'); } else { str = ' Model: ' + model + ' Year: ' + year + ' ' + 'Grade: \"' + score.replace(/\\,/g,'.') + '\" Mileage: '+ mileage +',000km '; str += ' '; str += ' ' + ' Mileage Group (km) ' + ' End Price (¥) ' + ' Model Grade ' + ' Avg End Price : ' + ' Sold car data ' + ' '; /* sekarang kita cari yang mileage-nya berdekatan */ var terakhir_kurang_dari = null; var tepat_sama = null; var pertama_lebih_dari = null; var pertama_lebih_dari_sudah = false; var banyaknya_baris = 0; $.each( data, function( i, item ) { var mileage_group = parseInt(item.mileage_group); if (mileage_group global_mileage && pertama_lebih_dari_sudah == false) { pertama_lebih_dari_sudah = true; pertama_lebih_dari = mileage_group; banyaknya_baris++; } }); if (banyaknya_baris == 0) { str += ' Sorry, no record found for this item :( '; $('#listprice').html(str); } $.each( data, function( i, item ) { var similiar_cars_anchors = ' '; var counter = 1; /* untuk menampilkan per cars */ var end_price_html = \" \"; var grade_html = \" \"; var end_price_total = 0; var end_price_count = 0; $.each( item.price_arr, function( i, c ) { end_price_html += \" \"+ ' ¥ ' + ' ' + (parseInt(c.end_price)* 1000).formatMoney(0, '.', ',') + \" \"; grade_html += \" \"+ c.grade_en + \" \"; end_price_total += (parseInt(c.end_price)* 1000); end_price_count ++; }); end_price_html += \" \"; grade_html += \" \"; $.each( item.similiar_cars, function ( j, car ) { var auction_sheet_url = ''; var auction_date = ''; $.each( car, function ( k, field) { if ( k == 0 ) { auction_sheet_url = field; } else if ( k == 1 ) { auction_date = field; } }); if (auction_sheet_url != null) { similiar_cars_anchors += '' + ' ' + ' Car ' + counter + ' / ' +auction_date + ' ' + ' ' + ' '; } counter++; }); similiar_cars_anchors += ' '; var table_row_openener = ' '; var mileage_group = parseInt(item.mileage_group); if (mileage_group == terakhir_kurang_dari) { table_row_openener = ' '; } else if (mileage_group == tepat_sama) { table_row_openener = ' '; } else if (mileage_group == pertama_lebih_dari) { table_row_openener = ' '; } else { table_row_openener = ' '; } var corrected_average_price = parseInt(item.average_price); if (parseInt(item.average_price) '+ ' Mileage Group (km) : ' + parseInt(item.mileage_group).formatMoney(0, '.', ',') + ' ' + ' '+ end_price_html + ' ' + ' '+ grade_html + ' ' + ' ' + ' Avg End Price : ' + item.car_calculated + ' Cars(s) ' + ' - '+' ¥ '+ (end_price_total/end_price_count).formatMoney(0, '.', ',') +' -'+ ' ' + ' ' + ' Data : ' + ' ' + similiar_cars_anchors ' ' + ' ' + ' '; }); str += ' '; $('#listprice').html(str); } }); }); }); $(document).on('click', 'a.sold-car-link', function(e) { e.preventDefault(); var auction_sheet_url = $(this).data('href'); modal({ type: 'info', title: 'Auction sheet', text: ' ' }); }); // Adds and removes body class depending on screen width. function screenClass() { if($(window).innerWidth() var now = moment('2026-09-16 07:09:04 PM', 'YYYY-MM-DD hh:mm:ss a'); function updateClock() { now.add(1, 'second'); var second = now.seconds() * 6, minute = now.minutes() * 6 + second / 60, hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12; $('#clock').empty().html(now.format('MMM Do, YYYY. HH:mm:ss') + ' Tokyo '); //$('#clock_hour').empty().html(hour); //$('#clock_minute').empty().html(minute); //$('#clock_second').empty().html(second); //console.log(now + ':' + hour + ':' + minute + ':' + second); } function timedUpdate () { updateClock(); setTimeout(timedUpdate, 1000); } $(document).ready(function() { timedUpdate(); $('.lang-switcher').click(function(e) { e.preventDefault(); var to_lang = $(this).data('to_lang'); $.get('/switch-language-to/' + to_lang, function(data) { location.reload(); }); }); });",
+        "imageUrls": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=65055&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=65055&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=65055&number=2&h=480"
+        ],
+        "reviewReason": "auction_date_and_photo_roles_require_review"
+      },
+      {
+        "source": "jpauc",
+        "sourceId": "345240965",
+        "raw": {
+          "dataId": "345240965",
+          "r": "2",
+          "rtotal": "78322",
+          "date": "2026-09-10",
+          "location": "Tokyo",
+          "lot": "75791",
+          "maker": "BMW",
+          "model": "IX",
+          "year": 2026,
+          "grade": "M70XDR FIRST ED",
+          "modelCode": "31CF93A",
+          "shift": "AT",
+          "mileageKm": 3000,
+          "color": "GRAY",
+          "auctionGrade": "6",
+          "sourceStatus": "available",
+          "startPrice": 0,
+          "listingImage": "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=75791&number=1&h=320",
+          "detailUrl": "https://jpauc.com/auction/past/detail/345240965?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=2&rtotal=78322",
+          "semanticEvidence": {
+            "year": {
+              "value": 2026,
+              "rawValues": [
+                "Year: 2026 M70XDR FIRST ED"
+              ],
+              "status": "exact"
+            },
+            "fuel": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "engineCc": {
+              "rawValues": [
+                "0cc | 31CF93A"
+              ],
+              "status": "ambiguous"
+            },
+            "powerHp": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "powerKw": {
+              "rawValues": [],
+              "status": "missing"
+            }
+          }
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://jpauc.com/auction/past/detail/345240965?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=2&rtotal=78322",
+        "statusRaw": "available",
+        "priceJpy": null,
+        "detailEvidence": "JPAUC - IX | (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81274524-1', 'auto'); ga('send', 'pageview'); Sep 16th, 2026. 19:09:06 JST $1 (USD) = ¥159.40 (JPY) Skip to content Login Language English 中文 Spanish Home Car Oneprice Motorbike LHD Prod. Year Car Parts & Accessories Carloto IX 2/ 78322 Date Location Maker Year CC Shift Color Steering Auc. Grade Status Time Lot No. Model Model Grade Model Code KM Title Start Price End Price Date: 2026-09-10 Location: Tokyo Maker: BMW Year: 2026 CC: EVcc Shift: AT Color: GRAY Steering: - Auc. Grade: 6 Status: available Time: 00:00:00 Lot No.: 75791 Model: IX Model Grade: M70XDR FIRST ED Model Code: 31CF93A code KM: 3,000 km Title: n/a Start Price: ¥ 0 End Price: N/A 2/ 78322 Auction History Last 3 Weeks Average sold price Click Here: How to Read Auction Sheet Auction Sheet Print Inquiry | How to Use OK Bid Request Must Login first OK $(document).ready(function () { $('.car-image').magnificPopup({ gallery: { enabled: true }, type: 'image' }); }); $('.slider-for').slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.slider-nav', autoplay: false }); $('.slider-nav').slick({ slidesToShow: 2.5, slidesToScroll: 1, asNavFor: '.slider-for', dots: false, centerMode: true, focusOnSelect: true }); Number.prototype.formatMoney = function(c, d, t) { var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? \".\" : d, t = t == undefined ? \",\" : t, s = n 3 ? j % 3 : 0; return s + (j ? i.substr(0, j) + t : \"\") + i.substr(j).replace(/(\\d{3})(?=\\d)/g, \"$1\" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : \"\"); }; var is_car_auction_history_opened = false; var is_car_price_history_opened = false; var global_mileage = null; /* global variable: start price */ var g_start_price = 0; function is_the_mileage_group( mileage, mileage_group ) { var mileage_10k_multiplier = 0; var group_multiplier = Math.floor( mileage_group / 10000 ); while ( mileage > 10000 ) { mileage_10k_multiplier++; mileage -= 10000; } return mileage_10k_multiplier == group_multiplier; } function display_bid_warning(message) { $('#bid-input-wrapper').css('background', 'red'); $('#bid-input-wrapper').css('color', 'white'); $('#bid-input-wrapper').css('padding', '10px'); $('#bid-input-wrapper').css('margin-bottom', '10px'); $('#bid-input-wrapper').css('border-radius', '5px'); $('#warning-text').empty().html(message); $('#bid-trigger').attr('disabled', true); } function hide_bid_warning() { $('#bid-input-wrapper').css('background', 'transparent'); $('#bid-input-wrapper').css('color', 'black'); $('#bid-input-wrapper').css('padding', '0'); $('#bid-input-wrapper').css('margin-bottom', '0'); $('#bid-input-wrapper').css('border-radius', '0'); $('#warning-text').empty(); $('#bid-trigger').attr('disabled', false); } $( document ).ready(function() { $(\"#bid_amount\").maskMoney({ thousands: ',', decimal:'.', allowZero: true, prefix: '¥ ', precision: 0 }); $('#bid_amount').keyup(function(e) { var bid_amount = $(this).val(); var bid_amount_int = parseInt(bid_amount.replace(/\\D/g, '')); if (bid_amount_int == 0) { display_bid_warning(\"Minimum bid amount is &yen 5,000!\"); return; } else if (bid_amount_int greater than start price!\"); return; } else if (bid_amount_int % 5000 != 0) { display_bid_warning(\"Bid amount must be multiple of &yen 5,000!\"); return; } else { hide_bid_warning(); } $.post(\"/API/yen-to-customers-currency\", {yen: bid_amount}, function( data ) { $('.customers_currencies').css('display', 'block'); $('.customers_currencies').empty().html(data.on_customers_currency); }); }); $('#close-bid').click(function() { $('#bid').css('display', 'none'); }); $('#close-follow').click(function() { $('#follow').css('display', 'none'); }); $('.carimages').unslider(); if ($(window).width() -- Car history not found -- '); $('#listhistory').toggle('slow'); } else { str = ' '; str += ' Date Auction End Price (¥) Status '; $.each( data, function( i, item ) { str += ' '+ item.lot_date +' ' + item.auct_system_ref + ' ' + item.auction_name +' ' + parseInt(item.end_price_en*1000).formatMoney(0, '.', ',') +' '+ item.result_en +' '; }); str += ' '; $('#listhistory').html(str); $('#listhistory').toggle('slow'); } }); }); $('#price_avg').click( function(e) { e.preventDefault(); var model = $(this).data('model'); var year = $(this).data('year'); var score = ($(this).data('score').toString()).replace(/\\./g,','); var mileage = $(this).data('mileage'); var model_name = $(this).data('model-name'); global_mileage = parseInt(mileage) * 1000; /// Okay, close the car's price history if ( is_car_price_history_opened ) { is_car_price_history_opened = false; $('#listprice').slideUp(); /// Halt here... return; } else { is_car_price_history_opened = true; $('#listprice').slideDown(); } $('#listprice').html('-- Loading data --'); $.getJSON( \"/API/auction/price/\" + model + \"/\" + year + \"/\" + score + \"/\" + model_name ) .done(function( data ) { if (data == null) { $('#listprice').html('-- Car history not found --'); } else { str = ' Model: ' + model + ' Year: ' + year + ' ' + 'Grade: \"' + score.replace(/\\,/g,'.') + '\" Mileage: '+ mileage +',000km '; str += ' '; str += ' ' + ' Mileage Group (km) ' + ' End Price (¥) ' + ' Model Grade ' + ' Avg End Price : ' + ' Sold car data ' + ' '; /* sekarang kita cari yang mileage-nya berdekatan */ var terakhir_kurang_dari = null; var tepat_sama = null; var pertama_lebih_dari = null; var pertama_lebih_dari_sudah = false; var banyaknya_baris = 0; $.each( data, function( i, item ) { var mileage_group = parseInt(item.mileage_group); if (mileage_group global_mileage && pertama_lebih_dari_sudah == false) { pertama_lebih_dari_sudah = true; pertama_lebih_dari = mileage_group; banyaknya_baris++; } }); if (banyaknya_baris == 0) { str += ' Sorry, no record found for this item :( '; $('#listprice').html(str); } $.each( data, function( i, item ) { var similiar_cars_anchors = ' '; var counter = 1; /* untuk menampilkan per cars */ var end_price_html = \" \"; var grade_html = \" \"; var end_price_total = 0; var end_price_count = 0; $.each( item.price_arr, function( i, c ) { end_price_html += \" \"+ ' ¥ ' + ' ' + (parseInt(c.end_price)* 1000).formatMoney(0, '.', ',') + \" \"; grade_html += \" \"+ c.grade_en + \" \"; end_price_total += (parseInt(c.end_price)* 1000); end_price_count ++; }); end_price_html += \" \"; grade_html += \" \"; $.each( item.similiar_cars, function ( j, car ) { var auction_sheet_url = ''; var auction_date = ''; $.each( car, function ( k, field) { if ( k == 0 ) { auction_sheet_url = field; } else if ( k == 1 ) { auction_date = field; } }); if (auction_sheet_url != null) { similiar_cars_anchors += '' + ' ' + ' Car ' + counter + ' / ' +auction_date + ' ' + ' ' + ' '; } counter++; }); similiar_cars_anchors += ' '; var table_row_openener = ' '; var mileage_group = parseInt(item.mileage_group); if (mileage_group == terakhir_kurang_dari) { table_row_openener = ' '; } else if (mileage_group == tepat_sama) { table_row_openener = ' '; } else if (mileage_group == pertama_lebih_dari) { table_row_openener = ' '; } else { table_row_openener = ' '; } var corrected_average_price = parseInt(item.average_price); if (parseInt(item.average_price) '+ ' Mileage Group (km) : ' + parseInt(item.mileage_group).formatMoney(0, '.', ',') + ' ' + ' '+ end_price_html + ' ' + ' '+ grade_html + ' ' + ' ' + ' Avg End Price : ' + item.car_calculated + ' Cars(s) ' + ' - '+' ¥ '+ (end_price_total/end_price_count).formatMoney(0, '.', ',') +' -'+ ' ' + ' ' + ' Data : ' + ' ' + similiar_cars_anchors ' ' + ' ' + ' '; }); str += ' '; $('#listprice').html(str); } }); }); }); $(document).on('click', 'a.sold-car-link', function(e) { e.preventDefault(); var auction_sheet_url = $(this).data('href'); modal({ type: 'info', title: 'Auction sheet', text: ' ' }); }); // Adds and removes body class depending on screen width. function screenClass() { if($(window).innerWidth() var now = moment('2026-09-16 07:09:06 PM', 'YYYY-MM-DD hh:mm:ss a'); function updateClock() { now.add(1, 'second'); var second = now.seconds() * 6, minute = now.minutes() * 6 + second / 60, hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12; $('#clock').empty().html(now.format('MMM Do, YYYY. HH:mm:ss') + ' Tokyo '); //$('#clock_hour').empty().html(hour); //$('#clock_minute').empty().html(minute); //$('#clock_second').empty().html(second); //console.log(now + ':' + hour + ':' + minute + ':' + second); } function timedUpdate () { updateClock(); setTimeout(timedUpdate, 1000); } $(document).ready(function() { timedUpdate(); $('.lang-switcher').click(function(e) { e.preventDefault(); var to_lang = $(this).data('to_lang'); $.get('/switch-language-to/' + to_lang, function(data) { location.reload(); }); }); });",
+        "imageUrls": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=75791&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=75791&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=75791&number=2&h=480"
+        ],
+        "reviewReason": "auction_date_and_photo_roles_require_review"
+      },
+      {
+        "source": "jpauc",
+        "sourceId": "345241040",
+        "raw": {
+          "dataId": "345241040",
+          "r": "3",
+          "rtotal": "78322",
+          "date": "2026-09-10",
+          "location": "Tokyo",
+          "lot": "25595",
+          "maker": "HONDA",
+          "model": "VEZEL",
+          "year": 2026,
+          "grade": "G",
+          "engineCc": 1500,
+          "modelCode": "RV4",
+          "shift": "FA",
+          "color": "PEARL",
+          "auctionGrade": "S",
+          "sourceStatus": "available",
+          "startPrice": 0,
+          "listingImage": "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=25595&number=1&h=320",
+          "detailUrl": "https://jpauc.com/auction/past/detail/345241040?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=3&rtotal=78322",
+          "semanticEvidence": {
+            "year": {
+              "value": 2026,
+              "rawValues": [
+                "Year: 2026 G"
+              ],
+              "status": "exact"
+            },
+            "fuel": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "engineCc": {
+              "value": 1500,
+              "rawValues": [
+                "1,500cc | RV4"
+              ],
+              "status": "exact"
+            },
+            "powerHp": {
+              "rawValues": [],
+              "status": "missing"
+            },
+            "powerKw": {
+              "rawValues": [],
+              "status": "missing"
+            }
+          }
+        },
+        "publicationReady": false,
+        "qualifiedSoldCandidate": false,
+        "sourceUrl": "https://jpauc.com/auction/past/detail/345241040?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=3&rtotal=78322",
+        "statusRaw": "available",
+        "priceJpy": null,
+        "detailEvidence": "JPAUC - VEZEL | (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81274524-1', 'auto'); ga('send', 'pageview'); Sep 16th, 2026. 19:09:08 JST $1 (USD) = ¥159.40 (JPY) Skip to content Login Language English 中文 Spanish Home Car Oneprice Motorbike LHD Prod. Year Car Parts & Accessories Carloto VEZEL 3/ 78322 Date Location Maker Year CC Shift Color Steering Auc. Grade Status Time Lot No. Model Model Grade Model Code KM Title Start Price End Price Date: 2026-09-10 Location: Tokyo Maker: HONDA Year: 2026 CC: 1500cc Shift: FA Color: PEARL Steering: - Auc. Grade: S Status: available Time: 00:00:00 Lot No.: 25595 Model: VEZEL Model Grade: G Model Code: RV4 code KM: 0 km Title: n/a Start Price: ¥ 0 End Price: N/A 3/ 78322 Auction History Last 3 Weeks Average sold price Click Here: How to Read Auction Sheet Auction Sheet Print Inquiry | How to Use OK Bid Request Must Login first OK $(document).ready(function () { $('.car-image').magnificPopup({ gallery: { enabled: true }, type: 'image' }); }); $('.slider-for').slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.slider-nav', autoplay: false }); $('.slider-nav').slick({ slidesToShow: 2.5, slidesToScroll: 1, asNavFor: '.slider-for', dots: false, centerMode: true, focusOnSelect: true }); Number.prototype.formatMoney = function(c, d, t) { var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? \".\" : d, t = t == undefined ? \",\" : t, s = n 3 ? j % 3 : 0; return s + (j ? i.substr(0, j) + t : \"\") + i.substr(j).replace(/(\\d{3})(?=\\d)/g, \"$1\" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : \"\"); }; var is_car_auction_history_opened = false; var is_car_price_history_opened = false; var global_mileage = null; /* global variable: start price */ var g_start_price = 0; function is_the_mileage_group( mileage, mileage_group ) { var mileage_10k_multiplier = 0; var group_multiplier = Math.floor( mileage_group / 10000 ); while ( mileage > 10000 ) { mileage_10k_multiplier++; mileage -= 10000; } return mileage_10k_multiplier == group_multiplier; } function display_bid_warning(message) { $('#bid-input-wrapper').css('background', 'red'); $('#bid-input-wrapper').css('color', 'white'); $('#bid-input-wrapper').css('padding', '10px'); $('#bid-input-wrapper').css('margin-bottom', '10px'); $('#bid-input-wrapper').css('border-radius', '5px'); $('#warning-text').empty().html(message); $('#bid-trigger').attr('disabled', true); } function hide_bid_warning() { $('#bid-input-wrapper').css('background', 'transparent'); $('#bid-input-wrapper').css('color', 'black'); $('#bid-input-wrapper').css('padding', '0'); $('#bid-input-wrapper').css('margin-bottom', '0'); $('#bid-input-wrapper').css('border-radius', '0'); $('#warning-text').empty(); $('#bid-trigger').attr('disabled', false); } $( document ).ready(function() { $(\"#bid_amount\").maskMoney({ thousands: ',', decimal:'.', allowZero: true, prefix: '¥ ', precision: 0 }); $('#bid_amount').keyup(function(e) { var bid_amount = $(this).val(); var bid_amount_int = parseInt(bid_amount.replace(/\\D/g, '')); if (bid_amount_int == 0) { display_bid_warning(\"Minimum bid amount is &yen 5,000!\"); return; } else if (bid_amount_int greater than start price!\"); return; } else if (bid_amount_int % 5000 != 0) { display_bid_warning(\"Bid amount must be multiple of &yen 5,000!\"); return; } else { hide_bid_warning(); } $.post(\"/API/yen-to-customers-currency\", {yen: bid_amount}, function( data ) { $('.customers_currencies').css('display', 'block'); $('.customers_currencies').empty().html(data.on_customers_currency); }); }); $('#close-bid').click(function() { $('#bid').css('display', 'none'); }); $('#close-follow').click(function() { $('#follow').css('display', 'none'); }); $('.carimages').unslider(); if ($(window).width() -- Car history not found -- '); $('#listhistory').toggle('slow'); } else { str = ' '; str += ' Date Auction End Price (¥) Status '; $.each( data, function( i, item ) { str += ' '+ item.lot_date +' ' + item.auct_system_ref + ' ' + item.auction_name +' ' + parseInt(item.end_price_en*1000).formatMoney(0, '.', ',') +' '+ item.result_en +' '; }); str += ' '; $('#listhistory').html(str); $('#listhistory').toggle('slow'); } }); }); $('#price_avg').click( function(e) { e.preventDefault(); var model = $(this).data('model'); var year = $(this).data('year'); var score = ($(this).data('score').toString()).replace(/\\./g,','); var mileage = $(this).data('mileage'); var model_name = $(this).data('model-name'); global_mileage = parseInt(mileage) * 1000; /// Okay, close the car's price history if ( is_car_price_history_opened ) { is_car_price_history_opened = false; $('#listprice').slideUp(); /// Halt here... return; } else { is_car_price_history_opened = true; $('#listprice').slideDown(); } $('#listprice').html('-- Loading data --'); $.getJSON( \"/API/auction/price/\" + model + \"/\" + year + \"/\" + score + \"/\" + model_name ) .done(function( data ) { if (data == null) { $('#listprice').html('-- Car history not found --'); } else { str = ' Model: ' + model + ' Year: ' + year + ' ' + 'Grade: \"' + score.replace(/\\,/g,'.') + '\" Mileage: '+ mileage +',000km '; str += ' '; str += ' ' + ' Mileage Group (km) ' + ' End Price (¥) ' + ' Model Grade ' + ' Avg End Price : ' + ' Sold car data ' + ' '; /* sekarang kita cari yang mileage-nya berdekatan */ var terakhir_kurang_dari = null; var tepat_sama = null; var pertama_lebih_dari = null; var pertama_lebih_dari_sudah = false; var banyaknya_baris = 0; $.each( data, function( i, item ) { var mileage_group = parseInt(item.mileage_group); if (mileage_group global_mileage && pertama_lebih_dari_sudah == false) { pertama_lebih_dari_sudah = true; pertama_lebih_dari = mileage_group; banyaknya_baris++; } }); if (banyaknya_baris == 0) { str += ' Sorry, no record found for this item :( '; $('#listprice').html(str); } $.each( data, function( i, item ) { var similiar_cars_anchors = ' '; var counter = 1; /* untuk menampilkan per cars */ var end_price_html = \" \"; var grade_html = \" \"; var end_price_total = 0; var end_price_count = 0; $.each( item.price_arr, function( i, c ) { end_price_html += \" \"+ ' ¥ ' + ' ' + (parseInt(c.end_price)* 1000).formatMoney(0, '.', ',') + \" \"; grade_html += \" \"+ c.grade_en + \" \"; end_price_total += (parseInt(c.end_price)* 1000); end_price_count ++; }); end_price_html += \" \"; grade_html += \" \"; $.each( item.similiar_cars, function ( j, car ) { var auction_sheet_url = ''; var auction_date = ''; $.each( car, function ( k, field) { if ( k == 0 ) { auction_sheet_url = field; } else if ( k == 1 ) { auction_date = field; } }); if (auction_sheet_url != null) { similiar_cars_anchors += '' + ' ' + ' Car ' + counter + ' / ' +auction_date + ' ' + ' ' + ' '; } counter++; }); similiar_cars_anchors += ' '; var table_row_openener = ' '; var mileage_group = parseInt(item.mileage_group); if (mileage_group == terakhir_kurang_dari) { table_row_openener = ' '; } else if (mileage_group == tepat_sama) { table_row_openener = ' '; } else if (mileage_group == pertama_lebih_dari) { table_row_openener = ' '; } else { table_row_openener = ' '; } var corrected_average_price = parseInt(item.average_price); if (parseInt(item.average_price) '+ ' Mileage Group (km) : ' + parseInt(item.mileage_group).formatMoney(0, '.', ',') + ' ' + ' '+ end_price_html + ' ' + ' '+ grade_html + ' ' + ' ' + ' Avg End Price : ' + item.car_calculated + ' Cars(s) ' + ' - '+' ¥ '+ (end_price_total/end_price_count).formatMoney(0, '.', ',') +' -'+ ' ' + ' ' + ' Data : ' + ' ' + similiar_cars_anchors ' ' + ' ' + ' '; }); str += ' '; $('#listprice').html(str); } }); }); }); $(document).on('click', 'a.sold-car-link', function(e) { e.preventDefault(); var auction_sheet_url = $(this).data('href'); modal({ type: 'info', title: 'Auction sheet', text: ' ' }); }); // Adds and removes body class depending on screen width. function screenClass() { if($(window).innerWidth() var now = moment('2026-09-16 07:09:08 PM', 'YYYY-MM-DD hh:mm:ss a'); function updateClock() { now.add(1, 'second'); var second = now.seconds() * 6, minute = now.minutes() * 6 + second / 60, hour = ((now.hours() % 12) / 12) * 360 + 90 + minute / 12; $('#clock').empty().html(now.format('MMM Do, YYYY. HH:mm:ss') + ' Tokyo '); //$('#clock_hour').empty().html(hour); //$('#clock_minute').empty().html(minute); //$('#clock_second').empty().html(second); //console.log(now + ':' + hour + ':' + minute + ':' + second); } function timedUpdate () { updateClock(); setTimeout(timedUpdate, 1000); } $(document).ready(function() { timedUpdate(); $('.lang-switcher').click(function(e) { e.preventDefault(); var to_lang = $(this).data('to_lang'); $.get('/switch-language-to/' + to_lang, function(data) { location.reload(); }); }); });",
+        "imageUrls": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=25595&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=25595&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-09-10&auct=5&bid=25595&number=2&h=480"
+        ],
+        "reviewReason": "auction_date_and_photo_roles_require_review"
+      }
+    ]
+  }
+}
