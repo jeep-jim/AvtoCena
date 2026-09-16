@@ -16,6 +16,20 @@ const adapters = {
 };
 if (!adapters[name]) throw new Error('Unknown source');
 const source = (await import(adapters[name][0]))[adapters[name][1]];
+if (name === 'carvector') {
+  // The legacy adapter defaults to Toyota Corolla. This run must cover all makes.
+  const { parseCarvectorNgState } = await import(adapters.carvector[0]);
+  source.fetchPage = async cursor => {
+    const page = Number(cursor || 1);
+    const url = new URL('https://carvector.com/stat/');
+    for (const [key,value] of Object.entries({minYear:'2010',minPrice:'1',pageSize:'50',sortBy:'AUCTION_AT_DESC',page:String(page)})) url.searchParams.set(key,value);
+    const r = await fetch(url,{headers:{'user-agent':'AvtoCena catalog research/1.0',accept:'text/html'},signal:AbortSignal.timeout(25000)});
+    if(!r.ok) throw new Error(`carvector_http_${r.status}`);
+    const result=parseCarvectorNgState(await r.text());
+    const finished=!result.offers.length || page*50>=result.total;
+    return {items:result.offers.map(row=>({...row,_carvectorListUrl:String(url)})),finished,nextCursor:finished?null:String(page+1),health:{total:result.total,page}};
+  };
+}
 const root = `japan-free-results/${name}`;
 await fs.mkdir(root, { recursive: true });
 const deadline = Date.now() + Number(process.env.SWEEP_SECONDS || 10800) * 1000;
@@ -55,7 +69,7 @@ try {
         row.qualifiedSoldCandidate=raw.currentStatus==='Sold' && raw.finalPrice>0 && raw.auctionDate>=cutoff && raw.auctionDate.slice(0,10)<=today;
       } else if (name === 'carvector') {
         // Ended/finishPrice does not alone prove a sale. Preserve evidence for exact joining.
-        row.sourceUrl=raw._carvectorListUrl;
+        row.sourceUrl=raw.urlPage?.fullUrl || raw._carvectorListUrl;
         row.priceJpy=raw.finishPrice?.JPY;
         row.auctionDate=raw.auctionAt;
         row.reviewReason='explicit_sold_status_and_gallery_not_verified';
