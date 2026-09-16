@@ -1,4 +1,4 @@
-import { catalogOfferUrl, readAiCatalogProjection } from "@/lib/ai-discovery";
+import { absoluteAvtocenaUrl, catalogOfferUrl, readAiCatalogProjection } from "@/lib/ai-discovery";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +37,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
       "  <url>",
       `    <loc>${xmlEscape(catalogOfferUrl(item.id))}</loc>`,
       `    <lastmod>${xmlEscape(lastmod)}</lastmod>`,
+      ...(item.cardImageUrl ? [`    <image:image><image:loc>${xmlEscape(absoluteAvtocenaUrl(item.cardImageUrl))}</image:loc></image:image>`] : []),
       "    <changefreq>hourly</changefreq>",
       "    <priority>0.68</priority>",
       "  </url>",
@@ -45,7 +46,7 @@ export async function GET(_request: Request, { params }: { params: { id: string 
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
     entries,
     "</urlset>",
     "",

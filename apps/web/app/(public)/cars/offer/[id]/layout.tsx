@@ -1,3 +1,4 @@
+import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -24,9 +25,7 @@ function offerStructuredData(id: string, offer: any) {
   const mileageKm = Number(offer.mileageKm || 0);
   const engineCc = Number(offer.engineCc || 0);
   const safePowerHp = publicCatalogPowerHp(offer);
-  const images = Array.isArray(offer.images)
-    ? offer.images.map((image: any) => absoluteAvtocenaUrl(image?.url)).filter(Boolean).slice(0, 12)
-    : [];
+  const images = rankedCatalogImageUrls(offer).map(absoluteAvtocenaUrl).filter(Boolean).slice(0, 12);
 
   return {
     "@context": "https://schema.org",
@@ -95,6 +94,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const priceText = totalRub > 0 ? `${money(totalRub)} ₽` : "рассчитывается";
   const description = `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Полный расчёт под ключ включает автомобиль, логистику, таможенные платежи, оформление и доставку по РФ.`;
   const canonical = `/cars/offer/${encodeURIComponent(id)}`;
+  const images = rankedCatalogImageUrls(offer).map(absoluteAvtocenaUrl).filter(Boolean).slice(0, 12);
 
   return {
     title,
@@ -105,9 +105,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title,
       description,
       url: canonical,
-      images: offer.images?.[0]?.url ? [{ url: offer.images[0].url, alt: displayTitle || `${make} ${model}` }] : undefined,
+      images: images.map(url => ({ url, alt: displayTitle || `${make} ${model}` })),
     },
-    robots: { index: true, follow: true },
+    twitter: { card: "summary_large_image", title, description, images },
+    robots: { index: true, follow: true, "max-image-preview": "large" },
   };
 }
 
