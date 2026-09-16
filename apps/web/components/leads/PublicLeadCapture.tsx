@@ -1,4 +1,5 @@
 "use client";
+import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
@@ -261,7 +262,7 @@ function LeadDialog({
     const max = isFavorites && contactPreference === "message" && messenger === "max" ? cleanText(messengerContact) : "";
 
     try {
-      const response = await fetch("/api/leads", {
+      const response = await leadFetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

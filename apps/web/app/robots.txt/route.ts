@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-const PRIVATE_PATHS = ["/crm/", "/api/", "/login", "/favorites", "/mcp"];
+const PRIVATE_PATHS = ["/crm", "/api/", "/login", "/favorites", "/mcp"];
 const USER_AGENTS = ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "*"];
 
 function blockFor(userAgent: string) {

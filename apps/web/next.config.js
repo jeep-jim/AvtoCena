@@ -10,6 +10,7 @@ const nextConfig = {
 
   async headers() {
     return [
+      ...["/crm/:path*", "/api/crm/:path*", "/api/leads", "/api/auth/:path*", "/login"].map(source => ({ source, headers: [{key: "X-Robots-Tag", value: "noindex, nofollow, noarchive"}] })),
       {
         source: "/login",
         headers: [

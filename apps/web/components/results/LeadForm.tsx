@@ -1,4 +1,5 @@
 "use client";
+import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
@@ -113,7 +114,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
 
     try {
       const currentAttribution = captureAttributionFromBrowser(attribution);
-      const response = await fetch("/api/leads", {
+      const response = await leadFetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

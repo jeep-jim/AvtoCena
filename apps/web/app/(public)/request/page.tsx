@@ -1,4 +1,5 @@
 "use client";
+import {leadFetch} from "@/lib/lead-submit-client";
 
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -48,7 +49,7 @@ export default function RequestPage() {
     setStatus("sending");
     setMessage("");
     try {
-      const response = await fetch("/api/leads", {
+      const response = await leadFetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

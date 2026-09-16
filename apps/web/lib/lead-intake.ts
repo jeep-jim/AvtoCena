@@ -1,3 +1,4 @@
+import {guardLead} from "./lead-antispam";
 import {normalizeRuPhone} from "./ru-phone";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
@@ -187,22 +188,6 @@ export async function createLead(
     genericRequest ? [] : body.selectedOfferIds,
     requestedPrimaryOfferId,
   );
-  const selectedOfferSnapshots = (
-    await Promise.all(selectedOfferIds.map(buildSelectedOfferSnapshot))
-  ).filter(
-    (
-      item,
-    ): item is NonNullable<
-      Awaited<ReturnType<typeof buildSelectedOfferSnapshot>>
-    > => Boolean(item),
-  );
-  const primaryOffer =
-    selectedOfferSnapshots.find(
-      (item) => item.id === requestedPrimaryOfferId,
-    ) ||
-    selectedOfferSnapshots[0] ||
-    null;
-  const primaryOfferId = primaryOffer?.id || requestedPrimaryOfferId;
 
   if (!crmUser && !personalDataConsent) {
     return NextResponse.json(
@@ -261,6 +246,28 @@ export async function createLead(
       { status: 400 },
     );
   }
+
+  if (!crmUser && !trustedTelegramId) {
+    const blocked = await guardLead(request, body, selectedOfferIds, [phone, telegram, max]);
+    if (blocked) return blocked;
+  }
+
+  const selectedOfferSnapshots = (
+    await Promise.all(selectedOfferIds.map(buildSelectedOfferSnapshot))
+  ).filter(
+    (
+      item,
+    ): item is NonNullable<
+      Awaited<ReturnType<typeof buildSelectedOfferSnapshot>>
+    > => Boolean(item),
+  );
+  const primaryOffer =
+    selectedOfferSnapshots.find(
+      (item) => item.id === requestedPrimaryOfferId,
+    ) ||
+    selectedOfferSnapshots[0] ||
+    null;
+  const primaryOfferId = primaryOffer?.id || requestedPrimaryOfferId;
 
   const createdAt = new Date().toISOString();
   const rawOperationId = clean(body.operationId, 120) || crypto.randomUUID();
