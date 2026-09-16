@@ -5,7 +5,7 @@ import { calculateRussiaCustomsForIndividual } from "../packages/engine/src/calc
 
 const importedAt = new Date("2026-07-26T00:00:00.000Z");
 
-test("full car price is one cost and the advance is not added to the total", () => {
+test("car remainder and separate advance preserve the full vehicle cost and total", () => {
   const result = calculateAvtocenaFromBusinessConfig({
     marketId: "china",
     sourcePriceRub: 1_000_000,
@@ -18,8 +18,8 @@ test("full car price is one cost and the advance is not added to the total", () 
   });
 
   assert.equal(result.totalRub, 1_590_000);
-  assert.equal(result.breakdown.find((line) => line.id === "car")?.amountRub, 1_000_000);
-  assert.equal(result.breakdown.find((line) => line.id === "security-deposit")?.amountRub, undefined);
+  assert.equal(result.breakdown.find((line) => line.id === "car")?.amountRub, 840_000);
+  assert.equal(result.breakdown.find((line) => line.id === "security-deposit")?.amountRub, 160_000);
   assert.equal(result.breakdown.find((line) => line.id === "car")?.note, undefined);
 });
 

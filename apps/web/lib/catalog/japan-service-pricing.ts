@@ -25,7 +25,7 @@ export function applyJapanServiceCosts<T extends Partial<VehicleOffer>>(offer:T,
   if (![laboratoryRub,commissionRub].every(n => Number.isFinite(n) && n >= 0)) return frozen as T;
   const totalRub = Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub;
   if (!(totalRub > 0)) return frozen as T;
-  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown).map((line:any) =>
+  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).map((line:any) =>
     line.id === 'laboratory' ? {...line,amountRub:laboratoryRub,includedServices:['laboratory','sbkts','epts']} :
     line.id === 'topavto-commission' ? {...line,amountRub:commissionRub} : line) : undefined;
   return {...frozen,totalRub,

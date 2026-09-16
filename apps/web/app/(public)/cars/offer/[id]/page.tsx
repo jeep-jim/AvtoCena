@@ -213,7 +213,7 @@ function priceBreakdown(offer: any): BreakdownLine[] {
         );
       }
     }
-    return customerPriceBreakdown(expandCustomsBreakdown(actual,customs));
+    return customerPriceBreakdown(expandCustomsBreakdown(actual,customs), offer.calculationSnapshot?.marketConfig?.securityDepositRub);
   }
   const total = Number(offer?.totalRub || 0);
   return total ? [{ id: "total", title: "Стоимость автомобиля", amountRub: total }] : [];
@@ -234,7 +234,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
           <path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-[12px] font-medium md:text-[13px]">
+      <div data-price-line={vehicleLine.id} data-price-amount-rub={vehicleLine.amountRub} className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-[12px] font-medium md:text-[13px]">
         <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="shrink-0">Цена автомобиля</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
         <span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(vehicleLine.amountRub)} ₽</span>
       </div>
