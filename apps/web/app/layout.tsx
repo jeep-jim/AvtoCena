@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-light.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/favicon.ico?v=transparent-2", type: "image/x-icon", sizes: "16x16 32x32 48x48 64x64 128x128 256x256" },
+      { url: "/logo/avtocena-mark-light.svg", type: "image/svg+xml", sizes: "any" },
     ],
-    apple: [{ url: "/apple-touch-icon-light.png", sizes: "180x180" }],
+    apple: [{ url: "/apple-touch-icon-light.png?v=transparent-2", sizes: "180x180" }],
   },
   openGraph: {
     title: "АвтоЦена",
