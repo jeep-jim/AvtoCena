@@ -1,4 +1,5 @@
 "use client";
+import {leadFetch} from "@/lib/lead-submit-client";
 
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
@@ -245,7 +246,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
     const max = contactPreference === "message" && messenger === "max" ? contact : "";
 
     try {
-      const response = await fetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+      const response = await leadFetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         requestMode: request.mode,
         submissionThreadToken: isOffer ? threadToken() : "",

@@ -1,4 +1,5 @@
 "use client";
+import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
@@ -23,7 +24,7 @@ export function OfferLeadForm({ offerId }: Props) {
   async function submit(event: React.FormEvent) {
     event.preventDefault(); setStatus("sending"); setMessage("");
     try {
-      const response = await fetch("/api/leads", { method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify({ operationId:getOperationId(), offerId, name, phone, source:"catalog_offer", attribution:captureAttributionFromBrowser() }) });
+      const response = await leadFetch("/api/leads", { method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify({ operationId:getOperationId(), offerId, name, phone, source:"catalog_offer", attribution:captureAttributionFromBrowser() }) });
       const json = await response.json(); if (!response.ok || !json.ok) throw new Error(json.error || "Не удалось отправить заявку");
       sessionStorage.removeItem(storageKey); setStatus("success"); setMessage("Заявка отправлена. Менеджер проверит наличие и точную стоимость автомобиля."); setName(""); setPhone("+7");
     } catch (error:any) { setStatus("error"); setMessage(error?.message || "Ошибка сети. Повторная отправка не создаст дубль."); }
