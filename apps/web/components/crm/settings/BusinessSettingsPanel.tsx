@@ -144,7 +144,7 @@ export function BusinessSettingsPanel({
                   <StatCard label="Рынок" value={marketLabel(market)} />
                   <StatCard label="Валюта" value={version.currency || "—"} />
                   <StatCard
-                    label="Аванс за автомобиль"
+                    label="Обеспечительный платёж"
                     value={
                       version.securityDepositRub
                         ? `${money(version.securityDepositRub)} ₽`

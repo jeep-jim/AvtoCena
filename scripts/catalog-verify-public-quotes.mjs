@@ -34,7 +34,17 @@ try {
       if(row.catalogPricingMode !== 'seller') {
         const bundle = html.match(/data-price-line="laboratory" data-price-amount-rub="([^"]+)"/);
         assert.ok(bundle && Number(bundle[1]) > 0,`Missing combined document cost: ${row.id}`);
-        assert.ok(!/data-price-line="(?:sbkts|epts|security-deposit)"/.test(html),`Duplicate payment lines: ${row.id}`);
+        assert.ok(!/data-price-line="(?:sbkts|epts)"/.test(html),`Duplicate document lines: ${row.id}`);
+        const deposits = [...html.matchAll(/data-price-line="security-deposit" data-price-amount-rub="([^"]+)"/g)];
+        assert.equal(deposits.length,1,`Expected one advance: ${row.id}`);
+        result.depositRub=Number(deposits[0][1]);
+        assert.equal(result.depositRub,market==='japan'?31000:160000,`Wrong advance: ${row.id}`);
+        const lines = [...html.matchAll(/data-price-line="([^"]+)" data-price-amount-rub="([^"]+)"/g)];
+        const car = lines.filter(line=>line[1]==='car');
+        assert.equal(car.length,1,`Expected one vehicle remainder: ${row.id}`);
+        result.vehicleRemainderRub=Number(car[0][2]);
+        result.breakdownSumRub=lines.reduce((sum,line)=>sum+Number(line[2]),0);
+        assert.equal(result.breakdownSumRub,detailRub,`Breakdown total mismatch: ${row.id}`);
         assert.ok(html.includes('Лаборатория, СБКТС, ЭПТС'));
         result.serviceBundleRub=Number(bundle[1]);
       }

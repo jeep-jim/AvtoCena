@@ -37,11 +37,14 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   const lines: BusinessCalculationLine[] = [];
   const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
 
-  // The contract advance is a payment stage, not an additional cost.
-  addLine(lines, {
-    id: "car", title: "Цена автомобиля", amountRub: carPriceRub,
+  // Split the advance out of the vehicle price without adding another cost.
+  const depositRub = Math.min(carPriceRub, numberOrZero(config.securityDepositRub));
+  lines.push({
+    id: "car", title: "Цена автомобиля", amountRub: carPriceRub - depositRub,
     kind: "car", amountType: "manual", source: "vehicle",
   });
+  addLine(lines, { id: "security-deposit", title: "Обеспечительный платёж", amountRub: depositRub,
+    kind: "deposit", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
