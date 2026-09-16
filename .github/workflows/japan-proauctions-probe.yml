@@ -14,7 +14,7 @@ jobs:
       - run: |
           python - <<'PY'
           import urllib.request,pathlib,json,concurrent.futures
-          urls={'sferacar':'https://sferacar.ru/auktsiony/'}
+          urls={'sfera-stat':'https://sferacar.ru/statistika/','sfera-page2':'https://sferacar.ru/auktsiony/?page=2&ajax=1'}
           root=pathlib.Path('data/japan-free-discovery/additional');root.mkdir(exist_ok=True)
           def fetch(item):
             name,url=item
