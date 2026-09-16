@@ -1,9 +1,9 @@
 [
   {
-    "source": "proauctions",
-    "url": "https://demo.pro-auctions.ru/statistika/?page=1",
+    "source": "proauctions-detail",
+    "url": "https://demo.pro-auctions.ru/statistika/suzuki/swift/30164101.html",
     "status": 200,
-    "bytes": 405283
+    "bytes": 167011
   },
   {
     "source": "japantransit",
@@ -13,8 +13,7 @@
   {
     "source": "jpcenter",
     "url": "https://jp.center/",
-    "status": 200,
-    "bytes": 133787
+    "error": "HTTP Error 403: Forbidden"
   },
   {
     "source": "auctiondatasearch",
