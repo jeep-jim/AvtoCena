@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
       - run: npm ci
-      - name: Audit every stored record in all six markets
+      - name: Verify final safety conversion against all six markets
         run: node --import tsx scripts/catalog-all-market-integrity-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
