@@ -40,7 +40,7 @@ import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } from "@/lib/catalog/customs-pricing";
-import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
+import { readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { getUnavailableOffer, getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
@@ -362,8 +362,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const thirtyMinuteInfo = powerDisplay?.estimated
     ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
     : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
-  const editablePowerHp = Math.max(20, Math.round(powerScenario?.horsepower || safePowerHp || (Number(o.powerKw || 0) > 0 ? Number(o.powerKw) / 0.73549875 : DEFAULT_CATALOG_POWER_FALLBACK_HP)));
-  const peakPowerTile = { label: "Мощность", value: powerValue || `${editablePowerHp} л.с.`, icon: "power" as const };
+  const peakPowerTile = { label: "Мощность", value: powerValue || "Мощность уточняется", icon: "power" as const };
   const powerTile = powerDisplay && electrified
     ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
     : null;
