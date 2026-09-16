@@ -13,12 +13,13 @@
   {
     "source": "jpcenter",
     "url": "https://jp.center/",
-    "error": "HTTP Error 403: Forbidden"
+    "status": 200,
+    "bytes": 133731
   },
   {
-    "source": "auctiondatasearch",
-    "url": "https://auctiondatasearch.jp/",
+    "source": "auctiondatasearch-statistics",
+    "url": "https://auctiondatasearch.jp/statistics/",
     "status": 200,
-    "bytes": 33704
+    "bytes": 13742
   }
 ]
