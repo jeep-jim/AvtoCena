@@ -34,7 +34,7 @@ jobs:
           result={}
           for source,items in sources.items():
             rows=list(items.values())
-            result[source]={'unique':len(rows),'fields':dict(collections.Counter(k for r in rows for k,v in r.items() if v)),'statuses':dict(collections.Counter(str(r.get('statusRaw')) for r in rows)),'reviewReasons':dict(collections.Counter(str(r.get('reviewReason')) for r in rows)),'detailErrors':dict(collections.Counter(str(r.get('detailError')) for r in rows)),'samples':rows[:3]}
+            result[source]={'unique':len(rows),'fields':dict(collections.Counter(k for r in rows for k,v in r.items() if v)),'statuses':dict(collections.Counter(str(r.get('statusRaw')) for r in rows)),'reviewReasons':dict(collections.Counter(str(r.get('reviewReason')) for r in rows)),'detailErrors':dict(collections.Counter(str(r.get('detailError')) for r in rows)),'samples':rows[:3]+[r for r in rows if r.get('statusRaw')=='sold'][:3]}
           p=pathlib.Path('data/japan-free-discovery/saved-records-audit.json')
           p.write_text(json.dumps(result,ensure_ascii=False,indent=2))
           print(json.dumps({s:{k:v for k,v in r.items() if k!='samples'} for s,r in result.items()},ensure_ascii=False))
