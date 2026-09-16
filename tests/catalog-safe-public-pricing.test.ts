@@ -1,0 +1,58 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
+import { isSellerPricedOffer } from '../apps/web/lib/catalog/seller-price-contract';
+import { offerSpecificationGroups } from '../apps/web/lib/catalog/offer-specification-groups';
+import { catalogOfferVisibleRub } from '../apps/web/lib/catalog/public-priority';
+import { searchProjectionFromOffer, projectionCanRenderCard } from '../apps/web/lib/catalog/storage';
+
+function fixture(): any {
+ return {market:'korea',sourceId:'kcar_korea_open',sourceOfferId:'one',make:'Genesis',model:'G80',year:2023,
+  fuel:'petrol',powertrainKind:'combustion',engineCc:2497,powerHp:34,powerKw:25,icePowerKw:25,utilizationPowerKw:25,
+  powerDataSource:'kcar_exact_detail_rvo_hrspow_hp',sourcePrice:30000000,sourceCurrency:'KRW',totalRub:3900000,
+  calculationStatus:'estimated',publicVisibleRub:3900000,publicSpecificationVerified:true,
+  calculationSnapshot:{currencyRate:{rateSource:'cbr',currency:'KRW',sourcePrice:30000000,effectiveRate:.06,rateDate:new Date().toISOString()},customs:{utilizationPowerKw:25}},
+  operational:{semanticEvidence:{engineCc:{status:'exact',value:2497},fuel:{status:'exact',value:'petrol'},powertrainKind:{status:'exact',value:'combustion'}},sourceSpecifications:{sourceId:'kcar_korea_open',sourceOfferId:'one',groups:[{name:'Source',items:[{name:'Horsepower',value:'34'},{name:'hrspow',value:'34'},{name:'Colour',value:'White'}]}]}}};
+}
+test('unsafe delivered quote becomes a bound seller quote without changing saved data',()=>{
+ const original=fixture();const clean=safePublicPricing(original);
+ assert.equal(isSellerPricedOffer(clean),true);assert.equal(clean.sellerPriceRub,1800000);
+ assert.equal(clean.totalRub,null);assert.equal(clean.powerHp,undefined);assert.equal(clean.utilizationPowerKw,undefined);
+ assert.equal(clean.calculationSnapshot.customs,undefined);assert.equal(clean.publicSpecificationVerified,false);
+ assert.equal(catalogOfferVisibleRub(clean),0);assert.equal(original.powerHp,34);assert.equal(original.totalRub,3900000);
+ assert.deepEqual(safePublicPricing(clean),clean);
+});
+test('mismatched, stale or missing conversion never manufactures a seller quote',()=>{
+ for(const patch of [{sourcePrice:1},{currency:'USD'},{rateSource:'fallback_env'},{rateDate:'2000-01-01'},{effectiveRate:0}]){
+  const row=fixture();Object.assign(row.calculationSnapshot.currencyRate,patch);
+  const clean=safePublicPricing(row);assert.equal(isSellerPricedOffer(clean),false);assert.equal(catalogOfferVisibleRub(clean),0);
+ }
+});
+test('rejected horsepower cannot leak through raw source specification groups',()=>{
+ for(const row of [fixture(),safePublicPricing(fixture())]){
+  const groups=offerSpecificationGroups(row);const items=groups.flatMap(g=>g.items);
+  assert.equal(items.some(i=>i.value==='34'),false);assert.equal(items.some(i=>i.value==='White'),true);
+ }
+});
+test('verified independent power and prices are untouched',()=>{
+ const row=fixture();row.powerDataSource='manufacturer_official';row.powerHp=304;
+ row.powerKw=row.icePowerKw=row.utilizationPowerKw=304*0.735499;
+ assert.equal(safePublicPricing(row),row);
+});
+test('all markets quarantine explicit conflicting specifications without guessing replacement values',()=>{
+ for(const market of ['korea','china','uae','europe','georgia','japan']) {
+  const row=fixture();row.market=market;row.powerDataSource='manufacturer_official';row.powerHp=304;
+  row.powerKw=row.icePowerKw=row.utilizationPowerKw=304*0.735499;
+  row.operational.semanticEvidence.engineCc={status:'conflict',rawValues:['1998','2497']};
+  const clean=safePublicPricing(row);
+  assert.equal(clean.engineCc,undefined,market);assert.equal(clean.totalRub,null,market);
+  assert.equal(clean.powerHp,304,market);assert.equal(isSellerPricedOffer(clean),true,market);
+ }
+});
+test('search cards retain seller price but never old horsepower or delivered-price attestation',()=>{
+ const row=fixture();Object.assign(row,{id:'sample',images:[{url:'https://example.test/car.jpg'}]});
+ const projection=searchProjectionFromOffer(row);
+ assert.equal(projection.powerHp,undefined);assert.equal(projection.totalRub,null);
+ assert.equal(projection.publicSpecificationVerified,false);assert.equal(projection.sellerPriceRub,1800000);
+ assert.equal(projectionCanRenderCard(projection),true);
+});
