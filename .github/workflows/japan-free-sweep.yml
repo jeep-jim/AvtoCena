@@ -1,0 +1,100 @@
+name: Japan free sources broad collection
+run-name: Free Japan sweep, public sources, no publication
+on:
+  push:
+    branches: [ops/japan-free-sweep-20260916]
+    paths: [.github/workflows/japan-free-sweep.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: japan-free-sweep
+  cancel-in-progress: false
+jobs:
+  collect:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        source: [jptrade, tokai, prestige, jpauc, carvector]
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: matrix.source != 'jptrade' && matrix.source != 'tokai'
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+        if: matrix.source != 'jptrade' && matrix.source != 'tokai'
+      - name: Collect public records with checkpoints
+        env:
+          SOURCE: ${{ matrix.source }}
+          SWEEP_SECONDS: '10800'
+        run: |
+          if [ "$SOURCE" = jptrade ] || [ "$SOURCE" = tokai ]; then
+            python scripts/japan-free-html-sweep.py "$SOURCE"
+          else
+            npx tsx scripts/japan-free-adapter-sweep.mjs "$SOURCE"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-free-${{ matrix.source }}
+          path: japan-free-results/
+          if-no-files-found: warn
+          retention-days: 14
+  aggregate:
+    needs: collect
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: japan-free-*
+          path: japan-free-input
+          merge-multiple: true
+      - name: Merge qualified candidates and preserve review records
+        run: |
+          python - <<'PY'
+          import pathlib,json,re,datetime,hashlib
+          root=pathlib.Path('japan-free-input')
+          out=pathlib.Path('japan-free-aggregate');out.mkdir(exist_ok=True)
+          rows={};reviews=0;duplicates=0
+          summaries=[json.loads(p.read_text()) for p in root.rglob('summary.json')]
+          for p in root.rglob('part-*.json'):
+            for row in json.loads(p.read_text()):
+              if not row.get('qualifiedSoldCandidate'):reviews+=1;continue
+              identity=[row.get(k) for k in ('auctionDate','auctionName','lotNumber','make','model','year')]
+              key='|'.join(re.sub(r'[^a-z0-9]','',str(v).lower()) for v in identity) if all(identity) else row['source']+':'+row['sourceId']
+              if key in rows:
+                duplicates+=1
+                rows[key].setdefault('alternateSources',[]).append(row['sourceUrl'])
+              else:rows[key]=row
+          vals=list(rows.values())
+          for start in range(0,len(vals),250):
+            (out/('part-%06d.json'%(start//250+1))).write_text(json.dumps(vals[start:start+250],ensure_ascii=False))
+          summary={'generatedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'qualifiedSoldCandidates':len(vals),'reviewRecords':reviews,'duplicates':duplicates,'publicationReady':False,'sources':summaries,'discoveryOnly':{'cyprus':'HTTP 403','jpcarshub':'exact JPY hammer price not established; not promoted'}}
+          (out/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2))
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: japan-free-aggregate
+          path: japan-free-aggregate/
+          retention-days: 14
+      - name: Save collection summary on research branch
+        run: |
+          git fetch origin ops/japan-free-sweep-20260916
+          git checkout -B collection-report origin/ops/japan-free-sweep-20260916
+          mkdir -p data/japan-free-discovery
+          cp japan-free-aggregate/summary.json data/japan-free-discovery/collection-summary.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/japan-free-discovery/collection-summary.json
+          git diff --cached --quiet || git commit -m "Record free Japan sweep results"
+          git push origin HEAD:ops/japan-free-sweep-20260916
