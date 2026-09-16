@@ -1,9 +1,6 @@
 name: Catalog price audit (read only)
 on:
   workflow_dispatch:
-  push:
-    branches: [fix/catalog-price-audit-20260916]
-    paths: [.github/workflows/catalog-price-audit-readonly.yml]
 permissions:
   contents: read
 concurrency:

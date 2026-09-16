@@ -1,3 +1,4 @@
+import { customerPriceBreakdown } from "@/lib/catalog/customer-price-breakdown";
 import { recyclingPowerInfo, type RecyclingPowerInfo } from "@/lib/catalog/recycling-power";
 import { RecyclingFeeHelp } from "@/components/catalog/RecyclingPower";
 import { translatedSpecificationGroups } from "@/lib/catalog/specification-translation-storage";
@@ -174,7 +175,7 @@ function SimilarOffersFallback() {
   return <section className="mt-10 md:mt-14" aria-label="Загружаем похожие предложения"><div className="h-9 w-52 animate-pulse rounded-xl bg-white/[0.08]" /><div className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-4">{Array.from({ length: 4 }, (_, index) => <div key={index} className="min-h-64 animate-pulse rounded-[1.35rem] bg-white/[0.045]" />)}</div></section>;
 }
 
-type BreakdownLine = { id?: string; title: string; amountRub: number };
+type BreakdownLine = { note?: string; id?: string; title: string; amountRub: number };
 function customerBreakdownTitle(id: string, title: string) {
   if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
   if (id === "customs") return "Таможенные платежи";
@@ -210,7 +211,7 @@ function priceBreakdown(offer: any): BreakdownLine[] {
         );
       }
     }
-    return expandCustomsBreakdown(actual,customs);
+    return customerPriceBreakdown(expandCustomsBreakdown(actual,customs));
   }
   const total = Number(offer?.totalRub || 0);
   return total ? [{ id: "total", title: "Стоимость автомобиля", amountRub: total }] : [];
@@ -235,6 +236,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
         <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="shrink-0">Цена автомобиля</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
         <span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(vehicleLine.amountRub)} ₽</span>
       </div>
+      {vehicleLine.note ? <p className="mt-2 text-xs font-normal text-[var(--ac-muted)]">{vehicleLine.note}</p> : null}
     </summary>
     {detailLines.length ? <div className="ac-offer-breakdown-lines border-t border-dotted border-[var(--ac-border)] px-4 pb-3 pt-2">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 truncate">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span>{/utilization|утил/i.test(`${line.id} ${line.title}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>)}</div> : null}
     <div className="grid gap-2 px-4 pb-4 pt-1 xl:hidden" aria-label="Финансовые сервисы">
