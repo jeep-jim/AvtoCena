@@ -212,5 +212,34 @@
     "message": "이미 판매완료된 차량입니다.",
     "interpretation": "Source reports already sold; no current rvo or horsepower available"
   },
-  "publicationReady": false
+  "publicationReady": false,
+  "additionalSourceRechecks": [
+    {
+      "id": "88e657dcea6f93bc0dedea74",
+      "sourceOfferId": "EC61407710",
+      "message": null,
+      "hrspow": 100,
+      "engineCc": "2497",
+      "trim": "가솔린 터보 2.5 AWD",
+      "status": "CAR_STATUS010"
+    },
+    {
+      "id": "eaabc602f5e5201268679eaa",
+      "sourceOfferId": "EC61401182",
+      "message": "이미 판매완료된 차량입니다.",
+      "hrspow": null,
+      "engineCc": null,
+      "trim": null,
+      "status": null
+    },
+    {
+      "id": "5e87d791f32903c90425fbe3",
+      "sourceOfferId": "EC61408822",
+      "message": null,
+      "hrspow": 380,
+      "engineCc": "3470",
+      "trim": "가솔린 AWD 3.5 터보 ",
+      "status": "CAR_STATUS010"
+    }
+  ]
 }
