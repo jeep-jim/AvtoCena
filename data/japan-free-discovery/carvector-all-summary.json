@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-16T09:26:23.571320+00:00",
+  "qualifiedSoldCandidates": 0,
+  "reviewRecords": 1600,
+  "duplicates": 0,
+  "publicationReady": false,
+  "sources": [
+    {
+      "source": "carvector",
+      "startedAt": "2026-09-16T09:24:47.665Z",
+      "pages": 32,
+      "rows": 1600,
+      "accepted": 0,
+      "review": 1600,
+      "duplicates": 0,
+      "errors": [
+        "Error: carvector_http_429\n    at CarvectorJapanExactAdapter.source.fetchPage (/home/runner/work/AvtoCena/AvtoCena/scripts/japan-free-adapter-sweep.mjs:27:21)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async <anonymous> (/home/runner/work/AvtoCena/AvtoCena/scripts/japan-free-adapter-sweep.mjs:52:18)"
+      ],
+      "stopReason": "source_error",
+      "finishedAt": "2026-09-16T09:26:01.290Z",
+      "cursor": "33",
+      "unique": 1600
+    }
+  ],
+  "discoveryOnly": {
+    "cyprus": "HTTP 403",
+    "jpcarshub": "exact JPY hammer price not established; not promoted"
+  }
+}
