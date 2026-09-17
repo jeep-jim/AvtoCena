@@ -6,7 +6,7 @@
  overflow: visible;
 }
 .tile:has(> .editor[open]) { z-index: 90; }
-.editor { position: relative !important; overflow: visible !important; }
+.editor { position: static !important; overflow: visible !important; }
 .editor > summary { position: relative; border-radius: 1rem; }
 .editor[open] { border-radius: 1rem 1rem 0 0; box-shadow: none !important; }
 .editor[open] > summary { z-index: 2; border-radius: 1rem 1rem 0 0; background: var(--ac-surface-2); }
