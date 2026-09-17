@@ -101,7 +101,8 @@ if(!state.complete){
         if(!state.pending.length){await checkpoint();continue;}
       }
       const batch=state.pending.slice(0,maxDetails?Math.min(3,maxDetails-state.details):3);
-      const results=await Promise.allSettled(batch.map(detail));
+      // Array.map's second argument is an index, not our explicit cache flag.
+      const results=await Promise.allSettled(batch.map(url=>detail(url)));
       state.pending=state.pending.filter(u=>!done.has(u));
       let fatal=null;
       for(let i=0;i<results.length;i++)if(results[i].status==='rejected'){const error=results[i].reason;state.errors.push({url:batch[i],error:String(error)});fatal=error;}

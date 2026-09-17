@@ -1,7 +1,7 @@
 name: ProAuctions live import smoke
 on:
   push:
-    branches: [feat/proauctions-collect-publish-20260917]
+    branches: [fix/proauctions-resume-batch-20260917]
     paths: ['.github/workflows/proauctions-live-import-smoke.yml']
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
         with:
           name: proauctions-collection
           path: proauctions-collection
-          run-id: 35251347998
+          run-id: 35252573605
           github-token: ${{ github.token }}
       - uses: actions/download-artifact@v4
         with:
@@ -33,17 +33,18 @@ jobs:
           path: saved-jptrade
           run-id: 35167936226
           github-token: ${{ github.token }}
-      - name: Recheck saved witness syntax and missing photos without collecting the ten details again
-        env: {PROAUCTIONS_SECONDS: '600', PROAUCTIONS_MAX_DETAILS: '10'}
+      - name: Resume the next three details and verify all concurrent worker positions
+        env: {PROAUCTIONS_SECONDS: '600', PROAUCTIONS_MAX_DETAILS: '14'}
         run: node --import tsx scripts/collect-proauctions.mjs
       - run: node --import tsx scripts/prepare-proauctions-publication.mjs
-      - name: Require the owner example and ten publication candidates
+      - name: Require an actual three-detail advance from the saved production checkpoint
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const row=JSON.parse(fs.readFileSync('proauctions-collection/offers/30198001.json'));
           const report=JSON.parse(fs.readFileSync('proauctions-collection/admission.json'));
-          if(row.sourcePrice!==353000 || row.auctionResult!=='sold' || report.admitted!==10)throw Error('live_import_contract_failed');
+          const summary=JSON.parse(fs.readFileSync('proauctions-collection/summary.json'));
+          if(row.sourcePrice!==353000 || row.auctionResult!=='sold' || report.admitted<11 || summary.details!==14 || summary.pending!==1713)throw Error('live_resume_contract_failed');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
