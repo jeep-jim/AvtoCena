@@ -1,4 +1,4 @@
-name: Publish saved JPtrade results 20260917
+name: Publish visually reviewed JPtrade results 20260917
 on:
   push:
     branches: [fix/finish-fresh-catalog-20260917]
@@ -8,7 +8,7 @@ permissions:
   actions: read
 concurrency:
   group: qualify-saved-jptrade-20260917
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   publish:
     runs-on: ubuntu-latest
