@@ -43,7 +43,7 @@ jobs:
         with: {node-version: 24, cache: npm}
       - name: Size verification heap from runner memory
         run: |
-          node -e 'const fs=require("fs"); const m=Number(fs.readFileSync("/proc/meminfo","utf8").match(/MemTotal:\s+(\d+)/)[1]); const heap=Math.floor(m/1024*0.75); if(heap<7000) throw new Error("Runner memory insufficient for saved China verification"); fs.appendFileSync(process.env.GITHUB_ENV, `NODE_OPTIONS=--max-old-space-size=${heap}\n`); console.log({physicalMemoryMiB:Math.floor(m/1024),heapMiB:heap});'
+          node -e 'const fs=require("fs"); const m=Number(fs.readFileSync("/proc/meminfo","utf8").match(/MemTotal:\s+(\d+)/)[1]); const heap=Math.floor(m/1024*0.75); if(heap<7000) throw new Error("Runner memory insufficient for saved China verification"); fs.appendFileSync(process.env.GITHUB_ENV, `CATALOG_VERIFY_HEAP_MIB=${heap}\n`); console.log({physicalMemoryMiB:Math.floor(m/1024),heapMiB:heap});'
       - run: npm ci
       - name: Verify baseline and compact storage contracts
         run: node --import tsx --test tests/catalog-inventory-regression.test.ts tests/catalog-internal-stream.test.ts
@@ -56,7 +56,9 @@ jobs:
       - name: Convert saved observations without recrawling
         run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Calculate and compare with current catalog without publication
-        run: node --import tsx scripts/catalog-publish-market.mjs
+        run: |
+          node --max-old-space-size="$CATALOG_VERIFY_HEAP_MIB" -e 'const v8=require("node:v8"); console.log({heapLimitMiB:Math.round(v8.getHeapStatistics().heap_size_limit/1024/1024)});'
+          node --max-old-space-size="$CATALOG_VERIFY_HEAP_MIB" --import tsx scripts/catalog-publish-market.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
