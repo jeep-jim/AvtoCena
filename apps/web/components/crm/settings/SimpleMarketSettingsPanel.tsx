@@ -97,8 +97,11 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
 
                   {calculationFields.filter(([name]) => name !== "topAvtoCommissionRub").map(([name, label]) => (
                     <label key={name} className={fieldLabelClass}>
-                      {label}
-                      <input name={name} type="number" step="1" min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
+                      {name === "logisticsRub"
+                        ? `Международная логистика: $${Number(version.logisticsUsd || 0).toLocaleString("ru-RU")} × курс ЦБ РФ`
+                        : label}
+                      <input name={name} type="number" step="1" min="0" readOnly={name === "logisticsRub"} defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal read-only:cursor-not-allowed read-only:opacity-70" />
+                      {name === "logisticsRub" ? <span className="normal-case tracking-normal text-white/40">Обновляется автоматически по последнему официальному курсу доллара{version.logisticsRateDate ? ` от ${version.logisticsRateDate}` : ""}.</span> : null}
                     </label>
                   ))}
 

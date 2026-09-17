@@ -110,6 +110,19 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
     if (customs.status !== "ready") return {...offer,totalRub:null,publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:"needs_customs_data"} as T;
   }
   if (snapshot.customs?.status !== "ready" || snapshot.priceIncludesAllCustoms === false || snapshot.priceIncludesUtilizationFee === false || snapshot.missing?.length) return offer;
+  if (resolved.config.logisticsRateStatus === "unavailable") return {
+    ...offer,
+    totalRub: null,
+    publicVisibleRub: undefined,
+    publicSpecificationVerified: false,
+    calculationStatus: "needs_currency_rate",
+    calculationSnapshot: {
+      ...(offer.calculationSnapshot || {}),
+      missing: ["fresh_official_usd_logistics_rate"],
+      pricingConfidence: "unavailable",
+      warnings: uniqueText([...(offer.calculationSnapshot?.warnings || []), "Для расчёта логистики нужен актуальный официальный курс доллара Банка России."]),
+    },
+  } as T;
   const sourcePriceRub = snapshotSourcePriceRub(offer);
   const customs = snapshotCustomsParts(offer);
   if (!sourcePriceRub || !customs.total) return offer;
@@ -120,7 +133,11 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
       && savedAdjustment?.policy === 'owner_che168_global_minus_2_percent_20260913'
       ? {...savedAdjustment, originalCarPriceRub: sourcePriceRub, adjustmentRub: -Math.round(sourcePriceRub * 0.02)} : undefined);
   const calculation = calculateAvtocenaFromBusinessConfig({
-    ...(adjustment ? {manualAdjustmentRub: adjustment.adjustmentRub, manualAdjustmentReason: adjustment.label} : {}),
+    ...(adjustment ? {
+      sourcePriceAdjustmentRub: adjustment.adjustmentRub,
+      sourcePriceAdjustmentLabel: adjustment.label,
+      sourcePriceAdjustmentNote: adjustment.warning,
+    } : {}),
     marketId: market,
     marketConfig: resolved.config,
     sourcePriceRub,

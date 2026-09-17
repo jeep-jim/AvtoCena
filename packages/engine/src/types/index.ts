@@ -53,7 +53,13 @@ export type BusinessCalculationInput = {
   utilizationFeeRub?: number;
   cityDeliveryRub?: number;
   deliveryCity?: string;
+  /** Automatic, source-specific vehicle-price correction. Never a manager edit. */
+  sourcePriceAdjustmentRub?: number;
+  sourcePriceAdjustmentLabel?: string;
+  sourcePriceAdjustmentNote?: string;
+  /** @deprecated Historical snapshots only. */
   manualAdjustmentRub?: number;
+  /** @deprecated Historical snapshots only. */
   manualAdjustmentReason?: string;
 };
 

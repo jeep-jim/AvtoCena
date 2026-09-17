@@ -7,6 +7,20 @@ import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normali
 import { applyPrestigeJapanExactIdentityKnowledge } from "../apps/web/lib/catalog/prestige-japan-identity-knowledge";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
+test("automatic transmission with manual mode remains automatic", () => {
+  const direct = normalizeVehicleOfferSpecs({
+    transmission: "6-speed automatic transmission with manual mode",
+  });
+  assert.equal(direct.transmission, "automatic");
+
+  const historical = normalizeVehicleOfferSpecs({
+    sourceTitle: "Volkswagen T-Cross 2023 Facelift 1.5L Automatic Trend Edition",
+    trim: "2023 Facelift 1.5L Automatic Trend Edition",
+    transmission: "manual",
+  });
+  assert.equal(historical.transmission, "automatic");
+});
+
 test("extracts structured peak kW without treating it as 30-minute power", () => {
   const normalized = normalizeVehicleOfferSpecs({ make: "Example", model: "EV", operational: { raw: { specification: { maxPowerKw: 150 } } } });
   assert.equal(normalized.powerKw, 150);

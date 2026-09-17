@@ -35,7 +35,9 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   const config = {...input.marketConfig, exchangeRateReservePercent: 0};
   const configVersion = config.id || `version_${config.version || 0}`;
   const lines: BusinessCalculationLine[] = [];
-  const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
+  const originalCarPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
+  const automaticAdjustmentRub = Number(input.sourcePriceAdjustmentRub || 0);
+  const carPriceRub = Math.max(0, originalCarPriceRub + (Number.isFinite(automaticAdjustmentRub) ? automaticAdjustmentRub : 0));
 
   // Cost composition is independent of payment timing: always retain the full seller price.
   lines.push({
@@ -68,15 +70,15 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   });
   addLine(lines, { id: "other-fixed", title: "Другие фиксированные расходы", amountRub: numberOrZero(config.otherFixedExpensesRub), kind: "other", amountType: "fixed", source: "market_config" });
 
-  const subtotalBeforePercent = lines.reduce((sum, line) => sum + line.amountRub, 0);
+  // The Global Che168 correction changes only the customer-facing vehicle
+  // price. Percentage expenses keep the same base they had before the
+  // source-specific correction; otherwise a 2% price normalization would
+  // silently alter unrelated business charges as well.
+  const subtotalBeforePercent = lines.reduce((sum, line) => sum + line.amountRub, 0)
+    - (Number.isFinite(automaticAdjustmentRub) ? automaticAdjustmentRub : 0);
   for (const expense of config.percentExpenses || []) {
     const amountRub = Math.round(subtotalBeforePercent * numberOrZero(expense.percent) / 100);
     addLine(lines, { id: expense.id, title: expense.title, amountRub, kind: "other", amountType: "percent", source: "market_config", note: `${expense.percent}%` });
-  }
-
-  const manualAdjustmentRub = Number(input.manualAdjustmentRub || 0);
-  if (manualAdjustmentRub !== 0) {
-    addLine(lines, { id: "manual-adjustment", title: "Ручная корректировка менеджера", amountRub: manualAdjustmentRub, kind: "adjustment", amountType: "manual", source: "manager", note: input.manualAdjustmentReason || "Причина не указана" });
   }
 
   const totalRub = lines.reduce((sum, line) => sum + line.amountRub, 0);
