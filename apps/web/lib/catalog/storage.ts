@@ -2,7 +2,7 @@ import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer }
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import { readCatalogOverview } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
-import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
+import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
@@ -787,7 +787,7 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
     readDataJson<JapanAuctionArchiveManifest | null>(JAPAN_ARCHIVE_MANIFEST_PATH, null),
   ]);
   const chunks: string[] = [
-    ...Object.entries<any>(manifest.sources || {}).filter(([sourceId]) => !options.excludeMarket || !REQUIRED_CATALOG_SOURCES[options.excludeMarket].some(source => source.sourceId === sourceId)).flatMap(([, source]) => source.chunks || []),
+    ...Object.entries<any>(manifest.sources || {}).filter(([sourceId]) => !options.excludeMarket || !allowedCatalogSourceIds(options.excludeMarket).includes(sourceId)).flatMap(([, source]) => source.chunks || []),
     ...(options.excludeMarket !== "japan" && Array.isArray(japanArchive?.chunks) ? japanArchive.chunks : []),
   ];
   const rows = await readOfferLists([...new Set(chunks)]);
@@ -796,7 +796,7 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
 /** Preserve the non-public assortment reserve for the next market refresh. */
 export async function readMarketMaintenanceOffers(market: CatalogMarket) {
   const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, {sources:{}});
-  const approved = new Set(REQUIRED_CATALOG_SOURCES[market].map(source => source.sourceId));
+  const approved = new Set(allowedCatalogSourceIds(market));
   const chunks = Object.entries<any>(manifest.sources || {}).filter(([id]) => approved.has(id)).flatMap(([,source]) => source.chunks || []);
   return (await readOfferLists([...new Set<string>(chunks)])).filter(offer => offer.market === market);
 }
@@ -804,7 +804,7 @@ export const readAllOffers = readAllOffersForMaintenance;
 /** Maintenance-only stream: never materialize every other market's raw payloads. */
 export async function* iterateOffersForMaintenance(options: { excludeMarket: CatalogMarket }) {
   const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, { sources: {} });
-  const excludedSources = new Set(REQUIRED_CATALOG_SOURCES[options.excludeMarket].map(source => source.sourceId));
+  const excludedSources = new Set(allowedCatalogSourceIds(options.excludeMarket));
   const seenPaths = new Set<string>();
   for (const [sourceId, source] of Object.entries<any>(manifest.sources || {})) {
     if (excludedSources.has(sourceId)) continue;

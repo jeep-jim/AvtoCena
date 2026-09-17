@@ -3,7 +3,7 @@ import { hasModificationSelection } from "./modification-contract";
 import { reviewedCatalogGalleryHold } from "./source-gallery-review";
 import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
-import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
+import { APPROVED_SAVED_CATALOG_SOURCES, REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
 import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } from "./public-priority";
 
@@ -13,7 +13,7 @@ const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
-const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
+const REQUIRED_SOURCE_IDS = new Set([...Object.values(REQUIRED_CATALOG_SOURCES).flat(), ...APPROVED_SAVED_CATALOG_SOURCES].map((source) => source.sourceId));
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
@@ -218,6 +218,7 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 
 function minimumImageCount(offer: VehicleOffer) {
   if (offer.sourceId === "drom_japan_stat") return 1;
+  if (offer.sourceId === "jptrade_japan_stat") return 2;
   if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
   const configuredValue = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || process.env.CATALOG_MIN_IMAGES;
   if (configuredValue) {

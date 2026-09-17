@@ -47,6 +47,15 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
   ],
 };
 
+// Owner-requested saved auction imports; no claim of an automated live adapter.
+export const APPROVED_SAVED_CATALOG_SOURCES = [
+  { market: "japan", sourceId: "jptrade_japan_stat", canonicalUrl: "https://jptrade.ru/stat/" },
+] as const;
+export function allowedCatalogSourceIds(market: CatalogMarket) {
+  return [...sourcesForMarket(market).map(source => source.sourceId),
+    ...APPROVED_SAVED_CATALOG_SOURCES.filter(source => source.market === market).map(source => source.sourceId)];
+}
+
 // Persisted maintenance rows may belong to retired or malformed markets.
 // Unknown markets have no approved sources and must fail closed, not crash.
 function sourcesForMarket(market: CatalogMarket) {
@@ -60,7 +69,7 @@ export function requiredCatalogSourceIds(market: CatalogMarket) {
 
 export function isAllowedCatalogSourceId(market: CatalogMarket, sourceId: unknown) {
   const id = String(sourceId || "").trim();
-  return sourcesForMarket(market).some((source) => source.sourceId === id);
+  return allowedCatalogSourceIds(market).includes(id);
 }
 
 function registrableHost(hostname: string) {
@@ -74,11 +83,12 @@ function registrableHost(hostname: string) {
 
 export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unknown, urlValue: unknown) {
   const id = String(sourceId || "").trim();
-  const allowed = sourcesForMarket(market).find((source) => source.sourceId === id);
+  const allowed = [...sourcesForMarket(market), ...APPROVED_SAVED_CATALOG_SOURCES.filter(source => source.market === market)].find((source) => source.sourceId === id);
   if (!allowed) return false;
   try {
     const actual = new URL(String(urlValue || ""));
     const canonical = new URL(allowed.canonicalUrl);
+    if (id === "jptrade_japan_stat") return actual.origin === "https://jptrade.ru" && /^\/stat\/\d+$/.test(actual.pathname) && !actual.search && !actual.hash;
     if (market === "china" && id === "autohome_used_china_open" && !["global.che168.com"].includes(actual.hostname.toLowerCase())) return false;
     return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);
   } catch {
