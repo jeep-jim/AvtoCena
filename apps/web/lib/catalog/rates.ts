@@ -143,7 +143,11 @@ async function fetchLiveCbrRates() {
   return liveCbrRatesPromise;
 }
 
-export async function convertToRub(sourcePrice: number | null, currency: string | null): Promise<CurrencyRateSnapshot | null> {
+export async function convertToRub(
+  sourcePrice: number | null,
+  currency: string | null,
+  options: { preferLive?: boolean } = {},
+): Promise<CurrencyRateSnapshot | null> {
   if (!sourcePrice || !currency) return null;
   const code = currency.toUpperCase().trim();
   if (code === "RUB") {
@@ -162,7 +166,7 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
   // publication before reusing a stale snapshot. The stored value remains the
   // fail-safe when CBR is temporarily unavailable.
   const structuredDate = structured?.rateDate || structured?.date || rates.updatedAt;
-  if (!liveRatesDisabled() && !storedRateIsFresh(structuredDate)) {
+  if (!liveRatesDisabled() && (options.preferLive || !storedRateIsFresh(structuredDate))) {
     const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
     if (live) {
       return {

@@ -43,8 +43,10 @@ test('owner adjustment preserves source and customs values, subtracts two percen
   assert.deepEqual(source,original);
   const input:any = {marketId:'china',marketConfig:{id:'test',version:1,securityDepositRub:160000,topAvtoCommissionRub:90000,logisticsRub:100000},sourcePriceRub:800000,customsRub:400000,utilizationFeeRub:5200};
   const baseline=calculateAvtocenaFromBusinessConfig(input);
-  const corrected=calculateAvtocenaFromBusinessConfig({...input,manualAdjustmentRub:adjustment.adjustmentRub,manualAdjustmentReason:adjustment.label});
+  const corrected=calculateAvtocenaFromBusinessConfig({...input,sourcePriceAdjustmentRub:adjustment.adjustmentRub,sourcePriceAdjustmentLabel:adjustment.label});
   assert.equal(baseline.totalRub-corrected.totalRub,16000);
+  assert.equal(corrected.breakdown.find(line=>line.id==='car')?.amountRub,784000);
+  assert.equal(corrected.breakdown.some(line=>line.id==='manual-adjustment'),false);
   assert.deepEqual(corrected.breakdown.filter(l=>l.kind==='customs'),baseline.breakdown.filter(l=>l.kind==='customs'));
   assert.equal(corrected.breakdown.reduce((sum,line)=>sum+line.amountRub,0),corrected.totalRub);
   assert.deepEqual(che168GlobalPriceAdjustment({...source,calculationSnapshot:{sourcePriceAdjustment:adjustment}},800000),adjustment);
@@ -52,6 +54,15 @@ test('owner adjustment preserves source and customs values, subtracts two percen
     assert.equal(che168GlobalPriceAdjustment(offer({operational:{sourceUrl:url}}),800000),undefined);
   assert.equal(che168GlobalPriceAdjustment(offer({sourceCurrency:'CNY'}),800000),undefined);
   assert.equal(che168GlobalPriceAdjustment(offer({sourceId:'autohome_new_china_open'}),800000),undefined);
+});
+
+test('Global Che168 correction does not change percentage expense base', () => {
+  const input:any = {marketId:'china',marketConfig:{id:'test',version:1,percentExpenses:[{id:'insurance',title:'Страхование',percent:1}]},sourcePriceRub:800000};
+  const baseline=calculateAvtocenaFromBusinessConfig(input);
+  const corrected=calculateAvtocenaFromBusinessConfig({...input,sourcePriceAdjustmentRub:-16000});
+  assert.equal(baseline.breakdown.find(line=>line.id==='insurance')?.amountRub,8000);
+  assert.equal(corrected.breakdown.find(line=>line.id==='insurance')?.amountRub,8000);
+  assert.equal(baseline.totalRub-corrected.totalRub,16000);
 });
 
 test('China 80/20 includes unknown seller prices while retaining raw input, and composes with Autohome cap', () => {

@@ -29,7 +29,9 @@ test('complete source evidence calculates before projecting cards in each non-Ja
     assert.ok(snapshot.warnings.some((warning:string)=>warning.includes('Скидка продавцом не подтверждена')));
     const repeated=await prepareSellerInventory(result);
     assert.equal(repeated!.totalRub,result.totalRub);
-    assert.equal(repeated!.calculationSnapshot.breakdown.filter((line:any)=>line.id==='manual-adjustment').length,1);
+    assert.equal(repeated!.calculationSnapshot.breakdown.some((line:any)=>line.id==='manual-adjustment'),false);
+    assert.equal(repeated!.calculationSnapshot.breakdown.find((line:any)=>line.id==='car').amountRub,
+      repeated!.calculationSnapshot.currencyRate.sourcePriceRub+repeated!.calculationSnapshot.sourcePriceAdjustment.adjustmentRub);
    }
   }
  } finally {read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}

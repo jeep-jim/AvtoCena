@@ -212,7 +212,11 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   }
 
   const sourcePriceAdjustment = che168GlobalPriceAdjustment(offer, rate.sourcePriceRub);
-  const adjustmentInput = sourcePriceAdjustment ? { manualAdjustmentRub: sourcePriceAdjustment.adjustmentRub, manualAdjustmentReason: sourcePriceAdjustment.label } : {};
+  const adjustmentInput = sourcePriceAdjustment ? {
+    sourcePriceAdjustmentRub: sourcePriceAdjustment.adjustmentRub,
+    sourcePriceAdjustmentLabel: sourcePriceAdjustment.label,
+    sourcePriceAdjustmentNote: sourcePriceAdjustment.warning,
+  } : {};
   const pendingSnapshot = {
     ...(offer.calculationSnapshot || {}),
     currencyRate: rate,
@@ -254,6 +258,19 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
+  if (market.config.logisticsRateStatus === "unavailable") {
+    return {
+      ...offer,
+      totalRub: null,
+      calculationStatus: "needs_currency_rate",
+      calculationSnapshot: {
+        ...pendingSnapshot,
+        pricingConfidence: "unavailable",
+        missing: ["fresh_official_usd_logistics_rate"],
+        warnings: ["Для расчёта логистики нужен актуальный официальный курс доллара Банка России."],
+      },
+    };
+  }
   const commercial = normalizedCategory(offer).category === "N1";
   const enteredTransport = offer.transportToBorderRub;
   const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;

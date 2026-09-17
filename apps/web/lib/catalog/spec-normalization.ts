@@ -120,11 +120,24 @@ function inferPowertrainKind(text: string, engineCc?: number): PowertrainKind {
 }
 
 function inferTransmission(text: string) {
-  if (/cvt|e-cvt|ecvt|xtronic|вариатор|无级变速/.test(text)) return "cvt";
-  if (/dct|dsg|pdk|dual clutch|робот|双离合/.test(text)) return "dct";
-  if (/manual|\bmt\b|stick shift|механик|手动|수동/.test(text)) return "manual";
-  if (/automatic|automatik|\bauto\b|a\/t|\bat\b|автомат|手自一体|自动挡?|오토|자동/.test(text)) return "automatic";
+  const scoped = text
+    .replace(/(?:with\s+)?manual\s+(?:shift\s+)?mode/g, " ")
+    .replace(/с\s+ручн\w*\s+режим\w*/g, " ");
+  if (/cvt|e-cvt|ecvt|xtronic|вариатор|无级变速/.test(scoped)) return "cvt";
+  if (/dct|dsg|pdk|dual clutch|робот|双离合/.test(scoped)) return "dct";
+  if (/automatic|automatik|\bauto\b|a\/t|\bat\b|автомат|手自一体|自动挡?|오토|자동/.test(scoped)) return "automatic";
+  if (/manual|\bmt\b|stick shift|механик|手动|수동/.test(scoped)) return "manual";
   return undefined;
+}
+
+function normalizedTransmission(offer: Partial<VehicleOffer>) {
+  const explicit = inferTransmission(String(offer.transmission || "").toLowerCase());
+  const identity = inferTransmission([offer.trim, offer.sourceTitle].filter(Boolean).join(" ").toLowerCase());
+  // Global Che168 can describe an automatic gearbox as “automatic … with
+  // manual mode”. Older normalization kept only “manual”; the exact trim/title
+  // still proves that the gearbox itself is automatic.
+  if (explicit === "manual" && identity === "automatic") return "automatic";
+  return explicit || identity || offer.transmission;
 }
 
 function inferDrive(text: string) {
@@ -361,7 +374,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     sourceCurrency: normalizedCurrency(offer),
     fuel,
     powertrainKind,
-    transmission: inferTransmission(String(offer.transmission || "").toLowerCase()) || offer.transmission,
+    transmission: normalizedTransmission(offer),
     drive: inferDrive(String(offer.drive || "").toLowerCase()) || offer.drive,
     bodyType: inferBody(String(offer.bodyType || "").toLowerCase()) || offer.bodyType,
     engineCc,

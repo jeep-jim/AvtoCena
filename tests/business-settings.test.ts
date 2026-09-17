@@ -140,12 +140,14 @@ test("business calculation engine returns configVersion, breakdown and immutable
     carPriceRub: 1000000,
     customsRub: 200000,
     deliveryCity: "Кемерово",
-    manualAdjustmentRub: 5000,
-    manualAdjustmentReason: "Округление",
+    sourcePriceAdjustmentRub: -5000,
+    sourcePriceAdjustmentLabel: "Автоматическая корректировка источника",
   });
   assert.equal(result.configVersion, config.id);
   assert.equal(result.deliveryCity, "Кемерово");
   assert.ok(result.breakdown.find((line: any) => line.id === "topavto-commission"));
+  assert.equal(result.breakdown.find((line: any) => line.id === "car")?.amountRub, 995000);
+  assert.equal(result.breakdown.some((line: any) => line.id === "manual-adjustment"), false);
   assert.equal(result.snapshot.marketConfig.topAvtoCommissionRub, config.topAvtoCommissionRub);
 });
 
