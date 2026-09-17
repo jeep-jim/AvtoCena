@@ -1,0 +1,93 @@
+name: Catalog source parsers · ten-card evidence audit
+on:
+  push:
+    branches: [fix/source-parser-audit-20260917]
+    paths: ['.github/workflows/catalog-parser-ten-card-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: catalog-parser-ten-card-audit
+  cancel-in-progress: false
+jobs:
+  samples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fresh-*
+          path: saved-audit-input
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-sferacar-results
+          path: saved-audit-input/sferacar
+          run-id: 35107193462
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-proauctions-results
+          path: saved-audit-input/proauctions
+          run-id: 35105995247
+          github-token: ${{ github.token }}
+      - run: python3 scripts/catalog-parser-audit-samples.py saved-audit-input parser-audit-input
+      - uses: actions/upload-artifact@v4
+        with:
+          name: parser-audit-ten-card-input
+          path: parser-audit-input
+          retention-days: 14
+  audit:
+    needs: samples
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        source:
+          - autohome_used_china_open
+          - autohome_new_china_open
+          - mobile_de_open
+          - autoscout_europe_open
+          - encar_direct
+          - kcar_korea_open
+          - dubizzle_uae_open
+          - dubicars_uae_exact
+          - carswitch_uae_open
+          - autopapa_georgia_open
+          - myauto_georgia_list
+          - jptrade
+          - sferacar
+          - proauctions
+    env:
+      PARSER_AUDIT_SOURCE: ${{ matrix.source }}
+      CATALOG_SOURCE_INVENTORY_MODE: '1'
+      CATALOG_SOURCE_RETRY_ATTEMPTS: '1'
+      CATALOG_SOURCE_TIMEOUT_MS: '15000'
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '15000'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_DISABLE_YANDEX_SOURCE_BRIDGE: '1'
+      JSON_STORAGE_DRIVER: file
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: parser-audit-ten-card-input
+          path: parser-audit-input
+      - name: Save bounded source responses and parser outputs, without publication
+        run: node --import tsx scripts/catalog-parser-audit.mjs --live
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: parser-audit-${{ matrix.source }}
+          path: parser-audit-output
+          retention-days: 14

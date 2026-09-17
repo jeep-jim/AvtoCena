@@ -65,6 +65,9 @@ export type CarSwitchExactRow = {
   vin?: string;
   sourceFuel?: string;
   sourceEngineDisplacement?: string;
+  sourceTransmission?: string;
+  sourceDrive?: string;
+  sourceBodyType?: string;
 };
 
 function clean(value: unknown) {
@@ -211,6 +214,9 @@ function rowFromEntity(entity: Record<string, unknown>, identity: NonNullable<Re
     sourceFuel: clean((entity.vehicleEngine as any)?.fuelType) || undefined,
     sourceEngineDisplacement: typeof (entity.vehicleEngine as any)?.engineDisplacement === "string"
       ? clean((entity.vehicleEngine as any).engineDisplacement) : undefined,
+    sourceTransmission: clean(entity.vehicleTransmission) || undefined,
+    sourceDrive: clean(entity.driveWheelConfiguration) || undefined,
+    sourceBodyType: clean(entity.bodyType) || undefined,
   };
 }
 
@@ -361,6 +367,12 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     const op = offer.operational as any;
     const fuel = canonicalSourceFuel(detail.sourceFuel);
     offer.fuel = fuel || undefined;
+    // These are named fields of the identity-bound vehicle entity. Do not use
+    // page-wide text (which also contains recommendations and UI dictionaries).
+    offer.transmission = ({ automatic: "automatic", manual: "manual", cvt: "cvt" } as Record<string, string>)[clean(detail.sourceTransmission).toLowerCase()];
+    // "2WD" does not identify which axle is driven; preserve it only as raw evidence.
+    offer.drive = ({ "forward wd": "fwd", "front wheel drive": "fwd", "rear wd": "rwd", "rear wheel drive": "rwd", awd: "awd", "4wd": "awd" } as Record<string, string>)[clean(detail.sourceDrive).toLowerCase()];
+    offer.bodyType = ({ suv: "suv", sedan: "sedan", hatchback: "hatchback", coupe: "coupe", convertible: "convertible", pickup: "pickup", wagon: "wagon", van: "van" } as Record<string, string>)[clean(detail.sourceBodyType).toLowerCase()];
     offer.powertrainKind = fuel === "electric" ? "electric" : ["hybrid", "phev", "hev", "mhev", "erev", "reev"].includes(fuel || "") ? "other_hybrid" : fuel ? "combustion" : "unknown";
     op.semanticEvidence = {
       ...(op.semanticEvidence || {}),
