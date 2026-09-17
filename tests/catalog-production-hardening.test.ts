@@ -435,3 +435,34 @@ test("production control document fixes the CRM readiness gate", () => {
   assert.match(controls, /Новая версия объявления не должна уменьшать уже накопленную галерею/);
   assert.match(controls, /destructive cleanup не запускается внутри неудачной публикации/);
 });
+
+
+test("standard publisher records a complete fail-closed outcome for every fresh offer id", () => {
+  assert.match(standardMarketPublisher, /const freshOfferMetaById = new Map/);
+  assert.match(standardMarketPublisher, /freshOfferMissingIdObservations/);
+  assert.match(standardMarketPublisher, /source:withdrawn/);
+  assert.match(standardMarketPublisher, /audit:\$\{reason\}/);
+  assert.match(standardMarketPublisher, /selection:source_quota/);
+  assert.match(standardMarketPublisher, /selection:duplicate_images/);
+  assert.match(standardMarketPublisher, /selection:candidate_limit/);
+  assert.match(standardMarketPublisher, /selection:description:\$\{reason\}/);
+  assert.match(standardMarketPublisher, /selection:v2_policy/);
+  assert.match(standardMarketPublisher, /canonical:qualityRejected/);
+  assert.match(standardMarketPublisher, /canonical:identityRejected/);
+  assert.match(standardMarketPublisher, /canonical:priceOutliers/);
+  assert.match(standardMarketPublisher, /canonical:model_year_quota/);
+  assert.match(standardMarketPublisher, /canonical:duplicate:\$\{pair\.keptId\}/);
+  assert.match(standardMarketPublisher, /canonical:power_mix_80_20/);
+  assert.match(standardMarketPublisher, /canonical:autohome_2026_share_10_percent/);
+  assert.match(standardMarketPublisher, /scope: "canonical_preflight"/);
+  assert.match(standardMarketPublisher, /outcome: admitted \? "admitted" : "rejected"/);
+  assert.match(standardMarketPublisher, /reason: admitted \? "canonical:admitted"/);
+  assert.match(standardMarketPublisher, /catalog_fresh_offer_audit_incomplete/);
+  assert.match(standardMarketPublisher, /freshOfferAudit: freshOfferAudit\.summary/);
+  assert.match(standardMarketPublisher, /key === "freshOfferAudit" && value\?\.summary/);
+  assert.match(standardMarketPublisher, /if \(reason !== "unknown" && !reason\.startsWith\("exception:"\)\) auditedRemovals\.set/);
+  assert.ok(standardMarketPublisher.indexOf("const freshOfferMetaById = new Map") < standardMarketPublisher.indexOf("generation.offers.length = 0"));
+  assert.ok(standardMarketPublisher.indexOf("canonical:autohome_2026_share_10_percent") < standardMarketPublisher.indexOf("const freshOfferAuditEntries"));
+  assert.ok(standardMarketPublisher.indexOf("const freshOfferAuditEntries") < standardMarketPublisher.indexOf("await fs.writeFile(reportFile, JSON.stringify(preflight"));
+  assert.doesNotMatch(standardMarketPublisher, /JSON\.stringify\(freshOfferAudit\.entries/);
+});
