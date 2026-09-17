@@ -21,14 +21,15 @@ test('six-market migration changes only requested costs, preserves history, is i
   assert.equal(v.contractInitialPaymentRub,m.id==='japan'?70000:250000);
   assert.equal(v.topAvtoCommissionRub,m.id==='japan'?39000:90000);
   assert.equal(v.securityDepositRub+v.topAvtoCommissionRub,v.contractInitialPaymentRub);
-  for(const key of ['logisticsRub','exportExpensesRub','brokerRub','svhRub','rfDeliveryRub','exchangeRateReservePercent']) assert.equal(v[key],old[key],`${m.id}:${key}`);
+  for(const key of ['logisticsRub','exportExpensesRub','brokerRub','svhRub','rfDeliveryRub']) assert.equal(v[key],old[key],`${m.id}:${key}`);
+  assert.equal(v.exchangeRateReservePercent,0);
   const archived=m.versions.find((x:any)=>x.id===old.id);assert.deepEqual({...archived,status:old.status},old);
   v.laboratoryRub=62000; // future country-specific amendment must survive deploy
  }
  assert.deepEqual(migrateMarketCosts(result.markets,at).markets,result.markets);
  assert.equal(migrateMarketCosts(result.markets,at).changed.length,0);
 });
-test('every active market quote keeps the full car price, keeping total, commission and 50k bundle',()=>{
+test('every active market quote keeps the full car price, without FX reserve, keeping commission and 50k bundle',()=>{
  for(const m of seeds){
   const config=selectActiveMarketVersion(m,new Date(at));
   const quote=calculateAvtocenaFromBusinessConfig({marketId:m.id,marketConfig:config,sourcePriceRub:1000000,customsRub:400000,utilizationFeeRub:5200});
@@ -38,7 +39,7 @@ test('every active market quote keeps the full car price, keeping total, commiss
   const bundle=quote.breakdown.find(l=>l.id==='laboratory')!;assert.equal(bundle.amountRub,50000);assert.equal(bundle.title,'Лаборатория, СБКТС, ЭПТС');
   assert.deepEqual(bundle.includedServices,['laboratory','sbkts','epts']);
   const fixed=['topAvtoCommissionRub','exportExpensesRub','logisticsRub','brokerRub','svhRub','rfDeliveryRub','otherFixedExpensesRub'].reduce((s,k)=>s+Number(config[k]||0),0);
-  assert.equal(quote.totalRub,1000000+400000+5200+fixed+50000+20000);
+  assert.equal(quote.totalRub,1000000+400000+5200+fixed+50000);
   assert.equal(quote.breakdown.reduce((s,l)=>s+l.amountRub,0),quote.totalRub);
  }
 });
