@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
-import { catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
+import { catalogSearchProjectionBalanceSources, catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
@@ -150,4 +150,17 @@ test("catalog sort directions used by the filter UI reach the search projection"
   ] as any[];
   assert.deepEqual(catalogSearchProjectionSort([...rows], "totalRubDesc").map((row) => row.id), ["new-expensive", "middle", "old-cheap"]);
   assert.deepEqual(catalogSearchProjectionSort([...rows], "yearAsc").map((row) => row.id), ["old-cheap", "middle", "new-expensive"]);
+});
+
+test("a market page does not hide an older source behind one freshly published source", () => {
+  const rows = [
+    { id: "kcar-new-1", sourceGroup: "kcar_korea_open", updatedAt: "2026-09-17T10:00:00Z" },
+    { id: "kcar-new-2", sourceGroup: "kcar_korea_open", updatedAt: "2026-09-17T09:00:00Z" },
+    { id: "kcar-new-3", sourceGroup: "kcar_korea_open", updatedAt: "2026-09-17T08:00:00Z" },
+    { id: "encar-retained-1", sourceGroup: "encar_korea_direct", updatedAt: "2026-09-14T10:00:00Z" },
+    { id: "encar-retained-2", sourceGroup: "encar_korea_direct", updatedAt: "2026-09-14T09:00:00Z" },
+  ] as any[];
+  catalogSearchProjectionSort(rows, "updatedAt");
+  catalogSearchProjectionBalanceSources(rows);
+  assert.deepEqual(rows.slice(0, 4).map((row) => row.id), ["kcar-new-1", "encar-retained-1", "kcar-new-2", "encar-retained-2"]);
 });
