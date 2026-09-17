@@ -689,7 +689,7 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
   return (await mapWithConcurrency(markets, Math.min(7, markets.length || 1), async (market) => {
     const projection = await readSearchProjection(manifest.generationId, market);
     if ((projection.items || []).length || Number(manifest.markets?.[market]?.count || 0) === 0) {
-      return (projection.items || []).filter(projectionCanRenderCard);
+      return (projection.items || []).map(safePublicPricing).filter(projectionCanRenderCard);
     }
     // Backward-compatible bridge for the currently published generation: older
     // generations do not have compact projection shards yet. Preserve correctness
@@ -705,7 +705,7 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
   const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
   const current = await readCurrentSearchProjection(scope);
   if (current.generationId === manifest.generationId) {
-    return { generationId: manifest.generationId, rows: (current.items || []).filter(projectionCanRenderCard) };
+    return { generationId: manifest.generationId, rows: (current.items || []).map(safePublicPricing).filter(projectionCanRenderCard) };
   }
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
 }
