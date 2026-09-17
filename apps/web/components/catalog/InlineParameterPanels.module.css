@@ -1,6 +1,12 @@
 /* Only offer parameter editors: no catalog/card/price layout changes. */
 .grid { --parameter-gap: 10px; position: relative; isolation: isolate; z-index: 70; column-gap: var(--parameter-gap); row-gap: var(--parameter-gap); }
-.tile { height: 50px; position: relative; }
+.tile {
+ height: 50px;
+ min-height: 0;
+ max-height: 50px;
+ position: relative;
+ overflow: visible;
+}
 .tile:has(> .editor[open]) { z-index: 90; }
 .editor { position: static !important; overflow: visible !important; }
 .editor > summary { position: relative; border-radius: 1rem; }
