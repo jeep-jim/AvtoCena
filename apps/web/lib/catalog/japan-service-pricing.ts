@@ -2,14 +2,16 @@ import { customerPriceBreakdown } from './customer-price-breakdown';
 import type { VehicleOffer } from './types';
 
 export function japanServiceCostBasis(snapshot: any) {
-  if (snapshot?.serviceCostBasis) return snapshot.serviceCostBasis;
+  if (snapshot?.serviceCostBasis && !Array.isArray(snapshot?.breakdown)) return snapshot.serviceCostBasis;
   const lines = snapshot?.breakdown;
   if (!Array.isArray(lines) || !lines.some(l => ['laboratory','sbkts','epts'].includes(l.id))) return undefined;
   const sum = (ids:string[]) => lines.filter(l => ids.includes(l.id)).reduce((s,l) => s + Number(l.amountRub),0);
   const laboratoryRub = sum(['laboratory','sbkts','epts']);
   const commissionRub = sum(['topavto-commission']);
   if (![laboratoryRub,commissionRub].every(n => Number.isFinite(n) && n >= 0)) return undefined;
-  return {laboratoryRub,commissionRub};
+  const exchangeReserveRub = sum(["exchange-reserve"]);
+  if (!Number.isFinite(exchangeReserveRub) || exchangeReserveRub < 0) return undefined;
+  return {laboratoryRub,commissionRub,exchangeReserveRub};
 }
 
 /** Update only the owner-authorized service costs. Auction price, historical
@@ -23,17 +25,17 @@ export function applyJapanServiceCosts<T extends Partial<VehicleOffer>>(offer:T,
   const laboratoryRub = Number(config.laboratoryRub || 0) + Number(config.sbktsRub || 0) + Number(config.eptsRub || 0);
   const commissionRub = Number(config.topAvtoCommissionRub);
   if (![laboratoryRub,commissionRub].every(n => Number.isFinite(n) && n >= 0)) return frozen as T;
-  const totalRub = Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub;
+  const totalRub = Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub - Number(basis.exchangeReserveRub || 0);
   if (!(totalRub > 0)) return frozen as T;
-  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).map((line:any) =>
+  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).filter((line:any) => line.id !== "exchange-reserve").map((line:any) =>
     line.id === 'laboratory' ? {...line,amountRub:laboratoryRub,includedServices:['laboratory','sbkts','epts']} :
     line.id === 'topavto-commission' ? {...line,amountRub:commissionRub} : line) : undefined;
   return {...frozen,totalRub,
     ...(Number((offer as any).cardProjectionVersion) >= 3 ? {publicVisibleRub:totalRub} : {}),
     calculationSnapshot:{...snapshot,...(breakdown ? {breakdown} : {}),
-      serviceCostBasis:{laboratoryRub,commissionRub},serviceBundleVersion:config.serviceBundleVersion,
+      serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub:0},serviceBundleVersion:config.serviceBundleVersion,
       businessConfigVersion:config.id,
-      marketConfig:{...snapshot?.marketConfig,laboratoryRub,sbktsRub:0,eptsRub:0,
+      marketConfig:{...snapshot?.marketConfig,exchangeRateReservePercent:0,laboratoryRub,sbktsRub:0,eptsRub:0,
         topAvtoCommissionRub:commissionRub,securityDepositRub:config.securityDepositRub,
         contractInitialPaymentRub:config.contractInitialPaymentRub,serviceBundleVersion:config.serviceBundleVersion}}} as T;
 }

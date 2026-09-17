@@ -32,7 +32,7 @@ function addLine(lines: BusinessCalculationLine[], line: BusinessCalculationLine
 }
 
 export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationInput): BusinessCalculationResult {
-  const config = input.marketConfig;
+  const config = {...input.marketConfig, exchangeRateReservePercent: 0};
   const configVersion = config.id || `version_${config.version || 0}`;
   const lines: BusinessCalculationLine[] = [];
   const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
@@ -72,12 +72,6 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   for (const expense of config.percentExpenses || []) {
     const amountRub = Math.round(subtotalBeforePercent * numberOrZero(expense.percent) / 100);
     addLine(lines, { id: expense.id, title: expense.title, amountRub, kind: "other", amountType: "percent", source: "market_config", note: `${expense.percent}%` });
-  }
-
-  const reservePercent = numberOrZero(config.exchangeRateReservePercent);
-  if (reservePercent > 0) {
-    const amountRub = Math.round(carPriceRub * reservePercent / 100);
-    addLine(lines, { id: "exchange-reserve", title: "Резерв на изменение курса", amountRub, kind: "reserve", amountType: "percent", source: "market_config", note: `${reservePercent}% от стоимости авто` });
   }
 
   const manualAdjustmentRub = Number(input.manualAdjustmentRub || 0);

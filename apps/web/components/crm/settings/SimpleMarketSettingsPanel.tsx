@@ -4,7 +4,6 @@ import { money } from "@/lib/avtocena";
 import { MarketPaymentFields } from "./MarketPaymentFields";
 
 const calculationFields = [
-  ["exchangeRateReservePercent", "Резерв курса, %"],
   ["topAvtoCommissionRub", "Комиссия компании, ₽"],
   ["exportExpensesRub", "Все услуги в стране покупки, включая предоплаченные, ₽"],
   ["logisticsRub", "Международная логистика, ₽"],
@@ -52,7 +51,6 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
       {markets.map((market) => {
         const version = market.effectiveVersion || market.versions?.find((item: any) => item.id === market.activeVersionId) || market.versions?.[0] || {};
         const fixedTotal = calculationFields
-          .filter(([name]) => name !== "exchangeRateReservePercent")
           .reduce((sum, [name]) => sum + (Number(version[name]) || 0), 0);
         const provisional = Boolean(version.provisional);
 
@@ -67,7 +65,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                   {provisional ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">средние значения</span> : null}
                 </div>
                 <div className="mt-2 text-sm font-bold text-white/45">
-                  Валюта {version.currency || "—"} · расходы {money(fixedTotal)} ₽ · обеспечительный платёж {money(Number(version.securityDepositRub) || 0)} ₽ · комиссия {money(Number(version.topAvtoCommissionRub) || 0)} ₽ · первый платёж {money((Number(version.securityDepositRub) || 0) + (Number(version.topAvtoCommissionRub) || 0))} ₽ · резерв курса {numberValue(version.exchangeRateReservePercent) || 0}%
+                  Валюта {version.currency || "—"} · расходы {money(fixedTotal)} ₽ · обеспечительный платёж {money(Number(version.securityDepositRub) || 0)} ₽ · комиссия {money(Number(version.topAvtoCommissionRub) || 0)} ₽ · первый платёж {money((Number(version.securityDepositRub) || 0) + (Number(version.topAvtoCommissionRub) || 0))} ₽
                 </div>
               </div>
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/[.07] text-white/65 transition group-open:rotate-180">
@@ -100,7 +98,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                   {calculationFields.filter(([name]) => name !== "topAvtoCommissionRub").map(([name, label]) => (
                     <label key={name} className={fieldLabelClass}>
                       {label}
-                      <input name={name} type="number" step={name === "exchangeRateReservePercent" ? "0.01" : "1"} min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
+                      <input name={name} type="number" step="1" min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                     </label>
                   ))}
 

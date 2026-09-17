@@ -49,7 +49,7 @@ function hasCompleteActiveProfile(current: any) {
   return [
     "securityDepositRub", "topAvtoCommissionRub", "exportExpensesRub", "logisticsRub",
     "brokerRub", "svhRub", "laboratoryRub", "sbktsRub", "eptsRub", "rfDeliveryRub",
-    "otherFixedExpensesRub", "exchangeRateReservePercent",
+    "otherFixedExpensesRub",
   ].every((field) => present(current[field]));
 }
 
@@ -72,7 +72,7 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
     securityDepositRub: deposit,
     topAvtoCommissionRub: commission,
     contractInitialPaymentRub: deposit + commission,
-    exchangeRateReservePercent: configuredValue(current, "exchangeRateReservePercent", defaults.exchangeRateReservePercent),
+    exchangeRateReservePercent: 0,
     exportExpensesRub: configuredValue(current, "exportExpensesRub", defaults.exportExpensesRub),
     logisticsRub: configuredValue(current, "logisticsRub", defaults.logisticsRub),
     brokerRub: configuredValue(current, "brokerRub", defaults.brokerRub),

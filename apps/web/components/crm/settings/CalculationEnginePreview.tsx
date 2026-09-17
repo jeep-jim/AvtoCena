@@ -280,7 +280,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               <tr>
                 <td className="px-4 py-3 font-black">6. Коммерческие расходы</td>
                 <td className="px-4 py-3 text-white/62">Добавляет только активную версию расходов выбранного рынка и резерв курса.</td>
-                <td className="px-4 py-3 text-white/45">{resolved.config?.id || "—"} · резерв {number(resolved.config?.exchangeRateReservePercent || 0)}%</td>
+                <td className="px-4 py-3 text-white/45">{resolved.config?.id || "—"}</td>
                 <td className="px-4 py-3 text-right font-black">{business ? rub(marketExtras) : "—"}</td>
               </tr>
               <tr className="bg-red-500/[.07]">

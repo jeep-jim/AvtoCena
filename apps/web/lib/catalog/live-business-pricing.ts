@@ -1,4 +1,4 @@
-import { applyJapanServiceCosts } from "./japan-service-pricing";
+import { applyJapanServiceCosts, japanServiceCostBasis } from "./japan-service-pricing";
 import { compactRepricedProjection } from "./compact-pricing-snapshot";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { withReplayInputs } from "./pricing-replay-inputs";
@@ -36,7 +36,18 @@ function uniqueText(values: unknown[]) {
 }
 
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
-  if (String(offer.market || "") === "japan") return offer;
+  if (String(offer.market || "") === "japan") {
+    // Older compact cards omitted the reserve. Recover its exact saved amount;
+    // never infer a historical charge from today's percentage or exchange rate.
+    if (Number((offer as any).cardProjectionVersion) >= 3 && offer.id
+      && offer.calculationSnapshot?.serviceCostBasis?.exchangeReserveRub == null) {
+      const {getOfferFromCurrentShard} = await import("./storage");
+      const full = await getOfferFromCurrentShard(offer.id).catch(() => null);
+      const basis = japanServiceCostBasis(full?.calculationSnapshot);
+      if (basis?.exchangeReserveRub != null) return {...offer, calculationSnapshot:{...offer.calculationSnapshot,serviceCostBasis:{...offer.calculationSnapshot?.serviceCostBasis,exchangeReserveRub:basis.exchangeReserveRub}}} as T;
+    }
+    return offer;
+  }
   const sourcePrice = positive(offer.sourcePrice);
   const sourceCurrency = String(offer.sourceCurrency || "").trim().toUpperCase();
   if (!sourcePrice || !sourceCurrency) return offer;

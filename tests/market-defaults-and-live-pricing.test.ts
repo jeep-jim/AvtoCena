@@ -92,9 +92,9 @@ test("visible offer is repriced from current CRM values without changing customs
   const config = markets.find((market: any) => market.id === "china").versions[0];
   const result = repriceOfferWithBusinessConfig(offer, config);
 
-  assert.equal(result.totalRub, 2_215_000);
+  assert.equal(result.totalRub, 2_195_000);
   assert.equal(result.previousTotalRub, 1_900_000);
-  assert.equal(result.priceDeltaRub, 315_000);
+  assert.equal(result.priceDeltaRub, 295_000);
   assert.equal(result.calculationSnapshot.customs.totalCustomsRub, 500_000);
   assert.equal(result.calculationSnapshot.businessConfigVersion, "market_china_v2");
   assert.equal(result.calculationSnapshot.provisionalMarketConfig, true);
