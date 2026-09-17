@@ -123,6 +123,7 @@ export class AutoScoutHqAdapter extends AutoScoutEuropeExactAdapter {
       (offer as any)[field] = exact[field];
     }
     offer.operational = { ...offer.operational, semanticEvidence: exact.operational?.semanticEvidence } as any;
+    if (offer.powerHp || offer.powerKw) offer.powerDataSource = "AutoScout24 exact listingDetails.vehicle";
     // Fresh peak power is not certified 30-minute power; requalification must
     // decide whether this offer has sufficient evidence for a calculation.
     offer.power30MinKw = undefined;
@@ -144,7 +145,7 @@ export class AutoScoutHqAdapter extends AutoScoutEuropeExactAdapter {
     offer.operational = {
       ...(offer.operational || {}), exactDetail: true, exactPhotos: true, galleryVerified: true, galleryImageCount: urls.length,
       gallerySafetyMode: "autoscout_exact_detail_next_gallery_v2", galleryStoredAs: "json_urls", photoIdentityVerified: true, photoResolutionVerified: true,
-      raw: { ...previousRaw, detailImages: urls, listingBoundImages: true, photoIdentityVerified: true, photoResolutionVerified: true, detailIdentityVerified: true },
+      raw: { ...previousRaw, parsed: detailRow, detailImages: urls, listingBoundImages: true, photoIdentityVerified: true, photoResolutionVerified: true, detailIdentityVerified: true },
     } as any;
     return urls.map(image);
   }
