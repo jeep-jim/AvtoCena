@@ -177,11 +177,12 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const common = {
     make: first(params.make) || first(params.brand), model: first(params.model), budgetFrom: numeric(params.budgetFrom), budgetTo: numeric(params.budget) || numeric(params.budgetTo), hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom), yearTo: numeric(params.yearTo), mileageFrom: numeric(params.mileageFrom), mileageTo: numeric(params.mileageTo), engineFrom: numeric(params.engineFrom), engineTo: numeric(params.engineTo), powerFrom: numeric(params.powerFrom), powerTo: numeric(params.powerTo),
+    auctionGrade: selectedMarket === "japan" ? first(params.auctionGrade) : undefined,
     fuel: first(params.fuel), transmission: first(params.transmission), drive: first(params.drive), bodyType: first(params.bodyType), sort: selectedSort,
   };
   const hasFilters = Boolean(common.make || common.model || common.budgetFrom || common.budgetTo || common.hasPrice
     || common.yearFrom || common.yearTo || common.mileageFrom || common.mileageTo || common.engineFrom || common.engineTo
-    || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
+    || common.auctionGrade || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
   const overviewEligible = !selectedMarket && !hasFilters && !customSort && requestedPage === 1;
   const overview = overviewEligible ? await readCatalogOverview().catch((error) => {
@@ -242,7 +243,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const totalPages = selectedResult ? Math.max(1, Math.ceil(selectedResult.total / selectedResult.pageSize)) : 1;
   const currentPage = Math.min(requestedPage, totalPages);
   const pages = paginationItems(currentPage, totalPages);
-  const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
+  const initialKeys = ["auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   const brandNames = facets.makes || [];
   const japanStatisticsSelected = selectedMarket === "japan";
