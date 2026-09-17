@@ -9,6 +9,9 @@ import { CatalogBrandMultiSelect } from "@/components/catalog/CatalogBrandMultiS
 import { catalogFilterOptions } from "@/lib/catalog/filter-options";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
+import { auctionGradeColorClass } from "@/lib/catalog/auction-grade-color";
+import { auctionGradeLabel } from "@/lib/catalog/japan-export-restriction";
+
 type Option = { value: string; label: string };
 type Facets = { makes: string[]; models: Array<{ make: string; model: string; aliases?: string[] }>; markets?: string[]; bodyTypes?: string[]; fuels?: string[]; transmissions?: string[]; drives?: string[] };
 type SortKey = "" | "totalRub" | "year";
@@ -30,8 +33,9 @@ type FilterDraft = {
   fuel: string;
   drive: string;
   powerTo: string;
+  auctionGrade: string;
 };
-type FilterChip = { key: string; label: string };
+type FilterChip = { key: string; label: string; grade?: string };
 
 function clean(value: string) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function splitMakeValues(value: string) { return [...new Set(String(value || "").split(",").map(clean).filter(Boolean))]; }
@@ -79,10 +83,12 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const active = options.find((item) => item.value === value);
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
-    <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black" aria-expanded={open}><span className="truncate">{active?.label || placeholder}</span><Chevron open={open} /></button>
+    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="truncate">{active?.label || placeholder}</span><Chevron open={open} /></button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); close(); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${value === item.value ? "is-active" : ""}`}><span>{item.label}</span>{value === item.value ? <span>✓</span> : null}</button>)}</div></div> : null}
   </div>;
 }
+
+const auctionGrades: Option[] = [{ value: "", label: "Любая оценка" }, ...["S", "6", "5.5", "5", "4.5", "4", "3.5", "3", "2", "1", "0", "R", "RA", "RB", "***", "**", "*", "A", "B", "C", "D", "E", "F", "0.5", "1.5", "2.5", "6.5", "7", "8", "9", "10"].map(value => ({ value, label: `Оценка ${value}` }))];
 
 const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
@@ -97,6 +103,7 @@ function draftFromInitial(initial: Record<string, string>): FilterDraft {
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: initial.budget || initial.budgetTo || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
+    auctionGrade: initial.market === "japan" ? auctionGradeLabel(initial.auctionGrade) || "" : "",
     fuel: initial.fuel || "", drive: initial.drive || "", powerTo: initial.powerTo || "",
   };
 }
@@ -110,6 +117,7 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
+  if (draft.market === "japan") add("auctionGrade", draft.auctionGrade);
   add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
@@ -226,13 +234,13 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
 
 function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]; onRemove: (key: string) => void; compact?: boolean }) {
   if (!chips.length) return null;
-  return <div className={`flex min-w-0 flex-wrap items-center gap-2 ${compact ? "" : "mt-3"}`} aria-label="Выбранные параметры">{!compact ? <span className="mr-1 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)]"><span>Выбрано</span><span className="ac-filter-count-badge flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black tracking-normal text-white" style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>{chips.length}</span></span> : null}{chips.map((item) => <button key={item.key} type="button" onClick={() => onRemove(item.key)} className="ac-filter-chip flex min-h-8 max-w-full items-center gap-1.5 rounded-full px-3 text-xs font-black"><span className="truncate">{item.label}</span><span className="text-base leading-none opacity-55">×</span></button>)}</div>;
+  return <div className={`flex min-w-0 flex-wrap items-center gap-2 ${compact ? "" : "mt-3"}`} aria-label="Выбранные параметры">{!compact ? <span className="mr-1 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)]"><span>Выбрано</span><span className="ac-filter-count-badge flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black tracking-normal text-white" style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>{chips.length}</span></span> : null}{chips.map((item) => <button key={item.key} type="button" onClick={() => onRemove(item.key)} className={`${item.grade ? `ac-japan-badge ${auctionGradeColorClass(item.grade)}` : "ac-filter-chip"} flex min-h-8 max-w-full items-center gap-1.5 rounded-full px-3 text-xs font-black`}><span className="truncate">{item.label}</span><span className="text-base leading-none opacity-55">×</span></button>)}</div>;
 }
 
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
-    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
+    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="auctionGrade" value={draft.auctionGrade} placeholder="Аукционная оценка" options={auctionGrades} onChange={(value) => setField("auctionGrade", value)} /> : null}</div>
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
@@ -253,7 +261,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const [sortKey, setSortKey] = useState<SortKey>(initialSortState.key);
   const [sortDirection, setSortDirection] = useState<SortDir>(initialSortState.direction);
   const [electricFacets, setElectricFacets] = useState<Facets | null>(null);
-  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
+  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
   const electricOnly = draft.fuel === "electric";
@@ -324,7 +332,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const transmissionOptions = useMemo(() => catalogFilterOptions(transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value }));
+  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "market" && value !== "japan" ? {auctionGrade: ""} : {}) }));
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
@@ -336,6 +344,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
+    if (draft.market === "japan" && draft.auctionGrade) rows.push({key: "auctionGrade", label: `Оценка ${draft.auctionGrade}`, grade: draft.auctionGrade});
     if (draft.model) rows.push({ key: "model", label: draft.model });
     if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
