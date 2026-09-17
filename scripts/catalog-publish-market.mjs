@@ -510,10 +510,14 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
-for (const field of ["qualityRejected", "identityRejected", "priceOutliers"]) {
+for (const [field, reason] of [
+  ["qualityRejected", "canonical:qualityRejected"],
+  ["identityRejected", "canonical:identityRejected"],
+  ["priceOutliers", "canonical:priceOutliers"],
+]) {
   for (const offer of canonicalTargetPreview[field]) {
-    rejectFreshOffer(offer.id, `canonical:${field}`);
-    auditedRemovals.set(offer.id, `canonical:${field}`);
+    rejectFreshOffer(offer.id, reason);
+    auditedRemovals.set(offer.id, reason);
   }
 }
 for (const offer of canonicalTargetPreview.quota.removed) {
