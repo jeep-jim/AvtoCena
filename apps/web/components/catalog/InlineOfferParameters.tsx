@@ -65,7 +65,13 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
     if(!current)return;
     const next=!current.open;
     if(next){
-     current.closest("[data-parameter-editor-grid]")?.querySelectorAll<HTMLDetailsElement>("details[data-parameter-editor][open]").forEach(other=>{if(other!==current)other.open=false;});
+     const grid=current.closest<HTMLElement>("[data-parameter-editor-grid]");
+     grid?.querySelectorAll<HTMLDetailsElement>("details[data-parameter-editor][open]").forEach(other=>{if(other!==current)other.open=false;});
+     const tile=current.parentElement;
+     if(grid && tile){
+      const gap=Number.parseFloat(getComputedStyle(grid).rowGap)||10;
+      tile.style.setProperty("--parameter-panel-top",`${tile.getBoundingClientRect().height+gap}px`);
+     }
     }
     current.open=next;
    }} className={`flex h-12 cursor-pointer list-none items-center gap-3 py-2 pl-4 pr-4 text-left [&::-webkit-details-marker]:hidden ${valueNode ? powerStyles.powerTile : ""} ${warning ? powerStyles.warningTile : ""}`}>
