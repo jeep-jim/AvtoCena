@@ -5,6 +5,19 @@ import { normalizeVehicleOfferSpecs } from '../apps/web/lib/catalog/spec-normali
 import { catalogOfferVisibleRub } from '../apps/web/lib/catalog/public-priority';
 import { kcarSpecificationEvidence } from '../apps/web/lib/catalog/kcar-exact-source';
 import { restoreSavedSourceEvidence } from '../apps/web/lib/catalog/saved-source-recovery';
+import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
+
+test('large-engine low-power evidence is reviewed without inventing horsepower',()=>{
+ const row:any={market:'europe',engineCc:2400,powerHp:34,fuel:'diesel',powertrainKind:'combustion',powerDataSource:'seller_exact',totalRub:2000000};
+ assert.equal(catalogPowerSanity(row).reason,'large_engine_low_power_requires_review');
+ const safe=safePublicPricing(row);
+ assert.equal(safe.powerHp,undefined);assert.equal(safe.totalRub,null);
+ assert.equal(row.powerHp,34);
+ assert.equal(catalogPowerSanity({...row,engineCc:2000}).suspicious,false);
+ assert.equal(catalogPowerSanity({...row,powerHp:100}).suspicious,false);
+ assert.equal(catalogPowerSanity({...row,powerDataSource:'manufacturer_official'}).suspicious,false);
+ assert.equal(catalogPowerSanity({...row,fuel:'hybrid',powertrainKind:'other_hybrid'}).suspicious,false);
+});
 
 for (const powerHp of [34, 100, 104, 111, 134, 144, 150, 304]) {
  test(`unverified K Car ${powerHp} hp cannot survive normalization or an attested price`, () => {
