@@ -1,0 +1,64 @@
+name: Japan saved packages admission evidence
+on:
+  push:
+    branches: [fix/japan-saved-qualification-20260917]
+    paths:
+      - '.github/workflows/qualify-saved-japan-packages.yml'
+      - 'scripts/qualify-saved-japan-packages.py'
+      - 'tests/qualify-saved-japan-packages.test.py'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: japan-saved-packages-admission-evidence
+  cancel-in-progress: false
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tests/qualify-saved-japan-packages.test.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-sferacar-results
+          path: saved-sferacar
+          run-id: 35107193462
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-proauctions-results
+          path: saved-proauctions
+          run-id: 35105995247
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: fresh-japan-jptrade
+          path: saved-jptrade
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: jptrade-image-verification-35167936226
+          path: verified-jptrade-images
+          run-id: 35186348125
+          github-token: ${{ github.token }}
+      - name: Account for every saved record and every unmet requirement
+        run: >-
+          python3 scripts/qualify-saved-japan-packages.py
+          --sferacar saved-sferacar --proauctions saved-proauctions --jptrade saved-jptrade
+          --verified-images verified-jptrade-images/jptrade-image-verification.jsonl
+          --output japan-qualification --as-of "$(date -u +%FT%TZ)"
+      - name: Preserve completed live checks without repeated source requests
+        uses: actions/download-artifact@v4
+        with:
+          name: japan-saved-packages-qualification
+          path: japan-qualification/previous-evidence
+          run-id: 35246306276
+          github-token: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-saved-packages-qualification
+          path: japan-qualification
+          retention-days: 14
