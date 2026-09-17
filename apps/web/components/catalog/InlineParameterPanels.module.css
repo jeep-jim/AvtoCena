@@ -15,7 +15,7 @@
 :global(html[data-theme="light"]) .editor[open] > summary::after { left: -1px; right: -1px; border-inline: 1px solid var(--ac-border); }
 .editor > summary:focus-visible { outline: 2px solid var(--ac-public-accent, #ff4650); outline-offset: 2px; }
 .editor:not([open]) > .panel { display: none; }
-/* The tile owns grid width; browser checks use the editor's outer visible edge, including theme borders. */
+/* The editor owns the vertical anchor; light-theme border compensation keeps the menu on the grid edges. */
 .panel {
  position: absolute;
  top: calc(100% + var(--parameter-gap));
