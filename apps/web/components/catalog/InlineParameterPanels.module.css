@@ -19,7 +19,7 @@
 .editor:not([open]) > .panel { display: none; }
 .panel {
  position: absolute;
- top: calc(100% + var(--parameter-gap));
+ top: var(--parameter-panel-top, calc(100% + var(--parameter-gap)));
  left: 0;
  width: calc(200% + var(--parameter-gap));
  box-sizing: border-box;
