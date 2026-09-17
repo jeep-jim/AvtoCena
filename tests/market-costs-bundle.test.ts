@@ -28,12 +28,12 @@ test('six-market migration changes only requested costs, preserves history, is i
  assert.deepEqual(migrateMarketCosts(result.markets,at).markets,result.markets);
  assert.equal(migrateMarketCosts(result.markets,at).changed.length,0);
 });
-test('every active market quote splits the advance, keeping total, commission and 50k bundle',()=>{
+test('every active market quote keeps the full car price, keeping total, commission and 50k bundle',()=>{
  for(const m of seeds){
   const config=selectActiveMarketVersion(m,new Date(at));
   const quote=calculateAvtocenaFromBusinessConfig({marketId:m.id,marketConfig:config,sourcePriceRub:1000000,customsRub:400000,utilizationFeeRub:5200});
-  const car=quote.breakdown.find(l=>l.id==='car')!; assert.equal(car.amountRub,1000000-config.securityDepositRub);assert.equal(car.note,undefined);
-  assert.equal(quote.breakdown.find(l=>l.id==='security-deposit')?.amountRub,m.id==='japan'?31000:160000);
+  const car=quote.breakdown.find(l=>l.id==='car')!; assert.equal(car.amountRub,1000000);assert.equal(car.note,undefined);
+  assert.equal(quote.breakdown.find(l=>l.id==='security-deposit')?.amountRub,undefined);
   assert.ok(!quote.breakdown.some(l=>['sbkts','epts'].includes(l.id)));
   const bundle=quote.breakdown.find(l=>l.id==='laboratory')!;assert.equal(bundle.amountRub,50000);assert.equal(bundle.title,'Лаборатория, СБКТС, ЭПТС');
   assert.deepEqual(bundle.includedServices,['laboratory','sbkts','epts']);
@@ -44,7 +44,7 @@ test('every active market quote splits the advance, keeping total, commission an
 });
 test('legacy display merges without rewriting its total and removes deposit explanations',()=>{
  const lines=[{id:'car',amountRub:840000,note:'old deposit explanation'},{id:'security-deposit',amountRub:160000},{id:'laboratory',amountRub:15000},{id:'sbkts',amountRub:35000},{id:'epts',amountRub:35000}];
- const out=customerPriceBreakdown(lines);assert.equal(out.length,3);assert.equal(out[0].amountRub,840000);assert.equal(out[0].note,undefined);assert.equal(out[1].amountRub,160000);assert.equal(out[2].amountRub,85000);
+ const out=customerPriceBreakdown(lines);assert.equal(out.length,2);assert.equal(out[0].amountRub,1000000);assert.equal(out[0].note,undefined);assert.equal(out[1].amountRub,85000);
  assert.deepEqual(customerPriceBreakdown(out),out);assert.equal(lines[0].amountRub,840000);
 });
 test('Japan list/detail apply the same service-only delta once, keeping auction, FX and customs frozen',()=>{

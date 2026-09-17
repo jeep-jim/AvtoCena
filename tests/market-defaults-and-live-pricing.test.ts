@@ -101,8 +101,8 @@ test("visible offer is repriced from current CRM values without changing customs
   assert.equal(result.priceMode, "estimated");
   const deposit = result.calculationSnapshot.breakdown.find((line: any) => line.id === "security-deposit");
   const car = result.calculationSnapshot.breakdown.find((line: any) => line.id === "car");
-  assert.equal(Number(car.amountRub), 840_000);
-  assert.equal(deposit.amountRub, 160_000);
+  assert.equal(Number(car.amountRub), 1_000_000);
+  assert.equal(deposit, undefined);
 });
 
 test("completed Japanese auction keeps its historical published total", () => {

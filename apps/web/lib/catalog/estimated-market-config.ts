@@ -70,7 +70,7 @@ export function resolveCatalogMarketConfig(market: CatalogMarket, configured: an
     active: true,
     effectiveFrom: source.effectiveFrom || "2026-07-27T00:00:00.000Z",
     currency: source.currency || defaults.currency,
-    contractInitialPaymentRub: source.contractInitialPaymentRub ?? (market === "japan" ? 70_000 : 250_000),
+
     securityDepositRub: value("securityDepositRub"),
     topAvtoCommissionRub: value("topAvtoCommissionRub"),
     exportExpensesRub: value("exportExpensesRub"),
@@ -92,10 +92,11 @@ export function resolveCatalogMarketConfig(market: CatalogMarket, configured: an
     provisional: source.provisional !== false,
   };
 
+  const paymentConfig = {...config, contractInitialPaymentRub: config.securityDepositRub + config.topAvtoCommissionRub};
   const provisional = Boolean(config.provisional);
   const estimated = provisional || !activeConfig(configured) || estimatedFields.length > 0;
   if (!activeConfig(configured)) warnings.push("Коммерческая конфигурация рынка не была активна: применён предварительный средний профиль.");
   if (provisional) warnings.push("Используются предварительные средние расходы рынка; владелец может уточнить их в CRM.");
   if (estimatedFields.length) warnings.push(`Оценочно заполнены расходы: ${estimatedFields.join(", ")}.`);
-  return { config, estimated, estimatedFields, warnings };
+  return { config: paymentConfig, estimated, estimatedFields, warnings };
 }

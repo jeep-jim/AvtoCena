@@ -6,7 +6,7 @@ import { MarketPaymentFields } from "./MarketPaymentFields";
 const calculationFields = [
   ["exchangeRateReservePercent", "Резерв курса, %"],
   ["topAvtoCommissionRub", "Комиссия компании, ₽"],
-  ["exportExpensesRub", "Расходы в стране покупки, ₽"],
+  ["exportExpensesRub", "Все услуги в стране покупки, включая предоплаченные, ₽"],
   ["logisticsRub", "Международная логистика, ₽"],
   ["brokerRub", "Брокер, ₽"],
   ["svhRub", "СВХ, ₽"],
@@ -42,7 +42,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
           <div>
             <h2 className="text-2xl font-black">Все рынки</h2>
             <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/48">
-              Здесь находятся цифры, которые используются в цене автомобиля. Сохранённая версия сразу применяется к карточкам и каталогу; полный поисковый индекс обновляется фоновым пересчётом.
+              Итог под ключ = полная цена продавца + услуги, перевозка и оформление + таможенные платежи + комиссия. Предоплата — часть оплаты этого итога. Сохранённая версия сразу применяется к карточкам и каталогу; полный поисковый индекс обновляется фоновым пересчётом.
             </p>
           </div>
           <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/60">{markets.length} рынков</span>
@@ -95,7 +95,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                     <input name="currency" defaultValue={version.currency || ""} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                   </label>
 
-                  <MarketPaymentFields key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
+                  <MarketPaymentFields marketId={market.id} key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
 
                   {calculationFields.filter(([name]) => name !== "topAvtoCommissionRub").map(([name, label]) => (
                     <label key={name} className={fieldLabelClass}>

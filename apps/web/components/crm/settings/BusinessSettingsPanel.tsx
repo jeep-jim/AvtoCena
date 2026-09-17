@@ -199,7 +199,7 @@ export function BusinessSettingsPanel({
                       name="currency"
                       defaultValue={version.currency}
                     />
-                    <MarketPaymentFields key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
+                    <MarketPaymentFields marketId={market.id} key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
                     <Field
                       label="Резерв курса %"
                       name="exchangeRateReservePercent"
@@ -207,7 +207,7 @@ export function BusinessSettingsPanel({
                       defaultValue={version.exchangeRateReservePercent}
                     />
                     <Field
-                      label="Export ₽"
+                      label="Все услуги в стране покупки, включая предоплаченные, ₽"
                       name="exportExpensesRub"
                       type="number"
                       defaultValue={version.exportExpensesRub}

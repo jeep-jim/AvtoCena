@@ -3,7 +3,7 @@ import test from "node:test";
 import { customerPriceBreakdown } from "../apps/web/lib/catalog/customer-price-breakdown";
 import { calculateAvtocenaFromBusinessConfig } from "../packages/engine/src/calculation/calculateAvtocena";
 
-test("customer screenshot cases split the advance without changing the seller price or total", () => {
+test("customer screenshot cases retain full seller price independently of the advance", () => {
   for (const [market, price, deposit] of [
     ["china",577160,160000], ["china",835828,160000],
     ["korea",793333,110000], ["korea",1082962,110000],
@@ -14,8 +14,8 @@ test("customer screenshot cases split the advance without changing the seller pr
       customsRub:500000, marketConfig:{securityDepositRub:deposit,topAvtoCommissionRub:90000,exchangeRateReservePercent:2}});
     const before = JSON.stringify(result);
     const visible = customerPriceBreakdown(result.breakdown);
-    assert.equal(visible.find(line=>line.id==='car')?.amountRub,price-deposit,market);
-    assert.equal(visible.find(line=>line.id==='security-deposit')?.amountRub,deposit);
+    assert.equal(visible.find(line=>line.id==='car')?.amountRub,price,market);
+    assert.equal(visible.find(line=>line.id==='security-deposit')?.amountRub,undefined);
     assert.equal(visible.reduce((sum,line)=>sum+line.amountRub,0),result.totalRub,market);
     assert.equal(visible.find(line=>line.id==='car')?.note,undefined);
     assert.equal(JSON.stringify(result),before,'stored snapshot is immutable');
@@ -28,8 +28,8 @@ test("fully prepaid vehicle remains visible and zero-deposit quotes stay unchang
     marketConfig:{securityDepositRub:110000,topAvtoCommissionRub:90000}});
   const lines=customerPriceBreakdown(result.breakdown);
   assert.equal(lines[0].id,'car');
-  assert.equal(lines[0].amountRub,0);
-  assert.equal(lines.find(line=>line.id==='security-deposit')?.amountRub,50000);
+  assert.equal(lines[0].amountRub,50000);
+  assert.equal(lines.find(line=>line.id==='security-deposit')?.amountRub,undefined);
   assert.equal(lines.reduce((sum,line)=>sum+line.amountRub,0),140000);
   const plain=[{id:'car',title:'Цена автомобиля',amountRub:123456},{id:'manual-adjustment',amountRub:-1000}];
   assert.deepEqual(customerPriceBreakdown(plain),plain);
@@ -44,8 +44,8 @@ test('historical full-price and split snapshots produce the same breakdown with 
     assert.deepEqual(customerPriceBreakdown(old,deposit),current);
     assert.deepEqual(customerPriceBreakdown(current,deposit),current);
     assert.equal(current.reduce((s,l)=>s+l.amountRub,0),1201918);
-    assert.equal(current[0].amountRub,1111918-deposit);
-    assert.equal(current[1].amountRub,deposit);
+    assert.equal(current[0].amountRub,1111918);
+    assert.ok(!current.some(line=>line.id==='security-deposit'));
     assert.equal(JSON.stringify(old),before);
   }
 });
