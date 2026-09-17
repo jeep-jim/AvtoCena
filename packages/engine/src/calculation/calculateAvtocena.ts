@@ -37,14 +37,11 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   const lines: BusinessCalculationLine[] = [];
   const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
 
-  // Split the advance out of the vehicle price without adding another cost.
-  const depositRub = Math.min(carPriceRub, numberOrZero(config.securityDepositRub));
+  // Cost composition is independent of payment timing: always retain the full seller price.
   lines.push({
-    id: "car", title: "Цена автомобиля", amountRub: carPriceRub - depositRub,
+    id: "car", title: "Цена автомобиля", amountRub: carPriceRub,
     kind: "car", amountType: "manual", source: "vehicle",
   });
-  addLine(lines, { id: "security-deposit", title: "Обеспечительный платёж", amountRub: depositRub,
-    kind: "deposit", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
@@ -95,12 +92,27 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
     effectiveFrom: config.effectiveFrom,
     deliveryCity: input.deliveryCity,
     totalRub,
+    paymentPlan: businessPaymentPlan(input.marketId, config, totalRub),
     breakdown: lines,
     snapshot: {
+      paymentPlan: businessPaymentPlan(input.marketId, config, totalRub),
       configVersion,
       effectiveFrom: config.effectiveFrom,
       marketConfig: JSON.parse(JSON.stringify(config)),
       breakdown: JSON.parse(JSON.stringify(lines)),
     },
+  };
+}
+
+/** Payments allocate an existing total; they must never be summed into its cost lines. */
+export function businessPaymentPlan(marketId: string, config: {securityDepositRub?: number | null; topAvtoCommissionRub?: number | null}, totalRub: number) {
+  const securityDepositRub = numberOrZero(config.securityDepositRub);
+  const commissionRub = numberOrZero(config.topAvtoCommissionRub);
+  const contractInitialPaymentRub = securityDepositRub + commissionRub;
+  return {
+    securityDepositRub, commissionRub, contractInitialPaymentRub,
+    depositAppliedTo: marketId === "japan" ? "vehicle" as const : "services" as const,
+    remainingAfterInitialRub: Math.max(0, totalRub - contractInitialPaymentRub),
+    initialPaymentExceedsTotal: contractInitialPaymentRub > totalRub,
   };
 }

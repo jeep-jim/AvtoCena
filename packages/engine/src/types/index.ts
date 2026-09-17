@@ -68,6 +68,15 @@ export type BusinessCalculationLine = {
   note?: string;
 };
 
+export type BusinessPaymentPlan = {
+  securityDepositRub: number;
+  commissionRub: number;
+  contractInitialPaymentRub: number;
+  depositAppliedTo: "vehicle" | "services";
+  remainingAfterInitialRub: number;
+  initialPaymentExceedsTotal: boolean;
+};
+
 export type BusinessCalculationResult = {
   marketId: Market;
   configVersion: string;
@@ -75,7 +84,9 @@ export type BusinessCalculationResult = {
   deliveryCity?: string;
   totalRub: number;
   breakdown: BusinessCalculationLine[];
+  paymentPlan: BusinessPaymentPlan;
   snapshot: {
+    paymentPlan: BusinessPaymentPlan;
     configVersion: string;
     effectiveFrom?: string;
     marketConfig: MarketBusinessConfig;

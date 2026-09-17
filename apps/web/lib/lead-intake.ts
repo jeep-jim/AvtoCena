@@ -1,3 +1,4 @@
+import { customerPriceBreakdown } from "./catalog/customer-price-breakdown";
 import {guardLead} from "./lead-antispam";
 import {normalizeRuPhone} from "./ru-phone";
 import crypto from "node:crypto";
@@ -134,7 +135,7 @@ async function buildSelectedOfferSnapshot(offerId: string) {
     breakdown:
       calculationSnapshot &&
       Array.isArray((calculationSnapshot as any).breakdown)
-        ? (calculationSnapshot as any).breakdown
+        ? customerPriceBreakdown((calculationSnapshot as any).breakdown)
         : [],
     updatedAt: offer.updatedAt || "",
   };
@@ -384,7 +385,7 @@ export async function createLead(
       calculationSnapshot &&
       typeof calculationSnapshot === "object" &&
       Array.isArray((calculationSnapshot as any).breakdown)
-        ? (calculationSnapshot as any).breakdown
+        ? customerPriceBreakdown((calculationSnapshot as any).breakdown)
         : [],
   };
   const client =
@@ -477,7 +478,7 @@ export async function createLead(
       calculationSnapshot &&
       typeof calculationSnapshot === "object" &&
       Array.isArray((calculationSnapshot as any).breakdown)
-        ? (calculationSnapshot as any).breakdown
+        ? customerPriceBreakdown((calculationSnapshot as any).breakdown)
         : [],
     telegramBindTokenHash: "",
     telegramBindExpiresAt: "",

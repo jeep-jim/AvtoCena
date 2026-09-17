@@ -1,3 +1,4 @@
+import { customerPriceBreakdown } from "./catalog/customer-price-breakdown";
 import crypto from "node:crypto";
 import { readChunkedDataJson, updateChunkedDataJson, appendChunkedDataJson } from "./data";
 import { telegramSend, enqueueMessage, flushCrmNotifications } from "./crm-notifications";
@@ -16,7 +17,7 @@ function compactBreakdown(offer: any) {
     : Array.isArray(offer?.calculationSnapshot?.breakdown)
       ? offer.calculationSnapshot.breakdown
       : [];
-  return rows.slice(0, 8).map((row: any) => {
+  return customerPriceBreakdown(rows).slice(0, 8).map((row: any) => {
     const label = String(row?.label || row?.title || row?.name || "").trim();
     const amount = Number(row?.amountRub ?? row?.valueRub ?? row?.rub ?? row?.amount ?? row?.value);
     if (!label || !Number.isFinite(amount) || amount <= 0) return "";

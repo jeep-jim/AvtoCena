@@ -498,7 +498,7 @@ export async function calculateOfferWithCustomerParametersDetailed(input: Vehicl
     const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
     return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
   }
-  return {ok: true as const, calculation: {totalRub:result.totalRub,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
+  return {ok: true as const, calculation: {totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
 }
 
 /** Preserve the nullable contract used by existing integrations. */

@@ -1,3 +1,4 @@
+import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { calculateCustomerParameterScenario, isOfficialCustomsCurrencyRate } from "@/lib/catalog/customs-pricing";
@@ -326,6 +327,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
                 <span>Итого на сайте</span><span>{rub(business.totalRub)}</span>
               </div>
             </div>
+            <ContractPaymentSummary plan={snapshot.paymentPlan} />
           </details>
         ) : null}
 

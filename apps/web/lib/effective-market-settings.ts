@@ -44,11 +44,6 @@ function configuredValue(current: any, field: string, fallback: number) {
   return present(current?.[field]) ? Number(current[field]) : fallback;
 }
 
-function defaultInitialPayment(marketId: MarketId, deposit: number, commission: number) {
-  if (marketId === "japan") return 70_000;
-  return Math.max(250_000, deposit + commission);
-}
-
 function hasCompleteActiveProfile(current: any) {
   if (!current || current.status !== "active" || current.active === false) return false;
   return [
@@ -76,9 +71,7 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
     currency: current?.currency || defaults.currency,
     securityDepositRub: deposit,
     topAvtoCommissionRub: commission,
-    contractInitialPaymentRub: present(current?.contractInitialPaymentRub)
-      ? Math.max(Number(current.contractInitialPaymentRub), deposit + commission)
-      : defaultInitialPayment(marketId, deposit, commission),
+    contractInitialPaymentRub: deposit + commission,
     exchangeRateReservePercent: configuredValue(current, "exchangeRateReservePercent", defaults.exchangeRateReservePercent),
     exportExpensesRub: configuredValue(current, "exportExpensesRub", defaults.exportExpensesRub),
     logisticsRub: configuredValue(current, "logisticsRub", defaults.logisticsRub),

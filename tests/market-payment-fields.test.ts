@@ -20,8 +20,8 @@ test("each market saves separate amounts and derives the first payment, ignoring
     const config = resolveEffectiveMarketVersion(market, changed);
     assert.equal(config.contractInitialPaymentRub, 122000);
     const quote = calculateAvtocenaFromBusinessConfig({marketId: market, marketConfig: config, sourcePriceRub: 1000000, customsRub: 400000});
-    assert.equal(quote.breakdown.find(line => line.id === "security-deposit")?.amountRub, 42000);
-    assert.equal(quote.breakdown.find(line => line.id === "car")?.amountRub, 958000);
+    assert.equal(quote.breakdown.find(line => line.id === "security-deposit")?.amountRub, undefined);
+    assert.equal(quote.breakdown.find(line => line.id === "car")?.amountRub, 1000000);
     const otherDeposit = calculateAvtocenaFromBusinessConfig({marketId: market, marketConfig: {...config, securityDepositRub: 60000}, sourcePriceRub: 1000000, customsRub: 400000});
     assert.equal(otherDeposit.totalRub, quote.totalRub, "deposit changes allocation, never adds a duplicate expense");
   }

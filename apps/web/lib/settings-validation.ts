@@ -76,7 +76,7 @@ export function validateMarketVersion(version: any) {
       active: Boolean(version?.active),
       topAvtoCommissionRub: nullableNumber(version?.topAvtoCommissionRub),
       securityDepositRub: nullableNumber(version?.securityDepositRub),
-      contractInitialPaymentRub: nullableNumber(version?.contractInitialPaymentRub),
+      contractInitialPaymentRub: (nullableNumber(version?.securityDepositRub) ?? 0) + (nullableNumber(version?.topAvtoCommissionRub) ?? 0),
       exchangeRateReservePercent: nullableNumber(version?.exchangeRateReservePercent) ?? 0,
       exportExpensesRub: nullableNumber(version?.exportExpensesRub),
       logisticsRub: nullableNumber(version?.logisticsRub),
