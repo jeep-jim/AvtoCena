@@ -1,0 +1,60 @@
+name: Verify saved JPtrade images 20260917
+on:
+  push:
+    branches: [ops/fresh-artifact-qualification-20260917]
+    paths: ['.github/workflows/fresh-jptrade-images-20260917.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: fresh-japan-jptrade
+          path: saved-japan
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - run: pip install Pillow
+      - name: Verify distinct decoded images without claiming visual confirmation
+        run: |
+          python -u <<'PY'
+          import json,glob,hashlib,io,urllib.request,concurrent.futures
+          from PIL import Image
+          rows={}
+          for f in sorted(glob.glob('saved-japan/**/part-*.json',recursive=True)):
+              for r in json.load(open(f)): rows[r['sourceId']]=r
+          candidates=[r for r in rows.values() if r.get('qualifiedSoldCandidate')]
+          def check(r):
+              images=[]; errors=[]
+              for u in dict.fromkeys(r.get('imageUrls',[])):
+                  try:
+                      with urllib.request.urlopen(u,timeout=15) as response:
+                          data=response.read(12000001)
+                      if len(data)>12000000: raise ValueError('image_too_large')
+                      with Image.open(io.BytesIO(data)) as im:
+                          im.load()
+                          if min(im.size)<100: raise ValueError('image_too_small')
+                          digest=hashlib.sha256(im.convert('RGB').tobytes()).hexdigest()
+                          images.append({'url':u,'decodedSha256':digest,'size':list(im.size)})
+                      if len(set(x['decodedSha256'] for x in images))>=2:break
+                  except Exception as e:errors.append({'url':u,'error':str(e)})
+              return {'sourceId':r['sourceId'],'sourceUrl':r['sourceUrl'],'images':images,'errors':errors,'twoDistinctDecodedImages':len(set(x['decodedSha256'] for x in images))>=2,'visualCarPhotosConfirmed':False,'publicationReady':False}
+          checked=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+              with open('jptrade-image-verification.jsonl','w') as out:
+                  for row in pool.map(check,candidates):
+                      checked.append(row);out.write(json.dumps(row)+'\n');out.flush()
+                      if len(checked)%50==0:print(json.dumps({'checked':len(checked),'passed':sum(r['twoDistinctDecodedImages'] for r in checked)}),flush=True)
+          summary={'sourceRunId':35167936226,'records':len(rows),'candidates':len(candidates),'checked':len(checked),'twoDistinctDecodedImages':sum(r['twoDistinctDecodedImages'] for r in checked),'visualCarPhotosConfirmed':0,'publicationReady':False}
+          json.dump(summary,open('jptrade-image-summary.json','w'),indent=2);print(json.dumps(summary))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jptrade-image-verification-35167936226
+          path: jptrade-image-*
+          retention-days: 30
