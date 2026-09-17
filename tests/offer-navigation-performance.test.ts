@@ -148,7 +148,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
   assert.match(page, /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
   assert.doesNotMatch(page, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
-  assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
+  // Complete-index absence and incomplete-index recovery are exercised with
+  // real storage fixtures in catalog-missing-offer-lookup.test.ts.
   assert.match(storage, /return offer \? \(isConfirmedSourceWithdrawn\(offer\) \? null : offer\) : readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
   assert.match(page, /decodeURIComponent\(routeId\)/);
