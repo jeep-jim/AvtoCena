@@ -133,6 +133,8 @@ export interface CatalogSourceAdapter {
   accessMode: CatalogAccessMode;
   fetchPage(cursor?: string | null, updatedSince?: string): Promise<CatalogFetchResult>;
   normalizeOffer(raw: unknown): VehicleOffer | null;
+  /** Re-read one already-known sourceOfferId without list pagination. */
+  refreshOffer?(offer: VehicleOffer): Promise<VehicleOffer>;
   fetchImages(offer: VehicleOffer): Promise<CatalogImage[]>;
   mapStatus(raw: unknown): OfferStatus;
   healthCheck(): Promise<SourceRunHealth>;

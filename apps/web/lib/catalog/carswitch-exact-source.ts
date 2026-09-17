@@ -391,6 +391,20 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     return detail.images.slice(0, limit).map(asImage);
   }
 
+  async refreshOffer(offer: VehicleOffer): Promise<VehicleOffer> {
+    if (offer.sourceId !== this.sourceId || offer.market !== this.market) {
+      throw new Error("carswitch_exact_refresh_source_identity");
+    }
+    const refreshed = structuredClone(offer);
+    refreshed.images = await this.fetchImages(refreshed);
+    if (refreshed.images.length < 2 || refreshed.operational?.exactDetail !== true
+      || refreshed.operational?.photoIdentityVerified !== true) {
+      throw new Error(`carswitch_exact_refresh_unverified_${offer.sourceOfferId}`);
+    }
+    refreshed.updatedAt = new Date().toISOString();
+    return refreshed;
+  }
+
   mapStatus(): OfferStatus { return "active"; }
   async healthCheck() { return { ok: true, message: "CarSwitch exact ItemList discovery + exact detail vehicle JSON-LD gallery", checkedAt: new Date().toISOString() }; }
 }
