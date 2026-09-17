@@ -474,6 +474,12 @@ export function isJapanCatalogOfferId(id: string) {
 }
 export async function getOfferFromCurrentProjection(id: string) {
   const manifest = await readManifest();
+  // A complete immutable ID index is authoritative for absence. Do not fetch
+  // the full six-market projection again for a genuinely missing detail page.
+  if (offerLookupCacheGeneration === manifest.generationId && offerLocationIndexCache) {
+    const index = await offerLocationIndexCache;
+    if (index.generationId === manifest.generationId && !index.byId[id]) return null;
+  }
   const projectionScope = offerProjectionScopeFromId(id);
   // Share the bounded market projection read across simultaneous card opens.
   // At a generation cutover, bypass a stale in-process entry exactly once.
@@ -498,7 +504,7 @@ let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrand
 const currentOfferShardCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string } & DetailShard<VehicleOffer>> }>();
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
-let offerLocationIndexCache: Promise<{ byId: Record<string, OfferLocation> }> | null = null;
+let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<string, OfferLocation> }> | null = null;
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
@@ -1400,11 +1406,11 @@ export async function getOffer(id: string) {
     offerLocationIndexCache = null;
     offerChunkCache.clear();
   }
-  offerLocationIndexCache ||= readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} })
+  offerLocationIndexCache ||= readIndex<{ generationId?: string; byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} })
     .catch((error) => { offerLocationIndexCache = null; throw error; });
   const byId = await offerLocationIndexCache;
   const loc = byId.byId[id];
-  if (!loc) return readProjectionFallback();
+  if (!loc) return byId.generationId === manifest.generationId ? null : readProjectionFallback();
   const path = storedOfferChunkPath(manifest.generationId, loc.market, loc.chunk);
   let chunkPromise = offerChunkCache.get(path);
   if (!chunkPromise) {
