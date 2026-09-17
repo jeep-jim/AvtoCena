@@ -1,0 +1,39 @@
+name: ProAuctions live import smoke
+on:
+  push:
+    branches: [feat/proauctions-collect-publish-20260917]
+    paths: ['.github/workflows/proauctions-live-import-smoke.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-proauctions-results
+          path: saved-proauctions
+          run-id: 35105995247
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: fresh-japan-jptrade
+          path: saved-jptrade
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - name: Exercise fresh details, sold corroboration and photo decoding without publication
+        env: {PROAUCTIONS_SECONDS: '600', PROAUCTIONS_MAX_DETAILS: '10'}
+        run: node --import tsx scripts/collect-proauctions.mjs
+      - run: node --import tsx scripts/prepare-proauctions-publication.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proauctions-collection
+          path: proauctions-collection
+          retention-days: 14

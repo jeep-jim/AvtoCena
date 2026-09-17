@@ -50,6 +50,7 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
 // Owner-requested saved auction imports; no claim of an automated live adapter.
 export const APPROVED_SAVED_CATALOG_SOURCES = [
   { market: "japan", sourceId: "jptrade_japan_stat", canonicalUrl: "https://jptrade.ru/stat/" },
+  { market: "japan", sourceId: "proauctions_japan_stat", canonicalUrl: "https://demo.pro-auctions.ru/statistika/" },
 ] as const;
 export function allowedCatalogSourceIds(market: CatalogMarket) {
   return [...sourcesForMarket(market).map(source => source.sourceId),
@@ -88,6 +89,7 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
   try {
     const actual = new URL(String(urlValue || ""));
     const canonical = new URL(allowed.canonicalUrl);
+    if (id === "proauctions_japan_stat") return actual.origin === "https://demo.pro-auctions.ru" && /^\/statistika\/[^/]+\/[^/]+\/\d+\.html$/.test(actual.pathname) && !actual.search && !actual.hash && !actual.username && !actual.password;
     if (id === "jptrade_japan_stat") return actual.origin === "https://jptrade.ru" && /^\/stat\/\d+$/.test(actual.pathname) && !actual.search && !actual.hash;
     if (market === "china" && id === "autohome_used_china_open" && !["global.che168.com"].includes(actual.hostname.toLowerCase())) return false;
     return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);

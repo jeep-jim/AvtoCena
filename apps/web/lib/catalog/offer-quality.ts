@@ -218,7 +218,7 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 
 function minimumImageCount(offer: VehicleOffer) {
   if (offer.sourceId === "drom_japan_stat") return 1;
-  if (offer.sourceId === "jptrade_japan_stat") return 2;
+  if (["jptrade_japan_stat", "proauctions_japan_stat"].includes(offer.sourceId)) return 2;
   if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
   const configuredValue = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || process.env.CATALOG_MIN_IMAGES;
   if (configuredValue) {
