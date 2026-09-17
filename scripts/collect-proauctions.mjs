@@ -5,6 +5,7 @@ import {gzipSync,gunzipSync} from 'node:zlib';
 import sharp from 'sharp';
 import {parseProAuctionsDetailEvidence,proAuctionsText} from '../apps/web/lib/catalog/proauctions-detail-evidence.ts';
 import {proAuctionsIdentity,matchingProAuctionsSale,proAuctionsOffer,proAuctionsSaleWitness} from '../apps/web/lib/catalog/proauctions-import.ts';
+import {proAuctionsCollectionStopReason} from './lib/proauctions-collection-stop.mjs';
 
 const root=process.env.PROAUCTIONS_OUTPUT || 'proauctions-collection';
 const deadline=Date.now()+Number(process.env.PROAUCTIONS_SECONDS || 4500)*1000;
@@ -107,8 +108,11 @@ if(!state.complete){
       let fatal=null;
       for(let i=0;i<results.length;i++)if(results[i].status==='rejected'){const error=results[i].reason;state.errors.push({url:batch[i],error:String(error)});fatal=error;}
       await checkpoint();
-      if(fatal){state.stopReason=fatal.access?'source_access_refused':'transport_error_checkpointed';break;}
+      if(fatal){state.stopReason=proAuctionsCollectionStopReason(fatal);break;}
     }
     state.stopReason ||= 'time_budget_checkpointed';
+  }catch(error){
+    state.errors.push({url:`https://demo.pro-auctions.ru/statistika/?page=${state.page}`,error:String(error)});
+    state.stopReason=proAuctionsCollectionStopReason(error);
   }finally{await checkpoint();}
 }

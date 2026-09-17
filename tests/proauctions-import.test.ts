@@ -1,4 +1,5 @@
 import {minimumPublicationImages} from '../apps/web/lib/catalog/offer-quality';
+import {proAuctionsCollectionStopReason} from '../scripts/lib/proauctions-collection-stop.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -74,4 +75,10 @@ test('ProAuctions import preserves Drom photo contract without admitting one-pho
  assert.equal(minimumPublicationImages(offer,2,false),2);
  assert.equal(minimumPublicationImages(offer,2,true),2);
  assert.equal(proAuctionsOffer(e,identity,witness,photos.slice(0,1),'b'.repeat(64),now),null);
+});
+
+test('listing transport and access failures preserve a publishable checkpoint',()=>{
+ assert.equal(proAuctionsCollectionStopReason(new TypeError('fetch failed')),'transport_error_checkpointed');
+ const access=Object.assign(new Error('access_403'),{access:true});
+ assert.equal(proAuctionsCollectionStopReason(access),'source_access_refused');
 });
