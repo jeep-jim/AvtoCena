@@ -41,14 +41,15 @@ async function geometry(page,trigger,panel,grid){
  assert.ok(g&&t&&b);
  assert.ok(Math.abs(b.x-g.x)<2&&Math.abs(b.width-g.width)<2,`must span exactly both columns ${JSON.stringify({g,t,b})}`);
  const spacing=await trigger.evaluate(el=>{
-  const tile=el.closest('[data-parameter-editor]').parentElement;
+  const editor=el.closest('[data-parameter-editor]');
+  const tile=editor.parentElement;
   const rowGap=parseFloat(getComputedStyle(tile.parentElement).rowGap);
   const pseudo=getComputedStyle(el,'::after');
   const triggerBottom=el.getBoundingClientRect().bottom;
-  return {rowGap,tileBottom:tile.getBoundingClientRect().bottom,bridgeTop:triggerBottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:triggerBottom-parseFloat(pseudo.bottom)};
+  return {rowGap,editorBottom:editor.getBoundingClientRect().bottom,tileBottom:tile.getBoundingClientRect().bottom,bridgeTop:triggerBottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:triggerBottom-parseFloat(pseudo.bottom)};
  });
  assert.ok(spacing.rowGap>0,'the original tile spacing must remain positive');
- const visibleTileBottom=Math.max(t.y+t.height,spacing.tileBottom);
+ const visibleTileBottom=Math.max(t.y+t.height,spacing.editorBottom);
  assert.ok(Math.abs(b.y-visibleTileBottom-spacing.rowGap)<1,`dropdown must leave the same gap after the visible tile edge, not touch its neighbour ${JSON.stringify({g,t,b,spacing,visibleTileBottom})}`);
  assert.ok(b.y-spacing.tileBottom>=spacing.rowGap-1,`dropdown must never overlap the grid tile ${JSON.stringify({g,t,b,spacing})}`);
  assert.ok(spacing.bridgeTop<=t.y+t.height+1&&spacing.bridgeBottom>=b.y,'only the active trigger must remain visually connected to its dropdown');
