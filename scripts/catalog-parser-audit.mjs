@@ -50,6 +50,7 @@ for (const sourceId of sources.filter(id => !selected || id === selected)) {
     requestedSampleCount: 10, liveCompleted: 0, accepted: false, samples: [], errors: [] };
   report.sources.push(result);
   let requests = 0;
+  const responses = [];
   let denied = false;
   const deadline = Date.now() + 240_000;
   const originalFetch = globalThis.fetch;
@@ -64,6 +65,7 @@ for (const sourceId of sources.filter(id => !selected || id === selected)) {
     const index = ++requests;
     const response = await originalFetch(url, { ...init,
       signal: init.signal ? AbortSignal.any([init.signal, AbortSignal.timeout(20_000)]) : AbortSignal.timeout(20_000) });
+    responses.push({request: index, status: response.status});
     if ([401, 403, 429].includes(response.status)) denied = true;
     const type = response.headers.get('content-type') || '';
     let bodyFile = null, sha256 = null, truncated = false;
@@ -113,9 +115,14 @@ for (const sourceId of sources.filter(id => !selected || id === selected)) {
           if (source.refreshOffer) refreshed = await source.refreshOffer(refreshed);
           else refreshed.images = await source.fetchImages(refreshed);
           row.reparsed = pick(refreshed);
+          row.reparsedEvidence = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(refreshed, field)]));
           row.changes = fields.filter(f => JSON.stringify(offer[f] ?? null) !== JSON.stringify(refreshed[f] ?? null));
           row.networkRequests = requests - start;
-          row.liveStatus = requests > start ? 'adapter_requested_source_review_required' : 'saved_gallery_only_not_a_live_check';
+          row.responseStatuses = responses.filter(r => r.request > start).map(r => r.status);
+          row.liveStatus = row.responseStatuses.some(status => status < 200 || status >= 300)
+            ? 'source_unavailable_not_verified'
+            : !refreshed.images?.length ? 'adapter_rejected_detail_gallery'
+            : requests > start ? 'adapter_requested_source_review_required' : 'saved_gallery_only_not_a_live_check';
         } else if (row.url) {
           const response = await fetch(row.url, { headers: { 'user-agent': 'AvtoCena source parser audit/1.0' } });
           row.httpStatus = response.status;
