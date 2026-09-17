@@ -1,14 +1,12 @@
 /* Only offer parameter editors: no catalog/card/price layout changes. */
 .grid { --parameter-gap: 10px; position: relative; isolation: isolate; z-index: 70; column-gap: var(--parameter-gap); row-gap: var(--parameter-gap); }
 .tile {
- height: 50px;
  min-height: 0;
- max-height: 50px;
  position: relative;
  overflow: visible;
 }
 .tile:has(> .editor[open]) { z-index: 90; }
-.editor { position: static !important; overflow: visible !important; }
+.editor { position: relative !important; overflow: visible !important; }
 .editor > summary { position: relative; border-radius: 1rem; }
 .editor[open] { border-radius: 1rem 1rem 0 0; box-shadow: none !important; }
 .editor[open] > summary { z-index: 2; border-radius: 1rem 1rem 0 0; background: var(--ac-surface-2); }
@@ -19,7 +17,7 @@
 .editor:not([open]) > .panel { display: none; }
 .panel {
  position: absolute;
- top: var(--parameter-panel-top, calc(100% + var(--parameter-gap)));
+ top: calc(100% + var(--parameter-gap));
  left: 0;
  width: calc(200% + var(--parameter-gap));
  box-sizing: border-box;
