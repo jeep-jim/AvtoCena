@@ -1,7 +1,7 @@
 /* Only offer parameter editors: no catalog/card/price layout changes. */
 .grid { --parameter-gap: 10px; position: relative; isolation: isolate; z-index: 70; column-gap: var(--parameter-gap); row-gap: var(--parameter-gap); }
 .tile {
- min-height: 0;
+ min-height: 48px;
  position: relative;
  overflow: visible;
 }
