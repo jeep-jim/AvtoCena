@@ -102,6 +102,7 @@ jobs:
       - name: Require all six live markets and current read models
         env:
           CATALOG_AUDIT_OUTPUT: catalog-six-market-saved-postpublish-audit.json
+          CATALOG_OFFER_DETAIL_VERIFY_OUTPUT: catalog-six-market-offer-detail-verify.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
           CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":14000,"china":18000,"japan":600,"uae":500,"europe":20000,"georgia":8000}'
         run: |
@@ -119,6 +120,6 @@ jobs:
             catalog-six-market-saved-postpublish-audit.json
             catalog-current-readmodel-parity.json
             catalog-visible-calculation-coverage.json
-            catalog-v3-offer-detail-verify.json
+            catalog-six-market-offer-detail-verify.json
           if-no-files-found: warn
           retention-days: 14
