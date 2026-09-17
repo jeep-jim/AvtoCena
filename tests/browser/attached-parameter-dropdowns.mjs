@@ -48,7 +48,8 @@ async function geometry(page,trigger,panel,grid){
   return {rowGap,tileBottom:tile.getBoundingClientRect().bottom,bridgeTop:triggerBottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:triggerBottom-parseFloat(pseudo.bottom)};
  });
  assert.ok(spacing.rowGap>0,'the original tile spacing must remain positive');
- assert.ok(Math.abs(b.y-spacing.tileBottom-spacing.rowGap)<1,`dropdown must leave the same gap as the tiles, not touch its neighbour ${JSON.stringify({g,t,b,spacing})}`);
+ assert.ok(Math.abs(b.y-(t.y+t.height)-spacing.rowGap)<1,`dropdown must leave the same gap after the visible trigger, not touch its neighbour ${JSON.stringify({g,t,b,spacing})}`);
+ assert.ok(b.y-spacing.tileBottom>=spacing.rowGap-1,`dropdown must never overlap the grid tile ${JSON.stringify({g,t,b,spacing})}`);
  assert.ok(spacing.bridgeTop<=t.y+t.height+1&&spacing.bridgeBottom>=b.y,'only the active trigger must remain visually connected to its dropdown');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no page overflow');
  assert.ok(await panel.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'no panel horizontal overflow');
