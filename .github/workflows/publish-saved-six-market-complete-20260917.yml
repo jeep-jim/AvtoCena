@@ -1,0 +1,124 @@
+name: Catalog · Publish saved six-market collection
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/market-runs/publish-saved-six-market-complete-20260917.json"
+      - ".github/workflows/publish-saved-six-market-complete-20260917.yml"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  # Queue behind the active targeted collector/writer. Never overlap catalog writes.
+  group: catalog-six-market-quality-rebuild
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_SELLER_INVENTORY: "1"
+  CATALOG_PUBLICATION_DRY_RUN: "0"
+  CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
+  CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
+  CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
+  CATALOG_PUBLISH_TARGET_PER_MARKET: "10000"
+  CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"
+  CATALOG_AUDIT_MIN_IMAGES_PER_OFFER: "2"
+  CATALOG_PRIORITY_MAX_TOTAL_RUB: "15000000"
+  CATALOG_V2_HARD_MAX_TOTAL_RUB: "15000000"
+  CATALOG_V2_PRIORITY_TARGET: "8000"
+  CATALOG_PUBLISH_PREPARE_CONCURRENCY: "12"
+  CATALOG_INDEX_WRITE_CONCURRENCY: "8"
+  CATALOG_PUBLISH_LOCK_WAIT_MS: "14400000"
+  CATALOG_PUBLISH_LOCK_TTL_MS: "5400000"
+  CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"
+  NODE_OPTIONS: --max-old-space-size=11000
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify unchanged publication gates
+        run: >-
+          node --import tsx --test --test-concurrency=1
+          tests/catalog-inventory-regression.test.ts
+          tests/catalog-internal-stream.test.ts
+          tests/catalog-safe-public-pricing.test.ts
+          tests/catalog-publication-gate.test.ts
+          tests/catalog-visible-calculation-audit-contract.test.ts
+      - name: Download the completed saved collection
+        uses: actions/download-artifact@v4
+        with:
+          pattern: fresh-*
+          path: saved-artifacts
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - name: Download verified JPtrade galleries
+        uses: actions/download-artifact@v4
+        with:
+          name: jptrade-image-verification-35167936226
+          path: saved-jptrade-images
+          run-id: 35186348125
+          github-token: ${{ github.token }}
+      - name: Prepare saved inputs without source requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p catalog-intake-input saved-jptrade
+          for market in china europe korea uae georgia; do
+            test -d "saved-artifacts/fresh-$market"
+            cp -a "saved-artifacts/fresh-$market" "catalog-intake-input/catalog-intake-$market"
+          done
+          test -d saved-artifacts/fresh-japan-jptrade
+          cp -a saved-artifacts/fresh-japan-jptrade/. saved-jptrade/
+          node --import tsx scripts/catalog-intake-to-publication.mjs
+          node --import tsx scripts/catalog-convert-saved-jptrade.mjs
+      - name: Publish the six markets sequentially
+        shell: bash
+        run: |
+          set -euo pipefail
+          for market in korea china europe uae georgia japan; do
+            export CATALOG_REBUILD_MARKETS="$market"
+            export CATALOG_REBUILD_PUBLISH_REPORT="publication-$market.json"
+            node --import tsx scripts/catalog-publish-market.mjs
+          done
+      - name: Require all six live markets and current read models
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-six-market-saved-postpublish-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":14000,"china":18000,"japan":600,"uae":500,"europe":20000,"georgia":8000}'
+        run: |
+          node --import tsx scripts/catalog-live-postpersist-audit.mjs
+          node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs
+          node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+          node --import tsx scripts/catalog-verify-current-offers.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saved-six-market-publication-20260917
+          path: |
+            publication-*.json
+            jptrade-conversion.json
+            catalog-six-market-saved-postpublish-audit.json
+            catalog-current-readmodel-parity.json
+            catalog-visible-calculation-coverage.json
+            catalog-v3-offer-detail-verify.json
+          if-no-files-found: warn
+          retention-days: 14
