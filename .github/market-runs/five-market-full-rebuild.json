@@ -1,11 +1,11 @@
 {
-  "mode": "owner-approved-uae-georgia-parser-recovery-final",
+  "mode": "owner-approved-uae-georgia-parser-recovery-final-after-writer",
   "publishMarkets": [
     "uae",
     "georgia"
   ],
   "resetCursors": true,
   "remainingMarkets": [],
-  "requestedAt": "2026-09-14T06:54:29.000000+00:00",
-  "reason": "Owner approved exactly one final verification pass from main after merged PR #941 and #942. Collect and publish only UAE and Georgia with fresh cursors, verify CarSwitch continues beyond page 3 and AutoPapa beyond page 105 or finishes normally, preserve every other market byte-stably, do not collect or modify Japan, do not reuse a prior run, and keep all source, image, calculation, regression, storage and post-publish quality gates unchanged."
+  "requestedAt": "2026-09-17T09:11:20.000000+00:00",
+  "reason": "Run exactly one post-writer recovery from current main after run 35190413385 completed. Collect and publish only UAE and Georgia with cursors reset to page 1, do not set reuseRunId, do not collect or modify Japan or any other market, verify CarSwitch beyond page 3 and AutoPapa beyond page 105 or a normal finish, keep MyAuto fail-closed, and retain every source, image, calculation, regression, storage, audit and preservation gate unchanged."
 }
