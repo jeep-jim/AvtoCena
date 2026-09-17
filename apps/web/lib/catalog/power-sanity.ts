@@ -104,6 +104,12 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   if (powerHp > 2_500) return { suspicious: true, reason: "absolute_power_outlier" };
 
   const engineCc = positive(offer.engineCc);
+  // Owner-requested review threshold, not a universal physical law. Never
+  // invent replacement power; independent official evidence above can resolve
+  // a legitimate exception. Exclude electrified power conventions.
+  if (combustionLike(offer) && engineCc > 2_000 && powerHp < 100) {
+    return { suspicious: true, reason: "large_engine_low_power_requires_review" };
+  }
   if (combustionLike(offer) && engineCc >= 500) {
     const hpPerLiter = powerHp / (engineCc / 1_000);
     if (powerHp >= 700 && hpPerLiter > 260) return { suspicious: true, reason: "combustion_power_density_outlier" };
