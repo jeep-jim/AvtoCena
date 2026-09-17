@@ -2,7 +2,10 @@ name: ProAuctions detail and price contract
 on:
   push:
     branches: [fix/proauctions-detail-contract-20260917]
-    paths: ['.github/workflows/proauctions-contract-probe.yml']
+    paths:
+      - '.github/workflows/proauctions-contract-probe.yml'
+      - 'apps/web/lib/catalog/proauctions-detail-evidence.ts'
+      - 'tests/proauctions-detail-evidence.test.ts'
 permissions:
   contents: read
   actions: read
@@ -12,17 +15,28 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
       - uses: actions/download-artifact@v4
         with:
           name: japan-saved-packages-qualification
           path: saved-evidence
           run-id: 35246306276
           github-token: ${{ github.token }}
-      - run: python3 -m pip install Pillow==11.3.0
-      - run: python3 scripts/proauctions-contract-probe.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: proauctions-detail-contract
+          path: proauctions-contract/verified-source-and-photos
+          run-id: 35248049926
+          github-token: ${{ github.token }}
+      - name: Test identity, price and power separation
+        run: node --import tsx --test tests/proauctions-detail-evidence.test.ts
+      - name: Parse ten full source responses without any new source requests
+        run: node --import tsx scripts/catalog-audit-proauctions-details.mjs saved-evidence/source-recheck/proauctions proauctions-contract/ten-full-details.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:

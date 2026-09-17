@@ -19,7 +19,7 @@ def get(url, target):
             return data
     except Exception as error:
         logs.append({'url':url,'error':str(error)});return None
-for name,url in [('calculator','https://demo.pro-auctions.ru/calculator/'),('questions','https://demo.pro-auctions.ru/voprosy-i-otvety/')]:
+for name,url in [('calculator','https://demo.pro-auctions.ru/calculator/'),('questions','https://demo.pro-auctions.ru/faq/')]:
     get(url,out/(name+'.html'))
 # Decode only the primary car gallery; do not mix recommendations or auction sheets.
 photos=[]
