@@ -177,3 +177,45 @@ test("DubiCars source URL mode returns the gallery without image requests", asyn
     assert.match(photos[0].url,/cdn.dubicars.com/);
   } finally { globalThis.fetch = fetchOriginal; if (previous === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previous; }
 });
+
+test("DubiCars refreshOffer requests only the saved fixed-ID URL and returns exact detail evidence", async () => {
+  const markup = `<link rel="canonical" href="${url}">
+    <section id="title-bar"><h1>Toyota Camry V6</h1><div>AED 145,000</div></section>
+    <div>Model year 2024</div>
+    <section id="item-specifications">Make Toyota Model Camry Trim V6 Transmission Automatic
+      Drive type Front Wheel Drive Vehicle type Sedan Color White Kilometers 12,000 Km
+      Engine capacity 2494 cc Horsepower 181 HP Fuel Type Petrol Service history Yes</section>
+    <section id="car-images-slider">${gallery}</section>`;
+  const parsed = parseDubicarsCurrentListing(markup, url);
+  const base = source.normalizeOffer(parsed);
+  assert.ok(base);
+  base.sourcePrice = null;
+  base.sourceCurrency = null;
+  base.engineCc = undefined;
+  base.powerHp = undefined;
+  base.images = [];
+  const before = structuredClone(base);
+  const requested: string[] = [];
+  const originalFetch = globalThis.fetch;
+  const previousMode = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+  globalThis.fetch = async (input) => {
+    requested.push(String(input));
+    return new Response(markup, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+  };
+  try {
+    const refreshed = await source.refreshOffer(base);
+    assert.deepEqual(requested, [url]);
+    assert.deepEqual(base, before);
+    assert.equal(refreshed.sourceOfferId, "1000265");
+    assert.equal(refreshed.sourcePrice, 145_000);
+    assert.equal(refreshed.engineCc, 2494);
+    assert.equal(refreshed.powerHp, 181);
+    assert.equal(refreshed.images.length, 5);
+    assert.equal(refreshed.operational?.detailIdentityVerified, true);
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (previousMode === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE;
+    else process.env.CATALOG_IMAGE_STORAGE_MODE = previousMode;
+  }
+});

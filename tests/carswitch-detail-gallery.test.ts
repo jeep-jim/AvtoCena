@@ -148,6 +148,29 @@ test("CarSwitch fetchImages upgrades one-image discovery to exact detail gallery
   }
 });
 
+test("CarSwitch refreshOffer requests only the saved fixed-ID detail and leaves the base immutable", async () => {
+  const adapter = new CarSwitchUaeExactAdapter();
+  const base = adapter.normalizeOffer(parseCarSwitchExactListing(listingMarkup)[0]);
+  assert.ok(base);
+  const before = structuredClone(base);
+  const requested: string[] = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (input) => {
+    requested.push(String(input));
+    return new Response(detailMarkup, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+  };
+  try {
+    const refreshed = await adapter.refreshOffer(base);
+    assert.deepEqual(requested, ["https://carswitch.com/abudhabi/used-car/nissan/patrol/2024/858598"]);
+    assert.deepEqual(base, before);
+    assert.equal(refreshed.sourceOfferId, base.sourceOfferId);
+    assert.equal(refreshed.sourcePrice, 209_000);
+    assert.equal(refreshed.images.length, 10);
+    assert.equal(refreshed.operational?.detailIdentityVerified, undefined);
+    assert.equal((refreshed.operational?.raw as any)?.detailIdentityVerified, true);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
 
 test("CarSwitch retries a transient 202 listing shell before parsing", async () => {
   const adapter = new CarSwitchUaeExactAdapter();

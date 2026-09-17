@@ -6,6 +6,7 @@ import { isCatalogYearAllowed } from "./offer-quality";
 import { canonicalSourceFuel } from "./powertrain-safety";
 import { captureSourceTable } from "./source-table-capture";
 import { htmlTechnicalGroups } from "./source-html-specifications";
+import { isAllowedCatalogSourceUrl } from "./required-catalog-sources";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 type DubicarsEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
@@ -479,6 +480,40 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     }
     if (row.specificationGroups) captureSourceTable(normalized,row.specificationGroups,"listing_fields");
     return normalized;
+  }
+
+  async refreshOffer(offer: VehicleOffer): Promise<VehicleOffer> {
+    const sourceOfferId = String(offer.sourceOfferId || "").trim();
+    const sourceUrl = String(offer.operational?.sourceUrl || "").trim();
+    if (offer.sourceId !== this.sourceId || offer.market !== this.market || !/^\d{5,}$/.test(sourceOfferId)
+      || !isAllowedCatalogSourceUrl(this.market, this.sourceId, sourceUrl)) {
+      throw new Error("dubicars_refresh_source_identity");
+    }
+    let requested: URL;
+    try { requested = new URL(sourceUrl); } catch { throw new Error("dubicars_refresh_source_url"); }
+    if (!new RegExp(`-${sourceOfferId}\\.html$`, "i").test(requested.pathname)) {
+      throw new Error("dubicars_refresh_source_offer_id");
+    }
+    const detail = await request(requested.toString(), requested.toString());
+    if (!detail.response.ok) throw new Error(`dubicars_refresh_http_${detail.response.status}`);
+    const responseUrl = new URL(detail.response.url || requested.toString()).toString();
+    if (responseUrl !== requested.toString()) throw new Error("dubicars_refresh_redirect_identity");
+    const row = parseDubicarsCurrentListing(detail.markup, requested.toString());
+    if (!row || row.id !== sourceOfferId || row.url !== requested.toString()) {
+      throw new Error("dubicars_refresh_detail_identity");
+    }
+    const refreshed = this.normalizeOffer(row);
+    if (!refreshed || refreshed.id !== offer.id) throw new Error("dubicars_refresh_offer_identity");
+    refreshed.firstSeenAt = offer.firstSeenAt;
+    refreshed.updatedAt = new Date().toISOString();
+    refreshed.operational = {
+      ...refreshed.operational,
+      exactDetail: true,
+      detailIdentityVerified: true,
+      fieldIdentityVerified: true,
+    };
+    refreshed.images = await this.fetchImages(refreshed);
+    return refreshed;
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
