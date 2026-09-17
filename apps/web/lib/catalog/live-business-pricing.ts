@@ -42,7 +42,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
     if (Number((offer as any).cardProjectionVersion) >= 3 && offer.id
       && offer.calculationSnapshot?.serviceCostBasis?.exchangeReserveRub == null) {
       const {getOfferFromCurrentShard} = await import("./storage");
-      const full = await getOfferFromCurrentShard(offer.id);
+      const full = await getOfferFromCurrentShard(offer.id).catch(() => null);
       const basis = japanServiceCostBasis(full?.calculationSnapshot);
       if (basis?.exchangeReserveRub != null) return {...offer, calculationSnapshot:{...offer.calculationSnapshot,serviceCostBasis:{...offer.calculationSnapshot?.serviceCostBasis,exchangeReserveRub:basis.exchangeReserveRub}}} as T;
     }
