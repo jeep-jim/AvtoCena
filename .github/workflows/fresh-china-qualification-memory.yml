@@ -35,6 +35,7 @@ jobs:
       CATALOG_REBUILD_PUBLISH_REPORT: qualification-${{ matrix.market }}.json
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '2'
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: '8'
+      CATALOG_READ_CONCURRENCY: '4'
       NODE_OPTIONS: --max-old-space-size=6144
     steps:
       - uses: actions/checkout@v4
