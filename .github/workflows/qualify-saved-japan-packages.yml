@@ -34,15 +34,25 @@ jobs:
           path: saved-jptrade
           run-id: 35167936226
           github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: jptrade-image-verification-35167936226
+          path: verified-jptrade-images
+          run-id: 35186348125
+          github-token: ${{ github.token }}
       - name: Account for every saved record and every unmet requirement
         run: >-
           python3 scripts/qualify-saved-japan-packages.py
           --sferacar saved-sferacar --proauctions saved-proauctions --jptrade saved-jptrade
+          --verified-images verified-jptrade-images/jptrade-image-verification.jsonl
           --output japan-qualification --as-of "$(date -u +%FT%TZ)"
-      - name: Recheck ten existing source details with stop on refusal
-        run: |
-          python3 scripts/probe-saved-japan-details.py --source sferacar --input saved-sferacar --output japan-qualification/source-recheck
-          python3 scripts/probe-saved-japan-details.py --source proauctions --input saved-proauctions --output japan-qualification/source-recheck
+      - name: Preserve completed live checks without repeated source requests
+        uses: actions/download-artifact@v4
+        with:
+          name: japan-saved-packages-qualification
+          path: japan-qualification/previous-evidence
+          run-id: 35246306276
+          github-token: ${{ github.token }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

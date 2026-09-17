@@ -59,7 +59,7 @@ def corroborate(row, candidates):
     return exact[0] if len(exact) == 1 else None
 
 
-def qualify(row, candidates, now, conflicting=False):
+def qualify(row, candidates, now, conflicting=False, checked=None):
     source, sid = row.get('source'), str(row.get('sourceId', ''))
     reasons, pending = [], []
     url = urlparse(str(row.get('sourceUrl', '')))
@@ -113,12 +113,21 @@ def qualify(row, candidates, now, conflicting=False):
     photos = set(row.get('imageUrls') or []) - set(row.get('auctionSheetUrls') or [])
     if len(photos) < 2:
         reasons.append('fewer_than_two_photo_urls')
-    pending.append('gallery_decode_and_content_verification_pending')
+    decoded = []
+    if match and checked and checked.get('sourceId') == str(match['sourceId']) and checked.get('sourceUrl') == match['sourceUrl']:
+        decoded = [image for image in checked.get('images', [])
+                   if image.get('url') in photos
+                   and re.fullmatch(r'[a-f0-9]{64}', str(image.get('decodedSha256', '')))
+                   and isinstance(image.get('size'), list) and len(image['size']) == 2
+                   and all(isinstance(size, (int, float)) and size >= 100 for size in image['size'])]
+    if len(set(image['decodedSha256'] for image in decoded)) < 2:
+        pending.append('gallery_decode_verification_pending')
+    pending.append('gallery_content_verification_pending')
     return {'source': source, 'sourceId': sid, 'sourceUrl': row.get('sourceUrl'),
             'evidenceSha256': row.get('evidenceSha256'), 'auctionDate': row.get('auctionDate'),
             'priceJpy': price, 'sourcePriceEvidence': row.get('priceEvidence'),
             'reportedEngineCc': row.get('engineCc'), 'powerEvidence': power_text or None,
-            'parsedIcePowerHp': power, 'photoUrlCount': len(photos),
+            'parsedIcePowerHp': power, 'photoUrlCount': len(photos), 'decodedPhotoEvidence': decoded,
             'corroboratingSoldLot': ({'sourceUrl': match['sourceUrl'], 'evidenceSha256': match['evidenceSha256']}
                                      if match else None),
             'rejectionReasons': reasons, 'verificationPending': pending,
@@ -130,12 +139,17 @@ def main():
     parser = argparse.ArgumentParser()
     for source in ('sferacar', 'proauctions', 'jptrade'):
         parser.add_argument('--' + source, required=True)
+    parser.add_argument('--verified-images')
     parser.add_argument('--output', required=True)
     parser.add_argument('--as-of', required=True)
     args = parser.parse_args()
     now = datetime.fromisoformat(args.as_of.replace('Z', '+00:00'))
     if now.tzinfo is None:
         raise ValueError('as_of_timezone_required')
+    checks = {}
+    if args.verified_images:
+        checks = {str(row['sourceId']): row for row in
+                  (json.loads(line) for line in Path(args.verified_images).read_text().splitlines() if line.strip())}
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
     jp, jp_conflicts, jp_digest = read_rows(args.jptrade)
@@ -151,7 +165,12 @@ def main():
         rows, conflicts, digest = read_rows(getattr(args, source))
         if any(row.get('source') != source for row in rows):
             raise ValueError('wrong_source_archive:' + source)
-        ledger = [qualify(row, idx.get(auction_key(row), []), now, str(row['sourceId']) in conflicts) for row in rows]
+        ledger = []
+        for row in rows:
+            candidates = idx.get(auction_key(row), [])
+            match = corroborate(row, candidates)
+            checked = checks.get(str(match['sourceId'])) if match else None
+            ledger.append(qualify(row, candidates, now, str(row['sourceId']) in conflicts, checked))
         file = output / (source + '-qualification.jsonl')
         file.write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in ledger))
         counts = Counter(reason for row in ledger for reason in row['rejectionReasons'] + row['verificationPending'])
@@ -159,6 +178,7 @@ def main():
            'ledgerSha256': hashlib.sha256(file.read_bytes()).hexdigest(),
            'decisions': dict(Counter(row['decision'] for row in ledger)),
            'corroboratedSoldLots': sum(bool(row['corroboratingSoldLot']) for row in ledger),
+           'twoDecodedPhotosCorroborated': sum(len(set(im['decodedSha256'] for im in row['decodedPhotoEvidence'])) >= 2 for row in ledger),
            'calculationReady': 0, 'publicationReady': 0, 'blockerCounts': dict(sorted(counts.items()))}
     (output / 'summary.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(report, ensure_ascii=False, indent=2))

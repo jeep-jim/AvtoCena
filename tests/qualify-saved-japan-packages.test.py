@@ -17,7 +17,7 @@ class QualificationTest(unittest.TestCase):
         r=m.qualify(dict(self.row, publicationReady=True, imagesVerified=True), [], self.now)
         self.assertFalse(r['publicationReady'])
         self.assertIn('sold_status_and_final_price_unconfirmed',r['verificationPending'])
-        self.assertIn('gallery_decode_and_content_verification_pending',r['verificationPending'])
+        self.assertIn('gallery_decode_verification_pending',r['verificationPending'])
     def test_exact_sold_match_only_corroborates_price(self):
         r=m.qualify(self.row,[self.match],self.now)
         self.assertIsNotNone(r['corroboratingSoldLot'])
@@ -25,6 +25,15 @@ class QualificationTest(unittest.TestCase):
         for field in ('priceJpy','chassis','year','make'):
             bad=dict(self.match, **{field: 'different'})
             self.assertIsNone(m.corroborate(self.row,[bad]))
+    def test_decoded_photos_must_be_bound_to_exact_matching_lot(self):
+        check=dict(sourceId='10',sourceUrl='https://jptrade.ru/stat/10',images=[
+            dict(url='https://example/a',decodedSha256='a'*64,size=[640,480]),
+            dict(url='https://example/b',decodedSha256='b'*64,size=[640,480])])
+        r=m.qualify(self.row,[self.match],self.now,checked=check)
+        self.assertNotIn('gallery_decode_verification_pending',r['verificationPending'])
+        self.assertIn('gallery_content_verification_pending',r['verificationPending'])
+        bad=m.qualify(self.row,[self.match],self.now,checked=dict(check,sourceId='11'))
+        self.assertEqual(bad['decodedPhotoEvidence'],[])
     def test_multiple_matches_do_not_resolve_identity(self):
         self.assertIsNone(m.corroborate(self.row,[self.match,self.match]))
     def test_date_price_and_identity_rejection(self):
