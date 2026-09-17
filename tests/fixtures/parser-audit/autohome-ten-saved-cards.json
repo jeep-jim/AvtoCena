@@ -1,0 +1,1755 @@
+{
+  "sourceRunId": 35167936226,
+  "artifactId": 10477812778,
+  "sampling": "stable SHA256 order with make/fuel diversity, diagnostic not statistical",
+  "cards": [
+    {
+      "sourceOfferId": "77379",
+      "sourceUrl": "https://www.autohome.com.cn/spec/77379/",
+      "fuel": "hybrid",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "05 DM-i 2026款 DM-i 220启航",
+        "energy": "插电式混合动力",
+        "engine": "1.5L 101马力 L4",
+        "displacementCcValues": [],
+        "engineMaxHp": "101",
+        "engineMaxKw": "74",
+        "motorTotalHp": "163",
+        "motorTotalKw": "120",
+        "transmission": "E-CVT无级变速",
+        "body": "5门5座SUV",
+        "seats": "5",
+        "marketDate": "2026.04"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "05 DM-i 2026款 DM-i 220启航"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "9.79"
+            },
+            {
+              "name": "厂",
+              "value": "—"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "插电式混合动力"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2026.04"
+            },
+            {
+              "name": "WLTC纯电续航里程(km)",
+              "value": "151"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "220"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.27"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "30-80"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "-"
+            },
+            {
+              "name": "变速箱",
+              "value": "E-CVT无级变速"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门5座SUV"
+            },
+            {
+              "name": "发动机",
+              "value": "1.5L 101马力 L4"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "163"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4620*1860*1630"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "8.4"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "175"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "0.76"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)WLTC",
+              "value": "4.5"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)NEDC",
+              "value": "3.2"
+            },
+            {
+              "name": "油电 燃料消耗量(L/100km)",
+              "value": "2.52"
+            },
+            {
+              "name": "整车",
+              "value": "六 15 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "1720"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "2160"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "BYD472QC"
+            },
+            {
+              "name": "(mL)",
+              "value": "1498"
+            },
+            {
+              "name": "(L)",
+              "value": "1.5"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "发动机布局",
+              "value": "横置"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "101"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "74"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "126"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "70"
+            },
+            {
+              "name": "能源类型",
+              "value": "插电式混合动力"
+            },
+            {
+              "name": "标",
+              "value": "92"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "74428",
+      "sourceUrl": "https://www.autohome.com.cn/spec/74428/",
+      "fuel": "electric",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "轩度EV 2026款 麦卡03出行",
+        "energy": "纯电动",
+        "displacementCcValues": [],
+        "overallMaxKw": "100",
+        "motorTotalHp": "136",
+        "motorTotalKw": "100",
+        "transmission": "电动车单速变速箱",
+        "body": "4门5座三厢车",
+        "seats": "5",
+        "marketDate": "2025.08"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "轩度EV 2026款 麦卡03出行"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "14.99"
+            },
+            {
+              "name": "厂",
+              "value": "—"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "纯电动"
+            },
+            {
+              "name": "上市",
+              "value": "2025.08"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "451"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.5"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "10"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "30-80"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "10-100"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "100"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "175"
+            },
+            {
+              "name": "车身结构",
+              "value": "4门5座三厢车"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "136"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4714*1825*1532"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "-"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "140"
+            },
+            {
+              "name": "整车",
+              "value": "-"
+            },
+            {
+              "name": "(kg)",
+              "value": "1580"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "1955"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "76091",
+      "sourceUrl": "https://www.autohome.com.cn/spec/76091/",
+      "fuel": "petrol",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "MG7 2026款 2.0T Trophy+ 超级运动",
+        "energy": "汽油",
+        "engine": "2.0T 261马力 L4",
+        "displacementCcValues": [],
+        "engineMaxHp": "261",
+        "engineMaxKw": "192",
+        "overallMaxKw": "192",
+        "transmission": "9挡手自一体",
+        "body": "5门5座掀背车",
+        "seats": "5",
+        "marketDate": "2026.01"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "MG7 2026款 2.0T Trophy+ 超级运动"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "16.99"
+            },
+            {
+              "name": "厂",
+              "value": "上汽集团"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "汽油"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2026.01"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "192"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "405"
+            },
+            {
+              "name": "变速箱",
+              "value": "9挡手自一体"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门5座掀背车"
+            },
+            {
+              "name": "发动机",
+              "value": "2.0T 261马力 L4"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4884*1889*1447"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "6.5"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "230"
+            },
+            {
+              "name": "NEDC (L/100km)",
+              "value": "6.2"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "6.94"
+            },
+            {
+              "name": "整车",
+              "value": "三 10 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "1650"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "2085"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "20A4E"
+            },
+            {
+              "name": "(mL)",
+              "value": "1986"
+            },
+            {
+              "name": "(L)",
+              "value": "2.0"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "发动机布局",
+              "value": "横置"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "261"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "192"
+            },
+            {
+              "name": "最大功率转速(rpm)",
+              "value": "5500-6000"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "405"
+            },
+            {
+              "name": "最大扭矩转速(rpm)",
+              "value": "1750-3500"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "184"
+            },
+            {
+              "name": "发动机特有技术",
+              "value": "VGT可变截面"
+            },
+            {
+              "name": "能源类型",
+              "value": "汽油"
+            },
+            {
+              "name": "标",
+              "value": "92"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "1022809",
+      "sourceUrl": "https://www.autohome.com.cn/spec/1022809/",
+      "fuel": "diesel",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "悍途 2026款 用 2.0T 自动柴油两驱旗舰型标双",
+        "energy": "柴油",
+        "engine": "2.0T 170马力 L4",
+        "displacementCcValues": [],
+        "engineMaxHp": "170",
+        "engineMaxKw": "125",
+        "overallMaxKw": "125",
+        "transmission": "8挡自动",
+        "body": "皮卡",
+        "seats": "5",
+        "marketDate": "2026.01"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "悍途 2026款 用 2.0T 自动柴油两驱旗舰型标双"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "15.28"
+            },
+            {
+              "name": "厂",
+              "value": "汽车"
+            },
+            {
+              "name": "级别",
+              "value": "皮卡"
+            },
+            {
+              "name": "能源类型",
+              "value": "柴油"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2026.01"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "125"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "420"
+            },
+            {
+              "name": "变速箱",
+              "value": "8挡自动"
+            },
+            {
+              "name": "车身结构",
+              "value": "皮卡"
+            },
+            {
+              "name": "发动机",
+              "value": "2.0T 170马力 L4"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "5330*1965*1920"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "-"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "150"
+            },
+            {
+              "name": "整车",
+              "value": "五 20 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "-"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "-"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "HFC4DB2-2E1"
+            },
+            {
+              "name": "(mL)",
+              "value": "1999"
+            },
+            {
+              "name": "(L)",
+              "value": "2.0"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "170"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "125"
+            },
+            {
+              "name": "最大功率转速(rpm)",
+              "value": "3600"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "420"
+            },
+            {
+              "name": "最大扭矩转速(rpm)",
+              "value": "1500-2500"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "-"
+            },
+            {
+              "name": "能源类型",
+              "value": "柴油"
+            },
+            {
+              "name": "标",
+              "value": "0"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "未知"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "75717",
+      "sourceUrl": "https://www.autohome.com.cn/spec/75717/",
+      "fuel": "hybrid",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "至境世家 2026款 奢享",
+        "energy": "插电式混合动力",
+        "engine": "1.5T 180马力 L4",
+        "displacementCcValues": [],
+        "engineMaxHp": "180",
+        "engineMaxKw": "132",
+        "overallMaxKw": "462",
+        "motorTotalHp": "449",
+        "motorTotalKw": "330",
+        "systemHp": "628",
+        "systemKw": "462",
+        "transmission": "1挡DHT",
+        "body": "5门7座",
+        "seats": "7",
+        "marketDate": "2025.12"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "至境世家 2026款 奢享"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "46.99"
+            },
+            {
+              "name": "厂",
+              "value": "上汽通用"
+            },
+            {
+              "name": "级别",
+              "value": "中大型"
+            },
+            {
+              "name": "能源类型",
+              "value": "插电式混合动力"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2025.12"
+            },
+            {
+              "name": "WLTC纯电续航里程(km)",
+              "value": "171"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "224"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.33"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "30-80"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "462"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "775"
+            },
+            {
+              "name": "变速箱",
+              "value": "1挡DHT"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门7座"
+            },
+            {
+              "name": "发动机",
+              "value": "1.5T 180马力 L4"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "449"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "5260*2023*1820"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "5.8"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "180"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "0.8"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)WLTC",
+              "value": "7.3"
+            },
+            {
+              "name": "电能当量燃料消耗量(L/100km)",
+              "value": "-"
+            },
+            {
+              "name": "油电 燃料消耗量(L/100km)",
+              "value": "3.41"
+            },
+            {
+              "name": "整车",
+              "value": "三 10 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "2690"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "3277"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "LAX"
+            },
+            {
+              "name": "(mL)",
+              "value": "1498"
+            },
+            {
+              "name": "(L)",
+              "value": "1.5"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "发动机布局",
+              "value": "横置"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "180"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "132"
+            },
+            {
+              "name": "最大功率转速(rpm)",
+              "value": "5500"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "255"
+            },
+            {
+              "name": "最大扭矩转速(rpm)",
+              "value": "1500-4500"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "127"
+            },
+            {
+              "name": "能源类型",
+              "value": "插电式混合动力"
+            },
+            {
+              "name": "标",
+              "value": "92"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "78862",
+      "sourceUrl": "https://www.autohome.com.cn/spec/78862/",
+      "fuel": "hybrid",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "深蓝G318 2026款 四驱 享乾崑",
+        "energy": "增程式",
+        "engine": "增程器 150马力",
+        "displacementCcValues": [],
+        "engineMaxHp": "150",
+        "engineMaxKw": "110",
+        "overallMaxKw": "331",
+        "motorTotalHp": "450",
+        "motorTotalKw": "331",
+        "transmission": "电动车单速变速箱",
+        "body": "5门5座SUV",
+        "seats": "5",
+        "marketDate": "2026.08"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "深蓝G318 2026款 四驱 享乾崑"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "21.98"
+            },
+            {
+              "name": "厂",
+              "value": "深蓝汽车"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "增程式"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2026.08"
+            },
+            {
+              "name": "WLTC纯电续航里程(km)",
+              "value": "144"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "200"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.25"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "5"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "30-80"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "0-100"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "331"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "552"
+            },
+            {
+              "name": "变速箱",
+              "value": "电动车单速变速箱"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门5座SUV"
+            },
+            {
+              "name": "发动机",
+              "value": "增程器 150马力"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "450"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "5125*2025*1895"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "5.9"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "185"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "1.40"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)WLTC",
+              "value": "7.3"
+            },
+            {
+              "name": "电能当量燃料消耗量(L/100km)",
+              "value": "2.62"
+            },
+            {
+              "name": "油电 燃料消耗量(L/100km)",
+              "value": "4.02"
+            },
+            {
+              "name": "整车",
+              "value": "三 12 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "2390"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "2875"
+            },
+            {
+              "name": "准拖挂车总 (kg)",
+              "value": "1600"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "JL469ZQ1"
+            },
+            {
+              "name": "(mL)",
+              "value": "1497"
+            },
+            {
+              "name": "(L)",
+              "value": "1.5"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "发动机布局",
+              "value": "横置"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "150"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "110"
+            },
+            {
+              "name": "最大功率转速(rpm)",
+              "value": "5000"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "220"
+            },
+            {
+              "name": "最大扭矩转速(rpm)",
+              "value": "3200-4200"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "105"
+            },
+            {
+              "name": "能源类型",
+              "value": "增程式"
+            },
+            {
+              "name": "标",
+              "value": "92"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "1023901",
+      "sourceUrl": "https://www.autohome.com.cn/spec/1023901/",
+      "fuel": "electric",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "乐迪 2026款 冷藏型悦行 +Pro 宁德70.59kWh 3700货箱",
+        "energy": "纯电动",
+        "displacementCcValues": [],
+        "overallMaxKw": "110",
+        "motorTotalHp": "150",
+        "motorTotalKw": "110",
+        "transmission": "电动车单速变速箱",
+        "body": "货车",
+        "seats": "2",
+        "marketDate": "2026.05"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "乐迪 2026款 冷藏型悦行 +Pro 宁德70.59kWh 3700货箱"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "20.66"
+            },
+            {
+              "name": "厂",
+              "value": "汽车"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "纯电动"
+            },
+            {
+              "name": "上市",
+              "value": "2026.05"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "420"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.33"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "110"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "270"
+            },
+            {
+              "name": "车身结构",
+              "value": "货车"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "150"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "5725*1820*1970"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "-"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "90"
+            },
+            {
+              "name": "整车",
+              "value": "-"
+            },
+            {
+              "name": "(kg)",
+              "value": "1750"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "3495"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "1023367",
+      "sourceUrl": "https://www.autohome.com.cn/spec/1023367/",
+      "fuel": "electric",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "祥菱U7 2026款 盲窗智享 宁德50.23kWh",
+        "energy": "纯电动",
+        "displacementCcValues": [],
+        "overallMaxKw": "100",
+        "motorTotalHp": "136",
+        "motorTotalKw": "100",
+        "transmission": "电动车单速变速箱",
+        "body": "货车",
+        "seats": "2",
+        "marketDate": "2026.08"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "祥菱U7 2026款 盲窗智享 宁德50.23kWh"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "12.19"
+            },
+            {
+              "name": "厂",
+              "value": "汽车"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "纯电动"
+            },
+            {
+              "name": "上市",
+              "value": "2026.08"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "360"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "100"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "225"
+            },
+            {
+              "name": "车身结构",
+              "value": "货车"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "136"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4905*1810*1960"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "-"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "-"
+            },
+            {
+              "name": "整车",
+              "value": "-"
+            },
+            {
+              "name": "(kg)",
+              "value": "1620"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "3200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "77409",
+      "sourceUrl": "https://www.autohome.com.cn/spec/77409/",
+      "fuel": "hybrid",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "星越L 2026款 i-HEV智擎混动 星汉",
+        "energy": "油电混合",
+        "engine": "1.5T 163马力 L4",
+        "displacementCcValues": [],
+        "engineMaxHp": "163",
+        "engineMaxKw": "120",
+        "motorTotalHp": "238",
+        "motorTotalKw": "175",
+        "transmission": "1挡DHT",
+        "body": "5门5座SUV",
+        "seats": "5",
+        "marketDate": "2026.04"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "星越L 2026款 i-HEV智擎混动 星汉"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "15.37"
+            },
+            {
+              "name": "厂",
+              "value": "—"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "油电混合"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            },
+            {
+              "name": "上市",
+              "value": "2026.04"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "-"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "-"
+            },
+            {
+              "name": "变速箱",
+              "value": "1挡DHT"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门5座SUV"
+            },
+            {
+              "name": "发动机",
+              "value": "1.5T 163马力 L4"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "238"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4795*1895*1689"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "8.3"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "180"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "4.75"
+            },
+            {
+              "name": "整车",
+              "value": "五 15 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "1700"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "2125"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "BHE15-CFZ"
+            },
+            {
+              "name": "(mL)",
+              "value": "1499"
+            },
+            {
+              "name": "(L)",
+              "value": "1.5"
+            },
+            {
+              "name": "进气形式",
+              "value": "—"
+            },
+            {
+              "name": "发动机布局",
+              "value": "横置"
+            },
+            {
+              "name": "形式",
+              "value": "L"
+            },
+            {
+              "name": "数(个)",
+              "value": "4"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "4"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "163"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "120"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "255"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "115"
+            },
+            {
+              "name": "能源类型",
+              "value": "油电混合"
+            },
+            {
+              "name": "标",
+              "value": "92"
+            },
+            {
+              "name": "方式",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "材料",
+              "value": "—"
+            },
+            {
+              "name": "环保标准",
+              "value": "国VI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sourceOfferId": "78127",
+      "sourceUrl": "https://www.autohome.com.cn/spec/78127/",
+      "fuel": "electric",
+      "beforeEngineCc": null,
+      "configFields": {
+        "title": "银河星舰7 2026款 605km 远航",
+        "energy": "纯电动",
+        "engine": "纯电动",
+        "displacementCcValues": [],
+        "overallMaxKw": "160",
+        "motorTotalHp": "218",
+        "motorTotalKw": "160",
+        "transmission": "电动车单速变速箱",
+        "body": "5门5座SUV",
+        "seats": "5",
+        "marketDate": "2026.06"
+      },
+      "groups": [
+        {
+          "name": "基本参数",
+          "items": [
+            {
+              "name": "车型",
+              "value": "银河星舰7 2026款 605km 远航"
+            },
+            {
+              "name": "厂 ( )",
+              "value": "11.98"
+            },
+            {
+              "name": "厂",
+              "value": "—"
+            },
+            {
+              "name": "级别",
+              "value": "—"
+            },
+            {
+              "name": "能源类型",
+              "value": "纯电动"
+            },
+            {
+              "name": "环保标准",
+              "value": "-"
+            },
+            {
+              "name": "上市",
+              "value": "2026.06"
+            },
+            {
+              "name": "WLTC纯电续航里程(km)",
+              "value": "-"
+            },
+            {
+              "name": "CLTC纯电续航里程(km)",
+              "value": "605"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "0.33"
+            },
+            {
+              "name": "电池 (小时)",
+              "value": "-"
+            },
+            {
+              "name": "电池 范围(%)",
+              "value": "30-80"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "160"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "320"
+            },
+            {
+              "name": "变速箱",
+              "value": "电动车单速变速箱"
+            },
+            {
+              "name": "车身结构",
+              "value": "5门5座SUV"
+            },
+            {
+              "name": "发动机",
+              "value": "纯电动"
+            },
+            {
+              "name": "电动机(Ps)",
+              "value": "218"
+            },
+            {
+              "name": "长*宽*高(mm)",
+              "value": "4750 *1905 *1680"
+            },
+            {
+              "name": "官方0-100km/h加速(s)",
+              "value": "-"
+            },
+            {
+              "name": "最高车速(km/h)",
+              "value": "175"
+            },
+            {
+              "name": "WLTC (L/100km)",
+              "value": "-"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)WLTC",
+              "value": "-"
+            },
+            {
+              "name": "最低荷电状态 (L/100km)CLTC",
+              "value": "-"
+            },
+            {
+              "name": "电能当量燃料消耗量(L/100km)",
+              "value": "1.44"
+            },
+            {
+              "name": "油电 燃料消耗量(L/100km)",
+              "value": "-"
+            },
+            {
+              "name": "整车",
+              "value": "六 15 公里"
+            },
+            {
+              "name": "(kg)",
+              "value": "1760"
+            },
+            {
+              "name": "最大满载 (kg)",
+              "value": "2219"
+            }
+          ]
+        },
+        {
+          "name": "发动机",
+          "items": [
+            {
+              "name": "发动机型",
+              "value": "-"
+            },
+            {
+              "name": "(mL)",
+              "value": "-"
+            },
+            {
+              "name": "(L)",
+              "value": "-"
+            },
+            {
+              "name": "进气形式",
+              "value": "-"
+            },
+            {
+              "name": "发动机布局",
+              "value": "-"
+            },
+            {
+              "name": "形式",
+              "value": "-"
+            },
+            {
+              "name": "数(个)",
+              "value": "-"
+            },
+            {
+              "name": "每缸 (个)",
+              "value": "-"
+            },
+            {
+              "name": "最大马力(Ps)",
+              "value": "-"
+            },
+            {
+              "name": "最大功率(kW)",
+              "value": "-"
+            },
+            {
+              "name": "最大功率转速(rpm)",
+              "value": "-"
+            },
+            {
+              "name": "最大扭矩(N·m)",
+              "value": "-"
+            },
+            {
+              "name": "最大扭矩转速(rpm)",
+              "value": "-"
+            },
+            {
+              "name": "最大净功率(kW)",
+              "value": "-"
+            },
+            {
+              "name": "能源类型",
+              "value": "纯电动"
+            },
+            {
+              "name": "标",
+              "value": "-"
+            },
+            {
+              "name": "方式",
+              "value": "-"
+            },
+            {
+              "name": "材料",
+              "value": "-"
+            },
+            {
+              "name": "材料",
+              "value": "-"
+            },
+            {
+              "name": "环保标准",
+              "value": "-"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
