@@ -1,0 +1,67 @@
+name: Qualify saved JPtrade results 20260917
+on:
+  push:
+    branches: [fix/finish-fresh-catalog-20260917]
+    paths: ['.github/workflows/qualify-saved-jptrade-20260917.yml']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: qualify-saved-jptrade-20260917
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_SELLER_INVENTORY: '1'
+      CATALOG_PUBLICATION_DRY_RUN: '1'
+      CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
+      CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '2'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '8'
+      CATALOG_READ_CONCURRENCY: '4'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - name: Verify publication safety and storage contracts
+        run: node --import tsx --test tests/catalog-inventory-regression.test.ts tests/catalog-internal-stream.test.ts tests/catalog-safe-public-pricing.test.ts
+      - uses: actions/download-artifact@v4
+        with:
+          name: fresh-japan-jptrade
+          path: saved-jptrade
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: jptrade-image-verification-35167936226
+          path: saved-jptrade-images
+          run-id: 35186348125
+          github-token: ${{ github.token }}
+      - name: Prepare source-bound sold results
+        run: node --import tsx scripts/catalog-convert-saved-jptrade.mjs
+      - name: Calculate and validate Japan candidates
+        env:
+          CATALOG_REBUILD_MARKETS: japan
+          CATALOG_REBUILD_PUBLISH_REPORT: publication-japan.json
+        run: node --max-old-space-size=11000 --import tsx scripts/catalog-publish-market.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jptrade-publication-20260917
+          path: |
+            publication-*.json
+            jptrade-conversion.json
+            catalog-current-readmodel-parity.json
+            catalog-visible-calculation-coverage.json
+          retention-days: 30
