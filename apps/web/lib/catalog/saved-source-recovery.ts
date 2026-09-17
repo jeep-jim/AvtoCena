@@ -57,7 +57,8 @@ export function restoreSavedSourceEvidence(input: VehicleOffer): VehicleOffer {
     const trusted = (field: string) => op.sourceExactFields.includes(field) && !applied.includes(field);
     engine = trusted("engineCc") ? input.engineCc : undefined;
     fuel = trusted("fuel") ? input.fuel : undefined;
-    hp = trusted("powerHp") && input.powerDataSource === "kcar_exact_detail_rvo_hrspow" ? input.powerHp : undefined;
+    // Do not launder the quarantined hrspow field into saved_source evidence.
+    hp = undefined;
     bound = true;
   } else if (input.sourceId === "autohome_new_china_open" && input.market === "china"
     && raw.detailIdentityVerified === true && text(raw.configSpecId) === text(input.sourceOfferId)

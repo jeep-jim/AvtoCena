@@ -3,6 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
 import { catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
@@ -37,18 +38,20 @@ test("all catalog filters use the projection when optional categorical shards ar
     await persistCatalogOffers([{
       id: "filter-target", sourceId: "encar_direct", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
       make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images,
-      totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
+      totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, powerDataConfidence:'source_exact', powerDataSource:'synthetic_exact_fixture', fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
       calculationStatus: "ready", calculationSnapshot: {
         customs: { status: "ready" },
         breakdown: ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
           .map((id) => ({ id, amountRub: 1 })),
       },
-      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=FILTER", photoIdentityVerified: true },
+      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=FILTER", photoIdentityVerified: true,
+        semanticEvidence: {fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1598},powerHp:{status:'exact',value:123}} },
     } as any]);
 
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     const projection = await readDataJson<any>(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {});
     assert.equal(projection.items?.[0]?.bodyType, "sedan");
+    assert.equal(safePublicPricing(projection.items[0]).totalRub, 2_021_912, JSON.stringify(safePublicPricing(projection.items[0])));
     const allProjection = await readDataJson<any>("catalog/public/projection/all.json", {});
     assert.deepEqual(allProjection.items?.map((item: any) => item.id), ["filter-target"]);
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/make/hyundai.json`), { force: true });

@@ -342,8 +342,8 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const power30MinKw = power30MinKwByMotor?.length
     ? Math.round(power30MinKwByMotor.reduce((sum, value) => sum + value, 0) * 100) / 100
     : undefined;
-  const icePowerKw = correctedFromCombustion ? undefined : exactIcePowerKw(offer, full, powertrainKind, powerKw);
-  const utilizationPowerKw = (correctedFromCombustion ? undefined : reasonable(offer.utilizationPowerKw, 1, 4_000))
+  const icePowerKw = correctedFromCombustion || powerSanity.suspicious ? undefined : exactIcePowerKw(offer, full, powertrainKind, powerKw);
+  const utilizationPowerKw = powerSanity.suspicious ? undefined : (correctedFromCombustion ? undefined : reasonable(offer.utilizationPowerKw, 1, 4_000))
     || (powertrainKind === "electric" || powertrainKind === "series_hybrid"
       ? power30MinKw
       : powertrainKind === "other_hybrid" && icePowerKw && power30MinKw

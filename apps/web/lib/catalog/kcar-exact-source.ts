@@ -128,7 +128,11 @@ export function kcarSpecificationEvidence(input: {
   if (fuel.value === "electric" && engineCc.status === "exact") {
     engineCc = { ...engineCc, value: undefined, status: "conflict" };
   }
-  const peakPower = structuredIntegerEvidence([input.horsepower], 10, 2_000);
+  const parsedPeakPower = structuredIntegerEvidence([input.horsepower], 10, 2_000);
+  // Preserve the raw field for investigation, but never attest hrspow as
+  // verified hp/kW. Exact extraction is not independent technical evidence.
+  const peakPower: KCarMetricEvidence = { rawValues: parsedPeakPower.rawValues,
+    status: parsedPeakPower.status === "missing" ? "missing" as const : "ambiguous" as const };
   const powerHp = !electricPowerUnit && unitMatchesFuel
     ? peakPower
     : { rawValues: peakPower.rawValues, status: unitMatchesFuel ? "missing" : "conflict" as KCarEvidenceStatus };
