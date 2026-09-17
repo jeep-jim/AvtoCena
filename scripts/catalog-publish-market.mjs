@@ -13,7 +13,7 @@ import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicl
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { minimumPublicationImages, hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
@@ -272,7 +272,7 @@ async function auditCandidate(sourceOffer) {
     let offer = normalizeVehicleOfferSpecs({ ...preserveCatalogOfferObservation(sourceOffer), status: market === "japan" ? "active" : sourceOffer.status, images: uniqueImages(sourceOffer.images) });
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
-    if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
+    if (offer.images.length < minimumPublicationImages(offer, minimumImagesPerOffer, retainedPublishedIds.has(offer.id))) return { offer: null, reason: "images" };
     if (sellerInventory) {
       const prepared = await prepareSellerInventory(sourceOffer,
         {preservePublishedPrice:retainedPublishedIds.has(sourceOffer.id)});
@@ -434,7 +434,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
       const owner = imageOwners.get(key);
       return !owner || owner === offer.id;
     });
-    if (ownedImages.length < minimumImagesPerOffer) {
+    if (ownedImages.length < minimumPublicationImages(offer, minimumImagesPerOffer, retainedPublishedIds.has(offer.id))) {
       rejectFreshOffer(offer.id, "selection:duplicate_images");
       auditedRemovals.set(offer.id, "selection:duplicate_images");
       rejectionReasons.duplicate_images = Number(rejectionReasons.duplicate_images || 0) + 1;

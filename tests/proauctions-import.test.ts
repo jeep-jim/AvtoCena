@@ -1,3 +1,4 @@
+import {minimumPublicationImages} from '../apps/web/lib/catalog/offer-quality';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -63,4 +64,14 @@ test('owner example kei van is not rejected by Cargo substring; other commercial
  assert.equal(isCommercialInventoryOffer(kei),false);
  assert.equal(isCommercialInventoryOffer({...kei,operational:{chassisCode:'OTHER'}}),true);
  assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),true);
+});
+
+test('ProAuctions import preserves Drom photo contract without admitting one-photo fresh lots',()=>{
+ const {e,identity,witness,photos}=fixture();
+ const offer=proAuctionsOffer(e,identity,witness,photos,'b'.repeat(64),now)!;
+ assert.equal(minimumPublicationImages({...offer,sourceId:'drom_japan_stat'},2,true),1);
+ assert.equal(minimumPublicationImages({...offer,sourceId:'drom_japan_stat'},2,false),2);
+ assert.equal(minimumPublicationImages(offer,2,false),2);
+ assert.equal(minimumPublicationImages(offer,2,true),2);
+ assert.equal(proAuctionsOffer(e,identity,witness,photos.slice(0,1),'b'.repeat(64),now),null);
 });

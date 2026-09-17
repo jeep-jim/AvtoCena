@@ -216,6 +216,12 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
   return false;
 }
 
+// A fresh source's batch minimum must not retroactively invalidate retained
+// cards that already satisfy their own source's image contract.
+export function minimumPublicationImages(offer: VehicleOffer, freshMinimum: number, retained: boolean) {
+  return Math.max(minimumImageCount(offer), retained ? 1 : freshMinimum);
+}
+
 function minimumImageCount(offer: VehicleOffer) {
   if (offer.sourceId === "drom_japan_stat") return 1;
   if (["jptrade_japan_stat", "proauctions_japan_stat"].includes(offer.sourceId)) return 2;
