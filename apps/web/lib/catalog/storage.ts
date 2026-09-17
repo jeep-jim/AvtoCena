@@ -174,7 +174,7 @@ export type CatalogSearchProjection = {
   japanExportRestriction?: VehicleOffer["japanExportRestriction"];
   modificationSelection?: VehicleOffer["modificationSelection"]; recoveryQualification?: VehicleOffer["recoveryQualification"];
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
-  calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
+  calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
@@ -416,7 +416,8 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
       ...compactPricingSnapshot(offer),
     },
     publicVisibleRub: visibleRub || undefined, publicSpecificationVerified: visibleRub > 0 && !catalogRequiredSpecificationRejectionReason(offer), cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
-    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 3,
+    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined,
+    sourceGroup: String(offer.sourceId || "") || undefined, cardProjectionVersion: 3,
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
@@ -435,9 +436,10 @@ function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   row = safePublicPricing(row);
+  const { sourceGroup: _sourceGroup, ...publicRow } = row;
   const imageUrl = String(row.cardImageUrl || "");
   return {
-    ...row, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
+    ...publicRow, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
     sourcePrice: row.sourcePrice ?? null, sourceCurrency: row.sourceCurrency ?? null,
     images: imageUrl ? [{ id: "", url: imageUrl, width: undefined, height: undefined, size: 0, mimeType: "image/jpeg" }] : [],
     firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",
@@ -676,6 +678,29 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
       : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
         : Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
           || projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+}
+export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
+  const groups = new Map<string, CatalogSearchProjection[]>();
+  for (const row of rows) {
+    const key = String(row.sourceGroup || "").trim();
+    const group = groups.get(key) || [];
+    group.push(row);
+    groups.set(key, group);
+  }
+  const knownGroups = [...groups.entries()].filter(([key]) => key);
+  if (knownGroups.length < 2) return rows;
+  const unknown = groups.get("") || [];
+  rows.length = 0;
+  for (let index = 0; knownGroups.some(([, group]) => index < group.length); index++) {
+    for (const [, group] of knownGroups) if (group[index]) rows.push(group[index]);
+  }
+  rows.push(...unknown);
+  return rows;
+}
+function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
+  const sort = params.sort || "updatedAt";
+  catalogSearchProjectionSort(rows, sort);
+  if (sort === "updatedAt" && params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
   if (!params.model) return null;
@@ -1451,7 +1476,7 @@ export async function searchOffers(params: CatalogSearchParams) {
       const rows = parts.flatMap(({ projection }) => projection.items || [])
         .filter(projectionCanRenderCard)
         .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
-      if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+      if (needsProjection) sortCatalogSearchRows(rows, params);
       else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
       const total = rows.length;
       const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
@@ -1473,7 +1498,7 @@ export async function searchOffers(params: CatalogSearchParams) {
     const rows = (current.items || [])
       .filter(projectionCanRenderCard)
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
-    if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+    if (needsProjection) sortCatalogSearchRows(rows, params);
     else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
     const total = rows.length;
     const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
@@ -1504,7 +1529,7 @@ export async function searchOffers(params: CatalogSearchParams) {
       .filter(projectionCanRenderCard)
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
     if (needsProjection) {
-      catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+      sortCatalogSearchRows(rows, params);
     } else {
       rows.sort((a, b) => {
         const af = Date.parse(String(a.sourcePublishedAt || a.firstSeenAt || a.updatedAt || "")) || 0;
@@ -1539,7 +1564,7 @@ export async function searchOffers(params: CatalogSearchParams) {
     const modelKeys = await projectionModelKeys(params);
     const projectionRows = (await readProjectionRows(manifest, params))
       .filter((row) => allowed.has(row.id) && catalogSearchProjectionMatches(row, params, modelKeys));
-    catalogSearchProjectionSort(projectionRows, params.sort || "updatedAt");
+    sortCatalogSearchRows(projectionRows, params);
     total = projectionRows.length;
     pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
     const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
