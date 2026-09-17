@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from '../apps/web/lib/catalog/specification-evidence-audit.ts';
+import { parseJptradeDetailEvidence } from '../apps/web/lib/catalog/jptrade-detail-evidence.ts';
 
 const input = process.env.PARSER_AUDIT_INPUT || 'parser-audit-input';
 const output = process.env.PARSER_AUDIT_OUTPUT || 'parser-audit-output';
@@ -127,6 +128,7 @@ for (const sourceId of sources.filter(id => !selected || id === selected)) {
           const response = await fetch(row.url, { headers: { 'user-agent': 'AvtoCena source parser audit/1.0' } });
           row.httpStatus = response.status;
           row.liveStatus = response.ok ? 'source_page_saved_parser_review_required' : 'source_unavailable';
+          if (sourceId === 'jptrade' && response.ok) row.detailEvidence = parseJptradeDetailEvidence(await response.text(), row.url);
         }
         if (requests > start) result.liveCompleted++;
       } catch (error) { row.liveStatus = 'failed'; row.error = String(error.message || error); }

@@ -4057,7 +4057,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "30156850",
+        "sourceUrl": "https://jptrade.ru/stat/30156850",
+        "sourceFields": {
+          "Комплектация": [
+            "240F"
+          ],
+          "Год": [
+            "2009"
+          ],
+          "Объем": [
+            "2400 см³"
+          ],
+          "Мощность": [
+            "163.15 л.с.",
+            "123 кВт"
+          ],
+          "Трансмиссия": [
+            "IAT"
+          ],
+          "Кузов": [
+            "ANA10"
+          ],
+          "Пробег": [
+            "83 000 км."
+          ],
+          "Аукцион": [
+            "TAA Kinki"
+          ],
+          "Лот": [
+            "75107"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "160 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "5 263 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "15-09-2026"
+          ]
+        },
+        "power": {
+          "state": "conflict",
+          "rawValues": [
+            "163.15 л.с.",
+            "123 кВт"
+          ],
+          "hpValues": [
+            163.15
+          ],
+          "kwValues": [
+            123
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "2400 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "160 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4082,7 +4155,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29381134",
+        "sourceUrl": "https://jptrade.ru/stat/29381134",
+        "sourceFields": {
+          "Комплектация": [
+            "PLAISIR 4WD"
+          ],
+          "Год": [
+            "1999"
+          ],
+          "Объем": [
+            "3000 см³"
+          ],
+          "Мощность": [
+            "160.44 л.с.",
+            "117 кВт"
+          ],
+          "Трансмиссия": [
+            "FAT"
+          ],
+          "Кузов": [
+            "UBS73GW"
+          ],
+          "Пробег": [
+            "144 000 км."
+          ],
+          "Аукцион": [
+            "JU Aichi"
+          ],
+          "Лот": [
+            "3112"
+          ],
+          "Оценка": [
+            "R"
+          ],
+          "Последняя ставка": [
+            "270 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "-"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "20-08-2026"
+          ]
+        },
+        "power": {
+          "state": "consistent_pair_unverified",
+          "rawValues": [
+            "160.44 л.с.",
+            "117 кВт"
+          ],
+          "hpValues": [
+            160.44
+          ],
+          "kwValues": [
+            117
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "3000 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "270 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4107,7 +4253,77 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29991289",
+        "sourceUrl": "https://jptrade.ru/stat/29991289",
+        "sourceFields": {
+          "Год": [
+            "2003"
+          ],
+          "Объем": [
+            "1400 см³"
+          ],
+          "Мощность": [
+            "74.78 л.с.",
+            "55 кВт"
+          ],
+          "Трансмиссия": [
+            "AT"
+          ],
+          "Кузов": [
+            "9NBBY"
+          ],
+          "Пробег": [
+            "206 000 км."
+          ],
+          "Аукцион": [
+            "JU Aichi"
+          ],
+          "Лот": [
+            "30291"
+          ],
+          "Оценка": [
+            "3"
+          ],
+          "Последняя ставка": [
+            "64 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "-"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "10-09-2026"
+          ]
+        },
+        "power": {
+          "state": "consistent_pair_unverified",
+          "rawValues": [
+            "74.78 л.с.",
+            "55 кВт"
+          ],
+          "hpValues": [
+            74.78
+          ],
+          "kwValues": [
+            55
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "1400 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "64 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4132,7 +4348,74 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29223697",
+        "sourceUrl": "https://jptrade.ru/stat/29223697",
+        "sourceFields": {
+          "Комплектация": [
+            "CHASSIS"
+          ],
+          "Год": [
+            "2013"
+          ],
+          "Объем": [
+            "-"
+          ],
+          "Мощность": [
+            "-"
+          ],
+          "Трансмиссия": [
+            "F6"
+          ],
+          "Кузов": [
+            "FE7JUAG"
+          ],
+          "Пробег": [
+            "290 000 км."
+          ],
+          "Аукцион": [
+            "ARAI Oyama VT"
+          ],
+          "Лот": [
+            "239"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "870 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "740 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "08-08-2026"
+          ]
+        },
+        "power": {
+          "state": "missing",
+          "rawValues": [
+            "-"
+          ],
+          "hpValues": [],
+          "kwValues": []
+        },
+        "auctionDisplacementRaw": [
+          "-"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "870 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4157,7 +4440,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29687484",
+        "sourceUrl": "https://jptrade.ru/stat/29687484",
+        "sourceFields": {
+          "Комплектация": [
+            "ALLURE"
+          ],
+          "Год": [
+            "2015"
+          ],
+          "Объем": [
+            "1200 см³"
+          ],
+          "Мощность": [
+            "130.52 л.с.",
+            "60 кВт"
+          ],
+          "Трансмиссия": [
+            "FAT"
+          ],
+          "Кузов": [
+            "T9HN02"
+          ],
+          "Пробег": [
+            "85 000 км."
+          ],
+          "Аукцион": [
+            "TAA Kinki"
+          ],
+          "Лот": [
+            "5028"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "49 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "667 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "01-09-2026"
+          ]
+        },
+        "power": {
+          "state": "conflict",
+          "rawValues": [
+            "130.52 л.с.",
+            "60 кВт"
+          ],
+          "hpValues": [
+            130.52
+          ],
+          "kwValues": [
+            60
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "1200 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "49 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4182,7 +4538,77 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29217404",
+        "sourceUrl": "https://jptrade.ru/stat/29217404",
+        "sourceFields": {
+          "Год": [
+            "2013"
+          ],
+          "Объем": [
+            "1500 см³"
+          ],
+          "Мощность": [
+            "111.49 л.с.",
+            "80 кВт"
+          ],
+          "Трансмиссия": [
+            "CAT"
+          ],
+          "Кузов": [
+            "Z12"
+          ],
+          "Пробег": [
+            "152 000 км."
+          ],
+          "Аукцион": [
+            "TAA Yokohama"
+          ],
+          "Лот": [
+            "80517"
+          ],
+          "Оценка": [
+            "3"
+          ],
+          "Последняя ставка": [
+            "31 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "754 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "08-08-2026"
+          ]
+        },
+        "power": {
+          "state": "conflict",
+          "rawValues": [
+            "111.49 л.с.",
+            "80 кВт"
+          ],
+          "hpValues": [
+            111.49
+          ],
+          "kwValues": [
+            80
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "1500 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "31 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4207,7 +4633,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29694539",
+        "sourceUrl": "https://jptrade.ru/stat/29694539",
+        "sourceFields": {
+          "Комплектация": [
+            "TWIN AIR POP"
+          ],
+          "Год": [
+            "2013"
+          ],
+          "Объем": [
+            "900 см³"
+          ],
+          "Мощность": [
+            "85.66 л.с.",
+            "63 кВт"
+          ],
+          "Трансмиссия": [
+            "AT"
+          ],
+          "Кузов": [
+            "31209"
+          ],
+          "Пробег": [
+            "48 000 км."
+          ],
+          "Аукцион": [
+            "CAA Touhoku"
+          ],
+          "Лот": [
+            "5544"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "57 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "561 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "01-09-2026"
+          ]
+        },
+        "power": {
+          "state": "consistent_pair_unverified",
+          "rawValues": [
+            "85.66 л.с.",
+            "63 кВт"
+          ],
+          "hpValues": [
+            85.66
+          ],
+          "kwValues": [
+            63
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "900 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "57 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4232,7 +4731,76 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "30033345",
+        "sourceUrl": "https://jptrade.ru/stat/30033345",
+        "sourceFields": {
+          "Комплектация": [
+            "Ver.L"
+          ],
+          "Год": [
+            "2007"
+          ],
+          "Объем": [
+            "2500 см³"
+          ],
+          "Мощность": [
+            "214.82 л.с."
+          ],
+          "Трансмиссия": [
+            "FAT"
+          ],
+          "Кузов": [
+            "GSE20"
+          ],
+          "Пробег": [
+            "153 000 км."
+          ],
+          "Аукцион": [
+            "JU Okinawa"
+          ],
+          "Лот": [
+            "215"
+          ],
+          "Оценка": [
+            "3"
+          ],
+          "Последняя ставка": [
+            "135 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "-"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "11-09-2026"
+          ]
+        },
+        "power": {
+          "state": "single_unit_unverified",
+          "rawValues": [
+            "214.82 л.с."
+          ],
+          "hpValues": [
+            214.82
+          ],
+          "kwValues": []
+        },
+        "auctionDisplacementRaw": [
+          "2500 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "135 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4257,7 +4825,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29207679",
+        "sourceUrl": "https://jptrade.ru/stat/29207679",
+        "sourceFields": {
+          "Комплектация": [
+            "SRX CROSSOVER LUXURY"
+          ],
+          "Год": [
+            "2014"
+          ],
+          "Объем": [
+            "2990 см³"
+          ],
+          "Мощность": [
+            "248.81 л.с.",
+            "183 кВт"
+          ],
+          "Трансмиссия": [
+            "FAT"
+          ],
+          "Кузов": [
+            "T166C"
+          ],
+          "Пробег": [
+            "265 000 км."
+          ],
+          "Аукцион": [
+            "ARAI Bayside"
+          ],
+          "Лот": [
+            "5004"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "200 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "5 677 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "07-08-2026"
+          ]
+        },
+        "power": {
+          "state": "consistent_pair_unverified",
+          "rawValues": [
+            "248.81 л.с.",
+            "183 кВт"
+          ],
+          "hpValues": [
+            248.81
+          ],
+          "kwValues": [
+            183
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "2990 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "200 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "jptrade",
@@ -4282,7 +4923,80 @@
       "reparsed": null,
       "changes": [],
       "error": null,
-      "sourceAccepted": false
+      "sourceAccepted": false,
+      "detailEvidence": {
+        "sourceId": "29074632",
+        "sourceUrl": "https://jptrade.ru/stat/29074632",
+        "sourceFields": {
+          "Комплектация": [
+            "SPORT"
+          ],
+          "Год": [
+            "1994"
+          ],
+          "Объем": [
+            "4000 см³"
+          ],
+          "Мощность": [
+            "190.35 л.с.",
+            "126 кВт"
+          ],
+          "Трансмиссия": [
+            "AT"
+          ],
+          "Кузов": [
+            "7MX"
+          ],
+          "Пробег": [
+            "167 000 км."
+          ],
+          "Аукцион": [
+            "JU Mie"
+          ],
+          "Лот": [
+            "2110"
+          ],
+          "Оценка": [
+            "3.5"
+          ],
+          "Последняя ставка": [
+            "375 000 ¥"
+          ],
+          "Цена в РФ с ПТС": [
+            "7 433 000 ₽"
+          ],
+          "Статус": [
+            "продано"
+          ],
+          "Дата": [
+            "04-08-2026"
+          ]
+        },
+        "power": {
+          "state": "conflict",
+          "rawValues": [
+            "190.35 л.с.",
+            "126 кВт"
+          ],
+          "hpValues": [
+            190.35
+          ],
+          "kwValues": [
+            126
+          ]
+        },
+        "auctionDisplacementRaw": [
+          "4000 см³"
+        ],
+        "soldStatusRaw": [
+          "продано"
+        ],
+        "lastBidRaw": [
+          "375 000 ¥"
+        ],
+        "sourceAccepted": false,
+        "publicationReady": false
+      }
     },
     {
       "source": "kcar_korea_open",

@@ -5,8 +5,26 @@ import { parseAutohomeExactConfigFields, autohomeNewSpecificationEvidence } from
 import { kcarKoreaExactSource, kcarSpecificationEvidence } from '../apps/web/lib/catalog/kcar-exact-source';
 import { CarSwitchUaeExactAdapter, parseCarSwitchExactDetail } from '../apps/web/lib/catalog/carswitch-exact-source';
 import { AutoScoutHqAdapter, parseAutoScoutExactDetail } from '../apps/web/lib/catalog/autoscout-hq-source';
+import { parseJptradeDetailEvidence } from '../apps/web/lib/catalog/jptrade-detail-evidence';
 
 const fixture = JSON.parse(fs.readFileSync(new URL('./fixtures/parser-audit/autohome-ten-saved-cards.json', import.meta.url), 'utf8'));
+test('ten JPtrade lots expose contradictory power instead of silently selecting one unit', () => {
+  const cards=JSON.parse(fs.readFileSync(new URL('./fixtures/parser-audit/jptrade-ten-detail-cards.json',import.meta.url),'utf8')).cards;
+  const expected=['conflict','consistent_pair_unverified','consistent_pair_unverified','missing','conflict','conflict',
+    'consistent_pair_unverified','single_unit_unverified','consistent_pair_unverified','conflict'];
+  assert.equal(cards.length,10);
+  for(const [i,card] of cards.entries()) {
+    const parsed=parseJptradeDetailEvidence(card.html,card.sourceUrl)!;
+    assert.ok(parsed,card.sourceUrl);
+    assert.equal(parsed.power.state,expected[i],card.sourceUrl);
+    assert.deepEqual(parsed.soldStatusRaw,['продано']);
+    assert.ok(parsed.lastBidRaw[0]?.includes('¥'));
+    assert.equal(parsed.publicationReady,false);
+    assert.equal(parseJptradeDetailEvidence(card.html,card.sourceUrl+'1'),null);
+    const unrelated=card.html+'<div class="item">Мощность:<span>999 л.с.</span></div>';
+    assert.deepEqual(parseJptradeDetailEvidence(unrelated,card.sourceUrl)!.power,parsed.power);
+  }
+});
 function markup(groups: any[], specId: string) {
   return 'var config = ' + JSON.stringify({ result: { paramtypeitems: groups.map(g => ({ name: g.name,
     paramitems: g.items.map((item: any) => ({ name: item.name, valueitems: [{specid:specId,value:item.value}] })) })) } }) + ';';
