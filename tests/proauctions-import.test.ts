@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseProAuctionsDetailEvidence} from '../apps/web/lib/catalog/proauctions-detail-evidence';
-import {matchingProAuctionsSale,proAuctionsIdentity,proAuctionsOffer} from '../apps/web/lib/catalog/proauctions-import';
+import {matchingProAuctionsSale,proAuctionsIdentity,proAuctionsOffer,proAuctionsSaleWitness} from '../apps/web/lib/catalog/proauctions-import';
 import {japanAuctionSoldPriceVerified} from '../apps/web/lib/catalog/public-priority';
 import {isAllowedCatalogSourceUrl} from '../apps/web/lib/catalog/required-catalog-sources';
 import {enrichOfferWithSourceTableDisplacement} from '../apps/web/lib/catalog/source-table-displacement';
+import {isCommercialInventoryOffer} from '../scripts/lib/catalog-vehicle-scope.mjs';
 const now=Date.parse('2026-09-17T12:00:00Z');
 const url='https://demo.pro-auctions.ru/statistika/mazda/cx-5/30162134.html';
 const html=fs.readFileSync('tests/fixtures/proauctions/30162134.html','utf8');
@@ -22,6 +23,12 @@ test('only a complete matching sold witness permits auction publication',()=>{
  assert.equal(matchingProAuctionsSale(e,identity,witness),true);
  for(const change of [{statusRaw:'не продано'},{priceJpy:100},{lotNumber:'other'},{chassis:'OTHER'},{year:2020},{make:'Toyota'},{auctionDate:'2026-09-14'}])
   assert.equal(proAuctionsOffer(e,identity,{...witness,...change},photos,'b'.repeat(64),now),null);
+});
+test('live sold witness accepts the source day-month-year syntax',()=>{
+ const markup='<button data-marka="Daihatsu" data-model="Hijet Cargo"></button>Статус: <span>продано</span>Дата: <span>16-09-2026</span>Год<span>2019</span>Кузов:<span>S321V</span>Лот:<span>6001</span>Аукцион:<span>KCAA M Kyushu</span>Последняя ставка:<span>353 000 ¥</span>';
+ const witness=proAuctionsSaleWitness(markup,'30198001');
+ assert.equal(witness.auctionDate,'2026-09-16');assert.equal(witness.priceJpy,353000);assert.equal(witness.statusRaw,'продано');
+ assert.equal(proAuctionsSaleWitness(markup.replace('16-09-2026','16.09.2026'),'30198001').auctionDate,witness.auctionDate);
 });
 test('incomplete specifications remain publishable without a fabricated total or exact displacement',()=>{
  const {e,identity,witness,photos}=fixture();
@@ -50,4 +57,10 @@ test('breadcrumb identity must agree with primary title',()=>{
  const crumbs=['ProAuctions','Статистика','Mazda','CX-5'].map(x=>`<span itemprop="name">${x}</span>`).join('');
  assert.deepEqual(proAuctionsIdentity(crumbs+html,e),{make:'Mazda',model:'CX-5'});
  assert.throws(()=>proAuctionsIdentity(crumbs.replace('Mazda','Toyota')+html,e),/identity/);
+});
+test('owner example kei van is not rejected by Cargo substring; other commercial exclusions remain',()=>{
+ const kei={market:'japan',sourceId:'proauctions_japan_stat',make:'Daihatsu',model:'Hijet Cargo',operational:{chassisCode:'S321V'}};
+ assert.equal(isCommercialInventoryOffer(kei),false);
+ assert.equal(isCommercialInventoryOffer({...kei,operational:{chassisCode:'OTHER'}}),true);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),true);
 });

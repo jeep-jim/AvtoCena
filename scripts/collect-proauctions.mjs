@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {gzipSync} from 'node:zlib';
+import {gzipSync,gunzipSync} from 'node:zlib';
 import sharp from 'sharp';
 import {parseProAuctionsDetailEvidence,proAuctionsText} from '../apps/web/lib/catalog/proauctions-detail-evidence.ts';
-import {proAuctionsIdentity,matchingProAuctionsSale,proAuctionsOffer} from '../apps/web/lib/catalog/proauctions-import.ts';
+import {proAuctionsIdentity,matchingProAuctionsSale,proAuctionsOffer,proAuctionsSaleWitness} from '../apps/web/lib/catalog/proauctions-import.ts';
 
 const root=process.env.PROAUCTIONS_OUTPUT || 'proauctions-collection';
 const deadline=Date.now()+Number(process.env.PROAUCTIONS_SECONDS || 4500)*1000;
@@ -31,15 +31,6 @@ async function get(url,limit=3000000){
     }catch(e){if(e.access || !/timeout|fetch failed/i.test(String(e)) || attempt===2)throw e;await pause(1500*(attempt+1));}
   }
 }
-const field=(html,label)=>proAuctionsText(html.match(new RegExp(label+'\\s*:?\\s*<span\\b[^>]*>([\\s\\S]*?)<\\/span>','i'))?.[1]||'');
-const num=s=>Number(String(s).replace(/[^0-9.]/g,'')) || null;
-function jptrade(body,id){
-  const attr=name=>body.match(new RegExp(name+'=["\']([^"\']+)["\']','i'))?.[1];
-  const d=field(body,'Дата').match(/(\d{2})\.(\d{2})\.(\d{4})/);
-  return {source:'jptrade',sourceId:id,sourceUrl:`https://jptrade.ru/stat/${id}`,statusRaw:field(body,'Статус'),
-    make:attr('data-marka'),model:attr('data-model'),year:num(field(body,'Год')),chassis:field(body,'Кузов'),
-    auctionDate:d?`${d[3]}-${d[2]}-${d[1]}`:'',auctionName:field(body,'Аукцион'),lotNumber:field(body,'Лот'),priceJpy:num(field(body,'Последняя ставка')),evidenceSha256:sha(body)};
-}
 async function readParts(dir){let rows=[];try{for(const f of await fs.readdir(dir,{recursive:true}))if(/part-[^/]+\.json$/.test(f))rows.push(...JSON.parse(await fs.readFile(path.join(dir,f),'utf8')));}catch(e){if(e.code!=='ENOENT')throw e;}return rows;}
 const witnesses=await readParts('saved-jptrade');
 const key=e=>`${e.auctionDate}|${String(e.auctionName).toLowerCase().replace(/[^a-z0-9]/g,'')}|${e.lotNumber}`;
@@ -51,9 +42,9 @@ if(!state.details && !state.pending.length){
   state.pending=[...new Set(['https://demo.pro-auctions.ru/statistika/daihatsu/hijet-cargo/30198001.html',...seeds.map(r=>r.sourceUrl)])];
 }
 async function checkpoint(){state.done=[...done];state.checkedAt=new Date().toISOString();await fs.writeFile(path.join(root,'checkpoint.tmp'),JSON.stringify(state));await fs.rename(path.join(root,'checkpoint.tmp'),path.join(root,'checkpoint.json'));await fs.writeFile(path.join(root,'summary.json'),JSON.stringify({...state,done:done.size,pending:state.pending.length},null,2));console.log(JSON.stringify({pages:state.pages,details:state.details,prepared:state.prepared,pending:state.pending.length,stopReason:state.stopReason}));}
-async function detail(url){
+async function detail(url,cached=false){
   const id=url.match(/\/(\d+)\.html$/)?.[1];if(!id || !url.startsWith('https://demo.pro-auctions.ru/statistika/'))throw Error('unexpected_detail_url');
-  const buffer=await get(url),body=buffer.toString('utf8');
+  const buffer=cached?gunzipSync(await fs.readFile(path.join(root,'html',`${id}.html.gz`))):await get(url),body=buffer.toString('utf8');
   await fs.writeFile(path.join(root,'html',`${id}.html.gz`),gzipSync(buffer));
   let record={sourceUrl:url,sourceId:id,evidenceSha256:sha(buffer),fetchedAt:new Date().toISOString()};
   try{
@@ -62,8 +53,8 @@ async function detail(url){
     const matches=(byKey.get(key(e.identity))||[]).filter(w=>matchingProAuctionsSale(e,identity,w));
     let witness=matches.length===1?matches[0]:null;
     if(!e.price.saleConfirmed && !witness && !witnessBlocked){
-      try{const bytes=await get(`https://jptrade.ru/stat/${id}`);await fs.writeFile(path.join(root,'witness',`${id}.html.gz`),gzipSync(bytes));
-        const w=jptrade(bytes.toString('utf8'),id);if(matchingProAuctionsSale(e,identity,w))witness=w;
+      try{const bytes=cached?gunzipSync(await fs.readFile(path.join(root,'witness',`${id}.html.gz`))):await get(`https://jptrade.ru/stat/${id}`);await fs.writeFile(path.join(root,'witness',`${id}.html.gz`),gzipSync(bytes));
+        const w=proAuctionsSaleWitness(bytes.toString('utf8'),id);if(matchingProAuctionsSale(e,identity,w))witness=w;
       }catch(error){record.witnessError=String(error);if(error.access)witnessBlocked=true;}
     }
     record.saleWitness=witness;
@@ -83,7 +74,16 @@ async function detail(url){
       else record.reason='identity_image_or_retention_gate';
     }
   }catch(error){record.reason=String(error);}
-  await fs.writeFile(path.join(root,'raw',`${id}.json`),JSON.stringify(record));done.add(url);state.details++;
+  await fs.writeFile(path.join(root,'raw',`${id}.json`),JSON.stringify(record));if(!done.has(url))state.details++;done.add(url);
+}
+// Reinterpret saved witness dates from the first smoke without recollecting HTML.
+if(state.contractVersion!==2){
+  for(const f of await fs.readdir(path.join(root,'raw'))){
+    const record=JSON.parse(await fs.readFile(path.join(root,'raw',f),'utf8'));
+    if(record.reason!=='sold_price_unconfirmed')continue;
+    try{await fs.access(path.join(root,'witness',`${record.sourceId}.html.gz`));await detail(record.sourceUrl,true);}catch(error){state.errors.push({url:record.sourceUrl,error:String(error)});}
+  }
+  state.contractVersion=2;await checkpoint();
 }
 if(!state.complete){
   state.stopReason='';

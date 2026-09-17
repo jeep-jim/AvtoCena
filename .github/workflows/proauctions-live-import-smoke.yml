@@ -17,6 +17,12 @@ jobs:
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
+          name: proauctions-collection
+          path: proauctions-collection
+          run-id: 35251347998
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
           name: japan-proauctions-results
           path: saved-proauctions
           run-id: 35105995247
@@ -27,10 +33,18 @@ jobs:
           path: saved-jptrade
           run-id: 35167936226
           github-token: ${{ github.token }}
-      - name: Exercise fresh details, sold corroboration and photo decoding without publication
+      - name: Recheck saved witness syntax and missing photos without collecting the ten details again
         env: {PROAUCTIONS_SECONDS: '600', PROAUCTIONS_MAX_DETAILS: '10'}
         run: node --import tsx scripts/collect-proauctions.mjs
       - run: node --import tsx scripts/prepare-proauctions-publication.mjs
+      - name: Require the owner example and ten publication candidates
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const row=JSON.parse(fs.readFileSync('proauctions-collection/offers/30198001.json'));
+          const report=JSON.parse(fs.readFileSync('proauctions-collection/admission.json'));
+          if(row.sourcePrice!==353000 || row.auctionResult!=='sold' || report.admitted!==10)throw Error('live_import_contract_failed');
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -3,6 +3,17 @@ import { parseProAuctionsDetailEvidence, proAuctionsText } from './proauctions-d
 import type { VehicleOffer } from './types';
 
 const norm = (v: unknown) => String(v || '').toLowerCase().replace(/[^a-zа-я0-9]/g, '');
+export function proAuctionsSaleWitness(body:string,id:string) {
+  if(!/^\d+$/.test(id))throw Error('invalid_witness_id');
+  const field=(label:string)=>proAuctionsText(body.match(new RegExp(label+'\\s*:?\\s*<span\\b[^>]*>([\\s\\S]*?)<\\/span>','i'))?.[1]||'');
+  const attr=(name:string)=>body.match(new RegExp(name+'=["\']([^"\']+)["\']','i'))?.[1];
+  const num=(s:string)=>Number(s.replace(/[^0-9.]/g,'')) || null;
+  const d=field('Дата').match(/^(\d{2})[.-](\d{2})[.-](\d{4})$/);
+  return {source:'jptrade',sourceId:id,sourceUrl:`https://jptrade.ru/stat/${id}`,statusRaw:field('Статус'),
+    make:attr('data-marka'),model:attr('data-model'),year:num(field('Год')),chassis:field('Кузов'),
+    auctionDate:d?`${d[3]}-${d[2]}-${d[1]}`:'',auctionName:field('Аукцион'),lotNumber:field('Лот'),priceJpy:num(field('Последняя ставка')),
+    evidenceSha256:createHash('sha256').update(body).digest('hex')};
+}
 export function proAuctionsIdentity(html: string, evidence: ReturnType<typeof parseProAuctionsDetailEvidence>) {
   const crumbs = [...html.matchAll(/<[^>]+itemprop=["']name["'][^>]*>([\s\S]*?)<\//gi)].map(m => proAuctionsText(m[1]));
   const i = crumbs.findIndex(v => v === 'Статистика');
@@ -26,6 +37,7 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
   const date = Date.parse(e.identity.auctionDate);
   if (!Number.isFinite(date) || date > now || now-date > 30*86400000 || e.identity.year < 2010 || e.identity.year > new Date(now).getUTCFullYear()) return null;
   if (!/^[a-f0-9]{64}$/.test(digest) || e.issues.includes('gallery_identity_unconfirmed')) return null;
+  if(e.price.soldStatusRaw && !e.price.saleConfirmed) return null;
   if (!e.price.saleConfirmed && !matchingProAuctionsSale(e,identity,witness)) return null;
   const decoded = photos.filter(p => e.imageUrls.includes(p.url) && /^[a-f0-9]{64}$/.test(p.decodedSha256 || '') && p.width >= 100 && p.height >= 100);
   if(new Set(decoded.map(p=>p.decodedSha256)).size < 2) return null;
@@ -40,12 +52,13 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
     sourcePrice:e.price.amountJpy,sourceCurrency:'JPY',totalRub:null,calculationStatus:'needs_data',
     auctionDate:e.identity.auctionDate,auctionName:e.identity.auctionName || undefined,lotNumber:e.identity.lotNumber,auctionGrade:s.grade || undefined,
     mileageKm:s.mileageKm ?? undefined,transmission:s.transmission || undefined,
+    vehicleCategory:identity.make==='Daihatsu' && identity.model==='Hijet Cargo' ? 'unknown' : undefined,
     fuel:!fuelConflict ? s.fuel || undefined : undefined,powertrainKind:!fuelConflict ? kind : 'unknown',
     powerHp:!powerConflict ? s.reportedCombustionPowerHp ?? undefined : undefined,
     powerKw:!powerConflict ? s.reportedCombustionPowerKw ?? undefined : undefined,
     firstSeenAt:timestamp,updatedAt:timestamp,
     images:decoded.map(p=>({id:p.decodedSha256,url:p.url,objectKey:'',checksum:p.decodedSha256,width:p.width,height:p.height,size:p.size,mimeType:p.mimeType})),
-    operational:{sourceUrl:e.sourceUrl,exactDetail:true,photoIdentityVerified:true,
+    operational:{sourceUrl:e.sourceUrl,exactDetail:true,photoIdentityVerified:true,chassisCode:e.identity.chassis,
       semanticEvidence:{year:evidence('exact',e.identity.year),engineCc:evidence('ambiguous',s.reportedEngineCc),
         fuel:evidence(fuelConflict || !s.fuel?'ambiguous':'exact',s.fuel),
         powerHp:evidence(powerConflict?'conflict':s.reportedCombustionPowerHp?'exact':'missing',s.reportedCombustionPowerHp),
