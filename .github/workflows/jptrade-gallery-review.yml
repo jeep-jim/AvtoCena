@@ -1,0 +1,67 @@
+name: Review JPtrade saved galleries
+on:
+  push:
+    branches: [ops/jptrade-gallery-review-20260917]
+    paths: ['.github/workflows/jptrade-gallery-review.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: fresh-japan-jptrade
+          path: saved-jptrade
+          run-id: 35167936226
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: jptrade-image-verification-35167936226
+          path: saved-jptrade-images
+          run-id: 35186348125
+          github-token: ${{ github.token }}
+      - run: node --import tsx scripts/catalog-convert-saved-jptrade.mjs
+      - run: pip install Pillow
+      - name: Build review contact sheets from checksum-matched source photos
+        run: |
+          python -u <<'PY'
+          import json,glob,io,hashlib,urllib.request,concurrent.futures,pathlib
+          from PIL import Image,ImageDraw
+          rows=[r for f in sorted(glob.glob('catalog-intake-publish/*.json')) for r in json.load(open(f))['offers']]
+          root=pathlib.Path('gallery-review');root.mkdir(exist_ok=True)
+          def pair(r):
+              canvas=Image.new('RGB',(400,175),'white');draw=ImageDraw.Draw(canvas);errors=[]
+              draw.text((3,3),r['sourceOfferId']+' '+r['make']+' '+r['model'],fill='black')
+              for i,img in enumerate(r['operational']['raw']['decodedGallery'][:2]):
+                  try:
+                      with urllib.request.urlopen(img['url'],timeout=20) as response:data=response.read(12000001)
+                      im=Image.open(io.BytesIO(data)).convert('RGB')
+                      if hashlib.sha256(im.tobytes()).hexdigest()!=img['decodedSha256']:raise ValueError('checksum_changed')
+                      im.thumbnail((198,150));canvas.paste(im,(i*200,22))
+                  except Exception as e:
+                      errors.append(str(e));draw.text((i*200+3,80),'FETCH FAILED',fill='red')
+              return r['sourceOfferId'],canvas,errors
+          failures=[];page=None
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+              for n,(id,im,errors) in enumerate(pool.map(pair,rows)):
+                  if n%40==0:page=Image.new('RGB',(2000,1400),'#dddddd')
+                  page.paste(im,((n%5)*400,((n%40)//5)*175))
+                  if errors:failures.append({'id':id,'errors':errors})
+                  if n%40==39 or n==len(rows)-1:
+                      page.save(root/f'review-{n//40+1:02d}.jpg',quality=85)
+                      print('reviewed_downloads',n+1,flush=True)
+          json.dump({'total':len(rows),'failures':failures},open(root/'download-check.json','w'),indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jptrade-gallery-contact-sheets
+          path: gallery-review
+          retention-days: 7
