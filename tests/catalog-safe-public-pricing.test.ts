@@ -86,3 +86,34 @@ test('old attested compact quotes retain the full audit rejection even after raw
  const refreshed={...row,updatedAt:'2026-09-17T00:00:00Z'};
  assert.equal(safePublicPricing(refreshed),refreshed);
 });
+
+test('public projection reader returns sanitized seller rows on current and generation paths', async () => {
+ const fs = await import('node:fs/promises');
+ const os = await import('node:os');
+ const path = await import('node:path');
+ const {getJsonStorage,resetJsonStorageForTests} = await import('../apps/web/lib/data');
+ const {readCurrentPublicCatalogProjection,resetCatalogReadCachesForTests} = await import('../apps/web/lib/catalog/storage');
+ const cwd=process.cwd(), driver=process.env.JSON_STORAGE_DRIVER;
+ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'safe-public-read-'));
+ await fs.mkdir(path.join(temp,'data'));process.chdir(temp);process.env.JSON_STORAGE_DRIVER='local';
+ resetJsonStorageForTests();resetCatalogReadCachesForTests();
+ try {
+  const row={...fixture(),id:'unsafe-kcar',cardProjectionVersion:3,cardImageUrl:'https://img.kcar.com/car.jpg'};
+  const storage=getJsonStorage();
+  await storage.writeJson('catalog/manifest.json',{version:2,generationId:'safety-test',markets:{korea:{count:1}}});
+  await storage.writeJson('catalog/generations/safety-test/indexes/projection/korea.json',{generationId:'safety-test',items:[row]});
+  for(const generationId of ['safety-test','stale']) {
+   await storage.writeJson('catalog/public/projection/all.json',{generationId,items:[row]});
+   resetCatalogReadCachesForTests();
+   const result=await readCurrentPublicCatalogProjection();
+   assert.equal(result.rows.length,1);
+   assert.equal(isSellerPricedOffer(result.rows[0]),true);
+   assert.equal(result.rows[0].powerHp,undefined);
+   assert.equal(result.rows[0].totalRub,null);
+   assert.equal(result.rows[0].sellerPriceRub,1800000);
+  }
+ } finally {
+  process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;
+  resetJsonStorageForTests();resetCatalogReadCachesForTests();await fs.rm(temp,{recursive:true,force:true});
+ }
+});
