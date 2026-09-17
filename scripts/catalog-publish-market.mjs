@@ -326,6 +326,35 @@ if (sellerInventory && !generation.offers.length && process.env.CATALOG_REBALANC
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
+const freshOfferMetaById = new Map();
+let freshOfferMissingIdObservations = 0;
+for (const offer of generation.offers) {
+  const id = String(offer?.id || "").trim();
+  if (!id) {
+    freshOfferMissingIdObservations += 1;
+    continue;
+  }
+  const sourceId = String(offer?.sourceId || "unknown");
+  const sourceOfferId = String(offer?.sourceOfferId || "");
+  const current = freshOfferMetaById.get(id);
+  if (current) {
+    current.observations += 1;
+    current.sourceIds.add(sourceId);
+    if (sourceOfferId) current.sourceOfferIds.add(sourceOfferId);
+  } else {
+    freshOfferMetaById.set(id, {
+      id,
+      sourceIds: new Set([sourceId]),
+      sourceOfferIds: new Set(sourceOfferId ? [sourceOfferId] : []),
+      observations: 1,
+    });
+  }
+}
+const freshOfferRejectionReasonById = new Map();
+function rejectFreshOffer(id, reason) {
+  const key = String(id || "").trim();
+  if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
+}
 let currentMarketRows = await readMarketOffers(market);
 const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market) : [];
 logPublicationMemory("target_reserve_loaded");
@@ -358,7 +387,11 @@ for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - 
   candidatesById.set(offer.id, mergeOfferVersions(preserveCatalogOfferObservation(offer), candidatesById.get(offer.id)));
 }
 for (const offer of generation.offers.sort((left, right) => freshness(left) - freshness(right))) {
-  if (!offer?.id || catalogOfferWithdrawnByReport(offer, confirmedWithdrawals)) continue;
+  if (!offer?.id) continue;
+  if (catalogOfferWithdrawnByReport(offer, confirmedWithdrawals)) {
+    rejectFreshOffer(offer.id, "source:withdrawn");
+    continue;
+  }
   candidatesById.set(offer.id, mergeOfferVersions(offer, candidatesById.get(offer.id)));
 }
 
@@ -382,6 +415,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
   for (const [batchIndex, result] of audited.entries()) {
     if (!result?.offer) {
       const reason = result?.reason || "unknown";
+      rejectFreshOffer(batch[batchIndex]?.id, `audit:${reason}`);
       if (reason !== "unknown" && !reason.startsWith("exception:")) auditedRemovals.set(batch[batchIndex].id, `audit:${reason}`);
       rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
       continue;
@@ -390,6 +424,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
     if (selectedIds.has(offer.id)) continue;
     const sourceId = String(offer.sourceId || "unknown");
     if (Number(sourceCounts.get(sourceId) || 0) >= targetPerSource) {
+      rejectFreshOffer(offer.id, "selection:source_quota");
       auditedRemovals.set(offer.id, "selection:source_quota");
       rejectionReasons.source_quota = Number(rejectionReasons.source_quota || 0) + 1;
       continue;
@@ -400,6 +435,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
       return !owner || owner === offer.id;
     });
     if (ownedImages.length < minimumImagesPerOffer) {
+      rejectFreshOffer(offer.id, "selection:duplicate_images");
       auditedRemovals.set(offer.id, "selection:duplicate_images");
       rejectionReasons.duplicate_images = Number(rejectionReasons.duplicate_images || 0) + 1;
       continue;
@@ -414,6 +450,9 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
   // Preserve array length for reporting and retain the separate regression baseline.
   for (let index = start; index < Math.min(start + prepareConcurrency, orderedCandidates.length); index++) orderedCandidates[index] = null;
 }
+for (const offer of orderedCandidates) {
+  if (offer) rejectFreshOffer(offer.id, "selection:candidate_limit");
+}
 
 // Retained rows pass the same audit as fresh intake. V2 first orders eligible
 // inventory; the canonical public stage below then enforces the non-Japan mix.
@@ -423,14 +462,17 @@ for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
   // Check after V2 normalization, which may clear a contradictory body value.
   const reason = sellerInventory ? "" : catalogDescriptionRejectionReason(offer);
   if (reason) {
+    rejectFreshOffer(offer.id, `selection:description:${reason}`);
     rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
     continue;
   }
   selectedMarketOffersById.set(String(offer.id), offer);
 }
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
-for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id)))
+for (const offer of selected) if (!selectedMarketOffersById.has(String(offer.id))) {
+  rejectFreshOffer(offer.id, "selection:v2_policy");
   auditedRemovals.set(offer.id, "selection:v2_policy");
+}
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
 const expectedPublishedByMarket = {};
@@ -468,13 +510,60 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
-for (const field of ["qualityRejected", "identityRejected", "priceOutliers"])
-  for (const offer of canonicalTargetPreview[field]) auditedRemovals.set(offer.id, `canonical:${field}`);
-for (const offer of canonicalTargetPreview.quota.removed) auditedRemovals.set(offer.id, "canonical:model_year_quota");
-for (const pair of canonicalTargetPreview.deduplicated.removed)
+for (const field of ["qualityRejected", "identityRejected", "priceOutliers"]) {
+  for (const offer of canonicalTargetPreview[field]) {
+    rejectFreshOffer(offer.id, `canonical:${field}`);
+    auditedRemovals.set(offer.id, `canonical:${field}`);
+  }
+}
+for (const offer of canonicalTargetPreview.quota.removed) {
+  rejectFreshOffer(offer.id, "canonical:model_year_quota");
+  auditedRemovals.set(offer.id, "canonical:model_year_quota");
+}
+for (const pair of canonicalTargetPreview.deduplicated.removed) {
+  rejectFreshOffer(pair.removedId, `canonical:duplicate:${pair.keptId}`);
   if (nextIds.has(pair.keptId)) auditedRemovals.set(pair.removedId, `canonical:duplicate:${pair.keptId}`);
-for (const offer of canonicalTargetPreview.powerMix.removed) auditedRemovals.set(offer.id, "canonical:power_mix_80_20");
-for (const offer of canonicalTargetPreview.sourceShare.removed) auditedRemovals.set(offer.id, "canonical:autohome_2026_share_10_percent");
+}
+for (const offer of canonicalTargetPreview.powerMix.removed) {
+  rejectFreshOffer(offer.id, "canonical:power_mix_80_20");
+  auditedRemovals.set(offer.id, "canonical:power_mix_80_20");
+}
+for (const offer of canonicalTargetPreview.sourceShare.removed) {
+  rejectFreshOffer(offer.id, "canonical:autohome_2026_share_10_percent");
+  auditedRemovals.set(offer.id, "canonical:autohome_2026_share_10_percent");
+}
+const freshOfferAuditEntries = [...freshOfferMetaById.values()]
+  .sort((left, right) => left.id.localeCompare(right.id))
+  .map((meta) => {
+    const admitted = nextIds.has(meta.id);
+    return {
+      id: meta.id,
+      sourceIds: [...meta.sourceIds].sort(),
+      sourceOfferIds: [...meta.sourceOfferIds].sort(),
+      observations: meta.observations,
+      outcome: admitted ? "admitted" : "rejected",
+      reason: admitted ? "canonical:admitted" : (freshOfferRejectionReasonById.get(meta.id) || "unexplained"),
+    };
+  });
+const freshOfferAuditReasonCounts = freshOfferAuditEntries.reduce((out, row) => {
+  out[row.reason] = Number(out[row.reason] || 0) + 1;
+  return out;
+}, {});
+const freshOfferAuditUnexplained = Number(freshOfferAuditReasonCounts.unexplained || 0);
+const freshOfferAudit = {
+  scope: "canonical_preflight",
+  summary: {
+    uniqueFreshOfferIds: freshOfferAuditEntries.length,
+    admitted: freshOfferAuditEntries.filter((row) => row.outcome === "admitted").length,
+    rejected: freshOfferAuditEntries.filter((row) => row.outcome === "rejected").length,
+    duplicateObservations: freshOfferAuditEntries.reduce((sum, row) => sum + Math.max(0, row.observations - 1), 0),
+    missingIdObservations: freshOfferMissingIdObservations,
+    complete: freshOfferAuditUnexplained === 0 && freshOfferMissingIdObservations === 0,
+    unexplained: freshOfferAuditUnexplained,
+    reasons: freshOfferAuditReasonCounts,
+  },
+  entries: freshOfferAuditEntries,
+};
 const publicationPolicy = { allowSellerTransition: true, auditedRemovals };
 
 const preflight = { market, published:false, dryRun, previousManifestPreserved:true,
@@ -493,10 +582,18 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
   quotaRejected:canonicalTargetPreview.quota.removed.length,
   canonicalRejections:canonicalTargetPreview.qualityRejected.reduce((out,offer)=>{ const key=String(offer.calculationStatus);out[key]=(out[key]||0)+1;return out;},{}),
   lostRetained:currentRetainedRows.filter(offer=>!nextIds.has(offer.id)).slice(0,10).map(offer=>({id:offer.id,sourceId:offer.sourceId,status:offer.calculationStatus})),
+  freshOfferAudit,
 };
 await fs.writeFile(reportFile, JSON.stringify(preflight,null,2));
-console.log(JSON.stringify({...preflight,auditedRemovals:preflight.auditedRemovals.slice(0,5)}));
+console.log(JSON.stringify({
+  ...preflight,
+  auditedRemovals: preflight.auditedRemovals.slice(0, 5),
+  freshOfferAudit: freshOfferAudit.summary,
+}));
 logPublicationMemory("preflight_complete");
+if (!freshOfferAudit.summary.complete) {
+  throw new Error(`catalog_fresh_offer_audit_incomplete:${market}:${freshOfferAudit.summary.unexplained}:${freshOfferAudit.summary.missingIdObservations}`);
+}
 if (dryRun) process.exit(0);
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
@@ -644,6 +741,7 @@ const report = {
   targetPerMarket,
   maximumPerMarket,
   selectedMarketCount: selectedMarketOffers.length,
+  freshOfferAudit,
   specificationCoverage: {
     auditedRemovals: preflight.auditedRemovals,
     recordsWithNamedGroups: canonicalTargetPreview.offers.filter(offer=>offer.operational?.sourceSpecifications?.groups?.length).length,
@@ -717,7 +815,11 @@ const report = {
 };
 
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
-console.log(JSON.stringify(report, (key,value)=>key==="auditedRemovals" && Array.isArray(value) ? {count:value.length,sample:value.slice(0,5)} : value, 2));
+console.log(JSON.stringify(report, (key, value) => {
+  if (key === "auditedRemovals" && Array.isArray(value)) return { count: value.length, sample: value.slice(0, 5) };
+  if (key === "freshOfferAudit" && value?.summary) return value.summary;
+  return value;
+}, 2));
 if (!report.published) process.exitCode = 1;
 } finally {
   await releasePublishLock();
