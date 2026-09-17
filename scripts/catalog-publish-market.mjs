@@ -20,7 +20,7 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -332,7 +332,7 @@ logPublicationMemory("target_reserve_loaded");
 const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
 for (const row of currentMarketRows) existingInventory.set(row.id,row);
 const retentionDecisions = new Map();
-const currentRetainedRows = [...existingInventory.values()].filter((row) => {
+let currentRetainedRows = [...existingInventory.values()].filter((row) => {
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
     offer: row,
@@ -362,6 +362,9 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
   candidatesById.set(offer.id, mergeOfferVersions(offer, candidatesById.get(offer.id)));
 }
 
+// Candidate versions retain full source evidence. The regression baseline only
+// needs normalized prices and identity, not a second copy of every raw response.
+currentRetainedRows = currentRetainedRows.map(compactPublicStorageOffer);
 const orderedCandidates = [...candidatesById.values()].sort(qualityOrder);
 const generatedCandidateCount = generation.offers.length;
 generation.offers.length = 0;
