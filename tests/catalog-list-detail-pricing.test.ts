@@ -8,7 +8,7 @@ import { che168GlobalPriceAdjustment } from '../apps/web/lib/catalog/china-owner
 
 function fixture(market: string, n1=false):any {
   const input:any = {customsValueRub:2000000,eurRateRub:100,productionDate:'2021-01-01',engineCc:1500,powerHp:120,powertrainKind:'combustion',fuel:'petrol',vehicleCategory:n1?'N1':'M1',...(n1?{grossVehicleWeightKg:2500}:{})};
-  return {id:'sample',market,make:'Toyota',model:'Corolla',year:2021,engineCc:1500,powerHp:120,fuel:'petrol',powertrainKind:'combustion',sourcePrice:20000,sourceCurrency:'USD',sourceId:'autohome_used_china_open',operational:{sourceUrl:'https://global.che168.com/car/123'},totalRub:3000000,transportToBorderRub:n1?123456:undefined,calculationStatus:'ready',priceMode:'fixed',calculationSnapshot:{customsInput:input,customs:customs(input),sourcePriceRub:2000000,currencyRate:{effectiveRate:100,sourcePriceRub:2000000},missing:[],priceIncludesAllCustoms:true,priceIncludesUtilizationFee:true}};
+  return {id:'sample',market,make:'Toyota',model:'Corolla',year:2021,engineCc:1500,powerHp:120,fuel:'petrol',powertrainKind:'combustion',sourcePrice:20000,sourceCurrency:'USD',sourceId:'autohome_used_china_open',operational:{sourceUrl:'https://global.che168.com/car/123',semanticEvidence:{fuel:{status:'exact',value:'petrol'},engineCc:{status:'exact',value:1500},powerHp:{status:'exact',value:120}}},totalRub:3000000,transportToBorderRub:n1?123456:undefined,calculationStatus:'ready',priceMode:'fixed',calculationSnapshot:{customsInput:input,customs:customs(input),sourcePriceRub:2000000,currencyRate:{effectiveRate:100,sourcePriceRub:2000000},missing:[],priceIncludesAllCustoms:true,priceIncludesUtilizationFee:true}};
 }
 function compact(offer:any) {
   const {operational,sourceId,...row}=offer;

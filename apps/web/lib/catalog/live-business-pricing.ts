@@ -10,6 +10,7 @@ import { applyEncyclopediaDisplayIdentity, applyEncyclopediaDisplayIdentityBatch
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { convertToRub } from "./rates";
 import type { CatalogMarket, VehicleOffer } from "./types";
+import { safePublicPricing } from './safe-public-pricing';
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -36,6 +37,14 @@ function uniqueText(values: unknown[]) {
 }
 
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
+  if (offer.catalogPricingMode === 'seller') {
+    const rate = await convertToRub(offer.sourcePrice ?? null, offer.sourceCurrency ?? null).catch(() => null);
+    if (!rate || !['cbr','cbr_live'].includes(rate.rateSource)
+      || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(Date.now()-Date.parse(rate.rateDate)) > 4*86400000) return offer;
+    return {...offer, sellerPriceRub:Math.round(rate.sourcePriceRub), totalRub:null,
+      publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:'needs_data',
+      calculationSnapshot:{currencyRate:rate,sourcePriceRub:Math.round(rate.sourcePriceRub),pricingConfidence:'unavailable'}} as T;
+  }
   if (String(offer.market || "") === "japan") {
     // Older compact cards omitted the reserve. Recover its exact saved amount;
     // never infer a historical charge from today's percentage or exchange rate.
@@ -74,6 +83,8 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
 }
 
 export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(offer: T, configured: any): T {
+  offer = safePublicPricing(offer);
+  if (offer.catalogPricingMode === 'seller') return offer;
   offer = synchronizeCombustionPower(offer);
   const market = String(offer.market || "") as CatalogMarket;
   if (!market) return offer;
@@ -158,7 +169,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
-  const rated = await attachCurrentCurrencyRate(withReplayInputs(offer));
+  const rated = await attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer)));
   const configured = await getEffectiveMarketVersion(String(rated.market));
   const repriced = repriceOfferWithBusinessConfig(rated, configured);
   return await applyEncyclopediaDisplayIdentity(repriced as any) as T;
@@ -168,7 +179,7 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
   if (!offers.length) return offers;
   const [markets, ratedOffers] = await Promise.all([
     getEffectiveMarketsWithDefaults(),
-    Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(offer)))),
+    Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));

@@ -190,7 +190,8 @@ test("K Car exact detail classifies fuel, displacement and horsepower provenance
   assert.equal(evidence.year.status, "exact");
   assert.equal(evidence.fuel.value, "petrol");
   assert.equal(evidence.engineCc.value, 1998);
-  assert.equal(evidence.powerHp.value, 245);
+  assert.equal(evidence.powerHp.value, undefined);
+  assert.equal(evidence.powerHp.status, "ambiguous");
   assert.equal(evidence.powerKw.status, "missing");
 });
 
@@ -223,8 +224,8 @@ test("K Car pure EV keeps kW as peak power and flags nonzero displacement", () =
   assert.equal(evidence.fuel.value, "electric");
   assert.equal(evidence.engineCc.status, "conflict");
   assert.equal(evidence.powerHp.status, "missing");
-  assert.equal(evidence.powerKw.status, "exact");
-  assert.equal(evidence.powerKw.value, 150);
+  assert.equal(evidence.powerKw.status, "ambiguous");
+  assert.equal(evidence.powerKw.value, undefined);
 });
 
 test("K Car normalized offer exposes exact source evidence to the shared audit", () => {
@@ -260,7 +261,7 @@ test("K Car normalized offer exposes exact source evidence to the shared audit",
   assert.ok(offer);
   assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
   assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "exact");
+  assert.notEqual(classifySpecificationEvidence(offer!, "powerHp").state, "exact");
 });
 
 test("pure EV cannot retain a leaked combustion displacement", () => {

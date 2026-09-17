@@ -60,6 +60,15 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
     ? `power_scenario:${clean(snapshotScenario.source) || "fallback_100"}`
     : "";
   const explicitSource = clean((offer as any).powerDataSource);
+  // Incident 2026-09-16: persisted K Car hrspow values include 34/100 hp
+  // for Genesis G80 2.5T and conflicting values for identical Carnival trims.
+  // A source-field attestation proves extraction, not specification accuracy.
+  // Keep this before missing-value / official / projection shortcuts, including
+  // after normalization clears hp but an old price snapshot still exists.
+  if (/^kcar_exact_detail_rvo_hrspow(?:_|$)/.test(explicitSource)
+    || /^saved_source:kcar_korea_open:/.test(explicitSource)) {
+    return { suspicious: true, reason: "unverified_kcar_hrspow" };
+  }
   const scenarioProvenance = [explicitSource, scenarioSource].filter(Boolean);
   const powerHp = positive(candidate);
   const powerEvidence = (offer.operational as any)?.semanticEvidence?.powerHp;
@@ -95,6 +104,12 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   if (powerHp > 2_500) return { suspicious: true, reason: "absolute_power_outlier" };
 
   const engineCc = positive(offer.engineCc);
+  // Owner-requested review threshold, not a universal physical law. Never
+  // invent replacement power; independent official evidence above can resolve
+  // a legitimate exception. Exclude electrified power conventions.
+  if (combustionLike(offer) && engineCc > 2_000 && powerHp < 100) {
+    return { suspicious: true, reason: "large_engine_low_power_requires_review" };
+  }
   if (combustionLike(offer) && engineCc >= 500) {
     const hpPerLiter = powerHp / (engineCc / 1_000);
     if (powerHp >= 700 && hpPerLiter > 260) return { suspicious: true, reason: "combustion_power_density_outlier" };

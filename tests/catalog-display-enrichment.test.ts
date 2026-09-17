@@ -60,6 +60,7 @@ test("offer detail enrichment uses the same canonical China identity as catalog 
     year: 2025,
     mileageKm: 1_000,
     powerHp: 231,
+    powerDataConfidence: 'source_exact', powerDataSource: 'synthetic_exact_fixture', fuel: 'petrol',
     engineCc: 1991,
     powertrainKind: "combustion",
     sourcePrice: 680_000,
@@ -70,6 +71,7 @@ test("offer detail enrichment uses the same canonical China identity as catalog 
     updatedAt: "2026-08-20T00:00:00.000Z",
     operational: {
       sourceUrl: "https://example.com/xiaoao-vito",
+      semanticEvidence: {engineCc:{status:'exact',value:1991},fuel:{status:'exact',value:'petrol'},powerHp:{status:'exact',value:231}},
       raw: { title: "AM晓澳汽车 晓澳汽车 VITO" },
     },
   } as any;
@@ -153,7 +155,7 @@ test("frozen Dubizzle bucket boundaries are removed only with retained range evi
   const exactCoincidence = await enrichOfferForDisplay({
     ...offer,
     id: "dubizzle-exact-coincidence",
-    operational: { raw: { parsed: { rawText: JSON.stringify({ details: {} }) } } },
+    operational: { semanticEvidence:{engineCc:{status:'exact',value:1499}}, raw: { parsed: { rawText: JSON.stringify({ details: {} }) } } },
   });
   assert.equal(exactCoincidence.engineCc, 1499);
   assert.equal(exactCoincidence.powerHp, 99);
