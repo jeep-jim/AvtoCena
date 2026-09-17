@@ -22,7 +22,7 @@ class QualificationTest(unittest.TestCase):
         r=m.qualify(self.row,[self.match],self.now)
         self.assertIsNotNone(r['corroboratingSoldLot'])
         self.assertFalse(r['calculationReady'])
-        for field in ('priceJpy','chassis','year','make'):
+        for field in ('priceJpy','chassis','year','make','auctionDate','lotNumber'):
             bad=dict(self.match, **{field: 'different'})
             self.assertIsNone(m.corroborate(self.row,[bad]))
     def test_decoded_photos_must_be_bound_to_exact_matching_lot(self):
@@ -39,6 +39,10 @@ class QualificationTest(unittest.TestCase):
     def test_date_price_and_identity_rejection(self):
         r=m.qualify(dict(self.row,auctionDate='2027-01-01',priceJpy=0,sourceUrl='https://other/10.html'),[],self.now)
         self.assertTrue(set(['auction_date_outside_retention','positive_price_missing','source_identity_invalid']) <= set(r['rejectionReasons']))
+    def test_unlabelled_power_is_not_asserted_to_be_ice_power(self):
+        r=m.qualify(dict(self.row,rawFields={'Мощность':'100 л.с. (73.5 кВт)'}),[],self.now)
+        self.assertEqual(r['powerEvidenceKind'],'unspecified')
+        self.assertEqual(r['reportedPowerHp'],100)
     def test_power_conflict_is_not_accepted(self):
         r=m.qualify(dict(self.row,rawFields={'Мощность':'100 л.с. (120 кВт)'}),[],self.now)
         self.assertIn('power_hp_kw_conflict',r['rejectionReasons'])

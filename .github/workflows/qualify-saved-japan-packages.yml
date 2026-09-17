@@ -2,7 +2,10 @@ name: Japan saved packages admission evidence
 on:
   push:
     branches: [fix/japan-saved-qualification-20260917]
-    paths: ['.github/workflows/qualify-saved-japan-packages.yml']
+    paths:
+      - '.github/workflows/qualify-saved-japan-packages.yml'
+      - 'scripts/qualify-saved-japan-packages.py'
+      - 'tests/qualify-saved-japan-packages.test.py'
 permissions:
   contents: read
   actions: read

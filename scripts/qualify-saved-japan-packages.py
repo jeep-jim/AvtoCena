@@ -48,7 +48,8 @@ def auction_key(row):
 def corroborate(row, candidates):
     # A date/auction/lot match alone is only a candidate, never an identity proof.
     exact = [other for other in candidates
-             if all(norm(row.get(k)) and norm(row.get(k)) == norm(other.get(k))
+             if auction_key(row) is not None and auction_key(row) == auction_key(other)
+             and all(norm(row.get(k)) and norm(row.get(k)) == norm(other.get(k))
                     for k in ('make', 'model', 'chassis'))
              and row.get('year') == other.get('year')
              and row.get('priceJpy', 0) > 0 and row.get('priceJpy') == other.get('priceJpy')
@@ -93,7 +94,7 @@ def qualify(row, candidates, now, conflicting=False, checked=None):
         pending.append('sold_status_and_final_price_unconfirmed')
     # A matching sold lot corroborates the price, not unspecified fuel/engine data.
     fields = row.get('rawFields') or {}
-    power_text = fields.get('Мощность') or fields.get('Мощность ДВС') or ''
+    power_text = fields.get('Мощность ДВС') or fields.get('Мощность') or ''
     hp = re.search(r'(\d+(?:[.,]\d+)?)\s*л\.с', power_text)
     kw = re.search(r'(\d+(?:[.,]\d+)?)\s*кВт', power_text)
     power = None
@@ -127,7 +128,7 @@ def qualify(row, candidates, now, conflicting=False, checked=None):
             'evidenceSha256': row.get('evidenceSha256'), 'auctionDate': row.get('auctionDate'),
             'priceJpy': price, 'sourcePriceEvidence': row.get('priceEvidence'),
             'reportedEngineCc': row.get('engineCc'), 'powerEvidence': power_text or None,
-            'parsedIcePowerHp': power, 'photoUrlCount': len(photos), 'decodedPhotoEvidence': decoded,
+            'reportedPowerHp': power, 'powerEvidenceKind': 'ice' if fields.get('Мощность ДВС') else 'unspecified', 'photoUrlCount': len(photos), 'decodedPhotoEvidence': decoded,
             'corroboratingSoldLot': ({'sourceUrl': match['sourceUrl'], 'evidenceSha256': match['evidenceSha256']}
                                      if match else None),
             'rejectionReasons': reasons, 'verificationPending': pending,
