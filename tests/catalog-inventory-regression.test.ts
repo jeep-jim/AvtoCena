@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { assertNoDeliveredPriceRegression } from "../apps/web/lib/catalog/publication-price-preservation";
 import { prepareSellerInventory } from "../apps/web/lib/catalog/prepare-seller-inventory";
-import { catalogSearchProjectionSort, searchProjectionFromOffer } from "../apps/web/lib/catalog/storage";
+import { catalogSearchProjectionSort, previewCanonicalPublicCatalogOffers, searchProjectionFromOffer } from "../apps/web/lib/catalog/storage";
 import { sellerPriceLabel } from "../apps/web/lib/catalog/seller-price-contract";
 
 const priced = ():any => ({id:"retained",market:"korea",make:"Renault",model:"QM6",year:2024,
@@ -56,4 +56,12 @@ test("only recorded pipeline exclusions may remove retained rows",()=>{
   assert.throws(()=>assertNoDeliveredPriceRegression([old],[{...old,market:"china"}]),/regression/);
   // No removal exceptions are carried into the write/publish checks.
   assert.throws(()=>assertNoDeliveredPriceRegression([old],[],{allowSellerTransition:true}),/regression/);
+});
+
+test("target-market append preview keeps an exact retained public quote",async()=>{
+  const old:any={...priced(),id:"retained-japan",market:"japan",sourceId:"drom_japan_stat",
+    sourcePrice:353000,sourceCurrency:"JPY",operational:{sourceUrl:"https://auto.drom.ru/auction/1"},images:[]};
+  const preview=await previewCanonicalPublicCatalogOffers([], [old]);
+  assert.equal(preview.offers.length,1);
+  assert.deepEqual(preview.offers[0],old);
 });

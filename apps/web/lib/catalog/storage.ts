@@ -1071,9 +1071,11 @@ export type PersistCatalogOptions = {
 export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions): boolean {
   const market = options.productionRefreshMarket;
   const preserved = options.preservePublicOffersByMarket || {};
+  const appended = Object.keys(options.appendPublicOffersByMarket || {});
+  const targetAppendOnly = appended.length === 0 || (appended.length === 1 && appended[0] === market);
   const weeklyInventory = process.env.CATALOG_SELLER_INVENTORY === "1" && market && MARKETS.includes(market);
   return Boolean(market && (CATALOG_PRODUCTION_REFRESH_MARKETS.includes(market) || weeklyInventory)
-    && !options.modificationRecovery && !options.appendPublicOffersByMarket
+    && !options.modificationRecovery && targetAppendOnly
     && typeof options.beforePersistValidate === "function"
     && typeof options.beforePublishValidate === "function"
     && !Object.prototype.hasOwnProperty.call(preserved, market)
@@ -1295,13 +1297,14 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
   return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix, sourceShare };
 }
 
-export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
+export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[], protectedPublicOffers: VehicleOffer[] = []) {
   // Match persistence's knowledge/specification normalization before auditing
   // rejections. Otherwise a row can pass preview and disappear during the
   // writer's later normalization, leaving no per-ID removal evidence.
-  const normalized = await Promise.all(storedOffers.map(async offer =>
+  const protectedIds = new Set(protectedPublicOffers.map((offer) => String(offer?.id || "")).filter(Boolean));
+  const normalized = await Promise.all(storedOffers.filter((offer) => !protectedIds.has(String(offer?.id || ""))).map(async offer =>
     normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
-  return canonicalizePublicCatalogOffers(normalized);
+  return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds);
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {

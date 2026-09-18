@@ -377,6 +377,10 @@ let currentRetainedRows = [...existingInventory.values()].filter((row) => {
 reserveRows.length = 0;
 existingInventory.clear();
 const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
+const currentPublicIds = new Set(currentMarketRows.map((offer) => String(offer?.id || "")).filter(Boolean));
+const retainedTargetPublicRows = process.env.CATALOG_APPEND_RETAINED_PUBLIC === "1"
+  ? currentRetainedRows.filter((offer) => currentPublicIds.has(String(offer?.id || "")))
+  : [];
 const freshIds = new Set(generation.offers.map(offer => offer.id));
 retainedPublishedIds = new Set(currentRetainedRows.filter(offer => !freshIds.has(offer.id)).map(offer => offer.id));
 const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
@@ -508,7 +512,7 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   expectedPublishedHashByMarket[otherMarket] = hashRows(preservedRows);
 }
 
-const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
+const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
 for (const [field, reason] of [
   ["qualityRejected", "canonical:qualityRejected"],
@@ -578,6 +582,7 @@ const preflight = { market, published:false, dryRun, previousManifestPreserved:t
   selected:selected.length, canonical:canonicalTargetPreview.offers.length,
   calculated:canonicalTargetPreview.offers.filter(hasExactCalculation).length,
   sellerOnly:canonicalTargetPreview.offers.filter(isSellerPricedOffer).length,
+  retainedTargetPublicCount:retainedTargetPublicRows.length,
   rejectionReasons,
   beforeCanonicalCalculated:selectedMarketOffers.filter(hasExactCalculation).length,
   identityRejected:canonicalTargetPreview.identityRejected.length,
@@ -629,6 +634,9 @@ const unique = new Map();
 for (const offer of selectedMarketOffers) {
   if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 }
+for (const offer of retainedTargetPublicRows) {
+  if (offer?.id) unique.set(offer.id, offer);
+}
 // Keep the internal maintenance state a superset of every exact public row,
 // including rows restored from an older verified public generation.
 for (const rows of Object.values(preservedPublicRowsByMarket)) {
@@ -669,6 +677,7 @@ if (regressionBlocked) {
       // paths. Replace only this market's sources and reuse every untouched
       // source entry without a full read/rewrite cycle.
       replaceInternalSourceIds,
+      ...(retainedTargetPublicRows.length ? { appendPublicOffersByMarket: { [market]: retainedTargetPublicRows } } : {}),
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
       beforePersistValidate(publicOffers) {
         if (sellerInventory) assertNoDeliveredPriceRegression(canonicalTargetPreview.offers, publicOffers.filter(offer => offer.market === market), {allowSellerTransition:true});

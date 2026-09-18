@@ -190,7 +190,8 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(storage, /protectedPublicIds/);
   assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.appendProtectedRows, \.\.\.priceFilteredOffers\], \{ protectedIds: protectedPublicIds \}\)/);
   assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
-  assert.doesNotMatch(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: currentMarketRows \}/);
+  assert.match(standardMarketPublisher, /CATALOG_APPEND_RETAINED_PUBLIC/);
+  assert.match(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: retainedTargetPublicRows \}/);
   assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
