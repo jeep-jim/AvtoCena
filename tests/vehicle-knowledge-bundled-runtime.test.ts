@@ -21,14 +21,14 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
 
   const legacyModelIds = new Set(models.map((row: any) => row.id));
   const newBridgeModels = bridgeModels.filter((row: any) => !legacyModelIds.has(row.id));
-  assert.equal(newBridgeModels.length, 6);
+  assert.equal(newBridgeModels.length, 7);
   assert.ok(newBridgeModels.some((row: any) => row.id === "honda/n-one-e"));
   assert.ok(newBridgeModels.some((row: any) => row.id === "toyota/land-cruiser-250"));
 
   resetVehicleKnowledgeCache();
   const resolvedModels = await readVehicleKnowledgeModels();
   const resolvedVariants = await readVehicleKnowledgeVariants();
-  assert.equal(resolvedModels.length, 4_904);
+  assert.equal(resolvedModels.length, 4_905);
   assert.equal(resolvedVariants.length, 12);
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "honda/n-one-e"));
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "toyota/land-cruiser-250"));

@@ -34,7 +34,7 @@ test("full verified corpus remains read-only and cannot expand calculator runtim
     readEncyclopediaKnowledgeVariants(),
   ]);
 
-  assert.equal(runtimeModels.length, 4_904);
+  assert.equal(runtimeModels.length, 4_905);
   assert.equal(runtimeVariants.length, 12);
   assert.ok(!runtimeModels.some((row) => row.id === "toyota/premio"));
   assert.ok(!runtimeVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
