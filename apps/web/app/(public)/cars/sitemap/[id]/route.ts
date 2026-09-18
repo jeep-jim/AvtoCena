@@ -1,4 +1,4 @@
-import { absoluteAvtocenaUrl, catalogOfferUrl, readAiCatalogProjection } from "@/lib/ai-discovery";
+import { absoluteAvtocenaUrl, catalogOfferUrl, readAiSitemapProjection } from "@/lib/ai-discovery";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +24,10 @@ export async function GET(_request: Request, { params }: { params: { id: string 
   const id = parseSitemapId(params.id);
   if (id === null) return new Response("Not Found", { status: 404 });
 
-  const projection = await readAiCatalogProjection();
+  const projection = await readAiSitemapProjection();
+  if (!projection) return new Response('Sitemap is being updated', {
+    status: 503, headers: { 'retry-after': '60', 'cache-control': 'private, no-store' },
+  });
   const start = id * CARS_PER_SITEMAP;
   if (start >= projection.items.length && !(id === 0 && projection.items.length === 0)) {
     return new Response("Not Found", { status: 404 });

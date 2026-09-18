@@ -1,6 +1,7 @@
 import { gzipSync } from "node:zlib";
-import { getJsonStorage, readDataJson } from "./data";
+import { getJsonStorage, readDataJson, type JsonStorage } from "./data";
 import type { CatalogSearchProjection } from "./catalog/storage";
+import { DetailReadCache } from './catalog/detail-read-cache';
 
 export const AVTOCENA_PUBLIC_ORIGIN = "https://avtocena.com";
 export const AI_CATALOG_PROJECTION_PATH = "catalog/public/projection/all.json";
@@ -50,6 +51,30 @@ export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
     generationId: "",
     markets: {},
   });
+}
+
+type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl'>> };
+const sitemapProjectionCache = new DetailReadCache<AiSitemapProjection>({
+  maxEntries: 1, maxBytes: 32 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
+});
+
+export async function readAiSitemapProjection(storage: JsonStorage = getJsonStorage()): Promise<AiSitemapProjection | null> {
+  const manifest = await storage.readJson('catalog/manifest.json', { generationId: '' });
+  if (!manifest.generationId) return null;
+  const projection = await sitemapProjectionCache.get(manifest.generationId, async () => {
+    const full = await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] });
+    // Do not retain a previous generation under the new generation's cache key.
+    if (full.generationId !== manifest.generationId) throw new Error('ai_sitemap_generation_changed');
+    return {
+      generationId: full.generationId,
+      items: (full.items || []).filter(item => item?.id && item?.make && item?.model && item?.year)
+        .map(({id, updatedAt, cardImageUrl}) => ({id, updatedAt, cardImageUrl})),
+    };
+  }).catch(error => {
+    if (error instanceof Error && error.message === 'ai_sitemap_generation_changed') return null;
+    throw error;
+  });
+  return projection;
 }
 
 export function aiCatalogManifestCount(manifest: AiCatalogManifest) {
@@ -158,4 +183,18 @@ export async function ensureAiProductFeed(projection: AiCatalogProjection): Prom
     && Boolean(await storage.binaryExists?.(AI_PRODUCT_FEED_PATH).catch(() => false));
   if (current?.version === 1 && current.generationId === projection.generationId && currentObjectExists) return current;
   return publishAiProductFeed(projection);
+}
+
+// Publication builds this object before activating the generation. A public GET
+// must not load the full catalog or rebuild/upload a feed inside the web process.
+export async function readPublishedAiProductFeed(storage: JsonStorage = getJsonStorage()): Promise<AiProductFeedMetadata | null> {
+  const [manifest, metadata] = await Promise.all([
+    storage.readJson<{ generationId: string }>('catalog/manifest.json', { generationId: '' }),
+    storage.readJson<AiProductFeedMetadata | null>(AI_PRODUCT_FEED_METADATA_PATH, null),
+  ]);
+  if (!manifest.generationId || metadata?.version !== 1
+    || metadata.generationId !== manifest.generationId
+    || metadata.objectPath !== AI_PRODUCT_FEED_PATH
+    || metadata.format !== 'google-compatible-csv-gzip') return null;
+  return await storage.binaryExists?.(AI_PRODUCT_FEED_PATH) ? metadata : null;
 }

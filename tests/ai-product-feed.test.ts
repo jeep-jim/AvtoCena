@@ -1,8 +1,49 @@
 import assert from "node:assert/strict";
 import { gunzipSync } from "node:zlib";
 import test from "node:test";
-import { buildAiProductFeed } from "../apps/web/lib/ai-discovery";
+import { buildAiProductFeed, readPublishedAiProductFeed, readAiSitemapProjection, AI_PRODUCT_FEED_METADATA_PATH, AI_PRODUCT_FEED_PATH } from "../apps/web/lib/ai-discovery";
+import type { JsonStorage } from "../apps/web/lib/data";
 import { ObjectJsonStorage } from "../apps/web/lib/data";
+
+test('sitemap requests share one full read, keep only URL fields, and retry a generation cutover', async () => {
+  let generationId = 'sitemap-test-one', projectionGeneration = generationId, fullReads = 0;
+  const storage = {async readJson(key: string) {
+    if (key === 'catalog/manifest.json') return {generationId};
+    fullReads++;
+    await new Promise(resolve => setTimeout(resolve, 1));
+    return {generationId: projectionGeneration, items: [{id: 'one', make: 'Toyota', model: 'Camry', year: 2026,
+      updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {unusedLargeData: 'x'.repeat(1000)}}]};
+  }} as unknown as JsonStorage;
+  const results = await Promise.all([readAiSitemapProjection(storage), readAiSitemapProjection(storage)]);
+  assert.equal(fullReads, 1);
+  assert.deepEqual(results[0]?.items, [{id: 'one', updatedAt: '2026-09-18', cardImageUrl: '/car.jpg'}]);
+  generationId = 'sitemap-test-two';
+  assert.equal(await readAiSitemapProjection(storage), null);
+  projectionGeneration = generationId;
+  assert.equal((await readAiSitemapProjection(storage))?.generationId, generationId);
+  assert.equal(fullReads, 3);
+});
+
+test('published feed lookup reads small metadata only and rejects stale or missing objects', async () => {
+  let generationId = 'active', exists = true;
+  const reads: string[] = [];
+  const metadata = {version: 1, generationId: 'active', objectPath: AI_PRODUCT_FEED_PATH, format: 'google-compatible-csv-gzip'};
+  const storage = {
+    async readJson(key: string) {
+      reads.push(key);
+      if (key === 'catalog/manifest.json') return { generationId };
+      assert.equal(key, AI_PRODUCT_FEED_METADATA_PATH, 'must not load the 168 MB projection');
+      return metadata;
+    },
+    async binaryExists(key: string) { assert.equal(key, AI_PRODUCT_FEED_PATH); return exists; },
+  } as unknown as JsonStorage;
+  assert.equal(await readPublishedAiProductFeed(storage), metadata);
+  assert.deepEqual(reads.sort(), ['catalog/manifest.json', AI_PRODUCT_FEED_METADATA_PATH].sort());
+  generationId = 'new-generation';
+  assert.equal(await readPublishedAiProductFeed(storage), null);
+  generationId = 'active'; exists = false;
+  assert.equal(await readPublishedAiProductFeed(storage), null);
+});
 
 test("product feed keeps the full eligible snapshot and a Google-compatible header", () => {
   const feed = buildAiProductFeed({
