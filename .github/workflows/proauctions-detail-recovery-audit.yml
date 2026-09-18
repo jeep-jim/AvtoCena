@@ -10,8 +10,19 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
       - uses: actions/download-artifact@v4
         with:
           name: proauctions-collection
@@ -39,6 +50,16 @@ jobs:
           (out/'summary.json').write_text(json.dumps({'stats':stats,'liveErrors':examples},ensure_ascii=False,indent=2))
           print((out/'summary.json').read_text())
           PY
+      - name: Read current example without writing catalog
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {getOfferFromCurrentShard} from './apps/web/lib/catalog/storage.ts';
+          import {classifySpecificationEvidence} from './apps/web/lib/catalog/specification-evidence-audit.ts';
+          const row=await getOfferFromCurrentShard('02defbbae91fe890a6b1dc3c');
+          fs.writeFileSync('evidence-audit/current-example.json',JSON.stringify(row));
+          console.log(JSON.stringify({hp:row?.powerHp,kw:row?.powerKw,power:classifySpecificationEvidence(row,'powerHp')}));
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
