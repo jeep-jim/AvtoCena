@@ -1083,6 +1083,10 @@ export function isCatalogProductionRefreshAllowed(options: PersistCatalogOptions
     && Object.keys(preserved).every((other) => MARKETS.includes(other as CatalogMarket)));
 }
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
+  const progress = (stage: string, details: Record<string, unknown> = {}) => {
+    if (process.env.CATALOG_PUBLICATION_PROGRESS === "1") console.log(JSON.stringify({ stage, ...details, rss: process.memoryUsage().rss }));
+  };
+  progress("persist_start", { inputCount: nextOffers.length });
   if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object" && !isCatalogProductionRefreshAllowed(options)) {
     throw new Error("catalog_production_writes_paused");
   }
@@ -1163,9 +1167,11 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     throw new Error("recovery_cannot_carry_unqualified_preserved_rows");
   }
   if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
+  progress("persist_validations_passed", { publicCount: publishedOffers.length });
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
+  progress("japan_archive_written", { count: japanArchive.count });
   const sourceAllowedInternalOffers = nextOffers.filter(hasAllowedCatalogSourceProvenance);
   await persistInternalCatalog(
     storage,
@@ -1174,6 +1180,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     options.preservedInternalOffers,
     options.replaceInternalSourceIds,
   );
+  progress("internal_manifest_written");
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of publishedOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
@@ -1189,8 +1196,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       await writeJsonAtomic(offerPath(generationId, market, name), slice.map(compactPublicStorageOffer));
     }
     markets[market] = { count: offers.length, chunks, updatedAt: now };
+    progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
   }
   await rebuildIndexes(generationId, publishedOffers, byId, imagesById);
+  progress("generation_indexes_written");
   const previousManifest = await readManifest();
   const previousUnavailable = previousManifest?.generationId
     ? await readIndex<UnavailableOffer[]>(previousManifest.generationId, "unavailable.json", []) : [];
@@ -1207,8 +1216,11 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // projections AND full offer-detail shards are verified do we expose the new
   // generation. This prevents cards from pointing at temporarily unavailable
   // /cars/offer/:id pages.
+  progress("current_read_models_start");
   await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
+  progress("current_read_models_written");
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
+  progress("all_read_models_verified");
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);
     try {

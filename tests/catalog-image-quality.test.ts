@@ -186,7 +186,7 @@ test("rejects Goo-net dealer-gallery fallback when no exact listing identity exi
   ], 3), []);
 });
 
-test("keeps a Drom Japan projection visible with one ranked cover", () => {
+test("rejects retired Drom projections even with a ranked cover", () => {
   const japanProjection = {
     ...rawOffer,
     id: "japan-projection-card",
@@ -202,10 +202,10 @@ test("keeps a Drom Japan projection visible with one ranked cover", () => {
     cardProjectionVersion: 1,
     operational: { sourceUrl: "https://www.drom.ru/world/japan/honda/fit/8504718/", photoIdentityVerified: true },
   };
-  assert.equal(isCrediblePublicOffer(japanProjection as any), true);
+  assert.equal(isCrediblePublicOffer(japanProjection as any), false);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, sourceId: undefined } as any), false);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, operational: { sourceUrl: "https://www.goo-net-exchange.com/usedcars/TOYOTA/COROLLA/100/" } } as any), false);
-  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), true);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, images: [] } as any), false);
 });
 
@@ -226,8 +226,8 @@ test("business liquidity remains a ranking signal but does not override Japan's 
   const olderJapan = {
     ...rawOffer,
     market: "japan",
-    sourceId: "drom_japan_stat",
-    operational: { sourceUrl: "https://www.drom.ru/world/japan/toyota/crown/8504718/", photoIdentityVerified: true },
+    sourceId: "proauctions_japan_stat",
+    operational: { sourceUrl: "https://demo.pro-auctions.ru/statistika/toyota/crown/8504718.html", photoIdentityVerified: true },
     year: new Date().getFullYear() - 7,
     fuel: "petrol",
     powerHp: 220,

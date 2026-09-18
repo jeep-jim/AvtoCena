@@ -40,11 +40,10 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "autohome_used_china_open", label: "Che168 Global", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
-  // Owner decision 2026-09-10: publish only Drom sold results. Retired
-  // auction rows must not be retained or restored by subsequent refreshes.
-  japan: [
-    { sourceId: "drom_japan_stat", label: "Drom completed auctions", canonicalUrl: "https://www.drom.ru/world/japan/", role: "auction_history", required: true, anchor: true },
-  ],
+  // Owner decision 2026-09-18: Drom retired. Japan is collected by the
+  // standalone ProAuctions workflow, using APPROVED_SAVED_CATALOG_SOURCES.
+  // No legacy generic Japan adapter may collect or restore Drom inventory.
+  japan: [],
 };
 
 // Owner-requested saved auction imports; no claim of an automated live adapter.

@@ -59,8 +59,8 @@ test("only recorded pipeline exclusions may remove retained rows",()=>{
 });
 
 test("target-market append preview keeps an exact retained public quote",async()=>{
-  const old:any={...priced(),id:"retained-japan",market:"japan",sourceId:"drom_japan_stat",
-    sourcePrice:353000,sourceCurrency:"JPY",operational:{sourceUrl:"https://auto.drom.ru/auction/1"},images:[]};
+  const old:any={...priced(),id:"retained-japan",market:"japan",sourceId:"proauctions_japan_stat",
+    sourcePrice:353000,sourceCurrency:"JPY",operational:{sourceUrl:"https://demo.pro-auctions.ru/statistika/toyota/corolla/1.html"},images:[]};
   const preview=await previewCanonicalPublicCatalogOffers([], [old]);
   assert.equal(preview.offers.length,1);
   assert.deepEqual(preview.offers[0],old);

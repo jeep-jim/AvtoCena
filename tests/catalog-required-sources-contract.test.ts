@@ -33,13 +33,12 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
   ],
   japan: [
-    ["drom_japan_stat", "https://www.drom.ru/world/japan/"],
   ],
 };
 
-test("the 12 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
+test("the 11 generic owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 12);
+  assert.equal(total, 11);
   assert.deepEqual(Object.keys(REQUIRED_CATALOG_SOURCES).sort(), ["china", "europe", "georgia", "japan", "korea", "uae"]);
 
   for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {
@@ -74,7 +73,7 @@ test("every approved source is required, anchored and included in collection", (
 
 test("Autohome stays enabled while retired JP Center cannot reenter Japan", () => {
   assert.ok(catalogV2SourceIds("china").includes("autohome_new_china_open"));
-  assert.deepEqual(catalogV2SourceIds("japan"), ["drom_japan_stat"]);
+  assert.deepEqual(catalogV2SourceIds("japan"), []);
   assert.notEqual(
     CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.sourceId === "autohome_new_china_open")?.role,
     "knowledge",

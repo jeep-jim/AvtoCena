@@ -33,12 +33,12 @@ test('catalog disagreement, unknown trim, unavailable catalogue and hybrid ambig
   assert.equal(result.sourcePrice,1033000,mode);
  }
 });
-test('confirmed Wagon R reaches a delivered calculation, not merely currency conversion', async () => {
+test('retired Drom is rejected even after exact Wagon R specifications are verified', async () => {
  const prev=process.env.CATALOG_LIVE_RATE_DISABLED; process.env.CATALOG_LIVE_RATE_DISABLED='true'; resetCatalogRateCache();
  const now=new Date().toISOString();
  const storage=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:now,JPY:{cbrRate:60,nominal:100,rateDate:now,rateSource:'cbr'},EUR:{cbrRate:100,nominal:1,rateDate:now,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:now,rateSource:'cbr'}}:[]}));
  try {
   const result=await prepareSellerInventory(await enrichDromJapanSpecifications(offer(),read));
-  assert.ok(result); assert.ok(Number(result.totalRub)>1033000*0.6,JSON.stringify({status:result.calculationStatus,total:result.totalRub,snapshot:result.calculationSnapshot}));
+  assert.equal(result,null);
  } finally {storage.mock.restore();resetCatalogRateCache();if(prev===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=prev;}
 });
