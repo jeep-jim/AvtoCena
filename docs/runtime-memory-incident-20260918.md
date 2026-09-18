@@ -1,6 +1,6 @@
 # Runtime memory investigation, 18 September 2026
 
-Status: diagnosis and a tested mitigation for detail-block retention. Not a confirmed production resolution. No production configuration or catalog objects were changed by this investigation.
+Status: runtime repairs are being deployed and verified. Detail-cache repair (#1021) and bounded recommendation pricing (#1022) are deployed; #1022 production workflow 35306894339 completed successfully. Gateway ARL protection is attached. Direct-container bypass closure remains blocked by automatic approval review; do not describe this as complete DDoS protection or a fully closed incident.
 
 ## Production evidence
 
@@ -55,3 +55,40 @@ Validation: six targeted tests passed (cache limits/recency, expiry, concurrent 
 3. Correlate request paths with OOM/502/504 events and add bounded operational timing/cache metrics, avoiding customer data in logs.
 4. After deployment, compare memory, latency and errors on the deployed revision. A green unit test or an active container is insufficient evidence of recovery.
 5. Configure and verify traffic protection separately. Inspect the public direct container URL before enabling protection only at the gateway, so requests cannot simply bypass it. Do not close that URL until gateway authorization/routing is ready.
+
+## Repairs and verification during the follow-up
+
+- #1021 merged at `54736f8c7cceedcd3b2f4e6d2b6548a4dd9465ce`; public `/api/health` confirmed that exact release. Homepage, `/cars`, and two observed offer links returned HTTP 200. Local end-to-end timings are not backend timings: a health probe spent 5.56 s in TLS negotiation, so these probes cannot substantiate a backend speedup percentage.
+- #1022 merged at `fd022982a0764fdcb05eaf519cc1e61accee497a`. Full CI passed and deployment **35306894339 succeeded**, including production gates. Similar rails price four candidates at a time, stopping when filled, continuing after rejected candidates or when more model diversity is needed. Previously up to 96 candidates were priced for eight cards.
+- The earlier deployment 35306209158 reached its product-feed check and logged repeated 30 s timeouts; it was superseded by #1022. Code inspection confirmed feed GET loaded the full 167.95 MB projection even for a valid existing binary. The follow-up makes feed GET read manifest + metadata + object existence only. Publication already writes the feed before activating a generation; a missing/mismatched feed returns 503 + Retry-After instead of rebuilding from a public request.
+- Sitemap readers share one load per generation and cache only id/date/image URL fields (one entry, 32 MiB serialized cap, 5 minute TTL). Generation mismatch is not cached and can be retried.
+- Market readers reuse rows from an already loaded all-market snapshot. Same-generation standalone market cache entries are released; unrelated expired entries are removed; expiry starts after a completed load. Existing cutover fallbacks and public pricing gates remain in place. Brand snapshots are capped at 8 entries / 32 MiB and two concurrent reads; immutable fallback projections at 96 MiB and one concurrent read.
+
+### Active gateway protection
+
+Created ARL `avtocena-catalog-rate-limit` / `fevinh4d30r652n9fl8g` and security profile `avtocena-production` / `fevq0sbmcheksqlk1b22` in folder `b1g9vq73onqb7dp5hgqg`.
+
+ARL rule `catalog-get-per-ip`: priority 100, HTTP method GET, request path PIRE regex `^/(cars(/.*)?|)$`, grouped by actual client IP, 60 requests per 10 seconds, block only requests exceeding the limit, dry-run disabled. It covers the homepage and catalog pages; static assets, API paths, form submissions and Telegram webhook are outside this rule. All other traffic is allowed. ML training consent was unchecked. No claim is made that this one rate-limit rule stops distributed attacks.
+
+Gateway `d5d4tne6a7djd0o5ip14` reached Active with this added root extension:
+
+```yaml
+x-yc-apigateway:
+  smartWebSecurity:
+    securityProfileId: fevq0sbmcheksqlk1b22
+```
+
+The existing HTTP integrations and logging remain active. Health via avtocena.com returned 200 after attachment. A deliberate rate-limit firing test has not been performed; avoid sending a burst through expensive production pages solely to force 429s.
+
+### Remaining access-control step requiring explicit approval
+
+Automatic approval review rejected switching both gateway routes to authenticated `serverless_containers` using the existing deploy service account, citing broad routing/access-control changes and an overprivileged account. That change was **not saved**. Subsequent cloud-browser calls timed out; the last verified active configuration remains public HTTP forwarding plus the SWS extension above.
+
+Safer proposed operation for approval:
+
+1. Create service account `avtocena-gateway-invoker`, with no keys and only `serverless-containers.containerInvoker` **on container `bbaohms2ccpm3vb4e73t`**, not the whole folder.
+2. Preserve the domains, root route, proxy path parameter, logging and SWS extension. On both routes use `type: serverless_containers`, the same container ID and the dedicated account ID.
+3. Before closing public access, verify homepage, catalog query parameters, offer page, health, authenticated CRM routing and webhook rejection of unauthenticated requests. Do not submit real leads or send Telegram messages as a probe.
+4. Remove public invocation only after these checks. Verify direct container invocation is denied while the same site routes still work through the gateway.
+
+This closes a currently open bypass around the gateway's protection. Do not claim it is already closed. For a routing rollback after closure, restore public invocation first, then the original HTTP integrations; avoid leaving the live gateway unable to invoke its backend.

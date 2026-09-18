@@ -498,10 +498,14 @@ export async function getOfferFromCurrentProjection(id: string) {
   return row && !isConfirmedSourceWithdrawn(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
-const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
+const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
+  maxEntries: SEARCH_PROJECTION_CACHE_MAX, maxBytes: 96 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
+});
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
 const currentProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
-const currentBrandProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
+  maxEntries: 8, maxBytes: 32 * 1024 * 1024, ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 2,
+});
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
@@ -529,11 +533,41 @@ export function resetCatalogReadCachesForTests() {
 async function readCurrentSearchProjection(market: string) {
   const key = cleanShard(market);
   const now = Date.now();
+  for (const [id, entry] of currentProjectionCache) {
+    if (entry.expiresAt <= now) currentProjectionCache.delete(id);
+  }
+  // Once the full projection is loaded, markets share its records instead of
+  // downloading and retaining a second complete copy of the same catalog.
+  if (key !== CURRENT_ALL_MARKETS_PROJECTION) {
+    const all = currentProjectionCache.get(CURRENT_ALL_MARKETS_PROJECTION);
+    if (all) {
+      const projection = await all.promise.catch(() => null);
+      if (projection?.generationId) return {
+        generationId: projection.generationId,
+        items: (projection.items || []).filter(item => item.market === market),
+      };
+    }
+  }
   const current = currentProjectionCache.get(key);
-  if (current && current.expiresAt > now) return current.promise;
+  if (current) return current.promise;
   const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentProjectionPath(market), { generationId: "", items: [] })
-    .catch((error) => { currentProjectionCache.delete(key); throw error; });
-  currentProjectionCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });
+    .then(value => {
+      const entry = currentProjectionCache.get(key);
+      if (entry?.promise === promise) {
+        entry.expiresAt = Date.now() + CURRENT_READ_MODEL_CACHE_MS;
+        if (key === CURRENT_ALL_MARKETS_PROJECTION && value.generationId) {
+          for (const [id, other] of currentProjectionCache) {
+            if (id === key) continue;
+            void other.promise.then(marketValue => {
+              if (marketValue.generationId === value.generationId && currentProjectionCache.get(id) === other) currentProjectionCache.delete(id);
+            }).catch(() => undefined);
+          }
+        }
+      }
+      return value;
+    })
+    .catch((error) => { if (currentProjectionCache.get(key)?.promise === promise) currentProjectionCache.delete(key); throw error; });
+  currentProjectionCache.set(key, { expiresAt: Infinity, promise });
   while (currentProjectionCache.size > SEARCH_PROJECTION_CACHE_MAX) {
     const oldest = currentProjectionCache.keys().next().value as string | undefined;
     if (!oldest || oldest === key) break;
@@ -542,19 +576,14 @@ async function readCurrentSearchProjection(market: string) {
   return promise;
 }
 async function readCurrentBrandProjection(make: string) {
-  const key = cleanShard(make);
-  const now = Date.now();
-  const current = currentBrandProjectionCache.get(key);
-  if (current && current.expiresAt > now) return current.promise;
-  const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentBrandProjectionPath(make), { generationId: "", items: [] })
-    .catch((error) => { currentBrandProjectionCache.delete(key); throw error; });
-  currentBrandProjectionCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });
-  while (currentBrandProjectionCache.size > 96) {
-    const oldest = currentBrandProjectionCache.keys().next().value as string | undefined;
-    if (!oldest || oldest === key) break;
-    currentBrandProjectionCache.delete(oldest);
-  }
-  return promise;
+  const key = currentBrandProjectionPath(make);
+  return currentBrandProjectionCache.get(key, () =>
+    readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(key, { generationId: "", items: [] }));
+}
+// Discovery readers share the same full snapshot as catalog searches. They
+// validate generation themselves and retain only their small output fields.
+export function readCurrentCatalogProjectionSnapshot() {
+  return readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
 }
 async function readCurrentFacets() {
   const now = Date.now();
@@ -598,17 +627,8 @@ async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
   projectionCacheGeneration = generationId;
   const key = `${generationId}:${cleanShard(market)}`;
-  const current = searchProjectionCache.get(key);
-  if (current) return current;
-  const promise = readIndex<{ generationId: string; items: CatalogSearchProjection[] }>(generationId, `projection/${cleanShard(market)}.json`, { generationId, items: [] })
-    .catch((error) => { searchProjectionCache.delete(key); throw error; });
-  searchProjectionCache.set(key, promise);
-  while (searchProjectionCache.size > SEARCH_PROJECTION_CACHE_MAX) {
-    const oldest = searchProjectionCache.keys().next().value as string | undefined;
-    if (!oldest || oldest === key) break;
-    searchProjectionCache.delete(oldest);
-  }
-  return promise;
+  return searchProjectionCache.get(key, () =>
+    readIndex<{ generationId: string; items: CatalogSearchProjection[] }>(generationId, `projection/${cleanShard(market)}.json`, { generationId, items: [] }));
 }
 function projectionNumber(value: unknown, missing: number) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : missing; }
 function projectionUtilizationPowerHp(row: CatalogSearchProjection) {

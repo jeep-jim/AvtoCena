@@ -1,12 +1,15 @@
-import { ensureAiProductFeed, AI_PRODUCT_FEED_PATH, readAiCatalogProjection } from "@/lib/ai-discovery";
+import { readPublishedAiProductFeed, AI_PRODUCT_FEED_PATH } from "@/lib/ai-discovery";
 import { getJsonStorage } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET() {
-  const projection = await readAiCatalogProjection();
-  const metadata = await ensureAiProductFeed(projection);
+  const metadata = await readPublishedAiProductFeed();
+  if (!metadata) return new Response('Product feed is being updated', {
+    status: 503,
+    headers: { 'retry-after': '60', 'cache-control': 'private, no-store' },
+  });
   const storage = getJsonStorage();
   const headers = {
     "cache-control": "private, no-store",
