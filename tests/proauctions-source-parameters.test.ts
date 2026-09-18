@@ -15,3 +15,9 @@ test('conflicting, unrelated or rejected source values are never restored',()=>{
  }
  const row=fixture();row.operational.semanticEvidence.engineCc.status='conflict';assert.equal(proAuctionsReportedVolume(row),undefined);
 });
+test('saved imports repair source confidence before inventory normalization',async()=>{
+ const {inventorySourceEvidence}=await import('../apps/web/lib/catalog/prepare-seller-inventory');
+ const input=fixture(),row=inventorySourceEvidence(input);
+ assert.equal(row.powerHp,140);assert.equal(row.powerDataConfidence,'source_exact');
+ assert.equal(input.powerDataConfidence,'estimated');
+});

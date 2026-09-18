@@ -1,3 +1,4 @@
+import {restoreProAuctionsPower} from "./proauctions-source-parameters";
 import { enrichOfferWithSourceTableParameters } from "./source-table-displacement";
 import { specificationEvidenceComplete } from "./modification-matching";
 import type { VehicleOffer } from "./types";
@@ -20,7 +21,7 @@ export function inventorySourceEvidence(input: VehicleOffer): VehicleOffer {
   const declared=["year","fuel","engineCc","powerHp"].every(field=>
     typeof semantic[field]?.source === "string" && semantic[field].source.length > 0
     && ["exact","missing","ambiguous","conflict","not_applicable"].includes(semantic[field]?.status));
-  const copy=structuredClone(input);
+  const copy=restoreProAuctionsPower(structuredClone(input));
   return sourceBound && declared ? copy : restoreSavedSourceEvidence(copy);
 }
 

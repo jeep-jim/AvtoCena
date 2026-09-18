@@ -6,8 +6,10 @@ on:
 permissions:
   contents: read
   actions: read
+# Detail recovery may overlap a read-only collection phase. The publisher still
+# acquires catalog/import-lock.json atomically, shared with every catalog writer.
 concurrency:
-  group: catalog-six-market-quality-rebuild
+  group: catalog-japan-detail-maintenance
   cancel-in-progress: false
 jobs:
   publish:
