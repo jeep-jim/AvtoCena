@@ -21,7 +21,7 @@ function safeAliasValues(rows: any) {
 }
 
 function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] = []): CatalogBrand {
-  return { name, slug, dromSlug: slug, aliases };
+  return { name, slug, aliasSlug: slug, aliases };
 }
 
 /**

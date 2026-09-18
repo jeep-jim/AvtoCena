@@ -5,29 +5,6 @@
   "maxRecords": 250,
   "records": [
     {
-      "id": "212",
-      "canonicalName": "212",
-      "slug": "212",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "abarth",
       "canonicalName": "Abarth",
       "slug": "abarth",
@@ -63,29 +40,6 @@
         "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
       ],
       "updatedAt": "2026-08-16"
-    },
-    {
-      "id": "ac-cars",
-      "canonicalName": "AC",
-      "slug": "ac",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
     },
     {
       "id": "acura",
@@ -229,13 +183,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model alpina/b3. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -343,29 +297,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "amc",
-      "canonicalName": "AMC",
-      "slug": "amc",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "arcfox",
       "canonicalName": "ARCFOX",
       "slug": "arcfox",
@@ -385,52 +316,6 @@
       ],
       "researchNotes": [
         "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "aro",
-      "canonicalName": "Aro",
-      "slug": "aro",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "asia",
-      "canonicalName": "Asia",
-      "slug": "asia",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -847,13 +732,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model borgward/bx7. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -882,29 +767,6 @@
       "researchNotes": [
         "EEA observations cover 2023, 2024, 2025 and 88 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
         "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "brilliance",
-      "canonicalName": "Brilliance",
-      "slug": "brilliance",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -1117,52 +979,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "changfeng",
-      "canonicalName": "Changfeng",
-      "slug": "changfeng",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "changhe",
-      "canonicalName": "Changhe",
-      "slug": "changhe",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "chery",
       "canonicalName": "Chery",
       "slug": "chery",
@@ -1266,13 +1082,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model chrysler/200. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -1391,29 +1207,6 @@
       "updatedAt": "2026-08-16"
     },
     {
-      "id": "coda",
-      "canonicalName": "Coda",
-      "slug": "coda",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "cupra",
       "canonicalName": "Cupra",
       "slug": "cupra",
@@ -1422,13 +1215,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model cupra/ateca. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -1445,59 +1238,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-wikidata-q104829401",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dadi",
-      "canonicalName": "Dadi",
-      "slug": "dadi",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "daewoo",
-      "canonicalName": "Daewoo",
-      "slug": "daewoo",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model dacia/bigster. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -1567,52 +1314,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "datsun",
-      "canonicalName": "Datsun",
-      "slug": "datsun",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dayun",
-      "canonicalName": "Dayun",
-      "slug": "dayun",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "deepal",
       "canonicalName": "Deepal",
       "slug": "deepal",
@@ -1621,36 +1322,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "denza",
-      "canonicalName": "Denza",
-      "slug": "denza",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model deepal/s05. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -1690,13 +1368,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model dodge/caravan. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -1713,13 +1391,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model dongfeng/box. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2084,29 +1762,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "esteo",
-      "canonicalName": "ESTEO",
-      "slug": "esteo",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "evo",
       "canonicalName": "EVO",
       "slug": "evo",
@@ -2164,13 +1819,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-huawei-hicar-current-models-2026",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model exeed/et5. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2268,13 +1923,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model faw/e-hs9. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2291,13 +1946,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model ferrari/12cilindri. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2314,13 +1969,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model fiat/124-spider. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2360,13 +2015,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model fisker/ocean. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2442,36 +2097,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "foton",
-      "canonicalName": "Foton",
-      "slug": "foton",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model forthing/forthing-4. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2488,13 +2120,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model gac/aion. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2580,36 +2212,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "geo",
-      "canonicalName": "Geo",
-      "slug": "geo",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model genesis/g70. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2626,13 +2235,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model gmc/acadia. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2686,59 +2295,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hafei",
-      "canonicalName": "Hafei",
-      "slug": "hafei",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "haima",
-      "canonicalName": "Haima",
-      "slug": "haima",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model great-wall/funky-cat. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -2784,29 +2347,6 @@
       "updatedAt": "2026-08-15"
     },
     {
-      "id": "hawtai",
-      "canonicalName": "Hawtai",
-      "slug": "hawtai",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "hedmos",
       "canonicalName": "HEDMOS",
       "slug": "hedmos",
@@ -2837,29 +2377,6 @@
       ],
       "researchNotes": [
         "Do not merge with HIMA's SHANGJIE despite the similar Chinese naming pattern. Authentic 90x60 dark/light logos remain missing."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hiphi",
-      "canonicalName": "HiPhi",
-      "slug": "hiphi",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -2919,82 +2436,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hozon",
-      "canonicalName": "Hozon",
-      "slug": "hozon",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "huanghai",
-      "canonicalName": "Huanghai",
-      "slug": "huanghai",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hummer",
-      "canonicalName": "Hummer",
-      "slug": "hummer",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model hongqi/e-hs9. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3073,29 +2521,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "icar",
-      "canonicalName": "iCAR",
-      "slug": "icar",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "icaur",
       "canonicalName": "iCAUR",
       "slug": "icaur",
@@ -3142,13 +2567,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-huawei-hicar-current-models-2026",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model im-motors/l6. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3188,36 +2613,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "iran-khodro",
-      "canonicalName": "Iran Khodro",
-      "slug": "iran-khodro",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model infiniti/ex35. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3234,36 +2636,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "iveco",
-      "canonicalName": "IVECO",
-      "slug": "iveco",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model isuzu/d-max. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3280,13 +2659,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model jac/e-js4. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3351,13 +2730,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model jaecoo/jaecoo-5. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3374,13 +2753,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-mlit-passenger-cd4512da88914640",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model jaguar/e-pace. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3408,36 +2787,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-wikidata-q113740800",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jeland",
-      "canonicalName": "Jeland",
-      "slug": "jeland",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model jeep/avenger. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3454,82 +2810,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jetta",
-      "canonicalName": "Jetta",
-      "slug": "jetta",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jinbei",
-      "canonicalName": "Jinbei",
-      "slug": "jinbei",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jmc",
-      "canonicalName": "JMC",
-      "slug": "jmc",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model jetour/dashing. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3582,29 +2869,6 @@
       "researchNotes": [
         "An authentic archived logo candidate exists, but its original source trace is incomplete; it is not staged as publication-ready media.",
         "Identity remains isolated from production until logo rights and full model/generation review pass."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "kaiyi",
-      "canonicalName": "Kaiyi",
-      "slug": "kaiyi",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -3663,13 +2927,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model kgm/actyon. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3721,29 +2985,6 @@
       ],
       "researchNotes": [
         "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "knewstar",
-      "canonicalName": "Knewstar",
-      "slug": "knewstar",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -3877,13 +3118,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lamborghini/aventador. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3900,13 +3141,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lancia/beta. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3923,36 +3164,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "landwind",
-      "canonicalName": "Landwind",
-      "slug": "landwind",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model land-rover/defender. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -3969,13 +3187,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model leapmotor/b10. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4103,29 +3321,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "lifan",
-      "canonicalName": "Lifan",
-      "slug": "lifan",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "lincoln",
       "canonicalName": "Lincoln",
       "slug": "lincoln",
@@ -4134,13 +3329,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lincoln/aviator. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4157,13 +3352,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model livan/x3-pro. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4180,13 +3375,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lotus/eletre. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4227,13 +3422,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lucid/air. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4276,29 +3471,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "luxgen",
-      "canonicalName": "Luxgen",
-      "slug": "luxgen",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "lynk-and-co",
       "canonicalName": "Lynk & Co",
       "slug": "lynk-and-co",
@@ -4307,36 +3479,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "m-hero",
-      "canonicalName": "M-Hero",
-      "slug": "m-hero",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model lynk-and-co/01. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4353,13 +3502,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-huawei-hicar-current-models-2026",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model maextro/s800. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4422,13 +3571,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model maserati/ghibli. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4445,36 +3594,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "maybach",
-      "canonicalName": "Maybach",
-      "slug": "maybach",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model maxus/edeliver-9. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4538,13 +3664,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model mclaren/540c. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4626,29 +3752,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "mercury",
-      "canonicalName": "Mercury",
-      "slug": "mercury",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "mg-motor",
       "canonicalName": "MG",
       "slug": "mg",
@@ -4657,13 +3760,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model mg-motor/cyberster. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4729,13 +3832,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model mini/aceman. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4822,29 +3925,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "mitsuoka",
-      "canonicalName": "Mitsuoka",
-      "slug": "mitsuoka",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "mobilize",
       "canonicalName": "Mobilize",
       "slug": "mobilize",
@@ -4901,13 +3981,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model morgan/plus-4. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -4947,13 +4027,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model nio/el6. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5046,29 +4126,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "oldsmobile",
-      "canonicalName": "Oldsmobile",
-      "slug": "oldsmobile",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "omoda",
       "canonicalName": "OMODA",
       "slug": "omoda",
@@ -5077,13 +4134,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model omoda/e5. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5123,13 +4180,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model opel/adam. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5146,13 +4203,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model ora/good-cat. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5200,36 +4257,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-changan-oshan-pakistan-current",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "oting",
-      "canonicalName": "Oting",
-      "slug": "oting",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model oshan/x7. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5246,59 +4280,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "plymouth",
-      "canonicalName": "Plymouth",
-      "slug": "plymouth",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "polar-stone",
-      "canonicalName": "Polar Stone",
-      "slug": "polar-stone",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model peugeot/107. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5315,13 +4303,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model polestar/polestar-1. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5338,13 +4326,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model pontiac/fiero. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5457,36 +4445,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ravon",
-      "canonicalName": "Ravon",
-      "slug": "ravon",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model ram/1500. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5503,91 +4468,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "renault-samsung",
-      "canonicalName": "Renault Samsung",
-      "slug": "renault-samsung",
-      "aliases": [
-        {
-          "value": "Renault Korea",
-          "kind": "market_name",
-          "safe": true,
-          "language": "en",
-          "market": "South Korea",
-          "sourceIds": [
-            "src-renault-korea-about-current"
-          ]
-        },
-        {
-          "value": "르노코리아(삼성)",
-          "kind": "source_spelling",
-          "safe": true,
-          "language": "ko",
-          "market": "South Korea",
-          "sourceIds": [
-            "src-encar-korean-make-selector-2026",
-            "src-renault-korea-about-current"
-          ]
-        },
-        {
-          "value": "르노코리아",
-          "kind": "localized",
-          "safe": true,
-          "language": "ko",
-          "market": "South Korea",
-          "sourceIds": [
-            "src-renault-korea-about-current"
-          ]
-        }
-      ],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "rising-auto",
-      "canonicalName": "Rising Auto",
-      "slug": "rising-auto",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model renault/10. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5604,36 +4491,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "roewe",
-      "canonicalName": "Roewe",
-      "slug": "roewe",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model rivian/r1t. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5650,59 +4514,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "rover",
-      "canonicalName": "Rover",
-      "slug": "rover",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "rox",
-      "canonicalName": "Rox",
-      "slug": "rox",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model rolls-royce/black-badge-cullinan. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5735,52 +4553,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "saab",
-      "canonicalName": "Saab",
-      "slug": "saab",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "saipa",
-      "canonicalName": "SAIPA",
-      "slug": "saipa",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "saturn",
       "canonicalName": "Saturn",
       "slug": "saturn",
@@ -5789,13 +4561,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model saturn/ion. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5812,13 +4584,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model scion/fr-s. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5835,13 +4607,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model seat/alhambra. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5882,13 +4654,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model seres/seres-3. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5942,29 +4714,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "shuanghuan",
-      "canonicalName": "Shuanghuan",
-      "slug": "shuanghuan",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "skoda",
       "canonicalName": "Skoda",
       "slug": "skoda",
@@ -5973,13 +4722,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model skoda/citigo. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -5996,13 +4745,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2023-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model skywell/be11. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6053,13 +4802,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model smart/1. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6116,29 +4865,6 @@
       ],
       "researchNotes": [
         "Authentic source-traceable 90 x 60 dark/light logos, rights review and complete generation/grade coverage remain required before publication."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "soueast",
-      "canonicalName": "Soueast",
-      "slug": "soueast",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -6222,13 +4948,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2024-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model ssangyong/actyon. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6377,59 +5103,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "tank",
-      "canonicalName": "Tank",
-      "slug": "tank",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "tata",
-      "canonicalName": "TATA",
-      "slug": "tata",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model swm/g01. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6488,52 +5168,6 @@
         "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
       ],
       "updatedAt": "2026-08-15"
-    },
-    {
-      "id": "tianma",
-      "canonicalName": "Tianma",
-      "slug": "tianma",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "tianye",
-      "canonicalName": "Tianye",
-      "slug": "tianye",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
     },
     {
       "id": "togg",
@@ -6605,52 +5239,6 @@
       "updatedAt": "2026-08-16"
     },
     {
-      "id": "trabant",
-      "canonicalName": "Trabant",
-      "slug": "trabant",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "umo",
-      "canonicalName": "Umo",
-      "slug": "umo",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "vauxhall",
       "canonicalName": "Vauxhall",
       "slug": "vauxhall",
@@ -6659,59 +5247,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "venucia",
-      "canonicalName": "Venucia",
-      "slug": "venucia",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "vgv",
-      "canonicalName": "VGV",
-      "slug": "vgv",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model vauxhall/astra. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6846,82 +5388,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "wartburg",
-      "canonicalName": "Wartburg",
-      "slug": "wartburg",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "weltmeister",
-      "canonicalName": "Weltmeister",
-      "slug": "weltmeister",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "wey",
-      "canonicalName": "WEY",
-      "slug": "wey",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model voyah/courage. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6938,13 +5411,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model willys/cj-3b. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -6961,13 +5434,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model wuling/air-ev. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -7010,36 +5483,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2025-provisional",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "xin-kai",
-      "canonicalName": "Xin Kai",
-      "slug": "xin-kai",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model xiaomi/su7-max. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -7056,13 +5506,13 @@
       "status": "seed",
       "evidence": [
         {
-          "sourceId": "src-drom-brand-catalog-index-2026",
+          "sourceId": "src-eea-co2cars-2020-2022-final",
           "fields": [
             "canonicalName"
           ],
           "status": "verified",
           "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+          "note": "Brand identity retained through independently sourced canonical model xpeng/g3. No retired catalog technical facts retained."
         }
       ],
       "researchNotes": [
@@ -7090,29 +5540,6 @@
       ],
       "researchNotes": [
         "Officially discovered active brand missing from the production static denominator. Keep blocked from publication until identity review and authentic 90x60 light/dark logos are complete."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "yema",
-      "canonicalName": "Yema",
-      "slug": "yema",
-      "aliases": [],
-      "countries": [],
-      "status": "seed",
-      "evidence": [
-        {
-          "sourceId": "src-drom-brand-catalog-index-2026",
-          "fields": [
-            "canonicalName"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
-        }
-      ],
-      "researchNotes": [
-        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
       ],
       "updatedAt": "2026-08-17"
     }

@@ -1,14 +1,14 @@
 export type CatalogBrand = {
   name: string;
   slug: string;
-  dromSlug: string;
+  aliasSlug: string;
   logoSlug?: string;
   aliases?: string[];
 };
 
-// Список иностранных марок синхронизирован с загруженной библиотекой Drom.
+// Список иностранных марок для каталога.
 // Российские марки и локальные российские ребрендинги намеренно не включены.
-const DROM_BRAND_NAMES = [
+const CATALOG_BRAND_NAMES = [
   "212", "Abarth", "AC", "Acura", "AITO", "Alfa Romeo", "Alpina", "AMC", "Aro", "Asia",
   "Aston Martin", "Audi", "Avatr", "BAIC", "Baojun", "BAW", "Belgee", "Bentley", "Bestune", "BMW",
   "Borgward", "Brilliance", "Buick", "BYD", "Cadillac", "Changfeng", "Changhe", "Changan", "Chery", "Chevrolet",
@@ -78,7 +78,7 @@ const SLUG_OVERRIDES: Record<string, string> = {
   "ZX": "zx",
 };
 
-const DROM_SLUG_OVERRIDES: Record<string, string> = {
+const BRAND_ALIAS_SLUG_OVERRIDES: Record<string, string> = {
   "Li Auto": "li",
   "Lynk & Co": "lynk-and-co",
   "M-Hero": "m-hero",
@@ -122,13 +122,13 @@ function key(value: string) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
-export const CATALOG_BRANDS: CatalogBrand[] = DROM_BRAND_NAMES
+export const CATALOG_BRANDS: CatalogBrand[] = CATALOG_BRAND_NAMES
   .map((name) => {
     const slug = SLUG_OVERRIDES[name] || slugify(name);
     return {
       name,
       slug,
-      dromSlug: DROM_SLUG_OVERRIDES[name] || slug,
+      aliasSlug: BRAND_ALIAS_SLUG_OVERRIDES[name] || slug,
       logoSlug: SIMPLE_ICON_SLUGS[name] || undefined,
     };
   })
@@ -262,7 +262,7 @@ const byKey = new Map<string, CatalogBrand>();
 for (const brand of CATALOG_BRANDS) {
   byKey.set(key(brand.name), brand);
   byKey.set(key(brand.slug), brand);
-  byKey.set(key(brand.dromSlug), brand);
+  byKey.set(key(brand.aliasSlug), brand);
 }
 
 export function canonicalCatalogBrand(value: string) {
@@ -285,6 +285,6 @@ export function catalogBrandLogoSlug(value: string) {
   return byKey.get(key(canonicalCatalogBrand(value)))?.logoSlug || "";
 }
 
-export function catalogBrandDromSlug(value: string) {
-  return byKey.get(key(canonicalCatalogBrand(value)))?.dromSlug || catalogBrandSlug(value);
+export function catalogBrandAliasSlug(value: string) {
+  return byKey.get(key(canonicalCatalogBrand(value)))?.aliasSlug || catalogBrandSlug(value);
 }

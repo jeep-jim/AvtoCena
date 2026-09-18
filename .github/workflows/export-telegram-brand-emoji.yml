@@ -27,7 +27,7 @@ jobs:
           from PIL import Image
           import json, shutil, zipfile
 
-          root = Path('apps/web/public/brand-logos/drom')
+          root = Path('apps/web/public/brand-logos/local')
           manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
           out = Path('telegram-brand-emoji')
           if out.exists():

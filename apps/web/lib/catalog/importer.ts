@@ -1,4 +1,3 @@
-import { dromJapanSource } from "./drom-japan-source";
 /*
  * Compatibility markers for source-level catalog safety tests:
  * const refreshLock = () => mutateDataJson
@@ -113,7 +112,6 @@ const completeSources = [
   dubizzleCollectionSource,
   carswitchUaeExactSource,
   jpaucPastSource,
-  dromJapanSource,
   encarCollectionSource,
   kcarKoreaExactSource,
   kbChaChaChaExactSource,
@@ -150,7 +148,6 @@ const requiredSourceIds = new Set(
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
-  "drom_japan_stat",
   "prestige_japan_auctions_open",
   "guazi_china_open",
   "autohome_used_china_open",

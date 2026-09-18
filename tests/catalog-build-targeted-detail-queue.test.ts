@@ -259,10 +259,10 @@ test("the offline queue is deduplicated by saved offer id and contains only acti
 
     await writeArtifact(input, "japan", [observation({
       id: "japan-must-never-enter-targeted-recovery",
-      sourceId: "drom_japan_stat",
+      sourceId: "retired_japan_source",
       sourceOfferId: "123",
       market: "japan",
-      sourceUrl: "https://www.drom.ru/world/japan/123",
+      sourceUrl: "https://retired.example/world/japan/123",
     })]);
     await writeArtifact(input, "europe", [observation({
       id: "europe-must-not-enter-targeted-recovery",

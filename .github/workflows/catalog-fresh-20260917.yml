@@ -46,7 +46,7 @@ jobs:
     timeout-minutes: 195
     steps:
       - uses: actions/checkout@v4
-      - name: Fresh sold-history collection, no Drom
+      - name: Fresh sold-history collection, current sources
         env:
           SWEEP_SECONDS: '10800'
         run: python3 scripts/japan-free-html-sweep.py jptrade

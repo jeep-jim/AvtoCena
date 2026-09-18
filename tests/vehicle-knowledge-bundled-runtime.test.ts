@@ -10,8 +10,8 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
   const bridgeModels = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/v2-bridge-models.json", "utf8"));
   const bridgeVariantIndex = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/v2-bridge-variants-index.json", "utf8"));
 
-  assert.equal(modelIndex.total, 4_899, "production model denominator must not be replaced by V2");
-  assert.equal(variantIndex.total, 15_735, "production variant denominator must not be replaced by V2");
+  assert.equal(modelIndex.total, 4_898, "production model denominator must not be replaced by V2");
+  assert.equal(variantIndex.total, 3, "only independently sourced legacy variants remain after source retirement");
   assert.equal(bridgeVariantIndex.total, 9, "calculator bridge must contain only zero-regression new-model variants");
 
   const models = await readBundledChunkedDataJson<any>("catalog/vehicle-knowledge/models.json", []);
@@ -21,7 +21,7 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
 
   const legacyModelIds = new Set(models.map((row: any) => row.id));
   const newBridgeModels = bridgeModels.filter((row: any) => !legacyModelIds.has(row.id));
-  assert.equal(newBridgeModels.length, 6);
+  assert.equal(newBridgeModels.length, 7);
   assert.ok(newBridgeModels.some((row: any) => row.id === "honda/n-one-e"));
   assert.ok(newBridgeModels.some((row: any) => row.id === "toyota/land-cruiser-250"));
 
@@ -29,7 +29,7 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
   const resolvedModels = await readVehicleKnowledgeModels();
   const resolvedVariants = await readVehicleKnowledgeVariants();
   assert.equal(resolvedModels.length, 4_905);
-  assert.equal(resolvedVariants.length, 15_744);
+  assert.equal(resolvedVariants.length, 12);
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "honda/n-one-e"));
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "toyota/land-cruiser-250"));
 });

@@ -47,8 +47,8 @@ async function readLegacyCollection(collection) {
 }
 
 function catalogBrands(source) {
-  const body = source.match(/const DROM_BRAND_NAMES = \[([\s\S]*?)\] as const;/)?.[1];
-  if (!body) throw new Error("DROM_BRAND_NAMES was not found in apps/web/lib/catalog/brands.ts");
+  const body = source.match(/const CATALOG_BRAND_NAMES = \[([\s\S]*?)\] as const;/)?.[1];
+  if (!body) throw new Error("CATALOG_BRAND_NAMES was not found in apps/web/lib/catalog/brands.ts");
   return [...body.matchAll(/"((?:\\.|[^"\\])*)"/g)].map((match) => JSON.parse(`"${match[1]}"`));
 }
 

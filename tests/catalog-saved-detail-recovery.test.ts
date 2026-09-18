@@ -213,11 +213,11 @@ test("known non-actionable power gaps do not create repeat detail traffic", () =
 
 test("the capability filter admits only approved UAE, Georgia, and Korea source identities", () => {
   const japan = baseOffer({
-    id: "drom-1",
-    sourceId: "drom_japan_stat",
+    id: "legacy-1",
+    sourceId: "retired_japan_source",
     sourceOfferId: "1",
     market: "japan",
-    operational: { sourceUrl: "https://www.drom.ru/world/japan/1" },
+    operational: { sourceUrl: "https://retired.example/world/japan/1" },
   });
   const unknown = baseOffer({ sourceId: "unapproved_uae", operational: { sourceUrl: "https://example.test/1" } });
   for (const offer of [japan, unknown]) {

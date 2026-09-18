@@ -31,13 +31,13 @@ test("brand logos never disappear and the public request path does not crawl a t
 
   assert.match(visual, /Логотип \$\{brand\} проверяется/);
   assert.match(visual, /const initials/);
-  assert.match(visual, /`\/brand-logos\/drom\/\$\{theme\}\/\$\{slug\}\.png`[\s\S]*`\/api\/catalog\/brand-logo/);
+  assert.match(visual, /`\/brand-logos\/local\/\$\{theme\}\/\$\{slug\}\.png`[\s\S]*`\/api\/catalog\/brand-logo/);
   assert.match(visual, /\(previous\?\.count \|\| 0\) \+ count/);
   assert.match(route, /LOGO_ROOTS/);
   assert.match(route, /params: Promise<\{ slug: string \}>/);
   assert.match(route, /const \{ slug \} = await params/);
   assert.doesNotMatch(route, /fetch\(/);
-  assert.doesNotMatch(route, /drom\.ru/);
+  assert.doesNotMatch(route, /retired\.example/);
 });
 
 test("every remaining live brand logo gap has local light and dark assets", () => {
@@ -50,7 +50,7 @@ test("every remaining live brand logo gap has local light and dark assets", () =
 
   for (const slug of slugs) {
     for (const theme of ["light", "dark"]) {
-      const asset = new URL(`../apps/web/public/brand-logos/drom/${theme}/${slug}.png`, import.meta.url);
+      const asset = new URL(`../apps/web/public/brand-logos/local/${theme}/${slug}.png`, import.meta.url);
       assert.ok(fs.statSync(asset).size > 1_000, `${theme}/${slug}.png must be a real local logo`);
     }
   }

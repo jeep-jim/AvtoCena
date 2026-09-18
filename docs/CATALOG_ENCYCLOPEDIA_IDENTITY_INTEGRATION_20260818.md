@@ -6,9 +6,6 @@ Date: 2026-08-18
 
 The live catalog currently has two independent identity systems:
 
-1. `apps/web/lib/catalog/brands.ts` maintains a Drom-derived brand list plus manual Korean/global aliases.
-2. `apps/web/lib/catalog/vehicle-knowledge.ts` reads legacy `data/catalog/vehicle-knowledge/**` and can rewrite `offer.make` / `offer.model` during catalog publication.
-
 `apps/web/lib/catalog/storage.ts` calls `enrichOfferWithVehicleKnowledge()` before publishing offers. Catalog facets then derive `makes` and `(make, model)` pairs directly from the stored projections. Therefore any unresolved or incorrectly normalized source spelling becomes a separate public filter entry and propagates into model suggestions/counts.
 
 The fast `brand-counts` path reads `catalog/public/brand-summary.json`, and that summary is keyed from the stored string `offer.make`. The filter UI itself is not a separate hardcoded source: `CatalogFilters.tsx` builds the visible make list from `facets.makes` plus the current selection. This means a canonical re-projection fixes the principal make list and counts in one place instead of requiring UI-specific deduplication.

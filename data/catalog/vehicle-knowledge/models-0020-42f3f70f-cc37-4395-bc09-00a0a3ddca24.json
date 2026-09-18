@@ -1042,86 +1042,6 @@
     "makeAliases": []
   },
   {
-    "id": "honda/hr-v",
-    "make": "Honda",
-    "model": "HR-V",
-    "aliases": [
-      "HRV",
-      "HR V",
-      "ХР-В",
-      "ХРВ"
-    ],
-    "bodyTypes": [
-      "suv"
-    ],
-    "countries": [
-      "ar",
-      "ca",
-      "de",
-      "es",
-      "fi",
-      "gb",
-      "ie",
-      "lu",
-      "my",
-      "nl",
-      "nz",
-      "th",
-      "ua",
-      "us"
-    ],
-    "regions": [
-      "as",
-      "eu",
-      "na",
-      "oc",
-      "sa"
-    ],
-    "popularityDecile": 1,
-    "source": "manual",
-    "sourceVersion": "2026.08.2",
-    "sourceUrl": "https://www.drom.ru/catalog/honda/hr-v/",
-    "updatedAt": "2026-08-06T05:42:16.523Z",
-    "active": true,
-    "makeAliases": [
-      "Хонда"
-    ],
-    "yearFrom": 2014,
-    "representativePowerHp": 141
-  },
-  {
-    "id": "honda/vezel",
-    "make": "Honda",
-    "model": "Vezel",
-    "aliases": [
-      "Везел",
-      "ヴェゼル"
-    ],
-    "bodyTypes": [
-      "hatchback",
-      "suv"
-    ],
-    "countries": [
-      "nz",
-      "ua"
-    ],
-    "regions": [
-      "eu",
-      "oc"
-    ],
-    "popularityDecile": 1,
-    "source": "manual",
-    "sourceVersion": "2026.08.2",
-    "sourceUrl": "https://www.drom.ru/catalog/honda/vezel/",
-    "updatedAt": "2026-08-06T05:42:16.523Z",
-    "active": true,
-    "makeAliases": [
-      "Хонда"
-    ],
-    "yearFrom": 2013,
-    "representativePowerHp": 131
-  },
-  {
     "id": "nissan/qashqai",
     "make": "Nissan",
     "model": "Qashqai",
@@ -3515,5 +3435,19 @@
     "updatedAt": "2026-08-06T04:48:47.893Z",
     "active": true,
     "makeAliases": []
+  },
+  {
+    "id": "honda/hr-v",
+    "make": "Honda",
+    "model": "HR-V",
+    "makeAliases": [],
+    "aliases": [
+      "HRV"
+    ],
+    "bodyTypes": [],
+    "source": "manual",
+    "sourceUrl": "https://www.eea.europa.eu/en/datahub/datahubitem-view/fa8b1229-3db6-495d-b18e-9c9b3267c02b",
+    "updatedAt": "2026-09-18T00:00:00.000Z",
+    "active": true
   }
 ]

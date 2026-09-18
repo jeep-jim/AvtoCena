@@ -5,7 +5,7 @@ import { WORKSPACE_ROOT, loadWorkspace, normalizeTerm, readJson, writeJson } fro
 
 const REPO_ROOT = path.resolve(WORKSPACE_ROOT, "../../..");
 const IMPORT_ROOT = path.join(REPO_ROOT, "data/catalog/imports");
-const RAW_LOGO_ROOT = path.join(REPO_ROOT, "apps/web/public/brand-logos/drom-source");
+const RAW_LOGO_ROOT = path.join(REPO_ROOT, "apps/web/public/brand-logos/archive");
 const OUTPUT = path.join(WORKSPACE_ROOT, "reports/brand-denominator-candidates.json");
 const RAW_SLUG_OVERRIDES = new Map([
   ["astonmartin", "aston-martin"],

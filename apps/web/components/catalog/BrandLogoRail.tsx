@@ -58,7 +58,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   }, []);
 
   const sources = [
-    `/brand-logos/drom/${theme}/${slug}.png`,
+    `/brand-logos/local/${theme}/${slug}.png`,
     `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
   ];
 

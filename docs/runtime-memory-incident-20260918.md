@@ -138,11 +138,3 @@ large objects are read and a cold sitemap test with no full projection read.
 
 
 ## Final verified state and owner approval
-
-- Deploy: https://github.com/jeep-jim/AvtoCena/actions/runs/35310956407 — success; exact health release `c58a58859bb6458a8f5bda706bcffd414d3db3fc`.
-- Refresh: https://github.com/jeep-jim/AvtoCena/actions/runs/35310956802 — 65,170 raw rows, all six markets agree with active manifest, zero mismatches.
-- Public parity: https://github.com/jeep-jim/AvtoCena/actions/runs/35311350625 — success, 12 list/detail quote pairs agree; homepage API TTFB 680 ms and 250 ms on repeat.
-- Residual slow pages: UAE `61b2923d227eddbdfe2ba616` 14,261 ms TTFB; Georgia `543aa634992e6a9a59d584dc` 18,525 ms. No attribution to storage/CBR/CPU without production trace correlation.
-- Owner explicitly approved the narrower operation described above after the automatic-review rejection. Do not re-request that permission, do not substitute the deployment account, and do not call the operation completed.
-- Supported browser discovery sees Chrome, but tab refresh times out after 20 seconds. No proof of IAM denial; do not ask for credentials or broad admin grants to solve a connection failure.
-- Preserve the active Japan run; successful completion now triggers current read-model refresh via #1026. Prepared rows and page progress do not establish publication or Drom replacement. See the newest roadmap entry for all continuation steps.

@@ -648,176 +648,6 @@
       "updatedAt": "2026-08-16"
     },
     {
-      "id": "honda/grace/drom-generation-1",
-      "modelId": "honda/grace",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-52d4805cc9ce6966"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2014-12",
-      "productionTo": "2020-07",
-      "bodyTypes": [
-        "Sedan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-52d4805cc9ce6966",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "honda/hr-v/drom-generation-2",
-      "modelId": "honda/hr-v",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-77e5575ff0e40340"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2014-11",
-      "productionTo": "2022-05",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-77e5575ff0e40340",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "honda/hr-v/drom-generation-3",
-      "modelId": "honda/hr-v",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-77e5575ff0e40340"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2022-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-77e5575ff0e40340",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "honda/hr-v/drom-generation-4",
-      "modelId": "honda/hr-v",
-      "name": "Fourth generation",
-      "aliases": [
-        {
-          "value": "4 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-77e5575ff0e40340"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2023-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-77e5575ff0e40340",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "honda/insight/eea-registration-observations-2020-2025",
       "modelId": "honda/insight",
       "name": "2020-2022 EEA registration observations",
@@ -845,92 +675,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "honda/jazz/drom-generation-2",
-      "modelId": "honda/jazz",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-aecd56a19d8caa48"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2011-04",
-      "productionTo": "2015-08",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-aecd56a19d8caa48",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "honda/jazz/drom-generation-3",
-      "modelId": "honda/jazz",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-aecd56a19d8caa48"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2015-09",
-      "productionTo": "2020-01",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-aecd56a19d8caa48",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -1594,49 +1338,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "hyundai/bayon/drom-generation-1",
-      "modelId": "hyundai/bayon",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-bab60cf53dc52023"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2021-03",
-      "productionTo": "2024-09",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-bab60cf53dc52023",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "hyundai/elantra/eea-registration-observations-2020-2025",
       "modelId": "hyundai/elantra",
       "name": "2020-2025 EEA registration observations",
@@ -1856,134 +1557,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hyundai/i10/drom-generation-3",
-      "modelId": "hyundai/i10",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-a580344f5e74066e"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2019-08",
-      "productionTo": null,
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-a580344f5e74066e",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hyundai/i20/drom-generation-2",
-      "modelId": "hyundai/i20",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-d6b7c79db5b0cace"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2018-06",
-      "productionTo": "2020-03",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-d6b7c79db5b0cace",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hyundai/i20/drom-generation-3",
-      "modelId": "hyundai/i20",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-d6b7c79db5b0cace"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2020-02",
-      "productionTo": "2024-05",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-d6b7c79db5b0cace",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -2443,49 +2016,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "hyundai/ix35/drom-generation-2",
-      "modelId": "hyundai/ix35",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-d26356bb52ea5a3c"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-04",
-      "productionTo": "2023-04",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-d26356bb52ea5a3c",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "hyundai/kauai/eea-registration-observations-2020-2025",
       "modelId": "hyundai/kauai",
       "name": "2020-2025 EEA registration observations",
@@ -2535,91 +2065,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hyundai/kona/drom-generation-1",
-      "modelId": "hyundai/kona",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-2f2365bc8b0015a7"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-06",
-      "productionTo": "2023-08",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-2f2365bc8b0015a7",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "hyundai/kona/drom-generation-2",
-      "modelId": "hyundai/kona",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-2f2365bc8b0015a7"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2022-12",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-2f2365bc8b0015a7",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -3520,49 +2965,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "isuzu/mu-x/drom-generation-3",
-      "modelId": "isuzu/mu-x",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-5d54e778f4ef2792"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2021-09",
-      "productionTo": "2023-07",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-5d54e778f4ef2792",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "jac-yiwei/3/current-china-2026",
       "modelId": "jac-yiwei/3",
       "name": "Current China specification",
@@ -3662,48 +3064,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jaguar/e-pace/drom-generation-1",
-      "modelId": "jaguar/e-pace",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-468a1a0ef517f5f4"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-07",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-468a1a0ef517f5f4",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -4026,49 +3386,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "jaguar/xf/drom-generation-2",
-      "modelId": "jaguar/xf",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-2e04b23257393734"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2015-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "Sedan",
-        "Station wagon"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-2e04b23257393734",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "jaguar/xj/eea-registration-observations-2020-2025",
       "modelId": "jaguar/xj",
       "name": "2020-2023 EEA registration observations",
@@ -4142,48 +3459,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "jeep/avenger/drom-generation-1",
-      "modelId": "jeep/avenger",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-a431e3978068c986"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2022-10",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-a431e3978068c986",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "jeep/cherokee-sport/eea-registration-observations-2020-2025",
       "modelId": "jeep/cherokee-sport",
       "name": "2022-2022 EEA registration observations",
@@ -4211,49 +3486,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jeep/cherokee/drom-generation-5",
-      "modelId": "jeep/cherokee",
-      "name": "Fifth generation",
-      "aliases": [
-        {
-          "value": "5 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-21651f366c29ae1e"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-12",
-      "productionTo": "2025-07",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-21651f366c29ae1e",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -4316,48 +3548,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jeep/compass/drom-generation-2",
-      "modelId": "jeep/compass",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-de721aaf966e52ec"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2016-09",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-de721aaf966e52ec",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -4590,49 +3780,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "jeep/renegade/drom-generation-1",
-      "modelId": "jeep/renegade",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-56ff3d939c055bd7"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2014-03",
-      "productionTo": "2023-09",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-56ff3d939c055bd7",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -5837,92 +4984,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "kia/optima/drom-generation-4",
-      "modelId": "kia/optima",
-      "name": "Fourth generation",
-      "aliases": [
-        {
-          "value": "4 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-384038231f14c1b7"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2018-07",
-      "productionTo": "2021-07",
-      "bodyTypes": [
-        "Sedan",
-        "Station wagon"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-384038231f14c1b7",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "kia/picanto/drom-generation-3",
-      "modelId": "kia/picanto",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-e82f9aeeb7a3e5f9"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-05",
-      "productionTo": null,
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-e82f9aeeb7a3e5f9",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "kia/pregio/eea-registration-observations-2020-2025",
       "modelId": "kia/pregio",
       "name": "2025-2025 EEA registration observations",
@@ -6080,49 +5141,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "kia/rio/drom-generation-4",
-      "modelId": "kia/rio",
-      "name": "Fourth generation",
-      "aliases": [
-        {
-          "value": "4 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-ce6e55e646af018b"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2016-11",
-      "productionTo": null,
-      "bodyTypes": [
-        "Hatchback",
-        "Sedan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-ce6e55e646af018b",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "kia/sedona/eea-registration-observations-2020-2025",
       "modelId": "kia/sedona",
       "name": "2020-2022 EEA registration observations",
@@ -6245,49 +5263,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "kia/soul/drom-generation-3",
-      "modelId": "kia/soul",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-b6382f050e09e424"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2018-11",
-      "productionTo": "2025-10",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-b6382f050e09e424",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -6416,48 +5391,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "kia/stonic/drom-generation-1",
-      "modelId": "kia/stonic",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-f064badccfb8dbc7"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-07",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-f064badccfb8dbc7",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
