@@ -1,7 +1,13 @@
 import { createHash } from 'node:crypto';
 export const retiredJapanSource = 'drom_japan_stat';
 export function hashRetirementRows(rows) {
-  return createHash('sha256').update(JSON.stringify([...rows].sort((a,b)=>a.id.localeCompare(b.id)))).digest('hex');
+  const hash = createHash('sha256').update('[');
+  let separator = '';
+  for (const row of [...rows].sort((a,b)=>a.id.localeCompare(b.id))) {
+    hash.update(separator).update(JSON.stringify(row));
+    separator = ',';
+  }
+  return hash.update(']').digest('hex');
 }
 export function planJapanDromRetirement(rows) {
   if(rows.some(r=>r.market!=='japan'))throw Error('retirement_requires_japan_only');
