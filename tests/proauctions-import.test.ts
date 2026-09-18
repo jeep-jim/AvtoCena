@@ -82,3 +82,11 @@ test('listing transport and access failures preserve a publishable checkpoint',(
  const access=Object.assign(new Error('access_403'),{access:true});
  assert.equal(proAuctionsCollectionStopReason(access),'source_access_refused');
 });
+test('sheet follows all car photos and never satisfies the two car photo gate',()=>{
+ const {e,identity,witness,photos}=fixture();
+ e.auctionSheetUrls=['https://jp2.pa-server.ru/auc_auto/2026_09_16/123/sheet.webp'];
+ const sheet={...photos[0],url:e.auctionSheetUrls[0],decodedSha256:'f'.repeat(64)};
+ const offer=proAuctionsOffer(e,identity,witness,[sheet,...photos],'b'.repeat(64),now)!;
+ assert.deepEqual(offer.images.map(p=>p.url),[...e.imageUrls,sheet.url]);
+ assert.equal(proAuctionsOffer(e,identity,witness,[photos[0],sheet],'b'.repeat(64),now),null);
+});

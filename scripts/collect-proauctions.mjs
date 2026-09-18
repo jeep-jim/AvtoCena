@@ -64,7 +64,7 @@ async function detail(url,cached=false){
     else if(Date.now()-date>30*86400000 || date>Date.now())record.reason='auction_outside_retention';
     else{
       const photos=[];
-      for(const imageUrl of e.imageUrls.slice(0,30)){
+      for(const imageUrl of [...e.imageUrls.slice(0,30),...e.auctionSheetUrls]){
         try{const bytes=await get(imageUrl,12000000);const decoded=await sharp(bytes,{limitInputPixels:40000000}).rotate().raw().toBuffer({resolveWithObject:true});
           photos.push({url:imageUrl,decodedSha256:sha(decoded.data),width:decoded.info.width,height:decoded.info.height,size:bytes.length,mimeType:'image/webp'});
         }catch(error){record.imageErrors=[...(record.imageErrors||[]),{url:imageUrl,error:String(error)}];if(error.access)break;}
