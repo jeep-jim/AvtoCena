@@ -164,14 +164,25 @@ export function isLikelyVehicleImage(image: CatalogImageLike) {
     && hasImageEvidence(image) && catalogImageScore(image) >= 0;
 }
 
+/** Published ProAuctions sheets use the same lot directory and the _1 image slot.
+ * Only decoded images already attached to this offer are eligible; never construct URLs.
+ */
+function isPublishedAuctionSheet(offer: any, image: CatalogImageLike) {
+  if (offer?.market !== "japan" || offer?.sourceId !== "proauctions_japan_stat") return false;
+  const match = text(image.url).match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^/?#]+_1\.(?:webp|jpe?g|png)$/i);
+  if (!match || !/^[a-f0-9]{64}$/.test(text(image.checksum)) || finite(image.width) < 100 || finite(image.height) < 100) return false;
+  return offer.images.some((other: CatalogImageLike) => other !== image
+    && text(other.url).includes(match[1]) && isLikelyVehicleImage(other));
+}
+
 export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
   const candidates = images
     .map((image, index) => ({
-      image, index, url: stablePublicImageUrl(image), key: catalogImageDedupKey(image), score: catalogImageScore(image),
+      sheet: isPublishedAuctionSheet(offer, image), image, index, url: stablePublicImageUrl(image), key: catalogImageDedupKey(image), score: catalogImageScore(image),
       sourceUrl: text(image.url),
     }))
-    .filter((candidate) => candidate.url && isLikelyVehicleImage(candidate.image));
+    .filter((candidate) => candidate.url && (candidate.sheet || isLikelyVehicleImage(candidate.image)));
 
   // AutoHome legacy public rows can contain one 900px image followed by 240px
   // thumbnails even when a full-size exact gallery exists upstream. Do not render
@@ -208,13 +219,14 @@ export function rankedCatalogImageUrls(offer: any) {
     }
   };
   for (const group of [...groups.values()].sort((a, b) =>
-    Number(isAleadoAuctionSheet(a)) - Number(isAleadoAuctionSheet(b))
+    Number(a.best.sheet || isAleadoAuctionSheet(a)) - Number(b.best.sheet || isAleadoAuctionSheet(b))
       || a.firstIndex - b.firstIndex)) {
+    if (result.length >= 30 && !group.best.sheet) continue;
     const renderedUrl = canonicalUrl(group.best.url);
     if (renderedUrl && seenUrls.has(renderedUrl)) continue;
     if (renderedUrl) seenUrls.add(renderedUrl);
     result.push(group.best.url);
-    if (result.length >= 30) break;
+
   }
   return result;
 }

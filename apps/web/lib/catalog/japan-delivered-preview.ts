@@ -1,3 +1,4 @@
+import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { unstable_cache } from "next/cache";
 import { getOfferForPage } from "./offer-page-data";
 import { japanPreviewParameters } from "./japan-preview-parameters";
@@ -11,8 +12,8 @@ const preview = unstable_cache(async (id: string, _revision: string) => {
   try { parameters = japanPreviewParameters(offer); } catch { return null; }
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
-    ? { totalRub: result.calculation.totalRub, engineCc: parameters.engineCc, estimated: true } : null;
-}, ["japan-delivered-preview-v1"], { revalidate: 60 });
+    ? { totalRub: result.calculation.totalRub, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
+}, ["japan-delivered-preview-v2"], { revalidate: 60 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];
@@ -25,7 +26,7 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
       if (offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
       try {
         const quote = await preview(offer.id, JSON.stringify([offer.updatedAt, offer.sourcePrice, configuration, new Date().toISOString().slice(0, 10)]));
-        if (quote) result[index] = { ...offer, japanDeliveredPreview: quote };
+        if (quote) result[index] = { ...offer, japanExportRestriction: quote.japanExportRestriction, japanDeliveredPreview: quote };
       } catch { /* A failed estimate preserves the explicitly labelled source price. */ }
     }
   }));

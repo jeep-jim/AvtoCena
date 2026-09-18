@@ -1,9 +1,10 @@
+import { proAuctionsReportedVolume } from "./proauctions-source-parameters";
 import type { VehicleOffer } from "./types";
 import { classifySpecificationEvidence } from "./specification-evidence-audit";
 
 export const JAPAN_EXPORT_RULE_URL = "https://www.meti.go.jp/press/2023/07/20230728001/20230728001.html";
 export type JapanExportRestriction = {
-  status: "restricted";
+  status: "restricted" | "needs_review";
   reason: "engine_over_1900cc" | "hybrid" | "electric";
   ruleUrl: string;
   ruleVersion: "jp-2023-08-09";
@@ -33,11 +34,16 @@ export function assessJapanExportRestriction(offer: Partial<VehicleOffer>): Japa
   else if (["petrol", "gasoline", "benzin", "diesel"].includes(String(offer.fuel).toLowerCase())
     && classifySpecificationEvidence(offer, "engineCc").state === "exact"
     && Number(offer.engineCc) > 1900) reason = "engine_over_1900cc";
+  if (!reason && Number(proAuctionsReportedVolume(offer as VehicleOffer)) > 1900) {
+    return { status: "needs_review", reason: "engine_over_1900cc", ruleUrl: JAPAN_EXPORT_RULE_URL, ruleVersion: "jp-2023-08-09" };
+  }
   return reason ? { status: "restricted", reason, ruleUrl: JAPAN_EXPORT_RULE_URL, ruleVersion: "jp-2023-08-09" } : undefined;
 }
 
 export function japanRestrictionDescription(restriction?: JapanExportRestriction) {
-  if (restriction?.status !== "restricted" || restriction.ruleVersion !== "jp-2023-08-09") return "";
+  if (!restriction || restriction.ruleVersion !== "jp-2023-08-09") return "";
+  if (restriction.status === "needs_review") return "В аукционе указан объём свыше 1 900 см³. Возможны экспортные ограничения: точный объём и допустимость поставки требуют проверки.";
+  if (restriction.status !== "restricted") return "";
   const reasons = { engine_over_1900cc: "ДВС свыше 1 900 см³", hybrid: "гибридная силовая установка", electric: "электромобиль" };
   if (!Object.prototype.hasOwnProperty.call(reasons, restriction.reason)) return "";
   return reasons[restriction.reason] ? `Ограничение экспорта из Японии в РФ: ${reasons[restriction.reason]}.` : "";
