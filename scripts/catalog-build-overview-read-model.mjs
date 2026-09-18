@@ -1,5 +1,5 @@
 const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts");
-const { readCatalogFacets, searchOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { readCatalogFacets, searchOffers, readCurrentCatalogProjectionSnapshot } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_OVERVIEW_PATH, buildCatalogOverviewPayload } = await import("../apps/web/lib/catalog/overview.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -29,12 +29,24 @@ if (facets.generationId !== generationBefore) {
   throw new Error(`catalog_overview_facets_stale:${generationBefore}:${facets.generationId}`);
 }
 
+const [sourceManifest, sourceProjection] = await Promise.all([
+  readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
+  readCurrentCatalogProjectionSnapshot(),
+]);
+if (sourceManifest.generationId !== generationBefore || sourceProjection.generationId !== generationBefore) {
+  throw new Error("catalog_overview_source_generation_mismatch");
+}
+const sourceCounts = new Map();
+for (const row of sourceProjection.items) sourceCounts.set(row.market, (sourceCounts.get(row.market) || 0) + 1);
 const markets = {};
 for (const [market, result] of marketEntries) {
   if (String(result?.generationId || "") !== generationBefore) {
     throw new Error(`catalog_overview_market_stale:${market}:${generationBefore}:${String(result?.generationId || "")}`);
   }
+  const sourceTotal = Number(sourceManifest.markets?.[market]?.count || 0);
+  if ((sourceCounts.get(market) || 0) !== sourceTotal) throw new Error(`catalog_overview_source_count_mismatch:${market}`);
   markets[market] = {
+    sourceTotal,
     total: Number(result?.total || 0),
     items: Array.isArray(result?.items) ? result.items : [],
   };

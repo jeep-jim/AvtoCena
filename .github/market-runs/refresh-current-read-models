@@ -5,3 +5,4 @@
 2026-09-16: retain Japan historical service cost basis for owner-authorized bundle correction; no source collection.
 
 2026-09-18: repair confirmed projection/manifest mismatch under the shared object-storage publication lock; rebuild only derived read models for the active generation.
+2026-09-18: publish compact sitemap fields and verified pre-filter counts for the homepage fast path.

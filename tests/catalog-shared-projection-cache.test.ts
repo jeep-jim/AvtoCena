@@ -14,6 +14,7 @@ test('a market detail fallback reuses the full projection and still checks cutov
     reads.push(key);
     let value: unknown;
     if (key === 'catalog/manifest.json') value = {generationId: manifestGeneration, markets: {}};
+    else if (key === 'catalog/public/sitemap-projection.json') value = null;
     else if (key === 'catalog/public/projection/all.json') value = {generationId: 'one', items: [row]};
     else if (key === 'catalog/public/projection/japan.json') value = {generationId: manifestGeneration, items: [row]};
     else assert.fail(`unexpected storage read: ${key}`);

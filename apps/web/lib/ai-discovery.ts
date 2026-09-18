@@ -4,6 +4,7 @@ import type { CatalogSearchProjection } from "./catalog/storage";
 import { DetailReadCache } from './catalog/detail-read-cache';
 
 export const AVTOCENA_PUBLIC_ORIGIN = "https://avtocena.com";
+export const AI_SITEMAP_PROJECTION_PATH = "catalog/public/sitemap-projection.json";
 export const AI_CATALOG_PROJECTION_PATH = "catalog/public/projection/all.json";
 export const AI_PRODUCT_FEED_PATH = "catalog/public/feeds/openai-products.csv.gz";
 export const AI_PRODUCT_FEED_METADATA_PATH = "catalog/public/feeds/openai-products.json";
@@ -53,7 +54,7 @@ export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
   });
 }
 
-type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl'>> };
+export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl'>> };
 const sitemapProjectionCache = new DetailReadCache<AiSitemapProjection>({
   maxEntries: 1, maxBytes: 32 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
@@ -63,21 +64,27 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
   const manifest = await backend.readJson('catalog/manifest.json', { generationId: '' });
   if (!manifest.generationId) return null;
   const projection = await sitemapProjectionCache.get(manifest.generationId, async () => {
+    const compact = await backend.readJson<AiSitemapProjection | null>(AI_SITEMAP_PROJECTION_PATH, null);
+    if (compact?.generationId === manifest.generationId && Array.isArray(compact.items)) return compact;
     const full = storage
       ? await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] })
       : await (await import('./catalog/storage')).readCurrentCatalogProjectionSnapshot();
     // Do not retain a previous generation under the new generation's cache key.
     if (full.generationId !== manifest.generationId) throw new Error('ai_sitemap_generation_changed');
-    return {
-      generationId: full.generationId,
-      items: (full.items || []).filter(item => item?.id && item?.make && item?.model && item?.year)
-        .map(({id, updatedAt, cardImageUrl}) => ({id, updatedAt, cardImageUrl})),
-    };
+    return buildAiSitemapProjection(full);
   }).catch(error => {
     if (error instanceof Error && error.message === 'ai_sitemap_generation_changed') return null;
     throw error;
   });
   return projection;
+}
+
+export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSitemapProjection {
+  return {
+    generationId: projection.generationId,
+    items: (projection.items || []).filter(item => item?.id && item?.make && item?.model && item?.year)
+      .map(({id, updatedAt, cardImageUrl}) => ({id, updatedAt, cardImageUrl})),
+  };
 }
 
 export function aiCatalogManifestCount(manifest: AiCatalogManifest) {
@@ -176,6 +183,7 @@ export async function publishAiProductFeed(projection: AiCatalogProjection): Pro
     format: "google-compatible-csv-gzip",
   };
   await storage.writeJson(AI_PRODUCT_FEED_METADATA_PATH, metadata);
+  await storage.writeJson(AI_SITEMAP_PROJECTION_PATH, buildAiSitemapProjection(projection));
   return metadata;
 }
 
