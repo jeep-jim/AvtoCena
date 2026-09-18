@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {planJapanDromRetirement,assertExactRetirementPreservation,hashRetirementRows,retiredJapanSource} from './lib/japan-drom-retirement.mjs';
-const {readManifest,readMarketOffers,persistCatalogOffers}=await import('../apps/web/lib/catalog/storage.ts');
-const {mutateDataJson}=await import('../apps/web/lib/data.ts');
+const {readMarketOffers,persistCatalogOffers}=await import('../apps/web/lib/catalog/storage.ts');
+const {mutateDataJson,readDataJson}=await import('../apps/web/lib/data.ts');
 const {PUBLIC_CATALOG_MARKETS}=await import('../apps/web/lib/catalog/runtime-config.ts');
 const {assertNoDeliveredPriceRegression}=await import('../apps/web/lib/catalog/publication-price-preservation.ts');
 const {japanAuctionSoldPriceVerified,japanAuctionSoldIdentityVerified}=await import('../apps/web/lib/catalog/public-priority.ts');
@@ -16,7 +16,8 @@ await mutateDataJson(lockPath,{lockedUntil:''},current=>{
  return {operationId,operationType:'japan_retire_drom',startedAt:new Date().toISOString(),lockedUntil:new Date(Date.now()+45*60000).toISOString()};
 });
 try {
- const previous=await readManifest();
+ const previous=await readDataJson('catalog/manifest.json',null);
+ if(!previous?.generationId)throw Error('retirement_manifest_missing');
  if(previous.generationId!==config.expectedGeneration)throw Error(`retirement_generation_changed:${previous.generationId}`);
  const all=[];const preserved={};const beforeCounts={};
  for(const market of PUBLIC_CATALOG_MARKETS){
