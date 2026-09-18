@@ -21,10 +21,10 @@ test('Drom price is JPY sold price, one lot photograph, no invented technical in
   assert.throws(()=>dromDetail(change==='sold'?html(f).replace('Продан за','Стартовая цена'):html(f),f.sourceUrl));
  }
 });
-test('Drom missing specs survive seller-only preparation and canonical publication with one photograph',async()=>{
+test('retired Drom cannot reenter seller preparation or canonical publication',async()=>{
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();
  const today=new Date().toISOString();
  const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,JPY:{cbrRate:60,nominal:100,rateDate:today,rateSource:'cbr'}}:{}}));
- try{const o=await prepareSellerInventory(dromDetail(html(),fixture.sourceUrl));assert.ok(o);assert.equal(o.sellerPriceRub,184800);assert.equal(o.totalRub,null);const preview=await previewCanonicalPublicCatalogOffers([o]);assert.equal(preview.offers.length,1,JSON.stringify(preview.qualityRejected));const p=searchProjectionFromOffer(preview.offers[0]);assert.equal(projectionCanRenderCard(p),true);}
+ try{const raw=dromDetail(html(),fixture.sourceUrl);const o=await prepareSellerInventory(raw);assert.equal(o,null);const preview=await previewCanonicalPublicCatalogOffers([raw]);assert.equal(preview.offers.length,0);assert.equal(projectionCanRenderCard(searchProjectionFromOffer(raw)),false);}
  finally{read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
