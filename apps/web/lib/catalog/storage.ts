@@ -4,6 +4,7 @@ import { readCatalogOverview } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
+import { DetailReadCache } from "./detail-read-cache";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { safePublicPricing } from "./safe-public-pricing";
 import { confirmedSourceWithdrawalById, isConfirmedSourceWithdrawn } from './confirmed-source-withdrawals';
@@ -503,7 +504,10 @@ const currentProjectionCache = new Map<string, { expiresAt: number; promise: Pro
 const currentBrandProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
-const currentOfferShardCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string } & DetailShard<VehicleOffer>> }>();
+const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
+  maxEntries: 8, maxBytes: 32 * 1024 * 1024,
+  ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
+});
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
 let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<string, OfferLocation> }> | null = null;
@@ -569,18 +573,8 @@ async function readCurrentBrandSummary() {
   return promise;
 }
 async function readDetailShardObject(key: string, file: string) {
-  const now = Date.now();
-  const current = currentOfferShardCache.get(key);
-  if (current && current.expiresAt > now) return current.promise;
-  const promise = readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(file, { generationId: "", items: [] })
-    .catch((error) => { currentOfferShardCache.delete(key); throw error; });
-  currentOfferShardCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });
-  while (currentOfferShardCache.size > 64) {
-    const oldest = currentOfferShardCache.keys().next().value as string | undefined;
-    if (!oldest || oldest === key) break;
-    currentOfferShardCache.delete(oldest);
-  }
-  return promise;
+  return currentOfferShardCache.get(key, () =>
+    readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(file, { generationId: "", items: [] }));
 }
 async function readCurrentOfferShard(id: string) {
   const hash=detailHash(id);
