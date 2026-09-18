@@ -580,6 +580,11 @@ async function readCurrentBrandProjection(make: string) {
   return currentBrandProjectionCache.get(key, () =>
     readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(key, { generationId: "", items: [] }));
 }
+// Discovery readers share the same full snapshot as catalog searches. They
+// validate generation themselves and retain only their small output fields.
+export function readCurrentCatalogProjectionSnapshot() {
+  return readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
+}
 async function readCurrentFacets() {
   const now = Date.now();
   if (currentFacetsCache && currentFacetsCache.expiresAt > now) return currentFacetsCache.promise;

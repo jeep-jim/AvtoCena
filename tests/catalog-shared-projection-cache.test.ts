@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getJsonStorage } from '../apps/web/lib/data';
+import { readAiSitemapProjection } from '../apps/web/lib/ai-discovery';
 import { getOfferFromCurrentProjection, resetCatalogReadCachesForTests } from '../apps/web/lib/catalog/storage';
 
 test('a market detail fallback reuses the full projection and still checks cutover generation', async () => {
@@ -22,6 +23,7 @@ test('a market detail fallback reuses the full projection and still checks cutov
     resetCatalogReadCachesForTests();
     await getOfferFromCurrentProjection('unknown'); // warm all-market snapshot
     assert.equal((await getOfferFromCurrentProjection(id))?.id, id);
+    assert.equal((await readAiSitemapProjection())?.items[0].id, id);
     assert.equal(reads.filter(key => key.endsWith('/japan.json')).length, 0);
     assert.equal(reads.filter(key => key.endsWith('/all.json')).length, 1);
     manifestGeneration = 'two'; resetCatalogReadCachesForTests(); reads.length = 0;

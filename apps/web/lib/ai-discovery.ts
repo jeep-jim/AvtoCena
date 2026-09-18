@@ -58,11 +58,14 @@ const sitemapProjectionCache = new DetailReadCache<AiSitemapProjection>({
   maxEntries: 1, maxBytes: 32 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
 
-export async function readAiSitemapProjection(storage: JsonStorage = getJsonStorage()): Promise<AiSitemapProjection | null> {
-  const manifest = await storage.readJson('catalog/manifest.json', { generationId: '' });
+export async function readAiSitemapProjection(storage?: JsonStorage): Promise<AiSitemapProjection | null> {
+  const backend = storage || getJsonStorage();
+  const manifest = await backend.readJson('catalog/manifest.json', { generationId: '' });
   if (!manifest.generationId) return null;
   const projection = await sitemapProjectionCache.get(manifest.generationId, async () => {
-    const full = await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] });
+    const full = storage
+      ? await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] })
+      : await (await import('./catalog/storage')).readCurrentCatalogProjectionSnapshot();
     // Do not retain a previous generation under the new generation's cache key.
     if (full.generationId !== manifest.generationId) throw new Error('ai_sitemap_generation_changed');
     return {
