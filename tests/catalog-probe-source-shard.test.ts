@@ -85,8 +85,8 @@ test("GitHub collection keeps Dubizzle mandatory and uses the production egress 
   assert.match(yandexBridge, /yandex_bridge_http_\$\{response\.status\}_\$\{kind\}_\$\{page\}/);
 });
 
-test("Japan generic rollout excludes retired Drom", () => {
-  assert.doesNotMatch(requiredSources, /sourceId: "drom_japan_stat"/);
+test("Japan generic rollout excludes retired retired provider", () => {
+  assert.doesNotMatch(requiredSources, /sourceId: "retired_japan_source"/);
   for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
     assert.doesNotMatch(requiredSources, new RegExp(sourceId));
   }
@@ -181,7 +181,7 @@ test("Catalog V2 audits the existing encyclopedia instead of rebuilding it for t
   assert.match(knowledgeBlock, /catalog-audit-vehicle-knowledge\.mjs/);
   assert.match(knowledgeBlock, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
   assert.doesNotMatch(knowledgeBlock, /catalog-sync-vehicle-models\.mjs/);
-  assert.doesNotMatch(knowledgeBlock, /catalog-enrich-drom-vehicle-variants\.mjs/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-enrich-legacy-vehicle-variants\.mjs/);
   assert.doesNotMatch(knowledgeBlock, /catalog-build-vehicle-variants\.mjs/);
   assert.doesNotMatch(knowledgeBlock, /catalog-build-power-knowledge\.mjs/);
   assert.match(collectBlock, /needs: \[validate, knowledge\]/);

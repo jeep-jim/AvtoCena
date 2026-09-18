@@ -26,7 +26,7 @@ test("brand directory keeps the encyclopedia corpus even without live offers", (
 });
 
 test("a brand alias cannot make unrelated catalog makes match", () => {
-  const emc = { name: "EMC", slug: "emc", dromSlug: "emc", aliases: ["EMC Auto"] };
+  const emc = { name: "EMC", slug: "emc", aliasSlug: "emc", aliases: ["EMC Auto"] };
   assert.equal(catalogBrandMatches(emc, "EMC"), true);
   assert.equal(catalogBrandMatches(emc, "EMC Auto"), true);
   assert.equal(catalogBrandMatches(emc, "Audi"), false);

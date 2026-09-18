@@ -57,8 +57,8 @@ test("exact and variant-bound horsepower remains eligible for customs", () => {
     powerHp: 155,
     powerKw: 114,
     powerDataConfidence: "reference",
-    powerDataSource: "vehicle-knowledge:drom_557278549f95be08442f2b86",
+    powerDataSource: "vehicle-knowledge:legacy_557278549f95be08442f2b86",
   }));
   assert.equal(variant.powerHp, 155);
-  assert.equal(variant.powerDataSource, "vehicle-knowledge:drom_557278549f95be08442f2b86");
+  assert.equal(variant.powerDataSource, "vehicle-knowledge:legacy_557278549f95be08442f2b86");
 });

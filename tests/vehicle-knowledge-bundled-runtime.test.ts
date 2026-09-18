@@ -10,8 +10,8 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
   const bridgeModels = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/v2-bridge-models.json", "utf8"));
   const bridgeVariantIndex = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/v2-bridge-variants-index.json", "utf8"));
 
-  assert.equal(modelIndex.total, 4_899, "production model denominator must not be replaced by V2");
-  assert.equal(variantIndex.total, 15_735, "production variant denominator must not be replaced by V2");
+  assert.equal(modelIndex.total, 4_898, "production model denominator must not be replaced by V2");
+  assert.equal(variantIndex.total, 3, "only independently sourced legacy variants remain after source retirement");
   assert.equal(bridgeVariantIndex.total, 9, "calculator bridge must contain only zero-regression new-model variants");
 
   const models = await readBundledChunkedDataJson<any>("catalog/vehicle-knowledge/models.json", []);
@@ -28,8 +28,8 @@ test("bundled vehicle knowledge preserves production and adds only gated V2 runt
   resetVehicleKnowledgeCache();
   const resolvedModels = await readVehicleKnowledgeModels();
   const resolvedVariants = await readVehicleKnowledgeVariants();
-  assert.equal(resolvedModels.length, 4_905);
-  assert.equal(resolvedVariants.length, 15_744);
+  assert.equal(resolvedModels.length, 4_904);
+  assert.equal(resolvedVariants.length, 12);
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "honda/n-one-e"));
   assert.ok(resolvedVariants.some((row: any) => row.modelId === "toyota/land-cruiser-250"));
 });

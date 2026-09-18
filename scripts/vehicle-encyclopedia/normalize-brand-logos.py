@@ -20,7 +20,7 @@ from PIL import Image
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent.parent
 WORKSPACE_ROOT = REPO_ROOT / "data" / "catalog" / "vehicle-encyclopedia-v2"
-DEFAULT_SOURCE_ROOT = REPO_ROOT / "apps" / "web" / "public" / "brand-logos" / "drom"
+DEFAULT_SOURCE_ROOT = REPO_ROOT / "apps" / "web" / "public" / "brand-logos" / "local"
 DEFAULT_SOURCE_MANIFEST = DEFAULT_SOURCE_ROOT / "manifest.json"
 DEFAULT_OUTPUT_ROOT = WORKSPACE_ROOT / "assets" / "brand-logos"
 DEFAULT_REPORT = WORKSPACE_ROOT / "reports" / "brand-logo-assets.json"

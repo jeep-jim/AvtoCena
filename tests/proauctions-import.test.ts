@@ -67,11 +67,9 @@ test('owner example kei van is not rejected by Cargo substring; other commercial
  assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),true);
 });
 
-test('ProAuctions import preserves Drom photo contract without admitting one-photo fresh lots',()=>{
+test('ProAuctions import requires two car photos for fresh lots',()=>{
  const {e,identity,witness,photos}=fixture();
  const offer=proAuctionsOffer(e,identity,witness,photos,'b'.repeat(64),now)!;
- assert.equal(minimumPublicationImages({...offer,sourceId:'drom_japan_stat'},2,true),1);
- assert.equal(minimumPublicationImages({...offer,sourceId:'drom_japan_stat'},2,false),2);
  assert.equal(minimumPublicationImages(offer,2,false),2);
  assert.equal(minimumPublicationImages(offer,2,true),2);
  assert.equal(proAuctionsOffer(e,identity,witness,photos.slice(0,1),'b'.repeat(64),now),null);

@@ -20,7 +20,7 @@ test('Autohome never fills an empty China market or more than ten percent of fin
 });
 test('old or used retained Autohome cannot consume the allowance; other markets stay unchanged', () => {
   const others=Array.from({length:9},(_,i)=>row('o'+i));
-  const foreign=[row('k','encar_direct',{market:'korea'}),row('j','drom_japan_stat',{market:'japan',year:2010})];
+  const foreign=[row('k','encar_direct',{market:'korea'}),row('j','retired_japan_source',{market:'japan',year:2010})];
   const result=selectChinaSourceShare([auto('old',{year:2025}),auto('used',{mileageKm:10}),...foreign,...others,auto('new')]);
   assert.deepEqual(result.removed.map(r=>r.id),['old','used']);
   assert.deepEqual(result.rows.slice(0,2),foreign);
@@ -38,7 +38,7 @@ test('power removals cannot make Autohome exceed ten percent afterwards', () => 
   assert.deepEqual(selectCatalogPublicationMix(result.rows,true).rows,result.rows);
 });
 test('both public policies hold with seller unknowns, several sources and Japan', () => {
-  const japan=row('j','drom_japan_stat',{market:'japan',powerHp:400});
+  const japan=row('j','retired_japan_source',{market:'japan',powerHp:400});
   const rows=[japan,...Array.from({length:30},(_,i)=>row('s'+i)),
     ...Array.from({length:8},(_,i)=>row('l'+i,'dongchedi_china_open',{powerHp:150})),
     ...Array.from({length:5},(_,i)=>row('h'+i,'guazi_china_open',{powerHp:300})),

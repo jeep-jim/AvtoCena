@@ -40,9 +40,9 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "autohome_used_china_open", label: "Che168 Global", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
-  // Owner decision 2026-09-18: Drom retired. Japan is collected by the
+  // Owner decision 2026-09-18: Legacy source retired. Japan is collected by the
   // standalone ProAuctions workflow, using APPROVED_SAVED_CATALOG_SOURCES.
-  // No legacy generic Japan adapter may collect or restore Drom inventory.
+  // No legacy generic Japan adapter may collect or restore legacy inventory.
   japan: [],
 };
 

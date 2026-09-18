@@ -14,7 +14,7 @@ export type VehicleKnowledgeModel = {
   yearFrom?: number;
   yearTo?: number;
   representativePowerHp?: number;
-  source: "vehiclesdb" | "drom" | "manufacturer" | "manual";
+  source: "vehiclesdb" | "manufacturer" | "manual";
   sourceVersion?: string;
   sourceUrl?: string;
   updatedAt: string;
@@ -46,7 +46,7 @@ export type VehicleKnowledgeVariant = {
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
   utilizationPowerKw?: number;
-  sourceType: "manufacturer" | "official_registry" | "drom_catalog" | "source_consensus" | "manual";
+  sourceType: "manufacturer" | "official_registry" | "source_consensus" | "manual";
   sourceIds?: string[];
   sourceUrl?: string;
   verifiedAt: string;
@@ -320,7 +320,7 @@ function variantScore(variant: VehicleKnowledgeVariant, offer: Partial<VehicleOf
   const candidateGeneration = vehicleKnowledgeCompact(variant.generation);
   const offerGeneration = vehicleKnowledgeCompact(offer.generation);
   if (candidateGeneration) {
-    // Legacy Drom rows often have no production years and contain hundreds of
+    // Legacy reference rows often have no production years and contain hundreds of
     // mutually incompatible generations under one model. They may participate
     // only when the offer proves the generation (or has an explicit trim rule),
     // never merely because make/model/engine happen to overlap.

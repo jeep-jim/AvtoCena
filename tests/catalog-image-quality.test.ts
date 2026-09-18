@@ -186,11 +186,11 @@ test("rejects Goo-net dealer-gallery fallback when no exact listing identity exi
   ], 3), []);
 });
 
-test("rejects retired Drom projections even with a ranked cover", () => {
+test("rejects retired retired provider projections even with a ranked cover", () => {
   const japanProjection = {
     ...rawOffer,
     id: "japan-projection-card",
-    sourceId: "drom_japan_stat",
+    sourceId: "retired_japan_source",
     sourceOfferId: "8504718",
     sourceTitle: undefined,
     market: "japan",
@@ -200,7 +200,7 @@ test("rejects retired Drom projections even with a ranked cover", () => {
     sourceCurrency: "JPY",
     images: rawOffer.images.slice(0, 1),
     cardProjectionVersion: 1,
-    operational: { sourceUrl: "https://www.drom.ru/world/japan/honda/fit/8504718/", photoIdentityVerified: true },
+    operational: { sourceUrl: "https://retired.example/world/japan/honda/fit/8504718/", photoIdentityVerified: true },
   };
   assert.equal(isCrediblePublicOffer(japanProjection as any), false);
   assert.equal(isCrediblePublicOffer({ ...japanProjection, sourceId: undefined } as any), false);
@@ -239,7 +239,7 @@ test("business liquidity remains a ranking signal but does not override Japan's 
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",
-    powerDataSource: "vehicle-knowledge:drom_variant_220hp",
+    powerDataSource: "vehicle-knowledge:legacy_variant_220hp",
   } as any), false);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,

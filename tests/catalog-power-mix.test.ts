@@ -18,7 +18,7 @@ test("unknown power uses the 20 percent allowance and each market is independent
  assert.equal(catalogPowerBand({...row("hev",100),powertrainKind:"other_hybrid",utilizationPowerKw:150}),"high");
 });
 test("Japan is exempt at every horsepower, including unknown power",()=>{
- const result=selectCatalogPowerMix([row("drom",undefined,"japan"),row("j-low",100,"japan"),row("j-high",500,"japan")]);
+ const result=selectCatalogPowerMix([row("legacy",undefined,"japan"),row("j-low",100,"japan"),row("j-high",500,"japan")]);
  assert.equal(result.rows.length,3);assert.equal((result.report.japan as any).exempt,true);
  assert.throws(()=>selectCatalogPowerMix([row("high",300)]),/no_qualified_low_power/);
 });

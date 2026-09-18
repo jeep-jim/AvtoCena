@@ -1,15 +1,16 @@
-name: Japan verified Drom retirement
+name: Publish recovered Japan details
 on:
   push:
     branches: [main]
-    paths: ['.github/market-runs/japan-retire-drom.json']
+    paths: ['.github/market-runs/proauctions-detail-patches.json']
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: catalog-six-market-quality-rebuild
   cancel-in-progress: false
 jobs:
-  retire:
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
@@ -42,10 +43,14 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
       - run: npm ci
-      - name: Test exact removal and preserved price guards
-        run: node --import tsx --test tests/japan-drom-retirement.test.ts tests/catalog-inventory-regression.test.ts
-      - name: Audit all replacement lots and remove only Drom under shared lock
-        run: node --import tsx scripts/catalog-retire-japan-drom.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: proauctions-detail-patches
+          path: proauctions-detail-patches
+          run-id: 35321658779
+          github-token: ${{ github.token }}
+      - name: Preserve source power and append verified sheets under shared lock
+        run: node --import tsx scripts/publish-proauctions-detail-patches.mjs
       - name: Verify all read models, prices and sampled Japan details
         run: |
           node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs
@@ -54,9 +59,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-drom-retirement
+          name: japan-detail-recovery
           path: |
-            japan-drom-retirement.json
+            japan-detail-recovery-report.json
             catalog-current-readmodel-parity.json
             catalog-visible-calculation-coverage.json
             catalog-offer-detail-verify.json

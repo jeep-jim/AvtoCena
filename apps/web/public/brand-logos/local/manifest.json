@@ -12,16 +12,16 @@
     "212": {
       "name": "212",
       "slug": "212",
-      "dromSlug": "212",
+      "aliasSlug": "212",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/212.png",
+          "path": "/brand-logos/local/light/212.png",
           "source": "local://212-light.04c2db1078e6adeb.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/212.png",
+          "path": "/brand-logos/local/dark/212.png",
           "source": "local://212-dark.b55ef4cc21314657.png",
           "fallback": false,
           "errors": []
@@ -31,16 +31,16 @@
     "abarth": {
       "name": "Abarth",
       "slug": "abarth",
-      "dromSlug": "abarth",
+      "aliasSlug": "abarth",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/abarth.png",
+          "path": "/brand-logos/local/light/abarth.png",
           "source": "local://abarth.1a06959f609c20da.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/abarth.png",
+          "path": "/brand-logos/local/dark/abarth.png",
           "source": "local://abarth.1a06959f609c20da.png",
           "fallback": false,
           "errors": []
@@ -50,16 +50,16 @@
     "ac": {
       "name": "AC",
       "slug": "ac",
-      "dromSlug": "ac",
+      "aliasSlug": "ac",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ac.png",
+          "path": "/brand-logos/local/light/ac.png",
           "source": "local://ac-light.e1234fab98218564.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ac.png",
+          "path": "/brand-logos/local/dark/ac.png",
           "source": "local://ac-dark.a88ad2f5f3acbf53.png",
           "fallback": false,
           "errors": []
@@ -69,16 +69,16 @@
     "acura": {
       "name": "Acura",
       "slug": "acura",
-      "dromSlug": "acura",
+      "aliasSlug": "acura",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/acura.png",
+          "path": "/brand-logos/local/light/acura.png",
           "source": "local://acura.0b21bedfb745ac83.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/acura.png",
+          "path": "/brand-logos/local/dark/acura.png",
           "source": "local://acura.0b21bedfb745ac83.png",
           "fallback": false,
           "errors": []
@@ -88,16 +88,16 @@
     "aito": {
       "name": "AITO",
       "slug": "aito",
-      "dromSlug": "aito",
+      "aliasSlug": "aito",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/aito.png",
+          "path": "/brand-logos/local/light/aito.png",
           "source": "local://aito-light.0caab072c01632f2.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/aito.png",
+          "path": "/brand-logos/local/dark/aito.png",
           "source": "local://aito-dark.13568ae6f96490a0.png",
           "fallback": false,
           "errors": []
@@ -107,16 +107,16 @@
     "alfa-romeo": {
       "name": "Alfa Romeo",
       "slug": "alfa-romeo",
-      "dromSlug": "alfa-romeo",
+      "aliasSlug": "alfa-romeo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/alfa-romeo.png",
+          "path": "/brand-logos/local/light/alfa-romeo.png",
           "source": "local://alfa-romeo.d97a0bcf6b939b36.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/alfa-romeo.png",
+          "path": "/brand-logos/local/dark/alfa-romeo.png",
           "source": "local://alfa-romeo.d97a0bcf6b939b36.png",
           "fallback": false,
           "errors": []
@@ -126,16 +126,16 @@
     "alpina": {
       "name": "Alpina",
       "slug": "alpina",
-      "dromSlug": "alpina",
+      "aliasSlug": "alpina",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/alpina.png",
+          "path": "/brand-logos/local/light/alpina.png",
           "source": "local://alpina.5afa675ef97c15c9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/alpina.png",
+          "path": "/brand-logos/local/dark/alpina.png",
           "source": "local://alpina.5afa675ef97c15c9.png",
           "fallback": false,
           "errors": []
@@ -145,16 +145,16 @@
     "amc": {
       "name": "AMC",
       "slug": "amc",
-      "dromSlug": "amc",
+      "aliasSlug": "amc",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/amc.png",
+          "path": "/brand-logos/local/light/amc.png",
           "source": "local://amc-light.f29b77b3210fa4a0.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/amc.png",
+          "path": "/brand-logos/local/dark/amc.png",
           "source": "local://amc-dark.805bd039d3d21c73.png",
           "fallback": false,
           "errors": []
@@ -164,16 +164,16 @@
     "aro": {
       "name": "Aro",
       "slug": "aro",
-      "dromSlug": "aro",
+      "aliasSlug": "aro",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/aro.png",
+          "path": "/brand-logos/local/light/aro.png",
           "source": "local://aro-light.173525d8141b198d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/aro.png",
+          "path": "/brand-logos/local/dark/aro.png",
           "source": "local://aro-dark.7b5bc5f1c581de0b.png",
           "fallback": false,
           "errors": []
@@ -183,16 +183,16 @@
     "asia": {
       "name": "Asia",
       "slug": "asia",
-      "dromSlug": "asia",
+      "aliasSlug": "asia",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/asia.png",
+          "path": "/brand-logos/local/light/asia.png",
           "source": "local://asia.ba52a050adb4c270.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/asia.png",
+          "path": "/brand-logos/local/dark/asia.png",
           "source": "local://asia.ba52a050adb4c270.png",
           "fallback": false,
           "errors": []
@@ -202,16 +202,16 @@
     "aston-martin": {
       "name": "Aston Martin",
       "slug": "aston-martin",
-      "dromSlug": "aston-martin",
+      "aliasSlug": "aston-martin",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/aston-martin.png",
+          "path": "/brand-logos/local/light/aston-martin.png",
           "source": "local://astonmartin-light.608b7565714b3f3b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/aston-martin.png",
+          "path": "/brand-logos/local/dark/aston-martin.png",
           "source": "local://astonmartin-dark.74960a77cc673f45.png",
           "fallback": false,
           "errors": []
@@ -221,16 +221,16 @@
     "audi": {
       "name": "Audi",
       "slug": "audi",
-      "dromSlug": "audi",
+      "aliasSlug": "audi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/audi.png",
+          "path": "/brand-logos/local/light/audi.png",
           "source": "local://audi-light.75b6056d0e41acd5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/audi.png",
+          "path": "/brand-logos/local/dark/audi.png",
           "source": "local://audi-dark.341f0e8009b8461d.png",
           "fallback": false,
           "errors": []
@@ -240,16 +240,16 @@
     "avatr": {
       "name": "Avatr",
       "slug": "avatr",
-      "dromSlug": "avatr",
+      "aliasSlug": "avatr",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/avatr.png",
+          "path": "/brand-logos/local/light/avatr.png",
           "source": "local://avatr-light.25161304cadf0054.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/avatr.png",
+          "path": "/brand-logos/local/dark/avatr.png",
           "source": "local://avatr-dark.f4818d1e08239336.png",
           "fallback": false,
           "errors": []
@@ -259,16 +259,16 @@
     "baic": {
       "name": "BAIC",
       "slug": "baic",
-      "dromSlug": "baic",
+      "aliasSlug": "baic",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/baic.png",
+          "path": "/brand-logos/local/light/baic.png",
           "source": "local://baic.5a16aef42282808c.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/baic.png",
+          "path": "/brand-logos/local/dark/baic.png",
           "source": "local://baic.5a16aef42282808c.png",
           "fallback": false,
           "errors": []
@@ -278,16 +278,16 @@
     "baojun": {
       "name": "Baojun",
       "slug": "baojun",
-      "dromSlug": "baojun",
+      "aliasSlug": "baojun",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/baojun.png",
+          "path": "/brand-logos/local/light/baojun.png",
           "source": "local://baojun.b93b1abe960e9e42.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/baojun.png",
+          "path": "/brand-logos/local/dark/baojun.png",
           "source": "local://baojun.b93b1abe960e9e42.png",
           "fallback": false,
           "errors": []
@@ -297,16 +297,16 @@
     "baw": {
       "name": "BAW",
       "slug": "baw",
-      "dromSlug": "baw",
+      "aliasSlug": "baw",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/baw.png",
+          "path": "/brand-logos/local/light/baw.png",
           "source": "local://baw.49c9df95fb44c388.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/baw.png",
+          "path": "/brand-logos/local/dark/baw.png",
           "source": "local://baw.49c9df95fb44c388.png",
           "fallback": false,
           "errors": []
@@ -316,16 +316,16 @@
     "belgee": {
       "name": "Belgee",
       "slug": "belgee",
-      "dromSlug": "belgee",
+      "aliasSlug": "belgee",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/belgee.png",
+          "path": "/brand-logos/local/light/belgee.png",
           "source": "local://belgee.c9dc0cf1a4333132.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/belgee.png",
+          "path": "/brand-logos/local/dark/belgee.png",
           "source": "local://belgee.c9dc0cf1a4333132.png",
           "fallback": false,
           "errors": []
@@ -335,16 +335,16 @@
     "bentley": {
       "name": "Bentley",
       "slug": "bentley",
-      "dromSlug": "bentley",
+      "aliasSlug": "bentley",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/bentley.png",
+          "path": "/brand-logos/local/light/bentley.png",
           "source": "local://bentley.e1f3f64241fa76ce.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/bentley.png",
+          "path": "/brand-logos/local/dark/bentley.png",
           "source": "local://bentley.e1f3f64241fa76ce.png",
           "fallback": false,
           "errors": []
@@ -354,16 +354,16 @@
     "bestune": {
       "name": "Bestune",
       "slug": "bestune",
-      "dromSlug": "bestune",
+      "aliasSlug": "bestune",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/bestune.png",
+          "path": "/brand-logos/local/light/bestune.png",
           "source": "local://bestune-light.cadaff88d6d1a811.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/bestune.png",
+          "path": "/brand-logos/local/dark/bestune.png",
           "source": "local://bestune-dark.4df4953dffcd6be4.png",
           "fallback": false,
           "errors": []
@@ -373,16 +373,16 @@
     "bmw": {
       "name": "BMW",
       "slug": "bmw",
-      "dromSlug": "bmw",
+      "aliasSlug": "bmw",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/bmw.png",
+          "path": "/brand-logos/local/light/bmw.png",
           "source": "local://bmw-light.d8554c1e92b03045.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/bmw.png",
+          "path": "/brand-logos/local/dark/bmw.png",
           "source": "local://bmw-dark.2f17a3a906f1fc7d.png",
           "fallback": false,
           "errors": []
@@ -392,16 +392,16 @@
     "borgward": {
       "name": "Borgward",
       "slug": "borgward",
-      "dromSlug": "borgward",
+      "aliasSlug": "borgward",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/borgward.png",
+          "path": "/brand-logos/local/light/borgward.png",
           "source": "local://borgward.687cfc092bbb11dc.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/borgward.png",
+          "path": "/brand-logos/local/dark/borgward.png",
           "source": "local://borgward.687cfc092bbb11dc.png",
           "fallback": false,
           "errors": []
@@ -411,16 +411,16 @@
     "brilliance": {
       "name": "Brilliance",
       "slug": "brilliance",
-      "dromSlug": "brilliance",
+      "aliasSlug": "brilliance",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/brilliance.png",
+          "path": "/brand-logos/local/light/brilliance.png",
           "source": "local://brilliance.656c7efae0ce5cfd.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/brilliance.png",
+          "path": "/brand-logos/local/dark/brilliance.png",
           "source": "local://brilliance.656c7efae0ce5cfd.png",
           "fallback": false,
           "errors": []
@@ -430,16 +430,16 @@
     "buick": {
       "name": "Buick",
       "slug": "buick",
-      "dromSlug": "buick",
+      "aliasSlug": "buick",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/buick.png",
+          "path": "/brand-logos/local/light/buick.png",
           "source": "local://buick.bab3c9c314c207d7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/buick.png",
+          "path": "/brand-logos/local/dark/buick.png",
           "source": "local://buick.bab3c9c314c207d7.png",
           "fallback": false,
           "errors": []
@@ -449,16 +449,16 @@
     "byd": {
       "name": "BYD",
       "slug": "byd",
-      "dromSlug": "byd",
+      "aliasSlug": "byd",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/byd.png",
+          "path": "/brand-logos/local/light/byd.png",
           "source": "local://byd.1bd550e1c1a00ea7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/byd.png",
+          "path": "/brand-logos/local/dark/byd.png",
           "source": "local://byd.1bd550e1c1a00ea7.png",
           "fallback": false,
           "errors": []
@@ -468,16 +468,16 @@
     "cadillac": {
       "name": "Cadillac",
       "slug": "cadillac",
-      "dromSlug": "cadillac",
+      "aliasSlug": "cadillac",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/cadillac.png",
+          "path": "/brand-logos/local/light/cadillac.png",
           "source": "local://cadillac.40b154f6ecb131e4.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/cadillac.png",
+          "path": "/brand-logos/local/dark/cadillac.png",
           "source": "local://cadillac.40b154f6ecb131e4.png",
           "fallback": false,
           "errors": []
@@ -487,16 +487,16 @@
     "changfeng": {
       "name": "Changfeng",
       "slug": "changfeng",
-      "dromSlug": "changfeng",
+      "aliasSlug": "changfeng",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/changfeng.png",
+          "path": "/brand-logos/local/light/changfeng.png",
           "source": "local://changfeng.1ee3fab3ef4acb34.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/changfeng.png",
+          "path": "/brand-logos/local/dark/changfeng.png",
           "source": "local://changfeng.1ee3fab3ef4acb34.png",
           "fallback": false,
           "errors": []
@@ -506,16 +506,16 @@
     "changhe": {
       "name": "Changhe",
       "slug": "changhe",
-      "dromSlug": "changhe",
+      "aliasSlug": "changhe",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/changhe.png",
+          "path": "/brand-logos/local/light/changhe.png",
           "source": "local://changhe.150a1b2acce1c570.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/changhe.png",
+          "path": "/brand-logos/local/dark/changhe.png",
           "source": "local://changhe.150a1b2acce1c570.png",
           "fallback": false,
           "errors": []
@@ -525,16 +525,16 @@
     "changan": {
       "name": "Changan",
       "slug": "changan",
-      "dromSlug": "changan",
+      "aliasSlug": "changan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/changan.png",
+          "path": "/brand-logos/local/light/changan.png",
           "source": "local://changan.9c8ae4ae573e17d1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/changan.png",
+          "path": "/brand-logos/local/dark/changan.png",
           "source": "local://changan.9c8ae4ae573e17d1.png",
           "fallback": false,
           "errors": []
@@ -544,16 +544,16 @@
     "chery": {
       "name": "Chery",
       "slug": "chery",
-      "dromSlug": "chery",
+      "aliasSlug": "chery",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/chery.png",
+          "path": "/brand-logos/local/light/chery.png",
           "source": "local://chery.30aa17044cd7e7d0.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/chery.png",
+          "path": "/brand-logos/local/dark/chery.png",
           "source": "local://chery.30aa17044cd7e7d0.png",
           "fallback": false,
           "errors": []
@@ -563,16 +563,16 @@
     "chevrolet": {
       "name": "Chevrolet",
       "slug": "chevrolet",
-      "dromSlug": "chevrolet",
+      "aliasSlug": "chevrolet",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/chevrolet.png",
+          "path": "/brand-logos/local/light/chevrolet.png",
           "source": "local://chevrolet.7a1549c14ec9bfff.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/chevrolet.png",
+          "path": "/brand-logos/local/dark/chevrolet.png",
           "source": "local://chevrolet.7a1549c14ec9bfff.png",
           "fallback": false,
           "errors": []
@@ -582,16 +582,16 @@
     "chrysler": {
       "name": "Chrysler",
       "slug": "chrysler",
-      "dromSlug": "chrysler",
+      "aliasSlug": "chrysler",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/chrysler.png",
+          "path": "/brand-logos/local/light/chrysler.png",
           "source": "local://chrysler.6edfaa709316b8b6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/chrysler.png",
+          "path": "/brand-logos/local/dark/chrysler.png",
           "source": "local://chrysler.6edfaa709316b8b6.png",
           "fallback": false,
           "errors": []
@@ -601,16 +601,16 @@
     "citroen": {
       "name": "Citroen",
       "slug": "citroen",
-      "dromSlug": "citroen",
+      "aliasSlug": "citroen",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/citroen.png",
+          "path": "/brand-logos/local/light/citroen.png",
           "source": "local://citroen-light.9fd789d52766f63e.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/citroen.png",
+          "path": "/brand-logos/local/dark/citroen.png",
           "source": "local://citroen-dark.d33d9dd4bb42e5bd.png",
           "fallback": false,
           "errors": []
@@ -620,16 +620,16 @@
     "coda": {
       "name": "Coda",
       "slug": "coda",
-      "dromSlug": "coda",
+      "aliasSlug": "coda",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/coda.png",
+          "path": "/brand-logos/local/light/coda.png",
           "source": "local://coda-light.9a09baea04a9603a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/coda.png",
+          "path": "/brand-logos/local/dark/coda.png",
           "source": "local://coda-dark.029b52c6435f42b1.png",
           "fallback": false,
           "errors": []
@@ -639,16 +639,16 @@
     "cupra": {
       "name": "Cupra",
       "slug": "cupra",
-      "dromSlug": "cupra",
+      "aliasSlug": "cupra",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/cupra.png",
+          "path": "/brand-logos/local/light/cupra.png",
           "source": "local://cupra-light.24c74d424dfb7b05.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/cupra.png",
+          "path": "/brand-logos/local/dark/cupra.png",
           "source": "local://cupra-dark.d5c0e2b1b7444f6f.png",
           "fallback": false,
           "errors": []
@@ -658,16 +658,16 @@
     "dacia": {
       "name": "Dacia",
       "slug": "dacia",
-      "dromSlug": "dacia",
+      "aliasSlug": "dacia",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/dacia.png",
+          "path": "/brand-logos/local/light/dacia.png",
           "source": "local://dacia-light.29a436168ad51dfe.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/dacia.png",
+          "path": "/brand-logos/local/dark/dacia.png",
           "source": "local://dacia-dark.f03b9c19efcc4135.png",
           "fallback": false,
           "errors": []
@@ -677,16 +677,16 @@
     "dadi": {
       "name": "Dadi",
       "slug": "dadi",
-      "dromSlug": "dadi",
+      "aliasSlug": "dadi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/dadi.png",
+          "path": "/brand-logos/local/light/dadi.png",
           "source": "local://dadi.7fb326808772370d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/dadi.png",
+          "path": "/brand-logos/local/dark/dadi.png",
           "source": "local://dadi.7fb326808772370d.png",
           "fallback": false,
           "errors": []
@@ -696,16 +696,16 @@
     "daewoo": {
       "name": "Daewoo",
       "slug": "daewoo",
-      "dromSlug": "daewoo",
+      "aliasSlug": "daewoo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/daewoo.png",
+          "path": "/brand-logos/local/light/daewoo.png",
           "source": "local://daewoo.7ad59af93738d23d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/daewoo.png",
+          "path": "/brand-logos/local/dark/daewoo.png",
           "source": "local://daewoo.7ad59af93738d23d.png",
           "fallback": false,
           "errors": []
@@ -715,16 +715,16 @@
     "daihatsu": {
       "name": "Daihatsu",
       "slug": "daihatsu",
-      "dromSlug": "daihatsu",
+      "aliasSlug": "daihatsu",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/daihatsu.png",
+          "path": "/brand-logos/local/light/daihatsu.png",
           "source": "local://daihatsu.54d26e973467e698.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/daihatsu.png",
+          "path": "/brand-logos/local/dark/daihatsu.png",
           "source": "local://daihatsu.54d26e973467e698.png",
           "fallback": false,
           "errors": []
@@ -734,16 +734,16 @@
     "datsun": {
       "name": "Datsun",
       "slug": "datsun",
-      "dromSlug": "datsun",
+      "aliasSlug": "datsun",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/datsun.png",
+          "path": "/brand-logos/local/light/datsun.png",
           "source": "local://datsun.359d60fec87ee9a5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/datsun.png",
+          "path": "/brand-logos/local/dark/datsun.png",
           "source": "local://datsun.359d60fec87ee9a5.png",
           "fallback": false,
           "errors": []
@@ -753,16 +753,16 @@
     "dayun": {
       "name": "Dayun",
       "slug": "dayun",
-      "dromSlug": "dayun",
+      "aliasSlug": "dayun",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/dayun.png",
+          "path": "/brand-logos/local/light/dayun.png",
           "source": "local://dayun.2467f94cd8aa23d1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/dayun.png",
+          "path": "/brand-logos/local/dark/dayun.png",
           "source": "local://dayun.2467f94cd8aa23d1.png",
           "fallback": false,
           "errors": []
@@ -772,16 +772,16 @@
     "deepal": {
       "name": "Deepal",
       "slug": "deepal",
-      "dromSlug": "deepal",
+      "aliasSlug": "deepal",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/deepal.png",
+          "path": "/brand-logos/local/light/deepal.png",
           "source": "local://deepal-light.5a4e11c352a1e51c.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/deepal.png",
+          "path": "/brand-logos/local/dark/deepal.png",
           "source": "local://deepal-dark.bb1c028a75638b16.png",
           "fallback": false,
           "errors": []
@@ -791,16 +791,16 @@
     "denza": {
       "name": "Denza",
       "slug": "denza",
-      "dromSlug": "denza",
+      "aliasSlug": "denza",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/denza.png",
+          "path": "/brand-logos/local/light/denza.png",
           "source": "local://denza.6e3d1cc852289140.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/denza.png",
+          "path": "/brand-logos/local/dark/denza.png",
           "source": "local://denza.6e3d1cc852289140.png",
           "fallback": false,
           "errors": []
@@ -810,16 +810,16 @@
     "dodge": {
       "name": "Dodge",
       "slug": "dodge",
-      "dromSlug": "dodge",
+      "aliasSlug": "dodge",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/dodge.png",
+          "path": "/brand-logos/local/light/dodge.png",
           "source": "local://dodge-light.882899a167d01bd6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/dodge.png",
+          "path": "/brand-logos/local/dark/dodge.png",
           "source": "local://dodge-dark.c6d3e97ab68eca37.png",
           "fallback": false,
           "errors": []
@@ -829,16 +829,16 @@
     "dongfeng": {
       "name": "Dongfeng",
       "slug": "dongfeng",
-      "dromSlug": "dongfeng",
+      "aliasSlug": "dongfeng",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/dongfeng.png",
+          "path": "/brand-logos/local/light/dongfeng.png",
           "source": "local://dongfeng.e30e835d6679387c.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/dongfeng.png",
+          "path": "/brand-logos/local/dark/dongfeng.png",
           "source": "local://dongfeng.e30e835d6679387c.png",
           "fallback": false,
           "errors": []
@@ -848,16 +848,16 @@
     "eagle": {
       "name": "Eagle",
       "slug": "eagle",
-      "dromSlug": "eagle",
+      "aliasSlug": "eagle",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/eagle.png",
+          "path": "/brand-logos/local/light/eagle.png",
           "source": "local://eagle.14827a05bc604b6d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/eagle.png",
+          "path": "/brand-logos/local/dark/eagle.png",
           "source": "local://eagle.14827a05bc604b6d.png",
           "fallback": false,
           "errors": []
@@ -867,16 +867,16 @@
     "esteo": {
       "name": "ESTEO",
       "slug": "esteo",
-      "dromSlug": "esteo",
+      "aliasSlug": "esteo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/esteo.png",
+          "path": "/brand-logos/local/light/esteo.png",
           "source": "local://esteo-light.b7bdc4b45a7a0c78.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/esteo.png",
+          "path": "/brand-logos/local/dark/esteo.png",
           "source": "local://esteo-dark.8c433c8662409753.png",
           "fallback": false,
           "errors": []
@@ -886,16 +886,16 @@
     "exeed": {
       "name": "EXEED",
       "slug": "exeed",
-      "dromSlug": "exeed",
+      "aliasSlug": "exeed",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/exeed.png",
+          "path": "/brand-logos/local/light/exeed.png",
           "source": "local://exeed.009e5d5f3aad4544.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/exeed.png",
+          "path": "/brand-logos/local/dark/exeed.png",
           "source": "local://exeed.009e5d5f3aad4544.png",
           "fallback": false,
           "errors": []
@@ -905,16 +905,16 @@
     "faw": {
       "name": "FAW",
       "slug": "faw",
-      "dromSlug": "faw",
+      "aliasSlug": "faw",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/faw.png",
+          "path": "/brand-logos/local/light/faw.png",
           "source": "local://faw.b4468374afb0a2a4.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/faw.png",
+          "path": "/brand-logos/local/dark/faw.png",
           "source": "local://faw.b4468374afb0a2a4.png",
           "fallback": false,
           "errors": []
@@ -924,16 +924,16 @@
     "ferrari": {
       "name": "Ferrari",
       "slug": "ferrari",
-      "dromSlug": "ferrari",
+      "aliasSlug": "ferrari",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ferrari.png",
+          "path": "/brand-logos/local/light/ferrari.png",
           "source": "local://ferrari.001935e984440d5a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ferrari.png",
+          "path": "/brand-logos/local/dark/ferrari.png",
           "source": "local://ferrari.001935e984440d5a.png",
           "fallback": false,
           "errors": []
@@ -943,16 +943,16 @@
     "fiat": {
       "name": "Fiat",
       "slug": "fiat",
-      "dromSlug": "fiat",
+      "aliasSlug": "fiat",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/fiat.png",
+          "path": "/brand-logos/local/light/fiat.png",
           "source": "local://fiat.9fdc990b85574af3.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/fiat.png",
+          "path": "/brand-logos/local/dark/fiat.png",
           "source": "local://fiat.9fdc990b85574af3.png",
           "fallback": false,
           "errors": []
@@ -962,16 +962,16 @@
     "fisker": {
       "name": "Fisker",
       "slug": "fisker",
-      "dromSlug": "fisker",
+      "aliasSlug": "fisker",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/fisker.png",
+          "path": "/brand-logos/local/light/fisker.png",
           "source": "local://fisker.f6b7093186396e88.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/fisker.png",
+          "path": "/brand-logos/local/dark/fisker.png",
           "source": "local://fisker.f6b7093186396e88.png",
           "fallback": false,
           "errors": []
@@ -981,16 +981,16 @@
     "ford": {
       "name": "Ford",
       "slug": "ford",
-      "dromSlug": "ford",
+      "aliasSlug": "ford",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ford.png",
+          "path": "/brand-logos/local/light/ford.png",
           "source": "local://ford.f71e8159380bf49b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ford.png",
+          "path": "/brand-logos/local/dark/ford.png",
           "source": "local://ford.f71e8159380bf49b.png",
           "fallback": false,
           "errors": []
@@ -1000,16 +1000,16 @@
     "forthing": {
       "name": "Forthing",
       "slug": "forthing",
-      "dromSlug": "forthing",
+      "aliasSlug": "forthing",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/forthing.png",
+          "path": "/brand-logos/local/light/forthing.png",
           "source": "local://forthing.7ffa4c7cd38a0731.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/forthing.png",
+          "path": "/brand-logos/local/dark/forthing.png",
           "source": "local://forthing.7ffa4c7cd38a0731.png",
           "fallback": false,
           "errors": []
@@ -1019,16 +1019,16 @@
     "foton": {
       "name": "Foton",
       "slug": "foton",
-      "dromSlug": "foton",
+      "aliasSlug": "foton",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/foton.png",
+          "path": "/brand-logos/local/light/foton.png",
           "source": "local://foton.d75a2f6484c3baa8.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/foton.png",
+          "path": "/brand-logos/local/dark/foton.png",
           "source": "local://foton.d75a2f6484c3baa8.png",
           "fallback": false,
           "errors": []
@@ -1038,16 +1038,16 @@
     "gac": {
       "name": "GAC",
       "slug": "gac",
-      "dromSlug": "gac",
+      "aliasSlug": "gac",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/gac.png",
+          "path": "/brand-logos/local/light/gac.png",
           "source": "local://gac.0b11f1136707f5ba.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/gac.png",
+          "path": "/brand-logos/local/dark/gac.png",
           "source": "local://gac.0b11f1136707f5ba.png",
           "fallback": false,
           "errors": []
@@ -1057,16 +1057,16 @@
     "geely": {
       "name": "Geely",
       "slug": "geely",
-      "dromSlug": "geely",
+      "aliasSlug": "geely",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/geely.png",
+          "path": "/brand-logos/local/light/geely.png",
           "source": "local://geely-light.7b86701812158965.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/geely.png",
+          "path": "/brand-logos/local/dark/geely.png",
           "source": "local://geely-dark.c09538aed2871758.png",
           "fallback": false,
           "errors": []
@@ -1076,16 +1076,16 @@
     "genesis": {
       "name": "Genesis",
       "slug": "genesis",
-      "dromSlug": "genesis",
+      "aliasSlug": "genesis",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/genesis.png",
+          "path": "/brand-logos/local/light/genesis.png",
           "source": "local://genesis.14c04e15e9463788.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/genesis.png",
+          "path": "/brand-logos/local/dark/genesis.png",
           "source": "local://genesis.14c04e15e9463788.png",
           "fallback": false,
           "errors": []
@@ -1095,16 +1095,16 @@
     "geo": {
       "name": "Geo",
       "slug": "geo",
-      "dromSlug": "geo",
+      "aliasSlug": "geo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/geo.png",
+          "path": "/brand-logos/local/light/geo.png",
           "source": "local://geo.beac4dc41bd7edb3.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/geo.png",
+          "path": "/brand-logos/local/dark/geo.png",
           "source": "local://geo.beac4dc41bd7edb3.png",
           "fallback": false,
           "errors": []
@@ -1114,16 +1114,16 @@
     "gmc": {
       "name": "GMC",
       "slug": "gmc",
-      "dromSlug": "gmc",
+      "aliasSlug": "gmc",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/gmc.png",
+          "path": "/brand-logos/local/light/gmc.png",
           "source": "local://gmc.58b165d107609dc9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/gmc.png",
+          "path": "/brand-logos/local/dark/gmc.png",
           "source": "local://gmc.58b165d107609dc9.png",
           "fallback": false,
           "errors": []
@@ -1133,16 +1133,16 @@
     "great-wall": {
       "name": "Great Wall",
       "slug": "great-wall",
-      "dromSlug": "great-wall",
+      "aliasSlug": "great-wall",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/great-wall.png",
+          "path": "/brand-logos/local/light/great-wall.png",
           "source": "local://great-wall.6f986b8b16eb0a8b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/great-wall.png",
+          "path": "/brand-logos/local/dark/great-wall.png",
           "source": "local://great-wall.6f986b8b16eb0a8b.png",
           "fallback": false,
           "errors": []
@@ -1152,16 +1152,16 @@
     "hafei": {
       "name": "Hafei",
       "slug": "hafei",
-      "dromSlug": "hafei",
+      "aliasSlug": "hafei",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hafei.png",
+          "path": "/brand-logos/local/light/hafei.png",
           "source": "local://hafei.3b251fd2904025bd.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hafei.png",
+          "path": "/brand-logos/local/dark/hafei.png",
           "source": "local://hafei.3b251fd2904025bd.png",
           "fallback": false,
           "errors": []
@@ -1171,16 +1171,16 @@
     "haima": {
       "name": "Haima",
       "slug": "haima",
-      "dromSlug": "haima",
+      "aliasSlug": "haima",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/haima.png",
+          "path": "/brand-logos/local/light/haima.png",
           "source": "local://haima.0f094e36040b771b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/haima.png",
+          "path": "/brand-logos/local/dark/haima.png",
           "source": "local://haima.0f094e36040b771b.png",
           "fallback": false,
           "errors": []
@@ -1190,16 +1190,16 @@
     "haval": {
       "name": "Haval",
       "slug": "haval",
-      "dromSlug": "haval",
+      "aliasSlug": "haval",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/haval.png",
+          "path": "/brand-logos/local/light/haval.png",
           "source": "local://haval-light.79af4b758ffdeb79.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/haval.png",
+          "path": "/brand-logos/local/dark/haval.png",
           "source": "local://haval-dark.e25abecdde80cb88.png",
           "fallback": false,
           "errors": []
@@ -1209,16 +1209,16 @@
     "hawtai": {
       "name": "Hawtai",
       "slug": "hawtai",
-      "dromSlug": "hawtai",
+      "aliasSlug": "hawtai",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hawtai.png",
+          "path": "/brand-logos/local/light/hawtai.png",
           "source": "local://hawtai.2a163104e150eb3e.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hawtai.png",
+          "path": "/brand-logos/local/dark/hawtai.png",
           "source": "local://hawtai.2a163104e150eb3e.png",
           "fallback": false,
           "errors": []
@@ -1228,16 +1228,16 @@
     "hiphi": {
       "name": "HiPhi",
       "slug": "hiphi",
-      "dromSlug": "hiphi",
+      "aliasSlug": "hiphi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hiphi.png",
+          "path": "/brand-logos/local/light/hiphi.png",
           "source": "local://hiphi-light.3c9e6bc5396dc75f.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hiphi.png",
+          "path": "/brand-logos/local/dark/hiphi.png",
           "source": "local://hiphi-dark.faf679c7e61250da.png",
           "fallback": false,
           "errors": []
@@ -1247,16 +1247,16 @@
     "honda": {
       "name": "Honda",
       "slug": "honda",
-      "dromSlug": "honda",
+      "aliasSlug": "honda",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/honda.png",
+          "path": "/brand-logos/local/light/honda.png",
           "source": "local://honda.a71e97477a819fc3.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/honda.png",
+          "path": "/brand-logos/local/dark/honda.png",
           "source": "local://honda.a71e97477a819fc3.png",
           "fallback": false,
           "errors": []
@@ -1266,16 +1266,16 @@
     "hongqi": {
       "name": "Hongqi",
       "slug": "hongqi",
-      "dromSlug": "hongqi",
+      "aliasSlug": "hongqi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hongqi.png",
+          "path": "/brand-logos/local/light/hongqi.png",
           "source": "local://hongqi.1edd49b8a32c1c32.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hongqi.png",
+          "path": "/brand-logos/local/dark/hongqi.png",
           "source": "local://hongqi.1edd49b8a32c1c32.png",
           "fallback": false,
           "errors": []
@@ -1285,16 +1285,16 @@
     "hozon": {
       "name": "Hozon",
       "slug": "hozon",
-      "dromSlug": "hozon",
+      "aliasSlug": "hozon",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hozon.png",
+          "path": "/brand-logos/local/light/hozon.png",
           "source": "local://hozon-light.d5466d73b2843622.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hozon.png",
+          "path": "/brand-logos/local/dark/hozon.png",
           "source": "local://hozon-dark.18e78e9162dcd5ec.png",
           "fallback": false,
           "errors": []
@@ -1304,16 +1304,16 @@
     "huanghai": {
       "name": "Huanghai",
       "slug": "huanghai",
-      "dromSlug": "huanghai",
+      "aliasSlug": "huanghai",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/huanghai.png",
+          "path": "/brand-logos/local/light/huanghai.png",
           "source": "local://huanghai.27071c99648ba5ae.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/huanghai.png",
+          "path": "/brand-logos/local/dark/huanghai.png",
           "source": "local://huanghai.27071c99648ba5ae.png",
           "fallback": false,
           "errors": []
@@ -1323,16 +1323,16 @@
     "hummer": {
       "name": "Hummer",
       "slug": "hummer",
-      "dromSlug": "hummer",
+      "aliasSlug": "hummer",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hummer.png",
+          "path": "/brand-logos/local/light/hummer.png",
           "source": "local://hummer-light.b45a85ffccb77aa8.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hummer.png",
+          "path": "/brand-logos/local/dark/hummer.png",
           "source": "local://hummer-dark.12811ae2cd6a2bcf.png",
           "fallback": false,
           "errors": []
@@ -1342,16 +1342,16 @@
     "hyundai": {
       "name": "Hyundai",
       "slug": "hyundai",
-      "dromSlug": "hyundai",
+      "aliasSlug": "hyundai",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/hyundai.png",
+          "path": "/brand-logos/local/light/hyundai.png",
           "source": "local://hyundai-light.9015f0d559caa06a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/hyundai.png",
+          "path": "/brand-logos/local/dark/hyundai.png",
           "source": "local://hyundai-dark.3a805bacc9d6e6ef.png",
           "fallback": false,
           "errors": []
@@ -1361,16 +1361,16 @@
     "icar": {
       "name": "iCAR",
       "slug": "icar",
-      "dromSlug": "icar",
+      "aliasSlug": "icar",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/icar.png",
+          "path": "/brand-logos/local/light/icar.png",
           "source": "local://i-car-light.1634edb70953cfb9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/icar.png",
+          "path": "/brand-logos/local/dark/icar.png",
           "source": "local://i-car-dark.bc6a572eaf540631.png",
           "fallback": false,
           "errors": []
@@ -1380,16 +1380,16 @@
     "im-motors": {
       "name": "IM Motors",
       "slug": "im-motors",
-      "dromSlug": "im-motors",
+      "aliasSlug": "im-motors",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/im-motors.png",
+          "path": "/brand-logos/local/light/im-motors.png",
           "source": "local://im-motors-light.bb6b3a729b5f9dca.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/im-motors.png",
+          "path": "/brand-logos/local/dark/im-motors.png",
           "source": "local://im-motors-dark.566b32f4c137e2f4.png",
           "fallback": false,
           "errors": []
@@ -1399,16 +1399,16 @@
     "infiniti": {
       "name": "Infiniti",
       "slug": "infiniti",
-      "dromSlug": "infiniti",
+      "aliasSlug": "infiniti",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/infiniti.png",
+          "path": "/brand-logos/local/light/infiniti.png",
           "source": "local://infiniti.f8b05e076dacf1d7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/infiniti.png",
+          "path": "/brand-logos/local/dark/infiniti.png",
           "source": "local://infiniti.f8b05e076dacf1d7.png",
           "fallback": false,
           "errors": []
@@ -1418,16 +1418,16 @@
     "iran-khodro": {
       "name": "Iran Khodro",
       "slug": "iran-khodro",
-      "dromSlug": "iran-khodro",
+      "aliasSlug": "iran-khodro",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/iran-khodro.png",
+          "path": "/brand-logos/local/light/iran-khodro.png",
           "source": "local://iran-khodro.d7cf0534b53aa5bf.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/iran-khodro.png",
+          "path": "/brand-logos/local/dark/iran-khodro.png",
           "source": "local://iran-khodro.d7cf0534b53aa5bf.png",
           "fallback": false,
           "errors": []
@@ -1437,16 +1437,16 @@
     "isuzu": {
       "name": "Isuzu",
       "slug": "isuzu",
-      "dromSlug": "isuzu",
+      "aliasSlug": "isuzu",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/isuzu.png",
+          "path": "/brand-logos/local/light/isuzu.png",
           "source": "local://isuzu.a51fb8c0f0a84288.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/isuzu.png",
+          "path": "/brand-logos/local/dark/isuzu.png",
           "source": "local://isuzu.a51fb8c0f0a84288.png",
           "fallback": false,
           "errors": []
@@ -1456,16 +1456,16 @@
     "iveco": {
       "name": "IVECO",
       "slug": "iveco",
-      "dromSlug": "iveco",
+      "aliasSlug": "iveco",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/iveco.png",
+          "path": "/brand-logos/local/light/iveco.png",
           "source": "local://iveco.a9de3d18013e068d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/iveco.png",
+          "path": "/brand-logos/local/dark/iveco.png",
           "source": "local://iveco.a9de3d18013e068d.png",
           "fallback": false,
           "errors": []
@@ -1475,16 +1475,16 @@
     "jac": {
       "name": "JAC",
       "slug": "jac",
-      "dromSlug": "jac",
+      "aliasSlug": "jac",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jac.png",
+          "path": "/brand-logos/local/light/jac.png",
           "source": "local://jac.24a134c9733304a6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jac.png",
+          "path": "/brand-logos/local/dark/jac.png",
           "source": "local://jac.24a134c9733304a6.png",
           "fallback": false,
           "errors": []
@@ -1494,16 +1494,16 @@
     "jaecoo": {
       "name": "Jaecoo",
       "slug": "jaecoo",
-      "dromSlug": "jaecoo",
+      "aliasSlug": "jaecoo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jaecoo.png",
+          "path": "/brand-logos/local/light/jaecoo.png",
           "source": "local://jaecoo-light.d54ce8a3f5ee7555.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jaecoo.png",
+          "path": "/brand-logos/local/dark/jaecoo.png",
           "source": "local://jaecoo-dark.bdecb7bb6e79a114.png",
           "fallback": false,
           "errors": []
@@ -1513,16 +1513,16 @@
     "jaguar": {
       "name": "Jaguar",
       "slug": "jaguar",
-      "dromSlug": "jaguar",
+      "aliasSlug": "jaguar",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jaguar.png",
+          "path": "/brand-logos/local/light/jaguar.png",
           "source": "local://jaguar.72a6ec162da24e31.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jaguar.png",
+          "path": "/brand-logos/local/dark/jaguar.png",
           "source": "local://jaguar.72a6ec162da24e31.png",
           "fallback": false,
           "errors": []
@@ -1532,16 +1532,16 @@
     "jeep": {
       "name": "Jeep",
       "slug": "jeep",
-      "dromSlug": "jeep",
+      "aliasSlug": "jeep",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jeep.png",
+          "path": "/brand-logos/local/light/jeep.png",
           "source": "local://jeep.5c7df33f88deae56.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jeep.png",
+          "path": "/brand-logos/local/dark/jeep.png",
           "source": "local://jeep.5c7df33f88deae56.png",
           "fallback": false,
           "errors": []
@@ -1551,16 +1551,16 @@
     "jeland": {
       "name": "Jeland",
       "slug": "jeland",
-      "dromSlug": "jeland",
+      "aliasSlug": "jeland",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jeland.png",
+          "path": "/brand-logos/local/light/jeland.png",
           "source": "local://jeland-light.83ccf04a21883dc2.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jeland.png",
+          "path": "/brand-logos/local/dark/jeland.png",
           "source": "local://jeland-dark.3ffcc783a6e002ea.png",
           "fallback": false,
           "errors": []
@@ -1570,16 +1570,16 @@
     "jetour": {
       "name": "Jetour",
       "slug": "jetour",
-      "dromSlug": "jetour",
+      "aliasSlug": "jetour",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jetour.png",
+          "path": "/brand-logos/local/light/jetour.png",
           "source": "local://jetour-light.4e06072a4639a2f6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jetour.png",
+          "path": "/brand-logos/local/dark/jetour.png",
           "source": "local://jetour-dark.8f4d3236fdeff419.png",
           "fallback": false,
           "errors": []
@@ -1589,16 +1589,16 @@
     "jetta": {
       "name": "Jetta",
       "slug": "jetta",
-      "dromSlug": "jetta",
+      "aliasSlug": "jetta",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jetta.png",
+          "path": "/brand-logos/local/light/jetta.png",
           "source": "local://jetta-light.c8882a2be0ef4e53.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jetta.png",
+          "path": "/brand-logos/local/dark/jetta.png",
           "source": "local://jetta-dark.a972bc7384015e27.png",
           "fallback": false,
           "errors": []
@@ -1608,16 +1608,16 @@
     "jinbei": {
       "name": "Jinbei",
       "slug": "jinbei",
-      "dromSlug": "jinbei",
+      "aliasSlug": "jinbei",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jinbei.png",
+          "path": "/brand-logos/local/light/jinbei.png",
           "source": "local://jinbei.960c0f5a774baf8c.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jinbei.png",
+          "path": "/brand-logos/local/dark/jinbei.png",
           "source": "local://jinbei.960c0f5a774baf8c.png",
           "fallback": false,
           "errors": []
@@ -1627,16 +1627,16 @@
     "jmc": {
       "name": "JMC",
       "slug": "jmc",
-      "dromSlug": "jmc",
+      "aliasSlug": "jmc",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/jmc.png",
+          "path": "/brand-logos/local/light/jmc.png",
           "source": "local://jmc.e75e0112d8af4a06.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/jmc.png",
+          "path": "/brand-logos/local/dark/jmc.png",
           "source": "local://jmc.e75e0112d8af4a06.png",
           "fallback": false,
           "errors": []
@@ -1646,16 +1646,16 @@
     "kaiyi": {
       "name": "Kaiyi",
       "slug": "kaiyi",
-      "dromSlug": "kaiyi",
+      "aliasSlug": "kaiyi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/kaiyi.png",
+          "path": "/brand-logos/local/light/kaiyi.png",
           "source": "local://kaiyi-light.8ede9033c2c5570b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/kaiyi.png",
+          "path": "/brand-logos/local/dark/kaiyi.png",
           "source": "local://kaiyi-dark.f3560c87e8b7fdea.png",
           "fallback": false,
           "errors": []
@@ -1665,16 +1665,16 @@
     "kgm": {
       "name": "KGM",
       "slug": "kgm",
-      "dromSlug": "kgm",
+      "aliasSlug": "kgm",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/kgm.png",
+          "path": "/brand-logos/local/light/kgm.png",
           "source": "local://kgm-light.b2556808ac993adc.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/kgm.png",
+          "path": "/brand-logos/local/dark/kgm.png",
           "source": "local://kgm-dark.cab1ec7a3f476e88.png",
           "fallback": false,
           "errors": []
@@ -1684,16 +1684,16 @@
     "kia": {
       "name": "Kia",
       "slug": "kia",
-      "dromSlug": "kia",
+      "aliasSlug": "kia",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/kia.png",
+          "path": "/brand-logos/local/light/kia.png",
           "source": "local://kia-light.0f5e2b451de7fb66.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/kia.png",
+          "path": "/brand-logos/local/dark/kia.png",
           "source": "local://kia-dark.8f64b8db57c6f713.png",
           "fallback": false,
           "errors": []
@@ -1703,16 +1703,16 @@
     "knewstar": {
       "name": "Knewstar",
       "slug": "knewstar",
-      "dromSlug": "knewstar",
+      "aliasSlug": "knewstar",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/knewstar.png",
+          "path": "/brand-logos/local/light/knewstar.png",
           "source": "local://knewstar-light.59ecc1f453839bd5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/knewstar.png",
+          "path": "/brand-logos/local/dark/knewstar.png",
           "source": "local://knewstar-dark.60fc18236185adac.png",
           "fallback": false,
           "errors": []
@@ -1722,16 +1722,16 @@
     "lamborghini": {
       "name": "Lamborghini",
       "slug": "lamborghini",
-      "dromSlug": "lamborghini",
+      "aliasSlug": "lamborghini",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lamborghini.png",
+          "path": "/brand-logos/local/light/lamborghini.png",
           "source": "local://lamborghini.2cbae21496a47722.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lamborghini.png",
+          "path": "/brand-logos/local/dark/lamborghini.png",
           "source": "local://lamborghini.2cbae21496a47722.png",
           "fallback": false,
           "errors": []
@@ -1741,16 +1741,16 @@
     "lancia": {
       "name": "Lancia",
       "slug": "lancia",
-      "dromSlug": "lancia",
+      "aliasSlug": "lancia",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lancia.png",
+          "path": "/brand-logos/local/light/lancia.png",
           "source": "local://lancia.518845082c977282.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lancia.png",
+          "path": "/brand-logos/local/dark/lancia.png",
           "source": "local://lancia.518845082c977282.png",
           "fallback": false,
           "errors": []
@@ -1760,16 +1760,16 @@
     "land-rover": {
       "name": "Land Rover",
       "slug": "land-rover",
-      "dromSlug": "land-rover",
+      "aliasSlug": "land-rover",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/land-rover.png",
+          "path": "/brand-logos/local/light/land-rover.png",
           "source": "local://land-rover.f575feddafb47225.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/land-rover.png",
+          "path": "/brand-logos/local/dark/land-rover.png",
           "source": "local://land-rover.f575feddafb47225.png",
           "fallback": false,
           "errors": []
@@ -1779,16 +1779,16 @@
     "landwind": {
       "name": "Landwind",
       "slug": "landwind",
-      "dromSlug": "landwind",
+      "aliasSlug": "landwind",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/landwind.png",
+          "path": "/brand-logos/local/light/landwind.png",
           "source": "local://landwind-light.20f69184ddf5964c.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/landwind.png",
+          "path": "/brand-logos/local/dark/landwind.png",
           "source": "local://landwind-dark.6b762e11c7c9ad06.png",
           "fallback": false,
           "errors": []
@@ -1798,16 +1798,16 @@
     "leapmotor": {
       "name": "Leapmotor",
       "slug": "leapmotor",
-      "dromSlug": "leapmotor",
+      "aliasSlug": "leapmotor",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/leapmotor.png",
+          "path": "/brand-logos/local/light/leapmotor.png",
           "source": "local://leapmotor-light.e8b090f1397922ea.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/leapmotor.png",
+          "path": "/brand-logos/local/dark/leapmotor.png",
           "source": "local://leapmotor-dark.3f6e024fdcadef5b.png",
           "fallback": false,
           "errors": []
@@ -1817,16 +1817,16 @@
     "lexus": {
       "name": "Lexus",
       "slug": "lexus",
-      "dromSlug": "lexus",
+      "aliasSlug": "lexus",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lexus.png",
+          "path": "/brand-logos/local/light/lexus.png",
           "source": "local://lexus.b93166dec5ae1360.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lexus.png",
+          "path": "/brand-logos/local/dark/lexus.png",
           "source": "local://lexus.b93166dec5ae1360.png",
           "fallback": false,
           "errors": []
@@ -1836,16 +1836,16 @@
     "li-auto": {
       "name": "Li Auto",
       "slug": "li-auto",
-      "dromSlug": "li",
+      "aliasSlug": "li",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/li-auto.png",
+          "path": "/brand-logos/local/light/li-auto.png",
           "source": "local://li-light.04d421b84d3ed3bd.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/li-auto.png",
+          "path": "/brand-logos/local/dark/li-auto.png",
           "source": "local://li-dark.1000bc686652ce93.png",
           "fallback": false,
           "errors": []
@@ -1855,16 +1855,16 @@
     "lifan": {
       "name": "Lifan",
       "slug": "lifan",
-      "dromSlug": "lifan",
+      "aliasSlug": "lifan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lifan.png",
+          "path": "/brand-logos/local/light/lifan.png",
           "source": "local://lifan-light.cfef1c10e61e2ddf.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lifan.png",
+          "path": "/brand-logos/local/dark/lifan.png",
           "source": "local://lifan-dark.2eb96c68286bcd19.png",
           "fallback": false,
           "errors": []
@@ -1874,16 +1874,16 @@
     "lincoln": {
       "name": "Lincoln",
       "slug": "lincoln",
-      "dromSlug": "lincoln",
+      "aliasSlug": "lincoln",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lincoln.png",
+          "path": "/brand-logos/local/light/lincoln.png",
           "source": "local://lincoln-light.5c8aa4d190c835d5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lincoln.png",
+          "path": "/brand-logos/local/dark/lincoln.png",
           "source": "local://lincoln-dark.2370f7b473f16eaf.png",
           "fallback": false,
           "errors": []
@@ -1893,16 +1893,16 @@
     "livan": {
       "name": "Livan",
       "slug": "livan",
-      "dromSlug": "livan",
+      "aliasSlug": "livan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/livan.png",
+          "path": "/brand-logos/local/light/livan.png",
           "source": "local://livan-light.4e9514f04b5537d5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/livan.png",
+          "path": "/brand-logos/local/dark/livan.png",
           "source": "local://livan-dark.8568eef4a2148143.png",
           "fallback": false,
           "errors": []
@@ -1912,16 +1912,16 @@
     "lotus": {
       "name": "Lotus",
       "slug": "lotus",
-      "dromSlug": "lotus",
+      "aliasSlug": "lotus",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lotus.png",
+          "path": "/brand-logos/local/light/lotus.png",
           "source": "local://lotus.17dcca679c64acf6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lotus.png",
+          "path": "/brand-logos/local/dark/lotus.png",
           "source": "local://lotus.17dcca679c64acf6.png",
           "fallback": false,
           "errors": []
@@ -1931,16 +1931,16 @@
     "lucid": {
       "name": "Lucid",
       "slug": "lucid",
-      "dromSlug": "lucid",
+      "aliasSlug": "lucid",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lucid.png",
+          "path": "/brand-logos/local/light/lucid.png",
           "source": "local://lucid-light.a32f3e3c2c9906ad.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lucid.png",
+          "path": "/brand-logos/local/dark/lucid.png",
           "source": "local://lucid-dark.10651aa9ca4cfe74.png",
           "fallback": false,
           "errors": []
@@ -1950,16 +1950,16 @@
     "luxgen": {
       "name": "Luxgen",
       "slug": "luxgen",
-      "dromSlug": "luxgen",
+      "aliasSlug": "luxgen",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/luxgen.png",
+          "path": "/brand-logos/local/light/luxgen.png",
           "source": "local://luxgen.e4a0f7b8f8cd5efc.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/luxgen.png",
+          "path": "/brand-logos/local/dark/luxgen.png",
           "source": "local://luxgen.e4a0f7b8f8cd5efc.png",
           "fallback": false,
           "errors": []
@@ -1969,16 +1969,16 @@
     "lynk-and-co": {
       "name": "Lynk & Co",
       "slug": "lynk-and-co",
-      "dromSlug": "lynk-and-co",
+      "aliasSlug": "lynk-and-co",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/lynk-and-co.png",
+          "path": "/brand-logos/local/light/lynk-and-co.png",
           "source": "local://lynk_and_co-light.edd98d302fcf2c07.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/lynk-and-co.png",
+          "path": "/brand-logos/local/dark/lynk-and-co.png",
           "source": "local://lynk_and_co-dark.d13e830605a8ced3.png",
           "fallback": false,
           "errors": []
@@ -1988,16 +1988,16 @@
     "m-hero": {
       "name": "M-Hero",
       "slug": "m-hero",
-      "dromSlug": "m-hero",
+      "aliasSlug": "m-hero",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/m-hero.png",
+          "path": "/brand-logos/local/light/m-hero.png",
           "source": "local://m-hero-light.c700acace6ca80b1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/m-hero.png",
+          "path": "/brand-logos/local/dark/m-hero.png",
           "source": "local://m-hero-dark.cc4e0787a55382e6.png",
           "fallback": false,
           "errors": []
@@ -2007,16 +2007,16 @@
     "maextro": {
       "name": "Maextro",
       "slug": "maextro",
-      "dromSlug": "maextro",
+      "aliasSlug": "maextro",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/maextro.png",
+          "path": "/brand-logos/local/light/maextro.png",
           "source": "local://maextro-light.dfe1138b3f401b9b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/maextro.png",
+          "path": "/brand-logos/local/dark/maextro.png",
           "source": "local://maextro-dark.760b564925d46ee6.png",
           "fallback": false,
           "errors": []
@@ -2026,16 +2026,16 @@
     "maserati": {
       "name": "Maserati",
       "slug": "maserati",
-      "dromSlug": "maserati",
+      "aliasSlug": "maserati",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/maserati.png",
+          "path": "/brand-logos/local/light/maserati.png",
           "source": "local://maserati-light.67f2ad1698d39cee.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/maserati.png",
+          "path": "/brand-logos/local/dark/maserati.png",
           "source": "local://maserati-dark.6cc2bba0c5eafceb.png",
           "fallback": false,
           "errors": []
@@ -2045,16 +2045,16 @@
     "maxus": {
       "name": "Maxus",
       "slug": "maxus",
-      "dromSlug": "maxus",
+      "aliasSlug": "maxus",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/maxus.png",
+          "path": "/brand-logos/local/light/maxus.png",
           "source": "local://maxus.d17ca984c1af0cc1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/maxus.png",
+          "path": "/brand-logos/local/dark/maxus.png",
           "source": "local://maxus.d17ca984c1af0cc1.png",
           "fallback": false,
           "errors": []
@@ -2064,16 +2064,16 @@
     "maybach": {
       "name": "Maybach",
       "slug": "maybach",
-      "dromSlug": "maybach",
+      "aliasSlug": "maybach",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/maybach.png",
+          "path": "/brand-logos/local/light/maybach.png",
           "source": "local://maybach.10af7fb0484daf90.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/maybach.png",
+          "path": "/brand-logos/local/dark/maybach.png",
           "source": "local://maybach.10af7fb0484daf90.png",
           "fallback": false,
           "errors": []
@@ -2083,16 +2083,16 @@
     "mazda": {
       "name": "Mazda",
       "slug": "mazda",
-      "dromSlug": "mazda",
+      "aliasSlug": "mazda",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mazda.png",
+          "path": "/brand-logos/local/light/mazda.png",
           "source": "local://mazda.c3208c174011a127.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mazda.png",
+          "path": "/brand-logos/local/dark/mazda.png",
           "source": "local://mazda.c3208c174011a127.png",
           "fallback": false,
           "errors": []
@@ -2102,16 +2102,16 @@
     "mclaren": {
       "name": "McLaren",
       "slug": "mclaren",
-      "dromSlug": "mclaren",
+      "aliasSlug": "mclaren",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mclaren.png",
+          "path": "/brand-logos/local/light/mclaren.png",
           "source": "local://mclaren-light.96cf075c117aff9b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mclaren.png",
+          "path": "/brand-logos/local/dark/mclaren.png",
           "source": "local://mclaren-dark.f3e689c11e8b42c6.png",
           "fallback": false,
           "errors": []
@@ -2121,16 +2121,16 @@
     "mercedes-benz": {
       "name": "Mercedes-Benz",
       "slug": "mercedes-benz",
-      "dromSlug": "mercedes-benz",
+      "aliasSlug": "mercedes-benz",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mercedes-benz.png",
+          "path": "/brand-logos/local/light/mercedes-benz.png",
           "source": "local://mercedes-benz.a0afa7f12a925483.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mercedes-benz.png",
+          "path": "/brand-logos/local/dark/mercedes-benz.png",
           "source": "local://mercedes-benz.a0afa7f12a925483.png",
           "fallback": false,
           "errors": []
@@ -2140,16 +2140,16 @@
     "mercury": {
       "name": "Mercury",
       "slug": "mercury",
-      "dromSlug": "mercury",
+      "aliasSlug": "mercury",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mercury.png",
+          "path": "/brand-logos/local/light/mercury.png",
           "source": "local://mercury.2ef2b6a4cf25a790.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mercury.png",
+          "path": "/brand-logos/local/dark/mercury.png",
           "source": "local://mercury.2ef2b6a4cf25a790.png",
           "fallback": false,
           "errors": []
@@ -2159,16 +2159,16 @@
     "mg": {
       "name": "MG",
       "slug": "mg",
-      "dromSlug": "mg",
+      "aliasSlug": "mg",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mg.png",
+          "path": "/brand-logos/local/light/mg.png",
           "source": "local://mg-light.d2995e7988cc92bf.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mg.png",
+          "path": "/brand-logos/local/dark/mg.png",
           "source": "local://mg-dark.a0260906849565ec.png",
           "fallback": false,
           "errors": []
@@ -2178,16 +2178,16 @@
     "mini": {
       "name": "MINI",
       "slug": "mini",
-      "dromSlug": "mini",
+      "aliasSlug": "mini",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mini.png",
+          "path": "/brand-logos/local/light/mini.png",
           "source": "local://mini-light.c7199b9ad628542d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mini.png",
+          "path": "/brand-logos/local/dark/mini.png",
           "source": "local://mini-dark.b6d43fa947ca1df0.png",
           "fallback": false,
           "errors": []
@@ -2197,16 +2197,16 @@
     "mitsubishi": {
       "name": "Mitsubishi",
       "slug": "mitsubishi",
-      "dromSlug": "mitsubishi",
+      "aliasSlug": "mitsubishi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mitsubishi.png",
+          "path": "/brand-logos/local/light/mitsubishi.png",
           "source": "local://mitsubishi.65c2717a7a005030.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mitsubishi.png",
+          "path": "/brand-logos/local/dark/mitsubishi.png",
           "source": "local://mitsubishi.65c2717a7a005030.png",
           "fallback": false,
           "errors": []
@@ -2216,16 +2216,16 @@
     "mitsuoka": {
       "name": "Mitsuoka",
       "slug": "mitsuoka",
-      "dromSlug": "mitsuoka",
+      "aliasSlug": "mitsuoka",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/mitsuoka.png",
+          "path": "/brand-logos/local/light/mitsuoka.png",
           "source": "local://mitsuoka-light.eef457da6cd6c14d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/mitsuoka.png",
+          "path": "/brand-logos/local/dark/mitsuoka.png",
           "source": "local://mitsuoka-dark.93d56b101514c725.png",
           "fallback": false,
           "errors": []
@@ -2235,16 +2235,16 @@
     "morgan": {
       "name": "Morgan",
       "slug": "morgan",
-      "dromSlug": "morgan",
+      "aliasSlug": "morgan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/morgan.png",
+          "path": "/brand-logos/local/light/morgan.png",
           "source": "local://morgan-light.efbb3ae0cdee57b6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/morgan.png",
+          "path": "/brand-logos/local/dark/morgan.png",
           "source": "local://morgan-dark.1de84beb046bf1a3.png",
           "fallback": false,
           "errors": []
@@ -2254,16 +2254,16 @@
     "neta": {
       "name": "Neta",
       "slug": "neta",
-      "dromSlug": "neta",
+      "aliasSlug": "neta",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/neta.png",
+          "path": "/brand-logos/local/light/neta.png",
           "source": "local://hozon-light.d5466d73b2843622.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/neta.png",
+          "path": "/brand-logos/local/dark/neta.png",
           "source": "local://hozon-dark.18e78e9162dcd5ec.png",
           "fallback": false,
           "errors": []
@@ -2273,16 +2273,16 @@
     "nio": {
       "name": "Nio",
       "slug": "nio",
-      "dromSlug": "nio",
+      "aliasSlug": "nio",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/nio.png",
+          "path": "/brand-logos/local/light/nio.png",
           "source": "local://nio-light.60e6813a98fc54b9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/nio.png",
+          "path": "/brand-logos/local/dark/nio.png",
           "source": "local://nio-dark.353980e376dd5ab9.png",
           "fallback": false,
           "errors": []
@@ -2292,16 +2292,16 @@
     "nissan": {
       "name": "Nissan",
       "slug": "nissan",
-      "dromSlug": "nissan",
+      "aliasSlug": "nissan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/nissan.png",
+          "path": "/brand-logos/local/light/nissan.png",
           "source": "local://nissan-light.3e2c1b1a5b9d5f44.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/nissan.png",
+          "path": "/brand-logos/local/dark/nissan.png",
           "source": "local://nissan-dark.c61f37b8d9b15740.png",
           "fallback": false,
           "errors": []
@@ -2311,16 +2311,16 @@
     "oldsmobile": {
       "name": "Oldsmobile",
       "slug": "oldsmobile",
-      "dromSlug": "oldsmobile",
+      "aliasSlug": "oldsmobile",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/oldsmobile.png",
+          "path": "/brand-logos/local/light/oldsmobile.png",
           "source": "local://oldsmobile.7faca984da6b9cf9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/oldsmobile.png",
+          "path": "/brand-logos/local/dark/oldsmobile.png",
           "source": "local://oldsmobile.7faca984da6b9cf9.png",
           "fallback": false,
           "errors": []
@@ -2330,16 +2330,16 @@
     "omoda": {
       "name": "OMODA",
       "slug": "omoda",
-      "dromSlug": "omoda",
+      "aliasSlug": "omoda",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/omoda.png",
+          "path": "/brand-logos/local/light/omoda.png",
           "source": "local://omoda-light.a217529c894563b1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/omoda.png",
+          "path": "/brand-logos/local/dark/omoda.png",
           "source": "local://omoda-dark.d463e4455e66e4e3.png",
           "fallback": false,
           "errors": []
@@ -2349,16 +2349,16 @@
     "opel": {
       "name": "Opel",
       "slug": "opel",
-      "dromSlug": "opel",
+      "aliasSlug": "opel",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/opel.png",
+          "path": "/brand-logos/local/light/opel.png",
           "source": "local://opel-light.eca7e7709cb5e30f.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/opel.png",
+          "path": "/brand-logos/local/dark/opel.png",
           "source": "local://opel-dark.02afe83c5d9c9644.png",
           "fallback": false,
           "errors": []
@@ -2368,16 +2368,16 @@
     "ora": {
       "name": "ORA",
       "slug": "ora",
-      "dromSlug": "ora",
+      "aliasSlug": "ora",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ora.png",
+          "path": "/brand-logos/local/light/ora.png",
           "source": "local://ora-light.0d65c6afd877b5d7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ora.png",
+          "path": "/brand-logos/local/dark/ora.png",
           "source": "local://ora-dark.2ff0e94f5ef10008.png",
           "fallback": false,
           "errors": []
@@ -2387,16 +2387,16 @@
     "oshan": {
       "name": "Oshan",
       "slug": "oshan",
-      "dromSlug": "oshan",
+      "aliasSlug": "oshan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/oshan.png",
+          "path": "/brand-logos/local/light/oshan.png",
           "source": "local://oshan.37822d5cb18d03f7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/oshan.png",
+          "path": "/brand-logos/local/dark/oshan.png",
           "source": "local://oshan.37822d5cb18d03f7.png",
           "fallback": false,
           "errors": []
@@ -2406,16 +2406,16 @@
     "oting": {
       "name": "Oting",
       "slug": "oting",
-      "dromSlug": "oting",
+      "aliasSlug": "oting",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/oting.png",
+          "path": "/brand-logos/local/light/oting.png",
           "source": "local://oting.73241a5a2292731a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/oting.png",
+          "path": "/brand-logos/local/dark/oting.png",
           "source": "local://oting.73241a5a2292731a.png",
           "fallback": false,
           "errors": []
@@ -2425,16 +2425,16 @@
     "peugeot": {
       "name": "Peugeot",
       "slug": "peugeot",
-      "dromSlug": "peugeot",
+      "aliasSlug": "peugeot",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/peugeot.png",
+          "path": "/brand-logos/local/light/peugeot.png",
           "source": "local://peugeot.c549476845fb11e6.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/peugeot.png",
+          "path": "/brand-logos/local/dark/peugeot.png",
           "source": "local://peugeot.c549476845fb11e6.png",
           "fallback": false,
           "errors": []
@@ -2444,16 +2444,16 @@
     "plymouth": {
       "name": "Plymouth",
       "slug": "plymouth",
-      "dromSlug": "plymouth",
+      "aliasSlug": "plymouth",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/plymouth.png",
+          "path": "/brand-logos/local/light/plymouth.png",
           "source": "local://plymouth.fdbc63558e2348b8.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/plymouth.png",
+          "path": "/brand-logos/local/dark/plymouth.png",
           "source": "local://plymouth.fdbc63558e2348b8.png",
           "fallback": false,
           "errors": []
@@ -2463,16 +2463,16 @@
     "polar-stone": {
       "name": "Polar Stone",
       "slug": "polar-stone",
-      "dromSlug": "polar-stone",
+      "aliasSlug": "polar-stone",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/polar-stone.png",
+          "path": "/brand-logos/local/light/polar-stone.png",
           "source": "local://polar-stone-light.2423a9d7186ee566.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/polar-stone.png",
+          "path": "/brand-logos/local/dark/polar-stone.png",
           "source": "local://polar-stone-dark.cce159dfd2365121.png",
           "fallback": false,
           "errors": []
@@ -2482,16 +2482,16 @@
     "polestar": {
       "name": "Polestar",
       "slug": "polestar",
-      "dromSlug": "polestar",
+      "aliasSlug": "polestar",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/polestar.png",
+          "path": "/brand-logos/local/light/polestar.png",
           "source": "local://polestar.6c61cfec4148991f.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/polestar.png",
+          "path": "/brand-logos/local/dark/polestar.png",
           "source": "local://polestar.6c61cfec4148991f.png",
           "fallback": false,
           "errors": []
@@ -2501,16 +2501,16 @@
     "pontiac": {
       "name": "Pontiac",
       "slug": "pontiac",
-      "dromSlug": "pontiac",
+      "aliasSlug": "pontiac",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/pontiac.png",
+          "path": "/brand-logos/local/light/pontiac.png",
           "source": "local://pontiac-light.07cdfd45a50b4e14.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/pontiac.png",
+          "path": "/brand-logos/local/dark/pontiac.png",
           "source": "local://pontiac-dark.21c094b830b3386e.png",
           "fallback": false,
           "errors": []
@@ -2520,16 +2520,16 @@
     "porsche": {
       "name": "Porsche",
       "slug": "porsche",
-      "dromSlug": "porsche",
+      "aliasSlug": "porsche",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/porsche.png",
+          "path": "/brand-logos/local/light/porsche.png",
           "source": "local://porsche.280baae7a622d533.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/porsche.png",
+          "path": "/brand-logos/local/dark/porsche.png",
           "source": "local://porsche.280baae7a622d533.png",
           "fallback": false,
           "errors": []
@@ -2539,16 +2539,16 @@
     "proton": {
       "name": "Proton",
       "slug": "proton",
-      "dromSlug": "proton",
+      "aliasSlug": "proton",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/proton.png",
+          "path": "/brand-logos/local/light/proton.png",
           "source": "local://proton.70cf1d42b60f5a1b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/proton.png",
+          "path": "/brand-logos/local/dark/proton.png",
           "source": "local://proton.70cf1d42b60f5a1b.png",
           "fallback": false,
           "errors": []
@@ -2558,16 +2558,16 @@
     "ram": {
       "name": "RAM",
       "slug": "ram",
-      "dromSlug": "ram",
+      "aliasSlug": "ram",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ram.png",
+          "path": "/brand-logos/local/light/ram.png",
           "source": "local://ram.7ae68d9ec8555ff3.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ram.png",
+          "path": "/brand-logos/local/dark/ram.png",
           "source": "local://ram.7ae68d9ec8555ff3.png",
           "fallback": false,
           "errors": []
@@ -2577,16 +2577,16 @@
     "ravon": {
       "name": "Ravon",
       "slug": "ravon",
-      "dromSlug": "ravon",
+      "aliasSlug": "ravon",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ravon.png",
+          "path": "/brand-logos/local/light/ravon.png",
           "source": "local://ravon.710cc8262ab1e8ad.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ravon.png",
+          "path": "/brand-logos/local/dark/ravon.png",
           "source": "local://ravon.710cc8262ab1e8ad.png",
           "fallback": false,
           "errors": []
@@ -2596,16 +2596,16 @@
     "renault": {
       "name": "Renault",
       "slug": "renault",
-      "dromSlug": "renault",
+      "aliasSlug": "renault",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/renault.png",
+          "path": "/brand-logos/local/light/renault.png",
           "source": "local://renault-light.43ab18e0bde119d7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/renault.png",
+          "path": "/brand-logos/local/dark/renault.png",
           "source": "local://renault-dark.6e6b6cd481f70cf1.png",
           "fallback": false,
           "errors": []
@@ -2615,16 +2615,16 @@
     "renault-samsung": {
       "name": "Renault Samsung",
       "slug": "renault-samsung",
-      "dromSlug": "renault-samsung",
+      "aliasSlug": "renault-samsung",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/renault-samsung.png",
+          "path": "/brand-logos/local/light/renault-samsung.png",
           "source": "local://renault-samsung.c54694da4a4cd132.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/renault-samsung.png",
+          "path": "/brand-logos/local/dark/renault-samsung.png",
           "source": "local://renault-samsung.c54694da4a4cd132.png",
           "fallback": false,
           "errors": []
@@ -2634,16 +2634,16 @@
     "rising-auto": {
       "name": "Rising Auto",
       "slug": "rising-auto",
-      "dromSlug": "rising-auto",
+      "aliasSlug": "rising-auto",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/rising-auto.png",
+          "path": "/brand-logos/local/light/rising-auto.png",
           "source": "local://rising-auto-light.3a5d976a523fdbce.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/rising-auto.png",
+          "path": "/brand-logos/local/dark/rising-auto.png",
           "source": "local://rising-auto-dark.3824ac82d429309f.png",
           "fallback": false,
           "errors": []
@@ -2653,16 +2653,16 @@
     "rivian": {
       "name": "Rivian",
       "slug": "rivian",
-      "dromSlug": "rivian",
+      "aliasSlug": "rivian",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/rivian.png",
+          "path": "/brand-logos/local/light/rivian.png",
           "source": "local://rivian-light.9b45d7b48e698638.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/rivian.png",
+          "path": "/brand-logos/local/dark/rivian.png",
           "source": "local://rivian-dark.09407b4cbd191d21.png",
           "fallback": false,
           "errors": []
@@ -2672,16 +2672,16 @@
     "roewe": {
       "name": "Roewe",
       "slug": "roewe",
-      "dromSlug": "roewe",
+      "aliasSlug": "roewe",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/roewe.png",
+          "path": "/brand-logos/local/light/roewe.png",
           "source": "local://roewe-light.3a12c65f321ceac1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/roewe.png",
+          "path": "/brand-logos/local/dark/roewe.png",
           "source": "local://roewe-dark.ba6a17d67bbfc12d.png",
           "fallback": false,
           "errors": []
@@ -2691,16 +2691,16 @@
     "rolls-royce": {
       "name": "Rolls-Royce",
       "slug": "rolls-royce",
-      "dromSlug": "rolls-royce",
+      "aliasSlug": "rolls-royce",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/rolls-royce.png",
+          "path": "/brand-logos/local/light/rolls-royce.png",
           "source": "local://rolls-royce.e4d833e5f2585593.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/rolls-royce.png",
+          "path": "/brand-logos/local/dark/rolls-royce.png",
           "source": "local://rolls-royce.e4d833e5f2585593.png",
           "fallback": false,
           "errors": []
@@ -2710,16 +2710,16 @@
     "rover": {
       "name": "Rover",
       "slug": "rover",
-      "dromSlug": "rover",
+      "aliasSlug": "rover",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/rover.png",
+          "path": "/brand-logos/local/light/rover.png",
           "source": "local://rover.ec9b82d069dd43f2.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/rover.png",
+          "path": "/brand-logos/local/dark/rover.png",
           "source": "local://rover.ec9b82d069dd43f2.png",
           "fallback": false,
           "errors": []
@@ -2729,16 +2729,16 @@
     "rox": {
       "name": "Rox",
       "slug": "rox",
-      "dromSlug": "rox",
+      "aliasSlug": "rox",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/rox.png",
+          "path": "/brand-logos/local/light/rox.png",
           "source": "local://rox-light.ed285bbe38a8e087.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/rox.png",
+          "path": "/brand-logos/local/dark/rox.png",
           "source": "local://rox-dark.6cde52c2216a4e6f.png",
           "fallback": false,
           "errors": []
@@ -2748,16 +2748,16 @@
     "saab": {
       "name": "Saab",
       "slug": "saab",
-      "dromSlug": "saab",
+      "aliasSlug": "saab",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/saab.png",
+          "path": "/brand-logos/local/light/saab.png",
           "source": "local://saab.b8fc67238fb7ef67.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/saab.png",
+          "path": "/brand-logos/local/dark/saab.png",
           "source": "local://saab.b8fc67238fb7ef67.png",
           "fallback": false,
           "errors": []
@@ -2767,16 +2767,16 @@
     "saipa": {
       "name": "SAIPA",
       "slug": "saipa",
-      "dromSlug": "saipa",
+      "aliasSlug": "saipa",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/saipa.png",
+          "path": "/brand-logos/local/light/saipa.png",
           "source": "local://saipa.072ee18628aac9ae.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/saipa.png",
+          "path": "/brand-logos/local/dark/saipa.png",
           "source": "local://saipa.072ee18628aac9ae.png",
           "fallback": false,
           "errors": []
@@ -2786,16 +2786,16 @@
     "saturn": {
       "name": "Saturn",
       "slug": "saturn",
-      "dromSlug": "saturn",
+      "aliasSlug": "saturn",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/saturn.png",
+          "path": "/brand-logos/local/light/saturn.png",
           "source": "local://saturn.0c099693577d8e4e.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/saturn.png",
+          "path": "/brand-logos/local/dark/saturn.png",
           "source": "local://saturn.0c099693577d8e4e.png",
           "fallback": false,
           "errors": []
@@ -2805,16 +2805,16 @@
     "scion": {
       "name": "Scion",
       "slug": "scion",
-      "dromSlug": "scion",
+      "aliasSlug": "scion",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/scion.png",
+          "path": "/brand-logos/local/light/scion.png",
           "source": "local://scion.858e24de736f096a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/scion.png",
+          "path": "/brand-logos/local/dark/scion.png",
           "source": "local://scion.858e24de736f096a.png",
           "fallback": false,
           "errors": []
@@ -2824,16 +2824,16 @@
     "seat": {
       "name": "SEAT",
       "slug": "seat",
-      "dromSlug": "seat",
+      "aliasSlug": "seat",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/seat.png",
+          "path": "/brand-logos/local/light/seat.png",
           "source": "local://seat.f419a28f3238524a.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/seat.png",
+          "path": "/brand-logos/local/dark/seat.png",
           "source": "local://seat.f419a28f3238524a.png",
           "fallback": false,
           "errors": []
@@ -2843,16 +2843,16 @@
     "seres": {
       "name": "Seres",
       "slug": "seres",
-      "dromSlug": "seres",
+      "aliasSlug": "seres",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/seres.png",
+          "path": "/brand-logos/local/light/seres.png",
           "source": "local://seres-light.e2645459e5c8c0b7.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/seres.png",
+          "path": "/brand-logos/local/dark/seres.png",
           "source": "local://seres-dark.15072d5e8c3eda8a.png",
           "fallback": false,
           "errors": []
@@ -2862,16 +2862,16 @@
     "shuanghuan": {
       "name": "Shuanghuan",
       "slug": "shuanghuan",
-      "dromSlug": "shuanghuan",
+      "aliasSlug": "shuanghuan",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/shuanghuan.png",
+          "path": "/brand-logos/local/light/shuanghuan.png",
           "source": "local://shuanghuan.9f3d01bb1e95b553.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/shuanghuan.png",
+          "path": "/brand-logos/local/dark/shuanghuan.png",
           "source": "local://shuanghuan.9f3d01bb1e95b553.png",
           "fallback": false,
           "errors": []
@@ -2881,16 +2881,16 @@
     "skoda": {
       "name": "Skoda",
       "slug": "skoda",
-      "dromSlug": "skoda",
+      "aliasSlug": "skoda",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/skoda.png",
+          "path": "/brand-logos/local/light/skoda.png",
           "source": "local://skoda.a9a03e95f464db4d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/skoda.png",
+          "path": "/brand-logos/local/dark/skoda.png",
           "source": "local://skoda.a9a03e95f464db4d.png",
           "fallback": false,
           "errors": []
@@ -2900,16 +2900,16 @@
     "skywell": {
       "name": "Skywell",
       "slug": "skywell",
-      "dromSlug": "skywell",
+      "aliasSlug": "skywell",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/skywell.png",
+          "path": "/brand-logos/local/light/skywell.png",
           "source": "local://skywell.dcb34fb6ee9d477d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/skywell.png",
+          "path": "/brand-logos/local/dark/skywell.png",
           "source": "local://skywell.dcb34fb6ee9d477d.png",
           "fallback": false,
           "errors": []
@@ -2919,16 +2919,16 @@
     "smart": {
       "name": "Smart",
       "slug": "smart",
-      "dromSlug": "smart",
+      "aliasSlug": "smart",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/smart.png",
+          "path": "/brand-logos/local/light/smart.png",
           "source": "local://smart.d0d5727a57f2c381.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/smart.png",
+          "path": "/brand-logos/local/dark/smart.png",
           "source": "local://smart.d0d5727a57f2c381.png",
           "fallback": false,
           "errors": []
@@ -2938,16 +2938,16 @@
     "soueast": {
       "name": "Soueast",
       "slug": "soueast",
-      "dromSlug": "soueast",
+      "aliasSlug": "soueast",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/soueast.png",
+          "path": "/brand-logos/local/light/soueast.png",
           "source": "local://soueast.f7f8e402eb086e96.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/soueast.png",
+          "path": "/brand-logos/local/dark/soueast.png",
           "source": "local://soueast.f7f8e402eb086e96.png",
           "fallback": false,
           "errors": []
@@ -2957,16 +2957,16 @@
     "ssangyong": {
       "name": "SsangYong",
       "slug": "ssangyong",
-      "dromSlug": "ssangyong",
+      "aliasSlug": "ssangyong",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/ssangyong.png",
+          "path": "/brand-logos/local/light/ssangyong.png",
           "source": "local://ssangyong-light.7e35d323157fd74b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/ssangyong.png",
+          "path": "/brand-logos/local/dark/ssangyong.png",
           "source": "local://ssangyong-dark.1b946bf530edbf9d.png",
           "fallback": false,
           "errors": []
@@ -2976,16 +2976,16 @@
     "subaru": {
       "name": "Subaru",
       "slug": "subaru",
-      "dromSlug": "subaru",
+      "aliasSlug": "subaru",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/subaru.png",
+          "path": "/brand-logos/local/light/subaru.png",
           "source": "local://subaru.8676b4eb42ce3ce0.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/subaru.png",
+          "path": "/brand-logos/local/dark/subaru.png",
           "source": "local://subaru.8676b4eb42ce3ce0.png",
           "fallback": false,
           "errors": []
@@ -2995,16 +2995,16 @@
     "suzuki": {
       "name": "Suzuki",
       "slug": "suzuki",
-      "dromSlug": "suzuki",
+      "aliasSlug": "suzuki",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/suzuki.png",
+          "path": "/brand-logos/local/light/suzuki.png",
           "source": "local://suzuki.1ca02a4a39f84416.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/suzuki.png",
+          "path": "/brand-logos/local/dark/suzuki.png",
           "source": "local://suzuki.1ca02a4a39f84416.png",
           "fallback": false,
           "errors": []
@@ -3014,16 +3014,16 @@
     "swm": {
       "name": "SWM",
       "slug": "swm",
-      "dromSlug": "swm",
+      "aliasSlug": "swm",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/swm.png",
+          "path": "/brand-logos/local/light/swm.png",
           "source": "local://swm.bfc9795bc03c336e.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/swm.png",
+          "path": "/brand-logos/local/dark/swm.png",
           "source": "local://swm.bfc9795bc03c336e.png",
           "fallback": false,
           "errors": []
@@ -3033,16 +3033,16 @@
     "tank": {
       "name": "Tank",
       "slug": "tank",
-      "dromSlug": "tank",
+      "aliasSlug": "tank",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/tank.png",
+          "path": "/brand-logos/local/light/tank.png",
           "source": "local://tank-light.d03be2507b43a74d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/tank.png",
+          "path": "/brand-logos/local/dark/tank.png",
           "source": "local://tank-dark.4fdc3561167a7932.png",
           "fallback": false,
           "errors": []
@@ -3052,16 +3052,16 @@
     "tata": {
       "name": "TATA",
       "slug": "tata",
-      "dromSlug": "tata",
+      "aliasSlug": "tata",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/tata.png",
+          "path": "/brand-logos/local/light/tata.png",
           "source": "local://tata.2df99ec6c3c0e5f4.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/tata.png",
+          "path": "/brand-logos/local/dark/tata.png",
           "source": "local://tata.2df99ec6c3c0e5f4.png",
           "fallback": false,
           "errors": []
@@ -3071,16 +3071,16 @@
     "tesla": {
       "name": "Tesla",
       "slug": "tesla",
-      "dromSlug": "tesla",
+      "aliasSlug": "tesla",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/tesla.png",
+          "path": "/brand-logos/local/light/tesla.png",
           "source": "local://tesla.4a459c85e060f5a4.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/tesla.png",
+          "path": "/brand-logos/local/dark/tesla.png",
           "source": "local://tesla.4a459c85e060f5a4.png",
           "fallback": false,
           "errors": []
@@ -3090,16 +3090,16 @@
     "tianma": {
       "name": "Tianma",
       "slug": "tianma",
-      "dromSlug": "tianma",
+      "aliasSlug": "tianma",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/tianma.png",
+          "path": "/brand-logos/local/light/tianma.png",
           "source": "local://tianma.a71697fe7727ecc0.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/tianma.png",
+          "path": "/brand-logos/local/dark/tianma.png",
           "source": "local://tianma.a71697fe7727ecc0.png",
           "fallback": false,
           "errors": []
@@ -3109,16 +3109,16 @@
     "tianye": {
       "name": "Tianye",
       "slug": "tianye",
-      "dromSlug": "tianye",
+      "aliasSlug": "tianye",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/tianye.png",
+          "path": "/brand-logos/local/light/tianye.png",
           "source": "local://tianye.a339e0fc46d62aa9.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/tianye.png",
+          "path": "/brand-logos/local/dark/tianye.png",
           "source": "local://tianye.a339e0fc46d62aa9.png",
           "fallback": false,
           "errors": []
@@ -3128,16 +3128,16 @@
     "toyota": {
       "name": "Toyota",
       "slug": "toyota",
-      "dromSlug": "toyota",
+      "aliasSlug": "toyota",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/toyota.png",
+          "path": "/brand-logos/local/light/toyota.png",
           "source": "local://toyota-light.c634f942f36c6b39.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/toyota.png",
+          "path": "/brand-logos/local/dark/toyota.png",
           "source": "local://toyota-dark.f0b4990b8279d9cf.png",
           "fallback": false,
           "errors": []
@@ -3147,16 +3147,16 @@
     "trabant": {
       "name": "Trabant",
       "slug": "trabant",
-      "dromSlug": "trabant",
+      "aliasSlug": "trabant",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/trabant.png",
+          "path": "/brand-logos/local/light/trabant.png",
           "source": "local://trabant-light.9f9b31bb8c154c71.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/trabant.png",
+          "path": "/brand-logos/local/dark/trabant.png",
           "source": "local://trabant-dark.782f982dde69353f.png",
           "fallback": false,
           "errors": []
@@ -3166,16 +3166,16 @@
     "umo": {
       "name": "Umo",
       "slug": "umo",
-      "dromSlug": "umo",
+      "aliasSlug": "umo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/umo.png",
+          "path": "/brand-logos/local/light/umo.png",
           "source": "local://umo-light.6c07c88b70399a61.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/umo.png",
+          "path": "/brand-logos/local/dark/umo.png",
           "source": "local://umo-dark.4f43da193a7424d7.png",
           "fallback": false,
           "errors": []
@@ -3185,16 +3185,16 @@
     "vauxhall": {
       "name": "Vauxhall",
       "slug": "vauxhall",
-      "dromSlug": "vauxhall",
+      "aliasSlug": "vauxhall",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/vauxhall.png",
+          "path": "/brand-logos/local/light/vauxhall.png",
           "source": "local://vauxhall-light.1fa600ab99308890.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/vauxhall.png",
+          "path": "/brand-logos/local/dark/vauxhall.png",
           "source": "local://vauxhall-dark.809a5431fc3fa268.png",
           "fallback": false,
           "errors": []
@@ -3204,16 +3204,16 @@
     "venucia": {
       "name": "Venucia",
       "slug": "venucia",
-      "dromSlug": "venucia",
+      "aliasSlug": "venucia",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/venucia.png",
+          "path": "/brand-logos/local/light/venucia.png",
           "source": "local://venucia.563959917d588ebc.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/venucia.png",
+          "path": "/brand-logos/local/dark/venucia.png",
           "source": "local://venucia.563959917d588ebc.png",
           "fallback": false,
           "errors": []
@@ -3223,16 +3223,16 @@
     "vgv": {
       "name": "VGV",
       "slug": "vgv",
-      "dromSlug": "vgv",
+      "aliasSlug": "vgv",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/vgv.png",
+          "path": "/brand-logos/local/light/vgv.png",
           "source": "local://vgv-light.4dfb3808eef401a0.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/vgv.png",
+          "path": "/brand-logos/local/dark/vgv.png",
           "source": "local://vgv-dark.f80031471ae49657.png",
           "fallback": false,
           "errors": []
@@ -3242,16 +3242,16 @@
     "volkswagen": {
       "name": "Volkswagen",
       "slug": "volkswagen",
-      "dromSlug": "volkswagen",
+      "aliasSlug": "volkswagen",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/volkswagen.png",
+          "path": "/brand-logos/local/light/volkswagen.png",
           "source": "local://volkswagen-light.6d82214350fafc4d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/volkswagen.png",
+          "path": "/brand-logos/local/dark/volkswagen.png",
           "source": "local://volkswagen-dark.7bf205eb82ec5e01.png",
           "fallback": false,
           "errors": []
@@ -3261,16 +3261,16 @@
     "volvo": {
       "name": "Volvo",
       "slug": "volvo",
-      "dromSlug": "volvo",
+      "aliasSlug": "volvo",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/volvo.png",
+          "path": "/brand-logos/local/light/volvo.png",
           "source": "local://volvo-light.3f24925350499f99.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/volvo.png",
+          "path": "/brand-logos/local/dark/volvo.png",
           "source": "local://volvo-dark.0807f2fe10f88f75.png",
           "fallback": false,
           "errors": []
@@ -3280,16 +3280,16 @@
     "voyah": {
       "name": "Voyah",
       "slug": "voyah",
-      "dromSlug": "voyah",
+      "aliasSlug": "voyah",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/voyah.png",
+          "path": "/brand-logos/local/light/voyah.png",
           "source": "local://voyah-light.98abde8353379c89.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/voyah.png",
+          "path": "/brand-logos/local/dark/voyah.png",
           "source": "local://voyah-dark.30cba6aa7a6da8bc.png",
           "fallback": false,
           "errors": []
@@ -3299,16 +3299,16 @@
     "wartburg": {
       "name": "Wartburg",
       "slug": "wartburg",
-      "dromSlug": "wartburg",
+      "aliasSlug": "wartburg",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/wartburg.png",
+          "path": "/brand-logos/local/light/wartburg.png",
           "source": "local://wartburg.4aab66c3ebaad081.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/wartburg.png",
+          "path": "/brand-logos/local/dark/wartburg.png",
           "source": "local://wartburg.4aab66c3ebaad081.png",
           "fallback": false,
           "errors": []
@@ -3318,16 +3318,16 @@
     "weltmeister": {
       "name": "Weltmeister",
       "slug": "weltmeister",
-      "dromSlug": "weltmeister",
+      "aliasSlug": "weltmeister",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/weltmeister.png",
+          "path": "/brand-logos/local/light/weltmeister.png",
           "source": "local://weltmeister-light.727f3a758519c598.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/weltmeister.png",
+          "path": "/brand-logos/local/dark/weltmeister.png",
           "source": "local://weltmeister-dark.cc77911ad673c68e.png",
           "fallback": false,
           "errors": []
@@ -3337,16 +3337,16 @@
     "wey": {
       "name": "WEY",
       "slug": "wey",
-      "dromSlug": "wey",
+      "aliasSlug": "wey",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/wey.png",
+          "path": "/brand-logos/local/light/wey.png",
           "source": "local://wey.b938a90453cc3580.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/wey.png",
+          "path": "/brand-logos/local/dark/wey.png",
           "source": "local://wey.b938a90453cc3580.png",
           "fallback": false,
           "errors": []
@@ -3356,16 +3356,16 @@
     "willys": {
       "name": "Willys",
       "slug": "willys",
-      "dromSlug": "willys",
+      "aliasSlug": "willys",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/willys.png",
+          "path": "/brand-logos/local/light/willys.png",
           "source": "local://willys-light.9c2378903aa513b8.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/willys.png",
+          "path": "/brand-logos/local/dark/willys.png",
           "source": "local://willys-dark.4c4fb9b10c3b7507.png",
           "fallback": false,
           "errors": []
@@ -3375,16 +3375,16 @@
     "wuling": {
       "name": "Wuling",
       "slug": "wuling",
-      "dromSlug": "wuling",
+      "aliasSlug": "wuling",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/wuling.png",
+          "path": "/brand-logos/local/light/wuling.png",
           "source": "local://wuling.d5ee57354aa692aa.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/wuling.png",
+          "path": "/brand-logos/local/dark/wuling.png",
           "source": "local://wuling.d5ee57354aa692aa.png",
           "fallback": false,
           "errors": []
@@ -3394,16 +3394,16 @@
     "xiaomi": {
       "name": "Xiaomi",
       "slug": "xiaomi",
-      "dromSlug": "xiaomi",
+      "aliasSlug": "xiaomi",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/xiaomi.png",
+          "path": "/brand-logos/local/light/xiaomi.png",
           "source": "local://xiaomi.d43d23685b38cfe2.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/xiaomi.png",
+          "path": "/brand-logos/local/dark/xiaomi.png",
           "source": "local://xiaomi.d43d23685b38cfe2.png",
           "fallback": false,
           "errors": []
@@ -3413,16 +3413,16 @@
     "xin-kai": {
       "name": "Xin Kai",
       "slug": "xin-kai",
-      "dromSlug": "xin-kai",
+      "aliasSlug": "xin-kai",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/xin-kai.png",
+          "path": "/brand-logos/local/light/xin-kai.png",
           "source": "local://xin-kai-light.c86545ad9a011f68.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/xin-kai.png",
+          "path": "/brand-logos/local/dark/xin-kai.png",
           "source": "local://xin-kai-dark.d2b5b4a0e4313e48.png",
           "fallback": false,
           "errors": []
@@ -3432,16 +3432,16 @@
     "xpeng": {
       "name": "XPeng",
       "slug": "xpeng",
-      "dromSlug": "xpeng",
+      "aliasSlug": "xpeng",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/xpeng.png",
+          "path": "/brand-logos/local/light/xpeng.png",
           "source": "local://xpeng-light.2e8cbc7e1a89e65b.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/xpeng.png",
+          "path": "/brand-logos/local/dark/xpeng.png",
           "source": "local://xpeng-dark.4a55be9328eb7d26.png",
           "fallback": false,
           "errors": []
@@ -3451,16 +3451,16 @@
     "yema": {
       "name": "Yema",
       "slug": "yema",
-      "dromSlug": "yema",
+      "aliasSlug": "yema",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/yema.png",
+          "path": "/brand-logos/local/light/yema.png",
           "source": "local://yema.38bcc7ca4d200190.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/yema.png",
+          "path": "/brand-logos/local/dark/yema.png",
           "source": "local://yema.38bcc7ca4d200190.png",
           "fallback": false,
           "errors": []
@@ -3470,16 +3470,16 @@
     "zeekr": {
       "name": "Zeekr",
       "slug": "zeekr",
-      "dromSlug": "zeekr",
+      "aliasSlug": "zeekr",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/zeekr.png",
+          "path": "/brand-logos/local/light/zeekr.png",
           "source": "local://zeekr-light.dce1bcd0f93decf5.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/zeekr.png",
+          "path": "/brand-logos/local/dark/zeekr.png",
           "source": "local://zeekr-dark.dd72dd8280a77754.png",
           "fallback": false,
           "errors": []
@@ -3489,16 +3489,16 @@
     "zotye": {
       "name": "Zotye",
       "slug": "zotye",
-      "dromSlug": "zotye",
+      "aliasSlug": "zotye",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/zotye.png",
+          "path": "/brand-logos/local/light/zotye.png",
           "source": "local://zotye.9d9df23fa60c5cde.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/zotye.png",
+          "path": "/brand-logos/local/dark/zotye.png",
           "source": "local://zotye.9d9df23fa60c5cde.png",
           "fallback": false,
           "errors": []
@@ -3508,16 +3508,16 @@
     "zx": {
       "name": "ZX",
       "slug": "zx",
-      "dromSlug": "zx",
+      "aliasSlug": "zx",
       "themes": {
         "light": {
-          "path": "/brand-logos/drom/light/zx.png",
+          "path": "/brand-logos/local/light/zx.png",
           "source": "local://zx.8b3abfab6ea276cf.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
-          "path": "/brand-logos/drom/dark/zx.png",
+          "path": "/brand-logos/local/dark/zx.png",
           "source": "local://zx.8b3abfab6ea276cf.png",
           "fallback": false,
           "errors": []

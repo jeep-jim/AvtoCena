@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 const LOGO_ROOTS = [
   path.resolve(process.cwd(), "data/catalog/vehicle-encyclopedia-v2/assets/brand-logos"),
-  path.resolve(process.cwd(), "apps/web/public/brand-logos/drom"),
+  path.resolve(process.cwd(), "apps/web/public/brand-logos/local"),
 ];
 
 async function localBrandLogo(values: string[], theme: "light" | "dark") {

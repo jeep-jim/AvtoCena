@@ -58,7 +58,7 @@ test("publisher is bounded, idempotent and has no third-party mirror mode", asyn
   assert.match(source, /previousCovers/);
   assert.match(source, /ifNoneMatch: "\*"/);
   assert.match(source, /manifest written|MANIFEST_PATH|writeJson\(MANIFEST_PATH/);
-  assert.doesNotMatch(source, /autohome\.com|drom\.ru/iu);
+  assert.doesNotMatch(source, /autohome\.com/iu);
 });
 
 test("published covers are served only through checksum-bound local storage routes", async () => {

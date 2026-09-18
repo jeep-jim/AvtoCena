@@ -167,7 +167,7 @@ test("Swift GLX bucket interiors never survive as exact power, displacement or o
     market: "uae", make: "Suzuki", model: "Swift", trim: "GLX", year: 2024,
     generation: "suzuki/swift/japan-2023", engineCc: 1373, powerHp: 140,
     powerKw: 102.97, icePowerKw: 102.97, utilizationPowerKw: 102.97,
-    powerDataConfidence: "reference", powerDataSource: "vehicle-knowledge:drom_f1e86718d9701240befdaed7",
+    powerDataConfidence: "reference", powerDataSource: "vehicle-knowledge:legacy_f1e86718d9701240befdaed7",
     powertrainKind: "combustion", fuel: "petrol", sourcePrice: 39500, sourceCurrency: "AED",
     totalRub: 2376520, publicVisibleRub: 2376520, publicSpecificationVerified: true, cardProjectionVersion: 3,
     calculationStatus: "ready", calculationSnapshot: { powerRequiresConfirmation: false }, images: [],

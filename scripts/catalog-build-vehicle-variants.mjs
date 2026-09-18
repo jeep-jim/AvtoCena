@@ -121,7 +121,7 @@ for (const [signature, rows] of groups) {
   });
 }
 
-const protectedVariants = existingVariants.filter((variant) => ["manufacturer", "official_registry", "drom_catalog", "manual"].includes(String(variant.sourceType)));
+const protectedVariants = existingVariants.filter((variant) => ["manufacturer", "official_registry", "manual"].includes(String(variant.sourceType)));
 const variantMap = new Map([...protectedVariants, ...generated].map((variant) => [variant.id, variant]));
 const variants = [...variantMap.values()].sort((left, right) => left.make.localeCompare(right.make, "ru") || left.model.localeCompare(right.model, "ru") || Number(left.yearFrom || 0) - Number(right.yearFrom || 0));
 

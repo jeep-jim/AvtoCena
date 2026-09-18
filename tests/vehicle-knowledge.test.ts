@@ -22,7 +22,6 @@ const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-di
 const brandDirectoryUi = fs.readFileSync(new URL("../apps/web/components/catalog/BrandModelDirectory.tsx", import.meta.url), "utf8");
 const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
 const productionWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
-const dromEnrichment = fs.readFileSync(new URL("../scripts/catalog-enrich-drom-vehicle-variants.mjs", import.meta.url), "utf8");
 const knowledgeAudit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
 
 function offer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
@@ -119,8 +118,8 @@ test("verified encyclopedia corpus is intact and complete", async () => {
 
 test("staging encyclopedia corpus exposes source-backed models and observations read-only", async () => {
   const corpus = await readStagingEncyclopediaCorpus();
-  assert.equal(corpus.models.length, 1_619);
-  assert.equal(corpus.variants.length, 19_240);
+  assert.equal(corpus.models.length, 1_617);
+  assert.equal(corpus.variants.length, 13_951);
   assert.ok(corpus.models.some((row) => row.id === "bentley/continental-gt"));
   assert.ok(corpus.variants.some((row) => row.id === "bentley/continental-gt/fourth-generation/speed-global" && row.powerHp === 782));
 });
@@ -134,8 +133,8 @@ test("full encyclopedia read layer remains isolated from calculator runtime", as
     readEncyclopediaKnowledgeVariants(),
   ]);
 
-  assert.equal(runtimeModels.length, 4_905);
-  assert.equal(runtimeVariants.length, 15_744);
+  assert.equal(runtimeModels.length, 4_904);
+  assert.equal(runtimeVariants.length, 12);
   assert.ok(!runtimeModels.some((row) => row.id === "toyota/premio"));
   assert.ok(!runtimeVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
 
@@ -191,15 +190,7 @@ test("public autocatalog does not expose unverified aggregate specification rang
   assert.doesNotMatch(modelPage, /source-backed|В расчёт — только exact|Собранные наблюдения источников|не используются в расчёте|V2 ·|review/);
 });
 
-test("Drom enrichment remains available but is not a two-hour production prerequisite", () => {
-  assert.match(productionWorkflow, /scripts\/catalog-enrich-drom-vehicle-variants\.mjs/);
-  assert.match(productionWorkflow, /Audit current encyclopedia snapshot/);
-  assert.doesNotMatch(productionWorkflow, /Enrich recent model specifications/);
-  assert.doesNotMatch(productionWorkflow, /DROM_KNOWLEDGE_LIMIT: "500"/);
-  assert.match(dromEnrichment, /RECENT_YEAR_FLOOR/);
-  assert.match(dromEnrichment, /activeModelIds\.has\(model\.id\) \|\| !ONLY_RECENT \|\| modelIsRecent\(model\)/);
-  assert.match(dromEnrichment, /status: "blocked"/);
-});
+
 
 test("vehicle knowledge is restricted to the rolling 15-year import window", () => {
   assert.match(knowledgeAudit, /const KNOWLEDGE_WINDOW_YEARS = 15/);

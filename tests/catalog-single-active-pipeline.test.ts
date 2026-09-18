@@ -44,7 +44,7 @@ test("only the owner-approved seller inventory workflows are scheduled under one
 test("owner-approved recurring schedule stays five-market only and keeps Japan manual", () => {
   const rebuild = text("catalog-five-market-full-rebuild.yml");
   const cleanup = text("catalog-storage-cleanup.yml");
-  const japan = text("catalog-japan-drom-refresh.yml");
+  const japan = text("proauctions-collect-publish.yml");
 
   assert.match(rebuild, /^\s{4}- cron: "0 18 \* \* \*"$/m);
   assert.match(rebuild, /catalogRefreshDue\(\)/);

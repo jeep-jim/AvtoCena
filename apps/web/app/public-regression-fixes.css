@@ -52,7 +52,7 @@
   z-index: 12020 !important;
 }
 
-/* Brand tiles share one rail surface; Drom PNGs stay transparent and equal-sized. */
+/* Brand tiles share one rail surface; Local brand PNGs stay transparent and equal-sized. */
 .ac-brand-rail a[href^="/cars/brand/"] {
   background: transparent !important;
   box-shadow: none !important;

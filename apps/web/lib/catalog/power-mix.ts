@@ -23,7 +23,7 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   const sellerUnknownSet=new Set(sellerUnknown);
   const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !sellerUnknownSet.has(row));
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
-  // Owner explicitly excludes Japan from the 80/20 policy: keep every Drom
+  // Owner explicitly excludes Japan from the 80/20 policy: keep every verified auction
   // sold-result candidate regardless of power; sanctions are a separate flag.
   if(market==="japan"){
    selected.push(...bucket);

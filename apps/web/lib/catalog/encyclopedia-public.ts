@@ -160,7 +160,6 @@ export async function readPublicEncyclopediaVariants(modelId: string) {
 export function encyclopediaSourceLabel(row: PublicEncyclopediaVariant) {
   if (row.source.includes("manufacturer")) return "Производитель";
   if (row.source.includes("official_registry")) return "Официальный реестр";
-  if (row.source.includes("drom")) return "Каталог модификаций";
   if (row.source.includes("consensus")) return "Подтверждено источниками";
   if (row.source.includes("manual")) return "Проверено АвтоЦена";
   if (row.source.includes("encyclopedia_v2")) {
