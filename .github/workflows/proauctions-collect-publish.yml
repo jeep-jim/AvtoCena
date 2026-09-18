@@ -26,6 +26,8 @@ jobs:
           const config=JSON.parse(fs.readFileSync('.github/market-runs/proauctions.json'));
           if(config.market!=='japan' || config.source!=='proauctions' || config.publish!==true)throw Error('invalid_proauctions_operation');
           if(config.resumeRunId && !/^\d+$/.test(String(config.resumeRunId)))throw Error('invalid_resume');
+          if(config.publishOnly === true && !config.resumeRunId)throw Error('publish_only_requires_saved_run');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`publishOnly=${config.publishOnly === true}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`resume=${config.resumeRunId || ''}\n`);
           NODE
       - uses: actions/download-artifact@v4
@@ -50,6 +52,7 @@ jobs:
       - name: Verify auction price, source links and incomplete specifications
         run: node --import tsx --test tests/proauctions-import.test.ts tests/proauctions-detail-evidence.test.ts
       - name: Collect all discovered details with resumable checkpoints
+        if: steps.operation.outputs.publishOnly != 'true'
         env:
           PROAUCTIONS_SECONDS: '16200'
         run: node --import tsx scripts/collect-proauctions.mjs
