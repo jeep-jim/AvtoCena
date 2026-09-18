@@ -153,11 +153,20 @@ async function SimilarOffers({ current }: { current: any }) {
       searchOffers({ market: current.market, make: current.make, model: familyModel, pageSize: 48, sort: "updatedAt" }),
       searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
     ]);
-    const modelRows = (await applyActiveBusinessPricingBatch(modelResult.items)).filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
-    const marketRows = (await applyActiveBusinessPricingBatch(marketResult.items)).filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
+    const { priceCandidatesUntil } = await import('../../../../../lib/catalog/price-candidates');
+    const modelRows = await priceCandidatesUntil(
+      modelResult.items.filter((item: any) => item.id !== current.id),
+      applyActiveBusinessPricingBatch, isRenderablePublicCatalogOffer,
+      rows => rows.length >= 4,
+    );
     marketTotal = Math.max(0, Number(marketResult.total || 0));
     sameModel = modelRows.slice(0, 4);
     const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
+    const marketRows = await priceCandidatesUntil(
+      marketResult.items.filter((item: any) => !selectedIds.has(String(item.id))),
+      applyActiveBusinessPricingBatch, isRenderablePublicCatalogOffer,
+      rows => new Set(rows.map(similarModelKey).filter(key => key !== similarModelKey(current))).size >= 4,
+    );
     otherMarketModels = diverseSimilarOffers(marketRows, current, 4, selectedIds);
   } catch (error) {
     console.error("offer_similar_search_failed", error);
