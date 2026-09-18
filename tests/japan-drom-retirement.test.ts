@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {planJapanDromRetirement,assertExactRetirementPreservation} from '../scripts/lib/japan-drom-retirement.mjs';
+import {planJapanDromRetirement,assertExactRetirementPreservation,hashRetirementRows} from '../scripts/lib/japan-drom-retirement.mjs';
 import {assertNoDeliveredPriceRegression} from '../apps/web/lib/catalog/publication-price-preservation';
 const old:any={id:'old',market:'japan',sourceId:'drom_japan_stat'};
 const fresh:any={id:'new',market:'japan',sourceId:'proauctions_japan_stat',sourcePrice:1200000,images:[{url:'a'},{url:'b'}]};
@@ -15,4 +15,12 @@ test('retirement refuses any unrelated deletion, price or photo change and Drom 
  const other:any={id:'korea',market:'korea',sourceId:'encar_direct',sourcePrice:200};const expected=[fresh,other];
  assert.doesNotThrow(()=>assertExactRetirementPreservation(expected,[other,fresh]));
  for(const actual of [[fresh],[{...fresh,sourcePrice:1},other],[{...fresh,images:[]},other],[fresh,other,old]])assert.throws(()=>assertExactRetirementPreservation(expected,actual));
+});
+
+test('catalog hashing stays within memory limits for a catalog larger than one JS string',()=>{
+ const payload='x'.repeat(1024*1024);
+ const rows=Array.from({length:520},(_,i)=>({id:String(i),payload}));
+ const hash=hashRetirementRows(rows);
+ assert.match(hash,/^[a-f0-9]{64}$/);
+ assert.equal(hash,hashRetirementRows([...rows].reverse()));
 });
