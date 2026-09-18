@@ -11,6 +11,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   collect:
+    # Renaming an operation label must not launch a duplicate collection.
+    if: "!contains(github.event.head_commit.message, '[catalog-metadata-only]')"
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
