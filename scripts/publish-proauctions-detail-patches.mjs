@@ -45,10 +45,12 @@ try{
  const expectedHash=hashCatalogRows(expected);
  const validate=rows=>{if(rows.length!==expected.length || hashCatalogRows(rows)!==expectedHash)throw Error('detail_patch_preservation_failed');assertNoDeliveredPriceRegression(all,rows);};
  validate(expected);
- const report={published:false,operationId,previousGeneration:previous.generationId,patched,sheetsAdded,powerRestored,newerLotsPreserved,otherMarketHashes:Object.fromEntries(Object.entries(preserved).map(([m,r])=>[m,hashCatalogRows(r)]))};
+ const report={published:false,operationId,previousGeneration:previous.generationId,expectedHash,patched,sheetsAdded,powerRestored,newerLotsPreserved,otherMarketHashes:Object.fromEntries(Object.entries(preserved).map(([m,r])=>[m,hashCatalogRows(r)]))};
  await fs.writeFile('japan-detail-recovery-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  const japan=expected.filter(r=>r.market==='japan');
  const manifest=await persistCatalogOffers(expected,{productionRefreshMarket:'japan',appendPublicOffersByMarket:{japan},preservePublicOffersByMarket:preserved,beforePersistValidate:validate,beforePublishValidate:validate});
+ Object.assign(report,{published:true,generationId:manifest.generationId,verification:'pending'});
+ await fs.writeFile('japan-detail-recovery-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  const after=[];for(const market of PUBLIC_CATALOG_MARKETS)after.push(...await readMarketOffers(market));validate(after);
- Object.assign(report,{published:true,generationId:manifest.generationId,verifiedAt:new Date().toISOString()});await fs.writeFile('japan-detail-recovery-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+ Object.assign(report,{verification:'passed',verifiedAt:new Date().toISOString()});await fs.writeFile('japan-detail-recovery-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
 }finally{await mutateDataJson(lockPath,{lockedUntil:''},current=>current.operationId===operationId?{...current,lockedUntil:new Date().toISOString(),releasedAt:new Date().toISOString()}:current);}

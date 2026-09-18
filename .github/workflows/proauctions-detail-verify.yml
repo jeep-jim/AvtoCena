@@ -1,0 +1,57 @@
+name: Verify published Japan detail recovery
+on:
+  push:
+    branches: [fix/japan-detail-publication-verification]
+    paths: ['.github/workflows/proauctions-detail-verify.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_READ_CONCURRENCY: '4'
+      YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: '60000'
+      NODE_OPTIONS: --max-old-space-size=11000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: proauctions-detail-patches
+          path: proauctions-detail-patches
+          run-id: 35321658779
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-detail-recovery
+          path: prior-detail-report
+          run-id: 35327515322
+          github-token: ${{ github.token }}
+      - name: Verify immutable generations and exact gallery order without writing the catalog
+        run: node --import tsx scripts/verify-proauctions-detail-publication.mjs
+      - name: Verify current read models, calculation coverage and Japan cards
+        run: |
+          node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs
+          node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+          node --import tsx scripts/catalog-verify-current-offers.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verified-japan-detail-publication
+          path: |
+            japan-detail-publication-verification.json
+            catalog-current-readmodel-parity.json
+            catalog-visible-calculation-coverage.json
+            catalog-offer-detail-verify.json
+          retention-days: 14
