@@ -334,7 +334,8 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     totalRub: visibleRub || null,
     previousTotalRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.previousTotalRub : null,
     priceDeltaRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.priceDeltaRub : null,
-    images: rankedCatalogImageUrls(raw),
+    // Rank before the public DTO removes the source identity and image checksums.
+    images: rankedCatalogImageUrls(pricedOffer),
   };
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
