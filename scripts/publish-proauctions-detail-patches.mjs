@@ -8,7 +8,9 @@ import {restoreProAuctionsPower} from '../apps/web/lib/catalog/proauctions-sourc
 import {hashCatalogRows} from './lib/catalog-preservation-hash.mjs';
 const patchRoot='proauctions-detail-patches';
 const summary=JSON.parse(await fs.readFile(`${patchRoot}/summary.json`,'utf8'));
-if(!summary.scanned || summary.failed.length)throw Error('incomplete_sheet_recovery');
+if(!summary.scanned)throw Error('empty_sheet_recovery');
+// Failed archival lots which were never published must not block existing cards.
+// Every published lot still requires its complete identity-checked patch below.
 const patches=new Map();for(const file of await fs.readdir(patchRoot))if(/^\d+\.json$/.test(file)){
  const patch=JSON.parse(await fs.readFile(`${patchRoot}/${file}`,'utf8'));if(patches.has(patch.id))throw Error('duplicate_patch');patches.set(patch.id,patch);
 }
