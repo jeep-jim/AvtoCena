@@ -16,6 +16,7 @@ on:
       # recovery publisher waiting in the shared catalog concurrency group.
   workflow_run:
     workflows:
+      - "ProAuctions collect and publish"
       - "Catalog V3 · Sequential production queue"
       - "Catalog UAE · publish preserved source shards"
       - "Catalog live · daily working markets"
