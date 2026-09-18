@@ -305,7 +305,7 @@ test("scheduled cleanup keeps a bounded six-hour grace while preserving both liv
 test("large catalog search uses compact projections and bounded fallback chunk reads", () => {
   assert.match(storage, /const maps: Record<string, Map<string, string\[\]>> = \{ market: new Map\(\) \}/);
   assert.doesNotMatch(storage, /power: new Map\(\)/);
-  assert.match(storage, /const searchProjectionCache = new Map/);
+  assert.match(storage, /const searchProjectionCache = new DetailReadCache/);
   assert.match(storage, /readSearchProjection\(manifest\.generationId, market\)/);
   assert.match(storage, /indexes\/projection/);
   assert.match(storage, /const needsProjection = Boolean/);
