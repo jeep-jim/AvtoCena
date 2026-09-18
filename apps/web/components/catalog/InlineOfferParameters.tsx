@@ -74,7 +74,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({offerId,initial,price,children,priceBadges,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(()=>isPickup?{...initial,vehicleCategory:'N1'}:initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:{sourcePrice:number;currency:string;effectiveRate:number;rateDate:string};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
@@ -109,7 +109,7 @@ export function InlineOfferParameters({offerId,initial,price,children,reportedVo
  const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {!showCalculation || keepSellerPrice?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
-   <p className="text-xs font-bold uppercase tracking-widest">{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>
+   <div className="flex items-start justify-between gap-3"><p className="min-w-0 text-xs font-bold uppercase tracking-widest">{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>{priceBadges ? <div className="shrink-0">{priceBadges}</div> : null}</div>
    {result?<p className="mt-2 text-3xl font-black">{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p>:<p className="mt-3 text-sm">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</p>}
    {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">{dirty?"Ориентир под ключ. Данные и стоимость требуют подтверждения.":"Рассчитано автоматически по данным объявления. Данные и стоимость требуют подтверждения."}</p>:null}
    {result?.currencyRate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Цена продавца: {result.currencyRate.sourcePrice.toLocaleString("ru-RU")} {result.currencyRate.currency}. Курс расчёта: {result.currencyRate.effectiveRate.toLocaleString("ru-RU", {maximumFractionDigits:8})} ₽ на {result.currencyRate.rateDate}.</p> : null}
