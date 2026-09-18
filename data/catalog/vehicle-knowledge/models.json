@@ -3,35 +3,31 @@
     "id": "honda/hr-v",
     "make": "Honda",
     "model": "HR-V",
-    "makeAliases": ["Хонда"],
-    "aliases": ["HRV", "HR V", "ХР-В", "ХРВ"],
-    "bodyTypes": ["suv"],
-    "popularityDecile": 1,
+    "makeAliases": [],
+    "aliases": [
+      "HRV"
+    ],
+    "bodyTypes": [],
     "source": "manual",
-    "sourceUrl": "https://www.drom.ru/catalog/honda/hr-v/",
-    "updatedAt": "2026-07-25T00:00:00.000Z",
-    "active": true
-  },
-  {
-    "id": "honda/vezel",
-    "make": "Honda",
-    "model": "Vezel",
-    "makeAliases": ["Хонда"],
-    "aliases": ["Везел", "ヴェゼル"],
-    "bodyTypes": ["suv"],
-    "popularityDecile": 1,
-    "source": "manual",
-    "sourceUrl": "https://www.drom.ru/catalog/honda/vezel/",
-    "updatedAt": "2026-07-25T00:00:00.000Z",
+    "sourceUrl": "https://www.eea.europa.eu/en/datahub/datahubitem-view/fa8b1229-3db6-495d-b18e-9c9b3267c02b",
+    "updatedAt": "2026-09-18T00:00:00.000Z",
     "active": true
   },
   {
     "id": "honda/fit",
     "make": "Honda",
     "model": "Fit",
-    "makeAliases": ["Хонда"],
-    "aliases": ["Jazz", "Фит", "Джаз"],
-    "bodyTypes": ["hatchback"],
+    "makeAliases": [
+      "Хонда"
+    ],
+    "aliases": [
+      "Jazz",
+      "Фит",
+      "Джаз"
+    ],
+    "bodyTypes": [
+      "hatchback"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -41,9 +37,18 @@
     "id": "honda/cr-v",
     "make": "Honda",
     "model": "CR-V",
-    "makeAliases": ["Хонда"],
-    "aliases": ["CRV", "CR V", "СР-В", "ЦРВ"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Хонда"
+    ],
+    "aliases": [
+      "CRV",
+      "CR V",
+      "СР-В",
+      "ЦРВ"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -53,9 +58,17 @@
     "id": "toyota/corolla",
     "make": "Toyota",
     "model": "Corolla",
-    "makeAliases": ["Тойота"],
-    "aliases": ["Королла"],
-    "bodyTypes": ["sedan", "hatchback", "wagon"],
+    "makeAliases": [
+      "Тойота"
+    ],
+    "aliases": [
+      "Королла"
+    ],
+    "bodyTypes": [
+      "sedan",
+      "hatchback",
+      "wagon"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -65,9 +78,15 @@
     "id": "toyota/camry",
     "make": "Toyota",
     "model": "Camry",
-    "makeAliases": ["Тойота"],
-    "aliases": ["Камри"],
-    "bodyTypes": ["sedan"],
+    "makeAliases": [
+      "Тойота"
+    ],
+    "aliases": [
+      "Камри"
+    ],
+    "bodyTypes": [
+      "sedan"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -77,9 +96,18 @@
     "id": "toyota/rav4",
     "make": "Toyota",
     "model": "RAV4",
-    "makeAliases": ["Тойота"],
-    "aliases": ["RAV 4", "RAV-4", "РАВ4", "РАВ 4"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Тойота"
+    ],
+    "aliases": [
+      "RAV 4",
+      "RAV-4",
+      "РАВ4",
+      "РАВ 4"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -89,9 +117,17 @@
     "id": "toyota/alphard",
     "make": "Toyota",
     "model": "Alphard",
-    "makeAliases": ["Тойота"],
-    "aliases": ["アルファード", "Альфард", "Алфард"],
-    "bodyTypes": ["minivan"],
+    "makeAliases": [
+      "Тойота"
+    ],
+    "aliases": [
+      "アルファード",
+      "Альфард",
+      "Алфард"
+    ],
+    "bodyTypes": [
+      "minivan"
+    ],
     "popularityDecile": 1,
     "source": "manufacturer",
     "sourceVersion": "Toyota 2019 specification",
@@ -103,9 +139,17 @@
     "id": "nissan/qashqai",
     "make": "Nissan",
     "model": "Qashqai",
-    "makeAliases": ["Ниссан"],
-    "aliases": ["Кашкай", "Dualis", "Дуалис"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Ниссан"
+    ],
+    "aliases": [
+      "Кашкай",
+      "Dualis",
+      "Дуалис"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -115,9 +159,19 @@
     "id": "nissan/x-trail",
     "make": "Nissan",
     "model": "X-Trail",
-    "makeAliases": ["Ниссан"],
-    "aliases": ["XTrail", "X Trail", "Экстрейл", "Икс-Трейл", "Rogue"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Ниссан"
+    ],
+    "aliases": [
+      "XTrail",
+      "X Trail",
+      "Экстрейл",
+      "Икс-Трейл",
+      "Rogue"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -127,9 +181,18 @@
     "id": "mazda/cx-5",
     "make": "Mazda",
     "model": "CX-5",
-    "makeAliases": ["Мазда"],
-    "aliases": ["CX5", "CX 5", "СХ-5", "СХ5"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Мазда"
+    ],
+    "aliases": [
+      "CX5",
+      "CX 5",
+      "СХ-5",
+      "СХ5"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -139,9 +202,18 @@
     "id": "hyundai/tucson",
     "make": "Hyundai",
     "model": "Tucson",
-    "makeAliases": ["Хендай", "Хундай", "Хёндэ"],
-    "aliases": ["Туссан", "Туксон"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Хендай",
+      "Хундай",
+      "Хёндэ"
+    ],
+    "aliases": [
+      "Туссан",
+      "Туксон"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -151,9 +223,16 @@
     "id": "kia/sportage",
     "make": "Kia",
     "model": "Sportage",
-    "makeAliases": ["Киа"],
-    "aliases": ["Спортейдж", "Спортаж"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Киа"
+    ],
+    "aliases": [
+      "Спортейдж",
+      "Спортаж"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -163,9 +242,26 @@
     "id": "bmw/3-series",
     "make": "BMW",
     "model": "3 Series",
-    "makeAliases": ["БМВ"],
-    "aliases": ["3-Series", "3er", "3 серия", "318", "320", "325", "328", "330", "335", "340"],
-    "bodyTypes": ["sedan", "wagon", "hatchback"],
+    "makeAliases": [
+      "БМВ"
+    ],
+    "aliases": [
+      "3-Series",
+      "3er",
+      "3 серия",
+      "318",
+      "320",
+      "325",
+      "328",
+      "330",
+      "335",
+      "340"
+    ],
+    "bodyTypes": [
+      "sedan",
+      "wagon",
+      "hatchback"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -175,9 +271,31 @@
     "id": "mercedes-benz/c-class",
     "make": "Mercedes-Benz",
     "model": "C-Class",
-    "makeAliases": ["Mercedes", "Мерседес", "Мерседес-Бенц"],
-    "aliases": ["C Class", "C-Класс", "C класс", "C180", "C200", "C220", "C250", "C300", "C350", "C400", "C43", "C63"],
-    "bodyTypes": ["sedan", "wagon", "coupe", "convertible"],
+    "makeAliases": [
+      "Mercedes",
+      "Мерседес",
+      "Мерседес-Бенц"
+    ],
+    "aliases": [
+      "C Class",
+      "C-Класс",
+      "C класс",
+      "C180",
+      "C200",
+      "C220",
+      "C250",
+      "C300",
+      "C350",
+      "C400",
+      "C43",
+      "C63"
+    ],
+    "bodyTypes": [
+      "sedan",
+      "wagon",
+      "coupe",
+      "convertible"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -187,9 +305,17 @@
     "id": "volkswagen/golf",
     "make": "Volkswagen",
     "model": "Golf",
-    "makeAliases": ["VW", "Фольксваген"],
-    "aliases": ["Гольф"],
-    "bodyTypes": ["hatchback", "wagon"],
+    "makeAliases": [
+      "VW",
+      "Фольксваген"
+    ],
+    "aliases": [
+      "Гольф"
+    ],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -199,9 +325,16 @@
     "id": "volkswagen/touareg",
     "make": "Volkswagen",
     "model": "Touareg",
-    "makeAliases": ["VW", "Фольксваген"],
-    "aliases": ["Туарег"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "VW",
+      "Фольксваген"
+    ],
+    "aliases": [
+      "Туарег"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manufacturer",
     "sourceVersion": "Volkswagen Touareg 2023",
@@ -213,9 +346,17 @@
     "id": "volkswagen/lavida",
     "make": "Volkswagen",
     "model": "Lavida",
-    "makeAliases": ["VW", "Фольксваген", "大众"],
-    "aliases": ["朗逸"],
-    "bodyTypes": ["sedan"],
+    "makeAliases": [
+      "VW",
+      "Фольксваген",
+      "大众"
+    ],
+    "aliases": [
+      "朗逸"
+    ],
+    "bodyTypes": [
+      "sedan"
+    ],
     "popularityDecile": 1,
     "source": "manufacturer",
     "sourceUrl": "https://www.svw-volkswagen.com/lavida2017/",
@@ -226,9 +367,19 @@
     "id": "volkswagen/t-cross",
     "make": "Volkswagen",
     "model": "T-Cross",
-    "makeAliases": ["VW", "Фольксваген", "大众"],
-    "aliases": ["T Cross", "TCross", "途铠"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "VW",
+      "Фольксваген",
+      "大众"
+    ],
+    "aliases": [
+      "T Cross",
+      "TCross",
+      "途铠"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manufacturer",
     "sourceUrl": "https://www.svw-volkswagen.com/tcross/",
@@ -239,9 +390,16 @@
     "id": "audi/a4",
     "make": "Audi",
     "model": "A4",
-    "makeAliases": ["Ауди"],
-    "aliases": ["А4"],
-    "bodyTypes": ["sedan", "wagon"],
+    "makeAliases": [
+      "Ауди"
+    ],
+    "aliases": [
+      "А4"
+    ],
+    "bodyTypes": [
+      "sedan",
+      "wagon"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -251,9 +409,16 @@
     "id": "tesla/model-3",
     "make": "Tesla",
     "model": "Model 3",
-    "makeAliases": ["Тесла"],
-    "aliases": ["Model3", "Модель 3"],
-    "bodyTypes": ["sedan"],
+    "makeAliases": [
+      "Тесла"
+    ],
+    "aliases": [
+      "Model3",
+      "Модель 3"
+    ],
+    "bodyTypes": [
+      "sedan"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -263,9 +428,19 @@
     "id": "byd/song-plus",
     "make": "BYD",
     "model": "Song Plus",
-    "makeAliases": ["БИД", "比亚迪"],
-    "aliases": ["Song Plus DM-i", "Song Plus EV", "Сонг Плюс", "宋PLUS"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "БИД",
+      "比亚迪"
+    ],
+    "aliases": [
+      "Song Plus DM-i",
+      "Song Plus EV",
+      "Сонг Плюс",
+      "宋PLUS"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -275,9 +450,19 @@
     "id": "geely/coolray",
     "make": "Geely",
     "model": "Coolray",
-    "makeAliases": ["Джили", "吉利"],
-    "aliases": ["Binyue", "Биньюе", "Кулрей", "缤越"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Джили",
+      "吉利"
+    ],
+    "aliases": [
+      "Binyue",
+      "Биньюе",
+      "Кулрей",
+      "缤越"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
@@ -287,9 +472,20 @@
     "id": "changan/cs55-plus",
     "make": "Changan",
     "model": "CS55 Plus",
-    "makeAliases": ["Чанган", "长安"],
-    "aliases": ["CS55+", "CS 55 Plus", "Uni-S", "UNI-S", "Юни-С"],
-    "bodyTypes": ["suv"],
+    "makeAliases": [
+      "Чанган",
+      "长安"
+    ],
+    "aliases": [
+      "CS55+",
+      "CS 55 Plus",
+      "Uni-S",
+      "UNI-S",
+      "Юни-С"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",

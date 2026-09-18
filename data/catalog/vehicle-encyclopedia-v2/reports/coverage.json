@@ -2,51 +2,41 @@
   "schemaVersion": 2,
   "productionConnected": false,
   "totals": {
-    "source": 928,
-    "brand": 255,
-    "model": 1619,
-    "generation": 1293,
-    "facelift": 105,
-    "variant": 19240,
-    "media": 449
+    "source": 820,
+    "brand": 186,
+    "model": 1617,
+    "generation": 1152,
+    "facelift": 12,
+    "variant": 13951,
+    "media": 61
   },
   "statuses": {
     "brand": {
       "review": 3,
-      "seed": 243,
+      "seed": 174,
       "verified": 9
     },
     "model": {
-      "review": 1560,
+      "review": 1558,
       "seed": 34,
       "verified": 25
     },
     "generation": {
-      "review": 1232,
+      "review": 1091,
       "seed": 35,
       "verified": 26
     },
     "facelift": {
-      "review": 93,
       "seed": 3,
       "verified": 9
     },
     "variant": {
-      "review": 18941,
+      "review": 13652,
       "seed": 38,
       "verified": 261
     }
   },
   "byBrand": [
-    {
-      "brandId": "212",
-      "brand": "212",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
     {
       "brandId": "abarth",
       "brand": "Abarth",
@@ -54,25 +44,16 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 19,
-      "media": 3
-    },
-    {
-      "brandId": "ac-cars",
-      "brand": "AC",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 1
     },
     {
       "brandId": "acura",
       "brand": "Acura",
       "models": 6,
-      "generations": 7,
-      "facelifts": 1,
-      "variants": 20,
-      "media": 3
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 7,
+      "media": 1
     },
     {
       "brandId": "aion",
@@ -90,7 +71,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "aiways",
@@ -108,7 +89,7 @@
       "generations": 13,
       "facelifts": 0,
       "variants": 152,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "alpina",
@@ -117,7 +98,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 11,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "alpine-cars",
@@ -135,7 +116,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ambertruck",
@@ -144,16 +125,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "amc",
-      "brand": "AMC",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "arcfox",
@@ -165,40 +137,22 @@
       "media": 0
     },
     {
-      "brandId": "aro",
-      "brand": "Aro",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "asia",
-      "brand": "Asia",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "aston-martin",
       "brand": "Aston Martin",
       "models": 17,
       "generations": 16,
       "facelifts": 0,
       "variants": 59,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "audi",
       "brand": "Audi",
       "models": 44,
-      "generations": 47,
-      "facelifts": 8,
-      "variants": 1112,
-      "media": 3
+      "generations": 34,
+      "facelifts": 0,
+      "variants": 672,
+      "media": 1
     },
     {
       "brandId": "audi-china",
@@ -216,7 +170,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "baic",
@@ -225,7 +179,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 45,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "baojun",
@@ -234,7 +188,7 @@
       "generations": 9,
       "facelifts": 0,
       "variants": 28,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "baw",
@@ -243,7 +197,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "belgee",
@@ -252,7 +206,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "bentley",
@@ -261,7 +215,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 67,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "bestune",
@@ -270,16 +224,16 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "bmw",
       "brand": "BMW",
       "models": 38,
-      "generations": 39,
-      "facelifts": 8,
-      "variants": 1229,
-      "media": 3
+      "generations": 28,
+      "facelifts": 1,
+      "variants": 923,
+      "media": 1
     },
     {
       "brandId": "borgward",
@@ -288,7 +242,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "brabus",
@@ -298,15 +252,6 @@
       "facelifts": 0,
       "variants": 0,
       "media": 0
-    },
-    {
-      "brandId": "brilliance",
-      "brand": "Brilliance",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
     },
     {
       "brandId": "bugatti",
@@ -324,7 +269,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 3,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "byd",
@@ -333,7 +278,7 @@
       "generations": 15,
       "facelifts": 0,
       "variants": 92,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "cadillac",
@@ -342,7 +287,7 @@
       "generations": 12,
       "facelifts": 0,
       "variants": 45,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "caterham",
@@ -360,30 +305,12 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "changan-nevo",
       "brand": "Changan NEVO",
       "models": 3,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "changfeng",
-      "brand": "Changfeng",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "changhe",
-      "brand": "Changhe",
-      "models": 0,
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
@@ -396,7 +323,7 @@
       "generations": 8,
       "facelifts": 0,
       "variants": 19,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "chevrolet",
@@ -405,7 +332,7 @@
       "generations": 21,
       "facelifts": 0,
       "variants": 100,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "chrysler",
@@ -414,7 +341,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 17,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ciimo",
@@ -438,55 +365,28 @@
       "brandId": "citroen",
       "brand": "Citroën",
       "models": 35,
-      "generations": 33,
-      "facelifts": 1,
-      "variants": 447,
-      "media": 3
-    },
-    {
-      "brandId": "coda",
-      "brand": "Coda",
-      "models": 0,
-      "generations": 0,
+      "generations": 30,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 428,
+      "media": 1
     },
     {
       "brandId": "cupra",
       "brand": "Cupra",
       "models": 7,
-      "generations": 7,
+      "generations": 6,
       "facelifts": 0,
-      "variants": 71,
-      "media": 2
+      "variants": 63,
+      "media": 0
     },
     {
       "brandId": "dacia",
       "brand": "Dacia",
       "models": 9,
-      "generations": 12,
-      "facelifts": 5,
-      "variants": 278,
-      "media": 2
-    },
-    {
-      "brandId": "dadi",
-      "brand": "Dadi",
-      "models": 0,
-      "generations": 0,
+      "generations": 6,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "daewoo",
-      "brand": "Daewoo",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 101,
+      "media": 0
     },
     {
       "brandId": "daihatsu",
@@ -495,7 +395,7 @@
       "generations": 2,
       "facelifts": 1,
       "variants": 15,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "dallara",
@@ -507,40 +407,13 @@
       "media": 0
     },
     {
-      "brandId": "datsun",
-      "brand": "Datsun",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "dayun",
-      "brand": "Dayun",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "deepal",
       "brand": "Deepal",
       "models": 2,
       "generations": 2,
       "facelifts": 0,
       "variants": 5,
-      "media": 2
-    },
-    {
-      "brandId": "denza",
-      "brand": "Denza",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "dfsk",
@@ -555,10 +428,10 @@
       "brandId": "dodge",
       "brand": "Dodge",
       "models": 11,
-      "generations": 10,
-      "facelifts": 1,
-      "variants": 111,
-      "media": 2
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 107,
+      "media": 0
     },
     {
       "brandId": "dongfeng",
@@ -567,7 +440,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 2,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "dongfeng-aeolus",
@@ -639,7 +512,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ebro",
@@ -675,16 +548,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "esteo",
-      "brand": "ESTEO",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "evo",
@@ -702,7 +566,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "exeed",
@@ -711,7 +575,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "exlantix",
@@ -747,7 +611,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 12,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ferrari",
@@ -756,16 +620,16 @@
       "generations": 36,
       "facelifts": 0,
       "variants": 68,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "fiat",
       "brand": "Fiat",
       "models": 42,
-      "generations": 38,
-      "facelifts": 1,
-      "variants": 416,
-      "media": 2
+      "generations": 36,
+      "facelifts": 0,
+      "variants": 198,
+      "media": 0
     },
     {
       "brandId": "firefly",
@@ -783,16 +647,16 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 9,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ford",
       "brand": "Ford",
       "models": 44,
-      "generations": 42,
-      "facelifts": 7,
-      "variants": 1041,
-      "media": 3
+      "generations": 32,
+      "facelifts": 0,
+      "variants": 690,
+      "media": 1
     },
     {
       "brandId": "forthing",
@@ -801,16 +665,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "foton",
-      "brand": "Foton",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "gac",
@@ -819,7 +674,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 4,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "geely",
@@ -828,7 +683,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 7,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "geely-galaxy",
@@ -846,16 +701,7 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 21,
-      "media": 2
-    },
-    {
-      "brandId": "geo",
-      "brand": "Geo",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "gmc",
@@ -864,7 +710,7 @@
       "generations": 8,
       "facelifts": 0,
       "variants": 18,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "great-wall",
@@ -873,43 +719,16 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 11,
-      "media": 2
-    },
-    {
-      "brandId": "hafei",
-      "brand": "Hafei",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "haima",
-      "brand": "Haima",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "haval",
       "brand": "Haval",
       "models": 4,
-      "generations": 4,
-      "facelifts": 1,
-      "variants": 14,
-      "media": 3
-    },
-    {
-      "brandId": "hawtai",
-      "brand": "Hawtai",
-      "models": 0,
-      "generations": 0,
+      "generations": 3,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 4,
+      "media": 1
     },
     {
       "brandId": "hedmos",
@@ -921,22 +740,13 @@
       "media": 0
     },
     {
-      "brandId": "hiphi",
-      "brand": "HiPhi",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "honda",
       "brand": "Honda",
       "models": 48,
-      "generations": 37,
-      "facelifts": 10,
-      "variants": 307,
-      "media": 10
+      "generations": 31,
+      "facelifts": 6,
+      "variants": 261,
+      "media": 8
     },
     {
       "brandId": "hongqi",
@@ -945,34 +755,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "hozon",
-      "brand": "Hozon",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "huanghai",
-      "brand": "Huanghai",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "hummer",
-      "brand": "Hummer",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "hyptec",
@@ -987,19 +770,10 @@
       "brandId": "hyundai",
       "brand": "Hyundai",
       "models": 30,
-      "generations": 32,
-      "facelifts": 4,
-      "variants": 1098,
-      "media": 3
-    },
-    {
-      "brandId": "icar",
-      "brand": "iCAR",
-      "models": 0,
-      "generations": 0,
+      "generations": 25,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 669,
+      "media": 1
     },
     {
       "brandId": "icaur",
@@ -1017,7 +791,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ineos",
@@ -1035,34 +809,16 @@
       "generations": 12,
       "facelifts": 0,
       "variants": 21,
-      "media": 2
-    },
-    {
-      "brandId": "iran-khodro",
-      "brand": "Iran Khodro",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "isuzu",
       "brand": "Isuzu",
       "models": 2,
-      "generations": 2,
+      "generations": 1,
       "facelifts": 0,
-      "variants": 5,
-      "media": 2
-    },
-    {
-      "brandId": "iveco",
-      "brand": "IVECO",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 1,
+      "media": 0
     },
     {
       "brandId": "jac",
@@ -1071,7 +827,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "jac-yiwei",
@@ -1089,34 +845,25 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 9,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "jaguar",
       "brand": "Jaguar",
       "models": 11,
-      "generations": 10,
-      "facelifts": 2,
-      "variants": 182,
-      "media": 2
+      "generations": 8,
+      "facelifts": 0,
+      "variants": 81,
+      "media": 0
     },
     {
       "brandId": "jeep",
       "brand": "Jeep",
       "models": 15,
-      "generations": 15,
-      "facelifts": 3,
-      "variants": 313,
-      "media": 2
-    },
-    {
-      "brandId": "jeland",
-      "brand": "Jeland",
-      "models": 0,
-      "generations": 0,
+      "generations": 11,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 100,
+      "media": 0
     },
     {
       "brandId": "jetour",
@@ -1125,34 +872,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 2,
-      "media": 2
-    },
-    {
-      "brandId": "jetta",
-      "brand": "Jetta",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "jinbei",
-      "brand": "Jinbei",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "jmc",
-      "brand": "JMC",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "jmev",
@@ -1164,40 +884,22 @@
       "media": 0
     },
     {
-      "brandId": "kaiyi",
-      "brand": "Kaiyi",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "kgm",
       "brand": "KGM",
       "models": 6,
       "generations": 6,
       "facelifts": 0,
       "variants": 32,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "kia",
       "brand": "Kia",
       "models": 34,
-      "generations": 34,
-      "facelifts": 5,
-      "variants": 457,
-      "media": 3
-    },
-    {
-      "brandId": "knewstar",
-      "brand": "Knewstar",
-      "models": 0,
-      "generations": 0,
+      "generations": 29,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 269,
+      "media": 1
     },
     {
       "brandId": "ktm",
@@ -1233,7 +935,7 @@
       "generations": 12,
       "facelifts": 0,
       "variants": 56,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "lancia",
@@ -1242,7 +944,7 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 23,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "land-rover",
@@ -1251,16 +953,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 375,
-      "media": 2
-    },
-    {
-      "brandId": "landwind",
-      "brand": "Landwind",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "leapmotor",
@@ -1269,7 +962,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 25,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "lepas",
@@ -1296,7 +989,7 @@
       "generations": 15,
       "facelifts": 0,
       "variants": 60,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "li-auto",
@@ -1305,16 +998,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "lifan",
-      "brand": "Lifan",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "lincoln",
@@ -1323,7 +1007,7 @@
       "generations": 8,
       "facelifts": 0,
       "variants": 18,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "livan",
@@ -1332,7 +1016,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 3,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "lotus",
@@ -1341,7 +1025,7 @@
       "generations": 12,
       "facelifts": 0,
       "variants": 50,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "lucid",
@@ -1350,7 +1034,7 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 32,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "luxeed",
@@ -1362,31 +1046,13 @@
       "media": 0
     },
     {
-      "brandId": "luxgen",
-      "brand": "Luxgen",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "lynk-and-co",
       "brand": "Lynk & Co",
       "models": 4,
       "generations": 3,
       "facelifts": 0,
       "variants": 5,
-      "media": 2
-    },
-    {
-      "brandId": "m-hero",
-      "brand": "M-Hero",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "maextro",
@@ -1395,7 +1061,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "mahindra",
@@ -1422,7 +1088,7 @@
       "generations": 9,
       "facelifts": 0,
       "variants": 76,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "maxus",
@@ -1431,25 +1097,16 @@
       "generations": 4,
       "facelifts": 0,
       "variants": 7,
-      "media": 2
-    },
-    {
-      "brandId": "maybach",
-      "brand": "Maybach",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "mazda",
       "brand": "Mazda",
-      "models": 33,
-      "generations": 19,
-      "facelifts": 5,
-      "variants": 647,
-      "media": 4
+      "models": 32,
+      "generations": 13,
+      "facelifts": 1,
+      "variants": 456,
+      "media": 2
     },
     {
       "brandId": "mclaren",
@@ -1458,7 +1115,7 @@
       "generations": 16,
       "facelifts": 0,
       "variants": 41,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "mercedes-benz",
@@ -1467,16 +1124,7 @@
       "generations": 52,
       "facelifts": 2,
       "variants": 1104,
-      "media": 5
-    },
-    {
-      "brandId": "mercury",
-      "brand": "Mercury",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 3
     },
     {
       "brandId": "mg-motor",
@@ -1485,7 +1133,7 @@
       "generations": 13,
       "facelifts": 0,
       "variants": 106,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "micro",
@@ -1500,28 +1148,19 @@
       "brandId": "mini",
       "brand": "MINI",
       "models": 9,
-      "generations": 9,
-      "facelifts": 1,
-      "variants": 274,
-      "media": 2
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 194,
+      "media": 0
     },
     {
       "brandId": "mitsubishi",
       "brand": "Mitsubishi",
       "models": 27,
-      "generations": 18,
-      "facelifts": 4,
-      "variants": 128,
-      "media": 3
-    },
-    {
-      "brandId": "mitsuoka",
-      "brand": "Mitsuoka",
-      "models": 0,
-      "generations": 0,
+      "generations": 12,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 61,
+      "media": 1
     },
     {
       "brandId": "mobilize",
@@ -1548,7 +1187,7 @@
       "generations": 6,
       "facelifts": 0,
       "variants": 27,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "neta",
@@ -1557,7 +1196,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "nio",
@@ -1566,16 +1205,16 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 17,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "nissan",
       "brand": "Nissan",
       "models": 51,
-      "generations": 34,
-      "facelifts": 5,
-      "variants": 267,
-      "media": 4
+      "generations": 28,
+      "facelifts": 0,
+      "variants": 142,
+      "media": 2
     },
     {
       "brandId": "nordcross",
@@ -1584,16 +1223,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "oldsmobile",
-      "brand": "Oldsmobile",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "omoda",
@@ -1602,7 +1232,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 20,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "onvo",
@@ -1617,10 +1247,10 @@
       "brandId": "opel",
       "brand": "Opel",
       "models": 18,
-      "generations": 16,
+      "generations": 15,
       "facelifts": 0,
-      "variants": 478,
-      "media": 2
+      "variants": 381,
+      "media": 0
     },
     {
       "brandId": "ora",
@@ -1629,7 +1259,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "oshan",
@@ -1638,43 +1268,16 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "oting",
-      "brand": "Oting",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "peugeot",
       "brand": "Peugeot",
       "models": 30,
-      "generations": 29,
-      "facelifts": 6,
-      "variants": 789,
-      "media": 2
-    },
-    {
-      "brandId": "plymouth",
-      "brand": "Plymouth",
-      "models": 0,
-      "generations": 0,
+      "generations": 23,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "polar-stone",
-      "brand": "Polar Stone",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 306,
+      "media": 0
     },
     {
       "brandId": "polestar",
@@ -1683,7 +1286,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 37,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "pontiac",
@@ -1692,7 +1295,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 2,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "porsche",
@@ -1701,7 +1304,7 @@
       "generations": 9,
       "facelifts": 0,
       "variants": 461,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "proton",
@@ -1710,7 +1313,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "radar",
@@ -1728,43 +1331,16 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 3,
-      "media": 2
-    },
-    {
-      "brandId": "ravon",
-      "brand": "Ravon",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "renault",
       "brand": "Renault",
       "models": 27,
-      "generations": 26,
-      "facelifts": 2,
-      "variants": 350,
-      "media": 2
-    },
-    {
-      "brandId": "renault-samsung",
-      "brand": "Renault Samsung",
-      "models": 0,
-      "generations": 0,
+      "generations": 22,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "rising-auto",
-      "brand": "Rising Auto",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 252,
+      "media": 0
     },
     {
       "brandId": "rivian",
@@ -1773,16 +1349,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 2
-    },
-    {
-      "brandId": "roewe",
-      "brand": "Roewe",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "rolls-royce",
@@ -1791,25 +1358,7 @@
       "generations": 16,
       "facelifts": 0,
       "variants": 83,
-      "media": 2
-    },
-    {
-      "brandId": "rover",
-      "brand": "Rover",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "rox",
-      "brand": "Rox",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "ruf",
@@ -1821,31 +1370,13 @@
       "media": 0
     },
     {
-      "brandId": "saab",
-      "brand": "Saab",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "saipa",
-      "brand": "SAIPA",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "saturn",
       "brand": "Saturn",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "scion",
@@ -1854,16 +1385,16 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 2,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "seat",
       "brand": "SEAT",
       "models": 10,
-      "generations": 11,
-      "facelifts": 2,
-      "variants": 210,
-      "media": 2
+      "generations": 8,
+      "facelifts": 0,
+      "variants": 87,
+      "media": 0
     },
     {
       "brandId": "secma",
@@ -1881,7 +1412,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "shangjie",
@@ -1893,22 +1424,13 @@
       "media": 0
     },
     {
-      "brandId": "shuanghuan",
-      "brand": "Shuanghuan",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
       "brandId": "skoda",
       "brand": "Skoda",
       "models": 14,
-      "generations": 16,
-      "facelifts": 5,
-      "variants": 1205,
-      "media": 2
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 623,
+      "media": 0
     },
     {
       "brandId": "skywell",
@@ -1917,7 +1439,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 9,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "skyworth",
@@ -1935,7 +1457,7 @@
       "generations": 10,
       "facelifts": 0,
       "variants": 67,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "solaris",
@@ -1944,7 +1466,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "sollers",
@@ -1953,16 +1475,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "soueast",
-      "brand": "Soueast",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "sportequipe",
@@ -1989,7 +1502,7 @@
       "generations": 9,
       "facelifts": 0,
       "variants": 282,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "stelato",
@@ -2007,7 +1520,7 @@
       "generations": 13,
       "facelifts": 0,
       "variants": 73,
-      "media": 3
+      "media": 1
     },
     {
       "brandId": "suda",
@@ -2022,10 +1535,10 @@
       "brandId": "suzuki",
       "brand": "Suzuki",
       "models": 30,
-      "generations": 15,
-      "facelifts": 1,
-      "variants": 162,
-      "media": 3
+      "generations": 14,
+      "facelifts": 0,
+      "variants": 95,
+      "media": 1
     },
     {
       "brandId": "swm",
@@ -2034,25 +1547,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 13,
-      "media": 2
-    },
-    {
-      "brandId": "tank",
-      "brand": "Tank",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "tata",
-      "brand": "TATA",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "tenet",
@@ -2061,7 +1556,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "tesla",
@@ -2070,25 +1565,7 @@
       "generations": 5,
       "facelifts": 0,
       "variants": 244,
-      "media": 3
-    },
-    {
-      "brandId": "tianma",
-      "brand": "Tianma",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "tianye",
-      "brand": "Tianye",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 1
     },
     {
       "brandId": "togg",
@@ -2103,28 +1580,10 @@
       "brandId": "toyota",
       "brand": "Toyota",
       "models": 93,
-      "generations": 59,
-      "facelifts": 6,
-      "variants": 588,
-      "media": 11
-    },
-    {
-      "brandId": "trabant",
-      "brand": "Trabant",
-      "models": 0,
-      "generations": 0,
+      "generations": 46,
       "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "umo",
-      "brand": "Umo",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "variants": 480,
+      "media": 9
     },
     {
       "brandId": "vauxhall",
@@ -2133,25 +1592,7 @@
       "generations": 7,
       "facelifts": 0,
       "variants": 23,
-      "media": 2
-    },
-    {
-      "brandId": "venucia",
-      "brand": "Venucia",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "vgv",
-      "brand": "VGV",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "vinfast",
@@ -2165,20 +1606,20 @@
     {
       "brandId": "volkswagen",
       "brand": "Volkswagen",
-      "models": 42,
-      "generations": 40,
-      "facelifts": 6,
-      "variants": 1926,
-      "media": 3
+      "models": 41,
+      "generations": 32,
+      "facelifts": 1,
+      "variants": 1319,
+      "media": 1
     },
     {
       "brandId": "volvo",
       "brand": "Volvo",
       "models": 25,
-      "generations": 23,
-      "facelifts": 2,
-      "variants": 344,
-      "media": 3
+      "generations": 20,
+      "facelifts": 0,
+      "variants": 210,
+      "media": 1
     },
     {
       "brandId": "voyah",
@@ -2187,34 +1628,7 @@
       "generations": 2,
       "facelifts": 0,
       "variants": 10,
-      "media": 2
-    },
-    {
-      "brandId": "wartburg",
-      "brand": "Wartburg",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "weltmeister",
-      "brand": "Weltmeister",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "wey",
-      "brand": "WEY",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "willys",
@@ -2223,7 +1637,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 1,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "wuling",
@@ -2232,7 +1646,7 @@
       "generations": 21,
       "facelifts": 0,
       "variants": 83,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "xcite",
@@ -2241,7 +1655,7 @@
       "generations": 0,
       "facelifts": 0,
       "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "xiaomi",
@@ -2250,16 +1664,7 @@
       "generations": 1,
       "facelifts": 0,
       "variants": 2,
-      "media": 2
-    },
-    {
-      "brandId": "xin-kai",
-      "brand": "Xin Kai",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "xpeng",
@@ -2268,7 +1673,7 @@
       "generations": 4,
       "facelifts": 0,
       "variants": 48,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "yangwang",
@@ -2278,15 +1683,6 @@
       "facelifts": 0,
       "variants": 0,
       "media": 0
-    },
-    {
-      "brandId": "yema",
-      "brand": "Yema",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
     },
     {
       "brandId": "yudo",
@@ -2304,7 +1700,7 @@
       "generations": 3,
       "facelifts": 0,
       "variants": 10,
-      "media": 2
+      "media": 0
     },
     {
       "brandId": "zhidou",
@@ -2314,29 +1710,11 @@
       "facelifts": 0,
       "variants": 0,
       "media": 0
-    },
-    {
-      "brandId": "zotye",
-      "brand": "Zotye",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
-    },
-    {
-      "brandId": "zx-auto",
-      "brand": "ZX",
-      "models": 0,
-      "generations": 0,
-      "facelifts": 0,
-      "variants": 0,
-      "media": 2
     }
   ],
   "sources": {
     "byType": {
-      "authoritative_catalog": 114,
+      "authoritative_catalog": 6,
       "government_registry": 232,
       "manufacturer": 350,
       "manufacturer_technical_document": 93,
@@ -2378,7 +1756,6 @@
       "dfmc.com.cn": 2,
       "dongfeng-honda.com": 1,
       "drautomobiles.com": 1,
-      "drom.ru": 107,
       "eea.europa.eu": 4,
       "en.jmev.com": 1,
       "en.wikipedia.org": 1,
@@ -2446,7 +1823,6 @@
       "peugeot.co.uk": 1,
       "press.bmwgroup.com": 5,
       "press.kia.com": 1,
-      "pressroom.toyota.com": 1,
       "prnewswire.com": 1,
       "proton.com": 1,
       "renaultgroup.com": 1,
@@ -2482,67 +1858,67 @@
     {
       "file": "brands-0001.json",
       "entityType": "brand",
-      "records": 250,
+      "records": 183,
       "maxRecords": 250
     },
     {
       "file": "brands-0002.json",
       "entityType": "brand",
-      "records": 5,
+      "records": 3,
       "maxRecords": 250
     },
     {
       "file": "facelifts-0001.json",
       "entityType": "facelift",
-      "records": 105,
+      "records": 12,
       "maxRecords": 250
     },
     {
       "file": "generations-0001.json",
       "entityType": "generation",
-      "records": 250,
+      "records": 224,
       "maxRecords": 250
     },
     {
       "file": "generations-0002.json",
       "entityType": "generation",
-      "records": 250,
+      "records": 226,
       "maxRecords": 250
     },
     {
       "file": "generations-0003.json",
       "entityType": "generation",
-      "records": 250,
+      "records": 225,
       "maxRecords": 250
     },
     {
       "file": "generations-0004.json",
       "entityType": "generation",
-      "records": 250,
+      "records": 220,
       "maxRecords": 250
     },
     {
       "file": "generations-0005.json",
       "entityType": "generation",
-      "records": 250,
+      "records": 217,
       "maxRecords": 250
     },
     {
       "file": "generations-0006.json",
       "entityType": "generation",
-      "records": 43,
+      "records": 40,
       "maxRecords": 250
     },
     {
       "file": "media-0001.json",
       "entityType": "media",
-      "records": 250,
+      "records": 2,
       "maxRecords": 250
     },
     {
       "file": "media-0002.json",
       "entityType": "media",
-      "records": 199,
+      "records": 59,
       "maxRecords": 250
     },
     {
@@ -2566,7 +1942,7 @@
     {
       "file": "models-0004.json",
       "entityType": "model",
-      "records": 250,
+      "records": 249,
       "maxRecords": 250
     },
     {
@@ -2584,13 +1960,13 @@
     {
       "file": "models-0007.json",
       "entityType": "model",
-      "records": 119,
+      "records": 118,
       "maxRecords": 250
     },
     {
       "file": "sources-0001.json",
       "entityType": "source",
-      "records": 250,
+      "records": 142,
       "maxRecords": 250
     },
     {
@@ -2614,7 +1990,7 @@
     {
       "file": "variants-0001.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 237,
       "maxRecords": 250
     },
     {
@@ -2626,25 +2002,25 @@
     {
       "file": "variants-0003.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 202,
       "maxRecords": 250
     },
     {
       "file": "variants-0004.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 54,
       "maxRecords": 250
     },
     {
       "file": "variants-0005.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 112,
       "maxRecords": 250
     },
     {
       "file": "variants-0006.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 192,
       "maxRecords": 250
     },
     {
@@ -2662,19 +2038,19 @@
     {
       "file": "variants-0009.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 135,
       "maxRecords": 250
     },
     {
       "file": "variants-0010.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 148,
       "maxRecords": 250
     },
     {
       "file": "variants-0011.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 161,
       "maxRecords": 250
     },
     {
@@ -2686,49 +2062,49 @@
     {
       "file": "variants-0013.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 241,
       "maxRecords": 250
     },
     {
       "file": "variants-0014.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 240,
       "maxRecords": 250
     },
     {
       "file": "variants-0015.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 153,
       "maxRecords": 250
     },
     {
       "file": "variants-0016.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 162,
       "maxRecords": 250
     },
     {
       "file": "variants-0017.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 246,
       "maxRecords": 250
     },
     {
       "file": "variants-0018.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 131,
       "maxRecords": 250
     },
     {
       "file": "variants-0019.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 151,
       "maxRecords": 250
     },
     {
       "file": "variants-0020.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 125,
       "maxRecords": 250
     },
     {
@@ -2740,73 +2116,73 @@
     {
       "file": "variants-0022.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 118,
       "maxRecords": 250
     },
     {
       "file": "variants-0023.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 156,
       "maxRecords": 250
     },
     {
       "file": "variants-0024.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 207,
       "maxRecords": 250
     },
     {
       "file": "variants-0025.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 138,
       "maxRecords": 250
     },
     {
       "file": "variants-0026.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 98,
       "maxRecords": 250
     },
     {
       "file": "variants-0027.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 143,
       "maxRecords": 250
     },
     {
       "file": "variants-0028.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 184,
       "maxRecords": 250
     },
     {
       "file": "variants-0029.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 245,
       "maxRecords": 250
     },
     {
       "file": "variants-0030.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 124,
       "maxRecords": 250
     },
     {
       "file": "variants-0031.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 58,
       "maxRecords": 250
     },
     {
       "file": "variants-0032.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 210,
       "maxRecords": 250
     },
     {
       "file": "variants-0033.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 102,
       "maxRecords": 250
     },
     {
@@ -2830,19 +2206,19 @@
     {
       "file": "variants-0037.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 82,
       "maxRecords": 250
     },
     {
       "file": "variants-0038.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 229,
       "maxRecords": 250
     },
     {
       "file": "variants-0039.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 248,
       "maxRecords": 250
     },
     {
@@ -2878,19 +2254,19 @@
     {
       "file": "variants-0045.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 141,
       "maxRecords": 250
     },
     {
       "file": "variants-0046.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 154,
       "maxRecords": 250
     },
     {
       "file": "variants-0047.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 183,
       "maxRecords": 250
     },
     {
@@ -2902,25 +2278,25 @@
     {
       "file": "variants-0049.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 73,
       "maxRecords": 250
     },
     {
       "file": "variants-0050.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 8,
       "maxRecords": 250
     },
     {
       "file": "variants-0051.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 160,
       "maxRecords": 250
     },
     {
       "file": "variants-0052.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 179,
       "maxRecords": 250
     },
     {
@@ -2932,37 +2308,37 @@
     {
       "file": "variants-0054.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 223,
       "maxRecords": 250
     },
     {
       "file": "variants-0055.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 179,
       "maxRecords": 250
     },
     {
       "file": "variants-0056.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 203,
       "maxRecords": 250
     },
     {
       "file": "variants-0057.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 174,
       "maxRecords": 250
     },
     {
       "file": "variants-0058.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 36,
       "maxRecords": 250
     },
     {
       "file": "variants-0059.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 50,
       "maxRecords": 250
     },
     {
@@ -2974,7 +2350,7 @@
     {
       "file": "variants-0061.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 82,
       "maxRecords": 250
     },
     {
@@ -2992,31 +2368,31 @@
     {
       "file": "variants-0064.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 183,
       "maxRecords": 250
     },
     {
       "file": "variants-0065.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 217,
       "maxRecords": 250
     },
     {
       "file": "variants-0066.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 197,
       "maxRecords": 250
     },
     {
       "file": "variants-0067.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 228,
       "maxRecords": 250
     },
     {
       "file": "variants-0068.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 242,
       "maxRecords": 250
     },
     {
@@ -3034,43 +2410,43 @@
     {
       "file": "variants-0071.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 239,
       "maxRecords": 250
     },
     {
       "file": "variants-0072.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 56,
       "maxRecords": 250
     },
     {
       "file": "variants-0073.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 0,
       "maxRecords": 250
     },
     {
       "file": "variants-0074.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 200,
       "maxRecords": 250
     },
     {
       "file": "variants-0075.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 156,
       "maxRecords": 250
     },
     {
       "file": "variants-0076.json",
       "entityType": "variant",
-      "records": 250,
+      "records": 171,
       "maxRecords": 250
     },
     {
       "file": "variants-0077.json",
       "entityType": "variant",
-      "records": 240,
+      "records": 185,
       "maxRecords": 250
     }
   ]

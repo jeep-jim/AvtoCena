@@ -4,7 +4,7 @@
     "delivery": "local-static-only",
     "themes": ["light", "dark"],
     "visitorThirdPartyRequests": false,
-    "outputTemplate": "apps/web/public/brand-logos/drom/{theme}/{slug}.png"
+    "outputTemplate": "apps/web/public/brand-logos/local/{theme}/{slug}.png"
   },
   "brands": [
     {

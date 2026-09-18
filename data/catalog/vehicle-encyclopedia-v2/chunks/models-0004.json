@@ -12502,57 +12502,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "mazda/axela",
-      "brandId": "mazda",
-      "canonicalName": "Axela",
-      "slug": "axela",
-      "aliases": [],
-      "sourceNames": [
-        {
-          "value": "Axela",
-          "kind": "source_spelling",
-          "safe": false,
-          "language": null,
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-16dc947d5a80b83d"
-          ]
-        }
-      ],
-      "productionFrom": "2013-11",
-      "productionTo": "2019-05",
-      "bodyTypes": [
-        "Hatchback",
-        "Sedan"
-      ],
-      "powertrainKinds": [
-        "ICE"
-      ],
-      "mediaIds": [],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-16dc947d5a80b83d",
-          "fields": [
-            "canonicalName",
-            "sourceNames",
-            "productionFrom",
-            "productionTo",
-            "bodyTypes",
-            "powertrainKinds"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Exact legacy catalog model spelling and the observed in-window production/body/powertrain envelope; review-only pending preferred-source confirmation."
-        }
-      ],
-      "researchNotes": [
-        "Added only because exact legacy specifications overlap the priority window and the canonical brand identity already exists.",
-        "No localized alias, market applicability, media asset or production scope outside the observed source rows is inferred."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "mazda/az-offroad",
       "brandId": "mazda",
       "canonicalName": "AZ-Offroad",

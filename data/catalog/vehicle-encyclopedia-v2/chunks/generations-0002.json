@@ -193,49 +193,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "citroen/c1/drom-generation-2",
-      "modelId": "citroen/c1",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-38b9c196e472ade8"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2014-03",
-      "productionTo": "2022-01",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-38b9c196e472ade8",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "citroen/c3-aircross/eea-registration-observations-2020-2025",
       "modelId": "citroen/c3-aircross",
       "name": "2020-2025 EEA registration observations",
@@ -1021,91 +978,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "citroen/ds4/drom-generation-1",
-      "modelId": "citroen/ds4",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-1a98fe3e9661ac2a"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2016-07",
-      "productionTo": "2021-12",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-1a98fe3e9661ac2a",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "citroen/ds4/drom-generation-2",
-      "modelId": "citroen/ds4",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-1a98fe3e9661ac2a"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2021-02",
-      "productionTo": null,
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-1a98fe3e9661ac2a",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "citroen/ds5/eea-registration-observations-2020-2025",
       "modelId": "citroen/ds5",
       "name": "2020-2022 EEA registration observations",
@@ -1846,48 +1718,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "cupra/terramar/drom-generation-1",
-      "modelId": "cupra/terramar",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-88c75f7ee3c35a44"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2024-09",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-88c75f7ee3c35a44",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "dacia/bigster/eea-registration-observations-2020-2025",
       "modelId": "dacia/bigster",
       "name": "2025-2025 EEA registration observations",
@@ -1957,91 +1787,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dacia/duster/drom-generation-2",
-      "modelId": "dacia/duster",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-fd221d63fc686579"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-09",
-      "productionTo": "2024-03",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-fd221d63fc686579",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dacia/duster/drom-generation-3",
-      "modelId": "dacia/duster",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-fd221d63fc686579"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2023-11",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-fd221d63fc686579",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -2152,91 +1897,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "dacia/logan/drom-generation-2",
-      "modelId": "dacia/logan",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-8b08c7acce59b6fd"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2016-09",
-      "productionTo": "2020-09",
-      "bodyTypes": [
-        "Sedan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-8b08c7acce59b6fd",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dacia/logan/drom-generation-3",
-      "modelId": "dacia/logan",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-8b08c7acce59b6fd"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2020-09",
-      "productionTo": null,
-      "bodyTypes": [
-        "Sedan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-8b08c7acce59b6fd",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "dacia/sandero-stepway/eea-registration-observations-2020-2025",
       "modelId": "dacia/sandero-stepway",
       "name": "2020-2020 EEA registration observations",
@@ -2264,91 +1924,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dacia/sandero/drom-generation-2",
-      "modelId": "dacia/sandero",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-509ac2ae51643b7f"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-01",
-      "productionTo": "2020-08",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-509ac2ae51643b7f",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dacia/sandero/drom-generation-3",
-      "modelId": "dacia/sandero",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-509ac2ae51643b7f"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2020-09",
-      "productionTo": null,
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-509ac2ae51643b7f",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -3247,49 +2822,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "dodge/journey/drom-generation-1",
-      "modelId": "dodge/journey",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-500d5f0f2287d04e"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2010-10",
-      "productionTo": "2020-12",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-500d5f0f2287d04e",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -6827,49 +6359,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "fiat/500/drom-generation-2",
-      "modelId": "fiat/500",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-dd2059e1417234ec"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2015-07",
-      "productionTo": "2024-08",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-dd2059e1417234ec",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "fiat/600-e/eea-registration-observations-2020-2025",
       "modelId": "fiat/600-e",
       "name": "2025-2025 EEA registration observations",
@@ -7629,49 +7118,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "fiat/panda/drom-generation-3",
-      "modelId": "fiat/panda",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-eb61d26b2ad9578e"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2013-05",
-      "productionTo": "2024-07",
-      "bodyTypes": [
-        "Hatchback"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-eb61d26b2ad9578e",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -8635,49 +8081,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "ford/ecosport/drom-generation-2",
-      "modelId": "ford/ecosport",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-fbeea4ef9a7b8b72"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2017-04",
-      "productionTo": "2023-08",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-fbeea4ef9a7b8b72",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "ford/edge/eea-registration-observations-2020-2025",
       "modelId": "ford/edge",
       "name": "2020-2024 EEA registration observations",
@@ -8731,48 +8134,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "ford/escape/drom-generation-4",
-      "modelId": "ford/escape",
-      "name": "Fourth generation",
-      "aliases": [
-        {
-          "value": "4 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-23552d0b41cd6fc3"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2019-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-23552d0b41cd6fc3",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "ford/expedition/eea-registration-observations-2020-2025",
       "modelId": "ford/expedition",
       "name": "2020-2025 EEA registration observations",
@@ -8822,48 +8183,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/explorer/drom-generation-6",
-      "modelId": "ford/explorer",
-      "name": "Sixth generation",
-      "aliases": [
-        {
-          "value": "6 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-b95025a735fb1e20"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2022-03",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-b95025a735fb1e20",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -9206,49 +8525,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "ford/galaxy/drom-generation-3",
-      "modelId": "ford/galaxy",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-29235df9d282d0c3"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2019-08",
-      "productionTo": "2023-04",
-      "bodyTypes": [
-        "Minivan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-29235df9d282d0c3",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "ford/grand-c-max/eea-registration-observations-2020-2025",
       "modelId": "ford/grand-c-max",
       "name": "2020-2020 EEA registration observations",
@@ -9393,92 +8669,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/ka/drom-generation-3",
-      "modelId": "ford/ka",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-b6259587b2b5f7cb"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2018-02",
-      "productionTo": "2021-08",
-      "bodyTypes": [
-        "Hatchback",
-        "Sedan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-b6259587b2b5f7cb",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/kuga/drom-generation-3",
-      "modelId": "ford/kuga",
-      "name": "Third generation",
-      "aliases": [
-        {
-          "value": "3 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-1febdfd5729fd4ae"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2024-01",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-1febdfd5729fd4ae",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -9661,49 +8851,6 @@
       "updatedAt": "2026-08-17"
     },
     {
-      "id": "ford/puma/drom-generation-2",
-      "modelId": "ford/puma",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-9c8a079e123dcbbf"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2019-09",
-      "productionTo": "2024-02",
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-9c8a079e123dcbbf",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
       "id": "ford/ranger/eea-registration-observations-2020-2025",
       "modelId": "ford/ranger",
       "name": "2020-2025 EEA registration observations",
@@ -9764,49 +8911,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/s-max/drom-generation-2",
-      "modelId": "ford/s-max",
-      "name": "Second generation",
-      "aliases": [
-        {
-          "value": "2 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-a6f577cb33071396"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2019-11",
-      "productionTo": "2023-04",
-      "bodyTypes": [
-        "Minivan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-a6f577cb33071396",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -9942,91 +9046,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/tourneo/drom-generation-4",
-      "modelId": "ford/tourneo",
-      "name": "Fourth generation",
-      "aliases": [
-        {
-          "value": "4 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-b8d03e791cd904ce"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2016-05",
-      "productionTo": "2023-04",
-      "bodyTypes": [
-        "Minivan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-b8d03e791cd904ce",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes",
-            "productionTo"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "ford/tourneo/drom-generation-5",
-      "modelId": "ford/tourneo",
-      "name": "Fifth generation",
-      "aliases": [
-        {
-          "value": "5 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-b8d03e791cd904ce"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2023-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "Minivan"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-b8d03e791cd904ce",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     },
@@ -11277,48 +10296,6 @@
       "researchNotes": [
         "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
         "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
-      ],
-      "updatedAt": "2026-08-17"
-    },
-    {
-      "id": "haval/jolion/drom-generation-1",
-      "modelId": "haval/jolion",
-      "name": "First generation",
-      "aliases": [
-        {
-          "value": "1 поколение",
-          "kind": "localized",
-          "safe": false,
-          "language": "ru",
-          "market": null,
-          "sourceIds": [
-            "src-drom-catalog-d1a1731bc85d4ab3"
-          ]
-        }
-      ],
-      "platformCodes": [],
-      "productionFrom": "2020-04",
-      "productionTo": null,
-      "bodyTypes": [
-        "SUV"
-      ],
-      "status": "review",
-      "evidence": [
-        {
-          "sourceId": "src-drom-catalog-d1a1731bc85d4ab3",
-          "fields": [
-            "name",
-            "productionFrom",
-            "bodyTypes"
-          ],
-          "status": "verified",
-          "confidence": "high",
-          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
-        }
-      ],
-      "researchNotes": [
-        "Review-only Drom/legacy generation group for an exact V2 model identity.",
-        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
       ],
       "updatedAt": "2026-08-17"
     }
