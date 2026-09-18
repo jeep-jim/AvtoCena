@@ -21,7 +21,7 @@ test("electric filter loads one facet response instead of every catalog page", (
 
 test("catalog filters apply automatically and show the active query", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
-  assert.match(source, /router\.replace/);
+  assert.match(source, /router\.push/);
   assert.match(source, /catalogQuery/);
   assert.doesNotMatch(source, /Показать автомобили/);
   assert.doesNotMatch(source, /type="submit"/);
