@@ -13,7 +13,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   plan:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    # Retired by owner after verified ProAuctions publication; no manual revival.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     outputs:
       run: ${{ steps.policy.outputs.run }}
