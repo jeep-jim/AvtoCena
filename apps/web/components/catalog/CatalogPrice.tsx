@@ -16,6 +16,7 @@ export function CatalogPrice({
   dense?: boolean;
   priceClassName?: string;
 }) {
+  if (offer.market === "japan" && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
   if (isSellerPricedOffer(offer)) return <SellerPrice offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = String(offer?.market || "").toLowerCase() === "japan"

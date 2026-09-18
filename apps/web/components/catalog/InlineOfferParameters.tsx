@@ -14,11 +14,7 @@ import { validateCustomerParameters } from "../../lib/catalog/customer-parameter
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
 const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
-const internalCustomsAgeNotes = new Set(["up to 3 years", "from 3 to 5 years", "over 5 years"]);
-function visibleBreakdownNote(note?: string) {
- const normalized=String(note||"").trim().toLocaleLowerCase("en-US");
- return internalCustomsAgeNotes.has(normalized)?"":String(note||"").trim();
-}
+import { visibleBreakdownNote } from "../../lib/catalog/customs-age-label";
 function parameterErrorText(error: unknown, draft: ParameterDraft) {
  const message=error instanceof Error?error.message:"Проверьте параметры";
  const key=message.match(/^Проверьте поле (\w+)$/)?.[1];

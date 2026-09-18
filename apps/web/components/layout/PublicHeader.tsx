@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
 
@@ -100,6 +100,7 @@ function CarIcon() {
 
 export function PublicHeader({ backHref, backLabel = "Назад", className = "" }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [theme, setTheme] = useState<Theme>("dark");
   const catalogActive = pathname === "/cars" || pathname.startsWith("/cars/");
@@ -148,10 +149,10 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
             {backHref ? (
-              <Link href={backHref} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
+              <button type="button" aria-label="Назад" onClick={() => window.history.length > 1 ? router.back() : router.replace(backHref)} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
                 <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                <span className="hidden sm:inline">{backLabel}</span>
-              </Link>
+                <span className="hidden sm:inline">Назад</span>
+              </button>
             ) : null}
 
             <Link href="/" className="flex min-w-0 items-center gap-2.5">

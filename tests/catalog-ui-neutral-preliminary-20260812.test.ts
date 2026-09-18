@@ -119,6 +119,6 @@ test("catalog route loader follows active light or dark theme variables", () => 
 });
 
 test("catalog filter changes have one client navigation owner", () => {
-  assert.match(catalogFilters, /router\.replace/);
+  assert.match(catalogFilters, /router\.push/);
   assert.doesNotMatch(carsLayout, /CatalogFilterAutoApply/);
 });

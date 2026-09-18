@@ -62,11 +62,13 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   if (!visibleRub && !selectionRequired && !sellerPricing) return null;
   const displayOffer = {
     ...o,
+    japanDeliveredPreview: offer.japanDeliveredPreview,
     totalRub: visibleRub || null,
     previousTotalRub: visibleRub ? o.previousTotalRub : null,
     priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
   };
   const snapshot = {
+    japanDeliveredPreview: offer.japanDeliveredPreview,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: offer.calculationStatus, catalogKind: offer.catalogKind,
     id: o.id, title: o.title, price: visibleRub || null, totalRub: visibleRub || null, previousTotalRub: displayOffer.previousTotalRub,
     priceDeltaRub: displayOffer.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice,
@@ -76,7 +78,8 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";
   const priceLabel = o.year ? `${o.year} г.` : "Год уточняется";
-  const engineLabel = o.engineCc ? `${o.engineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
+  const previewEngineCc = o.engineCc || offer.japanDeliveredPreview?.engineCc;
+  const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
@@ -93,7 +96,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
           <div className={`${powerInfo?.borderline ? powerStyles.wrapChips : ""} flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
-            <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
+            <span className={tagClass}><EngineIcon dense={dense} fuel={!previewEngineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
             {powerScenario
               ? <span className={`${tagClass} border border-amber-400/35 bg-amber-400/10 text-amber-100`} title="Предварительная мощность — можно изменить в карточке автомобиля"><PowerIcon dense={dense} /><span>{Math.round(powerScenario.horsepower)} л.с. · уточнить</span></span>
               : isElectrified && o.powerKw

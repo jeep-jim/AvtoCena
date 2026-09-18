@@ -200,5 +200,7 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));
-  return await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
+  const identified = await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
+  const { attachJapanDeliveredPreviews } = await import("./japan-delivered-preview");
+  return attachJapanDeliveredPreviews(identified, configs.get("japan"));
 }

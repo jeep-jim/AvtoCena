@@ -48,7 +48,7 @@ export function CatalogFilterAutoApply() {
 
       const next = params.toString();
       if (current.toString() === next) return;
-      router.replace(next ? `/cars?${next}` : "/cars", { scroll: false });
+      router.push(next ? `/cars?${next}` : "/cars", { scroll: false });
     };
 
     const schedule = (form: HTMLFormElement, delay = 0) => {

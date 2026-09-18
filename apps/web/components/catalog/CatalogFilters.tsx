@@ -282,7 +282,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
     if (nextQuery === serverQuery) return;
     const timer = window.setTimeout(() => {
-      router.replace(nextQuery ? `/cars?${nextQuery}` : "/cars", { scroll: false });
+      router.push(nextQuery ? `/cars?${nextQuery}` : "/cars", { scroll: false });
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
