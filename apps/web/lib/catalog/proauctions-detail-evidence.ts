@@ -65,6 +65,13 @@ export function parseProAuctionsDetailEvidence(html: string, expectedUrl: string
   const images=[...new Set([...gallery.matchAll(/<a\b[^>]*>/gi)].map(m=>attributes(m[0])).filter(a=>a['data-fancybox']==='gallery').map(a=>a.href))];
   const groups=images.map(s=>s?.match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^?#]+$/)?.[1]);
   if(images.length<2 || groups.some(g=>!g) || new Set(groups).size!==1)issues.push('gallery_identity_unconfirmed');
+  // The sheet belongs to the same auction lot directory, outside the car gallery.
+  // Never include the explanatory sample sheets from the adjacent help section.
+  const sheetSection=html.match(/<h2\b[^>]*>\s*Аукционный лист\s*<\/h2>\s*<div\b[^>]*class=["']list-img["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || '';
+  const auctionSheetUrls=[...new Set([...sheetSection.matchAll(/<img\b[^>]*>/gi)].map(m=>attributes(m[0]).src).filter(src=>{
+    const group=src?.match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^?#]+$/)?.[1];
+    return group && groups.length && groups.every(g=>g===group) && !images.includes(src);
+  }))];
   const transmissionRaw=field('Трансмиссия') || null;
   // FAT/IAT describe lever position; they do not establish AT versus CVT.
   const transmission=transmissionRaw==='Автомат' || transmissionRaw==='AT' ? 'automatic'
@@ -84,7 +91,7 @@ export function parseProAuctionsDetailEvidence(html: string, expectedUrl: string
       claimedMotor30MinKw:positive(field('30-мин. мощность ЭД')?.replace(/\s*кВт/i,'')),
       motor30MinCertification:'unverified',calculatorCombinedPowerHp:positive(inputs.p),
       transmission,transmissionRaw,mileageKm:positive(field('Пробег, км')),grade:field('Оценка') || null},
-    imageUrls:images,issues,
+    imageUrls:images,auctionSheetUrls,issues,
     calculationBlockers:[...issues,'exact_engine_displacement_required','production_month_not_confirmed',
       ...(!hp && !electric ? ['combustion_power_missing'] : []),...(hybrid || electric ? ['certified_motor_power_required'] : [])],
   };

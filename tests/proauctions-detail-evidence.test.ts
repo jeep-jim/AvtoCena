@@ -40,3 +40,10 @@ test('unknown fuel and conflicting power fail closed; FAT is not asserted to be 
  assert.ok(parse(base.replace('114.7 кВт','200 кВт'),url(base)).issues.includes('power_hp_kw_conflict'));
  assert.equal(parse(base,url(base)).specifications.transmission,null);
 });
+test('auction sheet is separate from car photos, bound to the same lot, and excludes help samples',()=>{
+ const h=fixture('30222301'),r=parse(h,url(h));
+ assert.equal(r.specifications.reportedCombustionPowerHp,140);assert.equal(r.specifications.reportedCombustionPowerKw,103);
+ assert.equal(r.imageUrls.length,2);assert.equal(r.auctionSheetUrls.length,1);assert.match(r.auctionSheetUrls[0],/1789240244\.7722_1.webp$/);
+ const foreign=h.replace('1881816550/1789240244.7722','9999999999/1789240244.7722');
+ assert.equal(parse(foreign,url(h)).auctionSheetUrls.length,0);
+});

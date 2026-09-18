@@ -1,0 +1,31 @@
+name: Recover auction sheets from saved Japan HTML
+on:
+  push:
+    branches: [fix/japan-parameters-sheets]
+    paths: ['.github/workflows/proauctions-sheet-recovery.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: proauctions-collection
+          path: proauctions-collection
+          run-id: 35278871233
+          github-token: ${{ github.token }}
+      - name: Recover sheets without refetching listing or detail pages
+        run: node --import tsx scripts/recover-proauctions-auction-sheets.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proauctions-detail-patches
+          path: proauctions-detail-patches
+          retention-days: 14

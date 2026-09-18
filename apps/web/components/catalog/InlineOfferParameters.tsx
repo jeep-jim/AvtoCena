@@ -78,7 +78,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({offerId,initial,price,children,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(()=>isPickup?{...initial,vehicleCategory:'N1'}:initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:{sourcePrice:number;currency:string;effectiveRate:number;rateDate:string};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
@@ -124,6 +124,7 @@ export function InlineOfferParameters({offerId,initial,price,children,showCommer
    <p role="status">{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p>
    {keepSellerPrice && dirty ? <button type="button" className="mt-1 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button> : null}
   </div> : null}
+  {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>

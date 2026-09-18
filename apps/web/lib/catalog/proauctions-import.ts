@@ -41,6 +41,8 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
   if (!e.price.saleConfirmed && !matchingProAuctionsSale(e,identity,witness)) return null;
   const decoded = photos.filter(p => e.imageUrls.includes(p.url) && /^[a-f0-9]{64}$/.test(p.decodedSha256 || '') && p.width >= 100 && p.height >= 100);
   if(new Set(decoded.map(p=>p.decodedSha256)).size < 2) return null;
+  const sheets=photos.filter(p=>(e.auctionSheetUrls || []).includes(p.url) && /^[a-f0-9]{64}$/.test(p.decodedSha256 || '') && p.width >= 100 && p.height >= 100);
+  const gallery=[...new Map([...decoded,...sheets].map(p=>[p.url,p])).values()];
   const timestamp = new Date(now).toISOString(), sourceId='proauctions_japan_stat', s=e.specifications;
   const evidence=(status:string,value?:unknown)=>({status, ...(value===undefined?{}:{value}), source:e.sourceUrl,rawValues:[]});
   const powerConflict=e.issues.some(x=>/power/.test(x)), fuelConflict=e.issues.some(x=>/fuel|powertrain|combustion|motor/.test(x));
@@ -56,8 +58,10 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
     fuel:!fuelConflict ? s.fuel || undefined : undefined,powertrainKind:!fuelConflict ? kind : 'unknown',
     powerHp:!powerConflict ? s.reportedCombustionPowerHp ?? undefined : undefined,
     powerKw:!powerConflict ? s.reportedCombustionPowerKw ?? undefined : undefined,
+    powerDataConfidence:!powerConflict && s.reportedCombustionPowerHp ? 'source_exact' : undefined,
+    powerDataSource:!powerConflict && s.reportedCombustionPowerHp ? e.sourceUrl : undefined,
     firstSeenAt:timestamp,updatedAt:timestamp,
-    images:decoded.map(p=>({id:p.decodedSha256,url:p.url,objectKey:'',checksum:p.decodedSha256,width:p.width,height:p.height,size:p.size,mimeType:p.mimeType})),
+    images:gallery.map(p=>({id:p.decodedSha256,url:p.url,objectKey:'',checksum:p.decodedSha256,width:p.width,height:p.height,size:p.size,mimeType:p.mimeType})),
     operational:{sourceUrl:e.sourceUrl,exactDetail:true,photoIdentityVerified:true,chassisCode:e.identity.chassis,
       semanticEvidence:{year:evidence('exact',e.identity.year),engineCc:evidence('ambiguous',s.reportedEngineCc),
         fuel:evidence(fuelConflict || !s.fuel?'ambiguous':'exact',s.fuel),
@@ -65,7 +69,7 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
         powertrainKind:evidence(kind==='unknown'||fuelConflict?'ambiguous':'exact',kind)},
       sourceSpecifications:{version:1,sourceId,sourceOfferId:e.sourceId,specificationId:e.sourceId,sourceUrl:e.sourceUrl,capturedAt:timestamp,
         groups:[{name:'Характеристики аукциона',items:Object.entries(e.sourceFields).map(([name,values])=>({name,value:values.join('; ')}))}]},
-      raw:{sourceEvidence:e,evidenceSha256:digest,saleWitness:witness || null,decodedGallery:decoded,
+      raw:{sourceEvidence:e,evidenceSha256:digest,saleWitness:witness || null,decodedGallery:decoded,decodedAuctionSheets:sheets,
         auctionResult:true,finalPriceJpy:e.price.amountJpy,listingBoundImages:true,photoIdentityVerified:true,recoveryExactSourceUrl:true,recoveryExactPhotoIdentity:true,
         calculationBlockers:e.calculationBlockers}},
   } as VehicleOffer;
