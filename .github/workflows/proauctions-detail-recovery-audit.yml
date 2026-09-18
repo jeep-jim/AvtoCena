@@ -1,0 +1,47 @@
+name: Audit saved Japan detail evidence
+on:
+  push:
+    branches: [fix/proauctions-detail-recovery]
+    paths: ['.github/workflows/proauctions-detail-recovery-audit.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: proauctions-collection
+          path: saved
+          run-id: 35278871233
+          github-token: ${{ github.token }}
+      - name: Extract requested examples and archive coverage
+        run: |
+          python - <<'PY'
+          import json,gzip,pathlib,shutil,collections,urllib.request
+          root=pathlib.Path('saved');out=pathlib.Path('evidence-audit');out.mkdir()
+          stats=collections.Counter(); examples={}
+          for f in (root/'raw').glob('*.json'):
+            r=json.loads(f.read_text()); e=r.get('evidence',{});s=e.get('specifications',{})
+            stats['raw']+=1;stats['html_saved']+=(root/'html'/f'{f.stem}.html.gz').exists()
+            stats['power_present']+=bool(s.get('reportedCombustionPowerHp'));stats['power_field']+=bool(e.get('sourceFields',{}).get('Мощность'))
+            for issue in e.get('issues',[]):stats[issue]+=1
+          for id in ['30222301','30222363']:
+            for sub,ext in [('raw','json'),('offers','json'),('html','html.gz')]:
+              f=root/sub/f'{id}.{ext}'
+              if f.exists():shutil.copyfile(f,out/f'{id}-{sub}.{ext}')
+            try:
+              with urllib.request.urlopen(f'https://demo.pro-auctions.ru/statistika/toyota/corolla-cross/{id}.html',timeout=45) as r:(out/f'{id}-live.html').write_bytes(r.read())
+            except Exception as e:examples[id]=str(e)
+          (out/'summary.json').write_text(json.dumps({'stats':stats,'liveErrors':examples},ensure_ascii=False,indent=2))
+          print((out/'summary.json').read_text())
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-detail-evidence
+          path: evidence-audit
+          retention-days: 7
