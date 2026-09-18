@@ -7,7 +7,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: catalog-six-market-quality-rebuild
+  group: ${{ contains(github.event.head_commit.message, '[catalog-metadata-only]') && format('catalog-metadata-{0}', github.run_id) || 'catalog-six-market-quality-rebuild' }}
   cancel-in-progress: false
 jobs:
   collect:
