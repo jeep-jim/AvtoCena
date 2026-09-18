@@ -1,6 +1,6 @@
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
-import { readCatalogOverview } from "./overview";
+import { readCatalogOverview, catalogOverviewMarketComplete } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
@@ -1627,7 +1627,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
   if (overview?.generationId === manifest.generationId && MARKETS.every(market => {
     const count = Number(manifest.markets?.[market]?.count || 0);
     const summary = overview.markets[market];
-    return summary && summary.total === count && summary.items.length >= Math.min(limit, count);
+    return catalogOverviewMarketComplete(summary, count, limit);
   })) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
     return {generationId: manifest.generationId, marketCounts,

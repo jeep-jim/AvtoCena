@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { gunzipSync } from "node:zlib";
 import test from "node:test";
-import { buildAiProductFeed, readPublishedAiProductFeed, readAiSitemapProjection, AI_PRODUCT_FEED_METADATA_PATH, AI_PRODUCT_FEED_PATH } from "../apps/web/lib/ai-discovery";
+import { buildAiProductFeed, readPublishedAiProductFeed, readAiSitemapProjection, AI_PRODUCT_FEED_METADATA_PATH, AI_PRODUCT_FEED_PATH, AI_SITEMAP_PROJECTION_PATH, buildAiSitemapProjection } from "../apps/web/lib/ai-discovery";
 import type { JsonStorage } from "../apps/web/lib/data";
 import { ObjectJsonStorage } from "../apps/web/lib/data";
 
@@ -9,6 +9,7 @@ test('sitemap requests share one full read, keep only URL fields, and retry a ge
   let generationId = 'sitemap-test-one', projectionGeneration = generationId, fullReads = 0;
   const storage = {async readJson(key: string) {
     if (key === 'catalog/manifest.json') return {generationId};
+    if (key === AI_SITEMAP_PROJECTION_PATH) return null;
     fullReads++;
     await new Promise(resolve => setTimeout(resolve, 1));
     return {generationId: projectionGeneration, items: [{id: 'one', make: 'Toyota', model: 'Camry', year: 2026,
@@ -112,4 +113,20 @@ test("Object Storage download URL is a bounded SigV4 presigned GET", async () =>
       else process.env[key] = value;
     }
   }
+});
+
+test('prebuilt sitemap reads no full catalog projection on a cold request', async () => {
+  const compact = buildAiSitemapProjection({generationId: 'compact-only-test', items: [
+    {id: 'car', make: 'Toyota', model: 'Camry', year: 2026, updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {large: 'discard'}} as any,
+  ]});
+  assert.deepEqual(Object.keys(compact.items[0]).sort(), ['id', 'updatedAt', 'cardImageUrl'].sort());
+  const reads: string[] = [];
+  const storage = {async readJson(key: string) {
+    reads.push(key);
+    if (key === 'catalog/manifest.json') return {generationId: compact.generationId};
+    assert.equal(key, AI_SITEMAP_PROJECTION_PATH);
+    return compact;
+  }} as unknown as JsonStorage;
+  assert.deepEqual(await readAiSitemapProjection(storage), compact);
+  assert.deepEqual(reads, ['catalog/manifest.json', AI_SITEMAP_PROJECTION_PATH]);
 });

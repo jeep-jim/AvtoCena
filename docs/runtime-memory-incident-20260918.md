@@ -110,3 +110,28 @@ lease; its 40-minute expiry exceeds the workflow's 30-minute hard timeout.
 The lease is released on success/failure only if still owned by this repair.
 Four behavioral lock tests and ten existing read-model policy tests passed.
 Actual production repair outcome must be recorded after execution.
+
+### Recovery result and remaining cold-read optimization
+
+Repair workflow **35309657977 succeeded** at 05:13 UTC. All 65,170 raw rows
+and all six market projections match active generation
+`gen_1789644640780_c0bf7914`; mismatches are empty. All 30 sampled detail
+records resolved. Feed was rebuilt with 31,683 eligible products, 2,749,864
+compressed bytes. Deploy **35309657916 succeeded** and public health confirmed
+`c0f79afd6b450b5ebd458ce7e84fe25521d1d53d`. Public sitemap shard 0 returned
+200 with 5,000 URLs, but the cold request took 29.8 s locally (7.1 s TLS).
+
+The recovered overview contains 65,167 *visible* rows because current policy
+filters three of the raw records. The homepage compared visible counts to raw
+manifest counts, rejecting this valid compact snapshot and loading the full
+projection. The builder now records separately verified raw `sourceTotal`
+counts. The homepage requires those counts to match the manifest, keeps the
+visible total, checks enough sample cards, and rejects false zeroes. Legacy
+snapshots still require exact counts.
+
+Publication also prepares a separate sitemap projection containing only IDs,
+dates and image URLs. Cold sitemap requests use that compact object after a
+generation check; older generations retain the existing bounded fallback.
+This avoids reading the 167.95 MB search projection for a sitemap request.
+23 targeted tests passed, including real homepage reader assertions that no
+large objects are read and a cold sitemap test with no full projection read.

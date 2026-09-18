@@ -6,6 +6,7 @@ export const CATALOG_OVERVIEW_PATH = "catalog/public/overview.json";
 
 export type CatalogOverviewMarket = {
   total: number;
+  sourceTotal?: number;
   items: PublicVehicleOffer[];
 };
 
@@ -73,4 +74,13 @@ export async function readCatalogOverview(): Promise<CatalogOverview | null> {
     readDataJson<{ generationId: string }>("catalog/manifest.json", { generationId: "" }),
   ]);
   return catalogOverviewMatchesGeneration(overview, manifest.generationId) ? overview : null;
+}
+
+// Source count proves completeness before display-policy filtering. Visible
+// count may be smaller without requiring a full catalog read on every visit.
+export function catalogOverviewMarketComplete(summary: CatalogOverviewMarket | undefined, sourceCount: number, limit: number) {
+  if (!summary || !Number.isInteger(summary.total) || summary.total < 0 || summary.total > sourceCount) return false;
+  if ((summary.sourceTotal ?? summary.total) !== sourceCount) return false;
+  if (sourceCount > 0 && summary.total === 0) return false;
+  return summary.items.length >= Math.min(limit, summary.total);
 }
