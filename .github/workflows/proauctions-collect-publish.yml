@@ -7,10 +7,12 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: catalog-six-market-quality-rebuild
+  group: ${{ contains(github.event.head_commit.message, '[catalog-metadata-only]') && format('catalog-metadata-{0}', github.run_id) || 'catalog-six-market-quality-rebuild' }}
   cancel-in-progress: false
 jobs:
   collect:
+    # Renaming an operation label must not launch a duplicate collection.
+    if: "!contains(github.event.head_commit.message, '[catalog-metadata-only]')"
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
