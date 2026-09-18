@@ -92,3 +92,21 @@ Safer proposed operation for approval:
 4. Remove public invocation only after these checks. Verify direct container invocation is denied while the same site routes still work through the gateway.
 
 This closes a currently open bypass around the gateway's protection. Do not claim it is already closed. For a routing rollback after closure, restore public invocation first, then the original HTTP integrations; avoid leaving the live gateway unable to invoke its backend.
+
+## Confirmed read-model divergence
+
+Post-deploy parity run 35307538476 at 04:36 UTC reports active manifest
+`gen_1789644640780_c0bf7914` / 65,170 offers, while every current market
+projection belongs to `gen_1789695301544_1e962b8d` / 65,304 offers (Korea
+14,513 vs active 14,379). This predates #1023. It forces generation-checked
+catalog readers into immutable fallback and causes the new strict feed/sitemap
+readers to return 503. Do not remove generation checks to conceal this.
+
+The repair trigger rebuilds derived read models from the active immutable
+generation, including the prebuilt feed and overview, then runs parity audit.
+The repair now acquires `catalog/import-lock.json`, the same object-storage
+lease used by the active ProAuctions publisher. It refuses an existing active
+lease; its 40-minute expiry exceeds the workflow's 30-minute hard timeout.
+The lease is released on success/failure only if still owned by this repair.
+Four behavioral lock tests and ten existing read-model policy tests passed.
+Actual production repair outcome must be recorded after execution.

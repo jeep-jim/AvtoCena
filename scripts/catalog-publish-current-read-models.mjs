@@ -1,4 +1,8 @@
 import { publishCurrentCatalogReadModels } from "../apps/web/lib/catalog/storage.ts";
+import { mutateDataJson } from "../apps/web/lib/data.ts";
+import { withCatalogReadModelRepairLock } from "./lib/catalog-read-model-repair-lock.mjs";
+
+await withCatalogReadModelRepairLock(mutateDataJson, async () => {
 
 const result = await publishCurrentCatalogReadModels();
 const requiredMarkets = ["korea", "china", "japan", "uae", "europe", "georgia"];
@@ -42,3 +46,8 @@ console.log(JSON.stringify({
 // records. Verify detail reads in this production storage context so a refresh
 // cannot report success while /cars/offer/:id is unavailable.
 await import("./catalog-verify-current-offers.mjs");
+
+});
+
+// Verify the restored aliases against the unchanged active generation.
+await import("./catalog-audit-current-readmodel-parity.mjs");
