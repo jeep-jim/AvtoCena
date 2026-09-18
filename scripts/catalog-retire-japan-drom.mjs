@@ -35,7 +35,7 @@ try {
   assertNoDeliveredPriceRegression(all,rows,{auditedRemovals:plan.removals});
  };
  validate(expected);
- const report={operationId,previousGeneration:previous.generationId,published:false,removed:plan.removed.map(r=>({id:r.id,sourceId:r.sourceId,reason:plan.removals.get(r.id)})),keptJapan:plan.kept.length,verifiedProAuctions:verified.length,beforeCounts,preservedHashes:Object.fromEntries(Object.entries(preserved).map(([m,r])=>[m,hashRetirementRows(r)]))};
+ const report={operationId,previousGeneration:previous.generationId,published:false,removed:plan.removed.map(r=>({id:r.id,sourceId:r.sourceId,reason:plan.removals.get(r.id)})),keptJapan:plan.kept.length,verifiedProAuctions:verified.length,sampleProAuctions:verified.slice(0,5).map(r=>({id:r.id,title:r.title,images:r.images.slice(0,2).map(i=>i.url)})),sampleRemoved:plan.removed.slice(0,3).map(r=>r.id),beforeCounts,preservedHashes:Object.fromEntries(Object.entries(preserved).map(([m,r])=>[m,hashRetirementRows(r)]))};
  await fs.writeFile('japan-drom-retirement.json',JSON.stringify(report,null,2));
  console.log(JSON.stringify({stage:'retirement_preflight_pass',removed:plan.removed.length,keptJapan:plan.kept.length,verifiedProAuctions:verified.length,beforeCounts}));
  const manifest=await persistCatalogOffers(expected,{productionRefreshMarket:'japan',appendPublicOffersByMarket:{japan:plan.kept},preservePublicOffersByMarket:preserved,replaceInternalSourceIds:new Set([retiredJapanSource]),beforePersistValidate:validate,beforePublishValidate:validate});
