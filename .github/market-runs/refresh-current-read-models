@@ -3,3 +3,5 @@
 2026-09-16 rebuild compact pricing replay inputs; source generations and Japan records unchanged
 
 2026-09-16: retain Japan historical service cost basis for owner-authorized bundle correction; no source collection.
+
+2026-09-18: repair confirmed projection/manifest mismatch under the shared object-storage publication lock; rebuild only derived read models for the active generation.
