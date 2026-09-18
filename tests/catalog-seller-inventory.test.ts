@@ -72,6 +72,9 @@ test("weekly inventory publication still requires both validation gates and pres
  try {
  const options:any={productionRefreshMarket:"korea",preservePublicOffersByMarket:{japan:[],china:[],uae:[],europe:[],georgia:[]},beforePersistValidate(){},beforePublishValidate(){}};
  assert.equal(isCatalogProductionRefreshAllowed(options),true);
+ assert.equal(isCatalogProductionRefreshAllowed({...options,appendPublicOffersByMarket:{korea:[]}}),true);
+ assert.equal(isCatalogProductionRefreshAllowed({...options,appendPublicOffersByMarket:{japan:[]}}),false);
+ assert.equal(isCatalogProductionRefreshAllowed({...options,appendPublicOffersByMarket:{korea:[],japan:[]}}),false);
  assert.equal(isCatalogProductionRefreshAllowed({...options,beforePublishValidate:undefined}),false);
  assert.equal(isCatalogProductionRefreshAllowed({...options,preservePublicOffersByMarket:{china:[]}}),false);
  } finally {if(previous===undefined)delete process.env.CATALOG_SELLER_INVENTORY;else process.env.CATALOG_SELLER_INVENTORY=previous;}
