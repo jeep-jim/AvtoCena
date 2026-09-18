@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
     paths: ['.github/market-runs/proauctions-detail-patches.json']
+  workflow_run:
+    workflows: ['Recover auction sheets from saved Japan HTML']
+    types: [completed]
 permissions:
   contents: read
   actions: read
@@ -13,6 +16,12 @@ concurrency:
   cancel-in-progress: false
 jobs:
   publish:
+    # Only this owner-authorized archive recovery can trigger the automatic write.
+    # The script independently rejects incomplete patches for published lots.
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.workflow_run.id == 35321658779 &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
