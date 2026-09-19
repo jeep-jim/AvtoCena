@@ -1,0 +1,36 @@
+name: Verify full city directory and catalog latency
+on:
+  push:
+    branches: [test/city-directory-20260919]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install --prefix "$RUNNER_TEMP/city-delivery" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Wait for published delivery release
+        run: |
+          node --input-type=module <<'JS'
+          let ready=false;
+          for(let i=0;i<40;i++){
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha==='2b745522489be7f38e7c91e50d5dc721c0b5e5ee'){ready=true;break;}}catch{}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          if(!ready)throw Error('Delivery release not confirmed');
+          JS
+      - name: Check mobile and desktop city calculations
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/city-delivery/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/city-directory-live.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: city-delivery-live
+          path: artifacts/city-directory
+          retention-days: 7
