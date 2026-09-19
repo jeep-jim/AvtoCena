@@ -170,7 +170,7 @@ export function EditablePowerTile({
         </div> : null}
       </div>
     </div>
-    <style>{`
+    <style dangerouslySetInnerHTML={{ __html: `
       .ac-offer-spec-grid > .ac-editable-power {
         grid-column: 1 / -1 !important;
         width: 100% !important;
@@ -235,6 +235,6 @@ export function EditablePowerTile({
           padding-right: .75rem !important;
         }
       }
-    `}</style>
+    ` }} />
   </>;
 }

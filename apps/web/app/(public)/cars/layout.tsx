@@ -1,7 +1,7 @@
 export default function CarsLayout({ children }: { children: React.ReactNode }) {
   return <>
     {children}
-    <style>{`
+    <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-catalog-page.ac-page-copy {
         background: #07090f !important;
         background-color: #07090f !important;
@@ -84,6 +84,6 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
           margin-top: 93px !important;
         }
       }
-    `}</style>
+    ` }} />
   </>;
 }
