@@ -27,3 +27,15 @@ test('shared layers are counted once',()=>{
 });
 
 test('missing layer inventory is unknown, never zero storage',()=>assert.equal(uniqueRegistryBytes([{id:'list-result'}]),null));
+
+
+import {waitForYandexOperation} from '../scripts/lib/yandex-operation.mjs';
+test('async deletion polls the shared operation service until confirmed',async()=>{
+ const urls=[];
+ await waitForYandexOperation({id:'op1',done:false},async url=>{urls.push(url);return {id:'op1',done:urls.length===2};},async()=>{});
+ assert.deepEqual(urls,['https://operation.api.cloud.yandex.net/operations/op1','https://operation.api.cloud.yandex.net/operations/op1']);
+});
+test('operation errors and incomplete polling never count as completed deletions',async()=>{
+ await assert.rejects(waitForYandexOperation({id:'op1',done:true,error:{code:7}},async()=>{}),/failed/);
+ await assert.rejects(waitForYandexOperation({id:'op1'},async()=>({id:'op1',done:false}),async()=>{}),/timeout/);
+});

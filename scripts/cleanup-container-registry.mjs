@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {waitForYandexOperation} from './lib/yandex-operation.mjs';
 import fs from 'node:fs/promises';
 import {registryRetentionPlan, uniqueRegistryBytes, WEB_REPOSITORY} from './lib/registry-retention.mjs';
 const apply = process.argv.includes('--apply');
@@ -49,16 +50,17 @@ if (apply) {
   for (let start=0;start<plan.candidates.length;start+=20) {
     const current=await inventory();
     const allowed=new Set(registryRetentionPlan(current.images,current.revisions).candidates.map(x=>x.id));
-    for (const image of plan.candidates.slice(start,start+20)) {
-      if (!allowed.has(image.id)) throw new Error(`Retention changed before deletion: ${image.id}`);
-      let operation=await request(registry+'images/'+encodeURIComponent(image.id),'DELETE');
-      for (let attempt=0;!operation.done && attempt<30;attempt++) {
-        if (!operation.id) throw new Error('Missing delete operation');
-        await new Promise(resolve=>setTimeout(resolve,1000));
-        operation=await request(registry+'operations/'+encodeURIComponent(operation.id));
-      }
-      if (!operation.done || operation.error) throw new Error(`Image delete failed: ${image.id}`);
-      report.deleted++;
+    const batch=plan.candidates.slice(start,start+20);
+    for(let offset=0;offset<batch.length;offset+=4) {
+      const results=await Promise.allSettled(batch.slice(offset,offset+4).map(async image=>{
+        if (!allowed.has(image.id)) throw new Error(`Retention changed before deletion: ${image.id}`);
+        const operation=await request(registry+'images/'+encodeURIComponent(image.id),'DELETE');
+        await waitForYandexOperation(operation,request);
+        report.deleted++;
+      }));
+      await fs.writeFile('registry-cleanup-report.json',JSON.stringify(report,null,2)+'\n');
+      const failed=results.find(result=>result.status==='rejected');
+      if(failed)throw failed.reason;
     }
     console.log(`Deleted ${report.deleted}/${plan.candidates.length} obsolete web images`);
     await fs.writeFile('registry-cleanup-report.json',JSON.stringify(report,null,2)+'\n');
