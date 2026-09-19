@@ -93,8 +93,8 @@ test("mobile offer controls remain tappable", () => {
   assert.match(priceTrend, /\.\.\.tapActivation/);
   assert.doesNotMatch(preliminaryPrice, /onTouchEnd=/);
   assert.doesNotMatch(priceTrend, /onTouchEnd=\{panel/);
-  assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(item\.city\); \}\}/);
-  assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(city\); \}\}/);
+  assert.match(citySelector, /onClick=\{\(\) => choose\(item\.value\)\}/);
+  assert.match(citySelector, /onClick=\{\(\) => choose\(city\)\}/);
 });
 
 test("mobile currency sheet closes without bubbling back to the price opener", () => {
