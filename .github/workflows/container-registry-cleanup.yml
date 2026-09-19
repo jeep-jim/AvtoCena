@@ -19,7 +19,9 @@ jobs:
   cleanup:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # Initial backlog exceeds 1,300 images; provider operations are asynchronous.
+    # Keep concurrency bounded while allowing the first cleanup to finish.
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
