@@ -91,6 +91,7 @@ export function CitySelector({ value, onChange }: Props) {
     <span className="ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex">
       <button
         type="button"
+        disabled={!mounted}
         onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); setQuery(value || ""); setOpen(true); }}
         onClick={() => { setQuery(value || ""); setOpen(true); }}
         className="inline-flex min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]"
