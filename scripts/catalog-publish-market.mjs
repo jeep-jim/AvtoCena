@@ -515,7 +515,7 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   expectedPublishedHashByMarket[otherMarket] = hashRows(preservedRows);
 }
 
-const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows);
+const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
 for (const [field, reason] of [
   ["qualityRejected", "canonical:qualityRejected"],
@@ -675,6 +675,7 @@ if (regressionBlocked) {
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
+      retainedPowerMixIds: currentPublicIds,
       unavailableOffers,
       // Internal chunks are immutable and the manifest protects referenced
       // paths. Replace only this market's sources and reuse every untouched

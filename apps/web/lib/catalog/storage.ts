@@ -1017,6 +1017,10 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
     }
   }));
 }
+function catalogMaintenanceIoConcurrency() {
+  const value=Number(process.env.CATALOG_MAINTENANCE_IO_CONCURRENCY || 4);
+  return Number.isFinite(value) ? Math.max(1,Math.min(4,Math.floor(value))) : 4;
+}
 async function assertCurrentCatalogReadModelsReady(generationId: string, offers: VehicleOffer[]) {
   const all = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
     currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION),
@@ -1040,7 +1044,7 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
   // representative proves that the object exists, but not that every projected
   // card was written into it.
   const expectedShards=boundedDetailShards(offers,CATALOG_CHUNK_SIZE);
-  await mapWithConcurrency([...expectedShards.entries()], 12, async ([prefix, expected]) => {
+  await mapWithConcurrency([...expectedShards.entries()], catalogMaintenanceIoConcurrency(), async ([prefix, expected]) => {
     const shard=await readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(
       detailShardPath(generationId,prefix),{generationId:'',items:[]});
     const ids=new Set((shard.items || []).map(item=>item.id));
@@ -1065,6 +1069,7 @@ export type PersistCatalogOptions = {
   preservePublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
   preservedInternalOffers?: AsyncIterable<VehicleOffer[]>;
   replaceInternalSourceIds?: ReadonlySet<string>;
+  retainedPowerMixIds?: ReadonlySet<string>;
   // A normal market refresh may append canonical newcomers while keeping every
   // already-published row byte-stable. Protected rows win duplicate and quota
   // ties, which makes routine collection genuinely grow-only.
@@ -1161,7 +1166,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // written, so a preservation mismatch cannot switch or partially stage a new
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
-  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds);
+  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds);
   const publishedOffers = options.modificationRecovery
     ? limitModificationInventory(canonicalPublic.offers, catalogOfferVisibleRub)
     : canonicalPublic.offers;
@@ -1281,7 +1286,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exactPreserveMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exactPreserveMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>(), retainedPowerMixIds?: ReadonlySet<string>) {
   // Keep source/internal objects immutable. Mutable rows receive the same
   // deterministic V2 + source-translation identity used by cards.
   // A one-market writer must not rename, reprice or delete another market.
@@ -1307,18 +1312,18 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
   const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
   // Other markets are immutable snapshots, not candidates for this refresh.
   // Deduplication and model-year quotas apply only to the market being rebuilt.
-  const { powerMix, sourceShare } = selectCatalogPublicationMix(quota.rows, process.env.CATALOG_SELLER_INVENTORY === "1");
+  const { powerMix, sourceShare } = selectCatalogPublicationMix(quota.rows, process.env.CATALOG_SELLER_INVENTORY === "1", retainedPowerMixIds);
   return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix, sourceShare };
 }
 
-export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[], protectedPublicOffers: VehicleOffer[] = []) {
+export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[], protectedPublicOffers: VehicleOffer[] = [], retainedPowerMixIds?: ReadonlySet<string>) {
   // Match persistence's knowledge/specification normalization before auditing
   // rejections. Otherwise a row can pass preview and disappear during the
   // writer's later normalization, leaving no per-ID removal evidence.
   const protectedIds = new Set(protectedPublicOffers.map((offer) => String(offer?.id || "")).filter(Boolean));
   const normalized = await Promise.all(storedOffers.filter((offer) => !protectedIds.has(String(offer?.id || ""))).map(async offer =>
     normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
-  return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds);
+  return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds, retainedPowerMixIds);
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {
@@ -1373,18 +1378,18 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     ...projectionsByBrand.keys(),
     ...(previousAllProjection.items || []).map((row) => catalogBrandReadModelKey(row.make)).filter(Boolean),
   ]);
-  await mapWithConcurrency([...brandProjectionsToWrite], 16, (make) =>
+  await mapWithConcurrency([...brandProjectionsToWrite], catalogMaintenanceIoConcurrency(), (make) =>
     writeJsonAtomic(currentBrandProjectionPath(make), { generationId, items: projectionsByBrand.get(make) || [] }, false));
-  await mapWithConcurrency(MARKETS, 7, (market) =>
+  await mapWithConcurrency(MARKETS, catalogMaintenanceIoConcurrency(), (market) =>
     writeJsonAtomic(currentProjectionPath(market), { generationId, items: projectionsByMarket.get(market) || [] }, false));
   const offerShardsToWrite = new Set([
     ...offersByShard.keys(),
     ...(previousAllProjection.items || []).map((row) => currentOfferShardName(row.id)),
   ]);
   // Children are immutable and complete before their mutable root advertises them.
-  await mapWithConcurrency([...offersByShard.entries()].filter(([prefix])=>prefix.length>2),12,([prefix,shard])=>
+  await mapWithConcurrency([...offersByShard.entries()].filter(([prefix])=>prefix.length>2),catalogMaintenanceIoConcurrency(),([prefix,shard])=>
     writeJsonAtomic(detailShardPath(generationId,prefix),{generationId,...shard},false));
-  await mapWithConcurrency([...offerShardsToWrite].filter(prefix=>prefix.length===2), 12, (prefix) =>
+  await mapWithConcurrency([...offerShardsToWrite].filter(prefix=>prefix.length===2), catalogMaintenanceIoConcurrency(), (prefix) =>
     writeJsonAtomic(detailShardPath(generationId,prefix), { generationId, ...(offersByShard.get(prefix) || {items:[]}) }, false));
   const aiProductFeed = await publishAiProductFeed({ generationId, items: allProjectionItems });
 

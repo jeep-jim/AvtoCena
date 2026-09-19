@@ -52,3 +52,13 @@ test('both public policies hold with seller unknowns, several sources and Japan'
   assert.ok(band.low>=4*band.high);
   assert.equal(result.rows.length+result.sourceShare.removed.length+result.powerMix.removed.length,rows.length);
 });
+
+
+test('publication mix retains recovered existing power without admitting new excess power',()=>{
+ const low=Array.from({length:4},(_,i)=>({id:'low-'+i,market:'korea',powerHp:150}));
+ const old={id:'old',market:'korea',powerHp:204};
+ const newer={id:'new',market:'korea',powerHp:300};
+ const result=selectCatalogPublicationMix([...low,newer,old] as any,true,new Set(['old']));
+ assert.ok(result.rows.some(row=>row.id==='old'));
+ assert.deepEqual(result.powerMix.removed.map(row=>row.id),['new']);
+});

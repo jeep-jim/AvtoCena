@@ -149,7 +149,7 @@ test("recovery publisher always preserves untouched full maintenance state exact
 test("recovery preservation gates keep untouched markets byte-stable and canonicalize only mutable rows", () => {
   assert.match(storage, /preservePublicOffersByMarket/);
   assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithKnowledgeCore/);
-  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds\)/);
   assert.match(storage, /protectedRows = storedOffers\.filter/);
   assert.match(storage, /mutableRows = storedOffers\.filter/);
   assert.match(storage, /applyEncyclopediaDisplayIdentityBatch\(mutableRows\)/);
@@ -201,7 +201,7 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(v3MarketWorkflow, /timeout-minutes: 120/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_TTL_MS: "1800000"/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"/);
-  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
   assert.match(storage, /writeCurrentCatalogReadModels\(generationId, publishedOffers, true\)/);
   assert.match(storage, /alreadyCanonical \? new Set<CatalogMarket>\(storedOffers\.map\(\(offer\) => offer\.market/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(storedOffers, exactMarkets, protectedIds\)/);
