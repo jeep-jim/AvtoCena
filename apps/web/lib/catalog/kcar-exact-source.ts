@@ -248,7 +248,7 @@ async function fetchExactDetailData(carCd: string, withRegistry = true) {
   }
   // Public secondary technical tab discovered in the source's own UI bundle.
   // An unavailable optional table cannot turn an active listing into a sale.
-  if (withRegistry) try {
+  if (withRegistry && clean(data.rvo?.statCd) === "CAR_STATUS010") try {
     const registry = await requestJson(`${API_BASE}/bc/detail/gov/bas?carCd=${encodeURIComponent(carCd)}`);
     if (registry.response.ok) data.registryTechnical = registry.json?.data?.data ?? registry.json?.data;
   } catch (error) {

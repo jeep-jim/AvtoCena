@@ -150,14 +150,19 @@ test('KCar refresh re-reads active state, price and exact specifications instead
   let requests = 0;
   globalThis.fetch = async input => {
     requests++;
-    assert.equal(new URL(String(input)).searchParams.get('i_sCarCd'), 'EC61390500');
+    const url = new URL(String(input));
+    if (url.pathname === '/bc/detail/gov/bas') {
+      assert.equal(url.searchParams.get('carCd'), 'EC61390500');
+      return new Response(JSON.stringify({data:{basInfo:null,productInfo:null}}));
+    }
+    assert.equal(url.searchParams.get('i_sCarCd'), 'EC61390500');
     return new Response(JSON.stringify({ success: true, data: { data: detail } }), { headers: { 'content-type': 'application/json' } });
   };
   const old = { sourceId: 'kcar_korea_open', market: 'korea', sourceOfferId: 'EC61390500', sourcePrice: 1,
     firstSeenAt: '2026-09-01T00:00:00Z', images: [{ url: 'cached' }] } as any;
   try {
     const fresh = await kcarKoreaExactSource.refreshOffer(old);
-    assert.equal(requests, 1);
+    assert.equal(requests, 2);
     assert.equal(fresh.sourcePrice, 19_000_000);
     assert.equal(fresh.year, 2022);
     assert.equal(fresh.engineCc, 1598);
@@ -169,7 +174,7 @@ test('KCar refresh re-reads active state, price and exact specifications instead
     detail.rvo.carCd = 'EC99999999';
     await assert.rejects(() => kcarKoreaExactSource.refreshOffer(old), /identity/);
     await assert.rejects(() => kcarKoreaExactSource.refreshOffer({ ...old, sourceId: 'other' }), /source_identity/);
-    assert.equal(requests, 3);
+    assert.equal(requests, 4);
   } finally {
     globalThis.fetch = originalFetch;
     if (oldInventory === undefined) delete process.env.CATALOG_SOURCE_INVENTORY_MODE;
