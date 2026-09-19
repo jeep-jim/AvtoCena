@@ -14,9 +14,9 @@ const buildOptions={entryPoints:['tests/browser/catalog-load-more-fixture.tsx'],
 await build(buildOptions);
 await build({...buildOptions,platform:'node',format:'esm',packages:'external',outfile:out+'/server.mjs'});
 const {App}=await import(pathToFileURL(path.resolve(out+'/server.mjs')).href);
-const initialHtml=renderToString(React.createElement(App));
+
 const css=await postcss([tailwind({content:['apps/web/components/catalog/CatalogLoadMore.tsx']})]).process('@tailwind utilities;',{from:undefined});fs.writeFileSync(out+'/app.css',css.css);
-const server=http.createServer((req,res)=>{const file=req.url==='/app.js'?'app.js':req.url==='/app.css'?'app.css':null;res.setHeader('Content-Type',file?.endsWith('js')?'text/javascript':file?'text/css':'text/html');res.end(file?fs.readFileSync(out+'/'+file):'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root">'+initialHtml+'</div><script src="/app.js"></script>');});
+const server=http.createServer((req,res)=>{const file=req.url==='/app.js'?'app.js':req.url==='/app.css'?'app.css':null;res.setHeader('Content-Type',file?.endsWith('js')?'text/javascript':file?'text/css':'text/html');res.end(file?fs.readFileSync(out+'/'+file):'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root">'+renderToString(React.createElement(App,{initialPage:Number(new URL(req.url,'http://fixture').searchParams.get('page'))||1}))+'</div><script src="/app.js"></script>');});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN});
 try{
@@ -25,8 +25,11 @@ try{
   const errors=[];page.on('pageerror',error=>errors.push(String(error)));
   await page.goto('http://127.0.0.1:'+server.address().port);
   await page.getByText('Показано 24 из 60').waitFor();
+  const pages=page.getByRole('navigation',{name:'Страницы каталога'});
+  assert.equal(await pages.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),'/cars?market=japan&page=2');
+  assert.equal(await pages.locator('[aria-current=page]').innerText(),'1');
   await page.getByRole('button',{name:'Показать ещё'}).click();
-  await page.getByText('Показано 48 из 60').waitFor();assert.equal(await page.locator('article').count(),48);
+  await page.getByText('Показано 48 из 60').waitFor();assert.equal(await page.locator('article').count(),48);assert.equal(await pages.locator('[aria-current=page]').innerText(),'2');
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByRole('alert').waitFor();assert.equal(await page.locator('article').count(),48);
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByText('Показано 60 из 60').waitFor();assert.equal(await page.locator('article').count(),60);
   await page.getByText('Автомобиль 48',{exact:true}).scrollIntoViewIfNeeded();const before=await page.evaluate(()=>scrollY);
@@ -35,7 +38,15 @@ try{
   assert.equal(await page.locator('article').count(),60);assert.equal(await page.getByRole('button',{name:'Показать ещё'}).count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   assert.deepEqual(errors,[], 'SSR hydration and interaction must not produce browser errors');
-  await page.screenshot({path:out+'/'+width+'.png'});await page.close();
+  await page.screenshot({path:out+'/'+width+'.png'});
+  await pages.getByRole('link',{name:'Страница 2',exact:true}).click();
+  await page.getByText('Показано 24 из 60').waitFor();
+  assert.equal(await page.locator('article').count(),24);assert.equal(await page.locator('article').first().innerText(),'Автомобиль 25');
+  assert.match(page.url(),/page=2/);
+  await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByRole('alert').waitFor();
+  await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByText('Показано 36 из 60').waitFor();
+  assert.equal(await page.locator('article').count(),36);
+  assert.deepEqual(errors,[]);await page.close();
  }
  console.log('Desktop/mobile append, retry, final batch and back/scroll restoration passed');
 }finally{await browser.close();server.close();}

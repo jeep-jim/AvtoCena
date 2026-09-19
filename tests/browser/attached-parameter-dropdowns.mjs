@@ -69,8 +69,8 @@ try{
    const response=await page.goto(origin+url,{waitUntil:'domcontentloaded',timeout:90000});assert.equal(response.status(),200);
    const grid=page.locator('[data-parameter-editor-grid]');await grid.waitFor({state:'visible',timeout:60000});
    await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');return el&&Object.keys(el).some(k=>k.startsWith('__reactProps$'));});
-   const cookie=page.locator('[aria-labelledby="avtocena-cookie-title"]');
-   if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Понятно',exact:true}).click();
+   const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});
+   if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
    const triggers=grid.locator('[data-parameter-editor] > summary');
    for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
     await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
@@ -129,7 +129,30 @@ try{
     await page.keyboard.press('Escape');
 
     await triggers.nth(0).click();await grid.getByLabel('Год выпуска',{exact:true}).selectOption('2025');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'118');
-    await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerKw,'');
+    await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.ok(Math.abs(Number(requests.at(-1)?.powerKw)-150*0.73549875)<1e-7);
+    const hp=grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true});
+    const kw=grid.getByRole('spinbutton',{name:'Мощность, кВт (если известна)',exact:true});
+    await kw.fill('110');assert.equal(await hp.inputValue(),'150');
+    await hp.fill('160');assert.ok(Math.abs(Number(await kw.inputValue())-160*0.73549875)<1e-7);
+    await kw.fill('');assert.equal(await hp.inputValue(),'');
+    await hp.fill('150');await hp.press('Enter');assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'Enter commits manual input and closes');
+    await triggers.nth(3).click();if(await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).getAttribute('aria-expanded')==='false')await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).click();
+    await grid.locator('[aria-label="Варианты: Мощность, л.с."]').getByRole('button',{name:'120',exact:true}).click();
+    assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'preset closes the whole tile');
+    await page.waitForTimeout(850);assert.equal(requests.at(-1)?.powerHp,'120');assert.ok(Math.abs(Number(requests.at(-1)?.powerKw)-120*0.73549875)<1e-7);
+    await triggers.nth(2).click();await grid.getByRole('button',{name:'Дизель',exact:true}).click();
+    assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'fuel choice closes tile');
+    await triggers.nth(0).click();await grid.getByLabel('Месяц выпуска',{exact:true}).selectOption('3');
+    assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'select closes tile');
+    await page.setViewportSize({width:390,height:640});await triggers.nth(3).click();
+    await page.waitForFunction(()=>document.documentElement.style.overflow==='hidden');
+    const scrollBefore=await page.evaluate(()=>scrollY);await page.mouse.move(5,400);await page.mouse.wheel(0,400);await page.waitForTimeout(100);
+    assert.equal(await page.evaluate(()=>scrollY),scrollBefore,'background remains fixed while mobile panel is open');
+    if(await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).getAttribute('aria-expanded')==='false')await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).click();
+    const presets=grid.locator('[aria-label="Варианты: Мощность, л.с."]');
+    await presets.hover();await page.mouse.wheel(0,200);await page.waitForTimeout(100);
+    assert.ok(await presets.evaluate(el=>el.scrollTop>0),'long list scrolls inside the mobile menu');
+    await page.keyboard.press('Escape');await page.waitForFunction(()=>document.documentElement.style.overflow!=='hidden');
     await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
     await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
     await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
