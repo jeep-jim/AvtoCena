@@ -1,6 +1,7 @@
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 
 type CatalogImageLike = {
+  role?: unknown;
   id?: unknown;
   url?: unknown;
   objectKey?: unknown;
@@ -164,15 +165,27 @@ export function isLikelyVehicleImage(image: CatalogImageLike) {
     && hasImageEvidence(image) && catalogImageScore(image) >= 0;
 }
 
-/** Published ProAuctions sheets use the same lot directory and the _1 image slot.
- * Only decoded images already attached to this offer are eligible; never construct URLs.
+/** Keep decoded, lot-bound auction documents in the gallery, after vehicle photos.
+ * Legacy ProAuctions imports did not retain a role: their sheet precedes the
+ * vehicle-image sequence, but the counter is global and is NOT always _1.
  */
 function isPublishedAuctionSheet(offer: any, image: CatalogImageLike) {
   if (offer?.market !== "japan" || offer?.sourceId !== "proauctions_japan_stat") return false;
-  const match = text(image.url).match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^/?#]+_1\.(?:webp|jpe?g|png)$/i);
+  const identity = (value: unknown) => text(value).match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^/?#]+_(\d+)\.(?:webp|jpe?g|png)$/i);
+  const match = identity(image.url);
   if (!match || !/^[a-f0-9]{64}$/.test(text(image.checksum)) || finite(image.width) < 100 || finite(image.height) < 100) return false;
-  return offer.images.some((other: CatalogImageLike) => other !== image
-    && text(other.url).includes(match[1]) && isLikelyVehicleImage(other));
+  const photos = offer.images.filter((other: CatalogImageLike) => other !== image
+    && identity(other.url)?.[1] === match[1] && isLikelyVehicleImage(other));
+  if (!photos.length) return false;
+  if (image.role === "auction_sheet") return true;
+  if (image.role === "vehicle") return false;
+  const evidence = offer.operational?.raw?.sourceEvidence;
+  if (evidence?.auctionSheetUrls?.includes(text(image.url))) return true;
+  // Compatibility for published rows whose raw evidence was compacted away.
+  // Require a decoded square/portrait document directly before its same-lot
+  // vehicle sequence. No URL is generated and no other lot is admitted.
+  return finite(image.width) <= finite(image.height)
+    && Number(match[2]) + 1 === Math.min(...photos.map((photo: CatalogImageLike) => Number(identity(photo.url)![2])));
 }
 
 export function rankedCatalogImageUrls(offer: any) {
