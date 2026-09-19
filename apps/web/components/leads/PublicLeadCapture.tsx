@@ -318,8 +318,7 @@ function LeadDialog({
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/30 lg:hidden" />
         <header className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <div className="text-xs font-black uppercase tracking-[.16em] text-red-500">АвтоЦена</div>
-            <h2 id="ac-lead-dialog-title" className="mt-1 text-2xl font-black tracking-[-.03em] md:text-3xl">{title}</h2>
+            <h2 id="ac-lead-dialog-title" className="text-2xl font-black tracking-[-.03em] md:text-3xl">{title}</h2>
             {status !== "success" ? <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[var(--ac-muted)]">{intro}</p> : null}
           </div>
           <button type="button" disabled={status === "sending"} onClick={onClose} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>

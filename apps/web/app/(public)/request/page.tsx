@@ -89,10 +89,9 @@ export default function RequestPage() {
       <PublicHeader />
       <section className="mx-auto w-full max-w-4xl px-4 py-10 md:px-8 md:py-14">
         <div className="rounded-[2rem] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] md:p-8">
-          <div className="text-xs font-black uppercase tracking-[.18em] text-red-500">АвтоЦена</div>
-          <h1 className="mt-2 text-3xl font-black tracking-[-.035em] md:text-5xl">Оставить заявку</h1>
+          <h1 className="text-3xl font-black tracking-[-.035em] md:text-5xl">Оставить заявку</h1>
           <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-[var(--ac-muted)] md:text-base">
-            Укажите, какой автомобиль нужен и ваш бюджет. Заявка попадёт в CRM АвтоЦены — менеджер проверит доступные рынки и свяжется с вами.
+            Укажите, какой автомобиль нужен и ваш бюджет. Менеджер проверит доступные рынки и свяжется с вами.
           </p>
 
           {status === "success" ? (
