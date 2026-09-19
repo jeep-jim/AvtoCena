@@ -1,0 +1,43 @@
+name: Verify published catalog journey
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/app/(public)/cars/layout.tsx'
+      - 'apps/web/components/catalog/CatalogLoadMore.tsx'
+      - 'tests/browser/catalog-live-journey.mjs'
+      - '.github/workflows/verify-catalog-live.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/catalog-live --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Wait for exact published release
+        env:
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'JS'
+          let ready=false;
+          for(let n=0;n<50;n++){
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}}catch{}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          if(!ready)throw Error('Exact release not confirmed');
+          JS
+      - name: Mobile and desktop published journey
+        env:
+          PLAYWRIGHT_MODULE: /tmp/catalog-live/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-live-journey.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-live-journey
+          path: artifacts/catalog-live
+          retention-days: 7

@@ -1,10 +1,11 @@
 name: Verify catalog load more
 on:
   push:
-    branches: [main, fix/catalog-speed-load-more, fix/catalog-gateway-actions]
+    branches: [main, fix/catalog-speed-load-more, fix/catalog-gateway-actions, fix/catalog-hydration-final]
     paths:
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
       - 'tests/browser/catalog-load-more*'
+      - 'apps/web/app/(public)/cars/layout.tsx'
       - '.github/workflows/verify-catalog-load-more.yml'
 permissions:
   contents: read

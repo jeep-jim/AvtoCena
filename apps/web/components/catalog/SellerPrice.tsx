@@ -28,7 +28,7 @@ export function SellerPrice({ offer, panel = true, dense = false, label, priceCl
       {japan ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
     </div>
     {panel ? <p className="mt-2 text-[10px] text-[var(--ac-muted)]">Без доставки и платежей</p> : null}
-    {panel ? <style>{`html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}`}</style> : null}
+    {panel ? <style dangerouslySetInnerHTML={{ __html: `html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}` }} /> : null}
     {panel && rate?.effectiveRate ? <>
       <button type="button" {...tap} onClick={()=>setOpen(true)} className="ac-seller-currency mt-3 flex min-h-10 w-full items-center justify-between gap-3 rounded-xl bg-white/5 px-3 py-2 text-left text-xs font-bold" aria-label={`Показать курс ${offer.sourceCurrency}`}>
         <span>{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency} · Курс валюты</span>
