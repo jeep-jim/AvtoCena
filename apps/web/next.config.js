@@ -5,6 +5,8 @@ const nextConfig = {
   output: "standalone",
 
   experimental: {
+    // Yandex forwards its internal container host; accept only our public origins.
+    serverActions: { allowedOrigins: ["avtocena.com", "www.avtocena.com"] },
     outputFileTracingRoot: path.join(__dirname, "../..")
   },
 

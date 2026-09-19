@@ -55,9 +55,9 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   }, [key]);
 
   const fallbackQuery = new URLSearchParams(Object.entries(query).filter(([,value]) => value != null && value !== "").map(([key,value])=>[key,String(value)]));
-  fallbackQuery.set("page", String(initialPage + 1));
   const count = batches.reduce((sum, batch) => sum + batch.count, 0);
   const page = batches[batches.length - 1].page;
+  fallbackQuery.set("page", String(page + 1));
   const more = page * 24 < total && batches[batches.length - 1].count > 0;
   async function load() {
     if (lock.current) return;
@@ -75,8 +75,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mt-7 flex flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} из {total.toLocaleString("ru-RU")}</p>
-      {more ? <button type="button" onClick={load} disabled={busy} className="min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-sm font-black text-white transition hover:bg-red-600 disabled:cursor-wait disabled:opacity-70 sm:w-auto sm:min-w-64" style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</button> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
-      {more ? <noscript><a href={`/cars?${fallbackQuery}`}>Следующие автомобили →</a></noscript> : null}
+      {more ? <a href={`/cars?${fallbackQuery}`} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 sm:w-auto sm:min-w-64 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;
