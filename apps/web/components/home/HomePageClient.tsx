@@ -226,7 +226,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
     let inFlight = false;
     let lastLoadedAt = initialOffers.length ? Date.now() : 0;
     const loadCatalog = async () => {
-      if (inFlight || document.visibilityState === "hidden" || Date.now() - lastLoadedAt < 55_000) return;
+      if (inFlight || document.visibilityState === "hidden" || Date.now() - lastLoadedAt < 5 * 60_000) return;
       inFlight = true;
       const stamp = Date.now();
       try {
@@ -267,7 +267,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         .then(payload => { if (!cancelled && Array.isArray(payload?.items)) setKnowledgeMakes(payload.items.map((item: any) => String(item.value || item.label || '')).filter(Boolean)); })
         .catch(() => {});
     }
-    loadCatalog(); const interval = window.setInterval(loadCatalog, 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
+    loadCatalog(); const interval = window.setInterval(loadCatalog, 5 * 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
     return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
   }, []);
