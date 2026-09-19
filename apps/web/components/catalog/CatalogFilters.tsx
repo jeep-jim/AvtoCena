@@ -266,6 +266,9 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Server HTML can be visible before this component has its event handlers.
+  const [interactive, setInteractive] = useState(false);
+  useEffect(() => setInteractive(true), []);
   const electricOnly = draft.fuel === "electric";
 
   useEffect(() => {
@@ -389,13 +392,13 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
-        <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
+        <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
       {expanded ? <section className="ac-advanced-fields mt-3"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel={!electricOnly} /></section> : null}
       <FilterChips chips={chips} onRemove={removeFilter} />
     </form>
 
-    <button type="button" onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
+    <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
     {mobileOpen ? <div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black uppercase tracking-[.15em] text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
