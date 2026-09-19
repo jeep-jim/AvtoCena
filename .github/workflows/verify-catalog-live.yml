@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/web/app/(public)/cars/layout.tsx'
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
+      - 'apps/web/components/catalog/CatalogFilters.tsx'
       - 'tests/browser/catalog-live-journey.mjs'
       - '.github/workflows/verify-catalog-live.yml'
 permissions:
