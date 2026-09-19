@@ -7,8 +7,8 @@ import { catalogPowerDisplay } from "../apps/web/lib/catalog/power-display";
 import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 
 const markets: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
-const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub", "rfDeliveryRub"];
-const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "rf-delivery", "customs"];
+const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub"];
+const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "customs"];
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
@@ -31,6 +31,7 @@ test("fills the full customer cost structure for every market when saved fields 
       rfDeliveryRub: null,
     };
     const resolved = resolveCatalogMarketConfig(market, configured);
+    assert.equal(resolved.config.rfDeliveryRub, 0);
     for (const field of requiredCosts) assert.ok(Number(resolved.config[field]) > 0, `${market}:${field}`);
 
     const calculation = calculateAvtocenaFromBusinessConfig({

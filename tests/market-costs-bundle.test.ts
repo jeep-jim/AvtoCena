@@ -54,7 +54,7 @@ test('Japan list/detail apply the same service-only delta once, keeping auction,
  const full:any={id:'jp',market:'japan',totalRub:oldQuote.totalRub,calculationStatus:'ready',calculationSnapshot:{...oldQuote.snapshot,currencyRate:{effectiveRate:0.54,rateDate:'2026-08-01',sourcePriceRub:1000000},customs:{status:'ready',totalCustomsRub:400000}}};
  const compact:any={...full,cardProjectionVersion:3,publicVisibleRub:full.totalRub,calculationSnapshot:{currencyRate:full.calculationSnapshot.currencyRate,...compactPricingSnapshot(full)}};
  const a=repriceOfferWithBusinessConfig(full,config),b=repriceOfferWithBusinessConfig(compact,config);
- assert.equal(a.totalRub,full.totalRub-35000);assert.equal(b.totalRub,a.totalRub);assert.equal(b.publicVisibleRub,a.totalRub);
+ assert.equal(a.totalRub,full.totalRub-35000-120000);assert.equal(b.totalRub,a.totalRub);assert.equal(b.publicVisibleRub,a.totalRub);
  assert.deepEqual(a.calculationSnapshot.customs,full.calculationSnapshot.customs);assert.deepEqual(a.calculationSnapshot.currencyRate,full.calculationSnapshot.currencyRate);
  assert.equal(a.calculationSnapshot.breakdown.reduce((s:number,l:any)=>s+l.amountRub,0),a.totalRub);
  assert.equal(repriceOfferWithBusinessConfig(a,config).totalRub,a.totalRub);

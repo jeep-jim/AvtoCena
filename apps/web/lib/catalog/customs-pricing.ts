@@ -1,3 +1,4 @@
+import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { expandCustomsBreakdown } from "./customs-breakdown";
@@ -258,6 +259,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
+  const deliveryQuote = quoteCityDelivery(offer.deliveryCity, offer.market);
+  market.warnings.push(deliveryDescription(deliveryQuote));
   if (market.config.logisticsRateStatus === "unavailable") {
     return {
       ...offer,
@@ -330,6 +333,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       ...adjustmentInput,
       marketId: offer.market,
       marketConfig: market.config,
+      cityDeliveryRub: deliveryQuote.amountRub,
+      deliveryCity: deliveryQuote.city,
       sourcePriceRub: rate.sourcePriceRub,
       customsRub: customs.knownCustomsRub,
     });
@@ -344,6 +349,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       totalRub: calculation.totalRub,
       calculationSnapshot: {
         ...calculation.snapshot,
+        deliveryQuote,
         sourcePriceAdjustment,
         currencyRate: rate,
         eurRate,
@@ -397,6 +403,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     ...adjustmentInput,
     marketId: offer.market,
     marketConfig: market.config,
+      cityDeliveryRub: deliveryQuote.amountRub,
+      deliveryCity: deliveryQuote.city,
     sourcePriceRub: rate.sourcePriceRub,
     customsRub: customs.knownCustomsRub,
     utilizationFeeRub: customs.utilizationFeeRub,
@@ -418,6 +426,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     totalRub: calculation.totalRub,
     calculationSnapshot: {
       ...calculation.snapshot,
+        deliveryQuote,
       sourcePriceAdjustment,
       currencyRate: rate,
       eurRate,
@@ -515,7 +524,7 @@ export async function calculateOfferWithCustomerParametersDetailed(input: Vehicl
     const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
     return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
   }
-  return {ok: true as const, calculation: {totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
+  return {ok: true as const, calculation: {deliveryQuote:result.calculationSnapshot?.deliveryQuote,totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
 }
 
 /** Preserve the nullable contract used by existing integrations. */

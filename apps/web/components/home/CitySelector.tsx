@@ -21,7 +21,7 @@ function persistCity(city: string) {
   try { localStorage.setItem(STORAGE_KEY, city); } catch {}
   document.cookie = `avtocena_city=${encodeURIComponent(city)}; Max-Age=15552000; Path=/; SameSite=Lax`;
   const url = new URL(window.location.href);
-  url.searchParams.set("city", city);
+  if (city) url.searchParams.set("city", city); else url.searchParams.delete("city");
   window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
 }
 
@@ -37,19 +37,7 @@ export function CitySelector({ value, onChange }: Props) {
     let stored = "";
     try { stored = localStorage.getItem(STORAGE_KEY) || ""; } catch {}
     if (stored && stored !== value) onChange(stored);
-    if (stored || value) return;
-    let cancelled = false;
-    fetch("/api/location/city", { cache: "no-store" })
-      .then((response) => response.ok ? response.json() : null)
-      .then((data) => {
-        const city = String(data?.city || "").trim();
-        if (!cancelled && city) {
-          onChange(city);
-          persistCity(city);
-        }
-      })
-      .catch(() => undefined);
-    return () => { cancelled = true; };
+
   }, []);
 
   useEffect(() => {
@@ -118,7 +106,7 @@ export function CitySelector({ value, onChange }: Props) {
     </span>
 
     {mounted && open ? createPortal(<div className="fixed inset-0 z-[15000] flex items-end justify-center bg-black/65 p-0 backdrop-blur-md md:items-center md:p-6" onClick={() => setOpen(false)}>
-      <section className="w-full max-w-[560px] rounded-t-[28px] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-[0_-24px_80px_rgba(0,0,0,.42)] md:rounded-[28px] md:p-6" role="dialog" aria-modal="true" aria-label="Выбор города" onClick={(event) => event.stopPropagation()}>
+      <section className="max-h-[90dvh] overflow-y-auto overscroll-contain w-full max-w-[560px] rounded-t-[28px] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-[0_-24px_80px_rgba(0,0,0,.42)] md:rounded-[28px] md:p-6" role="dialog" aria-modal="true" aria-label="Выбор города" onClick={(event) => event.stopPropagation()}>
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35 md:hidden" />
         <div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Город доставки</div><h2 className="mt-1 text-2xl font-black">Куда привезти автомобиль?</h2><p className="mt-2 text-sm font-medium leading-6 text-[var(--ac-muted)]">Город сохранится на этом устройстве и будет подставляться в подбор.</p></div><button type="button" onClick={() => setOpen(false)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
         <div className="relative mt-5"><LocationIcon className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--ac-muted)]" /><input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") choose(suggestions[0]?.city || query); }} autoFocus placeholder="Начните вводить город" className="h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] pl-12 pr-4 text-base font-bold text-[var(--ac-text)] outline-none placeholder:text-[var(--ac-muted)]" /></div>
@@ -127,6 +115,7 @@ export function CitySelector({ value, onChange }: Props) {
           {suggestions.map((item) => <button key={`${item.city}-${item.region || ""}`} type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(item.city); }} onClick={() => choose(item.city)} className="flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-[var(--ac-surface-2)]"><span className="font-black">{item.city}</span><span className="truncate text-xs font-bold text-[var(--ac-muted)]">{item.region}</span></button>)}
           {!suggestions.length && !loading ? <div className="grid grid-cols-2 gap-2 pt-1">{filteredPopular.map((city) => <button key={city} type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(city); }} onClick={() => choose(city)} className="rounded-xl bg-[var(--ac-surface-2)] px-3 py-3 text-left text-sm font-black">{city}</button>)}</div> : null}
         </div>
+        <button type="button" onClick={() => {onChange("");persistCity("");setOpen(false);}} className="mt-3 w-full py-2 text-sm underline">Не выбирать город</button>
         <button type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(query); }} onClick={() => choose(query)} disabled={!query.trim()} className="avto-button mt-4 flex h-14 w-full items-center justify-center rounded-2xl text-base font-black disabled:cursor-not-allowed disabled:opacity-45">Выбрать город</button>
       </section>
     </div>, document.body) : null}

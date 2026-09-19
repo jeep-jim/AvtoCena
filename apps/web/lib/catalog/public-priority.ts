@@ -79,7 +79,7 @@ function completeCalculation(offer: Partial<VehicleOffer> | any) {
     totalRub
       && ["ready", "estimated", "auction_start", "calculated"].includes(status)
       && customs?.status === "ready"
-      && REQUIRED_PRICE_LINES.every((id) => positiveIds.has(id)),
+      && REQUIRED_PRICE_LINES.every((id) => positiveIds.has(id) || (id === "rf-delivery" && offer?.calculationSnapshot?.marketConfig?.rfDeliveryRub === 0 && !(offer?.calculationSnapshot?.deliveryQuote?.amountRub > 0))),
   );
 }
 

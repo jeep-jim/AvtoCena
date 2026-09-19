@@ -79,7 +79,7 @@ export function resolveCatalogMarketConfig(market: CatalogMarket, configured: an
     laboratoryRub: value("laboratoryRub"),
     sbktsRub: value("sbktsRub"),
     eptsRub: value("eptsRub"),
-    rfDeliveryRub: value("rfDeliveryRub"),
+    rfDeliveryRub: 0, // Public base price excludes delivery until the customer selects a city.
     otherFixedExpensesRub: value("otherFixedExpensesRub"),
     exchangeRateReservePercent: 2,
     percentExpenses: Array.isArray(source.percentExpenses) ? source.percentExpenses : [],

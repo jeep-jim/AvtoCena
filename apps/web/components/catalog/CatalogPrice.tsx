@@ -5,7 +5,7 @@ import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { isCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { SellerPrice } from "./SellerPrice";
 
-export function CatalogPrice({
+function CatalogPriceContent({
   offer,
   label,
   dense = false,
@@ -47,4 +47,9 @@ export function CatalogPrice({
       </div>
     </div>
   );
+}
+
+export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
+ const estimated = Number(props.offer?.japanDeliveredPreview?.totalRub) > 0 || (!isSellerPricedOffer(props.offer) && Number(props.offer?.totalRub) > 0);
+ return <div><CatalogPriceContent {...props} />{estimated ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки до вашего города</p> : null}</div>;
 }

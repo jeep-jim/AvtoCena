@@ -1,3 +1,4 @@
+import { quoteCityDelivery, deliveryDescription } from "./catalog/city-delivery";
 import { customerPriceBreakdown } from "./catalog/customer-price-breakdown";
 import {guardLead} from "./lead-antispam";
 import {normalizeRuPhone} from "./ru-phone";
@@ -166,7 +167,7 @@ export async function createLead(
   const max = clean(body.max, 160);
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
-  const comment = clean(body.comment, 2000) || clean(body.message, 2000);
+  const customerComment = clean(body.comment, 2000) || clean(body.message, 2000);
   const contactPreference = normalizeContactPreference(
     body.contactPreference || body.contactMode,
   );
@@ -269,6 +270,8 @@ export async function createLead(
     selectedOfferSnapshots[0] ||
     null;
   const primaryOfferId = primaryOffer?.id || requestedPrimaryOfferId;
+  const deliveryQuote = quoteCityDelivery(city, primaryOffer?.market || "unknown");
+  const comment = [customerComment, city ? deliveryDescription(deliveryQuote) : ""].filter(Boolean).join("\n");
 
   const createdAt = new Date().toISOString();
   const rawOperationId = clean(body.operationId, 120) || crypto.randomUUID();
@@ -376,7 +379,7 @@ export async function createLead(
     createdByManagerId,
     assignedManagerId,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
-    selectedOffers: selectedOfferSnapshots,
+    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:quoteCityDelivery(city,item.market || "unknown")})),
     configVersion: businessSettingsSnapshot?.configVersion || "",
     effectiveFrom: businessSettingsSnapshot?.effectiveFrom || "",
     businessSettingsSnapshot,
@@ -396,6 +399,7 @@ export async function createLead(
     }));
 
   const leadPayload = {
+    deliveryQuote,
     id: leadId,
     operationId,
     threadKey,
@@ -442,7 +446,7 @@ export async function createLead(
     referrer,
     ...consentSnapshot,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
-    selectedOffers: selectedOfferSnapshots,
+    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:quoteCityDelivery(city,item.market || "unknown")})),
     carId: genericRequest ? "" : primaryOfferId || clean(body.carId, 200),
     offerId: primaryOfferId,
     offerUrl: primaryOffer?.href || "",
@@ -491,8 +495,8 @@ export async function createLead(
       if (stored.followups?.some((entry: any) => entry.operationId === operationId)) return stored;
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
-      const entry = {operationId, createdAt, comment, changes, ...contactFields, source, ...consentSnapshot};
-      return {...stored, ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+      const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, ...consentSnapshot};
+      return {...stored, ...(city ? {deliveryQuote} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
   if (threadKey) {
