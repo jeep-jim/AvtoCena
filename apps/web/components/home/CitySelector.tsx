@@ -81,7 +81,7 @@ export function CitySelector({ value, onChange }: Props) {
   }, [query]);
 
   const choose = (city: string) => {
-    const normalized = city.trim().replace(/^г\.?\s*/i, "");
+    const normalized = city.trim().replace(/^г(?:\.\s*|\s+)/i, "");
     if (!normalized) return;
     onChange(normalized);
     persistCity(normalized);

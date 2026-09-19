@@ -1,3 +1,4 @@
+import { businessPaymentPlan } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { customerPriceBreakdown } from './customer-price-breakdown';
 import type { VehicleOffer } from './types';
 
@@ -39,7 +40,7 @@ export function applyJapanServiceCosts<T extends Partial<VehicleOffer>>(offer:T,
   if (breakdown && exchangeReserveRub > 0) breakdown.push({id:"exchange-reserve",title:"Резерв на изменение курса",amountRub:exchangeReserveRub,kind:"reserve",amountType:"percent",source:"market_config",note:`${reservePercent}% от стоимости авто`});
   return {...frozen,totalRub,
     ...(Number((offer as any).cardProjectionVersion) >= 3 ? {publicVisibleRub:totalRub} : {}),
-    calculationSnapshot:{...snapshot,...(breakdown ? {breakdown} : {}),
+    calculationSnapshot:{...snapshot,paymentPlan:businessPaymentPlan("japan",config,totalRub),...(breakdown ? {breakdown} : {}),
       serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub:0,vehiclePriceRub,rfDeliveryRub:0},serviceBundleVersion:config.serviceBundleVersion,
       businessConfigVersion:config.id,
       marketConfig:{...snapshot?.marketConfig,rfDeliveryRub:0,exchangeRateReservePercent:reservePercent,laboratoryRub,sbktsRub:0,eptsRub:0,

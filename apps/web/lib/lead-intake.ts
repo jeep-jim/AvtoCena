@@ -496,7 +496,7 @@ export async function createLead(
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
       const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, ...consentSnapshot};
-      return {...stored, ...(city ? {deliveryQuote} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+      return {...stored, ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,deliveryQuote:quoteCityDelivery(city,item.market||"unknown")}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
   if (threadKey) {
