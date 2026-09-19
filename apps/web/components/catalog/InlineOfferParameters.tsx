@@ -73,7 +73,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
    if(window.matchMedia("(max-width: 767px)").matches){
     // Bring the attached menu into view before locking the page behind it.
     const panel=editor.querySelector<HTMLElement>("[data-parameter-panel]");
-    if(panel && panel.getBoundingClientRect().top>window.innerHeight-180)window.scrollBy(0,panel.getBoundingClientRect().top-window.innerHeight+180);
+    if(panel && panel.getBoundingClientRect().top>window.innerHeight-180)window.scrollBy({top:panel.getBoundingClientRect().top-window.innerHeight+180,behavior:"instant"});
     const root=document.documentElement,body=document.body;
     const rootOverflow=root.style.overflow,bodyOverflow=body.style.overflow;
     root.style.overflow="hidden";body.style.overflow="hidden";
