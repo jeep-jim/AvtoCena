@@ -13,7 +13,7 @@ export function catalogPowerBand(offer: Partial<VehicleOffer>) {
 }
 
 /** Public assortment only: callers retain the complete source inventory. */
-export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[]) {
+export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[], options: { retainedIds?: ReadonlySet<string> } = {}) {
  const groups=new Map<string,T[]>();
  for(const row of rows){const market=String(row.market||"");const bucket=groups.get(market)||[];bucket.push(row);groups.set(market,bucket);}
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
@@ -30,18 +30,24 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
    report[market]={low:low.length,high:other.length-unknown,unknown:unknown+sellerUnknown.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
    continue;
   }
-  if(market !== "china" && bucket.length && !low.length && !sellerUnknown.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
+  const retainedOther=other.filter(row=>options.retainedIds?.has(String(row.id)));
+  if(market !== "china" && bucket.length && !low.length && !sellerUnknown.length && !retainedOther.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
   const allowance=Math.floor(low.length/4);
   // Europe: fill the limited extra pool with the least expensive verified
   // delivered totals first. Seller-only prices are not comparable to totals.
   // Seller inventory with unknown power remains available for parameter entry.
   // It is not evidence for either the low-power or high-power assortment.
   if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
-  const keptOther=other.slice(0,allowance);
+  // An existing car must not vanish merely because its previously unknown power was recovered.
+  // Retained cars consume the allowance first; new high-power admissions wait for room.
+  const retainedSet=new Set(retainedOther);
+  const newOther=other.filter(row=>!retainedSet.has(row));
+  const newAllowance=Math.max(0,allowance-retainedOther.length);
+  const keptOther=[...retainedOther,...newOther.slice(0,newAllowance)];
   const kept=new Set<T>([...low,...keptOther,...sellerUnknown]);
   selected.push(...bucket.filter(row=>kept.has(row)));
-  removed.push(...other.slice(allowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
+  removed.push(...newOther.slice(newAllowance));
+  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,retainedAboveAllowance:Math.max(0,retainedOther.length-allowance),published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
  }
  return {rows:selected,removed,report};
 }

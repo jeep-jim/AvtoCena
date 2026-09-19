@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [fix/kcar-registry-recovery-20260919, main]
-    paths: [.github/workflows/kcar-registry-recovery.yml, data/catalog/triggers/kcar-registry-recovery.json]
+    paths: [.github/workflows/kcar-registry-recovery.yml, data/catalog/triggers/kcar-registry-recovery.json, .github/market-runs/kcar-registry-recovery.json]
 permissions:
   contents: read
 concurrency:
@@ -15,6 +15,8 @@ jobs:
     timeout-minutes: 60
     env:
       CATALOG_READ_CONCURRENCY: '4'
+      CATALOG_MAINTENANCE_IO_CONCURRENCY: '4'
+      CATALOG_PUBLICATION_PROGRESS: '1'
       NODE_OPTIONS: --max-old-space-size=6144
       JSON_STORAGE_DRIVER: object
       CATALOG_SOURCE_INVENTORY_MODE: '1'

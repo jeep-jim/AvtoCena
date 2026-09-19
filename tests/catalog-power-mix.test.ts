@@ -39,3 +39,15 @@ test("unknown-power seller inventory does not disappear into the calculated asso
  assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,4);
  assert.equal(selectCatalogPowerMix(sellers).rows.length,100);
 });
+
+
+test("recovering power keeps existing cars and reserves remaining allowance for newcomers",()=>{
+ const low=Array.from({length:4},(_,i)=>row('l'+i,150,'korea'));
+ const retained=[row('existing1',204,'korea'),row('existing2',304,'korea')];
+ const result=selectCatalogPowerMix([...low,row('new',250,'korea'),...retained],{retainedIds:new Set(['existing1','existing2'])});
+ assert.deepEqual(result.removed.map(x=>x.id),['new']);
+ assert.equal(result.rows.length,6);
+ assert.equal((result.report.korea as any).retainedAboveAllowance,1);
+ assert.equal((result.report.korea as any).targetMet,false);
+ assert.equal(selectCatalogPowerMix(retained,{retainedIds:new Set(['existing1','existing2'])}).rows.length,2);
+});

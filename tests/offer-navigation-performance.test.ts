@@ -107,7 +107,7 @@ test("catalog reads a current one-hop projection before generation indexes", () 
 });
 
 test("catalog generation becomes public only after canonical identity and deduplication", () => {
-  assert.match(storage, /const canonicalPublic = await canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)/);
+  assert.match(storage, /const canonicalPublic = await canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds, options\.retainedPowerMixIds\)/);
   assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
   assert.match(storage, /await rebuildIndexes\(generationId, publishedOffers, byId, imagesById\)/);
   const manifestSwitch = storage.indexOf('await storage.writeJson("catalog/manifest.json", manifest');
