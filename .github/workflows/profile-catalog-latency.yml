@@ -25,6 +25,11 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
         run: node --import tsx scripts/profile-catalog-latency.mjs
+      - run: npm install --prefix "$RUNNER_TEMP/profile-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Browser request timings
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/profile-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-latency-profile.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
