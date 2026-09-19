@@ -24,6 +24,8 @@ export function registryRetentionPlan(images, revisions, now = Date.now()) {
   return {repository:WEB_REPOSITORY, images:own.length, retained:own.length-candidates.length, candidates:candidates.map(x=>({id:x.id,digest:x.digest,createdAt:x.createdAt,tags:x.tags || []})), protectedRevisions:protectedRevisions.map(r=>({id:r.id,status:r.status,imageDigest:r.image.imageDigest,imageUrl:r.image.imageUrl}))};
 }
 export function uniqueRegistryBytes(images) {
+  // The list API may omit layer details; unknown is not zero bytes.
+  if (images.some(image => !Array.isArray(image.layers))) return null;
   const blobs = new Map();
   for (const image of images) for (const blob of [image.config,...(image.layers || [])]) {
     if (blob?.digest && Number.isFinite(Number(blob.size))) blobs.set(blob.digest, Number(blob.size));

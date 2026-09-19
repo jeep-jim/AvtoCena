@@ -25,3 +25,5 @@ test('protects a revision by immutable digest despite moved tags',()=>{
 test('shared layers are counted once',()=>{
  assert.equal(uniqueRegistryBytes([{layers:[{digest:'x',size:'100'}]},{layers:[{digest:'x',size:'100'},{digest:'y',size:'30'}]}]),130);
 });
+
+test('missing layer inventory is unknown, never zero storage',()=>assert.equal(uniqueRegistryBytes([{id:'list-result'}]),null));

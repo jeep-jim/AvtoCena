@@ -4,8 +4,12 @@ on:
     - cron: '30 16 * * *'
   workflow_dispatch:
   push:
-    branches: [fix/registry-retention-20260919, main]
+    branches: [fix/registry-retention-20260919]
     paths: [.github/workflows/container-registry-cleanup.yml, scripts/cleanup-container-registry.mjs, scripts/lib/registry-retention.mjs]
+  workflow_run:
+    workflows: [Deploy to Yandex Cloud]
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 concurrency:
@@ -13,6 +17,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   cleanup:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
