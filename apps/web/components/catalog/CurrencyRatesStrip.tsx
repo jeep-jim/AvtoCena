@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState, type WheelEvent as ReactWheelEvent } from "react";
 import { CurrencyFlag, CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
 
+import { loadPublicRates } from "../../lib/catalog/public-rates-client";
+
 type Variant = "mobile" | "desktop";
 
 type Props = {
@@ -67,10 +69,9 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
       return;
     }
     let cancelled = false;
-    fetch(`/api/catalog/search?pageSize=1&includeRates=1&_=${Date.now()}`, { cache: "no-store", headers: { "cache-control": "no-cache" } })
-      .then((response) => response.ok ? response.json() : null)
-      .then((data) => {
-        if (!cancelled) setLoadedRates(Array.isArray(data?.rates) ? data.rates : []);
+    loadPublicRates()
+      .then((rates) => {
+        if (!cancelled) setLoadedRates(rates);
       })
       .catch(() => undefined);
     return () => { cancelled = true; };

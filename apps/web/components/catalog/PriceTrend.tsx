@@ -3,6 +3,7 @@ import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
+import { loadPublicRates } from "../../lib/catalog/public-rates-client";
 import { AuctionCardPrice } from "./AuctionCardPrice";
 import type { JapanExportRestriction } from "../../lib/catalog/japan-export-restriction";
 
@@ -55,20 +56,10 @@ const RATE_META: Record<string, { label: string; nominal: number; country: strin
   CZK: { label: "Чешская крона", nominal: 1, country: "Чехия" },
 };
 
-let ratesPromise: Promise<Record<string, LiveRate>> | null = null;
-
-function loadLiveRates() {
-  if (!ratesPromise) {
-    ratesPromise = fetch("/api/catalog/search?pageSize=1&includeRates=1", { cache: "no-store" })
-      .then((response) => response.ok ? response.json() : null)
-      .then((data) => Object.fromEntries(
-        (Array.isArray(data?.rates) ? data.rates : [])
-          .filter((rate: any) => rate?.currency && Number(rate?.effectiveRate) > 0)
-          .map((rate: LiveRate) => [String(rate.currency).toUpperCase(), rate]),
-      ))
-      .catch(() => ({}));
-  }
-  return ratesPromise;
+function loadLiveRates(): Promise<Record<string, LiveRate>> {
+  return loadPublicRates().then(rates => Object.fromEntries(
+    rates.map(rate => [String(rate.currency).toUpperCase(), rate]),
+  )).catch(() => ({}));
 }
 
 function money(value: number) {

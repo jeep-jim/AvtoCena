@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { loadPublicRates } from "../../lib/catalog/public-rates-client";
 
 type Preview = {
   src: string;
@@ -260,11 +261,10 @@ export function PublicUiEnhancer() {
 
     const loadRates = async () => {
       try {
-        const response = await fetch(`/api/catalog/search?pageSize=1&includeRates=1&_=${Date.now()}`, { cache: "no-store", headers: { "cache-control": "no-cache" } });
-        if (!response.ok) return;
-        const data = await response.json();
+        if (document.visibilityState === "hidden") return;
+        const rates = await loadPublicRates();
         if (disposed) return;
-        rateMap = new Map((Array.isArray(data?.rates) ? data.rates : []).map((rate: PublicRate) => [String(rate.currency || "").toUpperCase(), rate]));
+        rateMap = new Map(rates.map((rate: PublicRate) => [String(rate.currency || "").toUpperCase(), rate]));
         scheduleApply();
       } catch {
         // The charts remain usable without the optional point labels.
@@ -274,12 +274,15 @@ export function PublicUiEnhancer() {
     const observer = new MutationObserver(scheduleApply);
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["aria-label"] });
     void loadRates();
-    const interval = window.setInterval(loadRates, 60_000);
+    const interval = window.setInterval(loadRates, 15 * 60_000);
+    const resumeRates = () => { if (document.visibilityState === "visible") void loadRates(); };
+    document.addEventListener("visibilitychange", resumeRates);
 
     return () => {
       disposed = true;
       observer.disconnect();
       window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", resumeRates);
       window.cancelAnimationFrame(frame);
       if (createdStyle) style?.remove();
     };
