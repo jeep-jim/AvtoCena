@@ -1,11 +1,8 @@
 {
-  "mode": "owner-approved-uae-georgia-parser-recovery-final-after-writer",
+  "requestedAt": "2026-09-19T12:32:17.742Z",
   "publishMarkets": [
-    "uae",
-    "georgia"
+    "korea"
   ],
   "resetCursors": true,
-  "remainingMarkets": [],
-  "requestedAt": "2026-09-17T09:11:20.000000+00:00",
-  "reason": "Run exactly one post-writer recovery from current main after run 35190413385 completed. Collect and publish only UAE and Georgia with cursors reset to page 1, do not set reuseRunId, do not collect or modify Japan or any other market, verify CarSwitch beyond page 3 and AutoPapa beyond page 105 or a normal finish, keep MyAuto fail-closed, and retain every source, image, calculation, regression, storage, audit and preservation gate unchanged."
+  "reason": "Full Korean refresh using VIN-bound KCar registry evidence and per-source retention guards"
 }
