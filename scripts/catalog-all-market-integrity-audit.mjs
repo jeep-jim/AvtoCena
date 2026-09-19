@@ -25,7 +25,7 @@ const report = {checkedAt: new Date().toISOString(), generationId: manifest.gene
 const inc = (obj, key) => { obj[key] = (obj[key] || 0) + 1; };
 const samples = new Map();
 for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
-  const stats = {rows:0, uniqueIds:0, uniqueSourceIds:0, sources:{}, issues:{}, evidence:{}, powerProvenance:{}, chunks:0, safety:{changed:0, sellerPriceAvailable:0, deliveredQuotesRemoved:0}};
+  const stats = {rows:0, uniqueIds:0, uniqueSourceIds:0, sources:{}, issues:{}, evidence:{}, powerProvenance:{}, chunks:0, calculationReady:0, productionMonth:0, specificationFields:{}, missingPowerVariants:{}, safety:{changed:0, sellerPriceAvailable:0, deliveredQuotesRemoved:0}};
   const seen = new Set(), sourceIds = new Set();
   report.markets[market] = stats;
   for (const chunk of manifest.markets?.[market]?.chunks || []) {
@@ -36,6 +36,22 @@ for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
     stats.chunks++;
     for (const row of rows) {
       stats.rows++;
+      if (row.totalRub > 0 && safePublicPricing(row).totalRub > 0) stats.calculationReady++;
+      if (/^\d{4}[-./]?\d{2}/.test(String(row.productionDate || ''))) stats.productionMonth++;
+      for (const group of row.operational?.sourceSpecifications?.groups || []) {
+        for (const field of group.items || []) {
+          const label = String(field.name || field.label || field.key || 'unknown');
+          if (/power|horse|мощ|hp|kw|출력|마력|제조|연식|등록|production|manufactur|registration|выпуск/i.test(label)) {
+            const key = `${row.sourceId}:${label}`;
+            const entry = stats.specificationFields[key] ||= {count:0, samples:[]};
+            entry.count++;
+            if (entry.samples.length < 3) entry.samples.push({id:row.sourceOfferId,value:String(field.value || '').slice(0,200)});
+          }
+        }
+      }
+      if (market === 'korea' && !(row.powerHp > 0)) {
+        inc(stats.missingPowerVariants, [row.make,row.model,row.trim,row.year,row.engineCc,row.fuel].join('|'));
+      }
       const safe = safePublicPricing(row);
       if (safe !== row) {
         stats.safety.changed++;
@@ -89,7 +105,7 @@ for (const market of ['korea', 'china', 'uae', 'europe', 'georgia', 'japan']) {
   }
   stats.uniqueIds=seen.size;stats.uniqueSourceIds=sourceIds.size;
   stats.requiredSourceCounts=Object.fromEntries((REQUIRED_CATALOG_SOURCES[market]||[]).map(x=>[x.sourceId,stats.sources[x.sourceId]||0]));
-  console.log('MARKET_AUDIT '+JSON.stringify({market,...stats}));
+  console.log('MARKET_AUDIT '+JSON.stringify({market,...stats,missingPowerVariants:Object.entries(stats.missingPowerVariants).sort((a,b)=>b[1]-a[1]).slice(0,30)}));
   await fs.writeFile(`${out}/summary.json`,JSON.stringify(report,null,2));
 }
 // Sampling is diagnostic; an inaccessible source is never classified as sold.

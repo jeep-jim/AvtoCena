@@ -49,3 +49,11 @@ test('a smaller conversion replaces obsolete shards and keeps the latest observa
   assert.equal(result.count,1);assert.equal(result.offers[0].revision,2);
  } finally {await fs.rm(dir,{recursive:true,force:true});}
 });
+
+test('completed and looping traversals restart from the first page',()=>{
+ for(const stopReason of ['source_finished','source_cycle_finished','cursor_loop','repeated_page']) {
+ const state={source:{market:'korea'},sourceId:'encar_direct',cursor:null,initialCursor:null};
+ restoreIntakeCursor(state,{version:1,market:'korea',updatedAt:new Date().toISOString(),sources:[{sourceId:'encar_direct',cursor:'424',stopReason}]});
+ assert.equal(state.cursor,null);
+ }
+});

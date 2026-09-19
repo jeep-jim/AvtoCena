@@ -214,7 +214,7 @@ test("six-market recovery is calculated, failure-tolerant and collapse-protected
   assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 6);
   assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "2592000000"/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: \$\{\{ inputs\.maximum_per_market \}\}/);
-  assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.10/);
+  assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.90/);
   assert.match(standardMarketPublisher, /catastrophicPublicCollapse/);
   assert.match(standardMarketPublisher, /CATALOG_ALLOW_PUBLIC_COLLAPSE/);
 });
