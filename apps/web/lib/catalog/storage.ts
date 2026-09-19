@@ -1,3 +1,4 @@
+import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import { readCatalogOverview, catalogOverviewMarketComplete } from "./overview";
@@ -374,6 +375,7 @@ async function readManifest(): Promise<CatalogManifest> {
   manifestCache = { expiresAt: now + MANIFEST_CACHE_MS, promise };
   return promise;
 }
+export async function catalogGenerationId() { return (await readManifest()).generationId; }
 async function readIndex<T>(generationId: string, path: string, fallback: T) { return readDataJson<T>(generationPath(generationId, `indexes/${path}`), fallback); }
 async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true) { const storage = getJsonStorage(); try { await storage.writeJson(path, value, ifNoneMatch ? { ifNoneMatch: "*" } : undefined); } catch (e) { if (e instanceof StorageConflictError && ifNoneMatch) return; throw e; } }
 
@@ -1324,6 +1326,8 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const protectedIds = alreadyCanonical ? new Set(storedOffers.map((offer) => String(offer.id || "")).filter(Boolean)) : undefined;
   const canonical = await canonicalizePublicCatalogOffers(storedOffers, exactMarkets, protectedIds);
   const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
+  // Derived calculation inputs only: published vehicle records remain unchanged.
+  await writeJsonAtomic(japanPreviewInputPath(generationId), buildJapanPreviewInputIndex(generationId, offers), false);
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
