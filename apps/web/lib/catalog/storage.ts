@@ -1481,9 +1481,9 @@ export async function getOffer(id: string) {
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
   return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
 }
-export async function searchOffers(params: CatalogSearchParams) {
+export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48) {
   const page = Math.max(1, Number(params.page || 1));
-  const pageSize = Math.min(48, Math.max(1, Number(params.pageSize || 24)));
+  const pageSize = Math.min(Math.max(1, Math.min(384, internalPageLimit)), Math.max(1, Number(params.pageSize || 24)));
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
     const manifest = await readManifest();
     return { generationId: manifest.generationId, total: 0, page, pageSize, items: [], usedIndexShards: [] };

@@ -4,7 +4,6 @@ import "../public-regression-fixes.css";
 import "../public-price-sheet-fix.css";
 import "../catalog-filter-compact.css";
 import Script from "next/script";
-import { CatalogFilterUiEnhancer } from "@/components/catalog/CatalogFilterUiEnhancer";
 import { YandexMetrikaRouteTracker } from "@/components/analytics/YandexMetrikaRouteTracker";
 
 const yandexMetrikaCounter = `
@@ -308,7 +307,6 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         dangerouslySetInnerHTML={{ __html: yandexMetrikaCounter }}
       />
       {children}
-      <CatalogFilterUiEnhancer />
       <YandexMetrikaRouteTracker />
       <style dangerouslySetInnerHTML={{ __html: publicPageFixes }} />
       <script dangerouslySetInnerHTML={{ __html: priceTrendTapGuard }} />

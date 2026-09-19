@@ -47,5 +47,5 @@ export async function GET(request: Request) {
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
   const items = await applyActiveBusinessPricingBatch(result.items);
-  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "no-store, max-age=0" } });
+  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30" } });
 }
