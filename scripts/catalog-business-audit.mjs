@@ -10,7 +10,7 @@ const minimumKnowledgeRecords = Math.max(1, Number(process.env.CATALOG_MIN_KNOWL
 const requiredMarkets = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const requiredAmounts = [
   "securityDepositRub", "topAvtoCommissionRub", "contractInitialPaymentRub",
-  "exportExpensesRub", "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",
+  "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",
   "sbktsRub", "eptsRub", "rfDeliveryRub", "otherFixedExpensesRub", "exchangeRateReservePercent",
 ];
 

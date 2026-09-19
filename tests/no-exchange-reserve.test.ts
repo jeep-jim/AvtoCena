@@ -38,11 +38,11 @@ test('Japanese historical reserve is removed exactly once in detail and compact 
  assert.equal(JSON.stringify(full),before);
 });
 
-test('owner Casper screenshot loses exactly 20028 reserve with the same other inputs',()=>{
+test('owner Casper screenshot drops the retired reserve and 70000 charge, retaining other inputs',()=>{
  const q=calculateAvtocenaFromBusinessConfig({marketId:'korea',sourcePriceRub:1001396,
  customsRub:4924+145400,utilizationFeeRub:5200,marketConfig:{exchangeRateReservePercent:2,
  securityDepositRub:160000,topAvtoCommissionRub:90000,exportExpensesRub:70000,logisticsRub:250000,
  brokerRub:35000,svhRub:35000,laboratoryRub:50000,rfDeliveryRub:120000}});
- assert.equal(q.totalRub,1826948-20028);
- assert.equal(q.paymentPlan.remainingAfterInitialRub,1556920);
+ assert.equal(q.totalRub,1826948-20028-70000);
+ assert.equal(q.paymentPlan.remainingAfterInitialRub,1486920);
 });

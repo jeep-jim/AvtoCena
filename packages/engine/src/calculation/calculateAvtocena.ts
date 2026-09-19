@@ -1,3 +1,4 @@
+import { activeMarketCosts } from "./market-cost-policy";
 import type { BusinessCalculationInput, BusinessCalculationLine, BusinessCalculationResult } from "../types";
 
 export type CalculationItem = {
@@ -32,7 +33,7 @@ function addLine(lines: BusinessCalculationLine[], line: BusinessCalculationLine
 }
 
 export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationInput): BusinessCalculationResult {
-  const config = {...input.marketConfig, exchangeRateReservePercent: 0};
+  const config = {...activeMarketCosts(input.marketConfig), exchangeRateReservePercent: 0};
   const configVersion = config.id || `version_${config.version || 0}`;
   const lines: BusinessCalculationLine[] = [];
   const originalCarPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
@@ -45,7 +46,6 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
     kind: "car", amountType: "manual", source: "vehicle",
   });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
-  addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "broker", title: "Брокер", amountRub: numberOrZero(config.brokerRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "svh", title: "СВХ", amountRub: numberOrZero(config.svhRub), kind: "service", amountType: "fixed", source: "market_config" });

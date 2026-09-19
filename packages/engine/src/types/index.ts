@@ -30,7 +30,6 @@ export type MarketBusinessConfig = {
   securityDepositRub?: number | null;
   contractInitialPaymentRub?: number | null;
   exchangeRateReservePercent?: number | null;
-  exportExpensesRub?: number | null;
   logisticsRub?: number | null;
   brokerRub?: number | null;
   svhRub?: number | null;

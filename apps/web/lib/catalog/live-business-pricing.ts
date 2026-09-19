@@ -49,11 +49,11 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
     // Older compact cards omitted the reserve. Recover its exact saved amount;
     // never infer a historical charge from today's percentage or exchange rate.
     if (Number((offer as any).cardProjectionVersion) >= 3 && offer.id
-      && offer.calculationSnapshot?.serviceCostBasis?.exchangeReserveRub == null) {
+      && (offer.calculationSnapshot?.serviceCostBasis?.exchangeReserveRub == null || offer.calculationSnapshot?.serviceCostBasis?.retiredExportRub == null)) {
       const {getOfferFromCurrentShard} = await import("./storage");
       const full = await getOfferFromCurrentShard(offer.id).catch(() => null);
       const basis = japanServiceCostBasis(full?.calculationSnapshot);
-      if (basis?.exchangeReserveRub != null) return {...offer, calculationSnapshot:{...offer.calculationSnapshot,serviceCostBasis:{...offer.calculationSnapshot?.serviceCostBasis,exchangeReserveRub:basis.exchangeReserveRub}}} as T;
+      if (basis?.exchangeReserveRub != null) return {...offer, calculationSnapshot:{...offer.calculationSnapshot,serviceCostBasis:{...offer.calculationSnapshot?.serviceCostBasis,exchangeReserveRub:basis.exchangeReserveRub,retiredExportRub:basis.retiredExportRub}}} as T;
     }
     return offer;
   }

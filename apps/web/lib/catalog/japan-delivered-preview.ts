@@ -13,7 +13,7 @@ const preview = unstable_cache(async (id: string, _revision: string) => {
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
     ? { totalRub: result.calculation.totalRub, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
-}, ["japan-delivered-preview-v2"], { revalidate: 60 });
+}, ["japan-delivered-preview-v3-no-retired-charge"], { revalidate: 60 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];

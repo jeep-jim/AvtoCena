@@ -201,12 +201,6 @@ export function BusinessSettingsPanel({
                     />
                     <MarketPaymentFields marketId={market.id} key={version.id} depositRub={version.securityDepositRub} commissionRub={version.topAvtoCommissionRub} />
                     <Field
-                      label="Все услуги в стране покупки, включая предоплаченные, ₽"
-                      name="exportExpensesRub"
-                      type="number"
-                      defaultValue={version.exportExpensesRub}
-                    />
-                    <Field
                       label="Логистика ₽"
                       name="logisticsRub"
                       type="number"

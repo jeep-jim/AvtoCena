@@ -1,3 +1,4 @@
+import { activeMarketCosts } from "../../../packages/engine/src/calculation/market-cost-policy";
 export const MARKET_IDS = ["japan", "china", "korea", "uae", "europe", "georgia"] as const;
 export const AMOUNT_TYPES = ["fixed", "percent", "calculated", "manual"] as const;
 export const PAYOUT_TYPES = ["fixed", "percent", "tiered", "custom/manual"] as const;
@@ -52,7 +53,7 @@ export function validateMarketVersion(version: any) {
 
   const errors: string[] = [];
   if (!currency) errors.push("currency_required");
-  for (const field of ["topAvtoCommissionRub","securityDepositRub","contractInitialPaymentRub","exchangeRateReservePercent","exportExpensesRub","logisticsRub","brokerRub","svhRub","laboratoryRub","sbktsRub","eptsRub","rfDeliveryRub","otherFixedExpensesRub"]) {
+  for (const field of ["topAvtoCommissionRub","securityDepositRub","contractInitialPaymentRub","exchangeRateReservePercent","logisticsRub","brokerRub","svhRub","laboratoryRub","sbktsRub","eptsRub","rfDeliveryRub","otherFixedExpensesRub"]) {
     if (version?.[field] != null && version[field] !== "" && nullableNumber(version[field]) === null) errors.push(`${field}_invalid`);
   }
   if (version?.effectiveFrom && !Number.isFinite(Date.parse(version.effectiveFrom))) errors.push("effective_from_invalid");
@@ -70,7 +71,7 @@ export function validateMarketVersion(version: any) {
     ok: errors.length === 0,
     errors,
     value: {
-      ...version,
+      ...activeMarketCosts(version || {}),
       name,
       currency,
       active: Boolean(version?.active),
@@ -78,7 +79,6 @@ export function validateMarketVersion(version: any) {
       securityDepositRub: nullableNumber(version?.securityDepositRub),
       contractInitialPaymentRub: (nullableNumber(version?.securityDepositRub) ?? 0) + (nullableNumber(version?.topAvtoCommissionRub) ?? 0),
       exchangeRateReservePercent: 0,
-      exportExpensesRub: nullableNumber(version?.exportExpensesRub),
       logisticsRub: nullableNumber(version?.logisticsRub),
       brokerRub: nullableNumber(version?.brokerRub),
       svhRub: nullableNumber(version?.svhRub),
