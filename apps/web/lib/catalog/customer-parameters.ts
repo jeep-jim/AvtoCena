@@ -1,3 +1,4 @@
+import { normalizeDeliveryCity } from "./city-delivery";
 import type { VehicleOffer } from "./types";
 export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
   const number = (name: string, min: number, max: number, integer = false) => {
@@ -34,7 +35,7 @@ export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
     if (!["petrol","diesel"].includes(input.n1IceFuel)) throw new Error("Укажите топливо ДВС гибрида");
     commercial.n1IceFuel = input.n1IceFuel;
   }
-  return {...commercial,productionDate: month ? `${year}-${String(month).padStart(2,"0")}${day ? `-${String(day).padStart(2,"0")}` : ""}` : undefined,year,fuel,powerHp:calculationHp,powerKw:explicitKw ?? (powerHp == null ? undefined : powerHp * 0.73549875),powertrainKind,
+  return {...commercial,deliveryCity:normalizeDeliveryCity(input?.deliveryCity),productionDate: month ? `${year}-${String(month).padStart(2,"0")}${day ? `-${String(day).padStart(2,"0")}` : ""}` : undefined,year,fuel,powerHp:calculationHp,powerKw:explicitKw ?? (powerHp == null ? undefined : powerHp * 0.73549875),powertrainKind,
     engineCc:fuel === "electric" ? undefined : number("engineCc",300,10000,true),
     power30MinKw:["electric","hybrid"].includes(fuel) && !(category === "N1" && powertrainKind !== "other_hybrid") ? number("power30MinKw",0.1,2000) : undefined,
     icePowerKw:fuel === "hybrid" && !(category === "N1" && powertrainKind === "series_hybrid") ? number("icePowerKw",0.1,2000) : undefined};

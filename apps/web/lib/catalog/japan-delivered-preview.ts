@@ -31,7 +31,7 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
     ? { totalRub: result.calculation.totalRub, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
-}, ["japan-delivered-preview-v5-compact-inputs"], { revalidate: 900 });
+}, ["japan-delivered-preview-v6-no-city-delivery"], { revalidate: 900 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];

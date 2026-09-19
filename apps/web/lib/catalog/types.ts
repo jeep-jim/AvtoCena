@@ -26,6 +26,7 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  deliveryCity?: string;
   catalogPricingMode?: "seller";
   sellerPriceRub?: number;
   id: string;

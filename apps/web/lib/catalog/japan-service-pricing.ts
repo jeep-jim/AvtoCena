@@ -1,3 +1,4 @@
+import { businessPaymentPlan } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { customerPriceBreakdown } from './customer-price-breakdown';
 import type { VehicleOffer } from './types';
 
@@ -13,7 +14,7 @@ export function japanServiceCostBasis(snapshot: any) {
   const retiredExportRub = sum(["export"]);
   if (!Number.isFinite(exchangeReserveRub) || exchangeReserveRub < 0) return undefined;
   const vehiclePriceRub = customerPriceBreakdown(lines).filter((line:any) => line.id === "car").reduce((sum:number,line:any) => sum + Number(line.amountRub),0);
-  return {laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub,vehiclePriceRub};
+  return {laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub,vehiclePriceRub,rfDeliveryRub:sum(["rf-delivery"])};
 }
 
 /** Update only the owner-authorized service costs. Auction price, historical
@@ -31,18 +32,18 @@ export function applyJapanServiceCosts<T extends Partial<VehicleOffer>>(offer:T,
   const vehiclePriceRub = Number(basis.vehiclePriceRub);
   if (reservePercent > 0 && !(vehiclePriceRub > 0)) return frozen as T;
   const exchangeReserveRub = Math.round((vehiclePriceRub || 0) * reservePercent / 100);
-  const totalRub = exchangeReserveRub + Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub - Number(basis.exchangeReserveRub || 0) - Number(basis.retiredExportRub || 0);
+  const totalRub = exchangeReserveRub + Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub - Number(basis.exchangeReserveRub || 0) - Number(basis.retiredExportRub || 0) - Number(basis.rfDeliveryRub || 0);
   if (!(totalRub > 0)) return frozen as T;
-  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).filter((line:any) => line.id !== "exchange-reserve" && line.id !== "export").map((line:any) =>
+  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).filter((line:any) => line.id !== "exchange-reserve" && line.id !== "export" && line.id !== "rf-delivery").map((line:any) =>
     line.id === 'laboratory' ? {...line,amountRub:laboratoryRub,includedServices:['laboratory','sbkts','epts']} :
     line.id === 'topavto-commission' ? {...line,amountRub:commissionRub} : line) : undefined;
   if (breakdown && exchangeReserveRub > 0) breakdown.push({id:"exchange-reserve",title:"Резерв на изменение курса",amountRub:exchangeReserveRub,kind:"reserve",amountType:"percent",source:"market_config",note:`${reservePercent}% от стоимости авто`});
   return {...frozen,totalRub,
     ...(Number((offer as any).cardProjectionVersion) >= 3 ? {publicVisibleRub:totalRub} : {}),
-    calculationSnapshot:{...snapshot,...(breakdown ? {breakdown} : {}),
-      serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub:0,vehiclePriceRub},serviceBundleVersion:config.serviceBundleVersion,
+    calculationSnapshot:{...snapshot,paymentPlan:businessPaymentPlan("japan",config,totalRub),...(breakdown ? {breakdown} : {}),
+      serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub:0,vehiclePriceRub,rfDeliveryRub:0},serviceBundleVersion:config.serviceBundleVersion,
       businessConfigVersion:config.id,
-      marketConfig:{...snapshot?.marketConfig,exchangeRateReservePercent:reservePercent,laboratoryRub,sbktsRub:0,eptsRub:0,
+      marketConfig:{...snapshot?.marketConfig,rfDeliveryRub:0,exchangeRateReservePercent:reservePercent,laboratoryRub,sbktsRub:0,eptsRub:0,
         topAvtoCommissionRub:commissionRub,securityDepositRub:config.securityDepositRub,
         contractInitialPaymentRub:config.contractInitialPaymentRub,serviceBundleVersion:config.serviceBundleVersion}}} as T;
 }

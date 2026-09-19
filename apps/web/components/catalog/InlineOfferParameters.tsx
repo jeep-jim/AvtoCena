@@ -1,5 +1,7 @@
 "use client";
 
+import { CitySelector } from "../home/CitySelector";
+import { quoteCityDelivery, deliveryDescription } from "../../lib/catalog/city-delivery";
 import { ContractPaymentSummary } from "./ContractPaymentSummary";
 import type { BusinessPaymentPlan } from "../../../../packages/engine/src/types";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
@@ -112,7 +114,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   </details>
  </div>;
 }
-export function InlineOfferParameters({offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({deliveryMarket,offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const [draft,setDraft]=useState(()=>isPickup?{...initial,vehicleCategory:'N1'}:initial),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:{sourcePrice:number;currency:string;effectiveRate:number;rateDate:string};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
@@ -136,6 +138,7 @@ export function InlineOfferParameters({offerId,initial,price,children,priceBadge
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
  },[draft,dirty,offerId,autoCalculate]);
+ const deliveryQuote=quoteCityDelivery(draft.deliveryCity,deliveryMarket);
  const showCalculation=dirty || Boolean(result);
  // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.
  const keepSellerPrice=sourcePriceOnly && !result;
@@ -157,14 +160,19 @@ export function InlineOfferParameters({offerId,initial,price,children,priceBadge
    {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">{dirty?"Ориентир под ключ. Данные и стоимость требуют подтверждения.":"Рассчитано автоматически по данным объявления. Данные и стоимость требуют подтверждения."}</p>:null}
    {result?.currencyRate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Цена продавца: {result.currencyRate.sourcePrice.toLocaleString("ru-RU")} {result.currencyRate.currency}. Курс расчёта: {result.currencyRate.effectiveRate.toLocaleString("ru-RU", {maximumFractionDigits:8})} ₽ на {result.currencyRate.rateDate}.</p> : null}
    {result?.customs?.productionReferenceDate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Дата выпуска в расчёте: {result.customs.productionReferenceDate}{result.customs.productionReferenceBasis !== "exact_date" ? " · условная дата, уточните по документам" : ""}. Тариф: {result.customs.vehicleCategory === "N1" ? `N1 · ТН ВЭД ${result.customs.tariffCode || "8704"}` : result.customs.ageBand === "up_to_3_years" ? "до 3 лет" : result.customs.ageBand === "from_3_to_5_years" ? "3–5 лет" : "старше 5 лет"}.</p> : null}
-   {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
+   {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft({...initial,deliveryCity:draft.deliveryCity||""});setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
   </div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <div className="mt-2 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>
    <p role="status">{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p>
-   {keepSellerPrice && dirty ? <button type="button" className="mt-1 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft(initial);setResult(null);setPending(false);}}>Вернуть исходные данные</button> : null}
+   {keepSellerPrice && dirty ? <button type="button" className="mt-1 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft({...initial,deliveryCity:draft.deliveryCity||""});setResult(null);setPending(false);}}>Вернуть исходные данные</button> : null}
   </div> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}>{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
+  <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
+   <p className="text-sm font-bold">Доставка до вашего города</p>
+   <CitySelector value={draft.deliveryCity||""} onChange={city=>change("deliveryCity",city)} />
+   <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
+  </div>
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>

@@ -14,7 +14,9 @@ test('China CRM logistics override changes only logistics and total in the same 
   assert.equal(catalog.logisticsRub, 150_000);
   const calculate = (marketConfig: any) => calculateAvtocenaFromBusinessConfig({ marketId: 'china', marketConfig, sourcePriceRub: 1_500_000, customsRub: 800_000, utilizationFeeRub: 100_000 });
   const baseline = calculate({ ...catalog, logisticsRub: 250_000 });
-  for (const current of [calculate(crm), calculate(catalog)]) {
+  assert.equal(crm.rfDeliveryRub,120_000);
+  assert.equal(catalog.rfDeliveryRub,0);
+  for (const current of [calculate({...crm,rfDeliveryRub:0}), calculate(catalog)]) {
     assert.equal(current.totalRub - baseline.totalRub, -100_000);
     assert.deepEqual(current.breakdown.filter(row => row.id !== 'logistics'), baseline.breakdown.filter(row => row.id !== 'logistics'));
   }
