@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {kcarRegistryEvidence} from '../apps/web/lib/catalog/kcar-registry-evidence';
 import {catalogPowerSanity} from '../apps/web/lib/catalog/power-sanity';
-import {confirmedProductionValue} from '../apps/web/lib/catalog/production-month';
+import {automaticProductionYear,confirmedProductionValue} from '../apps/web/lib/catalog/production-month';
 const vin='KNA12345678901234';
 const rvo={vin,hrspow:204,fuelType:'001',fuelTypecdNm:'가솔린',mfgDt:'202010',regModelyr:'2021'};
 const registry={basInfo:{vin,motoHghstOutpVal:'204'},productInfo:{prdcnDd:'20200922'}};
@@ -33,4 +33,12 @@ test('K Car stops on denied detail without repeating the denial or requesting th
  globalThis.fetch=async()=>{calls++;return calls===1?new Response(JSON.stringify({success:true,data:{rows:[{carCd:'EC1'}],totalCnt:1}}),{status:200}):new Response('denied',{status:403});};
  try {await assert.rejects(kcarKoreaExactSource.fetchPage(null),/kcar_source_blocked_http_403/);assert.equal(calls,2);}
  finally {globalThis.fetch=original;}
+});
+
+
+test('K Car registration/model year cannot stand in for unknown production age',()=>{
+ const offer={sourceId:'kcar_korea_open',year:2021,productionDate:'202101',operational:{semanticEvidence:{year:{status:'exact',source:'kcar_exact_detail_rvo_calendar_year',value:2021}}}};
+ assert.equal(automaticProductionYear(offer),undefined);
+ assert.equal(automaticProductionYear({...offer,year:2020,operational:{semanticEvidence:{productionDate:{status:'exact',source:'kcar_registry_production_date',value:'2020-09-22'}}}}),2020);
+ assert.equal(automaticProductionYear({sourceId:'other',year:2020}),2020);
 });

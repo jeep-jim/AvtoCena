@@ -21,3 +21,9 @@ export function confirmedProductionDay(offer: Parameters<typeof confirmedProduct
   const match = confirmedProductionValue(offer).match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
   return match ? String(Number(match[3])) : "";
 }
+
+/** K Car's model year and registration month do not prove production age. */
+export function automaticProductionYear(offer:any): number | undefined {
+ if (offer?.sourceId === "kcar_korea_open" && !confirmedProductionValue(offer)) return undefined;
+ return offer?.year;
+}
