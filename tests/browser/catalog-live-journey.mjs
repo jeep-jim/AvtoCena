@@ -14,6 +14,7 @@ try{for(const width of [390,1440]){
   await page.goto(`${origin}/cars?market=japan`,{waitUntil:'domcontentloaded',timeout:90000});
   await page.locator('[data-catalog-batch="1"] article').last().waitFor({timeout:60000});
   const initialMs=Date.now()-start;
+  await page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Открыть фильтры"]');return b&&!b.disabled;});
   const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});
   if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
   if(width<1024){
@@ -31,8 +32,12 @@ try{for(const width of [390,1440]){
   const after=await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
   assert.deepEqual(after.slice(0,24),before);assert.equal(new Set(after).size,48);
   const target=cards.nth(28);await target.scrollIntoViewIfNeeded();
-  const scrollY=await page.evaluate(()=>window.scrollY);
-  await target.click();await page.waitForURL(/\/cars\/offer\//,{timeout:60000});
+  // Playwright may scroll again to click (e.g. around a sticky header).
+  // Compare with the actual departure position saved by the application.
+  await target.evaluate(el=>el.addEventListener('click',()=>{window.__testCatalogDepartureY=window.scrollY;},{capture:true,once:true}));
+  await target.click();
+  const scrollY=await page.evaluate(()=>window.__testCatalogDepartureY);assert.ok(Number.isFinite(scrollY));
+  await page.waitForURL(/\/cars\/offer\//,{timeout:60000});
   await page.locator('main.ac-offer-page h1').waitFor({timeout:60000});
   const backStart=Date.now();await page.goBack({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-batch] article').length===48,null,{timeout:30000});
