@@ -31,7 +31,7 @@ try {for(const width of [390,1440]) {
   rows.push({city,amount,totalRub:body.totalRub});
  }
  await page.getByRole('button',{name:'Оставить заявку',exact:true}).click();
- const cityInput=page.getByPlaceholder('Например, Новокузнецк');await cityInput.waitFor({state:'visible'});assert.equal(await cityInput.inputValue(),'Москва');
+ const cityInput=page.getByPlaceholder('Например, Москва');await cityInput.waitFor({state:'visible'}).catch(async error=>{await page.screenshot({path:`${output}/${width}-lead-failure.png`,fullPage:true});console.log((await page.locator('body').innerText()).slice(-5000));throw error;});assert.equal(await cityInput.inputValue(),'Москва');
  await page.getByRole('dialog').getByRole('button',{name:'Закрыть',exact:true}).click();
  await panel.getByRole('button',{name:/Выбрать город/}).click();
  const clear=calculation('');await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Не выбирать город'}).click();
