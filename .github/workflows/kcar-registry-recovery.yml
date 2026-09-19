@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [fix/kcar-registry-recovery-20260919, main]
-    paths: [.github/workflows/kcar-registry-recovery.yml, data/catalog/triggers/kcar-registry-recovery.json]
+    paths: [.github/workflows/kcar-registry-recovery.yml, data/catalog/triggers/kcar-registry-recovery.json, .github/market-runs/kcar-registry-recovery.json]
 permissions:
   contents: read
 concurrency:
