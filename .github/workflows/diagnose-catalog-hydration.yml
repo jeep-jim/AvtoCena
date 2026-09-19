@@ -1,0 +1,19 @@
+name: Diagnose published catalog hydration
+on:
+  push:
+    branches: [fix/catalog-hydration-final]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/catalog-probe --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: |
+          cp tests/browser/catalog-hydration-probe.mjs /tmp/catalog-probe/probe.mjs
+          CHROME_BIN=$(command -v google-chrome) node /tmp/catalog-probe/probe.mjs
