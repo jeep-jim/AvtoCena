@@ -5,6 +5,7 @@ import {gzipSync,gunzipSync} from 'node:zlib';
 import sharp from 'sharp';
 import {parseProAuctionsDetailEvidence,proAuctionsText} from '../apps/web/lib/catalog/proauctions-detail-evidence.ts';
 import {proAuctionsIdentity,matchingProAuctionsSale,proAuctionsOffer,proAuctionsSaleWitness} from '../apps/web/lib/catalog/proauctions-import.ts';
+import {saveProAuctionsState} from './lib/proauctions-durable-state.mjs';
 import {proAuctionsCollectionStopReason} from './lib/proauctions-collection-stop.mjs';
 
 const root=process.env.PROAUCTIONS_OUTPUT || 'proauctions-collection';
@@ -13,7 +14,7 @@ const maxDetails=Number(process.env.PROAUCTIONS_MAX_DETAILS || 0);
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
 for(const folder of ['raw','offers','html','witness'])await fs.mkdir(path.join(root,folder),{recursive:true});
-let state={page:1,pending:[],done:[],pages:0,details:0,prepared:0,errors:[],stopReason:'',complete:false};
+let state={startedAt:new Date().toISOString(),page:1,pending:[],done:[],pages:0,details:0,prepared:0,errors:[],stopReason:'',complete:false};
 try{state=JSON.parse(await fs.readFile(path.join(root,'checkpoint.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 const done=new Set(state.done), lastRequest=new Map();
 let witnessBlocked=false;
@@ -40,9 +41,9 @@ const byKey=new Map();for(const w of witnesses){const k=key(w);byKey.set(k,[...(
 if(!state.details && !state.pending.length){
   const seeds=await readParts('saved-proauctions');
   seeds.sort((a,b)=>Number(byKey.has(key(b)))-Number(byKey.has(key(a))));
-  state.pending=[...new Set(['https://demo.pro-auctions.ru/statistika/daihatsu/hijet-cargo/30198001.html',...seeds.map(r=>r.sourceUrl)])];
+  state.pending=[...new Set(seeds.map(r=>r.sourceUrl))];
 }
-async function checkpoint(){state.done=[...done];state.checkedAt=new Date().toISOString();await fs.writeFile(path.join(root,'checkpoint.tmp'),JSON.stringify(state));await fs.rename(path.join(root,'checkpoint.tmp'),path.join(root,'checkpoint.json'));await fs.writeFile(path.join(root,'summary.json'),JSON.stringify({...state,done:done.size,pending:state.pending.length},null,2));console.log(JSON.stringify({pages:state.pages,details:state.details,prepared:state.prepared,pending:state.pending.length,stopReason:state.stopReason}));}
+async function checkpoint(force=false){state.startedAt ||= new Date().toISOString();state.done=[...done];state.checkedAt=new Date().toISOString();await fs.writeFile(path.join(root,'checkpoint.tmp'),JSON.stringify(state));await fs.rename(path.join(root,'checkpoint.tmp'),path.join(root,'checkpoint.json'));await fs.writeFile(path.join(root,'summary.json'),JSON.stringify({...state,done:done.size,pending:state.pending.length},null,2));console.log(JSON.stringify({pages:state.pages,details:state.details,prepared:state.prepared,pending:state.pending.length,stopReason:state.stopReason}));await saveProAuctionsState(root,state,force);}
 async function detail(url,cached=false){
   const id=url.match(/\/(\d+)\.html$/)?.[1];if(!id || !url.startsWith('https://demo.pro-auctions.ru/statistika/'))throw Error('unexpected_detail_url');
   const buffer=cached?gunzipSync(await fs.readFile(path.join(root,'html',`${id}.html.gz`))):await get(url),body=buffer.toString('utf8');
@@ -114,5 +115,7 @@ if(!state.complete){
   }catch(error){
     state.errors.push({url:`https://demo.pro-auctions.ru/statistika/?page=${state.page}`,error:String(error)});
     state.stopReason=proAuctionsCollectionStopReason(error);
-  }finally{await checkpoint();}
+  }finally{await checkpoint(true);}
 }
+
+if(["source_access_refused","transport_error_checkpointed","repeated_listing_page"].includes(state.stopReason))process.exitCode=1;

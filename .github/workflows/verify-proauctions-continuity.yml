@@ -1,0 +1,29 @@
+name: Verify resumable Japan collection
+on:
+  push:
+    branches: [fix/catalog-operations-20260919]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: node --import tsx --test tests/catalog-operation-continuity.test.ts tests/catalog-single-active-pipeline.test.ts tests/proauctions-import.test.ts tests/proauctions-detail-evidence.test.ts
+      - name: Fresh listing smoke without production writes
+        env:
+          JSON_STORAGE_DRIVER: local
+          PROAUCTIONS_DURABLE: '0'
+          PROAUCTIONS_SECONDS: '90'
+          PROAUCTIONS_MAX_DETAILS: '3'
+        run: node --import tsx scripts/collect-proauctions.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-continuity-smoke
+          path: proauctions-collection/
+          retention-days: 14

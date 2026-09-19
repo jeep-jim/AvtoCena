@@ -41,7 +41,7 @@ test("only the owner-approved seller inventory workflows are scheduled under one
   assert.equal(writesCatalogMarkets(cleanup), false);
 });
 
-test("owner-approved recurring schedule stays five-market only and keeps Japan manual", () => {
+test("five-market schedule stays separate from owner-approved resumable Japan refresh", () => {
   const rebuild = text("catalog-five-market-full-rebuild.yml");
   const cleanup = text("catalog-storage-cleanup.yml");
   const japan = text("proauctions-collect-publish.yml");
@@ -51,8 +51,9 @@ test("owner-approved recurring schedule stays five-market only and keeps Japan m
   assert.equal((rebuild.match(/^\s{4}- cron:/gm) || []).length, 1);
   assert.match(rebuild, /const allowed = \['china','korea','uae','georgia','europe'\]/);
   assert.doesNotMatch(rebuild, /const allowed = \[[^\n]*japan/);
-  assert.doesNotMatch(japan, /^\s{2}schedule\s*:/m);
-  assert.doesNotMatch(japan, /^\s{4}-\s*cron\s*:/m);
+  assert.match(japan, /proauctions-restore-state\.mjs/);
+  assert.match(japan, /^\s{4}- cron: "0 3 \* \* \*"$/m);
+  assert.doesNotMatch(japan, /run-id: 351/);
 
   // Finite seller inventories must always start from the newest page during
   // their weekly refresh; Japan remains outside this workflow entirely.
