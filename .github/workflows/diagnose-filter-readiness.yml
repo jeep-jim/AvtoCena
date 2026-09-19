@@ -1,0 +1,19 @@
+name: Diagnose mobile filter readiness
+on:
+  push:
+    branches: [fix/catalog-filter-readiness]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/filter-probe --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: |
+          cp tests/browser/filter-readiness-probe.mjs /tmp/filter-probe/probe.mjs
+          CHROME_BIN=$(command -v google-chrome) node /tmp/filter-probe/probe.mjs
