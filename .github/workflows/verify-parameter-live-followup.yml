@@ -1,0 +1,29 @@
+name: Verify published parameter viewport scrolling
+on:
+  push:
+    branches: [test/parameter-viewport-verification]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/parameter-live" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check published parameter dropdowns
+        env:
+          LIVE_ORIGIN: https://avtocena.com
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/parameter-live/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-parameter-viewport
+          path: artifacts/attached-parameters-live
+          retention-days: 7
