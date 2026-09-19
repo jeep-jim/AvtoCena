@@ -123,6 +123,9 @@ function minimumImagesForOffer(offer, source) {
   return minimumImages;
 }
 function pageTimeoutForSource(source) {
+  // K Car resolves 20 exact details and secondary technical tables per page.
+  // A paced page is intentionally longer than a single HTTP request.
+  if (source?.sourceId === "kcar_korea_open") return Math.max(requestTimeoutMs, Number(process.env.CATALOG_KCAR_PAGE_TIMEOUT_MS || 180_000));
   return source?.sourceId === "jpauc_japan_past_open" ? jpaucPageTimeoutMs : requestTimeoutMs;
 }
 function imageId(url) { return crypto.createHash("sha256").update(url).digest("hex").slice(0, 24); }
