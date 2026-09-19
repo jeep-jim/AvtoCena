@@ -1,3 +1,5 @@
+// Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
+process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
 const sellerInventory = process.env.CATALOG_SELLER_INVENTORY === "1";
 const { prepareSellerInventory } = await import("../apps/web/lib/catalog/prepare-seller-inventory.ts");

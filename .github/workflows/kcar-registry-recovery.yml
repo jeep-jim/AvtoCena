@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
+      CATALOG_READ_CONCURRENCY: '4'
       NODE_OPTIONS: --max-old-space-size=6144
       JSON_STORAGE_DRIVER: object
       CATALOG_SOURCE_INVENTORY_MODE: '1'
