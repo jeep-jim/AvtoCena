@@ -16,7 +16,7 @@ async function readInputs() {
 }
 const preview = unstable_cache(async (id: string, _revision: string, generationId: string, updatedAt: string, sourcePrice: number | null, sourceCurrency: string | null) => {
   const index = await readInputs().catch(()=>null);
-  const entry = index?.version===1 && index.generationId===generationId ? index.entries[id] : undefined;
+  const entry = index?.version===1 && index.generationId===generationId ? index.entries?.[id] : undefined;
   if(entry && matchesJapanPreviewInput(entry,{updatedAt,sourcePrice,sourceCurrency})) {
     if(!entry.parameters)return null;
     const result = await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);

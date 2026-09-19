@@ -1327,7 +1327,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
   const canonical = await canonicalizePublicCatalogOffers(storedOffers, exactMarkets, protectedIds);
   const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   // Derived calculation inputs only: published vehicle records remain unchanged.
-  await writeJsonAtomic(japanPreviewInputPath(generationId), buildJapanPreviewInputIndex(generationId, offers), false);
+  await writeJsonAtomic(japanPreviewInputPath(generationId), buildJapanPreviewInputIndex(generationId, offers.filter(offer=>offer.market === "japan").map(compactPublicStorageOffer)), false);
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
