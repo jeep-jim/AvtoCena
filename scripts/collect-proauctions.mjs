@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import {parseProAuctionsDetailEvidence,proAuctionsText} from '../apps/web/lib/catalog/proauctions-detail-evidence.ts';
 import {proAuctionsIdentity,matchingProAuctionsSale,proAuctionsOffer,proAuctionsSaleWitness} from '../apps/web/lib/catalog/proauctions-import.ts';
 import {saveProAuctionsState} from './lib/proauctions-durable-state.mjs';
-import {proAuctionsCollectionStopReason} from './lib/proauctions-collection-stop.mjs';
+import {proAuctionsCollectionStopReason,proAuctionsRetryableDependencyError} from './lib/proauctions-collection-stop.mjs';
 
 const root=process.env.PROAUCTIONS_OUTPUT || 'proauctions-collection';
 const deadline=Date.now()+Number(process.env.PROAUCTIONS_SECONDS || 4500)*1000;
@@ -50,16 +50,18 @@ async function detail(url,cached=false){
   const id=url.match(/\/(\d+)\.html$/)?.[1];if(!id || !url.startsWith('https://demo.pro-auctions.ru/statistika/'))throw Error('unexpected_detail_url');
   const buffer=cached?gunzipSync(await fs.readFile(path.join(root,'html',`${id}.html.gz`))):await get(url),body=buffer.toString('utf8');
   await fs.writeFile(path.join(root,'html',`${id}.html.gz`),gzipSync(buffer));
+  let dependencyFailure=null;
   let record={sourceUrl:url,sourceId:id,evidenceSha256:sha(buffer),fetchedAt:new Date().toISOString()};
   try{
     const e=parseProAuctionsDetailEvidence(body,url),identity=proAuctionsIdentity(body,e);
     record={...record,evidence:e,identity};
     const matches=(byKey.get(key(e.identity))||[]).filter(w=>matchingProAuctionsSale(e,identity,w));
     let witness=matches.length===1?matches[0]:null;
+    if(!e.price.saleConfirmed && !witness && witnessBlocked) dependencyFailure=Object.assign(Error('witness_host_already_refused'),{access:true});
     if(!e.price.saleConfirmed && !witness && !witnessBlocked){
       try{const bytes=cached?gunzipSync(await fs.readFile(path.join(root,'witness',`${id}.html.gz`))):await get(`https://jptrade.ru/stat/${id}`);await fs.writeFile(path.join(root,'witness',`${id}.html.gz`),gzipSync(bytes));
         const w=proAuctionsSaleWitness(bytes.toString('utf8'),id);if(matchingProAuctionsSale(e,identity,w))witness=w;
-      }catch(error){record.witnessError=String(error);if(error.access)witnessBlocked=true;}
+      }catch(error){record.witnessError=String(error);if(proAuctionsRetryableDependencyError(error))dependencyFailure=error;if(error.access)witnessBlocked=true;}
     }
     record.saleWitness=witness;
     const date=Date.parse(e.identity.auctionDate);
@@ -70,7 +72,7 @@ async function detail(url,cached=false){
       for(const imageUrl of [...e.imageUrls.slice(0,30),...e.auctionSheetUrls]){
         try{const bytes=await get(imageUrl,12000000);const decoded=await sharp(bytes,{limitInputPixels:40000000}).rotate().raw().toBuffer({resolveWithObject:true});
           photos.push({url:imageUrl,decodedSha256:sha(decoded.data),width:decoded.info.width,height:decoded.info.height,size:bytes.length,mimeType:'image/webp'});
-        }catch(error){record.imageErrors=[...(record.imageErrors||[]),{url:imageUrl,error:String(error)}];if(error.access)break;}
+        }catch(error){record.imageErrors=[...(record.imageErrors||[]),{url:imageUrl,error:String(error)}];if(proAuctionsRetryableDependencyError(error))dependencyFailure=error;if(error.access)break;}
       }
       record.photos=photos;
       const offer=proAuctionsOffer(e,identity,witness,photos,record.evidenceSha256);
@@ -78,7 +80,12 @@ async function detail(url,cached=false){
       else record.reason='identity_image_or_retention_gate';
     }
   }catch(error){record.reason=String(error);}
-  await fs.writeFile(path.join(root,'raw',`${id}.json`),JSON.stringify(record));if(!done.has(url))state.details++;done.add(url);
+  // A dependency outage is not a terminal rejection of the lot. Keep its URL
+  // pending so the durable continuation retries it after the source recovers.
+  if(dependencyFailure && record.reason!=='prepared')record.retryPending=true;
+  await fs.writeFile(path.join(root,'raw',`${id}.json`),JSON.stringify(record));
+  if(record.retryPending)throw dependencyFailure;
+  if(!done.has(url))state.details++;done.add(url);
 }
 // Reinterpret saved witness dates from the first smoke without recollecting HTML.
 if(state.contractVersion!==2){
@@ -88,6 +95,21 @@ if(state.contractVersion!==2){
     try{await fs.access(path.join(root,'witness',`${record.sourceId}.html.gz`));await detail(record.sourceUrl,true);}catch(error){state.errors.push({url:record.sourceUrl,error:String(error)});}
   }
   state.contractVersion=2;await checkpoint();
+}
+// Recover lots terminally marked by older collectors during dependency outages.
+if(state.dependencyRetryVersion!==1){
+  for(const f of await fs.readdir(path.join(root,'raw'))){
+    const record=JSON.parse(await fs.readFile(path.join(root,'raw',f),'utf8'));
+    if(record.reason==='prepared' || !done.has(record.sourceUrl))continue;
+    const date=Date.parse(record.evidence?.identity?.auctionDate || '');
+    if(!Number.isFinite(date) || date>Date.now() || Date.now()-date>30*86400000)continue;
+    const errors=[record.witnessError,...(record.imageErrors || []).map(item=>item.error)];
+    if(!errors.some(error=>proAuctionsRetryableDependencyError(error) || /access_(401|403|429)|source_host_already_refused/.test(String(error))))continue;
+    done.delete(record.sourceUrl);state.details=Math.max(0,state.details-1);
+    if(!state.pending.includes(record.sourceUrl))state.pending.push(record.sourceUrl);
+    state.complete=false;
+  }
+  state.dependencyRetryVersion=1;await checkpoint();
 }
 if(!state.complete){
   state.stopReason='';
