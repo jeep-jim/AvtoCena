@@ -2,7 +2,7 @@ import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
 import { expandCustomsBreakdown } from "./customs-breakdown";
-import { confirmedProductionValue } from "./production-month";
+import { automaticProductionYear, confirmedProductionValue } from "./production-month";
 import { synchronizeCombustionPower } from "./combustion-power-consistency";
 import { getEffectiveMarketVersion } from "../effective-market-settings";
 import { japanAuctionSoldPriceVerified } from "./public-priority";
@@ -308,7 +308,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: userParameters ? offer.productionDate : confirmedProductionValue(offer) || undefined,
-    year: offer.year,
+    year: userParameters ? offer.year : automaticProductionYear(offer),
     fuel: offer.fuel,
     vehicleCategory: offer.vehicleCategory,
     tnVedCode: offer.tnVedCode,
