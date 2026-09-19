@@ -19,7 +19,7 @@ jobs:
           node --input-type=module <<'JS'
           let ready=false;
           for(let i=0;i<40;i++){
-            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha==='c3675b4563a47983f4750139a92893220ba4bd2d'){ready=true;break;}}catch{}
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha==='d163df53508c0309ee5ba1c91ed2d1fc3ef00639'){ready=true;break;}}catch{}
             await new Promise(r=>setTimeout(r,10000));
           }
           if(!ready)throw Error('Delivery release not confirmed');
