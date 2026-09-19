@@ -33,7 +33,7 @@
 }
 .tile:nth-child(even) > .editor > .panel { left: auto; right: 0; border-radius: 1rem 0 1rem 1rem; }
 .tile[data-full-width] > .editor > .panel { left: 0; right: 0; width: 100%; border-radius: 0 0 1rem 1rem; }
-.body { box-sizing: border-box; min-width: 0; max-height: min(360px, 60dvh); overflow-y: auto; overflow-x: hidden; padding: 12px; overscroll-behavior: contain; overflow-wrap: anywhere; -webkit-overflow-scrolling: touch; }
+.body { box-sizing: border-box; min-width: 0; max-height: min(360px, 60dvh, var(--parameter-available-height, 360px)); overflow-y: auto; overflow-x: hidden; padding: 12px; overscroll-behavior: contain; overflow-wrap: anywhere; -webkit-overflow-scrolling: touch; }
 .body > * { min-width: 0; }
 .body > * + * { margin-top: 10px; }
 .dateFields { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr) minmax(0,.85fr); gap: 10px 8px; align-items: end; }
@@ -52,7 +52,7 @@
 .twoColumns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; align-items: start; }
 .twoColumns > :only-child { grid-column: 1 / -1; }
 .twoColumns :global(.ac-parameter-input) input { padding-left: 8px; padding-right: 4px; }
-.presets { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; margin-top: 8px; max-height: 160px; overflow-y: auto; }
+.presets { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; margin-top: 8px; max-height: 160px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .twoColumns .presets { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .note, .help { font-size: 12px; line-height: 1.45; color: var(--ac-muted); }
 .note { margin-bottom: 0; }

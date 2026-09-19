@@ -54,6 +54,39 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
   document.addEventListener("click",close);document.addEventListener("keydown",escape);
   return ()=>{document.removeEventListener("click",close);document.removeEventListener("keydown",escape);};
  },[]);
+ useEffect(()=>{
+  const editor=ref.current;
+  if(!editor)return;
+  let unlock:(()=>void)|undefined;
+  const position=()=>{
+   const body=editor.querySelector<HTMLElement>(".ac-attached-editor-body");
+   if(!body)return;
+   const viewport=window.visualViewport;
+   const bottom=(viewport?.height ?? window.innerHeight)+(viewport?.offsetTop ?? 0);
+   body.style.setProperty("--parameter-available-height",`${Math.max(100,bottom-body.getBoundingClientRect().top-12)}px`);
+  };
+  const toggle=()=>{
+   unlock?.();unlock=undefined;
+   if(!editor.open)return;
+   if(window.matchMedia("(max-width: 767px)").matches){
+    // Bring the attached menu into view before locking the page behind it.
+    const panel=editor.querySelector<HTMLElement>("[data-parameter-panel]");
+    if(panel && panel.getBoundingClientRect().top>window.innerHeight-180)window.scrollBy(0,panel.getBoundingClientRect().top-window.innerHeight+180);
+    const root=document.documentElement,body=document.body;
+    const rootOverflow=root.style.overflow,bodyOverflow=body.style.overflow;
+    root.style.overflow="hidden";body.style.overflow="hidden";
+    const touch=(event:TouchEvent)=>{if(!(event.target instanceof Node) || !editor.contains(event.target))event.preventDefault();};
+    document.addEventListener("touchmove",touch,{passive:false});
+    unlock=()=>{root.style.overflow=rootOverflow;body.style.overflow=bodyOverflow;document.removeEventListener("touchmove",touch);};
+   }
+   position();
+  };
+  editor.addEventListener("toggle",toggle);
+  window.visualViewport?.addEventListener("resize",position);
+  window.addEventListener("resize",position);
+  return ()=>{unlock?.();editor.removeEventListener("toggle",toggle);window.visualViewport?.removeEventListener("resize",position);window.removeEventListener("resize",position);};
+ },[]);
+ const finish=()=>{if(ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus({preventScroll:true});}};
  return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`} data-full-width={wide || undefined}>
   <details ref={ref} data-parameter-editor className={`${editorStyles.editor} ac-attached-editor group rounded-2xl bg-[var(--ac-surface-2)]`}>
    <summary id={`${id}-trigger`} aria-controls={`${id}-panel`} aria-label={`${label}: ${value}`} onClick={event=>{
@@ -70,7 +103,11 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
     <span className="shrink-0 text-[var(--ac-muted)]">{icon}</span><span className="min-w-0 flex-1 break-words text-xs font-bold">{valueNode ?? value}</span><ChevronDown aria-hidden size={16} className="ml-2 shrink-0 text-[var(--ac-muted)] transition-transform group-open:rotate-180"/>
    </summary>
    <div id={`${id}-panel`} data-parameter-panel role="region" aria-labelledby={`${id}-trigger`} className={editorStyles.panel}>
-    <div className={`${editorStyles.body} ac-attached-editor-body`}>{children}</div>
+    <div className={`${editorStyles.body} ac-attached-editor-body`}
+     onClick={event=>{if((event.target as Element).closest("button[aria-pressed]"))finish();}}
+     onChange={event=>{if(event.target instanceof HTMLSelectElement)finish();}}
+     onKeyDown={event=>{if(event.key==="Enter" && event.target instanceof HTMLInputElement){event.preventDefault();event.target.blur();finish();}}}
+    >{children}</div>
    </div>
   </details>
  </div>;
@@ -81,7 +118,7 @@ export function InlineOfferParameters({offerId,initial,price,children,priceBadge
  const revision=useRef(0);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...initial,...draft}).some(key=>(draft[key]??"")!==(initial[key]??""));
- function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="powerHp"?{powerKw:""}:{}),...(key==="powerKw" && Number(value)>0?{powerHp:String(Math.round(Number(value)/0.73549875))}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:"",powerKw:""}:{})}));}
+ function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,[key]:value,...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="powerHp"?{powerKw:Number(value)>0?String(Number((Number(value)*0.73549875).toFixed(8))):""}:{}),...(key==="powerKw"?{powerHp:Number(value)>0?String(Math.round(Number(value)/0.73549875)):""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",power30MinKw:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
@@ -156,7 +193,7 @@ export function InlineOfferParameters({offerId,initial,price,children,priceBadge
      {!["electric","hybrid"].includes(draft.fuel) ? field("powerKw","Мощность, кВт (если известна)",[],0.1,2000,undefined,"Мощность, кВт") : null}
     </div>
     {powerInfo?.borderline ? <details className={editorStyles.help}><summary>Почему повышенный утильсбор?</summary><RecyclingPowerExplanation info={powerInfo} /></details> : null}
-    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. Изменение л.с. очищает прежние кВт. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
+    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. Л.с. и кВт пересчитываются в обе стороны; пересчитанные значения не заменяют данные документов. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
    </Tile>
    {showCommercial ? <Tile wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>

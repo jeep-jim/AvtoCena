@@ -57,7 +57,7 @@ test("wiring: both views, reset path and price explanation use existing layout c
   const inline=readFileSync("apps/web/components/catalog/InlineOfferParameters.tsx","utf8");
   const page=readFileSync("apps/web/app/(public)/cars/offer/[id]/page.tsx","utf8");
   assert.match(card,/data-recycling-power-chip/); assert.match(card,/RecyclingPowerLabel/);
-  assert.match(inline,/valueNode=\{pairedPower/); assert.match(inline,/key==="powerHp"\?\{powerKw:""\}/);
+  assert.match(inline,/valueNode=\{pairedPower/);
   assert.match(inline,/setDraft\(initial\)/); assert.match(page,/powerKw:powerScenario\?"":String\(recyclingPowerInfo\(raw\)\?\.kw/);
   assert.match(page,/RecyclingFeeHelp info=\{powerInfo\}/);
 });

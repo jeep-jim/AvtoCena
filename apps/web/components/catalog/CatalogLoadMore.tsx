@@ -58,6 +58,13 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const count = batches.reduce((sum, batch) => sum + batch.count, 0);
   const page = batches[batches.length - 1].page;
   fallbackQuery.set("page", String(page + 1));
+  const pageCount = Math.ceil(total / 24);
+  const numberedPages = [...new Set([1, page - 1, page, page + 1, pageCount])].filter(n => n >= 1 && n <= pageCount).sort((a,b)=>a-b);
+  function pageHref(target: number) {
+    const params = new URLSearchParams(fallbackQuery);
+    params.set("page", String(target));
+    return `/cars?${params}`;
+  }
   const more = page * 24 < total && batches[batches.length - 1].count > 0;
   async function load() {
     if (lock.current) return;
@@ -75,6 +82,12 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
     <div className="mt-7 flex flex-col items-center gap-3">
       <p role="status" aria-live="polite" className="text-xs font-bold text-[var(--ac-muted)]">Показано {count.toLocaleString("ru-RU")} из {total.toLocaleString("ru-RU")}</p>
+      {pageCount > 1 ? <nav aria-label="Страницы каталога" className="flex max-w-full items-center justify-center gap-1">
+        {numberedPages.map((number, index) => <span key={number} className="flex items-center gap-1">
+          {index > 0 && number - numberedPages[index - 1] > 1 ? <span aria-hidden="true" className="px-1 text-[var(--ac-muted)]">…</span> : null}
+          <a href={pageHref(number)} aria-label={`Страница ${number}`} aria-current={number === page ? "page" : undefined} className={`flex min-h-11 min-w-11 items-center justify-center rounded-xl px-2 text-sm font-black ${number === page ? "bg-red-500 text-white" : "bg-[var(--ac-surface-2)] text-[var(--ac-text)]"}`}>{number}</a>
+        </span>)}
+      </nav> : null}
       {more ? <a href={`/cars?${fallbackQuery}`} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 sm:w-auto sm:min-w-64 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
