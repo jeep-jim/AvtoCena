@@ -41,3 +41,25 @@ test('rounded source volume triggers review without certifying exact displacemen
   offer.operational.sourceSpecifications.sourceOfferId='another';
   assert.equal(assessJapanExportRestriction(offer),undefined);
 });
+
+
+test('published X-Trail sheet uses slot 28 and is shown last without fetching or inventing URLs', () => {
+  const offer=JSON.parse(fs.readFileSync(new URL('./fixtures/proauctions/published-xtrail-sheet.json',import.meta.url),'utf8'));
+  const urls=rankedCatalogImageUrls(offer);
+  assert.equal(urls.length,3);
+  assert.match(urls[0],/_29\.webp$/);
+  assert.match(urls.at(-1)!,/_28\.webp$/);
+  const sheet=offer.images.at(-1);
+  sheet.url=sheet.url.replace('/1881816494/','/999999/');
+  assert.equal(rankedCatalogImageUrls(offer).length,2);
+});
+
+test('explicit same-lot sheet role does not depend on file counter or portrait shape', () => {
+  const offer=fixture();
+  offer.images=[2,3].map(n=>({url:`https://jp2.pa-server.ru/auc_auto/2026_09_17/1881816550/test_${n}.webp`,checksum:String(n).repeat(64),width:1024,height:768,size:56434}));
+  const sheet={...offer.images[0],url:offer.images[0].url.replace('_2.webp','_80.webp'),role:'auction_sheet',checksum:'f'.repeat(64)};
+  offer.images.unshift(sheet);
+  assert.equal(rankedCatalogImageUrls(offer).at(-1),sheet.url);
+  sheet.checksum=''; sheet.width=200; sheet.height=300;
+  assert.equal(rankedCatalogImageUrls(offer).includes(sheet.url),false);
+});

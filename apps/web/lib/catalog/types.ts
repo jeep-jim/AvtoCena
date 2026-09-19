@@ -14,6 +14,7 @@ export type AuctionResult = "sold" | "unsold";
 export type AuctionPriceKind = "hammer" | "published_result";
 
 export type CatalogImage = {
+  role?: "vehicle" | "auction_sheet";
   id: string;
   url: string;
   objectKey: string;

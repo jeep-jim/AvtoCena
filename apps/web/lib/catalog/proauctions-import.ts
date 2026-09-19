@@ -61,7 +61,7 @@ export function proAuctionsOffer(e: ReturnType<typeof parseProAuctionsDetailEvid
     powerDataConfidence:!powerConflict && s.reportedCombustionPowerHp ? 'source_exact' : undefined,
     powerDataSource:!powerConflict && s.reportedCombustionPowerHp ? e.sourceUrl : undefined,
     firstSeenAt:timestamp,updatedAt:timestamp,
-    images:gallery.map(p=>({id:p.decodedSha256,url:p.url,objectKey:'',checksum:p.decodedSha256,width:p.width,height:p.height,size:p.size,mimeType:p.mimeType})),
+    images:gallery.map(p=>({role:sheets.some(sheet=>sheet.url===p.url)?'auction_sheet':'vehicle',id:p.decodedSha256,url:p.url,objectKey:'',checksum:p.decodedSha256,width:p.width,height:p.height,size:p.size,mimeType:p.mimeType})),
     operational:{sourceUrl:e.sourceUrl,exactDetail:true,photoIdentityVerified:true,chassisCode:e.identity.chassis,
       semanticEvidence:{year:evidence('exact',e.identity.year),engineCc:evidence('ambiguous',s.reportedEngineCc),
         fuel:evidence(fuelConflict || !s.fuel?'ambiguous':'exact',s.fuel),

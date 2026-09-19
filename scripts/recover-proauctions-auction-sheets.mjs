@@ -19,7 +19,7 @@ async function decode(url){
    const decoded=await sharp(Buffer.concat(chunks),{limitInputPixels:40000000}).rotate().raw().toBuffer({resolveWithObject:true});
    if(decoded.info.width<100 || decoded.info.height<100)throw Error('sheet_too_small');
    const checksum=sha(decoded.data);
-   return {id:checksum,url,objectKey:'',checksum,width:decoded.info.width,height:decoded.info.height,size,mimeType:'image/webp'};
+   return {role:'auction_sheet',id:checksum,url,objectKey:'',checksum,width:decoded.info.width,height:decoded.info.height,size,mimeType:'image/webp'};
   }catch(e){if(e.access || attempt===2)throw e;}
  }
 }
