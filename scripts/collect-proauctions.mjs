@@ -16,16 +16,18 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
 for(const folder of ['raw','offers','html','witness'])await fs.mkdir(path.join(root,folder),{recursive:true});
 let state={startedAt:new Date().toISOString(),page:1,pending:[],done:[],pages:0,details:0,prepared:0,errors:[],stopReason:'',complete:false};
 try{state=JSON.parse(await fs.readFile(path.join(root,'checkpoint.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
-const done=new Set(state.done), lastRequest=new Map();
+const done=new Set(state.done), lastRequest=new Map(), refusedHosts=new Set();
 let witnessBlocked=false;
 async function get(url,limit=3000000){
   const u=new URL(url);
   if(u.protocol!=='https:' || !/^(demo\.pro-auctions\.ru|jptrade\.ru|jp\d+\.pa-server\.ru)$/.test(u.hostname) || u.port || u.username || u.password)throw Error('unexpected_host');
+  if(refusedHosts.has(u.hostname))throw Object.assign(Error("source_host_already_refused"),{access:true});
   const start=Math.max(Date.now(),(lastRequest.get(u.hostname)||0)+400);lastRequest.set(u.hostname,start);await pause(start-Date.now());
   for(let attempt=0;attempt<3;attempt++){
+    if(refusedHosts.has(u.hostname))throw Object.assign(Error("source_host_already_refused"),{access:true});
     try{
       const r=await fetch(url,{headers:{'user-agent':'AvtoCena source import/1.0'},signal:AbortSignal.timeout(25000),redirect:'error'});
-      if([401,403,429].includes(r.status))throw Object.assign(Error(`access_${r.status}`),{access:true});
+      if([401,403,429].includes(r.status)){refusedHosts.add(u.hostname);throw Object.assign(Error(`access_${r.status}`),{access:true});}
       if(r.status>=500 && attempt<2){await pause(1500*(attempt+1));continue;}
       if(!r.ok)throw Error(`http_${r.status}`);
       const chunks=[];let size=0;for await(const b of r.body){size+=b.length;if(size>limit)throw Error('response_too_large');chunks.push(b);}
