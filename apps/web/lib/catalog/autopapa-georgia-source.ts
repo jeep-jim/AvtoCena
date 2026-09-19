@@ -1,3 +1,4 @@
+import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -362,7 +363,8 @@ async function request(url: string) {
   try {
     const response = await fetch(url, { headers: HEADERS, redirect: "follow", cache: "no-store", signal: controller.signal });
     const markup = await response.text();
-    if ([401, 403, 429].includes(response.status) || /just a moment|cf-chl|captcha|access denied/i.test(markup.slice(0, 2_000))) throw new Error(`autopapa_georgia_blocked_${response.status}`);
+    assertSourceAccess(response.status, markup, "autopapa");
+    if ([401, 403, 429].includes(response.status) || /just a moment|cf-chl|captcha|access denied/i.test(markup.slice(0, 2_000))) throw Object.assign(new Error(`autopapa_georgia_blocked_${response.status}`), {blocked:true});
     if (!response.ok) throw new Error(`autopapa_georgia_http_${response.status}`);
     return { response, markup };
   } finally { clearTimeout(timeout); }
@@ -430,7 +432,7 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
     let urls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])];
     const detailUrl = String(offer.operational?.sourceUrl || raw?.parsed?.detailUrl || "");
     if (detailUrl) {
-      const detail = await request(detailUrl).catch(() => null);
+      const detail = await request(detailUrl).catch(optionalSourceDetailFailure);
       if (detail) {
         const facts = enrichAutoPapaOfferFromExactDetail(offer, detail.markup, detail.response.url || detailUrl);
         if (facts) {
