@@ -12,6 +12,7 @@ function n(v: string | null) {
 }
 
 export async function GET(request: Request) {
+  const started = performance.now();
   const u = new URL(request.url);
   const p = u.searchParams;
   const query: Parameters<typeof searchOffers>[0] = {
@@ -46,6 +47,8 @@ export async function GET(request: Request) {
   const extras: Record<string, unknown> = {};
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
-  const items = await applyActiveBusinessPricingBatch(result.items);
-  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30" } });
+  const readMs = performance.now() - started;
+  const items = p.get("countOnly") === "1" ? [] : await applyActiveBusinessPricingBatch(result.items);
+  const pricingMs = performance.now() - started - readMs;
+  return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
 }

@@ -7,7 +7,8 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 const results=[];
 try{for(const width of [390,1440]){
  const context=await browser.newContext({viewport:{width,height:900}});
- const page=await context.newPage(),errors=[];
+ const page=await context.newPage(),errors=[],unrelatedSearches=[];
+ page.on("request",request=>{const u=new URL(request.url());if(u.pathname==="/api/catalog/search" && u.searchParams.get("pageSize")==="48" && !u.searchParams.has("market"))unrelatedSearches.push(u.pathname+u.search);});
  page.on('pageerror',e=>errors.push(String(e)));
  try{
   const start=Date.now();
@@ -43,7 +44,7 @@ try{for(const width of [390,1440]){
   await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-batch] article').length===48,null,{timeout:30000});
   await page.waitForFunction(y=>Math.abs(window.scrollY-y)<100,scrollY,{timeout:10000});
   assert.deepEqual(await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),after);
-  assert.deepEqual(errors,[]);
+  assert.deepEqual(errors,[]);assert.deepEqual(unrelatedSearches,[],"catalog must not fetch the home page trend list");
   results.push({width,initialMs,appendMs,backMs:Date.now()-backStart,cards:48,scrollY,errors});
   await page.screenshot({path:`artifacts/catalog-live/catalog-${width}.png`});
  }catch(e){console.log('FAIL',JSON.stringify({width,errors,error:String(e)}));await page.screenshot({path:`artifacts/catalog-live/failure-${width}.png`});throw e;}finally{await context.close();}

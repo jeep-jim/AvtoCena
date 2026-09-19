@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { loadPublicRates } from "../../lib/catalog/public-rates-client";
 
 type Preview = {
@@ -148,6 +149,7 @@ function formatRatePointDelta(value: number) {
 }
 
 export function PublicUiEnhancer() {
+  const pathname = usePathname();
   const [preview, setPreview] = useState<Preview | null>(null);
 
   useEffect(() => {
@@ -289,6 +291,8 @@ export function PublicUiEnhancer() {
   }, []);
 
   useEffect(() => {
+    // Home-only decorations must not fetch/reprice 48 offers on every catalog or detail visit.
+    if (pathname !== "/") return;
     let countTimer = 0;
     let countController: AbortController | null = null;
     let trendController: AbortController | null = null;
@@ -309,7 +313,7 @@ export function PublicUiEnhancer() {
       countController?.abort();
       countController = new AbortController();
       try {
-        const response = await fetch(`/api/catalog/search?${state.params.toString()}`, { cache: "no-store", signal: countController.signal });
+        const response = await fetch(`/api/catalog/search?${state.params.toString()}&countOnly=1`, { cache: "no-store", signal: countController.signal });
         if (!response.ok) return;
         const data = await response.json();
         const count = Number(data?.total ?? data?.items?.length ?? 0);
@@ -454,7 +458,7 @@ export function PublicUiEnhancer() {
       document.removeEventListener("change", scheduleCount, true);
       document.removeEventListener("click", handleClick, true);
     };
-  }, []);
+  }, [pathname]);
 
   if (!preview) return null;
 
