@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import {staleJapanPreviewObjects} from "./lib/catalog-runtime-cleanup.mjs";
 import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
 const { catalogCandidateObjectExpired } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 
@@ -188,7 +189,8 @@ if (!publicGeneration || !generationIds.length) {
     const modifiedAt = objectAge(object.lastModified);
     return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
   });
-  const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects, ...staleSourceCandidateObjects, ...staleBrandProjectionObjects];
+  const staleRuntimeObjects = staleJapanPreviewObjects(catalogObjects, protectedGenerations, cutoff);
+  const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects, ...staleSourceCandidateObjects, ...staleBrandProjectionObjects, ...staleRuntimeObjects];
   const plannedDeletes = allDeleteObjects.length;
   const plannedBytes = objectBytes(allDeleteObjects);
   const blocked = plannedDeletes > MAX_DELETES;
@@ -198,8 +200,14 @@ if (!publicGeneration || !generationIds.length) {
   let deletedImages = 0;
   let deletedSourceCandidates = 0;
   let deletedBrandProjections = 0;
+  let deletedRuntimeObjects = 0;
 
   if (!DRY_RUN && !blocked) {
+    const runtimeResults = await mapWithConcurrency(staleRuntimeObjects, DELETE_CONCURRENCY, async (object) => {
+      try { await storage.deleteJson(object.key); return 1; }
+      catch (error) { errors.push({ stage: "runtime", key: object.key, error: String(error?.message || error) }); return 0; }
+    });
+    deletedRuntimeObjects = runtimeResults.reduce((sum, value) => sum + value, 0);
     for (const generationId of candidateGenerations) {
       try {
         deletedGenerationObjects += await storage.deletePrefix(`catalog/generations/${generationId}`);
@@ -302,6 +310,7 @@ if (!publicGeneration || !generationIds.length) {
       images: imageDeleteObjects.length,
       sourceCandidates: staleSourceCandidateObjects.length,
       brandProjections: staleBrandProjectionObjects.length,
+      runtimeObjects: staleRuntimeObjects.length,
       total: plannedDeletes,
       bytes: plannedBytes,
     },
@@ -311,7 +320,8 @@ if (!publicGeneration || !generationIds.length) {
       images: deletedImages,
       sourceCandidates: deletedSourceCandidates,
       brandProjections: deletedBrandProjections,
-      total: deletedGenerationObjects + deletedInternalObjects + deletedImages + deletedSourceCandidates + deletedBrandProjections,
+      runtimeObjects: deletedRuntimeObjects,
+      total: deletedGenerationObjects + deletedInternalObjects + deletedImages + deletedSourceCandidates + deletedBrandProjections + deletedRuntimeObjects,
     },
     errors: [...inventoryErrors, ...errors].slice(0, 500),
   };

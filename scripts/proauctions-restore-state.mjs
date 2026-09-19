@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import {getJsonStorage} from '../apps/web/lib/data.ts';
+import {proAuctionsSchedule} from './lib/proauctions-schedule.mjs';
+import {restoreProAuctionsState,proAuctionsStateKey} from './lib/proauctions-durable-state.mjs';
+const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
+const state=await getJsonStorage().readJson(proAuctionsStateKey,null);
+const decision=proAuctionsSchedule(state,Date.now(),policy.japan.refreshIntervalDays);
+if(decision.resume)await restoreProAuctionsState('proauctions-collection',state);
+if(process.env.GITHUB_OUTPUT)await fs.appendFile(process.env.GITHUB_OUTPUT,`due=${decision.due}\n`);
+console.log(JSON.stringify({decision,state:state?{startedAt:state.startedAt,complete:state.complete,details:state.details,savedAt:state.savedAt}:null}));
