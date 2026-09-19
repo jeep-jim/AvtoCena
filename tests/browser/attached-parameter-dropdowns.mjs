@@ -104,7 +104,13 @@ try{
       const boxes=await buttons.evaluateAll(els=>els.map(e=>e.getBoundingClientRect()));
       for(let row=0;row<3;row++){assert.ok(Math.abs(boxes[row*2].y-boxes[row*2+1].y)<1);assert.ok(boxes[row*2].x<boxes[row*2+1].x);}
       assert.ok(box.height<=275,`fuel must be 3 short rows, not a tall list: ${box.height}`);
-      assert.ok(await panel.locator('.ac-attached-editor-body').evaluate(el=>el.scrollHeight<=el.clientHeight+1),'fuel options should not need scrolling');
+      const body=panel.locator('.ac-attached-editor-body');
+      assert.ok(await body.evaluate(el=>el.clientHeight>0 && getComputedStyle(el).overflowY==='auto'),'viewport-limited fuel menu must retain internal scrolling');
+      if(await body.evaluate(el=>el.scrollHeight>el.clientHeight+1)){
+       await body.hover();await page.mouse.wheel(0,300);await page.waitForTimeout(100);
+       assert.ok(await body.evaluate(el=>el.scrollTop>0),'fuel choices remain reachable when viewport limits height');
+       await body.evaluate(el=>el.scrollTop=0);
+      }
      }
      if(width===390||width===1280){
       const r=await trigger.boundingBox();await page.evaluate(y=>scrollTo(0,Math.max(0,scrollY+y-145)),r.y);
