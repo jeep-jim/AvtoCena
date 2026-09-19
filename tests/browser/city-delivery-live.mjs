@@ -7,6 +7,14 @@ const reports=[];
 try {for(const width of [390,1440]) {
  const context=await browser.newContext({viewport:{width,height:900},isMobile:width<500,hasTouch:width<500});
  const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(String(error)));
+ page.on('console',message=>{if(message.text().includes('HYDRATION_DEBUG'))console.log(message.text());});
+ await page.route('**/1dd3208c-*.js',async route=>{
+  const response=await route.fetch();let body=await response.text();
+  const needle='function t5(){throw Error(i(418))}';
+  assert.ok(body.includes(needle),'diagnostic signature must match the observed React build');
+  body=body.replace(needle,'function t5(){console.warn("HYDRATION_DEBUG",JSON.stringify({parent:tG&&tG.parentElement&&tG.parentElement.outerHTML.slice(0,1800),extra:tG&&tG.outerHTML,type:tX&&typeof tX.type==="string"?tX.type:"component"}));throw Error(i(418))}');
+  await route.fulfill({response,body});
+ });
  const calculation=(city)=>page.waitForResponse(response=>response.url().includes('/calculate') && response.request().method()==='POST' && (JSON.parse(response.request().postData()||'{}').deliveryCity||'')===city,{timeout:90000});
  const first=calculation('');
  await page.goto('https://avtocena.com/cars/offer/6c52ef91feab0a62d14a697c',{waitUntil:'domcontentloaded',timeout:90000});
@@ -38,7 +46,7 @@ try {for(const width of [390,1440]) {
  const cleared=await (await clear).json();assert.equal(cleared.totalRub,initial.totalRub);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'horizontal overflow');
  await panel.scrollIntoViewIfNeeded();await page.screenshot({path:`${output}/${width}.png`,fullPage:false});
- assert.deepEqual(errors,[]);
+
  reports.push({width,initialTotal:initial.totalRub,rows,clearedTotal:cleared.totalRub,errors});console.log(JSON.stringify(reports.at(-1)));
  await context.close();
-}}finally{fs.writeFileSync(`${output}/report.json`,JSON.stringify(reports,null,2));await browser.close();}
+}assert.deepEqual(reports.flatMap(report=>report.errors),[]);}finally{fs.writeFileSync(`${output}/report.json`,JSON.stringify(reports,null,2));await browser.close();}
