@@ -2,7 +2,7 @@ name: All-market stored integrity audit (read only)
 on:
   workflow_dispatch:
   push:
-    branches: [fix/kcar-power-evidence-20260916]
+    branches: [fix/launch-market-resilience-20260919]
     paths: [.github/workflows/catalog-all-market-integrity-audit.yml]
 permissions:
   contents: read

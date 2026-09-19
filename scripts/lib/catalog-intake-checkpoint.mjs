@@ -21,7 +21,7 @@ export function restoreIntakeCursor(state, saved, now = Date.now()) {
   const age = now - Date.parse(saved.updatedAt || '');
   if (!Number.isFinite(age) || age < 0 || age > 14 * 86400000) return;
   const row = saved.sources?.find(row => row.sourceId === state.sourceId);
-  if (row && (row.cursor === null || typeof row.cursor === 'string')) {
+  if (row && !['source_finished', 'source_cycle_finished', 'cursor_loop', 'repeated_page'].includes(row.stopReason) && (row.cursor === null || typeof row.cursor === 'string')) {
     state.cursor = row.cursor;
     state.initialCursor = row.cursor;
   }

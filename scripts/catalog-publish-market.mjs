@@ -8,6 +8,7 @@ const { assertNoDeliveredPriceRegression } = await import("../apps/web/lib/catal
 import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
+import { catalogPublicCountGuard } from "./lib/catalog-public-count-guard.mjs";
 import { hashRows } from "./lib/catalog-row-hash.mjs";
 import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicle-scope.mjs";
 
@@ -37,7 +38,7 @@ const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN
 const defaultRetentionMs = catalogMarketRetentionMs("korea");
 const japanRetentionMs = catalogMarketRetentionMs("japan");
 const outageGraceMultiplier = 1;
-const minimumPublicRetentionRatio = Math.max(0.01, Math.min(1, Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.10)));
+const minimumPublicRetentionRatio = Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.90);
 const allowPublicCollapse = process.env.CATALOG_ALLOW_PUBLIC_COLLAPSE === "1";
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
 const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
@@ -613,6 +614,7 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
+const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)));
 const replaceInternalSourceIds = new Set([
   ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
   ...generation.offers.map(offer => String(offer?.sourceId || "")),
@@ -644,11 +646,10 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
 }
 const allOffers = [...unique.values()];
 const previousRetainedCount = retainedCandidateCount;
-const minimumSafePublicCount = !allowPublicCollapse && previousPublicCount >= 100
-  ? Math.max(1, Math.ceil(previousPublicCount * minimumPublicRetentionRatio))
-  : 1;
-const catastrophicPublicCollapse = previousPublicCount >= 100
-  && expectedPublishedByMarket[market] < minimumSafePublicCount;
+const publicCountGuard = catalogPublicCountGuard(previousSourceCounts,
+  countSources(canonicalTargetPreview.offers), withdrawnSourceCounts, minimumPublicRetentionRatio);
+const minimumSafePublicCount = allowPublicCollapse ? 1 : publicCountGuard.minimumTotal;
+const catastrophicPublicCollapse = !publicCountGuard.ok;
 const regressionBlocked = expectedPublishedByMarket[market] <= 0
   || (catastrophicPublicCollapse && !allowPublicCollapse);
 let manifest = null;
@@ -698,6 +699,10 @@ if (regressionBlocked) {
         for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
           const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);
           if (currentMarket === market) {
+            if (!allowPublicCollapse) {
+              const guard = catalogPublicCountGuard(previousSourceCounts, countSources(rows), withdrawnSourceCounts, minimumPublicRetentionRatio);
+              if (!guard.ok) failures.push(`${currentMarket}:sources:${JSON.stringify(guard.failures)}`);
+            }
             if (rows.length < minimumSafePublicCount) failures.push(`${currentMarket}:count:${rows.length}:${minimumSafePublicCount}`);
             expectedPublishedByMarket[currentMarket] = rows.length;
             expectedPublishedHashByMarket[currentMarket] = hashRows(rows);
@@ -792,6 +797,7 @@ const report = {
       previousRetainedCount,
       previousPublicCount,
       nextPublicCount,
+      publicCountGuard,
       minimumPublicRetentionRatio,
       minimumSafePublicCount,
       catastrophicPublicCollapse,
