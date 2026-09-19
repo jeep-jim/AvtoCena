@@ -1,0 +1,33 @@
+name: Verify catalog load more
+on:
+  push:
+    branches: [main, fix/catalog-speed-load-more]
+    paths:
+      - 'apps/web/components/catalog/CatalogLoadMore.tsx'
+      - 'tests/browser/catalog-load-more*'
+      - '.github/workflows/verify-catalog-load-more.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm install --prefix "$RUNNER_TEMP/catalog-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Test load more and return on mobile and desktop
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/catalog-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-load-more.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-load-more
+          path: artifacts/catalog-load-more
+          retention-days: 3

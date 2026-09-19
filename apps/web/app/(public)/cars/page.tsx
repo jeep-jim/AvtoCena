@@ -5,6 +5,8 @@ import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { readCatalogOverview } from "@/lib/catalog/overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
+import { readCatalogMarketPage, balanceBusinessRows, businessOrder, sortCatalogRows } from "@/lib/catalog/market-page";
+import { CatalogLoadMore } from "@/components/catalog/CatalogLoadMore";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
@@ -31,11 +33,7 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
 
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
-const MARKET_PAGE_SIZE = 48;
-const MARKET_DIVERSITY_WINDOW_PAGES = 8;
-const PRIORITY_MAX_RUB = 6_000_000;
-const PRIORITY_MAX_POWER_HP = 160;
-const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
+const MARKET_PAGE_SIZE = 24;
 const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
 
@@ -52,120 +50,6 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
   return suffix ? `/cars?${suffix}` : "/cars";
 }
 
-function paginationItems(currentPage: number, totalPages: number) {
-  const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
-  return [...pages].filter((page) => page >= 1 && page <= totalPages).sort((a, b) => a - b);
-}
-
-function offerFreshness(offer: any) {
-  return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0;
-}
-
-function offerRubValue(offer: any) {
-  const totalRub = Number(offer?.totalRub || 0);
-  if (totalRub > 0) return totalRub;
-  const sourcePrice = Number(offer?.sourcePrice || 0);
-  if (!sourcePrice) return 0;
-  const currency = String(offer?.sourceCurrency || "").toUpperCase();
-  if (currency === "RUB") return sourcePrice;
-  const rate = offer?.calculationSnapshot?.currencyRate || {};
-  const explicit = Number(rate.sourcePriceRub || offer?.calculationSnapshot?.sourcePriceRub || 0);
-  if (explicit > 0) return explicit;
-  const effectiveRate = Number(rate.effectiveRate || 0);
-  return effectiveRate > 0 ? Math.round(sourcePrice * effectiveRate) : 0;
-}
-
-function businessPriority(offer: any) {
-  const rub = offerRubValue(offer);
-  const power = Number(offer?.powerHp || 0);
-  const year = Number(offer?.year || 0);
-  const affordable = rub > 0 && rub <= PRIORITY_MAX_RUB;
-  const lowPower = power > 0 && power <= PRIORITY_MAX_POWER_HP;
-  const recent = year >= PRIORITY_MIN_YEAR;
-  // Source-only rubles cannot outrank a completed delivered quote merely
-  // because customs and delivery have not been added to them.
-  let score = Number(offer?.totalRub) > 0 ? 100_000 : 0;
-  if (affordable) score += 1_600;
-  if (lowPower) score += 1_600;
-  if (recent) score += 800;
-  if (affordable && lowPower && recent) score += 3_200;
-  if (rub > 0) score += 200;
-  return score;
-}
-
-function businessOrder(left: any, right: any) {
-  return businessPriority(right) - businessPriority(left)
-    || offerFreshness(right) - offerFreshness(left)
-    || String(left?.id || "").localeCompare(String(right?.id || ""));
-}
-function sortCatalogRows(rows: any[], sort: string) {
-  const sorted = [...rows];
-  if (sort === "totalRub") return sorted.sort((left, right) => {
-    const a = offerRubValue(left) || Number.POSITIVE_INFINITY;
-    const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
-    return a - b || businessOrder(left, right);
-  });
-  if (sort === "totalRubDesc") return sorted.sort((left, right) => {
-    const a = offerRubValue(left);
-    const b = offerRubValue(right);
-    return (b || Number.NEGATIVE_INFINITY) - (a || Number.NEGATIVE_INFINITY) || businessOrder(left, right);
-  });
-  if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
-  if (sort === "yearAsc") return sorted.sort((left, right) => Number(left?.year || 0) - Number(right?.year || 0) || businessOrder(left, right));
-  if (sort === "mileage") return sorted.sort((left, right) => {
-    const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
-    const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;
-    return a - b || businessOrder(left, right);
-  });
-  return sorted.sort(businessOrder);
-}
-
-
-function catalogModelGroupKey(offer: any) {
-  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
-  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
-}
-
-function balanceBusinessRows(rows: any[]) {
-  const sorted = [...rows].sort(businessOrder);
-  const groups = new Map<string, any[]>();
-  for (const row of sorted) {
-    const key = catalogModelGroupKey(row);
-    const group = groups.get(key) || [];
-    group.push(row);
-    groups.set(key, group);
-  }
-  const balanced: any[] = [];
-  for (let depth = 0; balanced.length < sorted.length; depth++) {
-    let added = false;
-    for (const group of groups.values()) {
-      const row = group[depth];
-      if (!row) continue;
-      balanced.push(row);
-      added = true;
-    }
-    if (!added) break;
-  }
-  return balanced;
-}
-
-async function readDiverseDefaultMarketPage(market: string, page: number) {
-  const windowIndex = Math.floor((Math.max(1, page) - 1) / MARKET_DIVERSITY_WINDOW_PAGES);
-  const windowStartPage = windowIndex * MARKET_DIVERSITY_WINDOW_PAGES + 1;
-  const offsetWithinWindow = ((Math.max(1, page) - 1) % MARKET_DIVERSITY_WINDOW_PAGES) * MARKET_PAGE_SIZE;
-  const resultPages = await Promise.all(Array.from({ length: MARKET_DIVERSITY_WINDOW_PAGES }, (_, index) =>
-    searchOffers({ market, page: windowStartPage + index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" })));
-  const firstResult = resultPages[0];
-  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isRenderablePublicCatalogOffer)));
-  return {
-    items: candidates.slice(offsetWithinWindow, offsetWithinWindow + MARKET_PAGE_SIZE),
-    total: firstResult?.total || 0,
-    page: Math.max(1, page),
-    pageSize: MARKET_PAGE_SIZE,
-  };
-}
-
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const requestedMarket = first(params.market).toLowerCase();
@@ -173,7 +57,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const selectedMarket = requestedMarket;
   const selectedSort = requestedSort(params.sort);
   const customSort = selectedSort !== "updatedAt";
-  const requestedPage = Math.max(1, Number(first(params.page)) || 1);
+  const requestedPage = Math.max(1, Math.floor(Number(first(params.page)) || 1));
   const common = {
     make: first(params.make) || first(params.brand), model: first(params.model), budgetFrom: numeric(params.budgetFrom), budgetTo: numeric(params.budget) || numeric(params.budgetTo), hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom), yearTo: numeric(params.yearTo), mileageFrom: numeric(params.mileageFrom), mileageTo: numeric(params.mileageTo), engineFrom: numeric(params.engineFrom), engineTo: numeric(params.engineTo), powerFrom: numeric(params.powerFrom), powerTo: numeric(params.powerTo),
@@ -216,12 +100,11 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
         const page = selectedMarket ? requestedPage : 1;
 
+        if (selectedMarket) {
+          const result = await readCatalogMarketPage({...common, market: market.id, page});
+          return {...market, ...result};
+        }
         if (!hasFilters && !customSort) {
-          if (selectedMarket) {
-            const indexed = await readDiverseDefaultMarketPage(market.id, page);
-            const visible = await applyActiveBusinessPricingBatch(indexed.items);
-            return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
-          }
           const indexedPageSize = Math.min(48, Math.max(pageSize * 4, 24));
           const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
           const candidates = balanceBusinessRows((indexed.items as any[]).filter(isRenderablePublicCatalogOffer));
@@ -239,10 +122,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
-  const selectedResult = selectedMarket ? groupedMarkets[0] : undefined;
-  const totalPages = selectedResult ? Math.max(1, Math.ceil(selectedResult.total / selectedResult.pageSize)) : 1;
-  const currentPage = Math.min(requestedPage, totalPages);
-  const pages = paginationItems(currentPage, totalPages);
+
   const initialKeys = ["auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   const brandNames = facets.makes || [];
@@ -290,12 +170,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       <CatalogFilters initial={initial} facets={facets} />
       <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
-      {selectedMarket && totalPages > 1 ? <nav className="ac-catalog-pagination ac-hide-scrollbar mt-10 flex flex-nowrap items-center justify-center gap-1 overflow-x-auto whitespace-nowrap px-1" aria-label="Страницы каталога">
-        {currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.055] px-2 text-base font-black" aria-label="Предыдущая страница">←</Link> : null}
-        {pages.map((page, index) => <span key={page} className="contents">{index > 0 && page - pages[index - 1] > 1 ? <span className="shrink-0 px-1 text-white/35">…</span> : null}<Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl px-2 text-sm font-black ${page === currentPage ? "ac-pagination-current bg-red-500 text-white" : "bg-white/[0.055]"}`} style={page === currentPage ? { color: "#ffffff", WebkitTextFillColor: "#ffffff" } : undefined}>{page}</Link></span>)}
-        {currentPage < totalPages ? <Link href={pageHref(params, currentPage + 1)} className="flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.055] px-2 text-base font-black" aria-label="Следующая страница">→</Link> : null}
-      </nav> : null}
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       @media(max-width:767px){

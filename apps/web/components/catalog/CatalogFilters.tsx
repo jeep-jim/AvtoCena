@@ -1,5 +1,7 @@
 "use client";
 
+import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
+
 import "./MobileCatalogDropdowns.css";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -376,7 +378,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "totalRub") setSortDirection("asc");
     if (key === "year") setSortDirection("desc");
   };
-  return <>
+  return <><CatalogFilterUiEnhancer />
     <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />

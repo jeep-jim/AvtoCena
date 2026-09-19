@@ -75,7 +75,7 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
     securityDepositRub: deposit,
     topAvtoCommissionRub: commission,
     contractInitialPaymentRub: deposit + commission,
-    exchangeRateReservePercent: 0,
+    exchangeRateReservePercent: 2,
     logisticsRub: configuredValue(current, "logisticsRub", defaults.logisticsRub),
     brokerRub: configuredValue(current, "brokerRub", defaults.brokerRub),
     svhRub: configuredValue(current, "svhRub", defaults.svhRub),

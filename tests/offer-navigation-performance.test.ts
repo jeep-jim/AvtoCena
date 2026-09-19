@@ -14,6 +14,7 @@ const deploy = fs.readFileSync(".github/workflows/deploy-yandex.yml", "utf8");
 const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings.ts", "utf8");
 const readModelsWorkflow = fs.readFileSync(".github/workflows/catalog-current-read-models.yml", "utf8");
 const readModelsScript = fs.readFileSync("scripts/catalog-publish-current-read-models.mjs", "utf8");
+const marketPage = fs.readFileSync("apps/web/lib/catalog/market-page.ts", "utf8");
 const catalogPage = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
 const vehicleGallery = fs.readFileSync("apps/web/components/catalog/VehicleGallery.tsx", "utf8");
 
@@ -56,8 +57,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /prefetch=\{false\}/);
   assert.match(intentLink, /router\.prefetch\(href\)/);
   assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
-  assert.match(intentLink, /onTouchStart=\{prefetch\}/);
-  assert.match(intentLink, /EAGER_PREFETCH_DELAY_MS = 120/);
+  assert.match(intentLink, /onPointerDown=\{prefetch\}/);
+  assert.doesNotMatch(intentLink, /EAGER_PREFETCH_DELAY_MS|setTimeout/);
   assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
@@ -176,9 +177,9 @@ test("offer page does not re-run source-only publication gates on compact public
 
 test("catalog overview and market diversity stay on bounded search projections", () => {
   assert.doesNotMatch(catalogPage, /readMarketOffers/);
-  assert.match(catalogPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
-  assert.match(catalogPage, /readDiverseDefaultMarketPage/);
-  assert.match(catalogPage, /searchOffers\(\{ market, page: windowStartPage \+ index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" \}\)/);
+  assert.match(marketPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
+  assert.match(marketPage, /readDiverseDefaultMarketPage/);
+  assert.match(marketPage, /pageSize: MARKET_PAGE_SIZE \* MARKET_DIVERSITY_WINDOW_PAGES/);
   assert.match(catalogPage, /readCatalogOverview/);
 });
 

@@ -101,14 +101,16 @@ test("catalog cards preserve the compact layout and never render source currency
   assert.doesNotMatch(catalogCard, /ориентир под ключ/);
 });
 
+const marketPage = fs.readFileSync("apps/web/lib/catalog/market-page.ts", "utf8");
+
 test("catalog prioritizes affordable low-power cars and diversifies market pages", () => {
-  assert.match(carsPage, /PRIORITY_MAX_RUB = 6_000_000/);
-  assert.match(carsPage, /PRIORITY_MAX_POWER_HP = 160/);
-  assert.doesNotMatch(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
-  assert.match(carsPage, /if \(lowPower\) score \+= 1_600/);
-  assert.match(carsPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
-  assert.match(carsPage, /readDiverseDefaultMarketPage/);
-  assert.match(carsPage, /balanceBusinessRows/);
-  assert.match(carsPage, /\.sort\(businessOrder\)/);
-  assert.match(carsPage, /const rub = offerRubValue\(offer\)/);
+  assert.match(marketPage, /PRIORITY_MAX_RUB = 6_000_000/);
+  assert.match(marketPage, /PRIORITY_MAX_POWER_HP = 160/);
+  assert.doesNotMatch(marketPage, /isJapanAuctionResult\(offer\) \? 5_000/);
+  assert.match(marketPage, /if \(lowPower\) score \+= 1_600/);
+  assert.match(marketPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
+  assert.match(marketPage, /readDiverseDefaultMarketPage/);
+  assert.match(marketPage, /balanceBusinessRows/);
+  assert.match(marketPage, /\.sort\(businessOrder\)/);
+  assert.match(marketPage, /const rub = offerRubValue\(offer\)/);
 });
