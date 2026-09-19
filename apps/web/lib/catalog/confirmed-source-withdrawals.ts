@@ -2,7 +2,11 @@ import type { UnavailableOffer } from './offer-availability';
 
 // Reviewed exact-ID responses, linked in docs/all-market-integrity-20260916.md.
 // Read-side quarantine preserves the immutable generations during the freeze.
+// 2026-09-19: source 30222266 itself mixes Tanto specifications with Carry
+// Truck photos/sheet (DA16T-906108). Keep hidden until a manual identity review.
+const identityMismatchId = '1dd7d519da6e7cd53d8fb5be';
 const records = [
+  {id:identityMismatchId,market:'japan',make:'Daihatsu',model:'Tanto',sourceId:'proauctions_japan_stat',sourceOfferId:'30222266',reason:'unavailable',removedAt:'2026-09-19T04:00:00Z'},
   {id:'b8809736fc4867fcedf2c64b',market:'korea',make:'Kia',model:'Ray',sourceId:'kcar_korea_open',sourceOfferId:'EC61409859',reason:'sold',removedAt:'2026-09-16T15:20:17Z'},
   {id:'62cbf7b61fc84ab0c5ef834b',market:'korea',make:'Kia',model:'Morning (JA)',sourceId:'kcar_korea_open',sourceOfferId:'EC61402490',reason:'sold',removedAt:'2026-09-16T15:20:17Z'},
   {id:'089cd85a95cbd1cbe4f59fd6',market:'korea',make:'Genesis',model:'G80',sourceId:'kcar_korea_open',sourceOfferId:'EC61398692',reason:'sold',removedAt:'2026-09-16T15:38:52Z'},
@@ -12,7 +16,9 @@ const records = [
 
 export function confirmedSourceWithdrawalById(id: string): UnavailableOffer | null {
   const row = records.find(record => record.id === id);
-  return row ? {...row,sourceUrl:row.sourceId === 'kcar_korea_open'
+  return row ? {...row,sourceUrl:row.sourceId === 'proauctions_japan_stat'
+    ? 'https://demo.pro-auctions.ru/statistika/daihatsu/tanto/30222266.html'
+    : row.sourceId === 'kcar_korea_open'
     ? `https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=${row.sourceOfferId}`
     : 'https://www.autoscout24.com/offers/dacia-sandero-sandero-1-0-sce-65-eu6e-essential-led-gra-allwette-gasoline-white-cat_ma16360mo19129-9e56324e-1c6e-44d8-8525-04f1a5809bad'} : null;
 }
@@ -22,6 +28,7 @@ export function isConfirmedSourceWithdrawn(offer: {id?: string; market?: string;
   if (!row || offer.market !== row.market) return false;
   if (offer.sourceId && offer.sourceId !== row.sourceId) return false;
   if (offer.sourceOfferId && offer.sourceOfferId !== row.sourceOfferId) return false;
+  if (row.id === identityMismatchId) return true;
   // A later source refresh can reinstate a listing. An unlisted/failing source
   // is never classified as sold by this incident evidence.
   return !(Date.parse(offer.updatedAt || '') > Date.parse(row.removedAt));
