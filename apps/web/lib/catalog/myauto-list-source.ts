@@ -1,3 +1,4 @@
+import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -203,6 +204,7 @@ async function fetchMyAutoProductSnapshot(id: string, expectedPhoto?: string) {
       cache: "no-store",
       signal: controller.signal,
     });
+    assertSourceAccess(response.status, "", "myauto");
     if (!response.ok) return null;
     const payload = await response.json().catch(() => null) as any;
     const info = payload?.data?.info;
@@ -340,6 +342,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       try {
         const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
         const markup = await response.text();
+        assertSourceAccess(response.status, markup, "myauto");
         attempts.push(`${new URL(url).host}${new URL(url).pathname}${new URL(url).search}:${response.status}:${markup.length}`);
         if (!response.ok) continue;
         const items = parseMyAutoListingMarkup(markup, response.url || url);
@@ -352,6 +355,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
           health: { ok: true, message: `MyAuto list parsed ${items.length} via ${new URL(response.url || url).host}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
         };
       } catch (error) {
+        if ((error as any)?.blocked) throw error;
         attempts.push(`${url}:${String((error as Error)?.message || error).slice(0, 160)}`);
       } finally { clearTimeout(timeout); }
     }
@@ -420,7 +424,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
     const listingUrls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])]
       .filter((url) => Boolean(parseMyAutoListingImageUrl(url, sourceId)));
     const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
-    const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(() => null);
+    const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(optionalSourceDetailFailure);
     applyMyAutoProductSpecifications(offer, snapshot);
     if (snapshot?.specificationGroups) captureSourceTable(offer,snapshot.specificationGroups);
     offer.operational = {

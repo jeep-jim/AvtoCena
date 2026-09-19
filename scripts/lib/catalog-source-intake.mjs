@@ -85,7 +85,7 @@ export async function collectSourcePage(state, options) {
     } catch (error) {
       const message = String(error?.message || error);
       if (state.errors.length < 30) state.errors.push({stage:'detail',offerId:offer.id,message});
-      if (error?.blocked || /(?:http[_: ](?:401|403|429)|bot.?challenge|captcha)/i.test(message)) {
+      if (error?.blocked || /(?:http[_: ](?:401|403|429)|bot.?challenge|captcha|(?:^|[_: ])blocked(?:[_: ]|$)|access.denied)/i.test(message)) {
         state.done = true; state.stopReason = 'blocked_detail'; pageComplete = false; break;
       }
     }

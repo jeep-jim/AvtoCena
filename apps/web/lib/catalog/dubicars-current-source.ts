@@ -1,3 +1,4 @@
+import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { CATALOG_BRANDS } from "./brands";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -89,7 +90,9 @@ async function request(url: string, referer = "https://www.dubicars.com/uae/used
   const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
   try {
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
-    return { response, markup: await response.text() };
+    const markup = await response.text();
+    assertSourceAccess(response.status, markup, "dubicars");
+    return { response, markup };
   } finally { clearTimeout(timer); }
 }
 
@@ -411,7 +414,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     const rows: DubicarsCurrentRow[] = [];
     for (let index = 0; index < links.length; index += 4) {
       const batch = await Promise.all(links.slice(index, index + 4).map(async (detailUrl) => {
-        const detail = await request(detailUrl, listUrl).catch(() => null);
+        const detail = await request(detailUrl, listUrl).catch(optionalSourceDetailFailure);
         return detail?.response.ok ? parseDubicarsCurrentListing(detail.markup, detailUrl) : null;
       }));
       rows.push(...batch.filter(Boolean) as DubicarsCurrentRow[]);
