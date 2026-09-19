@@ -6,6 +6,7 @@ import { validateCustomerParameters } from '../apps/web/lib/catalog/customer-par
 import { calculateOfferWithCustomerParametersDetailed } from '../apps/web/lib/catalog/customs-pricing';
 import { LocalJsonStorage } from '../apps/web/lib/data';
 import { resetCatalogRateCache } from '../apps/web/lib/catalog/rates';
+import { compactJapanPreviewInput, matchesJapanPreviewInput } from '../apps/web/lib/catalog/japan-preview-inputs';
 import { visibleBreakdownNote } from '../apps/web/lib/catalog/customs-age-label';
 const fixture=()=>JSON.parse(fs.readFileSync('tests/fixtures/proauctions/published-corolla-cross.json','utf8'));
 
@@ -16,6 +17,14 @@ test('preview equals detail estimate, includes customs and leaves auction eviden
  const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,JPY:{cbrRate:54.169,nominal:100,rateDate:today,rateSource:'cbr'},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:{}}));
  try {
   const preview=await calculateOfferWithCustomerParametersDetailed(input,japanPreviewParameters(input));
+  const cached=compactJapanPreviewInput(input);
+  assert.ok(cached.parameters);
+  const compact=await calculateOfferWithCustomerParametersDetailed(cached.offer as any,cached.parameters!);
+  assert.deepEqual(compact,preview,'compact inputs must preserve the entire calculation, including customs and payment plan');
+  assert.ok(!('operational' in cached.offer) && !('images' in cached.offer));
+  assert.equal(matchesJapanPreviewInput(cached,input),true);
+  assert.equal(matchesJapanPreviewInput(cached,{...input,sourcePrice:input.sourcePrice+1}),false);
+  assert.equal(matchesJapanPreviewInput(cached,{...input,updatedAt:'changed'}),false);
   const detail=await calculateOfferWithCustomerParametersDetailed(input,validateCustomerParameters({year:2023,fuel:'petrol',engineCc:1800,powerHp:140,powerKw:103}));
   assert.equal(preview.ok,true);assert.equal(detail.ok,true);
   if(preview.ok&&detail.ok){
@@ -29,7 +38,7 @@ test('preview equals detail estimate, includes customs and leaves auction eviden
 });
 test('missing or conflicting calculation parameters cannot produce preview inputs',()=>{
  for(const mutate of [(r:any)=>{r.operational.semanticEvidence.engineCc.status='conflict'},(r:any)=>{r.powerHp=undefined;r.powerKw=undefined},(r:any)=>{r.fuel='electric';r.powertrainKind='electric';r.power30MinKw=undefined}]){
-  const input=fixture();mutate(input);assert.throws(()=>japanPreviewParameters(input));
+  const input=fixture();mutate(input);assert.throws(()=>japanPreviewParameters(input));assert.equal(compactJapanPreviewInput(input).parameters,null);
  }
 });
 test('tariff age notes are readable Russian for both engine formats',()=>{

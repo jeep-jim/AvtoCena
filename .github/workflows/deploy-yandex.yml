@@ -58,7 +58,9 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-        run: node --import tsx scripts/migrate-market-costs.mjs
+        run: |
+          node --import tsx scripts/migrate-market-costs.mjs
+          node --import tsx scripts/build-japan-preview-inputs.mjs --publish
 
       - name: Deploy Serverless Container
         id: deploy
