@@ -43,7 +43,8 @@ try{
   current={theme,width};const c=await contextFor(width),page=await c.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   try{
    await page.goto(`${origin}/cars${live?'':`?theme=${theme}`}`,{waitUntil:'domcontentloaded',timeout:90000});await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-   const cookie=page.locator('[aria-labelledby="avtocena-cookie-title"]');if(await cookie.isVisible())await cookie.getByRole('button',{name:'Понятно',exact:true}).click();
+   await page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Открыть фильтры"]');return b&&!b.disabled;});
+   const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});if(await cookie.isVisible())await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
    if(width>=1024){
     const desktop=page.locator('.ac-catalog-filter-panel');await desktop.waitFor({state:'visible'});
     const toggle=desktop.getByRole('button',{name:'Расширенные фильтры',exact:true});if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();
