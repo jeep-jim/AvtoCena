@@ -21,7 +21,6 @@ type FavoriteLeadItem = {
 };
 
 type HostKind = "home" | "brand" | "offer";
-type HostTarget = { kind: HostKind; node: HTMLElement };
 type LeadRequest =
   | { mode: "generic"; source: string; car?: string }
   | { mode: "offer"; source: string; offerId: string; car?: string }
@@ -336,9 +335,18 @@ function FavoritesPinnedActions({ onLead }: { onLead: () => void }) {
   return <div data-ac-favorites-bar className="fixed inset-x-0 bottom-0 z-[9000] border-t border-white/10 bg-[var(--ac-surface)] px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl md:left-1/2 md:right-auto md:bottom-5 md:w-[min(720px,calc(100vw-40px))] md:-translate-x-1/2 md:rounded-[1.6rem] md:border md:p-3"><div className="mx-auto grid max-w-3xl grid-cols-2 gap-2.5"><button type="button" onClick={onLead} className="ac-colored-button inline-flex items-center justify-center h-14 min-w-0 rounded-[1.25rem] bg-[#22B14C] px-3 text-[13px] font-black leading-none sm:text-sm">Оставить заявку</button><ShareLinkButton className="ac-colored-button inline-flex min-h-14 items-center justify-center rounded-[1.25rem] bg-[#00A2E8] px-3 text-sm font-black" /></div></div>;
 }
 
+/** The banner belongs to its page's React tree. Appending a portal host into
+ * streamed server markup before hydration caused React errors 418/422. */
+export function PageLeadBanner({kind,car=""}:{kind:"brand"|"offer";car?:string}) {
+  const [open,setOpen]=useState(false);
+  return <div data-ac-lead-host={kind} className="col-span-full w-full">
+    <GenericLeadBanner kind={kind} onOpen={()=>setOpen(true)} />
+    {open ? <LeadDialog request={{mode:"generic",source:`${kind}_lead_banner`,car:kind === "brand" ? car : ""}} favorites={[]} onClose={()=>setOpen(false)} /> : null}
+  </div>;
+}
+
 export function PublicLeadCaptureV2() {
   const pathname = usePathname() || "/";
-  const [hosts, setHosts] = useState<HostTarget[]>([]);
   const [favorites, setFavorites] = useState<FavoriteLeadItem[]>([]);
   const [request, setRequest] = useState<LeadRequest | null>(null);
 
@@ -356,21 +364,6 @@ export function PublicLeadCaptureV2() {
     return () => document.removeEventListener("click", click);
   }, []);
 
-  useEffect(() => {
-    let cancelled = false; let frame = 0; const created: HTMLElement[] = [];
-    const mount = () => {
-      if (cancelled) return;
-      const targets: Array<{ kind: HostKind; parent: HTMLElement | null }> = [];
-      if (/^\/cars\/brand\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "brand", parent: document.querySelector<HTMLElement>("main.ac-brand-catalog-page > section") });
-      if (/^\/cars\/offer\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "offer", parent: document.querySelector<HTMLElement>("main.ac-offer-page > section") });
-      if (!targets.length) { setHosts([]); return; }
-      if (targets.some((target) => !target.parent)) { frame = window.requestAnimationFrame(mount); return; }
-      const next = targets.flatMap(({ kind, parent }) => { if (!parent) return []; const node = document.createElement("div"); node.dataset.acLeadHost = kind; node.style.gridColumn = "1 / -1"; node.style.width = "100%"; parent.appendChild(node); created.push(node); return [{ kind, node }]; });
-      setHosts(next);
-    };
-    mount();
-    return () => { cancelled = true; if (frame) window.cancelAnimationFrame(frame); created.forEach((node) => node.remove()); setHosts([]); };
-  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/favorites") { setFavorites([]); return; }
@@ -404,5 +397,5 @@ export function PublicLeadCaptureV2() {
     document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);
   }, [pathname]);
 
-  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const car = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\s+под ключ$/i, "") : host.kind === "offer" ? cleanText(document.querySelector<HTMLElement>("main.ac-offer-page h1")?.textContent) : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car: host.kind === "brand" ? car : "" }); }} />, host.node))}{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
+  return <>{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
 }

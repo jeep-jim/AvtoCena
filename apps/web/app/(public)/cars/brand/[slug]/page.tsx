@@ -1,3 +1,4 @@
+import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -162,6 +163,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
         <h2 className="text-2xl font-black md:text-3xl">Как заказать {brand.name}</h2>
         <p className="mt-3 max-w-5xl text-sm font-medium leading-7 text-[var(--ac-muted)]">Выберите модель или автомобиль в каталоге. Мы проверим историю и состояние машины, подготовим расчёт под ключ, организуем покупку, доставку, таможенное оформление, получение ЭПТС и передачу автомобиля в вашем городе.</p>
       </section>
+      <PageLeadBanner kind="brand" car={brand.name} />
     </section>
   </main>;
 }

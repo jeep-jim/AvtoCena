@@ -1,3 +1,4 @@
+import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import {restoreProAuctionsPower,proAuctionsReportedVolume} from "@/lib/catalog/proauctions-source-parameters";
 import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { businessPaymentPlan } from "../../../../../../../packages/engine/src/calculation/calculateAvtocena";
@@ -452,6 +453,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       <OfferMobileActions />
 
       <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
+      <PageLeadBanner kind="offer" />
     </section>
     <OfferContactActionsStyles />
     <style dangerouslySetInnerHTML={{ __html: `
