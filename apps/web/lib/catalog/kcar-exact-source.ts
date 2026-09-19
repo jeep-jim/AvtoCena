@@ -1,3 +1,4 @@
+import { kcarRegistryEvidence } from "./kcar-registry-evidence";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import crypto from "node:crypto";
@@ -22,6 +23,7 @@ type KCarDetailData = {
 };
 
 type Row = {
+  registryEvidence?: ReturnType<typeof kcarRegistryEvidence>;
   specificationGroups?: import("./source-specifications").SourceSpecificationSnapshot["groups"];
   id: string;
   url: string;
@@ -172,10 +174,25 @@ function retryDelay(response: Response, fallback: number) {
   return fallback;
 }
 
+let requestStartQueue: Promise<unknown> = Promise.resolve();
+let lastRequestStart = 0;
+let sourceBlocked: Error | undefined;
+async function paceRequest() {
+  const task = requestStartQueue.then(async () => {
+    if (sourceBlocked) throw sourceBlocked;
+    const rpm = Math.max(1, Math.min(120, Number(process.env.CATALOG_KCAR_REQUEST_RPM) || 60));
+    await sleep(Math.max(0, lastRequestStart + Math.ceil(60_000 / rpm) - Date.now()));
+    if (sourceBlocked) throw sourceBlocked;
+    lastRequestStart = Date.now();
+  });
+  requestStartQueue = task.catch(() => undefined);
+  return task;
+}
 async function requestJson(url: string, init: RequestInit = {}) {
   const attempts = Math.max(1, Math.min(6, Number(process.env.CATALOG_SOURCE_RETRY_ATTEMPTS || 5)));
   let lastError: unknown = null;
   for (let attempt = 0; attempt < attempts; attempt++) {
+    await paceRequest();
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
     try {
@@ -188,13 +205,18 @@ async function requestJson(url: string, init: RequestInit = {}) {
       const text = await response.text();
       let json: any = null;
       try { json = JSON.parse(text); } catch {}
-      const retryable = response.status === 403 || response.status === 429 || [500, 502, 503, 504].includes(response.status);
+      if ([401,403,429].includes(response.status) || /has_been_cr_blocked|captcha|access denied/i.test(text.slice(0,2000)) && !json) {
+        sourceBlocked = Object.assign(new Error(`kcar_source_blocked_http_${response.status}`), {blocked:true});
+        throw sourceBlocked;
+      }
+      const retryable = [500, 502, 503, 504].includes(response.status);
       if (retryable && attempt < attempts - 1) {
         await sleep(retryDelay(response, Math.min(30_000, 1_500 * (2 ** attempt))));
         continue;
       }
       return { response, json };
     } catch (error) {
+      if ((error as any)?.blocked) throw error;
       lastError = error;
       if (attempt === attempts - 1) throw error;
       await sleep(Math.min(30_000, 1_500 * (2 ** attempt)));
@@ -209,7 +231,7 @@ function detailUrl(carCd: string) {
   return `${WEB_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}`;
 }
 
-async function fetchExactDetailData(carCd: string) {
+async function fetchExactDetailData(carCd: string, withRegistry = true) {
   const url = new URL(`${API_BASE}/bc/car-info-detail-of-ng`);
   url.searchParams.set("i_sCarCd", carCd);
   url.searchParams.set("i_sPassYn", "N");
@@ -223,6 +245,14 @@ async function fetchExactDetailData(carCd: string) {
     // an identity failure so maintenance can retire only confirmed sold offers.
     if (message.includes("판매완료")) throw new Error(`kcar_exact_detail_sold_${carCd}`);
     throw new Error(`kcar_exact_detail_identity_${carCd}`);
+  }
+  // Public secondary technical tab discovered in the source's own UI bundle.
+  // An unavailable optional table cannot turn an active listing into a sale.
+  if (withRegistry) try {
+    const registry = await requestJson(`${API_BASE}/bc/detail/gov/bas?carCd=${encodeURIComponent(carCd)}`);
+    if (registry.response.ok) data.registryTechnical = registry.json?.data?.data ?? registry.json?.data;
+  } catch (error) {
+    if ((error as any)?.blocked) throw error;
   }
   return data;
 }
@@ -297,8 +327,11 @@ export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, on
     engineDisplacement: rvo.engdispmnt,
     horsepower: rvo.hrspow,
   });
+  const registryEvidence = kcarRegistryEvidence(rvo, data.registryTechnical);
+  if (registryEvidence.powerHp) evidence.powerHp = {status:"exact",value:registryEvidence.powerHp,rawValues:[String(rvo.hrspow),String(data.registryTechnical.basInfo.motoHghstOutpVal)]};
+  if (registryEvidence.productionDate) evidence.year = {status:"exact",value:Number(registryEvidence.productionDate.slice(0,4)),rawValues:[registryEvidence.productionDate]};
   const year = evidence.year.status === "exact" ? Number(evidence.year.value) : 0;
-  const productionDate = clean(rvo.mfgDt) || undefined;
+  const productionDate = registryEvidence.productionDate || clean(rvo.mfgDt) || undefined;
   const mileageKm = positiveInt(rvo.milg);
   const engineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
   const powerHp = evidence.powerHp.status === "exact" ? evidence.powerHp.value : undefined;
@@ -356,6 +389,7 @@ export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, on
       ...namedTechnicalGroups(data.specifications || data.specification, "Технические характеристики"),
     ],
     semanticEvidence: evidence,
+    registryEvidence,
   };
 }
 
@@ -408,7 +442,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
         const carCd = clean(meta.carCd);
         if (!carCd) { reject(carCd, "missing_list_identity"); return null; }
-        const data = await fetchExactDetailData(carCd).catch(() => null);
+        const data = await fetchExactDetailData(carCd).catch(error => { if (error?.blocked) throw error; return null; });
         if (!data) { failedDetailRows += 1; reject(carCd, "detail_request_failed"); }
         return data ? parseKcarExactDetail(meta, data, reason => reject(carCd, reason, data)) : null;
       }));
@@ -468,7 +502,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       powerHp: row.powerHp,
       powerKw: row.powerKw,
       powerDataConfidence: "source_exact",
-      powerDataSource: row.powerKw ? "kcar_exact_detail_rvo_hrspow_kw" : "kcar_exact_detail_rvo_hrspow_hp",
+      powerDataSource: row.registryEvidence?.powerHp ? "kcar_bound_registry_and_detail_hp" : row.powerKw ? "kcar_exact_detail_rvo_hrspow_kw" : "kcar_exact_detail_rvo_hrspow_hp",
       fuel: row.fuel,
       powertrainKind: powertrainKindForFuel(row.fuel),
       transmission: row.transmission,
@@ -495,13 +529,15 @@ class KCarExactSource implements CatalogSourceAdapter {
         sourceSpecifications: row.specificationGroups?.length ? {version:1,sourceId:this.sourceId,sourceOfferId:row.id,specificationId:row.id,sourceUrl:row.url,capturedAt:now,groups:row.specificationGroups} : undefined,
         vin: row.vin,
         semanticEvidence: {
-          year: { source: "kcar_exact_detail_rvo_calendar_year", ...row.semanticEvidence.year },
+          ...(row.registryEvidence?.productionDate ? {productionDate: {source:"kcar_registry_production_date",status:"exact",value:row.registryEvidence.productionDate}} : {}),
+          year: { source: row.registryEvidence?.productionDate ? "kcar_registry_production_date" : "kcar_exact_detail_rvo_calendar_year", ...row.semanticEvidence.year },
           fuel: { source: "kcar_exact_detail_rvo", ...row.semanticEvidence.fuel },
           engineCc: { source: "kcar_exact_detail_rvo_engdispmnt", ...row.semanticEvidence.engineCc },
-          powerHp: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerHp },
+          powerHp: { source: row.registryEvidence?.powerHp ? "kcar_bound_registry_and_detail_hp" : "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerHp },
           powerKw: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerKw },
         },
         raw: {
+          registryEvidence: row.registryEvidence,
           sourceModelYear: row.semanticEvidence.modelYear?.value,
           sourceCalendarDate: row.productionDate,
           sourceExactFields: fields,
@@ -542,7 +578,7 @@ class KCarExactSource implements CatalogSourceAdapter {
     if (previousMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE || hasCredentialScans) {
       const carCd = clean(offer.sourceOfferId);
       if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
-      const data = await fetchExactDetailData(carCd);
+      const data = await fetchExactDetailData(carCd, false);
       const rebuilt = exactVehicleGallery(data, carCd);
       const detailRow = parseKcarExactDetail({carCd},data);
       if (detailRow?.specificationGroups) captureSourceTable(offer,detailRow.specificationGroups);
