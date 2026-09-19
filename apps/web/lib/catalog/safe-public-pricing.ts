@@ -1,3 +1,4 @@
+import { withoutRetiredExportCharge } from "./retired-export-charge";
 import { catalogPowerSanity } from './power-sanity';
 import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from './specification-evidence-audit';
 import { combustionPowerMismatch } from './combustion-power-consistency';
@@ -5,6 +6,7 @@ import { auditedQuoteRejections } from './audited-quote-quarantine';
 
 /** Reuse only a bound, dated CBR conversion; never substitute a delivered quote. */
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
+  input = withoutRetiredExportCharge(input);
   const sanity = catalogPowerSanity(input);
   // Compact projections omit raw evidence. Classify complete records before
   // projection, and do not mistake absent projection metadata for a conflict.

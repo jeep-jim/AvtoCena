@@ -1,3 +1,4 @@
+import {activeMarketCosts} from "../packages/engine/src/calculation/market-cost-policy.ts";
 import assert from 'node:assert/strict';
 import {mutateDataJson, readDataJson} from '../apps/web/lib/data.ts';
 import {appendChangeLog, selectActiveMarketVersion} from '../apps/web/lib/business-settings.ts';
@@ -6,6 +7,12 @@ import {migrateMarketCosts, MARKET_COSTS_MIGRATION} from '../apps/web/lib/market
 // Only CRM settings and their change log. No catalog/manifest/source access.
 const at = new Date().toISOString();
 let changes = [];
+// Retire the obsolete setting from every saved/scheduled CRM version, idempotently.
+const settingsBeforeRetirement = await readDataJson('markets/markets.json', []);
+if (settingsBeforeRetirement.some(m => (m.versions || []).some(v => 'exportExpensesRub' in v))) {
+  await mutateDataJson('markets/markets.json', [], markets => markets.map(m => ({...m, versions:(m.versions || []).map(activeMarketCosts)})));
+  console.log(JSON.stringify({retiredSetting:'exportExpensesRub',markets:settingsBeforeRetirement.map(m=>m.id)}));
+}
 const existing = await readDataJson('markets/markets.json', []);
 if (migrateMarketCosts(existing, at).changed.length) await mutateDataJson('markets/markets.json', [], markets => {
   assert.ok(Array.isArray(markets) && markets.length, 'Existing CRM settings required');

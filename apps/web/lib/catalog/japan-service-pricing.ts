@@ -10,8 +10,9 @@ export function japanServiceCostBasis(snapshot: any) {
   const commissionRub = sum(['topavto-commission']);
   if (![laboratoryRub,commissionRub].every(n => Number.isFinite(n) && n >= 0)) return undefined;
   const exchangeReserveRub = sum(["exchange-reserve"]);
+  const retiredExportRub = sum(["export"]);
   if (!Number.isFinite(exchangeReserveRub) || exchangeReserveRub < 0) return undefined;
-  return {laboratoryRub,commissionRub,exchangeReserveRub};
+  return {laboratoryRub,commissionRub,exchangeReserveRub,retiredExportRub};
 }
 
 /** Update only the owner-authorized service costs. Auction price, historical
@@ -25,15 +26,15 @@ export function applyJapanServiceCosts<T extends Partial<VehicleOffer>>(offer:T,
   const laboratoryRub = Number(config.laboratoryRub || 0) + Number(config.sbktsRub || 0) + Number(config.eptsRub || 0);
   const commissionRub = Number(config.topAvtoCommissionRub);
   if (![laboratoryRub,commissionRub].every(n => Number.isFinite(n) && n >= 0)) return frozen as T;
-  const totalRub = Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub - Number(basis.exchangeReserveRub || 0);
+  const totalRub = Number(offer.totalRub) + laboratoryRub - basis.laboratoryRub + commissionRub - basis.commissionRub - Number(basis.exchangeReserveRub || 0) - Number(basis.retiredExportRub || 0);
   if (!(totalRub > 0)) return frozen as T;
-  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).filter((line:any) => line.id !== "exchange-reserve").map((line:any) =>
+  const breakdown = Array.isArray(snapshot?.breakdown) ? customerPriceBreakdown(snapshot.breakdown, config.securityDepositRub).filter((line:any) => line.id !== "exchange-reserve" && line.id !== "export").map((line:any) =>
     line.id === 'laboratory' ? {...line,amountRub:laboratoryRub,includedServices:['laboratory','sbkts','epts']} :
     line.id === 'topavto-commission' ? {...line,amountRub:commissionRub} : line) : undefined;
   return {...frozen,totalRub,
     ...(Number((offer as any).cardProjectionVersion) >= 3 ? {publicVisibleRub:totalRub} : {}),
     calculationSnapshot:{...snapshot,...(breakdown ? {breakdown} : {}),
-      serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub:0},serviceBundleVersion:config.serviceBundleVersion,
+      serviceCostBasis:{laboratoryRub,commissionRub,exchangeReserveRub:0,retiredExportRub:0},serviceBundleVersion:config.serviceBundleVersion,
       businessConfigVersion:config.id,
       marketConfig:{...snapshot?.marketConfig,exchangeRateReservePercent:0,laboratoryRub,sbktsRub:0,eptsRub:0,
         topAvtoCommissionRub:commissionRub,securityDepositRub:config.securityDepositRub,

@@ -5,7 +5,6 @@ import { MarketPaymentFields } from "./MarketPaymentFields";
 
 const calculationFields = [
   ["topAvtoCommissionRub", "Комиссия компании, ₽"],
-  ["exportExpensesRub", "Все услуги в стране покупки, включая предоплаченные, ₽"],
   ["logisticsRub", "Международная логистика, ₽"],
   ["brokerRub", "Брокер, ₽"],
   ["svhRub", "СВХ, ₽"],

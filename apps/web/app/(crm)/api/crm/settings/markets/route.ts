@@ -43,7 +43,6 @@ export async function POST(request: Request) {
       securityDepositRub,
       contractInitialPaymentRub,
       exchangeRateReservePercent: 0,
-      exportExpensesRub: nullableNumber(form.get("exportExpensesRub")),
       logisticsRub: nullableNumber(form.get("logisticsRub")),
       brokerRub: nullableNumber(form.get("brokerRub")),
       svhRub: nullableNumber(form.get("svhRub")),

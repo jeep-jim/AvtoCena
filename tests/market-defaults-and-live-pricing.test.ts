@@ -8,7 +8,7 @@ const markets = JSON.parse(fs.readFileSync(new URL("../data/markets/markets.json
 const expectedMarkets = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const requiredAmounts = [
   "securityDepositRub", "topAvtoCommissionRub", "contractInitialPaymentRub",
-  "exportExpensesRub", "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",
+  "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",
   "sbktsRub", "eptsRub", "rfDeliveryRub", "otherFixedExpensesRub", "exchangeRateReservePercent",
 ];
 
@@ -92,9 +92,9 @@ test("visible offer is repriced from current CRM values without changing customs
   const config = markets.find((market: any) => market.id === "china").versions[0];
   const result = repriceOfferWithBusinessConfig(offer, config);
 
-  assert.equal(result.totalRub, 2_195_000);
+  assert.equal(result.totalRub, 2_115_000);
   assert.equal(result.previousTotalRub, 1_900_000);
-  assert.equal(result.priceDeltaRub, 295_000);
+  assert.equal(result.priceDeltaRub, 215_000);
   assert.equal(result.calculationSnapshot.customs.totalCustomsRub, 500_000);
   assert.equal(result.calculationSnapshot.businessConfigVersion, "market_china_v2");
   assert.equal(result.calculationSnapshot.provisionalMarketConfig, true);

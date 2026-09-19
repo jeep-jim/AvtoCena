@@ -1,3 +1,4 @@
+import { activeMarketCosts } from "../../../packages/engine/src/calculation/market-cost-policy";
 import { getMarketsSettings, selectActiveMarketVersion } from "./business-settings";
 import { CATALOG_MARKET_DEFAULTS } from "./catalog/estimated-market-config";
 import { applyMarketLogisticsUsdRate, currentUsdLogisticsRate, withCurrentMarketLogisticsUsd } from "./catalog/market-logistics";
@@ -48,7 +49,7 @@ function configuredValue(current: any, field: string, fallback: number) {
 function hasCompleteActiveProfile(current: any) {
   if (!current || current.status !== "active" || current.active === false) return false;
   return [
-    "securityDepositRub", "topAvtoCommissionRub", "exportExpensesRub", "logisticsRub",
+    "securityDepositRub", "topAvtoCommissionRub", "logisticsRub",
     "brokerRub", "svhRub", "laboratoryRub", "sbktsRub", "eptsRub", "rfDeliveryRub",
     "otherFixedExpensesRub",
   ].every((field) => present(current[field]));
@@ -62,7 +63,8 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
   const provisional = !complete || Boolean(current?.provisional);
 
   return {
-    ...(current || {}),
+    ...activeMarketCosts(current || {}),
+    name: current?.name,
     serviceBundleVersion: current?.serviceBundleVersion || ([current?.laboratoryRub,current?.sbktsRub,current?.eptsRub].every(value => value == null) ? 1 : undefined),
     id: complete ? current.id : `market_${marketId}_system_average_v2`,
     version: complete ? Number(current.version || 1) : Math.max(2, Number(current?.version || 0) + 1),
@@ -74,7 +76,6 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
     topAvtoCommissionRub: commission,
     contractInitialPaymentRub: deposit + commission,
     exchangeRateReservePercent: 0,
-    exportExpensesRub: configuredValue(current, "exportExpensesRub", defaults.exportExpensesRub),
     logisticsRub: configuredValue(current, "logisticsRub", defaults.logisticsRub),
     brokerRub: configuredValue(current, "brokerRub", defaults.brokerRub),
     svhRub: configuredValue(current, "svhRub", defaults.svhRub),
