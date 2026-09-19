@@ -32,16 +32,18 @@ try{for(const width of [390,1440]){
   assert.deepEqual(after.slice(0,24),before);assert.equal(new Set(after).size,48);
   const target=cards.nth(28);await target.scrollIntoViewIfNeeded();
   const scrollY=await page.evaluate(()=>window.scrollY);
-  await target.click();await page.waitForURL(/\/cars\/offer\//,{timeout:60000});
+  await page.evaluate(()=>document.addEventListener('click',e=>{if(e.target.closest('a[href*="/cars/offer/"]')){window.__catalogClickY=window.scrollY;console.log('CATALOG_CLICK_Y',window.scrollY)}},{capture:true}));
+  await target.click();console.log('BEFORE_NAV',JSON.stringify({width,before:scrollY,clicked:await page.evaluate(()=>window.__catalogClickY)}));await page.waitForURL(/\/cars\/offer\//,{timeout:60000});
   await page.locator('main.ac-offer-page h1').waitFor({timeout:60000});
   const backStart=Date.now();await page.goBack({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-batch] article').length===48,null,{timeout:30000});
+  console.log('AFTER_BACK',JSON.stringify(await page.evaluate(y=>({expected:y,actual:window.scrollY,height:document.documentElement.scrollHeight}),scrollY)));
   await page.waitForFunction(y=>Math.abs(window.scrollY-y)<100,scrollY,{timeout:10000});
   assert.deepEqual(await cards.evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),after);
   assert.deepEqual(errors,[]);
   results.push({width,initialMs,appendMs,backMs:Date.now()-backStart,cards:48,scrollY,errors});
   await page.screenshot({path:`artifacts/catalog-live/catalog-${width}.png`});
- }catch(e){console.log('FAIL',JSON.stringify({width,errors,error:String(e)}));await page.screenshot({path:`artifacts/catalog-live/failure-${width}.png`});throw e;}finally{await context.close();}
+ }catch(e){console.log('FAIL',JSON.stringify({width,errors,error:String(e),dom:await page.evaluate(()=>({scrollY:window.scrollY,height:document.documentElement.scrollHeight,url:location.href,cards:document.querySelectorAll('[data-catalog-batch] article').length}))}));await page.screenshot({path:`artifacts/catalog-live/failure-${width}.png`});throw e;}finally{await context.close();}
 }
 console.log('LIVE_JOURNEY',JSON.stringify(results));
 }finally{fs.writeFileSync('artifacts/catalog-live/results.json',JSON.stringify(results,null,2));await browser.close();}

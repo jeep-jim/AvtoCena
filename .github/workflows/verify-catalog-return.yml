@@ -1,0 +1,19 @@
+name: Verify published catalog return
+on:
+  push:
+    branches: [test/catalog-return-verification]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/catalog-live --no-package-lock --ignore-scripts playwright@1.55.0
+      - env:
+          PLAYWRIGHT_MODULE: /tmp/catalog-live/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-live-journey.mjs
