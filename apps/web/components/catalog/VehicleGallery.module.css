@@ -2,8 +2,8 @@
 .center { display: flex; min-width: 0; max-width: 100%; flex-direction: column; align-items: center; }
 .side { display: none; }
 .mobileHelp { width: 100%; margin-top: 12px; color: var(--ac-text); background: var(--ac-surface); border-radius: 16px; }
-.mobileHelp summary { cursor: pointer; padding: 14px 16px; font-size: 14px; font-weight: 800; }
-.mobileHelp > div { max-height: 35dvh; overflow-y: auto; overscroll-behavior: contain; }
+.mobileHelp { cursor: pointer; padding: 14px 16px; font-size: 14px; font-weight: 800; }
+
 .sheetLayout { overflow-y: auto; overscroll-behavior: contain; padding-top: 44px; }
 .sheetLayout .center { width: 100%; }
 .sheetLayout img[data-fullscreen-image] { max-height: 58dvh; }
@@ -13,3 +13,12 @@
  .mobileHelp { display: none; }
  .sheetLayout img[data-fullscreen-image] { max-height: 68dvh; }
 }
+
+.helpOverlay { position: fixed; inset: 0; display: flex; align-items: flex-end; background: rgb(0 0 0 / .65); backdrop-filter: blur(8px); z-index: 1; }
+.helpPanel { display: flex; flex-direction: column; width: 100%; height: 92dvh; overflow: hidden; border-radius: 30px 30px 0 0; background: var(--ac-surface); color: var(--ac-text); }
+.helpHeader { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--ac-border); }
+.helpHeader h2 { font-size: 18px; font-weight: 900; }
+.helpHeader button { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: var(--ac-surface-2); color: var(--ac-text); font-size: 28px; }
+.helpBody { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 4px calc(16px + env(safe-area-inset-bottom)); }
+.helpBody section { padding: 16px; }
+.helpBody dl { font-size: 14px; line-height: 1.5; }
