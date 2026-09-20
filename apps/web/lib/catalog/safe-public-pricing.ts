@@ -1,3 +1,4 @@
+import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 import { withoutRetiredExportCharge } from "./retired-export-charge";
 import { catalogPowerSanity } from './power-sanity';
 import { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } from './specification-evidence-audit';
@@ -7,6 +8,8 @@ import { auditedQuoteRejections } from './audited-quote-quarantine';
 /** Reuse only a bound, dated CBR conversion; never substitute a delivered quote. */
 export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   input = withoutRetiredExportCharge(input);
+  const namedKind = namedElectrifiedPowertrainKind(input);
+  const powertrainMismatch = Boolean(namedKind && input.powertrainKind === 'combustion');
   const sanity = catalogPowerSanity(input);
   // Compact projections omit raw evidence. Classify complete records before
   // projection, and do not mistake absent projection metadata for a conflict.
@@ -14,7 +17,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     ['ambiguous', 'conflict'].includes(classifySpecificationEvidence(input, field).state)) : []);
   for (const field of auditedQuoteRejections(input)) rejected.add(field);
   const powerRejected = sanity.suspicious || rejected.has('powerHp') || rejected.has('certifiedPower') || combustionPowerMismatch(input);
-  if (!powerRejected && !rejected.size) return input;
+  if (!powerRejected && !rejected.size && !powertrainMismatch) return input;
   const rate = input.calculationSnapshot?.currencyRate;
   const price = Number(input.sourcePrice);
   const effectiveRate = Number(rate?.effectiveRate);
@@ -36,6 +39,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
       powerDataConfidence: undefined} : {}),
     ...(rejected.has('engineCc') ? {engineCc: undefined} : {}),
     ...(rejected.has('fuelPowertrain') ? {fuel: undefined, powertrainKind: undefined} : {}),
+    ...(powertrainMismatch ? {fuel:namedKind === 'electric' ? 'electric' : 'hybrid',powertrainKind:namedKind,icePowerKw:undefined,utilizationPowerKw:undefined,power30MinKw:undefined,power30MinKwByMotor:undefined} : {}),
     totalRub: null, previousTotalRub: null, priceDeltaRub: null,
     publicVisibleRub: undefined, publicSpecificationVerified: false,
     modificationSelection: undefined, recoveryQualification: undefined,
