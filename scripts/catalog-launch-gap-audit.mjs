@@ -7,10 +7,19 @@ import {offerSpecificationGroups} from '../apps/web/lib/catalog/offer-specificat
 import {parseProAuctionsDetailEvidence} from '../apps/web/lib/catalog/proauctions-detail-evidence.ts';
 import {restoreProAuctionsState,proAuctionsStateKey} from './lib/proauctions-durable-state.mjs';
 const storage=getJsonStorage(),report={checkedAt:new Date().toISOString(),korea:{},japan:{},errors:[]};
-const corpus=new Map();
+const corpus=new Map(), variants=new Map(), powerFields=new Map();
+function scanPower(value,path="",depth=0){
+ if(!value||typeof value!=="object"||depth>12)return;
+ for(const [key,child] of Object.entries(value)){const next=path?`${path}.${key}`:key;if(/power|horse|마력|출력|jato|engineCode|원동기/i.test(key)&&["number","string"].includes(typeof child)){const r=powerFields.get(next)||{path:next,count:0,values:[]};r.count++;if(r.values.length<8&&!r.values.includes(child))r.values.push(child);powerFields.set(next,r);}else if(typeof child==="object")scanPower(child,next,depth+1);}
+}
 const korea=await readMarketOffers('korea');
 report.korea.rows=korea.length;report.korea.sources={};
 for(const offer of korea){
+ if(offer.sourceId==="encar_direct"){
+ const raw=offer.operational?.raw,category=raw?.detail?.category||{};
+ const row={make:offer.make,model:offer.model,trim:offer.trim,year:offer.year,engineCc:offer.engineCc,fuel:offer.fuel,powertrainKind:offer.powertrainKind,category,engineCode:offer.operational?.inspection?.engineCode};
+ const key=JSON.stringify(row),entry=variants.get(key)||{...row,count:0};entry.count++;variants.set(key,entry);scanPower(raw);
+ }
  const source=report.korea.sources[offer.sourceId] ||= {rows:0,withPower:0,withRegistryDate:0,calculated:0};
  source.rows++;source.withPower+=Number(offer.powerHp>0);source.withRegistryDate+=Number(offer.operational?.semanticEvidence?.productionDate?.source==='kcar_registry_production_date');source.calculated+=Number(offer.totalRub>0);
  for(const group of offerSpecificationGroups(offer))for(const item of [{name:'group',value:group.name},...group.items]){
@@ -22,6 +31,7 @@ for(const offer of korea){
 }
 await fs.writeFile('korean-untranslated-corpus.json',JSON.stringify([...corpus.values()].sort((a,b)=>b.count-a.count),null,2));
 report.korea.untranslatedUnique=corpus.size;
+await fs.writeFile('encar-variant-audit.json',JSON.stringify({variants:[...variants.values()].sort((a,b)=>b.count-a.count),powerFields:[...powerFields.values()]},null,2));
 const japan=await readMarketOffers('japan'),root='gap-audit-japan';
 const meta=await storage.readJson(proAuctionsStateKey,null);
 if(!meta)throw Error('japan_archive_missing');
