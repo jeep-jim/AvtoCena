@@ -4,7 +4,7 @@ on:
     - cron: '30 16 * * *'
   workflow_dispatch:
   push:
-    branches: [fix/registry-retention-20260919, main]
+    branches: [fix/cloud-storage-budget-20260920, fix/registry-retention-20260919, main]
     paths: [.github/workflows/container-registry-cleanup.yml, scripts/cleanup-container-registry.mjs, scripts/lib/registry-retention.mjs, .github/market-runs/registry-cleanup.json]
   workflow_run:
     workflows: [Deploy to Yandex Cloud]
