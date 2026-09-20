@@ -1,3 +1,4 @@
+import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import type { Metadata } from "next";
@@ -83,16 +84,19 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
   }
 
+  const saved = await getSavedOfferCalculation(storedOffer!);
   const presented = presentCatalogOffer(offer);
   const make = clean(presented.makeLabel);
   const model = clean(presented.modelLabel);
   const displayTitle = clean(presented.title) || [make, model].filter(Boolean).join(" ");
-  const year = Number(offer.year || 0);
+  const year = Number(saved?.draft.year || offer.year || 0);
   const title = `${displayTitle}${year ? ` ${year}` : ""} — цена автомобиля под ключ`;
-  const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
+  const totalRub = saved?.calculation.totalRub || (offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer));
   const market = catalogMarketLabel(offer.market);
   const priceText = totalRub > 0 ? `${money(totalRub)} ₽` : "рассчитывается";
-  const description = `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Полный расчёт под ключ включает автомобиль, логистику, таможенные платежи, оформление и доставку по РФ.`;
+  const description = saved
+    ? `${displayTitle}, ${year} г. — ${priceText}. Сохранённый расчёт${saved.draft.deliveryCity ? ` с доставкой: ${saved.draft.deliveryCity}` : "; доставка по РФ не включена"}. ${[saved.draft.engineCc ? `${saved.draft.engineCc} см³` : "",saved.draft.powerHp ? `${saved.draft.powerHp} л.с.` : ""].filter(Boolean).join(", ")}.`
+    : `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Стоимость доставки и состав расчёта смотрите в карточке.`;
   const canonical = `/cars/offer/${encodeURIComponent(id)}`;
   const images = rankedCatalogImageUrls(offer).map(absoluteAvtocenaUrl).filter(Boolean).slice(0, 12);
 
@@ -116,7 +120,12 @@ export default async function OfferLayout({ children, params }: { children: Reac
   const { id } = await params;
   const storedOffer = await getOfferForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
+  const saved = storedOffer ? await getSavedOfferCalculation(storedOffer) : null;
   const structuredData = offer ? offerStructuredData(id, offer) : null;
+  if (saved && structuredData) {
+    structuredData.vehicleModelDate = saved.draft.year;
+    structuredData.offers = {"@type":"Offer",url:catalogOfferUrl(id),price:Math.round(saved.calculation.totalRub),priceCurrency:"RUB",availability:"https://schema.org/InStock",seller:{"@type":"Organization",name:"АвтоЦена",url:"https://avtocena.com"}};
+  }
 
   return <>
     {structuredData ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(structuredData) }} /> : null}

@@ -3,7 +3,10 @@ import {useState} from "react";
 export function ShareLinkButton({className = ""}: {className?: string}) {
   const [status,setStatus]=useState("");
   async function share() {
-    const url = window.location.origin + window.location.pathname;
+    const target = new URL(window.location.pathname, window.location.origin);
+    const savedVersion=document.querySelector<HTMLElement>("[data-offer-saved-version]")?.dataset.offerSavedVersion;
+    if(savedVersion)target.searchParams.set("calculation",savedVersion);
+    const url=target.toString();
     if(navigator.share) {try {await navigator.share({title:document.title,url});setStatus("");return;} catch(error) {if((error as Error).name === "AbortError") return;}}
     try {await navigator.clipboard.writeText(url);setStatus("Ссылка скопирована");}
     catch {setStatus("Скопируйте адрес из строки браузера");}

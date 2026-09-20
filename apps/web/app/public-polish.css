@@ -425,3 +425,19 @@ html[data-theme="light"] .ac-vehicle-research-link {
   .ac-catalog-card { border-radius: 1.15rem !important; }
   section[data-demo-enabled] > div:first-child .avto-button::after { font-size: 13px; }
 }
+
+html body .ac-attached-editor .ac-research-compact { background: var(--ac-surface-3); }
+
+html body input.ac-unified-checkbox { appearance: none; width: 24px; height: 24px; flex-shrink: 0; border-radius: 8px; border: 1px solid rgba(103,113,130,.55); background: var(--ac-surface-3); cursor: pointer; display: grid; place-content: center; }
+html body input.ac-unified-checkbox:checked { background: #ff353d; border-color: #ff353d; }
+html body input.ac-unified-checkbox:checked::after { content: "✓"; color: #fff; font-size: 16px; font-weight: 900; }
+html body input.ac-unified-checkbox:focus-visible { outline: 2px solid var(--ac-text); outline-offset: 3px; }
+.ac-pagination { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; }
+.ac-pagination a, .ac-pagination > span { display:flex; align-items:center; justify-content:center; flex:0 0 auto; min-width:36px; height:40px; padding:0 8px; border-radius:8px; font-size:14px; font-weight:800; }
+html body .ac-pagination a { background:var(--ac-surface-2); color:var(--ac-text); border:1px solid var(--ac-border); }
+html body .ac-pagination a[aria-current="page"] { background:#94a3b8; color:#101827; border-color:#94a3b8; }
+html[data-theme="light"] body .ac-pagination a[aria-current="page"] { background:#334155; color:#fff; border-color:#334155; }
+.ac-pagination a:hover { filter:brightness(1.15); }
+.ac-pagination [aria-disabled="true"] { opacity:.35; }
+.ac-pagination .ac-page-extra { display:none; }
+@media(min-width:768px) { .ac-pagination .ac-page-extra { display:flex; } }

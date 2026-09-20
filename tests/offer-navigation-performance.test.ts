@@ -169,7 +169,7 @@ test("offer actions render in stable page slots without hydration portals", () =
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
   assert.match(page, /if \(!storedOffer\) return <UnavailableOffer/);
-  assert.match(page, /if \(!visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
+  assert.match(page, /if \(!savedCalculation && !visibleRub && !selectionRequired && !sellerPricing\) return <UnavailableOffer/);
   assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);
