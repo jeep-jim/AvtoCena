@@ -1,5 +1,7 @@
 /* Mobile catalog sheet only. Keep offer editors and desktop filters unchanged. */
 @media (max-width: 1023px) {
+  /* City/cookie notices must not cover controls in the modal filter sheet. */
+  body:has(.ac-mobile-filter-sheet) .ac-notice-stack { visibility: hidden; }
   html body .ac-mobile-filter-sheet { --ac-mobile-menu-gap: 10px; }
 
   /* A selected grade keeps its badge color but uses the same 46px geometry as other controls. */
