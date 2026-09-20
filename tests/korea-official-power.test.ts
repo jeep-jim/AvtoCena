@@ -18,6 +18,8 @@ test('official engine-code consensus supplies Avante power with record-level pro
  assert.equal(result.powerHp,123);assert.ok(Math.abs(result.powerKw-90.46634625)<0.000001);
  assert.ok(result.operational.officialPowerEvidence.recordIds.length>0);
  assert.equal(JSON.stringify(input),before);
+ const compact={...result,powerKw:Number(result.powerKw.toFixed(2))};
+ assert.equal(matchKoreaOfficialPower(compact)?.powerHp,123,'a rounded public projection must not override the exact stored conversion evidence');
 });
 test('same engine family with conflicting government ratings is not guessed',()=>{
  const input=offer();input.make='Kia';input.engineCc=998;input.operational.inspection.engineCode='G3LA';
