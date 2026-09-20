@@ -1,6 +1,6 @@
 const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts");
 const { readCatalogFacets, searchOffers, readCurrentCatalogProjectionSnapshot } = await import("../apps/web/lib/catalog/storage.ts");
-const { CATALOG_OVERVIEW_PATH, buildCatalogOverviewPayload } = await import("../apps/web/lib/catalog/overview.ts");
+const { CATALOG_OVERVIEW_PATH, buildCatalogOverviewPayload, catalogOverviewGenerationPath } = await import("../apps/web/lib/catalog/overview.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const candidatesPerMarket = Math.min(48, Math.max(6, Number(process.env.CATALOG_OVERVIEW_CANDIDATES_PER_MARKET || 24)));
@@ -53,6 +53,7 @@ for (const [market, result] of marketEntries) {
 }
 
 const payload = buildCatalogOverviewPayload(generationBefore, facets, markets);
+await getJsonStorage().writeJson(catalogOverviewGenerationPath(generationBefore), payload);
 await getJsonStorage().writeJson(CATALOG_OVERVIEW_PATH, payload);
 
 const generationAfterWrite = await readManifestGeneration();

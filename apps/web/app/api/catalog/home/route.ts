@@ -6,6 +6,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET() {
+  const started = performance.now();
   try {
     const result = await readHomeCatalogSnapshot(6);
     let rows = [...(result.items || [])] as any[];
@@ -30,9 +31,11 @@ export async function GET() {
         rows.push(row as any);
       }
     }
+    const readMs = performance.now() - started;
     const items = await applyActiveBusinessPricingBatch(rows);
+    const pricingMs = performance.now() - started - readMs;
     return NextResponse.json({ ...result, items }, {
-      headers: { "Cache-Control": "no-store, max-age=0" },
+      headers: { "Cache-Control": "no-store, max-age=0", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` },
     });
   } catch (error) {
     console.error("catalog_home_api_failed", error);
