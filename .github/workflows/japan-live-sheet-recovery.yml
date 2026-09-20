@@ -1,0 +1,60 @@
+name: Recover missing Japan auction sheets from live source
+on:
+  workflow_dispatch:
+  push:
+    branches: [fix/japan-live-sheets-20260920, main]
+    paths: [.github/workflows/japan-live-sheet-recovery.yml, .github/market-runs/japan-live-sheets.json]
+permissions:
+  contents: read
+concurrency:
+  group: catalog-six-market-quality-rebuild
+  cancel-in-progress: false
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      JAPAN_SHEET_DURABLE: ${{ github.ref == 'refs/heads/main' && '1' || '0' }}
+      JAPAN_SHEET_LIMIT: ${{ github.ref == 'refs/heads/main' && '0' || '20' }}
+      CATALOG_READ_CONCURRENCY: '4'
+      CATALOG_MAINTENANCE_IO_CONCURRENCY: '4'
+      CATALOG_PUBLICATION_PROGRESS: '1'
+      NODE_OPTIONS: --max-old-space-size=6144
+      JSON_STORAGE_DRIVER: object
+      CATALOG_SOURCE_INVENTORY_MODE: '1'
+      CATALOG_SELLER_INVENTORY: '1'
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_INPUT_DIR: proauctions-detail-patches
+      CATALOG_REBUILD_MARKETS: japan
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
+      CATALOG_PUBLISH_TARGET_PER_MARKET: '100000'
+      CATALOG_PUBLISH_MAX_PER_MARKET: '100000'
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: node --test tests/proauctions-sheet-patch.test.mjs
+      - name: Recover missing sheets with bound identity and decoded images
+        run: node --import tsx scripts/recover-proauctions-live-sheets.mjs
+      - name: Check storage reserve
+        if: github.ref == 'refs/heads/main'
+        run: node --import tsx scripts/catalog-storage-preflight.mjs
+      - name: Append sheets while preserving all prices and every market
+        if: github.ref == 'refs/heads/main'
+        run: node --import tsx scripts/publish-proauctions-detail-patches.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-live-sheet-recovery
+          retention-days: 14
+          path: |
+            proauctions-detail-patches/
+            japan-detail-recovery-report.json
+            catalog-storage-preflight.json

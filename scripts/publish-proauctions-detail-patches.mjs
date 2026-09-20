@@ -17,10 +17,11 @@ const patches=new Map();for(const file of await fs.readdir(patchRoot))if(/^\d+\.
 const failedIds=new Set(summary.failed.map(row=>String(row.id)));
 if(summary.scanned!==patches.size+failedIds.size)throw Error('incomplete_archive_coverage');
 const lockPath='catalog/import-lock.json',operationId=`japan-detail-recovery-${randomUUID()}`;
-await mutateDataJson(lockPath,{lockedUntil:''},current=>{
+const lockDeadline=Date.now()+5400000;
+for(;;){try{await mutateDataJson(lockPath,{lockedUntil:''},current=>{
  if(Date.parse(current.lockedUntil||'')>Date.now())throw Error('publication_locked');
- return {operationId,operationType:'japan_detail_recovery',startedAt:new Date().toISOString(),lockedUntil:new Date(Date.now()+45*60000).toISOString()};
-});
+ return {operationId,operationType:'japan_detail_recovery',startedAt:new Date().toISOString(),lockedUntil:new Date(Date.now()+90*60000).toISOString()};
+});break;}catch(error){if(!String(error).includes('publication_locked')||Date.now()>lockDeadline)throw error;console.log('Waiting for the active catalog publisher');await new Promise(r=>setTimeout(r,10000));}}
 try{
  const previous=await readDataJson('catalog/manifest.json',null);if(!previous?.generationId)throw Error('manifest_missing');
  const all=[],preserved={};for(const market of PUBLIC_CATALOG_MARKETS){const rows=await readMarketOffers(market);if(rows.length!==previous.markets[market].count)throw Error(`incomplete_read:${market}`);all.push(...rows);if(market!=='japan')preserved[market]=rows;}
