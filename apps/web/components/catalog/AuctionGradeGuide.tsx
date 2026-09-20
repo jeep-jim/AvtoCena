@@ -23,7 +23,6 @@ export function AuctionGradeGuide({ grade, className }: { grade: string; classNa
   }, [open]);
   return <>
     <button ref={trigger} type="button" {...tap} onClick={() => setOpen(true)} aria-label={`Оценка ${grade}: расшифровка аукционных оценок`} aria-haspopup="dialog" aria-expanded={open} className="inline-flex min-h-11 cursor-pointer flex-col items-center justify-center text-center gap-1.5 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2">
-      <span className="text-xs font-semibold leading-4 text-[var(--ac-muted)]">Таблица</span>
       <span className={`${className} inline-flex min-h-7 items-center justify-center !rounded-xl !px-2.5 !py-1.5 text-xs`}>Оценка {grade}</span>
     </button>
     {open ? createPortal(<dialog ref={dialog} aria-labelledby={heading} onCancel={event => { event.preventDefault(); setOpen(false); }} className="ac-grade-guide fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-[var(--ac-text)] backdrop:bg-black/65 backdrop:backdrop-blur-md">

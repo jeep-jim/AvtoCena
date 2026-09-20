@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTapActivation } from "../catalog/useTapActivation";
 import { createPortal } from "react-dom";
 
 import { CITY_CHANGED_EVENT, readSelectedCity } from "../../lib/location/selected-city";
@@ -8,6 +9,7 @@ import type { CitySuggestion } from "../../lib/location/cities";
 
 type Props = {
   value: string;
+  syncStored?: boolean;
   triggerLabel?: string;
   onChange: (city: string) => void;
 };
@@ -28,7 +30,8 @@ function persistCity(city: string) {
   window.dispatchEvent(new Event(CITY_CHANGED_EVENT));
 }
 
-export function CitySelector({ value, onChange, triggerLabel }: Props) {
+export function CitySelector({ value, onChange, triggerLabel, syncStored = true }: Props) {
+  const tap = useTapActivation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<CitySuggestion[]>([]);
@@ -37,14 +40,16 @@ export function CitySelector({ value, onChange, triggerLabel }: Props) {
 
   useEffect(() => {
     setMounted(true);
+    if (!syncStored) return;
     const stored = readSelectedCity();
     if (stored !== value) onChange(stored);
   }, []);
   useEffect(() => {
+    if (!syncStored) return;
     const sync = () => onChange(readSelectedCity());
     window.addEventListener(CITY_CHANGED_EVENT, sync);
     return () => window.removeEventListener(CITY_CHANGED_EVENT, sync);
-  }, [onChange]);
+  }, [onChange, syncStored]);
 
   useEffect(() => {
     if (!open) return;
@@ -97,8 +102,8 @@ export function CitySelector({ value, onChange, triggerLabel }: Props) {
     <span className={triggerLabel ? "inline-flex" : "ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex"}>
       <button
         type="button"
+        {...tap}
         disabled={!mounted}
-        onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); setQuery(value || ""); setOpen(true); }}
         onClick={() => { setQuery(value || ""); setOpen(true); }}
         className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]"
         aria-label={`Выбрать город. Сейчас: ${label}`}

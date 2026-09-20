@@ -17,7 +17,7 @@ if(!live){
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
- const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
@@ -150,9 +150,9 @@ try{
     await triggers.nth(0).click();await grid.getByLabel('Месяц выпуска',{exact:true}).selectOption('3');
     assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'select closes tile');
     await page.setViewportSize({width:390,height:640});await triggers.nth(3).click();
-    await page.waitForFunction(()=>document.documentElement.style.overflow==='hidden');
+    await page.waitForFunction(()=>document.documentElement.style.overflow!=='hidden' && document.body.style.overflow!=='hidden');
     const scrollBefore=await page.evaluate(()=>scrollY);await page.mouse.move(5,400);await page.mouse.wheel(0,400);await page.waitForTimeout(100);
-    assert.equal(await page.evaluate(()=>scrollY),scrollBefore,'background remains fixed while mobile panel is open');
+    assert.ok(await page.evaluate(()=>scrollY)>scrollBefore,'page remains scrollable while mobile parameter panel is open');
     if(await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).getAttribute('aria-expanded')==='false')await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).click();
     const presets=grid.locator('[aria-label="Варианты: Мощность, л.с."]');
     await presets.hover();await page.mouse.wheel(0,200);await page.waitForTimeout(100);
@@ -201,6 +201,35 @@ try{
    }
    if(!live)assert.deepEqual(errors,[]);
   }catch(error){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({kind,url,theme,width,index,error:String(error),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw error;}finally{await context.close();}
+ }
+ if(!live){
+  for(const kind of ['saved-admin','saved-guest']){
+   const page=await browser.newPage({viewport:{width:390,height:844}});
+   await page.addInitScript(()=>localStorage.setItem('avtocena_city','Москва'));
+   let calculations=0,saves=0;
+   await page.route('**/api/catalog/offer/qa-attached/calculate',async route=>{calculations++;await route.fulfill({json:{totalRub:2600000,breakdown:[{id:'car',amountRub:2000000}]}});});
+   await page.route('**/api/catalog/offer/qa-attached/save',async route=>{saves++;const body=route.request().postDataJSON();assert.equal(body.version,'v1');assert.equal(body.draft.powerHp,'150');await route.fulfill({json:{version:'v2',savedAt:'2026-09-20T11:00:00Z',draft:body.draft,calculation:{totalRub:2600000}}});});
+   await page.goto(origin+'/?kind='+kind);await page.waitForTimeout(850);
+   assert.equal(calculations,0,'saved quote must not recalculate on open');
+   assert.ok(await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).isVisible(),'saved delivery overrides browser city');
+   assert.match(await page.locator('.ac-price').first().innerText(),/2[\s\u00a0]500[\s\u00a0]000/);
+   await page.getByText('Структура цены',{exact:true}).first().click();
+   assert.ok(await page.getByText('Обеспечительный платёж',{exact:true}).isVisible());
+   const power=page.locator('[data-parameter-editor] > summary').nth(3);await power.click();
+   await page.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.keyboard.press('Escape');await page.waitForTimeout(850);
+   const button=page.getByRole('button',{name:'Сохранить расчёт для клиента'});
+   if(kind==='saved-admin'){await button.click();await page.getByText('Сохранено. Можно отправить клиенту ссылку.').waitFor();assert.equal(saves,1);assert.equal(await button.count(),0);}
+   else {assert.equal(await button.count(),0);assert.equal(saves,0);}
+   await page.screenshot({path:`${out}/${kind}.png`,fullPage:true});await page.close();
+  }
+  const page=await browser.newPage();
+  await page.addInitScript(()=>{localStorage.setItem('avtocena_crm_notifications_enabled','1');window.__beeps=0;window.AudioContext=class{state='running';currentTime=0;destination={};resume(){return Promise.resolve();}createOscillator(){return {frequency:{setValueAtTime(){}},connect(){},disconnect(){},start(){window.__beeps++;},stop(){}};}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){}};}};});
+  await page.route('**/api/crm/inbox',route=>route.fulfill({json:{newCount:1,leads:[{id:'new-1',status:'new',createdAt:'2026-09-20T12:00:00Z'}]}}));
+  await page.goto(origin+'/?kind=alerts');await page.getByText('Новые заявки: 1').waitFor();
+  await page.getByText('Новые заявки: 1').click();await page.waitForTimeout(2400);
+  assert.ok(await page.evaluate(()=>window.__beeps)>=2,'sound repeats while unacknowledged');
+  await page.getByRole('button',{name:'Прочитано',exact:true}).click();const stopped=await page.evaluate(()=>window.__beeps);await page.waitForTimeout(1200);assert.equal(await page.evaluate(()=>window.__beeps),stopped);
+  await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);assert.equal(await page.getByRole('button',{name:/Заявки/}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.close();
  }
  assert.equal(results.length,pages.length*12);console.log(JSON.stringify({mode:live?'live':'fixture',cases:results.length,openings:results.reduce((n,r)=>n+r.panels.length,0),passed:true}));
 }finally{save();await browser.close();if(server)await new Promise(r=>server.close(r));}

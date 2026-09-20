@@ -1,7 +1,7 @@
 name: Verify attached compact parameter dropdowns
 on:
   push:
-    branches: [fix/final-catalog-ui-20260920, fix/korea-continuous-enrichment-20260920, fix/city-delivery-scroll-20260919, fix/catalog-pages-parameter-ux, fix/attached-compact-parameters-20260913, fix/parameter-dropdown-gap-20260913, main]
+    branches: [fix/saved-offer-and-ui-20260920, fix/final-catalog-ui-20260920, fix/korea-continuous-enrichment-20260920, fix/city-delivery-scroll-20260919, fix/catalog-pages-parameter-ux, fix/attached-compact-parameters-20260913, fix/parameter-dropdown-gap-20260913, main]
     paths:
       - 'apps/web/components/catalog/InlineOfferParameters.tsx'
       - 'apps/web/components/catalog/CalculationDateControl.tsx'

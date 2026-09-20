@@ -15,7 +15,7 @@ await build(buildOptions);
 await build({...buildOptions,platform:'node',format:'esm',packages:'external',outfile:out+'/server.mjs'});
 const {App}=await import(pathToFileURL(path.resolve(out+'/server.mjs')).href);
 
-const css=await postcss([tailwind({content:['apps/web/components/catalog/CatalogLoadMore.tsx']})]).process('@tailwind utilities;',{from:undefined});fs.writeFileSync(out+'/app.css',css.css);
+const css=await postcss([tailwind({content:['apps/web/components/catalog/CatalogLoadMore.tsx']})]).process('@tailwind utilities;'+fs.readFileSync('apps/web/app/public-polish.css','utf8'),{from:undefined});fs.writeFileSync(out+'/app.css',css.css);
 const server=http.createServer((req,res)=>{const file=req.url==='/app.js'?'app.js':req.url==='/app.css'?'app.css':null;res.setHeader('Content-Type',file?.endsWith('js')?'text/javascript':file?'text/css':'text/html');res.end(file?fs.readFileSync(out+'/'+file):'<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><div id="root">'+renderToString(React.createElement(App,{initialPage:Number(new URL(req.url,'http://fixture').searchParams.get('page'))||1}))+'</div><script src="/app.js"></script>');});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN});

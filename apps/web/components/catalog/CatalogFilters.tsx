@@ -155,11 +155,11 @@ function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value
  const toggle=(fuel:string,checked:boolean)=>{const ev=value==="electric"||value==="electrified",hybrid=value==="hybrid"||value==="electrified";const nextEv=fuel==="electric"?checked:ev,nextHybrid=fuel==="hybrid"?checked:hybrid;onChange(nextEv&&nextHybrid?"electrified":nextEv?"electric":nextHybrid?"hybrid":"");};
  return <div ref={root} className="relative min-w-0">
   <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center rounded-[15px] text-sm font-black">
-   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-2 px-4"><input type="checkbox" checked={selected} onChange={e=>onChange(e.target.checked?"electrified":"")} className="h-6 w-6 shrink-0 accent-[#ffd21f]"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
+   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-2 px-4"><input type="checkbox" checked={selected} onChange={e=>onChange(e.target.checked?"electrified":"")} className="ac-unified-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
    <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-12 shrink-0 items-center justify-center"><ChevronDown size={20}/></button>
   </div>
   {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-3 text-sm font-semibold">
-   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3 px-2"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="h-5 w-5 accent-[#ffd21f]"/>{label}</label>)}
+   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3 px-2"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="ac-unified-checkbox"/>{label}</label>)}
   </div> : null}
  </div>;
 }

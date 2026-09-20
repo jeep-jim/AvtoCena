@@ -1,5 +1,7 @@
 "use client";
 
+import { ContractPaymentSummary } from "./ContractPaymentSummary";
+import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calculation";
 import { missingCustomerFields } from "../../lib/catalog/missing-customer-fields";
 import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
 import { ResearchLink } from "./VehicleResearchLink";
@@ -62,7 +64,6 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
  useEffect(()=>{
   const editor=ref.current;
   if(!editor)return;
-  let unlock:(()=>void)|undefined;
   const position=()=>{
    const body=editor.querySelector<HTMLElement>(".ac-attached-editor-body");
    if(!body)return;
@@ -71,25 +72,13 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
    body.style.setProperty("--parameter-available-height",`${Math.max(100,bottom-body.getBoundingClientRect().top-12)}px`);
   };
   const toggle=()=>{
-   unlock?.();unlock=undefined;
    if(!editor.open)return;
-   if(window.matchMedia("(max-width: 767px)").matches){
-    // Bring the attached menu into view before locking the page behind it.
-    const panel=editor.querySelector<HTMLElement>("[data-parameter-panel]");
-    if(panel && panel.getBoundingClientRect().top>window.innerHeight-180)window.scrollBy({top:panel.getBoundingClientRect().top-window.innerHeight+180,behavior:"instant"});
-    const root=document.documentElement,body=document.body;
-    const rootOverflow=root.style.overflow,bodyOverflow=body.style.overflow;
-    root.style.overflow="hidden";body.style.overflow="hidden";
-    const touch=(event:TouchEvent)=>{if(!(event.target instanceof Node) || !editor.contains(event.target))event.preventDefault();};
-    document.addEventListener("touchmove",touch,{passive:false});
-    unlock=()=>{root.style.overflow=rootOverflow;body.style.overflow=bodyOverflow;document.removeEventListener("touchmove",touch);};
-   }
    position();
   };
   editor.addEventListener("toggle",toggle);
   window.visualViewport?.addEventListener("resize",position);
   window.addEventListener("resize",position);
-  return ()=>{unlock?.();editor.removeEventListener("toggle",toggle);window.visualViewport?.removeEventListener("resize",position);window.removeEventListener("resize",position);};
+  return ()=>{editor.removeEventListener("toggle",toggle);window.visualViewport?.removeEventListener("resize",position);window.removeEventListener("resize",position);};
  },[]);
  const finish=()=>{if(ref.current){ref.current.open=false;ref.current.querySelector("summary")?.focus({preventScroll:true});}};
  return <div className={`${editorStyles.tile} min-w-0 ${wide?"col-span-2":""}`} data-full-width={wide || undefined}>
@@ -117,15 +106,37 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({deliveryMarket,offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
- const originalDraft=completePowerUnitDraft(isPickup?{...initial,vehicleCategory:"N1"}:initial);
+export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"|"savedAt">|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+ const originalDraft=completePowerUnitDraft(savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
+ const [savedDraft,setSavedDraft]=useState(originalDraft);
+ const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
+ const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
+ const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
+
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
- const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
+ const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(savedCalculation?.calculation || null);
  const revision=useRef(0);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
- function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
+ const saveDirty=Object.keys({...savedDraft,...draft}).some(key=>(savedDraft[key]??"")!==(draft[key]??""));
+ async function save(){
+  const version=revision.current;
+  setSaving(true);setSaveMessage("");
+  try {
+   const response=await fetch(`/api/catalog/offer/${encodeURIComponent(offerId)}/save`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({draft,version:savedVersion})});
+   const data=await response.json();
+   if(!response.ok)throw Error(data.error || "Не удалось сохранить");
+   const page=document.querySelector<HTMLElement>("[data-offer-id]");
+   if(page)page.dataset.offerSavedVersion=data.version;
+   setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedDraft(completePowerUnitDraft(data.draft));
+   if(version===revision.current)setResult(data.calculation);
+   setSaveMessage("Сохранено. Можно отправить клиенту ссылку.");
+  }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
+  finally{setSaving(false);}
+ }
+ function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
+  if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
   try{validateCustomerParameters(draft);}catch(e){setPending(false);setError(parameterErrorText(e,draft));return;}
@@ -167,7 +178,7 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} onChange={city=>change("deliveryCity",city)} />
+   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation} onChange={city=>change("deliveryCity",city)} />
    <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
   </div>
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
@@ -232,10 +243,14 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
      <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽</span>
     </div> : null}
    </summary>
+   <ContractPaymentSummary plan={result.paymentPlan} />
    <div className="px-4 pb-4">
     <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-2"><dt>{row.label||row.title||row.id}{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="shrink-0 whitespace-nowrap">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>
    </div>
   </details> : null}
+  {canSave && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>void save()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
+  {saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
+  {savedAt && !saveDirty ? <p className="mt-3 text-xs text-[var(--ac-muted)]">Расчёт сохранён {new Date(savedAt).toLocaleDateString("ru-RU",{timeZone:"UTC"})}</p> : null}
   {children}
   <style dangerouslySetInnerHTML={{ __html: `.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}` }} />
  </div>;

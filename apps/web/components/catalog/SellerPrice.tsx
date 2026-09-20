@@ -6,8 +6,8 @@ import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import { sellerPriceLabel } from "../../lib/catalog/seller-price-contract";
 import { useTapActivation } from "./useTapActivation";
 
-export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = false, label, priceClassName = "text-3xl md:text-4xl" }: {
-  offer: any; deliveryCity?: string; panel?: boolean; dense?: boolean; label?: string; priceClassName?: string;
+export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = false, label, priceClassName = "text-3xl md:text-4xl", hideJapanBadges = false }: {
+  hideJapanBadges?: boolean; offer: any; deliveryCity?: string; panel?: boolean; dense?: boolean; label?: string; priceClassName?: string;
 }) {
   const [open, setOpen] = useState(false);
   const tap = useTapActivation();
@@ -24,7 +24,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
     </div>
     <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "flex-wrap" : "min-h-[22px] sm:min-h-[26px]"}`}>
       <span className={`ac-price ac-price--flat whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
-      {japan ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
+      {japan && !hideJapanBadges ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
     </div>
     {!panel && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
     {panel ? <div className="mt-3 flex items-center gap-2 text-[10px] text-[var(--ac-muted)]"><SellerPriceHelp /><span>Без доставки и платежей</span></div> : null}

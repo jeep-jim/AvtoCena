@@ -5,7 +5,7 @@ export async function GET() {
   const user = await getCurrentUser();
 
   if (!user) {
-    return NextResponse.json({ ok: false, user: null }, { status: 401 });
+    return NextResponse.json({ ok: false, user: null }, { status: 401, headers:{"Cache-Control":"no-store"} });
   }
 
   return NextResponse.json({
@@ -17,5 +17,5 @@ export async function GET() {
       role: user.role,
       partnerCode: user.partnerCode || null
     }
-  });
+  }, {headers:{"Cache-Control":"no-store"}});
 }

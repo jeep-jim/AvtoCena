@@ -1,157 +1,98 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-
-const ENABLED_KEY = "avtocena_crm_notifications_enabled";
-const BASELINE_KEY = "avtocena_crm_lead_alert_baseline";
-
-type LeadPreview = {
-  id: string;
-  createdAt?: string;
-  status?: string;
-  name?: string;
-  phone?: string;
-  telegram?: string;
-  car?: string;
-  offerTitle?: string;
-  selectedOffers?: Array<{ title?: string }>;
-};
-
-function createdMs(lead: LeadPreview) {
-  const parsed = Date.parse(String(lead.createdAt || ""));
-  return Number.isFinite(parsed) ? parsed : 0;
+import { useEffect, useRef, useState } from "react";
+import { unseenNewLeads, leadAlertTime, type AlertLead } from "../../lib/crm-alert-state";
+const ENABLED_KEY="avtocena_crm_notifications_enabled";
+const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
+const put=(key:string,value:string)=>{try{localStorage.setItem(key,value);}catch{}};
+let audio:AudioContext|null=null;
+function unlockAudio(){
+  try { const AudioCtor=window.AudioContext || (window as any).webkitAudioContext;
+    if(!AudioCtor)return;
+    if(!audio || audio.state==="closed")audio=new AudioCtor();
+    void audio!.resume().catch(()=>{});
+  }catch{}
 }
-
-function leadTitle(lead: LeadPreview) {
-  return lead.car
-    || lead.offerTitle
-    || lead.selectedOffers?.[0]?.title
-    || "Новая заявка";
-}
-
-function beep() {
+function beep(){
   try {
-    const AudioContextCtor = window.AudioContext || (window as any).webkitAudioContext;
-    if (!AudioContextCtor) return;
-    const context = new AudioContextCtor();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(880, context.currentTime);
-    gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.16, context.currentTime + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.34);
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.36);
-    oscillator.addEventListener("ended", () => void context.close());
-  } catch {
-    // Browser sound is best-effort and must never break CRM.
-  }
+    if(!audio || audio.state!=="running")return;
+    const oscillator=audio.createOscillator(),gain=audio.createGain(),now=audio.currentTime;
+    oscillator.type="sine";oscillator.frequency.setValueAtTime(880,now);
+    gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.12,now+.02);gain.gain.exponentialRampToValueAtTime(.0001,now+.3);
+    oscillator.connect(gain);gain.connect(audio.destination);oscillator.start();oscillator.stop(now+.32);
+    oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
+  }catch{}
 }
-
-export function CrmLiveAlerts() {
-  const [newCount, setNewCount] = useState(0);
-  const [enabled, setEnabled] = useState(false);
-  const [toast, setToast] = useState<LeadPreview | null>(null);
-  const baselineRef = useRef(0);
-  const initializedRef = useRef(false);
-
-  const poll = useCallback(async () => {
-    try {
-      const response = await fetch("/api/crm/inbox", { cache: "no-store" });
-      if (!response.ok) return;
-      const payload = await response.json().catch(() => null) as { leads?: LeadPreview[]; newCount?: number } | null;
-      const leads = Array.isArray(payload?.leads) ? payload!.leads! : [];
-      setNewCount(Number(payload?.newCount ?? leads.filter((lead) => lead.status === "new").length));
-
-      const newest = leads[0];
-      const newestMs = newest ? createdMs(newest) : 0;
-      if (!initializedRef.current) {
-        initializedRef.current = true;
-        const stored = Number(window.localStorage.getItem(BASELINE_KEY) || 0);
-        baselineRef.current = Math.max(stored, newestMs, Date.now());
-        window.localStorage.setItem(BASELINE_KEY, String(baselineRef.current));
-        return;
+export function CrmLiveAlerts({userId, floating=false}:{userId:string;floating?:boolean}) {
+  const [enabled,setEnabled]=useState(false),[count,setCount]=useState(0),[pending,setPending]=useState<AlertLead[]>([]),[authorized,setAuthorized]=useState(true);
+  const [audioBlocked,setAudioBlocked]=useState(false);
+  const pendingRef=useRef(pending);pendingRef.current=pending;
+  const enabledRef=useRef(enabled);enabledRef.current=enabled;
+  const tab=useRef("");
+  const notifiedRef=useRef("");
+  const ackKey=`avtocena_crm_ack_${userId}`,leaseKey=`avtocena_crm_alert_tab_${userId}`;
+  useEffect(()=>{
+    tab.current=crypto.randomUUID();
+    setEnabled(get(ENABLED_KEY)==="1");
+    const sync=(event:StorageEvent)=>{
+      if(event.key===ENABLED_KEY)setEnabled(event.newValue==="1");
+      if(event.key===ackKey){const ack=Number(event.newValue||0);setPending(rows=>unseenNewLeads(rows,ack));}
+    };
+    const unlock=()=>{if(enabledRef.current){unlockAudio();setAudioBlocked(false);}};
+    window.addEventListener("storage",sync);window.addEventListener("pointerdown",unlock);window.addEventListener("keydown",unlock);
+    return ()=>{window.removeEventListener("storage",sync);window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
+  },[ackKey]);
+  useEffect(()=>{
+    let active=true,busy=false;
+    const poll=async()=>{
+      if(busy)return;busy=true;
+      try {
+        const response=await fetch("/api/crm/inbox",{cache:"no-store"});
+        if(response.status===401 || response.status===403){if(active){setAuthorized(false);setPending([]);setCount(0);}return;}
+        if(!response.ok)return;
+        const data=await response.json();if(!active)return;
+        setAuthorized(true);setCount(Number(data.newCount)||0);
+        const unseen=unseenNewLeads(Array.isArray(data.leads)?data.leads:[],Number(get(ackKey)||0));
+        setPending(unseen);
+      }catch{}finally{busy=false;}
+    };
+    void poll();const timer=setInterval(()=>void poll(),20_000);
+    const focus=()=>void poll();window.addEventListener("focus",focus);
+    return ()=>{active=false;clearInterval(timer);window.removeEventListener("focus",focus);};
+  },[ackKey]);
+  useEffect(()=>{
+    if(!enabled || !pending.length || !authorized)return;
+    const ring=()=>{
+      // One sound source across CRM and public tabs; the lease expires if a tab closes.
+      let lease:{id?:string;until?:number}={};try{lease=JSON.parse(get(leaseKey)||"{}");}catch{}
+      if(lease.id!==tab.current && Number(lease.until)>Date.now())return;
+      put(leaseKey,JSON.stringify({id:tab.current,until:Date.now()+1800}));
+      beep();setAudioBlocked(!audio || audio.state!=="running");
+      const newest=pending[0];
+      const eventKey=`${newest.id}:${leadAlertTime(newest)}`;
+      if(notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
+        notifiedRef.current=eventKey;
+        try{const notice=new Notification("Новые заявки · АвтоЦена",{body:`Непросмотренных заявок: ${pending.length}`,tag:`avtocena-${userId}-${eventKey}`,icon:"/logo/avtocena-mark-light.svg",requireInteraction:true});notice.onclick=()=>{window.focus();location.assign("/crm/leads");notice.close();};}catch{}
       }
-
-      if (!newest || !newestMs || newestMs <= baselineRef.current) return;
-      baselineRef.current = newestMs;
-      window.localStorage.setItem(BASELINE_KEY, String(newestMs));
-      setToast(newest);
-
-      if (enabled) {
-        beep();
-        if ("Notification" in window && Notification.permission === "granted") {
-          new Notification("Новая заявка · АвтоЦена CRM", {
-            body: `${newest.name || newest.phone || newest.telegram || "Новый клиент"} — ${leadTitle(newest)}`,
-            tag: `avtocena-lead-${newest.id}`,
-          });
-        }
-      }
-    } catch {
-      // Keep polling silently; a transient network error must not disturb work.
-    }
-  }, [enabled]);
-
-  useEffect(() => {
-    const storedEnabled = window.localStorage.getItem(ENABLED_KEY) === "1";
-    setEnabled(storedEnabled);
-    void poll();
-    const timer = window.setInterval(() => void poll(), 20_000);
-    return () => window.clearInterval(timer);
-  }, [poll]);
-
-  useEffect(() => {
-    if (!toast) return;
-    const timer = window.setTimeout(() => setToast(null), 9_000);
-    return () => window.clearTimeout(timer);
-  }, [toast]);
-
-  async function toggleAlerts() {
-    if (enabled) {
-      setEnabled(false);
-      window.localStorage.setItem(ENABLED_KEY, "0");
-      return;
-    }
-
-    if ("Notification" in window && Notification.permission === "default") {
-      await Notification.requestPermission().catch(() => "denied");
-    }
-    setEnabled(true);
-    window.localStorage.setItem(ENABLED_KEY, "1");
-    beep();
+    };
+    ring();const timer=setInterval(ring,1000);
+    return ()=>{clearInterval(timer);try{if(JSON.parse(get(leaseKey)||"{}").id===tab.current)put(leaseKey,"{}");}catch{}};
+  },[enabled,pending,authorized,leaseKey,userId]);
+  function acknowledge(){
+    const latest=Math.max(Number(get(ackKey)||0),...pendingRef.current.map(leadAlertTime));
+    put(ackKey,String(latest));setPending([]);
   }
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={toggleAlerts}
-        className="relative inline-flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/8 px-3 py-2 text-xs font-black text-white/75 transition hover:bg-white/14"
-        title={enabled ? "Звуковые и браузерные уведомления включены" : "Включить уведомления о новых заявках"}
-      >
-        <span aria-hidden="true">{enabled ? "🔔" : "🔕"}</span>
-        <span className="hidden sm:inline">Заявки</span>
-        {newCount > 0 ? (
-          <span className="grid min-h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1.5 text-[10px] text-white">
-            {newCount > 99 ? "99+" : newCount}
-          </span>
-        ) : null}
-      </button>
-
-      {toast ? (
-        <a
-          href="/crm/leads"
-          className="fixed right-4 top-4 z-[120] w-[min(92vw,390px)] rounded-2xl border border-red-400/35 bg-[#1f2937] p-4 shadow-2xl"
-        >
-          <div className="text-xs font-black uppercase tracking-[0.14em] text-red-300">Новая заявка</div>
-          <div className="mt-1 font-black text-white">{toast.name || toast.phone || toast.telegram || "Новый клиент"}</div>
-          <div className="mt-1 text-sm font-bold text-white/65">{leadTitle(toast)}</div>
-          <div className="mt-3 text-xs font-black text-red-200">Открыть заявку →</div>
-        </a>
-      ) : null}
-    </>
-  );
+  function toggle(){
+    const next=!enabled;setEnabled(next);put(ENABLED_KEY,next?"1":"0");
+    if(next){unlockAudio();beep();if("Notification" in window && Notification.permission==="default")void Notification.requestPermission().catch(()=>{});}
+  }
+  if(!authorized)return null;
+  return <div className={floating?"fixed right-3 bottom-24 z-[110]":"contents"}>
+    <button type="button" onClick={toggle} aria-pressed={enabled} title={enabled?"Отключить звук заявок":"Включить звук заявок"} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-slate-500/30 bg-slate-800 px-3 py-2 text-xs font-bold text-white shadow-lg"><span aria-hidden>{enabled?"🔔":"🔕"}</span>Заявки{Math.max(count,pending.length)>0?<span className="rounded-full bg-red-500 px-2 py-0.5 text-white">{Math.max(count,pending.length)}</span>:null}</button>
+    {pending.length>0?<div role="status" className="fixed right-4 top-20 z-[120] w-[min(92vw,370px)] rounded-2xl border border-slate-500 bg-slate-800 p-4 text-white shadow-2xl">
+      <p className="font-bold">Новые заявки: {pending.length}</p>
+      {enabled && audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}} className="mt-2 text-xs underline">Нажмите, чтобы разрешить звук</button>:null}
+      <div className="mt-3 flex gap-4"><a href="/crm/leads" onClick={acknowledge} className="text-sm font-bold underline">Открыть заявки</a><button type="button" onClick={acknowledge} className="text-sm underline">Прочитано</button></div>
+    </div>:null}
+  </div>;
 }

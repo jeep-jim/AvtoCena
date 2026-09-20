@@ -1,7 +1,7 @@
 name: Verify catalog load more
 on:
   push:
-    branches: [fix/catalog-pages-parameter-ux, main, fix/catalog-speed-load-more, fix/catalog-gateway-actions, fix/catalog-hydration-final]
+    branches: [fix/saved-offer-and-ui-20260920, fix/catalog-pages-parameter-ux, main, fix/catalog-speed-load-more, fix/catalog-gateway-actions, fix/catalog-hydration-final]
     paths:
       - 'apps/web/components/catalog/CatalogLoadMore.tsx'
       - 'tests/browser/catalog-load-more*'
