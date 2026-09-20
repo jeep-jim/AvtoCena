@@ -110,7 +110,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   }
   if(!authorized)return null;
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
-  const assigned=pending.some(lead=>lead.assignmentUnread);
+  const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""}`}>
     <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>
     <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}><UserRound size={21}/><span className="ac-staff-mobile-badge">{badge}</span></button>
@@ -123,7 +123,8 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
     </div>:null}
     {pending.length>0?<div role="status" className="ac-staff-notice">
-      <p className="font-bold">{assigned?"Вам назначена заявка":"Новые заявки"}: {pending.length}</p>
+      <p className="font-bold">Новые заявки: {pending.length}</p>
+      {assignedCount>0?<p className="mt-1 text-sm">Назначено вам: {assignedCount}</p>:null}
       {enabled && audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}} className="mt-2 text-xs underline">Нажмите, чтобы разрешить звук</button>:null}
       <div className="mt-3 flex gap-4"><a href={pending.length===1?`/crm/leads?id=${encodeURIComponent(pending[0].id)}`:"/crm/leads"} className="text-sm font-bold underline">Открыть заявки</a><button type="button" disabled={acknowledging} onClick={()=>void acknowledge()} className="text-sm underline">{acknowledging?"Сохраняем…":"Прочитано мной"}</button></div>
       {ackError?<p className="mt-2 text-xs">{ackError}</p>:null}
