@@ -16,4 +16,15 @@ Every current-read-model publication now builds and stores an overview inside th
 
 The existing overview rebuild repairs the currently published generation on merge. A maintenance marker requests the existing preview-first, lock-protected cleanup and a fresh storage measurement. No collector, source inventory or interface layout changes are part of this patch.
 
-Validation and deployment results will be appended after completion.
+## Verified publication
+
+- [PR #1091](https://github.com/jeep-jim/AvtoCena/pull/1091) merged as b3bc996fef6414a797a85c998009cdeb0cf10b70.
+- [CI 35500855908](https://github.com/jeep-jim/AvtoCena/actions/runs/35500855908) passed: complete suite 1,499/1,499, additional required checks, typecheck and production build.
+- [Deploy 35501091554](https://github.com/jeep-jim/AvtoCena/actions/runs/35501091554) completed successfully; live /api/health returned the exact release SHA.
+- [Overview rebuild 35501091603](https://github.com/jeep-jim/AvtoCena/actions/runs/35501091603) passed, matching current generation gen_1789884357490_243e9a24. Home returns 36 cards across all six markets, visible total 75,087.
+- [Storage cleanup 35501091558](https://github.com/jeep-jim/AvtoCena/actions/runs/35501091558) passed at 2026-09-20T09:04:20.484Z: 39,585,339,833 → 34,432,808,232 bytes, 369 obsolete objects deleted, 5,152,531,601 bytes reclaimed. Current and previous generations protected, ok=true; 50 GB bucket ceiling and 5 GB reserve unchanged.
+- Live home Server-Timing samples: read 117.8 ms + pricing 932.7 ms = 1,050.5 ms; read 311.3 ms + pricing 925.5 ms = 1,236.8 ms. Full end-to-end requests through the research connection were 7.70 and 18.68 seconds, including network/queue time. Server timings are not a browser loading-time guarantee.
+- The legacy-collector completion backstop refreshes the overview even when an already-running collector started before this release.
+
+
+- [Post-deploy parity 35501384703](https://github.com/jeep-jim/AvtoCena/actions/runs/35501384703) completed successfully: all six markets, sampled list/detail quotes, unavailable-offer page and repeated homepage response. The previous timeout gate is now green.
