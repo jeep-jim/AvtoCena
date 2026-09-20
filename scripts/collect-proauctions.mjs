@@ -76,13 +76,21 @@ async function detail(url,cached=false){
       }
       record.photos=photos;
       const offer=proAuctionsOffer(e,identity,witness,photos,record.evidenceSha256);
-      if(offer){await fs.writeFile(path.join(root,'offers',`${id}.json`),JSON.stringify(offer));state.prepared++;record.reason='prepared';}
+      if(offer){
+        const offerPath=path.join(root,'offers',`${id}.json`);
+        const exists=await fs.access(offerPath).then(()=>true,()=>false);
+        // A failed optional sheet must remain retryable without replacing a
+        // previously complete offer or inflating the prepared count on restart.
+        if(!exists || !dependencyFailure)await fs.writeFile(offerPath,JSON.stringify(offer));
+        if(!exists)state.prepared++;
+        record.reason='prepared';
+      }
       else record.reason='identity_image_or_retention_gate';
     }
   }catch(error){record.reason=String(error);}
   // A dependency outage is not a terminal rejection of the lot. Keep its URL
   // pending so the durable continuation retries it after the source recovers.
-  if(dependencyFailure && record.reason!=='prepared')record.retryPending=true;
+  if(dependencyFailure)record.retryPending=true;
   await fs.writeFile(path.join(root,'raw',`${id}.json`),JSON.stringify(record));
   if(record.retryPending)throw dependencyFailure;
   if(!done.has(url))state.details++;done.add(url);
@@ -97,10 +105,10 @@ if(state.contractVersion!==2){
   state.contractVersion=2;await checkpoint();
 }
 // Recover lots terminally marked by older collectors during dependency outages.
-if(state.dependencyRetryVersion!==1){
+if(state.dependencyRetryVersion!==2){
   for(const f of await fs.readdir(path.join(root,'raw'))){
     const record=JSON.parse(await fs.readFile(path.join(root,'raw',f),'utf8'));
-    if(record.reason==='prepared' || !done.has(record.sourceUrl))continue;
+    if(!done.has(record.sourceUrl))continue;
     const date=Date.parse(record.evidence?.identity?.auctionDate || '');
     if(!Number.isFinite(date) || date>Date.now() || Date.now()-date>30*86400000)continue;
     const errors=[record.witnessError,...(record.imageErrors || []).map(item=>item.error)];
@@ -109,7 +117,7 @@ if(state.dependencyRetryVersion!==1){
     if(!state.pending.includes(record.sourceUrl))state.pending.push(record.sourceUrl);
     state.complete=false;
   }
-  state.dependencyRetryVersion=1;await checkpoint();
+  state.dependencyRetryVersion=2;await checkpoint();
 }
 if(!state.complete){
   state.stopReason='';
