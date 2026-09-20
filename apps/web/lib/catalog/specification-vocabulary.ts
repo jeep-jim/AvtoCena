@@ -14,6 +14,15 @@ const replacements=entries.filter(([source])=>!/[\p{Script=Han}\p{Script=Hiragan
  return [new RegExp(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(source)?escaped:`(?<![\\p{L}])${escaped}(?![\\p{L}])`,'giu'),target] as const;
 });
 const cache=new Map<string,string>();
+/** Unit-only labels come from truncated source names; do not guess their meaning. */
+export function readableSpecificationLabel(value:string): string | null {
+ const text=translateKnownSpecification(value).trim();
+ const foreign=/[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Georgian}]/u;
+ if(foreign.test(text)||/неполное в источнике/.test(text))return null;
+ if(!/[а-яё]/i.test(text))return /^(ABS|ESP|ISOFIX|USB|Bluetooth|Wi-Fi|LED|DCT|CVT)$/i.test(text)?text:null;
+ const units:Record<string,string>={mm:'мм',kg:'кг',kW:'кВт',L:'л',mL:'см³','N·m':'Н·м','km/h':'км/ч'};
+ return text.replace(/\((mm|kg|kW|L|mL|N·m|km\/h)\)/g,(_,unit)=>` (${units[unit]})`).replace(/ {2,}/g,' ');
+}
 export function translateKnownSpecification(value:string) {
  if(cache.has(value))return cache.get(value)!;
  const exact=exactTerms.get(value.toLocaleLowerCase());

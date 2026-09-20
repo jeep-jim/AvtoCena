@@ -48,6 +48,10 @@ try{
    if(width>=1024){
     const desktop=page.locator('.ac-catalog-filter-panel');await desktop.waitFor({state:'visible'});
     const toggle=desktop.getByRole('button',{name:'Расширенные фильтры',exact:true});if(await toggle.getAttribute('aria-expanded')!=='true')await toggle.click();
+    // The enhancer decorates newly mounted ranges on the next animation frame.
+    // Measure the ready controls, not the pre-enhancement intermediate layout.
+    await page.waitForFunction(()=>{const boxes=[...document.querySelectorAll('.ac-catalog-filter-panel .ac-range-input-box')];return boxes.length>0&&boxes.every(box=>box.querySelector('.ac-range-value-toggle'));});
+    await page.evaluate(async()=>{await document.fonts.ready;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));});
     const before=await positions(desktop);const root=desktop.locator('input[name="bodyType"]').locator('..');await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();
     assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.deepEqual(await positions(desktop),before);assert.ok(Math.abs((await menu.boundingBox()).width-(await root.boundingBox()).width)<2,'desktop remains single-control width');
     results.push({...current,desktopUnchanged:true});save();continue;
