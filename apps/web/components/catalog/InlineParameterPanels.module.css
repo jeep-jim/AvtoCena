@@ -72,3 +72,7 @@
 .dateControl:focus-within .datePlaceholder { visibility: hidden; }
 .todayButton { min-height: 44px; max-width: 100%; padding: 4px; border: 0; border-radius: 8px; background: transparent; color: var(--ac-text); text-decoration: underline; cursor: pointer; }
 .todayButton:focus-visible { outline: 2px solid var(--ac-public-accent); outline-offset: -2px; }
+
+/* Outline does not shift the two-column layout and survives light-theme borders. */
+.editor[data-missing-parameter] > summary { box-shadow: inset 0 0 0 2px #ef4444 !important; }
+.missingInput, .body select[aria-invalid="true"], .body input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px #ef4444 !important; }
