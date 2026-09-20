@@ -15,7 +15,7 @@ test('owner anchors, rounded estimates and explicit no-delivery state',()=>{
  assert.match(deliveryDescription(quoteCityDelivery('')),/не включена/);
  assert.equal(quoteCityDelivery('Владивосток').amountRub,0);
  for(const city of ['Неизвестный город','constructor','__proto__']) assert.equal(quoteCityDelivery(city).status,'needs_quote');
- assert.equal(quoteCityDelivery('Москва','georgia').status,'needs_quote');
+ assert.equal(quoteCityDelivery('Москва','unknown').status,'needs_quote');
 });
 
 test('city cost replaces legacy delivery once and participates in percentages and payment balance',()=>{
@@ -48,4 +48,23 @@ test('old Japan snapshot loses only saved delivery and repricing is idempotent',
  assert.equal(updated.calculationSnapshot.paymentPlan.remainingAfterInitialRub,910000);
  assert.equal(applyJapanServiceCosts(updated,config).totalRub,1160000);
  assert.ok(!updated.calculationSnapshot.breakdown.some((row:any)=>row.id==='rf-delivery'));
+});
+
+
+test('each western market starts at its own entry city and retains the same tariff',()=>{
+ for (const [market,origin] of [['georgia','Минеральные Воды'],['uae','Астрахань'],['europe','Санкт-Петербург']]) {
+  const same=quoteCityDelivery(origin,market);
+  assert.equal(same.origin,origin);assert.equal(same.amountRub,0);assert.equal(same.distanceKm,0);
+  assert.ok(deliveryDescription(same).includes(origin));
+  const moscow=quoteCityDelivery('Москва',market);
+  assert.equal(moscow.status,'estimated');assert.ok(moscow.amountRub<50000);
+  assert.equal(moscow.amountRub%5000,0);
+  assert.ok(deliveryDescription(moscow).includes(origin));
+  assert.equal(quoteCityDelivery('Неизвестный',market).status,'needs_quote');
+ }
+ assert.equal(quoteCityDelivery('Москва','georgia').distanceKm,1600);
+ assert.equal(quoteCityDelivery('Москва','uae').distanceKm,1400);
+ assert.equal(quoteCityDelivery('Москва','europe').distanceKm,700);
+ assert.equal(quoteCityDelivery('Чита','korea').amountRub,65000);
+ assert.notEqual(quoteCityDelivery('Чита','europe').amountRub,quoteCityDelivery('Чита','korea').amountRub);
 });

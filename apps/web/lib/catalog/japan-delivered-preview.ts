@@ -21,7 +21,7 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
     if(!entry.parameters)return null;
     const result = await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);
     return result.ok && Number(result.calculation.totalRub)>0
-      ? {totalRub:result.calculation.totalRub,engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction} : null;
+      ? {totalRub:result.calculation.totalRub,deliveryPricingBasis:result.calculation.deliveryPricingBasis,engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction} : null;
   }
   // Missing/old derived index retains the authoritative full-record path.
   const offer = await getOfferForPage(id);
@@ -30,8 +30,8 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
   try { parameters = japanPreviewParameters(offer); } catch { return null; }
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
-    ? { totalRub: result.calculation.totalRub, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
-}, ["japan-delivered-preview-v6-no-city-delivery"], { revalidate: 900 });
+    ? { totalRub: result.calculation.totalRub, deliveryPricingBasis:result.calculation.deliveryPricingBasis, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
+}, ["japan-delivered-preview-v7-city-basis"], { revalidate: 900 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];

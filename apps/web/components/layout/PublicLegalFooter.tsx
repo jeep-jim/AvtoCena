@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { CitySelector } from "../home/CitySelector";
+import { useSelectedCity } from "../../lib/location/selected-city";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
@@ -63,6 +65,11 @@ export function PublicLegalFooter() {
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
   const [cookieBannerOpen, setCookieBannerOpen] = useState(false);
+  const city = useSelectedCity();
+  const [cityNoticeOpen, setCityNoticeOpen] = useState(false);
+  const [noticeCity, setNoticeCity] = useState("");
+  const dismissCityNotice = () => { setCityNoticeOpen(false); try { localStorage.setItem("avtocena_city_notice_dismissed_v1", "1"); } catch {} };
+  useEffect(() => { try { setCityNoticeOpen(!localStorage.getItem("avtocena_city_notice_dismissed_v1")); } catch { setCityNoticeOpen(true); } }, []);
   const currentYear = new Date().getFullYear();
 
   const closeCookieNotice = useCallback(() => {
@@ -148,6 +155,14 @@ export function PublicLegalFooter() {
         </div>
       </footer>
 
+      <div className="ac-notice-stack">
+      {publicPath && cityNoticeOpen && !city && !cookieOpen ? <aside className="ac-city-notice" aria-label="Выбор города для расчёта">
+        <p>Выберите ваш город для точного расчёта</p>
+        <div className="flex items-center justify-between gap-4">
+          <CitySelector value={noticeCity} onChange={setNoticeCity} triggerLabel="Выбрать город" />
+          <button type="button" onClick={dismissCityNotice} className="min-h-11 px-2 text-xs font-bold" aria-label="Закрыть приглашение выбрать город">Закрыть</button>
+        </div>
+      </aside> : null}
       {cookieBannerOpen && !cookieOpen ? (
         <aside className="ac-cookie-banner" aria-label="Уведомление о cookie">
           <p>Используем cookie для работы сайта и сохранения ваших настроек.</p>
@@ -157,8 +172,9 @@ export function PublicLegalFooter() {
           </div>
         </aside>
       ) : null}
+      </div>
       <style>{`
-        .ac-cookie-banner {
+        .ac-notice-stack {
           position: fixed;
           z-index: 10090;
           left: max(12px, env(safe-area-inset-left));
@@ -166,6 +182,14 @@ export function PublicLegalFooter() {
           bottom: calc(12px + env(safe-area-inset-bottom, 0px));
           max-width: 520px;
           margin-inline: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .ac-city-notice { padding: 14px 16px 6px; border-radius: 18px; background: var(--ac-surface-2); color: var(--ac-text); box-shadow: 0 8px 28px rgba(10,30,60,.24); border: 1px solid var(--ac-border); }
+        .ac-city-notice p { font-size: 13px; line-height: 1.5; margin: 0; font-weight: 700; }
+        .ac-city-notice button { font-size: 13px; }
+        .ac-cookie-banner {
           padding: 14px 16px 10px;
           border-radius: 18px;
           background: #174b83 !important;

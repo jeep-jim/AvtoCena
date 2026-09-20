@@ -1,3 +1,6 @@
+"use client";
+import { useSelectedCity } from "../../lib/location/selected-city";
+import { priceCardForCity } from "../../lib/catalog/card-city-delivery";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
@@ -10,14 +13,16 @@ function CatalogPriceContent({
   label,
   dense = false,
   priceClassName = "text-[22px]",
+  deliveryCity = "",
 }: {
   offer: any;
   label: string;
   dense?: boolean;
   priceClassName?: string;
+  deliveryCity?: string;
 }) {
   if (offer.market === "japan" && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
-  if (isSellerPricedOffer(offer)) return <SellerPrice offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
+  if (isSellerPricedOffer(offer)) return <SellerPrice deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = String(offer?.market || "").toLowerCase() === "japan"
     || /япони/i.test(String(offer?.marketLabel || ""));
@@ -50,6 +55,11 @@ function CatalogPriceContent({
 }
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
+ const city = useSelectedCity();
+ const priced = priceCardForCity(props.offer,city);
  const estimated = Number(props.offer?.japanDeliveredPreview?.totalRub) > 0 || (!isSellerPricedOffer(props.offer) && Number(props.offer?.totalRub) > 0);
- return <div><CatalogPriceContent {...props} />{estimated ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
+ const caption = !city ? "Без доставки" : priced.included
+  ? (priced.quote.distanceKm === 0 ? `Получение: ${priced.quote.origin}` : `С доставкой: ${priced.quote.city} · предварительно`)
+  : `Доставка: ${city} — уточняется`;
+ return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{estimated ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">{caption}</p> : null}</div>;
 }
