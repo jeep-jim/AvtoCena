@@ -2,7 +2,8 @@
 export function missingCustomerFields(draft: Record<string,string>, showCommercial = false) {
  const missing = new Set<string>();
  const need = (key:string) => { if (!draft[key]?.trim()) missing.add(key); };
- need('year'); need('fuel');
+ need('year');
+ if (!['petrol','diesel','lpg','cng','electric','hybrid'].includes(draft.fuel)) missing.add('fuel');
  if (draft.vehicleCategory !== 'N1') need('powerHp');
  if (draft.fuel && draft.fuel !== 'electric') need('engineCc');
  if (showCommercial) need('vehicleCategory');

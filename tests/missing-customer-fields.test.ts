@@ -7,6 +7,7 @@ test('missing fields highlight all required blank inputs, and clear after comple
  assert.deepEqual([...missingCustomerFields(draft)].sort(),['engineCc','powerHp']);
  assert.equal(missingCustomerFields({...draft,engineCc:'1498',powerHp:'150'}).size,0);
  assert.deepEqual([...missingCustomerFields({})].sort(),['fuel','powerHp','year']);
+ assert.ok(missingCustomerFields({...draft,fuel:'unknown'}).has('fuel')); 
 });
 test('electric and hybrid requirements do not mark optional dates or absent combustion volume on EVs',()=>{
  const ev={year:'2023',fuel:'electric',powerHp:'200',vehicleCategory:'M1'};
