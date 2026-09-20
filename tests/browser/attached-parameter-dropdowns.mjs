@@ -242,6 +242,7 @@ try{
     await page.getByRole('button',{name:'Кабинет сотрудника'}).click();assert.ok(await page.getByRole('link',{name:'Рабочий кабинет',exact:true}).isVisible());
     await page.screenshot({path:`${out}/staff-header-${theme}-${width}.png`});
   }
+  read=false;await page.evaluate(()=>localStorage.setItem('avtocena_crm_ack_qa-staff',String(Date.parse('2026-09-20T12:01:00Z'))));await page.reload();await page.waitForTimeout(500);assert.equal(read,true,'legacy acknowledgement is persisted on server');assert.equal(await page.locator('.ac-staff-badge').count(),0);
   await page.unroute('**/api/auth/me');await page.route('**/api/auth/me',route=>route.fulfill({status:401,json:{user:null}}));await page.goto(origin+'/?kind=alerts-guest');await page.waitForTimeout(300);assert.equal(await page.getByRole('button',{name:'Кабинет сотрудника'}).count(),0);
   await page.setViewportSize({width:1440,height:900});await page.goto(origin+'/?kind=japan-specs');await page.getByRole('button',{name:'Все характеристики'}).click();
   const specs=await page.getByRole('region',{name:'Все характеристики',exact:true}).boundingBox();const main=await page.locator('main').boundingBox();assert.ok(specs.width>=main.width-12,'expanded specs span both header blocks');

@@ -12,7 +12,7 @@ export function leadReadState(lead:any,userId:string) {
   const receipt=(Array.isArray(lead.readReceipts)?lead.readReceipts:[]).find((row:LeadReadReceipt)=>row.userId===userId) as LeadReadReceipt|undefined;
   const newer=(value:string,seen?:string)=>Boolean(value)&&Date.parse(value)>(Date.parse(seen||"")||0);
   const assignmentUnread=newer(assignmentAt,receipt?.assignmentAt);
-  return {incomingAt,assignmentAt,eventKey:JSON.stringify([incomingAt,assignmentAt]),unread:newer(incomingAt,receipt?.incomingAt)||assignmentUnread,assignmentUnread};
+  return {incomingAt,assignmentAt,hasReadReceipt:Boolean(receipt),eventKey:JSON.stringify([incomingAt,assignmentAt]),unread:newer(incomingAt,receipt?.incomingAt)||assignmentUnread,assignmentUnread};
 }
 export function markLeadRead(lead:any,user:{id:string;displayName:string},eventKey:string,seenAt:string) {
   const state=leadReadState(lead,user.id);

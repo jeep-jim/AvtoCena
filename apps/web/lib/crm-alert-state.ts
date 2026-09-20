@@ -11,3 +11,8 @@ export function unseenNewLeads(leads:AlertLead[], acknowledged:number) {
   return leads.filter(lead=>(lead.status === "new" || leadAlertTime(lead)>Date.parse(lead.createdAt || "")) && leadAlertTime(lead)>acknowledged)
     .sort((a,b)=>leadAlertTime(b)-leadAlertTime(a));
 }
+
+export function canMigrateLegacyAcknowledgement(lead:AlertLead & {hasReadReceipt?:boolean;assignmentAt?:string},acknowledged:number) {
+  const incoming=leadAlertTime(lead);
+  return !lead.hasReadReceipt && !lead.assignmentAt && incoming>0 && incoming<=acknowledged && (lead.status==="new" || incoming>Date.parse(lead.createdAt||""));
+}

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList } from "lucide-react";
-import { type AlertLead } from "../../lib/crm-alert-state";
+import { canMigrateLegacyAcknowledgement, type AlertLead } from "../../lib/crm-alert-state";
 const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
 const put=(key:string,value:string)=>{try{localStorage.setItem(key,value);}catch{}};
@@ -24,7 +24,7 @@ function beep(){
     oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
   }catch{}
 }
-type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;eventKey:string};
+type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string};
 export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false}:{userId:string;role?:string;displayName?:string;header?:boolean}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
   const [audioBlocked,setAudioBlocked]=useState(false);
@@ -56,8 +56,15 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
         if(!response.ok)return;
         const data=await response.json();if(!active)return;
         setAuthorized(true);
-        const unseen=(Array.isArray(data.leads)?data.leads:[]).filter((lead:InboxLead)=>lead.unread);
-        setPending(unseen);
+        const unseen:InboxLead[]=(Array.isArray(data.leads)?data.leads:[]).filter((lead:InboxLead)=>lead.unread);
+        const legacyAck=Number(get(`avtocena_crm_ack_${userId}`)||0);
+        const migrated=new Set<string>();
+        const legacy=unseen.filter(lead=>canMigrateLegacyAcknowledgement(lead,legacyAck));
+        for(let i=0;i<legacy.length;i+=4)await Promise.all(legacy.slice(i,i+4).map(async lead=>{
+          try {const saved=await fetch(`/api/crm/leads/${encodeURIComponent(lead.id)}/seen`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({eventKey:lead.eventKey})});if(saved.ok)migrated.add(lead.id);}catch{}
+        }));
+        if(!active)return;
+        setPending(unseen.filter(lead=>!migrated.has(lead.id)));
       }catch{}finally{busy=false;}
     };
     void poll();const timer=setInterval(()=>void poll(),20_000);
