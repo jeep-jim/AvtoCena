@@ -1,5 +1,6 @@
 // Actual editor component; all calculation requests are intercepted by the browser test.
 import React from 'react';
+import {SellerPrice} from '../../apps/web/components/catalog/SellerPrice';
 import {PublicHeader} from '../../apps/web/components/layout/PublicHeader';
 import {OfferSpecificationsDisclosure} from '../../apps/web/components/catalog/OfferSpecificationsDisclosure';
 import {CrmLiveAlerts} from '../../apps/web/components/crm/CrmLiveAlerts';
@@ -12,7 +13,7 @@ const savedCalculation=kind.startsWith('saved-')?{version:'v1',savedAt:'2026-09-
 function App(){if(kind.startsWith('alerts'))return <PublicHeader backHref="/cars"/>;
  if(kind==='japan-specs')return <main className="ac-offer-page ac-page-copy" style={{width:900,margin:20}}><OfferSpecificationsDisclosure mode="desktop" title="Nissan Cube" groups={[{name:'Об автомобиле',items:[{name:'Марка',value:'Nissan'},{name:'Модель',value:'Cube'}]}]} headerAside={<div data-japan-auction-status className="flex items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4"><p>Продано на торгах · ARAI Bayside · 18.09.2026</p><span>Оценка R</span></div>}/></main>;return <main className="ac-offer-page ac-page-copy" style={{padding:16,minHeight:'180vh'}}>
  <div style={{maxWidth:390,margin:'40px auto 0'}}>
-  <InlineOfferParameters canSave={kind==='saved-admin'} savedCalculation={savedCalculation as any} sourcePriceOnly={kind==='missing-hybrid'} autoCalculate={kind==='missing-hybrid'} offerId="qa-attached" initial={initial} showCommercial={kind==='n1'} isPickup={kind==='n1'} price={<div className="ac-offer-price-panel" style={{padding:16,borderRadius:20,background:'var(--ac-surface-2)'}}><span>{kind==='missing-hybrid'?'Цена продавца':'Проверка интерфейса'}</span><br/><strong style={{fontSize:28}}>4 333 490 ₽</strong></div>}>
+  <InlineOfferParameters canSave={kind==='saved-admin'} savedCalculation={savedCalculation as any} sourcePriceOnly={kind==='missing-hybrid'} autoCalculate={kind==='missing-hybrid'} offerId="qa-attached" initial={initial} showCommercial={kind==='n1'} isPickup={kind==='n1'} price={kind==='missing-hybrid'?<SellerPrice offer={{market:'korea',sellerPriceRub:4333490}}/>:<div className="ac-offer-price-panel" style={{padding:16,borderRadius:20,background:'var(--ac-surface-2)'}}><span>{kind==='missing-hybrid'?'Цена продавца':'Проверка интерфейса'}</span><br/><strong style={{fontSize:28}}>4 333 490 ₽</strong></div>}>
    <div data-following-content style={{marginTop:16}}><div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}><div className="ac-offer-spec-tile" style={{padding:16,borderRadius:16}}>Робот</div><div className="ac-offer-spec-tile" style={{padding:16,borderRadius:16}}>Кроссовер</div></div>
    <button style={{width:'100%',padding:16,marginTop:12,borderRadius:16,background:'var(--ac-surface-2)'}}>Уточнить характеристики с ИИ</button>
    <div className="ac-original-calculation" style={{padding:20,marginTop:16,borderRadius:20,background:'var(--ac-surface-2)'}}>Структура цены</div>
