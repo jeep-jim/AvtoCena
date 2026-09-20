@@ -3,6 +3,7 @@ import type { PublicVehicleOffer } from "./types";
 import type { CatalogFacets } from "./storage";
 
 export const CATALOG_OVERVIEW_PATH = "catalog/public/overview.json";
+export const catalogOverviewGenerationPath = (generationId: string) => `catalog/generations/${generationId}/indexes/overview.json`;
 
 export type CatalogOverviewMarket = {
   total: number;
@@ -68,12 +69,29 @@ export function buildCatalogOverviewPayload(
   };
 }
 
-export async function readCatalogOverview(): Promise<CatalogOverview | null> {
-  const [overview, manifest] = await Promise.all([
-    readDataJson<CatalogOverview>(CATALOG_OVERVIEW_PATH, EMPTY_OVERVIEW),
-    readDataJson<{ generationId: string }>("catalog/manifest.json", { generationId: "" }),
-  ]);
-  return catalogOverviewMatchesGeneration(overview, manifest.generationId) ? overview : null;
+let overviewCache: { generationId: string; expiresAt: number; promise: Promise<CatalogOverview | null> } | null = null;
+export function resetCatalogOverviewCache() { overviewCache = null; }
+
+export async function readCatalogOverview(knownGenerationId?: string): Promise<CatalogOverview | null> {
+  const generationId = knownGenerationId || (await readDataJson<{ generationId: string }>("catalog/manifest.json", { generationId: "" })).generationId;
+  if (!generationId) return null;
+  if (overviewCache?.generationId === generationId && overviewCache.expiresAt > Date.now()) return overviewCache.promise;
+  const entry = { generationId, expiresAt: Date.now() + 60_000, promise: Promise.resolve<CatalogOverview | null>(null) };
+  entry.promise = (async () => {
+    const immutable = await readDataJson<CatalogOverview>(catalogOverviewGenerationPath(generationId), EMPTY_OVERVIEW);
+    if (catalogOverviewMatchesGeneration(immutable, generationId)) return immutable;
+    // Compatibility with generations published before the atomic overview.
+    const overview = await readDataJson<CatalogOverview>(CATALOG_OVERVIEW_PATH, EMPTY_OVERVIEW);
+    return catalogOverviewMatchesGeneration(overview, generationId) ? overview : null;
+  })().then(value => {
+    if (!value && overviewCache === entry) overviewCache = null;
+    return value;
+  }, error => {
+    if (overviewCache === entry) overviewCache = null;
+    throw error;
+  });
+  overviewCache = entry;
+  return entry.promise;
 }
 
 // Source count proves completeness before display-policy filtering. Visible

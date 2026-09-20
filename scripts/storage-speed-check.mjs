@@ -1,7 +1,6 @@
 // Read-only diagnostics; never changes source inventory or catalog manifests.
 import { readDataJson } from '../apps/web/lib/data.ts';
 import { readHomeCatalogSnapshot } from '../apps/web/lib/catalog/storage.ts';
-import { applyActiveBusinessPricingBatch } from '../apps/web/lib/catalog/live-business-pricing.ts';
 const manifest = await readDataJson('catalog/manifest.json', null);
 const overview = await readDataJson('catalog/public/overview.json', null);
 const maintenance = await readDataJson('catalog/storage-maintenance.json', null);
@@ -12,6 +11,5 @@ for (let attempt=1;attempt<=3;attempt++) {
   const start=performance.now();
   const home=await readHomeCatalogSnapshot(6);
   const readAt=performance.now();
-  const priced=await applyActiveBusinessPricingBatch(home.items);
-  console.log('TIMING',JSON.stringify({attempt,readMs:Math.round(readAt-start),pricingMs:Math.round(performance.now()-readAt),cards:priced.length,generationId:home.generationId}));
+  console.log('TIMING',JSON.stringify({attempt,readMs:Math.round(readAt-start),cards:home.items.length,generationId:home.generationId}));
 }

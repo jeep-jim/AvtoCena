@@ -141,6 +141,10 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
   await persistCatalogOffers(offers);
   const manifest = await readDataJson<any>("catalog/manifest.json", {});
   assert.ok(manifest.generationId.startsWith("gen_"));
+  const overview = await readDataJson<any>(`catalog/generations/${manifest.generationId}/indexes/overview.json`, null);
+  assert.equal(overview?.generationId, manifest.generationId, 'every publication stages its compact overview');
+  assert.equal(overview.markets.europe.sourceTotal, offers.length);
+  assert.ok(overview.markets.europe.items.length > 0 && overview.markets.europe.items.length <= 24);
   const firstChunkPath = String(manifest.markets.europe.chunks[0]).startsWith("catalog/")
     ? manifest.markets.europe.chunks[0]
     : `catalog/generations/${manifest.generationId}/offers/europe/${manifest.markets.europe.chunks[0]}.json`;

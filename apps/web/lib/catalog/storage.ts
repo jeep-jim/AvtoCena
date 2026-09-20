@@ -1,7 +1,7 @@
 import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
-import { readCatalogOverview, catalogOverviewMarketComplete } from "./overview";
+import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
 import { selectCatalogPublicationMix } from "./china-source-share";
 import { allowedCatalogSourceIds, REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { boundedDetailShards, detailHash, detailShardPath, type DetailShard } from "./detail-shards";
@@ -520,6 +520,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetCatalogOverviewCache();
   manifestCache = null;
   searchProjectionCache.clear();
   currentProjectionCache.clear();
@@ -1393,6 +1394,13 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     writeJsonAtomic(detailShardPath(generationId,prefix), { generationId, ...(offersByShard.get(prefix) || {items:[]}) }, false));
   const aiProductFeed = await publishAiProductFeed({ generationId, items: allProjectionItems });
 
+  // Stage the small landing snapshot with every publication, before switching
+  // the manifest. A separate workflow used to leave it on an old generation,
+  // forcing every homepage visit to parse the entire catalog instead.
+  const overview = await buildCatalogOverviewFromProjections(generationId, allProjectionItems);
+  await writeJsonAtomic(catalogOverviewGenerationPath(generationId), overview, false);
+  await writeJsonAtomic(CATALOG_OVERVIEW_PATH, overview, false);
+
   return {
     generationId,
     total: offers.length,
@@ -1644,10 +1652,22 @@ function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number) 
   return [...pricedSelection, ...selectCatalogShowcaseDiversity(pending, limit - pricedSelection.length)].slice(0, limit);
 }
 
+export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[]) {
+  const visible = projections.filter(projectionCanRenderCard);
+  const facets = await facetsFromProjection(generationId, visible, {}, false);
+  const markets = Object.fromEntries(MARKETS.map(market => {
+    const rows = visible.filter(row => row.market === market);
+    catalogSearchProjectionSort(rows, "updatedAt");
+    return [market, {sourceTotal: projections.filter(row => row.market === market).length,
+      total: rows.length, items: selectHomepageShowcase(rows, 24).map(publicOfferFromProjection)}];
+  }));
+  return buildCatalogOverviewPayload(generationId, facets, markets);
+}
+
 export async function readHomeCatalogSnapshot(perMarket = 6) {
   const manifest = await readManifest();
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
-  const overview = await readCatalogOverview().catch(() => null);
+  const overview = await readCatalogOverview(manifest.generationId).catch(() => null);
   if (overview?.generationId === manifest.generationId && MARKETS.every(market => {
     const count = Number(manifest.markets?.[market]?.count || 0);
     const summary = overview.markets[market];
