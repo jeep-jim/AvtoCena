@@ -1,4 +1,5 @@
 import {restoreProAuctionsPower} from "./proauctions-source-parameters";
+import {enrichEncarOfficialPower} from "./korea-official-power";
 import { enrichOfferWithSourceTableParameters } from "./source-table-displacement";
 import { specificationEvidenceComplete } from "./modification-matching";
 import type { VehicleOffer } from "./types";
@@ -37,7 +38,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
     const repriced = await enrichOfferForDisplay(structuredClone(input));
     if (!combustionPowerMismatch(repriced)) return repriced;
   }
-  const source = enrichOfferWithSourceTableParameters(inventorySourceEvidence(input));
+  const source = enrichEncarOfficialPower(enrichOfferWithSourceTableParameters(inventorySourceEvidence(input)));
   const original = await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
