@@ -226,7 +226,7 @@ try{
   await page.addInitScript(()=>{localStorage.setItem('avtocena_crm_notifications_enabled','1');window.__beeps=0;window.AudioContext=class{state='running';currentTime=0;destination={};resume(){return Promise.resolve();}createOscillator(){return {frequency:{setValueAtTime(){}},connect(){},disconnect(){},start(){window.__beeps++;},stop(){}};}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){}};}};});
   await page.route('**/api/crm/inbox',route=>route.fulfill({json:{newCount:1,leads:[{id:'new-1',status:'new',createdAt:'2026-09-20T12:00:00Z'}]}}));
   await page.goto(origin+'/?kind=alerts');await page.getByText('Новые заявки: 1').waitFor();
-  await page.locator('body').click({position:{x:5,y:5}});await page.waitForTimeout(2400);
+  await page.getByText('Новые заявки: 1').click();await page.waitForTimeout(2400);
   assert.ok(await page.evaluate(()=>window.__beeps)>=2,'sound repeats while unacknowledged');
   await page.getByRole('button',{name:'Прочитано',exact:true}).click();const stopped=await page.evaluate(()=>window.__beeps);await page.waitForTimeout(1200);assert.equal(await page.evaluate(()=>window.__beeps),stopped);
   await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);assert.equal(await page.getByRole('button',{name:/Заявки/}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.close();
