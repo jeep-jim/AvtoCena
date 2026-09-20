@@ -35,7 +35,7 @@ const results=[];let current={};
 const save=()=>fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));
 async function contextFor(width){const c=await browser.newContext({viewport:{width,height:900},hasTouch:width<1024,serviceWorkers:'block'});
  if(!live)await c.route('**/api/catalog/**',r=>r.fulfill({json:r.request().url().includes('brand-counts')?{counts:{Toyota:10,BMW:8,Mazda:5},modelCounts:{Toyota:4,BMW:3,Mazda:2}}:{facets,items:[{id:'corolla',make:'Toyota',model:'Corolla',label:'Toyota Corolla'}]}}));return c;}
-async function openSheet(page){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();const sheet=page.locator('.ac-mobile-filter-sheet');await sheet.waitFor();await page.waitForTimeout(350);return sheet;}
+async function openSheet(page){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();const sheet=page.locator('.ac-mobile-filter-sheet');await sheet.waitFor();await page.waitForTimeout(350);if(!page.url().includes('baseline=1'))assert.equal(await page.locator('.ac-notice-stack').isVisible(),false,'notices must not cover the modal filter controls');return sheet;}
 async function positions(scope){return scope.locator('.ac-filter-control,.ac-sort-control,.ac-range-card').evaluateAll(els=>els.map(el=>{const s=el.closest('.ac-mobile-filter-sheet')?.querySelector(':scope > .ac-hide-scrollbar');const r=el.getBoundingClientRect();return [Math.round(r.x),Math.round(r.y+(s?.scrollTop||0)),Math.round(r.width),Math.round(r.height)];}));}
 async function menuGeometry(page,root,menu,expectedWidth){const r=await root.boundingBox(),m=await menu.boundingBox();assert.ok(r&&m);assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.ok(Math.abs(m.width-expectedWidth)<3,`width ${JSON.stringify({r,m,expectedWidth})}`);assert.ok(m.x>=-1&&m.x+m.width<=page.viewportSize().width+1);assert.ok(m.y>=r.y+r.height&&m.y-r.y-r.height<=13);return {width:m.width,height:m.height,gap:m.y-r.y-r.height};}
 try{
@@ -78,7 +78,7 @@ try{
    // Selection stays a draft until the sheet closes; no data-changing requests.
    const body=row.locator('input[name="bodyType"]').locator('..');await body.locator(':scope > button').click();const options=body.locator('.ac-filter-option:not(.ac-facet-incompatible)');const option=options.filter({hasText:'Кроссовер'});if(await option.count()){
     const previousUrl=page.url();await option.click();assert.equal(await body.locator('input[name="bodyType"]').inputValue(),'suv');assert.equal(page.url(),previousUrl);assert.equal(await body.locator('.ac-filter-dropdown').count(),0);
-    await sheet.locator(':scope > div:first-child button[aria-label="Закрыть"],:scope > div:first-child button[data-ac-mobile-close="1"]').click();await page.waitForURL(/bodyType=suv/,{timeout:30000});
+    await sheet.locator(':scope > div:first-child button[aria-label="Закрыть"],:scope > div:first-child button[data-ac-mobile-close="1"]').click();await page.waitForURL(/bodyType=suv/,{timeout:30000});if(!live)assert.equal(await page.locator('.ac-notice-stack').isVisible(),true,'city notice returns after closing the filter sheet');
    }
    if(!live)assert.deepEqual(errors,[]);results.push({theme,width,menus:checks,noLayoutShift:true,rangeOverlays:true,selection:true,pageErrors:errors});save();
   }catch(e){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({...current,error:String(e),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw e;}finally{await c.close();}
