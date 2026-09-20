@@ -1,3 +1,4 @@
+import { latestLeadIncomingAt } from "@/lib/crm-alert-state";
 import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
@@ -20,6 +21,7 @@ export async function GET() {
     .map((lead) => ({
       id: String(lead.id || ""),
       createdAt: String(lead.createdAt || ""),
+      lastIncomingAt: latestLeadIncomingAt(lead),
       updatedAt: String(lead.updatedAt || ""),
       status: String(lead.status || "new"),
       name: String(lead.name || ""),

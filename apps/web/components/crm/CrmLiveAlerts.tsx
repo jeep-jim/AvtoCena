@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { unseenNewLeads, type AlertLead } from "../../lib/crm-alert-state";
+import { unseenNewLeads, leadAlertTime, type AlertLead } from "../../lib/crm-alert-state";
 const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
 const put=(key:string,value:string)=>{try{localStorage.setItem(key,value);}catch{}};
@@ -69,16 +69,17 @@ export function CrmLiveAlerts({userId, floating=false}:{userId:string;floating?:
       put(leaseKey,JSON.stringify({id:tab.current,until:Date.now()+1800}));
       beep();setAudioBlocked(!audio || audio.state!=="running");
       const newest=pending[0];
-      if(notifiedRef.current!==newest.id && "Notification" in window && Notification.permission==="granted"){
-        notifiedRef.current=newest.id;
-        try{const notice=new Notification("Новые заявки · АвтоЦена",{body:`Непросмотренных заявок: ${pending.length}`,tag:`avtocena-${userId}-${newest.id}`,icon:"/logo/avtocena-mark-light.svg",requireInteraction:true});notice.onclick=()=>{window.focus();location.assign("/crm/leads");notice.close();};}catch{}
+      const eventKey=`${newest.id}:${leadAlertTime(newest)}`;
+      if(notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
+        notifiedRef.current=eventKey;
+        try{const notice=new Notification("Новые заявки · АвтоЦена",{body:`Непросмотренных заявок: ${pending.length}`,tag:`avtocena-${userId}-${eventKey}`,icon:"/logo/avtocena-mark-light.svg",requireInteraction:true});notice.onclick=()=>{window.focus();location.assign("/crm/leads");notice.close();};}catch{}
       }
     };
     ring();const timer=setInterval(ring,1000);
     return ()=>{clearInterval(timer);try{if(JSON.parse(get(leaseKey)||"{}").id===tab.current)put(leaseKey,"{}");}catch{}};
   },[enabled,pending,authorized,leaseKey,userId]);
   function acknowledge(){
-    const latest=Math.max(Number(get(ackKey)||0),...pendingRef.current.map(lead=>Date.parse(lead.createdAt||"")||0));
+    const latest=Math.max(Number(get(ackKey)||0),...pendingRef.current.map(leadAlertTime));
     put(ackKey,String(latest));setPending([]);
   }
   function toggle(){
@@ -87,7 +88,7 @@ export function CrmLiveAlerts({userId, floating=false}:{userId:string;floating?:
   }
   if(!authorized)return null;
   return <div className={floating?"fixed right-3 bottom-24 z-[110]":"contents"}>
-    <button type="button" onClick={toggle} aria-pressed={enabled} title={enabled?"Отключить звук заявок":"Включить звук заявок"} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-slate-500/30 bg-slate-800 px-3 py-2 text-xs font-bold text-white shadow-lg"><span aria-hidden>{enabled?"🔔":"🔕"}</span>Заявки{count>0?<span className="rounded-full bg-red-500 px-2 py-0.5 text-white">{count}</span>:null}</button>
+    <button type="button" onClick={toggle} aria-pressed={enabled} title={enabled?"Отключить звук заявок":"Включить звук заявок"} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-slate-500/30 bg-slate-800 px-3 py-2 text-xs font-bold text-white shadow-lg"><span aria-hidden>{enabled?"🔔":"🔕"}</span>Заявки{Math.max(count,pending.length)>0?<span className="rounded-full bg-red-500 px-2 py-0.5 text-white">{Math.max(count,pending.length)}</span>:null}</button>
     {pending.length>0?<div role="status" className="fixed right-4 top-20 z-[120] w-[min(92vw,370px)] rounded-2xl border border-slate-500 bg-slate-800 p-4 text-white shadow-2xl">
       <p className="font-bold">Новые заявки: {pending.length}</p>
       {enabled && audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}} className="mt-2 text-xs underline">Нажмите, чтобы разрешить звук</button>:null}

@@ -1,5 +1,13 @@
-export type AlertLead = {id:string;createdAt?:string;status?:string;car?:string;offerTitle?:string};
+export type AlertLead = {id:string;createdAt?:string;lastIncomingAt?:string;status?:string;car?:string;offerTitle?:string};
+export function leadAlertTime(lead:AlertLead) {
+  const parsed=Date.parse(lead.lastIncomingAt || lead.createdAt || "");
+  return Number.isFinite(parsed)?parsed:0;
+}
+export function latestLeadIncomingAt(lead:{createdAt?:string;followups?:Array<{createdAt?:string}>}) {
+  const timestamps=[lead.createdAt,...(Array.isArray(lead.followups)?lead.followups.map(item=>item.createdAt):[])].filter((v):v is string=>Boolean(v)&&Number.isFinite(Date.parse(v!)));
+  return timestamps.sort((a,b)=>Date.parse(b)-Date.parse(a))[0] || "";
+}
 export function unseenNewLeads(leads:AlertLead[], acknowledged:number) {
-  return leads.filter(lead=>lead.status === "new" && Number.isFinite(Date.parse(lead.createdAt || "")) && Date.parse(lead.createdAt!) > acknowledged)
-    .sort((a,b)=>Date.parse(b.createdAt!)-Date.parse(a.createdAt!));
+  return leads.filter(lead=>(lead.status === "new" || leadAlertTime(lead)>Date.parse(lead.createdAt || "")) && leadAlertTime(lead)>acknowledged)
+    .sort((a,b)=>leadAlertTime(b)-leadAlertTime(a));
 }
