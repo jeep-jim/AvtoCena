@@ -13,6 +13,9 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
   const cleanImages = [...new Set(images.filter(Boolean))];
   const [activeIndex, setActiveIndex] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const helpCloseButton = useRef<HTMLButtonElement | null>(null);
+  const helpTrigger = useRef<HTMLButtonElement | null>(null);
   const isSheet = auctionSheetUrls.includes(cleanImages[activeIndex]);
   const touchStartX = useRef<number | null>(null);
   const didSwipe = useRef(false);
@@ -26,6 +29,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
   useEffect(() => {
     setActiveIndex(0);
     setFullscreen(false);
+    setHelpOpen(false);
   }, [images.join("|")]);
 
   useEffect(() => {
@@ -84,12 +88,13 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
   }, [fullscreen, cleanImages.length]);
 
   useEffect(() => {
-    if (!fullscreen) return;
+    if (!fullscreen) { setHelpOpen(false); return; }
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setFullscreen(false);
+      if (event.key === "Escape") { if (helpOpen) setHelpOpen(false); else setFullscreen(false); }
+      if (helpOpen) { if (event.key === "Tab") { event.preventDefault(); helpCloseButton.current?.focus(); } return; }
       if (event.key === "ArrowLeft") previous();
       if (event.key === "ArrowRight") next();
     };
@@ -99,7 +104,12 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [fullscreen, cleanImages.length]);
+  }, [fullscreen, cleanImages.length, helpOpen]);
+
+  useEffect(() => {
+    if (helpOpen) helpCloseButton.current?.focus();
+    else helpTrigger.current?.focus({preventScroll:true});
+  }, [helpOpen]);
 
   if (!cleanImages.length) {
     return <div className="flex h-[360px] min-w-0 max-w-full items-center justify-center overflow-hidden rounded-[2rem] bg-white/[0.045] text-sm font-black text-white/35 md:h-[520px]">Фото загружается</div>;
@@ -246,10 +256,16 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
             →
           </button>
         </div>
-        {isSheet ? <details className={styles.mobileHelp}><summary>Как читать аукционный лист</summary><div><AuctionSheetHelp kind="grades" /><AuctionSheetHelp kind="damage" /></div></details> : null}
+        {isSheet ? <button ref={helpTrigger} type="button" className={styles.mobileHelp} onClick={() => setHelpOpen(true)} aria-haspopup="dialog">Как читать аукционный лист</button> : null}
         </div>
         {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="damage" /></aside> : null}
       </div>
+      {isSheet && helpOpen ? <div className={styles.helpOverlay} onClick={event => { event.stopPropagation(); setHelpOpen(false); }}>
+        <section className={styles.helpPanel} role="dialog" aria-modal="true" aria-label="Как читать аукционный лист" onClick={event => event.stopPropagation()} data-auction-help>
+          <header className={styles.helpHeader}><h2>Аукционный лист: расшифровка</h2><button ref={helpCloseButton} type="button" onClick={() => setHelpOpen(false)} aria-label="Закрыть подсказки">×</button></header>
+          <div className={styles.helpBody}><AuctionSheetHelp kind="grades" /><AuctionSheetHelp kind="damage" /></div>
+        </section>
+      </div> : null}
     </div>
   ) : null;
 

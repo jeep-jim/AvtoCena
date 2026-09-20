@@ -58,8 +58,5 @@ export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const city = useSelectedCity();
  const priced = priceCardForCity(props.offer,city);
  const estimated = Number(props.offer?.japanDeliveredPreview?.totalRub) > 0 || (!isSellerPricedOffer(props.offer) && Number(props.offer?.totalRub) > 0);
- const caption = !city ? "Без доставки" : priced.included
-  ? (priced.quote.distanceKm === 0 ? `Получение: ${priced.quote.origin}` : `С доставкой: ${priced.quote.city} · предварительно`)
-  : `Доставка: ${city} — уточняется`;
- return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{estimated ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">{caption}</p> : null}</div>;
+ return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{estimated && !city ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
 }

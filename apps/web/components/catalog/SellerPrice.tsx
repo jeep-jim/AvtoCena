@@ -27,7 +27,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
       {panel ? <SellerPriceHelp /> : null}
       {japan ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
     </div>
-    {!panel && !japan ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">{deliveryCity ? `Доставка: ${deliveryCity} — после расчёта` : "Без доставки"}</p> : null}
+    {!panel && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
     {panel ? <p className="mt-2 text-[10px] text-[var(--ac-muted)]">Без доставки и платежей</p> : null}
     {panel ? <style dangerouslySetInnerHTML={{ __html: `html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}` }} /> : null}
     {panel && rate?.effectiveRate ? <>
