@@ -37,7 +37,7 @@ test('historical bound conversion retains its date so display repricing can refr
 test('rejected horsepower cannot leak through raw source specification groups',()=>{
  for(const row of [fixture(),safePublicPricing(fixture())]){
   const groups=offerSpecificationGroups(row);const items=groups.flatMap(g=>g.items);
-  assert.equal(items.some(i=>i.value==='34'),false);assert.equal(items.some(i=>i.value==='White'),true);
+  assert.equal(items.some(i=>i.value==='34'),false);assert.equal(items.some(i=>i.value==='Белый'),true);
  }
 });
 test('verified independent power and prices are untouched',()=>{

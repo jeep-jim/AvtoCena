@@ -15,7 +15,7 @@ test("selected catalog filters stay visible even when the result facet is empty"
 
 test("electric filter loads one facet response instead of every catalog page", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
-  assert.match(source, /fuel=electric&pageSize=1&includeFacets=1/);
+  assert.match(source, /fuel=\$\{encodeURIComponent\(fuel\)\}&pageSize=1&includeFacets=1/);
   assert.doesNotMatch(source, /Array\.from\(\{ length: pages - 1/);
 });
 

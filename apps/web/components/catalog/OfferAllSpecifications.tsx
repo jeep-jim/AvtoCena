@@ -1,29 +1,30 @@
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
-
-const LABELS: Record<string, string> = {
-  "Basic Specifications": "Основные характеристики", "Engine": "Двигатель",
-  "Body": "Кузов", "Transmission": "Коробка передач", "Chassis Steering": "Шасси и рулевое управление",
-  "Model Name": "Модификация", "Energy Type": "Тип топлива",
-  "Displacement (mL)": "Рабочий объём, см³", "Displacement (L)": "Объём, л",
-  "Maximum horsepower (Ps)": "Максимальная мощность, л.с.", "Maximum power (kW)": "Максимальная мощность, кВт",
-  "Engine Model": "Модель двигателя", "Length (mm)": "Длина, мм", "Width (mm)": "Ширина, мм",
-  "Height (mm)": "Высота, мм", "Wheelbase (mm)": "Колёсная база, мм",
-};
-
-// Unknown labels and source values are preserved, never guessed or run as HTML.
+import { translateKnownSpecification } from "../../lib/catalog/specification-vocabulary";
+import { SpecificationSectionIcon } from "./SpecificationSectionIcon";
+import styles from "./OfferSpecifications.module.css";
+const foreign = /[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Georgian}]/u;
+function readableLabel(value:string) {
+ const text=translateKnownSpecification(value);
+ return !foreign.test(text) && !/неполное в источнике/.test(text) && (!/[a-z]{3}/i.test(text) || /[а-яё]/i.test(text) || /^(ABS|ESP|ISOFIX|USB|Bluetooth|Wi-Fi|LED|DCT|CVT)$/i.test(text)) ? text : null;
+}
+function valueText(value:string) {
+ return translateKnownSpecification(value).replace(/\s*\/\s*(?=(?:спереди|сзади|Передн|Задн|Водител|Пассажир))/gi,"\n").replace(/;\s*/g,";\n");
+}
 export function OfferAllSpecifications({ snapshot, groups = snapshot?.groups || [], showHeading = true, sourceUrl }: { snapshot?: SourceSpecificationSnapshot; groups?: SourceSpecificationSnapshot["groups"]; showHeading?: boolean; sourceUrl?: string }) {
-  if (!groups.length) return <p className="text-sm text-[var(--ac-muted)]">Источник пока не предоставил характеристики.</p>;
-  return <section className="min-w-0 text-[var(--ac-text)]" aria-label="Все характеристики">
-    {showHeading ? <h2 className="text-xl font-black">Все характеристики</h2> : null}
-    {groups.map((group, groupIndex) => <div key={groupIndex} className="mt-6 min-w-0 first:mt-0">
-      <h3 className="text-[13px] font-black uppercase tracking-[0.08em]">{LABELS[group.name] || group.name}</h3>
-      <dl className="mt-2 grid min-w-0 gap-x-8 xl:grid-cols-2">
-        {group.items.map((item, itemIndex) => <div key={itemIndex} className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-3 border-b border-[var(--ac-border)] py-2.5 text-[13px] leading-5">
-          <dt className="break-words text-[var(--ac-muted)]">{LABELS[item.name] || item.name}</dt>
-          <dd className="min-w-0 break-words text-right font-semibold">{item.value.trim() && item.value.trim() !== "-" ? item.value : "Не указано"}</dd>
-        </div>)}
-      </dl>
-    </div>)}
-    {sourceUrl && /^https?:\/\//i.test(sourceUrl) ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#ef3340] underline underline-offset-4">Открыть объявление источника ↗</a> : null}
-  </section>;
+ if (!groups.length) return <p className="text-sm text-[var(--ac-muted)]">Источник пока не предоставил характеристики.</p>;
+ return <section className={styles.root} aria-label="Все характеристики">
+  {showHeading ? <h2 className="text-xl font-black">Все характеристики</h2> : null}
+  {groups.map((group,index)=>{
+   const name=readableLabel(group.name) || "Дополнительные сведения";
+   const rows=group.items.map(item=>({...item,label:readableLabel(item.name),displayValue:valueText(item.value)}));
+   const known=rows.filter(item=>item.label && !foreign.test(item.displayValue));
+   const unresolved=rows.filter(item=>!item.label || foreign.test(item.displayValue));
+   return <section key={index} className={styles.section}>
+    <h3 className={styles.heading}><SpecificationSectionIcon name={name}/><span>{name}</span><span className={styles.rule} aria-hidden/></h3>
+    <dl className={styles.rows}>{known.map((item,i)=><div key={i} className={styles.row}><dt>{item.label}</dt><dd>{item.displayValue.trim() && !/^[—-]$/.test(item.displayValue.trim())?item.displayValue:"Не указано"}</dd></div>)}</dl>
+    {unresolved.length ? <details className={styles.unresolved}><summary>Данные требуют уточнения ({unresolved.length})</summary><p>Источник передал неполное название или текст без подтверждённого перевода. Оригинальные сведения:</p><dl className={styles.rows}>{unresolved.map((item,i)=><div key={i} className={styles.row}><dt>{item.label||item.name}</dt><dd>{item.displayValue||"Не указано"}</dd></div>)}</dl></details> : null}
+   </section>;
+  })}
+  {sourceUrl && /^https?:\/\//i.test(sourceUrl) ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[#ef3340] underline underline-offset-4">Открыть объявление источника ↗</a> : null}
+ </section>;
 }

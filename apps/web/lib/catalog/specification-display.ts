@@ -1,3 +1,4 @@
+import { translateKnownSpecification } from "./specification-vocabulary";
 import { translateKoreanSpecification } from "./korean-specification-display";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
 
@@ -286,7 +287,7 @@ const exact: Record<string,string> = {
 };
 const ordered=Object.entries(phrases).sort((a,b)=>b[0].length-a[0].length);
 export function translateSpecificationText(value:string) {
-  const text=translateKoreanSpecification(value.normalize("NFKC").replace(/\s+/g," ").trim());
+  const text=translateKnownSpecification(translateKoreanSpecification(value.normalize("NFKC").replace(/\s+/g," ").trim()));
   if (Object.hasOwn(exact,text)) return exact[text];
   let result=text
     .replace(/(\d+)款/g,"$1 г.")
