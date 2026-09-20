@@ -37,11 +37,12 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
 
 export function enrichEncarOfficialPower<T extends VehicleOffer>(offer:T):T {
  const match=matchKoreaOfficialPower(offer);if(!match)return offer;
+ const semantic:any=offer.operational?.semanticEvidence||{};
  const powerKw=Number((match.powerHp*0.73549875).toFixed(6));
  const source='korea_energy_agency_engine_code_ps';
  const evidence=(value:number)=>({status:'exact',value,source,rawValues:[],unit:'PS',recordIds:match.recordIds});
  return {...offer,powerHp:match.powerHp,powerKw,icePowerKw:powerKw,utilizationPowerKw:powerKw,
    powerDataConfidence:'source_exact',powerDataSource:source,
    operational:{...offer.operational,officialPowerEvidence:match,
-    semanticEvidence:{...offer.operational?.semanticEvidence,powerHp:evidence(match.powerHp),powerKw:{...evidence(powerKw),unit:'kW',conversion:'PS * 0.73549875'}}}} as T;
+    semanticEvidence:{...semantic,powerHp:evidence(match.powerHp),powerKw:{...evidence(powerKw),unit:'kW',conversion:'PS * 0.73549875'}}}} as T;
 }
