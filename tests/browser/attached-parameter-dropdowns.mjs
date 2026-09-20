@@ -158,7 +158,7 @@ try{
     await presets.hover();await page.mouse.wheel(0,200);await page.waitForTimeout(100);
     assert.ok(await presets.evaluate(el=>el.scrollTop>0),'long list scrolls inside the mobile menu');
     await page.keyboard.press('Escape');await page.waitForFunction(()=>document.documentElement.style.overflow!=='hidden');
-    assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0);await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+    assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0);assert.match(await triggers.nth(3).innerText(),/120 л.с./);assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
     await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
     await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
    }
