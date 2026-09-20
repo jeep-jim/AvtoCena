@@ -38,3 +38,15 @@ test('absent or malformed official output and multiple ratings fail closed',()=>
  assert.equal(matchKoreaOfficialPower(offer(),[{...base,releaseYear:2023}]),null);
  assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'hybrid',powertrain:'하이브리드'}]),null);
 });
+test('model-bound Morning ratings no longer conflict with Ray; Ray year ambiguity remains blocked',()=>{
+ const input=offer();input.make='Kia';input.model='Morning III';input.year=2023;input.engineCc=998;input.operational.inspection.year=2023;input.operational.inspection.engineCode='G3LA';
+ assert.equal(matchKoreaOfficialPower(input)?.powerHp,76);
+ input.model='Ray';assert.equal(matchKoreaOfficialPower(input),null);
+ input.model='Unidentified';assert.equal(matchKoreaOfficialPower(input),null);
+});
+test('narrowing never discards unknown or hybrid records from the same model family',()=>{
+ const base={id:'1',manufacturer:'현대',model:'아반떼',engineCode:'G4FM',engineCc:1598,fuel:'휘발유',powertrain:'내연기관',output:'123/6300',releaseDate:'20200430',releaseYear:2020};
+ assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'unknown',model:'Unrecognised',output:'150/6300'}]),null);
+ assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'hybrid',model:'아반떼 하이브리드',powertrain:'하이브리드'}]),null);
+ assert.equal(matchKoreaOfficialPower({...offer(),model:'Ray'},[base]),null);
+});

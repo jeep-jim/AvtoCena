@@ -2,7 +2,7 @@ name: Encar official engine specification recovery
 on:
   workflow_dispatch:
   push:
-    branches: [fix/encar-corporate-manufacturers-20260920, fix/encar-official-power-20260920, main]
+    branches: [fix/encar-model-families-20260920, fix/encar-corporate-manufacturers-20260920, fix/encar-official-power-20260920, main]
     paths: [.github/workflows/encar-official-recovery.yml, data/catalog/triggers/encar-official-recovery.json, .github/market-runs/encar-official-recovery.json]
 permissions:
   contents: read
