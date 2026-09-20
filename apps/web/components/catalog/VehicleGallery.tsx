@@ -2,15 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { AuctionSheetHelp } from "./AuctionSheetHelp";
+import styles from "./VehicleGallery.module.css";
 
 function dominantWheelDelta(event: WheelEvent) {
   return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
 }
 
-export function VehicleGallery({ images, title }: { images: string[]; title: string }) {
+export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { images: string[]; title: string; auctionSheetUrls?: string[] }) {
   const cleanImages = [...new Set(images.filter(Boolean))];
   const [activeIndex, setActiveIndex] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
+  const isSheet = auctionSheetUrls.includes(cleanImages[activeIndex]);
   const touchStartX = useRef<number | null>(null);
   const didSwipe = useRef(false);
   const activeSideThumb = useRef<HTMLButtonElement | null>(null);
@@ -66,6 +69,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     lastFullscreenWheelAt.current = 0;
     const handleWheel = (event: WheelEvent) => {
       if (!window.matchMedia("(pointer: fine)").matches) return;
+      if ((event.target as Element)?.closest("[data-auction-help], details")) return;
       const delta = dominantWheelDelta(event);
       if (Math.abs(delta) < 1) return;
       event.preventDefault();
@@ -137,7 +141,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       key={cleanImages[activeIndex]}
       src={cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
-      className="block h-full w-full max-w-full select-none object-cover"
+      className={`block h-full w-full max-w-full select-none ${isSheet ? "object-contain" : "object-cover"}`}
       loading="eager"
       decoding="async"
       fetchPriority="high"
@@ -173,7 +177,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       aria-label={`Фотографии ${title}`}
       onClick={() => setFullscreen(false)}
     >
-      <div className="flex max-h-[94dvh] w-full max-w-5xl flex-col items-center" onClick={(event) => event.stopPropagation()}>
+      <div className={isSheet ? styles.sheetLayout : "flex max-h-[94dvh] w-full max-w-5xl flex-col items-center"} onClick={(event) => event.stopPropagation()}>
+        {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="grades" /></aside> : null}
+        <div className={styles.center}>
         <button
           type="button"
           onClick={() => setFullscreen(false)}
@@ -190,6 +196,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
           onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
         >
           <img
+            data-fullscreen-image
             key={`fullscreen-${cleanImages[activeIndex]}`}
             src={cleanImages[activeIndex]}
             alt={`${title}, фото ${activeIndex + 1}`}
@@ -239,6 +246,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             →
           </button>
         </div>
+        {isSheet ? <details className={styles.mobileHelp}><summary>Как читать аукционный лист</summary><div><AuctionSheetHelp kind="grades" /><AuctionSheetHelp kind="damage" /></div></details> : null}
+        </div>
+        {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="damage" /></aside> : null}
       </div>
     </div>
   ) : null;

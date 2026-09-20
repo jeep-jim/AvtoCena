@@ -1,0 +1,15 @@
+.sheetLayout { display: flex; width: 100%; max-height: 94dvh; flex-direction: column; align-items: center; }
+.center { display: flex; min-width: 0; max-width: 100%; flex-direction: column; align-items: center; }
+.side { display: none; }
+.mobileHelp { width: 100%; margin-top: 12px; color: var(--ac-text); background: var(--ac-surface); border-radius: 16px; }
+.mobileHelp summary { cursor: pointer; padding: 14px 16px; font-size: 14px; font-weight: 800; }
+.mobileHelp > div { max-height: 35dvh; overflow-y: auto; overscroll-behavior: contain; }
+.sheetLayout { overflow-y: auto; overscroll-behavior: contain; padding-top: 44px; }
+.sheetLayout .center { width: 100%; }
+.sheetLayout img[data-fullscreen-image] { max-height: 58dvh; }
+@media (min-width: 1280px) {
+ .sheetLayout { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(0, 1.8fr) minmax(240px, 1fr); gap: 24px; max-width: 1600px; overflow: visible; padding-top: 0; align-items: center; }
+ .side { display: block; min-width: 0; max-height: 82dvh; overflow-y: auto; overscroll-behavior: contain; border-radius: 16px; }
+ .mobileHelp { display: none; }
+ .sheetLayout img[data-fullscreen-image] { max-height: 68dvh; }
+}

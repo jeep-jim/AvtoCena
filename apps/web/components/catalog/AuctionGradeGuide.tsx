@@ -5,19 +5,7 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { useTapActivation } from "./useTapActivation";
 
-// Broad guide only: auction-specific criteria and the original sheet take precedence.
-const rows = [
-  ["S / 6", "Состояние близко к новому, минимальные следы эксплуатации.", "violet"],
-  ["5", "Очень хорошее состояние, возможны небольшие косметические дефекты.", "violet"],
-  ["4.5", "Хорошее состояние, возможны царапины и небольшие вмятины.", "green"],
-  ["4", "Есть заметные следы эксплуатации или косметического ремонта.", "green"],
-  ["3.5", "Несколько дефектов кузова и износ салона; могут потребоваться работы.", "amber"],
-  ["3", "Выраженный износ, многочисленные внешние дефекты.", "amber"],
-  ["2", "Плохое внешнее состояние, значительные дефекты.", "amber"],
-  ["1 / 0", "Особая категория состояния. Значение уточняют по правилам площадки и листу.", "red"],
-  ["R", "В истории есть восстановление силовых элементов кузова.", "red"],
-  ["RA", "Менее значительное восстановление силовых элементов по шкале площадки.", "red"],
-] as const;
+import { auctionGradeRows as rows } from "../../lib/catalog/auction-guide";
 
 export function AuctionGradeGuide({ grade, className }: { grade: string; className: string }) {
   const [open, setOpen] = useState(false);
