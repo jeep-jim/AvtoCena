@@ -1,1 +1,6 @@
-{"requestedAt":"2026-09-19T12:23:06.350Z","reason":"Publish VIN-bound KCar recovery with retained existing IDs and bounded storage I/O","limit":60}
+{
+  "requestedAt": "2026-09-20T03:56:00Z",
+  "scope": "all-existing-kcar",
+  "limit": 0,
+  "reason": "Complete VIN-bound power and production-date recovery with durable checkpoints"
+}
