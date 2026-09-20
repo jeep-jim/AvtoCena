@@ -1,4 +1,3 @@
-import { PublicStaffAlerts } from "@/components/crm/PublicStaffAlerts";
 import "../../components/catalog/MobileCatalogDropdowns.css";
 import "../flat-ui.css";
 import "../public-regression-fixes.css";
@@ -309,7 +308,6 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       />
       {children}
       <YandexMetrikaRouteTracker />
-      <PublicStaffAlerts />
       <style dangerouslySetInnerHTML={{ __html: publicPageFixes }} />
       <script dangerouslySetInnerHTML={{ __html: priceTrendTapGuard }} />
     </>

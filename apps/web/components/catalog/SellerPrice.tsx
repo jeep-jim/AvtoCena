@@ -22,12 +22,13 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
       {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label shrink-0 whitespace-nowrap font-black`}>{label}</div> : null}
       <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold text-right text-[var(--ac-muted)] ${!panel ? "shrink-0 whitespace-nowrap" : "uppercase tracking-wider"}`}>{!panel && japan ? "Лот продан" : priceLabel}</div>
     </div>
-    <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "flex-wrap" : "min-h-[22px] sm:min-h-[26px]"}`}>
+    <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "ac-seller-price-row" : "min-h-[22px] sm:min-h-[26px]"}`}>
       <span className={`ac-price ac-price--flat whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
       {japan && !hideJapanBadges ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
+      {panel ? <div className="ac-seller-help"><SellerPriceHelp /><span>Без доставки<br />и платежей</span></div> : null}
     </div>
     {!panel && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
-    {panel ? <div className="mt-3 flex items-center gap-2 text-[10px] text-[var(--ac-muted)]"><SellerPriceHelp /><span>Без доставки и платежей</span></div> : null}
+
     {panel ? <style dangerouslySetInnerHTML={{ __html: `html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}` }} /> : null}
     {panel && rate?.effectiveRate ? <>
       <button type="button" {...tap} onClick={()=>setOpen(true)} className="ac-seller-currency mt-3 flex min-h-10 w-full items-center justify-between gap-3 rounded-xl bg-white/5 px-3 py-2 text-left text-xs font-bold" aria-label={`Показать курс ${offer.sourceCurrency}`}>

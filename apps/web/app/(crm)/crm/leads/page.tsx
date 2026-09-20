@@ -1,3 +1,5 @@
+import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
+import { leadReadState } from "@/lib/crm-read-state";
 import Link from "next/link";
 import {LeadContact} from "@/components/crm/LeadContact";
 import {followupText} from "@/lib/crm-notifications";
@@ -235,6 +237,7 @@ export default async function CrmLeadsPage({
                 </div>
               </summary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">
+                <LeadReadStatus leadId={lead.id} userId={user.id} eventKey={leadReadState(lead,user.id).eventKey} initialReceipts={lead.readReceipts||[]} />
                 <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
                   <section>
                     <h2 className="mb-3 font-black">Автомобиль и контакты</h2>

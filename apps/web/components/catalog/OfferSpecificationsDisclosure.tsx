@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode, type PointerEvent } from "react";
 import { createPortal } from "react-dom";
 import { ChevronDown, ChevronRight, CarFront, X } from "lucide-react";
 import { OfferAllSpecifications } from "./OfferAllSpecifications";
 import { useTapActivation } from "./useTapActivation";
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
 
-type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string };
+type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode };
 
-export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl }: Props) {
+export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside }: Props) {
   const [open, setOpen] = useState(false);
   const [dragY, setDragY] = useState(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -63,13 +63,14 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl }
   };
   const content = <OfferAllSpecifications groups={groups} showHeading={false} sourceUrl={sourceUrl} />;
 
-  if (mode === "desktop") return <details className="group/specs mt-6 hidden min-w-0 xl:block">
-    <summary className="ac-specifications-trigger flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400 [&::-webkit-details-marker]:hidden">
+  if (mode === "desktop") return <div className={`mt-6 hidden min-w-0 xl:grid gap-3 ${headerAside ? "xl:grid-cols-[minmax(240px,.7fr)_minmax(0,1.3fr)]" : ""}`}>
+    <button type="button" aria-expanded={open} aria-controls={headingId} onClick={()=>setOpen(!open)} className="ac-specifications-trigger flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400">
       <span className="flex items-center gap-2.5"><CarFront className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />Все характеристики</span>
-      <ChevronDown className="h-5 w-5 transition-transform group-open/specs:rotate-180" aria-hidden="true" />
-    </summary>
-    <div className="px-1 pb-5 pt-4">{content}</div>
-  </details>;
+      <ChevronDown className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true" />
+    </button>
+    {headerAside}
+    {open ? <div id={headingId} className="col-span-full min-w-0 px-1 pb-5 pt-1">{content}</div> : null}
+  </div>;
 
   return <>
     <button ref={triggerRef} type="button" {...tap} onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}

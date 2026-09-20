@@ -1,5 +1,4 @@
 "use client";
-import { ChevronDown } from "lucide-react";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
 import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
@@ -154,12 +153,12 @@ function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value
  useEffect(()=>{if(!open)return;const close=(e:PointerEvent)=>{if(!root.current?.contains(e.target as Node))setOpen(false);};const escape=(e:KeyboardEvent)=>{if(e.key==="Escape")setOpen(false);};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[open]);
  const toggle=(fuel:string,checked:boolean)=>{const ev=value==="electric"||value==="electrified",hybrid=value==="hybrid"||value==="electrified";const nextEv=fuel==="electric"?checked:ev,nextHybrid=fuel==="hybrid"?checked:hybrid;onChange(nextEv&&nextHybrid?"electrified":nextEv?"electric":nextHybrid?"hybrid":"");};
  return <div ref={root} className="relative min-w-0">
-  <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center rounded-[15px] text-sm font-black">
-   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-2 px-4"><input type="checkbox" checked={selected} onChange={e=>onChange(e.target.checked?"electrified":"")} className="ac-unified-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
-   <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-12 shrink-0 items-center justify-center"><ChevronDown size={20}/></button>
+  <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center gap-2 rounded-[15px] px-4 text-sm font-black">
+   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-3"><input type="checkbox" checked={selected} onChange={e=>onChange(e.target.checked?"electrified":"")} className="ac-unified-checkbox"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
+   <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-[17px] shrink-0 items-center justify-center text-[var(--ac-muted)]"><Chevron open={open}/></button>
   </div>
-  {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-3 text-sm font-semibold">
-   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3 px-2"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="ac-unified-checkbox"/>{label}</label>)}
+  {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-4 py-2 text-sm font-semibold">
+   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="ac-unified-checkbox"/>{label}</label>)}
   </div> : null}
  </div>;
 }

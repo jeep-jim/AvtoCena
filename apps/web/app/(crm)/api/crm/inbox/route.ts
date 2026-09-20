@@ -1,3 +1,4 @@
+import { leadReadState } from "@/lib/crm-read-state";
 import { latestLeadIncomingAt } from "@/lib/crm-alert-state";
 import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { NextResponse } from "next/server";
@@ -20,6 +21,7 @@ export async function GET() {
   const compact = visible
     .map((lead) => ({
       id: String(lead.id || ""),
+      ...leadReadState(lead,user.id),
       createdAt: String(lead.createdAt || ""),
       lastIncomingAt: latestLeadIncomingAt(lead),
       updatedAt: String(lead.updatedAt || ""),
@@ -33,12 +35,12 @@ export async function GET() {
         ? lead.selectedOffers.slice(0, 5).map((offer: any) => ({ title: String(offer?.title || "") }))
         : [],
     }))
-    .sort((left, right) => Date.parse(right.createdAt || "") - Date.parse(left.createdAt || ""));
+    .sort((left, right) => Math.max(Date.parse(right.incomingAt)||0,Date.parse(right.assignmentAt)||0)-Math.max(Date.parse(left.incomingAt)||0,Date.parse(left.assignmentAt)||0));
 
   return NextResponse.json({
     ok: true,
     leads: compact,
-    newCount: compact.filter((lead) => lead.status === "new").length,
+    newCount: compact.filter((lead) => lead.unread).length,
     latestCreatedAt: compact[0]?.createdAt || "",
   }, {
     headers: { "cache-control": "no-store" },

@@ -1,7 +1,7 @@
 name: Verify mobile catalog filter overlays
 on:
   push:
-    branches: [fix/mobile-catalog-overlay-menus-20260913, fix/catalog-filter-readiness, fix/spec-labels-filter-ready-20260920, fix/mobile-filter-notice-20260920, fix/catalog-projection-reuse-20260920, main]
+    branches: [fix/staff-inbox-ui-20260920, fix/mobile-catalog-overlay-menus-20260913, fix/catalog-filter-readiness, fix/spec-labels-filter-ready-20260920, fix/mobile-filter-notice-20260920, fix/catalog-projection-reuse-20260920, main]
     paths:
       - 'apps/web/components/catalog/CatalogFilters.tsx'
       - 'apps/web/lib/catalog/storage.ts'
