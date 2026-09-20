@@ -6,7 +6,8 @@ const ROOT = path.resolve(process.env.KNOWLEDGE_OUTPUT_ROOT || "data/catalog/kno
 const OUT = path.join(ROOT, "korea");
 const PAGE = "https://min24.energy.or.kr/trans_hp/AHP/HP_03/HP_03_01_010.do";
 const ENDPOINT = "https://min24.energy.or.kr/trans_hp/cmn/AHP_L.do";
-const START_YEAR = 2020;
+const POWER_SNAPSHOT = process.env.KOREA_OFFICIAL_POWER_SNAPSHOT;
+const START_YEAR = POWER_SNAPSHOT ? 2010 : 2020;
 const END_YEAR = new Date().getUTCFullYear();
 const USER_AGENT = "AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; Korea public-data snapshot)";
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
@@ -26,10 +27,15 @@ async function fetchWithRetry(url, options = {}) {
         redirect: "follow",
         headers: { "user-agent": USER_AGENT, ...(options.headers || {}) },
       });
-      if (!response.ok) throw new Error(`http_${response.status}`);
+      if (!response.ok) {
+        const error = new Error(`http_${response.status}`);
+        error.noRetry = [401,403,429].includes(response.status);
+        throw error;
+      }
       return response;
     } catch (error) {
       lastError = error;
+      if (error.noRetry) throw error;
       if (attempt < 5) await sleep(1_500 * attempt);
     } finally {
       clearTimeout(timer);
@@ -129,11 +135,30 @@ const records = payload.list.map((row) => ({
   highwayRangeKm: numberOrNull(row.HIGH_CHARGE_MILEAGE),
   co2GPerKm: numberOrNull(row.MIXMD_CO2),
   engineCc: numberOrNull(row.BAEGI_AMT),
+  engineCode: clean(row.ENG_TYPE) || null,
+  maximumOutputPsRpm: clean(row.TOP_OUT) || null,
   grade: clean(row.GRD_NM) || null,
   releaseYear: numberOrNull(row.OPEN_YY),
   releaseDate: clean(row.OPEN_DT) || null,
   testNumber: clean(row.TEST_NO) || null,
 })).filter((row) => row.modelName && Number(row.releaseYear) >= START_YEAR);
+
+if (records.length < 1000) throw new Error(`korea_energy_model_collapse:${records.length}`);
+if (POWER_SNAPSHOT) {
+  const {buildOfficialPowerSnapshot} = await import('./lib/korea-official-power-snapshot.mjs');
+  const previous = JSON.parse(await fs.readFile(POWER_SNAPSHOT,'utf8'));
+  const detailUrl = 'https://min24.energy.or.kr/trans_hp/AHP/HP_03/HP_03_01_011.do';
+  const sample = payload.list.find(row => row.RECP_NO && row.TOP_OUT && row.ENG_TYPE);
+  if (!sample) throw Error('korea_energy_power_rows_missing');
+  const detail = await fetchWithRetry(detailUrl, {method:'POST',headers:{cookie,referer:PAGE,'content-type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams({_csrf:csrf,P_RECP_NO:String(sample.RECP_NO),P_CAR_TYPE_CD:String(sample.CAR_TYPE_CD||''),P_GRD:String(sample.GRD||'')})});
+  const unitHtml = await detail.text();
+  const snapshot = buildOfficialPowerSnapshot(payload.list,previous,{capturedAt:new Date().toISOString(),rawSha256:sha256(raw),unitHtml});
+  const temporary = `${POWER_SNAPSHOT}.tmp`;
+  await fs.writeFile(temporary,JSON.stringify(snapshot)+'\n');
+  await fs.rename(temporary,POWER_SNAPSHOT);
+  console.log(JSON.stringify({stage:'official_power_snapshot',records:snapshot.records.length,capturedAt:snapshot.capturedAt}));
+}
 
 const chunks = [];
 for (let index = 0; index < records.length; index += 1000) {

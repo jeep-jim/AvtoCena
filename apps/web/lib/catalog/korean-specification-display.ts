@@ -1,5 +1,8 @@
+import {additionalKoreanSpecifications} from "./korean-specification-vocabulary";
+import {koreanSpecificationNotes} from "./korean-specification-notes";
 // Presentation only: never rewrite source evidence or calculation inputs.
 const words: Record<string,string> = {
+ ...additionalKoreanSpecifications,
  '르노코리아(삼성)':'Renault Korea (Samsung)', 'KG모빌리티(쌍용)':'KGM (SsangYong)', '쉐보레(GM대우)':'Chevrolet (GM Daewoo)',
  '기아':'Kia','현대':'Hyundai','제네시스':'Genesis','벤츠':'Mercedes-Benz','아우디':'Audi','테슬라':'Tesla','볼보':'Volvo','미니':'MINI',
  '카니발':'Carnival','그랜저':'Grandeur','팰리세이드':'Palisade','캐스퍼':'Casper','쏘렌토':'Sorento','스타리아':'Staria','아반떼':'Avante','쏘나타':'Sonata','셀토스':'Seltos','아이오닉':'Ioniq','싼타페':'Santa Fe','스포티지':'Sportage','투싼':'Tucson','모하비':'Mohave','니로':'Niro','쿠퍼':'Cooper','레이':'Ray','모델':'Model',
@@ -12,7 +15,8 @@ const words: Record<string,string> = {
 };
 const ordered=Object.entries(words).sort((a,b)=>b[0].length-a[0].length);
 export function translateKoreanSpecification(value:string) {
- let result=value.replace(/(\d+)세대/g,'$1-е поколение');
+ if(Object.hasOwn(koreanSpecificationNotes,value))return koreanSpecificationNotes[value];
+ let result=value.replace(/(\d+)세대/g,'$1-е поколение').replace(/(\d+)인승/g,'$1 мест').replace(/(\d+)도어/g,'$1 дв.');
  for(const [source,target] of ordered) {
   const escaped=source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   result=result.replace(new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`, 'gu'), target);
