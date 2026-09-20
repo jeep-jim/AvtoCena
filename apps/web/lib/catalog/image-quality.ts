@@ -188,6 +188,12 @@ function isPublishedAuctionSheet(offer: any, image: CatalogImageLike) {
     && Number(match[2]) + 1 === Math.min(...photos.map((photo: CatalogImageLike) => Number(identity(photo.url)![2])));
 }
 
+export function catalogAuctionSheetUrls(offer: any): string[] {
+  const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
+  return [...new Set(images.filter(image => isPublishedAuctionSheet(offer, image))
+    .map(image => stablePublicImageUrl(image)).filter(Boolean))];
+}
+
 export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
   const candidates = images

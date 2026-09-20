@@ -12,6 +12,22 @@ function value(offer:VehicleOffer,label:RegExp) {
   const values=[...new Set(snapshotFor(offer)?.groups.flatMap(g=>g.items).filter(i=>label.test(i.name)).map(i=>i.value.trim()) || [])];
   return values.length===1?values[0]:'';
 }
+/** Editable source facts remain useful when the hybrid subtype is unresolved.
+ * Never promote the source's uncertified 30-minute figure to a customs input.
+ */
+export function proAuctionsHybridDraft(offer:VehicleOffer): {fuel?:string;icePowerKw?:string} {
+  if (value(offer,/^Гибрид$/i).toLowerCase() !== 'да'
+    || value(offer,/^Электромобиль$/i).toLowerCase() === 'да') return {};
+  const evidence:any=offer.operational?.semanticEvidence || {};
+  if (evidence.fuel?.status === 'conflict' || evidence.powertrainKind?.status === 'conflict') return {};
+  const raw=value(offer,/^Мощность ДВС$/i);
+  const hp=Number(raw.match(/(\d+(?:[.,]\d+)?)\s*л\.\s*с\./i)?.[1]?.replace(',','.'));
+  const kw=Number(raw.match(/(\d+(?:[.,]\d+)?)\s*кВт/i)?.[1]?.replace(',','.'));
+  const validPower=hp>0 && kw>0 && Math.abs(hp-kw/0.73549875)<=Math.max(2,hp*.015)
+    && evidence.powerHp?.status==='exact' && Number(evidence.powerHp.value)===hp
+    && evidence.powerHp.source===offer.operational?.sourceUrl;
+  return {fuel:'hybrid',...(validPower ? {icePowerKw:String(kw)} : {})};
+}
 /** Repair the legacy default confidence only when the source attestation and table agree. */
 export function restoreProAuctionsPower<T extends VehicleOffer>(offer:T):T {
   const raw=value(offer,/^Мощность(?: ДВС)?$/i);

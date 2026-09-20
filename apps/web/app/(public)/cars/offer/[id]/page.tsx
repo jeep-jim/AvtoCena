@@ -1,5 +1,5 @@
 import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
-import {restoreProAuctionsPower,proAuctionsReportedVolume} from "@/lib/catalog/proauctions-source-parameters";
+import {restoreProAuctionsPower,proAuctionsReportedVolume,proAuctionsHybridDraft} from "@/lib/catalog/proauctions-source-parameters";
 import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { businessPaymentPlan } from "../../../../../../../packages/engine/src/calculation/calculateAvtocena";
 import { applyActiveBusinessPricing, applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
@@ -38,7 +38,7 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
-import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
+import { rankedCatalogImageUrls, catalogAuctionSheetUrls } from "@/lib/catalog/image-quality";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
@@ -275,9 +275,12 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  const storedOffer = isJapanCatalogOfferId(id)
+  let storedOffer = isJapanCatalogOfferId(id)
     ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
     : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
+  // New auction IDs are hashes, so their market cannot be inferred from the ID.
+  if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
+  const sourceHybridDraft = storedOffer ? proAuctionsHybridDraft(storedOffer) : {};
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
@@ -415,12 +418,13 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
+          {catalogAuctionSheetUrls(storedOffer).length ? <div className="mt-3 flex flex-wrap gap-2" aria-label="Аукционные листы">{catalogAuctionSheetUrls(storedOffer).map((url,index)=><a key={url} href={url} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[var(--ac-surface-2)] px-4 py-3 text-sm font-bold">Аукционный лист{index ? ` ${index+1}` : ""} ↗</a>)}</div> : null}
           <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
         </div>
 
         <StickyOfferColumn>
-          <InlineOfferParameters deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} priceBadges={japanAuction ? <JapanAuctionBadges offer={o} interactive /> : undefined} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={/pickup|pick-up|пикап/i.test(String(offer.bodyType||""))} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={offer.vehicleCategory === "N1" || String(offer.tnVedCode||"").startsWith("8704") || /pickup|pick-up|пикап|truck|commercial|груз|hilux|taga|d-max|l200|tundra|tacoma|ranger|amarok|navara|poer|musso/i.test(`${offer.bodyType||""} ${offer.model||""}`) || offer.calculationSnapshot?.customs?.missing?.includes("vehicle_category")} key={offer.id} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={{vehicleCategory:offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory||"",grossVehicleWeightKg:String(offer.grossVehicleWeightKg||""),n1IceFuel:offer.n1IceFuel||"",year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),productionDay:confirmedProductionDay(offer),transportToBorderRub:offer.transportToBorderRub == null ? "" : String(offer.transportToBorderRub),engineCc:String(offer.engineCc||proAuctionsReportedVolume(offer)||""),fuel:offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),powerKw:powerScenario?"":String(recyclingPowerInfo(raw)?.kw||""),hybridKind:offer.powertrainKind||"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
+          <InlineOfferParameters deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} priceBadges={japanAuction ? <JapanAuctionBadges offer={o} interactive /> : undefined} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={/pickup|pick-up|пикап/i.test(String(offer.bodyType||""))} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={offer.vehicleCategory === "N1" || String(offer.tnVedCode||"").startsWith("8704") || /pickup|pick-up|пикап|truck|commercial|груз|hilux|taga|d-max|l200|tundra|tacoma|ranger|amarok|navara|poer|musso/i.test(`${offer.bodyType||""} ${offer.model||""}`) || offer.calculationSnapshot?.customs?.missing?.includes("vehicle_category")} key={offer.id} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={{vehicleCategory:offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory||"",grossVehicleWeightKg:String(offer.grossVehicleWeightKg||""),n1IceFuel:offer.n1IceFuel||"",year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),productionDay:confirmedProductionDay(offer),transportToBorderRub:offer.transportToBorderRub == null ? "" : String(offer.transportToBorderRub),engineCc:String(offer.engineCc||proAuctionsReportedVolume(offer)||""),fuel:sourceHybridDraft.fuel||offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),powerKw:powerScenario?"":String(recyclingPowerInfo(raw)?.kw||""),hybridKind:["series_hybrid","other_hybrid"].includes(offer.powertrainKind||"")?offer.powertrainKind!:"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:sourceHybridDraft.icePowerKw||String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold uppercase">Цена продавца</p><p className="mt-2 text-3xl font-black">{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
             ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
