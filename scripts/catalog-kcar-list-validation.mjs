@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import {getJsonStorage} from '../apps/web/lib/data.ts';
+import {readMarketOffers} from '../apps/web/lib/catalog/storage.ts';
+import {kcarKoreaExactSource as source} from '../apps/web/lib/catalog/kcar-exact-source.ts';
+const storage=getJsonStorage();for(const k of ['writeJson','putBinary','deleteJson','deleteBinary','deleteObjects','deletePrefix'])storage[k]=async()=>{throw Error('validation_read_only');};
+const saved=new Set((await readMarketOffers('korea')).filter(r=>r.sourceId===source.sourceId).map(r=>String(r.sourceOfferId)));
+const page=await source.fetchPage('1');
+const offers=page.items.map(row=>source.normalizeOffer(row)).filter(Boolean);
+const report={checkedAt:new Date().toISOString(),health:page.health,diagnostics:page.diagnostics,nextCursor:page.nextCursor,returned:offers.length,eligible:offers.filter(r=>r.year>=2020).length,newEligible:offers.filter(r=>r.year>=2020&&!saved.has(String(r.sourceOfferId))).map(r=>({id:r.sourceOfferId,make:r.make,model:r.model,year:r.year,powerHp:r.powerHp})),confirmedPower:offers.filter(r=>r.powerDataSource==='kcar_bound_registry_and_detail_hp'&&r.powerHp>0).length,scope:'First listing page and every detail on it; not a full fresh intake',productionWritten:false};
+await fs.writeFile('kcar-list-validation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
