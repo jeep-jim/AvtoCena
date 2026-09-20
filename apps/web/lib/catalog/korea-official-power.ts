@@ -1,3 +1,4 @@
+import {koreanModelFamily} from "./korea-model-family";
 import snapshot from '../../../../data/catalog/korea-official-power/snapshot.json';
 import {canonicalCatalogBrand} from './brands';
 import type {VehicleOffer} from './types';
@@ -29,9 +30,17 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
    ||inspection.year!==offer.year||!/^[A-Z0-9][A-Z0-9.-]{2,19}$/.test(code(inspection.engineCode)))return null;
  const semantic:any=offer.operational?.semanticEvidence||{};
  if(['fuel','engineCc','powerHp','powerKw'].some(key=>semantic[key]?.status==='conflict'))return null;
- const candidates=records.filter(row=>code(row.engineCode)===code(inspection.engineCode)
+ let candidates=records.filter(row=>code(row.engineCode)===code(inspection.engineCode)
    && Number(row.engineCc)===Number(offer.engineCc)&&fuels[row.fuel]===offer.fuel
    && officialKoreanManufacturerBrand(row)===canonicalCatalogBrand(offer.make));
+ // The same engine can have different calibrations in different models.
+ // Recognised model families separate Morning from Ray, for example. Keep
+ // all years and powertrains within the matching family. Unknown families
+ // prevent narrowing, so an unrecognised competing rating still blocks.
+ const family=koreanModelFamily(offer.model);
+ if(family && candidates.length && candidates.every(row=>koreanModelFamily(row.model))){
+   candidates=candidates.filter(row=>koreanModelFamily(row.model)===family);
+ }
  // Encar may label a mild hybrid merely as petrol. A government hybrid record
  // for the same engine must not be hidden by filtering it out before matching.
  if(!candidates.length||candidates.some(row=>row.powertrain!=='내연기관')||!candidates.some(row=>row.releaseYear<=offer.year)
@@ -47,7 +56,7 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
    && semantic.powerKw?.conversion==='PS * 0.73549875' && Number(semantic.powerKw.value)>0;
  const existingKw=ownDerivedKw?Number(semantic.powerKw.value):Number(offer.powerKw);
  if(existingKw>0&&Math.abs(existingKw-powerHp*0.73549875)>0.001)return null;
- return {powerHp,engineCode:code(inspection.engineCode),recordIds:candidates.map(row=>row.id),
+ return {powerHp,modelFamily:family,engineCode:code(inspection.engineCode),recordIds:candidates.map(row=>row.id),
    sourceUrl:snapshot.sourceUrl,snapshotSha256:snapshot.rawSha256,capturedAt:snapshot.capturedAt};
 }
 
