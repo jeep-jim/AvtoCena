@@ -1,3 +1,4 @@
+import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
@@ -27,6 +28,7 @@ export async function PATCH(
   request: Request,
   context: { params: { id: string } }
 ) {
+  if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const user = await getCurrentUser();
 
   if (!user || !isCrmRole(user.role)) {
@@ -71,6 +73,7 @@ export async function PATCH(
     }
   }
 
+  if(admin && Object.prototype.hasOwnProperty.call(body,"expectedManagerId") && (body.expectedManagerId||null)!==(existingLead.assignedManagerId||null))return NextResponse.json({error:"assignment_conflict"},{status:409});
   const now = new Date().toISOString();
   const nextStatus = requestedStatus || existingLead.status || "new";
   const nextManagerId = admin
@@ -91,7 +94,11 @@ export async function PATCH(
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
   }
 
-  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => ({
+  const previousManagerId=existingLead.assignedManagerId||null;
+  let updatedLead:any;
+  try { updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => {
+    if((lead.assignedManagerId||null)!==previousManagerId)throw new Error("assignment_conflict");
+    return ({
     ...lead,
     updatedAt: now,
     ...(archiveChanged ? {archivedAt:body.archived ? now : "",archivedByUserId:user.id,archiveReason:body.archived ? note : ""} : {}),
@@ -141,7 +148,10 @@ export async function PATCH(
           }
         ]
       : lead.internalNotes
-  }));
+  });}); } catch(error) {
+    if(error instanceof Error && error.message==="assignment_conflict")return NextResponse.json({error:"assignment_conflict"},{status:409});
+    throw error;
+  }
 
   if (!updatedLead) {
     return NextResponse.json({ ok: false, error: "lead_update_failed" }, { status: 500 });

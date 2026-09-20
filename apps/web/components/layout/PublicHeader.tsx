@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
@@ -165,6 +166,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           </div>
 
           <div className="flex items-center gap-1.5 md:gap-2">
+            <PublicStaffAlerts />
             <button type="button" onClick={toggleTheme} className={`ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] transition hover:bg-white/[0.085] ${themeIconClass}`} aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"} title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}>
               <ThemeIcon theme={theme} />
             </button>

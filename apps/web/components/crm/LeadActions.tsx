@@ -61,12 +61,14 @@ export function LeadActions({
         body: JSON.stringify({
           status,
           assignedManagerId: canAssignManagers ? assignedManagerId : undefined,
+          expectedManagerId: canAssignManagers ? currentManagerId || null : undefined,
           note,
         }),
       });
 
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
+        if (result?.error === "assignment_conflict") throw new Error("assignment_conflict");
         if (result?.error === "reason_required") throw new Error("reason_required");
         if (result?.error === "lead_forbidden" || result?.error === "manager_assignment_forbidden") throw new Error("forbidden");
         throw new Error("lead_update_error");
@@ -77,7 +79,9 @@ export function LeadActions({
       router.refresh();
     } catch (saveError) {
       setError(
-        saveError instanceof Error && saveError.message === "reason_required"
+        saveError instanceof Error && saveError.message === "assignment_conflict"
+          ? "Ответственный уже изменён другим сотрудником. Обновите страницу."
+          : saveError instanceof Error && saveError.message === "reason_required"
           ? "Для отказа или дубля причина обязательна."
           : saveError instanceof Error && saveError.message === "forbidden"
             ? "У вас нет прав на изменение этой заявки или её менеджера."

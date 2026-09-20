@@ -47,7 +47,7 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
           </Link>
 
           <div className="flex flex-wrap items-center justify-end gap-2">
-            <CrmLiveAlerts userId={user.id} />
+            <CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} />
             <CrmThemeToggle />
             <Link href={user?.id ? `/crm/managers/${encodeURIComponent(user.id)}` : "/crm/managers"} className="crm-user-chip flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/8 py-1.5 pl-1.5 pr-4 text-sm font-black text-white/70">
               <img src={avatar} alt="" className="h-8 w-8 rounded-full object-cover" referrerPolicy="no-referrer" />

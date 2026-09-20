@@ -12,12 +12,12 @@ const out = `artifacts/attached-parameters-${live ? 'live' : 'local'}`;
 fs.mkdirSync(out,{recursive:true});
 let server, origin=live;
 if(!live){
- await build({entryPoints:['tests/browser/attached-parameters-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
+ await build({entryPoints:['tests/browser/attached-parameters-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',plugins:[{name:'next-fixture',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({contents:args.path.endsWith('navigation')?`export const usePathname=()=>'/cars';export const useRouter=()=>({back(){},replace(){},refresh(){}});`:`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{href,...props},children);}`,loader:'jsx',resolveDir:process.cwd()}));}}],outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
  const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'];
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
- const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
@@ -224,12 +224,29 @@ try{
   }
   const page=await browser.newPage();
   await page.addInitScript(()=>{localStorage.setItem('avtocena_crm_notifications_enabled','1');window.__beeps=0;window.AudioContext=class{state='running';currentTime=0;destination={};resume(){return Promise.resolve();}createOscillator(){return {frequency:{setValueAtTime(){}},connect(){},disconnect(){},start(){window.__beeps++;},stop(){}};}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){}};}};});
-  await page.route('**/api/crm/inbox',route=>route.fulfill({json:{newCount:1,leads:[{id:'new-1',status:'new',createdAt:'2026-09-20T12:00:00Z'}]}}));
+  let read=false;
+  await page.route('**/api/auth/me',route=>route.fulfill({json:{user:{id:'qa-staff',role:'owner',displayName:'Сотрудник'}}}));
+  await page.route('**/api/crm/inbox',route=>route.fulfill({json:{newCount:read?0:1,leads:[{id:'new-1',status:'new',createdAt:'2026-09-20T12:00:00Z',unread:!read,eventKey:'e1'}]}}));
+  await page.route('**/api/crm/leads/new-1/seen',route=>{assert.equal(route.request().postDataJSON().eventKey,'e1');read=true;return route.fulfill({json:{ok:true}});});
   await page.goto(origin+'/?kind=alerts');await page.getByText('Новые заявки: 1').waitFor();
   await page.getByText('Новые заявки: 1').click();await page.waitForTimeout(2400);
   assert.ok(await page.evaluate(()=>window.__beeps)>=2,'sound repeats while unacknowledged');
-  await page.getByRole('button',{name:'Прочитано',exact:true}).click();const stopped=await page.evaluate(()=>window.__beeps);await page.waitForTimeout(1200);assert.equal(await page.evaluate(()=>window.__beeps),stopped);
-  await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);assert.equal(await page.getByRole('button',{name:/Заявки/}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.close();
+  await page.getByRole('button',{name:'Прочитано мной',exact:true}).click();const stopped=await page.evaluate(()=>window.__beeps);await page.waitForTimeout(1200);assert.equal(await page.evaluate(()=>window.__beeps),stopped);
+  await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);await page.getByRole('button',{name:'Кабинет сотрудника'}).click();assert.equal(await page.getByRole('button',{name:'Звук заявок: включён'}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.getByRole('button',{name:'Кабинет сотрудника'}).click();
+  assert.equal(await page.locator('.ac-staff-badge').count(),0,'read status removes red badge even when CRM status stays new');
+  assert.equal(await page.locator('.ac-staff-leads').getAttribute('href'),'/crm/leads','inbox control navigates instead of toggling audio');
+  for(const width of [320,390,1440])for(const theme of ['light','dark']){
+    await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=alerts&theme='+theme);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'staff header fits viewport');
+    const account=await page.getByRole('button',{name:'Кабинет сотрудника'}).boundingBox();const toggle=await page.getByRole('button',{name:/Включить .* тему/}).boundingBox();assert.ok(account.x+account.width<=toggle.x+1,'staff account sits before theme');
+    await page.getByRole('button',{name:'Кабинет сотрудника'}).click();assert.ok(await page.getByRole('link',{name:'Рабочий кабинет',exact:true}).isVisible());
+    await page.screenshot({path:`${out}/staff-header-${theme}-${width}.png`});
+  }
+  read=false;await page.evaluate(()=>localStorage.setItem('avtocena_crm_ack_qa-staff',String(Date.parse('2026-09-20T12:01:00Z'))));await page.reload();await page.waitForTimeout(500);assert.equal(read,true,'legacy acknowledgement is persisted on server');assert.equal(await page.locator('.ac-staff-badge').count(),0);
+  await page.unroute('**/api/auth/me');await page.route('**/api/auth/me',route=>route.fulfill({status:401,json:{user:null}}));await page.goto(origin+'/?kind=alerts-guest');await page.waitForTimeout(300);assert.equal(await page.getByRole('button',{name:'Кабинет сотрудника'}).count(),0);
+  await page.setViewportSize({width:1440,height:900});await page.goto(origin+'/?kind=japan-specs');await page.getByRole('button',{name:'Все характеристики'}).click();
+  const specs=await page.getByRole('region',{name:'Все характеристики',exact:true}).boundingBox();const main=await page.locator('main').boundingBox();assert.ok(specs.width>=main.width-12,'expanded specs span both header blocks');
+  await page.screenshot({path:`${out}/japan-full-width.png`});await page.close();
  }
  assert.equal(results.length,pages.length*12);console.log(JSON.stringify({mode:live?'live':'fixture',cases:results.length,openings:results.reduce((n,r)=>n+r.panels.length,0),passed:true}));
 }finally{save();await browser.close();if(server)await new Promise(r=>server.close(r));}

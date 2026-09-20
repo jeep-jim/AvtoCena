@@ -252,12 +252,12 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
         </svg>
       </div>
       <div data-price-line={vehicleLine.id} data-price-amount-rub={vehicleLine.amountRub} className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-[12px] font-medium md:text-[13px]">
-        <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="shrink-0">Цена автомобиля</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
-        <span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(vehicleLine.amountRub)} ₽</span>
+        <span className="ac-offer-breakdown-label ac-cost-label"><span className="shrink-0">Цена автомобиля</span></span>
+        <span className="ac-offer-breakdown-value ac-cost-amount">{money(vehicleLine.amountRub)} ₽</span>
       </div>
     </summary>
     {offer.calculationSnapshot?.marketConfig && offer.totalRub > 0 ? <ContractPaymentSummary plan={businessPaymentPlan(offer.market, offer.calculationSnapshot.marketConfig, offer.totalRub)} /> : null}
-    {detailLines.length ? <div className="ac-offer-breakdown-lines px-4 pb-3">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} data-price-line={line.id} data-price-amount-rub={line.amountRub} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-2 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 leading-snug">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span>{/utilization|утил/i.test(`${line.id} ${line.title}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>)}</div> : null}
+    {detailLines.length ? <div className="ac-offer-breakdown-lines px-4 pb-3">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} data-price-line={line.id} data-price-amount-rub={line.amountRub} className="ac-cost-row gap-y-1"><span className="ac-offer-breakdown-label ac-cost-label"><span className="min-w-0 leading-snug">{line.title}</span></span><span className="ac-offer-breakdown-value ac-cost-amount">{money(line.amountRub)} ₽</span>{/utilization|утил/i.test(`${line.id} ${line.title}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>)}</div> : null}
   </details>;
 }
 
@@ -412,7 +412,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const secondarySpecs = displayOnlySpecs.slice(4);
 
   const auctionStatus = japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
-    <p className="min-w-0 text-xs font-semibold leading-5 text-[var(--ac-muted)]"><span className="block">Продано на торгах{enrichedOffer.auctionName ? ` · ${enrichedOffer.auctionName}` : ""}</span><span>{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Открыть результат аукциона" className="ml-2">↗</a> : null}</p>
+    <p className="min-w-0 text-xs font-semibold leading-5 text-[var(--ac-muted)]"><span>Продано на торгах{enrichedOffer.auctionName ? ` · ${enrichedOffer.auctionName}` : ""}</span>{" · "}<span className="whitespace-nowrap">{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Открыть результат аукциона" className="ml-2">↗</a> : null}</p>
     <JapanAuctionBadges offer={o} interactive />
   </div> : null;
 
@@ -426,7 +426,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
-          <div className={japanAuction ? "ac-japan-spec-status hidden xl:grid xl:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] xl:items-start xl:gap-3" : ""}><OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} />{japanAuction ? <div className="mt-6">{auctionStatus}</div> : null}</div>
+          <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus} />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
         </div>
 
