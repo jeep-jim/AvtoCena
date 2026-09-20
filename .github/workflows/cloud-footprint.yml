@@ -1,0 +1,37 @@
+name: Read cloud registry and allocated disk footprint
+on:
+  workflow_dispatch:
+  push:
+    branches: [fix/launch-final-audit-20260920]
+    paths: [.github/workflows/cloud-footprint.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+      JSON_STORAGE_DRIVER: object
+      CATALOG_READ_CONCURRENCY: '4'
+      AUDIT_SKIP_SOURCE_SAMPLES: '1'
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - name: Check source pages of older cars without sheets
+        run: node --import tsx scripts/catalog-cloud-footprint.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cloud-footprint
+          retention-days: 14
+          path: |
+            cloud-footprint.json
