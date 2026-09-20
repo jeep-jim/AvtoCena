@@ -31,23 +31,19 @@ test("Europe prefers an affordable delivered total over a newer expensive car or
  assert.ok(!result.rows.some(r=>r.id==="expensive"||r.id==="seller"));
 });
 
-test("unknown-power seller inventory does not disappear into the calculated assortment quota",()=>{
+test("unknown seller power never bypasses the owner's whole-catalog quota",()=>{
  const sellers=Array.from({length:100},(_,i)=>({...row("s"+i,undefined,"korea"),catalogPricingMode:"seller"}));
- const result=selectCatalogPowerMix([...sellers,...Array.from({length:4},(_,i)=>row("l"+i,150,"korea")),row("h",250,"korea"),row("h2",300,"korea")]);
- assert.equal(result.rows.length,105);assert.equal(result.removed.length,1);
- assert.equal((result.report.korea as any).sellerUnknownExempt,100);
- assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,4);
- assert.equal(selectCatalogPowerMix(sellers).rows.length,100);
+ const result=selectCatalogPowerMix([...sellers,...Array.from({length:4},(_,i)=>row("l"+i,150,"korea")),row("h",250,"korea")]);
+ assert.equal(result.rows.length,5);assert.equal(result.removed.length,100);
+ assert.equal((result.report.korea as any).targetMet,true);
+ assert.equal(sellers.length,100);
+ assert.throws(()=>selectCatalogPowerMix(sellers),/no_qualified_low_power/);
 });
-
-
-test("recovering power keeps existing cars and reserves remaining allowance for newcomers",()=>{
+test("retained IDs get priority within the remainder without overriding 80 percent",()=>{
  const low=Array.from({length:4},(_,i)=>row('l'+i,150,'korea'));
  const retained=[row('existing1',204,'korea'),row('existing2',304,'korea')];
  const result=selectCatalogPowerMix([...low,row('new',250,'korea'),...retained],{retainedIds:new Set(['existing1','existing2'])});
- assert.deepEqual(result.removed.map(x=>x.id),['new']);
- assert.equal(result.rows.length,6);
- assert.equal((result.report.korea as any).retainedAboveAllowance,1);
- assert.equal((result.report.korea as any).targetMet,false);
- assert.equal(selectCatalogPowerMix(retained,{retainedIds:new Set(['existing1','existing2'])}).rows.length,2);
+ assert.deepEqual(result.rows.map(x=>x.id),['l0','l1','l2','l3','existing1']);
+ assert.deepEqual(result.removed.map(x=>x.id),['existing2','new']);
+ assert.equal((result.report.korea as any).targetMet,true);
 });
