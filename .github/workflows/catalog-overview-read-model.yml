@@ -13,7 +13,14 @@ on:
   workflow_run:
     workflows:
       - "Catalog quality · enforce global model cap"
+      - "ProAuctions collect and publish"
+      - "Catalog · Five-market full rebuild"
+      - "Encar official engine specification recovery"
+      - "K Car bound registry recovery"
+      - "Recover missing Japan auction sheets from live source"
+      - "Recover auction sheets from saved Japan HTML"
     types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
