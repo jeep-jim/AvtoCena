@@ -1,0 +1,20 @@
+name: Diagnose mobile filter navigation
+on:
+  push:
+    branches: [diagnostic/mobile-filter-navigation-20260920]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix "$RUNNER_TEMP/filter-diag" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Read-only live mobile filter diagnosis
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-diag/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/diagnose-mobile-filter-navigation.mjs
