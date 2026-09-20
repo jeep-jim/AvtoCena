@@ -1,0 +1,16 @@
+name: KCar listing transport diagnostic
+on:
+  push:
+    branches: [fix/kcar-transport-probe-20260920]
+    paths: [scripts/kcar-transport-probe.mjs, .github/workflows/kcar-transport-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24}
+      - run: node scripts/kcar-transport-probe.mjs
