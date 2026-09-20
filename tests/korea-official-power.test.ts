@@ -18,6 +18,7 @@ test('wrong identity, fuel, displacement, market, or a disputed source rating ca
  }
 });
 test('absent or malformed official output and multiple ratings fail closed',()=>{
+ const disputed=offer();disputed.powerKw=95;assert.equal(enrichEncarOfficialPower(disputed),disputed);
  const base={id:'1',manufacturer:'현대',model:'아반떼',engineCode:'G4FM',engineCc:1598,fuel:'휘발유',powertrain:'내연기관',output:'123/6300',releaseDate:'20200430',releaseYear:2020};
  assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'2',output:'130/6300'}]),null);
  assert.equal(matchKoreaOfficialPower(offer(),[{...base,output:'unknown'}]),null);

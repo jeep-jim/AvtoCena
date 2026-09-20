@@ -294,7 +294,14 @@ export function translateSpecificationText(value:string) {
     .replace(/(\d+)挡(?:手动|Механическая)/g,"$1-ступенчатая МКПП")
     .replace(/(\d+)挡(?:自动|Автоматическая)/g,"$1-ступенчатая АКПП")
     .replace(/\(个\)/g,", шт.").replace(/\(人\)/g,", чел.");
-  for(const [source,target] of ordered) result=result.split(source).join(target);
+  for(const [source,target] of ordered) {
+    // Short Korean words such as 자동 must not corrupt a longer company name
+    // 자동차. Chinese source phrases retain their existing matching rules.
+    if(/\p{Script=Hangul}/u.test(source)) {
+      const escaped=source.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      result=result.replace(new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`,'gu'),target);
+    } else result=result.split(source).join(target);
+  }
   if (Object.hasOwn(exact,result)) return exact[result];
   return result.replace(/等(?=\))/g," и аналоги").replace(/后(?=[●○—-])/g,"сзади ").replace(/前(?=[●○—-])/g,"спереди ").replace(/^通\s+Дисковые$/,"Дисковые (уточнение источника неполное)");
 }

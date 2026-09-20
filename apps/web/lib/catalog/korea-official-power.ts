@@ -32,6 +32,7 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
  if(outputs.some(hp=>!Number.isFinite(hp)||hp<20||hp>1500)||new Set(outputs).size!==1)return null;
  const powerHp=outputs[0];
  if(Number(offer.powerHp)>0&&Math.abs(Number(offer.powerHp)-powerHp)>0.1)return null;
+ if(Number(offer.powerKw)>0&&Math.abs(Number(offer.powerKw)-powerHp*0.73549875)>0.001)return null;
  return {powerHp,engineCode:code(inspection.engineCode),recordIds:candidates.map(row=>row.id),
    sourceUrl:snapshot.sourceUrl,snapshotSha256:snapshot.rawSha256,capturedAt:snapshot.capturedAt};
 }

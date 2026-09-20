@@ -1,4 +1,5 @@
 import {additionalKoreanSpecifications} from "./korean-specification-vocabulary";
+import {koreanSpecificationNotes} from "./korean-specification-notes";
 // Presentation only: never rewrite source evidence or calculation inputs.
 const words: Record<string,string> = {
  ...additionalKoreanSpecifications,
@@ -14,6 +15,7 @@ const words: Record<string,string> = {
 };
 const ordered=Object.entries(words).sort((a,b)=>b[0].length-a[0].length);
 export function translateKoreanSpecification(value:string) {
+ if(Object.hasOwn(koreanSpecificationNotes,value))return koreanSpecificationNotes[value];
  let result=value.replace(/(\d+)세대/g,'$1-е поколение').replace(/(\d+)인승/g,'$1 мест').replace(/(\d+)도어/g,'$1 дв.');
  for(const [source,target] of ordered) {
   const escaped=source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

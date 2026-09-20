@@ -11,6 +11,7 @@ test('official snapshot preserves engine codes, units, historical and conflictin
  const next=buildOfficialPowerSnapshot(changed,first,metadata);
  assert.equal(next.records.length,6200);assert.equal(next.records.filter(r=>r.id==='0').length,2);
  assert.deepEqual(new Set(next.records.map(r=>r.output)),new Set(['123/6300','130/6300']));
+ assert.equal(buildOfficialPowerSnapshot(changed,next,metadata).records.length,6200,'historical disagreements do not count as missing live rows');
 });
 test('incomplete response, lost power fields, or changed unit cannot replace the reference',()=>{
  const previous={records:[],rawSha256:'old'};
