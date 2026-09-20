@@ -432,6 +432,22 @@ export function projectionCanRenderCard(row: CatalogSearchProjection) {
     && (isSellerPricedOffer(row) || hasModificationSelection(row) || (catalogOfferVisibleRub(row) > 0
     && !catalogRequiredSpecificationRejectionReason(row)));
 }
+// Current read-model rows are immutable until their existing cache expires.
+// Facets and six market searches share those objects: validate each once rather
+// than rerunning the full specification audit for every consumer of a page.
+let preparedProjectionRows = new WeakMap<CatalogSearchProjection, CatalogSearchProjection | null>();
+export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
+  const visible: CatalogSearchProjection[] = [];
+  for (const input of rows) {
+    if (!preparedProjectionRows.has(input)) {
+      const normalized = safePublicPricing(input);
+      preparedProjectionRows.set(input, projectionCanRenderCard(normalized) ? normalized : null);
+    }
+    const row = preparedProjectionRows.get(input);
+    if (row) visible.push(row);
+  }
+  return visible;
+}
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
   if (isConfirmedSourceWithdrawn(offer)) return false;
   offer = safePublicPricing(offer);
@@ -521,6 +537,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  preparedProjectionRows = new WeakMap();
   resetCatalogOverviewCache();
   manifestCache = null;
   searchProjectionCache.clear();
@@ -750,11 +767,12 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
 }
 
 async function currentProjectionRows(params: CatalogSearchParams = {}) {
-  const manifest = await readManifest();
   const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
-  const current = await readCurrentSearchProjection(scope);
+  // Start the shared all-market read before sibling market searches start.
+  // Waiting for the manifest first made all six markets download duplicate rows.
+  const [manifest, current] = await Promise.all([readManifest(), readCurrentSearchProjection(scope)]);
   if (current.generationId === manifest.generationId) {
-    return { generationId: manifest.generationId, rows: (current.items || []).map(safePublicPricing).filter(projectionCanRenderCard) };
+    return { generationId: manifest.generationId, rows: prepareCatalogProjectionRows(current.items || []) };
   }
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
 }
@@ -1542,8 +1560,7 @@ export async function searchOffers(params: CatalogSearchParams, internalPageLimi
   ]);
   if (current.generationId === manifest.generationId) {
     const modelKeys = await projectionModelKeys(params);
-    const rows = (current.items || [])
-      .filter(projectionCanRenderCard)
+    const rows = prepareCatalogProjectionRows(current.items || [])
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
     if (needsProjection) sortCatalogSearchRows(rows, params);
     else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
