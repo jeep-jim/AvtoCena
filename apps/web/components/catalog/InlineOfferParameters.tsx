@@ -1,9 +1,10 @@
 "use client";
 
 import { missingCustomerFields } from "../../lib/catalog/missing-customer-fields";
+import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
+import { ResearchLink } from "./VehicleResearchLink";
 import { CitySelector } from "../home/CitySelector";
 import { quoteCityDelivery, deliveryDescription } from "../../lib/catalog/city-delivery";
-import { ContractPaymentSummary } from "./ContractPaymentSummary";
 import type { BusinessPaymentPlan } from "../../../../packages/engine/src/types";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel, RecyclingPowerExplanation, RecyclingFeeHelp } from "./RecyclingPower";
@@ -119,7 +120,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
 export function InlineOfferParameters({deliveryMarket,offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(isPickup?{...initial,vehicleCategory:"N1"}:initial);
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
- const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:{sourcePrice:number;currency:string;effectiveRate:number;rateDate:string};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
+ const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(null);
  const revision=useRef(0);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
@@ -146,34 +147,22 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
  // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.
  const keepSellerPrice=sourcePriceOnly && !result;
  const powerInfo = recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
- const powerLabel = draft.powerHp ? `${draft.powerHp} л.с.` : "Указать мощность";
- const pairedPower = Boolean(powerInfo?.borderline);
+ const powerLabel = draft.powerHp ? `${Number(draft.powerHp).toLocaleString("ru-RU",{maximumFractionDigits:2})} л.с.` : "Указать мощность";
+ const pairedPower = Boolean(Number(draft.powerKw) > 0);
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field missing={missingFields.has(key)} label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
  const missingFields=missingCustomerFields(draft,showCommercial);
  const vehicleLine=result?.breakdown?.find(row=>row.id==="car");
  const detailLines=result?.breakdown?.filter(row=>row!==vehicleLine) || [];
  const hybridQuery=hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
- const hybridHelp=<a href={`https://yandex.ru/search/?text=${encodeURIComponent(hybridQuery)}`} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-2 text-xs font-semibold underline"><img src="/brands/alice.svg" alt="" width={24} height={24}/>Алиса: найти тип гибрида и мощность по документам</a>;
+ const hybridHelp=<ResearchLink query={hybridQuery} label="Алиса покажи тип гибрида и мощность" compact />;
  const currentYear = new Date().getFullYear();
  const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
-  {!showCalculation || keepSellerPrice?price:<div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5" aria-live="polite" aria-busy={pending}>
-   <div className={priceStyles.heading}>
-    <div className={priceStyles.amountBlock}>
-     <p className={priceStyles.title}>{dirty?"По вашим параметрам":"Ориентир под ключ"}</p>
-     {result?<p className={priceStyles.amount}>{Math.round(result.totalRub).toLocaleString("ru-RU")} ₽</p>:<p className="mt-3 text-sm">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</p>}
-    </div>
-    {priceBadges ? <div className={priceStyles.badges}>{priceBadges}</div> : null}
-   </div>
-   {result?<p className="mt-2 text-xs text-[var(--ac-muted)]">{dirty?"Ориентир под ключ. Данные и стоимость требуют подтверждения.":"Рассчитано автоматически по данным объявления. Данные и стоимость требуют подтверждения."}</p>:null}
-   {result?.currencyRate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Цена продавца: {result.currencyRate.sourcePrice.toLocaleString("ru-RU")} {result.currencyRate.currency}. Курс расчёта: {result.currencyRate.effectiveRate.toLocaleString("ru-RU", {maximumFractionDigits:8})} ₽ на {result.currencyRate.rateDate}.</p> : null}
-   {result?.customs?.productionReferenceDate ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Дата выпуска в расчёте: {result.customs.productionReferenceDate}{result.customs.productionReferenceBasis !== "exact_date" ? " · условная дата, уточните по документам" : ""}. Тариф: {result.customs.vehicleCategory === "N1" ? `N1 · ТН ВЭД ${result.customs.tariffCode || "8704"}` : result.customs.ageBand === "up_to_3_years" ? "до 3 лет" : result.customs.ageBand === "from_3_to_5_years" ? "3–5 лет" : "старше 5 лет"}.</p> : null}
-   {dirty?<button type="button" className="mt-3 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft({...originalDraft,deliveryCity:draft.deliveryCity||""});setResult(null);setPending(false);}}>Вернуть исходные данные</button>:null}
-  </div>}
-  {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <div className="mt-2 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>
-   <p role="status">{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p>
-   {keepSellerPrice && dirty ? <button type="button" className="mt-1 py-2 text-xs underline" onClick={()=>{revision.current++;setDraft({...originalDraft,deliveryCity:draft.deliveryCity||""});setResult(null);setPending(false);}}>Вернуть исходные данные</button> : null}
-  </div> : null}
+  {result ? <div aria-live="polite" aria-busy={pending}>
+   <PriceTrend panel label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
+   {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}
+  </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
+  {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}>{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
@@ -204,7 +193,7 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
     {draft.fuel==="hybrid" ? hybridHelp : null}
     {draft.fuel==="hybrid" && draft.vehicleCategory==="N1"?<label className={editorStyles.hybridField}>Тип гибрида<select aria-invalid={missingFields.has("hybridKind") || undefined} aria-label="Тип гибрида" value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите тип</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label>:null}
    </Tile>
-   <Tile missing={missingFields.has("powerHp")} label="Мощность" value={`${powerLabel}${pairedPower && powerInfo ? ` / ${powerInfo.kwLabel}` : ""}`} valueNode={pairedPower ? <RecyclingPowerLabel hpLabel={powerLabel} info={powerInfo} showKw /> : undefined} warning={pairedPower} icon={<Zap size={16}/>}>
+   <Tile missing={missingFields.has("powerHp")} label="Мощность" value={`${powerLabel}${pairedPower ? ` / ${Number(draft.powerKw).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт` : ""}`} valueNode={pairedPower ? <RecyclingPowerLabel hpLabel={powerLabel} info={powerInfo} kw={draft.powerKw} showKw /> : undefined} warning={Boolean(powerInfo?.borderline)} icon={<Zap size={16}/>}>
     <div className={editorStyles.twoColumns}>
      {field("powerHp","Мощность, л.с.",[50,75,90,100,120,140,150,160,180,200,250,300,400,500],1,2500)}
      {!["electric","hybrid"].includes(draft.fuel) ? field("powerKw","Мощность, кВт (если известна)",[],0.1,2000,undefined,"Мощность, кВт") : null}
@@ -243,8 +232,8 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
      <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽</span>
     </div> : null}
    </summary>
-   <div className="px-4 pb-4"><ContractPaymentSummary plan={result.paymentPlan} embedded />
-    <dl className="space-y-2 text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="flex justify-between gap-3"><dt>{row.label||row.title||row.id}{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <RecyclingFeeHelp info={powerInfo} /> : null}</dt><dd className="shrink-0 whitespace-nowrap">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd></div>})}</dl>
+   <div className="px-4 pb-4">
+    <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-2"><dt>{row.label||row.title||row.id}{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="shrink-0 whitespace-nowrap">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>
    </div>
   </details> : null}
   {children}

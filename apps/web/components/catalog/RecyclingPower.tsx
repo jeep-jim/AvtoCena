@@ -1,12 +1,14 @@
 import type { RecyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import styles from "./RecyclingPower.module.css";
 
-export function RecyclingPowerLabel({ hpLabel, info, showKw = false }: {
-  hpLabel: string; info: RecyclingPowerInfo | null; showKw?: boolean;
+export function RecyclingPowerLabel({ hpLabel, info, kw, showKw = false }: {
+  hpLabel: string; info: RecyclingPowerInfo | null; showKw?: boolean; kw?: unknown;
 }) {
-  return <span className={styles.value} data-recycling-power={showKw && info ? "paired" : undefined}>
+  const value = Number(kw ?? info?.kw);
+  const kwLabel = Number.isFinite(value) && value > 0 ? `${value.toLocaleString("ru-RU", {maximumFractionDigits:2})} кВт` : "";
+  return <span className={styles.value} data-recycling-power={showKw && kwLabel ? "paired" : undefined}>
     <span className={styles.unit}>{hpLabel}</span>
-    {showKw && info ? <span className={`${styles.unit} ${info.aboveLimit ? styles.warningText : ""}`}> / {info.kwLabel}</span> : null}
+    {showKw && kwLabel ? <span className={`${styles.unit} ${info?.aboveLimit ? styles.warningText : ""}`}>{hpLabel ? " / " : ""}{kwLabel}</span> : null}
   </span>;
 }
 export function RecyclingPowerExplanation({ info }: { info: RecyclingPowerInfo | null }) {

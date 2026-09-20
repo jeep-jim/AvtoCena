@@ -52,12 +52,12 @@ test("hp-only customer calculation still works; invalid explicit kW is rejected"
   assert.equal(validateCustomerParameters({...draft,powerKw:"",powerHp:"150"}).powerKw,150*0.73549875);
   for (const kw of ["not-a-number",-1,0,Infinity,2001]) assert.throws(()=>validateCustomerParameters({...draft,powerKw:kw}));
 });
-test("wiring: both views, reset path and price explanation use existing layout containers", () => {
+test("wiring: both views, completed quote and price explanation use existing layout containers", () => {
   const card=readFileSync("apps/web/components/catalog/CatalogCard.tsx","utf8");
   const inline=readFileSync("apps/web/components/catalog/InlineOfferParameters.tsx","utf8");
   const page=readFileSync("apps/web/app/(public)/cars/offer/[id]/page.tsx","utf8");
   assert.match(card,/data-recycling-power-chip/); assert.match(card,/RecyclingPowerLabel/);
   assert.match(inline,/valueNode=\{pairedPower/);
-  assert.match(inline,/setDraft\(\{\.\.\.originalDraft,deliveryCity:draft\.deliveryCity\|\|""\}\)/); assert.match(page,/powerKw:powerScenario\?"":String\(recyclingPowerInfo\(raw\)\?\.kw/);
+  assert.doesNotMatch(inline,/Вернуть исходные данные/); assert.match(page,/powerKw:powerScenario\?"":String\(raw\.powerKw\|\|recyclingPowerInfo\(raw\)\?\.kw/);
   assert.match(page,/RecyclingFeeHelp info=\{powerInfo\}/);
 });

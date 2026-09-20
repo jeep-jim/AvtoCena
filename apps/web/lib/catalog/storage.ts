@@ -1,3 +1,4 @@
+import { matchesFuelFilter } from "./fuel-filter";
 import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
@@ -676,7 +677,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     if (params.powerFrom && utilizationPowerHp < params.powerFrom) return false;
     if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
   }
-  if (params.fuel && lower(row.fuel) !== lower(params.fuel)) return false;
+  if (!matchesFuelFilter(row.fuel, params.fuel)) return false;
   if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
   if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
   if (params.drive && lower(row.drive) !== lower(params.drive)) return false;

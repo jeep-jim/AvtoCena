@@ -1,4 +1,6 @@
 "use client";
+import { ChevronDown } from "lucide-react";
+import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
 import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
 
@@ -94,7 +96,7 @@ const auctionGrades: Option[] = [{ value: "", label: "Любая оценка" }
 
 const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
-const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
+const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "electrified", label: "Электромобили и гибриды" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
 const drives: Option[] = [{ value: "", label: "Любой привод" }, { value: "fwd", label: "Передний" }, { value: "rwd", label: "Задний" }, { value: "awd", label: "Полный" }];
 
@@ -137,16 +139,29 @@ function sortParam(key: SortKey, direction: SortDir) {
   return "";
 }
 
-async function loadElectricFacets() {
-  const response = await fetch("/api/catalog/search?fuel=electric&pageSize=1&includeFacets=1", { cache: "no-store" });
+async function loadElectricFacets(fuel: string) {
+  const response = await fetch(`/api/catalog/search?fuel=${encodeURIComponent(fuel)}&pageSize=1&includeFacets=1`, { cache: "no-store" });
   if (!response.ok) throw new Error(`catalog_electric_facets_http_${response.status}`);
   const payload = await response.json();
   if (!payload?.facets) throw new Error("catalog_electric_facets_missing");
   return payload.facets as Facets;
 }
 
-function ElectricCheckbox({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
-  return <label className="ac-filter-control ac-electric-filter flex min-h-13 cursor-pointer items-center gap-2 rounded-[15px] px-4 text-sm font-black"><input type="checkbox" name="fuel" value="electric" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" /><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-sm transition" style={{ background: checked ? "#ffd21f" : "var(--ac-surface-3)", border: checked ? "1px solid #ffd21f" : "1px solid rgba(103,113,130,.55)", color: checked ? "#171a21" : "transparent" }}>✓</span><span className="text-[17px] leading-none text-[#ffd21f]" aria-hidden="true">⚡</span><span>Электро</span></label>;
+function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+ const [open,setOpen]=useState(false);
+ const root=useRef<HTMLDivElement>(null);
+ const selected=isElectrifiedFilter(value);
+ useEffect(()=>{if(!open)return;const close=(e:PointerEvent)=>{if(!root.current?.contains(e.target as Node))setOpen(false);};const escape=(e:KeyboardEvent)=>{if(e.key==="Escape")setOpen(false);};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[open]);
+ const toggle=(fuel:string,checked:boolean)=>{const ev=value==="electric"||value==="electrified",hybrid=value==="hybrid"||value==="electrified";const nextEv=fuel==="electric"?checked:ev,nextHybrid=fuel==="hybrid"?checked:hybrid;onChange(nextEv&&nextHybrid?"electrified":nextEv?"electric":nextHybrid?"hybrid":"");};
+ return <div ref={root} className="relative min-w-0">
+  <div className="ac-filter-control ac-electric-filter flex min-h-13 items-center rounded-[15px] text-sm font-black">
+   <label className="flex min-h-13 min-w-0 flex-1 cursor-pointer items-center gap-2 px-4"><input type="checkbox" checked={selected} onChange={e=>onChange(e.target.checked?"electrified":"")} className="h-6 w-6 shrink-0 accent-[#ffd21f]"/><span>Электро{value==="electric"?": электромобили":value==="hybrid"?": гибриды":""}</span></label>
+   <button type="button" onClick={()=>setOpen(!open)} aria-label="Уточнить тип электрического автомобиля" aria-expanded={open} className="flex min-h-13 w-12 shrink-0 items-center justify-center"><ChevronDown size={20}/></button>
+  </div>
+  {open ? <div className="absolute inset-x-0 top-full z-[120] mt-2 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-3 text-sm font-semibold">
+   {[["electric","Электромобили"],["hybrid","Гибриды"]].map(([fuel,label])=><label key={fuel} className="flex min-h-11 cursor-pointer items-center gap-3 px-2"><input type="checkbox" checked={value===fuel||value==="electrified"} onChange={e=>toggle(fuel,e.target.checked)} className="h-5 w-5 accent-[#ffd21f]"/>{label}</label>)}
+  </div> : null}
+ </div>;
 }
 
 function PowerLimitCheckbox({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
@@ -269,7 +284,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   // Server HTML can be visible before this component has its event handlers.
   const [interactive, setInteractive] = useState(false);
   useEffect(() => setInteractive(true), []);
-  const electricOnly = draft.fuel === "electric";
+  const electricOnly = isElectrifiedFilter(draft.fuel);
 
   useEffect(() => {
     if (mobileOpen) return;
@@ -295,9 +310,9 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   useEffect(() => {
     if (!electricOnly) { setElectricFacets(null); return; }
     let cancelled = false;
-    loadElectricFacets().then((next) => { if (!cancelled) setElectricFacets(next); }).catch(() => { if (!cancelled) setElectricFacets({ makes: [], models: [], markets: [], bodyTypes: [], fuels: ["electric"], transmissions: [], drives: [] }); });
+    loadElectricFacets(draft.fuel).then((next) => { if (!cancelled) setElectricFacets(next); }).catch(() => { if (!cancelled) setElectricFacets({ makes: [], models: [], markets: [], bodyTypes: [], fuels: ["electric", "hybrid"], transmissions: [], drives: [] }); });
     return () => { cancelled = true; };
-  }, [electricOnly]);
+  }, [electricOnly, draft.fuel]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -375,7 +390,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "engine") return setDraft((current) => ({ ...current, engineFrom: "", engineTo: "" }));
     if (key in draft) setField(key as keyof FilterDraft, "");
   };
-  const setElectric = (checked: boolean) => { setField("fuel", checked ? "electric" : ""); setElectricFacets(null); };
+  const setElectric = (value: string) => { setField("fuel", value); setElectricFacets(null); };
   const chooseSort = (key: SortKey) => {
     setSortKey(key);
     if (key === "totalRub") setSortDirection("asc");
@@ -390,7 +405,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       </div>
       <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
-        <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
+        <ElectricCheckbox value={draft.fuel} onChange={setElectric} />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
@@ -405,7 +420,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
       </div>
     </form></div> : null}

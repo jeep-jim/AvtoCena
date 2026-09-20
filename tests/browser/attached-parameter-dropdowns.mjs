@@ -37,17 +37,16 @@ const browser=process.env.PARAMETER_BROWSER==='webkit' ? await webkit.launch({he
 const results=[];
 function save(){fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));}
 async function geometry(page,trigger,panel,grid){
- const g=await grid.boundingBox(),t=await trigger.boundingBox(),b=await panel.boundingBox();
+ // Read all geometry in one frame: opening a mobile menu can adjust scroll position.
+ const {g,t,b,spacing}=await trigger.evaluate(el=>{
+  const editor=el.closest('[data-parameter-editor]'), tile=editor.parentElement;
+  const rect=node=>node.getBoundingClientRect().toJSON();
+  const t=rect(el),g=rect(tile.parentElement),b=rect(editor.querySelector('[data-parameter-panel]'));
+  const pseudo=getComputedStyle(el,'::after');
+  return {g,t,b,spacing:{rowGap:parseFloat(getComputedStyle(tile.parentElement).rowGap),editorBottom:rect(editor).bottom,tileBottom:rect(tile).bottom,bridgeTop:t.bottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:t.bottom-parseFloat(pseudo.bottom)}};
+ });
  assert.ok(g&&t&&b);
  assert.ok(Math.abs(b.x-g.x)<2&&Math.abs(b.width-g.width)<2,`must span exactly both columns ${JSON.stringify({g,t,b})}`);
- const spacing=await trigger.evaluate(el=>{
-  const editor=el.closest('[data-parameter-editor]');
-  const tile=editor.parentElement;
-  const rowGap=parseFloat(getComputedStyle(tile.parentElement).rowGap);
-  const pseudo=getComputedStyle(el,'::after');
-  const triggerBottom=el.getBoundingClientRect().bottom;
-  return {rowGap,editorBottom:editor.getBoundingClientRect().bottom,tileBottom:tile.getBoundingClientRect().bottom,bridgeTop:triggerBottom-parseFloat(pseudo.bottom)-parseFloat(pseudo.height),bridgeBottom:triggerBottom-parseFloat(pseudo.bottom)};
- });
  assert.ok(spacing.rowGap>0,'the original tile spacing must remain positive');
  const visibleTileBottom=Math.max(t.y+t.height,spacing.editorBottom);
  assert.ok(Math.abs(b.y-visibleTileBottom-spacing.rowGap)<1,`dropdown must leave the same gap after the visible tile edge, not touch its neighbour ${JSON.stringify({g,t,b,spacing,visibleTileBottom})}`);
@@ -159,7 +158,7 @@ try{
     await presets.hover();await page.mouse.wheel(0,200);await page.waitForTimeout(100);
     assert.ok(await presets.evaluate(el=>el.scrollTop>0),'long list scrolls inside the mobile menu');
     await page.keyboard.press('Escape');await page.waitForFunction(()=>document.documentElement.style.overflow!=='hidden');
-    await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+    assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0);await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
     await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
     await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
    }
@@ -195,8 +194,9 @@ try{
     await page.keyboard.press('Escape');await triggers.nth(3).click();
     await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);
     assert.equal(requests.at(-1)?.customsCalculationDate,'');
-    assert.ok(await page.locator('.ac-offer-price-panel').getByText('По вашим параметрам',{exact:true}).isVisible());
-    await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await page.waitForTimeout(100);
+    assert.ok(await page.getByText('Стоимость под ключ',{exact:true}).isVisible());
+    assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0);
+    await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('');await page.waitForTimeout(100);
     assert.ok(await page.locator('.ac-offer-price-panel').getByText('Цена продавца',{exact:true}).isVisible());
    }
    if(!live)assert.deepEqual(errors,[]);
