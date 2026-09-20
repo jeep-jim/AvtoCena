@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {restoreProAuctionsPower,proAuctionsReportedVolume} from '../apps/web/lib/catalog/proauctions-source-parameters';
+import {restoreProAuctionsPower,proAuctionsReportedVolume,proAuctionsHybridDraft} from '../apps/web/lib/catalog/proauctions-source-parameters';
 import {safePublicPricing} from '../apps/web/lib/catalog/safe-public-pricing';
 const fixture=()=>JSON.parse(fs.readFileSync('tests/fixtures/proauctions/published-corolla-cross.json','utf8'));
 test('published Corolla Cross keeps its sourced 140 hp and prefills the reported volume without certifying it',()=>{
@@ -20,4 +20,13 @@ test('saved imports repair source confidence before inventory normalization',asy
  const input=fixture(),row=inventorySourceEvidence(input);
  assert.equal(row.powerHp,140);assert.equal(row.powerDataConfidence,'source_exact');
  assert.equal(input.powerDataConfidence,'estimated');
+});
+
+test('a bound hybrid source table fills ICE power but never invents subtype or 30-minute power',()=>{
+ const row=fixture();for(const g of row.operational.sourceSpecifications.groups)for(const i of g.items)if(i.name==='Мощность')i.name='Мощность ДВС';row.operational.sourceSpecifications.groups[0].items.push({name:'Гибрид',value:'да'});
+ const before=JSON.stringify(row);const draft=proAuctionsHybridDraft(row);
+ assert.equal(draft.fuel,'hybrid');assert.equal(draft.icePowerKw,'103');
+ assert.equal('hybridKind' in draft,false);assert.equal('power30MinKw' in draft,false);
+ assert.equal(JSON.stringify(row),before);
+ row.operational.sourceSpecifications.sourceOfferId='different';assert.deepEqual(proAuctionsHybridDraft(row),{});
 });

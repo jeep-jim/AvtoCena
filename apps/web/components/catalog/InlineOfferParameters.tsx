@@ -108,7 +108,7 @@ function Tile({label,value,valueNode,warning=false,icon,children,wide=false}:{la
    <div id={`${id}-panel`} data-parameter-panel role="region" aria-labelledby={`${id}-trigger`} className={editorStyles.panel}>
     <div className={`${editorStyles.body} ac-attached-editor-body`}
      onClick={event=>{if((event.target as Element).closest("button[aria-pressed]"))finish();}}
-     onChange={event=>{if(event.target instanceof HTMLSelectElement)finish();}}
+     onChange={event=>{if(event.target instanceof HTMLSelectElement && !event.target.hasAttribute("data-keep-open"))finish();}}
      onKeyDown={event=>{if(event.key==="Enter" && event.target instanceof HTMLInputElement){event.preventDefault();event.target.blur();finish();}}}
     >{children}</div>
    </div>
@@ -224,7 +224,7 @@ export function InlineOfferParameters({deliveryMarket,offerId,initial,price,chil
    </Tile> : null}
    {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
     {hybridHelp}
-    {draft.fuel==="hybrid" ? <label className={editorStyles.hybridField}>Тип гибрида<select aria-label="Тип гибрида для расчёта" value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите по документам автомобиля</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label> : null}
+    {draft.fuel==="hybrid" ? <label className={editorStyles.hybridField}>Тип гибрида<select aria-label="Тип гибрида для расчёта" data-keep-open value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите по документам автомобиля</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label> : null}
     <p className={editorStyles.note}>30-минутная мощность электромоторов — отдельное значение из СБКТС, ЭПТС или подтверждающих документов. Максимальная мощность из рекламы сюда не подходит. Если моторов несколько, нужна подтверждённая сумма их 30-минутных мощностей.</p>
     <div className={editorStyles.twoColumns}>{field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000,undefined,"30 минут, кВт")}{field("power30MinHp","30-минутная мощность, л.с.",[],0.1,2720,undefined,"30 минут, л.с.")}</div>
     {draft.fuel==="hybrid" ? <><p className={editorStyles.note}>Мощность ДВС — только бензинового или дизельного двигателя, без электромоторов.</p><div className={editorStyles.twoColumns}>{field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000,undefined,"ДВС, кВт")}{field("icePowerHp","Мощность ДВС, л.с.",[],0.1,2720,undefined,"ДВС, л.с.")}</div></> : null}
