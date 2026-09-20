@@ -22,4 +22,5 @@ test('absent or malformed official output and multiple ratings fail closed',()=>
  assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'2',output:'130/6300'}]),null);
  assert.equal(matchKoreaOfficialPower(offer(),[{...base,output:'unknown'}]),null);
  assert.equal(matchKoreaOfficialPower(offer(),[{...base,releaseYear:2023}]),null);
+ assert.equal(matchKoreaOfficialPower(offer(),[base,{...base,id:'hybrid',powertrain:'하이브리드'}]),null);
 });

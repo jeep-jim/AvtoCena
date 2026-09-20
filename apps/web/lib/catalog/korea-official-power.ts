@@ -18,11 +18,12 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
    ||inspection.year!==offer.year||!/^[A-Z0-9][A-Z0-9.-]{2,19}$/.test(code(inspection.engineCode)))return null;
  const semantic:any=offer.operational?.semanticEvidence||{};
  if(['fuel','engineCc','powerHp','powerKw'].some(key=>semantic[key]?.status==='conflict'))return null;
- const candidates=records.filter(row=>row.powertrain==='내연기관'
-   && code(row.engineCode)===code(inspection.engineCode)
+ const candidates=records.filter(row=>code(row.engineCode)===code(inspection.engineCode)
    && Number(row.engineCc)===Number(offer.engineCc)&&fuels[row.fuel]===offer.fuel
    && canonicalCatalogBrand(row.manufacturer)===canonicalCatalogBrand(offer.make));
- if(!candidates.length||!candidates.some(row=>row.releaseYear<=offer.year)
+ // Encar may label a mild hybrid merely as petrol. A government hybrid record
+ // for the same engine must not be hidden by filtering it out before matching.
+ if(!candidates.length||candidates.some(row=>row.powertrain!=='내연기관')||!candidates.some(row=>row.releaseYear<=offer.year)
    ||offer.year>Number(snapshot.capturedAt.slice(0,4)))return null;
  const outputs=candidates.map(row=>{
   const match=String(row.output||'').match(/^\s*(\d+(?:\.\d+)?)\s*\/[\d\s,.~–-]+$/);
