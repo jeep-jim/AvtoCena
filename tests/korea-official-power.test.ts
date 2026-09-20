@@ -1,12 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {matchKoreaOfficialPower,enrichEncarOfficialPower} from '../apps/web/lib/catalog/korea-official-power';
+import {matchKoreaOfficialPower,enrichEncarOfficialPower,officialKoreanManufacturerBrand} from '../apps/web/lib/catalog/korea-official-power';
 const offer=()=>({id:'test',sourceId:'encar_direct',sourceOfferId:'123',market:'korea',make:'Hyundai',model:'Avante (CN7)',year:2021,engineCc:1598,fuel:'petrol',powertrainKind:'combustion',operational:{inspection:{identityVerified:true,sourceOfferId:'123',year:2021,engineCode:'G4FM'},semanticEvidence:{}}}) as any;
+test('legal manufacturer names require an explicit matching product family',()=>{
+ assert.equal(officialKoreanManufacturerBrand({manufacturer:'한국지엠',model:'트랙스 1.2터보'}),'Chevrolet');
+ assert.notEqual(officialKoreanManufacturerBrand({manufacturer:'한국지엠',model:'GMC Sierra'}),'Chevrolet');
+ assert.equal(officialKoreanManufacturerBrand({manufacturer:'현대',model:'G80(RG3) 2.5T'}),'Genesis');
+ assert.equal(officialKoreanManufacturerBrand({manufacturer:'현대',model:'아반떼'}),'Hyundai');
+ assert.notEqual(officialKoreanManufacturerBrand({manufacturer:'기아',model:'G80'}),'Genesis');
+ const input=offer();input.make='Renault';input.model='QM6';input.engineCc=1997;input.operational.inspection.engineCode='M5R';
+ assert.equal(matchKoreaOfficialPower(input)?.powerHp,144);
+ input.make='Chevrolet';input.model='Trax';input.year=2024;input.operational.inspection.year=2024;input.engineCc=1199;input.operational.inspection.engineCode='LIH';
+ assert.equal(matchKoreaOfficialPower(input)?.powerHp,139);
+});
 test('official engine-code consensus supplies Avante power with record-level provenance',()=>{
  const input=offer(),before=JSON.stringify(input),result=enrichEncarOfficialPower(input);
  assert.equal(result.powerHp,123);assert.ok(Math.abs(result.powerKw-90.46634625)<0.000001);
  assert.ok(result.operational.officialPowerEvidence.recordIds.length>0);
  assert.equal(JSON.stringify(input),before);
+ const compact={...result,powerKw:Number(result.powerKw.toFixed(2))};
+ assert.equal(matchKoreaOfficialPower(compact)?.powerHp,123,'a rounded public projection must not override the exact stored conversion evidence');
 });
 test('same engine family with conflicting government ratings is not guessed',()=>{
  const input=offer();input.make='Kia';input.engineCc=998;input.operational.inspection.engineCode='G3LA';

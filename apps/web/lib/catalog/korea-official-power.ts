@@ -5,6 +5,17 @@ import type {VehicleOffer} from './types';
 type RecordRow = typeof snapshot.records[number];
 const fuels:Record<string,string>={'휘발유':'petrol','경유':'diesel','LPG':'lpg','CNG':'cng'};
 const code=(value:unknown)=>String(value||'').trim().toUpperCase();
+export function officialKoreanManufacturerBrand(row:Pick<RecordRow,'manufacturer'|'model'>) {
+ const manufacturer=String(row.manufacturer||'').trim(),model=String(row.model||'').trim();
+ // The government uses legal manufacturer names. Restrict corporate aliases
+ // to explicitly named product families; GM must not make every GMC a Chevrolet.
+ if(manufacturer==='한국지엠' && /^(?:CHEVROLET\b|스파크|말리부|트랙스|트레일블레이저)/i.test(model))return 'Chevrolet';
+ if(['르노코리아자동차(주)','르노코리아 주식회사'].includes(manufacturer)
+   && /^(?:QM6|SM6|XM3|ARKANA|Master|콜레오스)(?:\b|\s|\()/i.test(model))return 'Renault';
+ if(manufacturer==='케이지모빌리티' && /^(?:G4\s|MUSSO\b|렉스턴|무쏘|액티언|코란도|토레스|티볼리)/i.test(model))return 'KGM';
+ if(manufacturer==='현대' && /^(?:G70|G80|G90|GV60|GV70|GV80)(?:\b|\s|\()/i.test(model))return 'Genesis';
+ return canonicalCatalogBrand(manufacturer);
+}
 
 /** A source-bound inspection identifies the engine. Government ratings must
  * agree across ALL matching records, including older and newer versions.
@@ -20,7 +31,7 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
  if(['fuel','engineCc','powerHp','powerKw'].some(key=>semantic[key]?.status==='conflict'))return null;
  const candidates=records.filter(row=>code(row.engineCode)===code(inspection.engineCode)
    && Number(row.engineCc)===Number(offer.engineCc)&&fuels[row.fuel]===offer.fuel
-   && canonicalCatalogBrand(row.manufacturer)===canonicalCatalogBrand(offer.make));
+   && officialKoreanManufacturerBrand(row)===canonicalCatalogBrand(offer.make));
  // Encar may label a mild hybrid merely as petrol. A government hybrid record
  // for the same engine must not be hidden by filtering it out before matching.
  if(!candidates.length||candidates.some(row=>row.powertrain!=='내연기관')||!candidates.some(row=>row.releaseYear<=offer.year)
@@ -32,7 +43,10 @@ export function matchKoreaOfficialPower(offer:VehicleOffer,records:readonly Reco
  if(outputs.some(hp=>!Number.isFinite(hp)||hp<20||hp>1500)||new Set(outputs).size!==1)return null;
  const powerHp=outputs[0];
  if(Number(offer.powerHp)>0&&Math.abs(Number(offer.powerHp)-powerHp)>0.1)return null;
- if(Number(offer.powerKw)>0&&Math.abs(Number(offer.powerKw)-powerHp*0.73549875)>0.001)return null;
+ const ownDerivedKw=semantic.powerKw?.status==='exact' && semantic.powerKw?.source==='korea_energy_agency_engine_code_ps'
+   && semantic.powerKw?.conversion==='PS * 0.73549875' && Number(semantic.powerKw.value)>0;
+ const existingKw=ownDerivedKw?Number(semantic.powerKw.value):Number(offer.powerKw);
+ if(existingKw>0&&Math.abs(existingKw-powerHp*0.73549875)>0.001)return null;
  return {powerHp,engineCode:code(inspection.engineCode),recordIds:candidates.map(row=>row.id),
    sourceUrl:snapshot.sourceUrl,snapshotSha256:snapshot.rawSha256,capturedAt:snapshot.capturedAt};
 }
