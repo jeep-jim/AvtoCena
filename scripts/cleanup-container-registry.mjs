@@ -33,12 +33,26 @@ async function list(base, path, params, field) {
   } while(pageToken);
   return rows;
 }
-async function inventory() {
+const measuredImages=new Map();
+async function inventory(measure=false) {
   const images=await list(registry,'images',{registryId},'images');
   const revisions=await list(containers,'revisions',{folderId:folder},'revisions');
+  if(measure){
+    let next=0;
+    await Promise.all(Array.from({length:4},async()=>{while(next<images.length){
+      const index=next++,image=images[index];
+      if(Array.isArray(image.layers))continue;
+      try{
+        const detail=measuredImages.get(image.id)||await request(registry+'images/'+encodeURIComponent(image.id));
+        if(detail.id!==image.id||detail.digest!==image.digest)throw Error('image_measurement_identity_mismatch');
+        measuredImages.set(image.id,detail);
+        images[index]={...image,config:detail.config,layers:detail.layers};
+      }catch(error){console.warn('Registry byte measurement unavailable for image '+image.id+': '+String(error.message));}
+    }}));
+  }
   return {images,revisions};
 }
-const before=await inventory();
+const before=await inventory(true);
 const plan=registryRetentionPlan(before.images,before.revisions);
 const doomed=new Set(plan.candidates.map(x=>x.id));
 const report={createdAt:new Date().toISOString(),apply,...plan,uniqueBlobBytesBefore:uniqueRegistryBytes(before.images),estimatedUniqueBlobBytesAfter:uniqueRegistryBytes(before.images.filter(x=>!doomed.has(x.id))),deleted:0};
@@ -64,7 +78,7 @@ if (apply) {
     console.log(`Deleted ${report.deleted}/${plan.candidates.length} obsolete web images`);
     await fs.writeFile('registry-cleanup-report.json',JSON.stringify(report,null,2)+'\n');
   }
-  const after=await inventory();
+  const after=await inventory(true);
   registryRetentionPlan(after.images,after.revisions);
   report.uniqueBlobBytesAfter=uniqueRegistryBytes(after.images);
   report.remainingWebImages=after.images.filter(x=>x.name===WEB_REPOSITORY).length;
