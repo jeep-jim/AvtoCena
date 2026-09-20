@@ -1,11 +1,10 @@
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
-import { translateKnownSpecification } from "../../lib/catalog/specification-vocabulary";
+import { translateKnownSpecification, readableSpecificationLabel } from "../../lib/catalog/specification-vocabulary";
 import { SpecificationSectionIcon } from "./SpecificationSectionIcon";
 import styles from "./OfferSpecifications.module.css";
 const foreign = /[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Georgian}]/u;
 function readableLabel(value:string) {
- const text=translateKnownSpecification(value);
- return !foreign.test(text) && !/неполное в источнике/.test(text) && (!/[a-z]{3}/i.test(text) || /[а-яё]/i.test(text) || /^(ABS|ESP|ISOFIX|USB|Bluetooth|Wi-Fi|LED|DCT|CVT)$/i.test(text)) ? text : null;
+ return readableSpecificationLabel(value);
 }
 function valueText(value:string) {
  return translateKnownSpecification(value).replace(/\s*\/\s*(?=(?:спереди|сзади|Передн|Задн|Водител|Пассажир))/gi,"\n").replace(/;\s*/g,";\n");
