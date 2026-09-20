@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {yandexJsonRequest} from './lib/yandex-json-request.mjs';
 import {waitForYandexOperation} from './lib/yandex-operation.mjs';
 import fs from 'node:fs/promises';
 import {registryRetentionPlan, uniqueRegistryBytes, WEB_REPOSITORY} from './lib/registry-retention.mjs';
@@ -17,9 +18,7 @@ const tokenResponse = await fetch(iam,{method:'POST',headers:{'content-type':'ap
 if (!tokenResponse.ok) throw new Error(`IAM failed: ${tokenResponse.status}`);
 const {iamToken} = await tokenResponse.json();
 async function request(url, method='GET') {
-  const response = await fetch(url,{method,headers:{Authorization:'Bearer '+iamToken},signal:AbortSignal.timeout(30000)});
-  if (!response.ok) throw new Error(`${method} ${new URL(url).pathname}: ${response.status}`);
-  return response.json();
+  return yandexJsonRequest(url,{method,token:iamToken});
 }
 async function list(base, path, params, field) {
   const rows=[]; const seen=new Set(); let pageToken='';
