@@ -431,6 +431,8 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     }
     mergeEncarCompleteDetail(offer, detail);
     await this.captureInspection(offer);
+    const {enrichEncarOfficialPower}=await import('./korea-official-power');
+    Object.assign(offer,enrichEncarOfficialPower(offer));
     const vehicle = detail?.vehicle || detail?.Vehicle || detail;
     const declaredId = String(vehicle?.vehicleId || vehicle?.id || offer.sourceOfferId);
     if (declaredId === String(offer.sourceOfferId)) captureSourceTable(offer, [

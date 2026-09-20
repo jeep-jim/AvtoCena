@@ -138,7 +138,7 @@ try{
     await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.ok(Math.abs(Number(requests.at(-1)?.powerKw)-150*0.73549875)<1e-7);
     const hp=grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true});
     const kw=grid.getByRole('spinbutton',{name:'Мощность, кВт (если известна)',exact:true});
-    await kw.fill('110');assert.equal(await hp.inputValue(),'150');
+    await kw.fill('110');assert.ok(Math.abs(Number(await hp.inputValue())-110/0.73549875)<1e-7,'editing kW updates horsepower');
     await hp.fill('160');assert.ok(Math.abs(Number(await kw.inputValue())-160*0.73549875)<1e-7);
     await kw.fill('');assert.equal(await hp.inputValue(),'');
     await hp.fill('150');await hp.press('Enter');assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'Enter commits manual input and closes');
@@ -162,6 +162,22 @@ try{
     await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).click();await triggers.nth(3).locator('[data-recycling-power="paired"]').waitFor();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
     await triggers.nth(2).click();await triggers.nth(3).click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'same-row switching closes previous dropdown');
     await page.keyboard.press('Escape');await triggers.nth(0).click();await page.locator('[data-outside]').click();assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0);
+   }
+   if(!live && kind==='hybrid'){
+    await page.keyboard.press('Escape');await triggers.last().click();
+    const motorKw=grid.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true});
+    const motorHp=grid.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true});
+    const iceKw=grid.getByRole('spinbutton',{name:'Мощность ДВС, кВт',exact:true});
+    const iceHp=grid.getByRole('spinbutton',{name:'Мощность ДВС, л.с.',exact:true});
+    await motorKw.fill('10');assert.ok(Math.abs(Number(await motorHp.inputValue())-10/0.73549875)<1e-7);
+    assert.equal(await iceKw.inputValue(),'100','electric motor input must not overwrite combustion power');
+    await motorHp.fill('20');assert.ok(Math.abs(Number(await motorKw.inputValue())-20*0.73549875)<1e-7);
+    await iceHp.fill('100');assert.ok(Math.abs(Number(await iceKw.inputValue())-100*0.73549875)<1e-7);
+    await iceKw.fill('36');assert.ok(Math.abs(Number(await iceHp.inputValue())-36/0.73549875)<1e-7);
+    await motorKw.fill('');assert.equal(await motorHp.inputValue(),'');assert.equal(await iceKw.inputValue(),'36');
+    await grid.getByLabel('Тип гибрида для расчёта',{exact:true}).selectOption('series_hybrid');
+    assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'hybrid type selection keeps the related power inputs open');
+    await page.keyboard.press('Escape');
    }
    if(!live && kind==='missing-hybrid'){
     await page.keyboard.press('Escape');await triggers.nth(0).click();

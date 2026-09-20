@@ -1,11 +1,20 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intake-checkpoint.mjs';
 import { collectSourceStates, intakeState, intakeSummary } from './lib/catalog-source-intake.mjs';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
 process.env.CATALOG_REBUILD_MARKET=market;
 process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
+if (market==='korea') {
+  try {
+    const result=await promisify(execFile)(process.execPath,['scripts/catalog-download-korea-energy-models.mjs'],{
+      env:{...process.env,KOREA_OFFICIAL_POWER_SNAPSHOT:'data/catalog/korea-official-power/snapshot.json'},timeout:180000,maxBuffer:1000000});
+    console.log(result.stdout);
+  } catch {console.warn('Official power reference refresh unavailable; retaining the last verified snapshot.');}
+}
 const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
 const {AUTOHOME_NEW_MIN_YEAR}=await import('../apps/web/lib/catalog/source-inventory-scope.ts');
 const {chinaInventoryAgeDecision}=await import('../apps/web/lib/catalog/china-owner-policy.ts');
