@@ -60,8 +60,8 @@ export async function renderOfferPdf(data:OfferPdfData):Promise<Buffer> {
  const notes=["Обеспечительный платёж указан отдельно как этап оплаты; повторно к итогу не прибавляется.",...data.warnings,"Суммы в иностранной валюте пересчитаны по курсам на момент расчёта. Информация носит справочный характер и не является офертой."];
  for(const note of notes){doc.font("regular").fontSize(7);const h=doc.heightOfString(note,{width:W})+6;room(h);text(note,38,y,W,7,false,muted);y+=h;}
  room(88);y+=8;doc.moveTo(38,y).lineTo(557,y).strokeColor("#D8DDE4").stroke();y+=13;
- const contacts=[["Япония","+7 903 071-33-03","79030713303"],["Другие страны","+7 923 479-19-88","79234791988"],["Оформление документов","+7 923 623-47-77","79236234777"]];
- contacts.forEach(([label,phone,tg],i)=>{const x=38+i*176;text(label,x,y,172,8,true);text(phone,x,y+17,172,9);doc.font("regular").fontSize(8).fillColor("#008CCB").text("Telegram",x,y+34,{link:`https://t.me/+${tg}`,width:170});});y+=56;
+ const contacts=[["Япония","+7 903 071-33-03","IvanTOPAVTO"],["Другие страны","+7 923 479-19-88","Anton_Molodykh90"],["Оформление документов","+7 923 623-47-77","nvkz_zenit"]];
+ contacts.forEach(([label,phone,tg],i)=>{const x=38+i*176;text(label,x,y,172,8,true);doc.font("regular").fontSize(9).fillColor(ink).text(phone,x,y+17,{width:172,link:`tel:${phone.replace(/[^+0-9]/g,"")}`});doc.font("regular").fontSize(8).fillColor("#008CCB").text("Telegram",x,y+34,{link:`https://t.me/${tg}`,width:170});});y+=56;
  doc.font("regular").fontSize(8).fillColor(muted).text("topavto.online",38,y,{link:"https://topavto.online/",width:170});doc.text("@TopAvtoImport",214,y,{link:"https://t.me/TopAvtoImport",width:170});doc.text("Карточка автомобиля ↗",390,y,{link:data.url,width:170});
  const count=doc.bufferedPageRange().count;
  for(let i=0;i<count;i++){doc.switchToPage(i);text("АВТОЦЕНА  /  Индивидуальный расчёт",38,791,390,7,false,muted);doc.font("regular").fontSize(7).text(`${i+1} / ${count}`,510,791,{width:47,align:"right"});}
