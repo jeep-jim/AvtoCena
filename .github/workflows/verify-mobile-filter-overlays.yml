@@ -57,6 +57,12 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
           FILTER_BROWSER: webkit
         run: node tests/browser/mobile-filter-overlays.mjs
+      - name: Published budget continuity and Japanese results
+        if: github.ref == 'refs/heads/main'
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-budget-live.mjs
       - name: Record reviewed import and roadmap on the review branch only
         if: github.ref == 'refs/heads/fix/mobile-catalog-overlay-menus-20260913'
         run: |

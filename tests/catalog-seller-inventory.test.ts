@@ -20,10 +20,10 @@ test("source rubles survive the card projection but cannot become a delivered to
  for(const change of [{sourcePrice:20000},{sellerPriceRub:900000},{totalRub:950000},{sourceCurrency:"USD"},{catalogPricingMode:undefined}])assert.equal(isSellerPricedOffer({...input,...change}),false);
 });
 
-test("manual inputs require exact cc and separate certified power for electrified scenarios",()=>{
+test("manual inputs normalize liters to cc and require separate certified power for electrified scenarios",()=>{
  const draft={year:"2021",fuel:"petrol",engineCc:"1598",powerHp:"150"};
  assert.equal(validateCustomerParameters(draft).engineCc,1598);
- assert.throws(()=>validateCustomerParameters({...draft,engineCc:"1.6"}));
+ assert.equal(validateCustomerParameters({...draft,engineCc:"1.6"}).engineCc,1600);
  assert.throws(()=>validateCustomerParameters({...draft,fuel:"electric"}));
  assert.throws(()=>validateCustomerParameters({...draft,fuel:"hybrid",power30MinKw:60}));
  assert.equal(validateCustomerParameters({...draft,fuel:"electric",power30MinKw:60}).engineCc,undefined);

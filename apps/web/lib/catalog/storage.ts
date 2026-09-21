@@ -1542,7 +1542,7 @@ export async function searchOffers(params: CatalogSearchParams, internalPageLimi
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
-  if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub")) {
+  if ((!params.market || params.market === "any" || params.market === "japan") && (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub"))) {
     const {generationId,rows}=await currentProjectionRows(params);
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
     const prepared=await attachJapanSearchValues(rows,generationId);
