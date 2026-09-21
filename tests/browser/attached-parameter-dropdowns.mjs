@@ -30,7 +30,7 @@ if(live){
  const data=await response.json();
  const hybrid=data.items?.find(o=>o.id);
  assert.ok(hybrid,'a real hybrid offer is required for verification');
- pages=[['petrol','/cars/offer/15691a619182935d97aa25c7'],['hybrid','/cars/offer/'+hybrid.id]];
+ pages=[['petrol','/cars/offer/15691a619182935d97aa25c7'],['hybrid','/cars/offer/'+hybrid.id],['electric','/cars/offer/17153b86dd5a6519cf814186']];
  fs.writeFileSync(`${out}/live-pages.json`,JSON.stringify(pages,null,2));
 }
 const browser=process.env.PARAMETER_BROWSER==='webkit' ? await webkit.launch({headless:true}) : await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
@@ -68,6 +68,7 @@ try{
    const response=await page.goto(origin+url,{waitUntil:'domcontentloaded',timeout:90000});assert.equal(response.status(),200);
    const grid=page.locator('[data-parameter-editor-grid]');await grid.waitFor({state:'visible',timeout:60000});
    await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');return el&&Object.keys(el).some(k=>k.startsWith('__reactProps$'));});
+   await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');const grid=document.querySelector('[data-parameter-editor-grid]');return el && grid && getComputedStyle(el).height==='48px' && getComputedStyle(grid).display==='grid';},null,{timeout:30000});
    const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});
    if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
    const triggers=grid.locator('[data-parameter-editor] > summary');
@@ -199,8 +200,8 @@ try{
     await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('');await page.waitForTimeout(100);
     assert.ok(await page.locator('.ac-offer-price-panel').getByText('Цена продавца',{exact:true}).isVisible());
    }
-   if(!live)assert.deepEqual(errors,[]);
-  }catch(error){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({kind,url,theme,width,index,error:String(error),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true});throw error;}finally{await context.close();}
+   assert.deepEqual(errors,[],'hydration and interaction must not produce browser errors');
+  }catch(error){fs.writeFileSync(`${out}/failure.json`,JSON.stringify({kind,url,theme,width,index,error:String(error),pageErrors:errors},null,2));await page.screenshot({path:`${out}/failure.png`,fullPage:true}).catch(()=>{});throw error;}finally{await context.close();}
  }
  if(!live){
   for(const kind of ['saved-admin','saved-guest']){

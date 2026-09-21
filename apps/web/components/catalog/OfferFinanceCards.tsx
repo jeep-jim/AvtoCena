@@ -1,8 +1,6 @@
 "use client";
 
-import { createPortal } from "react-dom";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 function FinanceCards() {
@@ -38,63 +36,23 @@ function FinanceCards() {
 }
 
 export function OfferFinanceCards() {
-  const pathname = usePathname();
-  const [host, setHost] = useState<HTMLElement | null>(null);
+  const host = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!pathname?.startsWith("/cars/offer/")) return;
-
-    let cancelled = false;
-    let frame = 0;
-    let financeHost: HTMLElement | null = null;
-    let breakdown: HTMLDetailsElement | null = null;
-    let observer: MutationObserver | null = null;
-
-    const sync = () => {
-      if (!financeHost || !breakdown) return;
-      financeHost.hidden = !(window.innerWidth >= 1280 && breakdown.open);
-    };
-
-    const mount = () => {
-      if (cancelled) return;
-      const page = document.querySelector<HTMLElement>("main.ac-offer-page");
-      const section = page?.querySelector<HTMLElement>(":scope > section");
-      const grid = section?.querySelector<HTMLElement>(":scope > div.grid");
-      const mediaColumn = grid?.children?.[0] as HTMLElement | undefined;
-      breakdown = page?.querySelector<HTMLDetailsElement>(".ac-offer-breakdown") || null;
-
-      if (!page || !grid || !mediaColumn || !breakdown) {
-        frame = window.requestAnimationFrame(mount);
-        return;
-      }
-
-      page.querySelectorAll<HTMLElement>("[data-offer-finance-cards-host]").forEach((node) => node.remove());
-      financeHost = document.createElement("div");
-      financeHost.dataset.offerFinanceCardsHost = "true";
-      financeHost.className = "mt-4";
-      mediaColumn.appendChild(financeHost);
-      setHost(financeHost);
-
-      observer = new MutationObserver(sync);
-      observer.observe(breakdown, { attributes: true, attributeFilter: ["open"] });
-      window.addEventListener("resize", sync);
-      sync();
-    };
-
-    mount();
-    return () => {
-      cancelled = true;
-      if (frame) window.cancelAnimationFrame(frame);
-      observer?.disconnect();
-      window.removeEventListener("resize", sync);
-      financeHost?.remove();
-      setHost(null);
-    };
-  }, [pathname]);
+    const page = host.current?.closest("main.ac-offer-page");
+    if (!page) return;
+    const sync = () => setVisible(window.innerWidth >= 1280 && Boolean(page.querySelector<HTMLDetailsElement>(".ac-offer-breakdown")?.open));
+    const observer = new MutationObserver(sync);
+    observer.observe(page, { subtree: true, childList: true, attributes: true, attributeFilter: ["open"] });
+    window.addEventListener("resize", sync);
+    sync();
+    return () => { observer.disconnect(); window.removeEventListener("resize", sync); };
+  }, []);
 
   return (
     <>
-      {host ? createPortal(<FinanceCards />, host) : null}
+      <div ref={host} data-offer-finance-cards-host="true" className="mt-4" hidden={!visible}>{visible ? <FinanceCards /> : null}</div>
       <style jsx global>{`
         .ac-offer-page .ac-credit-calculator-mock,
         html body .ac-offer-page [data-offer-credit-mobile-host] {
