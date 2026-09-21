@@ -39,14 +39,13 @@ export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
     .ac-offer-contact-button{color:#fff!important}
+    .ac-offer-contact-button>span{font-size:inherit}
     .ac-credit-partner-button{color:#fff!important;-webkit-text-fill-color:#fff!important}
     .ac-offer-page [data-offer-credit-host]{display:none!important}
     .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
     html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
     @media(min-width:1280px){
       .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px}
-      .ac-offer-actions-below[data-has-pdf="true"] .ac-offer-contact-button{padding-left:36px;padding-right:12px;font-size:13px}
-      .ac-offer-actions-below[data-has-pdf="true"] .ac-offer-contact-button>span:first-child{left:12px}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}
