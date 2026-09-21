@@ -11,6 +11,7 @@ function ActionButtons({ className = "", stacked = false }: { className?: string
   return <div className={`grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
     <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку на расчёт</span></button>
     <ShareLinkButton className={`${buttonClass} bg-[#00A2E8]`} />
+    {className.includes("ac-offer-actions-") ? <div data-offer-pdf-slot className="hidden xl:block empty:!hidden" /> : null}
   </div>;
 }
 
@@ -42,6 +43,9 @@ export function OfferContactActionsStyles() {
     .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
     html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
     @media(min-width:1280px){
+      .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px}
+      .ac-offer-actions-below[data-has-pdf="true"] .ac-offer-contact-button{padding-left:36px;padding-right:12px;font-size:13px}
+      .ac-offer-actions-below[data-has-pdf="true"] .ac-offer-contact-button>span:first-child{left:12px}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}

@@ -1,4 +1,5 @@
 "use client";
+import { OfferPdfButton } from "./OfferPdfButton";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
 import { ContractPaymentSummary } from "./ContractPaymentSummary";
@@ -259,6 +260,7 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
    </Tile>:null}
   </div>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
+  {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
    <p className="mt-3 text-sm">Их увидят все пользователи сайта!</p>

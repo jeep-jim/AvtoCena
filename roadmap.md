@@ -4278,3 +4278,12 @@ Latest Europe scope: immediate rebalance only publishes Europe from retained sou
 ## 20.09.2026 — финальные правки каталога и расчёта
 
 Правки по семи пунктам владельца: компактная итоговая цена с валютным блоком, равномерные расходы, ширина пагинации, единые единицы мощности, единое открытие Алисы, уточнения электро/гибридного фильтра и русские характеристики с иконками. Подробности и ограничения исходных таблиц: `docs/catalog-ui-polish-20260920.md`. Результат публикации фиксируется в PR.
+
+
+## 2026-09-21 — PWA calculator icon and employee PDF export
+
+- Confirmed public manifest incorrectly referenced CRM AC icons. Restored existing calculator PNGs with versioned URLs; CRM notification icons remain separate.
+- Added employee-only PDF action: third desktop action, mobile below the save control and available before/after saving. A dialog offers view in a new tab or download.
+- PDF endpoint checks origin and current staff role; reads current draft without saving. Reuses a matching saved calculation or recalculates server-side. Incomplete drafts export with explicitly unknown amounts.
+- Styled A4 estimate preserves market/Russia cost rows, exchange rate, subtotals, commission, total, payment stage, disclaimer and all reference contact details. Deposit is not double-counted. Embedded Cyrillic fonts and clickable contacts.
+- Local focused access/accounting tests and production build passed. Browser verification, full CI and production deployment are pending at time of this entry.
