@@ -74,6 +74,22 @@ try{
    const triggers=grid.locator('[data-parameter-editor] > summary');
    for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
     await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
+    if(live){
+      const action=page.locator('.ac-offer-contact-button[data-offer-action="lead"]:visible');
+      assert.equal(await action.count(),1,'one visible primary action on the actual offer');
+      if(width>=1280){
+        assert.ok(await page.locator('.ac-offer-actions-below').isVisible(),'closed specs keep actions under photos');
+        await page.locator('[data-spec-desktop] .ac-specifications-trigger').click();
+        assert.ok(await page.locator('.ac-offer-actions-sidebar').isVisible(),'open specs move actions to sidebar');
+        assert.equal(await page.locator('.ac-offer-actions-below').isVisible(),false);
+        await page.locator('[data-spec-desktop] .ac-specifications-trigger').click();
+      } else {
+        const a=await action.boundingBox(),d=await page.locator('[data-city-delivery]').boundingBox();
+        assert.ok(a.y+a.height<=d.y,'actual mobile actions precede delivery');
+      }
+      const crumbs=await page.getByRole('navigation',{name:'Хлебные крошки'}).textContent();
+      assert.doesNotMatch(crumbs,/\b(?:georgia|korea|japan|china|uae|europe)\b/i,'market breadcrumb uses Russian');
+    }
     const original=await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);}));
     const metrics=[];
     for(index=0;index<await triggers.count();index++){
