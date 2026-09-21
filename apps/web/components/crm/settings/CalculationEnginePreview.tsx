@@ -129,22 +129,10 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
 
   return (
     <section className="ac-calc-preview glass mb-4 overflow-hidden rounded-[1.8rem]">
-      <div className="border-b border-white/8 p-5 md:p-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="max-w-3xl">
-            <div className="mb-2 flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-emerald-400/12 px-2.5 py-1 text-[11px] font-black uppercase tracking-[.08em] text-emerald-300">живой контроль ядра</span>
-              <span className="rounded-full bg-white/8 px-2.5 py-1 text-[11px] font-black text-white/55">RF {vehicleCategory} · 2026</span>
-              {resolved.estimated ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">коммерческие расходы: средний профиль</span> : null}
-            </div>
-            <h2 className="text-2xl font-black md:text-3xl">Параметры расчёта</h2>
-            <p className="mt-2 text-sm text-white/52">Проверка расчёта по действующим настройкам сайта.</p>
-          </div>
-          <div className="rounded-2xl bg-white/[.055] px-4 py-3 text-right">
-            <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">активная конфигурация</div>
-            <div className="mt-1 text-sm font-black">{resolved.config?.id || `market_${marketId}`} · v{resolved.config?.version || 1}</div>
-          </div>
-        </div>
+      <div className="flex flex-wrap items-center gap-2 border-b border-white/8 px-4 py-3 text-xs text-white/55">
+        <span>РФ · {vehicleCategory} · 2026</span>
+        <span>Настройки: {resolved.config?.id || `market_${marketId}`} · v{resolved.config?.version || 1}</span>
+        {resolved.estimated ? <span className="rounded-lg bg-amber-400/12 px-2 py-1 text-amber-200">Расходы: средний профиль</span> : null}
       </div>
 
       <form method="get" action="/crm/settings" className="crm-calculation-fields grid grid-cols-2 gap-3 border-b border-white/8 p-5 md:p-6 xl:grid-cols-4">
