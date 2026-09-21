@@ -1,3 +1,5 @@
+import { after } from "next/server";
+import { flushCrmPush } from "@/lib/crm-push";
 import {leadVisitor} from "@/lib/lead-antispam";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
@@ -28,6 +30,7 @@ export async function POST(request: Request) {
   if (response.ok) {
     // Await a bounded wake-up: a detached promise can be frozen by serverless.
     // The saved lead is already durable; a failed wake-up never fails intake.
+    after(() => flushCrmPush(5).catch(() => undefined));
     await requestCrmDelivery();
     try {
       await flushCrmNotifications(2);

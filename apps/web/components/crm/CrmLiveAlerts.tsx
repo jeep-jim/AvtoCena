@@ -1,5 +1,6 @@
 "use client";
 
+import { CrmPushControl, unsubscribeStaffPush } from "./CrmPushControl";
 import { useEffect, useRef, useState } from "react";
 import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList } from "lucide-react";
 import { canMigrateLegacyAcknowledgement, type AlertLead } from "../../lib/crm-alert-state";
@@ -64,7 +65,11 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
           try {const saved=await fetch(`/api/crm/leads/${encodeURIComponent(lead.id)}/seen`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({eventKey:lead.eventKey})});if(saved.ok)migrated.add(lead.id);}catch{}
         }));
         if(!active)return;
-        setPending(unseen.filter(lead=>!migrated.has(lead.id)));
+        const next=unseen.filter(lead=>!migrated.has(lead.id));
+        setPending(next);
+        const badges=navigator as any;
+        if(next.length && badges.setAppBadge)void badges.setAppBadge(next.length).catch(()=>{});
+        else if(!next.length && badges.clearAppBadge)void badges.clearAppBadge().catch(()=>{});
       }catch{}finally{busy=false;}
     };
     void poll();const timer=setInterval(()=>void poll(),20_000);
@@ -82,7 +87,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       beep();setAudioBlocked(!audio || audio.state!=="running");
       const newest=pending[0];
       const eventKey=`${newest.id}:${newest.eventKey}`;
-      if(notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
+      if(document.visibilityState!=="visible" && notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
         notifiedRef.current=eventKey;
         try{const notice=new Notification("Новые заявки · АвтоЦена",{body:newest.assignmentUnread?"Вам назначена заявка":"Непросмотренных заявок: "+pending.length,tag:`avtocena-${userId}-${eventKey}`,icon:"/logo/avtocena-mark-light.svg",requireInteraction:true});notice.onclick=()=>{window.focus();location.assign(`/crm/leads?id=${encodeURIComponent(newest.id)}`);notice.close();};}catch{}
       }
@@ -121,7 +126,8 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       {!crm && ["owner","admin"].includes(role)?<a href="/crm/settings"><Settings size={18}/>Настройки</a>:null}
       <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук заявок: {enabled?"включён":"выключен"}</button>
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
-      {crm?<form action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
+      <CrmPushControl userId={userId}/>
+      {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;void unsubscribeStaffPush().finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
     </div>:null}
     {pending.length>0?<div role="status" className="ac-staff-notice">
       <p className="font-bold">Новые заявки: {pending.length}</p>

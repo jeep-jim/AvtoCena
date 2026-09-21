@@ -17,7 +17,7 @@ if(!live){
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
- const css=await postcss([tailwindcss({content:['apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
@@ -246,7 +246,9 @@ try{
     const query=await page.getByRole('link',{name:'Алиса Алиса покажи 30-минутную мощность',exact:true}).getAttribute('href');
     assert.match(decodeURIComponent(query),/электромобиль без ДВС/);
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('20');
-    await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).click();
+    assert.equal(await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).count(),0);
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'20');
+    await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('');
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),'');
     await page.waitForTimeout(850);assert.equal(await page.getByText('Стоимость под ключ',{exact:true}).count(),0);
@@ -277,7 +279,18 @@ try{
   await page.unroute('**/api/auth/me');await page.route('**/api/auth/me',route=>route.fulfill({status:401,json:{user:null}}));await page.goto(origin+'/?kind=alerts-guest');await page.waitForTimeout(300);assert.equal(await page.getByRole('button',{name:'Кабинет сотрудника'}).count(),0);
   await page.setViewportSize({width:1440,height:900});await page.goto(origin+'/?kind=japan-specs');await page.getByRole('button',{name:'Все характеристики'}).click();
   const specs=await page.getByRole('region',{name:'Все характеристики',exact:true}).boundingBox();const main=await page.locator('main').boundingBox();assert.ok(specs.width>=main.width-12,'expanded specs span both header blocks');
-  await page.screenshot({path:`${out}/japan-full-width.png`});await page.close();
+  await page.getByRole('region',{name:'Все характеристики',exact:true}).evaluate(el=>el.style.minHeight='1500px');
+  await page.evaluate(()=>window.scrollTo(0,500));await page.waitForTimeout(80);
+  const sticky=await page.getByRole('button',{name:'Скрыть характеристики',exact:true}).boundingBox();assert.ok(Math.abs(sticky.y-72)<2,'expanded specifications stay below header');
+  await page.getByRole('button',{name:'Скрыть характеристики',exact:true}).click();assert.equal(await page.getByRole('region',{name:'Все характеристики',exact:true}).count(),0);
+  for(const width of [320,390,1440]) {
+    await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=offer-actions');
+    const buttons=page.locator('[data-offer-action="lead"]:visible');assert.equal(await buttons.count(),1);
+    assert.equal(await buttons.textContent(),'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
+    const share=page.locator('button:visible').filter({hasText:'Поделиться ссылкой'});assert.ok(await share.locator('svg').isVisible());
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  }
+  await page.screenshot({path:`${out}/offer-actions.png`});await page.close();
  }
  assert.equal(results.length,pages.length*12);console.log(JSON.stringify({mode:live?'live':'fixture',cases:results.length,openings:results.reduce((n,r)=>n+r.panels.length,0),passed:true}));
 }finally{save();await browser.close();if(server)await new Promise(r=>server.close(r));}

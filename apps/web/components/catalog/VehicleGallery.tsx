@@ -1,5 +1,6 @@
 "use client";
 
+import { retryProtectedPhoto } from "./protected-photo-retry";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AuctionSheetHelp } from "./AuctionSheetHelp";
@@ -147,7 +148,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
   }
 
   const image = (
-    <img
+    <img onError={retryProtectedPhoto}
       key={cleanImages[activeIndex]}
       src={cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
@@ -171,7 +172,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
       aria-label={`Открыть фото ${index + 1}`}
       aria-pressed={index === activeIndex}
     >
-      <img src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
+      <img onError={retryProtectedPhoto} src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
       {index === activeIndex ? <span className="absolute inset-x-2 bottom-0 h-1 rounded-full bg-red-500" /> : null}
     </button>
   );
@@ -205,7 +206,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
           onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
           onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
         >
-          <img
+          <img onError={retryProtectedPhoto}
             data-fullscreen-image
             key={`fullscreen-${cleanImages[activeIndex]}`}
             src={cleanImages[activeIndex]}
@@ -229,7 +230,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
                 aria-label={`Открыть фото ${index + 1}`}
                 aria-pressed={index === activeIndex}
               >
-                <img src={thumbnail} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
+                <img onError={retryProtectedPhoto} src={thumbnail} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
               </button>
             ))}
           </div>

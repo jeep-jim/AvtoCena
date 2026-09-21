@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: 24
       - name: Install worker dependencies
-        if: inputs.operation != 'notify'
         run: npm ci --ignore-scripts
       - name: Process bot commands and deliver CRM notices from GitHub
         env:
@@ -49,6 +48,9 @@ jobs:
           ACCEPTANCE_RUN: ${{ github.event_name == 'workflow_run' && '1' || '0' }}
         run: |
           set -euo pipefail
+          if [ "$OPERATION" = "deliver" ] || [ "$OPERATION" = "notify" ]; then
+            node --import tsx scripts/crm-web-push.ts || true
+          fi
           if [ "$OPERATION" = "enable-events" ]; then
             node --import tsx scripts/crm-enable-events.ts
           elif [ "$OPERATION" = "notify" ]; then
