@@ -3,6 +3,7 @@ const path = require("path");
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: "standalone",
+  serverExternalPackages: ["pdfkit"],
   outputFileTracingRoot: path.join(__dirname, "../.."),
 
   experimental: {
