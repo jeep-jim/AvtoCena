@@ -1,4 +1,5 @@
 "use client";
+import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
@@ -21,6 +22,7 @@ export type PublicCurrencyRate = {
 type CurrencyRateLike = Partial<PublicCurrencyRate>;
 type ChartPoint = RateHistoryPoint;
 type PriceLike = {
+  fuel?: string | null; fuelLabel?: string | null; powertrainKind?: string | null;
   market?: string | null;
   auctionDate?: string | null;
   auctionGrade?: string | null;
@@ -483,7 +485,7 @@ export function AuctionResultPrice({ offer, label = "Завершённый ау
   </div>;
 }
 
-export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false, highlightElectrified = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean; highlightElectrified?: boolean }) {
+export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false, highlightElectrified = isElectrifiedPrice(offer) }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean; highlightElectrified?: boolean }) {
   const tapActivation = useTapActivation();
   const currency = String(offer.sourceCurrency || offer.calculationSnapshot?.currencyRate?.currency || "").toUpperCase();
   const [liveRate, setLiveRate] = useState<LiveRate | null>(null);

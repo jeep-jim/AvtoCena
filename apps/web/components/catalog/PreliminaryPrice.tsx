@@ -1,4 +1,5 @@
 "use client";
+import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
@@ -16,7 +17,7 @@ export function PreliminaryPrice({
   priceClassName = "text-[22px]",
   className = "",
   panel = false,
-  highlightElectrified = false,
+  highlightElectrified = isElectrifiedPrice(offer),
 }: {
   offer: any;
   label: string;

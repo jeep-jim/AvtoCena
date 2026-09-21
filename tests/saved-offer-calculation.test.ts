@@ -10,7 +10,8 @@ test("saved employee calculation survives fresh reads and price updates, rejects
  const offer:any={id:`test-saved-${randomUUID()}`,market:"korea",sourceId:"encar",sourceOfferId:"lot-1",make:"Hyundai",model:"Elantra"};
  const calculation:any={totalRub:2500000,breakdown:[{id:"car",amountRub:2000000}],currencyRate:{currency:"KRW",effectiveRate:.06}};
  try {
-  const first=await saveOfferCalculation(offer,draft,calculation,"test-manager",null);
+  const first=await saveOfferCalculation(offer,draft,calculation,"test-manager",null,"Тестовый сотрудник");
+  assert.equal(first.savedByName,"Тестовый сотрудник");
   assert.equal((await getSavedOfferCalculation(offer))?.calculation.totalRub,2500000);
   assert.equal(matchingSavedCalculation(first,{...offer,sourcePrice:999999})?.draft.deliveryCity,"Новокузнецк");
   assert.equal(matchingSavedCalculation(first,null),null);

@@ -18,7 +18,7 @@ import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, ChevronDown, Fuel, Zap, Truck } from "lucide-react";
 import { validateCustomerParameters } from "../../lib/catalog/customer-parameters";
-import { completePowerUnitDraft, powerUnitPatch, hybridResearchQuery } from "../../lib/catalog/power-parameter-draft";
+import { completePowerUnitDraft, powerUnitPatch, hybridResearchQuery, electricResearchQuery } from "../../lib/catalog/power-parameter-draft";
 export type ParameterDraft = Record<string,string>;
 const fuels = [["petrol","Бензин"],["diesel","Дизель"],["lpg","Газ LPG"],["cng","Газ CNG"],["electric","Электро"],["hybrid","Гибрид"]];
 const names:Record<string,string>={year:"год выпуска",productionMonth:"месяц выпуска",productionDay:"день выпуска",transportToBorderRub:"стоимость доставки до границы",engineCc:"объём двигателя",powerHp:"мощность",powerKw:"мощность в кВт",power30MinKw:"30-минутную мощность",icePowerKw:"мощность ДВС",grossVehicleWeightKg:"полную разрешённую массу (до 3500 кг)"};
@@ -106,11 +106,14 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"|"savedAt">|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
  const [savedDraft,setSavedDraft]=useState(originalDraft);
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
  const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
+ const saveDialog=useRef<HTMLDialogElement>(null);
+ const [userEdited,setUserEdited]=useState(false);
+ const [savedByName,setSavedByName]=useState(savedCalculation?.savedByName || "");
  const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
 
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
@@ -128,13 +131,13 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
    if(!response.ok)throw Error(data.error || "Не удалось сохранить");
    const page=document.querySelector<HTMLElement>("[data-offer-id]");
    if(page)page.dataset.offerSavedVersion=data.version;
-   setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedDraft(completePowerUnitDraft(data.draft));
-   if(version===revision.current)setResult(data.calculation);
+   setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
+   if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
    setSaveMessage("Сохранено. Можно отправить клиенту ссылку.");
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
  }
- function change(key:string,value:string){if(draft[key]===value)return;revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
+ function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
@@ -164,23 +167,37 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
  const missingFields=missingCustomerFields(draft,showCommercial);
  const vehicleLine=result?.breakdown?.find(row=>row.id==="car");
  const detailLines=result?.breakdown?.filter(row=>row!==vehicleLine) || [];
- const hybridQuery=hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
- const hybridHelp=<ResearchLink query={hybridQuery} label="Алиса покажи тип гибрида и мощность" compact />;
+ const hybridQuery=draft.fuel==="electric" ? electricResearchQuery(researchContext,draft.year||"") : hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
+ const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric" ? "Алиса покажи 30-минутную мощность" : "Алиса покажи тип гибрида и мощность"} compact />;
  const currentYear = new Date().getFullYear();
  const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
-   <PriceTrend panel label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
+   <PriceTrend panel highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
    {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}
   </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
-  {exportWarning ? <p role="note" className={priceStyles.warning}>{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
+  {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation} onChange={city=>change("deliveryCity",city)} />
+   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
    <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
   </div>
+  {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+   <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
+    <div className="flex items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-[-0.02em]">Структура цены</h2><ChevronDown aria-hidden size={17} className="mr-1 shrink-0 transition-transform group-open:rotate-180" /></div>
+    {vehicleLine ? <div data-price-line="car" data-price-amount-rub={vehicleLine.amountRub} className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-xs font-medium">
+     <span className="flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span>Цена автомобиля</span><span className="mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
+     <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽</span>
+    </div> : null}
+   </summary>
+   <ContractPaymentSummary plan={result.paymentPlan} />
+   <div className="px-4 pb-4">
+    <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="ac-cost-row gap-y-1"><dt><span className="ac-cost-label">{row.label||row.title||row.id}</span>{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="ac-cost-amount">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>
+   </div>
+  </details> : null}
+  {!showCalculation ? originalBreakdown : null}
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile missing={missingFields.has("year")} label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>
@@ -226,31 +243,25 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
       {draft.fuel === "hybrid" && draft.hybridKind !== "series_hybrid" ? <label className="block text-xs font-semibold">Топливо ДВС гибрида<select aria-invalid={missingFields.has("n1IceFuel") || undefined} aria-label="Топливо ДВС гибрида" value={draft.n1IceFuel||""} onChange={e=>change("n1IceFuel",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
     </> : null}
    </Tile> : null}
-   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${draft.power30MinKw} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
+   {["electric","hybrid"].includes(draft.fuel) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid")?<Tile missing={["hybridKind","power30MinKw","icePowerKw"].some(key=>missingFields.has(key))} wide label="30-минутная мощность" value={draft.fuel==="hybrid" && !draft.hybridKind?"Гибрид: укажите тип и мощность":draft.power30MinKw?`${Number(draft.power30MinKw.replace(",",".")).toLocaleString("ru-RU",{maximumFractionDigits:2})} кВт · 30 минут`:"Указать 30-минутную мощность"} icon={<ElectricMotorIcon/>}>
     {hybridHelp}
     {draft.fuel==="hybrid" ? <label className={editorStyles.hybridField}>Тип гибрида<select aria-invalid={missingFields.has("hybridKind") || undefined} aria-label="Тип гибрида для расчёта" data-keep-open value={draft.hybridKind||""} onChange={e=>change("hybridKind",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Укажите по документам автомобиля</option><option value="series_hybrid">Последовательный — колёса приводит электромотор</option><option value="other_hybrid">Другой — ДВС тоже может приводить колёса</option></select></label> : null}
     <p className={editorStyles.note}>30-минутная мощность электромоторов — отдельное значение из СБКТС, ЭПТС или подтверждающих документов. Максимальная мощность из рекламы сюда не подходит. Если моторов несколько, нужна подтверждённая сумма их 30-минутных мощностей.</p>
     <div className={editorStyles.twoColumns}>{field("power30MinKw","30-минутная мощность, кВт",[],0.1,2000,undefined,"30 минут, кВт")}{field("power30MinHp","30-минутная мощность, л.с.",[],0.1,2720,undefined,"30 минут, л.с.")}</div>
     {draft.fuel==="hybrid" ? <><p className={editorStyles.note}>Мощность ДВС — только бензинового или дизельного двигателя, без электромоторов.</p><div className={editorStyles.twoColumns}>{field("icePowerKw","Мощность ДВС, кВт",[],0.1,2000,undefined,"ДВС, кВт")}{field("icePowerHp","Мощность ДВС, л.с.",[],0.1,2720,undefined,"ДВС, л.с.")}</div></> : null}
+    <button type="button" className="min-h-11 rounded-xl bg-[var(--ac-surface)] px-3 text-left text-xs font-semibold" onClick={()=>change("power30MinKw","")}>Нет данных — требуется уточнение</button>
+    {!draft.power30MinKw ? <p role="status" className={editorStyles.note}>Оставьте мощность пустой до подтверждения по документам. Полный расчёт недоступен; не вводите случайное значение.</p> : null}
     <p className={editorStyles.note}>Введите кВт или л.с. — второе поле заполнится автоматически. Когда обязательные поля заполнены, цена пересчитается сама. Ответ Алисы сверяйте с документами именно этой модификации.</p>
    </Tile>:null}
   </div>
-  {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
-   <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
-    <div className="flex items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-[-0.02em]">Структура цены</h2><ChevronDown aria-hidden size={17} className="mr-1 shrink-0 transition-transform group-open:rotate-180" /></div>
-    {vehicleLine ? <div data-price-line="car" data-price-amount-rub={vehicleLine.amountRub} className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-xs font-medium">
-     <span className="flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span>Цена автомобиля</span><span className="mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
-     <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽</span>
-    </div> : null}
-   </summary>
-   <ContractPaymentSummary plan={result.paymentPlan} />
-   <div className="px-4 pb-4">
-    <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="ac-cost-row gap-y-1"><dt><span className="ac-cost-label">{row.label||row.title||row.id}</span>{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="ac-cost-amount">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>
-   </div>
-  </details> : null}
-  {canSave && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>void save()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
-  {saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
-  {savedAt && !saveDirty ? <p className="mt-3 text-xs text-[var(--ac-muted)]">Расчёт сохранён {new Date(savedAt).toLocaleDateString("ru-RU",{timeZone:"UTC"})}</p> : null}
+  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
+  {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
+   <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
+   <p className="mt-3 text-sm">Их увидят все пользователи сайта!</p>
+   <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
+  </dialog> : null}
+  {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
+  {canSave && savedAt && !saveDirty ? <p className="mt-3 text-xs text-[var(--ac-muted)]">Расчёт сохранён {new Date(savedAt).toLocaleDateString("ru-RU",{timeZone:"UTC"})}{savedByName ? <> · <span className="font-semibold">{savedByName}</span></> : null}</p> : null}
   {children}
   <style dangerouslySetInnerHTML={{ __html: `.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}` }} />
  </div>;

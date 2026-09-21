@@ -1,5 +1,6 @@
 "use client";
 
+import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useEffect, useId, useRef, useState } from "react";
 import { CurrencyRatesSheet, RateDirectionIcon, type PublicCurrencyRate } from "./PriceTrend";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";
@@ -23,7 +24,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
       <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-bold text-right text-[var(--ac-muted)] ${!panel ? "shrink-0 whitespace-nowrap" : "uppercase tracking-wider"}`}>{!panel && japan ? "Лот продан" : priceLabel}</div>
     </div>
     <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "ac-seller-price-row" : "min-h-[22px] sm:min-h-[26px]"}`}>
-      <span className={`ac-price ac-price--flat whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
+      <span className={`ac-price ac-price--flat ${isElectrifiedPrice(offer) ? "ac-price--electrified" : ""} whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
       {japan && !hideJapanBadges ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
       {panel ? <div className="ac-seller-help"><SellerPriceHelp /><span>Без доставки<br />и платежей</span></div> : null}
     </div>
