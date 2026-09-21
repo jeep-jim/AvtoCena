@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const FAVORITES_KEY = "avtocena_favorites";
 
 type FavoriteSnapshot = {
+  fuel?: string; powertrainKind?: string;
   id: string;
   title?: string;
   price?: number | null;

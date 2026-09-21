@@ -242,7 +242,7 @@ try{
     assert.equal(color,theme==='light'?'rgb(197, 138, 0)':'rgb(255, 210, 31)','seller-only electric price has yellow identity');
     await page.getByLabel('30-минутная мощность: Указать 30-минутную мощность',{exact:true}).click();
     assert.ok(await page.getByText('Алиса покажи 30-минутную мощность',{exact:true}).isVisible());
-    const query=await page.getByText('Алиса покажи 30-минутную мощность',{exact:true}).getAttribute('href');
+    const query=await page.getByRole('link',{name:'Алиса Алиса покажи 30-минутную мощность',exact:true}).getAttribute('href');
     assert.match(decodeURIComponent(query),/электромобиль без ДВС/);
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('20');
     await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).click();
