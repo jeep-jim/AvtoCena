@@ -54,7 +54,23 @@ try{
     await page.evaluate(async()=>{await document.fonts.ready;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));});
     const before=await positions(desktop);const root=desktop.locator('input[name="bodyType"]').locator('..');await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();
     assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.deepEqual(await positions(desktop),before);assert.ok(Math.abs((await menu.boundingBox()).width-(await root.boundingBox()).width)<2,'desktop remains single-control width');
-    results.push({...current,desktopUnchanged:true});save();continue;
+    await root.locator(':scope > button').click();
+    if(!live){
+      const engine=desktop.getByRole('textbox',{name:'Объём двигателя: до',exact:true});
+      for(const [typed,expected] of [['1,5','1500'],['1.5','1500'],['1498','1498']]){
+        await engine.fill(typed);await engine.press('Tab');
+        await page.waitForFunction(expected=>new URLSearchParams(location.search).get('engineTo')===expected,expected);
+        assert.equal(await engine.inputValue(),expected);
+      }
+      const budget=desktop.getByRole('textbox',{name:'Цена: до',exact:true});await budget.fill('2000000');await budget.press('Tab');
+      await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='2000000');
+      const market=desktop.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();
+      await market.getByRole('button',{name:'Корея',exact:true}).click();
+      await page.waitForFunction(()=>new URLSearchParams(location.search).get('market')==='korea');
+      assert.equal(new URL(page.url()).searchParams.get('budget'),'2000000');
+      assert.equal(new URL(page.url()).searchParams.get('engineTo'),'1498');
+    }
+    results.push({...current,desktopUnchanged:true,engineUnits:true,budgetPreserved:true});save();continue;
    }
    const sheet=await openSheet(page),row=sheet.locator('.ac-advanced-select-row');const before=await positions(sheet);const checks=[];
    if(!live){

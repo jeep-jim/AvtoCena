@@ -1,3 +1,4 @@
+import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
@@ -16,6 +17,7 @@ export async function GET(request: Request) {
   const u = new URL(request.url);
   const p = u.searchParams;
   const query: Parameters<typeof searchOffers>[0] = {
+    city: p.get("city") || undefined,
     market: p.get("market") || undefined,
     make: p.get("make") || p.get("brand") || undefined,
     model: p.get("model") || undefined,
@@ -26,8 +28,8 @@ export async function GET(request: Request) {
     yearTo: n(p.get("yearTo")),
     mileageFrom: n(p.get("mileageFrom")),
     mileageTo: n(p.get("mileageTo")),
-    engineFrom: n(p.get("engineFrom")),
-    engineTo: n(p.get("engineTo")),
+    engineFrom: parseEngineCc(p.get("engineFrom")),
+    engineTo: parseEngineCc(p.get("engineTo")),
     powerFrom: n(p.get("powerFrom")),
     powerTo: n(p.get("powerTo")),
     fuel: p.get("fuel") || undefined,

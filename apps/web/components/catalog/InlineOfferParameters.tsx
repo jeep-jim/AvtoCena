@@ -1,4 +1,5 @@
 "use client";
+import { parseEngineCc } from "../../lib/catalog/engine-input";
 
 import { ContractPaymentSummary } from "./ContractPaymentSummary";
 import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calculation";
@@ -34,10 +35,13 @@ function parameterErrorText(error: unknown, draft: ParameterDraft) {
 function Field({missing=false,label,caption,value,change,options=[],min,max,searchQuery}:{missing?:boolean;label:string;caption?:string;value:string;change:(v:string)=>void;options?:number[];min?:number;max?:number;searchQuery?:string}) {
  const id=useId();
  const [choosing,setChoosing]=useState(false);
+ const engine=label==="Объём, см³";
+ const [text,setText]=useState(value);
+ useEffect(()=>setText(value),[value]);
  return <div className="min-w-0 text-xs font-semibold">
   <label htmlFor={id}>{caption || label}</label>
   <div className={`ac-parameter-input mt-2 flex min-h-11 overflow-hidden rounded-xl bg-[var(--ac-surface)] ${missing ? editorStyles.missingInput : ""}`}>
-   <input id={id} aria-invalid={missing || undefined} aria-label={label} type="number" inputMode="decimal" value={value} min={min} max={max} step="any" onFocus={()=>setChoosing(true)} onChange={e=>change(e.target.value)} className="min-w-0 flex-1 border-0 bg-transparent px-3 py-2 text-base text-[var(--ac-text)] outline-none"/>
+   <input id={id} aria-invalid={missing || undefined} aria-label={label} type={engine ? "text" : "number"} inputMode="decimal" value={engine ? text : value} min={min} max={max} step="any" onFocus={()=>setChoosing(true)} onChange={e=>engine ? setText(e.target.value) : change(e.target.value)} onBlur={()=>{if(engine){const cc=parseEngineCc(text);const next=text.trim()===""?"":cc==null?text:String(cc);setText(next);change(next);}}} onKeyDown={e=>{if(engine && e.key==="Enter"){e.preventDefault();e.currentTarget.blur();}}} className="min-w-0 flex-1 border-0 bg-transparent px-3 py-2 text-base text-[var(--ac-text)] outline-none"/>
    {options.length ? <button type="button" aria-label={`Выбрать: ${label}`} aria-expanded={choosing} aria-controls={`${id}-choices`} onClick={()=>setChoosing(!choosing)} className="min-h-11 min-w-11 shrink-0 px-3"><ChevronDown size={16} aria-hidden/></button> : null}
    {searchQuery ? <a href={`https://yandex.ru/search/?text=${encodeURIComponent(searchQuery)}`} target="_blank" rel="noopener noreferrer" aria-label={`Найти: ${label}`} title="Найти в Яндексе с Алисой. Проверьте источник и модификацию." className="flex min-h-11 min-w-11 shrink-0 items-center justify-center"><img src="/brands/alice.svg" alt="" width={22} height={22}/></a> : null}
   </div>

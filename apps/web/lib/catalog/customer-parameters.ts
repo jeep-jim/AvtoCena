@@ -1,3 +1,4 @@
+import { parseEngineCc } from "./engine-input";
 import { normalizeDeliveryCity } from "./city-delivery";
 import type { VehicleOffer } from "./types";
 export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
@@ -6,6 +7,7 @@ export function validateCustomerParameters(input: any): Partial<VehicleOffer> {
     if (!Number.isFinite(n) || n < min || n > max || (integer && !Number.isInteger(n))) throw new Error(`Проверьте поле ${name}`);
     return n;
   };
+  if (input?.engineCc != null) input = {...input, engineCc: parseEngineCc(input.engineCc) ?? input.engineCc};
   const year = number("year",1990,new Date().getUTCFullYear()+1,true);
   const fuel = input?.fuel;
   if (!["petrol","diesel","lpg","cng","electric","hybrid"].includes(fuel)) throw new Error("Укажите тип топлива");

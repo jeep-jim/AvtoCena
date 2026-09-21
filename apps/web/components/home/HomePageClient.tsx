@@ -289,12 +289,14 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
 
   useEffect(() => {
     if (skipInitialCountFetch.current) { skipInitialCountFetch.current = false; return; }
+    const controller = new AbortController();
     const timer = window.setTimeout(() => {
-      const params = new URLSearchParams({ pageSize: "1" });
+      const params = new URLSearchParams({ pageSize: "1", countOnly: "1" });
+      if(city) params.set("city",city);
       if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budgetTo", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric");
-      setCount(null); fetch(`/api/catalog/search?${params}`, { cache: "no-store" }).then((response) => response.json()).then((data) => setCount(Number(data?.total || 0))).catch(() => setCount(0));
-    }, 180); return () => window.clearTimeout(timer);
-  }, [selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
+      setCount(null); fetch(`/api/catalog/search?${params}`, { cache: "no-store", signal: controller.signal }).then((response) => response.json()).then((data) => {if(!controller.signal.aborted)setCount(Number(data?.total || 0));}).catch(() => {if(!controller.signal.aborted)setCount(0);});
+    }, 180); return () => {window.clearTimeout(timer);controller.abort();};
+  }, [city, selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
 
   const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 6) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
