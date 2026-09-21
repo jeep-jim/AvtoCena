@@ -15,8 +15,16 @@ test("incomplete draft still has an export without fabricated total or customs",
  const data=offerPdfData(offer,{year:"2022"},null,"Нужна мощность");
  assert.equal(data.total,"Требует уточнения");assert.equal(data.sections[0].rows[0].value,"1 729 660 ₽");assert.equal(data.sections[1].rows[1].value,"Требует уточнения");
  const pdf=await renderOfferPdf(data);assert.equal(pdf.subarray(0,5).toString(),"%PDF-");assert.ok(pdf.length>10000);
+ assert.equal((pdf.toString("latin1").match(/\/Type \/Page\b/g)||[]).length,1,"compact PDF must not create blank footer pages");
 });
 test("zero commission is a valid completed calculation",()=>{
  const data=offerPdfData(offer,draft,{...calculation,breakdown:calculation.breakdown.filter((l:any)=>l.id!=="topavto-commission")});
  assert.equal(data.sections[2].rows[0].value,"0 ₽");
+});
+
+test("PDF rate movement and calculation date are factual, with neutral unknown history",()=>{
+ const down=offerPdfData(offer,draft,{...calculation,currencyRate:{currency:"AED",effectiveRate:20,previousEffectiveRate:21}},undefined,"2026-08-12T10:00:00Z");
+ assert.equal(down.rateDirection,"down");assert.equal(down.valuationDate,"12.08.2026");assert.equal(down.rateChange,"-4,76%");
+ assert.equal(offerPdfData(offer,draft,{...calculation,currencyRate:{effectiveRate:22,previousEffectiveRate:21}}).rateDirection,"up");
+ assert.equal(offerPdfData(offer,draft,calculation).rateDirection,"flat");
 });

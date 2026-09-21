@@ -19,16 +19,16 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  const id=(await params).id;
  const offer=await getOfferForPage(id) || await getOfferFromCurrentShard(id);
  if(!offer)return Response.json({error:"Объявление не найдено"},{status:404,headers});
- let calculation:SavedCalculationResult|null=null,warning="";
+ let calculation:SavedCalculationResult|null=null,warning="",calculatedAt=new Date().toISOString();
  try{
   const parameters=validateCustomerParameters(draft);
   const saved=await getSavedOfferCalculation(offer);
   const cleaned=cleanSavedDraft(draft);
-  if(saved && Object.entries(cleaned).every(([k,v])=>v===(saved.draft[k] || "")))calculation=saved.calculation;
+  if(saved && Object.entries(cleaned).every(([k,v])=>v===(saved.draft[k] || ""))){calculation=saved.calculation;calculatedAt=saved.savedAt || calculatedAt;}
   else {const result=await calculateOfferWithCustomerParametersDetailed(offer,parameters);if(result.ok)calculation=result.calculation;else warning=result.error;}
  }catch{warning="Не все характеристики заполнены. Полная стоимость требует уточнения.";}
  try{
-  const pdf=await renderOfferPdf(offerPdfData(offer,draft,calculation,warning));
+  const pdf=await renderOfferPdf(offerPdfData(offer,draft,calculation,warning,calculatedAt));
   return new Response(new Uint8Array(pdf),{headers:{...headers,"Content-Type":"application/pdf","Content-Disposition":`inline; filename="AvtoCena-${id.replace(/[^a-zA-Z0-9_-]/g,"_").slice(0,80)}.pdf"`}});
  }catch(error){console.error("offer_pdf_failed",error);return Response.json({error:"Не удалось подготовить PDF. Попробуйте ещё раз."},{status:500,headers});}
 }
