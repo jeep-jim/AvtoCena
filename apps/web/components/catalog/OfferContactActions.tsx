@@ -14,8 +14,8 @@ function ActionButtons({ className = "", stacked = false }: { className?: string
   </div>;
 }
 
-export function OfferDesktopActions() {
-  return <ActionButtons stacked className="mt-4 hidden xl:grid" />;
+export function OfferDesktopActions({position = "sidebar"}: {position?: "sidebar" | "below"}) {
+  return <ActionButtons stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
 }
 
 export function OfferMobileActions() {
@@ -42,6 +42,10 @@ export function OfferContactActionsStyles() {
     .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
     html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
     @media(min-width:1280px){
+      .ac-offer-page .ac-offer-actions-sidebar{display:none}
+      .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
+      .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}
+
       .ac-offer-page .ac-offer-detail-stack>div:first-child{grid-template-columns:repeat(6,minmax(0,1fr))!important}
       .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile{grid-column:span 3!important;order:10}
       .ac-offer-page .ac-offer-detail-stack>div:first-child>.ac-offer-spec-tile[aria-label^="Год:"]{grid-column:span 2!important;order:1}

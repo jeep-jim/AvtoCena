@@ -1,3 +1,4 @@
+import { CATALOG_MARKET_LABELS } from "./catalog/runtime-config";
 import crypto from "node:crypto";
 import { appendChunkedDataJson, mutateDataJson, readChunkedDataJson, readDataJson } from "./data";
 import { canEditBusinessSettings, cleanText, isMarketId, nullableNumber, validateMarketVersion } from "./settings-validation";
@@ -35,7 +36,8 @@ export function selectActiveMarketVersion(market: any, asOf = new Date()) {
 
 
 export async function getMarketsSettings() {
-  return await readDataJson<any[]>("markets/markets.json", []);
+  const markets = await readDataJson<any[]>("markets/markets.json", []);
+  return markets.map(market => ({...market, name: (CATALOG_MARKET_LABELS as Record<string, string>)[market.id] || market.name}));
 }
 
 export async function getMarketSettings(marketId: string) {

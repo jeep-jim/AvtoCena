@@ -106,7 +106,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
  const [savedDraft,setSavedDraft]=useState(originalDraft);
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
@@ -179,6 +179,7 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
+  {afterPrice}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
    <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />

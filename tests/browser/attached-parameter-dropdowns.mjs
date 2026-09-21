@@ -17,7 +17,7 @@ if(!live){
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
- const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
@@ -74,6 +74,22 @@ try{
    const triggers=grid.locator('[data-parameter-editor] > summary');
    for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
     await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
+    if(live){
+      const action=page.locator('.ac-offer-contact-button[data-offer-action="lead"]:visible');
+      assert.equal(await action.count(),1,'one visible primary action on the actual offer');
+      if(width>=1280){
+        assert.ok(await page.locator('.ac-offer-actions-below').isVisible(),'closed specs keep actions under photos');
+        await page.locator('[data-spec-desktop] .ac-specifications-trigger').click();
+        assert.ok(await page.locator('.ac-offer-actions-sidebar').isVisible(),'open specs move actions to sidebar');
+        assert.equal(await page.locator('.ac-offer-actions-below').isVisible(),false);
+        await page.locator('[data-spec-desktop] .ac-specifications-trigger').click();
+      } else {
+        const a=await action.boundingBox(),d=await page.locator('[data-city-delivery]').boundingBox();
+        assert.ok(a.y+a.height<=d.y,'actual mobile actions precede delivery');
+      }
+      const crumbs=await page.getByRole('navigation',{name:'Хлебные крошки'}).textContent();
+      assert.doesNotMatch(crumbs,/\b(?:georgia|korea|japan|china|uae|europe)\b/i,'market breadcrumb uses Russian');
+    }
     const original=await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);}));
     const metrics=[];
     for(index=0;index<await triggers.count();index++){
@@ -283,12 +299,27 @@ try{
   await page.evaluate(()=>window.scrollTo(0,500));await page.waitForTimeout(80);
   const sticky=await page.getByRole('button',{name:'Скрыть характеристики',exact:true}).boundingBox();assert.ok(Math.abs(sticky.y-72)<2,'expanded specifications stay below header');
   await page.getByRole('button',{name:'Скрыть характеристики',exact:true}).click();assert.equal(await page.getByRole('region',{name:'Все характеристики',exact:true}).count(),0);
-  for(const width of [320,390,1440]) {
-    await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=offer-actions');
+  for(const width of [320,390,1280,1440]) for(const theme of ['light','dark']) {
+    await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=offer-actions&theme='+theme);
     const buttons=page.locator('[data-offer-action="lead"]:visible');assert.equal(await buttons.count(),1);
     assert.equal(await buttons.textContent(),'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
     const share=page.locator('button:visible').filter({hasText:'Поделиться ссылкой'});assert.ok(await share.locator('svg').isVisible());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+    if(width>=1280){
+      assert.ok(await page.locator('.ac-offer-actions-below').isVisible());assert.equal(await page.locator('.ac-offer-actions-sidebar').isVisible(),false);
+      const a=await buttons.boundingBox(),b=await share.boundingBox();assert.ok(Math.abs(a.y-b.y)<1 && a.x+a.width<=b.x,'desktop actions are side by side under photos');
+      const metadata=page.locator('.ac-offer-updated');assert.equal(await metadata.getAttribute('open'),null);
+      const h=await page.locator('.ac-specifications-trigger').boundingBox(),m=await metadata.boundingBox();assert.ok(Math.abs(h.y-m.y)<1 && h.x+h.width<=m.x,'updated date shares the specifications row');
+      await metadata.locator('summary').click();assert.ok(await metadata.getByText(/финальную стоимость подтвердит менеджер/).isVisible());await metadata.locator('summary').click();
+      await page.getByRole('button',{name:'Все характеристики',exact:true}).click();assert.equal(await page.locator('.ac-offer-actions-below').isVisible(),false);assert.ok(await page.locator('.ac-offer-actions-sidebar').isVisible());assert.equal(await buttons.count(),1);
+      await page.screenshot({path:`${out}/offer-actions-expanded-${theme}-${width}.png`});
+      await page.getByRole('button',{name:'Скрыть характеристики',exact:true}).click();assert.ok(await page.locator('.ac-offer-actions-below').isVisible());
+    } else {
+      const photo=await page.locator('[data-test-photo]').boundingBox(),price=await page.locator('[data-test-price]').boundingBox(),action=await buttons.boundingBox(),delivery=await page.locator('[data-city-delivery]').boundingBox();
+      assert.ok(price.y-photo.y-photo.height<=13,'mobile gallery-to-price gap is compact');
+      assert.ok(action.y>=price.y+price.height && action.y+action.height<=delivery.y,'mobile actions precede delivery and parameters');
+    }
+    await page.screenshot({path:`${out}/offer-actions-${theme}-${width}.png`});
   }
   await page.screenshot({path:`${out}/offer-actions.png`});await page.close();
  }
