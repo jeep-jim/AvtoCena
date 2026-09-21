@@ -15,6 +15,10 @@ test("incomplete draft still has an export without fabricated total or customs",
  const data=offerPdfData(offer,{year:"2022"},null,"Нужна мощность");
  assert.equal(data.total,"Требует уточнения");assert.equal(data.sections[0].rows[0].value,"1 729 660 ₽");assert.equal(data.sections[1].rows[1].value,"Требует уточнения");
  const pdf=await renderOfferPdf(data);assert.equal(pdf.subarray(0,5).toString(),"%PDF-");assert.ok(pdf.length>10000);
+ assert.equal((pdf.toString("latin1").match(/\/Type \/OCG\b/g)||[]).length,3);
+ assert.equal((pdf.toString("latin1").match(/\/S \/SetOCGState\b/g)||[]).length,3);
+ assert.match(pdf.toString("latin1"),/\/BaseState \/ON/);
+ assert.doesNotMatch(pdf.toString("latin1"),/\/JavaScript/);
  assert.equal((pdf.toString("latin1").match(/\/Type \/Page\b/g)||[]).length,1,"compact PDF must not create blank footer pages");
 });
 test("zero commission is a valid completed calculation",()=>{

@@ -309,6 +309,13 @@ try{
       assert.ok(await page.locator('.ac-offer-actions-below').isVisible());assert.equal(await page.locator('.ac-offer-actions-sidebar').isVisible(),false);
       const a=await buttons.boundingBox(),b=await share.boundingBox();assert.ok(Math.abs(a.y-b.y)<1 && a.x+a.width<=b.x,'desktop actions are side by side under photos');
       const metadata=page.locator('.ac-offer-updated');assert.equal(await metadata.getAttribute('open'),null);
+      const actionMetrics=async()=>page.locator('.ac-offer-contact-button:visible').evaluateAll(nodes=>nodes.map(el=>({font:getComputedStyle(el.lastElementChild).fontSize,weight:getComputedStyle(el.lastElementChild).fontWeight,iconLeft:el.querySelector('svg').getBoundingClientRect().left-el.getBoundingClientRect().left})));
+      const beforePdf=await actionMetrics();assert.deepEqual(beforePdf[0],beforePdf[1],'lead/share typography and icon inset match');
+      await page.locator('.ac-offer-actions-below').evaluate(el=>el.dataset.hasPdf='true');assert.deepEqual(await actionMetrics(),beforePdf,'PDF slot must not shrink type or shift icons');
+      await page.locator('.ac-offer-actions-below').evaluate(el=>delete el.dataset.hasPdf);
+      const disclosureMetrics=async(locator)=>locator.evaluate(el=>({font:getComputedStyle(el).fontSize,arrowWidth:el.querySelector('svg:last-child').getBoundingClientRect().width}));
+      assert.deepEqual(await disclosureMetrics(metadata.locator('summary')),await disclosureMetrics(page.locator('.ac-specifications-trigger')),'updated summary matches specifications type and arrow');
+
       const h=await page.locator('.ac-specifications-trigger').boundingBox(),m=await metadata.boundingBox();assert.ok(Math.abs(h.y-m.y)<1 && h.x+h.width<=m.x,'updated date shares the specifications row');
       await metadata.locator('summary').click();assert.ok(await metadata.getByText(/финальную стоимость подтвердит менеджер/).isVisible());await metadata.locator('summary').click();
       await page.getByRole('button',{name:'Все характеристики',exact:true}).click();assert.equal(await page.locator('.ac-offer-actions-below').isVisible(),false);assert.ok(await page.locator('.ac-offer-actions-sidebar').isVisible());assert.equal(await buttons.count(),1);
