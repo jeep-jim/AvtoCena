@@ -1,3 +1,4 @@
+import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
 import { matchesFuelFilter } from "./fuel-filter";
 import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
@@ -677,7 +678,8 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
     if (!canonicalMatch && !literalMatch) return false;
   }
-  const filterPrice = hasModificationSelection(row) ? 0 : Number(row.japanDeliveredPreview?.totalRub || row.totalRub || 0);
+  const priced = params.city ? priceCardForCity(row,params.city).offer : row;
+  const filterPrice = hasModificationSelection(row) ? 0 : Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || 0);
   if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
   if (params.hasPrice) { const value = filterPrice > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
   if (params.budgetFrom && filterPrice < params.budgetFrom) return false;
@@ -710,8 +712,8 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   return true;
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
-export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
-  const price = (row: CatalogSearchProjection, missing: number) => !hasModificationSelection(row) && Number(row.japanDeliveredPreview?.totalRub || row.totalRub) > 0 ? Number(row.japanDeliveredPreview?.totalRub || row.totalRub) : missing;
+export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+  const price = (row: CatalogSearchProjection, missing: number) => { const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub); return !hasModificationSelection(row) && rub>0 ? rub : missing; };
   return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
     : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
@@ -740,7 +742,7 @@ export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProject
 }
 function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
   const sort = params.sort || "updatedAt";
-  catalogSearchProjectionSort(rows, sort);
+  catalogSearchProjectionSort(rows, sort, params.city);
   if (sort === "updatedAt" && params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
 }
 async function projectionModelKeys(params: CatalogSearchParams) {

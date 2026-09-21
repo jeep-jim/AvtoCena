@@ -60,6 +60,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const customSort = selectedSort !== "updatedAt";
   const requestedPage = Math.max(1, Math.floor(Number(first(params.page)) || 1));
   const common = {
+    city: first(params.city),
     make: first(params.make) || first(params.brand), model: first(params.model), budgetFrom: numeric(params.budgetFrom), budgetTo: numeric(params.budget) || numeric(params.budgetTo), hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom), yearTo: numeric(params.yearTo), mileageFrom: numeric(params.mileageFrom), mileageTo: numeric(params.mileageTo), engineFrom: parseEngineCc(first(params.engineFrom)), engineTo: parseEngineCc(first(params.engineTo)), powerFrom: numeric(params.powerFrom), powerTo: numeric(params.powerTo),
     auctionGrade: selectedMarket === "japan" ? first(params.auctionGrade) : undefined,

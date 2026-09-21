@@ -17,6 +17,7 @@ export async function GET(request: Request) {
   const u = new URL(request.url);
   const p = u.searchParams;
   const query: Parameters<typeof searchOffers>[0] = {
+    city: p.get("city") || undefined,
     market: p.get("market") || undefined,
     make: p.get("make") || p.get("brand") || undefined,
     model: p.get("model") || undefined,

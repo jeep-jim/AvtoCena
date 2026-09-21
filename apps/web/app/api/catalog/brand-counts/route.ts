@@ -17,7 +17,7 @@ function positiveNumber(url: URL, key: string) {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const params: CatalogSearchParams = {
-    market: text(url, "market"),
+    market: text(url, "market"), city: text(url,"city"),
     hasPrice: text(url, "hasPrice"),
     budgetFrom: positiveNumber(url, "budgetFrom"),
     budgetTo: positiveNumber(url, "budgetTo") || positiveNumber(url, "budget"),

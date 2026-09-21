@@ -141,4 +141,4 @@ export interface CatalogSourceAdapter {
   mapStatus(raw: unknown): OfferStatus;
   healthCheck(): Promise<SourceRunHealth>;
 }
-export type CatalogSearchParams = { market?: string; make?: string; model?: string; hasPrice?: string; budgetFrom?: number; budgetTo?: number; yearFrom?: number; yearTo?: number; mileageFrom?: number; mileageTo?: number; engineFrom?: number; engineTo?: number; powerFrom?: number; powerTo?: number; fuel?: string; transmission?: string; drive?: string; bodyType?: string; auctionGrade?: string; auctionDateFrom?: string; auctionDateTo?: string; sort?: string; page?: number; pageSize?: number };
+export type CatalogSearchParams = { city?: string; market?: string; make?: string; model?: string; hasPrice?: string; budgetFrom?: number; budgetTo?: number; yearFrom?: number; yearTo?: number; mileageFrom?: number; mileageTo?: number; engineFrom?: number; engineTo?: number; powerFrom?: number; powerTo?: number; fuel?: string; transmission?: string; drive?: string; bodyType?: string; auctionGrade?: string; auctionDateFrom?: string; auctionDateTo?: string; sort?: string; page?: number; pageSize?: number };

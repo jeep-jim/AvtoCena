@@ -18,3 +18,9 @@ test('Japan budget uses the delivered preview, never the seller price',()=>{
  assert.equal(catalogSearchProjectionMatches({...row,japanDeliveredPreview:undefined},{budgetTo:2000000}),false);
  assert.deepEqual(catalogSearchProjectionSort([row,{...row,id:'cheaper',japanDeliveredPreview:{totalRub:1700000}}],'totalRub').map(r=>r.id),['cheaper','japan-preview']);
 });
+
+test('budget includes the selected city using the card delivery formula',()=>{
+ const row:any={id:'city',market:'japan',make:'Toyota',model:'Vitz',year:2020,cardProjectionVersion:3,catalogPricingMode:'seller',japanDeliveredPreview:{totalRub:1950000,engineCc:1498,estimated:true,deliveryPricingBasis:{subtotalRub:1950000,deliveryRub:0,percents:[]}}};
+ assert.equal(catalogSearchProjectionMatches(row,{budgetTo:2000000}),true);
+ assert.equal(catalogSearchProjectionMatches(row,{budgetTo:2000000,city:'Новокузнецк'}),false);
+});
