@@ -1,4 +1,5 @@
 import PDFDocument from "pdfkit";
+import { catalogOfferTitle } from "./presentation";
 import path from "node:path";
 import { existsSync } from "node:fs";
 import type { VehicleOffer } from "./types";
@@ -23,7 +24,7 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
  if(!calculation)local.push({label:"Доставка / перегруз по РФ",value:rub(null)},{label:"Таможенные платежи и утилизационный сбор",value:rub(null)},{label:"Брокер, СВХ, лаборатория, СБКТС, ЭПТС",value:rub(null)});
  const commission=amount("topavto-commission");
  local.push({label:"Стоимость авто до комиссии",value:rub(calculation && commission!=null?calculation.totalRub-commission:null)});
- return {title:[offer.make,offer.model,offer.trim].filter(Boolean).join(" "),market:markets[offer.market] || offer.market,date:new Date().toLocaleDateString("ru-RU",{timeZone:"UTC"}),
+ return {title:catalogOfferTitle(offer),market:markets[offer.market] || offer.market,date:new Date().toLocaleDateString("ru-RU",{timeZone:"UTC"}),
  specs:[draft.year?`${draft.year} г.`:"",draft.engineCc?`${draft.engineCc} см³`:"",fuels[draft.fuel] || "",draft.powerHp?`${draft.powerHp} л.с.`:"",draft.power30MinKw?`30 мин: ${draft.power30MinKw} кВт`:"",offer.mileageKm!=null?`${offer.mileageKm.toLocaleString("ru-RU")} км`:""].filter(Boolean).join("  /  "),
  city:draft.deliveryCity || "Город доставки не выбран",rate:rate?.currency && Number(rate?.effectiveRate)>0?`1 ${rate.currency} = ${Number(rate.effectiveRate).toLocaleString("ru-RU",{maximumFractionDigits:4})} ₽${rate.rateDate?` · ${rate.rateDate}`:""}`:"Курс требует уточнения",
  sections:[{title:`01 / ${markets[offer.market] || offer.market}`,rows:abroad},{title:"02 / Россия",rows:local},{title:"03 / Сопровождение",rows:[{label:'Комиссия компании «TOP AVTO»',value:rub(commission)}]}],
