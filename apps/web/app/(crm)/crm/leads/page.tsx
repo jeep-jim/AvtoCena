@@ -100,7 +100,7 @@ export default async function CrmLeadsPage({
       title="Заявки"
       subtitle="Обращения клиентов, автомобили и работа команды. Время указано по Москве."
     >
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="crm-lead-tabs mb-4 flex flex-wrap gap-2">
         {[
           ["all", "Активные"],
           ["my", "Мои заявки"],
@@ -115,7 +115,7 @@ export default async function CrmLeadsPage({
           </Link>
         ))}
       </div>
-      <form className="mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
+      <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
         <input
           name="q"
@@ -185,9 +185,9 @@ export default async function CrmLeadsPage({
               key={lead.id}
               id={lead.id}
               open={id === lead.id}
-              className="group overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]"
+              className="crm-lead-card group overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]"
             >
-              <summary className="grid cursor-pointer list-none grid-cols-[64px_1fr] items-center gap-3 p-4 md:grid-cols-[80px_1.4fr_1.4fr_1fr_auto] [&::-webkit-details-marker]:hidden">
+              <summary className="crm-lead-summary grid cursor-pointer list-none grid-cols-[64px_1fr] items-center gap-3 p-4 md:grid-cols-[80px_1.4fr_1.4fr_1fr_auto] [&::-webkit-details-marker]:hidden">
                 {car?.image ? (
                   <img
                     src={safeHref(car.image)}

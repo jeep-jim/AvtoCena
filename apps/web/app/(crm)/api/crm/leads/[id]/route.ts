@@ -26,7 +26,7 @@ function makeId(prefix: string) {
 
 export async function PATCH(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const user = await getCurrentUser();
@@ -35,7 +35,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
-  const leadId = clean(context.params.id, 160);
+  const leadId = clean((await context.params).id, 160);
   const body = await request.json().catch(() => ({}));
   const requestedStatus = clean(body.status, 80);
   const requestedManagerId = clean(body.assignedManagerId, 160);

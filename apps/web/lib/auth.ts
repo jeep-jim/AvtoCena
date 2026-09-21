@@ -112,7 +112,7 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  const signed = verifySessionCookie(cookies().get(AUTH_COOKIE_NAME)?.value);
+  const signed = verifySessionCookie((await cookies()).get(AUTH_COOKIE_NAME)?.value);
   if (!signed) return null;
   const users = await readDataJson<AuthUser[]>("auth/users.json", getAuthUsers());
   return resolveSessionUser(signed, users);

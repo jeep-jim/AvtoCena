@@ -1,0 +1,101 @@
+name: Verify CRM mobile and security audit
+on:
+  push:
+    branches: [fix/crm-mobile-security-20260921, main]
+    paths:
+      - 'apps/web/**'
+      - 'package-lock.json'
+      - 'package.json'
+      - 'tests/browser/crm-mobile*'
+      - 'tests/security-response-policy.test.ts'
+      - 'scripts/security-photo-audit.mjs'
+      - '.github/workflows/verify-crm-mobile-security.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for this release on production
+        if: github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'JS'
+          let ready=false;
+          for(let i=0;i<48;i++){
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}}catch{}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          if(!ready)throw new Error('Exact production release not confirmed');
+          JS
+      - name: Read public headers, photo hosts and existing cloud configuration
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: node scripts/security-photo-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-photo-audit
+          path: artifacts/security-photo-audit
+          retention-days: 14
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run typecheck
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/security-response-policy.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Real CRM pages at four widths in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/crm-mobile-layout.mjs
+      - name: Public dropdown and calculation regression
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crm-mobile-layout
+          path: |
+            artifacts/crm-mobile
+            artifacts/attached-parameters-*
+          retention-days: 14
+  live:
+    if: github.ref == 'refs/heads/main'
+    needs: [audit, browser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify published offer pages without submitting forms
+        env:
+          LIVE_ORIGIN: https://avtocena.com
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crm-security-live-offers
+          path: artifacts/attached-parameters-live
+          retention-days: 14

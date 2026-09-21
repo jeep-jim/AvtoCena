@@ -62,18 +62,18 @@ export function ClientCreateForm() {
   }
 
   return (
-    <form onSubmit={submit} className="glass rounded-[2rem] p-5 md:p-6">
+    <form onSubmit={submit} className="crm-client-form glass rounded-[2rem] p-5 md:p-6">
       <div className="text-sm font-black uppercase tracking-[0.16em] text-red-300">Новый клиент</div>
       <h2 className="mt-2 text-3xl font-black tracking-[-0.04em]">Добавить в CRM</h2>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
-        <input value={form.fio} onChange={(event) => update("fio", event.target.value)} placeholder="ФИО клиента" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold md:col-span-2" />
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <input value={form.fio} onChange={(event) => update("fio", event.target.value)} placeholder="ФИО клиента" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
         <PhoneInput value={form.phone} onChange={value => update("phone", value)} />
         <input value={form.telegram} onChange={(event) => update("telegram", event.target.value)} placeholder="Telegram" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Город" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.budgetRub} onChange={(event) => update("budgetRub", event.target.value)} placeholder="Бюджет, ₽" inputMode="numeric" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
-        <input value={form.car} onChange={(event) => update("car", event.target.value)} placeholder="Интересующий автомобиль" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold md:col-span-2" />
-        <textarea value={form.comment} onChange={(event) => update("comment", event.target.value)} placeholder="Комментарий" rows={4} className="soft-input resize-none rounded-2xl px-4 py-4 text-sm font-bold md:col-span-2" />
+        <input value={form.car} onChange={(event) => update("car", event.target.value)} placeholder="Интересующий автомобиль" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
+        <textarea value={form.comment} onChange={(event) => update("comment", event.target.value)} placeholder="Комментарий" rows={4} className="soft-input resize-none rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
       </div>
 
       {error && <div className="mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">{error}</div>}

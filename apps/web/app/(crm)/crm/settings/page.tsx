@@ -25,7 +25,7 @@ export default async function CrmSettingsPage({ searchParams }: { searchParams?:
     <CrmShell activeHref="/crm/settings" title="Рынки и расчёт" subtitle="Сверху — живой контроль того же расчётного ядра, которым считаются карточки сайта: можно ввести контрольные исходные данные и увидеть каждый этап. Ниже — коммерческие расходы рынков; таможня и утильсбор считаются отдельно по характеристикам конкретной машины.">
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Новая версия сохранена. Карточки используют её сразу; фоновый пересчёт обновит весь поисковый индекс.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить настройки рынка."}</div> : null}
-      <CalculationEnginePreview markets={markets} query={query} />
+      <details className="crm-calculator-disclosure" open={Object.keys(query).some(key=>key.startsWith("calc"))}><summary>Контрольный расчёт <span>Параметры и результат</span></summary><CalculationEnginePreview markets={markets} query={query} /></details>
       <SimpleMarketSettingsPanel markets={markets} canEdit={canEdit} />
     </CrmShell>
   );

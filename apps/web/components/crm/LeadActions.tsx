@@ -93,7 +93,7 @@ export function LeadActions({
   }
 
   return (
-    <div className="grid gap-2 rounded-2xl border border-white/10 bg-black/20 p-3 md:grid-cols-[minmax(150px,0.8fr)_minmax(170px,1fr)_minmax(180px,1.3fr)_auto] md:items-center">
+    <div className="crm-lead-actions grid grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-black/20 p-3 md:grid-cols-[minmax(150px,0.8fr)_minmax(170px,1fr)_minmax(180px,1.3fr)_auto] md:items-center">
       <select
         value={status}
         onChange={(event) => setStatus(event.target.value)}

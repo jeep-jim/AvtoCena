@@ -7,7 +7,7 @@ import { calculateOfferWithCustomerParametersDetailed } from "@/lib/catalog/cust
 import { cleanSavedDraft, saveOfferCalculation, SavedCalculationConflict } from "@/lib/catalog/saved-offer-calculation";
 
 export const dynamic = "force-dynamic";
-export async function POST(request:Request,{params}:{params:{id:string}}) {
+export async function POST(request:Request,{params}:{params: Promise<{id:string}>}) {
   const headers={"Cache-Control":"no-store"};
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"Недопустимый источник запроса"},{status:403,headers});
   const user=await getCurrentUser();
@@ -18,7 +18,7 @@ export async function POST(request:Request,{params}:{params:{id:string}}) {
   try { const input=JSON.parse(body); draft=cleanSavedDraft(input.draft); expectedVersion=typeof input.version==="string"?input.version:null; }
   catch(error){return NextResponse.json({error:error instanceof Error?error.message:"Проверьте параметры"},{status:400,headers});}
   // Authoritative current inventory: never save or resurrect an expired offer from a cached page.
-  const offer=await getOfferFromCurrentShard(params.id);
+  const offer=await getOfferFromCurrentShard((await params).id);
   if(!offer)return NextResponse.json({error:"Объявление больше недоступно"},{status:404,headers});
   const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
   if(!result.ok)return NextResponse.json({error:result.error},{status:422,headers});

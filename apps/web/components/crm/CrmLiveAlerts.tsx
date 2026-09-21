@@ -25,7 +25,7 @@ function beep(){
   }catch{}
 }
 type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string};
-export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false}:{userId:string;role?:string;displayName?:string;header?:boolean}) {
+export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
   const [audioBlocked,setAudioBlocked]=useState(false);
   const [menuOpen,setMenuOpen]=useState(false),[ackError,setAckError]=useState(""),[acknowledging,setAcknowledging]=useState(false);
@@ -111,16 +111,17 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   if(!authorized)return null;
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
-  return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""}`}>
-    <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>
-    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}><UserRound size={21}/><span className="ac-staff-mobile-badge">{badge}</span></button>
+  return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
+    {!crm && <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>}
+    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}>{crm && avatar ? <img src={avatar} alt="" width={28} height={28} className="rounded-full" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
     {menuOpen?<div id={`staff-menu-${userId}`} className="ac-staff-menu">
-      <p className="ac-staff-name">{displayName}</p>
-      <a href="/crm/leads"><ClipboardList size={18}/>Заявки{badge}</a>
-      <a href="/crm"><UserRound size={18}/>Рабочий кабинет</a>
-      {["owner","admin"].includes(role)?<a href="/crm/settings"><Settings size={18}/>Настройки</a>:null}
+      <p className="ac-staff-name">{displayName}{crm?<small className="block text-xs font-normal">{({owner:"Владелец",admin:"Администратор",manager:"Менеджер"} as Record<string,string>)[role]||role}</small>:null}</p>
+      {!crm && <a href="/crm/leads"><ClipboardList size={18}/>Заявки{badge}</a>}
+      <a href={crm?`/crm/managers/${encodeURIComponent(userId)}`:"/crm"}><UserRound size={18}/>{crm?"Мой профиль":"Рабочий кабинет"}</a>
+      {!crm && ["owner","admin"].includes(role)?<a href="/crm/settings"><Settings size={18}/>Настройки</a>:null}
       <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук заявок: {enabled?"включён":"выключен"}</button>
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
+      {crm?<form action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
     </div>:null}
     {pending.length>0?<div role="status" className="ac-staff-notice">
       <p className="font-bold">Новые заявки: {pending.length}</p>
@@ -133,6 +134,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       .ac-staff-tools{position:relative;display:flex;align-items:center;gap:6px;color:var(--ac-text,#fff)}
       .ac-staff-leads,.ac-staff-account{display:flex;align-items:center;justify-content:center;gap:7px;height:44px;border-radius:12px;background:var(--ac-surface-2,#273343);color:inherit;font-size:12px;font-weight:700}
       .ac-staff-leads{padding:0 12px}.ac-staff-account{width:40px;position:relative}.ac-staff-mobile-badge{display:none}
+      .ac-staff-tools--crm .ac-staff-mobile-badge{display:block;position:absolute;right:-4px;top:-4px}
       .ac-staff-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#ff353d!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:11px}
       .ac-staff-menu,.ac-staff-notice{position:absolute;right:0;top:calc(100% + 12px);width:290px;max-width:calc(100vw - 24px);border:1px solid var(--ac-border,#526074);border-radius:16px;background:var(--ac-surface-2,#273343);color:var(--ac-text,#fff);padding:12px;z-index:130}
       .ac-staff-menu{z-index:140}.ac-staff-menu a,.ac-staff-menu>button{display:flex;align-items:center;gap:10px;min-height:44px;width:100%;padding:8px;border-radius:8px;font-size:13px;text-align:left}.ac-staff-menu a:hover,.ac-staff-menu>button:hover{background:var(--ac-surface-3,#344156)}.ac-staff-name{font-size:13px;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--ac-border,#526074)}

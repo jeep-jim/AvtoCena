@@ -11,7 +11,8 @@ type SessionPayload = {
 };
 
 function authSecret() {
-  return process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "avtocena-dev-secret-change-me";
+  const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+  return secret || (process.env.NODE_ENV === "production" ? null : "avtocena-dev-secret-change-me");
 }
 
 function base64url(bytes: ArrayBuffer | Uint8Array) {
@@ -28,8 +29,10 @@ function decodeBase64url(value: string) {
 }
 
 async function signPayload(encodedPayload: string) {
+  const secret = authSecret();
+  if (!secret) return null;
   const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey("raw", encoder.encode(authSecret()), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const key = await crypto.subtle.importKey("raw", encoder.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(encodedPayload));
   return base64url(signature);
 }
@@ -40,7 +43,7 @@ async function getSession(request: NextRequest): Promise<SessionPayload | null> 
   const [encodedPayload, signature] = raw.split(".");
   if (!encodedPayload || !signature) return null;
   const expected = await signPayload(encodedPayload);
-  if (expected !== signature) return null;
+  if (!expected || expected !== signature) return null;
   try {
     const payload = JSON.parse(decodeBase64url(encodedPayload)) as SessionPayload;
     if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;

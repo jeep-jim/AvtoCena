@@ -36,5 +36,10 @@
     "catalog:cleanup-storage": "tsx scripts/catalog-clean-object-storage.mjs",
     "catalog:reindex-vehicle-knowledge": "tsx scripts/catalog-reindex-vehicle-knowledge.mjs",
     "autocatalog:publish": "tsx scripts/publish-autocatalog.mjs"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.28"
+    }
   }
 }
