@@ -7,7 +7,7 @@ import type { calculateOfferWithCustomerParametersDetailed } from "./customs-pri
 
 export type SavedCalculationResult = Extract<Awaited<ReturnType<typeof calculateOfferWithCustomerParametersDetailed>>, {ok:true}>["calculation"];
 export type SavedOfferCalculation = {
-  version: string; offerId: string; identity: string; savedAt: string; savedBy: string;
+  version: string; offerId: string; identity: string; savedAt: string; savedBy: string; savedByName?: string;
   draft: Record<string,string>; calculation: SavedCalculationResult;
 };
 const fields = ["year","productionMonth","productionDay","customsCalculationDate","fuel","engineCc","powerHp","powerKw","hybridKind","power30MinKw","icePowerKw","vehicleCategory","grossVehicleWeightKg","n1IceFuel","transportToBorderRub","deliveryCity"];
@@ -34,8 +34,8 @@ export async function getSavedOfferCalculation(offer: VehicleOffer) {
   return matchingSavedCalculation(await readSavedRecord(offer.id), offer);
 }
 export class SavedCalculationConflict extends Error {}
-export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null) {
-  const record:SavedOfferCalculation={offerId:offer.id,identity:savedOfferIdentity(offer),version:randomUUID(),savedAt:new Date().toISOString(),savedBy:userId,draft:cleanSavedDraft(draft),calculation};
+export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null, savedByName?:string) {
+  const record:SavedOfferCalculation={offerId:offer.id,identity:savedOfferIdentity(offer),version:randomUUID(),savedAt:new Date().toISOString(),savedBy:userId,savedByName,draft:cleanSavedDraft(draft),calculation};
   await mutateDataJson<SavedOfferCalculation|null>(storagePath(offer.id),null,current=>{
     if ((matchingSavedCalculation(current,offer)?.version || null) !== expectedVersion) throw new SavedCalculationConflict("Карточка уже изменена другим сотрудником. Обновите страницу перед сохранением.");
     return record;

@@ -10,6 +10,7 @@ import type { CitySuggestion } from "../../lib/location/cities";
 type Props = {
   value: string;
   syncStored?: boolean;
+  onStoredChange?: (city: string) => void;
   triggerLabel?: string;
   onChange: (city: string) => void;
 };
@@ -30,7 +31,7 @@ function persistCity(city: string) {
   window.dispatchEvent(new Event(CITY_CHANGED_EVENT));
 }
 
-export function CitySelector({ value, onChange, triggerLabel, syncStored = true }: Props) {
+export function CitySelector({ value, onChange, triggerLabel, onStoredChange, syncStored = true }: Props) {
   const tap = useTapActivation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -42,14 +43,14 @@ export function CitySelector({ value, onChange, triggerLabel, syncStored = true 
     setMounted(true);
     if (!syncStored) return;
     const stored = readSelectedCity();
-    if (stored !== value) onChange(stored);
+    if (stored !== value) (onStoredChange || onChange)(stored);
   }, []);
   useEffect(() => {
     if (!syncStored) return;
-    const sync = () => onChange(readSelectedCity());
+    const sync = () => (onStoredChange || onChange)(readSelectedCity());
     window.addEventListener(CITY_CHANGED_EVENT, sync);
     return () => window.removeEventListener(CITY_CHANGED_EVENT, sync);
-  }, [onChange, syncStored]);
+  }, [onChange, onStoredChange, syncStored]);
 
   useEffect(() => {
     if (!open) return;

@@ -1,4 +1,5 @@
 "use client";
+import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { priceCardForCity } from "../../lib/catalog/card-city-delivery";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
@@ -26,10 +27,7 @@ function CatalogPriceContent({
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = String(offer?.market || "").toLowerCase() === "japan"
     || /япони/i.test(String(offer?.marketLabel || ""));
-  const powertrainKind = String(offer?.powertrainKind || "").toLowerCase();
-  const fuel = String(offer?.fuel || "").toLowerCase();
-  const highlightElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)
-    || /(?:electric|battery|\bbev\b|\bev\b|hybrid|phev|hev|mhev|электро|гибрид)/i.test(fuel);
+  const highlightElectrified = isElectrifiedPrice(offer);
 
   if (totalRub > 0) {
     if (japanAuction) return <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;

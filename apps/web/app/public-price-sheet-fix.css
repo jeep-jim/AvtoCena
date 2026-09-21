@@ -247,3 +247,8 @@ html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Ма�
   box-shadow: none !important;
   filter: none !important;
 }
+
+/* Shared EV/hybrid price identity, including saved calculations and seller prices. */
+html body .ac-price.ac-price--electrified { color:#ffd21f!important; }
+html[data-theme="light"] body .ac-price.ac-price--electrified { color:#c58a00!important; }
+.ac-offer-page [data-city-delivery] .ac-city-selector { font-size:16px; }

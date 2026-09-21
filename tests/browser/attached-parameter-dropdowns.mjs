@@ -208,9 +208,11 @@ try{
    await page.addInitScript(()=>localStorage.setItem('avtocena_city','Москва'));
    let calculations=0,saves=0;
    await page.route('**/api/catalog/offer/qa-attached/calculate',async route=>{calculations++;await route.fulfill({json:{totalRub:2600000,breakdown:[{id:'car',amountRub:2000000}]}});});
-   await page.route('**/api/catalog/offer/qa-attached/save',async route=>{saves++;const body=route.request().postDataJSON();assert.equal(body.version,'v1');assert.equal(body.draft.powerHp,'150');await route.fulfill({json:{version:'v2',savedAt:'2026-09-20T11:00:00Z',draft:body.draft,calculation:{totalRub:2600000}}});});
+   await page.route('**/api/catalog/offer/qa-attached/save',async route=>{saves++;const body=route.request().postDataJSON();assert.equal(body.version,'v1');assert.equal(body.draft.powerHp,'150');await route.fulfill({json:{version:'v2',savedAt:'2026-09-20T11:00:00Z',savedByName:'Новый сотрудник',draft:body.draft,calculation:{totalRub:2600000}}});});
    await page.goto(origin+'/?kind='+kind);await page.waitForTimeout(850);
    assert.equal(calculations,0,'saved quote must not recalculate on open');
+   assert.equal(await page.getByRole('button',{name:'Сохранить расчёт для клиента'}).count(),0,'no save before edits');
+   assert.equal(await page.getByText(/Расчёт сохранён/).count(),kind==='saved-admin'?1:0,'save metadata is staff only');
    assert.ok(await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).isVisible(),'saved delivery overrides browser city');
    assert.match(await page.locator('.ac-price').first().innerText(),/2[\s\u00a0]500[\s\u00a0]000/);
    await page.getByText('Структура цены',{exact:true}).first().click();
@@ -218,9 +220,37 @@ try{
    const power=page.locator('[data-parameter-editor] > summary').nth(3);await power.click();
    await page.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.keyboard.press('Escape');await page.waitForTimeout(850);
    const button=page.getByRole('button',{name:'Сохранить расчёт для клиента'});
-   if(kind==='saved-admin'){await button.click();await page.getByText('Сохранено. Можно отправить клиенту ссылку.').waitFor();assert.equal(saves,1);assert.equal(await button.count(),0);}
+   if(kind==='saved-admin'){
+    await button.click();await page.getByRole('dialog').waitFor();assert.equal(saves,0,'opening confirmation does not save');
+    await page.getByRole('button',{name:'Нет',exact:true}).click();assert.equal(saves,0);assert.ok(await button.isVisible());
+    await button.click();await page.getByRole('button',{name:'Да',exact:true}).click();
+    await page.getByText('Сохранено. Можно отправить клиенту ссылку.').waitFor();assert.equal(saves,1);assert.equal(await button.count(),0);
+    assert.ok(await page.getByText('Новый сотрудник',{exact:true}).isVisible());
+   }
    else {assert.equal(await button.count(),0);assert.equal(saves,0);}
    await page.screenshot({path:`${out}/${kind}.png`,fullPage:true});await page.close();
+  }
+  {
+   const page=await browser.newPage({viewport:{width:390,height:844}});
+   await page.addInitScript(()=>localStorage.setItem('avtocena_city','Москва'));
+   await page.route('**/api/catalog/offer/qa-attached/calculate',route=>route.fulfill({json:{totalRub:2600000,breakdown:[{id:'car',amountRub:2000000}]}}));
+   await page.goto(origin+'/?kind=unsaved-admin');await page.waitForTimeout(850);
+   assert.equal(await page.getByRole('button',{name:'Сохранить расчёт для клиента'}).count(),0,'automatic city restoration is not an employee edit');
+   for(const theme of ['light','dark']){
+    await page.goto(origin+'/?kind=electric&theme='+theme);await page.waitForTimeout(300);
+    const color=await page.locator('.ac-price').first().evaluate(el=>getComputedStyle(el).color);
+    assert.equal(color,theme==='light'?'rgb(197, 138, 0)':'rgb(255, 210, 31)','seller-only electric price has yellow identity');
+    await page.getByLabel('30-минутная мощность: Указать 30-минутную мощность',{exact:true}).click();
+    assert.ok(await page.getByText('Алиса покажи 30-минутную мощность',{exact:true}).isVisible());
+    const query=await page.getByRole('link',{name:'Алиса Алиса покажи 30-минутную мощность',exact:true}).getAttribute('href');
+    assert.match(decodeURIComponent(query),/электромобиль без ДВС/);
+    await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('20');
+    await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).click();
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),'');
+    await page.waitForTimeout(850);assert.equal(await page.getByText('Стоимость под ключ',{exact:true}).count(),0);
+   }
+   await page.close();
   }
   const page=await browser.newPage();
   await page.addInitScript(()=>{localStorage.setItem('avtocena_crm_notifications_enabled','1');window.__beeps=0;window.AudioContext=class{state='running';currentTime=0;destination={};resume(){return Promise.resolve();}createOscillator(){return {frequency:{setValueAtTime(){}},connect(){},disconnect(){},start(){window.__beeps++;},stop(){}};}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},disconnect(){}};}};});

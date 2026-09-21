@@ -1,4 +1,5 @@
 "use client";
+import { isElectrifiedPrice } from "@/lib/catalog/electrified-price";
 import {leadFetch} from "@/lib/lead-submit-client";
 
 import { createPortal } from "react-dom";
@@ -10,6 +11,7 @@ import {ShareLinkButton} from "@/components/catalog/ShareLinkButton";
 import { captureAttributionFromBrowser } from "@/lib/attribution";
 
 type FavoriteLeadItem = {
+  fuel?:string; powertrainKind?:string;
   id: string;
   title?: string;
   totalRub?: number | null;
@@ -128,7 +130,7 @@ function FavoriteSelector({ items, selectedIds, onToggle }: { items: FavoriteLea
           const price = Number(item.totalRub ?? item.price ?? 0);
           return <button key={item.id} type="button" disabled={disabled} onClick={() => onToggle(item.id)} className={`grid grid-cols-[54px_minmax(0,1fr)_26px] items-center gap-3 rounded-2xl p-2.5 text-left transition ${selected ? "bg-red-500/10" : "bg-[var(--ac-surface-2)]"} disabled:opacity-45`} aria-pressed={selected}>
             <div className="h-[54px] w-[54px] overflow-hidden rounded-xl bg-[var(--ac-surface-3)]">{item.imageUrl ? <img src={item.imageUrl} alt="" className="h-full w-full object-cover" /> : null}</div>
-            <div className="min-w-0"><div className="truncate text-sm font-black text-[var(--ac-text)]">{cleanText(item.title) || "Автомобиль"}</div><div className="mt-1 flex flex-wrap gap-x-2 text-xs font-bold text-[var(--ac-muted)]">{item.year ? <span>{item.year}</span> : null}{price > 0 ? <span>{formatRub(price)}</span> : null}</div></div>
+            <div className="min-w-0"><div className="truncate text-sm font-black text-[var(--ac-text)]">{cleanText(item.title) || "Автомобиль"}</div><div className="mt-1 flex flex-wrap gap-x-2 text-xs font-bold text-[var(--ac-muted)]">{item.year ? <span>{item.year}</span> : null}{price > 0 ? <span className={isElectrifiedPrice(item) ? "ac-price ac-price--electrified" : undefined}>{formatRub(price)}</span> : null}</div></div>
             <span className={`flex h-6 w-6 items-center justify-center rounded-lg border text-xs font-black ${selected ? "border-red-500 bg-red-500 text-white" : "border-[var(--ac-border)] text-transparent"}`}>✓</span>
           </button>;
         })}
@@ -303,7 +305,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
 
             {!isFavorites && !isOffer ? <div className="grid gap-3 md:grid-cols-2"><label className="relative block min-w-0"><FieldLabel>Интересующее авто</FieldLabel><input value={form.car} onChange={(event) => setField("car", event.target.value)} onFocus={() => setCarFocused(true)} onBlur={() => window.setTimeout(() => setCarFocused(false), 120)} placeholder="Например, Toyota RAV4" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" autoComplete="off" />{carFocused && suggestions.length ? <div className="absolute left-0 right-0 top-[calc(100%+7px)] z-30 max-h-56 overflow-y-auto rounded-2xl bg-[var(--ac-surface-3)] p-2 shadow-2xl">{suggestions.map((item, index) => { const label = cleanText(item.label) || [item.make, item.model].map(cleanText).filter(Boolean).join(" "); return <button key={item.id || `${label}-${index}`} type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => { setField("car", label); setSuggestions([]); setCarFocused(false); }} className="block min-h-10 w-full rounded-xl px-3 py-2 text-left text-sm font-bold text-[var(--ac-text)] hover:bg-white/[.07]">{label}</button>; })}</div> : null}<span className="mt-1.5 block text-[11px] font-semibold leading-4 text-[var(--ac-muted)]">Можно выбрать подсказку или написать любую марку и модель вручную.</span></label><label className="block min-w-0"><FieldLabel>Бюджет</FieldLabel><div className="relative"><input value={formatBudgetInput(form.budget)} onChange={(event) => setField("budget", event.target.value.replace(/\D/g, ""))} inputMode="numeric" placeholder="Например, 3 000 000" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 pr-10 outline-none" /><span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-black text-[var(--ac-muted)]">₽</span></div></label></div> : null}
 
-            {isOffer ? <div className="flex items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-3">{offerPreview?.imageUrl ? <img src={offerPreview.imageUrl} alt="Выбранный автомобиль" className="h-20 w-24 shrink-0 rounded-xl object-cover" /> : <span className="flex h-20 w-24 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-3)]" aria-hidden="true">🚘</span>}<div className="min-w-0"><div className="text-sm font-black">{offerPreview?.title || cleanText(form.car) || "Автомобиль из открытой карточки"}</div><div className="mt-1 text-xs text-[var(--ac-muted)]">{[offerPreview?.marketLabel, offerPreview?.year].filter(Boolean).join(" · ")}</div>{Number(offerPreview?.totalRub) > 0 ? <div className="mt-1 text-sm font-bold">{formatRub(Number(offerPreview?.totalRub))}</div> : null}</div></div> : null}
+            {isOffer ? <div className="flex items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-3">{offerPreview?.imageUrl ? <img src={offerPreview.imageUrl} alt="Выбранный автомобиль" className="h-20 w-24 shrink-0 rounded-xl object-cover" /> : <span className="flex h-20 w-24 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-3)]" aria-hidden="true">🚘</span>}<div className="min-w-0"><div className="text-sm font-black">{offerPreview?.title || cleanText(form.car) || "Автомобиль из открытой карточки"}</div><div className="mt-1 text-xs text-[var(--ac-muted)]">{[offerPreview?.marketLabel, offerPreview?.year].filter(Boolean).join(" · ")}</div>{Number(offerPreview?.totalRub) > 0 ? <div className={`mt-1 text-sm font-bold ${offerPreview && isElectrifiedPrice(offerPreview) ? "ac-price ac-price--electrified" : ""}`}>{formatRub(Number(offerPreview?.totalRub))}</div> : null}</div></div> : null}
 
             <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input ac-lead-comment w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 

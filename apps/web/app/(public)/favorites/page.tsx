@@ -9,6 +9,7 @@ import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 const FAVORITES_KEY = "avtocena_favorites";
 
 type Favorite = {
+  fuel?: string; powertrainKind?: string;
   id: string;
   title?: string;
   price?: number | null;

@@ -23,8 +23,8 @@ export async function POST(request:Request,{params}:{params:{id:string}}) {
   const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
   if(!result.ok)return NextResponse.json({error:result.error},{status:422,headers});
   try {
-    const saved=await saveOfferCalculation(offer,draft,result.calculation,user.id,expectedVersion);
-    return NextResponse.json({version:saved.version,savedAt:saved.savedAt,draft:saved.draft,calculation:saved.calculation},{headers});
+    const saved=await saveOfferCalculation(offer,draft,result.calculation,user.id,expectedVersion,user.displayName);
+    return NextResponse.json({version:saved.version,savedAt:saved.savedAt,savedByName:user.displayName,draft:saved.draft,calculation:saved.calculation},{headers});
   } catch(error) {
     if(error instanceof SavedCalculationConflict)return NextResponse.json({error:error.message},{status:409,headers});
     console.error("offer_calculation_save_failed",error);

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {completePowerUnitDraft, powerUnitPatch, hybridResearchQuery} from '../apps/web/lib/catalog/power-parameter-draft';
+import {completePowerUnitDraft, powerUnitPatch, hybridResearchQuery, electricResearchQuery} from '../apps/web/lib/catalog/power-parameter-draft';
 import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-parameters';
 test('hybrid power pairs convert independently and preserve entered kW', () => {
  const draft = completePowerUnitDraft({powerHp:'49',icePowerKw:'36',power30MinKw:'1'});
@@ -32,4 +32,13 @@ test('research prompt identifies the car and asks for evidence rather than infer
  const query=hybridResearchQuery('Suzuki Spacia HYBRID G MK53S','2024','658');
  assert.match(query,/Suzuki Spacia HYBRID G MK53S 2024 658/);
  assert.match(query,/30-минутную/);assert.match(query,/номера документов/);assert.match(query,/данных нет/);
+});
+
+test('electric research preserves identity without requesting hybrid classification', () => {
+ const query=electricResearchQuery('Nissan Sakura X B6AW','2025');
+ assert.match(query,/Nissan Sakura X B6AW 2025/);assert.match(query,/электромобиль без ДВС/);
+ assert.match(query,/Нет подтверждённых данных/);assert.doesNotMatch(query,/см³|определить.*тип гибрида/);
+ const draft={year:'2025',fuel:'electric',powerHp:'64',power30MinKw:'20',...powerUnitPatch('power30MinKw','')};
+ assert.equal(draft.power30MinKw,'');assert.equal(draft.power30MinHp,'');
+ assert.throws(()=>validateCustomerParameters(draft));
 });

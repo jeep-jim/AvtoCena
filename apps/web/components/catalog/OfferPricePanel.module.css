@@ -6,3 +6,5 @@
 .warning { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #342b1d; color: #ffd28a; font-size: 12px; line-height: 1.5; }
 :global(html[data-theme="light"]) .warning { background: #fff2dc; color: #784000; }
 @media (max-width: 380px) { .heading { gap: 8px; } .amount { font-size: 21px; } .title { font-size: 10px; letter-spacing: .03em; } }
+
+.sanctionsBadge { display:inline; border-radius:4px; padding:2px 5px; background:#be3545; color:#fff; font-size:10px; font-weight:800; white-space:nowrap; vertical-align:baseline; }

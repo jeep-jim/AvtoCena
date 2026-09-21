@@ -3,7 +3,7 @@
 .section:first-child { margin-top:0; }
 .heading { display:flex; align-items:center; gap:12px; min-width:0; font-size:13px; font-weight:900; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; }
 .heading > span:not(.rule) { overflow-wrap:anywhere; }
-.rule { height:3px; background:currentColor; flex:1; min-width:28px; }
+.rule { height:3px; background:var(--ac-border); flex:1; min-width:28px; }
 .rows { display:grid; min-width:0; column-gap:28px; margin-top:12px; }
 .row { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; gap:10px 16px; padding:12px 0; border-bottom:1px solid var(--ac-border); font-size:13px; line-height:1.65; }
 .row dt { min-width:0; color:var(--ac-muted); overflow-wrap:anywhere; }

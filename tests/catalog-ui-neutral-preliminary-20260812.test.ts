@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import {isElectrifiedPrice} from "../apps/web/lib/catalog/electrified-price";
 
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");
@@ -18,8 +19,9 @@ const citySelector = fs.readFileSync(new URL("../apps/web/components/home/CitySe
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
-  assert.match(catalogPrice, /electric.*series_hybrid.*other_hybrid/);
-  assert.match(catalogPrice, /hybrid\|phev\|hev\|mhev/);
+  for(const fuel of ["electric","hybrid","PHEV","MHEV","Электро","Гибрид"]) assert.equal(isElectrifiedPrice({fuel}),true);
+  for(const powertrainKind of ["electric","series_hybrid","other_hybrid"]) assert.equal(isElectrifiedPrice({powertrainKind}),true);
+  for(const fuel of ["petrol","diesel",""]) assert.equal(isElectrifiedPrice({fuel}),false);
   assert.match(catalogPrice, /PreliminaryPrice[^;]+highlightElectrified=\{highlightElectrified\}/s);
   assert.match(catalogPrice, /PriceTrend[^;]+highlightElectrified=\{highlightElectrified\}/s);
   assert.match(preliminaryPrice, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : "var\(--ac-text\)"/);
