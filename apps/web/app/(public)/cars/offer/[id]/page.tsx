@@ -1,3 +1,4 @@
+import { OfferUpdatedStatus } from "@/components/catalog/OfferUpdatedStatus";
 import { protectedPhotoUrl } from "@/lib/catalog/photo-proxy-policy";
 import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";
 import { readCrmUsers } from "@/lib/crm-users";
@@ -422,24 +423,27 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     <JapanAuctionBadges offer={o} interactive hideRestriction />
   </div> : null;
 
+  const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
+
   return <main data-offer-id={o.id} data-offer-saved-version={savedCalculation?.version} data-offer-price-rub={savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-      <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
+      <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
         <div className="min-w-0">
           <header className="min-w-0">
             <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs"><Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}</nav>
             <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
-          <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus} />
+          <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
+          <OfferDesktopActions position="below" />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
           <OfferFinanceCards />
         </div>
 
         <StickyOfferColumn>
-          <div className="mb-3 xl:hidden">{auctionStatus}</div>
-          <InlineOfferParameters originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={/pickup|pick-up|пикап/i.test(String(offer.bodyType||""))} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={offer.vehicleCategory === "N1" || String(offer.tnVedCode||"").startsWith("8704") || /pickup|pick-up|пикап|truck|commercial|груз|hilux|taga|d-max|l200|tundra|tacoma|ranger|amarok|navara|poer|musso/i.test(`${offer.bodyType||""} ${offer.model||""}`) || offer.calculationSnapshot?.customs?.missing?.includes("vehicle_category")} key={offer.id} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={{vehicleCategory:offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory||"",grossVehicleWeightKg:String(offer.grossVehicleWeightKg||""),n1IceFuel:offer.n1IceFuel||"",year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),productionDay:confirmedProductionDay(offer),transportToBorderRub:offer.transportToBorderRub == null ? "" : String(offer.transportToBorderRub),engineCc:String(offer.engineCc||proAuctionsReportedVolume(offer)||""),fuel:sourceHybridDraft.fuel||offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),powerKw:powerScenario?"":String(raw.powerKw||recyclingPowerInfo(raw)?.kw||""),hybridKind:["series_hybrid","other_hybrid"].includes(offer.powertrainKind||"")?offer.powertrainKind!:"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:sourceHybridDraft.icePowerKw||String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
+          {auctionStatus ? <div className="mb-3 xl:hidden">{auctionStatus}</div> : null}
+          <InlineOfferParameters afterPrice={<OfferMobileActions />} originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={/pickup|pick-up|пикап/i.test(String(offer.bodyType||""))} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={offer.vehicleCategory === "N1" || String(offer.tnVedCode||"").startsWith("8704") || /pickup|pick-up|пикап|truck|commercial|груз|hilux|taga|d-max|l200|tundra|tacoma|ranger|amarok|navara|poer|musso/i.test(`${offer.bodyType||""} ${offer.model||""}`) || offer.calculationSnapshot?.customs?.missing?.includes("vehicle_category")} key={offer.id} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={{vehicleCategory:offer.vehicleCategory === "unknown" ? "" : offer.vehicleCategory||"",grossVehicleWeightKg:String(offer.grossVehicleWeightKg||""),n1IceFuel:offer.n1IceFuel||"",year:String(offer.year||""),productionMonth:confirmedProductionMonth(offer),productionDay:confirmedProductionDay(offer),transportToBorderRub:offer.transportToBorderRub == null ? "" : String(offer.transportToBorderRub),engineCc:String(offer.engineCc||proAuctionsReportedVolume(offer)||""),fuel:sourceHybridDraft.fuel||offer.fuel||"",powerHp:powerScenario?.source==="fallback_100"?"":String(safePowerHp||""),powerKw:powerScenario?"":String(raw.powerKw||recyclingPowerInfo(raw)?.kw||""),hybridKind:["series_hybrid","other_hybrid"].includes(offer.powertrainKind||"")?offer.powertrainKind!:"",power30MinKw:String(offer.power30MinKw||""),icePowerKw:sourceHybridDraft.icePowerKw||String(offer.icePowerKw||"")}} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold uppercase">Цена продавца</p><p className={`ac-price mt-2 text-3xl font-black ${electrified ? "ac-price--electrified" : ""}`}>{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
             ? <AuctionResultPrice offer={{...o,auctionGrade:undefined,japanExportRestriction:undefined}} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
@@ -455,18 +459,13 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
               <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="mobile" sourceUrl={sourceUrl} />
             </div>
 
-            {!japanAuction ? <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
-                <span className="block">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
-                <span className="mt-1 block">Возможность покупки и финальную стоимость подтвердит менеджер.</span>
-              </p>
-            </div> : null}
+            {!japanAuction ? <div className="mt-3 xl:hidden">{updatedStatus}</div> : null}
             <OfferDesktopActions />
           </aside>
           </InlineOfferParameters>
         </StickyOfferColumn>
       </div>
 
-      <OfferMobileActions />
 
       <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
       <PageLeadBanner kind="offer" />

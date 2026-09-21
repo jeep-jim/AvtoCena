@@ -1,3 +1,4 @@
+import { CATALOG_MARKET_LABELS } from "./runtime-config";
 import { CATALOG_BRANDS } from "./brands";
 
 const directPhrases: Array<[RegExp, string]> = [
@@ -266,13 +267,7 @@ const directPhrases: Array<[RegExp, string]> = [
   [/클래스/gi, "Class"],
 ];
 
-const marketNames: Record<string, string> = {
-  japan: "Япония",
-  korea: "Корея",
-  china: "Китай",
-  uae: "ОАЭ",
-  europe: "Европа",
-};
+const marketNames: Record<string, string> = CATALOG_MARKET_LABELS;
 
 const bodyNames: Record<string, string> = {
   suv: "Кроссовер",

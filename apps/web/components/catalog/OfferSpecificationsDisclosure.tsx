@@ -63,7 +63,7 @@ export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, 
   };
   const content = <OfferAllSpecifications groups={groups} showHeading={false} sourceUrl={sourceUrl} />;
 
-  if (mode === "desktop") return <div className="mt-6 hidden min-w-0 scroll-mt-20 xl:block">
+  if (mode === "desktop") return <div data-spec-desktop data-open={open} className="mt-6 hidden min-w-0 scroll-mt-20 xl:block">
     <div className={`ac-specifications-header grid gap-3 ${open ? "sticky top-[72px] z-30" : ""} ${headerAside ? "grid-cols-[minmax(240px,.7fr)_minmax(0,1.3fr)]" : ""}`}>
     <button type="button" aria-expanded={open} aria-controls={headingId} onClick={()=>{ if(open && triggerRef.current && triggerRef.current.getBoundingClientRect().top < 90) triggerRef.current.parentElement?.parentElement?.scrollIntoView({block:"start"}); setOpen(!open); }} ref={triggerRef} className={`ac-specifications-trigger ${open ? "shadow-sm" : ""} flex min-h-14 cursor-pointer items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 text-sm font-bold text-[var(--ac-text)] outline-none focus-visible:ring-2 focus-visible:ring-red-400`}>
       <span className="flex items-center gap-2.5"><CarFront className="h-5 w-5 text-[var(--ac-muted)]" aria-hidden="true" />{open ? "Скрыть характеристики" : "Все характеристики"}</span>
