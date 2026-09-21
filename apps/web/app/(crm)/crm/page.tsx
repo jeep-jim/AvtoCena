@@ -37,15 +37,15 @@ export default async function CrmPage() {
             <Link href="/crm/feed" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Открыть ленту</Link>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div className="crm-overview-feed mt-5 space-y-3">
             {(leads.length ? leads.slice(0, 6) : []).map((lead) => (
-              <div key={lead.id} className="rounded-2xl bg-white/7 px-4 py-3">
+              <Link key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}`} className="block rounded-2xl bg-white/7 px-4 py-3">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="font-black">{lead.name || lead.phone || lead.telegram || "Новый лид"}</div>
                   <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-black text-red-100">{leadStatusLabel(lead.status)}</span>
                 </div>
-                <div className="mt-1 text-sm font-bold text-white/48">{lead.car || "Авто не выбрано"} · {lead.source || "site"}</div>
-              </div>
+                <div className="mt-1 text-sm font-bold text-white/48">{lead.car || "Авто не выбрано"}</div>
+              </Link>
             ))}
 
             {!leads.length && <div className="rounded-2xl bg-white/7 px-4 py-5 text-sm font-bold text-white/50">Пока нет заявок. Они появятся после формы на сайте или ручного добавления клиента.</div>}

@@ -52,7 +52,7 @@ try{
     assert.equal(await page.locator('form[action="/api/crm/settings/markets"]').count(),6,'all six market forms retained');
    }
    if(kind==='clients'){await page.locator('.crm-calculator-disclosure>summary').click();assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible());}
-   for(const select of await page.locator('select:visible').all()){assert.equal(await select.evaluate(e=>getComputedStyle(e).backgroundPosition),'right 16px center');assert.ok(await select.evaluate(e=>parseFloat(getComputedStyle(e).paddingRight)>=40));}
+   for(const select of await page.locator('select:visible').all()){assert.ok(['right 16px center','calc(100% - 16px) 50%'].includes(await select.evaluate(e=>getComputedStyle(e).backgroundPosition)));assert.ok(await select.evaluate(e=>parseFloat(getComputedStyle(e).paddingRight)>=40));}
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no overflow after disclosure');
    if(width===390||width===1440)await page.screenshot({path:`${out}/${kind}-${theme}-${width}.png`,fullPage:false});
    await page.mouse.move(width-4,400);await page.mouse.wheel(0,500);await page.waitForTimeout(150);

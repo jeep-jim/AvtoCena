@@ -5,7 +5,7 @@ COPY apps/web/package*.json ./apps/web/
 COPY apps/bot/package*.json ./apps/bot/
 COPY packages/engine/package*.json ./packages/engine/
 COPY packages/ui/package*.json ./packages/ui/
-RUN npm install
+RUN npm ci
 
 FROM node:22-alpine AS builder
 WORKDIR /app

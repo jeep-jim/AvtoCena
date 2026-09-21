@@ -66,7 +66,7 @@ export default async function CrmManagersPage() {
                 <div className="rounded-2xl bg-white/[.055] p-4"><div className="text-xs font-bold text-white/45">Заявки</div><div className="mt-1 text-3xl font-black">{managerLeads.length}</div></div>
                 <div className="rounded-2xl bg-white/[.055] p-4"><div className="text-xs font-bold text-white/45">Клиенты</div><div className="mt-1 text-3xl font-black">{managerClients.length}</div></div>
               </div>
-              <div className="mt-4 text-sm font-black text-red-300">Открыть и редактировать →</div>
+              <div className="mt-4 text-sm font-black text-red-300">Открыть →</div>
             </Link>
           );
         })}

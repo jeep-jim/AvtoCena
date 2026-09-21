@@ -39,6 +39,7 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
  .crm-workspace .glass:not(details){border-radius:16px!important;padding:14px!important}
  .crm-metrics{gap:8px}.crm-metrics>div{padding:12px!important}.crm-metrics .text-4xl{font-size:28px;margin-top:4px;line-height:1.1}.crm-metrics .text-sm{font-size:12px}
  .crm-workspace h2.text-2xl{font-size:19px;line-height:1.2}
+ .crm-overview-feed{margin-top:12px}.crm-overview-feed>a{padding:9px 10px;margin-top:6px}.crm-overview-feed>a>div:first-child{flex-wrap:nowrap;gap:6px}.crm-overview-feed .font-black{font-size:12px}.crm-overview-feed>a>div:first-child>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.crm-overview-feed span{flex-shrink:0;font-size:10px!important;padding:4px 7px}.crm-overview-feed .text-sm{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .crm-quick-actions a{padding:12px 8px;font-size:12px;min-height:44px}
  .crm-lead-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.crm-lead-tabs a{padding:10px 3px;text-align:center;font-size:12px}
  .crm-lead-filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:10px;gap:8px}
