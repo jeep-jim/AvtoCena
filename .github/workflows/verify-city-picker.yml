@@ -1,0 +1,41 @@
+name: Verify city picker
+on:
+  push:
+    branches: [fix/mobile-city-picker-20260921, main]
+    paths:
+      - 'apps/web/components/home/CitySelector.tsx'
+      - 'apps/web/components/leads/**'
+      - 'tests/browser/city-picker*'
+      - '.github/workflows/verify-city-picker.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: |
+          npm install --prefix "$RUNNER_TEMP/city-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+          "$RUNNER_TEMP/city-browser/node_modules/.bin/playwright" install --with-deps webkit
+      - name: Chromium first tap, keyboard viewport, nested form
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/city-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/city-picker.mjs
+      - name: WebKit first tap, keyboard viewport, nested form
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/city-browser/node_modules/playwright/index.mjs
+          CITY_BROWSER: webkit
+        run: node tests/browser/city-picker.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: city-picker
+          path: artifacts/city-picker-*
+          retention-days: 7

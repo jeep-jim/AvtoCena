@@ -1,4 +1,5 @@
 "use client";
+import { LeadCityField } from "./LeadCityField";
 import { isElectrifiedPrice } from "@/lib/catalog/electrified-price";
 import {leadFetch} from "@/lib/lead-submit-client";
 
@@ -298,7 +299,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
 
           {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
-            <div className="grid gap-3 md:grid-cols-2"><label className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><input value={form.city} onChange={(event) => setField("city", event.target.value)} autoComplete="address-level2" placeholder="Например, Москва" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label><label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
+            <div className="grid gap-3 md:grid-cols-2"><div className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div><label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 
             <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); }} />
             {contactPreference === "message" ? <MessengerFields messenger={messenger} setMessenger={setMessenger} contact={messengerContact} setContact={setMessengerContact} kind={messengerContactKind} setKind={value => {setMessengerContactKind(value);setMessengerContact(value === "phone" ? "+7" : "");}} /> : <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><PhoneInput value={form.phone} onChange={value => setField("phone", value)} /></label>}
