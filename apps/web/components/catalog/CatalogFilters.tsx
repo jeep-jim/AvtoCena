@@ -309,7 +309,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     const initialSorting = initialSort(initial.sort || "");
     const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
-    if (nextQuery === serverQuery) return;
+    if (nextQuery === serverQuery && submitted.current === null) return;
     const timer = window.setTimeout(() => {
       if(submitted.current===nextQuery)return;
       submitted.current=nextQuery;
