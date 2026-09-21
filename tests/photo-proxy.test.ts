@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {PhotoMemoryCache} from '../apps/web/lib/catalog/photo-memory-cache';
-import {protectedPhotoUrl,photoProxyEligible,validPhotoSignature} from '../apps/web/lib/catalog/photo-proxy-policy';
+import {protectedPhotoUrl,photoProxyEligible,validPhotoSignature,supportedPhotoContentType} from '../apps/web/lib/catalog/photo-proxy-policy';
 test('photo signatures bind market and exact URL; Japan, credentials, arbitrary hosts stay excluded',()=>{
  const old=process.env.AUTH_SECRET;process.env.AUTH_SECRET='test-photo-secret';
  try {
@@ -23,4 +23,11 @@ test('source rejection opens circuit, prevents repeat fetches',async()=>{
  const cache=new PhotoMemoryCache();let calls=0;const fail=async()=>{calls++;throw Error('photo_blocked');};
  await assert.rejects(cache.read('https://one.test/a',fail));
  await assert.rejects(cache.read('https://one.test/b',fail));assert.equal(calls,1);
+});
+
+test('KCar image/jpg is accepted; HTML is rejected; incompatible Mobile.de stays direct',()=>{
+ for(const type of ['image/jpg','image/jpeg','image/webp','image/png','image/avif']) assert.ok(supportedPhotoContentType(type));
+ for(const type of ['text/html','image/svg+xml','application/json','image/jpeg-malformed']) assert.equal(supportedPhotoContentType(type),false);
+ const mobile='https://img.classistatic.de/api/v1/mo-prod/images/example?rule=mo-1600';
+ assert.equal(photoProxyEligible(mobile,'europe'),false);assert.equal(protectedPhotoUrl(mobile,'europe'),mobile);
 });
