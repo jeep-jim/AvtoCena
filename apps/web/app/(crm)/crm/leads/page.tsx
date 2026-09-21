@@ -100,7 +100,7 @@ export default async function CrmLeadsPage({
       title="Заявки"
       subtitle="Обращения клиентов, автомобили и работа команды. Время указано по Москве."
     >
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="crm-lead-tabs mb-4 flex flex-wrap gap-2">
         {[
           ["all", "Активные"],
           ["my", "Мои заявки"],

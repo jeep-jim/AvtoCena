@@ -4,6 +4,8 @@ on:
     branches: [fix/crm-mobile-security-20260921, main]
     paths:
       - 'apps/web/**'
+      - 'package-lock.json'
+      - 'package.json'
       - 'tests/browser/crm-mobile*'
       - 'tests/security-response-policy.test.ts'
       - 'scripts/security-photo-audit.mjs'
@@ -42,7 +44,6 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/security-response-policy.test.ts
-      - run: npm run build
       - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Real CRM pages at four widths in both themes
         env:
