@@ -1,7 +1,7 @@
 name: Verify CRM mobile and security audit
 on:
   push:
-    branches: [fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
+    branches: [fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
     paths:
       - 'apps/web/**'
       - 'package-lock.json'

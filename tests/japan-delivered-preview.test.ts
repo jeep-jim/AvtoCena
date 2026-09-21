@@ -1,6 +1,7 @@
 import test, {mock} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { attachJapanSearchValues } from '../apps/web/lib/catalog/japan-delivered-preview';
 import { japanPreviewParameters } from '../apps/web/lib/catalog/japan-preview-parameters';
 import { validateCustomerParameters } from '../apps/web/lib/catalog/customer-parameters';
 import { calculateOfferWithCustomerParametersDetailed } from '../apps/web/lib/catalog/customs-pricing';
@@ -14,7 +15,8 @@ test('preview equals detail estimate, includes customs and leaves auction eviden
  const input=fixture(),before=JSON.stringify(input),today=new Date().toISOString();
  const markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED='true';resetCatalogRateCache();
- const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>({found:true,value:key==='fees/exchange-rates.json'?{updatedAt:today,JPY:{cbrRate:54.169,nominal:100,rateDate:today,rateSource:'cbr'},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:{}}));
+ const reads:string[]=[];
+ const read=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>(reads.push(key),{found:true,value:key==='catalog/manifest.json'?{generationId:'filter-test-japan'}:key.startsWith('catalog/runtime/japan-preview-inputs-v1/')?{version:1,generationId:'filter-test-japan',entries:{[input.id]:compactJapanPreviewInput(input)}}:key==='fees/exchange-rates.json'?{updatedAt:today,JPY:{cbrRate:54.169,nominal:100,rateDate:today,rateSource:'cbr'},EUR:{cbrRate:95,nominal:1,rateDate:today,rateSource:'cbr'},USD:{cbrRate:90,nominal:1,rateDate:today,rateSource:'cbr'}}:key==='markets/markets.json'?markets:{}}));
  try {
   const preview=await calculateOfferWithCustomerParametersDetailed(input,japanPreviewParameters(input));
   const cached=compactJapanPreviewInput(input);
@@ -25,6 +27,9 @@ test('preview equals detail estimate, includes customs and leaves auction eviden
   assert.equal(matchesJapanPreviewInput(cached,input),true);
   assert.equal(matchesJapanPreviewInput(cached,{...input,sourcePrice:input.sourcePrice+1}),false);
   assert.equal(matchesJapanPreviewInput(cached,{...input,updatedAt:'changed'}),false);
+  const enriched:any[]=await attachJapanSearchValues([input],'filter-test-japan');
+  assert.equal(enriched[0].japanDeliveredPreview?.totalRub,preview.ok?preview.calculation.totalRub:undefined);
+  assert.ok(!reads.some(key=>key.includes('detail') || key.includes('offers/')),'filter lookup must not read detail shards');
   const detail=await calculateOfferWithCustomerParametersDetailed(input,validateCustomerParameters({year:2023,fuel:'petrol',engineCc:1800,powerHp:140,powerKw:103}));
   assert.equal(preview.ok,true);assert.equal(detail.ok,true);
   if(preview.ok&&detail.ok){

@@ -1,6 +1,5 @@
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { unstable_cache } from "next/cache";
-import { getOfferForPage } from "./offer-page-data";
 import { japanPreviewParameters } from "./japan-preview-parameters";
 import { calculateOfferWithCustomerParametersDetailed } from "./customs-pricing";
 import { readDataJson } from "../data";
@@ -10,12 +9,12 @@ import { japanPreviewInputPath, matchesJapanPreviewInput, type JapanPreviewInput
 import type { VehicleOffer } from "./types";
 
 const inputs = new DetailReadCache<JapanPreviewInputIndex | null>({maxEntries:2,maxBytes:16*1024*1024,ttlMs:60_000,concurrency:1});
-async function readInputs() {
+export async function readJapanPreviewInputs() {
   const generationId = await catalogGenerationId();
   return inputs.get(generationId, () => readDataJson<JapanPreviewInputIndex | null>(japanPreviewInputPath(generationId),null));
 }
 const preview = unstable_cache(async (id: string, _revision: string, generationId: string, updatedAt: string, sourcePrice: number | null, sourceCurrency: string | null) => {
-  const index = await readInputs().catch(()=>null);
+  const index = await readJapanPreviewInputs().catch(()=>null);
   const entry = index?.version===1 && index.generationId===generationId ? index.entries?.[id] : undefined;
   if(entry && matchesJapanPreviewInput(entry,{updatedAt,sourcePrice,sourceCurrency})) {
     if(!entry.parameters)return null;
@@ -24,6 +23,7 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
       ? {totalRub:result.calculation.totalRub,deliveryPricingBasis:result.calculation.deliveryPricingBasis,engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction} : null;
   }
   // Missing/old derived index retains the authoritative full-record path.
+  const {getOfferForPage}=await import("./offer-page-data");
   const offer = await getOfferForPage(id);
   if (!offer || offer.market !== "japan" || offer.catalogPricingMode !== "seller") return null;
   let parameters;
@@ -50,4 +50,40 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
     }
   }));
   return result;
+}
+
+// One bounded derived lookup per generation/configuration, shared by filters and cards.
+// Never fetch thousands of detail shards on a public search request.
+const searchQuotes = new DetailReadCache<Record<string, any>>({maxEntries:2,maxBytes:12*1024*1024,ttlMs:300_000,concurrency:1});
+export async function japanSearchQuotes(generationId: string) {
+  const { getEffectiveMarketVersion } = await import("../effective-market-settings");
+  const configuration = await getEffectiveMarketVersion("japan");
+  const key=JSON.stringify([generationId,configuration,new Date().toISOString().slice(0,10)]);
+  return searchQuotes.get(key,async()=>{
+    const index=await readJapanPreviewInputs();
+    if(index?.version!==1 || index.generationId!==generationId) return {};
+    const quotes:Record<string,any>={};
+    const entries=Object.entries(index.entries);
+    for(let start=0;start<entries.length;start+=64){
+      await Promise.all(entries.slice(start,start+64).map(async([id,entry])=>{
+        if(!entry.parameters)return;
+        const result=await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);
+        if(result.ok && Number(result.calculation.totalRub)>0) quotes[id]={
+          updatedAt:entry.updatedAt,sourcePrice:entry.sourcePrice,sourceCurrency:entry.sourceCurrency,
+          totalRub:result.calculation.totalRub,deliveryPricingBasis:result.calculation.deliveryPricingBasis,
+          engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction};
+      }));
+      await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    return quotes;
+  });
+}
+export async function attachJapanSearchValues<T extends {id:string;market:string;updatedAt?:string;sourcePrice?:number|null;sourceCurrency?:string|null}>(rows:T[], generationId:string):Promise<T[]> {
+  if(!rows.some(row=>row.market==="japan"))return rows;
+  const quotes=await japanSearchQuotes(generationId);
+  return rows.map(row=>{
+    const quote=quotes[row.id];
+    return row.market==="japan" && quote && matchesJapanPreviewInput(quote,row as any)
+      ? {...row,japanDeliveredPreview:quote} : row;
+  });
 }

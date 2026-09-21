@@ -169,6 +169,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  japanDeliveredPreview?: {totalRub:number;engineCc?:number;estimated:boolean};
   catalogKind?: VehicleOffer["catalogKind"];
   catalogPricingMode?: "seller"; sellerPriceRub?: number;
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
@@ -442,7 +443,9 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
   for (const input of rows) {
     if (!preparedProjectionRows.has(input)) {
       const normalized = safePublicPricing(input);
-      preparedProjectionRows.set(input, projectionCanRenderCard(normalized) ? normalized : null);
+      const valid = projectionCanRenderCard(normalized) ? normalized : null;
+      preparedProjectionRows.set(input, valid);
+      if (valid) preparedProjectionRows.set(valid, valid);
     }
     const row = preparedProjectionRows.get(input);
     if (row) visible.push(row);
@@ -538,6 +541,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  filteredSearchCache.clear();
   preparedProjectionRows = new WeakMap();
   resetCatalogOverviewCache();
   manifestCache = null;
@@ -664,7 +668,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
 }
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if (isConfirmedSourceWithdrawn(row)) return false;
-  row = safePublicPricing(row);
+  row = preparedProjectionRows.get(row) || safePublicPricing(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
   if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
@@ -673,18 +677,19 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
     if (!canonicalMatch && !literalMatch) return false;
   }
-  const filterPrice = hasModificationSelection(row) ? 0 : Number(row.totalRub || 0);
+  const filterPrice = hasModificationSelection(row) ? 0 : Number(row.japanDeliveredPreview?.totalRub || row.totalRub || 0);
   if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
   if (params.hasPrice) { const value = filterPrice > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
-  if (params.budgetFrom && projectionNumber(row.totalRub, 0) < params.budgetFrom) return false;
-  if (params.budgetTo && projectionNumber(row.totalRub, Infinity) > params.budgetTo) return false;
+  if (params.budgetFrom && filterPrice < params.budgetFrom) return false;
+  if (params.budgetTo && filterPrice > params.budgetTo) return false;
   if (params.yearFrom && Number(row.year || 0) < params.yearFrom) return false;
   if (params.yearTo && Number(row.year || 0) > params.yearTo) return false;
   if (params.mileageFrom && projectionNumber(row.mileageKm, 0) < params.mileageFrom) return false;
   if (params.mileageTo && projectionNumber(row.mileageKm, Infinity) > params.mileageTo) return false;
-  if ((params.engineFrom || params.engineTo) && !(Number(row.engineCc) > 0)) return false;
-  if (params.engineFrom && projectionNumber(row.engineCc, 0) < params.engineFrom) return false;
-  if (params.engineTo && projectionNumber(row.engineCc, Infinity) > params.engineTo) return false;
+  const engineCc = row.engineCc || row.japanDeliveredPreview?.engineCc;
+  if ((params.engineFrom || params.engineTo) && !(Number(engineCc) > 0)) return false;
+  if (params.engineFrom && projectionNumber(engineCc, 0) < params.engineFrom) return false;
+  if (params.engineTo && projectionNumber(engineCc, Infinity) > params.engineTo) return false;
   if (params.powerFrom || params.powerTo) {
     // This public control explains the utilization-fee threshold, so EVs and
     // hybrids must be filtered by the certified calculation power rather than
@@ -706,7 +711,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
 export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
-  const price = (row: CatalogSearchProjection, missing: number) => !hasModificationSelection(row) && Number(row.totalRub) > 0 ? Number(row.totalRub) : missing;
+  const price = (row: CatalogSearchProjection, missing: number) => !hasModificationSelection(row) && Number(row.japanDeliveredPreview?.totalRub || row.totalRub) > 0 ? Number(row.japanDeliveredPreview?.totalRub || row.totalRub) : missing;
   return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
     : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
@@ -798,7 +803,11 @@ export async function readPublicCatalogMarketCounts() {
 
 export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   const filters: CatalogSearchParams = { ...params, make: undefined };
-  const { generationId, rows } = await currentProjectionRows(filters);
+  let { generationId, rows } = await currentProjectionRows(filters);
+  if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
+    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+    rows=await attachJapanSearchValues(rows,generationId);
+  }
   const modelKeys = await projectionModelKeys(filters);
   const counts = new Map<string, number>();
   const models = new Map<string, Set<string>>();
@@ -824,7 +833,11 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
 
 export async function readCatalogBrandModelCounts(make: string) {
   const filters: CatalogSearchParams = { make };
-  const { generationId, rows } = await currentProjectionRows(filters);
+  let { generationId, rows } = await currentProjectionRows(filters);
+  if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
+    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+    rows=await attachJapanSearchValues(rows,generationId);
+  }
   const models = new Map<string, CatalogBrandSummaryModel>();
   for (const row of rows) {
     if (!catalogSearchProjectionMatches(row, filters)) continue;
@@ -901,6 +914,10 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
     };
   }
   const modelKeys = await projectionModelKeys(params);
+  if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice) {
+    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+    rows=await attachJapanSearchValues(rows,generationId);
+  }
   const offers = rows.filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
   const values = (selector: (offer: CatalogSearchProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
   const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()]
@@ -1518,7 +1535,27 @@ export async function getOffer(id: string) {
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
   return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
 }
+const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:8});
 export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48) {
+  const manifest=await readManifest();
+  const key=JSON.stringify([manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+  return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
+}
+async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
+  if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub")) {
+    const {generationId,rows}=await currentProjectionRows(params);
+    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+    const prepared=await attachJapanSearchValues(rows,generationId);
+    const modelKeys=await projectionModelKeys(params);
+    const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
+    sortCatalogSearchRows(matching,params);
+    const page=Math.max(1,Number(params.page||1));
+    const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
+    return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:[]};
+  }
+  return searchOffersStored(params,internalPageLimit);
+}
+async function searchOffersStored(params: CatalogSearchParams, internalPageLimit = 48) {
   const page = Math.max(1, Number(params.page || 1));
   const pageSize = Math.min(Math.max(1, Math.min(384, internalPageLimit)), Math.max(1, Number(params.pageSize || 24)));
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {

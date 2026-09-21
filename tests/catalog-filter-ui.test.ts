@@ -26,7 +26,7 @@ test("catalog filters apply automatically and show the active query", () => {
   assert.doesNotMatch(source, /Показать автомобили/);
   assert.doesNotMatch(source, /type="submit"/);
   assert.match(source, /aria-label="Выбранные параметры"/);
-  assert.match(source, /key=\{`desktop-\$\{formKey\}`\}/);
+  assert.doesNotMatch(source, /key=\{`desktop-\$\{formKey\}`\}/, "a completed response must not remount the active input");
   assert.match(source, /key=\{`mobile-\$\{formKey\}`\}/);
 });
 

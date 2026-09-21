@@ -1,11 +1,12 @@
 "use client";
+import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
 import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
 
 import "./MobileCatalogDropdowns.css";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
 import { CatalogBrandMultiSelect } from "@/components/catalog/CatalogBrandMultiSelect";
@@ -190,17 +191,20 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
   useEffect(() => setFromText(fromValue), [fromValue]);
   useEffect(() => setToText(toValue), [toValue]);
 
-  const digits = (value: string) => String(value || "").replace(/[^0-9]/g, "").slice(0, 10);
+  const isEngine = fromName === "engineFrom";
+  const digits = (value: string) => isEngine ? value.slice(0, 20) : String(value || "").replace(/[^0-9]/g, "").slice(0, 10);
   const normalize = (value: string) => {
     const raw = digits(value);
     if (!raw) return "";
-    const numeric = Math.min(max, Math.max(min, Number(raw)));
-    const snapped = step > 1 ? Math.round(numeric / step) * step : Math.round(numeric);
+    const numeric = Math.min(max, Math.max(min, isEngine ? (parseEngineCc(raw) ?? Number.NaN) : Number(raw)));
+    if (!Number.isFinite(numeric)) return raw;
+    const snapped = Math.round(numeric);
     return String(Math.min(max, Math.max(min, snapped)));
   };
   const commit = (side: "from" | "to") => {
     let nextFrom = normalize(fromText);
     let nextTo = normalize(toText);
+    if (isEngine && ((nextFrom && !parseEngineCc(nextFrom)) || (nextTo && !parseEngineCc(nextTo)))) return;
     if (nextFrom && nextTo && Number(nextFrom) > Number(nextTo)) {
       if (side === "from") nextTo = nextFrom;
       else nextFrom = nextTo;
@@ -240,8 +244,8 @@ function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step
       {fromValue || toValue ? <button type="button" onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
     </div>
     <div className="mt-3 grid grid-cols-2 gap-2">
-      <label className="ac-range-input-wrap"><span>От</span><div className="ac-range-input-box"><input inputMode="numeric" autoComplete="off" value={fromText} onChange={(event) => setFromText(digits(event.target.value))} onBlur={() => commit("from")} onKeyDown={keyHandler("from")} placeholder="Не важно" aria-label={`${title}: от`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
-      <label className="ac-range-input-wrap"><span>До</span><div className="ac-range-input-box"><input inputMode="numeric" autoComplete="off" value={toText} onChange={(event) => setToText(digits(event.target.value))} onBlur={() => commit("to")} onKeyDown={keyHandler("to")} placeholder="Не важно" aria-label={`${title}: до`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
+      <label className="ac-range-input-wrap"><span>От</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={fromText} onChange={(event) => setFromText(digits(event.target.value))} onBlur={() => commit("from")} onKeyDown={keyHandler("from")} placeholder="Не важно" aria-label={`${title}: от`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
+      <label className="ac-range-input-wrap"><span>До</span><div className="ac-range-input-box"><input inputMode={isEngine ? "decimal" : "numeric"} autoComplete="off" title={isEngine ? "Например: 1,5 л или 1498 см³" : undefined} value={toText} onChange={(event) => setToText(digits(event.target.value))} onBlur={() => commit("to")} onKeyDown={keyHandler("to")} placeholder="Не важно" aria-label={`${title}: до`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
     </div>
     <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
     <input type="hidden" name={fromName} value={fromValue} /><input type="hidden" name={toName} value={toValue} />
@@ -271,6 +275,8 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 
 export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
   const router = useRouter();
+  const [pending,startTransition]=useTransition();
+  const submitted=useRef<string|null>(null);
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
   const [draft, setDraft] = useState<FilterDraft>(() => draftFromInitial(initial));
   const initialSortState = useMemo(() => initialSort(initial.sort || ""), [initial.sort]);
@@ -287,6 +293,10 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
   useEffect(() => {
     if (mobileOpen) return;
+    const incomingSort=initialSort(initial.sort || "");
+    const incoming=catalogQuery(draftFromInitial(initial),incomingSort.key,incomingSort.direction);
+    if(submitted.current!==null && incoming!==submitted.current) return;
+    submitted.current=null;
     setDraft(draftFromInitial(initial));
     const nextSort = initialSort(initial.sort || "");
     setSortKey(nextSort.key);
@@ -301,7 +311,12 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
     if (nextQuery === serverQuery) return;
     const timer = window.setTimeout(() => {
-      router.push(nextQuery ? `/cars?${nextQuery}` : "/cars", { scroll: false });
+      if(submitted.current===nextQuery)return;
+      submitted.current=nextQuery;
+      const query=new URLSearchParams(nextQuery);
+      const current=new URLSearchParams(window.location.search);
+      for(const key of ["city","utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
+      startTransition(()=>router.push(query.size ? `/cars?${query}` : "/cars", { scroll: false }));
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
@@ -395,8 +410,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "totalRub") setSortDirection("asc");
     if (key === "year") setSortDirection("desc");
   };
-  return <><CatalogFilterUiEnhancer />
-    <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
+  return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
+    <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
