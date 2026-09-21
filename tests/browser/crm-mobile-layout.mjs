@@ -24,11 +24,11 @@ const server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
-const results=[];
+const results=[],failures=[];
 try{
  for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of ['overview','leads','team','settings','clients']){
   const page=await browser.newPage({viewport:{width,height:850}});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('**/api/**',r=>r.fulfill({json:{ok:true,leads:[]}}));
+  await page.route('**/api/**',r=>r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
    await page.locator('.crm-content').waitFor();
@@ -58,7 +58,7 @@ try{
    await page.mouse.move(width-4,400);await page.mouse.wheel(0,500);await page.waitForTimeout(150);
    assert.ok(await page.locator('.crm-header').evaluate(e=>Math.abs(e.getBoundingClientRect().top)<1),'header remains at top');
    assert.deepEqual(errors,[]);results.push({kind,width,theme,passed:true});
-  }catch(e){fs.writeFileSync(out+'/failure.json',JSON.stringify({kind,width,theme,error:String(e),errors},null,2));await page.screenshot({path:out+'/failure.png',fullPage:true}).catch(()=>{});throw e;}finally{await page.close();}
+  }catch(e){fs.writeFileSync(`${out}/failure-${kind}-${theme}-${width}.json`,JSON.stringify({kind,width,theme,error:String(e),errors},null,2));await page.screenshot({path:`${out}/failure-${kind}-${theme}-${width}.png`,fullPage:true}).catch(()=>{});failures.push({kind,width,theme,error:String(e),errors});}finally{await page.close();}
  }
- fs.writeFileSync(out+'/results.json',JSON.stringify(results,null,2));console.log(JSON.stringify({cases:results.length,passed:true}));
+ fs.writeFileSync(out+'/results.json',JSON.stringify({results,failures},null,2));assert.deepEqual(failures,[]);console.log(JSON.stringify({cases:results.length,passed:true}));
 }finally{await browser.close();server.close();}

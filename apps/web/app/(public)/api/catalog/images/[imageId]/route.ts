@@ -31,8 +31,8 @@ async function readCatalogImage(imageId: string) {
     : null;
 }
 
-export async function GET(request: Request, { params }: { params: { imageId: string } }) {
-  const image = await readCatalogImage(params.imageId);
+export async function GET(request: Request, { params }: { params: Promise<{ imageId: string }> }) {
+  const image = await readCatalogImage((await params).imageId);
   if (!image) return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
   const etag = `"${image.checksum}"`;
   if (request.headers.get("if-none-match") === etag) return new Response(null, { status: 304, headers: { etag } });

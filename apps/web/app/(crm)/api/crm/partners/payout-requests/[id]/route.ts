@@ -26,7 +26,7 @@ function clean(value: unknown, maxLength = 1000) {
 
 export async function PATCH(
   request: Request,
-  context: { params: { id: string } },
+  context: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
   if (!user || !isAdminRole(user.role)) {
@@ -41,7 +41,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
   }
 
-  const requestId = clean(context.params.id, 200);
+  const requestId = clean((await context.params).id, 200);
   const existing = (await readChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     [],

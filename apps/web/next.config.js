@@ -3,11 +3,11 @@ const path = require("path");
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: "standalone",
+  outputFileTracingRoot: path.join(__dirname, "../.."),
 
   experimental: {
     // Yandex forwards its internal container host; accept only our public origins.
-    serverActions: { allowedOrigins: ["avtocena.com", "www.avtocena.com"] },
-    outputFileTracingRoot: path.join(__dirname, "../..")
+    serverActions: { allowedOrigins: ["avtocena.com", "www.avtocena.com"] }
   },
 
   async headers() {

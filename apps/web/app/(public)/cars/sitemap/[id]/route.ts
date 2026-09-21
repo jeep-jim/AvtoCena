@@ -20,8 +20,8 @@ function parseSitemapId(raw: string) {
   return Number.isSafeInteger(id) && id >= 0 ? id : null;
 }
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
-  const id = parseSitemapId(params.id);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const id = parseSitemapId((await params).id);
   if (id === null) return new Response("Not Found", { status: 404 });
 
   const projection = await readAiSitemapProjection();
