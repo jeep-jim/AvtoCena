@@ -20,7 +20,7 @@ export default async function CrmClientsPage() {
   return (
     <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Ручное добавление клиентов и карточки обращений.">
       <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
-        <ClientCreateForm />
+        <details className="crm-calculator-disclosure self-start"><summary>Добавить клиента</summary><ClientCreateForm /></details>
 
         <div className="glass overflow-hidden rounded-[2rem]">
           <div className="border-b border-white/10 p-5">

@@ -23,7 +23,7 @@ export default async function CrmPage() {
 
   return (
     <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="crm-metrics grid grid-cols-2 gap-3 md:grid-cols-4">
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Все лиды</div><div className="mt-2 text-4xl font-black">{leads.length}</div></div>
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Мои заявки</div><div className="mt-2 text-4xl font-black">{myLeads.length}</div></div>
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Клиенты</div><div className="mt-2 text-4xl font-black">{clients.length}</div></div>
@@ -55,7 +55,7 @@ export default async function CrmPage() {
         <div className="grid gap-5">
           <div className="glass rounded-[2rem] p-6">
             <h2 className="text-2xl font-black">Быстрые действия</h2>
-            <div className="mt-5 grid gap-3">
+            <div className="crm-quick-actions mt-5 grid grid-cols-2 gap-3">
               <Link href="/crm/clients" className="avto-button rounded-2xl px-5 py-4 text-center font-black">Добавить клиента</Link>
               <Link href="/crm/leads?view=my" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Мои заявки</Link>
               <Link href="/crm/managers" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Менеджеры</Link>

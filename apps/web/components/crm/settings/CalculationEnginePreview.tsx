@@ -137,10 +137,8 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               <span className="rounded-full bg-white/8 px-2.5 py-1 text-[11px] font-black text-white/55">RF {vehicleCategory} · 2026</span>
               {resolved.estimated ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">коммерческие расходы: средний профиль</span> : null}
             </div>
-            <h2 className="text-2xl font-black md:text-3xl">Как сайт считает цену прямо сейчас</h2>
-            <p className="mt-2 text-sm font-bold leading-6 text-white/52">
-              Это не справочная таблица с продублированными формулами. Блок запускает то же ядро таможни, ту же таблицу утильсбора 2026, тот же курс и тот же коммерческий калькулятор, которыми считаются публичные карточки. Меняется ядро или активная версия рынка — меняется и этот контрольный расчёт.
-            </p>
+            <h2 className="text-2xl font-black md:text-3xl">Параметры расчёта</h2>
+            <p className="mt-2 text-sm text-white/52">Проверка расчёта по действующим настройкам сайта.</p>
           </div>
           <div className="rounded-2xl bg-white/[.055] px-4 py-3 text-right">
             <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">активная конфигурация</div>
@@ -149,7 +147,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         </div>
       </div>
 
-      <form method="get" action="/crm/settings" className="grid gap-3 border-b border-white/8 p-5 md:grid-cols-2 md:p-6 xl:grid-cols-4">
+      <form method="get" action="/crm/settings" className="crm-calculation-fields grid grid-cols-2 gap-3 border-b border-white/8 p-5 md:p-6 xl:grid-cols-4">
         <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
           Рынок
           <select name="calcMarket" defaultValue={marketId} className={inputClass()}>
@@ -196,7 +194,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2 xl:col-span-4">Пересчитать тем же движком, что и сайт</button>
       </form>
 
-      <div className="grid gap-3 p-5 md:grid-cols-2 md:p-6 xl:grid-cols-5">
+      <div className="crm-calculation-totals grid grid-cols-2 gap-3 p-5 md:p-6 xl:grid-cols-5">
         <div className="rounded-2xl bg-white/[.055] p-4">
           <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">цена после курса</div>
           <div className="mt-2 text-2xl font-black">{sourceRate ? rub(sourceRate.sourcePriceRub) : "нет курса"}</div>

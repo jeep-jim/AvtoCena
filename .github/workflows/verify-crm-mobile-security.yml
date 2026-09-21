@@ -1,0 +1,62 @@
+name: Verify CRM mobile and security audit
+on:
+  push:
+    branches: [fix/crm-mobile-security-20260921, main]
+    paths:
+      - 'apps/web/**'
+      - 'tests/browser/crm-mobile*'
+      - 'tests/security-response-policy.test.ts'
+      - 'scripts/security-photo-audit.mjs'
+      - '.github/workflows/verify-crm-mobile-security.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read public headers, photo hosts and existing cloud configuration
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: node scripts/security-photo-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-photo-audit
+          path: artifacts/security-photo-audit
+          retention-days: 14
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/security-response-policy.test.ts
+      - run: npm run build
+      - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Real CRM pages at four widths in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/crm-mobile-layout.mjs
+      - name: Public dropdown and calculation regression
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crm-mobile-layout
+          path: |
+            artifacts/crm-mobile
+            artifacts/attached-parameters-*
+          retention-days: 14

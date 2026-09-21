@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../flat-ui.css";
+import "./crm-responsive.css";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false }

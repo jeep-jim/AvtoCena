@@ -1,3 +1,4 @@
+import "./select-controls.css";
 import "./globals.css";
 import "./catalog-ui.css";
 import "./public-polish.css";
