@@ -75,3 +75,27 @@ jobs:
             artifacts/crm-mobile
             artifacts/attached-parameters-*
           retention-days: 14
+  live:
+    if: github.ref == 'refs/heads/main'
+    needs: [audit, browser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify published offer pages without submitting forms
+        env:
+          LIVE_ORIGIN: https://avtocena.com
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/crm-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/attached-parameter-dropdowns.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crm-security-live-offers
+          path: artifacts/attached-parameters-live
+          retention-days: 14
