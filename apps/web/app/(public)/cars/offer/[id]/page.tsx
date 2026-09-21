@@ -1,3 +1,4 @@
+import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";
 import { readCrmUsers } from "@/lib/crm-users";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
@@ -432,6 +433,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
           <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus} />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
+          <OfferFinanceCards />
         </div>
 
         <StickyOfferColumn>
