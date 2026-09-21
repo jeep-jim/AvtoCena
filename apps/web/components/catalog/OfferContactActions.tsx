@@ -7,9 +7,9 @@ function PhoneIcon() {
 }
 
 function ActionButtons({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {
-  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-2 text-[12px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-3 sm:text-sm md:px-12 md:text-base xl:h-14";
+  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-11 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-12 sm:text-sm md:px-12 md:text-base xl:h-14";
   return <div className={`grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку</span></button>
+    <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку на расчёт</span></button>
     <ShareLinkButton className={`${buttonClass} bg-[#00A2E8]`} />
   </div>;
 }
@@ -21,7 +21,7 @@ export function OfferDesktopActions() {
 export function OfferMobileActions() {
   // Remain in document flow. The former body portal measured the page before
   // layout settled, briefly placing these controls at the viewport origin.
-  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons /></div>;
+  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons stacked /></div>;
 }
 
 export function OfferCreditCalculator() {

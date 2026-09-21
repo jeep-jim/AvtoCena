@@ -1,3 +1,4 @@
+import { flushCrmPush } from "../apps/web/lib/crm-push";
 import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
 import { enablePolling, pollingEnabled, pollBatch, eventDrivenEnabled } from "../apps/web/lib/crm-polling";
@@ -63,6 +64,7 @@ export async function runPolling() {
     !eventDriven,
   );
   await flushCrmNotifications(3);
+  await flushCrmPush(10).catch(() => undefined);
   console.log(`Telegram polling: processed=${result.processed}, inactiveOrBusy=${result.inactiveOrBusy}`);
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runPolling().catch(() => {

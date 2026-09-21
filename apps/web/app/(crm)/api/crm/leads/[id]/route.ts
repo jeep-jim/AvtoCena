@@ -1,3 +1,5 @@
+import { after } from "next/server";
+import { flushCrmPush } from "@/lib/crm-push";
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
@@ -207,5 +209,6 @@ export async function PATCH(
     }
   }
 
+  if (managerChanged) after(() => flushCrmPush(5).catch(() => undefined));
   return NextResponse.json({ ok: true, lead: updatedLead });
 }

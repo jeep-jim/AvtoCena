@@ -1,3 +1,4 @@
+import { protectedPhotoUrl } from "./photo-proxy-policy";
 import { matchesFuelFilter } from "./fuel-filter";
 import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
@@ -179,7 +180,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -457,9 +458,9 @@ function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   row = safePublicPricing(row);
   const { sourceGroup: _sourceGroup, ...publicRow } = row;
-  const imageUrl = String(row.cardImageUrl || "");
+  const imageUrl = protectedPhotoUrl(String(row.cardImageUrl || ""), row.market);
   return {
-    ...publicRow, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
+    ...publicRow, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
     sourcePrice: row.sourcePrice ?? null, sourceCurrency: row.sourceCurrency ?? null,
     images: imageUrl ? [{ id: "", url: imageUrl, width: undefined, height: undefined, size: 0, mimeType: "image/jpeg" }] : [],
     firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",

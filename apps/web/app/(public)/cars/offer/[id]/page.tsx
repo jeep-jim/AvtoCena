@@ -1,3 +1,4 @@
+import { protectedPhotoUrl } from "@/lib/catalog/photo-proxy-policy";
 import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";
 import { readCrmUsers } from "@/lib/crm-users";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
@@ -347,7 +348,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     previousTotalRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.previousTotalRub : null,
     priceDeltaRub: visibleRub && !selectionRequired && !customerScenarioRub ? presented.priceDeltaRub : null,
     // Rank before the public DTO removes the source identity and image checksums.
-    images: rankedCatalogImageUrls(pricedOffer),
+    images: rankedCatalogImageUrls(pricedOffer).map(url => protectedPhotoUrl(url, pricedOffer.market)),
   };
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");

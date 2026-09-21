@@ -8,6 +8,7 @@ function blockFor(userAgent: string) {
     `User-agent: ${userAgent}`,
     "Allow: /",
     "Allow: /api/catalog/images/",
+    "Allow: /api/catalog/photo/",
     ...PRIVATE_PATHS.map((path) => `Disallow: ${path}`),
   ].join("\n");
 }
