@@ -64,7 +64,7 @@ export function LeadCaptureInteractionEnhancer() {
       const wrapper = dialog.parentElement as HTMLElement | null;
       const handle = wrapper?.querySelector<HTMLElement>(".ac-lead-sheet-handle") || null;
       const closeButton = dialog.querySelector<HTMLButtonElement>('button[aria-label="Закрыть"]');
-      const cityInput = dialog.querySelector<HTMLInputElement>('input[autocomplete="address-level2"]');
+      const cityInput = dialog.querySelector<HTMLInputElement>('input[autocomplete="address-level2"]:not([data-native-city])');
       const cityLabel = cityInput?.closest<HTMLLabelElement>("label") || null;
 
       let drag: DragState | null = null;

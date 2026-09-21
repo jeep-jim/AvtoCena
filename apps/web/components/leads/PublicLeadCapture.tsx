@@ -1,4 +1,5 @@
 "use client";
+import { LeadCityField } from "./LeadCityField";
 import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
@@ -336,7 +337,7 @@ function LeadDialog({
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
 
             <div className="grid gap-3 md:grid-cols-2">
-              <label className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><input value={form.city} onChange={(event) => setField("city", event.target.value)} autoComplete="address-level2" placeholder="Например, Новокузнецк" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
+              <div className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div>
               <label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>
             </div>
 
