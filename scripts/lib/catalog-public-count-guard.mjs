@@ -8,8 +8,10 @@ export function catalogPublicCountGuard(previous, next, withdrawn = {}, ratio = 
     const remaining = Math.max(0, count - Math.min(count, withdrawn[source] || 0));
     baseline += remaining;
     // Autohome is a capped supplement (<=10%), never a guaranteed minimum inventory.
-    // A few independently rejected rows must not freeze an otherwise healthy market.
-    const minimum = source === 'autohome_new_china_open' ? 0
+    // Tiny source samples (<20 listings) are monitored separately; losing six
+    // rows must not freeze a healthy eight-thousand-car market. The total
+    // market and every substantial source still require at least 90%.
+    const minimum = source === 'autohome_new_china_open' || Number(count) < 20 ? 0
       : Math.min(Math.ceil(remaining * ratio), Math.max(remaining ? 1 : 0, remaining - 2));
     const actual = next[source] || 0;
     if (actual < minimum) failures.push({source, previous:count, confirmedWithdrawals:withdrawn[source] || 0, minimum, actual});

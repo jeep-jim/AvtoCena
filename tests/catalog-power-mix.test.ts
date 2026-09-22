@@ -52,3 +52,18 @@ test("recovering power keeps existing cars and reserves remaining allowance for 
  assert.equal((result.report.korea as any).targetMet,false);
  assert.equal(selectCatalogPowerMix(retained,{retainedIds:new Set(['existing1','existing2'])}).rows.length,2);
 });
+
+test('verified low-power replacements improve the mix without reducing the fixed public count',()=>{
+ const old=[...Array.from({length:4},(_,i)=>row('old-low'+i,100)),...Array.from({length:8},(_,i)=>row('old-high'+i,300))];
+ const options={retainedIds:new Set(old.map(r=>r.id)),minimumCountByMarket:{europe:12}};
+ const fresh=Array.from({length:4},(_,i)=>row('new-low'+i,140));
+ const result=selectCatalogPowerMix([...old,...fresh],options);
+ assert.equal(result.rows.length,12);assert.equal(result.removed.length,4);
+ assert.equal(result.rows.filter(r=>catalogPowerBand(r)==='low').length,8);
+ const again=selectCatalogPowerMix(result.rows,options);
+ assert.deepEqual(again.rows,result.rows);assert.equal(again.removed.length,0);
+ const fulfilled=selectCatalogPowerMix([...old,...fresh,row('extra-low1',100),row('extra-low2',110)],options);
+ assert.equal(fulfilled.rows.length,12);assert.equal((fulfilled.report.europe as any).targetMet,true);
+ assert.equal(selectCatalogPowerMix(old,options).rows.length,12);
+ assert.throws(()=>selectCatalogPowerMix(old,{...options,minimumCountByMarket:{europe:NaN}}),/invalid_power_mix_minimum/);
+});

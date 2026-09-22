@@ -26,13 +26,13 @@ export function selectChinaSourceShare<T extends Partial<VehicleOffer>>(rows: re
 }
 
 /** Both quotas must hold after all removals, not just before canonicalization. */
-export function selectCatalogPublicationMix<T extends Partial<VehicleOffer>>(rows: readonly T[], enforcePower: boolean, retainedPowerIds?: ReadonlySet<string>) {
+export function selectCatalogPublicationMix<T extends Partial<VehicleOffer>>(rows: readonly T[], enforcePower: boolean, retainedPowerIds?: ReadonlySet<string>, minimumCountByMarket?: Readonly<Record<string, number>>) {
   let current = [...rows];
   const sourceRemoved: T[] = [], powerRemoved: T[] = [];
   while (true) {
     const source = selectChinaSourceShare(current);
     sourceRemoved.push(...source.removed);
-    const power = enforcePower ? selectCatalogPowerMix(source.rows,{retainedIds:retainedPowerIds})
+    const power = enforcePower ? selectCatalogPowerMix(source.rows,{retainedIds:retainedPowerIds,minimumCountByMarket})
       : { rows: source.rows, removed: [] as T[], report: {} };
     powerRemoved.push(...power.removed);
     const finalSource = selectChinaSourceShare(power.rows);
