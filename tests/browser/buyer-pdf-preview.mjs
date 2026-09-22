@@ -26,7 +26,9 @@ try{
   await page.locator('.ac-buyers-rail img').first().waitFor();await page.waitForFunction(()=>document.querySelector('.ac-buyers-rail img')?.naturalWidth>0);
   assert.ok(!requests.some(url=>/\/buyers\/\d+\.jpg/.test(url)),'homepage must not request original JPEGs');
   assert.ok(!requests.some(url=>url.includes('/pdfjs/')),'PDF worker must not load before preview');
-  await page.locator('.ac-buyers-rail button').first().click();const gallery=page.getByRole('dialog',{name:'Фотографии клиентов TopAvto'});await gallery.waitFor();await page.waitForFunction(()=>document.querySelector('[role=dialog] img')?.naturalWidth>0);
+  // The rail moves continuously; use a real pointer tap instead of waiting for a stationary element.
+  const point=await page.locator('.ac-buyers-rail').evaluate(el=>{const r=el.getBoundingClientRect();return {x:r.left+Math.min(90,r.width/2),y:r.top+Math.min(50,r.height/2)};});
+  if(width<500)await page.touchscreen.tap(point.x,point.y);else await page.mouse.click(point.x,point.y);const gallery=page.getByRole('dialog',{name:'Фотографии клиентов TopAvto'});await gallery.waitFor();await page.waitForFunction(()=>document.querySelector('[role=dialog] img')?.naturalWidth>0);
   assert.match(await gallery.locator('img').first().getAttribute('src'),/-1280.webp$/);if(width===390&&theme==='light')await page.screenshot({path:`${out}/buyer-photo.png`});await gallery.getByRole('button',{name:'Закрыть',exact:true}).click();
   const trigger=page.getByRole('button',{name:'PDF текущей карточки'}).filter({visible:true});
   await trigger.click();await page.getByRole('button',{name:'Просмотреть',exact:true}).click();
