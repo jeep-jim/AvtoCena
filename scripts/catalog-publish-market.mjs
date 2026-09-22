@@ -316,8 +316,8 @@ function logPublicationMemory(stage) {
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
 }
 if (!dryRun) await acquirePublishLock();
-const expectedBaseGenerationId = await catalogGenerationId();
 try {
+const expectedBaseGenerationId = await catalogGenerationId();
 logPublicationMemory("before_intake");
 const generation = await readGenerationFiles();
 logPublicationMemory("intake_loaded");
