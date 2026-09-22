@@ -1,3 +1,4 @@
+import {readFileSync} from "node:fs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selectRelatedOfferGroups} from '../apps/web/lib/catalog/related-offer-selection';
@@ -21,4 +22,9 @@ test('unrenderable candidates are skipped and each recommendation group is bound
  const calls:number[]=[];const candidates=Array.from({length:30},(_,i)=>({...row('model-'+i),totalRub:i<4?0:1}));
  const groups=await select({modelRows:candidates,price:async(rows:any[])=>{calls.push(rows.length);return rows;}});
  assert.equal(groups.sameModel.length,4);assert.deepEqual(calls,[4,4]);assert.equal(groups.sameModel[0].id,'model-4');
+});
+
+test('detail recommendations retain trusted source identity after publicOffer sanitization',()=>{
+ const page=readFileSync('apps/web/app/(public)/cars/offer/[id]/page.tsx','utf8');
+ assert.match(page,/<SimilarOffers current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
 });
