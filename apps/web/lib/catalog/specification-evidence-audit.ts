@@ -1,3 +1,4 @@
+import { isGreenCornerOffer } from "./green-corner-contract";
 import type { VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
 
@@ -71,6 +72,15 @@ function unsafeKnowledgeState(offer: Partial<VehicleOffer>, fields: string[]) {
 
 function provenance(offer: Partial<VehicleOffer>, evidenceKeys: string[], knowledgeFields: string[]) {
   if (explicitEvidenceState(offer, evidenceKeys) === "exact") return "source_evidence" as const;
+  // This adapter copies engineVolumeNum directly from the identified Akebono lot.
+  // Older stock snapshots predate semanticEvidence; retain that source value
+  // through detail safety checks instead of making the customer re-enter it.
+  const snapshot = offer.operational?.sourceSpecifications;
+  if (evidenceKeys.length === 1 && evidenceKeys[0] === "engineCc"
+    && isGreenCornerOffer(offer) && snapshot?.sourceId === offer.sourceId
+    && snapshot.sourceOfferId === offer.sourceOfferId
+    && offer.id === `green-${offer.sourceOfferId}`
+    && snapshot.specificationId === offer.id) return "source_evidence" as const;
   if (knowledgeApplied(offer, knowledgeFields)) return "knowledge_core" as const;
   return "stored_unclassified" as const;
 }

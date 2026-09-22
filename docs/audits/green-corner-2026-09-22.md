@@ -51,3 +51,14 @@ Checks so far: typecheck and 27 targeted tests pass, including source-field rete
 PR #1129 merged as ec316a07f1a738ca888a3b7f8840db5dc2d9188f. CI 35717343601 and Yandex deployment 35717742789 succeeded. Refresh 35717742860 published 447/447 at 2026-09-22T10:46:43.815Z, no exclusions. Live health returned that release SHA; live green-727977 contains the retained Akebono technical table and stock status. Live home All-button computed colors are #047857 / white in both themes. Local browser verified 390/1440 widths, both themes, 24→48 append, no overflow/errors, mobile year apply and stock→auction navigation preserving year.
 
 The standalone esbuild load-more fixture initially failed because its server-action stub did not cover the newly imported Green helper. Updated its stub and verified append/retry/final batch/back-scroll/pagination on both viewports. Production stock append was not confirmed by the initial browser run; switch stock pagination to a bounded public GET API, returning only public offer DTOs and keeping the same shared client controls. This removes dependence on POST server-action routing for fixed-stock reads. Follow-up deployment verification pending at this checkpoint.
+
+
+### Mobile cleanup and known displacement follow-up
+
+The public GET pagination follow-up was merged/deployed as 764b416e35fe3af2c063f70f370f03abcdf3bd7c (PR #1130). CI 35718851305, deploy 35719372403 and browser gate 35719372512 succeeded; live append 24→48 and Honda/year/power filters passed.
+
+User-requested cleanup: keep red/green Japan switches on one row at mobile widths; remove the duplicate catalog-back text link and technical FOB/logistics prose from the landing page, home rail and Green seller-price popup. Preserve truthful price labels and the existing price-structure calculation.
+
+Root cause of the missing detail displacement: the Green adapter copies engineVolumeNum, but the detail safety audit classified it as unproven and removed it. Recognize the adapter's source value only for Green offers with matching source, lot and specification identities. Explicit ambiguity/conflicts still fail the earlier guard, other sources retain existing behavior, and missing fuel remains missing. No snapshot reimport is required.
+
+Validation: typecheck and 22 targeted Green/safe-public-pricing tests passed. Browser checked 320/390/1440px in both themes: switches share a row and height, white text/green background, no horizontal overflow. Live publication and Honda detail verification will be recorded in the PR checkpoint.
