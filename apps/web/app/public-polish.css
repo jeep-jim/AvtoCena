@@ -455,11 +455,11 @@ html body .ac-offer-page .ac-cost-row { display:grid; grid-template-columns:minm
 /* Japan fixed-stock accents stay legible after both theme enhancers run. */
 html body .ac-page-copy .ac-green-button,
 html[data-theme="light"] body .ac-page-copy .ac-green-button {
- background:#047857!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
  border:0!important;text-decoration:none!important;
 }
-html body .ac-page-copy .ac-green-heading {color:#34d399!important;-webkit-text-fill-color:#34d399!important;}
-html[data-theme="light"] body .ac-page-copy .ac-green-heading {color:#047857!important;-webkit-text-fill-color:#047857!important;}
+html body .ac-page-copy .ac-green-heading {color:var(--ac-stock-accent)!important;-webkit-text-fill-color:var(--ac-stock-accent)!important;}
+html[data-theme="light"] body .ac-page-copy .ac-green-heading {color:var(--ac-stock-accent)!important;-webkit-text-fill-color:var(--ac-stock-accent)!important;}
 .ac-japan-sections a {display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:48px;padding:12px 8px;border-radius:12px;text-align:center;line-height:1.25;font-size:clamp(11px,3.2vw,14px);white-space:nowrap;}
 html body .ac-page-copy .ac-auction-button {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
 .ac-japan-sections a[aria-current="page"] {box-shadow:0 0 0 2px var(--ac-surface),0 0 0 4px var(--ac-muted);}
@@ -477,6 +477,13 @@ html[data-theme="light"] body .ac-page-copy .ac-directory-search {background:#ff
 .ac-directory-search input::-webkit-search-decoration {display:none;-webkit-appearance:none;}
 /* Carry the stock section's soft emerald tint on each preview instead of a surrounding panel. */
 html body .ac-catalog-card[data-green-corner="true"],
-html body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#1a262c!important;}
+html body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#153d32!important;}
 html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"],
-html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#e3f0eb!important;}
+html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#c5e2d2!important;}
+
+:root {--ac-stock-accent:#20a85e;}
+html[data-theme="light"] {--ac-stock-accent:#168a59;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab {background:var(--ac-surface-2)!important;color:var(--ac-muted)!important;-webkit-text-fill-color:var(--ac-muted)!important;box-shadow:none;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab[aria-current="page"] {background:var(--ac-text)!important;color:var(--ac-surface)!important;-webkit-text-fill-color:var(--ac-surface)!important;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab-auction[aria-current="page"] {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html body .ac-page-copy .ac-japan-sections .ac-japan-tab-green[aria-current="page"] {background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}

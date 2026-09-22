@@ -1,3 +1,7 @@
+import { selectRelatedOfferGroups } from "@/lib/catalog/related-offer-selection";
+import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
+import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
+import { PUBLIC_CATALOG_MARKETS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { isGreenCornerOffer } from "@/lib/catalog/green-corner-contract";
 import { OfferUpdatedStatus } from "@/components/catalog/OfferUpdatedStatus";
 import { protectedPhotoUrl } from "@/lib/catalog/photo-proxy-policy";
@@ -129,69 +133,40 @@ function safeExternalUrl(value: unknown) {
   }
 }
 
-function similarModelKey(offer: any) {
-  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
-  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
-}
-
-function diverseSimilarOffers(rows: any[], current: any, limit = 4, excludedIds = new Set<string>()) {
-  const currentKey = similarModelKey(current);
-  const seen = new Set<string>(currentKey ? [currentKey] : []);
-  const differentModels: any[] = [];
-  const repeats: any[] = [];
-  for (const row of rows) {
-    if (excludedIds.has(String(row?.id || ""))) continue;
-    const key = similarModelKey(row);
-    if (key && !seen.has(key)) {
-      seen.add(key);
-      differentModels.push(row);
-    } else {
-      repeats.push(row);
-    }
-  }
-  return [...differentModels, ...repeats].slice(0, limit);
-}
-
 async function SimilarOffers({ current }: { current: any }) {
-  let sameModel: any[] = [];
-  let otherMarketModels: any[] = [];
-  let marketTotal = 0;
   const familyModel = String(current.model || "").trim();
-  try {
-    const [modelResult, marketResult] = await Promise.all([
-      searchOffers({ market: current.market, make: current.make, model: familyModel, pageSize: 48, sort: "updatedAt" }),
-      searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
-    ]);
-    const { priceCandidatesUntil } = await import('../../../../../lib/catalog/price-candidates');
-    const modelRows = await priceCandidatesUntil(
-      modelResult.items.filter((item: any) => item.id !== current.id),
-      applyActiveBusinessPricingBatch, isRenderablePublicCatalogOffer,
-      rows => rows.length >= 4,
-    );
-    marketTotal = Math.max(0, Number(marketResult.total || 0));
-    sameModel = modelRows.slice(0, 4);
-    const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
-    const marketRows = await priceCandidatesUntil(
-      marketResult.items.filter((item: any) => !selectedIds.has(String(item.id))),
-      applyActiveBusinessPricingBatch, isRenderablePublicCatalogOffer,
-      rows => new Set(rows.map(similarModelKey).filter(key => key !== similarModelKey(current))).size >= 4,
-    );
-    otherMarketModels = diverseSimilarOffers(marketRows, current, 4, selectedIds);
-  } catch (error) {
-    console.error("offer_similar_search_failed", error);
-  }
-
+  const make = String(current.make || "").trim();
+  const greenCurrent = isGreenCornerOffer(current);
   const presented = presentCatalogOffer(current);
   const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
-  const modelParams = new URLSearchParams({ market: String(current.market || ""), make: String(current.make || ""), model: familyModel || String(current.model || "") });
-  const marketParams = new URLSearchParams({ market: String(current.market || "") });
+  const otherMarkets = PUBLIC_CATALOG_MARKETS.filter(market => market !== current.market);
+  // Bounded model queries stream behind the primary offer; failures stay isolated by market.
+  const safeSearch = (params: Parameters<typeof searchOffers>[0]) => searchOffers(params).catch(error => {
+    console.error("offer_similar_search_failed", error); return {items:[],total:0};
+  });
+  const [modelResult, marketResult, crossResults, green] = await Promise.all([
+    familyModel && make ? safeSearch({market:current.market,make,model: familyModel,pageSize:48,sort:"updatedAt"}) : Promise.resolve({items:[],total:0}),
+    safeSearch({market:current.market,pageSize:48,sort:"updatedAt"}),
+    Promise.all(otherMarkets.map(async market => ({market,...(familyModel && make ? await safeSearch({market,make,model: familyModel,pageSize:24,sort:"updatedAt"}) : {items:[],total:0})}))),
+    familyModel && make ? readGreenCorner().catch(()=>null) : Promise.resolve(null),
+  ]);
+  const greenModels = green ? filterGreenCorner(green.items,{make,model:familyModel}).map(publicGreenOffer) : [];
+  const {stockModels,sameModel,crossMarketGroups,marketRows} = await selectRelatedOfferGroups({
+    current,modelRows:modelResult.items,marketRows:marketResult.items,crossResults,
+    greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
+    price:applyActiveBusinessPricingBatch,renderable:isRenderablePublicCatalogOffer,
+  });
+  const marketTotal = Math.max(0,Number(marketResult.total||0)) + (current.market==='japan' ? green?.items.length||0 : 0);
+  const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
+  const marketParams = new URLSearchParams({market:String(current.market||"")});
+  if(current.market==='japan')marketParams.set('stock','all');
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
-  const rail = (rows: any[]) => rows.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Подходящие предложения появятся здесь после обновления каталога.</div>;
-
-  return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14">
-    {sameModel.length ? <section><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle}</h2><Link href={`/cars?${modelParams}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{rail(sameModel)}</section> : null}
-    <section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(otherMarketModels)}</section>
+  const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
+  return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>
+    {stockModels.length ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}
+    {sameModel.length ? <section data-related-section="market-model"><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle} · {marketLabel}</h2><Link href={`/cars?${modelParams}${current.market==='japan'?'&stock='+ (greenCurrent?'auction':'all'):''}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(sameModel)}</section> : null}
+    {crossMarketGroups.length ? <section data-related-section="other-markets"><h2 className="text-[26px] font-black md:text-4xl">{modelTitle} на других рынках</h2><div className="space-y-8">{crossMarketGroups.map(group=><section key={group.market}><div className="mt-5 flex items-center justify-between gap-3"><h3 className="flex items-center gap-2 text-xl font-black"><CatalogMarketFlag market={group.market} className="h-5 w-7" />{CATALOG_MARKET_LABELS[group.market as keyof typeof CATALOG_MARKET_LABELS]}</h3><Link href={`/cars?${new URLSearchParams({make,model:familyModel,market:group.market,...(group.market==='japan'?{stock:'all'}:{})})}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(group.items)}</section>)}</div></section> : null}
+    <section data-related-section="market"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{marketRows.length?rail(marketRows):<p className="text-[var(--ac-muted)]">Другие предложения появятся после обновления каталога.</p>}</section>
   </div>;
 }
 
