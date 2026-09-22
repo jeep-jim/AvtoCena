@@ -44,5 +44,19 @@ jobs:
             japan:pick(japan,['version','details','prepared','complete','published','startedAt','savedAt','publishedAt','stopReason']),archive};
           console.log(JSON.stringify(report));
           JS
-
-# Observation requested after independent publication startup.
+      - name: Restore multipart checkpoint into isolated runner storage
+        run: |
+          node --import tsx --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          import {restoreProAuctionsState,proAuctionsStateKey} from './scripts/lib/proauctions-durable-state.mjs';
+          const metadata=await getJsonStorage().readJson(proAuctionsStateKey,null);
+          assert.equal(metadata.version,2);
+          const root='/tmp/japan-checkpoint-readonly-verification';
+          await restoreProAuctionsState(root,metadata);
+          const restored=JSON.parse(await fs.readFile(root+'/checkpoint.json','utf8'));
+          assert.equal(restored.details,metadata.details);
+          assert.equal(restored.prepared,metadata.prepared);
+          console.log(JSON.stringify({verified:true,version:metadata.version,details:restored.details,prepared:restored.prepared,savedAt:metadata.savedAt,remoteWrites:false}));
+          JS
