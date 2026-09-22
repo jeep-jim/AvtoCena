@@ -4342,3 +4342,17 @@ Latest Europe scope: immediate rebalance only publishes Europe from retained sou
 - Styled A4 estimate preserves market/Russia cost rows, exchange rate, subtotals, commission, total, payment stage, disclaimer and all reference contact details. Deposit is not double-counted. Embedded Cyrillic fonts and clickable contacts.
 - Published via PR #1111 (https://github.com/jeep-jim/AvtoCena/pull/1111), release `6dce35f9415567a334f2b7c27d3bb9066342473f`. All 1,538 local tests, focused PDF tests, TypeScript and production build passed. Playwright verified desktop/mobile placement, one visible PDF action, persistence after saving and latest-draft download. PDF pages visually inspected; original Telegram URI annotations and telephone links preserved.
 - GitHub CI run `35604774138` and Yandex deploy run `35605367376` completed successfully. Live health returned the release above; public manifest references versioned calculator icons, downloaded icon checksum matches the source; unauthenticated PDF POST returns 403 and private/no-store. Staff PDF generation verified locally; a signed-in production employee export was not exercised in this session.
+
+
+## 2026-09-22 — Продолжение «Зелёного угла»: полный расчёт и привязка логистики к иене
+
+- Восстановлена незавершённая ветка `feat/akebono-green-corner`, PR #1125. В неё включены актуальные исправления основной ветки, включая PR #1126 по хранилищу.
+- Уточнение владельца заменяет прежний вариант «FOB + фиксированные 45 000 без расчёта»: цена авто — FOB; полный список расходов и первоначальные платежи — как для Японии; меняется только логистика.
+- Логистика: 45 000 ₽ переводятся в JPY по официальному курсу при первой успешной публикации раздела. Исходный курс, дата и сумма в JPY сохраняются в снимке раздела и не меняются при обновлениях. Далее рублёвая сумма = сумма JPY × текущий официальный курс. В расчёте одна строка логистики, FOB не содержит повторной надбавки.
+- Снят специальный запрет полного расчёта. Если исходных характеристик недостаточно, используются обычные поля уточнения; недостающие значения не выдумываются. Сохранены отдельный раздел и лента под Японией, по 10 карточек на витрину, независимое обновление каждые 72 часа и защита неполной публикации.
+- Проверка: TypeScript и 15 целевых тестов успешны; проверено совпадение всех остальных строк с обычной Японией, пересчёт при изменении иены, единственность логистики, сумма строк и отсутствие изменений исходного объявления.
+- Подготовлено в PR #1125; публикация на сайте на момент этой записи ещё не подтверждена. Остальные незакрытые проблемы предыдущего чата не объявляются решёнными этим изменением. Подробности: `docs/audits/green-corner-2026-09-22.md`.
+
+### Продолжение: исправление вынесено в PR #1128
+
+PR #1125 был объединён параллельно с восстановлением чата, со старой формулой. Коррекция полного расчёта, привязки к иене и этой записи находится в PR #1128. Маркер обновления изменён, чтобы после объединения повторно опубликовать снимок с сохранённой базой логистики. Публикация правильной формулы ещё требует успешных CI, обновления данных и деплоя.

@@ -6,7 +6,11 @@ Public anonymous source query: POST https://akebono.world/graphql/catalog/open, 
 
 ## Price scope
 
-The source explicitly describes FOB as including Japanese domestic expenses but excluding freight. An optional clarification question received no answer. Current implementation follows the literal requested amount: effective FOB in JPY, converted with a bound official CBR rate, plus RUB 45,000 once. This is explicitly labelled without delivery/customs. It is NOT a delivered quote. Standard auction-based customer calculation is blocked for this source with an explanatory message because its domestic cost composition has not been confirmed for fixed FOB stock. Do not claim full delivered pricing is finished.
+The owner clarified the final pricing requirement in the continuation chat: use FOB as the vehicle price and the ordinary full Japan calculation; replace only logistics with RUB 45,000 indexed to JPY. The initial FOB-plus-fee-only implementation below is superseded.
+
+At the first successful stock publication, capture the official JPY unit rate and date and store an immutable global logistics anchor in the conditional snapshot: amountJpy = 45,000 / initialRateRub. Each offer carries that anchor. Later imports reuse it, including for new listings; it is never rebased on each refresh. Customer calculation uses logisticsRub = round(amountJpy * currentOfficialRateRub), once, as the existing logistics line. FOB remains the seller price without logistics. All other Japan cost rows and the payment plan use the shared engine. Missing anchor or missing vehicle parameters block a full quote rather than inventing inputs. No source fuel type is assumed.
+
+Continuation verification: TypeScript passed; 15 focused tests passed, including full Green versus Japan cost-row parity, a single logistics line, sum-to-total, unchanged input, and yen-rate changes. Earlier fixture RUB 597,000 is obsolete: the same fixture now has FOB RUB 552,000 and logistics is separate. Production deployment is pending at this checkpoint.
 
 ## Isolation and automation
 
@@ -14,7 +18,7 @@ Snapshot: catalog/green-corner/current.json, separate from the six-market manife
 
 Workflow: catalog-refresh-green.yml, daily 23:47 UTC wake-up on the same continuous 72-hour calendar as non-auction markets. New stock starts at page one. Bounded source retries and the existing watchdog are enabled. Access refusals and quality guard failures are not bypassed.
 
-## Verification at preparation
+## Historical verification before the owner clarification
 
 - All 448 downloaded public listings normalize successfully.
 - Six focused pricing, discount, source pagination and retention tests passed.
