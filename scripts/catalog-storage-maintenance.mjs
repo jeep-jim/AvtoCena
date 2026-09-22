@@ -5,8 +5,10 @@ const {mutateDataJson,getJsonStorage,readDataJson,writeDataJson}=await import('.
 const minimumIntervalMs=Math.max(0,Number(process.env.CATALOG_STORAGE_MAINTENANCE_MIN_INTERVAL_MS||0));
 if(minimumIntervalMs>0){
   const previous=await readDataJson('catalog/storage-maintenance.json',null);
-  if(recentHealthyStorageMaintenance(previous,Date.now(),minimumIntervalMs)){
-    const report={...previous,skipped:true,reason:'recent_healthy_maintenance'};
+  const inventory=await getJsonStorage().listBucketObjects('');
+  const currentBytes=inventory.reduce((sum,row)=>sum+Math.max(0,Number(row.size)||0),0);
+  if(recentHealthyStorageMaintenance(previous,Date.now(),minimumIntervalMs,currentBytes)){
+    const report={...previous,skipped:true,reason:'recent_healthy_maintenance',currentBytes};
     await fs.writeFile('catalog-storage-maintenance.json',JSON.stringify(report,null,2));
     console.log(JSON.stringify(report));
     // Do not acquire the publisher's lease, or fake a newer maintenance date.

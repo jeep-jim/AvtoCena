@@ -1,4 +1,4 @@
-import { isGreenCornerOffer } from "./green-corner-contract";
+import { isGreenCornerOffer, greenCornerLogisticsRub } from "./green-corner-contract";
 import { deliveryPricingBasis } from "./card-city-delivery";
 import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
@@ -261,6 +261,16 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
+  if (isGreenCornerOffer(offer)) {
+    try {
+      market.config = {...market.config, logisticsRub:greenCornerLogisticsRub(offer.greenCornerLogistics, rate.effectiveRate),
+        logisticsRateStatus:'available', logisticsCurrency:'JPY', logisticsAmount:offer.greenCornerLogistics!.amountJpy,
+        logisticsRateDate:rate.rateDate};
+    } catch {
+      return {...offer,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:{...pendingSnapshot,
+        pricingConfidence:'unavailable',missing:['green_corner_logistics_basis']}};
+    }
+  }
   const deliveryQuote = quoteCityDelivery(offer.deliveryCity, offer.market);
   market.warnings.push(deliveryDescription(deliveryQuote));
   if (market.config.logisticsRateStatus === "unavailable") {
@@ -520,7 +530,6 @@ export async function calculateCustomerParameterScenario(input: VehicleOffer, pa
 }
 
 export async function calculateOfferWithCustomerParametersDetailed(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
-  if (isGreenCornerOffer(input)) return {ok:false as const,error:"Для Зелёного угла указана цена FOB + 45 000 ₽. Доставку и таможенные платежи рассчитает менеджер с учётом уже включённых расходов в Японии.",missing:["green_corner_delivery_quote"]};
   const result = await calculateCustomerParameterScenario(input, parameters);
   if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) {
     const snapshot = result.calculationSnapshot;

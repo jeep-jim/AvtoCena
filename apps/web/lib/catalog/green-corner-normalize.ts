@@ -1,6 +1,6 @@
 import type { VehicleOffer } from "./types";
 import type { CurrencyRateSnapshot } from "./rates";
-import { GREEN_CORNER_SOURCE, GREEN_CORNER_FEE_RUB } from "./green-corner-contract";
+import { GREEN_CORNER_SOURCE } from "./green-corner-contract";
 export function greenCornerFobPrice(row:any,now:string):number {
  const base=Number(row.priceInJapan), expiry=row.discountExpiresAt;
  if(expiry && (!Number.isFinite(Date.parse(expiry)) || Date.parse(expiry)<=Date.parse(now)))return base;
@@ -29,7 +29,7 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
   ...(Number(row.engineVolumeNum)>0?{engineCc:Number(row.engineVolumeNum)}:{}),
   ...(Number.isFinite(powerHp)&&powerHp>0?{powerHp,powerDataConfidence:"source_exact",powerDataSource:"Akebono"}:{}),
   color:row.color||undefined,
-  sourcePrice,sourceCurrency:"JPY",catalogPricingMode:"seller",sellerPriceRub:baseRub+GREEN_CORNER_FEE_RUB,totalRub:null,calculationStatus:"needs_data",
+  sourcePrice,sourceCurrency:"JPY",catalogPricingMode:"seller",sellerPriceRub:baseRub,totalRub:null,calculationStatus:"needs_data",
   calculationSnapshot:{currencyRate:{...unitRate,sourcePrice,sourcePriceRub:sourcePrice*unitRate.effectiveRate},sourcePriceRub:baseRub,pricingConfidence:"unavailable"},
   images:urls.map((url,index)=>({id:`green-${row.id}-${index}`,url,objectKey:"",size:0,checksum:"",mimeType:/\.png$/i.test(url)?"image/png":/\.webp$/i.test(url)?"image/webp":"image/jpeg"})),
   firstSeenAt:now,updatedAt:now,
