@@ -1,5 +1,6 @@
 import {transientOperationFailure} from './transient-operation.mjs';
 export const MARKET_WORKFLOWS=Object.fromEntries(['china','korea','uae','georgia','europe'].map(m=>[m,`catalog-refresh-${m}.yml`]));
+MARKET_WORKFLOWS.green='catalog-refresh-green.yml';
 MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
 export function recoveryDecision({market,runs,journal,japan,now=Date.now(),lastDispatchAt,recovery}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');

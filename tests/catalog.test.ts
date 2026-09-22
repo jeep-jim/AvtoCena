@@ -467,7 +467,7 @@ test("public UI uses live catalog and labels estimates honestly", async () => {
   const home = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/page.tsx", "utf-8"));
   const results = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/results/page.tsx", "utf-8"));
   const cars = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/cars/page.tsx", "utf-8"));
-  assert.match(home, /readHomeCatalogSnapshot\(6\)/);
+  assert.match(home, /readHomeCatalogSnapshot\(10\)/);
   assert.doesNotMatch(home, /ENABLE_DEMO_CATALOG/);
   assert.match(results, /redirect\(`\/cars/);
   assert.match(cars, /await searchOffers/);
