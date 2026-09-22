@@ -10,7 +10,8 @@ if(baseline.found&&!baseline.etag)throw Error('green_missing_conditional_write_e
 const source=await collectGreenCorner();
 const rate=await convertToRub(1,'JPY');
 const now=new Date().toISOString();
-const normalized=source.items.map(row=>normalizeGreenCorner(row,rate,now));
+const previousById=new Map((baseline.value?.items||[]).map(row=>[row.id,row]));
+const normalized=source.items.map(row=>{const offer=normalizeGreenCorner(row,rate,now);return {...offer,firstSeenAt:previousById.get(offer.id)?.firstSeenAt||now};});
 // Keep the existing global 15m ceiling. Do not apply auction retention or non-Japan year quotas.
 const items=normalized.filter(row=>row.sellerPriceRub<=15_000_000).sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
 assertGreenPublication(baseline.value?.items?.length||0,items.length,source.total);
