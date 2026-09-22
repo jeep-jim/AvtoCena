@@ -16,7 +16,7 @@ export function savedPreviewEntry(record:SavedOfferCalculation,offer:VehicleOffe
   const parameters=validateCustomerParameters(record.draft);
   return {market:offer.market,sourceId:offer.sourceId,sourceOfferId:offer.sourceOfferId,identity:record.identity,savedAt:record.savedAt,
    preview:{version:record.version,totalRub:record.calculation.totalRub!,parameters,
-    currencyRate:record.calculation.currencyRate,deliveryCity:record.draft.deliveryCity||""}};
+    currencyRate:record.calculation.currencyRate,utilizationPowerKw:record.calculation.customs?.utilizationPowerKw,deliveryCity:record.draft.deliveryCity||""}};
  } catch {return null;}
 }
 export async function rebuildSavedPreviewIndex():Promise<Index> {

@@ -83,3 +83,13 @@ test("saved preview never uses invalid totals",async()=>{
  for(const totalRub of [0,-1,Infinity,NaN])assert.equal(savedCalculationPreviewRub({totalRub} as any),0);
  assert.equal(savedCalculationPreviewRub({totalRub:2500000} as any),2500000);
 });
+
+
+test("saved electric power replaces stale source motor sums and utilization power",async()=>{
+ const {offerWithSavedPreview}=await import('../apps/web/lib/catalog/saved-calculation-preview');
+ const {catalogPowerDisplay}=await import('../apps/web/lib/catalog/power-display');
+ const shown=offerWithSavedPreview({power30MinKwByMotor:[100,150],utilizationPowerKw:250,savedCalculationPreview:{version:'saved',totalRub:3000000,deliveryCity:'',utilizationPowerKw:60,parameters:{fuel:'electric',powertrainKind:'electric',power30MinKw:60}}});
+ assert.equal(catalogPowerDisplay(shown)?.thirtyMinutePowerKw,60);
+ assert.equal(catalogPowerDisplay(shown)?.utilizationPowerKw,60);
+ assert.equal(shown.power30MinKwByMotor,undefined);
+});
