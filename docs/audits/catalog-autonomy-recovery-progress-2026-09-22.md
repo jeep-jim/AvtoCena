@@ -39,3 +39,12 @@ Post-deploy audit 35690254498 confirms live CRM advances (China 160,000; Korea 1
 - At 06:03 UTC Europe held a renewing publication lease and the current manifest was still the Korean generation. China, UAE, Georgia and Japan publications remain unconfirmed. Public API count observed earlier was 76,059 (six fewer than initial public count), without a market collapse.
 
 Outstanding: observe remaining cutovers and fresh source results; verify <=15m UAE inventory after its cutover and Autohome <=10% from reports; observe bounded automatic continuation; close live availability/browser checks; record final actual counts. VPN-specific failure remains unidentified. Code deployment, a successful checkpoint round trip and scheduled jobs do not prove full advertisement readiness or sufficient low-power supply.
+
+
+## Additional verified results through 06:18 UTC
+
+Europe run 35689947156 succeeded, generation gen_1790056341254_72b38254: 21,414 versus 21,443 internal manifest rows (publicly visible 21,413 versus 21,442). Other markets preserved. Power low 12,961, high 3,237, unknown 5,216; targetMet false. Georgia subsequently acquired the publication lease; China, UAE and Japan remain in progress.
+
+Deployment 35692872159 succeeded for 095216b7e5da9af951bf08d714ba6ae170e3857b. Parity 35693661163 matched all tested quotes before another HTTP 502, now on Georgian offer ffe6a05683b6a499aefd253b. Subsequent read-only requests returned HTTP 200 for that card, the earlier UAE card, and /cars?budget=2000000. Intermittent availability and slow external loading remain unresolved; repeated success is not proof of a fix.
+
+Read-only infrastructure observation 35694046261 confirmed the active revision uses 1 core, 2 GiB, concurrency 4, execution timeout 30s, logging enabled to the existing folder. The logging list API returned an empty object, with no available log group; runtime error categories could not be read. No infrastructure or permissions were changed, and OOM/timeout must not be claimed as a proven cause. Local full live browser audit timed out at initial React readiness on a failed page response; separate targeted filter reproductions succeeded. Final readiness remains unconfirmed.
