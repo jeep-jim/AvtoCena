@@ -952,15 +952,13 @@ export async function persistInternalCatalog(
   replaceSourceIds: ReadonlySet<string> = new Set(),
 ) {
   const now = new Date().toISOString();
-  const currentManifest = replaceSourceIds.size
-    ? await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} })
-    : null;
+  const currentManifest = await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} });
   // Source chunks are immutable. A one-market refresh can therefore keep the
   // exact chunk references for untouched source IDs instead of downloading and
   // uploading every retained record again. The internal manifest protects all
   // referenced chunks from cleanup, regardless of the generation in their path.
   const sources: Record<string, { count: number; chunks: string[]; updatedAt: string }> = {};
-  for (const [sourceId, entry] of Object.entries(currentManifest?.value?.sources || {})) {
+  for (const [sourceId, entry] of Object.entries(replaceSourceIds.size ? currentManifest.value?.sources || {} : {})) {
     if (replaceSourceIds.has(sourceId)) continue;
     const value = entry as { count?: unknown; chunks?: unknown; updatedAt?: unknown };
     if (!Number.isInteger(Number(value.count)) || Number(value.count) < 0
@@ -1000,12 +998,10 @@ export async function persistInternalCatalog(
   if (preserved) for await (const rows of preserved) for (const offer of rows) await append(offer);
   for (const offer of offers) await append(offer);
   for (const sourceId of bySource.keys()) await flush(sourceId);
-  for (let attempt = 0; attempt < 5; attempt++) {
-    const current = await storage.readJsonWithMeta<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} });
-    try { await storage.writeJson(INTERNAL_MANIFEST_PATH, { generationId, updatedAt: now, sources }, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" }); return; }
-    catch (e) { if (e instanceof StorageConflictError) continue; throw e; }
-  }
-  throw new StorageConflictError();
+  // Never rebase a stale reserve on a newer writer's ETag. A conflict requires
+  // a fresh read and rebuild under the publication lock, not an overwrite.
+  await storage.writeJson(INTERNAL_MANIFEST_PATH, { generationId, updatedAt: now, sources },
+    currentManifest.found && currentManifest.etag ? { ifMatch: currentManifest.etag } : { ifNoneMatch: "*" });
 }
 
 async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStorage>, offers: VehicleOffer[]) {
