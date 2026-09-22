@@ -1,5 +1,6 @@
 "use client";
 
+import { TOPAVTO_DEALER } from "@/lib/topavto-dealer";
 import Link from "next/link";
 import { CitySelector } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
@@ -142,6 +143,11 @@ export function PublicLegalFooter() {
             { href: "/login", label: "Вход для сотрудников" },
           ]} />
         </div>
+
+        <section aria-label="Реквизиты дилера TOP AVTO" className="mb-5 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--ac-border)] pt-5 text-sm">
+          <div><p className="font-bold">{TOPAVTO_DEALER.label} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
+        </section>
 
         <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-6">
           <p className="lg:whitespace-nowrap">Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.</p>
