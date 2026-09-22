@@ -99,7 +99,10 @@ jobs:
           console.log(JSON.stringify({container:c.id,revisions:revs.revisions.slice(0,3).map(r=>({id:r.id,status:r.status,resources:r.resources,executionTimeout:r.executionTimeout,concurrency:r.concurrency,logOptions:r.logOptions}))}));
           const gs=await get('https://logging.api.cloud.yandex.net/logging/v1/logGroups?folderId='+folder);
           const groupIds=[...new Set(revs.revisions.slice(0,3).map(r=>r.logOptions?.logGroupId).filter(Boolean))];
-          if(!groupIds.length)groupIds.push(...gs.groups.filter(g=>g.name==='default').map(g=>g.id));
+          console.log(JSON.stringify({loggingResponseKeys:Object.keys(gs),groups:(gs.groups||gs.logGroups||[]).map(g=>({id:g.id,name:g.name})),containerLogGroup:c.logGroupId||null}));
+          if(!groupIds.length)groupIds.push(...(gs.groups||gs.logGroups||[]).filter(g=>g.name==='default').map(g=>g.id));
+          if(!groupIds.length&&c.logGroupId)groupIds.push(c.logGroupId);
+          if(!groupIds.length)throw Error('runtime_log_group_unavailable');
           const py=spawnSync('python',['-c',process.env.RUNTIME_LOG_READER],{env:{...process.env,DIAGNOSTIC_IAM_TOKEN:iamToken,DIAGNOSTIC_CONTAINER:c.id,DIAGNOSTIC_GROUPS:JSON.stringify(groupIds)},encoding:'utf8',timeout:180000});
           process.stdout.write(py.stdout||'');if(py.status!==0){console.error('runtime_log_reader_failed',py.status);process.exitCode=1;}
           JS
