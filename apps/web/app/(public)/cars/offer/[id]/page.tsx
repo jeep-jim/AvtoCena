@@ -444,7 +444,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       </div>
 
 
-      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
+      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={{...raw,sourceId:offer.sourceId,offerType:offer.offerType}} /></Suspense>
       <PageLeadBanner kind="offer" />
     </section>
     <OfferContactActionsStyles />
