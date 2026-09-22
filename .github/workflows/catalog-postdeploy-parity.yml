@@ -67,7 +67,7 @@ jobs:
           done
 
       - name: Verify list/detail quotes, missing-offer explanation and response timings
-        run: node scripts/catalog-verify-public-quotes.mjs
+        run: node --import tsx scripts/catalog-verify-public-quotes.mjs
 
       - name: Upload current read-model parity report
         if: always()

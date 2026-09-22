@@ -11,4 +11,5 @@ await getJsonStorage().writeJson(`catalog/operations/markets/${market}.json`,{
  version:1,market,lastPublicationSuccess:new Date().toISOString(),lastCollectionSuccess:intake?.completedAt||null,
  sourceObservedAt:intake?.updatedAt||null,partialSources:intake?.partialSources||[],generationId:publication.generationId||null,runId:process.env.GITHUB_RUN_ID||null,
  sources:intake?.sources||[],qualityStatus:intake?.qualityStatus||null,
+ powerMix:publication.powerMix?.[market]||null,sourceShare:publication.sourceShare?.[market]||null,publishedCount:publication.publishedMarketCount||null,
 });
