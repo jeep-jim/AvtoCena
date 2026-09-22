@@ -26,6 +26,7 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  greenCornerLogistics?: import("./green-corner-contract").GreenCornerLogistics;
   deliveryCity?: string;
   catalogPricingMode?: "seller";
   sellerPriceRub?: number;

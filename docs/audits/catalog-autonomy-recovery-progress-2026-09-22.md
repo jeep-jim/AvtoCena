@@ -1,5 +1,33 @@
 # Catalog recovery execution — 2026-09-22
 
+## Verified production checkpoint — 07:57 UTC
+
+All six initial recovery publications completed successfully. Public counts (internal counts can include one non-public row) are:
+
+| Market | Initial public | Published public |
+|---|---:|---:|
+| Japan | 12,544 | 14,018 |
+| China | 19,368 | 25,991 |
+| Korea | 13,600 | 13,598 |
+| Europe | 21,442 | 21,413 |
+| Georgia | 8,355 | 7,888 |
+| UAE | 756 | 701 |
+| Total | 76,065 | 83,609 |
+
+The six-market total grew by 7,544. Independent Green Corner stock has 447 additional published listings and does not change the auction/main-manifest counts. Production browser checked six home and catalog rails with ten visible cards each plus the ten-card Green rail; desktop 1440 and mobile 390 had no document overflow. Detail stock-status correction and filtered-overview isolation are pending PR #1127. Current main #1128 supersedes the initial FOB-plus-fee-only price model: shared Japan calculation, FOB vehicle basis, one JPY-indexed logistics line initially RUB 45,000. Missing verified specifications still require completion before a full quote.
+
+China meets 80/20: 20,793 low-power, 1,875 high-power, 3,323 unknown; Autohome 1,277 / 25,991 = 4.913%, below 10%. The target is NOT yet met for Korea, Europe, UAE or Georgia. Unknown power counts in the upper 20%; no guessed power or mass deletion is used to make the ratio appear compliant. Japan remains exempt under the established repository policy.
+
+New Europe collection 35691565662 finished: mobile.de 17,514 unique plus AutoScout 3,440. Its publication safely stopped at storage reserve preflight, preserving the live market. PR #1126 is merged and fixes stale storage inventory, bounded cleanup/retry, and verified terminal-empty AutoScout pagination. Cleanup 35699999800 completed at 07:42:12: 45,505,905,608 -> 40,885,588,895 bytes, 232 old objects deleted, current/previous generations protected. Europe needs about 8.55 GB projected space plus 5 GB reserve under the 50 GB budget, so this cleanup alone is insufficient. Six-hour grace makes old Korea/Europe/Georgia/China generations eligible around 11:21/11:52/12:12/12:30 UTC, subject to current/previous protection. This is an eligibility window, NOT a guaranteed publication deadline; other writers can consume space. Watchdog rechecks are bounded. #1127 also triggers recheck after cleanup completion.
+
+At 07:52 the watchdog confirmed China, Korea, UAE and Japan already running, Green current, Europe cleanup requested, and Georgia source-access failures requiring attention. A red watchdog result can therefore mean a correctly reported unresolved source problem; it is not proof the watchdog crashed. Encar/MyAuto access refusals are not bypassed. Japan successfully passed the former 512 MB checkpoint limit with multi-part saves and dispatched continuation automatically.
+
+Next regular starts, UTC, 23 September: China 18:11, Korea 19:17, UAE 20:23, Georgia 21:29, Europe 22:37, Green 23:47. Repeat on the continuous 72-hour calendar (26 and 29 September). Japan daily 03:00 plus incomplete-cycle continuation. GitHub can delay queued starts.
+
+Post-deploy parity 35700975823, visible calculation coverage 35700975765, CRM/mobile/security 35700436138 and mobile catalog filter overlays 35700436182 passed. Full feature CI 35700012134 passed. Live health confirmed f8b56d3 before the concurrent #1128 deployment. The actual user VPN path is not reproduced; intermittent slow pages/502 remain unresolved. Official cloud Monitoring read returned HTTP 403; no permission change or bypass attempted. Do not claim Swiss-clock reliability or that advertising readiness is fully signed off.
+
+The sections below are historical checkpoints, superseded where this section provides newer results.
+
 Owner clarification: prevent a market collapse, not preservation of every old row. Autohome new inventory must remain <=10%. No unsafe quota cut to obtain a cosmetic 80/20.
 
 PR #1120 merged as e607da1e1e4e18ec75338dc4a22db03b7462559a after CI 35689568987 passed. Five independent refresh schedules, guarded multipart Japan checkpoints, bounded transient retries/watchdog, 15m seller-price cap, per-market journals and stale public/internal writer protection are on main. Deployment 35689935513 succeeded. Six recovery runs were triggered by main commit 2863b95 (full SHA in git).
@@ -24,27 +52,3 @@ Georgia recovery job 106624676944 safely refused cutover: candidate 7,888 vs min
 Next normal slots (UTC): China 23 Sep 18:11, Korea 19:17, UAE 20:23, Georgia 21:29, Europe 22:37, then every 72h calendar day. Japan daily 03:00 plus incomplete-checkpoint continuations, fresh full-cycle interval 14 days. Watchdog every two hours at :43. GitHub scheduled start times may be delayed.
 
 Post-deploy audit 35690254498 confirms live CRM advances (China 160,000; Korea 110,000) agree with displayed cards. Its next mismatch is an explicitly saved manager calculation: UAE c7b4eca0d367f0822069dbc8 has data-offer-saved-version 930ba947-ec91-4e25-a56f-50d143b9b0eb and total 1,909,579, versus seller-price listing 875,654. Follow-up audit verifies the saved version and amount against the identity-bound storage record; ordinary cards still require exact list/detail equality. No price or saved calculation is changed.
-
-
-## Verified execution through 06:03 UTC
-
-- PR #1121 merged as 04437a4b1a2b8e14e8ec7826aa75a0ca21de8a7e after CI 35691097338 passed. Deployment 35691499546 and post-deploy quote parity 35691880435 passed. Fixed-baseline low-power replacement and tiny-source guard corrections are deployed.
-- Korea recovery 35689947182 published generation gen_1790054483298_b684f4f8: 13,598 versus 13,600. Sources: Encar 11,701 retained, K Car 1,897. Power: verified low 1,466; high 2,412; unknown 9,720. Actual 80/20 is NOT achieved. Other markets were preserved.
-- Japan collect job 106624600299 succeeded: 8,326 details and 6,935 prepared rows; stopped normally at its 40-minute budget. Its durable v2 checkpoint is 565,369,209 bytes in nine parts, beyond the former 512 MiB failure. Read-only verification run 35692818885/job 106633238120 downloaded, checked and restored the production checkpoint in isolated runner storage; restored counts match. No remote writes or source requests occurred in that verification. Publication and automatic continuation are not yet confirmed.
-- PR #1122 merged as b8279725411f4cf2b7c90e1fd1fe682d5946bfcd after CI 35691783428 passed; deployment 35692146649 succeeded and live health confirmed its release. Completion-triggered storage maintenance skips redundant work only after a recent healthy report with sufficient headroom; daily/manual maintenance and publication preflight remain enabled.
-- Main operation marker ed58eeb started fresh source sweeps with cursors reset: Korea 35691565684, China 35691565627, UAE 35691565659, Europe 35691565662. Georgia 35691565694 retries saved observations through the corrected tiny-source guard. These runs are ongoing, not completed evidence of fresh supply.
-- Watchdog 35691466944 correctly reported Encar access denial and Georgia's then-deterministic source guard instead of retrying them indefinitely. Automatic dispatch after a completed Japan publication has not yet been observed.
-- Live browser reproduction confirmed engine inputs 1,5 -> 1500 and 1498 -> 1498 with budget preserved after waiting for React readiness on each document navigation. PR #1123 fixes that readiness wait in the audit only; CI 35692503780 passed, merged 095216b7e5da9af951bf08d714ba6ae170e3857b. Production UI and pricing are unchanged. Full live audit still requires a final successful run.
-- Later parity run 35692588351 encountered HTTP 502 on UAE offer f36afef8d45d26feb839b46d; prior checked quotes matched. A separate repeat returned HTTP 200. This is an availability failure, not a verified price mismatch; do not mark all live checks green.
-- At 06:03 UTC Europe held a renewing publication lease and the current manifest was still the Korean generation. China, UAE, Georgia and Japan publications remain unconfirmed. Public API count observed earlier was 76,059 (six fewer than initial public count), without a market collapse.
-
-Outstanding: observe remaining cutovers and fresh source results; verify <=15m UAE inventory after its cutover and Autohome <=10% from reports; observe bounded automatic continuation; close live availability/browser checks; record final actual counts. VPN-specific failure remains unidentified. Code deployment, a successful checkpoint round trip and scheduled jobs do not prove full advertisement readiness or sufficient low-power supply.
-
-
-## Additional verified results through 06:18 UTC
-
-Europe run 35689947156 succeeded, generation gen_1790056341254_72b38254: 21,414 versus 21,443 internal manifest rows (publicly visible 21,413 versus 21,442). Other markets preserved. Power low 12,961, high 3,237, unknown 5,216; targetMet false. Georgia subsequently acquired the publication lease; China, UAE and Japan remain in progress.
-
-Deployment 35692872159 succeeded for 095216b7e5da9af951bf08d714ba6ae170e3857b. Parity 35693661163 matched all tested quotes before another HTTP 502, now on Georgian offer ffe6a05683b6a499aefd253b. Subsequent read-only requests returned HTTP 200 for that card, the earlier UAE card, and /cars?budget=2000000. Intermittent availability and slow external loading remain unresolved; repeated success is not proof of a fix.
-
-Read-only infrastructure observation 35694046261 confirmed the active revision uses 1 core, 2 GiB, concurrency 4, execution timeout 30s, logging enabled to the existing folder. The logging list API returned an empty object, with no available log group; runtime error categories could not be read. No infrastructure or permissions were changed, and OOM/timeout must not be claimed as a proven cause. Local full live browser audit timed out at initial React readiness on a failed page response; separate targeted filter reproductions succeeded. Final readiness remains unconfirmed.

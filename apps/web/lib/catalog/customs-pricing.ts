@@ -1,3 +1,4 @@
+import { isGreenCornerOffer, greenCornerLogisticsRub } from "./green-corner-contract";
 import { deliveryPricingBasis } from "./card-city-delivery";
 import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
@@ -260,6 +261,16 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
+  if (isGreenCornerOffer(offer)) {
+    try {
+      market.config = {...market.config, logisticsRub:greenCornerLogisticsRub(offer.greenCornerLogistics, rate.effectiveRate),
+        logisticsRateStatus:'available', logisticsCurrency:'JPY', logisticsAmount:offer.greenCornerLogistics!.amountJpy,
+        logisticsRateDate:rate.rateDate};
+    } catch {
+      return {...offer,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:{...pendingSnapshot,
+        pricingConfidence:'unavailable',missing:['green_corner_logistics_basis']}};
+    }
+  }
   const deliveryQuote = quoteCityDelivery(offer.deliveryCity, offer.market);
   market.warnings.push(deliveryDescription(deliveryQuote));
   if (market.config.logisticsRateStatus === "unavailable") {

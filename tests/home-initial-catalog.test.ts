@@ -7,7 +7,7 @@ const client = fs.readFileSync("apps/web/components/home/HomePageClient.tsx", "u
 const homeRoute = fs.readFileSync("apps/web/app/api/catalog/home/route.ts", "utf8");
 
 test("home page supplies a bounded server snapshot and recovers from storage errors", () => {
-  assert.match(page, /readHomeCatalogSnapshot\(6\)\.catch/);
+  assert.match(page, /readHomeCatalogSnapshot\(10\)\.catch/);
   assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0 \}/);
   assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
   assert.match(page, /initialOffers=\{pricedItems\}/);
@@ -20,7 +20,7 @@ test("home API reads shared indexes once instead of seven complete searches", ()
   const start = storage.indexOf("export async function readHomeCatalogSnapshot");
   const end = storage.indexOf("\nfunction isPrivateHost", start);
   const implementation = storage.slice(start, end);
-  assert.match(homeRoute, /readHomeCatalogSnapshot\(6\)/);
+  assert.match(homeRoute, /readHomeCatalogSnapshot\(10\)/);
   assert.match(implementation, /offers-by-id\.json/);
   assert.match(implementation, /order-updatedAt\.json/);
   assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);

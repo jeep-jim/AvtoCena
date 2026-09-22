@@ -1,3 +1,4 @@
+import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
 import { matchesFuelFilter } from "./fuel-filter";
@@ -500,6 +501,7 @@ export function isJapanCatalogOfferId(id: string) {
   return offerProjectionScopeFromId(id) === "japan";
 }
 export async function getOfferFromCurrentProjection(id: string) {
+  if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const manifest = await readManifest();
   // A complete immutable ID index is authoritative for absence. Do not fetch
   // the full six-market projection again for a genuinely missing detail page.
@@ -646,6 +648,7 @@ async function readCurrentOfferShard(id: string) {
   return shard;
 }
 export async function getOfferFromCurrentShard(id: string) {
+  if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
   return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item)) || null;
@@ -1505,6 +1508,7 @@ export async function publishCurrentCatalogReadModels() {
   return writeCurrentCatalogReadModels(manifest.generationId, storedOffers, true);
 }
 export async function getOffer(id: string) {
+  if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   const readProjectionFallback = () => getOfferFromCurrentProjection(id);
   if (current.generationId === manifest.generationId) {
