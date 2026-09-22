@@ -1,3 +1,4 @@
+import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { CatalogCover } from "./CatalogCover";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel } from "./RecyclingPower";
@@ -90,7 +91,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
-          <div className={`ac-on-image absolute font-black uppercase tracking-[0.12em] text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}><span className="md:hidden">{o.marketLabel}</span><span className="hidden items-center gap-2 md:inline-flex"><CatalogMarketFlag market={normalizedOffer.market} className="h-4 w-6" /><span>{o.marketLabel}</span></span></div>
+          <div className={`ac-on-image absolute font-black uppercase tracking-[0.12em] text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}><span className="md:hidden">{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span><span className="hidden items-center gap-2 md:inline-flex"><CatalogMarketFlag market={normalizedOffer.market} className="h-4 w-6" /><span>{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span></span></div>
           <div className="ac-on-image absolute bottom-2 left-2 right-2 text-white sm:bottom-3 sm:left-3 sm:right-3">
             <div className={`line-clamp-2 min-w-0 font-black leading-[1.04] tracking-[-0.03em] text-white drop-shadow-[0_2px_15px_rgba(0,0,0,.7)] ${dense ? "text-[12px] sm:text-[17px] sm:leading-[1.08]" : "text-[16px] leading-[1.08]"}`}>{o.title}</div>
           </div>

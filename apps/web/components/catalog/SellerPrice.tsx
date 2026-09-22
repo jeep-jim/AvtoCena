@@ -27,7 +27,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
     <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between gap-1 ${panel ? "ac-seller-price-row" : "min-h-[22px] sm:min-h-[26px]"}`}>
       <span className={`ac-price ac-price--flat ${isElectrifiedPrice(offer) ? "ac-price--electrified" : ""} whitespace-nowrap font-black leading-none tracking-tight ${priceClassName}`}>{Math.round(price).toLocaleString("ru-RU")}<span className="ml-[0.18em] text-[0.58em]">₽</span></span>
       {japan && !hideJapanBadges ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
-      {panel ? <div className="ac-seller-help"><SellerPriceHelp /><span>Без доставки<br />и платежей</span></div> : null}
+      {panel ? <div className="ac-seller-help"><SellerPriceHelp green={isGreenCornerOffer(offer)} /><span>Без доставки<br />и платежей</span></div> : null}
     </div>
     {!panel && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
 
@@ -42,7 +42,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
   </div>;
 }
 
-function SellerPriceHelp() {
+function SellerPriceHelp({green=false}:{green?:boolean}) {
  const [open,setOpen]=useState(false);
  const id=useId();
  const panel=useRef<HTMLDivElement>(null);
@@ -60,7 +60,7 @@ function SellerPriceHelp() {
  return <>
   <button type="button" popoverTarget={id} onClick={position} aria-label="Почему указана только цена продавца" aria-expanded={open} className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black" style={{background:"var(--ac-surface-3)",border:"1px solid rgba(103,113,130,.45)",color:"var(--ac-text)"}}>?</button>
   <div ref={panel} id={id} popover="auto" className="fixed inset-auto m-0 w-[min(430px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 text-xs font-bold leading-5 text-[var(--ac-text)] shadow-2xl">
-   Указана только цена автомобиля у продавца, без доставки и обязательных платежей. Для полного расчёта не хватает подтверждённых параметров. Уточните их в плитках ниже — стоимость пересчитается автоматически. Финальные данные подтвердит менеджер.
+   {green ? "Указана цена FOB в рублях по курсу Банка России плюс 45 000 ₽. Расходы внутри Японии уже включены в FOB. Морская доставка, доставка по России и таможенные платежи в эту сумму не входят — их рассчитает менеджер." : "Указана только цена автомобиля у продавца, без доставки и обязательных платежей. Для полного расчёта не хватает подтверждённых параметров. Уточните их в плитках ниже — стоимость пересчитается автоматически. Финальные данные подтвердит менеджер."}
    <button type="button" popoverTarget={id} popoverTargetAction="hide" className="mt-3 block min-h-11 w-full rounded-xl bg-[var(--ac-surface)]">Понятно</button>
   </div>
  </>;
