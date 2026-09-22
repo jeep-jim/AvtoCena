@@ -1,13 +1,12 @@
-"use server";
 import { CatalogCard } from "./CatalogCard";
-import { currentGreenCornerPrices, readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
-import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
-import { filterGreenCorner, type GreenFilters } from "@/lib/catalog/green-corner-search";
+import type { GreenFilters } from "@/lib/catalog/green-corner-search";
+// Fixed-stock pagination is a public read. GET also works through the production gateway.
 export async function loadMoreGreenCorner(query: GreenFilters, page: number) {
- if (!query || typeof query !== "object" || Object.values(query).some(value=>value!=null&&(typeof value!=="string"||value.length>200)) || !Number.isInteger(page) || page < 1 || page > 10000) throw Error("invalid_green_page");
- const snapshot=await readGreenCorner();
- const current=await currentGreenCornerPrices(snapshot.items);
- const matched=filterGreenCorner(current,query);
- const items=await applyActiveBusinessPricingBatch(matched.slice((page-1)*24,page*24).map(publicGreenOffer));
- return {cards:items.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense />),ids:items.map(offer=>offer.id),total:matched.length,page};
+ const params=new URLSearchParams(Object.entries(query).filter((entry):entry is [string,string]=>typeof entry[1]==="string"));
+ params.set("page",String(page));
+ const response=await fetch(`/api/catalog/green?${params}`,{cache:"no-store",signal:AbortSignal.timeout(30000)});
+ if(!response.ok)throw Error(`green_page_http_${response.status}`);
+ const result=await response.json();
+ if(result.page!==page||!Array.isArray(result.items)||!Number.isSafeInteger(result.total))throw Error("invalid_green_page");
+ return {cards:result.items.map((offer:any)=><CatalogCard key={offer.id} offer={offer} compact dense />),ids:result.items.map((offer:any)=>offer.id),total:result.total,page};
 }
