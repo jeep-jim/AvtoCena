@@ -5,7 +5,7 @@ MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
 export function recoveryDecision({market,runs,journal,japan,now=Date.now(),lastDispatchAt,recovery}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');
  if(runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)))return {action:'none',reason:'already_running'};
- if(now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
+ if(recovery?.action!=='cleanup_dispatched'&&now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
  const latest=runs[0];
  if(latest&&['failure','timed_out'].includes(latest.conclusion)){
   if((latest.run_attempt||1)>=3)return {action:'none',reason:'retry_limit_reached'};

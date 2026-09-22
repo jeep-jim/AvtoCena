@@ -1,3 +1,4 @@
+import {recoveryDecision} from '../scripts/lib/catalog-recovery-policy.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';
 import {storageBlockedInputBytes,storagePressureRecovery} from '../scripts/lib/catalog-storage-recovery.mjs';
 test('storage retries require reserve, otherwise request bounded safe cleanup',()=>{
@@ -13,4 +14,11 @@ test('only the actual blocked preflight report supplies the retry estimate',()=>
  assert.equal(storageBlockedInputBytes('Object Storage reserve insufficient\n{"inputBytes":1068548199,"ok":false}'),1068548199);
  assert.equal(storageBlockedInputBytes('Object Storage reserve insufficient'),null);
  assert.equal(storageBlockedInputBytes('{"inputBytes":1068548199,"ok":false}'),null);
+});
+
+test('cleanup completion can recheck reserve immediately without bypassing retry cooldown',()=>{
+ const now=Date.parse('2026-09-22T08:00:00Z');
+ const input={market:'europe',now,runs:[{id:7,status:'completed',conclusion:'failure',run_attempt:1,updated_at:'2026-09-22T07:00:00Z'}],lastDispatchAt:'2026-09-22T07:59:00Z'};
+ assert.equal(recoveryDecision({...input,recovery:{action:'cleanup_dispatched'}}).action,'inspect_failure');
+ assert.equal(recoveryDecision({...input,recovery:{action:'rerun_failed'}}).reason,'dispatch_cooldown');
 });
