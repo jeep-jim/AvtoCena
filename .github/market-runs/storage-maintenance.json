@@ -1,1 +1,4 @@
-{"requestedAt":"2026-09-20","reason":"Owner-requested final storage maintenance: retain live/previous catalog and verify 5 GB reserve after routine cleanup"}
+{
+  "requestedAt": "2026-09-22",
+  "reason": "Recheck current 42GB bucket usage and safely reclaim eligible obsolete objects; keep current/previous generations, six-hour grace and existing 50GB budget"
+}

@@ -167,6 +167,13 @@ export function parseAutoScoutNextData(markup: string): AutoScoutExactRow[] {
   return rows;
 }
 
+export function autoScoutPublicWindowEnded(markup: string, page: number) {
+  const props = nextData(markup)?.props?.pageProps;
+  return page > 1 && props?.pageid === "list" && Number(props?.pageQuery?.page) === page
+    && props.numberOfPages === 0 && props.numberOfResults === 0
+    && Array.isArray(props.listings) && props.listings.length === 0;
+}
+
 export class AutoScoutEuropeExactAdapter implements CatalogSourceAdapter {
   sourceId = "autoscout_europe_open";
   market = "europe" as const;
@@ -181,6 +188,10 @@ export class AutoScoutEuropeExactAdapter implements CatalogSourceAdapter {
     const markup = await response.text();
     if (!response.ok) throw new Error(`autoscout_exact_http_${response.status}`);
     const items = parseAutoScoutNextData(markup);
+    if (!items.length && autoScoutPublicWindowEnded(markup, page)) return {
+      items: [], nextCursor: null, finished: true, count: 0,
+      health: {ok:true,message:`AutoScout24 public result window ended at page ${page}`,checkedAt:new Date().toISOString(),httpStatus:response.status,contentType:response.headers.get("content-type") || ""},
+    };
     if (!items.length) throw new Error(`autoscout_exact_parsed_zero_status_${response.status}_bytes_${markup.length}`);
     return { items, nextCursor: String(page + 1), finished: false, count: items.length,
       health: { ok: true, message: `AutoScout24 exact Next data parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" } };
