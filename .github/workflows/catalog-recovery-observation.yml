@@ -44,19 +44,62 @@ jobs:
             japan:pick(japan,['version','details','prepared','complete','published','startedAt','savedAt','publishedAt','stopReason']),archive};
           console.log(JSON.stringify(report));
           JS
-      - name: Restore multipart checkpoint into isolated runner storage
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: 24}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install official read-only logging client
+        run: pip install yandexcloud
+      - name: Inspect existing revision and classify runtime errors
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          RUNTIME_LOG_READER: |
+            import os,json,re,time,collections
+            import yandexcloud
+            from google.protobuf.timestamp_pb2 import Timestamp
+            from yandex.cloud.logging.v1.log_reading_service_pb2 import ReadRequest,Criteria
+            from yandex.cloud.logging.v1.log_reading_service_pb2_grpc import LogReadingServiceStub
+            client=yandexcloud.SDK(iam_token=os.environ['DIAGNOSTIC_IAM_TOKEN']).client(LogReadingServiceStub)
+            patterns={'oom':r'out of memory|oom|heap limit|allocation failed|memory limit exceeded','timeout':r'timeout|timed out|deadline exceeded','storage':r'object_storage|object storage|storage_','network':r'fetch failed|ECONN|ENOTFOUND|socket hang','js_error':r'TypeError|ReferenceError|SyntaxError','restart':r'signal|killed|exited|exit code','upstream':r'upstream|502|503|504'}
+            for group in json.loads(os.environ['DIAGNOSTIC_GROUPS']):
+             counts=collections.Counter();samples=[];seen=0;token=None
+             for page in range(4):
+              req=ReadRequest(page_token=token) if token else ReadRequest(criteria=Criteria(log_group_id=group,resource_ids=[os.environ['DIAGNOSTIC_CONTAINER']],since=Timestamp(seconds=int(time.time())-7200),page_size=1000))
+              try: result=client.Read(req,timeout=40)
+              except Exception as e: print(json.dumps({'logRead':'failed','type':type(e).__name__,'code':str(e.code()) if hasattr(e,'code') else None}));break
+              for entry in result.entries:
+               seen+=1;tags=[k for k,p in patterns.items() if re.search(p,entry.message,re.I)]
+               for tag in tags: counts[tag]+=1
+               if tags and len(samples)<30:
+                codes=re.findall(r'\b(?:ERR_[A-Z_]+|E[A-Z]{3,20}|TypeError|ReferenceError|SyntaxError)\b',entry.message)
+                samples.append({'at':entry.timestamp.ToJsonString(),'level':entry.level,'categories':tags,'codes':codes[:8]})
+              token=result.next_page_token
+              if not token: break
+             print(json.dumps({'group':group,'entriesRead':seen,'categories':dict(counts),'samples':samples,'truncated':bool(token),'rawMessagesIncluded':False}))
         run: |
-          node --import tsx --input-type=module <<'JS'
-          import fs from 'node:fs/promises';
-          import assert from 'node:assert/strict';
-          import {getJsonStorage} from './apps/web/lib/data.ts';
-          import {restoreProAuctionsState,proAuctionsStateKey} from './scripts/lib/proauctions-durable-state.mjs';
-          const metadata=await getJsonStorage().readJson(proAuctionsStateKey,null);
-          assert.equal(metadata.version,2);
-          const root='/tmp/japan-checkpoint-readonly-verification';
-          await restoreProAuctionsState(root,metadata);
-          const restored=JSON.parse(await fs.readFile(root+'/checkpoint.json','utf8'));
-          assert.equal(restored.details,metadata.details);
-          assert.equal(restored.prepared,metadata.prepared);
-          console.log(JSON.stringify({verified:true,version:metadata.version,details:restored.details,prepared:restored.prepared,savedAt:metadata.savedAt,remoteWrites:false}));
+          node --input-type=module <<'JS'
+          import crypto from 'node:crypto';
+          import {spawnSync} from 'node:child_process';
+          const key=JSON.parse(process.env.YC_SA_JSON_CREDENTIALS), now=Math.floor(Date.now()/1000), enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+          const iam='https://iam.api.cloud.yandex.net/iam/v1/tokens';
+          const unsigned=enc({alg:'PS256',typ:'JWT',kid:key.id})+'.'+enc({iss:key.service_account_id,aud:iam,iat:now,exp:now+600});
+          const sig=crypto.sign('sha256',Buffer.from(unsigned),{key:key.private_key.slice(key.private_key.indexOf('-----BEGIN')),padding:crypto.constants.RSA_PKCS1_PSS_PADDING,saltLength:32}).toString('base64url');
+          const ir=await fetch(iam,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jwt:unsigned+'.'+sig}),signal:AbortSignal.timeout(30000)});
+          if(!ir.ok)throw Error('iam_http_'+ir.status);
+          const {iamToken}=await ir.json();
+          async function get(url){const r=await fetch(url,{headers:{Authorization:'Bearer '+iamToken},signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('read_http_'+r.status+':'+new URL(url).pathname);return r.json();}
+          const folder='b1g9vq73onqb7dp5hgqg';
+          const cs=await get('https://serverless-containers.api.cloud.yandex.net/containers/v1/containers?folderId='+folder);
+          const c=cs.containers.find(c=>c.name==='avtocena-web');if(!c)throw Error('container_missing');
+          const revs=await get('https://serverless-containers.api.cloud.yandex.net/containers/v1/revisions?containerId='+c.id);
+          console.log(JSON.stringify({container:c.id,revisions:revs.revisions.slice(0,3).map(r=>({id:r.id,status:r.status,resources:r.resources,executionTimeout:r.executionTimeout,concurrency:r.concurrency,logOptions:r.logOptions}))}));
+          const gs=await get('https://logging.api.cloud.yandex.net/logging/v1/logGroups?folderId='+folder);
+          const groupIds=[...new Set(revs.revisions.slice(0,3).map(r=>r.logOptions?.logGroupId).filter(Boolean))];
+          if(!groupIds.length)groupIds.push(...gs.groups.filter(g=>g.name==='default').map(g=>g.id));
+          const py=spawnSync('python',['-c',process.env.RUNTIME_LOG_READER],{env:{...process.env,DIAGNOSTIC_IAM_TOKEN:iamToken,DIAGNOSTIC_CONTAINER:c.id,DIAGNOSTIC_GROUPS:JSON.stringify(groupIds)},encoding:'utf8',timeout:180000});
+          process.stdout.write(py.stdout||'');if(py.status!==0){console.error('runtime_log_reader_failed',py.status);process.exitCode=1;}
           JS
