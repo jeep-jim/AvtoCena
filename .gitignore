@@ -10,3 +10,7 @@ data/deals/*.local.json
 data/partners/*.local.json
 
 yc-github-key.json
+
+# Reproducible derivatives prepared before dev/build
+apps/web/public/buyers/webp/
+apps/web/public/pdfjs/

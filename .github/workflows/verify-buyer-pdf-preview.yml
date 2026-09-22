@@ -1,0 +1,44 @@
+name: Verify buyer images and PDF preview
+on:
+  push:
+    branches: [fix/buyer-images-pdf-preview, main]
+    paths:
+      - 'apps/web/components/catalog/OfferPdf*'
+      - 'apps/web/components/home/BuyerGallery.tsx'
+      - 'apps/web/package.json'
+      - 'package-lock.json'
+      - 'scripts/prepare-web-assets.mjs'
+      - 'tests/browser/buyer-pdf-*'
+      - '.github/workflows/verify-buyer-pdf-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-web-assets.mjs
+      - run: npm install --prefix "$RUNNER_TEMP/pdf-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node "$RUNNER_TEMP/pdf-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - name: Chromium mobile and desktop, both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/pdf-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/buyer-pdf-preview.mjs
+      - name: WebKit mobile and desktop, both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/pdf-browser/node_modules/playwright/index.mjs
+          BROWSER: webkit
+        run: node --import tsx tests/browser/buyer-pdf-preview.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: buyer-pdf-preview
+          path: artifacts/buyer-pdf-preview
+          retention-days: 14
