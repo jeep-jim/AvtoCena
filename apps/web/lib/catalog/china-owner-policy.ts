@@ -1,6 +1,6 @@
 import type { VehicleOffer } from './types';
 
-export const CHINA_MAX_TOTAL_RUB = 16_000_000;
+export const CHINA_MAX_TOTAL_RUB = 15_000_000;
 export const CHINA_MAX_AGE_MONTHS = 72;
 export function catalogHardPriceCap(offer?: Partial<VehicleOffer>) {
   return offer?.market === 'china' ? CHINA_MAX_TOTAL_RUB : 15_000_000;

@@ -40,3 +40,32 @@ test('durable checkpoints restore completed files and retain the previous archiv
  await assert.rejects(()=>restoreProAuctionsState('bad',{...second,checksum:'wrong'}),/checksum/);
  }finally{process.chdir(cwd);if(oldDriver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=oldDriver;if(oldDurable===undefined)delete process.env.PROAUCTIONS_DURABLE;else process.env.PROAUCTIONS_DURABLE=oldDurable;await fs.rm(root,{recursive:true,force:true});}
 });
+
+test('multipart checkpoint rejects corrupt parts and failed uploads preserve the committed pointer',async()=>{
+ const fs=await import('node:fs/promises'),os=await import('node:os'),path=await import('node:path'),crypto=await import('node:crypto');
+ const {saveProAuctionsState,restoreProAuctionsState,proAuctionsStateKey}=await import('../scripts/lib/proauctions-durable-state.mjs');
+ const {getJsonStorage,LocalJsonStorage}=await import('../apps/web/lib/data');
+ const cwd=process.cwd(),env={...process.env};const root=await fs.mkdtemp(path.join(os.tmpdir(),'avtocena-parts-'));
+ const originalPut=LocalJsonStorage.prototype.putBinary;
+ try{
+ process.chdir(root);process.env.JSON_STORAGE_DRIVER='local';process.env.PROAUCTIONS_DURABLE='1';process.env.PROAUCTIONS_CHECKPOINT_PART_BYTES='65536';
+ await fs.mkdir('data');await fs.mkdir('collection');
+ const bytes=crypto.randomBytes(220000);await fs.writeFile('collection/large.bin',bytes);
+ const state={startedAt:new Date().toISOString(),complete:false,details:1};
+ await saveProAuctionsState('collection',state,true);
+ const storage=getJsonStorage(),pointer:any=await storage.readJson(proAuctionsStateKey,null);
+ const descriptor=JSON.parse((await storage.getBinary!(pointer.key)).data.toString());
+ assert.ok(descriptor.parts.length>=4);
+ await restoreProAuctionsState('restored',pointer);
+ assert.deepEqual(await fs.readFile('restored/large.bin'),bytes);
+ let writes=0;
+ LocalJsonStorage.prototype.putBinary=async function(...args:any[]){if(++writes===2)throw Error('injected_upload_failure');return originalPut.apply(this,args as any);};
+ await assert.rejects(()=>saveProAuctionsState('collection',state,true),/injected_upload_failure/);
+ LocalJsonStorage.prototype.putBinary=originalPut;
+ assert.deepEqual(await storage.readJson(proAuctionsStateKey,null),pointer);
+ await restoreProAuctionsState('still-restorable',pointer);
+ await storage.putBinary!(descriptor.parts[1].key,Buffer.from('corrupt'),'application/octet-stream');
+ await assert.rejects(()=>restoreProAuctionsState('corrupt',pointer),/part_checksum/);
+ await assert.rejects(()=>fs.stat('corrupt/large.bin'),/ENOENT/);
+ }finally{LocalJsonStorage.prototype.putBinary=originalPut;process.chdir(cwd);for(const key of ['JSON_STORAGE_DRIVER','PROAUCTIONS_DURABLE','PROAUCTIONS_CHECKPOINT_PART_BYTES'])if(env[key]===undefined)delete process.env[key];else process.env[key]=env[key];await fs.rm(root,{recursive:true,force:true});}
+});

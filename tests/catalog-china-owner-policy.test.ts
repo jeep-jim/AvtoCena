@@ -31,7 +31,7 @@ test('Autohome remains new 2026+ and China price cap does not change other marke
   assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2025})),false);
   assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2026,mileageKm:1})),false);
   assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2026,mileageKm:0})),true);
-  assert.equal(catalogHardPriceCap(offer()),16_000_000);
+  assert.equal(catalogHardPriceCap(offer()),15_000_000);
   assert.equal(catalogHardPriceCap(offer({market:'korea'})),15_000_000);
 });
 

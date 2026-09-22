@@ -9,7 +9,7 @@ on:
     branches: [main]
     paths: ['.github/market-runs/storage-maintenance.json']
   workflow_run:
-    workflows: ['Catalog · Five-market full rebuild']
+    workflows: ['Catalog · Five-market full rebuild', 'Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish']
     types: [completed]
     branches: [main]
 

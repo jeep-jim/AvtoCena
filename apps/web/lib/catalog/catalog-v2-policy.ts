@@ -23,7 +23,7 @@ export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   recentMaxAgeYears: 15,
   priorityMaxPowerHp: 160,
   priorityMaxTotalRub: 6_000_000,
-  hardMaxTotalRub: 16_000_000,
+  hardMaxTotalRub: 15_000_000,
   lowPowerMinShare: 0.8,
 };
 
@@ -72,7 +72,7 @@ export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: Ca
   const minimumYear = offer.market === "japan" ? 2010 : 2020;
   if (!year || year < minimumYear || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
-  if (totalRub !== undefined && totalRub > Math.min(catalogHardPriceCap(offer), options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  if (Math.max(totalRub || 0, number(offer.sellerPriceRub) || 0, number(offer.calculationSnapshot?.sourcePriceRub) || 0) > Math.min(catalogHardPriceCap(offer), options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {
     if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
     return isCatalogPriorityOffer(offer, options)

@@ -1103,6 +1103,8 @@ export type PersistCatalogOptions = {
   modificationRecovery?: boolean;
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
   beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
+  beforeManifestCommit?: () => void | Promise<void>;
+  expectedBaseGenerationId?: string;
   // Recovery writers may preserve already-published markets byte-for-byte while
   // rebuilding only their target market. Those rows are trusted only because
   // the caller has already read and hash-validated the current public market.
@@ -1138,6 +1140,9 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     throw new Error("catalog_production_writes_paused");
   }
   const storage = getJsonStorage();
+  const baselineManifest = await readManifest();
+  const expectedBaseGenerationId = options.expectedBaseGenerationId ?? baselineManifest.generationId;
+  if (baselineManifest.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "").split(",").map((value) => value.trim()).filter(Boolean));
   const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};
   const appendPublicOffersByMarket = options.appendPublicOffersByMarket || {};
@@ -1214,6 +1219,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     throw new Error("recovery_cannot_carry_unqualified_preserved_rows");
   }
   if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
+  await options.beforeManifestCommit?.();
   progress("persist_validations_passed", { publicCount: publishedOffers.length });
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
@@ -1242,7 +1248,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       slice.forEach((o) => { byId[o.id] = { market: o.market, chunk: name }; o.images.forEach((img) => { imagesById[img.id] = { objectKey: img.objectKey, mimeType: img.mimeType, checksum: img.checksum, size: img.size }; }); });
       await writeJsonAtomic(offerPath(generationId, market, name), slice.map(compactPublicStorageOffer));
     }
-    markets[market] = { count: offers.length, chunks, updatedAt: now };
+    markets[market] = { count: offers.length, chunks, updatedAt: Object.prototype.hasOwnProperty.call(preservedPublicOffersByMarket, market) ? (baselineManifest?.markets?.[market]?.updatedAt || now) : now };
     progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
   }
   await rebuildIndexes(generationId, publishedOffers, byId, imagesById);
@@ -1269,7 +1275,9 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
   progress("all_read_models_verified");
   for (let attempt = 0; attempt < 5; attempt++) {
-    const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);
+    await options.beforeManifestCommit?.();
+    const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", { ...manifest, generationId: "empty" });
+    if (current.value.generationId !== expectedBaseGenerationId) throw new Error("catalog_publish_base_changed");
     try {
       if (current.found && current.value?.generationId && current.value.generationId !== generationId) await storage.writeJson("catalog/previous-manifest.json", current.value);
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });

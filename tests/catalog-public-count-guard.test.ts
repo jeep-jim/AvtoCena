@@ -18,3 +18,9 @@ test('only verified withdrawals reduce protected baseline',()=>{
 test('misconfigured ratios fail closed',()=>{
  for(const ratio of [NaN,0.1,Infinity,1.1]) assert.throws(()=>guard({a:100},{a:100},{},ratio));
 });
+
+test('declining optional Autohome does not freeze a healthy growing China market',()=>{
+ assert.equal(guard({autohome_used_china_open:17756,autohome_new_china_open:1612},{autohome_used_china_open:24668,autohome_new_china_open:1323}).ok,true);
+ assert.equal(guard({autohome_used_china_open:17756,autohome_new_china_open:1612},{autohome_used_china_open:700,autohome_new_china_open:0}).ok,false);
+ assert.equal(guard({autopapa:8349,myauto:6},{autopapa:8194,myauto:4}).ok,true);
+});
