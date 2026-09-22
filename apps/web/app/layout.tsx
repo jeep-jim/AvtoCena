@@ -10,7 +10,7 @@ import { PublicLegalFooter } from "@/components/layout/PublicLegalFooter";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://avtocena.com"),
-  title: "АвтоЦена — авто под ваш бюджет за 30 секунд",
+  title: "АвтоЦена — авто на заказ под ваш бюджет, авторасчёт под ключ",
   description: "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.",
   manifest: "/manifest.json",
   icons: {
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon-light.png?v=transparent-2", sizes: "180x180" }],
   },
   openGraph: {
-    title: "АвтоЦена",
-    description: "Авто под ваш бюджет за 30 секунд",
+    title: "АвтоЦена — авто на заказ под ваш бюджет, авторасчёт под ключ",
+    description: "Авто на заказ под ваш бюджет, авторасчёт под ключ",
     url: "https://avtocena.com",
     siteName: "АвтоЦена",
     locale: "ru_RU",

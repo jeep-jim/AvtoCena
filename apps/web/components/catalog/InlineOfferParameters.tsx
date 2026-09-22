@@ -183,7 +183,7 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
   </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
-  {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам.</p> : null}
+  {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
   {afterPrice}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>

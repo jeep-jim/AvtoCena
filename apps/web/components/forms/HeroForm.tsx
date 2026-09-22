@@ -45,7 +45,7 @@ export function HeroForm() {
           <label className="mt-1 block text-lg font-black text-white">Найдите автомобиль, который можно привезти под ваш бюджет</label>
         </div>
         <div className="hidden rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white/75 md:block">
-          результат за 30 секунд
+          расчёт стоимости под ключ
         </div>
       </div>
 

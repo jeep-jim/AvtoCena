@@ -22,7 +22,7 @@ function decodeCity(value: string) {
 export async function generateMetadata({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }): Promise<Metadata> {
   const params = (await searchParams) || {};
   const city = cleanCity(first(params.city));
-  const title = city ? `Цена на авто под заказ в ${city} — АвтоЦена` : "АвтоЦена — авто под ваш бюджет за 30 секунд";
+  const title = city ? `Цена на авто под заказ в ${city} — АвтоЦена` : "АвтоЦена — авто на заказ под ваш бюджет, авторасчёт под ключ";
   const description = city
     ? `Автомобили под заказ с расчётом стоимости и доставкой в ${city}. Предложения из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.`
     : "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.";
