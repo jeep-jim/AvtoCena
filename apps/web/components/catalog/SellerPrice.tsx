@@ -18,7 +18,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
   const rate = offer.calculationSnapshot?.currencyRate as PublicCurrencyRate | undefined;
   const rateDelta = Number(rate?.rateDelta || (rate?.effectiveRate && rate?.previousEffectiveRate ? rate.effectiveRate-rate.previousEffectiveRate : 0));
   const japan = offer.market === "japan" && !isGreenCornerOffer(offer);
-  const priceLabel = sellerPriceLabel(offer);
+  const priceLabel = !panel && isGreenCornerOffer(offer) ? "В наличии" : sellerPriceLabel(offer);
   return <div className={panel ? "relative ac-offer-price-panel ac-price-trend-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)]" : "ac-price-trend relative min-w-0 text-[var(--ac-text)]"}>
     <div className="flex min-w-0 items-center justify-between gap-1">
       {label ? <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label shrink-0 whitespace-nowrap font-black`}>{label}</div> : null}

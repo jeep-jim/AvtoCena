@@ -61,5 +61,5 @@ export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const saved = props.offer.savedCalculationPreview;
  const priced = saved ? {offer:props.offer} : priceCardForCity(props.offer,city);
  const estimated = Number(props.offer?.japanDeliveredPreview?.totalRub) > 0 || (!isSellerPricedOffer(props.offer) && Number(props.offer?.totalRub) > 0);
- return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{saved?.deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Доставка: {saved.deliveryCity}</p> : (saved || estimated && !city) ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
+ return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{!saved?.deliveryCity && (saved || estimated && !city) ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
 }

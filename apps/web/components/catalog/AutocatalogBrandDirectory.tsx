@@ -83,7 +83,7 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
 
   return <section ref={root} className="mt-7" aria-labelledby="autocatalog-brands-title">
     <div ref={toolbar} className="ac-directory-toolbar sticky top-[64px] z-20 -mx-4 px-4 py-2.5 md:-mx-8 md:px-8">
-      <label className="flex min-h-12 items-center gap-3 rounded-xl bg-[var(--ac-surface-2)] px-3 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35 md:px-4">
+      <label className="ac-directory-search flex min-h-12 items-center gap-3 rounded-xl bg-[var(--ac-surface-2)] px-3 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35 md:px-4">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" strokeWidth="1.9" /><path d="m16 16 4.3 4.3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>
         <input
           type="search"

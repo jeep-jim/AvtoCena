@@ -468,6 +468,15 @@ html body .ac-page-copy .ac-auction-button {background:#b91c1c!important;color:#
 
 /* The directory follows the page theme; only the current letter is accented. */
 html body .ac-page-copy .ac-directory-toolbar {background:var(--ac-page-bg,#edf0f6); }
-html body .ac-page-copy .ac-directory-letter {background:#fff!important;color:#111!important;-webkit-text-fill-color:#111!important;}
-html[data-theme="light"] body .ac-page-copy .ac-directory-letter {background:#17191e!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html body .ac-page-copy .ac-directory-letter {background:#3d4652!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html[data-theme="light"] body .ac-page-copy .ac-directory-letter {background:#dce1e8!important;color:#4b5563!important;-webkit-text-fill-color:#4b5563!important;}
 html body .ac-page-copy .ac-directory-letter[aria-current="location"] {background:#ff3347!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+
+html[data-theme="light"] body .ac-page-copy .ac-directory-search {background:#fff!important;}
+.ac-directory-search input::-webkit-search-cancel-button,
+.ac-directory-search input::-webkit-search-decoration {display:none;-webkit-appearance:none;}
+/* Carry the stock section's soft emerald tint on each preview instead of a surrounding panel. */
+html body .ac-catalog-card[data-green-corner="true"],
+html body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#1a262c!important;}
+html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"],
+html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#e3f0eb!important;}

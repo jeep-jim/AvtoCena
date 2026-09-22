@@ -94,7 +94,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 
   return (
-    <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
+    <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
@@ -104,7 +104,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
             <div className={`line-clamp-2 min-w-0 font-black leading-[1.04] tracking-[-0.03em] text-white drop-shadow-[0_2px_15px_rgba(0,0,0,.7)] ${dense ? "text-[12px] sm:text-[17px] sm:leading-[1.08]" : "text-[16px] leading-[1.08]"}`}>{o.title}</div>
           </div>
         </div>
-        <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
+        <div className={`ac-catalog-card-body ${dense ? "p-2.5 sm:p-3.5" : "p-3.5"}`}>
           {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
           <div className={`${powerInfo?.borderline ? powerStyles.wrapChips : ""} flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
