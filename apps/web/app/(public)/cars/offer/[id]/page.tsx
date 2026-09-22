@@ -1,4 +1,4 @@
-import { selectRelatedOfferGroups } from "@/lib/catalog/related-offer-selection";
+import { selectRelatedOfferGroups, isRenderableRelatedOffer } from "@/lib/catalog/related-offer-selection";
 import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
 import { PUBLIC_CATALOG_MARKETS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
@@ -154,7 +154,7 @@ async function SimilarOffers({ current }: { current: any }) {
   const {stockModels,sameModel,crossMarketGroups,marketRows} = await selectRelatedOfferGroups({
     current,modelRows:modelResult.items,marketRows:marketResult.items,crossResults,
     greenModels,greenRows:(green?.items||[]).map(publicGreenOffer),
-    price:applyActiveBusinessPricingBatch,renderable:isRenderablePublicCatalogOffer,
+    price:applyActiveBusinessPricingBatch,renderable:isRenderableRelatedOffer,
   });
   const marketTotal = Math.max(0,Number(marketResult.total||0)) + (current.market==='japan' ? green?.items.length||0 : 0);
   const modelParams = new URLSearchParams({market:String(current.market||""),make,model:familyModel});
