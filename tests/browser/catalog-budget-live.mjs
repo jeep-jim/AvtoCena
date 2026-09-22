@@ -21,17 +21,22 @@ for(const market of ['japan','korea'])for(let repeat=0;repeat<2;repeat++){
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},serviceWorkers:'block'});const page=await context.newPage();
+ // RSC navigation can fall back to a full document load. A changed URL and
+ // visible server HTML do not yet mean the filter's React handlers are ready.
+ const waitForFilters=()=>page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Расширенные фильтры"]');return b&&!b.disabled;},null,{timeout:60000});
  await page.route('**/*',route=>['GET','HEAD'].includes(route.request().method())?route.continue():route.abort());
  await page.goto(`${origin}/cars?budget=2000000`,{waitUntil:'domcontentloaded',timeout:120000});
- await page.waitForFunction(()=>{const b=document.querySelector('button[aria-label="Расширенные фильтры"]');return b&&!b.disabled;},null,{timeout:60000});
+ await waitForFilters();
  const japan=page.getByRole('heading',{name:/Япония/});await japan.waitFor();
  const korea=page.locator('section').filter({has:page.getByRole('heading',{name:/Корея/})}).last();
  const link=korea.getByRole('link',{name:'Все →'});assert.equal(new URL(await link.getAttribute('href'),origin).searchParams.get('budget'),'2000000');
- await link.click();await page.waitForURL(/market=korea/,{timeout:90000});
+ await link.click();await page.waitForURL(/market=korea/,{waitUntil:'domcontentloaded',timeout:90000});
+ await waitForFilters();
  assert.equal(new URL(page.url()).searchParams.get('budget'),'2000000');
  const desktop=page.locator('.ac-catalog-filter-panel');const input=desktop.getByRole('textbox',{name:'Объём двигателя: до',exact:true});
  for(const [typed,expected] of [['1,5','1500'],['1498','1498']]){
-  await input.fill(typed);await input.press('Tab');await page.waitForURL(url=>url.searchParams.get('engineTo')===expected,{timeout:90000});
+  await waitForFilters();
+  await input.fill(typed);await input.press('Tab');await page.waitForURL(url=>url.searchParams.get('engineTo')===expected,{waitUntil:'domcontentloaded',timeout:90000});
   assert.equal(new URL(page.url()).searchParams.get('budget'),'2000000');
  }
  await page.screenshot({path:`${out}/desktop.png`});
