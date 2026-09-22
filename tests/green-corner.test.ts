@@ -1,3 +1,5 @@
+import {safePublicPricing} from "../apps/web/lib/catalog/safe-public-pricing";
+import {classifySpecificationEvidence} from "../apps/web/lib/catalog/specification-evidence-audit";
 import {catalogCoverThumbnail} from "../apps/web/lib/catalog/cover-image";
 import test, {mock} from "node:test";
 import fs from "node:fs";
@@ -101,4 +103,23 @@ test("Green retains source specifications without guessing ambiguous drive or in
  assert.ok(o.operational.sourceSpecifications?.groups[0].items.some(x=>x.value==="AAC"));
  const conflicting=normalizeGreenCorner({...row,driveType:"FF,FULLTIME4WD",dateOfManufacture:"2015-02-30"},rate,now);
  assert.equal(conflicting.drive,undefined);assert.equal(conflicting.productionDate,undefined);
+});
+
+
+test("Green source displacement survives detail safety without customer re-entry",()=>{
+ const offer=normalizeGreenCorner({...row,id:800001,company:"HONDA",model:"Freed AIR EX",year:2026,engineVolumeNum:1500,horsepower:118},rate,now);
+ assert.equal(classifySpecificationEvidence(offer,"engineCc").provenance,"source_evidence");
+ const safe=safePublicPricing(offer);
+ assert.equal(safe.engineCc,1500);
+ assert.equal(safe.powerHp,118);
+ assert.equal(safe.fuel,undefined); // The source does not supply fuel; do not guess.
+ assert.equal(safe.totalRub,null);
+ const mismatched=structuredClone(offer);
+ mismatched.operational!.sourceSpecifications!.sourceOfferId="another-lot";
+ assert.equal(safePublicPricing(mismatched).engineCc,undefined);
+ const conflicted:any=structuredClone(offer);
+ conflicted.operational.semanticEvidence={engineCc:{status:"conflict",source:"source_check",rawValues:[]}};
+ assert.equal(safePublicPricing(conflicted).engineCc,undefined);
+ const otherSource={...offer,sourceId:"other"};
+ assert.equal(safePublicPricing(otherSource).engineCc,undefined);
 });
