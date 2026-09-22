@@ -66,12 +66,13 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const X=32,W=346,R=396,RW=167,ink="#1B222C",muted="#68758A",border="#DCE2E9";
  const height=(s:string,w:number,size:number,bold=false)=>doc.font(bold?"bold":"regular").fontSize(size).heightOfString(s,{width:w,lineGap:1});
  const notes=offerPdfNotes(data);
+ const supportGap=16;
  const layouts=[8.6,8.2,7.8,7.4].map(font=>{
   const titleFont=font+10,titleH=height(data.title,W,titleFont,true),specH=height(data.specs,W,font-1),routeH=height(`${data.market} → ${data.city}`,W,font+6,true);
   const start=38+titleH+10+specH+15+routeH+16;
   const rows=data.sections.slice(0,2).map(s=>s.rows.map(r=>Math.max(font+10,height(r.label,223,font)+8,height(r.value,100,font,true)+8)));
   const noteFont=Math.max(6.5,font-1),noteHeights=notes.map(n=>height(n,W,noteFont)+5);
-  return {font,titleFont,titleH,specH,routeH,start,rows,noteFont,noteHeights,total:start+rows.reduce((t,rs)=>t+28+rs.reduce((a,b)=>a+b,0),0)+28+noteHeights.reduce((a,b)=>a+b,0)};
+  return {font,titleFont,titleH,specH,routeH,start,rows,noteFont,noteHeights,total:start+rows.reduce((t,rs)=>t+28+rs.reduce((a,b)=>a+b,0),0)+28+supportGap+noteHeights.reduce((a,b)=>a+b,0)};
  });
  const fit=layouts.find(l=>l.total<=776)||layouts.at(-1)!;
  const text=(s:string,x:number,y:number,w:number,size=fit.font,bold=false,color=ink)=>doc.font(bold?"bold":"regular").fontSize(size).fillColor(color).text(s,x,y,{width:w,lineGap:1});
@@ -101,7 +102,7 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  text(data.title,X,38,W,fit.titleFont,true);let y=38+fit.titleH+10;text(data.specs,X,y,W,fit.font-1,false,muted);y+=fit.specH+15;text(`${data.market} → ${data.city}`,X,y,W,fit.font+6,true);y=fit.start;
  const room=(h:number)=>{if(y+h>783){doc.addPage();y=38;}};
  data.sections.slice(0,2).forEach((section,si)=>{room(24+(fit.rows[si][0]||0));heading(si,y);y+=23;section.rows.forEach((row,ri)=>{const h=fit.rows[si][ri];room(h);layers.begin(si);const subtotal=row.label.startsWith("Итого:");if(subtotal)doc.roundedRect(X,y,W,h-1,4).fill("#F5F7F9");text(row.label,X+8,y+4,223,fit.font,subtotal);doc.font("bold").fontSize(fit.font).fillColor(ink).text(row.value,X+W-108,y+4,{width:100,align:"right",lineGap:1});doc.moveTo(X+8,y+h-1).lineTo(X+W-8,y+h-1).lineWidth(.4).strokeColor(border).stroke();layers.end();y+=h;});y+=5;});
- room(25+fit.noteHeights[0]);heading(2,y);y+=25;notes.forEach((note,i)=>{room(fit.noteHeights[i]);layers.begin(2);text(note,X,y,W,fit.noteFont,false,muted);layers.end();y+=fit.noteHeights[i];});
+ y+=supportGap;room(25+fit.noteHeights[0]);heading(2,y);y+=25;notes.forEach((note,i)=>{room(fit.noteHeights[i]);layers.begin(2);text(note,X,y,W,fit.noteFont,false,muted);layers.end();y+=fit.noteHeights[i];});
  const count=doc.bufferedPageRange().count;for(let i=0;i<count;i++){doc.switchToPage(i);text("АВТОЦЕНА / Индивидуальный расчёт",X,798,390,6,false,muted);doc.font("regular").fontSize(6).text(`${i+1} / ${count}`,523,798,{width:40,align:"right"});}
  doc.end();return output;
 }
