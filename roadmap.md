@@ -4371,3 +4371,7 @@ PR #1125 был объединён параллельно с восстанов�
 - Общая завершающая проверка публичных маршрутов в deploy run 35701700554 на момент записи ещё выполняется; отдельные старые задачи по 502/VPN и восстановлению других рынков этим исправлением не закрываются.
 
 - Финальная проверка: deploy run 35701700554 завершён полностью со статусом success, включая проверку публичных маршрутов.
+
+
+## 2026-09-22 — Green Corner follow-up
+Owner requested source specifications, unified stock controls/pagination, green accents and Japan availability filters. See docs/audits/green-corner-2026-09-22.md for source coverage, FOB filter scope, JPY pricing verification and release status.

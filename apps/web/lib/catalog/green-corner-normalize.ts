@@ -21,6 +21,18 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
  }))];
  if(!urls.length)throw Error("green_missing_photos");
  const baseRub=Math.round(sourcePrice*unitRate.effectiveRate);
+ const text=(value:unknown)=>typeof value==="string"&&value.trim()?value.trim():undefined;
+ const productionDate=text(row.dateOfManufacture);
+ const validDate=productionDate && /^\d{4}-\d{2}-\d{2}$/.test(productionDate) && Number.isFinite(Date.parse(productionDate))
+  && new Date(productionDate).toISOString().slice(0,10)===productionDate && productionDate.slice(0,4)===String(year) ? productionDate : undefined;
+ const sourceUrl=`https://akebono.world/green/lots/${row.id}`;
+ const details=[
+  ["Дата выпуска",text(row.dateOfManufacture)], ["Коробка передач (код источника)",text(row.transmission)],
+  ["Привод",text(row.driveType)], ["Цвет",text(row.color)], ["Код кузова",text(row.frame)],
+  ["Код модели",text(row.modelType)], ["Оценка",text(row.scores)], ["Оснащение (коды источника)",text(row.equipment)],
+  ["Экспортный сертификат",typeof row.hasExportCertificate==="boolean"?(row.hasExportCertificate?"Есть":"Нет"):undefined]
+ ].flatMap(([name,value])=>value?[{name:name!,value}]:[]);
+
  return {
   id:`green-${row.id}`,sourceId:GREEN_CORNER_SOURCE,sourceOfferId:String(row.id),market:"japan",
   offerType:"fixed",priceMode:"fixed",status:"active",catalogKind:"listing",
@@ -28,11 +40,15 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
   ...(Number(row.mileageNum)>=0&&row.mileageNum!=null?{mileageKm:Math.round(Number(row.mileageNum)*1000)}:{}),
   ...(Number(row.engineVolumeNum)>0?{engineCc:Number(row.engineVolumeNum)}:{}),
   ...(Number.isFinite(powerHp)&&powerHp>0?{powerHp,powerDataConfidence:"source_exact",powerDataSource:"Akebono"}:{}),
-  color:row.color||undefined,
+  color:text(row.color), productionDate:validDate,
+  transmission:text(row.transmission), drive:({FF:"fwd",FR:"rwd",FULLTIME4WD:"awd",PARTTIME4WD:"awd"} as Record<string,string>)[row.driveType], auctionGrade:text(row.scores),
   sourcePrice,sourceCurrency:"JPY",catalogPricingMode:"seller",sellerPriceRub:baseRub,totalRub:null,calculationStatus:"needs_data",
   calculationSnapshot:{currencyRate:{...unitRate,sourcePrice,sourcePriceRub:sourcePrice*unitRate.effectiveRate},sourcePriceRub:baseRub,pricingConfidence:"unavailable"},
   images:urls.map((url,index)=>({id:`green-${row.id}-${index}`,url,objectKey:"",size:0,checksum:"",mimeType:/\.png$/i.test(url)?"image/png":/\.webp$/i.test(url)?"image/webp":"image/jpeg"})),
   firstSeenAt:now,updatedAt:now,
-  operational:{sourceUrl:`https://akebono.world/green/lots/${row.id}`,sourcePublishedAt:row.createdAt,sourceVenueName:"Akebono · Зелёный угол"}
+  operational:{sourceUrl,sourcePublishedAt:row.createdAt,sourceVenueName:"Akebono · Зелёный угол",
+   modelCode:text(row.modelType)||text(row.frame),
+   sourceSpecifications:{version:1,sourceId:GREEN_CORNER_SOURCE,sourceOfferId:String(row.id),specificationId:`green-${row.id}`,sourceUrl,capturedAt:now,groups:[{name:"Характеристики Akebono",items:details}]}}
+
  };
 }

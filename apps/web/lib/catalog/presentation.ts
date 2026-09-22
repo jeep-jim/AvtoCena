@@ -606,7 +606,7 @@ export function presentCatalogOffer(offer: any) {
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),
     fuelLabel: catalogFuelName(offer?.fuel),
-    transmissionLabel: catalogTransmissionName(offer?.transmission),
+    transmissionLabel: catalogTransmissionName(offer?.transmission) === "уточняется" && offer?.sourceId === "akebono_green_japan_open" && offer?.transmission ? `Код ${safeCatalogText(offer.transmission)}` : catalogTransmissionName(offer?.transmission),
     driveLabel: catalogDriveName(offer?.drive),
     images,
   };

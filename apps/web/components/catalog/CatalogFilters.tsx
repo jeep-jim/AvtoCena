@@ -24,6 +24,7 @@ type FilterDraft = {
   make: string;
   model: string;
   market: string;
+  stock: string;
   bodyType: string;
   transmission: string;
   yearFrom: string;
@@ -104,8 +105,9 @@ function optionLabel(options: Option[], value: string) { return options.find((op
 function formatNumber(value: number) { return new Intl.NumberFormat("ru-RU").format(Math.round(value)); }
 function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
+    stock: initial.stock || "",
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
-    yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: initial.budget || initial.budgetTo || "",
+    yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: (initial.stock === "green" ? initial.fobFrom : initial.budgetFrom) || "", budget: (initial.stock === "green" ? initial.fobTo : initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
     auctionGrade: initial.market === "japan" ? auctionGradeLabel(initial.auctionGrade) || "" : "",
     fuel: initial.fuel || "", drive: initial.drive || "", powerTo: initial.powerTo || "",
@@ -121,11 +123,11 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
 function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
   const params = new URLSearchParams();
   const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
-  if (draft.market === "japan") add("auctionGrade", draft.auctionGrade);
+  if (draft.market === "japan") { add("auctionGrade", draft.auctionGrade); add("stock", draft.stock); }
   add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
-  add("budgetFrom", draft.budgetFrom); add("budget", draft.budget);
+  add(draft.stock === "green" ? "fobFrom" : "budgetFrom", draft.budgetFrom); add(draft.stock === "green" ? "fobTo" : "budget", draft.budget);
   add("mileageFrom", draft.mileageFrom); add("mileageTo", draft.mileageTo);
   add("engineFrom", draft.engineFrom); add("engineTo", draft.engineTo); add("powerTo", draft.powerTo);
   const sort = sortParam(sortKey, sortDirection);
@@ -164,11 +166,11 @@ function ElectricCheckbox({ value, onChange }: { value: string; onChange: (value
  </div>;
 }
 
-function PowerLimitCheckbox({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
+function PowerLimitCheckbox({ checked, onChange, sourcePower=false }: { sourcePower?:boolean; checked: boolean; onChange: (checked: boolean) => void }) {
   const [infoOpen, setInfoOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => { if (!infoOpen) return; const outside = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setInfoOpen(false); }; document.addEventListener("pointerdown", outside); return () => document.removeEventListener("pointerdown", outside); }, [infoOpen]);
-  return <div ref={root} className={`relative ${infoOpen ? "z-[250]" : "z-0"}`}><label className="ac-filter-control ac-power-limit flex min-h-13 cursor-pointer items-center gap-3 rounded-[15px] px-4 pr-12 text-sm font-black"><input type="checkbox" name="powerTo" value="160" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" /><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm transition" style={{ background: checked ? "#ff353d" : "var(--ac-surface-3)", border: checked ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: checked ? "#ffffff" : "transparent" }}>✓</span><span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5"><span>До 160 л.с.</span><span className="text-[10px] font-black text-red-500">свыше — полный утильсбор</span></span></label><button type="button" onClick={() => setInfoOpen((current) => !current)} className="absolute right-2.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-black" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Почему есть фильтр до 160 лошадиных сил" aria-expanded={infoOpen}>?</button>{infoOpen ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+8px)] rounded-2xl p-4 text-sm font-bold leading-6"><div className="font-black">Почему до 160 л.с.?</div><p className="mt-2 text-[var(--ac-muted)]">Мощность влияет на коэффициент утилизационного сбора. Для электромобилей и гибридов применяется расчётная мощность по документам.</p><p className="mt-2 font-black text-red-500">Свыше 160 л.с. итоговые платежи могут быть значительно выше.</p></div> : null}</div>;
+  return <div ref={root} className={`relative ${infoOpen ? "z-[250]" : "z-0"}`}><label className="ac-filter-control ac-power-limit flex min-h-13 cursor-pointer items-center gap-3 rounded-[15px] px-4 pr-12 text-sm font-black"><input type="checkbox" name="powerTo" value="160" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" /><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm transition" style={{ background: checked ? "#ff353d" : "var(--ac-surface-3)", border: checked ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: checked ? "#ffffff" : "transparent" }}>✓</span><span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5"><span>До 160 л.с.</span><span className="text-[10px] font-black text-red-500">{sourcePower ? "по данным продавца" : "свыше — полный утильсбор"}</span></span></label><button type="button" onClick={() => setInfoOpen((current) => !current)} className="absolute right-2.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-black" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Почему есть фильтр до 160 лошадиных сил" aria-expanded={infoOpen}>?</button>{infoOpen ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+8px)] rounded-2xl p-4 text-sm font-bold leading-6"><div className="font-black">Почему до 160 л.с.?</div><p className="mt-2 text-[var(--ac-muted)]">Мощность влияет на коэффициент утилизационного сбора. Для электромобилей и гибридов применяется расчётная мощность по документам.</p><p className="mt-2 font-black text-red-500">Свыше 160 л.с. итоговые платежи могут быть значительно выше.</p></div> : null}</div>;
 }
 
 function SortControl({ sortKey, direction, onKeyChange, onDirectionChange, mobile = false }: { sortKey: SortKey; direction: SortDir; onKeyChange: (key: SortKey) => void; onDirectionChange: (direction: SortDir) => void; mobile?: boolean }) {
@@ -264,7 +266,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
-        <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
+        <DualRange title={draft.stock === "green" ? "Цена FOB" : "Цена"} fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
       </div>
@@ -316,13 +318,14 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       const query=new URLSearchParams(nextQuery);
       const current=new URLSearchParams(window.location.search);
       for(const key of ["city","utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
-      startTransition(()=>router.push(query.size ? `/cars?${query}` : "/cars", { scroll: false }));
+      const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
+      startTransition(()=>router.push(query.size ? `${basePath}?${query}` : basePath, { scroll: false }));
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
 
   useEffect(() => {
-    if (!electricOnly) { setElectricFacets(null); return; }
+    if (!electricOnly || draft.stock === "green") { setElectricFacets(null); return; }
     let cancelled = false;
     loadElectricFacets(draft.fuel).then((next) => { if (!cancelled) setElectricFacets(next); }).catch(() => { if (!cancelled) setElectricFacets({ makes: [], models: [], markets: [], bodyTypes: [], fuels: ["electric", "hybrid"], transmissions: [], drives: [] }); });
     return () => { cancelled = true; };
@@ -353,7 +356,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     };
   }, [mobileOpen]);
 
-  const activeFacets = electricOnly ? electricFacets || facets : facets;
+  const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
   const marketOptions = markets;
@@ -363,10 +366,10 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [draft]);
   const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, draft.bodyType), [activeFacets, draft.bodyType]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
-  const transmissionOptions = useMemo(() => catalogFilterOptions(transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission]);
+  const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "market" && value !== "japan" ? {auctionGrade: ""} : {}) }));
+  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "stock" ? {budget:"",budgetFrom:""} : {}), ...(key === "market" && value !== "japan" ? {auctionGrade: "",stock:""} : {}) }));
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
@@ -379,6 +382,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     const rows: FilterChip[] = [];
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
     if (draft.market === "japan" && draft.auctionGrade) rows.push({key: "auctionGrade", label: `Оценка ${draft.auctionGrade}`, grade: draft.auctionGrade});
+    if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     if (draft.model) rows.push({ key: "model", label: draft.model });
     if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
@@ -387,7 +391,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (draft.drive) rows.push({ key: "drive", label: optionLabel(drives, draft.drive) });
     if (draft.powerTo === "160") rows.push({ key: "powerTo", label: "До 160 л.с." });
     if (draft.yearFrom || draft.yearTo) rows.push({ key: "year", label: `Год ${draft.yearFrom ? `от ${draft.yearFrom}` : ""}${draft.yearFrom && draft.yearTo ? " · " : ""}${draft.yearTo ? `до ${draft.yearTo}` : ""}`.trim() });
-    if (draft.budgetFrom || draft.budget) rows.push({ key: "budget", label: `Цена ${draft.budgetFrom ? `от ${formatNumber(Number(draft.budgetFrom))} ₽` : ""}${draft.budgetFrom && draft.budget ? " · " : ""}${draft.budget ? `до ${formatNumber(Number(draft.budget))} ₽` : ""}`.trim() });
+    if (draft.budgetFrom || draft.budget) rows.push({ key: "budget", label: `${draft.stock === "green" ? "FOB" : "Цена"} ${draft.budgetFrom ? `от ${formatNumber(Number(draft.budgetFrom))} ₽` : ""}${draft.budgetFrom && draft.budget ? " · " : ""}${draft.budget ? `до ${formatNumber(Number(draft.budget))} ₽` : ""}`.trim() });
     if (draft.mileageFrom || draft.mileageTo) rows.push({ key: "mileage", label: `Пробег ${draft.mileageFrom ? `от ${formatNumber(Number(draft.mileageFrom))}` : ""}${draft.mileageFrom && draft.mileageTo ? " · " : ""}${draft.mileageTo ? `до ${formatNumber(Number(draft.mileageTo))} км` : ""}`.trim() });
     if (draft.engineFrom || draft.engineTo) rows.push({ key: "engine", label: `Объём ${draft.engineFrom ? `от ${formatNumber(Number(draft.engineFrom))}` : ""}${draft.engineFrom && draft.engineTo ? " · " : ""}${draft.engineTo ? `до ${formatNumber(Number(draft.engineTo))} см³` : ""}`.trim() });
     return rows;
@@ -410,6 +414,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "totalRub") setSortDirection("asc");
     if (key === "year") setSortDirection("desc");
   };
+  const stockSelect = draft.market === "japan" ? <div className="my-3"><SimpleSelect name="stock" value={draft.stock} placeholder="Аукционы" options={[{value:"",label:"Аукционы"},{value:"green",label:"В наличии · Зелёный угол"}]} onChange={value=>setField("stock",value)} /></div> : null;
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
     <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
@@ -417,8 +422,9 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
+      {stockSelect}
       <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
-        <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
+        <PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox value={draft.fuel} onChange={setElectric} />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
@@ -434,8 +440,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div>{stockSelect}<AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
       </div>
     </form></div> : null}
 
