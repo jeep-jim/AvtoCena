@@ -1,3 +1,4 @@
+import {catalogCoverThumbnail} from "../apps/web/lib/catalog/cover-image";
 import test from "node:test";
 import assert from "node:assert/strict";
 import {normalizeGreenCorner,greenCornerFobPrice} from "../apps/web/lib/catalog/green-corner-normalize";
@@ -38,4 +39,10 @@ test("FOB uses active discounts but never expired discounts",()=>{
  assert.equal(greenCornerFobPrice({...row,discountPrice:880000},now),880000);
  assert.equal(greenCornerFobPrice({...row,discount:10},now),828000);
  assert.equal(greenCornerFobPrice({...row,discountPrice:880000,discountExpiresAt:"2026-09-01"},now),920000);
+});
+
+test("stock covers use the verified small rendition without changing gallery URLs",()=>{
+ const url="https://img.akebono.world/f5475203-dc90-4efe-ba51-3a2007383fd8.JPG";
+ assert.equal(catalogCoverThumbnail(url),"https://img.akebono.world/400x300/f5475203-dc90-4efe-ba51-3a2007383fd8.JPG");
+ assert.equal(catalogCoverThumbnail(catalogCoverThumbnail(url)),catalogCoverThumbnail(url));
 });
