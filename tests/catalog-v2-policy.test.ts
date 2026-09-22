@@ -245,3 +245,12 @@ test("public price ceiling remains fifteen million even if a legacy caller suppl
   assert.equal(classifyCatalogV2Offer(row).reason, "hard_price_cap");
   assert.equal(classifyCatalogV2Offer(row, policy({ hardMaxTotalRub: 100_000_000 })).reason, "hard_price_cap");
 });
+
+test('15 million cap applies to seller-only listings and cannot be loosened by worker options',()=>{
+ for(const market of ['china','uae','korea','europe','georgia'] as const){
+  const seller=offer('price-cap',{market,totalRub:undefined,catalogPricingMode:'seller',sellerPriceRub:30_000_000});
+  assert.equal(classifyCatalogV2Offer(seller).reason,'hard_price_cap');
+  assert.equal(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_001},{...CATALOG_V2_DEFAULT_POLICY,hardMaxTotalRub:99_000_000}).reason,'hard_price_cap');
+  assert.notEqual(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_000}).reason,'hard_price_cap');
+ }
+});

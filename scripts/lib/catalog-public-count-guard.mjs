@@ -7,7 +7,10 @@ export function catalogPublicCountGuard(previous, next, withdrawn = {}, ratio = 
   for (const [source, count] of Object.entries(previous)) {
     const remaining = Math.max(0, count - Math.min(count, withdrawn[source] || 0));
     baseline += remaining;
-    const minimum = Math.ceil(remaining * ratio);
+    // Autohome is a capped supplement (<=10%), never a guaranteed minimum inventory.
+    // A few independently rejected rows must not freeze an otherwise healthy market.
+    const minimum = source === 'autohome_new_china_open' ? 0
+      : Math.min(Math.ceil(remaining * ratio), Math.max(remaining ? 1 : 0, remaining - 2));
     const actual = next[source] || 0;
     if (actual < minimum) failures.push({source, previous:count, confirmedWithdrawals:withdrawn[source] || 0, minimum, actual});
   }

@@ -19,7 +19,7 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
  for(const [market,bucket] of groups){
   const low=bucket.filter(row=>catalogPowerBand(row)==="low");
-  const sellerUnknown=market === "china" ? [] : bucket.filter(row=>catalogPowerBand(row)==="unknown" && row.catalogPricingMode==="seller");
+  const sellerUnknown: T[] = [];
   const sellerUnknownSet=new Set(sellerUnknown);
   const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !sellerUnknownSet.has(row));
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
@@ -35,8 +35,8 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   const allowance=Math.floor(low.length/4);
   // Europe: fill the limited extra pool with the least expensive verified
   // delivered totals first. Seller-only prices are not comparable to totals.
-  // Seller inventory with unknown power remains available for parameter entry.
-  // It is not evidence for either the low-power or high-power assortment.
+  // Unknown power consumes the same 20% allowance as high power.
+  // Only already-published rows can be grandfathered while verified low-power stock grows.
   if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
   // An existing car must not vanish merely because its previously unknown power was recovered.
   // Retained cars consume the allowance first; new high-power admissions wait for room.

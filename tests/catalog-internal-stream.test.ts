@@ -104,3 +104,16 @@ test('one-market persistence reuses immutable chunks for untouched source IDs', 
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+test('an interleaved writer cannot be overwritten by stale internal reserve metadata',async()=>{
+ const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER;
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'avtocena-internal-race-'));
+ fs.mkdirSync(path.join(root,'data'));process.chdir(root);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();
+ try{
+  const storage=getJsonStorage(),winner={generationId:'gen_winner',sources:{}};
+  await storage.writeJson('catalog/internal/manifest.json',{generationId:'gen_baseline',sources:{}});
+  async function* interleaved(){await storage.writeJson('catalog/internal/manifest.json',winner);yield [];}
+  await assert.rejects(()=>persistInternalCatalog(storage,'gen_stale',[],interleaved()),/conflict/i);
+  assert.deepEqual(await storage.readJson('catalog/internal/manifest.json',null),winner);
+ }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(root,{recursive:true,force:true});}
+});

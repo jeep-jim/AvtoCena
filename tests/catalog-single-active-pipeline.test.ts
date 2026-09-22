@@ -14,59 +14,42 @@ function hasSchedule(source: string) {
 }
 
 function writesCatalogMarkets(source: string) {
-  return /catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
+  return /catalog-market-refresh\.yml|catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
-test("only the owner-approved seller inventory workflows are scheduled under one publication lock", () => {
-  const scheduledWriters = fs.readdirSync(root)
-    .filter((name) => /^catalog.*\.ya?ml$/i.test(name))
-    .filter((name) => {
-      const source = text(name);
-      return hasSchedule(source) && writesCatalogMarkets(source);
-    })
-    .sort();
-  assert.deepEqual(scheduledWriters, ['catalog-five-market-full-rebuild.yml']);
-  for(const name of scheduledWriters){
-    const source=text(name);
-    assert.match(source,/group: catalog-six-market-quality-rebuild/);
-    assert.match(source,/cancel-in-progress: false/);
-    assert.match(source,/CATALOG_SELLER_INVENTORY: '1'/);
-    assert.match(source,/catalog-storage-preflight/);
-  }
-
-  // Owner-approved maintenance uses the same object lock without publishing markets.
-  const cleanup = text("catalog-storage-cleanup.yml");
-  assert.equal(hasSchedule(cleanup), true);
-  assert.match(cleanup, /catalog-storage-maintenance\.mjs/);
-  assert.equal(writesCatalogMarkets(cleanup), false);
+test("each scheduled market owns its queue and shares guarded publication through the worker", () => {
+ const expected=['china','europe','georgia','korea','uae'].map(m=>`catalog-refresh-${m}.yml`).sort();
+ const scheduled=fs.readdirSync(root).filter(n=>/^catalog.*\.ya?ml$/.test(n)&&hasSchedule(text(n))&&writesCatalogMarkets(text(n))).sort();
+ assert.deepEqual(scheduled,expected);
+ const groups=new Set<string>();
+ for(const name of expected){
+  const source=text(name);
+  const group=source.match(/group: (catalog-refresh-\w+)/)?.[1];assert.ok(group);groups.add(group!);
+  assert.match(source,/cancel-in-progress: false/);
+  assert.match(source,/uses: \.\/\.github\/workflows\/catalog-market-refresh\.yml/);
+ }
+ assert.equal(groups.size,5);
+ const worker=text('catalog-market-refresh.yml');
+ assert.match(worker,/CATALOG_SELLER_INVENTORY: '1'/);
+ assert.match(worker,/catalog-storage-preflight/);
+ assert.match(worker,/catalogRefreshDue\(\)/);
+ assert.match(worker,/CATALOG_INTAKE_RESUME: '0'/);
+ assert.doesNotMatch(worker,/group: catalog-six-market/);
+ assert.equal(hasSchedule(text('catalog-five-market-full-rebuild.yml')),false);
 });
-
-test("five-market schedule stays separate from owner-approved resumable Japan refresh", () => {
-  const rebuild = text("catalog-five-market-full-rebuild.yml");
-  const cleanup = text("catalog-storage-cleanup.yml");
-  const japan = text("proauctions-collect-publish.yml");
-
-  assert.match(rebuild, /^\s{4}- cron: "0 18 \* \* \*"$/m);
-  assert.match(rebuild, /catalogRefreshDue\(\)/);
-  assert.equal((rebuild.match(/^\s{4}- cron:/gm) || []).length, 1);
-  assert.match(rebuild, /const allowed = \['china','korea','uae','georgia','europe'\]/);
-  assert.doesNotMatch(rebuild, /const allowed = \[[^\n]*japan/);
-  assert.match(japan, /proauctions-restore-state\.mjs/);
-  assert.match(japan, /^\s{4}- cron: "0 3 \* \* \*"$/m);
-  assert.doesNotMatch(japan, /run-id: 351/);
-
-  // Finite seller inventories must always start from the newest page during
-  // their weekly refresh; Japan remains outside this workflow entirely.
-  assert.match(rebuild, /matrix\.market == 'uae' \|\| matrix\.market == 'georgia'/);
-  assert.match(rebuild, /CATALOG_INTAKE_RESUME:.*&& '0' \|\| '1'/);
-
-  assert.match(cleanup, /^\s{4}- cron: "0 17 \* \* \*"$/m);
-  assert.equal((cleanup.match(/^\s{4}- cron:/gm) || []).length, 1);
-  for (const workflow of [rebuild, cleanup]) {
-    const retentionDays = [...workflow.matchAll(/retention-days:\s*(\d+)/g)].map((match) => Number(match[1]));
-    assert.ok(retentionDays.length > 0);
-    assert.deepEqual([...new Set(retentionDays)], [14]);
-  }
+test("Japan independently resumes durable progress and cleanup retains its bounded daily schedule", () => {
+ const japan=text('proauctions-collect-publish.yml'),cleanup=text('catalog-storage-cleanup.yml');
+ assert.match(japan,/catalog-refresh-japan/);
+ assert.match(japan,/proauctions-restore-state\.mjs/);
+ assert.match(japan,/cron: "0 3 \* \* \*"/);
+ assert.match(japan,/PROAUCTIONS_SECONDS: '2400'/);
+ assert.match(cleanup,/cron: "0 17 \* \* \*"/);
+ assert.match(cleanup,/catalog-storage-maintenance\.mjs/);
+ assert.equal(writesCatalogMarkets(cleanup),false);
+ for(const workflow of [text('catalog-market-refresh.yml'),japan,cleanup]){
+  const days=[...workflow.matchAll(/retention-days:\s*(\d+)/g)].map(m=>Number(m[1]));
+  assert.ok(days.length);assert.deepEqual([...new Set(days)],[14]);
+ }
 });
 
 test("saved Knowledge CORE source corpus cannot restart its multi-hour crawl on a schedule", () => {

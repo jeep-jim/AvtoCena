@@ -1,6 +1,7 @@
 // Read-only post-deploy verification: no source crawls, forms or storage writes.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {getEffectiveMarketVersion} from '../apps/web/lib/effective-market-settings.ts';
 const origin = process.env.CATALOG_PUBLIC_ORIGIN || 'https://avtocena.com';
 const report = {checkedAt:new Date().toISOString(),requests:[],quotes:[],ok:false};
 async function read(path) {
@@ -17,6 +18,8 @@ try {
   const home=JSON.parse(await read('/api/catalog/home'));
   report.marketCounts=home.marketCounts;
   for(const market of ['china','korea','uae','georgia','europe','japan']) {
+    const marketConfig=await getEffectiveMarketVersion(market);
+    assert.ok(Number.isFinite(Number(marketConfig?.securityDepositRub)),`Missing configured advance: ${market}`);
     const rows=home.items.filter(row=>row.market===market && (Number(row.totalRub)>0 || Number(row.sellerPriceRub)>0)).slice(0,2);
     assert.ok(rows.length,`No public quotes for ${market}`);
     for(const row of rows) {
@@ -39,7 +42,9 @@ try {
         assert.ok(!/data-price-line="security-deposit"/.test(html),`Advance counted as a cost: ${row.id}`);
         assert.equal(deposits.length,1,`Expected one advance: ${row.id}`);
         result.depositRub=Number(deposits[0][1]);
-        assert.equal(result.depositRub,market==='japan'?31000:160000,`Wrong advance: ${row.id}`);
+        result.expectedDepositRub=Number(marketConfig.securityDepositRub);
+        result.marketConfigId=marketConfig.id;
+        assert.equal(result.depositRub,result.expectedDepositRub,`Advance differs from active CRM settings: ${row.id}`);
         const lines = [...html.matchAll(/data-price-line="([^"]+)" data-price-amount-rub="([^"]+)"/g)];
         const car = lines.filter(line=>line[1]==='car');
         assert.equal(car.length,1,`Expected one vehicle remainder: ${row.id}`);

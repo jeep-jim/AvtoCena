@@ -42,6 +42,7 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   const original = await enrichOfferWithKnowledgeCore(source);
   if (specificationEvidenceComplete(original)) {
     const calculated = await calculateOfferWithVerifiedSpecifications(original,true);
+    if (Number(calculated.totalRub) > 15_000_000) return null;
     if (catalogOfferVisibleRub(calculated) > 0 && hasCredibleOfferContent(calculated) && !combustionPowerMismatch(calculated)) {
       delete calculated.catalogPricingMode; delete calculated.sellerPriceRub;
       return calculated;
@@ -51,6 +52,8 @@ export async function prepareSellerInventory(input: VehicleOffer, options: { pre
   if (!rate || !["cbr","cbr_live"].includes(rate.rateSource)) return null;
   const date = Date.parse(rate.rateDate);
   if (!Number.isFinite(date) || Math.abs(Date.now()-date)>4*86400000) return null;
+  // A failed delivered-price admission must never reappear as a cheaper seller-only listing.
+  if (Math.max(Number(original.totalRub)||0, Number(rate.sourcePriceRub)||0) > 15_000_000) return null;
   const offer = withoutDeliveredPrice(original);
   delete offer.modificationSelection; delete offer.recoveryQualification;
   if (classifySpecificationEvidence(original,"engineCc").state !== "exact") offer.engineCc = undefined;

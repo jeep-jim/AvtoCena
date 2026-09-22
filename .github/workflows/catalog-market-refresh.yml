@@ -1,15 +1,13 @@
-name: Catalog · Five-market full rebuild
+name: Catalog independent market worker
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/market-runs/five-market-full-rebuild.json']
+  workflow_call:
+    inputs:
+      market:
+        required: true
+        type: string
 permissions:
   contents: read
   actions: read
-concurrency:
-  group: catalog-six-market-quality-rebuild
-  cancel-in-progress: false
 jobs:
   plan:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
@@ -29,16 +27,19 @@ jobs:
       - id: policy
         env:
           EVENT_NAME: ${{ github.event_name }}
+          TARGET_MARKET: ${{ inputs.market }}
         run: |
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
           const run = ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue());
-          const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync('.github/market-runs/five-market-full-rebuild.json','utf8')) : {};
+          const market = process.env.TARGET_MARKET;
+          const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
+          if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = marker.reuseRunId || '';
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
-          const allowed = ['china','korea','uae','georgia','europe'];
+          const allowed = [market];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`publish_matrix=${JSON.stringify(publish)}\n`);
@@ -65,7 +66,7 @@ jobs:
       # UAE and Georgia are finite, newest-first seller inventories. Restart
       # them at page 1 on every approved pass so a saved end cursor cannot turn
       # the next refresh into an empty or tail-only scan.
-      CATALOG_INTAKE_RESUME: ${{ (needs.plan.outputs.reset_cursors == 'true' || matrix.market == 'uae' || matrix.market == 'georgia') && '0' || '1' }}
+      CATALOG_INTAKE_RESUME: '0'
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
       YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
@@ -74,7 +75,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_INTAKE_TIME_MS: '12600000'
-      CATALOG_INTAKE_MAX_ROWS_PER_SOURCE: ${{ matrix.market == 'china' && '20000' || '100000' }}
+      CATALOG_INTAKE_MAX_ROWS_PER_SOURCE: '100000'
       CATALOG_SOURCE_INVENTORY_MODE: '1'
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: '20000'
       CATALOG_SOURCE_TIMEOUT_MS: '25000'
@@ -97,6 +98,7 @@ jobs:
         with:
           name: catalog-intake-${{ matrix.market }}
           path: catalog-intake-${{ matrix.market }}/
+          overwrite: true
           retention-days: 14
   publish:
     needs: [plan, collect]
@@ -129,11 +131,11 @@ jobs:
       CATALOG_PUBLISH_MAX_PER_MARKET: '100000'
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '1'
       CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
-      # Publisher still caps other markets at 15M; China owner limit is 16M.
-      CATALOG_V2_HARD_MAX_TOTAL_RUB: '16000000'
+      CATALOG_V2_HARD_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_PRIORITY_TARGET: '8000'
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: '12'
       CATALOG_INDEX_WRITE_CONCURRENCY: '8'
+      CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
       CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
       CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: '300000'
       NODE_OPTIONS: --max-old-space-size=6144
@@ -161,10 +163,8 @@ jobs:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
-      - name: Reclaim expired storage under the publication lock
-        run: node --import tsx scripts/catalog-storage-maintenance.mjs
       - name: Check bucket reserve without deleting objects
-        run: node --import tsx scripts/catalog-storage-preflight.mjs
+        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Publish markets through calculation and retention guards
         env:
           CATALOG_PUBLISH_MARKETS: ${{ matrix.market }}
@@ -172,11 +172,12 @@ jobs:
         run: |
           failures=0
           for market in $CATALOG_PUBLISH_MARKETS; do
-            node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
+            node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs || exit 1
             export CATALOG_REBUILD_MARKETS="$market"
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
-            if node --import tsx scripts/catalog-publish-market.mjs; then
+            if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
               node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
+              node scripts/run-transient-retry.mjs node --import tsx scripts/record-market-refresh.mjs || failures=$((failures + 1))
             else
               failures=$((failures + 1))
             fi
@@ -195,4 +196,5 @@ jobs:
             catalog-weekly-*.json
             catalog-storage-preflight.json
             catalog-visible-calculation-coverage.json
+          overwrite: true
           retention-days: 14

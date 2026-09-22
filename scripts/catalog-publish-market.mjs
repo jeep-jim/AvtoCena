@@ -23,7 +23,7 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
-const { compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { catalogGenerationId, compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -53,7 +53,7 @@ const v2Policy = {
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
   priorityMaxPowerHp,
   priorityMaxTotalRub,
-  hardMaxTotalRub: Math.min(market === "china" ? 16_000_000 : 15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || (market === "china" ? 16_000_000 : 15_000_000))),
+  hardMaxTotalRub: Math.min(15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || (15_000_000))),
   lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
 const publishLockPath = "catalog/import-lock.json";
@@ -316,6 +316,7 @@ function logPublicationMemory(stage) {
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
 }
 if (!dryRun) await acquirePublishLock();
+const expectedBaseGenerationId = await catalogGenerationId();
 try {
 logPublicationMemory("before_intake");
 const generation = await readGenerationFiles();
@@ -616,7 +617,9 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
-const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)));
+const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)
+  // Explicit owner price exclusion, not a missing field or failed network request.
+  || Math.max(Number(row.totalRub)||0,Number(row.sellerPriceRub)||0,Number(row.calculationSnapshot?.sourcePriceRub)||0)>15_000_000));
 const replaceInternalSourceIds = new Set([
   ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
   ...generation.offers.map(offer => String(offer?.sourceId || "")),
@@ -675,6 +678,14 @@ if (regressionBlocked) {
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
       productionRefreshMarket: market,
+      expectedBaseGenerationId,
+      async beforeManifestCommit() {
+        await publishLockHeartbeatPromise;
+        await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
+          if (current?.operationId !== publishOperationId || Date.parse(current.lockedUntil) <= Date.now()) throw new Error("catalog_publish_lock_lost");
+          return { ...current, lockedUntil: new Date(Date.now() + publishLockTtlMs).toISOString(), heartbeatAt: new Date().toISOString() };
+        });
+      },
       retainedPowerMixIds: currentPublicIds,
       unavailableOffers,
       // Internal chunks are immutable and the manifest protects referenced

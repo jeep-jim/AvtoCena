@@ -12,10 +12,17 @@ else{
  if(!japan.published && ageDays(japan.startedAt)>2)problems.push('japan_publication_pending_over_48h');
  if(['source_access_refused','transport_error_checkpointed','repeated_listing_page'].includes(japan.stopReason))problems.push(`japan_${japan.stopReason}`);
 }
-const markets={};
+const markets={},assortmentProblems=[];
 for(const market of ['japan','china','korea','europe','georgia','uae']){
- const record=manifest?.markets?.[market];markets[market]={count:record?.count||0,publishedAt:record?.updatedAt||null};
- if(!record?.count || !Number.isFinite(ageDays(record.updatedAt)) || ageDays(record.updatedAt)>(market==='japan'?16:4))problems.push(`${market}_publication_missing_or_stale`);
+ const record=manifest?.markets?.[market];
+ const journal=await readDataJson(`catalog/operations/markets/${market}.json`,null);
+ for(const source of journal?.sources||[])if(['blocked','blocked_detail','list_failed','adapter_missing','cursor_loop','repeated_page'].includes(source.stopReason))problems.push(`${market}_${source.sourceId}_${source.stopReason}`);
+ if(market!=='japan'&&journal?.powerMix?.targetMet!==true)assortmentProblems.push(`${market}_80_percent_low_power_not_confirmed`);
+ const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
+ const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
+ markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
+ if(!Number.isFinite(ageDays(publishedAt)) || ageDays(publishedAt)>(market==='japan'?16:4))problems.push(`${market}_publication_missing_or_stale`);
+ if(!record?.count || !Number.isFinite(ageDays(observedAt)) || ageDays(observedAt)>(market==='japan'?16:4))problems.push(`${market}_collection_missing_or_stale`);
 }
-const report={checkedAt:new Date().toISOString(),ok:!problems.length,problems,markets,maintenanceAt:maintenance?.checkedAt,storageBytes:maintenance?.afterBytes,japan: japan?{savedAt:japan.savedAt,publishedAt:japan.publishedAt,complete:japan.complete,details:japan.details}:null,note:'Publication timestamps do not prove fresh source observations; full source-data audits remain separate.'};
+const report={checkedAt:new Date().toISOString(),ok:!problems.length,readyForAdvertising:!problems.length&&!assortmentProblems.length,problems,assortmentProblems,markets,maintenanceAt:maintenance?.checkedAt,storageBytes:maintenance?.afterBytes,japan: japan?{savedAt:japan.savedAt,publishedAt:japan.publishedAt,complete:japan.complete,details:japan.details}:null,note:'Publication timestamps do not prove fresh source observations; full source-data audits remain separate.'};
 await fs.writeFile('catalog-operations-health.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(problems.length)process.exitCode=1;
