@@ -1,6 +1,18 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
+import {recentHealthyStorageMaintenance} from './lib/catalog-storage-budget.mjs';
 const {mutateDataJson,getJsonStorage,readDataJson,writeDataJson}=await import('../apps/web/lib/data.ts');
+const minimumIntervalMs=Math.max(0,Number(process.env.CATALOG_STORAGE_MAINTENANCE_MIN_INTERVAL_MS||0));
+if(minimumIntervalMs>0){
+  const previous=await readDataJson('catalog/storage-maintenance.json',null);
+  if(recentHealthyStorageMaintenance(previous,Date.now(),minimumIntervalMs)){
+    const report={...previous,skipped:true,reason:'recent_healthy_maintenance'};
+    await fs.writeFile('catalog-storage-maintenance.json',JSON.stringify(report,null,2));
+    console.log(JSON.stringify(report));
+    // Do not acquire the publisher's lease, or fake a newer maintenance date.
+    process.exit(0);
+  }
+}
 const lockPath='catalog/import-lock.json';
 const operationId=`storage-maintenance-${crypto.randomUUID()}`;
 // Longer than the bounded workflow; an interrupted runner eventually unlocks.

@@ -5,3 +5,9 @@ export function catalogStorageBudget(currentBytes,inputBytes) {
  return {currentBytes,inputBytes,estimatedAdditionalBytes,headroomBytes,limitBytes,
   ok:currentBytes+estimatedAdditionalBytes+headroomBytes<limitBytes};
 }
+
+export function recentHealthyStorageMaintenance(report, now, minimumIntervalMs) {
+ const age=now-Date.parse(report?.checkedAt||'');
+ return report?.ok===true && Number.isFinite(age) && age>=0 && age<minimumIntervalMs
+   && Number.isSafeInteger(report.afterBytes) && report.afterBytes>=0 && report.afterBytes<35_000_000_000;
+}
