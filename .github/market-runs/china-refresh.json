@@ -1,10 +1,8 @@
 {
-  "operation": "catalog-autonomy-recovery-20260922",
+  "operation": "catalog-fresh-independent-sweep-20260922",
   "market": "china",
-  "reuseRunId": "35534895557",
-  "refreshMarkets": [],
   "publishMarkets": [
     "china"
   ],
-  "reason": "Re-publish saved observations through repaired guards without another source crawl"
+  "resetCursors": true
 }
