@@ -20,3 +20,12 @@ test('only transient failures retry; bad data, denied source access and safety g
  for(const error of ['object_storage_GET_unreachable:fetch failed','ETIMEDOUT','transport_error_checkpointed']) assert.equal(transientOperationFailure(error),true,error);
  for(const error of ['catalog_public_regression_guard:korea','checkpoint_part_checksum_mismatch','source_access_refused','source_access_403','syntax error','catalog_publish_base_changed']) assert.equal(transientOperationFailure(error),false,error);
 });
+
+test('successful partial publications cannot hide broken sources; transient retries are bounded',()=>{
+ const journal={...input.journal,sources:[{sourceId:'encar',stopReason:'list_failed',errors:[{message:'network timeout'}]}]};
+ const decision=recoveryDecision({...input,journal});
+ assert.equal(decision.action,'dispatch');assert.equal(decision.sourceAttempts,1);
+ assert.equal(recoveryDecision({...input,journal,recovery:{windowStartedAt:new Date(now-3600000).toISOString(),sourceAttempts:3}}).reason,'source_retry_limit_reached');
+ assert.equal(recoveryDecision({...input,journal:{...journal,sources:[{sourceId:'encar',stopReason:'blocked'}]}}).reason,'source_failure_requires_attention');
+ assert.equal(recoveryDecision({...input,journal:{...journal,sources:[{sourceId:'encar',stopReason:'time_budget'}]}}).action,'none');
+});

@@ -16,6 +16,7 @@ const markets={};
 for(const market of ['japan','china','korea','europe','georgia','uae']){
  const record=manifest?.markets?.[market];
  const journal=await readDataJson(`catalog/operations/markets/${market}.json`,null);
+ for(const source of journal?.sources||[])if(['blocked','blocked_detail','list_failed','adapter_missing','cursor_loop','repeated_page'].includes(source.stopReason))problems.push(`${market}_${source.sourceId}_${source.stopReason}`);
  const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
  const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
  markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null};

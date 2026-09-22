@@ -17,7 +17,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
   market==='japan'?storage.readJson('catalog/collector-state/proauctions/current.json',null):null,
   storage.readJson(`catalog/operations/recovery/${market}.json`,null),
  ]);
- const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,lastDispatchAt:dispatch?.at});
+ const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,lastDispatchAt:dispatch?.at,recovery:dispatch});
  if(decision.action==='inspect_failure'){
   const jobs=await api(`actions/runs/${decision.runId}/jobs?per_page=100`);
   const failures=jobs.jobs.filter(j=>['failure','timed_out'].includes(j.conclusion));
@@ -33,6 +33,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
  }
  if(decision.action==='dispatch')await api(`actions/workflows/${workflow}/dispatches`,'POST',{ref:'main'});
  if(['dispatch','rerun_failed'].includes(decision.action))await storage.writeJson(`catalog/operations/recovery/${market}.json`,{at:new Date().toISOString(),...decision});
+ if(['deterministic_or_unclassified_failure','retry_limit_reached','source_retry_limit_reached','source_failure_requires_attention','old_failed_run_requires_new_schedule'].includes(decision.reason))process.exitCode=1;
  report.markets[market]=decision;
  }catch(e){report.markets[market]={action:'none',error:String(e.message)};process.exitCode=1;}
 }
