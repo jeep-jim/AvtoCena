@@ -42,7 +42,7 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
     while (cursor < offers.length) {
       const index = cursor++;
       const offer = offers[index];
-      if (offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
+      if ((offer as any).savedCalculationPreview || offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
       try {
         const quote = await preview(offer.id, JSON.stringify([offer.updatedAt, offer.sourcePrice, configuration, new Date().toISOString().slice(0, 10)]), generationId, offer.updatedAt || "", offer.sourcePrice ?? null, offer.sourceCurrency ?? null);
         if (quote) result[index] = { ...offer, japanExportRestriction: quote.japanExportRestriction, japanDeliveredPreview: quote };

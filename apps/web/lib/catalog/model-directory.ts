@@ -1,4 +1,5 @@
 import { countCanonicalCatalogModels } from "./canonical-model-counts";
+import { DetailReadCache } from "./detail-read-cache";
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
@@ -133,10 +134,11 @@ const readKnowledge = cache(async () => {
   return {models, variants, references};
 });
 
-export const readAutocatalogCounts = cache(async () => {
+const autocatalogCounts = new DetailReadCache<ReturnType<typeof countCanonicalCatalogModels>>({maxEntries:1,maxBytes:1024*1024,ttlMs:60_000,concurrency:1});
+export const readAutocatalogCounts = cache(async () => autocatalogCounts.get("counts", async () => {
   const [models, projection] = await Promise.all([readDirectoryModels(), readCurrentPublicCatalogProjection()]);
   return countCanonicalCatalogModels(models, projection.rows);
-});
+}));
 
 function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
   const trustedVariants = variants.filter(trustedVariant);

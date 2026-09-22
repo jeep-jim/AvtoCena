@@ -91,7 +91,7 @@ test("converts source prices to rubles before power and utilization checks", () 
 
 test("catalog cards preserve the compact layout and never render source currency", () => {
   assert.match(catalogCard, /catalogOfferVisibleRub/);
-  assert.match(catalogCard, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(catalogCard, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\} label=\{priceLabel\}/);
   assert.match(catalogCard, /const priceLabel = o\.year \? `\$\{o\.year\} г\.` : "Год уточняется"/);

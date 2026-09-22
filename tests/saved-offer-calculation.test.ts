@@ -21,6 +21,11 @@ test("saved employee calculation survives fresh reads and price updates, rejects
   const second=await saveOfferCalculation(offer,{...draft,powerHp:"160",powerKw:"117.6798"},calculation,"test-manager",first.version);
   assert.notEqual(second.version,first.version);
   assert.equal((await getSavedOfferCalculation(offer))?.draft.powerHp,"160");
+  const {attachSavedCalculationPreviews}=await import("../apps/web/lib/catalog/saved-calculation-previews");
+  const [preview]:any[]=await attachSavedCalculationPreviews([offer]);
+  assert.equal(preview.savedCalculationPreview.version,second.version);
+  assert.equal(preview.savedCalculationPreview.totalRub,2500000);
+  assert.equal(Math.round(preview.savedCalculationPreview.parameters.powerHp),160);
  } finally {await getJsonStorage().deleteJson?.(`offer-calculations/${createHash("sha256").update(offer.id).digest("hex")}.json`);}
 });
 test("only allowed calculation fields persist; incomplete hybrid cannot be saved",()=>{
@@ -41,4 +46,50 @@ test("a customer followup in an existing processed lead alerts again; manager ed
  assert.equal(incoming,"2026-09-20T11:00:00Z");
  assert.equal(unseenNewLeads([{...lead,lastIncomingAt:incoming}],Date.parse(lead.createdAt)).length,1);
  assert.equal(unseenNewLeads([{...lead,lastIncomingAt:incoming}],Date.parse(incoming)).length,0);
+});
+
+test("saved previews use the same price and parameters across all markets without leaking manager identity",async()=>{
+ const {savedPreviewEntry,attachSavedPreviewEntries}=await import('../apps/web/lib/catalog/saved-calculation-previews');
+ const {savedOfferIdentity}=await import('../apps/web/lib/catalog/saved-offer-calculation');
+ const {offerWithSavedPreview}=await import('../apps/web/lib/catalog/saved-calculation-preview');
+ for(const market of ['japan','china','korea','uae','europe','georgia']){
+  const offer:any={id:`saved-${market}`,market,sourceId:`source-${market}`,sourceOfferId:'1',engineCc:undefined,powerHp:undefined,catalogPricingMode:'seller',sellerPriceRub:500000,japanDeliveredPreview:{totalRub:1000000}};
+  const record:any={offerId:offer.id,identity:savedOfferIdentity(offer),version:'v1',savedAt:'2026-09-22T12:00:00Z',savedBy:'private-id',savedByName:'Private manager',draft,calculation:{totalRub:2500000,currencyRate:{currency:'JPY',effectiveRate:.5}}};
+  const entry=savedPreviewEntry(record,offer)!;assert.ok(entry);
+  const projection:any={id:offer.id,market,sourceGroup:offer.sourceId};
+  const [attached]:any[]=attachSavedPreviewEntries([projection],{version:1,entries:{[offer.id]:entry}});
+  const shown=offerWithSavedPreview(attached);
+  assert.equal(shown.totalRub,2500000);assert.equal(shown.engineCc,1998);assert.ok(Math.abs(shown.powerHp-150)<.01);
+  assert.equal(shown.fuel,'petrol');assert.equal(shown.savedCalculationPreview.deliveryCity,'Новокузнецк');
+  assert.equal(shown.japanDeliveredPreview,undefined);
+  assert.ok(!JSON.stringify(attached).includes('private-id'));assert.ok(!JSON.stringify(attached).includes('Private manager'));
+  const [mismatch]:any[]=attachSavedPreviewEntries([{...projection,sourceGroup:'different'}],{version:1,entries:{[offer.id]:entry}});
+  assert.equal(mismatch.savedCalculationPreview,undefined);
+ }
+});
+
+test("public saved preview endpoint bounds batches and exposes no index identity",async()=>{
+ const {GET}=await import('../apps/web/app/api/catalog/saved-previews/route');
+ assert.equal((await GET(new Request('http://localhost/api/catalog/saved-previews?ids='+Array.from({length:51},(_,i)=>'id-'+i).join(',')))).status,400);
+ assert.equal((await GET(new Request('http://localhost/api/catalog/saved-previews?ids=../private'))).status,400);
+ const response=await GET(new Request('http://localhost/api/catalog/saved-previews?ids=not-a-real-offer'));
+ assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+ assert.deepEqual(await response.json(),{previews:{'not-a-real-offer':null}});
+});
+
+
+test("saved preview never uses invalid totals",async()=>{
+ const {savedCalculationPreviewRub}=await import('../apps/web/lib/catalog/saved-calculation-preview');
+ for(const totalRub of [0,-1,Infinity,NaN])assert.equal(savedCalculationPreviewRub({totalRub} as any),0);
+ assert.equal(savedCalculationPreviewRub({totalRub:2500000} as any),2500000);
+});
+
+
+test("saved electric power replaces stale source motor sums and utilization power",async()=>{
+ const {offerWithSavedPreview}=await import('../apps/web/lib/catalog/saved-calculation-preview');
+ const {catalogPowerDisplay}=await import('../apps/web/lib/catalog/power-display');
+ const shown=offerWithSavedPreview({power30MinKwByMotor:[100,150],utilizationPowerKw:250,savedCalculationPreview:{version:'saved',totalRub:3000000,deliveryCity:'',utilizationPowerKw:60,parameters:{fuel:'electric',powertrainKind:'electric',power30MinKw:60}}});
+ assert.equal(catalogPowerDisplay(shown)?.thirtyMinutePowerKw,60);
+ assert.equal(catalogPowerDisplay(shown)?.utilizationPowerKw,60);
+ assert.equal(shown.power30MinKwByMotor,undefined);
 });

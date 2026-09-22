@@ -222,7 +222,7 @@ test("cards convert source prices to rubles while customs calculation is pending
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
   assert.match(catalogCard, /catalogOfferVisibleRub/);
-  assert.match(catalogCard, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(catalogCard, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\} label=\{priceLabel\}/);
   assert.doesNotMatch(catalogCard, /function sourceMoney/);

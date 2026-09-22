@@ -55,7 +55,7 @@ export default async function AutocatalogPage() {
   const totalOffers = directory.reduce((sum, brand) => sum + brand.offerCount, 0);
   const totalModels = directory.reduce((sum, brand) => sum + brand.modelCount, 0);
 
-  return <main className="ac-autocatalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
+  return <main className="ac-autocatalog-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">

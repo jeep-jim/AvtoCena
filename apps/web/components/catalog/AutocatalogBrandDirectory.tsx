@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
 export type AutocatalogBrandItem = {
@@ -36,6 +36,9 @@ function modelWord(count: number) {
 
 export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrandItem[] }) {
   const [query, setQuery] = useState("");
+  const toolbar = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLElement>(null);
+  const [activeLetter, setActiveLetter] = useState("#");
   const normalizedQuery = searchable(query);
   const allLetters = useMemo(() => [...new Set(brands.map((brand) => groupLetter(brand.name)))].sort((a, b) => a === "#" ? -1 : b === "#" ? 1 : a.localeCompare(b, "en")), [brands]);
   const filtered = useMemo(() => {
@@ -48,8 +51,38 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
     return [...rows.entries()].sort(([left], [right]) => left === "#" ? -1 : right === "#" ? 1 : left.localeCompare(right, "en"));
   }, [filtered]);
 
-  return <section className="mt-7" aria-labelledby="autocatalog-brands-title">
-    <div className="sticky top-[64px] z-20 -mx-4 border-y border-white/5 bg-[#07080d]/95 px-4 py-2.5 backdrop-blur-xl md:-mx-8 md:px-8">
+  useEffect(() => {
+    const bar = toolbar.current;
+    const header = document.querySelector(".ac-public-header");
+    if (!bar) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const top = bar.getBoundingClientRect().bottom + 12;
+      const sections = Array.from(root.current?.querySelectorAll<HTMLElement>("[data-brand-letter]") || []);
+      let active = sections[0]?.dataset.brandLetter || "";
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top > top) break;
+        active = section.dataset.brandLetter || active;
+      }
+      setActiveLetter(active);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const syncSize = () => {
+      const headerHeight = header?.getBoundingClientRect().height || 64;
+      bar.style.top = `${headerHeight}px`;
+      root.current?.style.setProperty("--directory-scroll-offset", `${headerHeight + bar.offsetHeight + 12}px`);
+      schedule();
+    };
+    const resize = new ResizeObserver(syncSize);
+    resize.observe(bar); if (header) resize.observe(header);
+    window.addEventListener("scroll", schedule, {passive:true});
+    schedule();
+    return () => { resize.disconnect(); window.removeEventListener("scroll", schedule); cancelAnimationFrame(frame); };
+  }, [grouped]);
+
+  return <section ref={root} className="mt-7" aria-labelledby="autocatalog-brands-title">
+    <div ref={toolbar} className="ac-directory-toolbar sticky top-[64px] z-20 -mx-4 px-4 py-2.5 md:-mx-8 md:px-8">
       <label className="flex min-h-12 items-center gap-3 rounded-xl bg-[var(--ac-surface-2)] px-3 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35 md:px-4">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" strokeWidth="1.9" /><path d="m16 16 4.3 4.3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>
         <input
@@ -66,7 +99,18 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
         {allLetters.map((letter) => <a
           key={letter}
           href={`#brands-${letter === "#" ? "number" : letter.toLowerCase()}`}
-          className={`flex h-8 min-w-0 items-center justify-center rounded-lg px-1 text-[11px] font-black transition md:h-9 md:text-xs ${grouped.some(([group]) => group === letter) ? "bg-red-500 text-white hover:bg-red-600" : "pointer-events-none bg-[var(--ac-surface-2)] text-[var(--ac-muted)] opacity-25"}`}
+          onClick={event => {
+            if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)return;
+            event.preventDefault();
+            const target=document.getElementById(`brands-${letter === "#" ? "number" : letter.toLowerCase()}`);
+            if(!target || !toolbar.current)return;
+            const offset=(document.querySelector(".ac-public-header")?.getBoundingClientRect().height || 64)+toolbar.current.offsetHeight+12;
+            window.history.replaceState(window.history.state,"",event.currentTarget.getAttribute("href"));
+            window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset,behavior:"instant"});
+          }}
+          aria-current={activeLetter === letter ? "location" : undefined}
+          aria-disabled={!grouped.some(([group]) => group === letter) || undefined}
+          className={`ac-directory-letter flex h-8 min-w-0 items-center justify-center rounded-lg px-1 text-[11px] font-black transition md:h-9 md:text-xs ${grouped.some(([group]) => group === letter) ? "" : "pointer-events-none bg-[var(--ac-surface-2)] text-[var(--ac-muted)] opacity-25"}`}
         >{letter}</a>)}
       </div>
     </div>
@@ -77,7 +121,7 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
     </div>
 
     {grouped.length ? <div className="mt-5 space-y-9">
-      {grouped.map(([letter, rows]) => <section key={letter} id={`brands-${letter === "#" ? "number" : letter.toLowerCase()}`} className="scroll-mt-44">
+      {grouped.map(([letter, rows]) => <section key={letter} id={`brands-${letter === "#" ? "number" : letter.toLowerCase()}`} data-brand-letter={letter} className="scroll-mt-[var(--directory-scroll-offset,176px)]">
         <div className="flex items-center gap-3 border-b border-white/8 pb-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-500 text-lg font-black text-white">{letter}</div>
           <div className="text-xs font-bold text-[var(--ac-muted)]">{rows.length} {rows.length === 1 ? "марка" : rows.length >= 2 && rows.length <= 4 ? "марки" : "марок"}</div>
@@ -86,6 +130,7 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
           {rows.map((brand) => <Link
             key={brand.slug}
             href={`/cars/brand/${brand.slug}`}
+            prefetch={false}
             className="group flex min-h-[68px] min-w-0 items-center gap-2.5 rounded-xl bg-[var(--ac-surface-2)] px-2.5 py-2 transition hover:bg-[var(--ac-surface-3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/45 md:min-h-[72px] md:px-3"
           >
             <span className="flex h-12 w-[70px] shrink-0 items-center justify-center">

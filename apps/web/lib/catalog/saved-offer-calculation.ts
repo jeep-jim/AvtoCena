@@ -40,5 +40,7 @@ export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<stri
     if ((matchingSavedCalculation(current,offer)?.version || null) !== expectedVersion) throw new SavedCalculationConflict("Карточка уже изменена другим сотрудником. Обновите страницу перед сохранением.");
     return record;
   });
+  const {publishSavedCalculationPreview}=await import("./saved-calculation-previews");
+  await publishSavedCalculationPreview(record,offer);
   return record;
 }

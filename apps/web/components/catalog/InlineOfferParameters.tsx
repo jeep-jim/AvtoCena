@@ -1,4 +1,5 @@
 "use client";
+import {invalidateSavedCalculationPreviews} from "./useSavedCalculationPreview";
 import { OfferPdfButton } from "./OfferPdfButton";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
@@ -138,6 +139,7 @@ export function InlineOfferParameters({canSave=false,savedCalculation,deliveryMa
    if(page)page.dataset.offerSavedVersion=data.version;
    setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
    if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
+   invalidateSavedCalculationPreviews();
    setSaveMessage("Сохранено. Можно отправить клиенту ссылку.");
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
