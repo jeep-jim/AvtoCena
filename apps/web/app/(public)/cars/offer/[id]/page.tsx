@@ -359,7 +359,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
   const favoriteRub = savedCalculation?.calculation.totalRub || catalogOfferVisibleRub(initialPublic);
   const snapshot = { sourceId: offer.sourceId, offerType: offer.offerType, fuel:offer.fuel,powertrainKind:offer.powertrainKind, catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: initialPublic.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : initialPublic.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: `/cars/offer/${o.id}` };
-  const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
+  const marketHref = isGreenCornerOffer(offer) ? "/cars/green" : `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
   const safePowerHp = publicCatalogPowerHp(raw);
@@ -371,7 +371,8 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const electrified = isElectric || isHybrid;
-  const japanAuction = String(raw.market || "").toLowerCase() === "japan";
+  const greenCorner = isGreenCornerOffer(offer);
+  const japanAuction = String(raw.market || "").toLowerCase() === "japan" && !greenCorner;
   const powerValue = electrified
     ? o.powerKw ? `${o.powerKw} кВт` : safePowerHp ? `${safePowerHp} л.с.` : ""
     : safePowerHp ? `${safePowerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
@@ -419,7 +420,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const primarySpecs = displayOnlySpecs.slice(0, 4);
   const secondarySpecs = displayOnlySpecs.slice(4);
 
-  const auctionStatus = japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
+  const auctionStatus = greenCorner ? <div data-green-corner-status className="flex min-h-14 min-w-0 items-center rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2 text-xs font-semibold text-emerald-600"><Link href="/cars/green">Зелёный угол · В наличии в Японии · Без торгов</Link></div> : japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
     <p className="min-w-0 text-xs font-semibold leading-5 text-[var(--ac-muted)]"><span>Продано на торгах{enrichedOffer.auctionName ? ` · ${enrichedOffer.auctionName}` : ""}</span>{" · "}<span className="whitespace-nowrap">{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Открыть результат аукциона" className="ml-2">↗</a> : null}</p>
     <JapanAuctionBadges offer={o} interactive hideRestriction />
   </div> : null;
