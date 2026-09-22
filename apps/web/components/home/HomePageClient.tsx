@@ -1,5 +1,5 @@
-import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 "use client";
+import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import Link from "next/link";

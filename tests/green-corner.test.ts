@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {normalizeGreenCorner} from "../apps/web/lib/catalog/green-corner-normalize";
+import {normalizeGreenCorner,greenCornerFobPrice} from "../apps/web/lib/catalog/green-corner-normalize";
 import {isSellerPricedOffer,sellerPriceLabel} from "../apps/web/lib/catalog/seller-price-contract";
 import {collectGreenCorner,assertGreenPublication} from "../scripts/lib/akebono-green-source.mjs";
 const now="2026-09-22T06:00:00Z";
@@ -32,4 +32,10 @@ test("Green denies collapse and empty replacement but permits ordinary stock tur
  assert.doesNotThrow(()=>assertGreenPublication(448,430,430));
  assert.throws(()=>assertGreenPublication(448,100,100),/collapse/);
  assert.throws(()=>assertGreenPublication(448,0,0));
+});
+
+test("FOB uses active discounts but never expired discounts",()=>{
+ assert.equal(greenCornerFobPrice({...row,discountPrice:880000},now),880000);
+ assert.equal(greenCornerFobPrice({...row,discount:10},now),828000);
+ assert.equal(greenCornerFobPrice({...row,discountPrice:880000,discountExpiresAt:"2026-09-01"},now),920000);
 });

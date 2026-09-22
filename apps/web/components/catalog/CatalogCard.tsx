@@ -1,3 +1,4 @@
+"use client";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { CatalogCover } from "./CatalogCover";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";

@@ -1,5 +1,5 @@
-import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 "use client";
+import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useEffect, useId, useRef, useState } from "react";
