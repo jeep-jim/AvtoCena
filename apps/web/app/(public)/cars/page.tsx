@@ -1,3 +1,4 @@
+import { JapanSectionTabs } from "@/components/catalog/JapanSectionTabs";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { parseEngineCc } from "@/lib/catalog/engine-input";
@@ -55,6 +56,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
+  if (first(params.market) === "japan" && first(params.stock) === "green") redirect(`/cars/green?${new URLSearchParams(Object.entries(params).map(([k,v])=>[k,first(v)]))}`);
   const requestedMarket = first(params.market).toLowerCase();
   if (requestedMarket && !PUBLIC_CATALOG_MARKET_SET.has(requestedMarket as CatalogMarket)) redirect("/cars");
   const selectedMarket = requestedMarket;
@@ -160,7 +162,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
-        {selectedMarket === "japan" ? <nav aria-label="Разделы Японии" className="mb-5 flex gap-4 text-sm font-bold"><span aria-current="page">Аукционная Япония</span><Link href="/cars/green" className="text-emerald-600">Зелёный угол · в наличии →</Link></nav> : null}
+        {selectedMarket === "japan" ? <JapanSectionTabs active="auction" params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))} /> : null}
         <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs ac-hide-scrollbar -mx-1 mb-4 flex min-w-0 items-center gap-x-2 overflow-x-auto whitespace-nowrap px-1 pb-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mb-5 md:overflow-visible md:text-xs">
           {breadcrumbItems.map((item, index) => <span key={`${item.href}-${item.label}`} className="flex shrink-0 items-center gap-x-2">
             {index > 0 ? <span aria-hidden="true">/</span> : null}

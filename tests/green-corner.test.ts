@@ -92,3 +92,13 @@ test("Green uses the full Japan breakdown with exactly one yen-linked logistics 
   assert.equal(missing.ok,false);
  }finally{read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
+
+
+test("Green retains source specifications without guessing ambiguous drive or invalid dates",()=>{
+ const o=normalizeGreenCorner({...row,transmission:"FAT",driveType:"FF",dateOfManufacture:"2015-05-12",frame:"156942",modelType:"156942",scores:"4.5",equipment:"AAC",hasExportCertificate:true},rate,now);
+ assert.equal(o.transmission,"FAT");assert.equal(o.drive,"fwd");assert.equal(o.productionDate,"2015-05-12");
+ assert.equal(o.auctionGrade,"4.5");assert.equal(o.operational.modelCode,"156942");
+ assert.ok(o.operational.sourceSpecifications?.groups[0].items.some(x=>x.value==="AAC"));
+ const conflicting=normalizeGreenCorner({...row,driveType:"FF,FULLTIME4WD",dateOfManufacture:"2015-02-30"},rate,now);
+ assert.equal(conflicting.drive,undefined);assert.equal(conflicting.productionDate,undefined);
+});

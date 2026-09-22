@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Fragment } from "react";
+import { loadMoreGreenCorner } from "./green-corner-load-more-action";
 import { loadMoreCatalog } from "./catalog-load-more-action";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
@@ -13,10 +14,12 @@ type Saved = {batches: Batch[]; total: number; scrollY: number; savedAt: number}
 const visits = new Map<string, Saved>();
 const TTL = 30 * 60_000;
 
-export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards}: {
-  query: CatalogSearchParams; initialPage: number; initialTotal: number; initialCount: number; initialCards: ReactNode;
+export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery}: {
+  greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number; initialCount: number; initialCards: ReactNode;
 }) {
-  const key = JSON.stringify([Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
+  const green = greenQuery !== undefined;
+  const basePath = green ? "/cars/green" : "/cars";
+  const key = JSON.stringify([basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
   const [batches, setBatches] = useState<Batch[]>([{page: initialPage, cards: initialCards, count: initialCount}]);
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
@@ -57,6 +60,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   }, [key]);
 
   const fallbackQuery = new URLSearchParams(Object.entries(query).filter(([,value]) => value != null && value !== "").map(([key,value])=>[key,String(value)]));
+  if (green) { fallbackQuery.delete("market"); for(const [key,value] of Object.entries(greenQuery)) if(value) fallbackQuery.set(key,value); }
   const count = batches.reduce((sum, batch) => sum + batch.count, 0);
   const page = batches[batches.length - 1].page;
   fallbackQuery.set("page", String(page + 1));
@@ -66,14 +70,14 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   function pageHref(target: number) {
     const params = new URLSearchParams(fallbackQuery);
     params.set("page", String(target));
-    return `/cars?${params}`;
+    return `${basePath}?${params}`;
   }
   const more = page * 24 < total && batches[batches.length - 1].count > 0;
   async function load() {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError("");
     try {
-      const result = await loadMoreCatalog(query, page + 1);
+      const result = await (green ? loadMoreGreenCorner(greenQuery, page + 1) : loadMoreCatalog(query, page + 1));
       if (!mounted.current) return;
       setBatches(current => [...current, {page: result.page, cards: result.cards, count: result.ids.length}]);
       setTotal(result.total);
@@ -93,7 +97,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
         </Fragment>)}
         {page < pageCount ? <a href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></a> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
       </nav> : null}
-      {more ? <a href={`/cars?${fallbackQuery}`} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
+      {more ? <a href={`${basePath}?${fallbackQuery}`} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`${green ? "ac-green-button" : ""} min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;

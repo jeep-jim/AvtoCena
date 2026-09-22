@@ -3,7 +3,7 @@ export const GREEN_ENDPOINT = 'https://akebono.world/graphql/catalog/open';
 export const GREEN_QUERY = `query greenCornerLots($first:Int,$offset:Int,$filter:LotsFilter) {
  lotsPaginatedList:lots(first:$first,offset:$offset,filter:$filter) {
   items:nodes {id company model modelGrade year dateOfManufacture engineVolumeNum horsepower
-    mileageNum transmission driveType color priceInJapan priceInJapanCurrency isSold location subgroup media createdAt discount discountPrice discountExpiresAt}
+    mileageNum transmission driveType color equipment frame modelType scores hasExportCertificate priceInJapan priceInJapanCurrency isSold location subgroup media createdAt discount discountPrice discountExpiresAt}
   totalCount:total
  }
 }`;
