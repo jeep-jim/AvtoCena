@@ -3,7 +3,7 @@
  */
 export const TOPAVTO_DEALER = {
  name: "TOP AVTO",
- label: "Ваш дилер по подбору и доставке авто",
+ label: "Дилер по подбору и доставке авто",
  inn: "422036933030",
  ogrnip: "326420500062911",
  website: "https://topavto.online/",
