@@ -15,6 +15,7 @@ function PdfPage({ pdf, number, width, layers, revision }: { pdf: PDFDocumentPro
   const [height, setHeight] = useState(width * 1.415);
   useEffect(() => {
     let disposed = false;
+    let rendered = false;
     let task: ReturnType<PDFPageProxy["render"]> | undefined;
     const node = canvas.current;
     if (!node) return;
@@ -31,8 +32,11 @@ function PdfPage({ pdf, number, width, layers, revision }: { pdf: PDFDocumentPro
         node.height = Math.ceil(viewport.height * ratio);
         task = page.render({ canvas: node, viewport, transform: [ratio, 0, 0, ratio, 0, 0], optionalContentConfigPromise: Promise.resolve(layers) });
         await task.promise;
+        rendered = true;
         if (disposed) return;
         node.dataset.rendered = "true";
+        node.dataset.revision = String(revision);
+        node.dataset.pageWidth = String(width);
         const annotations = await page.getAnnotations();
         if (disposed) return;
         setLinks(annotations.filter((item: LinkAnnotation) => item.url && /^(https?:|mailto:|tel:)/i.test(item.url)).map((item: LinkAnnotation) => ({ ...item, box: viewport.convertToViewportRectangle(item.rect) })));
@@ -42,7 +46,7 @@ function PdfPage({ pdf, number, width, layers, revision }: { pdf: PDFDocumentPro
         if (!disposed && !(e instanceof Error && e.name === "RenderingCancelledException")) setError("Не удалось показать страницу. Закройте предпросмотр и попробуйте ещё раз.");
       }
     })();
-    return () => { disposed = true; task?.cancel(); };
+    return () => { disposed = true; if (!rendered) task?.cancel(); };
   }, [pdf, number, width, layers, revision]);
   return <div className="relative shrink-0 bg-white shadow-lg" style={{ width, height }} data-pdf-page={number}>
     <canvas ref={canvas} style={{ width, height }} aria-label={`Страница ${number}`} />
@@ -85,7 +89,7 @@ export default function OfferPdfPreview({ blob, filename, onClose }: { blob: Blo
         if (disposed) return;
         const assets = `/pdfjs/${engine.version}/`;
         engine.GlobalWorkerOptions.workerSrc = `${assets}pdf.worker.min.mjs`;
-        loading = engine.getDocument({ data: new Uint8Array(await blob.arrayBuffer()), cMapUrl: `${assets}cmaps/`, cMapPacked: true, standardFontDataUrl: `${assets}standard_fonts/`, wasmUrl: `${assets}wasm/`, isEvalSupported: false, disableFontFace: true });
+        loading = engine.getDocument({ data: new Uint8Array(await blob.arrayBuffer()), cMapUrl: `${assets}cmaps/`, cMapPacked: true, standardFontDataUrl: `${assets}standard_fonts/`, wasmUrl: `${assets}wasm/`, isEvalSupported: false, disableFontFace: true, isOffscreenCanvasSupported: false });
         const document = await loading.promise;
         const config = await document.getOptionalContentConfig();
         if (!disposed) { setPdf(document); setLayers(config); }
