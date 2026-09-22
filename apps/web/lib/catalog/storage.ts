@@ -1108,6 +1108,7 @@ export type PersistCatalogOptions = {
   preservedInternalOffers?: AsyncIterable<VehicleOffer[]>;
   replaceInternalSourceIds?: ReadonlySet<string>;
   retainedPowerMixIds?: ReadonlySet<string>;
+  retainedPowerMixMinimumByMarket?: Readonly<Record<string, number>>;
   // A normal market refresh may append canonical newcomers while keeping every
   // already-published row byte-stable. Protected rows win duplicate and quota
   // ties, which makes routine collection genuinely grow-only.
@@ -1207,7 +1208,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // written, so a preservation mismatch cannot switch or partially stage a new
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
-  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds);
+  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds, options.retainedPowerMixMinimumByMarket);
   const publishedOffers = options.modificationRecovery
     ? limitModificationInventory(canonicalPublic.offers, catalogOfferVisibleRub)
     : canonicalPublic.offers;
@@ -1330,7 +1331,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exactPreserveMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>(), retainedPowerMixIds?: ReadonlySet<string>) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exactPreserveMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>(), retainedPowerMixIds?: ReadonlySet<string>, minimumCountByMarket?: Readonly<Record<string, number>>) {
   // Keep source/internal objects immutable. Mutable rows receive the same
   // deterministic V2 + source-translation identity used by cards.
   // A one-market writer must not rename, reprice or delete another market.
@@ -1356,18 +1357,18 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], exa
   const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
   // Other markets are immutable snapshots, not candidates for this refresh.
   // Deduplication and model-year quotas apply only to the market being rebuilt.
-  const { powerMix, sourceShare } = selectCatalogPublicationMix(quota.rows, process.env.CATALOG_SELLER_INVENTORY === "1", retainedPowerMixIds);
+  const { powerMix, sourceShare } = selectCatalogPublicationMix(quota.rows, process.env.CATALOG_SELLER_INVENTORY === "1", retainedPowerMixIds, minimumCountByMarket);
   return { offers: [...exactPreservedRows, ...powerMix.rows], qualityRejected, identityRejected, priceOutliers, deduplicated, quota, powerMix, sourceShare };
 }
 
-export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[], protectedPublicOffers: VehicleOffer[] = [], retainedPowerMixIds?: ReadonlySet<string>) {
+export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[], protectedPublicOffers: VehicleOffer[] = [], retainedPowerMixIds?: ReadonlySet<string>, minimumCountByMarket?: Readonly<Record<string, number>>) {
   // Match persistence's knowledge/specification normalization before auditing
   // rejections. Otherwise a row can pass preview and disappear during the
   // writer's later normalization, leaving no per-ID removal evidence.
   const protectedIds = new Set(protectedPublicOffers.map((offer) => String(offer?.id || "")).filter(Boolean));
   const normalized = await Promise.all(storedOffers.filter((offer) => !protectedIds.has(String(offer?.id || ""))).map(async offer =>
     normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
-  return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds, retainedPowerMixIds);
+  return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds, retainedPowerMixIds, minimumCountByMarket);
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {

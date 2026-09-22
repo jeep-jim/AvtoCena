@@ -13,7 +13,7 @@ export function catalogPowerBand(offer: Partial<VehicleOffer>) {
 }
 
 /** Public assortment only: callers retain the complete source inventory. */
-export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[], options: { retainedIds?: ReadonlySet<string> } = {}) {
+export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[], options: { retainedIds?: ReadonlySet<string>; minimumCountByMarket?: Readonly<Record<string, number>> } = {}) {
  const groups=new Map<string,T[]>();
  for(const row of rows){const market=String(row.market||"");const bucket=groups.get(market)||[];bucket.push(row);groups.set(market,bucket);}
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
@@ -42,12 +42,19 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   // Retained cars consume the allowance first; new high-power admissions wait for room.
   const retainedSet=new Set(retainedOther);
   const newOther=other.filter(row=>!retainedSet.has(row));
-  const newAllowance=Math.max(0,allowance-retainedOther.length);
-  const keptOther=[...retainedOther,...newOther.slice(0,newAllowance)];
+  const minimum = options.minimumCountByMarket?.[market];
+  if (minimum !== undefined && (!Number.isSafeInteger(minimum) || minimum < 0)) throw Error('invalid_power_mix_minimum');
+  // New verified low-power stock can replace old high/unknown rows without
+  // reducing the previous market count. The fixed baseline makes repeated
+  // preview/persistence selection idempotent instead of progressively shrinking.
+  const retainedAllowance = minimum === undefined ? retainedOther.length : Math.max(allowance, minimum - low.length);
+  const retainedKept = retainedOther.slice(0, retainedAllowance);
+  const newAllowance=Math.max(0,allowance-retainedKept.length);
+  const keptOther=[...retainedKept,...newOther.slice(0,newAllowance)];
   const kept=new Set<T>([...low,...keptOther,...sellerUnknown]);
   selected.push(...bucket.filter(row=>kept.has(row)));
-  removed.push(...newOther.slice(newAllowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,retainedAboveAllowance:Math.max(0,retainedOther.length-allowance),published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
+  removed.push(...retainedOther.slice(retainedKept.length),...newOther.slice(newAllowance));
+  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,retainedAboveAllowance:Math.max(0,retainedKept.length-allowance),replacedByLowPower:retainedOther.length-retainedKept.length,published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
  }
  return {rows:selected,removed,report};
 }

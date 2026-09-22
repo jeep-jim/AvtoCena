@@ -381,6 +381,7 @@ let currentRetainedRows = [...existingInventory.values()].filter((row) => {
 reserveRows.length = 0;
 existingInventory.clear();
 const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
+const retainedPowerMixMinimumByMarket = { [market]: currentMarketRows.length };
 const currentPublicIds = new Set(currentMarketRows.map((offer) => String(offer?.id || "")).filter(Boolean));
 const retainedTargetPublicRows = process.env.CATALOG_APPEND_RETAINED_PUBLIC === "1"
   ? currentRetainedRows.filter((offer) => currentPublicIds.has(String(offer?.id || "")))
@@ -516,7 +517,7 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   expectedPublishedHashByMarket[otherMarket] = hashRows(preservedRows);
 }
 
-const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds);
+const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds, retainedPowerMixMinimumByMarket);
 const nextIds = new Set(canonicalTargetPreview.offers.map(offer => offer.id));
 for (const [field, reason] of [
   ["qualityRejected", "canonical:qualityRejected"],
@@ -687,6 +688,7 @@ if (regressionBlocked) {
         });
       },
       retainedPowerMixIds: currentPublicIds,
+      retainedPowerMixMinimumByMarket,
       unavailableOffers,
       // Internal chunks are immutable and the manifest protects referenced
       // paths. Replace only this market's sources and reuse every untouched

@@ -62,3 +62,15 @@ test('publication mix retains recovered existing power without admitting new exc
  assert.ok(result.rows.some(row=>row.id==='old'));
  assert.deepEqual(result.powerMix.removed.map(row=>row.id),['new']);
 });
+
+test('count-preserving low-power replacements compose with the Autohome cap without repeated shrinkage',()=>{
+ const old=[...Array.from({length:10},(_,i)=>auto('auto'+i,{powerHp:150})),...Array.from({length:10},(_,i)=>row('old-low'+i,undefined,{powerHp:100})),...Array.from({length:80},(_,i)=>row('old-high'+i,undefined,{powerHp:300}))];
+ const fresh=Array.from({length:80},(_,i)=>row('new-low'+i,undefined,{powerHp:120}));
+ const retained=new Set(old.map(r=>r.id)),minimum={china:100};
+ const first=selectCatalogPublicationMix([...old,...fresh],true,retained,minimum);
+ assert.ok(first.rows.length>=100);
+ assert.ok(first.sourceShare.report.china.actualShare<=0.1);
+ assert.equal((first.powerMix.report.china as any).targetMet,true);
+ const again=selectCatalogPublicationMix(first.rows,true,retained,minimum);
+ assert.deepEqual(again.rows,first.rows);
+});
