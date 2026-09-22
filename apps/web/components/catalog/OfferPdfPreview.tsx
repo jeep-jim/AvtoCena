@@ -39,7 +39,7 @@ function PdfPage({ pdf, number, width, layers, revision }: { pdf: PDFDocumentPro
         node.dataset.pageWidth = String(width);
         const annotations = await page.getAnnotations();
         if (disposed) return;
-        setLinks(annotations.filter((item: LinkAnnotation) => item.url && /^(https?:|mailto:|tel:)/i.test(item.url)).map((item: LinkAnnotation) => ({ ...item, box: viewport.convertToViewportRectangle(item.rect) })));
+        setLinks(annotations.filter((item: LinkAnnotation) => item.url && /^(https?:|mailto:|tel:)/i.test(item.url)).map((item: LinkAnnotation) => ({ ...item, box: [...viewport.convertToViewportPoint(item.rect[0], item.rect[1]), ...viewport.convertToViewportPoint(item.rect[2], item.rect[3])] })));
         const content = await page.getTextContent();
         if (!disposed) setText(content.items.map(item => "str" in item ? item.str : "").join(" "));
       } catch (e) {
@@ -89,7 +89,7 @@ export default function OfferPdfPreview({ blob, filename, onClose }: { blob: Blo
         if (disposed) return;
         const assets = `/pdfjs/${engine.version}/`;
         engine.GlobalWorkerOptions.workerSrc = `${assets}pdf.worker.min.mjs`;
-        loading = engine.getDocument({ data: new Uint8Array(await blob.arrayBuffer()), cMapUrl: `${assets}cmaps/`, cMapPacked: true, standardFontDataUrl: `${assets}standard_fonts/`, wasmUrl: `${assets}wasm/`, isEvalSupported: false, disableFontFace: true, isOffscreenCanvasSupported: false });
+        loading = engine.getDocument({ data: new Uint8Array(await blob.arrayBuffer()), cMapUrl: `${assets}cmaps/`, cMapPacked: true, standardFontDataUrl: `${assets}standard_fonts/`, wasmUrl: `${assets}wasm/`, disableFontFace: true, isOffscreenCanvasSupported: false });
         const document = await loading.promise;
         const config = await document.getOptionalContentConfig();
         if (!disposed) { setPdf(document); setLayers(config); }

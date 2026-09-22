@@ -18,6 +18,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Audit production dependencies before merge
+        run: npm audit --omit=dev --audit-level=high
       - name: Complete regression suite
         run: npm test
       - name: Customs tests

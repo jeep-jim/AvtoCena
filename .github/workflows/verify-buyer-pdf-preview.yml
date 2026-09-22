@@ -1,7 +1,7 @@
 name: Verify buyer images and PDF preview
 on:
   push:
-    branches: [fix/buyer-images-pdf-preview, main]
+    branches: [fix/buyer-images-pdf-preview, fix/pdf-preview-dependency, main]
     paths:
       - 'apps/web/components/catalog/OfferPdf*'
       - 'apps/web/components/home/BuyerGallery.tsx'
@@ -24,6 +24,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
       - run: node scripts/prepare-web-assets.mjs
       - run: npm install --prefix "$RUNNER_TEMP/pdf-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - run: node "$RUNNER_TEMP/pdf-browser/node_modules/playwright/cli.js" install --with-deps webkit
