@@ -1,6 +1,8 @@
 // Read-only post-deploy verification: no source crawls, forms or storage writes.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {getOffer} from '../apps/web/lib/catalog/storage.ts';
+import {getSavedOfferCalculation} from '../apps/web/lib/catalog/saved-offer-calculation.ts';
 import {getEffectiveMarketVersion} from '../apps/web/lib/effective-market-settings.ts';
 const origin = process.env.CATALOG_PUBLIC_ORIGIN || 'https://avtocena.com';
 const report = {checkedAt:new Date().toISOString(),requests:[],quotes:[],ok:false};
@@ -27,14 +29,24 @@ try {
       const encoded=html.match(/data-offer-preview="([^"]+)"/)?.[1];
       assert.ok(encoded,`Offer page unavailable: ${row.id}`);
       const preview=JSON.parse(decode(encoded));
-      const expected=Number(row.catalogPricingMode==='seller'?row.sellerPriceRub:row.publicVisibleRub || row.totalRub);
+      const listRub=Number(row.catalogPricingMode==='seller'?row.sellerPriceRub:row.publicVisibleRub || row.totalRub);
+      const savedVersion=html.match(/data-offer-saved-version="([^"]+)"/)?.[1];
+      let saved=null;
+      if(savedVersion){
+        const stored=await getOffer(row.id);
+        assert.ok(stored,`Missing immutable offer for saved quote: ${row.id}`);
+        saved=await getSavedOfferCalculation(stored);
+        assert.ok(saved,`Unverified saved quote: ${row.id}`);
+        assert.equal(saved.version,savedVersion,`Saved quote version mismatch: ${row.id}`);
+      }
+      const expected=saved?Number(saved.calculation.totalRub):listRub;
       const detailRub=Number(html.match(/data-offer-price-rub="([^"]+)"/)?.[1]);
-      const result={market,id:row.id,listRub:expected,detailRub,equal:expected===detailRub,hasImage:Boolean(preview.imageUrl)};
+      const result={market,id:row.id,listRub,expectedRub:expected,quoteBasis:saved?'verified_saved_calculation':'catalog',savedVersion:saved?.version,detailRub,equal:expected===detailRub,hasImage:Boolean(preview.imageUrl)};
       report.quotes.push(result);
       assert.equal(detailRub,expected,`List/detail mismatch: ${row.id}`);
       assert.ok(preview.imageUrl,`Missing photo: ${row.id}`);
       assert.ok(!html.includes('В том числе обеспечительный платёж'),`Obsolete payment hint: ${row.id}`);
-      if(row.catalogPricingMode !== 'seller') {
+      if(!saved && row.catalogPricingMode !== 'seller') {
         const bundle = html.match(/data-price-line="laboratory" data-price-amount-rub="([^"]+)"/);
         assert.ok(bundle && Number(bundle[1]) > 0,`Missing combined document cost: ${row.id}`);
         assert.ok(!/data-price-line="(?:sbkts|epts)"/.test(html),`Duplicate document lines: ${row.id}`);
