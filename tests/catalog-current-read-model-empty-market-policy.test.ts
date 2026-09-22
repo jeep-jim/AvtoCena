@@ -81,7 +81,7 @@ const visibleAuditSource = fs.readFileSync(new URL("../scripts/catalog-audit-vis
 
 test("homepage route actively backfills a manifest-present market when its showcase rows are missing", () => {
   assert.match(homeRouteSource, /const missingMarkets = Object\.entries\(result\.marketCounts/);
-  assert.match(homeRouteSource, /searchOffers\(\{ market: market as any, page: 1, pageSize: 6/);
+  assert.match(homeRouteSource, /searchOffers\(\{ market: market as any, page: 1, pageSize: 10/);
   assert.match(homeRouteSource, /catalog_home_market_recovery_failed/);
 });
 

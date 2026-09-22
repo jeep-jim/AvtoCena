@@ -1,3 +1,4 @@
+import { greenCornerFeeRub, isGreenCornerOffer } from "./green-corner-contract";
 import { applyJapanServiceCosts, japanServiceCostBasis } from "./japan-service-pricing";
 import { compactRepricedProjection } from "./compact-pricing-snapshot";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
@@ -41,7 +42,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
     const rate = await convertToRub(offer.sourcePrice ?? null, offer.sourceCurrency ?? null).catch(() => null);
     if (!rate || !['cbr','cbr_live'].includes(rate.rateSource)
       || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(Date.now()-Date.parse(rate.rateDate)) > 4*86400000) return offer;
-    return {...offer, sellerPriceRub:Math.round(rate.sourcePriceRub), totalRub:null,
+    return {...offer, sellerPriceRub:Math.round(rate.sourcePriceRub) + greenCornerFeeRub(offer), totalRub:null,
       publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:'needs_data',
       calculationSnapshot:{currencyRate:rate,sourcePriceRub:Math.round(rate.sourcePriceRub),pricingConfidence:'unavailable'}} as T;
   }

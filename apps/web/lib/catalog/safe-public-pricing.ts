@@ -1,3 +1,4 @@
+import { greenCornerFeeRub, isGreenCornerOffer } from "./green-corner-contract";
 import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 import { withoutRetiredExportCharge } from "./retired-export-charge";
 import { catalogPowerSanity } from './power-sanity';
@@ -31,7 +32,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
     // The normal display repricer refreshes it after the card is selected;
     // retain its date instead of dropping inventory before repricing can run.
     && Number.isFinite(date) && date <= Date.now() + 86400000;
-  const sellerPriceRub = bound ? Math.round(price * effectiveRate) : undefined;
+  const sellerPriceRub = bound ? Math.round(price * effectiveRate) + greenCornerFeeRub(input) : undefined;
   return {
     ...input,
     ...(powerRejected ? {powerHp: undefined, powerKw: undefined, icePowerKw: undefined,

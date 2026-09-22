@@ -1,3 +1,4 @@
+import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 "use client";
 
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
@@ -16,7 +17,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
   if (!Number.isFinite(price) || price <= 0) return null;
   const rate = offer.calculationSnapshot?.currencyRate as PublicCurrencyRate | undefined;
   const rateDelta = Number(rate?.rateDelta || (rate?.effectiveRate && rate?.previousEffectiveRate ? rate.effectiveRate-rate.previousEffectiveRate : 0));
-  const japan = offer.market === "japan";
+  const japan = offer.market === "japan" && !isGreenCornerOffer(offer);
   const priceLabel = sellerPriceLabel(offer);
   return <div className={panel ? "relative ac-offer-price-panel ac-price-trend-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4 text-[var(--ac-text)]" : "ac-price-trend relative min-w-0 text-[var(--ac-text)]"}>
     <div className="flex min-w-0 items-center justify-between gap-1">

@@ -1,3 +1,5 @@
+import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
+import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import Link from "next/link";
@@ -33,7 +35,7 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
 }
 
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
-const OVERVIEW_CARDS = 6;
+const OVERVIEW_CARDS = 10;
 const MARKET_PAGE_SIZE = 24;
 const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
@@ -122,6 +124,8 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       })),
     ]);
   }
+  const green = await readGreenCorner().catch(()=>null);
+  const greenItems = await applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer));
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
 
@@ -172,7 +176,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       <CatalogFilters initial={initial} facets={facets} />
       <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market, marketIndex) => <div key={market.id} className="min-w-0"><section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="whitespace-nowrap text-sm text-[var(--ac-muted)] md:text-base" data-catalog-market-count={market.total}>· {formatCatalogCount(market.total)}</span></h2>{!selectedMarket ? <Link href={pageHref({...params, market: market.id}, 1)} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <CatalogLoadMore key={pageHref(params, requestedPage)} query={{...common, market: market.id}} initialPage={requestedPage} initialTotal={market.total} initialCount={market.items.length} initialCards={market.items.map((offer: any, index: number) => <CatalogCard key={offer.id} offer={offer} compact dense eagerPrefetch={index < 4} />)} /> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-5 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className="min-w-0"><CatalogCard offer={offer} compact dense eagerPrefetch={marketIndex === 0 && index < 4} /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>{market.id === "japan" && !selectedMarket ? <GreenCornerRail items={greenItems} total={green?.items.length || 0} /> : null}</div>)}</div>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       @media(max-width:767px){

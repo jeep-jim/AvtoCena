@@ -69,6 +69,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
   };
   const snapshot = {
+    sourceId: offer.sourceId, offerType: offer.offerType,
     fuel:normalizedOffer.fuel,powertrainKind:normalizedOffer.powertrainKind,
     japanDeliveredPreview: offer.japanDeliveredPreview,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: offer.calculationStatus, catalogKind: offer.catalogKind,

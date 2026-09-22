@@ -1,3 +1,4 @@
+import { isGreenCornerOffer } from "./green-corner-contract";
 import { deliveryPricingBasis } from "./card-city-delivery";
 import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
@@ -519,6 +520,7 @@ export async function calculateCustomerParameterScenario(input: VehicleOffer, pa
 }
 
 export async function calculateOfferWithCustomerParametersDetailed(input: VehicleOffer, parameters: Partial<VehicleOffer>) {
+  if (isGreenCornerOffer(input)) return {ok:false as const,error:"Для Зелёного угла указана цена FOB + 45 000 ₽. Доставку и таможенные платежи рассчитает менеджер с учётом уже включённых расходов в Японии.",missing:["green_corner_delivery_quote"]};
   const result = await calculateCustomerParameterScenario(input, parameters);
   if (result.calculationSnapshot?.customs?.status !== "ready" || result.calculationSnapshot?.priceIncludesAllCustoms !== true) {
     const snapshot = result.calculationSnapshot;

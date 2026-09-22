@@ -1,3 +1,4 @@
+import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 "use client";
 
 import { formatCatalogCount } from "@/lib/catalog/count-format";
@@ -24,6 +25,7 @@ import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/run
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = {
+  initialGreen?: {items:any[];total:number};
   initialCity?: string;
   initialOffers?: any[];
   initialMarketCounts?: Record<string, number>;
@@ -214,7 +216,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
+export default function HomePageClient({ initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
   const skipInitialCountFetch = useRef(true);
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
@@ -298,7 +300,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
     }, 180); return () => {window.clearTimeout(timer);controller.abort();};
   }, [city, selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
 
-  const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 6) }; }), [availableItems, catalogMarket, catalogMake]);
+  const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 10) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
   const submit = () => { const params = new URLSearchParams(); if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budget", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric"); if (city) params.set("city", city); appendAttributionToSearchParams(params); router.push(`/cars${params.toString() ? `?${params}` : ""}`); };
   const modelSearch = <VehicleModelSearch value={model} make={make} placeholder="Модель" onValueChange={setModel} onMakeChange={setMake} onSubmit={submit} />;
@@ -349,7 +351,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
       </div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div></div>
-        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><StableCatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section>{group.id === "japan" && !catalogMake && !electricOnly ? <GreenCornerRail {...initialGreen} /> : null}</div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>
       <CurrencyRatesStrip rates={rates} variant="mobile" showHeading className="ac-home-bottom-rates mt-8 !px-4 !py-4 lg:hidden" />

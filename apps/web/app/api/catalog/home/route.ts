@@ -8,7 +8,7 @@ export const revalidate = 0;
 export async function GET() {
   const started = performance.now();
   try {
-    const result = await readHomeCatalogSnapshot(6);
+    const result = await readHomeCatalogSnapshot(10);
     let rows = [...(result.items || [])] as any[];
     const missingMarkets = Object.entries(result.marketCounts || {})
       .filter(([market, count]) => Number(count || 0) > 0 && !rows.some((row) => String(row?.market || "") === market))
@@ -16,7 +16,7 @@ export async function GET() {
     if (missingMarkets.length) {
       const recovered = await Promise.all(missingMarkets.map(async (market) => {
         try {
-          const result = await searchOffers({ market: market as any, page: 1, pageSize: 6, sort: "updatedAt" });
+          const result = await searchOffers({ market: market as any, page: 1, pageSize: 10, sort: "updatedAt" });
           return result.items || [];
         } catch (error) {
           console.error("catalog_home_market_recovery_failed", market, error);
