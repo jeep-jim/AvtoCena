@@ -9,7 +9,7 @@ const contract = fs.readFileSync(new URL("../docs/catalog-card-contract.md", imp
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 
 test("catalog card never bypasses the validated public ruble price", () => {
-  assert.match(card, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(card, /const visibleRub = savedCalculationPreviewRub\(savedPreview\) \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.doesNotMatch(card, /exactTotalRub\s*\|\|/);
   assert.doesNotMatch(card, /Number\(o\.totalRub\s*\|\|\s*0\)/);
   assert.match(card, /totalRub: visibleRub \|\| null/);

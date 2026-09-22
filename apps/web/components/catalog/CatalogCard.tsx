@@ -1,4 +1,6 @@
 "use client";
+import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
+import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { CatalogCover } from "./CatalogCover";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
@@ -39,9 +41,12 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 }
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
-  const selectionRequired = hasModificationSelection(offer);
-  const sellerPricing = isSellerPricedOffer(offer);
-  const normalizedOffer = selectionRequired || sellerPricing ? offer : normalizeVehicleOfferSpecs(offer);
+  const candidatePreview = useSavedCalculationPreview(offer);
+  const savedPreview = savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
+  offer = {...offer,savedCalculationPreview:savedPreview};
+  const selectionRequired = !savedPreview && hasModificationSelection(offer);
+  const sellerPricing = !savedPreview && isSellerPricedOffer(offer);
+  const normalizedOffer = savedPreview ? offerWithSavedPreview(offer) : selectionRequired || sellerPricing ? offer : normalizeVehicleOfferSpecs(offer);
   const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
   const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
@@ -56,16 +61,17 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
 
-  /* Never render raw totalRub directly. It becomes public only after the full
-     calculation and public sanity limits pass in catalogOfferVisibleRub(). */
-  const visibleRub = catalogOfferVisibleRub(normalizedOffer);
+  /* Imported prices pass the public gate. The separate manager overlay comes
+     only from the saved, server-calculated scenario used by the detail page. */
+  const visibleRub = savedCalculationPreviewRub(savedPreview) || catalogOfferVisibleRub(normalizedOffer);
   // Defence in depth for an older immutable generation during deployment: the
   // publication gate removes these rows permanently on the next market write,
   // while the card renderer hides them immediately.
   if (!visibleRub && !selectionRequired && !sellerPricing) return null;
   const displayOffer = {
     ...o,
-    japanDeliveredPreview: offer.japanDeliveredPreview,
+    japanDeliveredPreview: savedPreview ? undefined : offer.japanDeliveredPreview,
+    savedCalculationPreview: savedPreview,
     totalRub: visibleRub || null,
     previousTotalRub: visibleRub ? o.previousTotalRub : null,
     priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
@@ -73,7 +79,8 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const snapshot = {
     sourceId: offer.sourceId, offerType: offer.offerType,
     fuel:normalizedOffer.fuel,powertrainKind:normalizedOffer.powertrainKind,
-    japanDeliveredPreview: offer.japanDeliveredPreview,
+    japanDeliveredPreview: savedPreview ? undefined : offer.japanDeliveredPreview,
+    savedCalculationPreview: savedPreview,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: offer.calculationStatus, catalogKind: offer.catalogKind,
     id: o.id, title: o.title, price: visibleRub || null, totalRub: visibleRub || null, previousTotalRub: displayOffer.previousTotalRub,
     priceDeltaRub: displayOffer.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice,

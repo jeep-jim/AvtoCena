@@ -465,3 +465,9 @@ html body .ac-page-copy .ac-auction-button {background:#b91c1c!important;color:#
 .ac-japan-sections a[aria-current="page"] {box-shadow:0 0 0 2px var(--ac-surface),0 0 0 4px var(--ac-muted);}
 .ac-japan-sections a:hover,.ac-green-button:hover {filter:brightness(1.1);}
 .ac-japan-sections a:focus-visible,.ac-green-button:focus-visible {outline:2px solid var(--ac-text);outline-offset:3px;}
+
+/* The directory follows the page theme; only the current letter is accented. */
+html body .ac-page-copy .ac-directory-toolbar {background:var(--ac-page-bg,#edf0f6); }
+html body .ac-page-copy .ac-directory-letter {background:#fff!important;color:#111!important;-webkit-text-fill-color:#111!important;}
+html[data-theme="light"] body .ac-page-copy .ac-directory-letter {background:#17191e!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+html body .ac-page-copy .ac-directory-letter[aria-current="location"] {background:#ff3347!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}

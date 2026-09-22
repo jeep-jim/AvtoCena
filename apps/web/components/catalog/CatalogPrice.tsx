@@ -1,4 +1,5 @@
 "use client";
+import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { priceCardForCity } from "../../lib/catalog/card-city-delivery";
@@ -22,6 +23,9 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;
 }) {
+  if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
+    ? <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
+    : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
   if (offer.market === "japan" && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
   if (isSellerPricedOffer(offer)) return <SellerPrice deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
@@ -54,7 +58,8 @@ function CatalogPriceContent({
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const city = useSelectedCity();
- const priced = priceCardForCity(props.offer,city);
+ const saved = props.offer.savedCalculationPreview;
+ const priced = saved ? {offer:props.offer} : priceCardForCity(props.offer,city);
  const estimated = Number(props.offer?.japanDeliveredPreview?.totalRub) > 0 || (!isSellerPricedOffer(props.offer) && Number(props.offer?.totalRub) > 0);
- return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{estimated && !city ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
+ return <div><CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />{saved?.deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Доставка: {saved.deliveryCity}</p> : (saved || estimated && !city) ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}</div>;
 }
