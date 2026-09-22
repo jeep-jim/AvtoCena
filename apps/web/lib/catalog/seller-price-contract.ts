@@ -1,4 +1,4 @@
-import { greenCornerFeeRub, isGreenCornerOffer } from "./green-corner-contract";
+import { isGreenCornerOffer } from "./green-corner-contract";
 /** A source price is never a delivered price or proof of technical completeness. */
 export function isSellerPricedOffer(offer: any): boolean {
   const rate = offer?.calculationSnapshot?.currencyRate;
@@ -10,8 +10,8 @@ export function isSellerPricedOffer(offer: any): boolean {
     && ["cbr", "cbr_live"].includes(rate?.rateSource)
     && rate.currency === offer.sourceCurrency && Number(rate.sourcePrice) === Number(offer.sourcePrice)
     && Number.isFinite(rate.effectiveRate) && rate.effectiveRate > 0
-    && Math.round(Number(offer.sourcePrice) * rate.effectiveRate) + greenCornerFeeRub(offer) === offer.sellerPriceRub;
+    && Math.round(Number(offer.sourcePrice) * rate.effectiveRate) === offer.sellerPriceRub;
 }
 export function sellerPriceLabel(offer: any) {
-  return isGreenCornerOffer(offer) ? "FOB + 45 000 ₽" : offer?.catalogKind === "auction_result" ? "Цена на завершённых торгах" : "Цена продавца";
+  return isGreenCornerOffer(offer) ? "Цена FOB" : offer?.catalogKind === "auction_result" ? "Цена на завершённых торгах" : "Цена продавца";
 }
