@@ -1,7 +1,8 @@
 import {readFileSync} from "node:fs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectRelatedOfferGroups} from '../apps/web/lib/catalog/related-offer-selection';
+import {normalizeGreenCorner} from '../apps/web/lib/catalog/green-corner-normalize';
+import {selectRelatedOfferGroups,isRenderableRelatedOffer} from '../apps/web/lib/catalog/related-offer-selection';
 const row=(id:string,market='japan',model='Vezel')=>({id,market,make:'Honda',model,totalRub:1000000});
 const stock=(id:string)=>({...row(id),sourceId:'akebono_green_japan_open',offerType:'fixed'});
 const select=(options:any)=>selectRelatedOfferGroups({current:row('current'),modelRows:[],marketRows:[],crossResults:[],greenModels:[],greenRows:[],price:async (rows:any[])=>rows,renderable:(r:any)=>r.totalRub>0,...options});
@@ -27,4 +28,16 @@ test('unrenderable candidates are skipped and each recommendation group is bound
 test('detail recommendations retain trusted source identity after publicOffer sanitization',()=>{
  const page=readFileSync('apps/web/app/(public)/cars/offer/[id]/page.tsx','utf8');
  assert.match(page,/<SimilarOffers current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
+});
+
+test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{
+ const source={id:713390,isSold:false,location:'japan',subgroup:'auto',priceInJapanCurrency:'JPY',priceInJapan:1000000,year:2026,horsepower:118,company:'HONDA',model:'VEZEL',media:['https://img.akebono.world/cars/713390.jpg']};
+ const full=normalizeGreenCorner(source,{currency:'JPY',rateSource:'cbr',effectiveRate:0.6,rateDate:'2026-09-22'} as any,'2026-09-22');
+ const {operational,vin,frameNumber,...published}=full;
+ assert.equal(isRenderableRelatedOffer(published),true);
+ assert.equal(isRenderableRelatedOffer({...published,images:[]}),false);
+ assert.equal(isRenderableRelatedOffer({...published,sellerPriceRub:0}),false);
+ assert.equal(isRenderableRelatedOffer({...published,sourceId:'untrusted'}),false);
+ const groups=await select({current:{...full,id:'green-713392'},greenModels:[published],renderable:isRenderableRelatedOffer});
+ assert.deepEqual(groups.stockModels.map(row=>row.id),['green-713390']);
 });

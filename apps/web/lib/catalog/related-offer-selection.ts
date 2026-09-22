@@ -1,3 +1,5 @@
+import { isSellerPricedOffer } from "./seller-price-contract";
+import { isRenderablePublicCatalogOffer } from "./offer-quality";
 import { isGreenCornerOffer } from "./green-corner-contract";
 import { priceCandidatesUntil } from "./price-candidates";
 function similarModelKey(offer: any) {
@@ -46,4 +48,12 @@ export async function selectRelatedOfferGroups({current,modelRows,marketRows,cro
   const marketCandidates = [...marketRows,...(current.market==='japan' ? greenRows : [])];
   const selectedMarketRows = await priceRows(diverseSimilarOffers(marketCandidates,current,24,selectedIds));
   return {stockModels,sameModel,crossMarketGroups,marketRows:selectedMarketRows};
+}
+
+/** Stock rows come from the independently validated Green Corner snapshot, not auction projections. */
+export function isRenderableRelatedOffer(offer:any) {
+  if(isGreenCornerOffer(offer)) return isSellerPricedOffer(offer)
+    && Boolean(String(offer.make||'').trim() && String(offer.model||'').trim())
+    && Array.isArray(offer.images) && offer.images.length>0;
+  return isRenderablePublicCatalogOffer(offer);
 }
