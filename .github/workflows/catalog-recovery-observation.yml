@@ -44,3 +44,5 @@ jobs:
             japan:pick(japan,['version','details','prepared','complete','published','startedAt','savedAt','publishedAt','stopReason']),archive};
           console.log(JSON.stringify(report));
           JS
+
+# Observation requested after independent publication startup.
