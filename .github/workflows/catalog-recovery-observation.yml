@@ -28,10 +28,13 @@ jobs:
           node --import tsx --input-type=module <<'JS'
           import {getJsonStorage} from './apps/web/lib/data.ts';
           const s=getJsonStorage();
-          const [manifest,lock,japan]=await Promise.all([
+          const [manifest,lock,japan,green,previous,maintenance]=await Promise.all([
             s.readJson('catalog/manifest.json',null),
             s.readJson('catalog/import-lock.json',null),
             s.readJson('catalog/collector-state/proauctions/current.json',null),
+            s.readJson('catalog/green-corner/current.json',null),
+            s.readJson('catalog/previous-manifest.json',null),
+            s.readJson('catalog/storage-maintenance.json',null),
           ]);
           let archive=null;
           if(japan?.version===2&&/^catalog\/collector-state\/proauctions\/archive-[0-9a-f-]+\.json$/.test(japan.key)){
@@ -39,37 +42,14 @@ jobs:
             archive={bytes:d?.size,parts:d?.parts?.length};
           }
           const pick=(x,fields)=>Object.fromEntries(fields.map(k=>[k,x?.[k]??null]));
-          const report={at:new Date().toISOString(),generation:manifest?.generationId,markets:manifest?.markets,
+          const report={at:new Date().toISOString(),generation:manifest?.generationId,markets:Object.fromEntries(Object.entries(manifest?.markets||{}).map(([k,v])=>[k,{count:v.count,updatedAt:v.updatedAt}])),
             lock:pick(lock,['operationId','operationType','lockedUntil','heartbeatAt','startedAt']),
             japan:pick(japan,['version','details','prepared','complete','published','startedAt','savedAt','publishedAt','stopReason']),archive};
+          const objects=await s.listBucketObjects('');
+          const generations=new Map();
+          for(const row of objects){const m=String(row.key).match(/(?:^|\/)catalog\/generations\/(gen_(\d+)_[-a-z0-9]+)\//);if(m)generations.set(m[1],{id:m[1],bytes:(generations.get(m[1])?.bytes||0)+Number(row.size||0),graceEndsAt:new Date(Number(m[2])+6*3600000).toISOString(),protected:[manifest?.generationId,previous?.generationId].includes(m[1])});}
+          const example=green?.items?.find(o=>o.id==='green-727977');
+          report.green={count:green?.items?.length,sourceCount:green?.sourceCount,updatedAt:green?.updatedAt,low:green?.items?.filter(o=>o.powerHp>0&&o.powerHp<=160).length,high:green?.items?.filter(o=>o.powerHp>160).length,example:example?{id:example.id,sourcePrice:example.sourcePrice,sellerPriceRub:example.sellerPriceRub,currencyRate:example.calculationSnapshot?.currencyRate}:null};
+          report.storage={bytes:objects.reduce((n,o)=>n+Number(o.size||0),0),maintenance,generations:[...generations.values()]};
           console.log(JSON.stringify(report));
-          JS
-  runtime:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/setup-node@v4
-        with: {node-version: 24}
-      - name: Read existing container metrics without changing infrastructure
-        env:
-          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-        run: |
-          node --input-type=module <<'JS'
-          import crypto from 'node:crypto';
-          const key=JSON.parse(process.env.YC_SA_JSON_CREDENTIALS), now=Math.floor(Date.now()/1000), enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
-          const iam='https://iam.api.cloud.yandex.net/iam/v1/tokens';
-          const unsigned=enc({alg:'PS256',typ:'JWT',kid:key.id})+'.'+enc({iss:key.service_account_id,aud:iam,iat:now,exp:now+600});
-          const sig=crypto.sign('sha256',Buffer.from(unsigned),{key:key.private_key.slice(key.private_key.indexOf('-----BEGIN')),padding:crypto.constants.RSA_PKCS1_PSS_PADDING,saltLength:32}).toString('base64url');
-          const ir=await fetch(iam,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jwt:unsigned+'.'+sig}),signal:AbortSignal.timeout(30000)});
-          if(!ir.ok)throw Error('iam_http_'+ir.status);
-          const {iamToken}=await ir.json();
-          const folder='b1g9vq73onqb7dp5hgqg',container='bbaohms2ccpm3vb4e73t';
-          const r=await fetch('https://monitoring.api.cloud.yandex.net/monitoring/v2/data/read?folderId='+folder,{method:'POST',headers:{Authorization:'Bearer '+iamToken,'content-type':'application/json'},body:JSON.stringify({query:'{service="serverless-containers",container="'+container+'"}',fromTime:new Date(Date.now()-4*3600000).toISOString(),toTime:new Date().toISOString(),downsampling:{maxPoints:'120',gridAggregation:'MAX'}}),signal:AbortSignal.timeout(45000)});
-          if(!r.ok)throw Error('monitoring_read_http_'+r.status);
-          const d=await r.json();console.log('metric_series_count',d.metrics?.length||0);
-          for(const m of d.metrics||[]){
-           const values=(m.timeseries?.doubleValues||m.timeseries?.int64Values||[]).map(Number).filter(Number.isFinite);
-           const max=values.length?Math.max(...values):null;
-           if(max>0)console.log('metric',m.name,'revision',m.labels?.revision,'bin',m.labels?.bin||'-','max',max,'last',values.at(-1),'points',values.length);
-          }
           JS
