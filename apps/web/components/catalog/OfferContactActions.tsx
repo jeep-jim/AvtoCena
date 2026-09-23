@@ -66,6 +66,12 @@ export function OfferContactActionsStyles() {
       .ac-offer-actions-sidebar{grid-template-columns:minmax(0,1fr) 56px}
       .ac-offer-actions-sidebar>[data-offer-action="lead"]{grid-column:1/-1}
       .ac-offer-actions-sidebar[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 80px 56px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button{padding-left:34px;padding-right:8px;font-size:13px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button>svg{left:10px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:first-child{display:inline!important}
+      .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:last-child{display:none!important}
+      .ac-offer-actions-sidebar [data-offer-pdf-slot] button{padding:0;gap:4px}
+
 
       .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px 56px}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}

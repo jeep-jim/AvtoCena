@@ -43,6 +43,14 @@ try {
    if(staff){const pdf=page.getByRole('button',{name:'PDF текущей карточки'});await pdf.waitFor();const c=await pdf.boundingBox();assert.ok(Math.abs(c.y-a.y)<3&&c.x<a.x,'PDF before favorite');}
    assert.ok(await share.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'share label fits');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no horizontal overflow');
+   if(width>=1280){
+    await page.locator('[data-spec-desktop]').evaluate(e=>e.dataset.open='true');
+    const row=page.locator('.ac-offer-actions-sidebar');assert.ok(await row.isVisible());
+    assert.ok(await row.locator('.ac-offer-contact-button').nth(1).evaluate(e=>e.scrollWidth<=e.clientWidth+1),'sidebar share fits');
+    const left=await row.locator('.ac-offer-contact-button').nth(1).boundingBox(),right=await row.locator('.ac-offer-favorite').boundingBox();assert.ok(Math.abs(left.y-right.y)<3,'sidebar favorite beside share');
+    await page.locator('[data-spec-desktop]').evaluate(e=>e.dataset.open='false');
+   }
+   await page.evaluate(()=>window.scrollTo(0,0));
    await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).click();const input=page.getByRole('textbox',{name:'Поиск города'});await input.fill('Ново');
    const ink=await input.evaluate(e=>({fill:getComputedStyle(e).webkitTextFillColor,color:getComputedStyle(e).color}));assert.equal(ink.fill,ink.color);if(theme==='light')assert.notEqual(ink.fill,'rgb(255, 255, 255)');
    await page.getByRole('button',{name:'Закрыть выбор города'}).click();
