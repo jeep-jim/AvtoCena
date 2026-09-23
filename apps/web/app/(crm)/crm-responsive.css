@@ -69,3 +69,15 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
 }
 
 .crm-navigation .crm-documents-button{background:#F59E0B!important;color:#171C24!important;font-weight:900;border:0;cursor:default}
+
+.crm-header-actions{flex-shrink:0}
+.crm-lid-button{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:11px;background:#f59e0b;color:#171c24;font-size:14px;font-weight:900;text-decoration:none}
+.crm-lid-button:hover{background:#fbbf24}
+.crm-lid-button[aria-current="page"]{box-shadow:inset 0 0 0 2px #92400e}
+.crm-metrika-status{display:flex;align-items:center;gap:12px;padding:16px;border-radius:16px;background:var(--ac-surface-2);border:1px solid var(--ac-border)}
+.crm-metrika-status-icon{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--ac-surface);font-weight:900}
+.crm-metrika-status-icon svg{width:24px;height:24px}
+.crm-metrika-status.is-connected{background:#103e2b;border-color:#258254;color:#d1fae5}
+.crm-metrika-status.is-connected .crm-metrika-status-icon{background:#16a34a;color:#fff}
+.crm-metrika-notice{padding:12px 16px;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-text);font-weight:700;border-left:4px solid #22c55e}
+html[data-theme="light"] .crm-metrika-status.is-connected{background:#dcfce7;border-color:#86efac;color:#14532d}

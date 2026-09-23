@@ -9,7 +9,7 @@ export function CrmShellView({title,subtitle,activeHref,user,links,avatar,childr
    <div className="crm-header-inner">
     <div className="crm-topbar">
      <Link href="/" className="crm-brand"><span className="crm-brand-mark">AC</span><span>АвтоЦена <small>CRM</small></span></Link>
-     <div className="crm-header-actions"><CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm avatar={avatar}/></div>
+     <div className="crm-header-actions">{links.some(([href])=>href==="/crm/telegram")?<Link href="/crm/settings/metrika" className="crm-lid-button" aria-label="Реклама и Метрика" title="Реклама и Метрика" aria-current={activeHref==="/crm/settings/metrika"?"page":undefined}>Lid</Link>:null}<CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm avatar={avatar}/></div>
     </div>
     <nav className="crm-navigation" aria-label="Разделы CRM">{links.map(([href,label])=><Link key={href} href={href} aria-label={label} aria-current={href===activeHref?"page":undefined}>{shortLabels[label]||label}</Link>)}{links.some(([href])=>href==="/crm/telegram")?<button type="button" className="crm-documents-button" aria-disabled="true" title="Раздел документов — подключим позже">Документы</button>:null}</nav>
    </div>
