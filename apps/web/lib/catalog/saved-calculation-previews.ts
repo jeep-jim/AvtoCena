@@ -1,3 +1,5 @@
+import {isGreenCornerOffer} from "./green-corner-contract";
+import {getSavedOfferCalculation} from "./saved-offer-calculation";
 import {getJsonStorage,mutateDataJson,readDataJson} from "../data";
 import {validateCustomerParameters} from "./customer-parameters";
 import {matchingSavedCalculation,type SavedOfferCalculation} from "./saved-offer-calculation";
@@ -64,5 +66,10 @@ export function attachSavedPreviewEntries<T extends Partial<VehicleOffer>>(offer
 export async function attachSavedCalculationPreviews<T extends Partial<VehicleOffer>>(offers:T[]):Promise<T[]> {
  if(!offers.length)return offers;
  const index=await readSavedPreviewIndex();
- return attachSavedPreviewEntries(offers,index);
+ const attached=attachSavedPreviewEntries(offers,index);
+ return Promise.all(attached.map(async offer=>{
+  if(!isGreenCornerOffer(offer) || !(offer as any).savedCalculationPreview)return offer;
+  const record=await getSavedOfferCalculation(offer as VehicleOffer);
+  return {...offer,savedCalculationPreview:record?savedPreviewEntry(record,offer as VehicleOffer)?.preview:undefined};
+ }));
 }

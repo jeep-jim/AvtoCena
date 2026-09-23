@@ -37,10 +37,10 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(preliminaryPrice, /rgba\(197, 138, 0, 0\.10\)/);
   assert.match(preliminaryPrice, /rgba\(255, 210, 31, 0\.14\)/);
   assert.match(preliminaryPrice, /: "var\(--ac-surface-2\)"/);
-  assert.match(priceTrend, /if \(highlightElectrified\)/);
+  assert.match(priceTrend, /if \(highlightElectrified && !greenCorner\)/);
   assert.match(priceTrend, /rgba\(197, 138, 0, 0\.10\)/);
   assert.match(priceTrend, /rgba\(255, 210, 31, 0\.14\)/);
-  assert.match(priceTrend, /\[panel, lightTheme, direction, highlightElectrified\]/);
+  assert.match(priceTrend, /\[panel, lightTheme, direction, highlightElectrified, greenCorner\]/);
   assert.match(preliminaryPrice, /setProperty\("background", electrifiedPanelBackground, "important"\)/);
   assert.match(preliminaryPrice, /setProperty\("background-color", electrifiedPanelBackground, "important"\)/);
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
@@ -79,7 +79,7 @@ test("catalog helper popovers preserve card rounding and currency opens only on 
 test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /trendUsesCurrency/);
   assert.match(priceTrend, /const currencyImpactRub = currencyDelta\(pricedOffer\) \|\| undefined/);
-  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate\)/);
+  assert.match(priceTrend, /const canShowRate = !greenCorner && Boolean\(sheetRate\)/);
   assert.match(priceTrend, /\{sheetRate \? <CurrencyRatesSheet/);
   assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
   assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);

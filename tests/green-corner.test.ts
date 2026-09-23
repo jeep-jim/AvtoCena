@@ -84,11 +84,24 @@ test("Green uses the full Japan breakdown with exactly one yen-linked logistics 
    assert.equal(lines.filter((l:any)=>l.id==="logistics").length,1);
    assert.equal(lines.find((l:any)=>l.id==="logistics")?.amountRub,49500);
    assert.equal(lines.find((l:any)=>l.id==="car")?.amountRub,607200);
-   assert.deepEqual(lines.filter((l:any)=>l.id!=="logistics"),other.filter((l:any)=>l.id!=="logistics"));
+   assert.equal(lines.find((l:any)=>l.id==="bank-transfer")?.amountRub,45540);
+   assert.equal(lines.some((l:any)=>l.id==="exchange-reserve"),false);
+   assert.equal(green.calculation.customsValue?.totalRub,656700);
+   assert.equal(green.calculation.customsValue?.transportIncludedInCustomsValue,true);
+   assert.equal(other.some((l:any)=>l.id==="bank-transfer"),false);
    assert.equal(lines.reduce((sum:number,l:any)=>sum+l.amountRub,0),green.calculation.totalRub);
    assert.ok(lines.some((l:any)=>l.id==="laboratory"));
    assert.ok(lines.some((l:any)=>l.id==="topavto-commission"));
    assert.equal(green.calculation.paymentPlan.securityDepositRub,ordinary.calculation.paymentPlan.securityDepositRub);
+  }
+  const young={...input,year:2026,sourcePrice:2500000};
+  const youngParams=validateCustomerParameters({year:2026,engineCc:1500,powerHp:118,fuel:"petrol"});
+  const fresh=await calculateOfferWithCustomerParametersDetailed(young,youngParams);
+  assert.equal(fresh.ok,true);
+  if(fresh.ok){
+   assert.equal(fresh.calculation.customsValue?.totalRub,1699500);
+   assert.equal(fresh.calculation.breakdown.find((l:any)=>/Единая ставка/.test(l.title))?.amountRub,815760);
+   assert.equal(fresh.calculation.breakdown.find((l:any)=>l.id==="bank-transfer")?.amountRub,123750);
   }
   assert.equal(JSON.stringify(input),before);
   const missing=await calculateOfferWithCustomerParametersDetailed({...input,greenCornerLogistics:undefined},params);

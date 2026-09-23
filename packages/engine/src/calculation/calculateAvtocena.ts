@@ -81,6 +81,10 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
     addLine(lines, { id: expense.id, title: expense.title, amountRub, kind: "other", amountType: "percent", source: "market_config", note: `${expense.percent}%` });
   }
 
+  const bankTransferPercent = numberOrZero(config.bankTransferPercent);
+  if (bankTransferPercent > 0) {
+    addLine(lines, {id:"bank-transfer", title:"Комиссия банка за перевод", amountRub:Math.round(carPriceRub * bankTransferPercent / 100), kind:"commission", amountType:"percent", source:"market_config", note:`${bankTransferPercent.toLocaleString("ru-RU")}% от стоимости авто`});
+  }
   const reservePercent = numberOrZero(config.exchangeRateReservePercent);
   if (reservePercent > 0) {
     const amountRub = Math.round(carPriceRub * reservePercent / 100);

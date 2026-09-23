@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import { isGreenCornerOffer } from "./green-corner-contract";
 import { cache } from "react";
 import { mutateDataJson, readDataJson } from "../data";
 import type { VehicleOffer } from "./types";
@@ -31,7 +32,12 @@ export function matchingSavedCalculation(record: SavedOfferCalculation | null, o
 const readRecord = (id:string)=>readDataJson<SavedOfferCalculation|null>(storagePath(id),null);
 const readSavedRecord = typeof cache === "function" ? cache(readRecord) : readRecord;
 export async function getSavedOfferCalculation(offer: VehicleOffer) {
-  return matchingSavedCalculation(await readSavedRecord(offer.id), offer);
+  const record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
+  if (!record || !isGreenCornerOffer(offer)) return record;
+  // Keep the manager's parameters and version, but price stock at today's yen rate.
+  const {calculateOfferWithCustomerParametersDetailed} = await import("./customs-pricing");
+  const fresh = await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(record.draft));
+  return fresh.ok ? {...record,calculation:fresh.calculation} : null;
 }
 export class SavedCalculationConflict extends Error {}
 export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null, savedByName?:string) {

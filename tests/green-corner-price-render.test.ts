@@ -13,7 +13,8 @@ test('calculated stock retains availability while auctions retain auction badges
   console.log(JSON.stringify({stock:render(offer),automatic:render(automatic),auction:render({...offer,id:'auction-123',sourceId:'auction',offerType:'auction'})}));
  `],{encoding:'utf8',env:{...process.env,TSX_TSCONFIG_PATH:'apps/web/tsconfig.json'}});
  const {stock,automatic,auction}=JSON.parse(output);
- assert.match(stock,/В наличии/);assert.doesNotMatch(stock,/Лот продан|Оценка/);assert.match(stock,/1\s200\s000/);
- assert.match(automatic,/1\s500\s000/);assert.match(automatic,/ac-price--down/);assert.doesNotMatch(automatic,/Лот продан|Оценка/);
+ assert.match(stock,/В наличии/);assert.doesNotMatch(stock,/Лот продан/);assert.match(stock,/1\s200\s000/);
+ assert.match(automatic,/1\s500\s000/);assert.match(automatic,/ac-price--down/);assert.doesNotMatch(automatic,/Лот продан/);
+ for(const html of [stock,automatic]){assert.match(html,/Оценка 4/);assert.doesNotMatch(html,/ac-price-trend-arrow|ac-price-trend-delta/);}
  assert.match(auction,/Лот продан/);
 });
