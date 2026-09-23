@@ -10,9 +10,9 @@ function PhoneIcon() {
 type FavoriteProps = {offerId: string; snapshot: FavoriteSnapshot};
 
 function ActionButtons({ className = "", stacked = false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean }) {
-  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-11 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-12 sm:text-sm md:px-12 md:text-base xl:h-14";
+  const buttonClass = "ac-offer-contact-button relative inline-flex h-14 min-w-0 items-center justify-center rounded-[1.05rem] px-12 text-base font-black leading-tight !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] ";
   return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку на расчёт</span></button>
+    <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>Оставить заявку на расчёт</span></button>
     <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
     <div data-offer-pdf-slot className="empty:!hidden" />
     <FavoriteToggle offerId={offerId} snapshot={snapshot} compact className="ac-offer-favorite" />
@@ -42,24 +42,31 @@ export function OfferCreditCalculator() {
 export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
-    .ac-offer-contact-button{color:#fff!important}
+    .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
+    .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}
+    .ac-offer-action-row .ac-offer-contact-button>svg,
+    .ac-offer-action-row .ac-offer-contact-button>span:has(>svg){left:20px!important;top:50%;transform:translateY(-50%)}
+    .ac-offer-action-row [data-offer-pdf-slot] button{height:56px!important}
+    .ac-offer-action-row [data-offer-pdf-slot] svg{width:21px;height:21px;flex-shrink:0}
     .ac-offer-action-row .ac-offer-contact-button>svg{display:block!important}
     .ac-offer-contact-button>span{font-size:inherit}
     .ac-credit-partner-button{color:#fff!important;-webkit-text-fill-color:#fff!important}
     .ac-offer-page [data-offer-credit-host]{display:none!important}
     .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
     html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
-    .ac-offer-favorite{width:54px!important;height:54px!important;border-radius:1.05rem!important;background:rgba(255,53,61,.09)!important;color:#ff353d!important}
+    .ac-offer-favorite{width:56px!important;height:56px!important;border-radius:1.05rem!important;background:rgba(255,53,61,.09)!important;color:#ff353d!important}
     .ac-offer-favorite svg{width:26px;height:26px}
     @media(max-width:1279px){
-      .ac-offer-action-row{grid-template-columns:minmax(0,1fr) 54px;gap:10px}
+      .ac-offer-action-row{grid-template-columns:minmax(0,1fr) 56px;gap:10px}
       .ac-offer-action-row>[data-offer-action="lead"]{grid-column:1/-1}
-      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 76px 54px}
+      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 76px 56px}
       .ac-offer-action-row [data-offer-pdf-slot] button{padding:0;gap:4px}
-      .ac-offer-action-row [data-offer-pdf-slot] svg{width:18px}
-      .ac-offer-action-row .ac-offer-contact-button{padding-left:34px;padding-right:8px}
-      .ac-offer-action-row .ac-offer-contact-button>span:first-child{left:10px}
-      .ac-offer-action-row .ac-offer-contact-button>svg{left:10px}
+      .ac-offer-action-row .ac-offer-contact-button{padding-left:48px;padding-right:12px}
+    }
+    @media(max-width:359px){
+      .ac-offer-action-row{gap:8px}
+      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 60px 44px}
+      .ac-offer-action-row .ac-offer-favorite{width:100%!important}
     }
     @media(min-width:1280px){
       .ac-offer-favorite{height:56px!important;width:56px!important}
@@ -67,8 +74,7 @@ export function OfferContactActionsStyles() {
       .ac-offer-actions-sidebar{grid-template-columns:minmax(0,1fr) 56px}
       .ac-offer-actions-sidebar>[data-offer-action="lead"]{grid-column:1/-1}
       .ac-offer-actions-sidebar[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 80px 56px}
-      .ac-offer-actions-sidebar .ac-offer-contact-button{padding-left:34px;padding-right:8px;font-size:13px}
-      .ac-offer-actions-sidebar .ac-offer-contact-button>svg{left:10px}
+      .ac-offer-actions-sidebar .ac-offer-contact-button{padding-left:48px;padding-right:12px;font-size:16px}
       .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:first-child{display:inline!important}
       .ac-offer-actions-sidebar .ac-offer-contact-button>span>span:last-child{display:none!important}
       .ac-offer-actions-sidebar [data-offer-pdf-slot] button{padding:0;gap:4px}

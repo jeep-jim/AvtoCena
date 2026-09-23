@@ -8,7 +8,7 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
 .crm-brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#fff;color:#141923;font-size:13px}
 .crm-header-actions{display:flex;align-items:center;gap:8px}
 .crm-navigation{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.crm-navigation a{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:11px;background:var(--ac-surface-2);font-size:13px;font-weight:750;color:var(--ac-text)}
+.crm-navigation a,.crm-navigation .crm-documents-button{display:flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:11px;background:var(--ac-surface-2);font-size:13px;font-weight:750;color:var(--ac-text)}
 .crm-navigation a[aria-current="page"]{background:#ff353d!important;color:#fff!important}
 .crm-content{padding-top:20px;min-width:0}
 .crm-page-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;position:relative}
@@ -33,7 +33,7 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
  .crm-brand{font-size:14px;gap:7px}.crm-brand-mark{width:32px;height:32px}.crm-brand small{display:none}
  .crm-header-actions{gap:6px}.crm-header-actions .crm-theme-toggle{width:40px;height:40px;padding:0;display:grid;place-items:center}
  .crm-navigation{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:8px}
- .crm-navigation a{min-height:36px;padding:7px 3px;font-size:11px;border:0;border-radius:9px;white-space:nowrap}
+ .crm-navigation a,.crm-navigation .crm-documents-button{min-height:36px;padding:7px 3px;font-size:11px;border:0;border-radius:9px;white-space:nowrap}
  .crm-page-heading{margin:6px 0 12px;gap:8px}.crm-page-heading h1{font-size:25px}
  .crm-page-help summary{font-size:11px}
  .crm-workspace .glass:not(details){border-radius:16px!important;padding:14px!important}
@@ -67,3 +67,5 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
  .crm-lead-actions>input,.crm-lead-actions>button,.crm-lead-actions>div:last-child{grid-column:1/-1}
  .crm-lead-actions select{min-height:44px}
 }
+
+.crm-navigation .crm-documents-button{background:#F59E0B!important;color:#171C24!important;font-weight:900;border:0;cursor:default}
