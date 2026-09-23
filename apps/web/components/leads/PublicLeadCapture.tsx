@@ -1,4 +1,5 @@
 "use client";
+import {offerRouteId} from "@/lib/catalog/offer-url";
 import { LeadCityField } from "./LeadCityField";
 import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
@@ -515,7 +516,7 @@ export function PublicLeadCapture() {
 
   useEffect(() => {
     if (!pathname.startsWith("/cars/offer/")) return;
-    const offerId = decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || "");
+    const offerId = offerRouteId(decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || ""));
     if (!offerId) return;
     const click = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;

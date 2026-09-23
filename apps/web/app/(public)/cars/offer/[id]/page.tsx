@@ -1,3 +1,5 @@
+import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
+import { permanentRedirect } from "next/navigation";
 import { selectRelatedOfferGroups, isRenderableRelatedOffer } from "@/lib/catalog/related-offer-selection";
 import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
@@ -243,8 +245,8 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
 
 export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string }> }) {
   const { id: routeId } = await params;
-  let id = routeId;
-  try { id = decodeURIComponent(routeId); } catch { /* Keep the route value. */ }
+  let id = offerRouteId(routeId);
+  try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
   const query = searchParams ? await searchParams : {};
   const requestedPowerHp = Number(query?.powerHp || 0);
   const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
@@ -268,6 +270,15 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia cards into a soft 404.
   if (!storedOffer) return <UnavailableOffer offer={await getUnavailableOffer(id)} />;
+  const canonicalPath = offerPath(storedOffer);
+  if (`/cars/offer/${encodeURIComponent(routeId)}` !== canonicalPath && `/cars/offer/${routeId}` !== canonicalPath) {
+    const preserved = new URLSearchParams();
+    for (const [key,value] of Object.entries(query)) {
+      if (Array.isArray(value)) value.forEach(item=>preserved.append(key,String(item)));
+      else if (value !== undefined) preserved.set(key,String(value));
+    }
+    permanentRedirect(canonicalPath + (preserved.size ? `?${preserved}` : ''));
+  }
   const [savedCalculation,currentUser] = await Promise.all([getSavedOfferCalculation(storedOffer),getCurrentUser()]);
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation
     ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
@@ -333,7 +344,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const auctionAt = new Date(o.auctionDate || "");
   const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
   const favoriteRub = savedCalculation?.calculation.totalRub || catalogOfferVisibleRub(initialPublic);
-  const snapshot = { sourceId: offer.sourceId, offerType: offer.offerType, fuel:offer.fuel,powertrainKind:offer.powertrainKind, catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: initialPublic.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : initialPublic.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: `/cars/offer/${o.id}` };
+  const snapshot = { sourceId: offer.sourceId, offerType: offer.offerType, fuel:offer.fuel,powertrainKind:offer.powertrainKind, catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, calculationStatus: initialPublic.calculationStatus, catalogKind: offer.catalogKind, id: o.id, title: o.title, price: favoriteRub || null, totalRub: favoriteRub || null, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: selectionRequired ? {} : initialPublic.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, auctionGrade: o.auctionGrade, japanExportRestriction: o.japanExportRestriction, href: offerPath(storedOffer) };
   const marketHref = isGreenCornerOffer(offer) ? "/cars/green" : `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);

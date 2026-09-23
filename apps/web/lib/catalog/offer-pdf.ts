@@ -1,3 +1,4 @@
+import {offerPath} from "./offer-url";
 import PDFDocument from "pdfkit";
 import { TOPAVTO_DEALER } from "../topavto-dealer";
 import { offerPdfLayers } from "./offer-pdf-layers";
@@ -42,7 +43,7 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
  photoUrl:rankedCatalogImageUrls({...offer,images:(offer.images || []).filter(image=>image.role!=="auction_sheet")})[0],
  rateDirection,rateDate:rate?.rateDate,rateChange:rateDirection!=="flat" && previous>0?`${delta>0?"+":""}${(delta/previous*100).toFixed(2).replace(".",",")}%`:undefined,
  sections:[{title:`01 / ${markets[offer.market] || offer.market}`,rows:abroad},{title:"02 / Россия",rows:local},{title:"03 / Сопровождение и доставка",rows:[]}],
- total:rub(calculation?.totalRub),deposit:rub(calculation?.paymentPlan?.securityDepositRub),warnings:[...(warning?[warning]:[]),...(calculation?.warnings || [])],url:`https://avtocena.com/cars/offer/${encodeURIComponent(offer.id)}`};
+ total:rub(calculation?.totalRub),deposit:rub(calculation?.paymentPlan?.securityDepositRub),warnings:[...(warning?[warning]:[]),...(calculation?.warnings || [])],url:`https://avtocena.com${offerPath(offer)}`};
 }
 export function offerPdfNotes(data:OfferPdfData) {
  const deposit=data.marketKey==="japan"

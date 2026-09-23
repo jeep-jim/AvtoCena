@@ -1,3 +1,4 @@
+import {StaffAvatarUpload} from "@/components/crm/StaffAvatarUpload";
 import { StaffAccess } from "@/components/crm/StaffAccess";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import Link from "next/link";
@@ -34,6 +35,7 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Сотрудник сохранён. Выдайте ему персональный ключ ниже.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить сотрудника."}</div> : null}
 
+      {user?<StaffAvatarUpload userId={user.id} avatar={avatar}/>:null}
       {isAdminRole(actor.role) && <form action="/api/crm/users" method="post" className="glass grid gap-5 rounded-[1.8rem] p-5 md:grid-cols-[180px_minmax(0,1fr)] md:p-6">
         <input type="hidden" name="userId" value={user?.id || ""} />
         <div>

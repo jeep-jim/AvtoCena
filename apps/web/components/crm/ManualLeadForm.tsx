@@ -1,4 +1,5 @@
 "use client";
+import {offerRouteId} from "@/lib/catalog/offer-url";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
@@ -9,7 +10,7 @@ function offerIdFromInput(value: string) {
   const clean = value.trim();
   if (!clean) return "";
   const match = clean.match(/\/cars\/offer\/([^/?#]+)/i);
-  if (match?.[1]) return decodeURIComponent(match[1]);
+  if (match?.[1]) return offerRouteId(decodeURIComponent(match[1]));
   return clean.replace(/^offer:/i, "").trim();
 }
 

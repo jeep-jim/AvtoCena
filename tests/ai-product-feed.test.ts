@@ -17,7 +17,7 @@ test('sitemap requests share one full read, keep only URL fields, and retry a ge
   }} as unknown as JsonStorage;
   const results = await Promise.all([readAiSitemapProjection(storage), readAiSitemapProjection(storage)]);
   assert.equal(fullReads, 1);
-  assert.deepEqual(results[0]?.items, [{id: 'one', updatedAt: '2026-09-18', cardImageUrl: '/car.jpg'}]);
+  assert.deepEqual(results[0]?.items, [{id: 'one', updatedAt: '2026-09-18', cardImageUrl: '/car.jpg',make:'Toyota',model:'Camry',trim:undefined,year:2026}]);
   generationId = 'sitemap-test-two';
   assert.equal(await readAiSitemapProjection(storage), null);
   projectionGeneration = generationId;
@@ -119,7 +119,7 @@ test('prebuilt sitemap reads no full catalog projection on a cold request', asyn
   const compact = buildAiSitemapProjection({generationId: 'compact-only-test', items: [
     {id: 'car', make: 'Toyota', model: 'Camry', year: 2026, updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {large: 'discard'}} as any,
   ]});
-  assert.deepEqual(Object.keys(compact.items[0]).sort(), ['id', 'updatedAt', 'cardImageUrl'].sort());
+  assert.deepEqual(Object.keys(compact.items[0]).sort(), ['id', 'updatedAt', 'cardImageUrl','make','model','trim','year'].sort());
   const reads: string[] = [];
   const storage = {async readJson(key: string) {
     reads.push(key);

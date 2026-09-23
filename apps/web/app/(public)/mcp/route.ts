@@ -186,7 +186,7 @@ function offerForAi(offer: any) {
 
   return {
     id: clean(item.id),
-    url: catalogOfferUrl(item.id),
+    url: catalogOfferUrl(item),
     make: clean(item.make),
     model: clean(item.model),
     generation: clean(item.generation) || null,

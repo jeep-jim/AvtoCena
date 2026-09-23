@@ -1,3 +1,4 @@
+import {offerPath} from "./catalog/offer-url";
 import crypto from "node:crypto";
 import {
   appendChunkedDataJson,
@@ -133,7 +134,7 @@ function offerCardText(offer: any, prefix = "🚘") {
 }
 
 function offerUrl(offer: any) {
-  return `${SITE_URL}/cars/offer/${encodeURIComponent(String(offer?.id || ""))}`;
+  return `${SITE_URL}${offerPath(offer)}`;
 }
 
 function budgetSiteUrl(budgetTo?: number) {

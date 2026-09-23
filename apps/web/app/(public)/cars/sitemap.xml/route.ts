@@ -29,6 +29,7 @@ export async function GET() {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     entries,
+    "  <sitemap><loc>https://avtocena.com/cars/sitemap/green.xml</loc></sitemap>",
     "</sitemapindex>",
     "",
   ].join("\n");

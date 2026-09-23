@@ -1,3 +1,4 @@
+import {offerPath} from "./catalog/offer-url";
 import { quoteCityDelivery, deliveryDescription } from "./catalog/city-delivery";
 import { customerPriceBreakdown } from "./catalog/customer-price-breakdown";
 import {guardLead} from "./lead-antispam";
@@ -114,7 +115,7 @@ async function buildSelectedOfferSnapshot(offerId: string) {
     id: offer.id,
     offerId: offer.id,
     title,
-    href: `https://avtocena.com/cars/offer/${encodeURIComponent(offer.id)}`,
+    href: `https://avtocena.com${offerPath(offer)}`,
     image: offer.images?.[0]?.url || "",
     market: offer.market || "",
     marketLabel: catalogMarketLabel(offer.market),

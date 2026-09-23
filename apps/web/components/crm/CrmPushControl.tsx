@@ -4,18 +4,33 @@ import { Bell, BellOff } from "lucide-react";
 export function CrmPushControl({userId}: {userId: string}) {
   const [active, setActive] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState("");
   const [supported, setSupported] = useState(false);
+  const preferenceKey=`avtocena_crm_push_${userId}`;
+  const remember=(value:boolean)=>{try{localStorage.setItem(preferenceKey,value?'1':'0');}catch{}};
   useEffect(() => {
-    setSupported("serviceWorker" in navigator && "PushManager" in window && "Notification" in window);
-    if (!("serviceWorker" in navigator)) return;
-    let mounted = true;
-    void navigator.serviceWorker.getRegistration("/").then(async registration => {
-      const subscription = await registration?.pushManager.getSubscription();
-      if (!subscription) return;
-      const response = await fetch("/api/crm/push", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(subscription)});
-      if (mounted && response.ok) setActive(true);
-    }).catch(() => {});
-    return () => { mounted = false; };
-  }, [userId]);
+    const supported="serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+    setSupported(supported); if(!supported)return;
+    let mounted=true, syncing=false;
+    const sync=async()=>{
+      if(syncing)return;syncing=true;
+      try {
+        let registration=await navigator.serviceWorker.getRegistration('/');
+        let subscription=await registration?.pushManager.getSubscription();
+        let desired=false;try{desired=localStorage.getItem(preferenceKey)==='1';}catch{}
+        if(!subscription && desired && Notification.permission==='granted') {
+          registration=await navigator.serviceWorker.register('/crm-push-sw.js',{scope:'/'});
+          await navigator.serviceWorker.ready;
+          const config=await fetch('/api/crm/push',{cache:'no-store'});if(!config.ok)return;
+          const {publicKey}=await config.json();
+          const bytes=Uint8Array.from(atob(publicKey.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+          subscription=await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:bytes});
+        }
+        if(mounted)setActive(Boolean(subscription)&&Notification.permission==='granted');
+        if(subscription){remember(true);await fetch('/api/crm/push',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(subscription)});}
+      }catch{}finally{syncing=false;}
+    };
+    void sync();window.addEventListener('focus',sync);
+    return()=>{mounted=false;window.removeEventListener('focus',sync);};
+  },[userId]);
   async function toggle() {
     setBusy(true); setMessage("");
     try {
@@ -30,14 +45,15 @@ export function CrmPushControl({userId}: {userId: string}) {
           if (!response.ok) throw Error();
           await subscription.unsubscribe();
         }
-        setActive(false); return;
+        remember(false);setActive(false); return;
       }
       const config = await fetch("/api/crm/push", {cache: "no-store"}); if (!config.ok) throw Error();
       const {publicKey} = await config.json();
       const bytes = Uint8Array.from(atob(publicKey.replace(/-/g, "+").replace(/_/g, "/")), char => char.charCodeAt(0));
       subscription ||= await registration.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: bytes});
       const response = await fetch("/api/crm/push", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(subscription)});
-      if (!response.ok) { await subscription.unsubscribe(); throw Error(); }
+      remember(true);setActive(true);
+      if (!response.ok) { setMessage("Подписка включена. Повторим синхронизацию при возвращении на сайт."); return; }
       setActive(true); setMessage("Уведомления на этом устройстве включены. Звук push настраивается в телефоне.");
     } catch { setMessage("Не удалось сохранить подписку. Проверьте разрешения браузера и повторите."); }
     finally { setBusy(false); }
@@ -47,7 +63,8 @@ export function CrmPushControl({userId}: {userId: string}) {
     {message ? <p role="status" className="px-2 pb-2 text-xs leading-5">{message}</p> : null}
   </div>;
 }
-export async function unsubscribeStaffPush() {
+export async function unsubscribeStaffPush(userId?:string) {
+  if(userId)try{localStorage.setItem(`avtocena_crm_push_${userId}`,"0");}catch{}
   try {
     const registration = await navigator.serviceWorker.getRegistration("/");
     const subscription = await registration?.pushManager.getSubscription();

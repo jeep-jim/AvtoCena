@@ -1,4 +1,5 @@
 "use client";
+import {offerPath} from "@/lib/catalog/offer-url";
 import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
 import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
@@ -58,7 +59,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isElectrified = isElectric || ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
-  const href = `/cars/offer/${o.id}`;
+  const href = offerPath(offer);
   const imageUrl = o.images[0] || "";
 
   /* Imported prices pass the public gate. The separate manager overlay comes
