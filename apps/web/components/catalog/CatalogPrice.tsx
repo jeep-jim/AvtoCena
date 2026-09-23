@@ -23,7 +23,13 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;
 }) {
-  if (isGreenCornerOffer(offer) && (offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0)) return <PriceTrend offer={offer} label={label} statusLabel="В наличии" dense={dense} priceClassName={priceClassName} />;
+  if (isGreenCornerOffer(offer)) {
+    const preview = !offer.savedCalculationPreview && Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
+    if (preview || offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0) {
+      const stock = preview ? {...offer, totalRub:preview.totalRub, calculationSnapshot:{...offer.calculationSnapshot, currencyRate:preview.currencyRate || offer.calculationSnapshot?.currencyRate}} : offer;
+      return <PriceTrend offer={stock} label={label} statusLabel="В наличии" dense={dense} priceClassName={priceClassName} />;
+    }
+  }
   if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
     ? <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
     : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;

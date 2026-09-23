@@ -481,3 +481,5 @@ html body .ac-page-copy .ac-japan-sections .ac-japan-tab {background:var(--ac-su
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab[aria-current="page"] {background:var(--ac-text)!important;color:var(--ac-surface)!important;-webkit-text-fill-color:var(--ac-surface)!important;}
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab-auction[aria-current="page"] {background:#b91c1c!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab-green[aria-current="page"] {background:var(--ac-stock-accent)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
+
+html[data-theme="light"] .ac-offer-updated { background:#fff!important; border:1px solid var(--ac-border); }

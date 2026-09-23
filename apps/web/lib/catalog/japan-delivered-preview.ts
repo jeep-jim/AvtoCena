@@ -20,7 +20,7 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
     if(!entry.parameters)return null;
     const result = await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);
     return result.ok && Number(result.calculation.totalRub)>0
-      ? {totalRub:result.calculation.totalRub,deliveryPricingBasis:result.calculation.deliveryPricingBasis,engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction} : null;
+      ? {totalRub:result.calculation.totalRub,currencyRate:result.calculation.currencyRate,deliveryPricingBasis:result.calculation.deliveryPricingBasis,engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction} : null;
   }
   // Missing/old derived index retains the authoritative full-record path.
   const {getOfferForPage}=await import("./offer-page-data");
@@ -30,8 +30,8 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
   try { parameters = japanPreviewParameters(offer); } catch { return null; }
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
-    ? { totalRub: result.calculation.totalRub, deliveryPricingBasis:result.calculation.deliveryPricingBasis, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
-}, ["japan-delivered-preview-v7-city-basis"], { revalidate: 900 });
+    ? { totalRub: result.calculation.totalRub, currencyRate:result.calculation.currencyRate, deliveryPricingBasis:result.calculation.deliveryPricingBasis, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
+}, ["japan-delivered-preview-v8-bound-rate"], { revalidate: 900 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];
@@ -70,7 +70,7 @@ export async function japanSearchQuotes(generationId: string) {
         const result=await calculateOfferWithCustomerParametersDetailed(entry.offer as VehicleOffer,entry.parameters);
         if(result.ok && Number(result.calculation.totalRub)>0) quotes[id]={
           updatedAt:entry.updatedAt,sourcePrice:entry.sourcePrice,sourceCurrency:entry.sourceCurrency,
-          totalRub:result.calculation.totalRub,deliveryPricingBasis:result.calculation.deliveryPricingBasis,
+          totalRub:result.calculation.totalRub,currencyRate:result.calculation.currencyRate,deliveryPricingBasis:result.calculation.deliveryPricingBasis,
           engineCc:entry.parameters.engineCc,estimated:true,japanExportRestriction:entry.restriction};
       }));
       await new Promise(resolve=>setTimeout(resolve,0));
