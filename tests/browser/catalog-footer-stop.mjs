@@ -48,7 +48,7 @@ try {
   assert.ok(Math.abs(await page.evaluate(()=>scrollY)-stop)<=3,'stop rearms after returning');
   await page.getByRole('button',{name:'Перейти к информации внизу страницы'}).tap();
   await page.waitForTimeout(200);
-  assert.ok(await page.evaluate(()=>scrollY)>stop+100,'arrow opens footer');
+  assert.ok(await page.evaluate(()=>scrollY)>stop+100,`arrow opens footer: ${JSON.stringify(await page.evaluate(()=>({y:scrollY,visible:getComputedStyle(document.querySelector('.ac-catalog-footer-boundary button')).visibility,body:document.body.scrollHeight,footer:document.querySelector('#footer-content').getBoundingClientRect().top})))}, stop=${stop}`);
   assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('ac-catalog-footer-stop')),false);
   assert.equal(await arrow.isVisible(),false,'arrow hidden after click');
   results.push({width,firstFlingStops:true,secondContinues:true,arrowWorks:true,rearms:true});await page.close();

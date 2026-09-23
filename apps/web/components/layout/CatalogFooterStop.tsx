@@ -7,6 +7,7 @@ import "./CatalogFooterStop.css";
 /** Stop one mobile gesture at pagination; the next gesture can enter the footer. */
 export function CatalogFooterStop() {
   const [visible,setVisible] = useState(false);
+  const tapStart = useRef<{x:number;y:number}|null>(null);
   const marker = useRef<HTMLDivElement>(null);
   const releaseStop = useRef<() => void>(() => {});
   useEffect(() => {
@@ -75,10 +76,14 @@ export function CatalogFooterStop() {
       releaseStop.current = () => {};
     };
   }, []);
+  const openFooter = () => {
+    releaseStop.current();
+    marker.current?.nextElementSibling?.scrollIntoView({block:"start", behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
+  };
   return <div ref={marker} className="ac-catalog-footer-boundary">
-    <button type="button" style={{visibility:visible ? "visible" : "hidden"}} tabIndex={visible ? 0 : -1} aria-hidden={!visible} aria-label="Перейти к информации внизу страницы" onClick={() => {
-      releaseStop.current();
-      marker.current?.nextElementSibling?.scrollIntoView({block:"start", behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
-    }}><ChevronDown size={28} aria-hidden="true" /></button>
+    <button type="button" style={{visibility:visible ? "visible" : "hidden"}} tabIndex={visible ? 0 : -1} aria-hidden={!visible} aria-label="Перейти к информации внизу страницы"
+      onTouchStart={event=>{const t=event.touches[0];tapStart.current=t?{x:t.clientX,y:t.clientY}:null;}}
+      onTouchEnd={event=>{const t=event.changedTouches[0],start=tapStart.current;tapStart.current=null;if(t&&start&&Math.hypot(t.clientX-start.x,t.clientY-start.y)<12){event.preventDefault();openFooter();}}}
+      onClick={openFooter}><ChevronDown size={28} aria-hidden="true" /></button>
   </div>;
 }
