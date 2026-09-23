@@ -46,7 +46,7 @@ try {
   // Returning to the list rearms the stop on the next gesture.
   await page.evaluate(y=>scrollTo(0,y),stop-300);await swipe();
   assert.ok(Math.abs(await page.evaluate(()=>scrollY)-stop)<=3,'stop rearms after returning');
-  await page.getByRole('button',{name:'Перейти к информации внизу страницы'}).click();
+  await page.getByRole('button',{name:'Перейти к информации внизу страницы'}).tap();
   await page.waitForTimeout(200);
   assert.ok(await page.evaluate(()=>scrollY)>stop+100,'arrow opens footer');
   assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('ac-catalog-footer-stop')),false);

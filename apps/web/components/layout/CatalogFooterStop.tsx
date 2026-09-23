@@ -38,10 +38,12 @@ export function CatalogFooterStop() {
       }
     };
     const start = (event: TouchEvent) => {
+      const target = event.target as Element;
+      // Keep the arrow visible until its tap produces a click.
+      if (marker.current?.contains(target) && target.closest("button")) {lastY=event.touches[0]?.clientY||0;return;}
       release();
       if (!mobile.matches || event.touches.length !== 1 || !marker.current) return;
       lastY = event.touches[0].clientY;
-      const target = event.target as Element;
       // Filters, galleries and other nested scrollers keep their own gestures.
       for (let element: Element | null = target; element && element !== document.body; element = element.parentElement) {
         if (element.matches('input, textarea, select, [role="dialog"], [aria-modal="true"]')) return;
