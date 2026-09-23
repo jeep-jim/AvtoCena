@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+
+test('calculated stock retains availability while auctions retain auction badges',()=>{
+ const output=execFileSync(process.execPath,['--import','tsx','-e',`
+  const React=require('react');globalThis.React=React;
+  const {renderToStaticMarkup}=require('react-dom/server');
+  const {CatalogPrice}=require('./apps/web/components/catalog/CatalogPrice');
+  const offer={id:'green-123',sourceId:'akebono_green_japan_open',offerType:'fixed',market:'japan',totalRub:1200000,fuel:'petrol',auctionGrade:'4',calculationStatus:'calculated'};
+  const render=offer=>renderToStaticMarkup(React.createElement(CatalogPrice,{offer,label:'2026 г.'}));
+  console.log(JSON.stringify({stock:render(offer),auction:render({...offer,id:'auction-123',sourceId:'auction',offerType:'auction'})}));
+ `],{encoding:'utf8',env:{...process.env,TSX_TSCONFIG_PATH:'apps/web/tsconfig.json'}});
+ const {stock,auction}=JSON.parse(output);
+ assert.match(stock,/В наличии/);assert.doesNotMatch(stock,/Лот продан|Оценка/);assert.match(stock,/1\s200\s000/);
+ assert.match(auction,/Лот продан/);
+});
