@@ -1,0 +1,26 @@
+.ac-catalog-footer-boundary { display: none; }
+@media (max-width: 767px) and (pointer: coarse) {
+  html.ac-catalog-footer-stop { scroll-snap-type: y proximity; }
+  .ac-catalog-footer-boundary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
+  }
+  .ac-catalog-footer-boundary button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ac-text);
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .ac-catalog-footer-boundary button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+}

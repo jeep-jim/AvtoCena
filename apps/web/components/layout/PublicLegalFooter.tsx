@@ -6,6 +6,7 @@ import { CitySelector, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { CatalogFooterStop } from "./CatalogFooterStop";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
@@ -103,6 +104,7 @@ export function PublicLegalFooter() {
   return (
     <>
       <footer className="ac-public-legal-footer mx-auto mt-14 w-full max-w-[1500px] px-4 pb-8 md:mt-20 md:px-8 md:pb-10">
+        {pathname && /^(?:\/results|\/favorites|\/cars(?:\/(?:green|brand(?:\/[^/]+)*|(?:japan|china|korea|uae|europe|georgia)(?:\/[^/]+)*))?)\/?$/.test(pathname) ? <CatalogFooterStop key={pathname} /> : null}
         <div className="ac-public-footer-navigation grid gap-8 py-7 sm:grid-cols-2 lg:grid-cols-[minmax(290px,1.25fr)_1fr_1fr_1fr] lg:gap-10 lg:py-9">
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
