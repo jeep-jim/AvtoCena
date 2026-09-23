@@ -1,13 +1,11 @@
 .ac-catalog-footer-boundary { display: none; }
 @media (max-width: 767px) and (pointer: coarse) {
-  html.ac-catalog-footer-stop { scroll-snap-type: y proximity; }
+  html.ac-catalog-footer-stop { scroll-behavior: auto; }
   .ac-catalog-footer-boundary {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 56px;
-    scroll-snap-align: end;
-    scroll-snap-stop: always;
   }
   .ac-catalog-footer-boundary button {
     display: flex;
