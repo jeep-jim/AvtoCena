@@ -563,7 +563,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
       node.style.removeProperty("background");
       node.style.removeProperty("background-color");
     };
-  }, [panel, lightTheme, direction, highlightElectrified]);
+  }, [panel, lightTheme, direction, highlightElectrified, greenCorner]);
   const stateClass = direction === "down" ? "is-down" : direction === "up" ? "is-up" : "is-flat";
   const priceStateClass = direction === "down" ? "ac-price--down" : direction === "up" ? "ac-price--up" : "ac-price--flat";
   const hasPrice = Boolean(pricedOffer.totalRub);
