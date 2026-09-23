@@ -43,6 +43,7 @@ export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
     .ac-offer-contact-button{color:#fff!important}
+    .ac-offer-action-row .ac-offer-contact-button>svg{display:block!important}
     .ac-offer-contact-button>span{font-size:inherit}
     .ac-credit-partner-button{color:#fff!important;-webkit-text-fill-color:#fff!important}
     .ac-offer-page [data-offer-credit-host]{display:none!important}

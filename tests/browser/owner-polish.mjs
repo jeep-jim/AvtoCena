@@ -39,6 +39,7 @@ try {
    assert.equal(await page.locator('.ac-favorite-nav svg').getAttribute('fill'),'currentColor');
    await star.click();assert.equal(await page.locator('.ac-favorite-nav svg').getAttribute('fill'),'none');
    const share=page.getByRole('button',{name:width<768?'Поделиться':'Поделиться ссылкой',exact:true});
+   assert.ok(await share.locator('svg').isVisible(),'share icon remains visible on mobile');
    const a=await star.boundingBox(),b=await share.boundingBox();assert.ok(Math.abs(a.y-b.y)<3,'favorite beside share');
    if(staff){const pdf=page.getByRole('button',{name:'PDF текущей карточки'});await pdf.waitFor();const c=await pdf.boundingBox();assert.ok(Math.abs(c.y-a.y)<3&&c.x<a.x,'PDF before favorite');}
    assert.ok(await share.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'share label fits');
