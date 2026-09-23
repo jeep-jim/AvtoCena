@@ -81,3 +81,14 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
 .crm-metrika-status.is-connected .crm-metrika-status-icon{background:#16a34a;color:#fff}
 .crm-metrika-notice{padding:12px 16px;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-text);font-weight:700;border-left:4px solid #22c55e}
 html[data-theme="light"] .crm-metrika-status.is-connected{background:#dcfce7;border-color:#86efac;color:#14532d}
+
+.crm-workspace [data-metrika-stage="qualified"]{background:#dcfce7!important;color:#14532d!important;border-color:#86efac!important}
+.crm-workspace [data-metrika-stage="contract"]{background:#dbeafe!important;color:#1e3a8a!important;border-color:#93c5fd!important}
+.crm-workspace [data-metrika-stage="spam"]{background:#fee2e2!important;color:#991b1b!important;border-color:#fca5a5!important}
+html[data-theme="dark"] .crm-workspace [data-metrika-stage="qualified"]{background:#163b2b!important;color:#bbf7d0!important;border-color:#258254!important}
+html[data-theme="dark"] .crm-workspace [data-metrika-stage="contract"]{background:#1e3457!important;color:#bfdbfe!important;border-color:#3b82f6!important}
+html[data-theme="dark"] .crm-workspace [data-metrika-stage="spam"]{background:#4c242c!important;color:#fecaca!important;border-color:#e05261!important}
+.crm-metrika-legend{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px;font-size:12px}
+.crm-metrika-legend>span{padding:6px 10px;border-radius:10px;border:1px solid;font-weight:700}
+.crm-metrika-legend>p{flex-basis:100%;color:var(--ac-muted);line-height:1.5}
+.crm-metrika-lead-hint{padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.5}

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LEAD_STATUSES, LEAD_STATUS_LABELS } from "@/lib/crm";
+import { LEAD_STATUSES, leadStatusOptionLabel, leadMetrikaStage } from "@/lib/crm";
 
 type ManagerOption = {
   id: string;
@@ -33,6 +33,7 @@ export function LeadActions({
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const metrikaStage = leadMetrikaStage(status);
   const requiresReason = status === "rejected" || status === "duplicate" || status === "spam";
   const currentManagerName = managers.find((manager) => manager.id === assignedManagerId)?.displayName || "Вы";
 
@@ -95,6 +96,7 @@ export function LeadActions({
   return (
     <div className="crm-lead-actions grid grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-black/20 p-3 md:grid-cols-[minmax(150px,0.8fr)_minmax(170px,1fr)_minmax(180px,1.3fr)_auto] md:items-center">
       <select
+        data-metrika-stage={metrikaStage?.tone}
         value={status}
         onChange={(event) => setStatus(event.target.value)}
         className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
@@ -102,7 +104,7 @@ export function LeadActions({
       >
         {LEAD_STATUSES.map((value) => (
           <option key={value} value={value}>
-            {LEAD_STATUS_LABELS[value]}
+            {leadStatusOptionLabel(value)}
           </option>
         ))}
       </select>
@@ -143,6 +145,11 @@ export function LeadActions({
         {loading ? "Сохраняем..." : "Сохранить"}
       </button>
 
+      {metrikaStage && <p className="crm-metrika-lead-hint col-span-2 md:col-span-4" data-metrika-stage={metrikaStage.tone}>
+        <strong>{metrikaStage.marker} Цель Метрики: {metrikaStage.name}.</strong>{' '}
+        {status === 'spam' ? 'Спам — сигнал о некачественной заявке. Отсутствие ответа само по себе не спам. ' : ''}
+        После сохранения статус попадёт в фоновую отправку при включённой интеграции и наличии ClientID. Эта отметка не подтверждает доставку в Метрику.
+      </p>}
       {canAssignManagers && <button disabled={loading} onClick={archive} className="rounded-xl border border-[var(--ac-border)] px-4 py-2 text-xs font-bold md:col-span-4">{archived ? "Восстановить заявку" : "Убрать в архив"}</button>}
 
       {(saved || error) && (
