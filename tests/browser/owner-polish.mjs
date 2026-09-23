@@ -71,6 +71,13 @@ try {
    }
    await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();const rows=page.locator('[data-facet-value]');await rows.first().waitFor();const r1=await rows.nth(0).boundingBox(),r2=await rows.nth(1).boundingBox();assert.ok(r2.y-r1.y-r1.height>=2,'brand spacing');
    assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-${theme}-${staff?'staff':'guest'}.png`});results.push({width,theme,staff});
+   await page.goto(origin+'/?unavailable=1&theme='+theme);
+   const sold=page.getByRole('heading',{name:'Этот автомобиль продан',exact:true});await sold.waitFor();
+   assert.ok(await sold.evaluate(e=>parseFloat(getComputedStyle(e).fontSize)>=40),'large unavailable heading');
+   assert.equal(await page.locator('.ac-unavailable-page').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(8, 9, 11)');
+   assert.ok(await page.locator('.ac-unavailable-key').evaluate(e=>e.complete&&e.naturalWidth>0),'key image loads');
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'unavailable page fits');
+   await page.screenshot({path:`${out}/unavailable-${width}-${theme}.png`});
    if(staff){
     await page.goto(origin+'/?crm=1&staff=1&theme='+theme);
     const docs=page.getByRole('button',{name:'Документы',exact:true});await docs.waitFor();
