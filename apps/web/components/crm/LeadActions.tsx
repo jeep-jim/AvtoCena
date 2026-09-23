@@ -1,5 +1,6 @@
 "use client";
 
+import { LeadStatusHelp } from "./LeadStatusHelp";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LEAD_STATUSES, leadStatusOptionLabel, leadMetrikaStage } from "@/lib/crm";
@@ -95,6 +96,7 @@ export function LeadActions({
 
   return (
     <div className="crm-lead-actions grid grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-black/20 p-3 md:grid-cols-[minmax(150px,0.8fr)_minmax(170px,1fr)_minmax(180px,1.3fr)_auto] md:items-center">
+      <div className="crm-status-picker">
       <select
         data-metrika-stage={metrikaStage?.tone}
         value={status}
@@ -108,6 +110,8 @@ export function LeadActions({
           </option>
         ))}
       </select>
+      <LeadStatusHelp status={status} />
+      </div>
 
       {canAssignManagers ? (
         <select

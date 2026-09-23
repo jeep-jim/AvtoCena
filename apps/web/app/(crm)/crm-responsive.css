@@ -92,3 +92,20 @@ html[data-theme="dark"] .crm-workspace [data-metrika-stage="spam"]{background:#4
 .crm-metrika-legend>span{padding:6px 10px;border-radius:10px;border:1px solid;font-weight:700}
 .crm-metrika-legend>p{flex-basis:100%;color:var(--ac-muted);line-height:1.5}
 .crm-metrika-lead-hint{padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.5}
+
+.crm-status-picker{display:flex;align-items:center;gap:6px;min-width:0}
+.crm-status-picker>select{flex:1;min-width:0;width:0}
+.crm-status-help-button{display:inline-grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border:1px solid currentColor;border-radius:50%;font-size:16px;font-weight:900;line-height:1;background:transparent;color:inherit;cursor:pointer}
+.crm-goal-help-chip{display:flex;align-items:center;gap:8px;padding:4px 8px 4px 10px;border:1px solid;border-radius:12px;font-weight:700}
+.crm-status-help-dialog{position:fixed;inset:0;margin:auto;width:min(600px,calc(100vw - 24px));max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;box-sizing:border-box;padding:20px;border:1px solid var(--ac-border);border-radius:20px;background:var(--ac-surface);color:var(--ac-text);box-shadow:0 20px 70px #0006;font-size:14px;font-weight:400;line-height:1.55;text-align:left}
+.crm-status-help-dialog::backdrop{background:#0009}
+.crm-status-help-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.crm-status-help-heading h2{font-size:20px;font-weight:900;line-height:1.2}
+.crm-status-help-heading button{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--ac-surface-2);color:var(--ac-text);border:0;font-size:26px;cursor:pointer}
+.crm-status-help-intro{margin:12px 0;color:var(--ac-muted)}
+.crm-status-help-item{border-top:1px solid var(--ac-border)}
+.crm-status-help-item>summary{cursor:pointer;padding:12px 0;font-weight:800;min-height:44px}
+.crm-status-help-item>div{padding-bottom:14px}
+.crm-status-help-item p+p{margin-top:10px}
+.crm-status-help-goal{color:var(--ac-muted);font-size:12px}
+@media(max-width:767px){.crm-lead-actions>.crm-status-picker{grid-column:1/-1}.crm-status-help-dialog{padding:16px}.crm-goal-help-chip{max-width:100%}}

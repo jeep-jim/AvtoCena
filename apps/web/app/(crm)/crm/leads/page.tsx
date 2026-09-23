@@ -1,3 +1,4 @@
+import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
 import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
 import { leadReadState } from "@/lib/crm-read-state";
 import Link from "next/link";
@@ -116,10 +117,10 @@ export default async function CrmLeadsPage({
         ))}
       </div>
       <div className="crm-metrika-legend" aria-label="Статусы для Метрики">
-        <strong>Статусы для Метрики</strong>
-        <span data-metrika-stage="qualified">🟢 Квалифицированный лид</span>
-        <span data-metrika-stage="contract">🔵 Договор подписан / Оплата получена</span>
-        <span data-metrika-stage="spam">🔴 Спам</span>
+        <strong>Статусы для Метрики</strong><LeadStatusHelp />
+        <div className="crm-goal-help-chip" data-metrika-stage="qualified">🟢 Квалифицированный лид<LeadStatusHelp status="qualified" /></div>
+        <div className="crm-goal-help-chip" data-metrika-stage="contract">🔵 Договор подписан / Оплата получена<LeadStatusHelp status="contract_signed" /></div>
+        <div className="crm-goal-help-chip" data-metrika-stage="spam">🔴 Спам<LeadStatusHelp status="spam" /></div>
         <p>Откройте заявку → выберите статус внизу карточки → нажмите «Сохранить». «Предложение отправлено» не означает подписанный договор.</p>
       </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
