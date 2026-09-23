@@ -265,7 +265,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     try {
       market.config = {...market.config, logisticsRub:greenCornerLogisticsRub(offer.greenCornerLogistics, rate.effectiveRate),
         logisticsRateStatus:'available', logisticsCurrency:'JPY', logisticsAmount:offer.greenCornerLogistics!.amountJpy,
-        logisticsRateDate:rate.rateDate};
+        logisticsRateDate:rate.rateDate, exchangeRateReservePercent:0, bankTransferPercent:7.5};
     } catch {
       return {...offer,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:{...pendingSnapshot,
         pricingConfidence:'unavailable',missing:['green_corner_logistics_basis']}};
@@ -289,12 +289,13 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   const commercial = normalizedCategory(offer).category === "N1";
   const enteredTransport = offer.transportToBorderRub;
   const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;
-  const borderTransportRub = commercial
+  const greenCorner = isGreenCornerOffer(offer);
+  const borderTransportRub = greenCorner ? Number(market.config.logisticsRub || 0) : commercial
     ? hasEnteredTransport ? enteredTransport : transportToBorderRub(offer) || Number(market.config.logisticsRub || 0)
     : transportToBorderRub(offer);
   // Goods imports include pre-border transport. In an N1 customer scenario this
   // replaces the logistics line, so it is not added twice to the delivered total.
-  const customsValueRub = rate.sourcePriceRub + (commercial ? borderTransportRub : 0);
+  const customsValueRub = rate.sourcePriceRub + ((commercial || greenCorner) ? borderTransportRub : 0);
   if (commercial) {
     market.config = {...market.config,logisticsRub:borderTransportRub};
     if (!hasEnteredTransport) {
@@ -368,7 +369,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         sourcePriceRub: rate.sourcePriceRub,
         customs,
         customsInput,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
         customsCompleteness: "needs_data",
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "preliminary",
@@ -398,7 +399,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         eurRate,
         customs,
         customsInput,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
         customsCompleteness: customs.status,
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "unavailable",
@@ -445,7 +446,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       sourcePriceRub: rate.sourcePriceRub,
       customs,
       customsInput,
-      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial),
+      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
       customsCompleteness: customs.status,
       pricingConfidence: priceEstimated ? "estimated" : "exact",
       estimatedMarketFields: market.estimatedFields,
@@ -536,7 +537,7 @@ export async function calculateOfferWithCustomerParametersDetailed(input: Vehicl
     const missing = [...new Set<string>([...(snapshot?.missing || []), ...(snapshot?.customs?.missing || [])])];
     return { ok: false as const, error: customerCalculationFailureMessage(missing), missing };
   }
-  return {ok: true as const, calculation: {deliveryPricingBasis:deliveryPricingBasis(result.calculationSnapshot),deliveryQuote:result.calculationSnapshot?.deliveryQuote,totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
+  return {ok: true as const, calculation: {customsValue:result.calculationSnapshot?.customsValue,deliveryPricingBasis:deliveryPricingBasis(result.calculationSnapshot),deliveryQuote:result.calculationSnapshot?.deliveryQuote,totalRub:result.totalRub,paymentPlan:result.calculationSnapshot?.paymentPlan,currencyRate:result.calculationSnapshot?.currencyRate,breakdown:customerPriceBreakdown(expandCustomsBreakdown(result.calculationSnapshot?.breakdown || [],result.calculationSnapshot?.customs)),rateDate:result.calculationSnapshot?.currencyRate?.rateDate,customs:result.calculationSnapshot?.customs,warnings:result.calculationSnapshot?.warnings}};
 }
 
 /** Preserve the nullable contract used by existing integrations. */

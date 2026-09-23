@@ -70,6 +70,7 @@ try {
     await trigger.click();assert.ok(await page.locator('.ac-staff-menu').isVisible());await trigger.click();assert.equal(await page.locator('.ac-staff-menu').isVisible(),false);
    }
    await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();const rows=page.locator('[data-facet-value]');await rows.first().waitFor();const r1=await rows.nth(0).boundingBox(),r2=await rows.nth(1).boundingBox();assert.ok(r2.y-r1.y-r1.height>=2,'brand spacing');
+   const green=page.locator('[data-green-price]');assert.equal(await green.locator('.ac-price-trend-arrow,.ac-price-trend-delta').count(),0,'green grade replaces currency trend');assert.ok(await green.getByText(/Оценка.*S/).isVisible(),'green grade visible');assert.ok(await green.locator('.ac-price--down').isVisible(),'green price preserved');
    assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-${theme}-${staff?'staff':'guest'}.png`});results.push({width,theme,staff});
    await page.goto(origin+'/?unavailable=1&theme='+theme);
    const sold=page.getByRole('heading',{name:'Этот автомобиль продан',exact:true});await sold.waitFor();

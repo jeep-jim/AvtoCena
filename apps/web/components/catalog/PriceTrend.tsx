@@ -6,6 +6,8 @@ import { useTapActivation } from "./useTapActivation";
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
 import { loadPublicRates } from "../../lib/catalog/public-rates-client";
+import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
+import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import { AuctionCardPrice } from "./AuctionCardPrice";
 import type { JapanExportRestriction } from "../../lib/catalog/japan-export-restriction";
 
@@ -23,6 +25,7 @@ export type PublicCurrencyRate = {
 type CurrencyRateLike = Partial<PublicCurrencyRate>;
 type ChartPoint = RateHistoryPoint;
 type PriceLike = {
+  id?: string; sourceId?: string; offerType?: string;
   fuel?: string | null; fuelLabel?: string | null; powertrainKind?: string | null;
   market?: string | null;
   auctionDate?: string | null;
@@ -539,12 +542,13 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   }, [popoverOpen]);
 
   const pricedOffer = useMemo(() => withLiveRate(offer, liveRate), [offer, liveRate]);
-  const trend = resolvePriceTrend(pricedOffer);
-  const direction = trend?.direction;
+  const greenCorner = isGreenCornerOffer(offer);
+  const trend = greenCorner ? null : resolvePriceTrend(pricedOffer);
+  const direction = greenCorner ? "down" : trend?.direction;
   useEffect(() => {
     const node = panelRoot.current;
     if (!node || !panel) return;
-    if (highlightElectrified) {
+    if (highlightElectrified && !greenCorner) {
       const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.14)";
       node.style.setProperty("background", background, "important");
       node.style.setProperty("background-color", background, "important");
@@ -570,9 +574,9 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   // A saved/live exchange rate is useful even when the total price has not
   // changed yet. Keeping this tied to `trend` made the offer price inert on
   // mobile until a second price snapshot existed.
-  const canShowRate = Boolean(sheetRate);
+  const canShowRate = !greenCorner && Boolean(sheetRate);
   const openSheet = () => { if (canShowRate) { setPopoverOpen(false); setSheetOpen(true); } };
-  const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
+  const priceColor = !greenCorner && highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
   return <div
     ref={panelRoot}
@@ -586,8 +590,8 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   >
     <div className="flex min-w-0 items-center justify-between gap-2"><div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>{trend ? <span className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`} title={trendTitle}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span> : statusLabel ? <span className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} shrink-0 font-bold text-[var(--ac-muted)]`}>{statusLabel}</span> : null}</div>
     <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-      <div className={`ac-price ${priceStateClass} ${highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
-      {trend ? <span
+      <div className={`ac-price ${priceStateClass} ${!greenCorner && highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
+      {greenCorner ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} hideRestriction /> : trend ? <span
         ref={trendRoot}
         role={canShowRate ? "button" : undefined}
         tabIndex={canShowRate ? 0 : undefined}
