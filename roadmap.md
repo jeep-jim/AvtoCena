@@ -4375,3 +4375,12 @@ PR #1125 был объединён параллельно с восстанов�
 
 ## 2026-09-22 — Green Corner follow-up
 Owner requested source specifications, unified stock controls/pagination, green accents and Japan availability filters. See docs/audits/green-corner-2026-09-22.md for source coverage, FOB filter scope, JPY pricing verification and release status.
+
+## 2026-09-23 — Owner UI follow-up and UAE refresh
+
+- City search uses explicit theme text/fill color. Green Corner cards omit the delivery footnote; calculation logic stays intact.
+- Staff arrow toggles the menu, profile API includes uploaded avatar, avatar fills its rounded square, settings have a distinct surface.
+- Client cards link to a protected edit page. Updates validate CRM visibility inside the storage mutation, reject stale versions, preserve assignments and unrelated fields; linked requests are accessible from the client page.
+- Favorites move from the offer title to the action row after PDF (staff) or share (guest). Mobile uses compact share/favorite controls. Empty header star is outlined; repeated favorite controls synchronize. Brand rows have 4px spacing.
+- UAE full source sweep requested through the existing main marker: run 35815727484, collection confirmed running. Final collection/publication counts are not yet confirmed.
+- Local TypeScript, production build and 19 targeted tests passed. Full regression and browser checks pending at this checkpoint. Publication is not yet confirmed.

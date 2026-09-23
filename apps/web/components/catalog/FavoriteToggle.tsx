@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const FAVORITES_KEY = "avtocena_favorites";
 
-type FavoriteSnapshot = {
+export type FavoriteSnapshot = {
   fuel?: string; powertrainKind?: string;
   id: string;
   title?: string;
@@ -45,7 +45,11 @@ export function FavoriteToggle({ offerId, snapshot, className = "", compact = fa
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    setActive(readFavorites().some((item) => item.id === offerId));
+    const sync = () => setActive(readFavorites().some((item) => item.id === offerId));
+    sync();
+    window.addEventListener("storage", sync);
+    window.addEventListener("avtocena:favorites-changed", sync);
+    return () => { window.removeEventListener("storage", sync); window.removeEventListener("avtocena:favorites-changed", sync); };
   }, [offerId]);
 
   function toggle(event: React.MouseEvent<HTMLButtonElement>) {

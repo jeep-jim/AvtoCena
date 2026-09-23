@@ -29,7 +29,7 @@ export function SellerPrice({ offer, deliveryCity = "", panel = true, dense = fa
       {japan && !hideJapanBadges ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} /> : null}
       {panel ? <div className="ac-seller-help">{!isGreenCornerOffer(offer) ? <SellerPriceHelp /> : null}<span>Без доставки<br />и платежей</span></div> : null}
     </div>
-    {!panel && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
+    {!panel && !isGreenCornerOffer(offer) && !japan && !deliveryCity ? <p className="mt-1 text-[10px] font-medium text-[var(--ac-muted)]">Без доставки</p> : null}
 
     {panel ? <style dangerouslySetInnerHTML={{ __html: `html[data-theme="light"] .ac-seller-currency{background:var(--ac-surface-2);border:1px solid var(--ac-border);color:var(--ac-text)}` }} /> : null}
     {panel && rate?.effectiveRate ? <>
