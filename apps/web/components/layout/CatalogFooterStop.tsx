@@ -40,7 +40,7 @@ export function CatalogFooterStop() {
     const start = (event: TouchEvent) => {
       const target = event.target as Element;
       // Keep the arrow visible until its tap produces a click.
-      if (marker.current?.contains(target) && target.closest("button")) {lastY=event.touches[0]?.clientY||0;return;}
+      if (marker.current?.contains(target) && target.closest("button")) {armed=false;root.classList.remove("ac-catalog-footer-stop");lastY=event.touches[0]?.clientY||0;return;}
       release();
       if (!mobile.matches || event.touches.length !== 1 || !marker.current) return;
       lastY = event.touches[0].clientY;
@@ -55,11 +55,12 @@ export function CatalogFooterStop() {
       const bottom = marker.current.getBoundingClientRect().bottom;
       if (bottom > window.innerHeight + 8) {armed = true; root.classList.add("ac-catalog-footer-stop");}
     };
+    const click = (event: MouseEvent) => {if(!marker.current?.contains(event.target as Node))release();};
     document.addEventListener("touchstart", start, {passive:true});
     document.addEventListener("touchmove", move, {passive:false});
     window.addEventListener("scroll", stop, {passive:true});
     document.addEventListener("keydown", release);
-    document.addEventListener("click", release, true);
+    document.addEventListener("click", click, true);
     window.addEventListener("popstate", release);
     mobile.addEventListener("change", release);
     return () => {
@@ -68,7 +69,7 @@ export function CatalogFooterStop() {
       document.removeEventListener("touchmove", move);
       window.removeEventListener("scroll", stop);
       document.removeEventListener("keydown", release);
-      document.removeEventListener("click", release, true);
+      document.removeEventListener("click", click, true);
       window.removeEventListener("popstate", release);
       mobile.removeEventListener("change", release);
       releaseStop.current = () => {};
