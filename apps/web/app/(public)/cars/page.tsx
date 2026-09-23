@@ -182,7 +182,8 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : "Каталог автомобилей"}</h1>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>
-      <p className="ac-catalog-result-count mt-3 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={total}>
+      <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={total}>
+        <span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span>
         <span>Найдено: <span className="whitespace-nowrap tabular-nums" data-catalog-result-value>{formatCatalogCount(total)}</span></span>
       </p>
       <CatalogFilters initial={initial} facets={facets} />

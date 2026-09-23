@@ -330,7 +330,7 @@ function ensureClearControls() {
 
 function decorateCatalogCounts() {
   document.querySelectorAll<HTMLElement>(".ac-catalog-page p, .ac-catalog-page h1, .ac-catalog-page h2, .ac-catalog-page [data-catalog-count]").forEach((element) => {
-    if (element.hasAttribute("data-catalog-result-count") || element.dataset.acCountPulse === "1") return;
+    if (element.querySelector(".ac-pulse-dot, .ac-catalog-count-pulse") || element.dataset.acCountPulse === "1") return;
     const ownText = Array.from(element.childNodes)
       .filter((node) => node.nodeType === Node.TEXT_NODE)
       .map((node) => node.textContent || "")

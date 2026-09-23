@@ -24,7 +24,7 @@ export default async function GreenCornerPage({searchParams}:{searchParams:Promi
   <h1 className="ac-green-heading mt-8 text-4xl font-black md:text-6xl">Зелёный угол</h1>
   <p className="mt-4 max-w-2xl text-[var(--ac-muted)]">Автомобили в наличии в Японии — без участия в аукционе.</p>
   <CatalogFilters initial={initial} facets={greenCornerFacets(current)} />
-  <p className="mt-5 text-sm text-[var(--ac-muted)]" role="status" data-catalog-result-count={matched.length}>Найдено: {matched.length.toLocaleString("ru-RU")}</p>
+  <p className="mt-5 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" data-catalog-result-count={matched.length}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span>Найдено: {matched.length.toLocaleString("ru-RU")}</span></p>
   <div className="mt-5"><CatalogLoadMore key={`${JSON.stringify(initial)}:${page}`} query={{}} greenQuery={initial} initialPage={page} initialTotal={matched.length} initialCount={items.length} initialCards={items.map(offer=><CatalogCard key={offer.id} offer={offer} compact dense />)} /></div>
   {!items.length?<p className="py-8">Подходящих автомобилей пока нет.</p>:null}
  </div></main>;

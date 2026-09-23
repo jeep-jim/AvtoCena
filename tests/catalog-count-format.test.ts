@@ -18,7 +18,7 @@ test("counter renders once outside the mobile-hidden heading wrapper before filt
   assert.match(source,/<\/div>\s*<p className="ac-catalog-result-count/);
   const counter = source.slice(source.indexOf('<p className="ac-catalog-result-count'),source.indexOf('<CatalogFilters initial='));
   assert.ok(!/\bhidden\b|lg:block|display:\s*none/.test(counter.replace('aria-hidden="true"','')));
-  assert.doesNotMatch(counter,/ac-pulse-dot/);
+  assert.match(counter,/ac-pulse-dot ac-pulse-dot--status/);
   assert.match(counter,/role="status"/);
   assert.match(counter,/formatCatalogCount\(total\)/);
   assert.ok(!source.includes('Найдено: {total}'));

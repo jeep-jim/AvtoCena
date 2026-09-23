@@ -292,7 +292,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     : initialVisibleRub > 0
       ? normalizedEnrichedOffer
       : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
-  const sourceUrl = enrichedOffer.market === "japan"
+  const sourceUrl = enrichedOffer.market === "japan" && !isGreenCornerOffer(enrichedOffer)
     ? undefined
     : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = selectionRequired || sellerPricing ? publicOffer(pricedOffer) : normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
@@ -395,7 +395,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const primarySpecs = displayOnlySpecs.slice(0, 4);
   const secondarySpecs = displayOnlySpecs.slice(4);
 
-  const auctionStatus = greenCorner ? <div data-green-corner-status className="flex min-h-14 min-w-0 items-center rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2 text-xs font-semibold text-emerald-600"><Link href="/cars/green">Зелёный угол · В наличии в Японии · Без торгов</Link></div> : japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
+  const auctionStatus = japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
     <p className="min-w-0 text-xs font-semibold leading-5 text-[var(--ac-muted)]"><span>Продано на торгах{enrichedOffer.auctionName ? ` · ${enrichedOffer.auctionName}` : ""}</span>{" · "}<span className="whitespace-nowrap">{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Открыть результат аукциона" className="ml-2">↗</a> : null}</p>
     <JapanAuctionBadges offer={o} interactive hideRestriction />
   </div> : null;

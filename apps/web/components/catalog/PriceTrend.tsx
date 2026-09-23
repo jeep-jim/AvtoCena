@@ -1,4 +1,5 @@
 "use client";
+import { withRateChartHistory } from "../../lib/catalog/rate-chart-history";
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
@@ -328,7 +329,16 @@ function DetailRow({ label, value, muted, valueClassName = "" }: { label: string
 
 function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact = false, statusLabel = "Изменение курса в сохранённом расчёте" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; light?: boolean; compact?: boolean; statusLabel?: string }) {
   const currency = String(rate.currency || "").toUpperCase();
-  const history = normalizedHistory(rate);
+  const [publicRate, setPublicRate] = useState<PublicCurrencyRate | null>(null);
+  const savedHistoryCount = normalizedHistory(rate).length;
+  useEffect(() => {
+    if (!currency || savedHistoryCount >= 5) return;
+    let active = true;
+    void loadPublicRates().then(rates => { if (active) setPublicRate(rates.find(item => item.currency.toUpperCase() === currency) || null); }).catch(() => {});
+    return () => { active = false; };
+  }, [currency, savedHistoryCount]);
+  const chartRate = withRateChartHistory(rate, publicRate);
+  const history = normalizedHistory(chartRate);
   const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
   const fallbackPrevious = history.length > 1 ? history[history.length - 2].effectiveRate : 0;
   const previousRate = Number(rate.previousEffectiveRate || fallbackPrevious || 0);
@@ -339,12 +349,12 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
   const strong = light ? "text-[#141821]" : "text-white";
 
   return <div>
-    <RateSparkline rate={rate} light={light} priceRub={priceRub} />
+    <RateSparkline rate={chartRate} light={light} priceRub={priceRub} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>{statusLabel}</div></div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
       <DetailRow label={`Курс ${currency}`} muted={muted} value={`${previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}${formatRate(currentRate, currency)} ₽`} valueClassName={strong} />
       <DetailRow label="Изменение курса" muted={muted} value={`${rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}${formatRate(Math.abs(rateDelta), currency)} ₽ (${percent < 0 ? "−" : percent > 0 ? "+" : ""}${Math.abs(percent).toFixed(2)}%)`} valueClassName={deltaClass} />
-      {(rate.previousRateDate || rate.rateDate || history.length) ? <DetailRow label="Период" muted={muted} value={`${fullRateDate(history[0]?.date || rate.previousRateDate)} → ${fullRateDate(history.at(-1)?.date || rate.rateDate)}`} valueClassName={strong} /> : null}
+      {(rate.previousRateDate || rate.rateDate || history.length) ? <DetailRow label="Период" muted={muted} value={`${fullRateDate(rate.previousRateDate || history[0]?.date)} → ${fullRateDate(rate.rateDate || history.at(-1)?.date)}`} valueClassName={strong} /> : null}
     </div>
     {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><DetailRow label="Влияние на ориентир" muted={muted} value={`${impactRub < 0 ? "−" : "+"}${money(Math.abs(impactRub))} ₽`} valueClassName={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"} /></div> : null}
     <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>* Итоговую цену подтверждает менеджер на момент оплаты.</div>
