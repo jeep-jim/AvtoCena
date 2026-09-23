@@ -475,12 +475,6 @@ html body .ac-page-copy .ac-directory-letter[aria-current="location"] {backgroun
 html[data-theme="light"] body .ac-page-copy .ac-directory-search {background:#fff!important;}
 .ac-directory-search input::-webkit-search-cancel-button,
 .ac-directory-search input::-webkit-search-decoration {display:none;-webkit-appearance:none;}
-/* Carry the stock section's soft emerald tint on each preview instead of a surrounding panel. */
-html body .ac-catalog-card[data-green-corner="true"],
-html body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#153d32!important;}
-html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"],
-html[data-theme="light"] body .ac-catalog-card[data-green-corner="true"] .ac-catalog-card-body {background:#c5e2d2!important;}
-
 :root {--ac-stock-accent:#20a85e;}
 html[data-theme="light"] {--ac-stock-accent:#168a59;}
 html body .ac-page-copy .ac-japan-sections .ac-japan-tab {background:var(--ac-surface-2)!important;color:var(--ac-muted)!important;-webkit-text-fill-color:var(--ac-muted)!important;box-shadow:none;}

@@ -1,3 +1,4 @@
+import { withGreenCornerFuel } from "./green-corner-fuel";
 import type { VehicleOffer } from "./types";
 import type { CurrencyRateSnapshot } from "./rates";
 import { GREEN_CORNER_SOURCE } from "./green-corner-contract";
@@ -33,13 +34,14 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
   ["Экспортный сертификат",typeof row.hasExportCertificate==="boolean"?(row.hasExportCertificate?"Есть":"Нет"):undefined]
  ].flatMap(([name,value])=>value?[{name:name!,value}]:[]);
 
- return {
+ return withGreenCornerFuel({
   id:`green-${row.id}`,sourceId:GREEN_CORNER_SOURCE,sourceOfferId:String(row.id),market:"japan",
   offerType:"fixed",priceMode:"fixed",status:"active",catalogKind:"listing",
   make:String(row.company).trim().replace(/MERCEDES\s*-\s*BENZ/i,"Mercedes-Benz"),model:String(row.model).trim(),trim:String(row.modelGrade||"").trim(),year,
   ...(Number(row.mileageNum)>=0&&row.mileageNum!=null?{mileageKm:Math.round(Number(row.mileageNum)*1000)}:{}),
   ...(Number(row.engineVolumeNum)>0?{engineCc:Number(row.engineVolumeNum)}:{}),
   ...(Number.isFinite(powerHp)&&powerHp>0?{powerHp,powerDataConfidence:"source_exact",powerDataSource:"Akebono"}:{}),
+  fuel:text(row.fuel),
   color:text(row.color), productionDate:validDate,
   transmission:text(row.transmission), drive:({FF:"fwd",FR:"rwd",FULLTIME4WD:"awd",PARTTIME4WD:"awd"} as Record<string,string>)[row.driveType], auctionGrade:text(row.scores),
   sourcePrice,sourceCurrency:"JPY",catalogPricingMode:"seller",sellerPriceRub:baseRub,totalRub:null,calculationStatus:"needs_data",
@@ -50,5 +52,5 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
    modelCode:text(row.modelType)||text(row.frame),
    sourceSpecifications:{version:1,sourceId:GREEN_CORNER_SOURCE,sourceOfferId:String(row.id),specificationId:`green-${row.id}`,sourceUrl,capturedAt:now,groups:[{name:"Характеристики Akebono",items:details}]}}
 
- };
+ });
 }
