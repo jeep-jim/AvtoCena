@@ -42,3 +42,20 @@ test('electric research preserves identity without requesting hybrid classificat
  assert.equal(draft.power30MinKw,'');assert.equal(draft.power30MinHp,'');
  assert.throws(()=>validateCustomerParameters(draft));
 });
+
+ test('editing kW preserves entered hp for every power pair, even while clearing and retyping', () => {
+ for (const [hp,kw] of [['powerHp','powerKw'],['icePowerHp','icePowerKw'],['power30MinHp','power30MinKw']]) {
+  let draft = powerUnitPatch(hp,'118');
+  for (const value of ['87','','86','86.8']) {
+   draft = {...draft,...powerUnitPatch(kw,value,draft)};
+   assert.equal(draft[hp],'118');
+   assert.equal(draft[kw],value);
+  }
+  draft = {...draft,...powerUnitPatch(hp,'120',draft)};
+  assert.equal(Number(draft[kw]),120*0.73549875);
+ }
+});
+test('validation preserves separately entered hp and kW on save', () => {
+ const result=validateCustomerParameters({year:'2026',fuel:'petrol',engineCc:'1500',powerHp:'118',powerKw:'86.8'});
+ assert.equal(result.powerHp,118);assert.equal(result.powerKw,86.8);
+});

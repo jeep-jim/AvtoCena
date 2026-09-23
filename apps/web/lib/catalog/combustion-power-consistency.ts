@@ -16,10 +16,10 @@ export function synchronizeCombustionPower<T extends Partial<VehicleOffer>>(offe
   const exactKw = ['exact','verified','conflict'].includes(semantic.powerKw?.status);
   if (!corrected && !(exactHp && !exactKw)) return offer;
   const hpKw = Number(offer.powerHp) * 0.73549875;
-  // Validated customer kW produces an unrounded matching hp value. Keep its
-  // original precision; still replace genuinely stale, conflicting kW copies.
+  // Customer kW is independently editable and authoritative for calculation.
+  // Preserve entered hp for display, without reconstructing either value.
   const suppliedKw = Number(offer.powerKw);
-  const kw = String(offer.powerDataSource || "") === "customer_input" && suppliedKw > 0 && Number.isFinite(suppliedKw) && Math.abs(suppliedKw - hpKw) < 1e-8
+  const kw = String(offer.powerDataSource || "") === "customer_input" && suppliedKw > 0 && Number.isFinite(suppliedKw)
     ? suppliedKw : Number(hpKw.toFixed(5));
   return {...offer, powerKw: kw, icePowerKw: kw, utilizationPowerKw: kw};
 }

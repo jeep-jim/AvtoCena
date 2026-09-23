@@ -36,7 +36,7 @@ test("presentation never mutates source specifications", () => {
 test("unrelated year and engine edits preserve entered 118 kW through validation and synchronization", () => {
   for (const patch of [{},{year:"2025"},{engineCc:"1998"}]) {
     const parameters = validateCustomerParameters({...draft,...patch});
-    assert.equal(parameters.powerKw,118); assert.ok(Number(parameters.powerHp)>160);
+    assert.equal(parameters.powerKw,118); assert.equal(parameters.powerHp,160);
     const synchronized = synchronizeCombustionPower({...parameters,powerDataSource:"customer_input"});
     assert.equal(synchronized.powerKw,118); assert.equal(synchronized.icePowerKw,118); assert.equal(synchronized.utilizationPowerKw,118);
   }
