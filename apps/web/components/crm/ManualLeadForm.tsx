@@ -4,7 +4,7 @@ import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 function offerIdFromInput(value: string) {
   const clean = value.trim();
@@ -14,7 +14,7 @@ function offerIdFromInput(value: string) {
   return clean.replace(/^offer:/i, "").trim();
 }
 
-export function ManualLeadForm() {
+export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -98,6 +98,7 @@ export function ManualLeadForm() {
 
   return (
     <div className="mb-5">
+      <div className="crm-lead-create-toolbar">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -105,6 +106,8 @@ export function ManualLeadForm() {
       >
         {open ? "Закрыть форму" : "+ Создать заявку"}
       </button>
+      {headerAside}
+      </div>
 
       {open ? (
         <form onSubmit={submit} className="glass mt-4 rounded-[2rem] p-4 md:p-5">

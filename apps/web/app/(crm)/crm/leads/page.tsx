@@ -116,12 +116,8 @@ export default async function CrmLeadsPage({
           </Link>
         ))}
       </div>
-      <div className="crm-metrika-legend" aria-label="Статусы для Метрики">
+      <div className="crm-metrika-legend crm-metrika-legend-mobile" aria-label="Статусы для Метрики">
         <strong>Статусы для Метрики</strong><LeadStatusHelp />
-        <div className="crm-goal-help-chip" data-metrika-stage="qualified">🟢 Квалифицированный лид<LeadStatusHelp status="qualified" /></div>
-        <div className="crm-goal-help-chip" data-metrika-stage="contract">🔵 Договор подписан / Оплата получена<LeadStatusHelp status="contract_signed" /></div>
-        <div className="crm-goal-help-chip" data-metrika-stage="spam">🔴 Спам<LeadStatusHelp status="spam" /></div>
-        <p>Откройте заявку → выберите статус внизу карточки → нажмите «Сохранить». «Предложение отправлено» не означает подписанный договор.</p>
       </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
@@ -172,7 +168,15 @@ export default async function CrmLeadsPage({
           Сбросить фильтры
         </Link>
       </div>
-      <ManualLeadForm />
+      <ManualLeadForm headerAside={
+        <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
+        <strong>Статусы для Метрики</strong><LeadStatusHelp />
+        <div className="crm-goal-help-chip" data-metrika-stage="qualified">🟢 Квалифицированный лид<LeadStatusHelp status="qualified" /></div>
+        <div className="crm-goal-help-chip" data-metrika-stage="contract">🔵 Договор подписан / Оплата получена<LeadStatusHelp status="contract_signed" /></div>
+        <div className="crm-goal-help-chip" data-metrika-stage="spam">🔴 Спам<LeadStatusHelp status="spam" /></div>
+        <p>Откройте заявку → выберите статус внизу карточки → нажмите «Сохранить». «Предложение отправлено» не означает подписанный договор.</p>
+      </div>
+      } />
       <div className="mt-4 space-y-3">
         {visible.map((lead) => {
           const cars = offers(lead);
