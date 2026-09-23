@@ -33,6 +33,7 @@ try {
   });
   try {
    await page.goto(origin+'/?theme='+theme+'&staff='+(staff?'1':'0'));
+   assert.equal(await page.locator('h1').evaluate(e=>getComputedStyle(e).clipPath),'none','heading must not clip the first letters');
    const star=page.locator('.ac-offer-favorite:visible');await star.waitFor();
    assert.equal(await star.locator('svg').getAttribute('fill'),'none');
    await star.click();assert.equal(await star.locator('svg').getAttribute('fill'),'currentColor');
@@ -52,7 +53,7 @@ try {
     await page.locator('[data-spec-desktop]').evaluate(e=>e.dataset.open='false');
    }
    await page.evaluate(()=>window.scrollTo(0,0));
-   await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).click();const input=page.getByRole('textbox',{name:'Поиск города'});await input.fill('Ново');
+   await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).click();const input=page.getByRole('textbox',{name:'Поиск города'});const hint=await input.evaluate(e=>({color:getComputedStyle(e,'::placeholder').color,fill:getComputedStyle(e,'::placeholder').webkitTextFillColor,text:getComputedStyle(e).color}));assert.equal(hint.fill,hint.color);assert.notEqual(hint.fill,hint.text,'placeholder is muted in both themes');await input.fill('Ново');
    const ink=await input.evaluate(e=>({fill:getComputedStyle(e).webkitTextFillColor,color:getComputedStyle(e).color}));assert.equal(ink.fill,ink.color);if(theme==='light')assert.notEqual(ink.fill,'rgb(255, 255, 255)');
    await page.getByRole('button',{name:'Закрыть выбор города'}).click();
    if(staff){
