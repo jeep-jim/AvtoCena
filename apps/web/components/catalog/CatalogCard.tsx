@@ -113,9 +113,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
             {powerScenario
               ? <span className={`${tagClass} border border-amber-400/35 bg-amber-400/10 text-amber-100`} title="Предварительная мощность — можно изменить в карточке автомобиля"><PowerIcon dense={dense} /><span>{Math.round(powerScenario.horsepower)} л.с. · уточнить</span></span>
               : isElectrified && o.powerKw
-              ? <span className={tagClass}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={o.powerHp ? `${o.powerHp} л.с.` : ""} info={null} kw={o.powerKw} showKw /></span>
+              ? <span className={tagClass}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={o.powerHp ? `${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.` : ""} info={null} kw={o.powerKw} showKw /></span>
               : o.powerHp
-              ? <span className={`${tagClass} ${powerInfo?.borderline ? powerStyles.warningChip : ""}`} title={powerInfo?.reason} data-recycling-power-chip={powerInfo?.borderline || undefined}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={`${o.powerHp} л.с.`} info={powerInfo} kw={o.powerKw} showKw={Boolean(o.powerKw)} /></span>
+              ? <span className={`${tagClass} ${powerInfo?.borderline ? powerStyles.warningChip : ""}`} title={powerInfo?.reason} data-recycling-power-chip={powerInfo?.borderline || undefined}><PowerIcon dense={dense} /><RecyclingPowerLabel hpLabel={`${Number(o.powerHp).toLocaleString("ru-RU", {maximumFractionDigits:2})} л.с.`} info={powerInfo} kw={o.powerKw} showKw={Boolean(o.powerKw)} /></span>
               : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}

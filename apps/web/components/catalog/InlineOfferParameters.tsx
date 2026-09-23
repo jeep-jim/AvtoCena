@@ -144,7 +144,7 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
  }
- function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
+ function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value,old),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
@@ -235,7 +235,7 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
      {!["electric","hybrid"].includes(draft.fuel) ? field("powerKw","Мощность, кВт (если известна)",[],0.1,2000,undefined,"Мощность, кВт") : null}
     </div>
     {powerInfo?.borderline ? <details className={editorStyles.help}><summary>Почему повышенный утильсбор?</summary><RecyclingPowerExplanation info={powerInfo} /></details> : null}
-    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. Л.с. и кВт пересчитываются в обе стороны; пересчитанные значения не заменяют данные документов. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
+    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. При изменении л.с. кВт пересчитываются автоматически. Изменение кВт сохраняет указанные л.с.; пересчитанные значения не заменяют данные документов. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
    </Tile>
    {showCommercial ? <Tile missing={["vehicleCategory","grossVehicleWeightKg","n1IceFuel"].some(key=>missingFields.has(key))} wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
