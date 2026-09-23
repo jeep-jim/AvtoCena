@@ -1,4 +1,5 @@
 "use client";
+import {metrikaAttribution,METRIKA_COUNTER} from "./metrika-client";
 
 type CaptchaApi = {
   render: (node: HTMLElement, options: {sitekey:string; hl:string; callback:(token:string)=>void}) => number;
@@ -56,7 +57,17 @@ async function challenge(sitekey: string): Promise<string> {
 export async function leadFetch(url: string, init: RequestInit): Promise<Response> {
   const payload = JSON.parse(String(init.body || "{}"));
   payload.operationId ||= crypto.randomUUID();
-  const send = () => fetch(url, {...init, body:JSON.stringify(payload)});
+  payload.attribution = {...payload.attribution,...await metrikaAttribution()};
+  const send = async () => {
+    const response=await fetch(url, {...init, body:JSON.stringify(payload)});
+    if(response.ok) {
+      try {
+        const key=`ac_metrika_lead_${payload.operationId}`;
+        if(!sessionStorage.getItem(key)){window.ym?.(METRIKA_COUNTER,'reachGoal','lead_submitted');sessionStorage.setItem(key,'1');}
+      } catch { /* Analytics must never interrupt a saved application. */ }
+    }
+    return response;
+  };
   const response = await send();
   if (response.status !== 429) return response;
   const result = await response.clone().json().catch(() => ({}));

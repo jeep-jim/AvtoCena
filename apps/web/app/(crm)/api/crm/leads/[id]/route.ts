@@ -83,7 +83,7 @@ export async function PATCH(
     : (existingLead.assignedManagerId || user.id);
   const statusChanged = nextStatus !== (existingLead.status || "new");
   const managerChanged = nextManagerId !== (existingLead.assignedManagerId || null);
-  const reasonRequired = statusChanged && (nextStatus === "rejected" || nextStatus === "duplicate");
+  const reasonRequired = statusChanged && (nextStatus === "rejected" || nextStatus === "duplicate" || nextStatus === "spam");
 
   if (reasonRequired && !note) {
     return NextResponse.json({ ok: false, error: "reason_required" }, { status: 400 });
@@ -106,13 +106,13 @@ export async function PATCH(
     ...(archiveChanged ? {archivedAt:body.archived ? now : "",archivedByUserId:user.id,archiveReason:body.archived ? note : ""} : {}),
     status: nextStatus,
     assignedManagerId: nextManagerId,
-    rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate"
+    rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" || nextStatus === "spam"
       ? note || lead.rejectionReason || ""
       : lead.rejectionReason,
-    rejectedAt: nextStatus === "rejected" || nextStatus === "duplicate"
+    rejectedAt: nextStatus === "rejected" || nextStatus === "duplicate" || nextStatus === "spam"
       ? now
       : lead.rejectedAt,
-    rejectedByUserId: nextStatus === "rejected" || nextStatus === "duplicate"
+    rejectedByUserId: nextStatus === "rejected" || nextStatus === "duplicate" || nextStatus === "spam"
       ? user.id
       : lead.rejectedByUserId,
     statusHistory: statusChanged
@@ -199,7 +199,7 @@ export async function PATCH(
       sub5: updatedLead.sub5 || updatedLead.attribution?.sub5 || "",
       status: nextStatus,
       eventType: nextStatus === "contract_signed" ? "contract_signed" : "lead_status_changed",
-      rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
+      rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" || nextStatus === "spam" ? note : "",
       changedByUserId: user.id,
       createdAt: now,
     });

@@ -496,3 +496,9 @@ html[data-theme="light"] .ac-offer-updated { background:#fff!important; border:1
 
 .ac-green-intro .ac-japan-sections{margin-top:0}
 .ac-green-delivery p{font-family:Arial,sans-serif;font-weight:600}
+
+@media(max-width:767px) {
+ .ac-pagination {width:100%;flex-wrap:nowrap;gap:4px;justify-content:space-between;}
+ .ac-pagination a,.ac-pagination > span {flex:1 1 0;min-width:0;padding:0;height:44px;}
+ .ac-pagination .ac-page-extra {display:none;}
+}

@@ -13,6 +13,7 @@ export const LEAD_STATUSES = [
   "delivered",
   "completed",
   "rejected",
+  "spam",
   "duplicate"
 ] as const;
 
@@ -22,7 +23,7 @@ export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
   new: "Новая",
   assigned: "Назначена",
   contacted: "Первичный контакт",
-  qualified: "Клиент подтверждён",
+  qualified: "Квалифицированный лид",
   selection: "Подбор автомобиля",
   offer_sent: "Предложение отправлено",
   negotiation: "Переговоры",
@@ -33,6 +34,7 @@ export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
   delivered: "Автомобиль доставлен",
   completed: "Завершена",
   rejected: "Отказ",
+  spam: "Спам",
   duplicate: "Дубль"
 };
 

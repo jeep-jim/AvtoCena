@@ -1,5 +1,6 @@
 "use client";
 
+import {rememberYandexClick} from "@/lib/metrika-client";
 import { Suspense, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -19,6 +20,7 @@ function RouteTracker() {
   const query = searchParams.toString();
 
   useEffect(() => {
+    rememberYandexClick();
     const currentUrl = `${window.location.origin}${pathname}${query ? `?${query}` : ""}`;
 
     if (!initialized.current) {
