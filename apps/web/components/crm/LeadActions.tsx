@@ -33,7 +33,7 @@ export function LeadActions({
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
-  const requiresReason = status === "rejected" || status === "duplicate";
+  const requiresReason = status === "rejected" || status === "duplicate" || status === "spam";
   const currentManagerName = managers.find((manager) => manager.id === assignedManagerId)?.displayName || "Вы";
 
   async function archive() {
@@ -48,7 +48,7 @@ export function LeadActions({
     setError("");
 
     if (requiresReason && !note.trim()) {
-      setError(status === "rejected" ? "Укажите причину отказа." : "Укажите причину дубля.");
+      setError(status === "rejected" ? "Укажите причину отказа." : status === "spam" ? "Укажите причину пометки спамом." : "Укажите причину дубля.");
       return;
     }
 
@@ -82,7 +82,7 @@ export function LeadActions({
         saveError instanceof Error && saveError.message === "assignment_conflict"
           ? "Ответственный уже изменён другим сотрудником. Обновите страницу."
           : saveError instanceof Error && saveError.message === "reason_required"
-          ? "Для отказа или дубля причина обязательна."
+          ? "Для отказа, дубля или спама причина обязательна."
           : saveError instanceof Error && saveError.message === "forbidden"
             ? "У вас нет прав на изменение этой заявки или её менеджера."
             : "Не получилось сохранить изменения."

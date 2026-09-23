@@ -1,11 +1,12 @@
 "use client";
 
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ChevronDown} from "lucide-react";
 import "./CatalogFooterStop.css";
 
 /** Stop one mobile gesture at pagination; the next gesture can enter the footer. */
 export function CatalogFooterStop() {
+  const [visible,setVisible] = useState(false);
   const marker = useRef<HTMLDivElement>(null);
   const releaseStop = useRef<() => void>(() => {});
   useEffect(() => {
@@ -13,22 +14,25 @@ export function CatalogFooterStop() {
     const mobile = window.matchMedia("(max-width: 767px) and (pointer: coarse)");
     let armed = false;
     let lastY = 0;
-    const release = () => {armed = false; root.classList.remove("ac-catalog-footer-stop");};
+    const release = () => {setVisible(false); armed = false; root.classList.remove("ac-catalog-footer-stop");};
     releaseStop.current = release;
     const limit = () => marker.current ? marker.current.getBoundingClientRect().bottom + window.scrollY - window.innerHeight : Infinity;
     const stop = () => {
       if (!armed || !mobile.matches) return;
       const boundary = limit();
-      if (boundary > 0 && window.scrollY > boundary) window.scrollTo({top:boundary, behavior:"instant"});
+      if (boundary > 0 && window.scrollY >= boundary - 1) {setVisible(true); if(window.scrollY > boundary) window.scrollTo({top:boundary, behavior:"instant"});}
+      else setVisible(false);
     };
     const move = (event: TouchEvent) => {
       if (event.touches.length !== 1) {release(); return;}
       const nextY = event.touches[0].clientY;
       const delta = lastY - nextY;
       lastY = nextY;
-      if (!armed || delta <= 0) return;
+      if (delta < 0) {release(); return;}
+      if (!armed || delta === 0) return;
       const boundary = limit();
       if (boundary > 0 && window.scrollY + delta >= boundary) {
+        setVisible(true);
         if (event.cancelable) event.preventDefault();
         window.scrollTo({top:boundary, behavior:"instant"});
       }
@@ -69,7 +73,7 @@ export function CatalogFooterStop() {
     };
   }, []);
   return <div ref={marker} className="ac-catalog-footer-boundary">
-    <button type="button" aria-label="Перейти к информации внизу страницы" onClick={() => {
+    <button type="button" style={{visibility:visible ? "visible" : "hidden"}} tabIndex={visible ? 0 : -1} aria-hidden={!visible} aria-label="Перейти к информации внизу страницы" onClick={() => {
       releaseStop.current();
       marker.current?.nextElementSibling?.scrollIntoView({block:"start", behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"});
     }}><ChevronDown size={28} aria-hidden="true" /></button>
