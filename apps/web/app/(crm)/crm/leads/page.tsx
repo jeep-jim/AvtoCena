@@ -11,7 +11,7 @@ import { readChunkedDataJson } from "@/lib/data";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
 import { filterLeads } from "@/lib/crm-visibility";
-import { LEAD_STATUSES, leadStatusLabel } from "@/lib/crm";
+import { LEAD_STATUSES, leadStatusLabel, leadStatusOptionLabel, leadMetrikaStage } from "@/lib/crm";
 export const dynamic = "force-dynamic";
 const first = (value?: string | string[]) =>
   Array.isArray(value) ? value[0] : value || "";
@@ -115,6 +115,13 @@ export default async function CrmLeadsPage({
           </Link>
         ))}
       </div>
+      <div className="crm-metrika-legend" aria-label="Статусы для Метрики">
+        <strong>Статусы для Метрики</strong>
+        <span data-metrika-stage="qualified">🟢 Квалифицированный лид</span>
+        <span data-metrika-stage="contract">🔵 Договор подписан / Оплата получена</span>
+        <span data-metrika-stage="spam">🔴 Спам</span>
+        <p>Откройте заявку → выберите статус внизу карточки → нажмите «Сохранить». «Предложение отправлено» не означает подписанный договор.</p>
+      </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
         <input
@@ -133,7 +140,7 @@ export default async function CrmLeadsPage({
           <option value="">Все статусы</option>
           {LEAD_STATUSES.map((status) => (
             <option key={status} value={status}>
-              {leadStatusLabel(status)}
+              {leadStatusOptionLabel(status)}
             </option>
           ))}
         </select>
@@ -220,9 +227,11 @@ export default async function CrmLeadsPage({
                 </div>
                 <div className="text-xs">
                   <span
+                    data-metrika-stage={leadMetrikaStage(lead.status)?.tone}
+                    title={leadMetrikaStage(lead.status) ? `Цель Метрики: ${leadMetrikaStage(lead.status)?.name}` : undefined}
                     className={`inline-block rounded-lg px-2 py-1 font-bold ${lead.status === "new" ? "bg-red-500 text-white" : "bg-[var(--ac-surface)]"}`}
                   >
-                    {leadStatusLabel(lead.status)}
+                    {leadMetrikaStage(lead.status)?.marker} {leadStatusLabel(lead.status)}
                   </span>
                   <div className="mt-2 text-[var(--ac-muted)]">
                     {manager?.displayName || "Без ответственного"}
