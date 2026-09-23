@@ -1,3 +1,4 @@
+import {withGreenCornerFuel} from "../apps/web/lib/catalog/green-corner-fuel";
 import {safePublicPricing} from "../apps/web/lib/catalog/safe-public-pricing";
 import {classifySpecificationEvidence} from "../apps/web/lib/catalog/specification-evidence-audit";
 import {catalogCoverThumbnail} from "../apps/web/lib/catalog/cover-image";
@@ -112,7 +113,7 @@ test("Green source displacement survives detail safety without customer re-entry
  const safe=safePublicPricing(offer);
  assert.equal(safe.engineCc,1500);
  assert.equal(safe.powerHp,118);
- assert.equal(safe.fuel,undefined); // The source does not supply fuel; do not guess.
+ assert.equal(safe.fuel,"petrol"); // Configured default when stock has no source fuel.
  assert.equal(safe.totalRub,null);
  const mismatched=structuredClone(offer);
  mismatched.operational!.sourceSpecifications!.sourceOfferId="another-lot";
@@ -122,4 +123,13 @@ test("Green source displacement survives detail safety without customer re-entry
  assert.equal(safePublicPricing(conflicted).engineCc,undefined);
  const otherSource={...offer,sourceId:"other"};
  assert.equal(safePublicPricing(otherSource).engineCc,undefined);
+});
+
+test("Green stock defaults missing fuel and preserves known powertrains",()=>{
+ const offer=normalizeGreenCorner(row,rate,now);
+ assert.equal(offer.fuel,"petrol");
+ assert.equal(withGreenCornerFuel({...offer,fuel:undefined}).fuel,"petrol");
+ assert.equal(withGreenCornerFuel({...offer,fuel:"diesel"}).fuel,"diesel");
+ assert.equal(withGreenCornerFuel({...offer,fuel:undefined,powertrainKind:"electric"}).fuel,"electric");
+ assert.equal(withGreenCornerFuel({...offer,fuel:undefined,powertrainKind:"other_hybrid"}).fuel,"hybrid");
 });

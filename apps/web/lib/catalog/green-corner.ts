@@ -1,3 +1,4 @@
+import { withGreenCornerFuel } from "./green-corner-fuel";
 import { unstable_cache } from "next/cache";
 import { getJsonStorage } from "../data";
 import type { VehicleOffer } from "./types";
@@ -8,7 +9,7 @@ export const readGreenCorner = unstable_cache(async ():Promise<GreenCornerSnapsh
  const value=await getJsonStorage().readJson<GreenCornerSnapshot|null>(GREEN_CORNER_PATH,null);
  if(!value)return {version:1,updatedAt:"",sourceCount:0,items:[]};
  if(value.version!==1||!Array.isArray(value.items)||!value.items.every(isGreenCornerOffer))throw Error("green_invalid_snapshot");
- return value;
+ return {...value, items: value.items.map(withGreenCornerFuel)};
 },["green-corner-v1"],{revalidate:60});
 export async function getGreenCornerOffer(id:string){
  if(!/^green-\d+$/.test(id))return null;
