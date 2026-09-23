@@ -11,7 +11,7 @@ const out='artifacts/owner-polish';fs.mkdirSync(out,{recursive:true});
 let server,origin;
 {
  await build({entryPoints:['tests/browser/owner-polish-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',plugins:[{name:'next-fixture',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({contents:args.path.endsWith('navigation')?`export const useSearchParams=()=>new URLSearchParams(location.search);export const usePathname=()=>'/cars';export const useRouter=()=>({back(){},replace(){},refresh(){}});`:`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{href,...props},children);}`,loader:'jsx',resolveDir:process.cwd()}));}}],outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
- const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'];
+ const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx','apps/web/app/(crm)/layout.tsx'];
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
@@ -23,6 +23,13 @@ let server,origin;
 }
 const browser=await chromium.launch({executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
 const results=[];
+async function checkActionGeometry(row){
+ const geometry=await row.evaluate(e=>Array.from(e.querySelectorAll(':scope > button, [data-offer-pdf-slot] button')).map(b=>{
+  const r=b.getBoundingClientRect(),icon=b.querySelector('svg')?.getBoundingClientRect(),label=b.querySelector(':scope > span:last-child');
+  return {height:r.height,contact:b.classList.contains('ac-offer-contact-button'),font:label&&getComputedStyle(label).fontSize,iconLeft:icon&&icon.left-r.left,iconCenter:icon&&icon.top+icon.height/2-r.top,overflow:b.scrollWidth>b.clientWidth+1};
+ }));
+ for(const b of geometry){assert.equal(b.height,56,'uniform action height');assert.equal(b.overflow,false,'action content fits');if(b.contact){assert.equal(b.font,'16px','large labels in every layout');assert.ok(Math.abs(b.iconLeft-20)<1,'consistent icon inset');assert.ok(Math.abs(b.iconCenter-28)<1,'icon vertically centered');}}
+}
 try {
  for(const width of [320,390,1440]) for(const theme of ['light','dark']) for(const staff of [false,true]) {
   const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
@@ -45,9 +52,10 @@ try {
    if(staff){const pdf=page.getByRole('button',{name:'PDF текущей карточки'});await pdf.waitFor();const c=await pdf.boundingBox();assert.ok(Math.abs(c.y-a.y)<3&&c.x<a.x,'PDF before favorite');}
    assert.ok(await share.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'share label fits');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no horizontal overflow');
+   await checkActionGeometry(page.locator('.ac-offer-action-row:visible'));
    if(width>=1280){
     await page.locator('[data-spec-desktop]').evaluate(e=>e.dataset.open='true');
-    const row=page.locator('.ac-offer-actions-sidebar');assert.ok(await row.isVisible());
+    const row=page.locator('.ac-offer-actions-sidebar');assert.ok(await row.isVisible());await checkActionGeometry(row);
     assert.ok(await row.locator('.ac-offer-contact-button').nth(1).evaluate(e=>e.scrollWidth<=e.clientWidth+1),'sidebar share fits');
     const left=await row.locator('.ac-offer-contact-button').nth(1).boundingBox(),right=await row.locator('.ac-offer-favorite').boundingBox();assert.ok(Math.abs(left.y-right.y)<3,'sidebar favorite beside share');
     await page.locator('[data-spec-desktop]').evaluate(e=>e.dataset.open='false');
@@ -63,6 +71,14 @@ try {
    }
    await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();const rows=page.locator('[data-facet-value]');await rows.first().waitFor();const r1=await rows.nth(0).boundingBox(),r2=await rows.nth(1).boundingBox();assert.ok(r2.y-r1.y-r1.height>=2,'brand spacing');
    assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-${theme}-${staff?'staff':'guest'}.png`});results.push({width,theme,staff});
+   if(staff){
+    await page.goto(origin+'/?crm=1&staff=1&theme='+theme);
+    const docs=page.getByRole('button',{name:'Документы',exact:true});await docs.waitFor();
+    assert.equal(await docs.evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(245, 158, 11)');
+    const d=await docs.boundingBox(),tg=await page.getByRole('link',{name:'Telegram',exact:true}).boundingBox();assert.ok(d.x>tg.x&&Math.abs(d.y-tg.y)<1,'Documents follows Telegram');
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'CRM fits viewport');
+    await page.screenshot({path:`${out}/crm-${width}-${theme}.png`});
+   }
   }catch(e){await page.screenshot({path:`${out}/failure-${width}-${theme}-${staff}.png`});throw e;}finally{await context.close();}
  }
  console.log(JSON.stringify({passed:true,cases:results.length}));
