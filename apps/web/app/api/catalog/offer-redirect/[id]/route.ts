@@ -6,6 +6,6 @@ export const dynamic='force-dynamic';
 export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
  const {id}=await params;
  const offer=await getOfferForPage(id);
- if(!offer)return new Response('Автомобиль больше недоступен',{status:404,headers:{'content-type':'text/plain; charset=utf-8','x-robots-tag':'noindex'}});
+ if(!offer)return new Response(null,{status:307,headers:{location:`/cars/offer/avtomobil--${encodeURIComponent(id)}`+new URL(request.url).search,'cache-control':'no-store','x-robots-tag':'noindex'}});
  return new Response(null,{status:308,headers:{location:offerPath(offer)+new URL(request.url).search,'cache-control':'no-store'}});
 }

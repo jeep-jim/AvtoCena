@@ -1,26 +1,35 @@
-import Link from "next/link";
-import { PublicHeader } from "@/components/layout/PublicHeader";
+import { Suspense } from "react";
+import { UnavailableOfferView } from "./UnavailableOfferView";
+import { CatalogCard } from "./CatalogCard";
+import { searchOffers } from "@/lib/catalog/storage";
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
+import { isRenderableRelatedOffer } from "@/lib/catalog/related-offer-selection";
+import { priceCandidatesUntil } from "@/lib/catalog/price-candidates";
+import { PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 import type { UnavailableOffer as UnavailableOfferRecord } from "@/lib/catalog/offer-availability";
 
-export function UnavailableOffer({ offer, calculationUnavailable = false }: { offer?: UnavailableOfferRecord | null; calculationUnavailable?: boolean }) {
-  const title = calculationUnavailable ? "Расчёт временно недоступен"
-    : offer?.reason === "sold" ? "Автомобиль продан"
-    : offer?.reason === "removed" ? "Объявление снято с продажи" : "Автомобиль сейчас недоступен в каталоге";
-  const description = calculationUnavailable
-    ? "Сейчас не хватает подтверждённых данных для точной цены. Это не означает, что автомобиль продан."
-    : offer?.reason === "sold" || offer?.reason === "removed"
-      ? "Источник подтвердил изменение статуса объявления. Подробности можно проверить на его странице."
-      : "Объявление больше не входит в актуальную подборку. Автомобиль мог быть продан или снят с продажи; точную причину уточняйте на источнике.";
-  const catalogHref = offer?.market ? `/cars?${new URLSearchParams({market: offer.market})}` : "/cars";
-  return <><PublicHeader /><main className="mx-auto w-full max-w-3xl px-4 py-14 md:py-24">
-    <section className="rounded-3xl bg-[var(--ac-surface)] p-6 md:p-10" aria-labelledby="unavailable-offer-title">
-      {offer ? <p className="mb-3 text-sm text-[var(--ac-muted)]">{[offer.make, offer.model].filter(Boolean).join(" ")}</p> : null}
-      <h1 id="unavailable-offer-title" className="text-3xl font-black leading-tight text-[var(--ac-text)]">{title}</h1>
-      <p className="mt-5 leading-relaxed text-[var(--ac-muted)]">{description}</p>
-      {offer?.market === "japan" ? null : offer?.sourceUrl ? <p className="mt-5 text-sm"><a href={offer.sourceUrl} target="_blank" rel="noopener noreferrer" className="break-all underline underline-offset-4">Открыть исходное объявление ↗</a></p>
-        : <p className="mt-4 text-sm text-[var(--ac-muted)]">Ссылка на исходное объявление не сохранилась.</p>}
-      <p className="mt-8 text-[var(--ac-text)]">Посмотрите другие автомобили, которые есть в каталоге.</p>
-      <Link href={catalogHref} className="mt-4 inline-flex rounded-2xl bg-[var(--ac-red,#ff3343)] px-6 py-4 font-bold text-white">Перейти в каталог →</Link>
-    </section>
-  </main></>;
+async function Alternatives({offer}:{offer?:UnavailableOfferRecord|null}) {
+  const search = async (make?:string,market?:string) => {
+    try { return (await searchOffers({make,market,pageSize:12,sort:"updatedAt"})).items.filter(row=>row.id!==offer?.id); }
+    catch(error) { console.error("unavailable_offer_alternatives",error); return []; }
+  };
+  const price = async (rows:any[]) => {
+    try { return await priceCandidatesUntil(rows,applyActiveBusinessPricingBatch,isRenderableRelatedOffer,accepted=>accepted.length>=8); }
+    catch(error) { console.error("unavailable_offer_pricing",error); return []; }
+  };
+  let rows = offer?.make ? await price(await search(offer.make)) : [];
+  const sameMake = rows.length>0;
+  if(!sameMake){
+    const groups=await Promise.all(PUBLIC_CATALOG_MARKETS.filter(market=>market!==offer?.market).map(market=>search(undefined,market)));
+    // Interleave markets so a single large source cannot occupy the whole rail.
+    const candidates=Array.from({length:12},(_,i)=>groups.flatMap(group=>group[i]?[group[i]]:[])).flat();
+    rows=await price(candidates);
+  }
+  const unique=[...new Map(rows.map(row=>[row.id,row])).values()].slice(0,8);
+  if(!unique.length)return null;
+  return <section className="ac-unavailable-alternatives" aria-labelledby="offer-alternatives-title"><div className="ac-unavailable-section-heading"><h2 id="offer-alternatives-title">{sameMake?`Другие автомобили ${offer?.make}`:"Посмотрите автомобили на других рынках"}</h2></div><div className="ac-unavailable-grid">{unique.map(row=><CatalogCard key={row.id} offer={row} compact/>)}</div></section>;
+}
+
+export function UnavailableOffer({offer,calculationUnavailable=false}:{offer?:UnavailableOfferRecord|null;calculationUnavailable?:boolean}) {
+ return <UnavailableOfferView offer={offer} calculationUnavailable={calculationUnavailable}><Suspense fallback={<div className="ac-unavailable-loading" role="status">Подбираем другие автомобили…</div>}><Alternatives offer={offer}/></Suspense></UnavailableOfferView>;
 }
