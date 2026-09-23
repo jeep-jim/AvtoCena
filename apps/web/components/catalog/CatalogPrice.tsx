@@ -23,14 +23,15 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;
 }) {
+  if (isGreenCornerOffer(offer) && (offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0)) return <PriceTrend offer={offer} label={label} statusLabel="В наличии" dense={dense} priceClassName={priceClassName} />;
   if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
     ? <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
     : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-  if (offer.market === "japan" && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
+  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
   if (isSellerPricedOffer(offer)) return <SellerPrice deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
-  const japanAuction = String(offer?.market || "").toLowerCase() === "japan"
-    || /япони/i.test(String(offer?.marketLabel || ""));
+  const japanAuction = !isGreenCornerOffer(offer) && (String(offer?.market || "").toLowerCase() === "japan"
+    || /япони/i.test(String(offer?.marketLabel || "")));
   const highlightElectrified = isElectrifiedPrice(offer);
 
   if (totalRub > 0) {
