@@ -40,7 +40,6 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         scrollbar-width: none;
         overscroll-behavior-inline: contain;
         -webkit-overflow-scrolling: touch;
-        clip-path: inset(0 0 0 2.7rem);
       }
       .ac-offer-page h1::-webkit-scrollbar {
         display: none;
@@ -49,11 +48,6 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         z-index: 20 !important;
         border-radius: 9999px !important;
         background: transparent !important;
-      }
-      @media (min-width: 768px) {
-        .ac-offer-page h1 {
-          clip-path: inset(0 0 0 3.35rem);
-        }
       }
 
       /* Keep the status card's original typography: the update line takes the old heading style, the confirmation stays the old small copy. */

@@ -144,7 +144,7 @@ export function CatalogBrandMultiSelect({
       <div className="mb-1.5">
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти марку" className="ac-filter-search h-10 w-full rounded-xl px-3 text-sm font-bold outline-none" />
       </div>
-      <div className="ac-hide-scrollbar max-h-72 space-y-1 overflow-y-auto">
+      <div className="ac-brand-options ac-hide-scrollbar max-h-72 space-y-1 overflow-y-auto">
         {selected.length ? <button type="button" onClick={() => choose("")} className="ac-filter-option mb-1 flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black"><span>Любая марка</span><span className="text-[var(--ac-muted)]">×</span></button> : null}
         {brands.map((option) => {
           const active = selectedKey === option.value.toLocaleLowerCase("ru-RU");

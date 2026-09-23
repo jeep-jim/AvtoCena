@@ -149,3 +149,9 @@
   }
   html body .ac-mobile-filter-sheet .ac-range-value-option { min-height: 40px; padding: 6px; white-space: normal; }
 }
+
+@media (max-width: 767px) {
+  html body .ac-mobile-filter-sheet .ac-filter-dropdown .ac-brand-options > .ac-filter-option + .ac-filter-option {
+    margin-top: 3px !important;
+  }
+}
