@@ -1,4 +1,5 @@
 "use client";
+import {offerRouteId} from "@/lib/catalog/offer-url";
 import { LeadCityField } from "./LeadCityField";
 import { isElectrifiedPrice } from "@/lib/catalog/electrified-price";
 import {leadFetch} from "@/lib/lead-submit-client";
@@ -395,7 +396,7 @@ export function PublicLeadCaptureV2() {
 
   useEffect(() => {
     if (!pathname.startsWith("/cars/offer/")) return;
-    const offerId = decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || ""); if (!offerId) return;
+    const offerId = offerRouteId(decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || "")); if (!offerId) return;
     const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-offer-action='lead']"); if (!button || window.location.pathname !== pathname) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-offer-page h1"); setRequest({ mode: "offer", source: "catalog_offer_request", offerId, car: cleanText(heading?.textContent) }); };
     document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);
   }, [pathname]);

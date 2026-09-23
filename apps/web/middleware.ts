@@ -105,6 +105,13 @@ function allowWithDocsCookie(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);
+  if ((request.method === 'GET' || request.method === 'HEAD') && legacyOffer && !legacyOffer[1].includes('--')) {
+    const url=request.nextUrl.clone();
+    url.pathname=`/api/catalog/offer-redirect/${legacyOffer[1]}`;
+    return NextResponse.rewrite(url);
+  }
+
   if (pathname === "/" && request.method === "GET" && request.nextUrl.searchParams.get("lead") === "1") {
     const url = request.nextUrl.clone();
     url.pathname = "/request";

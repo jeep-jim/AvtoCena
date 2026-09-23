@@ -1,3 +1,4 @@
+import {offerPath, type OfferUrlData} from "./catalog/offer-url";
 import { gzipSync } from "node:zlib";
 import { getJsonStorage, readDataJson, type JsonStorage } from "./data";
 import type { CatalogSearchProjection } from "./catalog/storage";
@@ -54,7 +55,7 @@ export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
   });
 }
 
-export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl'>> };
+export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl' | 'make' | 'model' | 'trim' | 'year'>> };
 const sitemapProjectionCache = new DetailReadCache<AiSitemapProjection>({
   maxEntries: 1, maxBytes: 32 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
@@ -65,7 +66,7 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
   if (!manifest.generationId) return null;
   const projection = await sitemapProjectionCache.get(manifest.generationId, async () => {
     const compact = await backend.readJson<AiSitemapProjection | null>(AI_SITEMAP_PROJECTION_PATH, null);
-    if (compact?.generationId === manifest.generationId && Array.isArray(compact.items)) return compact;
+    if (compact?.generationId === manifest.generationId && Array.isArray(compact.items) && compact.items.every(item=>item.make && item.model)) return compact;
     const full = storage
       ? await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] })
       : await (await import('./catalog/storage')).readCurrentCatalogProjectionSnapshot();
@@ -83,7 +84,7 @@ export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSit
   return {
     generationId: projection.generationId,
     items: (projection.items || []).filter(item => item?.id && item?.make && item?.model && item?.year)
-      .map(({id, updatedAt, cardImageUrl}) => ({id, updatedAt, cardImageUrl})),
+      .map(({id, updatedAt, cardImageUrl, make, model, trim, year}) => ({id, updatedAt, cardImageUrl, make, model, trim, year})),
   };
 }
 
@@ -102,8 +103,8 @@ export function absoluteAvtocenaUrl(value: unknown) {
 }
 
 export function catalogOfferUrl(id: unknown) {
-  const normalized = String(id || "").trim();
-  return normalized ? `${AVTOCENA_PUBLIC_ORIGIN}/cars/offer/${encodeURIComponent(normalized)}` : "";
+  const offer = typeof id === "object" && id !== null ? id as OfferUrlData : {id};
+  return offer.id ? `${AVTOCENA_PUBLIC_ORIGIN}${offerPath(offer)}` : "";
 }
 
 export function aiCatalogTitle(item: Pick<CatalogSearchProjection, "make" | "model" | "trim" | "year">) {
@@ -150,7 +151,7 @@ export function buildAiProductFeed(projection: AiCatalogProjection) {
         item.id,
         aiCatalogTitle(item).slice(0, 150),
         aiCatalogDescription(item).slice(0, 5000),
-        catalogOfferUrl(item.id),
+        catalogOfferUrl(item),
         absoluteAvtocenaUrl(item.cardImageUrl),
         "in_stock",
         `${priceRub} RUB`,

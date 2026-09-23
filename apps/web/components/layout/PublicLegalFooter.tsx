@@ -2,7 +2,7 @@
 
 import { TOPAVTO_DEALER } from "@/lib/topavto-dealer";
 import Link from "next/link";
-import { CitySelector } from "../home/CitySelector";
+import { CitySelector, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -163,11 +163,11 @@ export function PublicLegalFooter() {
 
       <div className="ac-notice-stack">
       {publicPath && cityNoticeOpen && !city && !cookieOpen ? <aside className="ac-city-notice" aria-label="Выбор города для расчёта">
-        <p>Выберите ваш город для точного расчёта</p>
-        <div className="flex items-center justify-between gap-4">
+        <LocationIcon className="ac-city-notice-pin" />
+        <div className="ac-city-notice-copy"><p>Выберите ваш город для точного расчёта</p>
           <CitySelector value={noticeCity} onChange={setNoticeCity} triggerLabel="Выбрать город" />
-          <button type="button" onClick={dismissCityNotice} className="min-h-11 px-2 text-xs font-bold" aria-label="Закрыть приглашение выбрать город">Закрыть</button>
         </div>
+        <button type="button" onClick={dismissCityNotice} className="ac-city-notice-close" aria-label="Закрыть приглашение выбрать город">×</button>
       </aside> : null}
       {cookieBannerOpen && !cookieOpen ? (
         <aside className="ac-cookie-banner" aria-label="Уведомление о cookie">
@@ -192,9 +192,14 @@ export function PublicLegalFooter() {
           flex-direction: column;
           gap: 10px;
         }
-        .ac-city-notice { padding: 14px 16px 6px; border-radius: 18px; background: var(--ac-surface-2); color: var(--ac-text); box-shadow: 0 8px 28px rgba(10,30,60,.24); border: 1px solid var(--ac-border); }
-        .ac-city-notice p { font-size: 13px; line-height: 1.5; margin: 0; font-weight: 700; }
-        .ac-city-notice button { font-size: 13px; }
+        .ac-city-notice { position:relative;display:flex;align-items:center;gap:18px;padding:18px 48px 18px 20px;border-radius:22px;background:var(--ac-surface-2);color:var(--ac-text);box-shadow:0 8px 28px rgba(10,30,60,.18); }
+        .ac-city-notice-pin{width:46px;height:56px;flex-shrink:0;color:#43c529}
+        .ac-city-notice-copy{min-width:0}
+        .ac-city-notice p{font-size:13px;line-height:1.5;margin:0;font-weight:600}
+        .ac-city-notice-copy button{font-size:18px;min-height:32px;text-decoration:underline;border:0;padding:0;color:#91a6c1}
+        .ac-city-notice-copy button svg{display:none}
+        .ac-city-notice-close{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--ac-surface-3,#1d2b39);color:#a6b9cc;font-size:23px;line-height:1}
+        @media(max-width:480px){.ac-city-notice{padding:16px 40px 16px 14px;gap:12px}.ac-city-notice-pin{width:38px;height:46px}.ac-city-notice p{font-size:12px}.ac-city-notice-copy button{font-size:16px}}
         .ac-cookie-banner {
           padding: 14px 16px 10px;
           border-radius: 18px;

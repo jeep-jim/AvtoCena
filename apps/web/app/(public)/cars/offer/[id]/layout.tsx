@@ -1,3 +1,4 @@
+import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
 import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
@@ -21,7 +22,7 @@ function offerStructuredData(id: string, offer: any) {
   const make = clean(presented.makeLabel || offer.make);
   const model = clean(presented.modelLabel || offer.model);
   const displayTitle = clean(presented.title) || [make, model, offer.trim, offer.year].filter(Boolean).join(" ");
-  const canonical = catalogOfferUrl(id);
+  const canonical = catalogOfferUrl(offer);
   const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
   const mileageKm = Number(offer.mileageKm || 0);
   const engineCc = Number(offer.engineCc || 0);
@@ -73,7 +74,7 @@ function safeJsonLd(value: unknown) {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;
+  const id = offerRouteId((await params).id);
   const storedOffer = await getOfferForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   if (!offer) {
@@ -97,7 +98,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const description = saved
     ? `${displayTitle}, ${year} г. — ${priceText}. Сохранённый расчёт${saved.draft.deliveryCity ? ` с доставкой: ${saved.draft.deliveryCity}` : "; доставка по РФ не включена"}. ${[saved.draft.engineCc ? `${saved.draft.engineCc} см³` : "",saved.draft.powerHp ? `${saved.draft.powerHp} л.с.` : ""].filter(Boolean).join(", ")}.`
     : `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Стоимость доставки и состав расчёта смотрите в карточке.`;
-  const canonical = `/cars/offer/${encodeURIComponent(id)}`;
+  const canonical = offerPath(offer);
   const images = rankedCatalogImageUrls(offer).map(absoluteAvtocenaUrl).filter(Boolean).slice(0, 12);
 
   return {
@@ -117,14 +118,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
-  const { id } = await params;
+  const id = offerRouteId((await params).id);
   const storedOffer = await getOfferForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   const saved = storedOffer ? await getSavedOfferCalculation(storedOffer) : null;
   const structuredData = offer ? offerStructuredData(id, offer) : null;
   if (saved && structuredData) {
     structuredData.vehicleModelDate = saved.draft.year;
-    structuredData.offers = {"@type":"Offer",url:catalogOfferUrl(id),price:Math.round(saved.calculation.totalRub),priceCurrency:"RUB",availability:"https://schema.org/InStock",seller:{"@type":"Organization",name:"АвтоЦена",url:"https://avtocena.com"}};
+    structuredData.offers = {"@type":"Offer",url:catalogOfferUrl(offer),price:Math.round(saved.calculation.totalRub),priceCurrency:"RUB",availability:"https://schema.org/InStock",seller:{"@type":"Organization",name:"АвтоЦена",url:"https://avtocena.com"}};
   }
 
   return <>

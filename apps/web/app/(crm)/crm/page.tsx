@@ -1,3 +1,4 @@
+import {StaffPresence} from "@/components/crm/StaffPresence";
 import { readCrmUsers } from "@/lib/crm-users";
 import { leadStatusLabel } from "@/lib/crm";
 import { canSeeLead, activeLead } from "@/lib/crm-visibility";
@@ -30,6 +31,7 @@ export default async function CrmPage() {
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Менеджеры</div><div className="mt-2 text-4xl font-black">{managers.length}</div></div>
       </div>
 
+      <StaffPresence />
       <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_380px]">
         <div className="glass rounded-[2rem] p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">

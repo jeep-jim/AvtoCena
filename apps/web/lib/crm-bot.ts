@@ -1,3 +1,4 @@
+import {offerRouteId} from "./catalog/offer-url";
 import crypto from "node:crypto";
 import { type AuthUser, getAuthUsers, normalizeTelegramUsername } from "./auth";
 import {
@@ -178,7 +179,7 @@ export async function handleCrmBotUpdate(
   }
   const actor = await botAdmin(id);
   if (/^\/start(?:@avtocena_bot)?(?:\s|$)/i.test(text) && !/^\/start\s+staff_/.test(text) || text === "/request" || text === "📝 Оставить заявку" || ["cust:new", "cust:confirm"].includes(data) || /https:\/\/avtocena\.com\/cars\/offer\//i.test(text)) {
-    const offerId = text.match(/(?:chat_|offer_|cars\/offer\/)([A-Za-z0-9_-]{1,100})/)?.[1];
+    const offerId = offerRouteId(text.match(/(?:chat_|offer_|cars\/offer\/)([^\s/?#]{1,500})/)?.[1] || "");
     await saveDialog(id, {});
     await telegramSend(token, id, "Обращения принимаем через форму на сайте. Укажите автомобиль и удобный контакт — менеджер свяжется с вами.", [[{text:"Оставить заявку на сайте",url:offerId ? `${SITE}/cars/offer/${encodeURIComponent(offerId)}` : `${SITE}/request`}]]);
     return true;

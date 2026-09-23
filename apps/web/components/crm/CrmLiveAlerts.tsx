@@ -1,8 +1,9 @@
 "use client";
 
+import { StaffHeartbeat } from "./StaffPresence";
 import { CrmPushControl, unsubscribeStaffPush } from "./CrmPushControl";
 import { useEffect, useRef, useState } from "react";
-import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList } from "lucide-react";
+import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList, ChevronDown } from "lucide-react";
 import { canMigrateLegacyAcknowledgement, type AlertLead } from "../../lib/crm-alert-state";
 const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
@@ -25,9 +26,11 @@ function beep(){
     oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
   }catch{}
 }
-type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string};
+type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string;name?:string;phone?:string;telegram?:string;car?:string;offerTitle?:string;selectedOffers?:{title:string}[]};
 export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
+  const [recent,setRecent]=useState<InboxLead[]>([]),[leadsOpen,setLeadsOpen]=useState(false);
+  const soundKey=`${ENABLED_KEY}_${userId}`;
   const [audioBlocked,setAudioBlocked]=useState(false);
   const [menuOpen,setMenuOpen]=useState(false),[ackError,setAckError]=useState(""),[acknowledging,setAcknowledging]=useState(false);
   const root=useRef<HTMLDivElement>(null);
@@ -39,13 +42,16 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const leaseKey=`avtocena_crm_alert_tab_${userId}`;
   useEffect(()=>{
     tab.current=crypto.randomUUID();
-    setEnabled(get(ENABLED_KEY)==="1");
+    if(get(soundKey)===null && get(ENABLED_KEY)!==null)put(soundKey,get(ENABLED_KEY)!);
+    setEnabled(get(soundKey)==="1");
     const sync=(event:StorageEvent)=>{
-      if(event.key===ENABLED_KEY)setEnabled(event.newValue==="1");
+      if(event.key===soundKey)setEnabled(event.newValue==="1");
     };
+    const localSync=()=>setEnabled(get(soundKey)==="1");
+    window.addEventListener("avtocena:sound-preference",localSync);
     const unlock=()=>{if(enabledRef.current){unlockAudio();setAudioBlocked(false);}};
     window.addEventListener("storage",sync);window.addEventListener("pointerdown",unlock);window.addEventListener("keydown",unlock);
-    return ()=>{window.removeEventListener("storage",sync);window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
+    return ()=>{window.removeEventListener("avtocena:sound-preference",localSync);window.removeEventListener("storage",sync);window.removeEventListener("pointerdown",unlock);window.removeEventListener("keydown",unlock);};
   },[userId]);
   useEffect(()=>{
     let active=true,busy=false;
@@ -57,6 +63,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
         if(!response.ok)return;
         const data=await response.json();if(!active)return;
         setAuthorized(true);
+        setRecent((Array.isArray(data.leads)?data.leads:[]).slice(0,8));
         const unseen:InboxLead[]=(Array.isArray(data.leads)?data.leads:[]).filter((lead:InboxLead)=>lead.unread);
         const legacyAck=Number(get(`avtocena_crm_ack_${userId}`)||0);
         const migrated=new Set<string>();
@@ -109,26 +116,39 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     if(confirmed.length!==rows.length)setAckError("Не все отметки сохранены. Обновите заявки и повторите.");
     put(`avtocena_crm_read_changed_${userId}`,String(Date.now()));window.dispatchEvent(new Event("avtocena:lead-read"));
   }
+  async function readRecent(lead:InboxLead){
+    if(!lead.unread)return;
+    try{const r=await fetch(`/api/crm/leads/${encodeURIComponent(lead.id)}/seen`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventKey:lead.eventKey})});
+      if(!r.ok)return;
+      setRecent(rows=>rows.map(row=>row.id===lead.id&&row.eventKey===lead.eventKey?{...row,unread:false}:row));
+      setPending(rows=>rows.filter(row=>row.id!==lead.id||row.eventKey!==lead.eventKey));
+      put(`avtocena_crm_read_changed_${userId}`,String(Date.now()));window.dispatchEvent(new Event('avtocena:lead-read'));
+    }catch{}
+  }
   function toggle(){
-    const next=!enabled;setEnabled(next);put(ENABLED_KEY,next?"1":"0");
+    const next=!enabled;setEnabled(next);put(soundKey,next?"1":"0");window.dispatchEvent(new Event("avtocena:sound-preference"));
     if(next){unlockAudio();beep();if("Notification" in window && Notification.permission==="default")void Notification.requestPermission().catch(()=>{});}
   }
   if(!authorized)return null;
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
+    <StaffHeartbeat/>
     {!crm && <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>}
-    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}>{crm && avatar ? <img src={avatar} alt="" width={28} height={28} className="rounded-full" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
-    {menuOpen?<div id={`staff-menu-${userId}`} className="ac-staff-menu">
+    {!crm && <button type="button" className="ac-staff-account ac-staff-expand" aria-label="Последние заявки" aria-expanded={menuOpen&&leadsOpen} onClick={()=>{setMenuOpen(true);setLeadsOpen(true);}}><ChevronDown size={16}/></button>}
+    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}>{avatar ? <img src={avatar} alt="" width={28} height={28} className="rounded-full" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
+    <div hidden={!menuOpen} id={`staff-menu-${userId}`} className="ac-staff-menu">
       <p className="ac-staff-name">{displayName}{crm?<small className="block text-xs font-normal">{({owner:"Владелец",admin:"Администратор",manager:"Менеджер"} as Record<string,string>)[role]||role}</small>:null}</p>
-      {!crm && <a href="/crm/leads"><ClipboardList size={18}/>Заявки{badge}</a>}
+      <button type="button" onClick={()=>setLeadsOpen(!leadsOpen)} aria-expanded={leadsOpen}><ClipboardList size={18}/>Заявки{badge}<ChevronDown size={18} style={{marginLeft:'auto',transform:leadsOpen?'rotate(180deg)':undefined}}/></button>
+      {leadsOpen?<div className="ac-staff-recent">{recent.length?recent.map(lead=><details key={lead.id} onToggle={event=>{if(event.currentTarget.open)void readRecent(lead);}}><summary>{lead.unread?<i aria-label="Не просмотрена"/>:null}<span>{lead.name||'Новая заявка'}<small>{lead.offerTitle||lead.car||lead.selectedOffers?.map(o=>o.title).join(', ')||'Подбор автомобиля'}</small></span><ChevronDown size={15}/></summary><div>{lead.phone?<a href={`tel:${lead.phone.replace(/[^+0-9]/g,'')}`}>{lead.phone}</a>:null}{lead.telegram?<p>{lead.telegram}</p>:null}<a href={`/crm/leads?id=${encodeURIComponent(lead.id)}`}>Открыть заявку →</a></div></details>):<p>Заявок пока нет</p>}<a href="/crm/leads">Все заявки →</a></div>:null}
       <a href={crm?`/crm/managers/${encodeURIComponent(userId)}`:"/crm"}><UserRound size={18}/>{crm?"Мой профиль":"Рабочий кабинет"}</a>
       {!crm && ["owner","admin"].includes(role)?<a href="/crm/settings"><Settings size={18}/>Настройки</a>:null}
       <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук заявок: {enabled?"включён":"выключен"}</button>
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
+
+      {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;put(soundKey,"0");void unsubscribeStaffPush(userId).finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
       <CrmPushControl userId={userId}/>
-      {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;void unsubscribeStaffPush().finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
-    </div>:null}
+    </div>
     {pending.length>0?<div role="status" className="ac-staff-notice">
       <p className="font-bold">Новые заявки: {pending.length}</p>
       {assignedCount>0?<p className="mt-1 text-sm">Назначено вам: {assignedCount}</p>:null}
@@ -143,9 +163,9 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       .ac-staff-tools--crm .ac-staff-mobile-badge{display:block;position:absolute;right:-4px;top:-4px}
       .ac-staff-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#ff353d!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:11px}
       .ac-staff-menu,.ac-staff-notice{position:absolute;right:0;top:calc(100% + 12px);width:290px;max-width:calc(100vw - 24px);border:1px solid var(--ac-border,#526074);border-radius:16px;background:var(--ac-surface-2,#273343);color:var(--ac-text,#fff);padding:12px;z-index:130}
-      .ac-staff-menu{z-index:140}.ac-staff-menu a,.ac-staff-menu>button{display:flex;align-items:center;gap:10px;min-height:44px;width:100%;padding:8px;border-radius:8px;font-size:13px;text-align:left}.ac-staff-menu a:hover,.ac-staff-menu>button:hover{background:var(--ac-surface-3,#344156)}.ac-staff-name{font-size:13px;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--ac-border,#526074)}
+      .ac-staff-menu{z-index:140}.ac-staff-menu[hidden]{display:none}.ac-staff-tools--header .ac-staff-menu{position:fixed;top:68px;right:max(24px,calc((100vw - 1500px)/2 + 32px));width:470px;max-height:calc(100dvh - 84px);overflow:auto}.ac-staff-expand{width:26px}.ac-staff-recent{padding:4px 8px;max-height:320px;overflow:auto}.ac-staff-recent details{border-bottom:1px solid var(--ac-border)}.ac-staff-recent summary{display:flex;gap:8px;align-items:center;cursor:pointer;padding:10px 0;font-size:13px}.ac-staff-recent summary>span{flex:1;min-width:0}.ac-staff-recent small{display:block;font-size:11px;opacity:.7;overflow-wrap:anywhere}.ac-staff-recent i{width:7px;height:7px;border-radius:50%;background:#ff353d;flex-shrink:0}.ac-staff-recent details>div{padding-left:15px}.ac-staff-recent a{min-height:32px!important}.ac-staff-menu a,.ac-staff-menu>button{display:flex;align-items:center;gap:10px;min-height:44px;width:100%;padding:8px;border-radius:8px;font-size:13px;text-align:left}.ac-staff-menu a:hover,.ac-staff-menu>button:hover{background:var(--ac-surface-3,#344156)}.ac-staff-name{font-size:13px;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--ac-border,#526074)}
       html[data-theme="light"] .ac-staff-menu,html[data-theme="light"] .ac-staff-notice{background:#fff!important;color:#172130!important;border-color:#ccd3de}
-      @media(max-width:767px){.ac-staff-tools--header .ac-staff-leads{display:none}.ac-staff-tools--header .ac-staff-mobile-badge{display:block;position:absolute;right:-5px;top:-5px}.ac-staff-tools--header .ac-staff-menu,.ac-staff-tools--header .ac-staff-notice{position:fixed;top:70px;right:12px}.ac-staff-tools--header .ac-staff-account{width:36px}.ac-public-header .ac-icon-button,.ac-public-header .ac-favorite-nav{width:36px!important;min-width:36px!important}.ac-public-header>div{gap:6px!important;padding-left:10px!important;padding-right:10px!important}}
+      @media(max-width:767px){.ac-staff-tools--header .ac-staff-leads,.ac-staff-tools--header .ac-staff-expand{display:none}.ac-staff-tools--header .ac-staff-mobile-badge{display:block;position:absolute;right:-5px;top:-5px}.ac-staff-tools--header .ac-staff-menu,.ac-staff-tools--header .ac-staff-notice{position:fixed;top:70px;right:12px}.ac-staff-tools--header .ac-staff-account{width:36px}.ac-public-header .ac-icon-button,.ac-public-header .ac-favorite-nav{width:36px!important;min-width:36px!important}.ac-public-header>div{gap:6px!important;padding-left:10px!important;padding-right:10px!important}}
     `}}/>
   </div>;
 }

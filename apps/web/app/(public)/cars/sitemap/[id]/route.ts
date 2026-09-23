@@ -1,3 +1,4 @@
+import {readGreenCorner} from "@/lib/catalog/green-corner";
 import { absoluteAvtocenaUrl, catalogOfferUrl, readAiSitemapProjection } from "@/lib/ai-discovery";
 
 export const dynamic = "force-dynamic";
@@ -21,10 +22,13 @@ function parseSitemapId(raw: string) {
 }
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const id = parseSitemapId((await params).id);
+  const rawId=(await params).id;
+  const green=rawId==="green.xml";
+  const id = green?0:parseSitemapId(rawId);
   if (id === null) return new Response("Not Found", { status: 404 });
 
-  const projection = await readAiSitemapProjection();
+  const stock=green?await readGreenCorner():null;
+  const projection = stock?{generationId:stock.updatedAt,items:stock.items.map(item=>({...item,cardImageUrl:item.images?.[0]}))}:await readAiSitemapProjection();
   if (!projection) return new Response('Sitemap is being updated', {
     status: 503, headers: { 'retry-after': '60', 'cache-control': 'private, no-store' },
   });
@@ -38,7 +42,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     const lastmod = item.updatedAt ? new Date(item.updatedAt).toISOString() : new Date().toISOString();
     return [
       "  <url>",
-      `    <loc>${xmlEscape(catalogOfferUrl(item.id))}</loc>`,
+      `    <loc>${xmlEscape(catalogOfferUrl(item))}</loc>`,
       `    <lastmod>${xmlEscape(lastmod)}</lastmod>`,
       ...(item.cardImageUrl ? [`    <image:image><image:loc>${xmlEscape(absoluteAvtocenaUrl(item.cardImageUrl))}</image:loc></image:image>`] : []),
       "    <changefreq>hourly</changefreq>",
