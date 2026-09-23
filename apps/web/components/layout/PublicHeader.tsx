@@ -172,7 +172,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             </button>
 
             <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
-              <StarIcon />
+              <StarIcon filled={favoritesCount > 0} />
               {favoritesCount > 0 ? (
                 <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
                   {Math.min(favoritesCount, 99)}

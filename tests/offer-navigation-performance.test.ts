@@ -160,8 +160,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
 test("offer actions render in stable page slots without hydration portals", () => {
   const actions = fs.readFileSync(new URL("../apps/web/components/catalog/OfferContactActions.tsx", import.meta.url), "utf8");
   const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
-  assert.match(page, /<OfferDesktopActions \/>/);
-  assert.match(page, /<OfferMobileActions \/>/);
+  assert.match(page, /<OfferDesktopActions offerId=/);
+  assert.match(page, /<OfferMobileActions offerId=/);
   assert.match(page, /<OfferCreditCalculator \/>/);
   assert.doesNotMatch(actions, /createPortal|document\.createElement|getBoundingClientRect|requestAnimationFrame/);
   assert.doesNotMatch(carsLayout, /OfferContactActions/);

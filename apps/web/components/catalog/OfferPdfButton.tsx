@@ -30,7 +30,6 @@ export function OfferPdfButton({offerId,draft}:{offerId:string;draft:Record<stri
  }
  const button=(mobile=false)=><button type="button" aria-label="PDF текущей карточки" onClick={()=>{setError("");dialog.current?.showModal();}} className={`inline-flex h-14 items-center justify-center gap-2 rounded-[1.05rem] bg-[#F59E0B] px-5 text-sm font-black !text-[#171C24] transition-[filter,transform] hover:brightness-95 active:scale-[.99] ${mobile?"mt-3 w-full xl:hidden":"w-full"}`}><FileDown size={21} aria-hidden/><span>PDF</span></button>;
  return <>
-  {button(true)}
   {hosts.map((host,i)=>createPortal(button(),host,String(i)))}
   <dialog ref={dialog} aria-labelledby={`pdf-title-${offerId}`} onCancel={e=>{if(busy)e.preventDefault();}} className="m-auto w-[min(420px,calc(100vw-32px))] rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-6 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/65">
    <div className="flex items-center justify-between gap-3"><h2 id={`pdf-title-${offerId}`} className="text-xl font-black">Карточка в PDF</h2><button type="button" aria-label="Закрыть" disabled={busy} onClick={()=>dialog.current?.close()} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)]"><X size={20}/></button></div>

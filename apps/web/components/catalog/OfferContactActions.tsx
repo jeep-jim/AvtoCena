@@ -1,4 +1,5 @@
 "use client";
+import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";
 import { ShareLinkButton } from "./ShareLinkButton";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
 
@@ -6,23 +7,26 @@ function PhoneIcon() {
   return <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.15 3.75 10 8.35 8.3 10.1a14.9 14.9 0 0 0 5.6 5.6l1.75-1.7 4.6 2.85c.5.3.7.92.48 1.46-.56 1.38-1.83 2.3-3.31 2.4C10.08 21.13 2.87 13.92 3.29 6.58c.1-1.48 1.02-2.75 2.4-3.31.54-.22 1.16-.02 1.46.48Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-function ActionButtons({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {
+type FavoriteProps = {offerId: string; snapshot: FavoriteSnapshot};
+
+function ActionButtons({ className = "", stacked = false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean }) {
   const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-11 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-12 sm:text-sm md:px-12 md:text-base xl:h-14";
-  return <div className={`grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
+  return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
     <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span className="whitespace-nowrap">Оставить заявку на расчёт</span></button>
-    <ShareLinkButton className={`${buttonClass} bg-[#00A2E8]`} />
-    {className.includes("ac-offer-actions-") ? <div data-offer-pdf-slot className="hidden xl:block empty:!hidden" /> : null}
+    <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
+    <div data-offer-pdf-slot className="empty:!hidden" />
+    <FavoriteToggle offerId={offerId} snapshot={snapshot} compact className="ac-offer-favorite" />
   </div>;
 }
 
-export function OfferDesktopActions({position = "sidebar"}: {position?: "sidebar" | "below"}) {
-  return <ActionButtons stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
+export function OfferDesktopActions({position = "sidebar", ...favorite}: FavoriteProps & {position?: "sidebar" | "below"}) {
+  return <ActionButtons {...favorite} stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
 }
 
-export function OfferMobileActions() {
+export function OfferMobileActions(favorite: FavoriteProps) {
   // Remain in document flow. The former body portal measured the page before
   // layout settled, briefly placing these controls at the viewport origin.
-  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons stacked /></div>;
+  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked /></div>;
 }
 
 export function OfferCreditCalculator() {
@@ -44,8 +48,26 @@ export function OfferContactActionsStyles() {
     .ac-offer-page [data-offer-credit-host]{display:none!important}
     .ac-offer-page>section>section{border-top:1px solid rgba(255,255,255,.085)!important;padding-top:1rem}
     html[data-theme="light"] .ac-offer-page>section>section{border-top-color:rgba(35,42,55,.12)!important}
+    .ac-offer-favorite{width:54px!important;height:54px!important;border-radius:1.05rem!important;background:rgba(255,53,61,.09)!important;color:#ff353d!important}
+    .ac-offer-favorite svg{width:26px;height:26px}
+    @media(max-width:1279px){
+      .ac-offer-action-row{grid-template-columns:minmax(0,1fr) 54px;gap:10px}
+      .ac-offer-action-row>[data-offer-action="lead"]{grid-column:1/-1}
+      .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 76px 54px}
+      .ac-offer-action-row [data-offer-pdf-slot] button{padding:0;gap:4px}
+      .ac-offer-action-row [data-offer-pdf-slot] svg{width:18px}
+      .ac-offer-action-row .ac-offer-contact-button{padding-left:34px;padding-right:8px}
+      .ac-offer-action-row .ac-offer-contact-button>span:first-child{left:10px}
+      .ac-offer-action-row .ac-offer-contact-button>svg{left:10px}
+    }
     @media(min-width:1280px){
-      .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px}
+      .ac-offer-favorite{height:56px!important;width:56px!important}
+      .ac-offer-actions-below{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px}
+      .ac-offer-actions-sidebar{grid-template-columns:minmax(0,1fr) 56px}
+      .ac-offer-actions-sidebar>[data-offer-action="lead"]{grid-column:1/-1}
+      .ac-offer-actions-sidebar[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 80px 56px}
+
+      .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px 56px}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}

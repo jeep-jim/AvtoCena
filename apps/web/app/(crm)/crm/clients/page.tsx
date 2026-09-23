@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { canSeeLead, activeLead } from "@/lib/crm-visibility";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { ClientCreateForm } from "@/components/crm/ClientCreateForm";
@@ -29,7 +30,7 @@ export default async function CrmClientsPage() {
           </div>
 
           {clients.map((client) => (
-            <div key={client.id} className="grid gap-3 border-b border-white/7 p-5 last:border-0 md:grid-cols-[1fr_180px]">
+            <Link href={`/crm/clients/${encodeURIComponent(client.id)}`} key={client.id} className="grid transition hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 gap-3 border-b border-white/7 p-5 last:border-0 md:grid-cols-[1fr_180px]">
               <div>
                 <div className="text-lg font-black">{client.fio || client.phone || client.telegram || "Клиент без имени"}</div>
                 <div className="mt-1 text-sm font-bold text-white/50">{[client.phone, client.telegram, client.city].filter(Boolean).join(" · ") || "Контакты не указаны"}</div>
@@ -39,7 +40,7 @@ export default async function CrmClientsPage() {
                 <div>Менеджер:</div>
                 <div className="mt-1 font-black text-white/80">{managerName(managers, client.assignedManagerId)}</div>
               </div>
-            </div>
+            </Link>
           ))}
 
           {!clients.length && <div className="p-8 text-center text-sm font-bold text-white/50">Клиентов пока нет. Добавьте первого клиента через форму слева.</div>}

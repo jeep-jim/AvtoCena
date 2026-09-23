@@ -14,6 +14,7 @@ export async function GET() {
       id: user.id,
       telegramUsername: user.telegramUsername,
       displayName: user.displayName,
+      avatarUrl: user.avatarUrl || null,
       role: user.role,
       partnerCode: user.partnerCode || null
     }
