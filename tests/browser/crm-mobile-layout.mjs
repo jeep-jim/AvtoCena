@@ -38,7 +38,7 @@ try{
    await page.getByRole('button',{name:'Кабинет сотрудника'}).click();
    assert.ok(await page.getByRole('link',{name:'Мой профиль',exact:true}).isVisible());
    assert.equal(await page.locator('.ac-staff-menu a[href="/crm/leads"]').count(),0);
-   await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').count(),0);
+   await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(kind==='leads'){
     if(width<=390)assert.ok(await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height)<165,'lead summary is compact');
