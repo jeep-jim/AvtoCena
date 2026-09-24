@@ -43,7 +43,7 @@ test("Japan independently resumes durable progress and cleanup retains its bound
  assert.match(japan,/proauctions-restore-state\.mjs/);
  assert.match(japan,/cron: "0 3 \* \* \*"/);
  assert.match(japan,/PROAUCTIONS_SECONDS: '2400'/);
- assert.match(cleanup,/cron: "0 \*/6 \* \* \*"/);
+ assert.match(cleanup,/cron: "0 \*\/6 \* \* \*"/);
  assert.match(cleanup,/catalog-storage-maintenance\.mjs/);
  assert.equal(writesCatalogMarkets(cleanup),false);
  for(const workflow of [text('catalog-market-refresh.yml'),japan,cleanup]){
