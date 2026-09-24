@@ -11,11 +11,17 @@ export function leadContact(lead: any) {
   const channel = messenger === "telegram" || messenger === "max" ? messenger : "call";
   const raw = String(channel === "telegram" ? lead.telegram || lead.phone || "" : channel === "max" ? lead.max || lead.phone || "" : lead.phone || "").trim();
   const byPhone = lead.messengerContactKind === "phone" || /^\+?[0-9][0-9 ()-]+$/.test(raw);
-  const value = channel !== "call" && raw && !byPhone ? `@${raw.replace(/^@+/, "")}` : raw;
+  const value = channel !== "call" && raw && !byPhone && !/^https:\/\//i.test(raw) ? `@${raw.replace(/^@+/, "")}` : raw;
   const label = channel === "telegram" ? "Telegram" : channel === "max" ? "MAX" : "Телефон · звонок";
-  const detail = channel !== "call" ? byPhone ? "телефон аккаунта" : "никнейм" : "";
-  // MAX username links are not assumed to be valid: show/copy the submitted contact.
-  const href = channel === "call" && /^\+?[0-9 ()-]+$/.test(raw) ? `tel:${raw.replace(/[^+0-9]/g, "")}`
-    : channel === "telegram" && !byPhone && /^@?[a-zA-Z][a-zA-Z0-9_]{3,63}$/.test(raw) ? `https://t.me/${raw.replace(/^@+/, "")}` : "";
+  const detail = channel !== "call" ? byPhone ? "телефон аккаунта" : /^https:\/\//i.test(raw) ? "ссылка на профиль" : "никнейм" : "";
+  // Telegram documents both username and international phone links.
+  // https://core.telegram.org/api/links#phone-number-links
+  const digits=raw.replace(/\D/g, "");
+  const phone=/^[+0-9 ()-]+$/.test(raw)&&digits.length>=7&&digits.length<=15?digits.length===11&&digits.startsWith("8")?`7${digits.slice(1)}`:digits:"";
+  let href=channel==="call"&&phone?`tel:+${phone}`
+    :channel==="telegram"&&byPhone&&phone?`https://t.me/+${phone}`
+    :channel==="telegram"&&!byPhone&&/^@?[a-zA-Z][a-zA-Z0-9_]{3,63}$/.test(raw)?`https://t.me/${raw.replace(/^@+/, "")}`:"";
+  // Only use an actual MAX profile URL, never synthesize one from a phone/username.
+  if(channel==="max")try{const url=new URL(raw);if(url.protocol==="https:"&&["max.ru","max.app"].includes(url.hostname)&&/^\/u\/[A-Za-z0-9_-]+\/?$/.test(url.pathname)&&!url.username&&!url.password&&!url.port){href=url.href;}}catch{}
   return {channel, value, label, detail, href, text: `${label}${detail ? ` (${detail})` : ""}: ${value || "не указан"}`};
 }

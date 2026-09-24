@@ -46,7 +46,7 @@ test('same-browser offer followups are atomic and isolated from generic requests
 test('messenger telephone and username contacts are explicitly labelled without false links',()=>{
   for(const messenger of ['telegram','max']) {
     const phone={contactPreference:'message',messenger,messengerContactKind:'phone',phone:'+79999999999',[messenger]:'+79999999999'};
-    const c=leadContact(phone); assert.equal(c.channel,messenger); assert.match(c.text,/телефон аккаунта/); assert.ok(!c.value.startsWith('@')); assert.equal(c.href,'');
+    const c=leadContact(phone); assert.equal(c.channel,messenger); assert.match(c.text,/телефон аккаунта/); assert.ok(!c.value.startsWith('@')); assert.equal(c.href,messenger==='telegram'?'https://t.me/+79999999999':'');
     const text=leadNotice({id:'test',...phone}); assert.ok(text.includes(messenger==='max'?'MAX':'Telegram')); assert.ok(!text.includes('Телефон · звонок'));
     const username=leadContact({...phone,phone:'',messengerContactKind:'username',[messenger]:'@test_user'}); assert.equal(username.value,'@test_user'); assert.match(username.text,/никнейм/);
   }
@@ -74,4 +74,15 @@ test('followups state one contact action instead of internal field transitions',
   assert.equal(followupText({...entry, comment: '', contactPreference: 'call', phone: '+78888888888'}), 'Позвонить: +78888888888');
   assert.equal(followupText({comment: '', changes: {name: {before: 'max', after: 'call'}}}), 'Имя: max → call');
   assert.deepEqual(entry, original);
+});
+
+test('contact actions link supported identities without inventing MAX phone links',()=>{
+ assert.equal(leadContact({telegram:'8 (999) 123-45-67'}).href,'https://t.me/+79991234567');
+ assert.equal(leadContact({telegram:'@test_user'}).href,'https://t.me/test_user');
+ assert.equal(leadContact({telegram:'javascript:alert(1)'}).href,'');
+ assert.equal(leadContact({max:'+79991234567'}).href,'');
+ assert.equal(leadContact({max:'@test_user'}).href,'');
+ assert.equal(leadContact({max:'https://max.ru/u/test_profile'}).href,'https://max.ru/u/test_profile');
+ assert.equal(leadContact({max:'https://max.ru.evil.example/u/test_profile'}).href,'');
+ assert.equal(leadContact({max:'https://evil@max.ru/u/test_profile'}).href,'');
 });

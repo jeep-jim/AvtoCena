@@ -1,7 +1,12 @@
+"use client";
+import {useState} from "react";
 import {leadContact} from "@/lib/lead-contact";
-export function LeadContact({lead, interactive = false}: {lead: any; interactive?: boolean}) {
-  const contact = leadContact(lead);
-  const className = `inline-flex max-w-full flex-wrap items-center gap-x-2 rounded-lg px-2.5 py-1.5 text-xs font-bold ${contact.channel === "telegram" ? "bg-[#229ED9] text-white" : contact.channel === "max" ? "bg-[#7B61FF] text-white" : "bg-[var(--ac-surface)] text-[var(--ac-text)]"}`;
-  const content = <><span>{contact.label}</span><span className="break-all">{contact.value || "Контакт не указан"}</span>{contact.detail && <span className="w-full text-[10px] opacity-90">{contact.detail}</span>}</>;
-  return interactive && contact.href ? <a className={className} href={contact.href} target={contact.channel === "call" ? undefined : "_blank"} rel="noreferrer">{content}</a> : <span className={className}>{content}</span>;
+export function LeadContact({lead,interactive=false}:{lead:any;interactive?:boolean}){
+ const contact=leadContact(lead),[notice,setNotice]=useState("");
+ if(!interactive)return <span className="crm-contact-text" aria-label={`${contact.label}: ${contact.value||"Контакт не указан"}`}><strong>{contact.value||"Контакт не указан"}</strong>{contact.detail&&<small>{contact.detail}</small>}</span>;
+ const className=`crm-contact-action ${contact.channel==="telegram"?"crm-contact-telegram":contact.channel==="max"?"crm-contact-max":"crm-contact-call"}`;
+ const content=<><strong>{contact.channel==="call"?"Позвонить":`Написать в ${contact.label}`}</strong><span>{contact.value||"Контакт не указан"}</span></>;
+ if(contact.href)return <a className={className} href={contact.href} target={contact.channel==="call"?undefined:"_blank"} rel="noreferrer">{content}</a>;
+ if(contact.channel==="max"&&contact.value)return <span className="crm-contact-fallback"><a className={className} href="https://web.max.ru/" target="_blank" rel="noreferrer" onClick={()=>{setNotice("Найдите контакт через поиск в MAX.");void navigator.clipboard?.writeText(contact.value.replace(/^@/,"")).then(()=>setNotice("Контакт скопирован. Вставьте его в поиск MAX; для телефона выберите «Найти по номеру».")).catch(()=>setNotice("Скопируйте контакт и найдите его через поиск в MAX."));}}><strong>Открыть MAX и скопировать контакт</strong><span>{contact.value}</span></a>{notice&&<small role="status">{notice}</small>}</span>;
+ return <span className="crm-contact-text">{contact.value||"Контакт не указан"}</span>;
 }

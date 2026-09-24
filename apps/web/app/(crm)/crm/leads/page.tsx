@@ -1,3 +1,4 @@
+import {ContactIcon} from "@/components/crm/ContactIcon";
 import {LeadDateFilter} from "@/components/crm/LeadDateFilter";
 import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
 import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
@@ -234,7 +235,7 @@ export default async function CrmLeadsPage({
                     {lead.clientId ? <Link className="crm-lead-client-link" href={`/crm/clients/${encodeURIComponent(lead.clientId)}`} title="Открыть карточку клиента">{lead.name || lead.telegramDisplayName || "Клиент"}</Link> : (lead.name || lead.telegramDisplayName || "Клиент")}
                   </div>
                   <div className="crm-lead-contact-row mt-1 text-sm text-[var(--ac-muted)]">
-                    <span className="crm-lead-channel-icon" aria-hidden="true">{leadContact(lead).channel==="call"?<span>☎</span>:<img src={`/brands/crm/${leadContact(lead).channel}.svg`} alt="" width={80} height={80} />}</span>
+                    <span className="crm-lead-channel-icon" aria-hidden="true"><ContactIcon channel={leadContact(lead).channel}/></span>
                     <LeadContact lead={lead} />
                   </div>
                 </div>

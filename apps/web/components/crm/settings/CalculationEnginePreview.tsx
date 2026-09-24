@@ -1,3 +1,4 @@
+import {CrmDateInput} from "../CrmDateInput";
 import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -177,7 +178,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         <label className="grid gap-1.5 text-xs font-black text-white/45">Категория<select name="calcCategory" defaultValue={vehicleCategory} className={inputClass()}><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select></label>
         <label className="grid gap-1.5 text-xs font-black text-white/45">Топливо ДВС<select name="calcFuel" defaultValue={fuel} className={inputClass()}><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label>
         <label className="grid gap-1.5 text-xs font-black text-white/45">Полная масса N1, кг<input name="calcGrossWeight" type="number" min="1" max="3500" defaultValue={grossVehicleWeightKg||""} className={inputClass()}/></label>
-        <label className="grid gap-1.5 text-xs font-black text-white/45">Дата таможенного расчёта<input name="calcDate" type="date" defaultValue={calculationDate} className={inputClass()}/></label>
+        <label className="grid gap-1.5 text-xs font-black text-white/45">Дата таможенного расчёта<CrmDateInput name="calcDate" defaultValue={calculationDate} calendar={false}/></label>
         <label className="grid gap-1.5 text-xs font-black text-white/45">Доставка N1 до границы, ₽<input name="calcBorderTransport" type="number" min="0" defaultValue={transportToBorderRub} className={inputClass()}/><span>Заменяет строку логистики для N1; входит в таможенную стоимость.</span></label>
         <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2 xl:col-span-4">Пересчитать тем же движком, что и сайт</button>
       </form>

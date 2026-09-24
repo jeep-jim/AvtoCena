@@ -35,7 +35,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 const results=[],failures=[];
 try{
  for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive'])){
-  const page=await browser.newPage({viewport:{width,height:850}});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+  const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
@@ -55,10 +55,23 @@ try{
     assert.ok(await close.evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(document.querySelector('button[type=submit]')).backgroundColor));
     await page.getByRole('button',{name:'Отмена',exact:true}).click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
     await page.getByRole('button',{name:'+ Создать заявку',exact:true}).click();await close.click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
+    assert.equal(await page.locator('.crm-date-display').textContent(),'дд.мм.гггг');
+    assert.ok(await page.locator('.crm-date-control>svg').isVisible(),'consistent calendar icon');
+    await page.locator('#lead-date').evaluate(e=>{e.showPicker=()=>{window.__crmPickerOpened=true;}});await page.locator('#lead-date').click();assert.ok(await page.evaluate(()=>window.__crmPickerOpened),'tap opens native calendar');
     const dateBoxes=await page.locator('.crm-lead-date-filter').evaluate(e=>[e.querySelector('label'),e.querySelector('input[type=date]'),e.querySelector('button')].map(n=>{const r=n.getBoundingClientRect();return r.y+r.height/2}));assert.ok(Math.max(...dateBoxes)-Math.min(...dateBoxes)<2,'date controls on one row');
     if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<265,`lead summary is compact (${height}px)`);}
+    for(const summary of await page.locator('.crm-lead-summary').all()){assert.ok(await summary.locator('.crm-lead-channel-icon').isVisible(),'channel icons on desktop and mobile');assert.equal(await summary.locator('.crm-contact-text').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no contact badge background');}
+    assert.ok(await page.locator('.crm-phone-icon').first().isVisible(),'modern handset icon');
     if(width<768){const summary=page.locator('.crm-lead-summary').first();const icon=await summary.locator('.crm-lead-channel-icon').boundingBox(),car=await summary.locator('.crm-lead-car-image').boundingBox();assert.equal(icon.x,car.x,'channel and car images aligned');assert.ok(car.y>icon.y);assert.ok(await summary.locator('.crm-lead-channel-icon img').evaluate(img=>img.complete&&img.naturalWidth===80),'Figma asset loaded');}
     await page.locator('.crm-lead-summary').first().click();assert.ok(await page.getByRole('combobox',{name:'Статус заявки',exact:true}).first().isVisible());
+    const chat=page.locator('.crm-contact-action').first();assert.equal(await chat.getAttribute('href'),'https://t.me/+79991234567');
+    await page.context().route('https://t.me/**',r=>r.fulfill({contentType:'text/html',body:'Telegram link test'}));
+    const opened=page.waitForEvent('popup');await chat.click();const popup=await opened;await popup.waitForLoadState();assert.equal(popup.url(),'https://t.me/+79991234567');await popup.close();
+    if(width===390||width===1440){
+     await page.locator('.crm-lead-card').first().evaluate(e=>e.open=false);
+     await page.locator('.crm-lead-date-filter').evaluate(e=>window.scrollBy(0,e.getBoundingClientRect().top-180));
+     await page.screenshot({path:`${out}/contact-summary-${theme}-${width}.png`});
+    }
    }
    if(kind==='client'){
     assert.ok(await page.getByRole('button',{name:'Прикрепить файлы'}).isVisible());
@@ -96,6 +109,9 @@ try{
     assert.equal(await page.locator('.crm-calculator-disclosure').getAttribute('open'),null);
     await page.locator('.crm-calculator-disclosure>summary').click();
     assert.equal(await page.locator('select[name="calcPowertrain"]').isVisible(),true);
+    const calcDate=page.locator('input[name="calcDate"]');assert.equal(await calcDate.evaluate(e=>getComputedStyle(e).opacity),'0','native date arrow invisible');assert.equal(await calcDate.locator('..').locator('svg').count(),0,'no decorative arrow in calculation date');
+    await calcDate.fill('2026-10-01');assert.equal(await calcDate.locator('..').locator('.crm-date-display').textContent(),'01.10.2026');
+    if(width===390||width===1440)await calcDate.locator('..').screenshot({path:`${out}/calculation-date-${theme}-${width}.png`});
     const fields=await page.locator('.crm-calculation-fields>label').evaluateAll(els=>els.slice(0,2).map(e=>e.getBoundingClientRect().toJSON()));assert.equal(fields[0].y,fields[1].y);
     assert.equal(await page.locator('form[action="/api/crm/settings/markets"]').count(),6,'all six market forms retained');
    }
