@@ -528,7 +528,8 @@ const searchProjectionCache = new DetailReadCache<{ generationId: string; items:
   maxEntries: SEARCH_PROJECTION_CACHE_MAX, maxBytes: 96 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
-const currentProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
+const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
   maxEntries: 8, maxBytes: 32 * 1024 * 1024, ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 2,
 });
@@ -560,10 +561,13 @@ export function resetCatalogReadCachesForTests() {
   offerChunkCache.clear();
 }
 async function readCurrentSearchProjection(market: string) {
+  // A small manifest check invalidates a large projection at publication cutover.
+  // Otherwise retain the immutable rows instead of downloading them every minute.
+  const {generationId} = await readManifest();
   const key = cleanShard(market);
   const now = Date.now();
   for (const [id, entry] of currentProjectionCache) {
-    if (entry.expiresAt <= now) currentProjectionCache.delete(id);
+    if (entry.expiresAt <= now || entry.generationId !== generationId) currentProjectionCache.delete(id);
   }
   // Once the full projection is loaded, markets share its records instead of
   // downloading and retaining a second complete copy of the same catalog.
@@ -583,7 +587,8 @@ async function readCurrentSearchProjection(market: string) {
     .then(value => {
       const entry = currentProjectionCache.get(key);
       if (entry?.promise === promise) {
-        entry.expiresAt = Date.now() + CURRENT_READ_MODEL_CACHE_MS;
+        entry.expiresAt = Date.now() + CURRENT_PROJECTION_CACHE_MS;
+        if (value.generationId !== generationId) currentProjectionCache.delete(key);
         if (key === CURRENT_ALL_MARKETS_PROJECTION && value.generationId) {
           for (const [id, other] of currentProjectionCache) {
             if (id === key) continue;
@@ -596,7 +601,7 @@ async function readCurrentSearchProjection(market: string) {
       return value;
     })
     .catch((error) => { if (currentProjectionCache.get(key)?.promise === promise) currentProjectionCache.delete(key); throw error; });
-  currentProjectionCache.set(key, { expiresAt: Infinity, promise });
+  currentProjectionCache.set(key, { generationId, expiresAt: Infinity, promise });
   while (currentProjectionCache.size > SEARCH_PROJECTION_CACHE_MAX) {
     const oldest = currentProjectionCache.keys().next().value as string | undefined;
     if (!oldest || oldest === key) break;
@@ -779,8 +784,8 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
 
 async function currentProjectionRows(params: CatalogSearchParams = {}) {
   const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
-  // Start the shared all-market read before sibling market searches start.
-  // Waiting for the manifest first made all six markets download duplicate rows.
+  // Register the shared all-market read before sibling market searches start.
+  // All readers coalesce the small manifest check before downloading projections.
   const [manifest, current] = await Promise.all([readManifest(), readCurrentSearchProjection(scope)]);
   if (current.generationId === manifest.generationId) {
     return { generationId: manifest.generationId, rows: prepareCatalogProjectionRows(current.items || []) };
@@ -880,11 +885,22 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
   return [...new Map(rows.filter(offer => offer.market !== options.excludeMarket).map((offer) => [offer.id, offer])).values()];
 }
 /** Preserve the non-public assortment reserve for the next market refresh. */
-export async function readMarketMaintenanceOffers(market: CatalogMarket) {
+export async function readMarketMaintenanceOffers(market: CatalogMarket, options: { excludeIds?: ReadonlySet<string> } = {}) {
   const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, {sources:{}});
   const approved = new Set(allowedCatalogSourceIds(market));
   const chunks = Object.entries<any>(manifest.sources || {}).filter(([id]) => approved.has(id)).flatMap(([,source]) => source.chunks || []);
-  return (await readOfferLists([...new Set<string>(chunks)])).filter(offer => offer.market === market);
+  const rows: VehicleOffer[] = [];
+  // Discard superseded public duplicates before reading the next raw chunk.
+  // Loading the entire reserve first kept gigabytes of unreachable source data
+  // alive alongside the new intake until the merge phase.
+  for (const path of new Set<string>(chunks)) {
+    const chunk = await readDataJson<VehicleOffer[] | null>(path, null);
+    if (!Array.isArray(chunk)) throw new Error(`catalog_maintenance_chunk_missing:${path}`);
+    for (const offer of chunk) {
+      if (offer.market === market && !options.excludeIds?.has(offer.id)) rows.push(offer);
+    }
+  }
+  return rows;
 }
 export const readAllOffers = readAllOffersForMaintenance;
 /** Maintenance-only stream: never materialize every other market's raw payloads. */

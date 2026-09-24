@@ -133,12 +133,12 @@ jobs:
       CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_HARD_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_PRIORITY_TARGET: '8000'
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '12'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '4'
       CATALOG_INDEX_WRITE_CONCURRENCY: '8'
       CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
       CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
       CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: '300000'
-      NODE_OPTIONS: --max-old-space-size=6144
+      NODE_OPTIONS: --max-old-space-size=12288
     steps:
       - uses: actions/checkout@v4
         with:
@@ -148,6 +148,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Report publication resource budget
+        run: |
+          free -m
+          df -h .
+          node -e 'console.log(JSON.stringify({heapLimitMiB:Math.round(require("node:v8").getHeapStatistics().heap_size_limit/1048576),availableMiB:Math.round(require("node:os").freemem()/1048576)}))'
       - name: Restore collected observations without repeating source requests
         uses: actions/download-artifact@v4
         if: needs.plan.outputs.reuse_run_id != ''

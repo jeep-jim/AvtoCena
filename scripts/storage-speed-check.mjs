@@ -13,3 +13,14 @@ for (let attempt=1;attempt<=3;attempt++) {
   const readAt=performance.now();
   console.log('TIMING',JSON.stringify({attempt,readMs:Math.round(readAt-start),cards:home.items.length,generationId:home.generationId}));
 }
+
+const {readCatalogMarketPage} = await import('../apps/web/lib/catalog/market-page.ts');
+const {readCatalogFacets} = await import('../apps/web/lib/catalog/storage.ts');
+for (let attempt=1; attempt<=2; attempt++) {
+  const started=performance.now();
+  const result=await Promise.all([
+    readCatalogFacets({market:'china'}).then(value=>({kind:'facets',ms:Math.round(performance.now()-started),makes:value.makes.length})),
+    readCatalogMarketPage({market:'china',page:1}).then(value=>({kind:'page',ms:Math.round(performance.now()-started),cards:value.items.length,total:value.total})),
+  ]);
+  console.log('MARKET_TIMING', JSON.stringify({attempt,result,rssMiB:Math.round(process.memoryUsage().rss/1048576)}));
+}

@@ -4,12 +4,12 @@ run-name: Catalog storage cleanup · ${{ github.sha }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 17 * * *"
+    - cron: "0 */6 * * *"
   push:
     branches: [main]
     paths: ['.github/market-runs/storage-maintenance.json']
   workflow_run:
-    workflows: ['Catalog · Five-market full rebuild', 'Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish']
+    workflows: ['Catalog · Five-market full rebuild', 'Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish', 'Catalog refresh green']
     types: [completed]
     branches: [main]
 

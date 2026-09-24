@@ -44,3 +44,27 @@ test('parallel facets and market searches download one shared catalog snapshot',
   assert.deepEqual(reads.filter(path=>path.includes('/projection/')),['catalog/public/projection/all.json']);
  } finally {t.mock.restoreAll();resetCatalogReadCachesForTests();}
 });
+
+
+test('unchanged projections survive minute boundaries but follow the next published generation',async(t)=>{
+ resetCatalogReadCachesForTests();
+ let now=Date.now(),generationId='first';let projectionReads=0;
+ t.mock.method(Date,'now',()=>now);
+ t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog/manifest.json')return {found:true,value:{generationId,markets:{korea:{count:1}}}};
+  if(file==='catalog/public/projection/korea.json'){
+   projectionReads++;
+   return {found:true,value:{generationId,items:[{...row(),id:generationId,make:generationId==='first'?'Kia':'Hyundai'}]}};
+  }
+  throw Error(`Unexpected read: ${file}`);
+ });
+ try {
+  assert.deepEqual((await readCatalogFacets({market:'korea'})).makes,['Kia']);
+  now+=61000;
+  assert.deepEqual((await readCatalogFacets({market:'korea'})).makes,['Kia']);
+  assert.equal(projectionReads,1,'same immutable snapshot must not be downloaded every minute');
+  generationId='second';now+=61000;
+  assert.deepEqual((await readCatalogFacets({market:'korea'})).makes,['Hyundai']);
+  assert.equal(projectionReads,2,'new manifest must invalidate the previous snapshot immediately');
+ } finally {t.mock.restoreAll();resetCatalogReadCachesForTests();}
+});

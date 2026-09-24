@@ -360,7 +360,7 @@ function rejectFreshOffer(id, reason) {
   if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
 }
 let currentMarketRows = await readMarketOffers(market);
-const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market) : [];
+const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id))}) : [];
 logPublicationMemory("target_reserve_loaded");
 const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
 for (const row of currentMarketRows) existingInventory.set(row.id,row);
@@ -405,10 +405,11 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
 }
 
 currentRetainedRows = currentRetainedRows.map(compactPublicStorageOffer);
-const orderedCandidates = [...candidatesById.values()].sort(qualityOrder);
 const generatedCandidateCount = generation.offers.length;
 generation.offers.length = 0;
+const orderedCandidates = [...candidatesById.values()];
 candidatesById.clear();
+orderedCandidates.sort(qualityOrder);
 logPublicationMemory("candidates_merged");
 const selected = [];
 const selectedIds = new Set();
