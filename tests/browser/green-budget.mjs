@@ -35,9 +35,9 @@ const facets={makes:['Toyota','BMW','Mazda'],models:[{make:'Toyota',model:'Corol
 try {
  for(const width of [1440,390]) {
   const context=await browser.newContext({viewport:{width,height:900}});
-  await context.route('**/api/**',r=>r.fulfill({json:{counts:{},modelCounts:{},items:[]}}));
+  if(!live)await context.route('**/api/**',r=>r.fulfill({json:{counts:{},modelCounts:{},items:[]}}));
   const page=await context.newPage();
-  await page.goto(origin+'/cars');
+  await page.goto(origin+(live?'/cars/green?advanced=1':'/cars'),{waitUntil:'domcontentloaded',timeout:90000});
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
   const price=scope.locator('.ac-range-card').filter({has:page.locator('input[name="budgetFrom"]')});
