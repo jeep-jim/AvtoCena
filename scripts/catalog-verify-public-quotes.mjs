@@ -7,12 +7,20 @@ import {getSavedOfferCalculation} from '../apps/web/lib/catalog/saved-offer-calc
 import {getEffectiveMarketVersion} from '../apps/web/lib/effective-market-settings.ts';
 const origin = process.env.CATALOG_PUBLIC_ORIGIN || 'https://avtocena.com';
 const report = {checkedAt:new Date().toISOString(),requests:[],quotes:[],ok:false};
-async function read(path) {
+async function read(path, redirects = 0) {
   const started=performance.now();
   const response=await fetch(new URL(path,origin),{signal:AbortSignal.timeout(45000),redirect:'manual'});
   const headersAt=performance.now();
   const text=await response.text();
   report.requests.push({path,status:response.status,ttfbMs:Math.round(headersAt-started),totalMs:Math.round(performance.now()-started),bytes:Buffer.byteLength(text)});
+  if ([301,302,303,307,308].includes(response.status)) {
+    assert.ok(redirects < 3, `Redirect loop: ${path}`);
+    const location=response.headers.get('location');
+    assert.ok(location, `Missing redirect location: ${path}`);
+    const target=new URL(location,new URL(path,origin));
+    assert.equal(target.origin,new URL(origin).origin,'Public verification must stay on the site');
+    return read(target.pathname+target.search,redirects+1);
+  }
   assert.equal(response.status,200,`HTTP ${response.status}: ${path}`);
   return text;
 }
@@ -71,7 +79,7 @@ try {
   }
   const missing=await read('/cars/offer/unavailable-verification-example');
   assert.ok(missing.includes('unavailable-offer-title'));
-  assert.ok(missing.includes('Перейти в каталог'));
+  assert.ok(missing.includes('Выбрать автомобиль'));
   assert.ok(!missing.includes('data-offer-id='));
   await read('/api/catalog/home'); // repeat request timing, not a speed guarantee
   report.ok=true;
