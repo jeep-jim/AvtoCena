@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { currentGreenCornerPrices, readGreenCorner } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
 import { NextResponse } from "next/server";
@@ -18,6 +19,7 @@ function positiveNumber(url: URL, key: string) {
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
+  if(!url.searchParams.has("city")){const city=(await cookies()).get("avtocena_city")?.value;if(city)url.searchParams.set("city",city);}
   if(url.searchParams.get("market")==="japan" && url.searchParams.get("stock")==="green") {
     const snapshot=await readGreenCorner();
     const rows=filterGreenCorner(await currentGreenCornerPrices(snapshot.items),{...Object.fromEntries(url.searchParams),make:undefined});

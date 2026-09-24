@@ -1,0 +1,33 @@
+name: Verify green corner budget
+on:
+  push:
+    branches: [fix/green-budget-20260924, main]
+    paths:
+      - 'apps/web/**'
+      - 'tests/green-corner-filters.test.ts'
+      - 'tests/browser/green-budget*'
+      - '.github/workflows/verify-green-budget.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-corner*.test.ts tests/catalog-filter*.test.ts tests/card-city-delivery*.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/green-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Desktop and mobile price controls
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-budget.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: green-budget-browser
+          path: artifacts/green-budget-*
