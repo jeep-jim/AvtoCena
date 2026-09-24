@@ -1,4 +1,5 @@
-import { isGreenCornerOffer, greenCornerLogisticsRub } from "./green-corner-contract";
+import {greenCornerPaymentRate} from "./green-corner-payment-rate";
+import { isGreenCornerOffer } from "./green-corner-contract";
 import { deliveryPricingBasis } from "./card-city-delivery";
 import { quoteCityDelivery, deliveryDescription } from "./city-delivery";
 import { customerPriceBreakdown } from "./customer-price-breakdown";
@@ -261,16 +262,14 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
   const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
-  if (isGreenCornerOffer(offer)) {
-    try {
-      market.config = {...market.config, logisticsRub:greenCornerLogisticsRub(offer.greenCornerLogistics, rate.effectiveRate),
-        logisticsRateStatus:'available', logisticsCurrency:'JPY', logisticsAmount:offer.greenCornerLogistics!.amountJpy,
-        logisticsRateDate:rate.rateDate, exchangeRateReservePercent:0, bankTransferPercent:7.5};
-    } catch {
-      return {...offer,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:{...pendingSnapshot,
-        pricingConfidence:'unavailable',missing:['green_corner_logistics_basis']}};
-    }
+  const greenCorner = isGreenCornerOffer(offer);
+  const paymentRate = greenCorner ? await greenCornerPaymentRate(offer) : rate;
+  if (greenCorner && (offer.greenCornerInvoice?.basis !== 'CIF' || !paymentRate)) {
+    return {...offer,totalRub:null,calculationStatus:'needs_data',calculationSnapshot:{...pendingSnapshot,
+      pricingConfidence:'unavailable',missing:['green_corner_cif_invoice_or_rate']}};
   }
+  if (greenCorner) market.config = {...market.config, logisticsRub:0, logisticsRateStatus:'available',
+    exchangeRateReservePercent:0, bankTransferPercent:0};
   const deliveryQuote = quoteCityDelivery(offer.deliveryCity, offer.market);
   market.warnings.push(deliveryDescription(deliveryQuote));
   if (market.config.logisticsRateStatus === "unavailable") {
@@ -289,14 +288,13 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   const commercial = normalizedCategory(offer).category === "N1";
   const enteredTransport = offer.transportToBorderRub;
   const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;
-  const greenCorner = isGreenCornerOffer(offer);
-  const borderTransportRub = greenCorner ? Number(market.config.logisticsRub || 0) : commercial
+  const borderTransportRub = greenCorner ? 0 : commercial
     ? hasEnteredTransport ? enteredTransport : transportToBorderRub(offer) || Number(market.config.logisticsRub || 0)
     : transportToBorderRub(offer);
   // Goods imports include pre-border transport. In an N1 customer scenario this
   // replaces the logistics line, so it is not added twice to the delivered total.
   const customsValueRub = rate.sourcePriceRub + ((commercial || greenCorner) ? borderTransportRub : 0);
-  if (commercial) {
+  if (commercial && !greenCorner) {
     market.config = {...market.config,logisticsRub:borderTransportRub};
     if (!hasEnteredTransport) {
       market.estimated = true;
@@ -348,7 +346,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       marketConfig: market.config,
       cityDeliveryRub: deliveryQuote.amountRub,
       deliveryCity: deliveryQuote.city,
-      sourcePriceRub: rate.sourcePriceRub,
+      sourcePriceRub: paymentRate!.sourcePriceRub,
       customsRub: customs.knownCustomsRub,
     });
     const excludedPriceItems = [
@@ -364,9 +362,10 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         ...calculation.snapshot,
         deliveryQuote,
         sourcePriceAdjustment,
-        currencyRate: rate,
+        currencyRate: paymentRate!,
+        customsCurrencyRate: rate,
         eurRate,
-        sourcePriceRub: rate.sourcePriceRub,
+        sourcePriceRub: paymentRate!.sourcePriceRub,
         customs,
         customsInput,
         customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
@@ -418,11 +417,15 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     marketConfig: market.config,
     cityDeliveryRub: deliveryQuote.amountRub,
     deliveryCity: deliveryQuote.city,
-    sourcePriceRub: rate.sourcePriceRub,
+    sourcePriceRub: paymentRate!.sourcePriceRub,
     customsRub: customs.knownCustomsRub,
     utilizationFeeRub: customs.utilizationFeeRub,
   });
 
+  if (greenCorner) {
+    const line=calculation.snapshot.breakdown?.find((line:any)=>line.id==='car');
+    if(line) line.title=`Инвойс (CIF) · ${offer.sourcePrice.toLocaleString('ru-RU')} JPY`;
+  }
   const powerEstimated = Boolean(powerScenario) || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const customsAssumed = customs.personalUseAssumed || customs.vehicleCategoryAssumed;
   const priceEstimated = Boolean(sourcePriceAdjustment) || market.estimated || powerEstimated || customs.ageEstimated || customsAssumed || offer.priceMode === "estimated";
@@ -441,9 +444,10 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       ...calculation.snapshot,
       deliveryQuote,
       sourcePriceAdjustment,
-      currencyRate: rate,
+      currencyRate: paymentRate!,
+        customsCurrencyRate: rate,
       eurRate,
-      sourcePriceRub: rate.sourcePriceRub,
+      sourcePriceRub: paymentRate!.sourcePriceRub,
       customs,
       customsInput,
       customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
@@ -502,7 +506,7 @@ export async function calculateOfferWithVerifiedSpecifications(input: VehicleOff
 
 export function requireFreshRecoveryRates(offer: VehicleOffer, now = Date.now()): VehicleOffer {
   const snapshot = offer.calculationSnapshot || {};
-  const rates = [snapshot.currencyRate, snapshot.eurRate];
+  const rates = [snapshot.customsCurrencyRate || snapshot.currencyRate, snapshot.eurRate];
   const fresh = rates.every(rate => {
     const date = Date.parse(String(rate?.rateDate || ""));
     return isOfficialCustomsCurrencyRate(rate) && Number.isFinite(date)

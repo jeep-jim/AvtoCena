@@ -10,7 +10,7 @@ export type CurrencyRateSnapshot = {
   rateDelta?: number;
   rateDate: string;
   fetchedAt?: string;
-  rateSource: "moex" | "cbr" | "cbr_live" | "legacy_json" | "fallback_env";
+  rateSource: "atb_akebono" | "moex" | "cbr" | "cbr_live" | "legacy_json" | "fallback_env";
   sourcePrice: number;
   sourcePriceRub: number;
 };

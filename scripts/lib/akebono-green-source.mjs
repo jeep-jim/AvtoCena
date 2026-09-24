@@ -38,3 +38,22 @@ export function assertGreenPublication(previousCount,nextCount,sourceCount){
  if(!Number.isSafeInteger(sourceCount)||sourceCount<1||!Number.isSafeInteger(nextCount)||nextCount<1||nextCount>sourceCount)throw Error('green_empty_or_invalid_publication');
  if(previousCount>0&&nextCount<Math.ceil(previousCount*.9))throw Error('green_market_collapse_guard');
 }
+
+// The public stock UI defines CIF as the discounted Japan price plus this
+// calculator freight parameter. Reject conditional rules rather than guess.
+export async function collectGreenInvoiceTerms(request=fetch) {
+ async function query(url,query){
+  const response=await request(url,{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(30000),body:JSON.stringify({query})});
+  if(!response.ok)throw Error('green_invoice_source_unavailable');
+  const result=await response.json();if(result.errors)throw Error('green_invoice_source_errors');return result.data;
+ }
+ const [calculator,rates]=await Promise.all([
+  query('https://akebono.world/auto/calculator','query { params { nodes { parameter constant paramGroupConditions { value } } } }'),
+  query('https://akebono.world/graphql/directory/exchange-rate/open','query { exchangeRate(bank: ATB, currency: JPY) { sell nominal } }')
+ ]);
+ const freight=calculator?.params?.nodes?.filter(row=>row.parameter==='automobile_freight');
+ const quote=rates?.exchangeRate;
+ if(freight?.length!==1 || freight[0].paramGroupConditions?.length || !Number.isFinite(Number(freight[0].constant)) || Number(freight[0].constant)<0
+  || !(Number(quote?.sell)>0) || !(Number(quote?.nominal)>0))throw Error('green_invoice_terms_invalid');
+ return {cifFreightJpy:Number(freight[0].constant),paymentQuote:{sell:Number(quote.sell),nominal:Number(quote.nominal),fetchedAt:new Date().toISOString()}};
+}

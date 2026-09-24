@@ -19,9 +19,10 @@ export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,fram
 
 // One currency lookup for stock filters; only the visible page needs full display enrichment.
 export async function currentGreenCornerPrices(items:VehicleOffer[]):Promise<VehicleOffer[]> {
- const {convertToRub}=await import("./rates");
- const rate=await convertToRub(1,"JPY").catch(()=>null);
- if(!rate || !["cbr","cbr_live"].includes(rate.rateSource) || !(rate.effectiveRate>0)
-  || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(Date.now()-Date.parse(rate.rateDate))>4*86400000)return items;
- return items.map(offer=>{const sourcePriceRub=Number(offer.sourcePrice)*rate.effectiveRate;return {...offer,sellerPriceRub:Math.round(sourcePriceRub),calculationSnapshot:{...offer.calculationSnapshot,sourcePriceRub:Math.round(sourcePriceRub),currencyRate:{...rate,sourcePrice:offer.sourcePrice,sourcePriceRub}}};});
+ const {greenCornerPaymentRate}=await import("./green-corner-payment-rate");
+ return Promise.all(items.map(async offer=>{
+  if(offer.greenCornerInvoice?.basis!=="CIF")return offer;
+  const rate=await greenCornerPaymentRate(offer);if(!rate)return offer;
+  return {...offer,sellerPriceRub:Math.round(rate.sourcePriceRub),calculationSnapshot:{...offer.calculationSnapshot,sourcePriceRub:Math.round(rate.sourcePriceRub),currencyRate:rate}};
+ }));
 }

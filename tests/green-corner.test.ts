@@ -12,16 +12,16 @@ import {resetCatalogRateCache} from "../apps/web/lib/catalog/rates";
 import assert from "node:assert/strict";
 import {normalizeGreenCorner,greenCornerFobPrice} from "../apps/web/lib/catalog/green-corner-normalize";
 import {isSellerPricedOffer,sellerPriceLabel} from "../apps/web/lib/catalog/seller-price-contract";
-import {collectGreenCorner,assertGreenPublication} from "../scripts/lib/akebono-green-source.mjs";
+import {collectGreenCorner,assertGreenPublication,collectGreenInvoiceTerms} from "../scripts/lib/akebono-green-source.mjs";
 const now="2026-09-22T06:00:00Z";
 const rate:any={currency:"JPY",effectiveRate:.6,cbrRate:60,nominal:100,rateDate:"2026-09-22",rateSource:"cbr",sourcePrice:1,sourcePriceRub:.6};
-const row={id:727977,company:"MERCEDES - BENZ",model:"GLA 180",year:"2015",yearForCustom:"2018",horsepower:122,mileageNum:"89",engineVolumeNum:"1600",priceInJapan:"920000",priceInJapanCurrency:"JPY",isSold:false,location:"japan",subgroup:"auto",media:["https://img.akebono.world/a.JPG","https://media.akebono.world/a.mp4"]};
-test("Green stock retains actual year and source FOB, keeps logistics separate, excludes videos",()=>{
+const row={cifFreightJpy:74000,paymentQuote:{sell:56.7,nominal:100,fetchedAt:new Date().toISOString()},id:727977,company:"MERCEDES - BENZ",model:"GLA 180",year:"2015",yearForCustom:"2018",horsepower:122,mileageNum:"89",engineVolumeNum:"1600",priceInJapan:"920000",priceInJapanCurrency:"JPY",isSold:false,location:"japan",subgroup:"auto",media:["https://img.akebono.world/a.JPG","https://media.akebono.world/a.mp4"]};
+test("Green stock retains actual year and CIF including source freight, excludes videos",()=>{
  const o=normalizeGreenCorner(row,rate,now);
- assert.equal(o.year,2015);assert.equal(o.mileageKm,89000);assert.equal(o.sourcePrice,920000);
- assert.equal(o.sellerPriceRub,552000);assert.equal(o.totalRub,null);assert.equal(o.images.length,1);
+ assert.equal(o.year,2015);assert.equal(o.mileageKm,89000);assert.equal(o.sourcePrice,994000);
+ assert.equal(o.sellerPriceRub,563598);assert.equal(o.totalRub,null);assert.equal(o.images.length,1);
  assert.equal(o.offerType,"fixed");assert.equal(o.catalogKind,"listing");assert.ok(isSellerPricedOffer(o));
- assert.equal(sellerPriceLabel(o),"Цена FOB");
+ assert.equal(sellerPriceLabel(o),"Стоимость автомобиля — инвойс (CIF)");
  assert.ok(!isSellerPricedOffer({...o,sellerPriceRub:642000}));
 
 });
@@ -67,7 +67,7 @@ test("logistics anchor remains fixed in JPY while rubles follow the rate",()=>{
  assert.throws(()=>greenCornerLogisticsRub({...basis,amountJpy:90000},.6));
 });
 
-test("Green uses the full Japan breakdown with exactly one yen-linked logistics line",async()=>{
+test("Green pays CIF at bank rate, taxes CIF at CBR rate, without duplicate logistics or bank fee",async()=>{
  const markets=JSON.parse(fs.readFileSync("data/markets/markets.json","utf8"));
  const today=new Date().toISOString();
  const previous=process.env.CATALOG_LIVE_RATE_DISABLED;process.env.CATALOG_LIVE_RATE_DISABLED="true";resetCatalogRateCache();
@@ -81,12 +81,12 @@ test("Green uses the full Japan breakdown with exactly one yen-linked logistics 
   assert.equal(green.ok,true);assert.equal(ordinary.ok,true);
   if(green.ok&&ordinary.ok){
    const lines=green.calculation.breakdown, other=ordinary.calculation.breakdown;
-   assert.equal(lines.filter((l:any)=>l.id==="logistics").length,1);
-   assert.equal(lines.find((l:any)=>l.id==="logistics")?.amountRub,49500);
-   assert.equal(lines.find((l:any)=>l.id==="car")?.amountRub,607200);
-   assert.equal(lines.find((l:any)=>l.id==="bank-transfer")?.amountRub,45540);
+   assert.equal(lines.filter((l:any)=>l.id==="logistics").length,0);
+   assert.equal(lines.find((l:any)=>l.id==="logistics")?.amountRub,undefined);
+   assert.equal(lines.find((l:any)=>l.id==="car")?.amountRub,563598);
+   assert.equal(lines.find((l:any)=>l.id==="bank-transfer")?.amountRub,undefined);
    assert.equal(lines.some((l:any)=>l.id==="exchange-reserve"),false);
-   assert.equal(green.calculation.customsValue?.totalRub,656700);
+   assert.equal(green.calculation.customsValue?.totalRub,656040);
    assert.equal(green.calculation.customsValue?.transportIncludedInCustomsValue,true);
    assert.equal(other.some((l:any)=>l.id==="bank-transfer"),false);
    assert.equal(lines.reduce((sum:number,l:any)=>sum+l.amountRub,0),green.calculation.totalRub);
@@ -94,17 +94,17 @@ test("Green uses the full Japan breakdown with exactly one yen-linked logistics 
    assert.ok(lines.some((l:any)=>l.id==="topavto-commission"));
    assert.equal(green.calculation.paymentPlan.securityDepositRub,ordinary.calculation.paymentPlan.securityDepositRub);
   }
-  const young={...input,year:2026,sourcePrice:2500000};
+  const young={...input,year:2026,sourcePrice:2574000};
   const youngParams=validateCustomerParameters({year:2026,engineCc:1500,powerHp:118,fuel:"petrol"});
   const fresh=await calculateOfferWithCustomerParametersDetailed(young,youngParams);
   assert.equal(fresh.ok,true);
   if(fresh.ok){
-   assert.equal(fresh.calculation.customsValue?.totalRub,1699500);
-   assert.equal(fresh.calculation.breakdown.find((l:any)=>/Единая ставка/.test(l.title))?.amountRub,815760);
-   assert.equal(fresh.calculation.breakdown.find((l:any)=>l.id==="bank-transfer")?.amountRub,123750);
+   assert.equal(fresh.calculation.customsValue?.totalRub,1698840);
+   assert.equal(fresh.calculation.breakdown.find((l:any)=>/Единая ставка/.test(l.title))?.amountRub,815443);
+   assert.equal(fresh.calculation.breakdown.find((l:any)=>l.id==="bank-transfer")?.amountRub,undefined);
   }
   assert.equal(JSON.stringify(input),before);
-  const missing=await calculateOfferWithCustomerParametersDetailed({...input,greenCornerLogistics:undefined},params);
+  const missing=await calculateOfferWithCustomerParametersDetailed({...input,greenCornerInvoice:undefined},params);
   assert.equal(missing.ok,false);
  }finally{read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
@@ -145,4 +145,19 @@ test("Green stock defaults missing fuel and preserves known powertrains",()=>{
  assert.equal(withGreenCornerFuel({...offer,fuel:"diesel"}).fuel,"diesel");
  assert.equal(withGreenCornerFuel({...offer,fuel:undefined,powertrainKind:"electric"}).fuel,"electric");
  assert.equal(withGreenCornerFuel({...offer,fuel:undefined,powertrainKind:"other_hybrid"}).fuel,"hybrid");
+});
+
+
+test("CIF terms come from source; unsupported conditional freight cannot become a fixed quote",async()=>{
+ const request=(conditions:any[]=[])=>async(url:string)=>({ok:true,json:async()=>({data:url.includes('/auto/calculator')
+  ? {params:{nodes:[{parameter:'automobile_freight',constant:'74000',paramGroupConditions:conditions}]}}
+  : {exchangeRate:{sell:56.7,nominal:100}}})});
+ const terms=await collectGreenInvoiceTerms(request());
+ assert.equal(terms.cifFreightJpy,74000);
+ assert.equal(terms.paymentQuote.nominal,100);
+ const honda=normalizeGreenCorner({...row,priceInJapan:2500000,...terms},rate,now);
+ assert.equal(honda.sourcePrice,2574000);
+ assert.equal(honda.sellerPriceRub,1459458);
+ await assert.rejects(()=>collectGreenInvoiceTerms(request([{value:'90000'}])),/terms_invalid/);
+ assert.throws(()=>normalizeGreenCorner({...row,cifFreightJpy:undefined},rate,now));
 });

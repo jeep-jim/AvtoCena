@@ -31,7 +31,7 @@ test('detail recommendations retain trusted source identity after publicOffer sa
 });
 
 test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{
- const source={id:713390,isSold:false,location:'japan',subgroup:'auto',priceInJapanCurrency:'JPY',priceInJapan:1000000,year:2026,horsepower:118,company:'HONDA',model:'VEZEL',media:['https://img.akebono.world/cars/713390.jpg']};
+ const source={cifFreightJpy:74000,paymentQuote:{sell:56.7,nominal:100,fetchedAt:"2026-09-22"},id:713390,isSold:false,location:'japan',subgroup:'auto',priceInJapanCurrency:'JPY',priceInJapan:1000000,year:2026,horsepower:118,company:'HONDA',model:'VEZEL',media:['https://img.akebono.world/cars/713390.jpg']};
  const full=normalizeGreenCorner(source,{currency:'JPY',rateSource:'cbr',effectiveRate:0.6,rateDate:'2026-09-22'} as any,'2026-09-22');
  const {operational,vin,frameNumber,...published}=full;
  assert.equal(isRenderableRelatedOffer(published),true);

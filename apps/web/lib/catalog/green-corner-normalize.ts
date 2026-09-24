@@ -10,8 +10,9 @@ export function greenCornerFobPrice(row:any,now:string):number {
  return Number.isFinite(percent)&&percent>0&&percent<100 ? Math.ceil(base*(1-percent/100)) : base;
 }
 export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, now = new Date().toISOString()): VehicleOffer {
- const sourcePrice=greenCornerFobPrice(row,now), year=Number(row.year), powerHp=Number(row.horsepower);
+ const sourcePrice=greenCornerFobPrice(row,now)+Number(row.cifFreightJpy), year=Number(row.year), powerHp=Number(row.horsepower);
  if(!/^\d+$/.test(String(row.id)) || row.isSold!==false || row.location!=="japan" || !["auto","oneprice"].includes(row.subgroup)
+  || !Number.isFinite(row.cifFreightJpy) || row.cifFreightJpy<0
   || row.priceInJapanCurrency!=="JPY" || !(sourcePrice>0) || !Number.isFinite(sourcePrice)
   || !Number.isInteger(year) || year<1950 || year>new Date(now).getUTCFullYear()+1
   || !String(row.company||"").trim() || !String(row.model||"").trim()) throw Error("green_invalid_listing");
@@ -21,7 +22,10 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
   try{const u=new URL(String(url));return u.protocol==="https:"&&u.hostname==="img.akebono.world"&&!u.port&&!u.username&&!u.password&&/\.(jpe?g|png|webp)$/i.test(u.pathname);}catch{return false;}
  }))];
  if(!urls.length)throw Error("green_missing_photos");
- const baseRub=Math.round(sourcePrice*unitRate.effectiveRate);
+ const quote=row.paymentQuote;
+ if(!(quote?.sell>0) || !(quote?.nominal>0) || !Number.isFinite(Date.parse(quote.fetchedAt)))throw Error("green_invalid_payment_quote");
+ const paymentRate={...unitRate,effectiveRate:quote.sell/quote.nominal,cbrRate:quote.sell,nominal:quote.nominal,rateSource:"atb_akebono" as const,rateDate:quote.fetchedAt,fetchedAt:quote.fetchedAt};
+ const baseRub=Math.round(sourcePrice*paymentRate.effectiveRate);
  const text=(value:unknown)=>typeof value==="string"&&value.trim()?value.trim():undefined;
  const productionDate=text(row.dateOfManufacture);
  const validDate=productionDate && /^\d{4}-\d{2}-\d{2}$/.test(productionDate) && Number.isFinite(Date.parse(productionDate))
@@ -44,8 +48,9 @@ export function normalizeGreenCorner(row: any, unitRate: CurrencyRateSnapshot, n
   fuel:text(row.fuel),
   color:text(row.color), productionDate:validDate,
   transmission:text(row.transmission), drive:({FF:"fwd",FR:"rwd",FULLTIME4WD:"awd",PARTTIME4WD:"awd"} as Record<string,string>)[row.driveType], auctionGrade:text(row.scores),
+  greenCornerInvoice:{basis:"CIF",freightJpy:row.cifFreightJpy,capturedAt:now,paymentQuote:row.paymentQuote},
   sourcePrice,sourceCurrency:"JPY",catalogPricingMode:"seller",sellerPriceRub:baseRub,totalRub:null,calculationStatus:"needs_data",
-  calculationSnapshot:{currencyRate:{...unitRate,sourcePrice,sourcePriceRub:sourcePrice*unitRate.effectiveRate},sourcePriceRub:baseRub,pricingConfidence:"unavailable"},
+  calculationSnapshot:{currencyRate:{...paymentRate,sourcePrice,sourcePriceRub:sourcePrice*paymentRate.effectiveRate},sourcePriceRub:baseRub,pricingConfidence:"unavailable"},
   images:urls.map((url,index)=>({id:`green-${row.id}-${index}`,url,objectKey:"",size:0,checksum:"",mimeType:/\.png$/i.test(url)?"image/png":/\.webp$/i.test(url)?"image/webp":"image/jpeg"})),
   firstSeenAt:now,updatedAt:now,
   operational:{sourceUrl,sourcePublishedAt:row.createdAt,sourceVenueName:"Akebono · Зелёный угол",
