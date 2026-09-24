@@ -79,7 +79,7 @@ test("catalog helper popovers preserve card rounding and currency opens only on 
 test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /trendUsesCurrency/);
   assert.match(priceTrend, /const currencyImpactRub = currencyDelta\(pricedOffer\) \|\| undefined/);
-  assert.match(priceTrend, /const canShowRate = !greenCorner && Boolean\(sheetRate\)/);
+  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate\)/);
   assert.match(priceTrend, /\{sheetRate \? <CurrencyRatesSheet/);
   assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
   assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);
