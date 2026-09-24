@@ -1,3 +1,4 @@
+import {isGreenCornerOffer} from "./green-corner-contract";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { unstable_cache } from "next/cache";
 import { japanPreviewParameters } from "./japan-preview-parameters";
@@ -44,6 +45,17 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
       const offer = offers[index];
       if ((offer as any).savedCalculationPreview || offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
       try {
+        if(isGreenCornerOffer(offer)) {
+          // Stock refresh is independent of auction generations and detail caches.
+          // Calculate the currently published CIF, never an older cached FOB row.
+          const parameters=japanPreviewParameters(offer as VehicleOffer);
+          const fresh=await calculateOfferWithCustomerParametersDetailed(offer as VehicleOffer,parameters);
+          if(fresh.ok && Number(fresh.calculation.totalRub)>0) result[index]={...offer,japanDeliveredPreview:{
+            totalRub:fresh.calculation.totalRub,currencyRate:fresh.calculation.currencyRate,
+            deliveryPricingBasis:fresh.calculation.deliveryPricingBasis,engineCc:parameters.engineCc,estimated:true,
+            japanExportRestriction:assessJapanExportRestriction(offer)}};
+          continue;
+        }
         const quote = await preview(offer.id, JSON.stringify([offer.updatedAt, offer.sourcePrice, configuration, new Date().toISOString().slice(0, 10)]), generationId, offer.updatedAt || "", offer.sourcePrice ?? null, offer.sourceCurrency ?? null);
         if (quote) result[index] = { ...offer, japanExportRestriction: quote.japanExportRestriction, japanDeliveredPreview: quote };
       } catch { /* A failed estimate preserves the explicitly labelled source price. */ }
