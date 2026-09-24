@@ -16,7 +16,7 @@ export async function directOfferScenario(offer: VehicleOffer, savedKnownAbsent 
   if (!result.ok || !Number.isFinite(result.calculation.totalRub) || !(Number(result.calculation.totalRub)>0)) return null;
   const date=parameters.productionDate?.split('-') || [];
   const draft = saved ? {...saved.draft,deliveryCity:DIRECT_CITY} : Object.fromEntries(Object.entries({
-    year:parameters.year,productionMonth:date[1],productionDay:date[2],fuel:parameters.fuel,
+    year:parameters.year,productionMonth:date[1]?String(Number(date[1])):undefined,productionDay:date[2]?String(Number(date[2])):undefined,fuel:parameters.fuel,
     engineCc:parameters.engineCc,powerHp:parameters.powerHp,powerKw:parameters.powerKw,
     hybridKind:parameters.powertrainKind,power30MinKw:parameters.power30MinKw,icePowerKw:parameters.icePowerKw,
     vehicleCategory:parameters.vehicleCategory,grossVehicleWeightKg:parameters.grossVehicleWeightKg,
