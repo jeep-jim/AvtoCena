@@ -154,9 +154,9 @@ try{
     await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.ok(Math.abs(Number(requests.at(-1)?.powerKw)-150*0.73549875)<1e-7);
     const hp=grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true});
     const kw=grid.getByRole('spinbutton',{name:'Мощность, кВт (если известна)',exact:true});
-    await kw.fill('110');assert.ok(Math.abs(Number(await hp.inputValue())-110/0.73549875)<1e-7,'editing kW updates horsepower');
+    await kw.fill('110');assert.equal(await hp.inputValue(),'150','rounding kW preserves manually entered horsepower');
     await hp.fill('160');assert.ok(Math.abs(Number(await kw.inputValue())-160*0.73549875)<1e-7);
-    await kw.fill('');assert.equal(await hp.inputValue(),'');
+    await kw.fill('');assert.equal(await hp.inputValue(),'160','clearing kW preserves manually entered horsepower');
     await hp.fill('150');await hp.press('Enter');assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'Enter commits manual input and closes');
     await triggers.nth(3).click();if(await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).getAttribute('aria-expanded')==='false')await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).click();
     await grid.locator('[aria-label="Варианты: Мощность, л.с."]').getByRole('button',{name:'120',exact:true}).click();
