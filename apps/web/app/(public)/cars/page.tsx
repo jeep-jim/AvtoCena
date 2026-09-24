@@ -130,7 +130,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const japanAll = selectedMarket === "japan" && first(params.stock) === "all";
   const green = overviewEligible || japanAll ? await readGreenCorner().catch(()=>null) : null;
   const greenMatched = japanAll && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
-  const greenItems = await applyActiveBusinessPricingBatch(greenMatched.slice(0,10).map(publicGreenOffer));
+  const greenItems = japanAll ? greenMatched.slice(0,10).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,10).map(publicGreenOffer));
   if (japanAll && green) {
     facets={...facets};
     const stockFacets=greenCornerFacets(green.items);

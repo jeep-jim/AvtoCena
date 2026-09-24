@@ -1,4 +1,5 @@
 "use client";
+import { readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
@@ -107,7 +108,7 @@ function draftFromInitial(initial: Record<string, string>): FilterDraft {
   return {
     stock: initial.stock || "",
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
-    yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: (initial.stock === "green" ? initial.fobFrom : initial.budgetFrom) || "", budget: (initial.stock === "green" ? initial.fobTo : initial.budget || initial.budgetTo) || "",
+    yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
     auctionGrade: initial.market === "japan" ? auctionGradeLabel(initial.auctionGrade) || "" : "",
     fuel: initial.fuel || "", drive: initial.drive || "", powerTo: initial.powerTo || "",
@@ -127,7 +128,7 @@ function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortD
   add("make", draft.make); add("model", draft.model); add("market", draft.market);
   add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
   add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
-  add(draft.stock === "green" ? "fobFrom" : "budgetFrom", draft.budgetFrom); add(draft.stock === "green" ? "fobTo" : "budget", draft.budget);
+  add("budgetFrom", draft.budgetFrom); add("budget", draft.budget);
   add("mileageFrom", draft.mileageFrom); add("mileageTo", draft.mileageTo);
   add("engineFrom", draft.engineFrom); add("engineTo", draft.engineTo); add("powerTo", draft.powerTo);
   const sort = sortParam(sortKey, sortDirection);
@@ -266,7 +267,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
-        <DualRange title={draft.stock === "green" ? "Цена FOB" : "Цена"} fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
+        <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
         <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
         <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
       </div>
@@ -317,6 +318,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       submitted.current=nextQuery;
       const query=new URLSearchParams(nextQuery);
       const current=new URLSearchParams(window.location.search);
+      const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["city","utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
       startTransition(()=>router.push(query.size ? `${basePath}?${query}` : basePath, { scroll: false }));
@@ -366,10 +368,10 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [draft]);
   const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, draft.bodyType), [activeFacets, draft.bodyType]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
-  const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission]);
+  const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "stock" ? {budget:"",budgetFrom:""} : {}), ...(key === "market" && value !== "japan" ? {auctionGrade: "",stock:""} : {}) }));
+  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "market" && value !== "japan" ? {auctionGrade: "",stock:""} : {}) }));
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
@@ -391,7 +393,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (draft.drive) rows.push({ key: "drive", label: optionLabel(drives, draft.drive) });
     if (draft.powerTo === "160") rows.push({ key: "powerTo", label: "До 160 л.с." });
     if (draft.yearFrom || draft.yearTo) rows.push({ key: "year", label: `Год ${draft.yearFrom ? `от ${draft.yearFrom}` : ""}${draft.yearFrom && draft.yearTo ? " · " : ""}${draft.yearTo ? `до ${draft.yearTo}` : ""}`.trim() });
-    if (draft.budgetFrom || draft.budget) rows.push({ key: "budget", label: `${draft.stock === "green" ? "FOB" : "Цена"} ${draft.budgetFrom ? `от ${formatNumber(Number(draft.budgetFrom))} ₽` : ""}${draft.budgetFrom && draft.budget ? " · " : ""}${draft.budget ? `до ${formatNumber(Number(draft.budget))} ₽` : ""}`.trim() });
+    if (draft.budgetFrom || draft.budget) rows.push({ key: "budget", label: `Цена ${draft.budgetFrom ? `от ${formatNumber(Number(draft.budgetFrom))} ₽` : ""}${draft.budgetFrom && draft.budget ? " · " : ""}${draft.budget ? `до ${formatNumber(Number(draft.budget))} ₽` : ""}`.trim() });
     if (draft.mileageFrom || draft.mileageTo) rows.push({ key: "mileage", label: `Пробег ${draft.mileageFrom ? `от ${formatNumber(Number(draft.mileageFrom))}` : ""}${draft.mileageFrom && draft.mileageTo ? " · " : ""}${draft.mileageTo ? `до ${formatNumber(Number(draft.mileageTo))} км` : ""}`.trim() });
     if (draft.engineFrom || draft.engineTo) rows.push({ key: "engine", label: `Объём ${draft.engineFrom ? `от ${formatNumber(Number(draft.engineFrom))}` : ""}${draft.engineFrom && draft.engineTo ? " · " : ""}${draft.engineTo ? `до ${formatNumber(Number(draft.engineTo))} см³` : ""}`.trim() });
     return rows;

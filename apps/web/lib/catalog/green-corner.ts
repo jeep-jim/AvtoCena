@@ -17,12 +17,9 @@ export async function getGreenCornerOffer(id:string){
 }
 export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,frameNumber,...row}=offer;return row;}
 
-// One currency lookup for stock filters; only the visible page needs full display enrichment.
+// Use the same current calculated rows for filtering, sorting and rendering.
+// Preview calculations are cached and their concurrency is bounded in the shared pipeline.
 export async function currentGreenCornerPrices(items:VehicleOffer[]):Promise<VehicleOffer[]> {
- const {greenCornerPaymentRate}=await import("./green-corner-payment-rate");
- return Promise.all(items.map(async offer=>{
-  if(offer.greenCornerInvoice?.basis!=="CIF")return offer;
-  const rate=await greenCornerPaymentRate(offer);if(!rate)return offer;
-  return {...offer,sellerPriceRub:Math.round(rate.sourcePriceRub),calculationSnapshot:{...offer.calculationSnapshot,sourcePriceRub:Math.round(rate.sourcePriceRub),currencyRate:rate}};
- }));
+ const {applyActiveBusinessPricingBatch}=await import("./live-business-pricing");
+ return applyActiveBusinessPricingBatch(items);
 }

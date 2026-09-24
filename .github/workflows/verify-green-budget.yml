@@ -1,0 +1,58 @@
+name: Verify green corner budget
+on:
+  push:
+    branches: [fix/green-budget-20260924, main]
+    paths:
+      - 'apps/web/**'
+      - 'tests/green-corner-filters.test.ts'
+      - 'tests/browser/green-budget*'
+      - '.github/workflows/verify-green-budget.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/green-corner*.test.ts tests/catalog-filter*.test.ts tests/card-city-delivery*.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/green-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Desktop and mobile price controls
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-budget.mjs
+      - name: Wait for exact deployed release and check live budget
+        if: github.ref == 'refs/heads/main'
+        env:
+          EXPECTED_RELEASE: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          let ready=false;
+          for(let i=0;i<60;i++){
+            const health=await fetch('https://avtocena.com/api/health').then(r=>r.json()).catch(()=>({}));
+            if(health.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}
+            await new Promise(r=>setTimeout(r,10000));
+          }
+          assert.ok(ready,'exact release must be live');
+          const result=await fetch('https://avtocena.com/api/catalog/green?budgetFrom=1100000&budget=1200000&sort=totalRub').then(r=>r.json());
+          assert.ok(result.total>0,'budget has real matches');
+          for(const offer of result.items){const price=offer.savedCalculationPreview?.totalRub||offer.japanDeliveredPreview?.totalRub||offer.totalRub;assert.ok(price>=1100000&&price<=1200000,`${offer.id}: ${price}`);}
+          console.log(JSON.stringify({release:process.env.EXPECTED_RELEASE,total:result.total,checked:result.items.length}));
+          JS
+      - name: Live desktop and mobile budget controls
+        if: github.ref == 'refs/heads/main'
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
+          LIVE_ORIGIN: https://avtocena.com
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-budget.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: green-budget-browser
+          path: artifacts/green-budget-*
