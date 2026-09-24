@@ -90,6 +90,7 @@ export default async function CrmLeadsPage({
     status: first(params.status),
     manager: first(params.manager),
     q: first(params.q),
+    date: first(params.date),
   }).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const id = first(params.id);
   const visible = id
@@ -109,7 +110,7 @@ export default async function CrmLeadsPage({
         ].map(([key, label]) => (
           <Link
             key={key}
-            href={`/crm/leads?view=${key}`}
+            href={`/crm/leads?${new URLSearchParams({view: key, ...(first(params.date) ? {date: first(params.date)} : {})})}`}
             className={`rounded-xl px-4 py-2 text-sm font-bold ${view === key ? "bg-red-500 text-white" : "border border-[var(--ac-border)]"}`}
           >
             {label}
@@ -131,6 +132,7 @@ export default async function CrmLeadsPage({
       </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
+        <input type="hidden" name="date" value={first(params.date)} />
         <input
           name="q"
           aria-label="Поиск заявок"
@@ -179,9 +181,17 @@ export default async function CrmLeadsPage({
         </Link>
       </div>
       <ManualLeadForm headerAside={
-        <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
-        <strong>Статусы для Метрики</strong><LeadStatusHelp />
-      </div>
+        <div className="crm-lead-toolbar-aside">
+          <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
+            <strong>Статусы для Метрики</strong><LeadStatusHelp />
+          </div>
+      <form className="crm-lead-date-filter" action="/crm/leads">
+        {["view", "q", "status", "manager"].map(key => <input key={key} type="hidden" name={key} value={first(params[key])} />)}
+        <label htmlFor="lead-date">Дата заявки <span>(МСК)</span></label>
+        <input id="lead-date" name="date" type="date" defaultValue={first(params.date)} className="soft-input rounded-xl p-2" />
+        <button type="submit" className="avto-button rounded-xl px-3 py-2 text-sm font-bold">Показать</button>
+      </form>
+        </div>
       } />
       <div className="mt-4 space-y-3">
         {visible.map((lead) => {

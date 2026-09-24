@@ -13,7 +13,7 @@ export const activeLead = (lead: any) => !lead.archivedAt;
 export function filterLeads(
   leads: any[],
   user: AuthUser | null,
-  params: { view?: string; status?: string; manager?: string; q?: string } = {},
+  params: { view?: string; status?: string; manager?: string; q?: string; date?: string } = {},
 ) {
   const q = (params.q || "").trim().toLocaleLowerCase("ru");
   return leads
@@ -27,6 +27,7 @@ export function filterLeads(
         lead.assignedManagerId === user?.id ||
         lead.createdByManagerId === user?.id,
     )
+    .filter((lead) => !params.date || leadDateKey(lead.createdAt) === params.date)
     .filter((lead) => !params.status || lead.status === params.status)
     .filter(
       (lead) =>
@@ -50,4 +51,11 @@ export function filterLeads(
           .toLocaleLowerCase("ru")
           .includes(q),
     );
+}
+
+/** Same Moscow calendar day as the date displayed in CRM. */
+export function leadDateKey(value: unknown) {
+  const date = new Date(String(value || ""));
+  if (!Number.isFinite(date.getTime())) return "";
+  return new Intl.DateTimeFormat("en-CA", {timeZone: "Europe/Moscow", year: "numeric", month: "2-digit", day: "2-digit"}).format(date);
 }

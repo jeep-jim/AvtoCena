@@ -10,6 +10,7 @@ export function ClientCreateForm() {
   const operationIdRef = useRef<string>(crypto.randomUUID());
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [createdClientId, setCreatedClientId] = useState("");
   const [error, setError] = useState("");
   const [form, setForm] = useState({
     fio: "",
@@ -50,6 +51,8 @@ export function ClientCreateForm() {
         throw new Error(payload?.error === "storage_write_failed" ? "storage_write_failed" : "client_create_error");
       }
 
+      const payload = await response.json();
+      setCreatedClientId(payload.client.id);
       setSent(true);
       setForm({ fio: "", phone: "+7", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
       operationIdRef.current = crypto.randomUUID();
@@ -68,7 +71,7 @@ export function ClientCreateForm() {
 
       <div className="mt-3 grid grid-cols-2 gap-3">
         <input value={form.fio} onChange={(event) => update("fio", event.target.value)} placeholder="ФИО клиента" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
-        <PhoneInput value={form.phone} onChange={value => update("phone", value)} />
+        <PhoneInput className="col-span-2" value={form.phone} onChange={value => update("phone", value)} />
         <input value={form.telegram} onChange={(event) => update("telegram", event.target.value)} placeholder="Telegram" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Город" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.budgetRub} onChange={(event) => update("budgetRub", event.target.value)} placeholder="Бюджет, ₽" inputMode="numeric" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
@@ -77,7 +80,7 @@ export function ClientCreateForm() {
       </div>
 
       {error && <div className="mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">{error}</div>}
-      {sent && <div className="mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен. Заявка создана и назначена на вас.</div>}
+      {sent && <div className="mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен. Заявка создана и назначена на вас. <a className="mt-2 block underline" href={`/crm/clients/${encodeURIComponent(createdClientId)}`}>Открыть карточку и прикрепить документы →</a></div>}
 
       <button disabled={loading} className="avto-button mt-5 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60">
         {loading ? "Сохраняем..." : "Добавить клиента"}
