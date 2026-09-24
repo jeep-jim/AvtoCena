@@ -2,7 +2,7 @@ name: Storage and homepage performance check
 on:
   workflow_dispatch:
   push:
-    branches: [fix/storage-speed-finish-20260920]
+    branches: [fix/storage-speed-finish-20260920, fix/catalog-memory-recovery-20260924]
 permissions:
   contents: read
 jobs:
