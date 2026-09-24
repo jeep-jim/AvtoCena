@@ -1,5 +1,6 @@
 {
-  "operation": "catalog-cold-page-backfill-20260924",
+  "operation": "catalog-cold-page-post-china-20260924",
+  "generationId": "gen_1790218460284_6134de05",
   "appendOnly": true,
-  "reason": "Build compact first-page indexes for the current immutable generation and measure cold/warm reads."
+  "reason": "China retry succeeded from a pre-index worker; build compact indexes for the newly published generation."
 }
