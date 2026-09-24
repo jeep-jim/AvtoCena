@@ -545,6 +545,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  marketLandingCache.clear();
   filteredSearchCache.clear();
   preparedProjectionRows = new WeakMap();
   resetCatalogOverviewCache();
@@ -949,7 +950,73 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
     bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive),
   };
 }
+// First eight pages use exactly the same sort/source balancing as full search.
+// Immutable, generation-scoped objects avoid parsing an entire market on cold starts.
+const MARKET_LANDING_LIMIT = 192;
+type MarketLanding = {
+  version: 1; generationId: string; market: string; sourceTotal: number;
+  total: number; items: CatalogSearchProjection[]; facets: CatalogFacets;
+};
+export function catalogMarketLandingPath(generationId: string, market: string) {
+  return generationPath(generationId, `indexes/market-landing-v1/${cleanShard(market)}.json`);
+}
+const marketLandingCache = new DetailReadCache<MarketLanding>({maxEntries: 8, maxBytes: 12_000_000, ttlMs: 300_000, concurrency: 4});
+function canUseMarketLanding(params: CatalogSearchParams) {
+  return isActivePublicCatalogMarket(params.market)
+    && (!params.sort || params.sort === "updatedAt")
+    && Object.entries(params).every(([key, value]) => ["market", "sort", "page", "pageSize"].includes(key) || !value);
+}
+export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[]): Promise<MarketLanding> {
+  const rows = prepareCatalogProjectionRows(items);
+  sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
+  return {version: 1, generationId, market, sourceTotal: items.length, total: rows.length,
+    items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
+}
+async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
+  if (!canUseMarketLanding(params)) return null;
+  const manifest = await readManifest();
+  const market = String(params.market);
+  const path = catalogMarketLandingPath(manifest.generationId, market);
+  try {
+    return await marketLandingCache.get(path, async () => {
+      const value = await readDataJson<MarketLanding | null>(path, null);
+      if (!value || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
+        || value.sourceTotal !== Number(manifest.markets?.[market]?.count || 0)
+        || !Number.isInteger(value.total) || value.total < 0 || value.total > value.sourceTotal
+        || !Array.isArray(value.items) || value.items.length !== Math.min(value.total, MARKET_LANDING_LIMIT)
+        || value.facets?.generationId !== manifest.generationId
+        || value.items.some(row => row.market !== market || !projectionCanRenderCard(row))) {
+        // Do not cache missing objects: a legacy generation can be backfilled.
+        throw new Error("catalog_market_landing_unavailable");
+      }
+      return value;
+    });
+  } catch { return null; } // Existing full search remains the authoritative fallback.
+}
+/** Append only derived indexes; never change catalog pointers, prices or inventory. */
+export async function backfillCatalogMarketLandings() {
+  const manifest = await readDataJson<CatalogManifest>("catalog/manifest.json", {generationId: "", markets: {}} as CatalogManifest);
+  if (!manifest.generationId) throw new Error("catalog_market_landing_no_generation");
+  const results = [];
+  for (const market of MARKETS) {
+    const count = Number(manifest.markets?.[market]?.count || 0);
+    if (!count) continue;
+    const projection = await readDataJson<{generationId: string; items: CatalogSearchProjection[]} | null>(
+      generationPath(manifest.generationId, `indexes/projection/${cleanShard(market)}.json`), null);
+    if (projection?.generationId !== manifest.generationId || !Array.isArray(projection.items) || projection.items.length !== count) {
+      throw new Error(`catalog_market_landing_incomplete:${market}`);
+    }
+    const landing = await buildCatalogMarketLanding(manifest.generationId, market, projection.items);
+    await writeJsonAtomic(catalogMarketLandingPath(manifest.generationId, market), landing);
+    results.push({market, total: landing.total, samples: landing.items.length, bytes: Buffer.byteLength(JSON.stringify(landing))});
+  }
+  const current = await readDataJson<{generationId: string}>("catalog/manifest.json", {generationId: ""});
+  if (current.generationId !== manifest.generationId) throw new Error("catalog_market_landing_generation_changed_retry");
+  return {generationId: manifest.generationId, results};
+}
 export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  const landing = await readMarketLanding(params);
+  if (landing) return landing.facets;
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
     const manifest = await readManifest();
     return { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
@@ -1337,11 +1404,14 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     const market = String(offer.market || "");
     if (!market) continue;
     const row = searchProjectionFromOffer(offer);
-    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
+    const marketRows = projectionsByMarket.get(market) || [];
+    marketRows.push(row);
+    projectionsByMarket.set(market, marketRows);
   }
   await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {
     const projection = { generationId, items };
     await writeJsonAtomic(generationPath(generationId, `indexes/projection/${cleanShard(market)}.json`), projection);
+    await writeJsonAtomic(catalogMarketLandingPath(generationId, market), await buildCatalogMarketLanding(generationId, market, items));
   });
   const freshness = (offer: VehicleOffer) => Date.parse(String((offer.operational as any)?.sourcePublishedAt || offer.firstSeenAt || offer.updatedAt || "")) || 0;
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).map((o) => o.id) });
@@ -1585,6 +1655,12 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 async function searchOffersStored(params: CatalogSearchParams, internalPageLimit = 48) {
   const page = Math.max(1, Number(params.page || 1));
   const pageSize = Math.min(Math.max(1, Math.min(384, internalPageLimit)), Math.max(1, Number(params.pageSize || 24)));
+  const landing = await readMarketLanding(params);
+  if (landing && (page * pageSize <= landing.items.length || landing.total <= landing.items.length || (page - 1) * pageSize >= landing.total)) {
+    return {generationId: landing.generationId, total: landing.total, page, pageSize,
+      items: landing.items.slice((page - 1) * pageSize, page * pageSize).map(publicOfferFromProjection),
+      usedIndexShards: [catalogMarketLandingPath(landing.generationId, landing.market)]};
+  }
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
     const manifest = await readManifest();
     return { generationId: manifest.generationId, total: 0, page, pageSize, items: [], usedIndexShards: [] };
