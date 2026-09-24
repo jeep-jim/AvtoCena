@@ -1,8 +1,10 @@
 {
-  "operation": "catalog-fresh-independent-sweep-20260922",
+  "operation": "catalog-memory-recovery-20260924",
   "market": "china",
+  "reuseRunId": "35922669965",
   "publishMarkets": [
     "china"
   ],
-  "resetCursors": true
+  "refreshMarkets": [],
+  "reason": "Retry completed intake with bounded reserve reads and 12 GiB publication heap; all regression guards retained."
 }
