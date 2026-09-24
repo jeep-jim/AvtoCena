@@ -316,7 +316,10 @@ function logPublicationMemory(stage) {
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
 }
 if (!dryRun) await acquirePublishLock();
+// Recheck after acquiring the shared lease: another publisher may have grown
+// the bucket while this process waited. Never start writes on a stale estimate.
 try {
+if (!dryRun && process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
 const expectedBaseGenerationId = await catalogGenerationId();
 logPublicationMemory("before_intake");
 const generation = await readGenerationFiles();
