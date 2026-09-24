@@ -34,9 +34,22 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
     ? { totalRub: result.calculation.totalRub, currencyRate:result.calculation.currencyRate, deliveryPricingBasis:result.calculation.deliveryPricingBasis, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
 }, ["japan-delivered-preview-v8-bound-rate"], { revalidate: 900 });
 
+// Stock refresh is independent of auction generations. Cache only the exact
+// current invoice/specifications/rate/settings combination, for at most a minute.
+// A changed invoice, bank quote or market configuration gets a different key.
+const greenPreview = unstable_cache(async (offer: VehicleOffer, _revision: string) => {
+  const parameters = japanPreviewParameters(offer);
+  const fresh = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
+  return fresh.ok && Number(fresh.calculation.totalRub) > 0 ? {
+    totalRub: fresh.calculation.totalRub, currencyRate: fresh.calculation.currencyRate,
+    deliveryPricingBasis: fresh.calculation.deliveryPricingBasis, engineCc: parameters.engineCc,
+    estimated: true, japanExportRestriction: assessJapanExportRestriction(offer),
+  } : null;
+}, ["green-cif-preview-v1"], { revalidate: 60 });
+
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];
-  const generationId = offers.some(o=>o.market==="japan" && o.catalogPricingMode==="seller") ? await catalogGenerationId() : "";
+  const generationId = offers.some(o=>o.market==="japan" && o.catalogPricingMode==="seller" && !isGreenCornerOffer(o)) ? await catalogGenerationId() : "";
   let cursor = 0;
   // Only visible cards, bounded storage/calculation concurrency, no browser fan-out.
   await Promise.all(Array.from({ length: Math.min(4, offers.length) }, async () => {
@@ -46,14 +59,8 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
       if ((offer as any).savedCalculationPreview || offer.market !== "japan" || offer.catalogPricingMode !== "seller" || !offer.id) continue;
       try {
         if(isGreenCornerOffer(offer)) {
-          // Stock refresh is independent of auction generations and detail caches.
-          // Calculate the currently published CIF, never an older cached FOB row.
-          const parameters=japanPreviewParameters(offer as VehicleOffer);
-          const fresh=await calculateOfferWithCustomerParametersDetailed(offer as VehicleOffer,parameters);
-          if(fresh.ok && Number(fresh.calculation.totalRub)>0) result[index]={...offer,japanDeliveredPreview:{
-            totalRub:fresh.calculation.totalRub,currencyRate:fresh.calculation.currencyRate,
-            deliveryPricingBasis:fresh.calculation.deliveryPricingBasis,engineCc:parameters.engineCc,estimated:true,
-            japanExportRestriction:assessJapanExportRestriction(offer)}};
+          const quote = await greenPreview(offer as VehicleOffer, JSON.stringify([configuration, new Date().toISOString().slice(0,10)]));
+          if (quote) result[index] = {...offer, japanDeliveredPreview: quote};
           continue;
         }
         const quote = await preview(offer.id, JSON.stringify([offer.updatedAt, offer.sourcePrice, configuration, new Date().toISOString().slice(0, 10)]), generationId, offer.updatedAt || "", offer.sourcePrice ?? null, offer.sourceCurrency ?? null);

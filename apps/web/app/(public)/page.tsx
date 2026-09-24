@@ -43,17 +43,21 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const catalog = await readHomeCatalogSnapshot(10).catch((error) => {
-    console.error("home_initial_catalog_failed", error);
-    return { items: [], marketCounts: {}, total: 0 };
-  });
-  const green = await readGreenCorner().catch(()=>null);
-  const greenItems = await applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer));
-  const pricedItems = await applyActiveBusinessPricingBatch(catalog.items).catch((error) => {
-    console.error("home_initial_pricing_failed", error);
-    // Preserve the last audited quote if settings storage is temporarily down.
-    return catalog.items;
-  });
+  const [catalog, green] = await Promise.all([
+    readHomeCatalogSnapshot(10).catch((error) => {
+      console.error("home_initial_catalog_failed", error);
+      return { items: [], marketCounts: {}, total: 0 };
+    }),
+    readGreenCorner().catch(() => null),
+  ]);
+  const [greenItems, pricedItems] = await Promise.all([
+    applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)),
+    applyActiveBusinessPricingBatch(catalog.items).catch((error) => {
+      console.error("home_initial_pricing_failed", error);
+      // Preserve the last audited quote if settings storage is temporarily down.
+      return catalog.items;
+    }),
+  ]);
   return <>
     <div className={styles.scope}>
       <HomePageClient

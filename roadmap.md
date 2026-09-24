@@ -1,3 +1,11 @@
+## 2026-09-24 — CIF Зелёного угла, фактические расписания и ускорение страниц
+
+Завершены PR #1155/#1156: CIF-инвойс в JPY/RUB, АТБ через Akebono для оплаты и ЦБ для таможни; удалены отдельная международная логистика и банковские 7,5%, сохранена комиссия дилера. Цена открывает курс также на зелёных плитках с оценкой. Опубликованы 455 автомобилей, Honda 709602 проверена на живом сайте.
+
+[Подробный проверяемый отчёт](docs/audits/catalog-schedule-performance-2026-09-24.md): расписания действуют, но Китай/Европа упали на RAM при публикации; Грузия защищена от падения 7 888 → 3 081, Корея на момент проверки собирается. ОАЭ опубликованы 23.09 23:23 UTC, Green 24.09 01:41 UTC. Япония завершила цикл 22.09; ежедневная проверка 23.09 штатно не перезапускала свежий 14-дневный цикл. Следующие слоты 72-часового календаря — 26.09 UTC (27.09 Новокузнецк). Не заявлять полную исправность рынков/80–20/готовность к рекламе: открытые проблемы перечислены в отчёте.
+
+Для скорости подготовлены параллельная загрузка независимых подборок главной, минутный кеш точного CIF-расчёта Green и исключение ненужного чтения аукционного поколения. Десять исходных HTTP-замеров: все 200; внешняя сеть существенно влияет на время. Сырые данные и ограничения методики сохранены в отчёте. Финальный результат публикации будет дополнен после проверки.
+
 ## 2026-09-22 07:57 UTC — recovery verified, remaining gates explicit
 
 Six recovery publications completed: public total 83,609 versus 76,065; Green stock adds 447 separately. China meets 80/20, Autohome 4.913%; other non-Japan markets still need verified low-power supply. Fresh Europe collection awaits safe storage reserve; cleanup freed 4.62 GB, six-hour grace and 50 GB budget remain enforced. VPN/502 diagnosis remains open, cloud metrics read returned 403. Green #1125 and revised full Japan pricing #1128 are on main; detail status/filtered rail and cleanup-completion follow-up #1127 pending. See [verified execution checkpoint](docs/audits/catalog-autonomy-recovery-progress-2026-09-22.md) and [Green contract](docs/audits/green-corner-2026-09-22.md). Do not represent these remaining gates as finished.
