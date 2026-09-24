@@ -81,7 +81,7 @@ try {
    await page.screenshot({path:`${out}/unavailable-${width}-${theme}.png`});
    if(staff){
     await page.goto(origin+'/?crm=1&staff=1&theme='+theme);
-    const docs=page.getByRole('button',{name:'Документы',exact:true});await docs.waitFor();
+    const docs=page.getByRole('link',{name:'Документы',exact:true});await docs.waitFor();assert.equal(await docs.getAttribute('href'),'/crm/documents');
     assert.equal(await docs.evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(245, 158, 11)');
     const d=await docs.boundingBox(),tg=await page.getByRole('link',{name:'Telegram',exact:true}).boundingBox();assert.ok(d.x>tg.x&&Math.abs(d.y-tg.y)<1,'Documents follows Telegram');
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'CRM fits viewport');
