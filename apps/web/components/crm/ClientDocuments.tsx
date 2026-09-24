@@ -16,6 +16,12 @@ export function ClientDocuments({clientId,documents}:{clientId:string;documents:
   catch(e){setError(e instanceof Error?e.message:"Не удалось открыть документ.");}
   finally{setOpening(false);}
  }
+ async function trash(doc:ClientDocument) {
+  if(!window.confirm(`Удалить «${doc.name}»? Даже если это договор, его можно будет восстановить: файл попадёт в корзину в «Архиве» на 30 дней, затем удалится автоматически. Переместить в корзину?`))return;
+  setBusy(true);setError("");setMessage("");
+  try{const response=await fetch(url(doc),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"trash",confirmed:true})});if(!response.ok)throw Error("Не удалось переместить документ в корзину. Повторите попытку.");setMessage("Документ в корзине. Восстановить его можно в разделе «Архив».");router.refresh();}
+  catch(e){setError(e instanceof Error?e.message:"Не удалось удалить документ.");}finally{setBusy(false);}
+ }
  async function upload(files:FileList|null) {
   if(!files?.length)return;
   setBusy(true);setError("");setMessage("");let saved=0;
@@ -41,9 +47,10 @@ export function ClientDocuments({clientId,documents}:{clientId:string;documents:
   {message&&<p role="status" className="mt-3 text-sm">{message}</p>}{error&&<p role="alert" className="mt-3 text-sm text-red-500">{error}</p>}
   <div className="crm-client-files-grid">{documents.map(doc=><article key={doc.id} className="crm-client-file">
    {doc.hasThumbnail||doc.mime==="application/pdf"?<button type="button" className="crm-client-file-preview" aria-label={`Просмотреть ${doc.name}`} disabled={opening} onClick={()=>void openDocument(doc)}>{doc.hasThumbnail?<img src={`${url(doc)}?preview=1`} alt="" loading="lazy" />:<span>PDF · Просмотр</span>}</button>:<a href={`${url(doc)}?download=1`} className="crm-client-file-preview" aria-label={`Скачать ${doc.name}`}>{doc.name.split(".").pop()?.toUpperCase()||"Файл"}</a>}
-   <div className="crm-client-file-info"><strong>{doc.name}</strong><small>{Math.max(1,Math.round(doc.size/1024))} КБ</small><div><a href={`${url(doc)}?download=1`}>Скачать</a></div></div>
+   <div className="crm-client-file-info"><strong>{doc.name}</strong><small>{Math.max(1,Math.round(doc.size/1024))} КБ</small><div className="crm-file-actions"><a href={`${url(doc)}?download=1`}>Скачать</a><button type="button" disabled={busy} onClick={()=>void trash(doc)} aria-label={`Удалить ${doc.name}`}>Удалить</button></div></div>
   </article>)}</div>
   {!documents.length&&<p className="mt-4 text-sm text-[var(--ac-muted)]">Документы пока не прикреплены.</p>}
+  <a className="crm-trash-link" href="/crm/leads?view=archive#document-trash">Корзина документов →</a>
   <dialog ref={dialog} className="crm-file-dialog" onClose={()=>setPreview(null)} aria-label="Просмотр документа">
    {preview&&<><header><strong>{preview.name}</strong><button type="button" aria-label="Закрыть просмотр" onClick={()=>dialog.current?.close()}>Закрыть ×</button></header><img src={url(preview)} alt={preview.name} /><a href={`${url(preview)}?download=1`} className="text-sm underline">Скачать файл</a></>}
   </dialog>

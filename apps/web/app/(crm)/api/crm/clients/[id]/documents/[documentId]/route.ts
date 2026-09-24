@@ -2,6 +2,8 @@ import {getCurrentUser,isCrmRole} from "@/lib/auth";
 import {canSeeLead} from "@/lib/crm-visibility";
 import {getJsonStorage,readChunkedDataJson} from "@/lib/data";
 import {documentKey,decryptClientDocument,type ClientDocument} from "@/lib/client-documents";
+import {changeDocumentState,purgeDocument,documentExpired} from "@/lib/client-document-trash";
+import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 export async function GET(request:Request,{params}:{params:Promise<{id:string;documentId:string}>}) {
@@ -11,7 +13,7 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string;do
  const client=(await readChunkedDataJson<any>("clients/clients.json",[])).find(c=>c.id===id);
  if(!client||!canSeeLead(user,client)) return new Response(null,{status:404});
  const doc:ClientDocument|undefined=client.documents?.find((d:ClientDocument)=>d.id===documentId);
- if(!doc||!/^[a-f0-9-]{36}$/.test(documentId)) return new Response(null,{status:404});
+ if(!doc||doc.purgeToken||documentExpired(doc)||!/^[a-f0-9-]{36}$/.test(documentId)) return new Response(null,{status:404});
  try {
   const key=documentKey(id,documentId),stored=await getJsonStorage().getBinary?.(key);
   if(!stored) return new Response(null,{status:404});
@@ -27,4 +29,22 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string;do
    "Content-Security-Policy":"sandbox; default-src 'none'; frame-ancestors 'self'",
   }});
  } catch { return new Response(null,{status:500}); }
+}
+
+export async function PATCH(request:Request,{params}:{params:Promise<{id:string;documentId:string}>}) {
+ if(!isCalculationOriginAllowed(request))return Response.json({error:"Недопустимый источник запроса."},{status:403});
+ const actor=await getCurrentUser();
+ if(!actor||!isCrmRole(actor.role))return Response.json({error:"Войдите в CRM."},{status:401});
+ const body=await request.json().catch(()=>null);
+ if(!body||!["trash","restore","purge"].includes(body.action)||(body.action!=="restore"&&body.confirmed!==true))return Response.json({error:"Подтвердите удаление документа."},{status:400});
+ const {id,documentId}=await params;
+ try{
+  if(body.action==="purge")await purgeDocument(actor,id,documentId);
+  else await changeDocumentState(actor,id,documentId,body.action);
+  return Response.json({ok:true},{headers:{"Cache-Control":"no-store"}});
+ }catch(error){
+  const code=error instanceof Error?error.message:"storage";
+  const messages:Record<string,string>={document_forbidden:"Нет доступа к клиенту.",document_not_found:"Документ не найден.",document_purging:"Документ уже удаляется. Восстановление недоступно.",document_expired:"Срок хранения 30 дней истёк.",document_not_trashed:"Сначала переместите документ в корзину."};
+  return Response.json({error:messages[code]||"Не удалось сохранить изменение. Попробуйте ещё раз."},{status:code==="document_forbidden"?403:code==="document_not_found"?404:messages[code]?409:500});
+ }
 }

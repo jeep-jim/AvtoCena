@@ -26,7 +26,7 @@ test('document routes isolate clients, reject forgery and roll back failed write
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__clientDocuments.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);`,
  '@/lib/data':`const s=globalThis.__clientDocuments;export const readChunkedDataJson=async()=>[s.client];export const updateChunkedDataJson=async(p,id,fn)=>{if(s.race)s.client.assignedManagerId='other';if(s.fail)throw Error('storage');return s.client=fn(s.client)};export const getJsonStorage=()=>({putBinary:async(k,b)=>{s.binary.set(k,b)},deleteBinary:async k=>s.binary.delete(k),getBinary:async k=>{s.reads++;return s.binary.has(k)?{data:s.binary.get(k)}:null}});`
  };
- async function route(path:string){const built=await build({entryPoints:[path],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mock',setup(b){b.onResolve({filter:/^@\/lib\//},a=>sources[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:sources[a.path],loader:'ts',resolveDir:process.cwd()}));}}]});const m={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,m,m.exports);return m.exports;}
+ async function route(path:string){const built=await build({entryPoints:[path],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mock',setup(b){b.onResolve({filter:/^(@\/lib\/|\.\/data$)/},a=>{const key=a.path==='./data'?'@/lib/data':a.path;return sources[key]?{path:key,namespace:'mock'}:undefined});b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:sources[a.path],loader:'ts',resolveDir:process.cwd()}));}}]});const m={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,m,m.exports);return m.exports;}
  const post=await route('apps/web/app/(crm)/api/crm/clients/[id]/documents/route.ts');
  const get=await route('apps/web/app/(crm)/api/crm/clients/[id]/documents/[documentId]/route.ts');
  const upload=(origin='https://avtocena.com')=>{const f=new FormData();f.set('file',new File(['%PDF-1.4\nfixture'],'contract.pdf'));return post.POST(new Request('https://avtocena.com/api/crm/clients/c/documents',{method:'POST',headers:{origin},body:f}),{params:Promise.resolve({id:'c'})});};
@@ -40,6 +40,12 @@ test('document routes isolate clients, reject forgery and roll back failed write
   const file=await download(document.id);assert.equal(file.status,200);assert.match(file.headers.get('cache-control')||'',/no-store/);assert.equal(await file.text(),'%PDF-1.4\nfixture');
   state.user={id:'other',role:'manager'};const reads=state.reads;assert.equal((await download(document.id)).status,404);assert.equal(state.reads,reads);
   state.user={id:'m',role:'manager'};assert.equal((await download(document.id,'other-client')).status,404);
+  const patch=(action:string,confirmed?:boolean,origin='https://avtocena.com')=>get.PATCH(new Request('https://avtocena.com/api/file',{method:'PATCH',headers:{origin,'content-type':'application/json'},body:JSON.stringify({action,confirmed})}),{params:Promise.resolve({id:'c',documentId:document.id})});
+  assert.equal((await patch('trash')).status,400);assert.equal((await patch('trash',true,'https://evil.example')).status,403);
+  state.user={id:'other',role:'manager'};assert.equal((await patch('trash',true)).status,403);state.user={id:'m',role:'manager'};
+  assert.equal((await patch('purge',true)).status,409);assert.equal((await patch('trash',true)).status,200);assert.ok(state.client.documents[0].deletedAt);assert.equal(state.binary.size,1);
+  assert.equal((await patch('restore')).status,200);assert.equal(state.client.documents[0].deletedAt,undefined);
+  state.client.documents[0].deletedAt='2020-01-01T00:00:00Z';assert.equal((await download(document.id)).status,404);assert.equal((await patch('restore')).status,409);delete state.client.documents[0].deletedAt;
   state.fail=true;assert.equal((await upload()).status,500);assert.equal(state.binary.size,1);state.fail=false;
   state.race=true;assert.equal((await upload()).status,403);assert.equal(state.binary.size,1);
   state.user=null;assert.equal((await download(document.id)).status,401);

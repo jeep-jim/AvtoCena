@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { canSeeLead } from "@/lib/crm-visibility";
 import { CrmShell } from "@/components/crm/CrmShell";
-import { ClientCreateForm } from "@/components/crm/ClientCreateForm";
+import { ClientCreatePanel } from "@/components/crm/ClientCreatePanel";
 import { readChunkedDataJson } from "@/lib/data";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
@@ -31,13 +31,13 @@ export default async function CrmClientsPage({searchParams}: {searchParams?: Pro
         <div className="crm-clients-list">
           {clients.map(client => <Link href={`/crm/clients/${encodeURIComponent(client.id)}`} key={client.id} className="crm-client-card">
             <span className="crm-client-avatar" aria-hidden="true">{String(client.fio || "К").slice(0,1).toUpperCase()}</span>
-            <div><h2>{client.fio || client.phone || client.telegram || "Клиент без имени"}</h2><p>{[client.phone,client.telegram,client.city].filter(Boolean).join(" · ") || "Контакты не указаны"}</p>{client.comment && <p className="line-clamp-2">{client.comment}</p>}{client.documents?.length > 0 && <div className="crm-client-file-strip">{client.documents.slice(0,3).map((doc:any) => <span key={doc.id} title={doc.name}>{doc.hasThumbnail ? <img src={`/api/crm/clients/${encodeURIComponent(client.id)}/documents/${doc.id}?preview=1`} alt="" loading="lazy" /> : <span aria-hidden="true">▤</span>}<small>{doc.name}</small></span>)}{client.documents.length > 3 && <small>+{client.documents.length-3}</small>}</div>}</div>
+            <div><h2>{client.fio || client.phone || client.telegram || "Клиент без имени"}</h2><p>{Array.from(new Set([client.phone,client.telegram,client.city].filter(Boolean))).join(" · ") || "Контакты не указаны"}</p>{client.comment && <p className="crm-client-comment line-clamp-2">{client.comment}</p>}{client.documents?.some((doc:any)=>!doc.deletedAt) && <div className="crm-client-file-strip">{client.documents.filter((doc:any)=>!doc.deletedAt).slice(0,3).map((doc:any) => <span key={doc.id} title={doc.name}>{doc.hasThumbnail ? <img src={`/api/crm/clients/${encodeURIComponent(client.id)}/documents/${doc.id}?preview=1`} alt="" loading="lazy" /> : <span aria-hidden="true">▤</span>}<small>{doc.name}</small></span>)}{client.documents.filter((doc:any)=>!doc.deletedAt).length > 3 && <small>+{client.documents.filter((doc:any)=>!doc.deletedAt).length-3}</small>}</div>}</div>
             <div className="crm-client-manager">Менеджер<strong>{managers.find(manager => manager.id===client.assignedManagerId)?.displayName || "Не назначен"}</strong><p>Открыть →</p></div>
           </Link>)}
           {!clients.length && <p className="rounded-2xl border border-[var(--ac-border)] p-6 text-[var(--ac-muted)]">{q ? "Клиенты не найдены. Попробуйте другое имя или телефон." : "Клиентов пока нет. Добавьте первого клиента через форму."}</p>}
         </div>
       </section>
-      <aside className="crm-client-create" aria-label="Добавить клиента"><ClientCreateForm /></aside>
+      <aside className="crm-client-create" aria-label="Добавить клиента"><ClientCreatePanel /></aside>
     </div>
   </CrmShell>;
 }

@@ -244,7 +244,7 @@ export class ObjectJsonStorage implements JsonStorage {
     return url.toString();
   }
   async binaryExists(relativePath: string) { return this.head(relativePath); }
-  async deleteBinary(relativePath: string) { await this.request("DELETE", relativePath); }
+  async deleteBinary(relativePath: string) { const res = await this.request("DELETE", relativePath); if (!res.ok && res.status !== 404) throw new Error(`object_storage_binary_delete_${res.status}`); }
   async exists(relativePath: string) { return this.head(relativePath); }
   private async listRawObjects(normalizedPrefix: string, stripConfiguredPrefix: boolean) {
     const cfg = objectConfig();

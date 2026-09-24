@@ -35,7 +35,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
   } catch(error) {
     if(stored) await storage.deleteBinary?.(key).catch(()=>undefined);
     const code=error instanceof Error?error.message:"storage";
-    const messages:Record<string,string>={size:"Максимальный размер файла — 5 МБ.",format:"Поддерживаются JPG, PNG, WebP, PDF, DOC, DOCX и XLSX.",limit:"У клиента уже 50 документов.",forbidden:"Нет доступа к клиенту."};
+    const messages:Record<string,string>={size:"Максимальный размер файла — 5 МБ.",format:"Поддерживаются JPG, PNG, WebP, PDF, DOC, DOCX и XLSX.",limit:"У клиента уже 50 документов, включая корзину. Очистите ненужные файлы в «Архиве».",forbidden:"Нет доступа к клиенту."};
     return Response.json({error:messages[code]||"Не удалось сохранить файл. Попробуйте ещё раз."},{status:code==="forbidden"?403:code==="size"?413:messages[code]?400:500});
   }
 }

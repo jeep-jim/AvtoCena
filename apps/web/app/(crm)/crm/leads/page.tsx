@@ -2,6 +2,9 @@ import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
 import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
 import { leadReadState } from "@/lib/crm-read-state";
 import Link from "next/link";
+import {DocumentTrash} from "@/components/crm/DocumentTrash";
+import {leadContact} from "@/lib/lead-contact";
+import {canSeeLead} from "@/lib/crm-visibility";
 import {LeadContact} from "@/components/crm/LeadContact";
 import {followupText} from "@/lib/crm-notifications";
 import { redirect } from "next/navigation";
@@ -96,6 +99,8 @@ export default async function CrmLeadsPage({
   const visible = id
     ? leads.filter((lead) => lead.id === id)
     : leads.slice(0, 100);
+  const trashClients=view==="archive"?(await readChunkedDataJson<any>("clients/clients.json",[])).filter(client=>canSeeLead(user,client)):[];
+  const trashEntries=trashClients.flatMap(client=>(client.documents||[]).filter((doc:any)=>doc.deletedAt).map((document:any)=>({clientId:client.id,clientName:client.fio||"Клиент",document})));
   return (
     <CrmShell
       activeHref="/crm/leads"
@@ -220,23 +225,24 @@ export default async function CrmLeadsPage({
                   <img
                     src={safeHref(car.image)}
                     alt=""
-                    className="h-16 w-16 rounded-xl object-cover md:w-20"
+                    className="crm-lead-car-image h-16 w-16 rounded-xl object-cover md:w-20"
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="grid h-16 w-16 place-items-center rounded-xl bg-[var(--ac-surface)] text-2xl">
+                  <div className="crm-lead-car-image grid h-16 w-16 place-items-center rounded-xl bg-[var(--ac-surface)] text-2xl">
                     🚘
                   </div>
                 )}
-                <div className="min-w-0">
-                  <div className="truncate font-black">
+                <div className="crm-lead-identity min-w-0">
+                  <div className="crm-lead-name font-black">
                     {lead.name || lead.telegramDisplayName || "Клиент"}
                   </div>
-                  <div className="mt-1 truncate text-sm text-[var(--ac-muted)]">
+                  <div className="crm-lead-contact-row mt-1 text-sm text-[var(--ac-muted)]">
+                    <span className="crm-lead-channel-icon" aria-hidden="true">{leadContact(lead).channel==="call"?<span>☎</span>:<img src={`/brands/crm/${leadContact(lead).channel}.svg`} alt="" width={80} height={80} />}</span>
                     <LeadContact lead={lead} />
                   </div>
                 </div>
-                <div className="col-span-2 min-w-0 md:col-span-1">
+                <div className="crm-lead-car-data col-span-2 min-w-0 md:col-span-1">
                   <div className="truncate text-sm font-bold">
                     {car?.title || lead.car || "Подбор автомобиля"}
                   </div>
@@ -246,7 +252,7 @@ export default async function CrmLeadsPage({
                       "Расчёт уточняется"}
                   </div>
                 </div>
-                <div className="text-xs">
+                <div className="crm-lead-status text-xs">
                   <span
                     data-metrika-stage={leadMetrikaStage(lead.status)?.tone}
                     title={leadMetrikaStage(lead.status) ? `Цель Метрики: ${leadMetrikaStage(lead.status)?.name}` : undefined}
@@ -258,7 +264,7 @@ export default async function CrmLeadsPage({
                     {manager?.displayName || "Без ответственного"}
                   </div>
                 </div>
-                <div className="text-right text-xs text-[var(--ac-muted)]">
+                <div className="crm-lead-meta text-right text-xs text-[var(--ac-muted)]">
                   {date(lead.createdAt)}
                   <div className="mt-2 flex items-center justify-end gap-2 font-bold">
                     {lead.followups?.length ? <span className="crm-followup-count" aria-label={`Дополнений: ${lead.followups.length}`} title={`Дополнений: ${lead.followups.length}`}>{lead.followups.length}</span> : null}
@@ -415,6 +421,7 @@ export default async function CrmLeadsPage({
           </div>
         )}
       </div>
+      {view==="archive"&&<DocumentTrash entries={trashEntries} />}
     </CrmShell>
   );
 }

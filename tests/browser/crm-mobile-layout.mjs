@@ -34,9 +34,9 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[],failures=[];
 try{
- for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client'])){
+ for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive'])){
   const page=await browser.newPage({viewport:{width,height:850}});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('**/api/**',r=>r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
+  await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
    await page.locator('.crm-content').waitFor();
@@ -49,12 +49,18 @@ try{
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(kind==='leads'){
-    if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<165,`lead summary is compact (${height}px)`);}
+    if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<265,`lead summary is compact (${height}px)`);}
+    if(width<768){const summary=page.locator('.crm-lead-summary').first();const icon=await summary.locator('.crm-lead-channel-icon').boundingBox(),car=await summary.locator('.crm-lead-car-image').boundingBox();assert.equal(icon.x,car.x,'channel and car images aligned');assert.ok(car.y>icon.y);assert.ok(await summary.locator('.crm-lead-channel-icon img').evaluate(img=>img.complete&&img.naturalWidth===80),'Figma asset loaded');}
     await page.locator('.crm-lead-summary').first().click();assert.ok(await page.getByRole('combobox',{name:'Статус заявки',exact:true}).first().isVisible());
    }
    if(kind==='client'){
     assert.ok(await page.getByRole('button',{name:'Прикрепить файлы'}).isVisible());
     assert.equal(await page.locator('.crm-client-file').count(),2);
+    if(width<768){const files=await page.locator('.crm-client-file').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().toJSON()));assert.equal(files[0].y,files[1].y,'two document columns');}
+    if(width===1440){const form=await page.locator('.crm-client-detail-layout>form').boundingBox(),docs=await page.locator('.crm-client-files').boundingBox();assert.ok(docs.x>form.x+form.width,'documents right of client form');assert.equal(Math.round(docs.y),Math.round(form.y));}
+    let patches=0;page.on('request',r=>{if(r.method()==='PATCH')patches++;});
+    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Удалить Паспорт.png',exact:true}).click();assert.equal(patches,0,'cancel does not delete');
+    page.once('dialog',d=>{assert.match(d.message(),/30 дней/);return d.accept();});await page.getByRole('button',{name:'Удалить Паспорт.png',exact:true}).click();await page.getByRole('status').filter({hasText:'Документ в корзине'}).waitFor();assert.equal(patches,1);
     await page.getByRole('button',{name:'Просмотреть Паспорт.png'}).click();
     assert.ok(await page.getByRole('dialog',{name:'Просмотр документа'}).isVisible());
     await page.getByRole('button',{name:'Закрыть просмотр'}).click();
@@ -64,6 +70,17 @@ try{
     await page.locator('input[type=file]').setInputFiles({name:'Договор.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4')});
     await page.getByRole('status').filter({hasText:'Сохранено файлов: 1.'}).waitFor();
    }
+   if(kind==='archive'){
+    assert.ok(await page.getByRole('heading',{name:'Корзина документов'}).isVisible());
+    let patches=0;page.on('request',r=>{if(r.method()==='PATCH')patches++;});
+    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Удалить навсегда',exact:true}).click();assert.equal(patches,0);
+    await page.getByRole('button',{name:'Восстановить',exact:true}).click();await page.getByRole('status').filter({hasText:'Документ восстановлен'}).waitFor();assert.equal(patches,1);
+    page.once('dialog',d=>{assert.match(d.message(),/навсегда/);return d.accept();});await page.getByRole('button',{name:'Очистить корзину (1)',exact:true}).click();await page.getByRole('status').filter({hasText:'Удалено файлов: 1'}).waitFor();assert.equal(patches,2);
+   }
+   if(kind==='overview'){
+    await page.locator('.crm-presence-card').first().waitFor();
+    for(const selector of ['.crm-presence-card','.crm-overview-feed>a'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
+   }
    if(kind==='settings'){
     assert.equal(await page.locator('.crm-calculator-disclosure').getAttribute('open'),null);
     await page.locator('.crm-calculator-disclosure>summary').click();
@@ -72,7 +89,7 @@ try{
     assert.equal(await page.locator('form[action="/api/crm/settings/markets"]').count(),6,'all six market forms retained');
    }
    if(kind==='clients'){
-    assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible(),'create form always expanded');
+    if(width<768){assert.equal(await page.getByPlaceholder('ФИО клиента').isVisible(),false,'mobile form initially collapsed');await page.locator('.crm-client-create-toggle').click();assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible());await page.locator('.crm-client-create-toggle').click();assert.equal(await page.locator('.crm-client-avatar').first().isVisible(),false,'no mobile initials');}else assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible(),'desktop form expanded');
     assert.ok(await page.getByRole('textbox',{name:'Поиск клиентов'}).isVisible());
     assert.ok(await page.locator('.crm-client-card').count()>0);
     if(width===1440){const list=await page.locator('.crm-clients-list').boundingBox(),form=await page.locator('.crm-client-create').boundingBox();assert.ok(form.x>list.x+list.width,'create form on the right');}

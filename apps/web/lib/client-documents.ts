@@ -2,7 +2,7 @@ import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:
 import sharp from "sharp";
 export const MAX_CLIENT_FILE_BYTES = 5 * 1024 * 1024;
 export const MAX_CLIENT_DOCUMENTS = 50;
-export type ClientDocument = {id:string;name:string;mime:string;size:number;createdAt:string;createdBy:string;hasThumbnail:boolean};
+export type ClientDocument = {id:string;name:string;mime:string;size:number;createdAt:string;createdBy:string;hasThumbnail:boolean;deletedAt?:string;deletedBy?:string;purgeToken?:string};
 export function documentKey(clientId:string, documentId:string) {
   return `clients/documents/${encodeURIComponent(clientId)}/${documentId}.enc`;
 }

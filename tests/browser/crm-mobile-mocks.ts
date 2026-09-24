@@ -1,12 +1,12 @@
 export const user={id:'owner-test',displayName:'Тестовый руководитель',telegramUsername:'test_owner',role:'owner',status:'active'};
 export const users=[user,{id:'manager-test',displayName:'Александр Константинопольский',telegramUsername:'test_manager_long',role:'manager',status:'active'}];
-export const leads=Array.from({length:8},(_,i)=>({id:'test-'+i,name:'Клиент для проверки '+(i+1),phone:'+79991234567',contactMethod:'phone',car:'Toyota Corolla Cross Hybrid',budgetRub:2250000,status:'new',assignedManagerId:i%2?'manager-test':undefined,clientId:'client-'+i,createdAt:'2026-09-21T05:00:00Z',source:'offer_lead_banner',selectedOffers:[],followups:[]}));
+export const leads=Array.from({length:8},(_,i)=>({id:'test-'+i,name:'Клиент для проверки '+(i+1),phone:'+79991234567',contactMethod:i===0?'telegram':i===1?'max':'phone',telegram:i===0?'+79991234567':undefined,max:i===1?'+79991234567':undefined,car:'Toyota Corolla Cross Hybrid',budgetRub:2250000,status:'new',assignedManagerId:i%2?'manager-test':undefined,clientId:'client-'+i,createdAt:'2026-09-21T05:00:00Z',source:'offer_lead_banner',selectedOffers:[],followups:[]}));
 export const getCurrentUser=async()=>user;
 export const getAuthUsers=()=>users;
 export const isAdminRole=(r:string)=>r==='owner'||r==='admin';
 export const isCrmRole=(r:string)=>isAdminRole(r)||r==='manager';
 export const readCrmUsers=async()=>users;
-export const readDataJson=async(p:string,f:any)=>p==='auth/users.json'?users:p==='leads/leads.json'?leads:p==='clients/clients.json'?leads.map((l,i)=>({...l,id:'client-'+i,fio:l.name,documents:i===0?[{id:'11111111-1111-4111-8111-111111111111',name:'Паспорт.png',mime:'image/png',size:1024,hasThumbnail:true},{id:'22222222-2222-4222-8222-222222222222',name:'Договор.pdf',mime:'application/pdf',size:2048,hasThumbnail:false}]:[]})):f;
+export const readDataJson=async(p:string,f:any)=>p==='auth/users.json'?users:p==='leads/leads.json'?leads:p==='clients/clients.json'?leads.map((l,i)=>({...l,id:'client-'+i,fio:l.name,documents:i===0?[{id:'11111111-1111-4111-8111-111111111111',name:'Паспорт.png',mime:'image/png',size:1024,hasThumbnail:true},{id:'22222222-2222-4222-8222-222222222222',name:'Договор.pdf',mime:'application/pdf',size:2048,hasThumbnail:false},{id:'33333333-3333-4333-8333-333333333333',name:'В корзине.pdf',mime:'application/pdf',size:2048,hasThumbnail:false,deletedAt:new Date().toISOString()}]:[]})):f;
 export const readChunkedDataJson=readDataJson;
 export const getActiveDirectPartnerPayout=async()=>({defaultSignedContractPayoutRub:10000});
 export const money=(v:number)=>Math.round(v).toLocaleString('ru-RU');
