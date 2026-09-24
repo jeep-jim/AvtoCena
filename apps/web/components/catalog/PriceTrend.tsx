@@ -14,6 +14,7 @@ import type { JapanExportRestriction } from "../../lib/catalog/japan-export-rest
 export type RateHistoryPoint = { date: string; effectiveRate: number };
 export type PublicCurrencyRate = {
   currency: string;
+  rateSource?: string;
   effectiveRate: number;
   previousEffectiveRate?: number;
   rateDelta?: number;
@@ -335,12 +336,12 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
   const [publicRate, setPublicRate] = useState<PublicCurrencyRate | null>(null);
   const savedHistoryCount = normalizedHistory(rate).length;
   useEffect(() => {
-    if (!currency || savedHistoryCount >= 5) return;
+    if (!currency || rate.rateSource === "atb_akebono" || savedHistoryCount >= 5) return;
     let active = true;
     void loadPublicRates().then(rates => { if (active) setPublicRate(rates.find(item => item.currency.toUpperCase() === currency) || null); }).catch(() => {});
     return () => { active = false; };
   }, [currency, savedHistoryCount]);
-  const chartRate = withRateChartHistory(rate, publicRate);
+  const chartRate = rate.rateSource === "atb_akebono" ? rate : withRateChartHistory(rate, publicRate);
   const history = normalizedHistory(chartRate);
   const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
   const fallbackPrevious = history.length > 1 ? history[history.length - 2].effectiveRate : 0;
@@ -352,6 +353,7 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
   const strong = light ? "text-[#141821]" : "text-white";
 
   return <div>
+    {rate.rateSource === "atb_akebono" ? <p className="text-xs leading-5">Курс АТБ для оплаты инвойса · источник Akebono. Таможня рассчитывается отдельно по официальному курсу ЦБ. Дата ниже — время получения котировки.</p> : null}
     <RateSparkline rate={chartRate} light={light} priceRub={priceRub} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>{statusLabel}</div></div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
@@ -574,7 +576,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   // A saved/live exchange rate is useful even when the total price has not
   // changed yet. Keeping this tied to `trend` made the offer price inert on
   // mobile until a second price snapshot existed.
-  const canShowRate = !greenCorner && Boolean(sheetRate);
+  const canShowRate = Boolean(sheetRate);
   const openSheet = () => { if (canShowRate) { setPopoverOpen(false); setSheetOpen(true); } };
   const priceColor = !greenCorner && highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
@@ -590,7 +592,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   >
     <div className="flex min-w-0 items-center justify-between gap-2"><div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>{trend ? <span className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`} title={trendTitle}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span> : statusLabel ? <span className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} shrink-0 font-bold text-[var(--ac-muted)]`}>{statusLabel}</span> : null}</div>
     <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-      <div className={`ac-price ${priceStateClass} ${!greenCorner && highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
+      <div role={canShowRate ? "button" : undefined} tabIndex={canShowRate ? 0 : undefined} aria-label={canShowRate ? `Показать курс ${currency}` : undefined} onClick={event=>{if(canShowRate){event.preventDefault();event.stopPropagation();openSheet();}}} onKeyDown={event=>{if(canShowRate && (event.key==="Enter" || event.key===" ")){event.preventDefault();event.stopPropagation();openSheet();}}} className={`ac-price ${priceStateClass} ${!greenCorner && highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
       {greenCorner ? <JapanAuctionBadges offer={offer} dense={dense} interactive={panel} hideRestriction /> : trend ? <span
         ref={trendRoot}
         role={canShowRate ? "button" : undefined}

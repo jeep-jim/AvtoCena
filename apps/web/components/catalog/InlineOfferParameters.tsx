@@ -1,4 +1,5 @@
 "use client";
+import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
 import {invalidateSavedCalculationPreviews} from "./useSavedCalculationPreview";
 import { OfferPdfButton } from "./OfferPdfButton";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
@@ -196,10 +197,11 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
     <div className="flex items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-[-0.02em]">Структура цены</h2><ChevronDown aria-hidden size={17} className="mr-1 shrink-0 transition-transform group-open:rotate-180" /></div>
     {vehicleLine ? <div data-price-line="car" data-price-amount-rub={vehicleLine.amountRub} className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-xs font-medium">
-     <span className="flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span>Цена автомобиля</span><span className="mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
-     <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽</span>
+     <span className="flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span>{isGreenCornerOffer(priceIdentity) ? "Стоимость автомобиля — инвойс (CIF)" : "Цена автомобиля"}</span><span className="mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
+     <span className="whitespace-nowrap font-bold">{Math.round(vehicleLine.amountRub).toLocaleString("ru-RU")} ₽{isGreenCornerOffer(priceIdentity) ? <span className="block text-right text-[11px]">{Number(result.currencyRate?.sourcePrice).toLocaleString("ru-RU")} JPY</span> : null}</span>
     </div> : null}
    </summary>
+   {isGreenCornerOffer(priceIdentity) ? <p className="px-4 pb-3 text-xs text-[var(--ac-muted)]">Инвойс — сумма счёта на автомобиль на условиях CIF: стоимость, страхование и фрахт до порта назначения. Доставка до границы уже включена. Рубли — по курсу АТБ (источник Akebono), таможня — от инвойса в иенах по курсу ЦБ.</p> : null}
    <ContractPaymentSummary plan={result.paymentPlan} />
    <div className="px-4 pb-4">
     <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="ac-cost-row gap-y-1"><dt><span className="ac-cost-label">{row.label||row.title||row.id}</span>{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="ac-cost-amount">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>

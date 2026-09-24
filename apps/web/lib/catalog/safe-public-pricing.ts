@@ -1,3 +1,4 @@
+import {isGreenCornerOffer} from "./green-corner-contract";
 import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 import { withoutRetiredExportCharge } from "./retired-export-charge";
 import { catalogPowerSanity } from './power-sanity';
@@ -22,7 +23,7 @@ export function safePublicPricing<T extends Record<string, any>>(input: T): T {
   const price = Number(input.sourcePrice);
   const effectiveRate = Number(rate?.effectiveRate);
   const date = Date.parse(rate?.rateDate || '');
-  const bound = rate && ['cbr', 'cbr_live'].includes(rate.rateSource)
+  const bound = rate && (['cbr', 'cbr_live'].includes(rate.rateSource) || isGreenCornerOffer(input) && rate.rateSource === 'atb_akebono')
     && rate.currency === input.sourceCurrency
     && Number(rate.sourcePrice) === price
     && Number.isFinite(price) && price > 0

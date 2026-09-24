@@ -7,11 +7,11 @@ export function isSellerPricedOffer(offer: any): boolean {
     && !(Number(offer?.totalRub) > 0)
     && Number.isFinite(offer?.sellerPriceRub) && offer.sellerPriceRub > 0
     && Number(offer?.sourcePrice) > 0 && /^[A-Z]{3}$/.test(String(offer?.sourceCurrency || ""))
-    && ["cbr", "cbr_live"].includes(rate?.rateSource)
+    && (["cbr", "cbr_live"].includes(rate?.rateSource) || isGreenCornerOffer(offer) && rate?.rateSource === "atb_akebono")
     && rate.currency === offer.sourceCurrency && Number(rate.sourcePrice) === Number(offer.sourcePrice)
     && Number.isFinite(rate.effectiveRate) && rate.effectiveRate > 0
     && Math.round(Number(offer.sourcePrice) * rate.effectiveRate) === offer.sellerPriceRub;
 }
 export function sellerPriceLabel(offer: any) {
-  return isGreenCornerOffer(offer) ? "Цена FOB" : offer?.catalogKind === "auction_result" ? "Цена на завершённых торгах" : "Цена продавца";
+  return isGreenCornerOffer(offer) ? "Стоимость автомобиля — инвойс (CIF)" : offer?.catalogKind === "auction_result" ? "Цена на завершённых торгах" : "Цена продавца";
 }

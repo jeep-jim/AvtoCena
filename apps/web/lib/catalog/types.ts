@@ -26,6 +26,7 @@ export type CatalogImage = {
 };
 
 export type VehicleOffer = {
+  greenCornerInvoice?: {basis:"CIF";freightJpy:number;capturedAt:string;paymentQuote:{sell:number;nominal:number;fetchedAt:string}};
   greenCornerLogistics?: import("./green-corner-contract").GreenCornerLogistics;
   deliveryCity?: string;
   catalogPricingMode?: "seller";
