@@ -610,9 +610,9 @@ async function readCurrentSearchProjection(market: string) {
   }
   return promise;
 }
-async function readCurrentBrandProjection(make: string) {
+async function readCurrentBrandProjection(make: string, generationId: string) {
   const key = currentBrandProjectionPath(make);
-  return currentBrandProjectionCache.get(key, () =>
+  return currentBrandProjectionCache.get(`${generationId}:${key}`, () =>
     readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(key, { generationId: "", items: [] }));
 }
 // Discovery readers share the same full snapshot as catalog searches. They
@@ -1672,15 +1672,16 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     || (params.sort && params.sort !== "updatedAt"));
 
   const requestedMakes = catalogMakeFilterValues(params.make);
-  if ((!params.market || params.market === "any") && requestedMakes.length) {
+  // Related offers query the same brand across six markets concurrently. Share
+  // its compact projection instead of downloading every complete market.
+  if (requestedMakes.length) {
     const manifest = await readManifest();
     const parts = await mapWithConcurrency(requestedMakes, Math.min(8, requestedMakes.length), async (make) => ({
-      make, projection: await readCurrentBrandProjection(make),
+      make, projection: await readCurrentBrandProjection(make, manifest.generationId).catch(() => ({generationId: "", items: []})),
     }));
     if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {
       const modelKeys = await projectionModelKeys(params);
-      const rows = parts.flatMap(({ projection }) => projection.items || [])
-        .filter(projectionCanRenderCard)
+      const rows = prepareCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []))
         .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
       if (needsProjection) sortCatalogSearchRows(rows, params);
       else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
