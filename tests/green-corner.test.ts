@@ -1,3 +1,4 @@
+import {applyActiveBusinessPricing} from "../apps/web/lib/catalog/live-business-pricing";
 import {withGreenCornerFuel} from "../apps/web/lib/catalog/green-corner-fuel";
 import {safePublicPricing} from "../apps/web/lib/catalog/safe-public-pricing";
 import {classifySpecificationEvidence} from "../apps/web/lib/catalog/specification-evidence-audit";
@@ -75,6 +76,9 @@ test("Green pays CIF at bank rate, taxes CIF at CBR rate, without duplicate logi
  try {
   const input={...normalizeGreenCorner(row,rate,now),greenCornerLogistics:createGreenCornerLogistics(rate)};
   const before=JSON.stringify(input);
+  const card=await applyActiveBusinessPricing(input);
+  assert.equal(card.sellerPriceRub,563598);
+  assert.equal(card.calculationSnapshot?.currencyRate?.rateSource,"atb_akebono");
   const params=validateCustomerParameters({year:2015,engineCc:1600,powerHp:122,fuel:"petrol"});
   const green=await calculateOfferWithCustomerParametersDetailed(input,params);
   const ordinary=await calculateOfferWithCustomerParametersDetailed({...input,id:"ordinary",sourceId:"ordinary"},params);

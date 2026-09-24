@@ -1,3 +1,5 @@
+import {isGreenCornerOffer} from "./green-corner-contract";
+import {greenCornerPaymentRate} from "./green-corner-payment-rate";
 import { applyJapanServiceCosts, japanServiceCostBasis } from "./japan-service-pricing";
 import { compactRepricedProjection } from "./compact-pricing-snapshot";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
@@ -38,8 +40,8 @@ function uniqueText(values: unknown[]) {
 
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (offer.catalogPricingMode === 'seller') {
-    const rate = await convertToRub(offer.sourcePrice ?? null, offer.sourceCurrency ?? null).catch(() => null);
-    if (!rate || !['cbr','cbr_live'].includes(rate.rateSource)
+    const rate = isGreenCornerOffer(offer) ? await greenCornerPaymentRate(offer as VehicleOffer) : await convertToRub(offer.sourcePrice ?? null, offer.sourceCurrency ?? null).catch(() => null);
+    if (!rate || !(['cbr','cbr_live'].includes(rate.rateSource) || isGreenCornerOffer(offer) && rate.rateSource==='atb_akebono')
       || !Number.isFinite(Date.parse(rate.rateDate)) || Math.abs(Date.now()-Date.parse(rate.rateDate)) > 4*86400000) return offer;
     return {...offer, sellerPriceRub:Math.round(rate.sourcePriceRub), totalRub:null,
       publicVisibleRub:undefined,publicSpecificationVerified:false,calculationStatus:'needs_data',
