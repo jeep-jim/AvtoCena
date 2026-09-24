@@ -265,9 +265,13 @@ try{
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('20');
     assert.equal(await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).count(),0);
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'20');
+    const retainedMotorHp=await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue();
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('');
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
-    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),'');
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),retainedMotorHp,'clearing kW preserves existing hp');
+    // To remove the physical quantity entirely, explicitly clear horsepower too.
+    await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).fill('');
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
     await page.waitForTimeout(850);assert.equal(await page.getByText('Стоимость под ключ',{exact:true}).count(),0);
    }
    await page.close();
