@@ -880,11 +880,22 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
   return [...new Map(rows.filter(offer => offer.market !== options.excludeMarket).map((offer) => [offer.id, offer])).values()];
 }
 /** Preserve the non-public assortment reserve for the next market refresh. */
-export async function readMarketMaintenanceOffers(market: CatalogMarket) {
+export async function readMarketMaintenanceOffers(market: CatalogMarket, options: { excludeIds?: ReadonlySet<string> } = {}) {
   const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, {sources:{}});
   const approved = new Set(allowedCatalogSourceIds(market));
   const chunks = Object.entries<any>(manifest.sources || {}).filter(([id]) => approved.has(id)).flatMap(([,source]) => source.chunks || []);
-  return (await readOfferLists([...new Set<string>(chunks)])).filter(offer => offer.market === market);
+  const rows: VehicleOffer[] = [];
+  // Discard superseded public duplicates before reading the next raw chunk.
+  // Loading the entire reserve first kept gigabytes of unreachable source data
+  // alive alongside the new intake until the merge phase.
+  for (const path of new Set<string>(chunks)) {
+    const chunk = await readDataJson<VehicleOffer[] | null>(path, null);
+    if (!Array.isArray(chunk)) throw new Error(`catalog_maintenance_chunk_missing:${path}`);
+    for (const offer of chunk) {
+      if (offer.market === market && !options.excludeIds?.has(offer.id)) rows.push(offer);
+    }
+  }
+  return rows;
 }
 export const readAllOffers = readAllOffersForMaintenance;
 /** Maintenance-only stream: never materialize every other market's raw payloads. */

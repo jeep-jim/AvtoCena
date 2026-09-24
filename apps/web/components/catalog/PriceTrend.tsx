@@ -353,7 +353,7 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
   const strong = light ? "text-[#141821]" : "text-white";
 
   return <div>
-    {rate.rateSource === "atb_akebono" ? <p className="text-xs leading-5">Курс АТБ для оплаты инвойса · источник Akebono. Таможня рассчитывается отдельно по официальному курсу ЦБ. Дата ниже — время получения котировки.</p> : null}
+    {rate.rateSource === "atb_akebono" ? <p className="text-xs leading-5">Курс АТБ для оплаты инвойса. Таможня рассчитывается отдельно по официальному курсу ЦБ. Дата ниже — время получения котировки.</p> : null}
     <RateSparkline rate={chartRate} light={light} priceRub={priceRub} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>{statusLabel}</div></div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>

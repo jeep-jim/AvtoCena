@@ -1,7 +1,7 @@
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
 import {LocalJsonStorage} from '../apps/web/lib/data';
-import {readAllOffersForMaintenance} from '../apps/web/lib/catalog/storage';
+import {readAllOffersForMaintenance, readMarketMaintenanceOffers} from '../apps/web/lib/catalog/storage';
 
 test('market refresh skips its obsolete source chunks before I/O and retains unknown sources for auditing',async()=>{
  const fixtures:any={
@@ -16,4 +16,27 @@ test('market refresh skips its obsolete source chunks before I/O and retains unk
   reads.length=0;assert.deepEqual((await readAllOffersForMaintenance({excludeMarket:'japan'})).map(o=>o.id).sort(),['e','e2','k','u']);assert.ok(!reads.includes('japan.json'));
   assert.equal((await readAllOffersForMaintenance()).length,5);
  }finally{reader.mock.restore();}
+});
+
+
+test('target reserve reads sequentially, excludes replaced IDs and preserves raw evidence', async () => {
+ const fixtures:any={
+  'catalog/internal/manifest.json':{sources:{mobile_de_open:{chunks:['one.json','two.json','one.json']},encar_direct:{chunks:['other.json']}}},
+  'one.json':[{id:'published',market:'europe',operational:{raw:{large:'superseded'}}},{id:'reserve',market:'europe',operational:{raw:{power:'exact'}}}],
+  'two.json':[{id:'reserve2',market:'europe'}],
+ };
+ let active=0,peak=0;const reads:string[]=[];
+ const reader=mock.method(LocalJsonStorage.prototype,'readJsonWithMeta',async(key:string)=>{
+  reads.push(key);peak=Math.max(peak,++active);await new Promise(resolve=>setImmediate(resolve));active--;
+  return {found:key in fixtures,value:fixtures[key]??null};
+ });
+ try {
+  const rows=await readMarketMaintenanceOffers('europe',{excludeIds:new Set(['published'])});
+  assert.deepEqual(rows.map(row=>row.id),['reserve','reserve2']);
+  assert.deepEqual(rows[0].operational?.raw,{power:'exact'});
+  assert.equal(peak,1);assert.equal(reads.filter(key=>key==='one.json').length,1);
+  assert.ok(!reads.includes('other.json'));
+  delete fixtures['two.json'];
+  await assert.rejects(readMarketMaintenanceOffers('europe'),/catalog_maintenance_chunk_missing/);
+ } finally {reader.mock.restore();}
 });
