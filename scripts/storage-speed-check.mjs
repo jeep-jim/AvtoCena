@@ -24,3 +24,14 @@ for (let attempt=1; attempt<=2; attempt++) {
   ]);
   console.log('MARKET_TIMING', JSON.stringify({attempt,result,rssMiB:Math.round(process.memoryUsage().rss/1048576)}));
 }
+
+// Same six market/model queries used by the related-offer section.
+const {searchOffers}=await import('../apps/web/lib/catalog/storage.ts');
+for(let attempt=1;attempt<=2;attempt++){
+  const started=performance.now();
+  const results=await Promise.all(['china','korea','japan','uae','europe','georgia'].map(async market=>{
+    const result=await searchOffers({market,make:'Nissan',model:'Sylphy',pageSize:24,sort:'updatedAt'});
+    return {market,total:result.total,items:result.items.length,indexes:result.usedIndexShards};
+  }));
+  console.log('RELATED_TIMING',JSON.stringify({attempt,ms:Math.round(performance.now()-started),rssMiB:Math.round(process.memoryUsage().rss/1048576),results}));
+}
