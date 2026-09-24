@@ -23,6 +23,7 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
   ];
   if (!isAdminRole(user.role)) links.splice(3);
   if (isAdminRole(user?.role)) links.push(["/crm/telegram", "Telegram"]);
+  if (["owner", "admin", "manager"].includes(user.role)) links.push(["/crm/documents", "Документы"]);
   const avatar = user?.avatarUrl || defaultManagerAvatar(user?.id || user?.telegramUsername);
 
   return <CrmShellView title={title} subtitle={subtitle} activeHref={activeHref} user={user} links={links} avatar={avatar}>{children}</CrmShellView>;

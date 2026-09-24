@@ -8,6 +8,7 @@ on:
       - 'package.json'
       - 'tests/browser/crm-mobile*'
       - 'tests/security-response-policy.test.ts'
+      - 'tests/crm-contracts.test.ts'
       - 'scripts/security-photo-audit.mjs'
       - '.github/workflows/verify-crm-mobile-security.yml'
   workflow_dispatch:
@@ -57,7 +58,7 @@ jobs:
       - run: npm ci
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run typecheck
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/security-response-policy.test.ts tests/crm-client-documents.test.ts tests/crm-document-trash.test.ts tests/lead-followups.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/security-response-policy.test.ts tests/crm-client-documents.test.ts tests/crm-document-trash.test.ts tests/lead-followups.test.ts tests/crm-contracts.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/crm-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Real CRM pages at four widths in both themes
         env:

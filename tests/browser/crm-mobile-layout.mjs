@@ -27,16 +27,20 @@ const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.
 const inline=sources.flatMap(({text})=>[...text.matchAll(/const publicUiCorrections = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
 const css=await postcss([tailwindcss({content:['apps/web/components/crm/**/*.{tsx,ts}','apps/web/app/(crm)/**/*.tsx','apps/web/components/leads/PhoneInput.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
 fs.writeFileSync(out+'/app.css',css.css);
-const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark';localStorage.setItem('avtocena_theme',document.documentElement.dataset.theme)</script><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
+const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark';localStorage.setItem('avtocena_theme',document.documentElement.dataset.theme)</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
 const server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(['/', '/crm/clients', '/crm/leads'].includes(name)){res.setHeader('content-type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve(name.startsWith('/pdfjs/')?out:'apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('content-type',name.endsWith('.css')?'text/css':(/\.m?js$/).test(name)?'text/javascript':name.endsWith('.webp')?'image/webp':name.endsWith('.svg')?'image/svg+xml':name.endsWith('.png')?'image/png':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.writeHead(404);res.end();}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[],failures=[];
 try{
- for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive'])){
+ for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
+  if(kind==='documents'){
+   const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;
+   await page.route('**/api/crm/contracts**',async route=>{const req=route.request();if(req.method()==='GET'){await route.fulfill({json:record?{record}:{records:[]}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};await route.fulfill({json:{record}});});
+  }
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
    await page.locator('.crm-content').waitFor();
@@ -48,6 +52,13 @@ try{
    assert.equal(await page.locator('.ac-staff-menu a[href="/crm/leads"]').count(),0);
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
+   if(kind==='documents'){
+    await page.getByRole('button',{name:'Создать договор',exact:true}).first().click();await page.locator('.contract-editor-layout').waitFor();
+    await page.getByLabel('ФИО',{exact:false}).fill('Иванов Иван Иванович');
+    await page.getByRole('button',{name:'Сохранить',exact:true}).click();await page.getByRole('status').filter({hasText:'Черновик сохранён'}).waitFor();
+    if(width<768){assert.equal(await page.locator('.contract-preview').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();assert.ok(await page.locator('.contract-preview').isVisible());await page.getByRole('button',{name:'Заполнение',exact:true}).click();}
+    assert.equal(await page.getByLabel('ФИО',{exact:false}).inputValue(),'Иванов Иван Иванович');
+   }
    if(kind==='leads'){
     const clientLink=page.locator('.crm-lead-client-link').first();assert.equal(await clientLink.getAttribute('href'),'/crm/clients/client-0');
     await page.getByRole('button',{name:'+ Создать заявку',exact:true}).click();
