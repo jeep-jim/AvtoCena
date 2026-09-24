@@ -181,10 +181,6 @@ export default async function CrmLeadsPage({
       <ManualLeadForm headerAside={
         <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
         <strong>Статусы для Метрики</strong><LeadStatusHelp />
-        <div className="crm-goal-help-chip" data-metrika-stage="qualified">🟢 Квалифицированный лид<LeadStatusHelp status="qualified" /></div>
-        <div className="crm-goal-help-chip" data-metrika-stage="contract">🔵 Договор подписан / Оплата получена<LeadStatusHelp status="contract_signed" /></div>
-        <div className="crm-goal-help-chip" data-metrika-stage="spam">🔴 Спам<LeadStatusHelp status="spam" /></div>
-        <p>Откройте заявку → выберите статус внизу карточки → нажмите «Сохранить». «Предложение отправлено» не означает подписанный договор.</p>
       </div>
       } />
       <div className="mt-4 space-y-3">

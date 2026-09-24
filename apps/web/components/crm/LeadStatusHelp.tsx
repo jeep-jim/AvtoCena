@@ -36,7 +36,7 @@ export function LeadStatusHelp({status}: {status?: string}) {
       {LEAD_STATUSES.map(value => {
         const help = explanations[value];
         const stage = leadMetrikaStage(value);
-        return <details key={value} open={value === (status || 'qualified')} className="crm-status-help-item">
+        return <details key={value} className="crm-status-help-item">
           <summary>{stage?.marker} {leadStatusLabel(value)}</summary>
           <div><p>{help.when}</p>{help.example && <p><strong>Пример: </strong>{help.example}</p>}{help.note && <p>{help.note}</p>}{stage && <p className="crm-status-help-goal">Цель Метрики: {stage.name}. Цветная отметка обозначает связь с целью, а не подтверждение отправки.</p>}</div>
         </details>;

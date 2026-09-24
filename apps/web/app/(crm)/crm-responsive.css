@@ -108,6 +108,8 @@ html[data-theme="dark"] .crm-workspace [data-metrika-stage="spam"]{background:#4
 .crm-status-help-intro{margin:12px 0;color:var(--ac-muted)}
 .crm-status-help-item{border-top:1px solid var(--ac-border)}
 .crm-status-help-item>summary{cursor:pointer;padding:12px 0;font-weight:800;min-height:44px}
+.crm-status-help-item>summary::marker{color:#9ca3af}
+.crm-status-help-item>summary::-webkit-details-marker{color:#9ca3af}
 .crm-status-help-item>div{padding-bottom:14px}
 .crm-status-help-item p+p{margin-top:10px}
 .crm-status-help-goal{color:var(--ac-muted);font-size:12px}
