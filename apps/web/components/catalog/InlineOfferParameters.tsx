@@ -113,9 +113,9 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
- const originalDraft=completePowerUnitDraft(savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
- const [savedDraft,setSavedDraft]=useState(originalDraft);
+export function InlineOfferParameters({initialScenario,priceIdentity,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+ const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
+ const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
  const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
  const saveDialog=useRef<HTMLDialogElement>(null);
@@ -124,7 +124,7 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
  const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
 
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
- const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(savedCalculation?.calculation || null);
+ const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(initialScenario?.calculation || savedCalculation?.calculation || null);
  const revision=useRef(0);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
@@ -147,6 +147,7 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
  }
  function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value,old),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
+  if(initialScenario && !dirty){setResult(initialScenario.calculation);setPending(false);return;}
   if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
   if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
@@ -190,7 +191,7 @@ export function InlineOfferParameters({priceIdentity,canSave=false,savedCalculat
   {afterPrice}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
+   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation && !initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
    <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
   </div>
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
