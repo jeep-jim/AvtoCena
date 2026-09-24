@@ -102,9 +102,11 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="rounded-full bg-red-500 px-4 py-2 text-sm font-black text-white transition hover:bg-red-400"
+        aria-expanded={open}
+        disabled={loading}
+        className={`crm-manual-toggle rounded-full px-4 py-2 text-sm font-black transition ${open ? "crm-manual-close" : "bg-red-500 text-white hover:bg-red-400"}`}
       >
-        {open ? "Закрыть форму" : "+ Создать заявку"}
+        {open ? <><span aria-hidden="true">×</span> Закрыть форму</> : "+ Создать заявку"}
       </button>
       {headerAside}
       </div>
@@ -135,6 +137,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
             <button disabled={loading} className="rounded-xl bg-red-500 px-5 py-3 text-sm font-black text-white disabled:opacity-50">
               {loading ? "Создаём..." : "Создать заявку"}
             </button>
+            <button type="button" disabled={loading} onClick={()=>setOpen(false)} className="crm-manual-close rounded-xl px-5 py-3 text-sm font-bold">Отмена</button>
             {error ? <span className="text-sm font-bold text-red-200">{error}</span> : null}
             {success ? <span className="text-sm font-bold text-green-200">{success}</span> : null}
           </div>

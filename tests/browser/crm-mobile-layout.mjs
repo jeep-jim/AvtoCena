@@ -49,6 +49,13 @@ try{
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(kind==='leads'){
+    const clientLink=page.locator('.crm-lead-client-link').first();assert.equal(await clientLink.getAttribute('href'),'/crm/clients/client-0');
+    await page.getByRole('button',{name:'+ Создать заявку',exact:true}).click();
+    const close=page.getByRole('button',{name:'Закрыть форму',exact:true});assert.ok(await close.locator('span').isVisible());
+    assert.ok(await close.evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(document.querySelector('button[type=submit]')).backgroundColor));
+    await page.getByRole('button',{name:'Отмена',exact:true}).click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
+    await page.getByRole('button',{name:'+ Создать заявку',exact:true}).click();await close.click();assert.equal(await page.getByPlaceholder('Имя клиента *').isVisible(),false);
+    const dateBoxes=await page.locator('.crm-lead-date-filter').evaluate(e=>[e.querySelector('label'),e.querySelector('input[type=date]'),e.querySelector('button')].map(n=>{const r=n.getBoundingClientRect();return r.y+r.height/2}));assert.ok(Math.max(...dateBoxes)-Math.min(...dateBoxes)<2,'date controls on one row');
     if(width<=390){const height=await page.locator('.crm-lead-summary').first().evaluate(e=>e.getBoundingClientRect().height);assert.ok(height<265,`lead summary is compact (${height}px)`);}
     if(width<768){const summary=page.locator('.crm-lead-summary').first();const icon=await summary.locator('.crm-lead-channel-icon').boundingBox(),car=await summary.locator('.crm-lead-car-image').boundingBox();assert.equal(icon.x,car.x,'channel and car images aligned');assert.ok(car.y>icon.y);assert.ok(await summary.locator('.crm-lead-channel-icon img').evaluate(img=>img.complete&&img.naturalWidth===80),'Figma asset loaded');}
     await page.locator('.crm-lead-summary').first().click();assert.ok(await page.getByRole('combobox',{name:'Статус заявки',exact:true}).first().isVisible());
@@ -82,6 +89,10 @@ try{
     for(const selector of ['.crm-presence-card','.crm-overview-feed>a'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
    }
    if(kind==='settings'){
+    const title=await page.getByRole('heading',{name:'Все рынки',exact:true}).boundingBox(),chip=await page.locator('.crm-market-count').boundingBox(),help=await page.locator('.crm-markets-help').boundingBox();assert.ok(Math.abs((title.y+title.height/2)-(chip.y+chip.height/2))<3,'market count at top right');
+    if(width>=768)assert.ok(Math.abs((title.y+title.height/2)-(help.y+help.height/2))<3,'desktop help beside title');
+    assert.equal(await page.locator('.crm-markets-heading>p').isVisible(),false);await page.locator('.crm-markets-summary').click();assert.ok(await page.locator('.crm-markets-heading>p').isVisible());await page.locator('.crm-markets-summary').click();
+    if(width===390||width===1440)await page.locator('.crm-markets-heading').screenshot({path:`${out}/market-heading-${theme}-${width}.png`});
     assert.equal(await page.locator('.crm-calculator-disclosure').getAttribute('open'),null);
     await page.locator('.crm-calculator-disclosure>summary').click();
     assert.equal(await page.locator('select[name="calcPowertrain"]').isVisible(),true);
@@ -114,6 +125,7 @@ try{
     await page.waitForURL('**/crm/leads?**date=2026-09-22');
     await page.locator('#lead-date').waitFor();
     assert.equal(await page.locator('.crm-lead-card').count(),0,'date filter excludes other days');
+    await page.getByRole('button',{name:'Очистить',exact:true}).click();await page.waitForURL(url=>!url.searchParams.has('date'));await page.locator('.crm-lead-card').first().waitFor();assert.equal(await page.locator('#lead-date').inputValue(),'');
    }
    assert.deepEqual(errors,[]);results.push({kind,width,theme,passed:true});
   }catch(e){fs.writeFileSync(`${out}/failure-${kind}-${theme}-${width}.json`,JSON.stringify({kind,width,theme,error:String(e),errors},null,2));await page.screenshot({path:`${out}/failure-${kind}-${theme}-${width}.png`,fullPage:true}).catch(()=>{});failures.push({kind,width,theme,error:String(e),errors});}finally{await page.close();}

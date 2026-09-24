@@ -1,3 +1,4 @@
+import {LeadDateFilter} from "@/components/crm/LeadDateFilter";
 import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
 import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
 import { leadReadState } from "@/lib/crm-read-state";
@@ -190,12 +191,7 @@ export default async function CrmLeadsPage({
           <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
             <strong>Статусы для Метрики</strong><LeadStatusHelp />
           </div>
-      <form className="crm-lead-date-filter" action="/crm/leads">
-        {["view", "q", "status", "manager"].map(key => <input key={key} type="hidden" name={key} value={first(params[key])} />)}
-        <label htmlFor="lead-date">Дата заявки <span>(МСК)</span></label>
-        <input id="lead-date" name="date" type="date" defaultValue={first(params.date)} className="soft-input rounded-xl p-2" />
-        <button type="submit" className="avto-button rounded-xl px-3 py-2 text-sm font-bold">Показать</button>
-      </form>
+      <LeadDateFilter date={first(params.date)} filters={Object.fromEntries(["view","q","status","manager"].map(key=>[key,first(params[key])]))} />
         </div>
       } />
       <div className="mt-4 space-y-3">
@@ -235,7 +231,7 @@ export default async function CrmLeadsPage({
                 )}
                 <div className="crm-lead-identity min-w-0">
                   <div className="crm-lead-name font-black">
-                    {lead.name || lead.telegramDisplayName || "Клиент"}
+                    {lead.clientId ? <Link className="crm-lead-client-link" href={`/crm/clients/${encodeURIComponent(lead.clientId)}`} title="Открыть карточку клиента">{lead.name || lead.telegramDisplayName || "Клиент"}</Link> : (lead.name || lead.telegramDisplayName || "Клиент")}
                   </div>
                   <div className="crm-lead-contact-row mt-1 text-sm text-[var(--ac-muted)]">
                     <span className="crm-lead-channel-icon" aria-hidden="true">{leadContact(lead).channel==="call"?<span>☎</span>:<img src={`/brands/crm/${leadContact(lead).channel}.svg`} alt="" width={80} height={80} />}</span>

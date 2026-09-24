@@ -36,15 +36,16 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
   return (
     <div className="space-y-4">
       <section className="glass rounded-[1.8rem] p-5">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
+        <details className="crm-markets-heading">
+          <summary className="crm-markets-summary">
             <h2 className="text-2xl font-black">Все рынки</h2>
-            <details className="crm-role-help"><summary>Как применяются настройки</summary>            <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/48">
-              Итог под ключ = полная цена продавца + услуги, перевозка и оформление + таможенные платежи + комиссия. Предоплата — часть оплаты этого итога. Сохранённая версия сразу применяется к карточкам и каталогу; полный поисковый индекс обновляется фоновым пересчётом.
-            </p></details>
-          </div>
-          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/60">{markets.length} рынков</span>
-        </div>
+            <span className="crm-markets-help">Как применяются настройки</span>
+            <span className="crm-market-count rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/60">{markets.length} рынков</span>
+          </summary>
+          <p className="mt-2 text-sm font-bold leading-6 text-white/48">
+            Итог под ключ = полная цена продавца + услуги, перевозка и оформление + таможенные платежи + комиссия. Предоплата — часть оплаты этого итога. Сохранённая версия сразу применяется к карточкам и каталогу; полный поисковый индекс обновляется фоновым пересчётом.
+          </p>
+        </details>
       </section>
 
       {markets.map((market) => {
