@@ -406,6 +406,7 @@ for (const offer of generation.offers.sort((left, right) => freshness(left) - fr
 
 currentRetainedRows = currentRetainedRows.map(compactPublicStorageOffer);
 const generatedCandidateCount = generation.offers.length;
+const generatedSourceIds = [...new Set(generation.offers.map(offer => String(offer?.sourceId || "")).filter(Boolean))];
 generation.offers.length = 0;
 const orderedCandidates = [...candidatesById.values()];
 candidatesById.clear();
@@ -624,7 +625,7 @@ const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catal
   || Math.max(Number(row.totalRub)||0,Number(row.sellerPriceRub)||0,Number(row.calculationSnapshot?.sourcePriceRub)||0)>15_000_000));
 const replaceInternalSourceIds = new Set([
   ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
-  ...generation.offers.map(offer => String(offer?.sourceId || "")),
+  ...generatedSourceIds,
   ...Object.keys(sourceRefreshStates),
 ].filter(Boolean));
 generation.offers.length = 0;

@@ -2,7 +2,8 @@ name: Storage and homepage performance check
 on:
   workflow_dispatch:
   push:
-    branches: [fix/storage-speed-finish-20260920, fix/catalog-memory-recovery-20260924]
+    branches: [fix/storage-speed-finish-20260920, fix/catalog-memory-recovery-20260924, main]
+    paths: [scripts/storage-speed-check.mjs, .github/market-runs/market-landings.json]
 permissions:
   contents: read
 jobs:
@@ -22,4 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 24, cache: npm}
       - run: npm ci
+      - name: Backfill immutable market landing indexes
+        if: github.ref == 'refs/heads/main'
+        run: node --import tsx scripts/catalog-backfill-market-landings.mjs
       - run: node --import tsx scripts/storage-speed-check.mjs

@@ -1,6 +1,7 @@
 // Read-only post-deploy verification: no source crawls, forms or storage writes.
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {offerPath} from '../apps/web/lib/catalog/offer-url.ts';
 import {getOffer} from '../apps/web/lib/catalog/storage.ts';
 import {getSavedOfferCalculation} from '../apps/web/lib/catalog/saved-offer-calculation.ts';
 import {getEffectiveMarketVersion} from '../apps/web/lib/effective-market-settings.ts';
@@ -25,7 +26,7 @@ try {
     const rows=home.items.filter(row=>row.market===market && (Number(row.totalRub)>0 || Number(row.sellerPriceRub)>0)).slice(0,2);
     assert.ok(rows.length,`No public quotes for ${market}`);
     for(const row of rows) {
-      const html=await read(`/cars/offer/${encodeURIComponent(row.id)}`);
+      const html=await read(offerPath(row));
       const encoded=html.match(/data-offer-preview="([^"]+)"/)?.[1];
       assert.ok(encoded,`Offer page unavailable: ${row.id}`);
       const preview=JSON.parse(decode(encoded));
