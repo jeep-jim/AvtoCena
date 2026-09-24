@@ -4,10 +4,15 @@ on:
   push:
     branches: [fix/storage-speed-finish-20260920, fix/catalog-memory-recovery-20260924, main]
     paths: [scripts/storage-speed-check.mjs, .github/market-runs/market-landings.json]
+  workflow_run:
+    workflows: ['Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish']
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 jobs:
   inspect:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:

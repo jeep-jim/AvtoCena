@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
-import {recentHealthyStorageMaintenance} from './lib/catalog-storage-budget.mjs';
+import {recentHealthyStorageMaintenance,CATALOG_STORAGE_LIMIT_BYTES,CATALOG_STORAGE_HEADROOM_BYTES} from './lib/catalog-storage-budget.mjs';
 const {mutateDataJson,getJsonStorage,readDataJson,writeDataJson}=await import('../apps/web/lib/data.ts');
 const minimumIntervalMs=Math.max(0,Number(process.env.CATALOG_STORAGE_MAINTENANCE_MIN_INTERVAL_MS||0));
 if(minimumIntervalMs>0){
@@ -57,7 +57,7 @@ try {
   const bytes=objects.reduce((n,row)=>n+Math.max(0,Number(row.size)||0),0);
   const manifest=await readDataJson('catalog/manifest.json',null);
   if(manifest?.generationId!==preview.currentPublicGeneration)throw Error('storage_manifest_changed_during_cleanup');
-  const report={checkedAt:new Date().toISOString(),beforeBytes:preview.physicalBucketInventory?.bytes ?? preview.namespaceInventory?.bytes,afterBytes:bytes,deletedObjects:after.deleted.total,protectedGenerations:after.protectedGenerations,generationId:manifest.generationId,marketCounts:Object.fromEntries(Object.entries(manifest.markets).map(([key,value])=>[key,value.count])),limitBytes:50_000_000_000,headroomBytes:5_000_000_000,ok:bytes<45_000_000_000};
+  const report={checkedAt:new Date().toISOString(),beforeBytes:preview.physicalBucketInventory?.bytes ?? preview.namespaceInventory?.bytes,afterBytes:bytes,deletedObjects:after.deleted.total,protectedGenerations:after.protectedGenerations,generationId:manifest.generationId,marketCounts:Object.fromEntries(Object.entries(manifest.markets).map(([key,value])=>[key,value.count])),limitBytes:CATALOG_STORAGE_LIMIT_BYTES,headroomBytes:CATALOG_STORAGE_HEADROOM_BYTES,ok:bytes<CATALOG_STORAGE_LIMIT_BYTES-CATALOG_STORAGE_HEADROOM_BYTES};
   await fs.writeFile('catalog-storage-maintenance.json',JSON.stringify(report,null,2));
   await writeDataJson('catalog/storage-maintenance.json',report);
   console.log(JSON.stringify(report));

@@ -185,12 +185,13 @@ try{
     const motorHp=grid.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true});
     const iceKw=grid.getByRole('spinbutton',{name:'Мощность ДВС, кВт',exact:true});
     const iceHp=grid.getByRole('spinbutton',{name:'Мощность ДВС, л.с.',exact:true});
-    await motorKw.fill('10');assert.ok(Math.abs(Number(await motorHp.inputValue())-10/0.73549875)<1e-7);
+    const initialMotorHp=await motorHp.inputValue();
+    await motorKw.fill('10');assert.equal(await motorHp.inputValue(),initialMotorHp,'editing motor kW preserves existing motor hp');
     assert.equal(await iceKw.inputValue(),'100','electric motor input must not overwrite combustion power');
     await motorHp.fill('20');assert.ok(Math.abs(Number(await motorKw.inputValue())-20*0.73549875)<1e-7);
     await iceHp.fill('100');assert.ok(Math.abs(Number(await iceKw.inputValue())-100*0.73549875)<1e-7);
-    await iceKw.fill('36');assert.ok(Math.abs(Number(await iceHp.inputValue())-36/0.73549875)<1e-7);
-    await motorKw.fill('');assert.equal(await motorHp.inputValue(),'');assert.equal(await iceKw.inputValue(),'36');
+    await iceKw.fill('36');assert.equal(await iceHp.inputValue(),'100','editing combustion kW preserves manually entered hp');
+    await motorKw.fill('');assert.equal(await motorHp.inputValue(),'20');assert.equal(await iceKw.inputValue(),'36');
     await grid.getByLabel('Тип гибрида для расчёта',{exact:true}).selectOption('series_hybrid');
     assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'hybrid type selection keeps the related power inputs open');
     await page.keyboard.press('Escape');
