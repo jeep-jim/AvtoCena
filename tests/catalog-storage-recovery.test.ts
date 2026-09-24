@@ -3,7 +3,7 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {storageBlockedInputBytes,storagePressureRecovery} from '../scripts/lib/catalog-storage-recovery.mjs';
 test('storage retries require reserve, otherwise request bounded safe cleanup',()=>{
  const now=Date.parse('2026-09-22T07:00:00Z');
- const input={currentBytes:42_194_162_968,inputBytes:1_068_548_199,now};
+ const input={currentBytes:52_194_162_968,inputBytes:1_068_548_199,now};
  assert.equal(storagePressureRecovery(input).action,'cleanup');
  assert.equal(storagePressureRecovery({...input,currentBytes:28_000_000_000}).action,'retry');
  assert.equal(storagePressureRecovery({...input,cleanupRunning:true}).action,'wait');
