@@ -290,7 +290,7 @@ test("scheduled cleanup keeps a bounded six-hour grace while preserving both liv
   assert.match(cleanupWorkflow, /^\s*schedule:\s*$/m);
   assert.doesNotMatch(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /catalog-storage-maintenance\.mjs/);
-  assert.match(cleanupWorkflow, /cron: "0 17 \* \* \*"/);
+  assert.match(cleanupWorkflow, /cron: "0 \*/6 \* \* \*"/);
   assert.match(cleanup, /version: 5/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
