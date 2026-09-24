@@ -52,7 +52,6 @@ try {
   await price.getByRole('textbox',{name:'Цена: до',exact:true}).blur();
   await volume.locator('.ac-range-value-toggle').first().click();
   await volume.getByRole('button',{name:'1,5 л',exact:true}).waitFor();
-  await volume.getByRole('button',{name:'Не важно',exact:true}).click();
   if(width<1024)await page.getByRole('button',{name:'Закрыть',exact:true}).click();
   await page.waitForFunction(()=>{const q=new URLSearchParams(location.search);return q.get('budgetFrom')==='1100000'&&q.get('budget')==='1200000';});
   const url=new URL(page.url());assert.equal(url.pathname,'/cars/green');assert.equal(url.searchParams.has('fobFrom'),false);assert.equal(url.searchParams.has('fobTo'),false);
