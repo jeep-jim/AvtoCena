@@ -1,10 +1,10 @@
 {
-  "operation": "catalog-memory-recovery-20260924",
+  "operation": "catalog-memory-recovery-quota60-20260924",
   "market": "europe",
   "reuseRunId": "35940256627",
   "publishMarkets": [
     "europe"
   ],
   "refreshMarkets": [],
-  "reason": "Retry completed intake with bounded reserve reads and 12 GiB publication heap; retain shared publication lock and all regression guards."
+  "reason": "Retry retained completed intake after verified 60 GiB bucket quota and cleanup; preserve all publication, pricing and capacity guards."
 }
