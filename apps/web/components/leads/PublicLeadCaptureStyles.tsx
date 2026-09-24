@@ -2,6 +2,11 @@
 
 export function PublicLeadCaptureStyles() {
   return <style jsx global>{`
+    .ac-lead-dialog .ac-messenger-callback {
+      background: #22B14C !important;
+      color: #fff !important;
+      -webkit-text-fill-color: #fff !important;
+    }
     .ac-colored-button,
     .ac-colored-button *,
     .ac-lead-capture-banner .avto-button,
