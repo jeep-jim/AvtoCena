@@ -1,0 +1,5 @@
+{
+  "operation": "catalog-cold-page-backfill-20260924",
+  "appendOnly": true,
+  "reason": "Build compact first-page indexes for the current immutable generation and measure cold/warm reads."
+}
