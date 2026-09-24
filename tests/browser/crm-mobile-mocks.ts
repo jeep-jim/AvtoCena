@@ -1,6 +1,6 @@
 export const user={id:'owner-test',displayName:'Тестовый руководитель',telegramUsername:'test_owner',role:'owner',status:'active'};
 export const users=[user,{id:'manager-test',displayName:'Александр Константинопольский',telegramUsername:'test_manager_long',role:'manager',status:'active'}];
-export const leads=Array.from({length:8},(_,i)=>({id:'test-'+i,name:'Клиент для проверки '+(i+1),phone:'+79991234567',contactMethod:i===0?'telegram':i===1?'max':'phone',telegram:i===0?'+79991234567':undefined,max:i===1?'+79991234567':undefined,car:'Toyota Corolla Cross Hybrid',budgetRub:2250000,status:'new',assignedManagerId:i%2?'manager-test':undefined,clientId:'client-'+i,createdAt:'2026-09-21T05:00:00Z',source:'offer_lead_banner',selectedOffers:[],followups:[]}));
+export const leads=Array.from({length:8},(_,i)=>({id:'test-'+i,name:'Клиент для проверки '+(i+1),phone:'+79991234567',contactMethod:i===0?'telegram':i===1?'max':'phone',telegram:i===0?'+79991234567':undefined,max:i===1?'+79991234567':undefined,car:'Toyota Corolla Cross Hybrid',budgetRub:2250000,status:i===1?'qualified':'new',assignedManagerId:i%2?'manager-test':undefined,clientId:'client-'+i,createdAt:'2026-09-21T05:00:00Z',source:'offer_lead_banner',selectedOffers:[],followups:[]}));
 export const getCurrentUser=async()=>user;
 export const getAuthUsers=()=>users;
 export const isAdminRole=(r:string)=>r==='owner'||r==='admin';

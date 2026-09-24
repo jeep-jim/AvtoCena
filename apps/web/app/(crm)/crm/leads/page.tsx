@@ -257,7 +257,7 @@ export default async function CrmLeadsPage({
                   >
                     {leadMetrikaStage(lead.status)?.marker} {leadStatusLabel(lead.status)}
                   </span>
-                  <div className="mt-2 text-[var(--ac-muted)]">
+                  <div className="crm-lead-manager mt-2 text-[var(--ac-muted)]">
                     {manager?.displayName || "Без ответственного"}
                   </div>
                 </div>
