@@ -42,6 +42,9 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
  .crm-overview-feed{margin-top:12px}.crm-overview-feed>a{padding:9px 10px;margin-top:6px}.crm-overview-feed>a>div:first-child{flex-wrap:nowrap;gap:6px}.crm-overview-feed .font-black{font-size:12px}.crm-overview-feed>a>div:first-child>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.crm-overview-feed span{flex-shrink:0;font-size:10px!important;padding:4px 7px}.crm-overview-feed .text-sm{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .crm-quick-actions a{padding:12px 8px;font-size:12px;min-height:44px}
  .crm-lead-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.crm-lead-tabs a{padding:10px 3px;text-align:center;font-size:12px}
+ .crm-lead-tabs-owner{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,.7fr) 40px;align-items:stretch}
+ .crm-lead-tabs-owner a{min-width:0;white-space:nowrap}
+ .crm-lead-tabs-owner .crm-lid-button{height:100%;min-height:40px;padding:0}
  .crm-lead-filters{grid-template-columns:repeat(4,minmax(0,1fr));padding:10px;gap:8px}
  .crm-lead-filters>input:not([type="hidden"]){grid-column:1/4;grid-row:1}.crm-lead-filters>select{grid-column:span 2;grid-row:2}.crm-lead-filters>button{grid-column:4;grid-row:1;min-height:44px;padding:10px 3px;font-size:12px}
  .crm-lead-filters select{font-size:12px;padding-top:10px;padding-bottom:10px;min-height:44px}

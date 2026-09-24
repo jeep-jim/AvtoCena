@@ -101,7 +101,7 @@ export default async function CrmLeadsPage({
       title="Заявки"
       subtitle="Обращения клиентов, автомобили и работа команды. Время указано по Москве."
     >
-      <div className="crm-lead-tabs mb-4 flex flex-wrap gap-2">
+      <div className={`crm-lead-tabs mb-4 flex flex-wrap gap-2${user.role === "owner" ? " crm-lead-tabs-owner" : ""}`}>
         {[
           ["all", "Активные"],
           ["my", "Мои заявки"],
@@ -115,6 +115,16 @@ export default async function CrmLeadsPage({
             {label}
           </Link>
         ))}
+        {user.role === "owner" ? (
+          <Link
+            href="/crm/settings/metrika"
+            className="crm-lid-button"
+            aria-label="Реклама и Метрика"
+            title="Реклама и Метрика"
+          >
+            Lid
+          </Link>
+        ) : null}
       </div>
       <div className="crm-metrika-legend crm-metrika-legend-mobile" aria-label="Статусы для Метрики">
         <strong>Статусы для Метрики</strong><LeadStatusHelp />
