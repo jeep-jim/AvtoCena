@@ -161,6 +161,7 @@ function MessengerFields({ messenger, setMessenger, contact, setContact, kind, s
     <fieldset><legend className="mb-2 text-sm font-bold">Как вас найти?</legend><div className="flex flex-wrap gap-5">{(["phone", "username"] as const).map(value => <label key={value} className="flex items-center gap-2 text-sm font-bold"><input type="radio" name="messenger-contact-kind" value={value} checked={kind === value} onChange={() => setKind(value)} className="h-4 w-4 accent-red-500" />{value === "phone" ? "Телефон" : "Никнейм"}</label>)}</div></fieldset>
     <label className="block"><FieldLabel required>{kind === "phone" ? "Телефон аккаунта" : "Никнейм"}</FieldLabel>{kind === "phone" ? <PhoneInput value={contact} onChange={setContact} /> : <input value={contact} onChange={event => setContact(event.target.value)} placeholder="@username" autoComplete="off" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" />}</label>
     <p className="text-xs leading-relaxed text-[var(--ac-muted)]">{kind === "phone" ? "Укажите номер, к которому привязан аккаунт. Разрешите находить вас по номеру в настройках мессенджера." : "Укажите свой никнейм в выбранном мессенджере. Если не знаете его, выберите телефон."}</p>
+    {kind === "phone" ? <p className="rounded-xl bg-[var(--ac-surface-2)] px-4 py-3 text-sm leading-relaxed text-[var(--ac-text)]">Если не сможем найти вас в мессенджере по указанному номеру, перезвоним на этот номер.</p> : null}
   </div>;
 }
 
