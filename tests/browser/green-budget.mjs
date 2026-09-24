@@ -46,10 +46,10 @@ try {
   await price.getByRole('button',{name:'1 млн',exact:true}).waitFor();
   assert.doesNotMatch(await price.innerText(),/FOB|1,0 л|1,5 л/);
   await price.getByRole('button',{name:'1 млн',exact:true}).click();
-  await price.locator('input[name="budgetFrom"]').fill('1100000');
-  await price.locator('input[name="budgetFrom"]').blur();
-  await price.locator('input[name="budget"]').fill('1200000');
-  await price.locator('input[name="budget"]').blur();
+  await price.getByRole('textbox',{name:'Цена: от',exact:true}).fill('1100000');
+  await price.getByRole('textbox',{name:'Цена: от',exact:true}).blur();
+  await price.getByRole('textbox',{name:'Цена: до',exact:true}).fill('1200000');
+  await price.getByRole('textbox',{name:'Цена: до',exact:true}).blur();
   await volume.locator('.ac-range-value-toggle').first().click();
   await volume.getByRole('button',{name:'1,5 л',exact:true}).waitFor();
   await volume.getByRole('button',{name:'Не важно',exact:true}).click();
