@@ -39,7 +39,7 @@ try{
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
    if(kind==='documents'){
    const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;let records=[];
-   await page.route('**/api/crm/contracts**',async route=>{const req=route.request(),url=new URL(req.url());if(req.method()==='GET'){await route.fulfill({json:url.searchParams.has('template')?{template}:url.searchParams.has('id')?{record}:{records}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,number:body.number??record.number,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};else if(body.action==='archive')record={...record,archivedAt:new Date().toISOString(),revision:record.revision+1};else if(body.action==='restore')record={...record,archivedAt:undefined,revision:record.revision+1};else if(body.action==='purge')record=null;else if(body.action==='template'){await route.fulfill({json:{template:{...body.template,revision:body.revision+1}}});return;}records=record?[{...record,client:record.fields.fio||'Без клиента',car:record.fields.car||'',market:record.fields.market,templateId:record.template.id,versions:record.versions.length}]:[];await route.fulfill({json:{record,ok:true}});});
+   await page.route('**/api/crm/contracts**',async route=>{const req=route.request(),url=new URL(req.url());if(req.method()==='GET'){await route.fulfill({json:url.searchParams.has('template')?{template}:url.searchParams.has('id')?{record}:{records}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,number:body.number??record.number,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};else if(body.action==='archive')record={...record,archivedAt:new Date().toISOString(),revision:record.revision+1};else if(body.action==='restore')record={...record,archivedAt:undefined,revision:record.revision+1};else if(body.action==='purge')record=null;else if(body.action==='template'){await route.fulfill({json:{template:{...body.template,revision:body.revision+1}}});return;}records=record?[...records.filter(x=>x.id!==record.id),{...record,client:record.fields.fio||'Без клиента',car:record.fields.car||'',market:record.fields.market,templateId:record.template.id,versions:record.versions.length}]:[];await route.fulfill({json:{record,ok:true}});});
   }
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
@@ -54,6 +54,7 @@ try{
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(['clients','client','leads'].includes(kind)){assert.ok(await page.locator('.crm-manual-client-origin').count()>0,'manual origin is shown');if(kind==='leads')assert.ok((await page.locator('.crm-manual-client-origin').first().innerText()).includes('Уже был в базе'));if(kind==='clients'&&(width===390||width===1440)){await page.locator('.crm-manual-client-origin').first().scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/manual-origin-${theme}-${width}.png`});}}
    if(kind==='documents'){
+    assert.equal(await page.getByRole('button',{name:'Договоры',exact:true}).count(),0);
     assert.equal(await page.getByRole('button',{name:'Создать договор',exact:true}).count(),1);
     if(theme==='light')assert.equal(await page.locator('.crm-documents-button').evaluate(e=>getComputedStyle(e).webkitTextFillColor),'rgb(23, 28, 36)','active documents text remains dark');
     assert.ok(await page.getByRole('combobox',{name:'Менеджер',exact:true}).isVisible());
@@ -75,8 +76,21 @@ try{
     await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row').waitFor();
     page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'В архив договор TEST/99',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1,'cancel archive retains document');
     page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'В архив договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).waitFor();
-    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Договоры',exact:true}).click();await page.locator('.contract-list-row').waitFor();
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Восстановить договор TEST/99',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.locator('.contract-list-row').waitFor();
     if(width===1440){await page.getByRole('button',{name:'Редактировать шаблон',exact:true}).click();await page.locator('.contract-editor-layout').waitFor();assert.ok(await page.locator('.contract-paper').isVisible());await page.getByRole('button',{name:'← К списку',exact:true}).click();}
+   }
+   if(kind==='documents'){
+    for(let i=0;i<5;i++){await page.getByRole('button',{name:'Создать договор',exact:true}).click();await page.getByRole('button',{name:'← К списку',exact:true}).click();}
+    await page.locator('.contract-list-row').nth(5).waitFor();
+    await page.getByRole('button',{name:'Плитки',exact:true}).click();
+    const columns=await page.locator('.contract-list-tiles').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);
+    assert.equal(columns,width>=1100?3:width>=768?2:1);
+    await page.getByPlaceholder('Клиент, автомобиль или номер').fill('TEST/99');assert.equal(await page.locator('.contract-list-row').count(),1);
+    await page.getByRole('button',{name:'Список',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1);
+    await page.getByRole('button',{name:'Плитки',exact:true}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();
+    await page.reload();await page.locator('.contract-list-tiles .contract-list-row').nth(5).waitFor();
+    if(width===390||width===1440){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/document-tiles-${theme}-${width}.png`});}
+    if(width>=1100){const archive=await page.getByRole('button',{name:'Архив',exact:true}).boundingBox(),date=await page.locator('.contract-filters .crm-date-control').boundingBox();assert.ok(archive.x>=date.x+date.width,'archive is right of date');}
    }
    if(kind==='leads'){
     const clientLink=page.locator('.crm-lead-client-link').first();assert.equal(await clientLink.getAttribute('href'),'/crm/clients/client-0');
@@ -102,6 +116,19 @@ try{
      await page.locator('.crm-lead-card').first().evaluate(e=>e.open=false);
      await page.locator('.crm-lead-date-filter').evaluate(e=>window.scrollBy(0,e.getBoundingClientRect().top-180));
      await page.screenshot({path:`${out}/contact-summary-${theme}-${width}.png`});
+    }
+   }
+   if(kind==='clients'){
+    assert.equal(await page.locator('.crm-client-card>div:first-child .crm-manual-client-origin').count(),0);
+    assert.ok(await page.locator('.crm-client-owner .crm-client-origin-compact svg').count()>0);
+    assert.ok(await page.locator('.crm-client-owner .crm-client-assigned svg').count()>0);
+    if(width>=1024){
+     await page.evaluate(()=>window.scrollTo(0,200));await page.waitForTimeout(150);const y1=(await page.locator('.crm-client-create').boundingBox()).y;
+     await page.evaluate(()=>window.scrollTo(0,300));await page.waitForTimeout(150);const y2=(await page.locator('.crm-client-create').boundingBox()).y;
+     assert.ok(Math.abs(y2-y1)<2,'desktop sidebar stays fixed while list scrolls');
+     const header=await page.locator('.crm-header').boundingBox();assert.ok(y2>=header.y+header.height,'sidebar stays below sticky header');
+     await page.locator('.crm-client-create').evaluate(e=>e.scrollTop=e.scrollHeight);const button=await page.getByRole('button',{name:'Добавить клиента',exact:true}).boundingBox();assert.ok(button.y+button.height<=851,'sidebar submit stays reachable');
+     await page.locator('.crm-client-create').evaluate(e=>e.scrollTop=0);
     }
    }
    if(kind==='client'){
