@@ -1,3 +1,5 @@
+import {ManualClientOrigin} from "@/components/crm/ManualClientOrigin";
+import {manualClientIndex} from "@/lib/crm-client-origin";
 import {ContactIcon} from "@/components/crm/ContactIcon";
 import {LeadDateFilter} from "@/components/crm/LeadDateFilter";
 import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
@@ -77,12 +79,14 @@ export default async function CrmLeadsPage({
   if (!user) redirect("/login");
   const params = (await searchParams) || {};
   const view = first(params.view) || "all";
-  const [stored, users, messages, deliveries] = await Promise.all([
+  const [stored, users, messages, deliveries, clients] = await Promise.all([
     readChunkedDataJson<any>("leads/leads.json", []),
     readCrmUsers(),
     readChunkedDataJson<any>("telegram/crm-messages.json", []),
     readChunkedDataJson<any>("telegram/crm-outbox.json", []),
+    readChunkedDataJson<any>("clients/clients.json", []),
   ]);
+  const previousManualClient = manualClientIndex(clients.filter(client=>canSeeLead(user,client)));
   const managers = users
     .filter(
       (user) =>
@@ -197,6 +201,7 @@ export default async function CrmLeadsPage({
       } />
       <div className="mt-4 space-y-3">
         {visible.map((lead) => {
+          const priorClient = previousManualClient(lead);
           const cars = offers(lead);
           const car = cars[0];
           const leadMessages = messages
@@ -233,6 +238,7 @@ export default async function CrmLeadsPage({
                 <div className="crm-lead-identity min-w-0">
                   <div className="crm-lead-name font-black">
                     {lead.clientId ? <Link className="crm-lead-client-link" href={`/crm/clients/${encodeURIComponent(lead.clientId)}`} title="Открыть карточку клиента">{lead.name || lead.telegramDisplayName || "Клиент"}</Link> : (lead.name || lead.telegramDisplayName || "Клиент")}
+                  {priorClient&&<Link href={`/crm/clients/${encodeURIComponent(priorClient.id!)}`} title="Открыть ранее добавленного клиента"><ManualClientOrigin client={priorClient} managers={users} previous/></Link>}
                   </div>
                   <div className="crm-lead-contact-row mt-1 text-sm text-[var(--ac-muted)]">
                     <span className="crm-lead-channel-icon" aria-hidden="true"><ContactIcon channel={leadContact(lead).channel}/></span>

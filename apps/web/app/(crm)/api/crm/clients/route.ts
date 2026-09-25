@@ -61,6 +61,8 @@ export async function POST(request: Request) {
       city: clean(body.city),
       comment,
       createdByManagerId: user.id,
+      createdByManagerName: user.displayName,
+      creationSource: "manual",
       assignedManagerId: (user.role === "manager" ? user.id : clean(body.assignedManagerId) || user.id),
       source: clean(body.source) || "manual"
     });

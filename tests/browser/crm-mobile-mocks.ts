@@ -6,7 +6,7 @@ export const getAuthUsers=()=>users;
 export const isAdminRole=(r:string)=>r==='owner'||r==='admin';
 export const isCrmRole=(r:string)=>isAdminRole(r)||r==='manager';
 export const readCrmUsers=async()=>users;
-export const readDataJson=async(p:string,f:any)=>p==='auth/users.json'?users:p==='leads/leads.json'?leads:p==='clients/clients.json'?leads.map((l,i)=>({...l,id:'client-'+i,fio:l.name,documents:i===0?[{id:'11111111-1111-4111-8111-111111111111',name:'Паспорт.png',mime:'image/png',size:1024,hasThumbnail:true},{id:'22222222-2222-4222-8222-222222222222',name:'Договор.pdf',mime:'application/pdf',size:2048,hasThumbnail:false},{id:'33333333-3333-4333-8333-333333333333',name:'В корзине.pdf',mime:'application/pdf',size:2048,hasThumbnail:false,deletedAt:new Date().toISOString()}]:[]})):f;
+export const readDataJson=async(p:string,f:any)=>p==='auth/users.json'?users:p==='leads/leads.json'?leads:p==='clients/clients.json'?leads.map((l,i)=>({...l,id:'client-'+i,fio:l.name,...(i===0?{source:'manual',createdByManagerId:'owner-test',createdAt:'2026-09-20T05:00:00Z'}:{}),documents:i===0?[{id:'11111111-1111-4111-8111-111111111111',name:'Паспорт.png',mime:'image/png',size:1024,hasThumbnail:true},{id:'22222222-2222-4222-8222-222222222222',name:'Договор.pdf',mime:'application/pdf',size:2048,hasThumbnail:false},{id:'33333333-3333-4333-8333-333333333333',name:'В корзине.pdf',mime:'application/pdf',size:2048,hasThumbnail:false,deletedAt:new Date().toISOString()}]:[]})):f;
 export const readChunkedDataJson=readDataJson;
 export const getActiveDirectPartnerPayout=async()=>({defaultSignedContractPayoutRub:10000});
 export const money=(v:number)=>Math.round(v).toLocaleString('ru-RU');

@@ -9,7 +9,7 @@ import {documentBlocks,sampleFields} from '../apps/web/lib/contracts/model';
 import {previewBlocks,previewParts} from '../apps/web/lib/contracts/preview';
 const require=createRequire(import.meta.url);
 test('manual client creation writes only the client, retains all contacts and is idempotent',async()=>{
- const state:any={user:{id:'m',role:'manager',status:'active'},clients:[],writes:[]};(globalThis as any).__clientCreate=state;
+ const state:any={user:{id:'m',displayName:'Менеджер Тест',role:'manager',status:'active'},clients:[],writes:[]};(globalThis as any).__clientCreate=state;
  const mocks:any={
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__clientCreate.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);`,
  '@/lib/data':`export const generateId=()=> 'op';export const readChunkedDataJson=async(p)=>{if(p!=='clients/clients.json')throw Error('unexpected read '+p);return globalThis.__clientCreate.clients;};export const appendChunkedDataJson=async(p,v)=>{const s=globalThis.__clientCreate;s.writes.push(p);s.clients.push(v);return v;};`
@@ -17,7 +17,7 @@ test('manual client creation writes only the client, retains all contacts and is
  const built=await build({entryPoints:['apps/web/app/(crm)/api/crm/clients/route.ts'],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'mocks',setup(b){b.onResolve({filter:/^@\/lib\//},a=>mocks[a.path]?{path:a.path,namespace:'test'}:undefined);b.onLoad({filter:/.*/,namespace:'test'},a=>({contents:mocks[a.path],loader:'ts'}));}}]});
  const m={exports:{} as any};new Function('require','module','exports',built.outputFiles[0].text)(require,m,m.exports);
  const post=(origin='https://avtocena.com')=>m.exports.POST(new Request('https://avtocena.com/api/crm/clients',{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify({operationId:'op',fio:'Игорь',max:'max-contact',car:'RAV4',budgetRub:'5000000'})}));
- try{assert.equal((await post()).status,200);assert.equal((await post()).status,200);assert.deepEqual(state.writes,['clients/clients.json']);assert.equal(state.clients[0].max,'max-contact');assert.equal(state.clients[0].car,'RAV4');assert.equal(state.clients[0].assignedManagerId,'m');assert.equal((await post('https://evil.example')).status,403);state.user.id='other';assert.equal((await post()).status,403);state.user=null;assert.equal((await post()).status,401);}finally{delete (globalThis as any).__clientCreate;}
+ try{assert.equal((await post()).status,200);assert.equal((await post()).status,200);assert.deepEqual(state.writes,['clients/clients.json']);assert.equal(state.clients[0].max,'max-contact');assert.equal(state.clients[0].car,'RAV4');assert.equal(state.clients[0].assignedManagerId,'m');assert.equal(state.clients[0].creationSource,'manual');assert.equal(state.clients[0].createdByManagerName,'Менеджер Тест');assert.equal((await post('https://evil.example')).status,403);state.user.id='other';assert.equal((await post()).status,403);state.user=null;assert.equal((await post()).status,401);}finally{delete (globalThis as any).__clientCreate;}
 });
 test('local CRM date crosses midnight at UTC+7 and ownership prefers assignment',()=>{
  assert.equal(crmDateKey('2026-09-25T17:01:00Z'),'2026-09-26');assert.match(crmDateTime('2026-09-25T09:00:00Z'),/16:00/);
