@@ -2,6 +2,7 @@ import { directOfferScenario } from "@/lib/catalog/yandex-direct-scenario";
 import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
 import { permanentRedirect } from "next/navigation";
 import { selectRelatedOfferGroups, isRenderableRelatedOffer } from "@/lib/catalog/related-offer-selection";
+import { readRelatedModelFamily } from "@/lib/catalog/related-model-family";
 import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { filterGreenCorner } from "@/lib/catalog/green-corner-search";
 import { PUBLIC_CATALOG_MARKETS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
@@ -136,8 +137,8 @@ function safeExternalUrl(value: unknown) {
 }
 
 async function SimilarOffers({ current }: { current: any }) {
-  const familyModel = String(current.model || "").trim();
   const make = String(current.make || "").trim();
+  const familyModel = await readRelatedModelFamily(make, String(current.model || "").trim());
   const greenCurrent = isGreenCornerOffer(current);
   const presented = presentCatalogOffer(current);
   const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
