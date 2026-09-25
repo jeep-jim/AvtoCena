@@ -269,3 +269,6 @@ html[data-theme] .crm-root .crm-navigation a.crm-documents-button[aria-current="
 @media(max-width:767px){.crm-client-card{grid-template-columns:minmax(0,1fr) auto;gap:8px}.crm-client-manager{grid-column:auto;align-items:flex-end;flex-direction:column;gap:5px}.crm-client-manager span{text-align:right;max-width:110px}.crm-client-search{grid-template-columns:minmax(0,1fr) auto}.crm-client-search input{grid-column:1/-1}.crm-client-search select{width:100%;min-width:0}}
 
 @media(min-width:1024px){.crm-client-create .crm-contact-row{grid-template-columns:repeat(2,minmax(0,1fr))}.crm-client-create .crm-contact-row>:first-child{grid-column:1/-1}}
+
+.crm-manual-client-origin{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 7px;margin:6px 0;font-size:11px;font-weight:400;line-height:1.45;color:var(--ac-muted);overflow-wrap:anywhere}.crm-manual-client-origin strong{color:var(--ac-text);font-size:11px;font-weight:650}.crm-lead-identity .crm-manual-client-origin{display:grid;gap:2px}
+@media(max-width:767px){.crm-lead-identity .crm-manual-client-origin{margin:3px 0}.crm-lead-identity .crm-manual-client-origin>span{display:none}}
