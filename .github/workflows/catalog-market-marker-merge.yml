@@ -1,0 +1,60 @@
+name: Catalog market marker merge dispatch
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      - ".github/market-runs/*-refresh.json"
+permissions:
+  contents: read
+  actions: write
+jobs:
+  dispatch:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+            const allowed = new Set(['china', 'korea', 'uae', 'georgia', 'europe']);
+            const markets = new Set();
+            for (const file of files) {
+              const match = file.filename.match(/^\.github\/market-runs\/(china|korea|uae|georgia|europe)-refresh\.json$/);
+              if (match && allowed.has(match[1])) markets.add(match[1]);
+            }
+            const mergeSha = context.payload.pull_request.merge_commit_sha;
+            for (const market of markets) {
+              const workflow_id = `catalog-refresh-${market}.yml`;
+              let pushRunExists = false;
+              for (let attempt = 0; attempt < 6 && !pushRunExists; attempt += 1) {
+                if (attempt) await new Promise(resolve => setTimeout(resolve, 5000));
+                const existing = await github.rest.actions.listWorkflowRuns({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id,
+                  branch: 'main',
+                  event: 'push',
+                  per_page: 20,
+                });
+                pushRunExists = existing.data.workflow_runs.some(run => run.head_sha === mergeSha);
+              }
+              if (pushRunExists) {
+                core.info(`${market}: push workflow already exists for ${mergeSha}`);
+                continue;
+              }
+              await github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id,
+                ref: 'main',
+              });
+              core.info(`${market}: dispatched after marker merge ${mergeSha}`);
+            }
