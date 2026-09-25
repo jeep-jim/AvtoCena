@@ -61,10 +61,10 @@ test('a legacy published slice is proven by the active market projection and com
  const intakeCheckpoint={version:1,market:'china',generationId:'g',updatedAt:new Date(now).toISOString(),sources};
  const args={...input,market:'china',journal,intakeCheckpoint,activeMarket:{count:28382,updatedAt:new Date(now-30000).toISOString()},runs:[{id:42,status:'completed',conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]};
  assert.equal(recoveryDecision(args).reason,'continue_published_budget_slice');
+ assert.equal(recoveryDecision({...args,activeMarket:{count:28382,updatedAt:new Date(now-16*60000).toISOString()}}).action,'dispatch');
  for(const activeMarket of [
   undefined,
   {count:0,updatedAt:new Date(now-30000).toISOString()},
-  {count:28382,updatedAt:new Date(now-16*60000).toISOString()},
  ])assert.notEqual(recoveryDecision({...args,activeMarket}).action,'dispatch',JSON.stringify(activeMarket));
 });
 
