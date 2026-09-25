@@ -2,7 +2,7 @@ import {transientOperationFailure} from './transient-operation.mjs';
 export const MARKET_WORKFLOWS=Object.fromEntries(['china','korea','uae','georgia','europe'].map(m=>[m,`catalog-refresh-${m}.yml`]));
 MARKET_WORKFLOWS.green='catalog-refresh-green.yml';
 MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
-export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now=Date.now(),lastDispatchAt,recovery}) {
+export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');
  if(runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)))return {action:'none',reason:'already_running'};
  if(recovery?.action!=='cleanup_dispatched'&&now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
@@ -15,9 +15,19 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now
  const sourceRows=journal?.sources||[];
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
+ const activeMarketAgeFromCheckpoint=Math.abs(Date.parse(activeMarket?.updatedAt||'')-Date.parse(intakeCheckpoint?.updatedAt||''));
+ // Older successful publishers committed the intake cursor and public catalog,
+ // but did not yet write publicationStatus to the operations journal. Recover
+ // that one legacy state only when the preserved market projection, journal
+ // generation and committed cursor describe the same publication window.
+ const legacyPublishedSlice=journal?.publicationStatus!=='published'
+  && Number(activeMarket?.count)>0
+  && journal?.generationId && journal.generationId===intakeCheckpoint?.generationId
+  && Number.isFinite(activeMarketAgeFromCheckpoint) && activeMarketAgeFromCheckpoint<15*60000;
+ const slicePublished=journal?.publicationStatus==='published'||legacyPublishedSlice;
  const budgetContinuationBlockers=[];
  if(!['china','europe'].includes(market))budgetContinuationBlockers.push('market_not_resumable');
- if(journal?.publicationStatus!=='published')budgetContinuationBlockers.push('slice_not_published');
+ if(!slicePublished)budgetContinuationBlockers.push('slice_not_published');
  if(intakeCheckpoint?.version!==1||intakeCheckpoint?.market!==market)budgetContinuationBlockers.push('checkpoint_missing_or_invalid');
  if(intakeCheckpoint?.generationId!==journal?.generationId)budgetContinuationBlockers.push('checkpoint_generation_mismatch');
  if(!(checkpointAge>=0&&checkpointAge<4*86400000))budgetContinuationBlockers.push('checkpoint_stale');
@@ -25,7 +35,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now
  if(budgetRows.some(s=>typeof s.cursor!=='string'||!s.cursor.length
    ||!intakeCheckpoint?.sources?.some(c=>c.sourceId===s.sourceId&&c.cursor===s.cursor&&budgetStops.has(c.stopReason))))budgetContinuationBlockers.push('cursor_not_committed');
  if(latest&&latest.conclusion!=='success'&&String(latest.id)!==String(journal?.runId))budgetContinuationBlockers.push('newer_failed_run');
- const committedBudget=['china','europe'].includes(market) && journal?.publicationStatus==='published'
+ const committedBudget=['china','europe'].includes(market) && slicePublished
   && intakeCheckpoint?.version===1 && intakeCheckpoint.market===market
   && intakeCheckpoint.generationId===journal.generationId
   && checkpointAge>=0 && checkpointAge<4*86400000 && budgetRows.length>0

@@ -1,7 +1,7 @@
 name: Catalog market marker merge dispatch
 on:
   pull_request:
-    types: [opened, reopened, synchronize, closed]
+    types: [closed]
     branches: [main]
     paths:
       - ".github/market-runs/*-refresh.json"
@@ -19,12 +19,8 @@ jobs:
           script: |
             const pull = context.payload.pull_request;
             const mergedMarker = context.payload.action === 'closed' && pull.merged === true;
-            const explicitRepeat = context.payload.action !== 'closed'
-              && pull.head.repo.full_name === `${context.repo.owner}/${context.repo.repo}`
-              && pull.base.ref === 'main'
-              && pull.title === 'ops: repeat current catalog marker';
-            if (!mergedMarker && !explicitRepeat) {
-              core.info('No trusted merged marker or explicit same-repository repeat request.');
+            if (!mergedMarker) {
+              core.info('No trusted merged marker.');
               return;
             }
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -42,29 +38,6 @@ jobs:
             const mergeSha = context.payload.pull_request.merge_commit_sha;
             for (const market of markets) {
               const workflow_id = `catalog-refresh-${market}.yml`;
-              if (explicitRepeat) {
-                const path = `.github/market-runs/${market}-refresh.json`;
-                const [mainFile, headFile] = await Promise.all([
-                  github.rest.repos.getContent({...context.repo, path, ref: 'main'}),
-                  github.rest.repos.getContent({...context.repo, path, ref: pull.head.sha}),
-                ]);
-                const normalized = response => {
-                  const marker = JSON.parse(Buffer.from(response.data.content, 'base64').toString('utf8'));
-                  delete marker.operation;
-                  return JSON.stringify(marker);
-                };
-                if (normalized(mainFile) !== normalized(headFile)) {
-                  throw new Error(`${market}: explicit repeat may change only the operation nonce`);
-                }
-                await github.rest.actions.createWorkflowDispatch({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  workflow_id,
-                  ref: 'main',
-                });
-                core.info(`${market}: explicitly repeated current main marker`);
-                continue;
-              }
               let pushRunExists = false;
               for (let attempt = 0; attempt < 6 && !pushRunExists; attempt += 1) {
                 if (attempt) await new Promise(resolve => setTimeout(resolve, 5000));

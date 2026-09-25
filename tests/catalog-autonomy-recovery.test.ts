@@ -55,6 +55,19 @@ test('published China budget slices continue automatically with matching committ
  ])assert.notEqual(recoveryDecision({...args,...change}).action,'dispatch',JSON.stringify(change));
 });
 
+test('a legacy published slice is proven by the active market projection and committed cursor',()=>{
+ const sources=[{sourceId:'che168',stopReason:'budget',cursor:'2001'}];
+ const journal={publicationStatus:'failed',generationId:'g',runId:'42',sources};
+ const intakeCheckpoint={version:1,market:'china',generationId:'g',updatedAt:new Date(now).toISOString(),sources};
+ const args={...input,market:'china',journal,intakeCheckpoint,activeMarket:{count:28382,updatedAt:new Date(now-30000).toISOString()},runs:[{id:42,status:'completed',conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]};
+ assert.equal(recoveryDecision(args).reason,'continue_published_budget_slice');
+ for(const activeMarket of [
+  undefined,
+  {count:0,updatedAt:new Date(now-30000).toISOString()},
+  {count:28382,updatedAt:new Date(now-16*60000).toISOString()},
+ ])assert.notEqual(recoveryDecision({...args,activeMarket}).action,'dispatch',JSON.stringify(activeMarket));
+});
+
 test('a blocked budget continuation is reported instead of being called current',()=>{
  const sources=[{sourceId:'che168',stopReason:'budget',cursor:'2001'}];
  const journal={publicationStatus:'published',generationId:'g',sources,lastCollectionSuccess:new Date(now).toISOString()};

@@ -5,6 +5,7 @@ import {MARKET_WORKFLOWS,recoveryDecision,transientOperationFailure} from './lib
 const token=process.env.GH_TOKEN,repo=process.env.GITHUB_REPOSITORY;
 if(!token||!/^[-\w]+\/[-\w]+$/.test(repo||''))throw Error('missing_github_context');
 const storage=getJsonStorage(),report={checkedAt:new Date().toISOString(),markets:{}};
+const manifest=await storage.readJson('catalog/manifest.json',null);
 async function api(path,method='GET',body){
  const response=await fetch(`https://api.github.com/repos/${repo}/${path}`,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(60000)});
  if(!response.ok)throw Error(`github_${method}_${response.status}`);
@@ -19,7 +20,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
   storage.readJson(`catalog/operations/recovery/${market}.json`,null),
   ['china','europe'].includes(market)?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
  ]);
- const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,lastDispatchAt:dispatch?.at,recovery:dispatch});
+ const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,activeMarket:manifest?.markets?.[market],lastDispatchAt:dispatch?.at,recovery:dispatch});
  if(decision.action==='inspect_failure'){
   const jobs=await api(`actions/runs/${decision.runId}/jobs?per_page=100`);
   const failures=jobs.jobs.filter(j=>['failure','timed_out'].includes(j.conclusion));
