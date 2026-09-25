@@ -20,7 +20,6 @@ const MOBILE_BASE = "https://www.mobile.de";
 const SEARCH_BASE = "https://suchen.mobile.de";
 const SRP_API = `${MOBILE_BASE}/consumer/api/search/srp`;
 const VIP_API = `${MOBILE_BASE}/consumer/api/search/vip`;
-const MAX_SHARD_PAGES = 25;
 const HEADERS = {
   accept: "application/json,text/plain,*/*",
   "accept-language": "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -285,8 +284,10 @@ function searchShards(): SearchShard[] {
     { minPowerKw: 161, maxPowerKw: 220, label: "power_161_220" },
     { minPowerKw: 221, label: "power_221_plus" },
   ];
-  return allowedYears.flatMap((year) =>
-    powerBands.map((band) => ({
+  // Finish the low-power bands across all eligible years first. A bounded
+  // collector should not spend most of its window on high-power inventory.
+  return powerBands.flatMap((band) =>
+    allowedYears.map((year) => ({
       yearFrom: year,
       yearTo: year,
       ...band,
@@ -466,8 +467,11 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
       .filter((row: MobileDeExactRow | null): row is MobileDeExactRow =>
         Boolean(row),
       );
-    const reportedPages = Math.max(1, Number(result?.numPages || 1));
-    const shardPageLimit = Math.min(MAX_SHARD_PAGES, reportedPages);
+    const shardPageLimit = Number(result?.numPages ?? 1);
+    if (!Number.isSafeInteger(shardPageLimit) || shardPageLimit < 0)
+      throw new Error('mobile_de_invalid_page_count');
+    // Respect the source's own pagination. The shared collector enforces the
+    // time/row/page budget and reports it as partial, not source_finished.
     const nextState =
       state.page < shardPageLimit
         ? { shard: state.shard, page: state.page + 1 }
