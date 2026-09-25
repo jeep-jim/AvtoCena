@@ -11,15 +11,16 @@ test('growth at one source cannot hide loss at another substantial source',()=>{
 });
 test('bounded turnover is accepted only after an authoritative complete source pass',()=>{
  const previous={autoscout_europe_open:10572,mobile_de_open:10842};
- const next={autoscout_europe_open:9099,mobile_de_open:15179};
+ const next={autoscout_europe_open:6982,mobile_de_open:15853};
  assert.equal(guard(previous,next).ok,false);
- const complete=guard(previous,next,{},0.9,{completedSources:new Set(['autoscout_europe_open','mobile_de_open'])});
+ const completedSources=new Set(['autoscout_europe_open','mobile_de_open']);
+ const complete=guard(previous,next,{},0.9,{completedSources,completedSourceCounts:{autoscout_europe_open:10776,mobile_de_open:34469}});
  assert.equal(complete.ok,true);
  assert.deepEqual(complete.completedSources,['autoscout_europe_open','mobile_de_open']);
- assert.equal(guard(previous,{autoscout_europe_open:5000,mobile_de_open:19278},{},0.9,
-   {completedSources:['autoscout_europe_open','mobile_de_open']}).ok,false);
+ assert.equal(guard(previous,{autoscout_europe_open:5000,mobile_de_open:19278},{},0.9,{completedSources,
+   completedSourceCounts:{autoscout_europe_open:5000,mobile_de_open:19278}}).ok,false);
  assert.equal(guard(previous,{autoscout_europe_open:8500,mobile_de_open:9000},{},0.9,
-   {completedSources:['autoscout_europe_open','mobile_de_open']}).ok,false);
+   {completedSources,completedSourceCounts:{autoscout_europe_open:10776,mobile_de_open:34469}}).ok,false);
 });
 test('only verified withdrawals reduce protected baseline',()=>{
  assert.equal(guard({encar:17000},{encar:700},{encar:16300}).ok,true);
