@@ -12,13 +12,14 @@ async function api(path,method='GET',body){
 }
 for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
  try{
- const [data,journal,japan,dispatch]=await Promise.all([
+ const [data,journal,japan,dispatch,intakeCheckpoint]=await Promise.all([
   api(`actions/workflows/${workflow}/runs?branch=main&per_page=10`),
   storage.readJson(`catalog/operations/markets/${market}.json`,null),
   market==='japan'?storage.readJson('catalog/collector-state/proauctions/current.json',null):null,
   storage.readJson(`catalog/operations/recovery/${market}.json`,null),
+  ['china','europe'].includes(market)?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
  ]);
- const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,lastDispatchAt:dispatch?.at,recovery:dispatch});
+ const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,lastDispatchAt:dispatch?.at,recovery:dispatch});
  if(decision.action==='inspect_failure'){
   const jobs=await api(`actions/runs/${decision.runId}/jobs?per_page=100`);
   const failures=jobs.jobs.filter(j=>['failure','timed_out'].includes(j.conclusion));

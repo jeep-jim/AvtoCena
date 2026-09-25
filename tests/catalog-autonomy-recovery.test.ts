@@ -33,3 +33,24 @@ test('successful partial publications cannot hide broken sources; transient retr
 test('a successful no-op schedule cannot hide a missing collection journal',()=>{
  assert.equal(recoveryDecision({...input,journal:null,runs:[{status:'completed',conclusion:'success'}]}).reason,'missing_or_stale_collection');
 });
+
+test('published China budget slices continue automatically with matching committed cursors',()=>{
+ const sources=[{sourceId:'che168',stopReason:'budget',cursor:'2001'}];
+ const journal={publicationStatus:'published',generationId:'g',runId:'42',sources};
+ const intakeCheckpoint={version:1,market:'china',generationId:'g',updatedAt:new Date(now).toISOString(),sources};
+ const args={...input,market:'china',journal,intakeCheckpoint,runs:[{id:42,status:'completed',conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]};
+ const result=recoveryDecision(args);
+ assert.equal(recoveryDecision({...args,market:'europe',intakeCheckpoint:{...intakeCheckpoint,market:'europe'}}).reason,'continue_published_budget_slice');
+ assert.equal(result.reason,'continue_published_budget_slice');assert.equal(result.action,'dispatch');
+ assert.equal(recoveryDecision({...args,recovery:{budgetWindowStartedAt:new Date(now-3600000).toISOString(),budgetAttempts:2}}).action,'none');
+ assert.equal(recoveryDecision({...args,lastDispatchAt:new Date(now-3600000).toISOString()}).reason,'dispatch_cooldown');
+ for(const change of [
+  {journal:{...journal,publicationStatus:'failed'}},
+  {intakeCheckpoint:{...intakeCheckpoint,generationId:'wrong'}},
+  {intakeCheckpoint:{...intakeCheckpoint,sources:[{...sources[0],cursor:'999'}]}},
+  {intakeCheckpoint:{...intakeCheckpoint,updatedAt:new Date(now-5*86400000).toISOString()}},
+  {journal:{...journal,sources:[...sources,{sourceId:'other',stopReason:'blocked'}]}},
+  {runs:[{id:43,status:'completed',conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]},
+  {runs:[{id:42,status:'completed',conclusion:'cancelled'}]},
+ ])assert.notEqual(recoveryDecision({...args,...change}).action,'dispatch',JSON.stringify(change));
+});

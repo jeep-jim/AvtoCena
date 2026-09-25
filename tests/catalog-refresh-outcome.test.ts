@@ -4,6 +4,10 @@ import {refreshOutcome} from '../scripts/lib/catalog-refresh-outcome.mjs';
 const now='2026-09-25T04:00:00Z';
 const complete={completedAt:now,sources:[{sourceId:'a',stopReason:'source_finished'}]};
 const previous={version:2,lastPublicationSuccess:'2026-09-20',lastCollectionSuccess:'2026-09-19',generationId:'old',publishedCount:701};
+test('finishing a continuation does not claim the entire source was freshly traversed',()=>{
+ const r=refreshOutcome({market:'china',previous,now,intake:{...complete,sources:[{sourceId:'a',stopReason:'source_finished',initialCursor:'2001'}]},publication:{published:true,generationId:'new'}});
+ assert.equal(r.collectionComplete,false);assert.equal(r.lastCollectionSuccess,previous.lastCollectionSuccess);
+});
 test('partial publication does not pretend collection succeeded',()=>{
  const r=refreshOutcome({market:'uae',previous,now,intake:{...complete,sources:[{sourceId:'a',stopReason:'blocked'}]},publication:{published:true,generationId:'new',publishedMarketCount:701}});
  assert.equal(r.lastCollectionSuccess,previous.lastCollectionSuccess);assert.equal(r.lastPublicationSuccess,now);assert.equal(r.collectionComplete,false);assert.equal(r.partialSources[0].reason,'blocked');
