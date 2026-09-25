@@ -1,11 +1,10 @@
 {
-  "operation": "europe-source-pagination-verification-20260925",
+  "operation": "europe-complete-intake-republication-20260925",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
-  "refreshMarkets": [
-    "europe"
-  ],
-  "reason": "Fresh collection after verified removal of local 25-page cap and low-power-first traversal. All publication, retention and pricing guards retained."
+  "refreshMarkets": [],
+  "reuseRunId": 36101730944,
+  "reason": "Republish the completed authoritative Europe intake after the verified bounded-turnover guard fix. No source requests; all pricing, quality, 80/20, 15M and total-market retention gates remain active."
 }
