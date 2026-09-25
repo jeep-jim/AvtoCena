@@ -32,17 +32,18 @@ export async function selectRelatedOfferGroups({current,modelRows,marketRows,cro
 }) {
   const greenCurrent = isGreenCornerOffer(current);
   const selectedIds = new Set<string>([String(current.id)]);
-  const priceRows = async (candidates:any[],limit=4) => {
+  const priceRows = async (candidates:any[],limit=4, family=false) => {
     const seen = new Set(selectedIds);
     const unique = candidates.filter(row=>{const id=String(row.id);if(seen.has(id))return false;seen.add(id);return true;});
-    const rows = await priceCandidatesUntil(unique,price,renderable,rows=>rows.length>=limit).catch(error=>{console.error("offer_related_pricing_failed",error);return [];});
+    const ordered = family ? diverseSimilarOffers(unique,current,unique.length) : unique;
+    const rows = await priceCandidatesUntil(ordered,price,renderable,rows=>rows.length>=limit).catch(error=>{console.error("offer_related_pricing_failed",error);return [];});
     const result=rows.slice(0,limit);result.forEach(row=>selectedIds.add(String(row.id)));return result;
   };
-  const stockModels = greenCurrent ? await priceRows(greenModels) : [];
-  const sameModel = await priceRows([...modelRows,...(!greenCurrent && current.market==='japan' ? greenModels : [])]);
+  const stockModels = greenCurrent ? await priceRows(greenModels,4,true) : [];
+  const sameModel = await priceRows([...modelRows,...(!greenCurrent && current.market==='japan' ? greenModels : [])],4,true);
   const crossMarketGroups: Array<{market:string;items:any[]}> = [];
   for(const result of crossResults) {
-    const items=await priceRows([...result.items,...(result.market==='japan'?greenModels:[])]);
+    const items=await priceRows([...result.items,...(result.market==='japan'?greenModels:[])],4,true);
     if(items.length)crossMarketGroups.push({market:result.market,items});
   }
   const marketCandidates = [...marketRows,...(current.market==='japan' ? greenRows : [])];
