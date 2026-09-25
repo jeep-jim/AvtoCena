@@ -68,6 +68,7 @@ try{
     if(width<768)await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();
     await page.waitForFunction(()=>document.querySelector('.contract-highlight')?.textContent?.includes('Audi A4L'));
     assert.ok(await page.locator('.contract-paper .contract-highlight').filter({hasText:'Audi A4L'}).isVisible(),'focused car highlights preview');
+    await page.waitForFunction(()=>{const paper=document.querySelector('.contract-paper'),target=paper?.querySelector('.contract-highlight');if(!target)return false;const p=paper.getBoundingClientRect(),t=target.getBoundingClientRect();return t.top>=p.top&&t.bottom<=p.bottom;});
     if(width>=768){const box=await page.locator('.contract-preview').boundingBox();assert.ok(box.y+box.height<=851,'preview fits viewport');}
     if(width===390||width===1440)await page.screenshot({path:`${out}/contract-editor-${theme}-${width}.png`});
     await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row').waitFor();
