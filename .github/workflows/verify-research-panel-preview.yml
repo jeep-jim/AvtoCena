@@ -1,0 +1,29 @@
+name: Verify research split preview
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/research/**'
+      - 'docs/prototypes/research-split-view*'
+      - 'scripts/*research-panel-preview.mjs'
+      - '.github/workflows/verify-research-panel-preview.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: node scripts/build-research-panel-preview.mjs
+      - run: npm install --prefix /tmp/research-preview-tools playwright@1.51.1 --no-audit --no-fund
+      - run: node /tmp/research-preview-tools/node_modules/playwright/cli.js install --with-deps chromium firefox webkit
+      - run: node scripts/verify-research-panel-preview.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-panel-browser-evidence
+          path: artifacts/research-split
+          retention-days: 14
