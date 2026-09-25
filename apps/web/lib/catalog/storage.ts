@@ -28,7 +28,8 @@ import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, is
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
-import { resolveVehicleModelQuery } from "./vehicle-knowledge";
+import { resolveVehicleModelQuery, vehicleKnowledgeCompact } from "./vehicle-knowledge";
+import { matchesCatalogModel } from "./model-filter";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
@@ -683,8 +684,10 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
   if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
   if (params.model) {
-    const canonicalMatch = modelKeys?.size ? modelKeys.has(`${lower(row.make)}:${lower(row.model)}`) : false;
-    const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
+    const makePrefix = `${lower(row.make)}:`;
+    const canonicalMatch = modelKeys ? [...modelKeys].some((key) => key.startsWith(makePrefix)
+      && matchesCatalogModel(row.model, key.slice(makePrefix.length))) : false;
+    const literalMatch = matchesCatalogModel(row.model, params.model);
     if (!canonicalMatch && !literalMatch) return false;
   }
   const priced = params.city ? priceCardForCity(row,params.city).offer : row;
@@ -760,8 +763,11 @@ async function projectionModelKeys(params: CatalogSearchParams) {
   const makes = catalogMakeFilterValues(params.make);
   const scopes: Array<string | undefined> = makes.length ? makes : [undefined];
   const matches = (await Promise.all(scopes.map((make) => resolveVehicleModelQuery(params.model, make, 100)))).flat();
-  const candidates = matches.length
-    ? matches.map((match) => ({ make: match.make, model: match.model }))
+  const exact = matches.filter((match) => [match.model, ...(match.aliases || [])]
+    .some((name) => vehicleKnowledgeCompact(name) === vehicleKnowledgeCompact(params.model)));
+  const selected = exact.length ? exact : matches;
+  const candidates = selected.length
+    ? selected.flatMap((match) => [match.model, ...(match.aliases || [])].map((model) => ({ make: match.make, model })))
     : makes.length
       ? makes.map((make) => ({ make, model: String(params.model) }))
       : [];
