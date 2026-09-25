@@ -1,4 +1,3 @@
-import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs/promises';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
@@ -49,15 +48,18 @@ const latest=await storage.readJson('catalog/manifest.json',null);
 const latestGreen=await storage.readJson('catalog/operations/markets/green.json',null);
 if(latest?.generationId!==manifest.generationId || latestGreen?.publishedAt && latestGreen.publishedAt!==green.updatedAt)throw Error('source_changed_retry_next_run');
 if(!cars.green.length)throw Error('green_feed_empty');
+// Do not switch to plain XML while an older deployed handler labels it gzip.
+const transport=await fetch('https://avtocena.com/feeds/yandex-auto/all.xml',{redirect:'manual',signal:AbortSignal.timeout(30_000)});
+if(transport.headers.get('x-feed-transport')!=='object-xml-v1')throw Error('feed_transport_deploy_required');
+await transport.body?.cancel();
 const files={};
 for(const name of ['all',...DIRECT_MARKETS]){
   const entries=name==='all'?DIRECT_MARKETS.flatMap(m=>cars[m]):cars[name];
   if(!entries.length)continue;
-  const data=gzipSync(directFeedXml(entries));
-  // Yandex serverless gateway response has a bounded payload; gzip remains XML.
-  if(data.length>3*1024*1024)throw Error(`feed_requires_partition:${name}:${data.length}`);
-  const path=`catalog/advertising/yandex/${slot}/${name}.xml.gz`;
-  await storage.putBinary(path,data,'application/gzip');
+  // Serve the verified object directly: the gateway only returns a redirect.
+  const data=Buffer.from(directFeedXml(entries),'utf8');
+  const path=`catalog/advertising/yandex/${slot}/${name}.xml`;
+  await storage.putBinary(path,data,'application/xml; charset=utf-8');
   const verified=await storage.getBinary(path);
   const sha256=createHash('sha256').update(data).digest('hex');
   if(createHash('sha256').update(verified.data).digest('hex')!==sha256)throw Error('upload_verification_failed');
