@@ -53,3 +53,9 @@ test("Japan thirty-day retention is not silently doubled", () => {
   assert.equal(result.retain, false);
   assert.equal(result.reason, "unverified_retention_expired");
 });
+
+test('current intake completion is recognized, but mixed incomplete reports are not authoritative',()=>{
+ const source={sourceId:'dubicars_uae_exact',mode:'live',pages:30,freshSaved:600,stopReason:'source_finished'};
+ assert.equal(catalogSourceRefreshStates([{report:{sources:[source]}}]).dubicars_uae_exact.authoritative,true);
+ assert.equal(catalogSourceRefreshStates([{report:{sources:[source,{...source,stopReason:'blocked'}]}}]).dubicars_uae_exact.authoritative,false);
+});

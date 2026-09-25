@@ -29,3 +29,7 @@ test('successful partial publications cannot hide broken sources; transient retr
  assert.equal(recoveryDecision({...input,journal:{...journal,sources:[{sourceId:'encar',stopReason:'blocked'}]}}).reason,'source_failure_requires_attention');
  assert.equal(recoveryDecision({...input,journal:{...journal,sources:[{sourceId:'encar',stopReason:'time_budget'}]}}).action,'none');
 });
+
+test('a successful no-op schedule cannot hide a missing collection journal',()=>{
+ assert.equal(recoveryDecision({...input,journal:null,runs:[{status:'completed',conclusion:'success'}]}).reason,'missing_or_stale_collection');
+});

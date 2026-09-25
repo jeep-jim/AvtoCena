@@ -182,12 +182,17 @@ jobs:
             export CATALOG_REBUILD_PUBLISH_REPORT="catalog-weekly-$market-publish-report.json"
             if node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-publish-market.mjs; then
               node --import tsx scripts/catalog-commit-intake-cursor.mjs || failures=$((failures + 1))
-              node scripts/run-transient-retry.mjs node --import tsx scripts/record-market-refresh.mjs || failures=$((failures + 1))
             else
               failures=$((failures + 1))
             fi
           done
           test "$failures" -eq 0
+      - name: Record collection and publication outcome even after failure
+        if: always()
+        env:
+          CATALOG_REBUILD_MARKETS: ${{ matrix.market }}
+          CATALOG_REBUILD_PUBLISH_REPORT: catalog-weekly-${{ matrix.market }}-publish-report.json
+        run: node --import tsx scripts/record-market-refresh.mjs
       - name: Audit the active catalog after all market publications
         run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
       - uses: actions/upload-artifact@v4
@@ -199,6 +204,7 @@ jobs:
             catalog-storage-preview.json
             catalog-storage-cleanup-report.json
             catalog-weekly-*.json
+            catalog-refresh-outcome-*.json
             catalog-storage-preflight.json
             catalog-visible-calculation-coverage.json
           overwrite: true
