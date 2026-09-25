@@ -1,3 +1,4 @@
+import { matchesCatalogModel } from "./model-filter";
 import type { VehicleOffer } from "./types";
 import { parseEngineCc } from "./engine-input";
 import { matchesFuelFilter } from "./fuel-filter";
@@ -20,7 +21,7 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
  const rows=items.filter(row=>{
   if(params.q&&!lower(`${row.make} ${row.model} ${row.year}`).includes(lower(params.q)))return false;
   if(params.make&&!params.make.split(',').some(make=>lower(make)===lower(row.make)))return false;
-  if(params.model&&!lower(row.model).includes(lower(params.model)))return false;
+  if(params.model&&!matchesCatalogModel(row.model,params.model))return false;
   if(!range(row.year,number('yearFrom'),number('yearTo'))||!range(row.mileageKm,number('mileageFrom'),number('mileageTo')))return false;
   if(!range(row.engineCc,parseEngineCc(params.engineFrom),parseEngineCc(params.engineTo)))return false;
   if(!range(row.powerHp,number('powerFrom'),number('powerTo')))return false;
