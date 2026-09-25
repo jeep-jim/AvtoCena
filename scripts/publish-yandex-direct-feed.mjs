@@ -53,9 +53,10 @@ const files={};
 for(const name of ['all',...DIRECT_MARKETS]){
   const entries=name==='all'?DIRECT_MARKETS.flatMap(m=>cars[m]):cars[name];
   if(!entries.length)continue;
-  const data=gzipSync(directFeedXml(entries));
-  // Yandex serverless gateway response has a bounded payload; gzip remains XML.
-  if(data.length>3*1024*1024)throw Error(`feed_requires_partition:${name}:${data.length}`);
+  const xml=directFeedXml(entries);
+  if(Buffer.byteLength(xml)>512*1024*1024)throw Error(`feed_exceeds_direct_limit:${name}`);
+  const data=gzipSync(xml);
+  if(data.length>64*1024*1024)throw Error(`feed_storage_budget_exceeded:${name}`);
   const path=`catalog/advertising/yandex/${slot}/${name}.xml.gz`;
   await storage.putBinary(path,data,'application/gzip');
   const verified=await storage.getBinary(path);

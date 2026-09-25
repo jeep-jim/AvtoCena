@@ -6,7 +6,8 @@ export const dynamic='force-dynamic';
 export const runtime='nodejs';
 const cache=new DetailReadCache<{data:Buffer;checksum:string}>({maxEntries:7,maxBytes:20*1024*1024,ttlMs:60_000,concurrency:1});
 export async function GET(request:Request,{params}:{params:Promise<{file:string}>}) {
-  const {file}=await params;
+  const {file:requestedFile}=await params;
+  const file=requestedFile.replace(/\.gz$/, "");
   if(!['all.xml',...DIRECT_MARKETS.map(m=>`${m}.xml`)].includes(file))return new Response('Not found',{status:404});
   try {
     const storage=getJsonStorage();
@@ -15,6 +16,13 @@ export async function GET(request:Request,{params}:{params:Promise<{file:string}
     if(!metadata || !Number.isFinite(age) || age<0 || age>DIRECT_FEED_MAX_AGE_MS)throw Error('feed_stale');
     const entry=metadata.files[file];
     if(!entry || !entry.count || !storage.getBinary)throw Error('feed_unavailable');
+    // Large feeds bypass the serverless response limit. Direct accepts .gz feeds;
+    // the stable site URL generates a fresh, short-lived read-only download URL.
+    if(requestedFile.endsWith('.gz') || entry.bytes>3*1024*1024){
+      if(!storage.createBinaryDownloadUrl)throw Error('feed_download_unavailable');
+      const location=await storage.createBinaryDownloadUrl(entry.path,900);
+      return new Response(null,{status:307,headers:{Location:location,'Cache-Control':'no-store','X-Feed-Offers':String(entry.count)}});
+    }
     const payload=await cache.get(entry.sha256,async()=>{
       const binary=await storage.getBinary!(entry.path);
       if(createHash('sha256').update(binary.data).digest('hex')!==entry.sha256)throw Error('feed_checksum');
