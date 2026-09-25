@@ -54,6 +54,7 @@ try{
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(kind==='documents'){
     assert.equal(await page.getByRole('button',{name:'Создать договор',exact:true}).count(),1);
+    if(theme==='light')assert.equal(await page.locator('.crm-documents-button').evaluate(e=>getComputedStyle(e).webkitTextFillColor),'rgb(23, 28, 36)','active documents text remains dark');
     assert.ok(await page.getByRole('combobox',{name:'Менеджер',exact:true}).isVisible());
     await page.getByRole('button',{name:'Создать договор',exact:true}).click();await page.locator('.contract-editor-layout').waitFor();
     await page.getByLabel('ФИО',{exact:false}).fill('Иванов Иван Иванович');
@@ -61,13 +62,14 @@ try{
     if(width<768){assert.equal(await page.locator('.contract-preview').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();assert.ok(await page.locator('.contract-preview').isVisible());}
     await page.locator('.contract-paper span').filter({hasText:/^Иванов Иван Иванович$/}).first().click();
     await page.waitForFunction(()=>document.activeElement?.closest('[data-editor-field]')?.getAttribute('data-editor-field')==='fio');
-    assert.ok(await page.getByLabel('ФИО',{exact:false}).isFocused(),'preview click focuses matching field');
+    assert.ok(await page.getByLabel('ФИО',{exact:false}).evaluate(e=>e===document.activeElement),'preview click focuses matching field');
     await page.locator('.contract-fields summary').filter({hasText:/^Автомобиль$/}).click();
     await page.getByLabel('Марка, модель, комплектация',{exact:false}).fill('Audi A4L');
     if(width<768)await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();
     await page.waitForFunction(()=>document.querySelector('.contract-highlight')?.textContent?.includes('Audi A4L'));
     assert.ok(await page.locator('.contract-paper .contract-highlight').filter({hasText:'Audi A4L'}).isVisible(),'focused car highlights preview');
     if(width>=768){const box=await page.locator('.contract-preview').boundingBox();assert.ok(box.y+box.height<=851,'preview fits viewport');}
+    if(width===390||width===1440)await page.screenshot({path:`${out}/contract-editor-${theme}-${width}.png`});
     await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row').waitFor();
     page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'В архив договор 24.09/01',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1,'cancel archive retains document');
     page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'В архив договор 24.09/01',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.getByRole('button',{name:'Восстановить договор 24.09/01',exact:true}).waitFor();

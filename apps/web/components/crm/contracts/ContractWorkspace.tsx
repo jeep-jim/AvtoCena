@@ -52,6 +52,7 @@ export function ContractWorkspace({owner,clients,managers=[]}:{owner:boolean;cli
   const node=Array.from(paper.current?.querySelectorAll<HTMLElement>('[data-preview-fields]')||[]).find(n=>n.dataset.previewFields?.split('|').includes(key));
   if(node&&paper.current)paper.current.scrollTo({top:paper.current.scrollTop+node.getBoundingClientRect().top-paper.current.getBoundingClientRect().top-50,behavior:'smooth'});
  }
+ useEffect(()=>{if(mobile==='preview'&&activeField)focusPreview(activeField);},[mobile]);
  useEffect(()=>{
   const shell=workspace.current?.querySelector<HTMLElement>('.contract-edit-shell');if(!shell)return;
   const measure=()=>shell.style.setProperty('--contract-editor-height',`${Math.max(400,window.innerHeight-shell.getBoundingClientRect().top-18)}px`);

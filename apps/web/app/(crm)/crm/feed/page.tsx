@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 function dateLabel(value?: string) {
   if (!value) return "—";
-  return new Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(new Date(value));
+  return new Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short", timeZone: "Asia/Novokuznetsk" }).format(new Date(value));
 }
 
 export default async function CrmFeedPage() {
