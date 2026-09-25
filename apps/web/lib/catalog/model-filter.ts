@@ -11,6 +11,9 @@ export function matchesCatalogModel(value: unknown, query: unknown): boolean {
   for (const word of words(value)) {
     prefix += word;
     if (prefix === requested) return true;
+    // Markets also attach letter badges without a separator: A4L, Q2L, X5M.
+    if (/\d$/.test(requested) && prefix.startsWith(requested)
+      && /^[a-z]+$/.test(prefix.slice(requested.length))) return true;
     if (!requested.startsWith(prefix)) return false;
   }
   return false;

@@ -19,7 +19,7 @@ test('model aliases expand to versions without leaking across manufacturers', ()
   assert.equal(catalogSearchProjectionMatches({make:'Other',model:'Vitz RS',market:'japan'} as any,{model:'Витц'},keys),false);
 });
 test('model separators normalize but neighboring model numbers stay distinct', () => {
-  for (const [model,query] of [['CX-5 2.0 High','CX5'],['C HR Hybrid','C-HR'],['A 2 Sport','A2'],['Corolla Cross Hybrid','Corolla']]) assert.equal(matchesCatalogModel(model,query),true);
+  for (const [model,query] of [['A4L 40 TFSI','A4'],['Q2L','Q2'],['X5M Competition','X5'],['CX-5 2.0 High','CX5'],['C HR Hybrid','C-HR'],['A 2 Sport','A2'],['Corolla Cross Hybrid','Corolla']]) assert.equal(matchesCatalogModel(model,query),true);
   for (const [model,query] of [['A20','A2'],['XA2','A2'],['X50','X5'],['CX-50','CX-5'],['A2','A2 quattro']]) assert.equal(matchesCatalogModel(model,query),false);
 });
 test('green corner includes versions and still respects other filters', () => {
