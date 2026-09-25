@@ -665,7 +665,7 @@ const completedSourceIds = new Set(freshOfferAudit.summary.complete
   : []);
 const publicCountGuard = catalogPublicCountGuard(previousSourceCounts,
   countSources(canonicalTargetPreview.offers), withdrawnSourceCounts, minimumPublicRetentionRatio,
-  {completedSources:completedSourceIds});
+  {completedSources:completedSourceIds, completedSourceCounts:countSources(selectedMarketOffers)});
 const minimumSafePublicCount = allowPublicCollapse ? 1 : publicCountGuard.minimumTotal;
 const catastrophicPublicCollapse = !publicCountGuard.ok;
 const regressionBlocked = expectedPublishedByMarket[market] <= 0
@@ -729,7 +729,7 @@ if (regressionBlocked) {
           if (currentMarket === market) {
             if (!allowPublicCollapse) {
               const guard = catalogPublicCountGuard(previousSourceCounts, countSources(rows), withdrawnSourceCounts, minimumPublicRetentionRatio,
-                {completedSources:completedSourceIds});
+                {completedSources:completedSourceIds, completedSourceCounts:countSources(selectedMarketOffers)});
               if (!guard.ok) failures.push(`${currentMarket}:sources:${JSON.stringify(guard.failures)}`);
             }
             if (rows.length < minimumSafePublicCount) failures.push(`${currentMarket}:count:${rows.length}:${minimumSafePublicCount}`);
