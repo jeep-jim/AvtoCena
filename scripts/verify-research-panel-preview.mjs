@@ -11,12 +11,13 @@ await new Promise(resolve=>server.listen(8765,'127.0.0.1',resolve));
 (async()=>{
 const results=[];
 for(const name of ['chromium','firefox','webkit']){
- let browser;
+ let browser,page;
  try{
   browser=await pw[name].launch({headless:true,executablePath:pw[name].executablePath()});
-  const page=await browser.newPage({viewport:{width:1440,height:960}});
+  page=await browser.newPage({viewport:{width:1440,height:960}});
   const messages=[];page.on('console',m=>{if(/frame|Content Security|ancestor/i.test(m.text()))messages.push(m.text());});
-  await page.goto('http://127.0.0.1:8765/research-split-view.html');
+  page.setDefaultTimeout(12000);
+  await page.goto('http://127.0.0.1:8765/research-split-view.html',{waitUntil:'domcontentloaded'});
   await page.getByRole('button',{name:'Уточнить характеристики с ИИ',exact:true}).click();
   const sep=page.getByRole('separator'),panel=page.locator('.ac-research-panel');
   await sep.waitFor();const initial=await panel.boundingBox();assert.equal(initial.width,420);
@@ -25,7 +26,7 @@ for(const name of ['chromium','firefox','webkit']){
   const after=await panel.boundingBox();assert(after.width>=555&&after.width<=565);
   await sep.focus();await page.keyboard.press('ArrowRight');assert.equal(Number(await sep.getAttribute('aria-valuenow')),after.width-24);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),1440);
-  await page.reload();await page.getByRole('button',{name:'Уточнить характеристики с ИИ',exact:true}).click();assert.equal((await panel.boundingBox()).width,after.width-24);
+  await page.reload({waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Уточнить характеристики с ИИ',exact:true}).click();assert.equal((await panel.boundingBox()).width,after.width-24);
   await page.keyboard.press('Escape');assert.equal(await panel.count(),0);
   assert.equal(await page.getByRole('button',{name:'Уточнить характеристики с ИИ',exact:true}).evaluate(e=>e===document.activeElement),true);
   await page.getByRole('button',{name:'Уточнить характеристики с ИИ',exact:true}).click();
@@ -45,7 +46,7 @@ for(const name of ['chromium','firefox','webkit']){
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),390);
   if(name==='chromium')await page.screenshot({path:`${output}/mobile.png`});
   results.push({engine:name,layout:'passed',drag:'passed',keyboard:'passed',savedWidth:'passed',mobile:'passed',focus:'passed'});
- }catch(e){results.push({engine:name,error:e.message});}finally{await browser?.close();}
+ }catch(e){await page?.screenshot({path:`${output}/${name}-failure.png`}).catch(()=>{});results.push({engine:name,error:e.message});}finally{await browser?.close();}
 }
 server.close();
 console.log(JSON.stringify(results,null,2));fs.writeFileSync(`${output}/results.json`,JSON.stringify(results,null,2));
