@@ -55,11 +55,5 @@ jobs:
                 core.info(`${market}: push workflow already exists for ${mergeSha}`);
                 continue;
               }
-              await github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id,
-                ref: 'main',
-              });
-              core.info(`${market}: dispatched after marker merge ${mergeSha}`);
+              throw new Error(`${market}: marker push workflow missing for ${mergeSha}; refusing workflow_dispatch because it cannot carry the marker reuse parameters`);
             }
