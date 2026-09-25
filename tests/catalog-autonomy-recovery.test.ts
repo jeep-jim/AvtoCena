@@ -54,3 +54,11 @@ test('published China budget slices continue automatically with matching committ
   {runs:[{id:42,status:'completed',conclusion:'cancelled'}]},
  ])assert.notEqual(recoveryDecision({...args,...change}).action,'dispatch',JSON.stringify(change));
 });
+
+test('a blocked budget continuation is reported instead of being called current',()=>{
+ const sources=[{sourceId:'che168',stopReason:'budget',cursor:'2001'}];
+ const journal={publicationStatus:'published',generationId:'g',sources,lastCollectionSuccess:new Date(now).toISOString()};
+ const result=recoveryDecision({...input,market:'china',journal,intakeCheckpoint:null,runs:[{status:'completed',conclusion:'success'}]});
+ assert.equal(result.reason,'budget_continuation_blocked');
+ assert.deepEqual(result.blockers,['checkpoint_missing_or_invalid','checkpoint_generation_mismatch','checkpoint_stale','cursor_not_committed']);
+});

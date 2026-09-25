@@ -45,7 +45,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
  }
  if(decision.action==='dispatch')await api(`actions/workflows/${workflow}/dispatches`,'POST',{ref:'main'});
  if(['dispatch','rerun_failed','cleanup_dispatched'].includes(decision.action))await storage.writeJson(`catalog/operations/recovery/${market}.json`,{...dispatch,at:new Date().toISOString(),...decision});
- if(['storage_pressure_requires_attention','deterministic_or_unclassified_failure','retry_limit_reached','source_retry_limit_reached','source_failure_requires_attention','old_failed_run_requires_new_schedule'].includes(decision.reason))process.exitCode=1;
+ if(['storage_pressure_requires_attention','deterministic_or_unclassified_failure','retry_limit_reached','source_retry_limit_reached','source_failure_requires_attention','old_failed_run_requires_new_schedule','budget_continuation_blocked'].includes(decision.reason))process.exitCode=1;
  report.markets[market]=decision;
  }catch(e){report.markets[market]={action:'none',error:String(e.message)};process.exitCode=1;}
 }

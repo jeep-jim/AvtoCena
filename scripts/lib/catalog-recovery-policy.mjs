@@ -15,6 +15,16 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now
  const sourceRows=journal?.sources||[];
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
+ const budgetContinuationBlockers=[];
+ if(!['china','europe'].includes(market))budgetContinuationBlockers.push('market_not_resumable');
+ if(journal?.publicationStatus!=='published')budgetContinuationBlockers.push('slice_not_published');
+ if(intakeCheckpoint?.version!==1||intakeCheckpoint?.market!==market)budgetContinuationBlockers.push('checkpoint_missing_or_invalid');
+ if(intakeCheckpoint?.generationId!==journal?.generationId)budgetContinuationBlockers.push('checkpoint_generation_mismatch');
+ if(!(checkpointAge>=0&&checkpointAge<4*86400000))budgetContinuationBlockers.push('checkpoint_stale');
+ if(sourceRows.some(s=>!budgetStops.has(s.stopReason)&&!['source_finished','source_cycle_finished'].includes(s.stopReason)))budgetContinuationBlockers.push('other_source_incomplete');
+ if(budgetRows.some(s=>typeof s.cursor!=='string'||!s.cursor.length
+   ||!intakeCheckpoint?.sources?.some(c=>c.sourceId===s.sourceId&&c.cursor===s.cursor&&budgetStops.has(c.stopReason))))budgetContinuationBlockers.push('cursor_not_committed');
+ if(latest&&latest.conclusion!=='success'&&String(latest.id)!==String(journal?.runId))budgetContinuationBlockers.push('newer_failed_run');
  const committedBudget=['china','europe'].includes(market) && journal?.publicationStatus==='published'
   && intakeCheckpoint?.version===1 && intakeCheckpoint.market===market
   && intakeCheckpoint.generationId===journal.generationId
@@ -30,6 +40,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now
   return {action:'dispatch',reason:'continue_published_budget_slice',budgetAttempts:attempts+1,
    budgetWindowStartedAt:active?recovery.budgetWindowStartedAt:new Date(now).toISOString()};
  }
+ if(budgetRows.length)return {action:'none',reason:'budget_continuation_blocked',blockers:[...new Set(budgetContinuationBlockers)]};
  if(latest&&['failure','timed_out'].includes(latest.conclusion)){
   if((latest.run_attempt||1)>=3)return {action:'none',reason:'retry_limit_reached'};
   if(now-Date.parse(latest.updated_at)<15*60000)return {action:'none',reason:'failure_cooldown'};
