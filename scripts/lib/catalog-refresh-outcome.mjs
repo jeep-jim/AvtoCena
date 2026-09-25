@@ -1,7 +1,7 @@
 const finished = new Set(['source_finished', 'source_cycle_finished']);
 export function collectionComplete(intake) {
  return Boolean(intake?.completedAt && intake.sources?.length && !intake.partialSources?.length
-  && intake.sources.every(source => finished.has(source.stopReason)));
+  && intake.sources.every(source => finished.has(source.stopReason) && !source.initialCursor));
 }
 /** Attempts, source coverage and committed publication are separate facts. */
 export function refreshOutcome({market,previous={},intake,publication,now,runId}) {

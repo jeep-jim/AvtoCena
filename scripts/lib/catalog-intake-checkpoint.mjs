@@ -21,7 +21,9 @@ export function restoreIntakeCursor(state, saved, now = Date.now()) {
   const age = now - Date.parse(saved.updatedAt || '');
   if (!Number.isFinite(age) || age < 0 || age > 14 * 86400000) return;
   const row = saved.sources?.find(row => row.sourceId === state.sourceId);
-  if (row && !['source_finished', 'source_cycle_finished', 'cursor_loop', 'repeated_page'].includes(row.stopReason) && (row.cursor === null || typeof row.cursor === 'string')) {
+  // Only exhausted work budgets are continuations. Access denials, parser
+  // failures and completed scans must never resume at a blocked/tail page.
+  if (row && ['budget', 'time_budget', 'budget_mid_page'].includes(row.stopReason) && typeof row.cursor === 'string' && row.cursor.length) {
     state.cursor = row.cursor;
     state.initialCursor = row.cursor;
   }
