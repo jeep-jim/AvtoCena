@@ -5,7 +5,7 @@ const principalKeys=['fio','birthDate','passportSeries','passportNumber','passpo
 export function previewBlocks(snapshot:ContractSnapshot,number:string):PreviewBlock[]{
  const {fields:f,template:t}=snapshot;
  const blocks=documentBlocks(snapshot,number).map(b=>({...b,fields:[] as string[],editor:undefined as string|undefined}));
- blocks[1].fields=['date'];blocks[2].fields=principalKeys;blocks[2].editor='template.agent';
+ blocks[0].fields=['number'];blocks[1].fields=['date'];blocks[2].fields=principalKeys;blocks[2].editor='template.agent';
  let index=3;
  for(let i=0;i<t.sections.length;i++){
   blocks[index++].editor=`template.sections.${i}.title`;
@@ -19,7 +19,7 @@ export function previewBlocks(snapshot:ContractSnapshot,number:string):PreviewBl
  for(const b of blocks.slice(index)){
   if(b.text===t.requisites)b.editor='template.requisites';
   if(b.text.startsWith(principal(f)))b.fields=[...principalKeys,'phone','email'];
-  else if(b.text.startsWith('К агентскому договору'))b.fields=['date'];
+  else if(b.text.startsWith('К агентскому договору'))b.fields=['number','date'];
   else if(b.text.startsWith('Гр. '))b.fields=['fio'];
   else if(/^\d+\. Марка, модель:/.test(b.text))b.fields=['car','year'];
   else if(/^\d+\. Цвет кузова:/.test(b.text))b.fields=['color'];
