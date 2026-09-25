@@ -38,8 +38,8 @@ try{
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
   if(kind==='documents'){
-   const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;
-   await page.route('**/api/crm/contracts**',async route=>{const req=route.request();if(req.method()==='GET'){await route.fulfill({json:record?{record}:{records:[]}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};await route.fulfill({json:{record}});});
+   const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;let records=[];
+   await page.route('**/api/crm/contracts**',async route=>{const req=route.request(),url=new URL(req.url());if(req.method()==='GET'){await route.fulfill({json:url.searchParams.has('template')?{template}:url.searchParams.has('id')?{record}:{records}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};else if(body.action==='archive')record={...record,archivedAt:new Date().toISOString(),revision:record.revision+1};else if(body.action==='restore')record={...record,archivedAt:undefined,revision:record.revision+1};else if(body.action==='purge')record=null;else if(body.action==='template'){await route.fulfill({json:{template:{...body.template,revision:body.revision+1}}});return;}records=record?[{...record,client:record.fields.fio||'Без клиента',car:record.fields.car||'',market:record.fields.market,templateId:record.template.id,versions:record.versions.length}]:[];await route.fulfill({json:{record,ok:true}});});
   }
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
@@ -53,11 +53,29 @@ try{
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(kind==='documents'){
-    await page.getByRole('button',{name:'Создать договор',exact:true}).first().click();await page.locator('.contract-editor-layout').waitFor();
+    assert.equal(await page.getByRole('button',{name:'Создать договор',exact:true}).count(),1);
+    if(theme==='light')assert.equal(await page.locator('.crm-documents-button').evaluate(e=>getComputedStyle(e).webkitTextFillColor),'rgb(23, 28, 36)','active documents text remains dark');
+    assert.ok(await page.getByRole('combobox',{name:'Менеджер',exact:true}).isVisible());
+    await page.getByRole('button',{name:'Создать договор',exact:true}).click();await page.locator('.contract-editor-layout').waitFor();
     await page.getByLabel('ФИО',{exact:false}).fill('Иванов Иван Иванович');
     await page.getByRole('button',{name:'Сохранить',exact:true}).click();await page.getByRole('status').filter({hasText:'Черновик сохранён'}).waitFor();
-    if(width<768){assert.equal(await page.locator('.contract-preview').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();assert.ok(await page.locator('.contract-preview').isVisible());await page.getByRole('button',{name:'Заполнение',exact:true}).click();}
-    assert.equal(await page.getByLabel('ФИО',{exact:false}).inputValue(),'Иванов Иван Иванович');
+    if(width<768){assert.equal(await page.locator('.contract-preview').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();assert.ok(await page.locator('.contract-preview').isVisible());}
+    await page.locator('.contract-paper span').filter({hasText:/^Иванов Иван Иванович$/}).first().click();
+    await page.waitForFunction(()=>document.activeElement?.closest('[data-editor-field]')?.getAttribute('data-editor-field')==='fio');
+    assert.ok(await page.getByLabel('ФИО',{exact:false}).evaluate(e=>e===document.activeElement),'preview click focuses matching field');
+    await page.locator('.contract-fields summary').filter({hasText:/^Автомобиль$/}).click();
+    await page.getByLabel('Марка, модель, комплектация',{exact:false}).fill('Audi A4L');
+    if(width<768)await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('.contract-highlight')?.textContent?.includes('Audi A4L'));
+    assert.ok(await page.locator('.contract-paper .contract-highlight').filter({hasText:'Audi A4L'}).isVisible(),'focused car highlights preview');
+    await page.waitForFunction(()=>{const paper=document.querySelector('.contract-paper'),target=paper?.querySelector('.contract-highlight');if(!target)return false;const p=paper.getBoundingClientRect(),t=target.getBoundingClientRect();return t.top>=p.top&&t.bottom<=p.bottom;});
+    if(width>=768){const box=await page.locator('.contract-preview').boundingBox();assert.ok(box.y+box.height<=851,'preview fits viewport');}
+    if(width===390||width===1440)await page.screenshot({path:`${out}/contract-editor-${theme}-${width}.png`});
+    await page.getByRole('button',{name:'← К списку',exact:true}).click();await page.locator('.contract-list-row').waitFor();
+    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'В архив договор 24.09/01',exact:true}).click();assert.equal(await page.locator('.contract-list-row').count(),1,'cancel archive retains document');
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'В архив договор 24.09/01',exact:true}).click();await page.getByRole('button',{name:'Архив',exact:true}).click();await page.getByRole('button',{name:'Восстановить договор 24.09/01',exact:true}).waitFor();
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Восстановить договор 24.09/01',exact:true}).click();await page.getByRole('button',{name:'Договоры',exact:true}).click();await page.locator('.contract-list-row').waitFor();
+    if(width===1440){await page.getByRole('button',{name:'Редактировать шаблон',exact:true}).click();await page.locator('.contract-editor-layout').waitFor();assert.ok(await page.locator('.contract-paper').isVisible());await page.getByRole('button',{name:'← К списку',exact:true}).click();}
    }
    if(kind==='leads'){
     const clientLink=page.locator('.crm-lead-client-link').first();assert.equal(await clientLink.getAttribute('href'),'/crm/clients/client-0');
@@ -128,7 +146,7 @@ try{
     assert.equal(await page.locator('form[action="/api/crm/settings/markets"]').count(),6,'all six market forms retained');
    }
    if(kind==='clients'){
-    if(width<768){assert.equal(await page.getByPlaceholder('ФИО клиента').isVisible(),false,'mobile form initially collapsed');await page.locator('.crm-client-create-toggle').click();assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible());await page.locator('.crm-client-create-toggle').click();assert.equal(await page.locator('.crm-client-avatar').first().isVisible(),false,'no mobile initials');}else assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible(),'desktop form expanded');
+    if(width<768){assert.equal(await page.getByPlaceholder('ФИО клиента').isVisible(),false,'mobile form initially collapsed');await page.locator('.crm-client-create-toggle').click();assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible());await page.locator('.crm-client-create-toggle').click();assert.equal(await page.locator('.crm-client-avatar').count(),0,'no client initials');}else assert.ok(await page.getByPlaceholder('ФИО клиента').isVisible(),'desktop form expanded');
     assert.ok(await page.getByRole('textbox',{name:'Поиск клиентов'}).isVisible());
     assert.ok(await page.locator('.crm-client-card').count()>0);
     if(width===1440){const list=await page.locator('.crm-clients-list').boundingBox(),form=await page.locator('.crm-client-create').boundingBox();assert.ok(form.x>list.x+list.width,'create form on the right');}

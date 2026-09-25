@@ -30,7 +30,7 @@ export function LeadReadStatus({leadId,userId,eventKey,initialReceipts}:{leadId:
  },[leadId,userId,eventKey]);
  return <div ref={root} className="mb-4 rounded-xl border border-[var(--ac-border)] p-3 text-xs">
   <p className="font-bold">Просмотры команды</p>
-  {receipts.length?<ul className="mt-2 space-y-1">{receipts.map(row=><li key={row.userId}>{row.displayName}{row.userId===userId?" (вы)":""} · {new Date(row.seenAt).toLocaleString("ru-RU",{timeZone:"Europe/Moscow"})} МСК{Date.parse(row.incomingAt)<Date.parse(JSON.parse(eventKey)[0])?" · до последнего сообщения":""}</li>)}</ul>:<p className="mt-1 text-[var(--ac-muted)]">Пока нет подтверждённых просмотров.</p>}
+  {receipts.length?<ul className="mt-2 space-y-1">{receipts.map(row=><li key={row.userId}>{row.displayName}{row.userId===userId?" (вы)":""} · {new Date(row.seenAt).toLocaleString("ru-RU",{timeZone:"Asia/Novokuznetsk"})} Новокузнецк{Date.parse(row.incomingAt)<Date.parse(JSON.parse(eventKey)[0])?" · до последнего сообщения":""}</li>)}</ul>:<p className="mt-1 text-[var(--ac-muted)]">Пока нет подтверждённых просмотров.</p>}
   <p className="mt-2 text-[var(--ac-muted)]">Просмотр не меняет статус заявки и не снимает уведомление у других сотрудников.</p>
   {changed?<button type="button" onClick={()=>router.refresh()} className="mt-2 font-bold underline">Есть новые данные — обновить заявку</button>:null}
   {error?<p role="alert" className="mt-2">{error}</p>:null}

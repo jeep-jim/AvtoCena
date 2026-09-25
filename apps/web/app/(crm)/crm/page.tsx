@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 export default async function CrmPage() {
   const user = await getCurrentUser();
   const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(lead=>canSeeLead(user,lead) && activeLead(lead));
-  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client) && leads.some(lead=>lead.clientId===client.id));
+  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client));
   const partners = await readDataJson<any[]>("partners/partners.json", []);
   const deals = await readDataJson<any[]>("deals/deals.json", []);
   const managers = (await readCrmUsers()).filter((item) => item.status !== "disabled" && isCrmRole(item.role));

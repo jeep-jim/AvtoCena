@@ -15,7 +15,7 @@ export function ClientCreateForm() {
   const [form, setForm] = useState({
     fio: "",
     phone: "+7",
-    telegram: "",
+    telegram: "", max: "",
     city: "",
     car: "",
     budgetRub: "",
@@ -31,8 +31,8 @@ export function ClientCreateForm() {
     setError("");
     setSent(false);
 
-    if (!form.fio.trim() && !normalizeRuPhone(form.phone) && !form.telegram.trim()) {
-      setError("Укажите ФИО, телефон или Telegram клиента.");
+    if (!form.fio.trim() && !normalizeRuPhone(form.phone) && !form.telegram.trim() && !form.max.trim()) {
+      setError("Укажите ФИО, телефон, Telegram или MAX клиента.");
       return;
     }
 
@@ -54,7 +54,7 @@ export function ClientCreateForm() {
       const payload = await response.json();
       setCreatedClientId(payload.client.id);
       setSent(true);
-      setForm({ fio: "", phone: "+7", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
+      setForm({ fio: "", phone: "+7", telegram: "", max: "", city: "", car: "", budgetRub: "", comment: "" });
       operationIdRef.current = crypto.randomUUID();
       router.refresh();
     } catch (error) {
@@ -71,16 +71,16 @@ export function ClientCreateForm() {
 
       <div className="mt-3 grid grid-cols-2 gap-3">
         <input value={form.fio} onChange={(event) => update("fio", event.target.value)} placeholder="ФИО клиента" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
-        <PhoneInput className="col-span-2" value={form.phone} onChange={value => update("phone", value)} />
-        <input value={form.telegram} onChange={(event) => update("telegram", event.target.value)} placeholder="Telegram" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
+        <div className="crm-contact-row col-span-2"><PhoneInput className="min-w-0" value={form.phone} onChange={value => update("phone", value)} />
+        <input value={form.telegram} onChange={(event) => update("telegram", event.target.value)} placeholder="Telegram" aria-label="Telegram" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" /><input aria-label="MAX" value={form.max} onChange={e=>update("max",e.target.value)} placeholder="MAX" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" /></div>
         <input value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Город" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.budgetRub} onChange={(event) => update("budgetRub", event.target.value)} placeholder="Бюджет, ₽" inputMode="numeric" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold" />
         <input value={form.car} onChange={(event) => update("car", event.target.value)} placeholder="Интересующий автомобиль" className="soft-input rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
         <textarea value={form.comment} onChange={(event) => update("comment", event.target.value)} placeholder="Комментарий" rows={4} className="soft-input resize-none rounded-2xl px-4 py-4 text-sm font-bold col-span-2" />
       </div>
 
-      {error && <div className="mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">{error}</div>}
-      {sent && <div className="mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен. Заявка создана и назначена на вас. <a className="mt-2 block underline" href={`/crm/clients/${encodeURIComponent(createdClientId)}`}>Открыть карточку и прикрепить документы →</a></div>}
+      {error && <div className="crm-error mt-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">{error}</div>}
+      {sent && <div className="crm-success mt-4 rounded-2xl bg-green-500/15 px-4 py-3 text-sm font-bold text-green-100">Клиент добавлен в базу. <a className="mt-2 block underline" href={`/crm/clients/${encodeURIComponent(createdClientId)}`}>Открыть карточку и прикрепить документы →</a></div>}
 
       <button disabled={loading} className="avto-button mt-5 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60">
         {loading ? "Сохраняем..." : "Добавить клиента"}

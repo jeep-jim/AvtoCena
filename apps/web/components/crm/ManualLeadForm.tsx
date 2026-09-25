@@ -23,7 +23,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
   const [form, setForm] = useState({
     name: "",
     phone: "+7",
-    telegram: "",
+    telegram: "", max: "",
     city: "",
     budgetRub: "",
     offer: "",
@@ -44,8 +44,8 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
       setError("Укажите имя клиента.");
       return;
     }
-    if (!normalizeRuPhone(form.phone) && !form.telegram.trim()) {
-      setError("Укажите телефон или Telegram.");
+    if (!normalizeRuPhone(form.phone) && !form.telegram.trim() && !form.max.trim()) {
+      setError("Укажите телефон, Telegram или MAX.");
       return;
     }
 
@@ -61,6 +61,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
           name: form.name.trim(),
           phone: normalizeRuPhone(form.phone) || undefined,
           telegram: form.telegram.trim() || undefined,
+          max: form.max.trim() || undefined,
           city: form.city.trim() || undefined,
           budgetRub: form.budgetRub ? Number(form.budgetRub) : undefined,
           offerId: offerId || undefined,
@@ -68,7 +69,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
           car: form.car.trim() || undefined,
           comment: form.comment.trim() || undefined,
           contactPreference: form.contactPreference,
-          messenger: form.contactPreference === "message" && form.telegram.trim() ? "telegram" : undefined,
+          messenger: form.contactPreference === "message" ? (form.telegram.trim() ? "telegram" : form.max.trim() ? "max" : undefined) : undefined,
         }),
       });
       const result = await response.json().catch(() => ({}));
@@ -78,7 +79,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
       setForm({
         name: "",
         phone: "+7",
-        telegram: "",
+        telegram: "", max: "",
         city: "",
         budgetRub: "",
         offer: "",
@@ -120,8 +121,8 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
 
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             <input value={form.name} onChange={(e) => field("name", e.target.value)} placeholder="Имя клиента *" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
-            <PhoneInput value={form.phone} onChange={value => field("phone", value)} />
-            <input value={form.telegram} onChange={(e) => field("telegram", e.target.value)} placeholder="Telegram @username" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
+            <div className="crm-contact-row md:col-span-2 lg:col-span-3"><PhoneInput value={form.phone} onChange={value => field("phone", value)} />
+            <input value={form.telegram} onChange={(e) => field("telegram", e.target.value)} placeholder="Telegram @username" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" /><input value={form.max} onChange={e=>field("max",e.target.value)} placeholder="MAX" aria-label="MAX" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" /></div>
             <input value={form.city} onChange={(e) => field("city", e.target.value)} placeholder="Город" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
             <input value={form.budgetRub} onChange={(e) => field("budgetRub", e.target.value.replace(/[^0-9]/g, ""))} inputMode="numeric" placeholder="Бюджет, ₽" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
             <input value={form.offer} onChange={(e) => field("offer", e.target.value)} placeholder="Ссылка / ID машины АвтоЦены" className="soft-input rounded-xl px-3 py-3 text-sm font-bold md:col-span-2" />
@@ -138,8 +139,8 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
               {loading ? "Создаём..." : "Создать заявку"}
             </button>
             <button type="button" disabled={loading} onClick={()=>setOpen(false)} className="crm-manual-close rounded-xl px-5 py-3 text-sm font-bold">Отмена</button>
-            {error ? <span className="text-sm font-bold text-red-200">{error}</span> : null}
-            {success ? <span className="text-sm font-bold text-green-200">{success}</span> : null}
+            {error ? <span className="crm-error text-sm font-bold text-red-200">{error}</span> : null}
+            {success ? <span className="crm-success text-sm font-bold text-green-200">{success}</span> : null}
           </div>
         </form>
       ) : null}

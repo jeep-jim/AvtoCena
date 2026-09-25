@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-type Client = {id:string; fio:string; phone:string; telegram:string; city:string; comment:string; updatedAt:string};
+type Client = {id:string; fio:string; phone:string; telegram:string; max?:string; city:string; comment:string; updatedAt:string};
 export function ClientEditForm({client}: {client:Client}) {
  const router = useRouter();
  const [form,setForm] = useState(client), [busy,setBusy] = useState(false), [message,setMessage] = useState("");
@@ -16,7 +16,9 @@ export function ClientEditForm({client}: {client:Client}) {
   finally {setBusy(false);}
  }
  return <form onSubmit={submit} className="glass grid max-w-3xl gap-4 rounded-3xl p-5">
-  {([["fio","ФИО"],["phone","Телефон"],["telegram","Telegram"],["city","Город"]] as const).map(([key,label]) => <label key={key} className="grid gap-2 text-sm font-bold">{label}<input type={key==="phone"?"tel":"text"} maxLength={500} value={form[key]} onChange={event=>setForm({...form,[key]:event.target.value})} className="soft-input rounded-xl px-4 py-3"/></label>)}
+  <label className="grid gap-2 text-sm font-bold">ФИО<input value={form.fio} onChange={e=>setForm({...form,fio:e.target.value})} className="soft-input rounded-xl px-4 py-3"/></label>
+  <div className="crm-contact-row">{([["phone","Телефон"],["telegram","Telegram"],["max","MAX"]] as const).map(([key,label])=><label key={key} className="grid gap-2 text-sm font-bold">{label}<input type={key==='phone'?'tel':'text'} maxLength={500} value={form[key]||''} onChange={e=>setForm({...form,[key]:e.target.value})} className="soft-input rounded-xl px-4 py-3"/></label>)}</div>
+  <label className="grid gap-2 text-sm font-bold">Город<input value={form.city} onChange={e=>setForm({...form,city:e.target.value})} className="soft-input rounded-xl px-4 py-3"/></label>
   <label className="grid gap-2 text-sm font-bold">Комментарий<textarea maxLength={4000} rows={4} value={form.comment} onChange={event=>setForm({...form,comment:event.target.value})} className="soft-input rounded-xl px-4 py-3"/></label>
   {message?<p role="status">{message}</p>:null}
   <button disabled={busy} className="avto-button min-h-12 rounded-xl px-4 font-black disabled:opacity-50">{busy?"Сохраняем…":"Сохранить изменения"}</button>
