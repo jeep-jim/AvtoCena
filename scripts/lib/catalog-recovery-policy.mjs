@@ -15,15 +15,13 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  const sourceRows=journal?.sources||[];
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
- const activeMarketAgeFromCheckpoint=Math.abs(Date.parse(activeMarket?.updatedAt||'')-Date.parse(intakeCheckpoint?.updatedAt||''));
- // Older successful publishers committed the intake cursor and public catalog,
- // but did not yet write publicationStatus to the operations journal. Recover
- // that one legacy state only when the preserved market projection, journal
- // generation and committed cursor describe the same publication window.
+ // The intake checkpoint is written only after the public manifest commit.
+ // Older successful publishers did not yet write publicationStatus to the
+ // operations journal, so the exact committed generation and cursors are the
+ // publication proof. Another market may later change the global manifest time.
  const legacyPublishedSlice=journal?.publicationStatus!=='published'
   && Number(activeMarket?.count)>0
-  && journal?.generationId && journal.generationId===intakeCheckpoint?.generationId
-  && Number.isFinite(activeMarketAgeFromCheckpoint) && activeMarketAgeFromCheckpoint<15*60000;
+  && journal?.generationId && journal.generationId===intakeCheckpoint?.generationId;
  const slicePublished=journal?.publicationStatus==='published'||legacyPublishedSlice;
  const budgetContinuationBlockers=[];
  if(!['china','europe'].includes(market))budgetContinuationBlockers.push('market_not_resumable');
