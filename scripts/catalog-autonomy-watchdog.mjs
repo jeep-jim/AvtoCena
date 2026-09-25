@@ -17,7 +17,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
   storage.readJson(`catalog/operations/markets/${market}.json`,null),
   market==='japan'?storage.readJson('catalog/collector-state/proauctions/current.json',null):null,
   storage.readJson(`catalog/operations/recovery/${market}.json`,null),
-  market==='china'?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
+  ['china','europe'].includes(market)?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
  ]);
  const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,lastDispatchAt:dispatch?.at,recovery:dispatch});
  if(decision.action==='inspect_failure'){

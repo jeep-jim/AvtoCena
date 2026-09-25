@@ -33,7 +33,7 @@ test("each scheduled market owns its queue and shares guarded publication throug
  assert.match(worker,/CATALOG_SELLER_INVENTORY: '1'/);
  assert.match(worker,/catalog-storage-preflight/);
  assert.match(worker,/catalogRefreshDue\(\)/);
- assert.ok(worker.includes("CATALOG_INTAKE_RESUME: ${{ matrix.market == 'china' && '1' || '0' }}"));
+ assert.ok(worker.includes("CATALOG_INTAKE_RESUME: ${{ (matrix.market == 'china' || matrix.market == 'europe') && '1' || '0' }}"));
  assert.doesNotMatch(worker,/group: catalog-six-market/);
  assert.equal(hasSchedule(text('catalog-five-market-full-rebuild.yml')),false);
 });

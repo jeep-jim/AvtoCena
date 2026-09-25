@@ -40,6 +40,7 @@ test('published China budget slices continue automatically with matching committ
  const intakeCheckpoint={version:1,market:'china',generationId:'g',updatedAt:new Date(now).toISOString(),sources};
  const args={...input,market:'china',journal,intakeCheckpoint,runs:[{id:42,status:'completed',conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]};
  const result=recoveryDecision(args);
+ assert.equal(recoveryDecision({...args,market:'europe',intakeCheckpoint:{...intakeCheckpoint,market:'europe'}}).reason,'continue_published_budget_slice');
  assert.equal(result.reason,'continue_published_budget_slice');assert.equal(result.action,'dispatch');
  assert.equal(recoveryDecision({...args,recovery:{budgetWindowStartedAt:new Date(now-3600000).toISOString(),budgetAttempts:2}}).action,'none');
  assert.equal(recoveryDecision({...args,lastDispatchAt:new Date(now-3600000).toISOString()}).reason,'dispatch_cooldown');

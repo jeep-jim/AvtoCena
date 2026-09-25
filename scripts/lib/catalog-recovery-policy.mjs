@@ -15,7 +15,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,now
  const sourceRows=journal?.sources||[];
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
- const committedBudget=market==='china' && journal?.publicationStatus==='published'
+ const committedBudget=['china','europe'].includes(market) && journal?.publicationStatus==='published'
   && intakeCheckpoint?.version===1 && intakeCheckpoint.market===market
   && intakeCheckpoint.generationId===journal.generationId
   && checkpointAge>=0 && checkpointAge<4*86400000 && budgetRows.length>0
