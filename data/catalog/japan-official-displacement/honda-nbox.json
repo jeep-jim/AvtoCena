@@ -1,0 +1,34 @@
+[
+  {
+    "id": "nbox-jf3-jf4",
+    "manufacturer": "Honda",
+    "model": "N-BOX",
+    "chassisCodes": [
+      "JF3",
+      "JF4"
+    ],
+    "engineCode": "S07B",
+    "engineCc": 658,
+    "sourceUrl": "https://www.honda.co.jp/factbook/auto/nbox/201708/P26.pdf",
+    "sourceSha256": "00eba9b8cae3480d2bd568870699e62a870a2da8b771b57f382c1c0f966e5292",
+    "unitLabel": "総排気量（L）",
+    "sourceValue": "0.658",
+    "checkedAt": "2026-09-20T05:21:08.380030+00:00"
+  },
+  {
+    "id": "nbox-jf5-jf6",
+    "manufacturer": "Honda",
+    "model": "N-BOX",
+    "chassisCodes": [
+      "JF5",
+      "JF6"
+    ],
+    "engineCode": "S07B",
+    "engineCc": 658,
+    "sourceUrl": "https://www.honda.co.jp/Nbox/common/pdf/nbox_spec_list.pdf",
+    "sourceSha256": "fd9aee39fe3f36733a104737d22f274a704d63bf8c6e233ce4af19bd7fc95192",
+    "unitLabel": "総排気量（L）",
+    "sourceValue": "0.658",
+    "checkedAt": "2026-09-20T05:21:15.267988+00:00"
+  }
+]

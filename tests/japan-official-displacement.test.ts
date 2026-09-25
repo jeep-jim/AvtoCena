@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {enrichJapanOfficialDisplacement as enrich} from '../apps/web/lib/catalog/japan-official-displacement';
+function fixture():any{const sourceUrl='https://demo.pro-auctions.ru/statistika/honda/n-box/123.html';return {market:'japan',sourceId:'proauctions_japan_stat',sourceOfferId:'123',make:'Honda',model:'N-BOX Custom',year:2021,operational:{sourceUrl,exactDetail:true,chassisCode:'JF3',semanticEvidence:{engineCc:{status:'ambiguous',value:650}},sourceSpecifications:{sourceUrl,sourceId:'proauctions_japan_stat',sourceOfferId:'123',groups:[{name:'Source',items:[{name:'Номер кузова',value:'JF3'}]}]}}};}
+test('exact source-bound Honda chassis resolves rounded displacement with manufacturer PDF provenance',()=>{const row=fixture(),result=enrich(row);assert.equal(result.engineCc,658);assert.equal(result.operational.semanticEvidence.engineCc.status,'exact');assert.match(result.operational.officialDisplacementEvidence.sourceSha256,/^[a-f0-9]{64}$/);assert.equal(row.engineCc,undefined);});
+test('model alone, wrong listing, ambiguous chassis or conflicting source volume never supplies displacement',()=>{
+ for(const change of [r=>r.make='Toyota',r=>r.model='N-WGN',r=>r.model='N-BOX Slash',r=>r.operational.exactDetail=false,r=>r.operational.sourceSpecifications.sourceOfferId='other',r=>r.operational.chassisCode='JF4',r=>r.operational.sourceSpecifications.groups[0].items=[],r=>r.operational.semanticEvidence.engineCc.status='conflict',r=>r.operational.semanticEvidence.engineCc.value=1000,r=>r.year=2015]){const row=fixture();change(row);assert.equal(enrich(row),row);}
+});
