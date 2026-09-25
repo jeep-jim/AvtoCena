@@ -251,3 +251,19 @@ html[data-theme="light"] .crm-lead-date-filter input[type="date"]{color-scheme:l
  .crm-phone-icon{width:28px;height:28px}
  .crm-lead-date-filter .crm-date-control{flex:1 1 150px;width:150px;min-width:0}
 }
+
+/* CRM contacts, ownership and feedback, September 2026. */
+.crm-contact-row{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0}
+.crm-contact-row>*{min-width:0;width:100%}
+@media(min-width:768px){.crm-contact-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.crm-client-search{display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,210px) auto;gap:8px}
+.crm-client-card{grid-template-columns:minmax(0,1fr) auto;align-items:start}
+.crm-client-manager{display:flex;align-items:center;gap:8px;grid-column:auto;border:0;padding:0}
+.crm-client-manager img{width:36px;height:36px;flex:none;border-radius:50%;object-fit:cover}
+.crm-client-manager strong{margin:0;font-size:12px}
+.crm-client-date{display:inline-flex;margin-top:6px;border-radius:6px;padding:3px 6px;background:var(--ac-surface);font-size:11px;color:var(--ac-muted);white-space:nowrap}
+.crm-client-lead-chips a{width:fit-content;overflow-wrap:anywhere}
+html[data-theme="light"] .crm-root .crm-success{color:#166534!important;background:#dcfce7}
+html[data-theme="light"] .crm-root .crm-error{color:#991b1b!important;background:#fee2e2}
+html[data-theme] .crm-root .crm-navigation a.crm-documents-button[aria-current="page"],html[data-theme="light"] .crm-root .crm-navigation a.crm-documents-button[aria-current="page"]{background:#f59e0b!important;color:#171c24!important}
+@media(max-width:767px){.crm-client-card{grid-template-columns:minmax(0,1fr) auto;gap:8px}.crm-client-manager{grid-column:auto;align-items:flex-end;flex-direction:column;gap:5px}.crm-client-manager span{text-align:right;max-width:110px}.crm-client-search{grid-template-columns:minmax(0,1fr) auto}.crm-client-search input{grid-column:1/-1}.crm-client-search select{width:100%;min-width:0}}

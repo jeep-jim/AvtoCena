@@ -28,7 +28,7 @@ const date = (value: any) =>
     ? new Intl.DateTimeFormat("ru-RU", {
         dateStyle: "short",
         timeStyle: "short",
-        timeZone: "Europe/Moscow",
+        timeZone: "Asia/Novokuznetsk",
       }).format(new Date(value))
     : "";
 function offers(lead: any) {

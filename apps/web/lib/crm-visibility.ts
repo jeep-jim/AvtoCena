@@ -53,9 +53,9 @@ export function filterLeads(
     );
 }
 
-/** Same Moscow calendar day as the date displayed in CRM. */
+/** Same Novokuznetsk calendar day as the date displayed in CRM. */
 export function leadDateKey(value: unknown) {
   const date = new Date(String(value || ""));
   if (!Number.isFinite(date.getTime())) return "";
-  return new Intl.DateTimeFormat("en-CA", {timeZone: "Europe/Moscow", year: "numeric", month: "2-digit", day: "2-digit"}).format(date);
+  return new Intl.DateTimeFormat("en-CA", {timeZone: "Asia/Novokuznetsk", year: "numeric", month: "2-digit", day: "2-digit"}).format(date);
 }

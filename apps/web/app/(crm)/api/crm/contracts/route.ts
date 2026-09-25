@@ -4,7 +4,7 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 import {getJsonStorage,updateChunkedDataJson} from '@/lib/data';
 import {canSeeLead} from '@/lib/crm-visibility';
 import {documentKey,encryptClientDocument,MAX_CLIENT_DOCUMENTS,MAX_CLIENT_FILE_BYTES,type ClientDocument} from '@/lib/client-documents';
-import {accessibleClient,createContract,getContract,getTemplate,listContracts,saveTemplate,updateContract} from '@/lib/contracts/store';
+import {changeContractState,accessibleClient,createContract,getContract,getTemplate,listContracts,saveTemplate,updateContract} from '@/lib/contracts/store';
 import {cleanFields,requiredMissing,sampleFields,validateTemplate,type ContractSnapshot,type TemplateId,type ContractTemplate} from '@/lib/contracts/model';
 import {importContractOffer,manualCalculation} from '@/lib/contracts/calculation';
 import {renderContractPdf} from '@/lib/contracts/pdf';
@@ -17,7 +17,9 @@ export async function GET(request:Request){const user=await getCurrentUser();if(
 export async function POST(request:Request){if(!isCalculationOriginAllowed(request))return json({error:'Недопустимый источник запроса.'},403);const user=await getCurrentUser();if(!user||!isCrmRole(user.role)||user.status==='disabled')return json({error:'Войдите в CRM.'},401);try{if(Number(request.headers.get('content-length'))>250000)return json({error:'Слишком большой документ.'},413);const raw=await request.text();if(raw.length>250000)return json({error:'Слишком большой документ.'},413);const b=JSON.parse(raw);
  if(b.action==='create')return json({record:await createContract(user,b.templateId,String(b.clientId||''),b.id)});
  if(b.action==='template'){if(user.role!=='owner')return json({error:'Шаблоны редактирует владелец.'},403);validateTemplate(b.template);return json({template:await saveTemplate(b.template,b.revision)});}
+ if(['archive','restore','purge'].includes(b.action)){if(b.confirm!==true)throw Error('Подтвердите действие.');await changeContractState(user,b.id,b.revision,b.action);return json({ok:true});}
  const r=await getContract(user,b.id);
+ if(r.archivedAt)throw Error('Договор в архиве. Сначала восстановите его.');
  if(b.action==='save'){const fields=cleanFields(b.fields);const clientId=String(b.clientId||'');await accessibleClient(user,clientId);if(r.versions.length&&r.clientId&&r.clientId!==clientId)throw Error('У договора уже есть готовая версия. Для другого клиента создайте новый договор.');let template:ContractTemplate=r.template;if(b.template){validateTemplate(b.template);if(b.template.id!==r.template.id)throw Error('Нельзя заменить тип шаблона.');template={...b.template,revision:r.template.revision};}
  const priceKeys=['market','offerUrl','deliveryCity','date','car','year','engine','engineCc','powerHp','manualTotal','manualCommission','manualDeposit','manualRate','manualRateDate','manualExpenses'];const invalidate=priceKeys.some(k=>(fields[k]||'')!==(r.fields[k]||''));return json({record:await updateContract(user,r.id,b.revision,current=>({...current,fields,clientId,template,calculation:invalidate?null:current.calculation}))});}
  if(b.action==='import'){const result=await importContractOffer(r.fields.offerUrl||'',r.fields,r.template.id);return json({record:await updateContract(user,r.id,b.revision,current=>({...current,fields:result.fields,calculation:result.calculation})),warning:result.warning});}

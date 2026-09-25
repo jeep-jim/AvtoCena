@@ -7,7 +7,7 @@ type TelegramStatus = {
   webhookMatches?: boolean; telegramLastError?: string; telegramLastErrorAt?: string;
 };
 const formatDate = (value?: string) => value && Number.isFinite(Date.parse(value))
-  ? new Date(value).toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}) : "Не проверялось";
+  ? new Date(value).toLocaleString("ru-RU", {timeZone: "Asia/Novokuznetsk"}) : "Не проверялось";
 
 export function TelegramSetupForm({initialStatus}: {initialStatus: TelegramStatus}) {
   const [status, setStatus] = useState(initialStatus);
