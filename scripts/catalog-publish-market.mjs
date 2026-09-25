@@ -657,8 +657,15 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
 }
 const allOffers = [...unique.values()];
 const previousRetainedCount = retainedCandidateCount;
+const completedSourceIds = new Set(freshOfferAudit.summary.complete
+  ? Object.values(sourceRefreshStates).filter(state => state?.observed && state?.authoritative
+    && Number(state?.liveReports || 0) > 0 && Number(state?.freshSaved || 0) > 0
+    && state?.stopReasons?.length && state.stopReasons.every(reason => reason === 'source_finished'))
+    .map(state => state.sourceId)
+  : []);
 const publicCountGuard = catalogPublicCountGuard(previousSourceCounts,
-  countSources(canonicalTargetPreview.offers), withdrawnSourceCounts, minimumPublicRetentionRatio);
+  countSources(canonicalTargetPreview.offers), withdrawnSourceCounts, minimumPublicRetentionRatio,
+  {completedSources:completedSourceIds});
 const minimumSafePublicCount = allowPublicCollapse ? 1 : publicCountGuard.minimumTotal;
 const catastrophicPublicCollapse = !publicCountGuard.ok;
 const regressionBlocked = expectedPublishedByMarket[market] <= 0
@@ -721,7 +728,8 @@ if (regressionBlocked) {
           const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);
           if (currentMarket === market) {
             if (!allowPublicCollapse) {
-              const guard = catalogPublicCountGuard(previousSourceCounts, countSources(rows), withdrawnSourceCounts, minimumPublicRetentionRatio);
+              const guard = catalogPublicCountGuard(previousSourceCounts, countSources(rows), withdrawnSourceCounts, minimumPublicRetentionRatio,
+                {completedSources:completedSourceIds});
               if (!guard.ok) failures.push(`${currentMarket}:sources:${JSON.stringify(guard.failures)}`);
             }
             if (rows.length < minimumSafePublicCount) failures.push(`${currentMarket}:count:${rows.length}:${minimumSafePublicCount}`);

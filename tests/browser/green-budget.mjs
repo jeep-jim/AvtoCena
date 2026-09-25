@@ -40,9 +40,12 @@ try {
   await page.goto(origin+(live?'/cars/green?advanced=1':'/cars'),{waitUntil:'domcontentloaded',timeout:90000});
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
+  await scope.waitFor({state:'visible',timeout:90000});
   const price=scope.locator('.ac-range-card').filter({has:page.locator('input[name="budgetFrom"]')});
   const volume=scope.locator('.ac-range-card').filter({has:page.locator('input[name="engineFrom"]')});
-  await price.locator('.ac-range-value-toggle').first().click();
+  const priceToggle=price.locator('.ac-range-value-toggle').first();
+  await priceToggle.waitFor({state:'visible',timeout:90000});
+  await priceToggle.click({timeout:90000});
   await price.getByRole('button',{name:'1 млн',exact:true}).waitFor();
   assert.doesNotMatch(await price.innerText(),/FOB|1,0 л|1,5 л/);
   await price.getByRole('button',{name:'1 млн',exact:true}).click();
