@@ -28,3 +28,11 @@ Avtocena.com в разрешённых родителях отсутствует
 Это прототип, не завершённое подключение Алисы. Production-кнопка и работающий внешний переход не изменены. Не публиковать вместо действующего перехода пустой/заблокированный iframe. Для завершения нужен разрешённый встраиваемый источник ответов; сам интерфейс готов к такому подключению.
 
 Локальная проверка TypeScript прошла. Браузерная проверка вынесена в workflow `Verify research split preview`: Chromium, Firefox, WebKit; resize, keyboard, mobile, focus, persistence. Результат и скриншоты публикуются в артефакте workflow, не объявлять их пройденными до завершения.
+
+## Фактическая браузерная проверка
+
+[Workflow 36083464531](https://github.com/jeep-jim/AvtoCena/actions/runs/36083464531) завершён success. Chromium 134, Firefox 135 и WebKit 18.4 прошли проверки перетаскивания, клавиатуры, сохранения ширины, возврата фокуса и мобильного режима (1440×960 / 390×844). Исходный screenshot: `research-split-view.png`; результаты: `research-split-view-tests.json`.
+
+При реальном встраивании alice.yandex.ru Chromium записал: `Refused to frame 'https://alice.yandex.ru/' because an ancestor violates ... frame-ancestors ...`. Полный текст без cookies/токенов: `research-split-view-browser-restriction.json`. Чат действительно не загрузился.
+
+Отдельный HTTP-запрос к текущему yandex.ru/search/ из проверочной среды перенаправлен на showcaptcha. Доступ к результатам и возможность их встраивания этим запросом не подтверждены; капча не обходилась.
