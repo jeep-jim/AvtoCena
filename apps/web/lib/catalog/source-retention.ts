@@ -80,10 +80,13 @@ export function catalogSourceRefreshStates(payloads: GenerationPayload[]) {
     current.restoredSaved += restoredSaved;
     if (mode === "live") current.liveReports += 1;
     if (stopReason && !current.stopReasons.includes(stopReason)) current.stopReasons.push(stopReason);
-    if (mode === "live" && pages > 0 && freshSaved > 0 && stopReason === "source_cycle_finished") {
+    if (mode === "live" && pages > 0 && freshSaved > 0 && ["source_cycle_finished", "source_finished"].includes(stopReason)) {
       current.authoritative = true;
     }
     grouped.set(sourceId, current);
+  }
+  for (const state of grouped.values()) {
+    if (state.stopReasons.some(reason => !["source_cycle_finished", "source_finished"].includes(reason))) state.authoritative = false;
   }
   return Object.fromEntries([...grouped.entries()].sort(([left], [right]) => left.localeCompare(right)));
 }

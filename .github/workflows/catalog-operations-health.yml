@@ -1,12 +1,19 @@
 name: Catalog operations freshness
 on:
   push:
-    branches: [fix/catalog-operations-20260919]
+    branches: [fix/catalog-operations-20260919, fix/catalog-readiness-20260925]
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish', 'Catalog refresh green']
+    types: [completed]
+    branches: [main]
   schedule:
     - cron: "0 10 * * *"
 permissions:
   contents: read
+concurrency:
+  group: catalog-operations-health
+  cancel-in-progress: true
 jobs:
   audit:
     runs-on: ubuntu-latest

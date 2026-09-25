@@ -13,11 +13,14 @@ else{
  if(['source_access_refused','transport_error_checkpointed','repeated_listing_page'].includes(japan.stopReason))problems.push(`japan_${japan.stopReason}`);
 }
 const markets={},assortmentProblems=[];
-for(const market of ['japan','china','korea','europe','georgia','uae']){
- const record=manifest?.markets?.[market];
+for(const market of ['japan','china','korea','europe','georgia','uae','green']){
+ let record=manifest?.markets?.[market];
  const journal=await readDataJson(`catalog/operations/markets/${market}.json`,null);
+ if(market==='green')record={count:journal?.publishedCount||0};
+ if(journal?.publicationStatus==='failed')problems.push(`${market}_last_publication_failed`);
+ if(market!=='japan' && market!=='green' && journal?.qualityStatus!=='configured_routes_finished')problems.push(`${market}_collection_incomplete`);
  for(const source of journal?.sources||[])if(['blocked','blocked_detail','list_failed','adapter_missing','cursor_loop','repeated_page'].includes(source.stopReason))problems.push(`${market}_${source.sourceId}_${source.stopReason}`);
- if(market!=='japan'&&journal?.powerMix?.targetMet!==true)assortmentProblems.push(`${market}_80_percent_low_power_not_confirmed`);
+ if(!['japan','green'].includes(market)&&journal?.powerMix?.targetMet!==true)assortmentProblems.push(`${market}_80_percent_low_power_not_confirmed`);
  const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
  const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
  markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};

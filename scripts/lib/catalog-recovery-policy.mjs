@@ -25,7 +25,7 @@ export function recoveryDecision({market,runs,journal,japan,now=Date.now(),lastD
   return {action:'dispatch',reason:'retry_transient_source_failure',sourceAttempts:attempt+1,windowStartedAt:windowActive?recovery.windowStartedAt:new Date(now).toISOString()};
  }
  const last=Date.parse(journal?.lastCollectionSuccess||journal?.lastPublicationSuccess||'');
- const stale=now-last>(market==='japan'?15:4)*86400000;
+ const stale=!Number.isFinite(last)||now-last>(market==='japan'?15:4)*86400000;
  if((!latest&&!Number.isFinite(last))||stale)return {action:'dispatch',reason:'missing_or_stale_collection'};
  return {action:'none',reason:'current'};
 }
