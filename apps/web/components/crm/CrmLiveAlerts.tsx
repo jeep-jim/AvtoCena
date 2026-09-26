@@ -82,9 +82,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
         if(!active)return;
         const next=unseen.filter(lead=>!migrated.has(lead.id));
         setPending(next);
-        const badges=navigator as any;
-        if(next.length && badges.setAppBadge)void badges.setAppBadge(next.length).catch(()=>{});
-        else if(!next.length && badges.clearAppBadge)void badges.clearAppBadge().catch(()=>{});
+
       }catch{}finally{busy=false;}
     };
     void poll();const timer=setInterval(()=>void poll(),20_000);
@@ -111,6 +109,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     ring();const timer=setInterval(ring,1000);
     return ()=>{clearInterval(timer);try{if(JSON.parse(get(leaseKey)||"{}").id===tab.current)put(leaseKey,"{}");}catch{}};
   },[enabled,pending,notifications,authorized,leaseKey,userId]);
+  useEffect(()=>{const badges=navigator as any,count=pending.length+unreadNotices.length;if(count&&badges.setAppBadge)void badges.setAppBadge(count).catch(()=>{});else if(!count&&badges.clearAppBadge)void badges.clearAppBadge().catch(()=>{});},[pending.length,unreadNotices.length]);
   async function acknowledge(){
     setAckError("");setAcknowledging(true);
     const rows=[...pendingRef.current];
@@ -153,7 +152,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     <ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)<=Date.now())} onChange={()=>void refreshNotices()}/>
     {reminders.some(r=>Date.parse(r.dueAt)>Date.now())?<><h4 className="ac-notifications-subtitle">Предстоящие</h4><ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)>Date.now())} onChange={()=>void refreshNotices()}/></>:null}
     {ackError?<p role="alert">{ackError}</p>:null}</section>:null}
-    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>{setMenuOpen(!menuOpen);setNotificationsOpen(false);}}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
+    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>{setMenuOpen(!menuOpen);setNotificationsOpen(false);}}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}</button>
     <div hidden={!menuOpen} id={`staff-menu-${userId}`} className="ac-staff-menu">
       <p className="ac-staff-name">{displayName}{crm?<small className="block text-xs font-normal">{({owner:"Владелец",admin:"Администратор",manager:"Менеджер"} as Record<string,string>)[role]||role}</small>:null}</p>
       <button type="button" onClick={()=>setLeadsOpen(!leadsOpen)} aria-expanded={leadsOpen}><ClipboardList size={18}/>Заявки{badge}<ChevronDown size={18} style={{marginLeft:'auto',transform:leadsOpen?'rotate(180deg)':undefined}}/></button>

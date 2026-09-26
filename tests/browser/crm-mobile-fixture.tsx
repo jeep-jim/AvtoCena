@@ -18,4 +18,4 @@ async function resolve(node:any):Promise<any>{
  return React.cloneElement(element,{...element.props,children:await resolve(element.props.children)});
 }
 const kind=new URLSearchParams(location.search).get('kind')||(location.pathname==='/crm/clients'?'clients':location.pathname==='/crm/leads'?'leads':'overview');
-void pages[kind]({searchParams:Promise.resolve({...Object.fromEntries(new URLSearchParams(location.search)),...(kind==='archive'?{view:'archive'}:{})}),params:Promise.resolve({id:kind==='staff'?'new':"client-0"})}).then(resolve).then((tree:any)=>createRoot(document.getElementById('root')!).render(tree));
+void pages[kind]({searchParams:Promise.resolve({...Object.fromEntries(new URLSearchParams(location.search)),...(kind==='archive'?{view:'archive'}:{})}),params:Promise.resolve({id:kind==='staff'?'manager-test':"client-0"})}).then(resolve).then((tree:any)=>createRoot(document.getElementById('root')!).render(tree));
