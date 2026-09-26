@@ -11,7 +11,9 @@ export async function reminderEntity(user:AuthUser,type:string,id:string){
  const entity=rows.find(x=>x.id===id);if(!entity||!canSeeLead(user,entity))throw Error('entity_forbidden');return entity;
 }
 export async function readReminders(user:AuthUser){
- const [rows,clients,leads]=await Promise.all([readDataJson<CrmReminder[]>(key(user.id),[]),readChunkedDataJson<any>('clients/clients.json',[]),readChunkedDataJson<any>('leads/leads.json',[])]);
+ const rows=await readDataJson<CrmReminder[]>(key(user.id),[]);
+ if(!rows.length)return [];
+ const [clients,leads]=await Promise.all([rows.some(r=>r.entityType==='client')?readChunkedDataJson<any>('clients/clients.json',[]):Promise.resolve([]),rows.some(r=>r.entityType==='lead')?readChunkedDataJson<any>('leads/leads.json',[]):Promise.resolve([])]);
  return rows.filter(r=>r.ownerId===user.id&&canSeeLead(user,(r.entityType==='client'?clients:leads).find(x=>x.id===r.entityId))).sort((a,b)=>a.dueAt.localeCompare(b.dueAt));
 }
 export async function createReminder(user:AuthUser,input:any){

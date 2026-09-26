@@ -69,15 +69,7 @@ export async function PATCH(
 
   const admin = hasCrmPermission(user,"assign");
   if (!canSeeLead(user,existingLead))return NextResponse.json({error:"lead_forbidden"},{status:403});
-  if (!admin) {
-    const ownsLead = existingLead.assignedManagerId === user.id || existingLead.createdByManagerId === user.id;
-    if (!ownsLead) {
-      return NextResponse.json({ ok: false, error: "lead_forbidden" }, { status: 403 });
-    }
-    if (requestedManagerId && requestedManagerId !== user.id) {
-      return NextResponse.json({ ok: false, error: "manager_assignment_forbidden" }, { status: 403 });
-    }
-  }
+  if(!admin&&Object.hasOwn(body,"assignedManagerId")&&requestedManagerId!==(existingLead.assignedManagerId||"")&&requestedManagerId!==user.id)return NextResponse.json({error:"manager_assignment_forbidden"},{status:403});
 
   if(admin && Object.prototype.hasOwnProperty.call(body,"expectedManagerId") && (body.expectedManagerId||null)!==(existingLead.assignedManagerId||null))return NextResponse.json({error:"assignment_conflict"},{status:409});
   const now = new Date().toISOString();
@@ -94,7 +86,7 @@ export async function PATCH(
   }
 
   const archiveChanged = typeof body.archived === "boolean" && body.archived !== Boolean(existingLead.archivedAt);
-  if (archiveChanged && !admin) return NextResponse.json({ok:false,error:"archive_forbidden"},{status:403});
+  if (archiveChanged && !isAdminRole(user.role)) return NextResponse.json({ok:false,error:"archive_forbidden"},{status:403});
   if (archiveChanged && body.archived && !note) return NextResponse.json({ok:false,error:"reason_required"},{status:400});
   if (!statusChanged && !managerChanged && !note && !archiveChanged) {
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });

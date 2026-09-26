@@ -8,3 +8,7 @@
 День 11–12: Telegram Bot + Mini App.
 День 13: SEO-страницы.
 День 14: деплой Selectel.
+
+## CRM — 26 сентября 2026
+
+Реализация и результаты проверки: [CRM activity, reminders and permissions](./crm-activity-reminders-20260926.md).

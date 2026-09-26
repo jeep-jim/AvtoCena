@@ -185,7 +185,7 @@ try{
    }
    if(kind==='overview'){
     await page.locator('.crm-presence-card').first().waitFor();
-    for(const selector of ['.crm-presence-card','.crm-overview-feed>a'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
+    for(const selector of ['.crm-presence-card','.crm-event'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
    }
    if(kind==='settings'){
     const title=await page.getByRole('heading',{name:'Все рынки',exact:true}).boundingBox(),chip=await page.locator('.crm-market-count').boundingBox(),help=await page.locator('.crm-markets-help').boundingBox();assert.ok(Math.abs((title.y+title.height/2)-(chip.y+chip.height/2))<3,'market count at top right');

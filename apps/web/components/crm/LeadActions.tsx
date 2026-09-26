@@ -17,6 +17,7 @@ type LeadActionsProps = {
   managers: ManagerOption[];
   canAssignManagers?: boolean;
   archived?: boolean;
+  canArchive?: boolean;
 };
 
 export function LeadActions({
@@ -26,6 +27,7 @@ export function LeadActions({
   managers,
   canAssignManagers = false,
   archived = false,
+  canArchive = false,
 }: LeadActionsProps) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
@@ -154,7 +156,7 @@ export function LeadActions({
         {status === 'spam' ? 'Спам — сигнал о некачественной заявке. Отсутствие ответа само по себе не спам. ' : ''}
         После сохранения статус попадёт в фоновую отправку при включённой интеграции и наличии ClientID. Эта отметка не подтверждает доставку в Метрику.
       </p>}
-      {canAssignManagers && <button disabled={loading} onClick={archive} className="rounded-xl border border-[var(--ac-border)] px-4 py-2 text-xs font-bold md:col-span-4">{archived ? "Восстановить заявку" : "Убрать в архив"}</button>}
+      {canArchive && <button disabled={loading} onClick={archive} className="rounded-xl border border-[var(--ac-border)] px-4 py-2 text-xs font-bold md:col-span-4">{archived ? "Восстановить заявку" : "Убрать в архив"}</button>}
 
       {(saved || error) && (
         <div className={`text-xs font-bold md:col-span-4 ${error ? "text-red-200" : "text-green-200"}`}>

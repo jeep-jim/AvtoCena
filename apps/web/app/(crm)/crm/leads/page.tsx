@@ -414,7 +414,7 @@ export default async function CrmLeadsPage({
                     currentManagerId={lead.assignedManagerId}
                     managers={managers}
                     canAssignManagers={hasCrmPermission(user,"assign")}
-                    archived={Boolean(lead.archivedAt)}
+                    canArchive={isAdminRole(user.role)} archived={Boolean(lead.archivedAt)}
                   />:null}
                 </div>
               </div>

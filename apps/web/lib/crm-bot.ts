@@ -1,3 +1,6 @@
+import {hasCrmPermission,permissionDefaults} from "./crm-permissions";
+import {canSeeLead} from "./crm-visibility";
+import {recordCrmActivity} from "./crm-activity";
 import {offerRouteId} from "./catalog/offer-url";
 import crypto from "node:crypto";
 import { type AuthUser, getAuthUsers, normalizeTelegramUsername } from "./auth";
@@ -82,6 +85,7 @@ async function staffCommand(
     /^\/(invite|key|disable)\s+@?([A-Za-z][A-Za-z0-9_]{4,31})(?:\s+(admin|manager))?$/i,
   );
   if (!match) return false;
+  if(!hasCrmPermission(actor,"staff")){await telegramSend(token,id,"Нет права управлять сотрудниками.");return true;}
   const command = match[1].toLowerCase();
   const username = normalizeTelegramUsername(match[2]);
   let target: StaffUser | undefined;
@@ -117,6 +121,7 @@ async function staffCommand(
       status: "active",
       companyId: actor.companyId,
       sessionVersion: 0,
+      permissions:Object.fromEntries(Object.entries(permissionDefaults(match[3])).map(([k,v])=>[k,v&&hasCrmPermission(actor,k as any)])),
     };
     await mutateDataJson<StaffUser[]>(
       "auth/users.json",
@@ -132,6 +137,7 @@ async function staffCommand(
         return [...current, candidate];
       },
     );
+    await recordCrmActivity(actor,{type:"staff_created",title:"Добавлен сотрудник через Telegram",entityType:"staff",entityId:candidate.id,entityLabel:candidate.displayName,visibility:"management",href:`/crm/managers/${candidate.id}`});
     target = candidate;
   }
   if (!target) {
@@ -208,14 +214,16 @@ export async function handleCrmBotUpdate(
     }
     if (await staffCommand(token, id, actor, text)) return true;
     if (data === "crm:team" || text === "/team") {
+      if(!hasCrmPermission(actor,"staff")){await telegramSend(token,id,"Нет права управлять сотрудниками.");return true;}
       await teamMenu(token, id);
       return true;
     }
     if (data.startsWith("crm:reply:")) {
+      if(!hasCrmPermission(actor,"editLeads")){await telegramSend(token,id,"Нет права изменять заявки.");return true;}
       const leadId = data.slice(10);
       const lead = (
         await readChunkedDataJson<any>("leads/leads.json", [])
-      ).find((lead) => lead.id === leadId && !lead.archivedAt);
+      ).find((lead) => lead.id === leadId && !lead.archivedAt && canSeeLead(actor,lead));
       if (!lead?.telegramChatId) {
         await telegramSend(
           token,
@@ -233,6 +241,7 @@ export async function handleCrmBotUpdate(
       return true;
     }
     if (data === "crm:send") {
+      if(!hasCrmPermission(actor,"editLeads")){await telegramSend(token,id,"Нет права изменять заявки.");return true;}
       if (
         dialog.mode !== "staffConfirm" ||
         !dialog.leadId ||
@@ -247,7 +256,7 @@ export async function handleCrmBotUpdate(
       }
       const lead = (
         await readChunkedDataJson<any>("leads/leads.json", [])
-      ).find((lead) => lead.id === dialog.leadId && !lead.archivedAt);
+      ).find((lead) => lead.id === dialog.leadId && !lead.archivedAt && canSeeLead(actor,lead));
       if (!lead?.telegramChatId) {
         await saveDialog(id, {});
         await telegramSend(
@@ -273,6 +282,7 @@ export async function handleCrmBotUpdate(
         managerId: actor.id,
         managerName: actor.displayName,
       });
+      await recordCrmActivity(actor,{id:`reply_activity_${dialog.requestId}`,type:"client_reply_queued",title:"Ответ клиенту поставлен на отправку",leadId:lead.id,clientId:lead.clientId,entityLabel:lead.name||lead.car||"Заявка",text:dialog.description});
       await saveDialog(id, {});
       await telegramSend(
         token,
@@ -282,7 +292,7 @@ export async function handleCrmBotUpdate(
       return true;
     }
     if (data.startsWith("crm:view:")) {
-      const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(row => row.id === data.slice(9) && !row.archivedAt);
+      const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(row => row.id === data.slice(9) && !row.archivedAt && canSeeLead(actor,row));
       await telegramSend(token, id, lead ? `${leadNotice(lead)}\nСтатус: ${leadStatusLabel(lead.status)}` : "Заявка недоступна.", lead ? [
         [{ text: "Ответить клиенту", callback_data: `crm:reply:${lead.id}` }],
         [{ text: "Открыть CRM", url: `${SITE}/crm/leads?id=${encodeURIComponent(lead.id)}` }],
@@ -292,7 +302,7 @@ export async function handleCrmBotUpdate(
     }
     if (data === "crm:inbox" || /^crm:inbox:\d+$/.test(data) || text === "/inbox") {
       const leads = (await readChunkedDataJson<any>("leads/leads.json", []))
-        .filter((lead) => !lead.archivedAt)
+        .filter((lead) => !lead.archivedAt && canSeeLead(actor,lead))
         .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
       const page = Math.min(Math.max(0, Number(data.split(":")[2]) || 0), Math.max(0, Math.ceil(leads.length / 8) - 1));
       await telegramSend(

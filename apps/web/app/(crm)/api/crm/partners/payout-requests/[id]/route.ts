@@ -1,3 +1,5 @@
+import {recordCrmActivity} from "@/lib/crm-activity";
+import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
@@ -29,6 +31,7 @@ export async function PATCH(
   request: Request,
   context: { params: Promise<{ id: string }> },
 ) {
+  if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const user = await getCurrentUser();
   if (!user || !hasCrmPermission(user,"settings")) {
     return NextResponse.json({ ok: false, error: "admin_required" }, { status: 403 });
@@ -53,7 +56,7 @@ export async function PATCH(
   }
 
   const now = new Date().toISOString();
-  const updated = updateChunkedDataJson<PayoutRequest>(
+  const updated = await updateChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     requestId,
     (item) => ({
@@ -86,5 +89,6 @@ export async function PATCH(
     }));
   }
 
+  await recordCrmActivity(user,{type:"partner_payout_updated",title:"Изменена заявка на выплату партнёру",visibility:"management",entityType:"payout",entityId:requestId,entityLabel:existing.partnerCode,href:"/crm/partners",changes:[{label:"Статус",before:existing.status,after:status}]});
   return NextResponse.json({ ok: true, request: updated });
 }
