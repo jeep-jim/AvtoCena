@@ -1,10 +1,10 @@
 {
-  "operation": "catalog-memory-recovery-20260924",
+  "operation": "china-publication-capacity-20260926",
   "market": "china",
-  "reuseRunId": "35922669965",
+  "reuseRunId": "36215075427",
   "publishMarkets": [
     "china"
   ],
   "refreshMarkets": [],
-  "reason": "Retry completed intake with bounded reserve reads and 12 GiB publication heap; all regression guards retained."
+  "reason": "Retry the completed intake with 24 GiB Node heap, 24 GiB swap reserve and lower peak concurrency. Other markets, schedule and publication guards unchanged."
 }
