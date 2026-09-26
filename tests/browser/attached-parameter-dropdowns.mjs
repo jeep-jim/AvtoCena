@@ -61,7 +61,14 @@ try{
   const context=await browser.newContext({viewport:{width:390,height:900},serviceWorkers:'block'});
   const page=await context.newPage();const errors=[],requests=[];
   page.on('pageerror',e=>errors.push(String(e)));
-  if(live) await page.route('**/*',route=>['GET','HEAD'].includes(route.request().method())?route.continue():route.abort());
+  if(live) await page.route('**/*',route=>{
+    const request=route.request(),url=new URL(request.url());
+    // This POST only computes a preview; blocking it fabricates a fetch error
+    // and changes the price/status layout while the geometry test is running.
+    const calculation=request.method()==='POST' && url.origin===new URL(origin).origin
+      && /^\/api\/catalog\/offer\/[^/]+\/calculate$/.test(url.pathname);
+    return ['GET','HEAD'].includes(request.method())||calculation?route.continue():route.abort();
+  });
   else await page.route('**/api/catalog/offer/qa-attached/calculate',async route=>{requests.push(route.request().postDataJSON());await route.fulfill({json:{totalRub:4333490,customs:{vehicleCategory:kind==='n1'?'N1':'M1'},breakdown:[{id:'utilization-fee',title:'Утилизационный сбор',amountRub:900000}]}});});
   let theme='dark',width=390,index=-1;
   try{
@@ -71,6 +78,13 @@ try{
    await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');const grid=document.querySelector('[data-parameter-editor-grid]');return el && grid && getComputedStyle(el).height==='48px' && getComputedStyle(grid).display==='grid';},null,{timeout:30000});
    const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});
    if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
+   await page.evaluate(()=>document.fonts.ready);
+   if(live){
+    // The initial preview is debounced by 600 ms. Measure only once its status
+    // has settled; the invariant below still checks every control's position.
+    await page.waitForTimeout(750);
+    await page.locator('[data-parameter-calculation-status]').filter({hasText:'Рассчитываем стоимость под ключ…'}).waitFor({state:'hidden',timeout:45000});
+   }
    const triggers=grid.locator('[data-parameter-editor] > summary');
    for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
     await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
