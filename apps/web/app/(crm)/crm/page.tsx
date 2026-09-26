@@ -1,3 +1,4 @@
+import {ActivityFeed} from "@/components/crm/ActivityFeed";
 import {StaffPresence} from "@/components/crm/StaffPresence";
 import { readCrmUsers } from "@/lib/crm-users";
 import { leadStatusLabel } from "@/lib/crm";
@@ -13,14 +14,15 @@ export const dynamic = "force-dynamic";
 
 export default async function CrmPage() {
   const user = await getCurrentUser();
-  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(lead=>canSeeLead(user,lead) && activeLead(lead));
-  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).filter(client=>canSeeLead(user,client));
-  const partners = await readDataJson<any[]>("partners/partners.json", []);
-  const deals = await readDataJson<any[]>("deals/deals.json", []);
-  const managers = (await readCrmUsers()).filter((item) => item.status !== "disabled" && isCrmRole(item.role));
-  const myLeads = leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
-  const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
-  const directPayout = await getActiveDirectPartnerPayout();
+  const [allLeads,allClients,partners,deals,allManagers,directPayout]=await Promise.all([
+    readChunkedDataJson<any>("leads/leads.json",[]),readChunkedDataJson<any>("clients/clients.json",[]),
+    readDataJson<any[]>("partners/partners.json",[]),readDataJson<any[]>("deals/deals.json",[]),readCrmUsers(),getActiveDirectPartnerPayout()
+  ]);
+  const leads=allLeads.filter(lead=>canSeeLead(user,lead)&&activeLead(lead));
+  const clients=allClients.filter(client=>canSeeLead(user,client));
+  const managers=allManagers.filter(item=>item.status!=="disabled"&&isCrmRole(item.role));
+  const myLeads=leads.filter(lead=>lead.assignedManagerId===user?.id||lead.createdByManagerId===user?.id);
+  const newLeads=leads.filter(lead=>(lead.status||"new")==="new");
 
   return (
     <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
@@ -39,26 +41,14 @@ export default async function CrmPage() {
             <Link href="/crm/feed" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Открыть ленту</Link>
           </div>
 
-          <div className="crm-overview-feed mt-5 space-y-3">
-            {(leads.length ? leads.slice(0, 6) : []).map((lead) => (
-              <Link key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}`} className="block rounded-2xl bg-white/7 px-4 py-3">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="font-black">{lead.name || lead.phone || lead.telegram || "Новый лид"}</div>
-                  <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-black text-red-100">{leadStatusLabel(lead.status)}</span>
-                </div>
-                <div className="mt-1 text-sm font-bold text-white/48">{lead.car || "Авто не выбрано"}</div>
-              </Link>
-            ))}
-
-            {!leads.length && <div className="rounded-2xl bg-white/7 px-4 py-5 text-sm font-bold text-white/50">Пока нет заявок. Они появятся после формы на сайте или ручного добавления клиента.</div>}
-          </div>
+          <div className="crm-overview-feed mt-5"><ActivityFeed compact/></div>
         </div>
 
         <div className="grid gap-5">
           <div className="glass rounded-[2rem] p-6">
             <h2 className="text-2xl font-black">Быстрые действия</h2>
             <div className="crm-quick-actions mt-5 grid grid-cols-2 gap-3">
-              <Link href="/crm/clients" className="avto-button rounded-2xl px-5 py-4 text-center font-black">Добавить клиента</Link>
+              <Link href="/crm/clients" className="avto-button col-span-2 whitespace-nowrap rounded-2xl px-5 py-4 text-center font-black">Добавить клиента</Link>
               <Link href="/crm/leads?view=my" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Мои заявки</Link>
               <Link href="/crm/managers" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Менеджеры</Link>
             </div>

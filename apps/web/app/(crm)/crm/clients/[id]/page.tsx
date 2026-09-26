@@ -1,3 +1,5 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
+import {ReminderButton} from "@/components/crm/Reminders";
 import {ManualClientOrigin} from "@/components/crm/ManualClientOrigin";
 import {readCrmUsers} from "@/lib/crm-users";
 import Link from "next/link";
@@ -20,9 +22,10 @@ export default async function ClientPage({params}: {params: Promise<{id: string}
   return <CrmShell activeHref="/crm/clients" title={client.fio || "Карточка клиента"} subtitle="Контакты и комментарий клиента.">
     <Link href="/crm/clients" className="mb-4 inline-block font-bold text-red-400">← Все клиенты</Link>
     <ManualClientOrigin client={client} managers={managers}/>
+    <ReminderButton entityType="client" entityId={client.id}/>
     <div className="crm-client-detail-layout">
-    <ClientEditForm client={{id:client.id, fio:client.fio||"", phone:client.phone||"", telegram:client.telegram||"", max:client.max||"", city:client.city||"", comment:client.comment||"", updatedAt:client.updatedAt||""}}/>
-    <ClientDocuments clientId={client.id} documents={(client.documents || []).filter((doc:any)=>!doc.deletedAt)} />
+    <ClientEditForm canEdit={hasCrmPermission(user,"editClients")} canAssign={hasCrmPermission(user,"assign")} managers={managers.map(m=>({id:m.id,displayName:m.displayName}))} client={{status:client.status||"new",assignedManagerId:client.assignedManagerId||"",id:client.id, fio:client.fio||"", phone:client.phone||"", telegram:client.telegram||"", max:client.max||"", city:client.city||"", comment:client.comment||"", updatedAt:client.updatedAt||""}}/>
+    {hasCrmPermission(user,"documents")?<ClientDocuments clientId={client.id} documents={(client.documents || []).filter((doc:any)=>!doc.deletedAt)} />:null}
     </div>
     <section className="crm-client-lead-chips mt-5 flex flex-wrap gap-3"><h2 className="w-full text-xl font-black">Заявки клиента</h2>{leads.map(lead => <Link key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}`} className="glass inline-flex max-w-full items-center rounded-xl px-4 py-2">{lead.offerTitle || lead.car || "Подбор автомобиля"} →</Link>)}</section>
   </CrmShell>;

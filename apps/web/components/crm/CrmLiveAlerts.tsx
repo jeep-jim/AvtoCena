@@ -1,4 +1,5 @@
 "use client";
+import {RemindersBell} from "./Reminders";
 
 import { StaffHeartbeat } from "./StaffPresence";
 import { CrmPushControl, unsubscribeStaffPush } from "./CrmPushControl";
@@ -56,7 +57,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   useEffect(()=>{
     let active=true,busy=false;
     const poll=async()=>{
-      if(busy)return;busy=true;
+      if(busy||document.visibilityState!=="visible")return;busy=true;
       try {
         const response=await fetch("/api/crm/inbox",{cache:"no-store"});
         if(response.status===401 || response.status===403){if(active){setAuthorized(false);setPending([]);}return;}
@@ -80,9 +81,9 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       }catch{}finally{busy=false;}
     };
     void poll();const timer=setInterval(()=>void poll(),20_000);
-    const focus=()=>void poll();window.addEventListener("focus",focus);window.addEventListener("avtocena:lead-read",focus);
+    const focus=()=>void poll();window.addEventListener("focus",focus);document.addEventListener("visibilitychange",focus);window.addEventListener("avtocena:lead-read",focus);
     const sync=(event:StorageEvent)=>{if(event.key===`avtocena_crm_read_changed_${userId}`)void poll();};window.addEventListener("storage",sync);
-    return ()=>{active=false;clearInterval(timer);window.removeEventListener("focus",focus);window.removeEventListener("avtocena:lead-read",focus);window.removeEventListener("storage",sync);};
+    return ()=>{active=false;clearInterval(timer);window.removeEventListener("focus",focus);document.removeEventListener("visibilitychange",focus);window.removeEventListener("avtocena:lead-read",focus);window.removeEventListener("storage",sync);};
   },[userId]);
   useEffect(()=>{
     if(!enabled || !pending.length || !authorized)return;
@@ -133,7 +134,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
-    <StaffHeartbeat/>
+    <StaffHeartbeat/><RemindersBell/>
     {!crm && <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>}
     {!crm && <button type="button" className="ac-staff-account ac-staff-expand" aria-label="Последние заявки" aria-expanded={menuOpen&&leadsOpen} onClick={()=>{setMenuOpen(current=>!(current&&leadsOpen));setLeadsOpen(true);}}><ChevronDown size={16}/></button>}
     <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
@@ -143,7 +144,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       {leadsOpen?<div className="ac-staff-recent">{recent.length?recent.map(lead=><details key={lead.id} onToggle={event=>{if(event.currentTarget.open)void readRecent(lead);}}><summary>{lead.unread?<i aria-label="Не просмотрена"/>:null}<span>{lead.name||'Новая заявка'}<small>{lead.offerTitle||lead.car||lead.selectedOffers?.map(o=>o.title).join(', ')||'Подбор автомобиля'}</small></span><ChevronDown size={15}/></summary><div>{lead.phone?<a href={`tel:${lead.phone.replace(/[^+0-9]/g,'')}`}>{lead.phone}</a>:null}{lead.telegram?<p>{lead.telegram}</p>:null}<a href={`/crm/leads?id=${encodeURIComponent(lead.id)}`}>Открыть заявку →</a></div></details>):<p>Заявок пока нет</p>}<a href="/crm/leads">Все заявки →</a></div>:null}
       <div className="ac-staff-menu-settings">
       <a href={crm?`/crm/managers/${encodeURIComponent(userId)}`:"/crm"}><UserRound size={18}/>{crm?"Мой профиль":"Рабочий кабинет"}</a>
-      {!crm && ["owner","admin"].includes(role)?<a href="/crm/settings"><Settings size={18}/>Настройки</a>:null}
+
       <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук заявок: {enabled?"включён":"выключен"}</button>
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
 

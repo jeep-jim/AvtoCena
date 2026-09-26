@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "./crm-permissions";
 import {offerPath} from "./catalog/offer-url";
 import { quoteCityDelivery, deliveryDescription } from "./catalog/city-delivery";
 import { customerPriceBreakdown } from "./catalog/customer-price-breakdown";
@@ -159,6 +160,7 @@ export async function createLead(
       >)
     : ((await request.json().catch(() => ({}))) as Record<string, unknown>);
 
+  if(currentUser&&clean(body.source,160)==="manual_crm"&&!hasCrmPermission(currentUser,"editLeads"))return NextResponse.json({ok:false,error:"lead_forbidden"},{status:403});
   const crmUser =
     currentUser && isCrmRole(currentUser.role) && clean(body.source, 160) === "manual_crm" ? currentUser : null;
   const rawPhone = clean(body.phone, 80);
@@ -345,7 +347,7 @@ export async function createLead(
 
   const createdByManagerId = crmUser?.id || null;
   const requestedManagerId =
-    crmUser && crmUser.role !== "manager"
+    crmUser && hasCrmPermission(crmUser,"assign")
       ? clean(body.assignedManagerId, 160)
       : "";
   const assignedManagerId =

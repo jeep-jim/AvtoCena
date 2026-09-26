@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { createDirectPartnerPayoutVersion, createPartnerPayoutVersion } from "@/lib/business-settings";
@@ -5,7 +6,7 @@ import { canEditBusinessSettings, cleanText, nullableNumber } from "@/lib/settin
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  if (!user || !hasCrmPermission(user,"settings")) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   const amount = nullableNumber(form.get("amountRub"));
   if (!amount) return NextResponse.json({ ok: false, error: "amount_required" }, { status: 400 });

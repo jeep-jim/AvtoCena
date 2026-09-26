@@ -39,7 +39,7 @@ html[data-theme="light"] .crm-header{background:#edf1f6}
  .crm-workspace .glass:not(details){border-radius:16px!important;padding:14px!important}
  .crm-metrics{gap:8px}.crm-metrics>div{padding:12px!important}.crm-metrics .text-4xl{font-size:28px;margin-top:4px;line-height:1.1}.crm-metrics .text-sm{font-size:12px}
  .crm-workspace h2.text-2xl{font-size:19px;line-height:1.2}
- .crm-overview-feed{margin-top:12px}.crm-overview-feed>a{padding:9px 10px;margin-top:6px}.crm-overview-feed>a>div:first-child{flex-wrap:nowrap;gap:6px}.crm-overview-feed .font-black{font-size:12px}.crm-overview-feed>a>div:first-child>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.crm-overview-feed span{flex-shrink:0;font-size:10px!important;padding:4px 7px}.crm-overview-feed .text-sm{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .crm-overview-feed{margin-top:12px}.crm-overview-feed>a{padding:9px 10px;margin-top:6px}.crm-overview-feed>a>div:first-child{flex-wrap:nowrap;gap:6px}.crm-overview-feed .font-black{font-size:12px}.crm-overview-feed>a>div:first-child>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.crm-overview-feed>a span{flex-shrink:0;font-size:10px!important;padding:4px 7px}.crm-overview-feed .text-sm{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .crm-quick-actions a{padding:12px 8px;font-size:12px;min-height:44px}
  .crm-lead-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.crm-lead-tabs a{padding:10px 3px;text-align:center;font-size:12px}
  .crm-lead-tabs-owner{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,.7fr) 40px;align-items:stretch}
@@ -280,3 +280,29 @@ html[data-theme] .crm-root .crm-navigation a.crm-documents-button[aria-current="
 
 .crm-client-owner .crm-client-manager{min-width:0;max-width:100%}
 .crm-client-owner .crm-client-manager span{min-width:0;overflow-wrap:anywhere}
+
+/* Activity cards stay readable on a narrow leadership dashboard. */
+.crm-event{margin-top:12px;border:1px solid var(--ac-border);border-radius:18px;background:var(--ac-surface-2);overflow:hidden}
+.crm-event summary{position:relative;display:flex;flex-wrap:wrap;gap:8px 12px;padding:16px 38px 16px 16px;cursor:pointer;list-style:none}
+.crm-event summary::-webkit-details-marker{display:none}.crm-event-people{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;flex:1 1 220px}
+.crm-event-person{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;min-width:0;overflow-wrap:anywhere}.crm-event-person img{width:32px;height:32px;object-fit:cover;border-radius:50%;flex-shrink:0}
+.crm-event time{font-size:11px;color:var(--ac-muted)}.crm-event summary>strong,.crm-event-label{flex-basis:100%;overflow-wrap:anywhere}.crm-event-label{font-size:13px;color:var(--ac-muted)}
+.crm-event-chevron{position:absolute;right:14px;top:24px}.crm-event[open] .crm-event-chevron{transform:rotate(180deg)}.crm-event-detail{padding:0 16px 16px;font-size:13px;overflow-wrap:anywhere}
+.crm-event-change{padding:10px 0;border-top:1px solid var(--ac-border)}.crm-event-change b{display:block;margin-bottom:4px}.crm-event-change span{display:flex;gap:7px;align-items:center;flex-wrap:wrap;color:var(--ac-muted)}
+.crm-activity button[aria-pressed=true]{background:var(--ac-text);color:var(--ac-surface)}
+.crm-quick-actions>a:first-child{grid-column:1/-1;white-space:nowrap}
+.crm-permission{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px;border:1px solid var(--ac-border);border-radius:16px;background:var(--ac-surface-2)}
+.crm-permission strong{display:block;font-size:14px}.crm-permission small{display:block;font-size:12px;line-height:1.5;color:var(--ac-muted);margin-top:4px}.crm-permission input{appearance:none;flex-shrink:0;width:44px;height:26px;border-radius:20px;background:#64748b;cursor:pointer;position:relative}.crm-permission input:after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .15s}.crm-permission input:checked{background:#e52d3b}.crm-permission input:checked:after{transform:translateX(18px)}.crm-permission input:focus-visible{outline:3px solid #38bdf8;outline-offset:3px}.crm-permission input:disabled{opacity:.55;cursor:default}
+.crm-view-toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--ac-border);background:var(--ac-surface-2)}.crm-view-toggle[aria-pressed=true]{background:var(--ac-text);color:var(--ac-surface)}
+.crm-clients-list.crm-clients-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.crm-clients-grid .crm-client-card{display:flex;flex-direction:column;align-items:stretch;gap:16px;min-width:0}.crm-clients-grid .crm-client-owner{margin-top:auto;width:100%;align-items:flex-start}.crm-clients-grid .crm-client-card>div{min-width:0}.crm-clients-grid .crm-client-comment{overflow-wrap:anywhere}
+@media(max-width:540px){.crm-clients-list.crm-clients-grid{grid-template-columns:minmax(0,1fr)}}
+
+.crm-quick-actions>a:not(.avto-button){background:var(--ac-surface-2);border:1px solid var(--ac-border)}
+.crm-clients-grid .crm-client-owner{max-width:none;justify-items:start}
+.crm-clients-grid .crm-client-manager{flex-direction:row;align-items:center;flex-wrap:nowrap;width:100%}
+.crm-clients-grid .crm-client-manager span{max-width:none;text-align:left;flex:1}
+.crm-clients-grid .crm-client-statuses{flex-direction:row;align-items:center;justify-content:flex-start;font-size:12px}
+.crm-event-people:has(>svg){display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);align-items:start}
+.crm-event-people>svg{margin-top:8px;flex-shrink:0}
+.crm-event-person>span{min-width:0}
+@media(max-width:540px){.crm-event-people:has(>svg) .crm-event-person{flex-direction:column;align-items:flex-start;gap:5px;font-size:12px}}

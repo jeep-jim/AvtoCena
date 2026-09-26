@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
@@ -54,13 +55,13 @@ async function storeFile(file: File | null, allowedTypes: Set<string>, maxBytes:
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  if (!user || !hasCrmPermission(user,"settings")) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   return NextResponse.json({ ok: true, contracts: await getContractTemplatesSettings(), pending: "Реальная генерация будет подключена после получения файла шаблона договора." });
 }
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  if (!user || !hasCrmPermission(user,"settings")) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   const operationId = cleanText(form.get("operationId"), 120);
   if (!UUID_RE.test(operationId)) return NextResponse.json({ ok: false, error: "invalid_operation_id" }, { status: 400 });

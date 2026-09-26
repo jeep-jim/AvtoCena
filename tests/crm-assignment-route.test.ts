@@ -8,6 +8,7 @@ test('only senior roles assign active staff; assignment alerts target the assign
  const state:any={user:{id:'m',role:'manager',displayName:'Manager'},lead:{id:'lot',status:'new',createdAt:'2026-09-20T10:00:00Z',assignedManagerId:'m'},writes:0};
  (globalThis as any).__assignmentRoute=state;
  const sources:Record<string,string>={
+ "@/lib/crm-activity":`export const recordCrmActivity=async()=>{};export const activityPerson=u=>({id:u.id,name:u.displayName});export const activityChanges=()=>[];`,
  'next/server':`export const NextResponse={json:(data,options)=>Response.json(data,options)};export const after=fn=>{globalThis.__assignmentRoute.queued=(globalThis.__assignmentRoute.queued||0)+1;};`,
  '@/lib/crm-push':`export const flushCrmPush=async()=>({sent:0});`,
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__assignmentRoute.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);export const isAdminRole=r=>['owner','admin'].includes(r);`,

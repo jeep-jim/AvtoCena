@@ -1,10 +1,11 @@
+import {hasCrmPermission} from "./crm-permissions";
 import type { AuthUser } from "./auth";
 export function canSeeLead(user: AuthUser | null | undefined, lead: any) {
   return Boolean(
-    user &&
+    user && lead &&
       user.status !== "disabled" &&
-      (["owner", "admin"].includes(user.role) ||
-        (user.role === "manager" &&
+      (hasCrmPermission(user,"viewAll") ||
+        (["owner","admin","manager"].includes(user.role) &&
           (lead.assignedManagerId === user.id ||
             lead.createdByManagerId === user.id))),
   );

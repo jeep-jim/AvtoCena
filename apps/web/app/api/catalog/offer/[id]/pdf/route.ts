@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
@@ -12,7 +13,7 @@ const headers={"Cache-Control":"private, no-store","X-Robots-Tag":"noindex, nofo
 export async function POST(request:Request,{params}:{params:Promise<{id:string}>}) {
  if(!isCalculationOriginAllowed(request))return Response.json({error:"Недопустимый источник запроса"},{status:403,headers});
  const user=await getCurrentUser();
- if(!user || !isCrmRole(user.role))return Response.json({error:"Требуется вход сотрудника"},{status:403,headers});
+ if(!user || !hasCrmPermission(user,"calculations"))return Response.json({error:"Требуется вход сотрудника"},{status:403,headers});
  const body=await request.text();if(body.length>8192)return Response.json({error:"Слишком большой запрос"},{status:413,headers});
  let draft:Record<string,string>;
  try{const input=JSON.parse(body);if(!input.draft || typeof input.draft!=="object" || Array.isArray(input.draft))throw Error();draft=Object.fromEntries(Object.entries(input.draft).filter(([,v])=>typeof v==="string").map(([k,v])=>[k,String(v).slice(0,160)]));}catch{return Response.json({error:"Неверные параметры"},{status:400,headers});}

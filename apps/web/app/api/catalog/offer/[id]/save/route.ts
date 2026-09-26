@@ -1,17 +1,19 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
+import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import { getOfferFromCurrentShard } from "@/lib/catalog/storage";
 import { validateCustomerParameters } from "@/lib/catalog/customer-parameters";
 import { calculateOfferWithCustomerParametersDetailed } from "@/lib/catalog/customs-pricing";
-import { cleanSavedDraft, saveOfferCalculation, SavedCalculationConflict } from "@/lib/catalog/saved-offer-calculation";
+import { cleanSavedDraft, getSavedOfferCalculation, saveOfferCalculation, SavedCalculationConflict } from "@/lib/catalog/saved-offer-calculation";
 
 export const dynamic = "force-dynamic";
 export async function POST(request:Request,{params}:{params: Promise<{id:string}>}) {
   const headers={"Cache-Control":"no-store"};
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"Недопустимый источник запроса"},{status:403,headers});
   const user=await getCurrentUser();
-  if(!user || !isCrmRole(user.role))return NextResponse.json({error:"Требуется вход сотрудника"},{status:403,headers});
+  if(!user || !hasCrmPermission(user,"calculations"))return NextResponse.json({error:"Требуется вход сотрудника"},{status:403,headers});
   const body=await request.text();
   if(body.length>4096)return NextResponse.json({error:"Слишком большой запрос"},{status:413,headers});
   let draft, expectedVersion;
@@ -23,7 +25,9 @@ export async function POST(request:Request,{params}:{params: Promise<{id:string}
   const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
   if(!result.ok)return NextResponse.json({error:result.error},{status:422,headers});
   try {
+    const previous=await getSavedOfferCalculation(offer);
     const saved=await saveOfferCalculation(offer,draft,result.calculation,user.id,expectedVersion,user.displayName);
+    await recordCrmActivity(user,{id:`calculation_${saved.version}`,type:"calculation_saved",title:"Изменены параметры и стоимость автомобиля",entityType:"offer",entityId:offer.id,entityLabel:[offer.make,offer.model,offer.year].filter(Boolean).join(" "),href:`/cars/offer/${encodeURIComponent(offer.id)}?calculation=${encodeURIComponent(saved.version)}`,changes:[...activityChanges(previous?.draft||{},saved.draft,{year:"Год",engineCc:"Объём, см³",powerHp:"Мощность, л.с.",powerKw:"Мощность, кВт",fuel:"Топливо",hybridKind:"Тип гибрида",power30MinKw:"30-минутная мощность",deliveryCity:"Город доставки"}),{label:"Стоимость, ₽",before:String(previous?.calculation?.totalRub||offer.totalRub||""),after:String(saved.calculation.totalRub)}]});
     return NextResponse.json({version:saved.version,savedAt:saved.savedAt,savedByName:user.displayName,draft:saved.draft,calculation:saved.calculation},{headers});
   } catch(error) {
     if(error instanceof SavedCalculationConflict)return NextResponse.json({error:error.message},{status:409,headers});

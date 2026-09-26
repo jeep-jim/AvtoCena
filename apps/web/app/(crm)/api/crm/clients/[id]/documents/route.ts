@@ -1,3 +1,5 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
+import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import {randomUUID} from "node:crypto";
 import {getCurrentUser,isCrmRole} from "@/lib/auth";
 import {canSeeLead} from "@/lib/crm-visibility";
@@ -9,7 +11,7 @@ export const dynamic="force-dynamic";
 export async function POST(request:Request,{params}:{params:Promise<{id:string}>}) {
   if(!isCalculationOriginAllowed(request)) return Response.json({error:"Недопустимый источник запроса."},{status:403});
   const user=await getCurrentUser();
-  if(!user||!isCrmRole(user.role)) return Response.json({error:"Войдите в CRM."},{status:401});
+  if(!user||!hasCrmPermission(user,"documents")) return Response.json({error:"Войдите в CRM."},{status:401});
   const {id}=await params;
   const client=(await readChunkedDataJson<any>("clients/clients.json",[])).find(c=>c.id===id);
   if(!client||!canSeeLead(user,client)) return Response.json({error:"Клиент не найден."},{status:404});
@@ -31,6 +33,8 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
       return {...current,documents:[...documents,document],documentsUpdatedAt:document.createdAt,documentsUpdatedByManagerId:user.id};
     });
     if(!updated) throw new Error("forbidden");
+    stored=false; // Metadata now references the binary; later audit failure must not remove it.
+    await recordCrmActivity(user,{id:`document_uploaded_${document.id}`,type:"document_uploaded",title:"Добавлен документ",entityType:"document",entityId:document.id,clientId:id,entityLabel:document.name,text:`Клиент: ${client.fio||"без имени"}`});
     return Response.json({ok:true,document},{headers:{"Cache-Control":"no-store"}});
   } catch(error) {
     if(stored) await storage.deleteBinary?.(key).catch(()=>undefined);

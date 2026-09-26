@@ -1,3 +1,5 @@
+import {recordCrmActivity} from "@/lib/crm-activity";
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import {createHash} from 'node:crypto';
 import {getCurrentUser,isAdminRole,isCrmRole} from '@/lib/auth';
 import {readCrmUsers,updateCrmUser} from '@/lib/crm-users';
@@ -11,7 +13,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  if(!isCalculationOriginAllowed(request))return json('origin_forbidden',403);
  const actor=await getCurrentUser();if(!actor||!isCrmRole(actor.role))return json('auth_required',401);
  const {id}=await params;
- if(actor.id!==id&&!isAdminRole(actor.role))return json('forbidden',403);
+ if(actor.id!==id&&!hasCrmPermission(actor,"staff"))return json('forbidden',403);
  const user=(await readCrmUsers()).find(u=>u.id===id);if(!user)return json('not_found',404);
  if(actor.role!=='owner'&&actor.id!==id&&(user.role==='owner'||user.companyId!==actor.companyId))return json('forbidden',403);
  if(Number(request.headers.get('content-length'))>MAX_AVATAR_BYTES+65536)return json('Файл больше 5 МБ.',413);
@@ -26,6 +28,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
    await storage.putBinary(key,data,'image/webp');
    const avatarUrl=`/api/crm/users/${encodeURIComponent(id)}/avatar?v=${version}`;
    await updateCrmUser(id,{avatarUrl});
+   await recordCrmActivity(actor,{type:"staff_avatar_updated",title:"Изменена фотография сотрудника",entityType:"staff",entityId:id,entityLabel:user.displayName,target:{id,name:user.displayName,avatarUrl},visibility:"management",href:`/crm/managers/${encodeURIComponent(id)}`});
    return Response.json({ok:true,avatarUrl});
  }catch{return json('Не удалось обработать фотографию. Проверьте формат и размер файла (до 5 МБ).',400);}
 }

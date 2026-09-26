@@ -34,9 +34,12 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[],failures=[];
 try{
- for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents'])){
+ for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents','staff'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
+   let reminders=[];
+   await page.route('**/api/crm/activity**',r=>r.fulfill({json:{userId:'owner-test',events:[{id:'evt-assigned',createdAt:'2026-09-26T07:00:00Z',type:'lead_assigned',title:'Назначен менеджер заявки',actor:{id:'owner-test',name:'Тестовый руководитель'},target:{id:'manager-test',name:'Александр Константинопольский'},entityLabel:'Toyota Corolla Cross',href:'/crm/leads?id=test-0',changes:[{label:'Ответственный',before:'Не назначен',after:'Александр Константинопольский'}]}]}}));
+   await page.route('**/api/crm/reminders**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();if(b.action==='done')reminders=reminders.filter(x=>x.id!==b.id);else reminders.push({...b,id:'reminder-1',ownerId:'owner-test',entityLabel:'Клиент для проверки',createdAt:new Date().toISOString()});await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{reminders}});});
    if(kind==='documents'){
    const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;let records=[];
    await page.route('**/api/crm/contracts**',async route=>{const req=route.request(),url=new URL(req.url());if(req.method()==='GET'){await route.fulfill({json:url.searchParams.has('template')?{template}:url.searchParams.has('id')?{record}:{records}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,number:body.number??record.number,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};else if(body.action==='archive')record={...record,archivedAt:new Date().toISOString(),revision:record.revision+1};else if(body.action==='restore')record={...record,archivedAt:undefined,revision:record.revision+1};else if(body.action==='purge')record=null;else if(body.action==='template'){await route.fulfill({json:{template:{...body.template,revision:body.revision+1}}});return;}records=record?[...records.filter(x=>x.id!==record.id),{...record,client:record.fields.fio||'Без клиента',car:record.fields.car||'',market:record.fields.market,templateId:record.template.id,versions:record.versions.length}]:[];await route.fulfill({json:{record,ok:true}});});
@@ -51,6 +54,31 @@ try{
    assert.ok(await page.getByRole('link',{name:'Мой профиль',exact:true}).isVisible());
    assert.equal(await page.locator('.ac-staff-menu a[href="/crm/leads"]').count(),0);
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
+   if(kind==='overview'){
+    await page.getByText('Назначен менеджер заявки',{exact:true}).waitFor();
+    const event=page.locator('.crm-event').first();await event.locator('summary').click();assert.ok(await event.getByText('Ответственный',{exact:true}).isVisible());
+    const boxes=await page.locator('.crm-quick-actions>a').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.ok(boxes[1].y>=boxes[0].y+boxes[0].height);assert.equal(boxes[1].y,boxes[2].y);
+   }
+   if(kind==='clients'){
+    await page.getByRole('button',{name:'Плитки клиентов',exact:true}).click();assert.ok(await page.locator('.crm-clients-grid').isVisible());
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+    if(width>=768)assert.equal(await page.locator('.crm-clients-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),2);
+    await page.reload();await page.locator('.crm-clients-grid').waitFor();
+   }
+   if(kind==='client'){
+    await page.getByRole('button',{name:'Напоминание',exact:true}).click();
+    await page.getByLabel('Дата и время',{exact:true}).fill('2027-01-10T15:30');await page.getByLabel('Что сделать',{exact:true}).fill('Позвонить клиенту');
+    await page.getByRole('button',{name:'Добавить напоминание',exact:true}).click();await page.locator('.crm-reminder-editor').getByText('Позвонить клиенту',{exact:true}).waitFor();
+    assert.equal(reminders[0].dueAt,'2027-01-10T08:30:00.000Z');
+    await page.getByRole('button',{name:'Напоминания: 1',exact:true}).click();await page.locator('.crm-reminder-popover').getByText('Позвонить клиенту',{exact:true}).waitFor();
+    await page.locator('.crm-reminder-popover').getByRole('button',{name:'Напоминание выполнено',exact:true}).click();await page.getByRole('button',{name:'Напоминания: 0',exact:true}).waitFor();
+    await page.getByRole('button',{name:'Закрыть напоминания',exact:true}).click();
+   }
+   if(kind==='staff'){
+    assert.equal(await page.getByRole('switch').count(),10);assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),true);
+    await page.getByLabel('Роль',{exact:true}).selectOption('admin');assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),false);
+    await page.getByRole('switch',{name:/Документы и договоры/}).uncheck();assert.equal(await page.getByRole('switch',{name:/Документы и договоры/}).isChecked(),false);
+   }
    if(kind==='overview'&&width<=390){const boxes=await page.locator('.crm-metrics>div').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.equal(boxes[0].y,boxes[1].y);assert.ok(boxes[2].y>boxes[0].y);}
    if(['clients','client','leads'].includes(kind)){assert.ok(await page.locator('.crm-manual-client-origin').count()>0,'manual origin is shown');if(kind==='leads')assert.ok((await page.locator('.crm-manual-client-origin').first().innerText()).includes('Уже был в базе'));if(kind==='clients'&&(width===390||width===1440)){await page.locator('.crm-manual-client-origin').first().scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/manual-origin-${theme}-${width}.png`});}}
    if(kind==='documents'){
@@ -157,7 +185,7 @@ try{
    }
    if(kind==='overview'){
     await page.locator('.crm-presence-card').first().waitFor();
-    for(const selector of ['.crm-presence-card','.crm-overview-feed>a'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
+    for(const selector of ['.crm-presence-card','.crm-event'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
    }
    if(kind==='settings'){
     const title=await page.getByRole('heading',{name:'Все рынки',exact:true}).boundingBox(),chip=await page.locator('.crm-market-count').boundingBox(),help=await page.locator('.crm-markets-help').boundingBox();assert.ok(Math.abs((title.y+title.height/2)-(chip.y+chip.height/2))<3,'market count at top right');

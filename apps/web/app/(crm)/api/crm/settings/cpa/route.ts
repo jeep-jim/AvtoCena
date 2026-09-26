@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { getCpaNetworks, upsertCpaNetworkDraft } from "@/lib/business-settings";
@@ -15,13 +16,13 @@ function json(value: FormDataEntryValue | null, fallback: unknown) {
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  if (!user || !hasCrmPermission(user,"settings")) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   return NextResponse.json({ ok: true, networks: getCpaNetworks() });
 }
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  if (!user || !hasCrmPermission(user,"settings")) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   upsertCpaNetworkDraft({
     id: cleanText(form.get("id"), 160),

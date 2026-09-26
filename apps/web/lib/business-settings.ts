@@ -1,3 +1,4 @@
+import {recordCrmActivity} from "./crm-activity";
 import { CATALOG_MARKET_LABELS } from "./catalog/runtime-config";
 import crypto from "node:crypto";
 import { appendChunkedDataJson, mutateDataJson, readChunkedDataJson, readDataJson } from "./data";
@@ -72,11 +73,13 @@ export async function getBusinessSettingsSnapshot(marketId: string) {
 }
 
 export async function appendChangeLog(entry: any) {
-  return appendChunkedDataJson("settings/change-log.json", {
+  const result=await appendChunkedDataJson("settings/change-log.json", {
     id: makeId("change"),
     createdAt: nowIso(),
     ...entry,
   });
+  await recordCrmActivity(null,{id:`settings_${result.id}`,createdAt:result.createdAt,type:"settings_updated",title:"Изменены настройки",visibility:"management",managerId:entry.changedByUserId,managerName:entry.changedByName,entityType:entry.entityType,entityId:entry.entityId,entityLabel:`${entry.entityType}: ${entry.entityId}`,href:"/crm/settings",text:entry.comment||"Сохранена новая версия настроек. Подробности — в истории соответствующего раздела."});
+  return result;
 }
 
 export async function createMarketVersion(marketId: string, patch: any, user: SettingsUser, comment: string) {

@@ -23,6 +23,7 @@ test('document routes isolate clients, reject forgery and roll back failed write
  const state:any={user:null,client:{id:'c',assignedManagerId:'m',documents:[]},binary:new Map(),reads:0};
  (globalThis as any).__clientDocuments=state;
  const sources:Record<string,string>={
+ "@/lib/crm-activity":`export const recordCrmActivity=async()=>{};export const activityPerson=u=>({id:u.id,name:u.displayName});export const activityChanges=()=>[];`,
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__clientDocuments.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);`,
  '@/lib/data':`const s=globalThis.__clientDocuments;export const readChunkedDataJson=async()=>[s.client];export const updateChunkedDataJson=async(p,id,fn)=>{if(s.race)s.client.assignedManagerId='other';if(s.fail)throw Error('storage');return s.client=fn(s.client)};export const getJsonStorage=()=>({putBinary:async(k,b)=>{s.binary.set(k,b)},deleteBinary:async k=>s.binary.delete(k),getBinary:async k=>{s.reads++;return s.binary.has(k)?{data:s.binary.get(k)}:null}});`
  };

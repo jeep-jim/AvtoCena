@@ -1,3 +1,5 @@
+import {hasCrmPermission} from "./crm-permissions";
+import {recordCrmActivity} from "./crm-activity";
 import crypto from "node:crypto";
 import {
   type AuthUser,
@@ -24,7 +26,7 @@ export function keyMatches(key: string, hash?: string) {
 }
 export function canManageStaff(actor: AuthUser, target: AuthUser) {
   return (
-    isAdminRole(actor.role) &&
+    hasCrmPermission(actor,"staff") &&
     (target.role !== "owner" || actor.role === "owner")
   );
 }
@@ -58,6 +60,7 @@ export async function issueStaffKey(
       );
     },
   );
+  await recordCrmActivity(actor,{type:revoke?"staff_access_revoked":"staff_key_issued",title:revoke?"Отключён доступ сотрудника":"Выдан новый ключ доступа",visibility:"management",entityType:"staff",entityId:id,href:`/crm/managers/${encodeURIComponent(id)}`,text:"Предыдущие сеансы сотрудника завершены. Значение ключа в журнале не хранится."});
   return key;
 }
 export async function bindLink(user: AuthUser, botUsername: string) {

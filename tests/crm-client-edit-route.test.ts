@@ -7,6 +7,7 @@ test('client editing enforces visibility, concurrency and field allowlist',async
  const state:any={user:null,client:{id:'c',assignedManagerId:'m',fio:'Before',phone:'',telegram:'',city:'',comment:'',updatedAt:'v1'},writes:0};
  (globalThis as any).__clientEdit=state;
  const sources:Record<string,string>={
+ "@/lib/crm-activity":`export const recordCrmActivity=async()=>{};export const activityPerson=u=>({id:u.id,name:u.displayName});export const activityChanges=()=>[];`,
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__clientEdit.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);`,
  '@/lib/data':`export const updateChunkedDataJson=async(path,id,fn)=>{const s=globalThis.__clientEdit;if(id!==s.client.id)return null;if(s.race)s.client.assignedManagerId='other';const next=fn(s.client);s.writes++;return s.client=next;};`
  };

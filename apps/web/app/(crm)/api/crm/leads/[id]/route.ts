@@ -1,3 +1,6 @@
+import {canSeeLead} from "@/lib/crm-visibility";
+import {hasCrmPermission} from "@/lib/crm-permissions";
+import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import { after } from "next/server";
 import { flushCrmPush } from "@/lib/crm-push";
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
@@ -10,7 +13,7 @@ import {
   readChunkedDataJson,
   updateChunkedDataJson
 } from "@/lib/data";
-import { isLeadStatus } from "@/lib/crm";
+import { isLeadStatus, leadStatusLabel } from "@/lib/crm";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
 import { handleLeadPartnerStatusChange } from "@/lib/business-settings";
 
@@ -33,7 +36,7 @@ export async function PATCH(
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const user = await getCurrentUser();
 
-  if (!user || !isCrmRole(user.role)) {
+  if (!user || !hasCrmPermission(user,"editLeads")) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
@@ -64,16 +67,9 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "lead_not_found" }, { status: 404 });
   }
 
-  const admin = isAdminRole(user.role);
-  if (!admin) {
-    const ownsLead = existingLead.assignedManagerId === user.id || existingLead.createdByManagerId === user.id;
-    if (!ownsLead) {
-      return NextResponse.json({ ok: false, error: "lead_forbidden" }, { status: 403 });
-    }
-    if (requestedManagerId && requestedManagerId !== user.id) {
-      return NextResponse.json({ ok: false, error: "manager_assignment_forbidden" }, { status: 403 });
-    }
-  }
+  const admin = hasCrmPermission(user,"assign");
+  if (!canSeeLead(user,existingLead))return NextResponse.json({error:"lead_forbidden"},{status:403});
+  if(!admin&&Object.hasOwn(body,"assignedManagerId")&&requestedManagerId!==(existingLead.assignedManagerId||"")&&requestedManagerId!==user.id)return NextResponse.json({error:"manager_assignment_forbidden"},{status:403});
 
   if(admin && Object.prototype.hasOwnProperty.call(body,"expectedManagerId") && (body.expectedManagerId||null)!==(existingLead.assignedManagerId||null))return NextResponse.json({error:"assignment_conflict"},{status:409});
   const now = new Date().toISOString();
@@ -90,7 +86,7 @@ export async function PATCH(
   }
 
   const archiveChanged = typeof body.archived === "boolean" && body.archived !== Boolean(existingLead.archivedAt);
-  if (archiveChanged && !admin) return NextResponse.json({ok:false,error:"archive_forbidden"},{status:403});
+  if (archiveChanged && !isAdminRole(user.role)) return NextResponse.json({ok:false,error:"archive_forbidden"},{status:403});
   if (archiveChanged && body.archived && !note) return NextResponse.json({ok:false,error:"reason_required"},{status:400});
   if (!statusChanged && !managerChanged && !note && !archiveChanged) {
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
@@ -167,23 +163,12 @@ export async function PATCH(
     }));
   }
 
-  await appendChunkedDataJson("activity/feed.json", {
-    id: makeId("event"),
-    createdAt: now,
-    type: statusChanged ? "lead_status_changed" : managerChanged ? "lead_assigned" : "lead_note_added",
-    title: statusChanged
-      ? "Изменён статус заявки"
-      : managerChanged
-        ? "Назначен менеджер"
-        : "Добавлен комментарий",
-    leadId,
-    clientId: updatedLead.clientId,
-    managerId: user.id,
-    managerName: user.displayName,
-    assignedManagerId: nextManagerId,
-    status: nextStatus,
-    text: note || manager?.displayName || nextStatus
-  });
+  const base={entityType:"lead",entityId:leadId,leadId,clientId:updatedLead.clientId,entityLabel:updatedLead.name||updatedLead.car||"Заявка"};
+  if(statusChanged)await recordCrmActivity(user,{...base,type:"lead_status_changed",title:"Изменён статус заявки",changes:[{label:"Статус",before:leadStatusLabel(existingLead.status),after:leadStatusLabel(nextStatus)}],text:note});
+  if(managerChanged)await recordCrmActivity(user,{...base,type:"lead_assigned",title:"Назначен менеджер заявки",target:manager?activityPerson(manager):undefined,changes:[{label:"Ответственный",before:managers.find(m=>m.id===previousManagerId)?.displayName||"Не назначен",after:manager?.displayName||"Не назначен"}]});
+  if(archiveChanged)await recordCrmActivity(user,{...base,type:"lead_archived",title:body.archived?"Заявка перенесена в архив":"Заявка восстановлена",text:note});
+  if(note&&!statusChanged&&!archiveChanged)await recordCrmActivity(user,{...base,type:"lead_note_added",title:"Добавлен комментарий к заявке",text:note});
+
 
   if (statusChanged) {
     const partnerEffects = await handleLeadPartnerStatusChange({

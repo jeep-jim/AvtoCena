@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { createMarketVersion } from "@/lib/business-settings";
@@ -24,7 +25,7 @@ function redirectToSettings(state: "saved" | "error", message = "") {
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) {
+  if (!user || !hasCrmPermission(user,"settings")) {
     const search = new URLSearchParams({ next: "/crm/settings#markets", error: "auth_required" });
     return relativeRedirect(`/login?${search.toString()}`);
   }

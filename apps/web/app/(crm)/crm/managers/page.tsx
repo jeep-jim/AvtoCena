@@ -1,3 +1,4 @@
+import {hasCrmPermission,ROLE_DETAILS} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
@@ -15,7 +16,7 @@ const roleInfo: Record<string, { label: string; access: string }> = {
 };
 
 export default async function CrmManagersPage() {
-  const actor=await getCurrentUser();if(!actor)redirect("/login");if(!isAdminRole(actor.role))redirect(`/crm/managers/${actor.id}`);
+  const actor=await getCurrentUser();if(!actor)redirect("/login");if(!hasCrmPermission(actor,"staff"))redirect(`/crm/managers/${actor.id}`);
   const [allUsers, leads, clients] = await Promise.all([
     readCrmUsers(),
     readChunkedDataJson<any>("leads/leads.json", []),
@@ -37,7 +38,7 @@ export default async function CrmManagersPage() {
           {Object.entries(roleInfo).map(([role, info]) => (
             <div key={role} className="rounded-2xl bg-white/[.045] p-4">
               <div className="text-sm font-black text-red-300">{info.label}</div>
-              <div className="mt-2 text-sm font-bold leading-6 text-white/48">{info.access}</div>
+              <div className="mt-2 text-sm font-bold leading-6 text-white/48">{ROLE_DETAILS[role]||info.access}</div>
             </div>
           ))}
         </div></details>

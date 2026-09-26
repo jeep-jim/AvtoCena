@@ -1,3 +1,5 @@
+import {recordCrmActivity} from "@/lib/crm-activity";
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { getJsonStorage, mutateDataJson } from "@/lib/data";
@@ -44,7 +46,7 @@ function imageExtension(type: string) {
 
 export async function POST(request: Request) {
   const actor = await getCurrentUser();
-  if (!actor || !isAdminRole(actor.role)) {
+  if (!actor || !hasCrmPermission(actor,"dealers")) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", "/crm/dealers");
     login.searchParams.set("error", "auth_required");
@@ -99,6 +101,7 @@ export async function POST(request: Request) {
       } : dealer);
     });
 
+    await recordCrmActivity(actor,{type:"dealer_updated",title:"Изменён дилер",visibility:"management",entityType:"dealer",entityId:dealerId,entityLabel:name,href:`/crm/dealers/${encodeURIComponent(dealerId)}`});
     return redirectWithState(request, dealerId, "saved");
   } catch (error) {
     console.error("crm_dealer_save_failed", error);
