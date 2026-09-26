@@ -1,5 +1,14 @@
 import { createHash } from 'node:crypto';
 
+function recordConfirmedWithdrawal(state, offer) {
+  if (offer.market === 'japan' || state.role === 'auction_history' || !offer.sourceOfferId
+    || !['sold', 'removed'].includes(offer.status)) return;
+  state.confirmedWithdrawals.set(offer.id, {
+    id: offer.id, sourceId: offer.sourceId, sourceOfferId: offer.sourceOfferId,
+    market: offer.market, status: offer.status, observedAt: new Date().toISOString(),
+  });
+}
+
 // Independent sites must not wait for the slowest site's detail page. Each
 // source still has exactly one pagination loop and its own bounded workers.
 export async function collectSourceStates(states, optionsForState, collect = collectSourcePage) {
@@ -53,6 +62,7 @@ export async function collectSourcePage(state, options) {
     try { offer = state.source.normalizeOffer(raw); } catch { state.normalizationFailures++; continue; }
     if (!offer?.id || offer.sourceId !== state.sourceId || offer.market !== options.market) { state.normalizationFailures++; continue; }
     pageIds.push(String(offer.id));
+    recordConfirmedWithdrawal(state, offer);
     if (state.seen.has(offer.id)) { state.duplicates++; continue; }
     if (options.inventoryAgeEligible ? !options.inventoryAgeEligible(offer) : Number.isFinite(offer.year) && offer.year < minYear) { state.outsideAge++; continue; }
     if (['withdrawn','deleted','inactive','removed','stale'].includes(offer.status) || (offer.status==='sold' && state.role!=='auction_history')) { state.withdrawn++; continue; }
@@ -61,6 +71,7 @@ export async function collectSourcePage(state, options) {
     state.detailAttempts++;
     try {
       const images = await state.source.fetchImages(offer);
+      recordConfirmedWithdrawal(state, offer);
       if (images?.length) offer.images = images;
       await writeObservation(snapshot(offer,'detail'));
       state.withImages += Boolean(offer.images?.length);
@@ -111,10 +122,14 @@ export async function collectSourcePage(state, options) {
 }
 export function intakeState(source, required) {
   return {source,sourceId:required.sourceId,sourceUrl:required.canonicalUrl,role:required.role,cursor:null,initialCursor:null,
-    seen:new Set(),cursors:new Set(),pages:0,listingRows:0,duplicates:0,normalizationFailures:0,outsideAge:0,withdrawn:0,
+    seen:new Set(),cursors:new Set(),confirmedWithdrawals:new Map(),pages:0,listingRows:0,duplicates:0,normalizationFailures:0,outsideAge:0,withdrawn:0,
     detailAttempts:0,withImages:0,withNamedTables:0,namedFields:0,withoutNamedTable:0,tableKinds:{},tableStatuses:{},untranslatedFields:0,untranslatedSamples:[],fieldEvidence:{},errors:[],done:!source,stopReason:source?'running':'adapter_missing'};
 }
 export function intakeSummary(state) {
-  const {source,seen,cursors,...rest} = state;
+  const {source,seen,cursors,confirmedWithdrawals,...rest} = state;
   return {...rest,observations:seen.size};
+}
+export function intakeReportEvidence(states) {
+  return { sources: states.map(intakeSummary),
+    confirmedWithdrawals: states.flatMap(state => [...state.confirmedWithdrawals.values()]) };
 }
