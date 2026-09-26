@@ -1,3 +1,5 @@
+import {ReminderButton} from "@/components/crm/Reminders";
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import {ManualClientOrigin} from "@/components/crm/ManualClientOrigin";
 import {manualClientIndex} from "@/lib/crm-client-origin";
 import {ContactIcon} from "@/components/crm/ContactIcon";
@@ -405,14 +407,15 @@ export default async function CrmLeadsPage({
                   </section>
                 </div>
                 <div className="mt-5">
-                  <LeadActions
+                  <ReminderButton entityType="lead" entityId={lead.id}/>
+                  {hasCrmPermission(user,"editLeads")?<LeadActions
                     leadId={lead.id}
                     currentStatus={lead.status}
                     currentManagerId={lead.assignedManagerId}
                     managers={managers}
-                    canAssignManagers={isAdminRole(user.role)}
+                    canAssignManagers={hasCrmPermission(user,"assign")}
                     archived={Boolean(lead.archivedAt)}
-                  />
+                  />:null}
                 </div>
               </div>
             </details>

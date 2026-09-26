@@ -1,3 +1,4 @@
+import { cache } from "react";
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import fs from "node:fs";
@@ -22,6 +23,7 @@ export type AuthUser = {
   updatedAt?: string;
   lastLoginAt?: string;
   sessionVersion?: number;
+  permissions?: import("./crm-permissions").CrmPermissions;
 };
 
 type SessionPayload = AuthUser & { exp: number };
@@ -111,12 +113,14 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
   }
 }
 
-export async function getCurrentUser(): Promise<AuthUser | null> {
+async function readCurrentUser(): Promise<AuthUser | null> {
   const signed = verifySessionCookie((await cookies()).get(AUTH_COOKIE_NAME)?.value);
   if (!signed) return null;
   const users = await readDataJson<AuthUser[]>("auth/users.json", getAuthUsers());
   return resolveSessionUser(signed, users);
 }
+
+export const getCurrentUser = typeof cache === "function" ? cache(readCurrentUser) : readCurrentUser;
 
 export function resolveSessionUser(signed: AuthUser, users: AuthUser[]): AuthUser | null {
   const current = users.find((user) => user.id === signed.id);

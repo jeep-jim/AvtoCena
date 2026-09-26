@@ -14,9 +14,7 @@ export async function GET() {
   }
 
   const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(activeLead);
-  const visible = isAdminRole(user.role)
-    ? leads
-    : leads.filter((lead) => lead.assignedManagerId === user.id || lead.createdByManagerId === user.id);
+  const visible=leads.filter(lead=>canSeeLead(user,lead));
 
   const compact = visible
     .map((lead) => ({

@@ -1,3 +1,4 @@
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import {
@@ -29,7 +30,7 @@ export async function PATCH(
   context: { params: Promise<{ id: string }> },
 ) {
   const user = await getCurrentUser();
-  if (!user || !isAdminRole(user.role)) {
+  if (!user || !hasCrmPermission(user,"settings")) {
     return NextResponse.json({ ok: false, error: "admin_required" }, { status: 403 });
   }
 

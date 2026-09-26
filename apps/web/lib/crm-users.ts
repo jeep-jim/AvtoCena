@@ -4,7 +4,7 @@ import { mutateDataJson, readDataJson } from "./data";
 export async function readCrmUsers(): Promise<AuthUser[]> {
   const seed = getAuthUsers();
   const stored = await readDataJson<AuthUser[]>("auth/users.json", seed);
-  return Array.isArray(stored) ? stored : seed;
+  return (Array.isArray(stored) ? stored : seed).map(user=>{const {accessKeyHash,botBindHash,botBindExpiresAt,...safe}=user as AuthUser & {accessKeyHash?:string;botBindHash?:string;botBindExpiresAt?:string};return safe;});
 }
 
 export async function findCrmUserByTelegram(input: { id?: string | number; username?: string }) {
