@@ -1,4 +1,4 @@
 {
-  "requestedAt": "2026-09-22",
-  "reason": "Recheck current 42GB bucket usage and safely reclaim eligible obsolete objects; keep current/previous generations, six-hour grace and existing 50GB budget"
+  "requestedAt": "2026-09-26T04:48:00Z",
+  "reason": "Run guarded preview/apply after #1192. Reclaim only expired unreferenced internal chunks; protect current/previous generations and retain six-hour grace."
 }
