@@ -12,3 +12,5 @@
 ## CRM — 26 сентября 2026
 
 Реализация и результаты проверки: [CRM activity, reminders and permissions](./crm-activity-reminders-20260926.md).
+
+- 26.09.2026: [Единые уведомления, график и документы сотрудников](crm-unified-team-20260926.md); [память публикации Китая](china-publication-memory-20260926.md).

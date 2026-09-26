@@ -17,7 +17,7 @@ fs.copyFileSync(path.join(pdfRoot,'legacy/build/pdf.worker.min.mjs'),path.join(p
 for(const dir of ['cmaps','standard_fonts','wasm'])fs.cpSync(path.join(pdfRoot,dir),path.join(pdfAssets,dir),{recursive:true});
 const mock=path.resolve('tests/browser/crm-mobile-mocks.ts');
 await build({entryPoints:['tests/browser/crm-mobile-fixture.tsx'],bundle:true,format:'iife',platform:'browser',target:'es2022',jsx:'automatic',outfile:out+'/fixture.js',loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'test-services',setup(b){
- b.onResolve({filter:/^@\/lib\/(auth|data|crm-users|business-settings|avtocena|effective-market-settings|crm-notifications|crm-read-state|catalog\/customs-pricing|catalog\/estimated-market-config)$/},()=>({path:mock}));
+ b.onResolve({filter:/^@\/lib\/(auth|data|crm-users|business-settings|avtocena|effective-market-settings|crm-notifications|crm-team|crm-read-state|catalog\/customs-pricing|catalog\/estimated-market-config)$/},()=>({path:mock}));
  b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-test'}));
  b.onLoad({filter:/.*/,namespace:'next-test'},args=>({contents:args.path.endsWith('navigation')?`export const redirect=()=>{throw Error('redirect')};export const notFound=()=>{throw Error('notFound')};export const usePathname=()=>'/crm';export const useRouter=()=>({refresh(){},push(){}});`:`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{href,...props},children);}`,loader:'jsx',resolveDir:process.cwd()}));
 }}]});
@@ -37,7 +37,9 @@ try{
  for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents','staff'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
-   let reminders=[];
+   let reminders=[];let teamShifts=[];
+   await page.route('**/api/crm/team/schedule**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();teamShifts=[...teamShifts.filter(x=>x.userId!==b.userId||x.date!==b.date),{...b,updatedAt:new Date().toISOString()}];await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{shifts:teamShifts,people:[{id:'owner-test',name:'Тестовый руководитель',birthday:''},{id:'manager-test',name:'Александр Константинопольский',birthday:''}]}});});
+   await page.route('**/api/crm/notifications**',r=>r.fulfill({json:{notifications:[],reminders}}));
    await page.route('**/api/crm/activity**',r=>r.fulfill({json:{userId:'owner-test',events:[{id:'evt-assigned',createdAt:'2026-09-26T07:00:00Z',type:'lead_assigned',title:'Назначен менеджер заявки',actor:{id:'owner-test',name:'Тестовый руководитель'},target:{id:'manager-test',name:'Александр Константинопольский'},entityLabel:'Toyota Corolla Cross',href:'/crm/leads?id=test-0',changes:[{label:'Ответственный',before:'Не назначен',after:'Александр Константинопольский'}]}]}}));
    await page.route('**/api/crm/reminders**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();if(b.action==='done')reminders=reminders.filter(x=>x.id!==b.id);else reminders.push({...b,id:'reminder-1',ownerId:'owner-test',entityLabel:'Клиент для проверки',createdAt:new Date().toISOString()});await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{reminders}});});
    if(kind==='documents'){
@@ -62,18 +64,20 @@ try{
    if(kind==='clients'){
     await page.getByRole('button',{name:'Плитки клиентов',exact:true}).click();assert.ok(await page.locator('.crm-clients-grid').isVisible());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-    if(width>=768)assert.equal(await page.locator('.crm-clients-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),2);
+    assert.equal(await page.locator('.crm-clients-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),2);
     await page.reload();await page.locator('.crm-clients-grid').waitFor();
    }
    if(kind==='client'){
     await page.getByRole('button',{name:'Напоминание',exact:true}).click();
-    await page.getByLabel('Дата и время',{exact:true}).fill('2027-01-10T15:30');await page.getByLabel('Что сделать',{exact:true}).fill('Позвонить клиенту');
+    await page.getByLabel('Дата и время напоминания',{exact:true}).fill('2027-01-10T15:30');await page.getByLabel('Что сделать',{exact:true}).fill('Позвонить клиенту');
     await page.getByRole('button',{name:'Добавить напоминание',exact:true}).click();await page.locator('.crm-reminder-editor').getByText('Позвонить клиенту',{exact:true}).waitFor();
     assert.equal(reminders[0].dueAt,'2027-01-10T08:30:00.000Z');
-    await page.getByRole('button',{name:'Напоминания: 1',exact:true}).click();await page.locator('.crm-reminder-popover').getByText('Позвонить клиенту',{exact:true}).waitFor();
-    await page.locator('.crm-reminder-popover').getByRole('button',{name:'Напоминание выполнено',exact:true}).click();await page.getByRole('button',{name:'Напоминания: 0',exact:true}).waitFor();
-    await page.getByRole('button',{name:'Закрыть напоминания',exact:true}).click();
+    await page.getByRole('button',{name:'Уведомления: 0',exact:true}).click();await page.locator('.ac-unified-notifications').getByText('Позвонить клиенту',{exact:true}).waitFor();
+    await page.locator('.ac-unified-notifications').getByRole('button',{name:'Напоминание выполнено',exact:true}).click();await page.locator('.ac-unified-notifications .crm-reminder-row').waitFor({state:'detached'});
+    await page.getByRole('button',{name:'Закрыть уведомления',exact:true}).click();
    }
+   if(kind==='team'){await page.locator('.crm-schedule-scroll tbody tr').nth(1).waitFor();const cell=page.locator('.crm-schedule-scroll tbody tr').nth(1).locator('td button').first();await cell.click();await page.getByLabel('Начало',{exact:true}).fill('09:00');page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Сохранить смену',exact:true}).click();assert.equal(teamShifts.length,0);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Сохранить смену',exact:true}).click();await page.locator('.crm-shift-editor').waitFor({state:'detached'});assert.equal(teamShifts[0].start,'09:00');assert.equal(teamShifts[0].confirmed,true);}
+   if(kind==='settings')assert.equal(await page.locator('.crm-content details[open]').count(),0,'markets start collapsed');
    if(kind==='staff'){
     assert.equal(await page.getByRole('switch').count(),10);assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),true);
     await page.getByLabel('Роль',{exact:true}).selectOption('admin');assert.equal(await page.getByRole('switch',{name:/Управление сотрудниками/}).isDisabled(),false);

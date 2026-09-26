@@ -1,3 +1,4 @@
+import {TeamSchedule} from "@/components/crm/TeamSchedule";
 import {hasCrmPermission,ROLE_DETAILS} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -15,8 +16,9 @@ const roleInfo: Record<string, { label: string; access: string }> = {
   manager: { label: "Менеджер", access: "Назначенные заявки, клиенты и расчёты" },
 };
 
-export default async function CrmManagersPage() {
-  const actor=await getCurrentUser();if(!actor)redirect("/login");if(!hasCrmPermission(actor,"staff"))redirect(`/crm/managers/${actor.id}`);
+export default async function CrmManagersPage({searchParams}:{searchParams?:Promise<Record<string,string|string[]|undefined>>}) {
+  const query=await searchParams||{};const month=typeof query.month==="string"?query.month:undefined;
+  const actor=await getCurrentUser();if(!actor)redirect("/login");if(!isCrmRole(actor.role))redirect("/login");
   const [allUsers, leads, clients] = await Promise.all([
     readCrmUsers(),
     readChunkedDataJson<any>("leads/leads.json", []),
@@ -26,13 +28,14 @@ export default async function CrmManagersPage() {
 
   return (
     <CrmShell activeHref="/crm/managers" title="Команда и права" subtitle="Сотрудники компании, их роли, назначенные заявки и доступ к разделам CRM.">
+      <TeamSchedule initialMonth={month} initialDate={typeof query.date==="string"?query.date:undefined}/>
       <section className="crm-team-intro glass mb-5 rounded-[1.8rem] p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-black">Сотрудники</h2>
 
           </div>
-          <Link href="/crm/managers/new" className="rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white">Добавить сотрудника</Link>
+          {hasCrmPermission(actor,"staff")?<Link href="/crm/managers/new" className="rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white">Добавить сотрудника</Link>:null}
         </div>
         <details className="crm-role-help mt-3"><summary>Роли и доступ</summary><div className="mt-3 grid gap-3 md:grid-cols-3">
           {Object.entries(roleInfo).map(([role, info]) => (
@@ -51,7 +54,7 @@ export default async function CrmManagersPage() {
           const info = roleInfo[manager.role] || { label: manager.role, access: "Индивидуальные права" };
           const avatar = manager.avatarUrl || defaultManagerAvatar(manager.id || manager.telegramUsername);
           return (
-            <Link key={manager.id} href={`/crm/managers/${encodeURIComponent(manager.id)}`} className="crm-team-card glass rounded-[1.6rem] p-5 transition hover:-translate-y-0.5">
+            <Link key={manager.id} href={hasCrmPermission(actor,"staff")||actor.id===manager.id?`/crm/managers/${encodeURIComponent(manager.id)}`:"/crm/managers#team-schedule"} className="crm-team-card glass rounded-[1.6rem] p-5 transition hover:-translate-y-0.5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
                   <img src={avatar} alt="" className="h-12 w-12 shrink-0 rounded-full object-cover" referrerPolicy="no-referrer" />

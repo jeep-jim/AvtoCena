@@ -105,7 +105,7 @@ export default async function CrmLeadsPage({
   }).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const id = first(params.id);
   const visible = id
-    ? leads.filter((lead) => lead.id === id)
+    ? stored.filter((lead) => lead.id === id && canSeeLead(user,lead))
     : leads.slice(0, 100);
   const trashClients=view==="archive"?(await readChunkedDataJson<any>("clients/clients.json",[])).filter(client=>canSeeLead(user,client)):[];
   const trashEntries=trashClients.flatMap(client=>(client.documents||[]).filter((doc:any)=>doc.deletedAt).map((document:any)=>({clientId:client.id,clientName:client.fio||"Клиент",document})));
@@ -113,7 +113,7 @@ export default async function CrmLeadsPage({
     <CrmShell
       activeHref="/crm/leads"
       title="Заявки"
-      subtitle="Обращения клиентов, автомобили и работа команды. Время указано по Москве."
+      subtitle="Обращения клиентов, автомобили и работа команды. Время Новокузнецка."
     >
       <div className={`crm-lead-tabs mb-4 flex flex-wrap gap-2${user.role === "owner" ? " crm-lead-tabs-owner" : ""}`}>
         {[

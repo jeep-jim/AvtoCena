@@ -55,7 +55,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
         const provisional = Boolean(version.provisional);
 
         return (
-          <details key={market.id} className="group glass rounded-[1.8rem]" open={market.id === "japan"}>
+          <details key={market.id} className="group glass rounded-[1.8rem]">
             <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">

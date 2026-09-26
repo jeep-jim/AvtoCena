@@ -1,10 +1,12 @@
 "use client";
-import {RemindersBell} from "./Reminders";
+import {ReminderRows} from "./Reminders";
+import type {CrmReminder} from "../../lib/crm-reminders";
+import type {CrmNotice} from "../../lib/crm-unified-notifications";
 
 import { StaffHeartbeat } from "./StaffPresence";
 import { CrmPushControl, unsubscribeStaffPush } from "./CrmPushControl";
 import { useEffect, useRef, useState } from "react";
-import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList, ChevronDown } from "lucide-react";
+import { Bell, UserRound, Volume2, VolumeX, Settings, ClipboardList, ChevronDown, AlarmClock, X } from "lucide-react";
 import { canMigrateLegacyAcknowledgement, type AlertLead } from "../../lib/crm-alert-state";
 const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
@@ -31,11 +33,16 @@ type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadRe
 export function CrmLiveAlerts({userId, role="manager", displayName="Кабинет", header=false,crm=false,avatar}:{userId:string;role?:string;displayName?:string;header?:boolean;crm?:boolean;avatar?:string}) {
   const [enabled,setEnabled]=useState(false),[pending,setPending]=useState<InboxLead[]>([]),[authorized,setAuthorized]=useState(true);
   const [recent,setRecent]=useState<InboxLead[]>([]),[leadsOpen,setLeadsOpen]=useState(false);
+  const [notifications,setNotifications]=useState<CrmNotice[]>([]),[reminders,setReminders]=useState<CrmReminder[]>([]),[notificationsOpen,setNotificationsOpen]=useState(false);
+  const unreadNotices=notifications.filter(n=>n.unread);
+  async function refreshNotices(){try{const r=await fetch('/api/crm/notifications',{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);}}catch{}}
+  useEffect(()=>{let busy=false;const poll=async()=>{if(busy||document.visibilityState!=='visible')return;busy=true;try{await refreshNotices();}finally{busy=false;}};void poll();const timer=setInterval(poll,20000);window.addEventListener('avtocena:reminders',poll);window.addEventListener('avtocena:crm-change',poll);document.addEventListener('visibilitychange',poll);return()=>{clearInterval(timer);window.removeEventListener('avtocena:reminders',poll);window.removeEventListener('avtocena:crm-change',poll);document.removeEventListener('visibilitychange',poll);};},[userId]);
+  async function readNotices(ids:string[]){if(!ids.length)return;try{const r=await fetch('/api/crm/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(!r.ok)throw Error();setNotifications(rows=>rows.map(n=>ids.includes(n.id)?{...n,unread:false}:n));}catch{setAckError('Не удалось отметить уведомления прочитанными.');}}
   const soundKey=`${ENABLED_KEY}_${userId}`;
   const [audioBlocked,setAudioBlocked]=useState(false);
   const [menuOpen,setMenuOpen]=useState(false),[ackError,setAckError]=useState(""),[acknowledging,setAcknowledging]=useState(false);
   const root=useRef<HTMLDivElement>(null);
-  useEffect(()=>{if(!menuOpen)return;const close=(event:PointerEvent)=>{if(!root.current?.contains(event.target as Node))setMenuOpen(false);};const escape=(event:KeyboardEvent)=>{if(event.key==="Escape")setMenuOpen(false);};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[menuOpen]);
+  useEffect(()=>{if(!menuOpen&&!notificationsOpen)return;const close=(event:PointerEvent)=>{if(!root.current?.contains(event.target as Node)){setMenuOpen(false);setNotificationsOpen(false);}};const escape=(event:KeyboardEvent)=>{if(event.key==="Escape"){setMenuOpen(false);setNotificationsOpen(false);}};document.addEventListener("pointerdown",close);document.addEventListener("keydown",escape);return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};},[menuOpen,notificationsOpen]);
   const pendingRef=useRef(pending);pendingRef.current=pending;
   const enabledRef=useRef(enabled);enabledRef.current=enabled;
   const tab=useRef("");
@@ -86,7 +93,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     return ()=>{active=false;clearInterval(timer);window.removeEventListener("focus",focus);document.removeEventListener("visibilitychange",focus);window.removeEventListener("avtocena:lead-read",focus);window.removeEventListener("storage",sync);};
   },[userId]);
   useEffect(()=>{
-    if(!enabled || !pending.length || !authorized)return;
+    if(!enabled || (!pending.length&&!unreadNotices.length) || !authorized)return;
     const ring=()=>{
       // One sound source across CRM and public tabs; the lease expires if a tab closes.
       let lease:{id?:string;until?:number}={};try{lease=JSON.parse(get(leaseKey)||"{}");}catch{}
@@ -94,6 +101,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       put(leaseKey,JSON.stringify({id:tab.current,until:Date.now()+1800}));
       beep();setAudioBlocked(!audio || audio.state!=="running");
       const newest=pending[0];
+      if(!newest)return;
       const eventKey=`${newest.id}:${newest.eventKey}`;
       if(document.visibilityState!=="visible" && notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
         notifiedRef.current=eventKey;
@@ -102,7 +110,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     };
     ring();const timer=setInterval(ring,1000);
     return ()=>{clearInterval(timer);try{if(JSON.parse(get(leaseKey)||"{}").id===tab.current)put(leaseKey,"{}");}catch{}};
-  },[enabled,pending,authorized,leaseKey,userId]);
+  },[enabled,pending,notifications,authorized,leaseKey,userId]);
   async function acknowledge(){
     setAckError("");setAcknowledging(true);
     const rows=[...pendingRef.current];
@@ -134,32 +142,42 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
-    <StaffHeartbeat/><RemindersBell/>
-    {!crm && <a href="/crm/leads" className="ac-staff-leads" aria-label={`Заявки${pending.length?`: непросмотренных ${pending.length}`:""}`}><Bell size={17}/><span>Заявки</span>{badge}</a>}
-    {!crm && <button type="button" className="ac-staff-account ac-staff-expand" aria-label="Последние заявки" aria-expanded={menuOpen&&leadsOpen} onClick={()=>{setMenuOpen(current=>!(current&&leadsOpen));setLeadsOpen(true);}}><ChevronDown size={16}/></button>}
-    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>setMenuOpen(!menuOpen)}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
+    <StaffHeartbeat/>
+    <button type="button" className="ac-staff-account" aria-label={`Уведомления: ${pending.length+unreadNotices.length}`} aria-expanded={notificationsOpen} onClick={()=>{setNotificationsOpen(!notificationsOpen);setMenuOpen(false);}}><Bell size={19}/>{pending.length+unreadNotices.length>0?<span className="ac-unified-badge ac-staff-badge">{pending.length+unreadNotices.length}</span>:null}</button>
+    {notificationsOpen?<section className="ac-unified-notifications" aria-label="Все уведомления"><div className="ac-notifications-heading"><strong>Уведомления</strong><button type="button" aria-label="Закрыть уведомления" onClick={()=>setNotificationsOpen(false)}><X size={20}/></button></div>
+    {pending.length+unreadNotices.length>0?<button type="button" className="ac-notifications-read" onClick={()=>{void acknowledge();void readNotices(unreadNotices.map(n=>n.id));}}>Отметить прочитанными</button>:<p className="ac-notifications-empty">Новых уведомлений нет</p>}
+    {pending.map(lead=><a className="ac-notification is-unread" key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}`} onClick={()=>void readRecent(lead)}><strong>{lead.assignmentUnread?'Вам назначена заявка':'Новая заявка'} · {lead.name||'Клиент'}</strong><span>{lead.offerTitle||lead.car||lead.selectedOffers?.map(o=>o.title).join(', ')||'Подбор автомобиля'}</span></a>)}
+    {notifications.map(n=><div key={n.id} className={`ac-notification ${n.unread?'is-unread':''}`}>{n.href?<a href={n.href} onClick={()=>void readNotices([n.id])}><strong>{n.title}</strong><span>{n.text}</span></a>:<><strong>{n.title}</strong><span>{n.text}</span></>}{n.unread?<button type="button" onClick={()=>void readNotices([n.id])}>Прочитано</button>:null}</div>)}
+    <h3 className="ac-notifications-subtitle"><AlarmClock size={17}/>Напоминания команды</h3>
+    {!reminders.some(r=>Date.parse(r.dueAt)<=Date.now())?<p className="ac-notifications-empty">На сейчас напоминаний нет</p>:null}
+    <ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)<=Date.now())} onChange={()=>void refreshNotices()}/>
+    {reminders.some(r=>Date.parse(r.dueAt)>Date.now())?<><h4 className="ac-notifications-subtitle">Предстоящие</h4><ReminderRows rows={reminders.filter(r=>Date.parse(r.dueAt)>Date.now())} onChange={()=>void refreshNotices()}/></>:null}
+    {ackError?<p role="alert">{ackError}</p>:null}</section>:null}
+    <button type="button" className="ac-staff-account" aria-label="Кабинет сотрудника" aria-expanded={menuOpen} aria-controls={`staff-menu-${userId}`} onClick={()=>{setMenuOpen(!menuOpen);setNotificationsOpen(false);}}>{avatar ? <img src={avatar} alt="" width={40} height={44} className="h-full w-full rounded-xl object-cover" referrerPolicy="no-referrer"/> : <UserRound size={21}/>}<span className="ac-staff-mobile-badge">{badge}</span></button>
     <div hidden={!menuOpen} id={`staff-menu-${userId}`} className="ac-staff-menu">
       <p className="ac-staff-name">{displayName}{crm?<small className="block text-xs font-normal">{({owner:"Владелец",admin:"Администратор",manager:"Менеджер"} as Record<string,string>)[role]||role}</small>:null}</p>
       <button type="button" onClick={()=>setLeadsOpen(!leadsOpen)} aria-expanded={leadsOpen}><ClipboardList size={18}/>Заявки{badge}<ChevronDown size={18} style={{marginLeft:'auto',transform:leadsOpen?'rotate(180deg)':undefined}}/></button>
+      <button type="button" onClick={()=>{setMenuOpen(false);setNotificationsOpen(true);}}><AlarmClock size={18}/>Напоминания и уведомления{unreadNotices.length?<span className="ac-staff-badge">{unreadNotices.length}</span>:null}</button>
       {leadsOpen?<div className="ac-staff-recent">{recent.length?recent.map(lead=><details key={lead.id} onToggle={event=>{if(event.currentTarget.open)void readRecent(lead);}}><summary>{lead.unread?<i aria-label="Не просмотрена"/>:null}<span>{lead.name||'Новая заявка'}<small>{lead.offerTitle||lead.car||lead.selectedOffers?.map(o=>o.title).join(', ')||'Подбор автомобиля'}</small></span><ChevronDown size={15}/></summary><div>{lead.phone?<a href={`tel:${lead.phone.replace(/[^+0-9]/g,'')}`}>{lead.phone}</a>:null}{lead.telegram?<p>{lead.telegram}</p>:null}<a href={`/crm/leads?id=${encodeURIComponent(lead.id)}`}>Открыть заявку →</a></div></details>):<p>Заявок пока нет</p>}<a href="/crm/leads">Все заявки →</a></div>:null}
       <div className="ac-staff-menu-settings">
       <a href={crm?`/crm/managers/${encodeURIComponent(userId)}`:"/crm"}><UserRound size={18}/>{crm?"Мой профиль":"Рабочий кабинет"}</a>
 
-      <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук заявок: {enabled?"включён":"выключен"}</button>
+      <button type="button" onClick={toggle} aria-pressed={enabled}>{enabled?<Volume2 size={18}/>:<VolumeX size={18}/>}Звук уведомлений: {enabled?"включён":"выключен"}</button>
       {enabled&&audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}}>Разрешить воспроизведение звука</button>:null}
 
       {crm?<form onSubmit={event=>{event.preventDefault();const form=event.currentTarget;put(soundKey,"0");void unsubscribeStaffPush(userId).finally(()=>form.submit());}} action="/api/auth/logout?redirect=/login" method="post"><button type="submit" className="w-full min-h-11 px-2 text-left text-sm">Выйти</button></form>:null}
       <CrmPushControl userId={userId}/>
       </div>
     </div>
-    {pending.length>0?<div role="status" className="ac-staff-notice">
-      <p className="font-bold">Новые заявки: {pending.length}</p>
+    {!notificationsOpen&&(pending.length>0||unreadNotices.length>0)?<div role="status" className="ac-staff-notice">
+      <p className="font-bold">{pending.length?`Новые заявки: ${pending.length}`:unreadNotices[0]?.title}</p>{unreadNotices.length>0?<button className="mt-2 text-sm underline" type="button" onClick={()=>{setNotificationsOpen(true);setMenuOpen(false);}}>Открыть уведомления ({unreadNotices.length})</button>:null}
       {assignedCount>0?<p className="mt-1 text-sm">Назначено вам: {assignedCount}</p>:null}
       {enabled && audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}} className="mt-2 text-xs underline">Нажмите, чтобы разрешить звук</button>:null}
-      <div className="mt-3 flex gap-4"><a href={pending.length===1?`/crm/leads?id=${encodeURIComponent(pending[0].id)}`:"/crm/leads"} className="text-sm font-bold underline">Открыть заявки</a><button type="button" disabled={acknowledging} onClick={()=>void acknowledge()} className="text-sm underline">{acknowledging?"Сохраняем…":"Прочитано мной"}</button></div>
+      {pending.length>0?<div className="mt-3 flex gap-4"><a href={pending.length===1?`/crm/leads?id=${encodeURIComponent(pending[0].id)}`:"/crm/leads"} className="text-sm font-bold underline">Открыть заявки</a><button type="button" disabled={acknowledging} onClick={()=>void acknowledge()} className="text-sm underline">{acknowledging?"Сохраняем…":"Прочитано мной"}</button></div>:null}
       {ackError?<p className="mt-2 text-xs">{ackError}</p>:null}
     </div>:null}
     <style dangerouslySetInnerHTML={{__html:`
+      .ac-unified-badge{position:absolute;right:-5px;top:-5px}.ac-unified-notifications{position:absolute;right:0;top:calc(100% + 12px);width:440px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 100px);overflow:auto;overscroll-behavior:contain;padding:16px;background:var(--ac-surface,#1e293b);border:1px solid var(--ac-border);border-radius:18px;z-index:145;box-shadow:0 16px 50px #0003;color:var(--ac-text)}.ac-notifications-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.ac-notifications-heading>button{width:36px;height:36px;display:grid;place-items:center}.ac-notification{display:block;padding:12px;border-radius:12px;background:var(--ac-surface-2);border:1px solid var(--ac-border);margin-top:8px;font-size:13px}.ac-notification.is-unread{border-left:3px solid #ff353d}.ac-notification strong,.ac-notification span{display:block;overflow-wrap:anywhere}.ac-notification span{margin-top:5px;color:var(--ac-muted);white-space:pre-wrap}.ac-notification>button,.ac-notifications-read{font-size:12px;text-decoration:underline;margin-top:8px;min-height:32px}.ac-notifications-empty{font-size:13px;color:var(--ac-muted);margin:10px 0}.ac-notifications-subtitle{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;margin-top:18px}.ac-unified-notifications .crm-reminder-row{display:flex;gap:10px;border-top:1px solid var(--ac-border);padding:12px 0;font-size:13px}.crm-reminder-copy{flex:1;min-width:0}.crm-reminder-copy>*{display:block;overflow-wrap:anywhere}.crm-reminder-copy time,.crm-reminder-copy small{font-size:11px;color:var(--ac-muted);margin-top:5px}.crm-reminder-row>button{flex:none;width:36px;height:36px;border-radius:10px;background:var(--ac-surface-2);display:grid;place-items:center}.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:68px;right:max(24px,calc((100vw - 1500px)/2 + 32px))}@media(max-width:767px){.ac-unified-notifications,.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:76px;right:12px;width:calc(100vw - 24px)}}
       .ac-staff-tools{position:relative;display:flex;align-items:center;gap:6px;color:var(--ac-text,#fff)}
       .ac-staff-leads,.ac-staff-account{display:flex;align-items:center;justify-content:center;gap:7px;height:44px;border-radius:12px;background:var(--ac-surface-2,#273343);color:inherit;font-size:12px;font-weight:700}
       .ac-staff-leads{padding:0 12px}.ac-staff-account{width:40px;position:relative}.ac-staff-mobile-badge{display:none}

@@ -17,3 +17,5 @@ export const isOfficialCustomsCurrencyRate=()=>true;
 export const resolveCatalogMarketConfig=()=>({config:{id:'fixture',version:1,currency:'USD',logisticsRub:100000},estimated:false});
 export const followupText=()=>'';
 export const leadReadState=()=>({seenBy:[],unread:true,eventKey:'test'});
+
+export const readStaffProfiles=async()=>({});

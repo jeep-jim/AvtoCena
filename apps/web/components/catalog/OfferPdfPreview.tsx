@@ -56,7 +56,7 @@ function PdfPage({ pdf, number, width, layers, revision }: { pdf: PDFDocumentPro
   </div>;
 }
 
-export default function OfferPdfPreview({ blob, filename, onClose }: { blob: Blob; filename: string; onClose: () => void }) {
+export default function OfferPdfPreview({ blob, filename, onClose, confirmDownload=false }: { blob: Blob; filename: string; onClose: () => void; confirmDownload?:boolean }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
@@ -104,7 +104,7 @@ export default function OfferPdfPreview({ blob, filename, onClose }: { blob: Blo
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-[var(--ac-border)] bg-[var(--ac-surface,#fff)] p-3">
         <strong className="mr-auto text-sm">Предпросмотр PDF</strong>
-        <a href={url || undefined} download={filename} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#F59E0B] px-3 text-sm font-bold text-[#171C24]"><Download size={18}/>Скачать</a>
+        <a href={url || undefined} download={filename} onClick={event=>{if(confirmDownload&&!window.confirm(`Скачать документ «${filename}» на это устройство?`))event.preventDefault();}} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#F59E0B] px-3 text-sm font-bold text-[#171C24]"><Download size={18}/>Скачать</a>
         <button type="button" onClick={onClose} aria-label="Закрыть предпросмотр" className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)]"><X size={22}/></button>
         <div className="flex w-full flex-wrap items-center gap-2">
           <button type="button" aria-label="Уменьшить PDF" disabled={zoom <= 1} onClick={() => setZoom(value => Math.max(1, value - 0.5))} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] disabled:opacity-40"><Minus size={18}/></button>

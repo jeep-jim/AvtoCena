@@ -22,10 +22,10 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
     ["/crm/settings", "Рынки и расчёт"],
     ["/crm/dealers", "Дилеры"],
   ];
-  if (!isAdminRole(user.role)) links.splice(3);
+  if (!isAdminRole(user.role)) links.splice(4);
   if (isAdminRole(user?.role)) links.push(["/crm/telegram", "Telegram"]);
   if (["owner", "admin", "manager"].includes(user.role)) links.push(["/crm/documents", "Документы"]);
-  const gates:Record<string,CrmPermission>={"/crm/managers":"staff","/crm/settings":"settings","/crm/dealers":"dealers","/crm/telegram":"settings","/crm/documents":"documents","/crm/partners":"settings"};
+  const gates:Record<string,CrmPermission>={"/crm/settings":"settings","/crm/dealers":"dealers","/crm/telegram":"settings","/crm/documents":"documents","/crm/partners":"settings"};
   const needed=gates[activeHref];
   if(needed&&!hasCrmPermission(user,needed)&&!(activeHref==="/crm/managers"))redirect("/crm");
   const allowedLinks=links.filter(([href])=>!gates[href]||hasCrmPermission(user,gates[href]));
