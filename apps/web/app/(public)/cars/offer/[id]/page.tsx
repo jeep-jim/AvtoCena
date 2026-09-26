@@ -424,7 +424,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs"><Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}</nav>
             <div className="relative mt-2 min-w-0"><h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1></div>
           </header>
-          <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
+          <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
           <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
           <OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
