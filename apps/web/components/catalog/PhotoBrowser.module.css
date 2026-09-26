@@ -1,0 +1,20 @@
+.dialog { position:fixed;inset:0;margin:0;width:100%;height:100dvh;max-width:none;max-height:none;border:0;padding:0;background:#111318;color:#fff;overflow:hidden; }
+.dialog[open] { display:flex;flex-direction:column; }
+.dialog::backdrop { background:#000; }
+.header { display:flex;align-items:center;gap:10px;flex-shrink:0;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:#161a20;z-index:2; }
+.title { flex:1;min-width:0;font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.title span { display:block;font-size:12px;font-weight:500;opacity:.65;margin-top:3px; }
+.control { display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;border-radius:50%;background:rgb(255 255 255 / .09);color:#fff!important;-webkit-text-fill-color:#fff;font-size:22px;cursor:pointer; }
+.control:disabled { opacity:.35;cursor:default; }
+.control:focus-visible,.tile:focus-visible,.percent:focus-visible { outline:3px solid #ff424c;outline-offset:-3px; }
+.tiles { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-content:start;overflow:auto;overscroll-behavior:contain;min-height:0;padding:8px max(8px,calc((100vw - 1160px)/2)) calc(16px + env(safe-area-inset-bottom)); }
+.tiles[hidden] { display:none; }
+.tile { display:block;min-width:0;overflow:hidden;cursor:zoom-in;background:#20252c; }
+.tile:nth-child(3n+1) { grid-column:1 / -1; }
+.tile img { display:block;width:100%;height:auto; }
+.viewport { display:flex;align-items:center;justify-content:center;flex:1;min-height:0;overflow:hidden;touch-action:none;cursor:grab; }
+.viewport:active { cursor:grabbing; }
+.viewport img { max-width:100%;max-height:100%;object-fit:contain;user-select:none;pointer-events:none; }
+.zoom { flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#161a20; }
+.percent { min-width:54px;height:44px;color:#fff;font-size:13px;font-weight:700; }
+@media(min-width:768px){.header{padding-left:24px;padding-right:24px}.tiles{gap:14px}.title{font-size:18px}}

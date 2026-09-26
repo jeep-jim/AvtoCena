@@ -1,5 +1,7 @@
 "use client";
 
+import { PageQrButton } from "../sharing/PageQrButton";
+import { isPublicPagePath } from "../../lib/public-page-url";
 import { TOPAVTO_DEALER } from "@/lib/topavto-dealer";
 import Link from "next/link";
 import { CitySelector, LocationIcon } from "../home/CitySelector";
@@ -10,7 +12,7 @@ import { CatalogFooterStop } from "./CatalogFooterStop";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
-const INTERNAL_ROUTE_PREFIXES = ["/crm", "/login", "/api"];
+
 
 const marketLinks = [
   { href: "/cars?market=japan", label: "Автомобили из Японии" },
@@ -29,7 +31,7 @@ const budgetLinks = [
 ];
 
 function isPublicPath(pathname: string) {
-  return !INTERNAL_ROUTE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return isPublicPagePath(pathname);
 }
 
 function FooterLinkGroup({ title, links }: { title: string; links: Array<{ href: string; label: string }> }) {
@@ -148,6 +150,7 @@ export function PublicLegalFooter() {
 
         <section aria-label="Реквизиты дилера TOP AVTO" className="mb-5 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--ac-border)] pt-5 text-sm">
           <div className="flex items-center gap-10"><div><p className="font-bold">{TOPAVTO_DEALER.label} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
+          <PageQrButton key={pathname} />
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
 

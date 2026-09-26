@@ -1,5 +1,7 @@
 "use client";
 
+import { PhotoBrowser } from "./PhotoBrowser";
+import type { FavoriteSnapshot } from "./FavoriteToggle";
 import { retryProtectedPhoto } from "./protected-photo-retry";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -10,9 +12,10 @@ function dominantWheelDelta(event: WheelEvent) {
   return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
 }
 
-export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { images: string[]; title: string; auctionSheetUrls?: string[] }) {
+export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot }: { images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
   const cleanImages = [...new Set(images.filter(Boolean))];
   const [activeIndex, setActiveIndex] = useState(0);
+  const [browserOpen, setBrowserOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const helpCloseButton = useRef<HTMLButtonElement | null>(null);
@@ -30,6 +33,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
   useEffect(() => {
     setActiveIndex(0);
     setFullscreen(false);
+    setBrowserOpen(false);
     setHelpOpen(false);
   }, [images.join("|")]);
 
@@ -144,7 +148,8 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
       didSwipe.current = false;
       return;
     }
-    setFullscreen(true);
+    if(isSheet) setFullscreen(true);
+    else setBrowserOpen(true);
   }
 
   const image = (
@@ -311,6 +316,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [] }: { image
         </> : null}
       </div>
 
+      {browserOpen ? <PhotoBrowser images={cleanImages.filter(src=>!auctionSheetUrls.includes(src))} title={title} initialIndex={Math.max(0,cleanImages.filter(src=>!auctionSheetUrls.includes(src)).indexOf(cleanImages[activeIndex]))} offerId={offerId} snapshot={snapshot} onClose={()=>setBrowserOpen(false)} /> : null}
       {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
     </>
   );

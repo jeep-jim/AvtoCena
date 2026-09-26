@@ -1,4 +1,5 @@
 import {offerPath} from "./offer-url";
+import QRCode from "qrcode";
 import PDFDocument from "pdfkit";
 import { TOPAVTO_DEALER } from "../topavto-dealer";
 import { offerPdfLayers } from "./offer-pdf-layers";
@@ -60,7 +61,7 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const publicDir=existsSync(path.join(process.cwd(),"public/fonts/DejaVuSans.ttf"))?path.join(process.cwd(),"public"):path.join(process.cwd(),"apps/web/public");
  const marketKey=Object.hasOwn(markets,data.marketKey || "")?data.marketKey!:Object.keys(markets).find(k=>markets[k]===data.market)||"korea";
  const flag=(key:string)=>sharp(path.join(publicDir,`pdf-flags/${key}.svg`)).resize(84,60,{fit:"fill"}).png().toBuffer();
- const [photo,mark,marketFlag,russiaFlag]=await Promise.all([assets?.photo!==undefined?assets.photo:fetchOfferPdfPhoto(data.photoUrl),sharp(path.join(publicDir,"logo/avtocena-mark-light.svg")).resize(96,96).png().toBuffer(),flag(marketKey),flag("russia")]);
+ const [photo,mark,marketFlag,russiaFlag,qr]=await Promise.all([assets?.photo!==undefined?assets.photo:fetchOfferPdfPhoto(data.photoUrl),sharp(path.join(publicDir,"logo/avtocena-mark-light.svg")).resize(96,96).png().toBuffer(),flag(marketKey),flag("russia"),QRCode.toBuffer(data.url,{errorCorrectionLevel:"M",margin:4,width:768})]);
  const doc=new PDFDocument({size:"A4",pdfVersion:"1.5",margin:32,font:path.join(publicDir,"fonts/DejaVuSans.ttf"),bufferPages:true,info:{Title:`Расчёт · ${data.title}`,Author:"TOP AVTO / АвтоЦена"}});
  doc.registerFont("regular",path.join(publicDir,"fonts/DejaVuSans.ttf"));doc.registerFont("bold",path.join(publicDir,"fonts/DejaVuSans-Bold.ttf"));
  const chunks:Buffer[]=[];const output=new Promise<Buffer>((resolve,reject)=>{doc.on("data",c=>chunks.push(c));doc.on("end",()=>resolve(Buffer.concat(chunks)));doc.on("error",reject);});
@@ -84,21 +85,22 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  doc.roundedRect(R,38,RW,111,7).fill("#F3F5F8");if(photo){doc.save().roundedRect(R,38,RW,111,7).clip();doc.image(photo,R,38,{fit:[RW,111],align:"center",valign:"center"});doc.restore();}else text("Фото доступно в карточке автомобиля",R+12,79,RW-24,8,false,muted);
  doc.roundedRect(R,160,RW,25,7).fill("#F59E0B");doc.font("bold").fontSize(8).fillColor(ink).text("АвтоЦена рассчитана ↗",R,168,{width:RW,align:"center",link:data.url});doc.link(R,160,RW,25,data.url);
  text(`Актуально на ${data.valuationDate || data.date} г.`,R+5,201,RW-10,7.5);
- text("РАСЧЁТ СТОИМОСТИ АВТОМОБИЛЯ",R,244,RW,6.3,false,muted);brand(268);
- text("ИТОГО ПОД КЛЮЧ",R,328,RW,8,true,muted);text(data.total,R,346,RW,data.total.includes("уточнения")?12:20,true);
- doc.moveTo(R,379).lineTo(R+RW,379).lineWidth(.7).strokeColor(border).stroke();
+ doc.image(qr,R+(RW-92)/2,214,{width:92,height:92});doc.link(R+(RW-92)/2,214,92,92,data.url);
+ text("РАСЧЁТ СТОИМОСТИ АВТОМОБИЛЯ",R,318,RW,6.3,false,muted);brand(340);
+ text("ИТОГО ПОД КЛЮЧ",R,391,RW,8,true,muted);text(data.total,R,409,RW,data.total.includes("уточнения")?12:20,true);
+ doc.moveTo(R,443).lineTo(R+RW,443).lineWidth(.7).strokeColor(border).stroke();
  const rateColor=data.rateDirection==="down"?"#20a85e":data.rateDirection==="up"?"#ef3340":muted;
  const rateBg=data.rateDirection==="down"?"#cfe5d8":data.rateDirection==="up"?"#f2d1d5":"#EDF0F5";
- doc.roundedRect(R,389,RW,47,7).fill(rateBg);
- if(data.rateDirection && data.rateDirection!=="flat"){const down=data.rateDirection==="down";doc.save().translate(R+8,400).scale(.45).lineWidth(3).lineCap("round").lineJoin("round").strokeColor(rateColor);doc.path(down?"M3 5L11.5 13.5L18 9L34 25":"M3 25L11.5 16.5L18 21L34 5").stroke();doc.path(down?"M25 25H34V16":"M25 5H34V14").stroke();doc.restore();}
- text(`${data.rate}${data.rateChange?`  ${data.rateChange}`:""}`,R+30,398,RW-37,7.4,true,rateColor);if(data.rateDate)text(`Курс на ${data.rateDate}`,R+30,422,RW-37,6.3,false,muted);
- doc.moveTo(R,451).lineTo(R+RW,451).strokeColor(border).stroke();
- text("ВАШ ДИЛЕР ПО ПОДБОРУ АВТО",R,469,RW,6.5,false,muted);
- doc.image(path.join(publicDir,"brands/topavto-logo-black.png"),R,491,{fit:[RW,40],align:"center",valign:"center"});doc.link(R,491,RW,40,TOPAVTO_DEALER.website);
- text(`ИНН: ${TOPAVTO_DEALER.inn}\nОГРНИП: ${TOPAVTO_DEALER.ogrnip}`,R,543,RW,7.7);
+ doc.roundedRect(R,453,RW,47,7).fill(rateBg);
+ if(data.rateDirection && data.rateDirection!=="flat"){const down=data.rateDirection==="down";doc.save().translate(R+8,464).scale(.45).lineWidth(3).lineCap("round").lineJoin("round").strokeColor(rateColor);doc.path(down?"M3 5L11.5 13.5L18 9L34 25":"M3 25L11.5 16.5L18 21L34 5").stroke();doc.path(down?"M25 25H34V16":"M25 5H34V14").stroke();doc.restore();}
+ text(`${data.rate}${data.rateChange?`  ${data.rateChange}`:""}`,R+30,462,RW-37,7.4,true,rateColor);if(data.rateDate)text(`Курс на ${data.rateDate}`,R+30,486,RW-37,6.3,false,muted);
+ doc.moveTo(R,514).lineTo(R+RW,514).strokeColor(border).stroke();
+ text("ВАШ ДИЛЕР ПО ПОДБОРУ АВТО",R,520,RW,6.5,false,muted);
+ doc.image(path.join(publicDir,"brands/topavto-logo-black.png"),R,543,{fit:[RW,36],align:"center",valign:"center"});doc.link(R,543,RW,36,TOPAVTO_DEALER.website);
+ text(`ИНН: ${TOPAVTO_DEALER.inn}\nОГРНИП: ${TOPAVTO_DEALER.ogrnip}`,R,594,RW,7.7);
  const contacts=[["Оформление документов","+7 923 623-47-77","nvkz_zenit"],["Япония","+7 903 071-33-03","IvanTOPAVTO"],["Другие страны","+7 923 479-19-88","Anton_Molodykh90"]];
- contacts.forEach(([label,phone,tg],i)=>{const y=586+i*57;text(label,R,y,RW,8,true);doc.font("regular").fontSize(8).fillColor(ink).text(phone,R,y+15,{width:RW,link:`tel:${phone.replace(/[^+0-9]/g,"")}`});doc.fontSize(7).fillColor("#008CCB").text("Telegram",R,y+29,{width:RW,link:`https://t.me/${tg}`});});
- doc.fontSize(7).fillColor(muted).text("topavto.online",R,758,{width:RW,link:TOPAVTO_DEALER.website});doc.text("@TopAvtoImport",R,772,{width:RW,link:"https://t.me/TopAvtoImport"});
+ contacts.forEach(([label,phone,tg],i)=>{const y=627+i*47;text(label,R,y,RW,8,true);doc.font("regular").fontSize(8).fillColor(ink).text(phone,R,y+15,{width:RW,link:`tel:${phone.replace(/[^+0-9]/g,"")}`});doc.fontSize(7).fillColor("#008CCB").text("Telegram",R,y+29,{width:RW,link:`https://t.me/${tg}`});});
+ doc.fontSize(7).fillColor(muted).text("topavto.online",R,770,{width:RW,link:TOPAVTO_DEALER.website});doc.text("@TopAvtoImport",R,783,{width:RW,link:"https://t.me/TopAvtoImport"});
  // Independent left column; unusually long warnings continue on another page.
  text(data.title,X,38,W,fit.titleFont,true);let y=38+fit.titleH+10;text(data.specs,X,y,W,fit.font-1,false,muted);y+=fit.specH+15;text(`${data.market} → ${data.city}`,X,y,W,fit.font+6,true);y=fit.start;
  const room=(h:number)=>{if(y+h>783){doc.addPage();y=38;}};
