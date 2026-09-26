@@ -66,7 +66,7 @@ try {
    await page.getByRole('button',{name:'Закрыть выбор города'}).click();
    if(staff){
     const account=page.getByRole('button',{name:'Кабинет сотрудника'});assert.equal(await account.locator('img').count(),1);
-    const trigger=width>=768?page.getByRole('button',{name:'Последние заявки',exact:true}):account;
+    const trigger=account;assert.equal(await page.getByRole('button',{name:/^Уведомления:/}).count(),1,'one shared notification bell');
     await trigger.click();assert.ok(await page.locator('.ac-staff-menu').isVisible());await trigger.click();assert.equal(await page.locator('.ac-staff-menu').isVisible(),false);
    }
    await page.getByRole('button',{name:'Выбрать марки автомобилей'}).click();const rows=page.locator('[data-facet-value]');await rows.first().waitFor();const r1=await rows.nth(0).boundingBox(),r2=await rows.nth(1).boundingBox();assert.ok(r2.y-r1.y-r1.height>=2,'brand spacing');

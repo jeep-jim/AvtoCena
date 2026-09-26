@@ -300,9 +300,9 @@ try{
   await page.getByText('Новые заявки: 1').click();await page.waitForTimeout(2400);
   assert.ok(await page.evaluate(()=>window.__beeps)>=2,'sound repeats while unacknowledged');
   await page.getByRole('button',{name:'Прочитано мной',exact:true}).click();const stopped=await page.evaluate(()=>window.__beeps);await page.waitForTimeout(1200);assert.equal(await page.evaluate(()=>window.__beeps),stopped);
-  await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);await page.getByRole('button',{name:'Кабинет сотрудника'}).click();assert.equal(await page.getByRole('button',{name:'Звук заявок: включён'}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.getByRole('button',{name:'Кабинет сотрудника'}).click();
+  await page.reload();await page.waitForTimeout(300);assert.equal(await page.getByText('Новые заявки: 1').count(),0);await page.getByRole('button',{name:'Кабинет сотрудника'}).click();assert.equal(await page.getByRole('button',{name:'Звук уведомлений: включён'}).getAttribute('aria-pressed'),'true','enabled preference survives reload');await page.getByRole('button',{name:'Кабинет сотрудника'}).click();
   assert.equal(await page.locator('.ac-staff-badge').count(),0,'read status removes red badge even when CRM status stays new');
-  assert.equal(await page.locator('.ac-staff-leads').getAttribute('href'),'/crm/leads','inbox control navigates instead of toggling audio');
+  assert.equal(await page.locator('.ac-staff-leads').count(),0,'no second bell shortcut');await page.getByRole('button',{name:'Уведомления: 0',exact:true}).click();assert.ok(await page.locator('.ac-unified-notifications').isVisible());await page.getByRole('button',{name:'Закрыть уведомления',exact:true}).click();
   for(const width of [320,390,1440])for(const theme of ['light','dark']){
     await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=alerts&theme='+theme);await page.getByRole('button',{name:'Кабинет сотрудника'}).waitFor();
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'staff header fits viewport');
