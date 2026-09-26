@@ -3,7 +3,7 @@ import path from 'node:path';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intake-checkpoint.mjs';
-import { collectSourceStates, intakeState, intakeSummary } from './lib/catalog-source-intake.mjs';
+import { collectSourceStates, intakeState, intakeReportEvidence } from './lib/catalog-source-intake.mjs';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
 process.env.CATALOG_REBUILD_MARKET=market;
@@ -44,7 +44,7 @@ let checkpointQueue = Promise.resolve();
 let lastProgressAt = 0;
 function checkpoint() {
  return checkpointQueue = checkpointQueue.then(async () => {
-  const value={...report,updatedAt:new Date().toISOString(),sources:states.map(intakeSummary)};
+  const value={...report,updatedAt:new Date().toISOString(),...intakeReportEvidence(states)};
   await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(value,null,2));
   await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));
   if (Date.now()-lastProgressAt >= 60000 || report.completedAt) {
@@ -67,4 +67,4 @@ report.completedAt=new Date().toISOString();
 report.partialSources=states.filter(s=>s.stopReason!=="source_finished").map(s=>({sourceId:s.sourceId,reason:s.stopReason}));
 report.qualityStatus=report.partialSources.length?"partial":"configured_routes_finished";
 await checkpoint();
-console.log(JSON.stringify({...report,sources:states.map(intakeSummary)}));
+console.log(JSON.stringify({...report,...intakeReportEvidence(states)}));
