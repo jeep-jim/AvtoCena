@@ -29,6 +29,7 @@ export async function createReminder(user:AuthUser,input:any){
 }
 export async function finishReminder(user:AuthUser,id:string){
  const row=(await readReminders(user)).find(r=>r.id===id);if(!row)throw Error('entity_forbidden');
- await mutateDataJson<CrmReminder[]>(key(row.ownerId),[],rows=>rows.map(r=>r.id===id?{...r,doneAt:r.doneAt||new Date().toISOString(),doneBy:r.doneBy||user.id}:r));
- if(!row.doneAt)await recordCrmActivity(user,{id:`reminder_done_${id}`,type:'reminder_done',title:'Напоминание выполнено',entityType:row.entityType,entityId:row.entityId,entityLabel:row.entityLabel,clientId:row.clientId,leadId:row.entityType==='lead'?row.entityId:undefined,text:row.text});
+ let completed=false;
+ await mutateDataJson<CrmReminder[]>(key(row.ownerId),[],rows=>{completed=false;return rows.map(r=>{if(r.id!==id||r.doneAt)return r;completed=true;return {...r,doneAt:new Date().toISOString(),doneBy:user.id};});});
+ if(completed)await recordCrmActivity(user,{id:`reminder_done_${id}`,type:'reminder_done',title:'Напоминание выполнено',entityType:row.entityType,entityId:row.entityId,entityLabel:row.entityLabel,clientId:row.clientId,leadId:row.entityType==='lead'?row.entityId:undefined,text:row.text});
 }
