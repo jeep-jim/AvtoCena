@@ -1,0 +1,8 @@
+import {getCurrentUser,isCrmRole} from '@/lib/auth';
+import {readSchedule,readStaffProfiles,saveShift,teamToday,birthdayOn} from '@/lib/crm-team';
+import {readCrmUsers} from '@/lib/crm-users';
+import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
+const headers={'Cache-Control':'private, no-store'};
+export const dynamic='force-dynamic';
+export async function GET(request:Request){const actor=await getCurrentUser();if(!actor||!isCrmRole(actor.role))return Response.json({error:'Войдите в CRM.'},{status:401,headers});try{const month=new URL(request.url).searchParams.get('month')||teamToday().slice(0,7);const [shifts,users,profiles]=await Promise.all([readSchedule(month),readCrmUsers(),readStaffProfiles()]);return Response.json({shifts,people:users.filter(u=>isCrmRole(u.role)&&u.status!=='disabled').map(u=>({id:u.id,name:u.displayName,avatarUrl:u.avatarUrl,birthday:profiles[u.id]?.birthDate?birthdayOn(profiles[u.id].birthDate!,Number(month.slice(0,4))):''}))},{headers});}catch{return Response.json({error:'Не удалось загрузить график.'},{status:400,headers});}}
+export async function POST(request:Request){if(!isCalculationOriginAllowed(request))return Response.json({error:'Недопустимый источник.'},{status:403});const actor=await getCurrentUser();if(!actor||!isCrmRole(actor.role))return Response.json({error:'Войдите в CRM.'},{status:401});try{const raw=await request.text();if(raw.length>4000)throw Error('Слишком большой запрос.');return Response.json({shift:await saveShift(actor,JSON.parse(raw))},{headers});}catch(e){return Response.json({error:e instanceof Error?e.message:'Не удалось изменить график.'},{status:409,headers});}}

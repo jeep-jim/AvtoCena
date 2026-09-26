@@ -12,7 +12,7 @@
 .tile { display:block;min-width:0;overflow:hidden;cursor:zoom-in;background:#20252c; }
 .tile:nth-child(3n+1) { grid-column:1 / -1; }
 .tile img { display:block;width:100%;height:auto; }
-.viewport { display:flex;align-items:center;justify-content:center;flex:1;min-height:0;overflow:hidden;touch-action:none;cursor:grab; }
+.viewport { display:flex;align-items:center;justify-content:center;flex:1;min-height:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab; }
 .viewport:active { cursor:grabbing; }
 .viewport img { max-width:100%;max-height:100%;object-fit:contain;user-select:none;pointer-events:none; }
 .zoom { flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#161a20; }

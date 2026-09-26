@@ -34,7 +34,7 @@ export default async function CrmPage() {
       </div>
 
       <StaffPresence />
-      <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_380px]">
+      <div className="crm-overview-columns mt-5 grid gap-5 lg:grid-cols-[1fr_340px]">
         <div className="glass rounded-[2rem] p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl font-black">Общая лента</h2>
@@ -44,7 +44,7 @@ export default async function CrmPage() {
           <div className="crm-overview-feed mt-5"><ActivityFeed compact/></div>
         </div>
 
-        <div className="grid gap-5">
+        <div className="crm-overview-aside grid gap-5">
           <div className="glass rounded-[2rem] p-6">
             <h2 className="text-2xl font-black">Быстрые действия</h2>
             <div className="crm-quick-actions mt-5 grid grid-cols-2 gap-3">

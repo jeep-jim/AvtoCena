@@ -1,3 +1,4 @@
+import {notifyTeam} from "@/lib/crm-notification-store";
 import {canSeeLead} from "@/lib/crm-visibility";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
@@ -165,6 +166,7 @@ export async function PATCH(
 
   const base={entityType:"lead",entityId:leadId,leadId,clientId:updatedLead.clientId,entityLabel:updatedLead.name||updatedLead.car||"Заявка"};
   if(statusChanged)await recordCrmActivity(user,{...base,type:"lead_status_changed",title:"Изменён статус заявки",changes:[{label:"Статус",before:leadStatusLabel(existingLead.status),after:leadStatusLabel(nextStatus)}],text:note});
+  if(statusChanged&&nextManagerId&&nextManagerId!==user.id)await notifyTeam({recipientIds:[nextManagerId],kind:"assignment",title:"Изменён статус вашей заявки",text:`${user.displayName}: ${leadStatusLabel(existingLead.status)} → ${leadStatusLabel(nextStatus)}`,href:`/crm/leads?id=${encodeURIComponent(leadId)}`});
   if(managerChanged)await recordCrmActivity(user,{...base,type:"lead_assigned",title:"Назначен менеджер заявки",target:manager?activityPerson(manager):undefined,changes:[{label:"Ответственный",before:managers.find(m=>m.id===previousManagerId)?.displayName||"Не назначен",after:manager?.displayName||"Не назначен"}]});
   if(archiveChanged)await recordCrmActivity(user,{...base,type:"lead_archived",title:body.archived?"Заявка перенесена в архив":"Заявка восстановлена",text:note});
   if(note&&!statusChanged&&!archiveChanged)await recordCrmActivity(user,{...base,type:"lead_note_added",title:"Добавлен комментарий к заявке",text:note});

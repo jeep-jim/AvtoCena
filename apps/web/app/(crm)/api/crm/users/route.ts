@@ -1,3 +1,4 @@
+import {saveStaffBirthDate,validateBirthDate} from "@/lib/crm-team";
 import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 import {CRM_PERMISSIONS,hasCrmPermission,type CrmPermission,type CrmPermissions} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
     const role: UserRole = ["owner", "admin", "manager"].includes(requestedRole) ? requestedRole : "manager";
     const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&["staff","settings","dealers"].includes(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
     if(permissions&&actor.role!=="owner"&&Object.entries(permissions).some(([key,value])=>value&&!hasCrmPermission(actor,key as CrmPermission)))throw Error("Нельзя выдать права, которых у вас нет");
+    const birthDate=form.has("birthDate")?validateBirthDate(clean(form.get("birthDate"),10)):undefined;
     const status = clean(form.get("status"), 30) === "disabled" ? "disabled" : "active";
     const companyId = clean(form.get("companyId"), 160) || "dealer_topavto";
     returnPath = userId ? `/crm/managers/${encodeURIComponent(userId)}` : "/crm/managers/new";
@@ -74,6 +76,7 @@ export async function POST(request: Request) {
         updatedAt: new Date().toISOString() } : item);
     });
 
+    if(birthDate!==undefined)await saveStaffBirthDate(savedId,birthDate);
     await recordCrmActivity(actor,{type:userId?"staff_updated":"staff_created",title:userId?"Изменён сотрудник":"Добавлен сотрудник",visibility:"management",entityType:"staff",entityId:savedId,entityLabel:displayName,target:{id:savedId,name:displayName},href:`/crm/managers/${encodeURIComponent(savedId)}`,changes:activityChanges(previous||{},{displayName,telegramUsername,role,status},{displayName:"Имя",telegramUsername:"Логин",role:"Роль",status:"Доступ"}).concat(permissions?Object.entries(permissions).filter(([k,v])=>v!==hasCrmPermission(previous||({role:"manager"} as AuthUser),k as CrmPermission)).map(([k,v])=>({label:CRM_PERMISSIONS[k as CrmPermission].label,after:v?"Разрешено":"Запрещено"})):[])});
     return redirectWithState(request, `/crm/managers/${encodeURIComponent(savedId)}`, "saved");
   } catch (error) {
