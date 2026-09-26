@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import {staleJapanPreviewObjects} from "./lib/catalog-runtime-cleanup.mjs";
 import { readProtectedImageReferences } from "./lib/catalog-cleanup-image-references.mjs";
+import { planInternalChunkCleanup } from "./lib/catalog-internal-cleanup.mjs";
 const { catalogCandidateObjectExpired } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
@@ -164,13 +165,8 @@ if (!publicGeneration || !generationIds.length) {
   });
   const candidateSet = new Set(candidateGenerations);
   const generationDeleteObjects = generationObjects.filter((object) => candidateSet.has(generationIdFromKey(object.key)));
-  const protectedInternalPaths = new Set(Object.values(internalManifest?.sources || {})
-    .flatMap((source) => Array.isArray(source?.chunks) ? source.chunks.map(String) : []));
-  const internalDeleteObjects = internalObjects.filter((object) => {
-    const key = String(object?.key || "");
-    if (!key || protectedInternalPaths.has(key)) return false;
-    return EMERGENCY || candidateGenerations.some((generationId) => key.includes(`/${generationId}-chunk-`));
-  });
+  const internalCleanup = planInternalChunkCleanup(internalObjects, internalManifest, protectedGenerations, cutoff);
+  const internalDeleteObjects = internalCleanup.candidates;
   // Emergency capacity recovery may remove fresh orphans, but it must still
   // preserve every gallery referenced by the current internal candidate pool.
   const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest, true);
@@ -255,6 +251,7 @@ if (!publicGeneration || !generationIds.length) {
     imageCleanupDeferred: imageCleanupDeferredGenerations.length > 0,
     imageCleanupDeferredGenerations,
     candidateGenerations,
+    internalChunkReachability: internalCleanup.summary,
     discovered: {
       catalogObjects: catalogObjects.length,
       generations: generationIds.length,

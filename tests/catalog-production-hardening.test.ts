@@ -266,8 +266,10 @@ test("scheduled cleanup keeps a bounded six-hour grace while preserving both liv
   assert.match(cleanup, /\.\.\.\(!EMERGENCY && internalGeneration/);
   assert.match(cleanup, /\.\.\.\(!EMERGENCY \? generationIds\.slice/);
   assert.match(cleanup, /includeInternal/);
-  assert.match(cleanup, /protectedInternalPaths/);
-  assert.match(cleanup, /protectedInternalPaths\.has\(key\)/);
+  assert.match(cleanup, /planInternalChunkCleanup\(internalObjects, internalManifest, protectedGenerations, cutoff\)/);
+  const internalCleanup = fs.readFileSync(new URL("../scripts/lib/catalog-internal-cleanup.mjs", import.meta.url), "utf8");
+  assert.match(internalCleanup, /!referenced\.has\(object\.key\)/);
+  assert.match(internalCleanup, /!protectedGenerations\.has\(match\[1\]\)/);
   assert.match(cleanup, /readLiveImageKeys\(protectedGenerations, internalManifest, true\)/);
   assert.match(cleanup, /const oldEnough = EMERGENCY \|\|/);
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
