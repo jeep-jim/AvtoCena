@@ -15,6 +15,6 @@ test('MyAuto denied listing stops before trying alternate routes',async()=>{
  try{await assert.rejects(new MyAutoListAdapter().fetchPage(null),/access_blocked_http_403/);assert.equal(calls,1);}finally{globalThis.fetch=original;}
 });
 test('DubiCars detail denial aborts the page instead of silently dropping every car',async()=>{
- const original=globalThis.fetch;let calls=0;globalThis.fetch=async()=>{calls++;return calls===1?new Response('<a href="https://www.dubicars.com/2024-toyota-yaris-123456.html">car</a>',{status:200}):new Response('denied',{status:403});};
+ const original=globalThis.fetch;let calls=0;globalThis.fetch=async()=>{calls++;return calls===1?new Response('<link rel="next" href="https://www.dubicars.com/uae/used?page=2"><a href="https://www.dubicars.com/2024-toyota-yaris-123456.html">car</a>',{status:200}):new Response('denied',{status:403});};
  try{await assert.rejects(new DubicarsCurrentAdapter().fetchPage(null),/access_blocked_http_403/);assert.equal(calls,2);}finally{globalThis.fetch=original;}
 });

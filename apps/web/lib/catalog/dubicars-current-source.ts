@@ -400,6 +400,28 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Dubica
   };
 }
 
+/** Follow the pagination advertised by the source; never invent an endless tail. */
+export function dubicarsNextCursor(markup: string, currentPage: number): string | null {
+  const next = new Set<string>();
+  for (const match of markup.matchAll(/<(?:a|link)\b[^>]*>/gi)) {
+    const tag = match[0];
+    const rel = tag.match(/\brel\s*=\s*["']([^"']*)["']/i)?.[1] || "";
+    if (!rel.split(/\s+/).includes("next")) continue;
+    const href = tag.match(/\bhref\s*=\s*["']([^"']*)["']/i)?.[1];
+    if (!href) continue; // Disabled terminal pagination control.
+    const url = new URL(href.replace(/&amp;/g, "&"), "https://www.dubicars.com/uae/used");
+    const page = Number(url.searchParams.get("page"));
+    if (url.origin !== "https://www.dubicars.com" || url.pathname !== "/uae/used" || !Number.isSafeInteger(page) || page <= currentPage) {
+      throw new Error("dubicars_pagination_invalid");
+    }
+    next.add(String(page));
+  }
+  if (next.size > 1) throw new Error("dubicars_pagination_conflict");
+  if (next.size) return [...next][0];
+  if (/<nav\b[^>]*\bid\s*=\s*["']pagination["']/i.test(markup)) return null;
+  throw new Error("dubicars_pagination_missing");
+}
+
 export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
   sourceId = "dubicars_uae_exact";
   market = "uae" as const;
@@ -410,6 +432,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     const listUrl = `https://www.dubicars.com/uae/used?page=${page}`;
     const listing = await request(listUrl);
     if (!listing.response.ok) throw new Error(`dubicars_current_http_${listing.response.status}`);
+    const nextCursor = dubicarsNextCursor(listing.markup, page);
     const links = [...new Set([...listing.markup.matchAll(/href=["']([^"']+-\d{5,}\.html)["']/gi)].map((match) => absoluteUrl(match[1], listUrl)))].slice(0, 40);
     const rows: DubicarsCurrentRow[] = [];
     for (let index = 0; index < links.length; index += 4) {
@@ -423,8 +446,8 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     if (!rows.length) throw new Error("dubicars_current_zero");
     return {
       items: rows,
-      nextCursor: String(page + 1),
-      finished: false,
+      nextCursor,
+      finished: nextCursor === null,
       count: rows.length,
       health: {
         ok: true,

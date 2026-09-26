@@ -42,7 +42,11 @@ test('published China budget slices continue automatically with matching committ
  const result=recoveryDecision(args);
  assert.equal(recoveryDecision({...args,market:'europe',intakeCheckpoint:{...intakeCheckpoint,market:'europe'}}).reason,'continue_published_budget_slice');
  assert.equal(result.reason,'continue_published_budget_slice');assert.equal(result.action,'dispatch');
- assert.equal(recoveryDecision({...args,recovery:{budgetWindowStartedAt:new Date(now-3600000).toISOString(),budgetAttempts:2}}).action,'none');
+ assert.equal(recoveryDecision({...args,recovery:result}).reason,'budget_continuation_no_progress');
+ const advanced=[{...sources[0],cursor:'4001'}];
+ assert.equal(recoveryDecision({...args,journal:{...journal,generationId:'g2',sources:advanced},intakeCheckpoint:{...intakeCheckpoint,generationId:'g2',sources:advanced},recovery:result}).action,'dispatch');
+ assert.equal(recoveryDecision({...args,journal:{...journal,generationId:'g2'},intakeCheckpoint:{...intakeCheckpoint,generationId:'g2'},recovery:result}).reason,'budget_continuation_no_progress');
+ assert.equal(recoveryDecision({...args,recovery:{budgetWindowStartedAt:new Date(now-3600000).toISOString(),budgetAttempts:2}}).action,'dispatch');
  assert.equal(recoveryDecision({...args,lastDispatchAt:new Date(now-3600000).toISOString()}).reason,'dispatch_cooldown');
  for(const change of [
   {journal:{...journal,publicationStatus:'failed'}},
