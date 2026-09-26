@@ -15,10 +15,10 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});const results=[];
 try{
  for(const width of [390,1440])for(const theme of ['light','dark']){
-  const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:2,isMobile:width<500,hasTouch:width<500,permissions:['clipboard-read','clipboard-write']});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+  const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:2,isMobile:width<500,hasTouch:width<500,permissions:['clipboard-read','clipboard-write']});const page=await context.newPage(),errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error(e)});
   await page.addInitScript(()=>{localStorage.setItem('avtocena_cookie_notice_acknowledged_v1','1');localStorage.setItem('avtocena_city_notice_dismissed_v1','1');});
   await page.goto(origin+'/cars/offer/qa-gallery?foo=bar');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-  await page.getByRole('button',{name:'QR страницы',exact:true}).click();const qr=page.getByRole('dialog',{name:'QR страницы',exact:true});await qr.locator('img').waitFor();
+  await page.getByRole('button',{name:'QR страницы',exact:true}).click();const qr=page.getByRole('dialog',{name:'QR страницы',exact:true});await qr.locator('img').waitFor().catch(async error=>{console.log(await qr.innerText());await page.screenshot({path:`${out}/failure-${width}-${theme}.png`});throw error});
   assert.equal(await qr.locator('a').getAttribute('href'),origin+'/cars/offer/qa-gallery?foo=bar&calculation=qa-saved');
   const data=await qr.locator('img').getAttribute('src');fs.writeFileSync(`${out}/qr-${width}-${theme}.png`,Buffer.from(data.split(',')[1],'base64'));await page.screenshot({path:`${out}/qr-dialog-${width}-${theme}.png`});await qr.getByRole('button',{name:'Закрыть QR'}).click();
   await page.getByRole('button',{name:'Открыть фотографии автомобиля'}).click();const gallery=page.getByRole('dialog',{name:'Фотографии Автомобиль',exact:true});await gallery.waitFor();assert.equal(await gallery.locator('[data-photo-index]').count(),5);await page.screenshot({path:`${out}/tiles-${width}-${theme}.png`});

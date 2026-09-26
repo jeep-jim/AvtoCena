@@ -11,7 +11,7 @@ export function PageQrButton() {
   const overflow=document.body.style.overflow;
   document.body.style.overflow='hidden';
   dialog.current?.showModal();
-  import('qrcode').then(qr=>qr.toDataURL(url,{errorCorrectionLevel:'M',margin:4,width:768,color:{dark:'#000000',light:'#ffffff'}})).then(value=>{if(live)setImage(value)}).catch(()=>{if(live)setError('Не удалось создать QR. Попробуйте ещё раз.');});
+  import('qrcode').then(qr=>qr.default.toDataURL(url,{errorCorrectionLevel:'M',margin:4,width:768,color:{dark:'#000000',light:'#ffffff'}})).then(value=>{if(live)setImage(value)}).catch(()=>{if(live)setError('Не удалось создать QR. Попробуйте ещё раз.');});
   return ()=>{live=false;document.body.style.overflow=overflow;};
  },[url]);
  function close(){dialog.current?.close();setUrl('');setImage('');setError('');trigger.current?.focus();}
