@@ -42,11 +42,13 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
     && intakeCheckpoint.sources?.some(c=>c.sourceId===s.sourceId && c.cursor===s.cursor && budgetStops.has(c.stopReason)))
   && (!latest || latest.conclusion==='success' || String(latest.id)===String(journal.runId));
  if(committedBudget){
-  const active=now-Date.parse(recovery?.budgetWindowStartedAt||'')<86400000;
-  const attempts=active?Number(recovery.budgetAttempts||0):0;
-  if(attempts>=2)return {action:'none',reason:'budget_continuation_limit_reached'};
-  return {action:'dispatch',reason:'continue_published_budget_slice',budgetAttempts:attempts+1,
-   budgetWindowStartedAt:active?recovery.budgetWindowStartedAt:new Date(now).toISOString()};
+  // Successful work is not a failed retry. Continue as long as the committed
+  // source cursors advance, with the existing cooldown and single-run lock.
+  // A new publication generation alone does not prove pagination progress.
+  const budgetCursorKey=JSON.stringify(budgetRows.map(s=>[s.sourceId,s.cursor]).sort((a,b)=>a[0].localeCompare(b[0])));
+  if(recovery?.budgetCursorKey===budgetCursorKey)return {action:'none',reason:'budget_continuation_no_progress'};
+  return {action:'dispatch',reason:'continue_published_budget_slice',budgetCursorKey,
+   budgetGenerationId:intakeCheckpoint.generationId};
  }
  if(budgetRows.length)return {action:'none',reason:'budget_continuation_blocked',blockers:[...new Set(budgetContinuationBlockers)]};
  if(latest&&['failure','timed_out'].includes(latest.conclusion)){
