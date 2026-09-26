@@ -76,6 +76,9 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     || common.auctionGrade || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
   const overviewEligible = !selectedMarket && !hasFilters && !customSort && requestedPage === 1;
+  const japanAll = selectedMarket === "japan" && first(params.stock) === "all";
+  // Stock and market snapshots are independent; start both storage reads together.
+  const greenRead = overviewEligible || japanAll ? readGreenCorner().catch(()=>null) : Promise.resolve(null);
   const overview = overviewEligible ? await readCatalogOverview().catch((error) => {
     console.error("catalog_overview_read_failed", error);
     return null;
@@ -127,8 +130,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       })),
     ]);
   }
-  const japanAll = selectedMarket === "japan" && first(params.stock) === "all";
-  const green = overviewEligible || japanAll ? await readGreenCorner().catch(()=>null) : null;
+  const green = await greenRead;
   const greenMatched = japanAll && green ? filterGreenCorner(await currentGreenCornerPrices(green.items),Object.fromEntries(Object.entries(params).map(([key,value])=>[key,first(value)]))) : green?.items || [];
   const greenItems = japanAll ? greenMatched.slice(0,10).map(publicGreenOffer) : await applyActiveBusinessPricingBatch(greenMatched.slice(0,10).map(publicGreenOffer));
   if (japanAll && green) {

@@ -1,7 +1,7 @@
 name: Verify CRM mobile and security audit
 on:
   push:
-    branches: [feat/crm-activity-reminders-20260926, fix/crm-client-documents-20260925, fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
+    branches: [fix/catalog-read-concurrency-20260926, feat/crm-activity-reminders-20260926, fix/crm-client-documents-20260925, fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
     paths:
       - 'apps/web/**'
       - 'package-lock.json'
@@ -77,7 +77,7 @@ jobs:
             artifacts/attached-parameters-*
           retention-days: 14
   live:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/catalog-read-concurrency-20260926'
     needs: [audit, browser]
     runs-on: ubuntu-latest
     timeout-minutes: 15
