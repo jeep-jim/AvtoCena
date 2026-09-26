@@ -44,6 +44,7 @@ export async function POST(request: Request) {
     if (!displayName || !telegramUsername) throw new Error("Укажите имя и Telegram username");
     if (role === "owner" && actor.role !== "owner") throw new Error("Назначить владельца может только владелец");
 
+    const assertCanGrant=(candidate:AuthUser)=>{if(actor.role!=="owner"&&(Object.keys(CRM_PERMISSIONS) as CrmPermission[]).some(key=>hasCrmPermission(candidate,key)&&!hasCrmPermission(actor,key)))throw Error("Нельзя выдать права, которых у вас нет");};
     const seed = getAuthUsers();
     let savedId = userId;
     let previous:any;
@@ -54,13 +55,16 @@ export async function POST(request: Request) {
 
       if (!userId) {
         savedId = generateId("user");
-        return [{ id: savedId, displayName, telegramUsername, role, status, companyId, permissions, updatedAt: new Date().toISOString() }, ...users];
+        const candidate:AuthUser={ id: savedId, displayName, telegramUsername, role, status, companyId, permissions, updatedAt: new Date().toISOString() };
+        assertCanGrant({...candidate,status:"active"});
+        return [candidate, ...users];
       }
 
       const current = users.find((item) => item.id === userId);
       if (!current) throw new Error("Сотрудник не найден");
       if (current.role === "owner" && actor.role !== "owner") throw new Error("Изменить владельца может только владелец");
       if (actor.id === userId && (status === "disabled" || role !== current.role)) throw new Error("Нельзя отключить или понизить собственный доступ");
+      assertCanGrant({...current,role,status:"active",permissions:permissions||current.permissions});
       previous=current;
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");
       const identityChanged = staffIdentityChanged(current.telegramUsername, telegramUsername);
