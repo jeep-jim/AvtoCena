@@ -136,12 +136,13 @@ jobs:
       CATALOG_PRIORITY_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_HARD_MAX_TOTAL_RUB: '15000000'
       CATALOG_V2_PRIORITY_TARGET: '8000'
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: '4'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
+      CATALOG_READ_CONCURRENCY: ${{ matrix.market == 'china' && '2' || '4' }}
       CATALOG_INDEX_WRITE_CONCURRENCY: '8'
       CATALOG_PUBLISH_LOCK_WAIT_MS: '14400000'
       CATALOG_PUBLISH_LOCK_TTL_MS: '1800000'
       CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: '300000'
-      NODE_OPTIONS: --max-old-space-size=12288
+      NODE_OPTIONS: ${{ matrix.market == 'china' && '--max-old-space-size=24576' || '--max-old-space-size=12288' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -151,6 +152,20 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Reserve additional memory for China publication
+        if: matrix.market == 'china'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This runner is disposable. Swap belongs to the publication worker,
+          # not the production web container or catalog object storage.
+          available_kib=$(df --output=avail /mnt | tail -1 | tr -d ' ')
+          test "$available_kib" -gt 27262976
+          sudo fallocate -l 24G /mnt/catalog-publication.swap
+          sudo chmod 600 /mnt/catalog-publication.swap
+          sudo mkswap /mnt/catalog-publication.swap
+          sudo swapon /mnt/catalog-publication.swap
+          free -m
       - name: Report publication resource budget
         run: |
           free -m
