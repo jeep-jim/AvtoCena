@@ -1,6 +1,6 @@
 import {createHash,randomUUID} from 'node:crypto';
 import {appendChunkedDataJson,mutateDataJson,readDataJson,readRecentChunkedDataJson} from './data';
-export type TeamNotice={id:string;createdAt:string;recipientIds:string[];title:string;text:string;href:string;kind:'schedule'|'assignment'|'staff';};
+export type TeamNotice={entityType?:'lead'|'client';entityId?:string;id:string;createdAt:string;recipientIds:string[];title:string;text:string;href:string;kind:'schedule'|'assignment'|'staff'|'comment';};
 export const noticeReadKey=(id:string)=>`crm/notification-read/${createHash('sha256').update(id).digest('hex')}.json`;
 export async function notifyTeam(input:Omit<TeamNotice,'id'|'createdAt'>&Partial<Pick<TeamNotice,'id'|'createdAt'>>){if(!input.recipientIds.length)return;await appendChunkedDataJson<TeamNotice>('crm/notifications.json',{...input,id:input.id||randomUUID(),createdAt:input.createdAt||new Date().toISOString(),recipientIds:[...new Set(input.recipientIds)]});}
 export async function teamNotices(userId:string){return readRecentChunkedDataJson<TeamNotice>('crm/notifications.json',80,n=>n.recipientIds.includes(userId));}

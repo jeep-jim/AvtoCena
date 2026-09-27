@@ -1,3 +1,5 @@
+import {TeamDiscussion} from "@/components/crm/TeamDiscussion";
+import {discussionMessages,discussionLabel} from "@/lib/crm-discussion";
 import {ReminderButton} from "@/components/crm/Reminders";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {ManualClientOrigin} from "@/components/crm/ManualClientOrigin";
@@ -337,6 +339,7 @@ export default async function CrmLeadsPage({
                     </div>
                     {lead.comment && (
                       <p className="whitespace-pre-wrap rounded-xl bg-[var(--ac-surface)] p-3 text-sm">
+                        <strong className="mb-1 block text-xs">Комментарий при создании заявки</strong>
                         {lead.comment}
                       </p>
                     )}
@@ -358,7 +361,8 @@ export default async function CrmLeadsPage({
                     )}
                   </section>
                   <section>
-                    <h2 className="mb-3 font-black">История и переписка</h2>
+                    <TeamDiscussion type="lead" entityId={lead.id} label={discussionLabel('lead',lead)} initialMessages={discussionMessages(lead)} userId={user.id} canReply={hasCrmPermission(user,"editLeads")}/>
+                    <details className="crm-external-history mt-4"><summary className="font-bold">История статусов и сообщения клиента</summary>
                     <div className="max-h-80 space-y-2 overflow-y-auto">
                       {[
                         ...(lead.followups || []).map((entry: any) => ({text: followupText(entry), createdAt: entry.createdAt, author: "Клиент · дополнение из формы"})),
@@ -366,11 +370,6 @@ export default async function CrmLeadsPage({
                           text: `Статус: ${leadStatusLabel(entry.status)}${entry.note ? ` · ${entry.note}` : ""}`,
                           createdAt: entry.changedAt,
                           author: entry.changedByName,
-                        })),
-                        ...(lead.internalNotes || []).map((entry: any) => ({
-                          text: entry.text,
-                          createdAt: entry.createdAt,
-                          author: entry.createdByName || "Заметка",
                         })),
                         ...leadMessages.map((entry: any) => ({
                           text: entry.text,
@@ -404,6 +403,7 @@ export default async function CrmLeadsPage({
                       Ответ клиенту через служебную кнопку в боте. Внутренние
                       заметки клиенту не отправляются.
                     </p>
+                    </details>
                   </section>
                 </div>
                 <div className="mt-5">
