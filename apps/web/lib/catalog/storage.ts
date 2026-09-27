@@ -591,7 +591,7 @@ async function readCurrentSearchProjection(market: string) {
     // Facets are staged before large aliases. Avoid downloading another generation
     // only to discard it and download every active market as well.
     const facets = await readCurrentFacets();
-    if (facets.generationId !== generationId) return {generationId,items:await readProjectionRows(manifest,market===CURRENT_ALL_MARKETS_PROJECTION?{}:{market})};
+    if (facets.generationId && facets.generationId !== generationId) return {generationId,items:await readProjectionRows(manifest,market===CURRENT_ALL_MARKETS_PROJECTION?{}:{market})};
     return readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(currentProjectionPath(market),{generationId:"",items:[]});
   })().then(value => {
       const entry = currentProjectionCache.get(key);
