@@ -46,7 +46,7 @@ export async function findAutoCalcKnowledge(query:string,year?:number,market?:st
    add({id:row.id,title:[model.make,model.model,row.name].filter(Boolean).join(' '),kind:'reference',label:'Вариант из энциклопедии — проверьте комплектацию',sourceUrl:row.sourceUrl,date:row.verifiedAt,market:row.market,draft:knowledgeDraft(row)});
   }
   for(const row of live.items.filter(sameModel).sort((a:any,b:any)=>Number(b.market===market)-Number(a.market===market))){
-   const image=String(row.images?.[0]?.url||row.cardImageUrl||'');
+   const image=String(row.images?.[0]?.url||'');
    if(image&&!result.image){result.image=image;result.imageLabel='Фото похожего автомобиля из каталога — не вашего объявления';}
    add({id:row.id,title:`${row.make} ${row.model} ${row.year}`,kind:'catalog',label:'Аналог в каталоге · ориентировочный расчёт',sourceUrl:`/cars/offer/${row.id}`,date:row.updatedAt,market:row.market,price:row.sourcePrice?String(row.sourcePrice):undefined,currency:row.sourceCurrency||undefined,image,draft:knowledgeDraft(row)});
   }
