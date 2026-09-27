@@ -1,3 +1,4 @@
+import {normalizeStaffPhone} from "@/lib/staff-phone";
 import {saveStaffBirthDate,validateBirthDate} from "@/lib/crm-team";
 import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 import {CRM_PERMISSIONS,hasCrmPermission,type CrmPermission,type CrmPermissions} from "@/lib/crm-permissions";
@@ -32,6 +33,8 @@ export async function POST(request: Request) {
   try {
     const form = await request.formData();
     const userId = clean(form.get("userId"), 120);
+    const phoneInput=clean(form.get("personalPhone"),40);
+    const personalPhone=form.has("personalPhone")?normalizeStaffPhone(phoneInput):undefined;
     const displayName = clean(form.get("displayName"), 160);
     const telegramUsername = normalizeTelegramUsername(clean(form.get("telegramUsername"), 160));
     const requestedRole = clean(form.get("role"), 40) as UserRole;
@@ -43,6 +46,7 @@ export async function POST(request: Request) {
     const companyId = clean(form.get("companyId"), 160) || "dealer_topavto";
     returnPath = userId ? `/crm/managers/${encodeURIComponent(userId)}` : "/crm/managers/new";
 
+    if (phoneInput&&!personalPhone) throw new Error("Проверьте личный телефон: укажите номер с кодом страны, например +7 999 123-45-67");
     if (!displayName || !telegramUsername) throw new Error("Укажите имя и Telegram username");
     if (role === "owner" && actor.role !== "owner") throw new Error("Назначить владельца может только владелец");
 
@@ -57,7 +61,7 @@ export async function POST(request: Request) {
 
       if (!userId) {
         savedId = generateId("user");
-        const candidate:AuthUser={ id: savedId, displayName, telegramUsername, role, status, companyId, permissions, updatedAt: new Date().toISOString() };
+        const candidate:AuthUser={ id: savedId, displayName, telegramUsername, role, status, companyId, personalPhone, permissions, updatedAt: new Date().toISOString() };
         assertCanGrant({...candidate,status:"active"});
         return [candidate, ...users];
       }
@@ -70,14 +74,14 @@ export async function POST(request: Request) {
       previous=current;
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");
       const identityChanged = staffIdentityChanged(current.telegramUsername, telegramUsername);
-      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, ...(permissions?{permissions}:{}),
+      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, ...(personalPhone!==undefined?{personalPhone}:{}), ...(permissions?{permissions}:{}),
         sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.role !== role || item.status !== status || (permissions&&JSON.stringify(item.permissions)!==JSON.stringify(permissions)) ? 1 : 0),
         ...(identityChanged ? {telegramId:"",botBindHash:"",botBindExpiresAt:""} : {}),
         updatedAt: new Date().toISOString() } : item);
     });
 
     if(birthDate!==undefined)await saveStaffBirthDate(savedId,birthDate);
-    await recordCrmActivity(actor,{type:userId?"staff_updated":"staff_created",title:userId?"Изменён сотрудник":"Добавлен сотрудник",visibility:"management",entityType:"staff",entityId:savedId,entityLabel:displayName,target:{id:savedId,name:displayName},href:`/crm/managers/${encodeURIComponent(savedId)}`,changes:activityChanges(previous||{},{displayName,telegramUsername,role,status},{displayName:"Имя",telegramUsername:"Логин",role:"Роль",status:"Доступ"}).concat(permissions?Object.entries(permissions).filter(([k,v])=>v!==hasCrmPermission(previous||({role:"manager"} as AuthUser),k as CrmPermission)).map(([k,v])=>({label:CRM_PERMISSIONS[k as CrmPermission].label,after:v?"Разрешено":"Запрещено"})):[])});
+    await recordCrmActivity(actor,{type:userId?"staff_updated":"staff_created",title:userId?"Изменён сотрудник":"Добавлен сотрудник",visibility:"management",entityType:"staff",entityId:savedId,entityLabel:displayName,target:{id:savedId,name:displayName},href:`/crm/managers/${encodeURIComponent(savedId)}`,changes:activityChanges(previous||{},{displayName,telegramUsername,role,status,...(personalPhone!==undefined?{personalPhone}:{})},{personalPhone:"Личный телефон",displayName:"Имя",telegramUsername:"Логин",role:"Роль",status:"Доступ"}).concat(permissions?Object.entries(permissions).filter(([k,v])=>v!==hasCrmPermission(previous||({role:"manager"} as AuthUser),k as CrmPermission)).map(([k,v])=>({label:CRM_PERMISSIONS[k as CrmPermission].label,after:v?"Разрешено":"Запрещено"})):[])});
     return redirectWithState(request, `/crm/managers/${encodeURIComponent(savedId)}`, "saved");
   } catch (error) {
     console.error("crm_user_save_failed", error);
