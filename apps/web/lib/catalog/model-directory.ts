@@ -1,8 +1,10 @@
 import { countCanonicalCatalogModels } from "./canonical-model-counts";
 import { DetailReadCache } from "./detail-read-cache";
-import { cache } from "react";
+import { cache as reactCache } from "react";
+// CLI compilation/tests use React 18; Next supplies cache in server components.
+const cache: typeof reactCache = typeof reactCache === "function" ? reactCache : (fn => fn);
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
-import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
+import { readEncyclopediaKnowledgeModels } from "./encyclopedia";
 import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
 import { readCompiledKnowledgeSummary } from "./knowledge-read-model";
 import { readCatalogBrandModelCounts, readCatalogDirectoryCountRows } from "./storage";
