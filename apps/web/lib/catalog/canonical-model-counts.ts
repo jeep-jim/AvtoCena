@@ -4,7 +4,7 @@ import {vehicleKnowledgeCompact} from "./vehicle-knowledge";
 /** One pass over public projections; aliases cannot invent canonical models. */
 export function countCanonicalCatalogModels(
   models: Array<{id: string; make: string; model: string; aliases?: string[]; active?: boolean}>,
-  rows: Array<{make?: string; model?: string}>,
+  rows: Array<{make?: string; model?: string; count?: number}>,
 ) {
   const aliases = new Map<string, string | null>();
   const key = (make: string, model: string) => `${canonicalCatalogBrand(make)}:${vehicleKnowledgeCompact(model)}`;
@@ -22,7 +22,7 @@ export function countCanonicalCatalogModels(
   for (const row of rows) {
     const make = canonicalCatalogBrand(String(row.make || ""));
     if (!make) continue;
-    counts[make] = (counts[make] || 0) + 1;
+    counts[make] = (counts[make] || 0) + Math.max(0,Number(row.count ?? 1));
     const id = aliases.get(key(make, String(row.model || "")));
     if (!id) continue;
     const ids = recognized.get(make) || new Set<string>();

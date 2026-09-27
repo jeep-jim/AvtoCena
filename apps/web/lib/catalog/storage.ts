@@ -790,6 +790,13 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
 }
 
 async function currentProjectionRows(params: CatalogSearchParams = {}) {
+  const makes = catalogMakeFilterValues(params.make);
+  if (makes.length) {
+    const manifest = await readManifest();
+    const parts = await Promise.all(makes.map(make => readCurrentBrandProjection(make, manifest.generationId)));
+    if (parts.every(part=>part.generationId===manifest.generationId)) return {generationId:manifest.generationId,rows:prepareCatalogProjectionRows(parts.flatMap(part=>part.items))};
+  }
+
   const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
   // Register the shared all-market read before sibling market searches start.
   // All readers coalesce the small manifest check before downloading projections.
@@ -798,6 +805,13 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
     return { generationId: manifest.generationId, rows: prepareCatalogProjectionRows(current.items || []) };
   }
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
+}
+
+/** Small publication summary for directory counts; no full catalog download on a landing page. */
+export async function readCatalogDirectoryCountRows() {
+  const [manifest,summary]=await Promise.all([readManifest(),readCurrentBrandSummary()]);
+  if(summary.generationId===manifest.generationId) return Object.values(summary.brands).flatMap(brand=>brand.models.map(model=>({make:brand.make,model:model.model,count:model.count})));
+  return (await currentProjectionRows({})).rows.map(row=>({make:row.make,model:row.model,count:1}));
 }
 
 export async function readCurrentPublicCatalogProjection() {
