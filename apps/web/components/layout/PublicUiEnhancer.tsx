@@ -292,7 +292,7 @@ export function PublicUiEnhancer() {
 
   useEffect(() => {
     // Home-only decorations must not fetch/reprice 48 offers on every catalog or detail visit.
-    if (pathname !== "/") return;
+    if (pathname !== "/" || document.querySelector("[data-home-react-filters]")) return;
     let countTimer = 0;
     let countController: AbortController | null = null;
     let trendController: AbortController | null = null;

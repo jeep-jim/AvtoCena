@@ -2,7 +2,7 @@ import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
 import { loadPublicRateExtras } from "@/lib/catalog/public-rates";
-import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { countCatalogOffers, readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -41,6 +41,10 @@ export async function GET(request: Request) {
     page: n(p.get("page")),
     pageSize: n(p.get("pageSize")),
   };
+  if (p.get("countOnly") === "1") {
+    const result = await countCatalogOffers(query);
+    return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
+  }
   const [result, facets, rateExtras] = await Promise.all([
     searchOffers(query),
     p.get("includeFacets") === "1" ? readCatalogFacets(query) : Promise.resolve(undefined),
@@ -50,7 +54,7 @@ export async function GET(request: Request) {
   if (facets) extras.facets = facets;
   if (rateExtras) Object.assign(extras, rateExtras);
   const readMs = performance.now() - started;
-  const items = p.get("countOnly") === "1" ? [] : await applyActiveBusinessPricingBatch(result.items);
+  const items = await applyActiveBusinessPricingBatch(result.items);
   const pricingMs = performance.now() - started - readMs;
   return NextResponse.json({ ok: true, ...result, items, ...extras }, { headers: { "Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-read;dur=${readMs.toFixed(1)}, catalog-pricing;dur=${pricingMs.toFixed(1)}` } });
 }
