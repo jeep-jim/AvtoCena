@@ -1,3 +1,4 @@
+import {buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCountQuery,type BudgetCountIndex} from "./budget-count-index";
 import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
@@ -550,6 +551,8 @@ export function resetCatalogReadCachesForTests() {
   marketLandingCache.clear();
   filteredSearchCache.clear();
   catalogCountCache.clear();
+  budgetIndexCache.clear();
+  budgetCardCache.clear();
   preparedProjectionRows = new WeakMap();
   resetCatalogOverviewCache();
   manifestCache = null;
@@ -1069,6 +1072,13 @@ export async function backfillCatalogMarketLandings() {
   return {generationId: manifest.generationId, results};
 }
 export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  const budget=await readBudgetSelection(params);
+  if(budget){
+    const rows=budget.rows.map(row=>row[5]);
+    const values=(key:keyof typeof rows[number])=>uniqueText(rows.map(row=>row[key])).sort((a,b)=>a.localeCompare(b,"ru"));
+    const models=[...new Map(rows.map(row=>[`${cleanFacet(row.make)}:${cleanFacet(row.model)}`,{make:cleanFacet(row.make),model:cleanFacet(row.model)}])).values()].filter(row=>row.make&&row.model).sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,"ru"));
+    return {generationId:budget.generationId,makes:values("make"),models,markets:[...PUBLIC_CATALOG_MARKETS],bodyTypes:values("bodyType"),fuels:values("fuel"),transmissions:values("transmission"),drives:values("drive")};
+  }
   const landing = await readMarketLanding(params);
   if (landing) return landing.facets;
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
@@ -1521,6 +1531,7 @@ export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleO
 }
 
 async function writeGenerationDirectoryIndexes(generationId:string,rows:CatalogSearchProjection[]) {
+  await writeBudgetSearchIndex(generationId,prepareCatalogProjectionRows(rows));
   const brands=new Map<string,CatalogSearchProjection[]>();
   for(const row of rows){const make=catalogBrandReadModelKey(row.make);if(!make)continue;const items=brands.get(make)||[];items.push(row);brands.set(make,items);}
   await mapWithConcurrency([...brands],catalogMaintenanceIoConcurrency(),([make,items])=>writeJsonAtomic(generationBrandProjectionPath(generationId,make),{generationId,items}));
@@ -1716,6 +1727,61 @@ export async function getOffer(id: string) {
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
   return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
 }
+const BUDGET_CARD_BLOCK_SIZE=256;
+const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({maxEntries:24,maxBytes:16*1024*1024,ttlMs:300_000,concurrency:6});
+async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProjection[]){
+ // Card blocks retain the existing pricing replay inputs; the small selector never carries photos or ledgers.
+ const ordered=[...rows];
+ ordered.sort((a,b)=>a.market.localeCompare(b.market)||projectionFreshness(b)-projectionFreshness(a));
+ const blocks=new Map<string,number>();
+ const chunks:CatalogSearchProjection[][]=[];
+ for(let start=0;start<ordered.length;start+=BUDGET_CARD_BLOCK_SIZE){
+  const chunk=ordered.slice(start,start+BUDGET_CARD_BLOCK_SIZE),block=chunks.length;
+  for(const row of chunk)blocks.set(row.id,block);
+  chunks.push(chunk);
+ }
+ await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v1/${block}.json`),{generationId,items}));
+ const index=buildBudgetCountIndex(generationId,rows,blocks);
+ // Readiness is published last. Missing/incomplete generations keep the original exact search.
+ await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v1.json"),index);
+ return index;
+}
+async function readBudgetSelection(params:CatalogSearchParams){
+ if(!isBudgetCountQuery(params))return null;
+ const manifest=await readManifest();
+ const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null));
+ if(index?.version!==1||index.generationId!==manifest.generationId)return null;
+ const {japanSearchQuotes}=await import("./japan-delivered-preview");
+ const quotes=(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
+ return {generationId:manifest.generationId,rows:matchingBudgetIndex(index,params,quotes)};
+}
+async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
+ if(params.sort&&params.sort!=="updatedAt")return null;
+ const selected=await readBudgetSelection(params);if(!selected)return null;
+ const rows=selected.rows.map(([market,totalRub,,, ,metadata])=>({...metadata,market,totalRub}));
+ sortCatalogSearchRows(rows,params);
+ const page=Math.max(1,Number(params.page||1));
+ const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
+ const visible=rows.slice((page-1)*pageSize,page*pageSize);
+ const blocks=[...new Set(visible.map(row=>row.block))];
+ const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v1/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ if(parts.some(part=>part.generationId!==selected.generationId))return null;
+ const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
+ if(visible.some(row=>!byId.has(row.id)))return null;
+ const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+ const cards=await attachJapanSearchValues(visible.map(row=>byId.get(row.id)!),selected.generationId);
+ return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v1/${block}.json`)};
+}
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:32*1024*1024,ttlMs:300_000,concurrency:1});
+/** Derived immutable index only; generation data and current aliases are untouched. */
+export async function backfillCatalogBudgetCountIndex(){
+ const {generationId,rows}=await currentProjectionRows({});
+ const manifest=await getJsonStorage().readJson<CatalogManifest>("catalog/manifest.json",{} as CatalogManifest);
+ if(manifest.generationId!==generationId)throw Error("catalog_budget_generation_changed");
+ const index=await writeBudgetSearchIndex(generationId,rows);
+ budgetIndexCache.clear();
+ return {generationId,sourceRows:index.sourceRows,rows:index.rows.length,bytes:Buffer.byteLength(JSON.stringify(index))};
+}
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
 /** Exact filter semantics without sorting, materializing or repricing result cards. */
 export async function countCatalogOffers(params: CatalogSearchParams) {
@@ -1728,6 +1794,14 @@ export async function countCatalogOffers(params: CatalogSearchParams) {
     if (!hasPredicates) {
       const summary = await readCatalogBrandCounts(query);
       return {generationId: summary.generationId, total: Object.values(summary.counts).reduce((sum,count)=>sum+count,0)};
+    }
+    if(isBudgetCountQuery(query)){
+      const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null));
+      if(index?.version===1 && index.generationId===manifest.generationId){
+        const {japanSearchQuotes}=await import("./japan-delivered-preview");
+        const quotes=(!query.market||query.market==="any"||query.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
+        return {generationId:manifest.generationId,total:countBudgetIndex(index,query,quotes)};
+      }
     }
     let {generationId, rows} = await currentProjectionRows(query);
     if (query.budgetFrom || query.budgetTo || query.engineFrom || query.engineTo || query.hasPrice) {
@@ -1747,6 +1821,12 @@ export async function searchOffers(params: CatalogSearchParams, internalPageLimi
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
+  const budgetResult=await searchBudgetIndex(params,internalPageLimit);
+  if(budgetResult)return budgetResult;
+  return searchOffersWithoutBudgetIndexForTests(params,internalPageLimit);
+}
+/** Read-only parity check against the existing projection search. */
+export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){
   if ((!params.market || params.market === "any" || params.market === "japan") && (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub"))) {
     const {generationId,rows}=await currentProjectionRows(params);
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");

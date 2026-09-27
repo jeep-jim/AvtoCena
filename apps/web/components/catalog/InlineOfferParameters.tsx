@@ -1,4 +1,5 @@
 "use client";
+import { publicProductionYears } from "../../lib/catalog/public-year-range";
 import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
 import {invalidateSavedCalculationPreviews} from "./useSavedCalculationPreview";
 import { OfferPdfButton } from "./OfferPdfButton";
@@ -179,7 +180,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
  const hybridQuery=draft.fuel==="electric" ? electricResearchQuery(researchContext,draft.year||"") : hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
  const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric" ? "Алиса покажи 30-минутную мощность" : "Алиса покажи тип гибрида и мощность"} compact />;
  const currentYear = new Date().getFullYear();
- const yearOptions = Array.from({length:currentYear-1990+2},(_,i)=>currentYear+1-i);
+ const yearOptions = publicProductionYears();
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
    <PriceTrend panel highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
@@ -233,12 +234,12 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field missing={missingFields.has(key)} label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
  const hybridQuery=draft.fuel==="electric"?electricResearchQuery(researchContext,draft.year||""):hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
  const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric"?"Алиса покажи 30-минутную мощность":"Алиса покажи тип гибрида и мощность"} compact/>;
- const yearOptions=Array.from({length:new Date().getFullYear()-1990+2},(_,i)=>new Date().getFullYear()+1-i);
+ const yearOptions=publicProductionYears();
  return <div className="ac-inline-parameters">
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile missing={missingFields.has("year")} label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>
-     <label>Год<select aria-invalid={missingFields.has("year") || undefined} aria-label="Год выпуска" value={draft.year||""} onChange={e=>change("year",e.target.value)}><option value="">—</option>{draft.year && !yearOptions.includes(Number(draft.year)) ? <option value={draft.year}>{draft.year}</option> : null}{yearOptions.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
+     <label>Год<select aria-invalid={missingFields.has("year") || undefined} aria-label="Год выпуска" value={draft.year||""} onChange={e=>change("year",e.target.value)}><option value="">—</option>{yearOptions.map(year=><option key={year} value={year}>{year}</option>)}</select></label>
      <label>Месяц<select aria-label="Месяц выпуска" value={draft.productionMonth||""} onChange={e=>change("productionMonth",e.target.value)}><option value="">—</option>{Array.from({length:12},(_,i)=><option key={i+1} value={i+1}>{String(i+1).padStart(2,"0")}</option>)}</select></label>
      <label>День<input aria-label="День выпуска (если известен)" type="number" inputMode="numeric" min={1} max={31} step={1} placeholder="—" value={draft.productionDay||""} onChange={e=>change("productionDay",e.target.value)}/></label>
      <CalculationDateControl value={draft.customsCalculationDate||""} onChange={value=>change("customsCalculationDate",value)} />

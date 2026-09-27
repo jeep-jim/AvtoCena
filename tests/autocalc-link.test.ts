@@ -22,7 +22,7 @@ test('do not mix price from multiple vehicle objects',()=>{
 });
 test('manual scenario validates inputs and never trusts totals from client',()=>{
  const base={title:'Toyota Corolla',market:'georgia',price:'15000',currency:'USD',city:'Новокузнецк',draft:{vehicleCategory:'M1',year:'2022',fuel:'petrol',engineCc:'1800',powerHp:'140'}};
- const {offer}=autocalcScenario({...base,totalRub:1});assert.equal(offer.totalRub,undefined);assert.equal(offer.sourcePrice,15000);assert.equal(offer.sourceId,'manual_link');
+ const {offer}=autocalcScenario({...base,totalRub:1});assert.equal(offer.totalRub,undefined);assert.equal(offer.sourcePrice,15000);assert.equal(offer.sourceId,'manual_link');assert.equal(offer.make,'Toyota');assert.equal(offer.model,'Corolla');assert.throws(()=>autocalcScenario({...base,draft:{...base.draft,year:'2009'}}),/2010/);
  for(const change of [{draft:{...base.draft,vehicleCategory:''}},{market:'unknown'},{price:0},{currency:'INVALID'},{city:''},{draft:{...base.draft,powerHp:''}},{draft:{...base.draft,fuel:'hybrid'}}])assert.throws(()=>autocalcScenario({...base,...change}));
 });
 

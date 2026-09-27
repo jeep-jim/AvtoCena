@@ -24,3 +24,10 @@ test('memory compacts duplicates and enforces real stored byte and row limits',(
 test('weighted compact counts preserve totals without expanding offer rows',()=>{
  const r=countCanonicalCatalogModels([{id:'a',make:'Peugeot',model:'2008'}],[{make:'Peugeot',model:'2008',count:174}]);assert.equal(r.counts.Peugeot,174);assert.equal(r.canonicalModelCounts.Peugeot,1);
 });
+
+test('model-only and Cyrillic Vito resolve the specific model instead of a generic brand reference',()=>{
+ const models=[{id:'generic',make:'Mercedes-Benz',model:'Mercedes'},{id:'vito',make:'Mercedes-Benz',model:'Vito'},{id:'sprinter',make:'Mercedes-Benz',model:'Sprinter'}];
+ for(const query of ['Vito','Вито','Mercedes Vito','Mercedes-Benz Vito'])assert.deepEqual(matchingKnowledgeModels(models,query).map(m=>m.id),['vito']);
+ assert.deepEqual(matchingKnowledgeModels(models,'Vito','Mercedes-Benz').map(m=>m.id),['vito']);
+ assert.equal(knowledgeDraft({year:2009}).year,undefined);
+});

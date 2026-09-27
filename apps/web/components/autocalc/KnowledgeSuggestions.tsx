@@ -2,13 +2,13 @@
 import {useEffect,useState} from 'react';
 import type {KnowledgeChoice,KnowledgeMatches} from '../../lib/autocalc/knowledge';
 import {AUTOCALC_MARKETS} from '../../lib/autocalc/sources';
-export function KnowledgeSuggestions({title,year,market,disabled,onChoose,onPreview}:{title:string;year?:string;market:string;disabled:boolean;onChoose:(choice:KnowledgeChoice)=>void;onPreview:(image?:string,label?:string)=>void}){
+export function KnowledgeSuggestions({title,make,year,market,disabled,onChoose,onPreview}:{title:string;make?:string;year?:string;market:string;disabled:boolean;onChoose:(choice:KnowledgeChoice)=>void;onPreview:(image?:string,label?:string)=>void}){
  const [data,setData]=useState<KnowledgeMatches|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
- useEffect(()=>{setData(null);setError('');onPreview();if(disabled||title.trim().length<3){setBusy(false);return;}const controller=new AbortController();const timer=setTimeout(async()=>{
-  setBusy(true);try{const params=new URLSearchParams({q:title.trim(),...(year?{year}:{}),...(market?{market}:{})});const response=await fetch(`/api/autocalc/knowledge?${params}`,{signal:controller.signal});const next=await response.json();if(!response.ok)throw Error(next.error);if(controller.signal.aborted)return;setData(next);onPreview(next.image,next.imageLabel);}
+ useEffect(()=>{setData(null);setError('');onPreview();if(disabled||title.trim().length<2){setBusy(false);return;}const controller=new AbortController();const timer=setTimeout(async()=>{
+  setBusy(true);try{const params=new URLSearchParams({q:title.trim(),...(make?{make}:{}),...(year?{year}:{}),...(market?{market}:{})});const response=await fetch(`/api/autocalc/knowledge?${params}`,{signal:controller.signal});const next=await response.json();if(!response.ok)throw Error(next.error);if(controller.signal.aborted)return;setData(next);onPreview(next.image,next.imageLabel);}
   catch(e){if(!controller.signal.aborted)setError(e instanceof Error?e.message:'Не удалось получить подсказки');}finally{if(!controller.signal.aborted)setBusy(false);}
- },800);return()=>{clearTimeout(timer);controller.abort();};},[title,year,market,disabled]);
- if(!title.trim()||title.trim().length<3)return null;
+ },800);return()=>{clearTimeout(timer);controller.abort();};},[title,make,year,market,disabled]);
+ if(!title.trim()||title.trim().length<2)return null;
  return <section className="mb-5 rounded-2xl bg-[var(--ac-surface-2)] p-4" aria-label="Подсказки из базы знаний">
  <p className="text-sm font-bold">Из базы знаний АвтоЦены</p>
  {busy?<p role="status" className="mt-2 text-xs text-[var(--ac-muted)]">Ищем модель и подходящие варианты…</p>:null}
