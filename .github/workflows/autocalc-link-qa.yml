@@ -18,7 +18,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --import tsx scripts/build-knowledge-read-model.mjs
-      - run: node --import tsx --test tests/autocalc-link.test.ts tests/autocalc-route.test.ts tests/autocalc-enrichment.test.ts tests/autocalc-knowledge.test.ts
+      - run: node --import tsx --test tests/autocalc-link.test.ts tests/autocalc-route.test.ts tests/autocalc-enrichment.test.ts tests/autocalc-knowledge.test.ts tests/autocatalog-ui.test.ts tests/catalog-filter-search.test.ts
       - run: npm install --no-save playwright esbuild
       - run: npx playwright install --with-deps chromium
       - run: node tests/browser/autocalc-preview.mjs
