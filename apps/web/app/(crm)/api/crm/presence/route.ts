@@ -12,6 +12,6 @@ export async function POST(request:Request){
 export async function GET(){
  const actor=await getCurrentUser();if(!actor||!isCrmRole(actor.role))return json({error:'auth_required'},401);
  const users=(await readCrmUsers()).filter(u=>u.status!=='disabled'&&isCrmRole(u.role)&&(!actor.companyId||u.companyId===actor.companyId));
- const team=await Promise.all(users.map(async u=>{const presence=await readStaffPresence(u.id);return {id:u.id,displayName:u.displayName,avatarUrl:u.avatarUrl,lastLoginAt:u.lastLoginAt,lastSeenAt:presence.lastSeenAt,online:staffIsOnline(presence.lastSeenAt)};}));
+ const team=await Promise.all(users.map(async u=>{const presence=await readStaffPresence(u.id);return {id:u.id,displayName:u.displayName,avatarUrl:u.avatarUrl,personalPhone:u.personalPhone,lastLoginAt:u.lastLoginAt,lastSeenAt:presence.lastSeenAt,online:staffIsOnline(presence.lastSeenAt)};}));
  return json({team});
 }
