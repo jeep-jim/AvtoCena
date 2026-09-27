@@ -1,11 +1,13 @@
 import { countCanonicalCatalogModels } from "./canonical-model-counts";
 import { DetailReadCache } from "./detail-read-cache";
-import { cache } from "react";
+import { cache as reactCache } from "react";
+// CLI compilation/tests use React 18; Next supplies cache in server components.
+const cache: typeof reactCache = typeof reactCache === "function" ? reactCache : (fn => fn);
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
-import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
+import { readEncyclopediaKnowledgeModels } from "./encyclopedia";
 import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
-import { readVehiclePowerKnowledge } from "./power-knowledge";
-import { readCatalogBrandModelCounts, readCurrentPublicCatalogProjection } from "./storage";
+import { readCompiledKnowledgeSummary } from "./knowledge-read-model";
+import { readCatalogBrandModelCounts, readCatalogDirectoryCountRows } from "./storage";
 import {
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
@@ -98,7 +100,7 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
   return slugify(idTail || model.model);
 }
 
-const readDirectoryModels = cache(async () => {
+export const readDirectoryModels = cache(async () => {
   const [canonicalModels, sourceModels] = await Promise.all([
     readEncyclopediaKnowledgeModels(),
     readSourceBackedEncyclopediaModels(),
@@ -127,20 +129,13 @@ const readDirectoryModels = cache(async () => {
   return [...byIdentity.values()] as CatalogModelDirectoryItem[];
 });
 
-const readKnowledge = cache(async () => {
-  const [models, variants, references] = await Promise.all([
-    readDirectoryModels(), readEncyclopediaKnowledgeVariants(), readVehiclePowerKnowledge(),
-  ]);
-  return {models, variants, references};
-});
-
 const autocatalogCounts = new DetailReadCache<ReturnType<typeof countCanonicalCatalogModels>>({maxEntries:1,maxBytes:1024*1024,ttlMs:60_000,concurrency:1});
 export const readAutocatalogCounts = cache(async () => autocatalogCounts.get("counts", async () => {
-  const [models, projection] = await Promise.all([readDirectoryModels(), readCurrentPublicCatalogProjection()]);
-  return countCanonicalCatalogModels(models, projection.rows);
+  const [models, rows] = await Promise.all([readDirectoryModels(), readCatalogDirectoryCountRows()]);
+  return countCanonicalCatalogModels(models, rows);
 }));
 
-function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
+export function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
   const trustedVariants = variants.filter(trustedVariant);
   const trustedRows = [...trustedVariants, ...references];
   const hp = trustedRows.map((row) => row.powerHp);
@@ -163,21 +158,8 @@ function summarizeModel(model: VehicleKnowledgeModel, variants: any[], reference
 
 export const readBrandModelDirectory = cache(async (rawMake: string): Promise<CatalogModelDirectoryItem[]> => {
   const make = canonicalCatalogBrand(rawMake);
-  const [{ models: knowledge, variants, references }, live] = await Promise.all([readKnowledge(), readCatalogBrandModelCounts(make)]);
+  const [knowledge, live, summaries] = await Promise.all([readDirectoryModels(), readCatalogBrandModelCounts(make), readCompiledKnowledgeSummary()]);
   const models = knowledge.filter((model) => model.active !== false && canonicalCatalogBrand(model.make) === make);
-  const variantsByModel = new Map<string, any[]>();
-  for (const row of variants.filter((item) => item.active !== false)) {
-    const list = variantsByModel.get(row.modelId) || [];
-    list.push(row);
-    variantsByModel.set(row.modelId, list);
-  }
-  const referencesByModel = new Map<string, any[]>();
-  for (const row of references.filter((item) => item.active !== false && canonicalCatalogBrand(item.make) === make)) {
-    const key = modelKey(make, row.model);
-    const list = referencesByModel.get(key) || [];
-    list.push(row);
-    referencesByModel.set(key, list);
-  }
   const modelByAlias = new Map<string, VehicleKnowledgeModel | null>();
   for (const model of models) {
     for (const value of [model.model, ...(model.aliases || [])]) {
@@ -197,15 +179,13 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
 
   const directoryModels = models.map((model) => {
     const count = counters.get(model.id) || { count: 0, marketCounts: {} };
-    const modelVariants = variantsByModel.get(model.id) || [];
-    const modelReferences = referencesByModel.get(modelKey(make, model.model)) || [];
     return {
       ...model,
       make,
       slug: catalogModelSlug(model),
       count: count.count,
       marketCounts: count.marketCounts,
-      knowledge: summarizeModel(model, modelVariants, modelReferences),
+      knowledge: summaries[model.id] || summarizeModel(model, [], []),
     } as CatalogModelDirectoryItem;
   });
 

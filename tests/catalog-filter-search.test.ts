@@ -70,22 +70,27 @@ test("all catalog filters use the projection when optional categorical shards ar
     const storage = getJsonStorage() as any;
     const originalRead = storage.readJsonWithMeta.bind(storage);
     let projectionReads = 0;
+    let brandProjectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
       if (relativePath === "catalog/public/projection/korea.json") projectionReads++;
+      if (relativePath.startsWith("catalog/public/projection-brand/hyundai-")) brandProjectionReads++;
       return originalRead(relativePath, fallback);
     };
     try {
       await Promise.all([searchOffers(filters), readCatalogFacets(filters)]);
-      assert.equal(projectionReads, 1, "parallel result and facets must share one current projection read");
+      assert.equal(projectionReads, 0, "a selected make must not download the whole market");
+      assert.equal(brandProjectionReads, 1, "parallel results and facets share one compact brand read");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
 
     resetCatalogReadCachesForTests();
     let allProjectionReads = 0;
+    brandProjectionReads = 0;
     let manifestReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
       if (relativePath === "catalog/public/projection/all.json") allProjectionReads++;
+      if (relativePath.startsWith("catalog/public/projection-brand/hyundai-")) brandProjectionReads++;
       if (relativePath === "catalog/manifest.json") manifestReads++;
       return originalRead(relativePath, fallback);
     };
@@ -94,7 +99,8 @@ test("all catalog filters use the projection when optional categorical shards ar
       const [globalResults, globalFacets] = await Promise.all([searchOffers(globalFilters), readCatalogFacets(globalFilters)]);
       assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
       assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
-      assert.equal(allProjectionReads, 1, "global results and filtered facets must share one all-market projection read");
+      assert.equal(allProjectionReads, 0, "a selected make must not download all markets");
+      assert.equal(brandProjectionReads, 1, "global results and facets share one compact brand read");
       assert.equal(manifestReads, 1, "the current all-market projection must validate the active manifest generation once");
     } finally {
       storage.readJsonWithMeta = originalRead;

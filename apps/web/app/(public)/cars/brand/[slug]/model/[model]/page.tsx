@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {readCompiledKnowledgeVariants} from "@/lib/catalog/knowledge-read-model";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -53,7 +54,8 @@ export default async function ModelLandingPage({ params }: PageProps) {
     readCatalogFacets(),
   ]);
   if (!model) notFound();
-  const publishedCover = await findAutocatalogPublishedCover(model.id);
+  const [publishedCover, knowledgeRows] = await Promise.all([findAutocatalogPublishedCover(model.id),readCompiledKnowledgeVariants(brand.name)]);
+  const knownVariants=knowledgeRows.filter(row=>row.modelId===model.id&&row.status==="reference").slice(0,12);
 
   const rawMakes = [...new Set([
     brand.name,
@@ -108,6 +110,13 @@ export default async function ModelLandingPage({ params }: PageProps) {
           <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</button>
         </div>
       </header>
+
+      <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
+        <h2 className="text-2xl font-black">Характеристики из базы знаний</h2>
+        <p className="mt-2 text-sm text-[var(--ac-muted)]">{knownVariants.length?'У модели несколько исполнений. Сверьте год, двигатель и комплектацию перед расчётом.':'Подтверждённых модификаций для этой модели пока недостаточно. В АвтоРасчёте можно посмотреть аналоги из каталога.'}</p>
+        {!!knownVariants.length&&<div className="mt-4 grid gap-3 md:grid-cols-2">{knownVariants.map(row=><div key={row.id} className="rounded-xl bg-[var(--ac-surface-2)] p-3 text-sm"><p className="font-bold">{row.name||row.model}</p><p className="mt-1">{[row.yearFrom&&`${row.yearFrom}${row.yearTo?`–${row.yearTo}`:'+'} г.`,row.engineCc&&`${row.engineCc} см³`,row.powerHp&&`${row.powerHp} л.с.`,({petrol:'Бензин',diesel:'Дизель',hybrid:'Гибрид',electric:'Электро'} as Record<string,string>)[row.fuel||'']].filter(Boolean).join(' · ')}</p>{row.sourceUrl?<a href={row.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block underline">Источник ↗</a>:null}</div>)}</div>}
+        <Link href={`/autocalc?title=${encodeURIComponent(`${brand.name} ${model.model}`)}`} className="avto-button mt-4 inline-flex min-h-12 items-center rounded-xl px-5 font-bold">Открыть в АвтоРасчёте</Link>
+      </section>
 
       {grouped.length ? <div className="mt-10 space-y-12">
         {grouped.map((group) => <section key={group.market}>

@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import {readEncyclopediaIdentityDataset} from "./encyclopedia-identity-data";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";
@@ -441,8 +442,9 @@ export async function readEncyclopediaKnowledgeModels() {
     encyclopediaModelCache = Promise.all([
       readVehicleKnowledgeModels(),
       readVerifiedEncyclopediaCorpus(),
-      readStagingEncyclopediaCorpus(),
-    ]).then(([runtime, verifiedCorpus, stagingCorpus]) => {
+      readEncyclopediaIdentityDataset(),
+    ]).then(([runtime, verifiedCorpus, identity]) => {
+      const stagingCorpus = {brands: identity?.brands || [], models: (identity?.models || []) as StagingModel[], manifest: (identity?.manifest || {}) as StagingManifest};
       const stagingBrands = new Map(stagingCorpus.brands.map((brand) => [brand.id, brand.canonicalName]));
       const stagingModels: EncyclopediaKnowledgeModel[] = stagingCorpus.models.map((model) => {
         const evidence = evidenceSummary(model.evidence);

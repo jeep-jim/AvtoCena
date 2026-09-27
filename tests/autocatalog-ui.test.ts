@@ -73,7 +73,10 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
   assert.match(modelDirectory, /model\.previewUrl/);
   assert.match(brandPage, /\(published \? autocatalogCoverUrl\(published\) : undefined\) \|\| previewByModel/);
   assert.doesNotMatch(modelDirectory, /Характеристики дополняются|specRanges|representativePowerHp/);
-  assert.doesNotMatch(modelPage, /Технические характеристики|Характеристики [^{]*\{/);
+  assert.doesNotMatch(modelPage, /specRanges|representativePowerHp/);
+  assert.match(modelPage, /Характеристики из базы знаний/);
+  assert.match(modelPage, /row\.status==="reference"/);
+  assert.match(modelPage, /Сверьте год, двигатель и комплектацию/);
   assert.doesNotMatch(modelLayout, /readVehicleKnowledgeVariants|Описание и характеристики|Мощность|Тип топлива|Привод/);
 });
 

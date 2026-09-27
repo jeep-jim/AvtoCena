@@ -134,7 +134,13 @@ jobs:
           fetch_complete 'https://avtocena.com/cars/brand/bentley' > /dev/null
           fetch_complete 'https://avtocena.com/cars/brand/bentley/model/continental-gt' > /dev/null
 
-          echo '3/9 OpenAI crawler rules'
+          echo '2c/9 Peugeot model and AutoCalc knowledge'
+          fetch_complete 'https://avtocena.com/cars/brand/peugeot' > /dev/null
+          fetch_complete 'https://avtocena.com/cars/brand/peugeot/model/2008' > /dev/null
+          knowledge_json="$(fetch_complete 'https://avtocena.com/api/autocalc/knowledge?q=Peugeot%202008&year=2023')"
+          jq -e '.models | length > 0' <<<"$knowledge_json" > /dev/null
+
+          echo '3/9 OpenAI crawler rules' 
           robots="$(fetch_complete 'https://avtocena.com/robots.txt')"
           grep -qi '^User-agent: OAI-SearchBot$' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/sitemap.xml' <<<"$robots"
