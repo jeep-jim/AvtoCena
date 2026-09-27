@@ -1,0 +1,32 @@
+name: Diagnose catalog runtime errors
+on:
+  push:
+    branches: [fix/catalog-runtime]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install existing Yandex CLI
+        run: |
+          curl -fsSL --max-time 60 https://storage.yandexcloud.net/yandexcloud-yc/install.sh -o "$RUNNER_TEMP/yc-install.sh"
+          bash "$RUNNER_TEMP/yc-install.sh" -i "$RUNNER_TEMP/yc" -n
+          echo "YC_BIN=$RUNNER_TEMP/yc/bin/yc" >> "$GITHUB_ENV"
+      - name: Read bounded runtime diagnostics
+        env:
+          YC_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: |
+          node -e 'require("fs").writeFileSync(process.env.RUNNER_TEMP+"/runtime-yc-key.json",process.env.YC_CREDENTIALS,{mode:0o600})'
+          "$YC_BIN" config profile create runtime-diagnostics
+          "$YC_BIN" config set service-account-key "$RUNNER_TEMP/runtime-yc-key.json"
+          "$YC_BIN" config set folder-id b1g9vq73onqb7dp5hgqg
+          container_id="$("$YC_BIN" serverless container get avtocena-web --format json | jq -r '.id')"
+          "$YC_BIN" logging read --group-name default --resource-ids "$container_id" --since 45m --limit 1000 --format json > "$RUNNER_TEMP/runtime-log.json"
+          jq '[.[] | select(.message | test("heap|memory|EOF|Error|timeout|REPORT|FATAL|exceeded|terminated|exit";"i")) | {timestamp,level,message:(.message|.[0:1600])}]' "$RUNNER_TEMP/runtime-log.json"
+      - name: Remove temporary files
+        if: always()
+        run: rm -f "$RUNNER_TEMP/runtime-yc-key.json" "$RUNNER_TEMP/runtime-log.json"
