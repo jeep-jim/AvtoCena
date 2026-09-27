@@ -1,0 +1,42 @@
+name: Diagnose catalog runtime errors
+on:
+  push:
+    branches: [fix/catalog-runtime]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      IMAGE: catalog-runtime:${{ github.sha }}
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-directory-memory.test.ts tests/catalog-filter-search.test.ts tests/catalog-brand-summary-read-model.test.ts
+      - name: Append compact indexes to the active immutable generation
+        run: node --import tsx scripts/backfill-catalog-generation-directories.mjs
+      - run: node --import tsx scripts/diagnose-directory-generation.mjs
+      - name: Cold production image with the same CPU and memory limits
+        run: |
+          docker build -t "$IMAGE" .
+          docker run -d --name catalog-cold -v "$PWD/scripts/runtime-read-trace.cjs:/app/runtime-read-trace.cjs:ro" -e NODE_OPTIONS=--require=/app/runtime-read-trace.cjs --cpus=1 --memory=2g -p 127.0.0.1:3100:3000 -e HOSTNAME=0.0.0.0 -e JSON_STORAGE_DRIVER -e YC_OBJECT_STORAGE_ENDPOINT -e YC_OBJECT_STORAGE_REGION -e YC_OBJECT_STORAGE_BUCKET -e YC_OBJECT_STORAGE_ACCESS_KEY_ID -e YC_OBJECT_STORAGE_SECRET_ACCESS_KEY -e YC_OBJECT_STORAGE_PREFIX "$IMAGE"
+          node scripts/diagnose-catalog-cold.mjs
+      - name: Bounded application and container diagnostics
+        if: always()
+        run: |
+          docker inspect catalog-cold --format '{{json .State}}'
+          docker stats catalog-cold --no-stream --format '{{json .}}'
+          docker logs --tail 300 catalog-cold
+      - name: Remove test container
+        if: always()
+        run: docker rm -f catalog-cold

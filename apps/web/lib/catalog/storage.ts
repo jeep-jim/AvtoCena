@@ -315,6 +315,7 @@ export function catalogMakeFilterValues(value: unknown) {
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }
 function catalogBrandReadModelKey(value: unknown) { return cleanFacet(value).toLocaleLowerCase("ru-RU"); }
+function generationBrandProjectionPath(generationId: string, make: string) { return generationPath(generationId, `indexes/projection-brand/${currentBrandProjectionPath(make).split("/").at(-1)}`); }
 function currentBrandProjectionPath(make: string) {
   const normalized = catalogBrandReadModelKey(make);
   const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
@@ -535,7 +536,7 @@ const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; 
   maxEntries: 8, maxBytes: 32 * 1024 * 1024, ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 2,
 });
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
-let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
+let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
   maxEntries: 8, maxBytes: 32 * 1024 * 1024,
   ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
@@ -565,7 +566,8 @@ export function resetCatalogReadCachesForTests() {
 async function readCurrentSearchProjection(market: string) {
   // A small manifest check invalidates a large projection at publication cutover.
   // Otherwise retain the immutable rows instead of downloading them every minute.
-  const {generationId} = await readManifest();
+  const manifest = await readManifest();
+  const {generationId} = manifest;
   const key = cleanShard(market);
   const now = Date.now();
   for (const [id, entry] of currentProjectionCache) {
@@ -585,8 +587,13 @@ async function readCurrentSearchProjection(market: string) {
   }
   const current = currentProjectionCache.get(key);
   if (current) return current.promise;
-  const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentProjectionPath(market), { generationId: "", items: [] })
-    .then(value => {
+  const promise = (async () => {
+    // Facets are staged before large aliases. Avoid downloading another generation
+    // only to discard it and download every active market as well.
+    const facets = await readCurrentFacets();
+    if (facets.generationId && facets.generationId !== generationId) return {generationId,items:await readProjectionRows(manifest,market===CURRENT_ALL_MARKETS_PROJECTION?{}:{market})};
+    return readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(currentProjectionPath(market),{generationId:"",items:[]});
+  })().then(value => {
       const entry = currentProjectionCache.get(key);
       if (entry?.promise === promise) {
         entry.expiresAt = Date.now() + CURRENT_PROJECTION_CACHE_MS;
@@ -613,8 +620,14 @@ async function readCurrentSearchProjection(market: string) {
 }
 async function readCurrentBrandProjection(make: string, generationId: string) {
   const key = currentBrandProjectionPath(make);
-  return currentBrandProjectionCache.get(`${generationId}:${key}`, () =>
-    readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(key, { generationId: "", items: [] }));
+  return currentBrandProjectionCache.get(`${generationId}:${key}`, async () => {
+    const current = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(key, {generationId:"",items:[]});
+    if (current.generationId === generationId) return current;
+    const stored = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(generationBrandProjectionPath(generationId,make), {generationId:"",items:[]});
+    if (stored.generationId === generationId) return stored;
+    const summary = await readCurrentBrandSummary();
+    return summary.generationId === generationId && !summary.brands[catalogBrandReadModelKey(make)] ? {generationId,items:[]} : stored;
+  });
 }
 // Discovery readers share the same full snapshot as catalog searches. They
 // validate generation themselves and retain only their small output fields.
@@ -630,11 +643,14 @@ async function readCurrentFacets() {
   return promise;
 }
 async function readCurrentBrandSummary() {
+  const {generationId} = await readManifest();
   const now = Date.now();
-  if (currentBrandSummaryCache && currentBrandSummaryCache.expiresAt > now) return currentBrandSummaryCache.promise;
-  const promise = readDataJson<CatalogBrandSummary>(CURRENT_BRAND_SUMMARY_PATH, { generationId: "", brands: {} })
-    .catch((error) => { currentBrandSummaryCache = null; throw error; });
-  currentBrandSummaryCache = { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise };
+  if (currentBrandSummaryCache?.generationId === generationId && currentBrandSummaryCache.expiresAt > now) return currentBrandSummaryCache.promise;
+  const promise = (async () => {
+    const current = await readDataJson<CatalogBrandSummary>(CURRENT_BRAND_SUMMARY_PATH, {generationId:"",brands:{}});
+    return current.generationId === generationId ? current : readIndex<CatalogBrandSummary>(generationId,"brand-summary.json",{generationId:"",brands:{}});
+  })().catch(error => {currentBrandSummaryCache=null;throw error;});
+  currentBrandSummaryCache = {generationId, expiresAt:now+CURRENT_READ_MODEL_CACHE_MS,promise};
   return promise;
 }
 async function readDetailShardObject(key: string, file: string) {
@@ -834,6 +850,21 @@ export async function readPublicCatalogMarketCounts() {
 
 export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   const filters: CatalogSearchParams = { ...params, make: undefined };
+  const hasPredicates = Boolean(filters.model || filters.hasPrice || filters.budgetFrom || filters.budgetTo
+    || filters.yearFrom || filters.yearTo || filters.mileageFrom || filters.mileageTo || filters.engineFrom || filters.engineTo
+    || filters.powerFrom || filters.powerTo || filters.fuel || filters.transmission || filters.drive || filters.bodyType
+    || filters.auctionGrade || filters.auctionDateFrom || filters.auctionDateTo);
+  if (!hasPredicates) {
+    const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
+    if (summary.generationId === manifest.generationId) {
+      const market = filters.market && filters.market !== "any" ? filters.market : undefined;
+      const brands = Object.values(summary.brands).map(brand => ({
+        make: brand.make, count: market ? Number(brand.marketCounts[market] || 0) : brand.count,
+        models: brand.models.filter(model => !market || Number(model.marketCounts[market] || 0) > 0).length,
+      })).filter(brand => brand.count > 0);
+      return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
+    }
+  }
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
@@ -864,6 +895,8 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
 
 export async function readCatalogBrandModelCounts(make: string) {
   const filters: CatalogSearchParams = { make };
+  const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
+  if (summary.generationId === manifest.generationId) return {generationId: manifest.generationId, models: summary.brands[catalogBrandReadModelKey(make)]?.models || []};
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
@@ -1046,6 +1079,12 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
+  if (!hasFilters && (!params.market || params.market === "any")) {
+    const [manifest, facets] = await Promise.all([readManifest(), readCurrentFacets()]);
+    if (facets.generationId === manifest.generationId) return facets;
+    const stored = await readIndex<CatalogFacets | null>(manifest.generationId, "facets.json", null);
+    if (stored?.generationId === manifest.generationId) return stored;
+  }
   const { generationId, rows } = await currentProjectionRows(params);
   return facetsFromProjection(generationId, rows, params, hasFilters);
 }
@@ -1480,6 +1519,29 @@ export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleO
   return canonicalizePublicCatalogOffers([...protectedPublicOffers, ...normalized], new Set<CatalogMarket>(), protectedIds, retainedPowerMixIds, minimumCountByMarket);
 }
 
+async function writeGenerationDirectoryIndexes(generationId:string,rows:CatalogSearchProjection[]) {
+  const brands=new Map<string,CatalogSearchProjection[]>();
+  for(const row of rows){const make=catalogBrandReadModelKey(row.make);if(!make)continue;const items=brands.get(make)||[];items.push(row);brands.set(make,items);}
+  await mapWithConcurrency([...brands],catalogMaintenanceIoConcurrency(),([make,items])=>writeJsonAtomic(generationBrandProjectionPath(generationId,make),{generationId,items}));
+  const summary=buildCatalogBrandSummary(generationId,rows);
+  // Publish the small readiness record only after all immutable brand shards exist.
+  await writeJsonAtomic(generationPath(generationId,"indexes/brand-summary.json"),summary);
+  return {brands:brands.size,rows:rows.length};
+}
+/** Append derived indexes to the active immutable generation; never touch aliases, offers or the publication lock. */
+export async function backfillCatalogGenerationDirectories() {
+  const manifest=await getJsonStorage().readJson<CatalogManifest>("catalog/manifest.json",{generationId:"",markets:{}} as CatalogManifest);
+  if(!manifest.generationId)throw Error("catalog_directory_no_generation");
+  const rows:CatalogSearchProjection[]=[];
+  for(const market of MARKETS){const count=Number(manifest.markets[market]?.count||0);if(!count)continue;
+    const part=await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(generationPath(manifest.generationId,`indexes/projection/${cleanShard(market)}.json`),{generationId:"",items:[]});
+    if(part.generationId!==manifest.generationId||part.items.length!==count)throw Error(`catalog_directory_projection_incomplete:${market}`);
+    for(const row of part.items)rows.push(row);
+  }
+  const result=await writeGenerationDirectoryIndexes(manifest.generationId,rows);
+  return {generationId:manifest.generationId,...result};
+}
+
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {
   const exactMarkets = alreadyCanonical ? new Set<CatalogMarket>(storedOffers.map((offer) => offer.market).filter(Boolean)) : undefined;
   const protectedIds = alreadyCanonical ? new Set(storedOffers.map((offer) => String(offer.id || "")).filter(Boolean)) : undefined;
@@ -1516,14 +1578,15 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     if (market) {
       const row = searchProjectionFromOffer(offer);
       allProjectionItems.push(row);
-      projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
+      const marketRows=projectionsByMarket.get(market)||[];marketRows.push(row);projectionsByMarket.set(market,marketRows);
       const make = cleanFacet(row.make);
       const brandKey = catalogBrandReadModelKey(make);
-      if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);
+      if (brandKey) {const brandRows=projectionsByBrand.get(brandKey)||[];brandRows.push(row);projectionsByBrand.set(brandKey,brandRows);}
     }
 
   }
 
+  await writeGenerationDirectoryIndexes(generationId,allProjectionItems);
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
   const brandSummary = buildCatalogBrandSummary(generationId, allProjectionItems);

@@ -13,6 +13,7 @@ function fixture(t:any,landing:any) {
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
   reads.push(file);
   if(file==='catalog/manifest.json')return {found:true,value:{generationId:'test',markets:{korea:{count:rows.length}}}};
+  if(file==='catalog/public/facets.json')return {found:false,value:{generationId:''}};
   if(file===catalogMarketLandingPath('test','korea'))return {found:!!landing,value:landing};
   if(file.includes('/projection/'))return {found:true,value:{generationId:'test',items:rows}};
   throw Error(`Unexpected read ${file}`);

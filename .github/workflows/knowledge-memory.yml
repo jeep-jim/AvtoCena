@@ -35,4 +35,5 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node --import tsx scripts/backfill-catalog-generation-directories.mjs
       - run: node --import tsx scripts/remember-catalog-knowledge.mjs
