@@ -323,3 +323,17 @@ html[data-theme] .crm-root .crm-permission input[role="switch"]{box-sizing:borde
 html[data-theme] .crm-root .crm-permission input[role="switch"]:checked{background:#d52235!important;border-color:#b91c2c!important}
 html[data-theme] .crm-root .crm-permission input[role="switch"]::after{top:2px;left:2px;background:#fff!important;box-shadow:0 1px 3px #0003}
 html[data-theme] .crm-root .crm-permission input[role="switch"]:disabled{opacity:.8}
+
+/* Compact team portraits, expanded contact list. */
+.crm-presence-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;border-radius:50%;color:var(--ac-text);background:transparent}
+.crm-presence-toggle:hover,.crm-presence-call:hover{background:var(--ac-surface-2)}
+.crm-presence-toggle svg{transition:transform .2s}
+.crm-presence-rail{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;padding:14px 2px 4px;-webkit-overflow-scrolling:touch}
+.crm-presence-person{display:flex;flex:0 0 76px;min-width:0;flex-direction:column;align-items:center;gap:7px;text-align:center;color:var(--ac-text)}
+.crm-presence-avatar{position:relative;display:block;width:64px;height:64px;border:2px solid var(--ac-text);border-radius:50%;padding:2px}
+.crm-presence-avatar img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.crm-presence-online{position:absolute;right:-2px;top:0;width:14px;height:14px;border:2px solid var(--ac-surface);border-radius:50%;background:#10b981}
+.crm-presence-name{display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;line-height:16px}
+.crm-presence-call{display:flex;flex:0 0 40px;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;color:var(--ac-text)}
+.crm-presence-call:disabled{opacity:.3;cursor:default}
+.crm-presence a:focus-visible,.crm-presence button:focus-visible{outline:2px solid var(--ac-text);outline-offset:3px}
