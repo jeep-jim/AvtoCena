@@ -549,6 +549,7 @@ const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALO
 export function resetCatalogReadCachesForTests() {
   marketLandingCache.clear();
   filteredSearchCache.clear();
+  catalogCountCache.clear();
   preparedProjectionRows = new WeakMap();
   resetCatalogOverviewCache();
   manifestCache = null;
@@ -706,7 +707,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     const literalMatch = matchesCatalogModel(row.model, params.model);
     if (!canonicalMatch && !literalMatch) return false;
   }
-  const priced = params.city ? priceCardForCity(row,params.city).offer : row;
+  const priced = params.city && (params.budgetFrom || params.budgetTo || params.hasPrice) ? priceCardForCity(row,params.city).offer : row;
   const filterPrice = hasModificationSelection(row) ? 0 : Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || 0);
   if ((params.budgetFrom || params.budgetTo) && !(filterPrice > 0)) return false;
   if (params.hasPrice) { const value = filterPrice > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
@@ -1714,6 +1715,30 @@ export async function getOffer(id: string) {
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
   return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
+}
+const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
+/** Exact filter semantics without sorting, materializing or repricing result cards. */
+export async function countCatalogOffers(params: CatalogSearchParams) {
+  const {page: _page, pageSize: _pageSize, sort: _sort, city, ...filters} = params;
+  const query = {...filters, city: filters.budgetFrom || filters.budgetTo || filters.hasPrice ? city : undefined};
+  const manifest = await readManifest();
+  const key = JSON.stringify([manifest.generationId, Object.entries(query).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+  return catalogCountCache.get(key, async () => {
+    const hasPredicates = Object.entries(filters).some(([name,value]) => name !== "market" && value !== undefined && value !== "");
+    if (!hasPredicates) {
+      const summary = await readCatalogBrandCounts(query);
+      return {generationId: summary.generationId, total: Object.values(summary.counts).reduce((sum,count)=>sum+count,0)};
+    }
+    let {generationId, rows} = await currentProjectionRows(query);
+    if (query.budgetFrom || query.budgetTo || query.engineFrom || query.engineTo || query.hasPrice) {
+      const {attachJapanSearchValues} = await import("./japan-delivered-preview");
+      rows = await attachJapanSearchValues(rows, generationId);
+    }
+    const modelKeys = await projectionModelKeys(query);
+    let total = 0;
+    for (const row of rows) if (catalogSearchProjectionMatches(row, query, modelKeys)) total++;
+    return {generationId, total};
+  });
 }
 const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:8});
 export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48) {

@@ -76,6 +76,15 @@ export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncSto
   const tap=useTapActivation();const [open,setOpen]=useState(false);const [mounted,setMounted]=useState(false);const trigger=useRef<HTMLButtonElement>(null);
   useEffect(()=>{setMounted(true);if(syncStored){const stored=readSelectedCity();if(stored!==value)(onStoredChange||onChange)(stored);}},[]);
   useEffect(()=>{if(!syncStored)return;const sync=()=>(onStoredChange||onChange)(readSelectedCity());window.addEventListener(CITY_CHANGED_EVENT,sync);return()=>window.removeEventListener(CITY_CHANGED_EVENT,sync);},[onChange,onStoredChange,syncStored]);
+  const keyboard = useRef(false);
+  const [keyboardFocus, setKeyboardFocus] = useState(false);
+  useEffect(() => {
+    const key = () => { keyboard.current = true; };
+    const pointer = () => { keyboard.current = false; setKeyboardFocus(false); };
+    window.addEventListener("keydown", key, true);
+    window.addEventListener("pointerdown", pointer, true);
+    return () => { window.removeEventListener("keydown", key, true); window.removeEventListener("pointerdown", pointer, true); };
+  }, []);
   const label=value||"Ваш город";
-  return <><span className={triggerLabel?"inline-flex":"ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex"}><button ref={trigger} type="button" {...tap} disabled={!mounted} onClick={()=>setOpen(true)} className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]" aria-label={`Выбрать город. Сейчас: ${label}`}><LocationIcon className="h-[.78em] w-[.78em] shrink-0 text-[#ff353d]"/><span className="truncate">{triggerLabel||label}</span></button></span>{mounted&&open?<CityPickerDialog onChange={onChange} onClose={()=>{setOpen(false);trigger.current?.focus({preventScroll:true});}}/>:null}</>;
+  return <><span className={triggerLabel?"inline-flex":"ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex"}><button ref={trigger} type="button" {...tap} onFocus={()=>setKeyboardFocus(keyboard.current)} onBlur={()=>setKeyboardFocus(false)} style={{outline:keyboardFocus ? "2px solid var(--ac-muted)" : "none",outlineOffset:4}} disabled={!mounted} onClick={()=>setOpen(true)} className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]" aria-label={`Выбрать город. Сейчас: ${label}`}><LocationIcon className="h-[.78em] w-[.78em] shrink-0 text-[#ff353d]"/><span className="truncate">{triggerLabel||label}</span></button></span>{mounted&&open?<CityPickerDialog onChange={onChange} onClose={()=>{setOpen(false);trigger.current?.focus({preventScroll:true});}}/>:null}</>;
 }

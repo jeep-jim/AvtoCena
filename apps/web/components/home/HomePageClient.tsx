@@ -1,4 +1,5 @@
 "use client";
+import { useHomeCatalogCount } from "./useHomeCatalogCount";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 
 import { formatCatalogCount } from "@/lib/catalog/count-format";
@@ -218,10 +219,9 @@ function CatalogLoadingSkeleton() {
 
 export default function HomePageClient({ initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
-  const skipInitialCountFetch = useRef(true);
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
-  const [items, setItems] = useState<Item[]>(() => initialOffers.flatMap((raw) => { const item = toItem(raw); return item ? [item] : []; })); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>(initialMarketCounts); const [count, setCount] = useState<number | null>(Number.isFinite(initialCount) ? Number(initialCount) : null); const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">(initialOffers.length ? "ready" : "loading"); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
+  const [items, setItems] = useState<Item[]>(() => initialOffers.flatMap((raw) => { const item = toItem(raw); return item ? [item] : []; })); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>(initialMarketCounts); const [catalogTotal, setCatalogTotal] = useState<number | null>(Number.isFinite(initialCount) && (Number(initialCount) > 0 || initialOffers.length > 0) ? Number(initialCount) : null); const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">(initialOffers.length ? "ready" : "loading"); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -254,7 +254,7 @@ export default function HomePageClient({ initialGreen = {items:[],total:0}, init
           const previousCount = Math.max(0, Number(previousCounts[marketId] || 0));
           return [marketId, incomingCount > 0 ? incomingCount : previousCount];
         })));
-        setCount((previousCount) => {
+        setCatalogTotal((previousCount) => {
           const incomingTotal = Math.max(0, Number(catalogPayload?.total || 0));
           return incomingTotal > 0 ? incomingTotal : previousCount;
         });
@@ -289,29 +289,32 @@ export default function HomePageClient({ initialGreen = {items:[],total:0}, init
   const marketOptions = useMemo<Option[]>(() => { if (!electricOnly) return markets; const available = new Set(availableItems.map((item) => item.market)); return [markets[0], ...markets.slice(1).filter((option) => available.has(option.value))]; }, [availableItems, electricOnly]);
   const selectedBudget = budgets.find((option) => option.value === budget) || budgets[0];
 
-  useEffect(() => {
-    if (skipInitialCountFetch.current) { skipInitialCountFetch.current = false; return; }
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => {
-      const params = new URLSearchParams({ pageSize: "1", countOnly: "1" });
-      if(city) params.set("city",city);
-      if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budgetTo", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric");
-      setCount(null); fetch(`/api/catalog/search?${params}`, { cache: "no-store", signal: controller.signal }).then((response) => response.json()).then((data) => {if(!controller.signal.aborted)setCount(Number(data?.total || 0));}).catch(() => {if(!controller.signal.aborted)setCount(0);});
-    }, 180); return () => {window.clearTimeout(timer);controller.abort();};
-  }, [city, selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
+  const countParams = new URLSearchParams();
+  // Delivery changes prices, never the number of cars without a price filter.
+  if (city && (selectedBudget.min || selectedBudget.max)) countParams.set("city", city);
+  if (selectedBudget.min) countParams.set("budgetFrom", String(selectedBudget.min));
+  if (selectedBudget.max) countParams.set("budgetTo", String(selectedBudget.max));
+  if (make) countParams.set("make", make);
+  if (model) countParams.set("model", model);
+  if (market) countParams.set("market", market);
+  if (body && !model) countParams.set("bodyType", body);
+  if (year === "older") countParams.set("yearTo", "2017"); else if (year) countParams.set("yearFrom", year);
+  if (powerLimited) countParams.set("powerTo", "160");
+  if (electricOnly) countParams.set("fuel", "electric");
+  const { count, countError } = useHomeCatalogCount(countParams.toString(), catalogTotal);
 
   const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 10) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
   const submit = () => { const params = new URLSearchParams(); if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budget", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric"); if (city) params.set("city", city); appendAttributionToSearchParams(params); router.push(`/cars${params.toString() ? `?${params}` : ""}`); };
   const modelSearch = <VehicleModelSearch value={model} make={make} placeholder="Модель" onValueChange={setModel} onMakeChange={setMake} onSubmit={submit} />;
 
-  return <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
+  return <main data-home-react-filters className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
     <PublicHeader />
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
       <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
         <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible">
-          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${formatCatalogCount(count)} вариантов`}</span></div>
+          <div className="mb-3 flex items-center justify-between gap-3 lg:mb-4"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{countError ? "Количество уточняется" : count === null ? "Считаем варианты" : `Нашли ${formatCatalogCount(count)} вариантов`}</span></div>
           <div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
           <div className="mt-2 flex flex-1 flex-col lg:mt-5">
             <h3 className="hidden text-lg font-black leading-tight md:text-xl lg:block">АвтоЦена — подбор автомобиля под ваш бюджет</h3>

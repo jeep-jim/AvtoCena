@@ -145,12 +145,12 @@ export function PublicLegalFooter() {
             { href: "/cars", label: "Каталог автомобилей" },
             { href: "/favorites", label: "Избранные автомобили" },
             { href: "/dealers", label: "🚗 АвтоДилерам" },
-            { href: "/login", label: "Вход для сотрудников" },
+            { href: "/cars/autocatalog", label: "Автокаталог" },
           ]} />
         </div>
 
         <section aria-label="Реквизиты дилера TOP AVTO" className="mb-5 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--ac-border)] pt-5 text-sm">
-          <div className="flex items-center gap-10"><div><p className="font-bold">{TOPAVTO_DEALER.label} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
+          <div className="flex items-center gap-10"><div><p className="font-bold"><Link href="/login" prefetch={false} style={{ color: "inherit", textDecoration: "none", cursor: "text" }}>Дилер</Link>{TOPAVTO_DEALER.label.slice("Дилер".length)} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
           <div className="flex flex-wrap items-center gap-6"><PageQrButton key={pathname} /><AutoCalcButton /></div>
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
@@ -162,7 +162,6 @@ export function PublicLegalFooter() {
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Cookie</button>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
             <Link href="/dealers" className="ac-public-legal-link">🚗 АвтоДилерам</Link>
-            <Link href="/login" className="ac-public-legal-link">Вход</Link>
           </nav>
         </div>
       </footer>

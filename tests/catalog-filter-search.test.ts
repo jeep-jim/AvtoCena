@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { safePublicPricing } from '../apps/web/lib/catalog/safe-public-pricing';
-import { catalogSearchProjectionBalanceSources, catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
+import { countCatalogOffers, catalogSearchProjectionBalanceSources, catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
@@ -65,6 +65,11 @@ test("all catalog filters use the projection when optional categorical shards ar
     }
     const filtered = await searchOffers(filters);
     assert.deepEqual(filtered.items.map((offer) => offer.id), ["filter-target"]);
+    for (const query of [{}, {city:"Новокузнецк"}, filters, {...filters, city:"Новокузнецк"}, {market:"korea",budgetTo:1}, {market:"korea",yearFrom:2025}]) {
+      const [count, search] = await Promise.all([countCatalogOffers(query), searchOffers(query)]);
+      assert.equal(count.total, search.total, `count must match results: ${JSON.stringify(query)}`);
+    }
+
 
     resetCatalogReadCachesForTests();
     const storage = getJsonStorage() as any;
