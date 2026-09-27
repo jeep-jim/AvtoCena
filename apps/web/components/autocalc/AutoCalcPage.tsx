@@ -1,5 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import {CATALOG_BRANDS} from '../../lib/catalog/brands';
+import {autoCalcMake,splitAutoCalcIdentity} from '../../lib/autocalc/identity';
+import {PUBLIC_MIN_VEHICLE_YEAR} from '../../lib/catalog/public-year-range';
+import {VehicleModelSearch} from '../catalog/VehicleModelSearch';
 import { Car, Link2, FileDown } from 'lucide-react';
 import { PublicHeader } from '../layout/PublicHeader';
 import {StickyOfferColumn} from '../catalog/StickyOfferColumn';
@@ -20,7 +24,9 @@ const input='mt-1.5 h-12 w-full min-w-0 rounded-xl border border-[var(--ac-borde
 const panel='rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-5';
 const rub=(n:number)=>`${Math.round(n).toLocaleString('ru-RU')} ₽`;
 export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;initialTitle?:string}){
- const [url,setUrl]=useState(initialUrl),[title,setTitle]=useState(initialTitle),[market,setMarket]=useState(''),[price,setPrice]=useState(''),[currency,setCurrency]=useState(''),[city,setCity]=useState('');
+ const [url,setUrl]=useState(initialUrl),[make,setMake]=useState(()=>splitAutoCalcIdentity(initialTitle).make),[model,setModel]=useState(()=>splitAutoCalcIdentity(initialTitle).model),[market,setMarket]=useState(''),[price,setPrice]=useState(''),[currency,setCurrency]=useState(''),[city,setCity]=useState('');
+ const title=[make.trim(),model.trim()].filter(Boolean).join(' ');
+ const editIdentity=()=>{invalidate();setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');};
  const [images,setImages]=useState<string[]>([]),[draft,setDraft]=useState<Partial<OfferCalculationDraft>>({}),[notes,setNotes]=useState<string[]>([]),[facts,setFacts]=useState<{label:string;value:string}[]>([]);
  const [loading,setLoading]=useState(false),[pending,setPending]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(''),[result,setResult]=useState<SavedCalculationResult|null>(null);
  const [referenceImage,setReferenceImage]=useState(''),[referenceLabel,setReferenceLabel]=useState(''),[knowledgeNote,setKnowledgeNote]=useState('');
@@ -29,9 +35,11 @@ export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;ini
  function invalidate(){revision.current++;setResult(null);setCalculatedBody(null);setError('');setPending(false);}
  async function load(link:string){
   controller.current?.abort();const c=new AbortController();controller.current=c;invalidate();setLoading(true);setMessage('Читаем объявление…');
-  setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');setTitle('');setMarket('');setPrice('');setCurrency('');setImages([]);setDraft({});setNotes([]);setFacts([]);
+  setKnowledgeNote('');setReferenceImage('');setReferenceLabel('');setMake('');setModel('');setMarket('');setPrice('');setCurrency('');setImages([]);setDraft({});setNotes([]);setFacts([]);
   try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'extract',url:link}),signal:c.signal});const data=await r.json();if(!r.ok)throw Error(data.error);if(c.signal.aborted)return;
-   setTitle(data.title||'');setMarket(data.market||'');setPrice(data.price||'');setCurrency(currencies.includes(data.currency)?data.currency:'');setImages(data.images||[]);setDraft(completePowerUnitDraft(data.draft||{}));setNotes(data.notes||[]);setFacts(data.facts||[]);setMessage(data.message);
+   const identity=splitAutoCalcIdentity(data.title||'');setMake(autoCalcMake(data.make||identity.make));setModel(data.model||identity.model);
+   if(data.draft?.year && Number(data.draft.year)<PUBLIC_MIN_VEHICLE_YEAR){data.draft={...data.draft,year:''};data.notes=[...(data.notes||[]),'АвтоРасчёт доступен для автомобилей от 2010 года. Проверьте год выпуска.'];}
+   setMarket(data.market||'');setPrice(data.price||'');setCurrency(currencies.includes(data.currency)?data.currency:'');setImages(data.images||[]);setDraft(completePowerUnitDraft(data.draft||{}));setNotes(data.notes||[]);setFacts(data.facts||[]);setMessage(data.message);
   }catch(e){if(!c.signal.aborted){setError(e instanceof Error?e.message:'Не удалось загрузить');setMessage('Заполните данные самостоятельно — расчёт доступен без загрузки объявления.');}}
   finally{if(!c.signal.aborted)setLoading(false);}
  }
@@ -39,12 +47,12 @@ export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;ini
  async function calculate(parameters:OfferCalculationDraft){
   if(calculationTimer.current)clearTimeout(calculationTimer.current);
   invalidate();const current=revision.current;setPending(true);
-  const body={action:'calculate',url,title,market,price,currency,city,draft:parameters};
+  const body={action:'calculate',url,title,make:autoCalcMake(make),model,market,price,currency,city,draft:parameters};
   try{const r=await fetch('/api/autocalc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();if(!r.ok)throw Error(data.error);if(current===revision.current){setResult(data);setCalculatedBody(body);}}
   catch(e){if(current===revision.current)setError(e instanceof Error?e.message:'Не удалось рассчитать');}finally{if(current===revision.current)setPending(false);}
  }
  useEffect(()=>{
-  if(loading||!title.trim()||!market||!currency||!(Number(price)>0)||!city||!draft.vehicleCategory)return;
+  if(loading||!make.trim()||!model.trim()||!market||!currency||!(Number(price)>0)||!city||!draft.vehicleCategory)return;
   try{validateCustomerParameters(draft);}catch{return;}
   calculationTimer.current=setTimeout(()=>void calculate(draft as OfferCalculationDraft),600);
   return()=>{if(calculationTimer.current)clearTimeout(calculationTimer.current);};
@@ -57,6 +65,7 @@ export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;ini
  }
  function useKnowledge(choice:KnowledgeChoice){
   invalidate();
+  if(choice.make)setMake(choice.make);if(choice.model)setModel(choice.model);
   setDraft(old=>completePowerUnitDraft({...choice.draft,...Object.fromEntries(Object.entries(old).filter(([,v])=>v!==''&&v!==undefined))}));
   const sameMarket=!market||choice.market===market;
   if(!market&&choice.market)setMarket(choice.market);
@@ -75,8 +84,8 @@ export function AutoCalcPage({initialUrl,initialTitle=""}:{initialUrl:string;ini
  <div className="mt-5 flex flex-wrap gap-3"><button type="button" data-autocalc-lead={leadText} className="min-h-14 flex-1 rounded-2xl bg-[#18b64b] px-5 font-bold text-white">{result?'Оставить заявку':<><span className="sm:hidden">Заявка на расчёт</span><span className="hidden sm:inline">Оставить заявку на расчёт</span></>}</button><button type="button" onClick={pdf} disabled={!result||pending} className="flex min-h-14 items-center gap-2 rounded-2xl bg-amber-500 px-5 font-bold text-black disabled:opacity-40"><FileDown size={20}/>PDF</button></div>
  </section></StickyOfferColumn><StickyOfferColumn desktopFrom="lg"><aside className="min-w-0 space-y-4">
  <div className={panel}><p className="mb-2 text-sm font-bold">Доставка в ваш город</p><CitySelector value={city} onChange={v=>{setCity(v);invalidate();}} onStoredChange={v=>{setCity(v);invalidate();}} triggerLabel={city || "Выберите город"}/></div>
- <div className="ac-autocalc-parameters min-w-0"><fieldset disabled={loading} onChange={invalidate} className="mb-6 grid grid-cols-2 gap-4"><label className="col-span-2 text-xs font-semibold">Название автомобиля *<input required className={input} value={title} onChange={e=>setTitle(e.target.value)} placeholder="Марка, модель, комплектация" maxLength={180}/></label><label className="text-xs font-semibold">Страна покупки *<select required className={input} value={market} onChange={e=>setMarket(e.target.value)}><option value="">Выберите</option>{Object.entries(markets).map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label><label className="text-xs font-semibold">Валюта *<select required className={input} value={currency} onChange={e=>setCurrency(e.target.value)}><option value="">Выберите</option>{currencies.map(c=><option key={c}>{c}</option>)}</select></label><label className="col-span-2 text-xs font-semibold">Цена автомобиля в объявлении *<input required type="number" min="0.01" step="any" className={input} value={price} onChange={e=>setPrice(e.target.value)} placeholder="Укажите цену"/></label></fieldset>
- <KnowledgeSuggestions title={title} year={draft.year?String(draft.year):undefined} market={market} disabled={loading} onChoose={useKnowledge} onPreview={(image,label)=>{setReferenceImage(image||'');setReferenceLabel(label||'');}}/>
+ <div className="ac-autocalc-parameters min-w-0"><fieldset disabled={loading} onChange={invalidate} className="mb-6 grid grid-cols-2 gap-4"><label className="min-w-0 text-xs font-semibold">Марка *<input aria-label="Марка автомобиля" required list="autocalc-makes" className={input} value={make} onChange={e=>{setMake(e.target.value);editIdentity();}} placeholder="Выберите марку" maxLength={80}/><datalist id="autocalc-makes">{CATALOG_BRANDS.map(brand=><option key={brand.name} value={brand.name}/>)}</datalist></label><div className="min-w-0 text-xs font-semibold"><span>Модель *</span><VehicleModelSearch required contextual={false} inputClassName={input} value={model} make={autoCalcMake(make)} placeholder="Введите модель" onValueChange={value=>{setModel(value);editIdentity();}} onMakeChange={value=>{setMake(value);editIdentity();}}/></div><label className="text-xs font-semibold">Страна покупки *<select required className={input} value={market} onChange={e=>setMarket(e.target.value)}><option value="">Выберите</option>{Object.entries(markets).map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label><label className="text-xs font-semibold">Валюта *<select required className={input} value={currency} onChange={e=>setCurrency(e.target.value)}><option value="">Выберите</option>{currencies.map(c=><option key={c}>{c}</option>)}</select></label><label className="col-span-2 text-xs font-semibold">Цена автомобиля в объявлении *<input required type="number" min="0.01" step="any" className={input} value={price} onChange={e=>setPrice(e.target.value)} placeholder="Укажите цену"/></label></fieldset>
+ <KnowledgeSuggestions title={model} make={autoCalcMake(make)} year={draft.year?String(draft.year):undefined} market={market} disabled={loading} onChoose={useKnowledge} onPreview={(image,label)=>{setReferenceImage(image||'');setReferenceLabel(label||'');}}/>
  {knowledgeNote?<p className="mb-3 text-xs leading-5 text-[var(--ac-muted)]">{knowledgeNote}</p>:null}
  <h2 className="text-lg font-bold">Характеристики для расчёта</h2>
  {notes.map((note,i)=><p key={i} className="mt-2 text-xs leading-5 text-[var(--ac-muted)]">{note}</p>)}

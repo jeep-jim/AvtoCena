@@ -268,6 +268,9 @@ export function VehicleModelSearch({
   onValueChange,
   onSubmit,
   className = "",
+  inputClassName = "ac-filter-control h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none",
+  contextual = true,
+  required = false,
 }: {
   value: string;
   make: string;
@@ -276,6 +279,9 @@ export function VehicleModelSearch({
   onValueChange?: (model: string) => void;
   onSubmit?: (selection: ModelSelection) => void;
   className?: string;
+  inputClassName?: string;
+  contextual?: boolean;
+  required?: boolean;
 }) {
   const [query, setQuery] = useState(value || "");
   const [items, setItems] = useState<ModelSuggestion[]>([]);
@@ -318,12 +324,12 @@ export function VehicleModelSearch({
       setLoading(true);
       try {
         const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
-        currentCatalogContext(false).forEach((contextValue, key) => {
+        if (contextual) currentCatalogContext(false).forEach((contextValue, key) => {
           if (key !== "make" && contextValue && !params.has(key)) params.set(key, contextValue);
         });
         const response = await fetch(`/api/catalog/models?${params.toString()}`, { cache: "no-store", signal: controller.signal });
         const payload = response.ok ? await response.json() : { items: [] };
-        setItems(Array.isArray(payload?.items) ? payload.items : []);
+        if (!controller.signal.aborted) setItems(Array.isArray(payload?.items) ? payload.items : []);
       } catch {
         if (!controller.signal.aborted) setItems([]);
       } finally {
@@ -334,7 +340,7 @@ export function VehicleModelSearch({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [canSearch, make, open, query]);
+  }, [canSearch, make, open, query, contextual]);
 
   const exact = useMemo(() => {
     const requested = compact(query);
@@ -391,7 +397,8 @@ export function VehicleModelSearch({
         event.preventDefault();
         choose(candidate, true);
       }}
-      className="ac-filter-control h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none"
+      className={inputClassName}
+      required={required}
       aria-label="Модель автомобиля"
       aria-expanded={open}
       aria-autocomplete="list"
