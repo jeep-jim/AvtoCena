@@ -1,3 +1,4 @@
+import {notifyDiscussion} from "@/lib/crm-discussion-store";
 import {notifyTeam} from "@/lib/crm-notification-store";
 import {canSeeLead} from "@/lib/crm-visibility";
 import {hasCrmPermission} from "@/lib/crm-permissions";
@@ -74,6 +75,7 @@ export async function PATCH(
 
   if(admin && Object.prototype.hasOwnProperty.call(body,"expectedManagerId") && (body.expectedManagerId||null)!==(existingLead.assignedManagerId||null))return NextResponse.json({error:"assignment_conflict"},{status:409});
   const now = new Date().toISOString();
+  const noteId = makeId("note");
   const nextStatus = requestedStatus || existingLead.status || "new";
   const nextManagerId = admin
     ? (Object.prototype.hasOwnProperty.call(body,"assignedManagerId") ? requestedManagerId || null : existingLead.assignedManagerId || null)
@@ -139,7 +141,7 @@ export async function PATCH(
       ? [
           ...(Array.isArray(lead.internalNotes) ? lead.internalNotes : []),
           {
-            id: makeId("note"),
+            id: noteId,
             text: note,
             createdAt: now,
             createdByUserId: user.id,
@@ -169,8 +171,8 @@ export async function PATCH(
   if(statusChanged&&nextManagerId&&nextManagerId!==user.id)await notifyTeam({recipientIds:[nextManagerId],kind:"assignment",title:"Изменён статус вашей заявки",text:`${user.displayName}: ${leadStatusLabel(existingLead.status)} → ${leadStatusLabel(nextStatus)}`,href:`/crm/leads?id=${encodeURIComponent(leadId)}`});
   if(managerChanged)await recordCrmActivity(user,{...base,type:"lead_assigned",title:"Назначен менеджер заявки",target:manager?activityPerson(manager):undefined,changes:[{label:"Ответственный",before:managers.find(m=>m.id===previousManagerId)?.displayName||"Не назначен",after:manager?.displayName||"Не назначен"}]});
   if(archiveChanged)await recordCrmActivity(user,{...base,type:"lead_archived",title:body.archived?"Заявка перенесена в архив":"Заявка восстановлена",text:note});
-  if(note&&!statusChanged&&!archiveChanged)await recordCrmActivity(user,{...base,type:"lead_note_added",title:"Добавлен комментарий к заявке",text:note});
-
+  if(note&&!statusChanged&&!archiveChanged)await recordCrmActivity(user,{...base,type:"lead_note_added",title:"Добавлен комментарий к заявке",commentId:noteId,text:note});
+  if(note)await notifyDiscussion(user,"lead",updatedLead,{id:noteId,text:note,createdAt:now,createdByUserId:user.id,createdByName:user.displayName});
 
   if (statusChanged) {
     const partnerEffects = await handleLeadPartnerStatusChange({
