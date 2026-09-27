@@ -2,7 +2,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 /** A tall sidebar can scroll to its bottom before sticking; no nested scrollbar. */
-export function StickyOfferColumn({children}:{children:ReactNode}) {
+export function StickyOfferColumn({children,desktopFrom="xl"}:{children:ReactNode;desktopFrom?:"lg"|"xl"}) {
  const ref=useRef<HTMLDivElement>(null);
  useEffect(()=>{
   const node=ref.current;
@@ -14,5 +14,5 @@ export function StickyOfferColumn({children}:{children:ReactNode}) {
   update();
   return ()=>{observer.disconnect();window.removeEventListener('resize',update);};
  },[]);
- return <div ref={ref} className="min-w-0 xl:sticky xl:top-[var(--offer-sticky-top,92px)] xl:self-start">{children}</div>;
+ return <div ref={ref} data-sticky-offer-column className={`min-w-0 ${desktopFrom === "lg" ? "lg:sticky lg:top-[var(--offer-sticky-top,92px)] lg:self-start" : "xl:sticky xl:top-[var(--offer-sticky-top,92px)] xl:self-start"}`}>{children}</div>;
 }
