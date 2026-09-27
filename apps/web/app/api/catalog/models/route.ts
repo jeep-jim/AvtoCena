@@ -73,6 +73,15 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const rawQuery = clean(url.searchParams.get("q"));
   const rawMake = clean(url.searchParams.get("make"));
+  // Manual calculation searches the same model directory as knowledge suggestions,
+  // without inventory/identity-mode restrictions belonging to catalog filtering.
+  if (url.searchParams.get("scope") === "autocalc") {
+    const [{readDirectoryModels},{matchingKnowledgeModels}]=await Promise.all([
+      import("@/lib/catalog/model-directory"),import("@/lib/autocalc/knowledge"),
+    ]);
+    const matches=matchingKnowledgeModels(await readDirectoryModels(),rawQuery.slice(0,180),rawMake.slice(0,80));
+    return NextResponse.json({items:matches.map(item=>({id:item.id,make:item.make,model:item.model,aliases:item.aliases||[],label:`${item.make} ${item.model}`}))});
+  }
   const mode = await effectiveCatalogEncyclopediaIdentityMode();
   const identitySearch = await resolveConfiguredCatalogSearchParams({ make: rawMake || undefined, model: rawQuery || undefined });
   const query = clean(identitySearch.model || rawQuery);

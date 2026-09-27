@@ -324,6 +324,7 @@ export function VehicleModelSearch({
       setLoading(true);
       try {
         const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
+        if (!contextual) params.set("scope", "autocalc");
         if (contextual) currentCatalogContext(false).forEach((contextValue, key) => {
           if (key !== "make" && contextValue && !params.has(key)) params.set(key, contextValue);
         });
