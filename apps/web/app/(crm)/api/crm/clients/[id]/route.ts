@@ -1,3 +1,5 @@
+import {randomUUID} from "node:crypto";
+import {notifyDiscussion} from "@/lib/crm-discussion-store";
 import {CLIENT_STATUSES,clientStatusLabel} from "@/lib/crm-client-status";
 import {readCrmUsers} from "@/lib/crm-users";
 import {hasCrmPermission} from "@/lib/crm-permissions";
@@ -22,15 +24,17 @@ export async function PATCH(request:Request, context:{params:Promise<{id:string}
  const {id} = await context.params;
  try {
   let previous:any;
+  const noteId=`note-${randomUUID()}`,now=new Date().toISOString();
   const client = await updateChunkedDataJson<any>("clients/clients.json",id,current=>{
    if (!canSeeLead(user,current)) throw Error("client_forbidden");
    if ((current.updatedAt||"")!==body.updatedAt) throw Error("client_conflict");
    previous=current;
-   return {...current,...fields,...(body.status?{status:body.status}:{}),...(assigning?{assignedManagerId:body.assignedManagerId}:{}),updatedAt:new Date().toISOString(),updatedByManagerId:user.id};
+   return {...current,...fields,...(fields.comment&&fields.comment!==current.comment?{internalNotes:[...(current.internalNotes||[]),{id:noteId,text:fields.comment,createdAt:now,createdByUserId:user.id,createdByName:user.displayName}]}:{}),...(body.status?{status:body.status}:{}),...(assigning?{assignedManagerId:body.assignedManagerId}:{}),updatedAt:new Date().toISOString(),updatedByManagerId:user.id};
   });
   if (!client) return NextResponse.json({error:"client_not_found"},{status:404});
   const changes=activityChanges(previous,client,{fio:"Имя",phone:"Телефон",telegram:"Telegram",max:"MAX",city:"Город",comment:"Комментарий"});
   if(changes.length)await recordCrmActivity(user,{type:"client_updated",title:"Изменён клиент",entityType:"client",entityId:id,clientId:id,entityLabel:client.fio||"Клиент",changes});
+  if(fields.comment&&fields.comment!==previous.comment)await notifyDiscussion(user,"client",client,{id:noteId,text:fields.comment,createdAt:now,createdByUserId:user.id,createdByName:user.displayName});
   const base={entityType:"client",entityId:id,clientId:id,entityLabel:client.fio||"Клиент"};
   if((previous.status||"new")!==(client.status||"new"))await recordCrmActivity(user,{...base,type:"client_status_changed",title:"Изменён статус клиента",changes:[{label:"Статус",before:clientStatusLabel(previous.status),after:clientStatusLabel(client.status)}]});
   if((previous.assignedManagerId||"")!==(client.assignedManagerId||"")){const manager=managers.find(m=>m.id===client.assignedManagerId);await recordCrmActivity(user,{...base,type:"client_assigned",title:"Назначен менеджер клиента",target:manager?activityPerson(manager):undefined,changes:[{label:"Ответственный",before:managers.find(m=>m.id===previous.assignedManagerId)?.displayName||"Не назначен",after:manager?.displayName||"Не назначен"}]});}
