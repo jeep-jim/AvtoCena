@@ -1,6 +1,7 @@
 import {readDirectoryModels,catalogModelSlug} from '../catalog/model-directory';
 import {readCompiledKnowledgeVariants} from '../catalog/knowledge-read-model';
 import {recallVehicleMemory} from '../catalog/knowledge-memory';
+import {findAutocatalogPublishedCover,autocatalogCoverUrl} from '../catalog/autocatalog-publication';
 import {searchOffers} from '../catalog/storage';
 import {catalogBrandSlug,canonicalCatalogBrand} from '../catalog/brands';
 import {vehicleKnowledgeToken,vehicleKnowledgeCompact} from '../catalog/vehicle-knowledge';
@@ -31,10 +32,11 @@ export async function findAutoCalcKnowledge(query:string,year?:number,market?:st
   const result:KnowledgeMatches={models:models.map(m=>({id:m.id,title:`${m.make} ${m.model}`,href:`/cars/brand/${catalogBrandSlug(m.make)}/model/${catalogModelSlug(m)}`})),choices:[]};
   if(models.length!==1)return result;
   const model=models[0];
-  const [variants,live,memory]=await Promise.all([
+  const [variants,live,memory,cover]=await Promise.all([
    readCompiledKnowledgeVariants(model.make),
    searchOffers({make:model.make,model:model.model,...(year?{yearFrom:year,yearTo:year}:{}),pageSize:12,sort:'updatedAt'}),
    recallVehicleMemory(model.make,model.model).catch(()=>[]),
+   findAutocatalogPublishedCover(model.id).catch(()=>null),
   ]);
   const sameModel=(r:any)=>canonicalCatalogBrand(r.make)===canonicalCatalogBrand(model.make)&&[model.model,...(model.aliases||[])].some(n=>vehicleKnowledgeCompact(n)===vehicleKnowledgeCompact(r.model));
   const seen=new Set<string>();
@@ -52,6 +54,7 @@ export async function findAutoCalcKnowledge(query:string,year?:number,market?:st
    add({id:row.id,title:`${row.make} ${row.model} ${row.year}`,kind:'memory',label:'Сохранённый аналог · цену нужно уточнить',sourceUrl:`/cars/offer/${row.offerId}`,date:row.seenAt,market:row.market,price:row.price?String(row.price):undefined,currency:row.currency,image:row.image,draft:knowledgeDraft(row)});
   }
   if(!result.image){const image=memory.find(r=>(!year||r.year===year)&&r.image)?.image;if(image){result.image=image;result.imageLabel='Фото сохранённого аналога — не вашего объявления';}}
+  if(!result.image&&cover){result.image=autocatalogCoverUrl(cover);result.imageLabel=`Иллюстрация модели — год и комплектация могут отличаться. ${cover.attribution} (${cover.license})`;}
   return result;
  });
 }

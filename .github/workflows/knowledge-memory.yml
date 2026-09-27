@@ -1,5 +1,8 @@
 name: Accumulate compact vehicle knowledge
 on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/knowledge-memory.yml', 'apps/web/lib/catalog/knowledge-memory.ts']
   workflow_dispatch:
   schedule:
     - cron: '20 18 * * *'
