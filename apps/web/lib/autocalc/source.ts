@@ -15,29 +15,29 @@ export function sourceUrl(value: unknown) {
   return url;
 }
 // Pin the validated address for every hop: redirects cannot reach internal services.
-export async function readSource(value: string, signal: AbortSignal, redirects=0): Promise<{html:string;url:string}> {
+export async function readSource(value: string, signal: AbortSignal, redirects=0,format:"html"|"json"="html"): Promise<{html:string;url:string}> {
   const url=sourceUrl(value);
   const addresses=await lookup(url.hostname,{all:true,family:4});
   signal.throwIfAborted();
   if (!addresses.length || addresses.some(x=>!publicIPv4(x.address))) throw Error('Этот адрес недоступен для загрузки');
   const response=await new Promise<{status:number;location?:string;html:string}>((resolve,reject)=>{
-    const req=request(url,{signal,family:4,headers:{'User-Agent':'AvtoCena/1.0 (+https://avtocena.com)','Accept':'text/html,application/xhtml+xml','Accept-Encoding':'identity'},lookup:((_host:any,_options:any,callback:any)=>callback(null,addresses[0].address,4)) as any},res=>{
+    const req=request(url,{signal,family:4,headers:{'User-Agent':'AvtoCena/1.0 (+https://avtocena.com)','Accept':format==='json'?'application/json':'text/html,application/xhtml+xml','Accept-Encoding':'identity'},lookup:((_host:any,_options:any,callback:any)=>callback(null,addresses[0].address,4)) as any},res=>{
       const status=res.statusCode || 0;
       if(status>=300&&status<400){res.resume();resolve({status,location:res.headers.location,html:''});return;}
-      if(status!==200 || !/text\/html|application\/xhtml\+xml/i.test(String(res.headers['content-type']))){res.resume();reject(Error('Источник не предоставил страницу объявления'));return;}
+      if(status!==200 || !(format==='json'?/application\/json/i:/text\/html|application\/xhtml\+xml/i).test(String(res.headers['content-type']))){res.resume();reject(Error('Источник не предоставил страницу объявления'));return;}
       let size=0;const chunks:Buffer[]=[];
       res.on('data',chunk=>{size+=chunk.length;if(size>2_000_000){res.destroy(Error('Страница слишком большая'));return;}chunks.push(chunk);});
       res.on('error',reject);res.on('end',()=>resolve({status,html:Buffer.concat(chunks).toString('utf8')}));
     });req.on('error',reject);req.end();
   });
-  if(response.location){if(redirects>=3)throw Error('Слишком много перенаправлений');return readSource(new URL(response.location,url).href,signal,redirects+1);}
+  if(response.location){if(redirects>=3)throw Error('Слишком много перенаправлений');return readSource(new URL(response.location,url).href,signal,redirects+1,format);}
   return {html:response.html,url:url.href};
 }
 const text=(x:any):string=>String(typeof x==='object' ? x?.name ?? x?.value ?? '' : x ?? '').replace(/<[^>]*>/g,'').trim().slice(0,180);
 const numeric=(x:any)=>{const n=Number(typeof x==='object'?x?.value:x);return Number.isFinite(n)&&n>0?n:undefined;};
 export function extractSource(html:string,url:string) {
   const pageTitle=html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '';
-  if (/pardon our interruption|access denied|just a moment|verify (?:that )?you are human|attention required|robot check|captcha/i.test(pageTitle)) throw Error('Источник показал страницу проверки вместо объявления');
+  if (/pardon our interruption|access denied|just a moment|verify (?:that )?you are human|attention required|robot check|security verification|captcha/i.test(pageTitle)) throw Error('Источник показал страницу проверки вместо объявления');
   const nodes:any[]=[];
   function visit(x:any,depth=0){if(!x||typeof x!=='object'||depth>12||nodes.length>500)return;if(Array.isArray(x)){x.slice(0,100).forEach(y=>visit(y,depth+1));return;}nodes.push(x);if(x['@graph'])visit(x['@graph'],depth+1);if(x.mainEntity)visit(x.mainEntity,depth+1);}
   for(const match of html.matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){try{visit(JSON.parse(match[1]));}catch{}}
