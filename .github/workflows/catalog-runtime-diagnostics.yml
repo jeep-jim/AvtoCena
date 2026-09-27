@@ -20,20 +20,22 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
     steps:
       - uses: actions/checkout@v4
+      - run: npm ci
+      - run: node --import tsx scripts/diagnose-directory-generation.mjs
       - uses: yc-actions/yc-cr-login@v3
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
       - name: Cold production image with the same CPU and memory limits
         run: |
           docker pull "$IMAGE"
-          docker run -d --name catalog-cold --cpus=1 --memory=2g -p 127.0.0.1:3100:3000 -e HOSTNAME=0.0.0.0 -e JSON_STORAGE_DRIVER -e YC_OBJECT_STORAGE_ENDPOINT -e YC_OBJECT_STORAGE_REGION -e YC_OBJECT_STORAGE_BUCKET -e YC_OBJECT_STORAGE_ACCESS_KEY_ID -e YC_OBJECT_STORAGE_SECRET_ACCESS_KEY -e YC_OBJECT_STORAGE_PREFIX "$IMAGE"
+          docker run -d --name catalog-cold -v "$PWD/scripts/runtime-read-trace.cjs:/app/runtime-read-trace.cjs:ro" -e NODE_OPTIONS=--require=/app/runtime-read-trace.cjs --cpus=1 --memory=2g -p 127.0.0.1:3100:3000 -e HOSTNAME=0.0.0.0 -e JSON_STORAGE_DRIVER -e YC_OBJECT_STORAGE_ENDPOINT -e YC_OBJECT_STORAGE_REGION -e YC_OBJECT_STORAGE_BUCKET -e YC_OBJECT_STORAGE_ACCESS_KEY_ID -e YC_OBJECT_STORAGE_SECRET_ACCESS_KEY -e YC_OBJECT_STORAGE_PREFIX "$IMAGE"
           node scripts/diagnose-catalog-cold.mjs
       - name: Bounded application and container diagnostics
         if: always()
         run: |
           docker inspect catalog-cold --format '{{json .State}}'
           docker stats catalog-cold --no-stream --format '{{json .}}'
-          docker logs --tail 100 catalog-cold
+          docker logs --tail 300 catalog-cold
       - name: Remove test container
         if: always()
         run: docker rm -f catalog-cold
