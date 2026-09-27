@@ -1,7 +1,7 @@
 name: AutoCalc link QA
 on:
   push:
-    branches: [feature/autocalc-link]
+    branches: ['feature/autocalc-*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,7 +17,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: node --import tsx --test tests/autocalc-link.test.ts tests/autocalc-route.test.ts
+      - run: node --import tsx --test tests/autocalc-link.test.ts tests/autocalc-route.test.ts tests/autocalc-enrichment.test.ts
       - run: npm install --no-save playwright esbuild
       - run: npx playwright install --with-deps chromium
       - run: node tests/browser/autocalc-preview.mjs

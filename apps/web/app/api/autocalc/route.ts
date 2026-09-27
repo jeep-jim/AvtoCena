@@ -1,3 +1,4 @@
+import {loadSource} from '@/lib/autocalc/load';
 import { isCalculationOriginAllowed } from '@/lib/catalog/calculation-request-origin';
 import { readSource, extractSource, sourceUrl } from '@/lib/autocalc/source';
 import { autocalcScenario } from '@/lib/autocalc/scenario';
@@ -17,8 +18,7 @@ export async function POST(request:Request) {
     const body=JSON.parse(raw);
     if(body.action==='extract'){
       const url=sourceUrl(body.url).href;
-      try{const page=await readSource(url,AbortSignal.timeout(12000));return Response.json({...extractSource(page.html,page.url),message:'Проверьте данные из объявления и заполните недостающее.'},{headers});}
-      catch{return Response.json({url,images:[],draft:{},message:'Источник не предоставил данные. Вы можете заполнить характеристики самостоятельно.'},{headers});}
+      return Response.json(await loadSource(url),{headers});
     }
     const {offer,parameters,draft}=autocalcScenario(body);
     const result=await calculateOfferWithCustomerParametersDetailed(offer,parameters);

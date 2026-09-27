@@ -209,6 +209,32 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
    </div>
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
+  <OfferParameterEditors draft={draft} change={change} showCommercial={showCommercial} isPickup={isPickup} researchContext={researchContext}/>
+  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
+  {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
+  {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
+   <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
+   <p className="mt-3 text-sm">Их увидят все пользователи сайта!</p>
+   <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
+  </dialog> : null}
+  {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
+  {canSave && savedAt && !saveDirty ? <p className="mt-3 text-xs text-[var(--ac-muted)]">Расчёт сохранён {new Date(savedAt).toLocaleDateString("ru-RU",{timeZone:"UTC"})}{savedByName ? <> · <span className="font-semibold">{savedByName}</span></> : null}</p> : null}
+  {children}
+  <style dangerouslySetInnerHTML={{ __html: `.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}` }} />
+ </div>;
+}
+
+/** Shared by saved vehicle cards and the standalone calculator. No network or storage writes. */
+export function OfferParameterEditors({draft,change,showCommercial=false,isPickup=false,researchContext=""}:{draft:ParameterDraft;change:(key:string,value:string)=>void;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+ const missingFields=missingCustomerFields(draft,showCommercial);
+ const powerInfo=recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
+ const powerLabel=draft.powerHp?`${Number(draft.powerHp).toLocaleString("ru-RU",{maximumFractionDigits:2})} л.с.`:"Указать мощность";
+ const pairedPower=Boolean(Number(draft.powerKw)>0);
+ const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field missing={missingFields.has(key)} label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
+ const hybridQuery=draft.fuel==="electric"?electricResearchQuery(researchContext,draft.year||""):hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
+ const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric"?"Алиса покажи 30-минутную мощность":"Алиса покажи тип гибрида и мощность"} compact/>;
+ const yearOptions=Array.from({length:new Date().getFullYear()-1990+2},(_,i)=>new Date().getFullYear()+1-i);
+ return <div className="ac-inline-parameters">
   <div data-parameter-editor-grid className={`${editorStyles.grid} mt-4 grid grid-cols-2 items-start gap-2.5`}>
    <Tile missing={missingFields.has("year")} label="Дата выпуска" value={draft.year?`${draft.year}${draft.productionMonth?`/${draft.productionMonth.padStart(2,"0")}`:""} г.`:"Дата выпуска"} icon={<CalendarDays size={16}/>}>
     <div className={editorStyles.dateFields} data-parameter-date-fields>
@@ -264,16 +290,6 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
     <p className={editorStyles.note}>Введите кВт или л.с. — второе поле заполнится автоматически. Когда обязательные поля заполнены, цена пересчитается сама. Ответ Алисы сверяйте с документами именно этой модификации.</p>
    </Tile>:null}
   </div>
-  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
-  {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
-  {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
-   <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
-   <p className="mt-3 text-sm">Их увидят все пользователи сайта!</p>
-   <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
-  </dialog> : null}
-  {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}
-  {canSave && savedAt && !saveDirty ? <p className="mt-3 text-xs text-[var(--ac-muted)]">Расчёт сохранён {new Date(savedAt).toLocaleDateString("ru-RU",{timeZone:"UTC"})}{savedByName ? <> · <span className="font-semibold">{savedByName}</span></> : null}</p> : null}
-  {children}
   <style dangerouslySetInnerHTML={{ __html: `.ac-inline-parameters input[type="number"]{appearance:textfield;-moz-appearance:textfield}.ac-inline-parameters input[type="number"]::-webkit-inner-spin-button,.ac-inline-parameters input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}html[data-theme="light"] .ac-inline-parameters input[type="date"],html[data-theme="light"] .ac-inline-parameters select,html[data-theme="light"] .ac-inline-parameters option{color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text);background-color:var(--ac-surface);color-scheme:light}.ac-inline-parameters input,.ac-inline-parameters select{border:0;outline:none}.ac-parameter-input:focus-within,.ac-attached-editor select:focus-visible,.ac-attached-editor input[type="date"]:focus-visible{box-shadow:inset 0 0 0 2px var(--ac-muted)}.ac-attached-editor-body{scrollbar-width:thin;scrollbar-color:var(--ac-muted) transparent}.ac-attached-editor-body::-webkit-scrollbar{width:5px}.ac-attached-editor-body::-webkit-scrollbar-track{background:transparent}.ac-attached-editor-body::-webkit-scrollbar-thumb{background:var(--ac-muted);border:0;border-radius:9px}.ac-attached-editor[open]{box-shadow:0 12px 24px rgba(0,0,0,.15)}.ac-attached-editor input{font-size:16px}html[data-theme="light"] body .ac-offer-page .ac-attached-editor,html[data-theme="light"] body .ac-offer-page .ac-specifications-trigger,html[data-theme="light"] body .ac-offer-page .ac-offer-breakdown{border:1px solid var(--ac-border)!important}.ac-personal-parameters .ac-original-calculation{display:none}.ac-inline-parameters select{appearance:none;padding-right:42px;background-repeat:no-repeat;background-size:14px;background-position:right 18px center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}` }} />
  </div>;
 }
