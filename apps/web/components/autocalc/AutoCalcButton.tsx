@@ -1,0 +1,16 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Car, Link2, X } from 'lucide-react';
+export function AutoCalcButton(){
+ const [open,setOpen]=useState(false),[url,setUrl]=useState('');const modal=useRef<HTMLDialogElement>(null),trigger=useRef<HTMLButtonElement>(null);const router=useRouter();
+ useEffect(()=>{if(!open)return;modal.current?.showModal();const previous=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.body.style.overflow=previous;};},[open]);
+ function close(){modal.current?.close();setOpen(false);trigger.current?.focus();}
+ function go(manual=false){close();router.push(`/autocalc${!manual&&url.trim()?`?url=${encodeURIComponent(url.trim())}`:''}`);}
+ return <><button ref={trigger} type="button" onClick={()=>setOpen(true)} className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[var(--ac-text)]"><Car size={20}/>АвтоРасчёт</button>{open?<dialog ref={modal} onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===e.currentTarget)close();}} aria-labelledby="autocalc-dialog-title" className="m-auto w-[calc(100%_-_2rem)] max-w-lg rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-6 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/70">
+ <div className="flex items-center justify-between gap-3"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-500/10 text-red-500"><Car size={27}/></span><button type="button" aria-label="Закрыть" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)]"><X/></button></div>
+ <h2 id="autocalc-dialog-title" className="mt-4 text-2xl font-black">Ваш автомобиль. Ваш расчёт.</h2><p className="mt-3 text-sm leading-6 text-[var(--ac-muted)]">Нашли автомобиль за границей? Вставьте ссылку на объявление, чтобы рассчитать стоимость с доставкой в ваш город. Мы попробуем загрузить данные, а недостающие характеристики вы сможете указать самостоятельно.</p>
+ <form onSubmit={e=>{e.preventDefault();go();}} className="mt-5"><label className="text-xs font-bold">Ссылка на автомобиль<input autoFocus required type="url" placeholder="https://…" value={url} onChange={e=>setUrl(e.target.value)} className="mt-2 h-12 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-3 text-base outline-none focus:border-red-500"/></label><button className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#e32c39] px-4 font-bold text-white"><Link2 size={18}/>Получить данные</button></form>
+ <button type="button" onClick={()=>go(true)} className="mt-3 min-h-11 w-full text-sm font-semibold underline underline-offset-4">Заполнить самостоятельно</button><p className="mt-2 text-center text-xs text-[var(--ac-muted)]">Япония · Китай · Корея · ОАЭ · Европа · Грузия</p>
+ </dialog>:null}</>;
+}

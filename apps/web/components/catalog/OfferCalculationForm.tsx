@@ -5,7 +5,7 @@ import { VehicleResearchLink } from "./VehicleResearchLink";
 import type { VehicleResearchIdentity } from "../../lib/catalog/vehicle-research-link";
 
 export type OfferCalculationDraft = {
-  year: string; engineCc: string; powerHp: string; fuel: string;
+  year: string; engineCc: string; powerHp: string; powerKw?: string; fuel: string;
   hybridKind: string; power30MinKw: string; icePowerKw: string;
   productionMonth?: string; productionDay?: string; customsCalculationDate?: string; transportToBorderRub?: string;
   vehicleCategory?: string; grossVehicleWeightKg?: string; n1IceFuel?: string;
@@ -13,7 +13,9 @@ export type OfferCalculationDraft = {
 
 // UI contract only: the caller must validate the scenario with the pricing engine.
 // It deliberately has no access to the saved offer or catalog storage.
-export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", offerId, researchIdentity }: {
+export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", offerId, researchIdentity, showPowerKw = false, requireCategory = false }: {
+  showPowerKw?: boolean;
+  requireCategory?: boolean;
   initial?: Partial<OfferCalculationDraft>;
   onCalculate: (draft: OfferCalculationDraft) => void;
   onManager?: () => void;
@@ -27,7 +29,10 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
   const [draft, setDraft] = useState<OfferCalculationDraft>({
     year: "", engineCc: "", powerHp: "", fuel: "", hybridKind: "", power30MinKw: "", icePowerKw: "", ...initial
   });
-  const field = (key: keyof OfferCalculationDraft, value: string) => setDraft(previous => ({ ...previous, [key]: value }));
+  const field = (key: keyof OfferCalculationDraft, value: string) => setDraft(previous => ({ ...previous, [key]: value,
+    ...(showPowerKw && key === "powerHp" ? {powerKw:value && Number(value)>0 ? String(Number((Number(value)*0.73549875).toFixed(5))) : ""} : {}),
+    ...(showPowerKw && key === "powerKw" ? {powerHp:value && Number(value)>0 ? String(Number((Number(value)/0.73549875).toFixed(2))) : ""} : {})
+  }));
   const electric = draft.fuel === "electric";
   const hybrid = draft.fuel === "hybrid";
   const control = "ac-calculation-input mt-1.5 block h-12 w-full min-w-0 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 text-sm font-semibold text-[var(--ac-text)] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-400/15 disabled:opacity-50";
@@ -52,7 +57,7 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
         <label className="min-w-0 text-xs font-semibold text-[var(--ac-muted)]">Дата расчёта (пусто — сегодня)<input type="date" className={control} value={draft.customsCalculationDate||""} onChange={event=>field("customsCalculationDate",event.target.value)}/></label>
         <label className="min-w-0 text-xs font-semibold text-[var(--ac-muted)]">Топливо
           <select required name="fuel" className={control} value={draft.fuel} onChange={event => setDraft(previous => ({ ...previous,
-            fuel: event.target.value, engineCc: "", powerHp: "", hybridKind: "", power30MinKw: "", icePowerKw: "" }))}>
+            fuel: event.target.value, engineCc: "", powerHp: "", powerKw: "", hybridKind: "", power30MinKw: "", icePowerKw: "" }))}>
             <option value="">Укажите</option>
             <option value="petrol">Бензин</option><option value="diesel">Дизель</option>
             <option value="hybrid">Гибрид</option><option value="electric">Электро</option>
@@ -60,7 +65,8 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
           </select>
         </label>
         {!electric ? numberField("engineCc", "Объём, см³", 300, 10000) : null}
-        {numberField("powerHp", "Мощность, л.с.", 1, 2500, 0.1, draft.vehicleCategory !== "N1")}
+        {numberField("powerHp", "Мощность, л.с.", 1, 2500, showPowerKw ? 0.01 : 0.1, draft.vehicleCategory !== "N1")}
+        {showPowerKw ? numberField("powerKw", "Мощность, кВт", 0.1, 2000, 0.00001, false) : null}
         {hybrid ? <label className="min-w-0 text-xs font-semibold text-[var(--ac-muted)]">Тип гибрида
           <select name="hybridKind" required className={control} value={draft.hybridKind} onChange={event => field("hybridKind", event.target.value)}>
             <option value="">Укажите</option><option value="series_hybrid">Последовательный</option><option value="other_hybrid">Другой гибрид</option>
@@ -69,7 +75,7 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
         {(electric || hybrid) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid") ? numberField("power30MinKw", "30-мин. мощность, кВт", 0.1, 2000, 0.1) : null}
         {hybrid && !(draft.vehicleCategory === "N1" && draft.hybridKind === "series_hybrid") ? numberField("icePowerKw", "Мощность ДВС, кВт", 0.1, 2000, 0.1) : null}
         <label className="min-w-0 text-xs font-semibold text-[var(--ac-muted)]">Категория по документам
-          <select name="vehicleCategory" className={control} value={draft.vehicleCategory||""} onChange={event => field("vehicleCategory",event.target.value)}><option value="">Из объявления</option><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select>
+          <select required={requireCategory} name="vehicleCategory" className={control} value={draft.vehicleCategory||""} onChange={event => field("vehicleCategory",event.target.value)}><option value="">{requireCategory ? "Выберите" : "Из объявления"}</option><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select>
         </label>
         {draft.vehicleCategory === "N1" ? <>{numberField("grossVehicleWeightKg","Полная разрешённая масса, кг",1,3500)}{numberField("transportToBorderRub","Доставка до границы, ₽ (пусто — расходы рынка)",0,10000000,1,false)}</> : null}
         {draft.vehicleCategory === "N1" && hybrid && draft.hybridKind !== "series_hybrid" ? <label className="text-xs font-semibold text-[var(--ac-muted)]">Топливо ДВС гибрида<select required className={control} value={draft.n1IceFuel||""} onChange={event=>field("n1IceFuel",event.target.value)}><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}
