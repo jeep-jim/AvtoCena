@@ -1,0 +1,9 @@
+import {getCurrentUser,isCrmRole} from '@/lib/auth';
+import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
+import {readDiscussion,addDiscussionMessage} from '@/lib/crm-discussion-store';
+import type {DiscussionType} from '@/lib/crm-discussion';
+export const dynamic='force-dynamic';
+const headers={'Cache-Control':'private, no-store'};
+function failure(e:unknown){const code=e instanceof Error?e.message:'';return Response.json({error:code==='discussion_forbidden'?'Нет доступа к обсуждению.':code==='message_conflict'?'Сообщение уже отправлено. Обновите обсуждение.':code==='invalid_reply'?'Сообщение для ответа не найдено.':'Не удалось отправить сообщение. Проверьте текст и повторите.'},{status:code==='discussion_forbidden'?403:400,headers});}
+export async function GET(request:Request){const user=await getCurrentUser();if(!user||!isCrmRole(user.role))return Response.json({error:'auth_required'},{status:401,headers});const q=new URL(request.url).searchParams;try{return Response.json(await readDiscussion(user,q.get('type') as DiscussionType,q.get('id')||''),{headers});}catch(e){return failure(e);}}
+export async function POST(request:Request){if(!isCalculationOriginAllowed(request))return Response.json({error:'origin_forbidden'},{status:403,headers});const user=await getCurrentUser();if(!user||!isCrmRole(user.role))return Response.json({error:'auth_required'},{status:401,headers});try{const raw=await request.text();if(raw.length>12000)throw Error();const b=JSON.parse(raw);return Response.json(await addDiscussionMessage(user,b.type,b.id,b),{headers});}catch(e){return failure(e);}}
