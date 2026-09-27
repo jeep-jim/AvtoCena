@@ -26,8 +26,11 @@ try{
   await page.locator('summary[aria-label^="Категория и масса:"]').click();await page.getByLabel('Категория транспортного средства',{exact:true}).selectOption('M1');
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   assert.equal(await page.getByRole('link',{name:'Уточнить характеристики с ИИ'}).count(),1);
+  await page.evaluate(()=>window.scrollTo(0,0));
   assert.ok(await page.locator('h1').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('header').getBoundingClientRect().bottom),'Header does not cover title');
   await page.screenshot({path:`${out}/card-${width}-${theme}.png`,fullPage:true});
+  await page.locator('summary[aria-label^="Объём двигателя:"]').click();await page.screenshot({path:`${out}/editor-${width}-${theme}.png`});await page.keyboard.press('Escape');assert.equal(await page.locator('details[data-parameter-editor][open]').count(),0);
+  await page.getByText('Проверенные источники по странам',{exact:true}).click();await page.getByLabel('Страна источников',{exact:true}).selectOption('georgia');assert.equal(await page.getByRole('link',{name:'AutoPapa'}).count(),1);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'No horizontal overflow');
   await page.getByLabel('Цена автомобиля в объявлении *').fill('');assert.equal(await page.getByText('1 900 000 ₽',{exact:true}).count(),0,'price edit invalidates previous result');
   await page.getByRole('button',{name:'АвтоРасчёт',exact:true}).click();const modal=page.getByRole('dialog');await modal.waitFor();await modal.getByRole('textbox').fill('https://www.dubicars.com/example');assert.ok(await modal.getByRole('textbox').evaluate(e=>getComputedStyle(e).webkitTextFillColor===getComputedStyle(document.querySelector('main')).color),'Readable URL color');await page.screenshot({path:`${out}/dialog-${width}-${theme}.png`});await page.keyboard.press('Escape');assert.equal(await modal.count(),0);assert.deepEqual(errors,[]);assert.ok(!apiCalls.some(u=>/push|notify|dispatch|rebuild|save|leads/.test(u)),'No background jobs, leads or pushes from calculator');
