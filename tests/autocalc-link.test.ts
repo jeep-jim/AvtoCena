@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { extractSource, sourceUrl, publicIPv4 } from '../apps/web/lib/autocalc/source';
 import { autocalcScenario } from '../apps/web/lib/autocalc/scenario';
+test('reject source challenge pages instead of using them as vehicle titles',()=>{
+ for(const title of ['Pardon Our Interruption','Just a moment...','Access Denied'])assert.throws(()=>extractSource(`<title>${title}</title>`,'https://dubizzle.com/s/example'));
+});
 test('reject internal URLs, credentials, non-https and private DNS addresses',()=>{
  for(const url of ['https://127.0.0.1','https://[::1]','https://2130706433','http://example.com','https://a:b@example.com','https://example.com:444','https://metadata.internal'])assert.throws(()=>sourceUrl(url));
  for(const ip of ['127.1.2.3','10.1.1.1','169.254.169.254','172.16.0.1','192.168.1.2','100.64.0.1','::1','224.0.0.1'])assert.equal(publicIPv4(ip),false,ip);
