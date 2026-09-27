@@ -26,7 +26,8 @@ try{
   await page.locator('summary[aria-label^="Категория и масса:"]').click();await page.getByLabel('Категория транспортного средства',{exact:true}).selectOption('M1');
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   assert.equal(await page.getByRole('link',{name:'Уточнить характеристики с ИИ'}).count(),1);
-  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await page.screenshot({path:`${out}/layout-${width}-${theme}.png`,fullPage:true});
   assert.ok(await page.locator('h1').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('header').getBoundingClientRect().bottom),'Header does not cover title');
   await page.screenshot({path:`${out}/card-${width}-${theme}.png`,fullPage:true});
   await page.locator('summary[aria-label^="Объём двигателя:"]').click();await page.screenshot({path:`${out}/editor-${width}-${theme}.png`});await page.keyboard.press('Escape');assert.equal(await page.locator('details[data-parameter-editor][open]').count(),0);
