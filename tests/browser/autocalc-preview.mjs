@@ -19,6 +19,7 @@ try{
   await page.addInitScript(()=>localStorage.setItem('avtocena_city','Новокузнецк'));
   await page.route('**/api/autocalc',async route=>{const b=route.request().postDataJSON();await route.fulfill({json:b.action==='extract'?{title:'Toyota Corolla',market:'georgia',price:'12000',currency:'USD',images:[],draft:{year:'2022',fuel:'petrol',engineCc:'1800',powerHp:'140'},message:'Проверьте данные'}:{totalRub:1900000,breakdown:[{id:'car',title:'Цена автомобиля',amountRub:1200000},{id:'other',title:'Расходы',amountRub:700000}],rateDate:'2026-09-27',warnings:[]}});});
   await page.goto(origin+'/autocalc');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  assert.ok(await page.locator('#autocalc-url').evaluate(e=>e.getBoundingClientRect().height>=44),'URL input keeps a touch-sized height');
   await page.locator('#autocalc-url').fill('https://myauto.ge/car/123');await page.getByRole('button',{name:'Получить данные',exact:true}).click();await page.getByRole('heading',{name:'Toyota Corolla',exact:true}).waitFor();
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/card-${width}-${theme}.png`,fullPage:true});
