@@ -17,3 +17,7 @@ test('source identity never accepts lookalike hosts or arbitrary KCar IDs',()=>{
  assert.equal(sourceIdentity('https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=../../metadata'),null);
  assert.equal(sourceIdentity('https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=EC61405827')?.id,'EC61405827');
 });
+test('AutoPapa retains source currency and separates rounded engine size from exact hp',async()=>{
+ const d=await extractKnownSource(readFileSync('tests/fixtures/autocalc/autopapa-961979.html','utf8'),'https://autopapa.ge/en/subaru/xv-crosstrek-premium/961979');
+ assert.equal(d.market,'georgia');assert.equal(d.price,'24776');assert.equal(d.currency,'GEL');assert.equal(d.images.length,6);assert.equal(d.draft.powerHp,'152');assert.equal(d.draft.fuel,'petrol');assert.equal(d.draft.engineCc,undefined);
+});

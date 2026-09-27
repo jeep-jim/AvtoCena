@@ -23,7 +23,7 @@ try{
   await page.goto(origin+'/autocalc');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   assert.ok(await page.locator('#autocalc-url').evaluate(e=>e.getBoundingClientRect().height>=44),'URL input keeps a touch-sized height');
   await page.locator('#autocalc-url').fill('https://myauto.ge/car/123');await page.getByRole('button',{name:'Получить данные',exact:true}).click();await page.getByRole('heading',{name:'Toyota Corolla',exact:true}).waitFor();
-  await page.getByText('Категория по документам',{exact:true}).click();await page.getByLabel('Категория транспортного средства',{exact:true}).selectOption('M1');
+  await page.locator('summary[aria-label^="Категория и масса:"]').click();await page.getByLabel('Категория транспортного средства',{exact:true}).selectOption('M1');
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   assert.equal(await page.getByRole('link',{name:'Уточнить характеристики с ИИ'}).count(),1);
   assert.ok(await page.locator('h1').evaluate(e=>e.getBoundingClientRect().top>=document.querySelector('header').getBoundingClientRect().bottom),'Header does not cover title');

@@ -37,7 +37,7 @@ const text=(x:any):string=>String(typeof x==='object' ? x?.name ?? x?.value ?? '
 const numeric=(x:any)=>{const n=Number(typeof x==='object'?x?.value:x);return Number.isFinite(n)&&n>0?n:undefined;};
 export function extractSource(html:string,url:string) {
   const pageTitle=html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '';
-  if (/pardon our interruption|access denied|just a moment|verify (?:that )?you are human|attention required|robot check|captcha/i.test(pageTitle)) throw Error('Источник показал страницу проверки вместо объявления');
+  if (/pardon our interruption|access denied|just a moment|verify (?:that )?you are human|attention required|robot check|security verification|captcha/i.test(pageTitle)) throw Error('Источник показал страницу проверки вместо объявления');
   const nodes:any[]=[];
   function visit(x:any,depth=0){if(!x||typeof x!=='object'||depth>12||nodes.length>500)return;if(Array.isArray(x)){x.slice(0,100).forEach(y=>visit(y,depth+1));return;}nodes.push(x);if(x['@graph'])visit(x['@graph'],depth+1);if(x.mainEntity)visit(x.mainEntity,depth+1);}
   for(const match of html.matchAll(/<script\b[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){try{visit(JSON.parse(match[1]));}catch{}}

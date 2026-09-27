@@ -14,6 +14,18 @@ function fromRow(row:any,url:string,market:string):SourceDraft {
 }
 export async function extractKnownSource(html:string,url:string):Promise<SourceDraft>{
  const base:SourceDraft=extractSource(html,url),identity=sourceIdentity(url);
+ if(identity?.ids[0]==='autopapa_georgia_open'){
+  const {autoPapaDetailPowerHp}=await import('../catalog/autopapa-georgia-source');
+  const plain=html.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+  const facts=plain.slice(plain.indexOf('Body Type:')).split('Car description')[0];
+  const fuel=canonicalSourceFuel(facts.match(/Engine Type:\s*(.*?)(?=Power:|Engine Vol:)/i)?.[1]);
+  if(fuel)base.draft.fuel=fuel;
+  const hp=autoPapaDetailPowerHp(html);if(hp)base.draft.powerHp=String(hp);
+  base.market='georgia';base.notes=[];
+  const liters=facts.match(/Engine Vol:\s*([\d.]+)\s*l/i)?.[1];
+  if(liters){delete base.draft.engineCc;base.notes.push(`Источник указывает объём ${liters} л. Уточните точное значение в см³.`);}
+  return base;
+ }
  if(identity?.ids[0]==='dubicars_uae_exact'){
   const {parseDubicarsCurrentListing}=await import('../catalog/dubicars-current-source');const row=parseDubicarsCurrentListing(html,url);
   if(row){const data=fromRow(row,url,'uae');if(row.semanticEvidence?.engineCc.status==='ambiguous')data.notes!.push(`Источник указывает объём: ${row.semanticEvidence.engineCc.rawValues.join(', ')}. Уточните точный объём в см³.`);return data;}
