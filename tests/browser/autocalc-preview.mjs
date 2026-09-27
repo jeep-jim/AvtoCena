@@ -8,7 +8,7 @@ import tailwindcss from 'tailwindcss';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const out='artifacts/autocalc';fs.mkdirSync(out,{recursive:true});
 await build({entryPoints:['tests/browser/autocalc-fixture.tsx'],bundle:true,splitting:true,format:'esm',platform:'browser',jsx:'automatic',outdir:out,entryNames:'fixture',define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},args=>({contents:args.path==='next/link'?`import React from 'react';export default function Link(props){return React.createElement('a',props)}`:`export const usePathname=()=>window.location.pathname;export const useSearchParams=()=>new URLSearchParams(window.location.search);export const useRouter=()=>({push:()=>{},replace:()=>{}});`,loader:'jsx',resolveDir:process.cwd()}));}}]});
-const publicCss=['select-controls.css','globals.css','catalog-ui.css','public-polish.css','flat-ui.css','public-regression-fixes.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n');
+const publicCss=['select-controls.css','globals.css','catalog-ui.css','public-polish.css','flat-ui.css','public-regression-fixes.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n')+'\n'+fs.readFileSync('apps/web/app/(crm)/crm-responsive.css','utf8');
 const css=await postcss([tailwindcss({content:['tests/browser/autocalc-fixture.tsx','apps/web/components/{catalog,sharing,layout,home,autocalc}/**/*.tsx']})]).process(publicCss+'\n@tailwind base;@tailwind components;@tailwind utilities;html{--ac-surface:#fff;--ac-surface-2:#e7eaf0;--ac-text:#171c24;--ac-muted:#68758a;--ac-border:#ccd0d8;background:var(--ac-surface);color:var(--ac-text)}html[data-theme=dark]{--ac-surface:#1b222c;--ac-surface-2:#303b4c;--ac-text:#fff;--ac-muted:#b8c0cd;--ac-border:#465368}',{from:undefined});fs.writeFileSync(`${out}/app.css`,css.css);
 const html='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>';
 const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost');if(['/','/autocalc'].includes(u.pathname)){res.setHeader('Content-Type','text/html');res.end(html);return;}const base=/^\/(buyers|pdf-flags|brands|avatars|logo)\//.test(u.pathname)?path.resolve('apps/web/public'):path.resolve(out);const file=path.resolve(base,'.'+u.pathname);if(!file.startsWith(base+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',/\.m?js$/.test(file)?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.webp')?'image/webp':file.endsWith('.svg')?'image/svg+xml':'application/octet-stream');res.end(fs.readFileSync(file));});
@@ -20,7 +20,7 @@ try{
   await page.addInitScript(()=>localStorage.setItem('avtocena_city','Новокузнецк'));
   await page.route('**/api/auth/me',r=>r.fulfill({json:{user:null}}));
   await page.route('**/api/autocalc/knowledge?**',r=>r.fulfill({json:{models:[{id:'corolla',title:'Toyota Corolla',href:'/cars/brand/toyota/model/corolla'}],choices:[{id:'known-corolla',title:'Toyota Corolla 2022',kind:'catalog',label:'Аналог в каталоге',market:'georgia',price:'12000',currency:'USD',draft:{year:'2022',fuel:'petrol',engineCc:'1800',powerHp:'140'}}]}}));
-  await page.route('**/api/autocalc',async route=>{const b=route.request().postDataJSON();await route.fulfill({json:b.action==='extract'?{title:'Toyota Corolla',market:'georgia',price:'12000',currency:'USD',images:['data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%23d7dde5%22/%3E%3C/svg%3E'],draft:{year:'2022',fuel:'petrol',engineCc:'1800',powerHp:'140'},message:'Проверьте данные'}:{totalRub:1900000,breakdown:[{id:'car',title:'Цена автомобиля',amountRub:1200000},{id:'other',title:'Расходы',amountRub:700000}],rateDate:'2026-09-27',warnings:[]}});});
+  await page.route('**/api/autocalc',async route=>{const b=route.request().postDataJSON();if(b.action==='calculate')await new Promise(r=>setTimeout(r,1200));await route.fulfill({json:b.action==='extract'?{title:'Toyota Corolla',market:'georgia',price:'12000',currency:'USD',images:['data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%23d7dde5%22/%3E%3C/svg%3E'],draft:{year:'2022',fuel:'petrol',engineCc:'1800',powerHp:'140'},message:'Проверьте данные'}:{totalRub:1900000,breakdown:[{id:'car',title:'Цена автомобиля',amountRub:1200000},{id:'other',title:'Расходы',amountRub:700000}],rateDate:'2026-09-27',warnings:[]}});});
   await page.goto(origin+'/autocalc');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   assert.ok(await page.locator('#autocalc-url').evaluate(e=>e.getBoundingClientRect().height>=44),'URL input keeps a touch-sized height');
   await page.getByRole('textbox',{name:'Название автомобиля *',exact:true}).fill('Toyota Corolla');await page.getByRole('button',{name:'Использовать вариант',exact:true}).waitFor();await page.getByRole('button',{name:'Использовать вариант',exact:true}).click();assert.equal(await page.getByLabel('Цена автомобиля в объявлении *').inputValue(),'12000');
@@ -30,6 +30,14 @@ try{
   await page.locator('summary[aria-label^="Категория и масса:"]').click();await page.getByLabel('Категория транспортного средства',{exact:true}).selectOption('M1');
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   assert.equal(await page.getByRole('button',{name:'Оставить заявку',exact:true}).count(),1);
+  const nameInput=page.getByRole('textbox',{name:'Название автомобиля *',exact:true});
+  await nameInput.focus();await page.keyboard.press('End');await page.keyboard.type(' Test',{delay:850});
+  assert.equal(await nameInput.inputValue(),'Toyota Corolla Test','Slow typing must retain every character through background calculations');
+  assert.ok(await nameInput.evaluate(e=>e===document.activeElement),'Typing focus survives calculation and knowledge responses');
+  await nameInput.fill('Toyota Corolla');await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
+  const columns=page.locator('[data-sticky-offer-column]');assert.equal(await columns.count(),2);
+  assert.deepEqual(await columns.evaluateAll(es=>es.map(e=>getComputedStyle(e).position)),[width>=1024?'sticky':'static',width>=1024?'sticky':'static']);
+
   assert.ok(await page.locator('[data-autocalc-result]').evaluate(e=>{const button=e.previousElementSibling;return e.getBoundingClientRect().top>=button.getBoundingClientRect().bottom&&e.getBoundingClientRect().top-button.getBoundingClientRect().bottom<32;}),'Result follows calculate button');
   assert.equal(await page.locator('.ac-autocalc-parameters').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','No outer panel behind parameters');
   assert.equal(await page.getByRole('link',{name:'Уточнить характеристики с ИИ'}).count(),1);
@@ -42,7 +50,13 @@ try{
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'No horizontal overflow');
   await page.getByLabel('Цена автомобиля в объявлении *').fill('');assert.equal(await page.getByText('1 900 000 ₽',{exact:true}).count(),0,'price edit invalidates previous result');
   await page.getByRole('button',{name:'АвтоРасчёт',exact:true}).click();const modal=page.getByRole('dialog');await modal.waitFor();await modal.getByRole('textbox').fill('https://www.dubicars.com/example');assert.ok(await modal.getByRole('textbox').evaluate(e=>getComputedStyle(e).webkitTextFillColor===getComputedStyle(document.querySelector('main')).color),'Readable URL color');await page.screenshot({path:`${out}/dialog-${width}-${theme}.png`});await page.keyboard.press('Escape');assert.equal(await modal.count(),0);assert.deepEqual(errors,[]);assert.ok(!apiCalls.some(u=>/push|notify|dispatch|rebuild|save|leads/.test(u)),'No background jobs, leads or pushes from calculator');
-  results.push({width,theme,calculation:true,invalidation:true,dialog:true});await context.close();
+  await page.goto(origin+'/autocalc?permissions=1');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  const switches=page.getByRole('switch');await switches.first().waitFor();
+  const checked=page.locator('input[role="switch"]:checked').first();const off=page.locator('input[role="switch"]:not(:checked)').first();
+  assert.equal(await checked.evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(213, 34, 53)');
+  assert.equal(await off.evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(100, 116, 139)');
+  await page.screenshot({path:`${out}/permissions-${width}-${theme}.png`,fullPage:true});
+  results.push({width,theme,calculation:true,invalidation:true,dialog:true,typingFocus:true,sticky:width>=1024,switches:true});await context.close();
  }
 }finally{await browser.close();await new Promise(r=>server.close(r));fs.writeFileSync(`${out}/results.json`,JSON.stringify(results,null,2));}
 console.log(JSON.stringify(results));
