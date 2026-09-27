@@ -18,7 +18,7 @@ try {
  for(const width of [390,1440])for(const theme of ['dark','light']) {
   const context=await browser.newContext({viewport:{width,height:950}}), page=await context.newPage();
   const calls=[], errors=[]; let mode='normal';
-  page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>{errors.push(e.message);console.error('BROWSER',e.message);});
   await page.addInitScript(()=>{localStorage.setItem('avtocena_cookie_notice_acknowledged_v1','1');});
   await page.route('**/api/**',async route=>{
    const url=new URL(route.request().url());
@@ -33,6 +33,7 @@ try {
    return route.fulfill({json:{ok:true,items:[],total:100000,marketCounts:{},rates:[],user:null}});
   });
   await page.goto(origin);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  await page.locator('#form').waitFor().catch(async error=>{console.error(await page.locator('body').innerText());await page.screenshot({path:`${out}/failure.png`});throw error;});
   const badge=page.locator('#form').getByText(/Нашли|Считаем варианты|Количество уточняется/);
   await badge.getByText(/Нашли/).count();
   assert.match(await badge.textContent(),/100/);
