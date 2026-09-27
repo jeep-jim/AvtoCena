@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type WheelEvent as ReactWheelEvent } from "react";
-import { CurrencyFlag, CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
+import { currencyName, CurrencyFlag, CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
 
 import { loadPublicRates } from "../../lib/catalog/public-rates-client";
 
@@ -125,7 +125,8 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
             type="button"
             onClick={() => openCurrency(currency)}
             className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "min-w-[62px] shrink-0"}`}
-            aria-label={`Открыть курс ${currency}`}
+            aria-label={`Открыть курс: ${currencyName(currency)} (${currency})`}
+            title={`${currencyName(currency)} · за ${amount} ${currency}`}
           >
             <CurrencyFlag currency={currency} className="h-4 w-6" />
             <span className="pointer-events-none mt-1 text-[9px] font-black">{currency}</span>
