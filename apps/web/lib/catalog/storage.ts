@@ -566,7 +566,8 @@ export function resetCatalogReadCachesForTests() {
 async function readCurrentSearchProjection(market: string) {
   // A small manifest check invalidates a large projection at publication cutover.
   // Otherwise retain the immutable rows instead of downloading them every minute.
-  const {generationId} = await readManifest();
+  const manifest = await readManifest();
+  const {generationId} = manifest;
   const key = cleanShard(market);
   const now = Date.now();
   for (const [id, entry] of currentProjectionCache) {
@@ -586,8 +587,13 @@ async function readCurrentSearchProjection(market: string) {
   }
   const current = currentProjectionCache.get(key);
   if (current) return current.promise;
-  const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentProjectionPath(market), { generationId: "", items: [] })
-    .then(value => {
+  const promise = (async () => {
+    // Facets are staged before large aliases. Avoid downloading another generation
+    // only to discard it and download every active market as well.
+    const facets = await readCurrentFacets();
+    if (facets.generationId !== generationId) return {generationId,items:await readProjectionRows(manifest,market===CURRENT_ALL_MARKETS_PROJECTION?{}:{market})};
+    return readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(currentProjectionPath(market),{generationId:"",items:[]});
+  })().then(value => {
       const entry = currentProjectionCache.get(key);
       if (entry?.promise === promise) {
         entry.expiresAt = Date.now() + CURRENT_PROJECTION_CACHE_MS;

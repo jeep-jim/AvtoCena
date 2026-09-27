@@ -115,8 +115,12 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.ok(!/^catalog\/public\/projection\//.test(relativePath),"brand search must not fall back to full-market downloads during staging");
       return originalRead(relativePath,fallback);
     };
-    try { assert.deepEqual((await searchOffers(filters)).items.map(offer=>offer.id),["filter-target"]); }
-    finally { storage.readJsonWithMeta=originalRead; }
+    try {
+      assert.deepEqual((await searchOffers(filters)).items.map(offer=>offer.id),["filter-target"]);
+      await storage.writeJson("catalog/public/facets.json",{generationId:"future-staging",makes:[],models:[]});
+      resetCatalogReadCachesForTests();
+      assert.deepEqual((await searchOffers({market:"korea",yearFrom:2021,yearTo:2021,pageSize:10})).items.map(offer=>offer.id),["filter-target"],"a staged market alias must be skipped before its large body is downloaded");
+    } finally { storage.readJsonWithMeta=originalRead; }
 
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`), { force: true });
     fs.rmSync(safeStoragePath("catalog/public/projection/korea.json"), { force: true });
