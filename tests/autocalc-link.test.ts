@@ -35,5 +35,5 @@ test('use explicit product price metadata without mixing recommended cars',()=>{
  const meta='<meta property="og:title" content="Dealer car"><meta property="product:price:amount" content="21000"><meta property="product:price:currency" content="AED"><meta name="twitter:image" content="/car.jpg">';
  const d=extractSource(meta,'https://dealer.example/car');assert.equal(d.price,'21000');assert.equal(d.currency,'AED');assert.equal(d.images[0],'https://dealer.example/car.jpg');
  const ambiguous=meta+'<script type="application/ld+json">[{"@type":"Car","url":"https://dealer.example/other"},{"@type":"Car","url":"https://dealer.example/another"}]</script>';
- assert.equal(extractSource(ambiguous,'https://dealer.example/car').price,'');
+ assert.equal(extractSource(ambiguous,'https://dealer.example/car').price,'');assert.equal(extractSource(ambiguous,'https://dealer.example/car').currency,'');
 });

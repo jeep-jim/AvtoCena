@@ -75,6 +75,6 @@ export function extractSource(html:string,url:string) {
   // Explicit product metadata is useful on sites without JSON-LD. Do not use it on ambiguous multi-car pages.
   const metadataAllowed=cars.length===0||Boolean(car['@type']);
   const price=numeric(offer.price??priceSpecification.price)??(metadataAllowed?numeric(meta('product:price:amount')||meta('og:price:amount')):undefined);
-  const currency=text(offer.priceCurrency||priceSpecification.priceCurrency||(metadataAllowed&&(meta('product:price:currency')||meta('og:price:currency')))).toUpperCase();
+  const currency=text(offer.priceCurrency||priceSpecification.priceCurrency||(metadataAllowed?(meta('product:price:currency')||meta('og:price:currency')):'')).toUpperCase();
   return {title,make:text(resolve(car.brand)),model:text(car.model),market,price:price?.toString()||'',currency,images:[...new Set(photos)],draft,url};
 }
