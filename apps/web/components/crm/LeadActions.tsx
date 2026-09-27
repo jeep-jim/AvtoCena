@@ -138,7 +138,7 @@ export function LeadActions({
       <input
         value={note}
         onChange={(event) => setNote(event.target.value)}
-        placeholder={requiresReason ? "Причина обязательна" : "Внутренний комментарий"}
+        placeholder={requiresReason ? "Причина обязательна" : "Примечание к изменению статуса"}
         className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
       />
 
