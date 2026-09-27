@@ -316,7 +316,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
         </> : null}
       </div>
 
-      {browserOpen ? <PhotoBrowser images={cleanImages.filter(src=>!auctionSheetUrls.includes(src))} title={title} initialIndex={Math.max(0,cleanImages.filter(src=>!auctionSheetUrls.includes(src)).indexOf(cleanImages[activeIndex]))} offerId={offerId} snapshot={snapshot} onClose={()=>setBrowserOpen(false)} /> : null}
+      {browserOpen && typeof document !== "undefined" ? createPortal(<PhotoBrowser images={cleanImages.filter(src=>!auctionSheetUrls.includes(src))} title={title} initialIndex={Math.max(0,cleanImages.filter(src=>!auctionSheetUrls.includes(src)).indexOf(cleanImages[activeIndex]))} offerId={offerId} snapshot={snapshot} onClose={()=>setBrowserOpen(false)} />, document.body) : null}
       {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
     </>
   );
