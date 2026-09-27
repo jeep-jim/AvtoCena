@@ -26,7 +26,7 @@ type FavoriteLeadItem = {
 
 type HostKind = "home" | "brand" | "offer";
 type LeadRequest =
-  | { mode: "generic"; source: string; car?: string }
+  | { mode: "generic"; source: string; car?: string; comment?: string }
   | { mode: "offer"; source: string; offerId: string; car?: string }
   | { mode: "favorites"; source: string };
 
@@ -167,7 +167,7 @@ function MessengerFields({ messenger, setMessenger, contact, setContact, kind, s
 
 function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; favorites: FavoriteLeadItem[]; onClose: () => void }) {
   const panelRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: "" }));
+  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: request.mode === "generic" ? request.comment || "" : "" }));
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
   const [messenger, setMessenger] = useState<MessengerKind>("telegram");
   const [messengerContact, setMessengerContact] = useState("+7");
@@ -356,6 +356,17 @@ export function PublicLeadCaptureV2() {
   const [request, setRequest] = useState<LeadRequest | null>(null);
 
   useEffect(() => { setRequest(null); }, [pathname]);
+  useEffect(() => {
+    if (pathname !== "/autocalc") return;
+    const click = (event: MouseEvent) => {
+      const button = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-autocalc-lead]");
+      if (!button) return;
+      setRequest({mode:"generic", source:"autocalc_link_request", car:(button.dataset.autocalcLead || "Самостоятельный расчёт").split("\n")[0], comment:button.dataset.autocalcLead});
+    };
+    document.addEventListener("click",click);
+    return () => document.removeEventListener("click",click);
+  },[pathname]);
+
 
   useEffect(() => {
     const click = (event: MouseEvent) => {
