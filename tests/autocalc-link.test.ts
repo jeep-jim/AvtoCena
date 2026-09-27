@@ -25,3 +25,15 @@ test('manual scenario validates inputs and never trusts totals from client',()=>
  const {offer}=autocalcScenario({...base,totalRub:1});assert.equal(offer.totalRub,undefined);assert.equal(offer.sourcePrice,15000);assert.equal(offer.sourceId,'manual_link');
  for(const change of [{draft:{...base.draft,vehicleCategory:''}},{market:'unknown'},{price:0},{currency:'INVALID'},{city:''},{draft:{...base.draft,powerHp:''}},{draft:{...base.draft,fuel:'hybrid'}}])assert.throws(()=>autocalcScenario({...base,...change}));
 });
+
+test('resolve JSON-LD graph references for offer, engine and photos',()=>{
+ const graph={'@graph':[{'@type':'Car','@id':'https://dealer.example/car/7#car',name:'Test car',offers:{'@id':'#offer'},vehicleEngine:{'@id':'#engine'},image:[{'@id':'#image'}]},{'@type':'Offer','@id':'#offer',priceSpecification:{'@id':'#price'}},{'@id':'#price',price:13500,priceCurrency:'EUR'},{'@id':'#engine',engineDisplacement:{value:1598,unitCode:'CMQ'},enginePower:{value:82,unitCode:'KWT'}},{'@type':'ImageObject','@id':'#image',contentUrl:'/photos/car.jpg'}]};
+ const d=extractSource(`<script type="application/ld+json">${JSON.stringify(graph)}</script>`,'https://dealer.example/car/7');
+ assert.equal(d.price,'13500');assert.equal(d.currency,'EUR');assert.equal(d.draft.engineCc,'1598');assert.equal(d.draft.powerKw,'82');assert.deepEqual(d.images,['https://dealer.example/photos/car.jpg']);
+});
+test('use explicit product price metadata without mixing recommended cars',()=>{
+ const meta='<meta property="og:title" content="Dealer car"><meta property="product:price:amount" content="21000"><meta property="product:price:currency" content="AED"><meta name="twitter:image" content="/car.jpg">';
+ const d=extractSource(meta,'https://dealer.example/car');assert.equal(d.price,'21000');assert.equal(d.currency,'AED');assert.equal(d.images[0],'https://dealer.example/car.jpg');
+ const ambiguous=meta+'<script type="application/ld+json">[{"@type":"Car","url":"https://dealer.example/other"},{"@type":"Car","url":"https://dealer.example/another"}]</script>';
+ assert.equal(extractSource(ambiguous,'https://dealer.example/car').price,'');
+});
