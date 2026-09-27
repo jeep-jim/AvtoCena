@@ -171,9 +171,9 @@ function ensureCatalogFilterLayoutPolish() {
   }
 }
 
-function useCatalogFilterDependentUi() {
+function useCatalogFilterDependentUi(enabled = true) {
   useEffect(() => {
-    if (catalogFilterDependentUiMounted) return;
+    if (!enabled || catalogFilterDependentUiMounted) return;
     catalogFilterDependentUiMounted = true;
     let frame = 0;
     let facetSignature = "";
@@ -257,7 +257,7 @@ function useCatalogFilterDependentUi() {
       window.removeEventListener("resize", requestRefresh);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [enabled]);
 }
 
 export function VehicleModelSearch({
@@ -291,7 +291,7 @@ export function VehicleModelSearch({
   const input = useRef<HTMLInputElement>(null);
   const submitRef = useRef(onSubmit);
 
-  useCatalogFilterDependentUi();
+  useCatalogFilterDependentUi(contextual);
   useLayoutEffect(() => { submitRef.current = onSubmit; }, [onSubmit]);
   useEffect(() => setQuery(value || ""), [value]);
 
