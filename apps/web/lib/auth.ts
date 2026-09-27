@@ -16,6 +16,7 @@ export type AuthUser = {
   telegramId?: string;
   displayName: string;
   avatarUrl?: string;
+  personalPhone?: string;
   companyId?: string;
   role: UserRole;
   status?: "active" | "disabled";

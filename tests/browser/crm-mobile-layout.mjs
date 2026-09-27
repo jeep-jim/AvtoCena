@@ -36,7 +36,7 @@ const results=[],failures=[];
 try{
  for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents','staff'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
-  await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
+  await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',personalPhone:'+79991234567',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
    let reminders=[];let teamShifts=[];
    await page.route('**/api/crm/team/schedule**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();teamShifts=[...teamShifts.filter(x=>x.userId!==b.userId||x.date!==b.date),{...b,updatedAt:new Date().toISOString()}];await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{shifts:teamShifts,people:[{id:'owner-test',name:'Тестовый руководитель',birthday:''},{id:'manager-test',name:'Александр Константинопольский',birthday:''}]}});});
    await page.route('**/api/crm/notifications**',r=>r.fulfill({json:{notifications:[],reminders}}));
@@ -81,6 +81,7 @@ try{
    if(kind==='team'){await page.locator('.crm-schedule-scroll tbody tr').nth(1).waitFor();const cell=page.locator('.crm-schedule-scroll tbody tr').nth(1).locator('td button').first();await cell.click();await page.getByLabel('Начало',{exact:true}).fill('09:00');page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Сохранить смену',exact:true}).click();assert.equal(teamShifts.length,0);page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Сохранить смену',exact:true}).click();await page.locator('.crm-shift-editor').waitFor({state:'detached'});assert.equal(teamShifts[0].start,'09:00');assert.equal(teamShifts[0].confirmed,true);}
    if(kind==='settings')assert.equal(await page.locator('.crm-content details[open]').count(),0,'markets start collapsed');
    if(kind==='staff'){
+    assert.equal(await page.getByLabel('Личный телефон',{exact:false}).getAttribute('type'),'tel');
     assert.equal(await page.getByText('Загрузить фото',{exact:true}).count(),1,'single photo upload');
     const accessBox=await page.getByRole('heading',{name:'Доступ в CRM',exact:true}).boundingBox(),nameBox=await page.getByLabel('Имя сотрудника',{exact:true}).boundingBox();assert.ok(accessBox.y<nameBox.y,'access controls are above profile');
     await page.getByLabel('Дата рождения',{exact:true}).fill('1991-05-16');
@@ -196,7 +197,18 @@ try{
     page.once('dialog',d=>{assert.match(d.message(),/навсегда/);return d.accept();});await page.getByRole('button',{name:'Очистить корзину (1)',exact:true}).click();await page.getByRole('status').filter({hasText:'Удалено файлов: 1'}).waitFor();assert.equal(patches,2);
    }
    if(kind==='overview'){
+    await page.locator('.crm-presence-person').first().waitFor();
+    assert.equal(await page.locator('.crm-presence-avatar').count(),2);
+    assert.equal(await page.locator('.crm-presence-online').count(),1);
+    const toggle=page.getByRole('button',{name:'Развернуть команду',exact:true});
+    assert.equal(await toggle.getAttribute('aria-expanded'),'false');
+    if(width===390||width===1440)await page.locator('.crm-presence').screenshot({path:`${out}/team-circles-${theme}-${width}.png`});
+    await toggle.click();
     await page.locator('.crm-presence-card').first().waitFor();
+    assert.equal(await page.getByRole('link',{name:'Позвонить: Тестовый руководитель',exact:true}).getAttribute('href'),'tel:+79991234567');
+    assert.ok(await page.getByRole('button',{name:'Личный телефон не указан: Александр Константинопольский',exact:true}).isDisabled());
+    assert.equal(await page.locator('.crm-presence-card a a').count(),0);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'expanded team fits viewport');
     for(const selector of ['.crm-presence-card','.crm-event'])assert.ok(await page.locator(selector).first().evaluate(e=>getComputedStyle(e).backgroundColor!==getComputedStyle(e.parentElement.closest('section')||e.parentElement).backgroundColor),'distinct card background');
    }
    if(kind==='settings'){
