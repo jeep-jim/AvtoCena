@@ -1,0 +1,34 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {MessageCircle,Send,X} from 'lucide-react';
+import {discussionAnchor,type DiscussionMessage,type DiscussionType} from '../../lib/crm-discussion';
+import {defaultManagerAvatar} from '../../lib/default-avatars';
+import {crmDateTime} from '../../lib/crm-time';
+export function TeamDiscussion({type,entityId,label,initialMessages=[],userId,canReply}:{type:DiscussionType;entityId:string;label:string;initialMessages?:DiscussionMessage[];userId:string;canReply:boolean}){
+ const [messages,setMessages]=useState(initialMessages),[text,setText]=useState(''),[replyTo,setReplyTo]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[highlight,setHighlight]=useState('');
+ const root=useRef<HTMLElement>(null),list=useRef<HTMLDivElement>(null),input=useRef<HTMLTextAreaElement>(null),scrolled=useRef(false),operation=useRef(''),readIds=useRef(new Set<string>()),followBottom=useRef(true);
+ const anchor=discussionAnchor(type,entityId);
+ useEffect(()=>{
+  let active=true,loading=false;const controller=new AbortController();const details=root.current?.closest('details');
+  const refresh=async()=>{if(loading||document.visibilityState!=='visible'||(details&&!details.open))return;loading=true;try{const r=await fetch(`/api/crm/discussion?type=${type}&id=${encodeURIComponent(entityId)}`,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error();const data=await r.json();if(!active)return;if(Array.isArray(data.messages))setMessages(old=>JSON.stringify(old)===JSON.stringify(data.messages)?old:data.messages);
+   // Reading a conversation marks only its notices, and only while it is visible.
+   const box=root.current?.getBoundingClientRect();const ids=(data.noticeIds||[]).filter((id:string)=>!readIds.current.has(id)).slice(-150);
+   if(box&&box.top<innerHeight&&box.bottom>0&&ids.length){const ack=await fetch('/api/crm/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(ack.ok){ids.forEach((id:string)=>readIds.current.add(id));window.dispatchEvent(new Event('avtocena:crm-change'));}}
+  }catch{if(active&&!controller.signal.aborted)setError('Не удалось обновить обсуждение. Повторим автоматически.');}finally{loading=false;}};
+  const focusTarget=()=>{let hash='';try{hash=decodeURIComponent(location.hash.slice(1));}catch{}if(hash===anchor){if(details)details.open=true;const target=new URLSearchParams(location.search).get('message')||'';setHighlight(target);if(!scrolled.current){scrolled.current=true;requestAnimationFrame(()=>root.current?.scrollIntoView({block:'start'}));}}};
+  focusTarget();void refresh();const timer=setInterval(refresh,15_000);details?.addEventListener('toggle',refresh);window.addEventListener('avtocena:crm-change',refresh);window.addEventListener('hashchange',focusTarget);document.addEventListener('visibilitychange',refresh);
+  return()=>{active=false;controller.abort();clearInterval(timer);details?.removeEventListener('toggle',refresh);window.removeEventListener('avtocena:crm-change',refresh);window.removeEventListener('hashchange',focusTarget);document.removeEventListener('visibilitychange',refresh);};
+ },[type,entityId,anchor]);
+ useEffect(()=>{if(!highlight&&followBottom.current&&list.current)list.current.scrollTop=list.current.scrollHeight;},[messages,highlight]);
+ useEffect(()=>{if(highlight){const target=list.current?.querySelector(`[data-message-id="${CSS.escape(highlight)}"]`) as HTMLElement|null;if(target&&list.current)list.current.scrollTop=target.offsetTop-list.current.offsetTop;}},[highlight]);
+ async function send(){if(busy||!text.trim())return;setBusy(true);setError('');if(!operation.current)operation.current=crypto.randomUUID();try{const r=await fetch('/api/crm/discussion',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type,id:entityId,text,replyTo,operationId:operation.current})});const d=await r.json();if(!r.ok)throw Error(d.error);setMessages(d.messages||[]);setText('');setReplyTo('');operation.current='';window.dispatchEvent(new Event('avtocena:crm-change'));requestAnimationFrame(()=>{if(list.current)list.current.scrollTop=list.current.scrollHeight;input.current?.focus();});}catch(e){setError((e as Error).message||'Не удалось отправить сообщение.');}finally{setBusy(false);}}
+ const reply=messages.find(n=>n.id===replyTo);
+ return <section id={anchor} ref={root} className="crm-discussion" aria-label={`Обсуждение команды · ${label}`}>
+  <header><h2><MessageCircle size={20}/>Обсуждение команды</h2><p>{label}</p><small>Сообщения сотрудникам с доступом к карточке. Клиент их не получает.</small></header>
+  <div className="crm-discussion-messages" ref={list} onScroll={()=>{const node=list.current;if(node)followBottom.current=node.scrollHeight-node.scrollTop-node.clientHeight<40;}} role="log" aria-live="polite" aria-relevant="additions">
+   {messages.length?messages.map(n=>{const quoted=messages.find(m=>m.id===n.replyTo);return <article data-message-id={n.id} key={n.id} className={`crm-message ${n.createdByUserId===userId?'is-own':''} ${n.id===highlight?'is-highlighted':''}`}><img src={n.avatarUrl||defaultManagerAvatar(n.createdByUserId||n.createdByName||'staff')} alt="" width={30} height={30}/><div className="crm-message-bubble"><div className="crm-message-author"><strong>{n.createdByName||'Сотрудник'}{n.createdByUserId===userId?' (вы)':''}</strong><time>{crmDateTime(n.createdAt)}</time></div>{quoted?<blockquote><b>{quoted.createdByName}</b><span>{quoted.text}</span></blockquote>:null}<p>{n.text}</p>{canReply?<button type="button" onClick={()=>{setReplyTo(n.id);input.current?.focus();}}>Ответить</button>:null}</div></article>;}):<p className="crm-discussion-empty">Здесь можно обсудить {type==='lead'?'заявку':'клиента'} с командой. Напишите первое сообщение ниже.</p>}
+  </div>
+  {canReply?<form onSubmit={e=>{e.preventDefault();void send();}} className="crm-discussion-compose">{reply?<div className="crm-discussion-reply"><span>Ответ: {reply.createdByName} — {reply.text}</span><button type="button" aria-label="Отменить ответ" onClick={()=>setReplyTo('')}><X size={16}/></button></div>:null}<label htmlFor={`${anchor}-input`}>Сообщение команде</label><textarea ref={input} id={`${anchor}-input`} value={text} disabled={busy} rows={3} maxLength={2000} placeholder="Напишите сообщение или ответ…" onChange={e=>{setText(e.target.value);operation.current='';}} onKeyDown={e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();void send();}}}/><div><small>Ctrl + Enter — отправить</small><button type="submit" disabled={busy||!text.trim()}><Send size={16}/>{busy?'Отправляем…':'Отправить'}</button></div></form>:<p className="crm-discussion-empty">У вас доступ только к просмотру обсуждения.</p>}
+  {error?<p role="alert" className="crm-discussion-error">{error}</p>:null}
+ </section>;
+}
