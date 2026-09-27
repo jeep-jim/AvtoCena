@@ -17,7 +17,7 @@ test('link calculator API rejects incomplete input, trusts engine only, and retu
   assert.equal((await post({})).status,400);assert.equal(state.calls.length,0);
   assert.equal((await post({action:'extract',url:'https://127.0.0.1'})).status,400);
   assert.equal((await post({title:'x'.repeat(13000)})).status,413);
-  const body={title:'Corolla',market:'china',price:100000,currency:'CNY',city:'Новокузнецк',draft:{year:2022,fuel:'petrol',engineCc:1500,powerHp:120},totalRub:1};
+  const body={title:'Corolla',market:'china',price:100000,currency:'CNY',city:'Новокузнецк',draft:{vehicleCategory:'M1',year:2022,fuel:'petrol',engineCc:1500,powerHp:120},totalRub:1};
   const r=await post(body);assert.equal(r.status,200);assert.equal((await r.json()).totalRub,2500000);assert.equal(state.calls[0].offer.totalRub,undefined);assert.equal(state.calls[0].parameters.deliveryCity,'Новокузнецк');
   const pdf=await post({...body,action:'pdf'});assert.equal(pdf.headers.get('content-type'),'application/pdf');assert.match(await pdf.text(),/^%PDF/);
  }finally{delete (globalThis as any).__autocalcTest;}

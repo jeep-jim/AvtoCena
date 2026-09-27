@@ -13,8 +13,9 @@ export type OfferCalculationDraft = {
 
 // UI contract only: the caller must validate the scenario with the pricing engine.
 // It deliberately has no access to the saved offer or catalog storage.
-export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", offerId, researchIdentity, showPowerKw = false }: {
+export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onDraftChange, pending = false, error = "", offerId, researchIdentity, showPowerKw = false, requireCategory = false }: {
   showPowerKw?: boolean;
+  requireCategory?: boolean;
   initial?: Partial<OfferCalculationDraft>;
   onCalculate: (draft: OfferCalculationDraft) => void;
   onManager?: () => void;
@@ -74,7 +75,7 @@ export function OfferCalculationForm({ initial = {}, onCalculate, onManager, onD
         {(electric || hybrid) && !(draft.vehicleCategory === "N1" && draft.hybridKind !== "other_hybrid") ? numberField("power30MinKw", "30-мин. мощность, кВт", 0.1, 2000, 0.1) : null}
         {hybrid && !(draft.vehicleCategory === "N1" && draft.hybridKind === "series_hybrid") ? numberField("icePowerKw", "Мощность ДВС, кВт", 0.1, 2000, 0.1) : null}
         <label className="min-w-0 text-xs font-semibold text-[var(--ac-muted)]">Категория по документам
-          <select name="vehicleCategory" className={control} value={draft.vehicleCategory||""} onChange={event => field("vehicleCategory",event.target.value)}><option value="">Из объявления</option><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select>
+          <select required={requireCategory} name="vehicleCategory" className={control} value={draft.vehicleCategory||""} onChange={event => field("vehicleCategory",event.target.value)}><option value="">{requireCategory ? "Выберите" : "Из объявления"}</option><option value="M1">M1 · Легковой</option><option value="N1">N1 · Грузовой до 3,5 т</option></select>
         </label>
         {draft.vehicleCategory === "N1" ? <>{numberField("grossVehicleWeightKg","Полная разрешённая масса, кг",1,3500)}{numberField("transportToBorderRub","Доставка до границы, ₽ (пусто — расходы рынка)",0,10000000,1,false)}</> : null}
         {draft.vehicleCategory === "N1" && hybrid && draft.hybridKind !== "series_hybrid" ? <label className="text-xs font-semibold text-[var(--ac-muted)]">Топливо ДВС гибрида<select required className={control} value={draft.n1IceFuel||""} onChange={event=>field("n1IceFuel",event.target.value)}><option value="">Укажите</option><option value="petrol">Бензин</option><option value="diesel">Дизель</option></select></label> : null}

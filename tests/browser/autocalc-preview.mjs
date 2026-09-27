@@ -21,6 +21,7 @@ try{
   await page.goto(origin+'/autocalc');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   assert.ok(await page.locator('#autocalc-url').evaluate(e=>e.getBoundingClientRect().height>=44),'URL input keeps a touch-sized height');
   await page.locator('#autocalc-url').fill('https://myauto.ge/car/123');await page.getByRole('button',{name:'Получить данные',exact:true}).click();await page.getByRole('heading',{name:'Toyota Corolla',exact:true}).waitFor();
+  await page.getByLabel('Категория по документам').selectOption('M1');
   await page.getByRole('button',{name:'Рассчитать под ключ',exact:true}).click();await page.getByText('1 900 000 ₽',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/card-${width}-${theme}.png`,fullPage:true});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),'No horizontal overflow');
