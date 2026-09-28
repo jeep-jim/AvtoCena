@@ -1,8 +1,7 @@
 {
-  "operation": "catalog-fresh-independent-sweep-20260922",
-  "market": "korea",
+  "requestedAt": "2026-09-28",
+  "reason": "launch_audit_kcar_age_filter_and_full_pass_budget",
   "publishMarkets": [
     "korea"
-  ],
-  "resetCursors": true
+  ]
 }
