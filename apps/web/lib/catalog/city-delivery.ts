@@ -2,9 +2,13 @@
  * Rounded planning distances, NOT measured navigation routes or carrier quotes.
  * Novokuznetsk is a commercial anchor, not a regression from kilometres.
  * Edit this versioned table when actual carrier tariffs become available. */
-export const DELIVERY_TARIFF_VERSION = "market-origins-20260920-v2";
+export const DELIVERY_TARIFF_VERSION = "market-origins-20260928-v3";
 const routes: Record<string, [string, number, number?]> = {
  "владивосток": ["Владивосток", 0, 0],
+ // Yandex Maps route checked 2026-09-28: 97–101 km, rounded for this
+ // provisional tariff. https://yandex.ru/maps/routes/auto/ussuriysk/vladivostok/
+ // The existing minimum applies; this is not a confirmed carrier quotation.
+ "уссурийск": ["Уссурийск", 100],
  "хабаровск": ["Хабаровск", 760], "благовещенск": ["Благовещенск", 1450],
  "чита": ["Чита", 3000], "улан-удэ": ["Улан-Удэ", 3650], "иркутск": ["Иркутск", 4100],
  "красноярск": ["Красноярск", 5150], "кемерово": ["Кемерово", 5700],
