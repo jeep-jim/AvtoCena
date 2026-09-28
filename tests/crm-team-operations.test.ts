@@ -55,3 +55,11 @@ test('calendar batch is atomic, preserves unselected dates and supports notes, v
  const clear={...batch,dates:['2026-10-02'],clear:true,expectedUpdates:{'2026-10-02':saved[0].updatedAt}};await api.saveShifts(owner,clear);const remaining=await api.readSchedule('2026-10');assert.equal(remaining.length,1);assert.equal(remaining[0].date,'2026-10-05');
  await api.saveShifts(owner,{...batch,dates:['2026-10-09'],kind:'note',note:'Обучение'});assert.equal((await api.readSchedule('2026-10')).find((s:any)=>s.date==='2026-10-09').note,'Обучение');
 });
+
+test('mixed work/rest batch saves both kinds and records accurate daily changes',async()=>{
+ const state={files:new Map(),users:[owner,manager],events:[] as any[]};const api=await moduleFor('apps/web/lib/crm-team.ts',state);
+ const input={userId:'m',dates:['2026-10-01','2026-10-02'],dayKinds:{'2026-10-01':'work','2026-10-02':'off'},start:'10:00',end:'20:00',confirmed:true,expectedUpdates:{}};
+ await assert.rejects(api.saveShifts(owner,{...input,dayKinds:{'2026-10-01':'work'}}),/рабочие и выходные/);
+ await assert.rejects(api.saveShifts(owner,{...input,dayKinds:{...input.dayKinds,'2026-10-03':'off'}}),/рабочие и выходные/);
+ const saved=await api.saveShifts(owner,input);assert.equal(saved[0].start,'10:00');assert.equal(saved[1].kind,'off');assert.equal(saved[1].start,'');assert.equal(saved[1].end,'');assert.equal(state.events[0].changes[1].after,'Выходной');assert.equal(state.files.get('crm/notifications.json').length,1);assert.match(state.files.get('crm/notifications.json')[0].text,/рабочих дней: 1, выходных: 1/);
+});
