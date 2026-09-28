@@ -38,3 +38,17 @@ test("currency names are readable in Russian", () => {
   assert.equal(currencyName("eur"), "Евро");
   assert.equal(currencyName("KRW"), "Южнокорейская вона");
 });
+
+test("recalculated price recovers its own dated comparison without changing the quote", async () => {
+  const {withLiveRate} = await import('../apps/web/components/catalog/PriceTrend');
+  const offer = {totalRub: 2_000_000, sourceCurrency:'EUR', calculationSnapshot:{currencyRate:{currency:'EUR',effectiveRate:95,rateDate:'2026-09-26',rateSource:'cbr_live',sourcePrice:10_000}}};
+  const live = {currency:'EUR',effectiveRate:98,rateDate:'2026-09-29',history:[{date:'2026-09-25',effectiveRate:96},{date:'2026-09-26',effectiveRate:95},{date:'2026-09-29',effectiveRate:98}]};
+  const restored = withLiveRate(offer,live);
+  assert.equal(restored.totalRub,offer.totalRub);
+  assert.equal(restored.calculationSnapshot?.currencyRate?.effectiveRate,95);
+  assert.equal(restored.calculationSnapshot?.currencyRate?.rateDate,'2026-09-26');
+  assert.equal(resolvePriceTrend(restored)?.deltaRub,-10_000);
+  assert.equal(withLiveRate(offer,{...live,history:[]}),offer);
+  assert.equal(withLiveRate({...offer,calculationSnapshot:{currencyRate:{...offer.calculationSnapshot.currencyRate,rateSource:'atb_akebono'}}},live).calculationSnapshot?.currencyRate?.previousEffectiveRate,undefined);
+  assert.equal(withLiveRate(offer,{...live,currency:'USD'}),offer);
+});

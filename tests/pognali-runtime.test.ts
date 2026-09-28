@@ -45,3 +45,11 @@ test('overturned car on the ground ends visibly; a midair flip can recover',()=>
  assert.equal(p.deathReason,'flip');assert.equal(h.element('#rTitle').textContent,'Машина перевернулась');assert.equal(h.element('#scrResult').classList.contains('hidden'),false);
  assert.equal(h.messages.filter(m=>m.type==='finish').length,1);
 });
+
+test('every race mode generates a track without spikes',()=>{
+ for(const mode of ['solo','circuit','battle']){
+  const h=harness();h.modeElements.find(el=>el.dataset.mode===mode)!.fire('click');h.element('#btnStart').fire('click');h.bridge({type:'started',id:mode});
+  if(mode==='solo')assert.ok(h.engine.state.obstacles.length>0);
+  assert.ok(h.engine.state.obstacles.every((o:any)=>['rock','pit','crate'].includes(o.type)));
+ }
+});

@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react';
 import {ArrowRight,ChevronDown,RefreshCw} from 'lucide-react';
 import type {CrmActivity,ActivityPerson} from '../../lib/crm-activity';
 import {defaultManagerAvatar} from '../../lib/default-avatars';
+import {groupCrmActivity} from '../../lib/crm-activity-groups';
 import {crmDateTime} from '../../lib/crm-time';
 function Person({person}:{person?:ActivityPerson}){return <span className="crm-event-person"><img src={person?.avatarUrl||defaultManagerAvatar(person?.id||'site')} alt="" width={32} height={32}/><span>{person?.name||'Сайт'}</span></span>;}
 export function ActivityFeed({compact=false}:{compact?:boolean}){
@@ -18,11 +19,18 @@ export function ActivityFeed({compact=false}:{compact?:boolean}){
  {!compact?<div className="mb-4 flex flex-wrap items-center gap-2"><button type="button" aria-pressed={!mine} className="soft-input rounded-xl px-4 py-2" onClick={()=>setMine(false)}>Общая лента</button><button type="button" aria-pressed={mine} className="soft-input rounded-xl px-4 py-2" onClick={()=>setMine(true)}>Мои действия</button><span className="text-xs text-[var(--ac-muted)]">Обновляется автоматически · время Новокузнецка</span></div>:null}
  {error?<p role="status" className="mb-3 text-sm text-[var(--ac-muted)]">{error}</p>:null}
  {!loaded&&!error?<p className="text-sm text-[var(--ac-muted)]">Загружаем события…</p>:null}
- {events.filter(e=>!mine||e.actor?.id===userId).map(e=><details key={e.id} className="crm-event">
-  <summary>{e.image?<img className="crm-event-car" src={e.image} alt="Автомобиль из заявки" loading="lazy"/>:null}<div className="crm-event-people"><Person person={e.actor}/>{e.target?<><ArrowRight size={16}/><Person person={e.target}/></>:null}</div><span className="crm-event-meta"><time dateTime={e.createdAt}>{crmDateTime(e.createdAt)}</time>{e.currentStatus?<span className="crm-event-status">{e.currentStatus}</span>:null}</span><strong>{e.title}</strong>{e.entityLabel?<span className="crm-event-label">{e.entityLabel}</span>:null}<ChevronDown size={16} className="crm-event-chevron"/></summary>
-  <div className="crm-event-detail">{e.text?<p className="whitespace-pre-wrap">{e.text}</p>:null}{e.changes?.map((change,i)=><div className="crm-event-change" key={i}><b>{change.label}</b><span>{change.before||'Не указано'} <ArrowRight size={13}/> {change.after||'Не указано'}</span></div>)}{e.href?<a href={e.href} className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-red-400">Открыть {e.type==='lead_note_added'||e.type==='client_note_added'||(e.type==='client_updated'&&e.changes?.some(c=>c.label==='Комментарий'))?'обсуждение и ответить':e.type.startsWith('reminder_')?'напоминание':e.entityType==='offer'?'автомобиль':e.entityType==='contract'?'договор':e.entityType==='lead'?'заявку':e.entityType==='client'?'клиента':'подробности'} <ArrowRight size={16}/></a>:null}{!e.text&&!e.changes?.length&&!e.href?<p>Действие зафиксировано {crmDateTime(e.createdAt)}.</p>:null}</div>
- </details>)}
+ {groupCrmActivity(events.filter(e=>!mine||e.actor?.id===userId)).map(group=>group.events.length===1
+  ? <ActivityEvent key={group.id} e={group.events[0]}/>
+  : <details key={group.id} className="crm-event crm-event-group">
+    <summary><div className="crm-event-people"><Person person={group.events[0].actor}/></div><span className="crm-event-meta"><time dateTime={group.events[0].createdAt}>{crmDateTime(group.events[0].createdAt)}</time></span><strong>{group.section}</strong><span className="crm-event-count" aria-label={`Действий внутри: ${group.events.length}`}>{group.events.length}</span><ChevronDown size={16} className="crm-event-chevron"/></summary>
+    <div className="crm-event-children">{group.events.map(e=><ActivityEvent key={e.id} e={e}/>)}</div>
+   </details>)}
  {loaded&&!events.length?<p className="py-5 text-sm text-[var(--ac-muted)]">Событий пока нет. Новые действия будут появляться здесь автоматически.</p>:null}
  {!compact&&more&&events.length>=limit?<button type="button" disabled={loadingMore} onClick={older} className="soft-input mt-4 flex min-h-11 items-center gap-2 rounded-xl px-4"><RefreshCw size={16}/> {loadingMore?'Загружаем…':'Показать ещё'}</button>:null}
  </section>;
 }
+
+function ActivityEvent({e}:{e:CrmActivity}){return <details className="crm-event">
+  <summary>{e.image?<img className="crm-event-car" src={e.image} alt="Автомобиль из заявки" loading="lazy"/>:null}<div className="crm-event-people"><Person person={e.actor}/>{e.target?<><ArrowRight size={16}/><Person person={e.target}/></>:null}</div><span className="crm-event-meta"><time dateTime={e.createdAt}>{crmDateTime(e.createdAt)}</time>{e.currentStatus?<span className="crm-event-status">{e.currentStatus}</span>:null}</span><strong>{e.title}</strong>{e.entityLabel?<span className="crm-event-label">{e.entityLabel}</span>:null}<ChevronDown size={16} className="crm-event-chevron"/></summary>
+  <div className="crm-event-detail">{e.text?<p className="whitespace-pre-wrap">{e.text}</p>:null}{e.changes?.map((change,i)=><div className="crm-event-change" key={i}><b>{change.label}</b><span>{change.before||'Не указано'} <ArrowRight size={13}/> {change.after||'Не указано'}</span></div>)}{e.href?<a href={e.href} className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-red-400">Открыть {e.type==='lead_note_added'||e.type==='client_note_added'||(e.type==='client_updated'&&e.changes?.some(c=>c.label==='Комментарий'))?'обсуждение и ответить':e.type.startsWith('reminder_')?'напоминание':e.entityType==='offer'?'автомобиль':e.entityType==='contract'?'договор':e.entityType==='lead'?'заявку':e.entityType==='client'?'клиента':'подробности'} <ArrowRight size={16}/></a>:null}{!e.text&&!e.changes?.length&&!e.href?<p>Действие зафиксировано {crmDateTime(e.createdAt)}.</p>:null}</div>
+ </details>;}
