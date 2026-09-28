@@ -370,6 +370,32 @@ async function request(url: string) {
   } finally { clearTimeout(timeout); }
 }
 
+/** Read the source's pagination, including pages whose cars all fail our filters. */
+export function autoPapaListingPagination(markup: string, pageUrl: string) {
+  const url = new URL(pageUrl);
+  const page = Number(url.searchParams.get("page") || 1);
+  const opening = /<div\b[^>]*class=["']boxPages["'][^>]*>/i.exec(markup);
+  let pager = "";
+  if (opening) {
+    const start = opening.index + opening[0].length;
+    const tail = markup.slice(start);
+    let depth = 1;
+    for (const tag of tail.matchAll(/<\/?div\b[^>]*>/gi)) {
+      depth += /^<\//.test(tag[0]) ? -1 : 1;
+      if (depth === 0) { pager = tail.slice(0,tag.index); break; }
+    }
+  }
+  if (!pager || !new RegExp(`class=["']current["'][^>]*>\\s*${page}\\s*<`).test(pager)) return null;
+  const links = [...pager.matchAll(/<a\b([^>]*)>/gi)];
+  const next = links.find(([, attributes]) => /\brel=["']next["']/i.test(attributes));
+  if (!next) return {nextCursor: null, finished: true};
+  const href = next[1].match(/\bhref=["']([^"']+)["']/i)?.[1];
+  if (!href) return null;
+  const target = new URL(decode(href), url);
+  if (target.origin !== url.origin || target.pathname !== url.pathname || Number(target.searchParams.get("page")) !== page + 1) return null;
+  return {nextCursor: String(page + 1), finished: false};
+}
+
 export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
   sourceId = "autopapa_georgia_open";
   market = "georgia" as const;
@@ -384,8 +410,9 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
     url.searchParams.set("page", String(page));
     const result = await request(url.toString());
     const items = parseAutoPapaGeorgiaListing(result.markup, result.response.url || url.toString());
-    if (!items.length) throw new Error(`autopapa_georgia_parsed_zero_status_${result.response.status}_bytes_${result.markup.length}`);
-    return { items, nextCursor: String(page + 1), finished: false, count: items.length,
+    const pagination = autoPapaListingPagination(result.markup, url.toString());
+    if (!items.length && !pagination) throw new Error(`autopapa_georgia_parsed_zero_status_${result.response.status}_bytes_${result.markup.length}`);
+    return { items, nextCursor: pagination ? pagination.nextCursor : String(page + 1), finished: pagination?.finished || false, count: items.length,
       health: { ok: true, message: `AutoPapa Georgia parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: result.response.status, contentType: result.response.headers.get("content-type") || "" } };
   }
 
