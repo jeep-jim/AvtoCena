@@ -120,7 +120,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Марка автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Автомобили {brand.name}, которые сейчас есть в каталоге, по моделям и рынкам. Справочные записи без предложений не засоряют эту страницу.
+            Выберите модель {brand.name}, чтобы посмотреть автомобили, характеристики и стоимость под ключ.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{saleModels.length} моделей в продаже</span>
