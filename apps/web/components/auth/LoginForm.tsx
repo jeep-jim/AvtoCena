@@ -6,20 +6,20 @@ import { startRoutePreloader } from "@/components/layout/RoutePreloader";
 import { TelegramLoginButton } from "@/components/auth/TelegramLoginButton";
 
 const AUTH_MESSAGES: Record<string, string> = {
-  auth_required: "Сессия завершилась. Войдите снова — несохранённая форма больше не откроет страницу ошибки.",
+  auth_required: "Сессия завершилась. Войдите снова.",
   telegram_not_allowed: "Этот Telegram пока не добавлен в команду. Попросите владельца или администратора выдать доступ.",
   telegram_invalid: "Не удалось подтвердить данные Telegram. Повторите вход.",
   telegram_expired: "Подтверждение Telegram устарело. Нажмите кнопку входа ещё раз.",
   telegram_not_configured: "Вход через Telegram ещё не активирован в настройках сервиса. Используйте персональный ключ.",
-  telegram_deprecated: "Старый Telegram Login больше не поддерживается. Используйте новую кнопку входа.",
-  telegram_oauth_error: "Telegram отклонил авторизацию до возврата к АвтоЦене. Повторите вход.",
-  telegram_state_invalid: "Telegram вернулся в АвтоЦену, но защитная сессия входа не совпала или устарела. Начните вход заново.",
-  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог завершить обмен на токен. Используйте новый вход через @avtocena_bot.",
-  telegram_token_invalid_client: "Telegram OIDC не принял Client ID или Client Secret. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
-  telegram_token_invalid_grant: "Telegram OIDC не принял код авторизации или PKCE. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
-  telegram_token_invalid_request: "Telegram OIDC не принял параметры запроса. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
-  telegram_token_unauthorized_client: "Telegram OIDC не разрешил этот flow. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
-  telegram_id_token_invalid: "Telegram вернул токен, но сервер не смог подтвердить его. Используйте новый вход через @avtocena_bot.",
+  telegram_deprecated: "Этот способ входа больше не доступен. Используйте кнопку входа через Telegram.",
+  telegram_oauth_error: "Не удалось войти через Telegram. Повторите попытку.",
+  telegram_state_invalid: "Подтверждение входа устарело. Начните вход заново.",
+  telegram_token_exchange_failed: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
+  telegram_token_invalid_client: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
+  telegram_token_invalid_grant: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
+  telegram_token_invalid_request: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
+  telegram_token_unauthorized_client: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
+  telegram_id_token_invalid: "Не удалось завершить вход через Telegram. Попробуйте войти через @avtocena_bot или используйте персональный ключ.",
 };
 
 export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { nextPath: string; errorCode?: string; botUsername?: string }) {

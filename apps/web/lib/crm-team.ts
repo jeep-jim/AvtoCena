@@ -29,21 +29,24 @@ export async function saveShifts(actor:AuthUser,input:any){
  const target=(await readCrmUsers()).find(u=>u.id===userId&&isCrmRole(u.role)&&u.status!=='disabled');if(!target)throw Error('Сотрудник не найден.');
  const kind:ShiftKind=input.kind??(input.off===true?'off':'work'),clear=input.clear===true;
  if(!Object.hasOwn(shiftKinds,kind))throw Error('Некорректная отметка.');
+ const dayKinds=input.dayKinds;
+ if(dayKinds!==undefined&&(!dayKinds||typeof dayKinds!=='object'||Array.isArray(dayKinds)||Object.keys(dayKinds).length!==ordered.length||Object.keys(dayKinds).some(d=>!ordered.includes(d))||ordered.some(d=>!['work','off'].includes(dayKinds[d]))))throw Error('Проверьте рабочие и выходные дни.');
+ const kindFor=(date:string):ShiftKind=>dayKinds?.[date]??kind;
  const start=String(input.start||''),end=String(input.end||''),note=String(input.note||'').trim();
  if(note.length>300)throw Error('Заметка — не более 300 символов.');
- if(!clear&&kind==='note'&&!note)throw Error('Добавьте текст отметки.');
- if(!clear&&kind==='work'&&(!/^([01]\d|2[0-3]):[0-5]\d$/.test(start)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(end)||end<=start))throw Error('Укажите начало и конец смены в пределах дня.');
+ if(!clear&&ordered.some(d=>kindFor(d)==='note')&&!note)throw Error('Добавьте текст отметки.');
+ if(!clear&&ordered.some(d=>kindFor(d)==='work')&&(!/^([01]\d|2[0-3]):[0-5]\d$/.test(start)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(end)||end<=start))throw Error('Укажите начало и конец смены в пределах дня.');
  const updatedAt=new Date().toISOString();
- const changed:Shift[]=ordered.map(date=>({date,userId,kind,start:kind==='work'?start:'',end:kind==='work'?end:'',note,updatedAt,updatedBy:actor.id}));
+ const changed:Shift[]=ordered.map(date=>({date,userId,kind:kindFor(date),start:kindFor(date)==='work'?start:'',end:kindFor(date)==='work'?end:'',note,updatedAt,updatedBy:actor.id}));
  let previous:Shift[]=[];
  await mutateDataJson<Shift[]>(scheduleKey(month),[],rows=>{
   previous=rows.filter(r=>r.userId===userId&&ordered.includes(r.date));
   if(ordered.some(date=>(previous.find(r=>r.date===date)?.updatedAt||'')!==String(input.expectedUpdates?.[date]||'')))throw Error('График уже изменён. Обновите календарь и повторите.');
   return [...rows.filter(r=>r.userId!==userId||!ordered.includes(r.date)),...(clear?[]:changed)];
  });
- const label=clear?'Не заполнено':shiftLabel(changed[0]),dateLabel=ordered.length===1?ordered[0].split('-').reverse().join('.'):ordered.map(d=>d.slice(8)).join(', ')+'.'+month.slice(5)+'.'+month.slice(0,4);
+ const label=clear?'Не заполнено':dayKinds?`рабочих дней: ${changed.filter(s=>s.kind==='work').length}, выходных: ${changed.filter(s=>s.kind==='off').length}`:shiftLabel(changed[0]),dateLabel=ordered.length===1?ordered[0].split('-').reverse().join('.'):ordered.map(d=>d.slice(8)).join(', ')+'.'+month.slice(5)+'.'+month.slice(0,4);
  const text=`${actor.displayName}: ${dateLabel} — ${label}${!clear&&note?`. ${note}`:''}`,href=`/crm/managers?month=${month}&date=${ordered[0]}#team-schedule`;
  await notifyTeam({id:`shift_${userId}_${ordered[0]}_${updatedAt}`,recipientIds:userId===actor.id?[]:[userId],kind:'schedule',title:'Ваш рабочий график изменён',text,href});
- await recordCrmActivity(actor,{type:'schedule_changed',title:`Изменён график: ${target.displayName}`,entityType:'staff',entityId:userId,entityLabel:target.displayName,target:{id:userId,name:target.displayName,avatarUrl:target.avatarUrl},href,changes:ordered.map(date=>({label:date,before:shiftLabel(previous.find(r=>r.date===date)),after:label})),text:clear?'Отметки удалены':note});
+ await recordCrmActivity(actor,{type:'schedule_changed',title:`Изменён график: ${target.displayName}`,entityType:'staff',entityId:userId,entityLabel:target.displayName,target:{id:userId,name:target.displayName,avatarUrl:target.avatarUrl},href,changes:ordered.map(date=>({label:date,before:shiftLabel(previous.find(r=>r.date===date)),after:clear?'Не заполнено':shiftLabel(changed.find(r=>r.date===date))})),text:clear?'Отметки удалены':note});
  return clear?[]:changed;
 }

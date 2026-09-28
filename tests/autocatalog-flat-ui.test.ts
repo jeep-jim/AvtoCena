@@ -30,5 +30,7 @@ test("public encyclopedia hides raw source-master brands and counts only live mo
   assert.match(page, /brand\.offerCount > 0 && brand\.modelCount > 0/);
   assert.doesNotMatch(page, /readSourceBackedEncyclopediaModels/);
   assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);
-  assert.match(page, /Сырые названия источников и пустые справочные карточки скрыты/);
+  assert.doesNotMatch(page, /Сырые названия источников|пустые справочные карточки/);
+  const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/page.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(brandPage, /Справочные записи без предложений|не засоряют/);
 });

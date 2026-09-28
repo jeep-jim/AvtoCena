@@ -237,7 +237,7 @@ export function BusinessSettingsPanel({
                       defaultValue={version.otherFixedExpensesRub}
                     />
                     <Field
-                      label="Effective from"
+                      label="Действует с"
                       name="effectiveFrom"
                       type="datetime-local"
                     />
@@ -363,7 +363,7 @@ export function BusinessSettingsPanel({
               >
                 <div className="break-words text-white">{network.name}</div>
                 <div>
-                  {network.status} · {network.payoutType} · cap{" "}
+                  {network.status} · {network.payoutType} · лимит в день / месяц: {" "}
                   {network.dailyCap || "—"}/{network.monthlyCap || "—"}
                 </div>
               </div>
@@ -376,7 +376,7 @@ export function BusinessSettingsPanel({
               className="mt-4 grid gap-3 md:grid-cols-2"
             >
               <Field
-                label="ID записи"
+                label="Код записи"
                 name="id"
                 defaultValue={cpaNetworks[0]?.id}
               />
@@ -386,52 +386,52 @@ export function BusinessSettingsPanel({
                 defaultValue={cpaNetworks[0]?.name}
               />
               <Field
-                label="Network ID"
+                label="Код партнёрской сети"
                 name="networkId"
                 defaultValue={cpaNetworks[0]?.networkId}
               />
               <Field
-                label="Offer ID"
+                label="Код предложения"
                 name="offerId"
                 defaultValue={cpaNetworks[0]?.offerId}
               />
               <Field
-                label="Payout type"
+                label="Тип выплаты"
                 name="payoutType"
                 defaultValue={cpaNetworks[0]?.payoutType}
               />
               <Field
-                label="Payout amount"
+                label="Сумма выплаты"
                 name="payoutAmount"
                 type="number"
                 defaultValue={cpaNetworks[0]?.payoutAmount}
               />
               <Field
-                label="Hold days"
+                label="Срок проверки, дней"
                 name="holdDays"
                 type="number"
                 defaultValue={cpaNetworks[0]?.holdDays}
               />
               <Field
-                label="Attribution window"
+                label="Срок учёта перехода, дней"
                 name="attributionWindowDays"
                 type="number"
                 defaultValue={cpaNetworks[0]?.attributionWindowDays}
               />
               <Field
-                label="Daily cap"
+                label="Лимит в день"
                 name="dailyCap"
                 type="number"
                 defaultValue={cpaNetworks[0]?.dailyCap}
               />
               <Field
-                label="Monthly cap"
+                label="Лимит в месяц"
                 name="monthlyCap"
                 type="number"
                 defaultValue={cpaNetworks[0]?.monthlyCap}
               />
               <Field
-                label="Effective from"
+                label="Действует с"
                 name="effectiveFrom"
                 type="datetime-local"
               />
@@ -460,7 +460,7 @@ export function BusinessSettingsPanel({
               <CpaStructuredFields network={cpaNetworks[0] || {}} />
               <TextArea label="Комментарий" name="comment" />
               <button className="rounded-xl bg-red-600 px-4 py-3 text-sm font-black text-white md:col-span-2">
-                Сохранить CPA draft
+                Сохранить черновик условий
               </button>
             </form>
           )}
@@ -471,7 +471,7 @@ export function BusinessSettingsPanel({
         >
           <h2 className="text-2xl font-black">Настройки сайта</h2>
           <p className="mt-2 text-sm font-bold text-white/50">
-            Бизнес-значения без переноса дизайна в JSON.
+            Размер выплат и условия работы, которые отображаются на сайте.
           </p>
           {canEdit && (
             <form

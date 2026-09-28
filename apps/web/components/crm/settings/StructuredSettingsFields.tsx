@@ -104,9 +104,9 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   )
                 }
               >
-                <option value="source">source</option>
-                <option value="subtotal">subtotal</option>
-                <option value="total">total</option>
+                <option value="source">Стоимость автомобиля</option>
+                <option value="subtotal">Промежуточная сумма</option>
+                <option value="total">Итоговая сумма</option>
               </SmallSelect>
               <button
                 type="button"
@@ -264,10 +264,10 @@ export function MarketStructuredFields({ version }: { version: any }) {
                     )
                   }
                 >
-                  <option value="fixed">fixed</option>
-                  <option value="percent">percent</option>
-                  <option value="calculated">calculated</option>
-                  <option value="manual">manual</option>
+                  <option value="fixed">Фиксированная сумма</option>
+                  <option value="percent">Процент</option>
+                  <option value="calculated">По расчёту</option>
+                  <option value="manual">Вручную</option>
                 </SmallSelect>
               </div>
               <textarea
@@ -444,7 +444,7 @@ export function CpaStructuredFields({ network }: { network: any }) {
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
         <div className="flex justify-between">
-          <b>Status mapping</b>
+          <b>Соответствие статусов</b>
           <button
             type="button"
             onClick={() =>
@@ -501,7 +501,7 @@ export function CpaStructuredFields({ network }: { network: any }) {
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
         <div className="flex justify-between">
-          <b>Headers</b>
+          <b>Заголовки запроса</b>
           <button
             type="button"
             onClick={() =>
