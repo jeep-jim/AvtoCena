@@ -182,6 +182,22 @@ h1 span{color:#ff4757}
 .pause,.sound{position:absolute;pointer-events:auto;top:10px;right:10px;background:#202836;color:white;border:1px solid #465167;border-radius:10px;padding:9px;font-weight:800}.sound{top:52px}.board{top:100px}.ringControl{display:none}body.ring .ringControl{display:flex}body.ring #btnJump,body.ring #btnBrake{display:none}body.circuit #btnFire{display:none}.playerAvatar{display:none!important}.chatWrap[hidden]{display:none}.hudTop{max-width:calc(100% - 115px)}.panel{overscroll-behavior:contain}.sub{line-height:1.5}.screen{backdrop-filter:none}.pbtn{touch-action:none}#pauseOverlay{position:absolute;inset:0;z-index:40;background:rgba(10,12,17,.9);display:grid;place-content:center;text-align:center;gap:18px;padding:24px}#pauseOverlay[hidden]{display:none}.mode-help{line-height:1.5}.ringMenu .hillWeapons{display:none}button:focus-visible,input:focus-visible{outline:2px solid #ffb703;outline-offset:3px}
 @media(max-width:640px){.board{display:none}.hudTop{gap:4px}.chip{padding:4px 6px}.chip .v{font-size:13px}.fuelWrap{min-width:90px}.pbtn{width:58px;height:64px;border-radius:16px;font-size:23px;backdrop-filter:none}.ctrls{bottom:44px}.quit{bottom:6px}.panel{max-height:100%;border-radius:14px;padding:14px}.screen{padding:6px}.cars{grid-template-columns:repeat(2,minmax(0,1fr))}.themes,.weapons{grid-template-columns:repeat(3,minmax(0,1fr))}.btn{min-width:86px;padding:10px 7px;font-size:12px}.controlsHint{display:none}.stat3{gap:6px}.stat{padding:8px}.stat .v{font-size:20px}.loginBox{padding:8px}.sound{font-size:11px}}
 #scrResult{background:rgba(10,12,17,.76)}#scrResult .panel{max-width:520px}#scrResult .stat3{grid-template-columns:repeat(2,minmax(0,1fr))}.resultActions{margin:18px 0 12px}.resultActions .btn{min-width:120px;padding:16px 10px;font-size:16px}#resultNotice{margin:0;text-align:center;min-height:18px}#btnRetrySave[hidden]{display:none}.btn:disabled{opacity:.55;cursor:wait}
+
+#scrMenu{overflow:hidden}
+#scrMenu>.panel{display:flex;flex-direction:column;height:100%;max-height:900px;overflow:hidden;padding:16px}
+#scrMenu>.panel>h1,#scrMenu>.panel>.sub,.menuLaunch{flex-shrink:0}
+.menuOptions{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 8px 12px 0}
+.menuLaunch{padding-top:10px;border-top:1px solid #303849;background:#171b24}
+.menuLaunch .btn{width:100%;min-height:48px}
+@media(max-height:500px){
+ .screen{padding:6px}.panel{max-height:100%;padding:12px}
+ #scrMenu>.panel{padding:10px}#scrMenu h1{font-size:22px}#scrMenu>.panel>.sub{font-size:11px;margin-bottom:6px}
+ .menuLaunch{padding-top:6px}.menuLaunch .btn{padding:10px}
+ .board,.controlsHint{display:none}.hudTop{gap:4px}.chip{padding:4px 6px}.chip .v{font-size:14px}.fuelWrap{min-width:90px}
+ .pbtn{width:62px;height:62px;font-size:24px;backdrop-filter:none}.ctrls{bottom:36px}.quit{bottom:4px}
+ .cars{grid-template-columns:repeat(5,minmax(0,1fr))}.car{padding:8px}.themes{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .weapons{grid-template-columns:repeat(5,minmax(0,1fr))}.btn{min-width:90px}.big{font-size:32px}
+}
 </style>
 </head>
 <body>
@@ -244,6 +260,7 @@ h1 span{color:#ff4757}
       <h1><span style="display:inline-block;transform:scaleX(-1)">💨</span> Погнали<span>!</span> <span style="display:inline-block;transform:scaleX(-1)">🚗</span></h1>
       <div class="sub">Выберите трассу и машину. На трассе — компьютерные соперники, в общем рейтинге — ваши коллеги.</div>
 
+      <div class="menuOptions">
       <div class="lbl">Игрок</div>
       <div class="loginBox">
         <input id="loginName" aria-label="Игрок" value="Гонщик" readonly>
@@ -272,8 +289,9 @@ h1 span{color:#ff4757}
       <div class="lbl">История заездов</div>
       <div class="hist" id="histBox"></div>
 
-      <div style="margin-top:18px">
-        <button class="btn go" id="btnStart">🏁 Погнали!</button>
+      </div>
+      <div class="menuLaunch">
+        <button class="btn go" id="btnStart">🏁 Начать игру</button>
       </div>
     </div>
   </div>

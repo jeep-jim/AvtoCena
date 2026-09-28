@@ -28,13 +28,13 @@ const inline=sources.flatMap(({text})=>[...text.matchAll(/const publicUiCorrecti
 const css=await postcss([tailwindcss({content:['apps/web/components/crm/**/*.{tsx,ts}','apps/web/app/(crm)/**/*.tsx','apps/web/components/leads/PhoneInput.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
 fs.writeFileSync(out+'/app.css',css.css);
 const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark';localStorage.setItem('avtocena_theme',document.documentElement.dataset.theme)</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
-const server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(['/', '/crm/clients', '/crm/leads'].includes(name)){res.setHeader('content-type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve(name.startsWith('/pdfjs/')?out:'apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('content-type',name.endsWith('.css')?'text/css':(/\.m?js$/).test(name)?'text/javascript':name.endsWith('.webp')?'image/webp':name.endsWith('.svg')?'image/svg+xml':name.endsWith('.png')?'image/png':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.writeHead(404);res.end();}});
+const server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(['/', '/crm/clients', '/crm/leads'].includes(name)){res.setHeader('content-type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve(name.startsWith('/pdfjs/')?out:'apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('content-type',name.endsWith('.html')?'text/html':name.endsWith('.css')?'text/css':(/\.m?js$/).test(name)?'text/javascript':name.endsWith('.webp')?'image/webp':name.endsWith('.svg')?'image/svg+xml':name.endsWith('.png')?'image/png':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.writeHead(404);res.end();}});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[],failures=[];
 try{
- for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['overview','leads','team','settings','clients','client','archive','documents','staff'])){
+ for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['game','overview','leads','team','settings','clients','client','archive','documents','staff'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',personalPhone:'+79991234567',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
    const chatMessages=[{id:'old-comment',text:'Стас, свяжись с клиентом',createdAt:'2026-09-27T09:00:00Z',createdByUserId:'manager-test',createdByName:'Антон'}];let chatWrites=0;
@@ -50,6 +50,7 @@ try{
    const template=JSON.parse(fs.readFileSync('apps/web/lib/contracts/default-templates.json','utf8'))[0];let record=null;let records=[];
    await page.route('**/api/crm/contracts**',async route=>{const req=route.request(),url=new URL(req.url());if(req.method()==='GET'){await route.fulfill({json:url.searchParams.has('template')?{template}:url.searchParams.has('id')?{record}:{records}});return;}const body=req.postDataJSON();if(body.action==='create')record={id:body.id,number:'24.09/01',revision:1,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),createdBy:'owner-test',clientId:'',fields:{date:'2026-09-24',market:'japan',deliveryDays:'90'},template,calculation:null,versions:[]};else if(body.action==='save')record={...record,number:body.number??record.number,fields:body.fields,clientId:body.clientId,template:body.template,revision:record.revision+1};else if(body.action==='archive')record={...record,archivedAt:new Date().toISOString(),revision:record.revision+1};else if(body.action==='restore')record={...record,archivedAt:undefined,revision:record.revision+1};else if(body.action==='purge')record=null;else if(body.action==='template'){await route.fulfill({json:{template:{...body.template,revision:body.revision+1}}});return;}records=record?[...records.filter(x=>x.id!==record.id),{...record,client:record.fields.fio||'Без клиента',car:record.fields.car||'',market:record.fields.market,templateId:record.template.id,versions:record.versions.length}]:[];await route.fulfill({json:{record,ok:true}});});
   }
+  await page.route('**/api/crm/game',r=>r.fulfill({json:r.request().method()==='POST'?{run:{id:'fixture-run',mode:'hills'}}:{team:[]}}));
   try{
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
    await page.locator('.crm-content').waitFor();
@@ -261,6 +262,28 @@ try{
     assert.ok(await page.getByRole('textbox',{name:'Поиск клиентов'}).isVisible());
     assert.ok(await page.locator('.crm-client-card').count()>0);
     if(width===1440){const list=await page.locator('.crm-clients-list').boundingBox(),form=await page.locator('.crm-client-create').boundingBox();assert.ok(form.x>list.x+list.width,'create form on the right');}
+   }
+   if(kind==='game'){
+    // Exercise the CSS landscape fallback even when a browser supports fullscreen.
+    await page.evaluate(()=>{Element.prototype.requestFullscreen=()=>Promise.reject(new Error('Not supported'));});
+    await page.getByRole('button',{name:'Погнали!',exact:true}).click();
+    const close=page.getByRole('button',{name:'Закрыть игру',exact:true}),game=page.frameLocator('.pognali-frame');
+    await game.getByRole('button',{name:'Начать игру',exact:false}).waitFor();
+    assert.equal(await page.evaluate(()=>document.body.style.overflow),'hidden');
+    const box=await page.locator('.pognali-frame').boundingBox();
+    assert.ok(box.x>=-1&&box.y>=-1&&box.x+box.width<=width+1&&box.y+box.height<=851,'game fits viewport');
+    const dimensions=await game.locator('body').evaluate(()=>({w:innerWidth,h:innerHeight}));
+    if(width<768)assert.ok(dimensions.w>dimensions.h,'portrait phone renders landscape game');
+    assert.ok(await game.locator('#btnStart').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'start visible without scrolling');
+    assert.ok(await close.isVisible());
+    await game.getByRole('button',{name:'Начать игру',exact:false}).click();
+    await game.locator('#hud.on').waitFor();
+    await close.click();
+    assert.equal(await page.locator('.pognali-frame').count(),0,'closing destroys game');
+    assert.notEqual(await page.evaluate(()=>document.body.style.overflow),'hidden','page scrolling restored');
+    await page.getByRole('button',{name:'Погнали!',exact:true}).click();
+    await game.locator('#btnStart').waitFor();
+    await close.click();
    }
    assert.ok(await page.locator('.crm-brand > span').isVisible(),'CRM visible on mobile and desktop');
    assert.equal((await page.locator('.crm-brand > span').innerText()).trim(),'CRM','CRM replaces the public brand in the admin header');
