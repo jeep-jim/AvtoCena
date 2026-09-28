@@ -104,9 +104,9 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   )
                 }
               >
-                <option value="source">source</option>
-                <option value="subtotal">subtotal</option>
-                <option value="total">total</option>
+                <option value="source">Стоимость автомобиля</option>
+                <option value="subtotal">Промежуточная сумма</option>
+                <option value="total">Итоговая сумма</option>
               </SmallSelect>
               <button
                 type="button"
