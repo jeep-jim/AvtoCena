@@ -630,6 +630,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
         }}
       ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
+    {canShowRate ? <button type="button" onClick={event => {event.preventDefault();event.stopPropagation();openSheet();}} onKeyDown={event=>event.stopPropagation()} aria-label={`Курс ${currency} — ${currencyName(currency)}`} className={`${dense ? "mt-1 text-[9px]" : "mt-2 text-[11px]"} inline-flex min-h-6 items-center gap-1 rounded-md font-bold text-[var(--ac-muted)] hover:text-[var(--ac-text)] focus-visible:outline focus-visible:outline-2`}><span>Курс {currency}</span><span aria-hidden="true">›</span></button> : null}
     {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} sourcePrice={Number(pricedOffer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(pricedOffer)} priceChangedAt={pricedOffer.priceChangedAt} statusLabel={trendUsesCurrency ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} /> : null}
   </div>;
 }
