@@ -276,7 +276,13 @@ try{
     if(width<768)assert.ok(dimensions.w>dimensions.h,'portrait phone renders landscape game');
     assert.ok(await game.locator('#btnStart').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'start visible without scrolling');
     assert.ok(await close.isVisible());
-    await game.getByRole('button',{name:'Начать игру',exact:false}).click();
+    if(width<768){
+     // Locator clicks do not map a rotated cross-origin iframe's coordinates.
+     // Send a real touchscreen tap at the DOM-derived, rotated button center.
+     const target=await game.locator('#btnStart').evaluate(e=>{const r=e.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2;return {x,y,hit:document.elementFromPoint(x,y)?.closest('button')?.id};});
+     assert.equal(target.hit,'btnStart','start is not covered inside the game');
+     await page.touchscreen.tap(box.x+box.width-target.y,box.y+target.x);
+    }else await game.getByRole('button',{name:'Начать игру',exact:false}).click();
     await game.locator('#hud.on').waitFor();
     await close.click();
     assert.equal(await page.locator('.pognali-frame').count(),0,'closing destroys game');
