@@ -63,3 +63,14 @@ test('mixed work/rest batch saves both kinds and records accurate daily changes'
  await assert.rejects(api.saveShifts(owner,{...input,dayKinds:{...input.dayKinds,'2026-10-03':'off'}}),/рабочие и выходные/);
  const saved=await api.saveShifts(owner,input);assert.equal(saved[0].start,'10:00');assert.equal(saved[1].kind,'off');assert.equal(saved[1].start,'');assert.equal(saved[1].end,'');assert.equal(state.events[0].changes[1].after,'Выходной');assert.equal(state.files.get('crm/notifications.json').length,1);assert.match(state.files.get('crm/notifications.json')[0].text,/рабочих дней: 1, выходных: 1/);
 });
+
+test('shift workplace is assigned from employee offices or remote and historical locations survive legacy edits',async()=>{
+ const staff={...manager,workAddresses:['Офис 1','Офис 2'],remoteWork:true};const state={files:new Map(),users:[owner,staff],events:[]};const api=await moduleFor('apps/web/lib/crm-team.ts',state);
+ const input={userId:'m',dates:['2026-10-01','2026-10-02'],dayKinds:{'2026-10-01':'work','2026-10-02':'off'},start:'10:00',end:'20:00',confirmed:true,expectedUpdates:{},workplace:'Офис 2'};
+ await assert.rejects(api.saveShifts(owner,{...input,workplace:'Чужой адрес'}),/Добавьте этот адрес/);assert.equal((await api.readSchedule('2026-10')).length,0);
+ const result=await api.saveShifts(owner,input);assert.equal(result[0].workplace,'Офис 2');assert.equal(result[1].workplace,'');
+ const single={userId:'m',date:'2026-10-01',start:'09:00',end:'19:00',confirmed:true,expectedUpdatedAt:result[0].updatedAt};staff.workAddresses=[];
+ const old=await api.saveShift(owner,single);assert.equal(old.workplace,'Офис 2','legacy request preserves historical address');
+ const remote=await api.saveShift(owner,{...single,workplace:'Удалённо',expectedUpdatedAt:old.updatedAt});assert.equal(remote.workplace,'Удалённо');
+ staff.remoteWork=false;await assert.rejects(api.saveShifts(owner,{...input,dates:['2026-10-03'],dayKinds:{'2026-10-03':'work'},workplace:'Удалённо'}),/Добавьте этот адрес/);
+});
