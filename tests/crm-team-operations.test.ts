@@ -43,3 +43,15 @@ test('staff documents are readable by self/authorized management, never by anoth
  await assert.rejects(api.staffDocumentAccess(other,'m'),/forbidden/);await assert.rejects(api.staffDocumentAccess(manager,'m',true),/forbidden/);
  assert.notEqual(api.staffDocumentKey('m','d'),api.staffDocumentKey('b','d'));
 });
+
+test('calendar batch is atomic, preserves unselected dates and supports notes, vacation and clearing',async()=>{
+ const state={files:new Map(),users:[owner,manager,other],events:[]};const api=await moduleFor('apps/web/lib/crm-team.ts',state);
+ const batch={userId:'m',dates:['2026-10-02','2026-10-05'],kind:'vacation',note:'Отпуск',expectedUpdates:{},confirmed:true};
+ await assert.rejects(api.saveShifts(owner,{...batch,dates:['2026-10-31','2026-11-01']}),/одного месяца/);
+ await assert.rejects(api.saveShifts(owner,{...batch,dates:['2026-10-02','2026-10-02']}),/дата/);
+ await assert.rejects(api.saveShifts(owner,{...batch,kind:'note',note:''}),/текст отметки/);
+ const saved=await api.saveShifts(owner,batch);assert.equal(saved.length,2);assert.equal(saved[0].kind,'vacation');assert.equal(saved[0].start,'');assert.equal(state.files.get('crm/notifications.json').length,1,'one notification for a batch');
+ await assert.rejects(api.saveShifts(owner,{...batch,dates:['2026-10-02','2026-10-06']}),/уже изменён/);assert.equal((await api.readSchedule('2026-10')).length,2,'conflict does not partially apply');
+ const clear={...batch,dates:['2026-10-02'],clear:true,expectedUpdates:{'2026-10-02':saved[0].updatedAt}};await api.saveShifts(owner,clear);const remaining=await api.readSchedule('2026-10');assert.equal(remaining.length,1);assert.equal(remaining[0].date,'2026-10-05');
+ await api.saveShifts(owner,{...batch,dates:['2026-10-09'],kind:'note',note:'Обучение'});assert.equal((await api.readSchedule('2026-10')).find((s:any)=>s.date==='2026-10-09').note,'Обучение');
+});
