@@ -66,7 +66,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
     const initials = brand.split(/[\s&-]+/).map((part) => part[0] || "").join("").slice(0, 2).toUpperCase() || "·";
     return <span
       aria-label={`Логотип ${brand} проверяется`}
-      title={`Официальный логотип ${brand} пока проходит проверку источника`}
+      title={`${brand}`}
       className={`flex h-10 w-[76px] shrink-0 items-center justify-center rounded-xl border border-current/10 bg-[var(--ac-surface-2)] text-sm font-black tracking-[0.08em] text-[var(--ac-muted)] ${className}`}
     >{initials}</span>;
   }
