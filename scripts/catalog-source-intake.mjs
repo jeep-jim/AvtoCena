@@ -8,6 +8,7 @@ const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
 process.env.CATALOG_REBUILD_MARKET=market;
 process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
+process.env.CATALOG_SOURCE_MIN_YEAR=String(market==='japan'?2010:new Date().getUTCFullYear()-6);
 if (market==='korea') {
   try {
     const result=await promisify(execFile)(process.execPath,['scripts/catalog-download-korea-energy-models.mjs'],{
@@ -36,7 +37,7 @@ if (process.env.CATALOG_INTAKE_RESUME === '1') {
 }
 const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(directory,state.sourceId)]));
 const startedAt=new Date().toISOString();
-const deadline=Date.now()+Math.min(210*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
+const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
 const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
