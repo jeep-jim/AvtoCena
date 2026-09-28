@@ -1,4 +1,4 @@
-import {TeamSchedule} from "@/components/crm/TeamSchedule";
+import {TeamSchedulePanel} from "@/components/crm/TeamSchedulePanel";
 import {hasCrmPermission,ROLE_DETAILS} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -28,7 +28,7 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
 
   return (
     <CrmShell activeHref="/crm/managers" title="Команда и права" subtitle="Сотрудники компании, их роли, назначенные заявки и доступ к разделам CRM.">
-      <TeamSchedule initialMonth={month} initialDate={typeof query.date==="string"?query.date:undefined}/>
+      <TeamSchedulePanel initialMonth={month} initialDate={typeof query.date==="string"?query.date:undefined}/>
       <section className="crm-team-intro glass mb-5 rounded-[1.8rem] p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
