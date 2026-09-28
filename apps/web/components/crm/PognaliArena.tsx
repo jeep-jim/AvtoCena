@@ -4,16 +4,28 @@ import type {GameMode,GameResult} from '@/lib/crm-game';
 import './pognali.css';
 type TeamRow={id:string;name:string;avatar?:string;best:Partial<Record<GameMode,GameResult>>};
 const modes:Record<GameMode,string>={hills:'Холмы',circuit:'Кольцо',battle:'Боевая гонка'};
+class GameRequestError extends Error{constructor(message:string,public status:number){super(message);}}
+async function gameRequest(body?:object){
+ const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);
+ try{
+  let response:Response;
+  try{response=await fetch('/api/crm/game',{cache:'no-store',signal:controller.signal,...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{})});}
+  catch{throw Error('Нет соединения. Проверьте интернет и попробуйте ещё раз.');}
+  if(!response.ok){const messages:Record<number,string>={401:'Сессия завершилась. Войдите в CRM снова.',403:'Не удалось подтвердить доступ к игре.',400:'Не удалось подтвердить результат заезда.',409:'Заезд уже завершён или устарел. Начните новый заезд.',429:'Подождите несколько секунд перед новым заездом.'};throw new GameRequestError(messages[response.status]||'Игра временно недоступна. Попробуйте ещё раз.',response.status);}
+  try{return await response.json();}catch{throw Error('Не удалось получить ответ. Попробуйте ещё раз.');}
+ }finally{clearTimeout(timeout);}
+}
+
 export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};userId:string}){
  const frame=useRef<HTMLIFrameElement>(null),active=useRef<string|null>(null),busy=useRef(false),pending=useRef<Record<string,unknown>|null>(null);
  const [opened,setOpened]=useState(false),[team,setTeam]=useState<TeamRow[]>([]),[mode,setMode]=useState<GameMode>('hills'),[notice,setNotice]=useState(''),[retry,setRetry]=useState(false),[loading,setLoading]=useState(false);
- const refresh=useCallback(async()=>{setLoading(true);try{const response=await fetch('/api/crm/game',{cache:'no-store'});const data=await response.json();if(!response.ok)throw Error(data.error);setTeam(data.team);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[]);
+ const refresh=useCallback(async()=>{setLoading(true);try{const data=await gameRequest();setTeam(data.team);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[]);
  useEffect(()=>{void refresh();},[refresh]);
  const send=useCallback((data:object)=>frame.current?.contentWindow?.postMessage({game:'pognali-v1',...data},'*'),[]);
  const save=useCallback(async()=>{
   if(!pending.current||busy.current)return;busy.current=true;setRetry(false);setNotice('Сохраняем результат…');
-  try{const response=await fetch('/api/crm/game',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pending.current)});const data=await response.json();if(!response.ok)throw Error(data.error);pending.current=null;active.current=null;await refresh();setNotice(`Сохранено: ${data.result.score.toLocaleString('ru-RU')} очков`);send({type:'saved',score:data.result.score});}
-  catch(e){setRetry(true);setNotice(e instanceof Error?e.message:'Не удалось сохранить результат');send({type:'save-error'});}
+  try{const data=await gameRequest(pending.current);pending.current=null;active.current=null;await refresh();setNotice(`Сохранено: ${data.result.score.toLocaleString('ru-RU')} очков`);send({type:'saved',score:data.result.score});}
+  catch(e){const canRetry=!(e instanceof GameRequestError&&[400,401,403,409].includes(e.status));setRetry(canRetry);if(!canRetry){pending.current=null;active.current=null;}setNotice(e instanceof Error?e.message:'Не удалось сохранить результат');send({type:'save-error',message:e instanceof Error?e.message:'Не удалось сохранить результат',canRetry});}
   finally{busy.current=false;}
  },[refresh,send]);
  useEffect(()=>{
@@ -26,7 +38,7 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
     if(busy.current)return;
     if(pending.current){send({type:'start-error',message:'Сначала сохраните предыдущий результат кнопкой над игрой.'});return;}
     busy.current=true;
-    try{const response=await fetch('/api/crm/game',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'start',mode:data.mode})});const result=await response.json();if(!response.ok)throw Error(result.error);active.current=result.run.id;setMode(result.run.mode);send({type:'started',id:result.run.id});setNotice('');}
+    try{const result=await gameRequest({action:'start',mode:data.mode});active.current=result.run.id;setMode(result.run.mode);send({type:'started',id:result.run.id});setNotice('');}
     catch(e){send({type:'start-error',message:e instanceof Error?e.message:'Не удалось начать заезд. Попробуйте ещё раз.'});}
     finally{busy.current=false;}
    }

@@ -2204,7 +2204,7 @@ window.addEventListener('message',event=>{
  if(data.type==='started'&&starting){runId=data.id;starting=false;paused=false;resetKeys();beginLocalRun();}
  if(data.type==='start-error'){starting=false;notify(data.message);}
  if(data.type==='saved')notify('В рейтинг: '+data.score+' очков','gold');
- if(data.type==='save-error')notify('Нажмите «Повторить сохранение» над игрой');
+ if(data.type==='save-error')notify(data.canRetry?'Нажмите «Повторить сохранение» над игрой':data.message);
 });
 function pauseGame(){
  if(state.screen!=='play')return;
