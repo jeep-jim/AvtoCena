@@ -67,7 +67,14 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
   if(attempt>=3)return {action:'none',reason:'source_retry_limit_reached'};
   return {action:'dispatch',reason:'retry_transient_source_failure',sourceAttempts:attempt+1,windowStartedAt:windowActive?recovery.windowStartedAt:new Date(now).toISOString()};
  }
- const last=Date.parse(journal?.lastCollectionSuccess||journal?.lastPublicationSuccess||'');
+ // Finishing a resumed tail is not evidence that the beginning was refreshed.
+ // Keep this visible until a full source cycle can be proven; do not start an
+ // endless expensive full crawl after every completed budget continuation.
+ if(journal?.collectionComplete===false && sourceRows.some(s=>s.initialCursor)
+   && sourceRows.every(s=>['source_finished','source_cycle_finished'].includes(s.stopReason))) {
+  return {action:'none',reason:'completed_continuation_requires_cycle_verification'};
+ }
+ const last=Date.parse(journal?.lastCollectionSuccess||(journal?.version>=2?'':journal?.lastPublicationSuccess)||'');
  const stale=!Number.isFinite(last)||now-last>(market==='japan'?15:4)*86400000;
  if((!latest&&!Number.isFinite(last))||stale)return {action:'dispatch',reason:'missing_or_stale_collection'};
  return {action:'none',reason:'current'};
