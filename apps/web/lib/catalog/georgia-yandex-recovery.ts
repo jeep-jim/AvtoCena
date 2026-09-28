@@ -18,6 +18,8 @@ type RecoverySnapshot = {
   market: "georgia";
   count: number;
   partial: boolean;
+  finished: boolean;
+  nextCursor: string | null;
   report: {
     mode: string;
     pagesPerSource: number;
@@ -243,7 +245,7 @@ async function collectPages(source: CatalogSourceAdapter, pages: number, startPa
     }
     cursor = page.finished ? null : (page.nextCursor || null);
   }
-  return [...offers.values()];
+  return {offers: [...offers.values()], finished: cursor === null, nextCursor: cursor};
 }
 
 export type GeorgiaRecoverySource = "all" | "myauto" | "autopapa";
@@ -264,10 +266,13 @@ export async function collectGeorgiaYandexRecoverySnapshot(
   const rejected: Record<string, number> = {};
   const reject = (reason: string) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
 
-  const [myAutoRows, autoPapaRows] = await Promise.all([
-    selectedSource === "autopapa" ? Promise.resolve([]) : collectPages(myAutoListSource, pages, firstPage),
-    selectedSource === "myauto" ? Promise.resolve([]) : collectPages(autoPapaGeorgiaSource, pages, firstPage),
+  const empty = {offers: [] as VehicleOffer[], finished: true, nextCursor: null};
+  const [myAutoResult, autoPapaResult] = await Promise.all([
+    selectedSource === "autopapa" ? Promise.resolve(empty) : collectPages(myAutoListSource, pages, firstPage),
+    selectedSource === "myauto" ? Promise.resolve(empty) : collectPages(autoPapaGeorgiaSource, pages, firstPage),
   ]);
+  const myAutoRows = myAutoResult.offers, autoPapaRows = autoPapaResult.offers;
+  const finished = myAutoResult.finished && autoPapaResult.finished;
   const rawSourceCounts = {
     myauto_georgia_list: myAutoRows.length,
     autopapa_georgia_open: autoPapaRows.length,
@@ -320,7 +325,9 @@ export async function collectGeorgiaYandexRecoverySnapshot(
   return {
     market: "georgia",
     count: offers.length,
-    partial: true,
+    partial: !finished || firstPage > 1,
+    finished,
+    nextCursor: selectedSource === "myauto" ? myAutoResult.nextCursor : selectedSource === "autopapa" ? autoPapaResult.nextCursor : null,
     report: {
       mode: "yandex_read_only_canonical_recovery_snapshot",
       pagesPerSource: pages,

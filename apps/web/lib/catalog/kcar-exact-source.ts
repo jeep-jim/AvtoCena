@@ -12,6 +12,8 @@ type KCarListRow = {
   modelNm?: string;
   prc?: string | number;
   milg?: string | number;
+  mfgDt?: string;
+  prdcnYr?: string;
 };
 
 type KCarDetailData = {
@@ -399,6 +401,16 @@ function image(url: string): CatalogImage {
   return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType };
 }
 
+// Skip expensive details only when both source dates unambiguously put the car
+// outside this collection's age window. Missing/conflicting dates still get read.
+export function kcarListingBeforeYear(meta: KCarListRow, minimumYear: number) {
+  if (!Number.isInteger(minimumYear) || minimumYear < 1900) return false;
+  const date = String(meta.mfgDt || ""), modelYear = String(meta.prdcnYr || "");
+  if (!/^\d{4}(0[1-9]|1[0-2])$/.test(date) || !/^\d{4}$/.test(modelYear)) return false;
+  const production = Number(date.slice(0,4)), model = Number(modelYear);
+  return production >= 1900 && model >= 1900 && production < minimumYear && model < minimumYear;
+}
+
 class KCarExactSource implements CatalogSourceAdapter {
   sourceId = "kcar_korea_open";
   market = "korea" as const;
@@ -442,6 +454,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
         const carCd = clean(meta.carCd);
         if (!carCd) { reject(carCd, "missing_list_identity"); return null; }
+        if (kcarListingBeforeYear(meta, Number(process.env.CATALOG_SOURCE_MIN_YEAR))) { reject(carCd, "outside_collection_age"); return null; }
         const data = await fetchExactDetailData(carCd).catch(error => { if (error?.blocked) throw error; return null; });
         if (!data) { failedDetailRows += 1; reject(carCd, "detail_request_failed"); }
         return data ? parseKcarExactDetail(meta, data, reason => reject(carCd, reason, data)) : null;
