@@ -1,3 +1,4 @@
+import {workOptions} from './staff-workplaces';
 import {isCrmRole,type AuthUser} from './auth';
 import {readDataJson,mutateDataJson} from './data';
 import {readCrmUsers} from './crm-users';
@@ -5,7 +6,7 @@ import {notifyTeam} from './crm-notification-store';
 import {recordCrmActivity} from './crm-activity';
 export type StaffProfile={birthDate?:string};
 import {shiftKinds,shiftLabel,type ShiftKind} from './crm-schedule-calendar';
-export type Shift={kind?:ShiftKind;date:string;userId:string;start:string;end:string;note:string;updatedAt:string;updatedBy:string};
+export type Shift={workplace?:string;kind?:ShiftKind;date:string;userId:string;start:string;end:string;note:string;updatedAt:string;updatedBy:string};
 export const teamToday=(now=new Date())=>new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
 export function validDay(value:string){const date=new Date(`${value}T00:00:00Z`);return /^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value;}
 export function validateBirthDate(value:string){if(value&&(!validDay(value)||value>teamToday()||value<'1900-01-01'))throw Error('Укажите корректную дату рождения.');return value;}
@@ -36,17 +37,21 @@ export async function saveShifts(actor:AuthUser,input:any){
  if(note.length>300)throw Error('Заметка — не более 300 символов.');
  if(!clear&&ordered.some(d=>kindFor(d)==='note')&&!note)throw Error('Добавьте текст отметки.');
  if(!clear&&ordered.some(d=>kindFor(d)==='work')&&(!/^([01]\d|2[0-3]):[0-5]\d$/.test(start)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(end)||end<=start))throw Error('Укажите начало и конец смены в пределах дня.');
+ const workplace=typeof input.workplace==='string'?input.workplace.trim():undefined;
+ if(input.workplace!==undefined&&(workplace===undefined||workplace.length>240))throw Error('Проверьте место работы.');
  const updatedAt=new Date().toISOString();
  const changed:Shift[]=ordered.map(date=>({date,userId,kind:kindFor(date),start:kindFor(date)==='work'?start:'',end:kindFor(date)==='work'?end:'',note,updatedAt,updatedBy:actor.id}));
  let previous:Shift[]=[];
  await mutateDataJson<Shift[]>(scheduleKey(month),[],rows=>{
   previous=rows.filter(r=>r.userId===userId&&ordered.includes(r.date));
+  if(!clear&&workplace&&ordered.some(date=>kindFor(date)==='work'&&!workOptions(target).includes(workplace)&&previous.find(r=>r.date===date)?.workplace!==workplace))throw Error('Добавьте этот адрес или удалённую работу в карточке сотрудника.');
+  for(const row of changed){row.workplace=row.kind==='work'?(workplace??previous.find(r=>r.date===row.date)?.workplace??''):'';}
   if(ordered.some(date=>(previous.find(r=>r.date===date)?.updatedAt||'')!==String(input.expectedUpdates?.[date]||'')))throw Error('График уже изменён. Обновите календарь и повторите.');
   return [...rows.filter(r=>r.userId!==userId||!ordered.includes(r.date)),...(clear?[]:changed)];
  });
  const label=clear?'Не заполнено':dayKinds?`рабочих дней: ${changed.filter(s=>s.kind==='work').length}, выходных: ${changed.filter(s=>s.kind==='off').length}`:shiftLabel(changed[0]),dateLabel=ordered.length===1?ordered[0].split('-').reverse().join('.'):ordered.map(d=>d.slice(8)).join(', ')+'.'+month.slice(5)+'.'+month.slice(0,4);
- const text=`${actor.displayName}: ${dateLabel} — ${label}${!clear&&note?`. ${note}`:''}`,href=`/crm/managers?month=${month}&date=${ordered[0]}#team-schedule`;
+ const text=`${actor.displayName}: ${dateLabel} — ${label}${!clear&&workplace&&changed.some(s=>s.kind==='work')?`. Место работы: ${workplace}`:''}${!clear&&note?`. ${note}`:''}`,href=`/crm/managers?month=${month}&date=${ordered[0]}#team-schedule`;
  await notifyTeam({id:`shift_${userId}_${ordered[0]}_${updatedAt}`,recipientIds:userId===actor.id?[]:[userId],kind:'schedule',title:'Ваш рабочий график изменён',text,href});
- await recordCrmActivity(actor,{type:'schedule_changed',title:`Изменён график: ${target.displayName}`,entityType:'staff',entityId:userId,entityLabel:target.displayName,target:{id:userId,name:target.displayName,avatarUrl:target.avatarUrl},href,changes:ordered.map(date=>({label:date,before:shiftLabel(previous.find(r=>r.date===date)),after:clear?'Не заполнено':shiftLabel(changed.find(r=>r.date===date))})),text:clear?'Отметки удалены':note});
+ await recordCrmActivity(actor,{type:'schedule_changed',title:`Изменён график: ${target.displayName}`,entityType:'staff',entityId:userId,entityLabel:target.displayName,target:{id:userId,name:target.displayName,avatarUrl:target.avatarUrl},href,changes:ordered.map(date=>({label:date,before:[shiftLabel(previous.find(r=>r.date===date)),previous.find(r=>r.date===date)?.workplace].filter(Boolean).join(' · '),after:clear?'Не заполнено':[shiftLabel(changed.find(r=>r.date===date)),changed.find(r=>r.date===date)?.workplace].filter(Boolean).join(' · ')})),text:clear?'Отметки удалены':note});
  return clear?[]:changed;
 }
