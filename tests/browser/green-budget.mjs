@@ -41,8 +41,8 @@ try {
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
   await scope.waitFor({state:'visible',timeout:90000});
-  const price=scope.locator('.ac-range-card').filter({has:page.locator('input[name="budgetFrom"]')});
-  const volume=scope.locator('.ac-range-card').filter({has:page.locator('input[name="engineFrom"]')});
+  const price=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Цена: от',exact:true})});
+  const volume=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Объём двигателя: от',exact:true})});
   const priceToggle=price.locator('.ac-range-value-toggle').first();
   await priceToggle.waitFor({state:'visible',timeout:90000});
   await priceToggle.click({timeout:90000});

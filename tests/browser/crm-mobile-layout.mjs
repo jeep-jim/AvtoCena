@@ -262,7 +262,12 @@ try{
     assert.ok(await page.locator('.crm-client-card').count()>0);
     if(width===1440){const list=await page.locator('.crm-clients-list').boundingBox(),form=await page.locator('.crm-client-create').boundingBox();assert.ok(form.x>list.x+list.width,'create form on the right');}
    }
-   assert.ok(await page.locator('.crm-brand small').isVisible(),'CRM visible on mobile and desktop');
+   assert.ok(await page.locator('.crm-brand > span').isVisible(),'CRM visible on mobile and desktop');
+   assert.equal((await page.locator('.crm-brand > span').innerText()).trim(),'CRM','CRM replaces the public brand in the admin header');
+   assert.ok(await page.getByRole('link',{name:'Погнали — гонки команды'}).isVisible(),'game is available in the CRM header');
+   assert.equal(await page.locator('.crm-game-label').isVisible(),width>=768,'full game label on desktop, icons on mobile');
+   assert.equal(await page.locator('.crm-game-emoji').count(),2);
+   for(const icon of await page.locator('.crm-game-emoji').all())assert.equal(await icon.evaluate(e=>getComputedStyle(e).transform),'matrix(-1, 0, 0, 1, 0, 0)','car and cloud face right');
    assert.equal(await page.locator('.crm-brand-mark').evaluate(e=>getComputedStyle(e).backgroundColor),'rgba(0, 0, 0, 0)','no white logo background');
    for(const select of await page.locator('select:visible').all()){assert.ok(['right 16px center','right 16px 50%','calc(100% - 16px) 50%'].includes(await select.evaluate(e=>getComputedStyle(e).backgroundPosition)),await select.evaluate(e=>e.outerHTML+' POSITION='+getComputedStyle(e).backgroundPosition));assert.ok(await select.evaluate(e=>parseFloat(getComputedStyle(e).paddingRight)>=40));}
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no overflow after disclosure');
