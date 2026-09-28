@@ -17,6 +17,8 @@ export type AuthUser = {
   displayName: string;
   avatarUrl?: string;
   personalPhone?: string;
+  workAddresses?: string[];
+  remoteWork?: boolean;
   companyId?: string;
   role: UserRole;
   status?: "active" | "disabled";
