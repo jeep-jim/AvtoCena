@@ -5,6 +5,8 @@ import { unstable_cache } from "next/cache";
 import { getJsonStorage } from "../data";
 import type { VehicleOffer } from "./types";
 import { isGreenCornerOffer } from "./green-corner-contract";
+import { greenCornerNeedsFullPricing,greenCornerPageSelection,type GreenFilters } from "./green-corner-search";
+import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 export const GREEN_CORNER_PATH="catalog/green-corner/current.json";
 export type GreenCornerSnapshot={version:1;updatedAt:string;sourceCount:number;items:VehicleOffer[]};
 export const readGreenCorner = unstable_cache(async ():Promise<GreenCornerSnapshot>=>{
@@ -18,6 +20,11 @@ export async function getGreenCornerOffer(id:string){
  return (await readGreenCorner()).items.find(row=>row.id===id)||null;
 }
 export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,frameNumber,...row}=offer;return row;}
+
+export async function readGreenCornerPage(items:VehicleOffer[],params:GreenFilters,clampPage=true) {
+ const current=greenCornerNeedsFullPricing(params)?items:await applyEncyclopediaDisplayIdentityBatch(items);
+ return greenCornerPageSelection(current,params,currentGreenCornerPrices,clampPage);
+}
 
 const pricedStock = new DetailReadCache<VehicleOffer[]>({maxEntries:2,maxBytes:16*1024*1024,ttlMs:60_000,concurrency:1});
 

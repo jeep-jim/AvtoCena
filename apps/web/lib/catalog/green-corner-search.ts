@@ -6,6 +6,21 @@ import { priceCardForCity } from "./card-city-delivery";
 import { savedCalculationPreviewRub } from "./saved-calculation-preview";
 import { catalogOfferVisibleRub } from "./public-priority";
 export type GreenFilters = Record<string,string|undefined>;
+export function greenCornerNeedsFullPricing(params:GreenFilters) {
+ // Keep every filtered/sorted query on the existing exact full-list path.
+ // Ordinary pagination needs only the 24 visible current calculations.
+ return Object.entries(params).some(([key,value])=>Boolean(value) && !['page','city','market','stock'].includes(key));
+}
+export async function greenCornerPageSelection(items:VehicleOffer[],params:GreenFilters,
+ price:(items:VehicleOffer[])=>Promise<VehicleOffer[]>,clampPage=true) {
+ const full=greenCornerNeedsFullPricing(params);
+ const current=full?await price(items):items;
+ const matched=filterGreenCorner(current,params);
+ const requested=Math.max(1,Math.floor(Number(params.page)||1));
+ const page=clampPage?Math.min(requested,Math.max(1,Math.ceil(matched.length/24))):requested;
+ const visible=matched.slice((page-1)*24,page*24);
+ return {items:full?visible:await price(visible),total:matched.length,page,facets:greenCornerFacets(current)};
+}
 // Match the price shown by CatalogPrice, including saved calculations and city delivery.
 export function greenCornerBudgetPrice(row:VehicleOffer, city = ""):number|undefined {
  const saved = savedCalculationPreviewRub((row as any).savedCalculationPreview);
