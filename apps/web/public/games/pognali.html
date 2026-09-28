@@ -910,7 +910,6 @@ function generateObstacles(){
     const r = Math.random();
     let type;
     if (r < 0.3) type = 'rock';
-    else if (r < 0.55) type = 'spikes';
     else if (r < 0.75) type = 'pit';
     else type = 'crate';
     arr.push({
@@ -1292,10 +1291,6 @@ function step(dt){
           o.taken = true;
           spawnParticles(o.x, terrainY(o.x)-20, '#7A6B58', 15, 250);
           notify('💥 Камень!', 'red');
-        } else if (o.type === 'spikes'){
-          damageCar(p, 15, 'obstacle', false);
-          p.vx *= 0.5;
-          notify('⚠️ Шипы!', 'red');
         } else if (o.type === 'crate'){
           p.vx *= 0.85; p.coins += 3;
           o.taken = true;
@@ -1675,28 +1670,11 @@ function drawRamps(){
 }
 function drawObstacles(){
   for (const o of state.obstacles){
-    if (o.taken && o.type !== 'pit' && o.type !== 'spikes') continue;
+    if (o.taken && o.type !== 'pit') continue;
     if (Math.abs(o.x - state.cam.x) > 1600) continue;
     const y = terrainY(o.x);
     if (o.type === 'rock'){
       drawRock(o.x, y, o.w/28, '#7A6B58');
-    } else if (o.type === 'spikes'){
-      ctx.save();
-      ctx.translate(o.x, y);
-      for (let i=0;i<5;i++){
-        const sx = -o.w/2 + i*(o.w/4);
-        ctx.beginPath();
-        ctx.moveTo(sx-4, 0);
-        ctx.lineTo(sx, -o.h);
-        ctx.lineTo(sx+4, 0);
-        ctx.closePath();
-        ctx.fillStyle = '#c0c0c0';
-        ctx.fill();
-        ctx.strokeStyle = '#666';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-      ctx.restore();
     } else if (o.type === 'pit'){
       ctx.beginPath();
       ctx.ellipse(o.x, y, o.w/2, 12, 0, 0, 6.284);

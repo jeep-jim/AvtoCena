@@ -23,7 +23,7 @@ export type PublicCurrencyRate = {
   history?: RateHistoryPoint[];
 };
 
-type CurrencyRateLike = Partial<PublicCurrencyRate>;
+type CurrencyRateLike = Partial<PublicCurrencyRate> & { sourcePrice?: number };
 type ChartPoint = RateHistoryPoint;
 type PriceLike = {
   id?: string; sourceId?: string; offerType?: string;
@@ -97,7 +97,7 @@ function savedPriceDelta(offer: PriceLike) {
 }
 
 function currencyDelta(offer: PriceLike) {
-  const sourcePrice = Number(offer.sourcePrice || 0);
+  const sourcePrice = Number(offer.calculationSnapshot?.currencyRate?.sourcePrice || offer.sourcePrice || 0);
   const rate = offer.calculationSnapshot?.currencyRate;
   const effectiveRate = Number(rate?.effectiveRate || 0);
   const previousEffectiveRate = Number(rate?.previousEffectiveRate || 0);
@@ -114,35 +114,30 @@ function formatDelta(value: number) {
   return `${money(absolute)} ₽`;
 }
 
-function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {
-  // Never relabel a saved quote with a rate that did not calculate its total.
-  if (offer.calculationSnapshot?.currencyRate?.effectiveRate || !liveRate) return offer;
-  const stored = offer.calculationSnapshot?.currencyRate || {};
-  const liveEffective = Number(liveRate.effectiveRate || 0);
-  const storedEffective = Number(stored.effectiveRate || 0);
-  let previousEffectiveRate = Number(liveRate.previousEffectiveRate || 0) || Number(stored.previousEffectiveRate || 0);
-  let rateDelta = finiteNumber(liveRate.rateDelta);
-  if (Math.abs(rateDelta) < 1e-9 && liveEffective && storedEffective && Math.abs(liveEffective - storedEffective) > 1e-9) {
-    previousEffectiveRate = storedEffective;
-    rateDelta = liveEffective - storedEffective;
+export function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {
+  const stored = offer.calculationSnapshot?.currencyRate;
+  if (!liveRate) return offer;
+  const currency = String(offer.sourceCurrency || stored?.currency || "").toUpperCase();
+  if (currency !== liveRate.currency.toUpperCase()) return offer;
+  let rate: CurrencyRateLike = liveRate;
+  if (stored?.effectiveRate) {
+    // Recover the comparison only for the saved publication, never replace
+    // the rate used to calculate this car or mix ATB and CBR histories.
+    if (stored.previousEffectiveRate || stored.rateDelta != null) return offer;
+    if (stored.rateSource && !stored.rateSource.startsWith("cbr")) return offer;
+    if (liveRate.rateSource && !liveRate.rateSource.startsWith("cbr")) return offer;
+    const date = String(stored.rateDate || "").slice(0, 10);
+    if (!date) return offer;
+    const history = [...(liveRate.history || [])];
+    if (liveRate.rateDate) history.push({date: liveRate.rateDate.slice(0, 10), effectiveRate: liveRate.effectiveRate});
+    if (liveRate.previousRateDate && liveRate.previousEffectiveRate) history.push({date: liveRate.previousRateDate.slice(0, 10), effectiveRate: liveRate.previousEffectiveRate});
+    const matching = history.find(point => point.date === date && Math.abs(point.effectiveRate - Number(stored.effectiveRate)) < 1e-8);
+    const previous = history.filter(point => point.date < date && point.effectiveRate > 0).sort((a,b) => b.date.localeCompare(a.date))[0];
+    if (!matching || !previous) return offer;
+    rate = {...stored, previousEffectiveRate: previous.effectiveRate, previousRateDate: previous.date,
+      rateDelta: Number(stored.effectiveRate) - previous.effectiveRate};
   }
-  if (Math.abs(rateDelta) < 1e-9 && Math.abs(finiteNumber(stored.rateDelta)) > 1e-9) {
-    rateDelta = finiteNumber(stored.rateDelta);
-    previousEffectiveRate = Number(stored.previousEffectiveRate || 0) || previousEffectiveRate;
-  }
-  return {
-    ...offer,
-    calculationSnapshot: {
-      ...(offer.calculationSnapshot || {}),
-      currencyRate: {
-        ...stored,
-        ...liveRate,
-        effectiveRate: liveEffective || storedEffective,
-        previousEffectiveRate: previousEffectiveRate || undefined,
-        rateDelta: Math.abs(rateDelta) > 1e-9 ? rateDelta : undefined,
-      },
-    },
-  };
+  return {...offer, calculationSnapshot: {...offer.calculationSnapshot, currencyRate: rate}};
 }
 
 export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
@@ -527,11 +522,13 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   const panelRoot = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!currency || currency === "RUB" || offer.calculationSnapshot?.currencyRate?.effectiveRate) return;
+    if (!currency || currency === "RUB") return;
+    const saved = offer.calculationSnapshot?.currencyRate;
+    if (saved?.previousEffectiveRate || saved?.rateDelta != null) return;
     let active = true;
     void loadLiveRates().then((rates) => { if (active) setLiveRate(rates[currency] || null); });
     return () => { active = false; };
-  }, [currency, offer.calculationSnapshot?.currencyRate?.effectiveRate]);
+  }, [currency, offer.calculationSnapshot?.currencyRate]);
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
     const sync = () => { setDesktopHover(media.matches); if (!media.matches) setPopoverOpen(false); };
@@ -612,10 +609,9 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
         tabIndex={canShowRate ? 0 : undefined}
         aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"}`}
         aria-expanded={canShowRate ? popoverOpen || sheetOpen : undefined}
-        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${canShowRate ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
+        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${canShowRate ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 cursor-pointer` : "pointer-events-none"}`}
         onClick={(event) => {
           if (!canShowRate) return;
-          if (!panel && !desktopHover) return;
           event.preventDefault();
           event.stopPropagation();
           if (desktopHover) setPopoverOpen((current) => !current); else openSheet();
@@ -625,12 +621,11 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             event.stopPropagation();
-            if (desktopHover) setPopoverOpen((current) => !current); else if (panel) openSheet();
+            if (desktopHover) setPopoverOpen((current) => !current); else openSheet();
           }
         }}
       ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
-    {canShowRate ? <button type="button" onClick={event => {event.preventDefault();event.stopPropagation();openSheet();}} onKeyDown={event=>event.stopPropagation()} aria-label={`Курс ${currency} — ${currencyName(currency)}`} className={`${dense ? "mt-1 text-[9px]" : "mt-2 text-[11px]"} inline-flex min-h-6 items-center gap-1 rounded-md font-bold text-[var(--ac-muted)] hover:text-[var(--ac-text)] focus-visible:outline focus-visible:outline-2`}><span>Курс {currency}</span><span aria-hidden="true">›</span></button> : null}
     {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} sourcePrice={Number(pricedOffer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(pricedOffer)} priceChangedAt={pricedOffer.priceChangedAt} statusLabel={trendUsesCurrency ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} /> : null}
   </div>;
 }

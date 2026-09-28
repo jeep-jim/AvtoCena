@@ -73,9 +73,9 @@ export function CurrencyChartEnhancer() {
         line-height:1!important;
       }
       @media(max-width:1023px){
-        .ac-catalog-card .ac-price-trend-arrow{
-          pointer-events:none!important;
-          cursor:default!important;
+        .ac-catalog-card .ac-price-trend-arrow[role="button"]{
+          pointer-events:auto!important;
+          cursor:pointer!important;
         }
       }
       @media(max-width:767px){
