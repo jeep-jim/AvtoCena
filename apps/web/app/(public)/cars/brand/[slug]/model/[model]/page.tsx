@@ -128,7 +128,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
         </section>)}
       </div> : <section className="mt-9 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:p-8">
         <h2 className="text-2xl font-black md:text-4xl">Подберём {brand.name} {model.model}</h2>
-        <p className="mt-3 max-w-4xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас подходящих предложений нет. Оставьте запрос — менеджер проверит доступные варианты на семи рынках и подготовит расчёт под ключ.</p>
+        <p className="mt-3 max-w-4xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас подходящих предложений нет. Оставьте запрос — менеджер проверит доступные варианты в странах, доступных для заказа и подготовит расчёт под ключ.</p>
         <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Оставить запрос на {brand.name} {model.model}</button>
       </section>}
 
