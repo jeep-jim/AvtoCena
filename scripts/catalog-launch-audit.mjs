@@ -21,3 +21,11 @@ for(const id of ['cbd5d3c2822eab380dead32b']){
 }
 await fs.writeFile('catalog-launch-audit.json',JSON.stringify(report,null,2));
 console.log(JSON.stringify(report));
+
+const previewInputs=await storage.readJson(`catalog/runtime/japan-preview-inputs-v1/${manifest.generationId}.json`,null);
+console.log(JSON.stringify({phase:'preview-input-size',bytes:Buffer.byteLength(JSON.stringify(previewInputs)),rows:Object.keys(previewInputs?.entries||{}).length}));
+const {japanSearchQuotes}=await import('../apps/web/lib/catalog/japan-delivered-preview.ts');
+for(let repeat=0;repeat<2;repeat++){
+ const started=performance.now();const quotes=await japanSearchQuotes(manifest.generationId);
+ console.log(JSON.stringify({phase:'japan-quotes',repeat,ms:Math.round(performance.now()-started),bytes:Buffer.byteLength(JSON.stringify(quotes)),rows:Object.keys(quotes).length,rssMiB:Math.round(process.memoryUsage().rss/1048576)}));
+}
