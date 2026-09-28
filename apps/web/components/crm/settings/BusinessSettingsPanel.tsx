@@ -460,7 +460,7 @@ export function BusinessSettingsPanel({
               <CpaStructuredFields network={cpaNetworks[0] || {}} />
               <TextArea label="Комментарий" name="comment" />
               <button className="rounded-xl bg-red-600 px-4 py-3 text-sm font-black text-white md:col-span-2">
-                Сохранить CPA draft
+                Сохранить черновик условий
               </button>
             </form>
           )}
@@ -471,7 +471,7 @@ export function BusinessSettingsPanel({
         >
           <h2 className="text-2xl font-black">Настройки сайта</h2>
           <p className="mt-2 text-sm font-bold text-white/50">
-            Бизнес-значения без переноса дизайна в JSON.
+            Размер выплат и условия работы, которые отображаются на сайте.
           </p>
           {canEdit && (
             <form
