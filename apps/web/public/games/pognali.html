@@ -181,6 +181,7 @@ h1 span{color:#ff4757}
 
 .pause,.sound{position:absolute;pointer-events:auto;top:10px;right:10px;background:#202836;color:white;border:1px solid #465167;border-radius:10px;padding:9px;font-weight:800}.sound{top:52px}.board{top:100px}.ringControl{display:none}body.ring .ringControl{display:flex}body.ring #btnJump,body.ring #btnBrake{display:none}body.circuit #btnFire{display:none}.playerAvatar{display:none!important}.chatWrap[hidden]{display:none}.hudTop{max-width:calc(100% - 115px)}.panel{overscroll-behavior:contain}.sub{line-height:1.5}.screen{backdrop-filter:none}.pbtn{touch-action:none}#pauseOverlay{position:absolute;inset:0;z-index:40;background:rgba(10,12,17,.9);display:grid;place-content:center;text-align:center;gap:18px;padding:24px}#pauseOverlay[hidden]{display:none}.mode-help{line-height:1.5}.ringMenu .hillWeapons{display:none}button:focus-visible,input:focus-visible{outline:2px solid #ffb703;outline-offset:3px}
 @media(max-width:640px){.board{display:none}.hudTop{gap:4px}.chip{padding:4px 6px}.chip .v{font-size:13px}.fuelWrap{min-width:90px}.pbtn{width:58px;height:64px;border-radius:16px;font-size:23px;backdrop-filter:none}.ctrls{bottom:44px}.quit{bottom:6px}.panel{max-height:100%;border-radius:14px;padding:14px}.screen{padding:6px}.cars{grid-template-columns:repeat(2,minmax(0,1fr))}.themes,.weapons{grid-template-columns:repeat(3,minmax(0,1fr))}.btn{min-width:86px;padding:10px 7px;font-size:12px}.controlsHint{display:none}.stat3{gap:6px}.stat{padding:8px}.stat .v{font-size:20px}.loginBox{padding:8px}.sound{font-size:11px}}
+#scrResult{background:rgba(10,12,17,.76)}#scrResult .panel{max-width:520px}#scrResult .stat3{grid-template-columns:repeat(2,minmax(0,1fr))}.resultActions{margin:18px 0 12px}.resultActions .btn{min-width:120px;padding:16px 10px;font-size:16px}#resultNotice{margin:0;text-align:center;min-height:18px}#btnRetrySave[hidden]{display:none}.btn:disabled{opacity:.55;cursor:wait}
 </style>
 </head>
 <body>
@@ -277,14 +278,21 @@ h1 span{color:#ff4757}
     </div>
   </div>
 
-  <div class="screen hidden" id="scrResult">
+  <div class="screen hidden" id="scrResult" role="dialog" aria-modal="true" aria-labelledby="rTitle">
     <div class="panel">
       <div style="text-align:center">
         <div class="sub" id="rTitle" style="margin-bottom:0">Заезд завершён</div>
         <div class="big" id="rDist">0 м</div>
       </div>
 
+      <div class="row resultActions">
+        <button class="btn go" id="btnAgain">Начать снова</button>
+        <button class="btn" id="btnExit">Выйти</button>
+      </div>
+      <p id="resultNotice" class="sub" role="status"></p>
+      <button class="btn" id="btnRetrySave" hidden>Повторить сохранение</button>
       <div class="stat3">
+        <div class="stat"><div class="k">Время</div><div class="v" id="rTime">0 с</div></div>
         <div class="stat"><div class="k">Монеты</div><div class="v" style="color:#ffb703" id="rCoins">0</div></div>
         <div class="stat"><div class="k">Место</div><div class="v" id="rPlace">1</div></div>
         <div class="stat"><div class="k">Побед над ботами</div><div class="v" style="color:#ff6b7a" id="rKills">0</div></div>
@@ -294,8 +302,7 @@ h1 span{color:#ff4757}
       <div class="hist" id="rBoard"></div>
 
       <div class="row" style="margin-top:18px">
-        <button class="btn" id="btnAgain">🔄 Ещё раз</button>
-        <button class="btn" id="btnMenu">🏠 В меню</button>
+        <button class="btn" id="btnMenu">Выбрать режим и машину</button>
       </div>
     </div>
   </div>
@@ -637,12 +644,10 @@ function stepCarPhysics(c, gas, brake, dt){
 
   const na = Math.atan2(Math.sin(c.angle), Math.cos(c.angle));
   if (c.alive){
-    if (Math.abs(na) > 1.95){
+    const touchingRoof = c.y >= terrainY(c.x) - cfg.bodyH - cfg.wheelR;
+    if (Math.abs(na) > 1.95 && touchingRoof){
       c.flipTimer += dt;
-      if (c.flipTimer > 1.6){
-        c.hp -= 30*dt;
-        if (c.hp <= 0) killCar(c, 'flip');
-      }
+      if (c.flipTimer > 1.2) killCar(c, 'flip');
     } else {
       c.flipTimer = Math.max(0, c.flipTimer - dt*3);
     }
@@ -668,6 +673,7 @@ function tryJump(c){
 function killCar(c, reason){
   if (!c.alive) return;
   c.alive = false;
+  c.deathReason = reason;
   c.deadTimer = 0;
   explosionSound();
   spawnParticles(c.x, c.y, '#ff6b7a', 25, 350);
@@ -1073,11 +1079,19 @@ function beginLocalRun(){
 function endRun(reason){
   if (state.screen !== 'play') return;
   state.screen = 'result';
+  paused=false;resetKeys();cancelAnimationFrame(raf);raf=0;
+  $('#pauseOverlay').hidden=true;
+  $('#hud').classList.remove('on');
+  $('#scrResult').classList.remove('hidden');
+  $('#scrResult').scrollTop=0;
+  $('#scrResult').querySelector('.panel').scrollTop=0;
+  $('#btnRetrySave').hidden=true;
+  $('#btnAgain').disabled=state.time>=1;
+  $('#resultNotice').textContent=state.time>=1?'Сохраняем результат…':'Можно начать новый заезд';
   setEngine(false, 0);
   const p = state.player;
   const dist = Math.max(0, Math.floor((p.maxX - START_X)/10));
-  if(state.time>=1) parent.postMessage({game:'pognali-v1',type:'finish',id:runId,distance:dist,coins:p.coins,kills:p.kills,duration:Math.min(240,state.time)},'*');
-  else notify('Слишком короткий заезд: проедьте хотя бы секунду', 'gold');
+
   const list = buildScoreboard();
   const place = list.findIndex(r=>r.me) + 1;
   saveHist({
@@ -1102,6 +1116,8 @@ function endRun(reason){
     </div>`).join('');
   $('#hud').classList.remove('on');
   $('#scrResult').classList.remove('hidden');
+  if(state.time>=1) parent.postMessage({game:'pognali-v1',type:'finish',id:runId,distance:dist,coins:p.coins,kills:p.kills,duration:Math.min(240,state.time)},'*');
+  $('#btnExit').focus();
 }
 
 function buildScoreboard(){
@@ -1289,7 +1305,7 @@ function step(dt){
     state.cam.y += (ty - state.cam.y) * Math.min(1, 4*dt);
   }
 
-  if (!p.alive) endRun('💥 Уничтожен!');
+  if (!p.alive) endRun(p.deathReason==='flip'?'Машина перевернулась':'Машине нужен ремонт');
   else if (p.fuel <= 0 && Math.abs(p.vx) < 15 && state.time > 2) endRun('⛽ Бензин кончился!');
   else if (state.time > 240) endRun('⏱ Время вышло!');
   else if (state.mode === 'deathmatch' && state.bots.every(b=>!b.alive) && state.bots.length > 0){
@@ -2179,6 +2195,8 @@ $$('[data-mode]').forEach(b=>{
 });
 $('#btnStart').addEventListener('click', startRun);
 $('#btnAgain').addEventListener('click', startRun);
+$('#btnExit').addEventListener('click',()=>{resetKeys();cancelAnimationFrame(raf);raf=0;setEngine(false,0);if(AC)AC.suspend().catch(()=>{});parent.postMessage({game:'pognali-v1',type:'exit'},'*');});
+$('#btnRetrySave').addEventListener('click',()=>{$('#btnRetrySave').hidden=true;$('#resultNotice').textContent='Сохраняем результат…';parent.postMessage({game:'pognali-v1',type:'retry-save'},'*');});
 $('#btnMenu').addEventListener('click', ()=>{
   state.screen='menu';
   setEngine(false, 0);
@@ -2202,9 +2220,9 @@ window.addEventListener('message',event=>{
  const data=event.data;
  if(data.type==='user')setUser({...data.user,isLogged:true});
  if(data.type==='started'&&starting){runId=data.id;starting=false;paused=false;resetKeys();beginLocalRun();}
- if(data.type==='start-error'){starting=false;notify(data.message);}
- if(data.type==='saved')notify('В рейтинг: '+data.score+' очков','gold');
- if(data.type==='save-error')notify(data.canRetry?'Нажмите «Повторить сохранение» над игрой':data.message);
+ if(data.type==='start-error'){starting=false;$('#btnAgain').disabled=false;$('#resultNotice').textContent=data.message;notify(data.message);}
+ if(data.type==='saved'){$('#btnAgain').disabled=false;$('#btnRetrySave').hidden=true;$('#resultNotice').textContent='В рейтинг: '+data.score+' очков';notify('В рейтинг: '+data.score+' очков','gold');}
+ if(data.type==='save-error'){$('#btnAgain').disabled=!!data.canRetry;$('#btnRetrySave').hidden=!data.canRetry;$('#resultNotice').textContent=data.message||'Не удалось сохранить результат';}
 });
 function pauseGame(){
  if(state.screen!=='play')return;

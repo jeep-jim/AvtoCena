@@ -34,8 +34,10 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
    if(event.source!==frame.current?.contentWindow||event.data?.game!=='pognali-v1')return;
    const data=event.data;
    if(data.type==='ready'){send({type:'user',user});return;}
+   if(data.type==='exit'){setOpened(false);active.current=null;return;}
+   if(data.type==='retry-save'){void save();return;}
    if(data.type==='start'){
-    if(busy.current)return;
+    if(busy.current){send({type:'start-error',message:'Сохраняем результат. Попробуйте ещё раз через несколько секунд.'});return;}
     if(pending.current){send({type:'start-error',message:'Сначала сохраните предыдущий результат кнопкой над игрой.'});return;}
     busy.current=true;
     try{const result=await gameRequest({action:'start',mode:data.mode});active.current=result.run.id;setMode(result.run.mode);send({type:'started',id:result.run.id});setNotice('');}
@@ -49,7 +51,7 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
  const ranked=team.filter(row=>row.best[mode]).sort((a,b)=>b.best[mode]!.score-a.best[mode]!.score);
  return <div className="pognali-arena">
   <div className="pognali-toolbar"><p role="status">{notice||'Лучший заезд каждого сотрудника · отдельный зачёт для каждого режима'}</p>{retry?<button onClick={()=>void save()}>Повторить сохранение</button>:null}{opened?<button onClick={()=>{setOpened(false);active.current=null;}}>Закрыть игру</button>:null}</div>
-  {opened?<iframe ref={frame} src="/games/pognali.html?v=1" title="Погнали — гонки" onLoad={()=>send({type:'user',user})} sandbox="allow-scripts" referrerPolicy="no-referrer" className="pognali-frame"/>:<div className="pognali-cover"><div aria-hidden="true">🏁</div><h2>Небольшой перерыв. Большая гонка.</h2><p>Холмы с прыжками, мини-машинки на кольце и гонка с оружием. Заезды до четырёх минут. Соперники на трассе — боты, рекорды в рейтинге — ваши и коллег.</p><button onClick={()=>setOpened(true)}>Погнали!</button></div>}
+  {opened?<iframe ref={frame} src="/games/pognali.html?v=2" title="Погнали — гонки" onLoad={()=>send({type:'user',user})} sandbox="allow-scripts" referrerPolicy="no-referrer" className="pognali-frame"/>:<div className="pognali-cover"><div aria-hidden="true">🏁</div><h2>Небольшой перерыв. Большая гонка.</h2><p>Холмы с прыжками, мини-машинки на кольце и гонка с оружием. Заезды до четырёх минут. Соперники на трассе — боты, рекорды в рейтинге — ваши и коллег.</p><button onClick={()=>setOpened(true)}>Погнали!</button></div>}
   <section className="pognali-ranking" aria-label="Рейтинг команды"><div className="pognali-ranking-title"><h2>🏆 Рейтинг команды</h2><button disabled={loading} onClick={()=>void refresh()}>{loading?'Обновляем…':'Обновить'}</button></div><div className="pognali-tabs">{Object.entries(modes).map(([id,label])=><button key={id} aria-pressed={mode===id} onClick={()=>setMode(id as GameMode)}>{label}</button>)}</div><p className="pognali-rule">Очки: метр = 1, монета = 25{mode==='battle'?', победа над ботом = 500':''}. На кольце за три круга добавляется бонус: 10 очков за каждую оставшуюся секунду из 180. Для рейтинга проедьте хотя бы секунду.</p>{ranked.length?<ol>{ranked.map((row,i)=><li key={row.id} className={row.id===userId?'is-me':''}><b>{i+1}</b>{row.avatar?<img src={row.avatar} alt="" loading="lazy"/>:<span className="pognali-avatar">{row.name.slice(0,1)}</span>}<span>{row.name}{row.id===userId?' · вы':''}</span><strong>{row.best[mode]!.score.toLocaleString('ru-RU')} <small>очков</small></strong></li>)}</ol>:<p className="pognali-empty">Пока нет результатов. Откройте игру и задайте темп команде!</p>}</section>
  </div>;
 }
