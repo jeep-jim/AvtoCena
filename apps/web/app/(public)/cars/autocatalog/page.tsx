@@ -66,7 +66,7 @@ export default async function AutocatalogPage() {
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Только актуальное</div>
           <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.05em] md:text-7xl">Автокаталог</h1>
           <p className="mt-4 max-w-3xl text-sm font-semibold leading-6 text-[var(--ac-muted)] md:text-base">
-            Здесь только марки и модели, у которых сейчас есть автомобили с рассчитанной ценой. Сырые названия источников и пустые справочные карточки скрыты.
+            Выберите марку и модель, чтобы сравнить доступные автомобили и стоимость под ключ.
           </p>
         </div>
         <div className="flex flex-wrap gap-2 text-xs font-black md:max-w-sm md:justify-end">
