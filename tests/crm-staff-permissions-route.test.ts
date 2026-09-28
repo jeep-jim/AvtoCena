@@ -8,5 +8,9 @@ test('staff writes enforce capability, owner boundary and prevent granting absen
  response=await save({userId:'new-staff'});assert.equal(state.users[0].personalPhone,'+79991234567','older form preserves the phone');
  response=await save({userId:'new-staff',personalPhone:'invalid'});assert.match(response.headers.get('location'),/state=error/);assert.equal(state.users[0].personalPhone,'+79991234567');
  response=await save({userId:'new-staff',personalPhone:''});assert.equal(state.users[0].personalPhone,'','phone can be cleared');
+ response=await save({userId:'new-staff',workplacesPresent:'1',workAddresses:JSON.stringify([' Офис 1 ','Офис 2','Офис 1']),remoteWork:'on'});assert.match(response.headers.get('location'),/state=saved/);assert.deepEqual(state.users[0].workAddresses,['Офис 1','Офис 2']);assert.equal(state.users[0].remoteWork,true);
+ response=await save({userId:'new-staff'});assert.deepEqual(state.users[0].workAddresses,['Офис 1','Офис 2'],'older forms preserve workplaces');
+ response=await save({userId:'new-staff',workplacesPresent:'1',workAddresses:'broken'});assert.match(response.headers.get('location'),/state=error/);assert.deepEqual(state.users[0].workAddresses,['Офис 1','Офис 2']);
+ response=await save({userId:'new-staff',workplacesPresent:'1',workAddresses:'[]'});assert.deepEqual(state.users[0].workAddresses,[]);assert.equal(state.users[0].remoteWork,false);
  state.actor={...state.actor,permissions:{staff:false}};response=await save({telegramUsername:'another'});assert.match(response.headers.get('location'),/auth_required/);assert.equal(state.users.length,3);}finally{delete (globalThis as any).__staffPermissions;}
 });
