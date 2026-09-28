@@ -1,6 +1,7 @@
 // Real CRM pages/components, synthetic records only. No production credentials.
 import React from 'react';
 import {createRoot} from 'react-dom/client';
+import Game from '../../apps/web/app/(crm)/crm/game/page';
 import StaffEdit from '../../apps/web/app/(crm)/crm/managers/[id]/page';
 import Documents from '../../apps/web/app/(crm)/crm/documents/page';
 import Overview from '../../apps/web/app/(crm)/crm/page';
@@ -9,7 +10,7 @@ import Managers from '../../apps/web/app/(crm)/crm/managers/page';
 import Settings from '../../apps/web/app/(crm)/crm/settings/page';
 import Clients from '../../apps/web/app/(crm)/crm/clients/page';
 import Client from '../../apps/web/app/(crm)/crm/clients/[id]/page';
-const pages:any={staff:StaffEdit,documents:Documents,overview:Overview,leads:Leads,archive:Leads,team:Managers,settings:Settings,clients:Clients,client:Client};
+const pages:any={game:Game,staff:StaffEdit,documents:Documents,overview:Overview,leads:Leads,archive:Leads,team:Managers,settings:Settings,clients:Clients,client:Client};
 async function resolve(node:any):Promise<any>{
  if(Array.isArray(node))return Promise.all(node.map(resolve));
  if(!React.isValidElement(node))return node;
