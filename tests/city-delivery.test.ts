@@ -38,6 +38,21 @@ test('API parameters retain city but cannot inject a delivery amount',()=>{
  assert.equal((result as any).cityDeliveryRub,undefined);
 });
 
+test('Ussuriysk delivery from Vladivostok reaches the calculation and clears without doubling',()=>{
+ for(const market of ['korea','china','japan']) {
+  const quote=quoteCityDelivery(' г. Уссурийск ',market);
+  assert.equal(quote.status,'estimated');assert.equal(quote.origin,'Владивосток');
+  assert.equal(quote.amountRub,15000);assert.match(deliveryDescription(quote),/15\s000/);
+ }
+ const config=resolveCatalogMarketConfig('korea',{percentExpenses:[]}).config;
+ const calculate=(city:string)=>calculateAvtocenaFromBusinessConfig({marketId:'korea',marketConfig:config,sourcePriceRub:1000000,customsRub:500000,cityDeliveryRub:quoteCityDelivery(city,'korea').amountRub,deliveryCity:city});
+ const base=calculate(''), delivered=calculate('Уссурийск');
+ assert.equal(delivered.totalRub-base.totalRub,15000);
+ assert.equal(delivered.breakdown.filter(row=>row.id==='rf-delivery').length,1);
+ assert.equal(delivered.breakdown.find(row=>row.id==='rf-delivery')?.amountRub,15000);
+ assert.equal(calculate('').totalRub,base.totalRub);
+});
+
 test('old Japan snapshot loses only saved delivery and repricing is idempotent',()=>{
  const config={serviceBundleVersion:1,topAvtoCommissionRub:90000,laboratoryRub:50000,securityDepositRub:160000,exchangeRateReservePercent:2};
  const breakdown=[{id:'car',amountRub:1000000},{id:'laboratory',amountRub:50000},{id:'topavto-commission',amountRub:90000},{id:'rf-delivery',amountRub:120000},{id:'exchange-reserve',amountRub:20000}];
