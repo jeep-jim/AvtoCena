@@ -1,5 +1,6 @@
 "use client";
 
+import {analyticsChoice,setAnalyticsChoice,ANALYTICS_EVENT} from "@/lib/privacy-consent";
 import { AutoCalcButton } from "../autocalc/AutoCalcButton";
 import { PageQrButton } from "../sharing/PageQrButton";
 import { isPublicPagePath } from "../../lib/public-page-url";
@@ -12,7 +13,7 @@ import { usePathname } from "next/navigation";
 import { CatalogFooterStop } from "./CatalogFooterStop";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
-const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
+
 
 
 const marketLinks = [
@@ -79,21 +80,11 @@ export function PublicLegalFooter() {
 
   const closeCookieNotice = useCallback(() => {
     setCookieOpen(false);
-    setCookieBannerOpen(false);
-    try { window.localStorage.setItem(COOKIE_NOTICE_STORAGE_KEY, "1"); } catch { /* storage can be unavailable */ }
+    setCookieBannerOpen(analyticsChoice()===null);
   }, []);
 
-  useEffect(() => {
-    if (!publicPath) return;
-    try {
-      if (!window.localStorage.getItem(COOKIE_NOTICE_STORAGE_KEY)) {
-        const frame = window.requestAnimationFrame(() => {
-          setCookieBannerOpen(true);
-        });
-        return () => window.cancelAnimationFrame(frame);
-      }
-    } catch { /* footer remains usable */ }
-  }, [publicPath]);
+  const chooseAnalytics=(allowed:boolean)=>{setAnalyticsChoice(allowed);setCookieOpen(false);setCookieBannerOpen(false);};
+  useEffect(()=>{if(!publicPath)return;const sync=()=>setCookieBannerOpen(analyticsChoice()===null);sync();window.addEventListener(ANALYTICS_EVENT,sync);return()=>window.removeEventListener(ANALYTICS_EVENT,sync);},[publicPath]);
 
   useEffect(() => {
     if (!cookieOpen) return;
@@ -159,7 +150,10 @@ export function PublicLegalFooter() {
           <p className="lg:whitespace-nowrap">Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.</p>
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
-            <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Cookie</button>
+            <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Настройки cookie</button>
+            <Link href="/privacy" className="ac-public-legal-link">Политика обработки данных</Link>
+            <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
+            <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
             <Link href="/dealers" className="ac-public-legal-link">🚗 АвтоДилерам</Link>
           </nav>
@@ -176,10 +170,10 @@ export function PublicLegalFooter() {
       </aside> : null}
       {cookieBannerOpen && !cookieOpen ? (
         <aside className="ac-cookie-banner" aria-label="Уведомление о cookie">
-          <p>Используем cookie для работы сайта и сохранения ваших настроек.</p>
+          <p>Необходимые cookie сохраняют настройки сайта. Аналитика Яндекса включается только с вашего разрешения.</p>
           <div className="ac-cookie-banner-actions">
             <button type="button" className="ac-cookie-banner-details" onClick={() => setCookieOpen(true)}>Подробнее</button>
-            <button type="button" className="ac-cookie-banner-close" onClick={closeCookieNotice}>Закрыть</button>
+            <button type="button" className="ac-cookie-banner-details" onClick={()=>chooseAnalytics(false)}>Только необходимые</button><button type="button" className="ac-cookie-banner-close" onClick={()=>chooseAnalytics(true)}>Разрешить аналитику</button>
           </div>
         </aside>
       ) : null}
@@ -220,7 +214,7 @@ export function PublicLegalFooter() {
           line-height: 1.5;
           font-weight: 500;
         }
-        .ac-cookie-banner-actions { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+        .ac-cookie-banner-actions { display: flex; flex-wrap:wrap; align-items: center; gap: 12px; margin-top: 6px; }
         .ac-cookie-banner button {
           min-height: 44px;
           padding: 8px 14px;
@@ -258,20 +252,11 @@ export function PublicLegalFooter() {
               </button>
             </header>
             <div className="space-y-5 px-5 py-6 text-sm leading-6 text-white/[0.78] sm:px-7 sm:py-7 sm:text-[15px] sm:leading-7">
-              <p>На сайте https://avtocena.com и его поддоменах используются файлы cookie — небольшие текстовые файлы, которые после посещения сохраняются на устройстве пользователя.</p>
-              <p>Они помогают обеспечивать корректную работу страниц, запоминать настройки пользователя, сохранять параметры подбора автомобилей, анализировать обезличенные данные и улучшать качество сервиса.</p>
-              <div>
-                <p className="mb-3">На сайте могут использоваться следующие типы файлов cookie:</p>
-                <ol className="space-y-3 pl-5 marker:font-bold marker:text-white">
-                  <li><strong className="text-white">Технические</strong> — необходимы для форм, навигации, выбора темы, избранного и других основных функций.</li>
-                  <li><strong className="text-white">Настройки и история поиска</strong> — сохраняют выбранные фильтры и параметры расчёта.</li>
-                  <li><strong className="text-white">Аналитические</strong> — помогают находить ошибки и улучшать интерфейс в обезличенном виде.</li>
-                  <li><strong className="text-white">Маркетинговые</strong> — применяются только при подключении рекламных и аналитических сервисов.</li>
-                </ol>
-              </div>
-              <p>Пользователь может удалить cookie или ограничить их использование в настройках браузера. При отключении отдельные функции могут работать некорректно.</p>
-              <p className="font-bold text-white">Закрывая уведомление и продолжая пользоваться сайтом, пользователь подтверждает, что ознакомился с условиями использования cookie.</p>
-              <button type="button" onClick={closeCookieNotice} className="avto-button min-h-12 rounded-2xl px-7 py-3 font-black text-white">Понятно</button>
+              <p>Необходимые cookie обеспечивают работу сайта и сохраняют ваши настройки. Яндекс Метрика включается только после вашего разрешения.</p>
+              <p>Аналитика помогает оценивать посещения и рекламу. При согласии стадии вашей заявки могут сопоставляться с идентификатором посетителя. Имя, телефон и комментарий в такую выгрузку не входят. Вебвизор отключён.</p>
+              <p><Link href="/cookies" className="underline">Подробнее о cookie</Link> · <Link href="/privacy" className="underline">Политика обработки данных</Link></p>
+              <div className="flex flex-wrap gap-3"><button type="button" onClick={()=>chooseAnalytics(false)} className="rounded-xl border border-white/30 px-5 py-3 font-bold">Только необходимые</button><button type="button" onClick={()=>chooseAnalytics(true)} className="avto-button rounded-xl px-5 py-3 font-bold text-white">Разрешить аналитику</button></div>
+
             </div>
           </section>
         </div>

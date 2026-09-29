@@ -59,7 +59,8 @@ test("bot details are shared among active admins and denied to customers and dis
         id: String(id), from: { id }, message: { chat: { id, type: "private" } }, data: "crm:view:lead_private",
       } }, "test-token");
     }
-    assert.equal(sent.filter(item => item.text.includes("PRIVATE PHONE")).length, 2);
+    assert.equal(sent.filter(item => item.text.includes("crm/leads?id=lead_private")).length, 2);
+    assert.ok(sent.every(item => !item.text.includes("PRIVATE PHONE") && !item.text.includes("PRIVATE CUSTOMER")));
     assert.ok(sent.filter(item => ["103", "104"].includes(item.chat_id)).every(item => !item.text.includes("PRIVATE")));
   } finally {
     globalThis.fetch = originalFetch; process.chdir(cwd);

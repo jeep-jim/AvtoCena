@@ -1,4 +1,6 @@
 "use client";
+import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
+import {ConsentLinks} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
 
 import { useRef, useState } from "react";
@@ -7,7 +9,7 @@ import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 
-const CONSENT_VERSION = "telegram-request-v1-2026-08-14";
+const CONSENT_VERSION = LEAD_CONSENT_VERSION;
 const CONSENT_TEXT = "Я даю согласие на обработку указанных мной персональных данных для обработки заявки и связи со мной.";
 
 function cleanText(value: unknown) {
@@ -104,7 +106,7 @@ export default function RequestPage() {
               </div>
             </div>
           ) : (
-            <form onSubmit={submit} className="mt-7 grid gap-4">
+            <form data-private="true" onSubmit={submit} className="mt-7 grid gap-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <label className="grid gap-1.5 text-sm font-black">Имя<input value={name} onChange={(event) => setName(event.target.value)} placeholder="Как к вам обращаться" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
                 <label className="grid gap-1.5 text-sm font-black">Телефон<PhoneInput value={phone} onChange={setPhone} /></label>
@@ -115,7 +117,7 @@ export default function RequestPage() {
               <label className="grid gap-1.5 text-sm font-black">Комментарий<textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Привод, цвет, комплектация, сроки или другие пожелания" className="soft-input min-h-28 resize-y rounded-2xl bg-[var(--ac-surface-2)] p-4 font-semibold outline-none" /></label>
               <label className="flex cursor-pointer items-start gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-xs font-semibold leading-5 text-[var(--ac-muted)]">
                 <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-red-500" />
-                <span>{CONSENT_TEXT}</span>
+                <span><ConsentLinks/></span>
               </label>
               {status === "error" ? <div className="rounded-xl bg-red-500/12 px-4 py-3 text-sm font-bold text-red-300">{message}</div> : null}
               <button type="submit" disabled={status === "sending"} className="ac-colored-button min-h-14 rounded-2xl bg-red-500 px-5 text-base font-black text-white disabled:opacity-60">

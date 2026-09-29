@@ -14,6 +14,19 @@ const seal=(r:ContractRecord):Envelope=>({encrypted:encryptClientDocument(Buffer
 const open=(id:string,e:Envelope):ContractRecord=>{if(!e.encrypted)throw Error('Договор не найден.');return JSON.parse(decryptClientDocument(Buffer.from(e.encrypted,'base64'),key(id)).toString());};
 export async function accessibleClient(user:AuthUser,id:string){if(!id)return null;const c=(await readChunkedDataJson<any>('clients/clients.json',[])).find(c=>c.id===id);if(!c||!canSeeLead(user,c))throw Error('Нет доступа к клиенту.');return c;}
 export async function getContract(user:AuthUser,id:string){const e=await readDataJson<Envelope|null>(key(id),null);if(!e)throw Error('Договор не найден.');const r=open(id,e);if(!hasCrmPermission(user,'viewAll')&&r.createdBy!==user.id)throw Error('Нет доступа к договору.');if(r.clientId)await accessibleClient(user,r.clientId);return r;}
+// Internal dependency check: never returns document contents to the caller.
+export async function hasStoredContractForClient(clientId:string){
+ if(!clientId)return false;
+ const items=await readChunkedDataJson<Index>('contracts/index.json',[]);
+ for(let i=0;i<items.length;i+=8){
+  const matches=await Promise.all(items.slice(i,i+8).map(async item=>{
+   const envelope=await readDataJson<Envelope|null>(key(item.id),null);
+   return Boolean(envelope?.encrypted&&open(item.id,envelope).clientId===clientId);
+  }));
+  if(matches.some(Boolean))return true;
+ }
+ return false;
+}
 export async function listContracts(user:AuthUser){
  const items=await readChunkedDataJson<Index>('contracts/index.json',[]);
  const admin=hasCrmPermission(user,'viewAll');
@@ -23,7 +36,7 @@ export async function listContracts(user:AuthUser){
  for(let i=0;i<eligible.length;i+=8){const batch=await Promise.all(eligible.slice(i,i+8).map(async item=>{
   const encrypted=await readDataJson<Envelope|null>(key(item.id),null);if(!encrypted?.encrypted)return null;
   const r=open(item.id,encrypted);if((!admin&&r.createdBy!==user.id)||(r.clientId&&!visibleClients.has(r.clientId)))return null;
-  return {id:r.id,revision:r.revision,createdAt:r.createdAt,createdBy:r.createdBy,market:r.fields.market,templateId:r.template.id,archivedAt:r.archivedAt,number:r.number,client:r.fields.fio||'Без клиента',car:r.fields.car||'',updatedAt:r.updatedAt,versions:r.versions.length};
+  return {id:r.id,clientId:r.clientId,revision:r.revision,createdAt:r.createdAt,createdBy:r.createdBy,market:r.fields.market,templateId:r.template.id,archivedAt:r.archivedAt,number:r.number,client:r.fields.fio||'Без клиента',car:r.fields.car||'',updatedAt:r.updatedAt,versions:r.versions.length};
  }));result.push(...batch.filter((r):r is NonNullable<typeof r>=>r!==null));}
  return result.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
 }

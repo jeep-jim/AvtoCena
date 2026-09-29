@@ -1,4 +1,6 @@
 "use client";
+import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
+import {ConsentLinks} from "@/components/legal/ConsentCheckbox";
 import {offerRouteId} from "@/lib/catalog/offer-url";
 import { LeadCityField } from "./LeadCityField";
 import {leadFetch} from "@/lib/lead-submit-client";
@@ -42,7 +44,7 @@ type LeadFormState = {
 };
 
 const FAVORITES_KEY = "avtocena_favorites";
-const CONSENT_VERSION = "lead-form-v1-2026-08-09";
+const CONSENT_VERSION = LEAD_CONSENT_VERSION;
 const MOSCOW_HOURS = "06:00–15:00 МСК";
 const NOVOKUZNETSK_HOURS = "10:00–19:00 Новокузнецк";
 
@@ -334,7 +336,7 @@ function LeadDialog({
             <button type="button" onClick={onClose} className="mt-5 min-h-12 rounded-2xl bg-[var(--ac-surface-2)] px-6 font-black">Закрыть</button>
           </div>
         ) : (
-          <form onSubmit={submit} className="mt-6 grid gap-4">
+          <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
 
             <div className="grid gap-3 md:grid-cols-2">
@@ -397,7 +399,7 @@ function LeadDialog({
               <label className="flex cursor-pointer items-start gap-3">
                 <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="sr-only" />
                 <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-xs font-black ${consent ? "border-red-500 bg-red-500 text-white" : "border-[var(--ac-border)] text-transparent"}`}>✓</span>
-                <span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]">Я даю согласие на обработку указанных мной персональных данных для обработки заявки и связи со мной.</span>
+                <span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]"><ConsentLinks/></span>
               </label>
               <details className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">
                 <summary className="cursor-pointer font-black text-[var(--ac-text)]">Что происходит с данными</summary>

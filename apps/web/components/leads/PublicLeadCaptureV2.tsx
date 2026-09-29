@@ -1,4 +1,6 @@
 "use client";
+import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
+import {ConsentLinks} from "@/components/legal/ConsentCheckbox";
 import {offerRouteId} from "@/lib/catalog/offer-url";
 import { LeadCityField } from "./LeadCityField";
 import { isElectrifiedPrice } from "@/lib/catalog/electrified-price";
@@ -36,7 +38,7 @@ type MessengerKind = "telegram" | "max";
 type LeadFormState = { city: string; name: string; phone: string; car: string; budget: string; comment: string };
 
 const FAVORITES_KEY = "avtocena_favorites";
-const CONSENT_VERSION = "lead-form-v2-2026-08-09";
+const CONSENT_VERSION = LEAD_CONSENT_VERSION;
 const MOSCOW_HOURS = "06:00–15:00 МСК";
 
 function cleanText(value: unknown) {
@@ -299,7 +301,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
             <button type="button" disabled={status === "sending"} onClick={onClose} className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>
           </header>
 
-          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form onSubmit={submit} className="mt-6 grid gap-4">
+          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
             <div className="grid gap-3 md:grid-cols-2"><div className="block min-w-0"><FieldLabel required>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div><label className="block min-w-0"><FieldLabel required>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 
@@ -312,7 +314,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
 
             <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input ac-lead-comment w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 
-            <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><label className="flex cursor-pointer items-start gap-3"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="sr-only" /><span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-xs font-black ${consent ? "border-red-500 bg-red-500 text-white" : "border-[var(--ac-border)] text-transparent"}`}>✓</span><span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]">Я даю согласие на обработку указанных мной персональных данных для обработки заявки и связи со мной.<span className="ac-lead-required" aria-label="обязательное поле"> *</span></span></label><details className="group mt-3 text-xs leading-5 text-[var(--ac-muted)]"><summary className="flex cursor-pointer list-none items-center font-black text-[var(--ac-text)] [&::-webkit-details-marker]:hidden"><span className="mr-2 inline-block transition-transform group-open:rotate-90">▸</span><span>Что происходит с данными</span></summary><p className="mt-2">Используем имя, город, контакт и параметры автомобиля только для обработки этой заявки, подготовки подбора/расчёта и связи по заявке. Рекламные рассылки без отдельного согласия не подключаются. Согласие можно отозвать через контакты сервиса.</p></details></div>
+            <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><label className="flex cursor-pointer items-start gap-3"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="sr-only" /><span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-xs font-black ${consent ? "border-red-500 bg-red-500 text-white" : "border-[var(--ac-border)] text-transparent"}`}>✓</span><span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]"><ConsentLinks/><span className="ac-lead-required" aria-label="обязательное поле"> *</span></span></label><details className="group mt-3 text-xs leading-5 text-[var(--ac-muted)]"><summary className="flex cursor-pointer list-none items-center font-black text-[var(--ac-text)] [&::-webkit-details-marker]:hidden"><span className="mr-2 inline-block transition-transform group-open:rotate-90">▸</span><span>Что происходит с данными</span></summary><p className="mt-2">Используем имя, город, контакт и параметры автомобиля только для обработки этой заявки, подготовки подбора/расчёта и связи по заявке. Рекламные рассылки без отдельного согласия не подключаются. Согласие можно отозвать через контакты сервиса.</p></details></div>
 
             {status === "error" && message ? <div className="ac-lead-error rounded-2xl bg-red-500/10 p-3 text-sm font-bold leading-5">{message}</div> : null}
             <button type="submit" disabled={status === "sending"} className="avto-button ac-colored-button min-h-14 rounded-2xl px-6 text-base font-black disabled:opacity-55">{status === "sending" ? "Отправляем…" : "Отправить заявку"}</button>

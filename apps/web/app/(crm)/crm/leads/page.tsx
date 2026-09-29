@@ -1,3 +1,4 @@
+import {DeleteCrmRecord} from "@/components/crm/DeleteCrmRecord";
 import {TeamDiscussion} from "@/components/crm/TeamDiscussion";
 import {discussionMessages,discussionLabel} from "@/lib/crm-discussion";
 import {ReminderButton} from "@/components/crm/Reminders";
@@ -64,6 +65,7 @@ function safeHref(value: any) {
 const sourceLabel = (value: string) =>
   (
     ({
+      privacy_request: "Обращение по персональным данным",
       catalog_offer: "Карточка автомобиля",
       catalog_offer_request: "Карточка автомобиля",
       offer_lead_banner: "Карточка автомобиля",
@@ -407,6 +409,7 @@ export default async function CrmLeadsPage({
                   </section>
                 </div>
                 <div className="mt-5">
+    {hasCrmPermission(user,"deleteRecords")?<DeleteCrmRecord kind="lead" id={lead.id}/>:null}
                   <ReminderButton entityType="lead" entityId={lead.id}/>
                   {hasCrmPermission(user,"editLeads")?<LeadActions
                     leadId={lead.id}

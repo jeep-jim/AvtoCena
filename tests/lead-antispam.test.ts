@@ -25,7 +25,7 @@ test('persisted reservations serialize parallel requests; retries, contact ident
   resetJsonStorageForTests();
   const visitor=leadVisitor(new Request('https://avtocena.com'));
   const request=new Request('https://avtocena.com/api/leads',{headers:{cookie:`ac_lead_visitor=${visitor.cookie}`}});
-  const body=(operationId:string)=>({operationId,phone:'+79999999999',personalDataConsent:true});
+  const body=(operationId:string)=>({operationId,phone:'+79999999999',personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-29"});
   const submit=(id:string, extra={})=>guardLead(request,{...body(id),...extra},['a'],['+79999999999']);
   try {
     assert.equal(leadVisitor(request).id,visitor.id);

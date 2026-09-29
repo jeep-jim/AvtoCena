@@ -35,6 +35,7 @@ export async function metrikaStatus() {
  return {counterId:METRIKA_COUNTER_ID,enabled:Boolean(config?.enabled),connectedAt:config?.connectedAt||null,timeZone:config?.timeZone||null,lastAcceptedAt:state.lastAcceptedAt||null,lastUploadId:state.lastUploadId||null,lastError:state.lastError||null,pending:state.pending||0,missingClientId:state.missingClientId||0,acceptedOrders:Object.keys(state.sent).length};
 }
 export function metrikaOrder(lead:any,timeZone:string) {
+ if(lead.analyticsConsent!==true||lead.source==='privacy_request')return null;
  const clientId=String(lead.metrikaClientId||lead.attribution?.metrikaClientId||'');
  if(!/^\d{1,32}$/.test(clientId)||!lead.id||!Number.isFinite(Date.parse(lead.createdAt)))return null;
  const history=new Set([lead.status,...(lead.statusHistory||[]).map((x:any)=>x.status)]);

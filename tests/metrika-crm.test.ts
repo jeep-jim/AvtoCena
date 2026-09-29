@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';
 import {metrikaOrder,metrikaCsv,encryptMetrikaToken,decryptMetrikaToken,connectMetrika,flushMetrika,metrikaStatus} from '../apps/web/lib/metrika-crm';
 import {resetJsonStorageForTests,appendChunkedDataJson,updateChunkedDataJson,readDataJson} from '../apps/web/lib/data';
-const base={id:'lead-1',clientId:'client-1',createdAt:'2026-09-23T10:00:00Z',metrikaClientId:'12345678901234567890',status:'qualified',statusHistory:[]};
+const base={analyticsConsent:true,id:'lead-1',clientId:'client-1',createdAt:'2026-09-23T10:00:00Z',metrikaClientId:'12345678901234567890',status:'qualified',statusHistory:[]};
 test('CRM statuses and cumulative goals remain distinct; no invented paid revenue',()=>{
  const q=metrikaOrder(base,'Asia/Novosibirsk')!;assert.equal(q.create_date_time,'2026-09-23 17:00:00');assert.equal(q.goals,'crm_qualified');assert.equal(q.order_status,'IN_PROGRESS');assert.ok(!('revenue' in q));
  const contract=metrikaOrder({...base,status:'contract_signed',statusHistory:[{status:'qualified'}]},'UTC')!;assert.equal(contract.goals,'crm_qualified,crm_contract');assert.equal(contract.order_status,'IN_PROGRESS');

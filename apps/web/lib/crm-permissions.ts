@@ -1,5 +1,6 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
+ deleteRecords:{label:'Удаление клиентов и заявок',description:'Для администратора: удаление ненужных записей с подтверждением и проверкой договоров, документов и начислений.'},
  viewAll:{label:'Вся клиентская база',description:'Просмотр всех заявок и клиентов. Если выключено — только созданные или назначенные сотруднику.'},
  editClients:{label:'Изменение клиентов',description:'Добавление и редактирование контактов, комментариев и карточек клиентов.'},
  editLeads:{label:'Работа с заявками',description:'Создание заявок, смена статуса и добавление комментариев.'},
@@ -14,7 +15,7 @@ export const CRM_PERMISSIONS = {
 export type CrmPermission=keyof typeof CRM_PERMISSIONS;
 export type CrmPermissions=Partial<Record<CrmPermission,boolean>>;
 const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documents','calculations']);
-const administrative=new Set<CrmPermission>(['staff','settings','dealers']);
+const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords']);
 export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission):boolean {
  if(!user||user.status==='disabled'||!['owner','admin','manager'].includes(user.role))return false;
  if(user.role==='owner')return true;

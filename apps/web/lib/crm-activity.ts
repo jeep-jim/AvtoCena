@@ -46,6 +46,8 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   const discussionEvent=e.type==='lead_note_added'||e.type==='client_note_added'||(e.type==='client_updated'&&changes.some(c=>c.label==='Комментарий'));
   if(discussionEvent){const kind=lead||e.leadId||e.entityType==='lead'?'lead':'client';const entityId=lead?.id||e.leadId||client?.id||e.clientId||e.entityId;if(entityId)href=discussionHref(kind,entityId,e.commentId);}
   if(e.type?.startsWith('reminder_')&&href)href=href.split('#')[0]+'#reminders-'+(lead?'lead':'client')+'-'+encodeURIComponent(lead?.id||e.leadId||client?.id||e.clientId||e.entityId||'');
+  if(e.type==='client_deleted')href='/crm/clients';
+  if(e.type==='lead_deleted')href='/crm/leads';
   const car=lead?.selectedOffers?.[0];
   const image=e.type==='lead_created'?String(car?.image||lead?.image||lead?.offerImage||''):undefined;
   return {...e,title,actor,target,changes,href,entityLabel:discussionEvent&&(lead||client)?discussionLabel(lead?"lead":"client",lead||client):e.entityLabel||[lead?.name,car?.title||lead?.car].filter(Boolean).join(' · ')||client?.fio,image:image&&/^(https?:\/\/|\/(?!\/))/.test(image)?image:undefined,currentStatus:lead?leadStatusLabel(lead.status):undefined,text:e.status&&e.text===e.status?leadStatusLabel(e.status):e.text};

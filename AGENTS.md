@@ -5,3 +5,7 @@
 - Keep necessary integration settings and protocol identifiers accurate (for example, a credential or an API field in integration documentation). Do not remove required attribution, legal notices or meaningful uncertainty about vehicle data.
 - Use clear Russian labels for ordinary controls. Preserve stored values and calculation behavior when changing labels.
 - When editing a page, check adjacent visible copy as well. Do not claim that every page is free of technical wording without actually checking it.
+
+# Daily work log
+
+- After each completed work session, append a dated Russian entry to `roadmap.md`, preserving earlier entries. Use the user's local calendar date when known. Record actual changes, verification, publication status and unresolved items; never claim unverified completion. Do this as part of the work, without a separate reminder.
