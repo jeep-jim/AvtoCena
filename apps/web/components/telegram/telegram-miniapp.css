@@ -11,3 +11,5 @@ html[data-miniapp="true"] .ac-public-legal-footer section[aria-label="Рекви
 html[data-miniapp="true"] .ac-page-copy nav[aria-label="Хлебные крошки"]{display:none!important}
 html[data-miniapp="true"] .ac-public-legal-footer{margin-top:24px;padding-bottom:calc(20px + var(--ac-mini-bottom,0px));}
 html[data-miniapp="true"] .ac-notice-stack{bottom:calc(12px + var(--ac-mini-bottom,0px))}
+
+html[data-miniapp="true"] .ac-catalog-page h1{max-width:100%;white-space:normal!important;overflow-wrap:anywhere;font-size:clamp(22px,6vw,34px)!important;line-height:1.15!important}
