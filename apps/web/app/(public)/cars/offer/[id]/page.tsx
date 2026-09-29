@@ -410,7 +410,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
 
   const auctionStatus = japanAuction ? <div data-japan-auction-status className="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 py-2">
     <p className="min-w-0 text-xs font-semibold leading-5 text-[var(--ac-muted)]"><span>Продано на торгах{enrichedOffer.auctionName ? ` · ${enrichedOffer.auctionName}` : ""}</span>{" · "}<span className="whitespace-nowrap">{auctionDateLabel || updatedDate}</span>{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" aria-label="Открыть результат аукциона" className="ml-2">↗</a> : null}</p>
-    <JapanAuctionBadges offer={o} interactive hideRestriction />
+    <JapanAuctionBadges offer={o} interactive />
   </div> : null;
 
   const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
