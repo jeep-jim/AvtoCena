@@ -45,11 +45,12 @@ export async function runPolling() {
     profileAttempted = true;
     try {
       await telegram("deleteMyCommands");
-      await telegram("setChatMenuButton", {menu_button:{type:"web_app",text:"АвтоЦена",web_app:{url:MINI_APP_URL}}});
       await telegram("setMyDescription", {description:"АвтоЦена — каталог автомобилей из-за рубежа. Откройте приложение, выберите автомобиль и рассчитайте стоимость."});
       await telegram("setMyShortDescription", {short_description:"Автомобили из-за рубежа: каталог, фильтры и расчёт стоимости."});
+      await telegram("setChatMenuButton", {menu_button:JSON.stringify({type:"web_app",text:"АвтоЦена",web_app:{url:MINI_APP_URL}})});
       const menu = await telegram("getChatMenuButton");
       console.log(JSON.stringify({publicMiniAppMenu:menu?.type,miniAppUrl:menu?.web_app?.url}));
+      if(menu?.type!=="web_app" || menu?.web_app?.url!==MINI_APP_URL) throw Error("menu_not_confirmed");
     } catch { console.error("Bot profile setup incomplete; update processing continues"); }
   }
   let info = await telegram("getWebhookInfo");
