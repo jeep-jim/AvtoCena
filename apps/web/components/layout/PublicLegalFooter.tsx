@@ -135,7 +135,6 @@ export function PublicLegalFooter() {
             { href: "/", label: "Главная" },
             { href: "/cars", label: "Каталог автомобилей" },
             { href: "/favorites", label: "Избранные автомобили" },
-            { href: "/dealers", label: "🚗 АвтоДилерам" },
             { href: "/cars/autocatalog", label: "Автокаталог" },
           ]} />
         </div>
@@ -156,7 +155,6 @@ export function PublicLegalFooter() {
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
-            <Link href="/dealers" className="ac-public-legal-link">🚗 АвтоДилерам</Link>
           </nav>
         </div>
       </footer>

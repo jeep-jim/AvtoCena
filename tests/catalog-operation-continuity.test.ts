@@ -69,3 +69,11 @@ test('multipart checkpoint rejects corrupt parts and failed uploads preserve the
  await assert.rejects(()=>fs.stat('corrupt/large.bin'),/ENOENT/);
  }finally{LocalJsonStorage.prototype.putBinary=originalPut;process.chdir(cwd);for(const key of ['JSON_STORAGE_DRIVER','PROAUCTIONS_DURABLE','PROAUCTIONS_CHECKPOINT_PART_BYTES'])if(env[key]===undefined)delete process.env[key];else process.env[key]=env[key];await fs.rm(root,{recursive:true,force:true});}
 });
+
+test('a long Japan collection keeps its checkpoint across the refresh boundary',()=>{
+ const now=Date.parse('2026-09-29T00:00:00Z');
+ const state={startedAt:'2026-09-19T00:00:00Z',complete:false,published:false};
+ assert.equal(proAuctionsSchedule(state,now,3).reason,'resume_checkpoint');
+ assert.equal(proAuctionsSchedule({...state,complete:true},now,3).reason,'retry_publication');
+ assert.equal(proAuctionsSchedule({...state,complete:true,published:true},now,3).reason,'refresh_interval');
+});

@@ -1,8 +1,9 @@
+import {proAuctionsSchedule} from './proauctions-schedule.mjs';
 import {transientOperationFailure} from './transient-operation.mjs';
 export const MARKET_WORKFLOWS=Object.fromEntries(['china','korea','uae','georgia','europe'].map(m=>[m,`catalog-refresh-${m}.yml`]));
 MARKET_WORKFLOWS.green='catalog-refresh-green.yml';
 MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
-export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery}) {
+export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery,japanRefreshIntervalDays=3}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');
  if(runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)))return {action:'none',reason:'already_running'};
  if(recovery?.action!=='cleanup_dispatched'&&now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
@@ -57,7 +58,13 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
   if(now-Date.parse(latest.updated_at)>24*3600000)return {action:'none',reason:'old_failed_run_requires_new_schedule'};
   return {action:'inspect_failure',runId:latest.id};
  }
- if(market==='japan'&&japan&&!japan.complete)return {action:'dispatch',reason:'resume_incomplete_checkpoint'};
+ if(market==='japan'){
+  // Use the collector's durable state and the same interval; a missing generic
+  // journal must not launch repeated no-op workflows.
+  if(japan && !japan.complete)return {action:'dispatch',reason:'resume_incomplete_checkpoint'};
+  const decision=proAuctionsSchedule(japan,now,japanRefreshIntervalDays);
+  return {action:decision.due?'dispatch':'none',reason:decision.reason};
+ }
  const failedSources=(journal?.sources||[]).filter(s=>['list_failed','blocked','blocked_detail','adapter_missing','cursor_loop','repeated_page'].includes(s.stopReason));
  if(failedSources.length){
   const retryable=failedSources.every(s=>s.stopReason==='list_failed'&&(s.errors||[]).some(e=>transientOperationFailure(e.message)));
@@ -72,6 +79,9 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  // endless expensive full crawl after every completed budget continuation.
  if(journal?.collectionComplete===false && sourceRows.some(s=>s.initialCursor)
    && sourceRows.every(s=>['source_finished','source_cycle_finished'].includes(s.stopReason))) {
+  const finishedAt=Date.parse(journal.lastCollectionAttempt||'');
+  if(Number.isFinite(finishedAt)&&now-finishedAt>=3*86400000)
+   return {action:'dispatch',reason:'refresh_completed_continuation'};
   return {action:'none',reason:'completed_continuation_requires_cycle_verification'};
  }
  const last=Date.parse(journal?.lastCollectionSuccess||(journal?.version>=2?'':journal?.lastPublicationSuccess)||'');
