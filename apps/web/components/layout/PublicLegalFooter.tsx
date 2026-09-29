@@ -146,12 +146,12 @@ export function PublicLegalFooter() {
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
 
-        <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-6">
-          <p className="lg:whitespace-nowrap">Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.</p>
+        <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-x-6">
+          <p className="lg:col-span-2">Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.</p>
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Настройки cookie</button>
-            <Link href="/privacy" className="ac-public-legal-link">Политика обработки данных</Link>
+            <Link href="/privacy" className="ac-public-legal-link font-bold underline underline-offset-4">Политика конфиденциальности</Link>
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
