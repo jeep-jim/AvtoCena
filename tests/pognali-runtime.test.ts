@@ -16,7 +16,7 @@ function harness(){
  const parent={postMessage:(message:any)=>messages.push(message)};
  const window={parent,devicePixelRatio:1,addEventListener:(type:string,fn:Function)=>(events[type]??=[]).push(fn),focus(){}};
  const sandbox={document,window,parent,console,Math,Date,Path2D:class {constructor(){return context;}},setTimeout:()=>0,clearTimeout(){},requestAnimationFrame:(fn:Function)=>(callback=fn,1),cancelAnimationFrame:()=>{callback=undefined;}};
- vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)![1].replace('/* ---------- INIT ---------- */','window.testEngine={state,terrainY,stepCarPhysics,step};'),sandbox,{timeout:2000});
+ vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)![1].replace('/* ---------- INIT ---------- */','window.testEngine={state,terrainY,stepCarPhysics,step,tryJump,CARS};'),sandbox,{timeout:2000});
  const bridge=(data:any)=>events.message.forEach(fn=>fn({source:parent,data:{game:'pognali-v1',...data}}));
  bridge({type:'user',user:{name:'<test>'}});
  return {element,messages,modeElements,bridge,events,engine:(window as any).testEngine,advance(seconds:number){for(let i=0;i<seconds*60;i++){const next=callback;callback=undefined;next?.(1000+i*1000/60);}},pending:()=>Boolean(callback)};
@@ -36,14 +36,27 @@ for(const mode of ['solo','circuit','battle'])test(`shipped engine runs, pauses 
  h.element('#btnMenu').fire('click');assert.equal(h.pending(),false);
 });
 
-test('overturned car on the ground ends visibly; a midair flip can recover',()=>{
- const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'flip-run'});h.advance(2);
- const {state,terrainY,stepCarPhysics,step}=h.engine,p=state.player;
- Object.assign(p,{angle:Math.PI,x:200,y:terrainY(200)-200,vx:0,vy:0,angularVelocity:0,flipTimer:0,hp:120});
- stepCarPhysics(p,false,false,0);assert.equal(p.alive,true);
- Object.assign(p,{y:terrainY(200),flipTimer:1.21});stepCarPhysics(p,false,false,0);step(1/120);
- assert.equal(p.deathReason,'flip');assert.equal(h.element('#rTitle').textContent,'Машина перевернулась');assert.equal(h.element('#scrResult').classList.contains('hidden'),false);
- assert.equal(h.messages.filter(m=>m.type==='finish').length,1);
+for (let car=0;car<5;car++) test(`car ${car}: roof contact survives and a jump rights it without an aerial double jump`,()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'flip-run'});
+ const {state,terrainY,stepCarPhysics,tryJump}=h.engine,p=state.player;
+ Object.assign(p,{cfg:h.engine.CARS[car],angle:Math.PI,x:200,y:terrainY(200),vx:0,vy:0,angularVelocity:0,hp:120,jumpCd:0});
+ for(let i=0;i<240;i++)stepCarPhysics(p,false,false,1/120);
+ assert.equal(p.alive,true);assert.equal(p.chassisGrounded,true);
+ assert.equal(tryJump(p),true);assert.ok(p.vy<0);assert.ok(p.angularVelocity<0);
+ assert.equal(tryJump(p),false);
+ let upright=false;
+ for(let i=0;i<240;i++){
+  stepCarPhysics(p,false,false,1/120);
+  if(Math.abs(Math.atan2(Math.sin(p.angle),Math.cos(p.angle)))<0.6&&p.onGround)upright=true;
+ }
+ assert.equal(upright,true);assert.equal(p.alive,true);
+ assert.equal(h.messages.filter(m=>m.type==='finish').length,0);
+});
+test('holding a pedal remains active when a thumb drifts outside until released',()=>{
+ const h=harness(),gas=h.element('#btnGas');gas.fire('pointerdown',{pointerId:1});
+ gas.fire('pointerleave',{pointerId:1});assert.equal(h.engine.state.keys.gas,true);
+ gas.fire('pointerup',{pointerId:1});assert.equal(h.engine.state.keys.gas,false);
+ gas.fire('pointerdown',{pointerId:2});gas.fire('pointercancel',{pointerId:2});assert.equal(h.engine.state.keys.gas,false);
 });
 
 test('every race mode generates a track without spikes',()=>{

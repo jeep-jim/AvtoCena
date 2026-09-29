@@ -179,7 +179,7 @@ h1 span{color:#ff4757}
   .ctrlLeft,.ctrlRight{gap:6px}
 }
 
-.pause,.sound{position:absolute;pointer-events:auto;top:10px;right:10px;background:#202836;color:white;border:1px solid #465167;border-radius:10px;padding:9px;font-weight:800}.sound{top:52px}.board{top:100px}.ringControl{display:none}body.ring .ringControl{display:flex}body.ring #btnJump,body.ring #btnBrake{display:none}body.circuit #btnFire{display:none}.playerAvatar{display:none!important}.chatWrap[hidden]{display:none}.hudTop{max-width:calc(100% - 115px)}.panel{overscroll-behavior:contain}.sub{line-height:1.5}.screen{backdrop-filter:none}.pbtn{touch-action:none}#pauseOverlay{position:absolute;inset:0;z-index:40;background:rgba(10,12,17,.9);display:grid;place-content:center;text-align:center;gap:18px;padding:24px}#pauseOverlay[hidden]{display:none}.mode-help{line-height:1.5}.ringMenu .hillWeapons{display:none}button:focus-visible,input:focus-visible{outline:2px solid #ffb703;outline-offset:3px}
+.pause,.sound{position:absolute;pointer-events:auto;top:10px;right:62px;background:#202836;color:white;border:1px solid #465167;border-radius:10px;padding:9px;font-weight:800}.sound{top:52px}.board{top:100px}.ringControl{display:none}body.ring .ringControl{display:flex}body.ring #btnJump,body.ring #btnBrake{display:none}body.circuit #btnFire{display:none}.playerAvatar{display:none!important}.chatWrap[hidden]{display:none}.hudTop{max-width:calc(100% - 115px)}.panel{overscroll-behavior:contain}.sub{line-height:1.5}.screen{backdrop-filter:none}.pbtn{touch-action:none}#pauseOverlay{position:absolute;inset:0;z-index:40;background:rgba(10,12,17,.9);display:grid;place-content:center;text-align:center;gap:18px;padding:24px}#pauseOverlay[hidden]{display:none}.mode-help{line-height:1.5}.ringMenu .hillWeapons{display:none}button:focus-visible,input:focus-visible{outline:2px solid #ffb703;outline-offset:3px}
 @media(max-width:640px){.board{display:none}.hudTop{gap:4px}.chip{padding:4px 6px}.chip .v{font-size:13px}.fuelWrap{min-width:90px}.pbtn{width:58px;height:64px;border-radius:16px;font-size:23px;backdrop-filter:none}.ctrls{bottom:44px}.quit{bottom:6px}.panel{max-height:100%;border-radius:14px;padding:14px}.screen{padding:6px}.cars{grid-template-columns:repeat(2,minmax(0,1fr))}.themes,.weapons{grid-template-columns:repeat(3,minmax(0,1fr))}.btn{min-width:86px;padding:10px 7px;font-size:12px}.controlsHint{display:none}.stat3{gap:6px}.stat{padding:8px}.stat .v{font-size:20px}.loginBox{padding:8px}.sound{font-size:11px}}
 #scrResult{background:rgba(10,12,17,.76)}#scrResult .panel{max-width:520px}#scrResult .stat3{grid-template-columns:repeat(2,minmax(0,1fr))}.resultActions{margin:18px 0 12px}.resultActions .btn{min-width:120px;padding:16px 10px;font-size:16px}#resultNotice{margin:0;text-align:center;min-height:18px}#btnRetrySave[hidden]{display:none}.btn:disabled{opacity:.55;cursor:wait}
 
@@ -194,7 +194,7 @@ h1 span{color:#ff4757}
  #scrMenu>.panel{padding:10px}#scrMenu h1{font-size:22px}#scrMenu>.panel>.sub{font-size:11px;margin-bottom:6px}
  .menuLaunch{padding-top:6px}.menuLaunch .btn{padding:10px}
  .board,.controlsHint{display:none}.hudTop{gap:4px}.chip{padding:4px 6px}.chip .v{font-size:14px}.fuelWrap{min-width:90px}
- .pbtn{width:62px;height:62px;font-size:24px;backdrop-filter:none}.ctrls{bottom:36px}.quit{bottom:4px}
+ .pbtn{width:76px;height:72px;font-size:24px;backdrop-filter:none}.ctrls{bottom:36px}.quit{bottom:4px}
  .cars{grid-template-columns:repeat(5,minmax(0,1fr))}.car{padding:8px}.themes{grid-template-columns:repeat(6,minmax(0,1fr))}
  .weapons{grid-template-columns:repeat(5,minmax(0,1fr))}.btn{min-width:90px}.big{font-size:32px}
 }
@@ -244,12 +244,12 @@ h1 span{color:#ff4757}
 
     <div class="ctrls">
       <div class="ctrlLeft"><button class="pbtn ringControl" id="btnLeft">←<span class="plabel">Внутрь</span></button><button class="pbtn ringControl" id="btnRight">→<span class="plabel">Наружу</span></button>
-        <button type="button" class="pbtn" id="btnBrake">◀<span class="plabel">Назад</span></button>
-        <button type="button" class="pbtn jump" id="btnJump">🦘<span class="plabel">Прыжок</span></button>
+        <button type="button" class="pbtn" id="btnBrake">◀<span class="plabel">Назад / ↷</span></button>
+        <button type="button" class="pbtn jump" id="btnJump">↑<span class="plabel">Прыжок</span></button>
       </div>
       <div class="ctrlRight">
         <button type="button" class="pbtn fire" id="btnFire">🔥<span class="plabel">Огонь</span></button>
-        <button type="button" class="pbtn" id="btnGas">▶<span class="plabel">Газ</span></button>
+        <button type="button" class="pbtn" id="btnGas">▶<span class="plabel">Газ / ↶</span></button>
       </div>
     </div>
     <button class="quit" id="btnQuit">Финиш</button><button class="pause" id="btnPause">Пауза</button><button class="sound" id="btnSound">Звук выкл.</button>
@@ -561,7 +561,7 @@ function createCar(cfg, color, name, isBot, avatar){
     x: START_X, y: terrainY(START_X) - cfg.wheelY - cfg.wheelR - 2,
     vx:0, vy:0, angle:0, angularVelocity:0,
     coins:0, fuel:100, hp: cfg.hp, maxHp: cfg.hp,
-    onGround:false, alive:true, flipTimer:0,
+    onGround:false, chassisGrounded:false, alive:true, flipTimer:0,
     wheelSpin:0, maxX: START_X, airTime:0,
     weapon: 'none', ammo: 0, fireCd: 0,
     slowTimer: 0, invuln: 0,
@@ -624,8 +624,13 @@ function stepCarPhysics(c, gas, brake, dt){
   c.onGround = grounded > 0;
 
   if (grounded === 0 && c.alive){
-    if (gas)   torque -= cfg.airTorque;
-    if (brake) torque += cfg.airTorque;
+    if (gas)   torque -= cfg.airTorque*4;
+    if (brake) torque += cfg.airTorque*4;
+    if (c.recoveryTimer > 0 && !gas && !brake) {
+      const angle = Math.atan2(Math.sin(c.angle), Math.cos(c.angle));
+      const targetSpin = clamp(-angle*6, -6, 6);
+      torque += (targetSpin-c.angularVelocity)*INERTIA*12;
+    }
     c.airTime += dt;
   } else {
     c.airTime = 0;
@@ -660,17 +665,21 @@ function stepCarPhysics(c, gas, brake, dt){
 
   if (c.x > c.maxX) c.maxX = c.x;
 
-  const na = Math.atan2(Math.sin(c.angle), Math.cos(c.angle));
-  if (c.alive){
-    const touchingRoof = c.y >= terrainY(c.x) - cfg.bodyH - cfg.wheelR;
-    if (Math.abs(na) > 1.95 && touchingRoof){
-      c.flipTimer += dt;
-      if (c.flipTimer > 1.2) killCar(c, 'flip');
-    } else {
-      c.flipTimer = Math.max(0, c.flipTimer - dt*3);
+  // Support the body on its corners even when neither wheel touches the track.
+  c.chassisGrounded = false;
+  const bodyCos = Math.cos(c.angle), bodySin = Math.sin(c.angle);
+  for (const ox of [-cfg.bodyW/2, cfg.bodyW/2]) for (const oy of [-cfg.bodyH/2, cfg.bodyH/2]) {
+    const rx = bodyCos*ox-bodySin*oy, ry = bodySin*ox+bodyCos*oy;
+    const penetration = c.y+ry-terrainY(c.x+rx);
+    if (penetration >= -1) {
+      c.chassisGrounded = true;
+      if (penetration > 0) c.y -= penetration;
+      c.vy = Math.min(c.vy, 0);
+      c.vx *= Math.pow(0.6, dt);
     }
   }
 
+  if (c.recoveryTimer > 0) c.recoveryTimer -= dt;
   if (c.fireCd > 0) c.fireCd -= dt;
   if (c.jumpCd > 0) c.jumpCd -= dt;
   if (c.invuln > 0) c.invuln -= dt;
@@ -680,7 +689,15 @@ function stepCarPhysics(c, gas, brake, dt){
 function tryJump(c){
   if (!c.alive) return false;
   if (c.jumpCd > 0) return false;
-  if (!c.onGround) return false;
+  if (!c.onGround && !c.chassisGrounded) return false;
+  const angle = Math.atan2(Math.sin(c.angle), Math.cos(c.angle));
+  if (Math.abs(angle) > Math.PI/2) {
+    // A roof/side jump provides enough spin to get upright; pedals still steer it.
+    c.angularVelocity = -Math.sign(angle)*4.5;
+    c.recoveryTimer = 1.2;
+  }
+  c.onGround = false;
+  c.chassisGrounded = false;
   c.vy = -c.cfg.jumpPower;
   c.jumpCd = JUMP_CD;
   blip(700, 0.12, 0.07, 'sine');
@@ -2098,11 +2115,11 @@ function bindHold(el, key){
   const off = e => { e.preventDefault(); state.keys[key]=false; el.classList.remove('act'); };
   el.addEventListener('pointerdown', on);
   el.addEventListener('pointerup', off);
-  el.addEventListener('pointerleave', off);
+  el.addEventListener('lostpointercapture', off);
   el.addEventListener('pointercancel', off);
 }
 function bindTap(el, action){
-  const on = e => { e.preventDefault(); initAudio(); if (AC && AC.state==='suspended') AC.resume().catch(()=>{}); action(); el.classList.add('act'); setTimeout(()=>el.classList.remove('act'), 150); };
+  const on = e => { e.preventDefault(); initAudio(); if (AC && AC.state==='suspended') AC.resume().catch(()=>{}); if(paused)return; action(); el.classList.add('act'); setTimeout(()=>el.classList.remove('act'), 150); };
   el.addEventListener('pointerdown', on);
 }
 bindHold($('#btnLeft'), 'left');
