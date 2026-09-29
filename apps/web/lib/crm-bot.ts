@@ -1,4 +1,4 @@
-import {miniAppCatalogButton, MINI_APP_URL} from "./telegram-miniapp";
+import {miniAppCatalogButton, MINI_APP_URL, MINI_APP_SHARE_URL, MINI_APP_SHARE_TEXT} from "./telegram-miniapp";
 import {hasCrmPermission,permissionDefaults} from "./crm-permissions";
 import {canSeeLead} from "./crm-visibility";
 import {recordCrmActivity} from "./crm-activity";
@@ -184,6 +184,10 @@ export async function handleCrmBotUpdate(
     return true;
   }
   const actor = await botAdmin(id);
+  if (text === "/shareapp" && actor && ["owner", "admin"].includes(actor.role)) {
+    await telegramSend(token, id, MINI_APP_SHARE_TEXT, [[{text:"Открыть АвтоЦену",url:MINI_APP_SHARE_URL}]]);
+    return true;
+  }
   if (/^\/start(?:@avtocena_bot)?(?:\s|$)/i.test(text) && !/^\/start\s+staff_/.test(text) || text === "/request" || text === "📝 Оставить заявку" || ["cust:new", "cust:confirm"].includes(data) || /https:\/\/avtocena\.com\/cars\/offer\//i.test(text)) {
     const offerId = offerRouteId(text.match(/(?:chat_|offer_|cars\/offer\/)([^\s/?#]{1,500})/)?.[1] || "");
     await saveDialog(id, {});

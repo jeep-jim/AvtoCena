@@ -92,6 +92,9 @@ test("customer request, private admin notification, reply confirmation, retry an
     ]);
     await handleCrmBotUpdate(message(101, "/admin"), "token");
     assert.match(sent.at(-1).text, /Заявки команды находятся в закрытой группе/);
+    await handleCrmBotUpdate(message(202, "/shareapp"), "token");
+    assert.equal(sent.at(-1).reply_markup.inline_keyboard[0][0].url, "https://t.me/avtocena_bot?startapp=topavto");
+    assert.equal(sent.at(-1).reply_markup.inline_keyboard[0][0].web_app, undefined);
     const beforeWelcome = sent.length;
     await handleCrmBotUpdate(message(101, "/start"), "token");
     assert.equal(sent.length, beforeWelcome + 1);

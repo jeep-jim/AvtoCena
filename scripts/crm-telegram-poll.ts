@@ -1,8 +1,9 @@
+import {recoverTelegramTransport} from "./lib/crm-telegram-transport";
 import {MINI_APP_URL} from "../apps/web/lib/telegram-miniapp";
 import { flushCrmPush } from "../apps/web/lib/crm-push";
 import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
-import { enablePolling, pollingEnabled, pollBatch, eventDrivenEnabled } from "../apps/web/lib/crm-polling";
+import { enablePolling, pollingEnabled, pollBatch, eventDrivenEnabled, setEventDrivenMode } from "../apps/web/lib/crm-polling";
 import {pendingCrmEvents} from "../apps/web/lib/crm-incoming-events";
 import { handleCrmBotUpdate, sendCustomerWelcome } from "../apps/web/lib/crm-bot";
 import { flushCrmNotifications } from "../apps/web/lib/crm-notifications";
@@ -51,18 +52,18 @@ export async function runPolling() {
       console.log(JSON.stringify({publicMiniAppMenu:menu?.type,miniAppUrl:menu?.web_app?.url}));
     } catch { console.error("Bot profile setup incomplete; update processing continues"); }
   }
-  const info = await telegram("getWebhookInfo");
-  const eventDriven = await eventDrivenEnabled();
+  let info = await telegram("getWebhookInfo");
+  let eventDriven = await eventDrivenEnabled();
+  const recovery = await recoverTelegramTransport(info, eventDriven, telegram, setEventDrivenMode);
+  info = recovery.info; eventDriven = recovery.eventDriven;
+  if (recovery.recovered) console.log("Unreachable known webhook disabled; pending updates preserved for polling");
   if (process.env.ACCEPTANCE_RUN === "1" && process.env.CRM_SERVICE_MODE !== "1") {
     const target = info?.url ? new URL(info.url) : null;
     console.log(JSON.stringify({eventDriven,webhookHost:target?.hostname||null,webhookPath:target?.pathname||null,pending:info?.pending_update_count||0,lastErrorAt:info?.last_error_date||null,lastErrorCategory:/timeout|timed out/i.test(info?.last_error_message||"")?"timeout":info?.last_error_message?"other":"none"}));
   }
   if (info?.url && !eventDriven) throw Error("webhook_still_active");
   process.env.CRM_BOT_POLL_WORKER = "1";
-  const result = await pollBatch(
-    offset => eventDriven ? pendingCrmEvents(offset) : telegram("getUpdates", { offset, limit: 8, timeout: process.env.CRM_SERVICE_MODE === "1" ? 15 : 0,
-      allowed_updates: ["message", "callback_query"] }),
-    async update => {
+  const handleUpdate = async (update: any) => {
       const handled = await handlePrivateLeadStart(update, token) || await handleCrmBotUpdate(update, token);
       const message = update.message;
       if (!handled && message?.chat?.type === "private" && String(message.chat.id) === String(message.from?.id)) {
@@ -72,8 +73,13 @@ export async function runPolling() {
         // Old callbacks may have expired while waiting for a scheduled run.
         await telegram("answerCallbackQuery", { callback_query_id: update.callback_query.id }).catch(() => null);
       }
-    },
-    !eventDriven,
+    };
+  // Old webhook events remain eligible even after transport recovery.
+  const queued = await pollBatch(pendingCrmEvents, handleUpdate, false);
+  const result = eventDriven ? queued : await pollBatch(
+    offset => telegram("getUpdates", {offset,limit:8,timeout:process.env.CRM_SERVICE_MODE === "1" ? 15 : 0,allowed_updates:["message","callback_query"]}),
+    handleUpdate,
+    true,
   );
   await flushCrmNotifications(3);
   await flushCrmPush(10).catch(() => undefined);
