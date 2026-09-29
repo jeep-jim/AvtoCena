@@ -151,7 +151,7 @@ export function PublicLegalFooter() {
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Настройки cookie</button>
-            <Link href="/privacy" className="ac-public-legal-link">Политика обработки данных</Link>
+            <Link href="/privacy" className="ac-public-legal-link font-bold underline underline-offset-4">Политика конфиденциальности</Link>
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
