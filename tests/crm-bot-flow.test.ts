@@ -34,11 +34,13 @@ test("customer request, private admin notification, reply confirmation, retry an
   resetJsonStorageForTests();
   let fail = false;
   const sent: any[] = [];
+  const menuButtons: any[] = [];
   globalThis.fetch = (async (url: any, options: any) => {
     assert.ok(String(url).startsWith("https://api.telegram.org/bot"));
     if (fail)
       return new Response(JSON.stringify({ ok: false }), { status: 503 });
     const payload = JSON.parse(options.body);
+    if(String(url).endsWith("/setChatMenuButton")){menuButtons.push(payload);return new Response(JSON.stringify({ok:true,result:true}),{status:200});}
     sent.push(payload);
     return new Response(
       JSON.stringify({ ok: true, result: { message_id: sent.length } }),
@@ -94,6 +96,8 @@ test("customer request, private admin notification, reply confirmation, retry an
       await handleCrmBotUpdate(message(101, input), "token");
       assert.match(sent.at(-1).text, /через форму на сайте/);
     }
+    assert.ok(menuButtons.some(menu=>menu.chat_id===101 && menu.menu_button?.web_app?.url.startsWith("https://avtocena.com/mini")));
+    assert.ok(sent.some(message=>message.reply_markup?.inline_keyboard?.flat().some((button:any)=>button.web_app?.url.startsWith("https://avtocena.com/mini"))));
     await handleCrmBotUpdate(callback(101, "cust:confirm"), "token");
     assert.equal((await readChunkedDataJson("leads/leads.json", [])).length, 0);
     // Existing customer conversations and staff replies still work.

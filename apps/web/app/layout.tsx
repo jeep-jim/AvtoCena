@@ -1,3 +1,6 @@
+import "../components/telegram/telegram-miniapp.css";
+import {TelegramMiniApp} from "../components/telegram/TelegramMiniApp";
+import {miniAppBootstrap} from "../lib/telegram-miniapp";
 import "./select-controls.css";
 import "./globals.css";
 import "./catalog-ui.css";
@@ -290,10 +293,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <script dangerouslySetInnerHTML={{ __html: miniAppBootstrap }} />
         <style dangerouslySetInnerHTML={{ __html: publicUiCorrections }} />
       </head>
       <body suppressHydrationWarning>
         {children}
+        <TelegramMiniApp />
         <PublicLegalFooter />
         <PublicUiEnhancer />
         <CurrencyChartEnhancer />
