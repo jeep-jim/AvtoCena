@@ -36,7 +36,15 @@ export async function collectSourcePage(state, options) {
     state.done=!transient || state.consecutiveListFailures>=3 || Date.now()>=deadline;
     state.stopReason=state.done?(blocked?'blocked':'list_failed'):'retry_pending';
     if(state.errors.length<30)state.errors.push({stage:'list',message});
-    await checkpoint();return;
+    await checkpoint();
+    if (!state.done) {
+      // Retry transient transport failures on the same cursor, with breathing
+      // room for the source. Access denials and the third failure never retry.
+      const delayMs = Math.min(1000 * 2 ** (state.consecutiveListFailures - 1), Math.max(0, deadline - Date.now()));
+      if (delayMs > 0) await (options.waitForRetry || (ms => new Promise(resolve => setTimeout(resolve, ms))))(delayMs);
+      if (Date.now() >= deadline) { state.done = true; state.stopReason = 'time_budget'; await checkpoint(); }
+    }
+    return;
   }
   state.consecutiveListFailures=0;
   state.stopReason='running';
