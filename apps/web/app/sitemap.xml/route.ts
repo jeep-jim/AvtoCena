@@ -27,7 +27,7 @@ export async function GET() {
   const brands = await readCatalogBrandDirectory();
   const entries = [
     urlEntry(baseUrl, "daily", 1),
-    ...["privacy","consent","cookies","requisites"].map(path=>urlEntry(`${baseUrl}/${path}`,"monthly",0.3)),
+    ...["privacy","consent","cookies","requisites","terms"].map(path=>urlEntry(`${baseUrl}/${path}`,"monthly",0.3)),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
     urlEntry(`${baseUrl}/cars/autocatalog`, "daily", 0.9),
     ...brands.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),

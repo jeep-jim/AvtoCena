@@ -1,7 +1,9 @@
+import {parseDealerMail} from "@/lib/dealer-mail";
+import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 import {recordCrmActivity} from "@/lib/crm-activity";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import { NextResponse } from "next/server";
-import { getCurrentUser, isAdminRole } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { getJsonStorage, mutateDataJson } from "@/lib/data";
 
 export const runtime = "nodejs";
@@ -53,10 +55,13 @@ export async function POST(request: Request) {
     return NextResponse.redirect(login, { status: 303 });
   }
 
+  if (!isCalculationOriginAllowed(request)) return NextResponse.json({error: "origin_forbidden"}, {status: 403});
+
   let dealerId = "";
   try {
     const form = await request.formData();
     dealerId = clean(form.get("dealerId"), 160);
+    const mail = parseDealerMail(form);
     const name = clean(form.get("name"), 200);
     const city = clean(form.get("city"), 160);
     const statusValue = clean(form.get("status"), 40);
@@ -83,6 +88,7 @@ export async function POST(request: Request) {
       if (!dealers.some((item) => item.id === dealerId)) throw new Error("Компания не найдена");
       return dealers.map((dealer) => dealer.id === dealerId ? {
         ...dealer,
+        ...(mail ? {mail} : {}),
         name,
         city,
         status,
