@@ -146,7 +146,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
  }
- function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value,old),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
+ function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);const page=document.querySelector<HTMLElement>("[data-offer-id]");if(page)delete page.dataset.offerSavedVersion;revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value,old),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
   if(initialScenario && !dirty){setResult(initialScenario.calculation);setPending(false);return;}
   if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
@@ -192,7 +192,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
   {afterPrice}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} syncStored={!savedCalculation && !initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
+   <CitySelector value={draft.deliveryCity||""} persistSelection={!canSave && !initialScenario} syncStored={!canSave && !initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
    <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
   </div>
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
@@ -211,11 +211,11 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
   <OfferParameterEditors draft={draft} change={change} showCommercial={showCommercial} isPickup={isPickup} researchContext={researchContext}/>
-  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Сохранить расчёт для клиента"}</button></div> : null}
+  {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
-   <p className="mt-3 text-sm">Их увидят все пользователи сайта!</p>
+   <p className="mt-3 text-sm">Характеристики увидят все пользователи. Город доставки сохранится только в ссылке на этот расчёт и в PDF.</p>
    <div className="mt-5 flex gap-3"><button type="button" onClick={()=>{saveDialog.current?.close();void save();}} className="min-h-11 flex-1 rounded-xl bg-red-500 px-4 font-bold text-white">Да</button><button type="button" autoFocus onClick={()=>saveDialog.current?.close()} className="min-h-11 flex-1 rounded-xl bg-[var(--ac-surface-2)] px-4 font-bold">Нет</button></div>
   </dialog> : null}
   {canSave && saveMessage ? <p role="status" className="mt-2 text-sm text-[var(--ac-text)]">{saveMessage}</p> : null}

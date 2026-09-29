@@ -31,22 +31,46 @@ export function matchingSavedCalculation(record: SavedOfferCalculation | null, o
 // Request-only cache: a save is visible on the very next request, never waits for a web deploy.
 const readRecord = (id:string)=>readDataJson<SavedOfferCalculation|null>(storagePath(id),null);
 const readSavedRecord = typeof cache === "function" ? cache(readRecord) : readRecord;
-export async function getSavedOfferCalculation(offer: VehicleOffer) {
+function scenarioPath(id:string,version:string) {
+  return `offer-calculation-scenarios/${createHash("sha256").update(id).digest("hex")}/${version}.json`;
+}
+export async function saveClientCalculation(offer:VehicleOffer,draft:Record<string,string>,calculation:SavedCalculationResult,userId:string,savedByName?:string) {
+  const record:SavedOfferCalculation={offerId:offer.id,identity:savedOfferIdentity(offer),version:randomUUID(),savedAt:new Date().toISOString(),savedBy:userId,savedByName,draft:cleanSavedDraft(draft),calculation};
+  await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,record.version),null,current=>current || record);
+  return record;
+}
+export async function getSavedOfferCalculation(offer: VehicleOffer, version?:string) {
+  if(version){
+    if(!/^[a-f0-9-]{36}$/i.test(version))return null;
+    const archived=matchingSavedCalculation(await readDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,version),null),offer);
+    if(archived)return archived;
+    const latest=matchingSavedCalculation(await readSavedRecord(offer.id),offer);
+    return latest?.version===version?latest:null;
+  }
   const record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
-  if (!record || !isGreenCornerOffer(offer)) return record;
-  // Keep the manager's parameters and version, but price stock at today's yen rate.
+  if (!record || (!record.draft.deliveryCity && !isGreenCornerOffer(offer) && offer.market!=="china")) return record;
+  // Shared characteristics have no client's delivery. Refresh currencies for Japan stock and China.
   const {calculateOfferWithCustomerParametersDetailed} = await import("./customs-pricing");
-  const fresh = await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(record.draft));
-  return fresh.ok ? {...record,calculation:fresh.calculation} : null;
+  const fresh = await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...record.draft,deliveryCity:""}));
+  return fresh.ok ? {...record,draft:{...record.draft,deliveryCity:""},calculation:fresh.calculation} : null;
 }
 export class SavedCalculationConflict extends Error {}
 export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null, savedByName?:string) {
   const record:SavedOfferCalculation={offerId:offer.id,identity:savedOfferIdentity(offer),version:randomUUID(),savedAt:new Date().toISOString(),savedBy:userId,savedByName,draft:cleanSavedDraft(draft),calculation};
+  const {calculateOfferWithCustomerParametersDetailed} = await import("./customs-pricing");
+  const publicDraft={...record.draft,deliveryCity:""};
+  const publicResult=record.draft.deliveryCity ? await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(publicDraft)) : {ok:true as const,calculation};
+  if(!publicResult.ok)throw Error(publicResult.error);
+  // Archive before publishing: every issued link has an immutable destination.
+  await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,record.version),null,()=>record);
+  const publicRecord={...record,draft:publicDraft,calculation:publicResult.calculation};
+  const previous=matchingSavedCalculation(await readRecord(offer.id),offer);
+  if(previous && previous.version===expectedVersion)await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,previous.version),null,current=>current || previous);
   await mutateDataJson<SavedOfferCalculation|null>(storagePath(offer.id),null,current=>{
     if ((matchingSavedCalculation(current,offer)?.version || null) !== expectedVersion) throw new SavedCalculationConflict("Карточка уже изменена другим сотрудником. Обновите страницу перед сохранением.");
-    return record;
+    return publicRecord;
   });
   const {publishSavedCalculationPreview}=await import("./saved-calculation-previews");
-  await publishSavedCalculationPreview(record,offer);
+  await publishSavedCalculationPreview(publicRecord,offer);
   return record;
 }

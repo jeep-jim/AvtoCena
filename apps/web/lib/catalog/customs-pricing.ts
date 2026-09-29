@@ -1,3 +1,4 @@
+import {withChinaCnyPrice} from "./china-cny-price";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
 import { isGreenCornerOffer } from "./green-corner-contract";
 import { deliveryPricingBasis } from "./card-city-delivery";
@@ -170,6 +171,7 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 }
 
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number, resolvedModification = false, userParameters = false): Promise<VehicleOffer> {
+  input=await withChinaCnyPrice(input);
   const coreEnriched = resolvedModification ? input : await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
   const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
     ? positive(coreEnriched.powerHp)

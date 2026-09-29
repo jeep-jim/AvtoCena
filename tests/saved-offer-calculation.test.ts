@@ -1,4 +1,9 @@
-import test from "node:test";
+import test,{mock} from "node:test";
+import fs from "node:fs";
+import {LocalJsonStorage} from "../apps/web/lib/data";
+import {resetCatalogRateCache} from "../apps/web/lib/catalog/rates";
+import {calculateOfferWithCustomerParametersDetailed} from "../apps/web/lib/catalog/customs-pricing";
+import {validateCustomerParameters} from "../apps/web/lib/catalog/customer-parameters";
 import assert from "node:assert/strict";
 import {randomUUID,createHash} from "node:crypto";
 import {getJsonStorage} from "../apps/web/lib/data";
@@ -7,12 +12,21 @@ import {unseenNewLeads,latestLeadIncomingAt} from "../apps/web/lib/crm-alert-sta
 
 const draft={year:"2021",productionMonth:"11",fuel:"petrol",engineCc:"1998",powerHp:"150",powerKw:"110.3248125",deliveryCity:"Новокузнецк"};
 test("saved employee calculation survives fresh reads and price updates, rejects lost updates and missing identity",async()=>{
- const offer:any={id:`test-saved-${randomUUID()}`,market:"korea",sourceId:"encar",sourceOfferId:"lot-1",make:"Hyundai",model:"Elantra"};
- const calculation:any={totalRub:2500000,breakdown:[{id:"car",amountRub:2000000}],currencyRate:{currency:"KRW",effectiveRate:.06}};
+ const offer:any={id:`test-saved-${randomUUID()}`,market:"korea",sourceId:"encar",sourceOfferId:"lot-1",sourcePrice:20000000,sourceCurrency:"KRW",make:"Hyundai",model:"Elantra"};
+ const today=new Date().toISOString(),readOriginal=LocalJsonStorage.prototype.readJsonWithMeta;
+ const read=mock.method(LocalJsonStorage.prototype,"readJsonWithMeta",async function(this:LocalJsonStorage,key:string,fallback:any){return key==="fees/exchange-rates.json"?{found:true,value:{updatedAt:today,EUR:{cbrRate:95,nominal:1,rateDate:today},KRW:{cbrRate:6,nominal:100,rateDate:today},USD:{cbrRate:90,nominal:1,rateDate:today}}}:readOriginal.call(this,key,fallback);});
+ resetCatalogRateCache();
+ const result=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));assert.ok(result.ok);
+ const calculation=result.calculation;
+ const baseline=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...draft,deliveryCity:""}));assert.ok(baseline.ok);
  try {
   const first=await saveOfferCalculation(offer,draft,calculation,"test-manager",null,"Тестовый сотрудник");
   assert.equal(first.savedByName,"Тестовый сотрудник");
-  assert.equal((await getSavedOfferCalculation(offer))?.calculation.totalRub,2500000);
+  assert.equal((await getSavedOfferCalculation(offer))?.draft.deliveryCity,"");
+  assert.equal((await getSavedOfferCalculation(offer,first.version))?.draft.deliveryCity,"Новокузнецк");
+  assert.equal((await getSavedOfferCalculation(offer,first.version))?.calculation.totalRub,calculation.totalRub);
+  assert.ok(calculation.totalRub>baseline.calculation.totalRub);
+  assert.equal((await getSavedOfferCalculation(offer))?.calculation.totalRub,baseline.calculation.totalRub);
   assert.equal(matchingSavedCalculation(first,{...offer,sourcePrice:999999})?.draft.deliveryCity,"Новокузнецк");
   assert.equal(matchingSavedCalculation(first,null),null);
   assert.equal(matchingSavedCalculation(first,{...offer,id:"another"}),null);
@@ -20,13 +34,16 @@ test("saved employee calculation survives fresh reads and price updates, rejects
   await assert.rejects(saveOfferCalculation(offer,draft,calculation,"other-manager",null),SavedCalculationConflict);
   const second=await saveOfferCalculation(offer,{...draft,powerHp:"160",powerKw:"117.6798"},calculation,"test-manager",first.version);
   assert.notEqual(second.version,first.version);
+  assert.equal((await getSavedOfferCalculation(offer,first.version))?.draft.powerHp,"150");
+  assert.equal(await getSavedOfferCalculation(offer,"../../private"),null);
   assert.equal((await getSavedOfferCalculation(offer))?.draft.powerHp,"160");
   const {attachSavedCalculationPreviews}=await import("../apps/web/lib/catalog/saved-calculation-previews");
   const [preview]:any[]=await attachSavedCalculationPreviews([offer]);
   assert.equal(preview.savedCalculationPreview.version,second.version);
-  assert.equal(preview.savedCalculationPreview.totalRub,2500000);
+  assert.equal(preview.savedCalculationPreview.totalRub,(await getSavedOfferCalculation(offer))?.calculation.totalRub);
+  assert.equal(preview.savedCalculationPreview.deliveryCity,"");
   assert.equal(Math.round(preview.savedCalculationPreview.parameters.powerHp),160);
- } finally {await getJsonStorage().deleteJson?.(`offer-calculations/${createHash("sha256").update(offer.id).digest("hex")}.json`);}
+ } finally {read.mock.restore();resetCatalogRateCache();await getJsonStorage().deleteJson?.(`offer-calculations/${createHash("sha256").update(offer.id).digest("hex")}.json`);}
 });
 test("only allowed calculation fields persist; incomplete hybrid cannot be saved",()=>{
  const cleaned=cleanSavedDraft({...draft,totalRub:1,role:"owner",savedBy:"forged",unknown:"x"});
@@ -54,13 +71,13 @@ test("saved previews use the same price and parameters across all markets withou
  const {offerWithSavedPreview}=await import('../apps/web/lib/catalog/saved-calculation-preview');
  for(const market of ['japan','china','korea','uae','europe','georgia']){
   const offer:any={id:`saved-${market}`,market,sourceId:`source-${market}`,sourceOfferId:'1',engineCc:undefined,powerHp:undefined,catalogPricingMode:'seller',sellerPriceRub:500000,japanDeliveredPreview:{totalRub:1000000}};
-  const record:any={offerId:offer.id,identity:savedOfferIdentity(offer),version:'v1',savedAt:'2026-09-22T12:00:00Z',savedBy:'private-id',savedByName:'Private manager',draft,calculation:{totalRub:2500000,currencyRate:{currency:'JPY',effectiveRate:.5}}};
+  const record:any={offerId:offer.id,identity:savedOfferIdentity(offer),version:'v1',savedAt:'2026-09-22T12:00:00Z',savedBy:'private-id',savedByName:'Private manager',draft:{...draft,deliveryCity:''},calculation:{totalRub:2500000,currencyRate:{currency:'JPY',effectiveRate:.5}}};
   const entry=savedPreviewEntry(record,offer)!;assert.ok(entry);
   const projection:any={id:offer.id,market,sourceGroup:offer.sourceId};
   const [attached]:any[]=attachSavedPreviewEntries([projection],{version:1,entries:{[offer.id]:entry}});
   const shown=offerWithSavedPreview(attached);
   assert.equal(shown.totalRub,2500000);assert.equal(shown.engineCc,1998);assert.ok(Math.abs(shown.powerHp-150)<.01);
-  assert.equal(shown.fuel,'petrol');assert.equal(shown.savedCalculationPreview.deliveryCity,'Новокузнецк');
+  assert.equal(shown.fuel,'petrol');assert.equal(shown.savedCalculationPreview.deliveryCity,'');
   assert.equal(shown.japanDeliveredPreview,undefined);
   assert.ok(!JSON.stringify(attached).includes('private-id'));assert.ok(!JSON.stringify(attached).includes('Private manager'));
   const [mismatch]:any[]=attachSavedPreviewEntries([{...projection,sourceGroup:'different'}],{version:1,entries:{[offer.id]:entry}});

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
-import { Download, Minus, Plus, X } from "lucide-react";
+import { Download, Share2, Minus, Plus, X } from "lucide-react";
 
 type Layers = Awaited<ReturnType<PDFDocumentProxy["getOptionalContentConfig"]>>;
 type LinkAnnotation = { url: string; rect: number[] };
@@ -65,6 +65,14 @@ export default function OfferPdfPreview({ blob, filename, onClose, confirmDownlo
   const [width, setWidth] = useState(300);
   const [zoom, setZoom] = useState(1);
   const [url, setUrl] = useState("");
+  const [canShare,setCanShare]=useState(false);
+  const [shareError,setShareError]=useState("");
+  useEffect(()=>{try{setCanShare(Boolean(navigator.canShare?.({files:[new File([blob],filename,{type:"application/pdf"})]})));}catch{setCanShare(false);}},[blob,filename]);
+  async function share(){
+    setShareError("");
+    try{await navigator.share({files:[new File([blob],filename,{type:"application/pdf"})]});}
+    catch(error){if(!(error instanceof Error && error.name==="AbortError"))setShareError("Не удалось отправить. Скачайте PDF и отправьте его как файл.");}
+  }
   const [error, setError] = useState("");
   useEffect(() => {
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -105,6 +113,8 @@ export default function OfferPdfPreview({ blob, filename, onClose, confirmDownlo
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-[var(--ac-border)] bg-[var(--ac-surface,#fff)] p-3">
         <strong className="mr-auto text-sm">Предпросмотр PDF</strong>
         <a href={url || undefined} download={filename} onClick={event=>{if(confirmDownload&&!window.confirm(`Скачать документ «${filename}» на это устройство?`))event.preventDefault();}} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#F59E0B] px-3 text-sm font-bold text-[#171C24]"><Download size={18}/>Скачать</a>
+        {canShare ? <button type="button" onClick={()=>void share()} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--ac-surface-2)] px-3 text-sm font-bold"><Share2 size={18}/>Поделиться PDF</button> : null}
+        {shareError ? <p role="alert" className="w-full text-sm">{shareError}</p> : null}
         <button type="button" onClick={onClose} aria-label="Закрыть предпросмотр" className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)]"><X size={22}/></button>
         <div className="flex w-full flex-wrap items-center gap-2">
           <button type="button" aria-label="Уменьшить PDF" disabled={zoom <= 1} onClick={() => setZoom(value => Math.max(1, value - 0.5))} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] disabled:opacity-40"><Minus size={18}/></button>

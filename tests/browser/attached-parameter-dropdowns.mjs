@@ -243,15 +243,15 @@ try{
    await page.route('**/api/catalog/offer/qa-attached/save',async route=>{saves++;const body=route.request().postDataJSON();assert.equal(body.version,'v1');assert.equal(body.draft.powerHp,'150');await route.fulfill({json:{version:'v2',savedAt:'2026-09-20T11:00:00Z',savedByName:'Новый сотрудник',draft:body.draft,calculation:{totalRub:2600000}}});});
    await page.goto(origin+'/?kind='+kind);await page.waitForTimeout(850);
    assert.equal(calculations,0,'saved quote must not recalculate on open');
-   assert.equal(await page.getByRole('button',{name:'Сохранить расчёт для клиента'}).count(),0,'no save before edits');
+   assert.equal(await page.getByRole('button',{name:'Применить к расчёту для клиента'}).count(),0,'no save before edits');
    assert.equal(await page.getByText(/Расчёт сохранён/).count(),kind==='saved-admin'?1:0,'save metadata is staff only');
-   assert.ok(await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).isVisible(),'saved delivery overrides browser city');
+   assert.ok(await page.getByRole('button',{name:'Выбрать город. Сейчас: Новокузнецк'}).isVisible(),'explicit client quote overrides browser city');
    assert.match(await page.locator('.ac-price').first().innerText(),/2[\s\u00a0]500[\s\u00a0]000/);
    await page.getByText('Структура цены',{exact:true}).first().click();
    assert.ok(await page.getByText('Обеспечительный платёж',{exact:true}).isVisible());
    const power=page.locator('[data-parameter-editor] > summary').nth(3);await power.click();
    await page.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.keyboard.press('Escape');await page.waitForTimeout(850);
-   const button=page.getByRole('button',{name:'Сохранить расчёт для клиента'});
+   const button=page.getByRole('button',{name:'Применить к расчёту для клиента'});
    if(kind==='saved-admin'){
     await button.click();await page.getByRole('dialog').waitFor();assert.equal(saves,0,'opening confirmation does not save');
     await page.getByRole('button',{name:'Нет',exact:true}).click();assert.equal(saves,0);assert.ok(await button.isVisible());
@@ -267,7 +267,7 @@ try{
    await page.addInitScript(()=>localStorage.setItem('avtocena_city','Москва'));
    await page.route('**/api/catalog/offer/qa-attached/calculate',route=>route.fulfill({json:{totalRub:2600000,breakdown:[{id:'car',amountRub:2000000}]}}));
    await page.goto(origin+'/?kind=unsaved-admin');await page.waitForTimeout(850);
-   assert.equal(await page.getByRole('button',{name:'Сохранить расчёт для клиента'}).count(),0,'automatic city restoration is not an employee edit');
+   assert.equal(await page.getByRole('button',{name:'Применить к расчёту для клиента'}).count(),0,'automatic city restoration is not an employee edit');
    for(const theme of ['light','dark']){
     await page.goto(origin+'/?kind=electric&theme='+theme);await page.waitForTimeout(300);
     const color=await page.locator('.ac-price').first().evaluate(el=>getComputedStyle(el).color);

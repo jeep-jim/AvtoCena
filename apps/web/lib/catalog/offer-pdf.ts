@@ -21,8 +21,10 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
  const lines=calculation?.breakdown || [];
  const amount=(id:string)=>lines.find(line=>line.id===id)?.amountRub ?? (calculation ? 0 : undefined);
  const row=(id:string,label:string):PdfLine=>({label,value:rub(amount(id))});
- const source=offer.sourcePrice!=null && offer.sourceCurrency ? `${offer.sourcePrice.toLocaleString("ru-RU")} ${offer.sourceCurrency}`:"";
  const rate=calculation?.currencyRate || offer.calculationSnapshot?.currencyRate;
+ const sourcePrice=rate?.sourcePrice ?? offer.sourcePrice;
+ const sourceCurrency=rate?.currency ?? offer.sourceCurrency;
+ const source=sourcePrice!=null && sourceCurrency ? `${Number(sourcePrice).toLocaleString("ru-RU",{maximumFractionDigits:2})} ${sourceCurrency}`:"";
  const previous=Number(rate?.previousEffectiveRate || 0);
  const delta=Number(rate?.rateDelta) || (previous>0 && Number(rate?.effectiveRate)>0 ? Number(rate.effectiveRate)-previous : 0);
  const rateDirection=Math.abs(delta)<1e-9?"flat":delta<0?"down":"up";
@@ -50,7 +52,7 @@ export function offerPdfNotes(data:OfferPdfData) {
  const deposit=data.marketKey==="japan"
   ? "Обеспечительный платёж в разделе страны — аванс в счёт автомобиля. Он засчитывается при оплате и не прибавляется к стоимости повторно."
   : "Обеспечительный платёж в разделе страны — аванс в счёт услуг по договору. Он засчитывается при оплате и не прибавляется к стоимости повторно.";
- const warnings=data.warnings.map(w=>w.startsWith("Льготный утильсбор рассчитан как")
+ const warnings=[...new Set(data.warnings.map(w=>w.trim()).filter(Boolean))].map(w=>w.startsWith("Льготный утильсбор рассчитан как")
   ? "Возможность применения льготного утилизационного сбора подтверждается по документам автомобиля и покупателя до оплаты."
   : w);
  return [deposit,"Комиссия TOP AVTO включена в раздел «Россия» и итоговую стоимость. Порядок и сроки оплаты отдельных этапов определяются договором.",...warnings,
@@ -68,12 +70,12 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const X=32,W=346,R=396,RW=167,ink="#1B222C",muted="#68758A",border="#DCE2E9";
  const height=(s:string,w:number,size:number,bold=false)=>doc.font(bold?"bold":"regular").fontSize(size).heightOfString(s,{width:w,lineGap:1});
  const notes=offerPdfNotes(data);
- const supportGap=16;
+ const supportGap=10;
  const layouts=[8.6,8.2,7.8,7.4].map(font=>{
   const titleFont=font+10,titleH=height(data.title,W,titleFont,true),specH=height(data.specs,W,font-1),routeH=height(`${data.market} → ${data.city}`,W,font+6,true);
   const start=38+titleH+10+specH+15+routeH+16;
-  const rows=data.sections.slice(0,2).map(s=>s.rows.map(r=>Math.max(font+10,height(r.label,223,font)+8,height(r.value,100,font,true)+8)));
-  const noteFont=Math.max(6.5,font-1),noteHeights=notes.map(n=>height(n,W,noteFont)+5);
+  const rows=data.sections.slice(0,2).map(s=>s.rows.map(r=>Math.max(font+8,height(r.label,223,font)+6,height(r.value,100,font,true)+6)));
+  const noteFont=Math.max(6.5,font-1),noteHeights=notes.map(n=>height(n,W,noteFont)+3);
   return {font,titleFont,titleH,specH,routeH,start,rows,noteFont,noteHeights,total:start+rows.reduce((t,rs)=>t+28+rs.reduce((a,b)=>a+b,0),0)+28+supportGap+noteHeights.reduce((a,b)=>a+b,0)};
  });
  const fit=layouts.find(l=>l.total<=776)||layouts.at(-1)!;
@@ -106,6 +108,6 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const room=(h:number)=>{if(y+h>783){doc.addPage();y=38;}};
  data.sections.slice(0,2).forEach((section,si)=>{room(24+(fit.rows[si][0]||0));heading(si,y);y+=23;section.rows.forEach((row,ri)=>{const h=fit.rows[si][ri];room(h);layers.begin(si);const subtotal=row.label.startsWith("Итого:");if(subtotal)doc.roundedRect(X,y,W,h-1,4).fill("#F5F7F9");text(row.label,X+8,y+4,223,fit.font,subtotal);doc.font("bold").fontSize(fit.font).fillColor(ink).text(row.value,X+W-108,y+4,{width:100,align:"right",lineGap:1});doc.moveTo(X+8,y+h-1).lineTo(X+W-8,y+h-1).lineWidth(.4).strokeColor(border).stroke();layers.end();y+=h;});y+=5;});
  y+=supportGap;room(25+fit.noteHeights[0]);heading(2,y);y+=25;notes.forEach((note,i)=>{room(fit.noteHeights[i]);layers.begin(2);text(note,X,y,W,fit.noteFont,false,muted);layers.end();y+=fit.noteHeights[i];});
- const count=doc.bufferedPageRange().count;for(let i=0;i<count;i++){doc.switchToPage(i);text("АВТОЦЕНА / Индивидуальный расчёт",X,798,390,6,false,muted);doc.font("regular").fontSize(6).text(`${i+1} / ${count}`,523,798,{width:40,align:"right"});}
+ const count=doc.bufferedPageRange().count;for(let i=0;i<count;i++){doc.switchToPage(i);doc.font("regular").fontSize(6).fillColor(muted).text("АВТОЦЕНА / Индивидуальный расчёт",X,798,{width:390,lineBreak:false});doc.text(`${i+1} / ${count}`,523,798,{width:40,align:"right",lineBreak:false});}
  doc.end();return output;
 }

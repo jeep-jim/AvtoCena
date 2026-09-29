@@ -1,3 +1,4 @@
+import {withChinaCnyPrice,withChinaCnyPrices} from "./china-cny-price";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
 import { applyJapanServiceCosts, japanServiceCostBasis } from "./japan-service-pricing";
@@ -64,7 +65,7 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
   if (!sourcePrice || !sourceCurrency) return offer;
 
   const storedRate = offer.calculationSnapshot?.currencyRate;
-  if (!offer.calculationSnapshot?.customsInput && snapshotSourcePriceRub(offer) > 0 && positive(storedRate?.effectiveRate) > 0) return offer;
+  if (!offer.chinaPriceConversion && !offer.calculationSnapshot?.customsInput && snapshotSourcePriceRub(offer) > 0 && positive(storedRate?.effectiveRate) > 0) return offer;
 
   const [rate,eurRate] = await Promise.all([convertToRub(sourcePrice, sourceCurrency).catch(() => null),convertToRub(1,"EUR").catch(() => null)]);
   const fresh = (item:any) => item && ["cbr","cbr_live"].includes(item.rateSource) && Number.isFinite(Date.parse(item.rateDate)) && Math.abs(Date.now()-Date.parse(item.rateDate)) <= 4*86400000;
@@ -131,7 +132,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
   const savedAdjustment = snapshot.sourcePriceAdjustment;
   const adjustment = che168GlobalPriceAdjustment(offer, sourcePriceRub)
-    || (market === 'china' && offer.sourceCurrency === 'USD'
+    || (market === 'china' && (offer.sourceCurrency === 'USD' || offer.chinaPriceConversion)
       && savedAdjustment?.policy === 'owner_che168_global_minus_2_percent_20260913'
       ? {...savedAdjustment, originalCarPriceRub: sourcePriceRub, adjustmentRub: -Math.round(sourcePriceRub * 0.02)} : undefined);
   const calculation = calculateAvtocenaFromBusinessConfig({
@@ -188,6 +189,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
+  offer=await withChinaCnyPrice(offer);
   const rated = await attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer)));
   const configured = await getEffectiveMarketVersion(String(rated.market));
   const repriced = repriceOfferWithBusinessConfig(rated, configured);
@@ -196,6 +198,7 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
+  offers=await withChinaCnyPrices(offers);
   const [markets, ratedOffers] = await Promise.all([
     getEffectiveMarketsWithDefaults(),
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),

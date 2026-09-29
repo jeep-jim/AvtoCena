@@ -44,7 +44,7 @@ export function chinaInventoryAgeDecision(offer: Partial<VehicleOffer>, now = ne
 }
 
 export function che168GlobalPriceAdjustment(offer: Partial<VehicleOffer>, originalCarPriceRub: number) {
-  if (offer.market !== 'china' || offer.sourceId !== 'autohome_used_china_open' || offer.sourceCurrency !== 'USD'
+  if (offer.market !== 'china' || offer.sourceId !== 'autohome_used_china_open' || (offer.sourceCurrency !== 'USD' && !offer.chinaPriceConversion)
     || !Number.isFinite(originalCarPriceRub) || originalCarPriceRub <= 0) return undefined;
   try {
     const url = new URL(String(offer.operational?.sourceUrl || ''));

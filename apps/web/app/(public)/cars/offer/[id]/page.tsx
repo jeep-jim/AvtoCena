@@ -244,7 +244,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string }> }) {
+export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string }> }) {
   const { id: routeId } = await params;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
@@ -280,13 +280,13 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     }
     permanentRedirect(canonicalPath + (preserved.size ? `?${preserved}` : ''));
   }
-  const [savedCalculation,currentUser] = await Promise.all([getSavedOfferCalculation(storedOffer),getCurrentUser()]);
-  const directScenario = query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null;
+  const [savedCalculation,clientScenario,currentUser] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser()]);
+  const directScenario = clientScenario || (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null);
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation
     ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
     : undefined;
   const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(storedOffer)));
-  const offer = safeOffer.catalogPricingMode === 'seller' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
+  const offer = safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
   const sellerPricing = isSellerPricedOffer(offer);
   const selectionRequired = hasModificationSelection(offer);
@@ -415,7 +415,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
 
   const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
 
-  return <main data-offer-id={o.id} data-offer-saved-version={savedCalculation?.version} data-offer-price-rub={directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
+  return <main data-offer-id={o.id} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">

@@ -19,7 +19,7 @@ export function OfferPdfButton({offerId,draft}:{offerId:string;draft:Record<stri
  async function generate(mode:"view"|"download") {
   if(busy)return;setBusy(true);setError("");
   try{
-   const response=await fetch(`/api/catalog/offer/${encodeURIComponent(offerId)}/pdf`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({draft})});
+   const response=await fetch(`/api/catalog/offer/${encodeURIComponent(offerId)}/pdf`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({draft,version:document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerSavedVersion})});
    if(!response.ok){const data=await response.json();throw Error(data.error || "Не удалось подготовить PDF");}
    const blob=await response.blob();if(!blob.type.includes("application/pdf"))throw Error("Сервер не вернул PDF. Попробуйте ещё раз.");
    if(mode==="view")setPreview(blob);

@@ -18,7 +18,7 @@ const browser=process.env.BROWSER==='webkit'?await webkit.launch():await chromiu
 const results=[];
 try{
  for(const width of [320,390,1440])for(const theme of ['light','dark']){
-  const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:2,isMobile:width<500,hasTouch:width<500,acceptDownloads:true});const page=await context.newPage();const errors=[],requests=[],downloads=[];
+  const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:2,isMobile:width<500,hasTouch:width<500,acceptDownloads:true});await context.addInitScript(()=>{Object.defineProperty(navigator,'canShare',{value:({files})=>files?.[0]?.type==='application/pdf'});Object.defineProperty(navigator,'share',{value:async({files})=>{window.sharedPdf={name:files[0].name,type:files[0].type,bytes:Array.from(new Uint8Array(await files[0].arrayBuffer()))};}});});const page=await context.newPage();const errors=[],requests=[],downloads=[];
   page.on('console',m=>{if(m.type()==='warning'||m.type()==='error')console.log(m.type(),m.text());});page.on('pageerror',e=>errors.push(String(e)));page.on('download',d=>downloads.push(d));page.on('request',r=>requests.push(r.url()));
   const drafts=[];let fail=false;
   await page.route('**/api/catalog/offer/qa-preview/pdf',async route=>{drafts.push(route.request().postDataJSON().draft);await new Promise(r=>setTimeout(r,350));await route.fulfill(fail?{status:500,json:{error:'Проверочная ошибка'}}:{status:200,headers:{'Content-Type':'application/pdf','Content-Disposition':'inline; filename="qa.pdf"'},body:pdf});});
@@ -33,6 +33,7 @@ try{
   const trigger=page.getByRole('button',{name:'PDF текущей карточки'}).filter({visible:true});
   await trigger.click();await page.getByRole('button',{name:'Просмотреть',exact:true}).click();
   const preview=page.getByRole('dialog',{name:'Предпросмотр PDF',exact:true});await preview.waitFor();await preview.locator('canvas[data-rendered=true]').waitFor({timeout:60000});
+  await preview.getByRole('button',{name:'Поделиться PDF',exact:true}).click();await page.waitForFunction(()=>window.sharedPdf);assert.deepEqual(Buffer.from(await page.evaluate(()=>window.sharedPdf.bytes)),pdf,'native share sends the exact PDF, never a printed web page');
   const initialCanvas=await preview.locator('canvas').evaluate(c=>c.toDataURL());if(width===390&&theme==='light')await page.screenshot({path:`${out}/before-zoom.png`});assert.equal(downloads.length,0,'preview must not download');assert.equal(context.pages().length,1,'preview stays on site without popup/native PDF navigation');
   assert.ok(await preview.locator('canvas').evaluate(c=>{const ctx=c.getContext('2d');const d=ctx.getImageData(0,0,c.width,c.height).data;let dark=0;for(let i=0;i<d.length;i+=16)if(d[i]<150&&d[i+1]<150&&d[i+2]<150)dark++;return dark>200;}),'real PDF pixels rendered');
   await preview.locator('[data-pdf-page] a').first().waitFor({state:'visible'});assert.ok(await preview.locator('[data-pdf-page] a').count()>0,'document links retained');

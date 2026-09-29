@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { CITY_CHANGED_EVENT, readSelectedCity } from "../../lib/location/selected-city";
 import type { searchRussianCities } from "../../lib/location/cities";
 
-type Props = { value: string; syncStored?: boolean; onStoredChange?: (city: string) => void; triggerLabel?: string; onChange: (city: string) => void };
+type Props = { value: string; syncStored?: boolean; persistSelection?: boolean; onStoredChange?: (city: string) => void; triggerLabel?: string; onChange: (city: string) => void };
 const POPULAR_CITIES = ["Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань", "Красноярск", "Омск", "Самара", "Челябинск", "Ростов-на-Дону", "Уфа", "Новокузнецк", "Барнаул", "Иркутск", "Владивосток"];
 
 export function LocationIcon({ className = "" }: { className?: string }) {
@@ -27,7 +27,7 @@ export function useCitySuggestions(query: string) {
   return {suggestions,loading:query.trim().length>=2 && !search};
 }
 
-export function CityPickerDialog({onChange,onClose}:{onChange:(city:string)=>void;onClose:()=>void}) {
+export function CityPickerDialog({onChange,onClose,persistSelection=true}:{persistSelection?:boolean;onChange:(city:string)=>void;onClose:()=>void}) {
   const [query,setQuery]=useState("");
   const {suggestions,loading}=useCitySuggestions(query);
   const [viewport,setViewport]=useState<{top:number;height:number}|null>(null);
@@ -50,7 +50,7 @@ export function CityPickerDialog({onChange,onClose}:{onChange:(city:string)=>voi
     window.addEventListener("keydown",keydown,true);
     return()=>{document.body.style.overflow=previous;window.removeEventListener("keydown",keydown,true);window.visualViewport?.removeEventListener("resize",update);window.visualViewport?.removeEventListener("scroll",update);window.removeEventListener("resize",update);};
   },[]);
-  const choose=(city:string)=>{const normalized=city.trim().replace(/^г(?:\.\s*|\s+)/i,"");if(!normalized)return;persistCity(normalized);onChange(normalized);onClose();};
+  const choose=(city:string)=>{const normalized=city.trim().replace(/^г(?:\.\s*|\s+)/i,"");if(!normalized)return;if(persistSelection)persistCity(normalized);onChange(normalized);onClose();};
   const popular=POPULAR_CITIES.filter(city=>!query.trim()||city.toLocaleLowerCase("ru-RU").includes(query.trim().toLocaleLowerCase("ru-RU"))).slice(0,10);
   // Keep the keyboard open until click: blurring on pointer-down can move a
   // bottom sheet between pointer-down/up and swallow the very first selection.
@@ -65,14 +65,14 @@ export function CityPickerDialog({onChange,onClose}:{onChange:(city:string)=>voi
         {!suggestions.length&&!loading?<div className="grid grid-cols-2 gap-2">{popular.map(city=><button key={city} type="button" onPointerDown={event=>event.preventDefault()} onClick={() => choose(city)} className="min-h-12 rounded-xl bg-[var(--ac-surface-2)] px-3 py-3 text-left text-sm font-black">{city}</button>)}</div>:null}
         {query.trim().length>=2&&!loading&&!suggestions.length?<p className="mt-2 text-sm text-[var(--ac-muted)]">Город не найден. Можно сохранить название вручную; доставку уточним.</p>:null}
         <p className="mt-3 text-xs text-[var(--ac-muted)]">Данные о городах: <a href="https://github.com/hflabs/city" target="_blank" rel="noreferrer" className="underline">HFLabs / DaData</a>, CC BY-SA 4.0.</p>
-        <button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>{persistCity("");onChange("");onClose();}} className="mt-2 min-h-11 w-full text-sm underline">Не выбирать город</button>
+        <button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>{if(persistSelection)persistCity("");onChange("");onClose();}} className="mt-2 min-h-11 w-full text-sm underline">Не выбирать город</button>
       </div>
       <button type="button" onPointerDown={event=>event.preventDefault()} onClick={()=>choose(suggestions.find(item=>item.city.toLocaleLowerCase("ru-RU")===query.trim().toLocaleLowerCase("ru-RU"))?.value||query)} disabled={!query.trim()} className="avto-button mt-3 min-h-12 shrink-0 rounded-2xl text-sm font-black disabled:opacity-45">Выбрать город</button>
     </section>
   </div>,document.body);
 }
 
-export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncStored=true}:Props){
+export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncStored=true,persistSelection=true}:Props){
   const tap=useTapActivation();const [open,setOpen]=useState(false);const [mounted,setMounted]=useState(false);const trigger=useRef<HTMLButtonElement>(null);
   useEffect(()=>{setMounted(true);if(syncStored){const stored=readSelectedCity();if(stored!==value)(onStoredChange||onChange)(stored);}},[]);
   useEffect(()=>{if(!syncStored)return;const sync=()=>(onStoredChange||onChange)(readSelectedCity());window.addEventListener(CITY_CHANGED_EVENT,sync);return()=>window.removeEventListener(CITY_CHANGED_EVENT,sync);},[onChange,onStoredChange,syncStored]);
@@ -86,5 +86,5 @@ export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncSto
     return () => { window.removeEventListener("keydown", key, true); window.removeEventListener("pointerdown", pointer, true); };
   }, []);
   const label=value||"Ваш город";
-  return <><span className={triggerLabel?"inline-flex":"ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex"}><button ref={trigger} type="button" {...tap} onFocus={()=>setKeyboardFocus(keyboard.current)} onBlur={()=>setKeyboardFocus(false)} style={{outline:keyboardFocus ? "2px solid var(--ac-muted)" : "none",outlineOffset:4}} disabled={!mounted} onClick={()=>setOpen(true)} className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]" aria-label={`Выбрать город. Сейчас: ${label}`}><LocationIcon className="h-[.78em] w-[.78em] shrink-0 text-[#ff353d]"/><span className="truncate">{triggerLabel||label}</span></button></span>{mounted&&open?<CityPickerDialog onChange={onChange} onClose={()=>{setOpen(false);trigger.current?.focus({preventScroll:true});}}/>:null}</>;
+  return <><span className={triggerLabel?"inline-flex":"ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex"}><button ref={trigger} type="button" {...tap} onFocus={()=>setKeyboardFocus(keyboard.current)} onBlur={()=>setKeyboardFocus(false)} style={{outline:keyboardFocus ? "2px solid var(--ac-muted)" : "none",outlineOffset:4}} disabled={!mounted} onClick={()=>setOpen(true)} className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]" aria-label={`Выбрать город. Сейчас: ${label}`}><LocationIcon className="h-[.78em] w-[.78em] shrink-0 text-[#ff353d]"/><span className="truncate">{triggerLabel||label}</span></button></span>{mounted&&open?<CityPickerDialog persistSelection={persistSelection} onChange={onChange} onClose={()=>{setOpen(false);trigger.current?.focus({preventScroll:true});}}/>:null}</>;
 }

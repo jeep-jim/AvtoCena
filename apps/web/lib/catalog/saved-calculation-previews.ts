@@ -11,14 +11,14 @@ export const SAVED_PREVIEW_PATH="offer-calculation-previews/current.json";
 type Entry={market:string;sourceId:string;sourceOfferId:string;identity:string;savedAt:string;preview:SavedCalculationPreview};
 type Index={version:1;entries:Record<string,Entry>};
 // One compact read per rendered batch, shared across simultaneous rails. No per-card reads.
-const cache=new DetailReadCache<Index>({maxEntries:1,maxBytes:8*1024*1024,ttlMs:1000,concurrency:1});
+const cache=new DetailReadCache<Index>({maxEntries:1,maxBytes:8*1024*1024,ttlMs:60000,concurrency:1});
 export function savedPreviewEntry(record:SavedOfferCalculation,offer:VehicleOffer):Entry|null {
- if(!matchingSavedCalculation(record,offer) || !Number.isFinite(record.calculation.totalRub))return null;
+ if(record.draft.deliveryCity || !matchingSavedCalculation(record,offer) || !Number.isFinite(record.calculation.totalRub))return null;
  try {
   const parameters=validateCustomerParameters(record.draft);
   return {market:offer.market,sourceId:offer.sourceId,sourceOfferId:offer.sourceOfferId,identity:record.identity,savedAt:record.savedAt,
    preview:{version:record.version,totalRub:record.calculation.totalRub!,parameters,
-    currencyRate:record.calculation.currencyRate,utilizationPowerKw:record.calculation.customs?.utilizationPowerKw,deliveryCity:record.draft.deliveryCity||""}};
+    deliveryPricingBasis:record.calculation.deliveryPricingBasis,currencyRate:record.calculation.currencyRate,utilizationPowerKw:record.calculation.customs?.utilizationPowerKw,deliveryCity:record.draft.deliveryCity||""}};
  } catch {return null;}
 }
 export async function rebuildSavedPreviewIndex():Promise<Index> {
@@ -35,7 +35,8 @@ export async function rebuildSavedPreviewIndex():Promise<Index> {
    const record=await storage.readJson<SavedOfferCalculation|null>(file.key,null);
    if(!record?.offerId)continue;
    const offer=/^green-\d+$/.test(record.offerId)?green.items.find(o=>o.id===record.offerId):await getOfferFromCurrentShard(record.offerId);
-   const entry=offer?savedPreviewEntry(record,offer):null;
+   const publicRecord=offer?await getSavedOfferCalculation(offer):null;
+   const entry=offer && publicRecord?savedPreviewEntry(publicRecord,offer):null;
    if(entry)entries[record.offerId]=entry;
   }
  }));
@@ -43,7 +44,21 @@ export async function rebuildSavedPreviewIndex():Promise<Index> {
  return mutateDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}},current=>({version:1,entries:{...entries,...current.entries}}));
 }
 export async function readSavedPreviewIndex() {
- return cache.get("current",async()=>await readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}}));
+ return cache.get("current",async()=>{
+  const index=await readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}});
+  const entries={...index.entries};
+  const legacy=Object.entries(entries).filter(([,entry])=>entry.preview.deliveryCity || entry.preview.parameters.deliveryCity || entry.market==="china");
+  if(legacy.length){
+   const {getOfferFromCurrentShard}=await import("./storage");
+   await Promise.all(legacy.map(async([id])=>{
+    const offer=await getOfferFromCurrentShard(id);
+    const record=offer?await getSavedOfferCalculation(offer):null;
+    const entry=record && offer?savedPreviewEntry(record,offer):null;
+    if(entry)entries[id]=entry;else delete entries[id];
+   }));
+  }
+  return {...index,entries};
+ });
 }
 export async function publishSavedCalculationPreview(record:SavedOfferCalculation,offer:VehicleOffer) {
  const entry=savedPreviewEntry(record,offer);if(!entry)throw Error("invalid_saved_preview");

@@ -174,6 +174,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  chinaPriceConversion?:VehicleOffer["chinaPriceConversion"];
   japanDeliveredPreview?: {totalRub:number;engineCc?:number;estimated:boolean};
   catalogKind?: VehicleOffer["catalogKind"];
   catalogPricingMode?: "seller"; sellerPriceRub?: number;
@@ -416,7 +417,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource, transportToBorderRub: offer.transportToBorderRub,
     modificationSelection: offer.modificationSelection, recoveryQualification: offer.recoveryQualification,
-    sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
+    chinaPriceConversion:offer.chinaPriceConversion, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: {
       currencyRate: offer.calculationSnapshot?.currencyRate,
       pricingConfidence: offer.calculationSnapshot?.pricingConfidence,
