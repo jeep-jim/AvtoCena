@@ -79,3 +79,20 @@ test('a blocked budget continuation is reported instead of being called current'
  assert.equal(result.reason,'budget_continuation_blocked');
  assert.deepEqual(result.blockers,['checkpoint_missing_or_invalid','checkpoint_generation_mismatch','checkpoint_stale','cursor_not_committed']);
 });
+
+test('Japan watchdog shares the collector schedule instead of relying on a missing generic journal',()=>{
+ const japan={startedAt:new Date(now-86400000).toISOString(),complete:true,published:true};
+ const args={...input,market:'japan',journal:null,japan};
+ assert.equal(recoveryDecision(args).action,'none');
+ assert.equal(recoveryDecision({...args,now:now+3*86400000}).reason,'refresh_interval');
+ assert.equal(recoveryDecision({...args,japan:{...japan,published:false}}).reason,'retry_publication');
+ assert.equal(recoveryDecision({...args,japanRefreshIntervalDays:14,now:now+4*86400000}).action,'none');
+});
+
+test('a completed China tail restarts on the refresh interval without claiming full cycle coverage',()=>{
+ const journal={collectionComplete:false,lastCollectionAttempt:new Date(now-3*86400000).toISOString(),sources:[{sourceId:'che168',initialCursor:'2001',stopReason:'source_finished'}]};
+ const args={...input,market:'china',journal};
+ assert.equal(recoveryDecision(args).reason,'refresh_completed_continuation');
+ assert.equal(recoveryDecision({...args,now:now-1}).action,'none');
+ assert.equal(recoveryDecision({...args,runs:[{status:'in_progress'}]}).reason,'already_running');
+});

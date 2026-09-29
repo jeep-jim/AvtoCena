@@ -4,6 +4,7 @@ import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {MARKET_WORKFLOWS,recoveryDecision,transientOperationFailure} from './lib/catalog-recovery-policy.mjs';
 const token=process.env.GH_TOKEN,repo=process.env.GITHUB_REPOSITORY;
 if(!token||!/^[-\w]+\/[-\w]+$/.test(repo||''))throw Error('missing_github_context');
+const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
 const storage=getJsonStorage(),report={checkedAt:new Date().toISOString(),markets:{}};
 const manifest=await storage.readJson('catalog/manifest.json',null);
 async function api(path,method='GET',body){
@@ -20,7 +21,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
   storage.readJson(`catalog/operations/recovery/${market}.json`,null),
   ['china','europe'].includes(market)?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
  ]);
- const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,activeMarket:manifest?.markets?.[market],lastDispatchAt:dispatch?.at,recovery:dispatch});
+ const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,activeMarket:manifest?.markets?.[market],lastDispatchAt:dispatch?.at,recovery:dispatch,japanRefreshIntervalDays:policy.japan.refreshIntervalDays});
  if(decision.action==='inspect_failure'){
   const jobs=await api(`actions/runs/${decision.runId}/jobs?per_page=100`);
   const failures=jobs.jobs.filter(j=>['failure','timed_out'].includes(j.conclusion));
