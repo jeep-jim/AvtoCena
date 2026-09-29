@@ -75,8 +75,7 @@ html[data-theme="light"] .ac-public-footer-dealers:focus-visible {
   border: 1px solid #d9e0e9 !important;
 }
 
-.ac-public-footer-navigation nav[aria-label="Разделы"] a[href="/#form"],
-.ac-public-legal-footer-line nav[aria-label="Правовая информация"] a {
+.ac-public-footer-navigation nav[aria-label="Разделы"] a[href="/#form"] {
   display: none !important;
 }
 

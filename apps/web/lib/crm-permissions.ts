@@ -16,10 +16,11 @@ export type CrmPermission=keyof typeof CRM_PERMISSIONS;
 export type CrmPermissions=Partial<Record<CrmPermission,boolean>>;
 const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documents','calculations']);
 const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords']);
+export function isAdministrativeCrmPermission(key:CrmPermission){return administrative.has(key);}
 export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission):boolean {
  if(!user||user.status==='disabled'||!['owner','admin','manager'].includes(user.role))return false;
  if(user.role==='owner')return true;
- if(user.role==='manager'&&administrative.has(key))return false;
+ if(user.role==='manager'&&isAdministrativeCrmPermission(key))return false;
  return user.permissions?.[key] ?? (user.role==='admin'||managerDefaults.has(key));
 }
 export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||role==='admin'||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}

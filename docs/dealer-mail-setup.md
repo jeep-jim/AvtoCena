@@ -13,3 +13,14 @@
 Прямое чтение писем в CRM — самостоятельный этап с ограничением доступа, безопасной авторизацией к провайдеру, защитой HTML и вложений, правилами хранения и удаления. Сейчас достаточно рабочего ящика и перехода к нему из карточки дилера.
 
 Официальная инструкция: https://help.reg.ru/support/hosting/nastroyka-pochty-regru/nastroyka-pochty-i-pochtovykh-kliyentovv/kak-sozdat-korporativnuyu-pochtuu
+
+## Проверка публичного DNS — 29 сентября 2026
+
+Ответы Google Public DNS и Cloudflare DNS независимо вернули NS `josh.ns.cloudflare.com` и `nia.ns.cloudflare.com`. Запрос MX через Google Public DNS вернул NOERROR без MX-записей. A-запись: `158.160.171.31`; HTTP-ответ сайта содержит `server: ycalb` и заголовки шлюза Yandex Cloud. Это подтверждает текущие DNS-серверы, но не доказывает, что Cloudflare проксирует HTTP-трафик сайта или получает содержимое CRM.
+
+REG.RU остаётся регистратором по подтверждению владельца; для почтовых записей нужен доступ к фактически обслуживающей DNS-зоне. Не менять NS наугад: перед переносом потребовалось бы полностью перенести действующие записи сайта. Отсутствие MX — признак неподготовленной почтовой маршрутизации, а не самостоятельная проверка наличия ящика в кабинете провайдера.
+
+Проверяемые адреса:
+- https://dns.google/resolve?name=avtocena.com&type=NS
+- https://dns.google/resolve?name=avtocena.com&type=MX
+- https://cloudflare-dns.com/dns-query?name=avtocena.com&type=NS (заголовок Accept: application/dns-json)
