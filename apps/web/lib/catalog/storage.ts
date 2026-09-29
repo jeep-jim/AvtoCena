@@ -1,3 +1,4 @@
+import { matchesAuctionGrades } from "./auction-grade-filter";
 import {buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCountQuery,type BudgetCountIndex} from "./budget-count-index";
 import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
@@ -738,7 +739,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
   if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
   if (params.drive && lower(row.drive) !== lower(params.drive)) return false;
-  if (params.auctionGrade && lower(row.auctionGrade) !== lower(params.auctionGrade)) return false;
+  if (!matchesAuctionGrades(row.auctionGrade, params.auctionGrade)) return false;
   if (params.auctionDateFrom && (!row.auctionDate || String(row.auctionDate) < params.auctionDateFrom)) return false;
   if (params.auctionDateTo && (!row.auctionDate || String(row.auctionDate) > params.auctionDateTo)) return false;
   return true;

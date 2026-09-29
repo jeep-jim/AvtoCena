@@ -1,3 +1,4 @@
+import { matchesAuctionGrades } from "./auction-grade-filter";
 import { matchesCatalogModel } from "./model-filter";
 import type { VehicleOffer } from "./types";
 import { parseEngineCc } from "./engine-input";
@@ -42,7 +43,8 @@ export function filterGreenCorner(items:VehicleOffer[], params:GreenFilters) {
   if(!range(row.powerHp,number('powerFrom'),number('powerTo')))return false;
   if((number('budgetFrom')||number('budget')||number('budgetTo'))&&!range(greenCornerBudgetPrice(row,params.city),number('budgetFrom'),number('budget')||number('budgetTo')))return false;
   if(!matchesFuelFilter(row.fuel,params.fuel))return false;
-  for(const key of ['transmission','drive','bodyType','auctionGrade'] as const)if(params[key]&&lower(row[key])!==lower(params[key]))return false;
+  if(!matchesAuctionGrades(row.auctionGrade,params.auctionGrade))return false;
+  for(const key of ['transmission','drive','bodyType'] as const)if(params[key]&&lower(row[key])!==lower(params[key]))return false;
   return true;
  });
  const price=(row:VehicleOffer)=>greenCornerBudgetPrice(row,params.city);

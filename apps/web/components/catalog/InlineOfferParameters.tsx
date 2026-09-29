@@ -183,7 +183,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
  const yearOptions = publicProductionYears();
  return <div className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
-   <PriceTrend panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
+   <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
    {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}
   </div> : !showCalculation || keepSellerPrice ? price : <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4" role="status">{pending?"Пересчитываем…":error||"Заполните параметры для расчёта"}</div>}
   {!result && (keepSellerPrice || (!dirty && autoCalculate)) ? <p role="status" className="mt-3 text-xs text-[var(--ac-muted)]" data-parameter-calculation-status>{pending?"Рассчитываем стоимость под ключ…":error||"Для расчёта под ключ заполните характеристики автомобиля."}</p> : null}

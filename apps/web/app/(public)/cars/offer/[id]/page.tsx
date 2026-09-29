@@ -439,7 +439,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             ? <AuctionResultPrice offer={{...o,auctionGrade:undefined,japanExportRestriction:undefined}} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
             : preliminaryPricing
             ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />
-            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}>
+            : <PriceTrend hideAuctionGrade offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}>
           {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
