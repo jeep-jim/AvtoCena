@@ -281,7 +281,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     permanentRedirect(canonicalPath + (preserved.size ? `?${preserved}` : ''));
   }
   const [savedCalculation,clientScenario,currentUser] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser()]);
-  const directScenario = clientScenario || (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null);
+  const directScenario = clientScenario ? {draft:clientScenario.draft,calculation:clientScenario.calculation} : (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null);
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation
     ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
     : undefined;

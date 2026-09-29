@@ -142,7 +142,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
    setSavedVersion(data.version);setSavedAt(data.savedAt);setSavedByName(data.savedByName || "Сотрудник");setSavedDraft(completePowerUnitDraft(data.draft));
    if(version===revision.current){setResult(data.calculation);setUserEdited(false);}
    invalidateSavedCalculationPreviews();
-   setSaveMessage("Сохранено. Можно отправить клиенту ссылку.");
+   setSaveMessage("Сохранено. Отправьте ссылку кнопкой «Поделиться» или сохраните PDF.");
   }catch(error){setSaveMessage(error instanceof Error?error.message:"Не удалось сохранить");}
   finally{setSaving(false);}
  }
