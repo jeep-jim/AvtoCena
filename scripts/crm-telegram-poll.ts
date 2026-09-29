@@ -1,3 +1,4 @@
+import {MINI_APP_URL} from "../apps/web/lib/telegram-miniapp";
 import { flushCrmPush } from "../apps/web/lib/crm-push";
 import { pathToFileURL } from "node:url";
 import { handlePrivateLeadStart } from "../apps/web/lib/crm-lead-start";
@@ -6,6 +7,7 @@ import {pendingCrmEvents} from "../apps/web/lib/crm-incoming-events";
 import { handleCrmBotUpdate, sendCustomerWelcome } from "../apps/web/lib/crm-bot";
 import { flushCrmNotifications } from "../apps/web/lib/crm-notifications";
 
+let profileAttempted = false;
 const token = (process.env.TELEGRAM_BOT_TOKEN || "").trim();
 async function telegram(method: string, body: unknown = {}) {
   const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
@@ -13,7 +15,10 @@ async function telegram(method: string, body: unknown = {}) {
     body: JSON.stringify(body), signal: AbortSignal.timeout(25_000),
   });
   const result = await response.json();
-  if (!response.ok || !result?.ok) throw Error("telegram_failed");
+  if (!response.ok || !result?.ok) {
+    console.error(JSON.stringify({telegramMethod:method,status:response.status,errorCode:result?.error_code,retryAfter:result?.parameters?.retry_after}));
+    throw Error("telegram_failed");
+  }
   return result.result;
 }
 export async function runPolling() {
@@ -33,18 +38,25 @@ export async function runPolling() {
     await enablePolling();
     await telegram("deleteWebhook", { drop_pending_updates: false });
   }
-  if (operation === "enable-polling" || process.env.ACCEPTANCE_RUN === "1") {
-    await telegram("setMyCommands", { commands: [
-      { command: "catalog", description: "Перейти в каталог" },
-      { command: "request", description: "Оставить заявку" },
-    ] });
-    await telegram("setMyDescription", { description: "АвтоЦена — выбор автомобилей из-за рубежа и расчёт стоимости. Посмотрите каталог или оставьте заявку на сайте — менеджер свяжется с вами." });
-    await telegram("setMyShortDescription", { short_description: "Каталог автомобилей и заявки на расчёт на avtocena.com." });
-    await telegram("setChatMenuButton", { menu_button: { type: "commands" } });
-    console.log("Public bot welcome and two-command menu configured");
+  if (!profileAttempted && (operation === "enable-polling" || process.env.ACCEPTANCE_RUN === "1")) {
+    // Profile updates are optional setup, never a prerequisite for consuming updates.
+    // The supervised loop must not rewrite them every two seconds.
+    profileAttempted = true;
+    try {
+      await telegram("deleteMyCommands");
+      await telegram("setChatMenuButton", {menu_button:{type:"web_app",text:"АвтоЦена",web_app:{url:MINI_APP_URL}}});
+      await telegram("setMyDescription", {description:"АвтоЦена — каталог автомобилей из-за рубежа. Откройте приложение, выберите автомобиль и рассчитайте стоимость."});
+      await telegram("setMyShortDescription", {short_description:"Автомобили из-за рубежа: каталог, фильтры и расчёт стоимости."});
+      const menu = await telegram("getChatMenuButton");
+      console.log(JSON.stringify({publicMiniAppMenu:menu?.type,miniAppUrl:menu?.web_app?.url}));
+    } catch { console.error("Bot profile setup incomplete; update processing continues"); }
   }
   const info = await telegram("getWebhookInfo");
   const eventDriven = await eventDrivenEnabled();
+  if (process.env.ACCEPTANCE_RUN === "1" && process.env.CRM_SERVICE_MODE !== "1") {
+    const target = info?.url ? new URL(info.url) : null;
+    console.log(JSON.stringify({eventDriven,webhookHost:target?.hostname||null,webhookPath:target?.pathname||null,pending:info?.pending_update_count||0,lastErrorAt:info?.last_error_date||null,lastErrorCategory:/timeout|timed out/i.test(info?.last_error_message||"")?"timeout":info?.last_error_message?"other":"none"}));
+  }
   if (info?.url && !eventDriven) throw Error("webhook_still_active");
   process.env.CRM_BOT_POLL_WORKER = "1";
   const result = await pollBatch(

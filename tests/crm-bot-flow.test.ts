@@ -92,9 +92,14 @@ test("customer request, private admin notification, reply confirmation, retry an
     ]);
     await handleCrmBotUpdate(message(101, "/admin"), "token");
     assert.match(sent.at(-1).text, /Заявки команды находятся в закрытой группе/);
+    const beforeWelcome = sent.length;
+    await handleCrmBotUpdate(message(101, "/start"), "token");
+    assert.equal(sent.length, beforeWelcome + 1);
+    assert.equal(sent.at(-1).reply_markup.inline_keyboard.flat().length, 1);
+    assert.match(sent.at(-1).text, /Добро пожаловать/);
     for (const input of ["/start chat_missing-car", "/start offer_missing-car", "/request", "https://avtocena.com/cars/offer/missing-car"]) {
       await handleCrmBotUpdate(message(101, input), "token");
-      assert.match(sent.at(-1).text, /через форму на сайте/);
+      assert.match(sent.at(-1).text, input.startsWith("https:") ? /через форму на сайте/ : /Открыть АвтоЦену/);
     }
     assert.ok(menuButtons.some(menu=>menu.chat_id===101 && menu.menu_button?.web_app?.url.startsWith("https://avtocena.com/mini")));
     assert.ok(sent.some(message=>message.reply_markup?.inline_keyboard?.flat().some((button:any)=>button.web_app?.url.startsWith("https://avtocena.com/mini"))));

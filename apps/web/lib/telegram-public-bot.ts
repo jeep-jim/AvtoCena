@@ -194,12 +194,7 @@ async function ensureBotProfile(token: string) {
   if (Date.now() - botProfileConfiguredAt < MENU_PROFILE_TTL_MS) return;
   botProfileConfiguredAt = Date.now();
   await Promise.allSettled([
-    telegramCall(token, "setMyCommands", {
-      commands: [
-        { command: "catalog", description: "Перейти в каталог" },
-        { command: "request", description: "Оставить заявку" },
-      ],
-    }),
+    telegramCall(token, "deleteMyCommands", {}),
     telegramCall(token, "setMyShortDescription", {
       short_description: "Подбор и расчёт автомобилей под ключ по вашему бюджету.",
     }),

@@ -42,12 +42,10 @@ const adminKeyboard = [
 ];
 const customerKeyboard = (id: string) => [
   [miniAppCatalogButton(id)],
-  [{ text: "Оставить заявку", url: `${SITE}/request` }],
 ];
 export async function sendCustomerWelcome(token: string, id: string) {
   if(Number(id)>0) await fetch(`https://api.telegram.org/bot${token}/setChatMenuButton`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({chat_id:Number(id),menu_button:{type:"web_app",text:"АвтоЦена",web_app:{url:MINI_APP_URL}}}),signal:AbortSignal.timeout(3000)}).catch(()=>null);
-  await telegramSend(token, id, "Добро пожаловать в АвтоЦену! 🚗\n\nМы помогаем выбрать автомобиль из-за рубежа и рассчитать его стоимость. В мини-приложении можно посмотреть автомобили, рассчитать стоимость и оставить заявку менеджеру.");
-  await telegramSend(token, id, "Обращения принимаем через форму на сайте, доступную и в мини-приложении. Выберите автомобиль в каталоге или оставьте заявку на подбор. Укажите удобный способ связи — менеджер свяжется с вами.", customerKeyboard(id));
+  await telegramSend(token, id, "Добро пожаловать в АвтоЦену! 🚗\n\nВыбирайте автомобили, пользуйтесь фильтрами и рассчитывайте стоимость прямо в Telegram.\n\nНажмите «Открыть АвтоЦену» 👇", customerKeyboard(id));
 }
 async function saveDialog(id: string, value: Dialog) {
   await mutateDataJson<Dialog>(dialogPath(id), {}, () => ({
