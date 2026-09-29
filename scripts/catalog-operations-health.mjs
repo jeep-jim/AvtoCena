@@ -3,11 +3,13 @@ import {readDataJson} from '../apps/web/lib/data.ts';
 const [manifest,maintenance,japan]=await Promise.all([
  readDataJson('catalog/manifest.json',null),readDataJson('catalog/storage-maintenance.json',null),readDataJson('catalog/collector-state/proauctions/current.json',null)
 ]);
+const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
+const japanMaxAgeDays=policy.japan.refreshIntervalDays+1;
 const problems=[];const ageDays=value=>(Date.now()-Date.parse(value||''))/86400000;
 if(!maintenance?.ok || !Number.isFinite(ageDays(maintenance?.checkedAt)) || ageDays(maintenance.checkedAt)>2)problems.push('storage_maintenance_missing_failed_or_older_than_48h');
 if(!japan)problems.push('japan_durable_collection_not_started');
 else{
- if(!Number.isFinite(ageDays(japan.savedAt)) || ageDays(japan.savedAt)>16)problems.push('japan_checkpoint_stale');
+ if(!Number.isFinite(ageDays(japan.savedAt)) || ageDays(japan.savedAt)>japanMaxAgeDays)problems.push('japan_checkpoint_stale');
  if(!japan.complete && ageDays(japan.savedAt)>2)problems.push('japan_continuation_stalled');
  if(!japan.published && ageDays(japan.startedAt)>2)problems.push('japan_publication_pending_over_48h');
  if(['source_access_refused','transport_error_checkpointed','repeated_listing_page'].includes(japan.stopReason))problems.push(`japan_${japan.stopReason}`);
@@ -23,9 +25,9 @@ for(const market of ['japan','china','korea','europe','georgia','uae','green']){
  if(!['japan','green'].includes(market)&&journal?.powerMix?.targetMet!==true)assortmentProblems.push(`${market}_80_percent_low_power_not_confirmed`);
  const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
  const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
- markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
- if(!Number.isFinite(ageDays(publishedAt)) || ageDays(publishedAt)>(market==='japan'?16:4))problems.push(`${market}_publication_missing_or_stale`);
- if(!record?.count || !Number.isFinite(ageDays(observedAt)) || ageDays(observedAt)>(market==='japan'?16:4))problems.push(`${market}_collection_missing_or_stale`);
+ markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,lastAttemptAt:journal?.lastAttemptAt||null,lastCollectionAttempt:journal?.lastCollectionAttempt||null,publicationStatus:journal?.publicationStatus||null,publicationError:journal?.publicationError||null,sources:(journal?.sources||[]).map(s=>({sourceId:s.sourceId,stopReason:s.stopReason,initialCursor:s.initialCursor||null,cursor:s.cursor||null,observations:s.observations,pages:s.pages,errors:s.errors})),powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
+ if(!Number.isFinite(ageDays(publishedAt)) || ageDays(publishedAt)>(market==='japan'?japanMaxAgeDays:4))problems.push(`${market}_publication_missing_or_stale`);
+ if(!record?.count || !Number.isFinite(ageDays(observedAt)) || ageDays(observedAt)>(market==='japan'?japanMaxAgeDays:4))problems.push(`${market}_collection_missing_or_stale`);
 }
 const report={checkedAt:new Date().toISOString(),ok:!problems.length,readyForAdvertising:!problems.length&&!assortmentProblems.length,problems,assortmentProblems,markets,maintenanceAt:maintenance?.checkedAt,storageBytes:maintenance?.afterBytes,japan: japan?{savedAt:japan.savedAt,publishedAt:japan.publishedAt,complete:japan.complete,details:japan.details}:null,note:'Publication timestamps do not prove fresh source observations; full source-data audits remain separate.'};
 await fs.writeFile('catalog-operations-health.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(problems.length)process.exitCode=1;
