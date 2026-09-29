@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AuctionSheetHelp } from "./AuctionSheetHelp";
 import styles from "./VehicleGallery.module.css";
+import { AuctionSheetAi } from "./AuctionSheetAi";
 
 function dominantWheelDelta(event: WheelEvent) {
   return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
@@ -196,6 +197,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
       <div className={isSheet ? styles.sheetLayout : "flex max-h-[94dvh] w-full max-w-5xl flex-col items-center"} onClick={(event) => event.stopPropagation()}>
         {isSheet ? <aside className={styles.side}><AuctionSheetHelp kind="grades" /></aside> : null}
         <div className={styles.center}>
+        {isSheet ? <AuctionSheetAi key={cleanImages[activeIndex]} imageUrl={cleanImages[activeIndex]} title={title} /> : null}
         <button
           type="button"
           onClick={() => setFullscreen(false)}

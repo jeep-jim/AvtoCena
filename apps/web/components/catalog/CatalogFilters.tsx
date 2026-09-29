@@ -15,7 +15,7 @@ import { catalogFilterOptions } from "@/lib/catalog/filter-options";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
 import { auctionGradeColorClass } from "@/lib/catalog/auction-grade-color";
-import { auctionGradeLabel } from "@/lib/catalog/japan-export-restriction";
+import { auctionGradeSelections } from "@/lib/catalog/auction-grade-filter";
 
 type Option = { value: string; label: string };
 type Facets = { makes: string[]; models: Array<{ make: string; model: string; aliases?: string[] }>; markets?: string[]; bodyTypes?: string[]; fuels?: string[]; transmissions?: string[]; drives?: string[] };
@@ -96,6 +96,23 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
 
 const auctionGrades: Option[] = [{ value: "", label: "Любая оценка" }, ...["S", "6", "5.5", "5", "4.5", "4", "3.5", "3", "2", "1", "0", "R", "RA", "RB", "***", "**", "*", "A", "B", "C", "D", "E", "F", "0.5", "1.5", "2.5", "6.5", "7", "8", "9", "10"].map(value => ({ value, label: `Оценка ${value}` }))];
 
+function AuctionGradeSelect({value, onChange}: {value: string; onChange: (value: string) => void}) {
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  useDropdown(open, root, () => setOpen(false));
+  const selected = auctionGradeSelections(value);
+  return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"}`}>
+    <input type="hidden" name="auctionGrade" value={value} />
+    <button type="button" aria-label="Аукционные оценки" aria-expanded={open} onClick={() => setOpen(current => !current)} className={`${selected.length === 1 ? `ac-japan-badge ${auctionGradeColorClass(selected[0])}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`}><span className="truncate">{selected.length ? `${selected.length === 1 ? "Оценка" : "Оценки"} ${selected.join(", ")}` : "Любая оценка"}</span><Chevron open={open} /></button>
+    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
+      <p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько</p>
+      <button type="button" onClick={() => onChange("")} className="ac-filter-option min-h-10 w-full rounded-xl px-3 py-2 text-left text-sm font-bold">Любая оценка{!selected.length ? " ✓" : ""}</button>
+      <div className="ac-hide-scrollbar max-h-64 overflow-y-auto" role="group" aria-label="Выберите оценки">{auctionGrades.filter(item => item.value).map(item => <label key={item.value} className={`ac-filter-option flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-3 py-2 text-sm font-bold ${selected.includes(item.value) ? "is-active" : ""}`}><input type="checkbox" className="h-4 w-4 accent-red-500" checked={selected.includes(item.value)} onChange={() => onChange((selected.includes(item.value) ? selected.filter(grade => grade !== item.value) : [...selected, item.value]).join("|"))} /><span>{item.label}</span></label>)}</div>
+      <button type="button" onClick={() => setOpen(false)} className="ac-filter-option min-h-11 w-full rounded-xl px-3 py-2 text-sm font-bold">Готово</button>
+    </div> : null}
+  </div>;
+}
+
 const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
 const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "electrified", label: "Электромобили и гибриды" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
@@ -110,7 +127,7 @@ function draftFromInitial(initial: Record<string, string>): FilterDraft {
     make: initial.make || "", model: initial.model || "", market: initial.market || "", bodyType: initial.bodyType || "", transmission: initial.transmission || "",
     yearFrom: initial.yearFrom || "", yearTo: initial.yearTo || "", budgetFrom: initial.budgetFrom || "", budget: (initial.budget || initial.budgetTo) || "",
     mileageFrom: initial.mileageFrom || "", mileageTo: initial.mileageTo || "", engineFrom: initial.engineFrom || "", engineTo: initial.engineTo || "",
-    auctionGrade: initial.market === "japan" ? auctionGradeLabel(initial.auctionGrade) || "" : "",
+    auctionGrade: initial.market === "japan" ? auctionGradeSelections(initial.auctionGrade).join("|") : "",
     fuel: initial.fuel || "", drive: initial.drive || "", powerTo: initial.powerTo || "",
   };
 }
@@ -263,7 +280,7 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
-    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="auctionGrade" value={draft.auctionGrade} placeholder="Аукционная оценка" options={auctionGrades} onChange={(value) => setField("auctionGrade", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="stock" value={draft.stock || "auction"} placeholder="Раздел Японии" options={[{value:"all",label:"Все"},{value:"auction",label:"Аукционы"},{value:"green",label:"В наличии"}]} onChange={value=>{setField("stock",value);if(value==="green")setField("auctionGrade","");}} /> : null}</div>
+    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <AuctionGradeSelect value={draft.auctionGrade} onChange={(value) => setField("auctionGrade", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="stock" value={draft.stock || "auction"} placeholder="Раздел Японии" options={[{value:"all",label:"Все"},{value:"auction",label:"Аукционы"},{value:"green",label:"В наличии"}]} onChange={value=>{setField("stock",value);if(value==="green")setField("auctionGrade","");}} /> : null}</div>
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
@@ -383,7 +400,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
-    if (draft.market === "japan" && draft.auctionGrade) rows.push({key: "auctionGrade", label: `Оценка ${draft.auctionGrade}`, grade: draft.auctionGrade});
+    if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     if (draft.model) rows.push({ key: "model", label: draft.model });
     if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
@@ -400,6 +417,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [draft]);
 
   const removeFilter = (key: string) => {
+    if (key.startsWith("auctionGrade:")) return setDraft(current => ({...current, auctionGrade: auctionGradeSelections(current.auctionGrade).filter(grade => grade !== key.slice(13)).join("|")}));
     if (key.startsWith("make:")) {
       const removed = key.slice(5);
       return setDraft((current) => ({ ...current, make: joinMakeValues(splitMakeValues(current.make).filter((make) => make !== removed)), model: "" }));
