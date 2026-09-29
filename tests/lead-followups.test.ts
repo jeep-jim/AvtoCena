@@ -13,7 +13,7 @@ test('same-browser offer followups are atomic and isolated from generic requests
   const cwd=process.cwd(), driver=process.env.JSON_STORAGE_DRIVER;
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'lead-followups-'));
   fs.mkdirSync(path.join(temp,'data')); process.chdir(temp); process.env.JSON_STORAGE_DRIVER='local'; resetJsonStorageForTests();
-  const base={requestMode:'offer',source:'catalog_offer_request',offerId:'fixture-car',submissionThreadToken:'12345678-1234-4321-aaaa-123456789abc',phone:'+79999999999',name:'Test',contactPreference:'call',personalDataConsent:true,comment:'Первое обращение'};
+  const base={requestMode:'offer',source:'catalog_offer_request',offerId:'fixture-car',submissionThreadToken:'12345678-1234-4321-aaaa-123456789abc',phone:'+79999999999',name:'Test',contactPreference:'call',personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-29",comment:'Первое обращение'};
   const submit=async (body:any)=>{const response=await createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...base,...body})})); assert.equal(response.status,200); return response.json();};
   try {
     const first=await submit({operationId:'one'});
@@ -47,7 +47,7 @@ test('messenger telephone and username contacts are explicitly labelled without 
   for(const messenger of ['telegram','max']) {
     const phone={contactPreference:'message',messenger,messengerContactKind:'phone',phone:'+79999999999',[messenger]:'+79999999999'};
     const c=leadContact(phone); assert.equal(c.channel,messenger); assert.match(c.text,/телефон аккаунта/); assert.ok(!c.value.startsWith('@')); assert.equal(c.href,messenger==='telegram'?'https://t.me/+79999999999':'');
-    const text=leadNotice({id:'test',...phone}); assert.ok(text.includes(messenger==='max'?'MAX':'Telegram')); assert.ok(!text.includes('Телефон · звонок'));
+    const text=leadNotice({id:'test',...phone}); assert.ok(!text.includes('+79999999999')); assert.ok(!text.includes('Телефон · звонок'));
     const username=leadContact({...phone,phone:'',messengerContactKind:'username',[messenger]:'@test_user'}); assert.equal(username.value,'@test_user'); assert.match(username.text,/никнейм/);
   }
   assert.equal(leadContact({contactPreference:'call',phone:'+79999999999'}).href,'tel:+79999999999');
@@ -67,7 +67,8 @@ test('followups state one contact action instead of internal field transitions',
   const original = structuredClone(entry);
   assert.equal(followupText(entry), 'Свяжитесь вечером\nНаписать в Telegram: +79999999999 (телефон аккаунта)');
   const notice = leadNotice({id: 'fixture', name: 'Клиент'}, entry);
-  assert.equal(notice.split('Написать в Telegram:').length - 1, 1);
+  assert.equal(notice.split('Написать в Telegram:').length - 1, 0);
+  assert.doesNotMatch(notice,/Свяжитесь вечером|79999999999/);
   assert.doesNotMatch(notice, /Способ связи|Мессенджер:|Тип контакта|не указан →/);
   assert.equal(followupText({...entry, changes: {}}), 'Свяжитесь вечером');
   assert.equal(followupText({...entry, comment: '', messenger: 'max', max: '@test_user', phone: '', messengerContactKind: 'username'}), 'Написать в MAX: @test_user (никнейм)');

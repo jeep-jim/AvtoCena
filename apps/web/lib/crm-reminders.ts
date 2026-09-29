@@ -18,7 +18,7 @@ export async function readReminders(user:AuthUser){
  const files:CrmReminder[][]=[];for(let i=0;i<owners.length;i+=4)files.push(...await Promise.all(owners.slice(i,i+4).map(id=>readDataJson<CrmReminder[]>(key(id),[]))));
  const rows=files.flat();if(!rows.length)return [];
  const [clients,leads]=await Promise.all([readChunkedDataJson<any>('clients/clients.json',[]),readChunkedDataJson<any>('leads/leads.json',[])]);
- return rows.map(row=>{const entity=(row.entityType==='client'?clients:leads).find(x=>x.id===row.entityId);return {...row,ownerName:users.find(u=>u.id===row.ownerId)?.displayName||row.ownerName||'Сотрудник',canOpen:Boolean(entity&&canSeeLead(user,entity)),notify:row.ownerId===user.id||entity?.assignedManagerId===user.id};}).sort((a,b)=>a.dueAt.localeCompare(b.dueAt));
+ return rows.filter(row=>(row.entityType==='client'?clients:leads).some(x=>x.id===row.entityId)).map(row=>{const entity=(row.entityType==='client'?clients:leads).find(x=>x.id===row.entityId);return {...row,ownerName:users.find(u=>u.id===row.ownerId)?.displayName||row.ownerName||'Сотрудник',canOpen:Boolean(entity&&canSeeLead(user,entity)),notify:row.ownerId===user.id||entity?.assignedManagerId===user.id};}).sort((a,b)=>a.dueAt.localeCompare(b.dueAt));
 }
 export async function createReminder(user:AuthUser,input:any){
  const entity=await reminderEntity(user,input.entityType,String(input.entityId||''));const text=String(input.text||'').trim().slice(0,1000),date=new Date(input.dueAt);

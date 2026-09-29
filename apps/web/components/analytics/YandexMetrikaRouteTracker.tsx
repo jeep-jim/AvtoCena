@@ -1,5 +1,6 @@
 "use client";
 
+import {analyticsAllowed} from "@/lib/privacy-consent";
 import {rememberYandexClick} from "@/lib/metrika-client";
 import { Suspense, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -20,8 +21,9 @@ function RouteTracker() {
   const query = searchParams.toString();
 
   useEffect(() => {
+    if(!analyticsAllowed()||pathname.startsWith("/privacy/request"))return;
     rememberYandexClick();
-    const currentUrl = `${window.location.origin}${pathname}${query ? `?${query}` : ""}`;
+    const currentUrl = `${window.location.origin}${pathname}`;
 
     if (!initialized.current) {
       initialized.current = true;

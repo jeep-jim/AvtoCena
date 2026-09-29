@@ -1,3 +1,5 @@
+import {isCalculationOriginAllowed} from "./catalog/calculation-request-origin";
+import {LEAD_CONSENT_VERSION,LEAD_CONSENT_TEXT,PRIVACY_VERSION} from "./privacy-documents";
 import {hasCrmPermission} from "./crm-permissions";
 import {offerPath} from "./catalog/offer-url";
 import { quoteCityDelivery, deliveryDescription } from "./catalog/city-delivery";
@@ -152,6 +154,7 @@ export async function createLead(
   currentUser: import("./auth").AuthUser | null = null,
   trustedTelegramId = "",
 ) {
+  if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const contentType = request.headers.get("content-type") || "";
   const body = contentType.includes("application/x-www-form-urlencoded")
     ? (Object.fromEntries((await request.formData()).entries()) as Record<
@@ -202,6 +205,8 @@ export async function createLead(
       { status: 400 },
     );
   }
+
+  if(!crmUser && personalDataConsentVersion!==LEAD_CONSENT_VERSION)return NextResponse.json({ok:false,error:"Обновите страницу и подтвердите актуальное согласие на обработку заявки."},{status:400});
 
   if (contactPreference === "call" && !phone) {
     return NextResponse.json(
@@ -289,7 +294,7 @@ export async function createLead(
     .slice(0, 40);
   let clientId = operationId ? `client_${operationId}` : makeId("client");
   let leadId = operationId ? `lead_${operationId}` : makeId("lead");
-  const attribution = normalizeAttribution(body.attribution, body);
+  const attribution = body.analyticsConsent===true ? normalizeAttribution(body.attribution, body) : normalizeAttribution({}, {});
   const source = clean(body.source, 160) || (crmUser ? "manual_crm" : "site");
   const market = clean(body.market, 120) || primaryOffer?.market || "";
   const businessSettingsSnapshot = market
@@ -335,15 +340,12 @@ export async function createLead(
     : null;
   // Website forms collect a contact for the manager; never redirect to a bot.
 
-  const consentSnapshot =
-    personalDataConsentVersion || personalDataConsentText
-      ? {
-          personalDataConsent,
-          personalDataConsentVersion,
-          personalDataConsentText,
-          personalDataConsentAt: personalDataConsent ? createdAt : "",
-        }
-      : {};
+  const consentSnapshot = !crmUser ? {
+    personalDataConsent:true,personalDataConsentVersion:LEAD_CONSENT_VERSION,
+    personalDataConsentText:LEAD_CONSENT_TEXT,personalDataConsentAt:createdAt,
+    privacyPolicyVersion:PRIVACY_VERSION,personalDataConsentUrl:'https://avtocena.com/consent',
+    analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,
+  } : {};
 
   const createdByManagerId = crmUser?.id || null;
   const requestedManagerId =
@@ -501,7 +503,7 @@ export async function createLead(
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
       const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, ...consentSnapshot};
-      return {...stored, ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,deliveryQuote:quoteCityDelivery(city,item.market||"unknown")}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+      return {...stored, ...(!crmUser ? {analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,...(body.analyticsConsent!==true?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,deliveryQuote:quoteCityDelivery(city,item.market||"unknown")}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
   if (threadKey) {

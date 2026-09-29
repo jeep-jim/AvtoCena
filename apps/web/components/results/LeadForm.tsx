@@ -1,4 +1,5 @@
 "use client";
+import {ConsentCheckbox} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
@@ -38,6 +39,7 @@ function money(value: number) {
 }
 
 export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFormProps) {
+  const [consent,setConsent]=useState(false);
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -110,6 +112,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
       return;
     }
 
+    if(!consent){setError("Подтвердите согласие на обработку заявки.");return;}
     setLoading(true);
 
     try {
@@ -134,7 +137,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
           year: car.year,
           budgetRub,
           totalRub: car.totalRub,
-          source: "results",
+          source: "results", personalDataConsent:consent,
           attribution: currentAttribution,
           searchRequest: searchRequest || { budgetRub },
           offerId: (car as any).offerId || car.id,
@@ -234,6 +237,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                       />
                     </div>
 
+                    <ConsentCheckbox checked={consent} onChange={setConsent}/>
                     {error && (
                       <div className="mt-3 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">
                         {error}

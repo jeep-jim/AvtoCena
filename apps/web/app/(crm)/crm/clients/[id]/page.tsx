@@ -1,3 +1,4 @@
+import {DeleteCrmRecord} from "@/components/crm/DeleteCrmRecord";
 import {TeamDiscussion} from "@/components/crm/TeamDiscussion";
 import {discussionMessages,discussionLabel} from "@/lib/crm-discussion";
 import {hasCrmPermission} from "@/lib/crm-permissions";
@@ -23,6 +24,7 @@ export default async function ClientPage({params}: {params: Promise<{id: string}
   const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).filter(lead => lead.clientId === id && canSeeLead(user, lead));
   return <CrmShell activeHref="/crm/clients" title={client.fio || "Карточка клиента"} subtitle="Контакты и комментарий клиента.">
     <Link href="/crm/clients" className="mb-4 inline-block font-bold text-red-400">← Все клиенты</Link>
+    {hasCrmPermission(user,"deleteRecords")?<DeleteCrmRecord kind="client" id={client.id}/>:null}
     <ManualClientOrigin client={client} managers={managers}/>
     <ReminderButton entityType="client" entityId={client.id}/>
     <div className="crm-client-detail-layout">

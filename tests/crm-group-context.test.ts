@@ -1,9 +1,5 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import {leadNotice} from "../apps/web/lib/crm-notifications";
-test("group notice retains all five selected vehicle links but no internal conversation", () => {
-  const selectedOffers = Array.from({length:5},(_,i)=>({id:`car${i}`,title:`Vehicle ${i}`}));
-  const text = leadNotice({id:"lead",selectedOffers,internalNote:"HIDDEN",messages:[{text:"HIDDEN"}]});
-  for(const offer of selectedOffers) assert.ok(text.includes(`/cars/offer/${offer.id}`));
-  assert.doesNotMatch(text,/HIDDEN/);
+import test from 'node:test';import assert from 'node:assert/strict';import {leadNotice} from '../apps/web/lib/crm-notifications';
+test('Telegram notices contain only ID and CRM link, never customer fields or notes',()=>{
+ const text=leadNotice({id:'lead',name:'SECRET_NAME',phone:'SECRET_PHONE',city:'SECRET_CITY',comment:'SECRET_TEXT',selectedOffers:[{id:'car',title:'SECRET_CAR'}],internalNote:'SECRET_NOTE'},{comment:'SECRET_FOLLOWUP'});
+ assert.match(text,/crm\/leads\?id=lead/);assert.doesNotMatch(text,/SECRET_|\/cars\/offer\//);
 });

@@ -1,0 +1,3 @@
+'use client';
+export function ConsentLinks(){return <span>Даю <a href="/consent" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">согласие на обработку персональных данных</a> для ответа на заявку. <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Политика обработки данных</a>.</span>;}
+export function ConsentCheckbox({checked,onChange}:{checked:boolean;onChange:(value:boolean)=>void}){return <label className="my-3 flex items-start gap-3 text-xs leading-5 text-[var(--ac-muted)]"><input type="checkbox" required checked={checked} onChange={e=>onChange(e.target.checked)} className="mt-1 h-5 w-5 shrink-0 accent-red-500"/><ConsentLinks/></label>;}

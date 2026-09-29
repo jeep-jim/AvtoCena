@@ -1,4 +1,6 @@
 "use client";
+import {analyticsAllowed} from "./privacy-consent";
+import {LEAD_CONSENT_VERSION} from "./privacy-documents";
 import {metrikaAttribution,METRIKA_COUNTER} from "./metrika-client";
 
 type CaptchaApi = {
@@ -57,13 +59,16 @@ async function challenge(sitekey: string): Promise<string> {
 export async function leadFetch(url: string, init: RequestInit): Promise<Response> {
   const payload = JSON.parse(String(init.body || "{}"));
   payload.operationId ||= crypto.randomUUID();
-  payload.attribution = {...payload.attribution,...await metrikaAttribution()};
+  if(payload.personalDataConsent===true)payload.personalDataConsentVersion ||= LEAD_CONSENT_VERSION;
+  const privacyRequest=url==="/api/privacy-request";
+  payload.analyticsConsent=!privacyRequest&&analyticsAllowed();
+  payload.attribution = privacyRequest?{}:{...payload.attribution,...await metrikaAttribution()};
   const send = async () => {
     const response=await fetch(url, {...init, body:JSON.stringify(payload)});
     if(response.ok) {
       try {
         const key=`ac_metrika_lead_${payload.operationId}`;
-        if(!sessionStorage.getItem(key)){window.ym?.(METRIKA_COUNTER,'reachGoal','lead_submitted');sessionStorage.setItem(key,'1');}
+        if(!privacyRequest&&analyticsAllowed()&&!sessionStorage.getItem(key)){window.ym?.(METRIKA_COUNTER,'reachGoal','lead_submitted');sessionStorage.setItem(key,'1');}
       } catch { /* Analytics must never interrupt a saved application. */ }
     }
     return response;

@@ -23,7 +23,8 @@ test("group relay needs no staff binding, preserves leases, excludes internal no
     const claims = [...first, ...second];
     assert.equal(claims.length, 1, JSON.stringify(await readChunkedDataJson<any>("telegram/crm-outbox.json", [])));
     assert.deepEqual(new Set(claims.map(c => c.chatId)), new Set([groupTarget.chatId]));
-    assert.match(claims[0].text, /PRIVATE_PHONE/);
+    assert.match(claims[0].text, /crm\/leads\?id=lead_test/);
+    assert.doesNotMatch(claims[0].text, /PRIVATE_PHONE|PRIVATE_NAME|CUSTOMER_COMMENT/);
     assert.doesNotMatch(JSON.stringify(claims), /PRIVATE_NOTE/);
     assert.equal((await claimCrmNotices()).length, 0);
     const owner = claims[0];

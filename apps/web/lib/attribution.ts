@@ -1,3 +1,4 @@
+import {analyticsAllowed} from "./privacy-consent";
 export const ATTRIBUTION_STORAGE_KEY = "avtocena_attribution";
 const ATTRIBUTION_SESSION_CLICK_KEY = "avtocena_session_click_id";
 
@@ -75,7 +76,7 @@ export function normalizeAttribution(value: Partial<AttributionData> | null | un
 }
 
 export function readStoredAttribution(): AttributionData {
-  if (typeof window === "undefined") return emptyAttribution();
+  if (typeof window === "undefined" || !analyticsAllowed()) return emptyAttribution();
 
   try {
     return normalizeAttribution(JSON.parse(window.localStorage.getItem(ATTRIBUTION_STORAGE_KEY) || "{}"));
@@ -87,6 +88,7 @@ export function readStoredAttribution(): AttributionData {
 export function captureAttributionFromBrowser(seed?: Partial<AttributionData>): AttributionData {
   if (typeof window === "undefined") return normalizeAttribution(seed);
 
+  if(!analyticsAllowed())return emptyAttribution();
   const now = new Date().toISOString();
   const params = new URLSearchParams(window.location.search);
   const stored = readStoredAttribution();
@@ -189,7 +191,7 @@ export async function trackAttributionEvent(
   attribution: AttributionData,
   payload: Record<string, unknown> = {}
 ) {
-  if (typeof window === "undefined" || !attribution.clickId) return;
+  if (typeof window === "undefined" || !analyticsAllowed() || !attribution.clickId) return;
 
   const calculationKey = clean(payload.calculationKey);
   const dedupeKey = `avtocena_event_${eventType}_${attribution.clickId}_${calculationKey}`;

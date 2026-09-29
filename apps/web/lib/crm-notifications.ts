@@ -46,24 +46,10 @@ export function followupText(entry: any, includeContact = true) {
   });
   return [entry.comment, includeContact && contactChanged ? leadContactAction(entry) : "", ...details].filter(Boolean).join("\n") || (includeContact ? "Повторное обращение через форму" : "");
 }
-export function leadNotice(lead: any, entry?: any) {
-  return [
-    `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} №${String(lead.id).slice(0, 100)} · АвтоЦена`,
-    lead.name || lead.telegramDisplayName || "Клиент",
-    entry ? leadContactAction(entry) : leadContact(lead.initialContact || lead).text,
-    lead.car || lead.offerTitle || "Подбор автомобиля",
-    ...(Array.isArray(lead.selectedOffers) ? lead.selectedOffers.slice(0, 5).map((offer: any, index: number) => `${index + 1}. ${String(offer.title || "Автомобиль").slice(0, 180)}\nhttps://avtocena.com/cars/offer/${encodeURIComponent(String(offer.id || offer.offerId || ""))}`) : []),
-    !lead.selectedOffers?.length && lead.offerId ? `https://avtocena.com/cars/offer/${encodeURIComponent(lead.offerId)}` : "",
-    lead.city || "",
-    lead.budgetRub
-      ? `Бюджет: ${Number(lead.budgetRub).toLocaleString("ru")} ₽`
-      : "",
-    String(entry ? followupText(entry, false) : lead.comment || "").slice(0, 2000),
-    `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
+export function leadNotice(lead:any,entry?:any){
+ return `📩 ${entry?'Дополнение к заявке':lead?.source==='privacy_request'?'Обращение по персональным данным':'Новая заявка'} №${String(lead?.id||'').slice(0,100)} · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\nhttps://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||''))}`;
 }
+
 const QUEUE = "telegram/crm-outbox.json";
 export async function enqueueMessage(input: {
   id: string;
