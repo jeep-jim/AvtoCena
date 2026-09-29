@@ -15,3 +15,19 @@ test('privacy requests are stored without sales consent or attribution and retri
  assert.equal((await send({},'https://evil.test')).status,403);assert.equal((await send({phone:'bad'})).status,400);const first=await send();assert.equal(first.status,200);const id=(await first.json()).id;assert.equal((await (await send()).json()).id,id);assert.equal(s.rows.size,1);const row=s.rows.get(id);assert.equal(row.source,'privacy_request');assert.equal(row.analyticsConsent,false);assert.equal(row.attribution,undefined);assert.equal(row.personalDataConsent,undefined);assert.equal(row.clientId,undefined);
  }finally{delete (globalThis as any).__privacyRoutes;}
 });
+
+test('dealer settings require permission and same origin, and preserve email for older forms', async()=>{
+ const s:any={user:null,rows:[{id:'dealer_topavto',name:'TopAvto',city:'Новокузнецк',mail:{email:'info@avtocena.com',provider:'reg',ready:false}}],writes:0}; (globalThis as any).__dealerMailRoutes=s;
+ try {
+  const api=await route('apps/web/app/(crm)/api/crm/dealers/route.ts',{
+   '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__dealerMailRoutes.user;`,
+   '@/lib/data':`export const getJsonStorage=()=>({});export const mutateDataJson=async(p,f,fn)=>{const s=globalThis.__dealerMailRoutes;s.rows=fn(s.rows);s.writes++;};`,
+   '@/lib/crm-activity':`export const recordCrmActivity=async()=>{};`
+  });
+  const send=(mail=false,origin='https://avtocena.com')=>{const body=new FormData();for(const [k,v] of Object.entries({dealerId:'dealer_topavto',name:'TopAvto',city:'Новокузнецк',status:'verified'}))body.set(k,v);if(mail){body.set('mailEmail','office@example.ru');body.set('mailProvider','yandex');body.set('mailReady','on');}return api.POST(new Request('https://avtocena.com/api/crm/dealers',{method:'POST',headers:{origin},body}));};
+  assert.match((await send()).headers.get('location')||'',/login/);s.user={id:'m',role:'manager'};assert.match((await send()).headers.get('location')||'',/login/);assert.equal(s.writes,0);
+  s.user={id:'o',role:'owner'};assert.equal((await send(true,'https://evil.test')).status,403);assert.equal(s.writes,0);
+  assert.match((await send()).headers.get('location')||'',/state=saved/);assert.equal(s.rows[0].mail.email,'info@avtocena.com');
+  assert.match((await send(true)).headers.get('location')||'',/state=saved/);assert.deepEqual(s.rows[0].mail,{email:'office@example.ru',provider:'yandex',ready:true});
+ } finally {delete (globalThis as any).__dealerMailRoutes;}
+});

@@ -147,11 +147,12 @@ export function PublicLegalFooter() {
         </section>
 
         <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-x-6">
-          <p className="lg:col-span-2">Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.</p>
+          <p className="lg:col-span-2">Цены и расчёты в каталоге предварительные. Наличие автомобиля, итоговая стоимость и условия доставки согласовываются перед заключением договора.</p>
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Настройки cookie</button>
             <Link href="/privacy" className="ac-public-legal-link font-bold underline underline-offset-4">Политика конфиденциальности</Link>
+            <Link href="/terms" className="ac-public-legal-link">Правила использования сервиса</Link>
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
