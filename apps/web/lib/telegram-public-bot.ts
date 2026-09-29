@@ -1,3 +1,4 @@
+import {MINI_APP_URL, miniAppCatalogButton} from "./telegram-miniapp";
 import {offerPath} from "./catalog/offer-url";
 import crypto from "node:crypto";
 import {
@@ -205,7 +206,7 @@ async function ensureBotProfile(token: string) {
     telegramCall(token, "setMyDescription", {
       description: "Каталог автомобилей, ориентир стоимости и помощь менеджера. Выберите автомобиль на avtocena.com или отправьте запрос на подбор.",
     }),
-    telegramCall(token, "setChatMenuButton", { menu_button: { type: "commands" } }),
+    telegramCall(token, "setChatMenuButton", { menu_button: { type: "web_app", text: "АвтоЦена", web_app: {url: MINI_APP_URL} } }),
   ]);
 }
 
@@ -269,7 +270,7 @@ async function sendWelcome(token: string, chatId: string, firstName = "") {
     reply_markup: {
       inline_keyboard: [
         [{ text: "🚗 Подобрать авто", callback_data: "ac:cars" }],
-        [{ text: "📚 Открыть каталог", url: `${SITE_URL}/cars?utm_source=telegram&utm_medium=bot` }],
+        [miniAppCatalogButton(chatId)],
       ],
     },
   });

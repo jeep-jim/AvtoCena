@@ -1,0 +1,13 @@
+.ac-mini-header{display:none}
+html[data-miniapp="true"] .ac-public-header{display:none!important}
+html[data-miniapp="true"] .ac-mini-header{position:fixed;z-index:5001;inset:var(--ac-mini-top,0px) 0 auto;display:flex;align-items:center;gap:10px;min-height:60px;padding:8px 12px;background:var(--ac-surface);color:var(--ac-text);border-bottom:1px solid var(--ac-border)}
+.ac-mini-brand{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:16px;font-weight:900}
+.ac-mini-header>button{width:36px;height:40px;flex-shrink:0;font-size:24px}
+.ac-mini-city{margin-left:auto;min-width:0;max-width:48%;font-size:12px}
+.ac-mini-city button{max-width:100%;min-height:40px}
+html[data-miniapp="true"] .ac-page-copy{padding-top:calc(68px + var(--ac-mini-top,0px))!important}
+html[data-miniapp="true"] .ac-public-footer-navigation,
+html[data-miniapp="true"] .ac-public-legal-footer section[aria-label="Реквизиты дилера TOP AVTO"],
+html[data-miniapp="true"] .ac-page-copy nav[aria-label="Хлебные крошки"]{display:none!important}
+html[data-miniapp="true"] .ac-public-legal-footer{margin-top:24px;padding-bottom:calc(20px + var(--ac-mini-bottom,0px));}
+html[data-miniapp="true"] .ac-notice-stack{bottom:calc(12px + var(--ac-mini-bottom,0px))}
