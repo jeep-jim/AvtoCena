@@ -84,7 +84,8 @@ test('Japan watchdog shares the collector schedule instead of relying on a missi
  const japan={startedAt:new Date(now-86400000).toISOString(),complete:true,published:true};
  const args={...input,market:'japan',journal:null,japan};
  assert.equal(recoveryDecision(args).action,'none');
- assert.equal(recoveryDecision({...args,now:now+3*86400000}).reason,'refresh_interval');
+ assert.equal(recoveryDecision({...args,now:now+3*86400000}).action,'none');
+ assert.equal(recoveryDecision({...args,now:now+14*86400000}).reason,'refresh_interval');
  assert.equal(recoveryDecision({...args,japan:{...japan,published:false}}).reason,'retry_publication');
  assert.equal(recoveryDecision({...args,japanRefreshIntervalDays:14,now:now+4*86400000}).action,'none');
 });

@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import {collectSourcePage,intakeState} from '../scripts/lib/catalog-source-intake.mjs';
 function fixture(pages,detail=async()=>[]) {
  const source={sourceId:'test',fetchPage:async c=>pages[c || 'first'],normalizeOffer:r=>r,fetchImages:detail};
- const state=intakeState(source,{sourceId:'test'}),rows=[];
- const options={market:'china',deadline:Date.now()+10000,maxRows:100,maxPages:10,minYear:2020,
+ const state=intakeState(source,{sourceId:'test'}),rows=[],delays=[];
+ const options={waitForRetry:async ms=>delays.push(ms),market:'china',deadline:Date.now()+10000,maxRows:100,maxPages:10,minYear:2020,
  snapshot:(o,stage)=>({offer:structuredClone(o),stage}),writeObservation:async r=>rows.push(r),checkpoint:async()=>{}};
- return {state,rows,options};
+ return {state,rows,options,delays};
 }
 const offer={id:'one',sourceId:'test',market:'china',year:2024,status:'active',sourcePrice:10000,powerHp:undefined};
 test('source month policy can retain an older trim year for exact detail collection',async()=>{
@@ -64,4 +64,27 @@ test('access denial is never retried as a transient timeout',async()=>{
  const f=fixture({});let calls=0;f.state.source.fetchPage=async()=>{calls++;throw Error('http_403')};
  await collectSourcePage(f.state,f.options);await collectSourcePage(f.state,f.options);
  assert.equal(calls,1);assert.equal(f.state.stopReason,'blocked');
+});
+
+
+test('transient retries back off, keep the cursor and stop after three failures',async()=>{
+ const f=fixture({});let calls=0;
+ f.state.cursor='10';f.state.source.fetchPage=async cursor=>{assert.equal(cursor,'10');calls++;throw Error('http_503')};
+ for(let i=0;i<4;i++)await collectSourcePage(f.state,f.options);
+ assert.equal(calls,3);assert.deepEqual(f.delays,[1000,2000]);
+ assert.equal(f.state.stopReason,'list_failed');assert.equal(f.state.cursor,'10');assert.equal(f.rows.length,0);
+});
+test('access refusals and deterministic errors never enter retry backoff',async()=>{
+ for(const message of ['http_403','http_429','invalid_source_payload']){
+  const f=fixture({});f.state.source.fetchPage=async()=>{throw Error(message)};
+  await collectSourcePage(f.state,f.options);assert.deepEqual(f.delays,[]);assert.equal(f.state.done,true);
+ }
+});
+test('retry waits cannot overrun the remaining collection budget',async t=>{
+ let clock=Date.parse('2026-09-29T05:00:00Z');t.mock.method(Date,'now',()=>clock);
+ const f=fixture({});f.options.deadline=clock+50;
+ f.state.source.fetchPage=async()=>{throw Error('timeout')};
+ f.options.waitForRetry=async ms=>{assert.equal(ms,50);clock+=ms;};
+ await collectSourcePage(f.state,f.options);assert.equal(f.state.cursor,null);assert.equal(f.rows.length,0);
+ assert.equal(f.state.done,true);assert.equal(f.state.stopReason,'time_budget');
 });

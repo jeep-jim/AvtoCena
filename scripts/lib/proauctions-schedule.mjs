@@ -1,4 +1,4 @@
-export function proAuctionsSchedule(state, now = Date.now(), intervalDays = 3) {
+export function proAuctionsSchedule(state, now = Date.now(), intervalDays = 14) {
   if (!state) return {due:true, resume:false, reason:'first_collection'};
   const started = Date.parse(state.startedAt || '');
   if (!Number.isFinite(started)) throw Error('invalid_collection_started_at');

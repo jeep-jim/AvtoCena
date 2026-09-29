@@ -3,7 +3,7 @@ import {transientOperationFailure} from './transient-operation.mjs';
 export const MARKET_WORKFLOWS=Object.fromEntries(['china','korea','uae','georgia','europe'].map(m=>[m,`catalog-refresh-${m}.yml`]));
 MARKET_WORKFLOWS.green='catalog-refresh-green.yml';
 MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
-export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery,japanRefreshIntervalDays=3}) {
+export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery,japanRefreshIntervalDays=14}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');
  if(runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)))return {action:'none',reason:'already_running'};
  if(recovery?.action!=='cleanup_dispatched'&&now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
