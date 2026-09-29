@@ -59,3 +59,16 @@ test("all specifications are listing-bound and exclude inferred/manual power and
   offer.operational.sourceSpecifications!.sourceOfferId = "another-listing";
   assert.equal(offerSpecificationGroups(offer).some(group => group.name === "Оснащение"), false);
 });
+
+test("electrified Japan labels survive missing subtype, volume and legacy provenance", () => {
+ for (const fuel of ["hybrid", "electric"] as const) {
+  const offer=vehicle({fuel,powertrainKind:undefined,engineCc:undefined});
+  assert.equal(assessJapanExportRestriction(offer)?.reason,fuel);
+  assert.equal(assessJapanExportRestriction(offer)?.status,"restricted");
+  offer.operational={};
+  assert.equal(assessJapanExportRestriction(offer)?.status,"needs_review");
+  assert.equal(publicOffer(offer).japanExportRestriction?.reason,fuel);
+ }
+ const hybrid=vehicle({fuel:"hybrid",powertrainKind:"other_hybrid"});hybrid.engineCc=660;
+ assert.equal(assessJapanExportRestriction(hybrid)?.reason,"hybrid");
+});

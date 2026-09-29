@@ -19,15 +19,26 @@ export function assessJapanExportRestriction(offer: Partial<VehicleOffer>): Japa
   const semantic = offer.operational?.semanticEvidence as Record<string, {status?: string; value?: unknown}> | undefined;
   const normalizeFuel = (value: unknown) => String(value ?? "").toLowerCase().replace(/^(gasoline|benzin)$/, "petrol");
   // A preserved evidence flag cannot validate a different field value.
-  for (const key of ["fuel", "powertrainKind", "engineCc"] as const) {
+  for (const key of ["fuel", "powertrainKind"] as const) {
     const item = semantic?.[key];
     if (item?.value === undefined || !["exact", "verified"].includes(item.status || "")) continue;
-    const matches = key === "engineCc" ? Number(item.value) === Number(offer[key])
-      : key === "fuel" ? normalizeFuel(item.value) === normalizeFuel(offer[key]) : item.value === offer[key];
+    const matches = key === "fuel" ? normalizeFuel(item.value) === normalizeFuel(offer[key]) : item.value === offer[key];
     if (!matches) return undefined;
   }
   const fuel = classifySpecificationEvidence(offer, "fuelPowertrain");
+  if (fuel.state === "conflict") return undefined;
+  const declaredFuel = normalizeFuel(offer.fuel);
+  const electrifiedReason = ["hybrid", "hev", "phev", "mhev", "reev", "erev"].includes(declaredFuel) ? "hybrid"
+    : ["electric", "bev"].includes(declaredFuel) ? "electric" : undefined;
+  if (electrifiedReason) {
+    // Export classification does not require a hybrid subtype or certified motor power.
+    const confirmedFuel = ["exact", "verified"].includes(semantic?.fuel?.status || "");
+    return { status: fuel.state === "exact" || confirmedFuel ? "restricted" : "needs_review", reason: electrifiedReason, ruleUrl: JAPAN_EXPORT_RULE_URL, ruleVersion: "jp-2023-08-09" };
+  }
   if (fuel.state !== "exact") return undefined;
+  const engineEvidence = semantic?.engineCc;
+  if (engineEvidence?.value !== undefined && ["exact", "verified"].includes(engineEvidence.status || "")
+    && Number(engineEvidence.value) !== Number(offer.engineCc)) return undefined;
   let reason: JapanExportRestriction["reason"] | undefined;
   if (offer.powertrainKind === "electric") reason = "electric";
   else if (["series_hybrid", "other_hybrid"].includes(offer.powertrainKind || "")) reason = "hybrid";
@@ -42,6 +53,7 @@ export function assessJapanExportRestriction(offer: Partial<VehicleOffer>): Japa
 
 export function japanRestrictionDescription(restriction?: JapanExportRestriction) {
   if (!restriction || restriction.ruleVersion !== "jp-2023-08-09") return "";
+  if (restriction.status === "needs_review" && restriction.reason !== "engine_over_1900cc") return `В объявлении указан ${restriction.reason === "electric" ? "электромобиль" : "гибрид"}. Экспорт таких автомобилей из Японии в РФ ограничен. Тип силовой установки и допустимость поставки требуют проверки.`;
   if (restriction.status === "needs_review") return "В аукционе указан объём свыше 1 900 см³. Возможны экспортные ограничения: точный объём и допустимость поставки требуют проверки.";
   if (restriction.status !== "restricted") return "";
   const reasons = { engine_over_1900cc: "ДВС свыше 1 900 см³", hybrid: "гибридная силовая установка", electric: "электромобиль" };

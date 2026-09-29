@@ -11,6 +11,13 @@ import { compactJapanPreviewInput, matchesJapanPreviewInput } from '../apps/web/
 import { visibleBreakdownNote } from '../apps/web/lib/catalog/customs-age-label';
 const fixture=()=>JSON.parse(fs.readFileSync('tests/fixtures/proauctions/published-corolla-cross.json','utf8'));
 
+function electrifiedFixture(kind:string){
+  const input=fixture();
+  Object.assign(input,{fuel:kind==='electric'?'electric':'hybrid',powertrainKind:kind,engineCc:kind==='electric'?undefined:1800,powerKw:300,powerHp:408,power30MinKw:undefined,power30MinKwByMotor:[30,25],icePowerKw:100,powerDataConfidence:'verified',utilizationPowerKw:undefined});
+  input.operational={semanticEvidence:Object.fromEntries(['fuel','powertrainKind','engineCc','powerHp','powerKw','certifiedPower'].map(k=>[k,{status:'exact',value:input[k]}]))};
+  return input;
+}
+
 test('preview equals detail estimate, includes customs and leaves auction evidence unchanged',async()=>{
  const input=fixture(),before=JSON.stringify(input),today=new Date().toISOString();
  const markets=JSON.parse(fs.readFileSync('data/markets/markets.json','utf8'));
@@ -38,6 +45,16 @@ test('preview equals detail estimate, includes customs and leaves auction eviden
    assert.equal(preview.calculation.breakdown.reduce((sum:number,row:any)=>sum+row.amountRub,0),preview.calculation.totalRub);
    assert.equal(preview.calculation.paymentPlan?.securityDepositRub,31000);
   }
+  for(const kind of ['electric','series_hybrid','other_hybrid']){
+   const electrified=electrifiedFixture(kind),parameters=japanPreviewParameters(electrified);
+   const result=await calculateOfferWithCustomerParametersDetailed(electrified,parameters);
+   assert.equal(result.ok,true,JSON.stringify(result));
+   if(result.ok){
+    assert.equal(result.calculation.customs?.utilizationPowerKw,kind==='other_hybrid'?155:55);
+    assert.equal(result.calculation.breakdown.reduce((sum:number,row:any)=>sum+row.amountRub,0),result.calculation.totalRub);
+    assert.equal(result.calculation.paymentPlan?.securityDepositRub,31000);
+   }
+  }
   assert.equal(JSON.stringify(input),before);assert.equal(input.engineCc,undefined);assert.equal(input.totalRub,null);
  } finally {read.mock.restore();resetCatalogRateCache();if(previous===undefined)delete process.env.CATALOG_LIVE_RATE_DISABLED;else process.env.CATALOG_LIVE_RATE_DISABLED=previous;}
 });
@@ -51,4 +68,15 @@ test('tariff age notes are readable Russian for both engine formats',()=>{
  assert.equal(visibleBreakdownNote('from 3 to 5 years'),'От 3 до 5 лет');
  assert.equal(visibleBreakdownNote('up_to_3_years'),'До 3 лет');
  assert.equal(visibleBreakdownNote('По документам'),'По документам');
+});
+
+test('Japanese EV and both hybrid types use documented motor totals, never peak power',()=>{
+ for(const kind of ['electric','series_hybrid','other_hybrid']){
+  const input=electrifiedFixture(kind);
+  const parameters=japanPreviewParameters(input);
+  assert.equal(parameters.power30MinKw,55);
+  assert.equal(parameters.powertrainKind,kind);
+  const cached=compactJapanPreviewInput(input);assert.equal(cached.parameters?.power30MinKw,55);
+  assert.ok(cached.restriction);
+ }
 });
