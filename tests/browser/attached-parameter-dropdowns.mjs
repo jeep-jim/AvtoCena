@@ -77,7 +77,7 @@ try{
    await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');return el&&Object.keys(el).some(k=>k.startsWith('__reactProps$'));});
    await page.waitForFunction(()=>{const el=document.querySelector('[data-parameter-editor] > summary');const grid=document.querySelector('[data-parameter-editor-grid]');return el && grid && getComputedStyle(el).height==='48px' && getComputedStyle(grid).display==='grid';},null,{timeout:30000});
    const cookie=page.getByRole('complementary',{name:'Уведомление о cookie'});
-   if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Закрыть',exact:true}).click();
+   if(await cookie.isVisible()) await cookie.getByRole('button',{name:'Только необходимые',exact:true}).click();
    await page.evaluate(()=>document.fonts.ready);
    if(live){
     // The initial preview is debounced by 600 ms. Measure only once its status
