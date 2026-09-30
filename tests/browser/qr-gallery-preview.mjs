@@ -19,7 +19,9 @@ try{
   const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:2,isMobile:width<500,hasTouch:width<500,permissions:['clipboard-read','clipboard-write']});const page=await context.newPage(),errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error(e)});
   await page.addInitScript(t=>{document.addEventListener('DOMContentLoaded',()=>{document.documentElement.dataset.theme=t;});localStorage.setItem('avtocena_city_notice_dismissed_v1','1');},theme);
   await page.goto(origin+'/cars/offer/qa-gallery?foo=bar');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-  await page.getByRole('button',{name:'Только необходимые',exact:true}).click();
+  assert.equal(await page.locator('.ac-cookie-banner').count(),0);
+  await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();
+  await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_analytics_choice_v1')).allowed),false);
   const legal=page.getByRole('navigation',{name:'Правовая информация'});await legal.scrollIntoViewIfNeeded();for(const [label,href] of [['Политика конфиденциальности','/privacy'],['Правила использования сервиса','/terms'],['Реквизиты ИП','/requisites']]){const link=legal.getByRole('link',{name:label,exact:true});assert.equal(await link.isVisible(),true,label+' is visible with public layout styles');assert.equal(await link.getAttribute('href'),href);}assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.getByRole('button',{name:'QR страницы',exact:true}).click();const qr=page.getByRole('dialog',{name:'QR страницы',exact:true});await qr.locator('img').waitFor().catch(async error=>{console.log(await qr.innerText());await page.screenshot({path:`${out}/failure-${width}-${theme}.png`});throw error});
