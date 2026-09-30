@@ -1,4 +1,5 @@
 "use client";
+import {syncMiniAppPresentation} from "./telegram-miniapp";
 import {analyticsAllowed} from "./privacy-consent";
 import {LEAD_CONSENT_VERSION} from "./privacy-documents";
 import {metrikaAttribution,METRIKA_COUNTER} from "./metrika-client";
@@ -61,6 +62,7 @@ export async function leadFetch(url: string, init: RequestInit): Promise<Respons
   payload.operationId ||= crypto.randomUUID();
   if(payload.personalDataConsent===true)payload.personalDataConsentVersion ||= LEAD_CONSENT_VERSION;
   const privacyRequest=url==="/api/privacy-request";
+  if (!privacyRequest) payload.submissionChannel = syncMiniAppPresentation() ? "telegram_miniapp" : "site";
   payload.analyticsConsent=!privacyRequest&&analyticsAllowed();
   payload.attribution = privacyRequest?{}:{...payload.attribution,...await metrikaAttribution()};
   const send = async () => {

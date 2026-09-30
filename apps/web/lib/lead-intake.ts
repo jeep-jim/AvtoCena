@@ -1,3 +1,4 @@
+import {leadChannelLabel} from "./lead-source";
 import {isCalculationOriginAllowed} from "./catalog/calculation-request-origin";
 import {LEAD_CONSENT_VERSION,LEAD_CONSENT_TEXT,PRIVACY_VERSION} from "./privacy-documents";
 import {hasCrmPermission} from "./crm-permissions";
@@ -296,6 +297,7 @@ export async function createLead(
   let leadId = operationId ? `lead_${operationId}` : makeId("lead");
   const attribution = body.analyticsConsent===true ? normalizeAttribution(body.attribution, body) : normalizeAttribution({}, {});
   const source = clean(body.source, 160) || (crmUser ? "manual_crm" : "site");
+  const submissionChannel = crmUser ? "manual_crm" : trustedTelegramId ? "telegram_bot" : body.submissionChannel === "telegram_miniapp" ? "telegram_miniapp" : "site";
   const market = clean(body.market, 120) || primaryOffer?.market || "";
   const businessSettingsSnapshot = market
     ? await getBusinessSettingsSnapshot(market)
@@ -381,6 +383,7 @@ export async function createLead(
     referrer,
     ...consentSnapshot,
     source,
+    submissionChannel,
     partnerRef: attribution.partnerRef,
     attribution,
     createdByManagerId,
@@ -423,10 +426,10 @@ export async function createLead(
         status: assignedManagerId ? "assigned" : "new",
         changedAt: createdAt,
         changedByUserId: crmUser?.id || null,
-        changedByName: crmUser?.displayName || "Сайт",
+        changedByName: crmUser?.displayName || leadChannelLabel({submissionChannel}),
         note: crmUser
           ? "Заявка создана вручную в CRM"
-          : "Заявка создана с сайта",
+          : submissionChannel === "telegram_miniapp" ? "Заявка создана из Telegram Mini App" : "Заявка создана с сайта",
       },
     ],
     managerHistory: assignedManagerId
@@ -435,7 +438,7 @@ export async function createLead(
             assignedManagerId,
             changedAt: createdAt,
             changedByUserId: crmUser?.id || null,
-            changedByName: crmUser?.displayName || "Сайт",
+            changedByName: crmUser?.displayName || leadChannelLabel({submissionChannel}),
           },
         ]
       : [],
@@ -471,6 +474,7 @@ export async function createLead(
     budgetRub: numberOrNull(body.budgetRub),
     totalRub: numberOrNull(body.totalRub) || primaryOffer?.totalRub || null,
     source,
+    submissionChannel,
     ...attribution,
     attribution: {
       ...attribution,
@@ -502,7 +506,7 @@ export async function createLead(
       if (stored.followups?.some((entry: any) => entry.operationId === operationId)) return stored;
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
-      const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, ...consentSnapshot};
+      const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, submissionChannel, ...consentSnapshot};
       return {...stored, ...(!crmUser ? {analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,...(body.analyticsConsent!==true?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,deliveryQuote:quoteCityDelivery(city,item.market||"unknown")}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
@@ -521,7 +525,9 @@ export async function createLead(
         operationId,
         createdAt,
         type: "lead_created",
-        title: crmUser ? "Заявка создана вручную" : "Заявка с сайта",
+        title: crmUser ? "Заявка создана вручную" : submissionChannel === "telegram_miniapp" ? "Заявка из Telegram Mini App" : "Заявка с сайта",
+        ...(submissionChannel === "telegram_miniapp" ? {actor: {id: "telegram_miniapp", name: "Telegram Mini App"}} : {}),
+        submissionChannel,
         clientId: client.id,
         leadId: lead.id,
         source: lead.source,

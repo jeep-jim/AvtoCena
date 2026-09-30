@@ -1,3 +1,4 @@
+import {leadChannelLabel} from "./lead-source";
 import {leadContact, leadContactAction} from "./lead-contact";
 import { pollingEnabled } from "./crm-polling";
 import crypto from "node:crypto";
@@ -46,8 +47,24 @@ export function followupText(entry: any, includeContact = true) {
   });
   return [entry.comment, includeContact && contactChanged ? leadContactAction(entry) : "", ...details].filter(Boolean).join("\n") || (includeContact ? "Повторное обращение через форму" : "");
 }
+const noticeField = (value: unknown, limit = 300) => String(value || "").replace(/[\r\n\t]+/g, " ").trim().slice(0, limit);
 export function leadNotice(lead:any,entry?:any){
- return `📩 ${entry?'Дополнение к заявке':lead?.source==='privacy_request'?'Обращение по персональным данным':'Новая заявка'} №${String(lead?.id||'').slice(0,100)} · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\nhttps://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||''))}`;
+ const url = `https://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||""))}`;
+ if (lead?.source === "privacy_request") return `📩 Обращение по персональным данным · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
+ const current = {...lead, ...entry};
+ if (current.personalDataConsent !== true || current.personalDataConsentVersion !== "lead-consent-2026-09-30") return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
+ const name = entry?.changes?.name?.after || lead?.name;
+ const car = lead?.offerTitle || lead?.car || lead?.selectedOffers?.map((offer:any) => offer.title).filter(Boolean).join(", ") || "Подбор автомобиля";
+ return [
+   `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена`,
+   `Источник: ${leadChannelLabel(current)}`,
+   `Имя: ${noticeField(name) || "не указано"}`,
+   noticeField(leadContact(current).text, 500),
+   current.phone && leadContact(current).value !== current.phone ? `Телефон: ${noticeField(current.phone, 80)}` : "",
+   `Автомобиль: ${noticeField(car, 600)}`,
+   current.city ? `Город: ${noticeField(current.city)}` : "",
+   url,
+ ].filter(Boolean).join("\n");
 }
 
 const QUEUE = "telegram/crm-outbox.json";
