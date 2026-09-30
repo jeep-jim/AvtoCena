@@ -143,7 +143,7 @@ try{
  const gate=new Promise(resolve=>{release=resolve;});
  await slow.route('https://mc.yandex.ru/**',async route=>{await gate;await route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.ym?.a||[];`});});
  const p=await slow.newPage();await p.goto(origin,{waitUntil:'domcontentloaded'});
- await p.getByRole('button',{name:'Закрыть приглашение выбрать город',exact:true}).click();
+ assert.equal(await p.locator('.ac-city-notice').count(),0);
  await p.getByRole('button',{name:'Настройки cookie',exact:true}).click();
  await p.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));

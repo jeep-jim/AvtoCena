@@ -6,8 +6,6 @@ import { PageQrButton } from "../sharing/PageQrButton";
 import { isPublicPagePath } from "../../lib/public-page-url";
 import { TOPAVTO_DEALER } from "@/lib/topavto-dealer";
 import Link from "next/link";
-import { CitySelector, LocationIcon } from "../home/CitySelector";
-import { useSelectedCity } from "../../lib/location/selected-city";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CatalogFooterStop } from "./CatalogFooterStop";
@@ -70,11 +68,6 @@ export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
-  const city = useSelectedCity();
-  const [cityNoticeOpen, setCityNoticeOpen] = useState(false);
-  const [noticeCity, setNoticeCity] = useState("");
-  const dismissCityNotice = () => { setCityNoticeOpen(false); try { localStorage.setItem("avtocena_city_notice_dismissed_v1", "1"); } catch {} };
-  useEffect(() => { try { setCityNoticeOpen(!localStorage.getItem("avtocena_city_notice_dismissed_v1")); } catch { setCityNoticeOpen(true); } }, []);
   const currentYear = new Date().getFullYear();
 
   const closeCookieNotice = useCallback(() => {
@@ -158,79 +151,6 @@ export function PublicLegalFooter() {
           </nav>
         </div>
       </footer>
-
-      <div className="ac-notice-stack">
-      {publicPath && cityNoticeOpen && !city && !cookieOpen ? <aside className="ac-city-notice" aria-label="Выбор города для расчёта">
-        <LocationIcon className="ac-city-notice-pin" />
-        <div className="ac-city-notice-copy"><p>Выберите ваш город для точного расчёта</p>
-          <CitySelector value={noticeCity} onChange={setNoticeCity} triggerLabel="Выбрать город" />
-        </div>
-        <button type="button" onClick={dismissCityNotice} className="ac-city-notice-close" aria-label="Закрыть приглашение выбрать город">×</button>
-      </aside> : null}
-      </div>
-      <style>{`
-        .ac-notice-stack {
-          position: fixed;
-          z-index: 10090;
-          left: max(12px, env(safe-area-inset-left));
-          right: max(12px, env(safe-area-inset-right));
-          bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-          max-width: 520px;
-          margin-inline: auto;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .ac-city-notice { position:relative;display:flex;align-items:center;gap:18px;padding:18px 48px 18px 20px;border-radius:22px;background:var(--ac-surface-2);color:var(--ac-text);box-shadow:0 8px 28px rgba(10,30,60,.18); }
-        .ac-city-notice-pin{width:46px;height:56px;flex-shrink:0;color:#43c529}
-        .ac-city-notice-copy{min-width:0}
-        .ac-city-notice p{font-size:13px;line-height:1.5;margin:0;font-weight:600}
-        .ac-city-notice-copy button{font-size:18px;min-height:32px;text-decoration:underline;border:0;padding:0;color:#91a6c1}
-        .ac-city-notice-copy button svg{display:none}
-        .ac-city-notice-close{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--ac-surface-3,#1d2b39);color:#a6b9cc;font-size:23px;line-height:1}
-        @media(max-width:480px){.ac-city-notice{padding:16px 40px 16px 14px;gap:12px}.ac-city-notice-pin{width:38px;height:46px}.ac-city-notice p{font-size:12px}.ac-city-notice-copy button{font-size:16px}}
-        .ac-cookie-banner {
-          padding: 14px 16px 10px;
-          border-radius: 18px;
-          background: #174b83 !important;
-          color: #ffffff !important;
-          box-shadow: 0 8px 28px rgba(10, 30, 60, .24);
-        }
-        .ac-cookie-banner p {
-          margin: 0;
-          color: #ffffff !important;
-          -webkit-text-fill-color: #ffffff !important;
-          font-size: 13px;
-          line-height: 1.5;
-          font-weight: 500;
-        }
-        .ac-cookie-banner-actions { display: flex; flex-wrap:wrap; align-items: center; gap: 12px; margin-top: 6px; }
-        .ac-cookie-banner button {
-          min-height: 44px;
-          padding: 8px 14px;
-          border: 0;
-          border-radius: 10px;
-          font-size: 13px;
-          font-weight: 700;
-          cursor: pointer;
-        }
-        .ac-cookie-banner-details {
-          margin-left: -8px;
-          padding-inline: 8px !important;
-          background: transparent !important;
-          color: #ffffff !important;
-          -webkit-text-fill-color: #ffffff !important;
-          text-decoration: underline;
-          text-underline-offset: 3px;
-        }
-        .ac-cookie-banner-close {
-          margin-left: auto;
-          background: #ffffff !important;
-          color: #174b83 !important;
-          -webkit-text-fill-color: #174b83 !important;
-        }
-        .ac-cookie-banner button:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
-      `}</style>
 
       {cookieOpen ? (
         <div className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="avtocena-cookie-title" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCookieNotice(); }}>
