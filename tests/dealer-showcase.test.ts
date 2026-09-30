@@ -271,3 +271,11 @@ test("owner configuration versions, unpublished isolation and special lead city 
     fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
+
+test("expired exchange rate cannot prevent hiding the special rail", () => {
+  const s=fixture(); s.pricing.rateAt="2020-01-01";
+  assert.throws(()=>normalizeShowcase({...s,specialsEnabled:true},s.dealerId,1),/курс/);
+  const hidden=normalizeShowcase({...s,specialsEnabled:false},s.dealerId,1);
+  assert.equal(hidden.specialsEnabled,false);
+  assert.equal(calculateSpecial(hidden,hidden.offers[0]).totalRub,null);
+});

@@ -420,7 +420,7 @@ export function normalizeShowcase(
         `Заполните характеристики и фото: ${specialTitle(o) || "новый автомобиль"}`,
       );
     const c = calculateSpecial(s, o);
-    if (!c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
+    if (s.specialsEnabled && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
   if (s.profileEnabled && (!s.phone || !s.offices.length))
     throw Error("Для публикации дилера нужны телефон и хотя бы один офис");
