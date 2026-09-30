@@ -121,6 +121,7 @@ async function staffCommand(
       status: "active",
       companyId: actor.companyId,
       sessionVersion: 0,
+      offerCopyEnabled: false,
       permissions:Object.fromEntries(Object.entries(permissionDefaults(match[3])).map(([k,v])=>[k,v&&hasCrmPermission(actor,k as any)])),
     };
     await mutateDataJson<StaffUser[]>(

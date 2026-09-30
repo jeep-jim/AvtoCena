@@ -14,6 +14,7 @@ function ActionButtons({ className = "", stacked = false, offerId, snapshot }: F
   return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
     <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>Оставить заявку на расчёт</span></button>
     <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
+    <div data-offer-copy-slot className="empty:!hidden" />
     <div data-offer-pdf-slot className="empty:!hidden" />
     <FavoriteToggle offerId={offerId} snapshot={snapshot} compact className="ac-offer-favorite" />
   </div>;
@@ -63,9 +64,18 @@ export function OfferContactActionsStyles() {
       .ac-offer-action-row [data-offer-pdf-slot] button{padding:0;gap:4px}
       .ac-offer-action-row .ac-offer-contact-button{padding-left:48px;padding-right:12px}
     }
+    .ac-offer-action-row[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 56px 56px}
+    .ac-offer-action-row[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 56px 76px 56px}
+    @media(max-width:767px){
+      .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button>svg{display:none!important}
+      .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button{padding-left:8px;padding-right:8px;font-size:13px!important}
+    }
     @media(max-width:359px){
       .ac-offer-action-row{gap:8px}
       .ac-offer-action-row[data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 60px 44px}
+      .ac-offer-action-row[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 44px 44px}
+      .ac-offer-action-row[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 44px 60px 44px}
+      .ac-offer-action-row .ac-offer-copy{width:100%!important}
       .ac-offer-action-row .ac-offer-favorite{width:100%!important}
     }
     @media(min-width:1280px){
@@ -81,6 +91,12 @@ export function OfferContactActionsStyles() {
 
 
       .ac-offer-actions-below[data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 100px 56px}
+      .ac-offer-actions-sidebar[data-has-copy="true"]{grid-template-columns:minmax(0,1fr) 56px 56px}
+      .ac-offer-actions-sidebar[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 56px 80px 56px}
+      .ac-offer-actions-below[data-has-copy="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 56px}
+      .ac-offer-actions-below[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 100px 56px}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button{padding-left:12px;padding-right:12px;font-size:14px!important}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>svg,.ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span:has(>svg){display:none!important}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-below{display:none}

@@ -2,6 +2,7 @@
 import { publicProductionYears } from "../../lib/catalog/public-year-range";
 import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
 import {invalidateSavedCalculationPreviews} from "./useSavedCalculationPreview";
+import { OfferCopyButton } from "./OfferCopyButton";
 import { OfferPdfButton } from "./OfferPdfButton";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
@@ -114,7 +115,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({initialScenario,priceIdentity,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
@@ -212,6 +213,7 @@ export function InlineOfferParameters({initialScenario,priceIdentity,canSave=fal
   {!showCalculation ? originalBreakdown : null}
   <OfferParameterEditors draft={draft} change={change} showCommercial={showCommercial} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
+  {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
   {canSave ? <dialog ref={saveDialog} aria-labelledby="save-calculation-title" className="m-auto w-[min(440px,calc(100vw-32px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 text-[var(--ac-text)] shadow-2xl backdrop:bg-black/60">
    <h2 id="save-calculation-title" className="text-lg font-bold">Подтверждаете изменение характеристик?</h2>
