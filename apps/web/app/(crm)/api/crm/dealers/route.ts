@@ -31,12 +31,12 @@ function checked(value: FormDataEntryValue | null) {
   return value === "on" || value === "true" || value === "1";
 }
 
-function redirectWithState(request: Request, dealerId: string, state: "saved" | "error", message = "") {
+function redirectWithState(dealerId: string, state: "saved" | "error", message = "") {
   const path = dealerId ? `/crm/dealers/${encodeURIComponent(dealerId)}` : "/crm/dealers";
-  const url = new URL(path, request.url);
-  url.searchParams.set("state", state);
-  if (message) url.searchParams.set("message", message.slice(0, 180));
-  return NextResponse.redirect(url, { status: 303 });
+  const params = new URLSearchParams({ state });
+  if (message) params.set("message", message.slice(0, 180));
+  // Keep the browser on its public origin behind the cloud reverse proxy.
+  return new NextResponse(null, { status: 303, headers: { Location: `${path}?${params}` } });
 }
 
 function imageExtension(type: string) {
@@ -49,10 +49,8 @@ function imageExtension(type: string) {
 export async function POST(request: Request) {
   const actor = await getCurrentUser();
   if (!actor || !hasCrmPermission(actor,"dealers")) {
-    const login = new URL("/login", request.url);
-    login.searchParams.set("next", "/crm/dealers");
-    login.searchParams.set("error", "auth_required");
-    return NextResponse.redirect(login, { status: 303 });
+    const params = new URLSearchParams({ next: "/crm/dealers", error: "auth_required" });
+    return new NextResponse(null, { status: 303, headers: { Location: `/login?${params}` } });
   }
 
   if (!isCalculationOriginAllowed(request)) return NextResponse.json({error: "origin_forbidden"}, {status: 403});
@@ -108,9 +106,9 @@ export async function POST(request: Request) {
     });
 
     await recordCrmActivity(actor,{type:"dealer_updated",title:"Изменён дилер",visibility:"management",entityType:"dealer",entityId:dealerId,entityLabel:name,href:`/crm/dealers/${encodeURIComponent(dealerId)}`});
-    return redirectWithState(request, dealerId, "saved");
+    return redirectWithState(dealerId, "saved");
   } catch (error) {
     console.error("crm_dealer_save_failed", error);
-    return redirectWithState(request, dealerId, "error", error instanceof Error ? error.message : "Не удалось сохранить компанию");
+    return redirectWithState(dealerId, "error", error instanceof Error ? error.message : "Не удалось сохранить компанию");
   }
 }
