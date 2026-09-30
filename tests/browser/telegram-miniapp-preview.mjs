@@ -27,7 +27,7 @@ const desktop=await browser.newContext({viewport:{width:1550,height:950}});
 await desktop.addInitScript(()=>{sessionStorage.setItem('avtocena_mini','1');localStorage.setItem('avtocena_mini_theme','light');window.Telegram={WebApp:{platform:'tdesktop',ready:()=>{},expand:()=>{}}};});
 const ordinary=await desktop.newPage();
 for(const route of ['/cars/offer/qa-mini','/mini','/cars?mini=1','/favorites']){
- await ordinary.goto(origin+route);await ordinary.locator('.ac-public-header').waitFor({state:'visible'});
+ await ordinary.goto(origin+route);await ordinary.locator('.ac-public-header').first().waitFor({state:'visible'});
  assert.equal(await ordinary.locator('.ac-mini-header').count(),0);
  assert.equal(await ordinary.evaluate(()=>document.documentElement.dataset.miniapp),undefined);
  assert.equal(await ordinary.evaluate(()=>sessionStorage.getItem('avtocena_mini')),null);
