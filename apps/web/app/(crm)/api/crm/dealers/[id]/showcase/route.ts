@@ -36,7 +36,7 @@ export async function PUT(
         { status: 413 },
       );
     return NextResponse.json(
-      await saveShowcase((await params).id, await withDealerRate(JSON.parse(body))),
+      await saveShowcase((await params).id, await withDealerRate(JSON.parse(body),true)),
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (e) {

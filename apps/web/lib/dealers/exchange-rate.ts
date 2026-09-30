@@ -52,9 +52,11 @@ export async function getDealerRate(){
  }
  return state;
 }
-export async function withDealerRate(s:DealerShowcase){
+export async function withDealerRate(s:DealerShowcase,refresh=false){
  if(s.pricing.rateMode==='manual')return s;
- const {quote}=await getDealerRate();
+ // Public pages read the saved quote immediately. Refresh happens in the editor
+ // and scheduled job, so a slow provider cannot delay a visitor's page.
+ const {quote}=refresh?await getDealerRate():await readDataJson<State>(key,empty);
  if(!quote)return s;
  return {...s,pricing:{...s.pricing,usdRub:quote.value,rateAt:quote.quoteAt,rateSource:quote.source}};
 }

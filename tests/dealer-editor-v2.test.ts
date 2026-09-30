@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseDealerRate} from '../apps/web/lib/dealers/exchange-rate';
+import {parseDealerRate,withDealerRate} from '../apps/web/lib/dealers/exchange-rate';
 import {mergeShowcaseChanges} from '../apps/web/lib/dealers/showcase-merge';
 import {defaultShowcase,type SpecialOffer} from '../apps/web/lib/dealers/showcase-model';
 import {importedOffer,applyImportedOffer} from '../apps/web/lib/dealers/import-offer';
@@ -55,6 +55,13 @@ test('saving a stale editor merges independent edits, rejects conflicting edits 
   const merged=await saveShowcase(base.dealerId,{...base,base,phone:'79990000000'});
   assert.equal(merged.version,2);assert.equal(merged.description,'remote');assert.equal(merged.phone,'79990000000');
   assert.equal(await resolveDealerProfile('nvkz','topavto'),base.dealerId);
+  await fs.mkdir(path.join(tmp,'data/dealers/rates'),{recursive:true});
+  await fs.writeFile(path.join(tmp,'data/dealers/rates/usdrub.json'),JSON.stringify({quote:{value:89.5,quoteAt:new Date().toISOString(),fetchedAt:new Date().toISOString(),source:'https://www.profinance.ru/chart/usdrub/'},attemptAt:'',error:''}));
+  const originalFetch=globalThis.fetch;let externalCalls=0;
+  try{globalThis.fetch=(async()=>{externalCalls++;throw Error('Provider offline');}) as typeof fetch;
+   assert.equal((await withDealerRate(merged)).pricing.usdRub,89.5);assert.equal(externalCalls,0);
+  }finally{globalThis.fetch=originalFetch;}
+
   await assert.rejects(saveShowcase(base.dealerId,{...first,base:first,phone:'78880000000'}),ShowcaseConflict);
   assert.equal((await readShowcase(base.dealerId))?.phone,'79990000000');
   await assert.rejects(saveShowcase('other',{...defaultShowcase('other','Other'),citySlug:'nvkz',slug:'topavto'}),/занята/);
