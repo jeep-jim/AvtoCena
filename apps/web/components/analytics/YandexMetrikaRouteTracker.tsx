@@ -1,49 +1,19 @@
 "use client";
+import {rememberYandexClick} from '@/lib/metrika-client';
+import {METRIKA_PAGE_EVENT} from '@/lib/metrika-pageviews';
+import {Suspense,useEffect} from 'react';
+import {usePathname,useSearchParams} from 'next/navigation';
 
-import {analyticsAllowed} from "@/lib/privacy-consent";
-import {rememberYandexClick} from "@/lib/metrika-client";
-import { Suspense, useEffect, useRef } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+declare global {interface Window {ym?:(...args:unknown[])=>void;}}
 
-const YANDEX_METRIKA_COUNTER_ID = 112098062;
-
-declare global {
-  interface Window {
-    ym?: (...args: unknown[]) => void;
-  }
+function RouteTracker(){
+ const pathname=usePathname();
+ const query=useSearchParams().toString();
+ useEffect(()=>{
+  // CRM attribution still requires explicit consent inside rememberYandexClick.
+  rememberYandexClick();
+  window.dispatchEvent(new Event(METRIKA_PAGE_EVENT));
+ },[pathname,query]);
+ return null;
 }
-
-function RouteTracker() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const initialized = useRef(false);
-  const previousUrl = useRef("");
-  const query = searchParams.toString();
-
-  useEffect(() => {
-    if(!analyticsAllowed()||pathname.startsWith("/privacy/request"))return;
-    rememberYandexClick();
-    const currentUrl = `${window.location.origin}${pathname}`;
-
-    if (!initialized.current) {
-      initialized.current = true;
-      previousUrl.current = currentUrl;
-      return;
-    }
-
-    window.ym?.(YANDEX_METRIKA_COUNTER_ID, "hit", currentUrl, {
-      referer: previousUrl.current,
-    });
-    previousUrl.current = currentUrl;
-  }, [pathname, query]);
-
-  return null;
-}
-
-export function YandexMetrikaRouteTracker() {
-  return (
-    <Suspense fallback={null}>
-      <RouteTracker />
-    </Suspense>
-  );
-}
+export function YandexMetrikaRouteTracker(){return <Suspense fallback={null}><RouteTracker /></Suspense>;}
