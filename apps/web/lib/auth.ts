@@ -17,6 +17,7 @@ export type AuthUser = {
   displayName: string;
   avatarUrl?: string;
   personalPhone?: string;
+  offerCopyEnabled?: boolean;
   workAddresses?: string[];
   remoteWork?: boolean;
   companyId?: string;
