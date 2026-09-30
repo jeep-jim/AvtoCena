@@ -104,6 +104,11 @@ export function PublicLegalFooter() {
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
             <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.</p>
 
+            <div aria-label="Инструменты АвтоЦены" className="ac-public-footer-tools mt-4 grid grid-cols-2 gap-2 [&>button]:justify-center [&>button]:rounded-xl [&>button]:border [&>button]:border-[var(--ac-border)] [&>button]:px-2 [&>button]:whitespace-nowrap [&>button]:text-xs sm:[&>button]:text-sm [&>button:hover]:bg-[var(--ac-surface-2)]">
+              <PageQrButton key={pathname} />
+              <AutoCalcButton />
+            </div>
+
             <div className="mt-4 grid gap-2">
               <a
                 href={AUTOCREDIT_AFFILIATE_URL}
@@ -139,10 +144,9 @@ export function PublicLegalFooter() {
           ]} />
         </div>
 
-        <section aria-label="Реквизиты дилера TOP AVTO" className="mb-5 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--ac-border)] pt-5 text-sm">
+        <section aria-label="Реквизиты дилера TOP AVTO" className="mb-5 grid gap-4 border-t border-[var(--ac-border)] pt-5 text-sm lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-8">
           <div className="flex items-center gap-10"><div><p className="font-bold"><Link href="/login" prefetch={false} style={{ color: "inherit", textDecoration: "none", cursor: "text" }}>Дилер</Link>{TOPAVTO_DEALER.label.slice("Дилер".length)} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
-          <div className="flex flex-wrap items-center gap-6"><PageQrButton key={pathname} /><AutoCalcButton /></div>
-          <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-[var(--ac-muted)] lg:flex-col lg:items-end"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
 
         <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-x-6">
@@ -154,7 +158,6 @@ export function PublicLegalFooter() {
             <Link href="/terms" className="ac-public-legal-link">Правила использования сервиса</Link>
             <Link href="/consent" className="ac-public-legal-link">Согласие</Link>
             <Link href="/requisites" className="ac-public-legal-link">Реквизиты ИП</Link>
-            <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
           </nav>
         </div>
       </footer>
