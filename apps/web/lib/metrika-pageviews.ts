@@ -45,7 +45,7 @@ export function createMetrikaPageTracker(adapter:Adapter){
   adapter.load();
   if(!active){
    adapter.send(METRIKA_COUNTER_ID,'init',{
-    ssr:true,webvisor:false,clickmap:false,trackLinks:false,disableYtm:true,
+    ssr:true,clickmap:false,trackLinks:false,disableYtm:true,
     ecommerce:false,accurateTrackBounce:15000,
     url,referrer:metrikaPageUrl(adapter.referrer()),
    });

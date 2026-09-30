@@ -39,7 +39,7 @@ test('immediate first hit, 15-second bounce tracking and SPA hits without duplic
  const tracker=createMetrikaPageTracker({href:()=>href,allowed:()=>allowed,referrer:()=> 'https://yandex.ru/?secret=removed',send:(...args)=>calls.push(args),load:()=>{},disable:v=>disabled.push(v)});
  tracker.sync();tracker.sync();
  assert.equal(calls.length,1);assert.equal(calls[0][1],'init');
- assert.equal((calls[0][2] as any).accurateTrackBounce,15000);assert.equal((calls[0][2] as any).webvisor,false);
+ assert.equal((calls[0][2] as any).accurateTrackBounce,15000);assert.equal(Object.hasOwn(calls[0][2] as object,'webvisor'),false);
  assert.equal((calls[0][2] as any).url,href);assert.equal((calls[0][2] as any).referrer,'https://yandex.ru/');
  href='https://avtocena.com/cars';tracker.sync();tracker.sync();assert.equal(calls.length,2);assert.equal(calls[1][1],'hit');
  allowed=false;tracker.sync();assert.equal(calls.at(-1)?.[1],'destruct');assert.equal(disabled.at(-1),true);
