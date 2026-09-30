@@ -1,3 +1,4 @@
+import {leadChannelLabel} from "@/lib/lead-source";
 import {DeleteCrmRecord} from "@/components/crm/DeleteCrmRecord";
 import {TeamDiscussion} from "@/components/crm/TeamDiscussion";
 import {discussionMessages,discussionLabel} from "@/lib/crm-discussion";
@@ -346,7 +347,7 @@ export default async function CrmLeadsPage({
                       </p>
                     )}
                     <div className="mt-3 text-xs text-[var(--ac-muted)]">
-                      {sourceLabel(lead.source)} · {date(lead.createdAt)}
+                      {leadChannelLabel(lead)} · {sourceLabel(lead.source)} · {date(lead.createdAt)}
                       <br />
                       Уведомления:{" "}
                       {notifications.length
@@ -367,7 +368,7 @@ export default async function CrmLeadsPage({
                     <details className="crm-external-history mt-4"><summary className="font-bold">История статусов и сообщения клиента</summary>
                     <div className="max-h-80 space-y-2 overflow-y-auto">
                       {[
-                        ...(lead.followups || []).map((entry: any) => ({text: followupText(entry), createdAt: entry.createdAt, author: "Клиент · дополнение из формы"})),
+                        ...(lead.followups || []).map((entry: any) => ({text: followupText(entry), createdAt: entry.createdAt, author: `Клиент · ${leadChannelLabel(entry)} · дополнение`})),
                         ...(lead.statusHistory || []).map((entry: any) => ({
                           text: `Статус: ${leadStatusLabel(entry.status)}${entry.note ? ` · ${entry.note}` : ""}`,
                           createdAt: entry.changedAt,

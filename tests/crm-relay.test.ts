@@ -18,13 +18,16 @@ test("group relay needs no staff binding, preserves leases, excludes internal no
   process.env.JSON_STORAGE_DRIVER = "local"; resetJsonStorageForTests();
   try {
     await writeDataJson("auth/users.json", []); // Group delivery needs no linked staff.
-    await writeDataJson("leads/leads.json", [{id: "lead_test", name: "PRIVATE_NAME", phone: "PRIVATE_PHONE", comment: "CUSTOMER_COMMENT", internalNote: "PRIVATE_NOTE", notificationRequestedAt: new Date().toISOString()}]);
+    await writeDataJson("leads/leads.json", [{id: "lead_test", personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",submissionChannel:"telegram_miniapp",name: "PRIVATE_NAME", phone: "PRIVATE_PHONE", comment: "CUSTOMER_COMMENT", internalNote: "PRIVATE_NOTE", notificationRequestedAt: new Date().toISOString()}]);
     const [first, second] = await Promise.all([claimCrmNotices(), claimCrmNotices()]);
     const claims = [...first, ...second];
     assert.equal(claims.length, 1, JSON.stringify(await readChunkedDataJson<any>("telegram/crm-outbox.json", [])));
     assert.deepEqual(new Set(claims.map(c => c.chatId)), new Set([groupTarget.chatId]));
     assert.match(claims[0].text, /crm\/leads\?id=lead_test/);
-    assert.doesNotMatch(claims[0].text, /PRIVATE_PHONE|PRIVATE_NAME|CUSTOMER_COMMENT/);
+    assert.match(claims[0].text, /PRIVATE_NAME/);
+    assert.match(claims[0].text, /PRIVATE_PHONE/);
+    assert.match(claims[0].text, /Источник: Telegram Mini App/);
+    assert.doesNotMatch(claims[0].text, /CUSTOMER_COMMENT/);
     assert.doesNotMatch(JSON.stringify(claims), /PRIVATE_NOTE/);
     assert.equal((await claimCrmNotices()).length, 0);
     const owner = claims[0];
