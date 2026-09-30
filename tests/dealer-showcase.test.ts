@@ -233,6 +233,7 @@ test("owner configuration versions, unpublished isolation and special lead city 
           source: "catalog_offer_request",
           offerId: id,
           operationId: "special-city-test",
+          submissionThreadToken: "12345678-1234-4321-aaaa-123456789abc",
           phone: "+79999999999",
           name: "Тест",
           city: "Москва",
@@ -250,6 +251,17 @@ test("owner configuration versions, unpublished isolation and special lead city 
     assert.equal(leads[0].deliveryQuote.origin, "Бишкек");
     assert.equal(leads[0].deliveryQuote.amountRub, 225000);
     assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 225000);
+    const followup = await createLead(new Request("https://avtocena.com/api/leads", {
+      method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},
+      body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",totalRub:1})
+    }));
+    assert.equal(followup.status,200);
+    const updated=await readChunkedDataJson<any>("leads/leads.json",[]);
+    assert.equal(updated.length,1);
+    assert.equal(updated[0].totalRub,3135900);
+    assert.equal(updated[0].offerSnapshot.totalRub,3135900);
+    assert.equal(updated[0].selectedOffers[0].totalRub,3135900);
+    assert.equal(updated[0].deliveryQuote.amountRub,142500);
     assert.equal(published.specialsEnabled, true);
   } finally {
     process.chdir(cwd);
