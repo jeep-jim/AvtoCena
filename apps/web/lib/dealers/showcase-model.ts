@@ -152,6 +152,7 @@ export function calculateSpecial(
   )
     errors.push("Подтвердите актуальный курс (не старше 7 дней)");
   if (!tariff) errors.push("Добавьте тариф доставки для выбранного города");
+  if (tariff && !(tariff.usd > 0)) errors.push("Укажите стоимость доставки в долларах");
   if (!(o.priceUsd > 0)) errors.push("Укажите цену автомобиля в долларах");
   if (!o.customsIncluded && !(o.customsExtraRub > 0))
     errors.push(
@@ -420,7 +421,7 @@ export function normalizeShowcase(
         `Заполните характеристики и фото: ${specialTitle(o) || "новый автомобиль"}`,
       );
     const c = calculateSpecial(s, o);
-    if (!c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
+    if (s.specialsEnabled && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
   if (s.profileEnabled && (!s.phone || !s.offices.length))
     throw Error("Для публикации дилера нужны телефон и хотя бы один офис");
