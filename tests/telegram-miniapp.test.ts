@@ -21,7 +21,7 @@ test("ordinary browsers clear stale mini state; URL and SDK alone never activate
 });
 test("Telegram native, desktop and web hosts retain mini presentation and explicit exit",()=>{
  for(const host of ["native","windows","web"] as const){
-  for(const path of ["/mini","/cars/offer/car","/privacy"]){assert.equal(boot(path,"",undefined,host).mode,"true");assert.equal(boot(path,"",undefined,host,true).mode,"true");}
+  for(const path of ["/mini","/cars/offer/car","/privacy","/","/nvkz/topavto","/dealers/dealer_topavto"]){assert.equal(boot(path,"",undefined,host).mode,"true");assert.equal(boot(path,"",undefined,host,true).mode,"true");}
   assert.equal(boot("/cars","?mini=0","1",host).mode,undefined);
   for(const path of ["/crm","/admin","/login","/api/crm","/partner","/cars-malicious"]){assert.equal(boot(path,"","1",host).mode,undefined);assert.equal(miniAppPathAllowed(path),false);}
  }

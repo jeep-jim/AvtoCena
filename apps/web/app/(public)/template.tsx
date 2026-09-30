@@ -168,7 +168,7 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
   useEffect(() => {
     const closeOpenDetails = (target?: EventTarget | null) => {
       const node = target instanceof Node ? target : null;
-      document.querySelectorAll<HTMLDetailsElement>("details[open]").forEach((details) => {
+      document.querySelectorAll<HTMLDetailsElement>("details[open]:not([data-ac-preserve-open])").forEach((details) => {
         if (!node || !details.contains(node)) details.removeAttribute("open");
       });
     };

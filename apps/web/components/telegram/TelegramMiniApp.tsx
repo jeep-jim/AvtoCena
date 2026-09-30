@@ -89,7 +89,7 @@ export function TelegramMiniApp(){
     <Script src="https://telegram.org/js/telegram-web-app.js" strategy="afterInteractive" onReady={()=>setSdkReady(true)}/>
     <header className="ac-mini-header" aria-label="АвтоЦена в Telegram">
       {!atCatalog?<button type="button" onClick={back} aria-label="Назад в каталог">←</button>:null}
-      <Link href="/mini" className="ac-mini-brand" aria-label="АвтоЦена — каталог"><img src="/logo/avtocena-mark-light.svg" width={30} height={30} alt=""/><span>АвтоЦена</span></Link>
+      <Link href="/" className="ac-mini-brand" aria-label="АвтоЦена — главная"><img src="/logo/avtocena-mark-light.svg" width={30} height={30} alt=""/><span>АвтоЦена</span></Link>
       <Link href="/favorites" className="ac-mini-favorites" aria-label={`Избранное${favoriteCount ? `: ${favoriteCount}` : ""}`} aria-current={pathname==="/favorites"?"page":undefined} title="Избранное">
         <svg width="24" height="24" viewBox="0 0 24 24" fill={pathname==="/favorites"?"currentColor":"none"} aria-hidden="true"><path d="M12 2.7L14.85 8.5L21.25 9.43L16.62 13.94L17.71 20.31L12 17.31L6.29 20.31L7.38 13.94L2.75 9.43L9.15 8.5L12 2.7Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/></svg>
         {favoriteCount>0?<span>{favoriteCount}</span>:null}

@@ -10,6 +10,9 @@ function fromRow(row:any,url:string,market:string):SourceDraft {
  const draft:Record<string,string>={};for(const key of ['year','engineCc','powerHp','powerKw'])if(positive(row[key]))draft[key]=positive(row[key]);
  if(/^\d{4}-?\d{2}/.test(row.productionDate||'')){const date=String(row.productionDate).replace(/-/g,'');draft.year=date.slice(0,4);draft.productionMonth=String(Number(date.slice(4,6)));}
  const fuel=canonicalSourceFuel(row.fuel);if(fuel)draft.fuel=fuel;
+ for(const key of ['trim','transmission','drive','body','color','description','equipment'])if(typeof row[key]==='string'&&row[key].trim())draft[key]=row[key].trim().slice(0,8000);
+ if(typeof row.mileageKm==='number'&&Number.isFinite(row.mileageKm)&&row.mileageKm>=0)draft.mileageKm=String(row.mileageKm);
+ if(['left','right'].includes(row.steering))draft.steering=row.steering;
  return {title:[row.make,row.model,row.trim].filter(Boolean).join(' ')||row.title||'',make:row.make||'',model:row.model||'',market,price:positive(row.price??row.sourcePrice),currency:row.currency||row.sourceCurrency||'',draft,url,images:[...new Map([...(row.images||[])].reverse().map((x:any)=>[/dubicars\.com\//.test(typeof x==='string'?x:x.url)?String(typeof x==='string'?x:x.url).split('/').at(-1):String(typeof x==='string'?x:x.url),typeof x==='string'?x:x.url])).values()].reverse().filter(x=>typeof x==='string') as string[],facts:[['Пробег, км',row.mileageKm],['Коробка передач',row.transmission],['Привод',row.drive]].filter(([,v])=>v).map(([label,value])=>({label:String(label),value:String(value)})),notes:[]};
 }
 export async function extractKnownSource(html:string,url:string):Promise<SourceDraft>{

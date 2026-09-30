@@ -72,6 +72,12 @@ export function extractSource(html:string,url:string) {
   const power=engine.enginePower;const unit=power?.unitCode||power?.unitText;
   if(['BHP','PS','hp','л.с.'].includes(unit))put('powerHp',numeric(power));
   if(['KWT','kW','кВт'].includes(unit)&&numeric(power)){put('powerKw',numeric(power));put('powerHp',(numeric(power)!/0.73549875).toFixed(2));}
+  for(const [key,value] of Object.entries({trim:car.vehicleConfiguration,transmission:car.vehicleTransmission,drive:car.driveWheelConfiguration,body:car.bodyType,color:car.color,description:car.description}))if(text(value))put(key,text(value));
+  const mileage=car.mileageFromOdometer;
+  if(['KMT','km','км'].includes(mileage?.unitCode||mileage?.unitText)&&Number.isFinite(Number(mileage?.value))&&Number(mileage.value)>=0)put('mileageKm',Number(mileage.value));
+  const steering=text(car.steeringPosition);
+  if(/^(?:https?:\/\/schema.org\/)?LeftHandDriving$/.test(steering))put('steering','left');
+  if(/^(?:https?:\/\/schema.org\/)?RightHandDriving$/.test(steering))put('steering','right');
   // Explicit product metadata is useful on sites without JSON-LD. Do not use it on ambiguous multi-car pages.
   const metadataAllowed=cars.length===0||Boolean(car['@type']);
   const price=numeric(offer.price??priceSpecification.price)??(metadataAllowed?numeric(meta('product:price:amount')||meta('og:price:amount')):undefined);

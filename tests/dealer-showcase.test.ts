@@ -63,6 +63,7 @@ function fixture() {
   const s = defaultShowcase("dealer_topavto");
   s.pricing = {
     ...s.pricing,
+    rateMode: "manual",
     usdRub: 80,
     rateAt: new Date().toISOString(),
     tariffs: [

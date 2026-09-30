@@ -1,3 +1,4 @@
+import {withDealerRate} from './exchange-rate';
 import { readShowcase } from "./showcase-store";
 import {
   calculateSpecial,
@@ -28,7 +29,8 @@ export function publicRail(s: DealerShowcase, city = "") {
 export async function getSpecialOffer(value: string, preview = false) {
   const parsed = parseSpecialId(value);
   if (!parsed) return null;
-  const showcase = await readShowcase(parsed.dealerId);
+  const stored = await readShowcase(parsed.dealerId);
+  const showcase = stored ? await withDealerRate(stored) : null;
   if (!showcase || (!preview && !showcase.specialsEnabled)) return null;
   const offer = showcase.offers.find(
     (o) => o.id === parsed.id && (preview || o.status === "published"),

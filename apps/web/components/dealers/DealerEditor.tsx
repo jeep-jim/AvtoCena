@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   calculateSpecial,
@@ -9,200 +9,10 @@ import {
   specialTitle,
   specialPath,
 } from "@/lib/dealers/showcase-model";
+import {Field, Toggle, Photos, input, button} from "./DealerEditorFields";
+import {DealerSpecialsEditor} from "./DealerSpecialsEditor";
+import {dealerProfilePath} from "@/lib/dealers/profile-url";
 import type { PublicFeatures } from "@/lib/dealers/showcase-store";
-const input = "soft-input w-full min-w-0 rounded-xl p-3 text-sm";
-const button =
-  "rounded-xl border border-white/20 px-4 py-2 text-sm font-bold disabled:opacity-40";
-function Field({
-  label,
-  value,
-  onChange,
-  type = "text",
-}: {
-  label: string;
-  value: string | number;
-  onChange: (v: any) => void;
-  type?: string;
-}) {
-  return (
-    <label className="grid gap-1 text-sm">
-      {label}
-      <input
-        className={input}
-        type={type}
-        value={value}
-        step={type === "number" ? "any" : undefined}
-        onChange={(e) =>
-          onChange(type === "number" ? Number(e.target.value) : e.target.value)
-        }
-      />
-    </label>
-  );
-}
-function Toggle({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="flex items-center gap-3 rounded-xl border border-white/15 p-3">
-      <input
-        className="h-5 w-5 accent-red-500"
-        type="checkbox"
-        role="switch"
-        checked={value}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span>{label}</span>
-    </label>
-  );
-}
-function Photos({
-  dealerId,
-  value,
-  onChange,
-  single = false,
-}: {
-  dealerId: string;
-  value: DealerPhoto[];
-  onChange: (p: DealerPhoto[]) => void;
-  single?: boolean;
-}) {
-  const [busy, setBusy] = useState(false),
-    [url, setUrl] = useState(""),
-    [error, setError] = useState("");
-  async function upload(files?: FileList | null) {
-    setBusy(true);
-    setError("");
-    try {
-      const added: DealerPhoto[] = [];
-      for (const file of files ? Array.from(files) : [null]) {
-        const data = new FormData();
-        if (file) data.set("file", file);
-        else data.set("url", url);
-        const r = await fetch(`/api/crm/dealers/${dealerId}/media`, {
-          method: "POST",
-          body: data,
-        });
-        const result = await r.json();
-        if (!r.ok) throw Error(result.error);
-        added.push(result);
-      }
-      onChange(single ? added.slice(-1) : [...value, ...added]);
-      setUrl("");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Ошибка загрузки");
-    } finally {
-      setBusy(false);
-    }
-  }
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
-        {value.map((p, i) => (
-          <div key={`${p.id}-${i}`} className="w-28">
-            <img
-              className="h-20 w-28 rounded-xl object-cover"
-              src={p.url}
-              alt={p.caption || `Фото ${i + 1}`}
-            />
-            <div className="flex justify-between text-xs">
-              <button
-                type="button"
-                disabled={busy || i === 0}
-                onClick={() => {
-                  const next = [...value];
-                  [next[i - 1], next[i]] = [next[i], next[i - 1]];
-                  onChange(next);
-                }}
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                disabled={busy}
-                onClick={() => onChange(value.filter((_, n) => n !== i))}
-              >
-                Удалить
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-      <input
-        aria-label="Загрузить фотографии"
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-        multiple={!single}
-        disabled={busy}
-        onChange={(e) => void upload(e.target.files)}
-        className="max-w-full text-sm"
-      />
-      <div className="flex gap-2">
-        <input
-          className={input}
-          type="url"
-          aria-label="Ссылка на изображение"
-          placeholder="https://… — ссылка на фото"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button
-          type="button"
-          disabled={busy || !url}
-          className={button}
-          onClick={() => void upload()}
-        >
-          Загрузить
-        </button>
-      </div>
-      <p className="text-xs text-white/60">
-        {busy
-          ? "Загружаем…"
-          : "JPG, PNG, WebP до 8 МБ. Первое фото будет обложкой."}
-      </p>
-      {error && (
-        <p role="alert" className="text-red-300">
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
-function newOffer(): SpecialOffer {
-  return {
-    id: crypto.randomUUID(),
-    status: "draft",
-    make: "",
-    model: "",
-    trim: "",
-    year: new Date().getFullYear(),
-    productionMonth: 0,
-    engineCc: 0,
-    powerHp: 0,
-    power30MinKw: 0,
-    fuel: "petrol",
-    transmission: "",
-    drive: "",
-    body: "",
-    color: "",
-    steering: "left",
-    mileageKm: 0,
-    description: "",
-    equipment: "",
-    photos: [],
-    priceUsd: 0,
-    customsIncluded: false,
-    customsExtraRub: 0,
-    personalUseEligible: false,
-    defaultCity: "",
-    updatedAt: "",
-  };
-}
 export function DealerEditor({
   initial,
   features,
@@ -210,16 +20,35 @@ export function DealerEditor({
   initial: DealerShowcase;
   features: PublicFeatures;
 }) {
-  const [s, setS] = useState(initial),
+  const prepared=()=>{
+    const value=structuredClone(initial);
+    if(value.dealerId==='dealer_topavto'&&!value.pricing.tariffs.some(t=>t.city.toLowerCase()==='новосибирск'))value.pricing.tariffs.push({id:'novosibirsk',city:'Новосибирск',usd:900,daysFrom:5,daysTo:7});
+    return value;
+  };
+  const [s, setS] = useState(prepared),
     [f, setF] = useState(features),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [tab, setTab] = useState("profile"),
     [mapPolicy, setMapPolicy] = useState(false);
+  const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
+  const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
+  const [recovery,setRecovery]=useState<any>(null);
+  const base=useRef(initial);
+  const [loaded,setLoaded]=useState(false);
+  const draftKey=`avtocena_dealer_draft_${initial.dealerId}`;
+  useEffect(()=>{
+    try{const draft=JSON.parse(sessionStorage.getItem(draftKey)||'null');if(draft?.value?.dealerId===initial.dealerId)setRecovery(draft);}catch{}
+    setLoaded(true);
+  },[draftKey,initial.dealerId]);
+  useEffect(()=>{if(!loaded||recovery)return;try{if(JSON.stringify(s)===JSON.stringify(base.current))sessionStorage.removeItem(draftKey);else sessionStorage.setItem(draftKey,JSON.stringify({value:s,base:base.current}));}catch{}},[s,draftKey,loaded,recovery]);
+  const active=s.offers.find(o=>o.id===activeId)||s.offers[0];
+  const quote=active?calculateSpecial(s,active):null;
+
   const patch = (v: Partial<DealerShowcase>) => setS((s) => ({ ...s, ...v }));
   const pricing = (v: Partial<DealerShowcase["pricing"]>) =>
     setS((s) => ({ ...s, pricing: { ...s.pricing, ...v } }));
-  async function save(global = false) {
+  async function save(global = false, draft = false, resolved?: DealerShowcase) {
     if (
       !confirm(
         global
@@ -228,6 +57,8 @@ export function DealerEditor({
       )
     )
       return;
+    let payload=resolved||s;
+    if(draft&&active){const offers=s.offers.map(o=>o.id===active.id?{...o,status:'draft' as const}:o);payload={...s,offers,specialsEnabled:s.specialsEnabled&&offers.some(o=>o.status==='published')};}
     setBusy(true);
     setMessage("");
     try {
@@ -238,14 +69,15 @@ export function DealerEditor({
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(global ? f : s),
+          body: JSON.stringify(global ? f : {...payload,base:base.current}),
         },
       );
       const result = await r.json();
+      if(r.status===409&&result.current){setConflict({current:result.current,proposed:result.proposed});throw Error(result.error);}
       if (!r.ok) throw Error(result.error);
       if (global) setF(result);
-      else setS(result);
-      setMessage("Настройки сохранены");
+      else {base.current=result;setS(result);setConflict(null);try{sessionStorage.removeItem(draftKey);}catch{}}
+      setMessage(draft ? "Черновик сохранён. Автомобиль не опубликован." : "Настройки сохранены");
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "Не удалось сохранить");
     } finally {
@@ -263,21 +95,22 @@ export function DealerEditor({
         {[
           ["profile", "Компания и офисы"],
           ["buyers", "Фото покупателей"],
-          ["pricing", "Цена и доставка"],
           ["offers", "Спецпредложения"],
           ["services", "ОСАГО и кредит"],
         ].map(([id, label]) => (
           <button
             type="button"
             key={id}
-            className={`${button} ${tab === id ? "bg-red-600" : ""}`}
+            className={`${button} ${tab === id ? "bg-red-600 text-white" : ""}`}
             onClick={() => setTab(id)}
           >
             {label}
           </button>
         ))}
       </div>
-      <fieldset disabled={busy} className="min-w-0 space-y-6">
+      {recovery&&<div className="dealer-editor-panel"><p>Есть несохранённые изменения из прошлой сессии.</p><div className="mt-3 flex gap-2"><button className={button} onClick={()=>{base.current=recovery.base||initial;setS(recovery.value);setRecovery(null);}}>Восстановить изменения</button><button className={button} onClick={()=>setRecovery(null)}>Оставить сохранённую версию</button></div></div>}
+      <div className="dealer-editor-layout">
+      <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-5">
         {tab === "profile" && (
           <>
             <Toggle
@@ -285,17 +118,18 @@ export function DealerEditor({
               value={s.profileEnabled}
               onChange={(v) => patch({ profileEnabled: v })}
             />
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-[var(--ac-muted)]">
               Страница появится после сохранения. До включения её можете
               посмотреть только вы.
             </p>
             <Link
-              className="text-red-300 underline"
+              className="text-red-500 underline"
               href={`/dealers/${s.dealerId}?preview=1`}
               target="_blank"
             >
               Предпросмотр страницы дилера ↗
             </Link>
+            <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Ссылка закрепится за вашей компанией после сохранения.</p></div>
             <Field
               label="Название компании"
               value={s.name}
@@ -377,7 +211,7 @@ export function DealerEditor({
               return (
                 <section
                   key={o.id}
-                  className="space-y-3 rounded-2xl border border-white/15 p-4"
+                  className="space-y-3 rounded-2xl border border-[var(--ac-border)] p-4"
                 >
                   <div className="grid gap-3 md:grid-cols-2">
                     <Field
@@ -451,7 +285,7 @@ export function DealerEditor({
                   >
                     Найти адрес на карте
                   </button>
-                  <p className="text-xs text-white/60">
+                  <p className="text-xs text-[var(--ac-muted)]">
                     Поиск OpenStreetMap. Если адрес не найден, укажите
                     координаты вручную.
                   </p>
@@ -504,7 +338,7 @@ export function DealerEditor({
               value={s.buyersEnabled}
               onChange={(v) => patch({ buyersEnabled: v })}
             />
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-[var(--ac-muted)]">
               Пустая галерея скрыта автоматически. Фотографии TopAvto
               отображаются на главной, фотографии остальных компаний — на их
               страницах.
@@ -516,361 +350,7 @@ export function DealerEditor({
             />
           </>
         )}
-        {tab === "pricing" && (
-          <>
-            <h2 className="text-xl font-black">Расчёт спецпредложений</h2>
-            <p className="text-sm text-white/60">
-              Цена автомобиля и доставка в USD пересчитываются по одному курсу.
-              Обычный каталог использует свои настройки.
-            </p>
-            <a
-              href="https://www.profinance.ru/chart/usdrub/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-red-300 underline"
-            >
-              Открыть курс USD/RUB на ProFinance ↗
-            </a>
-            <p className="text-sm">
-              Укажите проверенный курс и подтвердите дату. Курс старше 7 дней не
-              используется для публичной цены.
-            </p>
-            <div className="grid gap-3 md:grid-cols-2">
-              {[
-                ["usdRub", "Курс USD/RUB"],
-                ["fxMarkupRub", "Надбавка к курсу, ₽"],
-                ["deliveryMarkupRub", "Надбавка к доставке, ₽"],
-                ["commissionRub", "Комиссия, ₽"],
-                ["documentsRub", "СБКТС + ЭПТС, ₽"],
-              ].map(([key, label]) => (
-                <Field
-                  key={key}
-                  type="number"
-                  label={label}
-                  value={(s.pricing as any)[key]}
-                  onChange={(v) => pricing({ [key]: v })}
-                />
-              ))}
-            </div>
-            <button
-              type="button"
-              className={button}
-              onClick={() => pricing({ rateAt: new Date().toISOString() })}
-            >
-              Подтверждаю курс на сегодня
-            </button>
-            <p className="text-xs">
-              {s.pricing.rateAt
-                ? `Подтверждён: ${new Date(s.pricing.rateAt).toLocaleString("ru-RU")}`
-                : "Курс ещё не подтверждён"}
-            </p>
-            <h3 className="text-lg font-bold">Доставка по городам</h3>
-            {s.pricing.tariffs.map((t, i) => (
-              <div
-                key={t.id}
-                className="grid gap-3 rounded-xl border border-white/15 p-3 md:grid-cols-5"
-              >
-                {[
-                  ["city", "Город", "text"],
-                  ["usd", "Доставка, $", "number"],
-                  ["daysFrom", "От, дней", "number"],
-                  ["daysTo", "До, дней", "number"],
-                ].map(([k, l, type]) => (
-                  <Field
-                    key={k}
-                    label={l}
-                    type={type}
-                    value={(t as any)[k]}
-                    onChange={(v) =>
-                      pricing({
-                        tariffs: s.pricing.tariffs.map((x, n) =>
-                          n === i ? { ...x, [k]: v } : x,
-                        ),
-                      })
-                    }
-                  />
-                ))}
-                <button
-                  type="button"
-                  className={button}
-                  onClick={() =>
-                    pricing({
-                      tariffs: s.pricing.tariffs.filter((_, n) => n !== i),
-                    })
-                  }
-                >
-                  Удалить
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              className={button}
-              onClick={() =>
-                pricing({
-                  tariffs: [
-                    ...s.pricing.tariffs,
-                    {
-                      id: crypto.randomUUID(),
-                      city: "",
-                      usd: 0,
-                      daysFrom: 5,
-                      daysTo: 10,
-                    },
-                  ],
-                })
-              }
-            >
-              + Добавить город доставки
-            </button>
-          </>
-        )}
-        {tab === "offers" && (
-          <>
-            <Toggle
-              label="Показывать ленту спецпредложений"
-              value={s.specialsEnabled}
-              onChange={(v) => patch({ specialsEnabled: v })}
-            />
-            <Field
-              label="Заголовок ленты"
-              value={s.specialHeading}
-              onChange={(v) => patch({ specialHeading: v })}
-            />
-            <p className="text-sm text-white/60">
-              На главной лента TopAvto появится под фотографиями покупателей.
-              Публикуются только готовые автомобили; черновики видит только
-              владелец.
-            </p>
-            {s.offers.map((o) => {
-              const quote = calculateSpecial(s, o);
-              return (
-                <details
-                  key={o.id}
-                  className="rounded-2xl border border-white/15 p-4"
-                  open={undefined}
-                >
-                  <summary className="cursor-pointer font-bold">
-                    {specialTitle(o) || "Новый автомобиль"} ·{" "}
-                    {o.status === "published"
-                      ? "Опубликован"
-                      : o.status === "sold"
-                        ? "Продан"
-                        : "Черновик"}
-                  </summary>
-                  <div className="mt-4 space-y-4">
-                    <label className="grid gap-2">
-                      Статус
-                      <select
-                        className={input}
-                        value={o.status}
-                        onChange={(e) =>
-                          updateOffer(o.id, {
-                            status: e.target.value as SpecialOffer["status"],
-                          })
-                        }
-                      >
-                        <option value="draft">Черновик</option>
-                        <option value="published">Опубликован</option>
-                        <option value="sold">Продан</option>
-                      </select>
-                    </label>
-                    <Photos
-                      dealerId={s.dealerId}
-                      value={o.photos}
-                      onChange={(photos) => updateOffer(o.id, { photos })}
-                    />
-                    <div className="grid gap-3 md:grid-cols-3">
-                      {[
-                        ["make", "Марка", "text"],
-                        ["model", "Модель", "text"],
-                        ["trim", "Комплектация", "text"],
-                        ["year", "Год выпуска", "number"],
-                        [
-                          "productionMonth",
-                          "Месяц производства (1–12)",
-                          "number",
-                        ],
-                        ["engineCc", "Объём двигателя, см³", "number"],
-                        [
-                          "powerHp",
-                          "Мощность ДВС / электромобиля, л.с.",
-                          "number",
-                        ],
-                        [
-                          "power30MinKw",
-                          "30-минутная мощность электромоторов, кВт",
-                          "number",
-                        ],
-                        ["transmission", "Коробка передач", "text"],
-                        ["drive", "Привод", "text"],
-                        ["body", "Кузов", "text"],
-                        ["color", "Цвет", "text"],
-                        ["mileageKm", "Пробег, км", "number"],
-                        ["priceUsd", "Цена автомобиля, $", "number"],
-                        [
-                          "customsExtraRub",
-                          "Таможенные платежи сверх цены, ₽",
-                          "number",
-                        ],
-                      ].map(([k, label, type]) => (
-                        <Field
-                          key={k}
-                          label={label}
-                          type={type}
-                          value={(o as any)[k]}
-                          onChange={(v) => updateOffer(o.id, { [k]: v })}
-                        />
-                      ))}
-                      <label className="grid gap-1 text-sm">
-                        Двигатель
-                        <select
-                          className={input}
-                          value={o.fuel}
-                          onChange={(e) =>
-                            updateOffer(o.id, {
-                              fuel: e.target.value as SpecialOffer["fuel"],
-                            })
-                          }
-                        >
-                          {[
-                            ["petrol", "Бензин"],
-                            ["diesel", "Дизель"],
-                            ["electric", "Электро"],
-                            ["hybrid", "Параллельный гибрид"],
-                            ["series_hybrid", "Последовательный гибрид"],
-                          ].map(([v, l]) => (
-                            <option key={v} value={v}>
-                              {l}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      <label className="grid gap-1 text-sm">
-                        Руль
-                        <select
-                          className={input}
-                          value={o.steering}
-                          onChange={(e) =>
-                            updateOffer(o.id, {
-                              steering: e.target
-                                .value as SpecialOffer["steering"],
-                            })
-                          }
-                        >
-                          <option value="left">Левый</option>
-                          <option value="right">Правый</option>
-                        </select>
-                      </label>
-                      <label className="grid gap-1 text-sm">
-                        Город цены на карточке
-                        <select
-                          className={input}
-                          value={o.defaultCity}
-                          onChange={(e) =>
-                            updateOffer(o.id, { defaultCity: e.target.value })
-                          }
-                        >
-                          <option value="">Выберите город</option>
-                          {s.pricing.tariffs.map((t) => (
-                            <option key={t.id}>{t.city}</option>
-                          ))}
-                        </select>
-                      </label>
-                    </div>
-                    <Toggle
-                      label="Таможенные платежи включены в закупочную цену"
-                      value={o.customsIncluded}
-                      onChange={(v) =>
-                        updateOffer(o.id, { customsIncluded: v })
-                      }
-                    />
-                    <Toggle
-                      label="Подтверждены условия льготного утильсбора для личного пользования"
-                      value={o.personalUseEligible}
-                      onChange={(v) =>
-                        updateOffer(o.id, { personalUseEligible: v })
-                      }
-                    />
-                    <p className="text-xs text-white/60">
-                      Льгота применяется только при подходящих характеристиках.
-                      Перед публикацией проверьте условия ввоза и состав
-                      закупочной цены.
-                    </p>
-                    {[
-                      ["description", "Описание"],
-                      ["equipment", "Оснащение"],
-                    ].map(([k, label]) => (
-                      <label key={k} className="grid gap-2">
-                        {label}
-                        <textarea
-                          className={input}
-                          rows={4}
-                          value={(o as any)[k]}
-                          onChange={(e) =>
-                            updateOffer(o.id, { [k]: e.target.value })
-                          }
-                        />
-                      </label>
-                    ))}
-                    <div className="rounded-xl bg-white/5 p-4">
-                      <strong>
-                        {quote.complete
-                          ? `${quote.totalRub!.toLocaleString("ru-RU")} ₽ — ${quote.city}`
-                          : "Для публикации заполните расчёт"}
-                      </strong>
-                      {quote.complete ? (
-                        quote.lines.map((l) => (
-                          <p
-                            key={l.id}
-                            className="flex justify-between gap-3 text-sm"
-                          >
-                            <span>{l.title}</span>
-                            <span>{l.amountRub.toLocaleString("ru-RU")} ₽</span>
-                          </p>
-                        ))
-                      ) : (
-                        <ul className="list-inside list-disc text-sm">
-                          {quote.errors.map((e) => (
-                            <li key={e}>{e}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                      <Link
-                        className={button}
-                        target="_blank"
-                        href={`${specialPath(s.dealerId, o.id)}?preview=1`}
-                      >
-                        Предпросмотр после сохранения ↗
-                      </Link>
-                      <button
-                        type="button"
-                        className={button}
-                        onClick={() => {
-                          if (confirm("Удалить автомобиль из витрины?"))
-                            patch({
-                              offers: s.offers.filter((x) => x.id !== o.id),
-                            });
-                        }}
-                      >
-                        Удалить автомобиль
-                      </button>
-                    </div>
-                  </div>
-                </details>
-              );
-            })}
-            <button
-              type="button"
-              className={button}
-              onClick={() => patch({ offers: [...s.offers, newOffer()] })}
-            >
-              + Добавить автомобиль
-            </button>
-          </>
-        )}
+        {tab === "offers" && <DealerSpecialsEditor s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId}/>}
         {tab === "services" && (
           <>
             <h2 className="text-xl font-black">Сервисы на всём сайте</h2>
@@ -879,31 +359,43 @@ export function DealerEditor({
               value={f.affiliatesEnabled}
               onChange={(v) => setF({ ...f, affiliatesEnabled: v })}
             />
-            <p className="text-sm text-white/60">
+            <p className="text-sm text-[var(--ac-muted)]">
               Один переключатель управляет кнопками и ссылками на главной, в
               карточках автомобилей и в подвале, включая мобильную версию.
             </p>
           </>
         )}
       </fieldset>
-      <div className="sticky bottom-3 z-20 rounded-2xl border border-white/20 bg-slate-950 p-4 shadow-xl">
-        <button
-          type="button"
-          disabled={busy}
-          className="rounded-xl bg-red-600 px-6 py-3 font-black disabled:opacity-50"
-          onClick={() => void save(tab === "services")}
-        >
-          {busy
-            ? "Сохраняем…"
-            : tab === "services"
-              ? "Сохранить видимость сервисов"
-              : "Сохранить настройки дилера"}
-        </button>
-        <p role="status" className="mt-2 text-sm">
-          {message ||
-            "Изменения применятся только после сохранения и подтверждения."}
-        </p>
+      <aside className="dealer-editor-sidebar">
+       <section className="dealer-editor-panel space-y-3">
+        <h2 className="text-lg font-black">Сохранение</h2>
+        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-3 font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
+        {tab==='offers'&&active&&<button type="button" disabled={busy} className={button+' w-full'} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
+        <p role="status" className="text-sm leading-5">{message||'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.'}</p>
+        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
+        <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Открыть сохранённую страницу ↗</Link>
+       </section>
+       {tab==='offers'&&active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
+        <h2 className="font-bold">Так выглядит карточка</h2>
+        {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-sm text-[var(--ac-muted)]">Добавьте фото автомобиля</div>}
+        <h3 className="text-xl font-black">{specialTitle(active)||'Название автомобиля'}</h3>
+        <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,active.defaultCity].filter(Boolean).join(' · ')}</p>
+        <p className="text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p>
+        {quote?.complete?quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
+        <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. На сайте изменения появятся после сохранения.</p>
+       </section>}
+       {tab==='profile'&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр компании">{s.banner&&<img src={s.banner} alt="Баннер" className="aspect-[3/1] w-full rounded-xl object-cover"/>}{(s.logoDark||s.logoLight)&&<img src={s.logoDark||s.logoLight} alt="Логотип" className="h-14 max-w-full object-contain"/>}<h2 className="text-xl font-black">{s.name}</h2><p className="whitespace-pre-line text-sm">{s.description}</p><p className="text-sm">{s.phone}</p><p className="break-all text-xs text-red-500">avtocena.com{dealerProfilePath(s)}</p></section>}
+      </aside>
       </div>
+      <style>{`
+       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+       .dealer-editor-main{border:0;padding:0;margin:0}
+       .dealer-editor-sidebar{position:sticky;top:90px;display:grid;gap:16px;min-width:0}
+       .dealer-editor-panel{padding:20px;border:1px solid var(--ac-border);border-radius:20px;background:var(--ac-surface)}
+       .dealer-editor-main input,.dealer-editor-main select{min-height:44px}
+       @media(max-width:1000px){.dealer-editor-layout{grid-template-columns:minmax(0,1fr)}.dealer-editor-sidebar{position:static;grid-row:1;grid-template-columns:repeat(2,minmax(0,1fr))}}
+       @media(max-width:600px){.dealer-editor-sidebar{grid-template-columns:minmax(0,1fr)}.dealer-editor-panel{padding:14px}}
+      `}</style>
     </div>
   );
 }

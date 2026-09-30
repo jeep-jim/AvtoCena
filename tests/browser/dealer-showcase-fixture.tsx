@@ -6,7 +6,7 @@ import { BuyerGallery } from "../../apps/web/components/home/BuyerGallery";
 import { defaultShowcase } from "../../apps/web/lib/dealers/showcase-model";
 const s = defaultShowcase("dealer_topavto");
 createRoot(document.getElementById("root")!).render(
-  <main className="mx-auto max-w-6xl p-4 text-white">
+  <main className="mx-auto max-w-6xl p-4 text-[var(--ac-text)]">
     <h1 className="mb-6 text-3xl font-black">TopAvto — витрина дилера</h1>
     <DealerEditor
       initial={s}

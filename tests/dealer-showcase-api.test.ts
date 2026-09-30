@@ -104,7 +104,7 @@ test("dealer writes enforce current owner role and origin before accepting conte
     const r = await modules.showcase.PUT(request(), context);
     assert.equal(r.status, 200);
     assert.equal((await r.json()).version, 1);
-    assert.equal((await modules.showcase.PUT(request(), context)).status, 400);
+    assert.equal((await modules.showcase.PUT(request(), context)).status, 409);
     assert.equal(
       (
         await modules.features.PUT(

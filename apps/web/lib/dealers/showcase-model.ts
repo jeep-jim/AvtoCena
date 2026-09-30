@@ -1,3 +1,4 @@
+import {validProfilePart} from './profile-url';
 import {
   utilizationCoefficient2026,
   utilizationPowerKwForInput,
@@ -22,6 +23,7 @@ export type DeliveryTariff = {
   daysTo: number;
 };
 export type SpecialOffer = {
+  sourceUrl?: string;
   id: string;
   status: "draft" | "published" | "sold";
   make: string;
@@ -52,6 +54,8 @@ export type SpecialOffer = {
 export type DealerShowcase = {
   version: number;
   dealerId: string;
+  citySlug?: string;
+  slug?: string;
   profileEnabled: boolean;
   buyersEnabled: boolean;
   specialsEnabled: boolean;
@@ -67,6 +71,7 @@ export type DealerShowcase = {
   buyerPhotos: DealerPhoto[];
   specialHeading: string;
   pricing: {
+    rateMode?: "auto" | "manual";
     usdRub: number;
     rateAt: string;
     rateSource: string;
@@ -83,6 +88,8 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
   return {
     version: 0,
     dealerId: id,
+    citySlug: id === PILOT_DEALER_ID ? "nvkz" : "",
+    slug: id === PILOT_DEALER_ID ? "topavto" : "",
     profileEnabled: false,
     buyersEnabled: id === PILOT_DEALER_ID,
     specialsEnabled: false,
@@ -105,6 +112,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
         : [],
     specialHeading: "✅ СПЕЦ ПРЕДЛОЖЕНИЕ от 5 дней и авто у вас дома!",
     pricing: {
+      rateMode: "auto",
       usdRub: 0,
       rateAt: "",
       rateSource: "https://www.profinance.ru/chart/usdrub/",
@@ -261,6 +269,12 @@ export function mediaUrl(v: unknown, dealerId: string) {
     return u;
   throw Error("Сначала загрузите изображение");
 }
+function listingUrl(value: unknown) {
+  const raw=text(value,2048);if(!raw)return '';
+  const url=new URL(raw);
+  if(url.protocol!=='https:'||url.username||url.password)throw Error('Укажите HTTPS-ссылку на объявление');
+  return url.href;
+}
 function photos(v: unknown, id: string, max = 40): DealerPhoto[] {
   if (!Array.isArray(v)) return [];
   if (v.length > max) throw Error(`Можно загрузить не более ${max} фотографий`);
@@ -302,6 +316,8 @@ export function normalizeShowcase(
     ...base,
     version,
     dealerId: id,
+    citySlug: text(raw.citySlug,40).toLowerCase(),
+    slug: text(raw.slug,40).toLowerCase(),
     profileEnabled: raw.profileEnabled === true,
     buyersEnabled: raw.buyersEnabled === true,
     specialsEnabled: raw.specialsEnabled === true,
@@ -318,6 +334,7 @@ export function normalizeShowcase(
     offices: [],
     offers: [],
     pricing: {
+      rateMode: p.rateMode === "manual" ? "manual" : "auto",
       usdRub: number(p.usdRub, 0, 1000),
       rateAt: text(p.rateAt, 50),
       rateSource: base.pricing.rateSource,
@@ -330,6 +347,7 @@ export function normalizeShowcase(
     updatedAt: new Date().toISOString(),
   };
   if (!s.name) throw Error("Укажите название дилера");
+  if ((s.citySlug || s.slug) && (!validProfilePart(s.citySlug || "") || !validProfilePart(s.slug || ""))) throw Error("Для ссылки укажите код города и никнейм: 2–40 латинских букв, цифр или дефисов, начиная с буквы");
   if (!Array.isArray(raw.offices) || raw.offices.length > 100)
     throw Error("Проверьте список офисов");
   s.offices = raw.offices.map((o: any) => ({
@@ -366,6 +384,7 @@ export function normalizeShowcase(
       throw Error("Неверный идентификатор автомобиля");
     return {
       id: o.id,
+      sourceUrl: listingUrl(o.sourceUrl),
       status: ["published", "sold"].includes(o.status) ? o.status : "draft",
       make: text(o.make, 80),
       model: text(o.model, 100),

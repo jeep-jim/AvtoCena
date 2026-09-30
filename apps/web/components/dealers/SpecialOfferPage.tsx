@@ -1,3 +1,4 @@
+import {dealerProfilePath} from '@/lib/dealers/profile-url';
 import { DealerCitySync } from "./DealerCitySync";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -127,7 +128,7 @@ export async function SpecialOfferPage({
               )}
               {c.complete ? (
                 <>
-                  <details className="mt-5" open>
+                  <details className="mt-5" data-ac-preserve-open open>
                     <summary className="cursor-pointer font-bold">
                       Что входит в стоимость
                     </summary>
@@ -189,7 +190,7 @@ export async function SpecialOfferPage({
             {s.profileEnabled && (
               <Link
                 className="mt-5 block rounded-xl border border-[var(--ac-border)] p-4 font-bold"
-                href={`/dealers/${s.dealerId}`}
+                href={dealerProfilePath(s)}
               >
                 О дилере {s.name} →
               </Link>

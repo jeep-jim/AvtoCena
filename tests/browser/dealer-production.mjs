@@ -45,6 +45,7 @@ s.offices = [
 ];
 s.pricing = {
   ...s.pricing,
+  rateMode: "manual",
   usdRub: 80,
   rateAt: new Date().toISOString(),
   tariffs: [
@@ -131,7 +132,15 @@ try {
       console.error("BROWSER", e.message);
     });
     await page.route("https://**/*", (route) => route.abort());
-    await page.goto(`${origin}/dealers/dealer_topavto`);
+    await page.addInitScript(()=>{
+      const add=document.addEventListener.bind(document);
+      window.__dealerClickReady=false;
+      document.addEventListener=(type,listener,options)=>{
+        if(type==='click'&&String(listener).includes('data-offer-action'))window.__dealerClickReady=true;
+        return add(type,listener,options);
+      };
+    });
+    await page.goto(`${origin}/nvkz/topavto`);
     await page
       .getByRole("heading", { name: "TOP AVTO", exact: true })
       .waitFor();
@@ -173,12 +182,7 @@ try {
     );
     const consent = page.getByText("Только необходимые", { exact: true });
     if (await consent.isVisible()) await consent.click();
-    await page.waitForFunction(() => {
-      const button = document.querySelector("[data-offer-action=lead]");
-      return (
-        button && Object.keys(button).some((k) => k.startsWith("__reactProps"))
-      );
-    });
+    await page.waitForFunction(()=>window.__dealerClickReady===true);
     await page
       .locator("button[data-offer-action=lead]:visible")
       .first()

@@ -1,3 +1,5 @@
+import {dealerProfilePath} from '@/lib/dealers/profile-url';
+import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
@@ -24,7 +26,7 @@ export async function generateMetadata({
   return {
     title: `${s.name} — дилер на АвтоЦена`,
     description: s.description.slice(0, 200),
-    alternates: { canonical: `/dealers/${s.dealerId}` },
+    alternates: { canonical: dealerProfilePath(s) },
   };
 }
 export default async function Page({
@@ -34,11 +36,12 @@ export default async function Page({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ preview?: string }>;
 }) {
-  const s = await readShowcase((await params).id);
+  let s = await readShowcase((await params).id);
   const preview =
     (await searchParams).preview === "1" &&
     (await getCurrentUser())?.role === "owner";
   if (!s || (!s.profileEnabled && !preview)) notFound();
+  if(s.specialsEnabled)s=await withDealerRate(s);
   return (
     <main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
