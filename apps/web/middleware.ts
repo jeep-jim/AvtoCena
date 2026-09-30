@@ -106,7 +106,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);
-  if ((request.method === 'GET' || request.method === 'HEAD') && legacyOffer && !legacyOffer[1].includes('--')) {
+  if ((request.method === 'GET' || request.method === 'HEAD') && legacyOffer && !legacyOffer[1].includes('--') && !legacyOffer[1].startsWith('special_')) {
     const url=request.nextUrl.clone();
     url.pathname=`/api/catalog/offer-redirect/${legacyOffer[1]}`;
     return NextResponse.rewrite(url);

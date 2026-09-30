@@ -14,6 +14,7 @@ import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { GenericLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import type { PublicCurrencyRate } from "@/components/catalog/PriceTrend";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
+import {SpecialRail, type SpecialRailItem} from "@/components/dealers/SpecialRail";
 import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CitySelector } from "@/components/home/CitySelector";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -26,6 +27,8 @@ import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/run
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = {
+  dealerGallery?: string[];
+  specialRail?: {heading:string;items:SpecialRailItem[]};
   initialGreen?: {items:any[];total:number};
   initialCity?: string;
   initialOffers?: any[];
@@ -217,7 +220,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
+export default function HomePageClient({ dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
@@ -327,9 +330,10 @@ export default function HomePageClient({ initialGreen = {items:[],total:0}, init
           </div>
         </div>
       </section>
-      <div className="-mt-2 lg:mt-0"><BuyerGallery images={buyers} /></div>
+      <div className="-mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
+      {specialRail && <SpecialRail {...specialRail}/>}
       <div className="mt-4 hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
-        <section className="grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
+        <section className="ac-home-finance grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
           <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">
             <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
               <div className="flex items-start gap-7">

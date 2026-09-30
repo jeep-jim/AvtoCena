@@ -109,7 +109,7 @@ export function PublicLegalFooter() {
               <AutoCalcButton />
             </div>
 
-            <div className="mt-4 grid gap-2">
+            <div className="ac-public-footer-affiliates mt-4 grid gap-2">
               <a
                 href={AUTOCREDIT_AFFILIATE_URL}
                 target="_blank"

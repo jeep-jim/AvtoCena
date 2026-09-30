@@ -1,3 +1,4 @@
+import {readPublicFeatures} from "@/lib/dealers/showcase-store";
 import "../components/telegram/telegram-miniapp.css";
 import {TelegramMiniApp} from "../components/telegram/TelegramMiniApp";
 import {miniAppBootstrap} from "../lib/telegram-miniapp";
@@ -287,10 +288,14 @@ html[data-theme="light"] .ac-public-legal-link:hover { color: #c91e2a; }
 }
 `;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const dynamic = "force-dynamic";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const features = await readPublicFeatures();
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang="ru" data-finance-hidden={features.affiliatesEnabled ? undefined : "true"} suppressHydrationWarning>
       <head>
+        {!features.affiliatesEnabled && <style>{`html[data-finance-hidden="true"] body :is(#ac-finance-disabled,.ac-home-finance,.ac-public-footer-affiliates,.ac-offer-finance-cards,.ac-credit-calculator-mock,[data-offer-credit-host],[data-offer-finance-cards-host],a[href^="https://affid.ru/"],a[href="/autocredit"],a[href="/osago"]){display:none!important}`}</style>}
         <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <script dangerouslySetInnerHTML={{ __html: miniAppBootstrap }} />

@@ -1,3 +1,4 @@
+import {getCurrentUser} from "@/lib/auth";
 import {DEALER_MAIL_PROVIDERS, dealerMailLink} from "@/lib/dealer-mail";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -34,6 +35,7 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
   const dealers = stored.length ? stored : [pilotDealer];
   const dealer = dealers.find((item) => item.id === id);
   if (!dealer) notFound();
+  const owner = (await getCurrentUser())?.role === "owner";
   const mailUrl = dealerMailLink(dealer.mail);
   const verified = dealer.status === "verified";
   const state = first(query.state);
@@ -42,6 +44,7 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
   return (
     <CrmShell activeHref="/crm/dealers" title={dealer.name} subtitle="Публичная карточка компании, Telegram-подключение, города, рынки и возможности проверенного профиля.">
       <div className="mb-4"><Link href="/crm/dealers" className="text-sm font-black text-red-300">← Назад к дилерам</Link></div>
+      {owner && <Link href={`/crm/dealers/${id}/showcase`} className="mb-5 inline-block rounded-xl bg-red-600 px-5 py-3 font-black">Витрина, фотографии и спецпредложения →</Link>}
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Карточка компании сохранена.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить карточку компании."}</div> : null}
 
