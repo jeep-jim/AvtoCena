@@ -74,9 +74,11 @@ const sourceLabel = (value: string) =>
       model_calculation_request: "Запрос модели",
       favorites_request: "Избранное",
       telegram_bot: "Telegram",
+      telegram_bot_site_request: "Форма подбора",
+      results: "Результаты подбора",
       manual_crm: "Создана менеджером",
     }) as Record<string, string>
-  )[value] || "Заявка с сайта";
+  )[value] || "Форма заявки";
 export default async function CrmLeadsPage({
   searchParams,
 }: {
