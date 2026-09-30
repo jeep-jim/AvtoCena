@@ -62,7 +62,7 @@ const css = await postcss([
   }),
 ]).process(
   publicCss +
-    "\n@tailwind base;@tailwind components;@tailwind utilities;html{--ac-surface:#161b25;--ac-surface-2:#242b38;--ac-text:#fff;--ac-muted:#acb5c4;--ac-border:#3f4856;background:#090d16;color:#fff}html[data-theme=dark]{--ac-surface:#1b222c;--ac-surface-2:#303b4c;--ac-text:#fff;--ac-muted:#b8c0cd;--ac-border:#465368}",
+    "\n@tailwind base;@tailwind components;@tailwind utilities;html{--ac-surface:#161b25;--ac-surface-2:#242b38;--ac-text:#fff;--ac-muted:#acb5c4;--ac-border:#3f4856;background:#090d16;color:#fff}html[data-theme=light]{--ac-surface:#fff;--ac-surface-2:#f0f2f5;--ac-text:#18212e;--ac-muted:#586374;--ac-border:#d3d9e2;background:#f5f6f8;color:#18212e}html[data-theme=dark]{--ac-surface:#1b222c;--ac-surface-2:#303b4c;--ac-text:#fff;--ac-muted:#b8c0cd;--ac-border:#465368}",
   { from: undefined },
 );
 fs.writeFileSync(`${out}/app.css`, css.css);
@@ -111,7 +111,7 @@ const browser = await chromium.launch({
 });
 const results = [];
 try {
-  for (const width of [390, 1440]) {
+  for (const [width,theme] of [[390,"dark"],[1440,"dark"],[1440,"light"]]) {
     const context = await browser.newContext({
         viewport: { width, height: 950 },
       }),
@@ -126,7 +126,13 @@ try {
       writes.push({ url: route.request().url(), body });
       return route.fulfill({ json: { ...body, version: body.version + 1 } });
     });
+    await page.route("**/api/crm/dealers/*/media",route=>route.fulfill(route.request().postData().includes('photo-one')?{json:{id:"imported",url:"/buyers/1.jpg",caption:""}}:{status:400,json:{error:"Источник не отдал фото"}}));
+    await page.route("https://example.com/photo-*",route=>route.fulfill({status:200,contentType:"image/jpeg",body:fs.readFileSync("apps/web/public/buyers/1.jpg")}));
+    await page.route("**/api/dealers/exchange-rate",route=>route.fulfill({json:{quote:{value:84,quoteAt:new Date().toISOString(),fetchedAt:new Date().toISOString(),source:"https://www.profinance.ru/chart/usdrub/"},error:""}}));
+    await page.route("**/api/autocalc/knowledge?**",route=>route.fulfill({json:{models:[],choices:[]}}));
+    await page.route("**/api/autocalc",route=>route.fulfill({json:{url:"https://example.com/car",title:"Toyota RAV4",make:"Toyota",model:"RAV4",market:"",price:"34000",currency:"USD",draft:{year:"2025",productionMonth:"6",engineCc:"1998",powerHp:"150"},images:["https://example.com/photo-one.jpg","https://example.com/photo-two.jpg"],message:"Данные получены из объявления"}}));
     await page.goto(origin);
+    await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
     await page
       .getByRole("button", { name: "Фото покупателей", exact: true })
       .click();
@@ -155,24 +161,25 @@ try {
       .getByRole("button", { name: "Спецпредложения", exact: true })
       .click();
     await page.getByRole("button", { name: "+ Добавить автомобиль" }).click();
-    await page
-      .locator("summary")
-      .filter({ hasText: "Новый автомобиль" })
-      .click();
     await page.getByLabel("Марка", { exact: true }).fill("Toyota");
     await page.getByLabel("Модель", { exact: true }).fill("RAV4");
+    await page.getByLabel("Ссылка на объявление",{exact:true}).fill("https://example.com/car");
+    await page.getByRole("button",{name:"Разобрать ссылку",exact:true}).click();
+    await page.getByRole("button",{name:"Подставить данные и выбранные фото",exact:true}).click();
+    await page.getByRole("status").filter({hasText:"Загружено фото: 1. Не удалось загрузить 1"}).waitFor();
+    assert.equal(await page.getByLabel("Год выпуска",{exact:true}).inputValue(),"2025");
+    assert.equal(await page.getByLabel("Цена автомобиля, $",{exact:true}).inputValue(),"34000");
+    assert.equal(await page.getByLabel("Доставка, $",{exact:true}).inputValue(),"900");
+    await page.getByRole("region",{name:"Предпросмотр спецпредложения"}).getByText("Toyota RAV4",{exact:true}).waitFor();
     await page
       .getByRole("button", { name: "Сохранить настройки дилера" })
       .click();
-    await page.waitForFunction(
-      () =>
-        document.querySelector("[role=status]")?.textContent ===
-        "Настройки сохранены",
-    );
+    await page.getByRole("status").filter({hasText:/^Настройки сохранены$/}).waitFor();
     assert.equal(writes[1].body.offers[0].status, "draft");
     assert.equal(writes[1].body.offers[0].make, "Toyota");
+    assert.equal(writes[1].body.offers[0].photos.length,1);
     await page.screenshot({
-      path: `${out}/editor-${width}.png`,
+      path: `${out}/editor-${width}-${theme}.png`,
       fullPage: true,
     });
     await page
@@ -184,15 +191,11 @@ try {
     await page
       .getByRole("button", { name: "Сохранить видимость сервисов" })
       .click();
-    await page.waitForFunction(
-      () =>
-        document.querySelector("[role=status]")?.textContent ===
-        "Настройки сохранены",
-    );
+    await page.getByRole("status").filter({hasText:/^Настройки сохранены$/}).waitFor();
     assert.equal(writes[2].body.affiliatesEnabled, false);
     const rail = page.getByRole("heading", { name: /СПЕЦ ПРЕДЛОЖЕНИЕ/ });
     await rail.scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `${out}/rail-${width}.png` });
+    await page.screenshot({ path: `${out}/rail-${width}-${theme}.png` });
     assert.ok(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth + 1,

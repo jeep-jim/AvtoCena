@@ -1,3 +1,4 @@
+import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
 import {publicRail} from "@/lib/dealers/public-showcase";
@@ -61,7 +62,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       return catalog.items;
     }),
   ]);
-  const dealer = await readShowcase("dealer_topavto");
+  const storedDealer = await readShowcase("dealer_topavto");
+  const dealer = storedDealer?.specialsEnabled ? await withDealerRate(storedDealer) : storedDealer;
   return <>
     {dealer?.specialsEnabled && <DealerCitySync/>}
     <div className={styles.scope}>
