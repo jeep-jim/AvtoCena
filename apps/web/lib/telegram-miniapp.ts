@@ -8,8 +8,49 @@ export function miniAppCatalogButton(chatId?: string) {
     ? {text:"Открыть АвтоЦену",web_app:{url:MINI_APP_URL}}
     : {text:"Открыть АвтоЦену",url:MINI_APP_URL};
 }
-// Presentation only. Never use this flag, start_param or unverified Telegram data for authentication.
-export const miniAppBootstrap = `(function(){try{var q=new URLSearchParams(location.search);if(q.get('mini')==='0'){sessionStorage.removeItem('avtocena_mini');return;}if(location.pathname==='/mini'||q.get('mini')==='1'){sessionStorage.setItem('avtocena_mini','1');}if(sessionStorage.getItem('avtocena_mini')==='1'&&(/^(\\/mini|\\/cars(?:\\/.*)?|\\/favorites|\\/request|\\/privacy(?:\\/request)?|\\/terms|\\/consent|\\/requisites)$/.test(location.pathname))){document.documentElement.dataset.miniapp='true';if(typeof localStorage!=='undefined'){var mt=localStorage.getItem('avtocena_mini_theme');if(mt==='light'||mt==='dark')document.documentElement.dataset.theme=mt;}}}catch(_){if(location.pathname==='/mini')document.documentElement.dataset.miniapp='true';}})();`;
+// Presentation only: neither URL/storage flags nor an SDK object establish a
+// Telegram host. Keep this function self-contained: it also runs before hydration.
+export function syncMiniAppPresentation() {
+  const root = document.documentElement;
+  const host = window as Window & {
+    TelegramWebviewProxy?: {postEvent?: unknown};
+    external: External & {notify?: unknown};
+  };
+  let inTelegram = typeof host.TelegramWebviewProxy?.postEvent === "function"
+    || typeof host.external?.notify === "function";
+  if (!inTelegram && window.parent !== window) {
+    const origins = [document.referrer];
+    try { origins.push(...Array.from(location.ancestorOrigins || [])); } catch {}
+    inTelegram = origins.some(value => {
+      try { return new URL(value).origin === "https://web.telegram.org"; } catch { return false; }
+    });
+  }
+  const query = new URLSearchParams(location.search);
+  let optedOut = query.get("mini") === "0";
+  try {
+    // Remove the old sticky flag, including on ordinary desktop visits.
+    sessionStorage.removeItem("avtocena_mini");
+    if (!inTelegram) sessionStorage.removeItem("avtocena_mini_opt_out");
+    else if (optedOut) sessionStorage.setItem("avtocena_mini_opt_out", "1");
+    else if (location.pathname === "/mini" || query.get("mini") === "1") sessionStorage.removeItem("avtocena_mini_opt_out");
+    else optedOut = sessionStorage.getItem("avtocena_mini_opt_out") === "1";
+  } catch {}
+  const allowed = /^(\/mini|\/cars(?:\/.*)?|\/favorites|\/request|\/privacy(?:\/request)?|\/terms|\/consent|\/requisites)$/.test(location.pathname);
+  const active = inTelegram && allowed && !optedOut;
+  if (active) {
+    root.dataset.miniapp = "true";
+    try {
+      const theme = localStorage.getItem("avtocena_mini_theme");
+      if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+    } catch {}
+  } else {
+    delete root.dataset.miniapp;
+    root.style.removeProperty("--ac-mini-top");
+    root.style.removeProperty("--ac-mini-bottom");
+  }
+  return active;
+}
+export const miniAppBootstrap = `(${syncMiniAppPresentation.toString()})();`;
 
 export const MINI_APP_SHARE_URL = "https://t.me/avtocena_bot?startapp=topavto";
 export const MINI_APP_SHARE_TEXT = "🚗 АвтоЦена — каталог автомобилей из-за рубежа\n\nВыбирайте автомобили, задавайте фильтры и рассчитывайте стоимость прямо в Telegram.\n\nОткройте приложение по кнопке ниже 👇";

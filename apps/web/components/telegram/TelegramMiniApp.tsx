@@ -5,7 +5,7 @@ import Script from "next/script";
 import {usePathname,useRouter} from "next/navigation";
 import {CitySelector} from "../home/CitySelector";
 import {useSelectedCity} from "../../lib/location/selected-city";
-import {miniAppPathAllowed,miniAppLaunchPath} from "../../lib/telegram-miniapp";
+import {miniAppPathAllowed,miniAppLaunchPath,syncMiniAppPresentation} from "../../lib/telegram-miniapp";
 
 type TelegramWebApp = {
   initDataUnsafe?:{start_param?:string};
@@ -41,10 +41,7 @@ export function TelegramMiniApp(){
 
   const atCatalog=pathname==="/mini"||pathname==="/cars"||pathname==="/cars/green";
   useEffect(()=>{
-    let active=document.documentElement.dataset.miniapp==="true";
-    try{const query=new URLSearchParams(location.search);if(query.get("mini")==="0"){sessionStorage.removeItem("avtocena_mini");active=false;}else if(pathname==="/mini"||query.get("mini")==="1"){sessionStorage.setItem("avtocena_mini","1");active=true;}else active=sessionStorage.getItem("avtocena_mini")==="1";}catch{}
-    active=active&&miniAppPathAllowed(pathname);setEnabled(active);
-    if(active)document.documentElement.dataset.miniapp="true";else delete document.documentElement.dataset.miniapp;
+    setEnabled(syncMiniAppPresentation());
     if(atCatalog)lastCatalog.current=location.pathname+location.search;
   },[pathname,atCatalog]);
   useEffect(()=>{
