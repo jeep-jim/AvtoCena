@@ -1,3 +1,5 @@
+import {parseSpecialId,specialTitle} from "@/lib/dealers/showcase-model";
+import {getSpecialOffer} from "@/lib/dealers/public-showcase";
 import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
 import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
@@ -75,6 +77,7 @@ function safeJsonLd(value: unknown) {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const id = offerRouteId((await params).id);
+  if (parseSpecialId(id)) { const found = await getSpecialOffer(id); return found ? {title:`${specialTitle(found.offer)} — спецпредложение ${found.showcase.name}`,description:found.offer.description.slice(0,180),robots:{index:true,follow:true},alternates:{canonical:`/cars/offer/${id}`}} : {title:"Автомобиль — АвтоЦена",robots:{index:false,follow:false}}; }
   const storedOffer = await getOfferForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   if (!offer) {
@@ -119,6 +122,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const id = offerRouteId((await params).id);
+  if (parseSpecialId(id)) return <>{children}</>;
   const storedOffer = await getOfferForPage(id);
   const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   const saved = storedOffer ? await getSavedOfferCalculation(storedOffer) : null;

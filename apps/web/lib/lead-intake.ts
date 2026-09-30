@@ -1,3 +1,5 @@
+import {specialLeadSnapshot} from "./dealers/public-showcase";
+import {parseSpecialId} from "./dealers/showcase-model";
 import {leadChannelLabel} from "./lead-source";
 import {isCalculationOriginAllowed} from "./catalog/calculation-request-origin";
 import {LEAD_CONSENT_VERSION,LEAD_CONSENT_TEXT,PRIVACY_VERSION} from "./privacy-documents";
@@ -105,7 +107,13 @@ function selectedOfferTitle(offer: any) {
   );
 }
 
-async function buildSelectedOfferSnapshot(offerId: string) {
+function selectedDelivery(city:string,item:any) {
+  if (item?.market === "dealer") return item.deliveryQuote || {version:"dealer-special-v1",origin:"Бишкек",city,amountRub:0,distanceKm:null,estimated:true,status:"needs_quote" as const};
+  return quoteCityDelivery(city,item?.market || "unknown");
+}
+
+async function buildSelectedOfferSnapshot(offerId: string, city = "") {
+  if (parseSpecialId(offerId)) return specialLeadSnapshot(offerId,city);
   const offer = await getOffer(offerId).catch(() => null);
   if (!offer) return { id: offerId, offerId, title: "Автомобиль по ссылке", href: `https://avtocena.com/cars/offer/${encodeURIComponent(offerId)}`, image: "", market: "", marketLabel: "", make: "", model: "", trim: "", year: null, mileageKm: null, engineCc: null, powerHp: null, power30MinKw: null, fuel: "", transmission: "", drive: "", bodyType: "", totalRub: null, sourcePrice: null, calculationSnapshot: null, breakdown: [], updatedAt: "" };
   const title = selectedOfferTitle(offer);
@@ -266,7 +274,7 @@ export async function createLead(
   }
 
   const selectedOfferSnapshots = (
-    await Promise.all(selectedOfferIds.map(buildSelectedOfferSnapshot))
+    await Promise.all(selectedOfferIds.map(id=>buildSelectedOfferSnapshot(id,city)))
   ).filter(
     (
       item,
@@ -281,7 +289,7 @@ export async function createLead(
     selectedOfferSnapshots[0] ||
     null;
   const primaryOfferId = primaryOffer?.id || requestedPrimaryOfferId;
-  const deliveryQuote = quoteCityDelivery(city, primaryOffer?.market || "unknown");
+  const deliveryQuote = selectedDelivery(city,primaryOffer);
   const comment = [customerComment, city ? deliveryDescription(deliveryQuote) : ""].filter(Boolean).join("\n");
 
   const createdAt = new Date().toISOString();
@@ -389,7 +397,7 @@ export async function createLead(
     createdByManagerId,
     assignedManagerId,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
-    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:quoteCityDelivery(city,item.market || "unknown")})),
+    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:selectedDelivery(city,item)})),
     configVersion: businessSettingsSnapshot?.configVersion || "",
     effectiveFrom: businessSettingsSnapshot?.effectiveFrom || "",
     businessSettingsSnapshot,
@@ -456,7 +464,7 @@ export async function createLead(
     referrer,
     ...consentSnapshot,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
-    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:quoteCityDelivery(city,item.market || "unknown")})),
+    selectedOffers: selectedOfferSnapshots.map(item => ({...item, deliveryQuote:selectedDelivery(city,item)})),
     carId: genericRequest ? "" : primaryOfferId || clean(body.carId, 200),
     offerId: primaryOfferId,
     offerUrl: primaryOffer?.href || "",
@@ -472,7 +480,7 @@ export async function createLead(
     marketName: clean(body.marketName, 200) || primaryOffer?.marketLabel || "",
     year: numberOrNull(body.year) || primaryOffer?.year || null,
     budgetRub: numberOrNull(body.budgetRub),
-    totalRub: numberOrNull(body.totalRub) || primaryOffer?.totalRub || null,
+    totalRub: primaryOffer?.market === "dealer" ? primaryOffer.totalRub : numberOrNull(body.totalRub) || primaryOffer?.totalRub || null,
     source,
     submissionChannel,
     ...attribution,
@@ -507,7 +515,7 @@ export async function createLead(
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
       const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, submissionChannel, ...consentSnapshot};
-      return {...stored, ...(!crmUser ? {analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,...(body.analyticsConsent!==true?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,deliveryQuote:quoteCityDelivery(city,item.market||"unknown")}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+      return {...stored, ...(primaryOffer?.market === "dealer" ? {offerSnapshot:primaryOffer,totalRub:primaryOffer.totalRub} : {}), ...(!crmUser ? {analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,...(body.analyticsConsent!==true?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,...(item.market === "dealer" ? selectedOfferSnapshots.find(s=>s.id===item.id) || {} : {}),deliveryQuote:selectedDelivery(city,selectedOfferSnapshots.find(s=>s.id===item.id)||item)}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
   if (threadKey) {

@@ -1,3 +1,5 @@
+import {SpecialOfferPage} from "@/components/dealers/SpecialOfferPage";
+import {parseSpecialId} from "@/lib/dealers/showcase-model";
 import { canCopyOffer } from "@/lib/offer-copy";
 import { directOfferScenario } from "@/lib/catalog/yandex-direct-scenario";
 import { offerPath, offerRouteId } from "@/lib/catalog/offer-url";
@@ -245,8 +247,9 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string }> }) {
+export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;preview?:string }> }) {
   const { id: routeId } = await params;
+  if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
   const query = searchParams ? await searchParams : {};
