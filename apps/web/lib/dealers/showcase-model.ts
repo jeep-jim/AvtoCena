@@ -152,6 +152,7 @@ export function calculateSpecial(
   )
     errors.push("Подтвердите актуальный курс (не старше 7 дней)");
   if (!tariff) errors.push("Добавьте тариф доставки для выбранного города");
+  if (tariff && !(tariff.usd > 0)) errors.push("Укажите стоимость доставки в долларах");
   if (!(o.priceUsd > 0)) errors.push("Укажите цену автомобиля в долларах");
   if (!o.customsIncluded && !(o.customsExtraRub > 0))
     errors.push(

@@ -279,3 +279,9 @@ test("expired exchange rate cannot prevent hiding the special rail", () => {
   assert.equal(hidden.specialsEnabled,false);
   assert.equal(calculateSpecial(hidden,hidden.offers[0]).totalRub,null);
 });
+
+test("an unfilled delivery tariff never becomes a published zero-cost route", () => {
+  const s=fixture(); s.pricing.tariffs[0].usd=0;
+  assert.equal(calculateSpecial(s,s.offers[0]).totalRub,null);
+  assert.throws(()=>normalizeShowcase({...s,specialsEnabled:true},s.dealerId,1),/стоимость доставки/);
+});
