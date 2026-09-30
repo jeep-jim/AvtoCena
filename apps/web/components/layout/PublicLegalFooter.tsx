@@ -1,6 +1,6 @@
 "use client";
 
-import {analyticsChoice,setAnalyticsChoice,ANALYTICS_EVENT} from "@/lib/privacy-consent";
+import {enablePageAnalytics,setAnalyticsChoice} from "@/lib/privacy-consent";
 import { AutoCalcButton } from "../autocalc/AutoCalcButton";
 import { PageQrButton } from "../sharing/PageQrButton";
 import { isPublicPagePath } from "../../lib/public-page-url";
@@ -70,7 +70,6 @@ export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
-  const [cookieBannerOpen, setCookieBannerOpen] = useState(false);
   const city = useSelectedCity();
   const [cityNoticeOpen, setCityNoticeOpen] = useState(false);
   const [noticeCity, setNoticeCity] = useState("");
@@ -80,11 +79,9 @@ export function PublicLegalFooter() {
 
   const closeCookieNotice = useCallback(() => {
     setCookieOpen(false);
-    setCookieBannerOpen(analyticsChoice()===null);
   }, []);
 
-  const chooseAnalytics=(allowed:boolean)=>{setAnalyticsChoice(allowed);setCookieOpen(false);setCookieBannerOpen(false);};
-  useEffect(()=>{if(!publicPath)return;const sync=()=>setCookieBannerOpen(analyticsChoice()===null);sync();window.addEventListener(ANALYTICS_EVENT,sync);return()=>window.removeEventListener(ANALYTICS_EVENT,sync);},[publicPath]);
+  const chooseAnalytics=(allowed:boolean)=>{setAnalyticsChoice(allowed);setCookieOpen(false);};
 
   useEffect(() => {
     if (!cookieOpen) return;
@@ -170,15 +167,6 @@ export function PublicLegalFooter() {
         </div>
         <button type="button" onClick={dismissCityNotice} className="ac-city-notice-close" aria-label="Закрыть приглашение выбрать город">×</button>
       </aside> : null}
-      {cookieBannerOpen && !cookieOpen ? (
-        <aside className="ac-cookie-banner" aria-label="Уведомление о cookie">
-          <p>Необходимые cookie сохраняют настройки сайта. Аналитика Яндекса включается только с вашего разрешения.</p>
-          <div className="ac-cookie-banner-actions">
-            <button type="button" className="ac-cookie-banner-details" onClick={() => setCookieOpen(true)}>Подробнее</button>
-            <button type="button" className="ac-cookie-banner-details" onClick={()=>chooseAnalytics(false)}>Только необходимые</button><button type="button" className="ac-cookie-banner-close" onClick={()=>chooseAnalytics(true)}>Разрешить аналитику</button>
-          </div>
-        </aside>
-      ) : null}
       </div>
       <style>{`
         .ac-notice-stack {
@@ -254,10 +242,10 @@ export function PublicLegalFooter() {
               </button>
             </header>
             <div className="space-y-5 px-5 py-6 text-sm leading-6 text-white/[0.78] sm:px-7 sm:py-7 sm:text-[15px] sm:leading-7">
-              <p>Необходимые cookie обеспечивают работу сайта и сохраняют ваши настройки. Яндекс Метрика включается только после вашего разрешения.</p>
-              <p>Аналитика помогает оценивать посещения и рекламу. При согласии стадии вашей заявки могут сопоставляться с идентификатором посетителя. Имя, телефон и комментарий в такую выгрузку не входят. Вебвизор отключён.</p>
+              <p>Необходимые cookie обеспечивают работу сайта и сохраняют ваши настройки. Яндекс Метрика запускается при открытии публичных страниц, если вы ранее не отключили аналитику. Информация об аналитике доступна в настройках cookie и политике обработки данных.</p>
+              <p>Метрика получает сведения об устройстве, посещённых страницах и рекламных переходах. Вебвизор отключён. Только после выбора «Разрешить связь с заявкой» номер, время и стадия заявки могут сопоставляться с идентификатором посетителя для оценки рекламы. Имя, телефон и комментарий в эту выгрузку не входят.</p>
               <p><Link href="/cookies" className="underline">Подробнее о cookie</Link> · <Link href="/privacy" className="underline">Политика обработки данных</Link></p>
-              <div className="flex flex-wrap gap-3"><button type="button" onClick={()=>chooseAnalytics(false)} className="rounded-xl border border-white/30 px-5 py-3 font-bold">Только необходимые</button><button type="button" onClick={()=>chooseAnalytics(true)} className="avto-button rounded-xl px-5 py-3 font-bold text-white">Разрешить аналитику</button></div>
+              <div className="flex flex-wrap gap-3"><button type="button" onClick={()=>{enablePageAnalytics();setCookieOpen(false);}} className="rounded-xl border border-white/30 px-5 py-3 font-bold">Включить статистику посещений</button><button type="button" onClick={()=>chooseAnalytics(false)} className="rounded-xl border border-white/30 px-5 py-3 font-bold">Отключить аналитику</button><button type="button" onClick={()=>chooseAnalytics(true)} className="avto-button rounded-xl px-5 py-3 font-bold text-white">Разрешить связь с заявкой</button></div>
 
             </div>
           </section>

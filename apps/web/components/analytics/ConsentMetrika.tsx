@@ -1,20 +1,36 @@
 'use client';
 import {useEffect} from 'react';
-import {usePathname} from 'next/navigation';
-import {ANALYTICS_EVENT,analyticsAllowed} from '@/lib/privacy-consent';
+import {ANALYTICS_EVENT,pageAnalyticsAllowed} from '@/lib/privacy-consent';
+import {createMetrikaPageTracker,METRIKA_COUNTER_ID,METRIKA_PAGE_EVENT} from '@/lib/metrika-pageviews';
+
+type YmQueue=((...args:unknown[])=>void)&{a?:unknown[][];l?:number};
 export function ConsentMetrika(){
- const privatePage=usePathname().startsWith('/privacy/request');
  useEffect(()=>{
-  let active=false;
-  const sync=()=>{
-   const allowed=analyticsAllowed()&&!privatePage;if(allowed===active)return;active=allowed;
-   if(!allowed){window.ym?.(112098062,'destruct');return;}
-   if(!window.ym){const queue:any=function(...args:unknown[]){queue.a.push(args);};queue.a=[];queue.l=Date.now();window.ym=queue;}
-   if(!document.getElementById('yandex-metrika-112098062')){const script=document.createElement('script');script.id='yandex-metrika-112098062';script.async=true;script.src='https://mc.yandex.ru/metrika/tag.js?id=112098062';document.head.appendChild(script);}
-   window.ym(112098062,'init',{ssr:true,webvisor:false,clickmap:true,ecommerce:'dataLayer',referrer:document.referrer.split('?')[0],url:location.origin+location.pathname,accurateTrackBounce:true,trackLinks:true});
+  const tracker=createMetrikaPageTracker({
+   allowed:pageAnalyticsAllowed,href:()=>location.href,referrer:()=>document.referrer,
+   send:(...args)=>window.ym?.(...args),
+   disable:(disabled)=>{
+    (window as unknown as Record<string,unknown>)[`disableYaCounter${METRIKA_COUNTER_ID}`]=disabled;
+    // Discard pending events too: refusal can happen while tag.js is still loading.
+    const queue=window.ym as YmQueue|undefined;
+    if(disabled&&queue?.a)queue.a=queue.a.filter(args=>args[0]!==METRIKA_COUNTER_ID);
+   },
+   load:()=>{
+    if(!window.ym){const queue:YmQueue=(...args)=>{queue.a!.push(args);};queue.a=[];queue.l=Date.now();window.ym=queue;}
+    if(document.getElementById('yandex-metrika-112098062'))return;
+    const script=document.createElement('script');script.id='yandex-metrika-112098062';script.async=true;
+    script.src='https://mc.yandex.ru/metrika/tag.js?id=112098062';
+    script.onerror=()=>script.remove();document.head.appendChild(script);
+   },
+  });
+  tracker.sync();
+  window.addEventListener(ANALYTICS_EVENT,tracker.sync);
+  window.addEventListener('storage',tracker.sync);
+  window.addEventListener(METRIKA_PAGE_EVENT,tracker.sync);
+  return()=>{
+   tracker.stop();window.removeEventListener(ANALYTICS_EVENT,tracker.sync);
+   window.removeEventListener('storage',tracker.sync);window.removeEventListener(METRIKA_PAGE_EVENT,tracker.sync);
   };
-  sync();window.addEventListener(ANALYTICS_EVENT,sync);window.addEventListener('storage',sync);
-  return()=>{if(active)window.ym?.(112098062,'destruct');window.removeEventListener(ANALYTICS_EVENT,sync);window.removeEventListener('storage',sync);};
- },[privatePage]);
+ },[]);
  return null;
 }
