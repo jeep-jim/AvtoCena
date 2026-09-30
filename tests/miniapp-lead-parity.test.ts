@@ -15,7 +15,7 @@ test("website and mini app submit through the same intake, unread CRM state and 
  try{
   const ids:string[]=[];
   for(const [index,referer] of ["https://avtocena.com/cars/offer/fixture-car","https://avtocena.com/cars/offer/fixture-car?mini=1"].entries()){
-   const response=await createLead(new Request("https://avtocena.com/api/leads",{method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com",referer},body:JSON.stringify({submissionChannel:index?"telegram_miniapp":"site",requestMode:"offer",source:"catalog_offer_request",offerId:"fixture-car",operationId:`channel-${index}`,submissionThreadToken:`12345678-1234-4321-aaaa-123456789ab${index}`,phone:index?"+78888888888":"+79999999999",name:"Test",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",pageUrl:referer})}));
+   const response=await createLead(new Request("https://avtocena.com/api/leads",{method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com",referer},body:JSON.stringify({submissionChannel:index?"telegram_miniapp":"site",requestMode:"offer",source:"catalog_offer_request",offerId:"fixture-car",operationId:`channel-${index}`,submissionThreadToken:`12345678-1234-4321-aaaa-123456789ab${index}`,phone:index?"+78888888888":"+79999999999",name:"Test",city:"Красноярск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",pageUrl:referer})}));
    assert.equal(response.status,200);ids.push((await response.json()).leadId);
   }
   const leads=await readChunkedDataJson<any>("leads/leads.json",[]);assert.equal(leads.length,2);
@@ -23,6 +23,6 @@ test("website and mini app submit through the same intake, unread CRM state and 
   assert.equal(leads.find(l=>l.id===ids[1]).submissionChannel,"telegram_miniapp");
   const notices=await claimCrmNotices();assert.equal(notices.length,2);
   assert.ok(notices.some(n=>n.text.includes("Источник: Telegram Mini App")));assert.ok(notices.some(n=>n.text.includes("Источник: Сайт")));
-  for(const notice of notices){assert.equal(notice.chatId,groupTarget.chatId);assert.ok(ids.some(id=>notice.text.includes(id)));}
+  for(const notice of notices){assert.match(notice.text,/Имя: Test/);assert.match(notice.text,/Город: Красноярск/);assert.match(notice.text,/Телефон · звонок: \+7/);assert.match(notice.text,/Автомобиль:/);assert.equal(notice.chatId,groupTarget.chatId);assert.ok(ids.some(id=>notice.text.includes(id)));}
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(tmp,{recursive:true,force:true});}
 });
