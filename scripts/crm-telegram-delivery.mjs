@@ -2,6 +2,7 @@ import { pathToFileURL } from "node:url";
 import crypto from 'node:crypto';
 import groupTarget from '../apps/web/lib/crm-group-target.json' with { type: 'json' };
 import { verifyGroupTarget } from './lib/crm-group-target.mjs';
+import { telegramRequest, safeDeliveryError } from './lib/crm-telegram-request.mjs';
 
 // Never print request/response bodies, errors with URLs or tokens.
 // Explicit check-group diagnostics expose only recipient identity metadata.
@@ -18,7 +19,7 @@ async function post(url, body, headers = {}) {
   }
   return result;
 }
-const telegram = (method, body = {}) => post(`https://api.telegram.org/bot${token}/${method}`, body);
+const telegram = (method, body = {}) => telegramRequest(token, method, body);
 const relay = body => post('https://avtocena.com/api/internal/crm/relay', body, {'x-crm-relay-key': relayKey});
 export async function runDelivery() {
   if (!token || !secret) throw Error('configuration_missing');
@@ -72,4 +73,4 @@ export async function runDelivery() {
   console.log(`Delivery batch: sent=${sent}, failed=${failed}, claimed=${notices.length}`);
   if (failed) throw Error('delivery_incomplete');
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runDelivery().catch(() => { console.error('CRM Telegram worker failed. Check configuration and service availability; private details omitted.'); process.exitCode = 1; });
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) runDelivery().catch(error => { console.error(`CRM Telegram worker failed: ${safeDeliveryError(error)}. Private details omitted.`); process.exitCode = 1; });
