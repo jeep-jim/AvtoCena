@@ -45,6 +45,8 @@ export function DealerEditor({
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
   const [recovery,setRecovery]=useState<any>(null);
   const base=useRef(initial);
+  const previewDialog=useRef<HTMLDialogElement>(null);
+  const openDemoPreview=(event:React.MouseEvent)=>{if(demo){event.preventDefault();previewDialog.current?.showModal();}};
   const [loaded,setLoaded]=useState(false);
   const draftKey=`avtocena_dealer_draft_${initial.dealerId}`;
   useEffect(()=>{
@@ -96,6 +98,7 @@ export function DealerEditor({
   return (
     <DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
       <DealerWorkspaceStyles/>
+      {demo&&<dialog ref={previewDialog} className="dealer-preview-dialog"><div className="flex justify-between gap-4 mb-5"><strong>Предпросмотр демо-компании</strong><button type="button" className={button} onClick={()=>previewDialog.current?.close()}>Закрыть</button></div>{s.banner&&<img src={s.banner} alt="Обложка компании"/>}<h2 className="dw-title mt-5">{s.name}</h2><p className="dw-muted">{s.description}</p><p className="dw-muted mt-3">{s.offices.map(o=>[o.city,o.address].filter(Boolean).join(', ')).join(' · ')}</p><h3 className="font-bold mt-6 mb-3">Направления каталога</h3><div className="flex flex-wrap gap-3">{dealerMarkets(s.catalogMarkets).map(m=><span key={m} className="dw-badge">{DEALER_MARKETS.find(x=>x.id===m)?.label||m}</span>)}</div>{fullAccess&&s.offers.length>0&&<><h3 className="font-bold mt-6 mb-3">Ваши автомобили</h3><div className="dealer-offer-list">{s.offers.map(o=><article key={o.id} className="dw-card">{o.photos[0]&&<img src={o.photos[0].url} alt={specialTitle(o)}/>}<h3 className="mt-3">{specialTitle(o)}</h3><p className="dw-muted">{calculateSpecial(s,o).complete?`${calculateSpecial(s,o).totalRub?.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p></article>)}</div></>}<p className="dw-muted mt-6">Пример оформления. Эта компания не публикуется на сайте.</p></dialog>}
       <div className="dealer-editor-shell">
       <div className="dealer-editor-navigation flex flex-wrap gap-2">
         {[
@@ -119,18 +122,18 @@ export function DealerEditor({
         {tab==='offers'&&active&&<button type="button" disabled={busy} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
         <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
-        <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Предпросмотр</Link>
+        <Link onClick={openDemoPreview} className="block text-sm text-red-500 underline" target={demo?undefined:"_blank"} href={`/dealers/${s.dealerId}?preview=1`}>Предпросмотр</Link>
        </section>
 </aside>}
       {tab==='overview'&&<div className="space-y-5">
-       <section className="dealer-editor-panel"><p className="dw-eyebrow">Ваша компания</p><h2 className="dw-title">{s.name}</h2><p className="dw-muted">Страница, автомобили и обращения — всё начинается здесь.</p><div className="mt-5 flex flex-wrap gap-3"><button type="button" className="dw-primary" onClick={()=>setTab('offers')}><Car size={18}/> Добавить автомобиль</button><Link className={button+' inline-flex items-center gap-2'} href={demo?'#':`/dealers/${s.dealerId}?preview=1`} target={demo?undefined:'_blank'}>Посмотреть страницу <ArrowUpRight size={16}/></Link></div></section>
-       <div className="dw-grid">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
+       <section className="dealer-editor-panel"><p className="dw-eyebrow">Ваша компания</p><h2 className="dw-title">{s.name}</h2><p className="dw-muted">Страница, автомобили и обращения — всё начинается здесь.</p><div className="mt-5 flex flex-wrap gap-3"><button type="button" className="dw-primary" onClick={()=>setTab('offers')}><Car size={18}/> Добавить автомобиль</button><Link onClick={openDemoPreview} className={button+' inline-flex items-center gap-2'} href={demo?'#':`/dealers/${s.dealerId}?preview=1`} target={demo?undefined:'_blank'}>Посмотреть страницу <ArrowUpRight size={16}/></Link></div></section>
+       <div className="dw-grid dealer-overview-stats">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
        <section className="dealer-editor-panel"><h2 className="font-bold text-xl">Подготовьте компанию к работе</h2>{[['Название и описание',!!s.name&&!!s.description,'profile'],['Адрес офиса',s.offices.length>0,'offices'],['Направления каталога',dealerMarkets(s.catalogMarkets).length>0,'markets'],['Страница опубликована',s.profileEnabled,'profile']].map(([label,done,id])=><button type="button" className="dw-row w-full text-left" key={String(label)} onClick={()=>setTab(String(id))}><span>{label}</span><span className="dw-badge">{done?'Готово':'Настроить'}</span></button>)}</section>
        {s.dealerId==='dealer_topavto'&&<section className="dealer-editor-panel"><h2 className="font-bold">ТопАвто · компания платформы</h2><p className="dw-muted mt-2">Общие расценки шести рынков уже настроены в разделе «Рынки и расчёт». Здесь вы управляете своей страницей и отдельно добавленными автомобилями.</p></section>}
       </div>}
       {tab==='subscription'&&<section className="dealer-editor-panel"><p className="dw-eyebrow">Мой доступ</p><h2 className="dw-title">{fullAccess?'Все возможности':'Базовый доступ'}</h2><p className="dw-muted">{fullAccess?`Доступ до ${dealerAccessLevel(s.dealerId,membership).until?new Date(dealerAccessLevel(s.dealerId,membership).until).toLocaleDateString('ru-RU'):'окончания демо'}.`:'Общий каталог остаётся доступен. Собственные автомобили, фото выдач и расширенное оформление включаются с подпиской.'}</p><div className="dw-grid mt-5">{[[1,program.monthRub],[6,program.halfYearRub],[12,program.yearRub]].map(([m,price])=><div key={m} className="dw-card"><span className="dw-muted">{m===12?'Год':m===6?'6 месяцев':'Месяц'}</span><strong className="dw-stat">{price.toLocaleString('ru-RU')} ₽</strong></div>)}</div><p className="dw-muted mt-5">Комиссия по завершённым продажам из заявок АвтоЦены — {program.commissionPercent}% {program.commissionBasis==='sale'?'от стоимости проданного автомобиля':'от вознаграждения дилера'}. Подписка оплачивается отдельно. Для продления свяжитесь с командой АвтоЦены через вашу заявку на подключение.</p></section>}
       {tab==='administration'&&administration}
-      {!fullAccess&&['offers','buyers','pricing','rates'].includes(tab)?<section className="dealer-editor-panel"><h2 className="font-bold text-xl">Доступно с подпиской</h2><p className="dw-muted mt-3">Ваши данные сохранены. Продлите доступ, чтобы снова редактировать и показывать собственные автомобили и галерею.</p><button type="button" className={button+' mt-4'} onClick={()=>setTab('subscription')}>Посмотреть условия</button></section>:<div className="dealer-editor-layout">
+      {!fullAccess&&['offers','buyers','pricing','rates'].includes(tab)?<section className="dealer-editor-panel"><h2 className="font-bold text-xl">Доступно с подпиской</h2><p className="dw-muted mt-3">Ваши данные сохранены. Продлите доступ, чтобы снова редактировать и показывать собственные автомобили и галерею.</p><button type="button" className={button+' mt-4'} onClick={()=>setTab('subscription')}>Посмотреть условия</button></section>:<div className="dealer-editor-layout" data-offer-editor={tab==='offers'&&!!active}>
       <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-4">
         {tab === "profile" && (
           <section className="dealer-editor-panel space-y-5">
@@ -145,6 +148,7 @@ export function DealerEditor({
             </p>
             <Link
               className="text-red-500 underline"
+              onClick={openDemoPreview}
               href={`/dealers/${s.dealerId}?preview=1`}
               target="_blank"
             >

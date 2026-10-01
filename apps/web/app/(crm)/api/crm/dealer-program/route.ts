@@ -1,3 +1,4 @@
+import {parseDealerMail} from '@/lib/dealer-mail';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
 import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
@@ -22,7 +23,8 @@ export async function POST(req:Request){
    else if(b.action==='trial'){await startDealerTrial(id);result=await readMembership(id);}
    else if(b.action==='company'){
     if(!['active','verified','paused'].includes(b.status))throw Error('Неверный статус');if(id==='dealer_topavto'&&b.status!=='verified')throw Error('ТопАвто — компания платформы');
-    await mutateDataJson<any[]>('dealers/dealers.json',[],rows=>rows.map(d=>d.id===id?{...d,status:b.status,telegramChannel:String(b.telegramChannel||'').trim().slice(0,100),updatedAt:new Date().toISOString()}:d));
+    const mailForm=new FormData();if(b.mail){mailForm.set('mailEmail',String(b.mail.email||''));mailForm.set('mailProvider',String(b.mail.provider||''));if(b.mail.ready===true)mailForm.set('mailReady','on');}const mail=parseDealerMail(mailForm);
+    await mutateDataJson<any[]>('dealers/dealers.json',[],rows=>(rows.length?rows:[{id:'dealer_topavto',name:'TopAvto',city:'Новокузнецк',status:'verified',pilot:true}]).map(d=>d.id===id?{...d,status:b.status,telegramChannel:String(b.telegramChannel||'').trim().slice(0,100),...(mail?{mail}:{}),updatedAt:new Date().toISOString()}:d));
     if(b.status==='verified')await startDealerTrial(id);
    }else if(b.action==='sale'){
     const leads=await readChunkedDataJson<any>('leads/leads.json',[]),lead=leads.find(l=>l.id===b.leadId&&!l.archivedAt&&l.status==='completed'&&(l.requestedDealerId===id||l.dealerId===id));

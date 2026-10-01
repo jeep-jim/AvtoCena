@@ -66,7 +66,7 @@ function InsuranceIcon() {
 
 export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}:{partnersEnabled?:boolean;knowledgeEnabled?:boolean}) {
   const pathname = usePathname();
-  const publicPath = isPublicPath(pathname || "/");
+  const publicPath = isPublicPath(pathname || "/") && !["/partners","/knowledge","/dealers","/dealer-cabinet"].includes(pathname || "");
   const [cookieOpen, setCookieOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
