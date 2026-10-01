@@ -24,7 +24,7 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     const title=page?.dataset.offerShareName ? offerShareTitle({title:page.dataset.offerShareName,year:parameters?.dataset.shareYear||page.dataset.offerShareYear,engineCc:parameters?.dataset.shareEngineCc||page.dataset.offerShareEngineCc,fuel:parameters?.dataset.shareFuel||page.dataset.offerShareFuel,totalRub}) : document.title;
     const inMini=document.documentElement.dataset.miniapp==="true";
     const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerRouteId(decodeURIComponent(target.pathname.slice("/cars/offer/".length))) : "");
-    const url=(inMini && offerId && !dealer && !estimate ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
+    const url=(inMini && offerId && !dealer && (!estimate || savedVersion) ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
     if(inMini && offerId){
       try{await navigator.clipboard.writeText(url.startsWith("https://t.me/") ? `${title}\n${url}` : url);setStatus("Ссылка скопирована");return;}catch{}
     }
