@@ -29,7 +29,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.getByRole('button',{name:'Далее →'}).click();await page.waitForFunction(()=>document.querySelector('.dealer-catalog [aria-busy]')?.getAttribute('aria-busy')==='false');assert.equal(queries.at(-1).page,'2');
  await dock.getByRole('button',{name:'Фото',exact:true}).click();await page.locator('.dealer-photo-grid').waitFor();assert.equal(await page.locator('.dealer-photo-grid .ac-buyers-rail>button').count(),24);
  await page.locator('.dealer-photo-grid .ac-buyers-rail>button').first().click();await page.getByRole('dialog',{name:/Фотографии клиентов/}).waitFor();await page.getByRole('button',{name:'Закрыть',exact:true}).click();
- await page.screenshot({path:`${out}/photos-${theme}-${width}.png`});await dock.getByRole('button',{name:'Авто',exact:true}).click();
+ await page.screenshot({path:`${out}/photos-${theme}-${width}.png`});await dock.getByRole('button',{name:'Авто',exact:true}).click();assert.equal(await page.getByRole('button',{name:'Корея',exact:true}).getAttribute('aria-pressed'),'true');
  const dockBox=await dock.boundingBox();assert.ok(dockBox.y>0&&dockBox.y+dockBox.height<=1000,'Floating menu stays in viewport');
  await page.getByRole('button',{name:'Адреса',exact:true}).click();
  await page.getByRole('dialog').waitFor();
@@ -37,7 +37,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  assert.equal(await page.locator('iframe').count(),0);
  await page.getByRole('button',{name:'Показать Яндекс Карту',exact:true}).click();
  let url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('text'),'Новокузнецк, ТРК Планета');
- await page.getByLabel('Выберите офис').selectOption('point');url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('pt'),'37.61,55.75,pm2rdm');
+ await page.getByRole('combobox',{name:'Адрес офиса',exact:true}).selectOption('point');url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('pt'),'37.61,55.75,pm2rdm');
  await page.getByRole('button',{name:'Закрыть информацию'}).click();
  await page.getByRole('button',{name:'Рынки и каталог',exact:true}).click();assert.equal(await page.getByRole('checkbox').count(),6);assert.equal(await page.getByRole('checkbox').nth(0).isChecked(),true);await page.getByRole('checkbox').nth(0).uncheck();assert.equal(await page.getByRole('checkbox').nth(0).isChecked(),false);await page.screenshot({path:`${out}/markets-${theme}-${width}.png`});await page.getByRole('button',{name:'Профиль',exact:true}).click();
  await page.getByRole('button',{name:'Использовать новый баннер TopAvto',exact:true}).click();assert.ok(await page.locator('img[src="/dealers/topavto-banner-v3.webp"]').count()>1);
