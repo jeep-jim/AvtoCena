@@ -1,6 +1,6 @@
 import type { DealerOffice } from './showcase-model';
 
-export function yandexOfficeUrls(office: DealerOffice) {
+export function yandexOfficeUrls(office: Pick<DealerOffice, "city"|"address"|"lat"|"lon">) {
   const params = new URLSearchParams({ lang: 'ru_RU' });
   const { lat, lon } = office;
   if (typeof lat === 'number' && typeof lon === 'number' && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {

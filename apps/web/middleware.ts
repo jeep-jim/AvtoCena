@@ -1,3 +1,4 @@
+import {isPlatformTeam} from "./lib/platform-access";
 import { NextRequest, NextResponse } from "next/server";
 
 const COOKIE_NAME = "avtocena_session";
@@ -5,7 +6,8 @@ const DOCS_COOKIE_NAME = "avtocena_cpa_docs";
 
 type SessionPayload = {
   id: string;
-  role: "owner" | "admin" | "manager" | "partner";
+  role: "owner" | "admin" | "manager" | "partner" | "dealer";
+  companyId?: string;
   exp: number;
   partnerCode?: string;
 };
@@ -142,37 +144,39 @@ export async function middleware(request: NextRequest) {
   const session = await getSession(request);
 
   if (pathname === "/api/partners/payout-request") {
-    if (isPartnerRole(session?.role)) return NextResponse.next();
+    if (session?.role === "partner" || (isPlatformTeam(session) && isPartnerRole(session?.role))) return NextResponse.next();
     return denyOrRedirect(request);
   }
 
   if (pathname === "/partner/api" || pathname.startsWith("/partner/api/")) {
-    if (isAdminRole(session?.role) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
+    if ((isPlatformTeam(session) && isAdminRole(session?.role)) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
     return denyOrRedirect(request);
   }
 
+  if (session?.role === "dealer" && /^\/api\/crm\/dealers\/[a-zA-Z0-9_-]+\/(showcase|media)$/.test(pathname)) return NextResponse.next();
   if (pathname === "/crm" || pathname.startsWith("/crm/") || pathname.startsWith("/api/crm")) {
-    if (isCrmRole(session?.role)) return NextResponse.next();
+    if (session && isPlatformTeam(session)) return NextResponse.next();
+    if(session && !wantsJson(pathname)) return NextResponse.redirect(new URL("/dealer-cabinet",request.url));
     return denyOrRedirect(request);
   }
 
   if (pathname === "/partner" || pathname.startsWith("/partner/")) {
-    if (isPartnerRole(session?.role)) return NextResponse.next();
+    if (session?.role === "partner" || (isPlatformTeam(session) && isPartnerRole(session?.role))) return NextResponse.next();
     return denyOrRedirect(request);
   }
 
   if (pathname === "/api/leads" && request.method === "GET") {
-    if (isCrmRole(session?.role)) return NextResponse.next();
+    if (isPlatformTeam(session)) return NextResponse.next();
     return denyOrRedirect(request);
   }
 
   if (pathname === "/api/partners") {
-    if (isCrmRole(session?.role)) return NextResponse.next();
+    if (isPlatformTeam(session)) return NextResponse.next();
     return denyOrRedirect(request);
   }
 
   if (pathname === "/api/cpa") {
-    if (isAdminRole(session?.role) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
+    if ((isPlatformTeam(session) && isAdminRole(session?.role)) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
     return denyOrRedirect(request);
   }
 

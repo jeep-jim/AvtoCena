@@ -1,3 +1,6 @@
+import {getCurrentUser} from "@/lib/auth";
+import {managesAllDealers} from "@/lib/dealers/access";
+import {redirect} from "next/navigation";
 import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson, readDataJson } from "@/lib/data";
@@ -27,6 +30,7 @@ function statusLabel(value: string) {
 }
 
 export default async function CrmDealersPage() {
+  if(!managesAllDealers(await getCurrentUser()))redirect("/dealer-cabinet");
   const [storedDealers, applications] = await Promise.all([
     readDataJson<any[]>("dealers/dealers.json", []),
     readChunkedDataJson<any>("dealers/applications.json", []),

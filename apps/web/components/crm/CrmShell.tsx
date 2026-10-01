@@ -1,3 +1,4 @@
+import {isPlatformTeam} from "@/lib/platform-access";
 import {hasCrmPermission,type CrmPermission} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
@@ -14,6 +15,7 @@ type CrmShellProps = {
 export async function CrmShell({ title, subtitle, activeHref, children }: CrmShellProps) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (!isPlatformTeam(user)) redirect("/dealer-cabinet");
   const links: Array<readonly [string, string]> = [
     ["/crm", "Обзор"],
     ["/crm/leads", "Заявки"],

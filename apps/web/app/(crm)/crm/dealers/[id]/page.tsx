@@ -1,3 +1,8 @@
+import {managesAllDealers} from "@/lib/dealers/access";
+import {isPlatformOwner} from "@/lib/platform-access";
+import {readShowcase,readPublicFeatures} from "@/lib/dealers/showcase-store";
+import {DealerEditor} from "@/components/dealers/DealerEditor";
+import {DealerAccessEditor} from "@/components/dealers/DealerAccessEditor";
 import {getCurrentUser} from "@/lib/auth";
 import {DEALER_MAIL_PROVIDERS, dealerMailLink} from "@/lib/dealer-mail";
 import Link from "next/link";
@@ -29,13 +34,16 @@ function first(value?: string | string[]) {
 }
 
 export default async function CrmDealerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<SearchParams> }) {
+  const user = await getCurrentUser();
+  if(!managesAllDealers(user))notFound();
   const { id } = await params;
+  const showcase = await readShowcase(id);
   const query: SearchParams = (await searchParams) || {};
   const stored = await readDataJson<any[]>("dealers/dealers.json", []);
   const dealers = stored.length ? stored : [pilotDealer];
   const dealer = dealers.find((item) => item.id === id);
   if (!dealer) notFound();
-  const owner = (await getCurrentUser())?.role === "owner";
+  const owner = isPlatformOwner(user);
   const mailUrl = dealerMailLink(dealer.mail);
   const verified = dealer.status === "verified";
   const state = first(query.state);
@@ -44,11 +52,13 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
   return (
     <CrmShell activeHref="/crm/dealers" title={dealer.name} subtitle="Публичная карточка компании, Telegram-подключение, города, рынки и возможности проверенного профиля.">
       <div className="mb-4"><Link href="/crm/dealers" className="text-sm font-black text-red-300">← Назад к дилерам</Link></div>
-      {owner && <Link href={`/crm/dealers/${id}/showcase`} className="mb-5 inline-block rounded-xl bg-red-600 px-5 py-3 font-black">Витрина, фотографии и спецпредложения →</Link>}
+      {showcase && <DealerEditor initial={showcase} features={await readPublicFeatures()} platformOwner={owner}/>}
+      {owner && <DealerAccessEditor dealerId={id}/>}
+
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Карточка компании сохранена.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить карточку компании."}</div> : null}
 
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <details className="mt-6 rounded-2xl border border-[var(--ac-border)] p-5"><summary className="cursor-pointer font-bold">Служебные настройки · подтверждение компании, Telegram и почта</summary><div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
         <form action="/api/crm/dealers" method="post" encType="multipart/form-data" className="glass grid min-w-0 grid-cols-1 gap-4 rounded-[1.8rem] p-5 md:grid-cols-2 md:p-6">
           <input type="hidden" name="dealerId" value={dealer.id} />
           <input type="hidden" name="logoUrl" value={dealer.logoUrl || ""} />
@@ -60,13 +70,6 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
           <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42">Telegram-канал<input name="telegramChannel" defaultValue={dealer.telegramChannel || ""} placeholder="@channel" className="soft-input min-w-0 w-full rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
           <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2">Рынки<textarea name="markets" rows={3} defaultValue={Array.isArray(dealer.markets) ? dealer.markets.join(", ") : ""} className="soft-input min-w-0 w-full rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
 
-          <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2">
-            Шапка профиля {verified ? "" : "— только после верификации"}
-            {dealer.headerImageUrl && verified ? <img src={dealer.headerImageUrl} alt="Текущая шапка" className="mb-1 aspect-[3/1] w-full rounded-2xl object-cover" /> : null}
-            <input name="headerImage" type="file" accept="image/jpeg,image/png,image/webp" disabled={!verified} className="soft-input min-w-0 w-full rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal disabled:cursor-not-allowed disabled:opacity-50" />
-            <span className="normal-case tracking-normal text-white/38">Рекомендуем 1800 × 600 px (3:1). JPG, PNG или WebP до 8 МБ. Новая загрузка заменит текущую шапку.</span>
-            {dealer.id === "dealer_topavto" && <a href="/dealers/topavto-banner-v3.webp" download="topavto-banner-1800x600.webp" className="normal-case tracking-normal text-red-400 underline">Скачать готовый баннер TopAvto · 1800 × 600 px</a>}
-          </label>
 
           <div className="rounded-xl bg-white/[.045] px-4 py-3 text-sm font-bold text-white/68">
             <div className="font-black">Telegram: {dealer.telegramConnected ? "подключён" : "ожидает подключения"}</div>
@@ -107,7 +110,7 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
             <p className="mt-3 text-sm font-bold leading-6 text-white/48">Шапка, фотоотзывы, публичная Telegram-лента и участие в распределении заявок доступны только проверенным дилерам.</p>
           </section>
         </aside>
-      </div>
+      </div></details>
     </CrmShell>
   );
 }

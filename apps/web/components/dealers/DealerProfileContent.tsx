@@ -1,136 +1,34 @@
-import Link from "next/link";
-import type {DealerShowcase} from "@/lib/dealers/showcase-model";
-import type {ComponentProps} from "react";
-import {BuyerGallery} from "@/components/home/BuyerGallery";
-import {SpecialRail} from "./SpecialRail";
-import {DealerMap} from "./DealerMap";
-export function DealerProfileContent({s,preview=false,items=[]}:{s:DealerShowcase;preview?:boolean;items?:ComponentProps<typeof SpecialRail>["items"]}){
- return <>
-      <div className="dealer-profile mx-auto max-w-6xl px-4 pb-10 pt-4">
-        {preview && (
-          <p className="mb-4 rounded-xl bg-amber-500/15 p-3">
-            Предпросмотр владельца ·{" "}
-            {s.profileEnabled
-              ? "Страница включена"
-              : "Страница скрыта от посетителей"}
-          </p>
-        )}
-        <div className={s.banner ? "dealer-profile-hero" : ""}>
-        {s.banner && (
-          <img
-            src={s.banner}
-            alt={s.name}
-            className="aspect-[3/1] w-full rounded-2xl object-contain bg-neutral-950"
-          />
-        )}
-        <section className="dealer-profile-identity flex flex-wrap items-center gap-3">
-          {s.logoLight && (
-            <img
-              src={s.logoLight}
-              alt={s.name}
-              className="dealer-logo-light h-12 w-28 object-contain"
-            />
-          )}
-          {s.logoDark && (
-            <img
-              src={s.logoDark}
-              alt={s.name}
-              className="dealer-logo-dark h-12 w-28 object-contain"
-            />
-          )}
-          <div>
-            <h1 className="text-2xl font-black md:text-3xl">{s.name}</h1>
-            <p className="mt-2 text-[var(--ac-muted)]">
-              {[...new Set(s.offices.map((o) => o.city))].join(" · ")}
-            </p>
-          </div>
-        </section>
-        </div>
-        {s.offices.flatMap((o) => o.photos).length > 0 && (
-          <BuyerGallery
-            title="Наши офисы"
-            dealerName={s.name}
-            images={s.offices.flatMap((o) => o.photos.map((p) => p.url))}
-          />
-        )}
-        {s.description && <p className="my-4 whitespace-pre-line text-sm leading-relaxed">
-          {s.description}
-        </p>}
-        {(s.phone || s.telegram || s.max) && <div className="my-3 flex flex-wrap gap-2">
-          {s.phone && (
-            <a
-              className="rounded-xl bg-red-600 px-5 py-3 font-bold text-white"
-              href={`tel:${s.phone.replace(/[^+\d]/g, "")}`}
-            >
-              {s.phone}
-            </a>
-          )}
-          {s.telegram && (
-            <a
-              className="rounded-xl border border-[var(--ac-border)] px-5 py-3"
-              href={s.telegram}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Telegram
-            </a>
-          )}
-          {s.max && (
-            <a
-              className="rounded-xl border border-[var(--ac-border)] px-5 py-3"
-              href={s.max}
-              target="_blank"
-              rel="noreferrer"
-            >
-              MAX
-            </a>
-          )}
-        </div>}
-        <div className="dealer-profile-offices">
-        <div className="grid content-start gap-3">
-          {s.offices.map((o) => (
-            <section
-              key={o.id}
-              className="rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4"
-            >
-              <h2 className="text-base font-bold">{o.city}</h2>
-              <p className="mt-2">{o.address}</p>
-              {o.hours && (
-                <p className="mt-2 text-sm text-[var(--ac-muted)]">{o.hours}</p>
-              )}
-              {o.phone && (
-                <a
-                  className="mt-2 block"
-                  href={`tel:${o.phone.replace(/[^+\d]/g, "")}`}
-                >
-                  {o.phone}
-                </a>
-              )}
-              <a
-                className="mt-3 inline-block text-red-500 underline"
-                href={`https://yandex.ru/maps/?text=${encodeURIComponent(`${o.city}, ${o.address}`)}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Построить маршрут ↗
-              </a>
-            </section>
-          ))}
-        </div>
-        <DealerMap offices={s.offices} />
-        </div>
-        {s.buyersEnabled && (
-          <BuyerGallery
-            title="Наши покупатели"
-            dealerName={s.name}
-            images={s.buyerPhotos.map((p) => p.url)}
-          />
-        )}
-        <SpecialRail heading={s.specialHeading} items={items} />
-        <Link className="mt-5 inline-block text-sm text-red-500" href="/cars">
-          Перейти в каталог →
-        </Link>
-      </div>
-      <style>{`.dealer-profile-hero{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(220px,1fr);gap:20px;align-items:center}.dealer-profile-identity{padding:12px 0}.dealer-profile-offices{display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,1.7fr);gap:16px;margin-top:20px;align-items:start}.dealer-profile-offices>section{margin-top:0}.dealer-profile>section{margin-top:20px}.dealer-profile>section>h2{font-size:24px;line-height:1.2;white-space:normal}.dealer-profile .ac-buyers-rail>button{height:132px;width:192px}@media(max-width:700px){.dealer-profile-hero,.dealer-profile-offices{grid-template-columns:minmax(0,1fr);gap:12px}.dealer-profile-identity{padding:0}.dealer-profile>section>h2{font-size:20px}}.dealer-logo-light{display:none}html[data-theme="light"] .dealer-logo-light{display:block}html[data-theme="light"] .dealer-logo-dark{display:none}`}</style>
- </>;
+"use client";
+import {useState} from 'react';
+import Link from 'next/link';
+import type {PublicDealerProfile} from '@/lib/dealers/public-profile';
+import type {SpecialRailItem} from './SpecialRail';
+import {BuyerGallery} from '@/components/home/BuyerGallery';
+import {DealerMap} from './DealerMap';
+import {yandexOfficeUrls} from '@/lib/dealers/yandex-map';
+export function DealerProfileContent({s,preview=false,items=[]}:{s:PublicDealerProfile;preview?:boolean;items?:SpecialRailItem[]}){
+ const [tab,setTab]=useState('cars');
+ const cities=[...new Set(s.offices.map(o=>o.city).filter(Boolean))];
+ const request=`/request?dealer=${encodeURIComponent(s.dealerId)}`;
+ return <div className="dealer-profile mx-auto w-full max-w-[1500px] px-4 pb-10 pt-4 md:px-8">
+  {preview&&<p className="dealer-preview-note">Предпросмотр · {s.profileEnabled?'Страница опубликована':'Страница пока скрыта от посетителей'}</p>}
+  <div className="dealer-profile-hero">{s.banner?<img src={s.banner} alt={`Обложка ${s.name}`} className="dealer-cover"/>:<div className="dealer-cover dealer-cover-empty"/>}<span className="dealer-cover-label">Дилеры АвтоЦены</span></div>
+  <section className="dealer-profile-identity dealer-sheet">
+   <div className="dealer-identity-row"><div className="dealer-avatar">{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt="" className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt="" className="dealer-logo-dark"/></>:<span>{s.name.slice(0,2)}</span>}</div><div className="dealer-identity-title"><p className="dealer-eyebrow">Подбор и доставка автомобилей</p><h1>{s.name}</h1><button className="dealer-address-link" onClick={()=>setTab('offices')}>{cities.join(' · ')||'Адреса компании'} <span aria-hidden>↗</span></button></div><Link href={request} className="dealer-primary dealer-desktop-request">Оставить заявку</Link></div>
+   {s.description&&<p className="dealer-intro">{s.description}</p>}
+   {s.buyersEnabled&&s.buyerPhotos.length>0&&<div className="dealer-stories"><BuyerGallery title="Уже за рулём" dealerName={s.name} images={s.buyerPhotos.map(p=>p.url)}/></div>}
+   <nav className="dealer-profile-tabs" aria-label="Разделы профиля">{[['cars','Автомобили'],['about','О компании'],['offices','Адреса']].map(([id,label])=><button key={id} type="button" aria-pressed={tab===id} onClick={()=>setTab(id)}>{label}{id==='cars'&&items.length>0&&<span>{items.length}</span>}</button>)}</nav>
+  </section>
+  <div className="dealer-profile-body"><section className="dealer-sheet dealer-tab-content" aria-label={tab==='cars'?'Автомобили дилера':tab==='about'?'О компании':'Адреса компании'}>
+   {tab==='cars'&&<><div className="dealer-section-heading"><div><p className="dealer-eyebrow">Предложения компании</p><h2>Автомобили</h2></div><Link href="/cars">Весь каталог ↗</Link></div>{items.length?<><p className="dealer-muted">{s.specialHeading}</p><div className="dealer-cars-grid">{items.map(o=><Link key={o.id} href={o.href} className="dealer-car"><img src={o.image} alt={o.title} loading="lazy"/><div><h3>{o.title}</h3><strong>{o.price===null?'Цена уточняется':`${o.price.toLocaleString('ru-RU')} ₽`}</strong><p>{o.city}{o.daysFrom?` · ${o.daysFrom}–${o.daysTo} дней`:''}</p></div></Link>)}</div></>:<div className="dealer-cars-empty"><span aria-hidden>🚗</span><h3>Найдём автомобиль под ваши пожелания</h3><p>Расскажите о модели и бюджете. Менеджер АвтоЦены поможет с подбором и расчётом доставки.</p><Link className="dealer-primary" href={request}>Подобрать автомобиль</Link><Link className="dealer-text-link" href="/cars">Посмотреть общий каталог →</Link></div>}</>}
+   {tab==='about'&&<><p className="dealer-eyebrow">Знакомство с компанией</p><h2>{s.name}</h2><p className="dealer-about-text">{s.description||'Информация о компании появится здесь после заполнения профиля.'}</p>{cities.length>0&&<div className="dealer-city-chips">{cities.map(city=><span key={city}>{city}</span>)}</div>}{s.offices.some(o=>o.photos.length>0)&&<BuyerGallery title="Наши офисы" dealerName={s.name} images={s.offices.flatMap(o=>o.photos.map(p=>p.url))}/>}</>}
+   {tab==='offices'&&<><p className="dealer-eyebrow">Где нас найти</p><h2>Адреса и время работы</h2><div className="dealer-profile-offices">{s.offices.map(o=><article key={o.id}><h3>{o.city}</h3><p>{o.address}</p>{o.hours&&<p className="dealer-muted">{o.hours}</p>}<a href={yandexOfficeUrls(o).full} target="_blank" rel="noreferrer">Построить маршрут ↗</a></article>)}</div>{s.offices.length?<DealerMap offices={s.offices}/>:<p className="dealer-muted">Компания пока не добавила адреса офисов.</p>}</>}
+  </section><aside className="dealer-sheet dealer-request-card"><span className="dealer-request-icon" aria-hidden>↗</span><h2>Ваш следующий автомобиль</h2><p>Оставьте пожелания — менеджер АвтоЦены поможет подобрать автомобиль и рассчитать стоимость.</p><Link className="dealer-primary" href={request}>Оставить заявку</Link><small>Обращение обрабатывает АвтоЦена</small></aside></div>
+  <div className="dealer-mobile-request"><Link href={request} className="dealer-primary">Оставить заявку в АвтоЦене</Link></div>
+  <style>{`
+   .dealer-profile{--dealer-radius:24px}.dealer-preview-note{padding:12px 16px;background:#eab30818;border:1px solid #eab30844;border-radius:14px;margin-bottom:16px;font-size:13px}.dealer-profile-hero{position:relative;overflow:hidden;border-radius:var(--dealer-radius);background:#141820}.dealer-cover{display:block;width:100%;height:clamp(230px,25vw,360px);object-fit:cover}.dealer-cover-empty{background:radial-gradient(ellipse at 75% 90%,#933737,transparent 60%),linear-gradient(120deg,#101720,#334456)}.dealer-cover-label{position:absolute;top:20px;left:24px;color:#fff;background:#0007;border:1px solid #fff3;border-radius:100px;padding:7px 12px;font-size:12px;backdrop-filter:blur(10px)}.dealer-sheet{background:var(--ac-surface);border:1px solid var(--ac-border);border-radius:var(--dealer-radius);min-width:0}.dealer-profile-identity{position:relative;margin:-35px 24px 0;padding:24px 28px 0}.dealer-identity-row{display:flex;align-items:center;gap:20px}.dealer-avatar{width:86px;height:86px;flex-shrink:0;display:grid;place-items:center;border:1px solid var(--ac-border);border-radius:22px;background:var(--ac-bg);padding:10px}.dealer-avatar img{width:100%;height:100%;object-fit:contain}.dealer-avatar span{font-size:30px;font-weight:900}.dealer-identity-title{flex:1;min-width:0}.dealer-eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac-muted);font-weight:700;margin:0 0 7px}.dealer-profile h1{font-size:34px;font-weight:900;line-height:1.15;overflow-wrap:anywhere}.dealer-address-link{color:var(--ac-muted);font-size:13px;margin-top:8px;text-align:left}.dealer-primary{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:14px;background:#e52b35;color:white!important;font-size:14px;font-weight:800;text-align:center}.dealer-intro{font-size:14px;line-height:1.6;color:var(--ac-muted);max-width:850px;margin:18px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.dealer-stories>section{margin-top:20px}.dealer-stories h2{font-size:14px!important}.dealer-stories .ac-buyers-rail{margin-top:10px;gap:10px}.dealer-stories .ac-buyers-rail>button{height:110px;width:145px;border-radius:14px}.dealer-profile-tabs{display:flex;gap:6px;margin-top:20px;padding:8px 0;border-top:1px solid var(--ac-border)}.dealer-profile-tabs button{padding:12px 22px;border-radius:12px;font-weight:700;font-size:14px;color:var(--ac-muted)}.dealer-profile-tabs button[aria-pressed=true]{color:var(--ac-text);background:var(--ac-bg)}.dealer-profile-tabs button span{margin-left:7px;font-size:11px;opacity:.65}.dealer-profile-body{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:20px;margin:20px 24px 0;align-items:start}.dealer-tab-content{padding:28px}.dealer-profile h2{font-size:25px;font-weight:850;line-height:1.25}.dealer-section-heading{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}.dealer-section-heading>a,.dealer-text-link,.dealer-profile-offices a{color:#e64750;font-size:13px;font-weight:700}.dealer-muted{color:var(--ac-muted);font-size:14px;line-height:1.6}.dealer-cars-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}.dealer-car{overflow:hidden;border:1px solid var(--ac-border);border-radius:16px;min-width:0}.dealer-car>img{aspect-ratio:4/3;object-fit:cover;width:100%}.dealer-car>div{padding:14px}.dealer-car h3{font-size:14px;line-height:1.4;font-weight:750;margin-bottom:8px}.dealer-car strong{font-size:19px;display:block}.dealer-car p{color:var(--ac-muted);font-size:12px;margin-top:8px}.dealer-cars-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:25px 12px;gap:16px}.dealer-cars-empty>span{font-size:40px}.dealer-cars-empty h3{font-size:22px;font-weight:800;max-width:360px;line-height:1.3}.dealer-cars-empty p{max-width:430px;font-size:14px;line-height:1.7;color:var(--ac-muted)}.dealer-request-card{padding:24px;position:sticky;top:88px}.dealer-request-icon{display:grid;place-items:center;background:#e52b3515;color:#e52b35;border-radius:14px;width:44px;height:44px;font-size:25px;margin-bottom:20px}.dealer-request-card h2{font-size:23px}.dealer-request-card p{font-size:14px;line-height:1.7;color:var(--ac-muted);margin:14px 0 20px}.dealer-request-card .dealer-primary{width:100%}.dealer-request-card small{display:block;text-align:center;font-size:11px;color:var(--ac-muted);margin-top:12px}.dealer-about-text{white-space:pre-line;font-size:15px;line-height:1.8;margin:20px 0}.dealer-city-chips{display:flex;gap:8px;flex-wrap:wrap}.dealer-city-chips span{border-radius:100px;background:var(--ac-bg);padding:9px 14px;font-size:13px}.dealer-profile-offices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}.dealer-profile-offices article{padding:18px;border:1px solid var(--ac-border);border-radius:16px}.dealer-profile-offices h3{font-size:16px;font-weight:800}.dealer-profile-offices p{font-size:14px;margin-top:8px}.dealer-profile-offices a{display:inline-block;margin-top:14px}.dealer-tab-content>section>h2{font-size:22px;white-space:normal}.dealer-mobile-request{display:none}.dealer-logo-light{display:none}html[data-theme=light] .dealer-logo-light{display:block}html[data-theme=light] .dealer-logo-dark{display:none}
+   @media(max-width:1100px){.dealer-cars-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dealer-profile-body{grid-template-columns:minmax(0,1fr) 260px}.dealer-profile-identity{padding-left:20px;padding-right:20px}}
+   @media(max-width:700px){.dealer-profile{padding:0 0 90px;--dealer-radius:22px}.dealer-preview-note{margin:12px}.dealer-profile-hero{border-radius:0}.dealer-cover{height:210px;object-position:center}.dealer-cover-label{top:14px;left:16px;font-size:10px}.dealer-profile-identity{margin:-24px 12px 0;padding:18px 16px 0}.dealer-avatar{width:60px;height:60px;border-radius:16px;padding:7px}.dealer-identity-row{gap:12px}.dealer-profile h1{font-size:24px}.dealer-eyebrow{font-size:9px;letter-spacing:.06em}.dealer-address-link{font-size:12px;margin-top:5px}.dealer-desktop-request{display:none}.dealer-intro{font-size:12px;margin-top:14px}.dealer-stories .ac-buyers-rail>button{width:92px;height:108px;border-radius:13px}.dealer-stories h2{font-size:12px!important}.dealer-profile-tabs{gap:4px;margin-top:12px}.dealer-profile-tabs button{flex:1;padding:11px 4px;font-size:12px;white-space:nowrap}.dealer-profile-body{display:block;margin:12px}.dealer-tab-content{padding:20px 16px}.dealer-profile h2{font-size:22px}.dealer-request-card{display:none}.dealer-section-heading>a{font-size:11px}.dealer-cars-grid{gap:10px;margin-top:16px}.dealer-car>div{padding:10px}.dealer-car h3{font-size:12px}.dealer-car strong{font-size:16px}.dealer-car p{font-size:11px}.dealer-cars-empty{padding:22px 0}.dealer-cars-empty h3{font-size:20px}.dealer-cars-empty p{font-size:13px}.dealer-profile-offices{grid-template-columns:minmax(0,1fr)}.dealer-about-text{font-size:14px}.dealer-mobile-request{display:block;position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--ac-surface);border-top:1px solid var(--ac-border);z-index:40}.dealer-mobile-request a{width:100%}.dealer-profile .ac-buyers-rail{scrollbar-width:none}}
+  `}</style>
+ </div>;
 }

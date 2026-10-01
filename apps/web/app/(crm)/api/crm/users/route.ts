@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const displayName = clean(form.get("displayName"), 160);
     const telegramUsername = normalizeTelegramUsername(clean(form.get("telegramUsername"), 160));
     const requestedRole = clean(form.get("role"), 40) as UserRole;
-    const role: UserRole = ["owner", "admin", "manager"].includes(requestedRole) ? requestedRole : "manager";
+    const role: UserRole = ["owner", "admin", "manager", "dealer"].includes(requestedRole) ? requestedRole : "manager";
     const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&["staff","settings","dealers"].includes(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
     if(permissions&&actor.role!=="owner"&&Object.entries(permissions).some(([key,value])=>value&&!hasCrmPermission(actor,key as CrmPermission)))throw Error("Нельзя выдать права, которых у вас нет");
     const birthDate=form.has("birthDate")?validateBirthDate(clean(form.get("birthDate"),10)):undefined;
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
       previous=current;
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");
       const identityChanged = staffIdentityChanged(current.telegramUsername, telegramUsername);
-      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, ...workplaces, ...(personalPhone!==undefined?{personalPhone}:{}), ...(permissions?{permissions}:{}), ...(offerCopyEnabled!==undefined?{offerCopyEnabled}:{}),
+      return users.map((item) => item.id === userId ? { ...item, displayName, telegramUsername, role, status, companyId, ...workplaces, ...(personalPhone!==undefined?{personalPhone}:{}), ...(permissions?{permissions}:{}), ...((current.companyId!==companyId||current.role!==role)?{dealerApproved:false}:{}), ...(offerCopyEnabled!==undefined?{offerCopyEnabled}:{}),
         sessionVersion: (item.sessionVersion || 0) + (identityChanged || item.role !== role || item.status !== status || (permissions&&JSON.stringify(item.permissions)!==JSON.stringify(permissions)) ? 1 : 0),
         ...(identityChanged ? {telegramId:"",botBindHash:"",botBindExpiresAt:""} : {}),
         updatedAt: new Date().toISOString() } : item);

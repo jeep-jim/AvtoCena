@@ -26,3 +26,16 @@ test("website and mini app submit through the same intake, unread CRM state and 
   for(const notice of notices){assert.match(notice.text,/Имя: Test/);assert.match(notice.text,/Город: Красноярск/);assert.match(notice.text,/Телефон · звонок: \+7/);assert.match(notice.text,/Автомобиль:/);assert.equal(notice.chatId,groupTarget.chatId);assert.ok(ids.some(id=>notice.text.includes(id)));}
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(tmp,{recursive:true,force:true});}
 });
+
+test('dealer profile requests keep verified attribution in CRM and group notice',async()=>{
+ const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER;
+ const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'dealer-lead-'));fs.mkdirSync(path.join(tmp,'data/dealers/showcases'),{recursive:true});process.chdir(tmp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();
+ try{
+  const {defaultShowcase}=await import('../apps/web/lib/dealers/showcase-model');
+  fs.writeFileSync('data/dealers/showcases/dealer_topavto.json',JSON.stringify({...defaultShowcase('dealer_topavto'),profileEnabled:true,name:'Test dealer'}));
+  const response=await createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'content-type':'application/json',origin:'https://avtocena.com'},body:JSON.stringify({requestMode:'generic',source:'dealer_profile_request',dealerId:'dealer_topavto',dealerName:'Forged company',name:'Test',phone:'+79998887766',city:'Новосибирск',car:'Toyota RAV4',contactPreference:'call',personalDataConsent:true,personalDataConsentVersion:'lead-consent-2026-09-30',pageUrl:'https://avtocena.com/request?dealer=dealer_topavto'})}));
+  assert.equal(response.status,200,await response.clone().text());
+  const lead=(await readChunkedDataJson<any>('leads/leads.json',[]))[0];assert.equal(lead.requestedDealerId,'dealer_topavto');assert.equal(lead.requestedDealerName,'Test dealer');assert.match(lead.comment,/Test dealer/);assert.equal(lead.submissionChannel,'site');
+  const notices=await claimCrmNotices();assert.equal(notices.length,1);assert.match(notices[0].text,/Test dealer/);assert.equal(notices[0].text.includes('Forged company'),false);assert.equal(notices[0].chatId,groupTarget.chatId);
+ }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(tmp,{recursive:true,force:true});}
+});

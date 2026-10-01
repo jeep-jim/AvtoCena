@@ -14,7 +14,7 @@ export async function findDealer(id: string) {
   if (!validDealerId(id)) return null;
   const rows = await readDataJson<any[]>("dealers/dealers.json", []);
   return (
-    (rows.length ? rows : [{ id: PILOT_DEALER_ID, name: "TopAvto" }]).find(
+    (rows.length ? rows : [{ id: PILOT_DEALER_ID, name: "TopAvto", status:"verified" }]).find(
       (d) => d.id === id,
     ) || null
   );

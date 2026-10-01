@@ -1,3 +1,4 @@
+import {canManageDealer} from "@/lib/dealers/access";
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
@@ -11,7 +12,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> },
 ) {
   if (
-    (await getCurrentUser())?.role !== "owner" ||
+    !(await canManageDealer(await getCurrentUser(),(await params).id)) ||
     !isCalculationOriginAllowed(req)
   )
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });

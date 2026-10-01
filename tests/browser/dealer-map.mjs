@@ -13,9 +13,13 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.route('https://yandex.ru/map-widget/**',r=>r.fulfill({contentType:'text/html',body:'<html lang="ru"><body>Яндекс Карты — тест виджета</body></html>'}));
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
  await page.locator('.dealer-profile-hero img').first().evaluate(img=>img.decode());
- if(width>700){const box=await page.locator('.dealer-profile-hero').boundingBox();assert.ok(box.height<300,'Compact hero must fit within 300px');}
+ if(width>700){const box=await page.locator('.dealer-profile-hero').boundingBox();assert.ok(box.height<=360,'Cover has a bounded height');const profile=await page.locator('.dealer-profile').boundingBox();assert.equal(profile.width,width); }
  await page.locator('.ac-buyers-rail').scrollIntoViewIfNeeded();await page.locator('.ac-buyers-rail img').first().evaluate(img=>img.decode());await page.evaluate(()=>scrollTo(0,0));
  await page.screenshot({path:`${out}/profile-${theme}-${width}.png`});
+ assert.equal(await page.locator('.dealer-profile a[href^="tel:"]').count(),0);
+ assert.equal(await page.locator('.dealer-profile').getByText('+79991234567').count(),0);
+ assert.ok((await page.locator('.dealer-profile a[href*="/request?dealer="]').first().getAttribute('href')).includes('dealer_topavto'));
+ await page.getByRole('button',{name:'Адреса',exact:true}).click();
  assert.equal(await page.locator('iframe').count(),0);
  await page.getByRole('button',{name:'Показать Яндекс Карту',exact:true}).click();
  let url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('text'),'Новокузнецк, ТРК Планета');

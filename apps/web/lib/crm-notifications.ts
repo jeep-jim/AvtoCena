@@ -63,6 +63,7 @@ export function leadNotice(lead:any,entry?:any){
    current.phone && leadContact(current).value !== current.phone ? `Телефон: ${noticeField(current.phone, 80)}` : "",
    `Автомобиль: ${noticeField(car, 600)}`,
    current.city ? `Город: ${noticeField(current.city)}` : "",
+   current.requestedDealerName ? `Дилер: ${noticeField(current.requestedDealerName)}` : "",
    url,
  ].filter(Boolean).join("\n");
 }

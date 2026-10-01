@@ -1,3 +1,4 @@
+import {canManageDealer} from "@/lib/dealers/access";
 import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
@@ -8,7 +9,7 @@ export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  if ((await getCurrentUser())?.role !== "owner")
+  if (!(await canManageDealer(await getCurrentUser(),(await params).id)))
     return NextResponse.json(
       { error: "Доступ только владельцу" },
       { status: 403 },
@@ -24,7 +25,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   if (
-    (await getCurrentUser())?.role !== "owner" ||
+    !(await canManageDealer(await getCurrentUser(),(await params).id)) ||
     !isCalculationOriginAllowed(req)
   )
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });

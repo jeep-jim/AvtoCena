@@ -1,3 +1,4 @@
+import {scopedAuthUser} from "./platform-access";
 import { cache } from "react";
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
@@ -8,7 +9,7 @@ import { getDataRoot, readDataJson } from "./data";
 export const AUTH_COOKIE_NAME = "avtocena_session";
 export const AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 14;
 
-export type UserRole = "owner" | "admin" | "manager" | "partner";
+export type UserRole = "owner" | "admin" | "manager" | "partner" | "dealer";
 
 export type AuthUser = {
   id: string;
@@ -21,6 +22,7 @@ export type AuthUser = {
   workAddresses?: string[];
   remoteWork?: boolean;
   companyId?: string;
+  dealerApproved?: boolean;
   role: UserRole;
   status?: "active" | "disabled";
   partnerCode?: string;
@@ -73,6 +75,7 @@ export function findAuthUserByTelegram(username: string) {
 }
 
 export function createSessionCookie(user: AuthUser) {
+  user = scopedAuthUser(user);
   const payload: SessionPayload = {
     id: user.id,
     telegramUsername: normalizeTelegramUsername(user.telegramUsername),
@@ -121,7 +124,8 @@ async function readCurrentUser(): Promise<AuthUser | null> {
   const signed = verifySessionCookie((await cookies()).get(AUTH_COOKIE_NAME)?.value);
   if (!signed) return null;
   const users = await readDataJson<AuthUser[]>("auth/users.json", getAuthUsers());
-  return resolveSessionUser(signed, users);
+  const current = resolveSessionUser(signed, users);
+  return current ? scopedAuthUser(current) : null;
 }
 
 export const getCurrentUser = typeof cache === "function" ? cache(readCurrentUser) : readCurrentUser;
