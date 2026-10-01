@@ -213,15 +213,15 @@ export function DealerEditor({
                     />
                     <Field
                       label="Широта"
-                      type="number"
+                      type="text"
                       value={o.lat ?? ""}
-                      onChange={(v) => change({ lat: v })}
+                      onChange={(v) => change({ lat: v === "" ? null : Number(v) })}
                     />
                     <Field
                       label="Долгота"
-                      type="number"
+                      type="text"
                       value={o.lon ?? ""}
-                      onChange={(v) => change({ lon: v })}
+                      onChange={(v) => change({ lon: v === "" ? null : Number(v) })}
                     />
                   </div>
                   <a className={button + " inline-block"} href={yandexOfficeUrls(o).full} target="_blank" rel="noreferrer">Проверить адрес в Яндекс Картах ↗</a>
