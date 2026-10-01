@@ -1,5 +1,11 @@
 name: Verify dealer banner and Yandex map
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/dealers/**'
+      - 'apps/web/lib/dealers/**'
+      - 'tests/browser/dealer-map*'
+      - '.github/workflows/verify-dealer-map.yml'
   workflow_dispatch:
   push:
     branches: [main, fix/dealer-context-catalog-20261001, fix/dealer-profile-design-20261001, fix/dealer-banner-yandex-20261001, fix/dealer-compact-profile-20261001, feat/dealer-platform-20261001, fix/dealer-hidden-profile-favicon-20261001]

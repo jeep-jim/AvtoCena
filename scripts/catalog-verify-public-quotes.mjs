@@ -38,8 +38,11 @@ try {
       const encoded=html.match(/data-offer-preview="([^"]+)"/)?.[1];
       assert.ok(encoded,`Offer page unavailable: ${row.id}`);
       const preview=JSON.parse(decode(encoded));
-      const listRub=Number(row.catalogPricingMode==='seller'?row.sellerPriceRub:row.publicVisibleRub || row.totalRub);
-      const savedVersion=html.match(/data-offer-saved-version="([^"]+)"/)?.[1];
+      // Cards prefer the published saved calculation over the source-only price.
+      // The page's share-version attribute is reserved for explicit client links;
+      // an ordinary clean URL still renders the verified shared calculation.
+      const listRub=Number(row.savedCalculationPreview?.totalRub || (row.catalogPricingMode==='seller'?row.sellerPriceRub:row.publicVisibleRub || row.totalRub));
+      const savedVersion=html.match(/data-offer-saved-version="([^"]+)"/)?.[1] || row.savedCalculationPreview?.version;
       let saved=null;
       if(savedVersion){
         const stored=await getOffer(row.id);
