@@ -1,4 +1,5 @@
 "use client";
+import {DEALER_MARKETS,dealerMarkets} from "@/lib/dealers/catalog-markets";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
@@ -96,6 +97,7 @@ export function DealerEditor({
       <div className="dealer-editor-navigation flex flex-wrap gap-2">
         {[
           ["profile", "Профиль"],
+          ["markets", "Рынки и каталог"],
           ["offices", "Адреса офисов"],
           ["buyers", "Фото покупателей"],
           ["offers", "Спецпредложения"],
@@ -175,6 +177,12 @@ export function DealerEditor({
             <p className="rounded-xl bg-[var(--ac-bg)] p-3 text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
           </>
         )}
+        {tab === "markets" && <div className="space-y-5">
+          <div><h2 className="text-xl font-black">Откуда вы доставляете автомобили</h2><p className="mt-2 text-sm text-[var(--ac-muted)]">Выберите направления вашей компании. На странице будут доступны только эти рынки общего каталога АвтоЦены.</p></div>
+          <div className="grid gap-3 sm:grid-cols-2">{DEALER_MARKETS.map(m=><label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[var(--ac-border)] p-4"><input type="checkbox" checked={dealerMarkets(s.catalogMarkets).includes(m.id)} onChange={e=>patch({catalogMarkets:e.target.checked?[...dealerMarkets(s.catalogMarkets),m.id]:dealerMarkets(s.catalogMarkets).filter(id=>id!==m.id)})}/><span aria-hidden="true" className="text-2xl">{m.flag}</span><strong>{m.label}</strong></label>)}</div>
+          <p className="text-sm text-[var(--ac-muted)]">{s.catalogMarkets?.length?`Выбрано направлений: ${s.catalogMarkets.length}`:'Направления не выбраны — общий каталог на странице компании не показывается.'}</p>
+          <section className="dealer-editor-panel"><h3 className="font-bold">Собственные предложения</h3><p className="mt-2 text-sm text-[var(--ac-muted)]">Автомобили, которые вы добавите самостоятельно, появятся отдельно во вкладке «Предложения». Выбор рынков не делает автомобили АвтоЦены собственными предложениями компании.</p><button type="button" className={button+' mt-3'} onClick={()=>setTab('offers')}>Управлять предложениями</button></section>
+        </div>}
         {tab === "offices" && (
           <>
             <h2 className="text-xl font-black">Города и офисы</h2>

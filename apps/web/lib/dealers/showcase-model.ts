@@ -1,3 +1,4 @@
+import {DEALER_MARKETS,dealerMarkets,type DealerMarket} from './catalog-markets';
 import {validProfilePart} from './profile-url';
 import {
   utilizationCoefficient2026,
@@ -57,6 +58,7 @@ export type DealerShowcase = {
   citySlug?: string;
   slug?: string;
   profileEnabled: boolean;
+  catalogMarkets: DealerMarket[];
   buyersEnabled: boolean;
   specialsEnabled: boolean;
   name: string;
@@ -91,6 +93,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     citySlug: id === PILOT_DEALER_ID ? "nvkz" : "",
     slug: id === PILOT_DEALER_ID ? "topavto" : "",
     profileEnabled: false,
+    catalogMarkets: id === PILOT_DEALER_ID ? DEALER_MARKETS.map(m=>m.id) : [],
     buyersEnabled: id === PILOT_DEALER_ID,
     specialsEnabled: false,
     name: name || (id === PILOT_DEALER_ID ? "TOP AVTO" : ""),
@@ -319,6 +322,7 @@ export function normalizeShowcase(
     citySlug: text(raw.citySlug,40).toLowerCase(),
     slug: text(raw.slug,40).toLowerCase(),
     profileEnabled: raw.profileEnabled === true,
+    catalogMarkets: raw.catalogMarkets === undefined ? base.catalogMarkets : dealerMarkets(raw.catalogMarkets),
     buyersEnabled: raw.buyersEnabled === true,
     specialsEnabled: raw.specialsEnabled === true,
     name: text(raw.name, 120),
