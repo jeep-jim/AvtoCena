@@ -1,4 +1,4 @@
-import {isPlatformTeam} from "@/lib/platform-access";
+import {isPlatformTeam,isPlatformOwner} from "@/lib/platform-access";
 import {hasCrmPermission,type CrmPermission} from "@/lib/crm-permissions";
 import { redirect } from "next/navigation";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
@@ -22,7 +22,7 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
     ["/crm/clients", "Клиенты"],
     ["/crm/managers", "Команда и права"],
     ["/crm/settings", "Рынки и расчёт"],
-    ["/crm/dealers", "Дилеры"],
+    [isPlatformOwner(user)?"/crm/dealers":"/dealer-cabinet", isPlatformOwner(user)?"Дилеры":"Дилер"],
   ];
   if (!isAdminRole(user.role)) links.splice(4);
   if (isAdminRole(user?.role)) links.push(["/crm/telegram", "Telegram"]);

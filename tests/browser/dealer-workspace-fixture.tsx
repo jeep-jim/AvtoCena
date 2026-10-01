@@ -1,0 +1,12 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {DealerWorkspace} from '../../apps/web/components/dealers/DealerWorkspace';
+import {DealerPlatformManager} from '../../apps/web/components/dealers/DealerPlatformManager';
+import {PartnerLanding,KnowledgeBase} from '../../apps/web/components/partners/PartnerPages';
+import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
+import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
+const q=new URLSearchParams(location.search),kind=q.get('view')||'editor',s=defaultShowcase('dealer_topavto');s.description='Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
+const root=createRoot(document.getElementById('root')!);
+if(kind==='partners')root.render(<PartnerLanding lang={(q.get('lang')||'ru') as any} preview={false} program={DEFAULT_PROGRAM} knowledgeEnabled partnersEnabled/>);
+else if(kind==='knowledge')root.render(<KnowledgeBase lang={(q.get('lang')||'ru') as any} preview={false} knowledgeEnabled partnersEnabled/>);
+else root.render(<main className="mx-auto max-w-[1440px] p-5"><header className="flex justify-between border-b mb-7 pb-4"><strong>АвтоЦена / CRM</strong><span>Дилеры</span></header>{kind==='platform'?<DealerPlatformManager dealers={[{id:'dealer_topavto',name:'ТопАвто',city:'Новокузнецк',status:'verified'}]} applications={[{id:'app',companyName:'Компания-пример',city:'Шанхай',contactName:'Контакт',status:'new',partnerType:'supplier'}]} initialProgram={DEFAULT_PROGRAM} initialFeatures={{version:0,affiliatesEnabled:true}}/>:<DealerWorkspace initial={s} features={{version:0,affiliatesEnabled:true}} owner/>}</main>);

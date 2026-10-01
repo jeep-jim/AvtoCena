@@ -1,3 +1,6 @@
+import {readMembership} from '@/lib/dealers/program-store';
+import {dealerAccessLevel} from '@/lib/dealers/program-model';
+import {isPlatformOwner} from '@/lib/platform-access';
 import {canManageDealer} from "@/lib/dealers/access";
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
@@ -18,6 +21,7 @@ export async function POST(
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });
   try {
     const { id } = await params;
+    if(!isPlatformOwner(await getCurrentUser())&&!dealerAccessLevel(id,await readMembership(id)).full)return NextResponse.json({error:"Загрузка фото доступна во время пробного или оплаченного периода"},{status:403});
     if (!(await findDealer(id)))
       return NextResponse.json(
         { error: "Компания не найдена" },

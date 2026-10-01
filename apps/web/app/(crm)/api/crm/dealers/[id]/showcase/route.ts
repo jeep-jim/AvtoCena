@@ -1,3 +1,6 @@
+import {isPlatformOwner} from '@/lib/platform-access';
+import {readMembership} from '@/lib/dealers/program-store';
+import {dealerAccessLevel,restrictedShowcaseChange} from '@/lib/dealers/program-model';
 import {canManageDealer} from "@/lib/dealers/access";
 import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import { NextResponse } from "next/server";
@@ -36,8 +39,11 @@ export async function PUT(
         { error: "Слишком много данных" },
         { status: 413 },
       );
+    const raw=JSON.parse(body), id=(await params).id;
+    const current=await readShowcase(id);
+    if(current&&!isPlatformOwner(await getCurrentUser())&&!dealerAccessLevel(id,await readMembership(id)).full&&restrictedShowcaseChange(current,raw))return NextResponse.json({error:"Собственные автомобили и оформление доступны во время пробного или оплаченного периода"},{status:403});
     return NextResponse.json(
-      await saveShowcase((await params).id, await withDealerRate(JSON.parse(body),true)),
+      await saveShowcase(id, await withDealerRate(raw,true)),
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (e) {

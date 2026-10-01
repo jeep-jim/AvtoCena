@@ -64,7 +64,7 @@ function InsuranceIcon() {
   );
 }
 
-export function PublicLegalFooter() {
+export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}:{partnersEnabled?:boolean;knowledgeEnabled?:boolean}) {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
@@ -131,6 +131,8 @@ export function PublicLegalFooter() {
             { href: "/cars", label: "Каталог автомобилей" },
             { href: "/favorites", label: "Избранные автомобили" },
             { href: "/cars/autocatalog", label: "Автокаталог" },
+            ...(partnersEnabled?[{href:"/partners",label:"Партнёрам"}]:[]),
+            ...(knowledgeEnabled?[{href:"/knowledge",label:"База знаний"}]:[]),
           ]} />
         </div>
 

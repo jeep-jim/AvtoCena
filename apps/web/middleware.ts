@@ -145,7 +145,7 @@ export async function middleware(request: NextRequest) {
 
   // Unreleased dealer marketing pages are private; crawlers must see a real 404.
   // Do not block these URLs in robots.txt: bots need to observe their removal.
-  if (pathname === "/dealers" || pathname === "/dealers/demo") {
+  if (pathname === "/dealers/demo") {
     const headers = { "X-Robots-Tag": "noindex, nofollow, noarchive", "Cache-Control": "private, no-store" };
     if (request.nextUrl.searchParams.get("preview") === "1" && isPlatformTeam(session)) {
       return NextResponse.next({ headers });

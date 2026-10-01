@@ -55,11 +55,11 @@ export async function saveShowcase(id:string,raw:any){
  });
  return saved;
 }
-export type PublicFeatures = { version: number; affiliatesEnabled: boolean };
+export type PublicFeatures = { version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
 export function readPublicFeatures() {
   return readDataJson<PublicFeatures>("settings/public-features.json", {
     version: 0,
-    affiliatesEnabled: true,
+    affiliatesEnabled: true, knowledgeEnabled:false, partnersEnabled:false,
   });
 }
 export async function savePublicFeatures(raw: PublicFeatures) {
@@ -73,6 +73,8 @@ export async function savePublicFeatures(raw: PublicFeatures) {
       saved = {
         version: current.version + 1,
         affiliatesEnabled: raw.affiliatesEnabled === true,
+        knowledgeEnabled:raw.knowledgeEnabled === undefined ? current.knowledgeEnabled===true : raw.knowledgeEnabled===true,
+        partnersEnabled:raw.partnersEnabled === undefined ? current.partnersEnabled===true : raw.partnersEnabled===true,
       };
       return saved;
     },

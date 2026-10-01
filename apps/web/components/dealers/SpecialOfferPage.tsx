@@ -35,7 +35,7 @@ export async function SpecialOfferPage({
   try {
     city = decodeURIComponent(city);
   } catch {}
-  const c = calculateSpecial(s, o, city || o.defaultCity);
+  const c = calculateSpecial(s, o);
   const title = specialTitle(o);
   const snapshot = {
     id,
@@ -115,7 +115,7 @@ export async function SpecialOfferPage({
           <div className="ac-inline-parameters min-w-0">
             <section className="ac-offer-price-panel rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5">
               <p className="text-sm text-[var(--ac-muted)]">
-                {c.city ? `С доставкой: ${c.city}` : "Стоимость автомобиля"}
+                {c.city ? `Цена в городе ${c.city}` : "Стоимость автомобиля"}
               </p>
               <p className="ac-price mt-2 text-3xl font-black">
                 {c.totalRub === null
@@ -161,7 +161,7 @@ export async function SpecialOfferPage({
                 </p>
               )}
               <p className="mt-3 text-xs text-[var(--ac-muted)]">
-                Наличие, стоимость и срок доставки подтвердим перед заключением
+                Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением
                 договора.
               </p>
             </section>

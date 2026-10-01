@@ -76,6 +76,7 @@ export type DealerShowcase = {
   buyerPhotos: DealerPhoto[];
   specialHeading: string;
   pricing: {
+    baseCity?: string;
     rateMode?: "auto" | "manual";
     usdRub: number;
     rateAt: string;
@@ -119,6 +120,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
         : [],
     specialHeading: "✅ СПЕЦ ПРЕДЛОЖЕНИЕ от 5 дней и авто у вас дома!",
     pricing: {
+      baseCity:id===PILOT_DEALER_ID?"Новосибирск":"",
       rateMode: "auto",
       usdRub: 0,
       rateAt: "",
@@ -149,7 +151,7 @@ export function specialPath(dealerId: string, id: string) {
 export function calculateSpecial(
   s: DealerShowcase,
   o: SpecialOffer,
-  city = o.defaultCity,
+  city = s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
 ) {
   const p = s.pricing,
@@ -344,6 +346,7 @@ export function normalizeShowcase(
     offices: [],
     offers: [],
     pricing: {
+      baseCity:text(p.baseCity,120)|| (id===PILOT_DEALER_ID?"Новосибирск":""),
       rateMode: p.rateMode === "manual" ? "manual" : "auto",
       usdRub: number(p.usdRub, 0, 1000),
       rateAt: text(p.rateAt, 50),
