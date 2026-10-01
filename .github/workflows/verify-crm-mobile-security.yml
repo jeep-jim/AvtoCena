@@ -1,5 +1,12 @@
 name: Verify CRM mobile and security audit
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/crm/**'
+      - 'apps/web/app/(crm)/**'
+      - 'apps/web/lib/crm-permissions.ts'
+      - 'tests/browser/crm-mobile*'
+      - '.github/workflows/verify-crm-mobile-security.yml'
   push:
     branches: [feat/crm-unified-team-20260926, fix/catalog-read-concurrency-20260926, feat/crm-activity-reminders-20260926, fix/crm-client-documents-20260925, fix/catalog-filter-continuity-20260921, fix/crm-mobile-security-20260921, fix/photos-offer-push-20260921, fix/offer-layout-localized-20260921, main]
     paths:
@@ -16,6 +23,7 @@ permissions:
   contents: read
 jobs:
   audit:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
