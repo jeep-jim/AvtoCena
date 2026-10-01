@@ -1,0 +1,39 @@
+name: Verify dealer banner and Yandex map
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, fix/dealer-banner-yandex-20261001]
+    paths:
+      - 'apps/web/components/dealers/**'
+      - 'apps/web/lib/dealers/**'
+      - 'apps/web/public/dealers/**'
+      - 'apps/web/app/(crm)/api/crm/dealers/**'
+      - 'tests/dealer-*.test.ts'
+      - 'tests/browser/dealer-map*'
+      - '.github/workflows/verify-dealer-map.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/dealer-yandex-map.test.ts tests/dealer-showcase-api.test.ts tests/dealer-showcase.test.ts
+      - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/dealer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check banner and office map at mobile and desktop widths
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-map.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dealer-map-preview
+          path: artifacts/dealer-map/*.png
+          if-no-files-found: ignore

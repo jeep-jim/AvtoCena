@@ -126,7 +126,7 @@ test("dealer writes enforce current owner role and origin before accepting conte
           context,
         )
       ).status,
-      400,
+      410,
     );
   } finally {
     delete (globalThis as any).__dealerTestActor;

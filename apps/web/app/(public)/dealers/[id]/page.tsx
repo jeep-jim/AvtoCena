@@ -153,10 +153,7 @@ export default async function Page({
             </section>
           ))}
         </div>
-        <DealerMap
-          offices={s.offices}
-          tiles={process.env.DEALER_MAP_TILE_URL}
-        />
+        <DealerMap offices={s.offices} />
         {s.buyersEnabled && (
           <BuyerGallery
             dealerName={s.name}

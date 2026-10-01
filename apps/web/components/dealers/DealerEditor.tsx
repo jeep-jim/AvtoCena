@@ -11,6 +11,7 @@ import {
 } from "@/lib/dealers/showcase-model";
 import {Field, Toggle, Photos, input, button} from "./DealerEditorFields";
 import {DealerSpecialsEditor} from "./DealerSpecialsEditor";
+import {yandexOfficeUrls} from "@/lib/dealers/yandex-map";
 import {dealerProfilePath} from "@/lib/dealers/profile-url";
 import type { PublicFeatures } from "@/lib/dealers/showcase-store";
 export function DealerEditor({
@@ -29,8 +30,7 @@ export function DealerEditor({
     [f, setF] = useState(features),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [tab, setTab] = useState("profile"),
-    [mapPolicy, setMapPolicy] = useState(false);
+    [tab, setTab] = useState("profile");
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
   const [recovery,setRecovery]=useState<any>(null);
@@ -152,6 +152,10 @@ export function DealerEditor({
               ].map(([key, label]) => (
                 <section className="space-y-2" key={key}>
                   <h3>{label}</h3>
+                  {key === "banner" && <>
+                    <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Оставьте текст и логотип с отступом от краёв.</p>
+                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-1800x600.webp" })}>Использовать баннер TopAvto</button>}
+                  </>}
                   <Photos
                     dealerId={s.dealerId}
                     single
@@ -183,24 +187,7 @@ export function DealerEditor({
               />
             </div>
             <h2 className="text-xl font-black">Города и офисы</h2>
-            <label className="text-sm">
-              <input
-                type="checkbox"
-                checked={mapPolicy}
-                onChange={(e) => setMapPolicy(e.target.checked)}
-              />{" "}
-              Подключить поиск адресов OpenStreetMap: не чаще одного запроса в
-              секунду, без массового поиска.{" "}
-              <a
-                className="underline"
-                target="_blank"
-                rel="noreferrer"
-                href="https://operations.osmfoundation.org/policies/nominatim/"
-              >
-                Условия сервиса
-              </a>
-              . Используем только публичные адреса офисов.
-            </label>
+            <p className="text-sm text-[var(--ac-muted)]">Яндекс Карты покажут офис по городу и адресу. Для точной метки можно дополнительно указать координаты.</p>
             {s.offices.map((o, i) => {
               const change = (v: any) =>
                 patch({
@@ -251,44 +238,8 @@ export function DealerEditor({
                       onChange={(v) => change({ lon: v })}
                     />
                   </div>
-                  <button
-                    type="button"
-                    className={button}
-                    onClick={async () => {
-                      try {
-                        const r = await fetch(
-                          `/api/crm/dealers/${s.dealerId}/geocode`,
-                          {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                              city: o.city,
-                              address: o.address,
-                              acceptPolicy: mapPolicy,
-                            }),
-                          },
-                        );
-                        const d = await r.json();
-                        if (!r.ok) throw Error(d.error);
-                        change({ lat: d.lat, lon: d.lon });
-                        setMessage(
-                          "Адрес найден. Проверьте точку на предпросмотре после сохранения.",
-                        );
-                      } catch (e) {
-                        setMessage(
-                          e instanceof Error
-                            ? e.message
-                            : "Не удалось найти адрес",
-                        );
-                      }
-                    }}
-                  >
-                    Найти адрес на карте
-                  </button>
-                  <p className="text-xs text-[var(--ac-muted)]">
-                    Поиск OpenStreetMap. Если адрес не найден, укажите
-                    координаты вручную.
-                  </p>
+                  <a className={button + " inline-block"} href={yandexOfficeUrls(o).full} target="_blank" rel="noreferrer">Проверить адрес в Яндекс Картах ↗</a>
+                  <p className="text-xs text-[var(--ac-muted)]">Проверьте адрес перед публикацией. Если поиск показывает несколько мест, уточните адрес или укажите координаты нужного входа.</p>
                   <Photos
                     dealerId={s.dealerId}
                     value={o.photos}
