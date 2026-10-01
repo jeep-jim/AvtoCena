@@ -54,6 +54,17 @@ test('dealer HTTP endpoints deny foreign IDs, pending, suspended and unapproved 
   assert.equal((await modules.access.PUT(request('PUT'),context())).status,403);
   assert.equal((await modules.features.PUT(request('PUT'))).status,403);
   assert.equal((await modules.showcase.GET(request('GET','../second'),context('../second'))).status,403);
+  fs.mkdirSync('data/auth',{recursive:true});fs.writeFileSync('data/auth/users.json',JSON.stringify([{...actor,id:'external',telegramUsername:'dealer_one',displayName:'Dealer One',dealerApproved:false,sessionVersion:1},{...actor,id:'foreign',companyId:'second',telegramUsername:'dealer_two',displayName:'Dealer Two'}]));
+  (globalThis as any).__tenantActor={id:'user_nstass',role:'owner',companyId:'dealer_topavto'};
+  const grant=(username:string,approved:boolean)=>new Request('https://avtocena.com/api/crm/dealers/first/access',{method:'PUT',headers:{origin:'https://avtocena.com','Content-Type':'application/json'},body:JSON.stringify({username,approved})});
+  assert.equal((await modules.access.PUT(grant('dealer_two',true),context())).status,400);
+  assert.equal((await modules.access.PUT(grant('dealer_one',true),context())).status,200);
+  let saved=JSON.parse(fs.readFileSync('data/auth/users.json','utf8'))[0];assert.equal(saved.dealerApproved,true);assert.equal(saved.sessionVersion,2);
+  assert.equal((await (await modules.access.GET(request(),context())).json()).users.length,1);
+  assert.equal((await modules.access.PUT(grant('dealer_one',false),context())).status,200);
+  saved=JSON.parse(fs.readFileSync('data/auth/users.json','utf8'))[0];assert.equal(saved.dealerApproved,false);assert.equal(saved.sessionVersion,3);
+  (globalThis as any).__tenantActor=saved;assert.equal((await modules.showcase.GET(request(),context())).status,403);
+
  }finally{delete(globalThis as any).__tenantActor;process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;fs.rmSync(tmp,{recursive:true,force:true});}
 });
 test('middleware admits the reviewed team and limits dealer sessions to scoped endpoints',async()=>{
