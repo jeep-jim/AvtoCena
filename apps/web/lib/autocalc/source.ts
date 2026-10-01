@@ -27,7 +27,7 @@ export async function readSource(value: string, signal: AbortSignal, redirects=0
       if(status!==200 || !(format==='json'?/application\/json/i:/text\/html|application\/xhtml\+xml/i).test(String(res.headers['content-type']))){res.resume();reject(Error('Источник не предоставил страницу объявления'));return;}
       let size=0;const chunks:Buffer[]=[];
       res.on('data',chunk=>{size+=chunk.length;if(size>2_000_000){res.destroy(Error('Страница слишком большая'));return;}chunks.push(chunk);});
-      res.on('error',reject);res.on('end',()=>resolve({status,html:Buffer.concat(chunks).toString('utf8')}));
+      res.on('error',reject);res.on('end',()=>resolve({status,html:decodeSourceBytes(Buffer.concat(chunks))}));
     });req.on('error',reject);req.end();
   }).catch(async error=>{
     // Retry a dropped connection once, within the original time budget. Never retry an HTTP refusal.
@@ -84,3 +84,5 @@ export function extractSource(html:string,url:string) {
   const currency=text(offer.priceCurrency||priceSpecification.priceCurrency||(metadataAllowed?(meta('product:price:currency')||meta('og:price:currency')):'')).toUpperCase();
   return {title,make:text(resolve(car.brand)),model:text(car.model),market,price:price?.toString()||'',currency,images:[...new Set(photos)],draft,url};
 }
+
+export function decodeSourceBytes(bytes:Uint8Array){try{return new TextDecoder('utf-8',{fatal:true}).decode(bytes);}catch{return new TextDecoder('gb18030').decode(bytes);}}

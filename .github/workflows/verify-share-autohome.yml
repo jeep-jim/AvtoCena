@@ -1,0 +1,31 @@
+name: Verify sharing and AutoHome import
+on:
+  push:
+    branches: [fix/share-autohome-20261001]
+  pull_request:
+    paths:
+      - 'apps/web/lib/catalog/offer-share.ts'
+      - 'apps/web/lib/catalog/offer-metadata.ts'
+      - 'apps/web/lib/autocalc/autohome.ts'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/autocalc-autohome.test.ts tests/catalog-autohome-new-specification-evidence.test.ts tests/offer-share.test.ts tests/autocalc-enrichment.test.ts tests/dealer-editor-v2.test.ts
+      - run: npm run typecheck
+      - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
+      - name: Native share, clipboard, cancellation and Mini App on desktop, Android and WebKit iPhone
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs
+      - name: Live AutoHome link from the reported failure
+        run: |
+          node --import tsx -e "import('./apps/web/lib/autocalc/load.ts').then(async m=>{const r=await m.loadSource('https://www.autohome.com.cn/spec/74683/#pvareaid=6861993');console.log(JSON.stringify({make:r.make,model:r.model,draft:r.draft,currency:r.currency,price:r.price,images:r.images.length,message:r.message}));if(!r.model||!r.images.length||r.currency!=='CNY')process.exit(1);})"

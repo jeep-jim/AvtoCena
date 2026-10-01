@@ -297,7 +297,7 @@ function exactConfigFields(config: any, specId: string): ExactConfigFields {
     engine: anySection([{ id: 1150 }, { re: /^发动机$/ }]),
     displacementCcValues: (config?.result?.paramtypeitems || [])
       .filter((section: any) => clean(section.name || section.typename || section.title) === "发动机")
-      .flatMap((section: any) => (section.paramitems || []).filter((p: any) => /^排量\s*[（(]\s*(?:mL|cc|cm3|cm³)\s*[）)]$/i.test(clean(p.name)))
+      .flatMap((section: any) => (section.paramitems || []).filter((p: any) => (Number(p.id) === 1182 && /[（(]\s*(?:mL|cc|cm3|cm³)\s*[）)]$/i.test(clean(p.name))) || /^排量\s*[（(]\s*(?:mL|cc|cm3|cm³)\s*[）)]$/i.test(clean(p.name)))
         .flatMap((p: any) => (p.valueitems || []).filter((item: any) => String(item.specid) === specId)
           .map((item: any) => { const raw = clean(item.value) || (item.sublist || []).map((x: any) => clean(x.subvalue)).join(" / "); return /^\d{3,5}$/.test(raw) ? `${raw} cc` : raw || "missing"; }))),
     engineMaxHp: engineSection([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]),
