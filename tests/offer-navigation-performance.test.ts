@@ -15,7 +15,7 @@ const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings
 const readModelsWorkflow = fs.readFileSync(".github/workflows/catalog-current-read-models.yml", "utf8");
 const readModelsScript = fs.readFileSync("scripts/catalog-publish-current-read-models.mjs", "utf8");
 const marketPage = fs.readFileSync("apps/web/lib/catalog/market-page.ts", "utf8");
-const catalogPage = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
+const catalogPage = fs.readFileSync("apps/web/components/catalog/CatalogContent.tsx", "utf8");
 const vehicleGallery = fs.readFileSync("apps/web/components/catalog/VehicleGallery.tsx", "utf8");
 
 test("offer navigation swaps the catalog for an immediate route skeleton", () => {

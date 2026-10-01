@@ -1,4 +1,6 @@
 "use client";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import {offerPath} from "@/lib/catalog/offer-url";
 import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
 import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
@@ -42,6 +44,7 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 }
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
+  const dealer=useDealerBrowsing();
   const candidatePreview = useSavedCalculationPreview(offer);
   const savedPreview = savedCalculationPreviewRub(candidatePreview) ? candidatePreview : undefined;
   offer = {...offer,savedCalculationPreview:savedPreview};
@@ -59,7 +62,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isElectrified = isElectric || ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
-  const href = offerPath(offer);
+  const href = dealerBrowsingHref(offerPath(offer),dealer);
   const imageUrl = o.images[0] || "";
 
   /* Imported prices pass the public gate. The separate manager overlay comes

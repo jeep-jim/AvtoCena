@@ -36,8 +36,8 @@ export function newOffer(): SpecialOffer {
     updatedAt: "",
   };
 }
-type Props={s:DealerShowcase;patch:(v:Partial<DealerShowcase>)=>void;pricing:(v:Partial<DealerShowcase['pricing']>)=>void;updateOffer:(id:string,v:Partial<SpecialOffer>)=>void;activeId:string;setActiveId:(v:string)=>void};
-export function DealerSpecialsEditor({s,patch,pricing,updateOffer,activeId,setActiveId}:Props){
+type Props={section?:'offers'|'pricing';s:DealerShowcase;patch:(v:Partial<DealerShowcase>)=>void;pricing:(v:Partial<DealerShowcase['pricing']>)=>void;updateOffer:(id:string,v:Partial<SpecialOffer>)=>void;activeId:string;setActiveId:(v:string)=>void};
+export function DealerSpecialsEditor({section='offers',s,patch,pricing,updateOffer,activeId,setActiveId}:Props){
  const rateMode=useRef(s.pricing.rateMode);rateMode.current=s.pricing.rateMode;
  const o=s.offers.find(x=>x.id===activeId)||s.offers[0];
  const [rateStatus,setRateStatus]=useState(''),[rateBusy,setRateBusy]=useState(false);
@@ -56,13 +56,13 @@ export function DealerSpecialsEditor({s,patch,pricing,updateOffer,activeId,setAc
   updateOffer(o.id,next);
  }
  return <>
-  <section className="dealer-editor-panel space-y-4">
-   <Toggle label="Показывать ленту спецпредложений" value={s.specialsEnabled} onChange={v=>patch({specialsEnabled:v})}/>
+  {section==='offers'&&<section className="dealer-editor-panel space-y-4">
+   <Toggle label="Показывать предложения компании" value={s.specialsEnabled} onChange={v=>patch({specialsEnabled:v})}/>
    <Field label="Заголовок ленты" value={s.specialHeading} onChange={v=>patch({specialHeading:v})}/>
    <p className="text-xs text-[var(--ac-muted)]">На сайте и в миниаппе показываются сохранённые автомобили со статусом «Опубликован». Черновики видны только владельцу.</p>
-  </section>
-  <section className="dealer-editor-panel space-y-4">
-   <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-lg font-black">Цена и доставка</h2><a className="text-xs text-red-500 underline" href="https://www.profinance.ru/chart/usdrub/" target="_blank" rel="noreferrer">Курс ProFinance ↗</a></div>
+  </section>}
+  {section==='pricing'&&<section className="dealer-editor-panel space-y-4">
+   <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-lg font-black">Цена и доставка собственных автомобилей</h2><a className="text-xs text-red-500 underline" href="https://www.profinance.ru/chart/usdrub/" target="_blank" rel="noreferrer">Курс ProFinance ↗</a></div>
    <Toggle label="Автоматически обновлять курс USD/RUB" value={s.pricing.rateMode!=='manual'} onChange={v=>pricing({rateMode:v?'auto':'manual'})}/>
    <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
     {s.pricing.rateMode==='manual'?<Field type="number" label="Курс USD/RUB" value={s.pricing.usdRub} onChange={v=>pricing({usdRub:v,rateAt:new Date().toISOString()})}/>:<div className="rounded-xl bg-[var(--ac-surface-2)] p-3"><p className="text-xs text-[var(--ac-muted)]">USD/RUB</p><strong className="text-xl">{s.pricing.usdRub||'—'}</strong></div>}
@@ -77,10 +77,10 @@ export function DealerSpecialsEditor({s,patch,pricing,updateOffer,activeId,setAc
    </div>)}
    <button type="button" className={button} onClick={()=>pricing({tariffs:[...s.pricing.tariffs,{id:crypto.randomUUID(),city:'',usd:0,daysFrom:5,daysTo:10}]})}>+ Добавить город доставки</button>
    <p className="text-xs text-[var(--ac-muted)]">Доставка в рублях = тариф в $ × курс для расчёта + надбавка к доставке. Тариф задаётся один раз для города и применяется ко всем автомобилям.</p>
-  </section>
-  <section className="dealer-editor-panel space-y-4">
+  </section>}
+  {section==='offers'&&<section className="dealer-editor-panel space-y-4">
    <div className="flex flex-wrap justify-between gap-2"><h2 className="text-lg font-black">Автомобили</h2><button type="button" className={button} onClick={()=>add()}>+ Добавить автомобиль</button></div>
-   {!s.offers.length&&<p className="text-sm text-[var(--ac-muted)]">Добавьте автомобиль. Его можно сохранить черновиком и заполнить позже.</p>}
+   {!s.offers.length&&<p className="text-sm text-[var(--ac-muted)]">Добавьте автомобиль, заполните характеристики и загрузите фото. Кнопка «Сохранить черновик автомобиля» сохранит незавершённую карточку. Стоимость и города доставки настраиваются в разделе «Цена и доставка авто».</p>}
    <div className="flex flex-wrap gap-2">{s.offers.map(item=><button type="button" key={item.id} className={`${button} ${o?.id===item.id?'bg-red-600 text-white':''}`} onClick={()=>setActiveId(item.id)}>{specialTitle(item)||'Новый автомобиль'} · {item.status==='published'?'Опубликован':item.status==='sold'?'Продан':'Черновик'}</button>)}</div>
    {o&&<div className="space-y-4" key={o.id}>
     <DealerOfferImport dealerId={s.dealerId} offer={o} onChange={v=>updateOffer(o.id,v)}/>
@@ -103,6 +103,6 @@ export function DealerSpecialsEditor({s,patch,pricing,updateOffer,activeId,setAc
     {([['description','Описание'],['equipment','Комплектация и оснащение']] as const).map(([k,label])=><label key={k} className="grid gap-2 text-sm">{label}<textarea className={input} rows={4} value={o[k]} onChange={e=>updateOffer(o.id,{[k]:e.target.value})}/></label>)}
     <div className="flex flex-wrap gap-2"><button type="button" className={button} onClick={()=>add(o)}>Создать авто по этому шаблону</button><button type="button" className={button} onClick={()=>{if(confirm('Удалить этот автомобиль?'))patch({offers:s.offers.filter(x=>x.id!==o.id)});}}>Удалить автомобиль</button></div>
    </div>}
-  </section>
+  </section>}
  </>;
 }

@@ -119,7 +119,7 @@ try {
     } catch {}
     await new Promise((r) => setTimeout(r, 500));
   }
-  browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+  browser = await chromium.launch({ headless: true, executablePath:process.env.CHROME_BIN, args: ["--no-sandbox"] });
   const origin = "http://localhost:3099";
   for (const width of [390, 1440]) {
     const context = await browser.newContext({
@@ -154,9 +154,10 @@ try {
       ),
     );
     const response = await page.goto(
-      `${origin}/cars/offer/special_dealer_topavto__test-rav4`,
+      `${origin}/cars/offer/special_dealer_topavto__test-rav4?dealer=dealer_topavto`,
     );
     assert.equal(response.status(), 200);
+    assert.equal(await page.getByRole("link",{name:"Выйти на АвтоЦену"}).getAttribute("href"),"/cars");
     await page
       .getByRole("heading", { name: "Toyota RAV4 Premium", exact: true })
       .waitFor();
@@ -248,6 +249,18 @@ try {
   assert.equal(stored.buyerPhotos.length, 25);
   assert.equal(stored.version, 1);
   await page.screenshot({ path: path.join(out, "crm.png") });
+  await page.getByRole('button',{name:'Автомобили',exact:true}).click();
+  await page.getByRole('button',{name:'+ Добавить автомобиль',exact:true}).click();
+  await page.getByLabel('Марка',{exact:true}).fill('Toyota');
+  await page.getByLabel('Модель',{exact:true}).fill('Corolla');
+  await page.getByRole('button',{name:'Сохранить черновик автомобиля',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Черновик сохранён'}).waitFor();
+  const draftState=JSON.parse(fs.readFileSync(path.join(dir,'dealers/showcases/dealer_topavto.json'),'utf8'));
+  assert.equal(draftState.offers.length,2);assert.equal(draftState.offers[1].status,'draft');assert.equal(draftState.offers[1].model,'Corolla');
+  assert.equal(draftState.offers[0].status,'published');assert.equal(draftState.specialsEnabled,true);
+  await page.reload();await page.getByRole('button',{name:'Автомобили',exact:true}).click();
+  await page.getByRole('button',{name:'Toyota Corolla · Черновик',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'Corolla');
+  await page.screenshot({path:path.join(out,'new-car-persisted.png')});
   await context.close();
   console.log(
     JSON.stringify({

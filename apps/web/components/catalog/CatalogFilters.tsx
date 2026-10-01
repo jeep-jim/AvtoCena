@@ -1,4 +1,6 @@
 "use client";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import { readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
@@ -294,6 +296,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 
 
 export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
+  const dealer=useDealerBrowsing();
   const router = useRouter();
   const [pending,startTransition]=useTransition();
   const submitted=useRef<string|null>(null);
@@ -338,7 +341,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["city","utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-      startTransition(()=>router.push(query.size ? `${basePath}?${query}` : basePath, { scroll: false }));
+      startTransition(()=>router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), { scroll: false }));
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
@@ -378,7 +381,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
-  const marketOptions = markets;
+  const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes(m.value as any)) : markets;
   const brandStatsContext = useMemo(() => {
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     return catalogQuery(contextDraft, "", "asc");

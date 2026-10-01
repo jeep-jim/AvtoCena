@@ -1,9 +1,11 @@
 "use client";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {offerShareTitle,offerShareUrl} from "../../lib/catalog/offer-share";
 import {useState} from "react";
 import {miniAppOfferShareUrl} from "../../lib/telegram-miniapp";
 import {offerRouteId} from "../../lib/catalog/offer-url";
 export function ShareLinkButton({className = "", compactMobile = false, iconOnly = false}: {className?: string; compactMobile?: boolean; iconOnly?: boolean}) {
+  const dealer=useDealerBrowsing();
   const [status,setStatus]=useState("");
   async function share() {
     const page=document.querySelector<HTMLElement>("[data-offer-id]");
@@ -11,12 +13,13 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     if(parameters?.dataset.sharePending){setStatus("Дождитесь пересчёта");return;}
     const savedVersion=page?.dataset.offerSavedVersion || document.querySelector<HTMLElement>("[data-offer-saved-version]")?.dataset.offerSavedVersion;
     const target = new URL(offerShareUrl(window.location.href,document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || null,savedVersion));
+    if(dealer&&!dealer.preview)target.searchParams.set("dealer",dealer.id);
     const price=parameters?.querySelector(".ac-offer-price-panel .ac-price")?.textContent;
     const totalRub=price ? (price.includes('₽')?Number(price.replace(/[^\d,.-]/g,'').replace(',','.')):null) : parameters ? null : Number(page?.dataset.offerPriceRub);
     const title=page?.dataset.offerShareName ? offerShareTitle({title:page.dataset.offerShareName,year:parameters?.dataset.shareYear||page.dataset.offerShareYear,engineCc:parameters?.dataset.shareEngineCc||page.dataset.offerShareEngineCc,fuel:parameters?.dataset.shareFuel||page.dataset.offerShareFuel,totalRub}) : document.title;
     const inMini=document.documentElement.dataset.miniapp==="true";
     const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerRouteId(decodeURIComponent(target.pathname.slice("/cars/offer/".length))) : "");
-    const url=(inMini && offerId ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
+    const url=(inMini && offerId && !dealer ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
     if(inMini && offerId){
       try{await navigator.clipboard.writeText(`${title}\n${url}`);setStatus("Ссылка скопирована");return;}catch{}
     }

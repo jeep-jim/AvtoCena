@@ -1,4 +1,6 @@
 "use client";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -136,6 +138,7 @@ export function BrandLogoRail({
   directoryMode?: boolean;
   showSearch?: boolean;
 }) {
+  const dealer=useDealerBrowsing();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -273,14 +276,14 @@ export function BrandLogoRail({
     params.delete("model");
     params.delete("page");
     const queryString = params.toString();
-    router.replace(queryString ? `/cars?${queryString}` : "/cars", { scroll: false });
+    router.replace(dealerBrowsingHref(queryString ? `/cars?${queryString}` : "/cars",dealer), { scroll: false });
   };
 
   const clearSelectedBrands = () => setCatalogBrands([]);
 
   const hrefForBrand = (brand: string) => homeBrandDirectory
     ? `/cars/brand/${catalogBrandSlug(brand)}`
-    : `/cars?make=${encodeURIComponent(brand)}`;
+    : dealerBrowsingHref(`/cars?make=${encodeURIComponent(brand)}`,dealer);
 
   const handleBrandClick = (brand: string, closeAfter = false) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (homeBrandDirectory) {

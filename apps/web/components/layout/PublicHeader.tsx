@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -58,7 +59,7 @@ function applyBrowserTheme(theme: Theme) {
     icon.dataset.avtocenaThemeIcon = "true";
     document.head.appendChild(icon);
   }
-  icon.href = "/logo/avtocena-mark-light.svg";
+  icon.href = "/favicon-round-v3.svg";
   icon.type = "image/svg+xml";
   window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
 }
@@ -100,6 +101,7 @@ function CarIcon() {
 }
 
 export function PublicHeader({ backHref, backLabel = "Назад", className = "" }: Props) {
+  const dealer = useDealerBrowsing();
   const pathname = usePathname();
   const router = useRouter();
   const [favoritesCount, setFavoritesCount] = useState(0);
@@ -148,20 +150,24 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       <header className={`ac-public-header sticky top-0 z-50 backdrop-blur-xl ${className}`}>
         <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
-            {backHref ? (
+            {dealer ? <Link href="/cars" aria-label="Выйти на АвтоЦену" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 5-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></Link> : backHref ? (
               <button type="button" aria-label="Назад" onClick={() => window.history.length > 1 ? router.back() : router.replace(backHref)} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
                 <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 <span className="hidden sm:inline">Назад</span>
               </button>
             ) : null}
 
-            <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            {dealer ? <Link href={dealer.href} className="flex min-w-0 items-center gap-2.5" aria-label={`Страница ${dealer.name}`}>
+              {(dealer.logoLight||dealer.logoDark)?<img src={theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight)} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
+              <span className="truncate text-lg font-black md:text-xl">{dealer.name}</span>
+            </Link> : (            <Link href="/" className="flex min-w-0 items-center gap-2.5">
               <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
               <div className="min-w-0">
                 <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-white">Цена</span></div>
                 <div className="text-[11px] font-bold leading-none text-white/42">подбор · расчёт</div>
               </div>
-            </Link>
+            </Link>)}
+
           </div>
 
           <div className="flex items-center gap-1.5 md:gap-2">
@@ -181,13 +187,13 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
 
             <nav className="hidden items-center gap-1 text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
 
-              <Link href="/cars" className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
+              <Link href={dealer?.href || "/cars"} className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
                 <span className="ac-catalog-nav-icon"><CarIcon /></span>
                 <span>Каталог</span>
               </Link>
             </nav>
 
-            <Link href="/cars" className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
+            <Link href={dealer?.href || "/cars"} className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
               <span className="ac-catalog-nav-icon"><CarIcon /></span>
             </Link>
           </div>

@@ -13,7 +13,7 @@ test("invalid counts are not silently shown as zero", () => {
   for (const n of [NaN,Infinity,-1,1.5,Number.MAX_SAFE_INTEGER+1]) assert.equal(formatCatalogCount(n),"—");
 });
 test("counter renders once outside the mobile-hidden heading wrapper before filters", () => {
-  const source = readFileSync("apps/web/app/(public)/cars/page.tsx","utf8");
+  const source = readFileSync("apps/web/components/catalog/CatalogContent.tsx","utf8");
   assert.equal((source.match(/data-catalog-result-count=/g)||[]).length,1);
   assert.match(source,/<\/div>\s*<p className="ac-catalog-result-count/);
   const counter = source.slice(source.indexOf('<p className="ac-catalog-result-count'),source.indexOf('<CatalogFilters initial='));
@@ -24,7 +24,7 @@ test("counter renders once outside the mobile-hidden heading wrapper before filt
   assert.ok(!source.includes('Найдено: {total}'));
 });
 test("both home and catalog use the same count formatter without changing source totals", () => {
-  const page=readFileSync("apps/web/app/(public)/cars/page.tsx","utf8");
+  const page=readFileSync("apps/web/components/catalog/CatalogContent.tsx","utf8");
   const home=readFileSync("apps/web/components/home/HomePageClient.tsx","utf8");
   assert.match(page,/formatCatalogCount\(market.total\)/);
   assert.match(page,/groupedMarkets.reduce\(\(sum, market\) => sum \+ market.total, 0\)/);

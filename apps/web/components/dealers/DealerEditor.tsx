@@ -1,4 +1,6 @@
 "use client";
+import {CatalogMarketFlag} from "@/components/catalog/CatalogMarketFlag";
+import {DEALER_SERVICES} from "@/lib/dealers/service-pricing";
 import {DEALER_MARKETS,dealerMarkets} from "@/lib/dealers/catalog-markets";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -100,7 +102,9 @@ export function DealerEditor({
           ["markets", "Рынки и каталог"],
           ["offices", "Адреса офисов"],
           ["buyers", "Фото покупателей"],
-          ["offers", "Спецпредложения"],
+          ["offers", "Автомобили"],
+          ["pricing", "Цена и доставка авто"],
+          ["rates", "Расценки по рынкам"],
           ...(platformOwner ? [["services", "ОСАГО и кредит"]] : []),
         ].map(([id, label]) => (
           <button
@@ -114,6 +118,16 @@ export function DealerEditor({
         ))}
       </div>
       {recovery&&<div className="dealer-editor-panel"><p>Есть несохранённые изменения из прошлой сессии.</p><div className="mt-3 flex gap-2"><button className={button} onClick={()=>{base.current=recovery.base||initial;setS(recovery.value);setRecovery(null);}}>Восстановить изменения</button><button className={button} onClick={()=>setRecovery(null)}>Оставить сохранённую версию</button></div></div>}
+      <aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
+       <section className="dealer-editor-panel space-y-3">
+        <div className="flex items-center justify-between gap-2"><h2 className="text-lg font-black">Публикация</h2><span className="text-xs text-[var(--ac-muted)]">{s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
+        <button type="button" disabled={busy} className="rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
+        {tab==='offers'&&active&&<button type="button" disabled={busy} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
+        <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
+        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
+        <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Предпросмотр</Link>
+       </section>
+</aside>
       <div className="dealer-editor-layout">
       <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-4">
         {tab === "profile" && (
@@ -132,7 +146,7 @@ export function DealerEditor({
               href={`/dealers/${s.dealerId}?preview=1`}
               target="_blank"
             >
-              Предпросмотр страницы дилера ↗
+              Предпросмотр страницы дилера
             </Link>
             <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Ссылка закрепится за вашей компанией после сохранения.</p></div>
             <Field
@@ -174,15 +188,16 @@ export function DealerEditor({
                 </section>
               ))}
             </div>
-            <p className="rounded-xl bg-[var(--ac-bg)] p-3 text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
+            <Field label="Телефон компании (только для АвтоЦены)" value={s.phone} onChange={phone=>patch({phone})}/><p className="text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
           </>
         )}
         {tab === "markets" && <div className="space-y-5">
           <div><h2 className="text-xl font-black">Откуда вы доставляете автомобили</h2><p className="mt-2 text-sm text-[var(--ac-muted)]">Выберите направления вашей компании. На странице будут доступны только эти рынки общего каталога АвтоЦены.</p></div>
-          <div className="grid gap-3 sm:grid-cols-2">{DEALER_MARKETS.map(m=><label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[var(--ac-border)] p-4"><input type="checkbox" checked={dealerMarkets(s.catalogMarkets).includes(m.id)} onChange={e=>patch({catalogMarkets:e.target.checked?[...dealerMarkets(s.catalogMarkets),m.id]:dealerMarkets(s.catalogMarkets).filter(id=>id!==m.id)})}/><span aria-hidden="true" className="text-2xl">{m.flag}</span><strong>{m.label}</strong></label>)}</div>
+          <div className="grid gap-3 sm:grid-cols-2">{DEALER_MARKETS.map(m=><label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[var(--ac-border)] p-4"><input type="checkbox" checked={dealerMarkets(s.catalogMarkets).includes(m.id)} onChange={e=>patch({catalogMarkets:e.target.checked?[...dealerMarkets(s.catalogMarkets),m.id]:dealerMarkets(s.catalogMarkets).filter(id=>id!==m.id)})}/><CatalogMarketFlag market={m.id} className="h-5 w-7 shrink-0"/><strong>{m.label}</strong></label>)}</div>
           <p className="text-sm text-[var(--ac-muted)]">{s.catalogMarkets?.length?`Выбрано направлений: ${s.catalogMarkets.length}`:'Направления не выбраны — общий каталог на странице компании не показывается.'}</p>
           <section className="dealer-editor-panel"><h3 className="font-bold">Собственные предложения</h3><p className="mt-2 text-sm text-[var(--ac-muted)]">Автомобили, которые вы добавите самостоятельно, появятся отдельно во вкладке «Предложения». Выбор рынков не делает автомобили АвтоЦены собственными предложениями компании.</p><button type="button" className={button+' mt-3'} onClick={()=>setTab('offers')}>Управлять предложениями</button></section>
         </div>}
+        {tab === "rates" && <section className="space-y-6"><h2 className="text-xl font-black">Расценки услуг по рынкам</h2><p className="text-sm text-[var(--ac-muted)]">Отметьте только услуги вашей компании и укажите стоимость в рублях. Здесь сохраняется ваш прайс для работы с клиентом. Цены общего каталога пока рассчитываются по тарифам АвтоЦены.</p>{dealerMarkets(s.catalogMarkets).length===0?<p>Сначала выберите направления в разделе «Рынки и каталог».</p>:DEALER_MARKETS.filter(m=>dealerMarkets(s.catalogMarkets).includes(m.id)).map(m=><section key={m.id} className="space-y-3 border-t border-[var(--ac-border)] pt-5"><h3 className="flex items-center gap-2 font-bold"><CatalogMarketFlag market={m.id}/>{m.label}</h3><div className="grid gap-4 md:grid-cols-3">{DEALER_SERVICES.map(service=>{const value=s.servicePricing?.[m.id]?.[service.id]||{enabled:false,priceRub:0};const change=(v:Partial<typeof value>)=>patch({servicePricing:{...s.servicePricing,[m.id]:{...s.servicePricing?.[m.id],[service.id]:{...value,...v}}}});return <div key={service.id} className="space-y-3"><label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={value.enabled} onChange={e=>change({enabled:e.target.checked})}/>{service.label}</label>{value.enabled&&<Field label={`${service.label} · ${m.label}, ₽`} type="number" value={value.priceRub} onChange={priceRub=>change({priceRub})}/>}</div>;})}</div></section>)}</section>}
         {tab === "offices" && (
           <>
             <h2 className="text-xl font-black">Города и офисы</h2>
@@ -295,7 +310,7 @@ export function DealerEditor({
             />
           </>
         )}
-        {tab === "offers" && <DealerSpecialsEditor s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId}/>}
+        {(tab === "offers" || tab === "pricing") && <DealerSpecialsEditor section={tab==='pricing'?'pricing':'offers'} s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId}/>}
         {platformOwner && tab === "services" && (
           <>
             <h2 className="text-xl font-black">Сервисы на всём сайте</h2>
@@ -311,15 +326,6 @@ export function DealerEditor({
           </>
         )}
       </fieldset>
-      <aside className="dealer-editor-sidebar">
-       <section className="dealer-editor-panel space-y-3">
-        <div className="flex items-center justify-between gap-2"><h2 className="text-lg font-black">Публикация</h2><span className="text-xs text-[var(--ac-muted)]">{s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
-        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
-        {tab==='offers'&&active&&<button type="button" disabled={busy} className={button+' w-full'} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
-        <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.':'Изменения появятся на странице после сохранения.')}</p>
-        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
-        <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Открыть сохранённую страницу ↗</Link>
-       </section>
        {tab==='offers'&&active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
         <h2 className="font-bold">Так выглядит карточка</h2>
         {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-sm text-[var(--ac-muted)]">Добавьте фото автомобиля</div>}
@@ -329,18 +335,17 @@ export function DealerEditor({
         {quote?.complete?quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
         <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. На сайте изменения появятся после сохранения.</p>
        </section>}
-       {tab==='profile'&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр компании">{s.banner&&<img src={s.banner} alt="Баннер" className="aspect-[3/1] w-full rounded-xl object-cover"/>}{(s.logoDark||s.logoLight)&&<img src={s.logoDark||s.logoLight} alt="Логотип" className="h-14 max-w-full object-contain"/>}<h2 className="text-xl font-black">{s.name}</h2><p className="whitespace-pre-line text-sm">{s.description}</p><p className="break-all text-xs text-red-500">avtocena.com{dealerProfilePath(s)}</p></section>}
-      </aside>
+
       </div>
       <style>{`
-       .dealer-editor-navigation{padding:8px;border:1px solid var(--ac-border);border-radius:18px;background:var(--ac-surface)}
-       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
-       .dealer-editor-main{border:1px solid var(--ac-border);border-radius:20px;background:var(--ac-surface);padding:20px;margin:0}
-       .dealer-editor-sidebar{position:sticky;top:90px;display:grid;gap:16px;min-width:0}
-       .dealer-editor-panel{padding:14px;border:1px solid var(--ac-border);border-radius:16px;background:var(--ac-surface)}
+       .dealer-editor-navigation{padding:0;gap:8px;background:transparent;border:0}
+       .dealer-editor-layout{display:block}.dealer-editor-main{border:0;border-radius:0;background:transparent;padding:0;margin:0;min-width:0}
+       .dealer-editor-panel{padding:16px 0;border:0;border-top:1px solid var(--ac-border);border-radius:0;background:transparent}
+       .dealer-editor-toolbar{position:sticky;top:64px;z-index:20;background:var(--ac-bg);padding:10px 0;border-bottom:1px solid var(--ac-border)}
+       .dealer-editor-toolbar>.dealer-editor-panel{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:0;border:0}.dealer-editor-toolbar>.dealer-editor-panel>*{margin:0}.dealer-editor-toolbar>.dealer-editor-panel>p{flex-basis:100%}
        .dealer-editor-main input,.dealer-editor-main select{min-height:40px}
-       @media(max-width:1000px){.dealer-editor-layout{grid-template-columns:minmax(0,1fr)}.dealer-editor-sidebar{position:static;grid-row:1;grid-template-columns:repeat(2,minmax(0,1fr))}}
-       @media(max-width:600px){.dealer-editor-sidebar{grid-template-columns:minmax(0,1fr)}.dealer-editor-panel{padding:14px}}
+       .dealer-editor-layout>[aria-label="Предпросмотр спецпредложения"]{max-width:480px;margin-top:24px}
+       @media(max-width:600px){.dealer-editor-toolbar{position:static}.dealer-editor-toolbar>.dealer-editor-panel>div:first-child{width:100%}}
       `}</style>
     </div>
   );

@@ -4,7 +4,7 @@ import fs from "node:fs";
 
 const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
 const marketCountsRoute = fs.readFileSync(new URL("../apps/web/app/(public)/api/catalog/market-counts/route.ts", import.meta.url), "utf8");
-const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+const carsPage = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogContent.tsx", import.meta.url), "utf8");
 
 test("dealer demo reads the same published catalog generation as the public catalog", () => {
   assert.match(marketCountsRoute, /readPublicCatalogMarketCounts/);

@@ -91,7 +91,7 @@ test("removed offers explain availability and offer catalog navigation", () => {
 
 test("Autocatalog is not injected into the public catalog header or hero", () => {
   const header = source("apps/web/components/layout/PublicHeader.tsx");
-  const catalogPage = source("apps/web/app/(public)/cars/page.tsx");
+  const catalogPage = source("apps/web/components/catalog/CatalogContent.tsx");
   assert.doesNotMatch(header, /href="\/cars\/autocatalog"/);
   assert.doesNotMatch(catalogPage, /Автокаталог →/);
 });

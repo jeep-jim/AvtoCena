@@ -2,7 +2,7 @@ name: Verify dealer banner and Yandex map
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/dealer-profile-design-20261001, fix/dealer-banner-yandex-20261001, fix/dealer-compact-profile-20261001, feat/dealer-platform-20261001, fix/dealer-hidden-profile-favicon-20261001]
+    branches: [main, fix/dealer-context-catalog-20261001, fix/dealer-profile-design-20261001, fix/dealer-banner-yandex-20261001, fix/dealer-compact-profile-20261001, feat/dealer-platform-20261001, fix/dealer-hidden-profile-favicon-20261001]
     paths:
       - 'apps/web/components/dealers/**'
       - 'apps/web/lib/dealers/**'
@@ -38,7 +38,7 @@ jobs:
           path: artifacts/dealer-map/*.png
           if-no-files-found: ignore
   production-profile:
-    if: github.ref == 'refs/heads/fix/dealer-profile-design-20261001'
+    if: github.ref == 'refs/heads/fix/dealer-profile-design-20261001' || github.ref == 'refs/heads/fix/dealer-context-catalog-20261001'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -54,9 +54,15 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/dealer-profile-production.mjs
+      - name: Verify own vehicle creation and persistence with isolated owner
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/dealer-production.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: dealer-profile-production-preview
-          path: artifacts/dealer-profile-production/
+          path: |
+            artifacts/dealer-profile-production/
+            artifacts/dealer-production/
           if-no-files-found: ignore
