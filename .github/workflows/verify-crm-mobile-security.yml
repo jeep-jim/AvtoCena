@@ -85,7 +85,7 @@ jobs:
             artifacts/attached-parameters-*
           retention-days: 14
   live:
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/catalog-read-concurrency-20260926'
+    if: always() && needs.browser.result == 'success' && ((github.event_name == 'pull_request' && needs.audit.result == 'skipped') || (needs.audit.result == 'success' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/catalog-read-concurrency-20260926')))
     needs: [audit, browser]
     runs-on: ubuntu-latest
     timeout-minutes: 15
