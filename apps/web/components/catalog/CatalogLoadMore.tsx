@@ -1,4 +1,6 @@
 "use client";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -17,9 +19,10 @@ const TTL = 30 * 60_000;
 export function CatalogLoadMore({query, initialPage, initialTotal, initialCount, initialCards, greenQuery}: {
   greenQuery?: Record<string,string|undefined>; query: CatalogSearchParams; initialPage: number; initialTotal: number; initialCount: number; initialCards: ReactNode;
 }) {
+  const dealer=useDealerBrowsing();
   const green = greenQuery !== undefined;
   const basePath = green ? "/cars/green" : "/cars";
-  const key = JSON.stringify([basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
+  const key = JSON.stringify([dealer?.id,basePath, greenQuery, Object.entries(query).sort(([a],[b])=>a.localeCompare(b)), initialPage]);
   const [batches, setBatches] = useState<Batch[]>([{page: initialPage, cards: initialCards, count: initialCount}]);
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
@@ -70,7 +73,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   function pageHref(target: number) {
     const params = new URLSearchParams(fallbackQuery);
     params.set("page", String(target));
-    return `${basePath}?${params}`;
+    return dealerBrowsingHref(`${basePath}?${params}`,dealer);
   }
   const more = page * 24 < total && batches[batches.length - 1].count > 0;
   async function load() {
@@ -97,7 +100,7 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
         </Fragment>)}
         {page < pageCount ? <a href={pageHref(page+1)} aria-label="Следующая страница"><ChevronRight size={20}/></a> : <span aria-disabled="true"><ChevronRight size={20}/></span>}
       </nav> : null}
-      {more ? <a href={`${basePath}?${fallbackQuery}`} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`${green ? "ac-green-button" : ""} min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
+      {more ? <a href={dealerBrowsingHref(`${basePath}?${fallbackQuery}`,dealer)} data-no-route-loader="true" role="button" aria-disabled={busy} onClick={event => {if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return; event.preventDefault(); void load();}} onKeyDown={event => {if (event.key === " ") {event.preventDefault(); void load();}}} className={`${green ? "ac-green-button" : ""} min-h-12 w-full rounded-2xl bg-red-500 px-8 py-3 text-center text-sm font-black text-white transition hover:bg-red-600 ${busy ? "cursor-wait opacity-70" : ""}`} style={{color:"#fff"}}>{busy ? "Загружаем автомобили…" : "Показать ещё"}</a> : <p className="text-sm text-[var(--ac-muted)]">Вы посмотрели все предложения</p>}
       {error ? <p role="alert" className="max-w-md text-center text-sm text-[var(--ac-text)]">{error}</p> : null}
     </div>
   </div>;

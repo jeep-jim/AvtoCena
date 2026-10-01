@@ -27,7 +27,7 @@ test('unrenderable candidates are skipped and each recommendation group is bound
 
 test('detail recommendations retain trusted source identity after publicOffer sanitization',()=>{
  const page=readFileSync('apps/web/app/(public)/cars/offer/[id]/page.tsx','utf8');
- assert.match(page,/<SimilarOffers current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
+ assert.match(page,/<SimilarOffers markets=\{dealer\?\.markets\} current=\{\{\.\.\.raw,sourceId:offer.sourceId,offerType:offer.offerType\}\} \/>/);
 });
 
 test('published stock DTOs without private provenance remain eligible in recommendations',async()=>{

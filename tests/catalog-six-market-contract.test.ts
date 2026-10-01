@@ -6,7 +6,7 @@ import { MARKET_IDS } from "../apps/web/lib/settings-validation";
 
 const activeMarkets = ["korea", "china", "japan", "uae", "europe", "georgia"];
 const storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
-const catalogPageSource = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+const catalogPageSource = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogContent.tsx", import.meta.url), "utf8");
 const engineTypes = fs.readFileSync(new URL("../packages/engine/src/types/index.ts", import.meta.url), "utf8");
 const queueWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
 const retirementWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-republish-active-markets.yml", import.meta.url), "utf8");
@@ -24,7 +24,7 @@ test("retired markets cannot re-enter public reads from an older generation", ()
   assert.match(storageSource, /MARKETS\.filter\(\(market\) => Number\(manifest\.markets\?\.\[market\]\?\.count/);
   assert.match(storageSource, /!isActivePublicCatalogMarket\(params\.market\)/);
   assert.match(catalogPageSource, /PUBLIC_CATALOG_MARKET_SET\.has/);
-  assert.match(catalogPageSource, /redirect\("\/cars"\)/);
+  assert.match(catalogPageSource, /redirect\(dealer\?\.href \|\| "\/cars"\)/);
 });
 
 test("the refresh queue has exactly five markets and excludes paused Japan", () => {

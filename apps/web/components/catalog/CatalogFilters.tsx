@@ -1,4 +1,7 @@
 "use client";
+import {CatalogMarketFlag} from "./CatalogMarketFlag";
+import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
+import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import { readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
@@ -89,8 +92,8 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const active = options.find((item) => item.value === value);
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
-    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="truncate">{active?.label || placeholder}</span><Chevron open={open} /></button>
-    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); close(); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${value === item.value ? "is-active" : ""}`}><span>{item.label}</span>{value === item.value ? <span>✓</span> : null}</button>)}</div></div> : null}
+    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&<span aria-hidden="true"><CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/></span>}{active?.label || placeholder}</span><Chevron open={open} /></button>
+    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); close(); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${value === item.value ? "is-active" : ""}`}><span className="flex items-center gap-2">{name==="market"&&item.value&&<span aria-hidden="true"><CatalogMarketFlag market={item.value} className="h-4 w-6 shrink-0"/></span>}{item.label}</span>{value === item.value ? <span>✓</span> : null}</button>)}</div></div> : null}
   </div>;
 }
 
@@ -294,6 +297,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 
 
 export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
+  const dealer=useDealerBrowsing();
   const router = useRouter();
   const [pending,startTransition]=useTransition();
   const submitted=useRef<string|null>(null);
@@ -338,7 +342,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["city","utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-      startTransition(()=>router.push(query.size ? `${basePath}?${query}` : basePath, { scroll: false }));
+      startTransition(()=>router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), { scroll: false }));
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
@@ -378,7 +382,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
-  const marketOptions = markets;
+  const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes(m.value as any)) : markets;
   const brandStatsContext = useMemo(() => {
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     return catalogQuery(contextDraft, "", "asc");

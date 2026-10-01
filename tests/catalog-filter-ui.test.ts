@@ -32,7 +32,7 @@ test("catalog filters apply automatically and show the active query", () => {
 
 test("catalog filters use direct range inputs, quick presets and a real mobile bottom sheet", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
-  const page = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
+  const page = fs.readFileSync("apps/web/components/catalog/CatalogContent.tsx", "utf8");
   const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
   const template = fs.readFileSync("apps/web/app/(public)/template.tsx", "utf8");
   assert.match(source, /ac-range-input-box/);

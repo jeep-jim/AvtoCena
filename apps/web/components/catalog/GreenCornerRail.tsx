@@ -1,5 +1,5 @@
 import { CatalogMarketFlag } from "./CatalogMarketFlag";
-import Link from "next/link";
+import {DealerLink as Link} from "@/components/dealers/DealerBrowsingContext";
 import { CatalogCard } from "./CatalogCard";
 export function GreenCornerRail({items,total,href="/cars/green"}:{items:any[];total:number;href?:string}) {
  if(!total)return null;

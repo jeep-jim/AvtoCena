@@ -62,6 +62,7 @@ export async function leadFetch(url: string, init: RequestInit): Promise<Respons
   payload.operationId ||= crypto.randomUUID();
   if(payload.personalDataConsent===true)payload.personalDataConsentVersion ||= LEAD_CONSENT_VERSION;
   const privacyRequest=url==="/api/privacy-request";
+  if (!privacyRequest) {const dealer=document.querySelector<HTMLElement>("[data-dealer-context]")?.dataset.dealerContext;if(dealer)payload.dealerId ||= dealer;}
   if (!privacyRequest) payload.submissionChannel = syncMiniAppPresentation() ? "telegram_miniapp" : "site";
   payload.analyticsConsent=!privacyRequest&&analyticsAllowed();
   payload.attribution = privacyRequest?{}:{...payload.attribution,...await metrikaAttribution()};

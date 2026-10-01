@@ -41,7 +41,8 @@ import { assessJapanExportRestriction, japanRestrictionDescription } from "@/lib
 import { hasModificationSelection, withoutDeliveredPrice } from "@/lib/catalog/modification-contract";
 import { calculateSelectedModification, conditionalModificationRub } from "@/lib/catalog/modification-recovery";
 import { Suspense, type ReactNode } from "react";
-import Link from "next/link";
+import {DealerLink as Link,DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
+import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
 import { UnavailableOffer } from "@/components/catalog/UnavailableOffer";
 import { unavailableOfferRecord } from "@/lib/catalog/offer-availability";
 import { money } from "@/lib/avtocena";
@@ -141,7 +142,7 @@ function safeExternalUrl(value: unknown) {
   }
 }
 
-async function SimilarOffers({ current }: { current: any }) {
+async function SimilarOffers({ current, markets }: { current: any; markets?:string[] }) {
   const make = String(current.make || "").trim();
   const familyModel = await readRelatedModelFamily(make, String(current.model || "").trim());
   const greenCurrent = isGreenCornerOffer(current);
@@ -171,9 +172,9 @@ async function SimilarOffers({ current }: { current: any }) {
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
   const rail = (rows:any[]) => <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map(item=><CatalogCard key={item.id} offer={item} compact />)}</div>;
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14" data-related-offers>
-    {stockModels.length ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}
+    {stockModels.length && (!markets||markets.includes("japan")) ? <section data-related-section="stock-model"><div className="flex items-end justify-between gap-3"><h2 className="ac-green-heading text-[26px] font-black md:text-4xl">{modelTitle} · В наличии</h2><Link href={`/cars/green?${modelParams}`} className="ac-market-all-link ac-green-button shrink-0 text-sm font-black">Все →</Link></div>{rail(stockModels)}</section> : null}
     {sameModel.length ? <section data-related-section="market-model"><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle} · {marketLabel}</h2><Link href={`/cars?${modelParams}${current.market==='japan'?'&stock='+ (greenCurrent?'auction':'all'):''}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(sameModel)}</section> : null}
-    {crossMarketGroups.length ? <section data-related-section="other-markets"><h2 className="text-[26px] font-black md:text-4xl">{modelTitle} на других рынках</h2><div className="space-y-8">{crossMarketGroups.map(group=><section key={group.market}><div className="mt-5 flex items-center justify-between gap-3"><h3 className="flex items-center gap-2 text-xl font-black"><CatalogMarketFlag market={group.market} className="h-5 w-7" />{CATALOG_MARKET_LABELS[group.market as keyof typeof CATALOG_MARKET_LABELS]}</h3><Link href={`/cars?${new URLSearchParams({make,model:familyModel,market:group.market,...(group.market==='japan'?{stock:'all'}:{})})}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(group.items)}</section>)}</div></section> : null}
+    {crossMarketGroups.length ? <section data-related-section="other-markets"><h2 className="text-[26px] font-black md:text-4xl">{modelTitle} на других рынках</h2><div className="space-y-8">{crossMarketGroups.filter(group=>!markets||markets.includes(group.market)).map(group=><section key={group.market}><div className="mt-5 flex items-center justify-between gap-3"><h3 className="flex items-center gap-2 text-xl font-black"><CatalogMarketFlag market={group.market} className="h-5 w-7" />{CATALOG_MARKET_LABELS[group.market as keyof typeof CATALOG_MARKET_LABELS]}</h3><Link href={`/cars?${new URLSearchParams({make,model:familyModel,market:group.market,...(group.market==='japan'?{stock:'all'}:{})})}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(group.items)}</section>)}</div></section> : null}
     <section data-related-section="market"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{marketRows.length?rail(marketRows):<p className="text-[var(--ac-muted)]">Другие предложения появятся после обновления каталога.</p>}</section>
   </div>;
 }
@@ -249,12 +250,13 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;preview?:string }> }) {
+async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;preview?:string;dealer?:string }> }) {
   const { id: routeId } = await params;
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
   const query = searchParams ? await searchParams : {};
+  const dealer=await resolveDealerBrowsingContext(query.dealer||"",query.preview==="1");
   const requestedPowerHp = Number(query?.powerHp || 0);
   const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
   // The hashed current shard is the bounded authoritative detail record: unlike
@@ -439,7 +441,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       </div>
 
 
-      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={{...raw,sourceId:offer.sourceId,offerType:offer.offerType}} /></Suspense>
+      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers markets={dealer?.markets} current={{...raw,sourceId:offer.sourceId,offerType:offer.offerType}} /></Suspense>
       <PageLeadBanner kind="offer" />
     </section>
     <OfferContactActionsStyles />
@@ -462,4 +464,10 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}.ac-offer-page .ac-offer-spec-tile:nth-child(odd) .ac-spec-info-popover{left:0!important;right:auto!important}.ac-offer-page .ac-offer-spec-tile:nth-child(even) .ac-spec-info-popover{left:auto!important;right:0!important}}
     ` }} />
   </main>;
+}
+
+export default async function OfferPage(props:Parameters<typeof OfferPageContent>[0]) {
+ const query=await props.searchParams;
+ const dealer=await resolveDealerBrowsingContext(query?.dealer||'',query?.preview==='1');
+ return <DealerBrowsingProvider dealer={dealer}><OfferPageContent {...props}/></DealerBrowsingProvider>;
 }

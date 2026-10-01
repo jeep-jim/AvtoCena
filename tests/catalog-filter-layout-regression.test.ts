@@ -4,7 +4,7 @@ import test from "node:test";
 
 const marketPage = fs.readFileSync("apps/web/lib/catalog/market-page.ts", "utf8");
 const filters = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
-const page = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
+const page = fs.readFileSync("apps/web/components/catalog/CatalogContent.tsx", "utf8");
 
 test("redesigned desktop filters keep their own nested layout", () => {
   assert.match(filters, /ac-range-input-box/);

@@ -1,3 +1,6 @@
+import {CatalogContent} from "@/components/catalog/CatalogContent";
+import {DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
+import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
 import {canManageDealer} from "@/lib/dealers/access";
 import {publicDealerProfile} from "@/lib/dealers/public-profile";
 import {publicRail} from "@/lib/dealers/public-showcase";
@@ -14,7 +17,7 @@ export async function generateMetadata({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ preview?: string }>;
+  searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
   const s = await readShowcase((await params).id);
   if (!s?.profileEnabled || (await searchParams).preview)
@@ -33,7 +36,7 @@ export default async function Page({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ preview?: string }>;
+  searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
   let s = await readShowcase((await params).id);
   const preview =
@@ -41,10 +44,12 @@ export default async function Page({
     await canManageDealer(await getCurrentUser(),(await params).id);
   if (!s || (!s.profileEnabled && !preview)) notFound();
   if(s.specialsEnabled)s=await withDealerRate(s);
+  const dealer=await resolveDealerBrowsingContext(s.dealerId,preview);
+  const catalog=<CatalogContent params={await searchParams} dealer={dealer} embedded/>;
   return (
-    <main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
+    <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
-      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} />
-    </main>
+      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} />
+    </main></DealerBrowsingProvider>
   );
 }

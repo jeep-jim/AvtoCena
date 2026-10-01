@@ -202,7 +202,7 @@ html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-range > input + inp
 }
 
 /* Brand rails are page content, not cards: no backing in either theme, on catalog or home. */
-html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail,
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail,
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail {
   background: transparent !important;
   background-color: transparent !important;
@@ -215,23 +215,23 @@ html body main.ac-page-copy.ac-home-page section.ac-brand-rail {
   padding-bottom: 0 !important;
 }
 
-html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"],
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"],
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] {
   padding-right: 2.75rem !important;
 }
 
-html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar,
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar,
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
 
-html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child,
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child,
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child {
   margin-left: -9px !important;
 }
 
-html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button,
+html body .ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button,
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button {
   right: 0 !important;
 }

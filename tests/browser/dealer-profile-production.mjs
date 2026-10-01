@@ -28,11 +28,25 @@ try{
   assert.equal(await page.locator('.ac-public-footer-operator').isVisible(),false);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:`${out}/profile-${theme}-${width}.png`});
-  await page.getByRole('button',{name:'Адреса',exact:true}).click();await page.getByRole('dialog').waitFor();
+  assert.equal(await page.locator('.dealer-dock').isVisible(),width<768);
+  assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
+  assert.ok(await page.locator('.dealer-shared-catalog .ac-catalog-filters').count() || await page.locator('.dealer-shared-catalog input').count());
+  await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.getByRole('dialog').waitFor();
   await page.screenshot({path:`${out}/office-${theme}-${width}.png`});await page.keyboard.press('Escape');
   assert.equal(await page.getByRole('dialog').count(),0);
+  if(width>=768){
+   const catalog=page.locator('.dealer-shared-catalog');
+   await catalog.getByRole('button',{name:'Все рынки',exact:true}).click();
+   const options=catalog.locator('.ac-filter-dropdown .ac-filter-option');
+   assert.equal(await options.count(),3);assert.equal(await options.filter({hasText:'Китай'}).count(),0);
+   await catalog.getByRole('button',{name:'Корея',exact:true}).click();
+   await page.waitForURL(/market=korea/);
+   assert.equal(new URL(page.url()).pathname,'/nvkz/topavto');
+   assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
+  }
   await page.getByRole('button',{name:'О компании',exact:true}).click();await page.getByRole('heading',{name:'Направления доставки'}).waitFor();
   await page.locator('.dealer-profile-body').scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/about-${theme}-${width}.png`});
+  await page.locator('.ac-public-header .ac-catalog-nav:visible').click();await page.locator('.dealer-shared-catalog').waitFor({state:'visible'});
   assert.deepEqual(errors,[]);await page.close();console.log(`${width} ${theme}: real Next layout, shared header, private footer, modal and no overflow OK`);
  }
 }finally{await browser?.close();server.kill('SIGTERM');fs.closeSync(log);fs.rmSync(dir,{recursive:true,force:true});}

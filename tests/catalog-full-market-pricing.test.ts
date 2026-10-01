@@ -11,7 +11,7 @@ const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub"];
 const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "customs"];
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
-const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+const carsPage = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogContent.tsx", import.meta.url), "utf8");
 
 test("fills the full customer cost structure for every market when saved fields are null", () => {
   for (const market of markets) {

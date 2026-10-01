@@ -19,10 +19,12 @@ const write = (p, v) => {
   fs.writeFileSync(file, JSON.stringify(v));
 };
 const actor = {
-  id: "test-owner",
-  displayName: "Тестовый владелец",
-  telegramUsername: "fixture_owner",
-  role: "owner",
+  id: "test-dealer",
+  displayName: "Тестовый дилер",
+  telegramUsername: "fixture_dealer",
+  role: "dealer",
+  companyId: "dealer_topavto",
+  dealerApproved: true,
   status: "active",
   sessionVersion: 0,
 };
@@ -119,7 +121,7 @@ try {
     } catch {}
     await new Promise((r) => setTimeout(r, 500));
   }
-  browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+  browser = await chromium.launch({ headless: true, executablePath:process.env.CHROME_BIN, args: ["--no-sandbox"] });
   const origin = "http://localhost:3099";
   for (const width of [390, 1440]) {
     const context = await browser.newContext({
@@ -154,9 +156,10 @@ try {
       ),
     );
     const response = await page.goto(
-      `${origin}/cars/offer/special_dealer_topavto__test-rav4`,
+      `${origin}/cars/offer/special_dealer_topavto__test-rav4?dealer=dealer_topavto`,
     );
     assert.equal(response.status(), 200);
+    assert.equal(await page.getByRole("link",{name:"Выйти на АвтоЦену"}).getAttribute("href"),"/cars");
     await page
       .getByRole("heading", { name: "Toyota RAV4 Premium", exact: true })
       .waitFor();
@@ -213,7 +216,7 @@ try {
       headers: { ...r.request().headers(), origin: "https://avtocena.com" },
     }),
   );
-  await page.goto(`${origin}/crm/dealers/dealer_topavto/showcase`);
+  await page.goto(`${origin}/dealer-cabinet`);
   await page
     .getByRole("button", { name: "Фото покупателей", exact: true })
     .click();
@@ -248,6 +251,38 @@ try {
   assert.equal(stored.buyerPhotos.length, 25);
   assert.equal(stored.version, 1);
   await page.screenshot({ path: path.join(out, "crm.png") });
+  await page.getByRole('button',{name:'Автомобили',exact:true}).click();
+  await page.getByRole('button',{name:'+ Добавить автомобиль',exact:true}).click();
+  await page.getByLabel('Марка',{exact:true}).fill('Toyota');
+  await page.getByLabel('Модель',{exact:true}).fill('Corolla');
+  await page.getByRole('button',{name:'Сохранить черновик автомобиля',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Черновик сохранён'}).waitFor();
+  const draftState=JSON.parse(fs.readFileSync(path.join(dir,'dealers/showcases/dealer_topavto.json'),'utf8'));
+  assert.equal(draftState.offers.length,2);assert.equal(draftState.offers[1].status,'draft');assert.equal(draftState.offers[1].model,'Corolla');
+  assert.equal(draftState.offers[0].status,'published');assert.equal(draftState.specialsEnabled,true);
+  await page.reload();await page.getByRole('button',{name:'Автомобили',exact:true}).click();
+  await page.getByRole('button',{name:'Toyota Corolla · Черновик',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'Corolla');
+  await page.screenshot({path:path.join(out,'new-car-persisted.png')});
+  for(const [label,value] of [['Год выпуска','2024'],['Месяц производства (1–12)','6'],['Объём, см³','1500'],['Мощность ДВС / ЭВ, л.с.','100'],['Коробка передач','Автомат'],['Привод','Передний'],['Кузов','Седан'],['Цвет','Белый'],['Цена автомобиля, $','20000']])await page.getByLabel(label,{exact:true}).fill(value);
+  await page.getByLabel('Загрузить фотографии').setInputFiles({name:'corolla.png',mimeType:'image/png',buffer:png});
+  await page.locator('img[src^="/api/dealers/dealer_topavto/media/"]').first().waitFor();
+  const customs=page.getByRole('switch',{name:'Таможенные платежи включены в закупочную цену',exact:true});
+  await page.locator('.dealer-editor-main img[src^="/api/dealers/"]').first().evaluate(img=>img.decode());
+  try{await customs.check();}catch(error){
+   await page.screenshot({path:path.join(out,'checkbox-failure.png')});
+   console.error('CUSTOMS_DIAGNOSTIC',await customs.evaluate(el=>({checked:el.getAttribute('aria-checked'),control:el.outerHTML,box:el.getBoundingClientRect().toJSON()})));
+   throw error;
+  }
+  assert.equal(await customs.isChecked(),true);
+  await page.getByLabel('Статус',{exact:true}).selectOption('published');
+  await page.getByRole('button',{name:'Сохранить настройки дилера',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Настройки сохранены'}).waitFor();
+  const published=JSON.parse(fs.readFileSync(path.join(dir,'dealers/showcases/dealer_topavto.json'),'utf8'));
+  assert.equal(published.offers[1].status,'published');assert.equal(published.offers[1].photos.length,1);
+  await page.goto(`${origin}/cars/offer/special_dealer_topavto__${published.offers[1].id}?dealer=dealer_topavto`);
+  await page.getByRole('heading',{name:'Toyota Corolla',exact:true}).waitFor();
+  assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
+  await page.screenshot({path:path.join(out,'new-car-published.png')});
   await context.close();
   console.log(
     JSON.stringify({
@@ -255,7 +290,7 @@ try {
       readonlyOffers: true,
       leadDialog: true,
       financeHidden: true,
-      ownerUpload: true,
+      dealerUpload: true,
       persistedGallery: 25,
     }),
   );
