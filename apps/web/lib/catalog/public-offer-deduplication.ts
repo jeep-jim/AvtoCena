@@ -1,3 +1,4 @@
+import {reviewedSourceDuplicate} from './reviewed-source-duplicates';
 import { rankedCatalogImageUrls } from "./image-quality";
 import { catalogOfferVisibleRub } from "./public-priority";
 import type { VehicleOffer } from "./types";
@@ -104,6 +105,13 @@ function preferredOffer<T extends VehicleOffer>(left: T, right: T) {
  * listing's complete gallery without collapsing legitimate similar vehicles.
  */
 export function deduplicatePublicCatalogOffers<T extends VehicleOffer>(offers: T[], options: PublicOfferDeduplicationOptions = {}): PublicOfferDeduplicationResult<T> {
+  const reviewedRemoved: PublicOfferDuplicate[] = [];
+  offers = offers.filter(offer => {
+    const alias = reviewedSourceDuplicate(offer);
+    if (!alias) return true;
+    reviewedRemoved.push({keptId:alias.canonicalId,removedId:offer.id,market:offer.market,sourceId:offer.sourceId,coverIdentity:"reviewed:che168-i5-20261001"});
+    return false;
+  });
   const groups = new Map<string, T[]>();
   const unique: T[] = [];
   for (const offer of offers) {
@@ -113,7 +121,7 @@ export function deduplicatePublicCatalogOffers<T extends VehicleOffer>(offers: T
   }
 
   const keptIds = new Set(unique.map((offer) => offer.id));
-  const removed: PublicOfferDuplicate[] = [];
+  const removed: PublicOfferDuplicate[] = [...reviewedRemoved];
   for (const rows of groups.values()) {
     let winner = rows[0];
     for (const row of rows.slice(1)) {
