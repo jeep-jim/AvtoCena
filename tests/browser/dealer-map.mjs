@@ -14,6 +14,10 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
  await page.locator('.dealer-profile-hero img').first().evaluate(img=>img.decode());
  if(width>700){const box=await page.locator('.dealer-profile-hero').boundingBox();assert.ok(box.height<=360,'Cover has a bounded height');const profile=await page.locator('.dealer-profile').boundingBox();assert.equal(profile.width,width); }
+ const hero=await page.locator('.dealer-profile-hero').boundingBox(), identity=await page.locator('.dealer-profile-identity').boundingBox(), body=await page.locator('.dealer-profile-body').boundingBox();
+ assert.ok(Math.abs(hero.x-identity.x)<1 && Math.abs(hero.width-identity.width)<1,'Profile sheet must meet both cover edges');
+ assert.ok(identity.y<hero.y+hero.height,'Profile sheet must overlap cover');
+ assert.ok(Math.abs(hero.x-body.x)<1 && Math.abs(hero.width-body.width)<1,'Body aligns with cover');
  await page.locator('.ac-buyers-rail').scrollIntoViewIfNeeded();await page.locator('.ac-buyers-rail img').first().evaluate(img=>img.decode());await page.evaluate(()=>scrollTo(0,0));
  await page.screenshot({path:`${out}/profile-${theme}-${width}.png`});
  assert.equal(await page.locator('.dealer-profile a[href^="tel:"]').count(),0);
