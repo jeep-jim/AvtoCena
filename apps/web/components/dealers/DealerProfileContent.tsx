@@ -23,7 +23,8 @@ export function DealerProfileContent({s,preview=false,items=[],catalog}:{s:Publi
  const cities=[...new Set(s.offices.map(o=>o.city).filter(Boolean))];
  const photos=s.buyersEnabled?s.buyerPhotos:[];
  const request=`/request?dealer=${encodeURIComponent(s.dealerId)}`;
- useEffect(()=>{const navigate=()=>{if(location.hash==='#photos')setTab('photos');if(location.hash==='#offices')dialog.current?.showModal();};navigate();window.addEventListener('hashchange',navigate);return()=>window.removeEventListener('hashchange',navigate);},[]);
+ useEffect(()=>{const navigate=()=>{if(location.hash==='#cars'||location.hash==='#photos'){setTab(location.hash==='#cars'?'cars':'photos');requestAnimationFrame(()=>body.current?.scrollIntoView({block:'start'}));}if(location.hash==='#offices')dialog.current?.showModal();};navigate();window.addEventListener('hashchange',navigate);return()=>window.removeEventListener('hashchange',navigate);},[]);
+ useEffect(()=>{const openCatalog=()=>{setTab('cars');requestAnimationFrame(()=>body.current?.scrollIntoView({block:'start'}));};window.addEventListener('avtocena:dealer-section',openCatalog);return()=>window.removeEventListener('avtocena:dealer-section',openCatalog);},[]);
  useEffect(()=>{try{setFavorite(localStorage.getItem(`ac-dealer-favorite-${s.dealerId}`)==='1');}catch{}},[s.dealerId]);
  function toggleFavorite(){const value=!favorite;setFavorite(value);try{localStorage.setItem(`ac-dealer-favorite-${s.dealerId}`,value?'1':'0');}catch{}}
  function section(value:Tab){setTab(value);requestAnimationFrame(()=>body.current?.scrollIntoView({behavior:'smooth',block:'start'}));}

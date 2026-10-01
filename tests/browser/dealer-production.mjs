@@ -19,9 +19,9 @@ const write = (p, v) => {
   fs.writeFileSync(file, JSON.stringify(v));
 };
 const actor = {
-  id: "test-owner",
-  displayName: "Тестовый владелец",
-  telegramUsername: "fixture_owner",
+  id: "test-dealer",
+  displayName: "Тестовый дилер",
+  telegramUsername: "fixture_dealer",
   role: "dealer",
   companyId: "dealer_topavto",
   dealerApproved: true,
@@ -283,7 +283,7 @@ try {
       readonlyOffers: true,
       leadDialog: true,
       financeHidden: true,
-      ownerUpload: true,
+      dealerUpload: true,
       persistedGallery: 25,
     }),
   );

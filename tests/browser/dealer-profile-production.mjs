@@ -46,6 +46,7 @@ try{
   }
   await page.getByRole('button',{name:'О компании',exact:true}).click();await page.getByRole('heading',{name:'Направления доставки'}).waitFor();
   await page.locator('.dealer-profile-body').scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/about-${theme}-${width}.png`});
+  await page.locator('.ac-public-header .ac-catalog-nav:visible').click();await page.locator('.dealer-shared-catalog').waitFor({state:'visible'});
   assert.deepEqual(errors,[]);await page.close();console.log(`${width} ${theme}: real Next layout, shared header, private footer, modal and no overflow OK`);
  }
 }finally{await browser?.close();server.kill('SIGTERM');fs.closeSync(log);fs.rmSync(dir,{recursive:true,force:true});}

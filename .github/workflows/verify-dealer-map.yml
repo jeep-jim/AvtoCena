@@ -49,12 +49,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        id: build
       - run: npm install --prefix "$RUNNER_TEMP/dealer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Verify profile in the production Next layout with isolated data
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/dealer-profile-production.mjs
-      - name: Verify own vehicle creation and persistence with isolated owner
+      - name: Verify own vehicle creation and persistence with isolated dealer
+        if: ${{ !cancelled() && steps.build.conclusion == 'success' }}
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/dealer-production.mjs

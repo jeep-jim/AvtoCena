@@ -187,13 +187,13 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
 
             <nav className="hidden items-center gap-1 text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
 
-              <Link href={dealer?.href || "/cars"} className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
+              <Link href={dealer ? dealer.href+"#cars" : "/cars"} onClick={()=>{if(dealer)window.dispatchEvent(new CustomEvent("avtocena:dealer-section",{detail:"cars"}));}} className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
                 <span className="ac-catalog-nav-icon"><CarIcon /></span>
                 <span>Каталог</span>
               </Link>
             </nav>
 
-            <Link href={dealer?.href || "/cars"} className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
+            <Link href={dealer ? dealer.href+"#cars" : "/cars"} onClick={()=>{if(dealer)window.dispatchEvent(new CustomEvent("avtocena:dealer-section",{detail:"cars"}));}} className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
               <span className="ac-catalog-nav-icon"><CarIcon /></span>
             </Link>
           </div>
