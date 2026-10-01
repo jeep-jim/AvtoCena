@@ -14,7 +14,7 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));
 try{for(const device of ['desktop','android','iphone']){
  const browser=device==='iphone'?await webkit.launch():await chromium.launch({executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
  try{const page=await browser.newPage(device==='iphone'?devices['iPhone 13']:device==='android'?devices['Pixel 7']:{viewport:{width:1440,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${server.address().port}/`);
- await page.getByText('1.6L Комфорт 2 места фургон',{exact:true}).waitFor();await page.getByText('1.6L Комфорт 5 мест фургон',{exact:true}).waitFor();assert.equal(await page.getByText('Комплектация · фото модели',{exact:true}).count(),2);
+ try{await page.getByText('1.6L Комфорт 2 места фургон',{exact:true}).waitFor();}catch(error){console.log({device,errors,text:await page.locator('body').innerText()});await page.screenshot({path:`${out}/${device}-failure.png`,fullPage:true});throw error;}await page.getByText('1.6L Комфорт 5 мест фургон',{exact:true}).waitFor();assert.equal(await page.getByText('Комплектация · фото модели',{exact:true}).count(),2);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${device}.png`,fullPage:true});console.log(device+': both distinct trims visible, no horizontal overflow, no runtime errors');
  }finally{await browser.close();}
 }}finally{server.close();}

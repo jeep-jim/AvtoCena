@@ -866,9 +866,10 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
     const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
     if (summary.generationId === manifest.generationId) {
       const market = filters.market && filters.market !== "any" ? filters.market : undefined;
-      // Old summaries still count reviewed aliases. Reconcile only the China
-      // projection, keeping the lightweight summary path for other markets.
-      const reviewed = !market || market === "china" ? (await readCurrentSearchProjection("china")).items.filter(isReviewedSourceDuplicate) : [];
+      // Old summaries still count reviewed aliases. Only the affected make
+      // needs its small brand projection; all other counts stay summary-only.
+      const affected = (!market || market === "china") && Object.values(summary.brands).some(brand=>brand.make==="Roewe" && brand.marketCounts.china>0);
+      const reviewed = affected ? (await readCurrentBrandProjection("Roewe",manifest.generationId)).items.filter(isReviewedSourceDuplicate) : [];
       const brands = Object.values(summary.brands).map(brand => ({
         make: brand.make, count: (market ? Number(brand.marketCounts[market] || 0) : brand.count) - reviewed.filter(row=>row.make===brand.make).length,
         models: brand.models.filter(model => !market || Number(model.marketCounts[market] || 0) > 0).length,
