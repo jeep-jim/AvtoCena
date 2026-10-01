@@ -1,3 +1,5 @@
+import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
+import {isChinaModelSpecification} from './china-card-variant';
 import { matchesAuctionGrades } from "./auction-grade-filter";
 import {buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCountQuery,type BudgetCountIndex} from "./budget-count-index";
 import { getGreenCornerOffer } from "./green-corner";
@@ -187,7 +189,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -434,7 +436,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
-  if (isConfirmedSourceWithdrawn(row)) return false;
+  if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
     && Boolean(row.id && row.market && row.make && row.model && row.year && row.cardImageUrl)
@@ -460,7 +462,7 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
   return visible;
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
-  if (isConfirmedSourceWithdrawn(offer)) return false;
+  if (isConfirmedSourceWithdrawn(offer) || isReviewedSourceDuplicate(offer)) return false;
   offer = safePublicPricing(offer);
   return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
     && !catalogRequiredSpecificationRejectionReason(offer));
@@ -470,7 +472,7 @@ function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleO
   const { sourceGroup: _sourceGroup, ...publicRow } = row;
   const imageUrl = protectedPhotoUrl(String(row.cardImageUrl || ""), row.market);
   return {
-    ...publicRow, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
+    ...publicRow, catalogEntryKind:isChinaModelSpecification(row)?"model_variant":undefined, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
     sourcePrice: row.sourcePrice ?? null, sourceCurrency: row.sourceCurrency ?? null,
     images: imageUrl ? [{ id: "", url: imageUrl, width: undefined, height: undefined, size: 0, mimeType: "image/jpeg" }] : [],
     firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",
@@ -700,7 +702,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
   return projectionNumber(row.powerHp, 0);
 }
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
-  if (isConfirmedSourceWithdrawn(row)) return false;
+  if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = preparedProjectionRows.get(row) || safePublicPricing(row);
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
@@ -864,8 +866,12 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
     const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
     if (summary.generationId === manifest.generationId) {
       const market = filters.market && filters.market !== "any" ? filters.market : undefined;
+      // Old summaries still count reviewed aliases. Only the affected make
+      // needs its small brand projection; all other counts stay summary-only.
+      const affected = (!market || market === "china") && Object.values(summary.brands).some(brand=>brand.make==="Roewe" && brand.marketCounts.china>0);
+      const reviewed = affected ? (await readCurrentBrandProjection("Roewe",manifest.generationId)).items.filter(isReviewedSourceDuplicate) : [];
       const brands = Object.values(summary.brands).map(brand => ({
-        make: brand.make, count: market ? Number(brand.marketCounts[market] || 0) : brand.count,
+        make: brand.make, count: (market ? Number(brand.marketCounts[market] || 0) : brand.count) - reviewed.filter(row=>row.make===brand.make).length,
         models: brand.models.filter(model => !market || Number(model.marketCounts[market] || 0) > 0).length,
       })).filter(brand => brand.count > 0);
       return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
@@ -1013,7 +1019,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
 // Immutable, generation-scoped objects avoid parsing an entire market on cold starts.
 const MARKET_LANDING_LIMIT = 192;
 type MarketLanding = {
-  version: 1; generationId: string; market: string; sourceTotal: number;
+  version: 1; generationId: string; market: string; sourceTotal: number; duplicatePolicy?: string;
   total: number; items: CatalogSearchProjection[]; facets: CatalogFacets;
 };
 export function catalogMarketLandingPath(generationId: string, market: string) {
@@ -1028,7 +1034,7 @@ function canUseMarketLanding(params: CatalogSearchParams) {
 export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[]): Promise<MarketLanding> {
   const rows = prepareCatalogProjectionRows(items);
   sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
-  return {version: 1, generationId, market, sourceTotal: items.length, total: rows.length,
+  return {version: 1, generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
 async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
@@ -1039,7 +1045,7 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   try {
     return await marketLandingCache.get(path, async () => {
       const value = await readDataJson<MarketLanding | null>(path, null);
-      if (!value || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
+      if (!value || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
         || value.sourceTotal !== Number(manifest.markets?.[market]?.count || 0)
         || !Number.isInteger(value.total) || value.total < 0 || value.total > value.sourceTotal
         || !Array.isArray(value.items) || value.items.length !== Math.min(value.total, MARKET_LANDING_LIMIT)

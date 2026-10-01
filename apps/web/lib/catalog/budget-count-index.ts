@@ -1,3 +1,4 @@
+import {isReviewedSourceDuplicate} from './reviewed-source-duplicates';
 import {deliveryPricingBasis,priceCardForCity,type DeliveryPricingBasis} from './card-city-delivery';
 import {matchesJapanPreviewInput} from './japan-preview-inputs';
 import {hasModificationSelection} from './modification-contract';
@@ -11,7 +12,7 @@ export type BudgetCountIndex={version:1;generationId:string;sourceRows:number;ro
 export function buildBudgetCountIndex(generationId:string,rows:CatalogSearchProjection[],blocks:Map<string,number>=new Map()):BudgetCountIndex {
  const compact:BudgetCountRow[]=[];
  for(const row of rows){
-  if(hasModificationSelection(row))continue;
+  if(hasModificationSelection(row)||isReviewedSourceDuplicate(row))continue;
   const total=Number(row.totalRub||0);
   if(!(total>0)&&row.market!=='japan')continue;
   compact.push([row.market,total,deliveryPricingBasis(row.calculationSnapshot)||null,
@@ -23,6 +24,7 @@ export function matchingBudgetIndex(index:BudgetCountIndex,params:CatalogSearchP
  const matching:BudgetCountRow[]=[];
  for(const row of index.rows){
   const [market,totalRub,basis,japan,seller]=row;
+  if(isReviewedSourceDuplicate({market,id:row[5].id}))continue;
   if(params.market && params.market!=='any' && market!==params.market)continue;
   const candidate=japan?quotes[japan.id]:undefined;
   const preview=candidate&&japan&&matchesJapanPreviewInput(candidate,japan)?candidate:undefined;
