@@ -1,5 +1,5 @@
 export type DiscussionType = 'lead'|'client';
-export type DiscussionMessage = {id:string;text:string;createdAt:string;createdByUserId?:string;createdByName?:string;avatarUrl?:string;replyTo?:string};
+export type DiscussionMessage = {id:string;text:string;createdAt:string;createdByUserId?:string;createdByName?:string;avatarUrl?:string;replyTo?:string;editedAt?:string};
 export const discussionAnchor=(type:DiscussionType,id:string)=>`discussion-${type}-${id}`;
 export function discussionHref(type:DiscussionType,id:string,messageId?:string){
  const query=new URLSearchParams(type==='lead'?{id}:{ });
@@ -13,5 +13,5 @@ export function discussionLabel(type:DiscussionType,entity:any){
  return `${type==='lead'?'Заявка':'Клиент'}: ${name}${type==='lead'&&car?` · ${car}`:''}`;
 }
 export function discussionMessages(entity:any):DiscussionMessage[]{
- return (Array.isArray(entity.internalNotes)?entity.internalNotes:[]).filter((n:any)=>typeof n.text==='string').map((n:any,i:number)=>({id:String(n.id||`legacy-${i}`),text:n.text,createdAt:String(n.createdAt||''),createdByUserId:n.createdByUserId,createdByName:n.createdByName||'Сотрудник',replyTo:n.replyTo}));
+ return (Array.isArray(entity.internalNotes)?entity.internalNotes:[]).filter((n:any)=>typeof n.text==='string').map((n:any,i:number)=>({id:String(n.id||`legacy-${i}`),text:n.text,createdAt:String(n.createdAt||''),createdByUserId:n.createdByUserId,createdByName:n.createdByName||'Сотрудник',replyTo:n.replyTo,editedAt:n.editedAt}));
 }

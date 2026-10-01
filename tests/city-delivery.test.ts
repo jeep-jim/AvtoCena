@@ -83,3 +83,15 @@ test('each western market starts at its own entry city and retains the same tari
  assert.equal(quoteCityDelivery('Чита','korea').amountRub,65000);
  assert.notEqual(quoteCityDelivery('Чита','europe').amountRub,quoteCityDelivery('Чита','korea').amountRub);
 });
+
+
+test('Gorno-Altaysk uses the existing kilometre formula for all six markets',()=>{
+ for(const [market,origin,distance,amount] of [['japan','Владивосток',6100,130000],['china','Владивосток',6100,130000],['korea','Владивосток',6100,130000],['georgia','Минеральные Воды',4300,95000],['uae','Астрахань',4100,90000],['europe','Санкт-Петербург',4400,95000]] as const){
+  const q=quoteCityDelivery(' г. Горно-Алтайск ',market);
+  assert.equal(q.status,'estimated');assert.equal(q.origin,origin);assert.equal(q.distanceKm,distance);assert.equal(q.amountRub,amount);
+  const config=resolveCatalogMarketConfig(market,{percentExpenses:[]}).config;
+  const calculate=(city:string)=>calculateAvtocenaFromBusinessConfig({marketId:market,marketConfig:config,sourcePriceRub:1000000,customsRub:500000,cityDeliveryRub:quoteCityDelivery(city,market).amountRub,deliveryCity:city});
+  const base=calculate(''),delivered=calculate('Горно-Алтайск');
+  assert.equal(delivered.totalRub-base.totalRub,amount);assert.equal(delivered.breakdown.filter(r=>r.id==='rf-delivery').length,1);
+ }
+});

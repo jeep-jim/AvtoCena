@@ -8,7 +8,7 @@ import {readCrmUsers} from './crm-users';
 import {leadStatusLabel} from './crm';
 export type ActivityPerson={id:string;name:string;avatarUrl?:string};
 export type ActivityChange={label:string;before?:string;after?:string};
-export type CrmActivity={id:string;commentId?:string;createdAt:string;type:string;title:string;actor?:ActivityPerson;target?:ActivityPerson;entityType?:string;entityId?:string;entityLabel?:string;href?:string;clientId?:string;leadId?:string;changes?:ActivityChange[];text?:string;managerId?:string;managerName?:string;assignedManagerId?:string;status?:string;visibility?:'team'|'management';image?:string;currentStatus?:string;summary?:string;};
+export type CrmActivity={id:string;commentId?:string;createdAt:string;type:string;title:string;actor?:ActivityPerson;target?:ActivityPerson;entityType?:string;entityId?:string;entityLabel?:string;href?:string;clientId?:string;leadId?:string;changes?:ActivityChange[];text?:string;managerId?:string;managerName?:string;assignedManagerId?:string;status?:string;visibility?:'team'|'management';image?:string;currentStatus?:string;currentStatusCode?:string;summary?:string;};
 export const activityPerson=(u:Pick<AuthUser,'id'|'displayName'|'avatarUrl'>):ActivityPerson=>({id:u.id,name:u.displayName,avatarUrl:u.avatarUrl});
 export async function recordCrmActivity(actor:AuthUser|null,event:Omit<CrmActivity,'id'|'createdAt'|'actor'>&Partial<Pick<CrmActivity,'id'|'createdAt'>>) {
  const recorded=await appendChunkedDataJson<CrmActivity>('activity/feed.json',{...event,id:event.id||generateId('activity'),createdAt:event.createdAt||new Date().toISOString(),...(actor?{actor:activityPerson(actor)}:{})});
@@ -43,13 +43,13 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   else if(e.leadId)href=`/crm/leads?id=${encodeURIComponent(e.leadId)}#${encodeURIComponent(e.leadId)}`;
   else if(e.clientId||e.entityType==='client')href=`/crm/clients/${encodeURIComponent(e.clientId||e.entityId||'')}`;
   if(e.entityType==='document'&&e.clientId&&e.entityId)href=`/crm/clients/${encodeURIComponent(e.clientId)}?document=${encodeURIComponent(e.entityId)}#document-${encodeURIComponent(e.entityId)}`;
-  const discussionEvent=e.type==='lead_note_added'||e.type==='client_note_added'||(e.type==='client_updated'&&changes.some(c=>c.label==='Комментарий'));
+  const discussionEvent=['lead_note_added','client_note_added','lead_note_edited','client_note_edited'].includes(e.type)||(e.type==='client_updated'&&changes.some(c=>c.label==='Комментарий'));
   if(discussionEvent){const kind=lead||e.leadId||e.entityType==='lead'?'lead':'client';const entityId=lead?.id||e.leadId||client?.id||e.clientId||e.entityId;if(entityId)href=discussionHref(kind,entityId,e.commentId);}
   if(e.type?.startsWith('reminder_')&&href)href=href.split('#')[0]+'#reminders-'+(lead?'lead':'client')+'-'+encodeURIComponent(lead?.id||e.leadId||client?.id||e.clientId||e.entityId||'');
   if(e.type==='client_deleted')href='/crm/clients';
   if(e.type==='lead_deleted')href='/crm/leads';
   const car=lead?.selectedOffers?.[0];
   const image=e.type==='lead_created'?String(car?.image||lead?.image||lead?.offerImage||''):undefined;
-  return {...e,title,actor,target,changes,href,entityLabel:discussionEvent&&(lead||client)?discussionLabel(lead?"lead":"client",lead||client):e.entityLabel||[lead?.name,car?.title||lead?.car].filter(Boolean).join(' · ')||client?.fio,image:image&&/^(https?:\/\/|\/(?!\/))/.test(image)?image:undefined,currentStatus:lead?leadStatusLabel(lead.status):undefined,text:e.status&&e.text===e.status?leadStatusLabel(e.status):e.text};
+  return {...e,title,actor,target,changes,href,entityLabel:discussionEvent&&(lead||client)?discussionLabel(lead?"lead":"client",lead||client):e.entityLabel||[lead?.name,car?.title||lead?.car].filter(Boolean).join(' · ')||client?.fio,image:image&&/^(https?:\/\/|\/(?!\/))/.test(image)?image:undefined,currentStatus:lead?leadStatusLabel(lead.status):undefined,currentStatusCode:lead?.status,text:e.status&&e.text===e.status?leadStatusLabel(e.status):e.text};
  });
 }

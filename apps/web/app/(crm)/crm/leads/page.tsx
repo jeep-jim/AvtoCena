@@ -285,9 +285,9 @@ export default async function CrmLeadsPage({
                 </div>
               </summary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">
-                <LeadReadStatus leadId={lead.id} userId={user.id} eventKey={leadReadState(lead,user.id).eventKey} initialReceipts={lead.readReceipts||[]} />
-                <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
-                  <section>
+                <div className="crm-lead-detail-grid">
+                  <section className="crm-lead-detail-info">
+                    <LeadReadStatus leadId={lead.id} userId={user.id} eventKey={leadReadState(lead,user.id).eventKey} initialReceipts={lead.readReceipts||[]} />
                     <h2 className="mb-3 font-black">Автомобиль и контакты</h2>
                     <div className="grid gap-3">
                       {cars.map((offer: any, index: number) => (
@@ -365,7 +365,7 @@ export default async function CrmLeadsPage({
                       </p>
                     )}
                   </section>
-                  <section>
+                  <section className="crm-lead-detail-chat">
                     <TeamDiscussion type="lead" entityId={lead.id} label={discussionLabel('lead',lead)} initialMessages={discussionMessages(lead)} userId={user.id} canReply={hasCrmPermission(user,"editLeads")}/>
                     <details className="crm-external-history mt-4"><summary className="font-bold">История статусов и сообщения клиента</summary>
                     <div className="max-h-80 space-y-2 overflow-y-auto">
@@ -411,7 +411,7 @@ export default async function CrmLeadsPage({
                     </details>
                   </section>
                 </div>
-                <div className="mt-5">
+                <div className="crm-lead-detail-actions mt-5">
     {hasCrmPermission(user,"deleteRecords")?<DeleteCrmRecord kind="lead" id={lead.id}/>:null}
                   <ReminderButton entityType="lead" entityId={lead.id}/>
                   {hasCrmPermission(user,"editLeads")?<LeadActions

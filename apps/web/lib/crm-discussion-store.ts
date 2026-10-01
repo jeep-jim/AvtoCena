@@ -40,3 +40,26 @@ export async function addDiscussionMessage(user:AuthUser,type:DiscussionType,id:
  if(added){await recordCrmActivity(user,{type:type==='lead'?'lead_note_added':'client_note_added',title:'Сообщение в обсуждении команды',entityType:type,entityId:id,entityLabel:discussionLabel(type,entity),leadId:type==='lead'?id:undefined,clientId:type==='client'?id:entity.clientId,commentId:note.id,text,href:discussionHref(type,id,note.id)});await notifyDiscussion(user,type,entity,note);}
  return readDiscussion(user,type,id);
 }
+
+export async function editDiscussionMessage(user:AuthUser,type:DiscussionType,id:string,input:any){
+ await discussionEntity(user,type,id);
+ if(!hasCrmPermission(user,type==='lead'?'editLeads':'editClients'))throw Error('discussion_forbidden');
+ const text=typeof input.text==='string'?input.text.trim():'';
+ if(!text||text.length>2000||typeof input.messageId!=='string'||input.messageId.length>240||typeof input.expectedText!=='string')throw Error('invalid_message');
+ let changed=false,previous='',editedAt='';
+ const entity=await updateChunkedDataJson<any>(file(type),id,current=>{
+  changed=false;
+  if(!canSeeLead(user,current))throw Error('discussion_forbidden');
+  const notes=discussionMessages(current),position=notes.findIndex(n=>n.id===input.messageId),note=notes[position];
+  const originals=Array.isArray(current.internalNotes)?current.internalNotes:[];
+  const index=originals.indexOf(originals.filter((n:any)=>typeof n.text==='string')[position]);
+  if(!note||note.createdByUserId!==user.id)throw Error('discussion_forbidden');
+  if(note.text===text)return current;
+  if(note.text!==input.expectedText)throw Error('edit_conflict');
+  previous=note.text;editedAt=new Date().toISOString();changed=true;
+  return {...current,updatedAt:editedAt,internalNotes:current.internalNotes.map((n:any,i:number)=>i===index?{...n,id:note.id,text,editedAt}:n)};
+ });
+ if(!entity)throw Error('discussion_forbidden');
+ if(changed)await recordCrmActivity(user,{type:type==='lead'?'lead_note_edited':'client_note_edited',title:'Исправлено сообщение в обсуждении команды',entityType:type,entityId:id,entityLabel:discussionLabel(type,entity),leadId:type==='lead'?id:undefined,clientId:type==='client'?id:entity.clientId,commentId:input.messageId,text,changes:[{label:'Сообщение',before:previous,after:text}],href:discussionHref(type,id,input.messageId)});
+ return readDiscussion(user,type,id);
+}

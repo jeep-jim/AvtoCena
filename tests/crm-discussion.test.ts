@@ -7,6 +7,14 @@ test('chat preserves assignment/status, appends replies once and notifies only p
  try{const user=state.users[1],message={text:'Answer',operationId:'operation-123',replyTo:'old'};await assert.rejects(api.readDiscussion(state.users[2],'lead','l'),/forbidden/);await assert.rejects(api.addDiscussionMessage({...user,permissions:{editLeads:false}},'lead','l',message),/forbidden/);await assert.rejects(api.addDiscussionMessage(user,'lead','l',{...message,replyTo:'missing'}),/invalid_reply/);
  const result=await api.addDiscussionMessage(user,'lead','l',message);assert.equal(result.messages.length,2);assert.equal(result.messages[1].replyTo,'old');assert.equal(state.leads[0].assignedManagerId,'m');assert.equal(state.leads[0].status,'contacted');assert.equal(state.notices.length,1);assert.deepEqual(state.notices[0].recipientIds,['owner']);assert.match(state.notices[0].title,/Игорь.*RAV4/);assert.match(state.notices[0].href,/#discussion-lead-l/);
  await api.addDiscussionMessage(user,'lead','l',message);assert.equal(state.leads[0].internalNotes.length,2);assert.equal(state.notices.length,1);assert.equal(state.events.length,1);await assert.rejects(api.addDiscussionMessage(user,'lead','l',{...message,text:'different'}),/message_conflict/);
+ const noteId=result.messages[1].id;
+ await assert.rejects(api.editDiscussionMessage(state.users[0],'lead','l',{messageId:noteId,text:'Other author',expectedText:'Answer'}),/forbidden/);
+ await assert.rejects(api.editDiscussionMessage({...user,permissions:{editLeads:false}},'lead','l',{messageId:noteId,text:'No rights',expectedText:'Answer'}),/forbidden/);
+ await assert.rejects(api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'   ',expectedText:'Answer'}),/invalid_message/);
+ const edited=await api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'Corrected answer',expectedText:'Answer'});
+ assert.equal(edited.messages[1].text,'Corrected answer');assert.ok(edited.messages[1].editedAt);assert.equal(edited.messages[1].replyTo,'old');assert.equal(state.leads[0].status,'contacted');assert.equal(state.leads[0].assignedManagerId,'m');assert.equal(state.leads[0].internalNotes.length,2);assert.equal(state.notices.length,1);assert.equal(state.events.length,2);
+ await api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'Corrected answer',expectedText:'Answer'});assert.equal(state.events.length,2);
+ await assert.rejects(api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'Stale edit',expectedText:'Answer'}),/edit_conflict/);
  await api.addDiscussionMessage(user,'client','c',{text:'Client note',operationId:'operation-client'});assert.equal(state.clients[0].internalNotes[0].text,'Client note');state.leads[0].assignedManagerId='other';await assert.rejects(api.addDiscussionMessage(user,'lead','l',{text:'No access',operationId:'operation-denied'}),/forbidden/);
  }finally{delete (globalThis as any).__chat;}
 });
