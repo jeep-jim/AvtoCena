@@ -347,7 +347,7 @@ export function DealerEditor({
        .dealer-editor-panel{padding:16px 0;border:0;border-top:1px solid var(--ac-border);border-radius:0;background:transparent}
        .dealer-editor-toolbar{position:sticky;top:64px;z-index:20;background:var(--ac-bg);padding:10px 0;border-bottom:1px solid var(--ac-border)}
        .dealer-editor-toolbar>.dealer-editor-panel{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:0;border:0}.dealer-editor-toolbar>.dealer-editor-panel>*{margin:0}.dealer-editor-toolbar>.dealer-editor-panel>p{flex-basis:100%}
-       .dealer-editor-main input,.dealer-editor-main select{min-height:40px}
+       .dealer-editor-main input:not([type="checkbox"]),.dealer-editor-main select{min-height:40px}.dealer-editor-main input[type="checkbox"]{width:20px;height:20px;min-height:20px;flex-shrink:0;cursor:pointer}
        .dealer-editor-layout>[aria-label="Предпросмотр спецпредложения"]{max-width:480px;margin-top:24px}
        @media(max-width:600px){.dealer-editor-toolbar{position:static}.dealer-editor-toolbar>.dealer-editor-panel>div:first-child{width:100%}}
       `}</style>

@@ -266,7 +266,14 @@ try {
   for(const [label,value] of [['Год выпуска','2024'],['Месяц производства (1–12)','6'],['Объём, см³','1500'],['Мощность ДВС / ЭВ, л.с.','100'],['Коробка передач','Автомат'],['Привод','Передний'],['Кузов','Седан'],['Цвет','Белый'],['Цена автомобиля, $','20000']])await page.getByLabel(label,{exact:true}).fill(value);
   await page.getByLabel('Загрузить фотографии').setInputFiles({name:'corolla.png',mimeType:'image/png',buffer:png});
   await page.locator('img[src^="/api/dealers/dealer_topavto/media/"]').first().waitFor();
-  await page.getByRole('switch',{name:'Таможенные платежи включены в закупочную цену',exact:true}).check();
+  const customs=page.getByRole('switch',{name:'Таможенные платежи включены в закупочную цену',exact:true});
+  await page.locator('.dealer-editor-main img[src^="/api/dealers/"]').first().evaluate(img=>img.decode());
+  try{await customs.check();}catch(error){
+   await page.screenshot({path:path.join(out,'checkbox-failure.png')});
+   console.error('CUSTOMS_DIAGNOSTIC',await customs.evaluate(el=>({checked:el.checked,label:el.parentElement.outerHTML,box:el.getBoundingClientRect().toJSON(),active:document.activeElement?.outerHTML})));
+   throw error;
+  }
+  assert.equal(await customs.isChecked(),true);
   await page.getByLabel('Статус',{exact:true}).selectOption('published');
   await page.getByRole('button',{name:'Сохранить настройки дилера',exact:true}).click();
   await page.getByRole('status').filter({hasText:'Настройки сохранены'}).waitFor();
