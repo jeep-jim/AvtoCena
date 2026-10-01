@@ -65,7 +65,7 @@ export default async function CrmDealerEditPage({ params, searchParams }: { para
             {dealer.headerImageUrl && verified ? <img src={dealer.headerImageUrl} alt="Текущая шапка" className="mb-1 aspect-[3/1] w-full rounded-2xl object-cover" /> : null}
             <input name="headerImage" type="file" accept="image/jpeg,image/png,image/webp" disabled={!verified} className="soft-input min-w-0 w-full rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal disabled:cursor-not-allowed disabled:opacity-50" />
             <span className="normal-case tracking-normal text-white/38">Рекомендуем 1800 × 600 px (3:1). JPG, PNG или WebP до 8 МБ. Новая загрузка заменит текущую шапку.</span>
-            {dealer.id === "dealer_topavto" && <a href="/dealers/topavto-banner-1800x600.webp" download="topavto-banner-1800x600.webp" className="normal-case tracking-normal text-red-400 underline">Скачать готовый баннер TopAvto · 1800 × 600 px</a>}
+            {dealer.id === "dealer_topavto" && <a href="/dealers/topavto-banner-v3.webp" download="topavto-banner-1800x600.webp" className="normal-case tracking-normal text-red-400 underline">Скачать готовый баннер TopAvto · 1800 × 600 px</a>}
           </label>
 
           <div className="rounded-xl bg-white/[.045] px-4 py-3 text-sm font-bold text-white/68">

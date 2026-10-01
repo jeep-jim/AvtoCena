@@ -154,7 +154,7 @@ export function DealerEditor({
                   <h3>{label}</h3>
                   {key === "banner" && <>
                     <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Оставьте текст и логотип с отступом от краёв.</p>
-                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v2.webp" })}>Использовать новый баннер TopAvto</button>}
+                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v3.webp" })}>Использовать новый баннер TopAvto</button>}
                   </>}
                   <Photos
                     dealerId={s.dealerId}
