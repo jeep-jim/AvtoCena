@@ -7,13 +7,19 @@ import {publicDealerProfile} from '../apps/web/lib/dealers/public-profile';
 import {defaultShowcase} from '../apps/web/lib/dealers/showcase-model';
 import type {AuthUser} from '../apps/web/lib/auth';
 const require=createRequire(import.meta.url);
-test('new owners cannot become platform operators; existing roles and disabled status still apply',()=>{
+test('all internal TopAvto CRM staff retain roles without dealer approval; external accounts remain scoped',()=>{
  const base={id:'user_nstass',companyId:'dealer_topavto',role:'owner',telegramUsername:'test',displayName:'Test'} as AuthUser;
  assert.equal(isPlatformTeam(base),true);
- assert.equal(isPlatformTeam({...base,id:'new-owner'}),false);
+ assert.equal(isPlatformTeam({...base,id:'new-owner'}),true);
+ for(const role of ['owner','admin','manager'] as const) {
+  assert.equal(isPlatformTeam({...base,id:'other-internal-staff',role,dealerApproved:false}),true);
+  assert.equal(scopedAuthUser({...base,id:'other-internal-staff',role}).role,role);
+ }
+ assert.equal(isPlatformTeam({...base,role:'dealer'}),false);
+ assert.equal(isPlatformTeam({...base,companyId:undefined}),false);
  assert.equal(isPlatformTeam({...base,companyId:'other'}),false);
  assert.equal(isPlatformTeam({...base,status:'disabled'}),false);
- assert.equal(scopedAuthUser({...base,id:'new-owner'}).role,'dealer');
+ assert.equal(scopedAuthUser({...base,id:'new-owner',companyId:'external'}).role,'dealer');
  assert.equal(scopedAuthUser(base).role,'owner');
 });
 test('public profile never serializes contacts, pricing or unpublished offers',()=>{
@@ -72,7 +78,7 @@ test('middleware admits the reviewed team and limits dealer sessions to scoped e
  const previous=process.env.AUTH_SECRET;process.env.AUTH_SECRET='dealer-test-secret';
  const call=async(user:any,url:string)=>{const payload=Buffer.from(JSON.stringify({...user,exp:Math.floor(Date.now()/1000)+60})).toString('base64url');const cookie=payload+'.'+createHmac('sha256','dealer-test-secret').update(payload).digest('base64url');return middleware(new NextRequest('https://avtocena.com'+url,{headers:{cookie:'avtocena_session='+cookie}}));};
  try{
-  const team={id:'user_nstass',role:'owner',companyId:'dealer_topavto'},dealer={id:'external',role:'dealer',companyId:'first'};
+  const team={id:'other-internal-staff',role:'owner',companyId:'dealer_topavto'},dealer={id:'external',role:'dealer',companyId:'first'};
   assert.equal((await call(team,'/crm/dealers')).headers.get('x-middleware-next'),'1');
   assert.equal((await call(dealer,'/api/crm/dealers/first/showcase')).headers.get('x-middleware-next'),'1');
   for(const url of ['/api/crm/dealers','/api/crm/dealers/first/access','/api/crm/users','/api/crm/contracts','/api/leads','/api/partners','/api/cpa']){
@@ -97,4 +103,24 @@ test('unreleased dealer landing and demo return 404/noindex; only team preview c
   const preview=await call('/dealers?preview=1',team);assert.equal(preview.headers.get('x-middleware-next'),'1');assert.match(preview.headers.get('x-robots-tag')||'',/noindex/);
   for(const url of ['/dealers/dealer_topavto','/dealers/topavto-banner-v3.webp','/cars'])assert.equal((await call(url)).headers.get('x-middleware-next'),'1',url);
  }finally{if(old===undefined)delete process.env.AUTH_SECRET;else process.env.AUTH_SECRET=old;}
+});
+
+test('session recovery restores internal staff from current account and never upgrades dealers',async()=>{
+ const out=path.resolve('artifacts/dealer-tenant-tests/refresh.cjs');
+ await build({entryPoints:['apps/web/app/(public)/api/auth/refresh-team-session/route.ts'],outfile:out,bundle:true,platform:'node',format:'cjs',packages:'external',plugins:[{name:'auth',setup(b){b.onResolve({filter:/^@\/lib\/auth$/},()=>({path:'auth',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:`export async function getCurrentUser(){return globalThis.__refreshActor||null} export const AUTH_COOKIE_NAME='avtocena_session'; export const AUTH_MAX_AGE_SECONDS=120; export function createSessionCookie(user){return 'renewed-'+user.role}` }));}}]});
+ const route=require(out);
+ try{
+  for(const role of ['owner','admin','manager']){
+   (globalThis as any).__refreshActor={id:'internal-staff',role,companyId:'dealer_topavto'};
+   const r=await route.GET(new Request('https://avtocena.com/api/auth/refresh-team-session'));
+   assert.equal(new URL(r.headers.get('location')!).pathname,'/crm');
+   assert.match(r.headers.get('set-cookie')||'',new RegExp('renewed-'+role));
+  }
+  for(const actor of [null,{id:'external',role:'dealer',companyId:'dealer_topavto'},{id:'external',role:'owner',companyId:'other'}]){
+   (globalThis as any).__refreshActor=actor;
+   const r=await route.GET(new Request('https://avtocena.com/api/auth/refresh-team-session'));
+   assert.equal(r.headers.get('set-cookie'),null);
+   assert.notEqual(new URL(r.headers.get('location')!).pathname,'/crm');
+  }
+ }finally{delete(globalThis as any).__refreshActor;}
 });
