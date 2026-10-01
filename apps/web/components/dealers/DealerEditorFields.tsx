@@ -1,5 +1,6 @@
 "use client";
 import {useState} from "react";
+import {Check} from "lucide-react";
 import type {DealerPhoto} from "@/lib/dealers/showcase-model";
 export const input = "soft-input w-full min-w-0 rounded-xl px-3 py-2 text-sm";
 export const button =
@@ -40,16 +41,17 @@ export function Toggle({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <label className="flex items-center gap-3 rounded-xl border border-[var(--ac-border)] p-3">
-      <input
-        className="h-5 w-5 accent-red-500"
-        type="checkbox"
-        role="switch"
-        checked={value}
-        onChange={(e) => onChange(e.target.checked)}
-      />
+    <button
+      type="button"
+      role="switch"
+      aria-checked={value}
+      aria-label={label}
+      onClick={() => onChange(!value)}
+      className="flex min-h-11 w-full items-center gap-3 rounded-xl border border-[var(--ac-border)] p-3 text-left"
+    >
+      <span aria-hidden="true" className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border ${value ? "border-red-600 bg-red-600 text-white" : "border-[var(--ac-muted)]"}`}>{value&&<Check size={15}/>}</span>
       <span>{label}</span>
-    </label>
+    </button>
   );
 }
 export function Photos({

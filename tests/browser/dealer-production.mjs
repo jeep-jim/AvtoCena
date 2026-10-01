@@ -270,7 +270,7 @@ try {
   await page.locator('.dealer-editor-main img[src^="/api/dealers/"]').first().evaluate(img=>img.decode());
   try{await customs.check();}catch(error){
    await page.screenshot({path:path.join(out,'checkbox-failure.png')});
-   console.error('CUSTOMS_DIAGNOSTIC',await customs.evaluate(el=>({checked:el.checked,label:el.parentElement.outerHTML,box:el.getBoundingClientRect().toJSON(),active:document.activeElement?.outerHTML})));
+   console.error('CUSTOMS_DIAGNOSTIC',await customs.evaluate(el=>({checked:el.getAttribute('aria-checked'),control:el.outerHTML,box:el.getBoundingClientRect().toJSON()})));
    throw error;
   }
   assert.equal(await customs.isChecked(),true);
