@@ -75,51 +75,6 @@ function safeJsonLd(value: unknown) {
   return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const id = offerRouteId((await params).id);
-  if (parseSpecialId(id)) { const found = await getSpecialOffer(id); return found ? {title:`${specialTitle(found.offer)} — спецпредложение ${found.showcase.name}`,description:found.offer.description.slice(0,180),robots:{index:true,follow:true},alternates:{canonical:`/cars/offer/${id}`}} : {title:"Автомобиль — АвтоЦена",robots:{index:false,follow:false}}; }
-  const storedOffer = await getOfferForPage(id);
-  const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
-  if (!offer) {
-    return {
-      title: "Автомобиль под заказ — АвтоЦена",
-      description: "Каталог автомобилей с полным расчётом стоимости доставки и оформления в России.",
-      robots: { index: false, follow: true },
-    };
-  }
-
-  const saved = await getSavedOfferCalculation(storedOffer!);
-  const presented = presentCatalogOffer(offer);
-  const make = clean(presented.makeLabel);
-  const model = clean(presented.modelLabel);
-  const displayTitle = clean(presented.title) || [make, model].filter(Boolean).join(" ");
-  const year = Number(saved?.draft.year || offer.year || 0);
-  const title = `${displayTitle}${year ? ` ${year}` : ""} — цена автомобиля под ключ`;
-  const totalRub = saved?.calculation.totalRub || (offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer));
-  const market = catalogMarketLabel(offer.market);
-  const priceText = totalRub > 0 ? `${money(totalRub)} ₽` : "рассчитывается";
-  const description = saved
-    ? `${displayTitle}, ${year} г. — ${priceText}. Сохранённый расчёт${saved.draft.deliveryCity ? ` с доставкой: ${saved.draft.deliveryCity}` : "; доставка по РФ не включена"}. ${[saved.draft.engineCc ? `${saved.draft.engineCc} см³` : "",saved.draft.powerHp ? `${saved.draft.powerHp} л.с.` : ""].filter(Boolean).join(", ")}.`
-    : `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Стоимость доставки и состав расчёта смотрите в карточке.`;
-  const canonical = offerPath(offer);
-  const images = rankedCatalogImageUrls(offer).map(absoluteAvtocenaUrl).filter(Boolean).slice(0, 12);
-
-  return {
-    title,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      type: "website",
-      title,
-      description,
-      url: canonical,
-      images: images.map(url => ({ url, alt: displayTitle || `${make} ${model}` })),
-    },
-    twitter: { card: "summary_large_image", title, description, images },
-    robots: { index: true, follow: true, "max-image-preview": "large" },
-  };
-}
-
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const id = offerRouteId((await params).id);
   if (parseSpecialId(id)) return <>{children}</>;

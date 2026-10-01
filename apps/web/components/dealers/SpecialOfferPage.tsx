@@ -72,6 +72,7 @@ export async function SpecialOfferPage({
   return (
     <main
       data-offer-id={id}
+      data-offer-share-name={title} data-offer-share-year={o.year} data-offer-share-engine-cc={o.engineCc} data-offer-share-fuel={o.fuel}
       data-offer-price-rub={c.totalRub || undefined}
       data-offer-preview={JSON.stringify({ ...snapshot, totalRub: c.totalRub })}
       className="ac-offer-page ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]"
