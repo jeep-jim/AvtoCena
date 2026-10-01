@@ -2,7 +2,7 @@
  * Rounded planning distances, NOT measured navigation routes or carrier quotes.
  * Novokuznetsk is a commercial anchor, not a regression from kilometres.
  * Edit this versioned table when actual carrier tariffs become available. */
-export const DELIVERY_TARIFF_VERSION = "market-origins-20260928-v3";
+export const DELIVERY_TARIFF_VERSION = "market-origins-20261001-v4";
 const routes: Record<string, [string, number, number?]> = {
  "владивосток": ["Владивосток", 0, 0],
  // Yandex Maps route checked 2026-09-28: 97–101 km, rounded for this
@@ -13,6 +13,9 @@ const routes: Record<string, [string, number, number?]> = {
  "чита": ["Чита", 3000], "улан-удэ": ["Улан-Удэ", 3650], "иркутск": ["Иркутск", 4100],
  "красноярск": ["Красноярск", 5150], "кемерово": ["Кемерово", 5700],
  "новокузнецк": ["Новокузнецк", 5900, 120000], "новосибирск": ["Новосибирск", 6000, 130000],
+ // Gorno-Altaysk planning km rounded from road-route calculators (2026-10-01):
+ // avtodispetcher.ru/distance/route?from=Владивосток&to=Горно-Алтайск (6073 km).
+ "горно-алтайск": ["Горно-Алтайск", 6100],
  "барнаул": ["Барнаул", 6200], "томск": ["Томск", 5900], "омск": ["Омск", 6650],
  "тюмень": ["Тюмень", 7250], "челябинск": ["Челябинск", 7500], "екатеринбург": ["Екатеринбург", 7600],
  "уфа": ["Уфа", 7900], "пермь": ["Пермь", 7950], "самара": ["Самара", 8350],
@@ -31,6 +34,9 @@ const westernRoutes: Record<string, [number, number, number]> = {
  "улан-удэ": [6400, 6050, 6300], "иркутск": [5950, 5600, 5850],
  "красноярск": [4900, 4550, 4800], "кемерово": [4350, 4000, 4250],
  "новокузнецк": [4550, 4200, 4450], "новосибирск": [4050, 3700, 3950],
+ // Mineralnye Vody 4276 km: maintransport.ru/distance/mineralynyie-vodyi-gorno-altaysk
+ // Astrakhan 4088 km, Saint Petersburg 4386 km: avtodispetcher.ru/distance/
+ "горно-алтайск": [4300, 4100, 4400],
  "барнаул": [4250, 3900, 4150], "томск": [4200, 3850, 4100],
  "омск": [3400, 3050, 3300], "тюмень": [2800, 2450, 2700],
  "челябинск": [2450, 2100, 2550], "екатеринбург": [2600, 2250, 2400],

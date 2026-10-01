@@ -368,3 +368,15 @@ html[data-theme] .crm-root .crm-permission input[role="switch"]:disabled{opacity
 .crm-game-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border-radius:12px;background:var(--ac-surface-2,#283342);color:var(--ac-text);font-weight:800;white-space:nowrap}.crm-game-link:hover{box-shadow:inset 0 0 0 1px var(--ac-border)}.crm-game-emoji{display:inline-block;transform:scaleX(-1)}@media(max-width:767px){.crm-game-label{display:none}.crm-game-link{padding:8px 6px;gap:0;font-size:17px}}
 
 .crm-event-group>summary{padding-right:76px}.crm-event-count{position:absolute;right:40px;top:18px;display:flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;background:#2563eb;color:#fff;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}.crm-event-children{padding:0 12px 12px 20px;border-left:2px solid #2563eb;margin:0 12px 12px}.crm-event-children>.crm-event{margin-top:8px}.crm-event-group>summary:focus-visible{outline:2px solid #60a5fa;outline-offset:-3px}
+
+/* Lead details: both columns start at the same edge; status actions stay below. */
+.crm-lead-detail-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+.crm-lead-detail-info,.crm-lead-detail-chat{min-width:0}
+.crm-lead-detail-chat>.crm-discussion{margin-top:0}
+.crm-lead-detail-actions{clear:both;min-width:0}
+.crm-message-actions{display:flex;gap:14px;flex-wrap:wrap}
+.crm-message-actions button{font-size:11px;color:var(--ac-muted);text-decoration:underline;min-height:32px}
+.crm-message-edit textarea{display:block;width:100%;min-height:90px;resize:vertical;padding:8px;border:1px solid var(--ac-border);border-radius:8px;background:var(--ac-surface-2);color:var(--ac-text);font-size:14px}
+.crm-message-edit>div{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.crm-message-edit button{min-height:36px;font-size:12px;font-weight:700}.crm-message-edit button[type=submit]{color:var(--ac-text)}
+@media(min-width:1024px){.crm-lead-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
