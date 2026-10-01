@@ -90,7 +90,7 @@ export function DealerEditor({
       offers: s.offers.map((o) => (o.id === id ? { ...o, ...v } : o)),
     }));
   return (
-    <div className="space-y-6">
+    <div className="dealer-editor space-y-4">
       <div className="flex flex-wrap gap-2">
         {[
           ["profile", "Компания и офисы"],
@@ -110,7 +110,7 @@ export function DealerEditor({
       </div>
       {recovery&&<div className="dealer-editor-panel"><p>Есть несохранённые изменения из прошлой сессии.</p><div className="mt-3 flex gap-2"><button className={button} onClick={()=>{base.current=recovery.base||initial;setS(recovery.value);setRecovery(null);}}>Восстановить изменения</button><button className={button} onClick={()=>setRecovery(null)}>Оставить сохранённую версию</button></div></div>}
       <div className="dealer-editor-layout">
-      <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-5">
+      <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-4">
         {tab === "profile" && (
           <>
             <Toggle
@@ -139,7 +139,7 @@ export function DealerEditor({
               О компании
               <textarea
                 className={input}
-                rows={5}
+                rows={3}
                 value={s.description}
                 onChange={(e) => patch({ description: e.target.value })}
               />
@@ -154,7 +154,7 @@ export function DealerEditor({
                   <h3>{label}</h3>
                   {key === "banner" && <>
                     <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Оставьте текст и логотип с отступом от краёв.</p>
-                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-1800x600.webp" })}>Использовать баннер TopAvto</button>}
+                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v2.webp" })}>Использовать новый баннер TopAvto</button>}
                   </>}
                   <Photos
                     dealerId={s.dealerId}
@@ -320,9 +320,9 @@ export function DealerEditor({
       <aside className="dealer-editor-sidebar">
        <section className="dealer-editor-panel space-y-3">
         <h2 className="text-lg font-black">Сохранение</h2>
-        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-3 font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
+        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
         {tab==='offers'&&active&&<button type="button" disabled={busy} className={button+' w-full'} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
-        <p role="status" className="text-sm leading-5">{message||'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.'}</p>
+        <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.':'Изменения появятся на странице после сохранения.')}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
         <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Открыть сохранённую страницу ↗</Link>
        </section>
@@ -339,11 +339,11 @@ export function DealerEditor({
       </aside>
       </div>
       <style>{`
-       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start}
        .dealer-editor-main{border:0;padding:0;margin:0}
        .dealer-editor-sidebar{position:sticky;top:90px;display:grid;gap:16px;min-width:0}
-       .dealer-editor-panel{padding:20px;border:1px solid var(--ac-border);border-radius:20px;background:var(--ac-surface)}
-       .dealer-editor-main input,.dealer-editor-main select{min-height:44px}
+       .dealer-editor-panel{padding:14px;border:1px solid var(--ac-border);border-radius:16px;background:var(--ac-surface)}
+       .dealer-editor-main input,.dealer-editor-main select{min-height:40px}
        @media(max-width:1000px){.dealer-editor-layout{grid-template-columns:minmax(0,1fr)}.dealer-editor-sidebar{position:static;grid-row:1;grid-template-columns:repeat(2,minmax(0,1fr))}}
        @media(max-width:600px){.dealer-editor-sidebar{grid-template-columns:minmax(0,1fr)}.dealer-editor-panel{padding:14px}}
       `}</style>

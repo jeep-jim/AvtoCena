@@ -2,7 +2,7 @@ name: Verify dealer banner and Yandex map
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/dealer-banner-yandex-20261001]
+    branches: [main, fix/dealer-banner-yandex-20261001, fix/dealer-compact-profile-20261001]
     paths:
       - 'apps/web/components/dealers/**'
       - 'apps/web/lib/dealers/**'
