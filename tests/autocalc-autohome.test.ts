@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {parseAutohomeDraft} from '../apps/web/lib/autocalc/autohome';
+import {parseAutohomeDraft,savedAutohomeSpecification} from '../apps/web/lib/autocalc/autohome';
 import {sourceIdentity} from '../apps/web/lib/autocalc/sources';
 import {importedOffer} from '../apps/web/lib/dealers/import-offer';
 const page=JSON.parse(readFileSync('tests/fixtures/autocalc/autohome-74683.json','utf8'));
@@ -19,4 +19,10 @@ test('AutoHome rejects another spec and does not turn rounded litres or electric
  const d=parseAutohomeDraft(html(page),'74683',url);assert.equal(d.draft.engineCc,undefined);
  const ev=structuredClone(page);ev.specDetails.specinfo.funeldetail='纯电动';
  const e=parseAutohomeDraft(html(ev),'74683',url);assert.equal(e.draft.powerHp,undefined);assert.equal(e.draft.power30MinKw,undefined);
+});
+
+test('saved AutoHome rows recover exact cc from their own table instead of rounded legacy litres',()=>{
+ const row:any={id:'car',sourceId:'autohome_new_china_open',sourceOfferId:'74683',engineCc:2000,fuel:'petrol',operational:{sourceSpecifications:{sourceId:'autohome_new_china_open',sourceOfferId:'74683',specificationId:'74683',groups:[{name:'发动机',items:[{name:'(mL)',value:'1987'}]}]}}};
+ assert.equal(savedAutohomeSpecification(row).engineCc,1987);assert.equal(row.engineCc,2000);
+ row.operational.sourceSpecifications.sourceOfferId='other';assert.equal(savedAutohomeSpecification(row).engineCc,undefined);
 });

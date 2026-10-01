@@ -54,7 +54,9 @@ async function savedSource(url:string):Promise<SourceDraft|null>{
  for(const source of identity.ids){const offer=await getOfferFromCurrentShard(stableOfferId(source,identity.id)).catch(()=>null);
   if(!offer||offer.sourceId!==source||String(offer.sourceOfferId)!==identity.id||offer.market!==identity.market||offer.status!=='active')continue;
   // Use the admitted, identity-bound snapshot, never scan or rebuild a market.
-  const data=fromRow(offer,url,identity.market);data.capturedAt=offer.updatedAt;
+  const row=source==='autohome_new_china_open'?(await import('./autohome')).savedAutohomeSpecification(offer):offer;
+  const data=fromRow(row,url,identity.market);data.capturedAt=offer.updatedAt;
+  if(source==='autohome_new_china_open'&&!row.engineCc&&row.fuel!=='electric')data.notes!.push('Точный объём в см³ не подтверждён сохранёнными данными. Уточните по документам автомобиля.');
   data.message=`Использованы сохранённые данные АвтоЦены от ${new Date(offer.updatedAt).toLocaleDateString('ru-RU',{timeZone:'Asia/Krasnoyarsk'})}. Проверьте актуальность цены в объявлении.`;return data;
  }return null;
 }

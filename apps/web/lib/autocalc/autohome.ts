@@ -1,3 +1,5 @@
+import {enrichOfferWithSourceTableDisplacement} from '../catalog/source-table-displacement';
+import type {VehicleOffer} from '../catalog/types';
 import {translateCatalogText} from '../catalog/presentation';
 import {autohomeNewSpecificationEvidence,parseAutohomeExactConfigFields,exactAutohomeSpecGalleryImages} from '../catalog/autohome-new-exact-source';
 import {readSource} from './source';
@@ -34,4 +36,14 @@ export async function loadAutohomeDraft(specId:string,signal:AbortSignal):Promis
   if(gallery){const exact=exactAutohomeSpecGalleryImages(gallery.html,specId);if(exact.length)data.images=exact;}
  }
  return data;
+}
+
+/** Old catalog rows may contain rounded litres. Recover cc only from their own retained evidence. */
+export function savedAutohomeSpecification(offer:VehicleOffer):VehicleOffer{
+ const table=enrichOfferWithSourceTableDisplacement({...offer,engineCc:undefined});
+ if(table.engineCc)return table;
+ const raw=offer.operational?.raw as any;
+ const fields=raw?.configSpecId===String(offer.sourceOfferId)?raw.configFields:null;
+ const evidence=fields?autohomeNewSpecificationEvidence({energy:fields.energy,engine:fields.engine,displacementCcValues:fields.displacementCcValues}):null;
+ return {...offer,engineCc:evidence?.engineCc.status==='exact'?evidence.engineCc.value:undefined};
 }
