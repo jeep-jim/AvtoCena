@@ -102,7 +102,7 @@ export function Photos({
               alt={p.caption || `Фото ${i + 1}`}
             />
             <div className="flex justify-between text-xs">
-              <button
+              {!single && <button
                 type="button"
                 disabled={busy || i === 0}
                 onClick={() => {
@@ -111,8 +111,8 @@ export function Photos({
                   onChange(next);
                 }}
               >
-                {single ? "" : "←"}
-              </button>
+                ←
+              </button>}
               <button
                 type="button"
                 disabled={busy}
@@ -133,7 +133,8 @@ export function Photos({
         onChange={(e) => void upload(e.target.files)}
         className="max-w-full text-sm"
       />
-      <div className="flex gap-2">
+      <details open={single ? undefined : true}><summary className="cursor-pointer text-xs text-[var(--ac-muted)]">Загрузить по ссылке</summary>
+      <div className="mt-2 flex gap-2">
         <input
           className={input}
           type="url"
@@ -151,6 +152,7 @@ export function Photos({
           Загрузить
         </button>
       </div>
+      </details>
       <p className="text-xs text-[var(--ac-muted)]">
         {busy
           ? "Загружаем…"

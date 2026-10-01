@@ -320,9 +320,9 @@ export function DealerEditor({
       <aside className="dealer-editor-sidebar">
        <section className="dealer-editor-panel space-y-3">
         <h2 className="text-lg font-black">Сохранение</h2>
-        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-3 font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
+        <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
         {tab==='offers'&&active&&<button type="button" disabled={busy} className={button+' w-full'} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
-        <p role="status" className="text-sm leading-5">{message||'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.'}</p>
+        <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.':'Изменения появятся на странице после сохранения.')}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
         <Link className="block text-sm text-red-500 underline" target="_blank" href={`/dealers/${s.dealerId}?preview=1`}>Открыть сохранённую страницу ↗</Link>
        </section>
