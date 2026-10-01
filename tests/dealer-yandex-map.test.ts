@@ -21,7 +21,7 @@ test('saved coordinates retain correct Yandex longitude/latitude order and red p
 test('built-in TopAvto banner is accepted only for the pilot dealer',()=>{
  assert.equal(mediaUrl('/dealers/topavto-banner-1800x600.webp','dealer_topavto'),'/dealers/topavto-banner-1800x600.webp');
  assert.throws(()=>mediaUrl('/dealers/topavto-banner-1800x600.webp','another'));
- assert.equal(mediaUrl('/dealers/topavto-banner-v2.webp','dealer_topavto'),'/dealers/topavto-banner-v2.webp');
- assert.throws(()=>mediaUrl('/dealers/topavto-banner-v2.webp','another'));
+ assert.equal(mediaUrl('/dealers/topavto-banner-v3.webp','dealer_topavto'),'/dealers/topavto-banner-v3.webp');
+ assert.throws(()=>mediaUrl('/dealers/topavto-banner-v3.webp','another'));
  assert.throws(()=>mediaUrl('/dealers/unknown.webp','dealer_topavto'));
 });

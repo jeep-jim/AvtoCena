@@ -20,7 +20,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.getByRole('button',{name:'Показать Яндекс Карту',exact:true}).click();
  let url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('text'),'Новокузнецк, ТРК Планета');
  await page.getByLabel('Выберите офис').selectOption('point');url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('pt'),'37.61,55.75,pm2rdm');
- await page.getByRole('button',{name:'Использовать новый баннер TopAvto',exact:true}).click();assert.ok(await page.locator('img[src="/dealers/topavto-banner-v2.webp"]').count()>1);
+ await page.getByRole('button',{name:'Использовать новый баннер TopAvto',exact:true}).click();assert.ok(await page.locator('img[src="/dealers/topavto-banner-v3.webp"]').count()>1);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
  await page.screenshot({path:`${out}/${theme}-${width}.png`});console.log(`${theme} ${width}: map activation, office switching, banner selection, no overflow/errors OK`);await page.close();
 }}finally{await browser.close();server.close();}
