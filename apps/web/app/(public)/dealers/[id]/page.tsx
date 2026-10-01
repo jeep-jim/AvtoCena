@@ -1,3 +1,4 @@
+import {availableShowcase} from '@/lib/dealers/program-store';
 import {CatalogContent} from "@/components/catalog/CatalogContent";
 import {DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
 import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
@@ -43,6 +44,8 @@ export default async function Page({
     (await searchParams).preview === "1" &&
     await canManageDealer(await getCurrentUser(),(await params).id);
   if (!s || (!s.profileEnabled && !preview)) notFound();
+  if(!preview)s=await availableShowcase(s);
+  if(!s.profileEnabled&&!preview)notFound();
   if(s.specialsEnabled)s=await withDealerRate(s);
   const dealer=await resolveDealerBrowsingContext(s.dealerId,preview);
   const catalog=<CatalogContent params={await searchParams} dealer={dealer} embedded/>;

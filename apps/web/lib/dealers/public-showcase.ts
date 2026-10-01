@@ -1,3 +1,4 @@
+import {availableShowcase} from './program-store';
 import {withDealerRate} from './exchange-rate';
 import { readShowcase } from "./showcase-store";
 import {
@@ -12,7 +13,7 @@ export function publicRail(s: DealerShowcase, city = "") {
     ? s.offers
         .filter((o) => o.status === "published")
         .map((o) => {
-          const c = calculateSpecial(s, o, city || o.defaultCity);
+          const c = calculateSpecial(s, o);
           return {
             id: o.id,
             href: specialPath(s.dealerId, o.id),
@@ -30,7 +31,7 @@ export async function getSpecialOffer(value: string, preview = false) {
   const parsed = parseSpecialId(value);
   if (!parsed) return null;
   const stored = await readShowcase(parsed.dealerId);
-  const showcase = stored ? await withDealerRate(stored) : null;
+  const showcase = stored ? await withDealerRate(preview?stored:await availableShowcase(stored)) : null;
   if (!showcase || (!preview && !showcase.specialsEnabled)) return null;
   const offer = showcase.offers.find(
     (o) => o.id === parsed.id && (preview || o.status === "published"),
@@ -41,7 +42,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
   const found = await getSpecialOffer(id);
   if (!found) return null;
   const { showcase: s, offer: o } = found;
-  const c = calculateSpecial(s, o, city || o.defaultCity);
+  const c = calculateSpecial(s, o);
   return {
     id,
     offerId: id,

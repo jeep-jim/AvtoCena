@@ -1,6 +1,4 @@
 import {dealerProfilePath} from '@/lib/dealers/profile-url';
-import { DealerCitySync } from "./DealerCitySync";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
@@ -31,11 +29,7 @@ export async function SpecialOfferPage({
   const found = await getSpecialOffer(id, preview);
   if (!found) notFound();
   const { showcase: s, offer: o } = found;
-  let city = (await cookies()).get("avtocena_city")?.value || "";
-  try {
-    city = decodeURIComponent(city);
-  } catch {}
-  const c = calculateSpecial(s, o, city || o.defaultCity);
+  const c = calculateSpecial(s, o);
   const title = specialTitle(o);
   const snapshot = {
     id,
@@ -77,7 +71,6 @@ export async function SpecialOfferPage({
       data-offer-preview={JSON.stringify({ ...snapshot, totalRub: c.totalRub })}
       className="ac-offer-page ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]"
     >
-      <DealerCitySync />
       <PublicHeader backHref="/" backLabel="На главную" />
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-6">
         {preview && (
@@ -115,7 +108,7 @@ export async function SpecialOfferPage({
           <div className="ac-inline-parameters min-w-0">
             <section className="ac-offer-price-panel rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5">
               <p className="text-sm text-[var(--ac-muted)]">
-                {c.city ? `С доставкой: ${c.city}` : "Стоимость автомобиля"}
+                {c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
               <p className="ac-price mt-2 text-3xl font-black">
                 {c.totalRub === null
@@ -161,7 +154,7 @@ export async function SpecialOfferPage({
                 </p>
               )}
               <p className="mt-3 text-xs text-[var(--ac-muted)]">
-                Наличие, стоимость и срок доставки подтвердим перед заключением
+                Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением
                 договора.
               </p>
             </section>

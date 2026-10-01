@@ -193,7 +193,7 @@ test("remote media rejects internal addresses; images are decoded and normalized
     "webp",
   );
 });
-test("owner configuration versions, unpublished isolation and special lead city calculation", async () => {
+test("owner configuration versions, unpublished isolation and base-city price independent of visitor city", async () => {
   const cwd = process.cwd(),
     driver = process.env.JSON_STORAGE_DRIVER;
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "dealer-showcase-"));
@@ -215,7 +215,7 @@ test("owner configuration versions, unpublished isolation and special lead city 
     });
     assert.ok(await getSpecialOffer(id));
     assert.equal((await readShowcase(s.dealerId))?.version, 2);
-    assert.equal((await specialLeadSnapshot(id, "Москва"))?.totalRub, 3218400);
+    assert.equal((await specialLeadSnapshot(id, "Москва"))?.totalRub, 3135900);
     assert.equal((await readPublicFeatures()).affiliatesEnabled, true);
     await savePublicFeatures({ version: 0, affiliatesEnabled: false });
     assert.equal((await readPublicFeatures()).affiliatesEnabled, false);
@@ -247,11 +247,11 @@ test("owner configuration versions, unpublished isolation and special lead city 
     );
     assert.equal(r.status, 200);
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
-    assert.equal(leads[0].totalRub, 3218400);
+    assert.equal(leads[0].totalRub, 3135900);
     assert.equal(leads[0].offerSnapshot.dealerId, s.dealerId);
     assert.equal(leads[0].deliveryQuote.origin, "Бишкек");
-    assert.equal(leads[0].deliveryQuote.amountRub, 225000);
-    assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 225000);
+    assert.equal(leads[0].deliveryQuote.amountRub, 142500);
+    assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 142500);
     const followup = await createLead(new Request("https://avtocena.com/api/leads", {
       method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},
       body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",totalRub:1})

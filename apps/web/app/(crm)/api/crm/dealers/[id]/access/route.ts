@@ -1,3 +1,4 @@
+import {startDealerTrial} from '@/lib/dealers/program-store';
 import {getCurrentUser,getAuthUsers,normalizeTelegramUsername,type AuthUser} from '@/lib/auth';
 import {isPlatformOwner,isPlatformTeam} from '@/lib/platform-access';
 import {readDataJson,mutateDataJson} from '@/lib/data';
@@ -26,6 +27,7 @@ export async function PUT(req:Request,{params}:{params:Promise<{id:string}>}){
    targetId=target.id;
    return users.map(u=>u.id===target.id?{...u,dealerApproved:body.approved===true,sessionVersion:(u.sessionVersion||0)+1,updatedAt:new Date().toISOString()}:u);
   });
+  if(body.approved===true)await startDealerTrial(id);
   await recordCrmActivity(actor,{type:'dealer_access_updated',title:body.approved===true?'Подтверждён доступ дилера':'Отключён доступ дилера',visibility:'management',entityType:'dealer',entityId:id,href:`/crm/dealers/${id}`,text:`Аккаунт: ${targetId}`});
   return Response.json({ok:true},{headers:{'Cache-Control':'no-store'}});
  }catch(e){return Response.json({error:e instanceof Error?e.message:'Не удалось сохранить доступ'},{status:400});}

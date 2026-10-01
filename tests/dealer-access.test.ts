@@ -94,13 +94,13 @@ test('unreleased dealer landing and demo return 404/noindex; only team preview c
  const old=process.env.AUTH_SECRET;process.env.AUTH_SECRET='dealer-removal-test';
  const call=(url:string,user?:any)=>{const payload=Buffer.from(JSON.stringify({...user,exp:Math.floor(Date.now()/1000)+60})).toString('base64url');const cookie=payload+'.'+createHmac('sha256','dealer-removal-test').update(payload).digest('base64url');return middleware(new NextRequest('https://avtocena.com'+url,{headers:user?{cookie:'avtocena_session='+cookie}:{}}));};
  try{
-  for(const url of ['/dealers','/dealers?preview=1','/dealers?sent=1','/dealers/demo','/dealers/demo?preview=1']){
+  for(const url of ['/dealers/demo','/dealers/demo?preview=1']){
    const r=await call(url);assert.equal(r.status,404,url);assert.match(r.headers.get('x-robots-tag')||'',/noindex/);assert.doesNotMatch(await r.text(),/Первая CRM|Подключиться бесплатно/);
    assert.equal((await call(url,{id:'external',role:'owner',companyId:'external'})).status,404);
   }
   const team={id:'user_nstass',role:'owner',companyId:'dealer_topavto'};
-  assert.equal((await call('/dealers',team)).status,404);
-  const preview=await call('/dealers?preview=1',team);assert.equal(preview.headers.get('x-middleware-next'),'1');assert.match(preview.headers.get('x-robots-tag')||'',/noindex/);
+  assert.equal((await call('/dealers',team)).headers.get('x-middleware-next'),'1'); // visibility is now enforced by the server page setting
+  const preview=await call('/dealers/demo?preview=1',team);assert.equal(preview.headers.get('x-middleware-next'),'1');assert.match(preview.headers.get('x-robots-tag')||'',/noindex/);
   for(const url of ['/dealers/dealer_topavto','/dealers/topavto-banner-v3.webp','/cars'])assert.equal((await call(url)).headers.get('x-middleware-next'),'1',url);
  }finally{if(old===undefined)delete process.env.AUTH_SECRET;else process.env.AUTH_SECRET=old;}
 });

@@ -1,0 +1,12 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {DealerWorkspace} from '../../apps/web/components/dealers/DealerWorkspace';
+import {DealerPlatformManager} from '../../apps/web/components/dealers/DealerPlatformManager';
+import {PartnerLanding,KnowledgeBase} from '../../apps/web/components/partners/PartnerPages';
+import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
+import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
+const q=new URLSearchParams(location.search),kind=q.get('view')||'editor',s=defaultShowcase('dealer_topavto');s.description='Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
+const root=createRoot(document.getElementById('root')!);
+if(kind==='partners')root.render(<PartnerLanding lang={(q.get('lang')||'ru') as any} preview={false} program={DEFAULT_PROGRAM} knowledgeEnabled partnersEnabled/>);
+else if(kind==='knowledge')root.render(<KnowledgeBase lang={(q.get('lang')||'ru') as any} preview={false} knowledgeEnabled partnersEnabled/>);
+else root.render(<main className="crm-root crm-workspace min-h-screen"><header className="crm-header"><div className="crm-header-inner"><div className="crm-topbar"><a href="/" className="crm-brand"><img src="/logo/avtocena-mark-dark.svg" className="crm-brand-mark" width="36" height="36" alt=""/><span>CRM</span></a></div><nav className="crm-navigation" aria-label="Разделы CRM">{["Обзор","Заявки","Клиенты","Команда","Рынки","Дилеры"].map(x=><a key={x} href="#" aria-current={x==="Дилеры"?"page":undefined}>{x}</a>)}</nav></div></header><div className="crm-content"><div className="crm-page-heading"><h1>{kind==='platform'?'Дилеры':'ТопАвто'}</h1></div>{kind==='platform'?<DealerPlatformManager dealers={[{id:'dealer_topavto',name:'ТопАвто',city:'Новокузнецк',status:'verified'}]} applications={[{id:'app',companyName:'Компания-пример',city:'Шанхай',contactName:'Контакт',status:'new',partnerType:'supplier'}]} initialProgram={DEFAULT_PROGRAM} initialFeatures={{version:0,affiliatesEnabled:true}}/>:<DealerWorkspace initial={s} features={{version:0,affiliatesEnabled:true}} owner/>}</div></main>);

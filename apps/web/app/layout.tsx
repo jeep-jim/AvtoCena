@@ -304,7 +304,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body suppressHydrationWarning>
         {children}
         <TelegramMiniApp />
-        <PublicLegalFooter />
+        <PublicLegalFooter partnersEnabled={features.partnersEnabled} knowledgeEnabled={features.knowledgeEnabled}/>
         <PublicUiEnhancer />
         <CurrencyChartEnhancer />
         <RoutePreloader />
