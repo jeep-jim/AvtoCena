@@ -14,9 +14,9 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     if(parameters?.dataset.sharePending){setStatus("Дождитесь пересчёта");return;}
     const savedVersion=page?.dataset.offerSavedVersion || document.querySelector<HTMLElement>("[data-offer-saved-version]")?.dataset.offerSavedVersion;
     const target = new URL(offerShareUrl(window.location.href,document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || null,savedVersion));
-    target.searchParams.set("share","2");
+    target.searchParams.set("share","3");
     const estimate=parameters?.dataset.shareEstimate;
-    if(savedVersion)target.searchParams.delete("estimate");
+    if(savedVersion || (parameters && !estimate))target.searchParams.delete("estimate");
     if(estimate&&!savedVersion){target.searchParams.delete('calculation');target.searchParams.delete('direct');target.searchParams.set('estimate',estimate);}
     if(dealer&&!dealer.preview)target.searchParams.set("dealer",dealer.id);
     const price=parameters?.querySelector(".ac-offer-price-panel .ac-price")?.textContent;
@@ -26,10 +26,10 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerRouteId(decodeURIComponent(target.pathname.slice("/cars/offer/".length))) : "");
     const url=(inMini && offerId && !dealer && (!estimate || savedVersion) ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
     if(inMini && offerId){
-      try{await navigator.clipboard.writeText(url.startsWith("https://t.me/") ? `${title}\n${url}` : url);setStatus("Ссылка скопирована");return;}catch{}
+      try{await navigator.clipboard.writeText(`${title}\n${url}`);setStatus("Ссылка скопирована");return;}catch{}
     }
-    if(navigator.share) {try {await navigator.share({url});setStatus("");return;} catch(error) {if((error as Error).name === "AbortError") return;}}
-    try {await navigator.clipboard.writeText(url);setStatus("Ссылка скопирована");}
+    if(navigator.share) {try {await navigator.share({title,text:title,url});setStatus("");return;} catch(error) {if((error as Error).name === "AbortError") return;}}
+    try {await navigator.clipboard.writeText(`${title}\n${url}`);setStatus("Ссылка скопирована");}
     catch {setStatus(inMini ? "Не удалось скопировать ссылку" : "Скопируйте адрес из строки браузера");}
   }
   if(iconOnly) return <button type="button" onClick={share} className={className} aria-label="Поделиться автомобилем" title={status || "Поделиться автомобилем"}><svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12v8h16v-8M12 16V3m-5 5 5-5 5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg><span className="sr-only" aria-live="polite">{status}</span></button>;

@@ -1,7 +1,7 @@
 name: Verify sharing and AutoHome import
 on:
   push:
-    branches: [fix/share-autohome-20261001]
+    branches: [fix/share-readable-20261001]
   pull_request:
     paths:
       - 'apps/web/lib/catalog/offer-share.ts'

@@ -44,6 +44,8 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  const description=`${scenario?.draft.deliveryCity?`Доставка: ${scenario.draft.deliveryCity}. `:''}Фотографии, характеристики и состав стоимости — в карточке автомобиля.`;
  const query=new URLSearchParams();for(const key of ['calculation','direct','powerHp','modificationId','estimate','share','dealer'] as const)if(q[key])query.set(key,q[key]!);
  const url=offerShareUrl(absoluteAvtocenaUrl(offerPath(stored))+(query.size?'?'+query:''),offerPath(stored));
+ // The share message already contains the calculated price; avoid repeating it in its preview.
+ const previewTitle=q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title;
  const images=rankedCatalogImageUrls(pricedOffer).slice(0,3).map(u=>absoluteAvtocenaUrl(protectedPhotoUrl(u,offer.market)));
- return metadata(title,description,url,images,Boolean(scenario||visibleRub||selectionRequired||sellerPricing));
+ return metadata(previewTitle,description,url,images,Boolean(scenario||visibleRub||selectionRequired||sellerPricing));
 }
