@@ -25,10 +25,11 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     const inMini=document.documentElement.dataset.miniapp==="true";
     const offerId=document.querySelector<HTMLElement>("[data-offer-id]")?.dataset.offerId || (target.pathname.startsWith("/cars/offer/") ? offerRouteId(decodeURIComponent(target.pathname.slice("/cars/offer/".length))) : "");
     const url=(inMini && offerId && !dealer && (!estimate || savedVersion) ? miniAppOfferShareUrl(offerId,savedVersion) : null) || target.toString();
-    if(inMini && offerId){
+    const desktop=window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if(desktop || (inMini && offerId)){
       try{await navigator.clipboard.writeText(`${title}\n${url}`);setStatus("Ссылка скопирована");return;}catch{}
     }
-    if(navigator.share) {try {await navigator.share({title,text:title,url});setStatus("");return;} catch(error) {if((error as Error).name === "AbortError") return;}}
+    if(navigator.share) {try {await navigator.share({title,text:`${title}\n${url}`});setStatus("");return;} catch(error) {if((error as Error).name === "AbortError") return;}}
     try {await navigator.clipboard.writeText(`${title}\n${url}`);setStatus("Ссылка скопирована");}
     catch {setStatus(inMini ? "Не удалось скопировать ссылку" : "Скопируйте адрес из строки браузера");}
   }

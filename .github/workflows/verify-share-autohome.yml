@@ -1,7 +1,7 @@
 name: Verify sharing and AutoHome import
 on:
   push:
-    branches: [fix/share-readable-20261001]
+    branches: [fix/desktop-share-icons-20261001]
   pull_request:
     paths:
       - 'apps/web/lib/catalog/offer-share.ts'
@@ -26,6 +26,15 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs
+      - name: Desktop action icons with copy and PDF buttons
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-actions-icons.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: desktop-action-icons
+          path: artifacts/offer-actions/*.png
       - name: Live AutoHome link from the reported failure
         run: |
           node --import tsx -e "import('./apps/web/lib/autocalc/load.ts').then(async m=>{const r=await m.loadSource('https://www.autohome.com.cn/spec/74683/#pvareaid=6861993');console.log(JSON.stringify({make:r.make,model:r.model,draft:r.draft,currency:r.currency,price:r.price,images:r.images.length,message:r.message}));if(!r.model||!r.images.length||r.currency!=='CNY')process.exit(1);})"
