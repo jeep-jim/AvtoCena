@@ -95,8 +95,8 @@ export function OfferContactActionsStyles() {
       .ac-offer-actions-sidebar[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1fr) 56px 80px 56px}
       .ac-offer-actions-below[data-has-copy="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 56px}
       .ac-offer-actions-below[data-has-copy="true"][data-has-pdf="true"]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 56px 100px 56px}
-      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button{padding-left:44px;padding-right:12px;font-size:14px!important}
-      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>svg,.ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span:has(>svg){left:12px!important}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button{padding-left:48px;padding-right:12px;font-size:14px!important}
+      .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>svg,.ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span:has(>svg){left:20px!important}
       .ac-offer-actions-below[data-has-copy="true"] .ac-offer-contact-button>span{white-space:normal!important}
       .ac-offer-page .ac-offer-actions-sidebar{display:none}
       .ac-offer-page:has([data-spec-desktop][data-open="true"]) .ac-offer-actions-sidebar{display:grid}

@@ -1,5 +1,12 @@
 name: Verify catalog load more
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/CatalogLoadMore.tsx'
+      - 'apps/web/components/catalog/catalog-load-more-action.tsx'
+      - 'tests/browser/catalog-load-more*'
+      - 'apps/web/app/(public)/api/catalog/search/route.ts'
+      - '.github/workflows/verify-catalog-load-more.yml'
   push:
     branches: [fix/saved-offer-and-ui-20260920, fix/catalog-pages-parameter-ux, main, fix/catalog-speed-load-more, fix/catalog-gateway-actions, fix/catalog-hydration-final]
     paths:

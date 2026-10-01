@@ -27,6 +27,9 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
   const [total, setTotal] = useState(initialTotal);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const prepared = useRef<{key:string;page:number;at:number;promise:ReturnType<typeof loadMoreCatalog> | ReturnType<typeof loadMoreGreenCorner>} | null>(null);
+  const activeKey = useRef(key);
+  activeKey.current = key;
   const lock = useRef(false);
   const mounted = useRef(true);
   const list = useRef<HTMLDivElement>(null);
@@ -76,17 +79,34 @@ export function CatalogLoadMore({query, initialPage, initialTotal, initialCount,
     return dealerBrowsingHref(`${basePath}?${params}`,dealer);
   }
   const more = page * 24 < total && batches[batches.length - 1].count > 0;
+  function prepareNext() {
+    if (prepared.current?.key === key && prepared.current.page === page + 1 && Date.now()-prepared.current.at<60_000) return prepared.current.promise;
+    const promise = green ? loadMoreGreenCorner(greenQuery, page + 1) : loadMoreCatalog(query, page + 1);
+    const entry = {key,page:page+1,at:Date.now(),promise};
+    prepared.current = entry;
+    void promise.catch(()=>{if(prepared.current===entry)prepared.current=null;});
+    return promise;
+  }
+  useEffect(()=>{
+    if(!more)return;
+    // Prepare one batch while the visitor reads the visible cars. Do not
+    // recursively prefetch the catalogue, or append until explicitly asked.
+    const connection=(navigator as Navigator & {connection?:{saveData?:boolean;effectiveType?:string}}).connection;
+    if(connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType||""))return;
+    const timer=window.setTimeout(()=>{void prepareNext().catch(()=>{});},350);
+    return ()=>window.clearTimeout(timer);
+  },[key,page,more]);
   async function load() {
     if (lock.current) return;
     lock.current = true; setBusy(true); setError("");
     try {
-      const result = await (green ? loadMoreGreenCorner(greenQuery, page + 1) : loadMoreCatalog(query, page + 1));
-      if (!mounted.current) return;
+      const result = await prepareNext();
+      if (!mounted.current || activeKey.current !== key) return;
       setBatches(current => [...current, {page: result.page, cards: result.cards, count: result.ids.length}]);
       setTotal(result.total);
     } catch {
-      if (mounted.current) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
-    } finally {lock.current = false; if (mounted.current) setBusy(false);}
+      if (mounted.current && activeKey.current===key) setError("Не удалось загрузить автомобили. Попробуйте ещё раз — список сохранён.");
+    } finally {lock.current = false; if (mounted.current && activeKey.current===key) setBusy(false);}
   }
   return <div ref={list}>
     {batches.map(batch => <div key={batch.page} data-catalog-batch={batch.page} className="mb-2.5 grid min-w-0 grid-cols-2 gap-2.5 sm:mb-3 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{batch.cards}</div>)}
