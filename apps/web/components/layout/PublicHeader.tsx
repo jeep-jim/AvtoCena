@@ -158,7 +158,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             ) : null}
 
             {dealer ? <Link href={dealer.href} className="flex min-w-0 items-center gap-2.5" aria-label={`Страница ${dealer.name}`}>
-              {(dealer.logoLight||dealer.logoDark)?<img src={theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight)} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
+              {(dealer.headerIcon||dealer.logoLight||dealer.logoDark)?<img src={dealer.headerIcon||(theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight))} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
               <span className="truncate text-lg font-black md:text-xl">{dealer.name}</span>
             </Link> : (            <Link href="/" className="flex min-w-0 items-center gap-2.5">
               <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />

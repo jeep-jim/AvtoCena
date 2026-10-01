@@ -22,7 +22,9 @@ const actor = {
   id: "test-owner",
   displayName: "Тестовый владелец",
   telegramUsername: "fixture_owner",
-  role: "owner",
+  role: "dealer",
+  companyId: "dealer_topavto",
+  dealerApproved: true,
   status: "active",
   sessionVersion: 0,
 };
@@ -214,7 +216,7 @@ try {
       headers: { ...r.request().headers(), origin: "https://avtocena.com" },
     }),
   );
-  await page.goto(`${origin}/crm/dealers/dealer_topavto/showcase`);
+  await page.goto(`${origin}/dealer-cabinet`);
   await page
     .getByRole("button", { name: "Фото покупателей", exact: true })
     .click();
@@ -261,6 +263,19 @@ try {
   await page.reload();await page.getByRole('button',{name:'Автомобили',exact:true}).click();
   await page.getByRole('button',{name:'Toyota Corolla · Черновик',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'Corolla');
   await page.screenshot({path:path.join(out,'new-car-persisted.png')});
+  for(const [label,value] of [['Год выпуска','2024'],['Месяц производства (1–12)','6'],['Объём, см³','1500'],['Мощность ДВС / ЭВ, л.с.','100'],['Коробка передач','Автомат'],['Привод','Передний'],['Кузов','Седан'],['Цвет','Белый'],['Цена автомобиля, $','20000']])await page.getByLabel(label,{exact:true}).fill(value);
+  await page.getByLabel('Загрузить фотографии').setInputFiles({name:'corolla.png',mimeType:'image/png',buffer:png});
+  await page.locator('img[src^="/api/dealers/dealer_topavto/media/"]').first().waitFor();
+  await page.getByRole('switch',{name:'Таможенные платежи включены в закупочную цену',exact:true}).check();
+  await page.getByLabel('Статус',{exact:true}).selectOption('published');
+  await page.getByRole('button',{name:'Сохранить настройки дилера',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Настройки сохранены'}).waitFor();
+  const published=JSON.parse(fs.readFileSync(path.join(dir,'dealers/showcases/dealer_topavto.json'),'utf8'));
+  assert.equal(published.offers[1].status,'published');assert.equal(published.offers[1].photos.length,1);
+  await page.goto(`${origin}/cars/offer/special_dealer_topavto__${published.offers[1].id}?dealer=dealer_topavto`);
+  await page.getByRole('heading',{name:'Toyota Corolla',exact:true}).waitFor();
+  assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
+  await page.screenshot({path:path.join(out,'new-car-published.png')});
   await context.close();
   console.log(
     JSON.stringify({

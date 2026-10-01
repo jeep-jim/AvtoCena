@@ -65,6 +65,7 @@ export type DealerShowcase = {
   specialsEnabled: boolean;
   name: string;
   description: string;
+  headerIcon?: string;
   logoLight: string;
   logoDark: string;
   banner: string;
@@ -331,6 +332,7 @@ export function normalizeShowcase(
     specialsEnabled: raw.specialsEnabled === true,
     name: text(raw.name, 120),
     description: text(raw.description, 5000),
+    headerIcon: mediaUrl(raw.headerIcon,id),
     logoLight: mediaUrl(raw.logoLight, id),
     logoDark: mediaUrl(raw.logoDark, id),
     banner: mediaUrl(raw.banner, id),
@@ -431,22 +433,8 @@ export function normalizeShowcase(
   if (new Set(s.offers.map((o) => o.id)).size !== s.offers.length)
     throw Error("Автомобили не должны повторяться");
   for (const o of s.offers.filter((o) => o.status === "published")) {
-    if (
-      !o.make ||
-      !o.model ||
-      !o.photos.length ||
-      !o.year ||
-      !o.productionMonth ||
-      !o.transmission ||
-      !o.drive ||
-      !o.body ||
-      !o.color ||
-      (!o.engineCc && o.fuel !== "electric") ||
-      !o.powerHp
-    )
-      throw Error(
-        `Заполните характеристики и фото: ${specialTitle(o) || "новый автомобиль"}`,
-      );
+    const missing=specialPublicationFields(o);
+    if(missing.length)throw Error(`Заполните характеристики и фото: ${specialTitle(o)||"новый автомобиль"}. Не хватает: ${missing.join(", ")}`);
     const c = calculateSpecial(s, o);
     if (s.specialsEnabled && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
@@ -455,4 +443,9 @@ export function normalizeShowcase(
   if (s.specialsEnabled && !s.offers.some((o) => o.status === "published"))
     throw Error("Добавьте хотя бы одно готовое спецпредложение");
   return s;
+}
+
+/** Shared completeness checklist; pricing rules remain in calculateSpecial. */
+export function specialPublicationFields(o:SpecialOffer):string[]{
+ return [!o.make&&'марка',!o.model&&'модель',!o.photos.length&&'фотографии',!o.year&&'год выпуска',!o.productionMonth&&'месяц производства',!o.transmission&&'коробка передач',!o.drive&&'привод',!o.body&&'кузов',!o.color&&'цвет',(!o.engineCc&&o.fuel!=='electric')&&'объём двигателя',!o.powerHp&&'мощность'].filter(Boolean) as string[];
 }

@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   calculateSpecial,
+  specialPublicationFields,
   type DealerShowcase,
   type DealerPhoto,
   type SpecialOffer,
@@ -163,14 +164,16 @@ export function DealerEditor({
                 onChange={(e) => patch({ description: e.target.value })}
               />
             </label>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {[
+                ["headerIcon", "Иконка в шапке"],
                 ["logoLight", "Логотип для светлой темы"],
                 ["logoDark", "Логотип для тёмной темы"],
                 ["banner", "Баннер компании"],
               ].map(([key, label]) => (
                 <section className="space-y-2" key={key}>
                   <h3>{label}</h3>
+                  {key === "headerIcon" && <p className="text-xs text-[var(--ac-muted)]">Квадратное изображение от 128 × 128 px. Показывается рядом с названием компании при просмотре её каталога и автомобилей.</p>}
                   {key === "banner" && <>
                     <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Логотип загружается отдельно; края обложки могут обрезаться на телефоне.</p>
                     {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v3.webp" })}>Использовать новый баннер TopAvto</button>}
@@ -328,6 +331,7 @@ export function DealerEditor({
       </fieldset>
        {tab==='offers'&&active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
         <h2 className="font-bold">Так выглядит карточка</h2>
+        {specialPublicationFields(active).length>0&&<p className="text-sm text-[var(--ac-muted)]">Для публикации заполните: {specialPublicationFields(active).join(', ')}.</p>}
         {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-sm text-[var(--ac-muted)]">Добавьте фото автомобиля</div>}
         <h3 className="text-xl font-black">{specialTitle(active)||'Название автомобиля'}</h3>
         <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,active.defaultCity].filter(Boolean).join(' · ')}</p>

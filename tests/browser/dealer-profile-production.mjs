@@ -34,6 +34,16 @@ try{
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.getByRole('dialog').waitFor();
   await page.screenshot({path:`${out}/office-${theme}-${width}.png`});await page.keyboard.press('Escape');
   assert.equal(await page.getByRole('dialog').count(),0);
+  if(width>=768){
+   const catalog=page.locator('.dealer-shared-catalog');
+   await catalog.getByRole('button',{name:'Все рынки',exact:true}).click();
+   const options=catalog.locator('.ac-filter-dropdown .ac-filter-option');
+   assert.equal(await options.count(),3);assert.equal(await options.filter({hasText:'Китай'}).count(),0);
+   await catalog.getByRole('button',{name:'Корея',exact:true}).click();
+   await page.waitForURL(/market=korea/);
+   assert.equal(new URL(page.url()).pathname,'/nvkz/topavto');
+   assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
+  }
   await page.getByRole('button',{name:'О компании',exact:true}).click();await page.getByRole('heading',{name:'Направления доставки'}).waitFor();
   await page.locator('.dealer-profile-body').scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/about-${theme}-${width}.png`});
   assert.deepEqual(errors,[]);await page.close();console.log(`${width} ${theme}: real Next layout, shared header, private footer, modal and no overflow OK`);

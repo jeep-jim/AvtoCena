@@ -170,7 +170,8 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     })),
   }).replace(/</g, "\\u003c");
 
-  return <div className={`ac-catalog-page ac-page-copy ${embedded?"dealer-shared-catalog":"min-h-screen bg-[#0f172a] text-white"}`}>
+  const Container=embedded?"div":"main";
+  return <Container className={`ac-catalog-page ac-page-copy ${embedded?"dealer-shared-catalog":"min-h-screen bg-[#0f172a] text-white"}`}>
     {!embedded&&<PublicHeader backHref="/" backLabel="На главную" />}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className={embedded?"w-full py-5":"mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10"}>
@@ -202,5 +203,5 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
         .ac-catalog-page .ac-pagination-current{color:#fff!important;-webkit-text-fill-color:#fff!important}
       }
     ` }} />
-  </div>;
+  </Container>;
 }

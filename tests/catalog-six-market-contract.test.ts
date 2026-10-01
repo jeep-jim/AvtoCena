@@ -24,7 +24,7 @@ test("retired markets cannot re-enter public reads from an older generation", ()
   assert.match(storageSource, /MARKETS\.filter\(\(market\) => Number\(manifest\.markets\?\.\[market\]\?\.count/);
   assert.match(storageSource, /!isActivePublicCatalogMarket\(params\.market\)/);
   assert.match(catalogPageSource, /PUBLIC_CATALOG_MARKET_SET\.has/);
-  assert.match(catalogPageSource, /redirect\("\/cars"\)/);
+  assert.match(catalogPageSource, /redirect\(dealer\?\.href \|\| "\/cars"\)/);
 });
 
 test("the refresh queue has exactly five markets and excludes paused Japan", () => {

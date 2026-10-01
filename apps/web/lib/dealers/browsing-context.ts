@@ -1,5 +1,5 @@
 import type { DealerMarket } from './catalog-markets';
-export type DealerBrowsingContext = {id:string;name:string;logoLight:string;logoDark:string;href:string;preview:boolean;markets:DealerMarket[]};
+export type DealerBrowsingContext = {id:string;name:string;headerIcon?:string;logoLight:string;logoDark:string;href:string;preview:boolean;markets:DealerMarket[]};
 export function dealerBrowsingHref(href:string, dealer:DealerBrowsingContext|null):string {
  if(!dealer || !href.startsWith('/') || href.startsWith('//'))return href;
  const url=new URL(href,'https://avtocena.com');

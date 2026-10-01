@@ -1,4 +1,5 @@
 "use client";
+import {CatalogMarketFlag} from "./CatalogMarketFlag";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import { readSelectedCity } from "../../lib/location/selected-city";
@@ -91,8 +92,8 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
   const active = options.find((item) => item.value === value);
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"} ${className}`}>
     <input type="hidden" name={name} value={value} />
-    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="truncate">{active?.label || placeholder}</span><Chevron open={open} /></button>
-    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); close(); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${value === item.value ? "is-active" : ""}`}><span>{item.label}</span>{value === item.value ? <span>✓</span> : null}</button>)}</div></div> : null}
+    <button type="button" onClick={() => setOpen((current) => !current)} className={`${name === "auctionGrade" && value ? `ac-japan-badge ${auctionGradeColorClass(value)}` : "ac-filter-control"} flex h-13 w-full items-center justify-between gap-2 rounded-[15px] px-4 text-left text-sm font-black`} aria-expanded={open}><span className="flex min-w-0 items-center gap-2 truncate">{name==="market"&&value&&<CatalogMarketFlag market={value} className="h-4 w-6 shrink-0"/>}{active?.label || placeholder}</span><Chevron open={open} /></button>
+    {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2"><div className="ac-hide-scrollbar max-h-64 overflow-y-auto">{options.map((item) => <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); close(); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${value === item.value ? "is-active" : ""}`}><span className="flex items-center gap-2">{name==="market"&&item.value&&<CatalogMarketFlag market={item.value} className="h-4 w-6 shrink-0"/>}{item.label}</span>{value === item.value ? <span>✓</span> : null}</button>)}</div></div> : null}
   </div>;
 }
 
