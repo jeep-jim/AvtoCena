@@ -155,12 +155,12 @@ export function DealerEditor({
               посмотреть только вы.
             </p>
             <Link
-              className="text-red-500 underline"
+              className={button+" inline-flex items-center gap-2"}
               onClick={openDemoPreview}
               href={`/dealers/${s.dealerId}?preview=1`}
               target="_blank"
             >
-              Предпросмотр страницы дилера
+              <Eye size={17}/> Предпросмотр страницы дилера
             </Link>
             <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Ссылка закрепится за вашей компанией после сохранения.</p></div>
             <Field
