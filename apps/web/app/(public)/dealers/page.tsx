@@ -1,10 +1,15 @@
+import {notFound} from "next/navigation";
+import {getCurrentUser} from "@/lib/auth";
+import {isPlatformTeam} from "@/lib/platform-access";
 import {PhoneInput} from "@/components/leads/PhoneInput";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { DealerHeroPreview } from "@/components/dealers/DealerHeroPreview";
 
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
+  robots: {index:false, follow:false, nocache:true},
   title: "АвтоЦена для дилеров — CRM и заявки на автомобили под заказ",
   description: "Готовая CRM для компаний по привозу автомобилей: клиенты, менеджеры, расчёты, Telegram и новые заявки в одном сервисе.",
 };
@@ -60,6 +65,7 @@ function VerifiedIcon({ className = "" }: { className?: string }) {
 
 export default async function DealersLandingPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
+  if (params.preview !== "1" || !isPlatformTeam(await getCurrentUser())) notFound();
   const sent = params.sent === "1";
 
   return (
@@ -71,11 +77,11 @@ export default async function DealersLandingPage({ searchParams }: { searchParam
         <div className="relative mx-auto grid w-full max-w-[1500px] gap-10 px-4 py-14 md:px-8 md:py-20 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
           <div>
             <div className="text-sm font-black uppercase tracking-[.18em] text-red-400">АвтоЦена для дилеров</div>
-            <h1 className="mt-4 max-w-5xl text-[43px] font-black leading-[.96] tracking-[-.055em] sm:text-6xl lg:text-[78px]">Первая CRM для компаний по привозу автомобилей</h1>
+            <h1 className="mt-4 max-w-5xl text-[43px] font-black leading-[.96] tracking-[-.055em] sm:text-6xl lg:text-[78px]">CRM для компаний по привозу автомобилей</h1>
             <p className="mt-6 max-w-3xl text-base font-bold leading-7 text-white/62 md:text-xl md:leading-8">Ведите клиентов, управляйте менеджерами, рассчитывайте автомобили и получайте новые заявки в одной системе. АвтоЦена объединяет покупателей и проверенных дилеров по всей России.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#connect" className="dealer-primary-button rounded-2xl bg-[#ff353d] px-6 py-4 text-base font-black text-white transition hover:brightness-110">Подключиться бесплатно</a>
-              <Link href="/dealers/demo" className="rounded-2xl bg-white px-6 py-4 text-base font-black text-black transition hover:scale-[1.02]">Посмотреть демо</Link>
+              <Link href="/dealers/demo?preview=1" className="rounded-2xl bg-white px-6 py-4 text-base font-black text-black transition hover:scale-[1.02]">Посмотреть демо</Link>
               <a href="#how" className="rounded-2xl bg-white/[.075] px-6 py-4 text-base font-black text-white transition hover:bg-white/[.12]">Как это работает</a>
             </div>
             <div className="mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
@@ -95,7 +101,7 @@ export default async function DealersLandingPage({ searchParams }: { searchParam
             <h2 className="mt-3 text-4xl font-black tracking-[-.05em] md:text-6xl">Система уже понимает автомобильный бизнес</h2>
             <p className="mt-5 text-base font-bold leading-7 text-white/58 md:text-lg">Не нужно месяцами настраивать Bitrix или amoCRM. В АвтоЦена уже есть рынки, цена под ключ, таможня, утильсбор, автомобили в пути, выдача и готовая воронка компании по привозу авто.</p>
           </div>
-          <Link href="/dealers/demo" className="rounded-2xl bg-white/[.08] px-5 py-3 text-sm font-black text-white">Открыть демо CRM →</Link>
+          <Link href="/dealers/demo?preview=1" className="rounded-2xl bg-white/[.08] px-5 py-3 text-sm font-black text-white">Открыть демо CRM →</Link>
         </div>
         <div className="mt-9 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {crmBenefits.map(([number, title, text]) => <article key={number} className="rounded-[1.6rem] bg-[#12151d] p-5 md:p-6"><div className="text-sm font-black text-red-400">{number}</div><h3 className="mt-3 text-2xl font-black tracking-[-.035em]">{title}</h3><p className="mt-3 text-sm font-bold leading-6 text-white/52">{text}</p></article>)}

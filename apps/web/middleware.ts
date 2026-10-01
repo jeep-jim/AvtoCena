@@ -143,6 +143,16 @@ export async function middleware(request: NextRequest) {
 
   const session = await getSession(request);
 
+  // Unreleased dealer marketing pages are private; crawlers must see a real 404.
+  // Do not block these URLs in robots.txt: bots need to observe their removal.
+  if (pathname === "/dealers" || pathname === "/dealers/demo") {
+    const headers = { "X-Robots-Tag": "noindex, nofollow, noarchive", "Cache-Control": "private, no-store" };
+    if (request.nextUrl.searchParams.get("preview") === "1" && isPlatformTeam(session)) {
+      return NextResponse.next({ headers });
+    }
+    return new NextResponse('<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Страница не найдена — АвтоЦена</title></head><body style="font-family:system-ui;text-align:center;padding:12vh 24px"><h1>Страница не найдена</h1><p>Воспользуйтесь каталогом автомобилей.</p><a href="/cars">Перейти в каталог</a></body></html>', { status: 404, headers: { ...headers, "Content-Type": "text/html; charset=utf-8" } });
+  }
+
   if (pathname === "/api/partners/payout-request") {
     if (session?.role === "partner" || (isPlatformTeam(session) && isPartnerRole(session?.role))) return NextResponse.next();
     return denyOrRedirect(request);
