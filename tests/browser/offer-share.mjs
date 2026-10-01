@@ -15,11 +15,16 @@ try{
   if(mode==='default')await page.evaluate(()=>delete document.querySelector('[data-offer-id]').dataset.offerSavedVersion);
   if(mode==='estimate')await page.evaluate(()=>{delete document.querySelector('[data-offer-id]').dataset.offerSavedVersion;document.querySelector('.ac-inline-parameters').dataset.shareEstimate='eyJ5ZWFyIjoiMjAyMyJ9';});
   await page.getByRole('button',{name:'Поделиться ссылкой',exact:true}).click();
-  const calls=await page.evaluate(()=>window.calls);assert.equal(calls.length,mode==='cancel'?0:1);
+  const calls=await page.evaluate(()=>window.calls);assert.equal(calls.length,device!=='desktop'&&mode==='cancel'?0:1);
+  if(device==='desktop'){
+   assert.equal(calls.length,1);assert.equal(typeof calls[0],'string');assert.match(calls[0],/^Chevrolet Trax Turbo 1.2 — 2023, 1,5 л — 1 800 000 ₽\nhttps?:/);
+   if(mode==='default')assert.equal(new URL(calls[0].split('\n')[1]).search,'?share=3');
+   await page.close();console.log('desktop '+mode+': complete message copied even when native share exists');continue;
+  }
   const expected=origin+'/cars/offer/chevrolet-trax-2024--car?calculation=11111111-1111-1111-1111-111111111111&share=3';
-  if(mode==='native'){assert.equal(calls[0].url,expected);assert.match(calls[0].text,/₽/);assert.equal(calls[0].title,calls[0].text);}
-  else if(mode==='default'){const u=new URL(calls[0].url);assert.equal(u.search,'?share=3');assert.equal(calls[0].text,'Chevrolet Trax Turbo 1.2 — 2023, 1,5 л — 1 800 000 ₽');}
-  else if(mode==='estimate'){assert.match(calls[0].text,/₽/);const u=new URL(calls[0].url);assert.equal(u.searchParams.get('estimate'),'eyJ5ZWFyIjoiMjAyMyJ9');assert.equal(u.searchParams.has('calculation'),false);}
+  if(mode==='native'){assert.equal(calls[0].url,undefined);assert.equal(calls[0].text,calls[0].title+'\n'+expected);assert.match(calls[0].text,/₽/);}
+  else if(mode==='default'){const u=new URL(calls[0].text.split('\n')[1]);assert.equal(u.search,'?share=3');assert.equal(calls[0].text.split('\n')[0],'Chevrolet Trax Turbo 1.2 — 2023, 1,5 л — 1 800 000 ₽');}
+  else if(mode==='estimate'){assert.match(calls[0].text,/₽/);const u=new URL(calls[0].text.split('\n')[1]);assert.equal(u.searchParams.get('estimate'),'eyJ5ZWFyIjoiMjAyMyJ9');assert.equal(u.searchParams.has('calculation'),false);}
   else if(mode==='mini'){assert.ok(calls[0].includes('https://t.me/'));assert.equal((calls[0].match(/₽/g)||[]).length,1);}
   else if(mode!=='cancel'){assert.ok(calls[0].endsWith('\n'+expected));assert.equal((calls[0].match(/₽/g)||[]).length,1);}
   await page.evaluate(()=>{window.calls=[];document.querySelector('.ac-inline-parameters').dataset.sharePending='true';});await page.getByRole('button').click();assert.deepEqual(await page.evaluate(()=>window.calls),[]);await page.getByText('Дождитесь пересчёта').waitFor();
