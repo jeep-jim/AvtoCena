@@ -862,12 +862,15 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
     || filters.yearFrom || filters.yearTo || filters.mileageFrom || filters.mileageTo || filters.engineFrom || filters.engineTo
     || filters.powerFrom || filters.powerTo || filters.fuel || filters.transmission || filters.drive || filters.bodyType
     || filters.auctionGrade || filters.auctionDateFrom || filters.auctionDateTo);
-  if (!hasPredicates && filters.market && !["china", "any"].includes(filters.market)) {
+  if (!hasPredicates) {
     const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
     if (summary.generationId === manifest.generationId) {
       const market = filters.market && filters.market !== "any" ? filters.market : undefined;
+      // Old summaries still count reviewed aliases. Reconcile only the China
+      // projection, keeping the lightweight summary path for other markets.
+      const reviewed = !market || market === "china" ? (await readCurrentSearchProjection("china")).items.filter(isReviewedSourceDuplicate) : [];
       const brands = Object.values(summary.brands).map(brand => ({
-        make: brand.make, count: market ? Number(brand.marketCounts[market] || 0) : brand.count,
+        make: brand.make, count: (market ? Number(brand.marketCounts[market] || 0) : brand.count) - reviewed.filter(row=>row.make===brand.make).length,
         models: brand.models.filter(model => !market || Number(model.marketCounts[market] || 0) > 0).length,
       })).filter(brand => brand.count > 0);
       return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
