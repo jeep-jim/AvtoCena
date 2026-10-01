@@ -150,7 +150,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       <header className={`ac-public-header sticky top-0 z-50 backdrop-blur-xl ${className}`}>
         <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
-            {dealer ? <Link href="/cars" aria-label="Выйти на АвтоЦену" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 5-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></Link> : backHref ? (
+            {dealer ? <Link href="/cars" aria-label="Выйти на АвтоЦену" className="flex h-10 shrink-0 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg><span className="hidden sm:inline">Назад</span></Link> : backHref ? (
               <button type="button" aria-label="Назад" onClick={() => window.history.length > 1 ? router.back() : router.replace(backHref)} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
                 <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 <span className="hidden sm:inline">Назад</span>
@@ -159,7 +159,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
 
             {dealer ? <Link href={dealer.href} className="flex min-w-0 items-center gap-2.5" aria-label={`Страница ${dealer.name}`}>
               {(dealer.headerIcon||dealer.logoLight||dealer.logoDark)?<img src={dealer.headerIcon||(theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight))} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
-              <span className="truncate text-lg font-black md:text-xl">{dealer.name}</span>
+              <span className="hidden truncate text-lg font-black md:block md:text-xl">{dealer.name}</span>
             </Link> : (            <Link href="/" className="flex min-w-0 items-center gap-2.5">
               <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
               <div className="min-w-0">

@@ -1,5 +1,5 @@
 "use client";
-import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight} from 'lucide-react';
+import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight,Eye} from 'lucide-react';
 import {DealerDemoContext,DealerUploadContext} from './DealerDemoContext';
 import {DealerWorkspaceStyles} from './DealerWorkspaceStyles';
 import {DEFAULT_PROGRAM,EMPTY_MEMBERSHIP,dealerAccessLevel,type DealerProgram,type Membership} from '@/lib/dealers/program-model';
@@ -105,7 +105,7 @@ export function DealerEditor({
   return (
     <DealerUploadContext.Provider value={uploadChange}><DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
       <DealerWorkspaceStyles/>
-      {demo&&<dialog ref={previewDialog} className="dealer-preview-dialog"><div className="flex justify-between gap-4 mb-5"><strong>Предпросмотр демо-компании</strong><button type="button" className={button} onClick={()=>previewDialog.current?.close()}>Закрыть</button></div>{s.banner&&<img src={s.banner} alt="Обложка компании"/>}<h2 className="dw-title mt-5">{s.name}</h2><p className="dw-muted">{s.description}</p><p className="dw-muted mt-3">{s.offices.map(o=>[o.city,o.address].filter(Boolean).join(', ')).join(' · ')}</p><h3 className="font-bold mt-6 mb-3">Направления каталога</h3><div className="flex flex-wrap gap-3">{dealerMarkets(s.catalogMarkets).map(m=><span key={m} className="dw-badge">{DEALER_MARKETS.find(x=>x.id===m)?.label||m}</span>)}</div>{fullAccess&&s.offers.length>0&&<><h3 className="font-bold mt-6 mb-3">Ваши автомобили</h3><div className="dealer-offer-list">{s.offers.map(o=><article key={o.id} className="dw-card">{o.photos[0]&&<img src={o.photos[0].url} alt={specialTitle(o)}/>}<h3 className="mt-3">{specialTitle(o)}</h3><p className="dw-muted">{calculateSpecial(s,o).complete?`${calculateSpecial(s,o).totalRub?.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p></article>)}</div></>}<p className="dw-muted mt-6">Пример оформления. Эта компания не публикуется на сайте.</p></dialog>}
+      {demo&&<dialog ref={previewDialog} aria-label="Предпросмотр демо-компании" className="dealer-preview-dialog" onClick={event=>{if(event.target===event.currentTarget){const r=event.currentTarget.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.currentTarget.close();}}}><div className="dealer-preview-toolbar flex justify-between gap-4 mb-5"><strong>Предпросмотр демо-компании</strong><button type="button" className={button} onClick={()=>previewDialog.current?.close()}>Закрыть</button></div>{s.banner&&<img src={s.banner} alt="Обложка компании"/>}<h2 className="dw-title mt-5">{s.name}</h2><p className="dw-muted">{s.description}</p><p className="dw-muted mt-3">{s.offices.map(o=>[o.city,o.address].filter(Boolean).join(', ')).join(' · ')}</p><h3 className="font-bold mt-6 mb-3">Направления каталога</h3><div className="flex flex-wrap gap-3">{dealerMarkets(s.catalogMarkets).map(m=><span key={m} className="dw-badge">{DEALER_MARKETS.find(x=>x.id===m)?.label||m}</span>)}</div>{fullAccess&&s.offers.length>0&&<><h3 className="font-bold mt-6 mb-3">Ваши автомобили</h3><div className="dealer-offer-list">{s.offers.map(o=><article key={o.id} className="dw-card">{o.photos[0]&&<img src={o.photos[0].url} alt={specialTitle(o)}/>}<h3 className="mt-3">{specialTitle(o)}</h3><p className="dw-muted">{calculateSpecial(s,o).complete?`${calculateSpecial(s,o).totalRub?.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p></article>)}</div></>}<p className="dw-muted mt-6">Пример оформления. Эта компания не публикуется на сайте.</p></dialog>}
       <div className="dealer-editor-shell">
       <div className="dealer-editor-navigation flex flex-wrap gap-2">
         {[
@@ -127,9 +127,10 @@ export function DealerEditor({
         <div className="dealer-save-status"><span className="dw-badge">{demo?"Демо":s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
         <button type="button" disabled={busy||pendingUploads>0||(!fullAccess&&["offers","pricing","rates","buyers"].includes(tab))} className="rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':'Сохранить изменения'}</button>
         {tab==='offers'&&active&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
+        <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
         <p role="status" className="text-sm leading-5">{(pendingUploads?'Дождитесь окончания загрузки фотографий, затем сохраните изменения.':statusMessage)||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
-        <Link onClick={openDemoPreview} className="block text-sm text-red-500 underline" target={demo?undefined:"_blank"} href={`/dealers/${s.dealerId}?preview=1`}>Предпросмотр</Link>
+
        </section>
 </aside>}
       {tab==='overview'&&<div className="space-y-5">
@@ -154,12 +155,12 @@ export function DealerEditor({
               посмотреть только вы.
             </p>
             <Link
-              className="text-red-500 underline"
+              className={button+" inline-flex items-center gap-2"}
               onClick={openDemoPreview}
               href={`/dealers/${s.dealerId}?preview=1`}
               target="_blank"
             >
-              Предпросмотр страницы дилера
+              <Eye size={17}/> Предпросмотр страницы дилера
             </Link>
             <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Ссылка закрепится за вашей компанией после сохранения.</p></div>
             <Field

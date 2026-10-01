@@ -111,7 +111,7 @@ function formatDelta(value: number) {
   const absolute = Math.abs(value);
   if (absolute >= 1_000_000) return `${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(absolute / 1_000_000)}M`;
   if (absolute >= 1_000) return `${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(absolute / 1_000)}K`;
-  return `${money(absolute)} ₽`;
+  return money(absolute);
 }
 
 export function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {

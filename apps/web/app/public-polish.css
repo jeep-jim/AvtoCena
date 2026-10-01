@@ -1,4 +1,6 @@
 :root {
+  --ac-page-bg: #1a2029;
+  --ac-bg: var(--ac-page-bg);
   --ac-surface: #11141c;
   --ac-surface-2: #181b24;
   --ac-surface-3: #20232d;
@@ -149,6 +151,7 @@ section[data-demo-enabled] .ac-catalog-card .p-4 > div:first-child {
 }
 
 html[data-theme="light"] {
+  --ac-page-bg: #edf0f6;
   --ac-surface: #f8f9fb;
   --ac-surface-2: #edf0f5;
   --ac-surface-3: #e3e7ee;

@@ -1,3 +1,7 @@
+import {ChevronDown} from 'lucide-react';
+import {SpecTile,type SpecIconName} from '@/components/catalog/OfferSpecTile';
+import {StickyOfferColumn} from '@/components/catalog/StickyOfferColumn';
+import {OfferSpecificationsDisclosure} from '@/components/catalog/OfferSpecificationsDisclosure';
 import {dealerProfilePath} from '@/lib/dealers/profile-url';
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -63,6 +67,8 @@ export async function SpecialOfferPage({
     ["Цвет", o.color],
     ["Руль", o.steering === "left" ? "Левый" : "Правый"],
   ].filter(([, v]) => v);
+  const specIcons:Record<string,SpecIconName>={Год:'year',Двигатель:'engine',Мощность:'power',Пробег:'mileage',Топливо:'fuel',КПП:'transmission',Привод:'drive',Кузов:'body',Цвет:'body',Руль:'drive'};
+  const groups=[{name:'Характеристики',items:fields.map(([name,value])=>({name,value}))},...(o.equipment?[{name:'Оснащение',items:[{name:'Комплектация',value:o.equipment}]}]:[])];
   return (
     <main
       data-offer-id={id}
@@ -72,7 +78,7 @@ export async function SpecialOfferPage({
       className="ac-offer-page ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]"
     >
       <PublicHeader backHref="/" backLabel="На главную" />
-      <div className="mx-auto max-w-7xl px-4 pb-12 pt-6">
+      <div className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
         {preview && (
           <p className="mb-4 rounded-xl bg-amber-500/15 p-3">
             Предпросмотр владельца ·{" "}
@@ -81,32 +87,23 @@ export async function SpecialOfferPage({
               : "Автомобиль скрыт от посетителей"}
           </p>
         )}
-        <p className="mb-2 font-bold text-red-500">
-          Спецпредложение · {s.name}
-        </p>
-        <h1 className="mb-5 text-3xl font-black md:text-5xl">{title}</h1>
-        <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
           <div className="min-w-0">
+            <header><p className="text-xs font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Спецпредложение · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
+            <div className="mt-5 min-w-0 overflow-hidden">
             <VehicleGallery
               images={o.photos.map((p) => p.url)}
               title={title}
               offerId={id}
               snapshot={snapshot}
             />
-            <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {fields.map(([k, v]) => (
-                <div
-                  key={k}
-                  className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-3"
-                >
-                  <dt className="text-xs text-[var(--ac-muted)]">{k}</dt>
-                  <dd className="mt-1 font-bold">{v}</dd>
-                </div>
-              ))}
-            </dl>
+            </div>
+            <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" />
+            {!preview&&<OfferDesktopActions position="below" offerId={id} snapshot={snapshot}/>}
           </div>
+          <StickyOfferColumn>
           <div className="ac-inline-parameters min-w-0">
-            <section className="ac-offer-price-panel rounded-3xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5">
+            <section className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="text-sm text-[var(--ac-muted)]">
                 {c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
@@ -120,54 +117,21 @@ export async function SpecialOfferPage({
                   Доставка {c.daysFrom}–{c.daysTo} дней
                 </p>
               )}
-              {c.complete ? (
-                <>
-                  <details className="mt-5" data-ac-preserve-open open>
-                    <summary className="cursor-pointer font-bold">
-                      Что входит в стоимость
-                    </summary>
-                    <dl className="mt-3 space-y-3">
-                      {c.lines.map((l) => (
-                        <div
-                          key={l.id}
-                          className="flex justify-between gap-3 text-sm"
-                        >
-                          <dt>{l.title}</dt>
-                          <dd className="shrink-0 font-bold">
-                            {l.amountRub.toLocaleString("ru-RU")} ₽
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </details>
-                  <p className="mt-4 text-xs text-[var(--ac-muted)]">
-                    Курс расчёта: 1 $ = {c.rate.toLocaleString("ru-RU")} ₽.{" "}
-                    {o.customsIncluded
-                      ? "Таможенные платежи включены в цену автомобиля."
-                      : ""}
-                  </p>
-                </>
-              ) : (
-                <p className="mt-4 text-sm text-[var(--ac-muted)]">
-                  Уточним актуальную стоимость и доставку в выбранный город при
-                  обращении.
-                </p>
-              )}
-              <p className="mt-3 text-xs text-[var(--ac-muted)]">
-                Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением
-                договора.
-              </p>
             </section>
-            {!preview && (
-              <>
-                <OfferDesktopActions
-                  position="below"
-                  offerId={id}
-                  snapshot={snapshot}
-                />
-                <OfferMobileActions offerId={id} snapshot={snapshot} />
-              </>
-            )}
+            {!preview&&<OfferMobileActions offerId={id} snapshot={snapshot}/>}
+            {c.complete ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
+              <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>
+              <p className="px-4 pb-4 text-xs text-[var(--ac-muted)]">Курс расчёта: 1 $ = {c.rate.toLocaleString('ru-RU')} ₽. {o.customsIncluded?'Таможенные платежи включены в цену автомобиля.':''}</p>
+            </details>:<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>}
+            <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением договора.</p>
+            <aside className="ac-offer-detail-stack mt-4 min-w-0">
+              <div className="ac-offer-spec-stack space-y-2.5">
+                <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5">{fields.map(([label,value],index)=><SpecTile key={label} label={label} value={value} icon={specIcons[label]} fullWidth={fields.length%2===1&&index===fields.length-1}/>)}</div>
+                <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
+              </div>
+              {!preview&&<OfferDesktopActions offerId={id} snapshot={snapshot}/>}
+            </aside>
             {canCopyOffer(user) && (
               <OfferCopyButton
                 offerId={id}
@@ -190,6 +154,7 @@ export async function SpecialOfferPage({
               </Link>
             )}
           </div>
+          </StickyOfferColumn>
         </div>
         {o.description && (
           <section className="mt-8">

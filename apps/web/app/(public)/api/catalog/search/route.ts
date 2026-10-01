@@ -1,3 +1,6 @@
+import { readCatalogMarketPage } from "@/lib/catalog/market-page";
+import { PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
+import type { CatalogMarket } from "@/lib/catalog/types";
 import { parseEngineCc } from "@/lib/catalog/engine-input";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { NextResponse } from "next/server";
@@ -37,10 +40,17 @@ export async function GET(request: Request) {
     drive: p.get("drive") || undefined,
     bodyType: p.get("bodyType") || p.get("body") || undefined,
     auctionGrade: p.get("auctionGrade") || undefined,
+    auctionDateFrom: p.get("auctionDateFrom") || undefined,
+    auctionDateTo: p.get("auctionDateTo") || undefined,
     sort: p.get("sort") || undefined,
     page: n(p.get("page")),
     pageSize: n(p.get("pageSize")),
   };
+  if (p.get("marketPage") === "1") {
+    if (!PUBLIC_CATALOG_MARKET_SET.has(query.market as CatalogMarket) || !Number.isInteger(query.page || 1) || (query.page || 1) > 10000) return NextResponse.json({ok:false}, {status:400});
+    const result = await readCatalogMarketPage(query);
+    return NextResponse.json({ok:true,...result}, {headers:{"Cache-Control":"public, max-age=30, s-maxage=30", "Server-Timing":`catalog-page;dur=${(performance.now()-started).toFixed(1)}`}});
+  }
   if (p.get("countOnly") === "1") {
     const result = await countCatalogOffers(query);
     return NextResponse.json({ok: true, ...result, items: []}, {headers: {"Cache-Control": "public, max-age=30, s-maxage=30", "Server-Timing": `catalog-count;dur=${(performance.now()-started).toFixed(1)}`}});
