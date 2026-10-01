@@ -6,12 +6,13 @@ function buyerWebp(src: string, width: 256 | 448 | 1280) {
   return /^\/buyers\/(\d+)\.jpg$/.test(src) ? src.replace(/\/buyers\/(\d+)\.jpg$/, `/buyers/webp/$1-${width}.webp`) : src;
 }
 
-export function BuyerGallery({ images, title = "Те, кто узнали — уже ездят!", dealerName = "TopAvto" }: { images: string[]; title?: string; dealerName?: string }) {
+export function BuyerGallery({ images, title = "Те, кто узнали — уже ездят!", dealerName = "TopAvto", autoScroll = true }: { images: string[]; title?: string; dealerName?: string; autoScroll?: boolean }) {
   const [active, setActive] = useState<number | null>(null);
   const rail = useRef<HTMLDivElement>(null);
   const swipeStart = useRef<number | null>(null);
 
   useEffect(() => {
+    if (!autoScroll) return;
     let frame = 0;
     let previous = performance.now();
     let carriedDistance = 0;
@@ -38,7 +39,7 @@ export function BuyerGallery({ images, title = "Те, кто узнали — у
 
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [images.length]);
+  }, [images.length, autoScroll]);
 
   useEffect(() => {
     if (active === null) return;
@@ -70,7 +71,7 @@ export function BuyerGallery({ images, title = "Те, кто узнали — у
   return <section className="mt-8 overflow-hidden">
     <h2 className="whitespace-nowrap text-[clamp(18px,5.5vw,24px)] font-black leading-none md:text-5xl">{title}</h2>
     <div ref={rail} className="ac-buyers-rail ac-hide-scrollbar mt-4 flex gap-3 overflow-x-auto pb-2">
-      {[...images, ...images].map((src, index) => <button key={`${src}-${index}`} type="button" onClick={() => setActive(index % images.length)} className="h-32 w-44 shrink-0 overflow-hidden rounded-2xl sm:h-40 sm:w-56 md:h-44 md:w-64"><img src={buyerWebp(src, 448)} srcSet={`${buyerWebp(src, 256)} 256w, ${buyerWebp(src, 448)} 448w`} sizes="(min-width: 768px) 256px, (min-width: 640px) 224px, 176px" alt={`Клиент ${dealerName} ${(index % images.length) + 1}`} className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" /></button>)}
+      {(autoScroll ? [...images, ...images] : images).map((src, index) => <button key={`${src}-${index}`} type="button" onClick={() => setActive(index % images.length)} className="h-32 w-44 shrink-0 overflow-hidden rounded-2xl sm:h-40 sm:w-56 md:h-44 md:w-64"><img src={buyerWebp(src, 448)} srcSet={`${buyerWebp(src, 256)} 256w, ${buyerWebp(src, 448)} 448w`} sizes="(min-width: 768px) 256px, (min-width: 640px) 224px, 176px" alt={`Клиент ${dealerName} ${(index % images.length) + 1}`} className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" /></button>)}
     </div>
     {active !== null ? <div className="fixed inset-0 z-[10050] flex items-center justify-center bg-black/95 p-3 sm:p-6" onClick={() => setActive(null)} role="dialog" aria-modal="true" aria-label={`Фотографии клиентов ${dealerName}`}>
       <div className="flex max-h-[94dvh] w-full max-w-5xl flex-col items-center" onClick={(event) => event.stopPropagation()}>

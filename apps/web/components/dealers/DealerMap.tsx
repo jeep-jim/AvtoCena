@@ -3,20 +3,20 @@ import { useState } from "react";
 import type { DealerOffice } from "@/lib/dealers/showcase-model";
 import { yandexOfficeUrls } from "@/lib/dealers/yandex-map";
 
-export function DealerMap({ offices }: { offices: Omit<DealerOffice, "phone">[] }) {
+export function DealerMap({ offices, selectedId, onSelect, compact=false }: { offices: Omit<DealerOffice, "phone">[]; compact?:boolean; selectedId?:string; onSelect?:(id:string)=>void }) {
   const [enabled, setEnabled] = useState(false);
   const [selected, setSelected] = useState('');
   const available = offices.filter(o => o.address.trim() || (o.lat !== null && o.lon !== null));
-  const office = available.find(o => o.id === selected) || available[0];
+  const office = available.find(o => o.id === (selectedId || selected)) || available[0];
   if (!office) return null;
   const urls = yandexOfficeUrls(office);
   return (
     <section className="mt-6" aria-label="Офисы на Яндекс Картах">
-      <h2 className="mb-3 text-base font-bold">Офисы на карте</h2>
-      {available.length > 1 && (
+      {!compact&&<h2 className="mb-3 text-base font-bold">Офисы на карте</h2>}
+      {!compact && available.length > 1 && (
         <label className="mb-3 grid gap-2 text-sm">
           Выберите офис
-          <select className="soft-input w-full min-w-0 rounded-xl p-3" value={office.id} onChange={e => setSelected(e.target.value)}>
+          <select className="soft-input w-full min-w-0 rounded-xl p-3" value={office.id} onChange={e => {setSelected(e.target.value);onSelect?.(e.target.value);}}>
             {available.map(o => <option key={o.id} value={o.id}>{o.city} — {o.address}</option>)}
           </select>
         </label>
@@ -28,7 +28,7 @@ export function DealerMap({ offices }: { offices: Omit<DealerOffice, "phone">[] 
           Показать Яндекс Карту
         </button>
       )}
-      <a className="mt-2 inline-block text-sm text-red-500 underline" href={urls.full} target="_blank" rel="noreferrer">Открыть в Яндекс Картах ↗</a>
+      {!compact&&<a className="mt-2 inline-block text-sm text-red-500 underline" href={urls.full} target="_blank" rel="noreferrer">Открыть в Яндекс Картах ↗</a>}
     </section>
   );
 }
