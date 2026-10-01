@@ -263,7 +263,7 @@ export function mediaUrl(v: unknown, dealerId: string) {
   const u = text(v, 1000);
   if (!u) return "";
   if (/^\/buyers\/\d+\.jpg$/.test(u) && dealerId === PILOT_DEALER_ID) return u;
-  if (dealerId === PILOT_DEALER_ID && ["/brands/topavto-logo.png", "/dealers/topavto-banner-1800x600.webp"].includes(u))
+  if (dealerId === PILOT_DEALER_ID && ["/brands/topavto-logo.png", "/dealers/topavto-banner-1800x600.webp", "/dealers/topavto-banner-v2.webp"].includes(u))
     return u;
   if (new RegExp(`^/api/dealers/${dealerId}/media/[a-f0-9-]{36}$`).test(u))
     return u;

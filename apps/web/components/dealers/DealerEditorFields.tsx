@@ -1,7 +1,7 @@
 "use client";
 import {useState} from "react";
 import type {DealerPhoto} from "@/lib/dealers/showcase-model";
-export const input = "soft-input w-full min-w-0 rounded-xl p-3 text-sm";
+export const input = "soft-input w-full min-w-0 rounded-xl px-3 py-2 text-sm";
 export const button =
   "rounded-xl border border-[var(--ac-border)] px-4 py-2 text-sm font-bold disabled:opacity-40";
 export function Field({
@@ -95,9 +95,9 @@ export function Photos({
     <div className="space-y-3">
       <div className="flex flex-wrap gap-2">
         {value.map((p, i) => (
-          <div key={`${p.id}-${i}`} className="w-28">
+          <div key={`${p.id}-${i}`} className={single ? "w-full" : "w-28"}>
             <img
-              className="h-20 w-28 rounded-xl object-cover"
+              className={single ? "h-20 w-full rounded-xl bg-[var(--ac-surface-2)] object-contain" : "h-20 w-28 rounded-xl object-cover"}
               src={p.url}
               alt={p.caption || `Фото ${i + 1}`}
             />
@@ -111,7 +111,7 @@ export function Photos({
                   onChange(next);
                 }}
               >
-                ←
+                {single ? "" : "←"}
               </button>
               <button
                 type="button"
@@ -154,7 +154,7 @@ export function Photos({
       <p className="text-xs text-[var(--ac-muted)]">
         {busy
           ? "Загружаем…"
-          : "JPG, PNG, WebP до 8 МБ. Первое фото будет обложкой."}
+          : single ? "JPG, PNG, WebP до 8 МБ." : "JPG, PNG, WebP до 8 МБ. Первое фото будет обложкой."}
       </p>
       {error && (
         <p role="alert" className="text-red-300">

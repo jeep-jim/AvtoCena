@@ -12,7 +12,7 @@ export function DealerMap({ offices }: { offices: DealerOffice[] }) {
   const urls = yandexOfficeUrls(office);
   return (
     <section className="mt-6" aria-label="Офисы на Яндекс Картах">
-      <h2 className="mb-3 text-2xl font-black">Офисы на карте</h2>
+      <h2 className="mb-3 text-base font-bold">Офисы на карте</h2>
       {available.length > 1 && (
         <label className="mb-3 grid gap-2 text-sm">
           Выберите офис
@@ -22,9 +22,9 @@ export function DealerMap({ offices }: { offices: DealerOffice[] }) {
         </label>
       )}
       {enabled ? (
-        <iframe key={urls.widget} src={urls.widget} title={`Яндекс Карты: ${office.city}, ${office.address}`} loading="lazy" allowFullScreen className="relative z-0 h-80 w-full rounded-2xl border-0" />
+        <iframe key={urls.widget} src={urls.widget} title={`Яндекс Карты: ${office.city}, ${office.address}`} loading="lazy" allowFullScreen className="relative z-0 h-60 w-full rounded-2xl border-0" />
       ) : (
-        <button type="button" className="w-full rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-10 font-bold" onClick={() => setEnabled(true)}>
+        <button type="button" className="w-full rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 py-6 text-sm font-bold" onClick={() => setEnabled(true)}>
           Показать Яндекс Карту
         </button>
       )}
