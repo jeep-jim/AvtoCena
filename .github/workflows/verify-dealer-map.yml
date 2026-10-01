@@ -37,3 +37,26 @@ jobs:
           name: dealer-map-preview
           path: artifacts/dealer-map/*.png
           if-no-files-found: ignore
+  production-profile:
+    if: github.ref == 'refs/heads/fix/dealer-profile-design-20261001'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm install --prefix "$RUNNER_TEMP/dealer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify profile in the production Next layout with isolated data
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/dealer-profile-production.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dealer-profile-production-preview
+          path: artifacts/dealer-profile-production/
+          if-no-files-found: ignore
