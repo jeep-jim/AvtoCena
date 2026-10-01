@@ -75,7 +75,7 @@ test("an electrified horsepower scenario cannot replace certified 30-minute powe
 test("existing power control remains available alongside linked modification selection", () => {
   assert.match(offerPage, /InlineOfferParameters/);
   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
-  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string; direct\?: string; calculation\?:\s*string;preview\?:string;dealer\?:string \}>/);
+  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string; direct\?: string; calculation\?:\s*string;estimate\?:string;preview\?:string;dealer\?:string \}>/);
   assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
   assert.match(editableTile, /setTimeout\(\(\) => commitManual\(value\), 500\)/);
   assert.doesNotMatch(editableTile, /type="submit"|Пересчитать по введённой мощности/);
@@ -91,7 +91,8 @@ test("existing power control remains available alongside linked modification sel
 
 
 test("customer-entered horsepower stays visible as an on-page preliminary calculation", () => {
-  assert.match(offerPage, /powerHp:powerScenario\?\.source==="fallback_100"\?"":String\(safePowerHp/);
+  assert.match(offerPage, /initial=\{offerParameterDraft\(offer,raw\)\}/);
+  assert.match(fs.readFileSync("apps/web/lib/catalog/offer-parameter-draft.ts","utf8"), /powerHp:powerScenario\?\.source==="fallback_100"\?"":String\(safePowerHp/);
   assert.match(editableTile, /powerDataConfidence === "reference"/);
   assert.match(editableTile, /powerDataConfidence === "estimated"/);
   assert.match(offerPage, /const customerScenarioRub = safeRequestedPowerHp/);
