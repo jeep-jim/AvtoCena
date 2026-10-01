@@ -9,6 +9,7 @@ export const VERIFIED_LINK_SOURCES = [
 export function sourceIdentity(value:string):{market:string;ids:string[];id:string}|null {
  let u:URL;try{u=new URL(value);}catch{return null;}
  const host=u.hostname.replace(/^www\./,'');let id='';
+ if(/(^|\.)autohome\.com\.cn$/.test(host) && (id=u.pathname.match(/^\/(?:config\/)?spec\/(\d+)(?:\.html|\/)?$/)?.[1]||''))return {market:'china',ids:['autohome_new_china_open'],id};
  if(host==='autopapa.ge' && (id=u.pathname.match(/^\/en\/(?:usd\/)?[^/]+\/[^/]+\/(\d{5,})\/?$/)?.[1]||''))return {market:'georgia',ids:['autopapa_georgia_open'],id};
  if(/(^|\.)encar\.com$/.test(host) && (id=u.pathname.match(/\/cars\/detail\/(\d+)/)?.[1]||u.searchParams.get('carid')||'') && /^\d+$/.test(id))return {market:'korea',ids:['encar_direct'],id};
  if(host==='global.che168.com' && (id=u.pathname.match(/^\/en\/detail\/(\d+)/)?.[1]||''))return {market:'china',ids:['autohome_used_china_open'],id};

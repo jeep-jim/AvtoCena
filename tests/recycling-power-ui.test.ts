@@ -58,6 +58,6 @@ test("wiring: both views, completed quote and price explanation use existing lay
   const page=readFileSync("apps/web/app/(public)/cars/offer/[id]/page.tsx","utf8");
   assert.match(card,/data-recycling-power-chip/); assert.match(card,/RecyclingPowerLabel/);
   assert.match(inline,/valueNode=\{pairedPower/);
-  assert.doesNotMatch(inline,/Вернуть исходные данные/); assert.match(page,/powerKw:powerScenario\?"":String\(raw\.powerKw\|\|recyclingPowerInfo\(raw\)\?\.kw/);
+  assert.doesNotMatch(inline,/Вернуть исходные данные/); assert.match(page,/initial=\{offerParameterDraft\(offer,raw\)\}/); assert.match(readFileSync("apps/web/lib/catalog/offer-parameter-draft.ts","utf8"),/powerKw:powerScenario\?"":String\(raw\.powerKw\|\|recyclingPowerInfo\(raw\)\?\.kw/);
   assert.match(page,/RecyclingFeeHelp info=\{powerInfo\}/);
 });

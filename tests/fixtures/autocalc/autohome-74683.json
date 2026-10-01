@@ -1,0 +1,111 @@
+{
+  "specId": 74683,
+  "seriesId": 770,
+  "specDetails": {
+    "bread": {
+      "brandid": 3,
+      "brandname": "丰田",
+      "seriesid": 770,
+      "seriesname": "RAV4荣放",
+      "specid": 74683,
+      "specname": "2026款 2.0L 四驱豪华版",
+      "seriesstate": 20,
+      "serieslogo": "https://car2.autoimg.cn/cardfs/series/g34/M03/FF/03/400x300_autohomecar__ChxpV2ldyRyAOsNoADy9bk-z3kU850.png"
+    },
+    "specinfo": {
+      "id": 74683,
+      "specname": "2026款 2.0L 四驱豪华版",
+      "factname": "一汽丰田",
+      "brandname": "丰田",
+      "seriesname": "RAV4荣放",
+      "levelname": "紧凑型SUV",
+      "funeldetail": "汽油",
+      "minprice": 189800,
+      "specstate": 20,
+      "average": 4.5675,
+      "ownerprice": 524,
+      "brandlogo": "https://car3.autoimg.cn/cardfs/series/g25/M06/CA/43/autohomecar__CjIFV2TCOiiAQiQ0AAE0By3ZgZM165.png",
+      "fuelType": 1,
+      "adFuelType": 3,
+      "realtestshow": 0
+    },
+    "imageinfo": {
+      "speclogo": "https://car2.autoimg.cn/cardfs/product/g34/M04/95/86/autohomecar__ChtpWGk6TMmAR9kYACA-6gM6t_I152.jpg",
+      "imgnum": 627,
+      "item": [
+        {
+          "img": "http://car3.autoimg.cn/cardfs/product/g33/M07/66/3D/400x300_0_q87_c42_autohomecar__ChxpVmlnq92AW8YaACyCFigHsUM902.jpg",
+          "typecount": 54,
+          "type": "外观",
+          "typeid": 1
+        },
+        {
+          "img": "http://car3.autoimg.cn/cardfs/product/g34/M0B/95/B1/400x300_0_q87_c42_autohomecar__ChxpV2k6TOiAatxcACXEB6P6jl4378.jpg",
+          "typecount": 51,
+          "type": "中控",
+          "typeid": 10
+        },
+        {
+          "img": "http://car2.autoimg.cn/cardfs/product/g33/M02/97/F9/400x300_0_q87_c42_autohomecar__ChxpVWk6TRqAedONACTEbjGIem0358.jpg",
+          "typecount": 63,
+          "type": "座椅",
+          "typeid": 3
+        },
+        {
+          "img": "http://car2.autoimg.cn/cardfs/product/g33/M04/66/4A/400x300_0_q87_c42_autohomecar__Chto52lnq-iAakWQACwqBCFuCIM656.jpg",
+          "typecount": 456,
+          "type": "细节",
+          "typeid": 12
+        }
+      ]
+    },
+    "configinfo": [
+      {
+        "key": "级别",
+        "value": "紧凑型SUV",
+        "sort": 1,
+        "id": 116
+      },
+      {
+        "key": "排量",
+        "value": "2.0L",
+        "sort": 5,
+        "id": 40
+      },
+      {
+        "key": "最大功率",
+        "value": "126kW",
+        "sort": 10,
+        "id": 50
+      },
+      {
+        "key": "最大扭矩",
+        "value": "206N.m",
+        "sort": 15,
+        "id": 52
+      },
+      {
+        "key": "变速箱",
+        "value": "CVT无级变速(模拟10挡)",
+        "sort": 20,
+        "id": 108
+      },
+      {
+        "key": "综合油耗(工信部)",
+        "value": "暂无",
+        "sort": 25,
+        "id": 4
+      },
+      {
+        "key": "环保标准",
+        "value": "国VI",
+        "sort": 30,
+        "id": 61
+      }
+    ],
+    "cutinfo": {
+      "priceinfo": "",
+      "dayinfo": ""
+    }
+  }
+}

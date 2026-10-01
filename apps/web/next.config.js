@@ -3,7 +3,7 @@ const path = require("path");
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: "standalone",
-  htmlLimitedBots: new RegExp(require("next/dist/shared/lib/router/utils/html-bots").HTML_LIMITED_BOT_UA_RE.source + "|TelegramBot|Viber|vkbot", "i"),
+  htmlLimitedBots: new RegExp(require("next/dist/shared/lib/router/utils/html-bots").HTML_LIMITED_BOT_UA_RE.source + "|TelegramBot|Viber|vkbot|MAX|TamTam|OdklBot|Pinterest|Snapchat", "i"),
   serverExternalPackages: ["pdfkit", "heic-decode", "libheif-js"],
   outputFileTracingRoot: path.join(__dirname, "../.."),
 

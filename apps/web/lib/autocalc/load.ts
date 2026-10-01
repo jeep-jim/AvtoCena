@@ -66,7 +66,9 @@ export async function loadSource(value:string):Promise<SourceDraft>{
   const identity=sourceIdentity(url);const signal=AbortSignal.timeout(18000);
   try{
    let data:SourceDraft;
-   if(identity?.ids[0]==='kcar_korea_open'){
+   if(identity?.ids[0]==='autohome_new_china_open'){
+    const {loadAutohomeDraft}=await import('./autohome');data=await loadAutohomeDraft(identity.id,signal);
+   }else if(identity?.ids[0]==='kcar_korea_open'){
     const page=await readSource(`https://api.kcar.com/bc/car-info-detail-of-ng?i_sCarCd=${identity.id}&i_sPassYn=N`,signal,0,'json');const payload=JSON.parse(page.html),d=payload.data?.data||payload.data;
     const {kcarSpecificationEvidence,exactVehicleGallery}=await import('../catalog/kcar-exact-source');const r=d?.rvo;if(r?.carCd!==identity.id||r.statCd!=='CAR_STATUS010')throw Error('Объявление недоступно');
     const e=kcarSpecificationEvidence({regModelYear:r.regModelyr,manufactureDate:r.mfgDt,fuelName:r.fuelTypecdNm,rawFuelType:r.fuelType,engineDisplacement:r.engdispmnt,horsepower:r.hrspow});
