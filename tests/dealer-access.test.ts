@@ -109,18 +109,19 @@ test('session recovery restores internal staff from current account and never up
  const out=path.resolve('artifacts/dealer-tenant-tests/refresh.cjs');
  await build({entryPoints:['apps/web/app/(public)/api/auth/refresh-team-session/route.ts'],outfile:out,bundle:true,platform:'node',format:'cjs',packages:'external',plugins:[{name:'auth',setup(b){b.onResolve({filter:/^@\/lib\/auth$/},()=>({path:'auth',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:`export async function getCurrentUser(){return globalThis.__refreshActor||null} export const AUTH_COOKIE_NAME='avtocena_session'; export const AUTH_MAX_AGE_SECONDS=120; export function createSessionCookie(user){return 'renewed-'+user.role}` }));}}]});
  const route=require(out);
+ const oldOrigin=process.env.NEXT_PUBLIC_SITE_URL;process.env.NEXT_PUBLIC_SITE_URL='https://avtocena.com';
  try{
   for(const role of ['owner','admin','manager']){
    (globalThis as any).__refreshActor={id:'internal-staff',role,companyId:'dealer_topavto'};
-   const r=await route.GET(new Request('https://avtocena.com/api/auth/refresh-team-session'));
-   assert.equal(new URL(r.headers.get('location')!).pathname,'/crm');
+   const r=await route.GET(new Request('https://0.0.0.0:8080/api/auth/refresh-team-session'));
+   assert.equal(r.headers.get('location'),'https://avtocena.com/crm');
    assert.match(r.headers.get('set-cookie')||'',new RegExp('renewed-'+role));
   }
   for(const actor of [null,{id:'external',role:'dealer',companyId:'dealer_topavto'},{id:'external',role:'owner',companyId:'other'}]){
    (globalThis as any).__refreshActor=actor;
-   const r=await route.GET(new Request('https://avtocena.com/api/auth/refresh-team-session'));
+   const r=await route.GET(new Request('https://0.0.0.0:8080/api/auth/refresh-team-session'));
    assert.equal(r.headers.get('set-cookie'),null);
    assert.notEqual(new URL(r.headers.get('location')!).pathname,'/crm');
   }
- }finally{delete(globalThis as any).__refreshActor;}
+ }finally{delete(globalThis as any).__refreshActor;if(oldOrigin===undefined)delete process.env.NEXT_PUBLIC_SITE_URL;else process.env.NEXT_PUBLIC_SITE_URL=oldOrigin;}
 });
