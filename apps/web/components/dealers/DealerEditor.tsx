@@ -25,11 +25,11 @@ import type { PublicFeatures } from "@/lib/dealers/showcase-store";
 export function DealerEditor({
   initial,
   features,
-  platformOwner = false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration,
+  platformOwner = false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration, onDemoChange, onUploadingChange,
 }: {
   initial: DealerShowcase;
   features: PublicFeatures;
-  platformOwner?: boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode;
+  platformOwner?: boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode; onDemoChange?:(s:DealerShowcase)=>void; onUploadingChange?:(busy:boolean)=>void;
 }) {
   const prepared=()=>{
     const value=structuredClone(initial);
@@ -47,6 +47,8 @@ export function DealerEditor({
   const base=useRef(initial);
   const [pendingUploads,setPendingUploads]=useState(0);
   const uploadChange=useCallback((delta:number)=>setPendingUploads(n=>Math.max(0,n+delta)),[]);
+  useEffect(()=>{if(demo)onDemoChange?.(s);},[demo,s,onDemoChange]);
+  useEffect(()=>{onUploadingChange?.(pendingUploads>0);return()=>onUploadingChange?.(false);},[pendingUploads,onUploadingChange]);
   const dirty=JSON.stringify(s)!==JSON.stringify(base.current);
   const statusMessage=dirty&&['Настройки сохранены','Черновик сохранён. Автомобиль не опубликован.'].includes(message)?'Есть несохранённые изменения':message;
   const previewDialog=useRef<HTMLDialogElement>(null);

@@ -102,6 +102,6 @@ export function Photos({
     {!single&&<input className={input} aria-label={`Подпись фото ${i+1}`} placeholder="Подпись к фото" value={p.caption} onChange={e=>onChange(value.map((x,n)=>n===i?{...x,caption:e.target.value}:x))}/>}
    </article>)}</div>}
    <details><summary className="cursor-pointer text-sm text-[var(--ac-muted)]">Или добавить по ссылке на фото</summary><div className="mt-3 flex gap-2"><input className={input} type="url" aria-label="Ссылка на изображение" placeholder="https://…" value={url} onChange={e=>setUrl(e.target.value)}/><button type="button" className={button} disabled={busy||!url} onClick={()=>void upload()}>Добавить</button></div></details>
-   <p className="text-xs text-[var(--ac-muted)]" role="status">{busy?progress:progress||'JPG, PNG, WebP до 8 МБ. Первое фото — обложка.'}</p>{error&&<p role="alert" className="text-sm text-red-500">{error}</p>}
+   <p className="text-xs text-[var(--ac-muted)]" role="status">{busy?progress:progress||`JPG, PNG, WebP до 8 МБ. ${single?'':`Фото: ${value.length} из ${limit}. Первое фото — обложка.`}`}</p>{error&&<p role="alert" className="text-sm text-red-500">{error}</p>}
   </div>;
 }
