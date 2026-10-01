@@ -84,7 +84,7 @@ export function DealerSpecialsEditor({section='offers',s,patch,pricing,updateOff
   </section>}
   {section==='offers'&&<section className="dealer-editor-panel space-y-4">
    <div className="flex flex-wrap justify-between gap-2"><h2 className="text-lg font-black">Автомобили</h2><button type="button" className={button} onClick={()=>add()}>+ Добавить автомобиль</button></div>
-   {!s.offers.length&&<p className="text-sm text-[var(--ac-muted)]">Добавьте автомобиль, заполните характеристики и загрузите фото. Кнопка «Сохранить черновик автомобиля» сохранит незавершённую карточку. Стоимость и города доставки настраиваются в разделе «Цена и доставка авто».</p>}
+   {!s.offers.length&&<p className="text-sm text-[var(--ac-muted)]">Добавьте автомобиль, заполните характеристики и загрузите фото. Кнопка «Сохранить черновик автомобиля» сохранит незавершённую карточку. Базовая стоимость и доставка настраиваются в разделе «Расчёт своих авто».</p>}
    <div className="dealer-offer-list">{s.offers.map(item=><button type="button" key={item.id} className="dealer-offer-tile" aria-pressed={o?.id===item.id} onClick={()=>setActiveId(item.id)}>{item.photos[0]?<img src={item.photos[0].url} alt=""/>:<span className="dealer-offer-empty"><Car size={30}/></span>}<div><strong>{specialTitle(item)||'Новый автомобиль'}</strong><small>{item.status==='published'?'Опубликован':item.status==='sold'?'Продан':'Черновик'} · {item.photos.length} фото</small></div></button>)}</div>
    {o&&<div className="space-y-4" key={o.id}>
     <h3 className="dealer-step-title">01 · Данные автомобиля</h3>

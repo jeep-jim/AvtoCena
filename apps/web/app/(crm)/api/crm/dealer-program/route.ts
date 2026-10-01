@@ -25,7 +25,7 @@ export async function POST(req:Request){
     if(!['active','verified','paused'].includes(b.status))throw Error('Неверный статус');if(id==='dealer_topavto'&&b.status!=='verified')throw Error('ТопАвто — компания платформы');
     const mailForm=new FormData();if(b.mail){mailForm.set('mailEmail',String(b.mail.email||''));mailForm.set('mailProvider',String(b.mail.provider||''));if(b.mail.ready===true)mailForm.set('mailReady','on');}const mail=parseDealerMail(mailForm);
     await mutateDataJson<any[]>('dealers/dealers.json',[],rows=>(rows.length?rows:[{id:'dealer_topavto',name:'TopAvto',city:'Новокузнецк',status:'verified',pilot:true}]).map(d=>d.id===id?{...d,status:b.status,telegramChannel:String(b.telegramChannel||'').trim().slice(0,100),...(mail?{mail}:{}),updatedAt:new Date().toISOString()}:d));
-    if(b.status==='verified')await startDealerTrial(id);
+    if(b.status==='verified')await startDealerTrial(id);result={membership:await readMembership(id)};
    }else if(b.action==='sale'){
     const leads=await readChunkedDataJson<any>('leads/leads.json',[]),lead=leads.find(l=>l.id===b.leadId&&!l.archivedAt&&l.status==='completed'&&(l.requestedDealerId===id||l.dealerId===id));
     if(!lead)throw Error('Укажите завершённую заявку АвтоЦены, относящуюся к этому дилеру');
