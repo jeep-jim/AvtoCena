@@ -1,3 +1,4 @@
+import {readShowcase} from "./dealers/showcase-store";
 import {specialLeadSnapshot} from "./dealers/public-showcase";
 import {parseSpecialId} from "./dealers/showcase-model";
 import {leadChannelLabel} from "./lead-source";
@@ -184,7 +185,9 @@ export async function createLead(
   const max = clean(body.max, 160);
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
-  const customerComment = clean(body.comment, 2000) || clean(body.message, 2000);
+  const dealerProfile = body.dealerId ? await readShowcase(clean(body.dealerId,80)) : null;
+  const requestedDealer = dealerProfile?.profileEnabled ? {requestedDealerId:dealerProfile.dealerId,requestedDealerName:dealerProfile.name} : {};
+  const customerComment = [clean(body.comment, 2000) || clean(body.message, 2000), requestedDealer.requestedDealerName ? `Обращение со страницы дилера: ${requestedDealer.requestedDealerName}` : ""].filter(Boolean).join("\n");
   const contactPreference = normalizeContactPreference(
     body.contactPreference || body.contactMode,
   );
@@ -384,6 +387,7 @@ export async function createLead(
     max,
     city,
     comment,
+    ...requestedDealer,
     contactPreference,
     messenger,
     messengerContactKind: clean(body.messengerContactKind, 20),
@@ -457,6 +461,7 @@ export async function createLead(
     max,
     city,
     comment,
+    ...requestedDealer,
     contactPreference,
     messenger,
     messengerContactKind: clean(body.messengerContactKind, 20),

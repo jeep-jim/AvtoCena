@@ -1,3 +1,5 @@
+import {canManageDealer} from "@/lib/dealers/access";
+import {isPlatformOwner} from "@/lib/platform-access";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
@@ -10,7 +12,7 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  if ((await getCurrentUser())?.role !== "owner") notFound();
+  if (!(await canManageDealer(await getCurrentUser(),(await params).id))) notFound();
   const s = await readShowcase((await params).id);
   if (!s) notFound();
   return (
@@ -25,7 +27,7 @@ export default async function Page({
       >
         ← Карточка дилера
       </Link>
-      <DealerEditor initial={s} features={await readPublicFeatures()} />
+      <DealerEditor initial={s} features={await readPublicFeatures()} platformOwner={isPlatformOwner(await getCurrentUser())} />
     </CrmShell>
   );
 }

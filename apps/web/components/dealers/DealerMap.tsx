@@ -3,7 +3,7 @@ import { useState } from "react";
 import type { DealerOffice } from "@/lib/dealers/showcase-model";
 import { yandexOfficeUrls } from "@/lib/dealers/yandex-map";
 
-export function DealerMap({ offices }: { offices: DealerOffice[] }) {
+export function DealerMap({ offices }: { offices: Omit<DealerOffice, "phone">[] }) {
   const [enabled, setEnabled] = useState(false);
   const [selected, setSelected] = useState('');
   const available = offices.filter(o => o.address.trim() || (o.lat !== null && o.lon !== null));

@@ -1,3 +1,5 @@
+import {canManageDealer} from "@/lib/dealers/access";
+import {publicDealerProfile} from "@/lib/dealers/public-profile";
 import {publicRail} from "@/lib/dealers/public-showcase";
 import {DealerProfileContent} from "@/components/dealers/DealerProfileContent";
 import {dealerProfilePath} from '@/lib/dealers/profile-url';
@@ -22,7 +24,7 @@ export async function generateMetadata({
     };
   return {
     title: `${s.name} — дилер на АвтоЦена`,
-    description: s.description.slice(0, 200),
+    description: publicDealerProfile(s).description.slice(0, 200),
     alternates: { canonical: dealerProfilePath(s) },
   };
 }
@@ -36,13 +38,13 @@ export default async function Page({
   let s = await readShowcase((await params).id);
   const preview =
     (await searchParams).preview === "1" &&
-    (await getCurrentUser())?.role === "owner";
+    await canManageDealer(await getCurrentUser(),(await params).id);
   if (!s || (!s.profileEnabled && !preview)) notFound();
   if(s.specialsEnabled)s=await withDealerRate(s);
   return (
     <main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
-      <DealerProfileContent s={s} preview={preview} items={publicRail(s)} />
+      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} />
     </main>
   );
 }

@@ -48,6 +48,7 @@ export default function RequestPage() {
       return;
     }
 
+    const dealerId = new URLSearchParams(window.location.search).get("dealer") || "";
     setStatus("sending");
     setMessage("");
     try {
@@ -63,13 +64,13 @@ export default function RequestPage() {
           budgetRub: budgetRub || undefined,
           comment: cleanText(comment),
           contactPreference: "call",
-          source: "telegram_bot_site_request",
+          source: dealerId ? "dealer_profile_request" : "telegram_bot_site_request",
+          requestMode: "generic",
+          dealerId,
           personalDataConsent: true,
           personalDataConsentVersion: CONSENT_VERSION,
           personalDataConsentText: CONSENT_TEXT,
-          utmSource: "telegram",
-          utmMedium: "bot",
-          utmCampaign: "public_bot_request",
+          ...(dealerId ? {} : {utmSource: "telegram", utmMedium: "bot", utmCampaign: "public_bot_request"}),
           pageUrl: window.location.href,
           referrer: document.referrer,
           operationId: operationRef.current || (operationRef.current=crypto.randomUUID()),

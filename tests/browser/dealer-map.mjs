@@ -13,14 +13,18 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.route('https://yandex.ru/map-widget/**',r=>r.fulfill({contentType:'text/html',body:'<html lang="ru"><body>Яндекс Карты — тест виджета</body></html>'}));
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
  await page.locator('.dealer-profile-hero img').first().evaluate(img=>img.decode());
- if(width>700){const box=await page.locator('.dealer-profile-hero').boundingBox();assert.ok(box.height<300,'Compact hero must fit within 300px');}
+ if(width>700){const box=await page.locator('.dealer-profile-hero').boundingBox();assert.ok(box.height<=360,'Cover has a bounded height');const profile=await page.locator('.dealer-profile').boundingBox();assert.equal(profile.width,width); }
  await page.locator('.ac-buyers-rail').scrollIntoViewIfNeeded();await page.locator('.ac-buyers-rail img').first().evaluate(img=>img.decode());await page.evaluate(()=>scrollTo(0,0));
  await page.screenshot({path:`${out}/profile-${theme}-${width}.png`});
+ assert.equal(await page.locator('.dealer-profile a[href^="tel:"]').count(),0);
+ assert.equal(await page.locator('.dealer-profile').getByText('+79991234567').count(),0);
+ assert.ok((await page.locator('.dealer-profile a[href*="/request?dealer="]').first().getAttribute('href')).includes('dealer_topavto'));
+ await page.getByRole('button',{name:'Адреса',exact:true}).click();
  assert.equal(await page.locator('iframe').count(),0);
  await page.getByRole('button',{name:'Показать Яндекс Карту',exact:true}).click();
  let url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('text'),'Новокузнецк, ТРК Планета');
  await page.getByLabel('Выберите офис').selectOption('point');url=new URL(await page.locator('iframe').getAttribute('src'));assert.equal(url.searchParams.get('pt'),'37.61,55.75,pm2rdm');
  await page.getByRole('button',{name:'Использовать новый баннер TopAvto',exact:true}).click();assert.ok(await page.locator('img[src="/dealers/topavto-banner-v3.webp"]').count()>1);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
- await page.screenshot({path:`${out}/${theme}-${width}.png`});console.log(`${theme} ${width}: map activation, office switching, banner selection, no overflow/errors OK`);await page.close();
+ await page.screenshot({path:`${out}/${theme}-${width}.png`});await page.goto(`http://127.0.0.1:${server.address().port}/?offers=1`);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.locator('.dealer-car').first().scrollIntoViewIfNeeded();assert.equal(await page.locator('.dealer-car').count(),3);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:`${out}/offers-${theme}-${width}.png`});console.log(`${theme} ${width}: map activation, office switching, banner selection, offer grid, no overflow/errors OK`);await page.close();
 }}finally{await browser.close();server.close();}

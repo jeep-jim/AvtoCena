@@ -1,3 +1,4 @@
+import {managesAllDealers} from "@/lib/dealers/access";
 import {parseDealerMail} from "@/lib/dealer-mail";
 import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
 import {recordCrmActivity} from "@/lib/crm-activity";
@@ -48,7 +49,7 @@ function imageExtension(type: string) {
 
 export async function POST(request: Request) {
   const actor = await getCurrentUser();
-  if (!actor || !hasCrmPermission(actor,"dealers")) {
+  if (!actor || !managesAllDealers(actor)) {
     const params = new URLSearchParams({ next: "/crm/dealers", error: "auth_required" });
     return new NextResponse(null, { status: 303, headers: { Location: `/login?${params}` } });
   }

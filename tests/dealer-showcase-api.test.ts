@@ -87,7 +87,7 @@ test("dealer writes enforce current owner role and origin before accepting conte
         403,
       );
     }
-    (globalThis as any).__dealerTestActor = { id: "owner", role: "owner" };
+    (globalThis as any).__dealerTestActor = { id: "user_nstass", role: "owner", companyId:"dealer_topavto" };
     assert.equal(
       (
         await modules.showcase.PUT(

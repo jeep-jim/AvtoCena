@@ -1,3 +1,4 @@
+import {readDataJson} from "@/lib/data";
 import {StaffProfileTabs} from "@/components/crm/StaffProfileTabs";
 import {StaffWorkplaces} from "@/components/crm/StaffWorkplaces";
 import {TeamSchedule} from "@/components/crm/TeamSchedule";
@@ -29,6 +30,9 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
   if (!hasCrmPermission(actor,"staff") && id !== actor.id) redirect("/crm");
   const query: SearchParams = (await searchParams) || {};
   const isNew = id === "new";
+  const storedCompanies = await readDataJson<{id:string;name:string}[]>("dealers/dealers.json",[]);
+  const companies = storedCompanies.length ? storedCompanies : [{id:"dealer_topavto",name:"TopAvto"}];
+  const requestedCompany = isNew && companies.some(c=>c.id===first(query.dealer)) ? first(query.dealer) : "";
   const users = await readCrmUsers();
   const user = isNew ? null : users.find((item) => item.id === id);
   if (!isNew && !user) notFound();
@@ -57,9 +61,9 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
           <label className="grid gap-2 text-xs font-bold">Личный телефон<input type="tel" name="personalPhone" autoComplete="tel" maxLength={40} defaultValue={user?.personalPhone||""} placeholder="+7 (999) 123-45-67" className="soft-input rounded-xl px-4 py-3"/><span className="text-[11px] font-normal text-[var(--ac-muted)]">Для звонков из блока команды.</span></label>
           <StaffWorkplaces addresses={user?.workAddresses} remote={user?.remoteWork}/>
           {actor.role==="owner" ? <label className="crm-permission md:col-span-2"><span><strong>🌼 Ромашка</strong><small>Копирование характеристик и стоимости из карточки автомобиля.</small></span><input type="hidden" name="offerCopyPresent" value="1"/><input type="checkbox" role="switch" name="offerCopyEnabled" defaultChecked={Boolean(user && user.offerCopyEnabled!==false)}/></label> : null}
-          <StaffPermissions role={user?.role||"manager"} permissions={user?.permissions} owner={actor.role==="owner"}/>
+          <StaffPermissions role={user?.role||(requestedCompany?"dealer":"manager")} permissions={user?.permissions} owner={actor.role==="owner"}/>
           <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42">Статус<select name="status" defaultValue={user?.status || "active"} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal"><option value="active">Доступ разрешён</option><option value="disabled">Доступ отключён</option></select></label>
-          <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2">Компания<input name="companyId" defaultValue={user?.companyId || "dealer_topavto"} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
+          <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2">Компания<select name="companyId" defaultValue={user?.companyId || requestedCompany || "dealer_topavto"} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal">{user?.companyId&&!companies.some(c=>c.id===user.companyId)&&<option value={user.companyId}>{user.companyId}</option>}{companies.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
           <p className="text-sm md:col-span-2">Уведомления поступают в закрытую группу команды. Привязка личного Telegram не требуется.</p>
           <button className="dealer-primary-button rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2">{isNew ? "Добавить сотрудника" : "Сохранить сотрудника"}</button>
         </div>

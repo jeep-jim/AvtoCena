@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
 const roleInfo: Record<string, { label: string; access: string }> = {
   owner: { label: "Владелец", access: "Полный доступ, пользователи, рынки и дилеры" },
   admin: { label: "Администратор", access: "Заявки, клиенты, команда, рынки и дилеры" },
+  dealer: { label: "Дилер", access: "Только кабинет своей компании после подтверждения владельцем платформы" },
   manager: { label: "Менеджер", access: "Назначенные заявки, клиенты и расчёты" },
 };
 
@@ -24,7 +25,7 @@ export default async function CrmManagersPage({searchParams}:{searchParams?:Prom
     readChunkedDataJson<any>("leads/leads.json", []),
     readChunkedDataJson<any>("clients/clients.json", []),
   ]);
-  const managers = allUsers.filter((user) => isCrmRole(user.role));
+  const managers = allUsers.filter((user) => isCrmRole(user.role) || (user.role === "dealer" && hasCrmPermission(actor,"staff")));
 
   return (
     <CrmShell activeHref="/crm/managers" title="Команда и права" subtitle="Сотрудники компании, их роли, назначенные заявки и доступ к разделам CRM.">

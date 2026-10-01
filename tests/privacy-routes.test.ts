@@ -26,7 +26,8 @@ test('dealer settings require permission and same origin, and preserve email for
   });
   const send=(mail=false,origin='https://avtocena.com',city='Новокузнецк')=>{const body=new FormData();for(const [k,v] of Object.entries({dealerId:'dealer_topavto',name:'TopAvto',city,status:'verified'}))body.set(k,v);if(mail){body.set('mailEmail','office@example.ru');body.set('mailProvider','yandex');body.set('mailReady','on');}return api.POST(new Request('https://0.0.0.0:8080/api/crm/dealers',{method:'POST',headers:{origin},body}));};
   assert.equal((await send()).headers.get('location'),'/login?next=%2Fcrm%2Fdealers&error=auth_required');s.user={id:'m',role:'manager'};assert.match((await send()).headers.get('location')||'',/login/);assert.equal(s.writes,0);
-  s.user={id:'o',role:'owner'};assert.equal((await send(true,'https://evil.test')).status,403);assert.equal(s.writes,0);
+  s.user={id:'o',role:'owner'};assert.match((await send()).headers.get('location')||'',/login/);assert.equal(s.writes,0);
+  s.user={id:'user_nstass',role:'owner',companyId:'dealer_topavto'};assert.equal((await send(true,'https://evil.test')).status,403);assert.equal(s.writes,0);
   assert.equal((await send()).headers.get('location'),'/crm/dealers/dealer_topavto?state=saved');assert.equal(s.rows[0].mail.email,'info@avtocena.com');
   assert.match((await send(true)).headers.get('location')||'',/state=saved/);assert.deepEqual(s.rows[0].mail,{email:'office@example.ru',provider:'yandex',ready:true});
   const failed=await send(false,'https://avtocena.com','');assert.equal(failed.status,303);assert.ok(failed.headers.get('location')?.startsWith('/crm/dealers/dealer_topavto?state=error&message='));assert.equal(s.writes,2);

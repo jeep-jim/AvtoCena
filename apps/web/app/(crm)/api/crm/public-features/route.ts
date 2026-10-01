@@ -1,10 +1,11 @@
+import {isPlatformOwner} from "@/lib/platform-access";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { isCalculationOriginAllowed } from "@/lib/catalog/calculation-request-origin";
 import { savePublicFeatures } from "@/lib/dealers/showcase-store";
 export async function PUT(req: Request) {
   if (
-    (await getCurrentUser())?.role !== "owner" ||
+    !isPlatformOwner(await getCurrentUser()) ||
     !isCalculationOriginAllowed(req)
   )
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });

@@ -17,9 +17,11 @@ import type { PublicFeatures } from "@/lib/dealers/showcase-store";
 export function DealerEditor({
   initial,
   features,
+  platformOwner = false,
 }: {
   initial: DealerShowcase;
   features: PublicFeatures;
+  platformOwner?: boolean;
 }) {
   const prepared=()=>{
     const value=structuredClone(initial);
@@ -91,12 +93,13 @@ export function DealerEditor({
     }));
   return (
     <div className="dealer-editor space-y-4">
-      <div className="flex flex-wrap gap-2">
+      <div className="dealer-editor-navigation flex flex-wrap gap-2">
         {[
-          ["profile", "Компания и офисы"],
+          ["profile", "Профиль"],
+          ["offices", "Адреса офисов"],
           ["buyers", "Фото покупателей"],
           ["offers", "Спецпредложения"],
-          ["services", "ОСАГО и кредит"],
+          ...(platformOwner ? [["services", "ОСАГО и кредит"]] : []),
         ].map(([id, label]) => (
           <button
             type="button"
@@ -153,7 +156,7 @@ export function DealerEditor({
                 <section className="space-y-2" key={key}>
                   <h3>{label}</h3>
                   {key === "banner" && <>
-                    <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Оставьте текст и логотип с отступом от краёв.</p>
+                    <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Логотип загружается отдельно; края обложки могут обрезаться на телефоне.</p>
                     {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v3.webp" })}>Использовать новый баннер TopAvto</button>}
                   </>}
                   <Photos
@@ -169,23 +172,11 @@ export function DealerEditor({
                 </section>
               ))}
             </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              <Field
-                label="Телефон"
-                value={s.phone}
-                onChange={(v) => patch({ phone: v })}
-              />
-              <Field
-                label="Telegram — https://t.me/…"
-                value={s.telegram}
-                onChange={(v) => patch({ telegram: v })}
-              />
-              <Field
-                label="MAX — https://max.ru/…"
-                value={s.max}
-                onChange={(v) => patch({ max: v })}
-              />
-            </div>
+            <p className="rounded-xl bg-[var(--ac-bg)] p-3 text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
+          </>
+        )}
+        {tab === "offices" && (
+          <>
             <h2 className="text-xl font-black">Города и офисы</h2>
             <p className="text-sm text-[var(--ac-muted)]">Яндекс Карты покажут офис по городу и адресу. Для точной метки можно дополнительно указать координаты.</p>
             {s.offices.map((o, i) => {
@@ -216,26 +207,21 @@ export function DealerEditor({
                       }
                     />
                     <Field
-                      label="Телефон офиса"
-                      value={o.phone}
-                      onChange={(v) => change({ phone: v })}
-                    />
-                    <Field
                       label="Время работы"
                       value={o.hours}
                       onChange={(v) => change({ hours: v })}
                     />
                     <Field
                       label="Широта"
-                      type="number"
+                      type="text"
                       value={o.lat ?? ""}
-                      onChange={(v) => change({ lat: v })}
+                      onChange={(v) => change({ lat: v === "" ? null : Number(v) })}
                     />
                     <Field
                       label="Долгота"
-                      type="number"
+                      type="text"
                       value={o.lon ?? ""}
-                      onChange={(v) => change({ lon: v })}
+                      onChange={(v) => change({ lon: v === "" ? null : Number(v) })}
                     />
                   </div>
                   <a className={button + " inline-block"} href={yandexOfficeUrls(o).full} target="_blank" rel="noreferrer">Проверить адрес в Яндекс Картах ↗</a>
@@ -302,7 +288,7 @@ export function DealerEditor({
           </>
         )}
         {tab === "offers" && <DealerSpecialsEditor s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId}/>}
-        {tab === "services" && (
+        {platformOwner && tab === "services" && (
           <>
             <h2 className="text-xl font-black">Сервисы на всём сайте</h2>
             <Toggle
@@ -319,7 +305,7 @@ export function DealerEditor({
       </fieldset>
       <aside className="dealer-editor-sidebar">
        <section className="dealer-editor-panel space-y-3">
-        <h2 className="text-lg font-black">Сохранение</h2>
+        <div className="flex items-center justify-between gap-2"><h2 className="text-lg font-black">Публикация</h2><span className="text-xs text-[var(--ac-muted)]">{s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
         <button type="button" disabled={busy} className="w-full rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':tab==='services'?'Сохранить видимость сервисов':'Сохранить настройки дилера'}</button>
         {tab==='offers'&&active&&<button type="button" disabled={busy} className={button+' w-full'} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
         <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации выберите статус «Опубликован» и включите ленту.':'Изменения появятся на странице после сохранения.')}</p>
@@ -335,12 +321,13 @@ export function DealerEditor({
         {quote?.complete?quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
         <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. На сайте изменения появятся после сохранения.</p>
        </section>}
-       {tab==='profile'&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр компании">{s.banner&&<img src={s.banner} alt="Баннер" className="aspect-[3/1] w-full rounded-xl object-cover"/>}{(s.logoDark||s.logoLight)&&<img src={s.logoDark||s.logoLight} alt="Логотип" className="h-14 max-w-full object-contain"/>}<h2 className="text-xl font-black">{s.name}</h2><p className="whitespace-pre-line text-sm">{s.description}</p><p className="text-sm">{s.phone}</p><p className="break-all text-xs text-red-500">avtocena.com{dealerProfilePath(s)}</p></section>}
+       {tab==='profile'&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр компании">{s.banner&&<img src={s.banner} alt="Баннер" className="aspect-[3/1] w-full rounded-xl object-cover"/>}{(s.logoDark||s.logoLight)&&<img src={s.logoDark||s.logoLight} alt="Логотип" className="h-14 max-w-full object-contain"/>}<h2 className="text-xl font-black">{s.name}</h2><p className="whitespace-pre-line text-sm">{s.description}</p><p className="break-all text-xs text-red-500">avtocena.com{dealerProfilePath(s)}</p></section>}
       </aside>
       </div>
       <style>{`
-       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start}
-       .dealer-editor-main{border:0;padding:0;margin:0}
+       .dealer-editor-navigation{padding:8px;border:1px solid var(--ac-border);border-radius:18px;background:var(--ac-surface)}
+       .dealer-editor-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+       .dealer-editor-main{border:1px solid var(--ac-border);border-radius:20px;background:var(--ac-surface);padding:20px;margin:0}
        .dealer-editor-sidebar{position:sticky;top:90px;display:grid;gap:16px;min-width:0}
        .dealer-editor-panel{padding:14px;border:1px solid var(--ac-border);border-radius:16px;background:var(--ac-surface)}
        .dealer-editor-main input,.dealer-editor-main select{min-height:40px}
