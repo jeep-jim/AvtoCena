@@ -1,3 +1,5 @@
+import {resolveOfferDisplay} from '@/lib/catalog/offer-display-data';
+export {generateOfferMetadata as generateMetadata} from '@/lib/catalog/offer-metadata';
 import {SpecialOfferPage} from "@/components/dealers/SpecialOfferPage";
 import {parseSpecialId} from "@/lib/dealers/showcase-model";
 import { canCopyOffer } from "@/lib/offer-copy";
@@ -57,7 +59,7 @@ import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls, catalogAuctionSheetUrls } from "@/lib/catalog/image-quality";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
-import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { getOfferForPage, getOfferDetailRecord } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { safePublicPricing } from "@/lib/catalog/safe-public-pricing";
@@ -264,11 +266,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  let storedOffer = isJapanCatalogOfferId(id)
-    ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
-    : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
-  // New auction IDs are hashes, so their market cannot be inferred from the ID.
-  if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
+  const storedOffer = await getOfferDetailRecord(id);
   const sourceHybridDraft = storedOffer ? proAuctionsHybridDraft(storedOffer) : {};
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
@@ -289,30 +287,10 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation
     ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
     : undefined;
-  const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(storedOffer)));
-  const offer = safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
-
-  const sellerPricing = isSellerPricedOffer(offer);
-  const selectionRequired = hasModificationSelection(offer);
-  const selectedModification = selectionRequired && query.modificationId
-    ? await calculateSelectedModification(offer, query.modificationId) : null;
-  const enrichedOffer = selectionRequired || sellerPricing ? offer : await enrichOfferForDisplay(offer);
-  // Normalize while the trusted immutable identity evidence is still present.
-  // publicOffer deliberately removes operational fields; running it first used
-  // to erase resolver-backed variants such as UX250h before powertrain safety
-  // could correct the stale combustion classification.
-  const normalizedEnrichedOffer: any = selectionRequired || sellerPricing ? enrichedOffer : normalizeVehicleOfferSpecs(enrichedOffer);
-  const initialPublic: any = publicOffer(normalizedEnrichedOffer);
-  const initialVisibleRub = catalogOfferVisibleRub(initialPublic);
-  const pricedOffer = sellerPricing ? normalizedEnrichedOffer : selectionRequired ? selectedModification || withoutDeliveredPrice(offer) : safeRequestedPowerHp
-    ? await calculateOfferWithUserPowerScenario(normalizedEnrichedOffer as any, safeRequestedPowerHp)
-    : initialVisibleRub > 0
-      ? normalizedEnrichedOffer
-      : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
+  const {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw} = await resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '');
   const sourceUrl = enrichedOffer.market === "japan" && !isGreenCornerOffer(enrichedOffer)
     ? undefined
     : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
-  const raw: any = selectionRequired || sellerPricing ? publicOffer(pricedOffer) : normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
   const presented = presentCatalogOffer(raw);
   const powerScenario = readCatalogPowerScenario(raw);
   // A user-entered horsepower value is an explicit on-page calculation scenario.
@@ -419,7 +397,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
 
   const updatedStatus = <OfferUpdatedStatus date={updatedDate} time={updatedTime} sourceUrl={sourceUrl} />;
 
-  return <main data-offer-id={o.id} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
+  return <main data-offer-id={o.id} data-offer-share-name={o.title} data-offer-share-year={directScenario?.draft.year || savedCalculation?.draft.year || offer.year} data-offer-share-engine-cc={directScenario?.draft.engineCc || savedCalculation?.draft.engineCc || offer.engineCc} data-offer-share-fuel={offer.fuel} data-offer-saved-version={clientScenario?.version} data-offer-price-rub={directScenario?.calculation.totalRub || savedCalculation?.calculation.totalRub || (sellerPricing ? offer.sellerPriceRub : visibleRub || undefined)} data-offer-preview={JSON.stringify({id:o.id,title:o.title,imageUrl:o.images[0],fuel:offer.fuel,powertrainKind:offer.powertrainKind,year:o.year,totalRub:favoriteRub || null,marketLabel:o.marketLabel})} className="ac-offer-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">

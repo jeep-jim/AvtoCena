@@ -1,0 +1,25 @@
+name: Verify offer sharing
+on:
+  push:
+    branches: [fix/offer-share-summary-20261001]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/staff-avatar-presence-url.test.ts tests/offer-navigation-performance.test.ts tests/catalog-card-contract.test.ts tests/catalog-editable-power-scenario.test.ts
+      - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check native sharing, clipboard and mini-app
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs

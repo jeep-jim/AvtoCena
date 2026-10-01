@@ -46,7 +46,7 @@ test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /async function resilientOfferLookup/);
   assert.match(data, /return getOffer\(id\)/);
   assert.match(data, /cache\(\(id: string\) => resilientOfferLookup\(id\)\)/);
-  assert.match(page, /getOfferForPage\(id\)/);
+  assert.match(data, /getOfferForPage\(id\)/);
   assert.match(layout, /getOfferForPage\(id\)/);
 });
 
@@ -143,11 +143,12 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row && !isConfirmedSourceWithdrawn\(row\) \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
-  assert.match(page, /isJapanCatalogOfferId\(id\)/);
-  assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
-  assert.match(page, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(data, /isJapanCatalogOfferId\(id\)/);
+  assert.match(page, /await getOfferDetailRecord\(id\)/);
+  assert.match(data, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(data, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
-  assert.match(page, /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
+  assert.match(fs.readFileSync("apps/web/lib/catalog/offer-display-data.ts", "utf8"), /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
   assert.doesNotMatch(page, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
   // Complete-index absence and incomplete-index recovery are exercised with
   // real storage fixtures in catalog-missing-offer-lookup.test.ts.
