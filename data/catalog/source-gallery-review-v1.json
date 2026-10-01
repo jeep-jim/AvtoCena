@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "reviewedAt": "2026-09-07",
-  "evidence": "data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json#visualReview",
-  "method": "Previously completed visual review; exact source URL metadata, no new image downloads. This is a small review list, not an automatic image classifier.",
+  "reviewedAt": "2026-09-17",
+  "evidence": "data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json#visualReview; https://github.com/jeep-jim/AvtoCena/actions/runs/35191058090",
+  "method": "Previously completed visual review; exact source URL metadata, no new image downloads. This is a small review list, not an automatic image classifier. JPtrade: visual review of both decoded photos for 691 source-bound lots; exact holds include auction sheets, missing exterior, and uncertain vehicle identity.",
   "excludedImages": [
     {
       "url": "https://img.classistatic.de/api/v1/mo-prod/images/61/61655b0f-2b2c-44bb-b51f-2d2914ec3ead?rule=mo-1600",
@@ -57,6 +57,111 @@
       "sourceId": "mobile_de_open",
       "sourceOfferId": "38449215943136",
       "reason": "gallery_model_identity_requires_review"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "30150316"
+    },
+    {
+      "reason": "vehicle_identity_mismatch_n_wgn_vs_van",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29461316"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29444615"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29916754"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29916966"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29414266"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29377323"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29762392"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29609424"
+    },
+    {
+      "reason": "auction_sheet_in_two_image_gallery",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "30036693"
+    },
+    {
+      "reason": "no_exterior_image_in_verified_pair",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "30153739"
+    },
+    {
+      "reason": "no_exterior_image_in_verified_pair",
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29419181"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29986438",
+      "reason": "auction_sheet_in_two_image_gallery"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29413533",
+      "reason": "auction_sheet_in_two_image_gallery"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29756627",
+      "reason": "auction_sheet_in_two_image_gallery"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29616753",
+      "reason": "auction_sheet_in_two_image_gallery"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29440196",
+      "reason": "auction_sheet_in_two_image_gallery"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29587116",
+      "reason": "vehicle_identity_requires_visual_review"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29548909",
+      "reason": "vehicle_identity_requires_visual_review"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29820301",
+      "reason": "vehicle_identity_requires_visual_review"
+    },
+    {
+      "sourceId": "jptrade_japan_stat",
+      "sourceOfferId": "29468695",
+      "reason": "vehicle_identity_requires_visual_review"
     }
   ]
 }
