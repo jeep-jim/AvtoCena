@@ -9,7 +9,7 @@ export function ShareLinkButton({className = "", compactMobile = false, iconOnly
     const page=document.querySelector<HTMLElement>("[data-offer-id]");
     const parameters=page?.querySelector<HTMLElement>(".ac-inline-parameters");
     if(parameters?.dataset.sharePending){setStatus("Дождитесь пересчёта");return;}
-    const savedVersion=page?.dataset.offerSavedVersion;
+    const savedVersion=page?.dataset.offerSavedVersion || document.querySelector<HTMLElement>("[data-offer-saved-version]")?.dataset.offerSavedVersion;
     const target = new URL(offerShareUrl(window.location.href,document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || null,savedVersion));
     const price=parameters?.querySelector(".ac-offer-price-panel .ac-price")?.textContent;
     const totalRub=price ? (price.includes('₽')?Number(price.replace(/[^\d,.-]/g,'').replace(',','.')):null) : parameters ? null : Number(page?.dataset.offerPriceRub);
