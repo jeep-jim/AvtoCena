@@ -16,8 +16,7 @@ try {
   page.on('pageerror',e=>{browserErrors.push(e.message);console.error(e.message);});
   await page.goto(`http://127.0.0.1:${server.address().port}`);
   for(const pageNumber of [3,10,18]) {
-   page.on('pageerror',e=>{browserErrors.push(e.message);console.error(e.message);});
-  await page.goto(`http://127.0.0.1:${server.address().port}/?page=${pageNumber}`);
+   await page.goto(`http://127.0.0.1:${server.address().port}/?page=${pageNumber}`);
    const nav=page.getByRole('navigation',{name:'Страницы каталога'});await nav.waitFor();
    const boxes=await nav.locator(':scope > *').evaluateAll(items=>items.filter(el=>getComputedStyle(el).display!=='none').map(el=>{const r=el.getBoundingClientRect();return {top:r.top,left:r.left,right:r.right};}));
    assert.ok(Math.max(...boxes.map(x=>x.top))-Math.min(...boxes.map(x=>x.top))<2,`pagination wraps ${width}/${pageNumber}`);

@@ -43,9 +43,9 @@ export function SpecialRail({
                   : `${o.price.toLocaleString("ru-RU")} ₽`}
               </p>
               <p className="text-sm text-[var(--ac-muted)]">
-                Доставка в ваш город — отдельно
+                {o.city ? `Цена с доставкой до ${o.city}` : "Базовая стоимость автомобиля"}
                 {o.daysFrom ? ` · ${o.daysFrom}–${o.daysTo} дней` : ""}
-              </p>
+              </p><p className="text-xs text-[var(--ac-muted)]">Доставка дальше — отдельно</p>
             </div>
           </Link>
         ))}

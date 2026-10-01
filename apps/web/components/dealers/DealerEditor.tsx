@@ -1,12 +1,12 @@
 "use client";
 import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight} from 'lucide-react';
-import {DealerDemoContext} from './DealerDemoContext';
+import {DealerDemoContext,DealerUploadContext} from './DealerDemoContext';
 import {DealerWorkspaceStyles} from './DealerWorkspaceStyles';
 import {DEFAULT_PROGRAM,EMPTY_MEMBERSHIP,dealerAccessLevel,type DealerProgram,type Membership} from '@/lib/dealers/program-model';
 import {CatalogMarketFlag} from "@/components/catalog/CatalogMarketFlag";
 import {DEALER_SERVICES} from "@/lib/dealers/service-pricing";
 import {DEALER_MARKETS,dealerMarkets} from "@/lib/dealers/catalog-markets";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   calculateSpecial,
@@ -45,6 +45,10 @@ export function DealerEditor({
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
   const [recovery,setRecovery]=useState<any>(null);
   const base=useRef(initial);
+  const [pendingUploads,setPendingUploads]=useState(0);
+  const uploadChange=useCallback((delta:number)=>setPendingUploads(n=>Math.max(0,n+delta)),[]);
+  const dirty=JSON.stringify(s)!==JSON.stringify(base.current);
+  const statusMessage=dirty&&['Настройки сохранены','Черновик сохранён. Автомобиль не опубликован.'].includes(message)?'Есть несохранённые изменения':message;
   const previewDialog=useRef<HTMLDialogElement>(null);
   const openDemoPreview=(event:React.MouseEvent)=>{if(demo){event.preventDefault();previewDialog.current?.showModal();}};
   const [loaded,setLoaded]=useState(false);
@@ -62,6 +66,7 @@ export function DealerEditor({
   const pricing = (v: Partial<DealerShowcase["pricing"]>) =>
     setS((s) => ({ ...s, pricing: { ...s.pricing, ...v } }));
   async function save(global = false, draft = false, resolved?: DealerShowcase) {
+    if(pendingUploads)return;
     if(demo){setMessage('Демо сохранено в этой вкладке. Данные компаний не изменены.');return;}
     let payload=resolved||s;
     if(draft&&active){const offers=s.offers.map(o=>o.id===active.id?{...o,status:'draft' as const}:o);payload={...s,offers,specialsEnabled:s.specialsEnabled&&offers.some(o=>o.status==='published')};}
@@ -96,7 +101,7 @@ export function DealerEditor({
       offers: s.offers.map((o) => (o.id === id ? { ...o, ...v } : o)),
     }));
   return (
-    <DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
+    <DealerUploadContext.Provider value={uploadChange}><DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
       <DealerWorkspaceStyles/>
       {demo&&<dialog ref={previewDialog} className="dealer-preview-dialog"><div className="flex justify-between gap-4 mb-5"><strong>Предпросмотр демо-компании</strong><button type="button" className={button} onClick={()=>previewDialog.current?.close()}>Закрыть</button></div>{s.banner&&<img src={s.banner} alt="Обложка компании"/>}<h2 className="dw-title mt-5">{s.name}</h2><p className="dw-muted">{s.description}</p><p className="dw-muted mt-3">{s.offices.map(o=>[o.city,o.address].filter(Boolean).join(', ')).join(' · ')}</p><h3 className="font-bold mt-6 mb-3">Направления каталога</h3><div className="flex flex-wrap gap-3">{dealerMarkets(s.catalogMarkets).map(m=><span key={m} className="dw-badge">{DEALER_MARKETS.find(x=>x.id===m)?.label||m}</span>)}</div>{fullAccess&&s.offers.length>0&&<><h3 className="font-bold mt-6 mb-3">Ваши автомобили</h3><div className="dealer-offer-list">{s.offers.map(o=><article key={o.id} className="dw-card">{o.photos[0]&&<img src={o.photos[0].url} alt={specialTitle(o)}/>}<h3 className="mt-3">{specialTitle(o)}</h3><p className="dw-muted">{calculateSpecial(s,o).complete?`${calculateSpecial(s,o).totalRub?.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p></article>)}</div></>}<p className="dw-muted mt-6">Пример оформления. Эта компания не публикуется на сайте.</p></dialog>}
       <div className="dealer-editor-shell">
@@ -111,16 +116,16 @@ export function DealerEditor({
           ["pricing", "Расчёт своих авто",Calculator],
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription","Мой доступ",ShieldCheck]] : []),
           ...(administration ? [["administration","Управление доступом",ShieldCheck]] : []),
-        ].map(([id,label,Icon]:any)=><button type="button" key={id} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
+        ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
       </div>
       <div className="dealer-editor-content">
       {recovery&&<div className="dealer-editor-panel"><p>Есть несохранённые изменения из прошлой сессии.</p><div className="mt-3 flex gap-2"><button className={button} onClick={()=>{base.current=recovery.base||initial;setS(recovery.value);setRecovery(null);}}>Восстановить изменения</button><button className={button} onClick={()=>setRecovery(null)}>Оставить сохранённую версию</button></div></div>}
       {!["overview","subscription","administration"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
        <section className="dealer-editor-panel space-y-3">
         <div className="dealer-save-status"><span className="dw-badge">{demo?"Демо":s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
-        <button type="button" disabled={busy||(!fullAccess&&["offers","pricing","rates","buyers"].includes(tab))} className="rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{busy?'Сохраняем…':'Сохранить изменения'}</button>
-        {tab==='offers'&&active&&<button type="button" disabled={busy} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
-        <p role="status" className="text-sm leading-5">{message||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
+        <button type="button" disabled={busy||pendingUploads>0||(!fullAccess&&["offers","pricing","rates","buyers"].includes(tab))} className="rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':'Сохранить изменения'}</button>
+        {tab==='offers'&&active&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
+        <p role="status" className="text-sm leading-5">{(pendingUploads?'Дождитесь окончания загрузки фотографий, затем сохраните изменения.':statusMessage)||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
         <Link onClick={openDemoPreview} className="block text-sm text-red-500 underline" target={demo?undefined:"_blank"} href={`/dealers/${s.dealerId}?preview=1`}>Предпросмотр</Link>
        </section>
@@ -261,6 +266,7 @@ export function DealerEditor({
                   {fullAccess&&<Photos
                     dealerId={s.dealerId}
                     value={o.photos}
+                    limit={20}
                     onChange={(photos) => change({ photos })}
                   />}
                   <button
@@ -315,6 +321,7 @@ export function DealerEditor({
             <Photos
               dealerId={s.dealerId}
               value={s.buyerPhotos}
+              limit={100}
               onChange={(buyerPhotos) => patch({ buyerPhotos })}
             />
           </section>
@@ -348,6 +355,6 @@ export function DealerEditor({
 
       </div>}
       </div></div>
-    </div></DealerDemoContext.Provider>
+    </div></DealerDemoContext.Provider></DealerUploadContext.Provider>
   );
 }

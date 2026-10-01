@@ -1,5 +1,5 @@
 'use client';
-import {useDealerDemo} from './DealerDemoContext';
+import {useDealerDemo,useDealerUploadBusy} from './DealerDemoContext';
 import {useEffect,useRef,useState} from 'react';
 import type {SourceDraft} from '@/lib/autocalc/load';
 import type {SpecialOffer,DealerPhoto} from '@/lib/dealers/showcase-model';
@@ -8,6 +8,7 @@ import {button,input} from './DealerEditorFields';
 export function DealerOfferImport({dealerId,offer,onChange}:{dealerId:string;offer:SpecialOffer;onChange:(patch:Partial<SpecialOffer>)=>void}){
  const demo=useDealerDemo();
  const [url,setUrl]=useState(offer.sourceUrl||''),[data,setData]=useState<SourceDraft|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[replace,setReplace]=useState(false),[selected,setSelected]=useState<string[]>([]);
+ useDealerUploadBusy(busy);
  const current=useRef(offer);current.current=offer;
  const controller=useRef<AbortController|null>(null);
  useEffect(()=>()=>controller.current?.abort(),[]);

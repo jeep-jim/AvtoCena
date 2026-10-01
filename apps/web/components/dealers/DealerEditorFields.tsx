@@ -1,5 +1,5 @@
 "use client";
-import {useDealerDemo} from "./DealerDemoContext";
+import {useDealerDemo,useDealerUploadBusy} from "./DealerDemoContext";
 import {useState,useRef} from "react";
 import {Check,Upload,ImagePlus,Trash2,ArrowLeft,ArrowRight,Star} from "lucide-react";
 import type {DealerPhoto} from "@/lib/dealers/showcase-model";
@@ -60,17 +60,21 @@ export function Photos({
   value,
   onChange,
   single = false,
+  limit = 40,
 }: {
   dealerId: string;
   value: DealerPhoto[];
   onChange: (p: DealerPhoto[]) => void;
   single?: boolean;
+  limit?: number;
 }) {
   const demo=useDealerDemo(),picker=useRef<HTMLInputElement>(null);
   const [busy,setBusy]=useState(false),[url,setUrl]=useState(''),[error,setError]=useState(''),[progress,setProgress]=useState(''),[drag,setDrag]=useState(false);
+  useDealerUploadBusy(busy);
   const latest=useRef(value);latest.current=value;
   async function upload(files?:FileList|null){
    if(files&&!files.length)return;
+   if(!single&&value.length+(files?files.length:1)>limit){setError(`В этой галерее до ${limit} фото. Можно добавить ещё: ${Math.max(0,limit-value.length)}.`);return;}
    setBusy(true);setError('');const added:DealerPhoto[]=[];let failures=0;
    const list=files?Array.from(files):[null];
    for(const [i,file] of list.entries()){
