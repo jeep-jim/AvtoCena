@@ -183,7 +183,7 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
  const hybridHelp=<ResearchLink query={hybridQuery} label={draft.fuel==="electric" ? "Алиса покажи 30-минутную мощность" : "Алиса покажи тип гибрида и мощность"} compact />;
  const currentYear = new Date().getFullYear();
  const yearOptions = publicProductionYears();
- return <div data-share-error={error || undefined} data-share-estimate={result ? encodeShareDraft(draft) : undefined} data-share-year={draft.year} data-share-engine-cc={draft.engineCc} data-share-fuel={draft.fuel} data-share-pending={pending || undefined} className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
+ return <div data-share-error={error || undefined} data-share-estimate={result && (dirty || initialScenario) ? encodeShareDraft(draft) : undefined} data-share-year={draft.year} data-share-engine-cc={draft.engineCc} data-share-fuel={draft.fuel} data-share-pending={pending || undefined} className={`ac-inline-parameters ${showCalculation?"ac-personal-parameters":""}`}>
   {result ? <div aria-live="polite" aria-busy={pending}>
    <PriceTrend hideAuctionGrade panel className="ac-offer-price-panel" highlightElectrified={["electric","hybrid"].includes(draft.fuel)} label="Стоимость под ключ" priceClassName="text-3xl md:text-4xl" offer={{...priceIdentity,totalRub:result.totalRub,sourcePrice:result.currencyRate?.sourcePrice,sourceCurrency:result.currencyRate?.currency,calculationSnapshot:{currencyRate:result.currencyRate}}} />
    {priceBadges ? <div className="mt-3 flex justify-end">{priceBadges}</div> : null}

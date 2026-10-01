@@ -42,6 +42,9 @@ test('metadata uses displayed calculation, archived client version and proxy ima
  try{
   let result=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'})});assert.match(result.title,/1 668 942 ₽/);assert.equal(result.openGraph.title,result.title);assert.match(result.openGraph.images[0].url,/https:\/\/avtocena.com\/api\/catalog\/photo\//);
   assert.doesNotMatch(result.description,/₽|Chevrolet/);
+  const shared=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'}),searchParams:Promise.resolve({share:'3'})});
+  assert.equal(shared.openGraph.title,'Chevrolet Trax Turbo 1.2 — 2024, 1,2 л');assert.doesNotMatch(shared.openGraph.description,/₽/);assert.equal(shared.openGraph.images.length,1);
+  assert.equal(shared.twitter.card,'summary_large_image');
   state.seller=true;state.offer.sellerPriceRub=579040;state.automatic={draft:{},calculation:{totalRub:1160164}};
   result=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'})});assert.match(result.openGraph.title,/1 160 164 ₽/);assert.doesNotMatch(result.openGraph.title,/579 040/);assert.equal(result.twitter.title,result.openGraph.title);
   state.automatic=null;result=await m.exports.generateOfferMetadata({params:Promise.resolve({id:'car'})});assert.match(result.title,/Цена уточняется/);

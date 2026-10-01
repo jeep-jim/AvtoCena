@@ -27,7 +27,7 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
   if(!found)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:false}};
   const {showcase,offer}=found;const calculation=calculateSpecial(showcase,offer);
   const title=offerShareTitle({title:specialTitle(offer),year:offer.year,engineCc:offer.engineCc,fuel:offer.fuel,totalRub:calculation.totalRub});
-  return metadata(title,'Фотографии, комплектация и условия покупки — в карточке автомобиля.',absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
+  return metadata(q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title,'Фотографии, комплектация и условия покупки — в карточке автомобиля.',absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
  }
  const stored=await getOfferDetailRecord(id);
  if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};
@@ -44,6 +44,8 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  const description=`${scenario?.draft.deliveryCity?`Доставка: ${scenario.draft.deliveryCity}. `:''}Фотографии, характеристики и состав стоимости — в карточке автомобиля.`;
  const query=new URLSearchParams();for(const key of ['calculation','direct','powerHp','modificationId','estimate','share','dealer'] as const)if(q[key])query.set(key,q[key]!);
  const url=offerShareUrl(absoluteAvtocenaUrl(offerPath(stored))+(query.size?'?'+query:''),offerPath(stored));
+ // The share message already contains the calculated price; avoid repeating it in its preview.
+ const previewTitle=q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title;
  const images=rankedCatalogImageUrls(pricedOffer).slice(0,3).map(u=>absoluteAvtocenaUrl(protectedPhotoUrl(u,offer.market)));
- return metadata(title,description,url,images,Boolean(scenario||visibleRub||selectionRequired||sellerPricing));
+ return metadata(previewTitle,description,url,images,Boolean(scenario||visibleRub||selectionRequired||sellerPricing));
 }
