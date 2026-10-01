@@ -13,3 +13,14 @@ test('AutoHome model configurations retain seats, engine, fuel and trim in disti
  assert.equal(chinaCardVariant({market:'china',trim:'2026 1.5L CVT Luxury'}),'1.5L CVT Luxury');
  assert.equal(chinaCardVariant({market:'japan',trim:'2026 something'}),'');
 });
+
+test('JAC branded trims and BAW commercial equipment grades stay distinct',()=>{
+ for(const variants of [
+  ['2026款 2.0CTI 柴油手动劲享型','2026款 2.0CTI 柴油手动劲尚型','2026款 2.0CTI 柴油手动劲锐型'],
+  ['2026款 CNG 高级营运 7座','2026款 CNG 中级营运 7座','2026款 CNG 尊享型 7座'],
+  ['2026款 增程版 230高级营运旗舰型 7座','2026款 增程版 230旗舰型 7座','2026款 增程版 230尊贵型 7座'],
+ ]){
+  const labels=variants.map(trim=>chinaCardVariant({market:'china',trim}));
+  assert.equal(new Set(labels).size,variants.length);for(const label of labels)assert.doesNotMatch(label,/\p{Script=Han}/u);
+ }
+});
