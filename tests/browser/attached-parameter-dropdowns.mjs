@@ -86,6 +86,14 @@ try{
     await page.locator('[data-parameter-calculation-status]').filter({hasText:'Рассчитываем стоимость под ключ…'}).waitFor({state:'hidden',timeout:45000});
    }
    const triggers=grid.locator('[data-parameter-editor] > summary');
+   // Scrolling to a panel moves the entire StickyOfferColumn. Compare layout
+   // inside that column, while still detecting displaced controls or grid growth.
+   const controlPositions=()=>triggers.evaluateAll(els=>els.map(el=>{
+    const r=el.getBoundingClientRect();
+    const anchor=(el.closest('[data-sticky-offer-column]')||el.closest('.ac-inline-parameters')).getBoundingClientRect();
+    return [r.x-anchor.x,r.y-anchor.y,r.width,r.height].map(Math.round);
+   }));
+   const gridSize=()=>grid.evaluate(el=>{const r=el.getBoundingClientRect();return [r.width,r.height].map(Math.round);});
    for(theme of ['dark','light'])for(width of [320,360,390,414,768,1280]){
     await page.setViewportSize({width,height:900});await page.evaluate(v=>document.documentElement.dataset.theme=v,theme);await page.waitForTimeout(150);
     if(live){
@@ -104,7 +112,7 @@ try{
       const crumbs=await page.getByRole('navigation',{name:'Хлебные крошки'}).textContent();
       assert.doesNotMatch(crumbs,/\b(?:georgia|korea|japan|china|uae|europe)\b/i,'market breadcrumb uses Russian');
     }
-    const original=await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);}));
+    const original=await controlPositions(),originalGridSize=await gridSize();
     const metrics=[];
     for(index=0;index<await triggers.count();index++){
      await page.keyboard.press('Escape');
@@ -112,7 +120,8 @@ try{
      const panel=grid.locator('[data-parameter-editor][open] > [data-parameter-panel]');await panel.waitFor({state:'visible'});
      assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1);
      const box=await geometry(page,trigger,panel,grid);
-     assert.deepEqual(await triggers.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return [r.x,r.y+scrollY,r.width,r.height].map(Math.round);})),original,'opening must not move closed controls');
+     assert.deepEqual(await controlPositions(),original,'opening must not move closed controls within their column');
+     assert.deepEqual(await gridSize(),originalGridSize,'opening must not grow or resize the controls grid');
      assert.equal(await panel.getByRole('button',{name:/^Закрыть:/}).count(),0,'no separate panel header');
      if(index===0){
       const control=panel.locator('[data-calculation-date-control]');
