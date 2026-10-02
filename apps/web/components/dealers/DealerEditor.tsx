@@ -170,8 +170,6 @@ export function DealerEditor({
 
         <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
 
-
-
         {saveFeedback}
        </section>
 </aside>}
