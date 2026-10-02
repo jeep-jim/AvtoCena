@@ -505,3 +505,28 @@ html[data-theme="light"] .ac-offer-updated { background:#fff!important; border:1
  .ac-pagination a,.ac-pagination > span {flex:1 1 0;min-width:0;padding:0;height:44px;}
  .ac-pagination .ac-page-extra {display:none;}
 }
+
+/* The catalogue button uses the same bands, motion and label as the header. */
+.ac-catalog-more { position:relative; isolation:isolate; overflow:hidden; }
+.ac-catalog-more__candy {
+  position:absolute; inset:0 -64px; pointer-events:none;
+  background:repeating-linear-gradient(120deg,#ff353d 0 34px,#fff 34px 52px);
+  opacity:.58; animation:ac-catalog-candy-sweep .86s linear infinite;
+  will-change:transform; box-shadow:inset 0 -1px 0 rgba(0,0,0,.18);
+}
+.ac-catalog-more__label {
+  position:relative; z-index:1; display:inline-block; white-space:nowrap;
+  border:1px solid rgba(255,255,255,.30); border-radius:999px;
+  background:rgba(12,18,30,.56); color:#fff; -webkit-text-fill-color:#fff;
+  padding:7px 13px; font-size:12px; font-weight:900; line-height:1;
+  letter-spacing:.04em; box-shadow:0 3px 10px rgba(0,0,0,.16);
+  backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);
+}
+.ac-catalog-more[aria-busy="true"] { padding-top:9px; padding-bottom:9px; }
+@keyframes ac-catalog-candy-sweep {
+  from { transform:translate3d(-60px,0,0); }
+  to { transform:translate3d(0,0,0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ac-catalog-more__candy { animation:none; }
+}
