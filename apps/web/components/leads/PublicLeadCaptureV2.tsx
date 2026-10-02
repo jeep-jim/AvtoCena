@@ -1,4 +1,5 @@
 "use client";
+import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
 import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
 import {offerRouteId} from "@/lib/catalog/offer-url";
@@ -17,6 +18,7 @@ import { captureAttributionFromBrowser } from "@/lib/attribution";
 type FavoriteLeadItem = {
   fuel?:string; powertrainKind?:string;
   id: string;
+  dealerId?: string; dealerName?: string;
   title?: string;
   totalRub?: number | null;
   price?: number | null;
@@ -188,6 +190,9 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
   const isFavorites = request.mode === "favorites";
   const isOffer = request.mode === "offer";
   const selectedFavorites = useMemo(() => favorites.filter((item) => selectedIds.includes(item.id)), [favorites, selectedIds]);
+  const dealers = useMemo(() => Array.from(new Map(favorites.map(item => {const d=favoriteDealer(item);return [d.id,d];})).values()), [favorites]);
+  const [selectedDealer, setSelectedDealer] = useState(() => dealers.length===1 ? dealers[0].id : '');
+  const dealerFavorites = favorites.filter(item=>favoriteDealer(item).id===selectedDealer);
   const budgetRub = Number(form.budget.replace(/\D/g, "")) || 0;
 
   useEffect(() => {
@@ -219,11 +224,12 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
   }, [status]);
 
   const setField = (key: keyof LeadFormState, value: string) => setForm((current) => ({ ...current, [key]: value }));
-  const toggleFavorite = (id: string) => setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : current.length < 5 ? [...current, id] : current);
+  const toggleFavorite = (id: string) => setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : current.length < 5 && favoriteDealer(favorites.find(item=>item.id===id)!).id===selectedDealer ? [...current, id] : current);
 
   function validate() {
     if (!cleanText(form.city)) return "Укажите ваш город.";
     if (!cleanText(form.name)) return "Укажите имя.";
+    if (isFavorites && (!selectedDealer || selectedFavorites.some(item=>favoriteDealer(item).id!==selectedDealer))) return "Выберите одного дилера для этой заявки.";
     if (isFavorites && !selectedIds.length) return "Выберите хотя бы один автомобиль из Избранного.";
     if (contactPreference === "call") {
       if (!cleanText(form.phone)) return "Укажите телефон для звонка.";
@@ -255,6 +261,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
       const response = await leadFetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         requestMode: request.mode,
+        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? favoriteDealer(offerPreview).id : undefined,
         submissionThreadToken: isOffer ? threadToken() : "",
         pageUrl: window.location.href,
         offerId: isOffer ? request.offerId : "",
@@ -302,7 +309,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
           </header>
 
           {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
-            {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
+            {isFavorites ? <><label className="grid gap-2 text-sm font-bold">Кому отправить заявку<select aria-label="Дилер для заявки" value={selectedDealer} onChange={event=>{setSelectedDealer(event.target.value);setSelectedIds([]);setStatus('idle');setMessage('');}} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4"><option value="" disabled>Выберите дилера</option>{dealers.map(d=><option key={d.id} value={d.id}>{d.name}</option>)}</select></label><p className="text-xs leading-5 text-[var(--ac-muted)]">Одна заявка — одному дилеру. Для автомобилей другой компании создайте отдельную заявку.</p>{selectedDealer&&<FavoriteSelector items={dealerFavorites} selectedIds={selectedIds} onToggle={toggleFavorite} />}</> : null}
             <div className="grid gap-3 md:grid-cols-2"><div className="block min-w-0"><FieldLabel required>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div><label className="block min-w-0"><FieldLabel required>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 
             <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); }} />

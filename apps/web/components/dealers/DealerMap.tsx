@@ -3,8 +3,8 @@ import { useState } from "react";
 import type { DealerOffice } from "@/lib/dealers/showcase-model";
 import { yandexOfficeUrls } from "@/lib/dealers/yandex-map";
 
-export function DealerMap({ offices, selectedId, onSelect, compact=false }: { offices: Omit<DealerOffice, "phone">[]; compact?:boolean; selectedId?:string; onSelect?:(id:string)=>void }) {
-  const [enabled, setEnabled] = useState(false);
+export function DealerMap({ offices, selectedId, onSelect, compact=false, autoLoad=false }: { offices: Omit<DealerOffice, "phone">[]; compact?:boolean; autoLoad?:boolean; selectedId?:string; onSelect?:(id:string)=>void }) {
+  const [enabled, setEnabled] = useState(autoLoad);
   const [selected, setSelected] = useState('');
   const available = offices.filter(o => o.address.trim() || (o.lat !== null && o.lon !== null));
   const office = available.find(o => o.id === (selectedId || selected)) || available[0];

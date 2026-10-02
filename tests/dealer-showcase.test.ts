@@ -221,6 +221,9 @@ test("owner configuration versions, unpublished isolation and base-city price in
     await assert.rejects(() =>
       savePublicFeatures({ version: 0, affiliatesEnabled: true }),
     );
+    const mixed = await createLead(new Request("https://avtocena.com/api/leads",{method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},body:JSON.stringify({requestMode:"favorites",source:"favorites_request",selectedOfferIds:[id,"special_other__vehicle"],phone:"+79999999999",name:"Тест",city:"Москва",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02"})}));
+    assert.equal(mixed.status,400);assert.match((await mixed.json()).error,/одного дилера/);
+    assert.equal((await readChunkedDataJson<any>("leads/leads.json", [])).length,0);
     const r = await createLead(
       new Request("https://avtocena.com/api/leads", {
         method: "POST",
@@ -247,6 +250,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
     assert.equal(r.status, 200);
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
     assert.equal(leads[0].totalRub, 3135900);
+    assert.equal(leads[0].requestedDealerId,s.dealerId);
     assert.equal(leads[0].offerSnapshot.dealerId, s.dealerId);
     assert.equal(leads[0].deliveryQuote.origin, "Бишкек");
     assert.equal(leads[0].deliveryQuote.amountRub, 142500);
@@ -316,9 +320,21 @@ test("stock and order rails have independent visibility and pricing",()=>{
 });
 
 test("rail subtitles are opt-in, bounded and independent",()=>{
- const s=normalizeShowcase({...fixture(),specialSubtitleEnabled:true,specialSubtitle:"А".repeat(60),stockSubtitleEnabled:false,stockSubtitle:"В наличии сегодня"},fixture().dealerId,1);
- assert.equal(offerSectionSubtitle(s,"order"),"А".repeat(50));
+ const s=normalizeShowcase({...fixture(),specialSubtitleEnabled:true,specialSubtitle:"А".repeat(80),stockSubtitleEnabled:false,stockSubtitle:"В наличии сегодня"},fixture().dealerId,1);
+ assert.equal(offerSectionSubtitle(s,"order"),"А".repeat(70));
  assert.equal(offerSectionSubtitle(s,"stock"),"");
  s.stockSubtitleEnabled=true;assert.equal(offerSectionSubtitle(s,"stock"),"В наличии сегодня");
- s.specialSubtitleEnabled=false;assert.equal(offerSectionSubtitle(s,"order"),"");assert.equal(s.specialSubtitle,"А".repeat(50));
+ s.specialSubtitleEnabled=false;assert.equal(offerSectionSubtitle(s,"order"),"");assert.equal(s.specialSubtitle,"А".repeat(70));
 });
+
+ test("legacy favorites retain dealer ownership from canonical IDs",async()=>{
+ const {favoriteDealer}=await import('../apps/web/lib/dealers/favorite-dealer');
+ assert.deepEqual(favoriteDealer({id:'special_dealer_topavto__car',marketLabel:'Под заказ · Top Avto'}),{id:'dealer_topavto',name:'Top Avto'});
+ assert.deepEqual(favoriteDealer({id:'special_other__car',dealerName:'Другой дилер'}),{id:'other',name:'Другой дилер'});
+ assert.deepEqual(favoriteDealer({id:'catalog_car'}),{id:'dealer_topavto',name:'ТопАвто'});
+ });
+ test("dealer PDF uses its own company and no invented country flag",async()=>{
+ const {renderOfferPdf}=await import('../apps/web/lib/catalog/offer-pdf');
+ const data={dealerName:'Другой дилер',dealerAddress:'Новокузнецк, адрес',title:'Toyota RAV4',market:'Другой дилер',marketKey:'dealer',date:'02.10.2026',specs:'2026 г. · 1987 см³',city:'Новосибирск',rate:'1 $ = 86,5 ₽',sections:[{title:'Структура цены',rows:[{label:'Цена автомобиля',value:'3 000 000 ₽'}]},{title:'Условия',rows:[{label:'Доставка',value:'5–10 дней'}]}],total:'3 000 000 ₽',deposit:'Уточняется у дилера',warnings:[],url:'https://avtocena.com/cars/offer/special_other__car'};
+ const pdf=await renderOfferPdf(data,{photo:null});assert.equal(pdf.subarray(0,4).toString(),'%PDF');assert.ok(pdf.length>10000);
+ });

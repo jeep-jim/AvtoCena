@@ -42,9 +42,9 @@ export function SpecialRail({
               className="aspect-[16/10] w-full object-cover"
             />
             <div className="space-y-1 p-3">
-              <p className="text-xs font-bold text-emerald-600">{kind==="stock" ? `В наличии · ${o.condition==="used"?"С пробегом":"Новый"}` : "Под заказ"}</p>
+              <p className="text-xs font-bold text-emerald-600">{kind==="stock" ? `В наличии · ${o.condition==="used"?"С пробегом":"Новый"}` : `${o.condition==="used"?"С пробегом":"Новый"}${o.daysFrom?` от ${o.daysFrom} дней`:" · Под заказ"}`}</p>
               <h3 className="text-sm font-black">{o.title}</h3>
-              <p className="text-base font-black">
+              <p className="ac-price ac-price--down text-base font-black">
                 {o.price === null
                   ? "Цена уточняется"
                   : `${o.price.toLocaleString("ru-RU")} ₽`}

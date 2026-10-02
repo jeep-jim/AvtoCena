@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
+import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 
 const FAVORITES_KEY = "avtocena_favorites";
@@ -11,6 +12,7 @@ const FAVORITES_KEY = "avtocena_favorites";
 type Favorite = {
   fuel?: string; powertrainKind?: string;
   id: string;
+  dealerId?: string; dealerName?: string;
   title?: string;
   price?: number | null;
   totalRub?: number | null;
@@ -71,6 +73,7 @@ export default function FavoritesPage() {
               <div className="h-52 bg-white/[0.04]">{item.imageUrl ? <img src={item.imageUrl} alt={item.title || "Автомобиль"} className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-bold text-white/35">Фото загружается</div>}</div>
               <div className="p-4">
                 <div className="text-xs font-black uppercase tracking-[0.15em] text-red-300">{item.marketLabel || "Каталог"}</div>
+                <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Дилер: {favoriteDealer(item).name}</p>
                 <h2 className="mt-2 text-xl font-black">{item.title || "Автомобиль"}</h2>
                 <div className="mt-2 text-sm text-white/55">{item.year || "—"} · {item.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(item.mileageKm)} км` : "пробег уточняется"}</div>
                 <div className="mt-4"><CatalogPrice offer={trendOffer} label={item.year ? `${item.year} г.` : "Стоимость"} priceClassName="text-2xl" /></div>

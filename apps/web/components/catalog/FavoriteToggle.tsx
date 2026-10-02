@@ -7,6 +7,7 @@ const FAVORITES_KEY = "avtocena_favorites";
 export type FavoriteSnapshot = {
   fuel?: string; powertrainKind?: string;
   id: string;
+  dealerId?: string; dealerName?: string;
   title?: string;
   price?: number | null;
   imageUrl?: string;
