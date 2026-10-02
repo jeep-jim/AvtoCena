@@ -7,10 +7,10 @@ import { OfferAllSpecifications } from "./OfferAllSpecifications";
 import { useTapActivation } from "./useTapActivation";
 import type { SourceSpecificationSnapshot } from "../../lib/catalog/source-specifications";
 
-type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode };
+type Props = { groups: SourceSpecificationSnapshot["groups"]; title: string; mode: "desktop" | "mobile"; sourceUrl?: string; headerAside?: ReactNode; defaultOpen?: boolean };
 
-export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside }: Props) {
-  const [open, setOpen] = useState(false);
+export function OfferSpecificationsDisclosure({ groups, title, mode, sourceUrl, headerAside, defaultOpen = false }: Props) {
+  const [open, setOpen] = useState(defaultOpen && mode === "desktop");
   const [dragY, setDragY] = useState(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);

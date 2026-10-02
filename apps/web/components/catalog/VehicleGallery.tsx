@@ -318,6 +318,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
         </> : null}
       </div>
 
+      <style>{`@media(max-width:639px){.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}`}</style>
       {browserOpen && typeof document !== "undefined" ? createPortal(<PhotoBrowser images={cleanImages.filter(src=>!auctionSheetUrls.includes(src))} title={title} initialIndex={Math.max(0,cleanImages.filter(src=>!auctionSheetUrls.includes(src)).indexOf(cleanImages[activeIndex]))} offerId={offerId} snapshot={snapshot} onClose={()=>setBrowserOpen(false)} />, document.body) : null}
       {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
     </>

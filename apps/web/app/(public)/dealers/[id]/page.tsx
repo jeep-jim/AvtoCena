@@ -10,7 +10,7 @@ import {dealerProfilePath} from '@/lib/dealers/profile-url';
 import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { readShowcase } from "@/lib/dealers/showcase-store";
+import { readShowcase,findDealer } from "@/lib/dealers/showcase-store";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
@@ -52,7 +52,7 @@ export default async function Page({
   return (
     <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
-      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} />
+      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} verified={(await findDealer(s.dealerId))?.status==='verified'} />
     </main></DealerBrowsingProvider>
   );
 }

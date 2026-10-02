@@ -49,7 +49,7 @@ export function PhotoBrowser({images,title,initialIndex=0,offerId,snapshot,onClo
    {images.map((src,index)=><button type="button" data-photo-index={index} key={src} className={styles.tile} onClick={()=>open(index)} aria-label={`Увеличить фото ${index+1}`}><img src={src} alt={`${title}, фото ${index+1}`} loading={index===initialIndex?'eager':'lazy'} decoding="async" draggable={false} onError={retryProtectedPhoto}/></button>)}
   </div>
   {selected!==null?<>
-   <div ref={viewport} className={styles.viewport} onDragStart={e=>e.preventDefault()} onContextMenu={e=>e.preventDefault()} onPointerDown={begin} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onDoubleClick={()=>zoom(scale===1?2:1)}>
+   <div ref={viewport} data-back-layer className={styles.viewport} onDragStart={e=>e.preventDefault()} onContextMenu={e=>e.preventDefault()} onPointerDown={begin} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onDoubleClick={()=>zoom(scale===1?2:1)}>
     <img data-zoom-image src={images[selected]} alt={`${title}, фото ${selected+1}`} style={{transform:`translate(${pan.x}px,${pan.y}px) scale(${scale})`}} draggable={false} onError={retryProtectedPhoto}/>
    </div>
    <div className={styles.zoom}>

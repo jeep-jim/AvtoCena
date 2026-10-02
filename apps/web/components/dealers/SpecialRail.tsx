@@ -17,13 +17,15 @@ export type SpecialRailItem = {
 export function SpecialRail({
   heading,
   items,
+  kinds=["order","stock"],
 }: {
   heading: string;
   items: SpecialRailItem[];
+  kinds?: readonly ("order"|"stock")[];
 }) {
   if (!items.length) return null;
   return (
-    <>{(["order","stock"] as const).map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section key={kind} className="my-5 min-w-0">
+    <>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section key={kind} className="my-5 min-w-0">
       <h2 className="text-lg font-black leading-tight md:text-2xl">
         {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
       </h2>
