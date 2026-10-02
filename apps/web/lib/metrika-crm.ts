@@ -5,7 +5,7 @@ export const METRIKA_GOALS={lead_submitted:'Заявка отправлена',c
 const CONFIG='integrations/metrika/config.json';
 const STATE='integrations/metrika/state.json';
 type Config={enabled:boolean;encryptedToken:string;timeZone:string;connectedAt:string};
-type State={sent:Record<string,string>;lastAcceptedAt?:string;lastUploadId?:string;lastError?:string;pending?:number;missingClientId?:number};
+type State={sent:Record<string,string>;lastAcceptedAt?:string;lastUploadId?:string;lastError?:string;pending?:number;missingClientId?:number;withoutAnalyticsPermission?:number;lastCheckedAt?:string};
 const emptyState=():State=>({sent:{}});
 function key() {const secret=process.env.AUTH_SECRET||process.env.NEXTAUTH_SECRET;if(!secret)throw Error('encryption_not_configured');return crypto.createHash('sha256').update('metrika:'+secret).digest();}
 export function encryptMetrikaToken(token:string) {const iv=crypto.randomBytes(12);const cipher=crypto.createCipheriv('aes-256-gcm',key(),iv);const body=Buffer.concat([cipher.update(token,'utf8'),cipher.final()]);return [iv,cipher.getAuthTag(),body].map(x=>x.toString('base64')).join('.');}
@@ -32,7 +32,7 @@ export async function connectMetrika(token:string,send:typeof fetch=fetch) {
 export async function disableMetrika() {const config=await readDataJson<Config|null>(CONFIG,null);if(config)await writeDataJson(CONFIG,{...config,enabled:false});}
 export async function metrikaStatus() {
  const config=await readDataJson<Config|null>(CONFIG,null);const state=await readDataJson<State>(STATE,emptyState());
- return {counterId:METRIKA_COUNTER_ID,enabled:Boolean(config?.enabled),connectedAt:config?.connectedAt||null,timeZone:config?.timeZone||null,lastAcceptedAt:state.lastAcceptedAt||null,lastUploadId:state.lastUploadId||null,lastError:state.lastError||null,pending:state.pending||0,missingClientId:state.missingClientId||0,acceptedOrders:Object.keys(state.sent).length};
+ return {counterId:METRIKA_COUNTER_ID,enabled:Boolean(config?.enabled),connectedAt:config?.connectedAt||null,timeZone:config?.timeZone||null,lastAcceptedAt:state.lastAcceptedAt||null,lastUploadId:state.lastUploadId||null,lastError:state.lastError||null,pending:state.pending||0,missingClientId:state.missingClientId||0,withoutAnalyticsPermission:state.withoutAnalyticsPermission??null,lastCheckedAt:state.lastCheckedAt||null,acceptedOrders:Object.keys(state.sent).length};
 }
 export function metrikaOrder(lead:any,timeZone:string) {
  if(lead.analyticsConsent!==true||lead.source==='privacy_request')return null;
@@ -61,24 +61,25 @@ export async function flushMetrika(send:typeof fetch=fetch) {
  try {
   const leads=await readChunkedDataJson<any>('leads/leads.json',[]);
   const pending:Array<{order:NonNullable<ReturnType<typeof metrikaOrder>>;hash:string}>=[];
-  let missingClientId=0;
+  let missingClientId=0;let withoutAnalyticsPermission=0;
   for(const lead of leads) {
-   if(lead.archivedAt)continue;
+   if(lead.archivedAt||lead.source==='privacy_request')continue;
    const age=(Date.now()-Date.parse(lead.createdAt))/86400000;
    if(!Number.isFinite(age)||age<0||age>(state.sent[lead.id]?111:21))continue;
+   if(lead.analyticsConsent!==true){withoutAnalyticsPermission++;continue;}
    const order=metrikaOrder(lead,config.timeZone);if(!order){missingClientId++;continue;}
    const hash=crypto.createHash('sha256').update(JSON.stringify(order)).digest('hex');
    if(state.sent[order.id]!==hash)pending.push({order,hash});
   }
-  state.pending=pending.length;state.missingClientId=missingClientId;
-  if(!pending.length){state.lastError='';await writeDataJson(STATE,state);return {enabled:true,pending:0,missingClientId};}
+  state.pending=pending.length;state.missingClientId=missingClientId;state.withoutAnalyticsPermission=withoutAnalyticsPermission;state.lastCheckedAt=new Date().toISOString();
+  if(!pending.length){state.lastError='';await writeDataJson(STATE,state);return {enabled:true,pending:0,missingClientId,withoutAnalyticsPermission};}
   const batch=pending.slice(0,200);const form=new FormData();form.append('file',new Blob([metrikaCsv(batch.map(x=>x.order))],{type:'text/csv'}),'crm-orders.csv');
   const result=await api(decryptMetrikaToken(config.encryptedToken),`/cdp/api/v1/counter/${METRIKA_COUNTER_ID}/data/simple_orders?merge_mode=SAVE&delimiter_type=COMMA`,{method:'POST',body:form},send);
   if(result.uploading?.api_validation_status!=='PASSED'||!result.uploading?.uploading_id)throw Error('metrika_upload_not_validated');
   for(const {order,hash} of batch)state.sent[order.id]=hash;
   state.lastAcceptedAt=new Date().toISOString();state.lastUploadId=String(result.uploading.uploading_id);state.lastError='';state.pending-=batch.length;
   await writeDataJson(STATE,state);
-  return {enabled:true,accepted:batch.length,pending:state.pending,uploadId:state.lastUploadId,missingClientId};
+  return {enabled:true,accepted:batch.length,pending:state.pending,uploadId:state.lastUploadId,missingClientId,withoutAnalyticsPermission};
  } catch(error) {
   // Never store/log raw API responses, request bodies or OAuth credentials.
   state.lastError=error instanceof Error&&/^metrika_[a-z_0-9]+$/.test(error.message)?error.message:'metrika_delivery_failed';

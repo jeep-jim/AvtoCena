@@ -52,7 +52,7 @@ export function leadNotice(lead:any,entry?:any){
  const url = `https://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||""))}`;
  if (lead?.source === "privacy_request") return `📩 Обращение по персональным данным · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
  const current = {...lead, ...entry};
- if (current.personalDataConsent !== true || current.personalDataConsentVersion !== "lead-consent-2026-09-30") return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
+ if (current.personalDataConsent !== true || !["lead-consent-2026-09-30","lead-consent-2026-10-02"].includes(current.personalDataConsentVersion)) return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
  const name = entry?.changes?.name?.after || lead?.name;
  const car = lead?.offerTitle || lead?.car || lead?.selectedOffers?.map((offer:any) => offer.title).filter(Boolean).join(", ") || "Подбор автомобиля";
  return [

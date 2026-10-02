@@ -52,6 +52,8 @@ try{
   }
   await page.route('**/api/crm/game',r=>r.fulfill({json:r.request().method()==='POST'?{run:{id:'fixture-run',mode:'hills'}}:{team:[]}}));
   try{
+   // Calendar fixtures and expectations use October 1; real clock time must not age them.
+   if(kind==='team')await page.clock.setFixedTime(new Date('2026-10-01T05:00:00Z'));
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
    await page.locator('.crm-content').waitFor();
    assert.equal(await page.locator('.crm-header .ac-staff-leads').count(),0,'no duplicated requests shortcut');

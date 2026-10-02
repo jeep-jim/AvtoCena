@@ -306,7 +306,8 @@ export async function createLead(
     .slice(0, 40);
   let clientId = operationId ? `client_${operationId}` : makeId("client");
   let leadId = operationId ? `lead_${operationId}` : makeId("lead");
-  const attribution = body.analyticsConsent===true ? normalizeAttribution(body.attribution, body) : normalizeAttribution({}, {});
+  const analyticsConsent=body.analyticsConsent===true||(!crmUser&&personalDataConsent&&personalDataConsentVersion===LEAD_CONSENT_VERSION);
+  const attribution = analyticsConsent ? normalizeAttribution(body.attribution, body) : normalizeAttribution({}, {});
   const source = clean(body.source, 160) || (crmUser ? "manual_crm" : "site");
   const submissionChannel = crmUser ? "manual_crm" : trustedTelegramId ? "telegram_bot" : body.submissionChannel === "telegram_miniapp" ? "telegram_miniapp" : "site";
   const market = clean(body.market, 120) || primaryOffer?.market || "";
@@ -357,7 +358,7 @@ export async function createLead(
     personalDataConsent:true,personalDataConsentVersion:LEAD_CONSENT_VERSION,
     personalDataConsentText:LEAD_CONSENT_TEXT,personalDataConsentAt:createdAt,
     privacyPolicyVersion:PRIVACY_VERSION,personalDataConsentUrl:'https://avtocena.com/consent',
-    analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,
+    analyticsConsent,analyticsConsentVersion:analyticsConsent?PRIVACY_VERSION:undefined,
   } : {};
 
   const createdByManagerId = crmUser?.id || null;
@@ -520,7 +521,7 @@ export async function createLead(
       const contactFields = {phone, telegram, max, contactPreference, messenger, messengerContactKind: clean(body.messengerContactKind, 20)};
       const changes = Object.fromEntries(Object.entries({...contactFields, name, city}).filter(([key, value]) => value !== (stored[key] || "")).map(([key, value]) => [key, {before: stored[key] || "", after: value}]));
       const entry = {operationId, createdAt, deliveryQuote, comment, changes, ...contactFields, source, submissionChannel, ...consentSnapshot};
-      return {...stored, ...(primaryOffer?.market === "dealer" ? {offerSnapshot:primaryOffer,totalRub:primaryOffer.totalRub} : {}), ...(!crmUser ? {analyticsConsent:body.analyticsConsent===true,analyticsConsentVersion:body.analyticsConsent===true?PRIVACY_VERSION:undefined,...(body.analyticsConsent!==true?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,...(item.market === "dealer" ? selectedOfferSnapshots.find(s=>s.id===item.id) || {} : {}),deliveryQuote:selectedDelivery(city,selectedOfferSnapshots.find(s=>s.id===item.id)||item)}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
+      return {...stored, ...(primaryOffer?.market === "dealer" ? {offerSnapshot:primaryOffer,totalRub:primaryOffer.totalRub} : {}), ...(!crmUser ? {analyticsConsent,analyticsConsentVersion:analyticsConsent?PRIVACY_VERSION:undefined,...(!analyticsConsent?{metrikaClientId:"",yclid:"",attribution:{}}:{})} : {}), ...(!stored.metrikaClientId && attribution.metrikaClientId ? {metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid,attribution:{...stored.attribution,metrikaClientId:attribution.metrikaClientId,yclid:attribution.yclid}} : {}), ...(city ? {deliveryQuote,selectedOffers:(stored.selectedOffers||[]).map((item:any)=>({...item,...(item.market === "dealer" ? selectedOfferSnapshots.find(s=>s.id===item.id) || {} : {}),deliveryQuote:selectedDelivery(city,selectedOfferSnapshots.find(s=>s.id===item.id)||item)}))} : {}), ...contactFields, name: name || stored.name, city: city || stored.city, updatedAt: createdAt, followups: [...(stored.followups || []), entry]};
     });
   }
   if (threadKey) {

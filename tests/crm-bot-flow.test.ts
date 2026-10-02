@@ -109,7 +109,7 @@ test("customer request, private admin notification, reply confirmation, retry an
     await handleCrmBotUpdate(callback(101, "cust:confirm"), "token");
     assert.equal((await readChunkedDataJson("leads/leads.json", [])).length, 0);
     // Existing customer conversations and staff replies still work.
-    await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Test",telegram:"customer_test",car:"Toyota",contactPreference:"message",messenger:"telegram",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30"})}), null, "101");
+    await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Test",telegram:"customer_test",car:"Toyota",contactPreference:"message",messenger:"telegram",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02"})}), null, "101");
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
     assert.equal(leads.length, 1);
     const lead = leads[0];
@@ -171,14 +171,14 @@ test("customer request, private admin notification, reply confirmation, retry an
     await flushCrmNotifications(5);
     assert.equal(sent.length, count);
     // Messenger phone is saved canonically; form success never links to the bot.
-    const contactResult = await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Phone test",phone:"89991234567",telegram:"+79991234567",contactPreference:"message",messenger:"telegram",messengerContactKind:"phone",contactInputVersion:"ru-v1",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30"})}), null);
+    const contactResult = await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Phone test",phone:"89991234567",telegram:"+79991234567",contactPreference:"message",messenger:"telegram",messengerContactKind:"phone",contactInputVersion:"ru-v1",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02"})}), null);
     assert.equal(contactResult.status, 200);
     const contactJson = await contactResult.json();
     assert.equal(contactJson.telegramStartUrl, "");
     const savedContact = (await readChunkedDataJson<any>("leads/leads.json", [])).find(row => row.id === contactJson.leadId);
     assert.equal(savedContact.phone, "+79991234567");
     assert.equal(savedContact.messengerContactKind, "phone");
-    const invalidContact = await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Invalid",phone:"999",contactPreference:"call",contactInputVersion:"ru-v1",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30"})}), null);
+    const invalidContact = await createLead(new Request("https://avtocena.com/api/leads", {method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"Invalid",phone:"999",contactPreference:"call",contactInputVersion:"ru-v1",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02"})}), null);
     assert.equal(invalidContact.status, 400);
   } finally {
     globalThis.fetch = fetchOriginal;

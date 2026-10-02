@@ -1,6 +1,6 @@
 "use client";
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
-import {ConsentLinks} from "@/components/legal/ConsentCheckbox";
+import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
 
 import { useRef, useState } from "react";
@@ -117,9 +117,10 @@ export default function RequestPage() {
               <label className="grid gap-1.5 text-sm font-black">Какой автомобиль интересует<input value={car} onChange={(event) => setCar(event.target.value)} placeholder="Например, Toyota RAV4 2022" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
               <label className="grid gap-1.5 text-sm font-black">Комментарий<textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Привод, цвет, комплектация, сроки или другие пожелания" className="soft-input min-h-28 resize-y rounded-2xl bg-[var(--ac-surface-2)] p-4 font-semibold outline-none" /></label>
               <label className="flex cursor-pointer items-start gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-xs font-semibold leading-5 text-[var(--ac-muted)]">
-                <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-red-500" />
+                <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="peer sr-only" /><ConsentMark checked={consent}/>
                 <span><ConsentLinks/></span>
               </label>
+
               {status === "error" ? <div className="rounded-xl bg-red-500/12 px-4 py-3 text-sm font-bold text-red-300">{message}</div> : null}
               <button type="submit" disabled={status === "sending"} className="ac-colored-button min-h-14 rounded-2xl bg-red-500 px-5 text-base font-black text-white disabled:opacity-60">
                 {status === "sending" ? "Отправляем…" : "Отправить заявку"}
