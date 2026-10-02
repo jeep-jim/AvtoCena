@@ -160,7 +160,7 @@ try{
   assert.ok(await page.locator('.dealer-avatar-centered').evaluate(el=>{const r=el.getBoundingClientRect(),sheet=document.querySelector('.dealer-profile-identity').getBoundingClientRect();return Math.abs(r.left+r.width/2-sheet.left-sheet.width/2)<2&&Math.abs(r.width-r.height)<1&&r.top<sheet.top&&r.bottom>sheet.top;}),'logo is circular, centered and crosses the banner seam');
   assert.ok(await page.evaluate(()=>scrollY<5),'profile opens at its banner');
   assert.equal(await page.locator('.dealer-profile-tabs button').count(),3);
-  assert.equal(await page.locator('.dealer-profile-footer').innerText(),'Исполнитель (дилер)\nООО Тестовый дилер\nЮридический адрес\nНовокузнецк, Пример адреса\nИНН\n7707083893\nОГРН\n1027700132195');
+  assert.equal((await page.locator('.dealer-profile-footer').innerText()).replace(/\n+/g,'\n'),'Исполнитель (дилер)\nООО Тестовый дилер\nЮридический адрес\nНовокузнецк, Пример адреса\nИНН\n7707083893\nОГРН\n1027700132195');
   assert.equal(await page.getByText('Скрытый банк',{exact:true}).count(),0);
   assert.ok(!(await page.locator('body').innerText()).includes('40802810926710009905'));
   await page.getByLabel('Проверенный дилер',{exact:true}).click();await page.getByText('Проверенный дилер — компания прошла проверку АвтоЦены.',{exact:true}).waitFor();
