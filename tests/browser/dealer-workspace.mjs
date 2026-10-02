@@ -205,7 +205,7 @@ try{
    await page.getByLabel('Проверенный дилер',{exact:true}).waitFor();
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
    await page.locator('.dealer-offer-identity iframe').waitFor();
-   assert.equal(await page.getByRole('button',{name:'PDF',exact:true}).count(),0);
+   assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
    await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
    await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.getByRole('button',{name:'Закрыть',exact:true}).click();
    await page.getByRole('button',{name:'Добавить в избранное',exact:true}).filter({visible:true}).click();
@@ -215,7 +215,7 @@ try{
    await page.evaluate(()=>localStorage.clear());
   }
   await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?staff=1&verified=0');
-  await page.getByRole('button',{name:'PDF',exact:true}).filter({visible:true}).waitFor();assert.equal(await page.getByLabel('Проверенный дилер',{exact:true}).count(),0);
+  await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).filter({visible:true}).waitFor();assert.equal(await page.getByLabel('Проверенный дилер',{exact:true}).count(),0);
   await page.evaluate(()=>localStorage.setItem('avtocena_favorites',JSON.stringify([{id:'special_dealer_topavto__vehicle',dealerName:'ТопАвто',title:'Toyota RAV4',price:3000000},{id:'special_other__vehicle',dealerName:'Другой дилер',title:'Honda Fit',price:1500000},{id:'catalog_vehicle',title:'Kia Sportage',price:2200000}])));
   await page.goto(origin+'/favorites');await page.getByRole('button',{name:'Оставить заявку',exact:true}).click();
   await page.getByLabel('Дилер для заявки',{exact:true}).selectOption('dealer_topavto');
