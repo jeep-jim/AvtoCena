@@ -174,6 +174,10 @@ try{
   await page.getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
   await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
+  await page.waitForFunction(()=>!!history.state?.acOverlayStep);
+  await page.evaluate(()=>{history.pushState({},'', '/request?dealer=dealer_topavto');document.querySelector('dialog[open]').close();});
+  await page.goBack();await page.waitForFunction(()=>location.search==='?view=profile'&&!history.state?.acOverlayStep);
   await page.waitForFunction(()=>{const img=document.querySelector('.dealer-stories img');return img?.complete&&img.naturalWidth>0;});
   if(width===390)assert.equal(await page.locator('.dealer-stories .ac-buyers-rail>button').first().evaluate(el=>el.clientHeight),110);
   await page.screenshot({path:`${out}/${width}-${theme}-public-profile.png`,fullPage:true});
