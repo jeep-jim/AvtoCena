@@ -10,6 +10,7 @@ export type SpecialRailItem = {
   condition?: "new" | "used";
   address?: string;
   heading?: string;
+  subtitle?: string;
   daysFrom?: number;
   daysTo?: number;
 };
@@ -26,6 +27,7 @@ export function SpecialRail({
       <h2 className="text-lg font-black leading-tight md:text-2xl">
         {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
       </h2>
+      {visible[0].subtitle && visible.every(o=>o.subtitle===visible[0].subtitle&&o.heading===visible[0].heading)&&<p className="mt-1 break-words text-sm leading-relaxed text-[var(--ac-muted)]">{visible[0].subtitle}</p>}
       <div className="mt-4 flex gap-4 overflow-x-auto pb-3">
         {visible.map((o) => (
           <Link

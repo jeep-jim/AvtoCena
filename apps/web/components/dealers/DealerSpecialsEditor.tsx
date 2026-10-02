@@ -49,6 +49,8 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
  const o=visible.find(x=>x.id===activeId)||visible[0];
  const stock=mode==='stock';
  const heading=offerSectionHeading(s,mode);
+ const subtitle=stock?s.stockSubtitle||'':s.specialSubtitle||'';
+ const subtitleEnabled=(stock?s.stockSubtitleEnabled:s.specialSubtitleEnabled)===true;
  const complete={data:!!o?.make.trim()&&!!o?.model.trim()&&!!o&&Number.isInteger(o.year)&&o.year>=1900&&o.year<=new Date().getFullYear()&&(stock||(Number.isInteger(o.productionMonth)&&o.productionMonth>=1&&o.productionMonth<=12&&Date.UTC(o.year,o.productionMonth-1,1)<=Date.now())),photos:!!o?.photos.length,specs:!!o&&!!o.transmission&&!!o.drive&&!!o.body&&!!o.color&&!!o.powerHp&&(o.fuel==='electric'||!!o.engineCc)&&calculateSpecial(s,o).complete};
  const enabled=stock?s.stockEnabled===true:s.specialsEnabled;
  const [help,setHelp]=useState(false);
@@ -74,7 +76,8 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
    {help&&<p className="text-sm text-[var(--ac-muted)]">Под заказ — расчёт ввоза и доставки. В наличии — новые или подержанные автомобили с ценой в рублях и адресом осмотра.</p>}
    <section className="dealer-editor-panel space-y-4">
     <div className="dealer-rail-switch"><Toggle label="Показывать предложения компании" value={enabled} onChange={v=>patch(stock?{stockEnabled:v}:{specialsEnabled:v})}/><span>{enabled?'Включено':'Скрыто'}</span></div>
-    <Field label="Заголовок ленты" value={heading} onChange={v=>patch(stock?{stockHeading:v}:{specialHeading:v})}/>
+    <div className="dealer-heading-controls"><Field label="Заголовок ленты" value={heading} onChange={v=>patch(stock?{stockHeading:v}:{specialHeading:v})}/><Toggle label="Подзаголовок" value={subtitleEnabled} onChange={v=>patch(stock?{stockSubtitleEnabled:v}:{specialSubtitleEnabled:v})}/></div>
+    {subtitleEnabled&&<div><Field label="Подзаголовок ленты" value={subtitle} maxLength={50} onChange={v=>patch(stock?{stockSubtitle:v.slice(0,50)}:{specialSubtitle:v.slice(0,50)})}/><p className="mt-1 text-xs text-[var(--ac-muted)]">{subtitle.length} / 50 · Появится под заголовком меньшим шрифтом</p></div>}
     <p className="text-xs text-[var(--ac-muted)]">Посетителям видны опубликованные авто. Черновики — только вам.</p>
    </section>
   </>}
