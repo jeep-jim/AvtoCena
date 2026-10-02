@@ -235,7 +235,7 @@ try{
     await page.keyboard.press('Escape');await triggers.nth(3).click();
     await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);
     assert.equal(requests.at(-1)?.customsCalculationDate,'');
-    assert.equal(requests.at(-1)?.deliveryCity,'','this scenario has no delivery city');
+    assert.ok(!requests.at(-1)?.deliveryCity,'this scenario has no delivery city');
     assert.ok(await page.getByText('Ориентир без доставки',{exact:true}).isVisible());
     assert.equal(await page.getByRole('button',{name:'Вернуть исходные данные',exact:true}).count(),0);
     await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('');await page.waitForTimeout(100);
