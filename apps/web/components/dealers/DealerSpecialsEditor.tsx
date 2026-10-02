@@ -56,7 +56,7 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
  async function refreshRate(){
   setRateBusy(true);
   try{const r=await fetch('/api/dealers/exchange-rate',{cache:'no-store'});const data=await r.json();if(!r.ok)throw Error(data.error);if(rateMode.current==='manual')return;if(data.quote){pricing({usdRub:data.quote.value,rateAt:data.quote.quoteAt,rateSource:data.quote.source});setRateStatus(data.error||`Курс получен ${new Date(data.quote.fetchedAt).toLocaleString('ru-RU')}`);}else setRateStatus(data.error||'Источник пока не передал курс. Можно временно указать его вручную.');}
-  catch(e){setRateStatus(e instanceof Error?e.message:'Не удалось обновить курс');}finally{setRateBusy(false);}
+  catch{setRateStatus('Не удалось обновить курс. Проверьте соединение или укажите курс вручную.');}finally{setRateBusy(false);}
  }
  useEffect(()=>{if(demo||(section==='offers'&&stock)||s.pricing.rateMode==='manual')return;void refreshRate();const timer=setInterval(()=>void refreshRate(),15*60000);return()=>clearInterval(timer);},[s.pricing.rateMode,section,stock]);
  function add(source?:SpecialOffer){const next={...(source?structuredClone(source):newOffer(mode)),id:crypto.randomUUID(),status:'draft' as const,officeId:source?.officeId||(stock?s.offices[0]?.id||'':''),defaultCity:s.pricing.baseCity||s.pricing.tariffs[0]?.city||'',updatedAt:''};patch({offers:[...s.offers,next]});setActiveId(next.id);}
