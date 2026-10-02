@@ -1,6 +1,6 @@
 'use client';
-import {DealerDeliveryCity} from './DealerDeliveryCity';
-import {estimateDealerDelivery} from '@/lib/dealers/delivery-estimate';
+import {DealerDeliveryEditor} from './DealerDeliveryEditor';
+import {DealerRateEditor} from './DealerRateEditor';
 import {Car,Plus,ChevronDown,HelpCircle,Check} from 'lucide-react';
 import {useDealerDemo} from './DealerDemoContext';
 import {useEffect,useState,useRef} from 'react';
@@ -49,13 +49,16 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
  const o=visible.find(x=>x.id===activeId)||visible[0];
  const stock=mode==='stock';
  const heading=offerSectionHeading(s,mode);
+ const subtitle=stock?s.stockSubtitle||'':s.specialSubtitle||'';
+ const subtitleEnabled=(stock?s.stockSubtitleEnabled:s.specialSubtitleEnabled)===true;
  const complete={data:!!o?.make.trim()&&!!o?.model.trim()&&!!o&&Number.isInteger(o.year)&&o.year>=1900&&o.year<=new Date().getFullYear()&&(stock||(Number.isInteger(o.productionMonth)&&o.productionMonth>=1&&o.productionMonth<=12&&Date.UTC(o.year,o.productionMonth-1,1)<=Date.now())),photos:!!o?.photos.length,specs:!!o&&!!o.transmission&&!!o.drive&&!!o.body&&!!o.color&&!!o.powerHp&&(o.fuel==='electric'||!!o.engineCc)&&calculateSpecial(s,o).complete};
  const enabled=stock?s.stockEnabled===true:s.specialsEnabled;
  const [help,setHelp]=useState(false);
  const [rateStatus,setRateStatus]=useState(''),[rateBusy,setRateBusy]=useState(false);
- async function refreshRate(){
+ async function refreshRate(force=false){
+  if(demo){setRateStatus('В демо используется пример курса. Рабочие настройки не меняются.');return;}
   setRateBusy(true);
-  try{const r=await fetch('/api/dealers/exchange-rate',{cache:'no-store'});const data=await r.json();if(!r.ok)throw Error(data.error);if(rateMode.current==='manual')return;if(data.quote){pricing({usdRub:data.quote.value,rateAt:data.quote.quoteAt,rateSource:data.quote.source});setRateStatus(data.error||`Курс получен ${new Date(data.quote.fetchedAt).toLocaleString('ru-RU')}`);}else setRateStatus(data.error||'Источник пока не передал курс. Можно временно указать его вручную.');}
+  try{const r=await fetch(`/api/dealers/exchange-rate${force?'?dealerId='+encodeURIComponent(s.dealerId):''}`,{cache:'no-store',...(force?{method:'POST'}:{})});const data=await r.json();if(!r.ok)throw Error(data.error);if(rateMode.current==='manual'&&!force)return;if(data.quote){pricing({usdRub:data.quote.value,rateAt:data.quote.quoteAt,rateSource:data.quote.source,...(force?{rateMode:'auto' as const}:{})});setRateStatus(data.error||`Курс получен ${new Date(data.quote.fetchedAt).toLocaleString('ru-RU')}`);}else setRateStatus(data.error||'Источник пока не передал курс. Можно временно указать его вручную.');}
   catch{setRateStatus('Не удалось обновить курс. Проверьте соединение или укажите курс вручную.');}finally{setRateBusy(false);}
  }
  useEffect(()=>{if(demo||(section==='offers'&&stock)||s.pricing.rateMode==='manual')return;void refreshRate();const timer=setInterval(()=>void refreshRate(),15*60000);return()=>clearInterval(timer);},[s.pricing.rateMode,section,stock]);
@@ -73,29 +76,17 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
    {help&&<p className="text-sm text-[var(--ac-muted)]">Под заказ — расчёт ввоза и доставки. В наличии — новые или подержанные автомобили с ценой в рублях и адресом осмотра.</p>}
    <section className="dealer-editor-panel space-y-4">
     <div className="dealer-rail-switch"><Toggle label="Показывать предложения компании" value={enabled} onChange={v=>patch(stock?{stockEnabled:v}:{specialsEnabled:v})}/><span>{enabled?'Включено':'Скрыто'}</span></div>
-    <Field label="Заголовок ленты" value={heading} onChange={v=>patch(stock?{stockHeading:v}:{specialHeading:v})}/>
+    <div className="dealer-heading-controls"><Field label="Заголовок ленты" value={heading} onChange={v=>patch(stock?{stockHeading:v}:{specialHeading:v})}/><Toggle label="Подзаголовок" value={subtitleEnabled} onChange={v=>patch(stock?{stockSubtitleEnabled:v}:{specialSubtitleEnabled:v})}/></div>
+    {subtitleEnabled&&<div><Field label="Подзаголовок ленты" value={subtitle} maxLength={50} onChange={v=>patch(stock?{stockSubtitle:v.slice(0,50)}:{specialSubtitle:v.slice(0,50)})}/><p className="mt-1 text-xs text-[var(--ac-muted)]">{subtitle.length} / 50 · Появится под заголовком меньшим шрифтом</p></div>}
     <p className="text-xs text-[var(--ac-muted)]">Посетителям видны опубликованные авто. Черновики — только вам.</p>
    </section>
   </>}
-  {section==='pricing'&&<section className="dealer-editor-panel space-y-4">
-   <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-lg font-black">Цена и доставка собственных автомобилей</h2><a className="text-xs text-red-500 underline" href="https://www.profinance.ru/chart/usdrub/" target="_blank" rel="noreferrer">Курс ProFinance ↗</a></div>
-   <Toggle label="Автоматически обновлять курс USD/RUB" value={s.pricing.rateMode!=='manual'} onChange={v=>pricing({rateMode:v?'auto':'manual'})}/>
-   <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-    {s.pricing.rateMode==='manual'?<Field type="number" label="Курс USD/RUB" value={s.pricing.usdRub} onChange={v=>pricing({usdRub:v,rateAt:new Date().toISOString()})}/>:<div className="rounded-xl bg-[var(--ac-surface-2)] p-3"><p className="text-xs text-[var(--ac-muted)]">USD/RUB</p><strong className="text-xl">{s.pricing.usdRub||'—'}</strong></div>}
-    {([['fxMarkupRub','К курсу, ₽'],['deliveryMarkupRub','К доставке, ₽'],['commissionRub','Комиссия, ₽'],['documentsRub','СБКТС + ЭПТС, ₽']] as const).map(([k,label])=><Field key={k} label={label} type="number" value={s.pricing[k]} onChange={v=>pricing({[k]:v})}/>)}
-    <div className="rounded-xl bg-[var(--ac-surface-2)] p-3"><p className="text-xs text-[var(--ac-muted)]">Курс для расчёта</p><strong className="text-xl">{s.pricing.usdRub?(s.pricing.usdRub+s.pricing.fxMarkupRub).toLocaleString('ru-RU'):'—'} ₽</strong></div>
-   </div>
-   {s.pricing.rateMode!=='manual'&&<div className="flex flex-wrap items-center gap-3"><button className={button} type="button" disabled={rateBusy} onClick={()=>void refreshRate()}>{rateBusy?'Обновляем…':'Проверить курс'}</button><p className="text-xs text-[var(--ac-muted)]">{rateStatus||'Курс обновляется автоматически каждые 15 минут.'}</p></div>}
-   <div className="grid grid-cols-2 gap-3"><DealerDeliveryCity label="Откуда" value={s.pricing.originCity||'Бишкек'} onChange={originCity=>pricing({originCity})}/><DealerDeliveryCity label="Куда по умолчанию" value={s.pricing.baseCity||''} onChange={baseCity=>pricing({baseCity})}/></div>
-   <Toggle label="Оценивать доставку в другие города по расстоянию" value={s.pricing.distancePricing===true} onChange={distancePricing=>pricing({distancePricing})}/>
-   <h3 className="font-bold">Примеры стоимости доставки</h3>
-   <p className="text-xs text-[var(--ac-muted)]">Укажите два города и стоимость до них в долларах. Для остальных городов получим ориентир по расстоянию между городами. Дорожный маршрут и окончательную стоимость подтвердим перед заказом.</p>
-   {s.pricing.tariffs.map((t,i)=><div key={t.id} className="grid grid-cols-2 items-end gap-3 rounded-xl border border-[var(--ac-border)] p-3 lg:grid-cols-[1.5fr_1fr_.7fr_.7fr_auto]">
-    <DealerDeliveryCity label="Город" value={t.city} onChange={city=>pricing({tariffs:s.pricing.tariffs.map((x,n)=>n===i?{...x,city}:x)})}/>{([['usd','Доставка, $','number'],['daysFrom','От, дней','number'],['daysTo','До, дней','number']] as const).map(([k,label,type])=><Field key={k} label={label} type={type} value={t[k]} onChange={v=>pricing({tariffs:s.pricing.tariffs.map((x,n)=>n===i?{...x,[k]:v}:x)})}/>)}
-    <button type="button" className={button} aria-label={`Удалить тариф ${t.city}`} onClick={()=>pricing({tariffs:s.pricing.tariffs.filter((_,n)=>n!==i)})}>×</button>
-   </div>)}
-   <button type="button" className={button} onClick={()=>pricing({tariffs:[...s.pricing.tariffs,{id:crypto.randomUUID(),city:'',usd:0,daysFrom:5,daysTo:10}]})}>+ Добавить город доставки</button>
-   <p className="text-xs text-[var(--ac-muted)]">Доставка в рублях = тариф в $ × курс для расчёта + надбавка к доставке. Тариф задаётся один раз для города и применяется ко всем автомобилям.</p>
+  {section==='pricing'&&<section className="dealer-editor-panel space-y-5">
+   <h2 className="text-lg font-black">Цена и доставка собственных автомобилей</h2>
+   <DealerRateEditor value={s.pricing} onChange={pricing} busy={rateBusy} status={rateStatus} onRefresh={()=>void refreshRate(true)}/>
+   <div className="dealer-pricing-section"><h4>Услуги компании</h4><div className="grid grid-cols-2 gap-3 lg:grid-cols-3">{([['deliveryMarkupRub','К доставке, ₽'],['commissionRub','Комиссия, ₽'],['documentsRub','СБКТС + ЭПТС, ₽']] as const).map(([k,label])=><Field key={k} label={label} type="number" value={s.pricing[k]} onChange={v=>pricing({[k]:v})}/>)}</div></div>
+   <DealerDeliveryEditor value={s.pricing} city={s.pricing.baseCity||''} defaultDestination onCityChange={baseCity=>pricing({baseCity})} onChange={pricing}/>
+   <p className="dealer-pricing-note">Доставка в рублях = тариф в $ × курс для расчёта + надбавка к доставке.</p>
   </section>}
   {section==='offers'&&<>
    <details className="dealer-editor-panel dealer-fold" open>
@@ -114,17 +105,22 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
     <details className="dealer-knowledge-fold"><summary>Из базы знаний АвтоЦены<ChevronDown size={20}/></summary><KnowledgeSuggestions hideHeading title={o.model} make={o.make} year={o.year?String(o.year):''} market="" disabled={!o.make||!o.model} onChoose={choose} onPreview={()=>{}}/></details>
     </div></details>
     <details className="dealer-editor-panel dealer-fold" data-complete={complete.photos} open><summary><h3>{complete.photos&&<span className="dealer-section-check" aria-label="Заполнено"><Check size={20}/></span>}02 · Фотографии</h3><span className="dealer-circle-control"><ChevronDown size={20}/></span></summary><Photos dealerId={s.dealerId} value={o.photos} onChange={photos=>updateOffer(o.id,{photos})}/></details>
-    <details className="dealer-editor-panel dealer-fold" data-complete={complete.specs} open><summary><h3>{complete.specs&&<span className="dealer-section-check" aria-label="Заполнено"><Check size={20}/></span>}03 · Характеристики и стоимость</h3><span className="dealer-circle-control"><ChevronDown size={20}/></span></summary><div className="space-y-4"><div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-     {([['engineCc','Объём, см³','number'],['powerHp','Мощность ДВС / ЭВ, л.с.','number'],['power30MinKw','30-мин. мощность, кВт','number'],['transmission','Коробка передач','text'],['drive','Привод','text'],['body','Кузов','text'],['color','Цвет','text'],['mileageKm','Пробег, км','number'],['priceUsd','Цена автомобиля, $','number'],['customsExtraRub','Таможня сверх цены, ₽','number']] as const).filter(([k])=>!stock||!['priceUsd','customsExtraRub','power30MinKw'].includes(k)).map(([k,label,type])=><Field key={k} label={label} type={type} value={o[k]} onChange={v=>updateOffer(o.id,{[k]:v})}/>)}
+    <details className="dealer-editor-panel dealer-fold" data-complete={complete.specs} open><summary><h3>{complete.specs&&<span className="dealer-section-check" aria-label="Заполнено"><Check size={20}/></span>}03 · Характеристики и стоимость</h3><span className="dealer-circle-control"><ChevronDown size={20}/></span></summary><div className="space-y-5"><div className="dealer-pricing-section"><h4>Характеристики</h4><div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+     {([['engineCc','Объём, см³','number'],['powerHp','Мощность ДВС / ЭВ, л.с.','number'],['power30MinKw','30-мин. мощность, кВт','number'],['transmission','Коробка передач','text'],['drive','Привод','text'],['body','Кузов','text'],['color','Цвет','text'],['mileageKm','Пробег, км','number']] as const).filter(([k])=>!stock||k!=='power30MinKw').map(([k,label,type])=><Field key={k} label={label} type={type} value={o[k]} onChange={v=>updateOffer(o.id,{[k]:v})}/>)}
      <label className="grid gap-1 text-sm">Двигатель<select className={input} value={o.fuel} onChange={e=>updateOffer(o.id,{fuel:e.target.value as SpecialOffer['fuel']})}>{[['petrol','Бензин'],['diesel','Дизель'],['electric','Электро'],['hybrid','Параллельный гибрид'],['series_hybrid','Последовательный гибрид']].map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
      <label className="grid gap-1 text-sm">Руль<select className={input} value={o.steering} onChange={e=>updateOffer(o.id,{steering:e.target.value as 'left'|'right'})}><option value="left">Левый</option><option value="right">Правый</option></select></label>
-     {stock?<><Field type="number" label="Цена автомобиля, ₽" value={o.priceRub||0} onChange={v=>updateOffer(o.id,{priceRub:v})}/><label className="grid gap-1 text-sm">Адрес автомобиля<select aria-label="Адрес автомобиля" className={input} value={o.officeId||''} onChange={e=>updateOffer(o.id,{officeId:e.target.value})}><option value="">Выберите адрес</option>{s.offices.map(office=><option key={office.id} value={office.id}>{office.city}, {office.address}</option>)}</select>{!s.offices.length&&<small>Добавьте адрес в разделе «Адреса».</small>}</label></>:<div className="space-y-3 col-span-full"><div className="grid grid-cols-2 gap-3"><DealerDeliveryCity label="Откуда" value={s.pricing.originCity||'Бишкек'} onChange={originCity=>pricing({originCity})}/><DealerDeliveryCity label="Куда" value={o.defaultCity||s.pricing.baseCity||''} onChange={defaultCity=>updateOffer(o.id,{defaultCity})}/></div><p className="text-xs text-[var(--ac-muted)]">{(()=>{const t=estimateDealerDelivery(s.pricing.originCity||'Бишкек',o.defaultCity||s.pricing.baseCity||'',s.pricing.tariffs,s.pricing.distancePricing);return t?`${t.estimated?'Ориентировочно':'По тарифу'}: ${t.usd.toLocaleString('ru-RU')} $ · ${t.daysFrom}–${t.daysTo} дней`:'Проверьте города и два примера стоимости в разделе «Расчёт своих авто».';})()}</p></div>}
+    </div></div>
+    <div className="dealer-pricing-section"><h4>Стоимость автомобиля</h4>
+     {stock?<div className="grid grid-cols-2 gap-3"><Field type="number" label="Цена автомобиля, ₽" value={o.priceRub||0} onChange={v=>updateOffer(o.id,{priceRub:v})}/><label className="grid gap-1 text-sm">Адрес автомобиля<select aria-label="Адрес автомобиля" className={input} value={o.officeId||''} onChange={e=>updateOffer(o.id,{officeId:e.target.value})}><option value="">Выберите адрес</option>{s.offices.map(office=><option key={office.id} value={office.id}>{office.city}, {office.address}</option>)}</select>{!s.offices.length&&<small>Добавьте адрес в разделе «Адреса».</small>}</label></div>:<>
+      <DealerRateEditor value={s.pricing} onChange={pricing} busy={rateBusy} status={rateStatus} onRefresh={()=>void refreshRate(true)}/>
+      <div className="grid grid-cols-2 gap-3 mt-4"><Field type="number" label="Цена автомобиля, $" value={o.priceUsd} onChange={priceUsd=>updateOffer(o.id,{priceUsd})}/><Field type="number" label="Таможня сверх цены, ₽" value={o.customsExtraRub} onChange={customsExtraRub=>updateOffer(o.id,{customsExtraRub})}/></div>
+      <div className="mt-4 space-y-3"><Toggle label="Таможенные платежи включены в закупочную цену" value={o.customsIncluded} onChange={v=>updateOffer(o.id,{customsIncluded:v})}/><Toggle label="Подтверждены условия льготного утильсбора для личного пользования" value={o.personalUseEligible} onChange={v=>updateOffer(o.id,{personalUseEligible:v})}/><p className="dealer-pricing-note">Применимость льготы и 30-минутную мощность нужно подтвердить документами автомобиля.</p></div>
+     </>}
     </div>
-    {!stock&&<><Toggle label="Таможенные платежи включены в закупочную цену" value={o.customsIncluded} onChange={v=>updateOffer(o.id,{customsIncluded:v})}/>
-    <Toggle label="Подтверждены условия льготного утильсбора для личного пользования" value={o.personalUseEligible} onChange={v=>updateOffer(o.id,{personalUseEligible:v})}/>
-    <p className="text-xs text-[var(--ac-muted)]">Применимость льготы и 30-минутную мощность нужно подтвердить документами автомобиля.</p></>}
+    {!stock&&<DealerDeliveryEditor value={s.pricing} city={o.defaultCity||s.pricing.baseCity||''} onCityChange={defaultCity=>updateOffer(o.id,{defaultCity})} onChange={pricing}/>}
+    <div className="dealer-pricing-section"><h4>Описание и оснащение</h4><div className="space-y-4">
     {([['description','Описание'],['equipment','Комплектация и оснащение']] as const).map(([k,label])=><label key={k} className="grid gap-2 text-sm">{label}<textarea className={input} rows={4} value={o[k]} onChange={e=>updateOffer(o.id,{[k]:e.target.value})}/></label>)}
-    </div></details>
+    </div></div></div></details>
    </div>}
   </>}
  </>;

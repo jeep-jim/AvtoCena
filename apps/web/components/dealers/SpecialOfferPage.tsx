@@ -78,7 +78,7 @@ export async function SpecialOfferPage({
       data-offer-share-name={title} data-offer-share-year={o.year} data-offer-share-engine-cc={o.engineCc} data-offer-share-fuel={o.fuel}
       data-offer-price-rub={c.totalRub || undefined}
       data-offer-preview={JSON.stringify({ ...snapshot, totalRub: c.totalRub })}
-      className="ac-offer-page ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]"
+      className="ac-offer-page ac-dealer-offer ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]"
     >
       <PublicHeader backHref="/" backLabel="На главную" />
       <div className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
@@ -130,7 +130,7 @@ export async function SpecialOfferPage({
             <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{stock ? `Автомобиль находится по адресу: ${[office?.city,office?.address].filter(Boolean).join(", ")}. ${o.condition==="used"?"С пробегом":"Новый автомобиль"}. Доставка в другой город согласуется отдельно.` : "Доставка рассчитана до указанного города. Для другого направления уточним ориентировочную стоимость. Наличие, маршрут и срок подтвердим перед заключением договора."}</p>
             <aside className="ac-offer-detail-stack mt-4 min-w-0">
               <div className="ac-offer-spec-stack space-y-2.5">
-                <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5">{fields.map(([label,value],index)=><SpecTile key={label} label={label} value={value} icon={specIcons[label]} fullWidth={fields.length%2===1&&index===fields.length-1}/>)}</div>
+                <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5">{fields.map(([label,value],index)=><SpecTile showLabel key={label} label={label} value={value} icon={specIcons[label]} fullWidth={fields.length%2===1&&index===fields.length-1}/>)}</div>
                 <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
               </div>
               {!preview&&<OfferDesktopActions offerId={id} snapshot={snapshot}/>}

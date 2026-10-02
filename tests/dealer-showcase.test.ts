@@ -7,6 +7,7 @@ import {
   defaultShowcase,
   normalizeShowcase,
   offerAvailability,
+  offerSectionSubtitle,
   calculateSpecial,
   specialOfferId,
   parseSpecialId,
@@ -312,4 +313,12 @@ test("stock and order rails have independent visibility and pricing",()=>{
  let rows=publicRail(s);assert.equal(rows.length,2);assert.equal(rows[0].availability,"order");assert.equal(rows[1].price,2000000);assert.equal(rows[1].heading,s.stockHeading);
  rows=publicRail({...s,specialsEnabled:false});assert.equal(rows.length,1);assert.equal(rows[0].id,"stock");
  rows=publicRail({...s,stockEnabled:false});assert.equal(rows.length,1);assert.equal(rows[0].id,offer.id);
+});
+
+test("rail subtitles are opt-in, bounded and independent",()=>{
+ const s=normalizeShowcase({...fixture(),specialSubtitleEnabled:true,specialSubtitle:"А".repeat(60),stockSubtitleEnabled:false,stockSubtitle:"В наличии сегодня"},fixture().dealerId,1);
+ assert.equal(offerSectionSubtitle(s,"order"),"А".repeat(50));
+ assert.equal(offerSectionSubtitle(s,"stock"),"");
+ s.stockSubtitleEnabled=true;assert.equal(offerSectionSubtitle(s,"stock"),"В наличии сегодня");
+ s.specialSubtitleEnabled=false;assert.equal(offerSectionSubtitle(s,"order"),"");assert.equal(s.specialSubtitle,"А".repeat(50));
 });

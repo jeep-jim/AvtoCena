@@ -11,11 +11,13 @@ export function Field({
   value,
   onChange,
   type = "text",
+  maxLength,
 }: {
   label: string;
   value: string | number;
   onChange: (v: any) => void;
   type?: string;
+  maxLength?: number;
 }) {
   return (
     <label className="grid gap-1 text-sm">
@@ -23,6 +25,7 @@ export function Field({
       <input
         className={input}
         type={type}
+        maxLength={maxLength}
         value={value}
         step={type === "number" ? "any" : undefined}
         onChange={(e) =>

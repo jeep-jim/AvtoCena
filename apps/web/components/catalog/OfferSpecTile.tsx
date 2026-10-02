@@ -27,10 +27,10 @@ function SpecIcon({ name }: { name: SpecIconName }) {
   return <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-50" aria-hidden="true" {...common}>{paths[name]}</svg>;
 }
 
-export function SpecTile({ label, value, icon, info, fullWidth = false }: SpecItem & { fullWidth?: boolean }) {
+export function SpecTile({ label, value, icon, info, fullWidth = false, showLabel = false }: SpecItem & { fullWidth?: boolean; showLabel?: boolean }) {
   return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5" style={fullWidth ? { gridColumn: "1 / -1" } : undefined}>
     <SpecIcon name={icon} />
-    <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
+    <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{showLabel&&<span className="mb-1 block text-[11px] font-normal leading-tight text-[var(--ac-muted)]">{label}</span>}{value}</span>
     {info ? <details className="group static z-30 ml-auto shrink-0">
       <summary className="flex h-7 w-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/12 bg-white/10 text-xs font-black text-[var(--ac-text)] shadow-[inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-md transition hover:bg-white/15 [&::-webkit-details-marker]:hidden" aria-label={`Что означает ${label}`}>?</summary>
       <div className="ac-spec-info-popover absolute right-0 top-[calc(100%+.5rem)] z-50 w-[min(290px,calc(100vw-2rem))] rounded-2xl border border-white/10 bg-[var(--ac-surface)] p-4 text-left text-xs font-semibold leading-5 text-[var(--ac-muted)] shadow-2xl">{info}</div>

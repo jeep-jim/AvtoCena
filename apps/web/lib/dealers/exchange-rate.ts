@@ -34,13 +34,14 @@ export async function fetchDealerRate():Promise<DealerRate>{
  if(!quote)throw Error('ProFinance не передал курс USD/RUB');
  return quote;
 }
-export async function getDealerRate(){
+export async function getDealerRate(force=false){
+ const interval=force?30000:INTERVAL;
  let state=await readDataJson<State>(key,empty);
- if(Date.now()-Date.parse(state.attemptAt)<INTERVAL)return state;
+ if(Date.now()-Date.parse(state.attemptAt)<interval)return state;
  let acquired=false;
  await mutateDataJson<State>(key,empty,current=>{
   acquired=false;
-  if(Date.now()-Date.parse(current.attemptAt)<INTERVAL)return current;
+  if(Date.now()-Date.parse(current.attemptAt)<interval)return current;
   acquired=true;return {...current,attemptAt:new Date().toISOString()};
  });
  if(!acquired)return readDataJson<State>(key,empty);

@@ -6,7 +6,7 @@ import {withDealerRate} from './exchange-rate';
 import { readShowcase } from "./showcase-store";
 import {
   calculateSpecial,
-  offerAvailability, offerAvailabilityLabel, offerSectionEnabled, offerSectionHeading,
+  offerAvailability, offerAvailabilityLabel, offerSectionEnabled, offerSectionHeading, offerSectionSubtitle,
   parseSpecialId,
   specialTitle,
   specialPath,
@@ -24,6 +24,7 @@ export function publicRail(s: DealerShowcase, city = "") {
             condition: o.condition,
             address: offerAvailability(o)==="stock" ? s.offices.find(office=>office.id===o.officeId)?.address : undefined,
             heading: offerSectionHeading(s,offerAvailability(o)),
+            subtitle: offerSectionSubtitle(s,offerAvailability(o)),
             href: specialPath(s.dealerId, o.id),
             image: o.photos[0]?.url || "",
             title: specialTitle(o),

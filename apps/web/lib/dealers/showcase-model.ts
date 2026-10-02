@@ -70,6 +70,10 @@ export type DealerShowcase = {
   specialsEnabled: boolean;
   stockEnabled?: boolean;
   stockHeading?: string;
+  stockSubtitleEnabled?: boolean;
+  stockSubtitle?: string;
+  specialSubtitleEnabled?: boolean;
+  specialSubtitle?: string;
   name: string;
   description: string;
   headerIcon?: string;
@@ -165,6 +169,7 @@ export type OfferAvailability = "order" | "stock";
 export const offerAvailability = (o: SpecialOffer): OfferAvailability => o.availability === "stock" ? "stock" : "order";
 export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) === "stock" ? "В наличии" : "Под заказ";
 export const offerSectionEnabled = (s: DealerShowcase, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
+export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
 export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
 export function calculateSpecial(
   s: DealerShowcase,
@@ -357,6 +362,10 @@ export function normalizeShowcase(
     buyersEnabled: raw.buyersEnabled === true,
     specialsEnabled: raw.specialsEnabled === true,
     stockEnabled: raw.stockEnabled === true,
+    stockSubtitleEnabled: raw.stockSubtitleEnabled === true,
+    stockSubtitle: text(raw.stockSubtitle,50),
+    specialSubtitleEnabled: raw.specialSubtitleEnabled === true,
+    specialSubtitle: text(raw.specialSubtitle,50),
     stockHeading: text(raw.stockHeading,180) || "Автомобили в наличии",
     name: text(raw.name, 120),
     description: text(raw.description, 5000),

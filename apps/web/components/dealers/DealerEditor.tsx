@@ -138,11 +138,16 @@ export function DealerEditor({
       setBusy(false);
     }
   }
-  const updateOffer = (id: string, v: Partial<SpecialOffer>) =>
+  const updateOffer = (id: string, v: Partial<SpecialOffer>) => {
+    if(v.status==='published'){
+      const target=s.offers.find(o=>o.id===id);
+      if(target){const missing=specialPublicationFields({...target,...v});if(missing.length){setMessage(`Для публикации ${specialTitle(target)||'этого автомобиля'} заполните: ${missing.join(', ')}. После заполнения выберите «Опубликован» ещё раз.`);return;}}
+    }
     setS((s) => ({
       ...s,
       offers: s.offers.map((o) => (o.id === id ? { ...o, ...v } : o)),
     }));
+  };
   const saveFeedback=<>{message.startsWith('Не удалось сохранить')&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save()}>Повторить сохранение</button>}<p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>{conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}</>;
   return (
     <DealerUploadContext.Provider value={uploadChange}><DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
