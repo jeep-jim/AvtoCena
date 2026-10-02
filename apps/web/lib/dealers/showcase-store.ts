@@ -28,7 +28,7 @@ export async function readShowcase(id: string) {
   if(id===PILOT_DEALER_ID&&stored.pricing.distancePricing===undefined){
     pricing.originCity='Бишкек';pricing.distancePricing=true;
     pricing.tariffs=[...stored.pricing.tariffs];
-    for(const t of base.pricing.tariffs)if(!pricing.tariffs.some(x=>x.city.toLocaleLowerCase('ru')===t.city.toLocaleLowerCase('ru')))pricing.tariffs.push(t);
+    for(const t of base.pricing.tariffs){const index=pricing.tariffs.findIndex(x=>x.city.toLocaleLowerCase('ru')===t.city.toLocaleLowerCase('ru'));if(index<0)pricing.tariffs.push(t);else pricing.tariffs[index]={...pricing.tariffs[index],usd:t.usd,daysFrom:5,daysTo:10};}
   }
   return {...base,...stored,pricing};
 }
