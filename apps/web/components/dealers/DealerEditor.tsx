@@ -110,6 +110,7 @@ export function DealerEditor({
           : `/api/crm/dealers/${s.dealerId}/showcase`,
         {
           method: "PUT",
+          signal: AbortSignal.timeout(20000),
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(global ? f : {...payload,base:base.current}),
         },
@@ -166,7 +167,7 @@ export function DealerEditor({
         {tab==='offers'&&active&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
         <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
         <p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>
-        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
+        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
 
        </section>
 </aside>}
