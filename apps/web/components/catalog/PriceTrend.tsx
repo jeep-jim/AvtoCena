@@ -5,7 +5,7 @@ import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
-import { loadPublicRates } from "../../lib/catalog/public-rates-client";
+import { loadPublicRates, subscribePublicRates } from "../../lib/catalog/public-rates-client";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";
 import { AuctionCardPrice } from "./AuctionCardPrice";
@@ -338,8 +338,10 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, sourcePrice, totalDelt
   useEffect(() => {
     if (!currency || (rate.rateSource && !rate.rateSource.startsWith("cbr"))) return;
     let active = true;
-    void loadPublicRates().then(rates => { if (active) setPublicRate(rates.find(item => item.currency.toUpperCase() === currency) || null); }).catch(() => {});
-    return () => { active = false; };
+    const apply = (rates: PublicCurrencyRate[]) => { if (active) setPublicRate(rates.find(item => item.currency.toUpperCase() === currency) || null); };
+    const unsubscribe = subscribePublicRates(apply);
+    void loadPublicRates().then(apply).catch(() => {});
+    return () => { active = false; unsubscribe(); };
   }, [currency, rate.rateSource]);
   const chartRate = currentCurrencyRate(rate, publicRate);
   const history = normalizedHistory(chartRate);
@@ -526,8 +528,9 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
     const saved = offer.calculationSnapshot?.currencyRate;
     if (saved?.rateSource && !saved.rateSource.startsWith("cbr")) return;
     let active = true;
+    const unsubscribe = subscribePublicRates(rates => { if (active) setLiveRate(rates.find(rate => rate.currency.toUpperCase() === currency) || null); });
     void loadLiveRates().then((rates) => { if (active) setLiveRate(rates[currency] || null); });
-    return () => { active = false; };
+    return () => { active = false; unsubscribe(); };
   }, [currency, offer.calculationSnapshot?.currencyRate]);
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");

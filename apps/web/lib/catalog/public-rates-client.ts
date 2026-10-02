@@ -4,6 +4,11 @@ const TTL_MS = 15 * 60_000;
 let cached: PublicCurrencyRate[] | null = null;
 let expiresAt = 0;
 let inFlight: Promise<PublicCurrencyRate[]> | null = null;
+const listeners = new Set<(rates: PublicCurrencyRate[]) => void>();
+export function subscribePublicRates(listener: (rates: PublicCurrencyRate[]) => void) {
+  listeners.add(listener);
+  return () => { listeners.delete(listener); };
+}
 
 // Shared by desktop/mobile strips, price trends and chart annotations.
 export function loadPublicRates(): Promise<PublicCurrencyRate[]> {
@@ -15,6 +20,7 @@ export function loadPublicRates(): Promise<PublicCurrencyRate[]> {
       if (!Array.isArray(data?.rates)) throw new Error("public_rates_invalid");
       cached = data.rates.filter((rate: PublicCurrencyRate) => rate?.currency && Number(rate.effectiveRate) > 0);
       expiresAt = Date.now() + TTL_MS;
+      listeners.forEach(listener => listener(cached!));
       return cached!;
     }).finally(() => { inFlight = null; });
   }

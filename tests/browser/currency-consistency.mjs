@@ -11,8 +11,8 @@ const css=await postcss([tailwindcss({content:['tests/browser/currency-consisten
 const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','application/javascript');res.end(fs.readFileSync(`${out}/fixture.js`));}else{res.setHeader('Content-Type','text/html');res.end(`<html data-theme="${req.url.includes('light')?'light':'dark'}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`);}});await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 try{for(const width of [390,1440])for(const theme of ['light','dark']){
- const page=await browser.newPage({viewport:{width,height:1000}});let requests=0;const errors=[];page.on('pageerror',e=>errors.push(String(e)));
- await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'CNY',rateSource:'cbr_live',effectiveRate:12.4028,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:12.4028}]}]}});});
+ const page=await browser.newPage({viewport:{width,height:1000}});let requests=0,latest=12.4028;const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'CNY',rateSource:'cbr_live',effectiveRate:latest,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:latest}]}]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
  await page.locator('[data-car="0"] .ac-price-trend-delta').filter({hasText:'−28,3K'}).waitFor();
  assert.equal(await page.locator('[data-car="1"] .ac-price-trend-delta').innerText(),'−7K');
@@ -26,5 +26,11 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await sheet.getByRole('button',{name:'02.10',exact:true}).click();
  await page.screenshot({path:`${out}/${width}-${theme}.png`,fullPage:true});
  await sheet.getByRole('button',{name:'Закрыть',exact:true}).click();assert.match((await page.locator('[data-car="0"] .ac-price').innerText()).replace(/\s/g,' '),/8 811 105/);
- assert.equal(requests,1,'all cards and the sheet share one rate request');assert.deepEqual(errors,[]);await page.close();
+ assert.equal(requests,1,'all cards and the sheet share one rate request');
+ latest=12.3928;await page.clock.setFixedTime(new Date(Date.now()+16*60_000));
+ await page.locator('[data-car="0"]').getByRole('button',{name:'Показать курс CNY',exact:true}).click();
+ await page.locator('[data-car="0"] .ac-price-trend-delta').filter({hasText:'−32,3K'}).waitFor();
+ assert.equal(await page.locator('[data-car="1"] .ac-price-trend-delta').innerText(),'−8K');
+ assert.equal(requests,2,'refresh updates already mounted cards with the same comparison');
+ assert.deepEqual(errors,[]);await page.close();
 }console.log('currency comparison and touch spacing: 4 scenarios passed');}finally{await browser.close();server.close();}
