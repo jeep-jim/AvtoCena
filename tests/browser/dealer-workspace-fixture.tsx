@@ -6,6 +6,7 @@ import {PartnerLanding,KnowledgeBase} from '../../apps/web/components/partners/P
 import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
 import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
 const q=new URLSearchParams(location.search),kind=q.get('view')||(location.pathname==='/knowledge'?'knowledge':'editor'),s=defaultShowcase('dealer_topavto');s.description='Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
+Object.assign(s,JSON.parse(sessionStorage.getItem('fixture-server')||'{}'));
 const root=createRoot(document.getElementById('root')!);
 if(kind==='partners')root.render(<PartnerLanding lang={(q.get('lang')||'ru') as any} preview={false} program={DEFAULT_PROGRAM} knowledgeEnabled partnersEnabled/>);
 else if(kind==='knowledge')root.render(<KnowledgeBase lang={(q.get('lang')||'ru') as any} preview={false} knowledgeEnabled partnersEnabled initialArticle={q.get("article")||""} initialCategory={q.get("category")||""}/>);

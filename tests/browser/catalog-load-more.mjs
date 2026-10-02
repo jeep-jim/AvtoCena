@@ -10,7 +10,7 @@ import postcss from 'postcss';
 import tailwind from 'tailwindcss';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const out='artifacts/catalog-load-more';fs.mkdirSync(out,{recursive:true});
-const buildOptions={entryPoints:['tests/browser/catalog-load-more-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',outfile:out+'/app.js',plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'next-mock'}));b.onLoad({filter:/.*/,namespace:'next-mock'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path==='next/link'?"import React from 'react';export default p=>React.createElement('a',p)":"export const usePathname=()=>'/cars';export const useSearchParams=()=>new URLSearchParams();export const useRouter=()=>({prefetch:()=>{}});"}));}},{name:'action-fixture',setup(b){b.onResolve({filter:/(?:catalog|green-corner)-load-more-action$/},()=>({path:'action',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'tsx',resolveDir:process.cwd(),contents:`import React from 'react';export const loadMoreGreenCorner=(q,page)=>loadMoreCatalog(q,page);let attempts=0; export async function loadMoreCatalog(q,page){await new Promise(r=>setTimeout(r,150));if(page===3 && attempts++===0)throw Error('offline');const n=page===3?12:24;return {page,total:60,ids:Array.from({length:n},(_,i)=>String((page-1)*24+i)),cards:Array.from({length:n},(_,i)=><article key={(page-1)*24+i} style={{height:220,background:'#ddd',padding:12}}><a href={'/cars/offer/'+((page-1)*24+i)}>Автомобиль {(page-1)*24+i+1}</a></article>)};}` }));}}]};
+const buildOptions={entryPoints:['tests/browser/catalog-load-more-fixture.tsx'],bundle:true,format:'iife',jsx:'automatic',outfile:out+'/app.js',plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'next-mock'}));b.onLoad({filter:/.*/,namespace:'next-mock'},a=>({loader:'jsx',resolveDir:process.cwd(),contents:a.path==='next/link'?"import React from 'react';export default p=>React.createElement('a',p)":"export const usePathname=()=>'/cars';export const useSearchParams=()=>new URLSearchParams();export const useRouter=()=>({prefetch:()=>{}});"}));}},{name:'action-fixture',setup(b){b.onResolve({filter:/(?:catalog|green-corner)-load-more-action$/},()=>({path:'action',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'tsx',resolveDir:process.cwd(),contents:`import React from 'react';export const loadMoreGreenCorner=(q,page)=>loadMoreCatalog(q,page);let attempts=0; export async function loadMoreCatalog(q,page){await new Promise(r=>setTimeout(r,1200));if(page===3 && attempts++===0)throw Error('offline');const n=page===3?12:24;return {page,total:60,ids:Array.from({length:n},(_,i)=>String((page-1)*24+i)),cards:Array.from({length:n},(_,i)=><article key={(page-1)*24+i} style={{height:220,background:'#ddd',padding:12}}><a href={'/cars/offer/'+((page-1)*24+i)}>Автомобиль {(page-1)*24+i+1}</a></article>)};}` }));}}]};
 await build(buildOptions);
 await build({...buildOptions,platform:'node',format:'esm',packages:'external',outfile:out+'/server.mjs'});
 const {App}=await import(pathToFileURL(path.resolve(out+'/server.mjs')).href);
@@ -22,6 +22,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:900}});
+  await page.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true},configurable:true}));
   const errors=[];page.on('pageerror',error=>errors.push(String(error)));
   await page.goto('http://127.0.0.1:'+server.address().port);
   await page.getByText('Показано 24 из 60').waitFor();
@@ -29,6 +30,10 @@ try{
   assert.equal(await pages.getByRole('link',{name:'Страница 2',exact:true}).getAttribute('href'),'/cars?market=japan&page=2');
   assert.equal(await pages.locator('[aria-current=page]').innerText(),'1');
   await page.getByRole('button',{name:'Показать ещё'}).click();
+  const loading=page.getByRole('button',{name:'Загружаем варианты'});
+  await loading.waitFor();assert.equal(await loading.getAttribute('aria-busy'),'true');
+  assert.match(await loading.locator('.ac-catalog-more__candy').evaluate(el=>getComputedStyle(el).backgroundImage),/linear-gradient/);
+  await page.screenshot({path:out+'/'+width+'-loading.png'});
   await page.getByText('Показано 48 из 60').waitFor();assert.equal(await page.locator('article').count(),48);assert.equal(await pages.locator('[aria-current=page]').innerText(),'2');
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByRole('alert').waitFor();assert.equal(await page.locator('article').count(),48);
   await page.getByRole('button',{name:'Показать ещё'}).click();await page.getByText('Показано 60 из 60').waitFor();assert.equal(await page.locator('article').count(),60);

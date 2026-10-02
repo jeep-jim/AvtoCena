@@ -113,16 +113,55 @@ const browser = await chromium.launch({
 try{
  for(const [width,theme] of [[390,'light'],[1440,'light'],[1440,'dark']]){
   const page=await browser.newPage({viewport:{width,height:1000}});const errors=[],writes=[];let releaseMedia;let holdMedia=new Promise(r=>{releaseMedia=r;});page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
-  await page.route('**/api/**',async route=>{const u=route.request().url();if(u.includes('exchange-rate'))return route.fulfill({json:{quote:{value:84,quoteAt:new Date().toISOString(),fetchedAt:new Date().toISOString(),source:'https://www.profinance.ru/chart/usdrub/'}}});if(u.includes('/knowledge'))return route.fulfill({json:{models:[],choices:[]}});if(u.includes('/media')){await holdMedia;return route.fulfill({json:{id:crypto.randomUUID(),url:'/buyers/1.jpg',caption:''}});}let body={};try{body=route.request().postDataJSON()||{};}catch{}writes.push({url:u,body});return route.fulfill({json:{...body,version:(body.version||0)+1}});});
+  await page.route('**/api/**',async route=>{const u=route.request().url();if(u.includes('exchange-rate'))return route.fulfill({json:{quote:{value:84,quoteAt:new Date().toISOString(),fetchedAt:new Date().toISOString(),source:'https://www.profinance.ru/chart/usdrub/'}}});if(u.includes('/knowledge'))return route.fulfill({json:{models:[],choices:[]}});if(u.includes('/media')){await holdMedia;return route.fulfill({json:{id:crypto.randomUUID(),url:'/buyers/1.jpg',caption:''}});}let body={};try{body=route.request().postDataJSON()||{};}catch{}writes.push({url:u,body});const {base,...value}=body;return route.fulfill({json:{...value,version:(body.version||0)+1}});});
   async function shot(name){await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(250);await page.screenshot({path:`${out}/${width}-${theme}-${name}.png`,fullPage:true});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'horizontal overflow '+name);}
   await page.goto(origin);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot('overview');assert.ok(await page.locator('.dealer-editor-navigation button').evaluateAll(items=>items.every(el=>el.scrollWidth<=el.clientWidth+1)),'menu labels fit buttons');
-  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await page.getByRole('switch',{name:'Показывать фотографии покупателей'}).click();await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await page.getByText('Настройки сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.buyersEnabled,false);await shot('gallery');assert.equal(await page.locator('.dealer-editor-toolbar').evaluate(el=>getComputedStyle(el).position),'static');
-  await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByRole('button',{name:'+ Добавить автомобиль',exact:true}).click();await page.getByLabel('Марка',{exact:true}).fill('Toyota');await page.getByLabel('Модель',{exact:true}).fill('RAV4');await page.getByLabel('Загрузить фотографии',{exact:true}).setInputFiles('apps/web/public/buyers/1.jpg');await page.getByRole('button',{name:'Загружаем фотографии…',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Загружаем фотографии…',exact:true}).isDisabled(),true);releaseMedia();await page.getByRole('status').filter({hasText:'Загружено: 1'}).waitFor();await shot('vehicle');
+  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await page.getByRole('switch',{name:'Показывать фотографии покупателей'}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.buyersEnabled,false);await shot('gallery');assert.equal(await page.locator('.dealer-editor-toolbar').evaluate(el=>getComputedStyle(el).position),'static');
+  await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByRole('button',{name:'+ Добавить автомобиль',exact:true}).click();await page.getByLabel('Марка',{exact:true}).fill('Toyota');await page.getByLabel('Модель',{exact:true}).fill('RAV4');await page.getByLabel('Загрузить фотографии',{exact:true}).setInputFiles('apps/web/public/buyers/1.jpg');await page.getByRole('status').filter({hasText:'Загружаем фотографии…'}).waitFor();assert.equal(await page.getByRole('button',{name:'Сохранить черновик автомобиля',exact:true}).isDisabled(),true);releaseMedia();await page.getByRole('status').filter({hasText:'Загружено: 1'}).waitFor();await shot('vehicle');
   await page.getByRole('button',{name:'Сохранить черновик автомобиля',exact:true}).click();await page.getByText('Черновик сохранён. Автомобиль не опубликован.',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers[0].status,'draft');
-  const n=writes.length;await page.getByRole('switch',{name:'Включить демо',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Демо правка');await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await page.getByText('Демо сохранено в этой вкладке. Данные компаний не изменены.').waitFor();assert.equal(writes.length,n);await shot('demo');assert.equal(await page.locator('.crm-navigation').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();await page.getByRole('dialog').waitFor();assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');await shot('preview');await page.getByRole('button',{name:'Закрыть',exact:true}).click();assert.equal(writes.length,n);await page.getByRole('button',{name:'Пробный месяц · все функции'}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByText('Доступно с подпиской',{exact:true}).waitFor();assert.equal(writes.length,n);await page.getByRole('button',{name:'Базовый доступ',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Демо правка');
+  const n=writes.length;await page.getByRole('switch',{name:'Включить демо',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Демо правка');await page.getByText('Изменения демо запоминаются в этой вкладке.').waitFor();assert.equal(writes.length,n);await shot('demo');assert.equal(await page.locator('.crm-navigation').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();await page.getByRole('dialog').waitFor();assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');await shot('preview');await page.getByRole('button',{name:'Закрыть',exact:true}).click();assert.equal(writes.length,n);await page.getByRole('button',{name:'Пробный месяц · все функции'}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByText('Доступно с подпиской',{exact:true}).waitFor();assert.equal(writes.length,n);await page.getByRole('button',{name:'Базовый доступ',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Демо правка');
   await page.goto(origin+'?view=platform');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot('platform');await page.getByRole('button',{name:'Тарифы и доступ',exact:true}).click();await shot('tariffs');await page.getByRole('button',{name:'Страницы сайта',exact:true}).click();await shot('pages');
   for(const kind of ['partners','knowledge']){await page.goto(origin+'?view='+kind);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot(kind);if(kind==='knowledge'){await page.getByRole('searchbox').fill('расчёт');assert.ok(await page.locator('.pw-kb-group li a').count()>0);await page.locator('.pw-kb-group li a').first().click();await page.locator('.pw-article').waitFor();} }
   assert.deepEqual(errors,[]);await page.close();console.log(width,theme,'workspace, save, gallery, isolated demo, plans, pages and knowledge search OK');
+ }
+ // Saving must preserve later keystrokes, survive reload, and recover from errors.
+ {
+  const page=await browser.newPage();page.on('dialog',d=>d.accept());let saved=null,writes=0,fail=false,releaseSave;
+  let gate=null;
+  await page.route('**/api/**',async route=>{
+   if(route.request().method()!=='PUT')return route.fulfill({json:{}});
+   writes++;const {base,...body}=route.request().postDataJSON();
+   if(gate){const pending=gate;gate=null;await pending;}
+   if(fail)return route.fulfill({status:503,json:{error:'Соединение прервано'}});
+   saved={...body,version:(body.version||0)+1};
+   await page.evaluate(value=>sessionStorage.setItem('fixture-server',JSON.stringify(value)),saved);
+   await route.fulfill({json:saved});
+  });
+  await page.goto(origin);
+  await page.evaluate(()=>sessionStorage.setItem('avtocena_dealer_draft_dealer_topavto',JSON.stringify({value:{dealerId:'dealer_topavto',name:'Устаревшая копия'}})));
+  await page.reload();await page.getByRole('button',{name:'Страница компании',exact:true}).click();
+  assert.equal(await page.getByText('Есть несохранённые изменения из прошлой сессии.').count(),0);
+  assert.equal(writes,0,'opening editor does not publish changes');
+  gate=new Promise(r=>{releaseSave=r;});
+  await page.getByLabel('Название компании',{exact:true}).fill('Первая правка');
+  await page.getByText('Сохраняем…',{exact:true}).waitFor();
+  await page.getByLabel('Название компании',{exact:true}).fill('Последняя правка');
+  releaseSave();
+  await page.waitForFunction(()=>JSON.parse(sessionStorage.getItem('fixture-server')||'{}').name==='Последняя правка');
+  await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  assert.equal(saved.name,'Последняя правка');assert.equal(writes,2);
+  await page.reload();await page.getByRole('button',{name:'Страница компании',exact:true}).click();
+  assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Последняя правка');
+  fail=true;await page.getByLabel('Название компании',{exact:true}).fill('Повтор после ошибки');
+  await page.getByRole('button',{name:'Повторить сохранение'}).waitFor();
+  const failedWrites=writes;await page.waitForTimeout(1400);assert.equal(writes,failedWrites,'no failed-save loop');
+  // Unsaved edits restore automatically, without a version-choice banner.
+  await page.reload();fail=false;await page.getByRole('button',{name:'Страница компании',exact:true}).click();
+  await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  assert.equal(saved.name,'Повтор после ошибки');
+  assert.equal(await page.getByRole('button',{name:'Восстановить изменения'}).count(),0);
+  assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),0);
+  await page.close();console.log('Autosave: queued typing, reload, legacy copy and failure recovery OK');
  }
  for(const lang of ['ru','en','zh','ja','ko','ar','de']){const page=await browser.newPage({viewport:{width:390,height:900}});await page.goto(origin+'?view=partners&lang='+lang);assert.equal(await page.locator('main').getAttribute('lang'),lang);assert.equal(await page.locator('main').getAttribute('dir'),lang==='ar'?'rtl':'ltr');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'locale overflow '+lang);if(lang==='ar')await page.screenshot({path:`${out}/arabic.png`,fullPage:true});await page.goto(origin+'?view=knowledge&lang='+lang);assert.equal(await page.locator('.pw-kb-group li a').count(),7);await page.close();}
 }finally{await browser.close();server.close();}

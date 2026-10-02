@@ -7,6 +7,7 @@ import {CatalogMarketFlag} from "@/components/catalog/CatalogMarketFlag";
 import {DEALER_SERVICES} from "@/lib/dealers/service-pricing";
 import {DEALER_MARKETS,dealerMarkets} from "@/lib/dealers/catalog-markets";
 import { useState, useEffect, useRef, useCallback } from "react";
+import {mergeShowcaseChanges} from "@/lib/dealers/showcase-merge";
 import Link from "next/link";
 import {
   calculateSpecial,
@@ -43,24 +44,50 @@ export function DealerEditor({
     [tab, setTab] = useState("overview");
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
-  const [recovery,setRecovery]=useState<any>(null);
-  const base=useRef(initial);
+  const base=useRef(s);
+  const latest=useRef(s);
+  latest.current=s;
+  const saving=useRef(false);
+  const failed=useRef("");
   const [pendingUploads,setPendingUploads]=useState(0);
   const uploadChange=useCallback((delta:number)=>setPendingUploads(n=>Math.max(0,n+delta)),[]);
   useEffect(()=>{if(demo)onDemoChange?.(s);},[demo,s,onDemoChange]);
   useEffect(()=>{onUploadingChange?.(pendingUploads>0);return()=>onUploadingChange?.(false);},[pendingUploads,onUploadingChange]);
   const dirty=JSON.stringify(s)!==JSON.stringify(base.current);
-  const statusMessage=dirty&&['Настройки сохранены','Черновик сохранён. Автомобиль не опубликован.'].includes(message)?'Есть несохранённые изменения':message;
+  const statusMessage=busy?'Сохраняем…':message|| (dirty?'Изменения сохранятся автоматически':'Все изменения сохранены');
   const previewDialog=useRef<HTMLDialogElement>(null);
   const openDemoPreview=(event:React.MouseEvent)=>{if(demo){event.preventDefault();previewDialog.current?.showModal();}};
   const [loaded,setLoaded]=useState(false);
-  const draftKey=`avtocena_dealer_draft_${initial.dealerId}`;
+  // Separate autosave drafts from legacy manual-save copies, which may be stale.
+  const draftKey=`avtocena_dealer_autosave_${initial.dealerId}`;
   useEffect(()=>{
-    if(demo){setLoaded(true);return;}
-    try{const draft=JSON.parse(sessionStorage.getItem(draftKey)||'null');if(draft?.value?.dealerId===initial.dealerId)setRecovery(draft);}catch{}
+    if(!demo)try{
+      const draft=JSON.parse(sessionStorage.getItem(draftKey)||'null');
+      if(draft?.value?.dealerId===initial.dealerId&&draft?.base?.dealerId===initial.dealerId){
+        const merged=mergeShowcaseChanges(draft.base,draft.value,initial);
+        base.current=initial;
+        setS(merged.value);
+        if(merged.conflicts.length)setConflict({current:initial,proposed:merged.value});
+      }
+    }catch{}
     setLoaded(true);
-  },[draftKey,initial.dealerId]);
-  useEffect(()=>{if(demo||!loaded||recovery)return;try{if(JSON.stringify(s)===JSON.stringify(base.current))sessionStorage.removeItem(draftKey);else sessionStorage.setItem(draftKey,JSON.stringify({value:s,base:base.current}));}catch{}},[s,draftKey,loaded,recovery]);
+  },[draftKey,initial.dealerId,demo]);
+  useEffect(()=>{
+    if(demo||!loaded)return;
+    try{if(JSON.stringify(s)===JSON.stringify(base.current))sessionStorage.removeItem(draftKey);
+    else sessionStorage.setItem(draftKey,JSON.stringify({value:s,base:base.current}));}catch{}
+  },[s,draftKey,loaded,demo,busy]);
+  useEffect(()=>{
+    if(demo||!loaded||!dirty||busy||pendingUploads||conflict||failed.current===JSON.stringify(s))return;
+    const timer=setTimeout(()=>void save(),900);
+    return()=>clearTimeout(timer);
+  },[s,loaded,demo,dirty,busy,pendingUploads,conflict]);
+  useEffect(()=>{
+    if(demo||!dirty)return;
+    const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue='';};
+    window.addEventListener('beforeunload',warn);
+    return()=>window.removeEventListener('beforeunload',warn);
+  },[demo,dirty]);
   const active=s.offers.find(o=>o.id===activeId)||s.offers[0];
   const quote=active?calculateSpecial(s,active):null;
 
@@ -68,10 +95,12 @@ export function DealerEditor({
   const pricing = (v: Partial<DealerShowcase["pricing"]>) =>
     setS((s) => ({ ...s, pricing: { ...s.pricing, ...v } }));
   async function save(global = false, draft = false, resolved?: DealerShowcase) {
-    if(pendingUploads)return;
+    if(pendingUploads||saving.current)return;
     if(demo){setMessage('Демо сохранено в этой вкладке. Данные компаний не изменены.');return;}
-    let payload=resolved||s;
+    const submitted=latest.current;
+    let payload=resolved||submitted;
     if(draft&&active){const offers=s.offers.map(o=>o.id===active.id?{...o,status:'draft' as const}:o);payload={...s,offers,specialsEnabled:s.specialsEnabled&&offers.some(o=>o.status==='published')};}
+    saving.current=true;
     setBusy(true);
     setMessage("");
     try {
@@ -89,11 +118,19 @@ export function DealerEditor({
       if(r.status===409&&result.current){setConflict({current:result.current,proposed:result.proposed});throw Error(result.error);}
       if (!r.ok) throw Error(result.error);
       if (global) setF(result);
-      else {base.current=result;setS(result);setConflict(null);try{sessionStorage.removeItem(draftKey);}catch{}}
-      setMessage(draft ? "Черновик сохранён. Автомобиль не опубликован." : "Настройки сохранены");
+      else {
+        // Keep edits made while this request was in flight and save them next.
+        const next=mergeShowcaseChanges(submitted,latest.current,result).value;
+        base.current=result;latest.current=next;setS(next);setConflict(null);failed.current="";
+        try{if(JSON.stringify(next)===JSON.stringify(result))sessionStorage.removeItem(draftKey);
+        else sessionStorage.setItem(draftKey,JSON.stringify({value:next,base:result}));}catch{}
+      }
+      setMessage(draft ? "Черновик сохранён. Автомобиль не опубликован." : "");
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "Не удалось сохранить");
+      failed.current=JSON.stringify(submitted);
+      setMessage(`Не удалось сохранить. ${e instanceof Error ? e.message : "Проверьте соединение и повторите попытку."}`);
     } finally {
+      saving.current=false;
       setBusy(false);
     }
   }
@@ -121,14 +158,14 @@ export function DealerEditor({
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
       </div>
       <div className="dealer-editor-content">
-      {recovery&&<div className="dealer-editor-panel"><p>Есть несохранённые изменения из прошлой сессии.</p><div className="mt-3 flex gap-2"><button className={button} onClick={()=>{base.current=recovery.base||initial;setS(recovery.value);setRecovery(null);}}>Восстановить изменения</button><button className={button} onClick={()=>setRecovery(null)}>Оставить сохранённую версию</button></div></div>}
+
       {!["overview","subscription","administration"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
        <section className="dealer-editor-panel space-y-3">
         <div className="dealer-save-status"><span className="dw-badge">{demo?"Демо":s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
-        <button type="button" disabled={busy||pendingUploads>0||(!fullAccess&&["offers","pricing","rates","buyers"].includes(tab))} className="rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50" onClick={()=>void save(tab==='services')}>{pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':'Сохранить изменения'}</button>
+        {message.startsWith('Не удалось сохранить')&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save()}>Повторить сохранение</button>}
         {tab==='offers'&&active&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
         <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
-        <p role="status" className="text-sm leading-5">{(pendingUploads?'Дождитесь окончания загрузки фотографий, затем сохраните изменения.':statusMessage)||(tab==='offers'?'Черновик можно сохранить с незаполненными полями. Для публикации заполните карточку, выберите статус «Опубликован» и включите показ предложений.':'Изменения появятся на странице после сохранения.')}</p>
+        <p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>
         {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){base.current=conflict.current;void save(false,false,{...conflict.proposed,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
 
        </section>
@@ -142,7 +179,7 @@ export function DealerEditor({
       {tab==='subscription'&&<section className="dealer-editor-panel"><p className="dw-eyebrow">Мой доступ</p><h2 className="dw-title">{fullAccess?'Все возможности':'Базовый доступ'}</h2><p className="dw-muted">{fullAccess?`Доступ до ${dealerAccessLevel(s.dealerId,membership).until?new Date(dealerAccessLevel(s.dealerId,membership).until).toLocaleDateString('ru-RU'):'окончания демо'}.`:'Общий каталог остаётся доступен. Собственные автомобили, фото выдач и расширенное оформление включаются с подпиской.'}</p><div className="dw-grid mt-5">{[[1,program.monthRub],[6,program.halfYearRub],[12,program.yearRub]].map(([m,price])=><div key={m} className="dw-card"><span className="dw-muted">{m===12?'Год':m===6?'6 месяцев':'Месяц'}</span><strong className="dw-stat">{price.toLocaleString('ru-RU')} ₽</strong></div>)}</div><p className="dw-muted mt-5">Комиссия по завершённым продажам из заявок АвтоЦены — {program.commissionPercent}% {program.commissionBasis==='sale'?'от стоимости проданного автомобиля':'от вознаграждения дилера'}. Подписка оплачивается отдельно. Для продления свяжитесь с командой АвтоЦены через вашу заявку на подключение.</p></section>}
       {tab==='administration'&&administration}
       {!fullAccess&&['offers','buyers','pricing','rates'].includes(tab)?<section className="dealer-editor-panel"><h2 className="font-bold text-xl">Доступно с подпиской</h2><p className="dw-muted mt-3">Ваши данные сохранены. Продлите доступ, чтобы снова редактировать и показывать собственные автомобили и галерею.</p><button type="button" className={button+' mt-4'} onClick={()=>setTab('subscription')}>Посмотреть условия</button></section>:<div className="dealer-editor-layout" data-offer-editor={tab==='offers'&&!!active}>
-      <fieldset disabled={busy} className="dealer-editor-main min-w-0 space-y-4">
+      <fieldset className="dealer-editor-main min-w-0 space-y-4">
         {tab === "profile" && (
           <section className="dealer-editor-panel space-y-5">
             <Toggle
@@ -151,7 +188,7 @@ export function DealerEditor({
               onChange={(v) => patch({ profileEnabled: v })}
             />
             <p className="text-sm text-[var(--ac-muted)]">
-              Страница появится после сохранения. До включения её можете
+              После включения страница станет доступна посетителям. Пока она скрыта, её можете
               посмотреть только вы.
             </p>
             <Link
@@ -162,7 +199,7 @@ export function DealerEditor({
             >
               <Eye size={17}/> Предпросмотр страницы дилера
             </Link>
-            <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Ссылка закрепится за вашей компанией после сохранения.</p></div>
+            <div className="dealer-editor-panel space-y-3"><h2 className="font-bold">Ваша ссылка</h2><div className="grid grid-cols-2 gap-3"><Field label="Код города (nvkz, msk…)" value={s.citySlug||''} onChange={v=>patch({citySlug:v.toLowerCase()})}/><Field label="Никнейм дилера" value={s.slug||''} onChange={v=>patch({slug:v.toLowerCase()})}/></div><p className="break-all text-sm">https://avtocena.com{dealerProfilePath(s)}</p><p className="text-xs text-[var(--ac-muted)]">Латинские буквы, цифры и дефис. Изменения ссылки сохраняются автоматически.</p></div>
             <Field
               label="Название компании"
               value={s.name}
@@ -353,7 +390,7 @@ export function DealerEditor({
         <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,s.pricing.baseCity].filter(Boolean).join(' · ')}</p>
         <p className="text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p>
         {quote?.complete?quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
-        <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. На сайте изменения появятся после сохранения.</p>
+        <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. Изменения сохраняются автоматически.</p>
        </section>}
 
       </div>}
