@@ -167,7 +167,7 @@ try{
   assert.ok(await page.locator('.dealer-verification>span').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;}),'verification explanation fits the screen');
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});
-  await page.getByRole('button',{name:'Контакты',exact:true}).click();await page.locator('.dealer-tab-content .dealer-about-logo').waitFor();
+  await page.getByRole('button',{name:'Контакты',exact:true}).click();await page.locator('.dealer-tab-content .dealer-contact-sheet').waitFor();
   await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
   await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
