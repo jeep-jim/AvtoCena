@@ -1,4 +1,7 @@
 import React from 'react';
+import {OverlayBackHistory} from '../../apps/web/components/layout/OverlayBackHistory';
+import {DealerProfileContent} from '../../apps/web/components/dealers/DealerProfileContent';
+import {publicDealerProfile} from '../../apps/web/lib/dealers/public-profile';
 import {DealerOfferContent} from '../../apps/web/components/dealers/DealerOfferContent';
 import {PublicLeadCaptureV2} from '../../apps/web/components/leads/PublicLeadCaptureV2';
 import FavoritesPage from '../../apps/web/app/(public)/favorites/page';
@@ -12,12 +15,15 @@ import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
 import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
 const q=new URLSearchParams(location.search),kind=q.get('view')||(location.pathname.startsWith('/cars/offer/')?'offer':location.pathname==='/favorites'?'favorites':'')||(location.pathname==='/knowledge'?'knowledge':'editor'),s=defaultShowcase('dealer_topavto');s.description='Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
 Object.assign(s,JSON.parse(sessionStorage.getItem('fixture-server')||'{}'));
-const root=createRoot(document.getElementById('root')!);
+const renderer=createRoot(document.getElementById('root')!);
+const root={render:(content:React.ReactNode)=>renderer.render(<><OverlayBackHistory/>{content}</>)};
 if(kind==='offer'){
+ s.name='ТопАвто';
  const stock=q.get('stock')==='1';
- const o={id:'vehicle',status:'published' as const,availability:stock?'stock' as const:'order' as const,condition:'new' as const,officeId:'office',make:'Toyota',model:'RAV4',trim:'2026 2.0L',year:2026,productionMonth:1,engineCc:1987,powerHp:150,power30MinKw:0,fuel:'petrol' as const,transmission:'CVT',drive:'Полный',body:'SUV',color:'Чёрный',steering:'left' as const,mileageKm:0,description:'Автомобиль дилера',equipment:'Климат-контроль',photos:[{id:'p',url:'/buyers/1.jpg',caption:''}],priceUsd:34000,priceRub:3000000,customsIncluded:true,customsExtraRub:0,personalUseEligible:true,defaultCity:'Новосибирск',updatedAt:''};
+ const o={id:'vehicle',status:'published' as const,availability:stock?'stock' as const:'order' as const,condition:'new' as const,officeId:'office',make:'Toyota',model:'RAV4',trim:'2026 2.0L',year:2026,productionMonth:1,engineCc:1987,powerHp:150,power30MinKw:0,fuel:'petrol' as const,transmission:'CVT',drive:'Полный',body:'SUV',color:'Чёрный',steering:'left' as const,mileageKm:0,description:'Автомобиль дилера',equipment:'Климат-контроль',photos:[{id:'p',url:'/buyers/1.jpg',caption:''},{id:'p2',url:'/buyers/2.jpg',caption:''}],priceUsd:34000,priceRub:3000000,customsIncluded:true,customsExtraRub:0,personalUseEligible:true,defaultCity:'Новосибирск',updatedAt:'2026-10-02T08:00:00Z'};
  s.pricing.usdRub=84;s.pricing.rateAt=new Date().toISOString();s.pricing.rateMode='manual';s.specialsEnabled=true;s.stockEnabled=true;s.profileEnabled=true;s.logoLight='/brands/topavto-logo-black.png';s.logoDark='/brands/topavto-logo-black.png';
- root.render(<><DealerOfferContent id="special_dealer_topavto__vehicle" s={s} o={o} verified={q.get('verified')!=='0'} canCopy={q.get('staff')==='1'} canPdf={q.get('staff')==='1'}/><PublicLeadCaptureV2/></>);
+ root.render(<><DealerOfferContent id="special_dealer_topavto__vehicle" s={s} o={o} verified={q.get('verified')!=='0'} items={[{id:"another-order",availability:"order",href:"/cars/offer/another-order",image:"/buyers/1.jpg",title:"Другой автомобиль под заказ",price:2000000,city:"Томск"},{id:"another-stock",availability:"stock",href:"/cars/offer/another-stock",image:"/buyers/2.jpg",title:"Другой автомобиль в наличии",price:2500000,city:"Томск"}]} canCopy={q.get('staff')==='1'} canPdf={q.get('staff')==='1'}/><PublicLeadCaptureV2/></>);
+}else if(kind==='profile'){s.name='ТопАвто';s.profileEnabled=true;s.logoLight='/brands/topavto-logo-black.png';s.logoDark=s.logoLight;s.buyersEnabled=true;s.buyerPhotos=[{id:'p',url:'/buyers/1.jpg',caption:''}];root.render(<DealerProfileContent s={publicDealerProfile(s)} verified catalog={<p>Каталог компании</p>}/>);
 }else if(kind==='favorites')root.render(<><FavoritesPage/><PublicLeadCaptureV2/></>);
 else if(kind==='specs')root.render(<main className="ac-offer-page ac-dealer-offer ac-page-copy p-4"><SpecialRail heading="Спецпредложения" items={[{id:'test',href:'#',image:'/buyers/1.jpg',title:'Toyota RAV4',price:3000000,city:'Томск',heading:'Спецпредложения',subtitle:'От 5 дней — автомобиль у вас дома'}]}/><h2 className="mb-3 text-lg font-bold">Характеристики</h2><div className="grid grid-cols-2 gap-3"><SpecTile showLabel label="Год" value="2026" icon="year"/><SpecTile showLabel label="Двигатель" value="2000 см³" icon="engine"/><SpecTile showLabel label="Пробег" value="Новый" icon="mileage"/><SpecTile showLabel label="Привод" value="Полный" icon="drive"/></div></main>);
 else if(kind==='partners')root.render(<PartnerLanding lang={(q.get('lang')||'ru') as any} preview={false} program={DEFAULT_PROGRAM} knowledgeEnabled partnersEnabled/>);

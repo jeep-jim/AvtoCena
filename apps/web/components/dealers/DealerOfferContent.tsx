@@ -1,6 +1,9 @@
 import {DealerMap} from './DealerMap';
-import {BadgeCheck,MapPin,ChevronDown} from 'lucide-react';
-import {SpecTile,type SpecIconName} from '@/components/catalog/OfferSpecTile';
+import {MapPin,ChevronDown} from 'lucide-react';
+import {OfferUpdatedStatus} from '@/components/catalog/OfferUpdatedStatus';
+import {VerifiedDealerBadge} from './VerifiedDealerBadge';
+import {SpecialRail,type SpecialRailItem} from './SpecialRail';
+import type {ReactNode} from 'react';
 import {StickyOfferColumn} from '@/components/catalog/StickyOfferColumn';
 import {OfferSpecificationsDisclosure} from '@/components/catalog/OfferSpecificationsDisclosure';
 import {dealerProfilePath} from '@/lib/dealers/profile-url';
@@ -21,7 +24,7 @@ import {
 import {OfferPdfButton} from "@/components/catalog/OfferPdfButton";
 import { OfferCopyButton } from "@/components/catalog/OfferCopyButton";
 import type {DealerShowcase,SpecialOffer} from '@/lib/dealers/showcase-model';
-export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=false,canPdf=false}:{id:string;s:DealerShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;canPdf?:boolean}) {
+export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=false,canPdf=false,items=[],markets}:{id:string;s:DealerShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
   const c = calculateSpecial(s, o);
   const stock=offerAvailability(o)==="stock";
   const office=stock?s.offices.find(item=>item.id===o.officeId):s.offices.find(item=>item.id===o.officeId)||s.offices[0];
@@ -59,8 +62,9 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
     ["Цвет", o.color],
     ["Руль", o.steering === "left" ? "Левый" : "Правый"],
   ].filter(([, v]) => v);
-  const specIcons:Record<string,SpecIconName>={Год:'year',Двигатель:'engine',Мощность:'power',Пробег:'mileage',Топливо:'fuel',КПП:'transmission',Привод:'drive',Кузов:'body',Цвет:'body',Руль:'drive'};
   const groups=[{name:'Характеристики',items:fields.map(([name,value])=>({name,value}))},...(o.equipment?[{name:'Оснащение',items:[{name:'Комплектация',value:o.equipment}]}]:[])];
+  const updated = new Date(o.updatedAt || s.updatedAt);
+  const updatedStatus = Number.isFinite(updated.getTime()) ? <OfferUpdatedStatus date={updated.toLocaleDateString("ru-RU",{timeZone:"Asia/Krasnoyarsk"})} time={updated.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Krasnoyarsk"})} sourceUrl={s.profileEnabled?dealerProfilePath(s):undefined} sourceName={s.name}/> : null;
   return (
     <main
       data-offer-id={id}
@@ -90,8 +94,7 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
               snapshot={snapshot}
             />
             </div>
-            <div className="dealer-vehicle-specs mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">{fields.map(([label,value])=><SpecTile key={label} label={label} value={value} icon={specIcons[label]}/>)}</div>
-            <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" />
+            <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" defaultOpen headerAside={updatedStatus} />
             <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
           </div>
           <StickyOfferColumn>
@@ -111,19 +114,21 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
                 </p>
               )}
             </section>
-            <section className="dealer-offer-identity mt-4 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4" aria-label="Дилер объявления">
-              <div className="flex items-center gap-3">
-                <div className="dealer-offer-logo flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[var(--ac-surface-2)]">{s.logoLight||s.logoDark?<><img className="dealer-logo-light h-full w-full object-contain" src={s.logoLight||s.logoDark} alt=""/><img className="dealer-logo-dark h-full w-full object-contain" src={s.logoDark||s.logoLight} alt=""/></>:<span className="text-lg font-black">{s.name.slice(0,2)}</span>}</div>
-                <div className="min-w-0"><p className="text-xs text-[var(--ac-muted)]">Дилер объявления</p><div className="mt-1 flex items-center gap-2">{s.profileEnabled?<Link className="text-lg font-black" href={dealerProfilePath(s)}>{s.name}</Link>:<strong className="text-lg">{s.name}</strong>}{verified&&<BadgeCheck size={20} className="shrink-0 text-emerald-500" aria-label="Проверенный дилер"/>}</div>{verified&&<p className="mt-1 text-xs text-[var(--ac-muted)]">Проверенный дилер</p>}</div>
-              </div>
-              {office&&<div className="mt-4 border-t border-[var(--ac-border)] pt-3"><p className="mb-2 text-xs font-bold text-[var(--ac-muted)]">{stock?'Адрес автомобиля':'Офис дилера'}</p><p className="flex items-start gap-2 text-sm"><MapPin size={17} className="mt-0.5 shrink-0 text-emerald-500"/><span>{[office.city,office.address].filter(Boolean).join(', ')}</span></p><DealerMap offices={[(({phone,...publicOffice})=>publicOffice)(office)]} compact autoLoad/></div>}
-            </section>
-            <OfferMobileActions offerId={id} snapshot={snapshot}/>
             {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
               <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>
               <p className="px-4 pb-4 text-xs text-[var(--ac-muted)]">Курс расчёта: 1 $ = {c.rate.toLocaleString('ru-RU')} ₽. {o.customsIncluded?'Таможенные платежи включены в цену автомобиля.':''}</p>
             </details>:!c.complete?<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>:null}
+            <div className="mt-3 xl:hidden">{updatedStatus}</div>
+            <section className="dealer-offer-identity relative mt-4 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4" aria-label="Дилер объявления">
+              {s.profileEnabled&&<Link href={dealerProfilePath(s)} className="absolute inset-0 z-10 rounded-[1.35rem]" aria-label={`Профиль дилера ${s.name}`}/>}
+              <div className="flex items-center gap-3">
+                <div className="dealer-offer-logo flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[var(--ac-surface-2)]">{s.logoLight||s.logoDark?<><img className="dealer-logo-light h-full w-full object-contain" src={s.logoLight||s.logoDark} alt=""/><img className="dealer-logo-dark h-full w-full object-contain" src={s.logoDark||s.logoLight} alt=""/></>:<span className="text-lg font-black">{s.name.slice(0,2)}</span>}</div>
+                <div className="min-w-0"><p className="text-xs text-[var(--ac-muted)]">Дилер объявления</p><div className="mt-1 flex items-center gap-2">{s.profileEnabled?<Link className="text-lg font-black" href={dealerProfilePath(s)}>{s.name}</Link>:<strong className="text-lg">{s.name}</strong>}{verified&&<span className="relative z-20"><VerifiedDealerBadge/></span>}</div>{verified&&<p className="mt-1 text-xs text-[var(--ac-muted)]">Проверенный дилер</p>}</div>
+              </div>
+              {office&&<div className="relative z-20 mt-4 border-t border-[var(--ac-border)] pt-3"><p className="mb-2 text-xs font-bold text-[var(--ac-muted)]">{stock?'Адрес автомобиля':'Офис дилера'}</p><p className="flex items-start gap-2 text-sm"><MapPin size={17} className="mt-0.5 shrink-0 text-emerald-500"/><span>{[office.city,office.address].filter(Boolean).join(', ')}</span></p><DealerMap offices={[(({phone,...publicOffice})=>publicOffice)(office)]} compact autoLoad/></div>}
+            </section>
+            <OfferMobileActions offerId={id} snapshot={snapshot}/>
             <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{stock ? `Автомобиль находится по адресу: ${[office?.city,office?.address].filter(Boolean).join(", ")}. ${o.condition==="used"?"С пробегом":"Новый автомобиль"}. Доставка в другой город согласуется отдельно.` : "Доставка рассчитана до указанного города. Для другого направления уточним ориентировочную стоимость. Наличие, маршрут и срок подтвердим перед заключением договора."}</p>
             <OfferDesktopActions offerId={id} snapshot={snapshot}/>
             {canPdf&&<OfferPdfButton offerId={id} draft={{}}/>}
@@ -150,15 +155,13 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
             <p className="mt-3 whitespace-pre-line">{o.description}</p>
           </section>
         )}
-        {o.equipment && (
-          <section className="mt-8">
-            <h2 className="text-2xl font-black">Оснащение</h2>
-            <p className="mt-3 whitespace-pre-line">{o.equipment}</p>
-          </section>
-        )}
+        <div className="mt-10" data-dealer-related><SpecialRail kinds={stock?["stock","order"]:["order","stock"]} heading={`Ещё автомобили · ${s.name}`} items={items.filter(item=>item.id!==o.id)}/>{markets}</div>
       </div>
       <OfferContactActionsStyles />
       <style>{`
+        html[data-theme="light"] .ac-dealer-offer .ac-offer-price-panel{background:#cfe5d8!important}
+        .dealer-verification:hover>span{display:block}
+        .dealer-verification:not([open]):not(:hover)>span{display:none}
         .ac-dealer-offer .ac-offer-actions-sidebar{display:grid!important}
         .dealer-offer-logo .dealer-logo-dark{display:none}
         html[data-theme="dark"] .dealer-offer-logo .dealer-logo-light{display:none}

@@ -7,6 +7,7 @@ import "./globals.css";
 import "./catalog-ui.css";
 import "./public-polish.css";
 import type { Metadata, Viewport } from "next";
+import {OverlayBackHistory} from "@/components/layout/OverlayBackHistory";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
 import { PublicUiEnhancer } from "@/components/layout/PublicUiEnhancer";
 import { CurrencyChartEnhancer } from "@/components/layout/CurrencyChartEnhancer";
@@ -303,6 +304,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body suppressHydrationWarning>
         {children}
+        <OverlayBackHistory />
         <TelegramMiniApp />
         <PublicLegalFooter partnersEnabled={features.partnersEnabled} knowledgeEnabled={features.knowledgeEnabled}/>
         <PublicUiEnhancer />

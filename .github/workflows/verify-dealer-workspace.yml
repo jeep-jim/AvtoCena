@@ -24,6 +24,7 @@ jobs:
       - run: npm ci
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/dealer-program.test.ts tests/dealer-showcase.test.ts tests/dealer-access.test.ts tests/dealer-showcase-api.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/dealer-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node scripts/prepare-web-assets.mjs
       - name: Dealer cabinet, gallery, isolated demo, tariffs and multilingual pages
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/dealer-browser/node_modules/playwright/index.mjs

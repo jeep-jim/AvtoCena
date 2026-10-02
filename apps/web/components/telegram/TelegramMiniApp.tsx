@@ -57,9 +57,8 @@ export function TelegramMiniApp(){
     return()=>{window.removeEventListener("storage",sync);window.removeEventListener("avtocena:favorites-changed",sync);};
   },[enabled]);
   const back=useCallback(()=>{
-    const modal=document.querySelector<HTMLDialogElement>('dialog[open]');if(modal){modal.close();return;}
-    const filterClose=document.querySelector<HTMLButtonElement>('.ac-mobile-filter-sheet button[data-ac-mobile-close="1"],.ac-mobile-filter-sheet button[aria-label="Закрыть"]');if(filterClose){filterClose.click();return;}
-    router.push(lastCatalog.current);
+    if(window.history.length>1)window.history.back();
+    else router.push(lastCatalog.current);
   },[router]);
   useEffect(()=>{
     if(!enabled||!sdkReady)return;
