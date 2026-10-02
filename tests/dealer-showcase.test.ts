@@ -237,7 +237,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
           city: "Москва",
           contactPreference: "call",
           personalDataConsent: true,
-          personalDataConsentVersion: "lead-consent-2026-09-30",
+          personalDataConsentVersion: "lead-consent-2026-10-02",
           totalRub: 1,
         }),
       }),
@@ -251,7 +251,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
     assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 142500);
     const followup = await createLead(new Request("https://avtocena.com/api/leads", {
       method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},
-      body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-09-30",totalRub:1})
+      body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02",totalRub:1})
     }));
     assert.equal(followup.status,200);
     const updated=await readChunkedDataJson<any>("leads/leads.json",[]);

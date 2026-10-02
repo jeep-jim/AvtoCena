@@ -127,7 +127,7 @@ try{
   assert.equal(await page.locator('.ac-consent-mark').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
   await page.getByRole('button',{name:'Отправить проверочную заявку'}).click();assert.equal(submitted.length,0);
   async function submit(){const response=page.waitForResponse(r=>r.url().endsWith('/api/leads'));await page.getByRole('button',{name:'Отправить проверочную заявку'}).click();await response;}
-  await consent.check();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');assert.equal(submitted.at(-1).attribution.yclid,'123');
+  await page.locator('.ac-consent-mark').click();assert.equal(await consent.isChecked(),true);await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');assert.equal(submitted.at(-1).attribution.yclid,'123');
   assert.equal(await page.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='reachGoal'&&c[2]==='lead_submitted').length),1);
   assert.equal(await page.locator('.ac-consent-mark').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
   await page.screenshot({path:out+'/consent-'+width+'-'+theme+'.png',fullPage:true});
@@ -146,7 +146,7 @@ try{
   await page.evaluate(()=>{history.pushState({},'','/privacy/request');window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.at(-1)[1]),'destruct');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-  await page.goto(origin+'/?yclid=123');await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();await page.getByRole('checkbox').check();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');
+  await page.goto(origin+'/?yclid=123');await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();await page.locator('.ac-consent-mark').click();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');
   results.push({width,theme,singleConsent:true,whiteCheckbox:true,leadAttribution:true,newConsentAfterOldRefusal:true,immediateInit:true,noBanner:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
   await context.close();
  }

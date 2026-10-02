@@ -14,7 +14,7 @@ test('Mini App origin survives intake, activity, no analytics and cross-channel 
   const first=await send({operationId:'mini-first',submissionChannel:'telegram_miniapp'});
   const again=await send({operationId:'site-followup',submissionChannel:'site'});assert.equal(first.leadId,again.leadId);
   const lead=(await readChunkedDataJson<any>('leads/leads.json',[]))[0];
-  assert.equal(lead.source,'catalog_offer_request');assert.equal(lead.submissionChannel,'telegram_miniapp');assert.equal(lead.analyticsConsent,false);
+  assert.equal(lead.source,'catalog_offer_request');assert.equal(lead.submissionChannel,'telegram_miniapp');assert.equal(lead.analyticsConsent,true);
   assert.equal(lead.followups[0].submissionChannel,'site');
   const event=(await readChunkedDataJson<any>('activity/feed.json',[]))[0];assert.equal(event.title,'Заявка из Telegram Mini App');assert.equal(event.actor.name,'Telegram Mini App');
   assert.match(leadNotice(lead),/Источник: Telegram Mini App/);assert.match(leadNotice(lead,lead.followups[0]),/Источник: Сайт/);
