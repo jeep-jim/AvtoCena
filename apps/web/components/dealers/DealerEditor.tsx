@@ -141,7 +141,7 @@ export function DealerEditor({
   const updateOffer = (id: string, v: Partial<SpecialOffer>) => {
     if(v.status==='published'){
       const target=s.offers.find(o=>o.id===id);
-      if(target){const missing=specialPublicationFields({...target,...v});if(missing.length){setMessage(`Для публикации ${specialTitle(target)||'этого автомобиля'} заполните: ${missing.join(', ')}. Изменения сохраняются как черновик.`);return;}}
+      if(target){const missing=specialPublicationFields({...target,...v});if(missing.length){setMessage(`Для публикации ${specialTitle(target)||'этого автомобиля'} заполните: ${missing.join(', ')}. После заполнения выберите «Опубликован» ещё раз.`);return;}}
     }
     setS((s) => ({
       ...s,
