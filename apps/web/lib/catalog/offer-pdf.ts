@@ -49,6 +49,7 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
  total:rub(calculation?.totalRub),deposit:rub(calculation?.paymentPlan?.securityDepositRub),warnings:[...(warning?[warning]:[]),...(calculation?.warnings || [])],url:`https://avtocena.com${offerPath(offer)}`};
 }
 export function offerPdfNotes(data:OfferPdfData) {
+ if(data.dealerName)return ["Стоимость, наличие, срок доставки и порядок оплаты подтверждаются дилером перед заключением договора.",...data.warnings,"Расчёт носит информационный характер и не является публичной офертой."];
  const deposit=data.marketKey==="japan"
   ? "Обеспечительный платёж в разделе страны — аванс в счёт автомобиля. Он засчитывается при оплате и не прибавляется к стоимости повторно."
   : "Обеспечительный платёж в разделе страны — аванс в счёт услуг по договору. Он засчитывается при оплате и не прибавляется к стоимости повторно.";
@@ -64,7 +65,7 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const marketKey=Object.hasOwn(markets,data.marketKey || "")?data.marketKey!:Object.keys(markets).find(k=>markets[k]===data.market)||"korea";
  const flag=(key:string)=>sharp(path.join(publicDir,`pdf-flags/${key}.svg`)).resize(84,60,{fit:"fill"}).png().toBuffer();
  const [photo,mark,marketFlag,russiaFlag,qr]=await Promise.all([assets?.photo!==undefined?assets.photo:fetchOfferPdfPhoto(data.photoUrl),sharp(path.join(publicDir,"logo/avtocena-mark-light.svg")).resize(96,96).png().toBuffer(),data.marketKey==="dealer"?Promise.resolve(null):flag(marketKey),flag("russia"),QRCode.toBuffer(data.url,{errorCorrectionLevel:"M",margin:4,width:768})]);
- const doc=new PDFDocument({size:"A4",pdfVersion:"1.5",margin:32,font:path.join(publicDir,"fonts/DejaVuSans.ttf"),bufferPages:true,info:{Title:`Расчёт · ${data.title}`,Author:"TOP AVTO / АвтоЦена"}});
+ const doc=new PDFDocument({size:"A4",pdfVersion:"1.5",margin:32,font:path.join(publicDir,"fonts/DejaVuSans.ttf"),bufferPages:true,info:{Title:`Расчёт · ${data.title}`,Author:data.dealerName?`${data.dealerName} / АвтоЦена`:"TOP AVTO / АвтоЦена"}});
  doc.registerFont("regular",path.join(publicDir,"fonts/DejaVuSans.ttf"));doc.registerFont("bold",path.join(publicDir,"fonts/DejaVuSans-Bold.ttf"));
  const chunks:Buffer[]=[];const output=new Promise<Buffer>((resolve,reject)=>{doc.on("data",c=>chunks.push(c));doc.on("end",()=>resolve(Buffer.concat(chunks)));doc.on("error",reject);});
  const X=32,W=346,R=396,RW=167,ink="#1B222C",muted="#68758A",border="#DCE2E9";
@@ -104,12 +105,12 @@ export async function renderOfferPdf(data:OfferPdfData,assets?:{photo?:Buffer|nu
  const contacts=[["Оформление документов","+7 923 623-47-77","nvkz_zenit"],["Япония","+7 903 071-33-03","IvanTOPAVTO"],["Другие страны","+7 923 479-19-88","Anton_Molodykh90"]];
  contacts.forEach(([label,phone,tg],i)=>{const y=627+i*47;text(label,R,y,RW,8,true);doc.font("regular").fontSize(8).fillColor(ink).text(phone,R,y+15,{width:RW,link:`tel:${phone.replace(/[^+0-9]/g,"")}`});doc.fontSize(7).fillColor("#008CCB").text("Telegram",R,y+29,{width:RW,link:`https://t.me/${tg}`});});
  doc.fontSize(7).fillColor(muted).text("topavto.online",R,770,{width:RW,link:TOPAVTO_DEALER.website});doc.text("@TopAvtoImport",R,783,{width:RW,link:"https://t.me/TopAvtoImport"});
+ }
  // Independent left column; unusually long warnings continue on another page.
  text(data.title,X,38,W,fit.titleFont,true);let y=38+fit.titleH+10;text(data.specs,X,y,W,fit.font-1,false,muted);y+=fit.specH+15;text(`${data.market} → ${data.city}`,X,y,W,fit.font+6,true);y=fit.start;
  const room=(h:number)=>{if(y+h>783){doc.addPage();y=38;}};
  data.sections.slice(0,2).forEach((section,si)=>{room(24+(fit.rows[si][0]||0));heading(si,y);y+=23;section.rows.forEach((row,ri)=>{const h=fit.rows[si][ri];room(h);layers.begin(si);const subtotal=row.label.startsWith("Итого:");if(subtotal)doc.roundedRect(X,y,W,h-1,4).fill("#F5F7F9");text(row.label,X+8,y+4,223,fit.font,subtotal);doc.font("bold").fontSize(fit.font).fillColor(ink).text(row.value,X+W-108,y+4,{width:100,align:"right",lineGap:1});doc.moveTo(X+8,y+h-1).lineTo(X+W-8,y+h-1).lineWidth(.4).strokeColor(border).stroke();layers.end();y+=h;});y+=5;});
  y+=supportGap;room(25+fit.noteHeights[0]);heading(2,y);y+=25;notes.forEach((note,i)=>{room(fit.noteHeights[i]);layers.begin(2);text(note,X,y,W,fit.noteFont,false,muted);layers.end();y+=fit.noteHeights[i];});
- }
  const count=doc.bufferedPageRange().count;for(let i=0;i<count;i++){doc.switchToPage(i);doc.font("regular").fontSize(6).fillColor(muted).text("АВТОЦЕНА / Индивидуальный расчёт",X,798,{width:390,lineBreak:false});doc.text(`${i+1} / ${count}`,523,798,{width:40,align:"right",lineBreak:false});}
  doc.end();return output;
 }

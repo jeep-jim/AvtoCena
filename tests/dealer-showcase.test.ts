@@ -334,7 +334,7 @@ test("rail subtitles are opt-in, bounded and independent",()=>{
  assert.deepEqual(favoriteDealer({id:'catalog_car'}),{id:'dealer_topavto',name:'ТопАвто'});
  });
  test("dealer PDF uses its own company and no invented country flag",async()=>{
- const {renderOfferPdf}=await import('../apps/web/lib/catalog/offer-pdf');
- const data={dealerName:'Другой дилер',dealerAddress:'Новокузнецк, адрес',title:'Toyota RAV4',market:'Другой дилер',marketKey:'dealer',date:'02.10.2026',specs:'2026 г. · 1987 см³',city:'Новосибирск',rate:'1 $ = 86,5 ₽',sections:[{title:'Структура цены',rows:[{label:'Цена автомобиля',value:'3 000 000 ₽'}]},{title:'Условия',rows:[{label:'Доставка',value:'5–10 дней'}]}],total:'3 000 000 ₽',deposit:'Уточняется у дилера',warnings:[],url:'https://avtocena.com/cars/offer/special_other__car'};
- const pdf=await renderOfferPdf(data,{photo:null});assert.equal(pdf.subarray(0,4).toString(),'%PDF');assert.ok(pdf.length>10000);
+ const {renderOfferPdf,offerPdfNotes}=await import('../apps/web/lib/catalog/offer-pdf');
+ const data={dealerName:'Другой дилер',dealerAddress:'Новокузнецк, адрес',title:'Toyota RAV4',market:'Другой дилер',marketKey:'dealer',date:'02.10.2026',specs:'2026 г. · 1987 см³',city:'Новосибирск',rate:'1 $ = 86,5 ₽',sections:[{title:'Структура цены',rows:[{label:'Цена автомобиля',value:'3 000 000 ₽'}]},{title:'Условия',rows:[{label:'Доставка',value:'5–10 дней'}]},{title:'Информация',rows:[]}],total:'3 000 000 ₽',deposit:'Уточняется у дилера',warnings:[],url:'https://avtocena.com/cars/offer/special_other__car'};
+ const pdf=await renderOfferPdf(data,{photo:null});assert.equal(pdf.subarray(0,4).toString(),'%PDF');assert.ok(pdf.length>10000);assert.equal((pdf.toString('latin1').match(/\/S \/SetOCGState\b/g)||[]).length,3);assert.doesNotMatch(offerPdfNotes(data).join(' '),/TOP AVTO/);
  });
