@@ -232,7 +232,10 @@ try{
   await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Компания дилера');
   await page.getByLabel('ИНН',{exact:true}).fill('7707083893');
   await page.getByLabel('ОГРН / ОГРНИП',{exact:true}).fill('1027700132195');
-  await page.waitForFunction(()=>JSON.parse(sessionStorage.getItem('fixture-server')||'{}').requisites?.legalName==='ООО Компания дилера');
+  await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  assert.equal(writes.at(-1).body.requisites.legalName,'ООО Компания дилера');
+  assert.equal(writes.at(-1).body.requisites.inn,'7707083893');
+  await page.evaluate(value=>sessionStorage.setItem('fixture-server',JSON.stringify(value)),writes.at(-1).body);
   await shot('requisites');await page.reload();await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
   assert.equal(await page.getByLabel('ИНН',{exact:true}).inputValue(),'7707083893');
   const n=writes.length;await page.getByRole('switch',{name:'Посмотреть демо',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Демо правка');await page.getByText('Изменения демо запоминаются в этой вкладке.').waitFor();assert.equal(writes.length,n);await shot('demo');assert.equal(await page.locator('.crm-navigation').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();await page.getByRole('dialog').waitFor();assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');await shot('preview');await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.getByRole('dialog').waitFor({state:'detached'});assert.equal(writes.length,n);await page.getByRole('button',{name:'Пробный месяц · все функции'}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByText('Доступно с подпиской',{exact:true}).waitFor();assert.equal(writes.length,n);await page.getByRole('button',{name:'Базовый доступ',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Демо правка');

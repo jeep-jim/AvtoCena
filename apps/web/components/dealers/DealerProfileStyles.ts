@@ -26,12 +26,12 @@ body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0;padding-bottom:12
 .dealer-profile-identity>.dealer-desktop-request{display:flex;width:fit-content;margin:14px auto 0}
 .dealer-profile-identity{padding:20px 28px 24px;margin-top:-32px}
 .dealer-identity-row{display:block;position:relative;text-align:center}
-.dealer-identity-row>.dealer-avatar-centered{display:grid;position:absolute;left:50%;top:-64px;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;background:var(--ac-surface);border:8px solid var(--ac-surface);padding:5px;z-index:2;overflow:hidden}
+.dealer-identity-row>.dealer-avatar-centered{display:grid;position:absolute;left:50%;top:-64px;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;background:var(--ac-surface);border:8px solid var(--ac-surface);background:var(--ac-surface-2);padding:5px;z-index:2;overflow:hidden}
 .dealer-avatar-centered img{border-radius:50%;object-fit:contain}
 .dealer-profile-metrics{display:grid;grid-template-columns:1fr 1fr;gap:120px;min-height:64px;max-width:620px;margin:0 auto 16px}
-.dealer-profile-metrics button{display:grid;grid-template-columns:auto auto;justify-content:center;align-content:start;align-items:center;gap:4px 8px;min-height:52px}
+.dealer-profile-metrics button{display:flex;flex-wrap:wrap;justify-content:center;align-content:start;align-items:center;gap:4px 8px;min-height:52px}
 .dealer-profile-metrics svg{color:#eab308}.dealer-profile-metrics button:last-child svg{color:var(--ac-muted)}
-.dealer-profile-metrics strong{font-size:22px;font-weight:750;line-height:1.2}.dealer-profile-metrics span{grid-column:1/-1;font-size:14px;color:var(--ac-muted)}
+.dealer-profile-metrics strong{font-size:22px;font-weight:750;line-height:1.2}.dealer-profile-metrics span{flex-basis:100%;font-size:14px;color:var(--ac-muted)}
 .dealer-identity-divider{display:flex;align-items:center;gap:16px;color:var(--ac-muted);font-size:14px;margin-bottom:10px}
 .dealer-identity-divider:before,.dealer-identity-divider:after{content:'';flex:1;border-top:1px dashed var(--ac-border)}
 .dealer-title-line{display:flex;justify-content:center;align-items:center;gap:8px}
