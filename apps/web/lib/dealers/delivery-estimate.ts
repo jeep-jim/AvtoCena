@@ -5,11 +5,13 @@ import type {DeliveryTariff} from './showcase-model';
 // Distances below are geodesic, not road routes. Used only for a preliminary
 // price calibrated with the dealer's quotes; no routing availability is implied.
 const locations=[...cities,{city:'Бишкек',value:'Бишкек',region:'Кыргызстан',lat:42.87,lon:74.59}];
+const byValue=new Map(locations.map(c=>[normalizeCitySearch(c.value),c]));
+const byName=new Map<string,typeof locations>();
+for(const c of locations){const key=normalizeCitySearch(c.city);byName.set(key,[...(byName.get(key)||[]),c]);}
 export function deliveryLocation(value:string){
- const key=normalizeCitySearch(value);
- const exact=locations.find(c=>normalizeCitySearch(c.value)===key);
+ const key=normalizeCitySearch(value),exact=byValue.get(key);
  if(exact)return exact;
- const matches=locations.filter(c=>normalizeCitySearch(c.city)===key);
+ const matches=byName.get(key)||[];
  return matches.length===1?matches[0]:null;
 }
 export function deliveryDistance(origin:string,destination:string):number|null{

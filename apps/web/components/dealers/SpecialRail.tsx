@@ -29,7 +29,7 @@ export function SpecialRail({
       <div className="mt-4 flex gap-4 overflow-x-auto pb-3">
         {visible.map((o) => (
           <Link
-            key={o.id}
+            key={o.href}
             href={o.href}
             className="w-48 shrink-0 overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] md:w-56"
           >
