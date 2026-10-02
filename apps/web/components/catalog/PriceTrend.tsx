@@ -1,5 +1,5 @@
 "use client";
-import { withRateChartHistory } from "../../lib/catalog/rate-chart-history";
+
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
@@ -23,7 +23,7 @@ export type PublicCurrencyRate = {
   history?: RateHistoryPoint[];
 };
 
-type CurrencyRateLike = Partial<PublicCurrencyRate> & { sourcePrice?: number };
+type CurrencyRateLike = Partial<PublicCurrencyRate> & { sourcePrice?: number; calculatedEffectiveRate?: number };
 type ChartPoint = RateHistoryPoint;
 type PriceLike = {
   id?: string; sourceId?: string; offerType?: string;
@@ -114,35 +114,34 @@ function formatDelta(value: number) {
   return money(absolute);
 }
 
+// Display the last two publications from one rate source. Keep the quote's
+// original rate separately: changing the indicator must not rewrite its total.
+export function currentCurrencyRate(stored: CurrencyRateLike, live: PublicCurrencyRate | null): CurrencyRateLike {
+  const compatible = live && String(stored.currency || live.currency).toUpperCase() === live.currency.toUpperCase()
+    && (!stored.rateSource || stored.rateSource.startsWith("cbr"))
+    && (!live.rateSource || live.rateSource.startsWith("cbr"));
+  const latest = compatible && String(live.rateDate || "") >= String(stored.rateDate || "") ? live : stored;
+  const points = normalizedHistory(latest);
+  const current = points.at(-1), previous = points.at(-2);
+  return {...stored, ...latest,
+    calculatedEffectiveRate: stored.calculatedEffectiveRate || stored.effectiveRate,
+    sourcePrice: stored.sourcePrice,
+    ...(current ? {effectiveRate: current.effectiveRate, rateDate: current.date,
+      previousEffectiveRate: previous?.effectiveRate, previousRateDate: previous?.date,
+      rateDelta: previous ? current.effectiveRate - previous.effectiveRate : 0, history: points} : {})};
+}
+
 export function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {
-  const stored = offer.calculationSnapshot?.currencyRate;
-  if (!liveRate) return offer;
-  const currency = String(offer.sourceCurrency || stored?.currency || "").toUpperCase();
-  if (currency !== liveRate.currency.toUpperCase()) return offer;
-  let rate: CurrencyRateLike = liveRate;
-  if (stored?.effectiveRate) {
-    // Recover the comparison only for the saved publication, never replace
-    // the rate used to calculate this car or mix ATB and CBR histories.
-    if (stored.previousEffectiveRate || stored.rateDelta != null) return offer;
-    if (stored.rateSource && !stored.rateSource.startsWith("cbr")) return offer;
-    if (liveRate.rateSource && !liveRate.rateSource.startsWith("cbr")) return offer;
-    const date = String(stored.rateDate || "").slice(0, 10);
-    if (!date) return offer;
-    const history = [...(liveRate.history || [])];
-    if (liveRate.rateDate) history.push({date: liveRate.rateDate.slice(0, 10), effectiveRate: liveRate.effectiveRate});
-    if (liveRate.previousRateDate && liveRate.previousEffectiveRate) history.push({date: liveRate.previousRateDate.slice(0, 10), effectiveRate: liveRate.previousEffectiveRate});
-    const matching = history.find(point => point.date === date && Math.abs(point.effectiveRate - Number(stored.effectiveRate)) < 1e-8);
-    const previous = history.filter(point => point.date < date && point.effectiveRate > 0).sort((a,b) => b.date.localeCompare(a.date))[0];
-    if (!matching || !previous) return offer;
-    rate = {...stored, previousEffectiveRate: previous.effectiveRate, previousRateDate: previous.date,
-      rateDelta: Number(stored.effectiveRate) - previous.effectiveRate};
-  }
+  const stored = offer.calculationSnapshot?.currencyRate || {};
+  const currency = String(offer.sourceCurrency || stored.currency || "").toUpperCase();
+  if (!currency) return offer;
+  const rate = currentCurrencyRate({...stored, currency}, liveRate);
   return {...offer, calculationSnapshot: {...offer.calculationSnapshot, currencyRate: rate}};
 }
 
 export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
   const current = Number(offer.totalRub || 0);
-  const delta = savedPriceDelta(offer) || currencyDelta(offer);
+  const delta = offer.sourceCurrency || offer.calculationSnapshot?.currencyRate ? currencyDelta(offer) : savedPriceDelta(offer);
   if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1) return null;
   return { direction: delta < 0 ? "down" : "up", deltaRub: delta, formattedDelta: formatDelta(delta) };
 }
@@ -239,16 +238,12 @@ function movementColor(delta: number, light: boolean) {
   return light ? "#7c8594" : "#7a8496";
 }
 
-function RateSparkline({ rate, light = false, priceRub, sourcePrice }: { rate: CurrencyRateLike; light?: boolean; priceRub?: number; sourcePrice?: number }) {
+function RateSparkline({ rate, light = false, priceRub, sourcePrice, selectedDate, onSelect }: { rate: CurrencyRateLike; light?: boolean; priceRub?: number; sourcePrice?: number; selectedDate?: string; onSelect: (date: string) => void }) {
   const currency = String(rate.currency || "").toUpperCase();
   const meta = RATE_META[currency] || { label: currency || "Валюта", nominal: 1, country: currency || "Валюта" };
   const points = normalizedHistory(rate);
-  const historyKey = points.map((point) => `${point.date}:${point.effectiveRate}`).join("|");
-  const [selectedIndex, setSelectedIndex] = useState(Math.max(0, points.length - 1));
-
-  useEffect(() => {
-    setSelectedIndex(Math.max(0, points.length - 1));
-  }, [currency, historyKey, points.length]);
+  const chosen = points.findIndex(point => point.date === selectedDate);
+  const selectedIndex = chosen >= 0 ? chosen : Math.max(0, points.length - 1);
 
   const values = points.map((point) => point.effectiveRate * meta.nominal);
   const width = 360;
@@ -275,9 +270,9 @@ function RateSparkline({ rate, light = false, priceRub, sourcePrice }: { rate: C
   const overallColor = movementColor(totalDelta, light);
   const selectedPoint = points[selectedIndex] || points.at(-1);
   const selectedValue = values[selectedIndex] ?? values.at(-1) ?? Number(rate.effectiveRate || 0) * meta.nominal;
-  const selectedDelta = selectedIndex > 0 ? selectedValue - values[selectedIndex - 1] : totalDelta;
+  const selectedDelta = selectedIndex > 0 ? selectedValue - values[selectedIndex - 1] : 0;
   const selectedColor = movementColor(selectedDelta, light);
-  const currentEffective = Number(rate.effectiveRate || points.at(-1)?.effectiveRate || 0);
+  const currentEffective = Number(rate.calculatedEffectiveRate || 0);
   const selectedEffective = selectedValue / Math.max(1, meta.nominal);
   const selectedPrice = priceAtCurrencyRate(Number(priceRub), Number(sourcePrice), currentEffective, selectedEffective);
   const selectedPriceColor = selectedColor;
@@ -310,9 +305,9 @@ function RateSparkline({ rate, light = false, priceRub, sourcePrice }: { rate: C
           return <line key={`segment-${index}`} x1={previousPoint.x} y1={previousPoint.y} x2={point.x} y2={point.y} stroke={movementColor(delta, light)} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />;
         })}
         {coords.map((point, index) => {
-          const delta = index > 0 ? values[index] - values[index - 1] : totalDelta;
+          const delta = index > 0 ? values[index] - values[index - 1] : 0;
           const selected = index === selectedIndex;
-          return <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={selected ? 5.6 : 4.4} fill={movementColor(delta, light)} stroke={light ? (selected ? "#ffffff" : "#f1f3f7") : "var(--ac-surface-2, #293444)"} strokeWidth={selected ? 3.2 : 2.1} className="cursor-pointer" onClick={() => setSelectedIndex(index)} />;
+          return <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={selected ? 5.6 : 4.4} fill={movementColor(delta, light)} stroke={light ? (selected ? "#ffffff" : "#f1f3f7") : "var(--ac-surface-2, #293444)"} strokeWidth={selected ? 3.2 : 2.1} className="cursor-pointer" onClick={() => onSelect(points[index].date)} />;
         })}
         {coords.map((point, index) => {
           if (index === 0) return null;
@@ -325,7 +320,7 @@ function RateSparkline({ rate, light = false, priceRub, sourcePrice }: { rate: C
         {points.map((point, index) => {
           const active = index === selectedIndex;
           const idleClass = light ? "border-[#dfe3ea] bg-[#e9edf3] text-[#687282]" : "border-white/10 bg-white/[0.045] text-white/48";
-          return <button key={point.date} type="button" onClick={() => setSelectedIndex(index)} aria-pressed={active} className={`min-w-0 rounded-full border px-1 py-1.5 text-center text-[9px] font-black transition ${active ? "shadow-[0_3px_10px_rgba(41,48,61,.10)]" : idleClass}`} style={active ? { borderColor: selectedColor, color: selectedColor, backgroundColor: selectedBackground } : undefined}>{shortRateDate(point.date)}</button>;
+          return <button key={point.date} type="button" onClick={() => onSelect(point.date)} aria-pressed={active} className={`min-w-0 rounded-full border px-1 py-1.5 text-center text-[9px] font-black transition ${active ? "shadow-[0_3px_10px_rgba(41,48,61,.10)]" : idleClass}`} style={active ? { borderColor: selectedColor, color: selectedColor, backgroundColor: selectedBackground } : undefined}>{shortRateDate(point.date)}</button>;
         })}
       </div>
     </> : <div className={`mt-4 rounded-xl px-3 py-8 text-center text-sm font-bold ${light ? "bg-[#e9edf3] text-[#687282]" : "bg-white/[0.04] text-white/45"}`}>История курса обновляется</div>}
@@ -336,22 +331,28 @@ function DetailRow({ label, value, muted, valueClassName = "" }: { label: string
   return <div className="flex min-w-0 items-end gap-2"><span className={`shrink-0 ${muted}`}>{label}</span><span className="mb-[3px] min-w-3 flex-1 border-b border-dotted border-current opacity-35" aria-hidden="true" /><span className={`shrink-0 whitespace-nowrap ${valueClassName}`}>{value}</span></div>;
 }
 
-function CurrencyRateDetails({ rate, impactRub, priceRub, sourcePrice, totalDeltaRub, priceChangedAt, light = false, compact = false, statusLabel = "Изменение курса в сохранённом расчёте" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; sourcePrice?: number; totalDeltaRub?: number; priceChangedAt?: string; light?: boolean; compact?: boolean; statusLabel?: string }) {
+function CurrencyRateDetails({ rate, impactRub, priceRub, sourcePrice, totalDeltaRub, priceChangedAt, light = false, compact = false, statusLabel = "Изменение курса" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; sourcePrice?: number; totalDeltaRub?: number; priceChangedAt?: string; light?: boolean; compact?: boolean; statusLabel?: string }) {
   const currency = String(rate.currency || "").toUpperCase();
   const [publicRate, setPublicRate] = useState<PublicCurrencyRate | null>(null);
-  const savedHistoryCount = normalizedHistory(rate).length;
+  const [selectedDate, setSelectedDate] = useState("");
   useEffect(() => {
-    if (!currency || rate.rateSource === "atb_akebono" || savedHistoryCount >= 5) return;
+    if (!currency || (rate.rateSource && !rate.rateSource.startsWith("cbr"))) return;
     let active = true;
     void loadPublicRates().then(rates => { if (active) setPublicRate(rates.find(item => item.currency.toUpperCase() === currency) || null); }).catch(() => {});
     return () => { active = false; };
-  }, [currency, savedHistoryCount]);
-  const chartRate = rate.rateSource === "atb_akebono" ? rate : withRateChartHistory(rate, publicRate);
+  }, [currency, rate.rateSource]);
+  const chartRate = currentCurrencyRate(rate, publicRate);
   const history = normalizedHistory(chartRate);
-  const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
-  const fallbackPrevious = history.length > 1 ? history[history.length - 2].effectiveRate : 0;
-  const previousRate = Number(rate.previousEffectiveRate || fallbackPrevious || 0);
-  const rateDelta = finiteNumber(rate.rateDelta) || (currentRate && previousRate ? currentRate - previousRate : 0);
+  const chosen = history.findIndex(point => point.date === selectedDate);
+  const selectedIndex = chosen >= 0 ? chosen : history.length - 1;
+  const currentPoint = history[selectedIndex], previousPoint = history[selectedIndex - 1];
+  const currentRate = Number(currentPoint?.effectiveRate || chartRate.effectiveRate || 0);
+  const previousRate = Number(previousPoint?.effectiveRate || (!history.length ? chartRate.previousEffectiveRate : 0) || 0);
+  const rateDelta = currentRate && previousRate ? currentRate - previousRate : 0;
+  const currentDate = currentPoint?.date || chartRate.rateDate;
+  const previousDate = previousPoint?.date || (!history.length ? chartRate.previousRateDate : undefined);
+  const amount = Number(rate.sourcePrice || sourcePrice || 0);
+  const displayedImpact = amount > 0 ? Math.round(amount * rateDelta) : undefined;
   const percent = previousRate ? rateDelta / previousRate * 100 : 0;
   const deltaClass = rateDelta < 0 ? "text-[#20a85e]" : rateDelta > 0 ? "text-[#ef3340]" : light ? "text-[#4f5868]" : "text-white/60";
   const muted = light ? "text-[#6b7483]" : "text-white/58";
@@ -359,17 +360,16 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, sourcePrice, totalDelt
 
   return <div>
     {rate.rateSource === "atb_akebono" ? <p className="text-xs leading-5">Курс АТБ для оплаты инвойса. Таможня рассчитывается отдельно по официальному курсу ЦБ. Дата ниже — время получения котировки.</p> : null}
-    <RateSparkline rate={chartRate} light={light} priceRub={priceRub} sourcePrice={sourcePrice} />
+    <RateSparkline rate={chartRate} light={light} priceRub={priceRub} sourcePrice={amount} selectedDate={selectedDate} onSelect={setSelectedDate} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>{statusLabel}</div></div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
       <DetailRow label={`Курс ${currency}`} muted={muted} value={`${previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}${formatRate(currentRate, currency)} ₽`} valueClassName={strong} />
       <DetailRow label="Изменение курса" muted={muted} value={`${rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}${formatRate(Math.abs(rateDelta), currency)} ₽ (${percent < 0 ? "−" : percent > 0 ? "+" : ""}${Math.abs(percent).toFixed(2)}%)`} valueClassName={deltaClass} />
-      {(rate.previousRateDate || rate.rateDate || history.length) ? <DetailRow label="Период" muted={muted} value={`${fullRateDate(rate.previousRateDate || history[0]?.date)} → ${fullRateDate(rate.rateDate || history.at(-1)?.date)}`} valueClassName={strong} /> : null}
+      {currentDate ? <DetailRow label="Период" muted={muted} value={previousDate ? `${fullRateDate(previousDate)} → ${fullRateDate(currentDate)}` : fullRateDate(currentDate)} valueClassName={strong} /> : null}
     </div>
-    {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><DetailRow label="Из-за курса" muted={muted} value={`${impactRub < 0 ? "−" : "+"}${money(Math.abs(impactRub))} ₽`} valueClassName={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"} /></div> : null}
-    {impactRub ? <p className={`mt-2 text-[11px] leading-4 ${muted}`}>Стоимость самого автомобиля в рублях {impactRub < 0 ? "уменьшилась" : "увеличилась"} на {money(Math.abs(impactRub))} ₽ из-за курса за указанный период. Формула: цена в валюте × изменение курса. Остальные расходы здесь не пересчитываются.</p> : null}
-    {totalDeltaRub ? <div className={`mt-3 text-xs leading-5 ${muted}`}><strong className={strong}>На карточке: {totalDeltaRub < 0 ? "−" : "+"}{money(Math.abs(totalDeltaRub))} ₽</strong> — изменение полного расчёта относительно предыдущего сохранённого расчёта{priceChangedAt ? `, обновлено ${fullRateDate(priceChangedAt)}` : ""}. Оно может включать изменения цены продавца и расходов, а не только курса.</div> : null}
-    {priceRub ? <p className={`mt-2 text-[11px] leading-4 ${muted}`}>График — последние доступные курсы. Период сохранённого расчёта указан ниже графика и может отличаться у разных автомобилей. Цена при выбранном курсе — оценка с неизменными остальными расходами.</p> : null}
+    {displayedImpact !== undefined && previousRate > 0 ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><DetailRow label="Из-за курса" muted={muted} value={`${displayedImpact < 0 ? "−" : displayedImpact > 0 ? "+" : ""}${money(Math.abs(displayedImpact))} ₽`} valueClassName={deltaClass} /></div> : null}
+    {displayedImpact !== undefined && previousRate > 0 ? <p className={`mt-2 text-[11px] leading-4 ${muted}`}>Изменение стоимости автомобиля за указанный период: цена в валюте × изменение курса. Остальные расходы здесь не пересчитываются.</p> : null}
+    {priceRub ? <p className={`mt-2 text-[11px] leading-4 ${muted}`}>На карточке показано влияние последнего изменения курса. Выберите дату на графике, чтобы сравнить её с предыдущей публикацией. Цена при выбранном курсе — оценка с неизменными остальными расходами.</p> : null}
     <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>* Итоговую цену подтверждает менеджер на момент оплаты.</div>
   </div>;
 }
@@ -497,7 +497,7 @@ function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyI
   const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
   const panelClass = light ? "border-[#dfe3ea] bg-[#f8f9fb] text-[#151922] shadow-[0_20px_65px_rgba(34,40,52,.22)]" : "border-white/10 bg-[#11141c] text-white shadow-[0_20px_65px_rgba(0,0,0,.55)]";
   const tailClass = panel ? `absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-l border-t ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}` : `absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}`;
-  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} sourcePrice={Number(offer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(offer)} priceChangedAt={offer.priceChangedAt} compact light={light} statusLabel={currencyDriven ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает изменение полного сохранённого расчёта. Влияние курса указано отдельно.</div>}<span className={tailClass} /></div>;
+  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} sourcePrice={Number(offer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(offer)} priceChangedAt={offer.priceChangedAt} compact light={light} statusLabel={currencyDriven ? "Изменение курса" : "Изменение курса"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает влияние последнего изменения курса на стоимость автомобиля.</div>}<span className={tailClass} /></div>;
 }
 
 export function AuctionResultPrice({ offer, label = "Завершённый аукцион", priceClassName = "text-[22px]", className = "", panel = false, dense = false }: {
@@ -524,7 +524,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   useEffect(() => {
     if (!currency || currency === "RUB") return;
     const saved = offer.calculationSnapshot?.currencyRate;
-    if (saved?.previousEffectiveRate || saved?.rateDelta != null) return;
+    if (saved?.rateSource && !saved.rateSource.startsWith("cbr")) return;
     let active = true;
     void loadLiveRates().then((rates) => { if (active) setLiveRate(rates[currency] || null); });
     return () => { active = false; };
@@ -555,7 +555,8 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
 
   const pricedOffer = useMemo(() => withLiveRate(offer, liveRate), [offer, liveRate]);
   const greenCorner = isGreenCornerOffer(offer);
-  const trend = greenCorner ? null : resolvePriceTrend(pricedOffer);
+  const waitingForRate = !liveRate && currency !== "RUB" && (!offer.calculationSnapshot?.currencyRate?.rateSource || offer.calculationSnapshot.currencyRate.rateSource.startsWith("cbr"));
+  const trend = greenCorner || waitingForRate ? null : resolvePriceTrend(pricedOffer);
   const direction = greenCorner ? "down" : trend?.direction;
   useEffect(() => {
     const node = panelRoot.current;
@@ -579,7 +580,7 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
   const stateClass = direction === "down" ? "is-down" : direction === "up" ? "is-up" : "is-flat";
   const priceStateClass = direction === "down" ? "ac-price--down" : direction === "up" ? "ac-price--up" : "ac-price--flat";
   const hasPrice = Boolean(pricedOffer.totalRub);
-  const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(pricedOffer) && Boolean(currencyDelta(pricedOffer));
+  const trendUsesCurrency = Boolean(trend) && Boolean(currencyDelta(pricedOffer));
   const currencyImpactRub = currencyDelta(pricedOffer) || undefined;
   const trendTitle = trend ? trendUsesCurrency ? `Из-за курса: ${fullRateDate(pricedOffer.calculationSnapshot?.currencyRate?.previousRateDate)} → ${fullRateDate(pricedOffer.calculationSnapshot?.currencyRate?.rateDate)}. Нажмите, чтобы увидеть расчёт` : "Изменение относительно предыдущего сохранённого расчёта. Нажмите, чтобы увидеть пояснение" : "Ожидается следующий снимок валютного курса";
   const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
@@ -627,6 +628,6 @@ export function PriceTrend({ offer, statusLabel, label = "Ориентир", pri
         }}
       ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
-    {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} sourcePrice={Number(pricedOffer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(pricedOffer)} priceChangedAt={pricedOffer.priceChangedAt} statusLabel={trendUsesCurrency ? "Изменение курса в сохранённом расчёте" : "Курс валюты в расчёте автомобиля"} /> : null}
+    {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} sourcePrice={Number(pricedOffer.sourcePrice || 0)} totalDeltaRub={savedPriceDelta(pricedOffer)} priceChangedAt={pricedOffer.priceChangedAt} statusLabel={trendUsesCurrency ? "Изменение курса" : "Изменение курса"} /> : null}
   </div>;
 }

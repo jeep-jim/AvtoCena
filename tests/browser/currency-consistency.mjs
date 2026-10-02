@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import {build} from 'esbuild';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const out='artifacts/currency-consistency';fs.mkdirSync(out,{recursive:true});
+await build({entryPoints:['tests/browser/currency-consistency-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,define:{'process.env.NODE_ENV':'"production"'}});
+const css=await postcss([tailwindcss({content:['tests/browser/currency-consistency-fixture.tsx','apps/web/components/catalog/PriceTrend.tsx','apps/web/components/legal/ConsentCheckbox.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;'+['globals.css','catalog-ui.css','public-polish.css','flat-ui.css','public-regression-fixes.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n'),{from:undefined});
+const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','application/javascript');res.end(fs.readFileSync(`${out}/fixture.js`));}else{res.setHeader('Content-Type','text/html');res.end(`<html data-theme="${req.url.includes('light')?'light':'dark'}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`);}});await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
+try{for(const width of [390,1440])for(const theme of ['light','dark']){
+ const page=await browser.newPage({viewport:{width,height:1000}});let requests=0;const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'CNY',rateSource:'cbr_live',effectiveRate:12.4028,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:12.4028}]}]}});});
+ await page.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
+ await page.locator('[data-car="0"] .ac-price-trend-delta').filter({hasText:'−28,3K'}).waitFor();
+ assert.equal(await page.locator('[data-car="1"] .ac-price-trend-delta').innerText(),'−7K');
+ assert.ok(await page.locator('[data-car="0"] .is-down').count());
+ const gap=await page.locator('.ac-consent-mark').evaluate(el=>{const a=el.closest('label').querySelector('a');return a.getBoundingClientRect().left-el.getBoundingClientRect().right;});assert.ok(gap>=30,`tap separation ${gap}`);
+ const mark=await page.locator('.ac-consent-mark').boundingBox();await page.mouse.click(mark.x+mark.width+8,mark.y+12);assert.ok(await page.getByRole('checkbox').isChecked(),'space next to checkbox toggles it instead of opening a link');
+ await page.locator('[data-car="0"]').getByRole('button',{name:'Показать курс CNY',exact:true}).click();
+ const sheet=page.getByRole('dialog',{name:'Курсы валют'});await sheet.waitFor();
+ const text=(await sheet.innerText()).replace(/\s/g,' ');assert.match(text,/01.10.2026 → 02.10.2026/);assert.match(text,/−28 289 ₽/);assert.doesNotMatch(text,/\+11 073|На карточке:/);
+ await sheet.getByRole('button',{name:'30.09',exact:true}).click();assert.match((await sheet.innerText()).replace(/\s/g,' '),/29.09.2026 → 30.09.2026/);assert.match((await sheet.innerText()).replace(/\s/g,' '),/\+5 254 ₽/);
+ await sheet.getByRole('button',{name:'02.10',exact:true}).click();
+ await page.screenshot({path:`${out}/${width}-${theme}.png`,fullPage:true});
+ await sheet.getByRole('button',{name:'Закрыть',exact:true}).click();assert.match((await page.locator('[data-car="0"] .ac-price').innerText()).replace(/\s/g,' '),/8 811 105/);
+ assert.equal(requests,1,'all cards and the sheet share one rate request');assert.deepEqual(errors,[]);await page.close();
+}console.log('currency comparison and touch spacing: 4 scenarios passed');}finally{await browser.close();server.close();}

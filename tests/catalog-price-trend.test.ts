@@ -33,13 +33,13 @@ test("catalog import stores a decrease against the previous calculation", () => 
   assert.equal(next.previousTotalRub, 1_400_300);
   assert.equal(next.priceDeltaRub, -9_000);
   assert.equal(next.priceChangedAt, "2026-07-15T12:00:00.000Z");
-  assert.deepEqual(resolvePriceTrend(next), { direction: "down", deltaRub: -9_000, formattedDelta: "9K" });
+  assert.equal(resolvePriceTrend(next), null, "saved total change is not a currency comparison");
 });
 
 test("catalog import stores an increase and formats large changes", () => {
   const next = applyPriceTrend(offer(2_440_000), offer(2_300_000), "2026-07-15T12:00:00.000Z");
   assert.equal(next.priceDeltaRub, 140_000);
-  assert.deepEqual(resolvePriceTrend(next), { direction: "up", deltaRub: 140_000, formattedDelta: "140K" });
+  assert.equal(resolvePriceTrend(next), null, "wait for an actual rate comparison");
 });
 
 test("unchanged recalculation keeps the latest meaningful movement", () => {

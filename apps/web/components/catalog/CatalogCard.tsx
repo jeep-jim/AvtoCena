@@ -1,5 +1,5 @@
 "use client";
-import {chinaCardVariant,isChinaModelSpecification} from "@/lib/catalog/china-card-variant";
+import {chinaCardVariant} from "@/lib/catalog/china-card-variant";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import {offerPath} from "@/lib/catalog/offer-url";
@@ -64,7 +64,6 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isElectrified = isElectric || ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const variantLabel=chinaCardVariant(offer);
-  const modelSpecification=isChinaModelSpecification(offer);
   const href = dealerBrowsingHref(offerPath(offer),dealer);
   const imageUrl = o.images[0] || "";
 
@@ -113,7 +112,6 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
         </div>
         <div className={`ac-catalog-card-body ${dense ? "p-2.5 sm:p-3.5" : "p-3.5"}`}>
           {variantLabel ? <div className="mb-2" data-china-variant>
-            {modelSpecification ? <p className="mb-1 text-[10px] leading-tight text-white/50">Комплектация · фото модели</p> : null}
             <p className="text-[11px] font-semibold leading-snug text-white/80 sm:text-xs">{variantLabel}</p>
           </div> : null}
           {selectionRequired ? <div><p className="text-xs text-white/55">{priceLabel}</p><p className="mt-1 text-base font-black text-white">Выбрать модификацию</p></div> : <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}

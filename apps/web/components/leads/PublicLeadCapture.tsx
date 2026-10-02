@@ -396,7 +396,7 @@ function LeadDialog({
             <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 
             <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
-              <label className="flex cursor-pointer items-start gap-3">
+              <label className="flex cursor-pointer items-start gap-5">
                 <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="peer sr-only" />
                 <ConsentMark checked={consent}/>
                 <span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]"><ConsentLinks/></span>
