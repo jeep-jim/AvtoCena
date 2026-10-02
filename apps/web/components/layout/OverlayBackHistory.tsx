@@ -7,6 +7,12 @@ export function OverlayBackHistory(){
  useEffect(()=>{
   type Step={element:HTMLElement;token:string;url:string};
   const steps:Step[]=[];
+  const originalPush=history.pushState,originalReplace=history.replaceState;
+  let position=Number(history.state?.acBackPosition)||0;
+  originalReplace.call(history,{...history.state,acBackPosition:position},'',location.href);
+  const push:History['pushState']=(data,unused,url)=>{position++;originalPush.call(history,{...data,acBackPosition:position},unused,url);};
+  const replace:History['replaceState']=(data,unused,url)=>{originalReplace.call(history,{...data,acBackPosition:position},unused,url);};
+  history.pushState=push;history.replaceState=replace;
   let travelling=false,disposed=false,closing:HTMLElement|null=null;
   const visible=()=>Array.from(document.querySelectorAll<HTMLElement>('dialog[open],[role="dialog"][aria-modal="true"],[data-back-layer],.ac-mobile-filter-sheet')).filter(el=>el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden');
   const close=(element:HTMLElement)=>{
@@ -36,7 +42,13 @@ export function OverlayBackHistory(){
     history.pushState({...history.state,acOverlayStep:token},'',location.href);
    }
   };
-  const pop=()=>{
+  const pop=(event:PopStateEvent)=>{
+   const state=event.state;
+   const nextPosition=typeof state?.acBackPosition==='number'?state.acBackPosition:position-1;
+   const backwards=nextPosition<position;position=nextPosition;
+   // A route opened from a dialog no longer has that dialog mounted. Skip its
+   // old entries on Back so one gesture returns to the preceding page.
+   if(!travelling&&!steps.length&&state?.acOverlayStep&&backwards){history.back();return;}
    if(travelling){travelling=false;queueMicrotask(sync);return;}
    const step=steps.at(-1);
    if(step&&history.state?.acOverlayStep!==step.token){
@@ -47,7 +59,7 @@ export function OverlayBackHistory(){
   const observer=new MutationObserver(sync);
   observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['open','hidden','aria-modal','data-back-layer','class','style']});
   window.addEventListener('popstate',pop);sync();
-  return()=>{disposed=true;observer.disconnect();window.removeEventListener('popstate',pop);};
+  return()=>{disposed=true;observer.disconnect();window.removeEventListener('popstate',pop);if(history.pushState===push)history.pushState=originalPush;if(history.replaceState===replace)history.replaceState=originalReplace;};
  },[]);
  return null;
 }
