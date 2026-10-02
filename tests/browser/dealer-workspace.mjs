@@ -158,6 +158,7 @@ try{
   assert.equal(await page.getByText('На АвтоЦене',{exact:true}).count(),0);
   assert.equal(await page.locator('.dealer-identity-row>.dealer-avatar').isVisible(),width!==390);
   await page.getByLabel('Проверенный дилер',{exact:true}).click();await page.getByText('Проверенный дилер — компания прошла проверку АвтоЦены.',{exact:true}).waitFor();
+  assert.ok(await page.locator('.dealer-verification>span').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;}),'verification explanation fits the screen');
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});
   await page.getByRole('button',{name:'О компании',exact:true}).click();await page.locator('.dealer-tab-content .dealer-about-logo').waitFor();
