@@ -3,19 +3,24 @@ import {withDealerRate} from './exchange-rate';
 import { readShowcase } from "./showcase-store";
 import {
   calculateSpecial,
+  offerAvailability, offerAvailabilityLabel, offerSectionEnabled, offerSectionHeading,
   parseSpecialId,
   specialTitle,
   specialPath,
   type DealerShowcase,
 } from "./showcase-model";
 export function publicRail(s: DealerShowcase, city = "") {
-  return s.specialsEnabled
+  return (s.specialsEnabled || s.stockEnabled)
     ? s.offers
-        .filter((o) => o.status === "published")
+        .filter((o) => o.status === "published" && offerSectionEnabled(s,o))
         .map((o) => {
           const c = calculateSpecial(s, o);
           return {
             id: o.id,
+            availability: offerAvailability(o),
+            condition: o.condition,
+            address: offerAvailability(o)==="stock" ? s.offices.find(office=>office.id===o.officeId)?.address : undefined,
+            heading: offerSectionHeading(s,offerAvailability(o)),
             href: specialPath(s.dealerId, o.id),
             image: o.photos[0]?.url || "",
             title: specialTitle(o),
@@ -32,9 +37,9 @@ export async function getSpecialOffer(value: string, preview = false) {
   if (!parsed) return null;
   const stored = await readShowcase(parsed.dealerId);
   const showcase = stored ? await withDealerRate(preview?stored:await availableShowcase(stored)) : null;
-  if (!showcase || (!preview && !showcase.specialsEnabled)) return null;
+  if (!showcase) return null;
   const offer = showcase.offers.find(
-    (o) => o.id === parsed.id && (preview || o.status === "published"),
+    (o) => o.id === parsed.id && (preview || (o.status === "published" && offerSectionEnabled(showcase,o))),
   );
   return offer ? { showcase, offer } : null;
 }
@@ -50,7 +55,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
     href: `https://avtocena.com${specialPath(s.dealerId, o.id)}`,
     image: o.photos[0]?.url || "",
     market: "dealer",
-    marketLabel: `Спецпредложение · ${s.name}`,
+    marketLabel: `${offerAvailabilityLabel(o)} · ${s.name}`,
     dealerId: s.dealerId,
     dealerName: s.name,
     make: o.make,
@@ -66,10 +71,11 @@ export async function specialLeadSnapshot(id: string, city = "") {
     drive: o.drive,
     bodyType: o.body,
     totalRub: c.totalRub,
-    sourcePrice: o.priceUsd,
-    deliveryQuote: {
+    sourcePrice: offerAvailability(o)==="stock" ? o.priceRub : o.priceUsd,
+    sourceCurrency: offerAvailability(o)==="stock" ? "RUB" : "USD",
+    deliveryQuote: offerAvailability(o)==="stock" ? undefined : {
       version: "dealer-special-v1",
-      origin: "Бишкек",
+      origin: offerAvailability(o)==="stock" ? c.city : "Бишкек",
       city: c.city,
       amountRub: c.complete
         ? c.lines.find((l) => l.id === "delivery")?.amountRub || 0

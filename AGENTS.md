@@ -8,4 +8,6 @@
 
 # Daily work log
 
+- Before starting work, read the latest entries in `roadmap.md` and the relevant section for the current task. Keep this rule across sessions.
+
 - After each completed work session, append a dated Russian entry to `roadmap.md`, preserving earlier entries. Use the user's local calendar date when known. Record actual changes, verification, publication status and unresolved items; never claim unverified completion. Do this as part of the work, without a separate reminder.
