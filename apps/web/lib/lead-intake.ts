@@ -1,4 +1,5 @@
-import {readShowcase} from "./dealers/showcase-store";
+import {favoriteDealer} from "./dealers/favorite-dealer";
+import {readShowcase,findDealer} from "./dealers/showcase-store";
 import {specialLeadSnapshot} from "./dealers/public-showcase";
 import {parseSpecialId} from "./dealers/showcase-model";
 import {leadChannelLabel} from "./lead-source";
@@ -271,6 +272,11 @@ export async function createLead(
     );
   }
 
+  const selectedDealers = new Set(selectedOfferIds.map(id=>favoriteDealer({id}).id));
+  if (selectedDealers.size > 1) return NextResponse.json({ok:false,error:"Выберите автомобили одного дилера. Для другой компании создайте отдельную заявку."},{status:400});
+  const actualDealerId=selectedDealers.values().next().value;
+  if(actualDealerId&&body.dealerId&&actualDealerId!==clean(body.dealerId,80))return NextResponse.json({ok:false,error:"Выбранные автомобили относятся к другому дилеру."},{status:400});
+
   if (!crmUser && !trustedTelegramId) {
     const blocked = await guardLead(request, body, selectedOfferIds, [phone, telegram, max]);
     if (blocked) return blocked;
@@ -285,6 +291,8 @@ export async function createLead(
       Awaited<ReturnType<typeof buildSelectedOfferSnapshot>>
     > => Boolean(item),
   );
+  const actualDealer=actualDealerId?await findDealer(actualDealerId):null;
+  if(actualDealer){requestedDealer.requestedDealerId=actualDealer.id;requestedDealer.requestedDealerName=actualDealer.name;}
   const primaryOffer =
     selectedOfferSnapshots.find(
       (item) => item.id === requestedPrimaryOfferId,

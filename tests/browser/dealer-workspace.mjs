@@ -24,13 +24,13 @@ await build({
     {
       name: "next",
       setup(b) {
-        b.onResolve({ filter: /^next\/(link|navigation)$/ }, (args) => ({
+        b.onResolve({ filter: /^next\/(link|navigation|dynamic)$/ }, (args) => ({
           path: args.path,
           namespace: "mock",
         }));
         b.onLoad({ filter: /.*/, namespace: "mock" }, (args) => ({
           contents:
-            args.path === "next/link"
+            args.path === "next/dynamic" ? `export default function dynamic(){return ()=>null;}` : args.path === "next/link"
               ? `import React from 'react';export default function Link(props){return React.createElement('a',props)}`
               : `export const usePathname=()=>window.location.pathname;export const useSearchParams=()=>new URLSearchParams(window.location.search);export const useRouter=()=>({push:()=>{},replace:()=>{},prefetch:()=>{},back:()=>{}});`,
           loader: "jsx",
@@ -57,7 +57,8 @@ const css = await postcss([
   tailwindcss({
     content: [
       "tests/browser/dealer-workspace-fixture.tsx",
-      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners}/**/*.tsx",
+      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal}/**/*.tsx",
+      "apps/web/app/(public)/favorites/page.tsx",
     ],
   }),
 ]).process(
@@ -70,7 +71,7 @@ const html =
   '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>';
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, "http://localhost");
-  if (["/", "/autocalc", "/knowledge"].includes(u.pathname)) {
+  if (["/", "/autocalc", "/knowledge", "/favorites"].includes(u.pathname)||u.pathname.startsWith("/cars/offer/")) {
     res.setHeader("Content-Type", "text/html");
     res.end(html);
     return;
@@ -132,7 +133,7 @@ try{
   await page.getByRole('button',{name:'Добавить город доставки',exact:true}).click();await page.getByLabel('Новый город доставки',{exact:true}).fill('Томск');await page.getByLabel('Точный тариф, $',{exact:true}).fill('950');assert.ok(writes.at(-1).body.pricing.tariffs.every(t=>t.city));
   await page.getByRole('button',{name:'Добавить тариф',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Томск').usd,950);
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('published');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'draft');await page.getByText(/Для публикации Toyota RAV4 заполните:/).waitFor();
-  await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();await page.getByLabel('Подзаголовок ленты',{exact:true}).fill('От 5 дней — автомобиль у вас дома');assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).getAttribute('maxlength'),'50');await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.specialSubtitleEnabled,true);
+  await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();await page.getByLabel('Подзаголовок ленты',{exact:true}).fill('От 5 дней — автомобиль у вас дома');assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).getAttribute('maxlength'),'70');await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.specialSubtitleEnabled,true);
   await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).count(),0);await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).inputValue(),'От 5 дней — автомобиль у вас дома');
   await shot('pricing');
   assert.equal(await page.locator('.dealer-knowledge-fold').getAttribute('open'),null);await page.locator('.dealer-knowledge-fold > summary').click();assert.notEqual(await page.locator('.dealer-knowledge-fold').getAttribute('open'),null);
@@ -191,6 +192,41 @@ try{
   assert.equal(await page.getByRole('button',{name:'Восстановить изменения'}).count(),0);
   assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),0);
   await page.close();console.log('Autosave: queued typing, reload, legacy copy and failure recovery OK');
+ }
+ for(const width of [390,1440])for(const theme of ['light','dark']){
+  const page=await browser.newPage({viewport:{width,height:1050}});
+  await page.route('https://yandex.ru/**',r=>r.fulfill({body:'<html><body>Карта</body></html>',contentType:'text/html; charset=utf-8'}));
+  for(const stock of [false,true]){
+   await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?stock='+(stock?'1':'0'));
+   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+   await page.getByRole('heading',{name:'Toyota RAV4 2026 2.0L',exact:true}).waitFor();
+   assert.equal(await page.locator('.dealer-vehicle-specs .ac-offer-spec-tile').count(),10);
+   assert.equal(await page.locator('.dealer-vehicle-specs .ac-offer-spec-tile span span').count(),0);
+   await page.getByLabel('Проверенный дилер',{exact:true}).waitFor();
+   await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
+   await page.locator('.dealer-offer-identity iframe').waitFor();
+   assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
+   if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.dealer-offer-identity').evaluate(el=>!!el.nextElementSibling));}
+   assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
+   await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
+   await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.getByRole('button',{name:'Закрыть',exact:true}).click();
+   await page.getByRole('button',{name:'Добавить в избранное',exact:true}).filter({visible:true}).click();
+   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_favorites'))[0].dealerId),'dealer_topavto');
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.screenshot({path:`${out}/${width}-${theme}-public-${stock?'stock':'order'}.png`,fullPage:true});
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer card overflow');
+   await page.evaluate(()=>localStorage.clear());
+  }
+  await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?staff=1&verified=0');
+  await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).filter({visible:true}).waitFor();assert.equal(await page.getByLabel('Проверенный дилер',{exact:true}).count(),0);
+  await page.evaluate(()=>localStorage.setItem('avtocena_favorites',JSON.stringify([{id:'special_dealer_topavto__vehicle',dealerName:'ТопАвто',title:'Toyota RAV4',price:3000000},{id:'special_other__vehicle',dealerName:'Другой дилер',title:'Honda Fit',price:1500000},{id:'catalog_vehicle',title:'Kia Sportage',price:2200000}])));
+  await page.goto(origin+'/favorites');await page.getByRole('button',{name:'Оставить заявку',exact:true}).click();
+  await page.getByLabel('Дилер для заявки',{exact:true}).selectOption('dealer_topavto');
+  assert.equal(await page.locator('.ac-lead-favorites-list button').count(),2);
+  await page.locator('.ac-lead-favorites-list button').first().click();
+  await page.getByLabel('Дилер для заявки',{exact:true}).selectOption('other');
+  assert.equal(await page.locator('.ac-lead-favorites-list button').count(),1);assert.equal(await page.locator('.ac-lead-favorites-list button[aria-pressed=true]').count(),0);
+  await page.screenshot({path:`${out}/${width}-${theme}-favorites-dealer.png`,fullPage:true});await page.close();
  }
  for(const lang of ['ru','en','zh','ja','ko','ar','de']){const page=await browser.newPage({viewport:{width:390,height:900}});await page.goto(origin+'?view=partners&lang='+lang);assert.equal(await page.locator('main').getAttribute('lang'),lang);assert.equal(await page.locator('main').getAttribute('dir'),lang==='ar'?'rtl':'ltr');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'locale overflow '+lang);if(lang==='ar')await page.screenshot({path:`${out}/arabic.png`,fullPage:true});await page.goto(origin+'?view=knowledge&lang='+lang);assert.equal(await page.locator('.pw-kb-group li a').count(),7);await page.close();}
 }finally{await browser.close();server.close();}

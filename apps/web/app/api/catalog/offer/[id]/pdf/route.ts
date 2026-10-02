@@ -1,3 +1,6 @@
+import {parseSpecialId,calculateSpecial,specialTitle,specialPath,offerAvailability} from '@/lib/dealers/showcase-model';
+import {getSpecialOffer} from '@/lib/dealers/public-showcase';
+import type {OfferPdfData} from '@/lib/catalog/offer-pdf';
 import {withChinaCnyPrice} from "@/lib/catalog/china-cny-price";
 import {convertToRub} from "@/lib/catalog/rates";
 import {hasCrmPermission} from "@/lib/crm-permissions";
@@ -20,6 +23,15 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  let draft:Record<string,string>;let requestedVersion:string|undefined;
  try{const input=JSON.parse(body);requestedVersion=typeof input.version==="string"?input.version:undefined;if(!input.draft || typeof input.draft!=="object" || Array.isArray(input.draft))throw Error();draft=Object.fromEntries(Object.entries(input.draft).filter(([,v])=>typeof v==="string").map(([k,v])=>[k,String(v).slice(0,160)]));}catch{return Response.json({error:"Неверные параметры"},{status:400,headers});}
  const id=(await params).id;
+ if(parseSpecialId(id)){
+  const found=await getSpecialOffer(id,user.role==='owner');
+  if(!found)return Response.json({error:"Объявление не найдено"},{status:404,headers});
+  const {showcase:s,offer:o}=found,c=calculateSpecial(s,o),stock=offerAvailability(o)==='stock';
+  const office=stock?s.offices.find(item=>item.id===o.officeId):s.offices[0];
+  const rub=(n:number)=>`${n.toLocaleString('ru-RU')} ₽`;
+  const data:OfferPdfData={dealerName:s.name,dealerAddress:office?[office.city,office.address].filter(Boolean).join(', '):'',title:specialTitle(o),market:s.name,marketKey:'dealer',date:new Date().toLocaleDateString('ru-RU'),specs:[o.year&&`${o.year} г.`,o.engineCc&&`${o.engineCc} см³`,o.powerHp&&`${o.powerHp} л.с.`,`${o.mileageKm.toLocaleString('ru-RU')} км`,o.transmission,o.drive].filter(Boolean).join(' · '),city:c.city||'Город уточняется',rate:stock?'Цена в рублях':`1 $ = ${c.rate.toLocaleString('ru-RU')} ₽`,photoUrl:o.photos[0]?.url,sections:[{title:'Структура цены',rows:c.lines.map(l=>({label:l.title,value:rub(l.amountRub)}))},{title:'Условия',rows:[{label:stock?'Наличие':'Доставка',value:stock?'В наличии':c.daysFrom?`${c.daysFrom}–${c.daysTo} дней`:'Срок уточняется'}]},{title:'Информация',rows:[]}],total:c.totalRub===null?'Цена уточняется':rub(c.totalRub),deposit:'Уточняется у дилера',warnings:c.complete?[]:['Полная стоимость требует уточнения.'],url:`https://avtocena.com${specialPath(s.dealerId,o.id)}`};
+  try{const pdf=await renderOfferPdf(data);return new Response(new Uint8Array(pdf),{headers:{...headers,'Content-Type':'application/pdf','Content-Disposition':'inline; filename="AvtoCena-dealer.pdf"'}});}catch(error){console.error('dealer_offer_pdf_failed',error);return Response.json({error:'Не удалось подготовить PDF. Попробуйте ещё раз.'},{status:500,headers});}
+ }
  let offer=await getOfferForPage(id) || await getOfferFromCurrentShard(id);
  if(!offer)return Response.json({error:"Объявление не найдено"},{status:404,headers});
  if(offer.market==="china"){
