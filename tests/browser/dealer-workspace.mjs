@@ -163,6 +163,8 @@ try{
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});
   await page.getByRole('button',{name:'О компании',exact:true}).click();await page.locator('.dealer-tab-content .dealer-about-logo').waitFor();
   await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  await page.waitForFunction(()=>{const img=document.querySelector('.dealer-stories img');return img?.complete&&img.naturalWidth>0;});
+  if(width===390)assert.equal(await page.locator('.dealer-stories .ac-buyers-rail>button').first().evaluate(el=>el.clientHeight),110);
   await page.screenshot({path:`${out}/${width}-${theme}-public-profile.png`,fullPage:true});
   await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?staff=1&verified=0');
   await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).filter({visible:true}).waitFor();assert.equal(await page.getByLabel('Проверенный дилер',{exact:true}).count(),0);
