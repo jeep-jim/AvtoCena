@@ -10,6 +10,7 @@ import { canCopyOffer } from "@/lib/offer-copy";
 import { getSpecialOffer } from "@/lib/dealers/public-showcase";
 import {
   calculateSpecial,
+  offerAvailability, offerAvailabilityLabel, offerSectionEnabled,
   specialTitle,
   specialPath,
 } from "@/lib/dealers/showcase-model";
@@ -34,6 +35,8 @@ export async function SpecialOfferPage({
   if (!found) notFound();
   const { showcase: s, offer: o } = found;
   const c = calculateSpecial(s, o);
+  const stock=offerAvailability(o)==="stock";
+  const office=stock?s.offices.find(item=>item.id===o.officeId):null;
   const title = specialTitle(o);
   const snapshot = {
     id,
@@ -43,7 +46,7 @@ export async function SpecialOfferPage({
     year: o.year,
     mileageKm: o.mileageKm,
     market: "dealer",
-    marketLabel: `Спецпредложение · ${s.name}`,
+    marketLabel: `${offerAvailabilityLabel(o)} · ${s.name}`,
     href: specialPath(s.dealerId, o.id),
   };
   const fields = [
@@ -82,14 +85,14 @@ export async function SpecialOfferPage({
         {preview && (
           <p className="mb-4 rounded-xl bg-amber-500/15 p-3">
             Предпросмотр владельца ·{" "}
-            {o.status === "published" && s.specialsEnabled
+            {o.status === "published" && offerSectionEnabled(s,o)
               ? "Автомобиль опубликован"
               : "Автомобиль скрыт от посетителей"}
           </p>
         )}
         <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
           <div className="min-w-0">
-            <header><p className="text-xs font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Спецпредложение · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
+            <header><p className="text-xs font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">{offerAvailabilityLabel(o)} · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
             <div className="mt-5 min-w-0 overflow-hidden">
             <VehicleGallery
               images={o.photos.map((p) => p.url)}
@@ -105,7 +108,7 @@ export async function SpecialOfferPage({
           <div className="ac-inline-parameters min-w-0">
             <section className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="text-sm text-[var(--ac-muted)]">
-                {c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
+                {stock ? "Цена автомобиля в наличии" : c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
               <p className="ac-price mt-2 text-3xl font-black">
                 {c.totalRub === null
@@ -119,12 +122,12 @@ export async function SpecialOfferPage({
               )}
             </section>
             {!preview&&<OfferMobileActions offerId={id} snapshot={snapshot}/>}
-            {c.complete ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+            {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
               <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>
               <p className="px-4 pb-4 text-xs text-[var(--ac-muted)]">Курс расчёта: 1 $ = {c.rate.toLocaleString('ru-RU')} ₽. {o.customsIncluded?'Таможенные платежи включены в цену автомобиля.':''}</p>
-            </details>:<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>}
-            <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением договора.</p>
+            </details>:!c.complete?<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>:null}
+            <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{stock ? `Автомобиль находится по адресу: ${[office?.city,office?.address].filter(Boolean).join(", ")}. ${o.condition==="used"?"С пробегом":"Новый автомобиль"}. Доставка в другой город согласуется отдельно.` : "Доставка из базового города до вашего города рассчитывается отдельно. Наличие, стоимость и срок подтвердим перед заключением договора."}</p>
             <aside className="ac-offer-detail-stack mt-4 min-w-0">
               <div className="ac-offer-spec-stack space-y-2.5">
                 <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5">{fields.map(([label,value],index)=><SpecTile key={label} label={label} value={value} icon={specIcons[label]} fullWidth={fields.length%2===1&&index===fields.length-1}/>)}</div>

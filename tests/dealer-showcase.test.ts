@@ -6,6 +6,7 @@ import path from "node:path";
 import {
   defaultShowcase,
   normalizeShowcase,
+  offerAvailability,
   calculateSpecial,
   specialOfferId,
   parseSpecialId,
@@ -19,6 +20,7 @@ import {
 } from "../apps/web/lib/dealers/showcase-store";
 import {
   getSpecialOffer,
+  publicRail,
   specialLeadSnapshot,
 } from "../apps/web/lib/dealers/public-showcase";
 import {
@@ -147,13 +149,8 @@ test("publish validation, social allowlist and isolated dealer image references"
       1,
     ),
   );
-  assert.throws(() =>
-    normalizeShowcase(
-      { ...s, specialsEnabled: true, offers: [] },
-      s.dealerId,
-      1,
-    ),
-  );
+  const emptyEnabled=normalizeShowcase({...s,specialsEnabled:true,offers:[]},s.dealerId,1);
+  assert.equal(emptyEnabled.specialsEnabled,true);assert.deepEqual(publicRail(emptyEnabled),[]);
   assert.throws(() =>
     normalizeShowcase({ ...s, profileEnabled: true }, s.dealerId, 1),
   );
@@ -264,6 +261,13 @@ test("owner configuration versions, unpublished isolation and base-city price in
     assert.equal(updated[0].selectedOffers[0].totalRub,3135900);
     assert.equal(updated[0].deliveryQuote.amountRub,142500);
     assert.equal(published.specialsEnabled, true);
+    const stock:SpecialOffer={...offer,id:"stock-public",availability:"stock",condition:"used",year:2021,productionMonth:0,priceRub:1250000,priceUsd:0,officeId:"yard"};
+    const withStock=await saveShowcase(s.dealerId,{...published,stockEnabled:true,offices:[{id:"yard",city:"Новокузнецк",address:"Улица, 10",phone:"",hours:"",lat:null,lon:null,photos:[]}],offers:[...published.offers,stock]});
+    const stockId=specialOfferId(s.dealerId,stock.id);
+    const stockSnapshot=await specialLeadSnapshot(stockId,"Москва");assert.equal(stockSnapshot?.totalRub,1250000);assert.equal(stockSnapshot?.sourceCurrency,"RUB");assert.equal(stockSnapshot?.deliveryQuote,undefined);
+    const sold=await saveShowcase(s.dealerId,{...withStock,offers:withStock.offers.map(o=>o.id===stock.id?{...o,status:"sold"}:o)});
+    assert.equal(sold.stockEnabled,true);assert.equal(await getSpecialOffer(stockId),null);assert.ok(await getSpecialOffer(stockId,true));
+
   } finally {
     process.chdir(cwd);
     if (driver === undefined) delete process.env.JSON_STORAGE_DRIVER;
@@ -285,4 +289,26 @@ test("an unfilled delivery tariff never becomes a published zero-cost route", ()
   const s=fixture(); s.pricing.tariffs[0].usd=0;
   assert.equal(calculateSpecial(s,s.offers[0]).totalRub,null);
   assert.throws(()=>normalizeShowcase({...s,specialsEnabled:true},s.dealerId,1),/стоимость доставки/);
+});
+
+
+test("stock vehicles use an exact ruble price and dealer address, without import fees",()=>{
+ const s=fixture();s.pricing.rateAt="2020-01-01";s.pricing.tariffs=[];
+ s.offices=[{id:"stock-yard",city:"Новокузнецк",address:"Улица, 10",phone:"",hours:"",lat:null,lon:null,photos:[]}];
+ const stock:SpecialOffer={...offer,id:"used-fit",availability:"stock",condition:"used",year:2021,productionMonth:0,priceUsd:0,priceRub:1250000,officeId:"stock-yard",customsIncluded:false,customsExtraRub:0,mileageKm:42000};
+ s.offers=[stock];s.stockEnabled=true;s.specialsEnabled=false;
+ const c=calculateSpecial(s,stock,"Москва");assert.equal(c.complete,true);assert.equal(c.totalRub,1250000);assert.equal(c.city,"Новокузнецк");assert.equal(c.daysFrom,undefined);assert.equal(c.lines.length,1);assert.equal(c.rate,0);
+ const normalized=normalizeShowcase(s,s.dealerId,1);assert.equal(normalized.offers[0].condition,"used");assert.equal(normalized.offers[0].productionMonth,0);assert.equal(normalized.offers[0].priceRub,1250000);
+ assert.equal(publicRail(normalized)[0].availability,"stock");assert.equal(publicRail(normalized)[0].address,"Улица, 10");assert.equal(publicRail({...normalized,stockEnabled:false}).length,0);
+ assert.equal(calculateSpecial(s,{...stock,officeId:"unknown"}).complete,false);assert.equal(calculateSpecial(s,{...stock,priceRub:0}).totalRub,null);
+ assert.throws(()=>normalizeShowcase({...s,offers:[{...stock,priceRub:-1}]},s.dealerId,1));
+ assert.equal(offerAvailability(offer),"order");assert.equal(calculateSpecial(fixture(),offer).totalRub,3135900);
+});
+test("stock and order rails have independent visibility and pricing",()=>{
+ const s=fixture();s.specialsEnabled=true;s.stockEnabled=true;s.stockHeading="Авто на нашей площадке";
+ s.offices=[{id:"yard",city:"Кемерово",address:"Улица, 1",phone:"",hours:"",lat:null,lon:null,photos:[]}];
+ s.offers.push({...offer,id:"stock",availability:"stock",condition:"new",priceRub:2000000,officeId:"yard"});
+ let rows=publicRail(s);assert.equal(rows.length,2);assert.equal(rows[0].availability,"order");assert.equal(rows[1].price,2000000);assert.equal(rows[1].heading,s.stockHeading);
+ rows=publicRail({...s,specialsEnabled:false});assert.equal(rows.length,1);assert.equal(rows[0].id,"stock");
+ rows=publicRail({...s,stockEnabled:false});assert.equal(rows.length,1);assert.equal(rows[0].id,offer.id);
 });

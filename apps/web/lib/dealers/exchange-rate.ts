@@ -53,7 +53,7 @@ export async function getDealerRate(){
  return state;
 }
 export async function withDealerRate(s:DealerShowcase,refresh=false){
- if(s.pricing.rateMode==='manual')return s;
+ if(s.pricing.rateMode==='manual'||(refresh&&s.offers.length>0&&s.offers.every(o=>o.availability==='stock')))return s;
  // Public pages read the saved quote immediately. Refresh happens in the editor
  // and scheduled job, so a slow provider cannot delay a visitor's page.
  const {quote}=refresh?await getDealerRate():await readDataJson<State>(key,empty);

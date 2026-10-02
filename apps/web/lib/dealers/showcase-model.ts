@@ -25,6 +25,10 @@ export type DeliveryTariff = {
   daysTo: number;
 };
 export type SpecialOffer = {
+  availability?: "order" | "stock";
+  condition?: "new" | "used";
+  priceRub?: number;
+  officeId?: string;
   sourceUrl?: string;
   id: string;
   status: "draft" | "published" | "sold";
@@ -63,6 +67,8 @@ export type DealerShowcase = {
   servicePricing?: DealerServicePricing;
   buyersEnabled: boolean;
   specialsEnabled: boolean;
+  stockEnabled?: boolean;
+  stockHeading?: string;
   name: string;
   description: string;
   headerIcon?: string;
@@ -101,6 +107,8 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     catalogMarkets: id === PILOT_DEALER_ID ? DEALER_MARKETS.map(m=>m.id) : [],
     buyersEnabled: id === PILOT_DEALER_ID,
     specialsEnabled: false,
+    stockEnabled: false,
+    stockHeading: "Автомобили в наличии",
     name: name || (id === PILOT_DEALER_ID ? "TOP AVTO" : ""),
     description: "",
     logoLight: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
@@ -148,12 +156,26 @@ export function parseSpecialId(value: string) {
 export function specialPath(dealerId: string, id: string) {
   return `/cars/offer/${specialOfferId(dealerId, id)}`;
 }
+export type OfferAvailability = "order" | "stock";
+export const offerAvailability = (o: SpecialOffer): OfferAvailability => o.availability === "stock" ? "stock" : "order";
+export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) === "stock" ? "В наличии" : "Под заказ";
+export const offerSectionEnabled = (s: DealerShowcase, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
+export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
 export function calculateSpecial(
   s: DealerShowcase,
   o: SpecialOffer,
   city = s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
 ) {
+  if (offerAvailability(o) === "stock") {
+    const office=s.offices.find(item=>item.id===o.officeId);
+    const errors:string[]=[];
+    if(!Number.isInteger(o.year)||o.year<1900||o.year>now.getFullYear())errors.push("Проверьте год выпуска");
+    if (!(Number.isFinite(o.priceRub) && (o.priceRub || 0)>0)) errors.push("Укажите цену автомобиля в рублях");
+    if (!office?.city || !office.address) errors.push("Выберите адрес, где находится автомобиль");
+    return {complete:errors.length===0,errors,rate:0,city:office?.city||"",daysFrom:undefined as number|undefined,daysTo:undefined as number|undefined,
+      lines:[{id:"vehicle",title:"Цена автомобиля",amountRub:o.priceRub||0}],totalRub:errors.length?null:o.priceRub!};
+  }
   const p = s.pricing,
     tariff = p.tariffs.find(
       (t) =>
@@ -332,6 +354,8 @@ export function normalizeShowcase(
     catalogMarkets: raw.catalogMarkets === undefined ? base.catalogMarkets : dealerMarkets(raw.catalogMarkets),
     buyersEnabled: raw.buyersEnabled === true,
     specialsEnabled: raw.specialsEnabled === true,
+    stockEnabled: raw.stockEnabled === true,
+    stockHeading: text(raw.stockHeading,180) || "Автомобили в наличии",
     name: text(raw.name, 120),
     description: text(raw.description, 5000),
     headerIcon: mediaUrl(raw.headerIcon,id),
@@ -397,6 +421,10 @@ export function normalizeShowcase(
       throw Error("Неверный идентификатор автомобиля");
     return {
       id: o.id,
+      availability: o.availability === "stock" ? "stock" : "order",
+      condition: o.availability === "stock" && o.condition === "used" ? "used" : "new",
+      priceRub: number(o.priceRub ?? 0,0,1e9),
+      officeId: text(o.officeId,80),
       sourceUrl: listingUrl(o.sourceUrl),
       status: ["published", "sold"].includes(o.status) ? o.status : "draft",
       make: text(o.make, 80),
@@ -439,16 +467,14 @@ export function normalizeShowcase(
     const missing=specialPublicationFields(o);
     if(missing.length)throw Error(`Заполните характеристики и фото: ${specialTitle(o)||"новый автомобиль"}. Не хватает: ${missing.join(", ")}`);
     const c = calculateSpecial(s, o);
-    if (s.specialsEnabled && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
+    if (offerSectionEnabled(s,o) && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
   if (s.profileEnabled && (!s.phone || !s.offices.length))
     throw Error("Для публикации дилера нужны телефон и хотя бы один офис");
-  if (s.specialsEnabled && !s.offers.some((o) => o.status === "published"))
-    throw Error("Добавьте хотя бы одно готовое спецпредложение");
   return s;
 }
 
 /** Shared completeness checklist; pricing rules remain in calculateSpecial. */
 export function specialPublicationFields(o:SpecialOffer):string[]{
- return [!o.make&&'марка',!o.model&&'модель',!o.photos.length&&'фотографии',!o.year&&'год выпуска',!o.productionMonth&&'месяц производства',!o.transmission&&'коробка передач',!o.drive&&'привод',!o.body&&'кузов',!o.color&&'цвет',(!o.engineCc&&o.fuel!=='electric')&&'объём двигателя',!o.powerHp&&'мощность'].filter(Boolean) as string[];
+ return [!o.make&&'марка',!o.model&&'модель',!o.photos.length&&'фотографии',!o.year&&'год выпуска',(offerAvailability(o)==='order'&&!o.productionMonth)&&'месяц производства',!o.transmission&&'коробка передач',!o.drive&&'привод',!o.body&&'кузов',!o.color&&'цвет',(!o.engineCc&&o.fuel!=='electric')&&'объём двигателя',!o.powerHp&&'мощность'].filter(Boolean) as string[];
 }

@@ -11,6 +11,7 @@ import {mergeShowcaseChanges} from "@/lib/dealers/showcase-merge";
 import Link from "next/link";
 import {
   calculateSpecial,
+  offerAvailability,offerAvailabilityLabel, type OfferAvailability,
   specialPublicationFields,
   type DealerShowcase,
   type DealerPhoto,
@@ -26,11 +27,11 @@ import type { PublicFeatures } from "@/lib/dealers/showcase-store";
 export function DealerEditor({
   initial,
   features,
-  platformOwner = false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration, onDemoChange, onUploadingChange,
+  platformOwner = false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration, sidebarTop, onSaved, onDemoChange, onUploadingChange,
 }: {
   initial: DealerShowcase;
   features: PublicFeatures;
-  platformOwner?: boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode; onDemoChange?:(s:DealerShowcase)=>void; onUploadingChange?:(busy:boolean)=>void;
+  platformOwner?: boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode; sidebarTop?:React.ReactNode; onSaved?:(s:DealerShowcase)=>void; onDemoChange?:(s:DealerShowcase)=>void; onUploadingChange?:(busy:boolean)=>void;
 }) {
   const prepared=()=>{
     const value=structuredClone(initial);
@@ -42,6 +43,7 @@ export function DealerEditor({
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [tab, setTab] = useState("overview");
+  const [offerMode,setOfferMode]=useState<OfferAvailability>('order');
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
   const base=useRef(s);
@@ -88,7 +90,8 @@ export function DealerEditor({
     window.addEventListener('beforeunload',warn);
     return()=>window.removeEventListener('beforeunload',warn);
   },[demo,dirty]);
-  const active=s.offers.find(o=>o.id===activeId)||s.offers[0];
+  const modeOffers=s.offers.filter(o=>offerAvailability(o)===offerMode);
+  const active=modeOffers.find(o=>o.id===activeId)||modeOffers[0];
   const quote=active?calculateSpecial(s,active):null;
 
   const patch = (v: Partial<DealerShowcase>) => setS((s) => ({ ...s, ...v }));
@@ -122,7 +125,7 @@ export function DealerEditor({
       else {
         // Keep edits made while this request was in flight and save them next.
         const next=mergeShowcaseChanges(submitted,latest.current,result).value;
-        base.current=result;latest.current=next;setS(next);setConflict(null);failed.current="";
+        base.current=result;onSaved?.(result);latest.current=next;setS(next);setConflict(null);failed.current="";
         try{if(JSON.stringify(next)===JSON.stringify(result))sessionStorage.removeItem(draftKey);
         else sessionStorage.setItem(draftKey,JSON.stringify({value:next,base:result}));}catch{}
       }
@@ -140,12 +143,13 @@ export function DealerEditor({
       ...s,
       offers: s.offers.map((o) => (o.id === id ? { ...o, ...v } : o)),
     }));
+  const saveFeedback=<>{message.startsWith('Не удалось сохранить')&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save()}>Повторить сохранение</button>}<p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>{conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}</>;
   return (
     <DealerUploadContext.Provider value={uploadChange}><DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
       <DealerWorkspaceStyles/>
       {demo&&<dialog ref={previewDialog} aria-label="Предпросмотр демо-компании" className="dealer-preview-dialog" onClick={event=>{if(event.target===event.currentTarget){const r=event.currentTarget.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.currentTarget.close();}}}><div className="dealer-preview-toolbar flex justify-between gap-4 mb-5"><strong>Предпросмотр демо-компании</strong><button type="button" className={button} onClick={()=>previewDialog.current?.close()}>Закрыть</button></div>{s.banner&&<img src={s.banner} alt="Обложка компании"/>}<h2 className="dw-title mt-5">{s.name}</h2><p className="dw-muted">{s.description}</p><p className="dw-muted mt-3">{s.offices.map(o=>[o.city,o.address].filter(Boolean).join(', ')).join(' · ')}</p><h3 className="font-bold mt-6 mb-3">Направления каталога</h3><div className="flex flex-wrap gap-3">{dealerMarkets(s.catalogMarkets).map(m=><span key={m} className="dw-badge">{DEALER_MARKETS.find(x=>x.id===m)?.label||m}</span>)}</div>{fullAccess&&s.offers.length>0&&<><h3 className="font-bold mt-6 mb-3">Ваши автомобили</h3><div className="dealer-offer-list">{s.offers.map(o=><article key={o.id} className="dw-card">{o.photos[0]&&<img src={o.photos[0].url} alt={specialTitle(o)}/>}<h3 className="mt-3">{specialTitle(o)}</h3><p className="dw-muted">{calculateSpecial(s,o).complete?`${calculateSpecial(s,o).totalRub?.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p></article>)}</div></>}<p className="dw-muted mt-6">Пример оформления. Эта компания не публикуется на сайте.</p></dialog>}
       <div className="dealer-editor-shell">
-      <div className="dealer-editor-navigation flex flex-wrap gap-2">
+      <div className="dealer-editor-sidebar">{sidebarTop}<nav aria-label="Настройки дилера" className="dealer-editor-navigation flex flex-wrap gap-2">
         {[
           ["overview", "Обзор",LayoutDashboard],
           ["offers", "Автомобили",Car],
@@ -157,18 +161,16 @@ export function DealerEditor({
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription","Мой доступ",ShieldCheck]] : []),
           ...(administration ? [["administration","Управление доступом",ShieldCheck]] : []),
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
-      </div>
+      </nav></div>
       <div className="dealer-editor-content">
 
-      {!["overview","subscription","administration"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
+      {!["overview","subscription","administration","offers"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
        <section className="dealer-editor-panel space-y-3">
         <div className="dealer-save-status"><span className="dw-badge">{demo?"Демо":s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
-        {message.startsWith('Не удалось сохранить')&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save()}>Повторить сохранение</button>}
-        {tab==='offers'&&active&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save(false,true)}>Сохранить черновик автомобиля</button>}
-        <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
-        <p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>
-        {conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}
 
+        <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
+
+        {saveFeedback}
        </section>
 </aside>}
       {tab==='overview'&&<div className="space-y-5">
@@ -179,7 +181,7 @@ export function DealerEditor({
       </div>}
       {tab==='subscription'&&<section className="dealer-editor-panel"><p className="dw-eyebrow">Мой доступ</p><h2 className="dw-title">{fullAccess?'Все возможности':'Базовый доступ'}</h2><p className="dw-muted">{fullAccess?`Доступ до ${dealerAccessLevel(s.dealerId,membership).until?new Date(dealerAccessLevel(s.dealerId,membership).until).toLocaleDateString('ru-RU'):'окончания демо'}.`:'Общий каталог остаётся доступен. Собственные автомобили, фото выдач и расширенное оформление включаются с подпиской.'}</p><div className="dw-grid mt-5">{[[1,program.monthRub],[6,program.halfYearRub],[12,program.yearRub]].map(([m,price])=><div key={m} className="dw-card"><span className="dw-muted">{m===12?'Год':m===6?'6 месяцев':'Месяц'}</span><strong className="dw-stat">{price.toLocaleString('ru-RU')} ₽</strong></div>)}</div><p className="dw-muted mt-5">Комиссия по завершённым продажам из заявок АвтоЦены — {program.commissionPercent}% {program.commissionBasis==='sale'?'от стоимости проданного автомобиля':'от вознаграждения дилера'}. Подписка оплачивается отдельно. Для продления свяжитесь с командой АвтоЦены через вашу заявку на подключение.</p></section>}
       {tab==='administration'&&administration}
-      {!fullAccess&&['offers','buyers','pricing','rates'].includes(tab)?<section className="dealer-editor-panel"><h2 className="font-bold text-xl">Доступно с подпиской</h2><p className="dw-muted mt-3">Ваши данные сохранены. Продлите доступ, чтобы снова редактировать и показывать собственные автомобили и галерею.</p><button type="button" className={button+' mt-4'} onClick={()=>setTab('subscription')}>Посмотреть условия</button></section>:<div className="dealer-editor-layout" data-offer-editor={tab==='offers'&&!!active}>
+      {!fullAccess&&['offers','buyers','pricing','rates'].includes(tab)?<section className="dealer-editor-panel"><h2 className="font-bold text-xl">Доступно с подпиской</h2><p className="dw-muted mt-3">Ваши данные сохранены. Продлите доступ, чтобы снова редактировать и показывать собственные автомобили и галерею.</p><button type="button" className={button+' mt-4'} onClick={()=>setTab('subscription')}>Посмотреть условия</button></section>:<div className="dealer-editor-layout" data-offer-editor={tab==='offers'}>
       <fieldset className="dealer-editor-main min-w-0 space-y-4">
         {tab === "profile" && (
           <section className="dealer-editor-panel space-y-5">
@@ -367,7 +369,7 @@ export function DealerEditor({
             />
           </section>
         )}
-        {(tab === "offers" || tab === "pricing") && <DealerSpecialsEditor section={tab==='pricing'?'pricing':'offers'} s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId}/>}
+        {(tab === "offers" || tab === "pricing") && <DealerSpecialsEditor section={tab==='pricing'?'pricing':'offers'} s={s} patch={patch} pricing={pricing} updateOffer={updateOffer} activeId={active?.id||''} setActiveId={setActiveId} mode={offerMode} setMode={setOfferMode}/>}
         {platformOwner && tab === "services" && (
           <>
             <h2 className="text-xl font-black">Сервисы на всём сайте</h2>
@@ -383,16 +385,26 @@ export function DealerEditor({
           </>
         )}
       </fieldset>
-       {tab==='offers'&&active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
-        <h2 className="font-bold">Так выглядит карточка</h2>
-        {specialPublicationFields(active).length>0&&<p className="text-sm text-[var(--ac-muted)]">Для публикации заполните: {specialPublicationFields(active).join(', ')}.</p>}
-        {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-sm text-[var(--ac-muted)]">Добавьте фото автомобиля</div>}
-        <h3 className="text-xl font-black">{specialTitle(active)||'Название автомобиля'}</h3>
-        <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,s.pricing.baseCity].filter(Boolean).join(' · ')}</p>
-        <p className="text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Заполните данные для расчёта'}</p>
-        {quote?.complete?quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
-        <p className="text-xs text-[var(--ac-muted)]">Предпросмотр обновляется при вводе. Изменения сохраняются автоматически.</p>
-       </section>}
+       {tab==='offers'&&<aside className="dealer-offer-aside" aria-label="Действия и предпросмотр автомобиля">
+        <section className="dealer-editor-panel dealer-offer-actions">
+         <span className="dealer-offer-status">Статус: <strong>{active?.status==='published'?'Опубликован':active?.status==='sold'?'Продан':active?'Черновик автомобиля':'Выберите автомобиль'}</strong></span>
+         <button type="button" disabled={!active||(!demo&&(dirty||busy))} className={button+' dealer-preview-action'} onClick={event=>{if(demo)openDemoPreview(event);else if(active)window.open(`${specialPath(s.dealerId,active.id)}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
+         {active&&<><button type="button" disabled={pendingUploads>0||s.offers.length>=200} className={button} onClick={()=>{const next={...structuredClone(active),id:crypto.randomUUID(),status:'draft' as const,updatedAt:''};patch({offers:[...s.offers,next]});setActiveId(next.id);}}>+ Авто по этому шаблону</button>
+         <button type="button" disabled={pendingUploads>0} className={button+' dealer-delete-action'} onClick={()=>{if(confirm('Удалить этот автомобиль?')){const offers=s.offers.filter(o=>o.id!==active.id);patch({offers});}}}>Удалить автомобиль</button></>}
+         {saveFeedback}
+        </section>
+        {active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
+         <h2 className="font-bold">Так выглядит карточка</h2>
+         {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="dealer-offer-empty rounded-xl">Добавьте фото автомобиля</div>}
+         <span className="dw-badge">{offerAvailabilityLabel(active)}{offerMode==='stock'?` · ${active.condition==='used'?'С пробегом':'Новый'}`:''}</span>
+         <h3 className="text-xl font-black">{specialTitle(active)||'Название автомобиля'}</h3>
+         <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,quote?.city].filter(Boolean).join(' · ')}</p>
+         <p className="text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Цена не заполнена'}</p>
+         {offerMode==='stock'&&<p className="text-sm text-[var(--ac-muted)]">{s.offices.find(o=>o.id===active.officeId)?.address||'Выберите адрес автомобиля'}</p>}
+         {quote?.complete?(offerMode==='order'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
+         {specialPublicationFields(active).length>0&&<p className="text-xs text-[var(--ac-muted)]">Для публикации: {specialPublicationFields(active).join(', ')}.</p>}
+        </section>}
+       </aside>}
 
       </div>}
       </div></div>
