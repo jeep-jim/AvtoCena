@@ -6,6 +6,6 @@ export function OfferUpdatedStatus({date, time, sourceUrl, sourceName}: {date: s
       <span>Обновлено {date}{time ? `, ${time}` : ""}</span>
       <ChevronDown aria-hidden="true" className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" />
     </summary>
-    <p className="px-4 pb-3 text-xs leading-5 text-[var(--ac-muted)]">Возможность покупки и финальную стоимость подтвердит менеджер.{sourceUrl ? <> <a href={sourceUrl} target={sourceName ? undefined : "_blank"} rel={sourceName ? undefined : "noopener noreferrer"} className="underline">{sourceName ? `Источник: ${sourceName} →` : "Открыть источник ↗"}</a></> : null}</p>
+    <p className="px-4 pb-3 text-xs leading-5 text-[var(--ac-muted)]">Возможность покупки и финальную стоимость подтвердит менеджер.{sourceUrl ? <> <a href={sourceUrl} target={sourceName ? undefined : "_blank"} rel={sourceName ? undefined : "noopener noreferrer"} className="underline">{sourceName ? `Источник: ${sourceName} →` : "Открыть источник ↗"}</a></> : sourceName ? <> Источник: {sourceName}.</> : null}</p>
   </details>;
 }

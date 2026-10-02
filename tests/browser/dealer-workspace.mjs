@@ -213,6 +213,7 @@ try{
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
    await page.locator('.dealer-offer-identity iframe').waitFor();
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
+   if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(207, 229, 216)');
    if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
    assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
    await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
@@ -234,7 +235,7 @@ try{
    await page.evaluate(()=>localStorage.clear());
   }
   await page.goto(origin+'?view=profile');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-  await page.getByRole('heading',{name:'ТопАвто',exact:true}).waitFor();
+  await page.locator('.dealer-identity-title h1').filter({hasText:'ТопАвто'}).waitFor();
   assert.equal(await page.getByText('На АвтоЦене',{exact:true}).count(),0);
   assert.equal(await page.locator('.dealer-identity-row>.dealer-avatar').isVisible(),width!==390);
   await page.getByLabel('Проверенный дилер',{exact:true}).click();await page.getByText('Проверенный дилер — компания прошла проверку АвтоЦены.',{exact:true}).waitFor();

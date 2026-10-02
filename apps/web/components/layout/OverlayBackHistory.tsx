@@ -15,7 +15,7 @@ export function OverlayBackHistory(){
    const button=element.querySelector<HTMLButtonElement>('button[data-ac-mobile-close],button[aria-label^="Закрыть"],button[aria-label="Ко всем фотографиям"]');
    const control=button||Array.from(element.querySelectorAll<HTMLButtonElement>('button')).find(item=>/^(Закрыть|Назад|Ко всем фотографиям)$/.test(item.textContent?.trim()||''));
    if(control){control.click();return;}
-   window.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+   document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
   };
   const sync=()=>{
    if(disposed)return;
