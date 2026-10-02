@@ -1,3 +1,5 @@
+import {TOPAVTO_DEALER} from '../topavto-dealer';
+import {normalizeRequisites, EMPTY_REQUISITES, type DealerRequisites} from './requisites';
 import {estimateDealerDelivery} from './delivery-estimate';
 import {normalizeDealerServicePricing,type DealerServicePricing} from "./service-pricing";
 import {DEALER_MARKETS,dealerMarkets,type DealerMarket} from './catalog-markets';
@@ -76,6 +78,7 @@ export type DealerShowcase = {
   specialSubtitle?: string;
   name: string;
   description: string;
+  requisites?: DealerRequisites;
   headerIcon?: string;
   logoLight: string;
   logoDark: string;
@@ -118,6 +121,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     stockHeading: "Автомобили в наличии",
     name: name || (id === PILOT_DEALER_ID ? "TOP AVTO" : ""),
     description: "",
+    requisites: {...EMPTY_REQUISITES,...(id===PILOT_DEALER_ID?{legalName:TOPAVTO_DEALER.legalName,inn:TOPAVTO_DEALER.inn,ogrn:TOPAVTO_DEALER.ogrnip}:{})},
     logoLight: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
     logoDark: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
     banner: "",
@@ -369,6 +373,7 @@ export function normalizeShowcase(
     stockHeading: text(raw.stockHeading,50) || "Автомобили в наличии",
     name: text(raw.name, 120),
     description: text(raw.description, 5000),
+    requisites: normalizeRequisites(raw.requisites === undefined ? base.requisites : raw.requisites),
     headerIcon: mediaUrl(raw.headerIcon,id),
     logoLight: mediaUrl(raw.logoLight, id),
     logoDark: mediaUrl(raw.logoDark, id),

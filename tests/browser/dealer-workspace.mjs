@@ -76,7 +76,7 @@ const server = http.createServer((req, res) => {
     res.end(html);
     return;
   }
-  const base = /^\/(buyers|pdf-flags|brands|avatars|logo)\//.test(u.pathname) || u.pathname === "/favicon-round-v3.png"
+  const base = /^\/(buyers|pdf-flags|brands|avatars|logo|dealers)\//.test(u.pathname) || u.pathname === "/favicon-round-v3.png"
     ? path.resolve("apps/web/public")
     : path.resolve(out);
   const file = path.resolve(base, "." + u.pathname);
@@ -156,12 +156,23 @@ try{
   await page.goto(origin+'?view=profile');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.locator('.dealer-identity-title h1').filter({hasText:'ТопАвто'}).waitFor();
   assert.equal(await page.getByText('На АвтоЦене',{exact:true}).count(),0);
-  assert.equal(await page.locator('.dealer-identity-row>.dealer-avatar').isVisible(),width!==390);
+  assert.equal(await page.locator('.dealer-identity-row>.dealer-avatar').isVisible(),true);
+  assert.ok(await page.locator('.dealer-avatar-centered').evaluate(el=>{const r=el.getBoundingClientRect(),sheet=document.querySelector('.dealer-profile-identity').getBoundingClientRect();return Math.abs(r.left+r.width/2-sheet.left-sheet.width/2)<2&&Math.abs(r.width-r.height)<1&&r.top<sheet.top&&r.bottom>sheet.top;}),'logo is circular, centered and crosses the banner seam');
+  assert.ok(await page.evaluate(()=>scrollY<5),'profile opens at its banner');
+  assert.equal(await page.locator('.dealer-profile-tabs button').count(),3);
+  assert.equal((await page.locator('.dealer-profile-footer').innerText()).replace(/\n+/g,'\n'),'Исполнитель (дилер)\nООО Тестовый дилер\nЮридический адрес\nНовокузнецк, Пример адреса\nИНН\n7707083893\nОГРН\n1027700132195');
+  assert.equal(await page.getByText('Скрытый банк',{exact:true}).count(),0);
+  assert.ok(!(await page.locator('body').innerText()).includes('40802810926710009905'));
   await page.getByLabel('Проверенный дилер',{exact:true}).click();await page.getByText('Проверенный дилер — компания прошла проверку АвтоЦены.',{exact:true}).waitFor();
   assert.ok(await page.locator('.dealer-verification>span').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;}),'verification explanation fits the screen');
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});
-  await page.getByRole('button',{name:'О компании',exact:true}).click();await page.locator('.dealer-tab-content .dealer-about-logo').waitFor();
+  await page.getByRole('button',{name:'Контакты',exact:true}).click();await page.locator('.dealer-tab-content .dealer-contact-sheet').waitFor();
+  await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
+  await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
+  await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  await page.getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
+  await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
   await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);
@@ -217,6 +228,16 @@ try{
   acceptDelete=false;await page.getByRole('button',{name:'Удалить автомобиль',exact:true}).click();assert.equal(await page.locator('.dealer-offer-tile[aria-pressed]').count(),2,'cancel keeps both stock cars');acceptDelete=true;
   await page.getByRole('button',{name:'Удалить автомобиль',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers.length,2);
   await page.getByRole('tab',{name:'Новые автомобили под заказ',exact:true}).click();assert.equal(await page.getByLabel('Марка',{exact:true}).inputValue(),'Toyota');
+  await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
+  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Компания дилера');
+  await page.getByLabel('ИНН',{exact:true}).fill('7707083893');
+  await page.getByLabel('ОГРН / ОГРНИП',{exact:true}).fill('1027700132195');
+  await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  assert.equal(writes.at(-1).body.requisites.legalName,'ООО Компания дилера');
+  assert.equal(writes.at(-1).body.requisites.inn,'7707083893');
+  await page.evaluate(value=>sessionStorage.setItem('fixture-server',JSON.stringify(value)),writes.at(-1).body);
+  await shot('requisites');await page.reload();await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
+  assert.equal(await page.getByLabel('ИНН',{exact:true}).inputValue(),'7707083893');
   const n=writes.length;await page.getByRole('switch',{name:'Посмотреть демо',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Демо правка');await page.getByText('Изменения демо запоминаются в этой вкладке.').waitFor();assert.equal(writes.length,n);await shot('demo');assert.equal(await page.locator('.crm-navigation').isVisible(),false);await page.getByRole('button',{name:'Предпросмотр',exact:true}).click();await page.getByRole('dialog').waitFor();assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');await shot('preview');await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.getByRole('dialog').waitFor({state:'detached'});assert.equal(writes.length,n);await page.getByRole('button',{name:'Пробный месяц · все функции'}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByText('Доступно с подпиской',{exact:true}).waitFor();assert.equal(writes.length,n);await page.getByRole('button',{name:'Базовый доступ',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Демо правка');
   await page.getByRole('switch',{name:'Выйти из демо',exact:true}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'RAV4');await page.getByRole('tab',{name:'Автомобили в наличии',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'Fit');assert.equal(await page.getByLabel('Цена автомобиля, ₽',{exact:true}).inputValue(),'1250000');assert.equal(writes.length,n);
   await page.goto(origin+'?view=platform');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot('platform');await page.getByRole('button',{name:'Тарифы и доступ',exact:true}).click();await shot('tariffs');await page.getByRole('button',{name:'Страницы сайта',exact:true}).click();await shot('pages');

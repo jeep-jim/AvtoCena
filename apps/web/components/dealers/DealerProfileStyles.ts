@@ -21,4 +21,42 @@ body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0;padding-bottom:12
 .dealer-profile-body{display:block}.dealer-tab-content{padding:0;background:transparent;border:0;border-radius:0}.dealer-profile .dealer-shared-catalog{background:transparent!important;padding-top:0!important}.dealer-expand{display:inline-flex;align-items:center;gap:6px;min-height:40px}.dealer-city-chips>span{display:inline-flex;align-items:center;gap:8px}.dealer-dock{display:none}
 @media(min-width:768px){.dealer-profile{padding-bottom:32px}body:has(.dealer-profile) .ac-public-legal-footer{padding-bottom:30px}}
 @media(max-width:767px){.dealer-tab-content{padding:0 16px}.dealer-dock{display:flex;bottom:0;left:0;transform:none;width:100%;max-width:none;padding:8px 8px calc(8px + env(safe-area-inset-bottom));border-radius:24px 24px 0 0;box-shadow:none}.dealer-profile{padding-bottom:85px}}
+
+/* Centered identity follows the supplied dealer profile reference. */
+.dealer-profile-identity>.dealer-desktop-request{display:flex;width:fit-content;margin:14px auto 0}
+.dealer-profile-identity{padding:20px 28px 24px;margin-top:-32px}
+.dealer-identity-row{display:block;position:relative;text-align:center}
+.dealer-identity-row>.dealer-avatar-centered{display:grid;position:absolute;left:50%;top:-64px;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;background:var(--ac-surface);border:8px solid var(--ac-surface);background:var(--ac-surface-2);padding:5px;z-index:2;overflow:hidden}
+.dealer-avatar-centered img{border-radius:50%;object-fit:contain}
+.dealer-profile-metrics{display:grid;grid-template-columns:1fr 1fr;gap:120px;min-height:64px;max-width:620px;margin:0 auto 16px}
+.dealer-profile-metrics button{display:flex;flex-wrap:wrap;justify-content:center;align-content:start;align-items:center;gap:4px 8px;min-height:52px}
+.dealer-profile-metrics svg{color:#eab308}.dealer-profile-metrics button:last-child svg{color:var(--ac-muted)}
+.dealer-profile-metrics strong{font-size:22px;font-weight:750;line-height:1.2}.dealer-profile-metrics span{flex-basis:100%;font-size:14px;color:var(--ac-muted)}
+.dealer-identity-divider{display:flex;align-items:center;gap:16px;color:var(--ac-muted);font-size:14px;margin-bottom:10px}
+.dealer-identity-divider:before,.dealer-identity-divider:after{content:'';flex:1;border-top:1px dashed var(--ac-border)}
+.dealer-title-line{display:flex;justify-content:center;align-items:center;gap:8px}
+.dealer-identity-info{position:absolute;right:0;bottom:0}
+.dealer-identity-title h1{font-size:28px;line-height:1.3;padding:0 32px}
+.dealer-intro-wrap{text-align:center;margin:10px auto 0;max-width:840px}.dealer-intro{font-size:16px;line-height:1.65;margin:0 auto}.dealer-expand{font-size:14px;min-height:40px}
+.dealer-profile-tabs{max-width:740px;margin:14px auto 20px;background:var(--ac-surface);padding:7px;gap:6px}
+.dealer-profile-tabs button{font-size:16px;min-height:44px;padding:10px 16px}.dealer-profile-tabs button[aria-pressed=true]{background:#d8c1c155;color:var(--ac-text)}
+.dealer-profile-body{margin-top:0}.dealer-profile .dealer-stories{margin:0 0 20px;padding:0;border:0}.dealer-stories h2{display:block;font-size:18px;margin:0 0 12px}
+.dealer-profile .dealer-stories .ac-buyers-rail{padding:0;gap:12px}.dealer-profile .dealer-stories .ac-buyers-rail>button{height:128px;width:128px}
+.dealer-contact-sheet{padding:24px;max-width:900px;margin:0 auto}.dealer-contact-sheet .dealer-office-select{margin-top:0}.dealer-contact-sheet .dealer-office-select label,.dealer-dialog-content .dealer-office-select label{font-size:14px}.dealer-contact-sheet select,.dealer-dialog-content select{font-size:16px;padding-top:5px}
+.dealer-map-link{display:flex;justify-content:center;align-items:center;gap:8px;margin:12px 0 18px;border:1px solid var(--ac-border);border-radius:16px;padding:12px;font-size:16px;font-weight:700}
+.dealer-profile .dealer-office-hours small{font-size:14px}.dealer-profile .dealer-office-hours{font-size:16px}
+.dealer-profile .dealer-about-text{font-size:16px}.dealer-profile .dealer-eyebrow{font-size:12px}.dealer-profile .dealer-muted{font-size:14px}
+.dealer-reviews{padding:32px;text-align:center;max-width:740px;margin:0 auto}.dealer-reviews>svg{margin:0 auto 16px;color:var(--ac-muted)}.dealer-reviews h2{font-size:24px;font-weight:750}.dealer-reviews p{margin:12px auto 0;max-width:520px;line-height:1.65;font-size:16px}
+.dealer-requisites{font-size:14px;line-height:1.65;overflow-wrap:anywhere}.dealer-requisites h3{font-size:16px;font-weight:700;margin:0 0 10px}.dealer-requisites p{margin-bottom:8px}.dealer-requisites dl{display:grid;gap:5px}.dealer-requisites dl>div{display:flex;gap:8px;flex-wrap:wrap}.dealer-requisites dt{color:var(--ac-muted)}.dealer-requisites dd{margin:0}
+.dealer-contact-sheet>.dealer-requisites,.dealer-dialog-content>.dealer-requisites{margin-top:24px;padding-top:20px;border-top:1px dashed var(--ac-border)}
+.dealer-profile-footer{margin-top:28px;padding:24px 0;border-top:1px solid var(--ac-border)}.dealer-profile-footer:has(>.dealer-requisites:empty){display:none}.dealer-profile-footer:not(:has(.dealer-requisites)){display:none}
+@media(max-width:800px){
+ .dealer-profile-identity>.dealer-desktop-request{display:none}
+ .dealer-profile-identity{padding:16px 24px 22px;margin-top:-32px}.dealer-identity-row>.dealer-avatar-centered{top:-48px;width:72px;height:72px;border-width:6px;padding:3px}
+ .dealer-profile-metrics{gap:88px;margin-bottom:12px;min-height:54px}.dealer-profile-metrics strong{font-size:20px}.dealer-profile-metrics span{font-size:12px}.dealer-profile-metrics svg{width:17px;height:17px}
+ .dealer-identity-title h1{font-size:22px;padding:0 24px}.dealer-identity-divider{font-size:14px;gap:14px;margin-bottom:8px}.dealer-intro{font-size:15px;line-height:1.6}.dealer-intro-wrap{margin-top:10px}.dealer-expand{font-size:14px}
+ .dealer-profile-tabs{margin:12px 20px 18px;padding:5px;gap:3px}.dealer-profile-tabs button{font-size:14px;padding:10px 8px;min-height:44px}
+ .dealer-profile .dealer-stories .ac-buyers-rail>button{width:108px;height:110px}.dealer-profile .dealer-stories .ac-buyers-rail{gap:10px}.dealer-stories h2{font-size:16px}
+ .dealer-contact-sheet{padding:20px;border-radius:26px}.dealer-reviews{padding:28px 20px;border-radius:26px}.dealer-reviews h2{font-size:22px}.dealer-reviews p{font-size:15px}.dealer-profile-footer{margin:24px 20px 0;padding:20px 0}
+}
 `;

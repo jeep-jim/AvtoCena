@@ -1,4 +1,5 @@
 "use client";
+import {EMPTY_REQUISITES} from '@/lib/dealers/requisites';
 import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight,Eye,Check} from 'lucide-react';
 import {DealerDemoContext,DealerUploadContext} from './DealerDemoContext';
 import {DealerWorkspaceStyles} from './DealerWorkspaceStyles';
@@ -161,6 +162,7 @@ export function DealerEditor({
           ["profile", "Страница компании",Palette],
           ["buyers", "Фото выдач",Images],
           ["offices", "Адреса",MapPin],
+          ["requisites", "Реквизиты",BookOpen],
           ["markets", "Каталог и рынки",Globe],
           ["pricing", "Расчёт своих авто",Calculator],
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription","Мой доступ",ShieldCheck]] : []),
@@ -253,6 +255,19 @@ export function DealerEditor({
             <Field label="Телефон компании (только для АвтоЦены)" value={s.phone} onChange={phone=>patch({phone})}/><p className="text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
           </section>
         )}
+        {tab === "requisites" && <section className="dealer-editor-panel space-y-5">
+          <h2 className="text-xl font-black">Реквизиты компании</h2>
+          <p className="text-sm text-[var(--ac-muted)]">Укажите исполнителя, с которым клиент заключает договор. Название, адрес и регистрационные номера будут показаны в вашем профиле.</p>
+          <div className="grid gap-4 md:grid-cols-2">{([
+            ['legalName','Полное наименование ИП или организации'],['legalAddress','Юридический адрес'],
+            ['inn','ИНН'],['ogrn','ОГРН / ОГРНИП'],['kpp','КПП (для организации)'],
+          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='legalName'||key==='legalAddress'?500:30} onChange={value=>patch({requisites:{...EMPTY_REQUISITES,...s.requisites,[key]:value}})}/>)}</div>
+          <h3 className="font-bold border-t border-[var(--ac-border)] pt-5">Банковские реквизиты</h3>
+          <p className="text-sm text-[var(--ac-muted)]">Доступны вашей компании и АвтоЦене. На публичной странице не показываются.</p>
+          <div className="grid gap-4 md:grid-cols-2">{([
+            ['bank','Банк'],['bik','БИК'],['account','Расчётный счёт'],['correspondentAccount','Корреспондентский счёт'],
+          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='bank'?500:30} onChange={value=>patch({requisites:{...EMPTY_REQUISITES,...s.requisites,[key]:value}})}/>)}</div>
+        </section>}
         {tab === "markets" && <div className="dealer-editor-panel space-y-5">
           <div><h2 className="text-xl font-black">Откуда вы доставляете автомобили</h2><p className="mt-2 text-sm text-[var(--ac-muted)]">Выберите направления вашей компании. На странице будут доступны только эти рынки общего каталога АвтоЦены.</p></div>
           <div className="grid gap-3 sm:grid-cols-2">{DEALER_MARKETS.map(m=><label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-[var(--ac-border)] p-4"><input type="checkbox" checked={dealerMarkets(s.catalogMarkets).includes(m.id)} onChange={e=>patch({catalogMarkets:e.target.checked?[...dealerMarkets(s.catalogMarkets),m.id]:dealerMarkets(s.catalogMarkets).filter(id=>id!==m.id)})}/><CatalogMarketFlag market={m.id} className="h-5 w-7 shrink-0"/><strong>{m.label}</strong></label>)}</div>
