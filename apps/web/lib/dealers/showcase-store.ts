@@ -24,7 +24,13 @@ export async function readShowcase(id: string) {
   if (!dealer) return null;
   const base=defaultShowcase(id,dealer.name);
   const stored=await readDataJson<DealerShowcase>(`dealers/showcases/${id}.json`,base);
-  return {...base,...stored,pricing:{...base.pricing,...stored.pricing}};
+  const pricing={...base.pricing,...stored.pricing};
+  if(id===PILOT_DEALER_ID&&stored.pricing.distancePricing===undefined){
+    pricing.originCity='Бишкек';pricing.distancePricing=true;
+    pricing.tariffs=[...stored.pricing.tariffs];
+    for(const t of base.pricing.tariffs){const index=pricing.tariffs.findIndex(x=>x.city.toLocaleLowerCase('ru')===t.city.toLocaleLowerCase('ru'));if(index<0)pricing.tariffs.push(t);else pricing.tariffs[index]={...pricing.tariffs[index],usd:t.usd,daysFrom:5,daysTo:10};}
+  }
+  return {...base,...stored,pricing};
 }
 export class ShowcaseConflict extends Error {
  constructor(public current:DealerShowcase,public proposed:DealerShowcase){super("Настройки изменились в другой вкладке. Ваши данные сохранены в редакторе.");}

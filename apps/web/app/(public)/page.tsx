@@ -1,7 +1,6 @@
-import {withDealerRate} from '@/lib/dealers/exchange-rate';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
-import {publicRail} from "@/lib/dealers/public-showcase";
+import {homeSpecialRail} from "@/lib/dealers/public-showcase";
 import { readGreenCorner, publicGreenOffer } from "@/lib/catalog/green-corner";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import type { Metadata } from "next";
@@ -63,13 +62,14 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     }),
   ]);
   const storedDealer = await readShowcase("dealer_topavto");
-  const dealer = storedDealer?.specialsEnabled ? await withDealerRate(storedDealer) : storedDealer;
+  const dealer = storedDealer;
+  const specialRail = await homeSpecialRail(fromQuery||fromCookie,dealer);
   return <>
-    {dealer?.specialsEnabled && <DealerCitySync/>}
+    <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
         dealerGallery={dealer ? (dealer.buyersEnabled ? dealer.buyerPhotos.map(p=>p.url) : []) : undefined}
-        specialRail={dealer ? {heading:dealer.specialHeading,items:publicRail(dealer,fromQuery || fromCookie)} : undefined}
+        specialRail={specialRail}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
         initialCity={fromQuery || fromCookie}
         initialOffers={pricedItems}

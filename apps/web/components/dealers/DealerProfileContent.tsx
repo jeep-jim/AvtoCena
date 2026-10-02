@@ -5,7 +5,7 @@ import {CatalogMarketFlag} from '@/components/catalog/CatalogMarketFlag';
 import {ChevronDown,ChevronUp,ArrowUpRight,ArrowRight} from 'lucide-react';
 import type {PublicDealerProfile} from '@/lib/dealers/public-profile';
 import {DEALER_MARKETS} from '@/lib/dealers/catalog-markets';
-import type {SpecialRailItem} from './SpecialRail';
+import {SpecialRail,type SpecialRailItem} from './SpecialRail';
 import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {DealerMap} from './DealerMap';
 import {dealerProfileStyles} from './DealerProfileStyles';
@@ -36,6 +36,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog}:{s:Publi
   <section className="dealer-profile-identity dealer-sheet">
    <div className="dealer-identity-row"><div className="dealer-avatar">{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt="" className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt="" className="dealer-logo-dark"/></>:<span>{s.name.slice(0,2)}</span>}</div><div className="dealer-identity-title"><h1>{s.name}</h1><button type="button" className="dealer-address-link" onClick={openOffice}>{office?[office.city,office.address].filter(Boolean).join(', '):'Информация о компании'}</button>{office?.hours&&<button type="button" className="dealer-hours" onClick={openOffice}><Icon name="clock"/>{office.hours}<ChevronDown size={18}/></button>}</div><button type="button" className="dealer-info-button" aria-label="Информация о компании" onClick={openOffice}><Icon name="info"/></button><Link href={request} className="dealer-primary dealer-desktop-request">Подобрать автомобиль</Link></div>
    {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши покупатели" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}
+   <SpecialRail heading={s.specialHeading} items={items}/>
    {s.description&&<div className="dealer-intro-wrap"><p className={`dealer-intro ${expanded?'is-expanded':''}`}>{s.description}</p>{s.description.length>140&&<button type="button" className="dealer-expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded?'Свернуть':'Подробнее'} {expanded?<ChevronUp size={18}/>:<ChevronDown size={18}/>}</button>}</div>}
    <nav className="dealer-profile-tabs" aria-label="Разделы профиля">{([['cars','Каталог'],['specials','Предложения'],['photos','Фото'],['about','О компании']] as const).map(([id,label])=><button key={id} type="button" aria-pressed={tab===id} onClick={()=>setTab(id)}>{label}{id==='specials'&&items.length>0&&<span>{items.length}</span>}</button>)}</nav>
   </section>

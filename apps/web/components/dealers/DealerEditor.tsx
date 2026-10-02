@@ -1,5 +1,5 @@
 "use client";
-import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight,Eye} from 'lucide-react';
+import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight,Eye,Check} from 'lucide-react';
 import {DealerDemoContext,DealerUploadContext} from './DealerDemoContext';
 import {DealerWorkspaceStyles} from './DealerWorkspaceStyles';
 import {DEFAULT_PROGRAM,EMPTY_MEMBERSHIP,dealerAccessLevel,type DealerProgram,type Membership} from '@/lib/dealers/program-model';
@@ -35,7 +35,7 @@ export function DealerEditor({
 }) {
   const prepared=()=>{
     const value=structuredClone(initial);
-    if(fullAccess&&value.dealerId==='dealer_topavto'&&!value.pricing.tariffs.some(t=>t.city.toLowerCase()==='новосибирск'))value.pricing.tariffs.push({id:'novosibirsk',city:'Новосибирск',usd:900,daysFrom:5,daysTo:7});
+    if(fullAccess&&value.dealerId==='dealer_topavto'){value.pricing.originCity??='Бишкек';value.pricing.distancePricing??=true;for(const [id,city,usd] of [['novosibirsk','Новосибирск',900],['moscow','Москва',1100]] as const)if(!value.pricing.tariffs.some(t=>t.city.toLowerCase()===city.toLowerCase()))value.pricing.tariffs.push({id,city,usd,daysFrom:5,daysTo:10});}
     return value;
   };
   const [s, setS] = useState(prepared),
@@ -387,10 +387,10 @@ export function DealerEditor({
       </fieldset>
        {tab==='offers'&&<aside className="dealer-offer-aside" aria-label="Действия и предпросмотр автомобиля">
         <section className="dealer-editor-panel dealer-offer-actions">
-         <span className="dealer-offer-status">Статус: <strong>{active?.status==='published'?'Опубликован':active?.status==='sold'?'Продан':active?'Черновик автомобиля':'Выберите автомобиль'}</strong></span>
+         {active?<select aria-label="Статус автомобиля" className="dealer-offer-status" value={active.status} onChange={e=>updateOffer(active.id,{status:e.target.value as SpecialOffer['status']})}><option value="draft">Статус: Черновик</option><option value="published">Статус: Опубликован</option><option value="sold">Статус: Продан</option></select>:<span className="dealer-offer-status">Выберите автомобиль</span>}
          <button type="button" disabled={!active||(!demo&&(dirty||busy))} className={button+' dealer-preview-action'} onClick={event=>{if(demo)openDemoPreview(event);else if(active)window.open(`${specialPath(s.dealerId,active.id)}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
          {active&&<><button type="button" disabled={pendingUploads>0||s.offers.length>=200} className={button} onClick={()=>{const next={...structuredClone(active),id:crypto.randomUUID(),status:'draft' as const,updatedAt:''};patch({offers:[...s.offers,next]});setActiveId(next.id);}}>+ Авто по этому шаблону</button>
-         <button type="button" disabled={pendingUploads>0} className={button+' dealer-delete-action'} onClick={()=>{if(confirm('Удалить этот автомобиль?')){const offers=s.offers.filter(o=>o.id!==active.id);patch({offers});}}}>Удалить автомобиль</button></>}
+         <button type="button" disabled={pendingUploads>0} className={button+' dealer-delete-action'} onClick={()=>{if(confirm(`Удалить ${specialTitle(active)||'этот автомобиль'}? Это действие нельзя отменить.`)){const offers=s.offers.filter(o=>o.id!==active.id);patch({offers});}}}>Удалить автомобиль</button></>}
          {saveFeedback}
         </section>
         {active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
@@ -404,6 +404,7 @@ export function DealerEditor({
          {quote?.complete?(offerMode==='order'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
          {specialPublicationFields(active).length>0&&<p className="text-xs text-[var(--ac-muted)]">Для публикации: {specialPublicationFields(active).join(', ')}.</p>}
         </section>}
+        {active&&<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}
        </aside>}
 
       </div>}
