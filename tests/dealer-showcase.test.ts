@@ -66,6 +66,7 @@ function fixture() {
   s.pricing = {
     ...s.pricing,
     rateMode: "manual",
+    distancePricing:false,
     usdRub: 80,
     rateAt: new Date().toISOString(),
     tariffs: [

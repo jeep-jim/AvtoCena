@@ -1,3 +1,4 @@
+import {estimateDealerDelivery} from './delivery-estimate';
 import {normalizeDealerServicePricing,type DealerServicePricing} from "./service-pricing";
 import {DEALER_MARKETS,dealerMarkets,type DealerMarket} from './catalog-markets';
 import {validProfilePart} from './profile-url';
@@ -82,6 +83,8 @@ export type DealerShowcase = {
   buyerPhotos: DealerPhoto[];
   specialHeading: string;
   pricing: {
+    originCity?: string;
+    distancePricing?: boolean;
     baseCity?: string;
     rateMode?: "auto" | "manual";
     usdRub: number;
@@ -128,6 +131,8 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
         : [],
     specialHeading: "✅ СПЕЦ ПРЕДЛОЖЕНИЕ от 5 дней и авто у вас дома!",
     pricing: {
+      originCity:"Бишкек",
+      distancePricing:id===PILOT_DEALER_ID,
       baseCity:id===PILOT_DEALER_ID?"Новосибирск":"",
       rateMode: "auto",
       usdRub: 0,
@@ -137,7 +142,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
       deliveryMarkupRub: 60000,
       commissionRub: 140000,
       documentsRub: 45000,
-      tariffs: [],
+      tariffs: id===PILOT_DEALER_ID?[{id:'novosibirsk',city:'Новосибирск',usd:900,daysFrom:5,daysTo:10},{id:'moscow',city:'Москва',usd:1100,daysFrom:5,daysTo:10}]:[],
     },
     offers: [],
     updatedAt: "",
@@ -164,7 +169,7 @@ export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) 
 export function calculateSpecial(
   s: DealerShowcase,
   o: SpecialOffer,
-  city = s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
+  city = (s.pricing.distancePricing?o.defaultCity:"") || s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
 ) {
   if (offerAvailability(o) === "stock") {
@@ -177,10 +182,7 @@ export function calculateSpecial(
       lines:[{id:"vehicle",title:"Цена автомобиля",amountRub:o.priceRub||0}],totalRub:errors.length?null:o.priceRub!};
   }
   const p = s.pricing,
-    tariff = p.tariffs.find(
-      (t) =>
-        t.city.toLocaleLowerCase("ru") === city.trim().toLocaleLowerCase("ru"),
-    );
+    tariff = estimateDealerDelivery(p.originCity||'Бишкек',city,p.tariffs,p.distancePricing);
   const errors: string[] = [];
   if (!(p.usdRub > 0)) errors.push("Укажите курс USD/RUB");
   const rateTime = Date.parse(p.rateAt);
@@ -191,7 +193,7 @@ export function calculateSpecial(
   )
     errors.push("Подтвердите актуальный курс (не старше 7 дней)");
   if (!tariff) errors.push("Добавьте тариф доставки для выбранного города");
-  if (tariff && !(tariff.usd > 0)) errors.push("Укажите стоимость доставки в долларах");
+  if (tariff && !(tariff.usd > 0 || (tariff.estimated && tariff.usd === 0))) errors.push("Укажите стоимость доставки в долларах");
   if (!(o.priceUsd > 0)) errors.push("Укажите цену автомобиля в долларах");
   if (!o.customsIncluded && !(o.customsExtraRub > 0))
     errors.push(
@@ -370,6 +372,8 @@ export function normalizeShowcase(
     offices: [],
     offers: [],
     pricing: {
+      originCity:text(p.originCity,120)||"Бишкек",
+      distancePricing:p.distancePricing===true,
       baseCity:text(p.baseCity,120)|| (id===PILOT_DEALER_ID?"Новосибирск":""),
       rateMode: p.rateMode === "manual" ? "manual" : "auto",
       usdRub: number(p.usdRub, 0, 1000),
