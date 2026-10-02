@@ -21,10 +21,10 @@ test("currency impact never converts fixed ruble fees", () => {
   assert.equal(priceAtCurrencyRate(1_361_230, 0, 96.7442, 95.8709), 0);
 });
 
-test("saved total delta takes priority over a contrary exchange movement", () => {
+test("currency movement ignores a contrary saved total delta", () => {
   const trend = resolvePriceTrend({ totalRub: 1_466_795, priceDeltaRub: -2300, sourcePrice: 6400,
     calculationSnapshot: {currencyRate: {effectiveRate: 96.7442, previousEffectiveRate: 96.5915}} });
-  assert.equal(trend?.deltaRub, -2300);
+  assert.equal(trend?.deltaRub, 977);
 });
 
 test("saved exchange movement uses the actual source amount only", () => {
@@ -39,16 +39,22 @@ test("currency names are readable in Russian", () => {
   assert.equal(currencyName("KRW"), "Южнокорейская вона");
 });
 
-test("recalculated price recovers its own dated comparison without changing the quote", async () => {
-  const {withLiveRate} = await import('../apps/web/components/catalog/PriceTrend');
-  const offer = {totalRub: 2_000_000, sourceCurrency:'EUR', calculationSnapshot:{currencyRate:{currency:'EUR',effectiveRate:95,rateDate:'2026-09-26',rateSource:'cbr_live',sourcePrice:10_000}}};
-  const live = {currency:'EUR',effectiveRate:98,rateDate:'2026-09-29',history:[{date:'2026-09-25',effectiveRate:96},{date:'2026-09-26',effectiveRate:95},{date:'2026-09-29',effectiveRate:98}]};
-  const restored = withLiveRate(offer,live);
-  assert.equal(restored.totalRub,offer.totalRub);
-  assert.equal(restored.calculationSnapshot?.currencyRate?.effectiveRate,95);
-  assert.equal(restored.calculationSnapshot?.currencyRate?.rateDate,'2026-09-26');
-  assert.equal(resolvePriceTrend(restored)?.deltaRub,-10_000);
-  assert.equal(withLiveRate(offer,{...live,history:[]}),offer);
-  assert.equal(withLiveRate({...offer,calculationSnapshot:{currencyRate:{...offer.calculationSnapshot.currencyRate,rateSource:'atb_akebono'}}},live).calculationSnapshot?.currencyRate?.previousEffectiveRate,undefined);
-  assert.equal(withLiveRate(offer,{...live,currency:'USD'}),offer);
+test("latest publication drives the indicator without repricing the saved quote", async () => {
+  const {withLiveRate, currentCurrencyRate} = await import('../apps/web/components/catalog/PriceTrend');
+  const offer = {totalRub: 8_811_105, priceDeltaRub: 700, sourcePrice:404_125, sourceCurrency:'CNY', calculationSnapshot:{currencyRate:{currency:'CNY',effectiveRate:12.5629,previousEffectiveRate:12.5355,rateDate:'2026-09-29',previousRateDate:'2026-09-26',rateSource:'cbr_live'}}};
+  const live = {currency:'CNY',effectiveRate:12.4028,rateDate:'2026-10-02',previousEffectiveRate:12.4728,previousRateDate:'2026-10-01',history:[{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:12.4028}]};
+  const updated = withLiveRate(offer,live);
+  assert.equal(updated.totalRub,offer.totalRub);
+  assert.equal(updated.calculationSnapshot?.currencyRate?.calculatedEffectiveRate,12.5629);
+  assert.equal(updated.calculationSnapshot?.currencyRate?.rateDate,'2026-10-02');
+  assert.equal(resolvePriceTrend(updated)?.deltaRub,-28_289);
+  assert.equal(resolvePriceTrend(updated)?.direction,'down');
+  assert.equal(currentCurrencyRate(updated.calculationSnapshot!.currencyRate!,live).calculatedEffectiveRate,12.5629);
+  const flat = withLiveRate(offer,{...live,effectiveRate:12.4728,history:[]});
+  assert.equal(resolvePriceTrend(flat),null,'flat latest publication cannot inherit an old positive change');
+  const atb = {...offer,calculationSnapshot:{currencyRate:{...offer.calculationSnapshot.currencyRate,rateSource:'atb_akebono'}}};
+  assert.equal(withLiveRate(atb,live).calculationSnapshot?.currencyRate?.effectiveRate,12.5629);
+  assert.equal(withLiveRate(offer,{...live,currency:'USD'}).calculationSnapshot?.currencyRate?.effectiveRate,12.5629);
+  assert.equal(withLiveRate(updated,{...live,rateDate:'2026-09-28',history:[]}).calculationSnapshot?.currencyRate?.rateDate,'2026-10-02');
+  assert.equal(resolvePriceTrend(withLiveRate({...offer,sourcePrice:undefined},live)),null,'no fabricated impact without source amount');
 });

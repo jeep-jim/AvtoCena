@@ -116,7 +116,7 @@ export default function RequestPage() {
               </div>
               <label className="grid gap-1.5 text-sm font-black">Какой автомобиль интересует<input value={car} onChange={(event) => setCar(event.target.value)} placeholder="Например, Toyota RAV4 2022" className="soft-input h-13 rounded-2xl bg-[var(--ac-surface-2)] px-4 font-semibold outline-none" /></label>
               <label className="grid gap-1.5 text-sm font-black">Комментарий<textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Привод, цвет, комплектация, сроки или другие пожелания" className="soft-input min-h-28 resize-y rounded-2xl bg-[var(--ac-surface-2)] p-4 font-semibold outline-none" /></label>
-              <label className="flex cursor-pointer items-start gap-3 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-xs font-semibold leading-5 text-[var(--ac-muted)]">
+              <label className="flex cursor-pointer items-start gap-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-xs font-semibold leading-5 text-[var(--ac-muted)]">
                 <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="peer sr-only" /><ConsentMark checked={consent}/>
                 <span><ConsentLinks/></span>
               </label>

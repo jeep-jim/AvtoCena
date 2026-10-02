@@ -83,7 +83,7 @@ test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /\{sheetRate \? <CurrencyRatesSheet/);
   assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
   assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);
-  assert.match(priceTrend, /Стрелка показывает изменение полного сохранённого расчёта\. Влияние курса указано отдельно\./);
+  assert.match(priceTrend, /Стрелка показывает влияние последнего изменения курса на стоимость автомобиля\./);
 });
 
 test("mobile offer controls remain tappable", () => {
