@@ -195,7 +195,7 @@ try{
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});
-  await page.route('https://yandex.ru/**',r=>r.fulfill({body:'<html><body>Карта</body></html>',contentType:'text/html'}));
+  await page.route('https://yandex.ru/**',r=>r.fulfill({body:'<html><body>Карта</body></html>',contentType:'text/html; charset=utf-8'}));
   for(const stock of [false,true]){
    await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?stock='+(stock?'1':'0'));
    await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
@@ -210,6 +210,7 @@ try{
    await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.getByRole('button',{name:'Закрыть',exact:true}).click();
    await page.getByRole('button',{name:'Добавить в избранное',exact:true}).filter({visible:true}).click();
    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_favorites'))[0].dealerId),'dealer_topavto');
+   await page.evaluate(()=>window.scrollTo(0,0));
    await page.screenshot({path:`${out}/${width}-${theme}-public-${stock?'stock':'order'}.png`,fullPage:true});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer card overflow');
    await page.evaluate(()=>localStorage.clear());
