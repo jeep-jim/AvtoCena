@@ -205,6 +205,8 @@ try{
    await page.getByLabel('Проверенный дилер',{exact:true}).waitFor();
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
    await page.locator('.dealer-offer-identity iframe').waitFor();
+   assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
+   if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.dealer-offer-identity').evaluate(el=>!!el.nextElementSibling));}
    assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
    await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
    await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.getByRole('button',{name:'Закрыть',exact:true}).click();
