@@ -1,0 +1,37 @@
+name: Verify Metrika lead attribution
+on:
+  pull_request:
+    paths:
+      - 'apps/web/lib/*metrika*'
+      - 'apps/web/lib/privacy-consent.ts'
+      - 'apps/web/lib/lead-submit-client.ts'
+      - 'apps/web/components/legal/ConsentCheckbox.tsx'
+      - 'apps/web/components/leads/**'
+      - 'apps/web/components/crm/settings/MetrikaSettings.tsx'
+      - 'tests/browser/metrika*'
+      - '.github/workflows/verify-metrika-leads.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/metrika-crm.test.ts tests/privacy-consent.test.ts tests/yandex-metrika.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/metrika-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Consent, identifiers and successful submission goal on mobile and desktop
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/metrika-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/metrika.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: metrika-lead-attribution
+          path: artifacts/metrika/*.png
+          retention-days: 7

@@ -104,14 +104,16 @@ const server = http.createServer((req, res) => {
 });
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const origin = `http://127.0.0.1:${server.address().port}`;
-const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
 try{
- for(const width of [390,1440]){
+ for(const [width,theme] of [[390,'light'],[1440,'light'],[1440,'dark']]){
   const context=await browser.newContext({viewport:{width,height:900}});
-  await context.route('https://mc.yandex.ru/**',route=>route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.__ymCalls||[];var q=window.ym?.a||[];window.ym=(...args)=>window.__ymCalls.push(args);for(var args of q)window.ym(...args);`}));
+  await context.route('https://mc.yandex.ru/**',route=>route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.__ymCalls||[];var q=window.ym?.a||[];window.ym=(...args)=>{window.__ymCalls.push(args);if(args[1]==='getClientID')args[2]('1234567890123456789');};for(var args of q)window.ym(...args);`}));
+  const submitted=[];await context.route('**/api/leads',route=>{submitted.push(route.request().postDataJSON());return route.fulfill({json:{ok:true}});});
   const page=await context.newPage();
   await page.goto(origin+'/?utm_source=yandex&utm_campaign=987&yclid=123&phone=secret');
+  await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
@@ -120,6 +122,15 @@ try{
   assert.equal(await page.locator('[role=dialog]').count(),0);
   assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_analytics_choice_v1')),null);
   await page.screenshot({path:out+'/initial-'+width+'.png',fullPage:true});
+  const consent=page.getByRole('checkbox');
+  assert.equal(await consent.count(),1);assert.equal(await consent.isChecked(),false);
+  assert.equal(await page.locator('.ac-consent-mark').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
+  await page.getByRole('button',{name:'Отправить проверочную заявку'}).click();assert.equal(submitted.length,0);
+  async function submit(){const response=page.waitForResponse(r=>r.url().endsWith('/api/leads'));await page.getByRole('button',{name:'Отправить проверочную заявку'}).click();await response;}
+  await consent.check();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');assert.equal(submitted.at(-1).attribution.yclid,'123');
+  assert.equal(await page.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='reachGoal'&&c[2]==='lead_submitted').length),1);
+  assert.equal(await page.locator('.ac-consent-mark').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)');
+  await page.screenshot({path:out+'/consent-'+width+'-'+theme+'.png',fullPage:true});
   await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();
   await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
   await page.waitForFunction(()=>window.disableYaCounter112098062===true);
@@ -135,7 +146,8 @@ try{
   await page.evaluate(()=>{history.pushState({},'','/privacy/request');window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.at(-1)[1]),'destruct');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-  results.push({width,immediateInit:true,noBanner:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
+  await page.goto(origin+'/?yclid=123');await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();await page.getByRole('checkbox').check();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');
+  results.push({width,theme,singleConsent:true,whiteCheckbox:true,leadAttribution:true,newConsentAfterOldRefusal:true,immediateInit:true,noBanner:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
   await context.close();
  }
  // Refusal while tag.js is downloading must clear pending initialization.

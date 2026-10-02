@@ -27,9 +27,11 @@ test('encrypted connection, goal setup, upload retries and stable order id preve
   assert.ok(!JSON.stringify(await metrikaStatus()).includes(token));
   const stored=await readDataJson<any>('integrations/metrika/config.json',{});assert.ok(!JSON.stringify(stored).includes(token));
   await appendChunkedDataJson('leads/leads.json',{...base,createdAt:new Date(Date.now()-1000).toISOString()});
+  for(const extra of [{id:'no-permission',analyticsConsent:false},{id:'no-client-id',metrikaClientId:''},{id:'private-request',source:'privacy_request'}])await appendChunkedDataJson('leads/leads.json',{...base,createdAt:new Date(Date.now()-1000).toISOString(),...extra});
   assert.equal((await flushMetrika(mock) as any).error,'metrika_http_503');assert.equal((await metrikaStatus()).acceptedOrders,0);
   reject=false;assert.equal((await flushMetrika(mock) as any).accepted,1);assert.match(csv,/"lead-1"/);assert.match(csv,/crm_qualified/);
   await flushMetrika(mock);assert.equal(posts,2);
+  const diagnostic=await metrikaStatus();assert.equal(diagnostic.withoutAnalyticsPermission,1);assert.equal(diagnostic.missingClientId,1);assert.ok(diagnostic.lastCheckedAt);assert.doesNotMatch(csv,/no-permission|no-client-id|private-request/);
   await updateChunkedDataJson<any>('leads/leads.json','lead-1',l=>({...l,status:'contract_signed',statusHistory:[{status:'qualified'}]}));
   await flushMetrika(mock);assert.equal(posts,3);assert.match(csv,/crm_qualified,crm_contract/);assert.equal((await metrikaStatus()).acceptedOrders,1);
  } finally {process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;if(secret===undefined)delete process.env.AUTH_SECRET;else process.env.AUTH_SECRET=secret;resetJsonStorageForTests();await fs.rm(tmp,{recursive:true,force:true});}

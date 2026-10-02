@@ -1,6 +1,6 @@
 "use client";
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
-import {ConsentLinks} from "@/components/legal/ConsentCheckbox";
+import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
 import {offerRouteId} from "@/lib/catalog/offer-url";
 import { LeadCityField } from "./LeadCityField";
 import {leadFetch} from "@/lib/lead-submit-client";
@@ -397,13 +397,14 @@ function LeadDialog({
 
             <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
               <label className="flex cursor-pointer items-start gap-3">
-                <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="sr-only" />
-                <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-xs font-black ${consent ? "border-red-500 bg-red-500 text-white" : "border-[var(--ac-border)] text-transparent"}`}>✓</span>
+                <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} className="peer sr-only" />
+                <ConsentMark checked={consent}/>
                 <span className="text-xs font-semibold leading-5 text-[var(--ac-muted)]"><ConsentLinks/></span>
               </label>
+
               <details className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">
                 <summary className="cursor-pointer font-black text-[var(--ac-text)]">Что происходит с данными</summary>
-                <p className="mt-2">Используем имя, город, контакт и параметры автомобиля только для обработки этой заявки, подготовки подбора/расчёта и связи по заявке. Рекламные рассылки без отдельного согласия не подключаются. Согласие можно отозвать через контакты сервиса.</p>
+                <p className="mt-2">Используем имя, город, контакт и параметры автомобиля только для обработки этой заявки, подготовки подбора/расчёта и связи по заявке. Номер, время и стадия заявки связываются с посещением сайта для оценки рекламы. Рекламные рассылки без отдельного согласия не подключаются. Согласие можно отозвать через контакты сервиса.</p>
               </details>
             </div>
 
