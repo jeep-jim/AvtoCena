@@ -229,10 +229,12 @@ try{
   await page.getByRole('button',{name:'Удалить автомобиль',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers.length,2);
   await page.getByRole('tab',{name:'Новые автомобили под заказ',exact:true}).click();assert.equal(await page.getByLabel('Марка',{exact:true}).inputValue(),'Toyota');
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
+  const requisitesSaved=page.waitForResponse(response=>{if(response.request().method()!=='PUT')return false;const r=response.request().postDataJSON()?.requisites;return response.ok()&&r?.legalName==='ООО Компания дилера'&&r?.inn==='7707083893'&&r?.ogrn==='1027700132195';});
   await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Компания дилера');
   await page.getByLabel('ИНН',{exact:true}).fill('7707083893');
   await page.getByLabel('ОГРН / ОГРНИП',{exact:true}).fill('1027700132195');
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  await requisitesSaved;
   assert.equal(writes.at(-1).body.requisites.legalName,'ООО Компания дилера');
   assert.equal(writes.at(-1).body.requisites.inn,'7707083893');
   await page.evaluate(value=>sessionStorage.setItem('fixture-server',JSON.stringify(value)),writes.at(-1).body);
