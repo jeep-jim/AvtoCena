@@ -7,7 +7,7 @@ export const MARKET_LOGISTICS_USD: Record<MarketId, number> = {
   china: 1_500,
   georgia: 2_500,
   uae: 3_000,
-  europe: 4_000,
+  europe: 4_500,
   japan: 1_000,
 };
 
