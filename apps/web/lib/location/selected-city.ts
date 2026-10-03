@@ -19,3 +19,12 @@ function subscribe(notify:()=>void) {
  return ()=>{window.removeEventListener(CITY_CHANGED_EVENT,notify);window.removeEventListener("storage",notify);window.removeEventListener("popstate",notify);};
 }
 export function useSelectedCity() { return useSyncExternalStore(subscribe,readSelectedCity,()=>""); }
+
+export function persistCity(city: string) {
+  try { localStorage.setItem("avtocena_city", city); } catch {}
+  document.cookie = `avtocena_city=${encodeURIComponent(city)}; Max-Age=15552000; Path=/; SameSite=Lax`;
+  const url = new URL(window.location.href);
+  if (city) url.searchParams.set("city", city); else url.searchParams.delete("city");
+  window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+  window.dispatchEvent(new Event(CITY_CHANGED_EVENT));
+}

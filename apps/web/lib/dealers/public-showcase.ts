@@ -29,7 +29,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
   const found = await getSpecialOffer(id);
   if (!found) return null;
   const { showcase: s, offer: o } = found;
-  const c = calculateSpecial(s, o);
+  const c = calculateSpecial(s, o, city || undefined);
   return {
     id,
     offerId: id,
@@ -91,5 +91,5 @@ export async function homeSpecialRail(city:string,pilot:DealerShowcase|null){
  const showcases=[...(pilot?[pilot]:[]),...others.filter((s):s is DealerShowcase=>!!s)];
  const selected=selectCityShowcases(showcases,city);
  const priced=await Promise.all(selected.map(s=>(s.specialsEnabled?withDealerRate(s):Promise.resolve(s))));
- return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s))};
+ return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s,city))};
 }

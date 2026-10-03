@@ -19,7 +19,7 @@ try{for(const width of [320,390,768,1440])for(const theme of ['dark','light']){
  const context=await browser.newContext({viewport:{width,height:844},hasTouch:true});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
  try{
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
- const home=page.getByRole('button',{name:/Выбрать город. Сейчас:/});await home.tap();
+ const home=page.getByRole('button',{name:/Выбрать город. Сейчас:/}).first();assert.match(await page.locator('[data-scenario]').textContent(),/Москва/);await home.tap();
  let dialog=page.getByRole('dialog',{name:'Выбор города',exact:true}),input=dialog.getByRole('textbox',{name:'Поиск города'});await input.fill('Ново');
  const first=dialog.getByRole('button',{name:/Новоалтайск/});await first.waitFor();
  if(width<768){
@@ -28,12 +28,12 @@ try{for(const width of [320,390,768,1440])for(const theme of ['dark','light']){
   const b=await input.boundingBox();assert.ok(b.y>=0&&b.y+b.height<180,'search stays above keyboard on first focus');
   const choices=dialog.getByLabel('Подсказки городов');const box=await choices.boundingBox();assert.ok(box.height>80&&box.y+box.height<=420,'suggestions fit visible viewport');
  }
- await first.tap();await dialog.waitFor({state:'hidden'});assert.match(await home.textContent(),/Новоалтайск/);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новоалтайск');
+ await first.tap();await dialog.waitFor({state:'hidden'});assert.match(await home.textContent(),/Новоалтайск/);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новоалтайск');assert.match(await page.locator('[data-scenario]').textContent(),/Новоалтайск/);
  await page.getByRole('button',{name:'Оставить заявку',exact:true}).tap();const lead=page.getByRole('dialog',{name:'Заявка',exact:true});
  await lead.getByRole('textbox',{name:'Имя'}).fill('Имя сохранено');
  await lead.getByRole('button',{name:width<768?/Выбрать город. Сейчас:/:/Открыть выбор города/}).tap();
  dialog=page.getByRole('dialog',{name:'Выбор города',exact:true});input=dialog.getByRole('textbox',{name:'Поиск города'});await input.fill('Новокуз');await dialog.getByRole('button',{name:/Новокузнецк/}).tap();await dialog.waitFor({state:'hidden'});
- assert.equal(await lead.getByRole('textbox',{name:'Имя'}).inputValue(),'Имя сохранено');
+ assert.equal(await lead.getByRole('textbox',{name:'Имя'}).inputValue(),'Имя сохранено');assert.match(await home.textContent(),/Новокузнецк/);assert.match(await page.locator('[data-scenario]').textContent(),/Новокузнецк/);
  if(width<768)assert.match(await lead.getByRole('button',{name:/Выбрать город. Сейчас:/}).textContent(),/Новокузнецк/);else assert.equal(await lead.getByRole('textbox',{name:'Ваш город'}).inputValue(),'Новокузнецк');
  await lead.getByRole('button',{name:width<768?/Выбрать город. Сейчас:/:/Открыть выбор города/}).tap();await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});assert.ok(await lead.isVisible());
  assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-${theme}.png`});results.push({width,theme,firstTap:true,formPreserved:true});

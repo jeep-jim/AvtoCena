@@ -191,7 +191,7 @@ test("remote media rejects internal addresses; images are decoded and normalized
     "webp",
   );
 });
-test("owner configuration versions, unpublished isolation and base-city price independent of visitor city", async () => {
+test("owner configuration versions, unpublished isolation and selected-city lead price", async () => {
   const cwd = process.cwd(),
     driver = process.env.JSON_STORAGE_DRIVER;
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "dealer-showcase-"));
@@ -213,7 +213,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
     });
     assert.ok(await getSpecialOffer(id));
     assert.equal((await readShowcase(s.dealerId))?.version, 2);
-    assert.equal((await specialLeadSnapshot(id, "Москва"))?.totalRub, 3135900);
+    assert.equal((await specialLeadSnapshot(id, "Москва"))?.totalRub, 3218400);
     assert.equal((await readPublicFeatures()).affiliatesEnabled, true);
     await savePublicFeatures({ version: 0, affiliatesEnabled: false });
     assert.equal((await readPublicFeatures()).affiliatesEnabled, false);
@@ -248,12 +248,12 @@ test("owner configuration versions, unpublished isolation and base-city price in
     );
     assert.equal(r.status, 200);
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
-    assert.equal(leads[0].totalRub, 3135900);
+    assert.equal(leads[0].totalRub, 3218400);
     assert.equal(leads[0].requestedDealerId,s.dealerId);
     assert.equal(leads[0].offerSnapshot.dealerId, s.dealerId);
     assert.equal(leads[0].deliveryQuote.origin, "Бишкек");
-    assert.equal(leads[0].deliveryQuote.amountRub, 142500);
-    assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 142500);
+    assert.equal(leads[0].deliveryQuote.amountRub, 225000);
+    assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 225000);
     const followup = await createLead(new Request("https://avtocena.com/api/leads", {
       method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},
       body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03-v2",totalRub:1})
@@ -343,4 +343,19 @@ test('one listing allows 30 unique photos and rejects the 31st',()=>{
  assert.throws(()=>normalizeShowcase(s,s.dealerId,1),/не более 30/);
  s.offers[0].photos=s.offers[0].photos.slice(0,30);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,30);
  s.offers[0].photos.push(s.offers[0].photos[0]);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,30);
+});
+
+test("public rail uses selected city and exposes only calculation fields", () => {
+ const s=fixture();s.specialsEnabled=true;
+ s.offers[0].sourceUrl="https://private-import.example/car";
+ const base=publicRail(s)[0],moscow=publicRail(s,"Москва")[0];
+ assert.equal(base.price,calculateSpecial(s,s.offers[0]).totalRub);
+ assert.equal(moscow.price,calculateSpecial(s,s.offers[0],"Москва").totalRub);
+ assert.notEqual(moscow.price,base.price);
+ assert.equal(moscow.city,"Москва");
+ assert.ok(moscow.calculation);
+ assert.equal(calculateSpecial(moscow.calculation.showcase,moscow.calculation.offer,"Красноярск").totalRub,calculateSpecial(s,s.offers[0],"Красноярск").totalRub);
+ assert.equal(JSON.stringify(moscow).includes("private-import"),false);
+ assert.deepEqual(moscow.calculation.showcase.offices,[]);
+ assert.equal(publicRail(s,"Несуществующий город")[0].price,null);
 });

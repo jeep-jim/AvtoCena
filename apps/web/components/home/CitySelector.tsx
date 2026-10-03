@@ -3,22 +3,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTapActivation } from "../catalog/useTapActivation";
 import { createPortal } from "react-dom";
-import { CITY_CHANGED_EVENT, readSelectedCity } from "../../lib/location/selected-city";
+import { CITY_CHANGED_EVENT, readSelectedCity, persistCity } from "../../lib/location/selected-city";
 import type { searchRussianCities } from "../../lib/location/cities";
 
-type Props = { value: string; syncStored?: boolean; persistSelection?: boolean; onStoredChange?: (city: string) => void; triggerLabel?: string; onChange: (city: string) => void };
+export {persistCity} from "../../lib/location/selected-city";
+
+type Props = { value: string; syncStored?: boolean; syncStoredOnMount?: boolean; persistSelection?: boolean; onStoredChange?: (city: string) => void; triggerLabel?: string; onChange: (city: string) => void };
 const POPULAR_CITIES = ["Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань", "Красноярск", "Омск", "Самара", "Челябинск", "Ростов-на-Дону", "Уфа", "Новокузнецк", "Барнаул", "Иркутск", "Владивосток"];
 
 export function LocationIcon({ className = "" }: { className?: string }) {
   return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.6 7-12A7 7 0 1 0 5 9c0 6.4 7 12 7 12Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><circle cx="12" cy="9" r="2.6" stroke="currentColor" strokeWidth="2" /></svg>;
-}
-export function persistCity(city: string) {
-  try { localStorage.setItem("avtocena_city", city); } catch {}
-  document.cookie = `avtocena_city=${encodeURIComponent(city)}; Max-Age=15552000; Path=/; SameSite=Lax`;
-  const url = new URL(window.location.href);
-  if (city) url.searchParams.set("city", city); else url.searchParams.delete("city");
-  window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
-  window.dispatchEvent(new Event(CITY_CHANGED_EVENT));
 }
 export function useCitySuggestions(query: string) {
   const [search, setSearch] = useState<typeof searchRussianCities | null>(null);
@@ -72,9 +66,9 @@ export function CityPickerDialog({onChange,onClose,persistSelection=true}:{persi
   </div>,document.body);
 }
 
-export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncStored=true,persistSelection=true}:Props){
+export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncStored=true,syncStoredOnMount=true,persistSelection=true}:Props){
   const tap=useTapActivation();const [open,setOpen]=useState(false);const [mounted,setMounted]=useState(false);const trigger=useRef<HTMLButtonElement>(null);
-  useEffect(()=>{setMounted(true);if(syncStored){const stored=readSelectedCity();if(stored!==value)(onStoredChange||onChange)(stored);}},[]);
+  useEffect(()=>{setMounted(true);if(syncStored&&syncStoredOnMount){const stored=readSelectedCity();if(stored!==value)(onStoredChange||onChange)(stored);}},[]);
   useEffect(()=>{if(!syncStored)return;const sync=()=>(onStoredChange||onChange)(readSelectedCity());window.addEventListener(CITY_CHANGED_EVENT,sync);return()=>window.removeEventListener(CITY_CHANGED_EVENT,sync);},[onChange,onStoredChange,syncStored]);
   const keyboard = useRef(false);
   const [keyboardFocus, setKeyboardFocus] = useState(false);
