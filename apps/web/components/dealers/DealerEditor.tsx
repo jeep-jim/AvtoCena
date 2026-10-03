@@ -1,4 +1,5 @@
 "use client";
+import {DealerLivePreview} from './DealerLivePreview';
 import {EMPTY_REQUISITES} from '@/lib/dealers/requisites';
 import {LayoutDashboard,Car,Palette,MapPin,Images,Globe,Calculator,Wallet,ShieldCheck,BookOpen,ArrowUpRight,Eye,Check} from 'lucide-react';
 import {DealerDemoContext,DealerUploadContext} from './DealerDemoContext';
@@ -28,11 +29,11 @@ import type { PublicFeatures } from "@/lib/dealers/showcase-store";
 export function DealerEditor({
   initial,
   features,
-  platformOwner = false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration, sidebarTop, onSaved, onDemoChange, onUploadingChange,
+  platformOwner = false, verified=false, demo=false, fullAccess=true, program=DEFAULT_PROGRAM, membership=EMPTY_MEMBERSHIP, administration, sidebarTop, onSaved, onDemoChange, onUploadingChange,
 }: {
   initial: DealerShowcase;
   features: PublicFeatures;
-  platformOwner?: boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode; sidebarTop?:React.ReactNode; onSaved?:(s:DealerShowcase)=>void; onDemoChange?:(s:DealerShowcase)=>void; onUploadingChange?:(busy:boolean)=>void;
+  platformOwner?: boolean; verified?:boolean; demo?:boolean; fullAccess?:boolean; program?:DealerProgram; membership?:Membership; administration?:React.ReactNode; sidebarTop?:React.ReactNode; onSaved?:(s:DealerShowcase)=>void; onDemoChange?:(s:DealerShowcase)=>void; onUploadingChange?:(busy:boolean)=>void;
 }) {
   const prepared=()=>{
     const value=structuredClone(initial);
@@ -149,7 +150,8 @@ export function DealerEditor({
       offers: s.offers.map((o) => (o.id === id ? { ...o, ...v } : o)),
     }));
   };
-  const saveFeedback=<>{message.startsWith('Не удалось сохранить')&&<button type="button" disabled={busy||pendingUploads>0} className={button} onClick={()=>void save()}>Повторить сохранение</button>}<p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>{conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}</>;
+  const showLivePreview=['overview','profile','buyers','offices','requisites','markets'].includes(tab);
+  const saveFeedback=<><p role="status" className="text-sm leading-5">{pendingUploads?'Загружаем фотографии…':demo?'Изменения демо запоминаются в этой вкладке.':statusMessage}</p>{conflict&&<div className="space-y-2 rounded-xl border border-amber-500/50 p-3 text-sm"><p>В другой вкладке изменены те же поля. Ваш ввод сохранён. Можно применить свои значения, сохранив остальные изменения.</p><button className={button} onClick={()=>{if(confirm('Применить ваши значения в спорных полях?')){const resolved=mergeShowcaseChanges(base.current,latest.current,conflict.current).value;base.current=conflict.current;void save(false,false,{...resolved,version:conflict.current.version});}}}>Применить мои изменения</button></div>}</>;
   return (
     <DealerUploadContext.Provider value={uploadChange}><DealerDemoContext.Provider value={demo}><div className="dealer-editor dealer-workspace">
       <DealerWorkspaceStyles/>
@@ -165,11 +167,11 @@ export function DealerEditor({
           ["requisites", "Реквизиты",BookOpen],
           ["markets", "Каталог и рынки",Globe],
           ["pricing", "Расчёт своих авто",Calculator],
-          ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription","Мой доступ",ShieldCheck]] : []),
-          ...(administration ? [["administration","Управление доступом",ShieldCheck]] : []),
+          ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription",administration?"Подписка":"Доступ",ShieldCheck]] : []),
+          ...(administration ? [["administration","Доступ",ShieldCheck]] : []),
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
-      </nav></div>
-      <div className="dealer-editor-content">
+      </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
+      <div className="dealer-editor-content" data-live-preview={showLivePreview}><div className="dealer-editor-settings">
 
       {!["overview","subscription","administration","offers"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
        <section className="dealer-editor-panel space-y-3">
@@ -177,7 +179,6 @@ export function DealerEditor({
 
         <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
 
-        {saveFeedback}
        </section>
 </aside>}
       {tab==='overview'&&<div className="space-y-5">
@@ -218,6 +219,7 @@ export function DealerEditor({
             <label className="grid gap-2">
               О компании
               <textarea
+                aria-label="О компании"
                 className={input}
                 rows={3}
                 value={s.description}
@@ -229,15 +231,17 @@ export function DealerEditor({
                 ["headerIcon", "Иконка в шапке"],
                 ["logoLight", "Логотип для светлой темы"],
                 ["logoDark", "Логотип для тёмной темы"],
-                ["banner", "Баннер компании"],
+                ["banner", "Баннер для компьютера"],
+                ["bannerMobile", "Баннер для телефона"],
               ].map(([key, label]) => (
-                <section className="space-y-2" key={key}>
+                <section className="space-y-2" key={key} aria-label={label}>
                   <h3>{label}</h3>
                   {key === "headerIcon" && <p className="text-xs text-[var(--ac-muted)]">Квадратное изображение от 128 × 128 px. Показывается рядом с названием компании при просмотре её каталога и автомобилей.</p>}
                   {key === "banner" && <>
-                    <p className="text-xs text-[var(--ac-muted)]">1800 × 600 px · пропорции 3:1. Логотип загружается отдельно; края обложки могут обрезаться на телефоне.</p>
+                    <p className="text-xs text-[var(--ac-muted)]">Не меньше 1600 × 400 px, рекомендуем 2400 × 600 px (4:1). Желательно до 1 МБ, максимум 8 МБ. JPG, PNG или WebP. Загрузите файл или вставьте прямую ссылку ниже.</p>
                     {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v3.webp" })}>Использовать новый баннер TopAvto</button>}
                   </>}
+                  {key === "bannerMobile" && <p className="text-xs text-[var(--ac-muted)]">Не меньше 800 × 600 px, рекомендуем 1200 × 900 px (4:3). Желательно до 500 КБ, максимум 8 МБ. JPG, PNG или WebP, файл или прямая ссылка. Пока отдельный баннер не загружен, используется баннер для компьютера. Изображения других пропорций обрезаются по центру; логотип добавляется отдельно.</p>}
                   <Photos
                     dealerId={s.dealerId}
                     single
@@ -411,7 +415,6 @@ export function DealerEditor({
          <button type="button" disabled={!active||(!demo&&(dirty||busy))} className={button+' dealer-preview-action'} onClick={event=>{if(demo)openDemoPreview(event);else if(active)window.open(`${specialPath(s.dealerId,active.id)}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
          {active&&<><button type="button" disabled={pendingUploads>0||s.offers.length>=200} className={button} onClick={()=>{const next={...structuredClone(active),id:crypto.randomUUID(),status:'draft' as const,updatedAt:''};patch({offers:[...s.offers,next]});setActiveId(next.id);}}>+ Авто по этому шаблону</button>
          <button type="button" disabled={pendingUploads>0} className={button+' dealer-delete-action'} onClick={()=>{if(confirm(`Удалить ${specialTitle(active)||'этот автомобиль'}? Это действие нельзя отменить.`)){const offers=s.offers.filter(o=>o.id!==active.id);patch({offers});}}}>Удалить автомобиль</button></>}
-         {saveFeedback}
         </section>
         {active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
          <h2 className="font-bold">Так выглядит карточка</h2>
@@ -424,11 +427,11 @@ export function DealerEditor({
          {quote?.complete?(offerMode==='order'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
          {specialPublicationFields(active).length>0&&<p className="text-xs text-[var(--ac-muted)]">Для публикации: {specialPublicationFields(active).join(', ')}.</p>}
         </section>}
-        {active&&<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}
+
        </aside>}
 
       </div>}
-      </div></div>
+      </div>{showLivePreview&&<DealerLivePreview value={s} section={tab} verified={verified&&!demo} fullAccess={fullAccess}/>}</div></div>
     </div></DealerDemoContext.Provider></DealerUploadContext.Provider>
   );
 }
