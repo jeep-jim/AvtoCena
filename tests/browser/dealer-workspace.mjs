@@ -231,6 +231,12 @@ try{
   await page.getByRole('button',{name:'Добавить город',exact:true}).click();assert.ok(writes.at(-1).body.pricing.tariffs.every(t=>t.city));await page.getByLabel('Город 3',{exact:true}).fill('Томск');await page.getByLabel('Стоимость 3, $',{exact:true}).fill('950');await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('950'));assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Томск').usd,950);
   for(const [kw,hp] of [['117.68',160],['147.1',200]]){const saved=page.waitForResponse(r=>r.request().method()==='PUT'&&Math.abs((r.request().postDataJSON()?.offers?.[0]?.powerHp||0)*.73549875-Number(kw))<1e-7);await page.getByLabel('Мощность ДВС / ЭВ, кВт',{exact:true}).fill(kw);assert.equal(Number(await page.getByLabel('Мощность ДВС / ЭВ, л.с.',{exact:true}).inputValue()),hp);await saved;assert.ok(Math.abs(writes.at(-1).body.offers[0].powerHp*.73549875-Number(kw))<1e-7,'round display only; preserve exact calculation power');}
   await page.getByLabel('Мощность ДВС / ЭВ, кВт',{exact:true}).fill('162');assert.equal(Number(await page.getByLabel('Мощность ДВС / ЭВ, л.с.',{exact:true}).inputValue()),220);await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('220.258702'));await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  const missing=page.locator('.dealer-editor-main [aria-invalid=true]');
+  assert.ok(await missing.count()>0,'unfilled required fields are marked');
+  for(const field of await missing.all())assert.equal(await field.evaluate(el=>getComputedStyle(el).borderTopColor),'rgb(239, 68, 68)','required border stays red in '+theme);
+  await page.getByLabel('Коробка передач',{exact:true}).fill('Автомат');
+  assert.equal(await page.getByLabel('Коробка передач',{exact:true}).getAttribute('aria-invalid'),null);
+  await page.getByLabel('Коробка передач',{exact:true}).fill('');
   await page.getByRole('button',{name:'Цвет',exact:true}).click();
   const palette=page.getByRole('dialog',{name:'Цвет автомобиля'});await palette.waitFor();
   assert.equal(await palette.locator('button[aria-pressed]').count(),20);
