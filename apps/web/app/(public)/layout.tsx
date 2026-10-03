@@ -3,6 +3,7 @@ import "../flat-ui.css";
 import "../public-regression-fixes.css";
 import "../public-price-sheet-fix.css";
 import "../catalog-filter-compact.css";
+import {AnalyticsChoiceNotice} from '@/components/analytics/AnalyticsChoiceNotice';
 import {ConsentMetrika} from "@/components/analytics/ConsentMetrika";
 import { YandexMetrikaRouteTracker } from "@/components/analytics/YandexMetrikaRouteTracker";
 
@@ -290,7 +291,7 @@ html[data-theme="light"] .ac-public-footer-dealers:focus-visible {
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <ConsentMetrika />
+      <ConsentMetrika /><AnalyticsChoiceNotice/>
       {children}
       <YandexMetrikaRouteTracker />
       <style dangerouslySetInnerHTML={{ __html: publicPageFixes }} />

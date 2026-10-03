@@ -1,4 +1,5 @@
 "use client";
+import {PARTNER_CONSENT_VERSION} from '@/lib/privacy-documents';
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -71,7 +72,7 @@ export function PartnerAccessModal({
                 </button>
               </div>
 
-              <form action="/api/partners" method="post" className="mt-6 grid gap-4">
+              <form action="/api/partners" method="post" className="mt-6 grid gap-4"><label className="flex items-start gap-2 text-sm"><input type="hidden" name="consentVersion" value={PARTNER_CONSENT_VERSION}/><input type="checkbox" name="consent" value="yes" required/><span>Даю <a href="/consent/partner" target="_blank" className="underline">согласие на обработку заявки о сотрудничестве</a>. <a href="/privacy" target="_blank" className="underline">Политика</a>.</span></label>
                 <div>
                   <label
                     htmlFor="partner-name"

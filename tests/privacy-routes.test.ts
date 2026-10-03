@@ -13,6 +13,7 @@ test('privacy requests are stored without sales consent or attribution and retri
  try{const api=await route('apps/web/app/(public)/api/privacy-request/route.ts',{'next/server':`export {NextResponse} from 'next/server.js';export const after=()=>{};`,'@/lib/data':`export const appendChunkedDataJson=async(p,r)=>{globalThis.__privacyRoutes.rows.set(r.id,r);return r;};`,'@/lib/lead-antispam':`export const guardLead=async()=>null;export const leadVisitor=()=>({cookie:'test'});`,'@/lib/crm-dispatch':`export const requestCrmDelivery=async()=>{};`});
  const send=(extra:object={},origin='https://avtocena.com')=>api.POST(new Request('https://avtocena.com/api/privacy-request',{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify({name:'Test',phone:'+79991234567',message:'Отзываю согласие',operationId:'privacy-operation-1234',analyticsConsent:true,attribution:{metrikaClientId:'123'},...extra})}));
  assert.equal((await send({},'https://evil.test')).status,403);assert.equal((await send({phone:'bad'})).status,400);const first=await send();assert.equal(first.status,200);const id=(await first.json()).id;assert.equal((await (await send()).json()).id,id);assert.equal(s.rows.size,1);const row=s.rows.get(id);assert.equal(row.source,'privacy_request');assert.equal(row.analyticsConsent,false);assert.equal(row.attribution,undefined);assert.equal(row.personalDataConsent,undefined);assert.equal(row.clientId,undefined);
+ const emailResponse=await send({phone:'',contact:'privacy@example.com',operationId:'privacy-operation-email'});assert.equal(emailResponse.status,200);const emailRow=s.rows.get((await emailResponse.json()).id);assert.equal(emailRow.email,'privacy@example.com');assert.equal(emailRow.analyticsConsent,false);
  }finally{delete (globalThis as any).__privacyRoutes;}
 });
 
@@ -32,4 +33,22 @@ test('dealer settings require permission and same origin, and preserve email for
   assert.match((await send(true)).headers.get('location')||'',/state=saved/);assert.deepEqual(s.rows[0].mail,{email:'office@example.ru',provider:'yandex',ready:true});
   const failed=await send(false,'https://avtocena.com','');assert.equal(failed.status,303);assert.ok(failed.headers.get('location')?.startsWith('/crm/dealers/dealer_topavto?state=error&message='));assert.equal(s.writes,2);
  } finally {delete (globalThis as any).__dealerMailRoutes;}
+});
+
+test('partner access requires separate current consent and records server text',async()=>{
+ const s:any={rows:[]};(globalThis as any).__partnerPrivacy=s;
+ try{
+  const api=await route('apps/web/app/(public)/api/partners/route.ts',{
+   '@/lib/auth':`export const getCurrentUser=async()=>null;export const isCrmRole=()=>false;export const normalizeTelegramUsername=v=>String(v).replace(/^@/,'');`,
+   '@/lib/data':`export const readDataJson=async()=>globalThis.__partnerPrivacy.rows;export const appendDataJson=async(p,r)=>{globalThis.__partnerPrivacy.rows.push(r);};`,
+  });
+  const {PARTNER_CONSENT_VERSION,PARTNER_CONSENT_TEXT}=await import('../apps/web/lib/privacy-documents');
+  const req=(extra:any={},origin='https://avtocena.com')=>new Request('https://avtocena.com/api/partners',{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify({name:'Partner',telegram:'partner_test',trafficSource:'site',...extra})});
+  assert.equal((await api.POST(req())).status,400);
+  assert.equal((await api.POST(req({consent:'yes',consentVersion:'old'}))).status,400);
+  assert.equal((await api.POST(req({consent:'yes',consentVersion:PARTNER_CONSENT_VERSION},'https://evil.test'))).status,403);
+  assert.equal(s.rows.length,0);
+  assert.equal((await api.POST(req({consent:'yes',consentVersion:PARTNER_CONSENT_VERSION,consentText:'forged'}))).status,201);
+  assert.equal(s.rows[0].consentText,PARTNER_CONSENT_TEXT);assert.ok(s.rows[0].consentAt);assert.equal(s.rows[0].consentVersion,PARTNER_CONSENT_VERSION);
+ }finally{delete(globalThis as any).__partnerPrivacy;}
 });

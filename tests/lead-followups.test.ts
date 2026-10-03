@@ -13,7 +13,7 @@ test('same-browser offer followups are atomic and isolated from generic requests
   const cwd=process.cwd(), driver=process.env.JSON_STORAGE_DRIVER;
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'lead-followups-'));
   fs.mkdirSync(path.join(temp,'data')); process.chdir(temp); process.env.JSON_STORAGE_DRIVER='local'; resetJsonStorageForTests();
-  const base={requestMode:'offer',source:'catalog_offer_request',offerId:'fixture-car',submissionThreadToken:'12345678-1234-4321-aaaa-123456789abc',phone:'+79999999999',name:'Test',contactPreference:'call',personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-02",comment:'Первое обращение'};
+  const base={requestMode:'offer',source:'catalog_offer_request',offerId:'fixture-car',submissionThreadToken:'12345678-1234-4321-aaaa-123456789abc',phone:'+79999999999',name:'Test',contactPreference:'call',personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03",comment:'Первое обращение'};
   const submit=async (body:any)=>{const response=await createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...base,...body})})); assert.equal(response.status,200); return response.json();};
   try {
     const first=await submit({operationId:'one'});
