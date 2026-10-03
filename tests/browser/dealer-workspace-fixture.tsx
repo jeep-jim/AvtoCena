@@ -1,4 +1,7 @@
 import React from 'react';
+import {hydrateRoot} from 'react-dom/client';
+import {renderToString} from 'react-dom/server';
+import {DealerLivePreview} from '../../apps/web/components/dealers/DealerLivePreview';
 import {BrandLogoRail} from '../../apps/web/components/catalog/BrandLogoRail';
 import {CurrencyRatesStrip} from '../../apps/web/components/catalog/CurrencyRatesStrip';
 import {PublicLegalFooter} from '../../apps/web/components/layout/PublicLegalFooter';
@@ -19,9 +22,14 @@ import {defaultShowcase} from '../../apps/web/lib/dealers/showcase-model';
 import {DEFAULT_PROGRAM} from '../../apps/web/lib/dealers/program-model';
 const q=new URLSearchParams(location.search),kind=q.get('view')||(location.pathname.startsWith('/cars/offer/')?'offer':location.pathname==='/favorites'?'favorites':'')||(location.pathname==='/knowledge'?'knowledge':'editor'),s=defaultShowcase('dealer_topavto');s.description=q.has('long')?'Подбор и доставка автомобилей из шести стран. '+('Поможем выбрать автомобиль, проверим его состояние и организуем доставку в ваш город. '.repeat(6)):'Подбор и доставка автомобилей из шести стран.';s.offices=[{id:'office',city:'Новокузнецк',address:'Пример адреса',phone:'',hours:'10:00–19:00',lat:null,lon:null,photos:[]}];
 Object.assign(s,JSON.parse(sessionStorage.getItem('fixture-server')||'{}'));
-const renderer=createRoot(document.getElementById('root')!);
-const root={render:(content:React.ReactNode)=>renderer.render(<><OverlayBackHistory/>{content}</>)};
-if(kind==='offer'){
+const renderer=kind==='preview-hydration'?null:createRoot(document.getElementById('root')!);
+const root={render:(content:React.ReactNode)=>renderer!.render(<><OverlayBackHistory/>{content}</>)};
+if(kind==='preview-hydration'){
+ const preview=<DealerLivePreview value={s} section="overview" verified fullAccess/>;
+ const container=document.getElementById('root')!;
+ container.innerHTML=renderToString(preview);
+ window.addEventListener('fixture-hydrate',()=>hydrateRoot(container,preview),{once:true});
+}else if(kind==='offer'){
  s.name='ТопАвто';
  const stock=q.get('stock')==='1';
  const o={id:'vehicle',status:'published' as const,availability:stock?'stock' as const:'order' as const,condition:'new' as const,officeId:'office',make:'Toyota',model:'RAV4',trim:'2026 2.0L',year:2026,productionMonth:1,engineCc:1987,powerHp:150,power30MinKw:0,fuel:'petrol' as const,transmission:'CVT',drive:'Полный',body:'SUV',color:'Чёрный',steering:'left' as const,mileageKm:0,description:'Автомобиль дилера',equipment:'Климат-контроль',photos:[{id:'p',url:'/buyers/1.jpg',caption:''},{id:'p2',url:'/buyers/2.jpg',caption:''}],priceUsd:34000,priceRub:3000000,customsIncluded:true,customsExtraRub:0,personalUseEligible:true,defaultCity:'Новосибирск',updatedAt:'2026-10-02T08:00:00Z'};

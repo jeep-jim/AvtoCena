@@ -15,7 +15,7 @@ const rate = (usd: number) => ({
 });
 
 test("all market logistics tariffs use the owner USD amounts and the official USD rate", () => {
-  const expected = { korea: 1200, china: 1500, georgia: 2500, uae: 3000, europe: 4000, japan: 1000 } as const;
+  const expected = { korea: 1200, china: 1500, georgia: 2500, uae: 3000, europe: 4500, japan: 1000 } as const;
   assert.deepEqual(MARKET_LOGISTICS_USD, expected);
   for (const [market, usd] of Object.entries(expected)) {
     const config = applyMarketLogisticsUsdRate(market as keyof typeof expected, { logisticsRub: 1 }, rate(usd));
@@ -36,4 +36,12 @@ test("non-official or stale USD rates cannot silently price logistics", () => {
     rateDate: "2026-01-01",
   });
   assert.equal(stale.logisticsRateStatus, "unavailable");
+});
+
+
+test("Europe logistics replaces the previous tariff using the official USD rate", () => {
+  const previous = { logisticsRub: 360000, logisticsUsd: 4000 };
+  const config = applyMarketLogisticsUsdRate("europe", previous, rate(4500));
+  assert.equal(config.logisticsUsd, 4500);
+  assert.equal(config.logisticsRub, 405000);
 });
