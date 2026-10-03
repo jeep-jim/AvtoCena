@@ -39,8 +39,10 @@ export function Toggle({
   label,
   value,
   onChange,
+  status,
 }: {
   label: string;
+  status?:string;
   value: boolean;
   onChange: (v: boolean) => void;
 }) {
@@ -54,7 +56,7 @@ export function Toggle({
       className="flex min-h-11 w-full items-center gap-3 rounded-xl border border-[var(--ac-border)] p-3 text-left"
     >
       <span aria-hidden="true" className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${value ? "bg-red-500" : "bg-slate-400/40"}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${value ? "translate-x-6" : "translate-x-1"}`}/></span>
-      <span>{label}</span>
+      <span>{label}</span>{status&&<span className="dw-badge ml-auto shrink-0">{status}</span>}
     </button>
   );
 }
@@ -64,12 +66,14 @@ export function Photos({
   onChange,
   single = false,
   limit = 40,
+  purpose,
 }: {
   dealerId: string;
   value: DealerPhoto[];
   onChange: (p: DealerPhoto[]) => void;
   single?: boolean;
   limit?: number;
+  purpose?:"profile-banner";
 }) {
   const demo=useDealerDemo(),picker=useRef<HTMLInputElement>(null);
   const [busy,setBusy]=useState(false),[url,setUrl]=useState(''),[error,setError]=useState(''),[progress,setProgress]=useState(''),[drag,setDrag]=useState(false);
@@ -85,7 +89,7 @@ export function Photos({
     try{
      if(file&&(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>8*1024*1024))throw Error('Нужны JPG, PNG или WebP до 8 МБ');
      if(demo){if(!file)throw Error('В демо загрузите фото с устройства');added.push({id:crypto.randomUUID(),url:URL.createObjectURL(file),caption:''});continue;}
-     const body=new FormData();if(file)body.set('file',file);else body.set('url',url);
+     const body=new FormData();if(purpose)body.set("purpose",purpose);if(file)body.set('file',file);else body.set('url',url);
      const r=await fetch(`/api/crm/dealers/${dealerId}/media`,{method:'POST',body});const p=await r.json();if(!r.ok)throw Error(p.error||'Не удалось загрузить');added.push(p);
     }catch(e){failures++;setError(e instanceof Error?e.message:'Не удалось загрузить фото');}
    }

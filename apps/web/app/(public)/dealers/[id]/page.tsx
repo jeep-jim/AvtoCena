@@ -48,7 +48,7 @@ export default async function Page({
   if(!s.profileEnabled&&!preview)notFound();
   if(s.specialsEnabled)s=await withDealerRate(s);
   const dealer=await resolveDealerBrowsingContext(s.dealerId,preview);
-  const catalog=<CatalogContent params={await searchParams} dealer={dealer} embedded/>;
+  const catalog=s.catalogMarkets.length&&dealer?<CatalogContent params={await searchParams} dealer={dealer} embedded/>:null;
   return (
     <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />

@@ -22,6 +22,7 @@ export function DealerLivePreview({value,section,verified,fullAccess}:{value:Dea
   const syncStyles=()=>{
    doc.head.querySelectorAll('[data-preview-style]').forEach(n=>n.remove());
    document.querySelectorAll('style,link[rel="stylesheet"]').forEach(node=>{
+    if(node.tagName==='STYLE'&&node.textContent?.includes('.dealer-editor-shell'))return;
     const copy=node.cloneNode(true) as HTMLElement;copy.dataset.previewStyle='true';
     if(copy instanceof HTMLLinkElement)copy.href=(node as HTMLLinkElement).href;
     doc.head.appendChild(copy);
@@ -37,6 +38,6 @@ export function DealerLivePreview({value,section,verified,fullAccess}:{value:Dea
  return <aside className="dealer-live-preview" aria-label="Мобильный предпросмотр страницы дилера">
   <header><Smartphone size={18}/><strong>Мобильная страница</strong><span>Вживую</span></header>
   <iframe ref={frame} title="Мобильный предпросмотр дилера" srcDoc={documentHtml} onLoad={()=>setMount(frame.current?.contentDocument?.getElementById('dealer-preview-root')||null)}/>
-  {mount&&createPortal(<main className="ac-page-copy" style={{background:'var(--ac-bg)',color:'var(--ac-text)',minHeight:'100vh'}}><DealerProfileContent s={profile} verified={verified} editorSection={section} items={publicRail(s)} catalog={profile.catalogMarkets.length>0?<section className="dealer-preview-markets" style={{padding:'16px'}}><h2 style={{fontSize:18,fontWeight:750,marginBottom:12}}>Автомобили под заказ</h2><div className="dealer-city-chips">{DEALER_MARKETS.filter(m=>profile.catalogMarkets.includes(m.id)).map(m=><span key={m.id}><CatalogMarketFlag market={m.id}/>{m.label}</span>)}</div></section>:null}/></main>,mount)}
+  {mount&&createPortal(<main className="ac-page-copy" style={{background:'var(--ac-bg)',color:'var(--ac-text)',minHeight:'100vh',padding:0}}><DealerProfileContent s={profile} verified={verified} editorSection={section} items={publicRail(s)} catalog={profile.catalogMarkets.length>0?<section className="dealer-preview-markets" style={{padding:'16px'}}><h2 style={{fontSize:18,fontWeight:750,marginBottom:12}}>Автомобили под заказ</h2><div className="dealer-city-chips">{DEALER_MARKETS.filter(m=>profile.catalogMarkets.includes(m.id)).map(m=><span key={m.id}><CatalogMarketFlag market={m.id}/>{m.label}</span>)}</div></section>:null}/></main>,mount)}
  </aside>;
 }
