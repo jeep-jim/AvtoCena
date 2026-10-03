@@ -70,7 +70,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
 
   <div className="dealer-profile-body"><section ref={body} className="dealer-tab-content" aria-label={tab==='cars'?'Каталог АвтоЦены':tab==='specials'?'Предложения дилера':tab==='photos'?'Фотографии компании':tab==='reviews'?'Отзывы о дилере':'Контакты компании'}>
    <div>
-    {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши покупатели" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}
+    {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши фото и Автовыдачи" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}
     <div ref={specialSection} className="dealer-main-offers"><SpecialRail heading={s.specialHeading} items={items}/></div>{s.catalogMarkets.length>0&&catalog}
    </div>
 
