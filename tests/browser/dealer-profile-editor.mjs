@@ -124,8 +124,25 @@ try {
   await page.getByRole('button',{name:'Развернуть описание'}).click();assert.ok(await page.locator('.dealer-intro').evaluate(el=>el.clientHeight>parseFloat(getComputedStyle(el).lineHeight)*2+1));await page.getByRole('button',{name:'Свернуть описание'}).click();
   await page.screenshot({path:`${out}/profile-${width}-${theme}-${verified?'verified':'regular'}.png`});
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();assert.equal(await page.locator('.dealer-logo-dialog .dealer-logo-verified').count(),verified?1:0);await page.screenshot({path:`${out}/logo-${width}-${theme}-${verified}.png`});await page.getByRole('button',{name:'Закрыть логотип'}).click();
-  await page.getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
+  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.close();
+ }
+ if(!process.env.EDITOR_ONLY)for(const theme of ['light','dark']){
+  const page=await browser.newPage({viewport:{width:390,height:850}});await page.route('**/api/**',r=>r.fulfill({json:{}}));
+  await page.goto(origin+'?view=profile&multi=1&long=1#cars');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  assert.ok(await page.evaluate(()=>scrollY<5),'initial hash route still starts at cover');
+  assert.deepEqual(await page.locator('.dealer-dock span').allTextContents(),['Каталог','Медиа','Адреса','Отзывы','Заявка']);
+  await page.locator('.dealer-profile-hero .dealer-banner-dots button').nth(4).click();await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.decode());assert.ok((await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/buyers/7.jpg'));
+  await page.locator('.dealer-profile-hero').getByRole('button',{name:'Рассмотреть баннер'}).click();await page.locator('.dealer-banner-dialog[open]').waitFor();await page.getByRole('button',{name:'Предыдущий баннер'}).click();await page.getByRole('button',{name:'Закрыть баннер'}).click();
+  const face=await page.locator('.dealer-avatar-face').evaluate(el=>getComputedStyle(el).backgroundColor);assert.notEqual(face,'rgb(209, 250, 229)');
+  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Медиа',exact:true}).click();
+  assert.ok(await page.locator('.dealer-photo-grid .ac-buyers-rail').evaluate(el=>el.getBoundingClientRect().width>300));
+  await page.evaluate(()=>scrollTo(0,200));assert.ok(await page.locator('.dealer-profile-hero').evaluate(el=>Math.abs(el.getBoundingClientRect().top)<2),'cover stays pinned while sheet moves');
+  await page.screenshot({path:`${out}/media-${theme}.png`});
+  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByText('Сообщение компании',{exact:true}).waitFor();await page.screenshot({path:`${out}/reviews-${theme}.png`});
+  await page.locator('.dealer-dock').getByRole('button',{name:'Заявка',exact:true}).click();await page.locator('.ac-lead-dialog').waitFor();await page.screenshot({path:`${out}/request-${theme}.png`});assert.equal(await page.locator('.ac-lead-dialog form').count(),1);await page.keyboard.press('Escape');
+  await page.goto(origin+'?view=profile&empty=1');await page.locator('.dealer-default-logo').first().evaluate(img=>img.decode());assert.ok((await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/dealers/default-cover.svg'));assert.equal(await page.getByText('Каталог компании',{exact:true}).count(),0);
+  await page.close();
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});const errors=[];page.on('pageerror',e=>errors.push(e.message));let saved=null,media=0;
@@ -141,7 +158,7 @@ try {
   await preview.locator('.dealer-cover').evaluate(img=>img.decode());assert.ok((await preview.locator('.dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/buyers/2.jpg'),'preview selects mobile source');
   await page.screenshot({path:`${out}/editor-profile-${width}-${theme}.png`});
   await page.reload();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Компания Новое имя');assert.ok(await page.getByRole('region',{name:'Баннер для телефона',exact:true}).locator('img').count());
-  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await preview.getByRole('heading',{name:'Жизнь компании',exact:true}).waitFor();
+  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await preview.getByRole('heading',{name:'Жизнь компании',exact:true}).waitFor();assert.ok(await preview.locator('.dealer-photo-grid .ac-buyers-rail').evaluate(el=>el.getBoundingClientRect().width>280));await page.screenshot({path:`${out}/editor-buyers-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Адреса',exact:true}).click();await page.getByLabel('Адрес',{exact:true}).fill('Новый адрес, 77');await preview.getByLabel('Адрес офиса в профиле',{exact:true}).locator('option').filter({hasText:'Новый адрес, 77'}).waitFor({state:'attached'});
   await page.screenshot({path:`${out}/editor-offices-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Новые реквизиты');await preview.locator('.dealer-contact-sheet').getByText('ООО Новые реквизиты',{exact:true}).waitFor();await page.getByLabel('Банк',{exact:true}).fill('Закрытый банк');assert.equal(await preview.getByText('Закрытый банк',{exact:true}).count(),0);

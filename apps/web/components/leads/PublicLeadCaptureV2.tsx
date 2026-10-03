@@ -30,7 +30,7 @@ type FavoriteLeadItem = {
 
 type HostKind = "home" | "brand" | "offer";
 type LeadRequest =
-  | { mode: "generic"; source: string; car?: string; comment?: string }
+  | { mode: "generic"; source: string; car?: string; comment?: string; dealerId?:string }
   | { mode: "offer"; source: string; offerId: string; car?: string }
   | { mode: "favorites"; source: string };
 
@@ -169,7 +169,8 @@ function MessengerFields({ messenger, setMessenger, contact, setContact, kind, s
   </div>;
 }
 
-function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; favorites: FavoriteLeadItem[]; onClose: () => void }) {
+export function LeadDialog({ request, favorites, onClose, preview=false, portalDocument }: { request: LeadRequest; favorites: FavoriteLeadItem[]; onClose: () => void; preview?:boolean; portalDocument?:Document }) {
+  const ownerDocument=portalDocument||document;
   const panelRef = useRef<HTMLElement>(null);
   const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: request.mode === "generic" ? request.comment || "" : "" }));
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
@@ -212,11 +213,11 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
   }, [form.car, request.mode]);
 
   useEffect(() => {
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const previous = ownerDocument.body.style.overflow;
+    ownerDocument.body.style.overflow = "hidden";
     const keydown = (event: KeyboardEvent) => { if (event.key === "Escape" && status !== "sending") onClose(); };
-    window.addEventListener("keydown", keydown);
-    return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", keydown); };
+    ownerDocument.defaultView?.addEventListener("keydown", keydown);
+    return () => { ownerDocument.body.style.overflow = previous; ownerDocument.defaultView?.removeEventListener("keydown", keydown); };
   }, [onClose, status]);
 
   useEffect(() => {
@@ -247,6 +248,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
+    if(preview){setStatus("error");setMessage("Это предпросмотр формы. Отправить заявку можно на странице компании.");return;}
     const validation = validate();
     if (validation) { setStatus("error"); setMessage(validation); return; }
     setStatus("sending"); setMessage("");
@@ -261,7 +263,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
       const response = await leadFetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         requestMode: request.mode,
-        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? favoriteDealer(offerPreview).id : undefined,
+        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? favoriteDealer(offerPreview).id : request.mode==="generic" ? request.dealerId : undefined,
         submissionThreadToken: isOffer ? threadToken() : "",
         pageUrl: window.location.href,
         offerId: isOffer ? request.offerId : "",
@@ -341,7 +343,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
         body:has(main.ac-home-page) .ac-public-legal-footer{margin-top:1.5rem!important}
         @media(min-width:1024px){.ac-lead-dialog{animation-name:acLeadModalIn}}
       `}</style>
-    </div>, document.body,
+    </div>, ownerDocument.body,
   );
 }
 

@@ -84,6 +84,7 @@ export type DealerShowcase = {
   logoDark: string;
   banner: string;
   bannerMobile?: string;
+  extraBanners?: {id:string;desktop:string;mobile:string}[];
   phone: string;
   telegram: string;
   max: string;
@@ -113,7 +114,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     dealerId: id,
     citySlug: id === PILOT_DEALER_ID ? "nvkz" : "",
     slug: id === PILOT_DEALER_ID ? "topavto" : "",
-    profileEnabled: false,
+    profileEnabled: true,
     servicePricing: {},
     catalogMarkets: id === PILOT_DEALER_ID ? DEALER_MARKETS.map(m=>m.id) : [],
     buyersEnabled: id === PILOT_DEALER_ID,
@@ -127,6 +128,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     logoDark: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
     banner: "",
     bannerMobile: "",
+    extraBanners: [],
     phone: "",
     telegram: "",
     max: "",
@@ -381,6 +383,7 @@ export function normalizeShowcase(
     logoDark: mediaUrl(raw.logoDark, id),
     banner: mediaUrl(raw.banner, id),
     bannerMobile: mediaUrl(raw.bannerMobile, id),
+    extraBanners: (Array.isArray(raw.extraBanners)?raw.extraBanners:[]).slice(0,4).map((b:any,i:number)=>({id:text(b.id,80)||`banner-${i}`,desktop:mediaUrl(b.desktop,id),mobile:mediaUrl(b.mobile,id)})),
     phone: text(raw.phone, 60),
     telegram: contactUrl(raw.telegram, "telegram"),
     max: contactUrl(raw.max, "max"),
@@ -490,8 +493,7 @@ export function normalizeShowcase(
     const c = calculateSpecial(s, o);
     if (offerSectionEnabled(s,o) && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
-  if (s.profileEnabled && (!s.phone || !s.offices.length))
-    throw Error("Для публикации дилера нужны телефон и хотя бы один офис");
+  if(new Set(s.extraBanners?.map(b=>b.id)).size!==s.extraBanners?.length)throw Error("Баннеры не должны повторяться");
   return s;
 }
 

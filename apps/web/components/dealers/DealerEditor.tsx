@@ -173,14 +173,6 @@ export function DealerEditor({
       </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
       <div className="dealer-editor-content" data-live-preview={showLivePreview}><div className="dealer-editor-settings">
 
-      {!["overview","subscription","administration","offers"].includes(tab)&&<aside className="dealer-editor-toolbar" aria-label="Сохранение настроек">
-       <section className="dealer-editor-panel space-y-3">
-        <div className="dealer-save-status"><span className="dw-badge">{demo?"Демо":s.profileEnabled?"Страница включена":"Страница скрыта"}</span></div>
-
-        <button type="button" className={button+' inline-flex items-center justify-center gap-2'} onClick={event=>{if(demo)openDemoPreview(event);else window.open(tab==='offers'&&active?`${specialPath(s.dealerId,active.id)}?preview=1`:`/dealers/${s.dealerId}?preview=1`,'_blank','noopener,noreferrer');}}><Eye size={17}/>Предпросмотр</button>
-
-       </section>
-</aside>}
       {tab==='overview'&&<div className="space-y-5">
        <section className="dealer-editor-panel"><p className="dw-eyebrow">Ваша компания</p><h2 className="dw-title">{s.name}</h2><p className="dw-muted">Страница, автомобили и обращения — всё начинается здесь.</p><div className="mt-5 flex flex-wrap gap-3"><button type="button" className="dw-primary" onClick={()=>setTab('offers')}><Car size={18}/> Добавить автомобиль</button><Link onClick={openDemoPreview} className={button+' inline-flex items-center gap-2'} href={demo?'#':`/dealers/${s.dealerId}?preview=1`} target={demo?undefined:'_blank'}>Посмотреть страницу <ArrowUpRight size={16}/></Link></div></section>
        <div className="dw-grid dealer-overview-stats">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
@@ -195,6 +187,7 @@ export function DealerEditor({
           <section className="dealer-editor-panel space-y-5">
             <Toggle
               label="Показывать публичную страницу дилера"
+              status={s.profileEnabled?"Активна":"Скрыта"}
               value={s.profileEnabled}
               onChange={(v) => patch({ profileEnabled: v })}
             />
@@ -226,22 +219,16 @@ export function DealerEditor({
                 onChange={(e) => patch({ description: e.target.value })}
               />
             </label>
-            {fullAccess&&<div className="grid gap-4 md:grid-cols-2">
+            <div className="dealer-brand-fields">
               {[
                 ["headerIcon", "Иконка в шапке"],
                 ["logoLight", "Логотип для светлой темы"],
                 ["logoDark", "Логотип для тёмной темы"],
-                ["banner", "Баннер для компьютера"],
-                ["bannerMobile", "Баннер для телефона"],
-              ].map(([key, label]) => (
-                <section className="space-y-2" key={key} aria-label={label}>
+
+              ].filter(()=>fullAccess).map(([key, label]) => (
+                <section className={`dealer-brand-field dealer-brand-${key}`} key={key} aria-label={label}>
                   <h3>{label}</h3>
                   {key === "headerIcon" && <p className="text-xs text-[var(--ac-muted)]">Квадратное изображение от 128 × 128 px. Показывается рядом с названием компании при просмотре её каталога и автомобилей.</p>}
-                  {key === "banner" && <>
-                    <p className="text-xs text-[var(--ac-muted)]">Не меньше 1600 × 400 px, рекомендуем 2400 × 600 px (4:1). Желательно до 1 МБ, максимум 8 МБ. JPG, PNG или WebP. Загрузите файл или вставьте прямую ссылку ниже.</p>
-                    {s.dealerId === "dealer_topavto" && <button type="button" className={button} onClick={() => patch({ banner: "/dealers/topavto-banner-v3.webp" })}>Использовать новый баннер TopAvto</button>}
-                  </>}
-                  {key === "bannerMobile" && <p className="text-xs text-[var(--ac-muted)]">Не меньше 800 × 600 px, рекомендуем 1200 × 900 px (4:3). Желательно до 500 КБ, максимум 8 МБ. JPG, PNG или WebP, файл или прямая ссылка. Пока отдельный баннер не загружен, используется баннер для компьютера. Изображения других пропорций обрезаются по центру; логотип добавляется отдельно.</p>}
                   <Photos
                     dealerId={s.dealerId}
                     single
@@ -255,7 +242,12 @@ export function DealerEditor({
                 </section>
               ))}
             </div>
-            }
+            <section className="dealer-banner-settings"><h2>Баннеры профиля</h2><p className="dw-muted">Один баннер доступен по умолчанию. С подпиской — до пяти: посетитель переключает их сам.</p>
+             {[{id:'main',desktop:s.banner,mobile:s.bannerMobile||''},...(fullAccess?s.extraBanners||[]:[])].map((b,index)=><section key={b.id} className="dealer-banner-pair" aria-label={`Баннер ${index+1}`}><header><h3>Баннер {index+1}{index===0?' · основной':''}</h3>{index>0&&<button type="button" className={button} onClick={()=>{if(confirm('Удалить этот баннер?'))patch({extraBanners:s.extraBanners?.filter(x=>x.id!==b.id)});}}>Удалить</button>}</header><div className="dealer-brand-fields">
+              {(['desktop','mobile'] as const).map(device=><section key={device} className="dealer-brand-field" aria-label={device==='desktop'?'Баннер для компьютера':'Баннер для телефона'}><h4>{device==='desktop'?'Для компьютера':'Для телефона'}</h4><p className="dw-muted">{device==='desktop'?'От 1600 × 400 px · рекомендуем 2400 × 600 (4:1), до 1 МБ.':'От 800 × 600 px · рекомендуем 1200 × 900 (4:3), до 500 КБ. Без отдельной версии используется баннер для компьютера.'} JPG, PNG, WebP — максимум 8 МБ. Важные детали размещайте по центру.</p><Photos dealerId={s.dealerId} purpose={index===0?"profile-banner":undefined} single value={b[device]?[{id:device,url:b[device],caption:''}]:[]} onChange={p=>index===0?patch({[device==='desktop'?'banner':'bannerMobile']:p[0]?.url||''}):patch({extraBanners:s.extraBanners?.map(x=>x.id===b.id?{...x,[device]:p[0]?.url||''}:x)})}/></section>)}
+             </div></section>)}
+             {fullAccess&&(s.extraBanners?.length||0)<4&&<button type="button" className={button} onClick={()=>patch({extraBanners:[...(s.extraBanners||[]),{id:crypto.randomUUID(),desktop:'',mobile:''}]})}>Добавить баннер</button>}
+            </section>
             <Field label="Телефон компании (только для АвтоЦены)" value={s.phone} onChange={phone=>patch({phone})}/><p className="text-sm text-[var(--ac-muted)]">Обращения поступают через АвтоЦену. Телефоны и мессенджеры компании в публичном профиле не показываются.</p>
           </section>
         )}

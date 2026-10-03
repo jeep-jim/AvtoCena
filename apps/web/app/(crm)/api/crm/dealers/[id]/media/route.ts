@@ -21,7 +21,7 @@ export async function POST(
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });
   try {
     const { id } = await params;
-    if(!isPlatformOwner(await getCurrentUser())&&!dealerAccessLevel(id,await readMembership(id)).full)return NextResponse.json({error:"Загрузка фото доступна во время пробного или оплаченного периода"},{status:403});
+
     if (!(await findDealer(id)))
       return NextResponse.json(
         { error: "Компания не найдена" },
@@ -30,6 +30,7 @@ export async function POST(
     if (Number(req.headers.get("content-length")) > 9 * 1024 * 1024)
       throw Error("Размер изображения — до 8 МБ");
     const form = await req.formData();
+    if(form.get("purpose")!=="profile-banner"&&!isPlatformOwner(await getCurrentUser())&&!dealerAccessLevel(id,await readMembership(id)).full)return NextResponse.json({error:"Загрузка фото доступна во время пробного или оплаченного периода"},{status:403});
     const file = form.get("file");
     if (file instanceof File && file.size > 8 * 1024 * 1024)
       throw Error("Размер изображения — до 8 МБ");

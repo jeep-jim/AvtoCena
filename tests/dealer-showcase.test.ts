@@ -82,7 +82,7 @@ test("legacy gallery and affiliate default remain enabled, new features off", as
   const s = defaultShowcase("dealer_topavto");
   assert.equal(s.buyerPhotos.length, 24);
   assert.equal(s.buyersEnabled, true);
-  assert.equal(s.profileEnabled, false);
+  assert.equal(s.profileEnabled, true);
   assert.equal(s.specialsEnabled, false);
   assert.equal(defaultShowcase("dealer_other").buyerPhotos.length, 0);
   assert.equal(defaultShowcase("dealer_other").buyersEnabled, false);
@@ -153,9 +153,7 @@ test("publish validation, social allowlist and isolated dealer image references"
   );
   const emptyEnabled=normalizeShowcase({...s,specialsEnabled:true,offers:[]},s.dealerId,1);
   assert.equal(emptyEnabled.specialsEnabled,true);assert.deepEqual(publicRail(emptyEnabled),[]);
-  assert.throws(() =>
-    normalizeShowcase({ ...s, profileEnabled: true }, s.dealerId, 1),
-  );
+  assert.equal(normalizeShowcase({ ...s, profileEnabled: true }, s.dealerId, 1).profileEnabled,true);
   assert.equal(
     normalizeShowcase(
       { ...s, offers: [{ ...offer, status: "draft", priceUsd: 0 }] },
