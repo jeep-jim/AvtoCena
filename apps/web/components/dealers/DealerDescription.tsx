@@ -17,6 +17,6 @@ export function DealerDescription({text}:{text:string}){
   };measure();const observer=new ResizeObserver(measure);observer.observe(el);docFonts(el).then(measure);return()=>observer.disconnect();
  },[text]);
  const more=short!==text;
- return <div className="dealer-intro-wrap"><p ref={ref} className={`dealer-intro ${expanded?'is-expanded':''}`}>{expanded?text:short}{more&&<button type="button" className="dealer-expand" aria-expanded={expanded} aria-label={expanded?'Свернуть описание':'Развернуть описание'} onClick={()=>setExpanded(!expanded)}>{expanded?<ChevronUp size={18}/>:<ChevronDown size={18}/>}</button>}</p></div>;
+ return <div className="dealer-intro-wrap"><p ref={ref} role={more?"button":undefined} tabIndex={more?0:undefined} aria-label={more?(expanded?"Свернуть описание":"Развернуть описание"):undefined} aria-expanded={more?expanded:undefined} onClick={()=>{if(more)setExpanded(!expanded);}} onKeyDown={e=>{if(more&&(e.key==="Enter"||e.key===" ")){e.preventDefault();setExpanded(!expanded);}}} className={`dealer-intro ${expanded?'is-expanded':''}`}>{expanded?text:short}{more&&<span className="dealer-expand" aria-hidden="true">{expanded?<ChevronUp size={18}/>:<ChevronDown size={18}/>}</span>}</p></div>;
 }
 function docFonts(el:HTMLElement){return el.ownerDocument.fonts?.ready||Promise.resolve();}

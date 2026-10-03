@@ -57,7 +57,7 @@ const css = await postcss([
   tailwindcss({
     content: [
       "tests/browser/dealer-workspace-fixture.tsx",
-      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal}/**/*.tsx",
+      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal,ui}/**/*.tsx",
       "apps/web/app/(public)/favorites/page.tsx",
     ],
   }),
@@ -124,7 +124,7 @@ try {
   await page.getByRole('button',{name:'Развернуть описание'}).click();assert.ok(await page.locator('.dealer-intro').evaluate(el=>el.clientHeight>parseFloat(getComputedStyle(el).lineHeight)*2+1));await page.getByRole('button',{name:'Свернуть описание'}).click();
   await page.screenshot({path:`${out}/profile-${width}-${theme}-${verified?'verified':'regular'}.png`});
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();assert.equal(await page.locator('.dealer-logo-dialog .dealer-logo-verified').count(),verified?1:0);await page.screenshot({path:`${out}/logo-${width}-${theme}-${verified}.png`});await page.getByRole('button',{name:'Закрыть логотип'}).click();
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
+  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.close();
  }
  if(!process.env.EDITOR_ONLY)for(const theme of ['light','dark']){
@@ -135,14 +135,32 @@ try {
   await page.locator('.dealer-profile-hero .dealer-banner-dots button').nth(4).click();await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.decode());assert.ok((await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/buyers/7.jpg'));
   await page.locator('.dealer-profile-hero').getByRole('button',{name:'Рассмотреть баннер'}).click();await page.locator('.dealer-banner-dialog[open]').waitFor();await page.getByRole('button',{name:'Предыдущий баннер'}).click();await page.getByRole('button',{name:'Закрыть баннер'}).click();
   const face=await page.locator('.dealer-avatar-face').evaluate(el=>getComputedStyle(el).backgroundColor);assert.notEqual(face,'rgb(209, 250, 229)');
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Медиа',exact:true}).click();
+  await page.locator('.dealer-dock').getByRole('button',{name:'Медиа',exact:true}).click();
   assert.ok(await page.locator('.dealer-photo-grid .ac-buyers-rail').evaluate(el=>el.getBoundingClientRect().width>300));
-  await page.evaluate(()=>scrollTo(0,200));assert.ok(await page.locator('.dealer-profile-hero').evaluate(el=>Math.abs(el.getBoundingClientRect().top)<2),'cover stays pinned while sheet moves');
-  await page.screenshot({path:`${out}/media-${theme}.png`});
-  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByText('Сообщение компании',{exact:true}).waitFor();await page.screenshot({path:`${out}/reviews-${theme}.png`});
+  assert.equal(await page.getByRole('dialog',{name:'Медиа',exact:true}).count(),1);
+  await page.screenshot({path:`${out}/media-${theme}.png`});await page.getByRole('button',{name:'Закрыть медиа'}).click();
+  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByText('Сообщение компании',{exact:true}).waitFor();await page.screenshot({path:`${out}/reviews-${theme}.png`});await page.getByRole('button',{name:'Закрыть отзывы'}).click();
   await page.locator('.dealer-dock').getByRole('button',{name:'Заявка',exact:true}).click();await page.locator('.ac-lead-dialog').waitFor();await page.screenshot({path:`${out}/request-${theme}.png`});assert.equal(await page.locator('.ac-lead-dialog form').count(),1);await page.keyboard.press('Escape');
   await page.goto(origin+'?view=profile&empty=1');await page.locator('.dealer-default-logo').first().evaluate(img=>img.decode());assert.ok((await page.locator('.dealer-profile-hero .dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/dealers/default-cover.svg'));assert.equal(await page.getByText('Каталог компании',{exact:true}).count(),0);
   await page.close();
+ }
+ if(!process.env.EDITOR_ONLY)for(const width of [390,1440])for(const theme of ['light','dark']){
+  const page=await browser.newPage({viewport:{width,height:950},hasTouch:true});let subscribed=false,count=2,fail=false;const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/api/**',async r=>{if(r.request().url().includes('/subscription')){if(r.request().method()==='PUT'){if(fail)return r.fulfill({status:503,json:{error:'Временная ошибка'}});const next=r.request().postDataJSON().subscribed;if(next!==subscribed)count+=next?1:-1;subscribed=next;}return r.fulfill({json:{count,subscribed}});}if(r.request().url().includes('brand-counts'))return r.fulfill({json:{counts:{Toyota:3,BMW:2,Audi:2,Honda:2,Mazda:1,Lexus:1,Nissan:1,Kia:1}}});return r.fulfill({json:{}});});
+  await page.goto(origin+'?view=profile&interactive=1&long=1');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  const subscribe=page.getByRole('button',{name:'Подписаться на дилера',exact:true});await subscribe.waitFor();await page.waitForFunction(()=>!document.querySelector('.dealer-subscription-control button').disabled);assert.equal(await page.locator('.dealer-cover-actions').count(),0);assert.equal(await page.locator('.dealer-profile-tabs').count(),0);
+  await subscribe.click();await page.getByRole('button',{name:'Отписаться от дилера',exact:true}).waitFor();assert.equal(await page.locator('.dealer-subscription-control strong').textContent(),'3');
+  await page.reload();await page.getByRole('button',{name:'Отписаться от дилера',exact:true}).waitFor();assert.equal(await page.locator('.dealer-subscription-control strong').textContent(),'3');
+  await page.goto(origin+'?view=favorites');await page.getByRole('heading',{name:'Подписки на дилеров'}).waitFor();assert.equal(await page.locator('.ac-subscribed-dealers article').count(),1);await page.getByRole('button',{name:'Отписаться от ТопАвто',exact:true}).click();await page.locator('.ac-subscribed-dealers').waitFor({state:'detached'});assert.equal(count,2);
+  await page.goto(origin+'?view=profile&interactive=1&long=1');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.waitForFunction(()=>!document.querySelector('.dealer-subscription-control button').disabled);fail=true;await page.getByRole('button',{name:'Подписаться на дилера',exact:true}).click();await page.getByText('Временная ошибка',{exact:true}).waitFor();assert.equal(await page.locator('.dealer-subscription-control strong').textContent(),'2');fail=false;
+  const description=page.getByRole('button',{name:'Развернуть описание',exact:true});await description.click({position:{x:20,y:10}});await page.getByRole('button',{name:'Свернуть описание',exact:true}).click({position:{x:20,y:10}});
+  for(const selector of ['.ac-currency-rates-strip','.ac-brand-rail[aria-label="Марки автомобилей"]']){const rail=page.locator(selector);await rail.scrollIntoViewIfNeeded();const before=await page.evaluate(()=>scrollY);await rail.hover();await page.mouse.wheel(0,180);await page.waitForTimeout(200);assert.ok(await page.evaluate(y=>scrollY>y+40,before),'vertical wheel scrolls page over '+selector);if(width===390){await rail.scrollIntoViewIfNeeded();const box=await rail.boundingBox(),start=await page.evaluate(()=>scrollY),cdp=await page.context().newCDPSession(page);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+70,y:box.y+box.height/2}]});for(let i=1;i<=5;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:box.x+70,y:box.y+box.height/2-i*22}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(250);assert.ok(await page.evaluate(y=>scrollY>y+30,start),'touch scrolls page over '+selector);await cdp.detach();}}
+  await page.getByRole('button',{name:'Показать все марки'}).click();await page.getByRole('dialog',{name:'Все марки автомобилей'}).waitFor();await page.waitForTimeout(250);await page.screenshot({path:`${out}/brands-${width}-${theme}.png`});await page.keyboard.press('Escape');await page.locator('.ac-public-sheet').waitFor({state:'detached'});
+  await page.getByRole('button',{name:'Открыть курс: Японская иена (JPY)'}).click();await page.getByRole('dialog',{name:'Курсы валют'}).waitFor();await page.keyboard.press('Escape');await page.locator('.ac-public-sheet').waitFor({state:'detached'});
+  await page.locator('.dealer-profile-metrics button').nth(1).click();assert.equal(await page.locator('.dealer-car').count(),0);assert.equal(await page.locator('.dealer-main-offers a').count(),1);
+  await page.locator('.dealer-dock').getByRole('button',{name:'Каталог',exact:true}).click();await page.waitForFunction(()=>scrollY<5);
+  const tools=page.locator('.ac-public-footer-tools');assert.equal(await tools.getByRole('button',{name:'База знаний',exact:true}).isDisabled(),true);assert.equal(await tools.getByRole('button',{name:'АвтоРасчёт',exact:true}).count(),0);await tools.scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/footer-${width}-${theme}.png`});await page.goto(origin+'?view=profile&interactive=1&knowledge=1');await page.locator('.ac-public-footer-tools').getByRole('link',{name:'База знаний',exact:true}).waitFor();
+  assert.deepEqual(errors,[]);await page.close();console.log(width,theme,'subscriptions, favorites, failure recovery, touch/wheel rails and shared sheets OK');
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});const errors=[];page.on('pageerror',e=>errors.push(e.message));let saved=null,media=0;
@@ -158,7 +176,7 @@ try {
   await preview.locator('.dealer-cover').evaluate(img=>img.decode());assert.ok((await preview.locator('.dealer-cover').evaluate(img=>img.currentSrc)).endsWith('/buyers/2.jpg'),'preview selects mobile source');
   await page.screenshot({path:`${out}/editor-profile-${width}-${theme}.png`});
   await page.reload();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Компания Новое имя');assert.ok(await page.getByRole('region',{name:'Баннер для телефона',exact:true}).locator('img').count());
-  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await preview.getByRole('heading',{name:'Жизнь компании',exact:true}).waitFor();assert.ok(await preview.locator('.dealer-photo-grid .ac-buyers-rail').evaluate(el=>el.getBoundingClientRect().width>280));await page.screenshot({path:`${out}/editor-buyers-${width}-${theme}.png`});
+  await page.getByRole('button',{name:'Фото выдач',exact:true}).click();await preview.getByRole('dialog',{name:'Медиа',exact:true}).waitFor();assert.ok(await preview.locator('.dealer-photo-grid .ac-buyers-rail').evaluate(el=>el.getBoundingClientRect().width>280));await page.screenshot({path:`${out}/editor-buyers-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Адреса',exact:true}).click();await page.getByLabel('Адрес',{exact:true}).fill('Новый адрес, 77');await preview.getByLabel('Адрес офиса в профиле',{exact:true}).locator('option').filter({hasText:'Новый адрес, 77'}).waitFor({state:'attached'});
   await page.screenshot({path:`${out}/editor-offices-${width}-${theme}.png`});
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Новые реквизиты');await preview.locator('.dealer-contact-sheet').getByText('ООО Новые реквизиты',{exact:true}).waitFor();await page.getByLabel('Банк',{exact:true}).fill('Закрытый банк');assert.equal(await preview.getByText('Закрытый банк',{exact:true}).count(),0);

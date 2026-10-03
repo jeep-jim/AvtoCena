@@ -1,5 +1,6 @@
 "use client";
 
+import {readDealerSubscriptions} from "@/lib/dealers/subscriptions-client";
 import Link from "next/link";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import { PublicStaffAlerts } from "../crm/PublicStaffAlerts";
@@ -21,7 +22,7 @@ type Theme = "dark" | "light";
 function readCount() {
   try {
     const items = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
-    return Array.isArray(items) ? items.length : 0;
+    return (Array.isArray(items) ? items.length : 0)+readDealerSubscriptions().length;
   } catch {
     return 0;
   }

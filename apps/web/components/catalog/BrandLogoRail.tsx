@@ -1,4 +1,5 @@
 "use client";
+import {PublicSheet} from "@/components/ui/PublicSheet";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 
@@ -219,14 +220,6 @@ export function BrandLogoRail({
   }, [activeBrands, query]);
   const railBrands = showSearch && query.trim() ? filtered : orderedBrands;
 
-  useEffect(() => {
-    if (!open) return;
-    const old = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", escape);
-    return () => { document.body.style.overflow = old; window.removeEventListener("keydown", escape); };
-  }, [open]);
 
   useEffect(() => {
     let cancelled = false;
@@ -251,13 +244,9 @@ export function BrandLogoRail({
     const onWheel = (event: globalThis.WheelEvent) => {
       const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
       if (maxScroll <= 2) return;
-      const dominant = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      if (Math.abs(dominant) < 0.5) return;
-      // While the pointer is over the brand rail, the wheel belongs only to the
-      // rail. Do not let the page drift vertically at the same time.
-      event.preventDefault();
-      event.stopPropagation();
-      rail.scrollLeft = Math.max(0, Math.min(maxScroll, rail.scrollLeft + dominant));
+      if(Math.abs(event.deltaY)>=Math.abs(event.deltaX)&&!event.shiftKey)return;
+      const delta=event.shiftKey?event.deltaY:event.deltaX;
+      event.preventDefault();rail.scrollLeft=Math.max(0,Math.min(maxScroll,rail.scrollLeft+delta));
     };
     rail.addEventListener("wheel", onWheel, { passive: false });
     return () => rail.removeEventListener("wheel", onWheel);
@@ -351,7 +340,7 @@ export function BrandLogoRail({
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
       <div
         ref={railRef}
-        className="ac-hide-scrollbar flex min-w-0 cursor-grab touch-pan-x items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 [&.is-dragging]:cursor-grabbing [&.is-dragging]:scroll-auto"
+        className="ac-hide-scrollbar flex min-w-0 cursor-grab touch-auto items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 [&.is-dragging]:cursor-grabbing [&.is-dragging]:scroll-auto"
         style={{ WebkitOverflowScrolling: "touch" }}
         onPointerDown={beginMouseDrag}
         onPointerMove={moveMouseDrag}
@@ -369,7 +358,7 @@ export function BrandLogoRail({
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>
 
-    {open ? <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/80 p-2.5 backdrop-blur-sm md:p-5" onClick={close} role="dialog" aria-modal="true" aria-label="Все марки автомобилей">
+    {open ? <PublicSheet title="Все марки автомобилей" onClose={close} showHeader={false} maxWidth={1152}>
       <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()}>
         <div className="sticky -top-4 z-10 bg-[var(--ac-surface)] pb-4 pt-1 md:-top-7 md:pt-2">
           <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="mr-7 min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500 md:mr-14">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>
@@ -380,6 +369,6 @@ export function BrandLogoRail({
         </div>
         {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
-    </div> : null}
+    </PublicSheet> : null}
   </>;
 }
