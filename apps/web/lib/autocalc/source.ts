@@ -1,3 +1,4 @@
+import {sourceImages} from './source-images';
 import { lookup } from 'node:dns/promises';
 import { request } from 'node:https';
 import { isIP } from 'node:net';
@@ -58,7 +59,7 @@ export function extractSource(html:string,url:string) {
   const engine=resolve(car.vehicleEngine) || {};
   const meta=(key:string)=>{for(const m of html.matchAll(/<meta\b[^>]*>/gi)){const attrs=Object.fromEntries([...m[0].matchAll(/([\w:-]+)\s*=\s*["']([^"']*)["']/g)].map(x=>[x[1].toLowerCase(),x[2]]));if(attrs.property===key||attrs.name===key)return attrs.content || '';}return '';};
   const title=text(car.name || meta('og:title') || meta('twitter:title') || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]);
-  const photos=[car.image || meta('og:image') || meta('twitter:image')].flat().map(resolve).map(x=>typeof x==='object'?x?.contentUrl||x?.url:x).filter(Boolean).slice(0,20).flatMap(x=>{try{return [sourceUrl(new URL(x,url).href).href];}catch{return [];}});
+  const photos=sourceImages(html,url,[...[car.image].flat().filter(Boolean).map(resolve),meta('og:image'),meta('twitter:image')]).flatMap(x=>{try{return [sourceUrl(x).href];}catch{return [];}});
   const host=new URL(url).hostname;const hosts:Record<string,string>={'che168.com':'china','autohome.com.cn':'china','dongchedi.com':'china','guazi.com':'china','encar.com':'korea','kcar.com':'korea','mobile.de':'europe','autoscout24.com':'europe','dubizzle.com':'uae','dubicars.com':'uae','myauto.ge':'georgia','pro-auctions.ru':'japan','sferacar.ru':'japan','akebono.world':'japan'};
   const market=Object.entries(hosts).find(([h])=>host===h||host.endsWith('.'+h))?.[1] || '';
   const draft:Record<string,string>={};

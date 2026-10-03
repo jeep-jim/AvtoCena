@@ -2,7 +2,7 @@ import {readMembership} from '@/lib/dealers/program-store';
 import {dealerAccessLevel} from '@/lib/dealers/program-model';
 import {isPlatformOwner} from '@/lib/platform-access';
 import {canManageDealer} from "@/lib/dealers/access";
-import { randomUUID } from "node:crypto";
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { getJsonStorage } from "@/lib/data";
@@ -41,7 +41,8 @@ export async function POST(
     const image = await prepareDealerImage(bytes);
     const storage = getJsonStorage();
     if (!storage.putBinary) throw Error("Загрузка временно недоступна");
-    const mediaId = randomUUID();
+    const hash = createHash("sha256").update(image).digest("hex").slice(0,32);
+    const mediaId = `${hash.slice(0,8)}-${hash.slice(8,12)}-${hash.slice(12,16)}-${hash.slice(16,20)}-${hash.slice(20)}`;
     await storage.putBinary(
       `dealers/showcase-media/${id}/${mediaId}.webp`,
       image,

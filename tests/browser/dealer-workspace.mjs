@@ -131,6 +131,15 @@ try{
    await page.getByLabel('Проверенный дилер',{exact:true}).waitFor();
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
    await page.locator('.dealer-offer-identity iframe').waitFor();
+   if(!stock){
+    assert.equal(await page.locator('.ac-offer-price-panel .ac-price').innerText(),'Выберите город');
+    await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).filter({visible:true}).last().click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Москва',exact:true}).click();
+    await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();await page.waitForFunction(()=>!history.state?.acOverlayStep);
+    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();
+    await page.evaluate(()=>{localStorage.setItem('avtocena_city','Красноярск');document.cookie='avtocena_city='+encodeURIComponent('Красноярск')+'; Path=/';const u=new URL(location.href);u.searchParams.delete('city');history.replaceState(history.state,'',u);window.dispatchEvent(new Event('avtocena:city-changed'));});
+    await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();assert.notEqual(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
+    await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+   }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
    if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(207, 229, 216)');
    if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
@@ -151,7 +160,7 @@ try{
    await page.evaluate(()=>window.scrollTo(0,0));
    await page.screenshot({path:`${out}/${width}-${theme}-public-${stock?'stock':'order'}.png`,fullPage:true});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer card overflow');
-   await page.evaluate(()=>localStorage.clear());
+   await page.evaluate(()=>{localStorage.clear();document.cookie='avtocena_city=; Max-Age=0; Path=/';});
   }
   await page.goto(origin+'?view=profile');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.locator('.dealer-identity-title h1').filter({hasText:'ТопАвто'}).waitFor();
@@ -204,14 +213,15 @@ try{
   if(width>=1280){const layout=await page.locator('.dealer-editor-layout').boundingBox(),actions=await page.locator('.dealer-offer-actions').boundingBox(),mode=await page.locator('.dealer-offer-mode-row').boundingBox();assert.ok(actions.x>mode.x+mode.width,'actions sit to the right');assert.ok(Math.abs(actions.y-layout.y)<2,'actions align with mode switch');assert.ok(await page.locator('.dealer-editor-sidebar .dw-demo-button').count()===1);}
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('sold');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'sold');await page.getByLabel('Статус',{exact:true}).selectOption('draft');assert.equal(await page.getByLabel('Статус автомобиля',{exact:true}).inputValue(),'draft');
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();await page.getByRole('button',{name:'Сохранено',exact:true}).waitFor();
-  await page.getByLabel('Куда',{exact:true}).fill('Красноярск');await page.getByText(/Ориентировочно:.*\$/).waitFor();
+  await page.getByLabel('Город для проверки расчёта',{exact:true}).fill('Красноярск');await page.getByText(/Ориентировочно:.*\$/).waitFor();
   assert.equal(await page.getByRole('link',{name:/Источник: Форекс/}).getAttribute('href'),'https://www.profinance.ru/chart/usdrub/');
   await page.getByRole('switch',{name:'Автоматически обновлять курс USD/RUB'}).click();assert.equal(await page.getByLabel('Курс USD/RUB',{exact:true}).isDisabled(),false);
   await page.getByLabel('Курс USD/RUB',{exact:true}).fill('80');await page.getByLabel('К курсу, ₽',{exact:true}).fill('2.5');assert.ok(await page.locator('.dealer-rate-total').innerText().then(t=>t.includes('82,5')));
   await page.getByRole('button',{name:'Обновить курс',exact:true}).click();await page.waitForFunction(()=>document.querySelector('.dealer-rate-total').innerText.includes('86,5'));assert.equal(await page.getByLabel('Курс USD/RUB',{exact:true}).isDisabled(),true);
-  await page.locator('.dealer-route-price input').fill('1050');await page.getByText('По тарифу: 1 050 $ · 5–10 дней',{exact:true}).waitFor();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Красноярск').usd,1050);
-  await page.getByRole('button',{name:'Добавить город доставки',exact:true}).click();await page.getByLabel('Новый город доставки',{exact:true}).fill('Томск');await page.getByLabel('Точный тариф, $',{exact:true}).fill('950');assert.ok(writes.at(-1).body.pricing.tariffs.every(t=>t.city));
-  await page.getByRole('button',{name:'Добавить тариф',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Томск').usd,950);
+  await page.getByLabel('Город 1',{exact:true}).fill('Красноярск');await page.getByLabel('Стоимость 1, $',{exact:true}).fill('1050');await page.getByText('По тарифу: 1 050 $ · 5–10 дней',{exact:true}).waitFor();await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('1050'));assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Красноярск').usd,1050);
+  await page.getByRole('button',{name:'Добавить город',exact:true}).click();assert.ok(writes.at(-1).body.pricing.tariffs.every(t=>t.city));await page.getByLabel('Город 3',{exact:true}).fill('Томск');await page.getByLabel('Стоимость 3, $',{exact:true}).fill('950');await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('950'));assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Томск').usd,950);
+  await page.getByLabel('Мощность ДВС / ЭВ, кВт',{exact:true}).fill('162');assert.ok(Math.abs(Number(await page.getByLabel('Мощность ДВС / ЭВ, л.с.',{exact:true}).inputValue())-162/.73549875)<.00001);await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('220.258702'));await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  const fold=page.locator('.dealer-offer-fields > details').last();await page.getByLabel('Таможня сверх цены, ₽',{exact:true}).scrollIntoViewIfNeeded();const summary=await fold.locator(':scope > summary').boundingBox();assert.ok(summary.y>=0&&summary.y<180,'collapse header remains visible');
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('published');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'draft');await page.getByText(/Для публикации Toyota RAV4 заполните:/).waitFor();
   await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();await page.getByLabel('Подзаголовок ленты',{exact:true}).fill('От 5 дней — автомобиль у вас дома');assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).getAttribute('maxlength'),'70');await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.specialSubtitleEnabled,true);
   await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).count(),0);await page.getByRole('switch',{name:'Подзаголовок',exact:true}).click();assert.equal(await page.getByLabel('Подзаголовок ленты',{exact:true}).inputValue(),'От 5 дней — автомобиль у вас дома');

@@ -10,8 +10,6 @@ export function powerUnitPatch(key: string, value: string, current: Draft = {}):
  const pair = pairs.find(keys => keys.includes(key as never));
  if (!pair) return {[key]: value};
  const [hp, kw] = pair;
- // Editing kW must preserve an existing hp value, including during clearing/retyping.
- if (key === kw && current[hp]?.trim()) return {[key]: value};
  return {[key]: value, [key === hp ? kw : hp]: converted(value, key === hp ? KW_PER_HP : 1 / KW_PER_HP)};
 }
 export function completePowerUnitDraft(input: Draft): Draft {

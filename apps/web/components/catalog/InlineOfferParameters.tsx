@@ -194,7 +194,7 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
   {afterPrice}
   <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
    <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} persistSelection={!canSave && !initialScenario} syncStored={!canSave && !initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
+   <CitySelector value={draft.deliveryCity||""} persistSelection={!initialScenario} syncStored={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
    <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
   </div>
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
@@ -268,7 +268,7 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
      {!["electric","hybrid"].includes(draft.fuel) ? field("powerKw","Мощность, кВт (если известна)",[],0.1,2000,undefined,"Мощность, кВт") : null}
     </div>
     {powerInfo?.borderline ? <details className={editorStyles.help}><summary>Почему повышенный утильсбор?</summary><RecyclingPowerExplanation info={powerInfo} /></details> : null}
-    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. При изменении л.с. кВт пересчитываются автоматически. Изменение кВт сохраняет указанные л.с.; пересчитанные значения не заменяют данные документов. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
+    {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. При изменении л.с. кВт пересчитываются автоматически. При изменении кВт л.с. также пересчитываются автоматически. Значения нужно сверить с документами. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
    </Tile>
    {showCommercial ? <Tile missing={["vehicleCategory","grossVehicleWeightKg","n1IceFuel"].some(key=>missingFields.has(key))} wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
     {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>

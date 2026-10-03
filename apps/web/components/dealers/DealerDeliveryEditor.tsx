@@ -1,26 +1,31 @@
 'use client';
-import {MapPin,Navigation,Plus,Trash2} from 'lucide-react';
-import {useState} from 'react';
+import {Plus,Trash2} from 'lucide-react';
+import {useEffect,useRef,useState} from 'react';
 import {DealerDeliveryCity} from './DealerDeliveryCity';
-import {Field,Toggle,button} from './DealerEditorFields';
-import {estimateDealerDelivery} from '@/lib/dealers/delivery-estimate';
+import {Field,button} from './DealerEditorFields';
+import {estimateDealerDelivery,deliveryDistance,deliveryLocation,deliveryCalibrationError} from '@/lib/dealers/delivery-estimate';
 import {normalizeCitySearch} from '@/lib/location/cities';
 import type {DealerShowcase,DeliveryTariff} from '@/lib/dealers/showcase-model';
-export function DealerDeliveryEditor({value,city,onCityChange,onChange,defaultDestination=false}:{value:DealerShowcase['pricing'];city:string;onCityChange:(city:string)=>void;onChange:(v:Partial<DealerShowcase['pricing']>)=>void;defaultDestination?:boolean}){
- const [draft,setDraft]=useState<{city:string;usd:number}|null>(null);
- const estimate=estimateDealerDelivery(value.originCity||'Бишкек',city,value.tariffs,value.distancePricing);
- const current=value.tariffs.find(t=>normalizeCitySearch(t.city)===normalizeCitySearch(city));
- const others=value.tariffs.filter(t=>t!==current);
- function edit(id:string,patch:Partial<DeliveryTariff>){onChange({tariffs:value.tariffs.map(t=>t.id===id?{...t,...patch}:t)});}
- function exact(usd:number){if(!city.trim())return;const next=current?{...current,usd}:{id:crypto.randomUUID(),city:city.trim(),usd,daysFrom:estimate?.daysFrom||5,daysTo:estimate?.daysTo||10};onChange({tariffs:current?value.tariffs.map(t=>t.id===current.id?next:t):[...value.tariffs,next]});}
+const empty=():DeliveryTariff=>({id:crypto.randomUUID(),city:'',usd:0,daysFrom:5,daysTo:10});
+const padded=(rows:DeliveryTariff[])=>[...rows,...Array.from({length:Math.max(0,2-rows.length)},empty)];
+export function DealerDeliveryEditor({value,city,onCityChange,onChange}:{value:DealerShowcase['pricing'];city:string;onCityChange:(city:string)=>void;onChange:(v:Partial<DealerShowcase['pricing']>)=>void;defaultDestination?:boolean}){
+ const [rows,setRows]=useState(()=>padded(value.tariffs));
+ const sent=useRef(JSON.stringify(value.tariffs));
+ useEffect(()=>{const next=JSON.stringify(value.tariffs);if(next!==sent.current){sent.current=next;setRows(padded(value.tariffs));}},[value.tariffs]);
+ const origin=value.originCity||'Бишкек';
+ function change(next:DeliveryTariff[]){setRows(next);const tariffs=next.filter(t=>t.city.trim());sent.current=JSON.stringify(tariffs);onChange({tariffs,distancePricing:true});}
+ function edit(id:string,patch:Partial<DeliveryTariff>){change(rows.map(t=>t.id===id?{...t,...patch}:t));}
+ const estimate=estimateDealerDelivery(origin,city,rows,true);
+ const distances=rows.map(t=>deliveryDistance(origin,t.city));
+ const calibrationError=deliveryCalibrationError(origin,rows);
  return <div className="dealer-delivery-editor">
-  <div className="dealer-pricing-heading"><div><h4>Маршрут и доставка</h4><p className="dealer-pricing-note">Точный тариф в долларах · тот же курс, что и для автомобиля</p></div><button type="button" className="dealer-route-add" aria-label="Добавить город доставки" title="Добавить город с точным тарифом" onClick={()=>setDraft({city:'',usd:0})}><Plus size={19}/><span>Добавить город</span></button></div>
-  <div className="dealer-route"><div className="dealer-route-point"><MapPin size={20}/><DealerDeliveryCity label="Откуда" value={value.originCity||'Бишкек'} onChange={originCity=>onChange({originCity})}/></div><div className="dealer-route-path" aria-hidden="true"><span/><Navigation size={17}/><span/></div><div className="dealer-route-point"><MapPin size={20}/><DealerDeliveryCity label={defaultDestination?'Куда по умолчанию':'Куда'} value={city} onChange={onCityChange}/></div><label className="dealer-route-price grid gap-1 text-sm">Доставка, $<input aria-label="Доставка, $" className="soft-input w-full min-w-0 rounded-xl px-3 py-2 text-sm" type="number" min="0" step="any" disabled={!city.trim()} value={estimate?.usd??current?.usd??''} placeholder="Точный тариф" onChange={e=>exact(Number(e.target.value))}/></label></div>
-  <p className="dealer-pricing-note">{estimate?`${estimate.estimated?'Ориентировочно':'По тарифу'}: ${estimate.usd.toLocaleString('ru-RU')} $ · ${estimate.daysFrom}–${estimate.daysTo} дней`:'Укажите город и точный тариф доставки.'}{estimate?.estimated?' Чтобы закрепить точную цену, укажите стоимость выше.':''}</p>
-  {current&&<div className="dealer-delivery-days"><Field label="От, дней" type="number" value={current.daysFrom} onChange={daysFrom=>edit(current.id,{daysFrom})}/><Field label="До, дней" type="number" value={current.daysTo} onChange={daysTo=>edit(current.id,{daysTo})}/></div>}
-  {others.length>0&&<div className="dealer-delivery-anchors"><h5>Точные тарифы в другие города</h5>{others.map(t=><div className="dealer-delivery-anchor" key={t.id}><MapPin size={18}/><DealerDeliveryCity label="Город" value={t.city} onChange={city=>edit(t.id,{city})}/><Field label="Доставка, $" type="number" value={t.usd} onChange={usd=>edit(t.id,{usd})}/><Field label="От, дней" type="number" value={t.daysFrom} onChange={daysFrom=>edit(t.id,{daysFrom})}/><Field label="До, дней" type="number" value={t.daysTo} onChange={daysTo=>edit(t.id,{daysTo})}/><button type="button" className={button+' dealer-tariff-delete'} aria-label={`Удалить тариф ${t.city||'без города'}`} onClick={()=>onChange({tariffs:value.tariffs.filter(x=>x.id!==t.id)})}><Trash2 size={17}/></button></div>)}</div>}
-  {draft&&<div className="dealer-tariff-draft"><DealerDeliveryCity label="Новый город доставки" value={draft.city} onChange={city=>setDraft({...draft,city})}/><Field label="Точный тариф, $" type="number" value={draft.usd} onChange={usd=>setDraft({...draft,usd})}/><button type="button" className={button} disabled={!draft.city.trim()||draft.usd<=0||!Number.isFinite(draft.usd)||value.tariffs.some(t=>normalizeCitySearch(t.city)===normalizeCitySearch(draft.city))} onClick={()=>{onChange({tariffs:[...value.tariffs,{id:crypto.randomUUID(),city:draft.city.trim(),usd:draft.usd,daysFrom:5,daysTo:10}]});setDraft(null);}}>Добавить тариф</button><button type="button" className={button} onClick={()=>setDraft(null)}>Отмена</button><p className="dealer-pricing-note">Укажите город и цену перевозчика. Срок по умолчанию 5–10 дней можно изменить после добавления.</p></div>}
-  <Toggle label="Оценивать доставку в другие города по расстоянию" value={value.distancePricing===true} onChange={distancePricing=>onChange({distancePricing})}/>
-  <p className="dealer-pricing-note">Тарифы сохраняются для всей компании. Два города с точными ценами дают ориентир для остальных направлений. Оценка по расстоянию между городами требует подтверждения перевозчика.</p>
+  <div className="dealer-pricing-heading"><div><h4>Расчёт доставки по России</h4><p className="dealer-pricing-note">Один город отправки → минимум два примера доставки</p></div><button type="button" className="dealer-route-add" onClick={()=>setRows([...rows,empty()])}><Plus size={19}/><span>Добавить город</span></button></div>
+  <DealerDeliveryCity label="Откуда" value={origin} invalid={!deliveryLocation(origin)} onChange={originCity=>onChange({originCity,distancePricing:true})}/>
+  <p className="dealer-pricing-note">Укажите минимум два города на разных расстояниях от места отправки — не ближе 100 км — и стоимость доставки в каждый. По этим примерам рассчитаем стоимость для города покупателя.</p>
+  <div className="dealer-delivery-anchors">{rows.map((t,i)=><fieldset key={t.id} className="rounded-2xl border border-[var(--ac-border)] p-4 space-y-3"><legend className="px-2 text-sm font-bold">Пример доставки {i+1}</legend><div className="grid grid-cols-2 gap-3"><DealerDeliveryCity label={`Город ${i+1}`} value={t.city} invalid={distances[i]===null||distances[i]!<100||rows.some((r,j)=>j!==i&&normalizeCitySearch(r.city)===normalizeCitySearch(t.city))} onChange={city=>edit(t.id,{city})}/><Field label={`Стоимость ${i+1}, $`} type="number" value={t.usd} invalid={!(t.usd>0)} onChange={usd=>edit(t.id,{usd})}/><Field label={`От, дней (${i+1})`} type="number" value={t.daysFrom} onChange={daysFrom=>edit(t.id,{daysFrom})}/><Field label={`До, дней (${i+1})`} type="number" value={t.daysTo} onChange={daysTo=>edit(t.id,{daysTo})}/></div><p className="dealer-pricing-note">{distances[i]!==null?`Расстояние между городами: ${Math.round(distances[i]!)} км. Для примера нужно от 100 км.`:'Выберите город из списка.'}</p>{rows.length>2&&<button type="button" className={button} aria-label={`Удалить тариф ${t.city||'без города'}`} onClick={()=>change(rows.filter(r=>r.id!==t.id))}><Trash2 size={16}/> Удалить пример</button>}</fieldset>)}</div>
+  {calibrationError&&<p className="text-sm text-red-500">{calibrationError}</p>}
+  <DealerDeliveryCity label="Город для проверки расчёта" value={city} onChange={onCityChange}/>
+  <p className="dealer-pricing-note">{estimate?`${estimate.estimated?'Ориентировочно':'По тарифу'}: ${estimate.usd.toLocaleString('ru-RU')} $ · ${estimate.daysFrom}–${estimate.daysTo} дней`:'Для расчёта нужны известные города, разные расстояния и цены, не уменьшающиеся с расстоянием.'}</p>
+  <p className="dealer-pricing-note">Примеры общие для автомобилей компании. Покупатель увидит доставку в свой город. Оценка по расстоянию между городами требует подтверждения перевозчика.</p>
  </div>;
 }

@@ -1,6 +1,6 @@
 import {TOPAVTO_DEALER} from '../topavto-dealer';
 import {normalizeRequisites, EMPTY_REQUISITES, type DealerRequisites} from './requisites';
-import {estimateDealerDelivery} from './delivery-estimate';
+import {estimateDealerDelivery,deliveryCalibrationError} from './delivery-estimate';
 import {normalizeDealerServicePricing,type DealerServicePricing} from "./service-pricing";
 import {DEALER_MARKETS,dealerMarkets,type DealerMarket} from './catalog-markets';
 import {validProfilePart} from './profile-url';
@@ -176,11 +176,11 @@ export function specialPath(dealerId: string, id: string) {
 export type OfferAvailability = "order" | "stock";
 export const offerAvailability = (o: SpecialOffer): OfferAvailability => o.availability === "stock" ? "stock" : "order";
 export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) === "stock" ? "В наличии" : "Под заказ";
-export const offerSectionEnabled = (s: DealerShowcase, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
+export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled">, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
 export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
 export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
 export function calculateSpecial(
-  s: DealerShowcase,
+  s: Pick<DealerShowcase,"pricing"|"offices"|"dealerId">,
   o: SpecialOffer,
   city = (s.pricing.distancePricing?o.defaultCity:"") || s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
@@ -195,8 +195,10 @@ export function calculateSpecial(
       lines:[{id:"vehicle",title:"Цена автомобиля",amountRub:o.priceRub||0}],totalRub:errors.length?null:o.priceRub!};
   }
   const p = s.pricing,
-    tariff = estimateDealerDelivery(p.originCity||'Бишкек',city,p.tariffs,p.distancePricing);
+    tariff = estimateDealerDelivery(p.originCity||'Бишкек',city,p.tariffs,true);
   const errors: string[] = [];
+  const calibrationError=deliveryCalibrationError(p.originCity||"Бишкек",p.tariffs);
+  if(calibrationError)errors.push(calibrationError);
   if (!(p.usdRub > 0)) errors.push("Укажите курс USD/RUB");
   const rateTime = Date.parse(p.rateAt);
   if (
@@ -323,8 +325,9 @@ function listingUrl(value: unknown) {
 }
 function photos(v: unknown, id: string, max = 40): DealerPhoto[] {
   if (!Array.isArray(v)) return [];
-  if (v.length > max) throw Error(`Можно загрузить не более ${max} фотографий`);
-  return v
+  v = [...new Map(v.map(p=>[p.url,p])).values()];
+  if ((v as any[]).length > max) throw Error(`Можно загрузить не более ${max} фотографий`);
+  return (v as any[])
     .map((p) => ({
       id: text(p.id, 80),
       url: mediaUrl(p.url, id),
@@ -476,7 +479,7 @@ export function normalizeShowcase(
       mileageKm: number(o.mileageKm, 0, 1e7),
       description: text(o.description, 8000),
       equipment: text(o.equipment, 8000),
-      photos: photos(o.photos, id, 40),
+      photos: photos(o.photos, id, 30),
       priceUsd: number(o.priceUsd, 0, 1e7),
       customsIncluded: o.customsIncluded === true,
       customsExtraRub: number(o.customsExtraRub, 0, 1e8),

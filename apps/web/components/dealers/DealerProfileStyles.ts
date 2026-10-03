@@ -108,7 +108,8 @@ body:has(.dealer-profile) .ac-public-header{background:color-mix(in srgb,var(--a
 @media(max-width:800px){.dealer-profile-metrics{min-height:46px;margin-bottom:0}.dealer-profile-metrics button{min-height:46px}}
 
 .dealer-avatar-centered .dealer-avatar-face{background:var(--ac-surface)}
-.dealer-identity-row>.dealer-avatar-centered{border-color:var(--ac-text)}
+.dealer-identity-row>.dealer-avatar-centered{border-color:rgb(32 39 51 / .5)}
+html[data-theme=light] .dealer-identity-row>.dealer-avatar-centered{border-color:rgb(255 255 255 / .5)}
 html[data-theme] body .dealer-profile-actions>button{background:#00a5dc;color:#fff;-webkit-text-fill-color:#fff}
 html[data-theme] body .dealer-subscription-control>button,html[data-theme] body .dealer-subscription-control>button[aria-pressed=true]{background:#ed3d5318;color:#ed233a;-webkit-text-fill-color:#ed233a}
 .dealer-subscription-control strong{background:transparent}
