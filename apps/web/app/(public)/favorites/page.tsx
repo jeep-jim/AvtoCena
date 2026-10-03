@@ -64,7 +64,7 @@ export default function FavoritesPage() {
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-6xl px-4 py-10 md:px-8">
       <h1 className="text-4xl font-black tracking-[-0.04em] md:text-6xl">Избранное</h1>
-      <p className="mt-3 max-w-2xl text-white/58">Сохраняйте автомобили и подписывайтесь на дилеров.</p>
+      <p className="mt-3 max-w-2xl text-white/58">Сохраняйте понравившиеся автомобили и компании.</p>
 
       <SubscribedDealers/>
       <h2 className="mt-8 text-2xl font-black">Автомобили</h2>
