@@ -122,6 +122,9 @@ try {
   assert.ok(await page.locator('.dealer-intro').evaluate(el=>{const css=getComputedStyle(el);return css.textAlign==='left'&&el.clientHeight<=parseFloat(css.lineHeight)*2+1;}));
   assert.ok(await page.locator('.dealer-identity-title h1').evaluate(el=>{const r=el.getBoundingClientRect(),sheet=document.querySelector('.dealer-profile-identity').getBoundingClientRect();return Math.abs(r.x+r.width/2-sheet.x-sheet.width/2)<1;}));
   await page.getByRole('button',{name:'Развернуть описание'}).click();assert.ok(await page.locator('.dealer-intro').evaluate(el=>el.clientHeight>parseFloat(getComputedStyle(el).lineHeight)*2+1));await page.getByRole('button',{name:'Свернуть описание'}).click();
+  assert.equal(await page.locator('.dealer-avatar-face img:visible').evaluate(el=>getComputedStyle(el).objectFit),'cover');
+  assert.equal(await page.locator('.dealer-avatar-face').evaluate(el=>getComputedStyle(el).padding),'0px');
+  await page.getByRole('heading',{name:'Наши фото и Автовыдачи',exact:true}).waitFor();
   await page.screenshot({path:`${out}/profile-${width}-${theme}-${verified?'verified':'regular'}.png`});
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();assert.equal(await page.locator('.dealer-logo-dialog .dealer-logo-verified').count(),verified?1:0);await page.screenshot({path:`${out}/logo-${width}-${theme}-${verified}.png`});await page.getByRole('button',{name:'Закрыть логотип'}).click();
   await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
@@ -170,6 +173,10 @@ try {
   if(width===1440){const main=await page.locator('.dealer-editor-settings').boundingBox(),frame=await page.locator('.dealer-live-preview').boundingBox();assert.ok(frame.x>=main.x+main.width,'preview sits on the right');}
   assert.equal(await page.locator('.dealer-editor-sidebar .dealer-saved-button').count(),1);
   await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Компания Новое имя');await preview.getByRole('heading',{name:'Компания Новое имя',exact:true}).waitFor();
+  assert.equal(await page.locator('.dealer-live-preview>header').count(),0);
+  assert.ok(await preview.locator('.dealer-cover').evaluate(el=>Math.abs(el.getBoundingClientRect().top)<1),'preview banner begins at viewport top');
+  for(const [key,color] of [['logoLight','rgb(32, 38, 51)'],['logoDark','rgb(245, 247, 250)']]){const field=page.locator('.dealer-brand-'+key);assert.equal(await field.locator('h3').evaluate(el=>getComputedStyle(el).color),color);assert.equal(await field.locator('button').first().evaluate(el=>getComputedStyle(el).color),color);assert.equal(await field.locator('img').first().evaluate(el=>getComputedStyle(el).filter),'none');if(key==='logoDark')assert.equal(await field.locator('img').first().evaluate(el=>getComputedStyle(el).content),'normal');else assert.ok((await field.locator('img').first().evaluate(el=>getComputedStyle(el).content)).includes('topavto-logo-black.png'));}
+  await page.locator('.dealer-brand-fields').first().screenshot({path:`${out}/brand-fields-${width}-${theme}.png`});
   await page.getByLabel('О компании',{exact:true}).fill('Новое описание, которое сразу показывается на мобильной странице.');await preview.locator('.dealer-intro').filter({hasText:'Новое описание, которое сразу показывается на мобильной странице.'}).waitFor();
   for(const name of ['Баннер для компьютера','Баннер для телефона'])await page.getByRole('region',{name,exact:true}).locator('input[type=file]').setInputFiles('apps/web/public/brands/topavto-logo-black.png');
   await page.waitForFunction(()=>{const value=JSON.parse(sessionStorage.getItem('fixture-server')||'null');return value?.bannerMobile==='/buyers/2.jpg'&&value?.banner==='/dealers/topavto-banner-v3.webp';});

@@ -29,4 +29,12 @@ export function DealerWorkspaceStyles(){return <style>{`
 
 .dealer-brand-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.dealer-brand-field{padding:18px;border:1px solid var(--ac-border);border-radius:18px;min-width:0;display:flex;flex-direction:column;gap:12px}.dealer-brand-field h3,.dealer-brand-field h4,.dealer-banner-settings h2,.dealer-banner-pair h3{font-weight:750}.dealer-brand-field .dealer-photos{margin-top:auto}.dealer-brand-headerIcon{grid-column:1/-1}.dealer-brand-logoLight{background:#f1f3f6;color:#202633}.dealer-brand-logoDark{background:#202733;color:#f5f7fa}.dealer-brand-field .dw-muted{font-size:12px;line-height:1.6}.dealer-banner-settings{display:grid;gap:16px}.dealer-banner-pair{padding:18px 0;border-top:1px solid var(--ac-border)}.dealer-banner-pair>header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.dealer-banner-pair .dealer-brand-field{background:var(--ac-surface-2)}
 @media(max-width:900px){.dealer-brand-fields{grid-template-columns:1fr}}
+
+html[data-theme] body .dealer-brand-logoLight{--ac-surface:#f1f3f6;--ac-surface-2:#e3e7ee;--ac-text:#202633;--ac-muted:#526176;--ac-border:#c4ccd7;background:var(--ac-surface)!important;color:var(--ac-text)!important;color-scheme:light}
+html[data-theme] body .dealer-brand-logoDark{--ac-surface:#202733;--ac-surface-2:#2b3544;--ac-text:#f5f7fa;--ac-muted:#b9c4d4;--ac-border:#465367;background:var(--ac-surface)!important;color:var(--ac-text)!important;color-scheme:dark}
+html[data-theme] body .dealer-brand-fields :is(.dealer-brand-logoLight,.dealer-brand-logoDark) :is(h3,strong,button,summary,input){color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
+html[data-theme] body .dealer-brand-fields :is(.dealer-brand-logoLight,.dealer-brand-logoDark) p{color:var(--ac-muted)!important;-webkit-text-fill-color:var(--ac-muted)!important}
+html[data-theme] body .dealer-brand-fields :is(.dealer-brand-logoLight,.dealer-brand-logoDark) img{content:normal!important;filter:none!important;mix-blend-mode:normal!important}
+html[data-theme] body .dealer-brand-fields :is(.dealer-brand-logoLight,.dealer-brand-logoDark) :is(.dealer-photo-drop,.dealer-photo-tools button,input){background:var(--ac-surface-2)!important;border-color:var(--ac-border)!important}
+html[data-theme] body .dealer-brand-fields .dealer-brand-logoLight img[src="/brands/topavto-logo.png"]{content:url("/brands/topavto-logo-black.png")!important}
 `}</style>}
