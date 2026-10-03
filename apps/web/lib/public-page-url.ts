@@ -1,5 +1,6 @@
-const privatePrefixes = ['/admin', '/crm', '/login', '/api', '/auth', '/internal'];
+const privatePrefixes = ['/admin', '/crm', '/login', '/api', '/auth', '/internal', '/dealer-cabinet', '/partner'];
 export function isPublicPagePath(pathname: string) {
+ if(pathname==='/partner/landing')return true;
  return !privatePrefixes.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 export function publicPageUrl(href: string, savedVersion?: string) {

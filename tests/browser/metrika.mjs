@@ -57,7 +57,7 @@ const css = await postcss([
   tailwindcss({
     content: [
       "tests/browser/metrika-fixture.tsx",
-      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers}/**/*.tsx",
+      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,analytics,legal}/**/*.tsx",
     ],
   }),
 ]).process(
@@ -114,13 +114,17 @@ try{
   const page=await context.newPage();
   await page.goto(origin+'/?utm_source=yandex&utm_campaign=987&yclid=123&phone=secret');
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+  await page.getByRole('complementary',{name:'Выбор аналитики'}).waitFor();
+  assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
+  await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});
+  await page.getByRole('button',{name:'Разрешить',exact:true}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
   assert.match(calls[0][2].url,/utm_source=yandex/);assert.match(calls[0][2].url,/yclid=123/);assert.doesNotMatch(calls[0][2].url,/phone|secret/);
   assert.equal(await page.locator('.ac-cookie-banner').count(),0);
   assert.equal(await page.locator('[role=dialog]').count(),0);
-  assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_analytics_choice_v1')),null);
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_analytics_choice_v1')).allowed),true);
   await page.screenshot({path:out+'/initial-'+width+'.png',fullPage:true});
   const consent=page.getByRole('checkbox');
   assert.equal(await consent.count(),1);assert.equal(await consent.isChecked(),false);
@@ -140,14 +144,14 @@ try{
   await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();
   await page.getByRole('button',{name:'Включить статистику посещений',exact:true}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
-  assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_analytics_choice_v1')),null);
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_analytics_choice_v1')).allowed),true);
   await page.evaluate(()=>{history.pushState({},'','/cars');window.dispatchEvent(new Event('avtocena:metrika-page'));window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='hit').length),1);
   await page.evaluate(()=>{history.pushState({},'','/privacy/request');window.dispatchEvent(new Event('avtocena:metrika-page'));});
   assert.equal(await page.evaluate(()=>window.__ymCalls.at(-1)[1]),'destruct');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-  await page.goto(origin+'/?yclid=123');await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();await page.locator('.ac-consent-mark').click();await submit();assert.equal(submitted.at(-1).analyticsConsent,true);assert.equal(submitted.at(-1).attribution.metrikaClientId,'1234567890123456789');
-  results.push({width,theme,singleConsent:true,whiteCheckbox:true,leadAttribution:true,newConsentAfterOldRefusal:true,immediateInit:true,noBanner:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
+  await page.goto(origin+'/?yclid=123');await page.getByRole('button',{name:'Настройки cookie',exact:true}).click();await page.getByRole('button',{name:'Отключить аналитику',exact:true}).click();await page.locator('.ac-consent-mark').click();await submit();assert.equal(submitted.at(-1).analyticsConsent,false);assert.equal(submitted.at(-1).attribution.metrikaClientId,'');assert.equal(await page.evaluate(()=>window.disableYaCounter112098062),true);
+  results.push({width,theme,singleConsent:true,whiteCheckbox:true,leadAttribution:true,refusalPreservedOnLead:true,initAfterConsent:true,compactNotice:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
   await context.close();
  }
  // Refusal while tag.js is downloading must clear pending initialization.
@@ -156,6 +160,7 @@ try{
  await slow.route('https://mc.yandex.ru/**',async route=>{await gate;await route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.ym?.a||[];`});});
  const p=await slow.newPage();await p.goto(origin,{waitUntil:'domcontentloaded'});
  assert.equal(await p.locator('.ac-city-notice').count(),0);
+ await p.getByRole('button',{name:'Разрешить',exact:true}).click();
  await p.getByRole('button',{name:'Настройки cookie',exact:true}).click();
  await p.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));

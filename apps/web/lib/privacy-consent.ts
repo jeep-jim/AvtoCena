@@ -1,24 +1,24 @@
 'use client';
 import {isPublicPagePath} from './public-page-url';
 export const ANALYTICS_CHOICE_KEY='avtocena_analytics_choice_v1';
+export const ANALYTICS_CONSENT_VERSION='analytics-consent-2026-10-03';
 export const ANALYTICS_EVENT='avtocena:analytics-choice';
 const TTL=180*86400000;
-let memory:{allowed:boolean;at:number}|null=null;
+let memory:{allowed:boolean;at:number;version:string}|null=null;
 export function analyticsChoice():boolean|null{
  if(typeof window==='undefined')return null;
- try{const value=JSON.parse(localStorage.getItem(ANALYTICS_CHOICE_KEY)||'null');if(value&&typeof value.allowed==='boolean'&&Number.isFinite(value.at)&&(value.allowed===false||Date.now()-value.at<TTL)&&value.at<=Date.now())return value.allowed;}catch{}
+ try{const value=JSON.parse(localStorage.getItem(ANALYTICS_CHOICE_KEY)||'null');if(value&&typeof value.allowed==='boolean'&&Number.isFinite(value.at)&&(value.allowed===false||(value.version===ANALYTICS_CONSENT_VERSION&&Date.now()-value.at<TTL))&&value.at<=Date.now())return value.allowed;}catch{}
  return memory&&(memory.allowed===false||Date.now()-memory.at<TTL)?memory.allowed:null;
 }
-// Page statistics and explicit permission to associate CRM leads are separate.
-// Starting page statistics is never evidence of consent to link CRM leads.
-export function pageAnalyticsAllowed(){return typeof location!=='undefined'&&isPublicPagePath(location.pathname)&&!location.pathname.startsWith('/privacy/request')&&analyticsChoice()!==false;}
+// Optional analytics needs an explicit choice for this consent version.
+// Preserve old refusals; old automatic allowances must be confirmed again.
+export function pageAnalyticsAllowed(){return typeof location!=='undefined'&&isPublicPagePath(location.pathname)&&!location.pathname.startsWith('/privacy/request')&&analyticsChoice()===true;}
 export function enablePageAnalytics(){
- memory=null;try{localStorage.removeItem(ANALYTICS_CHOICE_KEY);}catch{}
- window.dispatchEvent(new Event(ANALYTICS_EVENT));
+ setAnalyticsChoice(true);
 }
-export function analyticsAllowed(){return analyticsChoice()===true&&typeof location!=='undefined'&&!location.pathname.startsWith('/privacy/request');}
+export function analyticsAllowed(){return analyticsChoice()===true&&typeof location!=='undefined'&&isPublicPagePath(location.pathname)&&!location.pathname.startsWith('/privacy/request');}
 export function setAnalyticsChoice(allowed:boolean){
- memory={allowed,at:Date.now()};try{localStorage.setItem(ANALYTICS_CHOICE_KEY,JSON.stringify(memory));}catch{}
+ memory={allowed,at:Date.now(),version:ANALYTICS_CONSENT_VERSION};try{localStorage.setItem(ANALYTICS_CHOICE_KEY,JSON.stringify(memory));}catch{}
  if(!allowed){
   window.dispatchEvent(new Event(ANALYTICS_EVENT));
   try{for(let i=localStorage.length-1;i>=0;i--){const key=localStorage.key(i);if(key?.startsWith('_ym'))localStorage.removeItem(key);}}catch{}

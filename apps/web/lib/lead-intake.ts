@@ -314,7 +314,7 @@ export async function createLead(
     .slice(0, 40);
   let clientId = operationId ? `client_${operationId}` : makeId("client");
   let leadId = operationId ? `lead_${operationId}` : makeId("lead");
-  const analyticsConsent=body.analyticsConsent===true||(!crmUser&&personalDataConsent&&personalDataConsentVersion===LEAD_CONSENT_VERSION);
+  const analyticsConsent=body.analyticsConsent===true;
   const attribution = analyticsConsent ? normalizeAttribution(body.attribution, body) : normalizeAttribution({}, {});
   const source = clean(body.source, 160) || (crmUser ? "manual_crm" : "site");
   const submissionChannel = crmUser ? "manual_crm" : trustedTelegramId ? "telegram_bot" : body.submissionChannel === "telegram_miniapp" ? "telegram_miniapp" : "site";

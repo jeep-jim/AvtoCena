@@ -1,3 +1,4 @@
+import {PARTNER_CONSENT_VERSION} from '../apps/web/lib/privacy-documents';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
@@ -43,7 +44,7 @@ test('program endpoints enforce owner, paid access, trial idempotency and hidden
   assert.equal(JSON.parse(fs.readFileSync(path.join(tmp,'data/dealers/sales.json'),'utf8'))[0].commissionRub,15000);
   assert.equal((await modules.program.POST(req({action:'settle',dealerId:'external',saleId:sales[0].id}))).status,200);
   assert.equal(JSON.parse(fs.readFileSync(path.join(tmp,'data/dealers/sales.json'),'utf8'))[0].status,'paid');
-  const form=()=>{const f=new FormData();for(const [k,v] of Object.entries({companyName:'Supplier',country:'China',city:'Shanghai',contactName:'Contact',contact:'test@example.com',consent:'yes',partnerType:'supplier',lang:'zh'}))f.set(k,v);return f;};
+  const form=()=>{const f=new FormData();for(const [k,v] of Object.entries({companyName:'Supplier',country:'China',city:'Shanghai',contactName:'Contact',contact:'test@example.com',consent:'yes',consentVersion:PARTNER_CONSENT_VERSION,partnerType:'supplier',lang:'zh'}))f.set(k,v);return f;};
   const apply=(f:FormData)=>modules.apply.POST(new Request('https://avtocena.com/api/dealers/apply',{method:'POST',headers:{origin:'https://avtocena.com',accept:'application/json'},body:f}));
   (globalThis as any).__programActor=null;assert.equal((await apply(form())).status,404);
   (globalThis as any).__programActor=owner;const preview=form();preview.set('preview','1');assert.equal((await apply(preview)).status,200);assert.equal(fs.existsSync(path.join(tmp,'data/dealers/applications.json')),false);

@@ -1,9 +1,12 @@
+import {PARTNER_CONSENT_VERSION,PARTNER_CONSENT_TEXT} from '@/lib/privacy-documents';
+import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-origin';
 import { NextResponse } from "next/server";
 import { appendDataJson, readDataJson } from "@/lib/data";
 import { getCurrentUser, isCrmRole, normalizeTelegramUsername } from "@/lib/auth";
 
 type PartnerRecord = {
   id: string;
+  consentAt?:string; consentVersion?:string; consentText?:string;
   createdAt: string;
   updatedAt?: string;
   code?: string | null;
@@ -55,17 +58,7 @@ async function notifyTelegram(record: PartnerRecord) {
   if (!token || !chatId) return false;
 
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://avtocena.com").replace(/\/$/, "");
-  const text = [
-    "🆕 Новая заявка на партнёрский доступ",
-    "",
-    `Имя: ${record.name}`,
-    `Telegram: ${record.telegram || "—"}`,
-    `Тип: ${record.partnerType || "—"}`,
-    `Источник трафика: ${record.trafficSource || "—"}`,
-    `Комментарий: ${record.comment || "—"}`,
-    "",
-    `ID: ${record.id}`,
-  ].join("\n");
+  const text = `Новая заявка на партнёрский доступ. Подробности в закрытой CRM: ${appUrl}/crm/partners`;
 
   try {
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -95,10 +88,11 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
-  return NextResponse.json(readDataJson<PartnerRecord[]>("partners/partners.json", []));
+  return NextResponse.json(await readDataJson<PartnerRecord[]>("partners/partners.json", []));
 }
 
 export async function POST(request: Request) {
+  if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const body = await readPayload(request);
   const htmlRequest = wantsHtml(request);
 
@@ -115,7 +109,7 @@ export async function POST(request: Request) {
   const trafficSource = cleanText(body.trafficSource, 80);
   const comment = cleanText(body.comment, 1200);
 
-  if (!name || !telegramUsername || !trafficSource) {
+  if (body.consent!=='yes' || body.consentVersion!==PARTNER_CONSENT_VERSION || !name || !telegramUsername || !trafficSource) {
     return htmlRequest
       ? landingRedirect(request, "error")
       : NextResponse.json(
@@ -142,6 +136,7 @@ export async function POST(request: Request) {
   const requestId = `partner_request_${Date.now()}`;
   const record: PartnerRecord = {
     id: requestId,
+    consentAt:now,consentVersion:PARTNER_CONSENT_VERSION,consentText:PARTNER_CONSENT_TEXT,
     createdAt: now,
     updatedAt: now,
     code: null,
