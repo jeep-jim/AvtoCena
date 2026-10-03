@@ -37,6 +37,7 @@ test('dealer settings require permission and same origin, and preserve email for
 
 test('partner access requires separate current consent and records server text',async()=>{
  const s:any={rows:[]};(globalThis as any).__partnerPrivacy=s;
+ const oldFetch=globalThis.fetch,oldToken=process.env.TELEGRAM_BOT_TOKEN,oldChat=process.env.TELEGRAM_ADMIN_CHAT_ID;let notice:any;process.env.TELEGRAM_BOT_TOKEN='fixture-token';process.env.TELEGRAM_ADMIN_CHAT_ID='fixture-chat';globalThis.fetch=async(_url,init)=>{notice=JSON.parse(String(init?.body));return Response.json({ok:true});};
  try{
   const api=await route('apps/web/app/(public)/api/partners/route.ts',{
    '@/lib/auth':`export const getCurrentUser=async()=>null;export const isCrmRole=()=>false;export const normalizeTelegramUsername=v=>String(v).replace(/^@/,'');`,
@@ -48,7 +49,8 @@ test('partner access requires separate current consent and records server text',
   assert.equal((await api.POST(req({consent:'yes',consentVersion:'old'}))).status,400);
   assert.equal((await api.POST(req({consent:'yes',consentVersion:PARTNER_CONSENT_VERSION},'https://evil.test'))).status,403);
   assert.equal(s.rows.length,0);
-  assert.equal((await api.POST(req({consent:'yes',consentVersion:PARTNER_CONSENT_VERSION,consentText:'forged'}))).status,201);
+  assert.equal((await api.POST(req({consent:'yes',consentVersion:PARTNER_CONSENT_VERSION,consentText:'forged',comment:'PRIVATE_COMMENT'}))).status,201);
   assert.equal(s.rows[0].consentText,PARTNER_CONSENT_TEXT);assert.ok(s.rows[0].consentAt);assert.equal(s.rows[0].consentVersion,PARTNER_CONSENT_VERSION);
- }finally{delete(globalThis as any).__partnerPrivacy;}
+  assert.match(notice.text,/Имя: Partner/);assert.match(notice.text,/partner_test/);assert.match(notice.text,/Источник: site/);assert.doesNotMatch(notice.text,/PRIVATE_COMMENT/);
+ }finally{globalThis.fetch=oldFetch;if(oldToken===undefined)delete process.env.TELEGRAM_BOT_TOKEN;else process.env.TELEGRAM_BOT_TOKEN=oldToken;if(oldChat===undefined)delete process.env.TELEGRAM_ADMIN_CHAT_ID;else process.env.TELEGRAM_ADMIN_CHAT_ID=oldChat;delete(globalThis as any).__partnerPrivacy;}
 });

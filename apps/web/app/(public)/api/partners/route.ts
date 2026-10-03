@@ -58,7 +58,8 @@ async function notifyTelegram(record: PartnerRecord) {
   if (!token || !chatId) return false;
 
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "https://avtocena.com").replace(/\/$/, "");
-  const text = `Новая заявка на партнёрский доступ. Подробности в закрытой CRM: ${appUrl}/crm/partners`;
+  const field = (value: unknown) => String(value || "—").replace(/[\r\n\t]+/g," ").slice(0,200);
+  const text = ["🆕 Заявка на партнёрский доступ",`Имя: ${field(record.name)}`,`Telegram: ${field(record.telegram)}`,`Тип: ${field(record.partnerType)}`,`Источник: ${field(record.trafficSource)}`,`${appUrl}/crm/partners`].join("\n");
 
   try {
     const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
