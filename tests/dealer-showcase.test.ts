@@ -220,7 +220,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
     await assert.rejects(() =>
       savePublicFeatures({ version: 0, affiliatesEnabled: true }),
     );
-    const mixed = await createLead(new Request("https://avtocena.com/api/leads",{method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},body:JSON.stringify({requestMode:"favorites",source:"favorites_request",selectedOfferIds:[id,"special_other__vehicle"],phone:"+79999999999",name:"Тест",city:"Москва",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03"})}));
+    const mixed = await createLead(new Request("https://avtocena.com/api/leads",{method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},body:JSON.stringify({requestMode:"favorites",source:"favorites_request",selectedOfferIds:[id,"special_other__vehicle"],phone:"+79999999999",name:"Тест",city:"Москва",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03-v2"})}));
     assert.equal(mixed.status,400);assert.match((await mixed.json()).error,/одного дилера/);
     assert.equal((await readChunkedDataJson<any>("leads/leads.json", [])).length,0);
     const r = await createLead(
@@ -241,7 +241,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
           city: "Москва",
           contactPreference: "call",
           personalDataConsent: true,
-          personalDataConsentVersion: "lead-consent-2026-10-03",
+          personalDataConsentVersion: "lead-consent-2026-10-03-v2",
           totalRub: 1,
         }),
       }),
@@ -256,7 +256,7 @@ test("owner configuration versions, unpublished isolation and base-city price in
     assert.equal(leads[0].selectedOffers[0].deliveryQuote.amountRub, 142500);
     const followup = await createLead(new Request("https://avtocena.com/api/leads", {
       method:"POST",headers:{"content-type":"application/json",origin:"https://avtocena.com"},
-      body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03",totalRub:1})
+      body:JSON.stringify({requestMode:"offer",source:"catalog_offer_request",offerId:id,operationId:"special-city-followup",submissionThreadToken:"12345678-1234-4321-aaaa-123456789abc",phone:"+79999999999",name:"Тест",city:"Новосибирск",contactPreference:"call",personalDataConsent:true,personalDataConsentVersion:"lead-consent-2026-10-03-v2",totalRub:1})
     }));
     assert.equal(followup.status,200);
     const updated=await readChunkedDataJson<any>("leads/leads.json",[]);

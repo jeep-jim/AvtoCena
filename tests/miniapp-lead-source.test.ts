@@ -22,12 +22,12 @@ test('Mini App origin survives intake, activity, no analytics and cross-channel 
   const other=(await readChunkedDataJson<any>('leads/leads.json',[])).find(l=>l.id===site.leadId);assert.equal(other.submissionChannel,'site');assert.equal(leadChannelLabel(other),'Сайт');
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
 });
-test('group notice contains only source and CRM link even with prior consent',()=>{
+test('group notice restores contacts for covered consent without comments or internal notes',()=>{
  const base={id:'test',name:'Стас',phone:'+79991234567',car:'Honda Stepwgn',city:'Новокузнецк',personalDataConsent:true,personalDataConsentVersion:LEAD_CONSENT_VERSION,submissionChannel:'telegram_miniapp',comment:'PRIVATE_COMMENT',internalNote:'PRIVATE_NOTE'};
  for(const contact of [{contactPreference:'call'},{contactPreference:'message',messenger:'telegram',telegram:'test_user'},{contactPreference:'message',messenger:'max',max:'https://max.ru/u/test'}]){
-  const text=leadNotice({...base,...contact});assert.doesNotMatch(text,/Стас|79991234567|Honda Stepwgn/);assert.match(text,/Источник: Telegram Mini App/);assert.doesNotMatch(text,/PRIVATE_|№test/);
-  assert.doesNotMatch(text,/@test_user/);
-  assert.doesNotMatch(text,/max.ru/);
+  const text=leadNotice({...base,...contact});assert.match(text,/Стас/);assert.match(text,/Honda Stepwgn/);assert.match(text,/Город: Новокузнецк/);assert.match(text,/Источник: Telegram Mini App/);assert.doesNotMatch(text,/PRIVATE_|№test/);
+  if(contact.messenger==='telegram')assert.match(text,/@test_user/);
+  if(contact.messenger==='max')assert.match(text,/max.ru/);
  }
- for(const extra of [{personalDataConsentVersion:'lead-consent-2026-09-29'},{source:'privacy_request'}])assert.doesNotMatch(leadNotice({...base,...extra}),/Стас|79991234567|Honda|PRIVATE_/);
+ for(const extra of [{personalDataConsentVersion:'lead-consent-2026-09-29'},{personalDataConsentVersion:'lead-consent-2026-10-03'},{source:'privacy_request'}])assert.doesNotMatch(leadNotice({...base,...extra}),/Стас|79991234567|Honda|PRIVATE_/);
 });

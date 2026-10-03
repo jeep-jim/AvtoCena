@@ -116,8 +116,9 @@ try{
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('complementary',{name:'Выбор аналитики'}).waitFor();
   assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
+  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y+noticeBox.height-page.viewportSize().height)<2,'notice is at viewport bottom');assert.ok(noticeBox.height<150,'compact mobile notice');}
   await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});
-  await page.getByRole('button',{name:'Разрешить',exact:true}).click();
+  await page.getByRole('button',{name:'Понятно',exact:true}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
@@ -154,13 +155,15 @@ try{
   results.push({width,theme,singleConsent:true,whiteCheckbox:true,leadAttribution:true,refusalPreservedOnLead:true,initAfterConsent:true,compactNotice:true,noFakeConsent:true,optOutAndReenable:true,spaDedup:true,privateExcluded:true});
   await context.close();
  }
+ // Settings allow a first-visit refusal without loading the counter.
+ const choices=await browser.newContext({viewport:{width:390,height:844}});const choicePage=await choices.newPage();await choicePage.goto(origin);await choicePage.getByRole('button',{name:'Настроить',exact:true}).click();await choicePage.getByRole('button',{name:'Продолжить без аналитики',exact:true}).click();assert.equal(await choicePage.locator('#yandex-metrika-112098062').count(),0);await choicePage.reload();assert.equal(await choicePage.locator('.ac-analytics-choice').count(),0);await choices.close();
  // Refusal while tag.js is downloading must clear pending initialization.
  const slow=await browser.newContext();let release;
  const gate=new Promise(resolve=>{release=resolve;});
  await slow.route('https://mc.yandex.ru/**',async route=>{await gate;await route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.ym?.a||[];`});});
  const p=await slow.newPage();await p.goto(origin,{waitUntil:'domcontentloaded'});
  assert.equal(await p.locator('.ac-city-notice').count(),0);
- await p.getByRole('button',{name:'Разрешить',exact:true}).click();
+ await p.getByRole('button',{name:'Понятно',exact:true}).click();
  await p.getByRole('button',{name:'Настройки cookie',exact:true}).click();
  await p.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));

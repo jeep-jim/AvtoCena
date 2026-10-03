@@ -24,8 +24,8 @@ test("group relay needs no staff binding, preserves leases, excludes internal no
     assert.equal(claims.length, 1, JSON.stringify(await readChunkedDataJson<any>("telegram/crm-outbox.json", [])));
     assert.deepEqual(new Set(claims.map(c => c.chatId)), new Set([groupTarget.chatId]));
     assert.match(claims[0].text, /crm\/leads\?id=lead_test/);
-    assert.doesNotMatch(claims[0].text, /PRIVATE_NAME/);
-    assert.doesNotMatch(claims[0].text, /PRIVATE_PHONE/);
+    assert.match(claims[0].text, /PRIVATE_NAME/);
+    assert.match(claims[0].text, /PRIVATE_PHONE/);
     assert.match(claims[0].text, /Источник: Telegram Mini App/);
     assert.doesNotMatch(claims[0].text, /CUSTOMER_COMMENT/);
     assert.doesNotMatch(JSON.stringify(claims), /PRIVATE_NOTE/);
