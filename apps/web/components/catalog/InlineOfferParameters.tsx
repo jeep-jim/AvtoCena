@@ -12,7 +12,7 @@ import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calcul
 import { missingCustomerFields } from "../../lib/catalog/missing-customer-fields";
 import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
 import { ResearchLink } from "./VehicleResearchLink";
-import { CitySelector } from "../home/CitySelector";
+import { DeliveryCityPanel } from "./DeliveryCityPanel";
 import { quoteCityDelivery, deliveryDescription } from "../../lib/catalog/city-delivery";
 import type { BusinessPaymentPlan } from "../../../../packages/engine/src/types";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
@@ -192,11 +192,8 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
   {afterPrice}
-  <div className="mt-4 rounded-2xl bg-[var(--ac-surface-2)] p-4" data-city-delivery>
-   <p className="text-sm font-bold">Доставка до вашего города</p>
-   <CitySelector value={draft.deliveryCity||""} persistSelection={!initialScenario} syncStored={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} />
-   <p className="mt-2 text-xs text-[var(--ac-muted)]">{deliveryDescription(deliveryQuote)}</p>
-  </div>
+  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!initialScenario} syncStored={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} description={deliveryDescription(deliveryQuote)}/>
+
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
     <div className="flex items-center justify-between gap-3"><h2 className="text-lg font-bold tracking-[-0.02em]">Структура цены</h2><ChevronDown aria-hidden size={17} className="mr-1 shrink-0 transition-transform group-open:rotate-180" /></div>

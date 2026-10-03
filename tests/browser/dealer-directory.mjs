@@ -125,6 +125,14 @@ try {
   }
   await page.getByRole('navigation',{name:'Каталоги'}).getByRole('link',{name:'Автодилеры'}).click();
   await page.getByRole('heading',{name:'Автодилеры',exact:true}).waitFor();
+  assert.equal(await page.locator('main.ac-page-copy').count(),1);
+  assert.equal(await page.getByRole('navigation',{name:'Каталоги'}).count(),0);
+  const card=page.locator('.dealer-directory-card');
+  assert.equal(await card.locator('picture img').count(),1);
+  assert.ok(!(await card.innerText()).includes('→')&&!(await card.innerText()).includes('↗'));
+  const logo=await card.locator('.ac-dealer-logo').boundingBox();assert.ok(logo.width<=(width<640?48:64));
+  for(const theme of ['light','dark']){await page.evaluate(t=>{document.documentElement.dataset.theme=t;window.scrollTo(0,0)},theme);await page.screenshot({path:out+'/'+width+'-'+theme+'-directory-top.png',fullPage:true});}
+
   await page.getByRole('textbox',{name:'Поиск по городу'}).fill('новокуз');
   assert.equal(await page.getByRole('link',{name:/Топ Авто/}).count(),1);
   await page.getByRole('textbox',{name:'Поиск по городу'}).fill('Москва');

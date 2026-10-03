@@ -9,6 +9,6 @@ export const metadata={title:'Автодилеры — АвтоЦена',descrip
 export default async function Page(){
  const [stored,dealer]=await Promise.all([readShowcase(PILOT_DEALER_ID),findDealer(PILOT_DEALER_ID)]);
  const s=stored?await availableShowcase(stored):null;
- const dealers=s?.profileEnabled?[{id:s.dealerId,name:publicDealerText(s.name),description:publicDealerText(s.description),logoLight:s.logoLight,logoDark:s.logoDark,href:dealerProfilePath(s),cities:[...new Set(s.offices.map(o=>o.city))],verified:dealer?.status==='verified'}]:[];
+ const dealers=s?.profileEnabled?[{id:s.dealerId,name:publicDealerText(s.name),description:publicDealerText(s.description),logoLight:s.logoLight,logoDark:s.logoDark,banner:s.banner,bannerMobile:s.bannerMobile,href:dealerProfilePath(s),cities:[...new Set(s.offices.map(o=>o.city))],verified:dealer?.status==='verified'}]:[];
  return <DealerDirectory dealers={dealers}/>;
 }
