@@ -43,17 +43,18 @@ export function BuyerGallery({ images, title = "Те, кто узнали — у
 
   useEffect(() => {
     if (active === null) return;
-    const old = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const doc=rail.current?.ownerDocument||document;
+    const old = doc.body.style.overflow;
+    doc.body.style.overflow = "hidden";
     const keydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActive(null);
       if (event.key === "ArrowLeft") setActive((active - 1 + images.length) % images.length);
       if (event.key === "ArrowRight") setActive((active + 1) % images.length);
     };
-    addEventListener("keydown", keydown);
+    doc.defaultView?.addEventListener("keydown", keydown);
     return () => {
-      document.body.style.overflow = old;
-      removeEventListener("keydown", keydown);
+      doc.body.style.overflow = old;
+      doc.defaultView?.removeEventListener("keydown", keydown);
     };
   }, [active, images.length]);
 
@@ -69,7 +70,7 @@ export function BuyerGallery({ images, title = "Те, кто узнали — у
 
   if (!images.length) return null;
   return <section className="mt-8 overflow-hidden">
-    <h2 className="whitespace-nowrap text-[clamp(18px,5.5vw,24px)] font-black leading-none md:text-5xl">{title}</h2>
+    {title&&<h2 className="whitespace-nowrap text-[clamp(18px,5.5vw,24px)] font-black leading-none md:text-5xl">{title}</h2>}
     <div ref={rail} className="ac-buyers-rail ac-hide-scrollbar mt-4 flex gap-3 overflow-x-auto pb-2">
       {(autoScroll ? [...images, ...images] : images).map((src, index) => <button key={`${src}-${index}`} type="button" onClick={() => setActive(index % images.length)} className="h-32 w-44 shrink-0 overflow-hidden rounded-2xl sm:h-40 sm:w-56 md:h-44 md:w-64"><img src={buyerWebp(src, 448)} srcSet={`${buyerWebp(src, 256)} 256w, ${buyerWebp(src, 448)} 448w`} sizes="(min-width: 768px) 256px, (min-width: 640px) 224px, 176px" alt={`Клиент ${dealerName} ${(index % images.length) + 1}`} className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" /></button>)}
     </div>

@@ -3,8 +3,8 @@
 import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
-import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useMemo, useRef, useState, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
+import {PublicSheet} from "@/components/ui/PublicSheet";
 import { loadPublicRates, subscribePublicRates } from "../../lib/catalog/public-rates-client";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";
@@ -384,8 +384,6 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   }), [rates]);
   const [activeCurrency, setActiveCurrency] = useState("");
   const [dark, setDark] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "dark");
-  const [dragY, setDragY] = useState(0);
-  const dragState = useRef<{ pointerId: number; startY: number; currentY: number; startedAt: number } | null>(null);
   const closeRef = useRef(onClose);
   const rateKey = orderedRates.map((rate) => String(rate.currency).toUpperCase()).join("|");
 
@@ -402,45 +400,8 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     if (!open) return;
     const requested = String(initialCurrency || "").toUpperCase();
     setActiveCurrency(orderedRates.some((rate) => String(rate.currency).toUpperCase() === requested) ? requested : String(orderedRates[0]?.currency || "").toUpperCase());
-    setDragY(0);
-    dragState.current = null;
-    const root = document.documentElement;
-    const body = document.body;
-    const previous = { rootOverflow: root.style.overflow, rootOverscroll: root.style.overscrollBehavior, bodyOverflow: body.style.overflow, bodyOverscroll: body.style.overscrollBehavior };
-    root.style.overflow = "hidden";
-    root.style.overscrollBehavior = "none";
-    body.style.overflow = "hidden";
-    body.style.overscrollBehavior = "none";
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") closeRef.current(); };
-    window.addEventListener("keydown", escape);
-    return () => {
-      root.style.overflow = previous.rootOverflow;
-      root.style.overscrollBehavior = previous.rootOverscroll;
-      body.style.overflow = previous.bodyOverflow;
-      body.style.overscrollBehavior = previous.bodyOverscroll;
-      window.removeEventListener("keydown", escape);
-    };
   }, [open, initialCurrency, rateKey]);
 
-  const startDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (window.matchMedia("(min-width: 768px)").matches) return;
-    dragState.current = { pointerId: event.pointerId, startY: event.clientY, currentY: event.clientY, startedAt: performance.now() };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-  const moveDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const state = dragState.current;
-    if (!state || state.pointerId !== event.pointerId) return;
-    state.currentY = event.clientY;
-    setDragY(Math.max(0, event.clientY - state.startY));
-  };
-  const finishDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const state = dragState.current;
-    if (!state || state.pointerId !== event.pointerId) return;
-    const distance = Math.max(0, state.currentY - state.startY);
-    const elapsed = Math.max(1, performance.now() - state.startedAt);
-    dragState.current = null;
-    if (distance > 95 || distance / elapsed > 0.65) closeRef.current(); else setDragY(0);
-  };
   const scrollRateTabs = (event: ReactWheelEvent<HTMLDivElement>) => {
     const node = event.currentTarget;
     if (node.scrollWidth <= node.clientWidth) return;
@@ -454,14 +415,6 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     event.stopPropagation();
     closeRef.current();
   };
-  const dismissBackdrop = (event: SyntheticEvent<HTMLDivElement>) => {
-    if (event.target !== event.currentTarget) return;
-    dismiss(event);
-  };
-  const stopSheetEvent = (event: SyntheticEvent) => {
-    event.stopPropagation();
-  };
-
   if (!open || typeof document === "undefined") return null;
   const activeRate = orderedRates.find((rate) => String(rate.currency).toUpperCase() === activeCurrency) || orderedRates[0];
   if (!activeRate) return null;
@@ -469,13 +422,9 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   const activeCountry = RATE_META[activeCurrencyCode]?.country || activeCurrencyCode;
   const sheetClass = dark ? "bg-[#0f1219] text-white" : "bg-[#f8f9fb] text-[#151922]";
   const headerClass = dark ? "border-white/10 bg-[#0f1219]/95" : "border-[#dfe3e9] bg-[#f8f9fb]/95";
-  const handleClass = dark ? "bg-white/60" : "bg-white/85";
   const closeClass = dark ? "bg-white/[0.07] text-white" : "bg-[#edf0f4] text-[#202630]";
 
-  return createPortal(<div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/65 backdrop-blur-md md:items-center md:p-6" onTouchEnd={dismissBackdrop} onClick={dismissBackdrop}>
-    <div className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`} style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }} onTouchEnd={stopSheetEvent} onClick={stopSheetEvent}>
-      <div className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag} aria-label="Потяните вниз, чтобы закрыть"><span className={`block h-1.5 w-12 rounded-full shadow-[0_1px_5px_rgba(0,0,0,.28)] ${handleClass}`} /></div>
-      <section className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`} role="dialog" aria-modal="true" aria-label="Курсы валют">
+  return <PublicSheet title="Курсы валют" onClose={onClose} showHeader={false} maxWidth={570} className={`ac-rate-sheet ${sheetClass}`}>
         <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-5 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
           <div className="flex items-center justify-between gap-3"><div><div className="text-[13px] font-bold leading-none text-[#ef3340]">{activeCountry} · {currencyName(activeCurrencyCode)}</div><h2 className="mt-1.5 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${activeCurrencyCode}`}</h2></div><button type="button" onTouchEnd={dismiss} onClick={dismiss} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button></div>
           {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex touch-pan-x snap-x snap-proximity gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1" style={{ WebkitOverflowScrolling: "touch" }} onWheel={scrollRateTabs}>{orderedRates.map((rate) => {
@@ -488,9 +437,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
           })}</div> : null}
         </div>
         <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5"><CurrencyRateDetails rate={activeRate} impactRub={impactRub} priceRub={priceRub} sourcePrice={sourcePrice} totalDeltaRub={totalDeltaRub} priceChangedAt={priceChangedAt} light={!dark} statusLabel={statusLabel} /></div>
-      </section>
-    </div>
-  </div>, document.body);
+  </PublicSheet>;
 }
 
 function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyImpactRub }: { offer: PriceLike; currency: string; panel: boolean; light: boolean; currencyDriven: boolean; currencyImpactRub?: number }) {

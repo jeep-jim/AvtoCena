@@ -31,7 +31,7 @@ try{
   assert.equal(await page.locator('.dealer-dock').isVisible(),width<768);
   assert.equal(await page.getByRole('link',{name:'Выйти на АвтоЦену'}).getAttribute('href'),'/cars');
   assert.ok(await page.locator('.dealer-shared-catalog .ac-catalog-filters').count() || await page.locator('.dealer-shared-catalog input').count());
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Адреса',exact:true}).click();
+  await page.locator('.dealer-dock').getByRole('button',{name:'Адреса',exact:true}).click();
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.getByRole('dialog').waitFor();
   await page.screenshot({path:`${out}/office-${theme}-${width}.png`});await page.keyboard.press('Escape');
   assert.equal(await page.getByRole('dialog').count(),0);

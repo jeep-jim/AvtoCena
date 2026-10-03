@@ -64,7 +64,7 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
   ].filter(([, v]) => v);
   const groups=[{name:'Характеристики',items:fields.map(([name,value])=>({name,value}))},...(o.equipment?[{name:'Оснащение',items:[{name:'Комплектация',value:o.equipment}]}]:[])];
   const updated = new Date(o.updatedAt || s.updatedAt);
-  const updatedStatus = Number.isFinite(updated.getTime()) ? <OfferUpdatedStatus date={updated.toLocaleDateString("ru-RU",{timeZone:"Asia/Krasnoyarsk"})} time={updated.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Krasnoyarsk"})} sourceUrl={s.profileEnabled?dealerProfilePath(s):undefined} sourceName={s.name}/> : null;
+  const updatedStatus = Number.isFinite(updated.getTime()) ? <OfferUpdatedStatus dealer date={updated.toLocaleDateString("ru-RU",{timeZone:"Asia/Krasnoyarsk"})} time={updated.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Krasnoyarsk"})} sourceUrl={s.profileEnabled?dealerProfilePath(s):undefined} sourceName={s.name}/> : null;
   return (
     <main
       data-offer-id={id}
@@ -159,7 +159,7 @@ export function DealerOfferContent({id,s,o,preview=false,verified=false,canCopy=
       </div>
       <OfferContactActionsStyles />
       <style>{`
-        html[data-theme="light"] .ac-dealer-offer .ac-offer-price-panel{background:#cfe5d8!important}
+        html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel{background:#cfe5d8!important;background-color:#cfe5d8!important}html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel,html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel *{color:#182b24!important;-webkit-text-fill-color:#182b24!important}html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel .text-green-500{color:#0a9c44!important;-webkit-text-fill-color:#0a9c44!important}
         .dealer-verification:hover>span{display:block}
         .dealer-verification:not([open]):not(:hover)>span{display:none}
         .ac-dealer-offer .ac-offer-actions-sidebar{display:grid!important}

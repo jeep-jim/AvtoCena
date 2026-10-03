@@ -57,7 +57,7 @@ const css = await postcss([
   tailwindcss({
     content: [
       "tests/browser/dealer-workspace-fixture.tsx",
-      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal}/**/*.tsx",
+      "apps/web/components/{catalog,sharing,layout,home,autocalc,dealers,partners,leads,legal,ui}/**/*.tsx",
       "apps/web/app/(public)/favorites/page.tsx",
     ],
   }),
@@ -123,7 +123,7 @@ try{
    if(width===1440)assert.equal(await page.locator('[data-spec-desktop]').getAttribute('data-open'),'true');
    await page.getByText('Обновлено 02.10.2026, 15:00',{exact:true}).filter({visible:true}).waitFor();
    await page.locator('.ac-offer-updated summary').filter({visible:true}).click();
-   assert.equal(await page.getByRole('link',{name:'Источник: ТопАвто →'}).filter({visible:true}).getAttribute('href'),'/nvkz/topavto');
+   assert.equal(await page.getByRole('link',{name:'Дилер: ТопАвто →'}).filter({visible:true}).getAttribute('href'),'/nvkz/topavto');assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(207, 229, 216)');
    await page.getByRole('link',{name:'Профиль дилера ТопАвто'}).waitFor();
    await page.getByText('Другой автомобиль в наличии',{exact:true}).waitFor();
    if(width===390)assert.ok(await page.getByRole('button',{name:'Открыть фотографии автомобиля'}).evaluate(el=>Math.abs(el.clientHeight/el.clientWidth-.75)<.02));
@@ -159,21 +159,21 @@ try{
   assert.equal(await page.locator('.dealer-identity-row>.dealer-avatar').isVisible(),true);
   assert.ok(await page.locator('.dealer-avatar-centered').evaluate(el=>{const r=el.getBoundingClientRect(),sheet=document.querySelector('.dealer-profile-identity').getBoundingClientRect();return Math.abs(r.left+r.width/2-sheet.left-sheet.width/2)<2&&Math.abs(r.width-r.height)<1&&r.top<sheet.top&&r.bottom>sheet.top;}),'logo is circular, centered and crosses the banner seam');
   assert.ok(await page.evaluate(()=>scrollY<5),'profile opens at its banner');
-  assert.equal(await page.locator('.dealer-profile-tabs button').count(),4);
+  assert.equal(await page.locator('.dealer-profile-actions').count(),1);
   assert.equal((await page.locator('.dealer-profile-footer').innerText()).replace(/\n+/g,'\n'),'Исполнитель (дилер)\nООО Тестовый дилер\nЮридический адрес\nНовокузнецк, Пример адреса\nИНН\n7707083893\nОГРН\n1027700132195');
   assert.equal(await page.getByText('Скрытый банк',{exact:true}).count(),0);
   assert.ok(!(await page.locator('body').innerText()).includes('40802810926710009905'));
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();await page.getByText('Проверенный дилер',{exact:true}).waitFor();await page.getByRole('button',{name:'Закрыть логотип'}).click();await page.waitForFunction(()=>!history.state?.acOverlayStep);
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Адреса',exact:true}).click();
+  await page.locator('.dealer-dock').getByRole('button',{name:'Адреса',exact:true}).click();
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
-  await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});await page.goBack();
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Адреса',exact:true}).click();await page.locator('.dealer-tab-content .dealer-contact-sheet').waitFor();
+  await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});await page.goBack();await page.locator('.ac-public-sheet').waitFor({state:'detached'});
+  await page.locator('.dealer-dock').getByRole('button',{name:'Адреса',exact:true}).click();await page.locator('.dealer-drawer-content .dealer-contact-sheet').waitFor();
   await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
-  await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
-  await page.locator('.dealer-profile-tabs').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
+  await page.goBack();await page.locator('.dealer-dock button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
-  await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
+  await page.goBack();await page.locator('.dealer-dock button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
   await page.getByRole('button',{name:/Открыть логотип/}).click();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);
   await page.evaluate(()=>{history.pushState({},'', '/request?dealer=dealer_topavto');document.querySelector('dialog[open]').close();});

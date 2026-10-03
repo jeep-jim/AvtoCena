@@ -83,7 +83,8 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
   const wheel = (event: ReactWheelEvent<HTMLDivElement>) => {
     const node = event.currentTarget;
     if (node.scrollWidth <= node.clientWidth) return;
-    const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+    if(Math.abs(event.deltaY)>=Math.abs(event.deltaX)&&!event.shiftKey)return;
+    const delta = event.shiftKey?event.deltaY:event.deltaX;
     if (!delta) return;
     node.scrollLeft += delta;
     event.preventDefault();
@@ -103,7 +104,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
     : "w-full min-w-0 max-w-full overflow-hidden rounded-[1.35rem] px-2 py-3";
   const rail = variant === "desktop"
     ? "grid grid-cols-5 gap-2"
-    : "ac-hide-scrollbar flex w-full min-w-0 touch-pan-x gap-2 overflow-x-auto overscroll-x-contain";
+    : "ac-hide-scrollbar flex w-full min-w-0 touch-auto gap-2 overflow-x-auto overscroll-x-contain";
 
   return <>
     <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">

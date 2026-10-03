@@ -1,4 +1,5 @@
 "use client";
+import {BookOpen} from "lucide-react";
 
 import {enablePageAnalytics,setAnalyticsChoice} from "@/lib/privacy-consent";
 import { AutoCalcButton } from "../autocalc/AutoCalcButton";
@@ -96,7 +97,8 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
 
             <div aria-label="Инструменты АвтоЦены" className="ac-public-footer-tools mt-4 grid grid-cols-2 gap-2 [&>button]:justify-center [&>button]:rounded-xl [&>button]:border [&>button]:border-[var(--ac-border)] [&>button]:px-2 [&>button]:whitespace-nowrap [&>button]:text-xs sm:[&>button]:text-sm [&>button:hover]:bg-[var(--ac-surface-2)]">
               <PageQrButton key={pathname} />
-              <AutoCalcButton />
+              <span className="ac-footer-global-calculator"><AutoCalcButton /></span>
+              {knowledgeEnabled?<Link href="/knowledge" className="ac-footer-dealer-knowledge"><BookOpen size={18}/>База знаний</Link>:<button type="button" disabled className="ac-footer-dealer-knowledge" title="База знаний скоро появится"><BookOpen size={18}/>База знаний</button>}
             </div>
 
             <div className="ac-public-footer-affiliates mt-4 grid gap-2">
@@ -154,6 +156,20 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
         </div>
       </footer>
 
+      <style>{`
+.ac-footer-global-calculator{display:contents}.ac-footer-global-calculator>button{justify-content:center;border:1px solid var(--ac-border);border-radius:12px;padding:0 8px;white-space:nowrap;font-size:12px}.ac-footer-global-calculator>button:hover{background:var(--ac-surface-2)}@media(min-width:640px){.ac-footer-global-calculator>button{font-size:14px}}.ac-footer-dealer-knowledge{display:none!important}
+body:has([data-dealer-context]) .ac-footer-global-calculator,body:has(.dealer-profile) .ac-footer-global-calculator{display:none!important}
+body:has([data-dealer-context]) .ac-footer-dealer-knowledge,body:has(.dealer-profile) .ac-footer-dealer-knowledge{display:flex!important;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ac-border);border-radius:12px;min-height:44px;padding:8px;font-size:12px;font-weight:700}
+body:has([data-dealer-context]) .ac-public-legal-footer,body:has(.dealer-profile) .ac-public-legal-footer{color:var(--ac-muted)}
+body:has([data-dealer-context]) .ac-footer-dealer-knowledge,body:has(.dealer-profile) .ac-footer-dealer-knowledge{color:var(--ac-text)}
+.ac-footer-dealer-knowledge:disabled{opacity:.5;cursor:not-allowed}
+body:has([data-dealer-context]) .ac-public-footer-navigation,body:has(.dealer-profile) .ac-public-footer-navigation{display:block;padding:0!important}
+body:has([data-dealer-context]) .ac-public-footer-navigation>div,body:has(.dealer-profile) .ac-public-footer-navigation>div{max-width:none}
+body:has([data-dealer-context]) .ac-public-footer-tools,body:has(.dealer-profile) .ac-public-footer-tools{margin:0!important;max-width:380px;padding:12px 0!important}
+body:has([data-dealer-context]) .ac-public-legal-footer,body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0!important}
+body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-profile) .ac-public-legal-footer-line{border-top:1px solid var(--ac-border);margin-top:8px;padding-top:16px}
+@media(min-width:1024px){body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-profile) .ac-public-legal-footer-line{grid-template-columns:1fr;gap:12px}body:has([data-dealer-context]) .ac-public-legal-footer-line>p,body:has(.dealer-profile) .ac-public-legal-footer-line>p{grid-column:auto;max-width:850px}body:has([data-dealer-context]) .ac-public-legal-footer-line nav,body:has(.dealer-profile) .ac-public-legal-footer-line nav{justify-content:flex-start}}
+`}</style>
       {cookieOpen ? (
         <div className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="avtocena-cookie-title" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCookieNotice(); }}>
           <section className="max-h-[90vh] w-full max-w-[780px] overflow-y-auto rounded-[1.35rem] bg-[#18191f] text-[#e8e9ed] shadow-[0_30px_100px_rgba(0,0,0,.52)]">
