@@ -83,6 +83,7 @@ export type DealerShowcase = {
   logoLight: string;
   logoDark: string;
   banner: string;
+  bannerMobile?: string;
   phone: string;
   telegram: string;
   max: string;
@@ -125,6 +126,7 @@ export function defaultShowcase(id: string, name = ""): DealerShowcase {
     logoLight: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
     logoDark: id === PILOT_DEALER_ID ? "/brands/topavto-logo.png" : "",
     banner: "",
+    bannerMobile: "",
     phone: "",
     telegram: "",
     max: "",
@@ -378,6 +380,7 @@ export function normalizeShowcase(
     logoLight: mediaUrl(raw.logoLight, id),
     logoDark: mediaUrl(raw.logoDark, id),
     banner: mediaUrl(raw.banner, id),
+    bannerMobile: mediaUrl(raw.bannerMobile, id),
     phone: text(raw.phone, 60),
     telegram: contactUrl(raw.telegram, "telegram"),
     max: contactUrl(raw.max, "max"),

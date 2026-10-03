@@ -163,10 +163,10 @@ try{
   assert.equal((await page.locator('.dealer-profile-footer').innerText()).replace(/\n+/g,'\n'),'Исполнитель (дилер)\nООО Тестовый дилер\nЮридический адрес\nНовокузнецк, Пример адреса\nИНН\n7707083893\nОГРН\n1027700132195');
   assert.equal(await page.getByText('Скрытый банк',{exact:true}).count(),0);
   assert.ok(!(await page.locator('body').innerText()).includes('40802810926710009905'));
-  await page.getByLabel('Проверенный дилер',{exact:true}).click();await page.getByText('Проверенный дилер — компания прошла проверку АвтоЦены.',{exact:true}).waitFor();
-  assert.ok(await page.locator('.dealer-verification>span').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;}),'verification explanation fits the screen');
+  await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();await page.getByText('Проверенный дилер',{exact:true}).waitFor();await page.getByRole('button',{name:'Закрыть логотип'}).click();await page.waitForFunction(()=>!history.state?.acOverlayStep);
+  await page.getByRole('button',{name:'Контакты',exact:true}).click();
   await page.getByRole('button',{name:'Информация о компании',exact:true}).click();await page.locator('dialog[open] .dealer-about-logo').waitFor();
-  await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});
+  await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.locator('dialog[open]').waitFor({state:'detached'});await page.goBack();
   await page.getByRole('button',{name:'Контакты',exact:true}).click();await page.locator('.dealer-tab-content .dealer-contact-sheet').waitFor();
   await page.getByLabel('Адрес офиса в профиле',{exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-contacts.png`,fullPage:true});
@@ -174,7 +174,7 @@ try{
   await page.getByRole('button',{name:'Отзывы',exact:true}).click();await page.getByRole('heading',{name:'Отзывы о ТопАвто',exact:true}).waitFor();
   await page.screenshot({path:`${out}/${width}-${theme}-public-reviews.png`,fullPage:true});
   await page.goBack();await page.locator('.dealer-profile-tabs button[aria-pressed=true]').filter({hasText:'Каталог'}).waitFor();
-  await page.getByRole('button',{name:'Информация о компании',exact:true}).click();
+  await page.getByRole('button',{name:/Открыть логотип/}).click();
   await page.waitForFunction(()=>!!history.state?.acOverlayStep);
   await page.evaluate(()=>{history.pushState({},'', '/request?dealer=dealer_topavto');document.querySelector('dialog[open]').close();});
   await page.goBack();await page.waitForFunction(()=>location.search==='?view=profile'&&!history.state?.acOverlayStep);
@@ -264,7 +264,7 @@ try{
   assert.equal(writes,0,'opening editor does not publish changes');
   gate=new Promise(r=>{releaseSave=r;});
   await page.getByLabel('Название компании',{exact:true}).fill('Первая правка');
-  await page.getByText('Сохраняем…',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'Сохраняем…',exact:true}).waitFor();
   await page.getByLabel('Название компании',{exact:true}).fill('Последняя правка');
   releaseSave();
   await page.waitForFunction(()=>JSON.parse(sessionStorage.getItem('fixture-server')||'{}').name==='Последняя правка');
