@@ -4,7 +4,7 @@ export function publicRail(s: DealerShowcase, city = "") {
     ? s.offers
         .filter((o) => o.status === "published" && offerSectionEnabled(s,o))
         .map((o) => {
-          const c = calculateSpecial(s, o);
+          const c = calculateSpecial(s, o, city || undefined);
           return {
             id: o.id,
             availability: offerAvailability(o),
@@ -16,6 +16,10 @@ export function publicRail(s: DealerShowcase, city = "") {
             image: o.photos[0]?.url || "",
             title: specialTitle(o),
             price: c.totalRub,
+            calculation: offerAvailability(o)==="order" ? {
+              showcase: {dealerId:s.dealerId, pricing:s.pricing, offices:[]},
+              offer: (({availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
+            } : undefined,
             city: c.city,
             daysFrom: c.daysFrom,
             daysTo: c.daysTo,

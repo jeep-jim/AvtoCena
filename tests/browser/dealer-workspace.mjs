@@ -132,12 +132,21 @@ try{
    await page.getByText(stock?'Адрес автомобиля':'Офис дилера',{exact:true}).waitFor();
    await page.locator('.dealer-offer-identity iframe').waitFor();
    if(!stock){
-    assert.equal(await page.locator('.ac-offer-price-panel .ac-price').innerText(),'Выберите город');
+    const basePrice=await page.locator('.ac-offer-price-panel .ac-price').innerText();
+    assert.match(basePrice,/₽/);
+    await page.getByText('Стоимость с доставкой до Новосибирск',{exact:true}).waitFor();
+    const relatedPrice=page.locator('[data-dealer-related] a[href$="another-order"] .ac-price');
+    assert.equal(await relatedPrice.innerText(),basePrice);
+    const heading=page.locator('[data-dealer-related] a[href$="another-order"] h3');
+    assert.equal(await heading.evaluate(el=>getComputedStyle(el).webkitLineClamp),'2');
+    assert.ok(await heading.evaluate(el=>el.clientHeight<=parseFloat(getComputedStyle(el).lineHeight)*2+1));
+    assert.equal(await page.locator('[data-dealer-related] .overflow-x-auto').first().evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
     await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).filter({visible:true}).last().click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Москва',exact:true}).click();
     await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();await page.waitForFunction(()=>!history.state?.acOverlayStep);
-    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();
+    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),moscow);
     await page.evaluate(()=>{localStorage.setItem('avtocena_city','Красноярск');document.cookie='avtocena_city='+encodeURIComponent('Красноярск')+'; Path=/';const u=new URL(location.href);u.searchParams.delete('city');history.replaceState(history.state,'',u);window.dispatchEvent(new Event('avtocena:city-changed'));});
     await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();assert.notEqual(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
+    assert.equal(await relatedPrice.innerText(),await page.locator('.ac-offer-price-panel .ac-price').innerText());
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
@@ -222,6 +231,16 @@ try{
   await page.getByRole('button',{name:'Добавить город',exact:true}).click();assert.ok(writes.at(-1).body.pricing.tariffs.every(t=>t.city));await page.getByLabel('Город 3',{exact:true}).fill('Томск');await page.getByLabel('Стоимость 3, $',{exact:true}).fill('950');await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('950'));assert.equal(writes.at(-1).body.pricing.tariffs.find(t=>t.city==='Томск').usd,950);
   for(const [kw,hp] of [['117.68',160],['147.1',200]]){const saved=page.waitForResponse(r=>r.request().method()==='PUT'&&Math.abs((r.request().postDataJSON()?.offers?.[0]?.powerHp||0)*.73549875-Number(kw))<1e-7);await page.getByLabel('Мощность ДВС / ЭВ, кВт',{exact:true}).fill(kw);assert.equal(Number(await page.getByLabel('Мощность ДВС / ЭВ, л.с.',{exact:true}).inputValue()),hp);await saved;assert.ok(Math.abs(writes.at(-1).body.offers[0].powerHp*.73549875-Number(kw))<1e-7,'round display only; preserve exact calculation power');}
   await page.getByLabel('Мощность ДВС / ЭВ, кВт',{exact:true}).fill('162');assert.equal(Number(await page.getByLabel('Мощность ДВС / ЭВ, л.с.',{exact:true}).inputValue()),220);await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('220.258702'));await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'Цвет',exact:true}).click();
+  const palette=page.getByRole('dialog',{name:'Цвет автомобиля'});await palette.waitFor();
+  assert.equal(await palette.locator('button[aria-pressed]').count(),20);
+  assert.ok(await palette.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'palette fits viewport');
+  await palette.screenshot({path:`${out}/${width}-${theme}-color-palette.png`});
+  await palette.getByRole('button',{name:'Синий',exact:true}).click();
+  await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('Синий'));
+  assert.match(await page.getByRole('button',{name:'Цвет',exact:true}).innerText(),/Синий/);
+  await page.getByRole('button',{name:'Цвет',exact:true}).click();await palette.getByRole('button',{name:'Белый',exact:true}).click();
+  await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postData()?.includes('Белый'));
   if(width<761){const pair=await page.locator('.dealer-power-pair').boundingBox();for(const name of ['Объём, см³','30-мин. мощность, кВт','Коробка передач','Привод','Кузов','Цвет','Пробег, км']){const box=await page.getByLabel(name,{exact:true}).boundingBox();assert.ok(Math.abs(box.x-pair.x)<2&&Math.abs(box.width-pair.width)<2,'mobile field uses full row: '+name);}}
   const fold=page.locator('.dealer-offer-fields > details').last();await page.getByLabel('Таможня сверх цены, ₽',{exact:true}).scrollIntoViewIfNeeded();const summary=await fold.locator(':scope > summary').boundingBox();assert.ok(summary.y>=0&&summary.y<180,'collapse header remains visible');
   await page.getByLabel('Статус автомобиля',{exact:true}).selectOption('published');assert.equal(await page.getByLabel('Статус',{exact:true}).inputValue(),'draft');await page.getByText(/Для публикации Toyota RAV4 заполните:/).waitFor();

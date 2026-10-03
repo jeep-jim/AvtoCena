@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import {persistCity} from "../../lib/location/selected-city";
 
 type CitySuggestion = { city: string; region?: string };
 
@@ -38,11 +39,6 @@ function setControlledInputValue(input: HTMLInputElement, value: string) {
   setter?.call(input, value);
   input.dispatchEvent(new Event("input", { bubbles: true }));
   input.dispatchEvent(new Event("change", { bubbles: true }));
-}
-
-function persistCity(city: string) {
-  try { window.localStorage.setItem("avtocena_city", city); } catch { /* storage may be unavailable */ }
-  document.cookie = `avtocena_city=${encodeURIComponent(city)}; Max-Age=15552000; Path=/; SameSite=Lax`;
 }
 
 function pinSvg() {

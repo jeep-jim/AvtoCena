@@ -174,14 +174,15 @@ export function specialPath(dealerId: string, id: string) {
   return `/cars/offer/${specialOfferId(dealerId, id)}`;
 }
 export type OfferAvailability = "order" | "stock";
-export const offerAvailability = (o: SpecialOffer): OfferAvailability => o.availability === "stock" ? "stock" : "order";
+export const offerAvailability = (o: Pick<SpecialOffer,"availability">): OfferAvailability => o.availability === "stock" ? "stock" : "order";
 export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) === "stock" ? "В наличии" : "Под заказ";
 export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled">, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
 export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
 export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
+export type SpecialCalculationOffer = Pick<SpecialOffer, "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
 export function calculateSpecial(
   s: Pick<DealerShowcase,"pricing"|"offices"|"dealerId">,
-  o: SpecialOffer,
+  o: SpecialCalculationOffer,
   city = (s.pricing.distancePricing?o.defaultCity:"") || s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
 ) {

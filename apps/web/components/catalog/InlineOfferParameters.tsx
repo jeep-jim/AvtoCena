@@ -192,7 +192,7 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
   {afterPrice}
-  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!initialScenario} syncStored={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} description={deliveryDescription(deliveryQuote)}/>
+  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection syncStored syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} description={deliveryDescription(deliveryQuote)}/>
 
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
