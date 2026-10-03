@@ -177,9 +177,9 @@ try{
     await page.keyboard.press('Escape');await triggers.nth(3).click();await grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.waitForTimeout(850);assert.ok(Math.abs(Number(requests.at(-1)?.powerKw)-150*0.73549875)<1e-7);
     const hp=grid.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true});
     const kw=grid.getByRole('spinbutton',{name:'Мощность, кВт (если известна)',exact:true});
-    await kw.fill('110');assert.equal(await hp.inputValue(),'150','rounding kW preserves manually entered horsepower');
+    for(const value of ['1','16','162','110']){await kw.fill(value);assert.ok(Math.abs(Number(await hp.inputValue())-Number(value)/.73549875)<1e-7,'each kW edit recalculates horsepower');}
     await hp.fill('160');assert.ok(Math.abs(Number(await kw.inputValue())-160*0.73549875)<1e-7);
-    await kw.fill('');assert.equal(await hp.inputValue(),'160','clearing kW preserves manually entered horsepower');
+    await kw.fill('');assert.equal(await hp.inputValue(),'','clearing kW clears its paired horsepower');
     await hp.fill('150');await hp.press('Enter');assert.equal(await grid.locator('[data-parameter-editor][open]').count(),0,'Enter commits manual input and closes');
     await triggers.nth(3).click();if(await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).getAttribute('aria-expanded')==='false')await grid.getByRole('button',{name:'Выбрать: Мощность, л.с.',exact:true}).click();
     await grid.locator('[aria-label="Варианты: Мощность, л.с."]').getByRole('button',{name:'120',exact:true}).click();
@@ -208,13 +208,12 @@ try{
     const motorHp=grid.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true});
     const iceKw=grid.getByRole('spinbutton',{name:'Мощность ДВС, кВт',exact:true});
     const iceHp=grid.getByRole('spinbutton',{name:'Мощность ДВС, л.с.',exact:true});
-    const initialMotorHp=await motorHp.inputValue();
-    await motorKw.fill('10');assert.equal(await motorHp.inputValue(),initialMotorHp,'editing motor kW preserves existing motor hp');
+    await motorKw.fill('10');assert.ok(Math.abs(Number(await motorHp.inputValue())-10/.73549875)<1e-7,'motor kW recalculates only motor hp');
     assert.equal(await iceKw.inputValue(),'100','electric motor input must not overwrite combustion power');
     await motorHp.fill('20');assert.ok(Math.abs(Number(await motorKw.inputValue())-20*0.73549875)<1e-7);
     await iceHp.fill('100');assert.ok(Math.abs(Number(await iceKw.inputValue())-100*0.73549875)<1e-7);
-    await iceKw.fill('36');assert.equal(await iceHp.inputValue(),'100','editing combustion kW preserves manually entered hp');
-    await motorKw.fill('');assert.equal(await motorHp.inputValue(),'20');assert.equal(await iceKw.inputValue(),'36');
+    await iceKw.fill('36');assert.ok(Math.abs(Number(await iceHp.inputValue())-36/.73549875)<1e-7,'combustion kW recalculates combustion hp');
+    await motorKw.fill('');assert.equal(await motorHp.inputValue(),'');assert.equal(await iceKw.inputValue(),'36');
     await grid.getByLabel('Тип гибрида для расчёта',{exact:true}).selectOption('series_hybrid');
     assert.equal(await grid.locator('[data-parameter-editor][open]').count(),1,'hybrid type selection keeps the related power inputs open');
     await page.keyboard.press('Escape');
@@ -289,11 +288,9 @@ try{
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('20');
     assert.equal(await page.getByRole('button',{name:'Нет данных — требуется уточнение',exact:true}).count(),0);
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'20');
-    const retainedMotorHp=await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue();
     await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).fill('');
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
-    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),retainedMotorHp,'clearing kW preserves existing hp');
-    // To remove the physical quantity entirely, explicitly clear horsepower too.
+    assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).inputValue(),'','clearing kW clears paired hp');
     await page.getByRole('spinbutton',{name:'30-минутная мощность, л.с.',exact:true}).fill('');
     assert.equal(await page.getByRole('spinbutton',{name:'30-минутная мощность, кВт',exact:true}).inputValue(),'');
     await page.waitForTimeout(850);assert.equal(await page.getByText('Стоимость под ключ',{exact:true}).count(),0);
