@@ -51,5 +51,12 @@ test('program endpoints enforce owner, paid access, trial idempotency and hidden
   (globalThis as any).__programActor=null;assert.equal((await apply(form())).status,200);
   (globalThis as any).__programActor=owner;assert.equal((await modules.features.PUT(req({version:1,affiliatesEnabled:true,partnersEnabled:false,knowledgeEnabled:false}))).status,200);
   (globalThis as any).__programActor=null;assert.equal((await apply(form())).status,404);
+  const directory=form();directory.set('source','dealer_directory');directory.set('partnerType','dealer');
+  const invalid=form();invalid.set('source','dealer_directory');invalid.delete('consent');assert.equal((await apply(invalid)).status,400);
+  assert.equal((await modules.apply.POST(new Request('https://avtocena.com/api/dealers/apply',{method:'POST',headers:{origin:'https://evil.example'},body:directory}))).status,403);
+  assert.equal((await apply(directory)).status,200);
+  const applicationIndex=JSON.parse(fs.readFileSync(path.join(tmp,'data/dealers/applications-index.json'),'utf8'));
+  const applications=applicationIndex.chunks.flatMap((c:any)=>JSON.parse(fs.readFileSync(path.join(tmp,'data/dealers',c.file),'utf8')));
+  const submitted=applications.find((a:any)=>a.source==='dealer_directory');assert.ok(submitted);assert.equal(submitted.status,'new');assert.equal(submitted.companyName,'Supplier');assert.equal(submitted.email,'test@example.com');assert.ok(submitted.consentAt);
  }finally{delete(globalThis as any).__programActor;process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;fs.rmSync(tmp,{recursive:true,force:true});}
 });
