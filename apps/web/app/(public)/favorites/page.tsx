@@ -66,7 +66,7 @@ export default function FavoritesPage() {
       <h1 className="text-4xl font-black tracking-[-0.04em] md:text-6xl">Избранное</h1>
       <p className="mt-3 max-w-2xl text-white/58">Сохраняйте понравившиеся автомобили и компании.</p>
 
-      <nav aria-label="Каталоги" className="mt-7 grid grid-cols-2 gap-3"><Link href="/cars" className="rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4 text-center font-bold">Автомобили ↗</Link><Link href="/dealers" className="rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4 text-center font-bold">Автодилеры ↗</Link></nav>
+      <nav aria-label="Каталоги" className="mt-7 grid grid-cols-2 gap-3"><Link href="/cars" className="rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4 text-center font-bold">Автомобили</Link><Link href="/dealers" className="rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4 text-center font-bold">Автодилеры</Link></nav>
       <SubscribedDealers/>
       <h2 className="mt-8 text-2xl font-black">Автомобили</h2>
       {items.length ? <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
