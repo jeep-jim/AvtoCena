@@ -24,9 +24,11 @@ body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0;padding-bottom:12
 
 /* Centered identity follows the supplied dealer profile reference. */
 .dealer-profile-identity>.dealer-desktop-request{display:flex;width:fit-content;margin:14px auto 0}
-.dealer-profile-identity{padding:20px 28px 24px;margin-top:-32px}
+.dealer-profile-identity{--dealer-logo-cutout:56px;padding:20px 28px 24px;margin-top:-56px;background:transparent;box-shadow:none;isolation:isolate}
+/* Cut only the sheet background: the real cover remains visible around the logo. */
+.dealer-profile-identity:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--ac-surface);-webkit-mask-image:radial-gradient(circle at 50% 0,transparent var(--dealer-logo-cutout),#000 calc(var(--dealer-logo-cutout) + 1px));mask-image:radial-gradient(circle at 50% 0,transparent var(--dealer-logo-cutout),#000 calc(var(--dealer-logo-cutout) + 1px))}
 .dealer-identity-row{display:block;position:relative;text-align:center}
-.dealer-identity-row>.dealer-avatar-centered{display:grid;position:absolute;left:50%;top:-64px;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;background:var(--ac-surface);border:8px solid var(--ac-surface);background:var(--ac-surface-2);padding:5px;z-index:2;overflow:hidden}
+.dealer-identity-row>.dealer-avatar-centered{display:grid;position:absolute;left:50%;top:-66px;transform:translateX(-50%);width:92px;height:92px;border-radius:50%;border:3px solid var(--ac-surface);background:var(--ac-surface-2,var(--ac-surface));padding:5px;z-index:2;overflow:hidden}
 .dealer-avatar-centered img{border-radius:50%;object-fit:contain}
 .dealer-profile-metrics{display:grid;grid-template-columns:1fr 1fr;gap:120px;min-height:64px;max-width:620px;margin:0 auto 16px}
 .dealer-profile-metrics button{display:flex;flex-wrap:wrap;justify-content:center;align-content:start;align-items:center;gap:4px 8px;min-height:52px}
@@ -52,7 +54,7 @@ body:has(.dealer-profile) .ac-public-legal-footer{margin-top:0;padding-bottom:12
 .dealer-profile-footer{margin-top:28px;padding:24px 0;border-top:1px solid var(--ac-border)}.dealer-profile-footer:has(>.dealer-requisites:empty){display:none}.dealer-profile-footer:not(:has(.dealer-requisites)){display:none}
 @media(max-width:800px){
  .dealer-profile-identity>.dealer-desktop-request{display:none}
- .dealer-profile-identity{padding:16px 24px 22px;margin-top:-32px}.dealer-identity-row>.dealer-avatar-centered{top:-48px;width:72px;height:72px;border-width:6px;padding:3px}
+ .dealer-profile-identity{--dealer-logo-cutout:44px;padding:16px 24px 22px;margin-top:-44px}.dealer-identity-row>.dealer-avatar-centered{top:-52px;width:72px;height:72px;border-width:3px;padding:3px}
  .dealer-profile-metrics{gap:88px;margin-bottom:12px;min-height:54px}.dealer-profile-metrics strong{font-size:20px}.dealer-profile-metrics span{font-size:12px}.dealer-profile-metrics svg{width:17px;height:17px}
  .dealer-identity-title h1{font-size:22px;padding:0 24px}.dealer-identity-divider{font-size:14px;gap:14px;margin-bottom:8px}.dealer-intro{font-size:15px;line-height:1.6}.dealer-intro-wrap{margin-top:10px}.dealer-expand{font-size:14px}
  .dealer-profile-tabs{margin:12px 20px 18px;padding:5px;gap:3px}.dealer-profile-tabs button{font-size:14px;padding:10px 8px;min-height:44px}
