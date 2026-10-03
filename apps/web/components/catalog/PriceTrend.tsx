@@ -4,7 +4,7 @@ import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useTapActivation } from "./useTapActivation";
 
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
-import {PublicSheet} from "@/components/ui/PublicSheet";
+import {PublicSheet} from "../ui/PublicSheet";
 import { loadPublicRates, subscribePublicRates } from "../../lib/catalog/public-rates-client";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
 import { JapanAuctionBadges } from "./JapanAuctionBadges";

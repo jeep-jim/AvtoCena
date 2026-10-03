@@ -7,6 +7,7 @@ const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/Cata
 const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");
 const auctionCardPrice = fs.readFileSync(new URL("../apps/web/components/catalog/AuctionCardPrice.tsx", import.meta.url), "utf8");
 const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");
+const publicSheet = fs.readFileSync(new URL("../apps/web/components/ui/PublicSheet.tsx", import.meta.url), "utf8");
 const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
 const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");
 const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
@@ -104,8 +105,8 @@ test("mobile offer controls remain tappable", () => {
 
 test("mobile currency sheet closes without bubbling back to the price opener", () => {
   assert.match(priceTrend, /const dismiss = \(event: SyntheticEvent\) => \{[\s\S]+event\.preventDefault\(\);[\s\S]+event\.stopPropagation\(\);[\s\S]+closeRef\.current\(\);[\s\S]+\};/);
-  assert.match(priceTrend, /onTouchEnd=\{dismissBackdrop\} onClick=\{dismissBackdrop\}/);
-  assert.match(priceTrend, /onTouchEnd=\{stopSheetEvent\} onClick=\{stopSheetEvent\}/);
+  assert.match(publicSheet, /onTouchEnd=\{dismissBackdrop\} onClick=\{dismissBackdrop\}/);
+  assert.match(publicSheet, /onTouchEnd=\{stopSheetEvent\} onClick=\{stopSheetEvent\}/);
   assert.match(priceTrend, /<button type="button" onTouchEnd=\{dismiss\} onClick=\{dismiss\}[^>]+aria-label="Закрыть">×<\/button>/);
 });
 
