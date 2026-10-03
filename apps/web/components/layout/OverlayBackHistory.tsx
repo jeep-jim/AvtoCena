@@ -7,11 +7,12 @@ export function OverlayBackHistory(){
  useEffect(()=>{
   type Step={element:HTMLElement;token:string;url:string};
   const steps:Step[]=[];
+  let replacementUrl:string|null=null;
   const originalPush=history.pushState,originalReplace=history.replaceState;
   let position=Number(history.state?.acBackPosition)||0;
   originalReplace.call(history,{...history.state,acBackPosition:position},'',location.href);
   const push:History['pushState']=(data,unused,url)=>{position++;originalPush.call(history,{...data,acBackPosition:position},unused,url);};
-  const replace:History['replaceState']=(data,unused,url)=>{originalReplace.call(history,{...data,acBackPosition:position},unused,url);};
+  const replace:History['replaceState']=(data,unused,url)=>{const before=location.pathname;originalReplace.call(history,{...data,acBackPosition:position},unused,url);if(steps.length&&before===location.pathname&&history.state?.acOverlayStep===steps.at(-1)?.token){replacementUrl=location.href;steps.forEach(step=>step.url=location.href);}};
   history.pushState=push;history.replaceState=replace;
   let travelling=false,disposed=false,closing:HTMLElement|null=null;
   const visible=()=>Array.from(document.querySelectorAll<HTMLElement>('dialog[open],[role="dialog"][aria-modal="true"],[data-back-layer],.ac-mobile-filter-sheet')).filter(el=>el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden');
@@ -49,7 +50,7 @@ export function OverlayBackHistory(){
    // A route opened from a dialog no longer has that dialog mounted. Skip its
    // old entries on Back so one gesture returns to the preceding page.
    if(!travelling&&!steps.length&&state?.acOverlayStep&&backwards){history.back();return;}
-   if(travelling){travelling=false;queueMicrotask(sync);return;}
+   if(travelling){if(replacementUrl&&new URL(replacementUrl).pathname===location.pathname){originalReplace.call(history,history.state,'',replacementUrl);}replacementUrl=null;travelling=false;queueMicrotask(sync);return;}
    const step=steps.at(-1);
    if(step&&history.state?.acOverlayStep!==step.token){
     steps.pop();travelling=true;closing=step.element;close(step.element);

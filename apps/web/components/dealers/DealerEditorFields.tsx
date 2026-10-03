@@ -12,17 +12,20 @@ export function Field({
   onChange,
   type = "text",
   maxLength,
+  invalid=false,
 }: {
   label: string;
   value: string | number;
   onChange: (v: any) => void;
   type?: string;
   maxLength?: number;
+  invalid?: boolean;
 }) {
   return (
     <label className="grid gap-1 text-sm">
       {label}
       <input
+        aria-invalid={invalid||undefined}
         className={input}
         type={type}
         maxLength={maxLength}
@@ -65,7 +68,7 @@ export function Photos({
   value,
   onChange,
   single = false,
-  limit = 40,
+  limit = 30,
   purpose,
 }: {
   dealerId: string;
@@ -93,7 +96,7 @@ export function Photos({
      const r=await fetch(`/api/crm/dealers/${dealerId}/media`,{method:'POST',body});const p=await r.json();if(!r.ok)throw Error(p.error||'Не удалось загрузить');added.push(p);
     }catch(e){failures++;setError(e instanceof Error?e.message:'Не удалось загрузить фото');}
    }
-   if(added.length)onChange(single?added.slice(-1):[...latest.current,...added]);
+   if(added.length)onChange(single?added.slice(-1):[...new Map([...latest.current,...added].map(p=>[p.url,p])).values()].slice(0,limit));
    setProgress(`Загружено: ${added.length}${failures?`. Не загружено: ${failures}`:''}`);setBusy(false);setUrl('');if(picker.current)picker.current.value='';
   }
   function move(i:number,to:number){const next=[...value];const [p]=next.splice(i,1);next.splice(to,0,p);onChange(next);}

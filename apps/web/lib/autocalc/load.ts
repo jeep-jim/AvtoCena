@@ -1,3 +1,4 @@
+import {offerImages} from '../catalog/offer-images';
 import {extractSource,readSource,sourceUrl} from './source';
 import {sourceIdentity} from './sources';
 import {DetailReadCache} from '../catalog/detail-read-cache';
@@ -77,9 +78,9 @@ export async function loadSource(value:string):Promise<SourceDraft>{
     data=fromRow({make:r.mnuftrNm,model:r.modelNm,trim:r.grdFullNm,year:e.year.value,productionDate:r.mfgDt,engineCc:e.engineCc.value,powerHp:e.powerHp.value,fuel:e.fuel.value,price:Number(r.salprc)*10000,currency:'KRW',mileageKm:r.milg,transmission:r.trnsmsncdNm,images:exactVehicleGallery(d,identity.id)},url,'korea');
    }else{const page=await readSource(url,signal);data=await extractKnownSource(page.html,page.url);}
    if(!data.price&&!Object.keys(data.draft).length)throw Error('Не получены характеристики объявления');
-   return {...data,capturedAt:new Date().toISOString(),message:'Данные получены из объявления. Проверьте характеристики и заполните недостающее.'};
+   return {...data,images:offerImages(data.images),capturedAt:new Date().toISOString(),message:'Данные получены из объявления. Проверьте характеристики и заполните недостающее.'};
   }catch{
-   const saved=await savedSource(url);if(saved)return saved;
+   const saved=await savedSource(url);if(saved)return {...saved,images:offerImages(saved.images)};
    return {title:'',make:'',model:'',market:identity?.market||'',price:'',currency:'',images:[],draft:{},url,message:'Не получилось загрузить объявление: источник не отдал данные. Попробуйте другую ссылку или введите характеристики вручную.'};
   }
  });}finally{pendingLoads--;}

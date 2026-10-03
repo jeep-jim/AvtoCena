@@ -43,12 +43,12 @@ test('electric research preserves identity without requesting hybrid classificat
  assert.throws(()=>validateCustomerParameters(draft));
 });
 
- test('editing kW preserves entered hp for every power pair, even while clearing and retyping', () => {
+ test('editing kW recalculates hp for every keystroke in each independent power pair', () => {
  for (const [hp,kw] of [['powerHp','powerKw'],['icePowerHp','icePowerKw'],['power30MinHp','power30MinKw']]) {
   let draft = powerUnitPatch(hp,'118');
-  for (const value of ['87','','86','86.8']) {
+  for (const value of ['1','16','162','','86','86.8']) {
    draft = {...draft,...powerUnitPatch(kw,value,draft)};
-   assert.equal(draft[hp],'118');
+   assert.equal(draft[hp],value?String(Number((Number(value)/0.73549875).toFixed(8))):'');
    assert.equal(draft[kw],value);
   }
   draft = {...draft,...powerUnitPatch(hp,'120',draft)};

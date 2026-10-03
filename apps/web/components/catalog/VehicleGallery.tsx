@@ -1,5 +1,6 @@
 "use client";
 
+import {offerImages} from '@/lib/catalog/offer-images';
 import { PhotoBrowser } from "./PhotoBrowser";
 import type { FavoriteSnapshot } from "./FavoriteToggle";
 import { retryProtectedPhoto } from "./protected-photo-retry";
@@ -14,7 +15,7 @@ function dominantWheelDelta(event: WheelEvent) {
 }
 
 export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot }: { images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
-  const cleanImages = [...new Set(images.filter(Boolean))];
+  const cleanImages = offerImages(images);
   const [activeIndex, setActiveIndex] = useState(0);
   const [browserOpen, setBrowserOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);

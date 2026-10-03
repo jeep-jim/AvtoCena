@@ -3,7 +3,7 @@ import type {SourceDraft} from '../autocalc/load';
 import type {SpecialOffer} from './showcase-model';
 export const importLabels:Partial<Record<keyof SpecialOffer,string>>={make:'Марка',model:'Модель',trim:'Комплектация',year:'Год производства',productionMonth:'Месяц производства',engineCc:'Объём, см³',powerHp:'Мощность, л.с.',power30MinKw:'30-мин. мощность, кВт',fuel:'Двигатель',transmission:'Коробка передач',drive:'Привод',body:'Кузов',color:'Цвет',steering:'Руль',mileageKm:'Пробег, км',priceUsd:'Цена автомобиля, $',description:'Описание',equipment:'Оснащение'};
 /** Only evidence supplied by the existing extractor. No customs or eligibility assumptions. */
-export function importedOffer(data:SourceDraft):Partial<SpecialOffer>{
+export function importedOffer(data:SourceDraft,mode:"listing"|"specs"="listing"):Partial<SpecialOffer>{
  const identity=splitAutoCalcIdentity(data.title||'');
  const patch:Partial<SpecialOffer>={};
  const make=autoCalcMake(data.make||identity.make);const model=data.model||identity.model;
@@ -21,6 +21,7 @@ export function importedOffer(data:SourceDraft):Partial<SpecialOffer>{
   if(fact.label==='Привод'&&fact.value)patch.drive=fact.value;
  }
  if(data.currency?.toUpperCase()==='USD'&&Number(data.price)>0)patch.priceUsd=Number(data.price);
+ if(mode==="specs"){delete patch.priceUsd;delete patch.description;}
  return patch;
 }
 export function applyImportedOffer(current:SpecialOffer,patch:Partial<SpecialOffer>,replace=false){

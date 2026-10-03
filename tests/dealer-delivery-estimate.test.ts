@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {defaultShowcase,calculateSpecial,normalizeShowcase,type SpecialOffer} from '../apps/web/lib/dealers/showcase-model';
-import {deliveryDistance,estimateDealerDelivery,deliveryLocation} from '../apps/web/lib/dealers/delivery-estimate';
+import {deliveryDistance,estimateDealerDelivery,deliveryLocation,deliveryCalibrationError} from '../apps/web/lib/dealers/delivery-estimate';
 import {selectCityShowcases} from '../apps/web/lib/dealers/public-showcase';
 const s=defaultShowcase('dealer_topavto'),tariffs=s.pricing.tariffs;
 test('delivery anchors are exact; new cities use calibrated geographic estimates',()=>{
@@ -40,4 +40,11 @@ test('pilot is nationwide alone; with other dealers only physical city matches',
  assert.deepEqual(selectCityShowcases([pilot,other],'г. Москва').map(s=>s.dealerId),['other']);
  assert.deepEqual(selectCityShowcases([pilot,other],'Новосибирск'),[],'shipping destination is not dealer location');
  assert.equal(selectCityShowcases([pilot,other],'').length,2);
+});
+
+test('delivery calibration requires two priced known cities at least 100 km away',()=>{
+ assert.ok(deliveryCalibrationError('Бишкек',tariffs.slice(0,1)));
+ assert.ok(deliveryCalibrationError('Москва',[{...tariffs[0],city:'Москва'},tariffs[1]]));
+ assert.ok(deliveryCalibrationError('Бишкек',[tariffs[0],{...tariffs[1],usd:0}]));
+ assert.equal(deliveryCalibrationError('Бишкек',tariffs),null);
 });
