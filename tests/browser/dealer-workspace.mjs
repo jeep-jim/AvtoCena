@@ -154,9 +154,9 @@ try{
     assert.equal(await page.locator('[data-dealer-related] .overflow-x-auto').first().evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
     await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).filter({visible:true}).last().click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Москва',exact:true}).click();
     await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();await page.waitForFunction(()=>!history.state?.acOverlayStep);
-    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),basePrice);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),null);
+    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),moscow);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');
     await page.evaluate(()=>{localStorage.setItem('avtocena_city','Красноярск');document.cookie='avtocena_city='+encodeURIComponent('Красноярск')+'; Path=/';const u=new URL(location.href);u.searchParams.delete('city');history.replaceState(history.state,'',u);window.dispatchEvent(new Event('avtocena:city-changed'));});
-    await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();assert.equal(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
+    await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();assert.notEqual(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);assert.equal(await relatedPrice.innerText(),await page.locator('.ac-offer-price-panel .ac-price').innerText());
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
