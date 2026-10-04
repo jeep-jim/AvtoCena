@@ -1,3 +1,4 @@
+import {hasCrmPermission} from '@/lib/crm-permissions';
 import {getCurrentUser,isCrmRole} from '@/lib/auth';
 import {readCrmUsers} from '@/lib/crm-users';
 import {beginGame,finishGame,gameBest,validGameMode} from '@/lib/crm-game';
@@ -6,6 +7,7 @@ export const dynamic='force-dynamic';
 const json=(data:unknown,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store'}});
 export async function GET(){
  const user=await getCurrentUser();if(!user||!isCrmRole(user.role)||user.status==='disabled')return json({error:'Войдите в CRM'},401);
+ if(!hasCrmPermission(user,'game'))return json({error:'Доступ запрещён'},403);
  try{
   const users=(await readCrmUsers()).filter(u=>isCrmRole(u.role)&&u.status!=='disabled'&&(u.companyId||'')===(user.companyId||''));
   const team=[]; // Bounded concurrency, even for large teams.
@@ -16,6 +18,7 @@ export async function GET(){
 export async function POST(request:Request){
  if(!isCalculationOriginAllowed(request)||request.headers.get('sec-fetch-site')==='cross-site')return json({error:'Запрос отклонён'},403);
  const user=await getCurrentUser();if(!user||!isCrmRole(user.role)||user.status==='disabled')return json({error:'Войдите в CRM'},401);
+ if(!hasCrmPermission(user,'game'))return json({error:'Доступ запрещён'},403);
  try{
   if(Number(request.headers.get('content-length')||0)>2048)return json({error:'Слишком большой запрос'},413);
   const raw=await request.text();if(raw.length>2048)return json({error:'Слишком большой запрос'},413);

@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'apps/web/lib/*metrika*'
+      - 'apps/web/components/analytics/**'
       - 'apps/web/lib/privacy-consent.ts'
       - 'apps/web/lib/lead-submit-client.ts'
       - 'apps/web/components/legal/ConsentCheckbox.tsx'

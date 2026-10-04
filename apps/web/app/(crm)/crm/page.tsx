@@ -67,7 +67,7 @@ export default async function CrmPage() {
           </div>
         </div>
       </div>
-      {hasCrmPermission(user,"activityAll")&&<SiteAnalytics/>}
+      {hasCrmPermission(user,"analytics")&&<SiteAnalytics/>}
     </CrmShell>
   );
 }
