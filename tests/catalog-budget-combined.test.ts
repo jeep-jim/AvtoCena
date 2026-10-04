@@ -19,7 +19,9 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
  storage.readJsonWithMeta=async<T>(key:string,fallback:T)=>{
   reads.push(key);let value:unknown;
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
+  else if(key==='fees/exchange-rates.json')value={};
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
+  else if(key.endsWith('/budget-count-v3.json'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v2.json'))value=index;
   else if(key.includes('/budget-cards-v2/')){const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:[rows[block]]};}
   else assert.fail('unexpected large or unrelated storage read: '+key);
@@ -37,7 +39,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
    assert.equal(count.total,expected.length);assert.equal(results.total,expected.length);
    assert.deepEqual(facets.makes,expected.length?['Hyundai']:[]);
    assert.equal(reads.some(key=>key.includes('projection')),false);
-   assert.equal(reads.some(key=>key.endsWith('/1.json')||key.endsWith('/4.json')),false,'old and expensive blocks are never read');
+   assert.equal(reads.some(key=>key.endsWith('/1.json')),false,'year metadata excludes old cars before pricing');
    assert.equal(reads.filter(key=>key.endsWith('/budget-count-v2.json')).length,1,'facets, count and results share the index');
   }
   }
@@ -46,7 +48,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   const [count,facets,brands]=await Promise.all([countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
    assert.deepEqual(brands.counts,rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length?{Hyundai:rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length}:{});
   assert.equal(count.total,2);assert.deepEqual(facets.makes,['Hyundai']);
-  assert.equal(reads.some(key=>key.includes('budget-cards-v2')),false,'mileage counts and facets never load card blocks with the compact mileage index');
+  assert.equal(reads.filter(key=>key.includes('budget-cards-v2')).length,4,'price predicates replay only metadata candidates, shared by count and facets');
   for(const params of [{bodyType:'sedan'},{bodyType:'suv'},{fuel:'petrol',transmission:'automatic',drive:'fwd'},{yearFrom:2022,mileageTo:50000}]){
    resetCatalogReadCachesForTests();reads.length=0;
    const expected=rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).map(row=>row.id).sort();

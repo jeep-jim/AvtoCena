@@ -241,6 +241,7 @@ test("explicit legacy binary mode: valid catalog photos are resized and stored a
 
 
 test("legacy JPY rate is not divided by 100 and structured CBR nominal is supported", async () => {
+  resetCatalogRateCache();
   const legacy = await convertToRub(1_000_000, "JPY");
   assert.equal(legacy?.sourcePriceRub, 570_000);
   assert.equal(legacy?.nominal, 1);

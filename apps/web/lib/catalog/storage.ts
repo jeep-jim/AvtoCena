@@ -2,7 +2,7 @@ import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
 import {isChinaModelSpecification} from './china-card-variant';
 import { matchesAuctionGrades } from "./auction-grade-filter";
-import {buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCountQuery,type BudgetCountIndex} from "./budget-count-index";
+import {splitBudgetReplayIndex,type BudgetReplayChunk,budgetReplayOffer,buildBudgetCountIndex,countBudgetIndex,matchingBudgetIndex,isBudgetCountQuery,type BudgetCountIndex} from "./budget-count-index";
 import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
@@ -557,6 +557,8 @@ export function resetCatalogReadCachesForTests() {
   filteredSearchCache.clear();
   catalogCountCache.clear();
   budgetIndexCache.clear();
+  liveBudgetBlockCache.clear();
+  liveBudgetReplayCache.clear();
   budgetCardCache.clear();
   filteredBudgetSelectionCache.clear();
   preparedProjectionRows = new WeakMap();
@@ -893,8 +895,7 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   }
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
-    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const modelKeys = await projectionModelKeys(filters);
   const counts = new Map<string, number>();
@@ -925,8 +926,7 @@ export async function readCatalogBrandModelCounts(make: string) {
   if (summary.generationId === manifest.generationId) return {generationId: manifest.generationId, models: summary.brands[catalogBrandReadModelKey(make)]?.models || []};
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
-    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const models = new Map<string, CatalogBrandSummaryModel>();
   for (const row of rows) {
@@ -1016,8 +1016,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
   }
   const modelKeys = await projectionModelKeys(params);
   if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice) {
-    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const offers = rows.filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
   const values = (selector: (offer: CatalogSearchProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -1762,14 +1761,67 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
   for(const row of chunk)blocks.set(row.id,block);
   chunks.push(chunk);
  }
- await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v2/${block}.json`),{generationId,items}));
- const index=buildBudgetCountIndex(generationId,rows,blocks);
+ await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v3/${block}.json`),{generationId,items}));
+ const {index,chunks:pricingChunks}=splitBudgetReplayIndex(buildBudgetCountIndex(generationId,rows,blocks,3));
+ await mapWithConcurrency(pricingChunks,catalogMaintenanceIoConcurrency(),chunk=>writeJsonAtomic(generationPath(generationId,`indexes/${chunk.path}`),chunk.value));
  // Versioned paths are append-only: never silently reuse an older immutable schema.
  // Readiness is published last. Missing/incomplete generations keep the original exact search.
- await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v2.json"),index);
+ await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v3.json"),index);
  return index;
 }
-const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
+// Price selection must replay the same FX, customs anniversaries and business
+// settings as rendered cards. Cache only compact tuples, never whole markets.
+const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntries:512,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:3});
+async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
+ const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
+ const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+ const result:CatalogSearchProjection[]=[];
+ for(let start=0;start<rows.length;start+=128){
+  const prepared=rows.slice(start,start+128);
+  const priced=await applyActiveBusinessPriceBatch(prepared as any[],{readOnly:true}) as CatalogSearchProjection[];
+  result.push(...await attachJapanSearchValues(priced,generationId));
+ }
+ return result;
+}
+async function currentBudgetBlock(generationId:string,version:1|2|3,block:number){
+ return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}`,async()=>{
+  const part=await budgetCardCache.get(`${generationId}:v${version}:${block}`,()=>readIndex(generationId,`budget-cards-v${version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+  if(part.generationId!==generationId)return null;
+  const priced=await currentSearchPrices(prepareCatalogProjectionRows(part.items),generationId);
+  return buildBudgetCountIndex(generationId,priced,new Map(priced.map(row=>[row.id,block])));
+ });
+}
+const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
+async function currentBudgetReplay(index:BudgetCountIndex,market:string){
+ return liveBudgetReplayCache.get(`${index.generationId}:${market}`,async()=>{
+  const source=index.rows.filter(row=>row[0]===market);
+  const originals=new Map(source.map(row=>[row[5].id,row]));
+  const paths=index.pricingChunks?.[market];
+  const refreshed:BudgetCountIndex['rows']=[];
+  if(paths){
+   const seen=new Set<string>();
+   // Discard each input chunk after replay. Only compact prices survive in cache.
+   const parts=await mapWithConcurrency(paths,3,async path=>{
+    const chunk=await readIndex<BudgetReplayChunk|null>(index.generationId,path,null);
+    if(!chunk || chunk.generationId!==index.generationId || chunk.market!==market || !Array.isArray(chunk.entries) || chunk.entries.length>500)throw Error('catalog_budget_replay_invalid');
+    const input=chunk.entries.map(([id,replay])=>{const row=originals.get(id);if(!row||seen.has(id))throw Error('catalog_budget_replay_identity');seen.add(id);return budgetReplayOffer([...row.slice(0,7),replay] as any);});
+    const priced=await currentSearchPrices(input,index.generationId);
+    return buildBudgetCountIndex(index.generationId,priced,new Map(input.map(row=>[row.id,originals.get(row.id)![5].block]))).rows;
+   });
+   if(seen.size!==source.length)throw Error('catalog_budget_replay_incomplete');
+   for(const row of parts.flat()){row[5]=originals.get(row[5].id)![5];refreshed.push(row);}
+  } else {
+   for(let start=0;start<source.length;start+=128){
+    const chunk=source.slice(start,start+128),replay=chunk.filter(row=>row[7]);
+    const priced=await currentSearchPrices(replay.map(budgetReplayOffer),index.generationId);
+    const rebuilt=buildBudgetCountIndex(index.generationId,priced,new Map(replay.map(row=>[row[5].id,row[5].block])));
+    refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7]));
+   }
+  }
+  return refreshed;
+ });
+}
+const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive'];
@@ -1779,21 +1831,24 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
-  if(!index || ![1,2].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
+  const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
+  if(!index || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
+  const cardVersion=index.version;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
   const costs=await currentDepositCosts();
   const pricedIndex={...index,rows:index.rows.map(row=>{
-   if(row[4] || !(row[1]>0))return row;
+   if(index.pricingChunks?.[row[0]] || row[7] || row[4] || !(row[1]>0))return row;
    const deposit=costs[row[0]]||0;
-   return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit] as typeof row;
+   return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit,row[7]] as typeof row;
   })};
-  const sourceRows=hasBudget?matchingBudgetIndex(pricedIndex,params,quotes):[...index.rows,...index.otherRows!];
+  // Never discard an old expensive row before replay: a lower current rate may
+  // move it into budget. Non-price metadata can still narrow block reads first.
+  const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
-  const candidates=sourceRows.filter(row=>
+  let candidates=sourceRows.filter(row=>
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
    && (!params.bodyType || same(row[5].bodyType,params.bodyType))
@@ -1801,7 +1856,21 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && (!params.drive || same(row[5].drive,params.drive)) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
-  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion:index.version,rows:candidates};
+  if(hasBudget && index.version===3){
+   const ids=new Set(candidates.map(row=>row[5].id));
+   const markets=[...new Set(candidates.map(row=>row[0]))];
+   const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
+   candidates=matchingBudgetIndex({...index,rows:parts.flat().filter(row=>ids.has(row[5].id))},params,quotes);
+  } else if(hasBudget){
+   const ids=new Set(candidates.map(row=>row[5].id));
+   const blocks=[...new Set(candidates.map(row=>row[5].block))];
+   const parts=await mapWithConcurrency(blocks,3,block=>currentBudgetBlock(manifest.generationId,cardVersion,block));
+   if(parts.some(part=>!part))return null;
+   const liveRows=parts.flatMap(part=>part!.rows).filter(row=>ids.has(row[5].id));
+   candidates=matchingBudgetIndex({...index,rows:liveRows},params,quotes);
+  }
+
+  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -1809,21 +1878,21 @@ async function readBudgetSelection(params:CatalogSearchParams){
   // Bound decoded memory even when a visitor combines budget, mileage and year.
   // Never materialize the all-market projection for this query.
   await mapWithConcurrency(blocks,2,async block=>{
-   const part=await budgetCardCache.get(`${manifest.generationId}:v${index.version}:${block}`,()=>readIndex(manifest.generationId,`budget-cards-v${index.version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+   const part=await budgetCardCache.get(`${manifest.generationId}:v${cardVersion}:${block}`,()=>readIndex(manifest.generationId,`budget-cards-v${cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
    if(part.generationId!==manifest.generationId){incomplete=true;return;}
    const selected=part.items.filter(row=>ids.has(row.id));
    for(const row of selected)seen.add(row.id);
-   const prepared=await attachJapanSearchValues(prepareCatalogProjectionRows(selected),manifest.generationId);
+   const prepared=hasBudget?await currentSearchPrices(prepareCatalogProjectionRows(selected),manifest.generationId):await attachJapanSearchValues(prepareCatalogProjectionRows(selected),manifest.generationId);
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
-  return {generationId:manifest.generationId,cardVersion:index.version,rows:candidates.filter(row=>matched.has(row[5].id))};
+  return {generationId:manifest.generationId,cardVersion,rows:candidates.filter(row=>matched.has(row[5].id))};
  });
 }
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
  if(params.sort&&params.sort!=="updatedAt")return null;
  const selected=await readBudgetSelection(params);if(!selected)return null;
- const rows=selected.rows.map(([market,totalRub,,, ,metadata])=>({...metadata,market,totalRub}));
+ const rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}}));
  sortCatalogSearchRows(rows,params);
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
@@ -1838,17 +1907,17 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:1,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
 /** Derived immutable index only; generation data and current aliases are untouched. */
 export async function backfillCatalogBudgetCountIndex(){
  const {generationId,rows}=await currentProjectionRows({});
  const manifest=await getJsonStorage().readJson<CatalogManifest>("catalog/manifest.json",{} as CatalogManifest);
  if(manifest.generationId!==generationId)throw Error("catalog_budget_generation_changed");
  const index=await writeBudgetSearchIndex(generationId,rows);
- const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v2.json",null);
- if(stored?.version!==2 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
-  || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v2_not_verified");
- budgetIndexCache.clear();filteredBudgetSelectionCache.clear();
+ const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null);
+ if(stored?.version!==3 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
+  || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v3_not_verified");
+ budgetIndexCache.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
  return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
@@ -1868,8 +1937,7 @@ export async function countCatalogOffers(params: CatalogSearchParams) {
     if(budget)return {generationId:budget.generationId,total:budget.rows.length};
     let {generationId, rows} = await currentProjectionRows(query);
     if (query.budgetFrom || query.budgetTo || query.engineFrom || query.engineTo || query.hasPrice) {
-      const {attachJapanSearchValues} = await import("./japan-delivered-preview");
-      rows = await attachJapanSearchValues(rows, generationId);
+      rows = await currentSearchPrices(rows, generationId);
     }
     const modelKeys = await projectionModelKeys(query);
     let total = 0;
@@ -1890,16 +1958,15 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 }
 /** Read-only parity check against the existing projection search. */
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){
-  if (params.budgetFrom || params.budgetTo || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub")))) {
+  if (params.budgetFrom || params.budgetTo || params.hasPrice || params.sort?.startsWith("totalRub") || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo))) {
     const {generationId,rows}=await currentProjectionRows(params);
-    const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    const prepared=await attachJapanSearchValues(rows,generationId);
+    const prepared=await currentSearchPrices(rows,generationId);
     const modelKeys=await projectionModelKeys(params);
     const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
     sortCatalogSearchRows(matching,params);
     const page=Math.max(1,Number(params.page||1));
     const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
-    return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:[]};
+    return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:catalogMakeFilterValues(params.make).map(currentBrandProjectionPath)};
   }
   return searchOffersStored(params,internalPageLimit);
 }

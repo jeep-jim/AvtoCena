@@ -1,12 +1,19 @@
 name: Prepare compact budget counts
 on:
+  workflow_run:
+    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh georgia, Catalog refresh uae, Catalog refresh europe]
+    types: [completed]
   push:
     branches: [main, feature/autocalc-identity-20260927]
     paths: [scripts/backfill-budget-count-index.mjs, apps/web/lib/catalog/budget-count-index.ts, .github/workflows/backfill-budget-count-index.yml]
 permissions:
   contents: read
+concurrency:
+  group: catalog-budget-index
+  cancel-in-progress: false
 jobs:
   prepare:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -25,4 +32,6 @@ jobs:
       - run: npm run typecheck
       - name: Validate compact delivery and budget parity before publishing the derived index
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-budget-count-index.test.ts
+      - name: Check bucket reserve before adding derived chunks
+        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - run: node --import tsx scripts/backfill-budget-count-index.mjs

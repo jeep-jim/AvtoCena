@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {applyActiveBusinessPriceBatch} from '../apps/web/lib/catalog/live-business-pricing.ts';
+import {attachJapanSearchValues} from '../apps/web/lib/catalog/japan-delivered-preview.ts';
 import {performance} from 'node:perf_hooks';
 import {backfillCatalogBudgetCountIndex,countCatalogOffers,searchOffers,searchOffersWithoutBudgetIndexForTests,readCatalogFacets,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
 console.log(JSON.stringify(await backfillCatalogBudgetCountIndex()));
@@ -12,6 +14,6 @@ for(const city of ['', 'Новокузнецк'])for(const budgetTo of [1500000,
  await readCatalogFacets(params);
  console.log(JSON.stringify({phase:'budget-results-with-facets',city,budgetTo,ms:Math.round(performance.now()-before)}));
  const baseline=await searchOffersWithoutBudgetIndexForTests(params);assert.equal(count.total,baseline.total);
- for(const {market,fast} of results){const old=await searchOffersWithoutBudgetIndexForTests({...params,market});assert.equal(fast.total,old.total,market);assert.deepEqual(fast.items,old.items,market+' exact card parity');}
+ for(const {market,fast} of results){const old=await searchOffersWithoutBudgetIndexForTests({...params,market});assert.equal(fast.total,old.total,market);assert.deepEqual(fast.items.map(row=>row.id),old.items.map(row=>row.id),market+' exact page parity');const current=await attachJapanSearchValues(await applyActiveBusinessPriceBatch(fast.items,{readOnly:true}),fast.generationId);assert.deepEqual(current.map(row=>row.totalRub),old.items.map(row=>row.totalRub),market+' exact current price parity');}
  console.log(JSON.stringify({phase:'exact-parity-passed',city,budgetTo}));
 }

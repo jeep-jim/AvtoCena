@@ -19,7 +19,7 @@ function eligible(offer:Partial<VehicleOffer>){return offer.market==='china' && 
  * not a daily USD->CNY round trip. Original API amounts remain in raw evidence.
  * Batch storage avoids a separate object read/write for every catalog card.
  */
-export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers:T[]):Promise<T[]> {
+export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers:T[],options:{readOnly?:boolean}={}):Promise<T[]> {
  const candidates=offers.filter(eligible);if(!candidates.length)return offers;
  let index=await cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
  const missing=candidates.filter(offer=>!index.entries[key(offer)]);
@@ -28,8 +28,8 @@ export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers
   const added:Index['entries']={};
   for(const offer of missing){const conversion=chinaCnyConversion(Number(offer.sourcePrice),usd,cny);if(conversion)added[key(offer)]=conversion;}
   if(Object.keys(added).length){
-   index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));
-   cache.clear();
+   if(options.readOnly)index={version:1,entries:{...added,...index.entries}};
+   else {index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));cache.clear();}
   }
  }
  return offers.map(offer=>{
