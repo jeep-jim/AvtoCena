@@ -104,3 +104,13 @@ test('own edits, replies, deletion and internal forwarding respect ownership and
  await assert.rejects(reactToChatMessage(owner,id,{messageId:mid,emoji:'👍',active:true}),/chat_forbidden/);
  assert.equal((await readChunkedDataJson('telegram/crm-outbox.json',[])).length,0);
 }));
+test('revoked chat access blocks reads and writes and excludes employee from recipients',()=>isolated(async()=>{
+ const denied={...manager,permissions:{...manager.permissions,chat:false}};
+ await writeDataJson('auth/users.json',[owner,denied,third]);
+ await assert.rejects(chatList(denied),/chat_forbidden/);
+ await assert.rejects(chatDetail(denied,'team_general'),/chat_forbidden/);
+ await assert.rejects(sendChatMessage(denied,'team_general',{text:'Denied',operationId:'operation-denied'}),/chat_forbidden/);
+ await assert.rejects(createDirectChat(owner,denied.id),/chat_forbidden/);
+ assert.equal((await chatList(owner)).team.some(u=>u.id===denied.id),false);
+ assert.equal((await chatDetail(owner,'team_general')).members?.some(u=>u.id===denied.id),false);
+}));

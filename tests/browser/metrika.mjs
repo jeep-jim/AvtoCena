@@ -169,5 +169,22 @@ try{
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));
  assert.equal(await p.evaluate(()=>window.__ymCalls.some(c=>c[1]==='init')),false);
  await slow.close();results.push({refusalDuringDownload:true});
+ const delayed=await browser.newContext({viewport:{width:390,height:900}});
+ let attempts=0;
+ await delayed.route('https://mc.yandex.ru/**',route=>{attempts++;if(attempts===1)return route.abort('failed');return route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=[];var q=window.ym?.a||[];window.ym=(...args)=>window.__ymCalls.push(args);for(var args of q)window.ym(...args);`});});
+ const late=await delayed.newPage();
+ await late.goto(origin+'/?utm_source=yandex&utm_medium=cpc&yclid=789&phone=secret');
+ await late.getByRole('button',{name:'Хорошо',exact:true}).waitFor();
+ await late.evaluate(()=>{history.pushState({},'', '/cars');window.dispatchEvent(new Event('avtocena:metrika-page'));});
+ assert.equal(attempts,0);assert.equal(await late.evaluate(()=>sessionStorage.getItem('ac_yclid')),null);
+ await late.getByRole('button',{name:'Хорошо',exact:true}).click();
+ await late.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
+ const recovered=await late.evaluate(()=>window.__ymCalls.filter(c=>c[1]==='init'));
+ assert.equal(attempts,2);assert.equal(recovered.length,1);
+ assert.equal(recovered[0][2].url,origin+'/cars?utm_source=yandex&utm_medium=cpc&yclid=789');
+ assert.equal(await late.evaluate(()=>sessionStorage.getItem('ac_yclid')),'789');
+ await late.reload();await late.getByRole('button',{name:'Настройки cookie',exact:true}).waitFor();
+ assert.equal(await late.getByRole('button',{name:'Хорошо',exact:true}).count(),0,'saved consent does not prompt again');
+ await delayed.close();results.push({delayedConsentAttribution:true,loadRetry:true,savedChoice:true});
  console.log(JSON.stringify(results));
 }finally{await browser.close();server.close();}

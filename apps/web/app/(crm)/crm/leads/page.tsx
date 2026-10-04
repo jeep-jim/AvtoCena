@@ -140,16 +140,7 @@ export default async function CrmLeadsPage({
             {label}
           </Link>
         ))}
-        {user.role === "owner" ? (
-          <Link
-            href="/crm/settings/metrika"
-            className="crm-lid-button"
-            aria-label="Реклама и Метрика"
-            title="Реклама и Метрика"
-          >
-            Lid
-          </Link>
-        ) : null}
+
       </div>
       <div className="crm-metrika-legend crm-metrika-legend-mobile" aria-label="Статусы для Метрики">
         <strong>Статусы для Метрики</strong><LeadStatusHelp />

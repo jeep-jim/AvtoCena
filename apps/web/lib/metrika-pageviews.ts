@@ -31,6 +31,10 @@ type Adapter={
 
 /** One init per active counter, one hit per distinct SPA URL. */
 export function createMetrikaPageTracker(adapter:Adapter){
+ // Keep only the current document's sanitized entry address in memory.
+ // No cookie, storage write or analytics request happens before consent.
+ const entry=metrikaPageUrl(adapter.href());
+ let started=false;
  let active=false;
  let previous='';
  const stop=()=>{
@@ -44,12 +48,20 @@ export function createMetrikaPageTracker(adapter:Adapter){
   adapter.disable(false);
   adapter.load();
   if(!active){
+   let firstUrl=url;
+   if(!started&&entry){
+    const current=new URL(url),landing=new URL(entry);
+    if(current.origin===landing.origin&&!campaignKeys.some(key=>current.searchParams.has(key))){
+     for(const key of campaignKeys){const value=landing.searchParams.get(key);if(value)current.searchParams.set(key,value);}
+     firstUrl=current.href;
+    }
+   }
    adapter.send(METRIKA_COUNTER_ID,'init',{
     ssr:true,clickmap:false,trackLinks:false,disableYtm:true,
     webvisor:false,ecommerce:false,accurateTrackBounce:15000,
-    url,referrer:metrikaPageUrl(adapter.referrer()),
+    url:firstUrl,referrer:metrikaPageUrl(adapter.referrer()),
    });
-   active=true;previous=url;return;
+   started=true;active=true;previous=url;return;
   }
   if(url===previous)return;
   adapter.send(METRIKA_COUNTER_ID,'hit',url,{referer:previous});

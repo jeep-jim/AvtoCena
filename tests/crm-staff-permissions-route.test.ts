@@ -16,6 +16,9 @@ test('staff writes enforce capability, owner boundary and prevent granting absen
  assert.equal(state.users[0].offerCopyEnabled,false,'new employees start without the flower button');
  response=await save({userId:'new-staff',offerCopyPresent:'1',offerCopyEnabled:'on'});assert.match(response.headers.get('location'),/state=error/);assert.equal(state.users[0].offerCopyEnabled,false,'admin cannot enable the button');
  state.actor={...state.actor,role:'owner'};
+ const previousVersion=state.users[0].sessionVersion||0;
+ response=await save({userId:'new-staff',permission_chat:'on',permission_analytics:'on'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].permissions.chat,true);assert.equal(state.users[0].permissions.analytics,true);assert.equal(state.users[0].sessionVersion,previousVersion+1);
+ response=await save({userId:'new-staff',permission_site:'on'});assert.equal(state.users[0].permissions.site,false,'manager cannot receive site administration');assert.equal(state.users[0].permissions.chat,false,'unchecked chat is revoked');
  response=await save({userId:'new-staff',offerCopyPresent:'1',offerCopyEnabled:'on'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].offerCopyEnabled,true);
  state.actor={...state.actor,role:'admin'};
  response=await save({userId:'new-staff'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].offerCopyEnabled,true,'admin saving other fields preserves owner setting');

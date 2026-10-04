@@ -1,3 +1,4 @@
+import {rememberYandexClick} from '../apps/web/lib/metrika-client';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
@@ -49,3 +50,21 @@ test('immediate first hit, 15-second bounce tracking and SPA hits without duplic
  href='https://avtocena.com/privacy/request?token=private';tracker.sync();assert.equal(calls.at(-1)?.[1],'destruct');
  href='https://avtocena.com/cars';tracker.sync();assert.equal(calls.at(-1)?.[1],'init');
 });
+test('delayed consent retains the entry campaign after SPA navigation without tracking before choice',()=>{
+ let href='https://avtocena.com/?utm_source=yandex&utm_medium=cpc&yclid=123&phone=secret';let allowed=false;
+ const calls:any[][]=[];
+ const tracker=createMetrikaPageTracker({href:()=>href,allowed:()=>allowed,referrer:()=>'',send:(...args)=>calls.push(args),load:()=>{},disable:()=>{}});
+ tracker.sync();href='https://avtocena.com/cars/korea';tracker.sync();assert.equal(calls.length,0);
+ allowed=true;tracker.sync();tracker.sync();
+ assert.equal(calls.length,1);assert.equal(calls[0][1],'init');
+ assert.equal(calls[0][2].url,'https://avtocena.com/cars/korea?utm_source=yandex&utm_medium=cpc&yclid=123');
+});
+
+test('a new campaign wins over the entry campaign and refusal does not replay old attribution',()=>{
+ let href='https://avtocena.com/?yclid=123';let allowed=false;const calls:any[][]=[];
+ const tracker=createMetrikaPageTracker({href:()=>href,allowed:()=>allowed,referrer:()=>'',send:(...args)=>calls.push(args),load:()=>{},disable:()=>{}});
+ tracker.sync();href='https://avtocena.com/cars?utm_campaign=new';allowed=true;tracker.sync();assert.equal(calls[0][2].url,href);
+ allowed=false;tracker.sync();href='https://avtocena.com/favorites';allowed=true;tracker.sync();assert.equal(calls.at(-1)[2].url,href);
+});
+
+test('advertising helper is safe outside the browser without consent',()=>{assert.doesNotThrow(()=>rememberYandexClick());});

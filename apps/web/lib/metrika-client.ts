@@ -2,9 +2,9 @@
 import {analyticsAllowed} from "./privacy-consent";
 export const METRIKA_COUNTER = 112098062;
 const digits = (value: unknown) => typeof value === 'string' && /^\d{1,32}$/.test(value) ? value : '';
-export function rememberYandexClick() {
+export function rememberYandexClick(href?:string) {
  if(!analyticsAllowed())return;
- try {const id=digits(new URLSearchParams(location.search).get('yclid'));if(id)sessionStorage.setItem('ac_yclid',id);} catch {}
+ try {const id=digits(new URL(href||location.href).searchParams.get('yclid'));if(id)sessionStorage.setItem('ac_yclid',id);} catch {}
 }
 export async function metrikaAttribution() {
  if(!analyticsAllowed())return {metrikaClientId:"",yclid:""};
