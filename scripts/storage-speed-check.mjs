@@ -1,6 +1,26 @@
 // Read-only diagnostics; never changes source inventory or catalog manifests.
+import {getHeapStatistics} from 'node:v8';
+import {getJsonStorage} from '../apps/web/lib/data.ts';
+import {countCatalogOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
 import { readDataJson } from '../apps/web/lib/data.ts';
 import { readHomeCatalogSnapshot } from '../apps/web/lib/catalog/storage.ts';
+// Aggregate-only diagnostics for ordinary filters; no listing payloads or credentials.
+const memory=()=>Object.fromEntries(Object.entries(process.memoryUsage()).map(([k,v])=>[k,Math.round(v/1048576)]));
+const probeStorage=getJsonStorage(),probeRead=probeStorage.readJsonWithMeta.bind(probeStorage);
+probeStorage.readJsonWithMeta=async function(file,fallback){
+ const started=performance.now();const result=await probeRead(file,fallback);
+ const kind=file.endsWith('/budget-count-v1.json')?'compact-index':file.includes('/projection/')?'projection':null;
+ if(kind)console.log('FILTER_READ',JSON.stringify({kind,ms:Math.round(performance.now()-started),found:result.found,complete:kind==='compact-index'?Array.isArray(result.value?.otherRows):undefined,rows:kind==='compact-index'?result.value?.rows?.length:result.value?.items?.length,otherRows:result.value?.otherRows?.length,memory:memory()}));
+ return result;
+};
+try{
+ resetCatalogReadCachesForTests();
+ console.log('FILTER_START',JSON.stringify({heapLimitMiB:Math.round(getHeapStatistics().heap_size_limit/1048576),memory:memory()}));
+ for(const query of [{bodyType:'suv'},{bodyType:'suv',market:'korea'},{yearFrom:2022,budgetTo:1600000,mileageTo:50000}]){
+  const started=performance.now(),result=await countCatalogOffers(query);
+  console.log('FILTER_COUNT',JSON.stringify({query,total:result.total,ms:Math.round(performance.now()-started),memory:memory()}));
+ }
+}finally{probeStorage.readJsonWithMeta=probeRead;resetCatalogReadCachesForTests();}
 const manifest = await readDataJson('catalog/manifest.json', null);
 const overview = await readDataJson('catalog/public/overview.json', null);
 const maintenance = await readDataJson('catalog/storage-maintenance.json', null);
