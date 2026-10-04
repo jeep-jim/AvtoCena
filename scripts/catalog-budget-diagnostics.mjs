@@ -1,0 +1,15 @@
+import {getJsonStorage,readDataJson} from '../apps/web/lib/data.ts';
+import {applyActiveBusinessPricingBatch} from '../apps/web/lib/catalog/live-business-pricing.ts';
+import {includedDepositCost} from '../apps/web/lib/catalog/deposit-cost-projection.ts';
+const storage=getJsonStorage();
+storage.writeJson=async()=>{throw Error('diagnostic_read_only');};
+storage.putBinary=async()=>{throw Error('diagnostic_read_only');};
+const manifest=await readDataJson('catalog/manifest.json',{});
+const projection=await readDataJson('catalog/public/projection/korea.json',{items:[]});
+const index=await readDataJson(`catalog/generations/${manifest.generationId}/indexes/budget-count-v2.json`,{rows:[]});
+const id='7e915e3af5196989891846b6';
+const source=projection.items.find(row=>row.id===id);
+if(!source)throw Error('diagnostic_offer_missing');
+const [current]=await applyActiveBusinessPricingBatch([source]);
+const summary=row=>({totalRub:row.totalRub,publicVisibleRub:row.publicVisibleRub,sourcePrice:row.sourcePrice,sourceCurrency:row.sourceCurrency,year:row.year,productionDate:row.productionDate,status:row.calculationStatus,deposit:includedDepositCost(row.calculationSnapshot),rate:row.calculationSnapshot?.currencyRate,customs:row.calculationSnapshot?.customs,customsInput:row.calculationSnapshot?.customsInput,deliveryBasis:row.calculationSnapshot?.deliveryPricingBasis});
+console.log(JSON.stringify({id,generation:manifest.generationId,projectionGeneration:projection.generationId,index:index.rows.find(row=>row[5].id===id)?.slice(0,3),stored:summary(source),current:summary(current)}));
