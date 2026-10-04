@@ -11,7 +11,7 @@ test('engine keeps an explicit reserve while effective market policies set China
   const config={exchangeRateReservePercent:2,topAvtoCommissionRub:90000,securityDepositRub:160000,logisticsRub:250000};
   const q=calculateAvtocenaFromBusinessConfig({marketId,marketConfig:config,sourcePriceRub:1001396});
   assert.equal(q.breakdown[0].amountRub,1001396);
-  assert.equal(q.totalRub,1361424);
+  assert.equal(q.totalRub,1521424);
   assert.equal(q.snapshot.marketConfig.exchangeRateReservePercent,2);
   assert.equal(q.breakdown.at(-1)?.amountRub,20028);
   assert.equal(resolveEffectiveMarketVersion(marketId,config).exchangeRateReservePercent,marketId==='china'?2.2:marketId==='korea'?3:2);
@@ -28,9 +28,9 @@ test('Japanese historical reserve is removed exactly once in detail and compact 
  const compact:any={...full,cardProjectionVersion:3,publicVisibleRub:full.totalRub,calculationSnapshot:compactPricingSnapshot(full)};
  for(const input of [full,compact]){
   const result=applyJapanServiceCosts(input,config);
-  assert.equal(result.totalRub,1109000);
-  assert.equal(applyJapanServiceCosts(result,config).totalRub,1109000);
-  if(result.cardProjectionVersion) assert.equal(result.publicVisibleRub,1109000);
+  assert.equal(result.totalRub,1140000);
+  assert.equal(applyJapanServiceCosts(result,config).totalRub,1140000);
+  if(result.cardProjectionVersion) assert.equal(result.publicVisibleRub,1140000);
  }
  const result=applyJapanServiceCosts(full,config);
  assert.equal(result.calculationSnapshot.breakdown.reduce((s:number,l:any)=>s+l.amountRub,0),result.totalRub);
@@ -43,8 +43,8 @@ test('owner Casper restores reserve while retired export remains excluded',()=>{
  customsRub:4924+145400,utilizationFeeRub:5200,marketConfig:{exchangeRateReservePercent:2,
  securityDepositRub:160000,topAvtoCommissionRub:90000,exportExpensesRub:70000,logisticsRub:250000,
  brokerRub:35000,svhRub:35000,laboratoryRub:50000,rfDeliveryRub:120000}});
- assert.equal(q.totalRub,1826948-70000);
- assert.equal(q.paymentPlan.remainingAfterInitialRub,1506948);
+ assert.equal(q.totalRub,1826948-70000+160000);
+ assert.equal(q.paymentPlan.remainingAfterInitialRub,1666948);
 });
 
 
@@ -58,9 +58,9 @@ test('Japan restores reserve once and list/detail totals agree with a frozen his
   const compact:any={...full,cardProjectionVersion:3,publicVisibleRub:full.totalRub,calculationSnapshot:compactPricingSnapshot(full)};
   for(const input of [full,compact]) {
    const result=applyJapanServiceCosts(input,config);
-   assert.equal(result.totalRub,1129000);
-   assert.equal(applyJapanServiceCosts(result,config).totalRub,1129000);
-   if(result.cardProjectionVersion) assert.equal(result.publicVisibleRub,1129000);
+   assert.equal(result.totalRub,1160000);
+   assert.equal(applyJapanServiceCosts(result,config).totalRub,1160000);
+   if(result.cardProjectionVersion) assert.equal(result.publicVisibleRub,1160000);
    else { assert.equal(result.calculationSnapshot.breakdown.at(-1).amountRub,20000); assert.equal(result.calculationSnapshot.breakdown.reduce((n:number,l:any)=>n+l.amountRub,0),result.totalRub); }
   }
  }

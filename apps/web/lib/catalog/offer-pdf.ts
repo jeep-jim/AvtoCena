@@ -31,10 +31,10 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
  const valuation=new Date(calculatedAt || new Date().toISOString());
  const abroad=[row("car",`Цена автомобиля${source?` · ${source}`:""}`),row("logistics","Логистика до России")];
  if(!calculation)abroad[0].value=rub(offer.sellerPriceRub ?? offer.calculationSnapshot?.sourcePriceRub);
- const foreignSum=amount("car")!=null && amount("logistics")!=null ? Number(amount("car"))+Number(amount("logistics")):null;
- abroad.push({label:"Обеспечительный платёж (аванс)",value:rub(calculation?.paymentPlan?.securityDepositRub)});
+ const foreignSum=amount("car")!=null && amount("logistics")!=null ? Number(amount("car"))+Number(amount("logistics"))+Number(amount("contract-services") || 0):null;
+ abroad.push({label:"Обеспечительный платёж (аванс)",value:rub(amount("contract-services"))});
  abroad.push({label:`Итого: ${markets[offer.market] || offer.market}`,value:rub(foreignSum)});
- const local=lines.filter(line=>!["car","logistics","topavto-commission"].includes(line.id)).map(line=>({label:line.title || line.label || line.id,value:rub(line.amountRub)}));
+ const local=lines.filter(line=>!["car","logistics","contract-services","topavto-commission"].includes(line.id)).map(line=>({label:line.title || line.label || line.id,value:rub(line.amountRub)}));
  if(!calculation)local.push({label:"Доставка / перегруз по РФ",value:rub(null)},{label:"Таможенные платежи и утилизационный сбор",value:rub(null)},{label:"Брокер, СВХ, лаборатория, СБКТС, ЭПТС",value:rub(null)});
  const commission=amount("topavto-commission");
  local.push({label:'Комиссия компании «TOP AVTO»',value:rub(commission)});
@@ -50,9 +50,7 @@ export function offerPdfData(offer:VehicleOffer,draft:Record<string,string>,calc
 }
 export function offerPdfNotes(data:OfferPdfData) {
  if(data.dealerName)return ["Стоимость, наличие, срок доставки и порядок оплаты подтверждаются дилером перед заключением договора.",...data.warnings,"Расчёт носит информационный характер и не является публичной офертой."];
- const deposit=data.marketKey==="japan"
-  ? "Обеспечительный платёж в разделе страны — аванс в счёт автомобиля. Он засчитывается при оплате и не прибавляется к стоимости повторно."
-  : "Обеспечительный платёж в разделе страны — аванс в счёт услуг по договору. Он засчитывается при оплате и не прибавляется к стоимости повторно.";
+ const deposit="Обеспечительный платёж и комиссия компании включены в итоговую стоимость отдельными строками сверх цены автомобиля. Их оплата засчитывается в итоговую стоимость.";
  const warnings=[...new Set(data.warnings.map(w=>w.trim()).filter(Boolean))].map(w=>w.startsWith("Льготный утильсбор рассчитан как")
   ? "Возможность применения льготного утилизационного сбора подтверждается по документам автомобиля и покупателя до оплаты."
   : w);

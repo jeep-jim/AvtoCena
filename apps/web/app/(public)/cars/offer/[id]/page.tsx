@@ -24,7 +24,6 @@ import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { getSavedOfferCalculation } from "@/lib/catalog/saved-offer-calculation";
 import { PageLeadBanner } from "@/components/leads/PublicLeadCaptureV2";
 import {restoreProAuctionsPower,proAuctionsReportedVolume,proAuctionsHybridDraft} from "@/lib/catalog/proauctions-source-parameters";
-import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { businessPaymentPlan } from "../../../../../../../packages/engine/src/calculation/calculateAvtocena";
 import { applyActiveBusinessPricing, applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { customerPriceBreakdown } from "@/lib/catalog/customer-price-breakdown";
@@ -211,7 +210,6 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
         <span className="ac-offer-breakdown-value ac-cost-amount">{money(vehicleLine.amountRub)} ₽</span>
       </div>
     </summary>
-    {offer.calculationSnapshot?.marketConfig && offer.totalRub > 0 ? <ContractPaymentSummary plan={businessPaymentPlan(offer.market, offer.calculationSnapshot.marketConfig, offer.totalRub)} /> : null}
     {detailLines.length ? <div className="ac-offer-breakdown-lines px-4 pb-3">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} data-price-line={line.id} data-price-amount-rub={line.amountRub} className="ac-cost-row gap-y-1"><span className="ac-offer-breakdown-label ac-cost-label"><span className="min-w-0 leading-snug">{line.title}</span></span><span className="ac-offer-breakdown-value ac-cost-amount">{money(line.amountRub)} ₽</span>{/utilization|утил/i.test(`${line.id} ${line.title}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>)}</div> : null}
   </details>;
 }

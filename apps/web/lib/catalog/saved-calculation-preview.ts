@@ -1,5 +1,6 @@
 import type { VehicleOffer } from "./types";
 export type SavedCalculationPreview = {
+ depositCostIncluded?:boolean;
  version:string; totalRub:number; deliveryCity:string;
  deliveryPricingBasis?:import("./card-city-delivery").DeliveryPricingBasis; parameters:Partial<VehicleOffer>; currencyRate?:any; utilizationPowerKw?:number;
 };

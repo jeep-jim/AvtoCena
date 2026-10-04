@@ -1,3 +1,4 @@
+import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
 import {isChinaModelSpecification} from './china-card-variant';
 import { matchesAuctionGrades } from "./auction-grade-filter";
@@ -1784,7 +1785,13 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
-  const sourceRows=hasBudget?matchingBudgetIndex(index,params,quotes):[...index.rows,...index.otherRows!];
+  const costs=await currentDepositCosts();
+  const pricedIndex={...index,rows:index.rows.map(row=>{
+   if(row[4] || !(row[1]>0))return row;
+   const deposit=costs[row[0]]||0;
+   return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit] as typeof row;
+  })};
+  const sourceRows=hasBudget?matchingBudgetIndex(pricedIndex,params,quotes):[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   const candidates=sourceRows.filter(row=>
    (!params.market || params.market==='any' || same(row[0],params.market))
@@ -1883,7 +1890,7 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 }
 /** Read-only parity check against the existing projection search. */
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){
-  if ((!params.market || params.market === "any" || params.market === "japan") && (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub"))) {
+  if ((params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub"))) {
     const {generationId,rows}=await currentProjectionRows(params);
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
     const prepared=await attachJapanSearchValues(rows,generationId);

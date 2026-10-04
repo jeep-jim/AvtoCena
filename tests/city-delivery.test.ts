@@ -59,9 +59,9 @@ test('old Japan snapshot loses only saved delivery and repricing is idempotent',
  const offer:any={totalRub:1280000,calculationSnapshot:{breakdown}};
  assert.equal(japanServiceCostBasis(offer.calculationSnapshot)?.rfDeliveryRub,120000);
  const updated=applyJapanServiceCosts(offer,config);
- assert.equal(updated.totalRub,1160000);
- assert.equal(updated.calculationSnapshot.paymentPlan.remainingAfterInitialRub,910000);
- assert.equal(applyJapanServiceCosts(updated,config).totalRub,1160000);
+ assert.equal(updated.totalRub,1320000);
+ assert.equal(updated.calculationSnapshot.paymentPlan.remainingAfterInitialRub,1070000);
+ assert.equal(applyJapanServiceCosts(updated,config).totalRub,1320000);
  assert.ok(!updated.calculationSnapshot.breakdown.some((row:any)=>row.id==='rf-delivery'));
 });
 

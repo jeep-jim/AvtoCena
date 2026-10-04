@@ -38,7 +38,7 @@ test('every active market quote keeps the full car price, with separate 2% FX re
   assert.ok(!quote.breakdown.some(l=>['sbkts','epts'].includes(l.id)));
   const bundle=quote.breakdown.find(l=>l.id==='laboratory')!;assert.equal(bundle.amountRub,50000);assert.equal(bundle.title,'Лаборатория, СБКТС, ЭПТС');
   assert.deepEqual(bundle.includedServices,['laboratory','sbkts','epts']);
-  const fixed=['topAvtoCommissionRub','exportExpensesRub','logisticsRub','brokerRub','svhRub','rfDeliveryRub','otherFixedExpensesRub'].reduce((s,k)=>s+Number(config[k]||0),0);
+  const fixed=['securityDepositRub','topAvtoCommissionRub','exportExpensesRub','logisticsRub','brokerRub','svhRub','rfDeliveryRub','otherFixedExpensesRub'].reduce((s,k)=>s+Number(config[k]||0),0);
   assert.equal(quote.totalRub,1000000+400000+5200+fixed+50000+20000);
   assert.equal(quote.breakdown.reduce((s,l)=>s+l.amountRub,0),quote.totalRub);
  }

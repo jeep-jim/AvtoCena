@@ -62,7 +62,7 @@ try {
         const bundle = html.match(/data-price-line="laboratory" data-price-amount-rub="([^"]+)"/);
         assert.ok(bundle && Number(bundle[1]) > 0,`Missing combined document cost: ${row.id}`);
         assert.ok(!/data-price-line="(?:sbkts|epts)"/.test(html),`Duplicate document lines: ${row.id}`);
-        const deposits = [...html.matchAll(/data-payment-kind="security-deposit" data-payment-amount-rub="([^"]+)"/g)];
+        const deposits = [...html.matchAll(/data-price-line="contract-services" data-price-amount-rub="([^"]+)"/g)];
         assert.ok(!/data-price-line="security-deposit"/.test(html),`Advance counted as a cost: ${row.id}`);
         assert.equal(deposits.length,1,`Expected one advance: ${row.id}`);
         result.depositRub=Number(deposits[0][1]);

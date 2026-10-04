@@ -17,7 +17,7 @@ export function savedPreviewEntry(record:SavedOfferCalculation,offer:VehicleOffe
  try {
   const parameters=validateCustomerParameters(record.draft);
   return {market:offer.market,sourceId:offer.sourceId,sourceOfferId:offer.sourceOfferId,identity:record.identity,savedAt:record.savedAt,
-   preview:{version:record.version,totalRub:record.calculation.totalRub!,parameters,
+   preview:{depositCostIncluded:record.calculation.breakdown?.some(line=>line.id==="contract-services"),version:record.version,totalRub:record.calculation.totalRub!,parameters,
     deliveryPricingBasis:record.calculation.deliveryPricingBasis,currencyRate:record.calculation.currencyRate,utilizationPowerKw:record.calculation.customs?.utilizationPowerKw,deliveryCity:record.draft.deliveryCity||""}};
  } catch {return null;}
 }
@@ -56,6 +56,13 @@ export async function readSavedPreviewIndex() {
     const entry=record && offer?savedPreviewEntry(record,offer):null;
     if(entry)entries[id]=entry;else delete entries[id];
    }));
+  }
+  const {getEffectiveMarketsWithDefaults} = await import("../effective-market-settings");
+  const configs = new Map((await getEffectiveMarketsWithDefaults()).map(m=>[m.id,m.effectiveVersion]));
+  for (const [id,entry] of Object.entries(entries)) {
+   if(entry.preview.depositCostIncluded)continue;
+   const deposit=Math.max(0,Number(configs.get(entry.market)?.securityDepositRub)||0);
+   entries[id]={...entry,preview:{...entry.preview,depositCostIncluded:true,totalRub:entry.preview.totalRub+deposit}};
   }
   return {...index,entries};
  });

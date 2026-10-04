@@ -30,7 +30,7 @@ test("fully prepaid vehicle remains visible and zero-deposit quotes stay unchang
   assert.equal(lines[0].id,'car');
   assert.equal(lines[0].amountRub,50000);
   assert.equal(lines.find(line=>line.id==='security-deposit')?.amountRub,undefined);
-  assert.equal(lines.reduce((sum,line)=>sum+line.amountRub,0),140000);
+  assert.equal(lines.reduce((sum,line)=>sum+line.amountRub,0),250000);
   const plain=[{id:'car',title:'Цена автомобиля',amountRub:123456},{id:'manual-adjustment',amountRub:-1000}];
   assert.deepEqual(customerPriceBreakdown(plain),[{id:'car',title:'Цена автомобиля',amountRub:122456}]);
 });
