@@ -125,7 +125,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
             key={currency}
             type="button"
             onClick={() => openCurrency(currency)}
-            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "min-w-[62px] shrink-0"}`}
+            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "ac-currency-rate-tile min-w-0 bg-white/[0.045]" : "min-w-[62px] shrink-0"}`}
             aria-label={`Открыть курс: ${currencyName(currency)} (${currency})`}
             title={`${currencyName(currency)} · за ${amount} ${currency}`}
           >

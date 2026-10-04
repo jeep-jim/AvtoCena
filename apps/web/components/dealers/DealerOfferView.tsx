@@ -110,11 +110,11 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
           </div>
           <StickyOfferColumn>
           <div className="ac-inline-parameters min-w-0" data-share-estimate={encodeShareDraft({deliveryCity:city})}>
-            <section className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
-              <p className="text-sm text-[var(--ac-muted)]">
+            <section className="ac-price-trend-panel ac-offer-price-panel is-down rounded-[1.35rem] p-4">
+              <p className="ac-price-trend-label text-[10px] font-black uppercase tracking-[0.19em] text-[var(--ac-text)] md:text-[11px]">
                 {stock ? "Цена автомобиля в наличии" : c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
-              <p className="ac-price mt-2 text-3xl font-black">
+              <p className="ac-price ac-price--down mt-2 text-3xl font-black">
                 {c.totalRub === null
                   ? "Цена уточняется"
                   : `${c.totalRub.toLocaleString("ru-RU")} ₽`}
@@ -171,7 +171,6 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
       </div>
       <OfferContactActionsStyles />
       <style>{`
-        html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel{background:#cfe5d8!important;background-color:#cfe5d8!important}html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel,html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel *{color:#182b24!important;-webkit-text-fill-color:#182b24!important}html[data-theme][data-theme] body .ac-dealer-offer .ac-offer-price-panel .text-green-500{color:#0a9c44!important;-webkit-text-fill-color:#0a9c44!important}
         .dealer-verification:hover>span{display:block}
         .dealer-verification:not([open]):not(:hover)>span{display:none}
         .ac-dealer-offer .ac-offer-actions-sidebar{display:grid!important}

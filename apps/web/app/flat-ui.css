@@ -82,6 +82,7 @@ html[data-theme="light"] .dealer-demo-toast{background:#fff!important;color:#171
 html[data-theme="light"] .ac-brand-rail{background:#f7f8fb}
 .ac-brand-logo-tile{background:var(--ac-surface-2,#20242e)}
 html[data-theme="light"] .ac-brand-logo-tile{background:#e6eaf1}
+html[data-theme="light"] .ac-currency-rates-strip .ac-currency-rate-tile{background:var(--ac-surface-2,#e6eaf1)!important}
 .ac-brand-logo-tile img{max-width:64px;max-height:38px}
 
 /* 07.08.2026 — финальная спокойная dark-палитра: серо-сине-графитовая, без чёрного и ярко-синего. */

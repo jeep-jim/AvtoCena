@@ -48,6 +48,7 @@ const publicCss =
     "public-polish.css",
     "flat-ui.css",
     "public-regression-fixes.css",
+    "public-price-sheet-fix.css",
   ]
     .map((f) => fs.readFileSync("apps/web/app/" + f, "utf8"))
     .join("\n") +
@@ -134,7 +135,7 @@ try{
    if(width===1440)assert.equal(await page.locator('[data-spec-desktop]').getAttribute('data-open'),'true');
    await page.getByText('Обновлено 02.10.2026, 15:00',{exact:true}).filter({visible:true}).waitFor();
    await page.locator('.ac-offer-updated summary').filter({visible:true}).click();
-   assert.equal(await page.getByRole('link',{name:'Дилер: ТопАвто →'}).filter({visible:true}).getAttribute('href'),'/nvkz/topavto');assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(207, 229, 216)');
+   assert.equal(await page.getByRole('link',{name:'Дилер: ТопАвто →'}).filter({visible:true}).getAttribute('href'),'/nvkz/topavto');assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),theme==='light'?'rgb(207, 229, 216)':'rgb(11, 48, 33)');
    await page.getByRole('link',{name:'Профиль дилера ТопАвто'}).waitFor();
    await page.getByText('Другой автомобиль в наличии',{exact:true}).waitFor();
    if(width===390)assert.ok(await page.getByRole('button',{name:'Открыть фотографии автомобиля'}).evaluate(el=>Math.abs(el.clientHeight/el.clientWidth-.75)<.02));
@@ -160,7 +161,7 @@ try{
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
-   if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(207, 229, 216)');
+   if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),theme==='light'?'rgb(207, 229, 216)':'rgb(11, 48, 33)');
    if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.hasAttribute('data-city-delivery') && el.nextElementSibling?.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
    assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
    await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
