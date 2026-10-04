@@ -1,3 +1,4 @@
+import {currentAccount} from '@/lib/account/auth';
 import { after } from "next/server";
 import { flushCrmPush } from "@/lib/crm-push";
 import {leadVisitor} from "@/lib/lead-antispam";
@@ -24,7 +25,7 @@ export async function POST(request: Request) {
   const visitor = leadVisitor(request);
   const headers = new Headers(request.headers);
   headers.set("cookie", `${(headers.get("cookie") || "").replace(/(?:^|;\s*)ac_lead_visitor=[^;]*/g, "")}; ac_lead_visitor=${visitor.cookie}`);
-  const response = await createLead(new Request(request, {headers}), await getCurrentUser());
+  const response = await createLead(new Request(request, {headers}), await getCurrentUser(), "", await currentAccount());
   response.cookies.set("ac_lead_visitor", visitor.cookie, {httpOnly:true, secure:process.env.NODE_ENV === "production", sameSite:"lax", path:"/", maxAge:86400 * 30});
   response.headers.set("cache-control", "no-store");
   if (response.ok) {
