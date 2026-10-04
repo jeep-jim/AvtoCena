@@ -8,7 +8,7 @@ import {writeDataJson,readChunkedDataJson,updateChunkedDataJson,resetJsonStorage
 import {claimCrmNotices,authorizeCrmNotice} from '../apps/web/lib/crm-relay';
 import type {AuthUser} from '../apps/web/lib/auth';
 const owner={id:'owner-test',displayName:'Владелец',role:'owner',companyId:'dealer_topavto'} as AuthUser;
-const manager={...owner,id:'manager-test',displayName:'Сотрудник',role:'manager',crmPermissions:{viewAll:false,editLeads:true}} as AuthUser;
+const manager={...owner,id:'manager-test',displayName:'Сотрудник',role:'manager',permissions:{viewAll:false,editLeads:true}} as AuthUser;
 const third={...manager,id:'third-test'} as AuthUser;
 async function isolated(run:()=>Promise<void>){const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,tmp=fs.mkdtempSync(path.join(os.tmpdir(),'crm-chat-'));fs.mkdirSync(path.join(tmp,'data'));process.chdir(tmp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();try{await writeDataJson('auth/users.json',[owner,manager,third]);await run();}finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(tmp,{recursive:true,force:true});}}
 test('device visibility keeps defaults, validates switches and isolates phone from desktop',()=>{

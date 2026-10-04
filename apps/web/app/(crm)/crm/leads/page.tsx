@@ -1,4 +1,4 @@
-import {leadDealerId} from '@/lib/dealers/telegram-settings';
+import {leadDealerId} from '@/lib/dealers/lead-routing';
 import {isPlatformOwner} from '@/lib/platform-access';
 import {leadChannelLabel} from "@/lib/lead-source";
 import {DeleteCrmRecord} from "@/components/crm/DeleteCrmRecord";
