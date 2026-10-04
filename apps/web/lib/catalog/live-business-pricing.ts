@@ -198,7 +198,8 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
   return await applyEncyclopediaDisplayIdentity(repriced as any) as T;
 }
 
-export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
+/** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
+export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
   offers=await withChinaCnyPrices(offers);
   const [markets, ratedOffers] = await Promise.all([
@@ -207,6 +208,13 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   const repriced = ratedOffers.map((offer) => compactRepricedProjection(repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market)))));
+  return repriced;
+}
+
+export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
+  if (!offers.length) return offers;
+  const [repriced, markets] = await Promise.all([applyActiveBusinessPriceBatch(offers), getEffectiveMarketsWithDefaults()]);
+  const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   const identified = await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
   const { attachJapanDeliveredPreviews } = await import("./japan-delivered-preview");
   const {attachSavedCalculationPreviews}=await import("./saved-calculation-previews");

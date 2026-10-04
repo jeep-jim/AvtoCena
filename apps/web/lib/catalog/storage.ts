@@ -1,4 +1,4 @@
-import {currentDepositCosts} from "./deposit-cost-projection";
+import {currentDepositCosts,withCurrentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
 import {isChinaModelSpecification} from './china-card-variant';
 import { matchesAuctionGrades } from "./auction-grade-filter";
@@ -557,6 +557,7 @@ export function resetCatalogReadCachesForTests() {
   filteredSearchCache.clear();
   catalogCountCache.clear();
   budgetIndexCache.clear();
+  liveBudgetBlockCache.clear();
   budgetCardCache.clear();
   filteredBudgetSelectionCache.clear();
   preparedProjectionRows = new WeakMap();
@@ -894,7 +895,7 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const modelKeys = await projectionModelKeys(filters);
   const counts = new Map<string, number>();
@@ -926,7 +927,7 @@ export async function readCatalogBrandModelCounts(make: string) {
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const models = new Map<string, CatalogBrandSummaryModel>();
   for (const row of rows) {
@@ -1017,7 +1018,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
   const modelKeys = await projectionModelKeys(params);
   if (params.budgetFrom || params.budgetTo || params.engineFrom || params.engineTo || params.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    rows=await attachJapanSearchValues(rows,generationId);
+    rows=await currentSearchPrices(rows,generationId);
   }
   const offers = rows.filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
   const values = (selector: (offer: CatalogSearchProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -1118,7 +1119,8 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
     const stored = await readIndex<CatalogFacets | null>(manifest.generationId, "facets.json", null);
     if (stored?.generationId === manifest.generationId) return stored;
   }
-  const { generationId, rows } = await currentProjectionRows(params);
+  let { generationId, rows } = await currentProjectionRows(params);
+  if(params.budgetFrom || params.budgetTo || params.hasPrice)rows=await currentSearchPrices(rows,generationId);
   return facetsFromProjection(generationId, rows, params, hasFilters);
 }
 
@@ -1769,6 +1771,28 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
  await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v2.json"),index);
  return index;
 }
+// Price selection must replay the same FX, customs anniversaries and business
+// settings as rendered cards. Cache only compact tuples, never whole markets.
+const liveBudgetBlockCache = new DetailReadCache<BudgetCountIndex|null>({maxEntries:512,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:3});
+async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:string){
+ const {applyActiveBusinessPriceBatch}=await import("./live-business-pricing");
+ const {attachJapanSearchValues}=await import("./japan-delivered-preview");
+ const result:CatalogSearchProjection[]=[];
+ for(let start=0;start<rows.length;start+=128){
+  const prepared=await withCurrentDepositCosts(rows.slice(start,start+128));
+  const priced=await applyActiveBusinessPriceBatch(prepared as any[]) as CatalogSearchProjection[];
+  result.push(...await attachJapanSearchValues(priced,generationId));
+ }
+ return result;
+}
+async function currentBudgetBlock(generationId:string,version:1|2,block:number){
+ return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}`,async()=>{
+  const part=await budgetCardCache.get(`${generationId}:v${version}:${block}`,()=>readIndex(generationId,`budget-cards-v${version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+  if(part.generationId!==generationId)return null;
+  const priced=await currentSearchPrices(prepareCatalogProjectionRows(part.items),generationId);
+  return buildBudgetCountIndex(generationId,priced,new Map(priced.map(row=>[row.id,block])));
+ });
+}
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
@@ -1791,9 +1815,11 @@ async function readBudgetSelection(params:CatalogSearchParams){
    const deposit=costs[row[0]]||0;
    return [row[0],row[1]+deposit-(row[6]||0),row[2],row[3],row[4],row[5],deposit] as typeof row;
   })};
-  const sourceRows=hasBudget?matchingBudgetIndex(pricedIndex,params,quotes):[...index.rows,...index.otherRows!];
+  // Never discard an old expensive row before replay: a lower current rate may
+  // move it into budget. Non-price metadata can still narrow block reads first.
+  const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
-  const candidates=sourceRows.filter(row=>
+  let candidates=sourceRows.filter(row=>
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
    && (!params.bodyType || same(row[5].bodyType,params.bodyType))
@@ -1801,6 +1827,14 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && (!params.drive || same(row[5].drive,params.drive)) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
+  if(hasBudget){
+   const ids=new Set(candidates.map(row=>row[5].id));
+   const blocks=[...new Set(candidates.map(row=>row[5].block))];
+   const parts=await mapWithConcurrency(blocks,3,block=>currentBudgetBlock(manifest.generationId,index.version,block));
+   if(parts.some(part=>!part))return null;
+   const liveRows=parts.flatMap(part=>part!.rows).filter(row=>ids.has(row[5].id));
+   candidates=matchingBudgetIndex({...index,rows:liveRows},params,quotes);
+  }
   if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion:index.version,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
@@ -1813,7 +1847,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    if(part.generationId!==manifest.generationId){incomplete=true;return;}
    const selected=part.items.filter(row=>ids.has(row.id));
    for(const row of selected)seen.add(row.id);
-   const prepared=await attachJapanSearchValues(prepareCatalogProjectionRows(selected),manifest.generationId);
+   const prepared=hasBudget?await currentSearchPrices(prepareCatalogProjectionRows(selected),manifest.generationId):await attachJapanSearchValues(prepareCatalogProjectionRows(selected),manifest.generationId);
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
@@ -1823,7 +1857,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
  if(params.sort&&params.sort!=="updatedAt")return null;
  const selected=await readBudgetSelection(params);if(!selected)return null;
- const rows=selected.rows.map(([market,totalRub,,, ,metadata])=>({...metadata,market,totalRub}));
+ const rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}}));
  sortCatalogSearchRows(rows,params);
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
@@ -1869,7 +1903,7 @@ export async function countCatalogOffers(params: CatalogSearchParams) {
     let {generationId, rows} = await currentProjectionRows(query);
     if (query.budgetFrom || query.budgetTo || query.engineFrom || query.engineTo || query.hasPrice) {
       const {attachJapanSearchValues} = await import("./japan-delivered-preview");
-      rows = await attachJapanSearchValues(rows, generationId);
+      rows = await currentSearchPrices(rows, generationId);
     }
     const modelKeys = await projectionModelKeys(query);
     let total = 0;
@@ -1890,10 +1924,10 @@ async function searchOffersUncached(params: CatalogSearchParams, internalPageLim
 }
 /** Read-only parity check against the existing projection search. */
 export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearchParams,internalPageLimit=48){
-  if (params.budgetFrom || params.budgetTo || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo || params.hasPrice || params.sort?.startsWith("totalRub")))) {
+  if (params.budgetFrom || params.budgetTo || params.hasPrice || params.sort?.startsWith("totalRub") || ((!params.market || params.market === "any" || params.market === "japan") && (params.engineFrom || params.engineTo))) {
     const {generationId,rows}=await currentProjectionRows(params);
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
-    const prepared=await attachJapanSearchValues(rows,generationId);
+    const prepared=await currentSearchPrices(rows,generationId);
     const modelKeys=await projectionModelKeys(params);
     const matching=prepared.filter(row=>catalogSearchProjectionMatches(row,params,modelKeys));
     sortCatalogSearchRows(matching,params);

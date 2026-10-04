@@ -13,3 +13,10 @@ if(!source)throw Error('diagnostic_offer_missing');
 const [current]=await applyActiveBusinessPricingBatch([source]);
 const summary=row=>({totalRub:row.totalRub,publicVisibleRub:row.publicVisibleRub,sourcePrice:row.sourcePrice,sourceCurrency:row.sourceCurrency,year:row.year,productionDate:row.productionDate,status:row.calculationStatus,deposit:includedDepositCost(row.calculationSnapshot),rate:row.calculationSnapshot?.currencyRate,customs:row.calculationSnapshot?.customs,customsInput:row.calculationSnapshot?.customsInput,deliveryBasis:row.calculationSnapshot?.deliveryPricingBasis});
 console.log(JSON.stringify({id,generation:manifest.generationId,projectionGeneration:projection.generationId,index:index.rows.find(row=>row[5].id===id)?.slice(0,3),stored:summary(source),current:summary(current)}));
+
+const {searchOffers,countCatalogOffers}=await import('../apps/web/lib/catalog/storage.ts');
+console.log(JSON.stringify({indexBytes:Buffer.byteLength(JSON.stringify(index)),priced:index.rows.length,other:index.otherRows?.length}));
+for(const market of ['korea','any']){
+ const start=performance.now();const result=await searchOffers({market,budgetTo:2000000,pageSize:24});const price=await applyActiveBusinessPricingBatch(result.items);const invalid=price.filter(row=>Number(row.totalRub)>2000000).map(row=>({id:row.id,total:row.totalRub}));console.log(JSON.stringify({market,total:result.total,ms:Math.round(performance.now()-start),rssMb:Math.round(process.memoryUsage().rss/1024/1024),invalid}));if(invalid.length)throw Error('budget_contains_expensive_card');
+ const warm=performance.now();const count=await countCatalogOffers({market,budgetTo:2000000});console.log(JSON.stringify({market,count:count.total,warmMs:Math.round(performance.now()-warm)}));if(count.total!==result.total)throw Error('count_mismatch');
+}
