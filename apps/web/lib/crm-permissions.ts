@@ -1,5 +1,9 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
+ chat:{label:'Чат',description:'Личные и общие переписки, комнаты команды, переписка по доступным заявкам.'},
+ analytics:{label:'Аналитика сайта',description:'Посещаемость, источники переходов и показатели сайта в обзоре. Доступ к ленте команды настраивается отдельно.'},
+ site:{label:'Управление сайтом',description:'Для администратора: включение страниц и блоков, видимость на компьютере и телефоне. Настройки Метрики доступны только владельцу.'},
+ game:{label:'Погнали',description:'Игра и рейтинг команды.'},
  deleteRecords:{label:'Удаление клиентов и заявок',description:'Для администратора: удаление ненужных записей с подтверждением и проверкой договоров, документов и начислений.'},
  viewAll:{label:'Вся клиентская база',description:'Просмотр всех заявок и клиентов. Если выключено — только созданные или назначенные сотруднику.'},
  editClients:{label:'Изменение клиентов',description:'Добавление и редактирование контактов, комментариев и карточек клиентов.'},
@@ -14,14 +18,22 @@ export const CRM_PERMISSIONS = {
 } as const;
 export type CrmPermission=keyof typeof CRM_PERMISSIONS;
 export type CrmPermissions=Partial<Record<CrmPermission,boolean>>;
-const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documents','calculations']);
-const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords']);
+const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documents','calculations','chat','game']);
+const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords','site']);
 export function isAdministrativeCrmPermission(key:CrmPermission){return administrative.has(key);}
 export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission):boolean {
  if(!user||user.status==='disabled'||!['owner','admin','manager'].includes(user.role))return false;
  if(user.role==='owner')return true;
  if(user.role==='manager'&&isAdministrativeCrmPermission(key))return false;
+ if(key==='analytics'&&user.permissions?.analytics===undefined)return hasCrmPermission(user,'activityAll');
+ if(key==='site')return user.permissions?.site===true;
  return user.permissions?.[key] ?? (user.role==='admin'||managerDefaults.has(key));
 }
-export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||role==='admin'||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
-export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, вся клиентская база и лента. Управление владельцами, сотрудниками, ключами, тарифами, дилерами и общими шаблонами договоров. Полный доступ владельца не отключается.',admin:'По умолчанию — вся база, общая лента, назначения, документы, расчёты, команда, тарифы и дилеры. Не может изменять владельцев или общие шаблоны договоров. Права можно ограничить переключателями.',manager:'По умолчанию — созданные и назначенные ему клиенты и заявки, их документы и договоры, расчёты. Общие напоминания и рабочий график доступны всей команде; смены редактируются с подтверждением. Нет доступа к управлению командой, тарифами и дилерами. Дополнительный обзор и назначения включаются отдельно.'};
+export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||(role==='admin'&&k!=='site')||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
+export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, вся клиентская база и лента. Управление владельцами, сотрудниками, ключами, тарифами, дилерами и общими шаблонами договоров. Полный доступ владельца не отключается.',admin:'По умолчанию — вся база, общая лента, назначения, документы, расчёты, команда, тарифы и дилеры. Не может изменять владельцев или общие шаблоны договоров. Права можно ограничить переключателями. Чат и игра включены; управление сайтом разрешается отдельно.',manager:'По умолчанию — созданные и назначенные ему клиенты и заявки, их документы и договоры, расчёты. Общие напоминания и рабочий график доступны всей команде; смены редактируются с подтверждением. Нет доступа к управлению командой, тарифами и дилерами. Чат и игра включены. Дополнительный обзор, аналитика и назначения включаются отдельно.'};
+
+export const CRM_PERMISSION_GROUPS:{label:string;keys:CrmPermission[]}[]=[
+ {label:'Разделы и общение',keys:['chat','analytics','game']},
+ {label:'Клиенты, заявки и документы',keys:['viewAll','editClients','editLeads','assign','documents','calculations','deleteRecords','activityAll']},
+ {label:'Управление',keys:['staff','settings','site','dealers']},
+];

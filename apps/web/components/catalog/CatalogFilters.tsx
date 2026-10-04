@@ -340,7 +340,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       const query=new URLSearchParams(nextQuery);
       const current=new URLSearchParams(window.location.search);
       const city=readSelectedCity();if(city)query.set("city",city);
-      for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"]) { const value=current.get(key); if(value)query.set(key,value); }
+      for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
       startTransition(()=>router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), { scroll: false }));
     }, 180);

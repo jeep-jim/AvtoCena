@@ -3,7 +3,7 @@ import {parseWorkAddresses} from "@/lib/staff-workplaces";
 import {normalizeStaffPhone} from "@/lib/staff-phone";
 import {saveStaffBirthDate,validateBirthDate} from "@/lib/crm-team";
 import {isCalculationOriginAllowed} from "@/lib/catalog/calculation-request-origin";
-import {CRM_PERMISSIONS,hasCrmPermission,type CrmPermission,type CrmPermissions} from "@/lib/crm-permissions";
+import {CRM_PERMISSIONS,isAdministrativeCrmPermission,hasCrmPermission,type CrmPermission,type CrmPermissions} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import { NextResponse } from "next/server";
 import { getAuthUsers, getCurrentUser, isAdminRole, normalizeTelegramUsername, type AuthUser, type UserRole } from "@/lib/auth";
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     const telegramUsername = normalizeTelegramUsername(clean(form.get("telegramUsername"), 160));
     const requestedRole = clean(form.get("role"), 40) as UserRole;
     const role: UserRole = ["owner", "admin", "manager", "dealer"].includes(requestedRole) ? requestedRole : "manager";
-    const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&["staff","settings","dealers"].includes(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
+    const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&isAdministrativeCrmPermission(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
     if(permissions&&actor.role!=="owner"&&Object.entries(permissions).some(([key,value])=>value&&!hasCrmPermission(actor,key as CrmPermission)))throw Error("Нельзя выдать права, которых у вас нет");
     const birthDate=form.has("birthDate")?validateBirthDate(clean(form.get("birthDate"),10)):undefined;
     const status = clean(form.get("status"), 30) === "disabled" ? "disabled" : "active";

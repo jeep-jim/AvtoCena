@@ -20,7 +20,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/crm-new-section-access.test.ts tests/crm-staff-permissions-route.test.ts tests/crm-permissions-activity.test.ts tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/chat-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Check desktop and mobile
         env:
