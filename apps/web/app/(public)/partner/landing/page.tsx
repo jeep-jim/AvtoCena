@@ -92,7 +92,7 @@ function GlowPill({ children }: { children: React.ReactNode }) {
 function ProfitabilityBlock() {
   return (
     <div className="glass rounded-[2rem] p-6 md:p-8">
-      <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+      <div className="text-xs font-black normal-case tracking-normal text-red-300">
         Почему это выгодно
       </div>
       <h2 className="mt-3 text-[30px] font-black leading-[0.98] tracking-[-0.04em] text-white md:text-[42px]">
@@ -117,7 +117,7 @@ function ProfitabilityBlock() {
       </div>
 
       <div className="mt-6 rounded-[1.6rem] border border-red-300/14 bg-[linear-gradient(135deg,rgba(239,68,68,0.12),rgba(255,255,255,0.04))] p-5">
-        <div className="text-xs font-black uppercase tracking-[0.18em] text-red-200/90">
+        <div className="text-xs font-black normal-case tracking-normal text-red-200/90">
           Что важно для CPA-сети
         </div>
         <div className="mt-3 grid gap-2 text-sm font-bold text-white/72 md:grid-cols-2">
@@ -145,7 +145,7 @@ function AccessBlock({ requestState }: { requestState: RequestState }) {
     <div className="glass rounded-[2rem] p-6 md:p-8">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+          <div className="text-xs font-black normal-case tracking-normal text-red-300">
             Доступ партнёра
           </div>
           <h2 className="mt-3 text-[30px] font-black leading-[0.98] tracking-[-0.04em] text-white md:text-[42px]">
@@ -216,7 +216,7 @@ function HowItWorksBlock() {
 function ConversionBlock() {
   return (
     <div className="glass rounded-[2rem] p-6 md:p-8">
-      <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+      <div className="text-xs font-black normal-case tracking-normal text-red-300">
         Почему страница будет конвертить
       </div>
       <h2 className="mt-3 text-[30px] font-black leading-[0.98] tracking-[-0.04em] text-white md:text-[42px]">
@@ -296,7 +296,7 @@ export default async function PartnerLandingPage({
 
               <div className="mt-6 flex flex-wrap gap-2.5">
                 {sourceChips.map((chip) => (
-                  <span key={chip} className="rounded-full border border-red-300/18 bg-red-500/8 px-3 py-2 text-xs font-black uppercase tracking-[0.12em] text-red-100/92">
+                  <span key={chip} className="rounded-full border border-red-300/18 bg-red-500/8 px-3 py-2 text-xs font-black normal-case tracking-normal text-red-100/92">
                     {chip}
                   </span>
                 ))}
@@ -308,7 +308,7 @@ export default async function PartnerLandingPage({
               <div className="relative">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <div className="text-xs font-black uppercase tracking-[0.18em] text-red-200/85">Модель заработка</div>
+                    <div className="text-xs font-black normal-case tracking-normal text-red-200/85">Модель заработка</div>
                     <div className="mt-2 whitespace-nowrap text-[46px] font-black leading-none tracking-[-0.06em] text-white sm:text-5xl">{money(partnerPayoutRub)} ₽</div>
                     <div className="mt-2 text-sm font-black text-white/68">за подписанный договор</div>
                   </div>

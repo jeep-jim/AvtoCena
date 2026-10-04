@@ -32,11 +32,11 @@ export function OfferLeadForm({ offerId }: Props) {
     } catch (error:any) { setStatus("error"); setMessage(error?.message || "Ошибка сети. Повторная отправка не создаст дубль."); }
   }
   async function shareLink() { setCopyStatus("idle"); try { setCopyStatus(await copyCurrentUrl() ? "success" : "error"); } catch { setCopyStatus("error"); } }
-  if (status === "success") return <div className="mt-6 rounded-2xl bg-emerald-500/10 p-4 text-emerald-100"><div className="text-xs font-black uppercase tracking-[0.15em] text-emerald-300">Готово</div><p className="mt-2 text-sm font-bold leading-6">{message}</p></div>;
+  if (status === "success") return <div className="mt-6 rounded-2xl bg-emerald-500/10 p-4 text-emerald-100"><div className="text-xs font-black normal-case tracking-normal text-emerald-300">Готово</div><p className="mt-2 text-sm font-bold leading-6">{message}</p></div>;
   return <form onSubmit={submit} className="mt-6 grid gap-3 md:grid-cols-2">
-    <div className="mb-1 md:col-span-2"><div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Запросить точный расчёт</div><p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p></div>
-    <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/55">Имя</span><input value={name} onChange={(e)=>setName(e.target.value)} name="name" placeholder="Как к вам обращаться" className="soft-input w-full rounded-2xl px-4 py-3.5" /></label>
-    <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/55">Телефон</span><PhoneInput value={phone} onChange={setPhone} /></label>
+    <div className="mb-1 md:col-span-2"><div className="text-xs font-black normal-case tracking-normal text-red-500">Запросить точный расчёт</div><p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p></div>
+    <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-white/55">Имя</span><input value={name} onChange={(e)=>setName(e.target.value)} name="name" placeholder="Как к вам обращаться" className="soft-input w-full rounded-2xl px-4 py-3.5" /></label>
+    <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-white/55">Телефон</span><PhoneInput value={phone} onChange={setPhone} /></label>
     <div className="md:col-span-2"><ConsentCheckbox checked={consent} onChange={setConsent}/></div>
     <button disabled={status === "sending"} className="avto-button mt-1 rounded-2xl px-5 py-4 font-black disabled:opacity-60 md:col-span-2">{status === "sending" ? "Отправляем…" : "Оставить заявку"}</button>
     {message ? <div className="rounded-2xl bg-red-500/10 p-3 text-sm font-bold text-red-100 md:col-span-2">{message}</div> : null}

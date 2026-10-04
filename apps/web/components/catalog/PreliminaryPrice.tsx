@@ -113,7 +113,7 @@ export function PreliminaryPrice({
       onKeyDown={panel ? (event) => { if (event.key === "Enter" || event.key === " ") togglePanelInfo(event); } : undefined}
     >
       <div className="flex min-w-0 items-center justify-between gap-2">
-        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em]`} style={{ color: panel ? panelText : undefined }}>
+        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black normal-case tracking-normal`} style={{ color: panel ? panelText : undefined }}>
           {label}
         </div>
         {!panel ? <span aria-hidden="true" className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} invisible shrink-0 font-black leading-none`}>+0K</span> : null}

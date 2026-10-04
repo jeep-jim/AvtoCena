@@ -68,7 +68,7 @@ export function PartnerMobileDrawer({
               <span className="text-red-500">Авто</span>
               <span className="text-white">Цена</span>
             </div>
-            <div className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/42">партнёрам</div>
+            <div className="mt-1 text-xs font-bold normal-case tracking-normal text-white/42">Партнёрам</div>
           </div>
 
           <label htmlFor="partner-mobile-menu-toggle" className="ac-mobile-menu__close" aria-label="Закрыть меню">

@@ -174,7 +174,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
               <div className="ac-safe-bottom overflow-y-auto p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+                    <div className="text-xs font-black normal-case tracking-normal text-red-300">
                       Запрос цены
                     </div>
                     <h2 className="mt-2 text-2xl font-black leading-tight tracking-[-0.035em] text-white">

@@ -93,7 +93,7 @@ export function VehicleSpecifications({
     const entries = sections.flatMap((section) => section.entries).slice(0, 8);
     return <dl className="grid grid-cols-2 gap-2 md:grid-cols-4">
       {entries.map((entry) => <div key={`${entry.label}-${entry.value}`} className="rounded-2xl bg-[var(--ac-surface-2)] p-3">
-        <dt className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">{entry.label}</dt>
+        <dt className="text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">{entry.label}</dt>
         <dd className="mt-1 text-sm font-black text-[var(--ac-text)]">{entry.value}</dd>
       </div>)}
     </dl>;

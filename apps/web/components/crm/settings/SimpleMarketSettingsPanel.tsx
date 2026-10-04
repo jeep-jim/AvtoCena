@@ -13,7 +13,7 @@ const calculationFields = [
   ["otherFixedExpensesRub", "Другие расходы, ₽"],
 ] as const;
 
-const fieldLabelClass = "ac-market-setting-label grid gap-1.5 text-xs font-black uppercase tracking-[.08em]";
+const fieldLabelClass = "ac-market-setting-label grid gap-1.5 text-xs font-black normal-case tracking-normal";
 
 function numberValue(value: unknown) {
   const result = Number(value);

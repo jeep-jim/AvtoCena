@@ -136,6 +136,8 @@ try{
    await page.getByText('Обновлено 02.10.2026, 15:00',{exact:true}).filter({visible:true}).waitFor();
    await page.locator('.ac-offer-updated summary').filter({visible:true}).click();
    assert.equal(await page.getByRole('link',{name:'Дилер: ТопАвто →'}).filter({visible:true}).getAttribute('href'),'/nvkz/topavto');assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),theme==='light'?'rgb(207, 229, 216)':'rgb(11, 48, 33)');
+   assert.equal(await page.locator('.ac-offer-price-panel .ac-price-trend-label').evaluate(el=>getComputedStyle(el).textTransform),'none');
+   assert.equal(await page.locator('.ac-offer-price-panel .ac-price-trend-label').evaluate(el=>getComputedStyle(el).letterSpacing),'normal');
    await page.getByRole('link',{name:'Профиль дилера ТопАвто'}).waitFor();
    await page.getByText('Другой автомобиль в наличии',{exact:true}).waitFor();
    if(width===390)assert.ok(await page.getByRole('button',{name:'Открыть фотографии автомобиля'}).evaluate(el=>Math.abs(el.clientHeight/el.clientWidth-.75)<.02));

@@ -66,7 +66,7 @@ export function ClientCreateForm() {
 
   return (
     <form onSubmit={submit} className="crm-client-form glass rounded-[2rem] p-5 md:p-6">
-      <div className="text-sm font-black uppercase tracking-[0.16em] text-red-300">Новый клиент</div>
+      <div className="text-sm font-black normal-case tracking-normal text-red-300">Новый клиент</div>
       <h2 className="mt-2 text-3xl font-black tracking-[-0.04em]">Добавить в CRM</h2>
 
       <div className="mt-3 grid grid-cols-2 gap-3">

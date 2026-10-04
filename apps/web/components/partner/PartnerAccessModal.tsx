@@ -51,7 +51,7 @@ export function PartnerAccessModal({
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+                  <div className="text-xs font-black normal-case tracking-normal text-red-300">
                     Партнёрская программа
                   </div>
                   <h2 className="mt-2 text-[28px] font-black leading-none tracking-[-0.04em] text-white sm:text-[36px]">
@@ -76,7 +76,7 @@ export function PartnerAccessModal({
                 <div>
                   <label
                     htmlFor="partner-name"
-                    className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-white/52"
+                    className="mb-2 block text-xs font-black normal-case tracking-normal text-white/52"
                   >
                     Имя или название команды
                   </label>
@@ -94,7 +94,7 @@ export function PartnerAccessModal({
                 <div>
                   <label
                     htmlFor="partner-telegram"
-                    className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-white/52"
+                    className="mb-2 block text-xs font-black normal-case tracking-normal text-white/52"
                   >
                     Telegram username
                   </label>
@@ -112,7 +112,7 @@ export function PartnerAccessModal({
                 <div>
                   <label
                     htmlFor="partner-source"
-                    className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-white/52"
+                    className="mb-2 block text-xs font-black normal-case tracking-normal text-white/52"
                   >
                     Кто вы и откуда планируете трафик
                   </label>
@@ -122,7 +122,7 @@ export function PartnerAccessModal({
                 <div>
                   <label
                     htmlFor="partner-comment"
-                    className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-white/52"
+                    className="mb-2 block text-xs font-black normal-case tracking-normal text-white/52"
                   >
                     Коротко о вашем трафике
                   </label>

@@ -18,7 +18,7 @@ function Field({
   type?: string;
 }) {
   return (
-    <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42">
+    <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">
       {label}
       <input
         name={name}
@@ -40,7 +40,7 @@ function TextArea({
   defaultValue?: any;
 }) {
   return (
-    <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42 md:col-span-2">
+    <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42 md:col-span-2">
       {label}
       <textarea
         name={name}
@@ -67,7 +67,7 @@ function marketLabel(market: any) {
 function StatCard({ label, value }: { label: string; value: any }) {
   return (
     <div className="rounded-xl border border-white/8 bg-white/[0.045] p-3">
-      <div className="text-[11px] font-black uppercase tracking-[0.08em] text-white/35">
+      <div className="text-[11px] font-black normal-case tracking-normal text-white/35">
         {label}
       </div>
       <div className="mt-1 break-words text-base font-black text-white/90">
@@ -315,7 +315,7 @@ export function BusinessSettingsPanel({
               method="post"
               className="mt-4 grid gap-3"
             >
-              <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42">
+              <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">
                 Партнёр для индивидуальной ставки
                 <select
                   name="partnerCode"
@@ -512,7 +512,7 @@ export function BusinessSettingsPanel({
                 name="email"
                 defaultValue={site?.contacts?.email}
               />
-              <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42 md:col-span-2">
+              <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42 md:col-span-2">
                 Активные рынки
                 <div className="flex flex-wrap gap-2 normal-case tracking-normal">
                   {markets.map((market: any) => (

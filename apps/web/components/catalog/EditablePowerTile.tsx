@@ -105,7 +105,7 @@ export function EditablePowerTile({
         <svg viewBox="0 0 24 24" className="ac-editable-power__icon mt-0.5 h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M13.5 2.8 5.8 13h5.1l-.7 8.2L18.3 11h-5.1z" /></svg>
         <div className="min-w-0 flex-1">
           <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="text-[11px] font-black uppercase tracking-[0.12em] text-[var(--ac-muted)]">Мощность</span>
+            <span className="text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Мощность</span>
             <span className="ac-editable-power__status rounded-full px-2 py-0.5 text-[10px] font-black">{copy.status}</span>
           </div>
           <p className="ac-editable-power__hint mt-1 text-[11px] font-semibold leading-4">{copy.hint}</p>

@@ -14,7 +14,7 @@ export default function AutocreditPage() {
       <PublicHeader />
       <section className="mx-auto flex min-h-[calc(100vh-88px)] w-full max-w-3xl items-center px-4 py-12 md:px-8">
         <div className="w-full rounded-[2rem] bg-[var(--ac-surface)] p-6 text-[var(--ac-text)] md:p-9">
-          <div className="text-xs font-black uppercase tracking-[.18em] text-red-500">АвтоЦена</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-500">АвтоЦена</div>
           <h1 className="mt-2 text-3xl font-black tracking-[-.035em] md:text-5xl">Автокредит</h1>
           <p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">
             Вы перешли из сервиса АвтоЦена. На следующем шаге можно рассчитать условия автокредита на стороне партнёрского сервиса.

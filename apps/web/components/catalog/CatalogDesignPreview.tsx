@@ -26,7 +26,7 @@ export function CatalogDesignPreview() {
       <CatalogFilters initial={{ advanced: "1" }} facets={{ makes: ["Suzuki", "Kia", "Toyota"], models: [], markets: ["korea", "china", "uae", "europe", "georgia"], fuels: ["petrol", "diesel", "hybrid", "electric"], bodyTypes: ["sedan", "suv", "hatchback"], transmissions: ["automatic", "manual"], drives: ["fwd", "awd"] }} />
       <div className="mt-12 grid items-start gap-8 border-t border-[var(--ac-border)] pt-8 xl:grid-cols-[minmax(0,1fr)_380px]">
         <div className="min-w-0">
-          <p className="text-xs font-bold uppercase tracking-widest text-[var(--ac-muted)]">Пример карточки без полного расчёта</p>
+          <p className="text-xs font-bold normal-case tracking-normal text-[var(--ac-muted)]">Пример карточки без полного расчёта</p>
           <h2 className="mt-2 text-3xl font-black">Suzuki Swift GLX</h2>
           <div className="mt-5 flex min-h-48 items-center justify-center rounded-2xl bg-[var(--ac-surface-2)] text-sm text-[var(--ac-muted)]">Фотографии исходного объявления</div>
           <OfferSpecificationsDisclosure groups={demoGroups} title="Suzuki Swift GLX" mode="desktop" />

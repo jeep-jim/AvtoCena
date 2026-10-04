@@ -38,7 +38,7 @@ function isPublicPath(pathname: string) {
 function FooterLinkGroup({ title, links }: { title: string; links: Array<{ href: string; label: string }> }) {
   return (
     <nav aria-label={title}>
-      <h2 className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-text)]">{title}</h2>
+      <h2 className="text-xs font-black normal-case tracking-normal text-[var(--ac-text)]">{title}</h2>
       <div className="mt-3 grid gap-2 text-sm font-semibold">
         {links.map((link) => <Link key={link.href} href={link.href} className="ac-public-footer-nav-link w-fit">{link.label}</Link>)}
       </div>

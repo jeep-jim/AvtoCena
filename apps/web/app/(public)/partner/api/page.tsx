@@ -108,7 +108,7 @@ export default function PartnerApiPage() {
 
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)] xl:gap-5">
           <section className="glass min-w-0 rounded-[1.6rem] p-4 sm:rounded-[2rem] sm:p-6">
-            <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-300">
+            <div className="text-[11px] font-black normal-case tracking-normal text-red-300">
               Входящий трафик
             </div>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
@@ -145,7 +145,7 @@ export default function PartnerApiPage() {
           </section>
 
           <section className="glass min-w-0 rounded-[1.6rem] p-4 sm:rounded-[2rem] sm:p-6">
-            <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-300">
+            <div className="text-[11px] font-black normal-case tracking-normal text-red-300">
               Исходящая конверсия
             </div>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
@@ -182,7 +182,7 @@ export default function PartnerApiPage() {
 
         <section className="glass overflow-hidden rounded-[1.6rem] sm:rounded-[2rem]">
           <div className="border-b border-white/10 p-4 sm:p-6">
-            <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-300">
+            <div className="text-[11px] font-black normal-case tracking-normal text-red-300">
               Сопоставление событий
             </div>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
@@ -195,7 +195,7 @@ export default function PartnerApiPage() {
             </p>
           </div>
 
-          <div className="hidden grid-cols-[190px_150px_minmax(0,1fr)] gap-3 border-b border-white/8 px-6 py-3 text-xs font-black uppercase tracking-[0.12em] text-white/35 md:grid">
+          <div className="hidden grid-cols-[190px_150px_minmax(0,1fr)] gap-3 border-b border-white/8 px-6 py-3 text-xs font-black normal-case tracking-normal text-white/35 md:grid">
             <div>Событие АвтоЦены</div>
             <div>Статус сети</div>
             <div>Смысл</div>
@@ -207,7 +207,7 @@ export default function PartnerApiPage() {
               className="grid min-w-0 gap-2 border-b border-white/7 p-4 last:border-0 md:grid-cols-[190px_150px_minmax(0,1fr)] md:gap-3 md:px-6"
             >
               <div className="min-w-0">
-                <div className="mb-1 text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+                <div className="mb-1 text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                   Событие
                 </div>
                 <code className="break-all font-mono text-sm font-black text-white/82">
@@ -215,7 +215,7 @@ export default function PartnerApiPage() {
                 </code>
               </div>
               <div>
-                <div className="mb-1 text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+                <div className="mb-1 text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                   Статус сети
                 </div>
                 <span

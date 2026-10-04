@@ -58,12 +58,12 @@ export default async function AutocatalogPage() {
   return <main className="ac-autocatalog-page ac-page-copy min-h-screen overflow-x-clip bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-      <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
+      <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
         <Link href="/cars" className="hover:text-red-500">Каталог предложений</Link><span className="mx-2">/</span><span>Автокаталог</span>
       </nav>
       <div className="mt-5 grid gap-5 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:p-8">
         <div>
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Только актуальное</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-500">Только актуальное</div>
           <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.05em] md:text-7xl">Автокаталог</h1>
           <p className="mt-4 max-w-3xl text-sm font-semibold leading-6 text-[var(--ac-muted)] md:text-base">
             Выберите марку и модель, чтобы сравнить доступные автомобили и стоимость под ключ.

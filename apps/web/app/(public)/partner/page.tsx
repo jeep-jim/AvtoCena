@@ -37,7 +37,7 @@ function StatCard({ label, value, wide = false }: StatCardProps) {
         wide ? "col-span-2 lg:col-span-1" : "",
       ].join(" ")}
     >
-      <div className="truncate text-[11px] font-black uppercase tracking-[0.08em] text-white/42 sm:text-[12px]">
+      <div className="truncate text-[11px] font-black normal-case tracking-normal text-white/42 sm:text-[12px]">
         {label}
       </div>
       <div className="mt-2 min-w-0 break-words text-[26px] font-black leading-none tracking-[-0.045em] text-white sm:text-[32px] xl:text-[34px]">
@@ -197,7 +197,7 @@ export default async function PartnerPage({
       >
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
           <div>
-            <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-300">
+            <div className="text-[11px] font-black normal-case tracking-normal text-red-300">
               Выплаты
             </div>
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
@@ -256,7 +256,7 @@ export default async function PartnerPage({
           </div>
 
           <div className="rounded-[1.4rem] border border-white/10 bg-black/20 p-4 sm:p-5">
-            <div className="text-xs font-black uppercase tracking-[0.14em] text-white/42">
+            <div className="text-xs font-black normal-case tracking-normal text-white/42">
               {isCpaNetwork ? "Подтверждённые действия" : "Доступно сейчас"}
             </div>
             <div className="mt-3 break-words text-[34px] font-black leading-none tracking-[-0.05em] text-white sm:text-[40px]">
@@ -267,7 +267,7 @@ export default async function PartnerPage({
               <form action="/api/partners/payout-request" method="post" className="mt-5">
                 <label
                   htmlFor="payout-comment"
-                  className="mb-2 block text-xs font-black uppercase tracking-[0.12em] text-white/42"
+                  className="mb-2 block text-xs font-black normal-case tracking-normal text-white/42"
                 >
                   Комментарий необязательно
                 </label>

@@ -9,7 +9,7 @@ export default function PublicError({ reset }: { error: Error & { digest?: strin
 
   return <main className="ac-page-copy min-h-screen bg-[#07080d] px-4 py-24 text-center text-white">
     <section className="mx-auto max-w-xl rounded-[2rem] bg-[var(--ac-surface,#12151d)] p-7 md:p-10">
-      <div className="text-xs font-black uppercase tracking-[.18em] text-red-500">АвтоЦена</div>
+      <div className="text-xs font-black normal-case tracking-normal text-red-500">АвтоЦена</div>
       <h1 className="mt-3 text-3xl font-black md:text-4xl">Страница временно недоступна</h1>
       <p className="mt-4 font-semibold leading-7 text-white/55">Попробуйте обновить страницу. Ваши выбранные параметры не потеряются.</p>
       <div className="mt-7 grid gap-3 sm:grid-cols-2">

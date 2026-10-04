@@ -11,7 +11,7 @@ export function UnavailableOfferView({offer,calculationUnavailable=false,childre
  .ac-unavailable-main{width:min(100%,1500px);margin:auto;padding:96px 32px 64px}
  .ac-unavailable-hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 0 64px}
  .ac-unavailable-key{width:clamp(170px,22vw,280px);height:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 18px 32px #000)}
- .ac-unavailable-model{color:#a5abb5!important;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+ .ac-unavailable-model{color:#a5abb5!important;font-size:14px;font-weight:800;letter-spacing:normal;text-transform:none;margin-bottom:16px}
  .ac-unavailable-page .ac-unavailable-hero h1{color:#fff!important;font-size:clamp(40px,6.5vw,88px)!important;line-height:1.02!important;letter-spacing:-.045em;font-weight:900;max-width:1050px;text-wrap:balance;margin:0}
  .ac-unavailable-description{max-width:550px;font-size:18px;line-height:1.6;color:#a5abb5!important;margin:24px 0 28px}
  .ac-unavailable-page .ac-unavailable-cta{display:inline-flex;align-items:center;gap:24px;min-height:56px;border-radius:16px;background:#ff353d!important;color:#fff!important;padding:16px 24px;font-size:16px;font-weight:900}

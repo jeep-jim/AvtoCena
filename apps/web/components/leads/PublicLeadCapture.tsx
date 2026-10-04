@@ -113,7 +113,7 @@ function GenericLeadBanner({ kind, onOpen }: { kind: HostKind; onOpen: () => voi
   return (
     <section className="ac-lead-capture-banner mt-8 grid gap-4 rounded-[1.7rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-6">
       <div className="min-w-0">
-        <div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Подберём вручную</div>
+        <div className="text-xs font-black normal-case tracking-normal text-red-500">Подберём вручную</div>
         <h2 className="mt-1.5 text-2xl font-black tracking-[-.025em] text-[var(--ac-text)] md:text-3xl">{headline}</h2>
         <p className="mt-2 max-w-4xl text-sm font-medium leading-6 text-[var(--ac-muted)] md:text-base">
           На сайте показана только часть доступных вариантов. Оставьте заявку — подберём и рассчитаем автомобиль под ваш запрос, даже если его сейчас нет в каталоге.
@@ -139,7 +139,7 @@ function FavoriteSelector({
     <div>
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-[11px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Автомобили</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Автомобили</div>
           <p className="mt-1 text-sm font-bold text-[var(--ac-text)]">Выберите до 5 вариантов из Избранного</p>
         </div>
         <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-1.5 text-xs font-black text-[var(--ac-muted)]">{selectedIds.length}/5</span>
@@ -178,7 +178,7 @@ function FavoriteSelector({
 }
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
-  return <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">{children}</span>;
+  return <span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)]">{children}</span>;
 }
 
 function LeadDialog({
@@ -391,7 +391,7 @@ function LeadDialog({
               </div>
             ) : null}
 
-            {isOffer ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-[11px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Интересующее авто</div><div className="mt-1.5 text-sm font-black text-[var(--ac-text)]">{cleanText(form.car) || "Автомобиль из открытой карточки"}</div></div> : null}
+            {isOffer ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Интересующее авто</div><div className="mt-1.5 text-sm font-black text-[var(--ac-text)]">{cleanText(form.car) || "Автомобиль из открытой карточки"}</div></div> : null}
 
             <label className="block min-w-0"><FieldLabel>Комментарий</FieldLabel><textarea value={form.comment} onChange={(event) => setField("comment", event.target.value)} rows={3} placeholder="Например: нужен полный привод, светлый салон или срок покупки" className="soft-input w-full resize-none rounded-2xl bg-[var(--ac-surface-2)] px-4 py-3.5 outline-none" /></label>
 

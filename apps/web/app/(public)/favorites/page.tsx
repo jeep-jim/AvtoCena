@@ -83,7 +83,7 @@ export default function FavoritesPage() {
             <Link href={item.href || `/cars/offer/${item.id}`}>
               <div className="h-52 bg-white/[0.04]">{item.imageUrl ? <img src={item.imageUrl} alt={item.title || "Автомобиль"} className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-bold text-white/35">Фото загружается</div>}</div>
               <div className="p-4">
-                <div className="text-xs font-black uppercase tracking-[0.15em] text-red-300">{item.marketLabel || "Каталог"}</div>
+                <div className="text-xs font-black normal-case tracking-normal text-red-300">{item.marketLabel || "Каталог"}</div>
                 <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Дилер: {favoriteDealer(item).name}</p>
                 <h2 className="mt-2 text-xl font-black">{item.title || "Автомобиль"}</h2>
                 <div className="mt-2 text-sm text-white/55">{item.year || "—"} · {item.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(item.mileageKm)} км` : "пробег уточняется"}</div>

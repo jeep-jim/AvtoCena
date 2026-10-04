@@ -51,7 +51,7 @@ export default async function EncyclopediaModificationPage({ params }: PageProps
   return <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref={`/cars/brand/${brand.slug}/model/${model.slug}`} backLabel={`${brand.name} ${model.model}`} />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
-      <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
+      <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
         <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span>
         <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span>
         <Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span>
@@ -64,7 +64,7 @@ export default async function EncyclopediaModificationPage({ params }: PageProps
           <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Модификация автомобиля</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-500">Модификация автомобиля</div>
           <h1 className="mt-2 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{brand.name} {model.model}</h1>
           <div className="mt-2 text-xl font-black text-[var(--ac-text)] md:text-2xl">{variantTitle}</div>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-black">
@@ -76,7 +76,7 @@ export default async function EncyclopediaModificationPage({ params }: PageProps
       </header>
 
       <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
-        <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Технические характеристики</div>
+        <div className="text-xs font-black normal-case tracking-normal text-red-500">Технические характеристики</div>
         <h2 className="mt-1 text-2xl font-black md:text-4xl">{variantTitle}</h2>
         <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Показываем только те характеристики, которые уже присутствуют в проверяемой базе АвтоЦены. Неизвестные размеры, массы и другие параметры не подставляются предположениями.</p>
         <div className="mt-6"><VehicleSpecifications row={variant} title={`${brand.name} ${model.model}`} mode="full" /></div>

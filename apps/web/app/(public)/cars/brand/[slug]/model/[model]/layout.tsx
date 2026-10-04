@@ -30,7 +30,7 @@ export default async function ModelSeoLayout({ children, params }: LayoutProps) 
       {media?.images?.length ? <section className="rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7" aria-labelledby="model-gallery-title">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Фото модели</div>
+            <div className="text-xs font-black normal-case tracking-normal text-red-500">Фото модели</div>
             <h2 id="model-gallery-title" className="mt-1 text-2xl font-black text-[var(--ac-text)] md:text-4xl">Как выглядит {brand.name} {model.model}</h2>
           </div>
           <span className="text-xs font-bold text-[var(--ac-muted)]">{media.generation ? `${media.generation} · ` : ""}{yearRange(media.yearFrom, media.yearTo)}</span>

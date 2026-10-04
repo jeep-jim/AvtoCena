@@ -51,7 +51,7 @@ function CatalogPriceContent({
 
   return (
     <div className="ac-price-trend relative min-w-0">
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black normal-case tracking-normal text-[var(--ac-text)]`}>
         {label}
       </div>
       <div className={`${dense ? "mt-1 sm:mt-1.5" : "mt-1.5"} flex min-w-0 items-end justify-between`}>

@@ -32,7 +32,7 @@ export function PartnerShell({
 
         <section className="mt-8">
           <div className="mb-6">
-            <div className="text-sm font-black uppercase tracking-[0.18em] text-red-300">
+            <div className="text-sm font-black normal-case tracking-normal text-red-300">
               Партнёрам
             </div>
             <h1 className="mt-2 text-[38px] font-black leading-[0.96] tracking-[-0.04em] md:text-5xl">
