@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 import { readChunkedDataJson, updateChunkedDataJson } from "./data";
 import { digest, keyMatches } from "./crm-access";
-import groupTarget from "./crm-group-target.json";
+import {leadTelegramTarget,leadCrmUrl} from "./dealers/telegram-settings";
 import { leadNotice, queueCrmAdminNotifications } from "./crm-notifications";
 
 const QUEUE = "telegram/crm-outbox.json";
@@ -14,9 +14,10 @@ export function crmRelayAuthorized(supplied: string, secret: string) {
   return Boolean(expected && /^[a-f0-9]{64}$/.test(supplied) && crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(supplied)));
 }
 async function allowed(item: any) {
-  if (item.audience !== "group" || String(item.chatId) !== groupTarget.chatId) return false;
+  if (item.audience !== "group") return false;
   const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(l => l.id === item.leadId);
-  return Boolean(lead && !lead.archivedAt);
+  const target=lead?await leadTelegramTarget(lead):null;
+  return Boolean(lead && !lead.archivedAt && target && String(item.chatId)===target.chatId);
 }
 export async function claimCrmNotices() {
   await queueCrmAdminNotifications();
@@ -39,8 +40,8 @@ export async function claimCrmNotices() {
     // Internal notes and conversation history are never included.
     const lead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(l => l.id === row.leadId);
     notices.push({id: row.id, token, chatId: String(row.chatId),
-      audience: "group", text: leadNotice(lead, row.followupOperationId ? lead.followups?.find((entry: any) => entry.operationId === row.followupOperationId) : undefined).slice(0, 4000),
-      url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(row.leadId)}`});
+      targetTitle:(await leadTelegramTarget(lead))?.title, audience: "group", text: leadNotice(lead, row.followupOperationId ? lead.followups?.find((entry: any) => entry.operationId === row.followupOperationId) : undefined).slice(0, 4000),
+      url: leadCrmUrl(lead)});
   }
   return notices;
 }
@@ -49,7 +50,9 @@ export async function authorizeCrmNotice(id: string, token: string) {
   if (!item || ["sent", "cancelled"].includes(item.status) || !keyMatches(token, item.relayHash)
     || !(item.relayUntil > Date.now())) return false;
   if (await allowed(item)) return true;
-  await updateChunkedDataJson<any>(QUEUE, id, row => keyMatches(token, row.relayHash) ? {...row, status: "cancelled", relayHash: "", relayUntil: 0} : row);
+  const lead=(await readChunkedDataJson<any>("leads/leads.json",[])).find(l=>l.id===item.leadId);
+  const target=item.audience==="group"&&lead&&!lead.archivedAt?await leadTelegramTarget(lead):null;
+  await updateChunkedDataJson<any>(QUEUE, id, row => keyMatches(token, row.relayHash) ? {...row, chatId:target?.chatId||row.chatId,status: target?"pending":"cancelled", relayHash: "", relayUntil: 0, nextAttemptAt:0} : row);
   return false;
 }
 export async function completeCrmNotice(id: string, token: string, messageId?: number) {

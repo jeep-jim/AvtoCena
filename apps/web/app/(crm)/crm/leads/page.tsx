@@ -1,3 +1,5 @@
+import {leadDealerId} from '@/lib/dealers/lead-routing';
+import {isPlatformOwner} from '@/lib/platform-access';
 import {leadChannelLabel} from "@/lib/lead-source";
 import {DeleteCrmRecord} from "@/components/crm/DeleteCrmRecord";
 import {TeamDiscussion} from "@/components/crm/TeamDiscussion";
@@ -87,7 +89,8 @@ export default async function CrmLeadsPage({
   const user = await getCurrentUser();
   if (!user) redirect("/login");
   const params = (await searchParams) || {};
-  const view = first(params.view) || "all";
+  const view = first(params.view) === "dealers" && !isPlatformOwner(user) ? "all" : first(params.view) || "all";
+  const dealerFilter=first(params.dealer);
   const [stored, users, messages, deliveries, clients] = await Promise.all([
     readChunkedDataJson<any>("leads/leads.json", []),
     readCrmUsers(),
@@ -109,7 +112,7 @@ export default async function CrmLeadsPage({
     manager: first(params.manager),
     q: first(params.q),
     date: first(params.date),
-  }).sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+  }).filter(lead=>view==='dealers'?leadDealerId(lead)!=='dealer_topavto'&&(!dealerFilter||leadDealerId(lead)===dealerFilter):view==='archive'||leadDealerId(lead)==='dealer_topavto').sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const id = first(params.id);
   const visible = id
     ? stored.filter((lead) => lead.id === id && canSeeLead(user,lead))
@@ -127,6 +130,7 @@ export default async function CrmLeadsPage({
           ["all", "Активные"],
           ["my", "Мои заявки"],
           ["archive", "Архив"],
+          ...(isPlatformOwner(user)?[["dealers","Дилеры"]]:[]),
         ].map(([key, label]) => (
           <Link
             key={key}
@@ -152,6 +156,7 @@ export default async function CrmLeadsPage({
       </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
+        {view==='dealers'&&<select name="dealer" aria-label="Фильтр дилера" defaultValue={dealerFilter} className="soft-input rounded-xl p-3"><option value="">Все дилеры</option>{Array.from(new Map(stored.filter(l=>canSeeLead(user,l)&&leadDealerId(l)!=='dealer_topavto').map(l=>[leadDealerId(l),l.requestedDealerName||leadDealerId(l)])).entries()).map(([id,name])=><option key={id} value={id}>{String(name)}</option>)}</select>}
         <input type="hidden" name="date" value={first(params.date)} />
         <input
           name="q"
@@ -205,7 +210,7 @@ export default async function CrmLeadsPage({
           <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
             <strong>Статусы для Метрики</strong><LeadStatusHelp />
           </div>
-      <LeadDateFilter date={first(params.date)} filters={Object.fromEntries(["view","q","status","manager"].map(key=>[key,first(params[key])]))} />
+      <LeadDateFilter date={first(params.date)} filters={Object.fromEntries(["view","q","status","manager","dealer"].map(key=>[key,first(params[key])]))} />
         </div>
       } />
       <div className="mt-4 space-y-3">
@@ -249,6 +254,7 @@ export default async function CrmLeadsPage({
                     {lead.clientId ? <Link className="crm-lead-client-link" href={`/crm/clients/${encodeURIComponent(lead.clientId)}`} title="Открыть карточку клиента">{lead.name || lead.telegramDisplayName || "Клиент"}</Link> : (lead.name || lead.telegramDisplayName || "Клиент")}
                   {priorClient&&<Link href={`/crm/clients/${encodeURIComponent(priorClient.id!)}`} title="Открыть ранее добавленного клиента"><ManualClientOrigin client={priorClient} managers={users} previous/></Link>}
                   </div>
+                  {leadDealerId(lead)!=='dealer_topavto'&&<div className="mt-1 text-xs font-bold text-blue-500">Дилер: {lead.requestedDealerName||leadDealerId(lead)}</div>}
                   <div className="crm-lead-contact-row mt-1 text-sm text-[var(--ac-muted)]">
                     <span className="crm-lead-channel-icon" aria-hidden="true"><ContactIcon channel={leadContact(lead).channel}/></span>
                     <LeadContact lead={lead} />

@@ -25,7 +25,7 @@ test("runner verifies the group, sends one notice, retries only ack, and does no
       }
       assert.equal(url,'https://avtocena.com/api/internal/crm/relay');
       assert.equal(init.headers['x-crm-relay-key'], crypto.createHmac('sha256','PRIVATE_MASTER').update('avtocena:crm-notification-relay:v1').digest('hex'));
-      if (body.action==='claim') return Response.json({ok:true,notices:[{audience:'group',id:'job',token:'PRIVATE_LEASE',chatId:'-1002697164330',text:'New request',url:'https://avtocena.com/crm/leads?id=test'}]});
+      if (body.action==='claim') return Response.json({ok:true,notices:[{audience:'group',id:'job',token:'PRIVATE_LEASE',chatId:'-1002697164330',targetTitle:'Заявки TopAvto',text:'New request',url:'https://avtocena.com/crm/leads?id=test'}]});
       if (body.action==='authorize') return Response.json({ok:true,allowed:process.env.REVOKED!=='yes'});
       if (body.action==='ack') {
         acks++; assert.equal(body.messageId,123);

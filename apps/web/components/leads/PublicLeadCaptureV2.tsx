@@ -172,7 +172,7 @@ function MessengerFields({ messenger, setMessenger, contact, setContact, kind, s
 export function LeadDialog({ request, favorites, onClose, preview=false, portalDocument }: { request: LeadRequest; favorites: FavoriteLeadItem[]; onClose: () => void; preview?:boolean; portalDocument?:Document }) {
   const ownerDocument=portalDocument||document;
   const panelRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState<LeadFormState>(() => ({ city: initialCity(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: request.mode === "generic" ? request.comment || "" : "" }));
+  const [form, setForm] = useState<LeadFormState>(() => ({ city: (()=>{if(request.mode==="offer"){try{const data=JSON.parse(ownerDocument.querySelector<HTMLElement>("main[data-offer-preview]")?.dataset.offerPreview||"null");if(data?.id===request.offerId&&typeof data.deliveryCity==="string")return data.deliveryCity;}catch{}}return initialCity();})(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: request.mode === "generic" ? request.comment || "" : "" }));
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
   const [messenger, setMessenger] = useState<MessengerKind>("telegram");
   const [messengerContact, setMessengerContact] = useState("+7");
@@ -263,7 +263,7 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
       const response = await leadFetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         requestMode: request.mode,
-        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? favoriteDealer(offerPreview).id : request.mode==="generic" ? request.dealerId : undefined,
+        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? (offerPreview.id.startsWith("special_")?favoriteDealer(offerPreview).id:ownerDocument.querySelector<HTMLElement>("[data-dealer-context]")?.dataset.dealerContext||favoriteDealer(offerPreview).id) : request.mode==="generic" ? request.dealerId : undefined,
         submissionThreadToken: isOffer ? threadToken() : "",
         pageUrl: window.location.href,
         offerId: isOffer ? request.offerId : "",

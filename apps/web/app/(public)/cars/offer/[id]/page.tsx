@@ -1,3 +1,4 @@
+import {decodeShareDraft} from '@/lib/catalog/offer-share';
 import {SpecTile,type SpecItem} from "@/components/catalog/OfferSpecTile";
 import {offerParameterDraft} from '@/lib/catalog/offer-parameter-draft';
 import {sharedOfferScenario} from '@/lib/catalog/shared-offer-scenario';
@@ -217,7 +218,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
 
 async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string }> }) {
   const { id: routeId } = await params;
-  if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} previewRequested={(await searchParams)?.preview === "1"}/>;
+  if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
   try { id = offerRouteId(decodeURIComponent(routeId)); } catch { /* Keep the route value. */ }
   const query = searchParams ? await searchParams : {};

@@ -1,3 +1,4 @@
+import {normalizeSiteControls,type SiteControls} from '../site-controls';
 import {mergeShowcaseChanges} from './showcase-merge';
 import {dealerProfilePath} from './profile-url';
 import { readDataJson, mutateDataJson } from "../data";
@@ -61,7 +62,7 @@ export async function saveShowcase(id:string,raw:any){
  });
  return saved;
 }
-export type PublicFeatures = { version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
+export type PublicFeatures = { siteControls?:SiteControls; version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
 export function readPublicFeatures() {
   return readDataJson<PublicFeatures>("settings/public-features.json", {
     version: 0,
@@ -78,6 +79,7 @@ export async function savePublicFeatures(raw: PublicFeatures) {
         throw Error("Настройки сервисов изменились. Обновите страницу");
       saved = {
         version: current.version + 1,
+        siteControls: raw.siteControls===undefined?current.siteControls:normalizeSiteControls(raw.siteControls),
         affiliatesEnabled: raw.affiliatesEnabled === true,
         knowledgeEnabled:raw.knowledgeEnabled === undefined ? current.knowledgeEnabled===true : raw.knowledgeEnabled===true,
         partnersEnabled:raw.partnersEnabled === undefined ? current.partnersEnabled===true : raw.partnersEnabled===true,

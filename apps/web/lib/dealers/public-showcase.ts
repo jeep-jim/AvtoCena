@@ -29,7 +29,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
   const found = await getSpecialOffer(id);
   if (!found) return null;
   const { showcase: s, offer: o } = found;
-  const c = calculateSpecial(s, o, city || undefined);
+  const c = calculateSpecial(s, o, city);
   return {
     id,
     offerId: id,

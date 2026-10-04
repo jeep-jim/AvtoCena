@@ -1,3 +1,4 @@
+import {encodeShareDraft} from '@/lib/catalog/offer-share';
 import {parseSpecialId,calculateSpecial,specialTitle,specialPath,offerAvailability} from '@/lib/dealers/showcase-model';
 import {getSpecialOffer} from '@/lib/dealers/public-showcase';
 import type {OfferPdfData} from '@/lib/catalog/offer-pdf';
@@ -26,10 +27,10 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  if(parseSpecialId(id)){
   const found=await getSpecialOffer(id,user.role==='owner');
   if(!found)return Response.json({error:"Объявление не найдено"},{status:404,headers});
-  const {showcase:s,offer:o}=found,c=calculateSpecial(s,o),stock=offerAvailability(o)==='stock';
+  const {showcase:s,offer:o}=found,c=calculateSpecial(s,o,draft.deliveryCity||""),stock=offerAvailability(o)==='stock';
   const office=stock?s.offices.find(item=>item.id===o.officeId):s.offices[0];
   const rub=(n:number)=>`${n.toLocaleString('ru-RU')} ₽`;
-  const data:OfferPdfData={dealerName:s.name,dealerAddress:office?[office.city,office.address].filter(Boolean).join(', '):'',title:specialTitle(o),market:s.name,marketKey:'dealer',date:new Date().toLocaleDateString('ru-RU'),specs:[o.year&&`${o.year} г.`,o.engineCc&&`${o.engineCc} см³`,o.powerHp&&`${o.powerHp} л.с.`,`${o.mileageKm.toLocaleString('ru-RU')} км`,o.transmission,o.drive].filter(Boolean).join(' · '),city:c.city||'Город уточняется',rate:stock?'Цена в рублях':`1 $ = ${c.rate.toLocaleString('ru-RU')} ₽`,photoUrl:o.photos[0]?.url,sections:[{title:'Структура цены',rows:c.lines.map(l=>({label:l.title,value:rub(l.amountRub)}))},{title:'Условия',rows:[{label:stock?'Наличие':'Доставка',value:stock?'В наличии':c.daysFrom?`${c.daysFrom}–${c.daysTo} дней`:'Срок уточняется'}]},{title:'Информация',rows:[]}],total:c.totalRub===null?'Цена уточняется':rub(c.totalRub),deposit:'Уточняется у дилера',warnings:c.complete?[]:['Полная стоимость требует уточнения.'],url:`https://avtocena.com${specialPath(s.dealerId,o.id)}`};
+  const data:OfferPdfData={dealerName:s.name,dealerAddress:office?[office.city,office.address].filter(Boolean).join(', '):'',title:specialTitle(o),market:s.name,marketKey:'dealer',date:new Date().toLocaleDateString('ru-RU'),specs:[o.year&&`${o.year} г.`,o.engineCc&&`${o.engineCc} см³`,o.powerHp&&`${o.powerHp} л.с.`,`${o.mileageKm.toLocaleString('ru-RU')} км`,o.transmission,o.drive].filter(Boolean).join(' · '),city:c.city||'Город уточняется',rate:stock?'Цена в рублях':`1 $ = ${c.rate.toLocaleString('ru-RU')} ₽`,photoUrl:o.photos[0]?.url,sections:[{title:'Структура цены',rows:c.lines.map(l=>({label:l.title,value:rub(l.amountRub)}))},{title:'Условия',rows:[{label:stock?'Наличие':'Доставка',value:stock?'В наличии':c.daysFrom?`${c.daysFrom}–${c.daysTo} дней`:'Срок уточняется'}]},{title:'Информация',rows:[]}],total:c.totalRub===null?'Цена уточняется':rub(c.totalRub),deposit:'Уточняется у дилера',warnings:c.complete?[]:['Полная стоимость требует уточнения.'],url:`https://avtocena.com${specialPath(s.dealerId,o.id)}?estimate=${encodeShareDraft({deliveryCity:draft.deliveryCity||""})}`};
   try{const pdf=await renderOfferPdf(data);return new Response(new Uint8Array(pdf),{headers:{...headers,'Content-Type':'application/pdf','Content-Disposition':'inline; filename="AvtoCena-dealer.pdf"'}});}catch(error){console.error('dealer_offer_pdf_failed',error);return Response.json({error:'Не удалось подготовить PDF. Попробуйте ещё раз.'},{status:500,headers});}
  }
  let offer=await getOfferForPage(id) || await getOfferFromCurrentShard(id);

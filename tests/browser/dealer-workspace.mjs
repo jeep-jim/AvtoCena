@@ -145,7 +145,7 @@ try{
    if(!stock){
     const basePrice=await page.locator('.ac-offer-price-panel .ac-price').innerText();
     assert.match(basePrice,/₽/);
-    await page.getByText('Стоимость с доставкой до Новосибирск',{exact:true}).waitFor();
+    await page.getByText('Стоимость автомобиля',{exact:true}).waitFor();
     const relatedPrice=page.locator('[data-dealer-related] a[href$="another-order"] .ac-price');
     assert.equal(await relatedPrice.innerText(),basePrice);
     const heading=page.locator('[data-dealer-related] a[href$="another-order"] h3');
@@ -154,10 +154,9 @@ try{
     assert.equal(await page.locator('[data-dealer-related] .overflow-x-auto').first().evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
     await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).filter({visible:true}).last().click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Москва',exact:true}).click();
     await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();await page.waitForFunction(()=>!history.state?.acOverlayStep);
-    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),moscow);
+    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),basePrice);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),null);
     await page.evaluate(()=>{localStorage.setItem('avtocena_city','Красноярск');document.cookie='avtocena_city='+encodeURIComponent('Красноярск')+'; Path=/';const u=new URL(location.href);u.searchParams.delete('city');history.replaceState(history.state,'',u);window.dispatchEvent(new Event('avtocena:city-changed'));});
-    await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();assert.notEqual(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
-    assert.equal(await relatedPrice.innerText(),await page.locator('.ac-offer-price-panel .ac-price').innerText());
+    await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();assert.equal(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
@@ -290,7 +289,7 @@ try{
   assert.equal(await page.getByLabel('ИНН',{exact:true}).inputValue(),'7707083893');
   const n=writes.length;await page.getByRole('switch',{name:'Посмотреть демо',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();await page.getByLabel('Название компании',{exact:true}).fill('Демо правка');await page.getByText('Изменения демо запоминаются в этой вкладке.').waitFor();assert.equal(writes.length,n);await shot('demo');assert.equal(await page.locator('.crm-navigation').isVisible(),false);await page.getByRole('link',{name:'Предпросмотр страницы дилера',exact:true}).click();await page.getByRole('dialog').waitFor();assert.notEqual(await page.getByRole('dialog').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');await shot('preview');await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.getByRole('dialog').waitFor({state:'detached'});assert.equal(writes.length,n);await page.getByRole('button',{name:'Пробный месяц · все функции'}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();await page.getByText('Доступно с подпиской',{exact:true}).waitFor();assert.equal(writes.length,n);await page.getByRole('button',{name:'Базовый доступ',exact:true}).click();await page.getByRole('button',{name:'Страница компании',exact:true}).click();assert.equal(await page.getByLabel('Название компании',{exact:true}).inputValue(),'Демо правка');
   await page.getByRole('switch',{name:'Выйти из демо',exact:true}).click();await page.getByRole('button',{name:'Автомобили',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'RAV4');await page.getByRole('tab',{name:'Автомобили в наличии',exact:true}).click();assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'Fit');assert.equal(await page.getByLabel('Цена автомобиля, ₽',{exact:true}).inputValue(),'1250000');assert.equal(writes.length,n);
-  await page.goto(origin+'?view=platform');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot('platform');await page.getByRole('button',{name:'Тарифы и доступ',exact:true}).click();await shot('tariffs');await page.getByRole('button',{name:'Страницы сайта',exact:true}).click();await shot('pages');
+  await page.goto(origin+'?view=platform');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot('platform');await page.getByRole('button',{name:'Тарифы и доступ',exact:true}).click();await shot('tariffs');assert.equal(await page.getByRole('button',{name:'Страницы сайта',exact:true}).count(),0); // Site controls now have a separate top-level page, covered by site-chat.mjs.
   for(const kind of ['partners','knowledge']){await page.goto(origin+'?view='+kind);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);await shot(kind);if(kind==='knowledge'){await page.getByRole('searchbox').fill('расчёт');assert.ok(await page.locator('.pw-kb-group li a').count()>0);await page.locator('.pw-kb-group li a').first().click();await page.locator('.pw-article').waitFor();} }
   assert.deepEqual(errors,[]);await page.close();console.log(width,theme,'workspace, save, gallery, isolated demo, plans, pages and knowledge search OK');
  }

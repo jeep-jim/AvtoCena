@@ -8,7 +8,7 @@ import {
   updateChunkedDataJson,
   mutateDataJson,
 } from "./data";
-import groupTarget from "./crm-group-target.json";
+import {leadTelegramTarget,leadCrmUrl} from "./dealers/telegram-settings";
 import { getTelegramRuntimeConfig } from "./telegram-config";
 import { botAdmin } from "./crm-access";
 
@@ -49,7 +49,7 @@ export function followupText(entry: any, includeContact = true) {
 }
 const noticeField = (value: unknown, limit = 300) => String(value || "").replace(/[\r\n\t]+/g, " ").trim().slice(0, limit);
 export function leadNotice(lead:any,entry?:any){
- const url = `https://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||""))}`;
+ const url = leadCrmUrl(lead);
  if (lead?.source === "privacy_request") return `📩 Обращение по персональным данным · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
  const current = {...lead, ...entry};
  if (current.personalDataConsent !== true || !["lead-consent-2026-09-30","lead-consent-2026-10-02","lead-consent-2026-10-03-v2"].includes(current.personalDataConsentVersion)) return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
@@ -123,7 +123,7 @@ export async function flushCrmNotifications(limit = 2) {
       const allowed =
         item.audience === "admin"
           ? Boolean(await botAdmin(item.chatId)) && !lead?.archivedAt
-          : String(lead?.telegramChatId || "") === item.chatId;
+          : Boolean(lead&&!lead.archivedAt&&String(lead.telegramChatId || "") === item.chatId);
       if (!allowed) {
         await updateChunkedDataJson<any>(QUEUE, item.id, (row) => ({
           ...row,
@@ -174,17 +174,14 @@ export async function flushCrmNotifications(limit = 2) {
 export async function queueCrmAdminNotifications() {
     const leads = await readChunkedDataJson<any>("leads/leads.json", []);
     const queue = await readChunkedDataJson<any>(QUEUE, []);
-    // A recipient correction moves only unfinished notices and revokes old claims.
-    for (const item of queue.filter(row => row.audience === "group" &&
-      !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId)) {
-      await updateChunkedDataJson<any>(QUEUE, item.id, row =>
-        row.audience === "group" && !["sent", "cancelled"].includes(row.status) && String(row.chatId) !== groupTarget.chatId
-          ? {...row, chatId: groupTarget.chatId, relayHash: "", relayUntil: 0, lastAckHash: "", nextAttemptAt: 0}
-          : row);
+    for (const item of queue.filter(row=>row.audience==='group'&&!['sent','cancelled'].includes(row.status))) {
+      const lead=leads.find(l=>l.id===item.leadId),target=lead?await leadTelegramTarget(lead):null;
+      if(!target||item.chatId!==target.chatId)await updateChunkedDataJson<any>(QUEUE,item.id,row=>['sent','cancelled'].includes(row.status)?row:{...row,chatId:target?.chatId||row.chatId,status:target?'pending':'cancelled',relayHash:'',relayUntil:0,lastAckHash:'',nextAttemptAt:0});
     }
     const initialQueued = new Set(queue.filter(row => row.audience === "group" && !row.followupOperationId).map(row => row.leadId));
     const pendingLegacy = new Set(queue.filter(row => row.audience === "admin" && !["sent", "cancelled"].includes(row.status)).map(row => row.leadId));
     // notificationRequestedAt excludes historical/test rows from unsolicited backfill.
+    let addedInitial=0;
     for (const lead of leads
       .filter(
         (lead) =>
@@ -192,8 +189,11 @@ export async function queueCrmAdminNotifications() {
           (!lead.notificationsQueuedAt || pendingLegacy.has(lead.id)) &&
           !lead.groupNotificationQueuedAt &&
           !lead.archivedAt,
-      )
-      .slice(0, 5)) {
+      )) {
+        if(addedInitial>=5)break;
+        const groupTarget=await leadTelegramTarget(lead);
+        if(!groupTarget)continue;
+        addedInitial++;
         await enqueueMessage({
           id: `group_${lead.id}`,
           chatId: groupTarget.chatId,
@@ -204,7 +204,7 @@ export async function queueCrmAdminNotifications() {
             [
               {
                 text: "Открыть заявку",
-                url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`,
+                url: leadCrmUrl(lead),
               },
             ],
           ],
@@ -221,10 +221,11 @@ export async function queueCrmAdminNotifications() {
       );
     }
     for (const lead of leads.filter(lead => !lead.archivedAt && initialQueued.has(lead.id) && lead.followups?.length)) {
+      const groupTarget=await leadTelegramTarget(lead);if(!groupTarget)continue;
       for (const entry of lead.followups) {
         const id = `group_${lead.id}_${entry.operationId}`;
         if (queue.some(row => row.id === id)) continue;
-        await enqueueMessage({id, chatId: groupTarget.chatId, leadId: lead.id, audience: "group", followupOperationId: entry.operationId, text: leadNotice(lead, entry), keyboard: [[{text: "Открыть заявку", url: `https://avtocena.com/crm/leads?id=${encodeURIComponent(lead.id)}`}]]});
+        await enqueueMessage({id, chatId: groupTarget.chatId, leadId: lead.id, audience: "group", followupOperationId: entry.operationId, text: leadNotice(lead, entry), keyboard: [[{text: "Открыть заявку", url: leadCrmUrl(lead)}]]});
       }
     }
 

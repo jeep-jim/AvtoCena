@@ -1,4 +1,4 @@
-import {favoriteDealer} from "./dealers/favorite-dealer";
+import {offerLeadDealerIds} from "./dealers/lead-routing";
 import {readShowcase,findDealer} from "./dealers/showcase-store";
 import {specialLeadSnapshot} from "./dealers/public-showcase";
 import {parseSpecialId} from "./dealers/showcase-model";
@@ -187,6 +187,7 @@ export async function createLead(
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
   const dealerProfile = body.dealerId ? await readShowcase(clean(body.dealerId,80)) : null;
+  if(body.dealerId&&(!dealerProfile||(dealerProfile.dealerId!=="dealer_topavto"&&!dealerProfile.profileEnabled)||(await findDealer(dealerProfile.dealerId))?.status!=="verified"))return NextResponse.json({ok:false,error:'Страница дилера недоступна. Выберите другую компанию.'},{status:400});
   const requestedDealer = dealerProfile?.profileEnabled ? {requestedDealerId:dealerProfile.dealerId,requestedDealerName:dealerProfile.name} : {};
   const customerComment = [clean(body.comment, 2000) || clean(body.message, 2000), requestedDealer.requestedDealerName ? `Обращение со страницы дилера: ${requestedDealer.requestedDealerName}` : ""].filter(Boolean).join("\n");
   const contactPreference = normalizeContactPreference(
@@ -272,7 +273,7 @@ export async function createLead(
     );
   }
 
-  const selectedDealers = new Set(selectedOfferIds.map(id=>favoriteDealer({id}).id));
+  const selectedDealers = offerLeadDealerIds(selectedOfferIds,requestedDealer.requestedDealerId||"dealer_topavto");
   if (selectedDealers.size > 1) return NextResponse.json({ok:false,error:"Выберите автомобили одного дилера. Для другой компании создайте отдельную заявку."},{status:400});
   const actualDealerId=selectedDealers.values().next().value;
   if(actualDealerId&&body.dealerId&&actualDealerId!==clean(body.dealerId,80))return NextResponse.json({ok:false,error:"Выбранные автомобили относятся к другому дилеру."},{status:400});
@@ -304,11 +305,12 @@ export async function createLead(
   const comment = [customerComment, city ? deliveryDescription(deliveryQuote) : ""].filter(Boolean).join("\n");
 
   const createdAt = new Date().toISOString();
+  const dealerScope=requestedDealer.requestedDealerId&&requestedDealer.requestedDealerId!=='dealer_topavto'?`:${requestedDealer.requestedDealerId}`:'';
   const rawOperationId = clean(body.operationId, 120) || crypto.randomUUID();
   const operationId = crypto
     .createHash("sha256")
     .update(
-      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || "public"}`,
+      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || "public"}${dealerScope}`,
     )
     .digest("hex")
     .slice(0, 40);
@@ -339,7 +341,7 @@ export async function createLead(
   const token = clean(body.submissionThreadToken, 100);
   const identity = currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
   const threadKey = !crmUser && !trustedTelegramId && identity && primaryOfferId && selectedOfferIds.length === 1
-    ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}`).digest("hex") : "";
+    ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}${dealerScope}`).digest("hex") : "";
   if (threadKey) {
     const previous = existingLeads.filter(lead => lead.threadKey === threadKey).sort((a,b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0];
     const closed = previous && (previous.archivedAt || ["completed", "rejected", "duplicate", "delivered"].includes(previous.status));

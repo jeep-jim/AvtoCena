@@ -199,7 +199,7 @@ export function calculateSpecial(
     tariff = estimateDealerDelivery(p.originCity||'Бишкек',city,p.tariffs,true);
   const errors: string[] = [];
   const calibrationError=deliveryCalibrationError(p.originCity||"Бишкек",p.tariffs);
-  if(calibrationError)errors.push(calibrationError);
+  if(city&&calibrationError)errors.push(calibrationError);
   if (!(p.usdRub > 0)) errors.push("Укажите курс USD/RUB");
   const rateTime = Date.parse(p.rateAt);
   if (
@@ -208,7 +208,7 @@ export function calculateSpecial(
     rateTime > now.getTime() + 300000
   )
     errors.push("Подтвердите актуальный курс (не старше 7 дней)");
-  if (!tariff) errors.push("Добавьте тариф доставки для выбранного города");
+  if (city && !tariff) errors.push("Добавьте тариф доставки для выбранного города");
   if (tariff && !(tariff.usd > 0 || (tariff.estimated && tariff.usd === 0))) errors.push("Укажите стоимость доставки в долларах");
   if (!(o.priceUsd > 0)) errors.push("Укажите цену автомобиля в долларах");
   if (!o.customsIncluded && !(o.customsExtraRub > 0))
@@ -263,11 +263,11 @@ export function calculateSpecial(
       title: "Цена автомобиля",
       amountRub: Math.round(o.priceUsd * rate),
     },
-    {
+    ...(city ? [{
       id: "delivery",
       title: `Доставка в ${tariff?.city || city || "выбранный город"}`,
       amountRub: Math.round((tariff?.usd || 0) * rate + p.deliveryMarkupRub),
-    },
+    }] : []),
     ...(!o.customsIncluded
       ? [
           {

@@ -11,4 +11,4 @@ async function resolve(params:Props['params']){
  return {id};
 }
 export async function generateMetadata(props:Props){return dealerMetadata({params:resolve(props.params),searchParams:props.searchParams});}
-export default async function DealerProfile(props:Props){return Page({params:resolve(props.params),searchParams:props.searchParams});}
+export default async function DealerProfile(props:Props){return <div data-site-page="dealers"><div data-site-content>{await Page({params:resolve(props.params),searchParams:props.searchParams})}</div><p data-site-disabled style={{display:"none"}} className="p-10 text-center">Раздел временно недоступен</p></div>;}

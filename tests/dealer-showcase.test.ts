@@ -96,7 +96,10 @@ test("special price applies forex markup once and reuses recycling rules", () =>
   assert.equal(c.lines.find((l) => l.id === "utilization")?.amountRub, 3400);
   assert.equal(calculateSpecial(s, offer, "Москва").totalRub, 3218400);
   assert.ok(calculateSpecial(s, offer, "Омск").totalRub! > 0);
-  assert.equal(calculateSpecial(s, offer, "").totalRub, null);
+  const withoutDelivery=calculateSpecial(s, offer, "");
+  assert.equal(withoutDelivery.totalRub,2993400);
+  assert.equal(withoutDelivery.complete,true);
+  assert.equal(withoutDelivery.lines.some(l=>l.id==="delivery"),false);
   assert.equal(
     calculateSpecial(s, {
       ...offer,
@@ -349,7 +352,7 @@ test("public rail uses selected city and exposes only calculation fields", () =>
  const s=fixture();s.specialsEnabled=true;
  s.offers[0].sourceUrl="https://private-import.example/car";
  const base=publicRail(s)[0],moscow=publicRail(s,"Москва")[0];
- assert.equal(base.price,calculateSpecial(s,s.offers[0]).totalRub);
+ assert.equal(base.price,calculateSpecial(s,s.offers[0],"").totalRub);
  assert.equal(moscow.price,calculateSpecial(s,s.offers[0],"Москва").totalRub);
  assert.notEqual(moscow.price,base.price);
  assert.equal(moscow.city,"Москва");
