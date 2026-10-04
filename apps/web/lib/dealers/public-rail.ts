@@ -4,7 +4,7 @@ export function publicRail(s: DealerShowcase, city = "") {
     ? s.offers
         .filter((o) => o.status === "published" && offerSectionEnabled(s,o))
         .map((o) => {
-          const c = calculateSpecial(s, o, city || undefined);
+          const c = calculateSpecial(s, o, city);
           return {
             id: o.id,
             availability: offerAvailability(o),

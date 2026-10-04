@@ -187,6 +187,7 @@ export async function createLead(
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
   const dealerProfile = body.dealerId ? await readShowcase(clean(body.dealerId,80)) : null;
+  if(body.dealerId&&!dealerProfile?.profileEnabled)return NextResponse.json({ok:false,error:'Страница дилера недоступна. Выберите другую компанию.'},{status:400});
   const requestedDealer = dealerProfile?.profileEnabled ? {requestedDealerId:dealerProfile.dealerId,requestedDealerName:dealerProfile.name} : {};
   const customerComment = [clean(body.comment, 2000) || clean(body.message, 2000), requestedDealer.requestedDealerName ? `Обращение со страницы дилера: ${requestedDealer.requestedDealerName}` : ""].filter(Boolean).join("\n");
   const contactPreference = normalizeContactPreference(
@@ -304,11 +305,12 @@ export async function createLead(
   const comment = [customerComment, city ? deliveryDescription(deliveryQuote) : ""].filter(Boolean).join("\n");
 
   const createdAt = new Date().toISOString();
+  const dealerScope=requestedDealer.requestedDealerId&&requestedDealer.requestedDealerId!=='dealer_topavto'?`:${requestedDealer.requestedDealerId}`:'';
   const rawOperationId = clean(body.operationId, 120) || crypto.randomUUID();
   const operationId = crypto
     .createHash("sha256")
     .update(
-      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || "public"}`,
+      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || "public"}${dealerScope}`,
     )
     .digest("hex")
     .slice(0, 40);
@@ -339,7 +341,7 @@ export async function createLead(
   const token = clean(body.submissionThreadToken, 100);
   const identity = currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
   const threadKey = !crmUser && !trustedTelegramId && identity && primaryOfferId && selectedOfferIds.length === 1
-    ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}`).digest("hex") : "";
+    ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}${dealerScope}`).digest("hex") : "";
   if (threadKey) {
     const previous = existingLeads.filter(lead => lead.threadKey === threadKey).sort((a,b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0];
     const closed = previous && (previous.archivedAt || ["completed", "rejected", "duplicate", "delivered"].includes(previous.status));

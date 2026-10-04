@@ -1,6 +1,6 @@
 import {offerParameterDraft} from './offer-parameter-draft';
 import {sharedOfferScenario} from './shared-offer-scenario';
-import {encodeShareDraft} from './offer-share';
+import {encodeShareDraft,decodeShareDraft} from './offer-share';
 import type {Metadata} from 'next';
 import {getOfferDetailRecord} from './offer-page-data';
 import {getSavedOfferCalculation} from './saved-offer-calculation';
@@ -25,9 +25,9 @@ export async function generateOfferMetadata({params,searchParams}:{params:Promis
  if(parseSpecialId(id)){
   const found=await getSpecialOffer(id);
   if(!found)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:false}};
-  const {showcase,offer}=found;const calculation=calculateSpecial(showcase,offer);
+  const {showcase,offer}=found;const calculation=calculateSpecial(showcase,offer,q.estimate?decodeShareDraft(q.estimate)?.deliveryCity||"":"");
   const title=offerShareTitle({title:specialTitle(offer),year:offer.year,engineCc:offer.engineCc,fuel:offer.fuel,totalRub:calculation.totalRub});
-  return metadata(q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title,'Фотографии, комплектация и условия покупки — в карточке автомобиля.',absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
+  return metadata(q.share==='3'?title.replace(/ — (?:[\d ]+ ₽|Цена уточняется)$/,''):title,`${calculation.city?'Доставка: '+calculation.city+'. ':''}Фотографии, комплектация и условия покупки — в карточке автомобиля.`,absoluteAvtocenaUrl(`/cars/offer/${id}`),offer.photos.slice(0,3).map(p=>absoluteAvtocenaUrl(p.url)),!q.preview);
  }
  const stored=await getOfferDetailRecord(id);
  if(!stored)return {title:'Автомобиль — АвтоЦена',robots:{index:false,follow:true}};

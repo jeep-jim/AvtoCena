@@ -1,3 +1,5 @@
+import {siteVisibilityCss} from '@/lib/site-controls';
+import {SitePageAccess} from '@/components/site/SitePageAccess';
 import {readPublicFeatures} from "@/lib/dealers/showcase-store";
 import "../components/telegram/telegram-miniapp.css";
 import {TelegramMiniApp} from "../components/telegram/TelegramMiniApp";
@@ -296,6 +298,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="ru" data-finance-hidden={features.affiliatesEnabled ? undefined : "true"} suppressHydrationWarning>
       <head>
+        <style>{siteVisibilityCss(features)}</style>
         {!features.affiliatesEnabled && <style>{`html[data-finance-hidden="true"] body :is(#ac-finance-disabled,.ac-home-finance,.ac-public-footer-affiliates,.ac-offer-finance-cards,.ac-credit-calculator-mock,[data-offer-credit-host],[data-offer-finance-cards-host],a[href^="https://affid.ru/"],a[href="/autocredit"],a[href="/osago"]){display:none!important}`}</style>}
         <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
@@ -303,7 +306,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <style dangerouslySetInnerHTML={{ __html: publicUiCorrections }} />
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <SitePageAccess>{children}</SitePageAccess>
         <OverlayBackHistory />
         <TelegramMiniApp />
         <PublicLegalFooter partnersEnabled={features.partnersEnabled} knowledgeEnabled={features.knowledgeEnabled}/>

@@ -1,0 +1,33 @@
+name: Verify site controls and chat
+on:
+  pull_request:
+    paths:
+      - 'apps/web/**'
+      - 'tests/site-chat*'
+      - 'tests/browser/site-chat*'
+      - '.github/workflows/verify-site-chat.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
+      - run: npm install --prefix "$RUNNER_TEMP/chat-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check desktop and mobile
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-chat-screenshots
+          path: artifacts/site-chat/*.png

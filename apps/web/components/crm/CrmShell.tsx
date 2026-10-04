@@ -18,15 +18,16 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
   if (!isPlatformTeam(user)) redirect("/dealer-cabinet");
   const links: Array<readonly [string, string]> = [
     ["/crm", "Обзор"],
+    ["/crm/chat", "Чат"],
     ["/crm/leads", "Заявки"],
     ["/crm/clients", "Клиенты"],
     ["/crm/managers", "Команда и права"],
     ["/crm/settings", "Рынки и расчёт"],
     [isPlatformOwner(user)?"/crm/dealers":"/dealer-cabinet", isPlatformOwner(user)?"Дилеры":"Дилер"],
   ];
-  if (!isAdminRole(user.role)) links.splice(4);
-  if (isAdminRole(user?.role)) links.push(["/crm/telegram", "Telegram"]);
+  if (!isAdminRole(user.role)) links.splice(5);
   if (["owner", "admin", "manager"].includes(user.role)) links.push(["/crm/documents", "Документы"]);
+  if (isPlatformOwner(user)) links.push(["/crm/site", "Сайт"]);
   const gates:Record<string,CrmPermission>={"/crm/settings":"settings","/crm/dealers":"dealers","/crm/telegram":"settings","/crm/documents":"documents","/crm/partners":"settings"};
   const needed=gates[activeHref];
   if(needed&&!hasCrmPermission(user,needed)&&!(activeHref==="/crm/managers"))redirect("/crm");

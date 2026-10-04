@@ -42,18 +42,20 @@ export async function runDelivery() {
     const {result: member} = await telegram('getChatMember', {chat_id: groupTarget.chatId, user_id: me.result.id});
     console.log(JSON.stringify({groupId: chat.id, groupTitle: chat.title, groupType: chat.type, public: Boolean(chat.username || chat.active_usernames?.length), botStatus: member.status, canSend: chat.permissions?.can_send_messages ?? null}));
   }
-  await verifyGroupTarget(telegram, me.result, groupTarget);
-  console.log('Approved private group identity and bot membership verified');
+  if(operation==='check-group') await verifyGroupTarget(telegram, me.result, groupTarget);
+  if(operation==='check-group')console.log('Approved private group identity and bot membership verified');
   if (operation === 'check-group') return;
   const {notices} = await relay({action: 'claim'});
   let sent = 0, failed = 0;
   for (const notice of notices) {
-    if (notice.audience !== 'group' || String(notice.chatId) !== groupTarget.chatId) throw Error('recipient_mismatch');
+    if (notice.audience !== 'group' || !/^-\d{5,20}$/.test(String(notice.chatId)) || !notice.targetTitle) throw Error('recipient_mismatch');
     const reference = {id: notice.id, token: notice.token};
     const permission = await relay({action: 'authorize', ...reference});
     if (!permission.allowed) continue;
     let message;
     try {
+      await verifyGroupTarget(telegram, me.result, {chatId:String(notice.chatId),title:notice.targetTitle});
+      const latest=await relay({action:'authorize',...reference});if(!latest.allowed)continue;
       message = await telegram('sendMessage', {chat_id: notice.chatId, text: notice.text, disable_web_page_preview: true,
         reply_markup: {inline_keyboard: [[{text: 'Открыть CRM', url: notice.url}]]}});
     } catch {

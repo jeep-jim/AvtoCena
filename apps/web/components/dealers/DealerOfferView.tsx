@@ -1,6 +1,7 @@
 'use client';
 import {useSelectedCity} from '@/lib/location/selected-city';
-import {persistCity} from '@/lib/location/selected-city';
+import {useState} from 'react';
+import {encodeShareDraft} from '@/lib/catalog/offer-share';
 import {DeliveryCityPanel} from '../catalog/DeliveryCityPanel';
 import {DealerMap} from './DealerMap';
 import {MapPin,ChevronDown} from 'lucide-react';
@@ -29,9 +30,11 @@ import {OfferPdfButton} from "@/components/catalog/OfferPdfButton";
 import { OfferCopyButton } from "@/components/catalog/OfferCopyButton";
 import type {DealerShowcase,SpecialOffer} from '@/lib/dealers/showcase-model';
 export type PublicOfferShowcase=Pick<DealerShowcase,"dealerId"|"citySlug"|"slug"|"name"|"logoLight"|"logoDark"|"profileEnabled"|"specialsEnabled"|"stockEnabled"|"pricing"|"offices"|"updatedAt">;
-export function DealerOfferView({id,s,o,preview=false,verified=false,canCopy=false,canPdf=false,items=[],markets}:{id:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
-  const city=useSelectedCity();
-  const c = calculateSpecial(s, o, city || undefined);
+export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false,canCopy=false,canPdf=false,items=[],markets}:{id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
+  const globalCity=useSelectedCity();
+  const [quoteCity,setQuoteCity]=useState<string|null>(initialCity??null);
+  const city=quoteCity??globalCity;
+  const c = calculateSpecial(s, o, city);
   const stock=offerAvailability(o)==="stock";
   const office=stock?s.offices.find(item=>item.id===o.officeId):s.offices.find(item=>item.id===o.officeId)||s.offices[0];
   const title = specialTitle(o);
@@ -45,7 +48,8 @@ export function DealerOfferView({id,s,o,preview=false,verified=false,canCopy=fal
     market: "dealer",
     dealerId: s.dealerId, dealerName: s.name,
     marketLabel: `${offerAvailabilityLabel(o)} · ${s.name}`,
-    href: specialPath(s.dealerId, o.id),
+    href: `${specialPath(s.dealerId, o.id)}?estimate=${encodeShareDraft({deliveryCity:city})}`,
+    deliveryCity:city,
   };
   const fields = [
     ["Год", o.year ? `${o.year} г.` : ""],
@@ -104,14 +108,14 @@ export function DealerOfferView({id,s,o,preview=false,verified=false,canCopy=fal
             <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
           </div>
           <StickyOfferColumn>
-          <div className="ac-inline-parameters min-w-0">
+          <div className="ac-inline-parameters min-w-0" data-share-estimate={encodeShareDraft({deliveryCity:city})}>
             <section className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="text-sm text-[var(--ac-muted)]">
                 {stock ? "Цена автомобиля в наличии" : c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
               <p className="ac-price mt-2 text-3xl font-black">
                 {c.totalRub === null
-                  ? (!stock&&!city?"Выберите город":"Цена уточняется")
+                  ? "Цена уточняется"
                   : `${c.totalRub.toLocaleString("ru-RU")} ₽`}
               </p>
               {c.daysFrom && (
@@ -120,7 +124,7 @@ export function DealerOfferView({id,s,o,preview=false,verified=false,canCopy=fal
                 </p>
               )}
             </section>
-            {!stock&&<DeliveryCityPanel value={city} onChange={persistCity} persistSelection={false} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
+            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={false} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
             {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
               <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>
@@ -138,7 +142,7 @@ export function DealerOfferView({id,s,o,preview=false,verified=false,canCopy=fal
             <OfferMobileActions offerId={id} snapshot={snapshot}/>
             <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{stock ? `Автомобиль находится по адресу: ${[office?.city,office?.address].filter(Boolean).join(", ")}. ${o.condition==="used"?"С пробегом":"Новый автомобиль"}. Доставка в другой город согласуется отдельно.` : "Выберите свой город для расчёта доставки. Стоимость для новых направлений ориентировочная. Наличие, маршрут и срок подтвердим перед заключением договора."}</p>
             <OfferDesktopActions offerId={id} snapshot={snapshot}/>
-            {canPdf&&<OfferPdfButton offerId={id} draft={{}}/>}
+            {canPdf&&<OfferPdfButton offerId={id} draft={{deliveryCity:city}}/>}
             {canCopy && (
               <OfferCopyButton
                 offerId={id}

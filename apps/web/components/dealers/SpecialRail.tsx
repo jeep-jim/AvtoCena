@@ -28,10 +28,10 @@ export function SpecialRail({
   kinds?: readonly ("order"|"stock")[];
 }) {
   const city=useSelectedCity();
-  items=items.map(item=>{if(!item.calculation)return item;const c=calculateSpecial(item.calculation.showcase,item.calculation.offer,city||undefined);return {...item,price:c.totalRub,city:c.city,daysFrom:c.daysFrom,daysTo:c.daysTo};});
+  items=items.map(item=>{if(!item.calculation)return item;const c=calculateSpecial(item.calculation.showcase,item.calculation.offer,city);return {...item,price:c.totalRub,city:c.city,daysFrom:c.daysFrom,daysTo:c.daysTo};});
   if (!items.length) return null;
   return (
-    <>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section key={kind} className="my-5 min-w-0">
+    <>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section data-site-block={kind==='stock'?'stock':'specials'} key={kind} className="my-5 min-w-0">
       <h2 className="text-lg font-black leading-tight md:text-2xl">
         {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
       </h2>
