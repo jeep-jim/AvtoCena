@@ -3,6 +3,12 @@ import {applyActiveBusinessPriceBatch} from '../apps/web/lib/catalog/live-busine
 import {attachJapanSearchValues} from '../apps/web/lib/catalog/japan-delivered-preview.ts';
 import {performance} from 'node:perf_hooks';
 import {backfillCatalogBudgetCountIndex,countCatalogOffers,searchOffers,searchOffersWithoutBudgetIndexForTests,readCatalogFacets,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
+import {mutateDataJson} from '../apps/web/lib/data.ts';
+import {withCatalogReadModelRepairLock} from './lib/catalog-read-model-repair-lock.mjs';
+try {
+await withCatalogReadModelRepairLock(mutateDataJson, async () => {
+process.env.CATALOG_STORAGE_PREFLIGHT_MODE='budget-index';
+await import('./catalog-storage-preflight.mjs');
 console.log(JSON.stringify(await backfillCatalogBudgetCountIndex()));
 for(const city of ['', 'Новокузнецк'])for(const budgetTo of [1500000,2000000]){
  resetCatalogReadCachesForTests();
@@ -16,4 +22,10 @@ for(const city of ['', 'Новокузнецк'])for(const budgetTo of [1500000,
  const baseline=await searchOffersWithoutBudgetIndexForTests(params);assert.equal(count.total,baseline.total);
  for(const {market,fast} of results){const old=await searchOffersWithoutBudgetIndexForTests({...params,market});assert.equal(fast.total,old.total,market);assert.deepEqual(fast.items.map(row=>row.id),old.items.map(row=>row.id),market+' exact page parity');const current=await attachJapanSearchValues(await applyActiveBusinessPriceBatch(fast.items,{readOnly:true}),fast.generationId);assert.deepEqual(current.map(row=>row.totalRub),old.items.map(row=>row.totalRub),market+' exact current price parity');}
  console.log(JSON.stringify({phase:'exact-parity-passed',city,budgetTo}));
+}
+
+});
+} catch(error) {
+ if(error?.message !== 'catalog_read_model_repair_publication_locked')throw error;
+ console.log(JSON.stringify({status:'deferred',reason:'catalog_writer_busy',indexPrepared:false}));
 }

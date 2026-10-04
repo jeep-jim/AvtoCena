@@ -1,11 +1,11 @@
 name: Prepare compact budget counts
 on:
   workflow_run:
-    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh georgia, Catalog refresh uae, Catalog refresh europe]
+    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh georgia, Catalog refresh uae, Catalog refresh europe, ProAuctions collect and publish]
     types: [completed]
   push:
     branches: [main, feature/autocalc-identity-20260927]
-    paths: [scripts/backfill-budget-count-index.mjs, apps/web/lib/catalog/budget-count-index.ts, .github/workflows/backfill-budget-count-index.yml]
+    paths: [scripts/backfill-budget-count-index.mjs, scripts/catalog-storage-preflight.mjs, scripts/lib/catalog-preflight-input.mjs, apps/web/lib/catalog/budget-count-index.ts, .github/workflows/backfill-budget-count-index.yml]
 permissions:
   contents: read
 concurrency:
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -32,6 +32,10 @@ jobs:
       - run: npm run typecheck
       - name: Validate compact delivery and budget parity before publishing the derived index
         run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-budget-count-index.test.ts
-      - name: Check bucket reserve before adding derived chunks
-        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - run: node --import tsx scripts/backfill-budget-count-index.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: budget-index-storage-preflight
+          path: catalog-storage-preflight.json
+          if-no-files-found: ignore
