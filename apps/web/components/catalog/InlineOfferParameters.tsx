@@ -1,6 +1,4 @@
 "use client";
-import {readSelectedCity} from "../../lib/location/selected-city";
-import {ClientCityMode} from "./ClientCityMode";
 import {encodeShareDraft} from "../../lib/catalog/offer-share";
 import { publicProductionYears } from "../../lib/catalog/public-year-range";
 import {isGreenCornerOffer} from "../../lib/catalog/green-corner-contract";
@@ -117,13 +115,14 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
  const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
  const saveDialog=useRef<HTMLDialogElement>(null);
- const [clientCityMode,setClientCityMode]=useState(Boolean(initialScenario));
+ const [localCityEdited,setLocalCityEdited]=useState(false);
+ const privateCity=Boolean(initialScenario)||((localCitySelection||canSave)&&localCityEdited);
  const [userEdited,setUserEdited]=useState(false);
  const [savedByName,setSavedByName]=useState(savedCalculation?.savedByName || "");
  const [savedAt,setSavedAt]=useState(savedCalculation?.savedAt || "");
@@ -194,8 +193,7 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
   {exportWarning ? <p role="note" className={priceStyles.warning}><span className={priceStyles.sanctionsBadge}>Санкции</span>{" "}{exportWarning} Расчёт использует обычные расходы Японии; возможность и стоимость поставки не подтверждены.</p> : null}
   {reportedVolume ? <p className="mt-2 text-xs text-[var(--ac-muted)]">Объём {reportedVolume} см³ указан в аукционных данных и может быть округлён. Расчёт ориентировочный; точный объём уточняется по документам или у менеджера.</p> : null}
   {afterPrice}
-  {canSave ? <ClientCityMode value={clientCityMode} onChange={value=>{setClientCityMode(value);if(!value)change("deliveryCity",readSelectedCity(),false);}}/> : null}
-  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!clientCityMode} syncStored={!clientCityMode} syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>change("deliveryCity",city)} description={deliveryDescription(deliveryQuote)}/>
+  <DeliveryCityPanel value={draft.deliveryCity||""} persistSelection={!localCitySelection&&!canSave&&!initialScenario} syncStored={!privateCity} syncStoredOnMount={!initialScenario} onStoredChange={city=>change("deliveryCity",city,false)} onChange={city=>{setLocalCityEdited(true);change("deliveryCity",city);}} description={deliveryDescription(deliveryQuote)}/>
 
   {result?.breakdown?.length ? <details className="ac-offer-breakdown group mt-4 min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">

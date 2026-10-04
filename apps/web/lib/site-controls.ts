@@ -35,5 +35,6 @@ export function siteRoute(path:string):SiteSection|null{
  return null;
 }
 export function siteVisibilityCss(features:any){
- return SITE_SECTIONS.map(s=>{const r=siteRule(features,s.id);return (['desktop','mobile'] as const).map(device=>r[device]?'':`@media(${device==='desktop'?'min':'max'}-width:${device==='desktop'?768:767}px){${s.selectors?s.selectors+',':''}[data-site-page="${s.id}"]:not(:has([data-site-preview="true"]))>[data-site-content]{display:none!important}[data-site-page="${s.id}"]:not(:has([data-site-preview="true"]))>[data-site-disabled]{display:block!important}}`).join('');}).join('');
+ const ratesLayout=siteRule(features,'affiliates').desktop?'':`@media(min-width:1024px){.ac-home-page .ac-home-services{grid-template-columns:minmax(0,1fr)}.ac-home-services>.ac-currency-rates-strip{grid-column:1 / -1;min-width:0}.ac-home-services .ac-currency-rates-grid{grid-template-columns:repeat(10,minmax(0,1fr))}}`;
+ return SITE_SECTIONS.map(s=>{const r=siteRule(features,s.id);return (['desktop','mobile'] as const).map(device=>r[device]?'':`@media(${device==='desktop'?'min':'max'}-width:${device==='desktop'?768:767}px){${s.selectors?s.selectors+',':''}[data-site-page="${s.id}"]:not(:has([data-site-preview="true"]))>[data-site-content]{display:none!important}[data-site-page="${s.id}"]:not(:has([data-site-preview="true"]))>[data-site-disabled]{display:block!important}}`).join('');}).join('')+ratesLayout;
 }
