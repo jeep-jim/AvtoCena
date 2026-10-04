@@ -7,6 +7,8 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
+import { useSavedCalculationPreview } from "@/components/catalog/useSavedCalculationPreview";
+import { offerWithSavedPreview } from "@/lib/catalog/saved-calculation-preview";
 
 const FAVORITES_KEY = "avtocena_favorites";
 
@@ -46,6 +48,12 @@ function EmptyStar() {
   return <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.7L14.85 8.5L21.25 9.43L16.62 13.94L17.71 20.31L12 17.31L6.29 20.31L7.38 13.94L2.75 9.43L9.15 8.5L12 2.7Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>;
 }
 
+function FavoritePrice({item}: {item: Favorite}) {
+  const savedCalculationPreview = useSavedCalculationPreview(item);
+  const offer = offerWithSavedPreview({...item, totalRub: item.totalRub ?? item.price, savedCalculationPreview});
+  return <CatalogPrice offer={offer} label={item.year ? `${item.year} г.` : "Стоимость"} priceClassName="text-2xl" />;
+}
+
 export default function FavoritesPage() {
   const [items, setItems] = useState<Favorite[]>([]);
 
@@ -71,7 +79,6 @@ export default function FavoritesPage() {
       <h2 className="mt-8 text-2xl font-black">Автомобили</h2>
       {items.length ? <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
-          const trendOffer = { ...item, totalRub: item.totalRub ?? item.price };
           return <article key={item.id} className="ac-favorites-card relative overflow-hidden rounded-[1.5rem] bg-white/[0.045]">
             <Link href={item.href || `/cars/offer/${item.id}`}>
               <div className="h-52 bg-white/[0.04]">{item.imageUrl ? <img src={item.imageUrl} alt={item.title || "Автомобиль"} className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-bold text-white/35">Фото загружается</div>}</div>
@@ -80,7 +87,7 @@ export default function FavoritesPage() {
                 <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Дилер: {favoriteDealer(item).name}</p>
                 <h2 className="mt-2 text-xl font-black">{item.title || "Автомобиль"}</h2>
                 <div className="mt-2 text-sm text-white/55">{item.year || "—"} · {item.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(item.mileageKm)} км` : "пробег уточняется"}</div>
-                <div className="mt-4"><CatalogPrice offer={trendOffer} label={item.year ? `${item.year} г.` : "Стоимость"} priceClassName="text-2xl" /></div>
+                <div className="mt-4"><FavoritePrice item={item} /></div>
               </div>
             </Link>
             <FavoriteToggle offerId={item.id} snapshot={item} className="absolute right-3 top-3" />
