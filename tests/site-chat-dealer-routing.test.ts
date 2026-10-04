@@ -4,7 +4,7 @@ import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
 import {siteRule,siteVisibilityCss,normalizeSiteControls} from '../apps/web/lib/site-controls';
 import {offerLeadDealerIds} from '../apps/web/lib/dealers/lead-routing';
 import {defaultDealerTelegram,targetForLead,saveDealerTelegram,readDealerTelegram} from '../apps/web/lib/dealers/telegram-settings';
-import {chatList,chatDetail,createDirectChat,sendChatMessage} from '../apps/web/lib/crm-chat';
+import {chatList,chatDetail,createDirectChat,sendChatMessage,createChatRoom,updateChatRoom,reactToChatMessage,changeChatMessage,forwardChatMessage} from '../apps/web/lib/crm-chat';
 import {writeDataJson,readChunkedDataJson,updateChunkedDataJson,resetJsonStorageForTests} from '../apps/web/lib/data';
 import {claimCrmNotices,authorizeCrmNotice} from '../apps/web/lib/crm-relay';
 import type {AuthUser} from '../apps/web/lib/auth';
@@ -56,3 +56,51 @@ test('customer replies require visible active own lead and connection; retry que
 }));
 
 test('catalog follows chosen dealer while dealer inventory remains authoritative',()=>{assert.deepEqual([...offerLeadDealerIds(['catalog-car'],'dealer_other')],['dealer_other']);assert.deepEqual([...offerLeadDealerIds(['special_dealer_one__car'],'dealer_other')],['dealer_one']);assert.equal(offerLeadDealerIds(['special_dealer_one__car','special_dealer_two__car']).size,2);});
+
+
+test('general chat contains active staff; rooms enforce membership, versions and revoked access',()=>isolated(async()=>{
+ const general='team_general';assert.equal((await chatList(owner)).threads[0].id,general);
+ await sendChatMessage(manager,general,{text:'Всем привет 👋',operationId:'general-message-001'});
+ assert.equal((await chatDetail(third,general)).messages[0].text,'Всем привет 👋');
+ const input={title:'Логистика',participants:[manager.id],operationId:'create-room-001'};
+ const room=await createChatRoom(owner,input);assert.equal((await createChatRoom(owner,input)).id,room.id);
+ await assert.rejects(chatDetail(third,room.id),/chat_forbidden/);
+ await sendChatMessage(owner,room.id,{text:'Внутри комнаты',operationId:'room-message-001'});
+ await assert.rejects(updateChatRoom(manager,room.id,{version:1,participants:[third.id]}),/chat_forbidden/);
+ const joined=await updateChatRoom(owner,room.id,{version:1,participants:[manager.id,third.id]});assert.equal(joined.version,2);
+ assert.equal((await chatDetail(third,room.id)).messages.length,1);
+ await assert.rejects(updateChatRoom(owner,room.id,{version:1,participants:[]}),/room_conflict/);
+ await updateChatRoom(owner,room.id,{version:2,participants:[manager.id]});await assert.rejects(chatDetail(third,room.id),/chat_forbidden/);
+ await assert.rejects(updateChatRoom(owner,general,{version:0,participants:[]}),/chat_forbidden/);
+ await writeDataJson('auth/users.json',[owner,manager,{...third,status:'disabled'}]);
+ assert.equal((await chatDetail(owner,general)).members?.length,2);await assert.rejects(chatDetail(third,general),/chat_forbidden/);
+ await assert.rejects(createChatRoom(owner,{...input,participants:['missing'],operationId:'create-room-002'}),/invalid_members/);
+ assert.equal((await readChunkedDataJson('telegram/crm-outbox.json',[])).length,0);
+}));
+test('reactions are persistent, idempotent, per-user and guarded by message access',()=>isolated(async()=>{
+ const {id}=await createDirectChat(owner,manager.id);const d=await sendChatMessage(owner,id,{text:'План',operationId:'reaction-message-001'});const mid=d.messages[0].id;
+ const reaction={messageId:mid,emoji:'👍',active:true};await reactToChatMessage(owner,id,reaction);await reactToChatMessage(owner,id,reaction);
+ await reactToChatMessage(manager,id,reaction);let m=(await chatDetail(owner,id)).messages[0];assert.equal(m.reactions[0].count,2);assert.equal(m.reactions[0].mine,true);
+ await reactToChatMessage(owner,id,{...reaction,active:false});m=(await chatDetail(owner,id)).messages[0];assert.equal(m.reactions[0].count,1);assert.equal(m.reactions[0].mine,false);
+ await assert.rejects(reactToChatMessage(third,id,reaction),/chat_forbidden/);await assert.rejects(reactToChatMessage(owner,id,{...reaction,messageId:'missing'}),/chat_forbidden/);await assert.rejects(reactToChatMessage(owner,id,{...reaction,emoji:'<script>'}),/invalid_reaction/);
+}));
+test('own edits, replies, deletion and internal forwarding respect ownership and retry boundaries',()=>isolated(async()=>{
+ const {id}=await createDirectChat(owner,manager.id),input={text:'Исходный текст',operationId:'edit-message-001'};
+ const first=await sendChatMessage(owner,id,input),mid=first.messages[0].id;
+ await assert.rejects(changeChatMessage(manager,id,{action:'edit',messageId:mid,text:'Чужая правка',version:0,operationId:'edit-operation-001'}),/chat_forbidden/);
+ const edit={action:'edit',messageId:mid,text:'Исправлено 😊',version:0,operationId:'edit-operation-002'};
+ await changeChatMessage(owner,id,edit);await changeChatMessage(owner,id,edit);
+ let m=(await chatDetail(manager,id)).messages[0];assert.equal(m.text,'Исправлено 😊');assert.equal(m.version,1);assert.ok(m.editedAt);
+ await assert.rejects(changeChatMessage(owner,id,{...edit,text:'Устаревшая правка',operationId:'edit-operation-003'}),/message_conflict/);
+ await sendChatMessage(manager,id,{text:'Отвечаю',replyToId:mid,operationId:'reply-operation-001'});
+ const forward={sourceThread:id,messageId:mid,operationId:'forward-operation-001'};
+ await forwardChatMessage(owner,'team_general',forward);await forwardChatMessage(owner,'team_general',forward);
+ const forwarded=(await chatDetail(third,'team_general')).messages;assert.equal(forwarded.length,1);assert.equal(forwarded[0].forwarded.author,owner.displayName);
+ await assert.rejects(forwardChatMessage(third,'team_general',{...forward,operationId:'forward-operation-002'}),/chat_forbidden/);
+ await assert.rejects(forwardChatMessage(owner,'lead:some-client',forward),/chat_forbidden/);
+ await assert.rejects(sendChatMessage(owner,id,{text:'Ответ',replyToId:'unknown',operationId:'bad-reply-001'}),/invalid_reply/);
+ await changeChatMessage(owner,id,{action:'delete',messageId:mid,version:1});await changeChatMessage(owner,id,{action:'delete',messageId:mid,version:1});
+ const messages=(await chatDetail(manager,id)).messages;assert.equal(messages[0].deleted,true);assert.equal(messages[0].text,'Сообщение удалено');assert.equal(messages[1].replyTo.text,'Сообщение удалено');
+ await assert.rejects(reactToChatMessage(owner,id,{messageId:mid,emoji:'👍',active:true}),/chat_forbidden/);
+ assert.equal((await readChunkedDataJson('telegram/crm-outbox.json',[])).length,0);
+}));
