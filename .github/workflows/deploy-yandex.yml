@@ -6,6 +6,9 @@ on:
       - main
     paths-ignore:
       - scripts/**
+      - tests/**
+      - docs/**
+      - roadmap.md
       - data/catalog/imports/**
       - .github/market-runs/**
   workflow_dispatch:
