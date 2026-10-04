@@ -1809,7 +1809,7 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const cards=await attachJapanSearchValues(visible.map(row=>byId.get(row.id)!),selected.generationId);
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v1/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:32*1024*1024,ttlMs:300_000,concurrency:1});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
 /** Derived immutable index only; generation data and current aliases are untouched. */
 export async function backfillCatalogBudgetCountIndex(){
  const {generationId,rows}=await currentProjectionRows({});
