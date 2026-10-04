@@ -7,7 +7,8 @@ export async function catalogPreflightInputBytes(storage, env = process.env) {
     if (!/^gen_[a-zA-Z0-9_-]+$/.test(manifest?.generationId || '')) throw Error('Invalid active generation');
     if (!storage.listObjects) throw Error('Projection inventory unavailable');
     const prefix = `catalog/generations/${manifest.generationId}/indexes/projection/`;
-    const objects = await storage.listObjects(prefix);
+    // The storage adapter normalizes away the trailing slash; exclude projection-brand siblings.
+    const objects = (await storage.listObjects(prefix)).filter(object => object.key.startsWith(prefix));
     if (!objects.length) throw Error('Active generation projections unavailable');
     let bytes = 0;
     for (const object of objects) {
