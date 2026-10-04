@@ -878,6 +878,18 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
       return {generationId: manifest.generationId, counts: Object.fromEntries(brands.map(brand => [brand.make, brand.count])), modelCounts: Object.fromEntries(brands.map(brand => [brand.make, brand.models]))};
     }
   }
+  const compact=await readBudgetSelection(filters);
+  if(compact){
+    const counts=new Map<string,number>(),models=new Map<string,Set<string>>();
+    for(const tuple of compact.rows){
+      const row=tuple[5],make=cleanFacet(row.make);if(!make)continue;
+      counts.set(make,(counts.get(make)||0)+1);
+      const model=cleanFacet(row.model);
+      if(model){const set=models.get(make)||new Set<string>();set.add(model.toLocaleLowerCase("ru-RU"));models.set(make,set);}
+    }
+    const ordered=[...counts].sort((a,b)=>a[0].localeCompare(b[0],"ru"));
+    return {generationId:compact.generationId,counts:Object.fromEntries(ordered),modelCounts:Object.fromEntries(ordered.map(([make])=>[make,models.get(make)?.size||0]))};
+  }
   let { generationId, rows } = await currentProjectionRows(filters);
   if (filters.budgetFrom || filters.budgetTo || filters.engineFrom || filters.engineTo || filters.hasPrice) {
     const {attachJapanSearchValues}=await import("./japan-delivered-preview");
