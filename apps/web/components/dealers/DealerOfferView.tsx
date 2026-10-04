@@ -126,7 +126,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
                 </p>
               )}
             </section>
-            {!stock&&canCopy&&<ClientCityMode value={clientCityMode} onChange={setClientCityMode}/>}
+            {!stock&&canCopy&&<ClientCityMode value={clientCityMode} onChange={value=>{if(value)setQuoteCity(city);setClientCityMode(value);}}/>}
             {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!clientCityMode} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
             {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>

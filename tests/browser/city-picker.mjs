@@ -38,6 +38,12 @@ try{for(const width of [320,390,768,1440])for(const theme of ['dark','light']){
  for(const selector of ['[data-saved-price]','[data-ordinary-price]'])assert.match(await page.locator(selector+' .ac-price').innerText(),/1[\s\u00a0]933[\s\u00a0]104/);
  if(width<768)assert.match(await lead.getByRole('button',{name:/Выбрать город. Сейчас:/}).textContent(),/Новокузнецк/);else assert.equal(await lead.getByRole('textbox',{name:'Ваш город'}).inputValue(),'Новокузнецк');
  await lead.getByRole('button',{name:width<768?/Выбрать город. Сейчас:/:/Открыть выбор города/}).tap();await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});assert.ok(await lead.isVisible());
+ await lead.getByRole('button',{name:'Закрыть заявку',exact:true}).tap();
+ await page.evaluate(()=>{history.pushState(null,'','/?city=Москва');window.dispatchEvent(new PopStateEvent('popstate'));});
+ assert.match(await home.textContent(),/Новокузнецк/,'old navigation URL cannot override the last selected city');
+ await home.tap();await page.getByRole('button',{name:'Не выбирать город',exact:true}).tap();
+ for(const selector of ['[data-saved-price]','[data-ordinary-price]'])assert.match(await page.locator(selector+' .ac-price').innerText(),/1[\s\u00a0]813[\s\u00a0]104/);
+ assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'');
  assert.deepEqual(errors,[]);await page.screenshot({path:`${out}/${width}-${theme}.png`});results.push({width,theme,firstTap:true,formPreserved:true});
  }catch(e){await page.screenshot({path:`${out}/failure.png`});throw e;}finally{await context.close();}
 }console.log(JSON.stringify({passed:true,engine,cases:results.length}));}finally{fs.writeFileSync(`${out}/results.json`,JSON.stringify(results));await browser.close();await new Promise(r=>server.close(r));}
