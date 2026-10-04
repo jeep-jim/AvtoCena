@@ -87,3 +87,17 @@ test('contact actions link supported identities without inventing MAX phone link
  assert.equal(leadContact({max:'https://max.ru.evil.example/u/test_profile'}).href,'');
  assert.equal(leadContact({max:'https://evil@max.ru/u/test_profile'}).href,'');
 });
+
+test('customer sessions isolate same-phone submissions and link only their own new CRM client',async()=>{
+ const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,temp=fs.mkdtempSync(path.join(os.tmpdir(),'customer-leads-'));
+ fs.mkdirSync(path.join(temp,'data'));process.chdir(temp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();
+ try{
+  const a={id:'a'.repeat(64),name:'A',phone:'+79999999999'} as any,b={...a,id:'b'.repeat(64),name:'B'};
+  const body={requestMode:'offer',source:'catalog_offer_request',offerId:'fixture-car',submissionThreadToken:'12345678-1234-4321-aaaa-123456789abc',operationId:'same-operation',phone:a.phone,name:'Customer',contactPreference:'call',personalDataConsent:true,personalDataConsentVersion:'lead-consent-2026-10-03-v2'};
+  const submit=async(account:any)=>{const r=await createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),null,'',account);assert.equal(r.status,200);return r.json();};
+  const first=await submit(a),second=await submit(b);assert.notEqual(first.clientId,second.clientId);assert.notEqual(first.leadId,second.leadId);
+  const {portalData,linkedClient}=await import('../apps/web/lib/account/portal');const pa=await portalData(a),pb=await portalData(b);
+  assert.equal(pa.length,1);assert.equal(pb.length,1);assert.equal(pa[0].leads[0].id,first.leadId);assert.equal(pb[0].leads[0].id,second.leadId);
+  await assert.rejects(linkedClient(a,pb[0].key));
+ }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
+});

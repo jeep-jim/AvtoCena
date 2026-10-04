@@ -1,3 +1,6 @@
+import {linksPath,clientsPath,type ClientLink} from './account/portal';
+import type {CustomerAccount} from './account/auth';
+import {mutateDataJson as mutateAccountLinks} from './data';
 import {offerLeadDealerIds} from "./dealers/lead-routing";
 import {readShowcase,findDealer} from "./dealers/showcase-store";
 import {specialLeadSnapshot} from "./dealers/public-showcase";
@@ -164,6 +167,7 @@ export async function createLead(
   request: Request,
   currentUser: import("./auth").AuthUser | null = null,
   trustedTelegramId = "",
+  customerAccount: CustomerAccount | null = null,
 ) {
   if(!isCalculationOriginAllowed(request))return NextResponse.json({error:"origin_forbidden"},{status:403});
   const contentType = request.headers.get("content-type") || "";
@@ -310,7 +314,7 @@ export async function createLead(
   const operationId = crypto
     .createHash("sha256")
     .update(
-      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || "public"}${dealerScope}`,
+      `${rawOperationId}:${primaryOfferId}:${phone}:${telegram}:${trustedTelegramId}:${max}:${crmUser?.id || customerAccount?.id || "public"}${dealerScope}`,
     )
     .digest("hex")
     .slice(0, 40);
@@ -339,7 +343,7 @@ export async function createLead(
   );
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
   const token = clean(body.submissionThreadToken, 100);
-  const identity = currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
+  const identity = customerAccount ? `customer:${customerAccount.id}` : currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
   const threadKey = !crmUser && !trustedTelegramId && identity && primaryOfferId && selectedOfferIds.length === 1
     ? crypto.createHash("sha256").update(`lead-thread-v1:${identity}:${primaryOfferId}${dealerScope}`).digest("hex") : "";
   if (threadKey) {
@@ -388,6 +392,7 @@ export async function createLead(
       : selectedOfferTitles[0] || "");
 
   const clientPayload = {
+    ...(customerAccount ? {portalAccountId:customerAccount.id} : {}),
     id: clientId,
     operationId,
     createdAt,
@@ -431,7 +436,19 @@ export async function createLead(
       id: duplicate?.clientId || clientId,
     }));
 
+  // Dealer clients use the same server-generated application identity, in the
+  // dealer's own document workspace. Do not copy unrelated CRM documents.
+  const portalCompany=actualDealer?.status==='verified'&&requestedDealer.requestedDealerId&&requestedDealer.requestedDealerId!=='dealer_topavto'?requestedDealer.requestedDealerId:'dealer_topavto';
+  const portalClient=portalCompany==='dealer_topavto'?client:await appendChunkedDataJson<any>(clientsPath(portalCompany),{
+    id:client.id,companyId:portalCompany,fio:name,phone,city,createdAt,updatedAt:createdAt,
+    ...(customerAccount?{portalAccountId:customerAccount.id}:{})
+  });
+  // Only account-scoped submissions can create this link. Phone matches never grant access.
+  if(customerAccount && portalClient.portalAccountId===customerAccount.id){
+    await mutateAccountLinks<ClientLink[]>(linksPath(customerAccount.id),[],rows=>rows.some(l=>l.companyId===portalCompany&&l.clientId===client.id)?rows:[...rows,{companyId:portalCompany,clientId:client.id,verifiedAt:createdAt}]);
+  }
   const leadPayload = {
+    ...(customerAccount ? {customerAccountId:customerAccount.id} : {}),
     deliveryQuote,
     id: leadId,
     operationId,

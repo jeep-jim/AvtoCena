@@ -1,0 +1,6 @@
+import {currentAccount} from '@/lib/account/auth';
+import {linkedClient} from '@/lib/account/portal';
+import {getJsonStorage} from '@/lib/data';
+import {documentKey,decryptClientDocument} from '@/lib/client-documents';
+export const dynamic='force-dynamic';
+export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){const a=await currentAccount();if(!a)return new Response(null,{status:401});try{const {id}=await params;const {client}=await linkedClient(a,new URL(request.url).searchParams.get('client')||'');const d=client.documents?.find((d:any)=>d.id===id&&d.customerVisible&&!d.deletedAt&&!d.purgeToken);if(!d||!/^[a-f0-9-]{36}$/.test(id))return new Response(null,{status:404});const key=documentKey(client.id,id),blob=await getJsonStorage().getBinary?.(key);if(!blob)return new Response(null,{status:404});const data=Buffer.from(JSON.parse(decryptClientDocument(blob.data,key).toString()).data,'base64');return new Response(new Uint8Array(data),{headers:{'Content-Type':d.mime,'Content-Disposition':`attachment; filename="document"; filename*=UTF-8''${encodeURIComponent(d.name).replace(/['()*]/g,c=>'%'+c.charCodeAt(0).toString(16))}`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"sandbox; default-src 'none'"}});}catch{return new Response(null,{status:404});}}

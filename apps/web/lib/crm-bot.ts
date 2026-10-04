@@ -1,3 +1,4 @@
+import {handleCustomerAccountBot} from "./account/telegram";
 import {miniAppCatalogButton, MINI_APP_URL, MINI_APP_SHARE_URL, MINI_APP_SHARE_TEXT} from "./telegram-miniapp";
 import {hasCrmPermission,permissionDefaults} from "./crm-permissions";
 import {canSeeLead} from "./crm-visibility";
@@ -167,6 +168,7 @@ export async function handleCrmBotUpdate(
   update: any,
   token: string,
 ): Promise<boolean> {
+  if(await handleCustomerAccountBot(update,token))return true;
   const callback = update?.callback_query;
   const message = callback?.message || update?.message;
   const from = callback?.from || message?.from;

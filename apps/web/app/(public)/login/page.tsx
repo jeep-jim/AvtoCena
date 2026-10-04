@@ -1,3 +1,4 @@
+import {AccountEntrance} from "@/components/account/AccountEntrance";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
@@ -8,6 +9,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Вход — АвтоЦена",
+  referrer: "no-referrer",
   robots: { index: false, follow: false },
 };
 
@@ -17,7 +19,7 @@ function firstParam(value?: string | string[]) {
 
 export default async function LoginPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) ?? {};
-  const nextPath = firstParam(params.next) || "/crm";
+  const nextPath = firstParam(params.next) || "/account";
   const errorCode = firstParam(params.error) || "";
   const botUsername = "";
 
@@ -26,8 +28,8 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
       <PublicHeader backHref="/" backLabel="Назад" />
 
       <section className="mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl place-items-center px-4 py-8 md:px-8 md:py-10">
-        <div className="w-full max-w-[460px]">
-          <LoginForm nextPath={nextPath} errorCode={errorCode} botUsername={botUsername} />
+        <div className="w-full max-w-[1120px]">
+          <AccountEntrance nextPath={nextPath} errorCode={errorCode} initialRole={firstParam(params.role) || (nextPath.startsWith("/crm") ? "team" : nextPath.startsWith("/dealer-cabinet") ? "dealer" : "customer")} />
         </div>
       </section>
 

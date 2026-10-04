@@ -164,6 +164,8 @@ export async function middleware(request: NextRequest) {
   }
 
   if (session?.role === "dealer" && /^\/api\/crm\/dealers\/[a-zA-Z0-9_-]+\/(showcase|media)$/.test(pathname)) return NextResponse.next();
+  // The handler verifies dealer approval, workspace and client ownership.
+  if (session?.role === "dealer" && pathname === "/api/crm/customer-access") return NextResponse.next();
   if (pathname === "/crm" || pathname.startsWith("/crm/") || pathname.startsWith("/api/crm")) {
     if (session && isPlatformTeam(session)) return NextResponse.next();
     if(session && !wantsJson(pathname)) return NextResponse.redirect(new URL("/dealer-cabinet",request.url));

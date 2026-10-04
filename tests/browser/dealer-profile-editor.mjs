@@ -127,11 +127,11 @@ try {
   await page.getByRole('heading',{name:'Наши фото и Автовыдачи',exact:true}).waitFor();
   await page.screenshot({path:`${out}/profile-${width}-${theme}-${verified?'verified':'regular'}.png`});
   await page.getByRole('button',{name:/Открыть логотип/}).click();await page.locator('.dealer-logo-dialog[open]').waitFor();assert.equal(await page.locator('.dealer-logo-dialog .dealer-logo-verified').count(),verified?1:0);await page.screenshot({path:`${out}/logo-${width}-${theme}-${verified}.png`});await page.getByRole('button',{name:'Закрыть логотип'}).click();
-  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв сможет оставить клиент, чья заявка подтверждена договором.',{exact:true}).isVisible());
+  await page.locator('.dealer-dock').getByRole('button',{name:'Отзывы',exact:true}).click();assert.ok(await page.getByText('Оценку и отзыв можно оставить после подтверждения подписанного договора.',{exact:true}).isVisible());assert.equal(await page.getByRole('link',{name:'Перейти в личный кабинет →'}).getAttribute('href'),'/account');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.close();
  }
  if(!process.env.EDITOR_ONLY)for(const theme of ['light','dark']){
-  const page=await browser.newPage({viewport:{width:390,height:850}});await page.route('**/api/**',r=>r.fulfill({json:{}}));
+  const page=await browser.newPage({viewport:{width:390,height:850}});await page.route('**/api/**',r=>r.fulfill({json:r.request().url().endsWith('/reviews')?{count:0,rating:null,items:[]}:{}}));
   await page.goto(origin+'?view=profile&multi=1&long=1#cars');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   assert.ok(await page.evaluate(()=>scrollY<5),'initial hash route still starts at cover');
   assert.deepEqual(await page.locator('.dealer-dock span').allTextContents(),['Каталог','Медиа','Адреса','Отзывы','Заявка']);
@@ -149,7 +149,7 @@ try {
  }
  if(!process.env.EDITOR_ONLY)for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:950},hasTouch:true});let subscribed=false,count=2,fail=false;const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.route('**/api/**',async r=>{if(r.request().url().includes('/subscription')){if(r.request().method()==='PUT'){if(fail)return r.fulfill({status:503,json:{error:'Временная ошибка'}});const next=r.request().postDataJSON().subscribed;if(next!==subscribed)count+=next?1:-1;subscribed=next;}return r.fulfill({json:{count,subscribed}});}if(r.request().url().includes('brand-counts'))return r.fulfill({json:{counts:{Toyota:3,BMW:2,Audi:2,Honda:2,Mazda:1,Lexus:1,Nissan:1,Kia:1}}});return r.fulfill({json:{}});});
+  await page.route('**/api/**',async r=>{if(r.request().url().includes('/subscription')){if(r.request().method()==='PUT'){if(fail)return r.fulfill({status:503,json:{error:'Временная ошибка'}});const next=r.request().postDataJSON().subscribed;if(next!==subscribed)count+=next?1:-1;subscribed=next;}return r.fulfill({json:{count,subscribed}});}if(r.request().url().includes('brand-counts'))return r.fulfill({json:{counts:{Toyota:3,BMW:2,Audi:2,Honda:2,Mazda:1,Lexus:1,Nissan:1,Kia:1}}});return r.fulfill({json:r.request().url().endsWith('/reviews')?{count:0,rating:null,items:[]}:{}});});
   await page.goto(origin+'?view=profile&interactive=1&long=1');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   const subscribe=page.getByRole('button',{name:'Добавить дилера в избранное',exact:true});await subscribe.waitFor();await page.waitForFunction(()=>!document.querySelector('.dealer-subscription-control button').disabled);assert.equal(await page.locator('.dealer-cover-actions').count(),0);assert.equal(await page.locator('.dealer-profile-tabs').count(),0);
   assert.equal(await subscribe.locator('svg.lucide-star').count(),1);await subscribe.click();await page.getByRole('button',{name:'Убрать дилера из избранного',exact:true}).waitFor();assert.equal(await page.locator('.dealer-subscription-control button>span').count(),0);assert.equal(await page.locator('.dealer-subscription-control strong').textContent(),'3');
@@ -167,7 +167,7 @@ try {
  }
  for(const width of [390,1440])for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width,height:1050}});const errors=[];page.on('pageerror',e=>errors.push(e.message));let saved=null,media=0;
-  await page.route('**/api/**',async r=>{const req=r.request();if(req.url().includes('/media')&&req.method()==='POST'){media++;return r.fulfill({json:{id:'banner-'+media,url:media===1?'/dealers/topavto-banner-v3.webp':'/buyers/2.jpg',caption:''}});}if(req.url().includes('/showcase')&&req.method()==='PUT'){const {base,...value}=req.postDataJSON();saved={...value,version:value.version+1};await page.evaluate(v=>sessionStorage.setItem('fixture-server',JSON.stringify(v)),saved);return r.fulfill({json:saved});}return r.fulfill({json:{}});});
+  await page.route('**/api/**',async r=>{const req=r.request();if(req.url().includes('/media')&&req.method()==='POST'){media++;return r.fulfill({json:{id:'banner-'+media,url:media===1?'/dealers/topavto-banner-v3.webp':'/buyers/2.jpg',caption:''}});}if(req.url().includes('/showcase')&&req.method()==='PUT'){const {base,...value}=req.postDataJSON();saved={...value,version:value.version+1};await page.evaluate(v=>sessionStorage.setItem('fixture-server',JSON.stringify(v)),saved);return r.fulfill({json:saved});}return r.fulfill({json:r.request().url().endsWith('/reviews')?{count:0,rating:null,items:[]}:{}});});
   await page.goto(origin);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   const preview=page.frameLocator('iframe[title="Мобильный предпросмотр дилера"]');await preview.locator('.dealer-profile').waitFor();await preview.locator('html').evaluate((el,t)=>{if(el.dataset.theme!==t)throw Error('Preview theme differs from editor');},theme);
   if(width===1440){const main=await page.locator('.dealer-editor-settings').boundingBox(),frame=await page.locator('.dealer-live-preview').boundingBox();assert.ok(frame.x>=main.x+main.width,'preview sits on the right');}
