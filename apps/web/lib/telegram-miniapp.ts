@@ -4,7 +4,7 @@ export const MINI_APP_URL = "https://avtocena.com/mini?utm_source=telegram&utm_m
 export function miniAppPathAllowed(path: string) {
   const parts=path.split("/");
   const dealer=parts.length===3&&validProfilePart(parts[1])&&validProfilePart(parts[2]);
-  return path === "/" || dealer || /^\/dealers\/[a-zA-Z0-9_-]{1,80}$/.test(path) || path === "/mini" || path === "/cars" || path.startsWith("/cars/") || ["/favorites","/request","/privacy","/privacy/request","/terms","/consent","/requisites"].includes(path);
+  return /^\/s\/[A-Za-z0-9_-]{16}$/.test(path) || path === "/" || dealer || /^\/dealers\/[a-zA-Z0-9_-]{1,80}$/.test(path) || path === "/mini" || path === "/cars" || path.startsWith("/cars/") || ["/favorites","/request","/privacy","/privacy/request","/terms","/consent","/requisites"].includes(path);
 }
 export function miniAppCatalogButton(chatId?: string) {
   return Number(chatId) > 0
@@ -41,7 +41,7 @@ export function syncMiniAppPresentation() {
   const parts=location.pathname.split('/');
   const reserved=new Set(['api','crm','admin','cars','auto','dealers','login','auth','privacy','terms','cookies','consent','results','favorites','autocalc','internal','telegram','mini','request','requisites','partner','osago','credit','mcp','sitemap','robots','health','settings','staff','_next']);
   const dealer=parts.length===3&&parts.slice(1).every(p=>/^[a-z][a-z0-9-]{1,39}$/.test(p)&&!reserved.has(p));
-  const allowed = location.pathname==='/' || dealer || /^\/dealers\/[a-zA-Z0-9_-]{1,80}$/.test(location.pathname) || /^(\/mini|\/cars(?:\/.*)?|\/favorites|\/request|\/privacy(?:\/request)?|\/terms|\/consent|\/requisites)$/.test(location.pathname);
+  const allowed = /^\/s\/[A-Za-z0-9_-]{16}$/.test(location.pathname) || location.pathname==='/' || dealer || /^\/dealers\/[a-zA-Z0-9_-]{1,80}$/.test(location.pathname) || /^(\/mini|\/cars(?:\/.*)?|\/favorites|\/request|\/privacy(?:\/request)?|\/terms|\/consent|\/requisites)$/.test(location.pathname);
   const active = inTelegram && allowed && !optedOut;
   if (active) {
     root.dataset.miniapp = "true";
@@ -70,6 +70,7 @@ export function miniAppOfferShareUrl(id: string, calculation?: string) {
   return start.length <= 512 ? `https://t.me/avtocena_bot?startapp=${start}` : null;
 }
 export function miniAppLaunchPath(start: unknown): string | null {
+  if(typeof start==='string' && /^short_[A-Za-z0-9_-]{16}$/.test(start))return `/s/${start.slice(6)}?open=web`;
   if(typeof start!=="string" || start.length>512 || !/^car_[A-Za-z0-9_-]+$/.test(start)) return null;
   try {
     const data = JSON.parse(atob(start.slice(4).replace(/-/g,"+").replace(/_/g,"/")));

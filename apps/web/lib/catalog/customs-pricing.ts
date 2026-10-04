@@ -1,3 +1,4 @@
+import {koreaIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice} from "./china-cny-price";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
 import { isGreenCornerOffer } from "./green-corner-contract";
@@ -288,14 +289,21 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     };
   }
   const commercial = normalizedCategory(offer).category === "N1";
+  const ageInput = {
+    importedAt: userParameters && offer.customsCalculationDate ? new Date(`${offer.customsCalculationDate}T00:00:00Z`) : undefined,
+    productionDate: userParameters ? offer.productionDate : confirmedProductionValue(offer) || undefined,
+    year: userParameters ? offer.year : automaticProductionYear(offer),
+  };
+  const koreaFreight = koreaIncludesLogistics(offer.market, ageInput);
+  const includeTransport = commercial || greenCorner || koreaFreight;
   const enteredTransport = offer.transportToBorderRub;
   const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;
   const borderTransportRub = greenCorner ? 0 : commercial
     ? hasEnteredTransport ? enteredTransport : transportToBorderRub(offer) || Number(market.config.logisticsRub || 0)
-    : transportToBorderRub(offer);
+    : koreaFreight ? Number(market.config.logisticsRub || 0) : transportToBorderRub(offer);
   // Goods imports include pre-border transport. In an N1 customer scenario this
   // replaces the logistics line, so it is not added twice to the delivered total.
-  const customsValueRub = rate.sourcePriceRub + ((commercial || greenCorner) ? borderTransportRub : 0);
+  const customsValueRub = rate.sourcePriceRub + (includeTransport ? borderTransportRub : 0);
   if (commercial && !greenCorner) {
     market.config = {...market.config,logisticsRub:borderTransportRub};
     if (!hasEnteredTransport) {
@@ -370,7 +378,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         sourcePriceRub: paymentRate!.sourcePriceRub,
         customs,
         customsInput,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, includeTransport),
         customsCompleteness: "needs_data",
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "preliminary",
@@ -400,7 +408,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
         eurRate,
         customs,
         customsInput,
-        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, includeTransport),
         customsCompleteness: customs.status,
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "unavailable",
@@ -452,7 +460,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       sourcePriceRub: paymentRate!.sourcePriceRub,
       customs,
       customsInput,
-      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, commercial || greenCorner),
+      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub, includeTransport),
       customsCompleteness: customs.status,
       pricingConfidence: priceEstimated ? "estimated" : "exact",
       estimatedMarketFields: market.estimatedFields,
