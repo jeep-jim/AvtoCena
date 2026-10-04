@@ -108,7 +108,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
-      <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
+      <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
         <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><span>{brand.name}</span>
       </nav>
 
@@ -117,7 +117,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Марка автомобиля</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-500">Марка автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
             Выберите модель {brand.name}, чтобы посмотреть автомобили, характеристики и стоимость под ключ.

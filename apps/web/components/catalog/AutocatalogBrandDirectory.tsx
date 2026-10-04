@@ -116,7 +116,7 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
     </div>
 
     <div className="mt-7">
-      <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Каталог в продаже</div>
+      <div className="text-xs font-black normal-case tracking-normal text-red-500">Каталог в продаже</div>
       <h2 id="autocatalog-brands-title" className="mt-1 text-3xl font-black md:text-5xl">{normalizedQuery ? `Найдено: ${filtered.length}` : "Марки с автомобилями"}</h2>
     </div>
 

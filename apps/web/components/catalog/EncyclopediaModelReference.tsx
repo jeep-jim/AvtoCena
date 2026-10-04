@@ -58,7 +58,7 @@ export function EncyclopediaModelReference({
       return <section key={encyclopediaGenerationKey(first)} className="overflow-hidden rounded-[1.55rem] bg-[var(--ac-surface-2)]">
         <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[var(--ac-border)] px-4 py-4 md:px-5">
           <div>
-            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-500">Поколение / период</div>
+            <div className="text-[10px] font-black normal-case tracking-normal text-red-500">Поколение / период</div>
             <h3 className="mt-1 text-xl font-black md:text-2xl">{groupLabel(first)}</h3>
             <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">{encyclopediaYearRange(yearFrom, yearTo)}</p>
           </div>
@@ -74,7 +74,7 @@ export function EncyclopediaModelReference({
               <div className="min-w-0 text-base font-black leading-5">{encyclopediaVariantTitle(row, `${brandName} ${modelName}`)}</div>
               <span className="shrink-0 text-lg font-black text-red-500 transition-transform group-hover:translate-x-0.5">→</span>
             </div>
-            <div className="mt-2 text-[10px] font-black uppercase tracking-wide text-emerald-500">{encyclopediaSourceLabel(row)}</div>
+            <div className="mt-2 text-[10px] font-black normal-case tracking-normal text-emerald-500">{encyclopediaSourceLabel(row)}</div>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {quickFacts(row).map((fact) => <span key={String(fact)} className="rounded-full bg-[var(--ac-surface-2)] px-2.5 py-1.5 text-[11px] font-black text-[var(--ac-text)]">{fact}</span>)}
             </div>

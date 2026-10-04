@@ -36,7 +36,7 @@ export default async function CrmPartnersPage() {
       subtitle="Прямые партнёры и CPA-источники. Внутренняя CRM остаётся доступна только сотрудникам компании."
     >
       <div className="glass overflow-hidden rounded-[2rem]">
-        <div className="hidden grid-cols-5 gap-3 border-b border-white/10 p-4 text-xs font-black uppercase tracking-[0.14em] text-white/42 md:grid">
+        <div className="hidden grid-cols-5 gap-3 border-b border-white/10 p-4 text-xs font-black normal-case tracking-normal text-white/42 md:grid">
           <div>Партнёр</div>
           <div>Код</div>
           <div>Переходы</div>
@@ -49,31 +49,31 @@ export default async function CrmPartnersPage() {
             className="grid min-w-0 gap-3 border-b border-white/7 p-4 text-sm font-bold text-white/70 last:border-0 sm:grid-cols-2 md:grid-cols-5"
           >
             <div className="min-w-0">
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Партнёр
               </div>
               <div className="mt-1 break-words text-white">{partner.name}</div>
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Код
               </div>
               <div className="mt-1 break-all">{partner.code || "—"}</div>
             </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Переходы
               </div>
               <div className="mt-1">{partner.clicks || 0}</div>
             </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Договоры
               </div>
               <div className="mt-1">{partner.contracts || 0}</div>
             </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 К выплате
               </div>
               <div className="mt-1 text-white">
@@ -111,7 +111,7 @@ export default async function CrmPartnersPage() {
               ) : null}
             </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Сумма
               </div>
               <div className="mt-1 font-black text-white">
@@ -119,7 +119,7 @@ export default async function CrmPartnersPage() {
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-white/30 md:hidden">
+              <div className="text-[10px] font-black normal-case tracking-normal text-white/30 md:hidden">
                 Статус
               </div>
               <span className="mt-1 inline-flex rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-xs font-black text-white/72">

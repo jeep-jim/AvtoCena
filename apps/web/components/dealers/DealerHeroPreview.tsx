@@ -30,7 +30,7 @@ export function DealerHeroPreview() {
   return (
     <div className="dealer-hero-preview rounded-[2rem] border border-white/8 bg-[#12151d] p-5 md:p-7 lg:-translate-y-8">
       <div className="flex items-center justify-between gap-4">
-        <div><div className="text-xs font-black uppercase tracking-[.16em] text-red-400">Рабочее место дилера</div><h2 className="mt-2 text-3xl font-black tracking-[-.04em]">Вся компания в одном окне</h2></div>
+        <div><div className="text-xs font-black normal-case tracking-normal text-red-400">Рабочее место дилера</div><h2 className="mt-2 text-3xl font-black tracking-[-.04em]">Вся компания в одном окне</h2></div>
         <div className="grid h-14 w-14 place-items-center rounded-2xl bg-red-500 text-2xl">⚡</div>
       </div>
 
@@ -39,7 +39,7 @@ export function DealerHeroPreview() {
       </div>
 
       <div className="relative mt-3 min-h-[290px] overflow-hidden rounded-2xl bg-white/[.035] p-3">
-        <div className="mb-2 flex items-center justify-between px-1 text-[11px] font-black uppercase tracking-[.12em] text-white/48"><span>Последние обращения</span><span className="inline-flex items-center gap-1.5 text-[#20a85e]"><i className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#20a85e]" />обновляется</span></div>
+        <div className="mb-2 flex items-center justify-between px-1 text-[11px] font-black normal-case tracking-normal text-white/48"><span>Последние обращения</span><span className="inline-flex items-center gap-1.5 text-[#20a85e]"><i className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#20a85e]" />обновляется</span></div>
         <div key={active} className="grid gap-2 dealer-preview-slide">
           {visible.map((item, index) => <article key={`${item.city}-${active}-${index}`} className="dealer-application-card rounded-2xl bg-white/[.065] p-3.5"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><div className="truncate text-sm font-black">Заявка из {item.city}</div><div className="mt-1 text-xs font-bold text-white/48">{item.meta}</div></div><span className={`dealer-status-chip shrink-0 rounded-full px-2.5 py-1 text-[10px] font-black ${toneClasses[item.tone]}`}>{item.status}</span></div><p className="mt-2 text-xs font-bold leading-5 text-white/62">{item.request}</p></article>)}
         </div>

@@ -30,7 +30,7 @@ export default async function ModelSeoPage({ params }: { params: Promise<{ brand
       <div className="mx-auto max-w-5xl">
         <Link href="/" className="text-sm font-black text-white/55">← АвтоЦена</Link>
         <section className="glass mt-6 rounded-[2rem] p-6 md:p-9">
-          <div className="text-sm font-black uppercase tracking-[0.18em] text-red-300">SEO страница</div>
+          <div className="text-sm font-black normal-case tracking-normal text-red-300">SEO страница</div>
           <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] md:text-6xl">
             {item ? item.title : `${brand.toUpperCase()} ${model.replaceAll("-", " ")}`} под заказ
           </h1>

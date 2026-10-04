@@ -25,7 +25,7 @@ export function CopyCodeBlock({ label, value, hint }: CopyCodeBlockProps) {
     <div className="min-w-0 rounded-[1.25rem] border border-white/10 bg-black/25 p-3 sm:p-4">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-[11px] font-black uppercase tracking-[0.16em] text-white/42">
+          <div className="text-[11px] font-black normal-case tracking-normal text-white/42">
             {label}
           </div>
           {hint ? (

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const labelClass = "ac-market-setting-label grid gap-1.5 text-xs font-black uppercase tracking-[.08em]";
+const labelClass = "ac-market-setting-label grid gap-1.5 text-xs font-black normal-case tracking-normal";
 const inputClass = "soft-input min-w-0 rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal";
 
 export function MarketPaymentFields({ depositRub, commissionRub, marketId }: { depositRub: number; commissionRub: number; marketId: string }) {

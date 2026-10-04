@@ -91,7 +91,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     <PublicHeader backHref={`/cars/brand/${brand.slug}`} backLabel={brand.name} />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
+      <nav className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]" aria-label="Хлебные крошки">
         <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
       </nav>
 
@@ -100,7 +100,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
           {heroImageUrl ? <img src={heroImageUrl} alt={`${brand.name} ${model.model}`} width={960} height={720} loading="eager" className="h-full w-full object-cover" /> : <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />}
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Модель автомобиля</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-500">Модель автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">Доступные автомобили {brand.name} {model.model} со всех рынков и расчёт стоимости под ключ.</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-black">

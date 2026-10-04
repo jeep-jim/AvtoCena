@@ -96,7 +96,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
         )}
         <div className="ac-offer-layout grid min-w-0 gap-3 xl:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(390px,.75fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.6fr)_480px]">
           <div className="min-w-0">
-            <header><p className="text-xs font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">{offerAvailabilityLabel(o)} · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
+            <header><p className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{offerAvailabilityLabel(o)} · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
             <div className="mt-5 min-w-0 overflow-hidden">
             <VehicleGallery
               images={o.photos.map((p) => p.url)}
@@ -111,7 +111,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
           <StickyOfferColumn>
           <div className="ac-inline-parameters min-w-0" data-share-estimate={encodeShareDraft({deliveryCity:city})}>
             <section className="ac-price-trend-panel ac-offer-price-panel is-down rounded-[1.35rem] p-4">
-              <p className="ac-price-trend-label text-[10px] font-black uppercase tracking-[0.19em] text-[var(--ac-text)] md:text-[11px]">
+              <p className="ac-price-trend-label text-[10px] font-black normal-case tracking-normal text-[var(--ac-text)] md:text-[11px]">
                 {stock ? "Цена автомобиля в наличии" : c.city ? `Стоимость с доставкой до ${c.city}` : "Стоимость автомобиля"}
               </p>
               <p className="ac-price ac-price--down mt-2 text-3xl font-black">

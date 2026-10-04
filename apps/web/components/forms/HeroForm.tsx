@@ -41,7 +41,7 @@ export function HeroForm() {
     <div className="glass red-glow relative z-10 rounded-[2rem] p-4 md:p-6">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>
-          <div className="text-xs font-black uppercase tracking-[0.22em] text-red-300">главное поле</div>
+          <div className="text-xs font-black normal-case tracking-normal text-red-300">Главное поле</div>
           <label className="mt-1 block text-lg font-black text-white">Найдите автомобиль, который можно привезти под ваш бюджет</label>
         </div>
         <div className="hidden rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white/75 md:block">

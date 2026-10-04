@@ -136,7 +136,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
       </div>
 
       <form method="get" action="/crm/settings" className="crm-calculation-fields grid grid-cols-2 gap-3 border-b border-white/8 p-5 md:p-6 xl:grid-cols-4">
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Рынок
           <select name="calcMarket" defaultValue={marketId} className={inputClass()}>
             {markets.filter((item) => MARKET_ORDER.includes(item.id)).map((item) => (
@@ -144,33 +144,33 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
             ))}
           </select>
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Цена объявления, {currency}
           <input name="calcSourcePrice" type="number" min="1" step="1" defaultValue={sourcePrice} className={inputClass()} />
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Дата производства
           <input name="calcProductionDate" placeholder="ГГГГ-ММ-ДД или ГГГГ-ММ" defaultValue={productionDate} className={inputClass()} />
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Силовая установка
           <select name="calcPowertrain" defaultValue={powertrainKind} className={inputClass()}>
             {POWERTRAINS.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Объём ДВС, см³
           <input name="calcEngineCc" type="number" min="0" step="1" defaultValue={engineCc || ""} className={inputClass()} />
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Мощность ДВС, л.с. / PS
           <input name="calcPowerHp" type="number" min="0" step="0.01" defaultValue={powerHp || ""} className={inputClass()} />
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           ДВС для гибрида, кВт
           <input name="calcIcePowerKw" type="number" min="0" step="0.01" defaultValue={icePowerKw || ""} className={inputClass()} />
         </label>
-        <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.07em] text-white/45">
+        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           30-мин. мощность электромоторов, кВт
           <input name="calcPower30MinKw" type="number" min="0" step="0.01" defaultValue={power30MinKw || ""} className={inputClass()} />
         </label>
@@ -184,27 +184,27 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
 
       <div className="crm-calculation-totals grid grid-cols-2 gap-3 p-5 md:p-6 xl:grid-cols-5">
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">цена после курса</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-white/38">Цена после курса</div>
           <div className="mt-2 text-2xl font-black">{sourceRate ? rub(sourceRate.sourcePriceRub) : "нет курса"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">{rateSourceLabel(sourceRate?.rateSource)} · {sourceRate?.rateDate || "—"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">таможенные платежи</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-white/38">Таможенные платежи</div>
           <div className="mt-2 text-2xl font-black">{customs ? rub(customs.knownCustomsRub) : "нужны данные"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">{customs?.ruleVersion || "расчёт заблокирован"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">утилизационный сбор</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-white/38">Утилизационный сбор</div>
           <div className="mt-2 text-2xl font-black">{customs?.utilizationFeeRub !== undefined ? rub(customs.utilizationFeeRub) : "нужны данные"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">коэффициент {customs?.utilizationCoefficient !== undefined ? number(customs.utilizationCoefficient, 4) : "—"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">расходы рынка + резерв</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-white/38">Расходы рынка + резерв</div>
           <div className="mt-2 text-2xl font-black">{business ? rub(marketExtras) : "—"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">активная версия CRM</div>
         </div>
         <div className="rounded-2xl bg-red-500/12 p-4 ring-1 ring-red-400/20">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-red-200/65">итог на сайте</div>
+          <div className="text-[11px] font-black normal-case tracking-normal text-red-200/65">Итог на сайте</div>
           <div className="mt-2 text-2xl font-black text-white">{business ? rub(business.totalRub) : "не публикуется"}</div>
           <div className="mt-1 text-xs font-bold text-red-100/55">только когда обязательные данные подтверждены</div>
         </div>
@@ -224,7 +224,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
 
         <div className="overflow-x-auto rounded-2xl border border-white/8">
           <table className="min-w-[780px] w-full text-left text-sm">
-            <thead className="bg-white/[.055] text-[11px] font-black uppercase tracking-[.08em] text-white/42">
+            <thead className="bg-white/[.055] text-[11px] font-black normal-case tracking-normal text-white/42">
               <tr>
                 <th className="px-4 py-3">Этап</th>
                 <th className="px-4 py-3">Что делает сайт</th>

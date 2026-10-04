@@ -1,7 +1,7 @@
 .root { min-width:0; color:var(--ac-text); }
 .section { margin-top:28px; min-width:0; }
 .section:first-child { margin-top:0; }
-.heading { display:flex; align-items:center; gap:12px; min-width:0; font-size:13px; font-weight:900; line-height:1.5; letter-spacing:.06em; text-transform:uppercase; }
+.heading { display:flex; align-items:center; gap:12px; min-width:0; font-size:13px; font-weight:900; line-height:1.5; letter-spacing:normal; text-transform:none; }
 .heading > span:not(.rule) { overflow-wrap:anywhere; }
 .rule { height:3px; background:var(--ac-border); flex:1; min-width:28px; }
 .rows { display:grid; min-width:0; column-gap:28px; margin-top:12px; }
