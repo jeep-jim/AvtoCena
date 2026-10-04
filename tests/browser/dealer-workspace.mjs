@@ -276,8 +276,10 @@ try{
   await page.getByRole('button',{name:'Удалить автомобиль',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers.length,2);
   await page.getByRole('tab',{name:'Новые автомобили под заказ',exact:true}).click();assert.equal(await page.getByLabel('Марка',{exact:true}).inputValue(),'Toyota');
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
+  await page.getByRole('button',{name:'Сохранено',exact:true}).waitFor();
   const requisitesSaved=page.waitForResponse(response=>{if(response.request().method()!=='PUT')return false;const r=response.request().postDataJSON()?.requisites;return response.ok()&&r?.legalName==='ООО Компания дилера'&&r?.inn==='7707083893'&&r?.ogrn==='1027700132195';}).catch(async error=>{console.log('REQUISITES_SAVE_FAILURE',JSON.stringify({width,theme,errors,writes:writes.slice(-3).map(w=>({url:w.url,requisites:w.body.requisites,base:w.body.base?.requisites,version:w.body.version})),fields:await page.locator('input').evaluateAll(es=>es.map(e=>({label:e.getAttribute('aria-label'),value:e.value}))),status:await page.locator('.dealer-editor-sidebar').innerText()}));throw error;});
-  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Компания дилера');
+  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('');
+  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).pressSequentially('ООО Компания дилера');
   await page.getByLabel('ИНН',{exact:true}).fill('7707083893');
   await page.getByLabel('ОГРН / ОГРНИП',{exact:true}).fill('1027700132195');
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();
