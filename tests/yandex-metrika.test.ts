@@ -1,3 +1,4 @@
+import {rememberYandexClick} from '../apps/web/lib/metrika-client';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
@@ -65,3 +66,5 @@ test('a new campaign wins over the entry campaign and refusal does not replay ol
  tracker.sync();href='https://avtocena.com/cars?utm_campaign=new';allowed=true;tracker.sync();assert.equal(calls[0][2].url,href);
  allowed=false;tracker.sync();href='https://avtocena.com/favorites';allowed=true;tracker.sync();assert.equal(calls.at(-1)[2].url,href);
 });
+
+test('advertising helper is safe outside the browser without consent',()=>{assert.doesNotThrow(()=>rememberYandexClick());});
