@@ -1,7 +1,9 @@
 {
-  "requestedAt": "2026-09-28",
-  "reason": "launch_audit_kcar_age_filter_and_full_pass_budget",
+  "operation": "owner-market-recovery-20261004",
+  "market": "korea",
   "publishMarkets": [
     "korea"
-  ]
+  ],
+  "resetCursors": true,
+  "reason": "Owner-authorized fresh collection with dated retention exclusion, bounded memory and unchanged source-access and quality guards."
 }

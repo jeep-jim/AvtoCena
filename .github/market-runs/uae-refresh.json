@@ -1,8 +1,9 @@
 {
-  "operation": "owner-uae-stability-check-20260926",
+  "operation": "owner-market-recovery-20261004",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
-  "resetCursors": true
+  "resetCursors": true,
+  "reason": "Owner-authorized fresh collection with dated retention exclusion, bounded memory and unchanged source-access and quality guards."
 }
