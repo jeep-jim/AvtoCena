@@ -263,7 +263,7 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
       const response = await leadFetch("/api/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
         operationId: operation.value,
         requestMode: request.mode,
-        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? favoriteDealer(offerPreview).id : request.mode==="generic" ? request.dealerId : undefined,
+        dealerId: isFavorites ? selectedDealer : isOffer && offerPreview ? (offerPreview.id.startsWith("special_")?favoriteDealer(offerPreview).id:ownerDocument.querySelector<HTMLElement>("[data-dealer-context]")?.dataset.dealerContext||favoriteDealer(offerPreview).id) : request.mode==="generic" ? request.dealerId : undefined,
         submissionThreadToken: isOffer ? threadToken() : "",
         pageUrl: window.location.href,
         offerId: isOffer ? request.offerId : "",

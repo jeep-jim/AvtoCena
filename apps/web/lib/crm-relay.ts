@@ -50,7 +50,9 @@ export async function authorizeCrmNotice(id: string, token: string) {
   if (!item || ["sent", "cancelled"].includes(item.status) || !keyMatches(token, item.relayHash)
     || !(item.relayUntil > Date.now())) return false;
   if (await allowed(item)) return true;
-  await updateChunkedDataJson<any>(QUEUE, id, row => keyMatches(token, row.relayHash) ? {...row, status: "cancelled", relayHash: "", relayUntil: 0} : row);
+  const lead=(await readChunkedDataJson<any>("leads/leads.json",[])).find(l=>l.id===item.leadId);
+  const target=item.audience==="group"&&lead&&!lead.archivedAt?await leadTelegramTarget(lead):null;
+  await updateChunkedDataJson<any>(QUEUE, id, row => keyMatches(token, row.relayHash) ? {...row, chatId:target?.chatId||row.chatId,status: target?"pending":"cancelled", relayHash: "", relayUntil: 0, nextAttemptAt:0} : row);
   return false;
 }
 export async function completeCrmNotice(id: string, token: string, messageId?: number) {

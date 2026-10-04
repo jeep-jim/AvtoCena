@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
 import {siteRule,siteVisibilityCss,normalizeSiteControls} from '../apps/web/lib/site-controls';
+import {offerLeadDealerIds} from '../apps/web/lib/dealers/lead-routing';
 import {defaultDealerTelegram,targetForLead,saveDealerTelegram,readDealerTelegram} from '../apps/web/lib/dealers/telegram-settings';
 import {chatList,chatDetail,createDirectChat,sendChatMessage} from '../apps/web/lib/crm-chat';
 import {writeDataJson,readChunkedDataJson,updateChunkedDataJson,resetJsonStorageForTests} from '../apps/web/lib/data';
@@ -22,9 +23,10 @@ test('dealer routing has no platform fallback, reserves group ownership, migrate
  const pilot=defaultDealerTelegram('dealer_topavto');await assert.rejects(saveDealerTelegram('dealer_other',{...pilot,version:0}),/другой компании/);
  const other={...defaultDealerTelegram('dealer_other'),enabled:true,chatId:'-100999999999',title:'Другой дилер'};await saveDealerTelegram('dealer_other',other);
  const now=new Date().toISOString();await writeDataJson('leads/leads.json',Array.from({length:6},(_,i)=>({id:`unconnected-${i}`,requestedDealerId:'dealer_missing',notificationRequestedAt:now})).concat([{id:'foreign',requestedDealerId:'dealer_other',notificationRequestedAt:now}]));
- const claims=await claimCrmNotices();assert.equal(claims.length,1);assert.equal(claims[0].chatId,other.chatId);assert.equal(claims[0].targetTitle,other.title);assert.match(claims[0].url,/dealer-cabinet$/);
+ const claims=await claimCrmNotices();assert.equal(claims.length,1);assert.equal(claims[0].chatId,other.chatId);assert.equal(claims[0].targetTitle,other.title);assert.match(claims[0].url,/dealer-cabinet\/leads\?id=foreign$/);
  await saveDealerTelegram('dealer_other',{...await readDealerTelegram('dealer_other'),chatId:'-100888888888'});
  assert.equal(await authorizeCrmNotice(claims[0].id,claims[0].token),false);
+ const rerouted=await claimCrmNotices();assert.equal(rerouted[0].chatId,"-100888888888");assert.notEqual(rerouted[0].token,claims[0].token);
 }));
 test('private team chat protects membership, rejects external accounts and deduplicates retry',()=>isolated(async()=>{
  const {id}=await createDirectChat(owner,manager.id);
@@ -52,3 +54,5 @@ test('customer replies require visible active own lead and connection; retry que
  await updateChunkedDataJson<any>('leads/leads.json','lead-a',l=>({...l,archivedAt:new Date().toISOString()}));
  await assert.rejects(sendChatMessage(owner,'lead:lead-a',input),/chat_forbidden/);
 }));
+
+test('catalog follows chosen dealer while dealer inventory remains authoritative',()=>{assert.deepEqual([...offerLeadDealerIds(['catalog-car'],'dealer_other')],['dealer_other']);assert.deepEqual([...offerLeadDealerIds(['special_dealer_one__car'],'dealer_other')],['dealer_one']);assert.equal(offerLeadDealerIds(['special_dealer_one__car','special_dealer_two__car']).size,2);});

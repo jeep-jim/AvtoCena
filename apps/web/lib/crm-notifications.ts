@@ -49,7 +49,7 @@ export function followupText(entry: any, includeContact = true) {
 }
 const noticeField = (value: unknown, limit = 300) => String(value || "").replace(/[\r\n\t]+/g, " ").trim().slice(0, limit);
 export function leadNotice(lead:any,entry?:any){
- const url = `https://avtocena.com/crm/leads?id=${encodeURIComponent(String(lead?.id||""))}`;
+ const url = leadCrmUrl(lead);
  if (lead?.source === "privacy_request") return `📩 Обращение по персональным данным · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
  const current = {...lead, ...entry};
  if (current.personalDataConsent !== true || !["lead-consent-2026-09-30","lead-consent-2026-10-02","lead-consent-2026-10-03-v2"].includes(current.personalDataConsentVersion)) return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;

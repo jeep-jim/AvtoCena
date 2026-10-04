@@ -1,4 +1,4 @@
-import {favoriteDealer} from "./dealers/favorite-dealer";
+import {offerLeadDealerIds} from "./dealers/lead-routing";
 import {readShowcase,findDealer} from "./dealers/showcase-store";
 import {specialLeadSnapshot} from "./dealers/public-showcase";
 import {parseSpecialId} from "./dealers/showcase-model";
@@ -187,7 +187,7 @@ export async function createLead(
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
   const dealerProfile = body.dealerId ? await readShowcase(clean(body.dealerId,80)) : null;
-  if(body.dealerId&&!dealerProfile?.profileEnabled)return NextResponse.json({ok:false,error:'Страница дилера недоступна. Выберите другую компанию.'},{status:400});
+  if(body.dealerId&&(!dealerProfile||(dealerProfile.dealerId!=="dealer_topavto"&&!dealerProfile.profileEnabled)||(await findDealer(dealerProfile.dealerId))?.status!=="verified"))return NextResponse.json({ok:false,error:'Страница дилера недоступна. Выберите другую компанию.'},{status:400});
   const requestedDealer = dealerProfile?.profileEnabled ? {requestedDealerId:dealerProfile.dealerId,requestedDealerName:dealerProfile.name} : {};
   const customerComment = [clean(body.comment, 2000) || clean(body.message, 2000), requestedDealer.requestedDealerName ? `Обращение со страницы дилера: ${requestedDealer.requestedDealerName}` : ""].filter(Boolean).join("\n");
   const contactPreference = normalizeContactPreference(
@@ -273,7 +273,7 @@ export async function createLead(
     );
   }
 
-  const selectedDealers = new Set(selectedOfferIds.map(id=>favoriteDealer({id}).id));
+  const selectedDealers = offerLeadDealerIds(selectedOfferIds,requestedDealer.requestedDealerId||"dealer_topavto");
   if (selectedDealers.size > 1) return NextResponse.json({ok:false,error:"Выберите автомобили одного дилера. Для другой компании создайте отдельную заявку."},{status:400});
   const actualDealerId=selectedDealers.values().next().value;
   if(actualDealerId&&body.dealerId&&actualDealerId!==clean(body.dealerId,80))return NextResponse.json({ok:false,error:"Выбранные автомобили относятся к другому дилеру."},{status:400});
