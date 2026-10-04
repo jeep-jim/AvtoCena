@@ -78,8 +78,12 @@ test("production keeps one warm container and serves navigation bursts in-proces
   assert.match(deploy, /cars\/offer\/\$offer_id/);
 });
 
-test("market run markers do not rebuild and redeploy the web container", () => {
+test("non-runtime maintenance and documentation do not rebuild the web container", () => {
   assert.match(deploy, /paths-ignore:[\s\S]*\.github\/market-runs\/\*\*/);
+  assert.match(deploy, /paths-ignore:[\s\S]*scripts\/\*\*/);
+  assert.match(deploy, /paths-ignore:[\s\S]*tests\/\*\*/);
+  assert.match(deploy, /paths-ignore:[\s\S]*docs\/\*\*/);
+  assert.match(deploy, /paths-ignore:[\s\S]*roadmap\.md/);
 });
 
 test("catalog pricing shares one short-lived market-settings read", () => {
