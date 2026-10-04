@@ -5,7 +5,7 @@ import {PILOT_DEALER_ID} from '@/lib/dealers/showcase-model';
 import {dealerProfilePath} from '@/lib/dealers/profile-url';
 import {publicDealerText} from '@/lib/dealers/public-profile';
 export const dynamic='force-dynamic';
-export const metadata={title:'Автодилеры — АвтоЦена',description:'Найдите автодилера в своём городе. Каталог компаний АвтоЦена.'};
+export const metadata={title:'Автодилеры — АвтоЦена',alternates:{canonical:'/dealers'},description:'Найдите автодилера в своём городе. Каталог компаний АвтоЦена.'};
 export default async function Page(){
  const [stored,dealer]=await Promise.all([readShowcase(PILOT_DEALER_ID),findDealer(PILOT_DEALER_ID)]);
  const s=stored?await availableShowcase(stored):null;

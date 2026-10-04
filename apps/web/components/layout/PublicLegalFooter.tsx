@@ -16,12 +16,12 @@ import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } fro
 
 
 const marketLinks = [
-  { href: "/cars?market=japan", label: "Автомобили из Японии" },
-  { href: "/cars?market=china", label: "Автомобили из Китая" },
-  { href: "/cars?market=korea", label: "Автомобили из Кореи" },
-  { href: "/cars?market=uae", label: "Автомобили из ОАЭ" },
-  { href: "/cars?market=europe", label: "Автомобили из Европы" },
-  { href: "/cars?market=georgia", label: "Автомобили из Грузии" },
+  { href: "/cars/japan", label: "Автомобили из Японии" },
+  { href: "/cars/china", label: "Автомобили из Китая" },
+  { href: "/cars/korea", label: "Автомобили из Кореи" },
+  { href: "/cars/uae", label: "Автомобили из ОАЭ" },
+  { href: "/cars/europe", label: "Автомобили из Европы" },
+  { href: "/cars/georgia", label: "Автомобили из Грузии" },
 ];
 
 const budgetLinks = [
@@ -138,12 +138,12 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
           ]} />
         </div>
 
-        <section aria-label="Реквизиты дилера TOP AVTO" className="ac-public-footer-operator mb-5 grid gap-4 border-t border-[var(--ac-border)] pt-5 text-sm lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-8">
+        <section data-nosnippet="" aria-label="Реквизиты дилера TOP AVTO" className="ac-public-footer-operator mb-5 grid gap-4 border-t border-[var(--ac-border)] pt-5 text-sm lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-8">
           <div className="flex items-center gap-10"><div><p className="font-bold"><Link href="/login" prefetch={false} style={{ color: "inherit", textDecoration: "none", cursor: "text" }}>Дилер</Link>{TOPAVTO_DEALER.label.slice("Дилер".length)} — <a href={TOPAVTO_DEALER.website} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{TOPAVTO_DEALER.name}</a></p><p className="mt-1 text-xs text-[var(--ac-muted)]">Подбор автомобиля, сопровождение покупки и организация доставки.</p></div><img src="/brands/topavto-logo.png" alt="TOP AVTO" className="hidden h-auto w-[160px] shrink-0 object-contain lg:block" /></div>
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-[var(--ac-muted)] lg:flex-col lg:items-end"><span>ИНН {TOPAVTO_DEALER.inn}</span><span>ОГРНИП {TOPAVTO_DEALER.ogrnip}</span></div>
         </section>
 
-        <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-x-6">
+        <div data-nosnippet="" className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-x-6">
           <p className="lg:col-span-2">Цены и расчёты в каталоге предварительные. Наличие автомобиля, итоговая стоимость и условия доставки согласовываются перед заключением договора.</p>
           <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
@@ -171,7 +171,7 @@ body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-pr
 @media(min-width:1024px){body:has([data-dealer-context]) .ac-public-legal-footer-line,body:has(.dealer-profile) .ac-public-legal-footer-line{grid-template-columns:1fr;gap:12px}body:has([data-dealer-context]) .ac-public-legal-footer-line>p,body:has(.dealer-profile) .ac-public-legal-footer-line>p{grid-column:auto;max-width:850px}body:has([data-dealer-context]) .ac-public-legal-footer-line nav,body:has(.dealer-profile) .ac-public-legal-footer-line nav{justify-content:flex-start}}
 `}</style>
       {cookieOpen ? (
-        <div className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="avtocena-cookie-title" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCookieNotice(); }}>
+        <div data-nosnippet="" className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="avtocena-cookie-title" onMouseDown={(event) => { if (event.target === event.currentTarget) closeCookieNotice(); }}>
           <section className="max-h-[90vh] w-full max-w-[780px] overflow-y-auto rounded-[1.35rem] bg-[#18191f] text-[#e8e9ed] shadow-[0_30px_100px_rgba(0,0,0,.52)]">
             <header className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-white/10 bg-[#18191f]/[0.96] px-5 py-5 backdrop-blur sm:px-7">
               <h2 id="avtocena-cookie-title" className="text-xl font-bold leading-tight text-white sm:text-2xl">Условия использования файлов cookie</h2>

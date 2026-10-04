@@ -401,3 +401,16 @@ html[data-theme] .crm-root .crm-permission input[role="switch"]:disabled{opacity
  .crm-navigation a,.crm-navigation .crm-documents-button{flex:0 0 auto;min-height:40px;padding:9px 14px}
  .crm-event-people{flex:none}.crm-event-meta{gap:6px}.crm-event-status{max-width:none}
 }
+
+/* Separate reports use the full width; only their headings remain pinned. */
+.crm-analytics{min-width:0;padding:0;border:0;background:none}
+.crm-analytics-report{min-width:0;border:1px solid var(--ac-border);border-radius:16px;scroll-margin-top:var(--analytics-top,124px)}
+.crm-analytics-report-heading{position:sticky;top:var(--analytics-top,124px);z-index:20;background:var(--ac-surface);border-radius:15px;margin:0}
+.crm-analytics-report-heading button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:64px;padding:16px;text-align:left;font-weight:700;border-radius:15px}
+.crm-analytics-report-heading small{display:block;font-size:12px;line-height:1.4;font-weight:400;color:var(--ac-muted);margin-top:5px}
+.crm-analytics-report-heading svg{flex-shrink:0;transition:transform .15s}
+.crm-analytics-report[data-open="true"] .crm-analytics-report-heading svg{transform:rotate(180deg)}
+.crm-analytics-report-heading button:focus-visible{outline:2px solid var(--ac-text);outline-offset:-3px}
+.crm-analytics-report-body{padding:0 16px 8px}
+.crm-analytics-report-body li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;border-top:1px solid var(--ac-border);padding:12px 0;font-size:14px}
+.crm-analytics-report-body li>div{min-width:0;overflow-wrap:anywhere}
