@@ -103,7 +103,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
     ? "rounded-[1.6rem] p-4"
     : "w-full min-w-0 max-w-full overflow-hidden rounded-[1.35rem] px-2 py-3";
   const rail = variant === "desktop"
-    ? "grid grid-cols-5 gap-2"
+    ? "ac-currency-rates-grid grid grid-cols-5 gap-2"
     : "ac-hide-scrollbar flex w-full min-w-0 touch-auto gap-2 overflow-x-auto overscroll-x-contain";
 
   return <>

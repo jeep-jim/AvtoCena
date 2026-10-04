@@ -1,5 +1,4 @@
 'use client';
-import {ClientCityMode} from '../catalog/ClientCityMode';
 import {useSelectedCity} from '@/lib/location/selected-city';
 import {useState} from 'react';
 import {encodeShareDraft} from '@/lib/catalog/offer-share';
@@ -31,11 +30,11 @@ import {OfferPdfButton} from "@/components/catalog/OfferPdfButton";
 import { OfferCopyButton } from "@/components/catalog/OfferCopyButton";
 import type {DealerShowcase,SpecialOffer} from '@/lib/dealers/showcase-model';
 export type PublicOfferShowcase=Pick<DealerShowcase,"dealerId"|"citySlug"|"slug"|"name"|"logoLight"|"logoDark"|"profileEnabled"|"specialsEnabled"|"stockEnabled"|"pricing"|"offices"|"updatedAt">;
-export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false,canCopy=false,canPdf=false,items=[],markets}:{id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
+export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false,canCopy=false,localCitySelection=false,canPdf=false,items=[],markets}:{id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;localCitySelection?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
   const globalCity=useSelectedCity();
-  const [clientCityMode,setClientCityMode]=useState(initialCity!==undefined);
+  const privateCity=localCitySelection||initialCity!==undefined;
   const [quoteCity,setQuoteCity]=useState<string|null>(initialCity??null);
-  const city=clientCityMode ? quoteCity??globalCity : globalCity;
+  const city=privateCity ? quoteCity??globalCity : globalCity;
   const c = calculateSpecial(s, o, city);
   const stock=offerAvailability(o)==="stock";
   const office=stock?s.offices.find(item=>item.id===o.officeId):s.offices.find(item=>item.id===o.officeId)||s.offices[0];
@@ -126,8 +125,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
                 </p>
               )}
             </section>
-            {!stock&&canCopy&&<ClientCityMode value={clientCityMode} onChange={value=>{if(value)setQuoteCity(city);setClientCityMode(value);}}/>}
-            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!clientCityMode} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
+            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!privateCity} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
             {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
               <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>

@@ -332,7 +332,7 @@ export default function HomePageClient({ dealerGallery = buyers, specialRail, in
       </section>
       <div className="-mt-2 lg:mt-0"><BuyerGallery images={dealerGallery} /></div>
       {specialRail && <SpecialRail {...specialRail}/>}
-      <div className="mt-4 hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+      <div className="ac-home-services mt-4 hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
         <section className="ac-home-finance grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
           <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">
             <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
