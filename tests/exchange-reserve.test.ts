@@ -6,7 +6,7 @@ import {compactPricingSnapshot} from '../apps/web/lib/catalog/compact-pricing-sn
 import {resolveEffectiveMarketVersion} from '../apps/web/lib/effective-market-settings';
 import {validateMarketVersion} from '../apps/web/lib/settings-validation';
 
-test('all markets restore 2 percent reserve separately from exact seller conversion',()=>{
+test('engine keeps an explicit reserve while effective market policies set China 2.2 and Korea 3 percent',()=>{
  for(const marketId of ['japan','china','korea','uae','europe','georgia'] as const){
   const config={exchangeRateReservePercent:2,topAvtoCommissionRub:90000,securityDepositRub:160000,logisticsRub:250000};
   const q=calculateAvtocenaFromBusinessConfig({marketId,marketConfig:config,sourcePriceRub:1001396});
@@ -14,7 +14,7 @@ test('all markets restore 2 percent reserve separately from exact seller convers
   assert.equal(q.totalRub,1361424);
   assert.equal(q.snapshot.marketConfig.exchangeRateReservePercent,2);
   assert.equal(q.breakdown.at(-1)?.amountRub,20028);
-  assert.equal(resolveEffectiveMarketVersion(marketId,config).exchangeRateReservePercent,2);
+  assert.equal(resolveEffectiveMarketVersion(marketId,config).exchangeRateReservePercent,marketId==='china'?2.2:marketId==='korea'?3:2);
  }
  assert.equal(validateMarketVersion({currency:'KRW',exchangeRateReservePercent:2}).value.exchangeRateReservePercent,2);
 });
@@ -65,3 +65,20 @@ test('Japan restores reserve once and list/detail totals agree with a frozen his
   }
  }
 });
+
+ test('catalog and CRM use the same reserve policy even with historical settings',async()=>{
+ const {resolveCatalogMarketConfig}=await import('../apps/web/lib/catalog/estimated-market-config');
+ for(const marketId of ['japan','china','korea','uae','europe','georgia'] as const){
+  const expected=marketId==='china'?2.2:marketId==='korea'?3:2;
+  for(const old of [null,{exchangeRateReservePercent:2}]){
+   const crm=resolveEffectiveMarketVersion(marketId,old);
+   const catalog=resolveCatalogMarketConfig(marketId,old).config;
+   for(const config of [crm,catalog]){
+    assert.equal(config.exchangeRateReservePercent,expected);
+    const result=calculateAvtocenaFromBusinessConfig({marketId,marketConfig:config,sourcePriceRub:914909});
+    assert.equal(result.breakdown.find(row=>row.id==='exchange-reserve')?.amountRub,Math.round(914909*expected/100));
+    assert.equal(result.breakdown.find(row=>row.id==='car')?.amountRub,914909);
+   }
+  }
+ }
+ });
