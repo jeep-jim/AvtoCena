@@ -14,7 +14,19 @@ export function budgetPriceReplay(row:CatalogSearchProjection):Partial<CatalogSe
  if(row.market==='japan' || hasModificationSelection(row) || !(Number(row.totalRub)>0))return undefined;
  const keys=['sourcePrice','sourceCurrency','chinaPriceConversion','priceMode','calculationStatus','engineCc','powerHp','powerKw','icePowerKw','power30MinKw','power30MinKwByMotor','utilizationPowerKw','powertrainKind','powerDataSource','transportToBorderRub','productionDate','productionMonth','productionYear','vehicleCategory','tnVedCode','grossVehicleWeightKg','n1IceFuel','personalUseEligible','cardProjectionVersion','publicSpecificationVerified'];
  const replay:any=Object.fromEntries(keys.filter(key=>(row as any)[key]!==undefined).map(key=>[key,(row as any)[key]]));
- replay.calculationSnapshot=row.calculationSnapshot;
+ const snapshot=row.calculationSnapshot;
+ // The shared engine consumes inputs and the attested customs gate. Historical
+ // FX metadata, explanations and delivered-price ledgers are not replay inputs.
+ replay.calculationSnapshot=snapshot?.customsInput ? {
+  customsInput:snapshot.customsInput,
+  customs:snapshot.customs ? Object.fromEntries(['status','totalCustomsRub','knownCustomsRub','utilizationFeeRub','ageEstimated','productionReferenceDate'].filter(key=>(snapshot.customs as any)[key]!==undefined).map(key=>[key,(snapshot.customs as any)[key]])) : undefined,
+  sourcePriceRub:snapshot.sourcePriceRub,
+  missing:snapshot.missing?.length?snapshot.missing:undefined,
+  priceIncludesAllCustoms:snapshot.priceIncludesAllCustoms,
+  priceIncludesUtilizationFee:snapshot.priceIncludesUtilizationFee,
+  depositCostRub:snapshot.depositCostRub,
+  sourcePriceAdjustment:snapshot.sourcePriceAdjustment ? {policy:snapshot.sourcePriceAdjustment.policy}:undefined,
+ } : snapshot;
  return replay;
 }
 export function budgetReplayOffer(row:BudgetCountRow):CatalogSearchProjection {

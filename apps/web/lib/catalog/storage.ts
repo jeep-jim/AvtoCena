@@ -558,6 +558,7 @@ export function resetCatalogReadCachesForTests() {
   catalogCountCache.clear();
   budgetIndexCache.clear();
   liveBudgetBlockCache.clear();
+  liveBudgetReplayCache.clear();
   budgetCardCache.clear();
   filteredBudgetSelectionCache.clear();
   preparedProjectionRows = new WeakMap();
@@ -1760,7 +1761,7 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
   for(const row of chunk)blocks.set(row.id,block);
   chunks.push(chunk);
  }
- await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v2/${block}.json`),{generationId,items}));
+ await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v3/${block}.json`),{generationId,items}));
  const index=buildBudgetCountIndex(generationId,rows,blocks,3);
  // Versioned paths are append-only: never silently reuse an older immutable schema.
  // Readiness is published last. Missing/incomplete generations keep the original exact search.
@@ -1781,7 +1782,7 @@ async function currentSearchPrices(rows:CatalogSearchProjection[],generationId:s
  }
  return result;
 }
-async function currentBudgetBlock(generationId:string,version:1|2,block:number){
+async function currentBudgetBlock(generationId:string,version:1|2|3,block:number){
  return liveBudgetBlockCache.get(`${generationId}:v${version}:${block}`,async()=>{
   const part=await budgetCardCache.get(`${generationId}:v${version}:${block}`,()=>readIndex(generationId,`budget-cards-v${version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
   if(part.generationId!==generationId)return null;
@@ -1789,7 +1790,22 @@ async function currentBudgetBlock(generationId:string,version:1|2,block:number){
   return buildBudgetCountIndex(generationId,priced,new Map(priced.map(row=>[row.id,block])));
  });
 }
-const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
+const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
+async function currentBudgetReplay(index:BudgetCountIndex,market:string){
+ return liveBudgetReplayCache.get(`${index.generationId}:${market}`,async()=>{
+  const source=index.rows.filter(row=>row[0]===market);
+  const refreshed:BudgetCountIndex['rows']=[];
+  for(let start=0;start<source.length;start+=128){
+   const chunk=source.slice(start,start+128),replay=chunk.filter(row=>row[7]);
+   const originals=new Map(replay.map(row=>[row[5].id,row]));
+   const priced=await currentSearchPrices(replay.map(budgetReplayOffer),index.generationId);
+   const rebuilt=buildBudgetCountIndex(index.generationId,priced,new Map(replay.map(row=>[row[5].id,row[5].block])));
+   refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7]));
+  }
+  return refreshed;
+ });
+}
+const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive'];
@@ -1801,7 +1817,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
   if(!index || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
-  const cardVersion=index.version===1?1:2;
+  const cardVersion=index.version;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
@@ -1825,16 +1841,10 @@ async function readBudgetSelection(params:CatalogSearchParams){
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
   if(hasBudget && index.version===3){
-   const refreshed:BudgetCountIndex['rows']=[];
-   for(let start=0;start<candidates.length;start+=128){
-    const chunk=candidates.slice(start,start+128);
-    const replay=chunk.filter(row=>row[7]);
-    const originals=new Map(replay.map(row=>[row[5].id,row]));
-    const priced=await currentSearchPrices(replay.map(budgetReplayOffer),manifest.generationId);
-    const rebuilt=buildBudgetCountIndex(manifest.generationId,priced,new Map(replay.map(row=>[row[5].id,row[5].block])));
-    refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7]));
-   }
-   candidates=matchingBudgetIndex({...index,rows:refreshed},params,quotes);
+   const ids=new Set(candidates.map(row=>row[5].id));
+   const markets=[...new Set(candidates.map(row=>row[0]))];
+   const parts=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(pricedIndex,market));
+   candidates=matchingBudgetIndex({...index,rows:parts.flat().filter(row=>ids.has(row[5].id))},params,quotes);
   } else if(hasBudget){
    const ids=new Set(candidates.map(row=>row[5].id));
    const blocks=[...new Set(candidates.map(row=>row[5].block))];
@@ -1891,7 +1901,7 @@ export async function backfillCatalogBudgetCountIndex(){
  const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null);
  if(stored?.version!==3 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
   || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v3_not_verified");
- budgetIndexCache.clear();filteredBudgetSelectionCache.clear();
+ budgetIndexCache.clear();filteredBudgetSelectionCache.clear();liveBudgetReplayCache.clear();liveBudgetBlockCache.clear();
  return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
@@ -1940,7 +1950,7 @@ export async function searchOffersWithoutBudgetIndexForTests(params:CatalogSearc
     sortCatalogSearchRows(matching,params);
     const page=Math.max(1,Number(params.page||1));
     const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
-    return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:[]};
+    return {generationId,total:matching.length,page,pageSize,items:matching.slice((page-1)*pageSize,page*pageSize).map(publicOfferFromProjection),usedIndexShards:catalogMakeFilterValues(params.make).map(make=>`projection-brand/${catalogBrandReadModelKey(make)}.json`)};
   }
   return searchOffersStored(params,internalPageLimit);
 }

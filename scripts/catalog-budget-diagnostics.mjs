@@ -22,7 +22,7 @@ const started=performance.now();
 const index=JSON.parse(fs.readFileSync('/tmp/budget-v3.json','utf8'));
 console.log(JSON.stringify({phase:'parse',ms:Math.round(performance.now()-started),rssMb:Math.round(process.memoryUsage().rss/1048576)}));
 const original=storage.readJsonWithMeta.bind(storage);
-storage.readJsonWithMeta=async(key,fallback)=>key.endsWith('/budget-count-v3.json')?{found:true,value:index}:original(key,fallback);
+storage.readJsonWithMeta=async(key,fallback)=>key.endsWith('/budget-count-v3.json')?{found:true,value:index}:original(key.replace('/budget-cards-v3/','/budget-cards-v2/'),fallback);
 const {searchOffers,countCatalogOffers,searchOffersWithoutBudgetIndexForTests}=await import('../apps/web/lib/catalog/storage.ts');
 for(const market of ['korea','any']){
  const start=performance.now();const params={market,budgetTo:2000000,pageSize:24};const result=await searchOffers(params);
@@ -32,3 +32,5 @@ for(const market of ['korea','any']){
  const warm=performance.now();const count=await countCatalogOffers(params);console.log(JSON.stringify({market,count:count.total,warmMs:Math.round(performance.now()-warm)}));assert.equal(count.total,result.total);
  if(market==='korea'){const baseline=await searchOffersWithoutBudgetIndexForTests(params);assert.equal(baseline.total,result.total);assert.deepEqual(result.items.map(row=>row.id),baseline.items.map(row=>row.id));console.log('Korean exact full-projection parity passed');}
 }
+
+const lock=await readDataJson('catalog/import-lock.json',null);console.log(JSON.stringify({phase:'publisher-lock',lock}));
