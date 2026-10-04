@@ -1765,7 +1765,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null));
+  const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
   if(index?.version!==1||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
