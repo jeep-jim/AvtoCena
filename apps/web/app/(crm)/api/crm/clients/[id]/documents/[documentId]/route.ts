@@ -1,3 +1,4 @@
+import {canUseDocuments,workspaceClientsPath,canAccessDocumentClient,documentCompany} from "@/lib/document-workspace";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import {getCurrentUser,isCrmRole} from "@/lib/auth";
@@ -10,10 +11,10 @@ export const runtime="nodejs";
 export const dynamic="force-dynamic";
 export async function GET(request:Request,{params}:{params:Promise<{id:string;documentId:string}>}) {
  const user=await getCurrentUser();
- if(!user||!hasCrmPermission(user,"documents")) return new Response(null,{status:401});
+ if(!user||!await canUseDocuments(user)) return new Response(null,{status:401});
  const {id,documentId}=await params;
- const client=(await readChunkedDataJson<any>("clients/clients.json",[])).find(c=>c.id===id);
- if(!client||!canSeeLead(user,client)) return new Response(null,{status:404});
+ const client=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);
+ if(!client||!canAccessDocumentClient(user,client)) return new Response(null,{status:404});
  const doc:ClientDocument|undefined=client.documents?.find((d:ClientDocument)=>d.id===documentId);
  if(!doc||doc.purgeToken||documentExpired(doc)||!/^[a-f0-9-]{36}$/.test(documentId)) return new Response(null,{status:404});
  try {
@@ -36,12 +37,12 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string;do
 export async function PATCH(request:Request,{params}:{params:Promise<{id:string;documentId:string}>}) {
  if(!isCalculationOriginAllowed(request))return Response.json({error:"Недопустимый источник запроса."},{status:403});
  const actor=await getCurrentUser();
- if(!actor||!hasCrmPermission(actor,"documents"))return Response.json({error:"Войдите в CRM."},{status:401});
+ if(!actor||!await canUseDocuments(actor))return Response.json({error:"Войдите в CRM."},{status:401});
  const body=await request.json().catch(()=>null);
  if(!body||!["trash","restore","purge"].includes(body.action)||(body.action!=="restore"&&body.confirmed!==true))return Response.json({error:"Подтвердите удаление документа."},{status:400});
  const {id,documentId}=await params;
  try{
-  const client=(await readChunkedDataJson<any>("clients/clients.json",[])).find(c=>c.id===id);
+  const client=(await readChunkedDataJson<any>(workspaceClientsPath(actor),[])).find(c=>c.id===id);
   const document=client?.documents?.find((d:any)=>d.id===documentId);
   if(body.action==="purge")await purgeDocument(actor,id,documentId);
   else await changeDocumentState(actor,id,documentId,body.action);

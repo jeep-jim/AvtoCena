@@ -1,3 +1,4 @@
+import {canUseDocuments,workspaceClientsPath,canAccessDocumentClient,documentCompany} from "@/lib/document-workspace";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
 import {randomUUID} from "node:crypto";
@@ -11,10 +12,10 @@ export const dynamic="force-dynamic";
 export async function POST(request:Request,{params}:{params:Promise<{id:string}>}) {
   if(!isCalculationOriginAllowed(request)) return Response.json({error:"Недопустимый источник запроса."},{status:403});
   const user=await getCurrentUser();
-  if(!user||!hasCrmPermission(user,"documents")) return Response.json({error:"Войдите в CRM."},{status:401});
+  if(!user||!await canUseDocuments(user)) return Response.json({error:"Войдите в CRM."},{status:401});
   const {id}=await params;
-  const client=(await readChunkedDataJson<any>("clients/clients.json",[])).find(c=>c.id===id);
-  if(!client||!canSeeLead(user,client)) return Response.json({error:"Клиент не найден."},{status:404});
+  const client=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);
+  if(!client||!canAccessDocumentClient(user,client)) return Response.json({error:"Клиент не найден."},{status:404});
   if(Number(request.headers.get("content-length"))>MAX_CLIENT_FILE_BYTES+65536) return Response.json({error:"Максимальный размер файла — 5 МБ."},{status:413});
   const storage=getJsonStorage();let key="",stored=false;
   try {
@@ -26,8 +27,8 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
     if(!storage.putBinary || !storage.deleteBinary) throw new Error("storage");
     const payload=Buffer.from(JSON.stringify({data:prepared.data.toString("base64"),thumbnail:prepared.thumbnail?.toString("base64")}));
     await storage.putBinary(key,encryptClientDocument(payload,key),"application/octet-stream");stored=true;
-    const updated=await updateChunkedDataJson<any>("clients/clients.json",id,current=>{
-      if(!canSeeLead(user,current)) throw new Error("forbidden");
+    const updated=await updateChunkedDataJson<any>(workspaceClientsPath(user),id,current=>{
+      if(!canAccessDocumentClient(user,current)) throw new Error("forbidden");
       const documents:ClientDocument[]=current.documents||[];
       if(documents.length>=MAX_CLIENT_DOCUMENTS) throw new Error("limit");
       return {...current,documents:[...documents,document],documentsUpdatedAt:document.createdAt,documentsUpdatedByManagerId:user.id};

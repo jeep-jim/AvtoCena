@@ -3,13 +3,13 @@ import {lazy,Suspense,useEffect,useRef,useState} from "react";
 import {useRouter} from "next/navigation";
 import type {ClientDocument} from "@/lib/client-documents";
 const PdfPreview=lazy(()=>import("../catalog/OfferPdfPreview"));
-export function ClientDocuments({clientId,documents}:{clientId:string;documents:ClientDocument[]}) {
+export function ClientDocuments({clientId,documents,trashHref='/crm/leads?view=archive#document-trash',apiBase='/api/crm/clients'}:{clientId:string;documents:ClientDocument[];trashHref?:string;apiBase?:string}) {
  const router=useRouter(),dialog=useRef<HTMLDialogElement>(null),input=useRef<HTMLInputElement>(null);
  const [busy,setBusy]=useState(false),[message,setMessage]=useState(""),[error,setError]=useState(""),[preview,setPreview]=useState<ClientDocument|null>(null);
  const deepOpened=useRef("");
  useEffect(()=>{const id=new URLSearchParams(window.location.search).get("document");if(!id||deepOpened.current===id)return;const doc=documents.find(d=>d.id===id);if(doc){deepOpened.current=id;if(doc.hasThumbnail||doc.mime==="application/pdf")void openDocument(doc);document.getElementById(`document-${id}`)?.scrollIntoView({block:"center"});}},[documents]);
  const [pdf,setPdf]=useState<{blob:Blob;name:string}|null>(null),[opening,setOpening]=useState(false);
- const url=(doc:ClientDocument)=>`/api/crm/clients/${encodeURIComponent(clientId)}/documents/${doc.id}`;
+ const url=(doc:ClientDocument)=>`${apiBase}/${encodeURIComponent(clientId)}/documents/${doc.id}`;
  useEffect(()=>{if(preview)dialog.current?.showModal();},[preview]);
  async function openDocument(doc:ClientDocument) {
   if(doc.mime!=="application/pdf"){setPreview(doc);return;}
@@ -32,7 +32,7 @@ export function ClientDocuments({clientId,documents}:{clientId:string;documents:
     if(file.size>5*1024*1024)throw Error(`${file.name}: файл больше 5 МБ.`);
     setMessage(`Загружаем ${saved+1} из ${files.length}: ${file.name}`);
     const form=new FormData();form.set("file",file);
-    const response=await fetch(`/api/crm/clients/${encodeURIComponent(clientId)}/documents`,{method:"POST",body:form});
+    const response=await fetch(`${apiBase}/${encodeURIComponent(clientId)}/documents`,{method:"POST",body:form});
     const body=await response.json().catch(()=>({}));
     if(!response.ok)throw Error(`${file.name}: ${body.error||"не удалось загрузить файл"}`);
     saved++;
@@ -52,7 +52,7 @@ export function ClientDocuments({clientId,documents}:{clientId:string;documents:
    <div className="crm-client-file-info"><strong>{doc.name}</strong><small>{Math.max(1,Math.round(doc.size/1024))} КБ</small><div className="crm-file-actions"><a href={`${url(doc)}?download=1`}>Скачать</a><button type="button" disabled={busy} onClick={()=>void trash(doc)} aria-label={`Удалить ${doc.name}`}>Удалить</button></div></div>
   </article>)}</div>
   {!documents.length&&<p className="mt-4 text-sm text-[var(--ac-muted)]">Документы пока не прикреплены.</p>}
-  <a className="crm-trash-link" href="/crm/leads?view=archive#document-trash">Корзина документов →</a>
+  <a className="crm-trash-link" href={trashHref}>Корзина документов →</a>
   <dialog ref={dialog} className="crm-file-dialog" onClose={()=>setPreview(null)} aria-label="Просмотр документа">
    {preview&&<><header><strong>{preview.name}</strong><button type="button" aria-label="Закрыть просмотр" onClick={()=>dialog.current?.close()}>Закрыть ×</button></header><img src={url(preview)} alt={preview.name} /><a href={`${url(preview)}?download=1`} className="text-sm underline">Скачать файл</a></>}
   </dialog>
