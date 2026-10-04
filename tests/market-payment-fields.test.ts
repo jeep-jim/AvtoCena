@@ -23,7 +23,7 @@ test("each market saves separate amounts and derives the first payment, ignoring
     assert.equal(quote.breakdown.find(line => line.id === "security-deposit")?.amountRub, undefined);
     assert.equal(quote.breakdown.find(line => line.id === "car")?.amountRub, 1000000);
     const otherDeposit = calculateAvtocenaFromBusinessConfig({marketId: market, marketConfig: {...config, securityDepositRub: 60000}, sourcePriceRub: 1000000, customsRub: 400000});
-    assert.equal(otherDeposit.totalRub, quote.totalRub, "deposit changes allocation, never adds a duplicate expense");
+    assert.equal(otherDeposit.totalRub, quote.totalRub + 18000, "configured deposit changes the total once");
   }
 });
 

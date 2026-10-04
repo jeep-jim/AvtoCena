@@ -1,3 +1,4 @@
+import {includedDepositCost} from "./deposit-cost-projection";
 import { deliveryPricingBasis } from "./card-city-delivery";
 import { japanServiceCostBasis } from "./japan-service-pricing";
 import { che168GlobalPriceAdjustment } from "./china-owner-policy";
@@ -16,6 +17,7 @@ export function compactPricingSnapshot(offer: VehicleOffer) {
   if (!s?.customsInput) return {};
   const c = s.customs;
   return {
+    depositCostRub:includedDepositCost(s),
     deliveryPricingBasis: deliveryPricingBasis(s),
     customsInput: s.customsInput, eurRate: s.eurRate, sourcePriceRub: s.sourcePriceRub,
     missing: s.missing, priceIncludesAllCustoms: s.priceIncludesAllCustoms,

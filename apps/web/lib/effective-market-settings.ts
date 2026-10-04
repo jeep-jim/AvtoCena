@@ -119,3 +119,9 @@ export async function getEffectiveMarketsWithDefaults() {
     };
   });
 }
+
+/** Payment costs do not require a currency-rate lookup. */
+export async function getEffectiveDepositCosts():Promise<Record<string,number>> {
+  const raw = await getCachedMarketsSettings();
+  return Object.fromEntries(MARKET_IDS.map(id => [id, resolveEffectiveMarketVersion(id,selectActiveMarketVersion(raw.find(m=>m.id===id))).securityDepositRub]));
+}

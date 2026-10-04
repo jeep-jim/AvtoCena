@@ -23,7 +23,7 @@ export function MarketPaymentFields({ depositRub, commissionRub, marketId }: { d
     <label className={labelClass}>
       Первый платёж по договору, ₽
       <input name="contractInitialPaymentRub" type="number" readOnly value={valid && Number.isFinite(total) ? total : ""} className={inputClass} />
-      <span className="text-xs font-normal normal-case tracking-normal">Обеспечительный платёж + комиссия дилера. Уже входят в итог: предоплату не прибавляем повторно и не вычитаем из строки цены автомобиля.</span>
+      <span className="text-xs font-normal normal-case tracking-normal">Обеспечительный платёж и комиссия дилера добавляются к цене автомобиля по одному разу. Их оплата уменьшает остаток к оплате.</span>
     </label>
   </>;
 }

@@ -38,7 +38,7 @@ test("dealer layout relocates the advance and commission without charging the ad
  assert.equal(data.sections[0].rows.filter(r=>r.label.includes("Обеспечительный")).length,1);
  assert.equal(data.sections[1].rows.filter(r=>r.label.includes("Комиссия компании")).length,1);
  assert.equal(data.sections[2].rows.length,0);
- assert.match(offerPdfNotes(data)[0],/аванс в счёт услуг/);
+ assert.match(offerPdfNotes(data)[0],/включены в итоговую стоимость/);
  const notes=offerPdfNotes({...data,warnings:["Льготный утильсбор рассчитан как для первого ввоза физлицом для личного пользования."]});
  assert.ok(notes.some(n=>n.startsWith("Возможность применения")));
  assert.ok(notes.every(n=>!n.startsWith("Льготный утильсбор рассчитан")));

@@ -1,5 +1,4 @@
 import {CrmDateInput} from "../CrmDateInput";
-import { ContractPaymentSummary } from "@/components/catalog/ContractPaymentSummary";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { calculateCustomerParameterScenario, isOfficialCustomsCurrencyRate } from "@/lib/catalog/customs-pricing";
@@ -301,7 +300,6 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
           <details className="mt-3 rounded-2xl bg-white/[.035]">
             <summary className="cursor-pointer list-none px-4 py-3 text-sm font-black [&::-webkit-details-marker]:hidden">Развернуть структуру итоговой цены сайта</summary>
             <div className="border-t border-white/7 px-4 py-2">
-              <ContractPaymentSummary plan={snapshot.paymentPlan} />
               {business.breakdown.map((line: any) => (
                 <div key={line.id} className="flex items-start justify-between gap-4 border-b border-white/6 py-2.5 last:border-0">
                   <div>

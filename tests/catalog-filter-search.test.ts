@@ -57,7 +57,7 @@ test("all catalog filters use the projection when optional categorical shards ar
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/make/hyundai.json`), { force: true });
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/model/hyundai-avante-cn7.json`), { force: true });
 
-    const filters = { market: "korea", make: "Hyundai", model: "Avante (CN7)", hasPrice: "yes", budgetFrom: 2_000_000, budgetTo: 2_100_000, yearFrom: 2021, yearTo: 2021, mileageFrom: 60_000, mileageTo: 62_000, engineFrom: 1_500, engineTo: 1_600, powerFrom: 120, powerTo: 160, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan", pageSize: 10 } as const;
+    const filters = { market: "korea", make: "Hyundai", model: "Avante (CN7)", hasPrice: "yes", budgetFrom: 2_000_000, budgetTo: 2_300_000, yearFrom: 2021, yearTo: 2021, mileageFrom: 60_000, mileageTo: 62_000, engineFrom: 1_500, engineTo: 1_600, powerFrom: 120, powerTo: 160, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan", pageSize: 10 } as const;
     for (const [name, value] of Object.entries(filters)) {
       if (name === "pageSize") continue;
       const isolated = await searchOffers({ market: "korea", [name]: value, pageSize: 10 });

@@ -1,3 +1,4 @@
+import {withCurrentDepositCosts} from "./deposit-cost-projection";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { unstable_cache } from "next/cache";
@@ -32,7 +33,7 @@ const preview = unstable_cache(async (id: string, _revision: string, generationI
   const result = await calculateOfferWithCustomerParametersDetailed(offer, parameters);
   return result.ok && Number(result.calculation.totalRub) > 0
     ? { totalRub: result.calculation.totalRub, currencyRate:result.calculation.currencyRate, deliveryPricingBasis:result.calculation.deliveryPricingBasis, engineCc: parameters.engineCc, estimated: true, japanExportRestriction: assessJapanExportRestriction(offer) } : null;
-}, ["japan-delivered-preview-v8-bound-rate"], { revalidate: 900 });
+}, ["japan-delivered-preview-v9-deposit-cost"], { revalidate: 900 });
 
 // Stock refresh is independent of auction generations. Cache only the exact
 // current invoice/specifications/rate/settings combination, for at most a minute.
@@ -45,7 +46,7 @@ const greenPreview = unstable_cache(async (offer: VehicleOffer, _revision: strin
     deliveryPricingBasis: fresh.calculation.deliveryPricingBasis, engineCc: parameters.engineCc,
     estimated: true, japanExportRestriction: assessJapanExportRestriction(offer),
   } : null;
-}, ["green-cif-preview-v1"], { revalidate: 60 });
+}, ["green-cif-preview-v2-deposit-cost"], { revalidate: 60 });
 
 export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffer>>(offers: T[], configuration: unknown): Promise<T[]> {
   const result = [...offers];
@@ -98,6 +99,7 @@ export async function japanSearchQuotes(generationId: string) {
   });
 }
 export async function attachJapanSearchValues<T extends {id:string;market:string;updatedAt?:string;sourcePrice?:number|null;sourceCurrency?:string|null}>(rows:T[], generationId:string):Promise<T[]> {
+  rows=await withCurrentDepositCosts(rows);
   if(!rows.some(row=>row.market==="japan"))return rows;
   const quotes=await japanSearchQuotes(generationId);
   return rows.map(row=>{

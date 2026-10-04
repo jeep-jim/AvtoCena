@@ -10,7 +10,7 @@ import {applyJapanServiceCosts,japanServiceCostBasis} from '../apps/web/lib/cata
 test('retired CRM values cannot enter a new price, percent base, or saved settings',()=>{
  const config:any={currency:'JPY',securityDepositRub:31000,topAvtoCommissionRub:39000,exportExpensesRub:100000,percentExpenses:[{id:'handling',title:'Услуга',percent:10}]};
  const q=calculateAvtocenaFromBusinessConfig({marketId:'japan',sourcePriceRub:1000000,marketConfig:config});
- assert.equal(q.totalRub,1039000*1.1);
+ assert.equal(q.totalRub,1039000*1.1+31000);
  assert.equal(q.breakdown.some(l=>l.id==='export'),false);
  assert.equal('exportExpensesRub' in q.snapshot.marketConfig,false);
  assert.equal(q.paymentPlan.contractInitialPaymentRub,70000);

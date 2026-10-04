@@ -45,6 +45,9 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
     id: "car", title: "Цена автомобиля", amountRub: carPriceRub,
     kind: "car", amountType: "manual", source: "vehicle",
   });
+  // Owner rule 2026-10-04: this amount is additional to the seller price.
+  // A distinct ID keeps old advances split out of the vehicle price distinguishable.
+  addLine(lines, { id: "contract-services", title: "Обеспечительный платёж", amountRub: numberOrZero(config.securityDepositRub), kind: "deposit", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "broker", title: "Брокер", amountRub: numberOrZero(config.brokerRub), kind: "service", amountType: "fixed", source: "market_config" });
@@ -75,6 +78,7 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   // source-specific correction; otherwise a 2% price normalization would
   // silently alter unrelated business charges as well.
   const subtotalBeforePercent = lines.reduce((sum, line) => sum + line.amountRub, 0)
+    - numberOrZero(config.securityDepositRub)
     - (Number.isFinite(automaticAdjustmentRub) ? automaticAdjustmentRub : 0);
   for (const expense of config.percentExpenses || []) {
     const amountRub = Math.round(subtotalBeforePercent * numberOrZero(expense.percent) / 100);
@@ -110,7 +114,7 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   };
 }
 
-/** Payments allocate an existing total; they must never be summed into its cost lines. */
+/** The initial payment settles costs already included once in the total. */
 export function businessPaymentPlan(marketId: string, config: {securityDepositRub?: number | null; topAvtoCommissionRub?: number | null}, totalRub: number) {
   const securityDepositRub = numberOrZero(config.securityDepositRub);
   const commissionRub = numberOrZero(config.topAvtoCommissionRub);

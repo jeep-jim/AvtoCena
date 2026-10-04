@@ -17,7 +17,7 @@ test("full car price and payment schedule preserve the vehicle cost and total", 
     },
   });
 
-  assert.equal(result.totalRub, 1_590_000);
+  assert.equal(result.totalRub, 1_750_000);
   assert.equal(result.breakdown.find((line) => line.id === "car")?.amountRub, 1_000_000);
   assert.equal(result.breakdown.find((line) => line.id === "security-deposit")?.amountRub, undefined);
   assert.equal(result.breakdown.find((line) => line.id === "car")?.note, undefined);
@@ -35,7 +35,7 @@ test("Japan first payment keeps 31k deposit plus 39k commission without double c
     },
   });
 
-  assert.equal(result.totalRub, 1_339_000);
+  assert.equal(result.totalRub, 1_370_000);
   assert.equal(
     (result.snapshot.marketConfig.securityDepositRub || 0)
       + (result.breakdown.find((line) => line.id === "topavto-commission")?.amountRub || 0),

@@ -12,6 +12,7 @@ function fixture(t:any,landing:any) {
  const reads:string[]=[];
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
   reads.push(file);
+  if(file==='markets/markets.json')return {found:true,value:[]};
   if(file==='catalog/manifest.json')return {found:true,value:{generationId:'test',markets:{korea:{count:rows.length}}}};
   if(file==='catalog/public/facets.json')return {found:false,value:{generationId:''}};
   if(file===catalogMarketLandingPath('test','korea'))return {found:!!landing,value:landing};

@@ -1,3 +1,4 @@
+import {includedDepositCost} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate} from './reviewed-source-duplicates';
 import {deliveryPricingBasis,priceCardForCity,type DeliveryPricingBasis} from './card-city-delivery';
 import {matchesJapanPreviewInput} from './japan-preview-inputs';
@@ -6,7 +7,7 @@ import type {CatalogSearchParams} from './types';
 import type {CatalogSearchProjection} from './storage';
 type JapanIdentity={id:string;updatedAt?:string;sourcePrice:number|null;sourceCurrency:string|null};
 export type BudgetMetadata=Pick<CatalogSearchProjection,'id'|'make'|'model'|'year'|'mileageKm'|'bodyType'|'fuel'|'transmission'|'drive'|'sourceGroup'|'auctionDate'|'sourcePublishedAt'|'firstSeenAt'|'updatedAt'> & {block:number};
-export type BudgetCountRow=[market:string,totalRub:number,basis:DeliveryPricingBasis|null,japan:JapanIdentity|null,seller:boolean,metadata:BudgetMetadata];
+export type BudgetCountRow=[market:string,totalRub:number,basis:DeliveryPricingBasis|null,japan:JapanIdentity|null,seller:boolean,metadata:BudgetMetadata,depositCostRub?:number];
 export type BudgetCountIndex={version:1|2;filterVersion?:1;generationId:string;sourceRows:number;rows:BudgetCountRow[];otherRows?:BudgetCountRow[]};
 /** Input must be the same admitted, prepared rows used by ordinary search. */
 export function buildBudgetCountIndex(generationId:string,rows:CatalogSearchProjection[],blocks:Map<string,number>=new Map()):BudgetCountIndex {
@@ -16,7 +17,7 @@ export function buildBudgetCountIndex(generationId:string,rows:CatalogSearchProj
   const total=Number(row.totalRub||0);
   const target=hasModificationSelection(row)||(!(total>0)&&row.market!=='japan')?otherRows:compact;
   target.push([row.market,total,deliveryPricingBasis(row.calculationSnapshot)||null,
-   row.market==='japan'?{id:row.id,updatedAt:row.updatedAt,sourcePrice:row.sourcePrice??null,sourceCurrency:row.sourceCurrency??null}:null,row.catalogPricingMode==='seller', {id:row.id,make:row.make,model:row.model,year:row.year,mileageKm:row.mileageKm,bodyType:row.bodyType,fuel:row.fuel,transmission:row.transmission,drive:row.drive,sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt,block:blocks.get(row.id)??0}]);
+   row.market==='japan'?{id:row.id,updatedAt:row.updatedAt,sourcePrice:row.sourcePrice??null,sourceCurrency:row.sourceCurrency??null}:null,row.catalogPricingMode==='seller', {id:row.id,make:row.make,model:row.model,year:row.year,mileageKm:row.mileageKm,bodyType:row.bodyType,fuel:row.fuel,transmission:row.transmission,drive:row.drive,sourceGroup:row.sourceGroup,auctionDate:row.auctionDate,sourcePublishedAt:row.sourcePublishedAt,firstSeenAt:row.firstSeenAt,updatedAt:row.updatedAt,block:blocks.get(row.id)??0},includedDepositCost(row.calculationSnapshot)]);
  }
  return {version:2,filterVersion:1,generationId,sourceRows:rows.length,rows:compact,otherRows};
 }

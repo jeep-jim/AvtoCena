@@ -7,7 +7,6 @@ import { OfferCopyButton } from "./OfferCopyButton";
 import { OfferPdfButton } from "./OfferPdfButton";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 
-import { ContractPaymentSummary } from "./ContractPaymentSummary";
 import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calculation";
 import { missingCustomerFields } from "../../lib/catalog/missing-customer-fields";
 import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
@@ -203,7 +202,6 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,c
     </div> : null}
    </summary>
    {isGreenCornerOffer(priceIdentity) ? <p className="px-4 pb-3 text-xs text-[var(--ac-muted)]">Инвойс — сумма счёта на автомобиль на условиях CIF: стоимость, страхование и фрахт до порта назначения. Доставка до границы уже включена. Рубли — по курсу АТБ, таможня — от инвойса в иенах по курсу ЦБ.</p> : null}
-   <ContractPaymentSummary plan={result.paymentPlan} />
    <div className="px-4 pb-4">
     <dl className="ac-price-costs text-xs">{detailLines.map((row,i)=>{const note=visibleBreakdownNote(row.note);return <div key={`${row.id}-${i}`} data-price-line={row.id} data-price-amount-rub={row.amountRub} className="ac-cost-row gap-y-1"><dt><span className="ac-cost-label">{row.label||row.title||row.id}</span>{note ? <p className="mt-1 text-[11px] font-normal text-[var(--ac-muted)]">{note}</p> : null}</dt><dd className="ac-cost-amount">{Math.round(row.amountRub).toLocaleString("ru-RU")} ₽</dd>{/utilization|утил/i.test(`${row.id} ${row.title||row.label||""}`) ? <div className="col-span-2"><RecyclingFeeHelp info={powerInfo} /></div> : null}</div>})}</dl>
    </div>

@@ -258,6 +258,8 @@ try{
    assert.match(await page.locator('.ac-price').first().innerText(),/2[\s\u00a0]500[\s\u00a0]000/);
    await page.getByText('Структура цены',{exact:true}).first().click();
    assert.ok(await page.getByText('Обеспечительный платёж',{exact:true}).isVisible());
+   assert.equal(await page.locator('[data-price-line="contract-services"]').count(),1,'payment is shown once');
+   assert.equal(await page.locator('[data-price-amount-rub]').evaluateAll(rows=>rows.reduce((sum,row)=>sum+Number(row.dataset.priceAmountRub),0)),2500000,'visible expense rows equal the saved total');
    const power=page.locator('[data-parameter-editor] > summary').nth(3);await power.click();
    await page.getByRole('spinbutton',{name:'Мощность, л.с.',exact:true}).fill('150');await page.keyboard.press('Escape');await page.waitForTimeout(850);
    const button=page.getByRole('button',{name:'Применить к расчёту для клиента'});

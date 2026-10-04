@@ -5,7 +5,7 @@ export type DeliveryPricingBasis = { subtotalRub: number; deliveryRub: number; p
 export function deliveryPricingBasis(snapshot: any): DeliveryPricingBasis | undefined {
  const lines = snapshot?.breakdown;
  if (!Array.isArray(lines)) return snapshot?.deliveryPricingBasis;
- const subtotalRub = lines.filter((line:any)=>line.amountType !== "percent" && line.id !== "exchange-reserve")
+ const subtotalRub = lines.filter((line:any)=>line.amountType !== "percent" && line.id !== "exchange-reserve" && line.id !== "contract-services")
   .reduce((sum:number,line:any)=>sum + Number(line.amountRub || 0),0) - Number(snapshot.sourcePriceAdjustment?.adjustmentRub || 0);
  const deliveryRub = lines.filter((line:any)=>line.id === "rf-delivery").reduce((sum:number,line:any)=>sum + Number(line.amountRub || 0),0);
  const percents = (snapshot.marketConfig?.percentExpenses || []).map((expense:any)=>Math.max(0,Number(expense.percent) || 0));
