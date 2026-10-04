@@ -128,10 +128,11 @@ export function DealerEditor({
       if (global) setF(result);
       else {
         // Keep edits made while this request was in flight and save them next.
-        const next=mergeShowcaseChanges(submitted,latest.current,result).value;
-        base.current=result;onSaved?.(result);latest.current=next;setS(next);setConflict(null);failed.current="";
-        try{if(JSON.stringify(next)===JSON.stringify(result))sessionStorage.removeItem(draftKey);
-        else sessionStorage.setItem(draftKey,JSON.stringify({value:next,base:result}));}catch{}
+        base.current=result;onSaved?.(result);
+        // Apply the response after any queued field edits, including edits whose
+        // render has not committed yet. The draft effect persists the result.
+        setS(current=>mergeShowcaseChanges(submitted,current,result).value);
+        setConflict(null);failed.current="";
       }
       setMessage(draft ? "Черновик сохранён. Автомобиль не опубликован." : "");
     } catch (e) {
