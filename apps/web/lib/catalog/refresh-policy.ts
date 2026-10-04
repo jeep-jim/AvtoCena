@@ -39,3 +39,8 @@ export function observeCatalogOffer<T extends VehicleOffer>(offer: T, observedAt
   if (!Number.isFinite(Date.parse(observedAt))) throw new Error("catalog_observation_date_invalid");
   return { ...offer, operational: { ...offer.operational, lastSeenAt: observedAt } };
 }
+/** A dated expiry is a policy removal, not an unexplained parser regression or proof of sale. */
+export function catalogOfferRetentionExpired(offer:Partial<VehicleOffer>,now=Date.now()){
+ const freshness=catalogOfferFreshness(offer);
+ return freshness>0&&now-freshness>catalogMarketRetentionMs(String(offer.market));
+}

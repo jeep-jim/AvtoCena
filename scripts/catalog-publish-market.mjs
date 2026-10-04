@@ -23,7 +23,7 @@ const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("..
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
-const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
+const { catalogOfferFreshness, catalogOfferWithinRetention, catalogOfferRetentionExpired, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 const { catalogGenerationId, compactPublicStorageOffer, persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketMaintenanceOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -630,7 +630,11 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
+const expiredPublicIds = new Set(currentMarketRows.filter(row => catalogOfferRetentionExpired(row)).map(row=>row.id));
 const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)
+  // The same dated 14/30-day policy already removed these candidates above.
+  // Keeping them in the safety baseline made legitimate expiry block all future publication.
+  || expiredPublicIds.has(row.id)
   // Explicit owner price exclusion, not a missing field or failed network request.
   || Math.max(Number(row.totalRub)||0,Number(row.sellerPriceRub)||0,Number(row.calculationSnapshot?.sourcePriceRub)||0)>15_000_000));
 const replaceInternalSourceIds = new Set([
@@ -832,6 +836,7 @@ const report = {
       retainedCandidates: retainedCandidateCount,
       previousRetainedCount,
       previousPublicCount,
+      expiredPublicCount: expiredPublicIds.size,
       nextPublicCount,
       publicCountGuard,
       minimumPublicRetentionRatio,

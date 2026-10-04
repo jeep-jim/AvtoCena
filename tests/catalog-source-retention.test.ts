@@ -59,3 +59,14 @@ test('current intake completion is recognized, but mixed incomplete reports are 
  assert.equal(catalogSourceRefreshStates([{report:{sources:[source]}}]).dubicars_uae_exact.authoritative,true);
  assert.equal(catalogSourceRefreshStates([{report:{sources:[source,{...source,stopReason:'blocked'}]}}]).dubicars_uae_exact.authoritative,false);
 });
+
+import {catalogOfferRetentionExpired} from '../apps/web/lib/catalog/refresh-policy';
+import {catalogPublicCountGuard} from '../scripts/lib/catalog-public-count-guard.mjs';
+test('dated policy expiry is removable without weakening protection for unobserved active inventory',()=>{
+ assert.equal(catalogOfferRetentionExpired(offer('encar_direct',15),now),true);
+ assert.equal(catalogOfferRetentionExpired(offer('encar_direct',13),now),false);
+ assert.equal(catalogOfferRetentionExpired({...offer('encar_direct',15),updatedAt:'invalid'},now),false);
+ assert.equal(catalogOfferRetentionExpired({...offer('encar_direct',15),market:'japan'},now),false);
+ assert.equal(catalogPublicCountGuard({encar_direct:100},{encar_direct:20},{encar_direct:80},.9).ok,true);
+ assert.equal(catalogPublicCountGuard({encar_direct:100},{encar_direct:20},{},.9).ok,false);
+});
