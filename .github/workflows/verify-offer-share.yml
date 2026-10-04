@@ -1,7 +1,16 @@
 name: Verify offer sharing
 on:
-  push:
-    branches: [fix/offer-share-summary-20261001]
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/*Share*'
+      - 'apps/web/lib/catalog/*share*'
+      - 'apps/web/lib/catalog/offer-metadata.ts'
+      - 'apps/web/lib/telegram-miniapp.ts'
+      - 'apps/web/app/api/share/**'
+      - 'apps/web/app/(public)/s/**'
+      - 'tests/*share*'
+      - 'tests/browser/offer-share*'
+      - '.github/workflows/verify-offer-share.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,9 +25,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/staff-avatar-presence-url.test.ts tests/offer-navigation-performance.test.ts tests/catalog-card-contract.test.ts tests/catalog-editable-power-scenario.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/short-share.test.ts tests/staff-avatar-presence-url.test.ts tests/offer-navigation-performance.test.ts tests/catalog-card-contract.test.ts tests/catalog-editable-power-scenario.test.ts
       - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
       - name: Check native sharing, clipboard and mini-app
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs

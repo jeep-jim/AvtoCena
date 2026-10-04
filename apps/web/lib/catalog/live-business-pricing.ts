@@ -1,3 +1,4 @@
+import {koreaIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice,withChinaCnyPrices} from "./china-cny-price";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
@@ -103,10 +104,11 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
       ...(offer.powertrainKind === 'combustion' && offer.utilizationPowerKw === offer.powerKw && offer.powerKw
         ? {powerHp:offer.powerHp,powerKw:offer.powerKw,icePowerKw:offer.icePowerKw,utilizationPowerKw:offer.utilizationPowerKw} : {})};
     const commercial = inputs.vehicleCategory === "N1" || String(inputs.tnVedCode || "").replace(/\D/g, "").startsWith("8704");
-    if (commercial) inputs.customsValueRub = snapshotSourcePriceRub(offer) + Number(resolved.config.logisticsRub || 0);
+    const includeTransport = commercial || koreaIncludesLogistics(market, inputs);
+    if (includeTransport) inputs.customsValueRub = snapshotSourcePriceRub(offer) + Number(resolved.config.logisticsRub || 0);
     const customs = calculateRussiaCustomsForIndividual(inputs);
     snapshot = {...snapshot,customs,customsInput:inputs,missing:customs.missing,customsCompleteness:customs.status,
-      customsValue:{...snapshot.customsValue,vehiclePriceRub:snapshotSourcePriceRub(offer),totalRub:inputs.customsValueRub,...(commercial ? {transportToBorderRub:resolved.config.logisticsRub,transportExcludedFromCustomsValueRub:0} : {})},
+      customsValue:{...snapshot.customsValue,vehiclePriceRub:snapshotSourcePriceRub(offer),totalRub:inputs.customsValueRub,transportIncludedInCustomsValue:includeTransport,transportToBorderRub:Number(resolved.config.logisticsRub || 0),transportExcludedFromCustomsValueRub:includeTransport ? 0 : Number(resolved.config.logisticsRub || 0)},
       warnings:uniqueText([...(snapshot.warnings || []),...customs.warnings]),
       priceIncludesAllCustoms:customs.status === "ready",priceIncludesUtilizationFee:customs.status === "ready"};
     offer = {...offer,calculationSnapshot:snapshot} as T;

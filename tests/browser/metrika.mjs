@@ -107,7 +107,7 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[];
 try{
- for(const [width,theme] of [[390,'light'],[1440,'light'],[1440,'dark']]){
+ for(const [width,theme] of [[320,'light'],[390,'light'],[390,'dark'],[1440,'light'],[1440,'dark']]){
   const context=await browser.newContext({viewport:{width,height:900}});
   await context.route('https://mc.yandex.ru/**',route=>route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.__ymCalls||[];var q=window.ym?.a||[];window.ym=(...args)=>{window.__ymCalls.push(args);if(args[1]==='getClientID')args[2]('1234567890123456789');};for(var args of q)window.ym(...args);`}));
   const submitted=[];await context.route('**/api/leads',route=>{submitted.push(route.request().postDataJSON());return route.fulfill({json:{ok:true}});});
@@ -116,9 +116,9 @@ try{
   await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await page.getByRole('complementary',{name:'Выбор аналитики'}).waitFor();
   assert.equal(await page.locator('#yandex-metrika-112098062').count(),0);
-  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y+noticeBox.height-page.viewportSize().height)<2,'notice is at viewport bottom');assert.ok(noticeBox.height<150,'compact mobile notice');}
+  const noticeBox=await page.locator('.ac-analytics-choice').boundingBox();if(width<768){assert.ok(Math.abs(noticeBox.y+noticeBox.height-page.viewportSize().height+10)<2,'notice floats 10px above viewport bottom');assert.ok(noticeBox.height<150,'compact mobile notice');}
   await page.screenshot({path:out+'/notice-'+width+'-'+theme+'.png'});
-  await page.getByRole('button',{name:'Понятно',exact:true}).click();
+  await page.getByRole('button',{name:'Хорошо',exact:true}).click();
   await page.waitForFunction(()=>window.__ymCalls?.some(c=>c[1]==='init'));
   const calls=await page.evaluate(()=>window.__ymCalls);
   assert.equal(calls.filter(c=>c[1]==='init').length,1);
@@ -163,7 +163,7 @@ try{
  await slow.route('https://mc.yandex.ru/**',async route=>{await gate;await route.fulfill({contentType:'text/javascript',body:`window.__ymCalls=window.ym?.a||[];`});});
  const p=await slow.newPage();await p.goto(origin,{waitUntil:'domcontentloaded'});
  assert.equal(await p.locator('.ac-city-notice').count(),0);
- await p.getByRole('button',{name:'Понятно',exact:true}).click();
+ await p.getByRole('button',{name:'Хорошо',exact:true}).click();
  await p.getByRole('button',{name:'Настройки cookie',exact:true}).click();
  await p.getByRole('button',{name:'Отключить аналитику',exact:true}).click();
  release();await p.waitForFunction(()=>Array.isArray(window.__ymCalls));
