@@ -25,9 +25,13 @@ jobs:
       - name: Check desktop and mobile
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat-rooms.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: site-chat-screenshots
-          path: artifacts/site-chat/*.png
+          path: |
+            artifacts/site-chat/*.png
+            artifacts/site-chat-rooms/*.png
