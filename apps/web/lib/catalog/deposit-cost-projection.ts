@@ -13,8 +13,8 @@ export function applyDepositToProjection<T extends {market?:string;totalRub?:num
   calculationSnapshot:{...snapshot,depositCostRub:deposit,...(breakdown?{breakdown}:{}),...(snapshot.serviceCostBasis?{serviceCostBasis:{...snapshot.serviceCostBasis,securityDepositCostRub:deposit}}:{})}};
 }
 export async function currentDepositCosts():Promise<Record<string,number>> {
- const {getEffectiveMarketsWithDefaults}=await import('../effective-market-settings');
- return Object.fromEntries((await getEffectiveMarketsWithDefaults()).map(m=>[m.id,Math.max(0,Number(m.effectiveVersion?.securityDepositRub)||0)]));
+ const {getEffectiveDepositCosts}=await import('../effective-market-settings');
+ return getEffectiveDepositCosts();
 }
 export async function withCurrentDepositCosts<T extends Parameters<typeof applyDepositToProjection>[0]>(rows:T[]):Promise<T[]> {
  const costs=await currentDepositCosts();
