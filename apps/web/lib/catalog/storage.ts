@@ -1757,23 +1757,31 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
 }
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
- if(!(params.budgetFrom || params.budgetTo) || params.make || params.model)return null;
+ const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
+ const metadataFields=['yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive'];
+ const metadataQuery=(hasBudget || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
+ if(params.make || params.model || (!hasBudget && !metadataQuery))return null;
  const manifest=await readManifest();
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null));
-  if(index?.version!==1||index.generationId!==manifest.generationId)return null;
+  if(index?.version!==1||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
-  const quotes=(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
+  const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
   // Older indexes keep the exact card matcher until the derived index is rebuilt.
-  const candidates=matchingBudgetIndex(index,params,quotes).filter(row=>
+  const sourceRows=hasBudget?matchingBudgetIndex(index,params,quotes):[...index.rows,...index.otherRows!];
+  const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
+  const candidates=sourceRows.filter(row=>
+   (!params.market || params.market==='any' || same(row[0],params.market))
+   && matchesFuelFilter(row[5].fuel,params.fuel)
+   && (!params.bodyType || same(row[5].bodyType,params.bodyType))
+   && (!params.transmission || same(row[5].transmission,params.transmission))
+   && (!params.drive || same(row[5].drive,params.drive)) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
-  const {yearFrom:_yearFrom,yearTo:_yearTo,...withoutYear}=params;
-  const remaining=index.filterVersion===1?{...withoutYear,mileageFrom:undefined,mileageTo:undefined}:withoutYear;
-  if(isBudgetCountQuery(remaining))return {generationId:manifest.generationId,rows:candidates};
+  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -1806,7 +1814,8 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
  if(visible.some(row=>!byId.has(row.id)))return null;
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
- const cards=await attachJapanSearchValues(visible.map(row=>byId.get(row.id)!),selected.generationId);
+ const visibleCards=visible.map(row=>byId.get(row.id)!);
+ const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v1/${block}.json`)};
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
