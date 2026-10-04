@@ -3,10 +3,12 @@ import fs from 'node:fs/promises';
 import {recentHealthyStorageMaintenance,CATALOG_STORAGE_LIMIT_BYTES,CATALOG_STORAGE_HEADROOM_BYTES} from './lib/catalog-storage-budget.mjs';
 const {mutateDataJson,getJsonStorage,readDataJson,writeDataJson}=await import('../apps/web/lib/data.ts');
 const minimumIntervalMs=Math.max(0,Number(process.env.CATALOG_STORAGE_MAINTENANCE_MIN_INTERVAL_MS||0));
+let observedBytes=null;
 if(minimumIntervalMs>0){
   const previous=await readDataJson('catalog/storage-maintenance.json',null);
   const inventory=await getJsonStorage().listBucketObjects('');
   const currentBytes=inventory.reduce((sum,row)=>sum+Math.max(0,Number(row.size)||0),0);
+  observedBytes=currentBytes;
   if(recentHealthyStorageMaintenance(previous,Date.now(),minimumIntervalMs,currentBytes)){
     const report={...previous,skipped:true,reason:'recent_healthy_maintenance',currentBytes};
     await fs.writeFile('catalog-storage-maintenance.json',JSON.stringify(report,null,2));
@@ -29,7 +31,22 @@ for (;;) {
     });
     break;
   } catch(error) {
-    if(!String(error?.message||error).startsWith('catalog_publish_locked:') || Date.now()>=deadline)throw error;
+    if(!String(error?.message||error).startsWith('catalog_publish_locked:'))throw error;
+    if(Date.now()>=deadline){
+      if(observedBytes===null){
+        const inventory=await getJsonStorage().listBucketObjects('');
+        observedBytes=inventory.reduce((sum,row)=>sum+Math.max(0,Number(row.size)||0),0);
+      }
+      const report={checkedAt:new Date().toISOString(),deferred:true,reason:'catalog_writer_busy',
+        currentBytes:observedBytes,deletedObjects:0,limitBytes:CATALOG_STORAGE_LIMIT_BYTES,
+        headroomBytes:CATALOG_STORAGE_HEADROOM_BYTES,
+        ok:observedBytes<CATALOG_STORAGE_LIMIT_BYTES-CATALOG_STORAGE_HEADROOM_BYTES};
+      const reportJson=JSON.stringify(report,null,2);
+      await fs.writeFile('catalog-storage-maintenance.json',reportJson);
+      await fs.writeFile(process.env.CATALOG_STORAGE_CLEANUP_REPORT||'catalog-storage-cleanup-report.json',reportJson);
+      console.log(JSON.stringify(report));
+      process.exit(0);
+    }
     console.log('Storage maintenance waiting for active catalog operation');
     await new Promise(resolve=>setTimeout(resolve,Math.min(15000,deadline-Date.now())));
   }
