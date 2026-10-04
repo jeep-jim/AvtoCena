@@ -4,12 +4,12 @@ import { useSyncExternalStore } from "react";
 export const CITY_CHANGED_EVENT = "avtocena:city-changed";
 export function readSelectedCity() {
  if (typeof window === "undefined") return "";
- const query = new URLSearchParams(window.location.search).get("city");
- if (query !== null) return query.trim();
  try {
   const cookie = document.cookie.split(";").map(v=>v.trim()).find(v=>v.startsWith("avtocena_city="));
   if (cookie) return decodeURIComponent(cookie.slice("avtocena_city=".length)).trim();
-  return localStorage.getItem("avtocena_city") || "";
+  const stored=localStorage.getItem("avtocena_city");
+  if(stored!==null)return stored.trim();
+  return new URLSearchParams(window.location.search).get("city")?.trim() || "";
  } catch { return ""; }
 }
 function subscribe(notify:()=>void) {

@@ -47,22 +47,23 @@ export async function readSavedPreviewIndex() {
  return cache.get("current",async()=>{
   const index=await readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}});
   const entries={...index.entries};
-  const legacy=Object.entries(entries).filter(([,entry])=>entry.preview.deliveryCity || entry.preview.parameters.deliveryCity || entry.market==="china");
-  if(legacy.length){
+  const ids=Object.keys(entries);
+  if(ids.length){
    const {getOfferFromCurrentShard}=await import("./storage");
-   await Promise.all(legacy.map(async([id])=>{
-    const offer=await getOfferFromCurrentShard(id);
-    const record=offer?await getSavedOfferCalculation(offer):null;
-    const entry=record && offer?savedPreviewEntry(record,offer):null;
-    if(entry)entries[id]=entry;else delete entries[id];
+   const {getGreenCornerOffer}=await import("./green-corner");
+   let cursor=0;
+   // Only saved scenarios are refreshed, once per cached batch; bound storage
+   // and calculation concurrency even when many managers have saved quotes.
+   await Promise.all(Array.from({length:Math.min(4,ids.length)},async()=>{
+    while(cursor<ids.length){
+     const id=ids[cursor++];
+     const offer=/^green-\d+$/.test(id)?await getGreenCornerOffer(id):await getOfferFromCurrentShard(id);
+     if(!offer){delete entries[id];continue;}
+     const record=await getSavedOfferCalculation(offer);
+     const entry=record?savedPreviewEntry(record,offer):null;
+     if(entry)entries[id]=entry;else delete entries[id];
+    }
    }));
-  }
-  const {getEffectiveMarketsWithDefaults} = await import("../effective-market-settings");
-  const configs = new Map((await getEffectiveMarketsWithDefaults()).map(m=>[m.id,m.effectiveVersion]));
-  for (const [id,entry] of Object.entries(entries)) {
-   if(entry.preview.depositCostIncluded)continue;
-   const deposit=Math.max(0,Number(configs.get(entry.market)?.securityDepositRub)||0);
-   entries[id]={...entry,preview:{...entry.preview,depositCostIncluded:true,totalRub:entry.preview.totalRub+deposit}};
   }
   return {...index,entries};
  });

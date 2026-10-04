@@ -154,9 +154,9 @@ try{
     assert.equal(await page.locator('[data-dealer-related] .overflow-x-auto').first().evaluate(el=>getComputedStyle(el).scrollbarWidth),'none');
     await page.getByRole('button',{name:/Выбрать город. Сейчас:/}).filter({visible:true}).last().click();await page.getByRole('dialog',{name:'Выбор города'}).getByRole('button',{name:'Москва',exact:true}).click();
     await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();await page.waitForFunction(()=>!history.state?.acOverlayStep);
-    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),basePrice);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),null);
+    const moscow=await page.locator('.ac-offer-price-panel .ac-price').innerText();assert.notEqual(moscow,basePrice);assert.equal(await relatedPrice.innerText(),moscow);assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Москва');
     await page.evaluate(()=>{localStorage.setItem('avtocena_city','Красноярск');document.cookie='avtocena_city='+encodeURIComponent('Красноярск')+'; Path=/';const u=new URL(location.href);u.searchParams.delete('city');history.replaceState(history.state,'',u);window.dispatchEvent(new Event('avtocena:city-changed'));});
-    await page.getByText('Стоимость с доставкой до Москва',{exact:true}).waitFor();assert.equal(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);
+    await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();assert.notEqual(await page.locator('.ac-offer-price-panel .ac-price').innerText(),moscow);assert.equal(await relatedPrice.innerText(),await page.locator('.ac-offer-price-panel .ac-price').innerText());
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
@@ -276,8 +276,10 @@ try{
   await page.getByRole('button',{name:'Удалить автомобиль',exact:true}).click();await page.getByText('Все изменения сохранены',{exact:true}).waitFor();assert.equal(writes.at(-1).body.offers.length,2);
   await page.getByRole('tab',{name:'Новые автомобили под заказ',exact:true}).click();assert.equal(await page.getByLabel('Марка',{exact:true}).inputValue(),'Toyota');
   await page.getByRole('button',{name:'Реквизиты',exact:true}).click();
+  await page.getByRole('button',{name:'Сохранено',exact:true}).waitFor();
   const requisitesSaved=page.waitForResponse(response=>{if(response.request().method()!=='PUT')return false;const r=response.request().postDataJSON()?.requisites;return response.ok()&&r?.legalName==='ООО Компания дилера'&&r?.inn==='7707083893'&&r?.ogrn==='1027700132195';}).catch(async error=>{console.log('REQUISITES_SAVE_FAILURE',JSON.stringify({width,theme,errors,writes:writes.slice(-3).map(w=>({url:w.url,requisites:w.body.requisites,base:w.body.base?.requisites,version:w.body.version})),fields:await page.locator('input').evaluateAll(es=>es.map(e=>({label:e.getAttribute('aria-label'),value:e.value}))),status:await page.locator('.dealer-editor-sidebar').innerText()}));throw error;});
-  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('ООО Компания дилера');
+  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).fill('');
+  await page.getByLabel('Полное наименование ИП или организации',{exact:true}).pressSequentially('ООО Компания дилера');
   await page.getByLabel('ИНН',{exact:true}).fill('7707083893');
   await page.getByLabel('ОГРН / ОГРНИП',{exact:true}).fill('1027700132195');
   await page.getByText('Все изменения сохранены',{exact:true}).waitFor();

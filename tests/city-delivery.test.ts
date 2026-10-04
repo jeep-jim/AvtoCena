@@ -1,3 +1,4 @@
+import {priceCardForCity} from "../apps/web/lib/catalog/card-city-delivery";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {quoteCityDelivery,deliveryDescription} from '../apps/web/lib/catalog/city-delivery';
@@ -94,4 +95,10 @@ test('Gorno-Altaysk uses the existing kilometre formula for all six markets',()=
   const base=calculate(''),delivered=calculate('Горно-Алтайск');
   assert.equal(delivered.totalRub-base.totalRub,amount);assert.equal(delivered.breakdown.filter(r=>r.id==='rf-delivery').length,1);
  }
+});
+
+test('saved public previews follow global city, including originally seller-priced offers',()=>{
+ const saved={market:'korea',catalogPricingMode:'seller',totalRub:1813104,savedCalculationPreview:{version:'saved'},calculationSnapshot:{deliveryPricingBasis:{subtotalRub:1785657,deliveryRub:0,percents:[]}}};
+ assert.equal(priceCardForCity(saved,'Новокузнецк').offer.totalRub,1933104);
+ assert.equal(priceCardForCity(saved,'').offer.totalRub,1813104);
 });

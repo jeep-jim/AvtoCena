@@ -1,5 +1,12 @@
 name: Verify city picker
 on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/**'
+      - 'apps/web/components/home/CitySelector.tsx'
+      - 'apps/web/lib/location/**'
+      - 'tests/browser/city-picker*'
+      - '.github/workflows/verify-city-picker.yml'
   push:
     branches: [fix/mobile-city-picker-20260921, main]
     paths:

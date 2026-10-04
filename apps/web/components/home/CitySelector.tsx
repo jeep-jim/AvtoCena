@@ -69,7 +69,7 @@ export function CityPickerDialog({onChange,onClose,persistSelection=true}:{persi
 export function CitySelector({value,onChange,triggerLabel,onStoredChange,syncStored=true,syncStoredOnMount=true,persistSelection=true}:Props){
   const tap=useTapActivation();const [open,setOpen]=useState(false);const [mounted,setMounted]=useState(false);const trigger=useRef<HTMLButtonElement>(null);
   useEffect(()=>{setMounted(true);if(syncStored&&syncStoredOnMount){const stored=readSelectedCity();if(stored!==value)(onStoredChange||onChange)(stored);}},[]);
-  useEffect(()=>{if(!syncStored)return;const sync=()=>(onStoredChange||onChange)(readSelectedCity());window.addEventListener(CITY_CHANGED_EVENT,sync);return()=>window.removeEventListener(CITY_CHANGED_EVENT,sync);},[onChange,onStoredChange,syncStored]);
+  useEffect(()=>{if(!syncStored)return;const sync=()=>(onStoredChange||onChange)(readSelectedCity());const events=[CITY_CHANGED_EVENT,"storage","popstate"];events.forEach(event=>window.addEventListener(event,sync));return()=>events.forEach(event=>window.removeEventListener(event,sync));},[onChange,onStoredChange,syncStored]);
   const keyboard = useRef(false);
   const [keyboardFocus, setKeyboardFocus] = useState(false);
   useEffect(() => {
