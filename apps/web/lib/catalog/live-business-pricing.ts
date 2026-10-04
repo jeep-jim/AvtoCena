@@ -199,9 +199,9 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 }
 
 /** Shared price replay for selectors and visible cards; no display-identity or saved-draft reads. */
-export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
+export async function applyActiveBusinessPriceBatch<T extends Partial<VehicleOffer>>(offers: T[], options:{readOnly?:boolean}={}): Promise<T[]> {
   if (!offers.length) return offers;
-  offers=await withChinaCnyPrices(offers);
+  offers=await withChinaCnyPrices(offers,options);
   const [markets, ratedOffers] = await Promise.all([
     getEffectiveMarketsWithDefaults(),
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(withReplayInputs(safePublicPricing(offer))))),
