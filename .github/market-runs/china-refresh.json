@@ -1,9 +1,10 @@
 {
-  "operation": "owner-market-recovery-20260929",
+  "operation": "owner-publisher-recovery-20261004",
   "market": "china",
-  "resetCursors": true,
+  "reuseRunId": "37071157351",
+  "refreshMarkets": [],
   "publishMarkets": [
     "china"
   ],
-  "reason": "Start a fresh cycle after the completed published continuation; keep publication guards."
+  "reason": "Retry interrupted publication with indexed knowledge matching and early reserve expiry. Preserve source timestamps and all publication guards."
 }

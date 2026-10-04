@@ -965,7 +965,7 @@ export async function readAllOffersForMaintenance(options: { excludeMarket?: Cat
   return [...new Map(rows.filter(offer => offer.market !== options.excludeMarket).map((offer) => [offer.id, offer])).values()];
 }
 /** Preserve the non-public assortment reserve for the next market refresh. */
-export async function readMarketMaintenanceOffers(market: CatalogMarket, options: { excludeIds?: ReadonlySet<string> } = {}) {
+export async function readMarketMaintenanceOffers(market: CatalogMarket, options: { excludeIds?: ReadonlySet<string>; withinRetention?: boolean } = {}) {
   const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, {sources:{}});
   const approved = new Set(allowedCatalogSourceIds(market));
   const chunks = Object.entries<any>(manifest.sources || {}).filter(([id]) => approved.has(id)).flatMap(([,source]) => source.chunks || []);
@@ -977,7 +977,7 @@ export async function readMarketMaintenanceOffers(market: CatalogMarket, options
     const chunk = await readDataJson<VehicleOffer[] | null>(path, null);
     if (!Array.isArray(chunk)) throw new Error(`catalog_maintenance_chunk_missing:${path}`);
     for (const offer of chunk) {
-      if (offer.market === market && !options.excludeIds?.has(offer.id)) rows.push(offer);
+      if (offer.market === market && !options.excludeIds?.has(offer.id) && (!options.withinRetention || catalogOfferWithinRetention(offer))) rows.push(offer);
     }
   }
   return rows;

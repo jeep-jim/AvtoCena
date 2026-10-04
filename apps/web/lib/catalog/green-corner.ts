@@ -38,7 +38,7 @@ export async function currentGreenCornerPrices(items:VehicleOffer[]):Promise<Veh
  ]);
  // Bind the complete list to the same inputs as the card calculations. A saved
  // scenario or settings/rate change invalidates the cache without waiting for TTL.
- const inputs=await Promise.all([getEffectiveMarketsWithDefaults(),readSavedPreviewIndex().catch(()=>null),
+ const inputs=await Promise.all([getEffectiveMarketsWithDefaults(),readSavedPreviewIndex(items.map(item=>item.id)).catch(()=>null),
   convertToRub(1,"JPY"),convertToRub(1,"EUR"),greenCornerPaymentRate(items[0])]);
  const key=createHash("sha256").update(JSON.stringify([items,inputs,new Date().toISOString().slice(0,10)])).digest("hex");
  return pricedStock.get(key,()=>applyActiveBusinessPricingBatch(items));

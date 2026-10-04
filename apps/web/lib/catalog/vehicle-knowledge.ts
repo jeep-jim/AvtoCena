@@ -292,13 +292,29 @@ export async function readVehicleKnowledgeVariants() {
   return variantCache;
 }
 
+let modelsByMake: Promise<Map<string, VehicleKnowledgeModel[]>> | null = null;
+let variantsByModel: Promise<Map<string, VehicleKnowledgeVariant[]>> | null = null;
+
 export function resetVehicleKnowledgeCache() {
+  modelsByMake = null;
+  variantsByModel = null;
   modelCache = null;
   variantCache = null;
 }
 
 export async function findVehicleModel(offer: Partial<VehicleOffer>) {
-  const ranked = (await readVehicleKnowledgeModels())
+  // The scoring function rejects every different make. Index that exact same
+  // predicate once instead of normalizing the entire encyclopedia per listing.
+  const make = vehicleKnowledgeCompact(offer.make);
+  modelsByMake ||= readVehicleKnowledgeModels().then(rows => {
+    const index = new Map<string, VehicleKnowledgeModel[]>();
+    for (const row of rows) for (const alias of new Set(makeSearchValues(row).map(vehicleKnowledgeCompact).filter(Boolean))) {
+      const bucket = index.get(alias) || []; bucket.push(row); index.set(alias, bucket);
+    }
+    return index;
+  });
+  const candidates = make ? (await modelsByMake).get(make) || [] : await readVehicleKnowledgeModels();
+  const ranked = candidates
     .map((model) => scoreModel(model, offer))
     .filter((entry): entry is VehicleModelMatch => Boolean(entry))
     .sort((left, right) => right.score - left.score || left.model.model.localeCompare(right.model.model, "ru"));
@@ -362,8 +378,12 @@ function variantScore(variant: VehicleKnowledgeVariant, offer: Partial<VehicleOf
 }
 
 export async function findVehicleVariant(model: VehicleKnowledgeModel, offer: Partial<VehicleOffer>) {
-  const ranked = (await readVehicleKnowledgeVariants())
-    .filter((variant) => variant.modelId === model.id)
+  variantsByModel ||= readVehicleKnowledgeVariants().then(rows => {
+    const index = new Map<string, VehicleKnowledgeVariant[]>();
+    for (const row of rows) { const bucket=index.get(row.modelId)||[]; bucket.push(row); index.set(row.modelId,bucket); }
+    return index;
+  });
+  const ranked = ((await variantsByModel).get(model.id) || [])
     .map((variant) => ({ variant, score: variantScore(variant, offer) }))
     .filter((entry) => entry.score >= 0)
     .sort((left, right) => right.score - left.score || Date.parse(right.variant.verifiedAt) - Date.parse(left.variant.verifiedAt));
