@@ -46,7 +46,7 @@ try{
    await page.route('**/api/crm/notifications**',r=>r.fulfill({json:{notifications:[],reminders}}));
    let staffDocs=[{id:'22222222-2222-4222-8222-222222222222',name:'Кадровый документ.pdf',mime:'application/pdf',size:2048,createdAt:'2026-09-26T05:00:00Z',createdBy:'owner-test',hasThumbnail:false}];
    await page.route(/\/api\/crm\/users\/[^/]+\/documents(?:\/[^/?]+)?(?:\?.*)?$/,async r=>{if(r.request().method()==='DELETE'){assert.equal(r.request().postDataJSON().confirmed,true);staffDocs=[];await r.fulfill({json:{ok:true}});}else if(new URL(r.request().url()).pathname.endsWith('/documents'))await r.fulfill({json:{documents:staffDocs}});else{assert.equal(new URL(r.request().url()).searchParams.get('confirmed'),'1');await r.fulfill({contentType:'application/pdf',body:testPdf});}});
-   await page.route('**/api/crm/analytics**',r=>r.fulfill({json:{status:'ready',days:7,updatedAt:new Date().toISOString(),totals:{visits:12,users:9,views:30},pages:{rows:[{label:'/cars',path:'/cars',count:20}]},cities:{rows:[{label:'Новокузнецк',count:8}]},sources:{rows:[{label:'Поиск',count:5}]},cars:{rows:[{label:'Toyota Corolla',path:'/cars/offer/test',detail:'Москва',count:3}]}}}));
+   await page.route('**/api/crm/analytics**',r=>r.fulfill({json:{status:'ready',days:7,updatedAt:new Date().toISOString(),totals:{visits:12,users:9,views:30},pages:{rows:Array.from({length:30},(_,i)=>({label:'/cars/offer/test-'+i,path:'/cars/offer/test-'+i,count:30-i}))},cities:{rows:[{label:'Новокузнецк',count:8}]},sources:{rows:[{label:'Поиск',count:5}]},cars:{rows:[{label:'Toyota Corolla',path:'/cars/offer/test',detail:'Москва',count:3}]}}}));
    await page.route('**/api/crm/activity**',r=>r.fulfill({json:{userId:'owner-test',events:[{id:'evt-assigned',createdAt:'2026-09-26T07:00:00Z',type:'lead_assigned',title:'Назначен менеджер заявки',actor:{id:'owner-test',name:'Тестовый руководитель'},target:{id:'manager-test',name:'Александр Константинопольский'},entityLabel:'Toyota Corolla Cross',currentStatus:'Квалифицированный лид',currentStatusCode:'qualified',href:'/crm/leads?id=test-0',changes:[{label:'Ответственный',before:'Не назначен',after:'Александр Константинопольский'}]}]}}));
    await page.route('**/api/crm/reminders**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();if(b.action==='done')reminders=reminders.filter(x=>x.id!==b.id);else reminders.push({...b,id:'reminder-1',ownerId:'owner-test',entityLabel:'Клиент для проверки',createdAt:new Date().toISOString()});await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{reminders}});});
    if(kind==='documents'){
@@ -79,7 +79,17 @@ try{
    if(width<768){const tabs=await page.locator('.crm-navigation a').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));assert.equal(new Set(tabs).size,1,'mobile navigation is one scrollable row');}
    if(kind==='overview'){
     await page.locator('.crm-event-status[data-metrika-stage=qualified]').waitFor();assert.equal(await page.locator('.crm-event-status').innerText(),'🟢 КВАЛ');await page.getByText('Назначен менеджер заявки',{exact:true}).waitFor();
-    await page.getByRole('heading',{name:'Автомобили и города просмотра'}).waitFor();await page.getByRole('region',{name:'Аналитика сайта'}).screenshot({path:`${out}/analytics-${theme}-${width}.png`});
+    await page.getByRole('heading',{name:'Автомобили и города просмотра'}).waitFor();
+    const analytics=page.getByRole('region',{name:'Аналитика сайта'}),report=page.getByRole('region',{name:'Страницы и разделы',exact:true}),toggle=report.getByRole('button');
+    assert.equal(await analytics.evaluate(e=>getComputedStyle(e).paddingLeft),'0px','reports have no nested outer padding');
+    await report.evaluate(e=>window.scrollTo({top:scrollY+e.getBoundingClientRect().top+450,behavior:"instant"}));await page.waitForTimeout(100);
+    const pinned=await report.locator('h3').boundingBox(),header=await page.locator('.crm-header').boundingBox();
+    assert.ok(Math.abs(pinned.y-header.height-8)<3,'report heading stays below the CRM header '+JSON.stringify({pinned,header,style:await report.locator('h3').evaluate(e=>({position:getComputedStyle(e).position,top:getComputedStyle(e).top,ancestors:[e.parentElement,e.parentElement.parentElement,e.parentElement.parentElement.parentElement].map(x=>({tag:x.className,overflow:getComputedStyle(x).overflow}))}))}));
+    await toggle.click();assert.equal(await toggle.getAttribute('aria-expanded'),'false');assert.equal(await report.locator('.crm-analytics-report-body').isVisible(),false);
+    await page.waitForTimeout(100);const collapsed=await report.boundingBox();assert.ok(collapsed.y>=header.height&&collapsed.y+collapsed.height<=850,'collapse keeps this report visible without scrolling back '+JSON.stringify({collapsed,header}));
+    await analytics.screenshot({path:`${out}/analytics-${theme}-${width}.png`});
+    if(width===390||width===1440)await page.screenshot({path:`${out}/analytics-viewport-${theme}-${width}.png`});
+    await toggle.click();assert.equal(await report.locator('.crm-analytics-report-body').isVisible(),true);
     const event=page.locator('.crm-event').first();await event.locator('summary').click();assert.ok(await event.getByText('Ответственный',{exact:true}).isVisible());
     const boxes=await page.locator('.crm-quick-actions>a').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.ok(boxes[1].y>=boxes[0].y+boxes[0].height);assert.equal(boxes[1].y,boxes[2].y);
    }

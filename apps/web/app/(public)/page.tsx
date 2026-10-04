@@ -1,3 +1,4 @@
+import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
 import {homeSpecialRail} from "@/lib/dealers/public-showcase";
@@ -30,7 +31,7 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   const description = city
     ? `Автомобили под заказ с расчётом стоимости и доставкой в ${city}. Предложения из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.`
     : "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.";
-  const canonical = city ? `/?city=${encodeURIComponent(city)}` : "/";
+  const canonical = "/";
   const openGraphUrl = city ? `https://avtocena.com/?city=${encodeURIComponent(city)}` : "https://avtocena.com";
   return {
     title,
@@ -65,6 +66,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const dealer = storedDealer;
   const specialRail = await homeSpecialRail(fromQuery||fromCookie,dealer);
   return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(WEBSITE_SCHEMA)}}/>
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
