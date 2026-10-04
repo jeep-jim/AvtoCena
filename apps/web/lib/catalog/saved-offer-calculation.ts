@@ -1,5 +1,4 @@
 import { createHash, randomUUID } from "node:crypto";
-import { isGreenCornerOffer } from "./green-corner-contract";
 import { cache } from "react";
 import { mutateDataJson, readDataJson } from "../data";
 import type { VehicleOffer } from "./types";
@@ -47,18 +46,11 @@ export async function getSavedOfferCalculation(offer: VehicleOffer, version?:str
     const latest=matchingSavedCalculation(await readSavedRecord(offer.id),offer);
     return latest?.version===version?latest:null;
   }
-  let record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
-  if (record && Array.isArray(record.calculation.breakdown) && !record.calculation.breakdown.some(line => line.id === "contract-services")) {
-    const {getEffectiveMarketVersion} = await import("../effective-market-settings");
-    const config = await getEffectiveMarketVersion(offer.market);
-    const deposit = Math.max(0, Number(config?.securityDepositRub) || 0);
-    const {businessPaymentPlan} = await import("../../../../packages/engine/src/calculation/calculateAvtocena");
-    const totalRub = record.calculation.totalRub + deposit;
-    record = {...record, calculation:{...record.calculation,totalRub,paymentPlan:businessPaymentPlan(offer.market,config || {},totalRub),
-      breakdown:[...record.calculation.breakdown.slice(0,1),...(deposit ? [{id:"contract-services",title:"Обеспечительный платёж",amountRub:deposit}] : []),...record.calculation.breakdown.slice(1)]}};
-  }
-  if (!record || (!record.draft.deliveryCity && !isGreenCornerOffer(offer) && offer.market!=="china")) return record;
-  // Shared characteristics have no client's delivery. Refresh currencies for Japan stock and China.
+  const record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
+  if (!record) return null;
+  // A public saved record preserves the manager's vehicle parameters, not old
+  // tariffs or taxes. Reuse the same current calculation as city changes.
+  // Explicit versioned customer links return above and remain immutable.
   const {calculateOfferWithCustomerParametersDetailed} = await import("./customs-pricing");
   const fresh = await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...record.draft,deliveryCity:""}));
   return fresh.ok ? {...record,draft:{...record.draft,deliveryCity:""},calculation:fresh.calculation} : null;
