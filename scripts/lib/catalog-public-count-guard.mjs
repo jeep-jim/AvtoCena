@@ -1,5 +1,6 @@
 // Stop an incomplete source from replacing a healthy public generation.
-// Verified withdrawals reduce the baseline; absence or expiry alone does not.
+// Caller-supplied, evidenced exclusions reduce the baseline (withdrawal or dated retention policy).
+// Unexplained source absence never reduces it.
 export function catalogPublicCountGuard(previous, next, withdrawn = {}, ratio = 0.9, options = {}) {
   if (!Number.isFinite(ratio) || ratio < 0.9 || ratio > 1) throw Error('invalid_public_retention_ratio');
   const completedSources = new Set(options.completedSources || []);
