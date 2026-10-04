@@ -1766,12 +1766,14 @@ async function readBudgetSelection(params:CatalogSearchParams){
   if(index?.version!==1||index.generationId!==manifest.generationId)return null;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
-  // Narrow on the existing small index before reading any card blocks. Year is
-  // already stored there; other filters must use the authoritative card matcher.
+  // Narrow on compact year/mileage metadata before reading card blocks.
+  // Older indexes keep the exact card matcher until the derived index is rebuilt.
   const candidates=matchingBudgetIndex(index,params,quotes).filter(row=>
-   (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo));
+   (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
+   && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
   const {yearFrom:_yearFrom,yearTo:_yearTo,...withoutYear}=params;
-  if(isBudgetCountQuery(withoutYear))return {generationId:manifest.generationId,rows:candidates};
+  const remaining=index.filterVersion===1?{...withoutYear,mileageFrom:undefined,mileageTo:undefined}:withoutYear;
+  if(isBudgetCountQuery(remaining))return {generationId:manifest.generationId,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
