@@ -65,7 +65,6 @@ function CatalogPriceContent({
 
 export function CatalogPrice(props: Parameters<typeof CatalogPriceContent>[0]) {
  const city = useSelectedCity();
- const saved = props.offer.savedCalculationPreview;
- const priced = saved ? {offer:props.offer} : priceCardForCity(props.offer,city);
+ const priced = priceCardForCity(props.offer,city);
  return <CatalogPriceContent {...props} offer={priced.offer} deliveryCity={city} />;
 }

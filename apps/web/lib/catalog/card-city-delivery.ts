@@ -17,7 +17,7 @@ export function priceCardForCity(offer: any, city: string) {
  const preview = Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
  const totalRub = Number(preview?.totalRub ?? offer.totalRub);
  const basis = preview?.deliveryPricingBasis || deliveryPricingBasis(offer.calculationSnapshot);
- if (!(totalRub > 0) || (!preview && offer.catalogPricingMode === "seller")) return {offer,quote,included:false};
+ if (!(totalRub > 0) || (!preview && !offer.savedCalculationPreview && offer.catalogPricingMode === "seller")) return {offer,quote,included:false};
  if (!basis) return {offer,quote,included:false};
  const nextDelivery = quote.status === "estimated" ? quote.amountRub : 0;
  const difference = nextDelivery - basis.deliveryRub;
