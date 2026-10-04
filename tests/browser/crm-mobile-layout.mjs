@@ -18,6 +18,8 @@ for(const dir of ['cmaps','standard_fonts','wasm'])fs.cpSync(path.join(pdfRoot,d
 const mock=path.resolve('tests/browser/crm-mobile-mocks.ts');
 await build({entryPoints:['tests/browser/crm-mobile-fixture.tsx'],bundle:true,format:'iife',platform:'browser',target:'es2022',jsx:'automatic',outfile:out+'/fixture.js',loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'test-services',setup(b){
  b.onResolve({filter:/^@\/lib\/(auth|data|crm-users|business-settings|avtocena|effective-market-settings|crm-notifications|crm-team|crm-read-state|catalog\/customs-pricing|catalog\/estimated-market-config)$/},()=>({path:mock}));
+ b.onResolve({filter:/^@\/lib\/document-workspace$/},()=>({path:'document-scope',namespace:'document-test'}));
+ b.onLoad({filter:/.*/,namespace:'document-test'},()=>({contents:`export const documentCompany=()=>"dealer_fixture";export const workspaceClientsPath=()=>"clients/clients.json";export const canUseDocuments=async()=>true;export const canAccessDocumentClient=()=>true;`,loader:'js'}));
  b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-test'}));
  b.onLoad({filter:/.*/,namespace:'next-test'},args=>({contents:args.path.endsWith('navigation')?`export const redirect=()=>{throw Error('redirect')};export const notFound=()=>{throw Error('notFound')};export const usePathname=()=>'/crm';export const useRouter=()=>({refresh(){},push(){}});`:`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{href,...props},children);}`,loader:'jsx',resolveDir:process.cwd()}));
 }}]});
@@ -25,7 +27,7 @@ const layouts=['apps/web/app/layout.tsx','apps/web/app/(crm)/layout.tsx'];
 const sources=layouts.map(file=>({file,text:fs.readFileSync(file,'utf8')}));
 const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
 const inline=sources.flatMap(({text})=>[...text.matchAll(/const publicUiCorrections = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
-const css=await postcss([tailwindcss({content:['apps/web/components/crm/**/*.{tsx,ts}','apps/web/app/(crm)/**/*.tsx','apps/web/components/leads/PhoneInput.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+const css=await postcss([tailwindcss({content:['apps/web/components/crm/**/*.{tsx,ts}','apps/web/app/(crm)/**/*.tsx','apps/web/components/leads/PhoneInput.tsx','apps/web/components/dealers/DealerClientForm.tsx','apps/web/app/(public)/dealer-cabinet/documents/page.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
 fs.writeFileSync(out+'/app.css',css.css);
 const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark';localStorage.setItem('avtocena_theme',document.documentElement.dataset.theme)</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
 const server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(['/', '/crm/clients', '/crm/leads'].includes(name)){res.setHeader('content-type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve(name.startsWith('/pdfjs/')?out:'apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('content-type',name.endsWith('.html')?'text/html':name.endsWith('.css')?'text/css':(/\.m?js$/).test(name)?'text/javascript':name.endsWith('.webp')?'image/webp':name.endsWith('.svg')?'image/svg+xml':name.endsWith('.png')?'image/png':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.writeHead(404);res.end();}});
@@ -34,7 +36,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 const results=[],failures=[];
 try{
- for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['game','overview','leads','team','settings','clients','client','archive','documents','staff'])){
+ for(const theme of ['dark','light'])for(const width of [320,390,768,1440])for(const kind of (process.env.CRM_TEST_PAGES?.split(',')||['game','overview','leads','team','settings','clients','client','archive','documents','staff','dealer-docs'])){
   const page=await browser.newPage({viewport:{width,height:850},isMobile:width<768,hasTouch:width<768});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',r=>r.request().url().endsWith('/presence')?r.fulfill({json:{team:[{id:'owner-test',displayName:'Тестовый руководитель',personalPhone:'+79991234567',online:true},{id:'manager-test',displayName:'Александр Константинопольский',online:false}]}}):r.request().method()==='PATCH'?r.fulfill({json:{ok:true}}):r.request().url().includes('/documents/22222222-2222-4222-8222-222222222222')?r.fulfill({contentType:'application/pdf',body:testPdf}):r.request().url().includes('/documents/')?r.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a1ZkAAAAASUVORK5CYII=','base64')}):r.fulfill({json:{ok:true,leads:[],readReceipts:[],state:{eventKey:'test'}}}));
    const chatMessages=[{id:'old-comment',text:'Стас, свяжись с клиентом',createdAt:'2026-09-27T09:00:00Z',createdByUserId:'manager-test',createdByName:'Антон'}];let chatWrites=0;
@@ -44,6 +46,7 @@ try{
    await page.route('**/api/crm/notifications**',r=>r.fulfill({json:{notifications:[],reminders}}));
    let staffDocs=[{id:'22222222-2222-4222-8222-222222222222',name:'Кадровый документ.pdf',mime:'application/pdf',size:2048,createdAt:'2026-09-26T05:00:00Z',createdBy:'owner-test',hasThumbnail:false}];
    await page.route(/\/api\/crm\/users\/[^/]+\/documents(?:\/[^/?]+)?(?:\?.*)?$/,async r=>{if(r.request().method()==='DELETE'){assert.equal(r.request().postDataJSON().confirmed,true);staffDocs=[];await r.fulfill({json:{ok:true}});}else if(new URL(r.request().url()).pathname.endsWith('/documents'))await r.fulfill({json:{documents:staffDocs}});else{assert.equal(new URL(r.request().url()).searchParams.get('confirmed'),'1');await r.fulfill({contentType:'application/pdf',body:testPdf});}});
+   await page.route('**/api/crm/analytics**',r=>r.fulfill({json:{status:'ready',days:7,updatedAt:new Date().toISOString(),totals:{visits:12,users:9,views:30},pages:{rows:[{label:'/cars',path:'/cars',count:20}]},cities:{rows:[{label:'Новокузнецк',count:8}]},sources:{rows:[{label:'Поиск',count:5}]},cars:{rows:[{label:'Toyota Corolla',path:'/cars/offer/test',detail:'Москва',count:3}]}}}));
    await page.route('**/api/crm/activity**',r=>r.fulfill({json:{userId:'owner-test',events:[{id:'evt-assigned',createdAt:'2026-09-26T07:00:00Z',type:'lead_assigned',title:'Назначен менеджер заявки',actor:{id:'owner-test',name:'Тестовый руководитель'},target:{id:'manager-test',name:'Александр Константинопольский'},entityLabel:'Toyota Corolla Cross',currentStatus:'Квалифицированный лид',currentStatusCode:'qualified',href:'/crm/leads?id=test-0',changes:[{label:'Ответственный',before:'Не назначен',after:'Александр Константинопольский'}]}]}}));
    await page.route('**/api/crm/reminders**',async r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();if(b.action==='done')reminders=reminders.filter(x=>x.id!==b.id);else reminders.push({...b,id:'reminder-1',ownerId:'owner-test',entityLabel:'Клиент для проверки',createdAt:new Date().toISOString()});await r.fulfill({json:{ok:true}});}else await r.fulfill({json:{reminders}});});
    if(kind==='documents'){
@@ -52,9 +55,19 @@ try{
   }
   await page.route('**/api/crm/game',r=>r.fulfill({json:r.request().method()==='POST'?{run:{id:'fixture-run',mode:'hills'}}:{team:[]}}));
   try{
+   if(kind==='dealer-docs')await page.route('**/api/dealers/contracts**',r=>r.fulfill({json:{records:[]}}));
    // Calendar fixtures and expectations use October 1; real clock time must not age them.
    if(kind==='team')await page.clock.setFixedTime(new Date('2026-10-01T05:00:00Z'));
    await page.goto(`http://127.0.0.1:${server.address().port}/?kind=${kind}&theme=${theme}`);
+   if(kind==='dealer-docs'){
+    await page.getByRole('heading',{name:'Клиенты и документы',exact:true}).waitFor();
+    assert.equal(await page.getByRole('button',{name:'Добавить клиента',exact:true}).count(),1);
+    assert.equal(await page.getByRole('heading',{name:'Документы компании',exact:true}).count(),1);
+    assert.equal(await page.getByRole('link',{name:'← Кабинет компании',exact:true}).count(),1);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'dealer documents fit viewport');
+    await page.screenshot({path:`${out}/dealer-documents-${theme}-${width}.png`,fullPage:true});
+    assert.deepEqual(errors,[]);results.push({theme,width,kind,passed:true});await page.close();continue;
+   }
    await page.locator('.crm-content').waitFor();
    assert.equal(await page.locator('.crm-header .ac-staff-leads').count(),0,'no duplicated requests shortcut');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no page overflow');
@@ -63,8 +76,10 @@ try{
    assert.ok(await page.getByRole('link',{name:'Мой профиль',exact:true}).isVisible());
    assert.equal(await page.locator('.ac-staff-menu a[href="/crm/leads"]').count(),0);
    await page.keyboard.press('Escape');assert.equal(await page.locator('.ac-staff-menu').isVisible(),false,'Escape closes the menu while notification state stays mounted');
+   if(width<768){const tabs=await page.locator('.crm-navigation a').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));assert.equal(new Set(tabs).size,1,'mobile navigation is one scrollable row');}
    if(kind==='overview'){
-    await page.locator('.crm-event-status[data-metrika-stage=qualified]').waitFor();assert.match(await page.locator('.crm-event-status').innerText(),/🟢/);await page.getByText('Назначен менеджер заявки',{exact:true}).waitFor();
+    await page.locator('.crm-event-status[data-metrika-stage=qualified]').waitFor();assert.equal(await page.locator('.crm-event-status').innerText(),'🟢 КВАЛ');await page.getByText('Назначен менеджер заявки',{exact:true}).waitFor();
+    await page.getByRole('heading',{name:'Автомобили и города просмотра'}).waitFor();await page.getByRole('region',{name:'Аналитика сайта'}).screenshot({path:`${out}/analytics-${theme}-${width}.png`});
     const event=page.locator('.crm-event').first();await event.locator('summary').click();assert.ok(await event.getByText('Ответственный',{exact:true}).isVisible());
     const boxes=await page.locator('.crm-quick-actions>a').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().toJSON()));assert.ok(boxes[1].y>=boxes[0].y+boxes[0].height);assert.equal(boxes[1].y,boxes[2].y);
    }
@@ -232,6 +247,7 @@ try{
     await page.getByRole('button',{name:'Восстановить',exact:true}).click();await page.getByRole('status').filter({hasText:'Документ восстановлен'}).waitFor();assert.equal(patches,1);
     page.once('dialog',d=>{assert.match(d.message(),/навсегда/);return d.accept();});await page.getByRole('button',{name:'Очистить корзину (1)',exact:true}).click();await page.getByRole('status').filter({hasText:'Удалено файлов: 1'}).waitFor();assert.equal(patches,2);
    }
+   if(width<768){const tabs=await page.locator('.crm-navigation a').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));assert.equal(new Set(tabs).size,1,'mobile navigation is one scrollable row');}
    if(kind==='overview'){
     await page.locator('.crm-presence-person').first().waitFor();
     assert.equal(await page.locator('.crm-presence-avatar').count(),2);

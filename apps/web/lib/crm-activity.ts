@@ -1,3 +1,4 @@
+import {documentCompany} from './document-workspace';
 import {discussionHref,discussionLabel} from './crm-discussion';
 import {notifyTeam} from './crm-notification-store';
 import type {AuthUser} from './auth';
@@ -11,7 +12,7 @@ export type ActivityChange={label:string;before?:string;after?:string};
 export type CrmActivity={id:string;commentId?:string;createdAt:string;type:string;title:string;actor?:ActivityPerson;target?:ActivityPerson;entityType?:string;entityId?:string;entityLabel?:string;href?:string;clientId?:string;leadId?:string;changes?:ActivityChange[];text?:string;managerId?:string;managerName?:string;assignedManagerId?:string;status?:string;visibility?:'team'|'management';image?:string;currentStatus?:string;currentStatusCode?:string;summary?:string;};
 export const activityPerson=(u:Pick<AuthUser,'id'|'displayName'|'avatarUrl'>):ActivityPerson=>({id:u.id,name:u.displayName,avatarUrl:u.avatarUrl});
 export async function recordCrmActivity(actor:AuthUser|null,event:Omit<CrmActivity,'id'|'createdAt'|'actor'>&Partial<Pick<CrmActivity,'id'|'createdAt'>>) {
- const recorded=await appendChunkedDataJson<CrmActivity>('activity/feed.json',{...event,id:event.id||generateId('activity'),createdAt:event.createdAt||new Date().toISOString(),...(actor?{actor:activityPerson(actor)}:{})});
+ const recorded=await appendChunkedDataJson<CrmActivity>(documentCompany(actor)?`dealers/${encodeURIComponent(documentCompany(actor)!)}/activity.json`:'activity/feed.json',{...event,id:event.id||generateId('activity'),createdAt:event.createdAt||new Date().toISOString(),...(actor?{actor:activityPerson(actor)}:{})});
  if(actor&&event.target?.id&&event.target.id!==actor.id&&['client_assigned','staff_updated','staff_created'].includes(event.type))await notifyTeam({recipientIds:[event.target.id],kind:event.type==='client_assigned'?'assignment':'staff',title:event.title,text:`${actor.displayName}${event.entityLabel?` · ${event.entityLabel}`:''}`,href:event.href||(event.clientId?`/crm/clients/${encodeURIComponent(event.clientId)}`:'/crm/managers')});
  return recorded;
 }

@@ -1,3 +1,5 @@
+import {SiteAnalytics} from "@/components/crm/SiteAnalytics";
+import {hasCrmPermission} from "@/lib/crm-permissions";
 import {ActivityFeed} from "@/components/crm/ActivityFeed";
 import {StaffPresence} from "@/components/crm/StaffPresence";
 import { readCrmUsers } from "@/lib/crm-users";
@@ -65,6 +67,7 @@ export default async function CrmPage() {
           </div>
         </div>
       </div>
+      {hasCrmPermission(user,"activityAll")&&<SiteAnalytics/>}
     </CrmShell>
   );
 }

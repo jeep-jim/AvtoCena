@@ -166,11 +166,10 @@ export function DealerEditor({
           ["offices", "Адреса",MapPin],
           ["requisites", "Реквизиты",BookOpen],
           ["markets", "Каталог и рынки",Globe],
-          ["pricing", "Расчёт своих авто",Calculator],
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription",administration?"Подписка":"Доступ",ShieldCheck]] : []),
           ...(administration ? [["administration","Доступ",ShieldCheck]] : []),
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
-      </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
+      </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}{!demo&&s.dealerId!=='dealer_topavto'&&<Link href="/dealer-cabinet/documents" className={button+' mt-3 flex justify-center'}>Клиенты и документы</Link>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
       <div className="dealer-editor-content" data-live-preview={showLivePreview}><div className="dealer-editor-settings">
 
       {tab==='overview'&&<div className="space-y-5">
@@ -257,12 +256,12 @@ export function DealerEditor({
           <div className="grid gap-4 md:grid-cols-2">{([
             ['legalName','Полное наименование ИП или организации'],['legalAddress','Юридический адрес'],
             ['inn','ИНН'],['ogrn','ОГРН / ОГРНИП'],['kpp','КПП (для организации)'],
-          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='legalName'||key==='legalAddress'?500:30} onChange={value=>patch({requisites:{...EMPTY_REQUISITES,...s.requisites,[key]:value}})}/>)}</div>
+          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='legalName'||key==='legalAddress'?500:30} onChange={value=>setS(current=>({...current,requisites:{...EMPTY_REQUISITES,...current.requisites,[key]:value}}))}/>)}</div>
           <h3 className="font-bold border-t border-[var(--ac-border)] pt-5">Банковские реквизиты</h3>
           <p className="text-sm text-[var(--ac-muted)]">Доступны вашей компании и АвтоЦене. На публичной странице не показываются.</p>
           <div className="grid gap-4 md:grid-cols-2">{([
             ['bank','Банк'],['bik','БИК'],['account','Расчётный счёт'],['correspondentAccount','Корреспондентский счёт'],
-          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='bank'?500:30} onChange={value=>patch({requisites:{...EMPTY_REQUISITES,...s.requisites,[key]:value}})}/>)}</div>
+          ] as const).map(([key,label])=><Field key={key} label={label} value={s.requisites?.[key]||''} maxLength={key==='bank'?500:30} onChange={value=>setS(current=>({...current,requisites:{...EMPTY_REQUISITES,...current.requisites,[key]:value}}))}/>)}</div>
         </section>}
         {tab === "markets" && <div className="dealer-editor-panel space-y-5">
           <div><h2 className="text-xl font-black">Откуда вы доставляете автомобили</h2><p className="mt-2 text-sm text-[var(--ac-muted)]">Выберите направления вашей компании. На странице будут доступны только эти рынки общего каталога АвтоЦены.</p></div>
