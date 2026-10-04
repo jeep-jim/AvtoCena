@@ -1,4 +1,4 @@
-import {koreaIncludesLogistics} from "./korea-customs-value";
+import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice,withChinaCnyPrices} from "./china-cny-price";
 import {isGreenCornerOffer} from "./green-corner-contract";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
@@ -104,7 +104,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
       ...(offer.powertrainKind === 'combustion' && offer.utilizationPowerKw === offer.powerKw && offer.powerKw
         ? {powerHp:offer.powerHp,powerKw:offer.powerKw,icePowerKw:offer.icePowerKw,utilizationPowerKw:offer.utilizationPowerKw} : {})};
     const commercial = inputs.vehicleCategory === "N1" || String(inputs.tnVedCode || "").replace(/\D/g, "").startsWith("8704");
-    const includeTransport = commercial || koreaIncludesLogistics(market, inputs);
+    const includeTransport = commercial || youngImportIncludesLogistics(market, inputs);
     if (includeTransport) inputs.customsValueRub = snapshotSourcePriceRub(offer) + Number(resolved.config.logisticsRub || 0);
     const customs = calculateRussiaCustomsForIndividual(inputs);
     snapshot = {...snapshot,customs,customsInput:inputs,missing:customs.missing,customsCompleteness:customs.status,

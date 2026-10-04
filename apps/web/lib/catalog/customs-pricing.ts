@@ -1,4 +1,4 @@
-import {koreaIncludesLogistics} from "./korea-customs-value";
+import {youngImportIncludesLogistics} from "./korea-customs-value";
 import {withChinaCnyPrice} from "./china-cny-price";
 import {greenCornerPaymentRate} from "./green-corner-payment-rate";
 import { isGreenCornerOffer } from "./green-corner-contract";
@@ -294,13 +294,13 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     productionDate: userParameters ? offer.productionDate : confirmedProductionValue(offer) || undefined,
     year: userParameters ? offer.year : automaticProductionYear(offer),
   };
-  const koreaFreight = koreaIncludesLogistics(offer.market, ageInput);
-  const includeTransport = commercial || greenCorner || koreaFreight;
+  const youngImportFreight = youngImportIncludesLogistics(offer.market, ageInput);
+  const includeTransport = commercial || greenCorner || youngImportFreight;
   const enteredTransport = offer.transportToBorderRub;
   const hasEnteredTransport = enteredTransport != null && Number.isFinite(enteredTransport) && enteredTransport >= 0;
   const borderTransportRub = greenCorner ? 0 : commercial
     ? hasEnteredTransport ? enteredTransport : transportToBorderRub(offer) || Number(market.config.logisticsRub || 0)
-    : koreaFreight ? Number(market.config.logisticsRub || 0) : transportToBorderRub(offer);
+    : youngImportFreight ? Number(market.config.logisticsRub || 0) : transportToBorderRub(offer);
   // Goods imports include pre-border transport. In an N1 customer scenario this
   // replaces the logistics line, so it is not added twice to the delivered total.
   const customsValueRub = rate.sourcePriceRub + (includeTransport ? borderTransportRub : 0);
