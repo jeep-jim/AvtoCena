@@ -194,6 +194,11 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: retainedTargetPublicRows \}/);
   assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
+  assert.ok(standardMarketPublisher.indexOf('logPublicationMemory("preflight_complete")') < standardMarketPublisher.indexOf("await acquirePublishLock()"));
+  assert.ok(standardMarketPublisher.indexOf("await acquirePublishLock()") < standardMarketPublisher.indexOf("manifest = await persistCatalogOffers"));
+  assert.match(standardMarketPublisher, /catalog_target_changed_during_prepare/);
+  assert.match(standardMarketPublisher, /currentRetainedRows = currentRetainedRows\.map\(\(offer\) => freshIds\.has\(offer\.id\)[\s\S]*compactPublicStorageOffer\(offer\)/);
+  assert.match(standardMarketPublisher, /return \{offer:compactPublicStorageOffer\(prepared\),reason:"ok"\}/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
   assert.match(standardMarketPublisher, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS/);
   assert.match(standardMarketPublisher, /setInterval\([\s\S]*heartbeatAt/);

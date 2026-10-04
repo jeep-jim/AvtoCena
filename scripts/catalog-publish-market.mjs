@@ -283,7 +283,11 @@ async function auditCandidate(sourceOffer) {
       if (!prepared) return {offer:null,reason:"source_inventory_unqualified"};
       const priority = classifyCatalogV2Offer(prepared,v2Policy);
       if (!priority.eligible) return {offer:null,reason:`v2_${priority.reason}`};
-      return {offer:prepared,reason:"ok"};
+      // The normalized specification tables remain on the offer, but the raw
+      // marketplace response is not used by canonical selection or public
+      // persistence. Releasing it here prevents a large market from retaining
+      // one deep-cloned source payload for every audited candidate.
+      return {offer:compactPublicStorageOffer(prepared),reason:"ok"};
     }
     const descriptionReason = catalogDescriptionRejectionReason(offer);
     if (descriptionReason) return { offer: null, reason: descriptionReason };
@@ -305,7 +309,7 @@ async function auditCandidate(sourceOffer) {
         publicPriority: priority,
       },
     };
-    return { offer, reason: "ok" };
+    return { offer: compactPublicStorageOffer(offer), reason: "ok" };
   } catch (error) {
     return { offer: null, reason: `exception:${String(error?.message || error)}` };
   }
@@ -316,12 +320,8 @@ function logPublicationMemory(stage) {
   const { rss, heapUsed, external } = process.memoryUsage();
   console.log(JSON.stringify({ market, stage, memoryBytes: { rss, heapUsed, external } }));
 }
-if (!dryRun) await acquirePublishLock();
-// Recheck after acquiring the shared lease: another publisher may have grown
-// the bucket while this process waited. Never start writes on a stale estimate.
 try {
-if (!dryRun && process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
-const expectedBaseGenerationId = await catalogGenerationId();
+let expectedBaseGenerationId = await catalogGenerationId();
 logPublicationMemory("before_intake");
 const generation = await readGenerationFiles();
 logPublicationMemory("intake_loaded");
@@ -394,6 +394,14 @@ const freshIds = new Set(generation.offers.map(offer => offer.id));
 retainedPublishedIds = new Set(currentRetainedRows.filter(offer => !freshIds.has(offer.id)).map(offer => offer.id));
 const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
 const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "unverified_retention_expired").length;
+
+// A fresh observation already carries the source evidence required for its
+// audit. Keeping the older raw response beside it made China retain several
+// gigabytes of duplicate payloads before the first candidate was processed.
+// Rows absent from the fresh intake keep their raw evidence unchanged.
+currentRetainedRows = currentRetainedRows.map((offer) => freshIds.has(offer.id)
+  ? compactPublicStorageOffer(offer)
+  : offer);
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - freshness(right))) {
@@ -501,32 +509,35 @@ const expectedPublishedHashByMarket = {};
 const preservedPublicRowsByMarket = {};
 const purgedForbiddenPublicByMarket = {};
 
-// A one-market refresh must never reconstruct the other six markets from
-// retention or quality filters. Read their already-published rows and pass them
-// through the exact-preservation path byte-for-byte.
-for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
-  if (otherMarket === market) continue;
-  let rows = [];
-  try { rows = await readMarketOffers(otherMarket); } catch (error) {
-    throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
+async function loadPreservedMarkets() {
+  // A one-market refresh must never reconstruct the other markets from
+  // retention or quality filters. For a live write this runs under the shared
+  // lease, so a waiting publisher cannot overwrite a market published while it
+  // was preparing its own candidates.
+  for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
+    if (otherMarket === market) continue;
+    let rows = [];
+    try { rows = await readMarketOffers(otherMarket); } catch (error) {
+      throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
+    }
+    // Exact preservation applies only to owner-approved provenance. Rows from a
+    // removed adapter/domain are stale public tails: quarantine them from the next
+    // generation, while keeping every still-approved row byte-stable. Structural
+    // corruption inside the approved set remains a hard stop.
+    const forbidden = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
+    const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
+    const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
+      || String(offer?.market || "") !== otherMarket
+      || !isCatalogYearAllowed(offer?.year, otherMarket)
+      || !Array.isArray(offer?.images) || offer.images.length === 0);
+    if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
+    purgedForbiddenPublicByMarket[otherMarket] = forbidden.length;
+    preservedByMarket[otherMarket] = preservedRows.length;
+    preservedPublicHashByMarket[otherMarket] = hashRows(preservedRows);
+    preservedPublicRowsByMarket[otherMarket] = preservedRows;
+    expectedPublishedByMarket[otherMarket] = preservedRows.length;
+    expectedPublishedHashByMarket[otherMarket] = preservedPublicHashByMarket[otherMarket];
   }
-  // Exact preservation applies only to owner-approved provenance. Rows from a
-  // removed adapter/domain are stale public tails: quarantine them from the next
-  // generation, while keeping every still-approved row byte-stable. Structural
-  // corruption inside the approved set remains a hard stop.
-  const forbidden = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
-  const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
-  const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
-    || String(offer?.market || "") !== otherMarket
-    || !isCatalogYearAllowed(offer?.year, otherMarket)
-    || !Array.isArray(offer?.images) || offer.images.length === 0);
-  if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
-  purgedForbiddenPublicByMarket[otherMarket] = forbidden.length;
-  preservedByMarket[otherMarket] = preservedRows.length;
-  preservedPublicHashByMarket[otherMarket] = hashRows(preservedRows);
-  preservedPublicRowsByMarket[otherMarket] = preservedRows;
-  expectedPublishedByMarket[otherMarket] = preservedRows.length;
-  expectedPublishedHashByMarket[otherMarket] = hashRows(preservedRows);
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers, retainedTargetPublicRows, currentPublicIds, retainedPowerMixMinimumByMarket);
@@ -620,7 +631,10 @@ logPublicationMemory("preflight_complete");
 if (!freshOfferAudit.summary.complete) {
   throw new Error(`catalog_fresh_offer_audit_incomplete:${market}:${freshOfferAudit.summary.unexplained}:${freshOfferAudit.summary.missingIdObservations}`);
 }
-if (dryRun) process.exit(0);
+if (dryRun) {
+  await loadPreservedMarkets();
+  process.exit(0);
+}
 if (sellerInventory) assertNoDeliveredPriceRegression(currentRetainedRows, canonicalTargetPreview.offers, publicationPolicy);
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
@@ -695,9 +709,23 @@ function countSources(rows) {
 }
 
 if (regressionBlocked) {
+  await loadPreservedMarkets();
   publicationError = `catalog_public_regression_guard:${market}:${expectedPublishedByMarket[market]}:${minimumSafePublicCount}`;
 } else if (selectedMarketOffers.length > 0) {
   try {
+    // Candidate preparation is read-only and may run in parallel across
+    // markets. Serialize only the generation snapshot and writes. Recheck the
+    // target market and storage after acquiring the lease; no stale snapshot is
+    // allowed to reach persistence.
+    const preparedTargetHash = hashRows(currentMarketRows);
+    await acquirePublishLock();
+    if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
+    expectedBaseGenerationId = await catalogGenerationId();
+    const latestTargetRows = await readMarketOffers(market);
+    if (latestTargetRows.length !== currentMarketRows.length || hashRows(latestTargetRows) !== preparedTargetHash) {
+      throw new Error(`catalog_target_changed_during_prepare:${market}`);
+    }
+    await loadPreservedMarkets();
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     logPublicationMemory("before_persist");
     manifest = await persistCatalogOffers(allOffers, {
@@ -762,6 +790,7 @@ if (regressionBlocked) {
     publicationError = String(error?.message || error);
   }
 } else {
+  await loadPreservedMarkets();
   publicationError = `catalog_v2_empty_market:${market}`;
 }
 
