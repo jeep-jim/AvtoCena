@@ -43,30 +43,29 @@ export async function rebuildSavedPreviewIndex():Promise<Index> {
  // A concurrent save wins over older records seen during the one-time migration.
  return mutateDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}},current=>({version:1,entries:{...entries,...current.entries}}));
 }
-export async function readSavedPreviewIndex() {
- return cache.get("current",async()=>{
-  const index=await readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}});
-  const entries={...index.entries};
-  const ids=Object.keys(entries);
-  if(ids.length){
-   const {getOfferFromCurrentShard}=await import("./storage");
-   const {getGreenCornerOffer}=await import("./green-corner");
-   let cursor=0;
-   // Only saved scenarios are refreshed, once per cached batch; bound storage
-   // and calculation concurrency even when many managers have saved quotes.
-   await Promise.all(Array.from({length:Math.min(4,ids.length)},async()=>{
-    while(cursor<ids.length){
-     const id=ids[cursor++];
+const refreshedEntries=new DetailReadCache<Entry|null>({maxEntries:512,maxBytes:4*1024*1024,ttlMs:60000,concurrency:4});
+export async function readSavedPreviewIndex(requestedIds?:string[]) {
+ const index=await cache.get("current",()=>readDataJson<Index>(SAVED_PREVIEW_PATH,{version:1,entries:{}}));
+ const ids=[...new Set(requestedIds||Object.keys(index.entries))].filter(id=>index.entries[id]);
+ const entries:Record<string,Entry>={};
+ if(ids.length){
+  const {getOfferFromCurrentShard}=await import("./storage");
+  const {getGreenCornerOffer}=await import("./green-corner");
+  let cursor=0;
+  await Promise.all(Array.from({length:Math.min(4,ids.length)},async()=>{
+   while(cursor<ids.length){
+    const id=ids[cursor++],original=index.entries[id];
+    const entry=await refreshedEntries.get(id+':'+original.savedAt,async()=>{
      const offer=/^green-\d+$/.test(id)?await getGreenCornerOffer(id):await getOfferFromCurrentShard(id);
-     if(!offer){delete entries[id];continue;}
+     if(!offer)return null;
      const record=await getSavedOfferCalculation(offer);
-     const entry=record?savedPreviewEntry(record,offer):null;
-     if(entry)entries[id]=entry;else delete entries[id];
-    }
-   }));
-  }
-  return {...index,entries};
- });
+     return record?savedPreviewEntry(record,offer):null;
+    });
+    if(entry)entries[id]=entry;
+   }
+  }));
+ }
+ return {...index,entries};
 }
 export async function publishSavedCalculationPreview(record:SavedOfferCalculation,offer:VehicleOffer) {
  const entry=savedPreviewEntry(record,offer);if(!entry)throw Error("invalid_saved_preview");
@@ -76,6 +75,7 @@ export async function publishSavedCalculationPreview(record:SavedOfferCalculatio
   return {version:1,entries:{...current.entries,[offer.id]:entry}};
  });
  cache.clear();
+ refreshedEntries.clear();
 }
 export function attachSavedPreviewEntries<T extends Partial<VehicleOffer>>(offers:T[],index:Index):T[] {
  return offers.map(offer=>{
@@ -88,7 +88,7 @@ export function attachSavedPreviewEntries<T extends Partial<VehicleOffer>>(offer
 }
 export async function attachSavedCalculationPreviews<T extends Partial<VehicleOffer>>(offers:T[]):Promise<T[]> {
  if(!offers.length)return offers;
- const index=await readSavedPreviewIndex();
+ const index=await readSavedPreviewIndex(offers.flatMap(offer=>offer.id?[offer.id]:[]));
  const attached=attachSavedPreviewEntries(offers,index);
  return Promise.all(attached.map(async offer=>{
   if(!isGreenCornerOffer(offer) || !(offer as any).savedCalculationPreview)return offer;

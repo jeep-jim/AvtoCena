@@ -364,7 +364,7 @@ function rejectFreshOffer(id, reason) {
   if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
 }
 let currentMarketRows = await readMarketOffers(market);
-const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id))}) : [];
+const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id)), withinRetention:true}) : [];
 logPublicationMemory("target_reserve_loaded");
 const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
 for (const row of currentMarketRows) existingInventory.set(row.id,row);
@@ -427,6 +427,12 @@ const selectionCandidateLimit = Math.max(maximumPerMarket, Math.min(100_000, max
 for (let start = 0; start < orderedCandidates.length && selected.length < selectionCandidateLimit; start += prepareConcurrency) {
   const batch = orderedCandidates.slice(start, start + prepareConcurrency);
   const audited = await runWithConcurrency(batch, prepareConcurrency, auditCandidate);
+  if (start === 0 || start % (prepareConcurrency * 32) === 0) {
+    logPublicationMemory(`audit_${start}_of_${orderedCandidates.length}`);
+    console.log(JSON.stringify({market, stage:"audit_progress", processed:start+batch.length, candidates:orderedCandidates.length, selected:selected.length, rejectionReasons}));
+    // Yield so the publication lease heartbeat is not starved.
+    await new Promise(resolve => setImmediate(resolve));
+  }
   for (const [batchIndex, result] of audited.entries()) {
     if (!result?.offer) {
       const reason = result?.reason || "unknown";
