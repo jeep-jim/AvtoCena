@@ -168,9 +168,9 @@ export function DealerEditor({
           ["offices", "Адреса",MapPin],
           ["requisites", "Реквизиты",BookOpen],
           ["markets", "Каталог и рынки",Globe],
-          ["telegram", "Telegram",Send],
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription",administration?"Подписка":"Доступ",ShieldCheck]] : []),
           ...(administration ? [["administration","Доступ",ShieldCheck]] : []),
+          ["telegram", "Telegram",Send],
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
       </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}{!demo&&s.dealerId!=='dealer_topavto'&&<Link href="/dealer-cabinet/documents" className={button+' mt-3 flex justify-center'}>Клиенты и документы</Link>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
       <div className="dealer-editor-content" data-live-preview={showLivePreview}><div className="dealer-editor-settings">
