@@ -1749,13 +1749,14 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
   for(const row of chunk)blocks.set(row.id,block);
   chunks.push(chunk);
  }
- await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v1/${block}.json`),{generationId,items}));
+ await mapWithConcurrency(chunks.map((items,block)=>({items,block})),catalogMaintenanceIoConcurrency(),({items,block})=>writeJsonAtomic(generationPath(generationId,`indexes/budget-cards-v2/${block}.json`),{generationId,items}));
  const index=buildBudgetCountIndex(generationId,rows,blocks);
+ // Versioned paths are append-only: never silently reuse an older immutable schema.
  // Readiness is published last. Missing/incomplete generations keep the original exact search.
- await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v1.json"),index);
+ await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v2.json"),index);
  return index;
 }
-const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
+const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive'];
@@ -1765,8 +1766,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await budgetIndexCache.get(manifest.generationId,()=>readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
-  if(index?.version!==1||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
+  const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
+  if(!index || ![1,2].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
   // Narrow on compact year/mileage metadata before reading card blocks.
@@ -1781,7 +1782,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    && (!params.drive || same(row[5].drive,params.drive)) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
    && (index.filterVersion!==1 || ((!params.mileageFrom || projectionNumber(row[5].mileageKm,0)>=params.mileageFrom) && (!params.mileageTo || projectionNumber(row[5].mileageKm,Infinity)<=params.mileageTo))));
-  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,rows:candidates};
+  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion:index.version,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -1789,7 +1790,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   // Bound decoded memory even when a visitor combines budget, mileage and year.
   // Never materialize the all-market projection for this query.
   await mapWithConcurrency(blocks,2,async block=>{
-   const part=await budgetCardCache.get(`${manifest.generationId}:${block}`,()=>readIndex(manifest.generationId,`budget-cards-v1/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+   const part=await budgetCardCache.get(`${manifest.generationId}:v${index.version}:${block}`,()=>readIndex(manifest.generationId,`budget-cards-v${index.version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
    if(part.generationId!==manifest.generationId){incomplete=true;return;}
    const selected=part.items.filter(row=>ids.has(row.id));
    for(const row of selected)seen.add(row.id);
@@ -1797,7 +1798,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    for(const row of prepared)if(catalogSearchProjectionMatches(row,params,modelKeys))matched.add(row.id);
   });
   if(incomplete || seen.size!==ids.size)return null;
-  return {generationId:manifest.generationId,rows:candidates.filter(row=>matched.has(row[5].id))};
+  return {generationId:manifest.generationId,cardVersion:index.version,rows:candidates.filter(row=>matched.has(row[5].id))};
  });
 }
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
@@ -1809,14 +1810,14 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
  const visible=rows.slice((page-1)*pageSize,page*pageSize);
  const blocks=[...new Set(visible.map(row=>row.block))];
- const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v1/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
  if(visible.some(row=>!byId.has(row.id)))return null;
  const {attachJapanSearchValues}=await import("./japan-delivered-preview");
  const visibleCards=visible.map(row=>byId.get(row.id)!);
  const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
- return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v1/${block}.json`)};
+ return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
 /** Derived immutable index only; generation data and current aliases are untouched. */
@@ -1825,8 +1826,11 @@ export async function backfillCatalogBudgetCountIndex(){
  const manifest=await getJsonStorage().readJson<CatalogManifest>("catalog/manifest.json",{} as CatalogManifest);
  if(manifest.generationId!==generationId)throw Error("catalog_budget_generation_changed");
  const index=await writeBudgetSearchIndex(generationId,rows);
- budgetIndexCache.clear();
- return {generationId,sourceRows:index.sourceRows,rows:index.rows.length,bytes:Buffer.byteLength(JSON.stringify(index))};
+ const stored=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v2.json",null);
+ if(stored?.version!==2 || stored.generationId!==generationId || stored.filterVersion!==1 || !Array.isArray(stored.otherRows)
+  || stored.rows.length!==index.rows.length || stored.otherRows.length!==index.otherRows!.length)throw Error("catalog_compact_index_v2_not_verified");
+ budgetIndexCache.clear();filteredBudgetSelectionCache.clear();
+ return {generationId,version:stored.version,verified:true,sourceRows:stored.sourceRows,rows:stored.rows.length,otherRows:stored.otherRows.length,bytes:Buffer.byteLength(JSON.stringify(stored))};
 }
 const catalogCountCache = new DetailReadCache<{generationId: string; total: number}>({maxEntries:128,maxBytes:128*1024,ttlMs:30_000,concurrency:4});
 /** Exact filter semantics without sorting, materializing or repricing result cards. */
