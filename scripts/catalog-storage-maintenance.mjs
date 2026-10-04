@@ -33,10 +33,10 @@ for (;;) {
   } catch(error) {
     if(!String(error?.message||error).startsWith('catalog_publish_locked:'))throw error;
     if(Date.now()>=deadline){
-      if(observedBytes===null){
-        const inventory=await getJsonStorage().listBucketObjects('');
-        observedBytes=inventory.reduce((sum,row)=>sum+Math.max(0,Number(row.size)||0),0);
-      }
+      // Measure again after waiting: the active publisher may have added a
+      // generation while this runner was queued behind its lock.
+      const inventory=await getJsonStorage().listBucketObjects('');
+      observedBytes=inventory.reduce((sum,row)=>sum+Math.max(0,Number(row.size)||0),0);
       const report={checkedAt:new Date().toISOString(),deferred:true,reason:'catalog_writer_busy',
         currentBytes:observedBytes,deletedObjects:0,limitBytes:CATALOG_STORAGE_LIMIT_BYTES,
         headroomBytes:CATALOG_STORAGE_HEADROOM_BYTES,
@@ -45,6 +45,7 @@ for (;;) {
       await fs.writeFile('catalog-storage-maintenance.json',reportJson);
       await fs.writeFile(process.env.CATALOG_STORAGE_CLEANUP_REPORT||'catalog-storage-cleanup-report.json',reportJson);
       console.log(JSON.stringify(report));
+      if(!report.ok)throw Error('storage_headroom_insufficient_while_writer_busy');
       process.exit(0);
     }
     console.log('Storage maintenance waiting for active catalog operation');
