@@ -58,7 +58,7 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
     <button type="button" className="recovery-close" aria-label="Закрыть восстановление пароля" onClick={onClose}><X size={21}/></button>
     <h2 id="recovery-title">Восстановление пароля</h2>
     <p className="account-muted">Введите номер телефона, указанный при регистрации, и выберите способ подтверждения для смены пароля.</p>
-    <form onSubmit={submit}>
+    <form data-no-route-loader="true" onSubmit={submit}>
       <label>Телефон, указанный при регистрации<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={22} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(event.target.value)}/></label>
       <fieldset disabled={busy || !!challenge}><legend>Куда отправить подтверждение?</legend><div className="recovery-channels">
         {CHANNELS.map(({id,label,Icon,available}) => <label key={id} className="recovery-channel" data-selected={channel === id}>

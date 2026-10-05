@@ -9,7 +9,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 process.env.AUTH_SECRET='isolated-browser-auth-secret';
 const auth=await customerAuthHarness();
 const out='artifacts/customer-auth';fs.mkdirSync(out,{recursive:true});
-await build({entryPoints:['tests/browser/account-entrance-fixture.tsx'],outfile:`${out}/fixture.js`,external:['/fonts/*'],bundle:true,platform:'browser',format:'esm',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:a.path==='next/navigation'?'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{}});':`import React from 'react';export default function Link(p){return React.createElement('a',p)}`,loader:'jsx',resolveDir:process.cwd()}));}}]});
+await build({stdin:{contents:"import './tests/browser/account-entrance-fixture';import React from 'react';import {createRoot} from 'react-dom/client';import {RoutePreloader} from './apps/web/components/layout/RoutePreloader';const root=document.body.appendChild(document.createElement('div'));createRoot(root).render(<RoutePreloader/>);",loader:'tsx',resolveDir:process.cwd()},outfile:`${out}/fixture.js`,external:['/fonts/*'],bundle:true,platform:'browser',format:'esm',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:a.path==='next/navigation'?'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{},prefetch:()=>{}});':`import React from 'react';export default function Link(p){return React.createElement('a',p)}`,loader:'jsx',resolveDir:process.cwd()}));}}]});
 const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx'],theme:{extend:{}},plugins:[]})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});
 const server=http.createServer(async(req,res)=>{
  try{
@@ -44,6 +44,7 @@ try{
   await phone.evaluate(input=>input.value='staff-login');
   await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
   await page.getByRole('alert').filter({hasText:'цифрами'}).waitFor();
+  await page.waitForTimeout(200);assert.equal(await page.locator('.ac-route-loader').getAttribute('aria-hidden'),'true','invalid forms must not start navigation loading');
   await phone.fill('+79991');await password.focus();await page.getByRole('alert').filter({hasText:'не хватает'}).waitFor();
   const number='+79990'+String(width).padStart(4,'0')+(theme==='light'?'01':'02');
   await phone.fill(number);
