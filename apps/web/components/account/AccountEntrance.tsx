@@ -1,6 +1,7 @@
 'use client';
 
 import {AccountScenes} from './AccountScenes';
+import {ACCOUNT_SCENES} from './scene-content';
 import {BetaApplication} from './BetaApplication';
 import {useState} from 'react';
 import {ArrowUpRight, ArrowLeft, MessageCircle, FileText, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
@@ -8,12 +9,16 @@ import {LoginForm} from '@/components/auth/LoginForm';
 import {PasswordField} from '@/components/auth/PasswordField';
 import {ACCOUNT_ROLES, type AccountRole, type AccountAppearance} from '@/lib/account-appearance';
 import './account.css';
+import './account-entrance.css';
 
 type Mode = 'login' | 'register' | 'recover';
 
 export function AccountEntrance({nextPath, errorCode, initialRole, appearance = {}}: {nextPath: string; errorCode: string; initialRole: string; appearance?: AccountAppearance}) {
   const [role, setRole] = useState<AccountRole>(initialRole === 'dealer' || initialRole === 'team' ? 'dealer' : initialRole === 'blogger' || initialRole === 'supplier' ? initialRole : 'customer');
+  const [sceneIndex, setSceneIndex] = useState(0);
   const selectedArt = appearance[role];
+  const scene = ACCOUNT_SCENES[role][sceneIndex % ACCOUNT_SCENES[role].length];
+  function selectRole(next: AccountRole) {setRole(next); setSceneIndex(0);}
   const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
   const [mode, setMode] = useState<Mode>('login');
   const [phone, setPhone] = useState('');
@@ -69,21 +74,21 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     }
   }
 
-  return <div className="account-entrance">
-    <header className="account-entrance-heading"><h1>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h1></header>
+  return <div className="account-entrance account-original-design">
+    <header className="account-entrance-heading"><div className="entrance-eyebrow"><span/>{role === 'customer' ? 'Личный кабинет покупателя' : role === 'dealer' ? 'Кабинет автодилера' : role === 'blogger' ? 'Автоблогер · закрытая бета' : 'АвтоПоставщик · закрытая бета'}</div><h1>{selectedArt?.banner ? (role === 'customer' ? 'Ваш автомобиль — в пути' : ACCOUNT_ROLES.find(item=>item.id===role)?.label) : scene.title}</h1><p>{selectedArt?.banner ? 'Заявки, общение и возможности вашего кабинета.' : scene.description}</p></header>
     <div className="account-login-main">
       <aside className={`account-welcome${selectedArt?.banner ? ' has-banner' : ''}`}>
         {selectedArt?.banner && <img className="account-welcome-background" src={selectedArt.banner} alt=""/>}
-        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : <AccountScenes role={role}/>}
+        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : <AccountScenes key={role} role={role} onSceneChange={setSceneIndex}/>}
 
       </aside>
-      <section className="account-login-form">
+      <section className="account-login-form" data-mode={role === 'customer' ? mode : role}>
         {role === 'blogger' || role === 'supplier' ? <>
-          <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
+          <button className="account-text-button" onClick={() => selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
           <h2>{ACCOUNT_ROLES.find(item => item.id === role)?.label}</h2>
           <BetaApplication key={role} role={role}/>
         </> : role === 'dealer' ? <>
-          <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
+          <button className="account-text-button" onClick={() => selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
           <h2>Вход в кабинет</h2>
           <LoginForm nextPath={nextPath.startsWith('/crm') ? nextPath : '/dealer-cabinet'} errorCode={errorCode}/>
         </> : <>
@@ -121,7 +126,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     <div className="account-roles">
       {ACCOUNT_ROLES.filter(item => item.id !== 'customer').map(item => {
         const Icon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[item.id];
-        return <button key={item.id} aria-pressed={role === item.id} onClick={() => {setRole(item.id); window.scrollTo({top: 0, behavior: 'smooth'});}}>
+        return <button key={item.id} aria-pressed={role === item.id} onClick={() => {selectRole(item.id); window.scrollTo({top: 0, behavior: 'smooth'});}}>
           <span className="account-role-art" data-role-art={item.id}>{appearance[item.id]?.icon ? <img src={appearance[item.id]?.icon} alt="" width={72} height={72}/> : <Icon size={28}/>}</span>
           <span><strong>{item.label}</strong><small>{item.id === 'dealer' ? 'Автомобили и клиенты' : 'Заявка в закрытую бету'}</small></span><ArrowUpRight size={18}/>
         </button>;

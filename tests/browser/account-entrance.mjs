@@ -7,13 +7,14 @@ import tailwindcss from 'tailwindcss';
 import sharp from 'sharp';
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const out = 'artifacts/account-entrance'; fs.mkdirSync(out, {recursive: true});
-await build({entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
+await build({external:['/fonts/*'],entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
   b.onResolve({filter: /^next\/(link|navigation)$/}, a => ({path: a.path, namespace: 'mock'}));
   b.onLoad({filter: /.*/, namespace: 'mock'}, a => ({contents: a.path === 'next/navigation' ? 'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{}});' : `import React from 'react';export default function Link(p){return React.createElement('a',p)}`, loader: 'jsx', resolveDir: process.cwd()}));
 }}]});
 const css = await postcss([tailwindcss({content: ['apps/web/components/**/*.tsx'], theme: {extend: {}}, plugins: []})]).process('@tailwind base;@tailwind components;@tailwind utilities;', {from: undefined});
 const picture = await sharp({create: {width: 240, height: 280, channels: 4, background: '#4b654a'}}).webp().toBuffer();
 const server = http.createServer((req, res) => {
+  if (/^\/fonts\/inter-(latin|cyrillic)-wght-normal\.woff2$/.test(req.url)) {res.setHeader('Content-Type','font/woff2');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (/^\/avatars\/customers\/character-\d+\.svg$/.test(req.url)) {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (req.url.startsWith('/api/site-media/')) {res.setHeader('Content-Type', 'image/webp'); return res.end(picture);}
   if (req.url === '/fixture.js') {res.setHeader('Content-Type', 'application/javascript'); return res.end(fs.readFileSync(`${out}/fixture.js`));}
@@ -68,6 +69,24 @@ try {
       assert.equal(await page.locator('.account-scene-controls button[aria-pressed=true]').innerText(),'2');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
       await page.screenshot({path:`${out}/scenes-${role}-${width}-${theme}.png`,fullPage:true});
+      const count=await page.locator('.step-node').count();
+      assert.equal(count,role==='customer'?6:role==='dealer'?5:4);
+      for(let n=0;n<count;n++){
+        await page.locator('.step-node').nth(n).click();
+        assert.equal(await page.locator('.step-node[aria-pressed=true]').innerText(),String(n+1));
+        assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+        const clipped=await page.locator('.account-scenes .scene').evaluate(el=>{
+          const outer=el.getBoundingClientRect();const child=el.firstElementChild.getBoundingClientRect();
+          return child.height>outer.height+2 || child.width>outer.width+2;
+        });
+        if(clipped)await page.screenshot({path:`${out}/clipped-${role}-${n+1}-${width}-${theme}.png`,fullPage:true});
+        assert.equal(clipped,false,`${role} scene ${n+1} must fit at ${width}/${theme}`);
+        if((width===390||width===1440)&&theme==='dark')await page.screenshot({path:`${out}/original-${role}-${n+1}-${width}.png`,fullPage:true});
+      }
+      if(role==='customer'){
+        await page.getByRole('button',{name:'4 звезды',exact:true}).click();assert.equal(await page.locator('.review-star.is-filled').count(),4);
+        await page.getByRole('button',{name:'Пример публикации',exact:true}).click();await page.getByRole('status').filter({hasText:'Это пример'}).waitFor();
+      }
     }
     let beta;await page.route('**/api/account/beta',route=>{beta=route.request().postDataJSON();return route.fulfill({json:{ok:true}});});
     await page.getByLabel('Имя или компания').fill('Тестовая компания');await page.getByLabel('Телефон, почта или Telegram').fill('@test');await page.getByLabel('О компании и направлениях поставок').fill('Проверяем заявку без реальной отправки');await page.locator('input[name=consent]').check();await page.getByRole('button',{name:'Подать заявку',exact:true}).click();await page.getByRole('status').filter({hasText:'Заявка принята'}).waitFor();assert.equal(beta.role,'supplier');assert.equal(beta.consent,true);await page.close();
@@ -83,6 +102,24 @@ try {
     await page.getByLabel('Как к вам обращаться').fill('Антон');await page.getByRole('button',{name:'Персонаж 12',exact:true}).click();await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('status').filter({hasText:'Профиль сохранён'}).waitFor();assert.equal(saved.avatarId,'character-12');await page.getByRole('heading',{name:'Здравствуйте, Антон'}).waitFor();
     await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
     await page.screenshot({path:`${out}/profile-notices-${width}.png`,fullPage:true});await page.close();
+  }
+  {
+    const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});
+    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(origin+'/login?scenes');
+    await page.getByRole('button',{name:/Сцена 2:/}).click();await page.mouse.move(0,0);
+    await page.locator('.contract-viewer.is-active').waitFor();
+    await page.locator('.contract-signature.is-signing').waitFor();
+    await page.locator('.contract-status.is-visible').waitFor();
+    assert.equal(await page.locator('.contract-viewer-line.is-visible').count(),8);
+    await page.getByRole('button',{name:/Сцена 3:/}).click();await page.mouse.move(0,0);
+    const before=await page.locator('.track-truck').evaluate(el=>el.getBoundingClientRect().left);
+    await page.waitForTimeout(1000);
+    const after=await page.locator('.track-truck').evaluate(el=>el.getBoundingClientRect().left);assert.ok(after>before+2,'car moves along original route');
+    await page.getByRole('button',{name:'Остановить смену сцен',exact:true}).click();
+    await page.getByRole('button',{name:/Сцена 1:/}).click();
+    assert.equal(await page.locator('.chat-msg').first().evaluate(el=>getComputedStyle(el).opacity),'1');
+    assert.deepEqual(errors,[]);await page.close();
   }
   console.log(JSON.stringify({passed: true, widths: [390, 1440], themes: ['light', 'dark'], passwordConfirmation: true, fourRoleBackgrounds: true, eightUploads: true, settingsSaved: true, legacyStaffEntry: true}));
 } finally {await browser.close(); await new Promise(r => server.close(r));}
