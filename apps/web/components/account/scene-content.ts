@@ -4,7 +4,7 @@ import {SCENE_TEMPLATES} from './scene-templates';
 type Scene = {template: number; title: string; description: string; replace?: Record<string,string>};
 export const ACCOUNT_SCENES: Record<AccountRole, Scene[]> = {
   customer: [
-    {template:0,title:'Ваш автомобиль — в пути',description:'Общайтесь с менеджером, следите за заявкой и документами.'},
+    {template:0,title:'Ваш менеджер — на связи',description:'Общайтесь с менеджером, следите за заявкой и документами.'},
     {template:1,title:'Договор с вашим дилером',description:'Согласуйте условия и сохраните подписанный договор в кабинете.'},
     {template:2,title:'Каждый этап — на связи',description:'Уточняйте ход доставки у менеджера. На экране — пример маршрута.'},
     {template:3,title:'Все документы под рукой',description:'Договоры, фотографии и файлы по заявке — в одном месте.'},
