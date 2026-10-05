@@ -1,5 +1,15 @@
 name: Verify green corner budget
 on:
+  pull_request:
+    paths:
+      - 'apps/web/**'
+      - 'tests/green-corner-filters.test.ts'
+      - 'tests/browser/green-budget*'
+      - '.github/workflows/verify-green-budget.yml'
+  workflow_run:
+    workflows: ['Deploy to Yandex Cloud']
+    types: [completed]
+    branches: [main]
   push:
     branches: [fix/green-budget-20260924, main]
     paths:
@@ -11,10 +21,16 @@ permissions:
   contents: read
 jobs:
   verify:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -27,9 +43,9 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/green-budget.mjs
       - name: Wait for exact deployed release and check live budget
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'workflow_run'
         env:
-          EXPECTED_RELEASE: ${{ github.sha }}
+          EXPECTED_RELEASE: ${{ github.event.workflow_run.head_sha }}
         run: |
           node --input-type=module <<'JS'
           import assert from 'node:assert/strict';
@@ -46,7 +62,7 @@ jobs:
           console.log(JSON.stringify({release:process.env.EXPECTED_RELEASE,total:result.total,checked:result.items.length}));
           JS
       - name: Live desktop and mobile budget controls
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'workflow_run'
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
           LIVE_ORIGIN: https://avtocena.com
