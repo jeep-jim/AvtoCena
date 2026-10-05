@@ -32,7 +32,7 @@ export async function addDiscussionMessage(user:AuthUser,type:DiscussionType,id:
  const entity=await updateChunkedDataJson<any>(file(type),id,current=>{
   added=false;if(!canSeeLead(user,current))throw Error('discussion_forbidden');
   const messages=discussionMessages(current),existing=messages.find(n=>n.id===note.id);
-  if(existing){if(existing.text!==text)throw Error('message_conflict');return current;}
+  if(existing){if(existing.text!==text||existing.replyTo!==(input.replyTo||undefined))throw Error('message_conflict');return current;}
   if(input.replyTo){if(typeof input.replyTo!=='string'||!messages.some(n=>n.id===input.replyTo))throw Error('invalid_reply');note.replyTo=input.replyTo;}
   added=true;return {...current,updatedAt:note.createdAt,internalNotes:[...(current.internalNotes||[]),note]};
  });

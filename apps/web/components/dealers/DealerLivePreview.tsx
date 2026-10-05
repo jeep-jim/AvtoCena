@@ -9,7 +9,7 @@ import {DEALER_MARKETS} from '@/lib/dealers/catalog-markets';
 import {applyBasicAccess} from '@/lib/dealers/program-model';
 import type {DealerShowcase} from '@/lib/dealers/showcase-model';
 
-const documentHtml='<!doctype html><html lang="ru" data-dealer-editor-preview="true"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><div id="dealer-preview-root"></div></body></html>';
+const documentHtml='<!doctype html><html lang="ru" data-dealer-editor-preview="true"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#1a2029"><div id="dealer-preview-root"></div></body></html>';
 /** An actual narrow viewport keeps public media queries and styles isolated from CRM. */
 export function DealerLivePreview({value,section,verified,fullAccess}:{value:DealerShowcase;section:string;verified:boolean;fullAccess:boolean}){
  const frame=useRef<HTMLIFrameElement>(null);
@@ -28,18 +28,26 @@ export function DealerLivePreview({value,section,verified,fullAccess}:{value:Dea
   if(!mount)return;
   const doc=mount.ownerDocument;
   const syncTheme=()=>{doc.documentElement.className=document.documentElement.className;if(document.documentElement.dataset.theme)doc.documentElement.dataset.theme=document.documentElement.dataset.theme;else delete doc.documentElement.dataset.theme;};
+  // Reconcile in place: removing every stylesheet exposes the white iframe
+  // canvas while replacement links load, even when the user only edits text.
+  const copies=new Map<Element,{copy:HTMLElement;signature:string}>();
   const syncStyles=()=>{
-   doc.head.querySelectorAll('[data-preview-style]').forEach(n=>n.remove());
-   document.querySelectorAll('style,link[rel="stylesheet"]').forEach(node=>{
-    if(node.tagName==='STYLE'&&node.textContent?.includes('.dealer-editor-shell'))return;
+   const sources=[...document.querySelectorAll('style,link[rel="stylesheet"]')].filter(node=>!(node.tagName==='STYLE'&&node.textContent?.includes('.dealer-editor-shell')));
+   for(const node of sources){
+    const signature=node.outerHTML,old=copies.get(node);
+    if(old?.signature===signature)continue;
     const copy=node.cloneNode(true) as HTMLElement;copy.dataset.previewStyle='true';
-    if(copy instanceof HTMLLinkElement)copy.href=(node as HTMLLinkElement).href;
-    doc.head.appendChild(copy);
-   });
+    if(node instanceof HTMLLinkElement)copy.setAttribute('href',node.href);
+    if(old){if(node instanceof HTMLLinkElement){copy.addEventListener('load',()=>old.copy.remove(),{once:true});doc.head.insertBefore(copy,old.copy);}else old.copy.replaceWith(copy);}
+    else doc.head.appendChild(copy);
+    copies.set(node,{copy,signature});
+   }
+   for(const [source,{copy}] of copies)if(!sources.includes(source)){copy.remove();copies.delete(source);}
+   doc.body.style.background='var(--ac-page-bg,var(--ac-bg,#1a2029))';
   };
   syncTheme();syncStyles();
   const themeObserver=new MutationObserver(syncTheme);themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['class','data-theme']});
-  const stylesObserver=new MutationObserver(syncStyles);stylesObserver.observe(document.head,{childList:true});
+  const stylesObserver=new MutationObserver(syncStyles);stylesObserver.observe(document.head,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['href','media']});
   return()=>{themeObserver.disconnect();stylesObserver.disconnect();};
  },[mount]);
  const s=fullAccess?value:applyBasicAccess(value);

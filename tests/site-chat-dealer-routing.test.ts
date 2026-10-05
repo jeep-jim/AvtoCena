@@ -114,3 +114,31 @@ test('revoked chat access blocks reads and writes and excludes employee from rec
  assert.equal((await chatList(owner)).team.some(u=>u.id===denied.id),false);
  assert.equal((await chatDetail(owner,'team_general')).members?.some(u=>u.id===denied.id),false);
 }));
+test('notification replies retain the original thread and customer quotes cannot cross lead boundaries',()=>isolated(async()=>{
+ const {id}=await createDirectChat(owner,manager.id);
+ await sendChatMessage(owner,id,{text:'Проверить документы',operationId:'notice-source-001'});
+ const notices=await chatDetail(manager,'notifications');const notice=notices.messages.find(m=>m.replyTarget?.kind==='chat');
+ assert.equal(notice?.replyTarget?.thread,id);assert.equal(notice?.replyTarget?.messageId,notice?.id);
+ await sendChatMessage(manager,id,{text:'Проверил',replyToId:notice!.id,operationId:'notice-reply-001'});
+ assert.equal((await chatDetail(owner,id)).messages.at(-1)?.replyTo?.text,'Проверить документы');
+ await writeDataJson('leads/leads.json',[{id:'a',assignedManagerId:manager.id,telegramChatId:'12345'},{id:'b',assignedManagerId:manager.id,telegramChatId:'23456'}]);
+ await writeDataJson('telegram/crm-messages.json',[{id:'in-a',leadId:'a',text:'Когда приедет?',direction:'in',createdAt:new Date().toISOString()},{id:'in-b',leadId:'b',text:'Другой клиент',direction:'in',createdAt:new Date().toISOString()}]);
+ const input={text:'Завтра',replyToId:'in-a',operationId:'lead-quoted-001'};
+ await sendChatMessage(manager,'lead:a',input);await sendChatMessage(manager,'lead:a',input);
+ assert.equal((await chatDetail(manager,'lead:a')).messages.find(m=>m.mine)?.replyTo?.text,'Когда приедет?');
+ const queue=await readChunkedDataJson<any>('telegram/crm-outbox.json',[]);assert.equal(queue.length,1);assert.match(queue[0].text,/В ответ на: Когда приедет\?/);
+ await assert.rejects(sendChatMessage(manager,'lead:a',{...input,replyToId:'in-b',operationId:'bad-lead-quote'}),/invalid_reply/);
+ await assert.rejects(sendChatMessage(manager,'lead:a',{...input,replyToId:undefined}),/message_conflict/);
+}));
+
+test('system event replies require an accessible notice and explicit team destination',()=>isolated(async()=>{
+ const {notifyTeam}=await import('../apps/web/lib/crm-notification-store');
+ const {id}=await createDirectChat(owner,manager.id);
+ await notifyTeam({id:'event-visible',createdAt:new Date().toISOString(),recipientIds:[owner.id],kind:'staff',title:'Изменение графика',text:'Завтра с 10:00',href:'/crm/managers'});
+ const notice=(await chatDetail(owner,'notifications')).messages.find(m=>m.id==='event-visible');assert.deepEqual(notice?.replyTarget,{kind:'notice',noticeId:'event-visible'});
+ const input={text:'Принято',noticeId:'event-visible',operationId:'event-reply-001'};
+ await sendChatMessage(owner,id,input);await sendChatMessage(owner,id,input);
+ const messages=(await chatDetail(manager,id)).messages;assert.equal(messages.length,1);assert.equal(messages[0].replyTo?.text,'Завтра с 10:00');
+ await assert.rejects(sendChatMessage(manager,id,{...input,operationId:'event-denied-001'}),/invalid_reply/);
+ await assert.rejects(sendChatMessage(owner,id,{...input,noticeId:undefined}),/message_conflict/);
+}));

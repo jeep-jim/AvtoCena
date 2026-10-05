@@ -1,8 +1,8 @@
 export const ACCOUNT_ROLES = [
   {id: 'customer', label: 'Пользователь'},
-  {id: 'dealer', label: 'АвтоДилер'},
+  {id: 'dealer', label: 'Автодилер'},
   {id: 'blogger', label: 'Автоблогер'},
-  {id: 'supplier', label: 'АвтоПоставщик'},
+  {id: 'supplier', label: 'Автопоставщик'},
 ] as const;
 export type AccountRole = typeof ACCOUNT_ROLES[number]['id'];
 export type AccountAppearance = Partial<Record<AccountRole, {banner: string; icon: string}>>;
