@@ -47,7 +47,7 @@ try {
     await page.goto(origin + '/login?role=team'); await page.getByText('Вход в кабинет', {exact: true}).waitFor(); assert.equal(await page.getByText('Вход для команды', {exact: true}).count(), 0);
     let saved; await page.route('**/api/crm/site-media', route => route.fulfill({json: {url: '/api/site-media/' + 'a'.repeat(64)}}));
     await page.route('**/api/crm/public-features', route => {saved = route.request().postDataJSON(); return route.fulfill({json: {...saved, version: 1}});});
-    await page.goto(origin + '/crm/site'); assert.equal(await page.locator('input[type="file"]').count(), 8);
+    await page.goto(origin + '/crm/site'); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme); assert.equal(await page.locator('input[type="file"]').count(), 8);
     await page.getByLabel('Загрузить фон: Пользователь', {exact: true}).setInputFiles({name: 'banner.webp', mimeType: 'image/webp', buffer: picture});
     await page.getByAltText('Фон: Пользователь', {exact: true}).waitFor();
     await page.getByLabel('Загрузить иконку: АвтоПоставщик', {exact: true}).setInputFiles({name: 'icon.webp', mimeType: 'image/webp', buffer: picture});
