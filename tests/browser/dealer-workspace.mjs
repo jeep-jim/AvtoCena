@@ -167,7 +167,7 @@ try{
    if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),theme==='light'?'rgb(207, 229, 216)':'rgb(11, 48, 33)');
    if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.hasAttribute('data-city-delivery') && el.nextElementSibling?.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
    assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
-   await page.getByRole('button',{name:'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
+   await page.getByRole('button',{name:width<1280?'Связаться':'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
    await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.getByRole('dialog').waitFor({state:'detached'});
    await page.getByRole('button',{name:'Добавить в избранное',exact:true}).filter({visible:true}).click();
    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_favorites'))[0].dealerId),'dealer_topavto');
