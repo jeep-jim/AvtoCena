@@ -55,3 +55,12 @@ test('message cleanup retains referenced chunks, recent writes, unknown dates an
  assert.deepEqual(obsoleteMessageChunks(rows,null,name,now),[]);
  assert.deepEqual(obsoleteMessageChunks(rows,{...index,collection:'wrong'},name,now),[]);
 });
+
+import {readAccountUpload} from '../apps/web/lib/account/request';
+test('avatar uploads enforce streamed body limit without Content-Length',async()=>{
+ const form=new FormData();form.set('file',new File(['x'.repeat(200)],'photo.png',{type:'image/png'}));
+ const encoded=new Response(form);const bytes=await encoded.arrayBuffer();
+ await assert.rejects(readAccountUpload(new Request('https://avtocena.com/api/account/avatar',{method:'POST',headers:{'content-type':encoded.headers.get('content-type')!},body:bytes}),100));
+ const small=new FormData();small.set('file',new File(['image'],'photo.png',{type:'image/png'}));
+ assert.ok((await readAccountUpload(new Request('https://avtocena.com/api/account/avatar',{method:'POST',body:small}))).get('file') instanceof File);
+});

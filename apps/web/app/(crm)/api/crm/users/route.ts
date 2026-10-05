@@ -44,6 +44,8 @@ export async function POST(request: Request) {
     const role: UserRole = ["owner", "admin", "manager", "dealer"].includes(requestedRole) ? requestedRole : "manager";
     const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&isAdministrativeCrmPermission(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
     if(permissions&&actor.role!=="owner"&&Object.entries(permissions).some(([key,value])=>value&&!hasCrmPermission(actor,key as CrmPermission)))throw Error("Нельзя выдать права, которых у вас нет");
+    if(actor.role!=="owner"&&form.has("permission_deleteReviews"))throw Error("Право удаления отзывов выдаёт только владелец");
+    if(actor.role!=="owner"&&permissions)delete permissions.deleteReviews;
     const birthDate=form.has("birthDate")?validateBirthDate(clean(form.get("birthDate"),10)):undefined;
     const status = clean(form.get("status"), 30) === "disabled" ? "disabled" : "active";
     const companyId = clean(form.get("companyId"), 160) || "dealer_topavto";
@@ -74,6 +76,7 @@ export async function POST(request: Request) {
       if (!current) throw new Error("Сотрудник не найден");
       if (current.role === "owner" && actor.role !== "owner") throw new Error("Изменить владельца может только владелец");
       if (actor.id === userId && (status === "disabled" || role !== current.role)) throw new Error("Нельзя отключить или понизить собственный доступ");
+      if(actor.role!=="owner"&&permissions)permissions.deleteReviews=current.permissions?.deleteReviews===true;
       assertCanGrant({...current,role,status:"active",permissions:permissions||current.permissions});
       previous=current;
       if(actor.id===userId&&permissions&&!permissions.staff)throw Error("Нельзя отключить собственное управление доступом");

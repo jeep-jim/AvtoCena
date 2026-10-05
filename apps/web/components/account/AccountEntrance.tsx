@@ -1,5 +1,7 @@
 'use client';
 
+import {AccountScenes} from './AccountScenes';
+import {BetaApplication} from './BetaApplication';
 import {useState} from 'react';
 import {ArrowUpRight, ArrowLeft, MessageCircle, FileText, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
 import {LoginForm} from '@/components/auth/LoginForm';
@@ -68,25 +70,18 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   }
 
   return <div className="account-entrance">
+    <header className="account-entrance-heading"><h1>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h1></header>
     <div className="account-login-main">
       <aside className={`account-welcome${selectedArt?.banner ? ' has-banner' : ''}`}>
         {selectedArt?.banner && <img className="account-welcome-background" src={selectedArt.banner} alt=""/>}
-        <span className="account-kicker">Личный кабинет</span>
-        <div className="account-art-slot" data-role-art={role}>
-          {selectedArt?.icon ? <img src={selectedArt.icon} alt="" width={180} height={180}/> : <RoleIcon size={80} strokeWidth={1.2}/>}
-        </div>
-        <h1>Ваш автомобиль.<br/>Всё рядом.</h1>
-        <p>{role === 'dealer' ? 'Автомобили, заявки и общение с клиентами — в одном месте.' : role === 'blogger' ? 'Рассказывайте об автомобилях и делитесь своим опытом.' : role === 'supplier' ? 'Предлагайте автомобили дилерам и покупателям.' : 'Заявки, документы и общение с менеджером — в одном месте.'}</p>
-        <div className="account-welcome-points">
-          <span><MessageCircle size={18}/> {role === 'dealer' ? 'Общение с клиентами' : 'Ваш менеджер на связи'}</span>
-          <span><FileText size={18}/> Документы под рукой</span>
-        </div>
+        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : <AccountScenes role={role}/>}
+
       </aside>
       <section className="account-login-form">
         {role === 'blogger' || role === 'supplier' ? <>
           <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
           <h2>{ACCOUNT_ROLES.find(item => item.id === role)?.label}</h2>
-          <p className="account-muted">Регистрация для этой роли скоро откроется.</p>
+          <BetaApplication key={role} role={role}/>
         </> : role === 'dealer' ? <>
           <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
           <h2>Вход в кабинет</h2>
@@ -128,7 +123,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
         const Icon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[item.id];
         return <button key={item.id} aria-pressed={role === item.id} onClick={() => {setRole(item.id); window.scrollTo({top: 0, behavior: 'smooth'});}}>
           <span className="account-role-art" data-role-art={item.id}>{appearance[item.id]?.icon ? <img src={appearance[item.id]?.icon} alt="" width={72} height={72}/> : <Icon size={28}/>}</span>
-          <span><strong>{item.label}</strong><small>{item.id === 'dealer' ? 'Автомобили и клиенты' : 'Скоро'}</small></span><ArrowUpRight size={18}/>
+          <span><strong>{item.label}</strong><small>{item.id === 'dealer' ? 'Автомобили и клиенты' : 'Заявка в закрытую бету'}</small></span><ArrowUpRight size={18}/>
         </button>;
       })}
     </div>

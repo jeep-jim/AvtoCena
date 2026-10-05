@@ -1,5 +1,6 @@
 'use client';
 
+import {BetaApplications} from './BetaApplications';
 import {useState} from 'react';
 import {ImagePlus, Trash2} from 'lucide-react';
 import {ACCOUNT_ROLES, type AccountAppearance} from '@/lib/account-appearance';
@@ -24,7 +25,7 @@ export function AccountAppearanceEditor({value, onChange, onBusyChange}: {
   }
   return <section className="border-b border-[var(--ac-border)] py-5" aria-labelledby="account-appearance-title">
     <h2 id="account-appearance-title" className="text-xl font-bold">Вход и регистрация</h2>
-    <p className="mt-2 text-sm text-[var(--ac-muted)]">Загрузите фон и иконку для каждого типа аккаунта. Фон меняется при выборе роли. Изменения появятся на сайте после сохранения.</p>
+    <p className="mt-2 text-sm text-[var(--ac-muted)]">По умолчанию показываем анимированные возможности выбранной роли. Загрузите фон, чтобы заменить сцены изображением. Уберите фон, чтобы вернуть анимацию. Изменения появятся после сохранения.</p>
     <a className="mt-3 inline-block text-sm underline" href="/login" target="_blank" rel="noreferrer">Открыть страницу входа</a>
     <div className="mt-5 grid gap-6 lg:grid-cols-2">{ACCOUNT_ROLES.map(role => <section key={role.id} aria-label={role.label}>
       <h3 className="mb-3 font-bold">{role.label}</h3>
@@ -45,6 +46,7 @@ export function AccountAppearanceEditor({value, onChange, onBusyChange}: {
       })}</div>
     </section>)}</div>
     <p className="mt-4 text-xs leading-5 text-[var(--ac-muted)]">Фон: рекомендуем 1200 × 1400 px, важные детали — по центру. Иконка: квадрат от 256 × 256 px, можно с прозрачным фоном. JPG, PNG или WebP до 8 МБ.</p>
+    <BetaApplications/>
     {error && <p className="mt-3 text-sm text-red-500" role="alert">{error}</p>}
   </section>;
 }
