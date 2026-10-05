@@ -72,12 +72,14 @@ try {
     let beta;await page.route('**/api/account/beta',route=>{beta=route.request().postDataJSON();return route.fulfill({json:{ok:true}});});
     await page.getByLabel('Имя или компания').fill('Тестовая компания');await page.getByLabel('Телефон, почта или Telegram').fill('@test');await page.getByLabel('О компании и направлениях поставок').fill('Проверяем заявку без реальной отправки');await page.locator('input[name=consent]').check();await page.getByRole('button',{name:'Подать заявку',exact:true}).click();await page.getByRole('status').filter({hasText:'Заявка принята'}).waitFor();assert.equal(beta.role,'supplier');assert.equal(beta.consent,true);await page.close();
   }
-  for(const width of [390,1440]){
+  for(const width of [320,390,1440]){
     const page=await browser.newPage({viewport:{width,height:900}});let saved;
+    await page.route('**/api/auth/me',route=>route.fulfill({json:{user:null}}));
+    await page.route('**/api/account/auth',route=>route.fulfill({json:{account:{id:'test',name:'Тестовый покупатель',phone:'+79990000000',avatarId:'character-1',avatarUrl:'/avatars/customers/character-1.svg'}}}));
     await page.route('**/api/account/portal',route=>route.fulfill({json:{clients:[]}}));
     await page.route('**/api/account/notifications',route=>route.fulfill({json:{items:[{id:'n1',title:'Можно оставить отзыв',text:'Договор подтверждён',at:'2026-10-05T00:00:00Z',href:'/account?tab=reviews'}]}}));
     await page.route('**/api/account/profile',route=>{saved=route.request().postDataJSON();return route.fulfill({json:{account:{id:'test',phone:'+79990000000',name:saved.name,avatarId:saved.avatarId,avatarUrl:'/avatars/customers/'+saved.avatarId+'.svg',telegramConnected:true}}});});
-    await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();assert.equal(await page.locator('.account-avatar-grid button').count(),20);
+    await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();await page.locator('.customer-header-tools').waitFor();if(width<761)assert.equal(await page.locator('.ac-public-header a[href="/"]>div').isVisible(),false,'compact customer header prevents wordmark overlap');assert.equal(await page.locator('.account-avatar-grid button').count(),20);
     await page.getByLabel('Как к вам обращаться').fill('Антон');await page.getByRole('button',{name:'Персонаж 12',exact:true}).click();await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('status').filter({hasText:'Профиль сохранён'}).waitFor();assert.equal(saved.avatarId,'character-12');await page.getByRole('heading',{name:'Здравствуйте, Антон'}).waitFor();
     await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
     await page.screenshot({path:`${out}/profile-notices-${width}.png`,fullPage:true});await page.close();
