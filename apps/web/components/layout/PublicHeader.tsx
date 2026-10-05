@@ -164,7 +164,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             </Link> : (            <Link href="/" className="flex min-w-0 items-center gap-2.5">
               <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
               <div className="min-w-0">
-                <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-white">Цена</span></div>
+                <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></div>
                 <div className="text-[11px] font-bold leading-none text-white/42">подбор · расчёт</div>
               </div>
             </Link>)}

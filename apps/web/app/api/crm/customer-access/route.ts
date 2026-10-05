@@ -1,3 +1,5 @@
+import {after} from 'next/server';
+import {sendCustomerPush} from '@/lib/account/push';
 import {readAccountJson} from '@/lib/account/request';
 import {randomBytes} from 'node:crypto';
 import {getCurrentUser} from '@/lib/auth';
@@ -19,5 +21,5 @@ export async function POST(request:Request){if(!isCalculationOriginAllowed(reque
  const lead=(await customerLeads(company,client.id)).find(l=>l.id===b.leadId);
  const document=client.documents?.find((d:any)=>d.id===b.documentId&&!d.deletedAt&&d.customerVisible);if(!lead||!document)throw Error('Выберите заявку и открытый клиенту документ договора.');
  await updateChunkedDataJson<any>(path,client.id,c=>{if(!canAccessDocumentClient(user,c))throw Error('Нет доступа.');return {...c,portalContracts:{...c.portalContracts,[lead.id]:{documentId:document.id,dealerId:lead.requestedDealerId||lead.dealerId||company,confirmedBy:user.id,confirmedAt:new Date().toISOString()}}};});
- }else throw Error('Неизвестное действие.');return Response.json(result,{headers});
+ }else throw Error('Неизвестное действие.');if(client.portalAccountId&&['message','share','confirm_contract'].includes(b.action)&&!(b.action==='share'&&!b.visible))after(()=>sendCustomerPush(client.portalAccountId,'/account?tab='+({message:'chat',share:'documents',confirm_contract:'reviews'}[b.action as string]||'notifications')).catch(()=>{}));return Response.json(result,{headers});
  }catch(e){return Response.json({error:e instanceof Error?e.message:'Не удалось сохранить.'},{status:400,headers});}}

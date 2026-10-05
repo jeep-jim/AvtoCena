@@ -1,5 +1,5 @@
 import {normalizeSiteControls,type SiteControls} from '../site-controls';
-import {normalizeAccountAppearance, type AccountAppearance} from '../account-appearance';
+import {normalizeAccountAppearance, withAccountMediaDefaults, type AccountAppearance} from '../account-appearance';
 import {mergeShowcaseChanges} from './showcase-merge';
 import {dealerProfilePath} from './profile-url';
 import { readDataJson, mutateDataJson } from "../data";
@@ -64,11 +64,12 @@ export async function saveShowcase(id:string,raw:any){
  return saved;
 }
 export type PublicFeatures = { accountAppearance?:AccountAppearance; siteControls?:SiteControls; version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
-export function readPublicFeatures() {
-  return readDataJson<PublicFeatures>("settings/public-features.json", {
+export async function readPublicFeatures() {
+  const features=await readDataJson<PublicFeatures>("settings/public-features.json", {
     version: 0,
     affiliatesEnabled: true, knowledgeEnabled:false, partnersEnabled:false,
   });
+  return {...features,accountAppearance:withAccountMediaDefaults(features.accountAppearance)};
 }
 export async function savePublicFeatures(raw: PublicFeatures) {
   let saved!: PublicFeatures;

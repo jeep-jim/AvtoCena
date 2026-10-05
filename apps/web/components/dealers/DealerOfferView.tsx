@@ -1,4 +1,6 @@
 'use client';
+import {videoReviews,withoutVideoLinks} from '@/lib/dealers/video-review';
+import {VideoReviews} from './VideoReviews';
 import {useSelectedCity} from '@/lib/location/selected-city';
 import {useState} from 'react';
 import {encodeShareDraft} from '@/lib/catalog/offer-share';
@@ -73,7 +75,10 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
     ["Цвет", o.color],
     ["Руль", o.steering === "left" ? "Левый" : "Правый"],
   ].filter(([, v]) => v);
-  const groups=[{name:'Характеристики',items:fields.map(([name,value])=>({name,value}))},...(o.equipment?[{name:'Оснащение',items:[{name:'Комплектация',value:o.equipment}]}]:[])];
+  const reviews=videoReviews(o.videoUrl,o.equipment,o.description);
+  const equipment=withoutVideoLinks(o.equipment);
+  const description=withoutVideoLinks(o.description);
+  const groups=[{name:'Характеристики',items:fields.map(([name,value])=>({name,value}))},...(equipment?[{name:'Оснащение',items:[{name:'Комплектация',value:equipment}]}]:[])];
   const updated = new Date(o.updatedAt || s.updatedAt);
   const updatedStatus = Number.isFinite(updated.getTime()) ? <OfferUpdatedStatus dealer date={updated.toLocaleDateString("ru-RU",{timeZone:"Asia/Krasnoyarsk"})} time={updated.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Krasnoyarsk"})} sourceUrl={s.profileEnabled?dealerProfilePath(s):undefined} sourceName={s.name}/> : null;
   return (
@@ -107,6 +112,14 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
             </div>
             <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" defaultOpen headerAside={updatedStatus} />
             <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
+            <VideoReviews items={reviews}/>
+        {description && (
+          <section className="mt-8 min-w-0">
+            <h2 className="text-2xl font-black">Об автомобиле</h2>
+            <p className="mt-3 whitespace-pre-line [overflow-wrap:anywhere]">{description}</p>
+          </section>
+        )}
+
           </div>
           <StickyOfferColumn>
           <div className="ac-inline-parameters min-w-0" data-share-estimate={encodeShareDraft({deliveryCity:city})}>
@@ -161,12 +174,6 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
           </div>
           </StickyOfferColumn>
         </div>
-        {o.description && (
-          <section className="mt-8">
-            <h2 className="text-2xl font-black">Об автомобиле</h2>
-            <p className="mt-3 whitespace-pre-line">{o.description}</p>
-          </section>
-        )}
         <div className="mt-10" data-dealer-related><SpecialRail kinds={stock?["stock","order"]:["order","stock"]} heading={`Ещё автомобили · ${s.name}`} items={items.filter(item=>item.id!==o.id)}/>{markets}</div>
       </div>
       <OfferContactActionsStyles />

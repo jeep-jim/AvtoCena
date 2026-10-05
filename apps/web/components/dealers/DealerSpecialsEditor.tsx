@@ -1,4 +1,6 @@
 'use client';
+import {videoReviews} from "@/lib/dealers/video-review";
+import {VideoReviews} from "./VideoReviews";
 import {DealerColorField} from './DealerColorField';
 import {DealerPowerFields} from './DealerPowerFields';
 import {DealerDeliveryEditor} from './DealerDeliveryEditor';
@@ -126,6 +128,7 @@ export function DealerSpecialsEditor({section='offers',mode='order',setMode,s,pa
     {!stock&&<DealerDeliveryEditor value={s.pricing} city={o.defaultCity||s.pricing.baseCity||''} onCityChange={defaultCity=>updateOffer(o.id,{defaultCity})} onChange={pricing}/>}
     <div className="dealer-pricing-section"><h4>Описание и оснащение</h4><div className="space-y-4">
     {([['description','Описание'],['equipment','Комплектация и оснащение']] as const).map(([k,label])=><label key={k} className="grid gap-2 text-sm">{label}<textarea className={input} rows={4} value={o[k]} onChange={e=>updateOffer(o.id,{[k]:e.target.value})}/></label>)}
+    <label className="grid gap-2 text-sm">Ссылка на видеообзор<input className={input} type="url" value={o.videoUrl||''} placeholder="https://max.ru/…" onChange={e=>updateOffer(o.id,{videoUrl:e.target.value})}/></label><VideoReviews items={videoReviews(o.videoUrl,o.equipment,o.description)}/>
     </div></div></div></details>
    </div>}
   </>}

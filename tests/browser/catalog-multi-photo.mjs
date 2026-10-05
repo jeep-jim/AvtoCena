@@ -69,6 +69,20 @@ try {
    const large=await sharp(noise,{raw:{width:1100,height:1100,channels:3}}).png().toBuffer();assert.ok(large.length>1500000);
    await page.locator('input[type="file"]').setInputFiles({name:'large.png',mimeType:'image/png',buffer:large});
    await page.waitForFunction(()=>document.querySelector('[data-photos]').textContent==='4');assert.ok(sent.at(-1)<1510000,'large photo must be reduced before multipart upload');
+   await page.evaluate(()=>{
+    const original=HTMLCanvasElement.prototype.toBlob;
+    window.__photoEncoders=[];
+    HTMLCanvasElement.prototype.toBlob=function(callback,type,quality){window.__photoEncoders.push(type);return original.call(this,callback,type==='image/webp'?'image/png':type,quality);};
+   });
+   await page.locator('input[type="file"]').setInputFiles({name:'fallback.png',mimeType:'image/png',buffer:large});
+   await page.waitForFunction(()=>document.querySelector('[data-photos]').textContent==='5');
+   assert.ok(sent.at(-1)<1510000,'PNG fallback must still be reduced');
+   assert.ok((await page.evaluate(()=>window.__photoEncoders)).includes('image/jpeg'));
+   await page.evaluate(()=>{window.__photoEncoders=[];});
+   await page.locator('input[type="file"]').setInputFiles({name:'small.png',mimeType:'image/png',buffer:bytes});
+   await page.waitForFunction(()=>document.querySelector('[data-photos]').textContent==='6');
+   assert.deepEqual(await page.evaluate(()=>window.__photoEncoders),[],'small photo must bypass canvas conversion');
+
   }
   assert.deepEqual(errors,[]);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   console.log({width,theme,passed:true});await context.close();

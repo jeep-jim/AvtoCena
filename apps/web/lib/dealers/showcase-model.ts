@@ -1,3 +1,4 @@
+import {videoReview} from './video-review';
 import {TOPAVTO_DEALER} from '../topavto-dealer';
 import {normalizeRequisites, EMPTY_REQUISITES, type DealerRequisites} from './requisites';
 import {estimateDealerDelivery,deliveryCalibrationError} from './delivery-estimate';
@@ -33,6 +34,7 @@ export type SpecialOffer = {
   priceRub?: number;
   officeId?: string;
   sourceUrl?: string;
+  videoUrl?: string;
   id: string;
   status: "draft" | "published" | "sold";
   make: string;
@@ -454,6 +456,7 @@ export function normalizeShowcase(
       priceRub: number(o.priceRub ?? 0,0,1e9),
       officeId: text(o.officeId,80),
       sourceUrl: listingUrl(o.sourceUrl),
+      videoUrl: videoReview(o.videoUrl)?.url,
       status: ["published", "sold"].includes(o.status) ? o.status : "draft",
       make: text(o.make, 80),
       model: text(o.model, 100),

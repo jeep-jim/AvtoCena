@@ -1,3 +1,4 @@
+import {isAccountVideo,prepareAccountVideo} from '@/lib/account/video';
 import {createHash} from 'node:crypto';
 import {NextResponse} from 'next/server';
 import {getCurrentUser} from '@/lib/auth';
@@ -20,12 +21,11 @@ export async function POST(req: Request) {
     if(Number(req.headers.get('content-length'))>max+1024*1024)throw Error('Размер видео — до 32 МБ, фото — до 8 МБ');
     const file=(await readAccountUpload(req,max+1024*1024,'Размер видео — до 32 МБ, фото — до 8 МБ')).get('file');
     if(!(file instanceof File))throw Error('Выберите фото или видео');
-    const video=file.type==='video/mp4';
-    if(!video&&!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error('Выберите JPG, PNG, WebP или MP4');
+    const video=isAccountVideo(file);
+    if(!video&&!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error('Выберите JPG, PNG, WebP, MP4 или MOV');
     if(file.size>(video?max:8*1024*1024))throw Error('Размер видео — до 32 МБ, фото — до 8 МБ');
     const bytes=Buffer.from(await file.arrayBuffer());
-    if(video&&(bytes.length<24||bytes.toString('ascii',4,8)!=='ftyp'||!['isom','iso2','mp41','mp42','avc1','M4V '].some(brand=>bytes.subarray(8,Math.min(bytes.readUInt32BE(0),128)).includes(Buffer.from(brand)))))throw Error('Не удалось прочитать MP4. Выберите другое видео');
-    const image=video?bytes:await prepareDealerImage(bytes);
+    const image=video?await prepareAccountVideo(bytes,file.type==='video/quicktime'||/\.mov$/i.test(file.name)):await prepareDealerImage(bytes);
     const id = createHash('sha256').update(image).digest('hex');
     const storage = getJsonStorage();
     if (!storage.putBinary) throw Error('Загрузка временно недоступна');

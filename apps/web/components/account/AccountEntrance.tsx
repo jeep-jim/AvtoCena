@@ -1,5 +1,6 @@
 'use client';
 
+import {phoneNational} from '@/lib/ru-phone';
 import {accountPhoneError} from '@/lib/account/phone';
 import {EntranceMediaPreview} from './EntranceMediaPreview';
 import {EntranceDealerPreview} from './EntranceDealerPreview';
@@ -122,7 +123,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
             <button disabled={busy} aria-pressed={mode === 'register'} onClick={() => changeMode('register')}>Регистрация</button>
           </div>
           <form data-no-route-loader="true" key={mode} autoComplete={mode === 'register' ? 'off' : 'on'} id={`customer-${mode}`} name={`customer-${mode}`} action="/api/account/auth" method="post" onSubmit={submit} noValidate>
-            <label>Телефон<input id="customer-phone" type="tel" inputMode="tel" name="customer-phone" value={phone} onChange={event => setPhone(event.target.value)} onInput={event => setPhone(event.currentTarget.value)} onBlur={event => {setPhone(event.currentTarget.value);setTouched(current=>({...current,phone:true}));}} autoComplete="section-customer tel" autoCapitalize="none" autoCorrect="off" spellCheck={false} aria-label="Телефон" aria-invalid={!!phoneError} aria-describedby={phoneError?'customer-phone-error':undefined} maxLength={32} placeholder="+7 (___) ___-__-__" required/>{phoneError && <span id="customer-phone-error" role="alert" className="account-error">{phoneError}</span>}</label>
+            <label>Телефон<input id="customer-phone" type="tel" inputMode="tel" name="customer-phone" value={phone} onChange={event => setPhone(`+7${phoneNational(event.target.value)}`)} onPaste={event=>{event.preventDefault();setPhone(`+7${phoneNational(event.clipboardData.getData("text"))}`);}} onBlur={event => {setPhone(event.currentTarget.value);setTouched(current=>({...current,phone:true}));}} autoComplete="section-customer tel" autoCapitalize="none" autoCorrect="off" spellCheck={false} aria-label="Телефон" aria-invalid={!!phoneError} aria-describedby={phoneError?'customer-phone-error':undefined} maxLength={12} placeholder="+7 (___) ___-__-__" required/>{phoneError && <span id="customer-phone-error" role="alert" className="account-error">{phoneError}</span>}</label>
             <PasswordField key={mode} label="Пароль" name="customer-password" value={password} onChange={setPassword} autoComplete={mode === 'login' ? 'section-customer current-password' : 'section-customer new-password'} error={passwordError} onBlur={()=>setTouched(current=>({...current,password:true}))} minLength={mode === 'login' ? 1 : 10} placeholder={mode === 'login' ? 'Введите пароль' : 'Придумайте пароль'}/>
             {mode === 'register' && password.length > 0 && <>
               <PasswordField label="Повторите пароль" name="customer-password-confirmation" value={confirmation} onChange={setConfirmation} autoComplete="section-customer new-password" error={confirmationError} onBlur={()=>setTouched(current=>({...current,confirmation:true}))} minLength={10} placeholder="Повторите пароль"/>

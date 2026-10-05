@@ -11,12 +11,29 @@ export async function preparePhotoUpload(file: File): Promise<File> {
   const scale=Math.min(1,2200/Math.max(image.naturalWidth,image.naturalHeight));
   const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
   const context=canvas.getContext("2d");if(!context)throw Error("Не удалось подготовить фото. Попробуйте другое изображение.");
-  context.drawImage(image,0,0,canvas.width,canvas.height);
-  for(const quality of [.88,.75,.6]) {
-   const blob=await new Promise<Blob|null>(resolve=>canvas.toBlob(resolve,"image/webp",quality));
-   if(blob && blob.size<=1500000)return new File([blob],file.name.replace(/\.[^.]+$/,".webp"),{type:blob.type});
+  // Unsupported encoders may silently return PNG; its quality argument is ignored.
+  // Try JPEG too, then reduce dimensions instead of rejecting a valid photo.
+  for(let attempt=0;attempt<5;attempt++) {
+   context.clearRect(0,0,canvas.width,canvas.height);
+   context.drawImage(image,0,0,canvas.width,canvas.height);
+   for(const type of ["image/webp","image/jpeg"]) {
+    if(type==="image/jpeg") {
+     context.fillStyle="#fff";context.fillRect(0,0,canvas.width,canvas.height);
+     context.drawImage(image,0,0,canvas.width,canvas.height);
+    }
+    for(const quality of [.88,.75,.6]) {
+     const blob=await new Promise<Blob|null>(resolve=>canvas.toBlob(resolve,type,quality));
+     if(!blob || blob.type!==type)break;
+     if(blob.size<=1500000) {
+      const extension=type==="image/jpeg"?"jpg":"webp";
+      return new File([blob],file.name.replace(/\.[^.]+$/,"")+"."+extension,{type:blob.type});
+     }
+    }
+   }
+   canvas.width=Math.max(1,Math.round(canvas.width*.75));
+   canvas.height=Math.max(1,Math.round(canvas.height*.75));
   }
-  throw Error("Фото слишком большое для отправки. Уменьшите его размер и повторите загрузку.");
+  throw Error("Не удалось подготовить фото к отправке. Сохраните его в JPG и повторите загрузку.");
  }finally{URL.revokeObjectURL(url);}
 }
 export async function readPhotoUploadResponse(response: Response) {
