@@ -37,3 +37,11 @@ html[data-theme=light] .account-cabinet-page{background:#edf1f6;--ac-surface:#f8
 .account-profile-actions{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
 .account-profile-actions .account-upload-button{margin:0;min-height:50px}
 @media(max-width:760px){.account-avatar-grid button:nth-child(6){display:block}.account-profile-actions{display:grid;grid-template-columns:1fr}.account-profile-actions>*{width:100%}.customer-portal .account-nav-button,.customer-portal .account-logout-button{padding:8px 10px;min-height:40px}}
+
+.customer-portal>header>div{min-width:0;width:100%}
+.customer-portal h1{font-size:26px;line-height:1.3;overflow-wrap:anywhere}
+.customer-portal .portal-panel{border:0}
+.account-profile-identity{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.account-profile-identity>img{width:72px;height:72px;object-fit:contain;flex:none}
+.account-profile-identity .account-logout-button{flex:none}
+@media(max-width:760px){.customer-portal h1{font-size:22px}}

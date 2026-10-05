@@ -40,6 +40,8 @@ try {
   if(width===1440)await page.evaluate(()=>{const original=history.replaceState.bind(history);history.replaceState=(...args)=>{clearTimeout(window.__routeTimer);return original(...args);};});
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
+  const market=scope.locator('input[name=market]').locator('..');
+  await market.getByRole('button',{name:'Все рынки',exact:true}).click();await market.getByRole('button',{name:'Китай',exact:true}).click();assert.equal(await scope.locator('input[name=market]').inputValue(),'china');
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
   await scope.locator('[data-facet-value="Toyota"]').click();await scope.locator('[data-facet-value="Kia"]').click();
   assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
@@ -57,7 +59,7 @@ try {
   await page.screenshot({path:`${out}/${width}-${theme}.png`});
   if(width<1024)await scope.locator('button[aria-label="Закрыть"],button[data-ac-mobile-close="1"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('model')==='Yaris L|KX1');
-  assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');
+  assert.equal(new URL(page.url()).searchParams.get('city'),'Новосибирск');assert.equal(new URL(page.url()).searchParams.get('market'),'china');
   let calls=0;const sent=[];
   await page.route('**/api/crm/dealers/*/media',route=>{calls++;sent.push(route.request().postDataBuffer()?.length||0);return route.fulfill(calls===2?{status:413,body:'too large'}:{json:{id:`photo-${calls}`,url:`/photo-${calls}`,caption:''}});});
   const sharp=(await import('sharp')).default;const bytes=await sharp({create:{width:30,height:20,channels:3,background:'#55aa33'}}).png().toBuffer();
