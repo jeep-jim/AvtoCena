@@ -30,6 +30,14 @@ export function OverlayBackHistory(){
    if(travelling){if(closing&&!elements.includes(closing)){travelling=false;closing=null;}else return;}
    const removed=steps.filter(step=>!elements.includes(step.element));
    if(removed.length){
+    // A picker can change the query and start navigation before its overlay
+    // closes. Promote that changed URL to a route entry; rewinding here would
+    // cancel the pending Next navigation and restore stale filter parameters.
+    if(removed.length===steps.length && replacementUrl===location.href){
+     const {acOverlayStep,...state}=history.state||{};
+     originalReplace.call(history,state,'',location.href);
+     steps.splice(0);replacementUrl=null;return;
+    }
     const top=steps.at(-1);
     if(top?.url===location.href&&history.state?.acOverlayStep===top.token){
      // A close button may remove a photo and its gallery together.
