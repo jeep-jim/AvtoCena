@@ -7,7 +7,7 @@ const sections: Record<string, string> = { leads: 'Заявки', clients: 'Кл
 function sectionFor(event: CrmActivity) {
   const path = event.href?.match(/^\/crm\/([^/?#]+)/)?.[1];
   if (path && sections[path]) return sections[path];
-  const entity: Record<string, string> = { lead: 'Заявки', client: 'Клиенты', document: 'Документы', contract: 'Договоры', staff: 'Команда', offer: 'Автомобили' };
+  const entity: Record<string, string> = { review: 'Отзывы', lead: 'Заявки', client: 'Клиенты', document: 'Документы', contract: 'Договоры', staff: 'Команда', offer: 'Автомобили' };
   return entity[event.entityType || ''] || event.entityType || event.type;
 }
 

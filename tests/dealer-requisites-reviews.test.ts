@@ -30,3 +30,8 @@ test('review requires verified client, matching platform application and separat
  assert.deepEqual(dealerReviewSummary([{...review,status:'published'},{...review,id:'second',status:'published',rating:4}],'dealer'),{count:2,rating:4.5});
  assert.throws(()=>normalizeReviewInput(6,'Длинный текст отзыва'),/оценку/);assert.throws(()=>normalizeReviewInput(4,'Мало'),/символов/);
 });
+test('review slider accepts tenths and preserves decimal ratings in public totals',()=>{
+ assert.deepEqual(normalizeReviewInput(4.2,'  Спасибо за помощь!  '),{rating:4.2,text:'Спасибо за помощь!'});
+ for(const rating of [NaN,Infinity,0,5.1,4.25,'4.2'])assert.throws(()=>normalizeReviewInput(rating,'Спасибо за помощь!'));
+ assert.deepEqual(dealerReviewSummary([{dealerId:'d',status:'published',rating:4.2},{dealerId:'d',status:'published',rating:5},{dealerId:'d',status:'hidden',rating:1}] as DealerReview[],'d'),{count:2,rating:4.6});
+});
