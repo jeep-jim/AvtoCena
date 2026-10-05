@@ -14,6 +14,7 @@ await build({entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle
 const css = await postcss([tailwindcss({content: ['apps/web/components/**/*.tsx'], theme: {extend: {}}, plugins: []})]).process('@tailwind base;@tailwind components;@tailwind utilities;', {from: undefined});
 const picture = await sharp({create: {width: 240, height: 280, channels: 4, background: '#4b654a'}}).webp().toBuffer();
 const server = http.createServer((req, res) => {
+  if (/^\/avatars\/customers\/character-\d+\.svg$/.test(req.url)) {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (req.url.startsWith('/api/site-media/')) {res.setHeader('Content-Type', 'image/webp'); return res.end(picture);}
   if (req.url === '/fixture.js') {res.setHeader('Content-Type', 'application/javascript'); return res.end(fs.readFileSync(`${out}/fixture.js`));}
   res.setHeader('Content-Type', 'text/html');
@@ -40,7 +41,7 @@ try {
     for (const [name, index] of [['АвтоДилер', 2], ['Автоблогер', 3], ['АвтоПоставщик', 4]]) {
       await page.getByRole('button', {name: new RegExp(name)}).click();
       assert.equal(await page.locator('.account-welcome-background').getAttribute('src'), '/api/site-media/' + String(index).repeat(64));
-      if (index > 2) await page.getByText('Регистрация для этой роли скоро откроется.').waitFor();
+      if (index > 2) await page.getByRole('button',{name:'Подать заявку',exact:true}).waitFor();
       else {await page.getByLabel('Логин', {exact: true}).fill('example'); await page.getByRole('button', {name: 'Показать пароль: Пароль', exact: true}).click(); assert.equal(await page.locator('input[name="accessKey"]').getAttribute('type'), 'text');}
     }
     await page.getByRole('button', {name: 'Пользователь', exact: true}).click(); assert.equal(await page.locator('.account-welcome-background').getAttribute('src'), '/api/site-media/' + '1'.repeat(64));
@@ -56,6 +57,32 @@ try {
     assert.equal(saved.accountAppearance.customer.banner, '/api/site-media/' + 'a'.repeat(64)); assert.equal(saved.accountAppearance.supplier.icon, '/api/site-media/' + 'a'.repeat(64)); assert.equal(saved.affiliatesEnabled, true);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
     await page.screenshot({path: `${out}/settings-${width}-${theme}.png`, fullPage: true}); await page.close();
+  }
+  for (const width of [320,390,1440]) for (const theme of ['light','dark']) {
+    const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
+    await page.goto(origin+'/login?scenes');await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
+    assert.equal(await page.locator('.account-scenes').count(),1);
+    for(const role of ['customer','dealer','blogger','supplier']){
+      if(role!=='customer') await page.getByRole('button',{name:new RegExp({dealer:'АвтоДилер',blogger:'Автоблогер',supplier:'АвтоПоставщик'}[role])}).click();
+      await page.getByRole('button',{name:'Следующая сцена',exact:true}).click();
+      assert.equal(await page.locator('.account-scene-controls button[aria-pressed=true]').innerText(),'2');
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+      await page.screenshot({path:`${out}/scenes-${role}-${width}-${theme}.png`,fullPage:true});
+    }
+    let beta;await page.route('**/api/account/beta',route=>{beta=route.request().postDataJSON();return route.fulfill({json:{ok:true}});});
+    await page.getByLabel('Имя или компания').fill('Тестовая компания');await page.getByLabel('Телефон, почта или Telegram').fill('@test');await page.getByLabel('О компании и направлениях поставок').fill('Проверяем заявку без реальной отправки');await page.locator('input[name=consent]').check();await page.getByRole('button',{name:'Подать заявку',exact:true}).click();await page.getByRole('status').filter({hasText:'Заявка принята'}).waitFor();assert.equal(beta.role,'supplier');assert.equal(beta.consent,true);await page.close();
+  }
+  for(const width of [320,390,1440]){
+    const page=await browser.newPage({viewport:{width,height:900}});let saved;
+    await page.route('**/api/auth/me',route=>route.fulfill({json:{user:null}}));
+    await page.route('**/api/account/auth',route=>route.fulfill({json:{account:{id:'test',name:'Тестовый покупатель',phone:'+79990000000',avatarId:'character-1',avatarUrl:'/avatars/customers/character-1.svg'}}}));
+    await page.route('**/api/account/portal',route=>route.fulfill({json:{clients:[]}}));
+    await page.route('**/api/account/notifications',route=>route.fulfill({json:{items:[{id:'n1',title:'Можно оставить отзыв',text:'Договор подтверждён',at:'2026-10-05T00:00:00Z',href:'/account?tab=reviews'}]}}));
+    await page.route('**/api/account/profile',route=>{saved=route.request().postDataJSON();return route.fulfill({json:{account:{id:'test',phone:'+79990000000',name:saved.name,avatarId:saved.avatarId,avatarUrl:'/avatars/customers/'+saved.avatarId+'.svg',telegramConnected:true}}});});
+    await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();await page.locator('.customer-header-tools').waitFor();if(width<761)assert.equal(await page.locator('.ac-public-header a[href="/"]>div').isVisible(),false,'compact customer header prevents wordmark overlap');assert.equal(await page.locator('.account-avatar-grid button').count(),20);
+    await page.getByLabel('Как к вам обращаться').fill('Антон');await page.getByRole('button',{name:'Персонаж 12',exact:true}).click();await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('status').filter({hasText:'Профиль сохранён'}).waitFor();assert.equal(saved.avatarId,'character-12');await page.getByRole('heading',{name:'Здравствуйте, Антон'}).waitFor();
+    await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+    await page.screenshot({path:`${out}/profile-notices-${width}.png`,fullPage:true});await page.close();
   }
   console.log(JSON.stringify({passed: true, widths: [390, 1440], themes: ['light', 'dark'], passwordConfirmation: true, fourRoleBackgrounds: true, eightUploads: true, settingsSaved: true, legacyStaffEntry: true}));
 } finally {await browser.close(); await new Promise(r => server.close(r));}
