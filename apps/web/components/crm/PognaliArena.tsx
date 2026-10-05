@@ -4,15 +4,15 @@ import {createPortal,flushSync} from 'react-dom';
 import type {GameMode,GameResult} from '@/lib/crm-game';
 import './pognali.css';
 type TeamRow={id:string;name:string;avatar?:string;best:Partial<Record<GameMode,GameResult>>};
-const modes:Record<GameMode,string>={hills:'Холмы',circuit:'Кольцо',battle:'Боевая гонка'};
+const modes:Record<GameMode,string>={hills:'Холмы',battle:'Боевая гонка'};
 class GameRequestError extends Error{constructor(message:string,public status:number){super(message);}}
 async function gameRequest(body?:object){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);
  try{
   let response:Response;
-  try{response=await fetch('/api/crm/game',{cache:'no-store',signal:controller.signal,...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{})});}
+  try{response=await fetch('/api/account/game',{cache:'no-store',signal:controller.signal,...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{})});}
   catch{throw Error('Нет соединения. Проверьте интернет и попробуйте ещё раз.');}
-  if(!response.ok){const messages:Record<number,string>={401:'Сессия завершилась. Войдите в CRM снова.',403:'Не удалось подтвердить доступ к игре.',400:'Не удалось подтвердить результат заезда.',409:'Заезд уже завершён или устарел. Начните новый заезд.',429:'Подождите несколько секунд перед новым заездом.'};throw new GameRequestError(messages[response.status]||'Игра временно недоступна. Попробуйте ещё раз.',response.status);}
+  if(!response.ok){const messages:Record<number,string>={401:'Сессия завершилась. Войдите в кабинет снова.',403:'Не удалось подтвердить доступ к игре.',400:'Не удалось подтвердить результат заезда.',409:'Заезд уже завершён или устарел. Начните новый заезд.',429:'Подождите несколько секунд перед новым заездом.'};throw new GameRequestError(messages[response.status]||'Игра временно недоступна. Попробуйте ещё раз.',response.status);}
   try{return await response.json();}catch{throw Error('Не удалось получить ответ. Попробуйте ещё раз.');}
  }finally{clearTimeout(timeout);}
 }
@@ -32,8 +32,9 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
    }).catch(()=>{});
   }
  };
+ const [playerId,setPlayerId]=useState(userId);
  const [opened,setOpened]=useState(false),[team,setTeam]=useState<TeamRow[]>([]),[mode,setMode]=useState<GameMode>('hills'),[notice,setNotice]=useState(''),[retry,setRetry]=useState(false),[loading,setLoading]=useState(false);
- const refresh=useCallback(async()=>{setLoading(true);try{const data=await gameRequest();setTeam(data.team);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[]);
+ const refresh=useCallback(async()=>{setLoading(true);try{const data=await gameRequest();setTeam(data.team);setPlayerId(data.playerId||userId);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[userId]);
  useEffect(()=>{void refresh();},[refresh]);
  const send=useCallback((data:object)=>frame.current?.contentWindow?.postMessage({game:'pognali-v1',...data},'*'),[]);
  const save=useCallback(async()=>{
@@ -82,11 +83,11 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
  },[opened,user,send,save,close]);
  const ranked=team.filter(row=>row.best[mode]).sort((a,b)=>b.best[mode]!.score-a.best[mode]!.score);
  return <div className="pognali-arena">
-  <div className="pognali-toolbar"><p role="status">{notice||'Лучший заезд каждого сотрудника · отдельный зачёт для каждого режима'}</p>{retry?<button onClick={()=>void save()}>Повторить сохранение</button>:null}</div>
+  <div className="pognali-toolbar"><p role="status">{notice||'Лучшие заезды всех игроков'}</p>{retry?<button onClick={()=>void save()}>Повторить сохранение</button>:null}</div>
   {opened?createPortal(<div ref={overlay} className="pognali-overlay" role="dialog" aria-modal="true" aria-label="Погнали — гонки">
-   <div className="pognali-stage"><iframe ref={frame} src="/games/pognali.html?v=4" title="Погнали — гонки" onLoad={()=>send({type:'user',user})} sandbox="allow-scripts" referrerPolicy="no-referrer" className="pognali-frame"/><button ref={closeButton} type="button" className="pognali-close" onClick={close} aria-label="Закрыть игру" title="Закрыть игру">×</button></div>
+   <div className="pognali-stage"><iframe ref={frame} src="/games/pognali.html?v=5" title="Погнали — гонки" onLoad={()=>send({type:'user',user})} sandbox="allow-scripts" referrerPolicy="no-referrer" className="pognali-frame"/><button ref={closeButton} type="button" className="pognali-close" onClick={close} aria-label="Закрыть игру" title="Закрыть игру">×</button></div>
   </div>,document.body):null}
-  <div className="pognali-cover"><div aria-hidden="true">🏁</div><h2>Небольшой перерыв. Большая гонка.</h2><p>Холмы с прыжками, мини-машинки на кольце и гонка с оружием. Заезды до четырёх минут. Соперники на трассе — боты, рекорды в рейтинге — ваши и коллег.</p><button ref={launchButton} onClick={open}>Погнали!</button></div>
-  <section className="pognali-ranking" aria-label="Рейтинг команды"><div className="pognali-ranking-title"><h2>🏆 Рейтинг команды</h2><button disabled={loading} onClick={()=>void refresh()}>{loading?'Обновляем…':'Обновить'}</button></div><div className="pognali-tabs">{Object.entries(modes).map(([id,label])=><button key={id} aria-pressed={mode===id} onClick={()=>setMode(id as GameMode)}>{label}</button>)}</div><p className="pognali-rule">Очки: метр = 1, монета = 25{mode==='battle'?', победа над ботом = 500':''}. На кольце за три круга добавляется бонус: 10 очков за каждую оставшуюся секунду из 180. Для рейтинга проедьте хотя бы секунду.</p>{ranked.length?<ol>{ranked.map((row,i)=><li key={row.id} className={row.id===userId?'is-me':''}><b>{i+1}</b>{row.avatar?<img src={row.avatar} alt="" loading="lazy"/>:<span className="pognali-avatar">{row.name.slice(0,1)}</span>}<span>{row.name}{row.id===userId?' · вы':''}</span><strong>{row.best[mode]!.score.toLocaleString('ru-RU')} <small>очков</small></strong></li>)}</ol>:<p className="pognali-empty">Пока нет результатов. Откройте игру и задайте темп команде!</p>}</section>
+  <div className="pognali-cover"><div aria-hidden="true">🏁</div><h2>Небольшой перерыв. Большая гонка.</h2><p>Горки, трамплины и боевые заезды. Собирайте бензин, обгоняйте ботов и соревнуйтесь со всеми игроками.</p><button ref={launchButton} onClick={open}>Погнали!</button></div>
+  <section className="pognali-ranking" aria-label="Общий рейтинг"><div className="pognali-ranking-title"><h2>🏆 Общий рейтинг</h2><button disabled={loading} onClick={()=>void refresh()}>{loading?'Обновляем…':'Обновить'}</button></div><div className="pognali-tabs">{Object.entries(modes).map(([id,label])=><button key={id} aria-pressed={mode===id} onClick={()=>setMode(id as GameMode)}>{label}</button>)}</div><p className="pognali-rule">Очки: метр = 1, монета = 25{mode==='battle'?', победа над ботом = 500':''}. Для рейтинга проедьте хотя бы секунду.</p>{ranked.length?<ol>{ranked.map((row,i)=><li key={row.id} className={row.id===playerId?'is-me':''}><b>{i+1}</b>{row.avatar?<img src={row.avatar} alt="" loading="lazy"/>:<span className="pognali-avatar">{row.name.slice(0,1)}</span>}<span>{row.name}{row.id===playerId?' · вы':''}</span><strong>{row.best[mode]!.score.toLocaleString('ru-RU')} <small>очков</small></strong></li>)}</ol>:<p className="pognali-empty">Пока нет результатов. Откройте игру и установите первый рекорд!</p>}</section>
  </div>;
 }

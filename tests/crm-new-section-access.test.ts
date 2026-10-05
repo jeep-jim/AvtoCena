@@ -19,6 +19,7 @@ test('new capabilities preserve existing access and require explicit site delega
 test('new section APIs deny revoked capabilities and Metrika is platform-owner only',async()=>{
  const state:any={user:manager,calls:0};(globalThis as any).__newAccess=state;
  const mock:any={
+ '@/lib/account/auth':`export const currentAccount=async()=>null;`,
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__newAccess.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);export const isAdminRole=r=>['owner','admin'].includes(r);`,
  '@/lib/crm-chat':`const call=async()=>{globalThis.__newAccess.calls++;return {ok:true}};export const chatList=call,chatDetail=call,createDirectChat=call,sendChatMessage=call,createChatRoom=call,updateChatRoom=call,reactToChatMessage=call,changeChatMessage=call,forwardChatMessage=call;`,
  '@/lib/dealers/showcase-store':`export const savePublicFeatures=async()=>{globalThis.__newAccess.calls++;return {ok:true}};`,
@@ -26,7 +27,7 @@ test('new section APIs deny revoked capabilities and Metrika is platform-owner o
  '@/lib/crm-activity':`export const recordCrmActivity=async()=>{};`,
  '@/lib/metrika-reports':`export const siteAnalytics=async()=>{globalThis.__newAccess.calls++;return {ok:true}};`,
  '@/lib/crm-users':`export const readCrmUsers=async()=>[];`,
- '@/lib/crm-game':`export const beginGame=async()=>{globalThis.__newAccess.calls++;return 'run'};export const finishGame=beginGame;export const gameBest=async()=>0;export const validGameMode=()=>true;`,
+ '@/lib/crm-game':`export const beginGame=async()=>{globalThis.__newAccess.calls++;return 'run'};export const finishGame=beginGame;export const gameBest=async()=>0;export const gameProfile=async()=>null;export const publicGameId=id=>id;export const validGameMode=()=>true;`,
  };
  async function load(name:string){const r=await build({entryPoints:[`apps/web/app/(crm)/api/crm/${name}/route.ts`],bundle:true,platform:'node',format:'cjs',write:false,packages:'external',plugins:[{name:'access',setup(b){b.onResolve({filter:/^@\//},a=>mock[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mock[a.path],loader:'ts',resolveDir:process.cwd()}));}}]});const m={exports:{} as any};new Function('require','module','exports',r.outputFiles[0].text)(require,m,m.exports);return m.exports;}
  const req=(route:string,method='POST',body={})=>new Request(`https://avtocena.com/api/crm/${route}`,{method,headers:{origin:'https://avtocena.com','content-type':'application/json'},...(method==='GET'?{}:{body:JSON.stringify(body)})});
