@@ -15,7 +15,7 @@ let server,origin=live;
 if(!live){
  const next={name:'isolated-next-navigation',setup(b){
   b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));
-  b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={push(url){history.pushState(null,'',url);window.__lastFilterUrl=url;},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
+  b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?`const router={push(url){if(window.__slowRoute??=new URLSearchParams(location.search).has('slowRouter')){clearTimeout(window.__routeTimer);window.__routeTimer=setTimeout(()=>{history.pushState(null,'',url);window.__lastFilterUrl=url;},2000);}else{history.pushState(null,'',url);window.__lastFilterUrl=url;}},replace(url){history.replaceState(null,'',url);window.__lastFilterUrl=url;}};export const useRouter=()=>router;export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);`:`import React from 'react';export default function Link({children,...props}){delete props.prefetch;return React.createElement('a',props,children);}`,resolveDir:process.cwd()}));
  }};
  for(const mode of ['fixture','baseline'])await build({entryPoints:['tests/browser/catalog-multi-photo-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/${mode}.js`,tsconfig:'apps/web/tsconfig.json',define:{'process.env.NODE_ENV':'"production"'},plugins:[next,...(mode==='baseline'?[{name:'without-new-style',setup(b){b.onLoad({filter:/MobileCatalogDropdowns\.css$/},()=>({contents:'',loader:'css'}));}}]:[])]});
  const sources=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx'].map(file=>({file,text:fs.readFileSync(file,'utf8')}));
@@ -36,7 +36,8 @@ try {
  for(const width of [390,1440])for(const theme of ['dark','light']) {
   const context=await browser.newContext({viewport:{width,height:1000}}), page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/catalog/**',route=>{const u=new URL(route.request().url());const models=[{make:'Toyota',model:'Yaris L'},{make:'Kia',model:'KX1'}];return route.fulfill({json:u.pathname.endsWith('brand-counts')?{counts:{Toyota:10,Kia:8},modelCounts:{Toyota:1,Kia:1}}:{facets:{makes:['Toyota','Kia']},items:models.filter(x=>!u.searchParams.get('q')||x.model.toLowerCase().includes(u.searchParams.get('q').toLowerCase()))}});});
-  await page.goto(`${origin}/cars?theme=${theme}`);
+  await page.goto(`${origin}/cars?theme=${theme}${width===1440?'&slowRouter=1':''}`);
+  if(width===1440)await page.evaluate(()=>{const original=history.replaceState.bind(history);history.replaceState=(...args)=>{clearTimeout(window.__routeTimer);return original(...args);};});
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();

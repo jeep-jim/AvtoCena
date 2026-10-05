@@ -4,7 +4,7 @@ import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
 import { CityPickerDialog, LocationIcon } from "../home/CitySelector";
 import { useSelectedCity } from "../../lib/location/selected-city";
-import { readSelectedCity } from "../../lib/location/selected-city";
+import { persistCity, readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
 
@@ -435,6 +435,22 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "engine") return setDraft((current) => ({ ...current, engineFrom: "", engineTo: "" }));
     if (key in draft) setField(key as keyof FilterDraft, "");
   };
+  const changeCity = (city: string) => {
+    persistCity(city);
+    if (mobileOpen) return;
+    // A city selection can supersede an in-flight Next navigation. Re-submit
+    // the full current draft instead of letting the old URL win that race.
+    const nextQuery = catalogQuery(draft, sortKey, sortDirection);
+    submitted.current = nextQuery;
+    const query = new URLSearchParams(nextQuery);
+    if (city) query.set("city", city);
+    const current = new URLSearchParams(window.location.search);
+    for (const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) {
+      const value = current.get(key); if (value) query.set(key,value);
+    }
+    const basePath = draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
+    startTransition(() => router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), {scroll:false}));
+  };
   const setElectric = (value: string) => { setField("fuel", value); setElectricFacets(null); };
   const chooseSort = (key: SortKey) => {
     setSortKey(key);
@@ -443,7 +459,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   };
 
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
-    <div className="mt-3 hidden lg:block"><CatalogCityFilter /></div>
+    <div className="mt-3 hidden lg:block"><CatalogCityFilter onChange={changeCity} /></div>
     <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
@@ -466,7 +482,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
-        <section className="ac-mobile-filter-section"><CatalogCityFilter /></section>
+        <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
@@ -515,7 +531,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   </>;
 }
 
-function CatalogCityFilter() {
+function CatalogCityFilter({onChange}:{onChange:(city:string)=>void}) {
  const city=useSelectedCity(),[open,setOpen]=useState(false);
- return <div className="flex flex-wrap items-center gap-3 text-sm"><span className="text-[var(--ac-muted)]">Город доставки</span><button type="button" className="ac-filter-control flex min-h-11 items-center gap-2 rounded-xl px-3 font-bold" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} onClick={()=>setOpen(true)}><LocationIcon className="h-4 w-4 text-red-500"/>{city || "Выбрать город"}<Chevron /></button>{open&&<CityPickerDialog onChange={()=>{}} onClose={()=>setOpen(false)}/>}</div>;
+ return <div className="flex flex-wrap items-center gap-3 text-sm"><span className="text-[var(--ac-muted)]">Город доставки</span><button type="button" className="ac-filter-control flex min-h-11 items-center gap-2 rounded-xl px-3 font-bold" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} onClick={()=>setOpen(true)}><LocationIcon className="h-4 w-4 text-red-500"/>{city || "Выбрать город"}<Chevron /></button>{open&&<CityPickerDialog persistSelection={false} onChange={onChange} onClose={()=>setOpen(false)}/>}</div>;
 }
