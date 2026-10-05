@@ -106,8 +106,13 @@ try{
         assert.equal(await page.locator('.ac-offer-actions-below').isVisible(),false);
         await page.locator('[data-spec-desktop] .ac-specifications-trigger').click();
       } else {
-        const a=await action.boundingBox(),d=await page.locator('[data-city-delivery]').boundingBox();
-        assert.ok(a.y+a.height<=d.y,'actual mobile actions precede delivery');
+        const slot=page.locator('.ac-offer-contact-anchor');
+        const a=await slot.boundingBox(),d=await page.locator('[data-city-delivery]').boundingBox();
+        assert.ok(a.y+a.height<=d.y,'the mobile contact slot precedes delivery even while its button is fixed');
+        if(await slot.getAttribute('data-stuck')==='true'){
+          const button=await action.boundingBox(),header=await page.locator('.ac-public-header').boundingBox();
+          assert.ok(Math.abs(button.y-Math.max(0,header.y+header.height)-8)<2,'fixed contact stays below the header');
+        }
       }
       const crumbs=await page.getByRole('navigation',{name:'Хлебные крошки'}).textContent();
       assert.doesNotMatch(crumbs,/\b(?:georgia|korea|japan|china|uae|europe)\b/i,'market breadcrumb uses Russian');
