@@ -45,3 +45,17 @@ html[data-theme=light] .account-cabinet-page{background:#edf1f6;--ac-surface:#f8
 .account-profile-identity>img{width:72px;height:72px;object-fit:contain;flex:none}
 .account-profile-identity .account-logout-button{flex:none}
 @media(max-width:760px){.customer-portal h1{font-size:22px}}
+
+/* Profile layout and selected navigation share the primary action color. */
+.customer-portal .account-nav-button[aria-pressed=true]{background:#ffda62;color:#17243d}
+.account-default-avatar{border-radius:50%;background:#ffc947;object-fit:contain}
+.account-profile-fields{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start}
+.account-profile-fields label:not(.account-upload-button){display:grid;gap:8px}
+.account-profile-fields .account-muted{margin-top:8px}
+.account-profile-upload{padding-top:28px}
+.account-profile-upload .account-upload-button{margin:0;width:100%;min-height:54px}
+.account-cabinet-content{padding-top:88px}
+@media(max-width:760px){.account-profile-fields{grid-template-columns:1fr;gap:12px}.account-profile-upload{padding-top:0}.account-cabinet-content{padding-top:76px}}
+
+.customer-portal .account-upload-button{position:relative}
+.customer-portal .account-upload-button input[type=file]{position:absolute;width:1px;height:1px;padding:0;border:0;margin:-1px;overflow:hidden;clip-path:inset(50%)}

@@ -352,3 +352,36 @@ body:has(.entrance-media-dialog[open]){overflow:hidden}
  .account-mobile-actions .scene-navigation button{display:grid;place-items:center;flex:1;min-height:46px}
  .account-scenes .scene-navigation{display:none}
 }
+
+/* Fixed scene viewport: switching steps must not move the login form. */
+html:not([data-theme=light]) .account-original-design{--intro-panel:#1a2029}
+.account-original-design .account-entrance-heading{min-height:90px}
+.account-scenes .chat-stream{justify-content:flex-start}
+.account-scenes .scene-contract.is-complete .contract-intro{position:absolute;inset:0}
+.account-scenes .scene-contract.is-complete :is(.contract-title,.contract-parties,.contract-status,.contract-bridge){display:none}
+.account-scenes .scene-contract.is-complete .contract-arena{position:absolute;inset:0;max-width:none;height:100%}
+.account-scenes .scene-contract.is-complete .contract-handshake{width:132px;height:132px;font-size:76px;animation:acHandshakeShake 1.1s ease-in-out infinite}
+@keyframes acHandshakeShake{0%,100%{transform:translate(-50%,-50%) rotate(-7deg)}50%{transform:translate(-50%,calc(-50% + 9px)) rotate(7deg)}}
+@media(prefers-reduced-motion:reduce){.account-scenes .scene-contract.is-complete .contract-handshake{animation:none}}
+@media(max-width:760px){
+ .account-original-design .account-entrance-heading{min-height:126px}
+ .account-original-design .account-entrance-heading h1{min-height:54px}
+ .account-original-design .account-entrance-heading p{min-height:51px}
+ .account-original-design .account-welcome{min-height:0;height:430px;padding:0 0 12px}
+ .account-scenes{height:100%;min-height:0;flex:none;padding:0 12px}
+ .account-scenes .demo-stage{height:374px;min-height:374px;flex:0 0 374px;overflow:hidden}
+ .account-scenes .scene-event-layer,.account-scenes .account-scene{position:absolute;inset:0;height:100%}
+ .account-scenes .scene{height:100%;min-height:0;padding:12px 0;overflow:hidden}
+ .account-scenes .scene-contract{height:100%}
+ .account-scenes .account-scene-controls{margin:0;flex:none}
+ .account-scenes .steps-bar{padding:10px 0 8px}
+ .account-scenes .chat-stream{min-height:0;gap:8px}
+ .account-scenes .scene-chat{gap:8px}
+}
+
+html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a2029!important;background-color:#1a2029!important}
+
+.account-scenes .media-tile[hidden]{display:none}
+.account-scenes .account-media-thumbnail{pointer-events:none}
+.account-scenes .media-tile[data-video=true]::before{position:relative;z-index:2;text-shadow:0 1px 6px #000}
+.account-scenes .media-tile:has(.account-media-thumbnail)>svg{display:none}

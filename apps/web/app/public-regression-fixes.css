@@ -11,28 +11,28 @@
 }
 
 /* Inner public pages use a compact wordmark: no subtitle, two lines only on narrow screens. */
-.ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:last-child {
+:is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:last-child {
   display: none !important;
 }
-.ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+:is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
   white-space: nowrap;
 }
 @media (max-width: 639px) {
-  .ac-page-copy:not(.ac-home-page) .ac-public-header > div {
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header > div {
     gap: .4rem !important;
     padding-left: .65rem !important;
     padding-right: .65rem !important;
   }
-  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] {
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] {
     gap: .4rem !important;
   }
-  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
     display: grid !important;
     line-height: .78 !important;
     white-space: normal !important;
     font-size: 15px !important;
   }
-  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
+  :is(.ac-page-copy:not(.ac-home-page),.account-cabinet-page) .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
     display: block;
   }
 }
@@ -375,4 +375,9 @@
     height: 100% !important;
     min-height: 3.25rem !important;
   }
+}
+
+@media(max-width:359px){
+ .account-cabinet-page .ac-public-header button[aria-label="Назад"]{width:28px;min-width:28px;padding:0;flex:none;justify-content:center}
+ .account-cabinet-page .ac-public-header>div>div:first-child{gap:4px}
 }

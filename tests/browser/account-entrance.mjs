@@ -7,7 +7,7 @@ import tailwindcss from 'tailwindcss';
 import sharp from 'sharp';
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const out = 'artifacts/account-entrance'; fs.mkdirSync(out, {recursive: true});
-await build({external:['/fonts/*'],entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
+await build({external:['/fonts/*','/brands/*'],entryPoints: ['tests/browser/account-entrance-fixture.tsx'], bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', outfile: `${out}/fixture.js`, define: {'process.env.NODE_ENV': '"production"', 'process.env': '{}'}, plugins: [{name: 'next', setup(b) {
   b.onResolve({filter: /^next\/(link|navigation)$/}, a => ({path: a.path, namespace: 'mock'}));
   b.onLoad({filter: /.*/, namespace: 'mock'}, a => ({contents: a.path === 'next/navigation' ? 'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{}});' : `import React from 'react';export default function Link(p){return React.createElement('a',p)}`, loader: 'jsx', resolveDir: process.cwd()}));
 }}]});
@@ -15,12 +15,14 @@ const css = await postcss([tailwindcss({content: ['apps/web/components/**/*.tsx'
 const picture = await sharp({create: {width: 240, height: 280, channels: 4, background: '#4b654a'}}).webp().toBuffer();
 const server = http.createServer((req, res) => {
   if (/^\/fonts\/inter-(latin|cyrillic)-wght-normal\.woff2$/.test(req.url)) {res.setHeader('Content-Type','font/woff2');return res.end(fs.readFileSync('apps/web/public'+req.url));}
-  if (/^\/avatars\/customers\/character-\d+\.svg$/.test(req.url)) {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
+  if (/^\/avatars\/customers\/(?:character|city-cars|offroad-cars)-\d+\.svg$/.test(req.url)) {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
   if (req.url==='/dealers/default-cover.svg'||req.url==='/logo/avtocena-mark-dark.svg'||req.url==='/logo/avtocena-mark-light.svg') {res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public'+req.url));}
+  if (req.url.startsWith('/api/site-media/')&&req.url.endsWith('.mp4')) {res.setHeader('Content-Type','video/mp4');return res.end(fs.readFileSync('apps/web/public/account-media/loading-oct05.mp4'));}
   if (req.url.startsWith('/api/site-media/')) {res.setHeader('Content-Type', 'image/webp'); return res.end(picture);}
+  if(req.url==='/key-logo.png'){res.setHeader('Content-Type','image/png');return res.end(fs.readFileSync('apps/web/public/key-logo.png'));}
   if (req.url === '/fixture.js') {res.setHeader('Content-Type', 'application/javascript'); return res.end(fs.readFileSync(`${out}/fixture.js`));}
   res.setHeader('Content-Type', 'text/html');
-  res.end(`<!doctype html><html data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`, 'utf8')}:root{--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-surface-3:#e3e7ee;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6;--ac-accent:#c91f2d}[data-theme=dark]{--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-surface-3:#20232d;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22;--ac-accent:#ff303d}body{margin:0;padding:16px;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}</style></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>`);
+  res.end(`<!doctype html><html data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`, 'utf8')}:root{--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-surface-3:#e3e7ee;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6;--ac-accent:#c91f2d}[data-theme=dark]{--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-surface-3:#20232d;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22;--ac-accent:#ff303d}.account-cabinet-page .ac-public-header{position:fixed!important;inset:0 0 auto 0!important;width:100%!important}body{margin:0;padding:16px;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}</style></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>`);
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r)); const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await chromium.launch({executablePath: process.env.CHROME_BIN || undefined, headless: true, args: ['--no-sandbox']});
@@ -100,9 +102,11 @@ try {
       await page.screenshot({path:`${out}/scenes-${role}-${width}-${theme}.png`,fullPage:true});
       const count=await page.locator('.step-node').count();
       assert.equal(count,role==='customer'?6:role==='dealer'?5:4);
+      const stageBox=await page.locator('.account-welcome').boundingBox();
       for(let n=0;n<count;n++){
         await page.locator('.step-node').nth(n).click();
         assert.equal(await page.locator('.step-node[aria-pressed=true]').innerText(),String(n+1));
+        const nextBox=await page.locator('.account-welcome').boundingBox();assert.ok(Math.abs(stageBox.height-nextBox.height)<1,'scene height remains stable');assert.ok(Math.abs(stageBox.y-nextBox.y)<1,'scene top remains stable');
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
         const clipped=await page.locator('.account-scenes .scene').evaluate(el=>{
           const outer=el.getBoundingClientRect();const child=el.firstElementChild.getBoundingClientRect();
@@ -127,8 +131,13 @@ try {
     await page.route('**/api/account/notifications',route=>route.fulfill({json:{items:[{id:'n1',title:'Можно оставить отзыв',text:'Договор подтверждён',at:'2026-10-05T00:00:00Z',href:'/account?tab=reviews'}]}}));
     await page.route('**/api/account/profile',route=>{saved=route.request().postDataJSON();return route.fulfill({json:{account:{id:'test',phone:'+79990000000',name:saved.name,avatarId:saved.avatarId,avatarUrl:'/avatars/customers/'+saved.avatarId+'.svg',telegramConnected:true}}});});
     await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();await page.locator('.customer-header-tools').waitFor();if(width<761)assert.equal(await page.locator('.ac-public-header a[href="/"]>div').isVisible(),true,'customer header keeps the site name visible');assert.equal(await page.locator('.account-avatar-grid button').count(),24);
+    await page.getByRole('button',{name:'Назад',exact:true}).waitFor();
+    const activeTab=page.getByRole('button',{name:'Профиль',exact:true});
+    assert.equal(await activeTab.evaluate(el=>{const n=el.parentElement.getBoundingClientRect(),a=el.getBoundingClientRect();return a.left>=n.left-1&&a.right<=n.right+1;}),true,'active tab visible on entry');
+    assert.equal(await activeTab.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 218, 98)');
+    assert.ok((await page.locator('.customer-portal>header').boundingBox()).y>=(await page.locator('.ac-public-header').boundingBox()).height,'greeting is below fixed header');
     await page.getByLabel('Как к вам обращаться').fill('Антон');await page.getByRole('button',{name:'Женский портрет 2',exact:true}).click();await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('status').filter({hasText:'Профиль сохранён'}).waitFor();assert.equal(saved.avatarId,'character-12');await page.getByRole('heading',{name:'Здравствуйте, Антон'}).waitFor();
-    await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
+    await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();await page.screenshot({path:`${out}/profile-debug-${width}.png`,fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
     await page.screenshot({path:`${out}/profile-notices-${width}.png`,fullPage:true});await page.close();
   }
   {
@@ -159,13 +168,19 @@ try {
     const page=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});
     await page.goto(origin+'/login?scenes&media');await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     await page.getByRole('button',{name:/Сцена 4:/}).click();
+    assert.equal(await page.locator('.media-tile:not([hidden])').count(),2);
+    await page.waitForFunction(()=>document.querySelector('.media-tile video')?.readyState>=2);
     const photo=page.getByRole('button',{name:'Автомобиль перед отправкой',exact:true});await photo.click();
     const surface=width<761?page.locator('.entrance-media-dialog'):page.locator('.entrance-media-preview');
     await surface.waitFor({state:'visible'});assert.equal(await surface.locator('img').getAttribute('alt'),'Автомобиль перед отправкой');
     if(width>=761)assert.equal(await page.locator('#account-login-form').isVisible(),false);
     await page.screenshot({path:`${out}/media-${width}-${theme}.png`,fullPage:true});
-    await surface.getByRole('button',{name:'Закрыть просмотр',exact:true}).click();assert.equal(await page.locator('#account-login-form').isVisible(),true);
-    await page.getByRole('button',{name:'Погрузка автомобиля',exact:true}).click();await surface.locator('video').waitFor();assert.equal(await surface.locator('video').getAttribute('controls'),'');await page.keyboard.press('Escape');await surface.waitFor({state:'detached'});
+    await surface.locator('h2').click();assert.equal(await page.locator('#account-login-form').isVisible(),true);
+    await page.getByRole('button',{name:'Погрузка автомобиля',exact:true}).click();await surface.locator('video').waitFor();assert.equal(await surface.locator('video').getAttribute('controls'),'');
+    await surface.locator('video').click({position:{x:30,y:30}});assert.equal(await surface.isVisible(),true,'player interaction keeps preview open');
+    if(width<761)await page.mouse.click(2,2);else await page.locator('.account-entrance-heading').click();
+    await surface.waitFor({state:'detached'});
+    await page.getByRole('button',{name:'Погрузка автомобиля',exact:true}).click();await surface.locator('video').waitFor();await page.keyboard.press('Escape');await surface.waitFor({state:'detached'});
     if(width>=761){await page.getByRole('button',{name:/Сцена 1:/}).click();await page.locator('.demo-stage').hover();await page.mouse.wheel(0,160);await page.waitForFunction(()=>document.querySelector('.step-node[aria-pressed=true]')?.textContent==='2');await page.mouse.wheel(0,160);assert.equal(await page.locator('.step-node[aria-pressed=true]').innerText(),'2','one wheel gesture advances once');}
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);await page.close();
   }

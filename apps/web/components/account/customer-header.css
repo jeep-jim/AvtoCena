@@ -7,3 +7,5 @@
  .customer-header-tools>a,.customer-header-icon{width:36px;min-width:36px}
  .customer-notice-panel{right:12px;top:calc(100% + 8px);width:min(380px,calc(100% - 24px))}
 }
+
+.customer-header-tools>a img.account-default-avatar{width:34px;height:34px;border-radius:50%;background:#ffc947}
