@@ -30,7 +30,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
  const [tab,setTab]=useState<Tab>('cars'),[shareStatus,setShareStatus]=useState('');
  const [leadOpen,setLeadOpen]=useState(false);
  const [canModerateReviews,setCanModerateReviews]=useState(false);
- useEffect(()=>{let active=true;fetch('/api/account/review-moderation',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(active)setCanModerateReviews(d?.canDelete===true);}).catch(()=>{});return()=>{active=false;};},[]);
+ useEffect(()=>{if(preview||editorSection)return;let active=true;fetch('/api/account/review-moderation',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(active)setCanModerateReviews(d?.canDelete===true);}).catch(()=>{});return()=>{active=false;};},[preview,editorSection]);
  const [reviews,setReviews]=useState<{count:number;rating:number|null;items:any[]}>({count:0,rating:null,items:[]});
  useEffect(()=>{let active=true;fetch(`/api/dealers/${encodeURIComponent(s.dealerId)}/reviews`).then(r=>r.ok?r.json():null).then(d=>{if(active&&d)setReviews(d);}).catch(()=>{});return()=>{active=false;};},[s.dealerId]);
  const logoDialog=useRef<HTMLDialogElement>(null);
