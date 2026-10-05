@@ -1,5 +1,6 @@
 'use client';
 
+import {accountPhoneError} from '@/lib/account/phone';
 import {EntranceMediaPreview} from './EntranceMediaPreview';
 import {EntranceDealerPreview} from './EntranceDealerPreview';
 import {AccountScenes} from './AccountScenes';
@@ -34,11 +35,17 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [touched, setTouched] = useState({phone:false,password:false,confirmation:false,consent:false});
+  const phoneError = touched.phone ? accountPhoneError(phone) : '';
+  const passwordError = touched.password && (!password || (mode === 'register' && password.length < 10)) ? (mode === 'register' ? 'В пароле должно быть не менее 10 символов.' : 'Введите пароль.') : '';
+  const confirmationError = mode === 'register' && (touched.confirmation || confirmation.length > 0) && (!confirmation || password !== confirmation) ? 'Пароли не совпадают. Проверьте повторный ввод.' : '';
   const [notice, setNotice] = useState('');
   const [recoveryOpen, setRecoveryOpen] = useState(false);
 
   function changeMode(nextMode: Mode) {
     setMode(nextMode);
+    setTouched({phone:false,password:false,confirmation:false,consent:false});
+    setPhone(current => /^[+\d\s()–-]*$/.test(current) ? current : '');
     setPassword('');
     setConfirmation('');
 
@@ -46,23 +53,39 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     setNotice('');
   }
 
-  async function submit(event: React.FormEvent) {
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (busy) return;
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    const enteredPhone = String(fields.get('customer-phone') || '');
+    const enteredPassword = String(fields.get('customer-password') || '');
+    const repeatedPassword = String(fields.get('customer-password-confirmation') || '');
+    const agreed = fields.get('customer-consent') === 'on';
+    setPhone(enteredPhone); setPassword(enteredPassword); setConfirmation(repeatedPassword); setConsent(agreed);
+    setTouched({phone:true,password:true,confirmation:true,consent:true});
     setError('');
-    if (mode === 'register' && password !== confirmation) {
-      setError('Пароли не совпадают. Проверьте повторный ввод.');
-      return;
-    }
+    const invalid = accountPhoneError(enteredPhone) ? 'customer-phone'
+      : !enteredPassword || (mode === 'register' && enteredPassword.length < 10) ? 'customer-password'
+      : mode === 'register' && enteredPassword !== repeatedPassword ? 'customer-password-confirmation'
+      : mode === 'register' && !agreed ? 'customer-consent' : '';
+    if (invalid) {form.querySelector<HTMLInputElement>(`[name="${invalid}"]`)?.focus(); return;}
     setBusy(true);
     try {
       const response = await fetch('/api/account/auth', {
-        method: 'POST',
+        method: 'POST', credentials: 'same-origin',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({action: mode, phone, password, consent}),
+        body: JSON.stringify({action: mode, phone: enteredPhone, password: enteredPassword, consent: agreed}),
       });
-      const data = await response.json();
-      if (!response.ok) throw Error(data.error || 'Не удалось войти. Попробуйте ещё раз.');
-      const safe = nextPath.startsWith('/account') && !nextPath.startsWith('//') ? nextPath : '/account';
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw Error(data.error || 'Не удалось войти. Попробуйте ещё раз.');
+      // Confirm the customer cookie before navigating; a staff session is independent.
+      const check = await fetch('/api/account/auth', {credentials:'same-origin', cache:'no-store'});
+      const session = await check.json().catch(() => ({}));
+      if (!check.ok || !session.account || session.account.id !== data.account?.id) {
+        throw Error('Не удалось сохранить вход. Разрешите cookie для сайта и попробуйте войти ещё раз.');
+      }
+      const safe = /^\/account(?:[/?#]|$)/.test(nextPath) ? nextPath : '/account';
       window.location.assign(safe);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Не удалось подключиться. Попробуйте ещё раз.');
@@ -98,16 +121,17 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
             <button disabled={busy} aria-pressed={mode === 'login'} onClick={() => changeMode('login')}>Вход</button>
             <button disabled={busy} aria-pressed={mode === 'register'} onClick={() => changeMode('register')}>Регистрация</button>
           </div>
-          <form onSubmit={submit}>
-            <label>Телефон<input type="tel" name="phone" value={phone} onChange={event => setPhone(event.target.value)} autoComplete="tel" maxLength={22} placeholder="+7 (___) ___-__-__" required/></label>
-            <PasswordField key={mode} label="Пароль" name="password" value={password} onChange={setPassword} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} minLength={mode === 'login' ? 1 : 10} placeholder={mode === 'login' ? 'Введите пароль' : 'Придумайте пароль'}/>
+          <form key={mode} autoComplete={mode === 'register' ? 'off' : 'on'} id={`customer-${mode}`} name={`customer-${mode}`} action="/api/account/auth" method="post" onSubmit={submit} noValidate>
+            <label>Телефон<input id="customer-phone" type="tel" inputMode="tel" name="customer-phone" value={phone} onChange={event => setPhone(event.target.value)} onInput={event => setPhone(event.currentTarget.value)} onBlur={event => {setPhone(event.currentTarget.value);setTouched(current=>({...current,phone:true}));}} autoComplete="section-customer tel" autoCapitalize="none" autoCorrect="off" spellCheck={false} aria-label="Телефон" aria-invalid={!!phoneError} aria-describedby={phoneError?'customer-phone-error':undefined} maxLength={32} placeholder="+7 (___) ___-__-__" required/>{phoneError && <span id="customer-phone-error" role="alert" className="account-error">{phoneError}</span>}</label>
+            <PasswordField key={mode} label="Пароль" name="customer-password" value={password} onChange={setPassword} autoComplete={mode === 'login' ? 'section-customer current-password' : 'section-customer new-password'} error={passwordError} onBlur={()=>setTouched(current=>({...current,password:true}))} minLength={mode === 'login' ? 1 : 10} placeholder={mode === 'login' ? 'Введите пароль' : 'Придумайте пароль'}/>
             {mode === 'register' && password.length > 0 && <>
-              <PasswordField label="Повторите пароль" name="password-confirmation" value={confirmation} onChange={setConfirmation} autoComplete="new-password" minLength={10} placeholder="Повторите пароль"/>
+              <PasswordField label="Повторите пароль" name="customer-password-confirmation" value={confirmation} onChange={setConfirmation} autoComplete="section-customer new-password" error={confirmationError} onBlur={()=>setTouched(current=>({...current,confirmation:true}))} minLength={10} placeholder="Повторите пароль"/>
               <p className="account-muted">Запомните и сохраните пароль. Если забудете его, нажмите «Забыли пароль?» на странице входа.</p>
             </>}
             {mode === 'register' && <>
               <p className="account-muted">В пароле должно быть не менее 10 символов.</p>
-              <label className="account-consent"><input type="checkbox" checked={consent} onChange={event => setConsent(event.target.checked)} required/><span>Согласен с <a href="/privacy" target="_blank" rel="noreferrer">условиями обработки персональных данных</a>.</span></label>
+              <label className="account-consent"><input type="checkbox" name="customer-consent" checked={consent} onChange={event => setConsent(event.target.checked)} required/><span>Согласен с <a href="/privacy" target="_blank" rel="noreferrer">условиями обработки персональных данных</a>.</span></label>
+              {touched.consent && !consent && <p role="alert" className="account-error">Подтвердите согласие на обработку персональных данных.</p>}
             </>}
             {error && <p role="alert" className="account-error">{error}</p>}
             {notice && <p role="status" className="account-muted">{notice}</p>}

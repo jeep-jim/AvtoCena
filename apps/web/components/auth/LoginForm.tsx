@@ -31,6 +31,7 @@ export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { next
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const fields = new FormData(event.currentTarget);
     setError("");
     setLoading(true);
 
@@ -38,7 +39,7 @@ export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { next
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, accessKey }),
+        body: JSON.stringify({ username: String(fields.get("username") || ""), accessKey: String(fields.get("accessKey") || "") }),
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.ok) {
@@ -60,10 +61,10 @@ export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { next
       {error ? <div className="ac-login-error mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
 
       <div className="ac-login-details mt-4">
-        <form onSubmit={submit} className="mt-4">
+        <form id="staff-login" name="staff-login" action="/api/auth/login" method="post" onSubmit={submit} className="mt-4">
           <div className="grid gap-3">
-            <label className="grid gap-2"><span>Логин</span><input name="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Введите логин" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required /></label>
-            <PasswordField label="Пароль" name="accessKey" value={accessKey} onChange={setAccessKey} placeholder="Введите пароль"/>
+            <label className="grid gap-2"><span>Логин</span><input name="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Введите логин" autoComplete="section-staff username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required /></label>
+            <PasswordField label="Пароль" name="accessKey" autoComplete="section-staff current-password" value={accessKey} onChange={setAccessKey} placeholder="Введите пароль"/>
           </div>
           <button disabled={loading} className="account-primary">{loading ? "Подождите…" : "Войти"}</button>
         </form>

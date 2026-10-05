@@ -54,13 +54,13 @@ try {
     await page.getByRole('button',{name:'Забыли пароль?',exact:true}).click();await page.keyboard.press('Escape');await recovery.waitFor({state:'detached'});
     assert.equal(await page.getByRole('button',{name:'Забыли пароль?',exact:true}).evaluate(el=>el===document.activeElement),true);
     await page.getByRole('button', {name: 'Регистрация', exact: true}).click();
-    assert.equal(await page.locator('input[name="password-confirmation"]').count(), 0);
-    await page.locator('input[name="phone"]').fill('+79991234567'); await page.locator('input[name="password"]').fill('a-secure-password');
-    await page.getByRole('button', {name: 'Показать пароль: Пароль', exact: true}).click(); assert.equal(await page.locator('input[name="password"]').getAttribute('type'), 'text');
+    assert.equal(await page.locator('input[name="customer-password-confirmation"]').count(), 0);
+    await page.locator('input[name="customer-phone"]').fill('+79991234567'); await page.locator('input[name="customer-password"]').fill('a-secure-password');
+    await page.getByRole('button', {name: 'Показать пароль: Пароль', exact: true}).click(); assert.equal(await page.locator('input[name="customer-password"]').getAttribute('type'), 'text');
     await page.getByRole('button', {name: 'Скрыть пароль: Пароль', exact: true}).click();
-    await page.locator('input[name="password-confirmation"]').fill('does-not-match'); await page.locator('input[type="checkbox"]').check();
+    await page.locator('input[name="customer-password-confirmation"]').fill('does-not-match'); await page.locator('input[type="checkbox"]').check();
     await page.getByRole('button', {name: 'Создать кабинет', exact: true}).click(); await page.getByRole('alert').filter({hasText: 'Пароли не совпадают'}).waitFor(); assert.equal(sent, 0);
-    await page.locator('input[name="password-confirmation"]').fill('a-secure-password'); await page.getByRole('button', {name: 'Создать кабинет', exact: true}).click(); await page.getByRole('alert').filter({hasText: 'Проверка формы'}).waitFor(); assert.equal(sent, 1);
+    await page.locator('input[name="customer-password-confirmation"]').fill('a-secure-password'); await page.getByRole('button', {name: 'Создать кабинет', exact: true}).click(); await page.getByRole('alert').filter({hasText: 'Проверка формы'}).waitFor(); assert.equal(sent, 1);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
     await page.screenshot({path: `${out}/register-${width}-${theme}.png`, fullPage: true});
     for (const [name, index] of [['Автодилер', 2], ['Автоблогер', 3], ['Автопоставщик', 4]]) {
@@ -171,3 +171,6 @@ try {
   }
   console.log(JSON.stringify({passed: true, widths: [390, 1440], themes: ['light', 'dark'], passwordConfirmation: true, rolePlaceholders: true, themeAndMediaUploads: true, settingsSaved: true, legacyStaffEntry: true}));
 } finally {await browser.close(); await new Promise(r => server.close(r));}
+
+// Exercise the real customer auth handlers after the visual fixture checks.
+await import('./customer-auth.mjs');
