@@ -23,7 +23,7 @@ export async function globalGameRanking(){
   const [best,profile]=await Promise.all([gameBest(id),gameProfile(id)]);
   // Existing staff records retain their historical results across companies.
   const player=profile||names.get(id);if(!player||!Object.keys(best).length)return null;
-  return {id:publicGameId(id),name:player.name,avatar:player.avatar,best};
+  return {id:publicGameId(id),name:player.name,avatar:player.avatar?.startsWith('/api/crm/')?undefined:player.avatar,best};
  }));for(const row of batch)if(row)rows.push(row);}
  return rows;
 }

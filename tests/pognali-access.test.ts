@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 test('global ranking combines legacy staff from different companies and customers without exposing private accounts',async()=>{
- const state:any={customer:null,staff:null,allow:true,records:new Map(),users:[{id:'staff-a',displayName:'Антон',companyId:'a'},{id:'staff-b',displayName:'Ян',companyId:'b'}]};
+ const state:any={customer:null,staff:null,allow:true,records:new Map(),users:[{id:'staff-a',displayName:'Антон',companyId:'a',avatarUrl:'/api/crm/users/staff-a/avatar?v=1'},{id:'staff-b',displayName:'Ян',companyId:'b'}]};
  const result={runId:'old',mode:'hills',score:123,distance:123,coins:0,kills:0,duration:10,at:'2026-10-05'};
  state.records.set('games/pognali/v1/staff-a.json',{best:{hills:result,circuit:{...result,mode:'circuit'}}});
  state.records.set('games/pognali/v1/staff-b.json',{best:{hills:result}});
@@ -22,7 +22,7 @@ test('global ranking combines legacy staff from different companies and customer
  try{
   assert.equal((await module.exports.GET()).status,401);
   state.customer={id:'customer-c',name:'John',profileConfigured:true,phone:'PRIVATE_PHONE',passwordHash:'PRIVATE_HASH'};
-  const response=await module.exports.GET(),data=await response.json();assert.equal(response.status,200);assert.deepEqual(data.team.map((r:any)=>r.name).sort(),['John','Антон','Ян']);assert.ok(data.team.every((r:any)=>!r.best.circuit));assert.ok(data.team.every((r:any)=>/^[a-f0-9]{64}$/.test(r.id)));assert.ok(!JSON.stringify(data).includes('PRIVATE_'));
+  const response=await module.exports.GET(),data=await response.json();assert.equal(response.status,200);assert.deepEqual(data.team.map((r:any)=>r.name).sort(),['John','Антон','Ян']);assert.ok(data.team.every((r:any)=>!r.best.circuit));assert.ok(data.team.every((r:any)=>/^[a-f0-9]{64}$/.test(r.id)));assert.ok(!JSON.stringify(data).includes('PRIVATE_'));assert.ok(!JSON.stringify(data).includes('/api/crm/users/'));
   const post=(input:any,origin='https://avtocena.com')=>module.exports.POST(new Request('https://avtocena.com/api/crm/game',{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(input)}));
   assert.equal((await post({action:'start',mode:'circuit'})).status,400);
   assert.equal((await post({action:'start',mode:'hills'},'https://other.test')).status,403);
