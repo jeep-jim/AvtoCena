@@ -9,7 +9,7 @@
 .account-original-design .account-entrance-heading p{color:var(--intro-muted);font-size:14px;line-height:1.5;margin:0;min-height:21px}
 .account-original-design .account-login-main{grid-template-columns:1.15fr 1fr;border:1px solid var(--intro-line);border-radius:28px;overflow:hidden;background:var(--intro-panel);gap:0;align-items:stretch;box-shadow:0 40px 100px -40px rgba(0,0,0,.4)}
 .account-original-design .account-welcome{padding:32px 34px 16px;min-height:660px;background:linear-gradient(180deg,var(--intro-left),var(--intro-right));border-radius:0;align-items:stretch;min-width:0}
-.account-original-design .account-welcome:not(.has-banner)::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 400px at 15% 8%,rgba(255,201,71,.08),transparent 60%),radial-gradient(450px 400px at 95% 92%,rgba(96,165,250,.06),transparent 60%);pointer-events:none}
+.account-original-design .account-welcome:not(.has-banner)::before{content:none}
 .account-original-design .account-login-form{padding:56px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--intro-panel);color:var(--intro-text)}
 .account-original-design .account-kicker{color:var(--intro-muted);font-size:12.5px;font-weight:600;opacity:1}
 .account-original-design .account-form-heading h2,.account-original-design .account-login-form>h2{font-size:28px;line-height:1.2;letter-spacing:-.02em;font-weight:700;color:var(--intro-title);margin:10px 0 26px}
@@ -74,9 +74,8 @@ html[data-theme=light] .account-scenes .media-tile--photo svg{stroke:#34517d}
  .account-original-design .entrance-eyebrow{font-size:10px;margin-bottom:5px}
  .account-original-design .account-entrance-heading h1{font-size:23px;margin-bottom:4px;min-height:27px}
  .account-original-design .account-entrance-heading p{font-size:12px;line-height:1.4;min-height:34px}
- .account-original-design .account-login-main{grid-template-columns:1fr;border:0;border-radius:0;background:transparent!important;box-shadow:none;overflow:visible}
+ .account-original-design .account-login-main{grid-template-columns:1fr;border:0;border-radius:0;background:var(--intro-panel)!important;box-shadow:none;overflow:visible}
  .account-original-design .account-welcome{padding:0 8px;min-height:0;border-radius:0;background:transparent}
- .account-original-design .account-welcome:not(.has-banner)::before{inset:0 -8px;background:radial-gradient(250px 250px at 15% 15%,rgba(255,201,71,.055),transparent 80%)}
  .account-original-design .account-welcome.has-banner{min-height:280px;padding:20px;border-radius:16px}
  .account-original-design .account-login-form{padding:12px 0 0;background:transparent}
  .account-original-design .account-form-heading h2,.account-original-design .account-login-form>h2{font-size:21px;margin:3px 0 12px}
@@ -293,7 +292,6 @@ html[data-theme=light] .account-scenes .contract-status{background:#dcefe4;borde
 /* Theme-specific appearance keeps the original scenes above the selected background. */
 .account-original-design .account-welcome:not(.has-banner){background-color:var(--entrance-dark-color);background-image:var(--entrance-dark-image);background-size:cover;background-position:center}
 html[data-theme=light] .account-original-design .account-welcome:not(.has-banner){background-color:var(--entrance-light-color);background-image:var(--entrance-light-image)}
-.account-original-design .account-welcome:not(.has-banner)::before{background:radial-gradient(ellipse at top left,#7db8ff20,transparent 65%)}
 .account-original-design .account-roles>button[aria-pressed=true],html[data-theme=light] .account-original-design .account-roles>button[aria-pressed=true]{background:#315d8d!important;border-color:#82baff;color:#fff;box-shadow:0 0 0 2px #82baff33}
 .account-original-design .account-roles>button[aria-pressed=true] :is(small,.account-role-art){color:#dfedff}
 .account-scenes .media-tile-badge{color:#fff!important;background:#263449cc}
@@ -364,9 +362,10 @@ html:not([data-theme=light]) .account-original-design{--intro-panel:#1a2029}
 @keyframes acHandshakeShake{0%,100%{transform:translate(-50%,-50%) rotate(-7deg)}50%{transform:translate(-50%,calc(-50% + 9px)) rotate(7deg)}}
 @media(prefers-reduced-motion:reduce){.account-scenes .scene-contract.is-complete .contract-handshake{animation:none}}
 @media(max-width:760px){
- .account-original-design .account-entrance-heading{min-height:126px}
- .account-original-design .account-entrance-heading h1{min-height:54px}
- .account-original-design .account-entrance-heading p{min-height:51px}
+ .account-original-design .account-entrance-heading{min-height:0;margin-bottom:0}
+ .account-original-design .account-entrance-heading h1{min-height:0;font-size:clamp(20px,5.9vw,23px);margin-bottom:6px}
+ .account-original-design .account-entrance-heading p{min-height:2.8em}
+ .account-mobile-actions{margin:12px 0}
  .account-original-design .account-welcome{min-height:0;height:430px;padding:0 0 12px}
  .account-scenes{height:100%;min-height:0;flex:none;padding:0 12px}
  .account-scenes .demo-stage{height:374px;min-height:374px;flex:0 0 374px;overflow:hidden}
