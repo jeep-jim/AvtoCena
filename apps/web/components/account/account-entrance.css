@@ -330,7 +330,7 @@ body:has(.entrance-media-dialog[open]){overflow:hidden}
 @media(max-width:760px){
  .account-original-design .account-login-main{width:100vw;max-width:none;margin-inline:calc(50% - 50vw);border:0;border-radius:28px;overflow:hidden;box-shadow:none}
  .account-original-design .account-login-form{padding:28px 20px 32px!important;background:var(--intro-panel)!important;border-radius:0 0 28px 28px}
- .account-original-design .account-welcome:not(.has-banner),.account-original-design .account-welcome.has-banner{border-radius:28px}
+ .account-original-design .account-welcome:not(.has-banner),.account-original-design .account-welcome.has-banner{border-radius:28px;overflow:hidden}
  .account-original-design .account-selected-role{gap:14px;margin-bottom:22px}
  .account-original-design .account-selected-icon{width:80px;height:80px}
  .account-original-design .account-selected-title{grid-template-columns:58px minmax(0,1fr) 58px}
