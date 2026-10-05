@@ -8,7 +8,7 @@ import {EntranceDealerPreview} from './EntranceDealerPreview';
 import {AccountScenes} from './AccountScenes';
 import {ACCOUNT_SCENES} from './scene-content';
 import {PasswordRecovery} from './PasswordRecovery';
-import {useCallback,useRef,useState, type CSSProperties} from 'react';
+import {useCallback,useLayoutEffect,useRef,useState, type CSSProperties} from 'react';
 import {ArrowUpRight, ArrowLeft, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
 import {LoginForm} from '@/components/auth/LoginForm';
 import {PasswordField} from '@/components/auth/PasswordField';
@@ -24,10 +24,12 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   const [preview,setPreview]=useState<AccountMedia|null>(null);
   const closePreview=useCallback(()=>setPreview(null),[]);
   const [controlsHost,setControlsHost]=useState<HTMLDivElement|null>(null);
+  const scrollAfterRole=useRef(false);
+  const [scrollRequest,setScrollRequest]=useState(0);
   const formRef=useRef<HTMLElement>(null);
   const upcoming=role==='blogger'||role==='supplier';
   function showLogin(){
-    const form=formRef.current;if(!form)return;
+    const form=formRef.current||document.querySelector<HTMLElement>('.account-coming-soon');if(!form)return;
     const header=document.querySelector<HTMLElement>('.ac-public-header');
     const headerBottom=header?header.getBoundingClientRect().height+(parseFloat(getComputedStyle(header).top)||0):0;
     const target=window.scrollY+form.getBoundingClientRect().top-headerBottom;
@@ -39,7 +41,8 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   }
   const selectedArt = appearance[role];
   const scene = ACCOUNT_SCENES[role][sceneIndex % ACCOUNT_SCENES[role].length];
-  function selectRole(next: AccountRole) {setRole(next); setSceneIndex(0);setPreview(null);}
+  function selectRole(next: AccountRole) {scrollAfterRole.current=true;setRole(next);setScrollRequest(value=>value+1);setSceneIndex(0);setPreview(null);}
+  useLayoutEffect(()=>{if(scrollAfterRole.current){scrollAfterRole.current=false;showLogin();}},[role,scrollRequest]);
   const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
   const [mode, setMode] = useState<Mode>('login');
   const [phone, setPhone] = useState('');
@@ -154,17 +157,18 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
         </>}
       </section>
     </div>}
+    <div className={`account-partner-layout${role==='dealer'?' is-dealer':''}`}>
     {role==='dealer'&&<section className="account-dealer-benefits"><h2>Что получает Автодилер</h2><ul><li>Полноценная CRM: управление процессом от заявки до выдачи</li><li>Страница компании и отзывы покупателей</li><li>Каталог автомобилей в наличии и под заказ</li><li>Свои условия доставки и расчёты предложений</li><li>Заявки и контакты клиентов вашей компании</li><li>Документы и договоры по заявкам</li><li>Уведомления в подключённый Telegram компании</li></ul><p className="account-muted">В базовом доступе — страница компании, общий каталог, заявки и документы. Свои автомобили, фото выдач и расширенное оформление доступны в пробном периоде и по подписке. Кабинет открывается после подтверждения компании и вашего доступа.</p></section>}
     {recoveryOpen && <PasswordRecovery initialPhone={phone} onClose={() => setRecoveryOpen(false)} onSuccess={() => {setRecoveryOpen(false);changeMode('login');setNotice('Пароль изменён. Войдите с новым паролем.');}}/>}
-    <div className="account-role-heading"><h2>Для партнёров</h2></div>
+    <div><div className="account-role-heading"><h2>Вход в кабинет</h2></div>
     <div className="account-roles">
-      {ACCOUNT_ROLES.filter(item => item.id !== 'customer').map(item => {
+      {ACCOUNT_ROLES.map(item => {
         const Icon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[item.id];
-        return <button key={item.id} aria-pressed={role === item.id} onClick={() => {selectRole(item.id); window.scrollTo({top: 0, behavior: 'smooth'});}}>
+        return <button key={item.id} aria-pressed={role === item.id} onClick={() => selectRole(item.id)}>
           <span className="account-role-art" data-role-art={item.id}>{appearance[item.id]?.icon ? <img src={appearance[item.id]?.icon} alt="" width={72} height={72}/> : <Icon size={28}/>}</span>
-          <span><strong>{item.label}</strong><small>{item.id === 'dealer' ? 'Автомобили и клиенты' : 'Скоро появится'}</small></span><ArrowUpRight size={18}/>
+          <span><strong>{item.label}</strong><small>{item.id === 'customer' ? 'Ваш автомобиль и заявки' : item.id === 'dealer' ? 'Автомобили и клиенты' : 'Скоро появится'}</small></span><ArrowUpRight size={18}/>
         </button>;
       })}
-    </div>
+    </div></div></div>
   </div>;
 }

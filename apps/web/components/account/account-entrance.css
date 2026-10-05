@@ -356,7 +356,7 @@ html:not([data-theme=light]) .account-original-design{--intro-panel:#1a2029}
 .account-original-design .account-entrance-heading{min-height:90px}
 .account-scenes .chat-stream{justify-content:flex-start}
 .account-scenes .scene-contract.is-complete .contract-intro{position:absolute;inset:0}
-.account-scenes .scene-contract.is-complete :is(.contract-title,.contract-parties,.contract-status,.contract-bridge){display:none}
+.account-scenes .scene-contract.is-complete :is(.contract-title,.contract-parties,.contract-bridge){display:none}
 .account-scenes .scene-contract.is-complete .contract-arena{position:absolute;inset:0;max-width:none;height:100%}
 .account-scenes .scene-contract.is-complete .contract-handshake{width:132px;height:132px;font-size:76px;animation:acHandshakeShake 1.1s ease-in-out infinite}
 @keyframes acHandshakeShake{0%,100%{transform:translate(-50%,-50%) rotate(-7deg)}50%{transform:translate(-50%,calc(-50% + 9px)) rotate(7deg)}}
@@ -384,3 +384,15 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
 .account-scenes .account-media-thumbnail{pointer-events:none}
 .account-scenes .media-tile[data-video=true]::before{position:relative;z-index:2;text-shadow:0 1px 6px #000}
 .account-scenes .media-tile:has(.account-media-thumbnail)>svg{display:none}
+
+.account-scenes .scene-contract.is-complete .contract-status{bottom:28px;white-space:nowrap;z-index:6}
+.account-scenes .contract-file--dealer,.account-scenes .contract-file--client,.account-scenes .contract-file-check,.account-scenes .party-connector::after,.account-scenes .contract-bridge{animation-duration:3s;animation-iteration-count:1;animation-fill-mode:forwards}
+.account-original-design .account-partner-layout{margin-top:24px}
+.account-original-design .account-role-heading{margin-top:0}
+@media(min-width:761px){
+ .account-original-design .account-partner-layout.is-dealer{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:start}
+ .account-original-design .account-partner-layout.is-dealer .account-dealer-benefits{margin-top:0}
+ .account-original-design .account-partner-layout.is-dealer .account-dealer-benefits ul{grid-template-columns:1fr}
+ .account-original-design .account-partner-layout.is-dealer .account-roles{grid-template-columns:1fr}
+ .account-original-design .account-roles{grid-template-columns:repeat(4,minmax(0,1fr))}
+}

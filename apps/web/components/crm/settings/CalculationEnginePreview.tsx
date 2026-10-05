@@ -1,3 +1,4 @@
+import {CalculationMarketFields} from './CalculationMarketFields';
 import {CrmDateInput} from "../CrmDateInput";
 import { expandCustomsBreakdown } from "@/lib/catalog/customs-breakdown";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -136,18 +137,10 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
       </div>
 
       <form method="get" action="/crm/settings" className="crm-calculation-fields grid grid-cols-2 gap-3 border-b border-white/8 p-5 md:p-6 xl:grid-cols-4">
-        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
-          Рынок
-          <select name="calcMarket" defaultValue={marketId} className={inputClass()}>
-            {markets.filter((item) => MARKET_ORDER.includes(item.id)).map((item) => (
-              <option key={item.id} value={item.id}>{item.name}</option>
-            ))}
-          </select>
-        </label>
-        <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
-          Цена объявления, {currency}
-          <input name="calcSourcePrice" type="number" min="1" step="1" defaultValue={sourcePrice} className={inputClass()} />
-        </label>
+        <CalculationMarketFields key={marketId} marketId={marketId} sourcePrice={sourcePrice} inputClass={inputClass()} markets={markets.filter(item=>MARKET_ORDER.includes(item.id)).map(item=>{
+          const version=item.effectiveVersion||item.versions?.find((version:any)=>version.id===item.activeVersionId)||item.versions?.[0];
+          return {id:item.id,name:item.name,currency:String(resolveCatalogMarketConfig(item.id,version).config.currency).toUpperCase()};
+        })}/>
         <label className="grid gap-1.5 text-xs font-black normal-case tracking-normal text-white/45">
           Дата производства
           <input name="calcProductionDate" placeholder="ГГГГ-ММ-ДД или ГГГГ-ММ" defaultValue={productionDate} className={inputClass()} />
