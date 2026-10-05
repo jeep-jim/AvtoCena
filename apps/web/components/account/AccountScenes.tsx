@@ -26,11 +26,8 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
   const holdCarousel=stopped||hovered||held;
   useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const update=()=>setReduced(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   useEffect(()=>{onSceneChange?.(index);setDemoNotice('');},[index,onSceneChange]);
-  useEffect(()=>{
-    if(holdCarousel)return;
-    const timer=setInterval(()=>{if(!document.hidden)setIndex(i=>(i+1)%items.length);},scene.template===0?20000:scene.template===1?10000:scene.template===4?13000:10000);
-    return()=>clearInterval(timer);
-  },[holdCarousel,items.length,index,scene.template]);
+  const autoAdvance=useRef(false);autoAdvance.current=!holdCarousel;
+  const duration=[9000,8500,10000,6500,8500,6500][scene.template];
 
   // Animate only inside this mounted scene; every frame is cancelled on switch/unmount.
   const running=useRef(false);running.current=!stopped;
@@ -40,9 +37,9 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
     const get=(id:string)=>node.querySelector<HTMLElement>(`[data-demo-id="${id}"]`);
     let frame=0, elapsed=0, previous=0;
     const map=get('trackMap'), car=get('trackTruck');
-    let routeStart=0, routeWidth=0, noticeStep=90;
+    let routeStops:number[]=[], noticeStep=90;
     const measure=()=>{
-      if(map){const points=map.querySelectorAll<HTMLElement>('.track-point-wrap');const a=map.getBoundingClientRect();const first=points[0]?.getBoundingClientRect(),end=points[2]?.getBoundingClientRect();if(first&&end){routeStart=first.left-a.left+first.width/2;routeWidth=end.left+end.width/2-a.left-routeStart;}}
+      if(map){const bounds=map.getBoundingClientRect();routeStops=Array.from(map.querySelectorAll<HTMLElement>('.track-point-wrap'),point=>{const box=point.getBoundingClientRect();return box.left-bounds.left+box.width/2;});}
       const notices=node.querySelectorAll<HTMLElement>('.notif-item');if(notices.length>1)noticeStep=notices[1].offsetTop-notices[0].offsetTop;
     };
     const resize=new ResizeObserver(measure);resize.observe(node);measure();
@@ -56,27 +53,37 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
       previous=now;
       const time=reducedRef.current?10000:elapsed;
       if(scene.template===0){
-        const count=reducedRef.current?6:Math.min(6,3+Math.floor(time/4500));
+        const count=reducedRef.current?6:Math.min(6,3+Math.floor(time/2000));
         node.querySelectorAll<HTMLElement>('.chat-msg').forEach((message,i)=>message.classList.toggle('is-visible',i<count&&i>=Math.max(0,count-3)));
         const typing=node.querySelector<HTMLElement>('.chat-typing');if(typing)typing.style.visibility=count===6?'hidden':'visible';
       }
       if(scene.template===1){
-        const finished=time>=5000;
-        toggle('contractIntro','is-hidden',time>=650&&!finished);
-        toggle('contractViewer','is-active',time>=650&&!finished);
+        const finished=time>=6500;
+        toggle('contractIntro','is-hidden',time>=2300&&!finished);
+        toggle('contractViewer','is-active',time>=2300&&!finished);
         get('sceneContract')?.classList.toggle('is-complete',finished);
-        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=850+i*110));
-        const progress=Math.max(0,Math.min(1,(time-2100)/650));
+        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=2500+i*110));
+        const progress=Math.max(0,Math.min(1,(time-3750)/650));
         if(signature)signature.style.strokeDashoffset=String(signatureLength*(1-progress));
         toggle('contractSignature','is-signing',progress>0);
-        toggle('contractConfirmCheck','is-visible',time>=2900);
-        toggle('contractStatus','is-visible',time>=3100);
-        const hint=get('contractSignHint');if(hint)hint.textContent=time>=2900?'Подписано':time>=2100?'Подписание…':'Ожидание подписи…';
+        toggle('contractConfirmCheck','is-visible',time>=4600);
+        toggle('contractStatus','is-visible',finished);
+        const hint=get('contractSignHint');if(hint)hint.textContent=time>=4600?'Подписано':time>=3750?'Подписание…':'Ожидание подписи…';
       }
       if(scene.template===2){
-        const progress=Math.min(time/5000,1);
-        if(car)car.style.left=`${routeStart+routeWidth*progress}px`;
-        toggle('trackArrival','is-visible',progress===1);
+        // Dwell at every checkpoint; all five stops share the same clock.
+        const leg=Math.min(4,Math.floor(time/2200));
+        const fraction=leg===4?0:Math.max(0,Math.min(1,(time%2200-850)/1350));
+        const position=(routeStops[leg]||0)+((routeStops[Math.min(4,leg+1)]||0)-(routeStops[leg]||0))*fraction;
+        if(car)car.style.left=`${position}px`;
+        const labels=['Автомобиль готов к отправке','Фрахт · перевозка морем','Автомобиль поступил на СВХ','Таможенное оформление','Автомобиль прибыл в Москву'];
+        const arrival=get('trackArrival');if(arrival){arrival.textContent=labels[leg];arrival.classList.add('is-visible');}
+        node.querySelectorAll<HTMLElement>('.track-point-wrap').forEach((point,i)=>{point.classList.toggle('is-active',i===leg);point.classList.toggle('is-done',i<leg);});
+        node.querySelectorAll<HTMLElement>('.track-segment').forEach((segment,i)=>{segment.classList.toggle('is-done',i<leg);segment.classList.toggle('is-active',i===leg);segment.classList.toggle('is-future',i>leg);segment.style.setProperty('--route-progress',`${fraction*100}%`);});
+        const stats=node.querySelectorAll('.track-stat-val');
+        if(stats[0])stats[0].textContent=`${Math.round((leg+fraction)*25)}%`;
+        if(stats[1])stats[1].textContent=leg===4?'Прибыл':`${12-leg*3} дн.`;
+        if(stats[2])stats[2].textContent=['Осака','Фрахт','Владивосток','Таможня','Москва'][leg];
       }
       if(scene.template===4){
         const shift=reducedRef.current?2:Math.min(2,Math.floor(time/3300));
@@ -88,10 +95,16 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
         node.querySelectorAll<HTMLElement>('.review-star').forEach((star,i)=>{star.classList.toggle('is-filled',i<rating);star.setAttribute('aria-pressed',String(i<rating));});
         const label=get('reviewRating');if(label)label.textContent=rating+',0';
       }
+      const drop=node.querySelector<HTMLElement>('.step-connector.is-active .step-drop');
+      if(drop)drop.style.left=`${Math.min(1,time/duration)*100}%`;
+      if(time>=duration&&autoAdvance.current&&!document.hidden){
+        if(index<items.length-1)setIndex(index+1);else setPaused(true);
+        return;
+      }
       if(!reducedRef.current)frame=requestAnimationFrame(tick);
     };
     tick(performance.now());return()=>{cancelAnimationFrame(frame);resize.disconnect();};
-  },[html,scene.template,reduced]);
+  },[html,scene.template,reduced,index,items.length,duration]);
 
   useEffect(()=>{
     const node=root.current;if(!node)return;
@@ -104,7 +117,7 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
       const now=performance.now();if(now-wheelLast.current<850)return;
       total+=event.deltaY*(event.deltaMode===1?16:1);
       if(Math.abs(total)<45)return;
-      wheelLast.current=now;total=0;setHeld(true);setIndex(i=>Math.max(0,Math.min(items.length-1,i+step)));
+      wheelLast.current=now;total=0;setHeld(false);setIndex(i=>Math.max(0,Math.min(items.length-1,i+step)));
     };
     node.addEventListener('wheel',wheel,{passive:false});return()=>node.removeEventListener('wheel',wheel);
   },[index,items.length]);
@@ -127,10 +140,10 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
     const node=root.current;node?.addEventListener('click',click);node?.addEventListener('keydown',key);
     return()=>{node?.removeEventListener('click',click);node?.removeEventListener('keydown',key);tiles?.forEach(t=>{const preview=t.querySelector('.account-media-thumbnail');if(preview instanceof HTMLVideoElement){preview.pause();preview.removeAttribute('src');preview.load();}preview?.remove();t.hidden=false;t.removeAttribute('role');t.removeAttribute('tabindex');t.removeAttribute('aria-label');t.removeAttribute('data-video');});};
   },[html,media,onMediaOpen,scene.template]);
-  function move(step:number){setHeld(true);setIndex(i=>(i+step+items.length)%items.length);}
-  const player=<div className="scene-navigation"><button type="button" aria-label="Предыдущая сцена" onClick={()=>move(-1)}><ChevronLeft size={15}/></button><button type="button" aria-label={paused||reduced?'Включить смену сцен':'Остановить смену сцен'} onClick={()=>{setReduced(false);setHeld(false);setPaused(!(paused||reduced));}}>{paused||reduced?<Play size={13}/>:<Pause size={13}/>}</button><button type="button" aria-label="Следующая сцена" onClick={()=>move(1)}><ChevronRight size={15}/></button></div>;
+  function move(step:number){setHeld(false);setIndex(i=>(i+step+items.length)%items.length);}
+  const player=<div className="scene-navigation"><button type="button" aria-label="Предыдущая сцена" onClick={()=>move(-1)}><ChevronLeft size={15}/></button><button type="button" aria-label={paused||reduced?'Включить смену сцен':'Остановить смену сцен'} onClick={()=>{if((paused||reduced)&&index===items.length-1)setIndex(0);setReduced(false);setHeld(false);setPaused(!(paused||reduced));}}>{paused||reduced?<Play size={13}/>:<Pause size={13}/>}</button><button type="button" aria-label="Следующая сцена" onClick={()=>move(1)}><ChevronRight size={15}/></button></div>;
   return <div ref={root} className="account-scenes" data-role={role} data-paused={stopped} data-reduced={reduced} aria-label="Возможности кабинета" aria-roledescription="карусель"
-    onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}
+    onMouseEnter={()=>{if(matchMedia('(min-width: 761px) and (hover: hover) and (pointer: fine)').matches)setHovered(true);}} onMouseLeave={()=>setHovered(false)}
     onKeyDown={e=>{if((e.target as HTMLElement).matches('input,textarea'))return;if(e.key==='ArrowRight'){e.preventDefault();move(1);}if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}}}>
     <div className="demo-stage" onPointerDown={e=>{pointer.current={x:e.clientX,y:e.clientY};}} onPointerUp={e=>{const start=pointer.current;pointer.current=null;if(start&&Math.abs(e.clientX-start.x)>50&&Math.abs(e.clientX-start.x)>Math.abs(e.clientY-start.y)*1.4)move(e.clientX<start.x?1:-1);}} onPointerCancel={()=>{pointer.current=null;}}>
       <div className="scene-event-layer" onClick={e=>{
@@ -142,7 +155,7 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
     </div>
     <div className="account-scene-controls">
       <div className="steps-bar">{items.map((item,i)=><Fragment key={item.title}>
-        <button type="button" className={`step-node${i===index?' is-active':i<index?' is-done':''}`} aria-label={`Сцена ${i+1}: ${item.title}`} aria-pressed={i===index} onClick={()=>{setHeld(true);setIndex(i);}}>{i+1}</button>
+        <button type="button" className={`step-node${i===index?' is-active':i<index?' is-done':''}`} aria-label={`Сцена ${i+1}: ${item.title}`} aria-pressed={i===index} onClick={()=>{setHeld(false);setIndex(i);}}>{i+1}</button>
         {i<items.length-1&&<div className={`step-connector${i<index?' is-done':i===index?' is-active':''}`}><div className="step-drop"/></div>}
       </Fragment>)}</div>
       {player}

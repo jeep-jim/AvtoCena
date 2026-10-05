@@ -168,7 +168,8 @@ test("offer actions render in stable page slots without hydration portals", () =
   assert.match(page, /<OfferDesktopActions offerId=/);
   assert.match(page, /<OfferMobileActions offerId=/);
   assert.match(page, /<OfferCreditCalculator \/>/);
-  assert.doesNotMatch(actions, /createPortal|document\.createElement|getBoundingClientRect|requestAnimationFrame/);
+  // Scroll positioning is covered in entrance-flow.mjs; the SSR slot must stay mounted.
+  assert.doesNotMatch(actions, /createPortal|document\.createElement/);
   assert.doesNotMatch(carsLayout, /OfferContactActions/);
 });
 

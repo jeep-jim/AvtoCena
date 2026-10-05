@@ -330,7 +330,7 @@ try{
   for(const width of [320,390,1280,1440]) for(const theme of ['light','dark']) {
     await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=offer-actions&theme='+theme);
     const buttons=page.locator('[data-offer-action="lead"]:visible');assert.equal(await buttons.count(),1);
-    assert.equal(await buttons.textContent(),'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
+    assert.equal(await buttons.textContent(),width<1280?'Связаться':'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
     const share=page.locator('button:visible').filter({hasText:'Поделиться ссылкой'});assert.ok(await share.locator('svg').isVisible());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     if(width>=1280){

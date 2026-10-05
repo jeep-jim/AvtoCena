@@ -1,4 +1,5 @@
 "use client";
+import {useEffect,useRef,type ReactNode} from "react";
 import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";
 import { ShareLinkButton } from "./ShareLinkButton";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
@@ -9,10 +10,11 @@ function PhoneIcon() {
 
 type FavoriteProps = {offerId: string; snapshot: FavoriteSnapshot};
 
-function ActionButtons({ className = "", stacked = false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean }) {
+function ActionButtons({ className = "", stacked = false, stickyContact=false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean;stickyContact?:boolean }) {
   const buttonClass = "ac-offer-contact-button relative inline-flex h-14 min-w-0 items-center justify-center rounded-[1.05rem] px-12 text-base font-black leading-tight !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] ";
+  const contact=<button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>{stickyContact?'Связаться':'Оставить заявку на расчёт'}</span></button>;
   return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    <button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>Оставить заявку на расчёт</span></button>
+    {stickyContact?<StickyContact>{contact}</StickyContact>:contact}
     <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
     <div data-offer-copy-slot className="empty:!hidden" />
     <div data-offer-pdf-slot className="empty:!hidden" />
@@ -24,10 +26,33 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
   return <ActionButtons {...favorite} stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
 }
 
+function StickyContact({children}:{children:ReactNode}) {
+  const anchor=useRef<HTMLDivElement>(null);
+  useEffect(()=>{
+    const node=anchor.current,button=node?.querySelector<HTMLElement>('button');if(!node||!button)return;
+    const header=document.querySelector<HTMLElement>('.ac-public-header');
+    let frame=0;
+    const update=()=>{
+      frame=0;
+      const rect=node.getBoundingClientRect();
+      const top=Math.max(0,header?.getBoundingClientRect().bottom||0)+8;
+      const fixed=window.innerWidth<1280&&rect.width>0&&rect.top<top;
+      node.dataset.stuck=String(fixed);
+      button.style.position=fixed?'fixed':'';
+      button.style.top=fixed?`${top}px`:'';
+      button.style.left=fixed?`${rect.left}px`:'';
+      button.style.width=fixed?`${rect.width}px`:'100%';
+    };
+    const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
+    const observer=new ResizeObserver(schedule);observer.observe(node);observer.observe(document.body);if(header)observer.observe(header);
+    window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
+    return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+  },[]);
+  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false">{children}</div>;
+}
+
 export function OfferMobileActions(favorite: FavoriteProps) {
-  // Remain in document flow. The former body portal measured the page before
-  // layout settled, briefly placing these controls at the viewport origin.
-  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked /></div>;
+  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked stickyContact/></div>;
 }
 
 export function OfferCreditCalculator() {
@@ -43,6 +68,8 @@ export function OfferCreditCalculator() {
 export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
+    .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
+    .ac-offer-contact-anchor[data-stuck="true"]>button{z-index:45;box-shadow:0 6px 20px #0003}
     .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
     .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}
     .ac-offer-action-row .ac-offer-contact-button>svg,
