@@ -1,6 +1,6 @@
 import https from "node:https";
 import dns from "node:dns/promises";
-import sharp from "sharp";
+import sharp, {type Sharp} from "sharp";
 const MAX = 8 * 1024 * 1024;
 export function isPublicIPv4(ip: string) {
   const n = ip.split(".").map(Number);
@@ -92,10 +92,22 @@ export async function downloadDealerImage(
 export async function prepareDealerImage(bytes: Buffer) {
   if (!bytes.length || bytes.length > MAX)
     throw Error("Размер изображения — до 8 МБ");
-  const input = sharp(bytes, { limitInputPixels: 40000000 });
-  const meta = await input.metadata();
-  if (!["jpeg", "png", "webp"].includes(meta.format || ""))
-    throw Error("Выберите JPG, PNG или WebP");
+  let input:Sharp;
+  const brands=bytes.subarray(8,40).toString('ascii');
+  if(bytes.subarray(4,8).toString()==='ftyp' && /heic|heix|hevc|hevx|mif1|msf1/.test(brands) && !/avif|avis/.test(brands)) {
+    const decode=(await import('heic-decode')).default;
+    const images=await decode.all({buffer:bytes});
+    try {
+      const image=images[0];
+      if(!image || image.width*image.height>40000000)throw Error('Слишком большое разрешение фотографии.');
+      const raw=await image.decode();
+      input=sharp(Buffer.from(raw.data),{raw:{width:raw.width,height:raw.height,channels:4}});
+    } finally {images.dispose();}
+  } else {
+    input=sharp(bytes,{limitInputPixels:40000000});
+    const meta=await input.metadata();
+    if(!["jpeg","png","webp"].includes(meta.format || ""))throw Error("Выберите JPG, PNG, WebP или HEIC");
+  }
   return input
     .rotate()
     .resize({

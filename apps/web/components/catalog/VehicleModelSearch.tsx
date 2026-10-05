@@ -84,7 +84,7 @@ function selectedFacetLabel(name: string, value: string) {
 }
 
 function applyDependentFacetOptions(facets: ContextFacets | null) {
-  const names = new Set(["make", "bodyType", "transmission", "fuel", "drive"]);
+  const names = new Set(["bodyType", "transmission", "fuel", "drive"]);
   document.querySelectorAll<HTMLInputElement>('.ac-catalog-filter-panel input[type="hidden"][name], .ac-mobile-filter-sheet input[type="hidden"][name]').forEach((hidden) => {
     if (!names.has(hidden.name)) return;
     const root = hidden.parentElement;
@@ -271,6 +271,8 @@ export function VehicleModelSearch({
   inputClassName = "ac-filter-control h-13 w-full rounded-[15px] px-4 text-sm font-black outline-none",
   contextual = true,
   required = false,
+  multiple = false,
+  contextQuery,
 }: {
   value: string;
   make: string;
@@ -282,8 +284,10 @@ export function VehicleModelSearch({
   inputClassName?: string;
   contextual?: boolean;
   required?: boolean;
+  multiple?: boolean;
+  contextQuery?: string;
 }) {
-  const [query, setQuery] = useState(value || "");
+  const [query, setQuery] = useState(multiple ? "" : value || "");
   const [items, setItems] = useState<ModelSuggestion[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -293,7 +297,8 @@ export function VehicleModelSearch({
 
   useCatalogFilterDependentUi(contextual);
   useLayoutEffect(() => { submitRef.current = onSubmit; }, [onSubmit]);
-  useEffect(() => setQuery(value || ""), [value]);
+  useEffect(() => { if (!multiple) setQuery(value || ""); }, [value, multiple]);
+  const selectedModels = value.split("|").map(clean).filter(Boolean);
 
   useEffect(() => {
     if (!open) return;
@@ -325,8 +330,8 @@ export function VehicleModelSearch({
       try {
         const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
         if (!contextual) params.set("scope", "autocalc");
-        if (contextual) currentCatalogContext(false).forEach((contextValue, key) => {
-          if (key !== "make" && contextValue && !params.has(key)) params.set(key, contextValue);
+        if (contextual) (contextQuery !== undefined ? new URLSearchParams(contextQuery) : currentCatalogContext(false)).forEach((contextValue, key) => {
+          if (key !== "make" && key !== "model" && contextValue && !params.has(key)) params.set(key, contextValue);
         });
         const response = await fetch(`/api/catalog/models?${params.toString()}`, { cache: "no-store", signal: controller.signal });
         const payload = response.ok ? await response.json() : { items: [] };
@@ -341,7 +346,7 @@ export function VehicleModelSearch({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [canSearch, make, open, query, contextual]);
+  }, [canSearch, make, open, query, contextual, contextQuery]);
 
   const exact = useMemo(() => {
     const requested = compact(query);
@@ -349,6 +354,12 @@ export function VehicleModelSearch({
   }, [items, query]);
 
   const applySelection = (item: ModelSuggestion) => {
+    if (multiple) {
+      onValueChange?.((selectedModels.includes(item.model) ? selectedModels.filter(model => model !== item.model) : [...selectedModels, item.model]).join("|"));
+      if (!make) onMakeChange?.(item.make);
+      setQuery("");
+      return root.current?.closest("form") || null;
+    }
     setQuery(item.model);
     setOpen(false);
     onValueChange?.(item.model);
@@ -377,18 +388,19 @@ export function VehicleModelSearch({
   };
 
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
+    {multiple && <input type="hidden" name="model" value={value} />}
     <input
       ref={input}
       type="search"
-      name="model"
+      name={multiple ? undefined : "model"}
       value={query}
-      placeholder={placeholder}
+      placeholder={multiple && selectedModels.length ? selectedModels.join(", ") : placeholder}
       autoComplete="off"
       spellCheck={false}
       onFocus={() => setOpen(true)}
       onChange={(event) => {
         setQuery(event.target.value);
-        onValueChange?.(event.target.value);
+        if (!multiple) onValueChange?.(event.target.value);
         setOpen(true);
       }}
       onKeyDown={(event) => {
@@ -396,7 +408,7 @@ export function VehicleModelSearch({
         const candidate = exact || items[0];
         if (!candidate) return;
         event.preventDefault();
-        choose(candidate, true);
+        choose(candidate, !multiple);
       }}
       className={inputClassName}
       required={required}
@@ -405,20 +417,23 @@ export function VehicleModelSearch({
       aria-autocomplete="list"
     />
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
+      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько моделей</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => onValueChange?.("")}>Любая модель</button></>}
       <div className="ac-hide-scrollbar max-h-72 overflow-y-auto">
-        {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-white/45">Введите минимум 2 символа модели</div> : null}
-        {canSearch && loading ? <div className="px-3 py-4 text-sm font-bold text-white/45">Ищем модель…</div> : null}
+        {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
+        {canSearch && loading ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
         {canSearch && !loading && items.length ? items.map((item) => <button
           key={item.id || `${item.make}:${item.model}`}
           type="button"
           onClick={() => choose(item)}
+          aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
         >
           <span className="min-w-0"><span className="block truncate">{item.model}</span>{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
-          <span className="shrink-0 opacity-45">↵</span>
+          <span className="shrink-0 opacity-70">{multiple ? selectedModels.includes(item.model) ? "☑" : "☐" : "↵"}</span>
         </button>) : null}
-        {canSearch && !loading && !items.length ? <div className="px-3 py-4 text-sm font-bold text-white/45">Совпадений в каталоге нет</div> : null}
+        {canSearch && !loading && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Совпадений в каталоге нет</div> : null}
       </div>
+      {multiple && <button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => setOpen(false)}>Готово</button>}
     </div> : null}
   </div>;
 }

@@ -124,9 +124,7 @@ export function CatalogBrandMultiSelect({
   }, [options, query, selected, stats.counts]);
 
   const choose = (make: string) => {
-    onChange(make);
-    setOpen(false);
-    setQuery("");
+    onChange(!make ? "" : (selected.includes(make) ? selected.filter(item => item !== make) : [...selected, make]).join(","));
   };
 
   const triggerLabel = selected.length === 0
@@ -141,13 +139,14 @@ export function CatalogBrandMultiSelect({
       <span className="truncate">{triggerLabel}</span><Chevron open={open} />
     </button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
+      <p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько марок</p>
       <div className="mb-1.5">
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти марку" className="ac-filter-search h-10 w-full rounded-xl px-3 text-sm font-bold outline-none" />
       </div>
       <div className="ac-brand-options ac-hide-scrollbar max-h-72 space-y-1 overflow-y-auto">
         {selected.length ? <button type="button" onClick={() => choose("")} className="ac-filter-option mb-1 flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black"><span>Любая марка</span><span className="text-[var(--ac-muted)]">×</span></button> : null}
         {brands.map((option) => {
-          const active = selectedKey === option.value.toLocaleLowerCase("ru-RU");
+          const active = selected.some(make => make.toLocaleLowerCase("ru-RU") === option.value.toLocaleLowerCase("ru-RU"));
           const modelCount = Number(stats.modelCounts[option.value] || 0);
           return <button key={option.value} type="button" data-facet-value={option.value} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-active" : ""}`} aria-pressed={active}>
             <BrandLogoVisual brand={option.value} className="h-8 w-12 shrink-0" />
@@ -157,6 +156,7 @@ export function CatalogBrandMultiSelect({
         })}
         {!brands.length ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
+      <button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => setOpen(false)}>Готово</button>
     </div> : null}
   </div>;
 }

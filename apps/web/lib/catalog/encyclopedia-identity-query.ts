@@ -30,8 +30,7 @@ export function resolveCatalogSearchParamsWithEncyclopedia(
 
   let model = params.model;
   if (model && resolvedMakes.length === 1 && resolvedMakes[0].brandId) {
-    const match = resolver.resolveModel(resolvedMakes[0].brandId!, model);
-    if (match) model = match.model.canonicalName;
+    model = model.split("|").map(value => resolver.resolveModel(resolvedMakes[0].brandId!, value)?.model.canonicalName || value).join("|");
   }
 
   return {

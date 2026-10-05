@@ -787,6 +787,10 @@ function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogS
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
   if (!params.model) return null;
+  if (String(params.model).includes("|")) {
+    const sets = await Promise.all(String(params.model).split("|").filter(Boolean).map(model => projectionModelKeys({...params,model})));
+    return new Set(sets.flatMap(set => [...(set || [])]));
+  }
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   const makes = catalogMakeFilterValues(params.make);
   const scopes: Array<string | undefined> = makes.length ? makes : [undefined];
