@@ -283,7 +283,9 @@ html[data-theme=light] .account-original-design .account-roles>button,html[data-
 }
 .account-scenes .contract-intro.is-hidden{visibility:hidden}
 @media(max-width:760px){.account-scenes .contract-file{display:none}.account-scenes .chat-msg{max-width:100%}.account-scenes .track-stat{min-width:0}}
-html[data-theme=light] .account-scenes :is(.doc-status--new,.doc-icon,.doc-progress-value,.contract-status){color:#805600}
+html[data-theme=light] .account-scenes :is(.doc-status--new,.doc-icon,.doc-bar-percent,.contract-status){color:#805600}
 html[data-theme=light] .account-scenes .doc-icon--blue{color:#315c91}
 html[data-theme=light] .account-scenes .media-tile--video{background:linear-gradient(135deg,#ead8e9,#d9c0d8);color:#674568}
 html[data-theme=light] .account-scenes .contract-status{background:#dcefe4;border-color:#9bc6ad;color:#216343}
+
+.account-original-design .account-dealer-benefits>p{font-size:13px;line-height:1.6;margin-top:14px;max-width:900px}
