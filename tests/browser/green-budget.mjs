@@ -45,6 +45,11 @@ try {
   const volume=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Объём двигателя: от',exact:true})});
   const priceToggle=price.locator('.ac-range-value-toggle').first();
   await priceToggle.waitFor({state:'visible',timeout:90000});
+  // Reproduce the desktop control already scrolled beneath the sticky header.
+  if(!live && width>=1024)await priceToggle.evaluate(element=>element.scrollIntoView({block:'start',behavior:'instant'}));
+  // A real click must reach the control, without force or bypassing pointer checks.
+  await priceToggle.evaluate(element=>element.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'}));
+  await page.waitForTimeout(250);
   await priceToggle.click({timeout:90000});
   await price.getByRole('button',{name:'1 млн',exact:true}).waitFor();
   assert.doesNotMatch(await price.innerText(),/FOB|1,0 л|1,5 л/);
