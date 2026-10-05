@@ -28,7 +28,7 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
   useEffect(()=>{onSceneChange?.(index);setDemoNotice('');},[index,onSceneChange]);
   useEffect(()=>{
     if(holdCarousel)return;
-    const timer=setInterval(()=>{if(!document.hidden)setIndex(i=>(i+1)%items.length);},scene.template===0?32000:scene.template===1?21000:scene.template===4?13000:10000);
+    const timer=setInterval(()=>{if(!document.hidden)setIndex(i=>(i+1)%items.length);},scene.template===0?20000:scene.template===1?10000:scene.template===4?13000:10000);
     return()=>clearInterval(timer);
   },[holdCarousel,items.length,index,scene.template]);
 
@@ -56,22 +56,22 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
       previous=now;
       const time=reducedRef.current?10000:elapsed;
       if(scene.template===0){
-        const count=reducedRef.current?6:Math.min(6,1+Math.floor(time/4500));
+        const count=reducedRef.current?6:Math.min(6,3+Math.floor(time/4500));
         node.querySelectorAll<HTMLElement>('.chat-msg').forEach((message,i)=>message.classList.toggle('is-visible',i<count&&i>=Math.max(0,count-3)));
         const typing=node.querySelector<HTMLElement>('.chat-typing');if(typing)typing.style.visibility=count===6?'hidden':'visible';
       }
       if(scene.template===1){
-        const finished=time>=15000;
-        toggle('contractIntro','is-hidden',time>=2500&&!finished);
-        toggle('contractViewer','is-active',time>=2500&&!finished);
+        const finished=time>=5000;
+        toggle('contractIntro','is-hidden',time>=650&&!finished);
+        toggle('contractViewer','is-active',time>=650&&!finished);
         get('sceneContract')?.classList.toggle('is-complete',finished);
-        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=3000+i*550));
-        const progress=Math.max(0,Math.min(1,(time-8000)/2600));
+        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=850+i*110));
+        const progress=Math.max(0,Math.min(1,(time-2100)/650));
         if(signature)signature.style.strokeDashoffset=String(signatureLength*(1-progress));
         toggle('contractSignature','is-signing',progress>0);
-        toggle('contractConfirmCheck','is-visible',time>=11000);
-        toggle('contractStatus','is-visible',time>=11500);
-        const hint=get('contractSignHint');if(hint)hint.textContent=time>=11000?'Подписано':time>=8000?'Подписание…':'Ожидание подписи…';
+        toggle('contractConfirmCheck','is-visible',time>=2900);
+        toggle('contractStatus','is-visible',time>=3100);
+        const hint=get('contractSignHint');if(hint)hint.textContent=time>=2900?'Подписано':time>=2100?'Подписание…':'Ожидание подписи…';
       }
       if(scene.template===2){
         const progress=Math.min(time/5000,1);
@@ -112,17 +112,20 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsH
     if(scene.template!==3)return;
     const tiles=root.current?.querySelectorAll<HTMLElement>('.media-tile');
     tiles?.forEach((tile,i)=>{
-      const item=media[i];if(!item)return;
+      const item=media[i];tile.hidden=media.length>0&&!item;if(!item)return;
       tile.setAttribute('role','button');tile.tabIndex=0;tile.setAttribute('aria-label',item.caption||`Открыть ${item.type==='video'?'видео':'фото'} ${i+1}`);
       const badge=tile.querySelector('.media-tile-badge');if(badge)badge.textContent=String(i+1);
       if(item.type==='image'){const img=document.createElement('img');img.src=item.url;img.alt=item.caption;img.className='account-media-thumbnail';tile.prepend(img);}
-      else {tile.classList.add('media-tile--video');tile.setAttribute('data-video','true');}
+      else {tile.classList.add('media-tile--video');tile.setAttribute('data-video','true');
+        const video=document.createElement('video');video.src=item.url;video.muted=true;video.playsInline=true;video.preload='metadata';video.className='account-media-thumbnail';video.setAttribute('aria-hidden','true');
+        video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(video.duration)&&video.duration>0)video.currentTime=Math.min(.1,video.duration/2);},{once:true});tile.prepend(video);
+      }
     });
     const open=(target:EventTarget|null)=>{const tile=(target as HTMLElement)?.closest('.media-tile');if(!tile||!tiles)return;const i=Array.from(tiles).indexOf(tile as HTMLElement);if(media[i]){setHeld(true);onMediaOpen?.(media[i]);}};
     const click=(e:MouseEvent)=>open(e.target);
     const key=(e:KeyboardEvent)=>{if((e.key==='Enter'||e.key===' ')&&(e.target as HTMLElement).matches('.media-tile[role=button]')){e.preventDefault();open(e.target);}};
     const node=root.current;node?.addEventListener('click',click);node?.addEventListener('keydown',key);
-    return()=>{node?.removeEventListener('click',click);node?.removeEventListener('keydown',key);tiles?.forEach(t=>t.querySelector('.account-media-thumbnail')?.remove());};
+    return()=>{node?.removeEventListener('click',click);node?.removeEventListener('keydown',key);tiles?.forEach(t=>{const preview=t.querySelector('.account-media-thumbnail');if(preview instanceof HTMLVideoElement){preview.pause();preview.removeAttribute('src');preview.load();}preview?.remove();t.hidden=false;t.removeAttribute('role');t.removeAttribute('tabindex');t.removeAttribute('aria-label');t.removeAttribute('data-video');});};
   },[html,media,onMediaOpen,scene.template]);
   function move(step:number){setHeld(true);setIndex(i=>(i+step+items.length)%items.length);}
   const player=<div className="scene-navigation"><button type="button" aria-label="Предыдущая сцена" onClick={()=>move(-1)}><ChevronLeft size={15}/></button><button type="button" aria-label={paused||reduced?'Включить смену сцен':'Остановить смену сцен'} onClick={()=>{setReduced(false);setHeld(false);setPaused(!(paused||reduced));}}>{paused||reduced?<Play size={13}/>:<Pause size={13}/>}</button><button type="button" aria-label="Следующая сцена" onClick={()=>move(1)}><ChevronRight size={15}/></button></div>;
