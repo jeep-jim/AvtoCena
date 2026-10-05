@@ -3,6 +3,7 @@
 import {phoneNational} from '@/lib/ru-phone';
 import {accountPhoneError} from '@/lib/account/phone';
 import {EntranceMediaPreview} from './EntranceMediaPreview';
+import type {PublishedDealerPreview} from '../dealers/DealerLivePreview';
 import {EntranceDealerPreview} from './EntranceDealerPreview';
 import {AccountScenes} from './AccountScenes';
 import {ACCOUNT_SCENES} from './scene-content';
@@ -17,14 +18,25 @@ import './account-entrance.css';
 
 type Mode = 'login' | 'register';
 
-export function AccountEntrance({nextPath, errorCode, initialRole, appearance = {}}: {nextPath: string; errorCode: string; initialRole: string; appearance?: AccountAppearance}) {
+export function AccountEntrance({nextPath, errorCode, initialRole, appearance = {}, topDealer}: {nextPath: string; errorCode: string; initialRole: string; appearance?: AccountAppearance;topDealer?:PublishedDealerPreview}) {
   const [role, setRole] = useState<AccountRole>(initialRole === 'dealer' || initialRole === 'team' ? 'dealer' : initialRole === 'blogger' || initialRole === 'supplier' ? initialRole : 'customer');
   const [sceneIndex, setSceneIndex] = useState(0);
   const [preview,setPreview]=useState<AccountMedia|null>(null);
   const closePreview=useCallback(()=>setPreview(null),[]);
+  const [controlsHost,setControlsHost]=useState<HTMLDivElement|null>(null);
   const formRef=useRef<HTMLElement>(null);
   const upcoming=role==='blogger'||role==='supplier';
-  function showLogin(){formRef.current?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+  function showLogin(){
+    const form=formRef.current;if(!form)return;
+    const header=document.querySelector<HTMLElement>('.ac-public-header');
+    const headerBottom=header?header.getBoundingClientRect().height+(parseFloat(getComputedStyle(header).top)||0):0;
+    const target=window.scrollY+form.getBoundingClientRect().top-headerBottom;
+    // A short page needs enough trailing space to reach the exact form boundary.
+    const missing=target-(document.documentElement.scrollHeight-window.innerHeight);
+    const entrance=form.closest<HTMLElement>('.account-entrance');
+    if(entrance&&missing>0)entrance.style.paddingBottom=`${(parseFloat(getComputedStyle(entrance).paddingBottom)||0)+Math.ceil(missing)}px`;
+    window.scrollTo({top:target,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  }
   const selectedArt = appearance[role];
   const scene = ACCOUNT_SCENES[role][sceneIndex % ACCOUNT_SCENES[role].length];
   function selectRole(next: AccountRole) {setRole(next); setSceneIndex(0);setPreview(null);}
@@ -102,11 +114,11 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     '--entrance-dark-image':selectedArt?.backgroundDark?`url("${selectedArt.backgroundDark}")`:'none',
   } as CSSProperties}>
     <header className="account-entrance-heading"><div className="entrance-eyebrow"><span/>{role === 'customer' ? 'Личный кабинет покупателя' : role === 'dealer' ? 'Кабинет автодилера' : role === 'blogger' ? 'Автоблогер' : 'Автопоставщик'}</div><h1>{upcoming ? ACCOUNT_ROLES.find(item=>item.id===role)?.label : selectedArt?.banner ? (role === 'customer' ? 'Ваш менеджер — на связи' : ACCOUNT_ROLES.find(item=>item.id===role)?.label) : role==='dealer'?'Ваша компания на АвтоЦене':scene.title}</h1><p>{upcoming ? 'Возможности для партнёров АвтоЦены' : selectedArt?.banner ? 'Заявки, общение и возможности вашего кабинета.' : role==='dealer'?'Личная страница компании и полноценная CRM для управления всем процессом: от заявки до выдачи автомобиля.':scene.description}</p></header>
-    {!upcoming&&<button className="account-mobile-login account-primary" type="button" onClick={showLogin}>Войти</button>}
+    <div className="account-mobile-actions">{!selectedArt?.banner&&role!=='dealer'&&<div className="account-scene-player" ref={setControlsHost}/>} {!upcoming&&<button className="account-mobile-login account-primary" type="button" onClick={showLogin}>Войти</button>}</div>
     {upcoming ? <section className="account-coming-soon">{selectedArt?.icon?<img className="account-coming-icon" src={selectedArt.icon} alt=""/>:<RoleIcon size={64}/>}<h2>{ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Этот раздел ещё в разработке, скоро появится ;)</p><button className="account-text-button" onClick={()=>selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button></section> : <div className="account-login-main">
       <aside className={`account-welcome${selectedArt?.banner ? ' has-banner' : ''}`}>
         {selectedArt?.banner && <img className="account-welcome-background" src={selectedArt.banner} alt=""/>}
-        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : role==='dealer'?<EntranceDealerPreview/>:<AccountScenes key={role} role={role} media={selectedArt?.media} onMediaOpen={setPreview} onSceneChange={setSceneIndex}/>}
+        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : role==='dealer'?<EntranceDealerPreview dealer={topDealer}/>:<AccountScenes controlsHost={controlsHost} key={role} role={role} media={selectedArt?.media} onMediaOpen={setPreview} onSceneChange={setSceneIndex}/>}
 
       </aside>
       {preview&&<EntranceMediaPreview item={preview} onClose={closePreview}/>}

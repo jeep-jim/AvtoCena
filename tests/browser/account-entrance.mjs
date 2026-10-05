@@ -27,7 +27,7 @@ const browser = await chromium.launch({executablePath: process.env.CHROME_BIN ||
 try {
   for (const width of [390, 1440]) for (const theme of ['light', 'dark']) {
     const page = await browser.newPage({viewport: {width, height: 1000}}); let sent = 0;
-    await page.route('**/api/account/auth', route => {sent++; return route.fulfill({status: 400, json: {error: 'Проверка формы'}});});
+    await page.route('**/api/account/auth', route => {if(route.request().method()==='POST')sent++; return route.fulfill({status: 400, json: {error: 'Проверка формы'}});});
     await page.goto(origin + '/login'); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme);
     assert.equal(await page.getByText(/Вход для команды|Покупателю достаточно/).count(), 0);
     assert.equal(await page.locator('.account-selected-title h2').innerText(),'Пользователь');assert.equal(await page.locator('.account-selected-icon img').getAttribute('src'),'/api/site-media/'+'5'.repeat(64));
@@ -88,12 +88,12 @@ try {
   }
   for (const width of [320,390,1440]) for (const theme of ['light','dark']) {
     const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
-    await page.goto(origin+'/login?scenes');await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
+    await page.goto(origin+'/login?scenes&header');await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
     assert.equal(await page.locator('.account-scenes').count(),1);
-    if(width<761){await page.getByRole('button',{name:'Войти',exact:true}).click();const form=await page.locator('#account-login-form').boundingBox();assert.ok(form.y>=70&&form.y<500);assert.ok(form.y+form.height<900,'whole login form is visible');await page.evaluate(()=>scrollTo(0,0));}
+    if(width<761){await page.getByRole('button',{name:'Войти',exact:true}).click();const form=await page.locator('#account-login-form').boundingBox();const header=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(form.y-header.y-header.height)<=1,JSON.stringify({form,header}));assert.equal(await page.locator('.account-welcome').evaluate(el=>getComputedStyle(el).borderRadius),'28px');assert.ok(form.y+form.height<900,'whole login form is visible');await page.evaluate(()=>scrollTo(0,0));}
     for(const role of ['customer','dealer']){
       if(role!=='customer') await page.getByRole('button',{name:new RegExp({dealer:'Автодилер',blogger:'Автоблогер',supplier:'Автопоставщик'}[role])}).click();
-      if(role==='dealer'){await page.frameLocator('.entrance-dealer-preview iframe').getByRole('heading',{name:'Ваша компания',exact:true}).first().waitFor();assert.equal(await page.locator('.account-scenes').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);await page.screenshot({path:`${out}/dealer-preview-${width}-${theme}.png`,fullPage:true});continue;}
+      if(role==='dealer'){await page.frameLocator('.entrance-dealer-preview iframe').getByRole('heading',{name:'Top Avto',exact:true}).first().waitFor();assert.equal(await page.locator('.account-scenes').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);await page.screenshot({path:`${out}/dealer-preview-${width}-${theme}.png`,fullPage:true});continue;}
       await page.getByRole('button',{name:'Следующая сцена',exact:true}).click();
       assert.equal(await page.locator('.account-scene-controls button[aria-pressed=true]').innerText(),'2');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
@@ -126,7 +126,7 @@ try {
     await page.route('**/api/account/portal',route=>route.fulfill({json:{clients:[]}}));
     await page.route('**/api/account/notifications',route=>route.fulfill({json:{items:[{id:'n1',title:'Можно оставить отзыв',text:'Договор подтверждён',at:'2026-10-05T00:00:00Z',href:'/account?tab=reviews'}]}}));
     await page.route('**/api/account/profile',route=>{saved=route.request().postDataJSON();return route.fulfill({json:{account:{id:'test',phone:'+79990000000',name:saved.name,avatarId:saved.avatarId,avatarUrl:'/avatars/customers/'+saved.avatarId+'.svg',telegramConnected:true}}});});
-    await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();await page.locator('.customer-header-tools').waitFor();if(width<761)assert.equal(await page.locator('.ac-public-header a[href="/"]>div').isVisible(),true,'customer header keeps the site name visible');assert.equal(await page.locator('.account-avatar-grid button').count(),20);
+    await page.goto(origin+'/account?tab=profile');await page.getByRole('heading',{name:'Ваш профиль',exact:true}).waitFor();await page.locator('.customer-header-tools').waitFor();if(width<761)assert.equal(await page.locator('.ac-public-header a[href="/"]>div').isVisible(),true,'customer header keeps the site name visible');assert.equal(await page.locator('.account-avatar-grid button').count(),24);
     await page.getByLabel('Как к вам обращаться').fill('Антон');await page.getByRole('button',{name:'Женский портрет 2',exact:true}).click();await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('status').filter({hasText:'Профиль сохранён'}).waitFor();assert.equal(saved.avatarId,'character-12');await page.getByRole('heading',{name:'Здравствуйте, Антон'}).waitFor();
     await page.getByRole('button',{name:'Уведомления: 1',exact:true}).click();await page.getByText('Договор подтверждён',{exact:true}).waitFor();await page.getByRole('button',{name:'Прочитать все',exact:true}).click();await page.getByRole('button',{name:'Уведомления',exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);
     await page.screenshot({path:`${out}/profile-notices-${width}.png`,fullPage:true});await page.close();

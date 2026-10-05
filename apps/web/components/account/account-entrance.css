@@ -328,9 +328,9 @@ body:has(.entrance-media-dialog[open]){overflow:hidden}
 .account-original-design .account-role-back{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--intro-muted);justify-self:start;white-space:nowrap}
 .account-original-design .account-coming-icon{width:96px;height:96px;object-fit:contain}
 @media(max-width:760px){
- .account-original-design .account-login-main{width:100vw;max-width:none;margin-inline:calc(50% - 50vw);border:0;border-radius:0 0 28px 28px;overflow:hidden;box-shadow:none}
+ .account-original-design .account-login-main{width:100vw;max-width:none;margin-inline:calc(50% - 50vw);border:0;border-radius:28px;overflow:hidden;box-shadow:none}
  .account-original-design .account-login-form{padding:28px 20px 32px!important;background:var(--intro-panel)!important;border-radius:0 0 28px 28px}
- .account-original-design .account-welcome:not(.has-banner),.account-original-design .account-welcome.has-banner{border-radius:0}
+ .account-original-design .account-welcome:not(.has-banner),.account-original-design .account-welcome.has-banner{border-radius:28px}
  .account-original-design .account-selected-role{gap:14px;margin-bottom:22px}
  .account-original-design .account-selected-icon{width:80px;height:80px}
  .account-original-design .account-selected-title{grid-template-columns:58px minmax(0,1fr) 58px}
@@ -342,3 +342,13 @@ body:has(.entrance-media-dialog[open]){overflow:hidden}
 .account-original-design .account-error{color:#b4233b;font-weight:500}
 [data-theme="dark"] .account-original-design .account-error{color:#ff9aaa}
 .account-original-design .account-login-form input[aria-invalid="true"]{border-color:#c33750}
+
+.account-mobile-actions{display:none}
+@media(max-width:760px){
+ .account-mobile-actions{display:flex;gap:12px;margin:16px 0;align-items:stretch}
+ .account-mobile-actions>*{flex:1;min-width:0}
+ .account-mobile-actions .account-mobile-login{margin:0;width:auto;min-height:48px}
+ .account-mobile-actions .scene-navigation{display:flex;align-items:center;justify-content:space-evenly;min-height:48px;height:100%;border:1px solid var(--intro-title);border-radius:12px;color:var(--intro-title);background:transparent}
+ .account-mobile-actions .scene-navigation button{display:grid;place-items:center;flex:1;min-height:46px}
+ .account-scenes .scene-navigation{display:none}
+}
