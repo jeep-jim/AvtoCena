@@ -34,7 +34,7 @@ export function PognaliArena({user,userId}:{user:{name:string;avatar?:string};us
  };
  const [playerId,setPlayerId]=useState(userId);
  const [opened,setOpened]=useState(false),[team,setTeam]=useState<TeamRow[]>([]),[mode,setMode]=useState<GameMode>('hills'),[notice,setNotice]=useState(''),[retry,setRetry]=useState(false),[loading,setLoading]=useState(false);
- const refresh=useCallback(async()=>{setLoading(true);try{const data=await gameRequest();setTeam(data.team);setPlayerId(data.playerId||userId);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[userId]);
+ const refresh=useCallback(async()=>{setLoading(true);try{const data=await gameRequest();if(!Array.isArray(data?.team))throw Error('Не удалось загрузить рейтинг. Попробуйте обновить его.');setTeam(data.team);setPlayerId(data.playerId||userId);setNotice('');}catch(e){setNotice(e instanceof Error?e.message:'Не удалось обновить рейтинг');}finally{setLoading(false);}},[userId]);
  useEffect(()=>{void refresh();},[refresh]);
  const send=useCallback((data:object)=>frame.current?.contentWindow?.postMessage({game:'pognali-v1',...data},'*'),[]);
  const save=useCallback(async()=>{

@@ -5,13 +5,14 @@ import {build} from 'esbuild';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/pognali';fs.mkdirSync(out,{recursive:true});
 await build({stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {PognaliArena} from './apps/web/components/crm/PognaliArena';createRoot(document.getElementById('root')).render(<PognaliArena user={{name:'Ян'}} userId="fixture"/>);`,loader:'tsx',resolveDir:process.cwd()},bundle:true,platform:'browser',format:'esm',jsx:'automatic',outfile:out+'/fixture.js',define:{'process.env.NODE_ENV':'"production"'},tsconfig:'apps/web/tsconfig.json'});
-let runs=0,finishes=0;
+let runs=0,finishes=0,ratingRequests=0;
 const server=http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://'+req.headers.host);
  if(url.pathname==='/api/account/game'){
   res.setHeader('Content-Type','application/json');let input={};if(req.method==='POST'){const b=[];for await(const c of req)b.push(c);input=JSON.parse(Buffer.concat(b));}
   if(input.action==='start'){assert.ok(['hills','battle'].includes(input.mode));runs++;return res.end(JSON.stringify({run:{id:'run-'+runs,mode:input.mode}}));}
   if(input.action==='finish'){finishes++;return res.end(JSON.stringify({result:{score:123}}));}
+  if(ratingRequests++===0)return res.end('{}');
   return res.end(JSON.stringify({playerId:'fixture',team:[{id:'fixture',name:'Ян',best:{hills:{score:123}}},{id:'other',name:'Антон',best:{battle:{score:456}}}]}));
  }
  if(url.pathname==='/games/pognali.html'){res.setHeader('Content-Type','text/html');return res.end(fs.readFileSync('apps/web/public/games/pognali.html'));}
@@ -23,6 +24,7 @@ const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||unde
 try{
  for(const [width,height] of [[390,844],[320,640],[1280,800]]){
   const context=await browser.newContext({viewport:{width,height},hasTouch:width<600,isMobile:width<600}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(origin);
+  if(width===390){await page.getByRole('status').filter({hasText:'Не удалось загрузить рейтинг'}).waitFor();await page.getByRole('button',{name:'Обновить',exact:true}).click();}
   await page.getByRole('heading',{name:'🏆 Общий рейтинг'}).waitFor();assert.equal(await page.getByRole('button',{name:'Кольцо',exact:true}).count(),0);
   await page.getByRole('button',{name:'Погнали!',exact:true}).click();const frame=page.frameLocator('iframe');await frame.locator('#btnStart').waitFor();
   assert.ok(await frame.locator('#scrMenu .panel').evaluate(e=>e.scrollHeight<=e.clientHeight+1));
