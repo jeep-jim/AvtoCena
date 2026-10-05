@@ -52,6 +52,10 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/mobile-filter-overlays.mjs
+      - name: Multiple models, delivery city and partial photo upload
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/catalog-multi-photo.mjs
       - name: WebKit mobile overlays and selections
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/filter-browser/node_modules/playwright/index.mjs

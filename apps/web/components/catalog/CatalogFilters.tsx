@@ -2,6 +2,8 @@
 import {CatalogMarketFlag} from "./CatalogMarketFlag";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
+import { CityPickerDialog, LocationIcon } from "../home/CitySelector";
+import { useSelectedCity } from "../../lib/location/selected-city";
 import { readSelectedCity } from "../../lib/location/selected-city";
 import { parseEngineCc } from "../../lib/catalog/engine-input";
 import { isElectrifiedFilter } from "../../lib/catalog/fuel-filter";
@@ -282,7 +284,7 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
 
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
-    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
+    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
     <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <AuctionGradeSelect value={draft.auctionGrade} onChange={(value) => setField("auctionGrade", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="stock" value={draft.stock || "auction"} placeholder="Раздел Японии" options={[{value:"all",label:"Все"},{value:"auction",label:"Аукционы"},{value:"green",label:"В наличии"}]} onChange={value=>{setField("stock",value);if(value==="green")setField("auctionGrade","");}} /> : null}</div>
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -406,7 +408,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
     if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
-    if (draft.model) rows.push({ key: "model", label: draft.model });
+    draft.model.split("|").filter(Boolean).forEach(model => rows.push({key:`model:${model}`,label:model}));
     if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
     if (draft.transmission) rows.push({ key: "transmission", label: optionLabel(transmissions, draft.transmission) });
@@ -421,6 +423,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [draft]);
 
   const removeFilter = (key: string) => {
+    if (key.startsWith("model:")) return setDraft(current => ({...current,model:current.model.split("|").filter(model => model !== key.slice(6)).join("|")}));
     if (key.startsWith("auctionGrade:")) return setDraft(current => ({...current, auctionGrade: auctionGradeSelections(current.auctionGrade).filter(grade => grade !== key.slice(13)).join("|")}));
     if (key.startsWith("make:")) {
       const removed = key.slice(5);
@@ -440,10 +443,11 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   };
 
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
+    <div className="mt-3 hidden lg:block"><CatalogCityFilter /></div>
     <form aria-busy={pending} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel mt-6 hidden lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
-        <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
+        <VehicleModelSearch multiple contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
       <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
@@ -462,6 +466,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
+        <section className="ac-mobile-filter-section"><CatalogCityFilter /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
@@ -508,4 +513,9 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       html[data-theme="light"] .ac-mobile-filter-sheet [class*="border-white/"]{border-color:rgba(30,36,48,.09)!important}
     `}</style>
   </>;
+}
+
+function CatalogCityFilter() {
+ const city=useSelectedCity(),[open,setOpen]=useState(false);
+ return <div className="flex flex-wrap items-center gap-3 text-sm"><span className="text-[var(--ac-muted)]">Город доставки</span><button type="button" className="ac-filter-control flex min-h-11 items-center gap-2 rounded-xl px-3 font-bold" aria-label={`Выбрать город. Сейчас: ${city || "не выбран"}`} onClick={()=>setOpen(true)}><LocationIcon className="h-4 w-4 text-red-500"/>{city || "Выбрать город"}<Chevron /></button>{open&&<CityPickerDialog onChange={()=>{}} onClose={()=>setOpen(false)}/>}</div>;
 }

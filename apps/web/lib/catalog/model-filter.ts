@@ -3,6 +3,8 @@
  * This does not change the exact identity used for technical specifications.
  */
 export function matchesCatalogModel(value: unknown, query: unknown): boolean {
+  const selections = String(query ?? "").split("|").map(value => value.trim()).filter(Boolean);
+  if (selections.length > 1) return selections.some(selection => matchesCatalogModel(value, selection));
   const words = (input: unknown) => String(input ?? '').normalize('NFKC')
     .toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/).filter(Boolean);
   const requested = words(query).join('');

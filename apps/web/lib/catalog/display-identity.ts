@@ -1,3 +1,4 @@
+import { restoreSourceModelName } from "./source-model-name";
 import { canonicalCatalogBrand, catalogBrandBySlug, catalogBrandSlug } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { presentCatalogOffer, translateCatalogText } from "./presentation";
@@ -236,6 +237,8 @@ function hasUnresolvedAsianScript(value: string) {
 }
 
 export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>(offer: T): Promise<T & { encyclopediaDisplayIdentity?: DisplayIdentity }> {
+  const restored = restoreSourceModelName(offer);
+  if (restored.model === "Yaris L" && restored.market === "china" && /^Toyota$/i.test(String(restored.make))) return restored;
   const presented = presentCatalogOffer(offer);
   const presentedMake = duplicateParentheticalMake(clean(presented.makeLabel || offer.make));
   const canonicalMake = trustedCanonicalMake(presentedMake);
