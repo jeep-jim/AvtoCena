@@ -26,6 +26,8 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
   return <ActionButtons {...favorite} stacked={position === "sidebar"} className={`mt-4 hidden xl:grid ac-offer-actions-${position}`} />;
 }
 
+// Keep the anchor in document flow: its bounds describe the original position,
+// while the button bounds follow the viewport after it becomes fixed.
 function StickyContact({children}:{children:ReactNode}) {
   const anchor=useRef<HTMLDivElement>(null);
   useEffect(()=>{
