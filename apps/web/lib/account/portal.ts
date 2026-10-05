@@ -18,7 +18,7 @@ export async function portalData(a:CustomerAccount){const links=await readDataJs
  const manager=users.find(u=>u.id===(client.assignedManagerId||leads.find(l=>l.assignedManagerId)?.assignedManagerId)&&u.status!=='disabled');
  const messages=(await readRecentChunkedDataJson<any>(threadPath(link.companyId,client.id),100)).sort((a,b)=>a.createdAt.localeCompare(b.createdAt));
  result.push({key,name:client.fio||a.name,companyId:link.companyId,manager:manager?{name:manager.displayName,avatar:manager.avatarUrl}:null,
- leads:leads.map(l=>({id:l.id,title:l.offerTitle||l.car||'Подбор автомобиля',status:leadStatusLabel(l.status),updatedAt:l.updatedAt||l.createdAt,canReview:!!confirmedCustomerContract(client,l.id)&&!client.portalReviews?.[l.id]&&!reviews.some(r=>r.leadId===l.id)})),
+ leads:leads.map(l=>({id:l.id,title:l.offerTitle||l.car||'Подбор автомобиля',status:leadStatusLabel(l.status),updatedAt:l.updatedAt||l.createdAt,reviewAvailableAt:confirmedCustomerContract(client,l.id)?.confirmedAt,canReview:!!confirmedCustomerContract(client,l.id)&&!client.portalReviews?.[l.id]&&!reviews.some(r=>r.leadId===l.id)})),
  documents:sharedCustomerDocuments(client).map((d:any)=>({id:d.id,name:d.name,size:d.size,createdAt:d.createdAt})),
  reviews:reviews.map(r=>({id:r.id,rating:r.rating,text:r.text,status:r.status})),
  messages:messages.map(m=>({id:m.id,text:m.text,author:m.author,createdAt:m.createdAt,mine:m.accountId===a.id}))});
