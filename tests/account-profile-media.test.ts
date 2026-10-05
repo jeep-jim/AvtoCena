@@ -33,9 +33,8 @@ test('customer push isolates accounts, expires old sessions and keeps sensitive 
  }finally{delete (globalThis as any).__accountPush;}
 });
 test('customer worker suppresses pushes after account switch or logout',async()=>{const handlers:any={},shown:any[]=[];let account:any={id:'current'};const scope:any={location:{origin:'https://avtocena.com'},addEventListener:(n:string,f:any)=>handlers[n]=f,registration:{showNotification:async(...args:any[])=>shown.push(args)}};vm.runInNewContext(readFileSync('apps/web/public/account-notifications-sw.js','utf8'),{self:scope,URL,fetch:async(url:string)=>Response.json(url.endsWith('/auth')?{account}:{items:[{id:'message'}]})});async function push(id:string){let work;handlers.push({data:{json:()=>({accountId:id,href:'/account?tab=chat'})},waitUntil:(p:any)=>work=p});await work;}await push('other');assert.equal(shown.length,0);await push('current');assert.equal(shown.length,1);account=null;await push('current');assert.equal(shown.length,1);});
-test('default avatar follows the configured customer icon without exposing arbitrary redirects',async()=>{
- const icon='/api/site-media/'+'a'.repeat(64);(globalThis as any).__defaultIcon=icon;
- const bundle=await build({entryPoints:['apps/web/app/api/account/default-avatar/route.ts'],bundle:true,platform:'node',format:'cjs',packages:'external',write:false,plugins:[{name:'appearance',setup(b){b.onResolve({filter:/showcase-store$/},()=>({path:'appearance',namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},()=>({contents:'export const readPublicFeatures=async()=>({accountAppearance:{customer:{icon:globalThis.__defaultIcon}}});'}));}}]});
- const module={exports:{} as any};new Function('require','module','exports',bundle.outputFiles[0].text)(require,module,module.exports);
- try{const r=await module.exports.GET(new Request('https://avtocena.com/api/account/default-avatar'));assert.equal(r.status,307);assert.equal(r.headers.get('location'),'https://avtocena.com'+icon);(globalThis as any).__defaultIcon='https://elsewhere.test/icon';const fallback=await module.exports.GET(new Request('https://avtocena.com/api/account/default-avatar'));assert.equal(fallback.status,200);assert.match(fallback.headers.get('content-type'),/image\/svg/);}finally{delete (globalThis as any).__defaultIcon;}
+test('legacy default avatar URL redirects to the bundled key on the public origin',async()=>{
+ const {GET}=await import('../apps/web/app/api/account/default-avatar/route');
+ const response=GET();assert.equal(response.status,307);assert.equal(response.headers.get('location'),'/key-logo.png');
+ assert.equal(customerAvatar('new-account'),'/key-logo.png');
 });

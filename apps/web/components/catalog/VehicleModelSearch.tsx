@@ -116,7 +116,6 @@ function ensureCatalogFilterLayoutPolish() {
       }
       @media(max-width:1023px){
         .ac-mobile-filter-sheet input.ac-filter-control[name="model"]{height:46px!important;min-height:46px!important;border-radius:13px!important}
-        .ac-mobile-filter-sheet .ac-mobile-market-field{display:none!important}
         .ac-mobile-filter-sheet .ac-mobile-secondary-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
         .ac-mobile-filter-sheet .ac-mobile-secondary-grid .ac-filter-control{min-width:0!important;padding-left:11px!important;padding-right:11px!important;font-size:12px!important}
         .ac-mobile-filter-sheet .ac-mobile-secondary-grid>.ac-mobile-secondary-span{grid-column:1/-1!important}
@@ -145,7 +144,6 @@ function ensureCatalogFilterLayoutPolish() {
       if (!element.children.length && clean(element.textContent).toLocaleLowerCase("ru-RU") === "каталог") element.classList.add("ac-mobile-eyebrow-hidden");
     });
 
-    sheet.querySelectorAll<HTMLInputElement>('input[type="hidden"][name="market"]').forEach((input) => input.parentElement?.classList.add("ac-mobile-market-field"));
 
     const advanced = sheet.querySelector<HTMLElement>(".ac-advanced-fields");
     advanced?.querySelectorAll<HTMLElement>(":scope > div").forEach((grid) => {

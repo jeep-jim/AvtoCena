@@ -202,6 +202,20 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       </header>
 
       <style jsx global>{`
+        @media(max-width:767px){
+          .ac-public-header>div{gap:6px!important;padding-left:10px!important;padding-right:10px!important}
+          .ac-public-header .ac-icon-button,.ac-public-header .ac-favorite-nav{width:36px!important;min-width:36px!important}
+          .ac-public-header>div>div:last-child{flex-shrink:0}
+        }
+        @media(max-width:359px){
+          .ac-public-header>div>div:last-child,.ac-public-header .customer-header-tools,.ac-public-header .ac-staff-tools{gap:3px}
+          .ac-public-header a[href="/"]{gap:4px}
+          .ac-public-header a[href="/"]>svg{width:26px}
+          .ac-public-header a[href="/"]>div>div:first-child{font-size:16px}
+          .ac-public-header a[href="/"]>div>div:last-child{font-size:9px}
+          .ac-public-header .ac-icon-button,.ac-public-header .ac-favorite-nav,.ac-public-header .customer-header-icon,.ac-public-header .customer-header-tools>a,.ac-public-header .ac-staff-account{width:32px!important;min-width:32px!important}
+        }
+
         html:not([data-theme="light"]) body,
         html:not([data-theme="light"]) body main.ac-page-copy,
         html:not([data-theme="light"]) body .ac-page-copy,

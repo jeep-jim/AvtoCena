@@ -10,12 +10,14 @@ process.env.AUTH_SECRET='isolated-browser-auth-secret';
 const auth=await customerAuthHarness();
 const out='artifacts/customer-auth';fs.mkdirSync(out,{recursive:true});
 await build({stdin:{contents:"import './tests/browser/account-entrance-fixture';import React from 'react';import {createRoot} from 'react-dom/client';import {RoutePreloader} from './apps/web/components/layout/RoutePreloader';const root=document.body.appendChild(document.createElement('div'));createRoot(root).render(<RoutePreloader/>);",loader:'tsx',resolveDir:process.cwd()},outfile:`${out}/fixture.js`,external:['/fonts/*'],bundle:true,platform:'browser',format:'esm',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"','process.env':'{}'},plugins:[{name:'next',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},a=>({path:a.path,namespace:'mock'}));b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:a.path==='next/navigation'?'export const usePathname=()=>location.pathname;export const useSearchParams=()=>new URLSearchParams(location.search);export const useRouter=()=>({push:()=>{},refresh:()=>{},prefetch:()=>{}});':`import React from 'react';export default function Link(p){return React.createElement('a',p)}`,loader:'jsx',resolveDir:process.cwd()}));}}]});
+const publicVisualFixes=fs.readFileSync('apps/web/app/(public)/template.tsx','utf8').match(/const publicVisualFixes = `([\s\S]*?)`;/)[1];
 const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx'],theme:{extend:{}},plugins:[]})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});
 const server=http.createServer(async(req,res)=>{
  try{
  const url=new URL(req.url,'http://'+req.headers.host);
+ if(url.pathname==='/key-logo.png'){res.setHeader('Content-Type','image/png');return res.end(fs.readFileSync('apps/web/public/key-logo.png'));}
  if(url.pathname==='/api/account/default-avatar'){res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public/logo/avtocena-mark-light.svg'));}
- if(url.pathname==='/api/account/auth'){
+ if(url.pathname==='/api/account/auth'||url.pathname==='/api/account/profile'){
   const chunks=[];for await(const chunk of req)chunks.push(chunk);
   const response=await auth.handle(new Request(url,{method:req.method,headers:req.headers,...(req.method==='POST'?{body:Buffer.concat(chunks)}:{})}));
   res.writeHead(response.status,Object.fromEntries(response.headers));return res.end(await response.text());
@@ -28,7 +30,7 @@ const server=http.createServer(async(req,res)=>{
   account=(await (await auth.handle(new Request(new URL('/api/account/auth',url),{headers:req.headers}))).json()).account;
   if(!account){res.writeHead(302,{location:'/login?scenes'});return res.end();}
  }
- res.setHeader('content-type','text/html');res.end(`<!doctype html><html data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`,'utf8')}:root{--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6}[data-theme=dark]{--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22}body{margin:0;padding:16px;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}</style></head><body><div id="root"></div><script>window.__CUSTOMER_ACCOUNT__=${JSON.stringify(account)}</script><script type="module" src="/fixture.js"></script></body></html>`);
+ res.setHeader('content-type','text/html');res.end(`<!doctype html><html data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`,'utf8')}:root{--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6}[data-theme=dark]{--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22}body{margin:0;padding:0;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}${publicVisualFixes}</style></head><body><div id="root"></div><script>window.__CUSTOMER_ACCOUNT__=${JSON.stringify(account)}</script><script type="module" src="/fixture.js"></script></body></html>`);
  }catch(error){res.writeHead(500);res.end('Isolated test server error');console.error(error);}
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin=`http://127.0.0.1:${server.address().port}`;
@@ -72,6 +74,14 @@ try{
   await page.getByRole('button',{name:'Закрыть уведомления'}).click();
   assert.equal(await page.getByRole('heading',{name:'Восстановление доступа'}).count(),0);
   assert.equal(await page.getByLabel('Как к вам обращаться').inputValue(),'');
+  assert.equal(await page.locator('.account-profile-identity .account-logout-button').count(),1);
+  const avatar=page.locator('.account-profile-identity>img');await avatar.evaluate(img=>img.decode());assert.ok(await avatar.evaluate(img=>img.naturalWidth>0));
+  if(theme==='dark')assert.equal(await page.locator('.account-cabinet-page').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(26, 32, 41)');
+  assert.equal(await page.locator('.customer-profile').evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
+  const name=page.getByLabel('Как к вам обращаться');assert.equal(await name.getAttribute('maxlength'),'60');
+  for(const invalid of ['а','  ','Ан тон','а4','хуй_на','sex']){await name.fill(invalid);await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();assert.equal(await page.getByRole('heading',{name:'Здравствуйте!'}).count(),1);}
+  await name.fill('Ян');await page.getByRole('button',{name:'Сохранить профиль',exact:true}).click();await page.getByRole('heading',{name:'Здравствуйте, Ян!'}).waitFor();
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   const logout=await page.getByRole('button',{name:'Выйти',exact:true}).boundingBox();assert.ok(logout.x>=0&&logout.x+logout.width<=width);
   for(const grid of await page.locator('.account-avatar-grid').all())assert.equal(await grid.locator('button:visible').count(),width<761?6:5);
   await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/profile-${width}-${theme}.png`,fullPage:true});
@@ -81,8 +91,8 @@ try{
   await page.locator('[name=customer-phone]').evaluate((input,value)=>input.value=value,number);
   await page.locator('[name=customer-password]').evaluate(input=>input.value='isolated-test-password');
   await page.getByRole('button',{name:'Войти в кабинет',exact:true}).click();await page.waitForURL(origin+'/account');
-  await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
-  await page.reload();await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
+  await page.getByRole('heading',{name:'Здравствуйте, Ян!'}).waitFor();
+  await page.reload();await page.getByRole('heading',{name:'Здравствуйте, Ян!'}).waitFor();
   assert.deepEqual(errors,[]);await context.close();
  }
  {

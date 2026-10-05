@@ -14,7 +14,7 @@ html:not([data-theme="light"]) body {
   background-image: none !important;
 }
 
-html:not([data-theme="light"]) body main,
+html:not([data-theme="light"]) body main:not(.account-cabinet-page),
 html:not([data-theme="light"]) body .ac-page-copy,
 html:not([data-theme="light"]) body .ac-partner-page {
   background: #07090f !important;
