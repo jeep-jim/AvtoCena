@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from 'react';
 import {Mail, MessageCircle, Send, X} from 'lucide-react';
+import {phoneNational} from '@/lib/ru-phone';
 import {PasswordField} from '@/components/auth/PasswordField';
 
 type Channel = 'email' | 'telegram' | 'max';
@@ -59,7 +60,7 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
     <h2 id="recovery-title">Восстановление пароля</h2>
     <p className="account-muted">Введите номер телефона, указанный при регистрации, и выберите способ подтверждения для смены пароля.</p>
     <form data-no-route-loader="true" onSubmit={submit}>
-      <label>Телефон, указанный при регистрации<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={22} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(event.target.value)}/></label>
+      <label>Телефон, указанный при регистрации<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={12} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(`+7${phoneNational(event.target.value)}`)} onPaste={event=>{event.preventDefault();setPhone(`+7${phoneNational(event.clipboardData.getData("text"))}`);}}/></label>
       <fieldset disabled={busy || !!challenge}><legend>Куда отправить подтверждение?</legend><div className="recovery-channels">
         {CHANNELS.map(({id,label,Icon,available}) => <label key={id} className="recovery-channel" data-selected={channel === id}>
           <input type="radio" name="recovery-channel" value={id} checked={channel === id} onChange={() => {setChannel(id);setError('');}}/>

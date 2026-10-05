@@ -1,3 +1,7 @@
-export const CUSTOMER_AVATARS=Array.from({length:20},(_,i)=>({id:`character-${i+1}`,url:`/avatars/customers/character-${i+1}.svg`,label:`Персонаж ${i+1}`}));
-export function customerAvatar(seed:string,avatarId?:string){return CUSTOMER_AVATARS.find(a=>a.id===avatarId)?.url||CUSTOMER_AVATARS[Array.from(seed).reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0)%20].url;}
-export function validCustomerAvatar(id:unknown){return typeof id==='string'&&CUSTOMER_AVATARS.some(a=>a.id===id);}
+const people = (start:number,group:string,label:string) => Array.from({length:5},(_,i)=>({id:`character-${start+i}`,url:`/avatars/customers/character-${start+i}.svg`,label:`${label} ${i+1}`,group}));
+const cars = (group:string,label:string) => Array.from({length:5},(_,i)=>({id:`${group}-${i+1}`,url:`/avatars/customers/${group}-${i+1}.svg`,label:`${label} ${i+1}`,group}));
+export const CUSTOMER_AVATARS=[...people(11,'women','Женский портрет'),...people(1,'men','Мужской портрет'),...cars('city-cars','Городской автомобиль'),...cars('offroad-cars','Внедорожник')];
+export const DEFAULT_CUSTOMER_AVATAR='/avatars/customers/key.svg';
+// Previously selected portraits remain valid even when not in the new picker.
+export function customerAvatar(_seed:string,avatarId?:string){if(avatarId&&/^character-([1-9]|1[0-9]|20)$/.test(avatarId))return `/avatars/customers/${avatarId}.svg`;return CUSTOMER_AVATARS.find(a=>a.id===avatarId)?.url||DEFAULT_CUSTOMER_AVATAR;}
+export function validCustomerAvatar(id:unknown){return typeof id==='string'&&(id==='key'||/^character-([1-9]|1[0-9]|20)$/.test(id)||CUSTOMER_AVATARS.some(a=>a.id===id));}

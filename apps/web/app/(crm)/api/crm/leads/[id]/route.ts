@@ -1,3 +1,4 @@
+import {notifyCustomerForLead} from '@/lib/account/lead-push';
 import {notifyDiscussion} from "@/lib/crm-discussion-store";
 import {notifyTeam} from "@/lib/crm-notification-store";
 import {canSeeLead} from "@/lib/crm-visibility";
@@ -198,6 +199,6 @@ export async function PATCH(
     }
   }
 
-  if (managerChanged) after(() => flushCrmPush(5).catch(() => undefined));
+  if(statusChanged||managerChanged)after(async()=>{if(managerChanged)await flushCrmPush(5).catch(()=>undefined);await notifyCustomerForLead(updatedLead).catch(()=>{});});
   return NextResponse.json({ ok: true, lead: updatedLead });
 }

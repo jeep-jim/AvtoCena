@@ -5,7 +5,7 @@ import {cookies} from 'next/headers';
 import {getJsonStorage,mutateDataJson,readDataJson,StorageConflictError} from '../data';
 const scrypt=promisify(scryptCallback);
 export const ACCOUNT_COOKIE='avtocena_customer';
-export type CustomerAccount={id:string;phone:string;name:string;passwordHash:string;createdAt:string;sessionVersion:number;telegramId?:string;phoneVerifiedAt?:string;disabled?:boolean;avatarId?:string;gender?:'unspecified'|'male'|'female';avatarVersion?:string};
+export type CustomerAccount={id:string;phone:string;name:string;passwordHash:string;createdAt:string;sessionVersion:number;telegramId?:string;phoneVerifiedAt?:string;disabled?:boolean;avatarId?:string;gender?:'unspecified'|'male'|'female';profileConfigured?:boolean;avatarVersion?:string};
 export const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 export {normalizeAccountPhone} from './phone';
 export const accountPath=(id:string)=>{if(!/^[a-f0-9]{64}$/.test(id))throw Error('Нет доступа.');return `accounts/users/${id}.json`;};
@@ -16,7 +16,7 @@ function secret(){const s=process.env.AUTH_SECRET||process.env.NEXTAUTH_SECRET;i
 export function accountSession(account:CustomerAccount){const body=Buffer.from(JSON.stringify({id:account.id,v:account.sessionVersion,exp:Date.now()+14*86400000})).toString('base64url');return body+'.'+createHmac('sha256',secret()).update('customer:'+body).digest('base64url');}
 export function parseAccountSession(raw:string){try{const [body,sig,...extra]=raw.split('.');const expected=createHmac('sha256',secret()).update('customer:'+body).digest('base64url');if(extra.length||sig?.length!==expected.length||!timingSafeEqual(Buffer.from(sig),Buffer.from(expected)))return null;const p=JSON.parse(Buffer.from(body,'base64url').toString());return /^[a-f0-9]{64}$/.test(p.id)&&p.exp>Date.now()?p:null;}catch{return null;}}
 export async function currentAccount(){const p=parseAccountSession((await cookies()).get(ACCOUNT_COOKIE)?.value||'');if(!p)return null;const a=await readDataJson<CustomerAccount|null>(accountPath(p.id),null);return a&&!a.disabled&&a.sessionVersion===p.v?a:null;}
-export const publicAccount=(a:CustomerAccount)=>({id:a.id,name:a.name,phone:a.phone,telegramConnected:!!a.telegramId,phoneVerified:!!a.phoneVerifiedAt,avatarId:a.avatarId||'',gender:a.gender||'unspecified',avatarUrl:a.avatarVersion?`/api/account/avatar?v=${a.avatarVersion}`:customerAvatar(a.id,a.avatarId)});
+export const publicAccount=(a:CustomerAccount)=>({id:a.id,profileConfigured:a.profileConfigured===true,name:a.name,phone:a.phone,telegramConnected:!!a.telegramId,phoneVerified:!!a.phoneVerifiedAt,avatarId:a.avatarId||'',gender:a.gender||'unspecified',avatarUrl:a.avatarVersion?`/api/account/avatar?v=${a.avatarVersion}`:customerAvatar(a.id,a.avatarId)});
 // Bounded fixed buckets: unauthenticated rate limiting cannot create an
 // unbounded collection in Object Storage by varying phone numbers or IPs.
 export async function accountRateLimit(identity:string,limit=12,windowMs=900000){const bucket=hash(identity).slice(0,3);let ok=false;await mutateDataJson(`accounts/rate/${bucket}.json`,{at:0,count:0},r=>{const value=Date.now()-r.at>windowMs?{at:Date.now(),count:0}:r;ok=value.count<limit;return {...value,count:Math.min(1000,value.count+1)};});return ok;}

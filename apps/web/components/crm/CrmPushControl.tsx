@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Bell, BellOff } from "lucide-react";
-export function CrmPushControl({userId}: {userId: string}) {
+export function CrmPushControl({userId,customer=false}: {userId: string;customer?:boolean}) {
+  const endpoint=customer?"/api/account/push":"/api/crm/push",scope=customer?"/account":"/",worker=customer?"/account-notifications-sw.js":"/crm-push-sw.js";
   const [active, setActive] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState("");
   const [supported, setSupported] = useState(false);
-  const preferenceKey=`avtocena_crm_push_${userId}`;
+  const preferenceKey=`avtocena_${customer?"customer":"crm"}_push_${userId}`;
   const remember=(value:boolean)=>{try{localStorage.setItem(preferenceKey,value?'1':'0');}catch{}};
   useEffect(() => {
     const supported="serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
@@ -13,45 +14,48 @@ export function CrmPushControl({userId}: {userId: string}) {
     const sync=async()=>{
       if(syncing)return;syncing=true;
       try {
-        let registration=await navigator.serviceWorker.getRegistration('/');
+        let registration=await navigator.serviceWorker.getRegistration(scope);
+        if(registration?.scope!==new URL(scope,location.origin).href)registration=undefined;
         let subscription=await registration?.pushManager.getSubscription();
-        let desired=false;try{desired=localStorage.getItem(preferenceKey)==='1';}catch{}
+        let desired=!customer&&Boolean(subscription);try{desired=desired||localStorage.getItem(preferenceKey)==='1';}catch{}
         if(!subscription && desired && Notification.permission==='granted') {
-          registration=await navigator.serviceWorker.register('/crm-push-sw.js',{scope:'/'});
-          await navigator.serviceWorker.ready;
-          const config=await fetch('/api/crm/push',{cache:'no-store'});if(!config.ok)return;
+          registration=await navigator.serviceWorker.register(worker,{scope});
+          await waitForPushWorker(registration);
+          const config=await fetch(endpoint,{cache:'no-store'});if(!config.ok)return;
           const {publicKey}=await config.json();
           const bytes=Uint8Array.from(atob(publicKey.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
           subscription=await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:bytes});
         }
-        if(mounted)setActive(Boolean(subscription)&&Notification.permission==='granted');
-        if(subscription){remember(true);await fetch('/api/crm/push',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(subscription)});}
+        if(registration?.scope!==new URL(scope,location.origin).href)subscription=null;
+        if(mounted)setActive(Boolean(subscription)&&desired&&Notification.permission==='granted');
+        if(subscription&&desired){remember(true);await fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(subscription)});}
       }catch{}finally{syncing=false;}
     };
     void sync();window.addEventListener('focus',sync);
     return()=>{mounted=false;window.removeEventListener('focus',sync);};
-  },[userId]);
+  },[userId,customer]);
   async function toggle() {
     setBusy(true); setMessage("");
     try {
       if (!supported) { setMessage("На iPhone добавьте сайт на экран «Домой» и откройте его оттуда. Нужен iOS 16.4 или новее."); return; }
       if (!active && await Notification.requestPermission() !== "granted") { setMessage("Разрешите уведомления для сайта в настройках браузера."); return; }
-      const registration = await navigator.serviceWorker.register("/crm-push-sw.js", {scope: "/"});
-      await navigator.serviceWorker.ready;
+      const registration = await navigator.serviceWorker.register(worker, {scope});
+      await waitForPushWorker(registration);
       let subscription = await registration.pushManager.getSubscription();
       if (active) {
         if (subscription) {
-          const response = await fetch("/api/crm/push", {method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify({endpoint: subscription.endpoint})});
+          const response = await fetch(endpoint, {method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify({endpoint: subscription.endpoint})});
           if (!response.ok) throw Error();
           await subscription.unsubscribe();
         }
         remember(false);setActive(false); return;
       }
-      const config = await fetch("/api/crm/push", {cache: "no-store"}); if (!config.ok) throw Error();
+      const config = await fetch(endpoint, {cache: "no-store"}); if (!config.ok) throw Error();
       const {publicKey} = await config.json();
       const bytes = Uint8Array.from(atob(publicKey.replace(/-/g, "+").replace(/_/g, "/")), char => char.charCodeAt(0));
+      if(subscription&&!active){await subscription.unsubscribe();subscription=null;}
       subscription ||= await registration.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: bytes});
-      const response = await fetch("/api/crm/push", {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(subscription)});
+      const response = await fetch(endpoint, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify(subscription)});
       remember(true);setActive(true);
       if (!response.ok) { setMessage("Подписка включена. Повторим синхронизацию при возвращении на сайт."); return; }
       setActive(true); setMessage("Уведомления на этом устройстве включены. Звук push настраивается в телефоне.");
@@ -73,3 +77,6 @@ export async function unsubscribeStaffPush(userId?:string) {
     if ("clearAppBadge" in navigator) await (navigator as any).clearAppBadge();
   } catch {}
 }
+
+async function waitForPushWorker(registration:ServiceWorkerRegistration){if(registration.active)return;const worker=registration.installing||registration.waiting;if(!worker)throw Error();await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>{worker.removeEventListener('statechange',change);reject(Error());},15000);function change(){if(worker!.state==='activated'||worker!.state==='redundant'){clearTimeout(timer);worker!.removeEventListener('statechange',change);worker!.state==='activated'?resolve():reject(Error());}}worker.addEventListener('statechange',change);change();});}
+export async function unsubscribeCustomerPush(userId:string){try{localStorage.setItem(`avtocena_customer_push_${userId}`,'0');const registration=await navigator.serviceWorker.getRegistration('/account');if(registration?.scope!==new URL('/account',location.origin).href)return;const subscription=await registration.pushManager.getSubscription();if(subscription){await fetch('/api/account/push',{method:'DELETE',headers:{'content-type':'application/json'},body:JSON.stringify({endpoint:subscription.endpoint})});await subscription.unsubscribe();}(await registration.getNotifications()).forEach(n=>n.close());}catch{}}

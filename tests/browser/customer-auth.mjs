@@ -45,6 +45,7 @@ try{
   await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
   await page.getByRole('alert').filter({hasText:'цифрами'}).waitFor();
   await page.waitForTimeout(200);assert.equal(await page.locator('.ac-route-loader').getAttribute('aria-hidden'),'true','invalid forms must not start navigation loading');
+  await phone.fill('9'.repeat(200));assert.ok((await phone.inputValue()).length<=12);
   await phone.fill('+79991');await password.focus();await page.getByRole('alert').filter({hasText:'не хватает'}).waitFor();
   const number='+79990'+String(width).padStart(4,'0')+(theme==='light'?'01':'02');
   await phone.fill(number);
@@ -60,7 +61,18 @@ try{
   await page.getByRole('checkbox').check();await page.screenshot({path:`${out}/register-${width}-${theme}.png`,fullPage:true});
   await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
   await page.waitForURL(origin+'/account');await page.getByRole('heading',{name:'Здравствуйте, Покупатель'}).waitFor();
-  await page.getByRole('heading',{name:'Всё начинается с заявки'}).waitFor();
+  await page.getByRole('heading',{name:'Ваш профиль'}).waitFor();
+  await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;localStorage.setItem('avtocena_theme',theme);},theme);
+  assert.equal(await page.locator('.account-avatar-quadrants button').count(),20);
+  assert.equal(await page.getByLabel('Персонаж',{exact:true}).count(),0);
+  await page.getByRole('button',{name:'Уведомления',exact:true}).click();
+  const panel=await page.locator('.customer-notice-panel').boundingBox();assert.ok(panel.x>=0&&panel.x+panel.width<=width,JSON.stringify({width,panel}));
+  await page.getByRole('button',{name:'Включить push на устройстве'}).waitFor();
+  await page.getByRole('button',{name:'Закрыть уведомления'}).click();
+  await page.getByRole('button',{name:'Восстановить пароль',exact:true}).click();
+  await page.getByRole('dialog').waitFor();assert.equal(await page.locator('.recovery-channel').count(),3);
+  await page.getByRole('button',{name:'Закрыть восстановление пароля'}).click();
+  await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/profile-${width}-${theme}.png`,fullPage:true});
   assert.equal((await context.cookies()).find(cookie=>cookie.name==='avtocena_session').value,'isolated-staff-session');
   await page.getByRole('button',{name:'Выйти',exact:true}).click();await page.waitForURL(/\/login/);
   // Silent autofill must also submit the native value without requiring reveal.
