@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {Star} from 'lucide-react';
 export function CustomerReviews({client,onSubmit}:{client:any;onSubmit:(body:any)=>Promise<unknown>}){
  return <section className="customer-reviews"><div className="review-welcome"><div className="review-brand"><span>{client.dealer?.name||'Ваш отзыв'}</span><span className="review-overall"><Star fill="currentColor" size={22}/>{client.reviewSummary?.rating?.toFixed(1)||'—'}<small>{client.reviewSummary?.count?`Оценок: ${client.reviewSummary.count}`:'Оценок пока нет'}</small></span></div><h2>Здравствуйте!</h2><p>Спасибо, что выбираете нас!</p><p>Нам важно ваше мнение. Расскажите о своём опыте — ваш отзыв поможет другим клиентам выбрать компанию, а нам — улучшить работу.</p></div>
- {client.reviews?.map((r:any)=><article className="review-published" key={r.id}><strong>{r.rating.toFixed(1)} ★ · {r.status==='published'?'Спасибо! Ваш отзыв опубликован':'Отзыв удалён модератором'}</strong><p>{r.text}</p></article>)}
+ {client.reviews?.map((r:any)=><article className="review-published" key={r.id}><strong>{r.rating.toFixed(1)} ★ · {r.status==='published'?'Спасибо! Ваш отзыв опубликован':'Отзыв удалён модератором'}</strong><p>{r.text}</p>{r.reply&&<div className="customer-review-reply"><strong>Ответ компании</strong><p>{r.reply.text}</p></div>}</article>)}
  {client.leads.filter((l:any)=>l.canReview).map((lead:any)=><ReviewForm key={lead.id} lead={lead} onSubmit={body=>onSubmit({...body,action:'review',key:client.key,leadId:lead.id})}/>)}
  {!client.leads.some((l:any)=>l.canReview)&&!client.reviews?.length&&<p className="review-eligibility">Оставить отзыв можно после подтверждения подписанного договора. На одну заявку доступен один отзыв.</p>}
  </section>;

@@ -1,3 +1,4 @@
+import {readReviewActivity} from './dealers/review-activity';
 import {documentCompany} from './document-workspace';
 import {discussionHref,discussionLabel} from './crm-discussion';
 import {notifyTeam} from './crm-notification-store';
@@ -23,8 +24,10 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
  const all=hasCrmPermission(user,'activityAll');
  const [users,leads,clients]=await Promise.all([readCrmUsers(),readChunkedDataJson<any>('leads/leads.json',[]),readChunkedDataJson<any>('clients/clients.json',[])]);
  const leadIds=new Set(leads.filter(x=>canSeeLead(user,x)).map(x=>x.id)),clientIds=new Set(clients.filter(x=>canSeeLead(user,x)).map(x=>x.id));
+ const reviewEventsPromise=readReviewActivity(leads,leadIds,all,limit,before);
  const rows=await readRecentChunkedDataJson<CrmActivity>('activity/feed.json',limit,e=>(!before||e.createdAt<before)&&(all||(e.visibility!=='management'&&(!e.type?.startsWith('staff_'))&&(e.leadId?leadIds.has(e.leadId):e.clientId?clientIds.has(e.clientId):e.actor?.id===user.id||e.managerId===user.id))));
- return rows.sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,limit).map(e=>{
+ const reviewEvents=await reviewEventsPromise;
+ return [...rows,...reviewEvents].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,limit).map(e=>{
   const author=users.find(u=>u.id===(e.actor?.id||e.managerId)),targetUser=users.find(u=>u.id===(e.target?.id||e.assignedManagerId));
   const actor=author?activityPerson(author):e.actor||(e.managerId?{id:e.managerId,name:e.managerName||'Сотрудник'}:undefined);
   const lead=leads.find(l=>l.id===(e.leadId||(e.entityType==='lead'?e.entityId:''))),client=clients.find(c=>c.id===(e.clientId||(e.entityType==='client'?e.entityId:'')));
@@ -47,6 +50,7 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   const discussionEvent=['lead_note_added','client_note_added','lead_note_edited','client_note_edited'].includes(e.type)||(e.type==='client_updated'&&changes.some(c=>c.label==='Комментарий'));
   if(discussionEvent){const kind=lead||e.leadId||e.entityType==='lead'?'lead':'client';const entityId=lead?.id||e.leadId||client?.id||e.clientId||e.entityId;if(entityId)href=discussionHref(kind,entityId,e.commentId);}
   if(e.type?.startsWith('reminder_')&&href)href=href.split('#')[0]+'#reminders-'+(lead?'lead':'client')+'-'+encodeURIComponent(lead?.id||e.leadId||client?.id||e.clientId||e.entityId||'');
+  if(e.entityType==='review')href=e.href;
   if(e.type==='client_deleted')href='/crm/clients';
   if(e.type==='lead_deleted')href='/crm/leads';
   const car=lead?.selectedOffers?.[0];

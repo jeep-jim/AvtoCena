@@ -25,7 +25,7 @@ export async function portalData(a:CustomerAccount){const [links,users,allLeads]
  result.push({key,name:client.fio||a.name,companyId:link.companyId,dealer:{name:showcase?.name||'Ваша компания',logo:showcase?.logoLight},reviewSummary:dealerReviewSummary(allReviews,link.companyId),manager:manager?{name:manager.displayName,avatar:avatar(manager)}:null,
  leads:leads.map(l=>({id:l.id,title:l.offerTitle||l.car||'Подбор автомобиля',status:leadStatusLabel(l.status),updatedAt:l.updatedAt||l.createdAt,reviewAvailableAt:confirmedCustomerContract(client,l.id)?.confirmedAt,canReview:!!confirmedCustomerContract(client,l.id)&&!client.portalReviews?.[l.id]&&!reviews.some(r=>r.leadId===l.id)})),
  documents:sharedCustomerDocuments(client).map((d:any)=>({id:d.id,name:d.name,size:d.size,createdAt:d.createdAt})),
- reviews:reviews.map(r=>({id:r.id,rating:r.rating,text:r.text,status:r.status})),
+ reviews:reviews.map(r=>({id:r.id,rating:r.rating,text:r.text,status:r.status,reply:r.reply?{text:r.reply.text,createdAt:r.reply.createdAt}:null})),
  messages:messages.map(m=>({id:m.id,text:m.text,author:m.author,createdAt:m.createdAt,mine:m.accountId===a.id,avatar:m.accountId?undefined:avatar(users.find(u=>u.status!=='disabled'&&(m.staffId?u.id===m.staffId:u.id===manager?.id&&u.displayName===m.author)),m.id)}))});
  }return result;
 }
