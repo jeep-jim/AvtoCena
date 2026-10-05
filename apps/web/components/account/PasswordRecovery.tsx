@@ -57,9 +57,9 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
   return <dialog ref={dialog} className="account-recovery" aria-labelledby="recovery-title" onCancel={event => {event.preventDefault();onClose();}} onClick={event => {if (event.target === event.currentTarget) {const box=event.currentTarget.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)onClose();}}}>
     <button type="button" className="recovery-close" aria-label="Закрыть восстановление пароля" onClick={onClose}><X size={21}/></button>
     <h2 id="recovery-title">Восстановление пароля</h2>
-    <p className="account-muted">Введите телефон и выберите, куда получить подтверждение для смены пароля.</p>
+    <p className="account-muted">Введите номер телефона, указанный при регистрации, и выберите способ подтверждения для смены пароля.</p>
     <form onSubmit={submit}>
-      <label>Телефон<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={22} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(event.target.value)}/></label>
+      <label>Телефон, указанный при регистрации<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={22} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(event.target.value)}/></label>
       <fieldset disabled={busy || !!challenge}><legend>Куда отправить подтверждение?</legend><div className="recovery-channels">
         {CHANNELS.map(({id,label,Icon,available}) => <label key={id} className="recovery-channel" data-selected={channel === id}>
           <input type="radio" name="recovery-channel" value={id} checked={channel === id} onChange={() => {setChannel(id);setError('');}}/>

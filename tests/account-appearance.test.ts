@@ -53,5 +53,20 @@ test('site media protects uploads, validates images, and serves only the exact p
     assert.equal((await sharp(Buffer.from(await media.arrayBuffer())).metadata()).hasAlpha, true);
     assert.equal((await read.GET(new Request('https://avtocena.com'), {params: Promise.resolve({id: '../documents'})})).status, 404);
     await upload.POST(request()); assert.equal(state.stored.size, 1, 'identical files reuse one object');
+    assert.equal((await upload.POST(request(undefined,png,'video/mp4'))).status,400);
+    const mp4=Buffer.alloc(32);mp4.writeUInt32BE(24,0);mp4.write('ftypisom',4);mp4.write('mp42',16);
+    const videoResponse=await upload.POST(request(undefined,mp4,'video/mp4'));assert.equal(videoResponse.status,200);
+    const videoUrl=(await videoResponse.json()).url;assert.ok(videoUrl.endsWith('.mp4'));
+    const videoId=videoUrl.split('/').pop();
+    const partial=await read.GET(new Request('https://avtocena.com'+videoUrl,{headers:{range:'bytes=4-11'}}),{params:Promise.resolve({id:videoId})});
+    assert.equal(partial.status,206);assert.equal(partial.headers.get('Content-Type'),'video/mp4');assert.equal(await partial.text(),'ftypisom');
+    const badRange=await read.GET(new Request('https://avtocena.com'+videoUrl,{headers:{range:'bytes=999-'}}),{params:Promise.resolve({id:videoId})});assert.equal(badRange.status,416);
   } finally {delete (globalThis as any).__accountMediaTest;}
+});
+
+test('appearance preserves separate theme backgrounds and limits public media to uploaded assets',()=>{
+ const photo='/api/site-media/'+'c'.repeat(64),video=photo+'.mp4';
+ const value={customer:{banner:'',icon:'',backgroundLight:photo,backgroundDark:'',colorLight:'#d7e7fa',colorDark:'#253e5b',media:[{url:video,type:'video',caption:'Погрузка'},{url:photo,type:'image',caption:'Автомобиль'}]}};
+ assert.deepEqual(normalizeAccountAppearance(value),value);
+ for(const patch of [{colorLight:'url(javascript:alert(1))'},{backgroundDark:'https://other.test/image'},{media:[{url:video,type:'image'}]},{media:Array(7).fill({url:photo,type:'image'})},{media:[{url:'/api/account/documents/private',type:'image'}]}])assert.throws(()=>normalizeAccountAppearance({customer:{...value.customer,...patch}}));
 });

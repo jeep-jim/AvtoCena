@@ -1,13 +1,15 @@
 'use client';
 
+import {EntranceMediaPreview} from './EntranceMediaPreview';
+import {EntranceDealerPreview} from './EntranceDealerPreview';
 import {AccountScenes} from './AccountScenes';
 import {ACCOUNT_SCENES} from './scene-content';
 import {PasswordRecovery} from './PasswordRecovery';
-import {useRef,useState} from 'react';
+import {useCallback,useRef,useState, type CSSProperties} from 'react';
 import {ArrowUpRight, ArrowLeft, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
 import {LoginForm} from '@/components/auth/LoginForm';
 import {PasswordField} from '@/components/auth/PasswordField';
-import {ACCOUNT_ROLES, type AccountRole, type AccountAppearance} from '@/lib/account-appearance';
+import {ACCOUNT_ROLES, type AccountRole, type AccountAppearance, type AccountMedia} from '@/lib/account-appearance';
 import './account.css';
 import './account-entrance.css';
 
@@ -16,12 +18,14 @@ type Mode = 'login' | 'register';
 export function AccountEntrance({nextPath, errorCode, initialRole, appearance = {}}: {nextPath: string; errorCode: string; initialRole: string; appearance?: AccountAppearance}) {
   const [role, setRole] = useState<AccountRole>(initialRole === 'dealer' || initialRole === 'team' ? 'dealer' : initialRole === 'blogger' || initialRole === 'supplier' ? initialRole : 'customer');
   const [sceneIndex, setSceneIndex] = useState(0);
+  const [preview,setPreview]=useState<AccountMedia|null>(null);
+  const closePreview=useCallback(()=>setPreview(null),[]);
   const formRef=useRef<HTMLElement>(null);
   const upcoming=role==='blogger'||role==='supplier';
   function showLogin(){formRef.current?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
   const selectedArt = appearance[role];
   const scene = ACCOUNT_SCENES[role][sceneIndex % ACCOUNT_SCENES[role].length];
-  function selectRole(next: AccountRole) {setRole(next); setSceneIndex(0);}
+  function selectRole(next: AccountRole) {setRole(next); setSceneIndex(0);setPreview(null);}
   const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
   const [mode, setMode] = useState<Mode>('login');
   const [phone, setPhone] = useState('');
@@ -67,25 +71,29 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     }
   }
 
-  return <div className="account-entrance account-original-design">
-    <header className="account-entrance-heading"><div className="entrance-eyebrow"><span/>{role === 'customer' ? 'Личный кабинет покупателя' : role === 'dealer' ? 'Кабинет автодилера' : role === 'blogger' ? 'Автоблогер' : 'Автопоставщик'}</div><h1>{upcoming ? ACCOUNT_ROLES.find(item=>item.id===role)?.label : selectedArt?.banner ? (role === 'customer' ? 'Ваш автомобиль — в пути' : ACCOUNT_ROLES.find(item=>item.id===role)?.label) : scene.title}</h1><p>{upcoming ? 'Возможности для партнёров АвтоЦены' : selectedArt?.banner ? 'Заявки, общение и возможности вашего кабинета.' : scene.description}</p></header>
+  return <div className="account-entrance account-original-design" style={{
+    '--entrance-light-color':selectedArt?.colorLight||'#d7e7fa',
+    '--entrance-dark-color':selectedArt?.colorDark||'#253e5b',
+    '--entrance-light-image':selectedArt?.backgroundLight?`url("${selectedArt.backgroundLight}")`:'none',
+    '--entrance-dark-image':selectedArt?.backgroundDark?`url("${selectedArt.backgroundDark}")`:'none',
+  } as CSSProperties}>
+    <header className="account-entrance-heading"><div className="entrance-eyebrow"><span/>{role === 'customer' ? 'Личный кабинет покупателя' : role === 'dealer' ? 'Кабинет автодилера' : role === 'blogger' ? 'Автоблогер' : 'Автопоставщик'}</div><h1>{upcoming ? ACCOUNT_ROLES.find(item=>item.id===role)?.label : selectedArt?.banner ? (role === 'customer' ? 'Ваш менеджер — на связи' : ACCOUNT_ROLES.find(item=>item.id===role)?.label) : role==='dealer'?'Ваша компания на АвтоЦене':scene.title}</h1><p>{upcoming ? 'Возможности для партнёров АвтоЦены' : selectedArt?.banner ? 'Заявки, общение и возможности вашего кабинета.' : role==='dealer'?'Личная страница компании и полноценная CRM для управления всем процессом: от заявки до выдачи автомобиля.':scene.description}</p></header>
     {!upcoming&&<button className="account-mobile-login account-primary" type="button" onClick={showLogin}>Войти</button>}
-    {upcoming ? <section className="account-coming-soon"><RoleIcon size={44}/><h2>{ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Этот раздел ещё в разработке, скоро появится ;)</p><button className="account-text-button" onClick={()=>selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button></section> : <div className="account-login-main">
+    {upcoming ? <section className="account-coming-soon">{selectedArt?.icon?<img className="account-coming-icon" src={selectedArt.icon} alt=""/>:<RoleIcon size={64}/>}<h2>{ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Этот раздел ещё в разработке, скоро появится ;)</p><button className="account-text-button" onClick={()=>selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button></section> : <div className="account-login-main">
       <aside className={`account-welcome${selectedArt?.banner ? ' has-banner' : ''}`}>
         {selectedArt?.banner && <img className="account-welcome-background" src={selectedArt.banner} alt=""/>}
-        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : <AccountScenes key={role} role={role} onSceneChange={setSceneIndex}/>}
+        {selectedArt?.banner ? <><div className="account-art-slot" data-role-art={role}>{selectedArt?.icon ? <img src={selectedArt.icon} alt=""/> : <RoleIcon size={64}/>}</div><h2>{role === 'customer' ? 'Ваш автомобиль. Всё рядом.' : ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2><p>Заявки, общение и возможности вашего кабинета.</p></> : role==='dealer'?<EntranceDealerPreview/>:<AccountScenes key={role} role={role} media={selectedArt?.media} onMediaOpen={setPreview} onSceneChange={setSceneIndex}/>}
 
       </aside>
-      <section ref={formRef} id="account-login-form" className="account-login-form" data-mode={role === 'customer' ? mode : role}>
+      {preview&&<EntranceMediaPreview item={preview} onClose={closePreview}/>}
+      <section hidden={!!preview} ref={formRef} id="account-login-form" className="account-login-form" data-mode={role === 'customer' ? mode : role}>
+        <header className="account-selected-role">
+          <div className="account-selected-icon" data-role-art={role}>{selectedArt?.icon?<img src={selectedArt.icon} alt=""/>:<RoleIcon size={44}/>}</div>
+          <div className="account-selected-title">{role==='customer'?<a className="account-role-back" href="/" aria-label="Назад на главную"><ArrowLeft size={17}/> Назад</a>:<button type="button" className="account-role-back" aria-label="Пользователь" onClick={()=>selectRole('customer')}><ArrowLeft size={17}/> Назад</button>}<h2>{ACCOUNT_ROLES.find(item=>item.id===role)?.label}</h2></div>
+        </header>
         {role === 'dealer' ? <>
-          <button className="account-text-button" onClick={() => selectRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
-          <h2>Вход в кабинет</h2>
           <LoginForm nextPath={nextPath.startsWith('/crm') ? nextPath : '/dealer-cabinet'} errorCode={errorCode}/>
         </> : <>
-          <div className="account-form-heading">
-            <span className="account-kicker">Пользователь</span>
-            <h2>{mode === 'login' ? 'Рады видеть вас' : 'Создайте свой кабинет'}</h2>
-          </div>
           <div className="account-tabs" role="group" aria-label="Вход или регистрация">
             <button disabled={busy} aria-pressed={mode === 'login'} onClick={() => changeMode('login')}>Вход</button>
             <button disabled={busy} aria-pressed={mode === 'register'} onClick={() => changeMode('register')}>Регистрация</button>
@@ -109,7 +117,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
         </>}
       </section>
     </div>}
-    {role==='dealer'&&<section className="account-dealer-benefits"><h2>Что получает Автодилер</h2><ul><li>Страница компании и отзывы покупателей</li><li>Каталог автомобилей в наличии и под заказ</li><li>Свои условия доставки и расчёты предложений</li><li>Заявки и контакты клиентов вашей компании</li><li>Документы и договоры по заявкам</li><li>Уведомления в подключённый Telegram компании</li></ul><p className="account-muted">В базовом доступе — страница компании, общий каталог, заявки и документы. Свои автомобили, фото выдач и расширенное оформление доступны в пробном периоде и по подписке. Кабинет открывается после подтверждения компании и вашего доступа.</p></section>}
+    {role==='dealer'&&<section className="account-dealer-benefits"><h2>Что получает Автодилер</h2><ul><li>Полноценная CRM: управление процессом от заявки до выдачи</li><li>Страница компании и отзывы покупателей</li><li>Каталог автомобилей в наличии и под заказ</li><li>Свои условия доставки и расчёты предложений</li><li>Заявки и контакты клиентов вашей компании</li><li>Документы и договоры по заявкам</li><li>Уведомления в подключённый Telegram компании</li></ul><p className="account-muted">В базовом доступе — страница компании, общий каталог, заявки и документы. Свои автомобили, фото выдач и расширенное оформление доступны в пробном периоде и по подписке. Кабинет открывается после подтверждения компании и вашего доступа.</p></section>}
     {recoveryOpen && <PasswordRecovery initialPhone={phone} onClose={() => setRecoveryOpen(false)} onSuccess={() => {setRecoveryOpen(false);changeMode('login');setNotice('Пароль изменён. Войдите с новым паролем.');}}/>}
     <div className="account-role-heading"><h2>Для партнёров</h2></div>
     <div className="account-roles">

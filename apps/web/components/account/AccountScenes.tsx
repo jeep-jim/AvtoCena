@@ -2,7 +2,7 @@
 
 import {Fragment,memo,useEffect,useMemo,useRef,useState} from 'react';
 import {Pause,Play,ChevronLeft,ChevronRight} from 'lucide-react';
-import type {AccountRole} from '@/lib/account-appearance';
+import type {AccountMedia, AccountRole} from '@/lib/account-appearance';
 import {ACCOUNT_SCENES,sceneMarkup} from './scene-content';
 import './account-scenes.css';
 
@@ -11,11 +11,12 @@ const SceneBody = memo(function SceneBody({html,kind}:{html:string;kind:string})
   return <div className="account-scene" data-kind={kind} dangerouslySetInnerHTML={{__html:html}}/>;
 });
 
-type Props = {role:AccountRole; onSceneChange?:(index:number)=>void};
-export function AccountScenes({role,onSceneChange}:Props) {
+type Props = {role:AccountRole; media?:AccountMedia[]; onMediaOpen?:(item:AccountMedia)=>void; onSceneChange?:(index:number)=>void};
+export function AccountScenes({role,onSceneChange,media=[],onMediaOpen}:Props) {
   const [index,setIndex]=useState(0), [paused,setPaused]=useState(false), [reduced,setReduced]=useState(false);
   const [held,setHeld]=useState(false);
   const [hovered,setHovered]=useState(false), [demoNotice,setDemoNotice]=useState('');
+  const wheelLast=useRef(-Infinity);
   const manualRating=useRef<number|null>(null);
   const root=useRef<HTMLDivElement>(null), pointer=useRef<{x:number;y:number}|null>(null);
   const items=ACCOUNT_SCENES[role], scene=items[index%items.length];
@@ -26,7 +27,7 @@ export function AccountScenes({role,onSceneChange}:Props) {
   useEffect(()=>{onSceneChange?.(index);setDemoNotice('');},[index,onSceneChange]);
   useEffect(()=>{
     if(holdCarousel)return;
-    const timer=setInterval(()=>{if(!document.hidden)setIndex(i=>(i+1)%items.length);},scene.template===0?13000:scene.template===1?14000:scene.template===4?13000:10000);
+    const timer=setInterval(()=>{if(!document.hidden)setIndex(i=>(i+1)%items.length);},scene.template===0?32000:scene.template===1?21000:scene.template===4?13000:10000);
     return()=>clearInterval(timer);
   },[holdCarousel,items.length,index,scene.template]);
 
@@ -54,20 +55,22 @@ export function AccountScenes({role,onSceneChange}:Props) {
       previous=now;
       const time=reducedRef.current?10000:elapsed;
       if(scene.template===0){
-        const count=reducedRef.current?6:Math.min(6,1+Math.floor(time/1700));
+        const count=reducedRef.current?6:Math.min(6,1+Math.floor(time/4500));
         node.querySelectorAll<HTMLElement>('.chat-msg').forEach((message,i)=>message.classList.toggle('is-visible',i<count&&i>=Math.max(0,count-3)));
         const typing=node.querySelector<HTMLElement>('.chat-typing');if(typing)typing.style.visibility=count===6?'hidden':'visible';
       }
       if(scene.template===1){
-        toggle('contractIntro','is-hidden',time>=600);
-        toggle('contractViewer','is-active',time>=600);
-        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=900+i*340));
-        const progress=Math.max(0,Math.min(1,(time-4100)/2200));
+        const finished=time>=15000;
+        toggle('contractIntro','is-hidden',time>=2500&&!finished);
+        toggle('contractViewer','is-active',time>=2500&&!finished);
+        get('sceneContract')?.classList.toggle('is-complete',finished);
+        lines.forEach((line,i)=>line.classList.toggle('is-visible',time>=3000+i*550));
+        const progress=Math.max(0,Math.min(1,(time-8000)/2600));
         if(signature)signature.style.strokeDashoffset=String(signatureLength*(1-progress));
         toggle('contractSignature','is-signing',progress>0);
-        toggle('contractConfirmCheck','is-visible',time>=6500);
-        toggle('contractStatus','is-visible',time>=7000);
-        const hint=get('contractSignHint');if(hint)hint.textContent=time>=6500?'Подписано':time>=4100?'Подписание…':'Ожидание подписи…';
+        toggle('contractConfirmCheck','is-visible',time>=11000);
+        toggle('contractStatus','is-visible',time>=11500);
+        const hint=get('contractSignHint');if(hint)hint.textContent=time>=11000?'Подписано':time>=8000?'Подписание…':'Ожидание подписи…';
       }
       if(scene.template===2){
         const progress=Math.min(time/5000,1);
@@ -89,6 +92,37 @@ export function AccountScenes({role,onSceneChange}:Props) {
     tick(performance.now());return()=>{cancelAnimationFrame(frame);resize.disconnect();};
   },[html,scene.template,reduced]);
 
+  useEffect(()=>{
+    const node=root.current;if(!node)return;
+    let total=0;
+    const wheel=(event:WheelEvent)=>{
+      if(!matchMedia('(min-width: 761px) and (pointer: fine)').matches||event.ctrlKey||Math.abs(event.deltaX)>Math.abs(event.deltaY))return;
+      const step=event.deltaY>0?1:-1;
+      if((index===0&&step<0)||(index===items.length-1&&step>0))return;
+      event.preventDefault();
+      const now=performance.now();if(now-wheelLast.current<850)return;
+      total+=event.deltaY*(event.deltaMode===1?16:1);
+      if(Math.abs(total)<45)return;
+      wheelLast.current=now;total=0;setHeld(true);setIndex(i=>Math.max(0,Math.min(items.length-1,i+step)));
+    };
+    node.addEventListener('wheel',wheel,{passive:false});return()=>node.removeEventListener('wheel',wheel);
+  },[index,items.length]);
+  useEffect(()=>{
+    if(scene.template!==3)return;
+    const tiles=root.current?.querySelectorAll<HTMLElement>('.media-tile');
+    tiles?.forEach((tile,i)=>{
+      const item=media[i];if(!item)return;
+      tile.setAttribute('role','button');tile.tabIndex=0;tile.setAttribute('aria-label',item.caption||`Открыть ${item.type==='video'?'видео':'фото'} ${i+1}`);
+      const badge=tile.querySelector('.media-tile-badge');if(badge)badge.textContent=String(i+1);
+      if(item.type==='image'){const img=document.createElement('img');img.src=item.url;img.alt=item.caption;img.className='account-media-thumbnail';tile.prepend(img);}
+      else {tile.classList.add('media-tile--video');tile.setAttribute('data-video','true');}
+    });
+    const open=(target:EventTarget|null)=>{const tile=(target as HTMLElement)?.closest('.media-tile');if(!tile||!tiles)return;const i=Array.from(tiles).indexOf(tile as HTMLElement);if(media[i]){setHeld(true);onMediaOpen?.(media[i]);}};
+    const click=(e:MouseEvent)=>open(e.target);
+    const key=(e:KeyboardEvent)=>{if((e.key==='Enter'||e.key===' ')&&(e.target as HTMLElement).matches('.media-tile[role=button]')){e.preventDefault();open(e.target);}};
+    const node=root.current;node?.addEventListener('click',click);node?.addEventListener('keydown',key);
+    return()=>{node?.removeEventListener('click',click);node?.removeEventListener('keydown',key);tiles?.forEach(t=>t.querySelector('.account-media-thumbnail')?.remove());};
+  },[html,media,onMediaOpen,scene.template]);
   function move(step:number){setHeld(true);setIndex(i=>(i+step+items.length)%items.length);}
   return <div ref={root} className="account-scenes" data-role={role} data-paused={stopped} data-reduced={reduced} aria-label="Возможности кабинета" aria-roledescription="карусель"
     onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}

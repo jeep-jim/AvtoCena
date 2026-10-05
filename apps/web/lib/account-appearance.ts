@@ -5,7 +5,9 @@ export const ACCOUNT_ROLES = [
   {id: 'supplier', label: 'Автопоставщик'},
 ] as const;
 export type AccountRole = typeof ACCOUNT_ROLES[number]['id'];
-export type AccountAppearance = Partial<Record<AccountRole, {banner: string; icon: string}>>;
+export type AccountMedia = {url:string; type:'image'|'video'; caption:string};
+export type AccountArtwork = {banner:string;icon:string;backgroundLight?:string;backgroundDark?:string;colorLight?:string;colorDark?:string;media?:AccountMedia[]};
+export type AccountAppearance = Partial<Record<AccountRole, AccountArtwork>>;
 
 export function normalizeAccountAppearance(value: unknown): AccountAppearance {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
@@ -20,7 +22,22 @@ export function normalizeAccountAppearance(value: unknown): AccountAppearance {
       if (typeof value !== 'string' || !/^\/api\/site-media\/[a-f0-9]{64}$/.test(value)) throw Error('Загрузите изображение с устройства');
       return value;
     };
-    result[id] = {banner: clean(row.banner), icon: clean(row.icon)};
+    const art:AccountArtwork={banner:clean(row.banner),icon:clean(row.icon)};
+    for(const key of ['backgroundLight','backgroundDark'] as const)if(row[key]!==undefined)art[key]=clean(row[key]);
+    for(const key of ['colorLight','colorDark'] as const)if(row[key]!==undefined){
+      if(typeof row[key]!=='string'||!/^#[a-f0-9]{6}$/i.test(row[key] as string))throw Error('Выберите цвет фона');
+      art[key]=row[key] as string;
+    }
+    if(row.media!==undefined){
+      if(!Array.isArray(row.media)||row.media.length>6)throw Error('Можно добавить до 6 фото и видео');
+      art.media=row.media.map(item=>{
+        if(!item||typeof item!=='object'||!['image','video'].includes(item.type))throw Error('Выберите фото или видео');
+        const valid=item.type==='video'?/^\/api\/site-media\/[a-f0-9]{64}\.mp4$/:/^\/api\/site-media\/[a-f0-9]{64}$/;
+        if(typeof item.url!=='string'||!valid.test(item.url))throw Error('Загрузите файл с устройства');
+        return {url:item.url,type:item.type,caption:typeof item.caption==='string'?item.caption.trim().slice(0,120):''};
+      });
+    }
+    result[id] = art;
   }
   return result;
 }
