@@ -14,6 +14,7 @@ const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx'],t
 const server=http.createServer(async(req,res)=>{
  try{
  const url=new URL(req.url,'http://'+req.headers.host);
+ if(url.pathname==='/api/account/default-avatar'){res.setHeader('Content-Type','image/svg+xml');return res.end(fs.readFileSync('apps/web/public/logo/avtocena-mark-light.svg'));}
  if(url.pathname==='/api/account/auth'){
   const chunks=[];for await(const chunk of req)chunks.push(chunk);
   const response=await auth.handle(new Request(url,{method:req.method,headers:req.headers,...(req.method==='POST'?{body:Buffer.concat(chunks)}:{})}));
@@ -60,18 +61,19 @@ try{
   await repeat.fill('isolated-test-password');assert.equal(await page.getByRole('alert').filter({hasText:'Пароли не совпадают'}).count(),0);
   await page.getByRole('checkbox').check();await page.screenshot({path:`${out}/register-${width}-${theme}.png`,fullPage:true});
   await page.getByRole('button',{name:'Создать кабинет',exact:true}).click();
-  await page.waitForURL(origin+'/account');await page.getByRole('heading',{name:'Здравствуйте, Покупатель'}).waitFor();
+  await page.waitForURL(origin+'/account');await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
   await page.getByRole('heading',{name:'Ваш профиль'}).waitFor();
   await page.evaluate(theme=>{document.documentElement.dataset.theme=theme;localStorage.setItem('avtocena_theme',theme);},theme);
-  assert.equal(await page.locator('.account-avatar-quadrants button').count(),20);
+  assert.equal(await page.locator('.account-avatar-quadrants button').count(),24);
   assert.equal(await page.getByLabel('Персонаж',{exact:true}).count(),0);
   await page.getByRole('button',{name:'Уведомления',exact:true}).click();
   const panel=await page.locator('.customer-notice-panel').boundingBox();assert.ok(panel.x>=0&&panel.x+panel.width<=width,JSON.stringify({width,panel}));
   await page.getByRole('button',{name:'Включить push на устройстве'}).waitFor();
   await page.getByRole('button',{name:'Закрыть уведомления'}).click();
-  await page.getByRole('button',{name:'Восстановить пароль',exact:true}).click();
-  await page.getByRole('dialog').waitFor();assert.equal(await page.locator('.recovery-channel').count(),3);
-  await page.getByRole('button',{name:'Закрыть восстановление пароля'}).click();
+  assert.equal(await page.getByRole('heading',{name:'Восстановление доступа'}).count(),0);
+  assert.equal(await page.getByLabel('Как к вам обращаться').inputValue(),'');
+  const logout=await page.getByRole('button',{name:'Выйти',exact:true}).boundingBox();assert.ok(logout.x>=0&&logout.x+logout.width<=width);
+  for(const grid of await page.locator('.account-avatar-grid').all())assert.equal(await grid.locator('button:visible').count(),width<761?6:5);
   await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:`${out}/profile-${width}-${theme}.png`,fullPage:true});
   assert.equal((await context.cookies()).find(cookie=>cookie.name==='avtocena_session').value,'isolated-staff-session');
   await page.getByRole('button',{name:'Выйти',exact:true}).click();await page.waitForURL(/\/login/);
@@ -79,8 +81,8 @@ try{
   await page.locator('[name=customer-phone]').evaluate((input,value)=>input.value=value,number);
   await page.locator('[name=customer-password]').evaluate(input=>input.value='isolated-test-password');
   await page.getByRole('button',{name:'Войти в кабинет',exact:true}).click();await page.waitForURL(origin+'/account');
-  await page.getByRole('heading',{name:'Здравствуйте, Покупатель'}).waitFor();
-  await page.reload();await page.getByRole('heading',{name:'Здравствуйте, Покупатель'}).waitFor();
+  await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
+  await page.reload();await page.getByRole('heading',{name:'Здравствуйте!'}).waitFor();
   assert.deepEqual(errors,[]);await context.close();
  }
  {

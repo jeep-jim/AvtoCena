@@ -1,5 +1,6 @@
 'use client';
 
+import {createPortal} from 'react-dom';
 import {Fragment,memo,useEffect,useMemo,useRef,useState} from 'react';
 import {Pause,Play,ChevronLeft,ChevronRight} from 'lucide-react';
 import type {AccountMedia, AccountRole} from '@/lib/account-appearance';
@@ -11,8 +12,8 @@ const SceneBody = memo(function SceneBody({html,kind}:{html:string;kind:string})
   return <div className="account-scene" data-kind={kind} dangerouslySetInnerHTML={{__html:html}}/>;
 });
 
-type Props = {role:AccountRole; media?:AccountMedia[]; onMediaOpen?:(item:AccountMedia)=>void; onSceneChange?:(index:number)=>void};
-export function AccountScenes({role,onSceneChange,media=[],onMediaOpen}:Props) {
+type Props = {controlsHost?:HTMLElement|null;role:AccountRole; media?:AccountMedia[]; onMediaOpen?:(item:AccountMedia)=>void; onSceneChange?:(index:number)=>void};
+export function AccountScenes({role,onSceneChange,media=[],onMediaOpen,controlsHost}:Props) {
   const [index,setIndex]=useState(0), [paused,setPaused]=useState(false), [reduced,setReduced]=useState(false);
   const [held,setHeld]=useState(false);
   const [hovered,setHovered]=useState(false), [demoNotice,setDemoNotice]=useState('');
@@ -124,6 +125,7 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen}:Props) {
     return()=>{node?.removeEventListener('click',click);node?.removeEventListener('keydown',key);tiles?.forEach(t=>t.querySelector('.account-media-thumbnail')?.remove());};
   },[html,media,onMediaOpen,scene.template]);
   function move(step:number){setHeld(true);setIndex(i=>(i+step+items.length)%items.length);}
+  const player=<div className="scene-navigation"><button type="button" aria-label="Предыдущая сцена" onClick={()=>move(-1)}><ChevronLeft size={15}/></button><button type="button" aria-label={paused||reduced?'Включить смену сцен':'Остановить смену сцен'} onClick={()=>{setReduced(false);setHeld(false);setPaused(!(paused||reduced));}}>{paused||reduced?<Play size={13}/>:<Pause size={13}/>}</button><button type="button" aria-label="Следующая сцена" onClick={()=>move(1)}><ChevronRight size={15}/></button></div>;
   return <div ref={root} className="account-scenes" data-role={role} data-paused={stopped} data-reduced={reduced} aria-label="Возможности кабинета" aria-roledescription="карусель"
     onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}
     onKeyDown={e=>{if((e.target as HTMLElement).matches('input,textarea'))return;if(e.key==='ArrowRight'){e.preventDefault();move(1);}if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}}}>
@@ -140,7 +142,8 @@ export function AccountScenes({role,onSceneChange,media=[],onMediaOpen}:Props) {
         <button type="button" className={`step-node${i===index?' is-active':i<index?' is-done':''}`} aria-label={`Сцена ${i+1}: ${item.title}`} aria-pressed={i===index} onClick={()=>{setHeld(true);setIndex(i);}}>{i+1}</button>
         {i<items.length-1&&<div className={`step-connector${i<index?' is-done':i===index?' is-active':''}`}><div className="step-drop"/></div>}
       </Fragment>)}</div>
-      <div className="scene-navigation"><span>{role==='blogger'||role==='supplier'?'Закрытая бета · знакомство':'Пример возможностей кабинета'}</span><button type="button" aria-label="Предыдущая сцена" onClick={()=>move(-1)}><ChevronLeft size={15}/></button><button type="button" aria-label={paused||reduced?'Включить смену сцен':'Остановить смену сцен'} onClick={()=>{setReduced(false);setHeld(false);setPaused(!(paused||reduced));}}>{paused||reduced?<Play size={13}/>:<Pause size={13}/>}</button><button type="button" aria-label="Следующая сцена" onClick={()=>move(1)}><ChevronRight size={15}/></button></div>
+      {player}
+      {controlsHost&&createPortal(player,controlsHost)}
     </div>
     {demoNotice&&<div className="scene-notice" role="status">{demoNotice}<button type="button" aria-label="Закрыть подсказку" onClick={()=>setDemoNotice('')}>×</button></div>}
   </div>;

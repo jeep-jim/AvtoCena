@@ -26,4 +26,14 @@ html[data-theme=light] .account-cabinet-page{background:#edf1f6;--ac-surface:#f8
 .customer-portal .account-recovery{--intro-line:var(--ac-border);--intro-panel:var(--ac-surface);--intro-text:var(--ac-text);--intro-title:var(--ac-text);--intro-muted:var(--ac-muted);--intro-card:var(--ac-surface-2)}
 @media(max-width:760px){.customer-portal nav{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;gap:8px}.customer-portal nav button{flex:none;white-space:nowrap;scroll-snap-align:start}.account-avatar-quadrants{gap:8px}.account-avatar-quadrants .account-avatar-grid{gap:1px}.account-avatar-grid button{padding:1px}}
 @media(max-width:760px){.account-avatar-quadrants .account-avatar-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.account-avatar-grid button{min-height:40px}.account-avatar-grid img{max-width:64px;margin:auto}}
-@media(max-width:359px){.account-avatar-quadrants .account-avatar-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Cabinet controls use the same dimensions and colors as CRM navigation. */
+.account-navigation{display:flex;align-items:center;gap:6px;min-width:0}
+.customer-portal .account-navigation nav{flex:1;min-width:0;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:3px 0}
+.customer-portal .account-navigation nav::-webkit-scrollbar{display:none}
+.customer-portal .account-nav-button,.customer-portal .account-logout-button{display:flex;align-items:center;justify-content:center;gap:7px;flex:none;min-height:40px;padding:8px 14px;border-radius:11px;background:var(--ac-surface-2);font-size:13px;font-weight:750;color:var(--ac-text);white-space:nowrap}
+.customer-portal .account-nav-button[aria-pressed=true]{background:#ff353d;color:white}
+.account-avatar-grid button:nth-child(6){display:none}
+.account-profile-actions{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.account-profile-actions .account-upload-button{margin:0;min-height:50px}
+@media(max-width:760px){.account-avatar-grid button:nth-child(6){display:block}.account-profile-actions{display:grid;grid-template-columns:1fr}.account-profile-actions>*{width:100%}.customer-portal .account-nav-button,.customer-portal .account-logout-button{padding:8px 10px;min-height:40px}}
