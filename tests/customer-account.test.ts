@@ -6,6 +6,10 @@ test('phone aliases share one account without accepting invalid identifiers',()=
  assert.equal(normalizeAccountPhone('8 (999) 123-45-67'),'+79991234567');
  assert.equal(normalizeAccountPhone('+7 999 1234567'),'+79991234567');
  assert.throws(()=>normalizeAccountPhone('123'));
+ assert.throws(()=>normalizeAccountPhone('+7999123456'),/не хватает/);
+ assert.throws(()=>normalizeAccountPhone('+799912345678'),/слишком много/);
+ assert.throws(()=>normalizeAccountPhone('admin79991234567'),/цифрами/);
+ assert.equal(normalizeAccountPhone('+8613812345678'),'+8613812345678');
  assert.throws(()=>accountPath('../clients'));
  assert.equal(phoneAccountId('+79991234567').length,64);
 });

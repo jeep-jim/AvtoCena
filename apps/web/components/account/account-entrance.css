@@ -338,3 +338,7 @@ body:has(.entrance-media-dialog[open]){overflow:hidden}
  .account-original-design .account-role-back{font-size:12px}
  .account-original-design .account-coming-soon{width:100vw;margin-inline:calc(50% - 50vw);border:0;border-radius:0 0 28px 28px}
 }
+
+.account-original-design .account-error{color:#b4233b;font-weight:500}
+[data-theme="dark"] .account-original-design .account-error{color:#ff9aaa}
+.account-original-design .account-login-form input[aria-invalid="true"]{border-color:#c33750}
