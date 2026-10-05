@@ -14,7 +14,7 @@ export async function POST(request:Request){if(!isCalculationOriginAllowed(reque
  const path=clientsPath(company);const result=await updateChunkedDataJson<any>(path,clientId,c=>{if(!canClaimCustomerInvite(a.id,c,hash(token)))throw Error('Приглашение недействительно или устарело.');return {...c,portalAccountId:a.id};});if(!result)throw Error('Приглашение недействительно.');
  await mutateDataJson<ClientLink[]>(linksPath(a.id),[],rows=>rows.some(l=>l.clientId===clientId&&l.companyId===company)?rows:[...rows,{companyId:company,clientId,verifiedAt:new Date().toISOString()}]);
  }else{const {link,client}=await linkedClient(a,String(b.key||''));
- if(b.action==='message')await sendPortalMessage(link.companyId,client.id,b.text,a.name,a.id);
+ if(b.action==='message'){const message=await sendPortalMessage(link.companyId,client.id,b.text,a.name,a.id);return Response.json({ok:true,message:{id:message.id,text:message.text,author:message.author,createdAt:message.createdAt,mine:true}},{headers});}
  else if(b.action==='review'){
  const confirmation=confirmedCustomerContract(client,String(b.leadId));if(!confirmation||client.portalReviews?.[b.leadId])throw Error('Отзыв доступен после подтверждения подписанного договора.');
  const lead=(await customerLeads(link.companyId,client.id)).find(l=>l.id===b.leadId);if(!lead)throw Error('Заявка не найдена.');
@@ -23,6 +23,7 @@ export async function POST(request:Request){if(!isCalculationOriginAllowed(reque
  // One immutable review per application, including retries and concurrent tabs.
  await appendChunkedDataJson(`dealers/${encodeURIComponent(dealerId)}/reviews.json`,review);
  await updateChunkedDataJson<any>(clientsPath(link.companyId),client.id,c=>({...c,portalReviews:{...c.portalReviews,[lead.id]:review.id}}));
+ return Response.json({ok:true,review:{id:review.id,rating:review.rating,text:review.text,status:review.status,leadId:review.leadId}},{headers});
  }else throw Error('Неизвестное действие.');}
  return Response.json({ok:true},{headers});
  }catch(e){return Response.json({error:e instanceof Error?e.message:'Не удалось сохранить.'},{status:400,headers});}

@@ -22,12 +22,12 @@ test('review publication, retries, deletion and access boundaries use real route
  };
  async function load(entry:string){const r=await build({entryPoints:[entry],bundle:true,platform:'node',format:'cjs',packages:'external',write:false,plugins:[{name:'controls',setup(b){b.onResolve({filter:/^@\//},a=>mocks[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path],loader:'ts'}));}}]});const m={exports:{} as any};new Function('require','module','exports',r.outputFiles[0].text)(require,m,m.exports);return m.exports;}
  const request=(body:any,origin='https://avtocena.com')=>new Request('https://avtocena.com/api/account/portal',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify(body)});
- try{const portal=await load('apps/web/app/api/account/portal/route.ts'),moderate=await load('apps/web/app/api/account/review-moderation/route.ts');const body={action:'review',key:'owned',leadId:'lead',rating:5,text:'Спасибо за работу, всё прошло хорошо.'};
+ try{const portal=await load('apps/web/app/api/account/portal/route.ts'),moderate=await load('apps/web/app/api/account/review-moderation/route.ts');const body={action:'review',key:'owned',leadId:'lead',rating:4.2,text:'Спасибо за работу, всё прошло хорошо.'};
  assert.equal((await portal.POST(request(body))).status,400);assert.equal(state.writes,0);
  state.client.portalContracts.lead={documentId:'contract',dealerId:'dealer_topavto',confirmedBy:'manager',confirmedAt:new Date().toISOString()};
  assert.equal((await portal.POST(request({...body,key:'other'}))).status,400);assert.equal((await portal.POST(request(body,'https://evil.example'))).status,403);
  assert.equal((await portal.POST(request({...body,rating:6}))).status,400);
- assert.equal((await portal.POST(request(body))).status,200);assert.equal(state.writes,1);const original=JSON.stringify(state.review);
+ assert.equal((await portal.POST(request(body))).status,200);assert.equal(state.writes,1);assert.equal(state.review.rating,4.2);const original=JSON.stringify(state.review);
  assert.equal((await portal.POST(request({...body,text:'Changed review content'}))).status,400);assert.equal(JSON.stringify(state.review),original);
  const deletion={action:'delete',dealerId:'dealer_topavto',reviewId:state.review.id};state.actor={id:'staff',role:'admin',companyId:'dealer_topavto'};
  assert.equal((await moderate.POST(request(deletion))).status,403);state.actor.permissions={deleteReviews:true};

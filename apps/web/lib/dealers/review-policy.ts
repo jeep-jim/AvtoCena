@@ -12,11 +12,11 @@ export function canReviewDealer(userId:string,dealerId:string,link:ReviewClientL
  return !existing.some(r=>r.leadId===lead.id);
 }
 export function normalizeReviewInput(rating:unknown,text:unknown){
- if(typeof rating!=='number'||!Number.isInteger(rating)||rating<1||rating>5)throw Error('Выберите оценку от 1 до 5');
+ if(typeof rating!=='number'||!Number.isFinite(rating)||!Number.isInteger(rating*10)||rating<1||rating>5)throw Error('Выберите оценку от 1 до 5');
  if(typeof text!=='string'||text.trim().length<10||text.trim().length>3000)throw Error('Отзыв должен содержать от 10 до 3000 символов');
  return {rating,text:text.trim()};
 }
 export function dealerReviewSummary(reviews:DealerReview[],dealerId:string){
- const published=reviews.filter(r=>r.dealerId===dealerId&&r.status==='published'&&Number.isInteger(r.rating)&&r.rating>=1&&r.rating<=5);
+ const published=reviews.filter(r=>r.dealerId===dealerId&&r.status==='published'&&Number.isFinite(r.rating)&&Number.isInteger(r.rating*10)&&r.rating>=1&&r.rating<=5);
  return {count:published.length,rating:published.length?Math.round(published.reduce((sum,r)=>sum+r.rating,0)/published.length*10)/10:null};
 }
