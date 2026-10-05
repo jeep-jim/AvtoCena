@@ -1,0 +1,1203 @@
+/* Visual rules ported from the user-supplied deepseek_html_20261005_891c98.html.
+   Selectors and keyframes are scoped; original artwork, gradients and effects are preserved. */
+/* ==================== STAGE ==================== */
+.account-scenes .demo-stage{
+  position:relative;flex:1;
+  z-index:1;min-height:0;
+  border-radius:16px;overflow:hidden;
+}
+.account-scenes .demo-stage-inner{
+  position:absolute;inset:0;
+  display:flex;flex-direction:row;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.account-scenes .demo-stage-inner::-webkit-scrollbar{display:none}
+.account-scenes .scene{
+  flex:0 0 100%;height:100%;
+  scroll-snap-align:center;scroll-snap-stop:always;
+  padding:14px 6px;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;
+}
+
+/* ==================== ШАГИ-КРУЖКИ ==================== */
+.account-scenes .steps-bar{
+  display:flex;align-items:center;justify-content:center;
+  padding:16px 4px 8px;position:relative;z-index:1;
+}
+.account-scenes .step-node{
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(255,255,255,.1);
+  color:var(--intro-muted);font-size:11.5px;font-weight:700;
+  cursor:pointer;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+  flex-shrink:0;position:relative;z-index:2;
+}
+.account-scenes .step-node:hover{border-color:rgba(255,201,71,.4);color:#ffc947;transform:scale(1.06)}
+.account-scenes .step-node.is-done{
+  background:rgba(74,222,128,.1);
+  border-color:rgba(74,222,128,.4);color:#4ade80;
+}
+.account-scenes .step-node.is-active{
+  background:linear-gradient(135deg,#ffc947,#ffb020);
+  border-color:#ffc947;color:#0f1420;
+  box-shadow:0 0 0 5px rgba(255,201,71,.12), 0 0 24px rgba(255,201,71,.65);
+  transform:scale(1.12);
+}
+.account-scenes .step-node.is-active::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(255,201,71,.4);
+  animation:acIntrostepPulse 2s infinite;
+}
+@keyframes acIntrostepPulse{
+  0%{transform:scale(.9);opacity:.9}
+  100%{transform:scale(1.4);opacity:0}
+}
+.account-scenes .step-connector{
+  flex:1;height:2px;
+  background:rgba(255,255,255,.08);
+  position:relative;overflow:visible;min-width:14px;
+}
+.account-scenes .step-connector.is-done{background:rgba(74,222,128,.4)}
+.account-scenes .step-drop{
+  position:absolute;top:50%;left:0;
+  width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle,#ffc947,rgba(255,201,71,.4));
+  box-shadow:0 0 12px #ffc947, 0 0 20px rgba(255,201,71,.6);
+  transform:translate(-50%,-50%);
+  opacity:0;pointer-events:none;
+}
+.account-scenes .step-connector.is-active .step-drop{
+  opacity:1;animation:acIntrodropTravel 6s linear infinite;
+}
+@keyframes acIntrodropTravel{from{left:0}to{left:100%}}
+
+/* ==================== СЦЕНА 1: ЧАТ ==================== */
+.account-scenes .scene-chat{display:flex;flex-direction:column;gap:12px}
+.account-scenes .chat-msg{
+  display:flex;gap:11px;align-items:flex-end;max-width:88%;
+  animation:acIntromsgIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .chat-msg--in{animation-delay:.1s}
+.account-scenes .chat-msg--out{align-self:flex-end;flex-direction:row-reverse;animation-delay:.4s}
+@keyframes acIntromsgIn{
+  from{opacity:0;transform:translateY(10px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+.account-scenes .chat-avatar{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  position:relative;
+  background:linear-gradient(135deg,#ffc947 0%,#ff9a3c 100%);
+  display:grid;place-items:center;
+  font-size:13px;font-weight:700;color:#0f1420;
+  box-shadow:0 4px 14px rgba(255,201,71,.4);
+  border:2px solid rgba(255,255,255,.1);
+}
+.account-scenes .chat-avatar::after{
+  content:'';position:absolute;bottom:-1px;right:-1px;
+  width:11px;height:11px;border-radius:50%;
+  background:#4ade80;border:2px solid #0d1425;
+  box-shadow:0 0 8px rgba(74,222,128,.8);
+}
+.account-scenes .chat-bubble{
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px 16px 16px 4px;
+  padding:11px 15px;
+}
+.account-scenes .chat-msg--out .chat-bubble{
+  background:linear-gradient(135deg,rgba(255,201,71,.15),rgba(255,176,32,.08));
+  border-color:rgba(255,201,71,.28);
+  border-radius:16px 16px 4px 16px;
+}
+.account-scenes .chat-name{
+  font-size:11px;font-weight:600;color:#ffc947;margin-bottom:4px;
+  display:flex;align-items:center;gap:6px;
+}
+.account-scenes .chat-name::after{
+  content:'online';font-size:9px;font-weight:500;
+  color:#4ade80;background:rgba(74,222,128,.12);
+  padding:1px 6px;border-radius:100px;
+  border:1px solid rgba(74,222,128,.25);
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.account-scenes .chat-text{font-size:13px;line-height:1.5;color:var(--intro-text)}
+.account-scenes .chat-time{font-size:10.5px;color:var(--intro-dim);margin-top:5px}
+.account-scenes .chat-typing{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:10px 14px;
+  width:fit-content;margin-left:49px;
+  animation:acIntromsgIn .5s .7s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .chat-typing span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--intro-muted);
+  animation:acIntrotypingBounce 1.4s infinite ease-in-out;
+}
+.account-scenes .chat-typing span:nth-child(2){animation-delay:.2s}
+.account-scenes .chat-typing span:nth-child(3){animation-delay:.4s}
+@keyframes acIntrotypingBounce{
+  0%,60%,100%{transform:translateY(0);opacity:.5}
+  30%{transform:translateY(-5px);opacity:1}
+}
+.account-scenes .chat-typing-text{font-size:11px;color:var(--intro-dim);margin-left:6px}
+.account-scenes .chat-actions{
+  display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;
+  animation:acIntromsgIn .5s .9s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .chat-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:100px;
+  background:rgba(255,201,71,.08);
+  border:1px solid rgba(255,201,71,.28);
+  color:#ffc947;font-size:12px;font-weight:500;
+  cursor:pointer;transition:all .25s;
+  font-family:inherit;
+}
+.account-scenes .chat-chip:hover{background:rgba(255,201,71,.16);transform:translateY(-1px);box-shadow:0 6px 20px -8px rgba(255,201,71,.5)}
+.account-scenes .chat-chip svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .chat-chip--green{
+  background:rgba(74,222,128,.08);
+  border-color:rgba(74,222,128,.3);
+  color:#4ade80;
+}
+.account-scenes .chat-chip--green:hover{background:rgba(74,222,128,.15);box-shadow:0 6px 20px -8px rgba(74,222,128,.5)}
+
+/* ==================== СЦЕНА 2: ДОГОВОР — ПОЛНЫЙ VIEWER С ПОДПИСЬЮ ПО ЦЕНТРУ ==================== */
+.account-scenes .scene-contract{
+  position:relative;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:12px;padding:6px 0;
+  height:100%;
+}
+
+/* Верхняя часть: аватарки + скрепка — показывается пока не открылся viewer */
+.account-scenes .contract-intro{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:12px;
+  width:100%;
+  transition:opacity .4s, transform .4s;
+}
+.account-scenes .contract-intro.is-hidden{
+  opacity:0;
+  transform:scale(.9);
+  pointer-events:none;
+}
+
+.account-scenes .contract-title{
+  font-size:11.5px;font-weight:600;color:var(--intro-muted);
+  text-transform:uppercase;letter-spacing:.14em;
+  text-align:center;
+}
+.account-scenes .contract-parties{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;width:100%;max-width:320px;padding:0 4px;
+}
+.account-scenes .party{display:flex;flex-direction:column;align-items:center;gap:5px;flex:0 0 auto}
+.account-scenes .party-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,#ffc947 0%,#ff9a3c 100%);
+  display:grid;place-items:center;
+  font-size:15px;font-weight:700;color:#0f1420;
+  border:2px solid rgba(255,255,255,.15);
+  position:relative;
+  box-shadow:0 6px 20px rgba(255,201,71,.35);
+}
+.account-scenes .party-avatar--client{
+  background:linear-gradient(135deg,#60a5fa 0%,#7c5cff 100%);
+  color:var(--intro-title);
+  box-shadow:0 6px 20px rgba(96,165,250,.35);
+}
+.account-scenes .party-avatar::after{
+  content:'';position:absolute;bottom:-1px;right:-1px;
+  width:11px;height:11px;border-radius:50%;
+  background:#4ade80;border:2px solid #0d1425;
+  box-shadow:0 0 8px rgba(74,222,128,.8);
+}
+.account-scenes .party-label{font-size:11px;font-weight:700;color:var(--intro-title);text-align:center;line-height:1.2}
+.account-scenes .party-role{font-size:9px;color:var(--intro-muted);text-align:center;line-height:1.2}
+.account-scenes .party-connector{
+  flex:0 0 70px;height:2px;margin:0 8px;
+  margin-bottom:24px;background:rgba(255,255,255,.08);
+  position:relative;overflow:visible;
+}
+.account-scenes .party-connector::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,#60a5fa,#ffc947);
+  border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  animation:acIntroconnectorFill 9s infinite;
+}
+@keyframes acIntroconnectorFill{
+  0%,8%{transform:scaleX(0)}
+  18%,72%{transform:scaleX(1)}
+  82%,100%{transform:scaleX(1);opacity:0}
+}
+.account-scenes .party-connector::after{
+  content:'';position:absolute;top:50%;left:0;
+  width:8px;height:8px;border-radius:50%;
+  background:#ffc947;
+  box-shadow:0 0 12px #ffc947;
+  transform:translate(-50%,-50%);
+  animation:acIntropartyDot 9s infinite;
+}
+@keyframes acIntropartyDot{
+  0%,8%{left:0;opacity:0}
+  18%{left:0;opacity:1}
+  72%{left:100%;opacity:1}
+  82%,100%{left:100%;opacity:0}
+}
+
+.account-scenes .contract-arena{
+  position:relative;width:100%;max-width:320px;
+  height:110px;
+  display:flex;align-items:center;justify-content:center;
+}
+.account-scenes .contract-bridge{
+  position:absolute;top:50%;left:22%;right:22%;
+  height:2px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,201,71,.15) 20%,
+    rgba(255,201,71,.4) 50%,
+    rgba(255,201,71,.15) 80%,
+    transparent 100%);
+  transform:translateY(-50%);opacity:0;
+  animation:acIntrobridgeFade 9s infinite;
+}
+@keyframes acIntrobridgeFade{
+  0%,12%{opacity:0}
+  22%,72%{opacity:1}
+  82%,100%{opacity:0}
+}
+.account-scenes .contract-file{
+  position:absolute;width:80px;padding:10px 9px;
+  border-radius:11px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1.5px solid rgba(255,255,255,.1);
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  opacity:0;
+  transition:all .7s cubic-bezier(.16,1,.3,1);
+  z-index:3;
+}
+.account-scenes .contract-file--dealer{
+  left:0;top:50%;
+  transform:translate(-180%,-50%) scale(.7) rotate(-8deg);
+  animation:acIntrofileInLeft 9s infinite;
+}
+.account-scenes .contract-file--client{
+  right:0;top:50%;
+  transform:translate(180%,-50%) scale(.7) rotate(8deg);
+  animation:acIntrofileInRight 9s infinite;
+}
+@keyframes acIntrofileInLeft{
+  0%{opacity:0;transform:translate(-180%,-50%) scale(.7) rotate(-8deg)}
+  8%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg)}
+  72%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg)}
+  80%{opacity:1;transform:translate(-25%,-50%) scale(1.05) rotate(-3deg)}
+  88%{opacity:0;transform:translate(-10%,-50%) scale(.8) rotate(0deg)}
+  100%{opacity:0;transform:translate(-180%,-50%) scale(.7) rotate(-8deg)}
+}
+@keyframes acIntrofileInRight{
+  0%{opacity:0;transform:translate(180%,-50%) scale(.7) rotate(8deg)}
+  8%{opacity:1;transform:translate(50%,-50%) scale(1) rotate(0deg)}
+  72%{opacity:1;transform:translate(50%,-50%) scale(1) rotate(0deg)}
+  80%{opacity:1;transform:translate(25%,-50%) scale(1.05) rotate(3deg)}
+  88%{opacity:0;transform:translate(10%,-50%) scale(.8) rotate(0deg)}
+  100%{opacity:0;transform:translate(180%,-50%) scale(.7) rotate(8deg)}
+}
+.account-scenes .contract-file-icon{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(255,201,71,.15),rgba(255,154,60,.08));
+  border:1px solid rgba(255,201,71,.3);
+  display:grid;place-items:center;color:#ffc947;
+}
+.account-scenes .contract-file-icon svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .contract-file-name{font-size:9.5px;font-weight:600;color:var(--intro-text);text-align:center;line-height:1.3}
+.account-scenes .contract-file-sub{font-size:8.5px;color:var(--intro-muted);text-align:center}
+
+.account-scenes .contract-file-check{
+  position:absolute;top:-7px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(74,222,128,.95);
+  border:2px solid #0d1425;
+  display:grid;place-items:center;
+  color:var(--intro-title);opacity:0;transform:scale(0);
+  z-index:5;
+}
+.account-scenes .contract-file--dealer .contract-file-check{
+  right:-9px;
+  animation:acIntrocheckAppear 9s infinite;animation-delay:.1s;
+}
+.account-scenes .contract-file--client .contract-file-check{
+  left:-9px;right:auto;
+  animation:acIntrocheckAppear 9s infinite;animation-delay:.2s;
+}
+@keyframes acIntrocheckAppear{
+  0%,25%{opacity:0;transform:scale(0)}
+  35%,72%{opacity:1;transform:scale(1)}
+  80%,100%{opacity:0;transform:scale(0)}
+}
+.account-scenes .contract-file-check svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* Рукопожатие */
+.account-scenes .contract-handshake{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:66px;height:66px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(74,222,128,.3),rgba(74,222,128,.08));
+  border:2px solid rgba(74,222,128,.5);
+  display:grid;place-items:center;
+  color:#4ade80;
+  opacity:0;
+  z-index:4;
+  animation:acIntrohandshakeAppear 9s infinite;
+  font-size:32px;
+  line-height:1;
+  filter:drop-shadow(0 0 14px rgba(74,222,128,.7));
+}
+@keyframes acIntrohandshakeAppear{
+  0%,40%{opacity:0;transform:translate(-50%,-50%) scale(0)}
+  45%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  72%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  80%{opacity:0;transform:translate(-50%,-50%) scale(.7)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.7)}
+}
+.account-scenes .contract-handshake::before{
+  content:'';position:absolute;inset:-12px;border-radius:50%;
+  border:1px solid rgba(74,222,128,.3);
+  animation:acIntrohandshakeRipple 2s infinite;
+}
+@keyframes acIntrohandshakeRipple{
+  0%{transform:scale(.9);opacity:.8}
+  100%{transform:scale(1.6);opacity:0}
+}
+
+/* VIEWER — большая карточка документа по центру */
+.account-scenes .contract-viewer{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.7);
+  width:340px;
+  height:calc(100% - 20px);
+  max-height:420px;
+  background:linear-gradient(180deg,#fafafa,#f2f2f0);
+  border-radius:14px;
+  padding:16px 18px 18px;
+  color:#1a1a1a;
+  display:flex;flex-direction:column;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(0,0,0,.1);
+  opacity:0;
+  pointer-events:none;
+  z-index:8;
+  font-family:'Inter',sans-serif;
+  transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+}
+.account-scenes .contract-viewer.is-active{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  pointer-events:auto;
+}
+
+.account-scenes .contract-viewer-header{
+  display:flex;align-items:center;gap:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  margin-bottom:12px;
+}
+.account-scenes .contract-viewer-logo{
+  width:26px;height:26px;border-radius:7px;
+  background:linear-gradient(135deg,#ffc947,#ffb020);
+  display:grid;place-items:center;
+  font-weight:800;color:#0f1420;font-size:12px;
+}
+.account-scenes .contract-viewer-title{
+  font-size:12.5px;font-weight:700;color:#1a1a1a;
+  line-height:1.2;
+}
+.account-scenes .contract-viewer-sub{
+  font-size:9.5px;color:#666;
+  margin-top:1px;
+}
+
+.account-scenes .contract-viewer-body{
+  flex:1;
+  font-size:10px;
+  line-height:1.65;
+  color:#333;
+  overflow:hidden;
+  position:relative;
+  mask-image:linear-gradient(180deg, #000 75%, transparent 100%);
+  -webkit-mask-image:linear-gradient(180deg, #000 75%, transparent 100%);
+}
+.account-scenes .contract-viewer-line{
+  margin-bottom:8px;
+  display:block;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .3s, transform .3s;
+}
+.account-scenes .contract-viewer-line.is-visible{
+  opacity:1;
+  transform:none;
+}
+.account-scenes .contract-viewer-line strong{color:#111;font-weight:700}
+
+.account-scenes .contract-viewer-footer{
+  position:relative;
+  margin-top:10px;
+  padding-top:12px;
+  border-top:1px dashed rgba(0,0,0,.15);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  min-height:52px;
+}
+.account-scenes .contract-viewer-sign-label{
+  font-size:9px;color:#666;
+  text-transform:uppercase;letter-spacing:.1em;
+}
+.account-scenes .contract-viewer-sign-hint{
+  font-size:8.5px;color:#999;
+  margin-top:2px;
+  font-style:italic;
+  transition:color .3s;
+}
+.account-scenes .contract-viewer-sign-area{
+  position:relative;
+  width:130px;height:40px;
+}
+.account-scenes .contract-signature{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  stroke:#1a4fbf;
+  stroke-width:1.8;
+  fill:none;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:200;
+  stroke-dashoffset:200;
+}
+.account-scenes .contract-signature.is-signing{
+  animation:acIntrosignWrite 2s ease-out forwards;
+}
+@keyframes acIntrosignWrite{
+  0%{stroke-dashoffset:200}
+  100%{stroke-dashoffset:0}
+}
+
+/* Перо — слева направо */
+.account-scenes .contract-pen{
+  position:absolute;
+  left:-4px;
+  bottom:-6px;
+  width:30px;height:30px;
+  opacity:0;
+  transform:translate(-20px, 20px) rotate(-30deg);
+  pointer-events:none;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.35));
+}
+.account-scenes .contract-pen.is-writing{
+  opacity:1;
+  animation:acIntropenWrite 2s ease-out forwards;
+}
+@keyframes acIntropenWrite{
+  0%{transform:translate(-10px, 10px) rotate(-25deg)}
+  20%{transform:translate(0px, 0px) rotate(-25deg)}
+  100%{transform:translate(105px, -10px) rotate(-25deg)}
+}
+
+.account-scenes .contract-viewer-check{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:70px;height:70px;
+  border-radius:50%;
+  background:rgba(74,222,128,.95);
+  border:3px solid rgba(255,255,255,.9);
+  display:grid;place-items:center;
+  color:var(--intro-title);
+  box-shadow:0 20px 60px -10px rgba(74,222,128,.7), 0 0 0 8px rgba(74,222,128,.2);
+  opacity:0;
+  z-index:10;
+  pointer-events:none;
+}
+.account-scenes .contract-viewer-check.is-visible{
+  animation:acIntrocheckConfirm 1.4s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes acIntrocheckConfirm{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0)}
+  30%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
+  45%{transform:translate(-50%,-50%) scale(1)}
+  80%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}
+}
+.account-scenes .contract-viewer-check svg{
+  width:36px;height:36px;
+  stroke:currentColor;fill:none;stroke-width:3.5;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* Статус «подписан» внизу сцены */
+.account-scenes .contract-status{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 14px;border-radius:100px;
+  background:rgba(74,222,128,.08);
+  border:1px solid rgba(74,222,128,.25);
+  color:#4ade80;font-size:11.5px;font-weight:600;
+  position:absolute;
+  bottom:-8px;left:50%;
+  transform:translateX(-50%) translateY(8px);
+  opacity:0;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.account-scenes .contract-status.is-visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+.account-scenes .contract-status-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#4ade80;box-shadow:0 0 8px #4ade80;
+  animation:demoPulse 1.5s infinite;
+}
+
+/* ==================== СЦЕНА 3: ТРЕК ==================== */
+.account-scenes .scene-track{display:flex;flex-direction:column;gap:12px}
+.account-scenes .track-header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 14px;
+  background:rgba(255,201,71,.06);
+  border:1px solid rgba(255,201,71,.2);
+  border-radius:12px;
+  animation:acIntrocardIn .5s .05s both;
+}
+@keyframes acIntrocardIn{
+  from{opacity:0;transform:translateX(-12px)}
+  to{opacity:1;transform:none}
+}
+.account-scenes .track-header-left{display:flex;align-items:center;gap:10px}
+.account-scenes .track-header-icon{
+  width:32px;height:32px;border-radius:9px;
+  background:rgba(255,201,71,.15);
+  border:1px solid rgba(255,201,71,.3);
+  display:grid;place-items:center;color:#ffc947;
+  flex-shrink:0;
+}
+.account-scenes .track-header-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .track-header-title{font-size:12.5px;font-weight:600;color:var(--intro-title);line-height:1.3}
+.account-scenes .track-header-sub{font-size:10.5px;color:var(--intro-muted);margin-top:2px}
+.account-scenes .track-header-eta{
+  font-size:11px;font-weight:700;color:#0f1420;
+  background:linear-gradient(135deg,#ffc947,#ffb020);
+  padding:6px 11px;border-radius:100px;white-space:nowrap;
+  box-shadow:0 4px 12px rgba(255,201,71,.35);
+}
+.account-scenes .track-map{
+  position:relative;
+  padding:22px 4px 8px;
+  animation:acIntrocardIn .5s .1s both;
+}
+.account-scenes .track-row{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  position:relative;
+}
+.account-scenes .track-point-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  flex-shrink:0;position:relative;z-index:2;
+}
+.account-scenes .track-pin-marker{
+  width:36px;height:36px;border-radius:50%;
+  background:#0f1420;border:2px solid var(--intro-dim);
+  display:grid;place-items:center;color:var(--intro-dim);
+  transition:all .5s;position:relative;
+}
+.account-scenes .track-pin-marker svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .track-pin-label{
+  font-size:10.5px;font-weight:600;
+  color:var(--intro-muted);white-space:nowrap;
+  text-align:center;line-height:1.2;
+}
+.account-scenes .track-pin-label small{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:9px;opacity:.85;font-weight:500;margin-top:2px;
+}
+.account-scenes .pin-city{
+  display:block;
+  font-size:10.5px;
+  font-weight:700;
+  color:var(--intro-text);
+  line-height:1.2;
+}
+.account-scenes .track-point-wrap.is-active .pin-city{color:var(--intro-title)}
+
+.account-scenes .flag-svg{
+  display:inline-flex;
+  width:16px;
+  height:11px;
+  border-radius:2px;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.15), 0 1px 3px rgba(0,0,0,.4);
+  flex-shrink:0;
+  vertical-align:middle;
+}
+.account-scenes .flag-svg svg{width:100%;height:100%;display:block}
+
+.account-scenes .track-point-wrap.is-done .track-pin-marker{
+  background:rgba(74,222,128,.15);
+  border-color:#4ade80;color:#4ade80;
+  box-shadow:0 0 12px rgba(74,222,128,.5);
+}
+.account-scenes .track-point-wrap.is-done .track-pin-label{color:var(--intro-text)}
+.account-scenes .track-point-wrap.is-active .track-pin-marker{
+  background:linear-gradient(135deg,rgba(255,201,71,.25),rgba(255,176,32,.15));
+  border-color:#ffc947;color:#ffc947;
+  box-shadow:0 0 0 5px rgba(255,201,71,.12), 0 0 22px rgba(255,201,71,.65);
+  animation:acIntropinPulse 2s infinite;
+  width:40px;height:40px;
+}
+.account-scenes .track-point-wrap.is-active .track-pin-marker svg{width:18px;height:18px}
+@keyframes acIntropinPulse{
+  0%,100%{box-shadow:0 0 0 5px rgba(255,201,71,.12), 0 0 22px rgba(255,201,71,.65)}
+  50%{box-shadow:0 0 0 9px rgba(255,201,71,.05), 0 0 30px rgba(255,201,71,.85)}
+}
+.account-scenes .track-point-wrap.is-active .track-pin-label{color:var(--intro-title);font-weight:700}
+
+.account-scenes .track-segment{
+  flex:1;height:4px;
+  margin:16px 6px 0 6px;
+  border-radius:4px;
+  background:rgba(255,255,255,.08);
+  position:relative;overflow:hidden;
+  align-self:flex-start;
+}
+.account-scenes .track-segment.is-done{
+  background:linear-gradient(90deg,#4ade80,#ffc947);
+  box-shadow:0 0 12px rgba(255,201,71,.5);
+}
+.account-scenes .track-segment.is-active{background:rgba(255,255,255,.08)}
+.account-scenes .track-segment.is-active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,#4ade80,#ffc947);
+  border-radius:4px;
+  box-shadow:0 0 12px rgba(255,201,71,.6);
+  width:0%;
+  animation:acIntrosegmentFill 6s ease-in-out infinite;
+}
+@keyframes acIntrosegmentFill{0%{width:0%}100%{width:100%}}
+.account-scenes .track-segment.is-future{
+  background:transparent;height:2px;margin-top:17px;
+  background-image:linear-gradient(90deg,rgba(255,255,255,.3) 50%,transparent 50%);
+  background-size:8px 2px;background-repeat:repeat-x;
+}
+.account-scenes .track-truck{
+  position:absolute;top:16px;left:0;
+  transform:translate(-50%,0);
+  width:44px;height:32px;
+  z-index:5;
+  transition:left 6s ease-in-out;
+  filter:drop-shadow(0 4px 12px rgba(229,57,53,.7)) drop-shadow(0 0 20px rgba(229,57,53,.5));
+}
+.account-scenes .track-truck svg{
+  width:100%;height:100%;display:block;
+  animation:acIntrotruckBob 1.6s ease-in-out infinite;
+}
+@keyframes acIntrotruckBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+.account-scenes .track-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin-top:34px;
+  animation:acIntrocardIn .5s .4s both;
+}
+.account-scenes .track-stat{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:11px 8px;text-align:center;
+}
+.account-scenes .track-stat-val{
+  font-size:14px;font-weight:700;color:#ffc947;
+  margin-bottom:2px;letter-spacing:-.02em;
+}
+.account-scenes .track-stat-label{font-size:10px;color:var(--intro-muted);line-height:1.25}
+
+/* ==================== СЦЕНА 4: ДОКУМЕНТЫ + ПЛИТКИ ==================== */
+.account-scenes .scene-docs{display:flex;flex-direction:column;gap:10px;padding:14px 2px}
+.account-scenes .docs-title{
+  font-size:11.5px;font-weight:600;color:var(--intro-muted);
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-bottom:2px;
+}
+.account-scenes .docs-list{display:flex;flex-direction:column;gap:10px}
+.account-scenes .doc-card{
+  display:flex;align-items:center;gap:13px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:13px 15px;
+  position:relative;overflow:hidden;
+  animation:acIntrocardIn .55s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .doc-card--new{
+  border-color:rgba(255,201,71,.4);
+  background:linear-gradient(135deg,rgba(255,201,71,.08),rgba(255,176,32,.02));
+}
+.account-scenes .doc-card--new::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#ffc947,#ffb020);
+  box-shadow:0 0 12px rgba(255,201,71,.8);
+}
+.account-scenes .doc-shimmer{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.account-scenes .doc-shimmer::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,201,71,.1),transparent);
+  animation:acIntroshimmerMove 2.5s infinite;
+}
+@keyframes acIntroshimmerMove{0%{left:-100%}60%,100%{left:200%}}
+.account-scenes .doc-icon{
+  width:40px;height:40px;flex-shrink:0;border-radius:11px;
+  display:grid;place-items:center;
+  background:rgba(255,201,71,.1);
+  border:1px solid rgba(255,201,71,.22);
+  color:#ffc947;
+  position:relative;z-index:1;
+}
+.account-scenes .doc-icon svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .doc-icon--blue{background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.22);color:#60a5fa}
+.account-scenes .doc-info{flex:1;min-width:0;position:relative;z-index:1}
+.account-scenes .doc-name{font-size:13px;font-weight:500;color:var(--intro-text);margin-bottom:4px}
+.account-scenes .doc-status{font-size:11px;color:var(--intro-muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.account-scenes .doc-status--new{color:#ffc947}
+.account-scenes .doc-form-progress{display:flex;align-items:center;gap:8px;margin-top:5px}
+.account-scenes .doc-bar{
+  flex:1;height:4px;border-radius:4px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;position:relative;
+}
+.account-scenes .doc-bar::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,#ffc947,#ffb020);
+  border-radius:4px;
+  width:0%;
+  animation:acIntrodocFillOnce 4s ease-out infinite;
+  box-shadow:0 0 10px rgba(255,201,71,.6);
+}
+@keyframes acIntrodocFillOnce{
+  0%{width:0%}
+  70%{width:68%}
+  85%,100%{width:68%}
+}
+.account-scenes .doc-bar-percent{
+  font-size:10.5px;font-weight:700;color:#ffc947;
+  font-variant-numeric:tabular-nums;min-width:32px;text-align:right;
+}
+.account-scenes .media-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:6px;
+}
+.account-scenes .media-tile{
+  aspect-ratio:1;
+  border-radius:11px;
+  background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  display:grid;
+  place-items:center;
+  color:var(--intro-muted);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all .25s;
+  animation:acIntrotileIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .media-tile:nth-child(1){animation-delay:.05s}
+.account-scenes .media-tile:nth-child(2){animation-delay:.12s}
+.account-scenes .media-tile:nth-child(3){animation-delay:.19s}
+.account-scenes .media-tile:nth-child(4){animation-delay:.26s}
+.account-scenes .media-tile:nth-child(5){animation-delay:.33s}
+.account-scenes .media-tile:nth-child(6){animation-delay:.4s}
+.account-scenes .media-tile:nth-child(7){animation-delay:.47s}
+.account-scenes .media-tile:nth-child(8){animation-delay:.54s}
+@keyframes acIntrotileIn{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:none}
+}
+.account-scenes .media-tile:hover{
+  background:rgba(255,201,71,.08);
+  border-color:rgba(255,201,71,.3);
+  color:#ffc947;
+  transform:translateY(-2px);
+}
+.account-scenes .media-tile svg{
+  width:22px;height:22px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+}
+.account-scenes .media-tile--photo{background:linear-gradient(135deg,#3a4a6b,#1f2a44);color:var(--intro-title)}
+.account-scenes .media-tile--video{background:linear-gradient(135deg,#4a2c3f,#2c1a2a)}
+.account-scenes .media-tile--video::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at center, rgba(255,201,71,.15), transparent 60%);
+}
+.account-scenes .media-tile--doc{
+  background:linear-gradient(135deg,rgba(255,201,71,.12),rgba(255,154,60,.05));
+  border-color:rgba(255,201,71,.25);
+  color:#ffc947;
+}
+.account-scenes .media-tile-play{
+  position:absolute;bottom:6px;right:6px;
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.25);
+  display:grid;place-items:center;
+  backdrop-filter:blur(4px);
+}
+.account-scenes .media-tile-play svg{width:8px;height:8px;fill:#fff;stroke:none;margin-left:1px}
+.account-scenes .media-tile-badge{
+  position:absolute;top:5px;right:5px;
+  font-size:8.5px;font-weight:700;
+  padding:2px 6px;border-radius:100px;
+  background:rgba(0,0,0,.5);color:var(--intro-title);
+  backdrop-filter:blur(4px);
+}
+.account-scenes .docs-chips{
+  display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;
+}
+
+/* ==================== СЦЕНА 5: УВЕДОМЛЕНИЯ ==================== */
+.account-scenes .scene-notifs{display:flex;flex-direction:column;gap:9px}
+.account-scenes .notif-hero{display:flex;justify-content:center;margin-bottom:6px}
+.account-scenes .notif-bell{
+  position:relative;width:74px;height:74px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,201,71,.18),rgba(255,201,71,.04));
+  border:1.5px solid rgba(255,201,71,.4);
+  display:grid;place-items:center;
+  color:#ffc947;
+  animation:acIntrobellShake 3s infinite;
+}
+.account-scenes .notif-bell svg{
+  width:32px;height:32px;stroke:currentColor;fill:none;
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+  transform-origin:50% 10%;
+}
+@keyframes acIntrobellShake{
+  0%,70%,100%{transform:rotate(0deg)}
+  75%{transform:rotate(-14deg)}
+  80%{transform:rotate(12deg)}
+  85%{transform:rotate(-10deg)}
+  90%{transform:rotate(8deg)}
+  95%{transform:rotate(-4deg)}
+}
+.account-scenes .notif-bell::before,
+.account-scenes .notif-bell::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1.5px solid rgba(255,201,71,.35);
+  animation:acIntrobellRipple 2.4s infinite;pointer-events:none;
+}
+.account-scenes .notif-bell::after{animation-delay:1.2s}
+@keyframes acIntrobellRipple{
+  0%{transform:scale(.85);opacity:.9}
+  100%{transform:scale(1.5);opacity:0}
+}
+.account-scenes .notif-bell-badge{
+  position:absolute;top:-4px;right:-4px;
+  min-width:24px;height:24px;padding:0 6px;
+  border-radius:100px;
+  background:linear-gradient(135deg,#ff5f57,#ff8a3c);
+  border:2px solid #0d1425;color:var(--intro-title);
+  font-size:11px;font-weight:800;
+  display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(255,95,87,.55);
+  animation:acIntrobadgePulse 2s infinite;
+}
+@keyframes acIntrobadgePulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+}
+.account-scenes .notif-title{
+  font-size:11.5px;font-weight:600;color:var(--intro-muted);
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-bottom:2px;text-align:center;
+}
+.account-scenes .notif-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;padding:12px 14px;
+  animation:acIntronotifIn .55s cubic-bezier(.16,1,.3,1) both;
+  position:relative;
+}
+.account-scenes .notif-item:nth-child(3){animation-delay:.08s}
+.account-scenes .notif-item:nth-child(4){animation-delay:.2s}
+.account-scenes .notif-item:nth-child(5){animation-delay:.32s}
+@keyframes acIntronotifIn{
+  from{opacity:0;transform:translateY(10px) scale(.97)}
+  to{opacity:1;transform:none}
+}
+.account-scenes .notif-item--highlight{
+  border-color:rgba(255,201,71,.35);
+  background:linear-gradient(135deg,rgba(255,201,71,.07),rgba(255,176,32,.02));
+}
+.account-scenes .notif-item--highlight::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#ffc947,#ffb020);
+  box-shadow:0 0 10px rgba(255,201,71,.7);
+}
+.account-scenes .notif-icon{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  display:grid;place-items:center;
+}
+.account-scenes .notif-icon svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .notif-icon--green{background:rgba(74,222,128,.14);border:1px solid rgba(74,222,128,.3);color:#4ade80}
+.account-scenes .notif-icon--blue{background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.3);color:#60a5fa}
+.account-scenes .notif-icon--gold{background:rgba(255,201,71,.14);border:1px solid rgba(255,201,71,.3);color:#ffc947}
+.account-scenes .notif-body{flex:1;min-width:0}
+.account-scenes .notif-name{font-size:12.5px;font-weight:600;color:var(--intro-text);margin-bottom:3px}
+.account-scenes .notif-text{font-size:11px;color:var(--intro-muted);line-height:1.45}
+.account-scenes .notif-time{font-size:10px;color:#5a6378;margin-top:4px}
+
+/* ==================== СЦЕНА 6: ОТЗЫВ С АНИМАЦИЕЙ ЗВЁЗД ==================== */
+.account-scenes .scene-review{
+  display:flex;flex-direction:column;gap:11px;
+  padding:10px 2px;
+  position:relative;
+  height:100%;
+  justify-content:center;
+}
+.account-scenes .review-header{text-align:center}
+.account-scenes .review-header-icon{
+  width:52px;height:52px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(74,222,128,.2),rgba(255,201,71,.15));
+  border:1px solid rgba(74,222,128,.35);
+  display:grid;place-items:center;
+  color:#4ade80;margin:0 auto 10px;
+  box-shadow:0 0 30px -8px rgba(74,222,128,.6);
+  animation:acIntroiconFloat 3s ease-in-out infinite;
+}
+@keyframes acIntroiconFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+.account-scenes .review-header-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .review-title{
+  font-size:15px;font-weight:700;color:var(--intro-title);
+  margin-bottom:4px;letter-spacing:-.01em;
+}
+.account-scenes .review-subtitle{
+  font-size:11.5px;color:var(--intro-muted);line-height:1.45;
+  max-width:280px;margin:0 auto;
+}
+.account-scenes .review-dealer{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;
+}
+.account-scenes .review-dealer-avatar{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#ffc947,#ff9a3c);
+  display:grid;place-items:center;
+  font-size:13px;font-weight:700;color:#0f1420;
+  position:relative;
+  border:2px solid rgba(255,255,255,.1);
+}
+.account-scenes .review-dealer-avatar::after{
+  content:'';position:absolute;bottom:-2px;right:-2px;
+  width:11px;height:11px;border-radius:50%;
+  background:#4ade80;border:2px solid #0d1425;
+  box-shadow:0 0 8px rgba(74,222,128,.8);
+}
+.account-scenes .review-dealer-info{flex:1;min-width:0}
+.account-scenes .review-dealer-name{font-size:12.5px;font-weight:600;color:var(--intro-text);margin-bottom:2px}
+.account-scenes .review-dealer-role{font-size:10.5px;color:var(--intro-muted)}
+.account-scenes .review-dealer-badge{
+  font-size:10px;font-weight:600;
+  padding:4px 9px;border-radius:100px;
+  background:rgba(74,222,128,.12);color:#4ade80;
+  border:1px solid rgba(74,222,128,.3);
+  display:flex;align-items:center;gap:4px;
+}
+.account-scenes .review-dealer-badge svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .review-stars-label{
+  font-size:11px;font-weight:600;color:var(--intro-muted);
+  text-transform:uppercase;letter-spacing:.12em;
+  text-align:center;
+}
+
+/* ЗВЁЗДЫ С АНИМАЦИЕЙ */
+.account-scenes .review-stars{
+  display:flex;justify-content:center;gap:8px;
+}
+.account-scenes .review-star{
+  width:38px;height:38px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:11px;
+  display:grid;place-items:center;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  color:var(--intro-dim);
+  position:relative;
+  overflow:hidden;
+  /* Появление звёзд по одной при входе в сцену */
+  animation:acIntrostarAppear .5s cubic-bezier(.16,1,.3,1) both;
+}
+.account-scenes .review-star:nth-child(1){animation-delay:.1s}
+.account-scenes .review-star:nth-child(2){animation-delay:.2s}
+.account-scenes .review-star:nth-child(3){animation-delay:.3s}
+.account-scenes .review-star:nth-child(4){animation-delay:.4s}
+.account-scenes .review-star:nth-child(5){animation-delay:.5s}
+@keyframes acIntrostarAppear{
+  0%{opacity:0;transform:scale(.5) translateY(10px) rotate(-30deg)}
+  60%{opacity:1;transform:scale(1.15) translateY(0) rotate(0)}
+  100%{opacity:1;transform:scale(1) translateY(0) rotate(0)}
+}
+
+/* Ripple при клике */
+.account-scenes .review-star::before{
+  content:'';position:absolute;
+  width:100%;height:100%;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,201,71,.4), transparent 70%);
+  transform:scale(0);
+  opacity:0;
+  pointer-events:none;
+}
+.account-scenes .review-star.is-pulsing::before{
+  animation:acIntrostarRipple .6s ease-out;
+}
+@keyframes acIntrostarRipple{
+  0%{transform:scale(0);opacity:1}
+  100%{transform:scale(2.5);opacity:0}
+}
+
+.account-scenes .review-star svg{
+  width:20px;height:20px;
+  fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  position:relative;z-index:1;
+}
+.account-scenes .review-star:hover{
+  background:rgba(255,201,71,.1);
+  border-color:rgba(255,201,71,.35);
+  color:#ffc947;
+  transform:translateY(-3px) scale(1.05);
+}
+.account-scenes .review-star:hover svg{
+  transform:scale(1.15);
+}
+.account-scenes .review-star.is-filled{
+  background:linear-gradient(135deg,rgba(255,201,71,.25),rgba(255,176,32,.12));
+  border-color:rgba(255,201,71,.55);
+  color:#ffc947;
+  box-shadow:0 0 18px rgba(255,201,71,.55), inset 0 0 12px rgba(255,201,71,.15);
+  animation:acIntrostarPop .45s cubic-bezier(.16,1,.3,1);
+}
+@keyframes acIntrostarPop{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.25) rotate(6deg)}
+  70%{transform:scale(.95) rotate(-3deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+.account-scenes .review-star.is-filled svg{
+  fill:#ffc947;
+  filter:drop-shadow(0 0 6px rgba(255,201,71,.8));
+}
+
+.account-scenes .review-tags{
+  display:flex;flex-wrap:wrap;gap:6px;
+  justify-content:center;
+}
+.account-scenes .review-tag{
+  font-size:10.5px;font-weight:500;
+  padding:5px 10px;border-radius:100px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--intro-muted);
+  cursor:pointer;transition:all .25s;
+  font-family:inherit;
+}
+.account-scenes .review-tag:hover{background:rgba(255,201,71,.08);color:#ffc947;border-color:rgba(255,201,71,.3);transform:translateY(-1px)}
+.account-scenes .review-tag.is-active{
+  background:rgba(255,201,71,.14);
+  border-color:rgba(255,201,71,.4);
+  color:#ffc947;
+  animation:acIntrotagPop .35s cubic-bezier(.16,1,.3,1);
+}
+@keyframes acIntrotagPop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+.account-scenes .review-textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--intro-text);font-size:12px;font-family:inherit;
+  line-height:1.5;resize:none;
+  outline:none;min-height:60px;
+  transition:all .25s;
+}
+.account-scenes .review-textarea::placeholder{color:#5a6378}
+.account-scenes .review-textarea:focus{
+  border-color:rgba(255,201,71,.45);
+  background:rgba(255,201,71,.03);
+  box-shadow:0 0 0 3px rgba(255,201,71,.08);
+}
+.account-scenes .review-submit{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px 20px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ffc947,#ffb020);
+  color:#0f1420;
+  font-size:13px;font-weight:700;
+  border:none;cursor:pointer;
+  box-shadow:0 12px 30px -10px rgba(255,201,71,.6);
+  transition:all .25s;
+  font-family:inherit;
+  position:relative;
+  overflow:hidden;
+}
+.account-scenes .review-submit:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 38px -10px rgba(255,201,71,.8);
+}
+.account-scenes .review-submit svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.account-scenes .review-celebration{
+  position:absolute;inset:0;
+  pointer-events:none;overflow:hidden;
+  opacity:0;z-index:10;
+}
+.account-scenes .review-celebration.is-active{opacity:1}
+.account-scenes .confetti{
+  position:absolute;
+  width:8px;height:8px;
+  top:50%;left:50%;
+  opacity:0;
+}
+.account-scenes .confetti.is-active{animation:acIntroconfettiFall 1.6s ease-out forwards}
+@keyframes acIntroconfettiFall{
+  0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--tx,0), var(--ty,200px)) rotate(var(--rot,360deg)) scale(.4)}
+}

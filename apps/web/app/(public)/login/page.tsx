@@ -26,7 +26,7 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
       <PublicHeader backHref="/" backLabel="Назад" />
 
       <section className="mx-auto max-w-7xl px-4 py-5 md:px-8 md:py-10">
-        <div className="w-full max-w-[1120px]">
+        <div className="w-full max-w-[1240px]">
           <AccountEntrance appearance={features.accountAppearance} nextPath={nextPath} errorCode={errorCode} initialRole={firstParam(params.role) || (nextPath.startsWith("/crm") || nextPath.startsWith("/dealer-cabinet") ? "dealer" : "customer")} />
         </div>
       </section>
