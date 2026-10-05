@@ -1,11 +1,136 @@
 'use client';
+
 import {useState} from 'react';
-import {UserRound,Building2,Megaphone,Globe2,ArrowUpRight,ArrowLeft,ShieldCheck,MessageCircle,FileText} from 'lucide-react';
+import {ArrowUpRight, ArrowLeft, MessageCircle, FileText, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
 import {LoginForm} from '@/components/auth/LoginForm';
+import {PasswordField} from '@/components/auth/PasswordField';
+import {ACCOUNT_ROLES, type AccountRole, type AccountAppearance} from '@/lib/account-appearance';
 import './account.css';
-export function AccountEntrance({nextPath,errorCode,initialRole}:{nextPath:string;errorCode:string;initialRole:string}){
- const [role,setRole]=useState(initialRole==='dealer'||initialRole==='team'?initialRole:'customer');
- const [mode,setMode]=useState<'login'|'register'|'recover'>('login'),[phone,setPhone]=useState(''),[name,setName]=useState(''),[password,setPassword]=useState(''),[consent,setConsent]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[recovery,setRecovery]=useState<{token:string;url:string}|null>(null);
- async function submit(e:React.FormEvent){e.preventDefault();setError('');setBusy(true);try{const recover=mode==='recover';const response=await fetch(recover?'/api/account/telegram':'/api/account/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(recover?recovery?{action:'reset',token:recovery.token,password}:{action:'recover',phone}:{action:mode,phone,password,name,consent})});const data=await response.json();if(!response.ok)throw Error(data.error||'Не удалось войти.');if(recover){if(recovery){setMode('login');setRecovery(null);setPassword('');setError('Пароль изменён. Войдите с новым паролем.');}else setRecovery(data);}else{const safe=nextPath.startsWith('/account')&&!nextPath.startsWith('//')?nextPath:'/account';window.location.assign(safe);}}catch(e){setError(e instanceof Error?e.message:'Ошибка соединения.');}finally{setBusy(false);}}
- return <div className="account-entrance"><div className="account-login-main"><aside className="account-welcome"><span className="account-kicker">АвтоЦена · Личный кабинет</span><div className="account-art-slot" data-role-art="customer"><UserRound strokeWidth={1.2}/><span className="account-art-badge"><ShieldCheck size={26}/></span></div><h1>Ваш автомобиль.<br/>Всё рядом.</h1><p>Заявки, документы и общение с менеджером — в одном месте.</p><div className="account-welcome-points"><span><MessageCircle size={18}/> На связи с командой</span><span><FileText size={18}/> Документы под рукой</span></div></aside><section className="account-login-form">{role!=='customer'?<><button className="account-text-button" onClick={()=>setRole('customer')}><ArrowLeft size={16}/> Вход покупателя</button><h2>{role==='dealer'?'Кабинет АвтоДилера':'Вход для команды'}</h2><p className="account-muted">Для действующих партнёров и сотрудников.</p><LoginForm nextPath={role==='dealer'?'/dealer-cabinet':nextPath.startsWith('/crm')?nextPath:'/crm'} errorCode={errorCode}/></>:<><div className="account-form-heading"><span className="account-kicker">Для покупателя</span><h2>{mode==='login'?'Рады видеть вас':mode==='register'?'Создайте свой кабинет':'Восстановить доступ'}</h2><p>{mode==='recover'?'Подтвердите восстановление в подключённом Telegram.':'Начните с телефона и пароля.'}</p></div><div className="account-tabs" role="group" aria-label="Вход или регистрация"><button aria-pressed={mode==='login'} onClick={()=>{setMode('login');setError('');}}>Вход</button><button aria-pressed={mode==='register'} onClick={()=>{setMode('register');setError('');}}>Регистрация</button></div><form onSubmit={submit}>{mode==='register'&&<label>Как вас зовут (необязательно)<input value={name} onChange={e=>setName(e.target.value)} autoComplete="name" maxLength={80} placeholder="Ваше имя"/></label>}<label>Телефон<input type="tel" value={phone} onChange={e=>setPhone(e.target.value)} autoComplete="tel" maxLength={22} placeholder="+7 (___) ___-__-__" required/></label>{(mode!=='recover'||recovery)&&<label>{mode==='recover'?'Новый пароль':'Пароль'}<input type="password" value={password} onChange={e=>setPassword(e.target.value)} autoComplete={mode==='login'?'current-password':'new-password'} minLength={mode==='login'?1:10} maxLength={128} placeholder={mode==='login'?'Ваш пароль':'Не менее 10 символов'} required/></label>}{mode==='register'&&<label className="account-consent"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)} required/><span>Согласен с <a href="/privacy" target="_blank" rel="noreferrer">условиями обработки персональных данных</a>.</span></label>}{recovery&&mode==='recover'&&<a className="account-telegram-link" href={recovery.url} target="_blank" rel="noreferrer">Открыть Telegram для подтверждения ↗</a>}{error&&<p role="alert" className="account-error">{error}</p>}<button className="account-primary" disabled={busy}>{busy?'Подождите…':mode==='login'?'Войти в кабинет':mode==='register'?'Создать кабинет':recovery?'Сохранить новый пароль':'Продолжить через Telegram'}<ArrowUpRight size={20}/></button>{mode==='login'&&<button type="button" className="account-text-button" onClick={()=>{setMode('recover');setError('');}}>Забыли пароль?</button>}{mode==='recover'&&<p className="account-muted">Восстановление работает после подключения Telegram в кабинете. Если он не подключён, обратитесь к своему менеджеру.</p>}</form></>}</section></div><div className="account-role-heading"><h2>АвтоЦена для партнёров</h2><span>Покупателю достаточно обычного кабинета</span></div><div className="account-roles"><button onClick={()=>{setRole('dealer');window.scrollTo({top:0,behavior:'smooth'});}}><span className="account-role-art" data-role-art="dealer"><Building2/></span><span><strong>АвтоДилер</strong><small>Компания, автомобили и клиенты</small></span><ArrowUpRight size={18}/></button><div aria-label="АвтоБлогер — скоро"><span className="account-role-art" data-role-art="blogger"><Megaphone/></span><span><strong>АвтоБлогер</strong><small>Скоро</small></span></div><div aria-label="АвтоПоставщик — скоро"><span className="account-role-art" data-role-art="supplier"><Globe2/></span><span><strong>АвтоПоставщик</strong><small>Фиды и интеграции · Скоро</small></span></div></div><button className="account-team-link" onClick={()=>{setRole('team');window.scrollTo({top:0,behavior:'smooth'});}}>Вход для команды АвтоЦены</button></div>;
+
+type Mode = 'login' | 'register' | 'recover';
+
+export function AccountEntrance({nextPath, errorCode, initialRole, appearance = {}}: {nextPath: string; errorCode: string; initialRole: string; appearance?: AccountAppearance}) {
+  const [role, setRole] = useState<AccountRole>(initialRole === 'dealer' || initialRole === 'team' ? 'dealer' : initialRole === 'blogger' || initialRole === 'supplier' ? initialRole : 'customer');
+  const selectedArt = appearance[role];
+  const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
+  const [mode, setMode] = useState<Mode>('login');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmation, setConfirmation] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [recovery, setRecovery] = useState<{token: string; url: string} | null>(null);
+
+  function changeMode(nextMode: Mode) {
+    setMode(nextMode);
+    setPassword('');
+    setConfirmation('');
+    setRecovery(null);
+    setError('');
+    setNotice('');
+  }
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    setError('');
+    if (mode === 'register' && password !== confirmation) {
+      setError('Пароли не совпадают. Проверьте повторный ввод.');
+      return;
+    }
+    setBusy(true);
+    try {
+      const recover = mode === 'recover';
+      const response = await fetch(recover ? '/api/account/telegram' : '/api/account/auth', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(recover
+          ? recovery ? {action: 'reset', token: recovery.token, password} : {action: 'recover', phone}
+          : {action: mode, phone, password, consent}),
+      });
+      const data = await response.json();
+      if (!response.ok) throw Error(data.error || 'Не удалось войти. Попробуйте ещё раз.');
+      if (recover) {
+        if (recovery) {
+          changeMode('login');
+          setNotice('Пароль изменён. Войдите с новым паролем.');
+        } else setRecovery(data);
+      } else {
+        const safe = nextPath.startsWith('/account') && !nextPath.startsWith('//') ? nextPath : '/account';
+        window.location.assign(safe);
+      }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Не удалось подключиться. Попробуйте ещё раз.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return <div className="account-entrance">
+    <div className="account-login-main">
+      <aside className={`account-welcome${selectedArt?.banner ? ' has-banner' : ''}`}>
+        {selectedArt?.banner && <img className="account-welcome-background" src={selectedArt.banner} alt=""/>}
+        <span className="account-kicker">Личный кабинет</span>
+        <div className="account-art-slot" data-role-art={role}>
+          {selectedArt?.icon ? <img src={selectedArt.icon} alt="" width={180} height={180}/> : <RoleIcon size={80} strokeWidth={1.2}/>}
+        </div>
+        <h1>Ваш автомобиль.<br/>Всё рядом.</h1>
+        <p>{role === 'dealer' ? 'Автомобили, заявки и общение с клиентами — в одном месте.' : role === 'blogger' ? 'Рассказывайте об автомобилях и делитесь своим опытом.' : role === 'supplier' ? 'Предлагайте автомобили дилерам и покупателям.' : 'Заявки, документы и общение с менеджером — в одном месте.'}</p>
+        <div className="account-welcome-points">
+          <span><MessageCircle size={18}/> {role === 'dealer' ? 'Общение с клиентами' : 'Ваш менеджер на связи'}</span>
+          <span><FileText size={18}/> Документы под рукой</span>
+        </div>
+      </aside>
+      <section className="account-login-form">
+        {role === 'blogger' || role === 'supplier' ? <>
+          <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
+          <h2>{ACCOUNT_ROLES.find(item => item.id === role)?.label}</h2>
+          <p className="account-muted">Регистрация для этой роли скоро откроется.</p>
+        </> : role === 'dealer' ? <>
+          <button className="account-text-button" onClick={() => setRole('customer')}><ArrowLeft size={16}/> Пользователь</button>
+          <h2>Вход в кабинет</h2>
+          <LoginForm nextPath={nextPath.startsWith('/crm') ? nextPath : '/dealer-cabinet'} errorCode={errorCode}/>
+        </> : <>
+          <div className="account-form-heading">
+            <span className="account-kicker">Пользователь</span>
+            <h2>{mode === 'login' ? 'Рады видеть вас' : mode === 'register' ? 'Создайте свой кабинет' : 'Восстановление пароля'}</h2>
+            {mode === 'recover' && <p>Укажите номер телефона вашего аккаунта.</p>}
+          </div>
+          <div className="account-tabs" role="group" aria-label="Вход или регистрация">
+            <button disabled={busy} aria-pressed={mode === 'login'} onClick={() => changeMode('login')}>Вход</button>
+            <button disabled={busy} aria-pressed={mode === 'register'} onClick={() => changeMode('register')}>Регистрация</button>
+          </div>
+          <form onSubmit={submit}>
+            <label>Телефон<input type="tel" name="phone" value={phone} onChange={event => setPhone(event.target.value)} autoComplete="tel" maxLength={22} placeholder="+7 (___) ___-__-__" required/></label>
+            {(mode !== 'recover' || recovery) && <PasswordField key={mode} label={mode === 'recover' ? 'Новый пароль' : 'Пароль'} name="password" value={password} onChange={setPassword} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} minLength={mode === 'login' ? 1 : 10} placeholder={mode === 'login' ? 'Введите пароль' : 'Придумайте пароль'}/>}
+            {mode === 'register' && password.length > 0 && <>
+              <PasswordField label="Повторите пароль" name="password-confirmation" value={confirmation} onChange={setConfirmation} autoComplete="new-password" minLength={10} placeholder="Повторите пароль"/>
+              <p className="account-muted">Запомните и сохраните пароль. Если забудете его, нажмите «Забыли пароль?» на странице входа.</p>
+            </>}
+            {mode === 'register' && <>
+              <p className="account-muted">В пароле должно быть не менее 10 символов.</p>
+              <label className="account-consent"><input type="checkbox" checked={consent} onChange={event => setConsent(event.target.checked)} required/><span>Согласен с <a href="/privacy" target="_blank" rel="noreferrer">условиями обработки персональных данных</a>.</span></label>
+            </>}
+            {recovery && mode === 'recover' && <a className="account-telegram-link" href={recovery.url} target="_blank" rel="noreferrer">Подтвердить восстановление в Telegram ↗</a>}
+            {error && <p role="alert" className="account-error">{error}</p>}
+            {notice && <p role="status" className="account-muted">{notice}</p>}
+            <button className="account-primary" disabled={busy}>{busy ? 'Подождите…' : mode === 'login' ? 'Войти в кабинет' : mode === 'register' ? 'Создать кабинет' : recovery ? 'Сохранить новый пароль' : 'Восстановить пароль'}<ArrowUpRight size={20}/></button>
+            {mode === 'login' && <button type="button" className="account-text-button" onClick={() => changeMode('recover')}>Забыли пароль?</button>}
+            {mode === 'recover' && <p className="account-muted">Подтверждение придёт в Telegram, который вы подключили в кабинете. Если он не подключён, восстановить доступ поможет ваш менеджер.</p>}
+          </form>
+        </>}
+      </section>
+    </div>
+    <div className="account-role-heading"><h2>Для партнёров</h2></div>
+    <div className="account-roles">
+      {ACCOUNT_ROLES.filter(item => item.id !== 'customer').map(item => {
+        const Icon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[item.id];
+        return <button key={item.id} aria-pressed={role === item.id} onClick={() => {setRole(item.id); window.scrollTo({top: 0, behavior: 'smooth'});}}>
+          <span className="account-role-art" data-role-art={item.id}>{appearance[item.id]?.icon ? <img src={appearance[item.id]?.icon} alt="" width={72} height={72}/> : <Icon size={28}/>}</span>
+          <span><strong>{item.label}</strong><small>{item.id === 'dealer' ? 'Автомобили и клиенты' : 'Скоро'}</small></span><ArrowUpRight size={18}/>
+        </button>;
+      })}
+    </div>
+  </div>;
 }
