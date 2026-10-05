@@ -312,6 +312,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.auctionGrade || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const acknowledgedQuery = useRef(catalogQuery(draftFromInitial(initial), initialSortState.key, initialSortState.direction));
   // Server HTML can be visible before this component has its event handlers.
   const [interactive, setInteractive] = useState(false);
   useEffect(() => setInteractive(true), []);
@@ -321,7 +322,11 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (mobileOpen) return;
     const incomingSort=initialSort(initial.sort || "");
     const incoming=catalogQuery(draftFromInitial(initial),incomingSort.key,incomingSort.direction);
-    if(submitted.current!==null && incoming!==submitted.current) return;
+    const currentQuery = catalogQuery(draft, sortKey, sortDirection);
+    // Local edits win even during the debounce window, before submitted is set.
+    // Only the response matching the current draft may acknowledge those edits.
+    if (currentQuery !== acknowledgedQuery.current && incoming !== currentQuery) return;
+    acknowledgedQuery.current = incoming;
     submitted.current=null;
     setDraft(draftFromInitial(initial));
     const nextSort = initialSort(initial.sort || "");
