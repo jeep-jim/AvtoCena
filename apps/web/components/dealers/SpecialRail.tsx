@@ -2,6 +2,31 @@
 import {useSelectedCity} from "@/lib/location/selected-city";
 import {calculateSpecial} from "@/lib/dealers/showcase-model";
 import Link from "next/link";
+import {useEffect,useRef,useState,type ReactNode} from "react";
+function DesktopScrollableRail({children}:{children:ReactNode}) {
+  const rail=useRef<HTMLDivElement>(null);
+  const [edges,setEdges]=useState({left:false,right:false});
+  useEffect(()=>{
+    const el=rail.current;if(!el)return;
+    const sync=()=>setEdges({left:el.scrollLeft>2,right:el.scrollLeft+el.clientWidth<el.scrollWidth-2});
+    sync();
+    const observer=new ResizeObserver(sync);
+    observer.observe(el);
+    for(const child of Array.from(el.children))observer.observe(child);
+    el.addEventListener("scroll",sync,{passive:true});
+    return ()=>{observer.disconnect();el.removeEventListener("scroll",sync);};
+  },[children]);
+  function move(direction:number){
+    const el=rail.current;if(!el)return;
+    el.scrollBy({left:direction*Math.max(240,el.clientWidth-80),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  }
+  return <div className="relative mt-4">
+    <div ref={rail} className="ac-hide-scrollbar flex gap-4 overflow-x-auto pb-3">{children}</div>
+    {([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-red-500 shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:flex ${direction===-1?"left-0":"right-0"}`}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={direction===-1?"m14 5-7 7 7 7":"m10 5 7 7-7 7"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+    </button>)}
+  </div>;
+}
 export type SpecialRailItem = {
   id: string;
   href: string;
@@ -36,7 +61,7 @@ export function SpecialRail({
         {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
       </h2>
       {visible[0].subtitle && visible.every(o=>o.subtitle===visible[0].subtitle&&o.heading===visible[0].heading)&&<p className="mt-1 break-words text-sm leading-relaxed text-[var(--ac-muted)]">{visible[0].subtitle}</p>}
-      <div className="ac-hide-scrollbar mt-4 flex gap-4 overflow-x-auto pb-3">
+      <DesktopScrollableRail>
         {visible.map((o) => (
           <Link
             key={o.href}
@@ -61,7 +86,7 @@ export function SpecialRail({
             </div>
           </Link>
         ))}
-      </div>
+      </DesktopScrollableRail>
     </section>:null;})}</>
   );
 }
