@@ -110,18 +110,9 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
               snapshot={snapshot}
             />
             </div>
-            <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" defaultOpen headerAside={updatedStatus} />
-            <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
-            <VideoReviews items={reviews}/>
-        {description && (
-          <section className="mt-8 min-w-0">
-            <h2 className="text-2xl font-black">Об автомобиле</h2>
-            <p className="mt-3 whitespace-pre-line [overflow-wrap:anywhere]">{description}</p>
-          </section>
-        )}
 
           </div>
-          <StickyOfferColumn>
+          <StickyOfferColumn className="xl:col-start-2 xl:row-start-1 xl:row-span-2">
           <div className="ac-inline-parameters min-w-0" data-share-estimate={encodeShareDraft({deliveryCity:city})}>
             <section className="ac-price-trend-panel ac-offer-price-panel is-down rounded-[1.35rem] p-4">
               <p className="ac-price-trend-label text-[10px] font-black normal-case tracking-normal text-[var(--ac-text)] md:text-[11px]">
@@ -138,12 +129,15 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
                 </p>
               )}
             </section>
-            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!privateCity} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
-            {c.complete && !stock ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+
+            {c.complete ? <details className="ac-offer-breakdown group mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 p-4 font-bold [&::-webkit-details-marker]:hidden">Структура цены<ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180"/></summary>
               <dl className="space-y-3 px-4 pb-4">{c.lines.map(l=><div key={l.id} className="flex justify-between gap-3 text-sm"><dt>{l.title}</dt><dd className="shrink-0 font-bold">{l.amountRub.toLocaleString('ru-RU')} ₽</dd></div>)}</dl>
-              <p className="px-4 pb-4 text-xs text-[var(--ac-muted)]">Курс расчёта: 1 $ = {c.rate.toLocaleString('ru-RU')} ₽. {o.customsIncluded?'Таможенные платежи включены в цену автомобиля.':''}</p>
+              {!stock&&<p className="px-4 pb-4 text-xs text-[var(--ac-muted)]">Курс расчёта: 1 $ = {c.rate.toLocaleString('ru-RU')} ₽. {o.customsIncluded?'Таможенные платежи включены в цену автомобиля.':''}</p>}
             </details>:!c.complete?<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>:null}
+            <OfferMobileActions offerId={id} snapshot={snapshot}/>
+            <OfferDesktopActions offerId={id} snapshot={snapshot}/>
+            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!privateCity} syncStored={false} description={city&&c.complete?`Доставка: ${s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
             <div className="mt-3 xl:hidden">{updatedStatus}</div>
             <section className="dealer-offer-identity relative mt-4 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4" aria-label="Дилер объявления">
               {s.profileEnabled&&<Link href={dealerProfilePath(s)} className="absolute inset-0 z-10 rounded-[1.35rem]" aria-label={`Профиль дилера ${s.name}`}/>}
@@ -153,9 +147,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
               </div>
               {office&&<div className="relative z-20 mt-4 border-t border-[var(--ac-border)] pt-3"><p className="mb-2 text-xs font-bold text-[var(--ac-muted)]">{stock?'Адрес автомобиля':'Офис дилера'}</p><p className="flex items-start gap-2 text-sm"><MapPin size={17} className="mt-0.5 shrink-0 text-emerald-500"/><span>{[office.city,office.address].filter(Boolean).join(', ')}</span></p><DealerMap offices={[(({phone,...publicOffice})=>publicOffice)(office)]} compact autoLoad/></div>}
             </section>
-            <OfferMobileActions offerId={id} snapshot={snapshot}/>
             <p className="mt-3 text-xs leading-5 text-[var(--ac-muted)]">{stock ? `Автомобиль находится по адресу: ${[office?.city,office?.address].filter(Boolean).join(", ")}. ${o.condition==="used"?"С пробегом":"Новый автомобиль"}. Доставка в другой город согласуется отдельно.` : "Выберите свой город для расчёта доставки. Стоимость для новых направлений ориентировочная. Наличие, маршрут и срок подтвердим перед заключением договора."}</p>
-            <OfferDesktopActions offerId={id} snapshot={snapshot}/>
             {canPdf&&<OfferPdfButton offerId={id} draft={{deliveryCity:city}}/>}
             {canCopy && (
               <OfferCopyButton
@@ -173,6 +165,18 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
 
           </div>
           </StickyOfferColumn>
+          <div className="min-w-0 xl:col-start-1 xl:row-start-2">
+            <OfferSpecificationsDisclosure groups={groups} title={title} mode="desktop" defaultOpen headerAside={updatedStatus} />
+            <OfferSpecificationsDisclosure groups={groups} title={title} mode="mobile"/>
+            <VideoReviews items={reviews}/>
+        {description && (
+          <section className="mt-8 min-w-0">
+            <h2 className="text-2xl font-black">Об автомобиле</h2>
+            <p className="mt-3 whitespace-pre-line [overflow-wrap:anywhere]">{description}</p>
+          </section>
+        )}
+
+          </div>
         </div>
         <div className="mt-10" data-dealer-related><SpecialRail kinds={stock?["stock","order"]:["order","stock"]} heading={`Ещё автомобили · ${s.name}`} items={items.filter(item=>item.id!==o.id)}/>{markets}</div>
       </div>

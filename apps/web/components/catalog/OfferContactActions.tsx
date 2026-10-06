@@ -12,9 +12,9 @@ type FavoriteProps = {offerId: string; snapshot: FavoriteSnapshot};
 
 function ActionButtons({ className = "", stacked = false, stickyContact=false, offerId, snapshot }: FavoriteProps & { className?: string; stacked?: boolean;stickyContact?:boolean }) {
   const buttonClass = "ac-offer-contact-button relative inline-flex h-14 min-w-0 items-center justify-center rounded-[1.05rem] px-12 text-base font-black leading-tight !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] ";
-  const contact=<button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>{stickyContact?'Связаться':'Оставить заявку на расчёт'}</span></button>;
+  const contact=<button type="button" data-offer-action="lead" className={`${buttonClass} bg-[#22B14C]`}><span className="pointer-events-none absolute left-4 inline-flex items-center justify-center xl:left-5"><PhoneIcon /></span><span>{stickyContact?'Оставить заявку':'Оставить заявку на расчёт'}</span></button>;
   return <div className={`ac-offer-action-row grid ${stacked ? "grid-cols-1 gap-3" : "grid-cols-2 gap-3 md:gap-4"} ${className}`}>
-    {stickyContact?<StickyContact>{contact}</StickyContact>:contact}
+    {stickyContact?<StickyContact imageUrl={snapshot.imageUrl} title={snapshot.title}>{contact}</StickyContact>:contact}
     <ShareLinkButton compactMobile className={`${buttonClass} bg-[#00A2E8]`} />
     <div data-offer-copy-slot className="empty:!hidden" />
     <div data-offer-pdf-slot className="empty:!hidden" />
@@ -28,10 +28,10 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
 
 // Keep the anchor in document flow: its bounds describe the original position,
 // while the button bounds follow the viewport after it becomes fixed.
-function StickyContact({children}:{children:ReactNode}) {
+function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:string;title:string}) {
   const anchor=useRef<HTMLDivElement>(null);
   useEffect(()=>{
-    const node=anchor.current,button=node?.querySelector<HTMLElement>('button');if(!node||!button)return;
+    const node=anchor.current,button=node?.querySelector<HTMLElement>('.ac-offer-contact-bar');if(!node||!button)return;
     const header=document.querySelector<HTMLElement>('.ac-public-header');
     let frame=0;
     const update=()=>{
@@ -50,11 +50,11 @@ function StickyContact({children}:{children:ReactNode}) {
     window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
     return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
   },[]);
-  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false">{children}</div>;
+  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar">{imageUrl&&<img className="ac-offer-contact-thumbnail" src={imageUrl} alt={title} onError={event=>{event.currentTarget.hidden=true;}}/>}{children}</div></div>;
 }
 
 export function OfferMobileActions(favorite: FavoriteProps) {
-  return <div className="relative z-20 mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked stickyContact/></div>;
+  return <div className="ac-offer-mobile-actions relative mt-4 w-full xl:hidden"><ActionButtons {...favorite} stacked stickyContact/></div>;
 }
 
 export function OfferCreditCalculator() {
@@ -71,7 +71,11 @@ export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
     .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
-    .ac-offer-contact-anchor[data-stuck="true"]>button{z-index:45;box-shadow:0 6px 20px #0003}
+    .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
+    .ac-offer-contact-bar>button{flex:1;min-width:0}
+    .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;object-fit:cover;border-radius:12px}
+    .ac-offer-contact-anchor[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:var(--ac-surface);box-shadow:0 6px 20px #0003}
+    .ac-offer-contact-anchor[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
     .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
     .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}
     .ac-offer-action-row .ac-offer-contact-button>svg,

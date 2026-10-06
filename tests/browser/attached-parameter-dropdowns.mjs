@@ -335,7 +335,7 @@ try{
   for(const width of [320,390,1280,1440]) for(const theme of ['light','dark']) {
     await page.setViewportSize({width,height:900});await page.goto(origin+'/?kind=offer-actions&theme='+theme);
     const buttons=page.locator('[data-offer-action="lead"]:visible');assert.equal(await buttons.count(),1);
-    assert.equal(await buttons.textContent(),width<1280?'Связаться':'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
+    assert.equal(await buttons.textContent(),width<1280?'Оставить заявку':'Оставить заявку на расчёт');assert.ok(await buttons.locator('svg').isVisible());
     const share=page.locator('button:visible').filter({hasText:'Поделиться ссылкой'});assert.ok(await share.locator('svg').isVisible());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     if(width>=1280){
@@ -358,6 +358,13 @@ try{
       const photo=await page.locator('[data-test-photo]').boundingBox(),price=await page.locator('[data-test-price]').boundingBox(),action=await buttons.boundingBox(),delivery=await page.locator('[data-city-delivery]').boundingBox();
       assert.ok(price.y-photo.y-photo.height<=13,'mobile gallery-to-price gap is compact');
       assert.ok(action.y>=price.y+price.height && action.y+action.height<=delivery.y,'mobile actions precede delivery and parameters');
+      await page.evaluate(()=>document.body.style.minHeight='2400px');
+      const y=await page.locator('[data-parameter-editor-grid]').evaluate(n=>n.getBoundingClientRect().top+scrollY-120);
+      await page.evaluate(y=>scrollTo({top:y+120,behavior:'instant'}),y);await page.waitForTimeout(150);
+      assert.equal(await page.locator('.ac-offer-contact-anchor').getAttribute('data-stuck'),'true');
+      assert.ok(await buttons.evaluate(n=>{const r=n.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===n;}),'sticky action stays above editable parameters');
+      await page.evaluate(()=>{scrollTo({top:0,behavior:'instant'});document.body.style.minHeight='';});await page.waitForTimeout(150);
+
     }
     await page.screenshot({path:`${out}/offer-actions-${theme}-${width}.png`});
   }
