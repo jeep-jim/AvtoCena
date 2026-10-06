@@ -2,7 +2,7 @@ import { readDataJson } from "../data";
 import { convertToRub } from "./rates";
 
 const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
-const CBR_HISTORY_TTL_MS = 15 * 60_000;
+const CBR_HISTORY_TTL_MS = 5 * 60_000;
 
 type RatePoint = { date: string; effectiveRate: number };
 type PublicRate = {
@@ -177,41 +177,26 @@ async function enrichRateHistory(rates: PublicRate[]): Promise<PublicRate[]> {
     const publishedHistory = historyByCurrency.get(currency) || [];
     if (!publishedHistory.length) return rate;
 
-    const latest = publishedHistory.at(-1);
-    const previous = publishedHistory.at(-2);
-    const effectiveRate = latest?.effectiveRate || rate.effectiveRate;
-    const previousEffectiveRate = previous?.effectiveRate || rate.previousEffectiveRate;
-    const rateDelta = effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : rate.rateDelta;
-
-    return {
-      ...rate,
-      effectiveRate,
-      previousEffectiveRate,
-      rateDelta,
-      rateDate: latest?.date || rate.rateDate,
-      previousRateDate: previous?.date || rate.previousRateDate,
-      history: publishedHistory.slice(-5),
-    };
+    // History annotates the calculation quote; it must never select a different
+    // current rate from the conversion used by the full pricing engine.
+    const history = publishedHistory.filter(point => point.date < String(rate.rateDate || ""));
+    if(rate.rateDate)history.push({date:rate.rateDate,effectiveRate:rate.effectiveRate});
+    const previous = history.at(-2);
+    return {...rate, previousEffectiveRate:previous?.effectiveRate,
+      previousRateDate:previous?.date, rateDelta:previous?rate.effectiveRate-previous.effectiveRate:0,
+      history:history.slice(-5)};
   });
 }
 
 async function readPublicRateExtras() {
   const rawRates = await readDataJson<any>("fees/exchange-rates.json", {});
-  let rates = publicRates(rawRates);
-  if (!rates.some((rate) => rate.currency === "GEL")) {
-    const liveGel = await convertToRub(1, "GEL").catch(() => null);
-    if (liveGel) {
-      rates.push({
-        currency: "GEL",
-        effectiveRate: liveGel.effectiveRate,
-        previousEffectiveRate: liveGel.previousEffectiveRate,
-        rateDelta: liveGel.rateDelta,
-        rateDate: validIsoDate(liveGel.rateDate),
-        previousRateDate: validIsoDate(liveGel.previousRateDate) || undefined,
-        history: [],
-      });
-    }
-  }
+  const stored = publicRates(rawRates);
+  let rates = (await Promise.all(RATE_CODES.map(async currency=>{
+    const current=await convertToRub(1,currency).catch(()=>null);
+    const previous=stored.find(rate=>rate.currency===currency);
+    if(!current)return previous || null;
+    return {...previous,...current,history:previous?.history || []};
+  }))).filter((rate):rate is NonNullable<typeof rate>=>Boolean(rate));
   rates = await enrichRateHistory(rates);
   return { rates, ratesUpdatedAt: rawRates?.updatedAt || null };
 }
@@ -224,7 +209,7 @@ export async function loadPublicRateExtras(): Promise<RateExtras> {
   if (extrasCache && extrasCache.expiresAt > Date.now()) return extrasCache.value;
   if (!extrasPromise) {
     extrasPromise = readPublicRateExtras().then(value => {
-      extrasCache = { value, expiresAt: Date.now() + 15 * 60_000 };
+      extrasCache = { value, expiresAt: Date.now() + 5 * 60_000 };
       return value;
     }).finally(() => { extrasPromise = null; });
   }

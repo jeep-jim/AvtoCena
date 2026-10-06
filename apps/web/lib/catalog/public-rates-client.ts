@@ -1,20 +1,27 @@
 import type { PublicCurrencyRate } from "../../components/catalog/PriceTrend";
 
-const TTL_MS = 15 * 60_000;
+const TTL_MS = 60_000;
 let cached: PublicCurrencyRate[] | null = null;
 let expiresAt = 0;
 let inFlight: Promise<PublicCurrencyRate[]> | null = null;
+let stopWatching: (()=>void) | null = null;
 const listeners = new Set<(rates: PublicCurrencyRate[]) => void>();
 export function subscribePublicRates(listener: (rates: PublicCurrencyRate[]) => void) {
   listeners.add(listener);
-  return () => { listeners.delete(listener); };
+  if(typeof window!=="undefined"&&!stopWatching){
+    const refresh=()=>{if(document.visibilityState!=="hidden")void loadPublicRates().catch(()=>{});};
+    const timer=setInterval(refresh,TTL_MS);
+    window.addEventListener("focus",refresh);document.addEventListener("visibilitychange",refresh);
+    stopWatching=()=>{clearInterval(timer);window.removeEventListener("focus",refresh);document.removeEventListener("visibilitychange",refresh);};
+  }
+  return () => { listeners.delete(listener);if(!listeners.size){stopWatching?.();stopWatching=null;} };
 }
 
 // Shared by desktop/mobile strips, price trends and chart annotations.
 export function loadPublicRates(): Promise<PublicCurrencyRate[]> {
   if (cached && expiresAt > Date.now()) return Promise.resolve(cached);
   if (!inFlight) {
-    inFlight = fetch("/api/catalog/rates").then(async response => {
+    inFlight = fetch("/api/catalog/rates",{cache:"no-store"}).then(async response => {
       if (!response.ok) throw new Error("public_rates_unavailable");
       const data = await response.json();
       if (!Array.isArray(data?.rates)) throw new Error("public_rates_invalid");

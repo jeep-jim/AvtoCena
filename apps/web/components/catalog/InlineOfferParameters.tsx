@@ -9,6 +9,7 @@ import { parseEngineCc } from "../../lib/catalog/engine-input";
 
 import type { SavedOfferCalculation } from "../../lib/catalog/saved-offer-calculation";
 import { missingCustomerFields } from "../../lib/catalog/missing-customer-fields";
+import {loadPublicRates,subscribePublicRates} from "../../lib/catalog/public-rates-client";
 import { PriceTrend, type PublicCurrencyRate } from "./PriceTrend";
 import { ResearchLink } from "./VehicleResearchLink";
 import { DeliveryCityPanel } from "./DeliveryCityPanel";
@@ -115,7 +116,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
   </details>
  </div>;
 }
-export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
+export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
  const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
@@ -130,6 +131,20 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,l
  const [draft,setDraft]=useState(()=>originalDraft),[pending,setPending]=useState(false),[error,setError]=useState("");
  const [result,setResult]=useState<{totalRub:number;paymentPlan?:BusinessPaymentPlan;currencyRate?:PublicCurrencyRate & {sourcePrice?:number};customs?:{vehicleCategory?:string;tariffCode?:string;productionReferenceDate?:string;productionReferenceBasis?:string;ageBand?:string};warnings?:string[];breakdown?:{id:string;label?:string;title?:string;note?:string;amountRub:number}[]}|null>(initialScenario?.calculation || savedCalculation?.calculation || null);
  const revision=useRef(0);
+ const [rateRevision,setRateRevision]=useState(0);
+ const latestRatesKey=useRef("");
+ useEffect(()=>{
+  const apply=(rates:PublicCurrencyRate[])=>{
+   const key=rates.map(r=>[r.currency,r.rateDate,r.effectiveRate].join(":")).sort().join("|");
+   const prior=latestRatesKey.current;latestRatesKey.current=key;
+   const saved=(initialScenario?.calculation||savedCalculation?.calculation)?.currencyRate || initialCurrencyRate;
+   const live=saved&&rates.find(r=>r.currency===saved.currency);
+   const stale=live&&saved&&(!saved.rateSource||saved.rateSource.startsWith("cbr"))&&String(live.rateDate||"")>=String(saved.rateDate||"")&&Math.abs(live.effectiveRate-saved.effectiveRate)>1e-9;
+   if(prior?prior!==key:stale)setRateRevision(n=>n+1);
+  };
+  const unsubscribe=subscribePublicRates(apply);void loadPublicRates().then(apply).catch(()=>{});
+  return unsubscribe;
+ },[offerId]);
  // Empty optional values equal omitted values, so returning to today restores the original scenario.
  const dirty=Object.keys({...originalDraft,...draft}).some(key=>(draft[key]??"")!==(originalDraft[key]??""));
  const saveDirty=Object.keys({...savedDraft,...draft}).some(key=>(savedDraft[key]??"")!==(draft[key]??""));
@@ -151,9 +166,9 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,l
  }
  function change(key:string,value:string,manual=true){if(draft[key]===value)return;if(manual)setUserEdited(true);const page=document.querySelector<HTMLElement>("[data-offer-id]");if(page)delete page.dataset.offerSavedVersion;revision.current++;setSaveMessage("");setResult(null);setError("");setPending(true);setDraft(old=>({...old,...powerUnitPatch(key,value,old),...(key==="year"?{productionMonth:"",productionDay:""}:{}),...(key==="fuel"?{hybridKind:"",icePowerKw:"",icePowerHp:"",power30MinKw:"",power30MinHp:"",powerKw:""}:{})}));}
  useEffect(()=>{
-  if(initialScenario && !dirty){setResult(initialScenario.calculation);setPending(false);return;}
-  if(savedCalculation && !dirty){setResult(savedCalculation.calculation);setPending(false);return;}
-  if(!dirty && !autoCalculate){setPending(false);setError("");setResult(null);return;}
+  if(initialScenario && !dirty && !rateRevision){setResult(initialScenario.calculation);setPending(false);return;}
+  if(savedCalculation && !dirty && !rateRevision){setResult(savedCalculation.calculation);setPending(false);return;}
+  if(!dirty && !autoCalculate && !rateRevision){setPending(false);setError("");setResult(null);return;}
   const version=revision.current;
   try{validateCustomerParameters(draft);}catch(e){setPending(false);setError(parameterErrorText(e,draft));return;}
   const controller=new AbortController();
@@ -168,7 +183,7 @@ export function InlineOfferParameters({copyOffer,initialScenario,priceIdentity,l
    finally{if(!controller.signal.aborted && version===revision.current)setPending(false);}
   },600);
   return ()=>{clearTimeout(timer);controller.abort();};
- },[draft,dirty,offerId,autoCalculate]);
+ },[draft,dirty,offerId,autoCalculate,rateRevision]);
  const deliveryQuote=quoteCityDelivery(draft.deliveryCity,deliveryMarket);
  const showCalculation=dirty || Boolean(result);
  // A seller price is not a stale delivered estimate: keep its explicit label while missing data blocks calculation.

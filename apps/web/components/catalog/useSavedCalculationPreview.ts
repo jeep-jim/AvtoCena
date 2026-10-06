@@ -1,10 +1,13 @@
 "use client";
+import {subscribePublicRates} from "../../lib/catalog/public-rates-client";
 import {useEffect,useState} from "react";
 import type {SavedCalculationPreview} from "../../lib/catalog/saved-calculation-preview";
 type Value={market:string;sourceGroup:string;preview:SavedCalculationPreview}|null;
 const listeners=new Map<string,Set<(value:Value)=>void>>();
 const known=new Map<string,{value:Value;at:number}>();
 const queued=new Set<string>();
+let stopRates:(()=>void)|undefined;
+let rateKey="";
 let timer:ReturnType<typeof setTimeout>|undefined;
 function queue(id:string){queued.add(id);if(!timer)timer=setTimeout(flush,0);}
 async function flush(){
@@ -34,12 +37,12 @@ export function useSavedCalculationPreview(offer:any):SavedCalculationPreview|un
    const source=offer.sourceId||offer.sourceGroup;
    if(entry.market===offer.market && (!source||source===entry.sourceGroup))setValue(entry.preview);
   };
-  if(!listeners.size){window.addEventListener("focus",refresh);window.addEventListener("avtocena:calculation-saved",refresh);}
+  if(!listeners.size){stopRates=subscribePublicRates(rates=>{const key=JSON.stringify(rates.map(r=>[r.currency,r.effectiveRate,r.rateDate]));if(rateKey&&key!==rateKey)refresh();rateKey=key;});window.addEventListener("focus",refresh);window.addEventListener("avtocena:calculation-saved",refresh);}
   const set=listeners.get(offer.id)||new Set();set.add(receive);listeners.set(offer.id,set);
   const cached=known.get(offer.id);
   if(cached && Date.now()-cached.at<1000)receive(cached.value);else queue(offer.id);
   return()=>{set.delete(receive);if(!set.size)listeners.delete(offer.id);
-   if(!listeners.size){window.removeEventListener("focus",refresh);window.removeEventListener("avtocena:calculation-saved",refresh);}
+   if(!listeners.size){stopRates?.();stopRates=undefined;window.removeEventListener("focus",refresh);window.removeEventListener("avtocena:calculation-saved",refresh);}
   };
  },[offer.id,offer.market,offer.sourceId,offer.sourceGroup]);
  return value;

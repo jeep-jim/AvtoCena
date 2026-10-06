@@ -55,7 +55,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
  useEffect(()=>{
   if(!editorSection)return;
   setTab(editorSection==='buyers'?'photos':['offices','requisites','markets'].includes(editorSection)?'about':'cars');
-  if(['overview','profile'].includes(editorSection)){const win=top.current?.ownerDocument.defaultView;win?.scrollTo({top:0,behavior:'instant'});}
+  if(['overview','profile'].includes(editorSection)&&top.current?.ownerDocument!==document){const win=top.current?.ownerDocument.defaultView;win?.scrollTo({top:0,behavior:'instant'});}
  },[editorSection]);
  const logo=<>{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt={`Логотип ${s.name}`} className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt={`Логотип ${s.name}`} className="dealer-logo-dark"/></>:<img className="dealer-default-logo" src="/logo/avtocena-mark-dark.svg" alt="АвтоЦена"/>}</>;
  return <div ref={top} className="dealer-profile mx-auto w-full max-w-[1500px] px-4 md:px-8" onClickCapture={editorSection?e=>{if((e.target as HTMLElement).closest('a'))e.preventDefault();}:undefined}>
