@@ -42,9 +42,16 @@ jobs:
           EXPECTED_RELEASE: ${{ github.sha }}
         run: |
           node --input-type=module <<'JS'
+          import {execFileSync} from 'node:child_process';
           let ready=false;
           for(let i=0;i<90;i++){
-            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&d.releaseSha===process.env.EXPECTED_RELEASE){ready=true;break;}}catch{}
+            try{const r=await fetch('https://avtocena.com/api/health',{signal:AbortSignal.timeout(15000)});const d=await r.json();if(d.ok&&/^[0-9a-f]{40}$/.test(d.releaseSha)){
+              if(d.releaseSha!==process.env.EXPECTED_RELEASE){
+                execFileSync('git',['fetch','--no-tags','--depth=100','origin',d.releaseSha],{stdio:'ignore'});
+                execFileSync('git',['merge-base','--is-ancestor',process.env.EXPECTED_RELEASE,d.releaseSha],{stdio:'ignore'});
+              }
+              ready=true;break;
+            }}catch{}
             await new Promise(r=>setTimeout(r,10000));
           }
           if(!ready)throw Error('CIF web release not confirmed; existing stock retained');
