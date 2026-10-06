@@ -79,7 +79,7 @@ jobs:
           revision-core-fraction: 100
           revision-concurrency: 4
           revision-provisioned: 1
-          revision-execution-timeout: 30
+          revision-execution-timeout: 120
           revision-env: |
             NODE_ENV=production
             NEXT_PUBLIC_SITE_URL=https://avtocena.com

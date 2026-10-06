@@ -74,7 +74,7 @@ try {
     }
     await page.getByRole('button', {name: 'Пользователь', exact: true}).click(); assert.equal(await page.locator('.account-welcome-background').getAttribute('src'), '/api/site-media/' + '1'.repeat(64));
     await page.goto(origin + '/login?role=team'); await page.locator('#account-login-form').getByRole('heading',{name:'Автодилер',exact:true}).waitFor(); assert.equal(await page.getByText('Вход для команды', {exact: true}).count(), 0);
-    let saved; await page.route('**/api/crm/site-media', route => route.fulfill({json: {url: '/api/site-media/' + 'a'.repeat(64)}}));
+    let saved; await page.route('**/api/crm/site-media', route => route.fulfill({json: route.request().headers()['content-type']?.includes('application/json')&&route.request().postDataJSON().action==='start'?{token:'fixture-token',chunkSize:2097152}:{url: '/api/site-media/' + 'a'.repeat(64)}}));
     await page.route('**/api/crm/public-features', route => {saved = route.request().postDataJSON(); return route.fulfill({json: {...saved, version: 1}});});
     await page.goto(origin + '/crm/site'); await page.evaluate(t => document.documentElement.setAttribute('data-theme', t), theme); assert.equal(await page.locator('input[type="file"]').count(), 17);
     await page.getByLabel('Загрузить фон: Пользователь', {exact: true}).setInputFiles({name: 'banner.webp', mimeType: 'image/webp', buffer: picture});

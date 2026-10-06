@@ -5,7 +5,14 @@ export async function GET(req: Request, {params}: {params: Promise<{id: string}>
   if(!/^[a-f0-9]{64}(\.mp4)?$/.test(id))return new Response(null,{status:404});
   try {
     const video=id.endsWith('.mp4');
-    const file=await getJsonStorage().getBinary?.(`settings/account-media/${video?id:id+'.webp'}`);
+    const storage=getJsonStorage();
+    // Large video responses exceed the container limit; Object Storage serves ranges directly.
+    if(video&&storage.createBinaryDownloadUrl){
+      if(storage.binaryExists&&!(await storage.binaryExists(`settings/account-media/${id}`)))return new Response(null,{status:404});
+      const url=await storage.createBinaryDownloadUrl(`settings/account-media/${id}`,3600);
+      if(url)return new Response(null,{status:307,headers:{Location:url,'Cache-Control':'no-store'}});
+    }
+    const file=await storage.getBinary?.(`settings/account-media/${video?id:id+'.webp'}`);
     if(!file)return new Response(null,{status:404});
     const bytes=new Uint8Array(file.data);
     const headers:Record<string,string>={'Content-Type':video?'video/mp4':'image/webp','Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff','Accept-Ranges':'bytes'};
