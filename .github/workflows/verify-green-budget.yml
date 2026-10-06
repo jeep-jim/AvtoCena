@@ -1,5 +1,6 @@
 name: Verify green corner budget
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'apps/web/**'
@@ -62,7 +63,7 @@ jobs:
           console.log(JSON.stringify({release:process.env.EXPECTED_RELEASE,total:result.total,checked:result.items.length}));
           JS
       - name: Live desktop and mobile budget controls
-        if: github.event_name == 'workflow_run'
+        if: github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch'
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/green-browser/node_modules/playwright/index.mjs
           LIVE_ORIGIN: https://avtocena.com

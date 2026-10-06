@@ -37,10 +37,16 @@ try {
   const context=await browser.newContext({viewport:{width,height:900}});
   if(!live)await context.route('**/api/**',r=>r.fulfill({json:{counts:{},modelCounts:{},items:[]}}));
   const page=await context.newPage();
+  const diagnostics=[];
+  page.on('pageerror',error=>diagnostics.push({type:'pageerror',message:error.message}));
+  page.on('requestfailed',request=>diagnostics.push({type:'requestfailed',url:request.url(),error:request.failure()?.errorText}));
+  await context.tracing.start({screenshots:true,snapshots:true});
+  try {
   await page.goto(origin+(live?'/cars/green?advanced=1':'/cars'),{waitUntil:'domcontentloaded',timeout:90000});
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
   await scope.waitFor({state:'visible',timeout:90000});
+  console.log(JSON.stringify({phase:'filter-panel-ready',width,url:page.url(),expanded:await page.getByRole('button',{name:'Расширенные фильтры',exact:true}).getAttribute('aria-expanded'),priceInputs:await scope.getByRole('textbox',{name:'Цена: от',exact:true}).count()}));
   const price=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Цена: от',exact:true})});
   const volume=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Объём двигателя: от',exact:true})});
   const priceToggle=price.locator('.ac-range-value-toggle').first();
@@ -67,6 +73,14 @@ try {
   const url=new URL(page.url());assert.equal(url.pathname,'/cars/green');assert.equal(url.searchParams.has('fobFrom'),false);assert.equal(url.searchParams.has('fobTo'),false);
   await page.screenshot({path:`${out}/green-${width}.png`,fullPage:true});
   console.log(JSON.stringify({width,url:page.url(),pricePresets:'rubles',enginePresets:'litres',passed:true}));
-  await context.close();
+  } catch(error) {
+   await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true}).catch(()=>{});
+   fs.writeFileSync(`${out}/failure-${width}.html`,await page.content().catch(()=>''));
+   fs.writeFileSync(`${out}/failure-${width}.json`,JSON.stringify({width,url:page.url(),error:String(error),diagnostics},null,2));
+   throw error;
+  } finally {
+   await context.tracing.stop({path:`${out}/trace-${width}.zip`});
+   await context.close();
+  }
  }
 } finally {await browser.close();if(server)await new Promise(r=>server.close(r));}
