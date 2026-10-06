@@ -415,3 +415,12 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
  .entrance-dealer-preview .dealer-inline-preview>.dealer-profile{padding:0;overflow:visible}
  .entrance-dealer-preview .dealer-inline-preview .dealer-dock{position:sticky;bottom:0;margin:0;z-index:45}
 }
+
+/* The inline phone profile must not inherit the entrance artwork text widths. */
+@media(max-width:760px){
+ .account-welcome .entrance-dealer-preview .dealer-profile p{max-width:none;padding-right:0}
+ .account-welcome .entrance-dealer-preview .dealer-identity-divider{width:100%}
+ .account-welcome .entrance-dealer-preview .dealer-identity-title h1{padding:0;margin:0;text-align:center}
+ .entrance-dealer-preview .dealer-inline-preview .dealer-dock{border-radius:24px 24px 0 0}
+ .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview .dealer-dock{border-radius:0 0 24px 24px}
+}
