@@ -5,7 +5,7 @@ import {createRequire} from 'node:module';
 import {canReplyCustomerReview} from '../apps/web/lib/account/review-moderation';
 const require=createRequire(import.meta.url);
 test('review reply belongs to the verified dealer or platform owner/administrator',()=>{
- const dealer:any={id:'d',role:'dealer',companyId:'dealer',dealerApproved:true};
+ const dealer:any={id:'d',role:'dealer',companyId:'dealer',dealerApproved:true,permissions:{replyReviews:true}};
  assert.equal(canReplyCustomerReview(dealer,'dealer'),true);
  for(const actor of [null,{...dealer,companyId:'other'},{...dealer,status:'disabled'},{...dealer,dealerApproved:false},{id:'m',role:'manager',companyId:'dealer_topavto'}])assert.equal(canReplyCustomerReview(actor as any,'dealer'),false);
  for(const role of ['owner','admin'])assert.equal(canReplyCustomerReview({id:'a',role,companyId:'dealer_topavto'} as any,'dealer'),true);
@@ -19,7 +19,7 @@ test('reply endpoint enforces tenant, origin and publication and public DTO hide
  };
  try{const result=await build({entryPoints:['apps/web/app/api/dealers/[id]/reviews/route.ts'],bundle:true,platform:'node',format:'cjs',packages:'external',write:false,plugins:[{name:'mocks',setup(b){b.onResolve({filter:/^@\//},a=>mocks[a.path]?{path:a.path,namespace:'mock'}:undefined);b.onLoad({filter:/.*/,namespace:'mock'},a=>({contents:mocks[a.path],loader:'ts'}));}}]});const module={exports:{} as any};new Function('require','module','exports',result.outputFiles[0].text)(require,module,module.exports);
  const context={params:Promise.resolve({id:'dealer'})};const post=(text='Спасибо за отзыв!',origin='https://avtocena.com')=>module.exports.POST(new Request('https://avtocena.com/api/dealers/dealer/reviews',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({reviewId:state.review.id,text})}),context);
- assert.equal((await post()).status,403);state.actor={id:'d',role:'dealer',dealerApproved:true,companyId:'other'};assert.equal((await post()).status,403);state.actor.companyId='dealer';assert.equal((await post('Спасибо','https://evil.example')).status,403);assert.equal((await post('  ')).status,400);assert.equal(state.writes,0);
+ assert.equal((await post()).status,403);state.actor={id:'d',role:'dealer',dealerApproved:true,companyId:'other',permissions:{replyReviews:true}};assert.equal((await post()).status,403);state.actor.companyId='dealer';assert.equal((await post('Спасибо','https://evil.example')).status,403);assert.equal((await post('  ')).status,400);assert.equal(state.writes,0);
  assert.equal((await post()).status,200);assert.equal(state.review.reply.authorId,'d');assert.equal(state.review.text,'Отзыв клиента');assert.equal(state.review.rating,4.2);
  const output=await (await module.exports.GET(new Request('https://avtocena.com'),context)).json();assert.equal(output.items[0].reply.text,'Спасибо за отзыв!');assert.equal(JSON.stringify(output).includes('private-customer'),false);assert.equal('authorId' in output.items[0].reply,false);assert.match(output.items[0].avatarUrl,/reviews\/[a-f0-9]{64}\/avatar$/);
  state.review.status='hidden';assert.equal((await post()).status,400);state.review.status='published';state.dealerStatus='disabled';assert.equal((await post()).status,403);assert.equal(state.writes,1);

@@ -1,4 +1,5 @@
 "use client";
+import {DealerReviewsManager} from "./DealerReviewsManager";
 import {DealerTelegramSettings} from './DealerTelegramSettings';
 import {DealerLivePreview} from './DealerLivePreview';
 import {EMPTY_REQUISITES} from '@/lib/dealers/requisites';
@@ -47,6 +48,8 @@ export function DealerEditor({
     [message, setMessage] = useState(""),
     [tab, setTab] = useState("overview");
   useEffect(()=>{if(new URLSearchParams(window.location.search).get("tab")==="telegram")setTab("telegram");},[]);
+  const [reviewCount,setReviewCount]=useState<number|null>(null);
+  useEffect(()=>{if(demo)return;const controller=new AbortController();fetch(`/api/crm/reviews?dealerId=${encodeURIComponent(initial.dealerId)}`,{signal:controller.signal,cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d)setReviewCount(d.total);}).catch(()=>{});return()=>controller.abort();},[initial.dealerId,demo]);
   const [offerMode,setOfferMode]=useState<OfferAvailability>('order');
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
@@ -171,6 +174,7 @@ export function DealerEditor({
           ["markets", "Каталог и рынки",Globe],
           ...(s.dealerId!=='dealer_topavto' ? [["rates", "Услуги компании",Wallet],["subscription",administration?"Подписка":"Доступ",ShieldCheck]] : []),
           ...(administration ? [["administration","Доступ",ShieldCheck]] : []),
+          ["reviews", "Отзывы",BookOpen],
           ["telegram", "Telegram",Send],
         ].map(([id,label,Icon]:any)=><button type="button" key={id} disabled={pendingUploads>0} aria-selected={tab===id} className={button} onClick={()=>setTab(id)}><Icon size={19}/>{label}</button>)}
       </nav><div className="dealer-sidebar-save">{<button type="button" className={button+' dealer-saved-button'} disabled={busy||pendingUploads>0||!!conflict||(!dirty&&!demo)} onClick={()=>void save()} aria-live="polite">{!dirty&&!busy&&!pendingUploads&&<Check size={18}/>} {pendingUploads?'Загружаем фотографии…':busy?'Сохраняем…':message.startsWith('Не удалось сохранить')?'Повторить сохранение':demo?'Сохранено в демо':dirty?'Сохранить сейчас':'Сохранено'}</button>}{!demo&&s.dealerId!=='dealer_topavto'&&<Link href="/dealer-cabinet/documents" className={button+' mt-3 flex justify-center'}>Клиенты и документы</Link>}<div className="dealer-sidebar-feedback">{saveFeedback}</div></div></div>
@@ -178,10 +182,11 @@ export function DealerEditor({
 
       {tab==='overview'&&<div className="space-y-5">
        <section className="dealer-editor-panel"><p className="dw-eyebrow">Ваша компания</p><h2 className="dw-title">{s.name}</h2><p className="dw-muted">Страница, автомобили и обращения — всё начинается здесь.</p><div className="mt-5 flex flex-wrap gap-3"><button type="button" className="dw-primary" onClick={()=>setTab('offers')}><Car size={18}/> Добавить автомобиль</button><Link onClick={openDemoPreview} className={button+' inline-flex items-center gap-2'} href={demo?'#':`/dealers/${s.dealerId}?preview=1`} target={demo?undefined:'_blank'}>Посмотреть страницу <ArrowUpRight size={16}/></Link></div></section>
-       <div className="dw-grid dealer-overview-stats">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
+       <div className="dw-grid dealer-overview-stats">{[['Автомобили',s.offers.filter(o=>o.status==='published').length,'offers'],['Фото выдач',s.buyerPhotos.length,'buyers'],['Направления',dealerMarkets(s.catalogMarkets).length,'markets'],['Отзывы',demo?0:reviewCount??'—','reviews']].map(([label,n,id])=><button key={String(id)} type="button" className="dw-card text-left" onClick={()=>setTab(String(id))}><span className="dw-muted">{label}</span><strong className="dw-stat">{n}</strong></button>)}</div>
        <section className="dealer-editor-panel"><h2 className="font-bold text-xl">Подготовьте компанию к работе</h2>{[['Название и описание',!!s.name&&!!s.description,'profile'],['Адрес офиса',s.offices.length>0,'offices'],['Направления каталога',dealerMarkets(s.catalogMarkets).length>0,'markets'],['Страница опубликована',s.profileEnabled,'profile']].map(([label,done,id])=><button type="button" className="dw-row w-full text-left" key={String(label)} onClick={()=>setTab(String(id))}><span>{label}</span><span className="dw-badge">{done?'Готово':'Настроить'}</span></button>)}</section>
        {s.dealerId==='dealer_topavto'&&<section className="dealer-editor-panel"><h2 className="font-bold">ТопАвто · компания платформы</h2><p className="dw-muted mt-2">Общие расценки шести рынков уже настроены в разделе «Рынки и расчёт». Здесь вы управляете своей страницей и отдельно добавленными автомобилями.</p></section>}
       </div>}
+      {tab==='reviews'&&(demo?<section className="dealer-editor-panel">Отзывы появятся после работы с покупателями.</section>:<DealerReviewsManager dealerId={s.dealerId} onCount={setReviewCount}/>)}
       {tab==='telegram'&&<DealerTelegramSettings dealerId={s.dealerId} demo={demo}/>}
       {tab==='subscription'&&<section className="dealer-editor-panel"><p className="dw-eyebrow">Мой доступ</p><h2 className="dw-title">{fullAccess?'Все возможности':'Базовый доступ'}</h2><p className="dw-muted">{fullAccess?`Доступ до ${dealerAccessLevel(s.dealerId,membership).until?new Date(dealerAccessLevel(s.dealerId,membership).until).toLocaleDateString('ru-RU'):'окончания демо'}.`:'Общий каталог остаётся доступен. Собственные автомобили, фото выдач и расширенное оформление включаются с подпиской.'}</p><div className="dw-grid mt-5">{[[1,program.monthRub],[6,program.halfYearRub],[12,program.yearRub]].map(([m,price])=><div key={m} className="dw-card"><span className="dw-muted">{m===12?'Год':m===6?'6 месяцев':'Месяц'}</span><strong className="dw-stat">{price.toLocaleString('ru-RU')} ₽</strong></div>)}</div><p className="dw-muted mt-5">Комиссия по завершённым продажам из заявок АвтоЦены — {program.commissionPercent}% {program.commissionBasis==='sale'?'от стоимости проданного автомобиля':'от вознаграждения дилера'}. Подписка оплачивается отдельно. Для продления свяжитесь с командой АвтоЦены через вашу заявку на подключение.</p></section>}
       {tab==='administration'&&administration}

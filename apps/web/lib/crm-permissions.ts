@@ -1,5 +1,6 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
+ replyReviews:{label:'Ответы на отзывы',description:'Ответ компании на отзывы и изменение ответа. Для дилера — только своя компания.'},
  deleteReviews:{label:'Удаление отзывов',description:'Удаление опубликованных отзывов с подтверждением. Это право выдаёт только владелец ресурса.'},
  chat:{label:'Чат',description:'Личные и общие переписки, комнаты команды, переписка по доступным заявкам.'},
  analytics:{label:'Аналитика сайта',description:'Посещаемость, источники переходов и показатели сайта в обзоре. Доступ к ленте команды настраивается отдельно.'},
@@ -23,7 +24,9 @@ const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documen
 const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords','site']);
 export function isAdministrativeCrmPermission(key:CrmPermission){return administrative.has(key);}
 export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission):boolean {
- if(!user||user.status==='disabled'||!['owner','admin','manager'].includes(user.role))return false;
+ if(!user||user.status==='disabled')return false;
+ if(user.role==='dealer')return ['replyReviews','deleteReviews'].includes(key)&&user.permissions?.[key]===true;
+ if(!['owner','admin','manager'].includes(user.role))return false;
  if(user.role==='owner')return true;
  if(user.role==='manager'&&isAdministrativeCrmPermission(key))return false;
  if(key==='analytics'&&user.permissions?.analytics===undefined)return hasCrmPermission(user,'activityAll');
@@ -37,5 +40,5 @@ export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, �
 export const CRM_PERMISSION_GROUPS:{label:string;keys:CrmPermission[]}[]=[
  {label:'Разделы и общение',keys:['chat','analytics','game']},
  {label:'Клиенты, заявки и документы',keys:['viewAll','editClients','editLeads','assign','documents','calculations','deleteRecords','activityAll']},
- {label:'Управление',keys:['staff','settings','site','dealers','deleteReviews']},
+ {label:'Управление',keys:['staff','settings','site','dealers','replyReviews','deleteReviews']},
 ];
