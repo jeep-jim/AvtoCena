@@ -19,3 +19,13 @@ export function hashRows(rows) {
   }
   return hash.update(']').digest('hex');
 }
+
+// Keep only a compact immutable baseline while candidate payloads are released.
+export function snapshotCatalogRows(rows) {
+  return Object.freeze({ count: rows.length, hash: hashRows(rows) });
+}
+export function assertCatalogRowsUnchanged(snapshot, rows, market) {
+  if (rows.length !== snapshot.count || hashRows(rows) !== snapshot.hash) {
+    throw new Error(`catalog_target_changed_during_prepare:${market}`);
+  }
+}

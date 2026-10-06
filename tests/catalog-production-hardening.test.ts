@@ -196,7 +196,8 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
   assert.ok(standardMarketPublisher.indexOf('logPublicationMemory("preflight_complete")') < standardMarketPublisher.indexOf("await acquirePublishLock()"));
   assert.ok(standardMarketPublisher.indexOf("await acquirePublishLock()") < standardMarketPublisher.indexOf("manifest = await persistCatalogOffers"));
-  assert.match(standardMarketPublisher, /catalog_target_changed_during_prepare/);
+  assert.match(standardMarketPublisher, /assertCatalogRowsUnchanged\(preparedTargetSnapshot, latestTargetRows, market\)/);
+  assert.ok(standardMarketPublisher.indexOf("const preparedTargetSnapshot = snapshotCatalogRows(currentMarketRows)") < standardMarketPublisher.indexOf("currentMarketRows = []"));
   assert.match(standardMarketPublisher, /currentRetainedRows = currentRetainedRows\.map\(\(offer\) => freshIds\.has\(offer\.id\)[\s\S]*compactPublicStorageOffer\(offer\)/);
   assert.match(standardMarketPublisher, /return \{offer:compactPublicStorageOffer\(prepared\),reason:"ok"\}/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);

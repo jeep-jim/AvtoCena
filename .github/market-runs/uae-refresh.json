@@ -1,9 +1,9 @@
 {
-  "operation": "owner-market-recovery-20261004",
+  "operation": "owner-urgent-market-recovery-20261006",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
   "resetCursors": true,
-  "reason": "Owner-authorized fresh collection with dated retention exclusion, bounded memory and unchanged source-access and quality guards."
+  "reason": "Owner requested fresh collection and report. Fix false target-changed guard after releasing rows; preserve all source access, quality, power, retention and storage safeguards."
 }

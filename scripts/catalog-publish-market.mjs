@@ -12,7 +12,7 @@ import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
 import { catalogPublicCountGuard } from "./lib/catalog-public-count-guard.mjs";
-import { hashRows } from "./lib/catalog-row-hash.mjs";
+import { hashRows, snapshotCatalogRows, assertCatalogRowsUnchanged } from "./lib/catalog-row-hash.mjs";
 import { isCommercialInventoryOffer as isCommercial } from "./lib/catalog-vehicle-scope.mjs";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
@@ -364,6 +364,7 @@ function rejectFreshOffer(id, reason) {
   if (freshOfferMetaById.has(key)) freshOfferRejectionReasonById.set(key, String(reason || "unknown"));
 }
 let currentMarketRows = await readMarketOffers(market);
+const preparedTargetSnapshot = snapshotCatalogRows(currentMarketRows);
 const reserveRows = sellerInventory ? await readMarketMaintenanceOffers(market, {excludeIds: new Set(currentMarketRows.map(row => row.id)), withinRetention:true}) : [];
 logPublicationMemory("target_reserve_loaded");
 const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
@@ -717,14 +718,11 @@ if (regressionBlocked) {
     // markets. Serialize only the generation snapshot and writes. Recheck the
     // target market and storage after acquiring the lease; no stale snapshot is
     // allowed to reach persistence.
-    const preparedTargetHash = hashRows(currentMarketRows);
     await acquirePublishLock();
     if (process.env.JSON_STORAGE_DRIVER === "object") await import("./catalog-storage-preflight.mjs");
     expectedBaseGenerationId = await catalogGenerationId();
     const latestTargetRows = await readMarketOffers(market);
-    if (latestTargetRows.length !== currentMarketRows.length || hashRows(latestTargetRows) !== preparedTargetHash) {
-      throw new Error(`catalog_target_changed_during_prepare:${market}`);
-    }
+    assertCatalogRowsUnchanged(preparedTargetSnapshot, latestTargetRows, market);
     await loadPreservedMarkets();
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     logPublicationMemory("before_persist");
