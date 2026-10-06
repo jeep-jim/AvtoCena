@@ -13,6 +13,8 @@ export function deliveryPricingBasis(snapshot: any): DeliveryPricingBasis | unde
 }
 
 export function priceCardForCity(offer: any, city: string) {
+ const delivered=!offer.savedCalculationPreview && offer.deliveredCalculationPreview;
+ if(delivered && Number(delivered.totalRub)>0)offer={...offer,totalRub:delivered.totalRub,catalogPricingMode:undefined,previousTotalRub:null,priceDeltaRub:null,calculationSnapshot:{currencyRate:delivered.currencyRate,deliveryPricingBasis:delivered.deliveryPricingBasis}};
  const quote = quoteCityDelivery(city, offer.market);
  const preview = Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
  const totalRub = Number(preview?.totalRub ?? offer.totalRub);

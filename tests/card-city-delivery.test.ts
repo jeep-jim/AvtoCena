@@ -40,3 +40,15 @@ test('compact snapshots preserve delivery replay basis and prefer fresh ledger o
  const compact=compactPricingSnapshot({market:'korea',calculationSnapshot:snapshot} as any);
  assert.deepEqual(compact.deliveryPricingBasis,{subtotalRub:1065000,deliveryRub:65000,percents:[]});
 });
+
+test('seller preview replays the detail calculation and city without changing the source price',()=>{
+ const offer={market:'korea',catalogPricingMode:'seller',sellerPriceRub:968248,totalRub:null,deliveredCalculationPreview:{totalRub:1841638,deliveryPricingBasis:{subtotalRub:1841638,deliveryRub:0,percents:[]}}};
+ const calculated=priceCardForCity(offer,'Новокузнецк').offer;
+ assert.equal(calculated.totalRub,1961638);
+ assert.equal(calculated.catalogPricingMode,undefined);
+ assert.equal(calculated.sellerPriceRub,968248);
+ assert.equal(offer.totalRub,null);
+ assert.equal(priceCardForCity({...offer,deliveredCalculationPreview:undefined},'Новокузнецк').offer.totalRub,null);
+ const saved={...offer,totalRub:2100000,savedCalculationPreview:{version:'saved'},calculationSnapshot:{deliveryPricingBasis:{subtotalRub:2100000,deliveryRub:0,percents:[]}}};
+ assert.equal(priceCardForCity(saved,'Новокузнецк').offer.totalRub,2220000);
+});

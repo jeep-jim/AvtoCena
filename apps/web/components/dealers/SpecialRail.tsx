@@ -2,8 +2,9 @@
 import {useSelectedCity} from "@/lib/location/selected-city";
 import {calculateSpecial} from "@/lib/dealers/showcase-model";
 import Link from "next/link";
+import {PublicSheet} from "@/components/ui/PublicSheet";
 import {useEffect,useRef,useState,type ReactNode} from "react";
-function DesktopScrollableRail({children}:{children:ReactNode}) {
+function DesktopScrollableRail({children,expanded=false}:{children:ReactNode;expanded?:boolean}) {
   const rail=useRef<HTMLDivElement>(null);
   const [edges,setEdges]=useState({left:false,right:false});
   useEffect(()=>{
@@ -21,8 +22,8 @@ function DesktopScrollableRail({children}:{children:ReactNode}) {
     el.scrollBy({left:direction*Math.max(240,el.clientWidth-80),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   }
   return <div className="relative mt-4">
-    <div ref={rail} className="ac-hide-scrollbar flex gap-4 overflow-x-auto pb-3">{children}</div>
-    {([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-red-500 shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:flex ${direction===-1?"left-0":"right-0"}`}>
+    <div ref={rail} className={expanded?"grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>a]:w-full":"ac-hide-scrollbar flex gap-4 overflow-x-auto pb-3"}>{children}</div>
+    {!expanded && ([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-red-500 shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:flex ${direction===-1?"left-0":"right-0"}`}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={direction===-1?"m14 5-7 7 7 7":"m10 5 7 7-7 7"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
     </button>)}
   </div>;
@@ -46,22 +47,25 @@ export type SpecialRailItem = {
 export function SpecialRail({
   heading,
   items,
+  expanded=false,
   kinds=["order","stock"],
 }: {
   heading: string;
+  expanded?: boolean;
   items: SpecialRailItem[];
   kinds?: readonly ("order"|"stock")[];
 }) {
   const city=useSelectedCity();
+  const [allKind,setAllKind]=useState<"order"|"stock"|null>(null);
   items=items.map(item=>{if(!item.calculation)return item;const c=calculateSpecial(item.calculation.showcase,item.calculation.offer,city);return {...item,price:c.totalRub,city:c.city,daysFrom:c.daysFrom,daysTo:c.daysTo};});
   if (!items.length) return null;
   return (
     <>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section data-site-block={kind==='stock'?'stock':'specials'} key={kind} className="my-5 min-w-0">
-      <h2 className="text-lg font-black leading-tight md:text-2xl">
+      <div className="flex items-end justify-between gap-3"><h2 className="text-lg font-black leading-tight md:text-2xl">
         {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
-      </h2>
+      </h2>{!expanded&&<button type="button" onClick={()=>setAllKind(kind)} className="ac-market-all-link shrink-0 text-sm font-black" aria-label={kind==="stock"?"Все автомобили в наличии":"Все спецпредложения"}>Все →</button>}</div>
       {visible[0].subtitle && visible.every(o=>o.subtitle===visible[0].subtitle&&o.heading===visible[0].heading)&&<p className="mt-1 break-words text-sm leading-relaxed text-[var(--ac-muted)]">{visible[0].subtitle}</p>}
-      <DesktopScrollableRail>
+      <DesktopScrollableRail expanded={expanded}>
         {visible.map((o) => (
           <Link
             key={o.href}
@@ -87,6 +91,6 @@ export function SpecialRail({
           </Link>
         ))}
       </DesktopScrollableRail>
-    </section>:null;})}</>
+    </section>:null;})}{allKind&&<PublicSheet title={allKind==="stock"?"Автомобили в наличии":heading} onClose={()=>setAllKind(null)} maxWidth={1100}><div className="px-5 pb-5"><SpecialRail heading={heading} items={items} kinds={[allKind]} expanded/></div></PublicSheet>}</>
   );
 }

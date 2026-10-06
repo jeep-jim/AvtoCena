@@ -219,5 +219,7 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
   const { attachJapanDeliveredPreviews } = await import("./japan-delivered-preview");
   const {attachSavedCalculationPreviews}=await import("./saved-calculation-previews");
   const saved=await attachSavedCalculationPreviews(identified).catch(()=>identified);
-  return attachJapanDeliveredPreviews(saved, configs.get("japan"));
+  const {attachSellerDeliveredPreviews}=await import("./seller-delivered-preview");
+  const delivered=await attachSellerDeliveredPreviews(saved,markets);
+  return attachJapanDeliveredPreviews(delivered, configs.get("japan"));
 }

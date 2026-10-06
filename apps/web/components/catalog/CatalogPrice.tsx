@@ -23,6 +23,7 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;
 }) {
+  if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview) return <PriceTrend offer={offer} label={label} statusLabel="Расчёт под ключ" dense={dense} priceClassName={priceClassName} />;
   if (isGreenCornerOffer(offer)) {
     const preview = !offer.savedCalculationPreview && Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
     if (preview || offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0) {

@@ -78,6 +78,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     ...o,
     japanDeliveredPreview: savedPreview ? undefined : offer.japanDeliveredPreview,
     savedCalculationPreview: savedPreview,
+    deliveredCalculationPreview: savedPreview ? undefined : offer.deliveredCalculationPreview,
     totalRub: visibleRub || null,
     previousTotalRub: visibleRub ? o.previousTotalRub : null,
     priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
