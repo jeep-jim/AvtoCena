@@ -2,10 +2,9 @@
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {DealerProfileContent} from './DealerProfileContent';
-import {CatalogMarketFlag} from '@/components/catalog/CatalogMarketFlag';
+import {DealerMarketChips} from './DealerMarketChips';
 import {publicDealerProfile,type PublicDealerProfile} from '@/lib/dealers/public-profile';
 import {publicRail} from '@/lib/dealers/public-rail';
-import {DEALER_MARKETS} from '@/lib/dealers/catalog-markets';
 import {applyBasicAccess} from '@/lib/dealers/program-model';
 import type {DealerShowcase} from '@/lib/dealers/showcase-model';
 
@@ -56,6 +55,6 @@ export function DealerLivePreview({value,published,section,verified,fullAccess}:
  if(!profile)return null;
  return <aside className="dealer-live-preview" aria-label="Мобильный предпросмотр страницы дилера">
   <iframe ref={frame} title="Мобильный предпросмотр дилера" srcDoc={documentHtml}/>
-  {mount&&createPortal(<main className="ac-page-copy dealer-preview-page" style={{background:'var(--ac-bg)',color:'var(--ac-text)',minHeight:'100vh',padding:0}}><style>{`html[data-dealer-editor-preview] body,html[data-dealer-editor-preview] #dealer-preview-root,html[data-dealer-editor-preview] body main.dealer-preview-page{margin:0!important;padding:0!important;border:0!important}html[data-dealer-editor-preview]{--ac-header-height:0px;--ac-public-header-height:0px}html[data-dealer-editor-preview] .dealer-profile-hero{top:0!important}`}</style><DealerProfileContent s={profile} verified={verified} editorSection={section} items={published?.items||(s?publicRail(s):[])} catalog={profile.catalogMarkets.length>0?<section className="dealer-preview-markets" style={{padding:'16px'}}><h2 style={{fontSize:18,fontWeight:750,marginBottom:12}}>Автомобили под заказ</h2><div className="dealer-city-chips">{DEALER_MARKETS.filter(m=>profile.catalogMarkets.includes(m.id)).map(m=><span key={m.id}><CatalogMarketFlag market={m.id}/>{m.label}</span>)}</div></section>:null}/></main>,mount)}
+  {mount&&createPortal(<main className="ac-page-copy dealer-preview-page" style={{background:'var(--ac-bg)',color:'var(--ac-text)',minHeight:'100vh',padding:0}}><style>{`html[data-dealer-editor-preview] body,html[data-dealer-editor-preview] #dealer-preview-root,html[data-dealer-editor-preview] body main.dealer-preview-page{margin:0!important;padding:0!important;border:0!important}html[data-dealer-editor-preview]{--ac-header-height:0px;--ac-public-header-height:0px}html[data-dealer-editor-preview] .dealer-profile-hero{top:0!important}`}</style><DealerProfileContent s={profile} verified={verified} editorSection={section} items={published?.items||(s?publicRail(s):[])} catalog={profile.catalogMarkets.length>0?<section className="dealer-preview-markets" style={{padding:'16px'}}><h2 style={{fontSize:18,fontWeight:750,marginBottom:12}}>Автомобили под заказ</h2><DealerMarketChips markets={profile.catalogMarkets}/></section>:null}/></main>,mount)}
  </aside>;
 }

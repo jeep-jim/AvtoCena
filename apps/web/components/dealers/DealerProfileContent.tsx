@@ -9,10 +9,9 @@ import {DealerRequisites} from './DealerRequisites';
 import {Star,MapPin,BadgeCheck} from 'lucide-react';
 import {useEffect,useRef,useState} from 'react';
 import {DealerLink as Link} from './DealerBrowsingContext';
-import {CatalogMarketFlag} from '@/components/catalog/CatalogMarketFlag';
+import {DealerMarketChips} from './DealerMarketChips';
 import {ChevronDown,ChevronUp,ArrowUpRight,ArrowRight} from 'lucide-react';
 import type {PublicDealerProfile} from '@/lib/dealers/public-profile';
-import {DEALER_MARKETS} from '@/lib/dealers/catalog-markets';
 import {SpecialRail,type SpecialRailItem} from './SpecialRail';
 import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {DealerMap} from './DealerMap';
@@ -87,7 +86,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
    {tab==='about'&&<section className="dealer-sheet dealer-contact-sheet">
     <button type="button" className="dealer-contact-details" onClick={openOffice}>Информация о компании <ArrowUpRight size={16}/></button>
     {s.offices.length>0?<><div className="dealer-office-select"><MapPin size={22}/><label>Адрес офиса<select aria-label="Адрес офиса в профиле" value={office?.id} onChange={e=>setOfficeId(e.target.value)}>{s.offices.map(o=><option key={o.id} value={o.id}>{o.city}, {o.address}</option>)}</select></label></div><DealerMap compact offices={s.offices} selectedId={office?.id} onSelect={setOfficeId}/>{office?.hours&&<div className="dealer-office-hours"><Icon name="clock"/><span><small>Режим работы</small>{office.hours}</span></div>}</>:<p className="dealer-about-text">Компания пока не добавила адреса офисов.</p>}
-    {s.catalogMarkets.length>0&&<><h3 className="dealer-small-heading">Направления доставки</h3><div className="dealer-city-chips">{DEALER_MARKETS.filter(m=>s.catalogMarkets.includes(m.id)).map(m=><span key={m.id}><CatalogMarketFlag market={m.id}/> {m.label}</span>)}</div></>}<DealerRequisites value={s.requisites}/>{photos.length>0&&<div className="dealer-stories"><BuyerGallery title="" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}</section>}
+    {s.catalogMarkets.length>0&&<><h3 className="dealer-small-heading">Направления доставки</h3><DealerMarketChips markets={s.catalogMarkets}/></>}<DealerRequisites value={s.requisites}/>{photos.length>0&&<div className="dealer-stories"><BuyerGallery title="" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}</section>}
    {tab==='photos'&&<>{dealerBanners(s).length>0&&<section className="dealer-media-cover-section"><DealerBannerGallery s={s} media/></section>}{photos.length>0?<div className="dealer-photo-grid"><BuyerGallery title="" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>:<p className="dealer-about-text dealer-muted">Фотографии покупателей появятся здесь после публикации компанией.</p>}{s.offices.some(o=>o.photos.length>0)&&<BuyerGallery title="" dealerName={s.name} images={s.offices.flatMap(o=>o.photos.map(p=>p.url))} autoScroll={false}/>}</>}</div></PublicSheet>}
   {leadOpen&&<LeadDialog request={{mode:'generic',source:'dealer_profile_request',dealerId:s.dealerId}} favorites={[]} onClose={()=>setLeadOpen(false)} preview={!!editorSection||preview} portalDocument={top.current?.ownerDocument}/>}
   <dialog ref={dialog} className="dealer-info-dialog" onClick={e=>{if(e.target===dialog.current)dialog.current.close();}}>
