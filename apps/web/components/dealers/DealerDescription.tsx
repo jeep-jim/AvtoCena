@@ -8,7 +8,7 @@ export function DealerDescription({text}:{text:string}){
   const el=ref.current;if(!el)return;
   let measuredWidth=-1,disposed=false;
   const measure=()=>{
-   if(disposed)return;measuredWidth=el.clientWidth;
+   if(disposed||!el.isConnected||!el.ownerDocument.defaultView)return;measuredWidth=el.clientWidth;
    const doc=el.ownerDocument,style=doc.defaultView!.getComputedStyle(el),probe=doc.createElement('p');
    probe.style.cssText=`position:fixed;visibility:hidden;pointer-events:none;left:-10000px;top:0;width:${el.clientWidth}px;font:${style.font};line-height:${style.lineHeight};white-space:pre-line;overflow-wrap:anywhere;margin:0;padding:0;`;
    doc.body.appendChild(probe);probe.textContent=text;const max=parseFloat(style.lineHeight)*2+1;
