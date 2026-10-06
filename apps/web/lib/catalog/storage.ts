@@ -1,4 +1,4 @@
-import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded} from './inventory-admission';
+import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
@@ -207,7 +207,7 @@ export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   delete operational.publicJapanSoldPriceVerified;
   if (publicJapanSoldIdentityVerified) operational.publicJapanSoldIdentityVerified = true;
   if (publicJapanSoldPriceVerified) operational.publicJapanSoldPriceVerified = true;
-  return { ...offer, inventorySourceDate:catalogInventoryDate(offer), operational };
+  return { ...offer, inventorySourceDate:catalogInventoryDate(offer), grossVehicleWeightKg:catalogGrossVehicleWeightKg(offer), operational };
 }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
@@ -415,7 +415,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
-    inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:offer.grossVehicleWeightKg,vehicleCategory:offer.vehicleCategory,
+    inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:catalogGrossVehicleWeightKg(offer),vehicleCategory:offer.vehicleCategory,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),

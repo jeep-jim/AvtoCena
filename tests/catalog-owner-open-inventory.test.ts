@@ -44,3 +44,14 @@ test('display prefers all affordable stock before luxury, then low power; luxury
  const showcase=selectCatalogShowcaseDiversity(rows.map(x=>({...x,make:x.id,model:x.id,fuel:'petrol'})),5);
  assert.deepEqual(showcase.map(x=>x.id),['low','high','unknown','lux1','lux2']);
 });
+
+
+test('gross mass uses listing-bound labelled kg, never curb mass or another listing',()=>{
+ const row:any={bodyType:'truck',sourceId:'test',sourceOfferId:'a',operational:{sourceSpecifications:{sourceId:'test',sourceOfferId:'a',groups:[{items:[{name:'Gross vehicle weight (kg)',value:'7,500'}]}]}}};
+ assert.equal(heavy(row),true);
+ row.operational.sourceSpecifications.groups[0].items[0].name='Curb weight (kg)';
+ assert.equal(heavy(row),false);
+ row.operational.sourceSpecifications.groups[0].items[0].name='Gross vehicle weight (kg)';
+ row.operational.sourceSpecifications.sourceOfferId='b';
+ assert.equal(heavy(row),false);
+});

@@ -23,13 +23,28 @@ export function catalogInventoryAgeDecision(offer:any,now=new Date()){
  }
  return {eligible:Number.isInteger(year)&&year>=current-6&&year<=current,basis:'source_year'};
 }
+/** Only exact, listing-bound permitted gross mass; never payload or curb mass. */
+export function catalogGrossVehicleWeightKg(offer:any):number|undefined {
+ const direct=Number(offer.grossVehicleWeightKg);
+ if(Number.isFinite(direct)&&direct>0)return direct;
+ const op=offer.operational||{},snapshot=op.sourceSpecifications;
+ if(op.semanticEvidence?.grossVehicleWeightKg?.status==='conflict'||!snapshot||snapshot.sourceId!==offer.sourceId||snapshot.sourceOfferId!==offer.sourceOfferId)return;
+ const values:number[]=[];
+ for(const group of snapshot.groups||[])for(const item of group.items||[]){
+  const label=String(item.name||'').normalize('NFKC'),raw=String(item.value||'').normalize('NFKC').trim().replace(/(?<=\d)[ ,](?=\d{3}(?:\D|$))/g,'');
+  if(!/最大允许总质量|最大总质量|总质量|차량총중량|총중량|полная.*масса|разреш[её]нная.*масса|gross.*(?:weight|mass)|gvwr/i.test(label))continue;
+  if(!/kg|кг|킬로그램|千克/i.test(label+' '+raw)||!/^\d{3,5}(?:\s*(?:kg|кг|킬로그램|千克))?$/i.test(raw))continue;
+  values.push(Number(raw.match(/^\d+/)?.[0]));
+ }
+ const unique=[...new Set(values)];if(unique.length===1&&unique[0]>0)return unique[0];
+}
 /** GVWR is the permitted loaded mass; curb weight is never a substitute. */
 export function catalogHeavyVehicleExcluded(offer:any){
  const text=[offer.make,offer.model,offer.trim,offer.bodyType].join(' ');
  if(/forklift|excavator|bulldozer|tractor|machinery|погрузчик|экскаватор|трактор|工程机械/i.test(text))return true;
  const category=String(offer.vehicleCategory||'').toUpperCase();
  const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia)\b|грузов|автобус|货车|卡车|客车|巴士/i.test(text)||/^N[123]|^M[23]/.test(category);
- const mass=Number(offer.grossVehicleWeightKg);
+ const mass=Number(catalogGrossVehicleWeightKg(offer));
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;
 }
