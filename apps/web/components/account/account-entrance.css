@@ -423,4 +423,6 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
  .account-welcome .entrance-dealer-preview .dealer-identity-title h1{padding:0;margin:0;text-align:center}
  .entrance-dealer-preview .dealer-inline-preview .dealer-dock{border-radius:24px 24px 0 0}
  .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview .dealer-dock{border-radius:0 0 24px 24px}
+ /* Clip the sticky cover too, without creating a scroll container around the dock. */
+ .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview{clip-path:inset(0 round 0 0 24px 24px)}
 }
