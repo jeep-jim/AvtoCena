@@ -16,3 +16,18 @@ test('derived budget index reserves eight copies of active projections without a
   await assert.rejects(catalogPreflightInputBytes({...storage, listObjects: async () => [{key: 'other', size: 1}]}, {CATALOG_STORAGE_PREFLIGHT_MODE: 'budget-index'}));
   await assert.rejects(catalogPreflightInputBytes(storage, {CATALOG_REBUILD_INPUT_DIR: '/missing-intake-must-still-fail'}), {code: 'ENOENT'});
 });
+
+test('intake estimate excludes only raw source responses that publication discards',async()=>{
+ const fs=await import('node:fs/promises');const os=await import('node:os');const path=await import('node:path');
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'preflight-'));
+ try{
+ const offer={id:'car',sourcePrice:10000,images:[{url:'photo.jpg'}],operational:{photoIdentityVerified:true,sourceSpecifications:{groups:['kept']},raw:{html:'x'.repeat(100000)}}};
+ const compact={...offer,operational:{...offer.operational}};delete compact.operational.raw;
+ await fs.writeFile(path.join(dir,'shard.json'),JSON.stringify({offers:[offer]}));
+ const bytes=await catalogPreflightInputBytes({}, {CATALOG_REBUILD_INPUT_DIR:dir});
+ assert.equal(bytes,Buffer.byteLength(JSON.stringify({offers:[compact]})));
+ assert.equal(catalogStorageBudget(45_318_716_412,bytes).headroomBytes,5_000_000_000);
+ await fs.writeFile(path.join(dir,'bad.json'),'{');
+ await assert.rejects(catalogPreflightInputBytes({}, {CATALOG_REBUILD_INPUT_DIR:dir}));
+ }finally{await fs.rm(dir,{recursive:true,force:true});}
+});

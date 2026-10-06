@@ -60,11 +60,14 @@ test('breadcrumb identity must agree with primary title',()=>{
  assert.deepEqual(proAuctionsIdentity(crumbs+html,e),{make:'Mazda',model:'CX-5'});
  assert.throws(()=>proAuctionsIdentity(crumbs.replace('Mazda','Toyota')+html,e),/identity/);
 });
-test('owner example kei van is not rejected by Cargo substring; other commercial exclusions remain',()=>{
+test('commercial names alone do not exclude inventory; confirmed heavy vehicles remain excluded',()=>{
  const kei={market:'japan',sourceId:'proauctions_japan_stat',make:'Daihatsu',model:'Hijet Cargo',operational:{chassisCode:'S321V'}};
  assert.equal(isCommercialInventoryOffer(kei),false);
- assert.equal(isCommercialInventoryOffer({...kei,operational:{chassisCode:'OTHER'}}),true);
- assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),true);
+ assert.equal(isCommercialInventoryOffer({...kei,operational:{chassisCode:'OTHER'}}),false);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck'}),false);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',grossVehicleWeightKg:3500}),false);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',grossVehicleWeightKg:3501}),true);
+ assert.equal(isCommercialInventoryOffer({make:'Hino',model:'Truck',vehicleCategory:'N2'}),true);
 });
 
 test('ProAuctions import requires two car photos for fresh lots',()=>{

@@ -1,5 +1,15 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {createReadStream} from 'node:fs';
+import {createInterface} from 'node:readline';
+
+export function publicationInputRecord(record) {
+ const compact=offer=>{if(!offer || typeof offer!== 'object')return offer;const operational={...offer.operational};delete operational.raw;return {...offer,operational};};
+ if(Array.isArray(record?.offers))return {...record,offers:record.offers.map(compact)};
+ if(record?.offer)return {...record,offer:compact(record.offer)};
+ return record;
+}
+
 
 export async function catalogPreflightInputBytes(storage, env = process.env) {
   if (env.CATALOG_STORAGE_PREFLIGHT_MODE === 'budget-index') {
@@ -22,7 +32,15 @@ export async function catalogPreflightInputBytes(storage, env = process.env) {
   const input = env.CATALOG_REBUILD_INPUT_DIR || 'catalog-intake-publish';
   let bytes = 0;
   for (const file of await fs.readdir(input, {recursive: true})) {
-    if (/\.jsonl?$/.test(file)) bytes += (await fs.stat(path.join(input, file))).size;
+    if (!/\.jsonl?$/.test(file)) continue;
+    const filename=path.join(input,file);
+    if(file.endsWith('.jsonl')){
+      for await(const line of createInterface({input:createReadStream(filename),crlfDelay:Infinity})){
+        if(line.trim())bytes+=Buffer.byteLength(JSON.stringify(publicationInputRecord(JSON.parse(line))))+1;
+      }
+    }else{
+      bytes+=Buffer.byteLength(JSON.stringify(publicationInputRecord(JSON.parse(await fs.readFile(filename,'utf8')))));
+    }
   }
   return bytes;
 }

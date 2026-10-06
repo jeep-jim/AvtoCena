@@ -175,7 +175,9 @@ function regionalPhotoIdentityVerified(offer: Partial<VehicleOffer> | any) {
   const market = String(offer?.market || "").toLowerCase();
   if (market !== "georgia") return true;
   const raw = offer?.operational?.raw || {};
-  return raw?.listingBoundImages === true
+  return offer?.operational?.photoIdentityVerified === true
+    || offer?.operational?.detailIdentityVerified === true
+    || raw?.listingBoundImages === true
     || raw?.photoIdentityVerified === true
     || raw?.detailIdentityVerified === true;
 }

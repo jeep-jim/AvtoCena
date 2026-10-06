@@ -1,9 +1,11 @@
 {
-  "operation": "owner-open-inventory-20261006-1412",
+  "operation": "publication-recovery-20261006-1743",
   "market": "georgia",
   "publishMarkets": [
     "georgia"
   ],
-  "resetCursors": true,
-  "reason": "Fresh full traversal under six-year age policy, no price/power/assortment caps; heavy trucks and buses over 3500 kg excluded. Preserve all collected slices and resume committed budget stops."
+  "reuseRunId": "37429980818",
+  "refreshMarkets": [],
+  "resetCursors": false,
+  "reason": "Republish preserved observations after photo-attestation and storage-estimation fixes; do not repeat source collection."
 }

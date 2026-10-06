@@ -202,6 +202,8 @@ export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   const operational = { ...(offer.operational || {}) } as any;
   const publicJapanSoldIdentityVerified = isJapanAuctionOffer(offer) && japanAuctionSoldIdentityVerified(offer);
   const publicJapanSoldPriceVerified = isJapanAuctionOffer(offer) && japanAuctionSoldPriceVerified(offer);
+  // Preserve existing photo attestation before discarding bulky source responses.
+  if (operational.raw?.listingBoundImages === true || operational.raw?.photoIdentityVerified === true || operational.raw?.detailIdentityVerified === true) operational.photoIdentityVerified = true;
   delete operational.raw;
   delete operational.publicJapanSoldIdentityVerified;
   delete operational.publicJapanSoldPriceVerified;

@@ -22,7 +22,7 @@ for(const market of ['japan','china','korea','europe','georgia','uae','green']){
  if(journal?.publicationStatus==='failed')problems.push(`${market}_last_publication_failed`);
  if(market!=='japan' && market!=='green' && journal?.qualityStatus!=='configured_routes_finished')problems.push(`${market}_collection_incomplete`);
  for(const source of journal?.sources||[])if(['blocked','blocked_detail','list_failed','adapter_missing','cursor_loop','repeated_page'].includes(source.stopReason))problems.push(`${market}_${source.sourceId}_${source.stopReason}`);
- if(!['japan','green'].includes(market)&&journal?.powerMix?.targetMet!==true)assortmentProblems.push(`${market}_80_percent_low_power_not_confirmed`);
+ // Price/power are ordering preferences, not an inventory completeness quota.
  const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
  const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
  markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,lastAttemptAt:journal?.lastAttemptAt||null,lastCollectionAttempt:journal?.lastCollectionAttempt||null,publicationStatus:journal?.publicationStatus||null,publicationError:journal?.publicationError||null,sources:(journal?.sources||[]).map(s=>({sourceId:s.sourceId,stopReason:s.stopReason,initialCursor:s.initialCursor||null,cursor:s.cursor||null,observations:s.observations,pages:s.pages,errors:s.errors})),powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
