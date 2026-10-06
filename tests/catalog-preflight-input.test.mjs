@@ -11,7 +11,7 @@ test('derived budget index reserves eight copies of active projections without a
   const bytes = await catalogPreflightInputBytes(storage, {CATALOG_STORAGE_PREFLIGHT_MODE: 'budget-index'});
   assert.equal(bytes, 250_000_000);
   assert.equal(catalogStorageBudget(33_613_376_506, bytes).estimatedAdditionalBytes, 2_000_000_000);
-  assert.equal(catalogStorageBudget(54_000_000_000, bytes).ok, false);
+  assert.equal(catalogStorageBudget(94_000_000_000, bytes).ok, false);
   await assert.rejects(catalogPreflightInputBytes({...storage, listObjects: async () => []}, {CATALOG_STORAGE_PREFLIGHT_MODE: 'budget-index'}));
   await assert.rejects(catalogPreflightInputBytes({...storage, listObjects: async () => [{key: 'other', size: 1}]}, {CATALOG_STORAGE_PREFLIGHT_MODE: 'budget-index'}));
   await assert.rejects(catalogPreflightInputBytes(storage, {CATALOG_REBUILD_INPUT_DIR: '/missing-intake-must-still-fail'}), {code: 'ENOENT'});

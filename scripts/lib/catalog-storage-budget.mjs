@@ -1,5 +1,5 @@
-// Conservative decimal-byte budget below the approved 60 GiB bucket quota.
-export const CATALOG_STORAGE_LIMIT_BYTES = 60_000_000_000;
+// Conservative decimal-byte budget below the approved 100 GiB bucket quota.
+export const CATALOG_STORAGE_LIMIT_BYTES = 100_000_000_000;
 export const CATALOG_STORAGE_HEADROOM_BYTES = 5_000_000_000;
 export function catalogStorageBudget(currentBytes,inputBytes) {
  if (![currentBytes,inputBytes].every(n=>Number.isSafeInteger(n)&&n>=0))throw Error('Invalid storage inventory size');
