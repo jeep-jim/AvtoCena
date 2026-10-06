@@ -46,7 +46,8 @@ try {
   let scope=page.locator('.ac-catalog-filter-panel');
   if(width<1024){await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();scope=page.locator('.ac-mobile-filter-sheet');}
   await scope.waitFor({state:'visible',timeout:90000});
-  console.log(JSON.stringify({phase:'filter-panel-ready',width,url:page.url(),expanded:await page.getByRole('button',{name:'Расширенные фильтры',exact:true}).getAttribute('aria-expanded'),priceInputs:await scope.getByRole('textbox',{name:'Цена: от',exact:true}).count()}));
+  console.log(JSON.stringify({phase:'filter-panel-ready',width,url:page.url(),expanded:width>=1024?await page.getByRole('button',{name:'Расширенные фильтры',exact:true}).getAttribute('aria-expanded'):null,priceInputs:await scope.getByRole('textbox',{name:'Цена: от',exact:true}).count()}));
+  fs.writeFileSync(`${out}/ready-${width}.html`,await page.content());
   const price=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Цена: от',exact:true})});
   const volume=scope.locator('.ac-range-card').filter({has:page.getByRole('textbox',{name:'Объём двигателя: от',exact:true})});
   const priceToggle=price.locator('.ac-range-value-toggle').first();
