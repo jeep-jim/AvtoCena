@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {checkDealerPreview} from './dealer-preview-checks.mjs';
 import fs from 'node:fs';
 import http from 'node:http';
 import {build} from 'esbuild';
@@ -22,7 +23,7 @@ const server = http.createServer((req, res) => {
   if(req.url==='/key-logo.png'){res.setHeader('Content-Type','image/png');return res.end(fs.readFileSync('apps/web/public/key-logo.png'));}
   if (req.url === '/fixture.js') {res.setHeader('Content-Type', 'application/javascript'); return res.end(fs.readFileSync(`${out}/fixture.js`));}
   res.setHeader('Content-Type', 'text/html');
-  res.end(`<!doctype html><html data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`, 'utf8')}:root{--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-surface-3:#e3e7ee;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6;--ac-accent:#c91f2d}[data-theme=dark]{--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-surface-3:#20232d;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22;--ac-accent:#ff303d}.account-cabinet-page .ac-public-header{position:fixed!important;inset:0 0 auto 0!important;width:100%!important}body{margin:0;padding:16px;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}</style></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>`);
+  res.end(`<!doctype html><html data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}${fs.readFileSync(`${out}/fixture.css`, 'utf8')}:root{--ac-page-bg:#edf0f6;--ac-bg:var(--ac-page-bg);--ac-surface:#fff;--ac-surface-2:#edf0f5;--ac-surface-3:#e3e7ee;--ac-text:#171b24;--ac-muted:#657080;--ac-border:#ccd0d6;--ac-accent:#c91f2d}[data-theme=dark]{--ac-page-bg:#1a2029;--ac-surface:#11141c;--ac-surface-2:#181b24;--ac-surface-3:#20232d;--ac-text:#edf3ff;--ac-muted:#9babc3;--ac-border:#ffffff22;--ac-accent:#ff303d}.account-cabinet-page .ac-public-header{position:fixed!important;inset:0 0 auto 0!important;width:100%!important}body{margin:0;padding:16px;background:var(--ac-surface);color:var(--ac-text)}#root{max-width:1120px;margin:auto}</style></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>`);
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r)); const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await chromium.launch({executablePath: process.env.CHROME_BIN || undefined, headless: true, args: ['--no-sandbox']});
@@ -95,7 +96,7 @@ try {
     if(width<761){await page.getByRole('button',{name:'Войти',exact:true}).click();const form=await page.locator('#account-login-form').boundingBox();const header=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(form.y-header.y-header.height)<=1,JSON.stringify({form,header}));assert.equal(await page.locator('.account-welcome').evaluate(el=>getComputedStyle(el).borderRadius),'28px');assert.equal(await page.locator('.account-welcome').evaluate(el=>getComputedStyle(el).overflow),'hidden');assert.ok(form.y+form.height<900,'whole login form is visible');await page.evaluate(()=>scrollTo(0,0));}
     for(const role of ['customer','dealer']){
       if(role!=='customer') await page.getByRole('button',{name:new RegExp({dealer:'Автодилер',blogger:'Автоблогер',supplier:'Автопоставщик'}[role])}).click();
-      if(role==='dealer'){await page.frameLocator('.entrance-dealer-preview iframe').getByRole('heading',{name:'Top Avto',exact:true}).first().waitFor();assert.equal(await page.locator('.account-scenes').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);await page.screenshot({path:`${out}/dealer-preview-${width}-${theme}.png`,fullPage:true});continue;}
+      if(role==='dealer'){await page.frameLocator('.entrance-dealer-preview iframe').getByRole('heading',{name:'Top Avto',exact:true}).first().waitFor();await checkDealerPreview(page,width);assert.equal(await page.locator('.account-scenes').count(),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);await page.screenshot({path:`${out}/dealer-preview-${width}-${theme}.png`,fullPage:true});continue;}
       await page.getByRole('button',{name:'Следующая сцена',exact:true}).click();
       assert.equal(await page.locator('.account-scene-controls button[aria-pressed=true]').innerText(),'2');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width);

@@ -74,7 +74,7 @@ export function OfferContactActionsStyles() {
     .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
     .ac-offer-contact-bar>button{flex:1;min-width:0}
     .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;object-fit:cover;border-radius:12px}
-    .ac-offer-contact-anchor[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:var(--ac-surface);box-shadow:0 6px 20px #0003}
+    .ac-offer-contact-anchor[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:color-mix(in srgb,var(--ac-surface) 55%,transparent);-webkit-backdrop-filter:blur(16px) saturate(120%);backdrop-filter:blur(16px) saturate(120%);box-shadow:0 6px 20px #0002}
     .ac-offer-contact-anchor[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
     .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
     .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}

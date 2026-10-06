@@ -396,3 +396,16 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
  .account-original-design .account-partner-layout.is-dealer .account-roles{grid-template-columns:1fr}
  .account-original-design .account-roles{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* Keep the dealer viewport whole: customer scene height must not crop its dock. */
+.account-dealer-register{display:flex;align-items:center;justify-content:center;width:100%;max-width:460px;min-height:48px;margin:12px auto 0;padding:12px 16px;border:1px solid var(--intro-line);border-radius:12px;font-size:14px;font-weight:650;color:var(--intro-title);text-decoration:none}
+.account-dealer-register:hover{background:var(--intro-card)}
+.account-dealer-register:focus-visible{outline:2px solid #ffc947;outline-offset:3px}
+@media(max-width:760px){
+ .account-original-design .account-login-main:has(.entrance-dealer-preview){border:0;border-radius:0;overflow:visible;background:transparent;box-shadow:none}
+ .account-original-design .account-welcome:has(.entrance-dealer-preview){height:auto;min-height:0;padding:0;border-radius:0;overflow:visible;background:transparent!important}
+ .entrance-dealer-preview{padding:0}
+ .entrance-dealer-preview .dealer-live-preview{width:100%;max-width:none;border:0;border-radius:0;background:transparent}
+ .entrance-dealer-preview iframe{height:min(720px,calc(100svh - 100px));min-height:460px}
+ .account-original-design .account-login-main:has(.entrance-dealer-preview)>.account-login-form{border-radius:0 0 24px 24px}
+}

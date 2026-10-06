@@ -132,6 +132,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
         </header>
         {role === 'dealer' ? <>
           <LoginForm nextPath={nextPath.startsWith('/crm') ? nextPath : '/dealer-cabinet'} errorCode={errorCode}/>
+          <a className="account-dealer-register" href="/dealers#dealer-apply">Регистрация</a>
         </> : <>
           <div className="account-tabs" role="group" aria-label="Вход или регистрация">
             <button disabled={busy} aria-pressed={mode === 'login'} onClick={() => changeMode('login')}>Вход</button>
