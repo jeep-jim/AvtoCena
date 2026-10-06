@@ -16,9 +16,9 @@ function offer(market: string, make: string, model: string, year: number) {
   return { market, make, model, year, fuel: "petrol", powertrainKind: "combustion" } as any;
 }
 
-test("broad inventory removes the legacy 20-row ceiling while Japan stays unchanged", () => {
+test("broad inventory removes the legacy 20-row ceiling including Japan", () => {
   assert.equal(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, 100000);
-  assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, 20);
+  assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, Number.MAX_SAFE_INTEGER);
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper|2022");
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2025)), "korea|hyundai|casper|2025");
   assert.notEqual(
@@ -32,14 +32,14 @@ test("broad inventory removes the legacy 20-row ceiling while Japan stays unchan
   assert.equal(catalogExactModelKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper");
 });
 
-test("Japan obeys the same twenty-listing model-year ceiling", () => {
+test("Japan retains all distinct listings of the same model and year", () => {
   const rows = Array.from({ length: 115 }, (_, index) => ({
     ...offer("japan", "Toyota", "Aqua", 2024),
     id: `aqua-${index}`,
   }));
   const result = enforceCatalogModelYearQuota(rows);
-  assert.equal(result.rows.length, 20);
-  assert.equal(result.removed.length, 95);
+  assert.equal(result.rows.length, 115);
+  assert.equal(result.removed.length, 0);
 });
 
 test("homepage showcase prefers different makes and exact models without losing freshness order", () => {

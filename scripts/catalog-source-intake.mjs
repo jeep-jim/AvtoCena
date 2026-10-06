@@ -18,7 +18,7 @@ if (market==='korea') {
 }
 const {catalogImportSources}=await import('../apps/web/lib/catalog/importer.ts');
 const {AUTOHOME_NEW_MIN_YEAR}=await import('../apps/web/lib/catalog/source-inventory-scope.ts');
-const {chinaInventoryAgeDecision}=await import('../apps/web/lib/catalog/china-owner-policy.ts');
+const {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded}=await import('../apps/web/lib/catalog/inventory-admission.ts');
 const {REQUIRED_CATALOG_SOURCES}=await import('../apps/web/lib/catalog/required-catalog-sources.ts');
 const {sourceListingSnapshot}=await import('../apps/web/lib/catalog/source-listing-snapshot.ts');
 const {untranslatedSpecificationFields}=await import('../apps/web/lib/catalog/specification-display.ts');
@@ -58,8 +58,9 @@ function checkpoint() {
 await checkpoint();
 await collectSourceStates(states,state=>({market,deadline,maxRows:maxRowsPerSource,maxPages:2000,detailConcurrency:4,
       minYear:state.sourceId==='autohome_new_china_open'?AUTOHOME_NEW_MIN_YEAR:market==='japan'?2010:new Date().getUTCFullYear()-6,
-      inventoryAgeEligible:market==='china' && state.sourceId==='autohome_used_china_open' ? offer=>chinaInventoryAgeDecision(offer).eligible : undefined,
+      inventoryAgeEligible:offer=>catalogInventoryAgeDecision(offer).eligible && !catalogHeavyVehicleExcluded(offer),
       snapshot:sourceListingSnapshot,checkpoint,
+      hasDiskRoom:async()=>{const disk=await fs.statfs(directory);return disk.bavail*disk.bsize>=2*1024**3;},
       translationReport:groups=>untranslatedSpecificationFields(groups),
       specificationReport:offer=>Object.fromEntries(['year','engineCc','powerHp','fuelPowertrain','certifiedPower'].map(field=>[field,classifySpecificationEvidence(offer,field).state])),
       writeObservation:writers.get(state.sourceId)}));

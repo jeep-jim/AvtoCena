@@ -88,3 +88,18 @@ test('retry waits cannot overrun the remaining collection budget',async t=>{
  await collectSourcePage(f.state,f.options);assert.equal(f.state.cursor,null);assert.equal(f.rows.length,0);
  assert.equal(f.state.done,true);assert.equal(f.state.stopReason,'time_budget');
 });
+
+test('disk reserve stops before requesting another page and preserves the cursor',async()=>{
+ const f=fixture({first:{items:[offer],nextCursor:'second'}});
+ await collectSourcePage(f.state,f.options);
+ f.options.hasDiskRoom=async()=>false;
+ f.state.source.fetchPage=async()=>{throw Error('must not request when disk is low');};
+ await collectSourcePage(f.state,f.options);
+ assert.equal(f.state.stopReason,'disk_budget');assert.equal(f.state.cursor,'second');assert.equal(f.rows.length,2);
+});
+test('unexpected source failure does not terminate another source',async()=>{
+ const {collectSourceStates}=await import('../scripts/lib/catalog-source-intake.mjs');
+ const one=fixture({}),two=fixture({});
+ await collectSourceStates([one.state,two.state],()=>one.options,async state=>{if(state===one.state)throw Error('source crashed');state.done=true;state.stopReason='source_finished';});
+ assert.equal(one.state.stopReason,'collector_error');assert.equal(two.state.stopReason,'source_finished');
+});

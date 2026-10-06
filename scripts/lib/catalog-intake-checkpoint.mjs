@@ -4,14 +4,17 @@ import path from 'node:path';
 // At most 500 observation revisions (normally 250 cars) per raw shard.
 export function observationShardWriter(directory, sourceId) {
   if (!/^[a-z0-9_-]+$/i.test(sourceId)) throw Error('invalid_intake_source');
-  let count = 0;
+  let count = 0, part=0, partRows=0, partBytes=0, filename='';
   let queue = Promise.resolve();
   return row => (queue = queue.then(async () => {
-    const part = Math.floor(count / 500) + 1;
-    const filename = path.join(directory, `${sourceId}-${String(part).padStart(6, '0')}.jsonl`);
-    // A reused directory must never silently mix old and new collection runs.
-    if (count % 500 === 0) await fs.writeFile(filename, '', { flag: 'wx' });
-    await fs.appendFile(filename, JSON.stringify(row) + '\n');
+    const line=JSON.stringify(row)+'\n';
+    const size=Buffer.byteLength(line);
+    if(!partRows||partRows>=500||partBytes+size>8*1024*1024){
+      part++;partRows=0;partBytes=0;
+      filename=path.join(directory,`${sourceId}-${String(part).padStart(6,'0')}.jsonl`);
+      await fs.writeFile(filename,'',{flag:'wx'});
+    }
+    await fs.appendFile(filename,line);partRows++;partBytes+=size;
     count++;
   }));
 }
@@ -23,7 +26,7 @@ export function restoreIntakeCursor(state, saved, now = Date.now()) {
   const row = saved.sources?.find(row => row.sourceId === state.sourceId);
   // Only exhausted work budgets are continuations. Access denials, parser
   // failures and completed scans must never resume at a blocked/tail page.
-  if (row && ['budget', 'time_budget', 'budget_mid_page'].includes(row.stopReason) && typeof row.cursor === 'string' && row.cursor.length) {
+  if (row && ['budget', 'time_budget', 'budget_mid_page','disk_budget'].includes(row.stopReason) && typeof row.cursor === 'string' && row.cursor.length) {
     state.cursor = row.cursor;
     state.initialCursor = row.cursor;
   }

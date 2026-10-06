@@ -44,7 +44,7 @@ const outageGraceMultiplier = 1;
 const minimumPublicRetentionRatio = Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.90);
 const allowPublicCollapse = process.env.CATALOG_ALLOW_PUBLIC_COLLAPSE === "1";
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
-const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
+const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 15_000_000));
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const v2Policy = {
@@ -54,7 +54,7 @@ const v2Policy = {
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
   priorityMaxPowerHp,
   priorityMaxTotalRub,
-  hardMaxTotalRub: Math.min(15_000_000, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || (15_000_000))),
+  hardMaxTotalRub: Number.POSITIVE_INFINITY,
   lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
 const publishLockPath = "catalog/import-lock.json";
@@ -645,13 +645,11 @@ expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 const retainedCandidateCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
 const previousSourceCounts = countSources(currentMarketRows);
-const expiredPublicIds = new Set(currentMarketRows.filter(row => catalogOfferRetentionExpired(row)).map(row=>row.id));
+const expiredPublicIds = new Set(currentMarketRows.filter(row => catalogOfferRetentionExpired(row) || !sourceInventoryInScope(row)).map(row=>row.id));
 const withdrawnSourceCounts = countSources(currentMarketRows.filter(row => catalogOfferWithdrawnByReport(row, confirmedWithdrawals)
   // The same dated 14/30-day policy already removed these candidates above.
   // Keeping them in the safety baseline made legitimate expiry block all future publication.
-  || expiredPublicIds.has(row.id)
-  // Explicit owner price exclusion, not a missing field or failed network request.
-  || Math.max(Number(row.totalRub)||0,Number(row.sellerPriceRub)||0,Number(row.calculationSnapshot?.sourcePriceRub)||0)>15_000_000));
+  || expiredPublicIds.has(row.id) || !sourceInventoryInScope(row)));
 const replaceInternalSourceIds = new Set([
   ...currentRetainedRows.map(offer => String(offer?.sourceId || "")),
   ...generatedSourceIds,

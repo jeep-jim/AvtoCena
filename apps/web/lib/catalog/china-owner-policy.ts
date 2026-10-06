@@ -1,9 +1,10 @@
+import {catalogInventoryAgeDecision} from './inventory-admission';
 import type { VehicleOffer } from './types';
 
-export const CHINA_MAX_TOTAL_RUB = 15_000_000;
+export const CHINA_MAX_TOTAL_RUB = Number.POSITIVE_INFINITY;
 export const CHINA_MAX_AGE_MONTHS = 72;
 export function catalogHardPriceCap(offer?: Partial<VehicleOffer>) {
-  return offer?.market === 'china' ? CHINA_MAX_TOTAL_RUB : 15_000_000;
+  return Number.POSITIVE_INFINITY;
 }
 
 export function chinaSourceProductionDate(value: unknown) {
@@ -23,24 +24,7 @@ function monthIndex(value: unknown) {
  * manufacturing date and never a replacement for the customs age evidence.
  */
 export function chinaInventoryAgeDecision(offer: Partial<VehicleOffer>, now = new Date()) {
-  if (offer.market !== 'china') return { eligible: true, basis: 'other_market' };
-  const op: any = offer.operational || {}, raw = op.raw || {};
-  const boundDetail = raw.detail && String(offer.sourceOfferId || '') && String(raw.detail.infoid || '') === String(offer.sourceOfferId) ? raw.detail : {};
-  const production = op.semanticEvidence?.productionDate;
-  const manufactured = monthIndex(production?.status === 'exact' && /manufactur|production|produced/i.test(String(production.source)) ? production.value : undefined)
-    ?? monthIndex(boundDetail.manufacturedate || boundDetail.producedate);
-  const registered = monthIndex(op.registrationDate || boundDetail.regdate || raw.listing?.regdate);
-  const current = now.getUTCFullYear() * 12 + now.getUTCMonth();
-  const dated = manufactured ?? registered;
-  if (dated !== undefined) {
-    const ageMonths = current - dated;
-    return { eligible: ageMonths >= 0 && ageMonths <= CHINA_MAX_AGE_MONTHS, ageMonths,
-      basis: manufactured !== undefined ? 'manufacture_month' : 'registration_month' };
-  }
-  // At the six-year boundary a year alone cannot establish the month.
-  const year = Number(offer.year);
-  return { eligible: Number.isInteger(year) && year > now.getUTCFullYear() - 6 && year <= now.getUTCFullYear(),
-    basis: 'year_only_conservative' };
+  return catalogInventoryAgeDecision(offer,now);
 }
 
 export function che168GlobalPriceAdjustment(offer: Partial<VehicleOffer>, originalCarPriceRub: number) {

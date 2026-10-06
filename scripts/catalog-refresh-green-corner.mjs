@@ -1,3 +1,4 @@
+import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 import {collectGreenCorner,assertGreenPublication,collectGreenInvoiceTerms} from './lib/akebono-green-source.mjs';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {convertToRub} from '../apps/web/lib/catalog/rates.ts';
@@ -13,14 +14,14 @@ const rate=await convertToRub(1,'JPY');
 const now=new Date().toISOString();
 const previousById=new Map((baseline.value?.items||[]).map(row=>[row.id,row]));
 const normalized=source.items.map(row=>{const offer=normalizeGreenCorner({...row,...terms},rate,now);return {...offer,firstSeenAt:previousById.get(offer.id)?.firstSeenAt||now};});
-// Keep the existing global 15m ceiling. Do not apply auction retention or non-Japan year quotas.
-const items=normalized.filter(row=>row.sellerPriceRub<=15_000_000).sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
+// Price affects presentation only; Japan inventory starts at 2010.
+const items=normalized.filter(row=>catalogInventoryAgeDecision(row).eligible&&!catalogHeavyVehicleExcluded(row)).sort((a,b)=>b.year-a.year||a.id.localeCompare(b.id));
 assertGreenPublication(baseline.value?.items?.length||0,items.length,source.total);
 const snapshot={version:1,updatedAt:now,sourceCount:source.total,invoiceTerms:terms,items};
 await storage.writeJson(key,snapshot,baseline.found?{ifMatch:baseline.etag}:{ifNoneMatch:'*'});
 const verified=await storage.readJson(key,null);
 if(verified?.updatedAt!==now||verified.items?.length!==items.length)throw Error('green_publication_verification_failed');
-const report={status:'published',priceBasis:'CIF',freightJpy:terms.cifFreightJpy,paymentQuote:terms.paymentQuote,example:items.filter(row=>row.sourceOfferId==='709602').map(row=>({id:row.id,invoiceJpy:row.sourcePrice,invoiceRub:row.sellerPriceRub})),lastCollectionSuccess:now,lastPublicationSuccess:now,publishedAt:now,sourceCount:source.total,publishedCount:items.length,overPriceCap:normalized.length-items.length};
+const report={status:'published',priceBasis:'CIF',freightJpy:terms.cifFreightJpy,paymentQuote:terms.paymentQuote,example:items.filter(row=>row.sourceOfferId==='709602').map(row=>({id:row.id,invoiceJpy:row.sourcePrice,invoiceRub:row.sellerPriceRub})),lastCollectionSuccess:now,lastPublicationSuccess:now,publishedAt:now,sourceCount:source.total,publishedCount:items.length,outsideInventoryPolicy:normalized.length-items.length};
 await storage.writeJson('catalog/operations/markets/green.json',report);
 await fs.writeFile('catalog-green-report.json',JSON.stringify(report,null,2));
 console.log(JSON.stringify(report));

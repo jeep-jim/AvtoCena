@@ -1,3 +1,5 @@
+import {compareCatalogDisplayOrder} from './display-order';
+import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
 import { chinaInventoryAgeDecision, catalogHardPriceCap } from "./china-owner-policy";
 import { enforceCatalogModelYearQuota, isCatalogCombustionLowPower, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
@@ -18,12 +20,12 @@ export type CatalogV2Selection = { selected: VehicleOffer[]; priorityCount: numb
 
 export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   priorityTarget: 24_000,
-  maximumPerMarket: 30_000,
+  maximumPerMarket: Number.MAX_SAFE_INTEGER,
   priorityMaxAgeYears: 6,
   recentMaxAgeYears: 15,
   priorityMaxPowerHp: 160,
-  priorityMaxTotalRub: 6_000_000,
-  hardMaxTotalRub: 15_000_000,
+  priorityMaxTotalRub: 15_000_000,
+  hardMaxTotalRub: Number.POSITIVE_INFINITY,
   lowPowerMinShare: 0.8,
 };
 
@@ -68,11 +70,8 @@ export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: Ca
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
   if (!offer.id || !offer.make || !offer.model || !offer.market) return { tier: "rejected", eligible: false, reason: "identity" };
   const year = number(offer.year), ageYears = currentAge(year), powerHp = number(offer.powerHp), totalRub = number(offer.totalRub), popularity = popularityDecile(offer);
-  if (offer.market === "china" && !chinaInventoryAgeDecision(offer).eligible) return { tier: "rejected", eligible: false, reason: "china_age_month", ageYears, powerHp, totalRub };
-  const minimumYear = offer.market === "japan" ? 2010 : 2020;
-  if (!year || year < minimumYear || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  if (!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer)) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
-  if (Math.max(totalRub || 0, number(offer.sellerPriceRub) || 0, number(offer.calculationSnapshot?.sourcePriceRub) || 0) > Math.min(catalogHardPriceCap(offer), options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {
     if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
     return isCatalogPriorityOffer(offer, options)
@@ -91,7 +90,7 @@ function order(left: VehicleOffer, right: VehicleOffer, options: CatalogV2Policy
   const lowPowerDelta = Number(isCatalogLowPowerOffer(right, options)) - Number(isCatalogLowPowerOffer(left, options));
   const priorityDelta = Number(isCatalogPriorityOffer(right, options)) - Number(isCatalogPriorityOffer(left, options));
   const tier = (value: CatalogV2Tier) => value === "priority" ? 0 : value === "recent" ? 1 : value === "japan_auction" ? 2 : 3;
-  return lowPowerDelta
+  return compareCatalogDisplayOrder(left,right) || lowPowerDelta
     || priorityDelta
     || Number(a.ageYears ?? Number.MAX_SAFE_INTEGER) - Number(b.ageYears ?? Number.MAX_SAFE_INTEGER)
     || Number(a.totalRub || Number.MAX_SAFE_INTEGER) - Number(b.totalRub || Number.MAX_SAFE_INTEGER)
@@ -118,7 +117,7 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
   // resolve a broad mix of cars, and every valid resolved listing should be
   // allowed to fill the market up to the configured maximum.
   accepted.sort((left, right) => order(left, right, options));
-  const maximum = Math.max(1, Number(options.maximumPerMarket || 30_000));
+  const maximum = Math.max(1, Number(options.maximumPerMarket || Number.MAX_SAFE_INTEGER));
   const requestedPriorityTarget = Math.max(0, Math.min(maximum, Number(options.priorityTarget || 0)));
   const quota = enforceCatalogModelYearQuota(accepted);
   if (quota.removed.length) rejected.model_year_quota = quota.removed.length;

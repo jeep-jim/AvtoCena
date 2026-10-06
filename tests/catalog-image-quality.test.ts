@@ -234,18 +234,18 @@ test("business liquidity remains a ranking signal but does not override Japan's 
     powerDataConfidence: "estimated",
     powerDataSource: "vehicle-model-representative:toyota/crown",
   };
-  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), false);
+  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), true);
   assert.equal(isCrediblePublicOffer(olderJapan as any), true);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",
     powerDataSource: "vehicle-knowledge:legacy_variant_220hp",
-  } as any), false);
+  } as any), true);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "source_exact",
     powerDataSource: "source:horsepower",
-  } as any), false);
+  } as any), true);
 });
 
 test("rejects rounded Korea K9 3.3 GDI displacement and keeps exact 3342cc evidence", () => {

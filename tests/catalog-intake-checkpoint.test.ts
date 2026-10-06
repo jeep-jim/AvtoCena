@@ -57,3 +57,10 @@ test('completed and looping traversals restart from the first page',()=>{
  assert.equal(state.cursor,null);
  }
 });
+
+test('large observations rotate by bytes as well as row count',async()=>{
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'intake-large-'));
+ try{const write=observationShardWriter(dir,'test');for(let i=0;i<3;i++)await write({id:i,payload:'x'.repeat(4*1024*1024)});
+ const files=await fs.readdir(dir);assert.equal(files.length,3);for(const file of files)assert.ok((await fs.stat(path.join(dir,file))).size<8*1024*1024);
+ }finally{await fs.rm(dir,{recursive:true,force:true});}
+});

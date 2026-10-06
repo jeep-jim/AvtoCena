@@ -1,3 +1,5 @@
+import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded} from './inventory-admission';
+import {compareCatalogDisplayOrder} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
 import {isChinaModelSpecification} from './china-card-variant';
@@ -177,6 +179,7 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
 export type CatalogSearchProjection = {
+  inventorySourceDate?:string; grossVehicleWeightKg?:number; vehicleCategory?:VehicleOffer["vehicleCategory"];
   chinaPriceConversion?:VehicleOffer["chinaPriceConversion"];
   japanDeliveredPreview?: {totalRub:number;engineCc?:number;estimated:boolean};
   catalogKind?: VehicleOffer["catalogKind"];
@@ -204,7 +207,7 @@ export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   delete operational.publicJapanSoldPriceVerified;
   if (publicJapanSoldIdentityVerified) operational.publicJapanSoldIdentityVerified = true;
   if (publicJapanSoldPriceVerified) operational.publicJapanSoldPriceVerified = true;
-  return { ...offer, operational };
+  return { ...offer, inventorySourceDate:catalogInventoryDate(offer), operational };
 }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
@@ -412,6 +415,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   const visibleRub = catalogOfferVisibleRub(offer);
   const raw: any = offer.operational?.raw || {};
   return {
+    inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:offer.grossVehicleWeightKg,vehicleCategory:offer.vehicleCategory,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
@@ -437,6 +441,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
+  if(!catalogInventoryAgeDecision(row).eligible || catalogHeavyVehicleExcluded(row)) return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
   return [1, 2, 3].includes(Number(row.cardProjectionVersion))
@@ -458,11 +463,12 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
       if (valid) preparedProjectionRows.set(valid, valid);
     }
     const row = preparedProjectionRows.get(input);
-    if (row) visible.push(row);
+    if (row && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row)) visible.push(row);
   }
   return visible;
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
+  if(!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer))return false;
   if (isConfirmedSourceWithdrawn(offer) || isReviewedSourceDuplicate(offer)) return false;
   offer = safePublicPricing(offer);
   return isSellerPricedOffer(offer) || hasModificationSelection(offer) || (catalogOfferVisibleRub(offer) > 0
@@ -529,7 +535,7 @@ export async function getOfferFromCurrentProjection(id: string) {
   }
   if (projection.generationId !== manifest.generationId) return null;
   const row = (projection.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market));
-  return row && !isConfirmedSourceWithdrawn(row) ? offerDetailFromProjection(row) : null;
+  return row && !isConfirmedSourceWithdrawn(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
@@ -686,7 +692,7 @@ export async function getOfferFromCurrentShard(id: string) {
   if (/^green-\d+$/.test(id)) return getGreenCornerOffer(id);
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
-  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item)) || null;
+  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market) && !isConfirmedSourceWithdrawn(item) && catalogInventoryAgeDecision(item).eligible && !catalogHeavyVehicleExcluded(item)) || null;
 }
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
@@ -759,7 +765,7 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
         : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
       : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
-        : Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
+        : compareCatalogDisplayOrder(a,b) || Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
           || projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
@@ -783,7 +789,10 @@ export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProject
 function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogSearchParams) {
   const sort = params.sort || "updatedAt";
   catalogSearchProjectionSort(rows, sort, params.city);
-  if (sort === "updatedAt" && params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
+  if (sort === "updatedAt") {
+    if(params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
+    rows.sort(compareCatalogDisplayOrder);
+  }
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
   if (!params.model) return null;
@@ -1036,7 +1045,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
 // Immutable, generation-scoped objects avoid parsing an entire market on cold starts.
 const MARKET_LANDING_LIMIT = 192;
 type MarketLanding = {
-  version: 1; generationId: string; market: string; sourceTotal: number; duplicatePolicy?: string;
+  version: 1; policyDate?:string; generationId: string; market: string; sourceTotal: number; duplicatePolicy?: string;
   total: number; items: CatalogSearchProjection[]; facets: CatalogFacets;
 };
 export function catalogMarketLandingPath(generationId: string, market: string) {
@@ -1051,7 +1060,7 @@ function canUseMarketLanding(params: CatalogSearchParams) {
 export async function buildCatalogMarketLanding(generationId: string, market: string, items: CatalogSearchProjection[]): Promise<MarketLanding> {
   const rows = prepareCatalogProjectionRows(items);
   sortCatalogSearchRows(rows, {market: market as CatalogMarket, sort: "updatedAt"});
-  return {version: 1, generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
+  return {version: 1, policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10), generationId, market, duplicatePolicy: REVIEWED_DUPLICATE_POLICY, sourceTotal: items.length, total: rows.length,
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
 async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
@@ -1060,9 +1069,9 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   const market = String(params.market);
   const path = catalogMarketLandingPath(manifest.generationId, market);
   try {
-    return await marketLandingCache.get(path, async () => {
+    return await marketLandingCache.get(path+new Date(Date.now()+7*3600000).toISOString().slice(0,10), async () => {
       const value = await readDataJson<MarketLanding | null>(path, null);
-      if (!value || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
+      if (!value || value.policyDate!==new Date(Date.now()+7*3600000).toISOString().slice(0,10) || (market === "china" && value.duplicatePolicy !== REVIEWED_DUPLICATE_POLICY) || value.version !== 1 || value.generationId !== manifest.generationId || value.market !== market
         || value.sourceTotal !== Number(manifest.markets?.[market]?.count || 0)
         || !Number.isInteger(value.total) || value.total < 0 || value.total > value.sourceTotal
         || !Array.isArray(value.items) || value.items.length !== Math.min(value.total, MARKET_LANDING_LIMIT)
@@ -1724,7 +1733,7 @@ export async function getOffer(id: string) {
     // Regional cards navigate to a soft 404. If a shard is incomplete, fall
     // through to the immutable generation index instead of returning early.
     const currentOffer = (current.items || []).find((item) => item.id === id);
-    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return isConfirmedSourceWithdrawn(currentOffer) ? null : currentOffer;
+    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return isConfirmedSourceWithdrawn(currentOffer) || !catalogInventoryAgeDecision(currentOffer).eligible || catalogHeavyVehicleExcluded(currentOffer) ? null : currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1750,7 +1759,7 @@ export async function getOffer(id: string) {
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
-  return offer ? (isConfirmedSourceWithdrawn(offer) ? null : offer) : readProjectionFallback();
+  return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
 const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({maxEntries:24,maxBytes:16*1024*1024,ttlMs:300_000,concurrency:6});
@@ -1833,10 +1842,10 @@ async function readBudgetSelection(params:CatalogSearchParams){
  if(params.make || params.model || (!hasBudget && !metadataQuery))return null;
  const manifest=await readManifest();
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
- const key=JSON.stringify([manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+ const key=JSON.stringify([new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
   const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
-  if(!index || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
+  if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   const cardVersion=index.version;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
   const quotes=hasBudget&&(!params.market||params.market==="any"||params.market==="japan")&&index.rows.some(row=>row[3])?await japanSearchQuotes(manifest.generationId):{};
@@ -1853,6 +1862,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   let candidates=sourceRows.filter(row=>
+   catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
    && (!params.bodyType || same(row[5].bodyType,params.bodyType))
@@ -1952,7 +1962,7 @@ export async function countCatalogOffers(params: CatalogSearchParams) {
 const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:8});
 export async function searchOffers(params: CatalogSearchParams, internalPageLimit = 48) {
   const manifest=await readManifest();
-  const key=JSON.stringify([manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
+  const key=JSON.stringify([new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
@@ -2006,7 +2016,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
       const rows = prepareCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []))
         .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
       if (needsProjection) sortCatalogSearchRows(rows, params);
-      else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+      else sortCatalogSearchRows(rows,params);
       const total = rows.length;
       const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
       if (pageRows.every(projectionCanRenderCard)) return {
@@ -2027,7 +2037,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     const rows = prepareCatalogProjectionRows(current.items || [])
       .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
     if (needsProjection) sortCatalogSearchRows(rows, params);
-    else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+    else sortCatalogSearchRows(rows,params);
     const total = rows.length;
     const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
     if (pageRows.every(projectionCanRenderCard)) {
@@ -2122,16 +2132,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
 }
 
 function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number) {
-  // The homepage is a sales showcase, not a diagnostics queue. Prefer rows whose
-  // compact public projection already contains a validated delivered RUB total.
-  // Unpriced/pending inventory remains available in the catalog and may fill a
-  // showcase only when a market genuinely has fewer than `limit` priced rows.
-  const priced = rows.filter((row) => Number(row.totalRub || 0) > 0);
-  const pricedSelection = selectCatalogShowcaseDiversity(priced, limit);
-  if (pricedSelection.length >= limit) return pricedSelection;
-  const selectedIds = new Set(pricedSelection.map((row) => row.id));
-  const pending = rows.filter((row) => Number(row.totalRub || 0) <= 0 && !selectedIds.has(row.id));
-  return [...pricedSelection, ...selectCatalogShowcaseDiversity(pending, limit - pricedSelection.length)].slice(0, limit);
+ return selectCatalogShowcaseDiversity(rows.filter(projectionCanRenderCard).sort(compareCatalogDisplayOrder),limit);
 }
 
 export async function buildCatalogOverviewFromProjections(generationId: string, projections: CatalogSearchProjection[]) {
@@ -2143,14 +2144,14 @@ export async function buildCatalogOverviewFromProjections(generationId: string, 
     return [market, {sourceTotal: projections.filter(row => row.market === market).length,
       total: rows.length, items: selectHomepageShowcase(rows, 24).map(publicOfferFromProjection)}];
   }));
-  return buildCatalogOverviewPayload(generationId, facets, markets);
+  return {...buildCatalogOverviewPayload(generationId, facets, markets),policyDate:new Date(Date.now()+7*3600000).toISOString().slice(0,10)};
 }
 
 export async function readHomeCatalogSnapshot(perMarket = 6) {
   const manifest = await readManifest();
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const overview = await readCatalogOverview(manifest.generationId).catch(() => null);
-  if (overview?.generationId === manifest.generationId && MARKETS.every(market => {
+  if ((overview as any)?.policyDate===new Date(Date.now()+7*3600000).toISOString().slice(0,10) && overview?.generationId === manifest.generationId && MARKETS.every(market => {
     const count = Number(manifest.markets?.[market]?.count || 0);
     const summary = overview.markets[market];
     return catalogOverviewMarketComplete(summary, count, limit);
@@ -2158,7 +2159,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
     const marketCounts = Object.fromEntries(MARKETS.map(market => [market, overview.markets[market].total]));
     return {generationId: manifest.generationId, marketCounts,
       total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
-      items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit))};
+      items: MARKETS.flatMap(market => overview.markets[market].items.slice(0, limit)).sort(compareCatalogDisplayOrder)};
   }
   const currentProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
   if (currentProjection.generationId === manifest.generationId) {
@@ -2182,7 +2183,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
       });
       return {
         generationId: manifest.generationId,
-        items,
+        items:items.sort(compareCatalogDisplayOrder),
         marketCounts,
         total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
       };

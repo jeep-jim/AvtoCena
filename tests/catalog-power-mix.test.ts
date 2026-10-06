@@ -1,79 +1,17 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import {selectCatalogPowerMix,catalogPowerBand} from "../apps/web/lib/catalog/power-mix";
-const row=(id:string,powerHp?:number,market="europe")=>({id,market,powerHp}) as any;
-test("public selection enforces 80 percent and keeps input reserve intact",()=>{
- const rows=[...Array.from({length:8},(_,i)=>row("low"+i,150)),...Array.from({length:20},(_,i)=>row("high"+i,300))];
- const result=selectCatalogPowerMix(rows);
- assert.equal(result.rows.length,10);assert.equal(result.removed.length,18);assert.equal(rows.length,28);
- assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,8);
-});
-test("unknown power is outside the known-power allowance and each market is independent",()=>{
- const rows=[row("l1",100),row("l2",120),row("l3",130),row("l4",160),row("unknown"),row("high",300),...Array.from({length:4},(_,i)=>row("k"+i,140,"korea")),row("kh",250,"korea")];
- const result=selectCatalogPowerMix(rows);
- assert.equal(result.rows.length,11);assert.equal(result.removed.length,0);
- assert.equal(catalogPowerBand(row("x")), "unknown");
- assert.equal(catalogPowerBand({...row("ev",150),powertrainKind:"electric"}),"unknown");
- assert.equal(catalogPowerBand({...row("ev",400),powertrainKind:"electric",utilizationPowerKw:100}),"low");
- assert.equal(catalogPowerBand({...row("hev",100),powertrainKind:"other_hybrid",utilizationPowerKw:150}),"high");
-});
-test("Japan is exempt at every horsepower, including unknown power",()=>{
- const result=selectCatalogPowerMix([row("legacy",undefined,"japan"),row("j-low",100,"japan"),row("j-high",500,"japan")]);
- assert.equal(result.rows.length,3);assert.equal((result.report.japan as any).exempt,true);
- assert.throws(()=>selectCatalogPowerMix([row("high",300)]),/no_qualified_low_power/);
-});
-
-test("Europe prefers an affordable delivered total over a newer expensive car or seller-only price",()=>{
- const quote=(id:string,price:number)=>({...row(id,300),cardProjectionVersion:3,publicSpecificationVerified:true,publicVisibleRub:price,totalRub:price,calculationStatus:"ready",powertrainKind:"combustion",engineCc:2000});
- const rows=[...Array.from({length:4},(_,i)=>row("low"+i,150)),quote("expensive",12000000),{...row("seller",350),catalogPricingMode:"seller",sellerPriceRub:1000000},quote("affordable",3500000)];
- const result=selectCatalogPowerMix(rows);
- assert.ok(result.rows.some(r=>r.id==="affordable"));
- assert.ok(!result.rows.some(r=>r.id==="expensive"||r.id==="seller"));
-});
-
-test("unknown seller power is retained without consuming known-power allowance",()=>{
- const sellers=Array.from({length:100},(_,i)=>({...row("s"+i,undefined,"korea"),catalogPricingMode:"seller"}));
- const result=selectCatalogPowerMix([...sellers,...Array.from({length:4},(_,i)=>row("l"+i,150,"korea")),row("h",250,"korea"),row("h2",300,"korea")]);
- assert.equal(result.rows.length,105);assert.equal(result.removed.length,1);
- assert.equal((result.report.korea as any).sellerUnknownExempt,100);
- assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,4);
- assert.equal(selectCatalogPowerMix(sellers).rows.length,100);
- assert.equal(selectCatalogPowerMix(sellers,{retainedIds:new Set(sellers.map(r=>r.id))}).rows.length,100);
-});
-
-
-test("recovering power keeps existing cars and reserves remaining allowance for newcomers",()=>{
- const low=Array.from({length:4},(_,i)=>row('l'+i,150,'korea'));
- const retained=[row('existing1',204,'korea'),row('existing2',304,'korea')];
- const result=selectCatalogPowerMix([...low,row('new',250,'korea'),...retained],{retainedIds:new Set(['existing1','existing2'])});
- assert.deepEqual(result.removed.map(x=>x.id),['new']);
- assert.equal(result.rows.length,6);
- assert.equal((result.report.korea as any).retainedAboveAllowance,1);
- assert.equal((result.report.korea as any).targetMet,false);
- assert.equal(selectCatalogPowerMix(retained,{retainedIds:new Set(['existing1','existing2'])}).rows.length,2);
-});
-
-test('verified low-power replacements improve the mix without reducing the fixed public count',()=>{
- const old=[...Array.from({length:4},(_,i)=>row('old-low'+i,100)),...Array.from({length:8},(_,i)=>row('old-high'+i,300))];
- const options={retainedIds:new Set(old.map(r=>r.id)),minimumCountByMarket:{europe:12}};
- const fresh=Array.from({length:4},(_,i)=>row('new-low'+i,140));
- const result=selectCatalogPowerMix([...old,...fresh],options);
- assert.equal(result.rows.length,12);assert.equal(result.removed.length,4);
- assert.equal(result.rows.filter(r=>catalogPowerBand(r)==='low').length,8);
- const again=selectCatalogPowerMix(result.rows,options);
- assert.deepEqual(again.rows,result.rows);assert.equal(again.removed.length,0);
- const fulfilled=selectCatalogPowerMix([...old,...fresh,row('extra-low1',100),row('extra-low2',110)],options);
- assert.equal(fulfilled.rows.length,12);assert.equal((fulfilled.report.europe as any).targetMet,true);
- assert.equal(selectCatalogPowerMix(old,options).rows.length,12);
- assert.throws(()=>selectCatalogPowerMix(old,{...options,minimumCountByMarket:{europe:NaN}}),/invalid_power_mix_minimum/);
-});
-
-test("unknown power survives every market without fabricated values and selection is idempotent",()=>{
- for(const market of ["china","korea","uae","georgia","europe","japan"]){
-  const rows=[row("missing",undefined,market),{...row("hybrid",300,market),powertrainKind:"other_hybrid"}];
-  const before=structuredClone(rows);
-  const result=selectCatalogPowerMix(rows);
-  assert.deepEqual(result.rows,before);assert.deepEqual(rows,before);
-  assert.deepEqual(selectCatalogPowerMix(result.rows).rows,before);
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {selectCatalogPowerMix,catalogPowerBand} from '../apps/web/lib/catalog/power-mix';
+test('unlimited publication keeps high power with no low-power supply',()=>{
+ for(const market of ['china','korea','uae','europe','georgia','japan']){
+ const rows=[{market,id:'high',powerHp:600},{market,id:'unknown'},{market,id:'low',powerHp:100}];
+ const copy=structuredClone(rows),result=selectCatalogPowerMix(rows as any,{retainedIds:new Set(['low']),minimumCountByMarket:{[market]:1}});
+ assert.deepEqual(result.rows,copy);assert.deepEqual(result.removed,[]);assert.deepEqual(rows,copy);
+ assert.deepEqual(selectCatalogPowerMix(result.rows).rows,copy);
+ assert.equal(selectCatalogPowerMix([rows[0]] as any).rows.length,1);
  }
+});
+test('unknown and hybrid peak power are never misclassified as certified low power',()=>{
+ assert.equal(catalogPowerBand({powerHp:400,powertrainKind:'electric'}),'unknown');
+ assert.equal(catalogPowerBand({powerHp:400,powertrainKind:'electric',utilizationPowerKw:100}),'low');
+ assert.equal(catalogPowerBand({powertrainKind:'other_hybrid',utilizationPowerKw:150}),'high');
 });

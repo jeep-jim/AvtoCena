@@ -1,3 +1,4 @@
+import {catalogDisplayGroup,compareCatalogDisplayOrder} from './display-order';
 import type { VehicleOffer } from "./types";
 
 // Broad inventory is bounded by the market/storage budget, not a 20-row model bucket.
@@ -5,7 +6,7 @@ import type { VehicleOffer } from "./types";
 const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL_YEAR || 100000);
 export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredMaxOffersPerModelYear)
   ? Math.max(1, Math.min(100000, Math.floor(configuredMaxOffersPerModelYear))) : 100000;
-export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = 20;
+export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = Number.MAX_SAFE_INTEGER;
 export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
 export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
@@ -71,7 +72,7 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   for (const row of [...rows].sort((a, b) => Number(options.protectedIds?.has(String(b.id)) === true) - Number(options.protectedIds?.has(String(a.id)) === true))) {
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
-    const limit = row.market === "japan" ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR : CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+    const limit = Number.MAX_SAFE_INTEGER;
     if (!key || count >= limit) {
       removed.push(row);
       continue;
@@ -129,7 +130,7 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
     for (const row of pool) {
       if (selectedRows.has(row)) continue;
       const key = catalogExactModelKey(row as Partial<VehicleOffer>);
-      buckets.set(key, [...(buckets.get(key) || []), row]);
+      const bucket=buckets.get(key)||[];bucket.push(row);buckets.set(key,bucket);
     }
     for (let round = 0; selected.length < target; round++) {
       let added = false;
@@ -145,8 +146,12 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
   const lowPowerRows = rows.filter(row => isCatalogCombustionLowPower(row));
   const requestedLowPower = Math.ceil(boundedLimit * CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE);
   const lowPowerTarget = Math.min(requestedLowPower, lowPowerRows.length);
-  fillDiverse(lowPowerRows, lowPowerTarget);
-  fillDiverse(rows, boundedLimit);
+  for(const group of [0,1,2]){
+    const pool=rows.filter(row=>catalogDisplayGroup(row)===group).sort(compareCatalogDisplayOrder);
+    if(group===2){for(const row of pool){if(selected.length>=boundedLimit)break;append(row);}continue;}
+    fillDiverse(pool.filter(row=>isCatalogCombustionLowPower(row)),Math.min(boundedLimit,selected.length+pool.filter(row=>isCatalogCombustionLowPower(row)).length));
+    fillDiverse(pool,boundedLimit);
+  }
   return selected;
 }
 
@@ -176,7 +181,7 @@ export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOff
 
   const orderedBuckets = [...buckets.entries()]
     .sort(([a], [b]) => a.localeCompare(b, "en"))
-    .map(([, bucket]) => [...bucket].sort(compare).slice(0, bucket[0]?.market === "japan" ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR : CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
+    .map(([, bucket]) => [...bucket].sort(compare).slice(0, Number.MAX_SAFE_INTEGER));
   const selected: T[] = [];
   for (let round = 0; selected.length < boundedLimit; round++) {
     let added = false;

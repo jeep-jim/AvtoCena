@@ -44,7 +44,6 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
     && raw.calculationSnapshot?.priceIncludesAllCustoms === true
     && powerScenario?.source === "customer_input"
     && Number(raw.totalRub || 0) > 0
-    && Number(raw.totalRub || 0) <= 15_000_000
       ? Math.round(Number(raw.totalRub))
       : 0;
   const modificationRub = selectedModification ? conditionalModificationRub(selectedModification) : 0;

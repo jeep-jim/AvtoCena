@@ -73,18 +73,18 @@ test("Catalog V2 source registry keeps every configured adapter valid", () => {
   assert.deepEqual(failures, []);
 });
 
-test("default production policy is 30k with an 80 percent <=160 hp priority target", () => {
-  assert.equal(CATALOG_V2_DEFAULT_POLICY.maximumPerMarket, 30_000);
+test("default production policy has no count ceiling and ranks affordable low-power cars", () => {
+  assert.equal(CATALOG_V2_DEFAULT_POLICY.maximumPerMarket, Number.MAX_SAFE_INTEGER);
   assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityTarget, 24_000);
   assert.equal(CATALOG_V2_DEFAULT_POLICY.lowPowerMinShare, 0.8);
   assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityMaxPowerHp, 160);
-  assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityMaxTotalRub, 6_000_000);
+  assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityMaxTotalRub, 15_000_000);
 });
 
-test("commercial priority is <=160 hp and <=6m while low-power ranking is price-independent", () => {
+test("commercial priority is <=160 hp and <=15m while low-power ranking is price-independent", () => {
   assert.equal(classifyCatalogV2Offer(offer("priority")).tier, "priority");
   assert.equal(classifyCatalogV2Offer(offer("power", { powerHp: 161 })).tier, "recent");
-  assert.equal(classifyCatalogV2Offer(offer("price", { totalRub: 6_000_001 })).tier, "recent");
+  assert.equal(classifyCatalogV2Offer(offer("price", { totalRub: 15_000_001 })).tier, "recent");
   assert.equal(isCatalogLowPowerOffer(offer("expensive-low-power", { totalRub: 9_000_000, powerHp: 150 })), true);
   assert.equal(isCatalogLowPowerOffer(offer("high-power", { powerHp: 161 })), false);
 });
@@ -177,7 +177,7 @@ test("Japan supports fixed listings but auction rows must be completed", () => {
   assert.deepEqual(result.selected.map((row) => row.id).sort(), ["completed-auction", "fixed"]);
 });
 
-test("completed Japanese <=160 hp <=6m lot enters the priority layer", () => {
+test("completed Japanese <=160 hp <=15m lot enters the priority layer", () => {
   const auction = offer("japan-priority", {
     market: "japan",
     sourceId: "carvector_japan_stat_open",
@@ -240,17 +240,17 @@ test("market selection retains broad model-year inventory across source websites
   assert.equal(result.rejected.model_year_quota || 0, 0);
 });
 
-test("public price ceiling remains fifteen million even if a legacy caller supplies a higher cap", () => {
+test("price never rejects a valid listing even with legacy worker options", () => {
   const row = offer("luxury", { totalRub: 15_000_001 });
-  assert.equal(classifyCatalogV2Offer(row).reason, "hard_price_cap");
-  assert.equal(classifyCatalogV2Offer(row, policy({ hardMaxTotalRub: 100_000_000 })).reason, "hard_price_cap");
+  assert.equal(classifyCatalogV2Offer(row).reason, "market_year_eligible");
+  assert.equal(classifyCatalogV2Offer(row, policy({ hardMaxTotalRub: 100_000_000 })).reason, "market_year_eligible");
 });
 
-test('15 million cap applies to seller-only listings and cannot be loosened by worker options',()=>{
+test('seller-only listings above fifteen million remain eligible',()=>{
  for(const market of ['china','uae','korea','europe','georgia'] as const){
   const seller=offer('price-cap',{market,totalRub:undefined,catalogPricingMode:'seller',sellerPriceRub:30_000_000});
-  assert.equal(classifyCatalogV2Offer(seller).reason,'hard_price_cap');
-  assert.equal(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_001},{...CATALOG_V2_DEFAULT_POLICY,hardMaxTotalRub:99_000_000}).reason,'hard_price_cap');
-  assert.notEqual(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_000}).reason,'hard_price_cap');
+  assert.equal(classifyCatalogV2Offer(seller).reason,'market_year_eligible');
+  assert.equal(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_001},{...CATALOG_V2_DEFAULT_POLICY,hardMaxTotalRub:99_000_000}).reason,'market_year_eligible');
+  assert.equal(classifyCatalogV2Offer({...seller,sellerPriceRub:15_000_000}).eligible,true);
  }
 });

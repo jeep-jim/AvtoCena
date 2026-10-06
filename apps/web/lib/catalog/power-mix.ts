@@ -1,5 +1,4 @@
 import type { VehicleOffer } from "./types";
-import { catalogOfferVisibleRub } from "./public-priority";
 
 /** Unknown power is never evidence for the <=160 hp pool. */
 export function catalogPowerBand(offer: Partial<VehicleOffer>) {
@@ -12,49 +11,26 @@ export function catalogPowerBand(offer: Partial<VehicleOffer>) {
  return power<=160.01 ? "low" : "high";
 }
 
-/** Public assortment only: callers retain the complete source inventory. */
-export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[], options: { retainedIds?: ReadonlySet<string>; minimumCountByMarket?: Readonly<Record<string, number>> } = {}) {
- const groups=new Map<string,T[]>();
- for(const row of rows){const market=String(row.market||"");const bucket=groups.get(market)||[];bucket.push(row);groups.set(market,bucket);}
- const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
- for(const [market,bucket] of groups){
-  const low=bucket.filter(row=>catalogPowerBand(row)==="low");
-  const unknownPower = bucket.filter(row=>catalogPowerBand(row)==="unknown");
-  const unknownPowerSet=new Set(unknownPower);
-  const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !unknownPowerSet.has(row));
-  const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
-  // Owner explicitly excludes Japan from the 80/20 policy: keep every verified auction
-  // sold-result candidate regardless of power; sanctions are a separate flag.
-  if(market==="japan"){
-   selected.push(...bucket);
-   report[market]={low:low.length,high:other.length-unknown,unknown:unknown+unknownPower.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
-   continue;
+/** Owner policy 2026-10-06: 80/20 is showcase priority, never an inventory cap.
+ * Keep the compatibility options for existing publishers; neither old public
+ * membership nor a minimum count may exclude a newly admitted car by power.
+ */
+export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: readonly T[], _options: { retainedIds?: ReadonlySet<string>; minimumCountByMarket?: Readonly<Record<string, number>> } = {}) {
+ const report:Record<string,any>={};
+ for(const row of rows){
+  const market=String(row.market||"");
+  const stats=report[market] ||= {mode:"priority_only",low:0,high:0,unknown:0,published:0,held:0,unknownPowerExempt:0,sellerUnknownExempt:0,retainedAboveAllowance:0,replacedByLowPower:0};
+  const band=catalogPowerBand(row);
+  stats[band]++;stats.published++;
+  if(band==="unknown"){
+   stats.unknownPowerExempt++;
+   if(row.catalogPricingMode==="seller")stats.sellerUnknownExempt++;
   }
-  const retainedOther=other.filter(row=>options.retainedIds?.has(String(row.id)));
-  if(market !== "china" && bucket.length && !low.length && !unknownPower.length && !retainedOther.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
-  const allowance=Math.floor(low.length/4);
-  // Europe: fill the limited extra pool with the least expensive verified
-  // delivered totals first. Seller-only prices are not comparable to totals.
-  // Owner policy 2026-10-06: editable unknown power is outside the known-power quota.
-  // Only already-published rows can be grandfathered while verified low-power stock grows.
-  if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
-  // An existing car must not vanish merely because its previously unknown power was recovered.
-  // Retained cars consume the allowance first; new high-power admissions wait for room.
-  const retainedSet=new Set(retainedOther);
-  const newOther=other.filter(row=>!retainedSet.has(row));
-  const minimum = options.minimumCountByMarket?.[market];
-  if (minimum !== undefined && (!Number.isSafeInteger(minimum) || minimum < 0)) throw Error('invalid_power_mix_minimum');
-  // New verified low-power stock can replace old high/unknown rows without
-  // reducing the previous market count. The fixed baseline makes repeated
-  // preview/persistence selection idempotent instead of progressively shrinking.
-  const retainedAllowance = minimum === undefined ? retainedOther.length : Math.max(allowance, minimum - low.length - unknownPower.length);
-  const retainedKept = retainedOther.slice(0, retainedAllowance);
-  const newAllowance=Math.max(0,allowance-retainedKept.length);
-  const keptOther=[...retainedKept,...newOther.slice(0,newAllowance)];
-  const kept=new Set<T>([...low,...keptOther,...unknownPower]);
-  selected.push(...bucket.filter(row=>kept.has(row)));
-  removed.push(...retainedOther.slice(retainedKept.length),...newOther.slice(newAllowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+unknownPower.length,sellerUnknownExempt:unknownPower.filter(row=>row.catalogPricingMode==="seller").length,retainedAboveAllowance:Math.max(0,retainedKept.length-allowance),replacedByLowPower:retainedOther.length-retainedKept.length,published:kept.size,held:other.length-keptOther.length,unknownPowerExempt:unknownPower.length,targetMet:low.length + keptOther.length > 0 && low.length / (low.length + keptOther.length) >= 0.8};
  }
- return {rows:selected,removed,report};
+ for(const [market,stats] of Object.entries(report)){
+  stats.targetMet=stats.low+stats.high>0 && stats.low/(stats.low+stats.high)>=0.8;
+  if(market==="japan"){stats.exempt=true;stats.reason="japan_owner_exemption";}
+ }
+ // Existing ranking and showcase diversity decide presentation, not admission.
+ return {rows:[...rows],removed:[] as T[],report};
 }

@@ -14,7 +14,8 @@ function recordConfirmedWithdrawal(state, offer) {
 export async function collectSourceStates(states, optionsForState, collect = collectSourcePage) {
   await Promise.all(states.map(async state => {
     const options = optionsForState(state);
-    while (!state.done && Date.now() < options.deadline) await collect(state, options);
+    try { while (!state.done && Date.now() < options.deadline) await collect(state, options); }
+    catch(error){state.done=true;state.stopReason="collector_error";state.errors.push({stage:"collector",message:String(error?.message||error)});await options.checkpoint();}
   }));
 }
 
@@ -22,6 +23,7 @@ export async function collectSourceStates(states, optionsForState, collect = col
 export async function collectSourcePage(state, options) {
   const { snapshot, writeObservation, checkpoint, deadline, maxRows, maxPages, minYear, specificationReport } = options;
   if (state.done || Date.now() >= deadline) return;
+  if(options.hasDiskRoom && !await options.hasDiskRoom()){state.done=true;state.stopReason="disk_budget";await checkpoint();return;}
   if (state.pages >= maxPages || state.seen.size >= maxRows) { state.done = true; state.stopReason = 'budget'; return; }
   const cursorKey = JSON.stringify(state.cursor ?? null);
   if (state.cursors.has(cursorKey)) { state.done = true; state.stopReason = 'cursor_loop'; return; }

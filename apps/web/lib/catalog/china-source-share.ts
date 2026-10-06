@@ -4,12 +4,12 @@ import { selectCatalogPowerMix } from './power-mix';
 
 const AUTOHOME = 'autohome_new_china_open';
 
-/** Cap actual public rows, including retained inventory; never delete raw data. */
+/** Owner policy: no source-share assortment cap; source identity rules still apply. */
 export function selectChinaSourceShare<T extends Partial<VehicleOffer>>(rows: readonly T[]) {
   const china = rows.filter(row => row.market === 'china');
   const other = china.filter(row => row.sourceId !== AUTOHOME).length;
-  // A / (A + other) <= 0.10, hence A <= floor(other / 9).
-  const allowance = Math.floor(other / 9);
+  // Unlimited admission is independent of source composition.
+  const allowance = china.length;
   let kept = 0;
   const removed: T[] = [];
   const selected = rows.filter(row => {
@@ -20,12 +20,12 @@ export function selectChinaSourceShare<T extends Partial<VehicleOffer>>(rows: re
   });
   return { rows: selected, removed, report: { china: {
     autohome: kept, otherSources: other, published: other + kept,
-    maxShare: 0.1, actualShare: other + kept ? kept / (other + kept) : 0,
+    maxShare: 1, actualShare: other + kept ? kept / (other + kept) : 0,
     held: removed.length, allowance,
   } } };
 }
 
-/** Both quotas must hold after all removals, not just before canonicalization. */
+/** Both assortment reports are informational; source-scope checks still apply. */
 export function selectCatalogPublicationMix<T extends Partial<VehicleOffer>>(rows: readonly T[], enforcePower: boolean, retainedPowerIds?: ReadonlySet<string>, minimumCountByMarket?: Readonly<Record<string, number>>) {
   let current = [...rows];
   const sourceRemoved: T[] = [], powerRemoved: T[] = [];

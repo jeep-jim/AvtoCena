@@ -1,3 +1,4 @@
+import {compareCatalogDisplayOrder} from './display-order';
 import { catalogHardPriceCap } from "./china-owner-policy";
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { isCatalogCombustionLowPower } from "./inventory-quota";
@@ -54,7 +55,7 @@ const PRELIMINARY_POWER_MISSING = new Set([
   "power_hp",
 ]);
 
-export const CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB = 15_000_000;
+export const CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB = Number.POSITIVE_INFINITY;
 export const CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO = 8;
 
 function positive(value: unknown, max = Number.MAX_SAFE_INTEGER) {
@@ -217,21 +218,7 @@ export function japanAuctionSoldPriceVerified(offer: Partial<VehicleOffer> | any
 }
 
 function publicPriceLimits(offer?: Partial<VehicleOffer>) {
-  const hardMaximumRub = catalogHardPriceCap(offer);
-  // The preferred limit only affects ordering. The market ceiling is a product
-  // invariant for a displayed delivered price. Inventory with an unfinished
-  // calculation can still be shown, but it receives no public delivered total.
-  const requestedPreferredRub = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_RUB || 8_000_000);
-  const requestedAbsoluteRub = Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || hardMaximumRub);
-  const absoluteMaximumRub = Math.min(
-    hardMaximumRub,
-    Math.max(1_000_000, Number.isFinite(requestedAbsoluteRub) ? requestedAbsoluteRub : hardMaximumRub),
-  );
-  const preferredMaximumRub = Math.min(
-    absoluteMaximumRub,
-    Math.max(1_000_000, Number.isFinite(requestedPreferredRub) ? requestedPreferredRub : 8_000_000),
-  );
-  return { preferredMaximumRub, absoluteMaximumRub };
+  return {preferredMaximumRub:15_000_000,absoluteMaximumRub:Number.POSITIVE_INFINITY};
 }
 
 export function catalogOfferCarPriceRub(offer: Partial<VehicleOffer> | any) {
@@ -379,6 +366,7 @@ export function compareCatalogPublicPriority(left: Partial<VehicleOffer> | any, 
   const a = catalogPublicPriority(left);
   const b = catalogPublicPriority(right);
   return Number(b.eligible) - Number(a.eligible)
+    || compareCatalogDisplayOrder(left,right)
     || a.tier - b.tier
     || Number(b.calculated) - Number(a.calculated)
     || b.imageCount - a.imageCount

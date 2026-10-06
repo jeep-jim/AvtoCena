@@ -11,28 +11,28 @@ const offer = (extra: any = {}) => ({ market: 'china', year: 2024, sourceId: 'au
   sourcePrice: 10000, sourceCurrency: 'USD', operational: {sourceUrl: 'https://global.che168.com/zh/detail/123'}, ...extra }) as any;
 
 test('six-year China boundary uses month; production takes precedence over registration', () => {
-  for (const [date, allowed] of [['2020-08', false], ['2020-09', true], ['2020-10', true], ['2026-10', false], ['2020-02-31', false]] as const) {
+  for (const [date, allowed] of [['2020-08', false], ['2020-09', true], ['2020-10', true], ['2026-10', false], ['2020-02-31', true]] as const) {
     assert.equal(chinaInventoryAgeDecision(offer({year:2020,operational:{registrationDate:date}}),now).eligible,allowed,date);
   }
   const row = offer({year:2020,operational:{registrationDate:'2021-01',raw:{detail:{infoid:123,manufacturedate:'2020-08'}}}});
   assert.equal(chinaInventoryAgeDecision(row,now).eligible,false);
-  assert.equal(chinaInventoryAgeDecision(row,now).basis,'manufacture_month');
+  assert.equal(chinaInventoryAgeDecision(row,now).basis,'source_month');
   row.operational.raw.detail.manufacturedate='2020-08-01 00:00:00';
   assert.equal(chinaInventoryAgeDecision(row,now).eligible,false,'timestamp must not fall back to newer registration');
   row.operational.raw.detail.manufacturedate='2020-09-01 00:00:00';
-  assert.equal(chinaInventoryAgeDecision(row,now).eligible,true);
+  assert.equal(chinaInventoryAgeDecision(row,now).eligible,false);
   assert.equal(chinaInventoryAgeDecision(offer({year:2019,operational:{registrationDate:'2021.09'}}),now).eligible,true,'old trim year does not discard an age-qualified detail candidate');
-  assert.equal(chinaInventoryAgeDecision(offer({year:2020}),now).eligible,false);
+  assert.equal(chinaInventoryAgeDecision(offer({year:2020}),now).eligible,true);
   assert.equal(chinaInventoryAgeDecision(offer({year:2021}),now).eligible,true);
   assert.equal(chinaInventoryAgeDecision(offer({market:'japan',year:2010}),now).eligible,true);
 });
 
-test('Autohome remains new 2026+ and China price cap does not change other markets', () => {
-  assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2025})),false);
+test('Autohome remains new-car source within the shared age policy; no market price cap', () => {
+  assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2025})),true);
   assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2026,mileageKm:1})),false);
   assert.equal(sourceInventoryInScope(offer({sourceId:'autohome_new_china_open',year:2026,mileageKm:0})),true);
-  assert.equal(catalogHardPriceCap(offer()),15_000_000);
-  assert.equal(catalogHardPriceCap(offer({market:'korea'})),15_000_000);
+  assert.equal(catalogHardPriceCap(offer()),Infinity);
+  assert.equal(catalogHardPriceCap(offer({market:'korea'})),Infinity);
 });
 
 test('owner adjustment preserves source and customs values, subtracts two percent of car only, never compounds', () => {
@@ -65,7 +65,7 @@ test('Global Che168 correction does not change percentage expense base', () => {
   assert.equal(baseline.totalRub-corrected.totalRub,16000);
 });
 
-test('China 80/20 excludes unknown seller power while retaining raw input, and composes with Autohome cap', () => {
+test('China admits unknown seller power and unrestricted approved source inventory', () => {
   const low = Array.from({length:80},(_,i)=>offer({id:'low'+i,powerHp:150}));
   const unknown = Array.from({length:100},(_,i)=>offer({id:'unknown'+i,catalogPricingMode:'seller'}));
   const auto = Array.from({length:100},(_,i)=>offer({id:'auto'+i,sourceId:'autohome_new_china_open',year:2026,powerHp:100}));
@@ -73,7 +73,7 @@ test('China 80/20 excludes unknown seller power while retaining raw input, and c
   const selected=selectCatalogPublicationMix(input,true);
   assert.equal(input.length,280);
   assert.ok(selected.rows.filter(r=>catalogPowerBand(r)==='low').length / selected.rows.filter(r=>catalogPowerBand(r)!=='unknown').length >= .8);
-  assert.ok(selected.rows.filter(r=>r.sourceId==='autohome_new_china_open').length / selected.rows.length <= .1);
+  assert.equal(selected.rows.length,280);
   assert.equal((selected.powerMix.report.china as any).sellerUnknownExempt,100);
   assert.equal(selected.rows.length+selected.powerMix.removed.length+selected.sourceShare.removed.length,input.length);
   assert.equal(selectCatalogPublicationMix(unknown,true).rows.length,100);

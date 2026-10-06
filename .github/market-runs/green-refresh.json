@@ -1,1 +1,8 @@
-{"requestedAt":"2026-09-24T05:00:00Z","reason":"Replace FOB with verified source CIF invoices and ATB payment quote; no separate logistics or bank surcharge"}
+{
+  "operation": "owner-open-inventory-20261006-1412",
+  "market": "japan",
+  "resetCursors": true,
+  "publish": true,
+  "publishOnly": false,
+  "reason": "Fresh Japan 2010+ inventory without price or horsepower exclusion."
+}

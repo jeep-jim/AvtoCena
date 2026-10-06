@@ -56,11 +56,11 @@ function sourceOffer(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
-test("public price requires a complete calculation and enforces the 15M product ceiling", () => {
+test("public price requires a complete calculation without a product price ceiling", () => {
   assert.equal(catalogOfferVisibleRub(calculatedOffer(3_200_000)), 3_200_000);
   assert.equal(catalogOfferVisibleRub(calculatedOffer(15_000_000)), 15_000_000);
-  assert.equal(catalogOfferVisibleRub(calculatedOffer(15_000_001)), 0);
-  assert.equal(catalogOfferVisibleRub(calculatedOffer(346_980_250)), 0);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(15_000_001)), 15_000_001);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(346_980_250)), 346_980_250);
   assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
 });
 

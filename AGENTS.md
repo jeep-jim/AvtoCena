@@ -16,5 +16,6 @@
 # Editable vehicle specifications
 
 - Owner policy updated 06.10.2026: missing editable specifications (including horsepower, certified power, engine volume, fuel, drive, transmission and body) alone must not reject an otherwise valid listing. Keep missing fields honest and let the existing card parameter controls complete calculation. Never fabricate specifications or display an incomplete calculation as a confirmed delivered total.
-- Unknown power is outside the known-power 80/20 assortment quota; it is not evidence of <=160 hp. Preserve provenance, price, identity, deduplication and freshness checks.
+- Owner policy superseded 06.10.2026 14:12 Asia/Krasnoyarsk: no admission caps by price, horsepower, source share or model-year count. Non-Japan inventory is at most six calendar years old using actual source day/month/year precision; Japan is 2010+. Recheck age at display time. Exclude trucks/buses with permitted gross mass above 3500 kg, not curb mass. Do not fabricate missing dates or mass.
+- Default display order across markets: known price up to 15,000,000 RUB first, preferably verified <=160 hp; missing prices separately, >15,000,000 RUB last from cheaper to most expensive. Ranking never removes inventory. Preserve truthful pricing, allowed provenance, identity, deduplication, withdrawal/freshness and storage safeguards.
 - Append every completed task and operational launch to roadmap.md during the session, not only at the end of the day. Preserve history and record unfinished runs explicitly.

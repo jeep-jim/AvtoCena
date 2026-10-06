@@ -39,7 +39,7 @@ const v2Policy = {
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
   priorityMaxPowerHp,
   priorityMaxTotalRub,
-  hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
+  hardMaxTotalRub: Number.POSITIVE_INFINITY,
 };
 const generationKeepCount = Math.max(2, Number(process.env.CATALOG_GENERATION_KEEP_COUNT || 2));
 const generationCleanupGraceMs = Math.max(retentionMs, Number(process.env.CATALOG_GENERATION_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));

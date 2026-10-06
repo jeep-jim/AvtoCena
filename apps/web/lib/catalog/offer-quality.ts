@@ -1,3 +1,4 @@
+import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { hasModificationSelection } from "./modification-contract";
 import { reviewedCatalogGalleryHold } from "./source-gallery-review";
@@ -14,12 +15,10 @@ const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set([...Object.values(REQUIRED_CATALOG_SOURCES).flat(), ...APPROVED_SAVED_CATALOG_SOURCES].map((source) => source.sourceId));
-const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
-const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
 const GOONET_CATALOG_IMAGE_HOST = "catalogphoto.goo-net.com";
 const GOONET_PICTURE_HOST_RE = /(?:^|\.)picture\d*\.goo-net\.com$/i;
-export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
+export const CATALOG_NON_JAPAN_MIN_YEAR = new Date().getUTCFullYear()-6;
 export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
 export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
@@ -33,11 +32,11 @@ export function hasAllowedCatalogSourceProvenance(offer: VehicleOffer) {
 
 export function catalogMinYearForMarket(marketValue: unknown) {
   const market = String(marketValue || "").trim().toLowerCase();
-  return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : CATALOG_NON_JAPAN_MIN_YEAR;
+  return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : new Date(Date.now()+7*3600000).getUTCFullYear()-6;
 }
 export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) {
   const year = Number(yearValue || 0);
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date(Date.now()+7*3600000).getUTCFullYear();
   return Number.isFinite(year) && year >= catalogMinYearForMarket(marketValue) && year <= currentYear + 1;
 }
 
@@ -203,17 +202,7 @@ export function isCatalogKnownK9EngineSemanticValid(offer: VehicleOffer) {
 }
 
 export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
-  if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
-  const currentYear = new Date().getFullYear();
-  const year = Number(offer.year || 0);
-  const powerHp = Number(offer.powerHp || 0);
-  if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
-
-  const powertrainKind = clean(offer.powertrainKind).toLowerCase();
-  if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)) return true;
-  if (ALTERNATIVE_POWERTRAIN_RE.test(clean(offer.fuel))) return true;
-
-  return false;
+  return isCatalogKnownBodySemanticValid(offer) && isCatalogKnownK9EngineSemanticValid(offer);
 }
 
 // A fresh source's batch minimum must not retroactively invalidate retained
@@ -267,10 +256,10 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
   if (!hasCredibleCatalogIdentity(offer)) return false;
   if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
-  if (!isCatalogYearAllowed(year, offer.market)) return false;
+  if (!catalogInventoryAgeDecision(offer).eligible) return false;
   if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
-  if (isNonPassengerCatalogBodyType(offer.bodyType)) return false;
+  if (catalogHeavyVehicleExcluded(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   if (!checkGalleryCoherence) {
     return (offer.images || []).some((image) => {

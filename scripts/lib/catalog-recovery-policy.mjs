@@ -12,7 +12,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  // A published slice may end with a non-success workflow solely because its
  // collection is partial. Resume only its committed budget cursor, never
  // rerun the failed publication or advance past observations not published.
- const budgetStops=new Set(['budget','time_budget','budget_mid_page']);
+ const budgetStops=new Set(['budget','time_budget','budget_mid_page','disk_budget']);
  const sourceRows=journal?.sources||[];
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
@@ -25,7 +25,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
   && journal?.generationId && journal.generationId===intakeCheckpoint?.generationId;
  const slicePublished=journal?.publicationStatus==='published'||legacyPublishedSlice;
  const budgetContinuationBlockers=[];
- if(!['china','europe'].includes(market))budgetContinuationBlockers.push('market_not_resumable');
+ if(!['china','europe','korea','uae','georgia'].includes(market))budgetContinuationBlockers.push('market_not_resumable');
  if(!slicePublished)budgetContinuationBlockers.push('slice_not_published');
  if(intakeCheckpoint?.version!==1||intakeCheckpoint?.market!==market)budgetContinuationBlockers.push('checkpoint_missing_or_invalid');
  if(intakeCheckpoint?.generationId!==journal?.generationId)budgetContinuationBlockers.push('checkpoint_generation_mismatch');
@@ -34,7 +34,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  if(budgetRows.some(s=>typeof s.cursor!=='string'||!s.cursor.length
    ||!intakeCheckpoint?.sources?.some(c=>c.sourceId===s.sourceId&&c.cursor===s.cursor&&budgetStops.has(c.stopReason))))budgetContinuationBlockers.push('cursor_not_committed');
  if(latest&&latest.conclusion!=='success'&&String(latest.id)!==String(journal?.runId))budgetContinuationBlockers.push('newer_failed_run');
- const committedBudget=['china','europe'].includes(market) && slicePublished
+ const committedBudget=['china','europe','korea','uae','georgia'].includes(market) && slicePublished
   && intakeCheckpoint?.version===1 && intakeCheckpoint.market===market
   && intakeCheckpoint.generationId===journal.generationId
   && checkpointAge>=0 && checkpointAge<4*86400000 && budgetRows.length>0

@@ -48,6 +48,7 @@ export type VehicleOffer = {
   trim?: string;
   year: number;
   productionDate?: string;
+  inventorySourceDate?: string;
   mileageKm?: number;
   engineCc?: number;
   engineType?: string;
