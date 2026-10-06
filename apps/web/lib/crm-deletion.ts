@@ -24,18 +24,19 @@ export async function deletionPreview(actor:AuthUser,kind:DeletionKind,id:string
  if(kind==='client'&&record.documents?.length)blockers.push('У клиента есть документы, в том числе в архиве. Сначала разберите документы.');
  if(contracts)blockers.push('С клиентом связан договор. Удаление заблокировано, пока договор хранится в CRM.');
  if(deals.some(r=>kind==='lead'?r.leadId===id:r.clientId===id)||accruals.some(r=>kind==='lead'?r.leadId===id:r.clientId===id)
-   ||kind==='lead'&&[record.status,...(record.statusHistory||[]).map((h:any)=>h.status)].some(s=>['contract_signed','paid'].includes(s)))blockers.push('Есть сделка, подписанный договор или финансовое начисление. Используйте архив.');
- return {id,label:kind==='client'?record.fio||record.phone||'Клиент':record.name||record.car||'Заявка',revision:deletionRevision(record),blockers};
+)blockers.push('Есть сделка, подписанный договор или финансовое начисление. Используйте архив.');
+ const requiresTestConfirmation=kind==='lead'&&[record.status,...(record.statusHistory||[]).map((h:any)=>h.status)].some(s=>['contract_signed','paid'].includes(s));
+ return {requiresTestConfirmation,id,label:kind==='client'?record.fio||record.phone||'Клиент':record.name||record.car||'Заявка',revision:deletionRevision(record),blockers};
 }
-export async function deleteCrmRecord(actor:AuthUser,kind:DeletionKind,id:string,revision:string){
+export async function deleteCrmRecord(actor:AuthUser,kind:DeletionKind,id:string,revision:string,confirmTestRecord=false){
  const preview=await deletionPreview(actor,kind,id);
- if(preview.blockers.length)throw Error('delete_linked');
+ if(preview.blockers.length||(preview.requiresTestConfirmation&&!confirmTestRecord))throw Error('delete_linked');
  if(preview.revision!==revision)throw Error('delete_conflict');
  const deleted=await deleteChunkedDataJson<any>(pathFor(kind),id,record=>{
   if(!canSeeLead(actor,record))throw Error('delete_forbidden');
   if(deletionRevision(record)!==revision)throw Error('delete_conflict');
  });
  if(!deleted)throw Error('delete_not_found');
- await recordCrmActivity(actor,{id:`${kind}_deleted_${id}`,type:`${kind}_deleted`,title:kind==='client'?'Удалён клиент':'Удалена заявка',entityType:kind,entityId:id,entityLabel:`№ ${id}`,href:kind==='client'?'/crm/clients':'/crm/leads',visibility:'management'});
+ await recordCrmActivity(actor,{id:`${kind}_deleted_${id}`,type:`${kind}_deleted`,title:kind==='client'?'Удалён клиент':confirmTestRecord?'Удалена тестовая заявка':'Удалена заявка',entityType:kind,entityId:id,entityLabel:`№ ${id}`,href:kind==='client'?'/crm/clients':'/crm/leads',visibility:'management'});
  return {ok:true};
 }

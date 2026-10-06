@@ -28,7 +28,14 @@ test('deletion protects linked records, permissions and stale confirmations; rem
   await appendChunkedDataJson('clients/clients.json',{id:'docs',documents:[{id:'doc',deletedAt:'2026-09-29'}]});
   assert.ok((await deletionPreview(actor,'client','docs')).blockers.some(x=>x.includes('документы')));
   await appendChunkedDataJson('leads/leads.json',{id:'paid',status:'rejected',statusHistory:[{status:'paid'}]});
-  assert.ok((await deletionPreview(actor,'lead','paid')).blockers.length);
+  const paidPreview=await deletionPreview(actor,'lead','paid');
+  assert.equal(paidPreview.requiresTestConfirmation,true);
+  await assert.rejects(deleteCrmRecord(actor,'lead','paid',paidPreview.revision),/delete_linked/);
+  await deleteCrmRecord(actor,'lead','paid',paidPreview.revision,true);
+  await appendChunkedDataJson('leads/leads.json',{id:'signed-test',status:'contract_signed'});
+  const testPreview=await deletionPreview(actor,'lead','signed-test');
+  await appendChunkedDataJson('deals/deals.json',{id:'real-deal',leadId:'signed-test'});
+  await assert.rejects(deleteCrmRecord(actor,'lead','signed-test',testPreview.revision,true),/delete_linked/);
   await appendChunkedDataJson('clients/clients.json',{id:'contract',fio:'Contract client'});
   await createContract(actor,'japan','contract',randomUUID());
   assert.ok((await deletionPreview(actor,'client','contract')).blockers.some(x=>x.includes('договор')));
