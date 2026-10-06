@@ -13,6 +13,10 @@ const ENABLED_KEY="avtocena_crm_notifications_enabled";
 const get=(key:string)=>{try{return localStorage.getItem(key);}catch{return null;}};
 const put=(key:string,value:string)=>{try{localStorage.setItem(key,value);}catch{}};
 let audio:AudioContext|null=null;
+const playing=new Set<OscillatorNode>();
+function stopBeep(){for(const oscillator of playing){try{oscillator.stop();}catch{}}playing.clear();}
+function dismissedEvents(key:string):Set<string>{try{const rows=JSON.parse(get(key)||"[]");return new Set(Array.isArray(rows)?rows.filter(v=>typeof v==="string"):[]);}catch{return new Set();}}
+
 function unlockAudio(){
   try { const AudioCtor=window.AudioContext || (window as any).webkitAudioContext;
     if(!AudioCtor)return;
@@ -26,8 +30,8 @@ function beep(){
     const oscillator=audio.createOscillator(),gain=audio.createGain(),now=audio.currentTime;
     oscillator.type="sine";oscillator.frequency.setValueAtTime(880,now);
     gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.12,now+.02);gain.gain.exponentialRampToValueAtTime(.0001,now+.3);
-    oscillator.connect(gain);gain.connect(audio.destination);oscillator.start();oscillator.stop(now+.32);
-    oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
+    oscillator.connect(gain);gain.connect(audio.destination);playing.add(oscillator);oscillator.start();oscillator.stop(now+.32);
+    oscillator.onended=()=>{playing.delete(oscillator);oscillator.disconnect();gain.disconnect();};
   }catch{}
 }
 type InboxLead = AlertLead & {unread:boolean;assignmentUnread?:boolean;hasReadReceipt?:boolean;assignmentAt?:string;eventKey:string;name?:string;phone?:string;telegram?:string;car?:string;offerTitle?:string;selectedOffers?:{title:string}[]};
@@ -39,6 +43,24 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   async function refreshNotices(){try{const r=await fetch('/api/crm/notifications',{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);}}catch{}}
   useEffect(()=>{let busy=false;const poll=async()=>{if(busy||document.visibilityState!=='visible')return;busy=true;try{await refreshNotices();}finally{busy=false;}};void poll();const timer=setInterval(poll,20000);window.addEventListener('avtocena:reminders',poll);window.addEventListener('avtocena:crm-change',poll);document.addEventListener('visibilitychange',poll);return()=>{clearInterval(timer);window.removeEventListener('avtocena:reminders',poll);window.removeEventListener('avtocena:crm-change',poll);document.removeEventListener('visibilitychange',poll);};},[userId]);
   async function readNotices(ids:string[]){if(!ids.length)return;try{const r=await fetch('/api/crm/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(!r.ok)throw Error();setNotifications(rows=>rows.map(n=>ids.includes(n.id)?{...n,unread:false}:n));}catch{setAckError('Не удалось отметить уведомления прочитанными.');}}
+  const dismissKey=`avtocena_crm_dismissed_${userId}`;
+  const [dismissed,setDismissed]=useState<Set<string>>(new Set());
+  const leadKey=(lead:InboxLead)=>`lead:${lead.id}:${lead.eventKey}`;
+  const noticeKey=(notice:CrmNotice)=>`notice:${notice.id}:${notice.createdAt}`;
+  const alertKeys=[...pending.map(leadKey),...unreadNotices.map(noticeKey)];
+  const alertKeysRef=useRef(alertKeys);alertKeysRef.current=alertKeys;
+  const hasAlert=alertKeys.some(key=>!dismissed.has(key));
+  useEffect(()=>{
+    const sync=()=>{const next=dismissedEvents(dismissKey);setDismissed(next);if(!alertKeysRef.current.some(key=>!next.has(key)))stopBeep();};
+    const storage=(event:StorageEvent)=>{if(event.key===dismissKey)sync();};
+    sync();window.addEventListener('storage',storage);window.addEventListener('avtocena:alert-dismissed',sync);
+    return()=>{window.removeEventListener('storage',storage);window.removeEventListener('avtocena:alert-dismissed',sync);};
+  },[dismissKey]);
+  function dismissAlert(){
+    const next=dismissedEvents(dismissKey);for(const key of alertKeys)next.add(key);
+    put(dismissKey,JSON.stringify([...next].slice(-2000)));setDismissed(next);stopBeep();
+    window.dispatchEvent(new Event('avtocena:alert-dismissed'));
+  }
   const soundKey=`${ENABLED_KEY}_${userId}`;
   const [audioBlocked,setAudioBlocked]=useState(false);
   const [menuOpen,setMenuOpen]=useState(false),[ackError,setAckError]=useState(""),[acknowledging,setAcknowledging]=useState(false);
@@ -92,14 +114,16 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     return ()=>{active=false;clearInterval(timer);window.removeEventListener("focus",focus);document.removeEventListener("visibilitychange",focus);window.removeEventListener("avtocena:lead-read",focus);window.removeEventListener("storage",sync);};
   },[userId]);
   useEffect(()=>{
-    if(!enabled || (!pending.length&&!unreadNotices.length) || !authorized)return;
+    if(!enabled || !hasAlert || !authorized)return;
     const ring=()=>{
+      const dismissedNow=dismissedEvents(dismissKey);
+      if(!alertKeysRef.current.some(key=>!dismissedNow.has(key)))return;
       // One sound source across CRM and public tabs; the lease expires if a tab closes.
       let lease:{id?:string;until?:number}={};try{lease=JSON.parse(get(leaseKey)||"{}");}catch{}
       if(lease.id!==tab.current && Number(lease.until)>Date.now())return;
       put(leaseKey,JSON.stringify({id:tab.current,until:Date.now()+1800}));
       beep();setAudioBlocked(!audio || audio.state!=="running");
-      const newest=pending[0];
+      const newest=pending.find(lead=>!dismissedNow.has(leadKey(lead)));
       if(!newest)return;
       const eventKey=`${newest.id}:${newest.eventKey}`;
       if(document.visibilityState!=="visible" && notifiedRef.current!==eventKey && "Notification" in window && Notification.permission==="granted"){
@@ -109,7 +133,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     };
     ring();const timer=setInterval(ring,1000);
     return ()=>{clearInterval(timer);try{if(JSON.parse(get(leaseKey)||"{}").id===tab.current)put(leaseKey,"{}");}catch{}};
-  },[enabled,pending,notifications,authorized,leaseKey,userId]);
+  },[enabled,pending,notifications,authorized,leaseKey,userId,hasAlert,dismissKey]);
   useEffect(()=>{const badges=navigator as any,count=pending.length+unreadNotices.length;if(count&&badges.setAppBadge)void badges.setAppBadge(count).catch(()=>{});else if(!count&&badges.clearAppBadge)void badges.clearAppBadge().catch(()=>{});},[pending.length,unreadNotices.length]);
   async function acknowledge(){
     setAckError("");setAcknowledging(true);
@@ -169,7 +193,8 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
       <CrmPushControl userId={userId}/>
       </div>
     </div>
-    {!notificationsOpen&&(pending.length>0||unreadNotices.length>0)?<div role="status" className="ac-staff-notice">
+    {!notificationsOpen&&hasAlert?<div role="status" className="ac-staff-notice">
+      <button type="button" className="ac-staff-notice-close" aria-label="Закрыть и остановить звук" onClick={dismissAlert}><X size={20}/></button>
       <p className="font-bold">{pending.length?`Новые заявки: ${pending.length}`:unreadNotices[0]?.title}</p>{unreadNotices.length>0?<button className="mt-2 text-sm underline" type="button" onClick={()=>{setNotificationsOpen(true);setMenuOpen(false);}}>Открыть уведомления ({unreadNotices.length})</button>:null}
       {assignedCount>0?<p className="mt-1 text-sm">Назначено вам: {assignedCount}</p>:null}
       {enabled && audioBlocked?<button type="button" onClick={()=>{unlockAudio();setAudioBlocked(false);}} className="mt-2 text-xs underline">Нажмите, чтобы разрешить звук</button>:null}
@@ -178,6 +203,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
     </div>:null}
     <style dangerouslySetInnerHTML={{__html:`
       .ac-unified-badge{position:absolute;right:-5px;top:-5px}.ac-unified-notifications{position:absolute;right:0;top:calc(100% + 12px);width:440px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 100px);overflow:auto;overscroll-behavior:contain;padding:16px;background:var(--ac-surface,#1e293b);border:1px solid var(--ac-border);border-radius:18px;z-index:145;box-shadow:0 16px 50px #0003;color:var(--ac-text)}.ac-notifications-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.ac-notifications-heading>button{width:36px;height:36px;display:grid;place-items:center}.ac-notification{display:block;padding:12px;border-radius:12px;background:var(--ac-surface-2);border:1px solid var(--ac-border);margin-top:8px;font-size:13px}.ac-notification.is-unread{border-left:3px solid #ff353d}.ac-notification strong,.ac-notification span{display:block;overflow-wrap:anywhere}.ac-notification span{margin-top:5px;color:var(--ac-muted);white-space:pre-wrap}.ac-notification>button,.ac-notifications-read{font-size:12px;text-decoration:underline;margin-top:8px;min-height:32px}.ac-notifications-empty{font-size:13px;color:var(--ac-muted);margin:10px 0}.ac-notifications-subtitle{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;margin-top:18px}.ac-unified-notifications .crm-reminder-row{display:flex;gap:10px;border-top:1px solid var(--ac-border);padding:12px 0;font-size:13px}.crm-reminder-copy{flex:1;min-width:0}.crm-reminder-copy>*{display:block;overflow-wrap:anywhere}.crm-reminder-copy time,.crm-reminder-copy small{font-size:11px;color:var(--ac-muted);margin-top:5px}.crm-reminder-row>button{flex:none;width:36px;height:36px;border-radius:10px;background:var(--ac-surface-2);display:grid;place-items:center}.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:68px;right:max(24px,calc((100vw - 1500px)/2 + 32px))}@media(max-width:767px){.ac-unified-notifications,.ac-staff-tools--header .ac-unified-notifications{position:fixed;top:76px;right:12px;width:calc(100vw - 24px)}}
+      .ac-staff-notice{padding-right:58px!important}.ac-staff-notice-close{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--ac-border,#526074);background:var(--ac-surface,#1e293b);color:inherit;cursor:pointer}.ac-staff-notice-close:focus-visible{outline:2px solid currentColor;outline-offset:2px}
       .ac-staff-tools{position:relative;display:flex;align-items:center;gap:6px;color:var(--ac-text,#fff)}
       .ac-staff-leads,.ac-staff-account{display:flex;align-items:center;justify-content:center;gap:7px;height:44px;border-radius:12px;background:var(--ac-surface-2,#273343);color:inherit;font-size:12px;font-weight:700}
       .ac-staff-leads{padding:0 12px}.ac-staff-account{width:40px;position:relative}.ac-staff-mobile-badge{display:none}
