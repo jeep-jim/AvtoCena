@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {build} from 'esbuild';
 import sharp from 'sharp';
+import fs from 'node:fs';
 import {normalizeAccountAppearance} from '../apps/web/lib/account-appearance';
 const require = createRequire(import.meta.url);
 
@@ -20,7 +21,7 @@ test('site media protects uploads, validates images, and serves only the exact p
   (globalThis as any).__accountMediaTest = state;
   const mocks: Record<string, string> = {
     '@/lib/auth': 'export const getCurrentUser=async()=>globalThis.__accountMediaTest.user;',
-    '@/lib/data': 'export const getJsonStorage=()=>({putBinary:async(k,data)=>globalThis.__accountMediaTest.stored.set(k,{data}),getBinary:async k=>globalThis.__accountMediaTest.stored.get(k)});',
+    '@/lib/data': 'export const getJsonStorage=()=>({putBinary:async(k,data)=>globalThis.__accountMediaTest.stored.set(k,{data}),getBinary:async k=>globalThis.__accountMediaTest.stored.get(k),deleteBinary:async k=>globalThis.__accountMediaTest.stored.delete(k),createBinaryDownloadUrl:async()=>globalThis.__accountMediaTest.downloadUrl||null});',
   };
   async function load(entry: string) {
     const result = await build({entryPoints: [entry], bundle: true, platform: 'node', format: 'cjs', packages: 'external', write: false, plugins: [{name: 'site-media-test', setup(b) {
@@ -61,6 +62,34 @@ test('site media protects uploads, validates images, and serves only the exact p
     const partial=await read.GET(new Request('https://avtocena.com'+videoUrl,{headers:{range:'bytes=4-11'}}),{params:Promise.resolve({id:videoId})});
     assert.equal(partial.status,206);assert.equal(partial.headers.get('Content-Type'),'video/mp4');assert.equal(await partial.text(),'ftypisom');
     const badRange=await read.GET(new Request('https://avtocena.com'+videoUrl,{headers:{range:'bytes=999-'}}),{params:Promise.resolve({id:videoId})});assert.equal(badRange.status,416);
+    const command=(body:any)=>upload.POST(new Request('https://avtocena.com/api/crm/site-media',{method:'POST',headers:{origin:'https://avtocena.com','content-type':'application/json'},body:JSON.stringify(body)}));
+    // A real playable MP4 padded with a valid ISO free box exceeds the container request limit.
+    const original=fs.readFileSync('apps/web/public/account-media/loading-oct05.mp4');
+    const free=Buffer.alloc(4*1024*1024);free.writeUInt32BE(free.length);free.write('free',4);
+    const large=Buffer.concat([original,free]);
+    const start=await command({action:'start',name:'car.mp4',type:'video/mp4',size:large.length});assert.equal(start.status,200);
+    const {token,chunkSize}=await start.json();assert.equal(chunkSize,2*1024*1024);
+    const part=async(index:number,bytes:Buffer,uploadToken=token)=>{
+      const form=new FormData();form.set('file',new Blob([new Uint8Array(bytes)]),'part');
+      const req=new Request('https://avtocena.com/api/crm/site-media',{method:'POST',headers:{origin:'https://avtocena.com','x-media-upload':uploadToken,'x-media-part':String(index)},body:form});
+      assert.ok((await req.clone().arrayBuffer()).byteLength<3.5*1024*1024);
+      return upload.POST(req);
+    };
+    assert.equal((await part(0,large.subarray(0,chunkSize),token+'x')).status,400);
+    state.user={...state.user,id:'another-owner'};assert.equal((await part(0,large.subarray(0,chunkSize))).status,400);state.user.id='owner';
+    assert.equal((await part(0,Buffer.from('short'))).status,400);
+    for(let offset=0,index=0;offset<large.length;offset+=chunkSize,index++)assert.equal((await part(index,large.subarray(offset,offset+chunkSize))).status,200);
+    const finished=await command({action:'finish',token});assert.equal(finished.status,200);
+    const uploaded=(await finished.json()).url;const uploadedId=uploaded.split('/').pop();
+    assert.deepEqual(state.stored.get('settings/account-media/'+uploadedId).data,large);
+    assert.ok(![...state.stored.keys()].some(k=>k.includes('pending')),'temporary parts are deleted');
+    const missing=await command({action:'start',name:'car.mp4',type:'video/mp4',size:large.length});
+    assert.equal((await command({action:'finish',token:(await missing.json()).token})).status,400);
+    assert.equal((await command({action:'start',name:'huge.mp4',type:'video/mp4',size:33*1024*1024})).status,400);
+    state.downloadUrl='https://storage.example/video.mp4?signed=yes';
+    const redirect=await read.GET(new Request('https://avtocena.com'+uploaded,{headers:{range:'bytes=0-'}}),{params:Promise.resolve({id:uploadedId})});
+    assert.equal(redirect.status,307);assert.equal(redirect.headers.get('location'),state.downloadUrl);assert.equal(redirect.headers.get('cache-control'),'no-store');
+
   } finally {delete (globalThis as any).__accountMediaTest;}
 });
 

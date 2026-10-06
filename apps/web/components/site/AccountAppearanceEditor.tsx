@@ -1,5 +1,7 @@
 'use client';
 
+import {isAccountVideo,validateAccountMedia} from '@/lib/account/media-format';
+import {uploadAccountMedia} from '@/lib/account/media-upload-client';
 import {BetaApplications} from './BetaApplications';
 import {useState} from 'react';
 import {ImagePlus, Trash2} from 'lucide-react';
@@ -10,19 +12,18 @@ export function AccountAppearanceEditor({value, onChange, onBusyChange}: {
 }) {
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
+  const [progress,setProgress]=useState(0);
   async function upload(role: typeof ACCOUNT_ROLES[number]['id'], kind: 'banner' | 'icon' | 'backgroundLight' | 'backgroundDark' | 'media', file?: File) {
     if (!file) return;
-    setBusy(`${role}-${kind}`); onBusyChange(true); setError('');
+    setBusy(`${role}-${kind}`); onBusyChange(true); setError('');setProgress(0);
     try {
-      const video=kind==='media'&&(['video/mp4','video/quicktime','video/x-m4v'].includes(file.type)||(!file.type||file.type==='application/octet-stream')&&/\.(mov|mp4|m4v)$/i.test(file.name));
-      if ((!video&&!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) || file.size > (video?32:8) * 1024 * 1024) throw Error('Выберите JPG, PNG, WebP до 8 МБ или MP4 или MOV до 32 МБ');
-      const body = new FormData(); body.set('file', file);
-      const response = await fetch('/api/crm/site-media', {method: 'POST', body});
-      const data = await response.json();
-      if (!response.ok) throw Error(data.error || 'Не удалось загрузить изображение');
+      const video=isAccountVideo(file);
+      if(kind!=='media'&&video)throw Error('Для фона и иконки выберите JPG, PNG или WebP');
+      validateAccountMedia(file);
+      const data=await uploadAccountMedia(file,setProgress);
       const current={banner:'',icon:'',...value[role]};
       onChange({...value,[role]:kind==='media'?{...current,media:[...(current.media||[]),{url:data.url,type:video?'video':'image',caption:file.name.replace(/\.[^.]+$/,'') }]}:{...current,[kind]:data.url}});
-    } catch (error) { setError(error instanceof Error ? error.message : 'Не удалось загрузить изображение'); }
+    } catch (error) { setError(error instanceof Error ? error.message : 'Не удалось загрузить файл. Попробуйте ещё раз'); }
     finally { setBusy(''); onBusyChange(false); }
   }
   function patch(role:typeof ACCOUNT_ROLES[number]['id'],changes:Partial<AccountArtwork>){onChange({...value,[role]:{banner:'',icon:'',...value[role],...changes}});}
@@ -58,13 +59,13 @@ export function AccountAppearanceEditor({value, onChange, onBusyChange}: {
         </div>;
       })}</div><p className="mt-2 text-xs text-[var(--ac-muted)]">Цвет и фон блока сохраняют анимацию. Изображение «Фон» выше заменяет её целиком.</p>
     </section>)}</div>
-    <section className="mt-6" aria-label="Фото и видео в сцене файлов"><h3 className="font-bold">Фото и видео в сцене «Файлы»</h3><p className="mt-2 text-sm text-[var(--ac-muted)]">Добавьте до 6 материалов, например фотографии автомобиля и видео погрузки. Они будут видны всем посетителям страницы входа. JPG, PNG, WebP до 8 МБ, MP4 или MOV до 32 МБ.</p>
+    <section className="mt-6" aria-label="Фото и видео в сцене файлов"><h3 className="font-bold">Фото и видео в сцене «Файлы»</h3><p className="mt-2 text-sm text-[var(--ac-muted)]">Добавьте до 6 материалов, например фотографии автомобиля и видео погрузки. Они будут видны всем посетителям страницы входа. JPG, PNG, WebP до 8 МБ, MP4, MOV, M4V или WebM до 32 МБ.</p>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">{(value.customer?.media||[]).map((item,index)=><div key={item.url+index} className="rounded-xl border border-[var(--ac-border)] p-3">
         {item.type==='video'?<video src={item.url} controls preload="metadata" className="h-32 w-full object-contain"/>:<img src={item.url} alt={item.caption} className="h-32 w-full object-cover"/>}
         <label className="mt-2 block text-sm">Подпись<input className="mt-1 w-full rounded-lg border border-[var(--ac-border)] bg-[var(--ac-surface)] p-2" value={item.caption} maxLength={120} onChange={e=>patch('customer',{media:value.customer?.media?.map((m,i)=>i===index?{...m,caption:e.target.value}:m)})}/></label>
         <button type="button" disabled={!!busy} className="mt-2 text-sm" onClick={()=>{if(confirm('Убрать этот материал?'))patch('customer',{media:value.customer?.media?.filter((_,i)=>i!==index)});}}>Убрать</button>
       </div>)}</div>
-      <label className="mt-3 inline-block cursor-pointer rounded-xl border border-[var(--ac-border)] px-4 py-2 text-sm">{busy==='customer-media'?'Загрузка…':'Добавить фото или видео'}<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/x-m4v,.mp4,.mov,.m4v" aria-label="Добавить фото или видео в сцену файлов" disabled={!!busy||(value.customer?.media?.length||0)>=6} onChange={e=>{void upload('customer','media',e.target.files?.[0]);e.target.value='';}}/></label>
+      <label className="mt-3 inline-block cursor-pointer rounded-xl border border-[var(--ac-border)] px-4 py-2 text-sm">{busy==='customer-media'?(progress===100?'Подготовка…':`Загрузка ${progress}%`):'Добавить фото или видео'}<input className="sr-only" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/x-m4v,video/webm,.mp4,.mov,.m4v,.webm" aria-label="Добавить фото или видео в сцену файлов" disabled={!!busy||(value.customer?.media?.length||0)>=6} onChange={e=>{void upload('customer','media',e.target.files?.[0]);e.target.value='';}}/></label>
     </section>
     <p className="mt-4 text-xs leading-5 text-[var(--ac-muted)]">Фон: рекомендуем 1200 × 1400 px, важные детали — по центру. Иконка: квадрат от 256 × 256 px, можно с прозрачным фоном. JPG, PNG или WebP до 8 МБ.</p>
     <BetaApplications/>
