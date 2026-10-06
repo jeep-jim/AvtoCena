@@ -4,7 +4,7 @@ import {proAuctionsSchedule} from './lib/proauctions-schedule.mjs';
 import {restoreProAuctionsState,proAuctionsStateKey} from './lib/proauctions-durable-state.mjs';
 const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
 const state=await getJsonStorage().readJson(proAuctionsStateKey,null);
-const decision=proAuctionsSchedule(state,Date.now(),policy.japan.refreshIntervalDays);
+const decision=proAuctionsSchedule(state,Date.now(),policy.japan.refreshIntervalDays, ['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME));
 if(decision.resume)await restoreProAuctionsState('proauctions-collection',state);
 if(process.env.GITHUB_OUTPUT)await fs.appendFile(process.env.GITHUB_OUTPUT,`due=${decision.due}\n`);
 console.log(JSON.stringify({decision,state:state?{startedAt:state.startedAt,complete:state.complete,details:state.details,savedAt:state.savedAt}:null}));

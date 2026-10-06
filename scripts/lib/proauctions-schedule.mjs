@@ -1,9 +1,10 @@
-export function proAuctionsSchedule(state, now = Date.now(), intervalDays = 14) {
+export function proAuctionsSchedule(state, now = Date.now(), intervalDays = 14, forceRefresh = false) {
   if (!state) return {due:true, resume:false, reason:'first_collection'};
   const started = Date.parse(state.startedAt || '');
   if (!Number.isFinite(started)) throw Error('invalid_collection_started_at');
   if (state.complete && !state.published) return {due:true,resume:true,reason:'retry_publication'};
   if (!state.complete) return {due:true,resume:true,reason:'resume_checkpoint'};
+  if (forceRefresh) return {due:true,resume:false,reason:'owner_requested_refresh'};
   if (now - started >= intervalDays * 86400000) return {due:true,resume:false,reason:'refresh_interval'};
   return {due:false,resume:false,reason:'fresh_completed_collection'};
 }

@@ -65,16 +65,16 @@ test('Global Che168 correction does not change percentage expense base', () => {
   assert.equal(baseline.totalRub-corrected.totalRub,16000);
 });
 
-test('China 80/20 includes unknown seller prices while retaining raw input, and composes with Autohome cap', () => {
+test('China 80/20 excludes unknown seller power while retaining raw input, and composes with Autohome cap', () => {
   const low = Array.from({length:80},(_,i)=>offer({id:'low'+i,powerHp:150}));
   const unknown = Array.from({length:100},(_,i)=>offer({id:'unknown'+i,catalogPricingMode:'seller'}));
   const auto = Array.from({length:100},(_,i)=>offer({id:'auto'+i,sourceId:'autohome_new_china_open',year:2026,powerHp:100}));
   const input=[...low,...unknown,...auto];
   const selected=selectCatalogPublicationMix(input,true);
   assert.equal(input.length,280);
-  assert.ok(selected.rows.filter(r=>catalogPowerBand(r)==='low').length / selected.rows.length >= .8);
+  assert.ok(selected.rows.filter(r=>catalogPowerBand(r)==='low').length / selected.rows.filter(r=>catalogPowerBand(r)!=='unknown').length >= .8);
   assert.ok(selected.rows.filter(r=>r.sourceId==='autohome_new_china_open').length / selected.rows.length <= .1);
-  assert.equal((selected.powerMix.report.china as any).sellerUnknownExempt,0);
+  assert.equal((selected.powerMix.report.china as any).sellerUnknownExempt,100);
   assert.equal(selected.rows.length+selected.powerMix.removed.length+selected.sourceShare.removed.length,input.length);
-  assert.equal(selectCatalogPublicationMix(unknown,true).rows.length,0);
+  assert.equal(selectCatalogPublicationMix(unknown,true).rows.length,100);
 });

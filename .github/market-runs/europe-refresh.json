@@ -1,10 +1,9 @@
 {
-  "operation": "europe-republish-final2-20260925",
+  "operation": "owner-editable-specifications-20261006",
   "market": "europe",
   "publishMarkets": [
     "europe"
   ],
-  "refreshMarkets": [],
-  "reuseRunId": 36101730944,
-  "reason": "Republish the completed authoritative Europe intake after the verified bounded-turnover guard fix. No source requests; all pricing, quality, 80/20, 15M and total-market retention gates remain active."
+  "resetCursors": true,
+  "reason": "Fresh collection with unknown power outside known-power quota; keep editable missing fields, source provenance, freshness and storage safeguards."
 }

@@ -8,10 +8,10 @@ test("public selection enforces 80 percent and keeps input reserve intact",()=>{
  assert.equal(result.rows.length,10);assert.equal(result.removed.length,18);assert.equal(rows.length,28);
  assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,8);
 });
-test("unknown power uses the 20 percent allowance and each market is independent",()=>{
+test("unknown power is outside the known-power allowance and each market is independent",()=>{
  const rows=[row("l1",100),row("l2",120),row("l3",130),row("l4",160),row("unknown"),row("high",300),...Array.from({length:4},(_,i)=>row("k"+i,140,"korea")),row("kh",250,"korea")];
  const result=selectCatalogPowerMix(rows);
- assert.equal(result.rows.length,10);assert.equal(result.removed[0].id,"high");
+ assert.equal(result.rows.length,11);assert.equal(result.removed.length,0);
  assert.equal(catalogPowerBand(row("x")), "unknown");
  assert.equal(catalogPowerBand({...row("ev",150),powertrainKind:"electric"}),"unknown");
  assert.equal(catalogPowerBand({...row("ev",400),powertrainKind:"electric",utilizationPowerKw:100}),"low");
@@ -31,13 +31,13 @@ test("Europe prefers an affordable delivered total over a newer expensive car or
  assert.ok(!result.rows.some(r=>r.id==="expensive"||r.id==="seller"));
 });
 
-test("unknown seller power consumes the 20 percent allowance without an exemption",()=>{
+test("unknown seller power is retained without consuming known-power allowance",()=>{
  const sellers=Array.from({length:100},(_,i)=>({...row("s"+i,undefined,"korea"),catalogPricingMode:"seller"}));
  const result=selectCatalogPowerMix([...sellers,...Array.from({length:4},(_,i)=>row("l"+i,150,"korea")),row("h",250,"korea"),row("h2",300,"korea")]);
- assert.equal(result.rows.length,5);assert.equal(result.removed.length,101);
- assert.equal((result.report.korea as any).sellerUnknownExempt,0);
+ assert.equal(result.rows.length,105);assert.equal(result.removed.length,1);
+ assert.equal((result.report.korea as any).sellerUnknownExempt,100);
  assert.equal(result.rows.filter(r=>catalogPowerBand(r)==="low").length,4);
- assert.throws(()=>selectCatalogPowerMix(sellers),/no_qualified_low_power/);
+ assert.equal(selectCatalogPowerMix(sellers).rows.length,100);
  assert.equal(selectCatalogPowerMix(sellers,{retainedIds:new Set(sellers.map(r=>r.id))}).rows.length,100);
 });
 
@@ -66,4 +66,14 @@ test('verified low-power replacements improve the mix without reducing the fixed
  assert.equal(fulfilled.rows.length,12);assert.equal((fulfilled.report.europe as any).targetMet,true);
  assert.equal(selectCatalogPowerMix(old,options).rows.length,12);
  assert.throws(()=>selectCatalogPowerMix(old,{...options,minimumCountByMarket:{europe:NaN}}),/invalid_power_mix_minimum/);
+});
+
+test("unknown power survives every market without fabricated values and selection is idempotent",()=>{
+ for(const market of ["china","korea","uae","georgia","europe","japan"]){
+  const rows=[row("missing",undefined,market),{...row("hybrid",300,market),powertrainKind:"other_hybrid"}];
+  const before=structuredClone(rows);
+  const result=selectCatalogPowerMix(rows);
+  assert.deepEqual(result.rows,before);assert.deepEqual(rows,before);
+  assert.deepEqual(selectCatalogPowerMix(result.rows).rows,before);
+ }
 });

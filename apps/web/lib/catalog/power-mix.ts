@@ -19,23 +19,23 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
  const selected:T[]=[],removed:T[]=[],report:Record<string,unknown>={};
  for(const [market,bucket] of groups){
   const low=bucket.filter(row=>catalogPowerBand(row)==="low");
-  const sellerUnknown: T[] = [];
-  const sellerUnknownSet=new Set(sellerUnknown);
-  const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !sellerUnknownSet.has(row));
+  const unknownPower = bucket.filter(row=>catalogPowerBand(row)==="unknown");
+  const unknownPowerSet=new Set(unknownPower);
+  const other=bucket.filter(row=>catalogPowerBand(row)!=="low" && !unknownPowerSet.has(row));
   const unknown=other.filter(row=>catalogPowerBand(row)==="unknown").length;
   // Owner explicitly excludes Japan from the 80/20 policy: keep every verified auction
   // sold-result candidate regardless of power; sanctions are a separate flag.
   if(market==="japan"){
    selected.push(...bucket);
-   report[market]={low:low.length,high:other.length-unknown,unknown:unknown+sellerUnknown.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
+   report[market]={low:low.length,high:other.length-unknown,unknown:unknown+unknownPower.length,published:bucket.length,exempt:true,reason:"japan_owner_exemption"};
    continue;
   }
   const retainedOther=other.filter(row=>options.retainedIds?.has(String(row.id)));
-  if(market !== "china" && bucket.length && !low.length && !sellerUnknown.length && !retainedOther.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
+  if(market !== "china" && bucket.length && !low.length && !unknownPower.length && !retainedOther.length)throw Error("catalog_power_mix_no_qualified_low_power:"+market);
   const allowance=Math.floor(low.length/4);
   // Europe: fill the limited extra pool with the least expensive verified
   // delivered totals first. Seller-only prices are not comparable to totals.
-  // Unknown power consumes the same 20% allowance as high power.
+  // Owner policy 2026-10-06: editable unknown power is outside the known-power quota.
   // Only already-published rows can be grandfathered while verified low-power stock grows.
   if(market==="europe")other.sort((a,b)=>(catalogOfferVisibleRub(a)||Infinity)-(catalogOfferVisibleRub(b)||Infinity));
   // An existing car must not vanish merely because its previously unknown power was recovered.
@@ -47,14 +47,14 @@ export function selectCatalogPowerMix<T extends Partial<VehicleOffer>>(rows: rea
   // New verified low-power stock can replace old high/unknown rows without
   // reducing the previous market count. The fixed baseline makes repeated
   // preview/persistence selection idempotent instead of progressively shrinking.
-  const retainedAllowance = minimum === undefined ? retainedOther.length : Math.max(allowance, minimum - low.length);
+  const retainedAllowance = minimum === undefined ? retainedOther.length : Math.max(allowance, minimum - low.length - unknownPower.length);
   const retainedKept = retainedOther.slice(0, retainedAllowance);
   const newAllowance=Math.max(0,allowance-retainedKept.length);
   const keptOther=[...retainedKept,...newOther.slice(0,newAllowance)];
-  const kept=new Set<T>([...low,...keptOther,...sellerUnknown]);
+  const kept=new Set<T>([...low,...keptOther,...unknownPower]);
   selected.push(...bucket.filter(row=>kept.has(row)));
   removed.push(...retainedOther.slice(retainedKept.length),...newOther.slice(newAllowance));
-  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+sellerUnknown.length,sellerUnknownExempt:sellerUnknown.length,retainedAboveAllowance:Math.max(0,retainedKept.length-allowance),replacedByLowPower:retainedOther.length-retainedKept.length,published:kept.size,held:other.length-keptOther.length,targetMet:kept.size > 0 && low.length / kept.size >= 0.8};
+  report[market]={low:low.length,high:keptOther.filter(row=>catalogPowerBand(row)==="high").length,unknown:keptOther.filter(row=>catalogPowerBand(row)==="unknown").length+unknownPower.length,sellerUnknownExempt:unknownPower.filter(row=>row.catalogPricingMode==="seller").length,retainedAboveAllowance:Math.max(0,retainedKept.length-allowance),replacedByLowPower:retainedOther.length-retainedKept.length,published:kept.size,held:other.length-keptOther.length,unknownPowerExempt:unknownPower.length,targetMet:low.length + keptOther.length > 0 && low.length / (low.length + keptOther.length) >= 0.8};
  }
  return {rows:selected,removed,report};
 }

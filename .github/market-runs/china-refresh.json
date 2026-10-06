@@ -1,10 +1,9 @@
 {
-  "operation": "owner-publisher-recovery-20261005-after-pr1312",
+  "operation": "owner-editable-specifications-20261006",
   "market": "china",
-  "reuseRunId": "37071157351",
-  "refreshMarkets": [],
   "publishMarkets": [
     "china"
   ],
-  "reason": "Republish the preserved China intake after PR1312 memory and writer-lock fix. Run 37214466020 has reports only; original intake is in 37071157351. No new source requests, no concurrent manual market retry, preserve observation dates and all gates."
+  "resetCursors": true,
+  "reason": "Fresh collection with unknown power outside known-power quota; keep editable missing fields, source provenance, freshness and storage safeguards."
 }
