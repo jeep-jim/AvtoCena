@@ -50,7 +50,7 @@ function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:s
     window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
     return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
   },[]);
-  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar">{imageUrl&&<img className="ac-offer-contact-thumbnail" src={imageUrl} alt={title} onError={event=>{event.currentTarget.hidden=true;}}/>}{children}</div></div>;
+  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar">{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div></div>;
 }
 
 export function OfferMobileActions(favorite: FavoriteProps) {
@@ -72,8 +72,10 @@ export function OfferContactActionsStyles() {
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
     .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
     .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
-    .ac-offer-contact-bar>button{flex:1;min-width:0}
-    .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;object-fit:cover;border-radius:12px}
+    .ac-offer-contact-bar>.ac-offer-contact-button{flex:1;min-width:0}
+    .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;padding:0;border:0;overflow:hidden;cursor:pointer;border-radius:12px}
+    .ac-offer-contact-thumbnail img{display:block;width:100%;height:100%;object-fit:cover}
+    .ac-offer-contact-thumbnail:focus-visible{outline:2px solid var(--ac-text);outline-offset:3px}
     .ac-offer-contact-anchor[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:color-mix(in srgb,var(--ac-surface) 55%,transparent);-webkit-backdrop-filter:blur(16px) saturate(120%);backdrop-filter:blur(16px) saturate(120%);box-shadow:0 6px 20px #0002}
     .ac-offer-contact-anchor[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
     .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
