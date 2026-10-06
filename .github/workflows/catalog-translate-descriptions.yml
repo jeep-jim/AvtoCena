@@ -1,11 +1,13 @@
 name: Catalog Russian descriptions
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '20 20 * * *'
   push:
     branches: [main]
     paths: ['.github/workflows/catalog-translate-descriptions.yml']
   workflow_run:
-    workflows: ['Catalog · Five-market full rebuild']
+    workflows: ['Catalog · Five-market full rebuild', 'Catalog independent market worker', 'Catalog refresh china', 'Catalog refresh korea']
     types: [completed]
 permissions:
   contents: read
@@ -14,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   translate:
-    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion != 'cancelled' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:

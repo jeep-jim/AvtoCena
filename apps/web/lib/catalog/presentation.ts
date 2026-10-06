@@ -1,3 +1,4 @@
+import {internationalModel} from './international-model';
 import { CATALOG_MARKET_LABELS } from "./runtime-config";
 import { CATALOG_BRANDS } from "./brands";
 
@@ -405,7 +406,7 @@ function publicChinaMake(offer: any) {
 
 function publicChinaModel(offer: any) {
   const publicMake = publicChinaMake(offer);
-  const translated = cleanIdentityLabel(compactListingText(offer?.model));
+  const translated = cleanIdentityLabel(compactListingText(internationalModel(publicMake,offer?.model)));
   const translatedIsUseful = translated
     && normalizedIdentity(translated) !== normalizedIdentity(publicMake)
     && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(translated);

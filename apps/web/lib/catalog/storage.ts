@@ -722,8 +722,8 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.model) {
     const makePrefix = `${lower(row.make)}:`;
     const canonicalMatch = modelKeys ? [...modelKeys].some((key) => key.startsWith(makePrefix)
-      && matchesCatalogModel(row.model, key.slice(makePrefix.length))) : false;
-    const literalMatch = matchesCatalogModel(row.model, params.model);
+      && matchesCatalogModel(row.model, key.slice(makePrefix.length),row.make)) : false;
+    const literalMatch = matchesCatalogModel(row.model, params.model,row.make);
     if (!canonicalMatch && !literalMatch) return false;
   }
   const priced = params.city && (params.budgetFrom || params.budgetTo || params.hasPrice) ? priceCardForCity(row,params.city).offer : row;

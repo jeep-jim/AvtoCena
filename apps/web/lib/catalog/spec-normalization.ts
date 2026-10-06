@@ -1,3 +1,4 @@
+import {internationalModel} from './international-model';
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
 import { canonicalSourceFuel, namedElectrifiedPowertrainKind } from "./powertrain-safety";
@@ -367,6 +368,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
 
   return {
     ...offer,
+    ...(offer.model ? {model: internationalModel(offer.make,offer.model)} : {}),
     operational: powerSanity.suspicious ? {
       ...(offer.operational || {}),
       powerSanity: { rejected: true, reason: powerSanity.reason, rejectedPowerHp: candidatePowerHp || null },

@@ -7,7 +7,7 @@ import {PasswordField} from '@/components/auth/PasswordField';
 
 type Channel = 'email' | 'telegram' | 'max';
 const CHANNELS = [
-  {id: 'email', label: 'Почта', Icon: Mail, available: false},
+  {id: 'email', label: 'Почта', Icon: Mail, available: true},
   {id: 'telegram', label: 'Telegram', Icon: Send, available: true},
   {id: 'max', label: 'MAX', Icon: MessageCircle, available: false},
 ] as const;
@@ -17,6 +17,8 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
   const [phone, setPhone] = useState(initialPhone);
   const [channel, setChannel] = useState<Channel | null>(null);
   const [challenge, setChallenge] = useState<{token: string; url: string} | null>(null);
+  const [email,setEmail]=useState('');
+  const [code,setCode]=useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [busy, setBusy] = useState(false);
@@ -34,19 +36,20 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
-    if (busy || channel !== 'telegram') return;
+    if (busy || !channel || channel === 'max') return;
     setError('');
     if (challenge && password !== confirmation) {setError('Пароли не совпадают. Проверьте повторный ввод.');return;}
     setBusy(true);
     try {
-      const response = await fetch('/api/account/telegram', {
+      const response = await fetch(channel==='email'?'/api/account/email':'/api/account/telegram', {
         method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(challenge ? {action: 'reset', token: challenge.token, password} : {action: 'recover', phone}),
+        body: JSON.stringify(challenge ? {action: 'reset', token: challenge.token, password,code} : {action: 'recover', phone,email}),
       });
       const data = await response.json();
       if (!alive.current) return;
       if (!response.ok) throw Error(data.error || 'Не удалось восстановить доступ. Попробуйте ещё раз.');
       if (challenge) {onSuccess();return;}
+      if(channel==='email'){if(!/^[a-f0-9]{48}$/.test(data.token))throw Error('Не удалось начать восстановление.');setChallenge({token:data.token,url:''});return;}
       const url = new URL(data.url);
       if (url.protocol !== 'https:' || url.hostname !== 't.me' || !/^[a-f0-9]{48}$/.test(data.token)) throw Error('Не удалось начать восстановление. Попробуйте ещё раз.');
       setChallenge({token: data.token, url: url.href});
@@ -64,20 +67,22 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
       <fieldset disabled={busy || !!challenge}><legend>Куда отправить подтверждение?</legend><div className="recovery-channels">
         {CHANNELS.map(({id,label,Icon,available}) => <label key={id} className="recovery-channel" data-selected={channel === id}>
           <input type="radio" name="recovery-channel" value={id} checked={channel === id} onChange={() => {setChannel(id);setError('');}}/>
-          <Icon size={22}/><strong>{label}</strong><small>{available ? 'Привязанный аккаунт' : 'Пока недоступно'}</small>
+          <Icon size={22}/><strong>{label}</strong><small>{id==='email'?'Подтверждённый адрес':available ? 'Привязанный аккаунт' : 'Пока недоступно'}</small>
         </label>)}
       </div></fieldset>
-      {channel && channel !== 'telegram' && <p role="status" className="account-muted">Восстановление через {channel === 'email' ? 'почту' : 'MAX'} пока недоступно. Выберите другой способ или обратитесь к вашему менеджеру.</p>}
+      {channel === 'max' && <p role="status" className="account-muted">Восстановление через MAX пока недоступно. Выберите другой способ или обратитесь к вашему менеджеру.</p>}
+      {channel==='email'&&!challenge&&<label>Почта, подтверждённая в вашем кабинете<input type="email" value={email} onChange={event=>setEmail(event.target.value)} autoComplete="email" maxLength={254} required/></label>}
       {channel === 'telegram' && !challenge && <p className="account-muted">Используйте аккаунт, который ранее подключили в кабинете.</p>}
       {challenge && <>
-        <a className="account-telegram-link" href={challenge.url} target="_blank" rel="noopener noreferrer">Открыть подтверждение ↗</a>
-        <p className="account-muted">Подтвердите запрос в выбранном приложении, затем задайте новый пароль. Подтверждение действует 10 минут.</p>
+        {challenge.url&&<a className="account-telegram-link" href={challenge.url} target="_blank" rel="noopener noreferrer">Открыть подтверждение ↗</a>}
+        {channel==='email'&&<><p className="account-muted">Если телефон и подтверждённая почта совпадают с данными кабинета, на почту отправлен код.</p><label>Код из письма<input value={code} onChange={e=>setCode(e.target.value.replace(/\D/g,''))} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required/></label></>}
+        {channel==='telegram'&&<p className="account-muted">Подтвердите запрос в выбранном приложении, затем задайте новый пароль. Подтверждение действует 10 минут.</p>}
         <PasswordField label="Новый пароль" name="recovery-password" value={password} onChange={setPassword} autoComplete="new-password" minLength={10} placeholder="Придумайте пароль"/>
         <PasswordField label="Повторите новый пароль" name="recovery-confirmation" value={confirmation} onChange={setConfirmation} autoComplete="new-password" minLength={10} placeholder="Повторите пароль"/>
         <button type="button" className="account-text-button" disabled={busy} onClick={() => {setChallenge(null);setPassword('');setConfirmation('');setError('');}}>Изменить телефон или способ</button>
       </>}
       {error && <p role="alert" className="account-error">{error}</p>}
-      <button className="account-primary" disabled={busy || channel !== 'telegram'}>{busy ? 'Подождите…' : challenge ? 'Сохранить новый пароль' : 'Продолжить'}</button>
+      <button className="account-primary" disabled={busy || !channel || channel==='max'}>{busy ? 'Подождите…' : challenge ? 'Сохранить новый пароль' : 'Продолжить'}</button>
     </form>
   </dialog>;
 }

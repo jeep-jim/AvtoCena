@@ -42,11 +42,13 @@ test('private team chat protects membership, rejects external accounts and dedup
  await assert.rejects(sendChatMessage(owner,id,{text:'x'.repeat(3001),operationId:'operation-1234567'}),/invalid_message/);
  await writeDataJson('auth/users.json',[owner,{...manager,status:'disabled'},third]);await assert.rejects(chatDetail(owner,id),/chat_forbidden/);
 }));
-test('customer replies require visible active own lead and connection; retry queues once; reassignment removes access',()=>isolated(async()=>{
- await writeDataJson('leads/leads.json',[{id:'lead-a',name:'Клиент',assignedManagerId:manager.id,telegramChatId:'12345'},{id:'no-tg',assignedManagerId:manager.id},{id:'external',requestedDealerId:'dealer_other',telegramChatId:'23456'}]);
+test('customer replies use the connected portal without Telegram; retry deduplicates; reassignment removes access',()=>isolated(async()=>{
+ await writeDataJson('leads/leads.json',[{id:'lead-a',name:'Клиент',assignedManagerId:manager.id,clientId:'client-a'},{id:'no-tg',assignedManagerId:manager.id},{id:'external',requestedDealerId:'dealer_other',telegramChatId:'23456'}]);
+ await writeDataJson('clients/clients.json',[{id:'client-a',assignedManagerId:manager.id,portalAccountId:'customer-a'}]);
  const input={text:'Ответ клиенту',operationId:'customer-operation-123'};
  await sendChatMessage(manager,'lead:lead-a',input);await sendChatMessage(manager,'lead:lead-a',input);
- const queue=await readChunkedDataJson<any>('telegram/crm-outbox.json',[]);assert.equal(queue.length,1);assert.equal(queue[0].chatId,'12345');assert.equal(queue[0].audience,'customer');
+ const queue=await readChunkedDataJson<any>('telegram/crm-outbox.json',[]);assert.equal(queue.length,0);assert.equal((await chatDetail(manager,'lead:lead-a')).messages.length,1);
+ await assert.rejects(sendChatMessage(manager,'lead:lead-a',{...input,text:'Изменённый текст'}),/message_conflict/);
  await assert.rejects(sendChatMessage(manager,'lead:no-tg',input),/chat_forbidden/);
  await assert.rejects(sendChatMessage(owner,'lead:external',input),/chat_forbidden/);
  await updateChunkedDataJson<any>('leads/leads.json','lead-a',l=>({...l,assignedManagerId:third.id}));
@@ -121,12 +123,13 @@ test('notification replies retain the original thread and customer quotes cannot
  assert.equal(notice?.replyTarget?.thread,id);assert.equal(notice?.replyTarget?.messageId,notice?.id);
  await sendChatMessage(manager,id,{text:'Проверил',replyToId:notice!.id,operationId:'notice-reply-001'});
  assert.equal((await chatDetail(owner,id)).messages.at(-1)?.replyTo?.text,'Проверить документы');
- await writeDataJson('leads/leads.json',[{id:'a',assignedManagerId:manager.id,telegramChatId:'12345'},{id:'b',assignedManagerId:manager.id,telegramChatId:'23456'}]);
+ await writeDataJson('leads/leads.json',[{id:'a',assignedManagerId:manager.id,clientId:'client-a',telegramChatId:'12345'},{id:'b',assignedManagerId:manager.id,telegramChatId:'23456'}]);
  await writeDataJson('telegram/crm-messages.json',[{id:'in-a',leadId:'a',text:'Когда приедет?',direction:'in',createdAt:new Date().toISOString()},{id:'in-b',leadId:'b',text:'Другой клиент',direction:'in',createdAt:new Date().toISOString()}]);
+ await writeDataJson('clients/clients.json',[{id:'client-a',assignedManagerId:manager.id,portalAccountId:'customer-a'}]);
  const input={text:'Завтра',replyToId:'in-a',operationId:'lead-quoted-001'};
  await sendChatMessage(manager,'lead:a',input);await sendChatMessage(manager,'lead:a',input);
  assert.equal((await chatDetail(manager,'lead:a')).messages.find(m=>m.mine)?.replyTo?.text,'Когда приедет?');
- const queue=await readChunkedDataJson<any>('telegram/crm-outbox.json',[]);assert.equal(queue.length,1);assert.match(queue[0].text,/В ответ на: Когда приедет\?/);
+ const queue=await readChunkedDataJson<any>('telegram/crm-outbox.json',[]);assert.equal(queue.length,0);assert.match((await chatDetail(manager,'lead:a')).messages.find(m=>m.mine)!.text,/В ответ на: Когда приедет\?/);
  await assert.rejects(sendChatMessage(manager,'lead:a',{...input,replyToId:'in-b',operationId:'bad-lead-quote'}),/invalid_reply/);
  await assert.rejects(sendChatMessage(manager,'lead:a',{...input,replyToId:undefined}),/message_conflict/);
 }));
