@@ -8,7 +8,7 @@ import {validateCustomerParameters} from '../apps/web/lib/catalog/customer-param
 import {resetCatalogRateCache} from '../apps/web/lib/catalog/rates';
 import {invalidateEffectiveMarketsCache} from '../apps/web/lib/effective-market-settings';
 
-test('ordinary saved Korea quote uses current 3% reserve; city adds only delivery; issued version stays fixed',async()=>{
+test('ordinary saved Korea quote uses current 3% reserve; city adds only delivery; issued version retains inputs but refreshes costs',async()=>{
  const offer:any={id:'saved-trax-refresh',sourceId:'kcar_korea_open',sourceOfferId:'lot',market:'korea',make:'Chevrolet',model:'Trax',sourcePrice:14900000,sourceCurrency:'KRW'};
  const draft={year:'2024',productionMonth:'3',productionDay:'12',engineCc:'1199',fuel:'petrol',powerHp:'139',powerKw:'102.23',vehicleCategory:'M1',deliveryCity:''};
  const hash=createHash('sha256').update(offer.id).digest('hex'),version=randomUUID();
@@ -35,7 +35,7 @@ test('ordinary saved Korea quote uses current 3% reserve; city adds only deliver
   const city=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...draft,deliveryCity:'Новокузнецк'}));assert.ok(city.ok);
   assert.equal(city.calculation.totalRub-current.calculation.totalRub,120000);
   assert.equal(city.calculation.totalRub,1933104);
-  assert.deepEqual(await getSavedOfferCalculation(offer,version),historical);
+  const linked=await getSavedOfferCalculation(offer,version);assert.equal(linked?.calculation.totalRub,current.calculation.totalRub);assert.deepEqual(linked?.draft,historical.draft);assert.equal(linked?.version,historical.version);
   assert.equal(historical.calculation.totalRub,1645868);
   const china=await calculateOfferWithCustomerParametersDetailed({...offer,id:'china-refresh',market:'china',sourceCurrency:'KRW'},validateCustomerParameters(draft));assert.ok(china.ok);
   assert.equal(china.calculation.breakdown.find(l=>l.id==='exchange-reserve')?.note,'2.2% от стоимости авто');

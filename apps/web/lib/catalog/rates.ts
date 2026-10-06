@@ -111,6 +111,7 @@ async function fetchLiveCbrRates() {
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_RATE_TIMEOUT_MS || 12_000));
     try {
       const response = await fetch("https://www.cbr.ru/scripts/XML_daily.asp", {
+        cache: "no-store",
         headers: { accept: "application/xml,text/xml,*/*", "user-agent": "AvtoCenaCatalog/1.0" },
         redirect: "follow",
         signal: controller.signal,
@@ -166,9 +167,12 @@ export async function convertToRub(
   // publication before reusing a stale snapshot. The stored value remains the
   // fail-safe when CBR is temporarily unavailable.
   const structuredDate = structured?.rateDate || structured?.date || rates.updatedAt;
-  if (!liveRatesDisabled() && (options.preferLive || !storedRateIsFresh(structuredDate))) {
+  const official = !structured?.rateSource || String(structured.rateSource).startsWith("cbr");
+  // A recent stored date is a fallback, not proof that no newer publication
+  // exists. All consumers share one in-flight request and a five-minute cache.
+  if (!liveRatesDisabled() && (options.preferLive || official || !storedRateIsFresh(structuredDate))) {
     const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
-    if (live) {
+    if (live && (!structuredDate || live.rateDate >= String(structuredDate).slice(0,10))) {
       return {
         currency: code,
         cbrRate: live.cbrRate,

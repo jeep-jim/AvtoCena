@@ -38,22 +38,25 @@ export async function saveClientCalculation(offer:VehicleOffer,draft:Record<stri
   await mutateDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,record.version),null,current=>current || record);
   return record;
 }
+async function currentSavedCalculation(offer:VehicleOffer,record:SavedOfferCalculation|null,keepCity=false) {
+ if(!record)return null;
+ const draft=keepCity?record.draft:{...record.draft,deliveryCity:""};
+ const {calculateOfferWithCustomerParametersDetailed}=await import("./customs-pricing");
+ const fresh=await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters(draft));
+ return fresh.ok?{...record,draft,calculation:fresh.calculation}:null;
+}
 export async function getSavedOfferCalculation(offer: VehicleOffer, version?:string) {
   if(version){
     if(!/^[a-f0-9-]{36}$/i.test(version))return null;
     const archived=matchingSavedCalculation(await readDataJson<SavedOfferCalculation|null>(scenarioPath(offer.id,version),null),offer);
-    if(archived)return archived;
+    if(archived)return currentSavedCalculation(offer,archived,true);
     const latest=matchingSavedCalculation(await readSavedRecord(offer.id),offer);
-    return latest?.version===version?latest:null;
+    return latest?.version===version?currentSavedCalculation(offer,latest,true):null;
   }
   const record = matchingSavedCalculation(await readSavedRecord(offer.id), offer);
-  if (!record) return null;
-  // A public saved record preserves the manager's vehicle parameters, not old
-  // tariffs or taxes. Reuse the same current calculation as city changes.
-  // Explicit versioned customer links return above and remain immutable.
-  const {calculateOfferWithCustomerParametersDetailed} = await import("./customs-pricing");
-  const fresh = await calculateOfferWithCustomerParametersDetailed(offer,validateCustomerParameters({...record.draft,deliveryCity:""}));
-  return fresh.ok ? {...record,draft:{...record.draft,deliveryCity:""},calculation:fresh.calculation} : null;
+  // Stored versions preserve the chosen vehicle inputs and city. Public links
+  // replay those inputs with current rates/costs, without rewriting the archive.
+  return currentSavedCalculation(offer,record);
 }
 export class SavedCalculationConflict extends Error {}
 export async function saveOfferCalculation(offer:VehicleOffer, draft:Record<string,string>, calculation:SavedCalculationResult, userId:string, expectedVersion:string|null, savedByName?:string) {

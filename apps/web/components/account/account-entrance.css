@@ -409,3 +409,9 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
  .entrance-dealer-preview iframe{height:min(720px,calc(100svh - 100px));min-height:460px}
  .account-original-design .account-login-main:has(.entrance-dealer-preview)>.account-login-form{border-radius:0 0 24px 24px}
 }
+
+@media(max-width:760px){
+ .entrance-dealer-preview .dealer-inline-preview{overflow:visible}
+ .entrance-dealer-preview .dealer-inline-preview>.dealer-profile{padding:0;overflow:visible}
+ .entrance-dealer-preview .dealer-inline-preview .dealer-dock{position:sticky;bottom:0;margin:0;z-index:45}
+}

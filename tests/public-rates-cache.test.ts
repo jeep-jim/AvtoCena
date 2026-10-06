@@ -41,7 +41,7 @@ test('public rates share storage/history reads and never read the vehicle catalo
   try {
     const [a,b] = await Promise.all([loadPublicRateExtras(),loadPublicRateExtras()]);
     assert.deepEqual(a,b); assert.equal(a.rates.find(r=>r.currency==='JPY')?.effectiveRate,0.5);
-    assert.equal(reads,1); assert.equal(historyReads,14);
-    await loadPublicRateExtras(); assert.equal(reads,1); assert.equal(historyReads,14);
+    assert.equal(reads,2); assert.equal(historyReads,15);
+    await loadPublicRateExtras(); assert.equal(reads,2); assert.equal(historyReads,15);
   } finally { request.mock.restore(); read.mock.restore(); }
 });
