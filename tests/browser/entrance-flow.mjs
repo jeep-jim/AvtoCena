@@ -78,7 +78,7 @@ try {
       assert.ok(await page.getByText('Цена объявления, '+({japan:'JPY',china:'CNY',korea:'KRW'}[market]),{exact:true}).count());
     }
     if(width<1280){
-      const anchor=page.locator('.ac-offer-contact-anchor'),button=page.getByRole('button',{name:'Связаться',exact:true});
+      const anchor=page.locator('.ac-offer-contact-anchor'),button=page.getByRole('button',{name:'Оставить заявку',exact:true});
       const y=await anchor.evaluate(node=>node.getBoundingClientRect().top+scrollY);
       await page.evaluate(y=>scrollTo(0,y+250),y);await page.waitForTimeout(100);assert.equal(await anchor.getAttribute('data-stuck'),'true');assert.ok(Math.abs((await button.boundingBox()).y-72)<2);
       await page.evaluate(()=>scrollTo(0,0));await page.waitForTimeout(100);assert.equal(await anchor.getAttribute('data-stuck'),'false');assert.equal(await button.evaluate(node=>node.style.position),'');

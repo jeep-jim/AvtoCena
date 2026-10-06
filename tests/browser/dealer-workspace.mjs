@@ -164,10 +164,21 @@ try{
     await page.reload();await page.getByText('Стоимость с доставкой до Красноярск',{exact:true}).waitFor();await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    }
    assert.match(await page.locator('.ac-offer-price-panel .ac-price').innerText(),/₽/);
+   if(width<1280){
+    const slot=page.locator('.ac-offer-contact-anchor');
+    assert.ok(await slot.evaluate(n=>n.getBoundingClientRect().top<document.querySelector('.dealer-offer-identity').getBoundingClientRect().top),'request precedes dealer identity');
+    const y=await slot.evaluate(n=>n.getBoundingClientRect().top+scrollY);
+    await page.evaluate(y=>scrollTo({top:y+120,behavior:'instant'}),y);await page.waitForTimeout(150);
+    assert.equal(await slot.getAttribute('data-stuck'),'true');assert.ok(await slot.locator('.ac-offer-contact-thumbnail').isVisible());
+    const button=slot.locator('button');assert.ok(await button.evaluate(n=>{const r=n.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===n;}));
+    if(width<768){const dock=page.locator('.dealer-context-dock');assert.equal(await dock.locator('a').first().evaluate(n=>getComputedStyle(n).color),await dock.evaluate(n=>getComputedStyle(n).getPropertyValue('--ac-text').trim().startsWith('#')?getComputedStyle(n).color:''));}
+    await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(150);assert.equal(await slot.getAttribute('data-stuck'),'false');
+   }
+
    if(theme==='light')assert.equal(await page.locator('.ac-offer-price-panel').evaluate(el=>getComputedStyle(el).backgroundColor),theme==='light'?'rgb(207, 229, 216)':'rgb(11, 48, 33)');
-   if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.hasAttribute('data-city-delivery') && el.nextElementSibling?.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
+   if(!stock){await page.getByText('Структура цены',{exact:true}).waitFor();assert.ok(await page.locator('.ac-offer-price-panel').evaluate(el=>el.nextElementSibling?.classList.contains('ac-offer-breakdown')));}
    assert.equal(await page.getByRole('button',{name:'PDF текущей карточки',exact:true}).count(),0);
-   await page.getByRole('button',{name:width<1280?'Связаться':'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
+   await page.getByRole('button',{name:width<1280?'Оставить заявку':'Оставить заявку на расчёт',exact:true}).filter({visible:true}).click();
    await page.getByRole('dialog').waitFor();await page.getByRole('heading',{name:'Оставить заявку на автомобиль'}).waitFor();await page.waitForFunction(()=>!!history.state?.acOverlayStep);await page.goBack();await page.getByRole('dialog').waitFor({state:'detached'});
    await page.getByRole('button',{name:'Добавить в избранное',exact:true}).filter({visible:true}).click();
    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('avtocena_favorites'))[0].dealerId),'dealer_topavto');
