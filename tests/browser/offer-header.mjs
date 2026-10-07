@@ -132,3 +132,5 @@ try{for(const stock of [false,true])for(const theme of ['light','dark'])for(cons
  if(width<768){await floating.getByRole('button',{name:'Закрыть панель заявки и показать шапку'}).click();await floating.waitFor({state:'detached'});assert.equal(await page.locator('.ac-public-header').evaluate(n=>n.inert),false);await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.waitForTimeout(100);await page.evaluate(y=>scrollTo({top:y+180,behavior:'instant'}),top);await floating.waitFor();}
  await floating.getByRole('button',{name:/Наверх к фото/}).click();await floating.waitFor({state:'detached'});assert.equal(await page.evaluate(()=>scrollY),0);assert.deepEqual(errors,[]);await page.close();console.log(JSON.stringify({stock,theme,width,headerVisible:true,leadOpens:true,closeAndTop:true}));
 }}finally{await browser.close();server.close();}
+// On source-only test updates, verify the currently installed release as well.
+if(process.env.GITHUB_EVENT_NAME==='push')await import('./offer-header-live.mjs');
