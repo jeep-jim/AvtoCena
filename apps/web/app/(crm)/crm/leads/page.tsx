@@ -1,3 +1,4 @@
+import {clientRegistrationAvatars} from "@/lib/account/crm-registration";
 import {leadDealerId} from '@/lib/dealers/lead-routing';
 import {isPlatformOwner} from '@/lib/platform-access';
 import {leadChannelLabel} from "@/lib/lead-source";
@@ -117,6 +118,8 @@ export default async function CrmLeadsPage({
   const visible = id
     ? stored.filter((lead) => lead.id === id && canSeeLead(user,lead))
     : leads.slice(0, 100);
+  const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
+  const registrationAvatars=await clientRegistrationAvatars(clients.filter(client=>visibleClientIds.has(client.id)&&canSeeLead(user,client)));
   const trashClients=view==="archive"?(await readChunkedDataJson<any>("clients/clients.json",[])).filter(client=>canSeeLead(user,client)):[];
   const trashEntries=trashClients.flatMap(client=>(client.documents||[]).filter((doc:any)=>doc.deletedAt).map((document:any)=>({clientId:client.id,clientName:client.fio||"Клиент",document})));
   return (
@@ -242,6 +245,7 @@ export default async function CrmLeadsPage({
                 )}
                 <div className="crm-lead-identity min-w-0">
                   <div className="crm-lead-name font-black">
+                    {registrationAvatars.has(lead.clientId)&&<img src={registrationAvatars.get(lead.clientId)} alt="Есть личный кабинет" title="Есть личный кабинет" width={32} height={32} loading="lazy" className="inline-block h-8 w-8 shrink-0 rounded-full object-cover align-middle mr-2"/>}
                     {lead.clientId ? <Link className="crm-lead-client-link" href={`/crm/clients/${encodeURIComponent(lead.clientId)}`} title="Открыть карточку клиента">{lead.name || lead.telegramDisplayName || "Клиент"}</Link> : (lead.name || lead.telegramDisplayName || "Клиент")}
                   {priorClient&&<Link href={`/crm/clients/${encodeURIComponent(priorClient.id!)}`} title="Открыть ранее добавленного клиента"><ManualClientOrigin client={priorClient} managers={users} previous/></Link>}
                   </div>

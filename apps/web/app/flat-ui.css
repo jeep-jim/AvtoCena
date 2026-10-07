@@ -153,3 +153,15 @@ html[data-theme="light"] body .ac-home-market-rail:empty::after{content:"Пре�
 /* Характеристики собственных автомобилей: видимые границы и подписи. */
 .ac-dealer-offer .ac-offer-spec-tile{background:var(--ac-surface);border:1px solid var(--ac-border)}
 html[data-theme="light"] .ac-dealer-offer .ac-offer-spec-tile{background:#fff!important;border-color:#d5dce5!important}
+
+/* One desktop canvas; cards and controls retain their surface colors. */
+@media(min-width:768px){
+ html[data-theme="light"],html[data-theme="light"] body,
+ html[data-theme="light"] body .ac-page-copy,
+ html[data-theme="light"] body .crm-root,
+ html[data-theme="light"] body .ac-dealers-page,
+ html[data-theme="light"] body .dealer-profile {
+   background:var(--ac-page-bg,#edf0f6)!important;
+   background-image:none!important;
+ }
+}
