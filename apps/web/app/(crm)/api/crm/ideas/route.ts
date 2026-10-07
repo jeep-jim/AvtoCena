@@ -6,7 +6,7 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 import {readAccountJson,readAccountUpload} from '@/lib/account/request';
 import {prepareDealerImage} from '@/lib/dealers/media';
 import {getJsonStorage} from '@/lib/data';
-import {createIdea,ideaInput,listIdeas,publicIdea,updateIdea} from '@/lib/team-ideas';
+import {createIdea,ideaInput,listIdeas,publicIdea,updateIdea,canEditIdea,editIdea} from '@/lib/team-ideas';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
@@ -23,12 +23,17 @@ export async function POST(req:Request){
    const files=form.getAll('screenshots');
    if(files.length>5||files.some(f=>!(f instanceof File)||f.size>5*1024*1024||!['image/png','image/jpeg','image/webp'].includes(f.type)))throw Error('Можно прикрепить до 5 скриншотов PNG, JPG или WebP, каждый до 5 МБ.');
    const storage=getJsonStorage();if(files.length&&!storage.putBinary)throw Error('Загрузка временно недоступна.');
-   const id=randomUUID(),saved:string[]=[];
+   const editing=String(form.get('id')||'');
+   const existing=editing?(await listIdeas(user)).find(row=>row.id===editing):undefined;
+   if(editing&&!existing)throw Error('ideas_missing');if(existing&&!canEditIdea(existing,user))throw Error('ideas_forbidden');
+   const retain=form.getAll('retain').map(String);if(retain.length+files.length>5)throw Error('Можно прикрепить до 5 скриншотов.');
+   const id=editing||randomUUID(),saved:string[]=[];
    try{
-    for(let i=0;i<files.length;i++){const bytes=await prepareDealerImage(Buffer.from(await (files[i] as File).arrayBuffer()));const key=`${id}/${i}.webp`;await storage.putBinary!(`crm/team-ideas/media/${key}`,bytes,'image/webp');saved.push(key);}
-    await createIdea(user,input,saved,id);
+    for(let i=0;i<files.length;i++){const bytes=await prepareDealerImage(Buffer.from(await (files[i] as File).arrayBuffer()));const key=`${id}/${randomUUID()}.webp`;await storage.putBinary!(`crm/team-ideas/media/${key}`,bytes,'image/webp');saved.push(key);}
+    if(existing){await editIdea(user,id,input,retain,saved,Number(form.get('revision')));await Promise.allSettled(existing.screenshots.filter(key=>!retain.includes(key)).map(key=>storage.deleteBinary?.(`crm/team-ideas/media/${key}`)));}
+    else await createIdea(user,input,saved,id);
    }catch(e){await Promise.allSettled(saved.map(key=>storage.deleteBinary?.(`crm/team-ideas/media/${key}`)));throw e;}
   }
   return Response.json({ok:true},{headers});
- }catch(e){const message=e instanceof Error?e.message:'';return Response.json({error:message==='ideas_forbidden'?'Только владелец может менять готовность.':message==='ideas_missing'?'Идея не найдена.':message.startsWith('Заполните')||message.startsWith('Можно')||message.startsWith('Готовность')||message.startsWith('Суммарный')?message:'Не удалось сохранить. Повторите попытку.'},{status:message==='ideas_forbidden'?403:message==='ideas_missing'?404:400,headers});}
+ }catch(e){const message=e instanceof Error?e.message:'';return Response.json({error:message==='ideas_forbidden'?'Нет прав на это изменение.':message==='ideas_conflict'?'Идею уже отредактировали. Обновите список и откройте редактирование заново.':message==='ideas_missing'?'Идея не найдена.':message.startsWith('Заполните')||message.startsWith('Можно')||message.startsWith('Готовность')||message.startsWith('Суммарный')?message:'Не удалось сохранить. Повторите попытку.'},{status:message==='ideas_forbidden'?403:message==='ideas_missing'?404:message==='ideas_conflict'?409:400,headers});}
 }

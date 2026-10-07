@@ -52,13 +52,20 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
   assert.equal((await modules.api.POST(post({id:item.id,action:'progress',value:80}))).status,403);
   await Promise.all(Array.from({length:4},()=>modules.api.POST(post({id:item.id,action:'vote',value:true}))));
   result=await (await modules.api.GET()).json();assert.equal(result.ideas[0].voteCount,1);
-  const context={params:Promise.resolve({ideaId:item.id,file:'0.webp'})};
+  const context={params:Promise.resolve({ideaId:item.id,file:item.screenshots[0].split('/')[1]})};
   const photo=await modules.media.GET(new Request('https://avtocena.com'),context);assert.equal(photo.status,200);assert.equal(photo.headers.get('Cache-Control'),'private, no-store');assert.equal(photo.headers.get('Content-Type'),'image/webp');
   (globalThis as any).__ideaActor=null;assert.equal((await modules.media.GET(new Request('https://avtocena.com'),context)).status,403);
   (globalThis as any).__ideaActor=owner;assert.equal((await modules.api.POST(post({id:item.id,action:'progress',value:80}))).status,200);
   result=await (await modules.api.GET()).json();assert.equal(result.ideas[0].progress,80);assert.equal(result.ideas[0].voteCount,1);
   await Promise.all(['Second','Third'].map(async title=>{const f=new FormData();f.set('title',title);f.set('description','Text');assert.equal((await modules.api.POST(post(f))).status,200);}));
   result=await (await modules.api.GET()).json();assert.deepEqual(result.ideas.map((r:any)=>r.number).sort(),[1,2,3]);assert.equal(result.ideas.find((r:any)=>r.id===item.id).number,1);
+  const editForm=(revision:number)=>{const f=new FormData();f.set('id',item.id);f.set('revision',String(revision));f.set('title','Исправленная идея');f.set('description','Новое описание');f.append('retain',item.screenshots[0]);return f;};
+  (globalThis as any).__ideaActor={...manager,id:'other'};assert.equal((await modules.api.POST(post(editForm(0)))).status,403);
+  (globalThis as any).__ideaActor=manager;assert.equal((await modules.api.POST(post(editForm(0)))).status,200);
+  assert.equal((await modules.api.POST(post(editForm(0)))).status,409);
+  result=await (await modules.api.GET()).json();const edited=result.ideas.find((r:any)=>r.id===item.id);assert.equal(edited.title,'Исправленная идея');assert.equal(edited.number,1);assert.equal(edited.progress,80);assert.equal(edited.voteCount,1);assert.equal(edited.screenshots.length,1);
+  (globalThis as any).__ideaActor=owner;const removal=editForm(1);removal.delete('retain');assert.equal((await modules.api.POST(post(removal))).status,200);assert.equal((await modules.media.GET(new Request('https://avtocena.com'),context)).status,404);
+
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;delete (globalThis as any).__ideaActor;fs.rmSync(tmp,{recursive:true,force:true});}
 });
 test('formatted text escapes HTML and only makes HTTP(S) URLs clickable',async()=>{

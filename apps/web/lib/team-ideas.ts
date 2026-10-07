@@ -4,7 +4,7 @@ import type {AuthUser} from './auth';
 import {isPlatformTeam,isPlatformOwner} from './platform-access';
 import {readDataJson,mutateDataJson} from './data';
 
-export type TeamIdea={id:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
+export type TeamIdea={id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
 export const IDEAS_PATH='crm/team-ideas/items.json';
 export function requireIdeaTeam(user:AuthUser|null|undefined):asserts user is AuthUser {if(!isPlatformTeam(user))throw Error('ideas_forbidden');}
 export function ideaInput(input:{title:unknown;description:unknown}) {
@@ -36,9 +36,9 @@ export function numberIdeas(rows:TeamIdea[]):TeamIdea[]{
  return rows.map(r=>assigned.has(r.id)?{...r,number:assigned.get(r.id)}:r);
 }
 export async function listIdeas(user:AuthUser){requireIdeaTeam(user);const rows=await readDataJson<TeamIdea[]>(IDEAS_PATH,[]);return rows.some(r=>!Number.isSafeInteger(r.number)||(r.number??0)<1)?mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],numberIdeas):rows;}
-export async function createIdea(user:AuthUser,input:{title:unknown;description:unknown},screenshots:string[],id=randomUUID()){
+export async function createIdea(user:AuthUser,input:{title:unknown;description:unknown},screenshots:string[],id:string=randomUUID()){
  requireIdeaTeam(user);const fields=ideaInput(input);
- if(screenshots.length>5||screenshots.some(s=>!new RegExp(`^${id}/[0-4]\\.webp$`).test(s)))throw Error('Некорректные скриншоты.');
+ if(screenshots.length>5||screenshots.some(s=>!validIdeaScreenshot(id,s)))throw Error('Некорректные скриншоты.');
  const at=new Date().toISOString();const row:TeamIdea={id,...fields,authorId:user.id,authorName:user.displayName||'Сотрудник',authorAvatarUrl:user.avatarUrl,createdAt:at,updatedAt:at,progress:0,votes:[],screenshots};
  await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{const numbered=numberIdeas(rows);row.number=numbered.reduce((n,r)=>Math.max(n,r.number!),0)+1;return [row,...numbered];});return row;
 }
@@ -49,5 +49,17 @@ export async function updateIdea(user:AuthUser,id:string,action:unknown,value:un
 export function publicIdea(row:TeamIdea,user:AuthUser,users:AuthUser[]=[]){
  const person=(id:string,name='Сотрудник',avatar?:string)=>{const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
  const votes=[...new Set(row.votes)],downvotes=[...new Set(row.downvotes||[])].filter(id=>!votes.includes(id));
- return {...row,votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
+ return {...row,canEdit:canEditIdea(row,user),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
+}
+
+export function canEditIdea(row:TeamIdea,user:AuthUser){return isPlatformTeam(user)&&(isPlatformOwner(user)||row.authorId===user.id);}
+export function validIdeaScreenshot(id:string,key:string){return key.startsWith(id+'/')&&/^(?:[0-4]|[a-f0-9-]{36})\.webp$/.test(key.slice(id.length+1));}
+export async function editIdea(user:AuthUser,id:string,input:{title:unknown;description:unknown},retain:string[],added:string[],revision:number){
+ requireIdeaTeam(user);const fields=ideaInput(input);
+ await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{
+  const row=rows.find(r=>r.id===id);if(!row)throw Error('ideas_missing');if(!canEditIdea(row,user))throw Error('ideas_forbidden');
+  if(!Number.isInteger(revision)||revision!==(row.revision||0))throw Error('ideas_conflict');
+  if(retain.length+added.length>5||retain.some(key=>!row.screenshots.includes(key))||added.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
+  const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,screenshots:[...new Set([...retain,...added])],revision:revision+1,editedAt:at,updatedAt:at}:r);
+ });
 }
