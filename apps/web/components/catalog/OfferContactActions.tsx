@@ -118,6 +118,8 @@ export function OfferContactActionsStyles() {
       .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button{padding-left:8px;padding-right:8px;font-size:13px!important}
     }
     @media(max-width:767px){
+      .ac-offer-page>section:has(.ac-offer-contact-anchor[data-in-header="true"]){z-index:auto!important}
+      .ac-offer-contact-anchor[data-in-header="true"]>.ac-offer-contact-bar{z-index:1001!important}
       .ac-public-header[data-offer-contact="true"]>*{visibility:hidden!important;pointer-events:none!important}
       .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-close{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:44px;padding:0;border:0;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-muted)}
       .ac-offer-contact-anchor[data-in-header="true"]>.ac-offer-contact-bar{box-shadow:none;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;gap:8px}
