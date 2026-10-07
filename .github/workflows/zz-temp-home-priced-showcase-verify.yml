@@ -1,0 +1,28 @@
+name: TEMP homepage priced showcase verify
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-home-priced-showcase-verify.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployed UAE homepage selection via API
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --retry 3 --max-time 60 -fsS 'https://avtocena.com/api/catalog/home' -o home.json
+          jq '{total,marketCounts,uae:[.items[]|select(.market=="uae")|{id,make,model,year,totalRub,sourcePrice,sourceCurrency,calculationStatus,priceMode}]}' home.json
+          uae_count="$(jq '[.items[]|select(.market=="uae")]|length' home.json)"
+          priced_count="$(jq '[.items[]|select(.market=="uae" and ((.totalRub // 0) > 0))]|length' home.json)"
+          pending_count="$(jq '[.items[]|select(.market=="uae" and ((.totalRub // 0) <= 0))]|length' home.json)"
+          echo "uae_count=$uae_count priced_count=$priced_count pending_count=$pending_count"
+          test "$uae_count" -ge 4
+          test "$priced_count" -ge 4
+          test "$pending_count" -eq 0

@@ -1,0 +1,45 @@
+name: TEMP CarSwitch spec diagnostic
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-carswitch-spec-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect exact vehicle JSON-LD specification fields
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import urllib.request,re,json,html
+          url='https://carswitch.com/abudhabi/used-car/nissan/patrol/2024/858598'
+          req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36','Accept':'text/html,application/xhtml+xml,*/*;q=0.8','Accept-Language':'en-US,en;q=0.9'})
+          with urllib.request.urlopen(req,timeout=45) as r:
+              text=r.read().decode('utf-8','ignore')
+              print('HTTP',r.status,'BYTES',len(text),'FINAL',r.geturl())
+          scripts=re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>([\s\S]*?)</script>',text,re.I)
+          def walk(x):
+              if isinstance(x,list):
+                  for v in x: yield from walk(v)
+              elif isinstance(x,dict):
+                  typ=x.get('@type'); types=typ if isinstance(typ,list) else [typ]
+                  if any(str(t).lower() in {'car','vehicle','product'} for t in types): yield x
+                  for v in x.values():
+                      if isinstance(v,(list,dict)): yield from walk(v)
+          for raw in scripts:
+              try: obj=json.loads(html.unescape(raw.strip()))
+              except Exception: continue
+              for ent in walk(obj):
+                  if str(ent.get('url','')).rstrip('/') != url.rstrip('/'): continue
+                  print('ENTITY_KEYS',sorted(ent.keys()))
+                  for k in ['name','fuelType','vehicleEngine','vehicleTransmission','vehicleConfiguration','vehicleInteriorColor','color','bodyType','driveWheelConfiguration','numberOfDoors','vehicleSeatingCapacity','mileageFromOdometer','additionalProperty','offers']:
+                      if k in ent: print(k, json.dumps(ent[k],ensure_ascii=False)[:5000])
+                  raise SystemExit(0)
+          raise SystemExit('matching exact entity not found')
+          PY
