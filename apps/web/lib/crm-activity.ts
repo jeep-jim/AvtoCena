@@ -44,6 +44,7 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   if(statusEvent&&status?.after)title=`${actor?.name||'Сотрудник'} изменил статус ${e.entityType==='client'?'клиента':'заявки'}${status.before?` с «${status.before}»`:''} на «${status.after}»`;
   else if(assignment)title=`${actor?.name||'Сотрудник'} ${target?.name||assigned?.after&&assigned.after!=='Не назначен'?`назначил ${e.entityType==='client'?'клиента':'заявку'}: ${target?.name||assigned?.after}`:`снял назначение ${e.entityType==='client'?'клиента':'заявки'}`}`;
   let href=e.href;
+  if(e.entityType==='account'&&/^[a-f0-9]{64}$/.test(e.entityId||''))href=`/crm/clients/registered/${e.entityId}`;
   if(lead)href=`/crm/leads?id=${encodeURIComponent(lead.id)}${lead.archivedAt?'&view=archive':''}#${encodeURIComponent(lead.id)}`;
   else if(e.leadId)href=`/crm/leads?id=${encodeURIComponent(e.leadId)}#${encodeURIComponent(e.leadId)}`;
   else if(e.clientId||e.entityType==='client')href=`/crm/clients/${encodeURIComponent(e.clientId||e.entityId||'')}`;

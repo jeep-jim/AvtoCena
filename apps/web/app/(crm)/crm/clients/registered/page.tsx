@@ -1,0 +1,13 @@
+import Link from 'next/link';
+import {redirect} from 'next/navigation';
+import {getCurrentUser} from '@/lib/auth';
+import {canReadRegisteredCustomers,registeredCustomersPage,registeredCustomerHref} from '@/lib/account/crm-accounts';
+import {customerAvatar} from '@/lib/account/avatars';
+import {CrmShell} from '@/components/crm/CrmShell';
+import {crmDateTime} from '@/lib/crm-time';
+export const dynamic='force-dynamic';
+export default async function RegisteredCustomers({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){
+ const user=await getCurrentUser();if(!user)redirect('/login');if(!canReadRegisteredCustomers(user))return <CrmShell activeHref="/crm/clients" title="Зарегистрированные пользователи" subtitle="Личные кабинеты"><p>Для просмотра нужен доступ ко всей клиентской базе. Обратитесь к владельцу.</p></CrmShell>;
+ const p=await searchParams,phone=String(p.phone||'').slice(0,30),page=Math.min(100000,Math.max(1,Number(p.page)||1)),{accounts,total}=await registeredCustomersPage(phone,page);
+ return <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Личные кабинеты пользователей и их обращения."><nav className="mb-5 flex gap-3"><Link className="rounded-xl border border-[var(--ac-border)] px-4 py-2" href="/crm/clients">Клиентская база</Link><Link className="avto-button rounded-xl px-4 py-2" href="/crm/clients/registered" aria-current="page">Зарегистрированные</Link></nav><form className="mb-4 flex flex-wrap gap-3"><input className="soft-input rounded-xl p-3" name="phone" defaultValue={phone} placeholder="Телефон регистрации полностью" aria-label="Телефон регистрации" type="tel"/><button className="avto-button rounded-xl px-4">Найти</button>{phone&&<Link href="/crm/clients/registered">Сбросить</Link>}</form><p className="mb-3">Всего: {total}</p><div className="grid gap-2">{accounts.map(a=><Link key={a.id} href={registeredCustomerHref(a.id)} className="flex items-center gap-3 rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-3"><img className="h-11 w-11 shrink-0 rounded-xl object-cover" alt="" src={a.avatarVersion?`/api/crm/registered-customers/${a.id}?avatar=1`:customerAvatar(a.id,a.avatarId)}/><span className="min-w-0 flex-1"><strong className="block truncate">{a.name}</strong><span>{a.phone}</span></span><span className="text-right text-xs text-[var(--ac-muted)]">{crmDateTime(a.createdAt)}<br/>{a.disabled?'Доступ отключён':'Есть личный кабинет'}</span></Link>)}</div>{!accounts.length&&<p>Пользователи не найдены.</p>}{!phone&&<nav className="mt-5 flex gap-4" aria-label="Страницы пользователей">{page>1&&<Link href={`?page=${page-1}`}>← Назад</Link>}<span>Страница {page}</span>{page*40<total&&<Link href={`?page=${page+1}`}>Далее →</Link>}</nav>}</CrmShell>;
+}

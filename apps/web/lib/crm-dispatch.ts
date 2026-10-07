@@ -4,7 +4,7 @@ const WORKFLOW_URL = "https://api.github.com/repos/jeep-jim/AvtoCena/actions/wor
 export async function requestCrmDelivery(
   token = process.env.CRM_GITHUB_DISPATCH_TOKEN || "",
   send: typeof fetch = fetch,
-  operation: "notify" | "deliver" = "notify",
+  operation: "notify" | "deliver" | "recover" = "notify",
 ): Promise<"accepted" | "not_configured" | "pending"> {
   if (!token.trim()) return "not_configured";
   try {

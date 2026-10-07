@@ -31,7 +31,7 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
 // while the button bounds follow the viewport after it becomes fixed.
 function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:string;title:string}) {
   const anchor=useRef<HTMLDivElement>(null),dismiss=useRef<()=>void>(()=>{});
-  const [floating,setFloating]=useState<{inHeader:boolean;top:number;left:number;width:number;height:number}|null>(null);
+  const [floating,setFloating]=useState<{inHeader:boolean;top:number;left:number;width:number;height:number;zIndex:number}|null>(null);
   useEffect(()=>{
     const node=anchor.current;if(!node)return;
     const header=node.closest('main')?.querySelector<HTMLElement>('.ac-public-header')||document.querySelector<HTMLElement>('.ac-public-header');
@@ -46,19 +46,20 @@ function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:s
       const mobile=window.innerWidth<768&&!!header;
       const fixed=window.innerWidth<1280&&rect.width>0&&passed&&(!mobile||!closed),inHeader=mobile&&fixed;
       if(inHeader&&header){header.dataset.offerContact='true';header.inert=true;}else restoreHeader();
-      const next=fixed?{inHeader,top:inHeader?Math.max(0,bounds!.top)+8:top,left:inHeader?bounds!.left+10:rect.left,width:inHeader?bounds!.width-20:rect.width,height:Math.max(44,(bounds?.height||64)-16)}:null;
+      const headerZ=header?Number.parseInt(getComputedStyle(header).zIndex,10)||0:0;
+      const next=fixed?{inHeader,zIndex:Math.max(1001,headerZ+1),top:inHeader?Math.max(0,bounds!.top)+8:top,left:inHeader?bounds!.left+10:rect.left,width:inHeader?bounds!.width-20:rect.width,height:Math.max(44,(bounds?.height||64)-16)}:null;
       setFloating(current=>JSON.stringify(current)===JSON.stringify(next)?current:next);
     };
     dismiss.current=()=>{closed=true;update();header?.querySelector<HTMLElement>('button,a')?.focus({preventScroll:true});};
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
     const observer=new ResizeObserver(schedule);observer.observe(node);observer.observe(document.body);if(header)observer.observe(header);
-    window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
-    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+    window.addEventListener('scroll',schedule,{passive:true,capture:true});window.addEventListener('resize',schedule);update();
+    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);};
   },[]);
   const bar=<div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div>;
   // A portal avoids clipping/stacking contexts in both dealer and catalogue layouts.
   // The original anchor remains in flow, so scrolling and the reset point do not jump.
-  return <><div ref={anchor} className="ac-offer-contact-anchor" data-stuck={!!floating} data-in-header={!!floating?.inHeader}>{!floating&&bar}</div>{floating&&createPortal(<div className="ac-offer-contact-floating ac-offer-action-row" data-stuck="true" data-in-header={floating.inHeader} style={{position:'fixed',top:floating.top,left:floating.left,width:floating.width,zIndex:floating.inHeader?1001:80,'--contact-header-height':`${floating.height}px`} as CSSProperties}>{bar}</div>,document.body)}</>;
+  return <><div ref={anchor} className="ac-offer-contact-anchor" data-stuck={!!floating} data-in-header={!!floating?.inHeader}>{!floating&&bar}</div>{floating&&createPortal(<div className="ac-offer-contact-floating ac-offer-action-row" data-stuck="true" data-in-header={floating.inHeader} style={{position:'fixed',top:floating.top,left:floating.left,width:floating.width,zIndex:floating.zIndex,'--contact-header-height':`${floating.height}px`} as CSSProperties}>{bar}</div>,document.body)}</>;
 
 }
 

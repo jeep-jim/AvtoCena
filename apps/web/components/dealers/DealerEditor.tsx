@@ -1,4 +1,5 @@
 "use client";
+import {OfficeAddress} from "./OfficeAddress";
 import {DealerReviewsManager} from "./DealerReviewsManager";
 import {DealerTelegramSettings} from './DealerTelegramSettings';
 import {DealerLivePreview} from './DealerLivePreview';
@@ -283,7 +284,7 @@ export function DealerEditor({
         {tab === "offices" && (
           <section className="dealer-editor-panel space-y-4">
             <h2 className="text-xl font-black">Города и офисы</h2>
-            <p className="text-sm text-[var(--ac-muted)]">Яндекс Карты покажут офис по городу и адресу. Для точной метки можно дополнительно указать координаты.</p>
+            <p className="text-sm text-[var(--ac-muted)]">Выберите адрес дома из подсказок: метка сохранится вместе с офисом. Проверьте её перед публикацией.</p>
             {s.offices.map((o, i) => {
               const change = (v: any) =>
                 patch({
@@ -304,19 +305,14 @@ export function DealerEditor({
                         change({ city: v, lat: null, lon: null })
                       }
                     />
-                    <Field
-                      label="Адрес"
-                      value={o.address}
-                      onChange={(v) =>
-                        change({ address: v, lat: null, lon: null })
-                      }
-                    />
+                    <OfficeAddress dealerId={s.dealerId} office={o} onChange={change}/>
                     <Field
                       label="Время работы"
                       value={o.hours}
                       onChange={(v) => change({ hours: v })}
                     />
-                    <Field
+                  </div>
+                  <details><summary className="cursor-pointer text-sm text-[var(--ac-muted)]">Уточнить координаты вручную</summary><div className="mt-2 grid gap-3 md:grid-cols-2">                    <Field
                       label="Широта"
                       type="text"
                       value={o.lat ?? ""}
@@ -328,9 +324,9 @@ export function DealerEditor({
                       value={o.lon ?? ""}
                       onChange={(v) => change({ lon: v === "" ? null : Number(v) })}
                     />
-                  </div>
+</div></details>
                   <a className={button + " inline-block"} href={yandexOfficeUrls(o).full} target="_blank" rel="noreferrer">Проверить адрес в Яндекс Картах ↗</a>
-                  <p className="text-xs text-[var(--ac-muted)]">Проверьте адрес перед публикацией. Если поиск показывает несколько мест, уточните адрес или укажите координаты нужного входа.</p>
+                  <p className="text-xs text-[var(--ac-muted)]">Если на карте другое здание, выберите точный дом из подсказок. Без точных координат карта показывает результаты поиска, а не подтверждённую метку.</p>
                   {fullAccess&&<Photos
                     dealerId={s.dealerId}
                     value={o.photos}

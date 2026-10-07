@@ -116,6 +116,7 @@ try{for(const stock of [false,true])for(const theme of ['light','dark'])for(cons
  const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://yandex.ru/**',r=>r.fulfill({body:'<html><body>Карта</body></html>',contentType:'text/html'}));
  await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?stock='+(stock?'1':'0'));await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+ await page.addStyleTag({content:'.ac-public-header{position:fixed!important;inset:0 0 auto;z-index:5000!important}'});
  const anchor=page.locator('.ac-offer-contact-anchor');await page.getByRole('button',{name:width<1280?'Оставить заявку':'Оставить заявку на расчёт',exact:true}).waitFor();
  if(width>=1280){assert.equal(await page.locator('.ac-offer-contact-floating').count(),0);await page.close();continue;}
  // Reproduce a containing/stacking context in the dealer's nested price column.

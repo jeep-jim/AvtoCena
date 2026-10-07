@@ -12,17 +12,17 @@ on:
       operation:
         description: "Deliver and poll, check credentials, or enable the external bot"
         type: choice
-        options: [deliver, notify, check, check-group, setup-webhook, enable-polling, enable-events]
+        options: [deliver, recover, notify, check, check-group, setup-webhook, enable-polling, enable-events]
         default: deliver
 permissions:
   contents: read
 concurrency:
-  group: avtocena-crm-telegram-delivery
+  group: avtocena-crm-telegram-${{ inputs.operation == 'recover' && 'recovery' || 'delivery' }}
   cancel-in-progress: false
 jobs:
   deliver:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -51,7 +51,9 @@ jobs:
           if [ "$OPERATION" = "deliver" ] || [ "$OPERATION" = "notify" ]; then
             node --import tsx scripts/crm-web-push.ts || true
           fi
-          if [ "$OPERATION" = "enable-events" ]; then
+          if [ "$OPERATION" = "recover" ]; then
+            CRM_SERVICE_RUN_SECONDS=300 node --import tsx scripts/crm-bot-service.ts
+          elif [ "$OPERATION" = "enable-events" ]; then
             node --import tsx scripts/crm-enable-events.ts
           elif [ "$OPERATION" = "notify" ]; then
             node scripts/crm-telegram-delivery.mjs deliver
@@ -75,6 +77,7 @@ jobs:
           fi
 
   metrika:
+    if: ${{ inputs.operation != 'recover' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

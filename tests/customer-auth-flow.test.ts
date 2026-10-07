@@ -1,3 +1,4 @@
+import {passwordDigest} from '../apps/web/lib/account/auth';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 // @ts-ignore Node fixture helper shared with browser integration.
@@ -22,5 +23,19 @@ test('registration, session, logout and login remain independent from employee c
  state.records.get(`accounts/users/${account.id}.json`).sessionVersion++;
  assert.equal((await (await current()).json()).account,null);
  state.failWrites=true;response=await handle(request({...body,phone:'+79990005678'}));assert.match((await response.json()).error,/сохранить кабинет/);
+ delete (globalThis as any).__customerAuthTest;
+});
+
+test('temporary password permits one login, expires, and changes only with current credential',async()=>{
+ const {handle,state}=await customerAuthHarness();
+ const request=(body:any,cookie='',route='auth')=>new Request('https://avtocena.com/api/account/'+route,{method:'POST',headers:{origin:'https://avtocena.com',cookie,'content-type':'application/json'},body:JSON.stringify(body)});
+ const phone='+79990009876';let response=await handle(request({action:'register',phone,password:'initial-password',consent:true}));const account=(await response.json()).account;
+ const stored=state.records.get(`accounts/users/${account.id}.json`);stored.passwordHash=await passwordDigest('temporary-test-password');stored.passwordTemporaryUntil=Date.now()+600000;stored.passwordTemporaryUsed=false;
+ response=await handle(request({action:'login',phone,password:'temporary-test-password'}));assert.equal(response.status,200);const cookie=response.headers.get('set-cookie')!.split(';')[0];assert.equal((await response.json()).account.passwordChangeRequired,true);
+ assert.equal((await handle(request({action:'login',phone,password:'temporary-test-password'}))).status,400);
+ assert.equal((await handle(request({currentPassword:'incorrect',password:'new-permanent-password'},cookie,'password'))).status,400);
+ assert.equal((await handle(request({currentPassword:'temporary-test-password',password:'new-permanent-password'},cookie,'password'))).status,200);
+ assert.equal((await handle(request({action:'login',phone,password:'new-permanent-password'}))).status,200);
+ const next=state.records.get(`accounts/users/${account.id}.json`);assert.equal(next.passwordTemporaryUntil,undefined);next.passwordTemporaryUntil=Date.now()-1;assert.equal((await handle(request({action:'login',phone,password:'new-permanent-password'}))).status,400);
  delete (globalThis as any).__customerAuthTest;
 });

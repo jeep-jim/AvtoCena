@@ -1,3 +1,4 @@
+import {handleImmediateAccountUpdate} from '@/lib/account/telegram-incoming';
 import {NextResponse} from "next/server";
 import {getTelegramRuntimeConfig} from "@/lib/telegram-config";
 import {enqueueCrmEvent} from "@/lib/crm-incoming-events";
@@ -12,7 +13,9 @@ export async function POST(request: Request) {
   try {
     const raw = await request.text();
     if (raw.length > 256000) return NextResponse.json({ok: false}, {status: 413});
-    const result = await enqueueCrmEvent(JSON.parse(raw));
+    const update=JSON.parse(raw);
+    try {if(await handleImmediateAccountUpdate(update,config.token))return NextResponse.json({ok:true});}catch{console.error("account_bot_delivery_queued");}
+    const result = await enqueueCrmEvent(update);
     if (result !== "queued") return NextResponse.json({ok: true});
     const dispatch = await requestCrmDelivery(undefined, undefined, "deliver");
     // Keep Telegram's own retries if GitHub did not accept the wake-up.

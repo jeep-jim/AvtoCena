@@ -6,6 +6,9 @@ on:
       - 'apps/web/components/catalog/OfferContactActions.tsx'
       - 'apps/web/components/dealers/DealerOfferView.tsx'
       - 'tests/browser/offer-header.mjs'
+      - 'apps/web/lib/account/**'
+      - 'apps/web/app/api/account/**'
+      - 'apps/web/components/account/**'
       - '.github/workflows/verify-offer-header.yml'
   workflow_dispatch:
 permissions:
@@ -21,6 +24,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Verify account recovery and CRM account access
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/customer-auth-flow.test.ts tests/customer-telegram.test.ts tests/account-recovery-registration.test.ts tests/crm-registration-avatar.test.ts tests/crm-polling.test.ts tests/registered-customers.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/header-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Verify dealer order and stock header in both themes
         env:

@@ -170,7 +170,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
     </div>}
     <div className={`account-partner-layout${role==='dealer'?' is-dealer':''}`}>
     {role==='dealer'&&<section className="account-dealer-benefits"><h2>Что получает Автодилер</h2><ul><li>Полноценная CRM: управление процессом от заявки до выдачи</li><li>Страница компании и отзывы покупателей</li><li>Каталог автомобилей в наличии и под заказ</li><li>Свои условия доставки и расчёты предложений</li><li>Заявки и контакты клиентов вашей компании</li><li>Документы и договоры по заявкам</li><li>Уведомления в подключённый Telegram компании</li></ul><p className="account-muted">В базовом доступе — страница компании, общий каталог, заявки и документы. Свои автомобили, фото выдач и расширенное оформление доступны в пробном периоде и по подписке. Кабинет открывается после подтверждения компании и вашего доступа.</p></section>}
-    {recoveryOpen && <PasswordRecovery initialPhone={phone} onClose={() => setRecoveryOpen(false)} onSuccess={() => {setRecoveryOpen(false);changeMode('login');setNotice('Пароль изменён. Войдите с новым паролем.');}}/>}
+    {recoveryOpen && <PasswordRecovery initialPhone={phone} onClose={() => setRecoveryOpen(false)} onSuccess={() => {setRecoveryOpen(false);changeMode('login');setNotice('Введите новый пароль или временный пароль, полученный при восстановлении.');}}/>}
     <div><div className="account-role-heading"><h2>Вход в кабинет</h2></div>
     <div className="account-roles">
       {ACCOUNT_ROLES.map(item => {
