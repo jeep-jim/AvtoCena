@@ -1,3 +1,4 @@
+import {EMPTY_MEMBERSHIP,type Membership,remunerationCommission} from '@/lib/dealers/program-model';
 import {parseDealerMail} from '@/lib/dealer-mail';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
@@ -19,7 +20,8 @@ export async function POST(req:Request){
    if(!['new','contacted','approved','rejected'].includes(b.status))throw Error('Неверный статус');const updated=await updateChunkedDataJson<any>('dealers/applications.json',String(b.id),row=>({...row,status:b.status,note:String(b.note||'').slice(0,1000),updatedAt:new Date().toISOString(),updatedBy:actor.id}));if(!updated)throw Error('Заявка не найдена');result=updated;
   }else{
    const id=String(b.dealerId||'');if(!validDealerId(id)||!await findDealer(id))throw Error('Компания не найдена');
-   if(b.action==='membership')result=await grantDealerPeriod(id,b,actor.id);
+   if(b.action==='approveAgreement'){await mutateDataJson<Membership>(`dealers/memberships/${id}.json`,EMPTY_MEMBERSHIP,m=>{if(m.version!==b.version)throw Error('Данные изменились');if(!m.agreement)throw Error('Дилер ещё не принял оферту');if(m.agreement.approvedAt)return m;return {...m,version:m.version+1,agreement:{...m.agreement,approvedAt:new Date().toISOString(),approvedBy:actor.id}};});await startDealerTrial(id);result=await readMembership(id);}
+   else if(b.action==='membership')result=await grantDealerPeriod(id,b,actor.id);
    else if(b.action==='trial'){await startDealerTrial(id);result=await readMembership(id);}
    else if(b.action==='company'){
     if(!['active','verified','paused'].includes(b.status))throw Error('Неверный статус');if(id==='dealer_topavto'&&b.status!=='verified')throw Error('ТопАвто — компания платформы');
@@ -30,7 +32,7 @@ export async function POST(req:Request){
     const leads=await readChunkedDataJson<any>('leads/leads.json',[]),lead=leads.find(l=>l.id===b.leadId&&!l.archivedAt&&l.status==='completed'&&(l.requestedDealerId===id||l.dealerId===id));
     if(!lead)throw Error('Укажите завершённую заявку АвтоЦены, относящуюся к этому дилеру');
     const amount=Number(b.amountRub);if(!Number.isFinite(amount)||amount<=0||amount>1e9)throw Error('Укажите подтверждённую сумму сделки');
-    const p=await readDealerProgram();await mutateDataJson<any[]>('dealers/sales.json',[],rows=>{if(rows.some(r=>r.leadId===b.leadId))throw Error('Комиссия по этой заявке уже учтена');return [...rows,{id:crypto.randomUUID(),dealerId:id,leadId:b.leadId,amountRub:amount,basis:p.commissionBasis,percent:p.commissionPercent,commissionRub:Math.round(amount*p.commissionPercent/100),status:'accrued',createdAt:new Date().toISOString(),createdBy:actor.id}];});
+    if(!lead.platformTerms?.percent||!lead.platformTerms?.agreementDigest)throw Error('По этой заявке не зафиксированы условия комиссии. Старые сделки нельзя начислять по новой оферте');const percent=lead.platformTerms.percent;await mutateDataJson<any[]>('dealers/sales.json',[],rows=>{if(rows.some(r=>r.leadId===b.leadId))throw Error('Комиссия по этой заявке уже учтена');return [...rows,{id:crypto.randomUUID(),dealerId:id,leadId:b.leadId,amountRub:amount,basis:'remuneration',percent,agreementDigest:lead.platformTerms.agreementDigest,commissionRub:remunerationCommission(amount,percent),status:'accrued',createdAt:new Date().toISOString(),createdBy:actor.id}];});
    }else if(b.action==='settle'){
     await mutateDataJson<any[]>('dealers/sales.json',[],rows=>rows.map(r=>r.id===b.saleId&&r.dealerId===id?{...r,status:'paid',paidAt:new Date().toISOString(),paidBy:actor.id}:r));
    }else throw Error('Неизвестное действие');

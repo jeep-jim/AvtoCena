@@ -1,3 +1,4 @@
+import {dealerClientReady} from '@/lib/dealers/client-workflow';
 import {canUseDocuments,workspaceClientsPath,canAccessDocumentClient,documentCompany} from "@/lib/document-workspace";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
@@ -15,7 +16,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
   if(!user||!await canUseDocuments(user)) return Response.json({error:"Войдите в CRM."},{status:401});
   const {id}=await params;
   const client=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);
-  if(!client||!canAccessDocumentClient(user,client)) return Response.json({error:"Клиент не найден."},{status:404});
+  if(!client||!canAccessDocumentClient(user,client)||!await dealerClientReady(user,client)) return Response.json({error:"Клиент не найден."},{status:404});
   if(Number(request.headers.get("content-length"))>MAX_CLIENT_FILE_BYTES+65536) return Response.json({error:"Максимальный размер файла — 5 МБ."},{status:413});
   const storage=getJsonStorage();let key="",stored=false;
   try {

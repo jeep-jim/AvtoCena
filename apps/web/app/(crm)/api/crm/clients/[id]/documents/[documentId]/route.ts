@@ -1,3 +1,4 @@
+import {dealerClientReady} from '@/lib/dealers/client-workflow';
 import {canUseDocuments,workspaceClientsPath,canAccessDocumentClient,documentCompany} from "@/lib/document-workspace";
 import {hasCrmPermission} from "@/lib/crm-permissions";
 import {recordCrmActivity,activityChanges,activityPerson} from "@/lib/crm-activity";
@@ -14,7 +15,7 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string;do
  if(!user||!await canUseDocuments(user)) return new Response(null,{status:401});
  const {id,documentId}=await params;
  const client=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);
- if(!client||!canAccessDocumentClient(user,client)) return new Response(null,{status:404});
+ if(!client||!canAccessDocumentClient(user,client)||!await dealerClientReady(user,client)) return new Response(null,{status:404});
  const doc:ClientDocument|undefined=client.documents?.find((d:ClientDocument)=>d.id===documentId);
  if(!doc||doc.purgeToken||documentExpired(doc)||!/^[a-f0-9-]{36}$/.test(documentId)) return new Response(null,{status:404});
  try {

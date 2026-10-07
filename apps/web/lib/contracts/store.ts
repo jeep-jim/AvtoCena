@@ -1,3 +1,4 @@
+import {dealerClientReady,readyDealerClients} from '../dealers/client-workflow';
 import {documentCompany,workspaceClientsPath,canAccessDocumentClient,contractIndexPath,contractBelongsToWorkspace} from "../document-workspace";
 import {readShowcase} from "../dealers/showcase-store";
 import {hasCrmPermission} from "../crm-permissions";
@@ -14,7 +15,7 @@ type Envelope={encrypted:string;purgedAt?:never}|{purgedAt:string;encrypted?:nev
 const key=(id:string)=>{if(!/^[a-f0-9-]{36}$/.test(id))throw Error('Договор не найден.');return `contracts/records/${id}.json`;};
 const seal=(r:ContractRecord):Envelope=>({encrypted:encryptClientDocument(Buffer.from(JSON.stringify(r)),key(r.id)).toString('base64')});
 const open=(id:string,e:Envelope):ContractRecord=>{if(!e.encrypted)throw Error('Договор не найден.');return JSON.parse(decryptClientDocument(Buffer.from(e.encrypted,'base64'),key(id)).toString());};
-export async function accessibleClient(user:AuthUser,id:string){if(!id)return null;const c=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);if(!c||!canAccessDocumentClient(user,c))throw Error('Нет доступа к клиенту.');return c;}
+export async function accessibleClient(user:AuthUser,id:string){if(!id)return null;const c=(await readChunkedDataJson<any>(workspaceClientsPath(user),[])).find(c=>c.id===id);if(!c||!canAccessDocumentClient(user,c)||!await dealerClientReady(user,c))throw Error('Нет доступа к клиенту.');return c;}
 export async function getContract(user:AuthUser,id:string){const e=await readDataJson<Envelope|null>(key(id),null);if(!e)throw Error('Договор не найден.');const r=open(id,e);if(!contractBelongsToWorkspace(user,r))throw Error('Нет доступа к договору.');if(!documentCompany(user)&&!hasCrmPermission(user,'viewAll')&&r.createdBy!==user.id)throw Error('Нет доступа к договору.');if(r.clientId)await accessibleClient(user,r.clientId);return r;}
 // Internal dependency check: never returns document contents to the caller.
 export async function hasStoredContractForClient(clientId:string){
@@ -33,7 +34,7 @@ export async function listContracts(user:AuthUser){
  const items=await readChunkedDataJson<Index>(contractIndexPath(user),[]);
  const admin=Boolean(documentCompany(user))||hasCrmPermission(user,'viewAll');
  const clients=await readChunkedDataJson<any>(workspaceClientsPath(user),[]);
- const visibleClients=new Set(clients.filter(c=>canAccessDocumentClient(user,c)).map(c=>c.id));
+ const visibleClients=new Set((await readyDealerClients(user,clients.filter(c=>canAccessDocumentClient(user,c)))).map(c=>c.id));
  const eligible=items.filter(i=>admin||i.createdBy===user.id),result=[];
  for(let i=0;i<eligible.length;i+=8){const batch=await Promise.all(eligible.slice(i,i+8).map(async item=>{
   const encrypted=await readDataJson<Envelope|null>(key(item.id),null);if(!encrypted?.encrypted)return null;

@@ -1,3 +1,4 @@
+import {leadDealerId} from './dealers/lead-routing';
 import {leadChannelLabel} from "./lead-source";
 import {leadContact, leadContactAction} from "./lead-contact";
 import { pollingEnabled } from "./crm-polling";
@@ -50,6 +51,7 @@ export function followupText(entry: any, includeContact = true) {
 const noticeField = (value: unknown, limit = 300) => String(value || "").replace(/[\r\n\t]+/g, " ").trim().slice(0, limit);
 export function leadNotice(lead:any,entry?:any){
  const url = leadCrmUrl(lead);
+ if(leadDealerId(lead)!=='dealer_topavto')return `📩 Обращение в АвтоЦене. Откройте заявку в кабинете компании. Контакты доступны после назначения менеджера.\n${url}`;
  if (lead?.source === "privacy_request") return `📩 Обращение по персональным данным · АвтоЦена\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
  const current = {...lead, ...entry};
  if (current.personalDataConsent !== true || !["lead-consent-2026-09-30","lead-consent-2026-10-02","lead-consent-2026-10-03-v2"].includes(current.personalDataConsentVersion)) return `📩 ${entry ? "Дополнение к заявке" : "Новая заявка"} · АвтоЦена\nИсточник: ${leadChannelLabel(current)}\nКонтакты и подробности доступны сотрудникам в CRM.\n${url}`;
@@ -176,6 +178,7 @@ export async function queueCrmAdminNotifications() {
     const queue = await readChunkedDataJson<any>(QUEUE, []);
     for (const item of queue.filter(row=>row.audience==='group'&&!['sent','cancelled'].includes(row.status))) {
       const lead=leads.find(l=>l.id===item.leadId),target=lead?await leadTelegramTarget(lead):null;
+      if(target&&target.dealerId!=='dealer_topavto'&&item.text!==leadNotice(lead))await updateChunkedDataJson<any>(QUEUE,item.id,row=>({...row,text:leadNotice(lead),relayHash:'',relayUntil:0,lastAckHash:''}));
       if(!target||item.chatId!==target.chatId)await updateChunkedDataJson<any>(QUEUE,item.id,row=>['sent','cancelled'].includes(row.status)?row:{...row,chatId:target?.chatId||row.chatId,status:target?'pending':'cancelled',relayHash:'',relayUntil:0,lastAckHash:'',nextAttemptAt:0});
     }
     const initialQueued = new Set(queue.filter(row => row.audience === "group" && !row.followupOperationId).map(row => row.leadId));

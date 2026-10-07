@@ -1,3 +1,4 @@
+import {dealerClientReady} from './dealers/client-workflow';
 import {workspaceClientsPath,canAccessDocumentClient} from "./document-workspace";
 import {randomUUID} from "node:crypto";
 import type {AuthUser} from "./auth";
@@ -13,6 +14,7 @@ function authorize(actor:AuthUser|null,client:any,system:boolean) {
  if(!system&&!canAccessDocumentClient(actor,client))throw Error("document_forbidden");
 }
 export async function changeDocumentState(actor:AuthUser,clientId:string,id:string,action:"trash"|"restore",now=Date.now()) {
+ if(actor.role==='dealer'){const client=(await readChunkedDataJson<any>(workspaceClientsPath(actor),[])).find(c=>c.id===clientId);if(!await dealerClientReady(actor,client))throw Error('document_forbidden');}
  let result:ClientDocument|undefined;
  const updated=await updateChunkedDataJson<any>(workspaceClientsPath(actor),clientId,current=>{
   authorize(actor,current,false);
@@ -30,6 +32,7 @@ export async function changeDocumentState(actor:AuthUser,clientId:string,id:stri
 export async function purgeDocument(actor:AuthUser|null,clientId:string,id:string,options:{expiredOnly?:boolean;now?:number;clientPath?:string}={}) {
  const now=options.now??Date.now(),system=actor===null&&options.expiredOnly===true;
  const clientPath=system&&options.clientPath?options.clientPath:workspaceClientsPath(actor);
+ if(!system&&actor?.role==='dealer'){const client=(await readChunkedDataJson<any>(clientPath,[])).find(c=>c.id===clientId);if(!await dealerClientReady(actor,client))throw Error('document_forbidden');}
  let token="",claimed=false;
  const updated=await updateChunkedDataJson<any>(clientPath,clientId,current=>{
   authorize(actor,current,system);
