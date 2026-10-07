@@ -10,15 +10,22 @@ on:
       - 'apps/web/app/api/account/**'
       - 'apps/web/components/account/**'
       - '.github/workflows/verify-offer-header.yml'
+  workflow_run:
+    workflows: ["Deploy to Yandex Cloud"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   browser:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -31,9 +38,17 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/header-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-header.mjs
+      - name: Verify the actual deployed dealer header
+        if: ${{ github.event_name == 'workflow_run' }}
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/header-browser/node_modules/playwright/index.mjs
+          EXPECTED_RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-header-live.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: offer-header-preview
-          path: artifacts/offer-header/*.png
+          path: |
+            artifacts/offer-header/*.png
+            artifacts/offer-header-live/*.png
           if-no-files-found: ignore

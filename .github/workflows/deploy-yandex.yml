@@ -86,6 +86,7 @@ jobs:
             AVTOCENA_RELEASE_SHA=${{ github.sha }}
             SMARTCAPTCHA_CLIENT_KEY=${{ secrets.SMARTCAPTCHA_CLIENT_KEY }}
             SMARTCAPTCHA_SERVER_KEY=${{ secrets.SMARTCAPTCHA_SERVER_KEY }}
+            ACCOUNT_MAIL_PROVIDER=${{ vars.ACCOUNT_MAIL_PROVIDER }}
             ACCOUNT_SMTP_HOST=${{ vars.ACCOUNT_SMTP_HOST }}
             ACCOUNT_SMTP_PORT=${{ vars.ACCOUNT_SMTP_PORT }}
             ACCOUNT_SMTP_USER=${{ secrets.ACCOUNT_SMTP_USER }}

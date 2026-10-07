@@ -17,6 +17,8 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
   const [channel, setChannel] = useState<Channel | null>(null);
   const [challenge, setChallenge] = useState<{token: string; url: string} | null>(null);
   const [email,setEmail]=useState('');
+  const [mailAvailable,setMailAvailable]=useState<boolean|null>(null);
+  useEffect(()=>{let active=true;fetch('/api/account/email',{cache:'no-store'}).then(r=>r.json()).then(d=>{if(active)setMailAvailable(d.available===true);}).catch(()=>{if(active)setMailAvailable(false);});return()=>{active=false;};},[]);
   const [code,setCode]=useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -65,10 +67,11 @@ export function PasswordRecovery({initialPhone, onClose, onSuccess}: {initialPho
       <label>Телефон, указанный при регистрации<input autoFocus type="tel" name="recovery-phone" autoComplete="tel" placeholder="+7 (___) ___-__-__" maxLength={12} required value={phone} disabled={busy || !!challenge} onChange={event => setPhone(`+7${phoneNational(event.target.value)}`)} onPaste={event=>{event.preventDefault();setPhone(`+7${phoneNational(event.clipboardData.getData("text"))}`);}}/></label>
       <fieldset disabled={busy || !!challenge}><legend>Куда отправить подтверждение?</legend><div className="recovery-channels">
         {CHANNELS.map(({id,label,Icon,available}) => <label key={id} className="recovery-channel" data-selected={channel === id}>
-          <input type="radio" name="recovery-channel" value={id} checked={channel === id} onChange={() => {setChannel(id);setError('');}}/>
-          <Icon size={22}/><strong>{label}</strong><small>{id==='email'?'Код или временный пароль':'По номеру телефона'}</small>
+          <input type="radio" name="recovery-channel" value={id} disabled={id==='email'&&mailAvailable===false} checked={channel === id} onChange={() => {setChannel(id);setError('');}}/>
+          <Icon size={22}/><strong>{label}</strong><small>{id==='email'?(mailAvailable===false?'Пока недоступно':'Код или временный пароль'):'По номеру телефона'}</small>
         </label>)}
       </div></fieldset>
+      {mailAvailable===false&&<p className="account-muted">Отправка писем пока не подключена. Выберите Telegram или обратитесь в поддержку.</p>}
       {channel==='email'&&!challenge&&<label>Электронная почта<input type="email" value={email} onChange={event=>setEmail(event.target.value)} autoComplete="email" maxLength={254} required/></label>}
       {channel === 'telegram' && !challenge && <p className="account-muted">Привязка в кабинете не нужна. Откройте бота и подтвердите свой номер кнопкой Telegram — он должен совпадать с номером регистрации.</p>}
       {challenge && <>
