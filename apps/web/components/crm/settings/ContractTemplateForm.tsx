@@ -1,4 +1,5 @@
 "use client";
+import {FileAttachment} from '@/components/ui/FileAttachment';
 
 import { useEffect, useRef, useState } from "react";
 
@@ -56,8 +57,8 @@ export function ContractTemplateForm() {
       <label className="flex items-center gap-2 text-sm font-bold text-white/70"><input type="checkbox" name="active" /> Активен</label>
       <label className="flex items-center gap-2 text-sm font-bold text-white/70"><input type="checkbox" name="includeDirectorSignatureByDefault" /> Накладывать PNG-подпись</label>
       <TextArea label="Placeholders, по одному в строке" name="placeholdersText" /><TextArea label="Mapping: placeholder=client.phone" name="placeholderMappingText" />
-      <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">DOCX/PDF шаблон<input type="file" name="templateFile" accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="text-sm normal-case" /></label>
-      <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">PNG подпись<input type="file" name="signatureFile" accept="image/png" className="text-sm normal-case" /></label>
+      <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">DOCX/PDF шаблон<FileAttachment name="templateFile" accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="text-sm normal-case" /></label>
+      <label className="grid gap-1 text-xs font-black normal-case tracking-normal text-white/42">PNG подпись<FileAttachment name="signatureFile" accept="image/png" className="text-sm normal-case" /></label>
       <TextArea label="Комментарий" name="comment" />
       {error && <div className="rounded-xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100 md:col-span-2">{error}</div>}
       <button disabled={!operationId || loading} className="rounded-xl bg-red-600 px-4 py-3 text-sm font-black text-white disabled:cursor-not-allowed disabled:opacity-60 md:col-span-2">{loading ? "Сохраняем..." : "Сохранить метаданные шаблона"}</button>

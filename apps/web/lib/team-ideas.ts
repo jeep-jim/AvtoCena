@@ -4,7 +4,8 @@ import type {AuthUser} from './auth';
 import {isPlatformTeam,isPlatformOwner} from './platform-access';
 import {readDataJson,mutateDataJson} from './data';
 
-export type TeamIdea={id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
+export type IdeaComment={id:string;authorId:string;authorName:string;authorAvatarUrl?:string;text:string;createdAt:string;screenshots:string[]};
+export type TeamIdea={comments?:IdeaComment[];id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
 export const IDEAS_PATH='crm/team-ideas/items.json';
 export function requireIdeaTeam(user:AuthUser|null|undefined):asserts user is AuthUser {if(!isPlatformTeam(user))throw Error('ideas_forbidden');}
 export function ideaInput(input:{title:unknown;description:unknown}) {
@@ -49,7 +50,7 @@ export async function updateIdea(user:AuthUser,id:string,action:unknown,value:un
 export function publicIdea(row:TeamIdea,user:AuthUser,users:AuthUser[]=[]){
  const person=(id:string,name='Сотрудник',avatar?:string)=>{const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
  const votes=[...new Set(row.votes)],downvotes=[...new Set(row.downvotes||[])].filter(id=>!votes.includes(id));
- return {...row,canEdit:canEditIdea(row,user),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
+ return {...row,comments:(row.comments||[]).map(c=>({...c,author:person(c.authorId,c.authorName,c.authorAvatarUrl)})),canEdit:canEditIdea(row,user),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
 }
 
 export function canEditIdea(row:TeamIdea,user:AuthUser){return isPlatformTeam(user)&&(isPlatformOwner(user)||row.authorId===user.id);}
@@ -61,5 +62,20 @@ export async function editIdea(user:AuthUser,id:string,input:{title:unknown;desc
   if(!Number.isInteger(revision)||revision!==(row.revision||0))throw Error('ideas_conflict');
   if(retain.length+added.length>5||retain.some(key=>!row.screenshots.includes(key))||added.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
   const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,screenshots:[...new Set([...retain,...added])],revision:revision+1,editedAt:at,updatedAt:at}:r);
+ });
+}
+
+export function commentText(value:unknown){
+ const text=typeof value==='string'?value.trim():'';
+ if(!text||text.length>12000)throw Error('Заполните комментарий (до 12 000 символов).');
+ return text;
+}
+export async function addIdeaComment(user:AuthUser,id:string,value:unknown,screenshots:string[]){
+ requireIdeaTeam(user);const text=commentText(value);
+ if(screenshots.length>5||screenshots.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
+ const comment:IdeaComment={id:randomUUID(),authorId:user.id,authorName:user.displayName||'Сотрудник',authorAvatarUrl:user.avatarUrl,text,createdAt:new Date().toISOString(),screenshots};
+ await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{
+  if(!rows.some(r=>r.id===id))throw Error('ideas_missing');
+  return rows.map(r=>r.id===id?{...r,comments:[...(r.comments||[]),comment]}:r);
  });
 }

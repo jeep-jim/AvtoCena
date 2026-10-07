@@ -64,7 +64,16 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
   (globalThis as any).__ideaActor=manager;assert.equal((await modules.api.POST(post(editForm(0)))).status,200);
   assert.equal((await modules.api.POST(post(editForm(0)))).status,409);
   result=await (await modules.api.GET()).json();const edited=result.ideas.find((r:any)=>r.id===item.id);assert.equal(edited.title,'Исправленная идея');assert.equal(edited.number,1);assert.equal(edited.progress,80);assert.equal(edited.voteCount,1);assert.equal(edited.screenshots.length,1);
+  (globalThis as any).__ideaActor={...manager,id:'other',displayName:'Другой сотрудник'};
+  const comment=new FormData();comment.set('id',item.id);comment.set('action','comment');comment.set('text','Обоснование https://example.com');comment.append('screenshots',new Blob([png],{type:'image/png'}),'comment.png');
+  assert.equal((await modules.api.POST(post(comment))).status,200);
+  result=await (await modules.api.GET()).json();const commented=result.ideas.find((r:any)=>r.id===item.id);assert.equal(commented.comments.length,1);assert.equal(commented.comments[0].author.id,'other');assert.equal(commented.revision,1);assert.equal(commented.voteCount,1);
+  const commentContext={params:Promise.resolve({ideaId:item.id,file:commented.comments[0].screenshots[0].split('/')[1]})};
+  assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,200);
+  const empty=new FormData();empty.set('id',item.id);empty.set('action','comment');empty.set('text',' ');assert.equal((await modules.api.POST(post(empty))).status,400);
+  (globalThis as any).__ideaActor={...manager,companyId:'external'};assert.equal((await modules.api.POST(post(comment))).status,403);assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,403);
   (globalThis as any).__ideaActor=owner;const removal=editForm(1);removal.delete('retain');assert.equal((await modules.api.POST(post(removal))).status,200);assert.equal((await modules.media.GET(new Request('https://avtocena.com'),context)).status,404);
+  assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,200);
 
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;delete (globalThis as any).__ideaActor;fs.rmSync(tmp,{recursive:true,force:true});}
 });

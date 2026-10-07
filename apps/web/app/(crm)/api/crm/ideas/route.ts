@@ -6,7 +6,7 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 import {readAccountJson,readAccountUpload} from '@/lib/account/request';
 import {prepareDealerImage} from '@/lib/dealers/media';
 import {getJsonStorage} from '@/lib/data';
-import {createIdea,ideaInput,listIdeas,publicIdea,updateIdea,canEditIdea,editIdea} from '@/lib/team-ideas';
+import {addIdeaComment,commentText,createIdea,ideaInput,listIdeas,publicIdea,updateIdea,canEditIdea,editIdea} from '@/lib/team-ideas';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
@@ -19,19 +19,22 @@ export async function POST(req:Request){
    const b=await readAccountJson(req);await updateIdea(user,String(b.id||''),b.action,b.value);
   }else{
    const form=await readAccountUpload(req,26*1024*1024,'Суммарный размер скриншотов — до 25 МБ.');
-   const input=ideaInput({title:form.get('title'),description:form.get('description')});
+   const commenting=form.get('action')==='comment';
+   const text=commenting?commentText(form.get('text')):'';
+   const input=commenting?null:ideaInput({title:form.get('title'),description:form.get('description')});
    const files=form.getAll('screenshots');
    if(files.length>5||files.some(f=>!(f instanceof File)||f.size>5*1024*1024||!['image/png','image/jpeg','image/webp'].includes(f.type)))throw Error('Можно прикрепить до 5 скриншотов PNG, JPG или WebP, каждый до 5 МБ.');
    const storage=getJsonStorage();if(files.length&&!storage.putBinary)throw Error('Загрузка временно недоступна.');
    const editing=String(form.get('id')||'');
    const existing=editing?(await listIdeas(user)).find(row=>row.id===editing):undefined;
-   if(editing&&!existing)throw Error('ideas_missing');if(existing&&!canEditIdea(existing,user))throw Error('ideas_forbidden');
+   if(editing&&!existing)throw Error('ideas_missing');if(commenting&&!existing)throw Error('ideas_missing');if(existing&&!commenting&&!canEditIdea(existing,user))throw Error('ideas_forbidden');
    const retain=form.getAll('retain').map(String);if(retain.length+files.length>5)throw Error('Можно прикрепить до 5 скриншотов.');
    const id=editing||randomUUID(),saved:string[]=[];
    try{
     for(let i=0;i<files.length;i++){const bytes=await prepareDealerImage(Buffer.from(await (files[i] as File).arrayBuffer()));const key=`${id}/${randomUUID()}.webp`;await storage.putBinary!(`crm/team-ideas/media/${key}`,bytes,'image/webp');saved.push(key);}
-    if(existing){await editIdea(user,id,input,retain,saved,Number(form.get('revision')));await Promise.allSettled(existing.screenshots.filter(key=>!retain.includes(key)).map(key=>storage.deleteBinary?.(`crm/team-ideas/media/${key}`)));}
-    else await createIdea(user,input,saved,id);
+    if(commenting)await addIdeaComment(user,id,text,saved);
+    else if(existing){await editIdea(user,id,input!,retain,saved,Number(form.get('revision')));await Promise.allSettled(existing.screenshots.filter(key=>!retain.includes(key)).map(key=>storage.deleteBinary?.(`crm/team-ideas/media/${key}`)));}
+    else await createIdea(user,input!,saved,id);
    }catch(e){await Promise.allSettled(saved.map(key=>storage.deleteBinary?.(`crm/team-ideas/media/${key}`)));throw e;}
   }
   return Response.json({ok:true},{headers});
