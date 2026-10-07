@@ -1,4 +1,4 @@
-import {catalogInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
+import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -35,8 +35,8 @@ const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "")
   .filter(Boolean);
 const market = configuredMarkets[0] || "";
 const targetPerSource = catalogInventoryLimit(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE);
-const targetPerMarket = Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000));
-const maximumPerMarket = Math.max(targetPerMarket, catalogInventoryLimit(process.env.CATALOG_PUBLISH_MAX_PER_MARKET));
+const targetPerMarket = catalogMarketInventoryLimit(market, Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000)));
+const maximumPerMarket = catalogMarketInventoryLimit(market, Math.max(targetPerMarket, catalogInventoryLimit(process.env.CATALOG_PUBLISH_MAX_PER_MARKET)));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const defaultRetentionMs = catalogMarketRetentionMs("korea");
 const japanRetentionMs = catalogMarketRetentionMs("japan");
