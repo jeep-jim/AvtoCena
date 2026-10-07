@@ -1,4 +1,5 @@
 "use client";
+import {DealerLogo} from "./DealerLogo";
 import {useSelectedCity} from "@/lib/location/selected-city";
 import {calculateSpecial} from "@/lib/dealers/showcase-model";
 import Link from "next/link";
@@ -30,6 +31,7 @@ function DesktopScrollableRail({children,expanded=false}:{children:ReactNode;exp
 }
 export type SpecialRailItem = {
   id: string;
+  dealer?: {id:string;name:string;logoLight?:string;logoDark?:string};
   href: string;
   image: string;
   title: string;
@@ -59,6 +61,10 @@ export function SpecialRail({
   const [allKind,setAllKind]=useState<"order"|"stock"|null>(null);
   items=items.map(item=>{if(!item.calculation)return item;const c=calculateSpecial(item.calculation.showcase,item.calculation.offer,city);return {...item,price:c.totalRub,city:c.city,daysFrom:c.daysFrom,daysTo:c.daysTo};});
   if (!items.length) return null;
+  const selected=items.filter(o=>(o.availability||"order")===allKind);
+  const dealer=selected[0]?.dealer;
+  const singleDealer=dealer && selected.every(o=>o.dealer?.id===dealer.id);
+  const sheetName=singleDealer?dealer.name:"Предложения дилеров";
   return (
     <>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section data-site-block={kind==='stock'?'stock':'specials'} key={kind} className="my-5 min-w-0">
       <div className="flex items-end justify-between gap-3"><h2 className="text-lg font-black leading-tight md:text-2xl">
@@ -91,6 +97,6 @@ export function SpecialRail({
           </Link>
         ))}
       </DesktopScrollableRail>
-    </section>:null;})}{allKind&&<PublicSheet title={allKind==="stock"?"Автомобили в наличии":heading} onClose={()=>setAllKind(null)} maxWidth={1100}><div className="px-5 pb-5"><SpecialRail heading={heading} items={items} kinds={[allKind]} expanded/></div></PublicSheet>}</>
+    </section>:null;})}{allKind&&<PublicSheet title={sheetName} headerContent={<span className="flex min-w-0 items-center gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--ac-surface-2)] [&_img]:h-full [&_img]:w-full [&_img]:object-contain"><DealerLogo logoLight={singleDealer?dealer.logoLight:undefined} logoDark={singleDealer?dealer.logoDark:undefined} name={sheetName}/></span><span className="truncate">{sheetName}</span></span>} onClose={()=>setAllKind(null)} maxWidth={1100}><div className="px-5 pb-5"><SpecialRail heading={heading} items={items} kinds={[allKind]} expanded/></div></PublicSheet>}</>
   );
 }

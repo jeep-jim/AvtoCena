@@ -1,3 +1,4 @@
+import {publicDealerText} from './public-profile';
 import {calculateSpecial,offerAvailability,offerSectionEnabled,offerSectionHeading,offerSectionSubtitle,specialPath,specialTitle,type DealerShowcase} from './showcase-model';
 export function publicRail(s: DealerShowcase, city = "") {
   return (s.specialsEnabled || s.stockEnabled)
@@ -7,6 +8,7 @@ export function publicRail(s: DealerShowcase, city = "") {
           const c = calculateSpecial(s, o, city);
           return {
             id: o.id,
+            dealer: {id:s.dealerId,name:publicDealerText(s.name),logoLight:s.logoLight,logoDark:s.logoDark},
             availability: offerAvailability(o),
             condition: o.condition,
             address: offerAvailability(o)==="stock" ? s.offices.find(office=>office.id===o.officeId)?.address : undefined,
