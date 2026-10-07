@@ -1,5 +1,6 @@
 "use client";
-import {useEffect,useRef,type ReactNode} from "react";
+import {useEffect,useRef,useState,type ReactNode,type CSSProperties} from "react";
+import {createPortal} from "react-dom";
 import { FavoriteToggle, type FavoriteSnapshot } from "./FavoriteToggle";
 import { ShareLinkButton } from "./ShareLinkButton";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
@@ -30,30 +31,23 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
 // while the button bounds follow the viewport after it becomes fixed.
 function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:string;title:string}) {
   const anchor=useRef<HTMLDivElement>(null),dismiss=useRef<()=>void>(()=>{});
+  const [floating,setFloating]=useState<{inHeader:boolean;top:number;left:number;width:number;height:number}|null>(null);
   useEffect(()=>{
-    const node=anchor.current,button=node?.querySelector<HTMLElement>('.ac-offer-contact-bar');if(!node||!button)return;
-    const header=document.querySelector<HTMLElement>('.ac-public-header');
+    const node=anchor.current;if(!node)return;
+    const header=node.closest('main')?.querySelector<HTMLElement>('.ac-public-header')||document.querySelector<HTMLElement>('.ac-public-header');
     let frame=0,closed=false;
     const originalInert=header?.inert??false;
     const restoreHeader=()=>{if(header){delete header.dataset.offerContact;header.inert=originalInert;}};
     const update=()=>{
       frame=0;
-      const rect=node.getBoundingClientRect();
-      const bounds=header?.getBoundingClientRect();
-      const top=Math.max(0,bounds?.bottom||0)+8;
-      const passed=rect.top<top;
+      const rect=node.getBoundingClientRect(),bounds=header?.getBoundingClientRect();
+      const top=Math.max(0,bounds?.bottom||0)+8,passed=rect.top<top;
       if(!passed)closed=false;
       const mobile=window.innerWidth<768&&!!header;
-      const fixed=window.innerWidth<1280&&rect.width>0&&passed&&(!mobile||!closed);
-      const inHeader=mobile&&fixed;
-      node.dataset.stuck=String(fixed);node.dataset.inHeader=String(inHeader);
+      const fixed=window.innerWidth<1280&&rect.width>0&&passed&&(!mobile||!closed),inHeader=mobile&&fixed;
       if(inHeader&&header){header.dataset.offerContact='true';header.inert=true;}else restoreHeader();
-      button.style.position=fixed?'fixed':'';
-      button.style.top=fixed?`${inHeader?Math.max(0,bounds!.top)+8:top}px`:'';
-      button.style.left=fixed?`${inHeader?bounds!.left+10:rect.left}px`:'';
-      button.style.width=fixed?`${inHeader?bounds!.width-20:rect.width}px`:'100%';
-      button.style.setProperty('--contact-header-height',`${Math.max(44,(bounds?.height||64)-16)}px`);
-
+      const next=fixed?{inHeader,top:inHeader?Math.max(0,bounds!.top)+8:top,left:inHeader?bounds!.left+10:rect.left,width:inHeader?bounds!.width-20:rect.width,height:Math.max(44,(bounds?.height||64)-16)}:null;
+      setFloating(current=>JSON.stringify(current)===JSON.stringify(next)?current:next);
     };
     dismiss.current=()=>{closed=true;update();header?.querySelector<HTMLElement>('button,a')?.focus({preventScroll:true});};
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
@@ -61,7 +55,11 @@ function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:s
     window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
     return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
   },[]);
-  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div></div>;
+  const bar=<div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div>;
+  // A portal avoids clipping/stacking contexts in both dealer and catalogue layouts.
+  // The original anchor remains in flow, so scrolling and the reset point do not jump.
+  return <><div ref={anchor} className="ac-offer-contact-anchor" data-stuck={!!floating} data-in-header={!!floating?.inHeader}>{!floating&&bar}</div>{floating&&createPortal(<div className="ac-offer-contact-floating ac-offer-action-row" data-stuck="true" data-in-header={floating.inHeader} style={{position:'fixed',top:floating.top,left:floating.left,width:floating.width,zIndex:floating.inHeader?1001:80,'--contact-header-height':`${floating.height}px`} as CSSProperties}>{bar}</div>,document.body)}</>;
+
 }
 
 export function OfferMobileActions(favorite: FavoriteProps) {
@@ -81,6 +79,7 @@ export function OfferCreditCalculator() {
 export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
+    .ac-offer-contact-floating{display:block!important;color:var(--ac-text)}
     .ac-offer-contact-close{display:none}
     .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
     .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
@@ -88,8 +87,8 @@ export function OfferContactActionsStyles() {
     .ac-offer-contact-thumbnail{display:none;width:56px;height:56px;flex:0 0 56px;padding:0;border:0;overflow:hidden;cursor:pointer;border-radius:12px}
     .ac-offer-contact-thumbnail img{display:block;width:100%;height:100%;object-fit:cover}
     .ac-offer-contact-thumbnail:focus-visible{outline:2px solid var(--ac-text);outline-offset:3px}
-    .ac-offer-contact-anchor[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:color-mix(in srgb,var(--ac-surface) 55%,transparent);-webkit-backdrop-filter:blur(16px) saturate(120%);backdrop-filter:blur(16px) saturate(120%);box-shadow:0 6px 20px #0002}
-    .ac-offer-contact-anchor[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
+    :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-stuck="true"]>.ac-offer-contact-bar{z-index:80;background:color-mix(in srgb,var(--ac-surface) 55%,transparent);-webkit-backdrop-filter:blur(16px) saturate(120%);backdrop-filter:blur(16px) saturate(120%);box-shadow:0 6px 20px #0002}
+    :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-stuck="true"] .ac-offer-contact-thumbnail:not([hidden]){display:block}
     .ac-offer-action-row .ac-offer-contact-button{height:56px!important;font-size:16px!important;color:#fff!important}
     .ac-offer-action-row .ac-offer-contact-button>span{font-size:inherit!important}
     .ac-offer-action-row .ac-offer-contact-button>svg,
@@ -119,13 +118,13 @@ export function OfferContactActionsStyles() {
     }
     @media(max-width:767px){
       .ac-offer-page>section:has(.ac-offer-contact-anchor[data-in-header="true"]){z-index:auto!important}
-      .ac-offer-contact-anchor[data-in-header="true"]>.ac-offer-contact-bar{z-index:1001!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"]>.ac-offer-contact-bar{z-index:1001!important}
       .ac-public-header[data-offer-contact="true"]>*{visibility:hidden!important;pointer-events:none!important}
-      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-close{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:44px;padding:0;border:0;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-muted)}
-      .ac-offer-contact-anchor[data-in-header="true"]>.ac-offer-contact-bar{box-shadow:none;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;gap:8px}
-      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-thumbnail{width:var(--contact-header-height);height:var(--contact-header-height);flex-basis:var(--contact-header-height)}
-      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-button{height:var(--contact-header-height)!important;font-size:14px!important;padding-left:36px!important;padding-right:8px!important}
-      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-button>span:has(>svg){left:10px!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-close{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:44px;padding:0;border:0;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-muted)}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"]>.ac-offer-contact-bar{box-shadow:none;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;gap:8px}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-thumbnail{width:var(--contact-header-height);height:var(--contact-header-height);flex-basis:var(--contact-header-height)}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-button{height:var(--contact-header-height)!important;font-size:14px!important;padding-left:36px!important;padding-right:8px!important}
+      :is(.ac-offer-contact-anchor,.ac-offer-contact-floating)[data-in-header="true"] .ac-offer-contact-button>span:has(>svg){left:10px!important}
     }
     @media(max-width:359px){
       .ac-offer-action-row{gap:8px}

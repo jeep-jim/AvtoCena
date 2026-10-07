@@ -1,7 +1,7 @@
 export const BILLING_POLICY='dealer-2026-10-07-v2';
 export type TaxRate='none'|0|5|7|10|22;
 export type BillingConfig={version:number;tax:TaxRate|null;taxBasis:string;confirmedBy:string;confirmedAt:string};
-export const EMPTY_CONFIG:BillingConfig={version:0,tax:null,taxBasis:'',confirmedBy:'',confirmedAt:''};
+export const EMPTY_CONFIG:BillingConfig={version:0,tax:'none',taxBasis:'УСН. Без НДС. Подтверждено владельцем 07.10.2026.',confirmedBy:'owner_instruction_2026-10-07',confirmedAt:'2026-10-07T10:47:09.000Z'};
 export type DealSpec={leadId:string;documentId:string;contractNumber:string;car:string;year:number;vin:string;totalMinor:number;depositMinor:number;commissionMinor:number;otherMinor:number;excludedMinor:number;exclusionReason:string;dealerTax:string;version:number;updatedAt:string;updatedBy:string;digest:string;lockedAt?:string;exclusionApprovedBy?:string;exclusionApprovedAt?:string};
 export type Charge={id:string;leadId:string;documentId:string;contractNumber:string;car:string;year:number;vin:string;totalMinor:number;baseMinor:number;amountMinor:number;percent:number;period:string;serviceAt:string;createdAt:string;spec:DealSpec;agreementDigest:string;tax:TaxRate|null;taxBasis:string;reverses?:string;reason?:string};
 export type Invoice={id:string;number:string;period:string;createdAt:string;dueDate:string;chargeIds:string[];amountMinor:number;tax:TaxRate|null;vatMinor:number|null;taxBasis:string;dealer:{name:string;inn:string;ogrn:string;address:string};issuer:{name:string;inn:string;ogrnip:string;correspondenceAddress:string;account:string;bank:string;bik:string;correspondent:string};status:'draft'|'issued';revision:number};

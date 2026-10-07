@@ -1,0 +1,34 @@
+name: Verify offer header actions
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/components/catalog/OfferContactActions.tsx'
+      - 'apps/web/components/dealers/DealerOfferView.tsx'
+      - 'tests/browser/offer-header.mjs'
+      - '.github/workflows/verify-offer-header.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm install --prefix "$RUNNER_TEMP/header-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify dealer order and stock header in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/header-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-header.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: offer-header-preview
+          path: artifacts/offer-header/*.png
+          if-no-files-found: ignore
