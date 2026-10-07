@@ -1,0 +1,45 @@
+name: TEMP CarSwitch detail JSON-LD
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-carswitch-detail-jsonld.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect exact detail JSON-LD
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,re,urllib.request,html
+          u='https://carswitch.com/abudhabi/used-car/nissan/patrol/2024/858598'
+          req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36','Accept':'text/html,application/xhtml+xml,*/*;q=0.8','Accept-Language':'en-US,en;q=0.9'})
+          with urllib.request.urlopen(req,timeout=45) as r: s=r.read().decode('utf-8','ignore'); print('DETAIL',r.status,r.geturl(),len(s))
+          scripts=re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>([\s\S]*?)</script>',s,re.I)
+          print('SCRIPTS',len(scripts))
+          def walk(x,path='root'):
+              if isinstance(x,list):
+                  for i,v in enumerate(x): yield from walk(v,f'{path}[{i}]')
+              elif isinstance(x,dict):
+                  yield path,x
+                  for k,v in x.items():
+                      if isinstance(v,(dict,list)): yield from walk(v,f'{path}.{k}')
+          for i,raw in enumerate(scripts):
+              try: obj=json.loads(html.unescape(raw.strip()))
+              except Exception as e: print('PARSE_ERR',i,str(e)); continue
+              for path,x in walk(obj):
+                  typ=x.get('@type')
+                  types=typ if isinstance(typ,list) else [typ]
+                  if any(str(t).lower() in {'product','car','vehicle','itempage'} for t in types):
+                      imgs=x.get('image') or []
+                      if not isinstance(imgs,list): imgs=[imgs]
+                      off=x.get('offers') or {}
+                      if isinstance(off,list): off=off[0] if off else {}
+                      print(json.dumps({'path':path,'type':types,'url':x.get('url'),'name':x.get('name'),'vin':x.get('vehicleIdentificationNumber'),'images':len(imgs),'firstImage':imgs[0] if imgs else None,'price':off.get('price') if isinstance(off,dict) else None,'currency':off.get('priceCurrency') if isinstance(off,dict) else None},ensure_ascii=False))
+          PY
