@@ -12,13 +12,13 @@ try{
  for(const [kind,href] of Object.entries(links))for(const theme of ['light','dark']){
   const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.addInitScript(t=>{localStorage.setItem('theme',t);document.documentElement.dataset.theme=t;},theme);
+  await page.addInitScript(t=>{localStorage.setItem('theme',t);},theme);
   try{
    const response=await page.goto(origin+href,{waitUntil:'domcontentloaded',timeout:60000});assert.ok(response?.ok(),'dealer card must respond successfully');
    await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    const anchor=page.locator('.ac-offer-contact-anchor');await anchor.waitFor();
    // Scroll the actual rendered anchor, after page layout, rather than a stale SSR coordinate.
-   await anchor.scrollIntoViewIfNeeded();await page.mouse.wheel(0,450);
+   await anchor.scrollIntoViewIfNeeded();const distance=await anchor.evaluate(e=>Math.max(0,e.getBoundingClientRect().top)+180);await page.mouse.wheel(0,distance);
    const bar=page.locator('.ac-offer-contact-floating');await bar.waitFor();
    const button=bar.locator('[data-offer-action="lead"]');
    assert.ok(await button.evaluate(e=>{const r=e.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===e;}),'live header action is clickable');
