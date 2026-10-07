@@ -1,3 +1,4 @@
+import {MAX_MANUAL_OFFER_PHOTOS} from './photo-limits';
 import {videoReview} from './video-review';
 import {TOPAVTO_DEALER} from '../topavto-dealer';
 import {normalizeRequisites, EMPTY_REQUISITES, type DealerRequisites} from './requisites';
@@ -483,7 +484,7 @@ export function normalizeShowcase(
       mileageKm: number(o.mileageKm, 0, 1e7),
       description: text(o.description, 8000),
       equipment: text(o.equipment, 8000),
-      photos: photos(o.photos, id, 30),
+      photos: photos(o.photos, id, MAX_MANUAL_OFFER_PHOTOS),
       priceUsd: number(o.priceUsd, 0, 1e7),
       customsIncluded: o.customsIncluded === true,
       customsExtraRub: number(o.customsExtraRub, 0, 1e8),

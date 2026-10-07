@@ -340,12 +340,12 @@ test("rail subtitles are opt-in, bounded and independent",()=>{
  const data={dealerName:'Другой дилер',dealerAddress:'Новокузнецк, адрес',title:'Toyota RAV4',market:'Другой дилер',marketKey:'dealer',date:'02.10.2026',specs:'2026 г. · 1987 см³',city:'Новосибирск',rate:'1 $ = 86,5 ₽',sections:[{title:'Структура цены',rows:[{label:'Цена автомобиля',value:'3 000 000 ₽'}]},{title:'Условия',rows:[{label:'Доставка',value:'5–10 дней'}]},{title:'Информация',rows:[]}],total:'3 000 000 ₽',deposit:'Уточняется у дилера',warnings:[],url:'https://avtocena.com/cars/offer/special_other__car'};
  const pdf=await renderOfferPdf(data,{photo:null});assert.equal(pdf.subarray(0,4).toString(),'%PDF');assert.ok(pdf.length>10000);assert.equal((pdf.toString('latin1').match(/\/S \/SetOCGState\b/g)||[]).length,3);assert.doesNotMatch(offerPdfNotes(data).join(' '),/TOP AVTO/);
  });
-test('one listing allows 30 unique photos and rejects the 31st',()=>{
+test('manual listing allows 50 unique photos and rejects the 51st',()=>{
  const s=fixture();s.offers[0].status='draft';
- s.offers[0].photos=Array.from({length:31},(_,i)=>({id:`p${i}`,url:`/api/dealers/${s.dealerId}/media/00000000-0000-0000-0000-${String(i).padStart(12,'0')}`,caption:''}));
- assert.throws(()=>normalizeShowcase(s,s.dealerId,1),/не более 30/);
- s.offers[0].photos=s.offers[0].photos.slice(0,30);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,30);
- s.offers[0].photos.push(s.offers[0].photos[0]);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,30);
+ s.offers[0].photos=Array.from({length:51},(_,i)=>({id:`p${i}`,url:`/api/dealers/${s.dealerId}/media/00000000-0000-0000-0000-${String(i).padStart(12,'0')}`,caption:''}));
+ assert.throws(()=>normalizeShowcase(s,s.dealerId,1),/не более 50/);
+ s.offers[0].photos=s.offers[0].photos.slice(0,50);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,50);
+ s.offers[0].photos.push(s.offers[0].photos[0]);assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].photos.length,50);
 });
 
 test("public rail uses selected city and exposes only calculation fields", () => {
