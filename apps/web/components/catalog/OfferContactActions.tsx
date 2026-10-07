@@ -29,28 +29,39 @@ export function OfferDesktopActions({position = "sidebar", ...favorite}: Favorit
 // Keep the anchor in document flow: its bounds describe the original position,
 // while the button bounds follow the viewport after it becomes fixed.
 function StickyContact({children,imageUrl,title}:{children:ReactNode;imageUrl?:string;title:string}) {
-  const anchor=useRef<HTMLDivElement>(null);
+  const anchor=useRef<HTMLDivElement>(null),dismiss=useRef<()=>void>(()=>{});
   useEffect(()=>{
     const node=anchor.current,button=node?.querySelector<HTMLElement>('.ac-offer-contact-bar');if(!node||!button)return;
     const header=document.querySelector<HTMLElement>('.ac-public-header');
-    let frame=0;
+    let frame=0,closed=false;
+    const originalInert=header?.inert??false;
+    const restoreHeader=()=>{if(header){delete header.dataset.offerContact;header.inert=originalInert;}};
     const update=()=>{
       frame=0;
       const rect=node.getBoundingClientRect();
-      const top=Math.max(0,header?.getBoundingClientRect().bottom||0)+8;
-      const fixed=window.innerWidth<1280&&rect.width>0&&rect.top<top;
-      node.dataset.stuck=String(fixed);
+      const bounds=header?.getBoundingClientRect();
+      const top=Math.max(0,bounds?.bottom||0)+8;
+      const passed=rect.top<top;
+      if(!passed)closed=false;
+      const mobile=window.innerWidth<768&&!!header;
+      const fixed=window.innerWidth<1280&&rect.width>0&&passed&&(!mobile||!closed);
+      const inHeader=mobile&&fixed;
+      node.dataset.stuck=String(fixed);node.dataset.inHeader=String(inHeader);
+      if(inHeader&&header){header.dataset.offerContact='true';header.inert=true;}else restoreHeader();
       button.style.position=fixed?'fixed':'';
-      button.style.top=fixed?`${top}px`:'';
-      button.style.left=fixed?`${rect.left}px`:'';
-      button.style.width=fixed?`${rect.width}px`:'100%';
+      button.style.top=fixed?`${inHeader?Math.max(0,bounds!.top)+8:top}px`:'';
+      button.style.left=fixed?`${inHeader?bounds!.left+10:rect.left}px`:'';
+      button.style.width=fixed?`${inHeader?bounds!.width-20:rect.width}px`:'100%';
+      button.style.setProperty('--contact-header-height',`${Math.max(44,(bounds?.height||64)-16)}px`);
+
     };
+    dismiss.current=()=>{closed=true;update();header?.querySelector<HTMLElement>('button,a')?.focus({preventScroll:true});};
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
     const observer=new ResizeObserver(schedule);observer.observe(node);observer.observe(document.body);if(header)observer.observe(header);
     window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);update();
-    return()=>{cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
+    return()=>{restoreHeader();dismiss.current=()=>{};cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);};
   },[]);
-  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar">{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div></div>;
+  return <div ref={anchor} className="ac-offer-contact-anchor" data-stuck="false"><div className="ac-offer-contact-bar"><button type="button" className="ac-offer-contact-close" aria-label="Закрыть панель заявки и показать шапку" onClick={()=>dismiss.current()}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>{imageUrl&&<button type="button" className="ac-offer-contact-thumbnail" aria-label={`Наверх к фото ${title}`} onClick={()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"})}><img src={imageUrl} alt={title} onError={event=>{if(event.currentTarget.parentElement)event.currentTarget.parentElement.hidden=true;}}/></button>}{children}</div></div>;
 }
 
 export function OfferMobileActions(favorite: FavoriteProps) {
@@ -70,6 +81,7 @@ export function OfferCreditCalculator() {
 export function OfferContactActionsStyles() {
   return <style dangerouslySetInnerHTML={{ __html: `
     html[data-theme="light"] .ac-offer-page .ac-offer-updated{background:#fff!important;border:1px solid var(--ac-border)!important}
+    .ac-offer-contact-close{display:none}
     .ac-offer-contact-anchor{grid-column:1/-1;min-height:56px}
     .ac-offer-contact-bar{display:flex;align-items:center;gap:8px;width:100%;border-radius:1.05rem}
     .ac-offer-contact-bar>.ac-offer-contact-button{flex:1;min-width:0}
@@ -104,6 +116,14 @@ export function OfferContactActionsStyles() {
     @media(max-width:767px){
       .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button>svg{display:none!important}
       .ac-offer-action-row[data-has-copy="true"] .ac-offer-contact-button{padding-left:8px;padding-right:8px;font-size:13px!important}
+    }
+    @media(max-width:767px){
+      .ac-public-header[data-offer-contact="true"]>*{visibility:hidden!important;pointer-events:none!important}
+      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-close{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:44px;padding:0;border:0;border-radius:12px;background:var(--ac-surface-2);color:var(--ac-muted)}
+      .ac-offer-contact-anchor[data-in-header="true"]>.ac-offer-contact-bar{box-shadow:none;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;gap:8px}
+      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-thumbnail{width:var(--contact-header-height);height:var(--contact-header-height);flex-basis:var(--contact-header-height)}
+      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-button{height:var(--contact-header-height)!important;font-size:14px!important;padding-left:36px!important;padding-right:8px!important}
+      .ac-offer-contact-anchor[data-in-header="true"] .ac-offer-contact-button>span:has(>svg){left:10px!important}
     }
     @media(max-width:359px){
       .ac-offer-action-row{gap:8px}
