@@ -15,12 +15,12 @@ export async function POST(request:Request){
  await mutateDataJson<Membership>(`dealers/memberships/${user.companyId}.json`,EMPTY_MEMBERSHIP,m=>{
  if(m.version!==b.version)throw Error('Условия изменились. Обновите страницу');
  if(b.action==='accept'){
- if(m.agreement)throw Error('Заявление уже сохранено. Обратитесь к команде АвтоЦены для уточнения');
+ if(m.agreement?.version===DEALER_AGREEMENT_VERSION)throw Error('Заявление уже сохранено. Обратитесь к команде АвтоЦены для уточнения');
  if(b.agreementVersion!==DEALER_AGREEMENT_VERSION||b.confirmed!==true)throw Error('Ознакомьтесь с актуальной офертой');
  const representative=String(b.representative||'').trim(),authority=String(b.authority||'').trim();
  if(representative.length<5||representative.length>200||authority.length<3||authority.length>500)throw Error('Укажите ФИО и основание полномочий');
  if(!r?.legalName||!r.inn||!r.ogrn||!r.legalAddress)throw Error('Сначала заполните реквизиты компании в настройках');
- return {...m,version:m.version+1,agreement:{version:DEALER_AGREEMENT_VERSION,text:DEALER_AGREEMENT,digest:createHash('sha256').update(DEALER_AGREEMENT).digest('hex'),submittedAt:new Date().toISOString(),actorId:user.id,representative,authority,legalName:r.legalName,inn:r.inn,ogrn:r.ogrn,address:r.legalAddress}};
+ return {...m,agreementHistory:m.agreement?[...(m.agreementHistory||[]),m.agreement]:(m.agreementHistory||[]),version:m.version+1,agreement:{version:DEALER_AGREEMENT_VERSION,text:DEALER_AGREEMENT,digest:createHash('sha256').update(DEALER_AGREEMENT).digest('hex'),submittedAt:new Date().toISOString(),actorId:user.id,representative,authority,legalName:r.legalName,inn:r.inn,ogrn:r.ogrn,address:r.legalAddress}};
  }
  if(b.action==='commission'){
  if(!m.agreement?.approvedAt||b.confirmed!==true)throw Error('Сначала подтвердите подключение и выбор режима');

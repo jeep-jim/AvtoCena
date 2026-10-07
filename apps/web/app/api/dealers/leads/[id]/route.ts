@@ -19,7 +19,7 @@ export async function POST(request:Request,{params}:{params:Promise<{id:string}>
  const manager=users.find(x=>x.id===b.managerId&&x.companyId===u.companyId&&x.status!=='disabled'&&x.dealerApproved===true);if(!manager)throw Error('Выберите подтверждённого сотрудника своей компании');
  if((l.assignedManagerId||'')!==(b.expectedManagerId||''))throw Error('Ответственный уже изменён. Обновите страницу');
  if(!l.platformTerms&&(!m.agreement?.approvedAt||dealerCommissionPercent(m,now)===null))throw Error('Сначала подтвердите оферту и активируйте тариф');
- return {...l,assignedManagerId:manager.id,status:l.status==='new'?'assigned':l.status,updatedAt:now.toISOString(),platformTerms:l.platformTerms||{percent:dealerCommissionPercent(m,now),basis:'remuneration',agreementDigest:m.agreement!.digest,at:now.toISOString()},dealerWorkflowHistory:[...(l.dealerWorkflowHistory||[]),{action:'assign',managerId:manager.id,actorId:u.id,at:now.toISOString()}]};
+ return {...l,assignedManagerId:manager.id,status:l.status==='new'?'assigned':l.status,updatedAt:now.toISOString(),platformTerms:l.platformTerms||{percent:dealerCommissionPercent(m,now),basis:'remuneration',agreementDigest:m.agreement!.digest,agreementVersion:m.agreement!.version,at:now.toISOString()},dealerWorkflowHistory:[...(l.dealerWorkflowHistory||[]),{action:'assign',managerId:manager.id,actorId:u.id,at:now.toISOString()}]};
  }
  if(b.action==='contact'){
  if(!l.platformTerms||!l.assignedManagerId)throw Error('Сначала назначьте менеджера');if(!CONTACT_RESULTS.includes(b.result))throw Error('Выберите результат');const note=String(b.note||'').trim().slice(0,2000);if(b.result==='rejected'&&!note)throw Error('Укажите причину отказа');

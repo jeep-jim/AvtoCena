@@ -1,3 +1,4 @@
+import {requireSpec,captureSignedDeal} from '@/lib/dealers/billing/store';
 import {canClaimCustomerInvite,confirmedCustomerContract,sharedCustomerDocuments} from '@/lib/account/access';
 import {readAccountJson} from '@/lib/account/request';
 import {currentAccount,hash,accountRateLimit} from '@/lib/account/auth';
@@ -17,9 +18,10 @@ export async function POST(request:Request){if(!isCalculationOriginAllowed(reque
  if(b.action==='confirm_contract'){
  if(b.confirmed!==true)throw Error('Подтвердите, что этот экземпляр договора подписан вами и дилером');
  const lead=(await customerLeads(link.companyId,client.id)).find(l=>l.id===b.leadId);if(!lead)throw Error('Заявка не найдена');
- const documentId=String(b.documentId||''),at=new Date().toISOString();
- await updateChunkedDataJson<any>(clientsPath(link.companyId),client.id,c=>{const contract=c.portalContracts?.[lead.id];if(c.portalAccountId!==a.id||!contract||contract.revokedAt||contract.documentId!==documentId||!sharedCustomerDocuments(c).some((d:any)=>d.id===documentId))throw Error('Договор недоступен или изменился');return {...c,portalContracts:{...c.portalContracts,[lead.id]:{...contract,customerConfirmedAt:contract.customerConfirmedAt||at,customerConfirmedBy:a.id}}};});
+ const documentId=String(b.documentId||''),at=new Date().toISOString();const financialSpec=await requireSpec(link.companyId,lead,documentId,true);
+ await updateChunkedDataJson<any>(clientsPath(link.companyId),client.id,c=>{const contract=c.portalContracts?.[lead.id];if(c.portalAccountId!==a.id||!contract||contract.revokedAt||contract.documentId!==documentId||!sharedCustomerDocuments(c).some((d:any)=>d.id===documentId))throw Error('Договор недоступен или изменился');return {...c,portalContracts:{...c.portalContracts,[lead.id]:{...contract,customerConfirmedAt:contract.customerConfirmedAt||at,customerConfirmedBy:a.id,...(financialSpec?{financialDigest:financialSpec.digest}:{})}}};});
  await updateChunkedDataJson<any>('leads/leads.json',lead.id,l=>{if(l.clientId!==client.id||(l.requestedDealerId||l.dealerId||'dealer_topavto')!==link.companyId)throw Error('Нет доступа');return {...l,status:['paid','in_progress','delivered','completed'].includes(l.status)?l.status:'contract_signed',updatedAt:at};});
+ await captureSignedDeal(link.companyId,lead.id);
  }else if(b.action==='message'){const message=await sendPortalMessage(link.companyId,client.id,b.text,a.name,a.id);return Response.json({ok:true,message:{id:message.id,text:message.text,author:message.author,createdAt:message.createdAt,mine:true}},{headers});}
  else if(b.action==='review'){
  const confirmation=confirmedCustomerContract(client,String(b.leadId));if(!confirmation||client.portalReviews?.[b.leadId])throw Error('Отзыв доступен после подтверждения подписанного договора.');

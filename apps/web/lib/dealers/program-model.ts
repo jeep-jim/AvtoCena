@@ -2,7 +2,7 @@ import type {DealerShowcase} from './showcase-model';
 export type DealerProgram = {version:number;trialDays:number;monthRub:number;halfYearRub:number;yearRub:number;commissionPercent:number;commissionBasis:'sale'|'remuneration';policyVersion?:number;updatedAt:string};
 export const DEFAULT_PROGRAM:DealerProgram={version:0,trialDays:30,monthRub:10000,halfYearRub:50000,yearRub:100000,commissionPercent:10,commissionBasis:'remuneration',policyVersion:2,updatedAt:''};
 export type DealerAcceptance={version:string;text:string;digest:string;submittedAt:string;actorId:string;representative:string;authority:string;legalName:string;inn:string;ogrn:string;address:string;approvedAt?:string;approvedBy?:string};
-export type Membership={agreement?:DealerAcceptance;plan?:'subscription'|'commission';version:number;trialStartedAt:string;trialEndsAt:string;paidUntil:string;history:{id:string;at:string;actorId:string;months:number;amountRub:number;note:string}[]};
+export type Membership={agreementHistory?:DealerAcceptance[];agreement?:DealerAcceptance;plan?:'subscription'|'commission';version:number;trialStartedAt:string;trialEndsAt:string;paidUntil:string;history:{id:string;at:string;actorId:string;months:number;amountRub:number;note:string}[]};
 export const EMPTY_MEMBERSHIP:Membership={version:0,trialStartedAt:'',trialEndsAt:'',paidUntil:'',history:[]};
 export function dealerAccessLevel(id:string,m:Membership,now=new Date()){
  if(id==='dealer_topavto')return {level:'platform' as const,full:true,until:''};

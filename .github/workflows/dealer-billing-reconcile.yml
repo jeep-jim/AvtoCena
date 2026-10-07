@@ -1,0 +1,39 @@
+name: Dealer billing reconciliation
+on:
+  schedule:
+    # Hourly; 17:07 UTC = 00:07 Asia/Krasnoyarsk. Scheduler timing is not guaranteed.
+    - cron: '7 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: avtocena-dealer-billing
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Reconcile immutable dealer charges and payments
+        env:
+          JSON_STORAGE_DRIVER: object
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          DEALER_YOOKASSA_SHOP_ID: ${{ secrets.DEALER_YOOKASSA_SHOP_ID }}
+          DEALER_YOOKASSA_SECRET: ${{ secrets.DEALER_YOOKASSA_SECRET }}
+          DEALER_PAYMENTS_ENABLED: ${{ vars.DEALER_PAYMENTS_ENABLED }}
+          DEALER_PAYMENTS_MODE: ${{ vars.DEALER_PAYMENTS_MODE }}
+          DEALER_RECEIPTS_CONFIRMED: ${{ vars.DEALER_RECEIPTS_CONFIRMED }}
+          DEALER_FISCAL_FLOW_CONFIRMED: ${{ vars.DEALER_FISCAL_FLOW_CONFIRMED }}
+        run: node --import tsx scripts/dealer-billing-reconcile.ts
