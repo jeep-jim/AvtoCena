@@ -1,4 +1,5 @@
 "use client";
+import {DealerNumericInput} from "./DealerNumericInput";
 import {useDealerDemo,useDealerUploadBusy} from "./DealerDemoContext";
 import {preparePhotoUpload,readPhotoUploadResponse} from "@/lib/dealers/photo-upload";
 import {useState,useRef} from "react";
@@ -25,7 +26,7 @@ export function Field({
   return (
     <label className="grid gap-1 text-sm">
       {label}
-      <input
+      {type === "number" ? <DealerNumericInput aria-invalid={invalid||undefined} className={input} value={value} onValueChange={onChange} group={/[₽$€¥]|руб|стоимость|сумма/i.test(label)}/> : <input
         aria-invalid={invalid||undefined}
         className={input}
         type={type}
@@ -35,7 +36,7 @@ export function Field({
         onChange={(e) =>
           onChange(type === "number" ? Number(e.target.value) : e.target.value)
         }
-      />
+      />}
     </label>
   );
 }
