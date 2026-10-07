@@ -1,0 +1,12 @@
+'use client';
+import {useEffect,useRef,useState,type ClipboardEvent} from 'react';
+import {FileAttachment} from '@/components/ui/FileAttachment';
+export function pastedScreenshots(event:ClipboardEvent,add:(files:File[])=>void){
+ const files=Array.from(event.clipboardData.items).filter(i=>i.kind==='file'&&i.type.startsWith('image/')).map(i=>i.getAsFile()).filter((f):f is File=>!!f);
+ if(files.length){event.preventDefault();add(files);}
+}
+export function IdeaScreenshots({files,onChange,retained=0,disabled=false,onError}:{files:File[];onChange:(files:File[])=>void;retained?:number;disabled?:boolean;onError:(message:string)=>void}){
+ const [reading,setReading]=useState(false);const active=useRef(true);useEffect(()=>{active.current=true;return()=>{active.current=false;};},[]);
+ function add(next:File[]){if(disabled)return;if(next.length+files.length+retained>5||next.some(f=>f.size>5*1024*1024||!['image/png','image/jpeg','image/webp'].includes(f.type))){onError('До 5 скриншотов PNG, JPG или WebP, каждый до 5 МБ.');return;}onChange([...files,...next]);onError('');}
+ return <div className="ideas-attachments" onPaste={e=>pastedScreenshots(e,add)}><div className="ideas-actions"><FileAttachment multiple disabled={disabled||reading} accept="image/png,image/jpeg,image/webp" aria-label="Прикрепить скриншоты" onChange={e=>{add(Array.from(e.target.files||[]));e.target.value='';}}/><button type="button" disabled={disabled||reading} onClick={async()=>{setReading(true);try{if(!navigator.clipboard?.read)throw Error();const items=await navigator.clipboard.read();const next:File[]=[];for(const item of items){const type=item.types.find(t=>['image/png','image/jpeg','image/webp'].includes(t));if(type){const blob=await item.getType(type);next.push(new File([blob],`Скриншот-${Date.now()}-${next.length}.${type.split('/')[1]}`,{type}));}}if(!active.current)return;if(next.length)add(next);else onError('В буфере нет изображения. Скопируйте скриншот и повторите.');}catch{if(active.current)onError('Не удалось прочитать буфер. Нажмите Ctrl+V или ⌘V в поле описания или комментария либо выберите файл.');}finally{if(active.current)setReading(false);}}}>{reading?'Вставляем…':'Вставить скриншот'}</button></div><small>PNG, JPG, WebP — до 5 файлов, каждый до 5 МБ. Можно вставить через Ctrl+V или ⌘V.</small>{files.length>0&&<ul>{files.map((f,i)=><li key={i}>{f.name} <button type="button" disabled={disabled||reading} aria-label={`Убрать ${f.name}`} onClick={()=>onChange(files.filter((_,n)=>n!==i))}>Убрать</button></li>)}</ul>}</div>;
+}
