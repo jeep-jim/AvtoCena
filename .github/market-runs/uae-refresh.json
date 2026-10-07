@@ -1,9 +1,9 @@
 {
-  "operation": "owner-open-inventory-20261006-1412",
+  "operation": "all-market-continuations-20261007-0822",
   "market": "uae",
   "publishMarkets": [
     "uae"
   ],
-  "resetCursors": true,
-  "reason": "Fresh full traversal under six-year age policy, no price/power/assortment caps; heavy trucks and buses over 3500 kg excluded. Preserve all collected slices and resume committed budget stops."
+  "resetCursors": false,
+  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
 }

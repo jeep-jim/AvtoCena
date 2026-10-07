@@ -97,3 +97,18 @@ test('a completed China tail restarts on the refresh interval without claiming f
  assert.equal(recoveryDecision({...args,now:now-1}).action,'none');
  assert.equal(recoveryDecision({...args,runs:[{status:'in_progress'}]}).reason,'already_running');
 });
+
+
+test('all five intake markets resume a proven published transport slice before failed-job replay',()=>{
+ for(const market of ['china','europe','korea','uae','georgia']){
+ const sources=[{sourceId:'primary',cursor:'192',stopReason:'list_failed',retryableTransportFailure:true},{sourceId:'secondary',cursor:'2001',stopReason:'budget'}];
+ const journal={publicationStatus:'published',generationId:'g',runId:42,sources};
+ const intakeCheckpoint={version:1,market,generationId:'g',updatedAt:new Date(now).toISOString(),sources};
+ const args={...input,market,journal,intakeCheckpoint,runs:[{id:42,status:'completed',conclusion:'failure',run_attempt:3,updated_at:new Date(now-3600000).toISOString()}]};
+ const decision=recoveryDecision(args);assert.equal(decision.action,'dispatch');assert.equal(decision.reason,'continue_published_transport_slice');
+ assert.equal(recoveryDecision({...args,recovery:{...decision,transportAttempts:3}}).reason,'source_retry_limit_reached');
+ for(const change of [{intakeCheckpoint:null},{intakeCheckpoint:{...intakeCheckpoint,generationId:'wrong'}},{intakeCheckpoint:{...intakeCheckpoint,sources:[{...sources[0],retryableTransportFailure:false},sources[1]]}},{journal:{...journal,sources:[{...sources[0],stopReason:'blocked'}]}}])assert.notEqual(recoveryDecision({...args,...change}).action,'dispatch');
+ const advanced=sources.map(row=>({...row,cursor:row.cursor+'1'}));
+ assert.equal(recoveryDecision({...args,journal:{...journal,sources:advanced},intakeCheckpoint:{...intakeCheckpoint,sources:advanced},recovery:{...decision,transportAttempts:3}}).action,'dispatch');
+ }
+});

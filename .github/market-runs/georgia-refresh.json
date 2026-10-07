@@ -1,11 +1,9 @@
 {
-  "operation": "publication-recovery-20261006-1743",
+  "operation": "all-market-continuations-20261007-0822",
   "market": "georgia",
   "publishMarkets": [
     "georgia"
   ],
-  "reuseRunId": "37429980818",
-  "refreshMarkets": [],
   "resetCursors": false,
-  "reason": "Republish preserved observations after photo-attestation and storage-estimation fixes; do not repeat source collection."
+  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
 }
