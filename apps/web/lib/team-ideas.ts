@@ -1,9 +1,10 @@
+import {defaultManagerAvatar} from './default-avatars';
 import {randomUUID} from 'node:crypto';
 import type {AuthUser} from './auth';
 import {isPlatformTeam,isPlatformOwner} from './platform-access';
 import {readDataJson,mutateDataJson} from './data';
 
-export type TeamIdea={id:string;title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
+export type TeamIdea={id:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
 export const IDEAS_PATH='crm/team-ideas/items.json';
 export function requireIdeaTeam(user:AuthUser|null|undefined):asserts user is AuthUser {if(!isPlatformTeam(user))throw Error('ideas_forbidden');}
 export function ideaInput(input:{title:unknown;description:unknown}) {
@@ -15,8 +16,11 @@ export function ideaInput(input:{title:unknown;description:unknown}) {
 export function changeIdea(row:TeamIdea,user:AuthUser,action:unknown,value:unknown):TeamIdea {
  requireIdeaTeam(user);
  if(action==='vote'){
-  if(typeof value!=='boolean')throw Error('Некорректный голос.');
-  return {...row,votes:value?[...new Set([...row.votes,user.id])]:row.votes.filter(id=>id!==user.id)};
+  const choice=value===true?'for':value===false?null:value;
+  if(choice!==null&&choice!=='for'&&choice!=='against')throw Error('Некорректный голос.');
+  const votes=row.votes.filter(id=>id!==user.id),downvotes=(row.downvotes||[]).filter(id=>id!==user.id);
+  if(choice==='for')votes.push(user.id);if(choice==='against')downvotes.push(user.id);
+  return {...row,votes:[...new Set(votes)],downvotes:[...new Set(downvotes)]};
  }
  if(action==='progress'){
   if(!isPlatformOwner(user))throw Error('ideas_forbidden');
@@ -25,15 +29,25 @@ export function changeIdea(row:TeamIdea,user:AuthUser,action:unknown,value:unkno
  }
  throw Error('Неизвестное действие.');
 }
-export async function listIdeas(user:AuthUser){requireIdeaTeam(user);return readDataJson<TeamIdea[]>(IDEAS_PATH,[]);}
+export function numberIdeas(rows:TeamIdea[]):TeamIdea[]{
+ let max=rows.reduce((n,r)=>Math.max(n,Number.isSafeInteger(r.number)&&(r.number??0)>0?r.number!:0),0);
+ const missing=rows.filter(r=>!Number.isSafeInteger(r.number)||(r.number??0)<1).sort((a,b)=>a.createdAt.localeCompare(b.createdAt)||a.id.localeCompare(b.id));
+ const assigned=new Map(missing.map(r=>[r.id,++max]));
+ return rows.map(r=>assigned.has(r.id)?{...r,number:assigned.get(r.id)}:r);
+}
+export async function listIdeas(user:AuthUser){requireIdeaTeam(user);const rows=await readDataJson<TeamIdea[]>(IDEAS_PATH,[]);return rows.some(r=>!Number.isSafeInteger(r.number)||(r.number??0)<1)?mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],numberIdeas):rows;}
 export async function createIdea(user:AuthUser,input:{title:unknown;description:unknown},screenshots:string[],id=randomUUID()){
  requireIdeaTeam(user);const fields=ideaInput(input);
  if(screenshots.length>5||screenshots.some(s=>!new RegExp(`^${id}/[0-4]\\.webp$`).test(s)))throw Error('Некорректные скриншоты.');
- const at=new Date().toISOString();const row:TeamIdea={id,...fields,authorId:user.id,authorName:user.displayName||'Сотрудник',createdAt:at,updatedAt:at,progress:0,votes:[],screenshots};
- await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>[row,...rows]);return row;
+ const at=new Date().toISOString();const row:TeamIdea={id,...fields,authorId:user.id,authorName:user.displayName||'Сотрудник',authorAvatarUrl:user.avatarUrl,createdAt:at,updatedAt:at,progress:0,votes:[],screenshots};
+ await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{const numbered=numberIdeas(rows);row.number=numbered.reduce((n,r)=>Math.max(n,r.number!),0)+1;return [row,...numbered];});return row;
 }
 export async function updateIdea(user:AuthUser,id:string,action:unknown,value:unknown){
  requireIdeaTeam(user);
  await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{if(!rows.some(r=>r.id===id))throw Error('ideas_missing');return rows.map(row=>row.id===id?changeIdea(row,user,action,value):row);});
 }
-export function publicIdea(row:TeamIdea,user:AuthUser){return {...row,votes:undefined,voteCount:row.votes.length,voted:row.votes.includes(user.id)};}
+export function publicIdea(row:TeamIdea,user:AuthUser,users:AuthUser[]=[]){
+ const person=(id:string,name='Сотрудник',avatar?:string)=>{const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
+ const votes=[...new Set(row.votes)],downvotes=[...new Set(row.downvotes||[])].filter(id=>!votes.includes(id));
+ return {...row,votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
+}

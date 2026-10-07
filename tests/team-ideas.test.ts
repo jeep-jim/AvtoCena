@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {changeIdea,ideaInput,requireIdeaTeam,publicIdea,type TeamIdea} from '../apps/web/lib/team-ideas';
+import {changeIdea,ideaInput,requireIdeaTeam,publicIdea,numberIdeas,type TeamIdea} from '../apps/web/lib/team-ideas';
 import type {AuthUser} from '../apps/web/lib/auth';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -36,7 +36,7 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
  const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER;
  const out=path.resolve('artifacts/team-ideas-tests');fs.mkdirSync(out,{recursive:true});const modules:any={};
  for(const [name,entry] of Object.entries({api:'apps/web/app/(crm)/api/crm/ideas/route.ts',media:'apps/web/app/(crm)/api/crm/ideas/media/[ideaId]/[file]/route.ts'})){
-  const outfile=path.join(out,name+'.cjs');await build({entryPoints:[entry],outfile,bundle:true,platform:'node',format:'cjs',packages:'external',plugins:[{name:'actor',setup(b){b.onResolve({filter:/^@\/lib\/auth$/},()=>({path:'actor',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:'export async function getCurrentUser(){return globalThis.__ideaActor||null}'}));}}]});modules[name]=require(outfile);
+  const outfile=path.join(out,name+'.cjs');await build({entryPoints:[entry],outfile,bundle:true,platform:'node',format:'cjs',packages:'external',plugins:[{name:'actor',setup(b){b.onResolve({filter:/^@\/lib\/auth$/},()=>({path:'actor',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:'export async function getCurrentUser(){return globalThis.__ideaActor||null} export function getAuthUsers(){return []} export function normalizeTelegramUsername(v){return v}'}));}}]});modules[name]=require(outfile);
  }
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'ideas-test-'));fs.mkdirSync(path.join(tmp,'data'));
  process.chdir(tmp);process.env.JSON_STORAGE_DRIVER='local';
@@ -57,10 +57,28 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
   (globalThis as any).__ideaActor=null;assert.equal((await modules.media.GET(new Request('https://avtocena.com'),context)).status,403);
   (globalThis as any).__ideaActor=owner;assert.equal((await modules.api.POST(post({id:item.id,action:'progress',value:80}))).status,200);
   result=await (await modules.api.GET()).json();assert.equal(result.ideas[0].progress,80);assert.equal(result.ideas[0].voteCount,1);
+  await Promise.all(['Second','Third'].map(async title=>{const f=new FormData();f.set('title',title);f.set('description','Text');assert.equal((await modules.api.POST(post(f))).status,200);}));
+  result=await (await modules.api.GET()).json();assert.deepEqual(result.ideas.map((r:any)=>r.number).sort(),[1,2,3]);assert.equal(result.ideas.find((r:any)=>r.id===item.id).number,1);
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;delete (globalThis as any).__ideaActor;fs.rmSync(tmp,{recursive:true,force:true});}
 });
 test('formatted text escapes HTML and only makes HTTP(S) URLs clickable',async()=>{
  const outfile=path.resolve('artifacts/team-ideas-tests/text.cjs');await build({entryPoints:['apps/web/components/crm/IdeaText.tsx'],outfile,bundle:true,platform:'node',format:'cjs',packages:'external',jsx:'automatic'});
  const {IdeaText}=require(outfile);const html=renderToStaticMarkup(React.createElement(IdeaText,{text:'**Жирный** [u]Линия[/u] [color=red]Цвет[/color] <script>alert(1)</script> javascript:alert(1) https://example.com'}));
  assert.ok(html.includes('<strong>Жирный</strong>'));assert.ok(html.includes('<u>Линия</u>'));assert.ok(html.includes('idea-color-red'));assert.ok(!html.includes('<script>'));assert.ok(!html.includes('href="javascript:'));assert.ok(html.includes('href="https://example.com/"'));assert.ok(html.includes('noopener noreferrer'));
+});
+
+test('against votes switch sides exclusively, remain idempotent and can be removed',()=>{
+ const yes=changeIdea(row,manager,'vote','for');
+ const no=changeIdea(yes,manager,'vote','against');assert.deepEqual(no.votes,[]);assert.deepEqual(no.downvotes,['manager']);
+ assert.deepEqual(changeIdea(no,manager,'vote','against').downvotes,['manager']);
+ assert.deepEqual(changeIdea(no,manager,'vote',null).downvotes,[]);
+ assert.deepEqual(changeIdea(no,manager,'vote','for').downvotes,[]);
+ const view=publicIdea(no,owner,[{...manager,displayName:'Антон',avatarUrl:'/avatars/test.webp'}]);
+ assert.equal(view.againstCount,1);assert.equal(view.opponents[0].name,'Антон');assert.equal(view.opponents[0].avatar,'/avatars/test.webp');assert.equal(view.author.avatar.includes('/avatars/'),true);
+});
+test('migration assigns chronological permanent numbers and never renumbers existing ideas',()=>{
+ const old={...row,id:'old',createdAt:'2026-10-06'},recent={...row,id:'recent',createdAt:'2026-10-07'};
+ const rows=numberIdeas([recent,old]);assert.equal(rows[0].number,2);assert.equal(rows[1].number,1);
+ assert.deepEqual(numberIdeas([...rows].reverse()).map(r=>r.number),[1,2]);
+ assert.equal(numberIdeas([{...row,id:'new'},...rows])[0].number,3);
 });

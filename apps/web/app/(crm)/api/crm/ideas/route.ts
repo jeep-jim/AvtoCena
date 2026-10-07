@@ -1,3 +1,4 @@
+import {readCrmUsers} from '@/lib/crm-users';
 import {randomUUID} from 'node:crypto';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformTeam,isPlatformOwner} from '@/lib/platform-access';
@@ -10,7 +11,7 @@ export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
 const denied=()=>Response.json({error:'Нет доступа'},{status:403,headers});
-export async function GET(){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();return Response.json({ideas:(await listIdeas(user)).map(r=>publicIdea(r,user)),owner:isPlatformOwner(user)},{headers});}
+export async function GET(){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();const [rows,users]=await Promise.all([listIdeas(user),readCrmUsers()]);return Response.json({ideas:rows.map(r=>publicIdea(r,user,users)),owner:isPlatformOwner(user)},{headers});}
 export async function POST(req:Request){
  const user=await getCurrentUser();if(!user||!isPlatformTeam(user)||!isCalculationOriginAllowed(req))return denied();
  try{
