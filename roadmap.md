@@ -6666,3 +6666,112 @@ Owner requested source specifications, unified stock controls/pagination, green 
 - В recoveryDecision добавлена ветка продолжения опубликованного транспортного обрыва ДО inspect_failure: новый collect вместо повторного запуска только упавшего summary/publish job. Требуются совпадающие generation/source/cursor, успешная публикация, свежий checkpoint и retryableTransportFailure=true. Смешанные budget+transport источники поддержаны. Существующие очереди/отмена владельцем/2h cooldown соблюдаются; одинаковый cursor максимум3 попытки за24h, продвинувшийся cursor начинает новый лимит. Отказы доступа, поддельные/устаревшие состояния не обходятся.
 - Обновлены отдельные markers China/UAE/Georgia/Europe на новый collect, resetCursors=false. Старые Europe/Georgia markers были publication-only с reuseRunId; в новом запуске нужны свежие наблюдения, а не очередная перепубликация старого артефакта. Активный Korea37544378192 и ожидающий исправленный37556119734, Japan37554691979 не отменяются и не дублируются. Green в свежем отчёте current, новый ручной запуск не заявлен; его обычный отдельный график сохранён.
 - 17 тестов recovery/checkpoint success; node --check watchdog success. Роадмап сохранён с дополнением. Подготовлено к отправке; ID новых запусков и новые опубликованные объёмы на момент записи ещё неизвестны. Ошибки доступа UAE/Georgia и полнота китайского обхода остаются открытыми, автоматическое продолжение не выдаётся за восстановленные сотни тысяч авто.
+
+<a id="parser-operating-rules-2026-10-07"></a>
+
+## 07.10.2026 — постоянный регламент обходов, публикации и обслуживания рынков
+
+По поручению владельца: этот блок — отдельная справочная точка для следующих сессий. Перед изменением парсеров сверять его, AGENTS.md, фактические workflow и последние записи ниже. Историю не стирать; изменения правил, расписания, источников и запусков дописывать с датой, причиной, результатом проверки и статусом публикации. При расхождении документа и кода явно фиксировать расхождение, не выдавать намерение за выполненную работу.
+
+Версия конфигурации, по которой составлен блок: [559c0b4](https://github.com/jeep-jim/AvtoCena/commit/559c0b4d112b814e5da0b574c7eabcea3532b985). Это регламент, а не подтверждение завершения текущих запусков или полного охвата сайтов.
+
+### 1. Обязательное расписание
+
+Время для владельца — Новокузнецк, UTC+7 (Asia/Krasnoyarsk). GitHub cron записан в UTC. Время означает плановый запуск, а не завершение публикации: возможны очередь и задержка GitHub Actions.
+
+| Рынок / задача | Периодичность | Время UTC+7 | Cron UTC | Workflow |
+|---|---|---|---|---|
+| Китай | раз в 3 дня | 01:11 | `11 18 * * *` | [catalog-refresh-china.yml](.github/workflows/catalog-refresh-china.yml) |
+| Корея | раз в 3 дня | 02:17 | `17 19 * * *` | [catalog-refresh-korea.yml](.github/workflows/catalog-refresh-korea.yml) |
+| ОАЭ | раз в 3 дня | 03:23 | `23 20 * * *` | [catalog-refresh-uae.yml](.github/workflows/catalog-refresh-uae.yml) |
+| Грузия | раз в 3 дня | 04:29 | `29 21 * * *` | [catalog-refresh-georgia.yml](.github/workflows/catalog-refresh-georgia.yml) |
+| Европа | раз в 3 дня | 05:37 | `37 22 * * *` | [catalog-refresh-europe.yml](.github/workflows/catalog-refresh-europe.yml) |
+| Япония: «Зелёный угол» | раз в 3 дня, отдельный сбор | 06:47 | `47 23 * * *` | [catalog-refresh-green.yml](.github/workflows/catalog-refresh-green.yml) |
+| Япония: ProAuctions | проверка ежедневно; новый завершённый цикл раз в 14 дней | 10:00 | `0 3 * * *` | [proauctions-collect-publish.yml](.github/workflows/proauctions-collect-publish.yml) |
+| Watchdog: проверка / восстановление | каждые 2 часа и после завершения связанных workflow | 01:43, 03:43, …, 23:43 | `43 */2 * * *` | [catalog-autonomy-watchdog.yml](.github/workflows/catalog-autonomy-watchdog.yml) |
+| Очистка хранилища | каждые 6 часов; также после сборов и вручную | 01:00, 07:00, 13:00, 19:00 | `0 */6 * * *` | [catalog-storage-cleanup.yml](.github/workflows/catalog-storage-cleanup.yml) |
+
+Ежедневный cron первых шести строк только будит workflow. Реальное разрешение на плановый сбор задаёт [catalog-refresh-schedule.mjs](scripts/lib/catalog-refresh-schedule.mjs): опорная дата `2026-09-17T18:00:00Z`, условие `floor((now-anchor)/86400000) % 3 === 0`. Цикл непрерывный через границы месяцев, а не «каждое третье число месяца». Ближайшие даты после составления блока: 09, 12, 15 октября 2026 по UTC+7. Ручной workflow_dispatch и предусмотренные push-маркеры могут запускать вне календаря.
+
+ProAuctions: [proauctions-schedule.mjs](scripts/lib/proauctions-schedule.mjs), [proauctions-restore-state.mjs](scripts/proauctions-restore-state.mjs). Нет состояния — первый сбор; незавершённый сбор — продолжение checkpoint; complete без published — повтор публикации. Новый плановый цикл после завершённого опубликованного запуска определяется 14 днями от startedAt. Ручной принудительный запуск может начать новый завершённый цикл раньше; resetCursors требует осознанного решения. Это отдельная статистика аукционов, не текущие активные объявления.
+
+### 2. Источники и точки входа
+
+Канонический список: [required-catalog-sources.ts](apps/web/lib/catalog/required-catalog-sources.ts). Наличие сайта в списке означает разрешённый/требуемый источник, но не доказательство его доступности или полного сбора на текущую дату.
+
+| Рынок | Источник и ссылка | sourceId / способ |
+|---|---|---|
+| Китай, б/у | [Che168 Global](https://global.che168.com/) | `autohome_used_china_open`; разрешён именно global.che168.com |
+| Китай, новые | [Autohome](https://www.autohome.com.cn/) | `autohome_new_china_open`; отдельный канал новых авто |
+| Корея | [Encar](https://www.encar.com/) | `encar_direct` |
+| Корея | [K Car](https://www.kcar.com/) | `kcar_korea_open` |
+| ОАЭ | [Dubizzle](https://uae.dubizzle.com/) | `dubizzle_uae_open` |
+| ОАЭ | [DubiCars](https://www.dubicars.com/) | `dubicars_uae_exact` |
+| ОАЭ | [CarSwitch](https://carswitch.com/) | `carswitch_uae_open` |
+| Европа | [mobile.de](https://www.mobile.de/) | `mobile_de_open` |
+| Европа | [AutoScout24](https://www.autoscout24.com/) | `autoscout_europe_open` |
+| Грузия | [MyAuto](https://www.myauto.ge/) | `myauto_georgia_list` |
+| Грузия | [AutoPapa](https://autopapa.ge/) | `autopapa_georgia_open` |
+| Япония, статистика | [ProAuctions](https://demo.pro-auctions.ru/statistika/) | `proauctions_japan_stat`; отдельный workflow, сохранение состояния |
+| Япония, разрешённый сохранённый импорт | [JPTrade](https://jptrade.ru/stat/) | `jptrade_japan_stat`; разрешение импорта НЕ означает наличие автоматического live-обхода |
+| Япония, «Зелёный угол» | [Akebono](https://akebono.world/) | отдельный GraphQL-сбор, вне generic Japan adapter |
+
+Для Akebono: [catalog/open](https://akebono.world/graphql/catalog/open), лоты `https://akebono.world/green/lots/{id}`, [курс](https://akebono.world/graphql/directory/exchange-rate/open). Реализация: [akebono-green-source.mjs](scripts/lib/akebono-green-source.mjs), [catalog-refresh-green-corner.mjs](scripts/catalog-refresh-green-corner.mjs), [green-corner-normalize.ts](apps/web/lib/catalog/green-corner-normalize.ts). API-адреса требуют соответствующего запроса из кода; это не обычные страницы каталога.
+
+Общий путь пяти рынков: [catalog-market-refresh.yml](.github/workflows/catalog-market-refresh.yml) → [catalog-source-intake.mjs](scripts/catalog-source-intake.mjs) → адаптеры из [importer-impl.ts](apps/web/lib/catalog/importer-impl.ts) / [public-market-sources.ts](apps/web/lib/catalog/public-market-sources.ts), при необходимости [yandex-source-bridge.ts](apps/web/lib/catalog/yandex-source-bridge.ts) → [catalog-intake-to-publication.mjs](scripts/catalog-intake-to-publication.mjs) → [catalog-publish-market.mjs](scripts/catalog-publish-market.mjs) → [record-market-refresh.mjs](scripts/record-market-refresh.mjs). Точные URL запросов, параметры пагинации и извлечение данных смотреть в адаптере sourceId, а не выводить из главной страницы сайта.
+
+Корея: [encar-complete-source.ts](apps/web/lib/catalog/encar-complete-source.ts), [kcar-exact-source.ts](apps/web/lib/catalog/kcar-exact-source.ts). Данные и фотографии привязываются к точному объявлению; неоднозначную мощность не выдумывать. Для KCar inventory достаточно одного подтверждённого фото; отсутствие фото и отсутствие второго фото — разные случаи.
+
+Упоминания других площадок в старых записях не делают их действующими источниками. Generic Japan список пуст: старый японский адаптер не возвращать автоматически. Менять allowlist только отдельным обоснованным изменением с записью в роадмап.
+
+### 3. Правила допуска и выдачи — решение владельца от 06.10.2026
+
+- Не отсекать машины по цене, мощности, доле источника или квоте модельного года. Дорогие машины тоже собирать.
+- Все рынки кроме Японии: возраст не более шести календарных лет от текущей даты с доступной точностью даты источника (день/месяц/год). Япония: 2010 год и новее. Возраст повторно проверять при показе. Не придумывать отсутствующий месяц или день.
+- Не собирать грузовики/автобусы с разрешённой полной массой выше 3500 кг; не подменять её снаряжённой массой. Не выдумывать неизвестную массу.
+- Отсутствие редактируемых характеристик (л.с., объём, топливо, привод, КПП, кузов) само по себе не причина отказа для валидного объявления. Недостающее дополняется существующими настройками карточки; неполный расчёт нельзя показывать как подтверждённую итоговую цену.
+- Сохранить проверку происхождения, идентичности объявления, допустимого URL, фотографий, достоверности цены, дедупликации, актуальности и снятия. «Забирать всё» не разрешает публиковать выдуманные данные или чужие фото.
+- Сортировка: сначала известная стоимость до 15 млн ₽, предпочтительно подтверждённые ≤160 л.с.; неизвестная стоимость отдельно; более 15 млн ₽ в конце от меньшей к большей. Это приоритет показа, не фильтр сбора.
+- Реализацию сверять с [inventory-admission.ts](apps/web/lib/catalog/inventory-admission.ts), [source-inventory-scope.ts](apps/web/lib/catalog/source-inventory-scope.ts) и AGENTS.md. Перевод/международные названия сохранять без подмены исходной идентичности; пробелы в характеристиках не заполнять догадками.
+
+### 4. Независимость, объём и сохранность обхода
+
+У каждого рынка свой workflow и concurrency group; cancel-in-progress=false. Сбой одного рынка не отменяет остальные. Источники внутри рынка обрабатываются независимо; публикация общего manifest защищена общей блокировкой, поэтому независимый сбор может ждать публикации.
+
+Пагинация списка → точные карточки → наблюдения JSONL → нормализация/дедупликация → безопасная публикация → сохранение подтверждённого cursor. Считать уникальные пары sourceId + offer.id, а не число строк JSONL: список и detail дают разные ревизии одной машины.
+
+Текущие бюджеты одного прохода пяти рынков: Корея 300 минут, остальные 210 минут; collector job 330 минут, publication job 360 минут; до 2000 страниц и 100000 наблюдений на источник за проход, detail concurrency 4. При свободном диске менее 2 GiB сбор останавливает порцию контролируемо. Это технические границы порции с продолжением, не потолок каталога и не обещание бесконечного runtime.
+
+Checkpoint: [catalog-intake-checkpoint.mjs](scripts/lib/catalog-intake-checkpoint.mjs). Продолжать только с cursor, чьи наблюдения подтверждённо опубликованы; не перескакивать непубликованную часть. Сброс cursor не делать привычным способом лечения ошибок — он повторяет уже выполненную работу. Различать свежий collect и publication-only reuseRunId, который сам новых машин не собирает.
+
+### 5. Автовосстановление и критерии завершения
+
+Код: [catalog-autonomy-watchdog.mjs](scripts/catalog-autonomy-watchdog.mjs), [catalog-recovery-policy.mjs](scripts/lib/catalog-recovery-policy.mjs), [source-transport-failure.mjs](scripts/lib/source-transport-failure.mjs).
+
+- При queued/in_progress/waiting/pending/requested второй проход не плодить; отмену владельцем уважать. Между автоматическими dispatch обычно не менее двух часов.
+- Продолжение budget/time_budget/disk_budget и доказанного временного list_failed требует опубликованной порции, совпадающих generation/source/cursor и свежего checkpoint. Автоматическое продолжение проверяет возраст менее четырёх дней; механизм восстановления сохранённого intake cursor отдельно допускает до 14 дней. Не путать эти окна.
+- Для транспортного продолжения нужен retryableTransportFailure=true. Не более трёх попыток на одном cursor за 24 часа; продвижение cursor начинает новый лимит. На уровне запроса временный обрыв, включая terminated, повторяется ограниченно и в пределах времени прохода.
+- 401/403/429, captcha/challenge и детерминированная ошибка не означают пустой рынок и не лечатся бесконечным повтором. Зафиксировать источник, ошибку и необходимость отдельного исправления.
+- collectionComplete и publicationStatus проверять раздельно. Красный workflow может иметь успешно опубликованную порцию; зелёный skipped workflow может вообще ничего не собрать. configured_routes_finished подтверждает только настроенные маршруты, не весь объём сайта.
+- Полный успех заявлять только по отчётам всех обязательных источников, подтверждённой публикации и проверке видимого каталога. Рост рынка оценивать по опубликованным уникальным авто, а не обещанию или upstream count.
+
+### 6. Актуальность и очистка
+
+Нормативная конфигурация: [refresh-policy-v1.json](data/catalog/refresh-policy-v1.json).
+Для non-Japan: refresh 3 дня, retention 14 дней от последнего подтверждённого наблюдения, cleanupIntervalDays 7. Для японского архива: refresh 14 дней, retention 30 дней по дате аукциона/события источника, cleanupIntervalDays 30. Эти поля политики не заменяют отдельный шестичасовой cron очистки хранилища.
+
+Подтверждённое sold/removed удаляется из активного non-Japan инвентаря. Таймаут, ошибка сети, блокировка и неполный обход НЕ доказательство продажи и НЕ основание объявить весь источник исчезнувшим. Перепубликация старого объекта не должна подменять дату реального наблюдения.
+
+Фото хранятся как source_urls_only. Очистку чанков/объектов выполнять штатным workflow с защитой используемых manifest и объектов текущей публикации, а не массовым удалением каталогов. Контролировать объём объектов, свободный диск, время публикации и ожидание блокировки по мере роста трафика и количества авто.
+
+### 7. Как проверить в любой момент
+
+1. Открыть [GitHub Actions](https://github.com/jeep-jim/AvtoCena/actions), нужный workflow из таблицы; записать run ID, SHA, scheduled/manual/recovery, время, attempt и статус collect/publish отдельно.
+2. В отчёте каждого sourceId проверить pages, upstream, уникальные observations, причины отсева, stopReason, cursor. Сопоставить с обязательным списком: отсутствие источника не замаскировать суммой рынка.
+3. Сопоставить журнал `catalog/operations/markets/{market}.json`, `catalog/intake-cursors/v1/{market}.json` и активную generation manifest. Для ProAuctions — `catalog/collector-state/proauctions/current.json`; восстановление — `catalog/operations/recovery/{market}.json`.
+4. Проверить опубликованные количества, publishedAt, цены и выборочные карточки на сайте. Если число резко уменьшилось, сравнить источник/возраст/retention/ошибки/дедупликацию, не считать падение автоматически нормальным.
+5. Проверить последний watchdog и storage-cleanup: отсутствие зависшей очереди, причины отказа продолжения, защищённые данные и доступный объём хранения.
+6. Любое изменение или ручной перезапуск дописать в roadmap: дата UTC+7, причина, рынок/sourceId, правило, commit/run ID, что проверено, что опубликовано и что осталось незавершённым.
+
+На момент составления регламента устранение всех ошибок доступа ОАЭ/Грузии и полный охват Китая/Encar не подтверждены (см. записи 07.10.2026 08:11 и 08:22). Этот документ не закрывает эти задачи. В данной записи зафиксирован регламент; код, расписания и парсеры не изменялись.
+
