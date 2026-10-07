@@ -64,3 +64,13 @@ test('large observations rotate by bytes as well as row count',async()=>{
  const files=await fs.readdir(dir);assert.equal(files.length,3);for(const file of files)assert.ok((await fs.stat(path.join(dir,file))).size<8*1024*1024);
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
+
+
+test('published transport failures resume the failed page; policy and parser failures never do',()=>{
+ for(const message of ['terminated','yandex_bridge_http_502_encar_192','invalid_payload','http_403_timeout']){
+ const intake={market:'korea',completedAt:new Date().toISOString(),sources:[{sourceId:'encar_direct',cursor:'192',stopReason:'list_failed',errors:[{stage:'list',message}]}]};
+ const saved=publishedIntakeCheckpoint(intake,{market:'korea',published:true,generationId:'generation'});
+ const state={source:{market:'korea'},sourceId:'encar_direct',cursor:null,initialCursor:null};restoreIntakeCursor(state,saved);
+ assert.equal(state.cursor,['terminated','yandex_bridge_http_502_encar_192'].includes(message)?'192':null);
+ }
+});

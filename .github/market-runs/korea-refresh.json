@@ -1,9 +1,7 @@
 {
-  "operation": "owner-open-inventory-20261006-1412",
+  "operation": "korea-transport-and-gallery-20261007",
   "market": "korea",
-  "publishMarkets": [
-    "korea"
-  ],
-  "resetCursors": true,
-  "reason": "Fresh full traversal under six-year age policy, no price/power/assortment caps; heavy trucks and buses over 3500 kg excluded. Preserve all collected slices and resume committed budget stops."
+  "publishMarkets": ["korea"],
+  "resetCursors": false,
+  "reason": "Queue after active Korea run without cancellation. Accept one exact vehicle photo, retry terminated transport bodies, preserve published retryable cursors; no price/power admission caps."
 }

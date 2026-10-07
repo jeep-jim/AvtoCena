@@ -1,3 +1,4 @@
+import {sourceTransportFailure} from './source-transport-failure.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -24,9 +25,9 @@ export function restoreIntakeCursor(state, saved, now = Date.now()) {
   const age = now - Date.parse(saved.updatedAt || '');
   if (!Number.isFinite(age) || age < 0 || age > 14 * 86400000) return;
   const row = saved.sources?.find(row => row.sourceId === state.sourceId);
-  // Only exhausted work budgets are continuations. Access denials, parser
-  // failures and completed scans must never resume at a blocked/tail page.
-  if (row && ['budget', 'time_budget', 'budget_mid_page','disk_budget'].includes(row.stopReason) && typeof row.cursor === 'string' && row.cursor.length) {
+  // Resume published budget slices or proven transport interruptions on the
+  // same failed cursor. Never skip an access denial, parser failure or finished scan.
+  if (row && (['budget', 'time_budget', 'budget_mid_page','disk_budget'].includes(row.stopReason) || row.stopReason === 'list_failed' && row.retryableTransportFailure === true) && typeof row.cursor === 'string' && row.cursor.length) {
     state.cursor = row.cursor;
     state.initialCursor = row.cursor;
   }
@@ -40,5 +41,6 @@ export function publishedIntakeCheckpoint(intake, publication) {
   return { version: 1, market: intake.market, updatedAt: intake.completedAt,
     generationId: publication.generationId,
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
-      cursor: row.cursor ?? null, stopReason: row.stopReason })) };
+      cursor: row.cursor ?? null, stopReason: row.stopReason,
+      retryableTransportFailure: row.stopReason === "list_failed" && !!row.errors?.length && row.errors.every(error=>error.stage === "list" && sourceTransportFailure(error.message)) })) };
 }

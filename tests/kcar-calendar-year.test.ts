@@ -21,3 +21,15 @@ test('KCar rejection diagnostic preserves identity and listing status checks', (
   assert.equal(parseKcarExactDetail({ carCd: 'EC1' }, { rvo: { carCd: 'EC1', statCd: 'sold' } }, r => reasons.push(r)), null);
   assert.deepEqual(reasons, ['detail_identity_mismatch', 'not_active']);
 });
+
+
+test('inventory accepts one exact vehicle photo and missing power, never a different car photo',()=>{
+ const previous=process.env.CATALOG_SOURCE_INVENTORY_MODE;process.env.CATALOG_SOURCE_INVENTORY_MODE='1';
+ try{
+ const meta={carCd:'EC61390500'};
+ const data:any={rvo:{carCd:meta.carCd,statCd:'CAR_STATUS010',mnuftrNm:'Hyundai',modelNm:'Avante',grdNm:'Smart',regModelyr:'2024',mfgDt:'202401',salprc:2000},outerPhotoList:[{thumbnailType:'01',elanPath:'https://img.kcar.com/3dcarpicture/2026/07/081/61390500_1/main/main780.jpg'}]};
+ const reasons:string[]=[];const row=parseKcarExactDetail(meta,data,r=>reasons.push(r));assert.ok(row,JSON.stringify(reasons));
+ assert.equal(row.images.length,1);assert.equal(row.powerHp,undefined);
+ data.outerPhotoList[0].elanPath=data.outerPhotoList[0].elanPath.replace('61390500_1','99999999_1');assert.equal(parseKcarExactDetail(meta,data),null);
+ }finally{if(previous===undefined)delete process.env.CATALOG_SOURCE_INVENTORY_MODE;else process.env.CATALOG_SOURCE_INVENTORY_MODE=previous;}
+});

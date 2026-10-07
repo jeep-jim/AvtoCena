@@ -103,3 +103,11 @@ test('unexpected source failure does not terminate another source',async()=>{
  await collectSourceStates([one.state,two.state],()=>one.options,async state=>{if(state===one.state)throw Error('source crashed');state.done=true;state.stopReason='source_finished';});
  assert.equal(one.state.stopReason,'collector_error');assert.equal(two.state.stopReason,'source_finished');
 });
+
+
+test('terminated response bodies retry the same page, not abandon the Encar crawl',async()=>{
+ const f=fixture({first:{items:[offer]}});const fetch=f.state.source.fetchPage;let calls=0;
+ f.state.source.fetchPage=async c=>{if(++calls===1)throw Error('terminated');return fetch(c)};
+ await collectSourcePage(f.state,f.options);assert.equal(f.state.done,false);assert.equal(f.state.cursor,null);assert.deepEqual(f.delays,[1000]);
+ await collectSourcePage(f.state,f.options);assert.equal(f.state.seen.size,1);assert.equal(calls,2);
+});

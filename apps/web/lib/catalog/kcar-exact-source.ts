@@ -353,7 +353,7 @@ export function parseKcarExactDetail(meta: KCarListRow, data: KCarDetailData, on
   if (!inventory && (!transmission || !drive || !bodyType)) return reject("missing_vehicle_description");
   if (!sourcePrice) return reject("missing_source_price");
   if (!inventory && !powerHp && !powerKw) return reject("missing_exact_peak_power");
-  if (images.length < (inventory ? 2 : 5)) return reject("insufficient_bound_gallery");
+  if (images.length < (inventory ? 1 : 5)) return reject(inventory ? "missing_bound_gallery" : "insufficient_bound_gallery");
   if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return reject("list_detail_make_mismatch");
   if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return reject("list_detail_model_mismatch");
   const listPrice = positiveInt(meta.prc);
@@ -483,7 +483,7 @@ class KCarExactSource implements CatalogSourceAdapter {
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as Row;
     const inventory = process.env.CATALOG_SOURCE_INVENTORY_MODE === "1";
-    if (!row?.id || !row.make || !row.model || !row.trim || !row.year || !row.sourcePrice || !row.sourceCurrency || row.images.length < (inventory ? 2 : 5)) return null;
+    if (!row?.id || !row.make || !row.model || !row.trim || !row.year || !row.sourcePrice || !row.sourceCurrency || row.images.length < (inventory ? 1 : 5)) return null;
     if (!inventory && !row.powerHp && !row.powerKw) return null;
     const now = new Date().toISOString();
     const fields = [
