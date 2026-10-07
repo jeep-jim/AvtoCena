@@ -1,3 +1,4 @@
+import {SESSION_COOKIE_MAX_AGE} from "@/lib/session-policy";
 import {readAccountJson} from '@/lib/account/request';
 import {NextResponse} from 'next/server';
 import {ACCOUNT_COOKIE,accountSession,currentAccount,publicAccount,accountRateLimit,normalizeAccountPhone,registerAccount,phoneAccountId,accountPath,passwordMatches,type CustomerAccount} from '@/lib/account/auth';
@@ -15,6 +16,6 @@ export async function POST(request:Request){
  if(b.action==='register'){if(b.consent!==true)throw Error('Подтвердите согласие на обработку данных.');a=await registerAccount(phone,String(b.password||''),String(b.name||''));}
  else if(b.action==='login'){a=await readDataJson<CustomerAccount|null>(accountPath(phoneAccountId(phone)),null);const match=await passwordMatches(String(b.password||''),a?.passwordHash||'0'.repeat(32)+':'+ '0'.repeat(128));if(!a||a.disabled||!match)throw Error('Телефон или пароль не совпадают.');}
  else throw Error('Неизвестное действие.');
- const r=NextResponse.json({ok:true,account:publicAccount(a)},{headers:{'Cache-Control':'private, no-store'}});r.cookies.set(ACCOUNT_COOKIE,accountSession(a),{httpOnly:true,path:'/',sameSite:'lax',secure:process.env.NODE_ENV==='production',maxAge:14*86400});return r;
+ const r=NextResponse.json({ok:true,account:publicAccount(a)},{headers:{'Cache-Control':'private, no-store'}});r.cookies.set(ACCOUNT_COOKIE,accountSession(a),{httpOnly:true,path:'/',sameSite:'lax',secure:process.env.NODE_ENV==='production',maxAge:SESSION_COOKIE_MAX_AGE});return r;
  }catch(e){return NextResponse.json({error:e instanceof Error?e.message:'Не удалось войти.'},{status:400,headers:{'Cache-Control':'no-store'}});}
 }

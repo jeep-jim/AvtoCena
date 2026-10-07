@@ -1,3 +1,4 @@
+import {SESSION_COOKIE_MAX_AGE, persistentSessionFields, sessionTimeValid, sessionNeedsRenewal} from "./lib/session-policy";
 import {isPlatformTeam} from "./lib/platform-access";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,6 +10,8 @@ type SessionPayload = {
   role: "owner" | "admin" | "manager" | "partner" | "dealer";
   companyId?: string;
   exp: number;
+  persistent?: boolean;
+  renewedAt?: number;
   partnerCode?: string;
 };
 
@@ -42,13 +45,13 @@ async function signPayload(encodedPayload: string) {
 async function getSession(request: NextRequest): Promise<SessionPayload | null> {
   const raw = request.cookies.get(COOKIE_NAME)?.value;
   if (!raw || !raw.includes(".")) return null;
-  const [encodedPayload, signature] = raw.split(".");
-  if (!encodedPayload || !signature) return null;
+  const [encodedPayload, signature, ...extra] = raw.split(".");
+  if (!encodedPayload || !signature || extra.length) return null;
   const expected = await signPayload(encodedPayload);
   if (!expected || expected !== signature) return null;
   try {
     const payload = JSON.parse(decodeBase64url(encodedPayload)) as SessionPayload;
-    if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;
+    if (!sessionTimeValid(payload)) return null;
     return payload;
   } catch {
     return null;
@@ -104,7 +107,7 @@ function allowWithDocsCookie(request: NextRequest) {
   return response;
 }
 
-export async function middleware(request: NextRequest) {
+async function routeRequest(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);
@@ -196,3 +199,26 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = { matcher: ["/((?!.*\\..*).*)"] };
+
+export async function middleware(request: NextRequest) {
+  const response = await routeRequest(request);
+  // Never overwrite logout/login responses, errors, or redirects with a renewed cookie.
+  if (request.method !== "GET" || response.status >= 300 || /\/(?:login|logout)(?:\/|$)/.test(request.nextUrl.pathname)) return response;
+  for (const [name, prefix] of [[COOKIE_NAME, ""], ["avtocena_customer", "customer:"]] as const) {
+    const raw = request.cookies.get(name)?.value;
+    if (!raw) continue;
+    try {
+      const [body, signature, ...extra] = raw.split(".");
+      if (!body || !signature || extra.length || await signPayload(prefix + body) !== signature) continue;
+      const payload = JSON.parse(decodeBase64url(body));
+      if (!sessionTimeValid(payload, !!prefix) || !sessionNeedsRenewal(payload)) continue;
+      // Only a still-valid legacy token is migrated. Expired tokens are never revived.
+      const nextBody = base64url(new TextEncoder().encode(JSON.stringify({...payload, ...persistentSessionFields()})));
+      const nextSignature = await signPayload(prefix + nextBody);
+      if (!nextSignature) continue;
+      response.cookies.set(name, nextBody + "." + nextSignature, {httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: SESSION_COOKIE_MAX_AGE});
+      response.headers.set("Cache-Control", "private, no-store");
+    } catch { /* A malformed cookie cannot establish or renew a session. */ }
+  }
+  return response;
+}

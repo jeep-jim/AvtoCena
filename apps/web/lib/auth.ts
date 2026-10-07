@@ -1,3 +1,4 @@
+import {SESSION_COOKIE_MAX_AGE, persistentSessionFields, sessionTimeValid} from "./session-policy";
 import {scopedAuthUser} from "./platform-access";
 import { cache } from "react";
 import crypto from "node:crypto";
@@ -7,7 +8,7 @@ import path from "node:path";
 import { getDataRoot, readDataJson } from "./data";
 
 export const AUTH_COOKIE_NAME = "avtocena_session";
-export const AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 14;
+export const AUTH_MAX_AGE_SECONDS = SESSION_COOKIE_MAX_AGE;
 
 export type UserRole = "owner" | "admin" | "manager" | "partner" | "dealer";
 
@@ -32,7 +33,7 @@ export type AuthUser = {
   permissions?: import("./crm-permissions").CrmPermissions;
 };
 
-type SessionPayload = AuthUser & { exp: number };
+type SessionPayload = AuthUser & { exp: number; persistent?: boolean; renewedAt?: number };
 
 function authSecret() {
   const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
@@ -89,7 +90,7 @@ export function createSessionCookie(user: AuthUser) {
     updatedAt: user.updatedAt,
     lastLoginAt: user.lastLoginAt,
     sessionVersion: user.sessionVersion || 0,
-    exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS,
+    ...persistentSessionFields(),
   };
 
   const encodedPayload = base64url(JSON.stringify(payload));
@@ -100,8 +101,8 @@ export function createSessionCookie(user: AuthUser) {
 export function verifySessionCookie(raw?: string | null): AuthUser | null {
   if (!raw || !raw.includes(".")) return null;
 
-  const [encodedPayload, signature] = raw.split(".");
-  if (!encodedPayload || !signature) return null;
+  const [encodedPayload, signature, ...extra] = raw.split(".");
+  if (!encodedPayload || !signature || extra.length) return null;
 
   const expected = signPayload(encodedPayload);
   const expectedBuffer = Buffer.from(expected);
@@ -111,7 +112,7 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
 
   try {
     const payload = JSON.parse(fromBase64url(encodedPayload)) as SessionPayload;
-    if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000) || payload.status === "disabled") return null;
+    if (!sessionTimeValid(payload) || payload.status === "disabled") return null;
 
     const { exp: _exp, ...signedUser } = payload;
     return signedUser;
