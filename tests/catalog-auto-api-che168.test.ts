@@ -9,7 +9,7 @@ import {inventorySourceEvidence} from '../apps/web/lib/catalog/prepare-seller-in
 import {classifySpecificationEvidence} from '../apps/web/lib/catalog/specification-evidence-audit';
 import {catalogInventoryAgeDecision, catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission';
 import {catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport} from '../apps/web/lib/catalog/source-retention';
-import {autoApiChe168Client, autoApiPage, collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
+import {autoApiChe168Client, autoApiPage, autoApiChe168Detail, collectAutoApiChe168} from '../scripts/lib/auto-api-che168-client.mjs';
 import {observationShardWriter, publishedIntakeCheckpoint} from '../scripts/lib/catalog-intake-checkpoint.mjs';
 import {convertMarketOnDisk} from '../scripts/lib/catalog-disk-conversion.mjs';
 
@@ -121,6 +121,12 @@ test('pagination fails closed on a loop or unexpected metadata',()=>{
  assert.throws(()=>autoApiPage({result:[],meta:{page:1}},1));
  assert.deepEqual(autoApiPage({result:[],meta:{page:1,next_page:null}},1),{items:[],next:null});
 });
+test('detail accepts the observed flat /offer form while preserving strict identity',()=>{
+ const wrapped=autoApiChe168Detail(fixture(),'50837332');assert.equal(wrapped.data.model,'1 Series');
+ const flat=fixture().data;const normalized=autoApiChe168Detail(flat,'50837332');assert.equal(normalized.data,flat);
+ assert.throws(()=>autoApiChe168Detail({...flat,inner_id:'9'},'50837332'),/identity_mismatch/);
+ assert.throws(()=>autoApiChe168Detail({inner_id:'50837332'},'50837332'),/identity_mismatch/);
+});
 test('snapshot replay overwrites price via full detail; explicit removal, cursor and on-disk revisions survive',async()=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'che168-'));const out=path.join(dir,'out');await fs.mkdir(out);
  const write=observationShardWriter(dir,AUTO_API_CHE168_SOURCE);const withdrawals:any[]=[];const calls:any[]=[];
@@ -131,7 +137,7 @@ test('snapshot replay overwrites price via full detail; explicit removal, cursor
   if(endpoint==='change_id')return {change_id:10};
   if(endpoint==='offers')return {result:[fixture()],meta:{page:1,next_page:null}};
   if(endpoint==='changes')return {result:params.change_id===10?[event,{...event,id:11,inner_id:'999',change_type:'removed'}]:[],meta:{cur_change_id:params.change_id,next_change_id:12}};
-  if(endpoint==='offer'){const r=fixture();r.data.price='80000';return r;}
+  if(endpoint==='offer'){const r=fixture();return {...r.data,price:'80000'};}
  },onOffer:async(row:any,at:string)=>write({offer:normalizeAutoApiChe168(row,at)}),onRemoval:async(row:any)=>{withdrawals.push(row);}});
  assert.equal(result.cursor,12);assert.equal(result.pages,1);assert.equal(withdrawals.length,1);
  assert.equal(calls[0][0],'change_id');assert.equal(calls.filter(x=>x[0]==='offer').length,1);
@@ -217,5 +223,26 @@ test('legacy recovery requires a completed full scan proof; truncation and trans
   assert.equal(report.recovery.originalRejectionReasons,'unrecorded; not assumed to be missing_model');
   assert.equal(JSON.parse(await fs.readFile(path.join(dir,'report.before-recovery.json'),'utf8')).completed,false);
   assert.ok(calls.every(x=>['change_id','changes','offer'].includes(x)));assert.ok((await fs.readFile(path.join(dir,`${AUTO_API_CHE168_SOURCE}-000002.jsonl`),'utf8')).includes('80000'));
+ }finally{await fs.rm(dir,{recursive:true,force:true});}
+});
+
+test('verified full snapshot interrupted by flat detail replay recovers without /offers or a new change cursor',async()=>{
+ const {recoverLegacyChe168Snapshot,validateInterruptedChe168ReplayRecovery}=await import('../scripts/lib/auto-api-che168-recovery.mjs');
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'che168-replay-recovery-'));const calls:string[]=[];
+ try{
+  const write=observationShardWriter(dir,AUTO_API_CHE168_SOURCE);
+  for(let i=0;i<200;i++){const row=fixture();row.inner_id=String(50837332+i);row.data.inner_id=row.inner_id;row.data.url=`https://www.che168.com/dealer/451591/${row.inner_id}.html`;await write({observedAt,offer:normalizeAutoApiChe168(row,observedAt)});}
+  const quarantine={innerId:'50837399',reason:'missing_model',observedAt};await fs.writeFile(path.join(dir,'quarantine.ndjson'),JSON.stringify(quarantine)+'\n');
+  const source={sourceId:AUTO_API_CHE168_SOURCE,pages:10,rows:201,changes:0,cursor:20,phase:'snapshot',observations:200,uniqueOffers:200,rejectedIdentity:0,quarantined:1,rejectionReasons:{missing_model:1}};
+  const original={version:1,provider:'auto_api_che168',market:'china',completed:false,startedAt:observedAt,failure:'auto_api_detail_identity_mismatch',sources:[source],confirmedWithdrawals:[]};
+  validateInterruptedChe168ReplayRecovery(original);await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(original));
+  const request=async(endpoint:string,params:any)=>{calls.push(endpoint);assert.notEqual(endpoint,'offers');assert.notEqual(endpoint,'change_id');
+   if(endpoint==='offer'){const row=fixture();return {...row.data,price:'80000'};}
+   return {result:params.change_id===20?[{id:20,inner_id:'50837332',change_type:'changed',created_at:observedAt}]:[],meta:{cur_change_id:params.change_id,next_change_id:21}};};
+  const report=await recoverLegacyChe168Snapshot({directory:dir,request,now:()=>observedAt});
+  assert.equal(report.completed,true);assert.equal(report.recovery.interruptedChangeReplay,true);assert.equal(report.recovery.originalQuarantined,1);
+  assert.equal(report.sources[0].cursor,21);assert.equal(report.sources[0].observations,201);assert.equal(report.sources[0].quarantined,1);
+  assert.deepEqual((await fs.readFile(path.join(dir,'quarantine.ndjson'),'utf8')).trim(),JSON.stringify(quarantine));
+  assert.ok(calls.every(x=>['changes','offer'].includes(x)));
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });

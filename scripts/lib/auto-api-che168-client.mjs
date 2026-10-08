@@ -50,6 +50,17 @@ export function autoApiPage(payload, currentPage) {
   return {items: payload.result, next};
 }
 
+/** /offer is documented and observed in both wrapped and flat forms. Keep the
+ * outer identity explicit so the normalizer can still validate the canonical
+ * source URL and every required field. */
+export function autoApiChe168Detail(payload, expectedInnerId) {
+  let row=payload?.inner_id ? payload : payload?.result;
+  if(String(row?.inner_id)!==String(expectedInnerId)) throw Error('auto_api_detail_identity_mismatch');
+  if(!row?.data && typeof row?.url==='string') row={inner_id:row.inner_id,data:row};
+  if(!row?.data) throw Error('auto_api_detail_identity_mismatch');
+  return row;
+}
+
 /** Resume only a successfully published paid-feed cursor. Periodic snapshots
  * revalidate unchanged rows before the catalogue's 14-day observation expiry. */
 export function autoApiChe168Resume(saved, {yearFrom, now=Date.now(), forceSnapshot=false}={}) {
@@ -104,8 +115,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
         await onRemoval(change, startedAt);
       } else {
         const response = await request('offer', {inner_id: change.inner_id});
-        const row = response?.inner_id ? response : response?.result;
-        if (String(row?.inner_id) !== String(change.inner_id) || !row?.data) throw Error('auto_api_detail_identity_mismatch');
+        const row = autoApiChe168Detail(response,change.inner_id);
         await onOffer(row, now());
       }
     }
