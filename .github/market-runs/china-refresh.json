@@ -1,9 +1,9 @@
 {
-  "operation": "all-market-continuations-20261007-0822",
+  "operation": "paid-che168-launch-20261008",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "resetCursors": false,
-  "reason": "Owner requested independent full traversals. Resume safe published cursors, retain source observations and publish each slice. No price/power admission caps. Never cancel an active market."
+  "resetCursors": true,
+  "reason": "Owner purchased Che168 and added AUTO_API_CHE168_KEY. Start full paid snapshot and changes; retain existing admission, calculation and publication guards."
 }
