@@ -6,14 +6,21 @@ import postcss from 'postcss';
 import tailwindcss from 'tailwindcss';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const out='artifacts/currency-consistency';fs.mkdirSync(out,{recursive:true});
-await build({entryPoints:['tests/browser/currency-consistency-fixture.tsx'],bundle:true,format:'iife',platform:'browser',jsx:'automatic',outfile:`${out}/fixture.js`,define:{'process.env.NODE_ENV':'"production"'}});
+await build({entryPoints:['tests/browser/currency-consistency-fixture.tsx'],bundle:true,format:'iife',platform:'browser',tsconfig:'apps/web/tsconfig.json',jsx:'automatic',outfile:`${out}/fixture.js`,define:{'process.env.NODE_ENV':'"production"'}});
 const css=await postcss([tailwindcss({content:['apps/web/components/ui/**/*.tsx','tests/browser/currency-consistency-fixture.tsx','apps/web/components/catalog/PriceTrend.tsx','apps/web/components/legal/ConsentCheckbox.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;'+['globals.css','catalog-ui.css','public-polish.css','flat-ui.css','public-regression-fixes.css'].map(f=>fs.readFileSync('apps/web/app/'+f,'utf8')).join('\n'),{from:undefined});
 const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHeader('Content-Type','application/javascript');res.end(fs.readFileSync(`${out}/fixture.js`));}else{res.setHeader('Content-Type','text/html');res.end(`<html data-theme="${req.url.includes('light')?'light':'dark'}"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css.css}</style></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`);}});await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
 try{for(const width of [390,1440])for(const theme of ['light','dark']){
  const page=await browser.newPage({viewport:{width,height:1000}});let requests=0,latest=12.4028;const errors=[];page.on('pageerror',e=>errors.push(String(e)));
- await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'CNY',rateSource:'cbr_live',effectiveRate:latest,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:latest}]}]}});});
+ await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'JPY',rateSource:'cbr_live',effectiveRate:.6,previousEffectiveRate:.598,rateDate:'2026-10-02',previousRateDate:'2026-10-01'}, {currency:'CNY',rateSource:'cbr_live',effectiveRate:latest,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:latest}]}]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
+ await page.locator('[data-japan="preview"] .ac-price-trend-delta').waitFor();
+ for(const kind of ['preview','saved','detail']) {
+  assert.equal(await page.locator(`[data-japan="${kind}"] .ac-price-trend-delta`).innerText(),'+1,4K');
+  assert.ok(await page.locator(`[data-japan="${kind}"] .ac-price--up`).count());
+  assert.equal((await page.locator(`[data-japan="${kind}"] .ac-price`).innerText()).replace(/\s/g,''),'970371₽');
+ }
+ assert.equal(await page.locator('[data-japan="historical"] .ac-price-trend-delta').count(),0);
  await page.locator('[data-car="0"] .ac-price-trend-delta').filter({hasText:'−28,3K'}).waitFor();
  assert.equal(await page.locator('[data-car="1"] .ac-price-trend-delta').innerText(),'−7K');
  assert.ok(await page.locator('[data-car="0"] .is-down').count());
