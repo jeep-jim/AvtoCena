@@ -14,13 +14,14 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  const page=await browser.newPage({viewport:{width,height:1000}});let requests=0,latest=12.4028;const errors=[];page.on('pageerror',e=>errors.push(String(e)));
  await page.route('**/api/catalog/rates',async route=>{requests++;await route.fulfill({json:{rates:[{currency:'JPY',rateSource:'cbr_live',effectiveRate:.6,previousEffectiveRate:.598,rateDate:'2026-10-02',previousRateDate:'2026-10-01'}, {currency:'CNY',rateSource:'cbr_live',effectiveRate:latest,previousEffectiveRate:12.4728,rateDate:'2026-10-02',previousRateDate:'2026-10-01',history:[{date:'2026-09-26',effectiveRate:12.5355},{date:'2026-09-29',effectiveRate:12.5629},{date:'2026-09-30',effectiveRate:12.5759},{date:'2026-10-01',effectiveRate:12.4728},{date:'2026-10-02',effectiveRate:latest}]}]}});});
  await page.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
- await page.locator('[data-japan="preview"] .ac-price-trend-delta').waitFor();
- for(const kind of ['preview','saved','detail']) {
-  assert.equal(await page.locator(`[data-japan="${kind}"] .ac-price-trend-delta`).innerText(),'+1,4K');
-  assert.ok(await page.locator(`[data-japan="${kind}"] .ac-price--up`).count());
+ await page.locator('[data-japan="detail"] .ac-price-trend-delta').waitFor();
+ for(const kind of ['preview','saved','historical']) {
+  assert.equal(await page.locator(`[data-japan="${kind}"] .ac-price-trend-delta`).count(),0);
+  assert.equal(await page.locator(`[data-japan="${kind}"] .ac-price--up`).count(),0);
   assert.equal((await page.locator(`[data-japan="${kind}"] .ac-price`).innerText()).replace(/\s/g,''),'970371₽');
+  assert.equal(await page.locator(`[data-japan="${kind}"] .ac-japan-badge`).innerText(),'Оценка 4.5');
  }
- assert.equal(await page.locator('[data-japan="historical"] .ac-price-trend-delta').count(),0);
+ assert.equal(await page.locator('[data-japan="detail"] .ac-price-trend-delta').innerText(),'+1,4K');
  await page.locator('[data-car="0"] .ac-price-trend-delta').filter({hasText:'−28,3K'}).waitFor();
  assert.equal(await page.locator('[data-car="1"] .ac-price-trend-delta').innerText(),'−7K');
  assert.ok(await page.locator('[data-car="0"] .is-down').count());
