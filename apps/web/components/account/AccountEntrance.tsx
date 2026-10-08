@@ -8,6 +8,7 @@ import {EntranceDealerPreview} from './EntranceDealerPreview';
 import {AccountScenes} from './AccountScenes';
 import {ACCOUNT_SCENES} from './scene-content';
 import {PasswordRecovery} from './PasswordRecovery';
+import {REGISTRATION_WELCOME_KEY} from './RegistrationWelcome';
 import {useCallback,useLayoutEffect,useRef,useState, type CSSProperties} from 'react';
 import {ArrowUpRight, ArrowLeft, UserRound, Building2, Megaphone, Globe2} from 'lucide-react';
 import {LoginForm} from '@/components/auth/LoginForm';
@@ -112,6 +113,9 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
         throw Error('Не удалось сохранить вход. Разрешите cookie для сайта и попробуйте войти ещё раз.');
       }
       const safe = /^\/account(?:[/?#]|$)/.test(nextPath) ? nextPath : '/account';
+      if (mode === 'register') {
+        try { sessionStorage.setItem(REGISTRATION_WELCOME_KEY, session.account.id); } catch {}
+      }
       window.location.assign(safe);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Не удалось подключиться. Попробуйте ещё раз.');

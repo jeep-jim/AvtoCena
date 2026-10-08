@@ -8,12 +8,22 @@ import {issueTemporaryPassword} from '../apps/web/lib/account/temporary-password
 test('fresh Telegram phone proof recovers without binding, rejects foreign contacts and retries one credential',async()=>{
  const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,secret=process.env.AUTH_SECRET,temp=fs.mkdtempSync(path.join(os.tmpdir(),'customer-tg-')),originalFetch=globalThis.fetch;
  fs.mkdirSync(path.join(temp,'data'));process.chdir(temp);process.env.JSON_STORAGE_DRIVER='local';process.env.AUTH_SECRET='isolated-recovery-secret';resetJsonStorageForTests();
- const sent:string[]=[];let failPassword=false;globalThis.fetch=async(_u,init)=>{const text=JSON.parse(String(init?.body)).text;if(failPassword&&text.startsWith('Временный пароль')){failPassword=false;throw Error('network failure');}sent.push(text);return Response.json({ok:true,result:{message_id:1}});};
+ const sent:string[]=[];const payloads:any[]=[];let failPassword=false;globalThis.fetch=async(_u,init)=>{const payload=JSON.parse(String(init?.body));payloads.push(payload);const text=payload.text||'';if(failPassword&&text.startsWith('Временный пароль')){failPassword=false;throw Error('network failure');}sent.push(text);return Response.json({ok:true,result:{message_id:1}});};
  const a={id:'a'.repeat(64),phone:'+79990001111',name:'Customer',passwordHash:'old',createdAt:new Date().toISOString(),sessionVersion:0} as CustomerAccount;
  const msg=(from:number,body:any)=>({message:{chat:{id:from,type:'private'},from:{id:from},...body}});
  try{
  await writeDataJson(accountPath(a.id),a);const token=await createCustomerChallenge(a,'reset');
  await handleCustomerAccountBot(msg(42,{text:'/start account_'+token}),'test');
+ const button=payloads.at(-1).reply_markup.inline_keyboard[0][0];
+ assert.equal(button.text,'Подтвердить мой телефон');
+ const callback=(from:number)=>({callback_query:{id:'query',data:button.callback_data,from:{id:from},message:{chat:{id:from,type:'private'}}}});
+ await handleCustomerAccountBot(callback(99),'test');
+ assert.match(payloads.at(-1).text,/недействительна/);
+ await handleCustomerAccountBot(callback(42),'test');
+ assert.equal(payloads.at(-1).reply_markup.keyboard[0][0].request_contact,true);
+ assert.equal(payloads.at(-1).reply_markup.is_persistent,true);
+ assert.equal((await readDataJson<any>(accountPath(a.id),null)).passwordHash,'old','opening keyboard must never reset a password');
+
  await handleCustomerAccountBot(msg(99,{text:'/start account_'+token}),'test');
  await handleCustomerAccountBot(msg(99,{contact:{user_id:99,phone_number:a.phone}}),'test');
  await handleCustomerAccountBot(msg(42,{contact:{user_id:99,phone_number:a.phone}}),'test');
@@ -22,6 +32,7 @@ test('fresh Telegram phone proof recovers without binding, rejects foreign conta
  const contact=msg(42,{contact:{user_id:42,phone_number:a.phone}});failPassword=true;await assert.rejects(handleCustomerAccountBot(contact,'test'));
  const first=await readDataJson<any>(accountPath(a.id),null);await handleCustomerAccountBot(contact,'test');const after=await readDataJson<any>(accountPath(a.id),null);
  assert.equal(after.passwordHash,first.passwordHash);assert.equal(after.sessionVersion,1);assert.equal(after.telegramId,undefined);assert.equal(after.email,undefined);const password=sent.find(s=>s.startsWith('Временный пароль'))!.split(': ')[1].split('\n')[0];assert.ok(await passwordMatches(password,after.passwordHash));assert.ok(after.passwordTemporaryUntil>Date.now());
+ await handleCustomerAccountBot(callback(42),'test');assert.match(payloads.at(-1).text,/недействительна/);
  assert.equal(await handleCustomerAccountBot(contact,'test'),false);await assert.rejects(consumeCustomerChallenge(token,'reset'));await assert.rejects(issueTemporaryPassword(a.id,0,'another-proof'));
  await writeDataJson(accountPath(a.id),{...after,passwordTemporaryUsed:true});await assert.rejects(issueTemporaryPassword(a.id,0,after.passwordRecoveryProof));
  const absent=await createCustomerChallenge(null,'reset');await assert.rejects(consumeCustomerChallenge(absent,'reset'));
