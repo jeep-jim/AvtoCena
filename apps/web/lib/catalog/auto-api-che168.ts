@@ -11,18 +11,27 @@ const number = (v: unknown) => /^\d+(?:\.\d+)?$/.test(text(v)) && Number(v) > 0 
 const evidence = (field: string, value: unknown, status = value === undefined ? "missing" : "exact") =>
   ({ source: `auto_api_che168:${field}`, status, value });
 
-export function normalizeAutoApiChe168(row: any, observedAt = new Date().toISOString()): VehicleOffer | null {
+export function autoApiChe168RejectionReason(row: any): string | null {
   const d = row?.data;
   const id = text(row?.inner_id);
-  if (!d || !/^\d+$/.test(id) || text(d.inner_id) !== id) return null;
+  if (!d || !/^\d+$/.test(id) || text(d.inner_id) !== id) return "identity_mismatch";
   let url: URL;
-  try { url = new URL(text(d.url)); } catch { return null; }
+  try { url = new URL(text(d.url)); } catch { return "invalid_url"; }
   if (url.origin !== "https://www.che168.com" || url.username || url.password
-    || !new RegExp(`^/dealer/\\d+/${id}\\.html$`).test(url.pathname)) return null;
+    || !new RegExp(`^/dealer/\\d+/${id}\\.html$`).test(url.pathname)) return "url_identity_mismatch";
+  if (!text(d.mark) || !text(d.model)) return "missing_make_model";
+  const year = number(d.year);
+  if (!Number.isInteger(year) || !year || year < 1900) return "invalid_year";
+  if (!number(d.price)) return "missing_price";
+  return null;
+}
+
+export function normalizeAutoApiChe168(row: any, observedAt = new Date().toISOString()): VehicleOffer | null {
+  if (autoApiChe168RejectionReason(row)) return null;
+  const d = row.data, id = text(row.inner_id), url = new URL(text(d.url));
   // Drop tracking; never persist authentication query strings.
   const sourceUrl = url.origin + url.pathname;
   const year = number(d.year), price = number(d.price);
-  if (!text(d.mark) || !text(d.model) || !Number.isInteger(year) || !year || year < 1900 || !price) return null;
   const now = observedAt;
   const specId = text(d.specid), table = d.extra?.configuration;
   const groups = /^\d+$/.test(specId) && text(table?.specid) === specId
