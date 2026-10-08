@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {autoApiChe168Client, collectAutoApiChe168, autoApiChe168Resume} from './lib/auto-api-che168-client.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
-import {normalizeAutoApiChe168, autoApiChe168RejectionReason, AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168.ts';
+import {normalizeAutoApiChe168, autoApiChe168RejectionReason, isAutoApiChe168QuarantineReason, AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168.ts';
 import {catalogInventoryAgeDecision, catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 import {stableOfferId} from '../apps/web/lib/catalog/storage.ts';
 
@@ -50,8 +50,9 @@ try {
       const offer = normalizeAutoApiChe168(row, observedAt);
       if (!offer) {
         const reason=autoApiChe168RejectionReason(row)||'unknown'; rejectionReasons[reason]=(rejectionReasons[reason]||0)+1;
-        if(reason==='missing_model') {
-          // Observed provider defect: quarantine a bound listing, never invent a model.
+        if(isAutoApiChe168QuarantineReason(reason)) {
+          // Observed provider defects: isolate one bound listing, never invent
+          // a model or production year needed by admission/calculation.
           quarantined.add(String(row.inner_id));
           await fs.appendFile(path.join(directory,'quarantine.ndjson'),JSON.stringify({innerId:String(row.inner_id),reason,observedAt})+'\n');
         } else rejectedIdentity++;

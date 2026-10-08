@@ -1,5 +1,5 @@
 {
-  "operation": "paid-che168-recover-flat-detail-20261009",
+  "operation": "paid-che168-recover-invalid-year-quarantine-20261009",
   "market": "china",
   "publishMarkets": [
     "china"
@@ -7,5 +7,5 @@
   "reuseRunId": "37835596394",
   "refreshMarkets": [],
   "recoverPaidSnapshot": true,
-  "reason": "The replacement snapshot completed before change replay hit the observed flat /offer response. Validate every saved observation and quarantine row, accept both documented detail shapes, replay from the captured cursor, and publish without another full /offers scan."
+  "reason": "Reuse the verified snapshot. During replay, isolate the confirmed invalid-year revision under the existing bounded quarantine instead of inventing a year or blocking the whole fleet; retain strict identity, URL, count and publication guards."
 }
