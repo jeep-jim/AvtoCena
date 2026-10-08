@@ -63,6 +63,7 @@ jobs:
         market: ${{ fromJSON(needs.plan.outputs.collect_markets) }}
     env:
       CATALOG_INTAKE_MARKET: ${{ matrix.market }}
+      AUTO_API_CHE168_KEY: ${{ matrix.market == 'china' && secrets.AUTO_API_CHE168_KEY || '' }}
       # Fresh owner markers start at page 1. Subsequent budget slices resume only
       # committed cursors; access failures are never resumed past the refusal.
       CATALOG_INTAKE_RESUME: ${{ needs.plan.outputs.reset_cursors != 'true' && '1' || '0' }}
@@ -90,8 +91,26 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Verify paid Che168 access before collection
+        if: matrix.market == 'china'
+        run: |
+          node --input-type=module <<'JS'
+          import {autoApiChe168Client, autoApiPage} from './scripts/lib/auto-api-che168-client.mjs';
+          const request = autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY});
+          const page = autoApiPage(await request('offers', {page:1, year_from:new Date(Date.now()+7*3600000).getUTCFullYear()-6}), 1);
+          if (!page.items.length) throw Error('auto_api_empty_preflight');
+          console.log(JSON.stringify({provider:'auto_api_che168',access:'ok',sampleRows:page.items.length}));
+          JS
       - name: Collect listing, exact detail and technical tables
+        env:
+          # Domestic used cars now come from the paid feed. Continue collecting
+          # the independent new-car source instead of silently retiring it.
+          CATALOG_INTAKE_SOURCE_IDS: ${{ matrix.market == 'china' && 'autohome_new_china_open' || '' }}
+          CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
         run: node --import tsx scripts/catalog-source-intake.mjs
+      - name: Collect paid Che168 snapshot and replay changes
+        if: matrix.market == 'china'
+        run: node --import tsx scripts/catalog-auto-api-che168-intake.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -101,7 +120,9 @@ jobs:
           retention-days: 14
   publish:
     needs: [plan, collect]
-    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled'
+    # Paid China must finish both snapshot and changes. A refusal, exhausted
+    # budget or schema drift cannot publish a partially collected paid feed.
+    if: always() && needs.plan.outputs.run == 'true' && needs.collect.result != 'cancelled' && (inputs.market != 'china' || needs.collect.result == 'success' || needs.plan.outputs.reuse_run_id != '')
     runs-on: ubuntu-latest
     # Each market gets its own budget; a large Georgia publish must not consume
     # Europe's turn. The workflow and object-store publication locks are retained.

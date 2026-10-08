@@ -37,7 +37,7 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "autopapa_georgia_open", label: "AutoPapa", canonicalUrl: "https://autopapa.ge/", role: "primary", required: true, anchor: true },
   ],
   china: [
-    { sourceId: "autohome_used_china_open", label: "Che168 Global", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
+    { sourceId: "autohome_used_china_open", label: "Che168", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
   // Owner decision 2026-09-18: Legacy source retired. Japan is collected by the
@@ -90,7 +90,13 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
     const canonical = new URL(allowed.canonicalUrl);
     if (id === "proauctions_japan_stat") return actual.origin === "https://demo.pro-auctions.ru" && /^\/statistika\/[^/]+\/[^/]+\/\d+\.html$/.test(actual.pathname) && !actual.search && !actual.hash && !actual.username && !actual.password;
     if (id === "jptrade_japan_stat") return actual.origin === "https://jptrade.ru" && /^\/stat\/\d+$/.test(actual.pathname) && !actual.search && !actual.hash;
-    if (market === "china" && id === "autohome_used_china_open" && !["global.che168.com"].includes(actual.hostname.toLowerCase())) return false;
+    // Owner purchased the domestic Che168 feed on 08.10.2026. Retain Global
+    // provenance for existing rows; admit only exact domestic dealer listings.
+    if (market === "china" && id === "autohome_used_china_open") {
+      if (actual.hostname === "www.che168.com") return actual.origin === "https://www.che168.com"
+        && /^\/dealer\/\d+\/\d+\.html$/.test(actual.pathname) && !actual.search && !actual.hash && !actual.username && !actual.password;
+      if (actual.hostname !== "global.che168.com") return false;
+    }
     return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);
   } catch {
     return false;
