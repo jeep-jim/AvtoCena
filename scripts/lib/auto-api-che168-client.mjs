@@ -21,7 +21,13 @@ export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, d
         await sleep(1000 * 2 ** attempt); continue;
       }
       if (response.ok) {
-        try { return await response.json(); } catch { throw Error('auto_api_invalid_json'); }
+        try { return await response.json(); } catch {
+          // A truncated/invalid success body must retry the SAME request, not
+          // abandon hours of pagination or advance past unreceived records.
+          // Four attempts and the shared deadline still fail closed.
+          if (attempt === 3) throw Error('auto_api_invalid_json');
+          await sleep(1000 * 2 ** attempt); continue;
+        }
       }
       // A refusal is final. Do not retry with alternate identities or routes.
       if ((response.status === 429 || response.status >= 500) && attempt < 3) {

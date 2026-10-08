@@ -1,9 +1,8 @@
 {
-  "operation": "paid-che168-recover-completed-bootstrap-20261009",
+  "operation": "paid-che168-retry-invalid-json-20261009",
   "market": "china",
-  "publishMarkets": ["china"],
-  "reuseRunId": "37811797930",
-  "refreshMarkets": [],
-  "recoverPaidSnapshot": true,
-  "reason": "After the active full scan completes, validate its saved observations and replay changes without fetching the full feed again. Timeout, access failure or incomplete artifacts remain blocked."
+  "publishMarkets": [
+    "china"
+  ],
+  "reason": "The original bootstrap stopped with auto_api_invalid_json before completion; its legacy artifact has no reliable continuation checkpoint. Start one replacement scan with bounded same-request JSON retries. Preserve the failed artifact and all publication guards."
 }
