@@ -19,6 +19,7 @@ jobs:
       publish_markets: ${{ steps.policy.outputs.publish_markets }}
       publish_matrix: ${{ steps.policy.outputs.publish_matrix }}
       reset_cursors: ${{ steps.policy.outputs.reset_cursors }}
+      recover_paid_snapshot: ${{ steps.policy.outputs.recover_paid_snapshot }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,6 +40,8 @@ jobs:
           const reuse = marker.reuseRunId || '';
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
+          if (marker.recoverPaidSnapshot && (!reuse || market !== 'china')) throw Error('invalid_paid_snapshot_recovery');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`recover_paid_snapshot=${marker.recoverPaidSnapshot === true}\n`);
           const allowed = [market];
           const publish = marker.publishMarkets || allowed;
           if (!Array.isArray(publish) || !publish.length || publish.some(market => !allowed.includes(market)) || new Set(publish).size !== publish.length) throw Error('invalid_publish_markets');
@@ -108,7 +111,7 @@ jobs:
           CATALOG_INTAKE_SOURCE_IDS: ${{ matrix.market == 'china' && 'autohome_new_china_open' || '' }}
           CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
         run: node --import tsx scripts/catalog-source-intake.mjs
-      - name: Collect paid Che168 snapshot and replay changes
+      - name: Sync paid Che168 from published cursor or bootstrap snapshot
         if: matrix.market == 'china'
         run: node --import tsx scripts/catalog-auto-api-che168-intake.mjs
       - uses: actions/upload-artifact@v4
@@ -202,6 +205,11 @@ jobs:
         with:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
+      - name: Validate and recover completed legacy paid snapshot
+        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
+        env:
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+        run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
         run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs

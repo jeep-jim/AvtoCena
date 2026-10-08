@@ -1,4 +1,5 @@
 import {catalogInventoryLimit,catalogMarketInventoryLimit} from "./lib/catalog-inventory-limit.mjs";
+import {isCompletedChe168Delta} from './lib/auto-api-che168-client.mjs';
 // Maintenance publication reads large source payloads; avoid a burst of twelve simultaneous S3 downloads.
 process.env.CATALOG_READ_CONCURRENCY ||= "4";
 import { unavailableOfferRecord } from "../apps/web/lib/catalog/offer-availability.ts";
@@ -327,7 +328,7 @@ const generation = await readGenerationFiles();
 logPublicationMemory("intake_loaded");
 // A failed/empty source collection is not a request to reinterpret all of the
 // market's existing immutable records as newly collected seller inventory.
-if (sellerInventory && !generation.offers.length && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
+if (sellerInventory && !generation.offers.length && !generation.payloads.some(payload=>isCompletedChe168Delta(payload.report)) && process.env.CATALOG_REBALANCE_EXISTING !== "1") {
   await fs.writeFile(reportFile, JSON.stringify({market, published:false, previousManifestPreserved:true,
     skipped:true, reason:"no_fresh_source_offers", generationErrors:generation.errors},null,2));
   throw new Error(`catalog_no_fresh_source_offers:${market}`);

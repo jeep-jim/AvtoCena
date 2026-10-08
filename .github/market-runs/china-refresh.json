@@ -1,9 +1,9 @@
 {
-  "operation": "paid-che168-launch-20261008-trim-secret",
+  "operation": "paid-che168-recover-completed-bootstrap-20261009",
   "market": "china",
-  "publishMarkets": [
-    "china"
-  ],
-  "resetCursors": true,
-  "reason": "Retry owner-authorized paid feed after trimming surrounding whitespace in the configured secret."
+  "publishMarkets": ["china"],
+  "reuseRunId": "37811797930",
+  "refreshMarkets": [],
+  "recoverPaidSnapshot": true,
+  "reason": "After the active full scan completes, validate its saved observations and replay changes without fetching the full feed again. Timeout, access failure or incomplete artifacts remain blocked."
 }

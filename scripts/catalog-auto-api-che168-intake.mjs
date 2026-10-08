@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {autoApiChe168Client, collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
+import {autoApiChe168Client, collectAutoApiChe168, autoApiChe168Resume} from './lib/auto-api-che168-client.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
-import {normalizeAutoApiChe168, AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168.ts';
+import {normalizeAutoApiChe168, autoApiChe168RejectionReason, AUTO_API_CHE168_SOURCE as sourceId} from '../apps/web/lib/catalog/auto-api-che168.ts';
 import {catalogInventoryAgeDecision, catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 import {stableOfferId} from '../apps/web/lib/catalog/storage.ts';
 
@@ -20,14 +20,20 @@ if (files.length) {
 const write = observationShardWriter(directory, sourceId);
 const deadline = Date.now() + Math.min(300*60000, Number(process.env.CATALOG_INTAKE_TIME_MS || 210*60000));
 const request = autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY, deadline});
+const yearFrom=new Date(Date.now()+7*3600000).getUTCFullYear()-6;
+const {getJsonStorage}=await import('../apps/web/lib/data.ts');
+const saved=await getJsonStorage().readJson('catalog/intake-cursors/v1/china.json',null);
+const resume=autoApiChe168Resume(saved,{yearFrom,forceSnapshot:process.env.CATALOG_INTAKE_RESUME==='0'});
 const report = {version:1, market:'china', provider:'auto_api_che168', productionWrites:false,
   startedAt:new Date().toISOString(), completed:false, sources:[], confirmedWithdrawals:[]};
 const withdrawn = new Map(), seen = new Set();
+const rejectionReasons={};
+const quarantined=new Set();
 let observations = 0, rejectedIdentity = 0, outOfScope = 0, withImages = 0, withExactCc = 0, withPower = 0;
 let lastLog = 0;
 async function checkpoint(progress = {}) {
-  report.sources = [{sourceId, ...progress, observations, uniqueOffers:seen.size, rejectedIdentity, outOfScope,
-    withImages, withExactCc, withPower, stopReason:report.completed ? 'source_finished' : 'collecting'}];
+  report.sources = [{sourceId, provider:'auto_api_che168', ...progress, syncMode:progress.mode, observations, uniqueOffers:seen.size, rejectedIdentity, rejectionReasons, quarantined:quarantined.size, outOfScope,
+    withImages, withExactCc, withPower, stopReason:report.completed ? (progress.mode==='delta'?'source_changes_finished':'source_finished') : 'collecting'}];
   report.sources.push(...(prior?.sources || []));
   report.confirmedWithdrawals = [...withdrawn.values(), ...(prior?.confirmedWithdrawals || [])];
   await fs.writeFile(path.join(directory, 'report.tmp'), JSON.stringify(report));
@@ -37,10 +43,18 @@ async function checkpoint(progress = {}) {
 await checkpoint();
 try {
   const completed = await collectAutoApiChe168({request,
-    yearFrom:new Date(Date.now()+7*3600000).getUTCFullYear()-6,
+    yearFrom, resume,
     onOffer:async (row, observedAt) => {
       const offer = normalizeAutoApiChe168(row, observedAt);
-      if (!offer) { rejectedIdentity++; return; }
+      if (!offer) {
+        const reason=autoApiChe168RejectionReason(row)||'unknown'; rejectionReasons[reason]=(rejectionReasons[reason]||0)+1;
+        if(reason==='missing_model') {
+          // Observed provider defect: quarantine a bound listing, never invent a model.
+          quarantined.add(String(row.inner_id));
+          await fs.appendFile(path.join(directory,'quarantine.ndjson'),JSON.stringify({innerId:String(row.inner_id),reason,observedAt})+'\n');
+        } else rejectedIdentity++;
+        return;
+      }
       // Keep out-of-scope revisions too: the converter replaces a former active
       // revision; the existing publisher owns final admission/calculation.
       if (!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer)) outOfScope++;
@@ -63,9 +77,10 @@ try {
       await checkpoint(progress);
     },
   });
-  if (!seen.size) throw Error('auto_api_empty_inventory');
+  if (!seen.size && !resume) throw Error('auto_api_empty_inventory');
   // A changed upstream contract must not silently publish a truncated fleet.
   if (rejectedIdentity) throw Error('auto_api_rejected_identity_review_required');
+  if (quarantined.size>1000 || quarantined.size>10 && quarantined.size/Math.max(1,seen.size+quarantined.size)>0.005) throw Error('auto_api_quarantine_review_required');
   Object.assign(report, {completed:true, completedAt:completed.completedAt});
   await checkpoint(completed);
 } catch (error) {

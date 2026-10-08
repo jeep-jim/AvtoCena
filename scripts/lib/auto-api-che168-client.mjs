@@ -44,13 +44,32 @@ export function autoApiPage(payload, currentPage) {
   return {items: payload.result, next};
 }
 
-/** Full snapshot then change replay. Only the caller can commit after publication. */
-export async function collectAutoApiChe168({request, yearFrom, onOffer, onRemoval, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
+/** Resume only a successfully published paid-feed cursor. Periodic snapshots
+ * revalidate unchanged rows before the catalogue's 14-day observation expiry. */
+export function autoApiChe168Resume(saved, {yearFrom, now=Date.now(), forceSnapshot=false}={}) {
+  if (forceSnapshot || !saved) return null;
+  const row=saved.sources?.find(row=>row.sourceId==='autohome_used_china_open');
+  if (row?.provider!=='auto_api_che168') return null;
+  if (saved.version!==1 || saved.market!=='china' || !saved.generationId
+    || !Number.isSafeInteger(row.cursor) || row.cursor<0
+    || !['source_finished','source_changes_finished'].includes(row.stopReason)) throw Error('auto_api_invalid_saved_cursor');
+  const snapshotAge=now-Date.parse(row.snapshotStartedAt), age=now-Date.parse(saved.updatedAt);
+  if (!Number.isFinite(snapshotAge) || !Number.isFinite(age) || age<0 || snapshotAge<0) throw Error('auto_api_invalid_saved_cursor');
+  if (snapshotAge>=7*86400000 || row.yearFrom!==yearFrom) return null;
+  return {cursor:row.cursor,snapshotStartedAt:row.snapshotStartedAt};
+}
+
+/** Full bootstrap or delta replay. Only the caller can commit after publication. */
+export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
   const startedAt = now();
-  const start = await request('change_id', {date: startedAt.slice(0, 10)});
-  let cursor = start?.change_id;
+  const mode=resume?'delta':'snapshot';
+  const snapshotStartedAt=resume?.snapshotStartedAt || startedAt;
+  const start = resume || await request('change_id', {date: startedAt.slice(0, 10)});
+  let cursor = resume ? start.cursor : start?.change_id;
   if (!Number.isSafeInteger(cursor) || cursor < 0) throw Error('auto_api_invalid_change_id');
-  let pages = 0, rows = 0, changes = 0, page = 1;
+  if (!Number.isFinite(Date.parse(snapshotStartedAt))) throw Error('auto_api_invalid_saved_cursor');
+  const initialCursor=cursor;
+  let pages = 0, rows = 0, changes = 0, page = resume ? null : 1;
   while (page !== null) {
     const parsed = autoApiPage(await request('offers', {page, year_from: yearFrom}), page);
     for (const row of parsed.items) { await onOffer(row, now()); rows++; }
@@ -87,5 +106,14 @@ export async function collectAutoApiChe168({request, yearFrom, onOffer, onRemova
     changes += payload.result.length; cursor = next;
     await onProgress({pages, rows, changes, cursor, phase:'changes'});
   }
-  return {startedAt, completedAt: now(), pages, rows, changes, cursor};
+  return {startedAt, completedAt: now(), pages, rows, changes, cursor, initialCursor, mode, snapshotStartedAt, yearFrom};
+}
+
+export function isCompletedChe168Delta(report) {
+  const row=report?.sources?.find(row=>row.sourceId==='autohome_used_china_open');
+  return report?.provider==='auto_api_che168' && report.market==='china' && report.completed===true && !report.failure
+    && Number.isFinite(Date.parse(report.completedAt)) && row?.provider==='auto_api_che168' && row.syncMode==='delta'
+    && row.stopReason==='source_changes_finished' && row.rejectedIdentity===0 && row.pages===0
+    && Number.isSafeInteger(row.initialCursor) && row.initialCursor>=0
+    && Number.isSafeInteger(row.cursor) && row.cursor>=row.initialCursor;
 }
