@@ -1,3 +1,4 @@
+import {canReadRegisteredCustomers} from './account/crm-accounts';
 import {isPlatformTeam} from './platform-access';
 import {readReviewActivity} from './dealers/review-activity';
 import {documentCompany} from './document-workspace';
@@ -26,7 +27,7 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
  const [users,leads,clients]=await Promise.all([readCrmUsers(),readChunkedDataJson<any>('leads/leads.json',[]),readChunkedDataJson<any>('clients/clients.json',[])]);
  const leadIds=new Set(leads.filter(x=>canSeeLead(user,x)).map(x=>x.id)),clientIds=new Set(clients.filter(x=>canSeeLead(user,x)).map(x=>x.id));
  const reviewEventsPromise=readReviewActivity(leads,leadIds,all,limit,before);
- const rows=await readRecentChunkedDataJson<CrmActivity>('activity/feed.json',limit,e=>(!before||e.createdAt<before)&&(all||(e.type==='customer_registered'&&isPlatformTeam(user))||(e.visibility!=='management'&&(!e.type?.startsWith('staff_'))&&(e.leadId?leadIds.has(e.leadId):e.clientId?clientIds.has(e.clientId):e.actor?.id===user.id||e.managerId===user.id))));
+ const rows=await readRecentChunkedDataJson<CrmActivity>('activity/feed.json',limit,e=>(!before||e.createdAt<before)&&((e.type?.startsWith('customer_recovery_')||e.type?.startsWith('customer_manual_recovery_'))?canReadRegisteredCustomers(user):(all||(e.type==='customer_registered'&&isPlatformTeam(user))||(e.visibility!=='management'&&(!e.type?.startsWith('staff_'))&&(e.leadId?leadIds.has(e.leadId):e.clientId?clientIds.has(e.clientId):e.actor?.id===user.id||e.managerId===user.id)))));
  const reviewEvents=await reviewEventsPromise;
  return [...rows,...reviewEvents].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,limit).map(e=>{
   const author=users.find(u=>u.id===(e.actor?.id||e.managerId)),targetUser=users.find(u=>u.id===(e.target?.id||e.assignedManagerId));

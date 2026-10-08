@@ -32,7 +32,7 @@ export default async function CrmClientsPage({searchParams}: {searchParams?: Pro
   }).sort((a,b) => String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
   const registrationAvatars=await clientRegistrationAvatars(clients);
   return <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Клиентская база, контакты, документы и история обращений.">
-    {canReadRegisteredCustomers(user)&&<nav className="mb-5 flex gap-3"><Link href="/crm/clients" aria-current="page" className="avto-button rounded-xl px-4 py-2">Клиентская база</Link><Link href="/crm/clients/registered" className="rounded-xl border border-[var(--ac-border)] px-4 py-2">Зарегистрированные</Link></nav>}
+    {canReadRegisteredCustomers(user)&&<nav className="mb-5 flex flex-wrap gap-3"><Link href="/crm/clients" aria-current="page" className="avto-button rounded-xl px-4 py-2">Клиентская база</Link><Link href="/crm/clients/registered" className="rounded-xl border border-[var(--ac-border)] px-4 py-2">Зарегистрированные</Link><Link href="/crm/clients/recovery" className="rounded-xl border border-[var(--ac-border)] px-4 py-2">Восстановление доступа</Link></nav>}
     <div className="crm-clients-layout">
       <section className="min-w-0" aria-label="Клиентская база">
         <form className="crm-client-search" action="/crm/clients">

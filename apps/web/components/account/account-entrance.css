@@ -426,3 +426,13 @@ html:not([data-theme=light]) body main.ac-page-copy.ac-login-page{background:#1a
  /* Clip the sticky cover too, without creating a scroll container around the dock. */
  .entrance-dealer-preview[data-dock-at-end="true"] .dealer-inline-preview{clip-path:inset(0 round 0 0 24px 24px)}
 }
+
+.recovery-methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.account-recovery .recovery-method{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:18px 10px;min-height:138px;border:2px solid;border-radius:15px;background:var(--intro-card);color:var(--intro-title);text-align:center;cursor:pointer}
+.account-recovery .recovery-method strong{font-size:16px}.recovery-method span{font-size:12px;line-height:1.4}
+.account-recovery .recovery-method-telegram{border-color:#168ac1}.recovery-method-telegram svg{color:#168ac1}
+.account-recovery .recovery-method-support{border-color:#e8b72d}.recovery-method-support svg{color:#b78109}
+.account-recovery .recovery-method-telegram[aria-pressed=true]{background:color-mix(in srgb,#168ac1 15%,var(--intro-card));box-shadow:0 0 0 1px #168ac1}
+.account-recovery .recovery-method-support[aria-pressed=true]{background:color-mix(in srgb,#e8b72d 15%,var(--intro-card));box-shadow:0 0 0 1px #e8b72d}
+.account-recovery label.recovery-consent{display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-size:12px}.account-recovery .recovery-consent input{width:18px;min-width:18px;height:18px;padding:0;margin-top:3px}.recovery-consent a{text-decoration:underline}
+.recovery-request-success{display:grid;gap:16px;font-size:14px;line-height:1.6}.recovery-request-success h3{font-size:18px;font-weight:700}.recovery-request-success svg{color:#24966c}
