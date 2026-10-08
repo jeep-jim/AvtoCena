@@ -23,7 +23,7 @@ function DesktopScrollableRail({children,expanded=false}:{children:ReactNode;exp
     el.scrollBy({left:direction*Math.max(240,el.clientWidth-80),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   }
   return <div className="relative mt-4">
-    <div ref={rail} className={expanded?"grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>a]:w-full":"ac-hide-scrollbar -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 pb-3 md:mr-0 md:flex md:gap-4 md:pr-0"}>{children}</div>
+    <div ref={rail} className={expanded?"grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-3 [&>a]:w-full":"ac-hide-scrollbar -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 pb-3 md:mr-0 md:flex md:gap-4 md:pr-0"}>{children}</div>
     {!expanded && ([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-red-500 shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:flex ${direction===-1?"left-0":"right-0"}`}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={direction===-1?"m14 5-7 7 7 7":"m10 5 7 7-7 7"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
     </button>)}
