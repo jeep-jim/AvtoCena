@@ -117,7 +117,7 @@ function Tile({missing=false,label,value,valueNode,warning=false,icon,children,w
  </div>;
 }
 export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScenario,priceIdentity,localCitySelection=false,canSave=false,savedCalculation,deliveryMarket,offerId,initial,price,originalBreakdown,afterPrice,children,priceBadges,exportWarning,reportedVolume,showCommercial=false,isPickup=false,researchContext="",autoCalculate=false,sourcePriceOnly=false}:{initialCurrencyRate?:PublicCurrencyRate;copyOffer?:{title:string;mileageKm?:number|null};initialScenario?:{draft:ParameterDraft;calculation:SavedOfferCalculation["calculation"]}|null;priceIdentity?:{id:string;sourceId:string;offerType:string;market:string;auctionGrade?:string};localCitySelection?:boolean;canSave?:boolean;savedCalculation?:Pick<SavedOfferCalculation,"version"|"draft"|"calculation"> & {savedAt?:string;savedByName?:string}|null;offerId:string;reportedVolume?:number;autoCalculate?:boolean;sourcePriceOnly?:boolean;deliveryMarket?:string;initial:ParameterDraft;price:ReactNode;originalBreakdown?:ReactNode;afterPrice?:ReactNode;children:ReactNode;priceBadges?:ReactNode;exportWarning?:string;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
- const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || (isPickup?{...initial,vehicleCategory:"N1"}:initial));
+ const originalDraft=completePowerUnitDraft(initialScenario?.draft || savedCalculation?.draft || initial);
  const [savedDraft,setSavedDraft]=useState(completePowerUnitDraft(savedCalculation?.draft || originalDraft));
  const [savedVersion,setSavedVersion]=useState(savedCalculation?.version || null);
  const [saving,setSaving]=useState(false),[saveMessage,setSaveMessage]=useState("");
@@ -192,7 +192,8 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
  const powerLabel = draft.powerHp ? `${Number(draft.powerHp).toLocaleString("ru-RU",{maximumFractionDigits:2})} л.с.` : "Указать мощность";
  const pairedPower = Boolean(Number(draft.powerKw) > 0);
  const field=(key:string,label:string,options:number[]=[],min?:number,max?:number,searchQuery?:string,caption?:string)=><Field missing={missingFields.has(key)} label={label} caption={caption} value={draft[key]||""} change={v=>change(key,v)} options={options} min={min} max={max} searchQuery={searchQuery}/>;
- const missingFields=missingCustomerFields(draft,showCommercial);
+ const commercialVisible=showCommercial || isPickup || draft.vehicleCategory === "N1";
+ const missingFields=missingCustomerFields(draft,commercialVisible);
  const vehicleLine=result?.breakdown?.find(row=>row.id==="car");
  const detailLines=result?.breakdown?.filter(row=>row!==vehicleLine) || [];
  const hybridQuery=draft.fuel==="electric" ? electricResearchQuery(researchContext,draft.year||"") : hybridResearchQuery(researchContext,draft.year||"",draft.engineCc||"");
@@ -224,7 +225,7 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
    </div>
   </details> : null}
   {!showCalculation ? originalBreakdown : null}
-  <OfferParameterEditors draft={draft} change={change} showCommercial={showCommercial} isPickup={isPickup} researchContext={researchContext}/>
+  <OfferParameterEditors draft={draft} change={change} showCommercial={commercialVisible} isPickup={isPickup} researchContext={researchContext}/>
   {canSave && userEdited && saveDirty ? <div className="mt-4"><button type="button" onClick={()=>saveDialog.current?.showModal()} disabled={saving || pending || !result} className="min-h-12 w-full rounded-2xl bg-red-500 px-4 py-3 text-sm font-bold text-white disabled:opacity-50">{saving?"Сохраняем…":"Применить к расчёту для клиента"}</button></div> : null}
   {copyOffer ? <OfferCopyButton offerId={offerId} title={copyOffer.title} mileageKm={copyOffer.mileageKm} draft={draft} pending={pending || saving}/> : null}
   {canSave ? <OfferPdfButton offerId={offerId} draft={draft} /> : null}
@@ -242,7 +243,8 @@ export function InlineOfferParameters({initialCurrencyRate,copyOffer,initialScen
 
 /** Shared by saved vehicle cards and the standalone calculator. No network or storage writes. */
 export function OfferParameterEditors({draft,change,showCommercial=false,isPickup=false,researchContext=""}:{draft:ParameterDraft;change:(key:string,value:string)=>void;showCommercial?:boolean;isPickup?:boolean;researchContext?:string}) {
- const missingFields=missingCustomerFields(draft,showCommercial);
+ const commercialVisible=showCommercial || isPickup || draft.vehicleCategory === "N1";
+ const missingFields=missingCustomerFields(draft,commercialVisible);
  const powerInfo=recyclingPowerInfo({powerHp:draft.powerHp,powerKw:draft.powerKw,fuel:draft.fuel,vehicleCategory:draft.vehicleCategory,powertrainKind:draft.fuel==="hybrid"?draft.hybridKind:draft.fuel==="electric"?"electric":"combustion"});
  const powerLabel=draft.powerHp?`${Number(draft.powerHp).toLocaleString("ru-RU",{maximumFractionDigits:2})} л.с.`:"Указать мощность";
  const pairedPower=Boolean(Number(draft.powerKw)>0);
@@ -282,9 +284,9 @@ export function OfferParameterEditors({draft,change,showCommercial=false,isPicku
     {powerInfo?.borderline ? <details className={editorStyles.help}><summary>Почему повышенный утильсбор?</summary><RecyclingPowerExplanation info={powerInfo} /></details> : null}
     {!["electric","hybrid"].includes(draft.fuel) ? <p className={editorStyles.note}>Если кВт указаны, расчёт использует их без округления до л.с. При изменении л.с. кВт пересчитываются автоматически. При изменении кВт л.с. также пересчитываются автоматически. Значения нужно сверить с документами. Если в источнике только 160 л.с., точные кВт нужно уточнить перед оплатой.</p> : null}
    </Tile>
-   {showCommercial ? <Tile missing={["vehicleCategory","grossVehicleWeightKg","n1IceFuel"].some(key=>missingFields.has(key))} wide label={isPickup ? "Полная масса пикапа" : "Категория и масса"} value={isPickup ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
-    {!isPickup ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
-    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-invalid={missingFields.has("vehicleCategory") || undefined} aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Грузовой до 3,5 т</option><option value="M1">M1 · Легковой</option></select></label></> : <p className="text-xs text-[var(--ac-muted)]">Полную массу берём из характеристик автомобиля. При необходимости её можно уточнить здесь.</p>}
+   {commercialVisible ? <Tile missing={["vehicleCategory","grossVehicleWeightKg","n1IceFuel"].some(key=>missingFields.has(key))} wide label={isPickup && draft.vehicleCategory === "N1" ? "Полная масса пикапа" : "Категория и масса"} value={isPickup && draft.vehicleCategory === "N1" ? (draft.grossVehicleWeightKg ? `Пикап · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : "Полная масса пикапа · указать") : draft.vehicleCategory ? `${draft.vehicleCategory === "N1" ? "N1 · Пикап / грузовой" : "M1 · Легковой"}${draft.vehicleCategory === "N1" && draft.grossVehicleWeightKg ? ` · ${Number(draft.grossVehicleWeightKg).toLocaleString("ru-RU")} кг` : ""}` : "Категория и масса · указать"} icon={<Truck size={16}/>}>
+    {!isPickup || draft.vehicleCategory !== "N1" ? <><p className="text-xs leading-5 text-[var(--ac-muted)]">Выберите категорию по СБКТС или ЭПТС.</p>
+    <label className="block text-xs font-semibold">Категория транспортного средства<select aria-invalid={missingFields.has("vehicleCategory") || undefined} aria-label="Категория транспортного средства" value={draft.vehicleCategory||""} onChange={e=>change("vehicleCategory",e.target.value)} className="mt-2 min-h-11 w-full rounded-xl bg-[var(--ac-surface)] px-3"><option value="">Выберите категорию</option><option value="N1">N1 · Пикап / грузовой до 3,5 т</option><option value="M1">M1 · Легковой</option></select></label></> : <p className="text-xs text-[var(--ac-muted)]">Полную массу берём из характеристик автомобиля. При необходимости её можно уточнить здесь.</p>}
     {draft.vehicleCategory === "N1" ? <>
       {field("grossVehicleWeightKg","Полная разрешённая масса, кг",[2500,2800,3000,3200,3500],1,3500,`${researchContext} ${draft.year} ${draft.engineCc} см³ ${draft.fuel} полная разрешённая максимальная масса GVWR кг технические характеристики`)}
       <p className="text-xs leading-5 text-[var(--ac-muted)]">В списке примеры значений, а не характеристики этого авто. Выберите или введите массу из документов; значок Алисы поможет найти данные вашей модификации.</p>
