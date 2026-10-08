@@ -43,7 +43,7 @@ export function catalogHeavyVehicleExcluded(offer:any){
  const text=[offer.make,offer.model,offer.trim,offer.bodyType].join(' ');
  if(/forklift|excavator|bulldozer|tractor|machinery|погрузчик|экскаватор|трактор|工程机械/i.test(text))return true;
  const category=String(offer.vehicleCategory||'').toUpperCase();
- const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia)\b|грузов|автобус|货车|卡车|客车|巴士/i.test(text)||/^N[123]|^M[23]/.test(category);
+ const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia|pick[ -]?up)\b|пикап|皮卡|грузов|автобус|货车|卡车|客车|巴士/i.test(text)||/^N[123]|^M[23]/.test(category);
  const mass=Number(catalogGrossVehicleWeightKg(offer));
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;

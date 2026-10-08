@@ -10,6 +10,7 @@ for(const market of ['korea','china','uae','europe','georgia','japan']) {
  const directory=path.join(root,`catalog-intake-${market}`);
  let files=[];try{files=await fs.readdir(directory);}catch{continue;}
  let report;try{report=JSON.parse(await fs.readFile(path.join(directory,"report.json"),"utf8"));}catch{}
+ if (report?.provider === 'auto_api_che168' && report.completed !== true) throw Error('auto_api_incomplete_snapshot_not_publishable');
  if(market!=='japan') {
   console.log(JSON.stringify(await convertMarketOnDisk({market,directory,files,out,report})));
   continue;
