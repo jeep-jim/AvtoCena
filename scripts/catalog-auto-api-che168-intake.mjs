@@ -31,7 +31,9 @@ const rejectionReasons={};
 const quarantined=new Set();
 let observations = 0, rejectedIdentity = 0, outOfScope = 0, withImages = 0, withExactCc = 0, withPower = 0;
 let lastLog = 0;
-async function checkpoint(progress = {}) {
+let lastProgress = {};
+async function checkpoint(progress = lastProgress) {
+  lastProgress = progress;
   report.sources = [{sourceId, provider:'auto_api_che168', ...progress, syncMode:progress.mode, observations, uniqueOffers:seen.size, rejectedIdentity, rejectionReasons, quarantined:quarantined.size, outOfScope,
     withImages, withExactCc, withPower, stopReason:report.completed ? (progress.mode==='delta'?'source_changes_finished':'source_finished') : 'collecting'}];
   report.sources.push(...(prior?.sources || []));

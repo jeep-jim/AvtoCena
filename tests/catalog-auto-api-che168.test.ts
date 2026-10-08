@@ -89,6 +89,33 @@ test('secret entry permits surrounding whitespace but rejects internal whitespac
  assert.deepEqual(await request('offers'),{ok:true});
  assert.throws(()=>autoApiChe168Client({apiKey:'private test key'}),/missing_or_invalid/);
 });
+test('invalid JSON retries the same page without duplicate offers or skipping records',async()=>{
+ const calls:string[]=[];const ids:string[]=[];const waits:number[]=[];let pageAttempts=0;
+ const request=autoApiChe168Client({apiKey:'private-test-key',sleep:async(ms:number)=>{waits.push(ms);},fetchImpl:async(url:URL)=>{
+  calls.push(url.pathname+'?'+new URLSearchParams([...url.searchParams].filter(([key])=>key!=='api_key')));
+  if(url.pathname.endsWith('/change_id'))return Response.json({change_id:10});
+  if(url.pathname.endsWith('/offers')){
+   pageAttempts++;
+   if(pageAttempts===1)return new Response('{"result":[', {status:200});
+   return Response.json({result:[fixture()],meta:{page:1,next_page:null}});
+  }
+  return Response.json({result:[],meta:{cur_change_id:10}});
+ }});
+ const result=await collectAutoApiChe168({request,yearFrom:2020,now:()=>observedAt,onOffer:async(row:any)=>{ids.push(row.inner_id);},onRemoval:async()=>{}});
+ assert.equal(calls[1],calls[2]);assert.equal(pageAttempts,2);assert.deepEqual(waits,[1000]);
+ assert.deepEqual(ids,['50837332']);assert.equal(result.pages,1);assert.equal(result.rows,1);
+});
+test('persistent invalid JSON fails closed after bounded retries without leaking upstream content',async()=>{
+ let calls=0;const waits:number[]=[];
+ const request=autoApiChe168Client({apiKey:'private-test-key',sleep:async(ms:number)=>{waits.push(ms);},fetchImpl:async()=>{calls++;return new Response('private-test-key <html>broken</html>');}});
+ await assert.rejects(()=>request('offers',{page:7065}),{message:'auto_api_invalid_json'});
+ assert.equal(calls,4);assert.deepEqual(waits,[1000,2000,4000]);
+});
+test('invalid JSON retry respects the overall deadline',async()=>{
+ let calls=0;
+ const request=autoApiChe168Client({apiKey:'private-test-key',deadline:Date.now()+100, sleep:async()=>{await new Promise(resolve=>setTimeout(resolve,120));},fetchImpl:async()=>{calls++;return new Response('{');}});
+ await assert.rejects(()=>request('offers'),{message:'auto_api_time_budget'});assert.equal(calls,1);
+});
 test('pagination fails closed on a loop or unexpected metadata',()=>{
  assert.throws(()=>autoApiPage({result:[],meta:{page:1,next_page:1}},1));
  assert.throws(()=>autoApiPage({result:[],meta:{page:1}},1));
