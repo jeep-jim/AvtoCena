@@ -1,8 +1,56 @@
-import {autoApiChe168Client, autoApiPage} from './lib/auto-api-che168-client.mjs';
+import {autoApiChe168Client, autoApiPage, collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
 import {autoApiChe168RejectionReason} from '../apps/web/lib/catalog/auto-api-che168.ts';
 
 // Read-only bounded inspection. Never log the response body, contacts or credentials.
-const request=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+12*60000});
+const baseRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+12*60000});
+const diagnosticCursor=Number(process.env.CHE168_DIAGNOSE_CHANGE_ID || '');
+if (Number.isSafeInteger(diagnosticCursor) && diagnosticCursor >= 0) {
+ let mismatch=null,offerChecks=0,removals=0;
+ const request=async(endpoint,params)=>{
+  const payload=await baseRequest(endpoint,params);
+  if(endpoint==='offer'){
+   offerChecks++;
+   const row=payload?.inner_id ? payload : payload?.result;
+   const expected=String(params.inner_id);
+   if(String(row?.inner_id)!==expected || !row?.data){
+    mismatch={expected,
+     responseKind:Array.isArray(payload)?'array':payload===null?'null':typeof payload,
+     resultKind:Array.isArray(payload?.result)?'array':payload?.result===null?'null':typeof payload?.result,
+     resultLength:Array.isArray(payload?.result)?payload.result.length:null,
+     hasDirectId:payload?.inner_id!==undefined,
+     hasResultId:payload?.result?.inner_id!==undefined,
+     idMatches:String(row?.inner_id)===expected,
+     hasData:!!row?.data};
+    console.log(JSON.stringify({diagnostic:'che168_detail_mismatch',...mismatch,expected:undefined}));
+   }
+  }
+  return payload;
+ };
+ try {
+  await collectAutoApiChe168({request,yearFrom:2020,
+   resume:{cursor:diagnosticCursor,snapshotStartedAt:process.env.CHE168_DIAGNOSE_SNAPSHOT_AT || new Date().toISOString()},
+   onOffer:async()=>{},onRemoval:async()=>{removals++;},
+   onProgress:async progress=>console.log(JSON.stringify({diagnostic:'che168_change_progress',changes:progress.changes,cursor:progress.cursor}))});
+  console.log(JSON.stringify({diagnosticComplete:true,mode:'changes',mismatch:false,offerChecks,removals,productionWrites:false}));
+ } catch(error) {
+  if(error?.message!=='auto_api_detail_identity_mismatch' || !mismatch)throw error;
+  let cursor=diagnosticCursor,pages=0,eventCount=0,latestType=null;
+  while(pages<1000){
+   const payload=await baseRequest('changes',{change_id:cursor});
+   if(!Array.isArray(payload?.result)||payload?.meta?.cur_change_id!==cursor)throw Error('auto_api_invalid_changes');
+   for(const event of payload.result)if(String(event?.inner_id)===mismatch.expected){eventCount++;latestType=event.change_type;}
+   if(!payload.result.length)break;
+   const next=payload.meta.next_change_id;
+   if(!Number.isSafeInteger(next)||next<=cursor)throw Error('auto_api_stalled_changes');
+   cursor=next;pages++;
+  }
+  console.log(JSON.stringify({diagnosticComplete:true,mode:'changes',mismatch:true,offerChecks,removals,
+   mismatchedListingEvents:eventCount,latestEventType:latestType,changePagesInspected:pages,productionWrites:false}));
+ }
+ process.exit(0);
+}
+
+const request=baseRequest;
 let pages=0,rows=0,rejected=0,page=1;
 const reasons={};
 while(page!==null && pages<250 && rejected<10){
