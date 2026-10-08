@@ -1,3 +1,4 @@
+import {commercialParameters} from '../catalog/commercial-parameters';
 import {offerImages} from '../catalog/offer-images';
 import {extractSource,readSource,sourceUrl} from './source';
 import {sourceIdentity} from './sources';
@@ -8,7 +9,12 @@ const cache=new DetailReadCache<SourceDraft>({maxEntries:100,maxBytes:2_000_000,
 let pendingLoads=0;
 const positive=(x:unknown)=>Number.isFinite(Number(x))&&Number(x)>0?String(x):'';
 function fromRow(row:any,url:string,market:string):SourceDraft {
- const draft:Record<string,string>={};for(const key of ['year','engineCc','powerHp','powerKw'])if(positive(row[key]))draft[key]=positive(row[key]);
+ const draft:Record<string,string>={};
+ const commercial=commercialParameters(row);
+ if(commercial.vehicleCategory)draft.vehicleCategory=commercial.vehicleCategory;
+ if(positive(row.grossVehicleWeightKg))draft.grossVehicleWeightKg=positive(row.grossVehicleWeightKg);
+ if(['petrol','diesel'].includes(row.n1IceFuel))draft.n1IceFuel=row.n1IceFuel;
+ for(const key of ['year','engineCc','powerHp','powerKw'])if(positive(row[key]))draft[key]=positive(row[key]);
  if(/^\d{4}-?\d{2}/.test(row.productionDate||'')){const date=String(row.productionDate).replace(/-/g,'');draft.year=date.slice(0,4);draft.productionMonth=String(Number(date.slice(4,6)));}
  const fuel=canonicalSourceFuel(row.fuel);if(fuel)draft.fuel=fuel;
  for(const key of ['trim','transmission','drive','body','color','description','equipment'])if(typeof row[key]==='string'&&row[key].trim())draft[key]=row[key].trim().slice(0,8000);
