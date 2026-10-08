@@ -131,3 +131,64 @@ test('price-only detail and non-advancing changes abort the snapshot',async()=>{
   }}),new RegExp(invalidDetail?'detail_identity_mismatch':'stalled_changes'));
  }
 });
+
+test('delta resumes at the published cursor without snapshot requests, including no-change and removal-only batches',async()=>{
+ for(const removed of [false,true]){
+  const calls:string[]=[],withdrawals:any[]=[];
+  const result=await collectAutoApiChe168({yearFrom:2020,resume:{cursor:12,snapshotStartedAt:observedAt},now:()=>observedAt,
+   request:async(endpoint:string,params:any)=>{calls.push(endpoint);assert.equal(endpoint,'changes');return {result:removed&&params.change_id===12?[{id:12,inner_id:'50837332',change_type:'removed',created_at:observedAt}]:[],meta:{cur_change_id:params.change_id,next_change_id:13}};},
+   onOffer:async()=>{assert.fail('No offers expected');},onRemoval:async(row:any)=>{withdrawals.push(row);}});
+  assert.equal(result.pages,0);assert.equal(result.mode,'delta');assert.equal(result.cursor,removed?13:12);assert.equal(withdrawals.length,removed?1:0);
+  assert.ok(calls.every(x=>x==='changes'));
+ }
+});
+test('published paid checkpoint preserves bootstrap time and fails closed on incomplete intake or publication',async()=>{
+ const {autoApiChe168Resume,isCompletedChe168Delta}=await import('../scripts/lib/auto-api-che168-client.mjs');
+ const source={sourceId:AUTO_API_CHE168_SOURCE,provider:'auto_api_che168',snapshotStartedAt:observedAt,yearFrom:2020,cursor:20,initialCursor:12,pages:0,rejectedIdentity:0,syncMode:'delta',stopReason:'source_changes_finished'};
+ const intake={market:'china',provider:'auto_api_che168',completed:true,completedAt:observedAt,sources:[source]};
+ const publication={market:'china',published:true,generationId:'published-1'};
+ const saved=publishedIntakeCheckpoint(intake,publication);
+ assert.deepEqual(autoApiChe168Resume(saved,{yearFrom:2020,now:Date.parse(observedAt)+86400000}),{cursor:20,snapshotStartedAt:observedAt});
+ assert.equal(autoApiChe168Resume(saved,{yearFrom:2020,now:Date.parse(observedAt)+7*86400000}),null);
+ assert.equal(autoApiChe168Resume(saved,{yearFrom:2021,now:Date.parse(observedAt)}),null);
+ assert.equal(autoApiChe168Resume(saved,{yearFrom:2020,now:Date.parse(observedAt),forceSnapshot:true}),null);
+ assert.throws(()=>autoApiChe168Resume({...saved,sources:[{...saved.sources[0],cursor:'20'}]},{yearFrom:2020,now:Date.parse(observedAt)}),/invalid_saved_cursor/);
+ assert.throws(()=>publishedIntakeCheckpoint({...intake,completed:false},publication),/incomplete_cursor/);
+ assert.throws(()=>publishedIntakeCheckpoint(intake,{...publication,published:false}),/successful_publication/);
+ assert.equal(isCompletedChe168Delta(intake),true);
+ assert.equal(isCompletedChe168Delta({...intake,sources:[{...source,mode:'live'}]}),true,'converter mode does not erase sync mode');
+ for(const bad of [{completed:false},{failure:'auto_api_http_403'},{sources:[{...source,rejectedIdentity:1}]},{sources:[{...source,cursor:11}]}])assert.equal(isCompletedChe168Delta({...intake,...bad}),false);
+});
+
+test('missing model is classified separately from invalid source identity and remains unpublished',async()=>{
+ const {autoApiChe168RejectionReason}=await import('../apps/web/lib/catalog/auto-api-che168');
+ const row=fixture();row.data.model='';
+ assert.equal(autoApiChe168RejectionReason(row),'missing_model');assert.equal(normalizeAutoApiChe168(row),null);
+ row.data.url='https://www.che168.com/dealer/451591/9.html';
+ assert.equal(autoApiChe168RejectionReason(row),'url_identity_mismatch');
+});
+
+test('legacy recovery requires a completed full scan proof; truncation and transport failures cannot publish',async()=>{
+ const {recoverLegacyChe168Snapshot,validateLegacyChe168Recovery}=await import('../scripts/lib/auto-api-che168-recovery.mjs');
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'che168-recovery-'));
+ const offer=normalizeAutoApiChe168(fixture(),observedAt)!;
+ const source={sourceId:AUTO_API_CHE168_SOURCE,observations:500,uniqueOffers:500,rejectedIdentity:1};
+ const original={version:1,provider:'auto_api_che168',market:'china',completed:false,startedAt:observedAt,failure:'auto_api_rejected_identity_review_required',sources:[source],confirmedWithdrawals:[]};
+ const calls:string[]=[];
+ try{
+  for(const failure of ['auto_api_time_budget','auto_api_http_403','auto_api_transport_failed'])assert.throws(()=>validateLegacyChe168Recovery({...original,failure}),/not_recoverable/);
+  assert.throws(()=>validateLegacyChe168Recovery({...original,sources:[{...source,rejectedIdentity:1001}]}),/not_recoverable/);
+  await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(original));
+  const write=observationShardWriter(dir,AUTO_API_CHE168_SOURCE);
+  await write({observedAt,offer});
+  const request=async(endpoint:string,params:any)=>{calls.push(endpoint);assert.notEqual(endpoint,'offers');if(endpoint==='change_id')return {change_id:20};if(endpoint==='offer'){const r=fixture();r.data.price='80000';return r;}return {result:params.change_id===20?[{id:20,inner_id:'50837332',change_type:'changed',created_at:observedAt}]:[],meta:{cur_change_id:params.change_id,next_change_id:21}};};
+  await assert.rejects(()=>recoverLegacyChe168Snapshot({directory:dir,request,now:()=>observedAt}),/truncated_artifact/);
+  assert.equal(calls.length,0,'no provider calls for invalid artifact');
+  for(let i=1;i<500;i++){const row=fixture();row.inner_id=String(50837332+i);row.data.inner_id=row.inner_id;row.data.url=`https://www.che168.com/dealer/451591/${row.inner_id}.html`;await write({observedAt,offer:normalizeAutoApiChe168(row,observedAt)});}
+  const report=await recoverLegacyChe168Snapshot({directory:dir,request,now:()=>observedAt});
+  assert.equal(report.completed,true);assert.equal(report.sources[0].cursor,21);assert.equal(report.sources[0].observations,501);assert.equal(report.sources[0].quarantined,1);
+  assert.equal(report.recovery.originalRejectionReasons,'unrecorded; not assumed to be missing_model');
+  assert.equal(JSON.parse(await fs.readFile(path.join(dir,'report.before-recovery.json'),'utf8')).completed,false);
+  assert.ok(calls.every(x=>['change_id','changes','offer'].includes(x)));assert.ok((await fs.readFile(path.join(dir,`${AUTO_API_CHE168_SOURCE}-000002.jsonl`),'utf8')).includes('80000'));
+ }finally{await fs.rm(dir,{recursive:true,force:true});}
+});

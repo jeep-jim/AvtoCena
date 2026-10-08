@@ -38,9 +38,12 @@ export function publishedIntakeCheckpoint(intake, publication) {
     throw Error('intake_cursor_requires_successful_publication');
   }
   if (!intake.completedAt || !Array.isArray(intake.sources)) throw Error('intake_incomplete_report');
+  if (intake.provider==='auto_api_che168' && (intake.completed!==true || intake.failure
+    || intake.sources.some(row=>row.provider==='auto_api_che168' && (row.rejectedIdentity!==0 || !Number.isSafeInteger(row.cursor) || row.cursor<0)))) throw Error('auto_api_incomplete_cursor_not_committable');
   return { version: 1, market: intake.market, updatedAt: intake.completedAt,
     generationId: publication.generationId,
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
+      ...(row.provider==='auto_api_che168'?{provider:row.provider,snapshotStartedAt:row.snapshotStartedAt,yearFrom:row.yearFrom}:{}),
       cursor: row.cursor ?? null, stopReason: row.stopReason,
       retryableTransportFailure: row.stopReason === "list_failed" && !!row.errors?.length && row.errors.every(error=>error.stage === "list" && sourceTransportFailure(error.message)) })) };
 }

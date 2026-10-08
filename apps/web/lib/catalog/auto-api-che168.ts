@@ -19,7 +19,8 @@ export function autoApiChe168RejectionReason(row: any): string | null {
   try { url = new URL(text(d.url)); } catch { return "invalid_url"; }
   if (url.origin !== "https://www.che168.com" || url.username || url.password
     || !new RegExp(`^/dealer/\\d+/${id}\\.html$`).test(url.pathname)) return "url_identity_mismatch";
-  if (!text(d.mark) || !text(d.model)) return "missing_make_model";
+  if (!text(d.mark)) return "missing_make";
+  if (!text(d.model)) return "missing_model";
   const year = number(d.year);
   if (!Number.isInteger(year) || !year || year < 1900) return "invalid_year";
   if (!number(d.price)) return "missing_price";
