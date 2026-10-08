@@ -20,7 +20,12 @@ if (Number.isSafeInteger(diagnosticCursor) && diagnosticCursor >= 0) {
      hasDirectId:payload?.inner_id!==undefined,
      hasResultId:payload?.result?.inner_id!==undefined,
      idMatches:String(row?.inner_id)===expected,
-     hasData:!!row?.data};
+     hasData:!!row?.data,
+     hasDirectUrl:typeof payload?.url==='string',
+     hasDirectMake:typeof payload?.mark==='string' && !!payload.mark,
+     hasDirectModel:typeof payload?.model==='string' && !!payload.model,
+     hasDirectYear:Number.isFinite(Number(payload?.year)),
+     hasPositiveDirectPrice:Number(payload?.price)>0};
     console.log(JSON.stringify({diagnostic:'che168_detail_mismatch',...mismatch,expected:undefined}));
    }
   }
@@ -35,7 +40,8 @@ if (Number.isSafeInteger(diagnosticCursor) && diagnosticCursor >= 0) {
  } catch(error) {
   if(error?.message!=='auto_api_detail_identity_mismatch' || !mismatch)throw error;
   let cursor=diagnosticCursor,pages=0,eventCount=0,latestType=null;
-  while(pages<1000){
+  const scanPages=Math.max(0,Math.min(1000,Number(process.env.CHE168_DIAGNOSE_SCAN_PAGES ?? 1000)));
+  while(pages<scanPages){
    const payload=await baseRequest('changes',{change_id:cursor});
    if(!Array.isArray(payload?.result)||payload?.meta?.cur_change_id!==cursor)throw Error('auto_api_invalid_changes');
    for(const event of payload.result)if(String(event?.inner_id)===mismatch.expected){eventCount++;latestType=event.change_type;}
