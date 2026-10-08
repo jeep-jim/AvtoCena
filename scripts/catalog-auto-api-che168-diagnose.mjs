@@ -1,18 +1,18 @@
-import {autoApiChe168Client, autoApiPage, collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
+import {autoApiChe168Client, autoApiPage, autoApiChe168Detail, collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
 import {autoApiChe168RejectionReason} from '../apps/web/lib/catalog/auto-api-che168.ts';
 
 // Read-only bounded inspection. Never log the response body, contacts or credentials.
 const baseRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+12*60000});
 const diagnosticCursor=Number(process.env.CHE168_DIAGNOSE_CHANGE_ID || '');
 if (Number.isSafeInteger(diagnosticCursor) && diagnosticCursor >= 0) {
- let mismatch=null,offerChecks=0,removals=0;
+ let mismatch=null,rejection=null,offerChecks=0,removals=0;
  const request=async(endpoint,params)=>{
   const payload=await baseRequest(endpoint,params);
   if(endpoint==='offer'){
    offerChecks++;
-   const row=payload?.inner_id ? payload : payload?.result;
    const expected=String(params.inner_id);
-   if(String(row?.inner_id)!==expected || !row?.data){
+   try{autoApiChe168Detail(payload,expected);}catch{
+    const row=payload?.inner_id ? payload : payload?.result;
     mismatch={expected,
      responseKind:Array.isArray(payload)?'array':payload===null?'null':typeof payload,
      resultKind:Array.isArray(payload?.result)?'array':payload?.result===null?'null':typeof payload?.result,
@@ -34,10 +34,20 @@ if (Number.isSafeInteger(diagnosticCursor) && diagnosticCursor >= 0) {
  try {
   await collectAutoApiChe168({request,yearFrom:2020,
    resume:{cursor:diagnosticCursor,snapshotStartedAt:process.env.CHE168_DIAGNOSE_SNAPSHOT_AT || new Date().toISOString()},
-   onOffer:async()=>{},onRemoval:async()=>{removals++;},
+   onOffer:async row=>{const reason=autoApiChe168RejectionReason(row);if(reason && reason!=='missing_model'){
+    rejection=reason;const data=row?.data||{};
+    console.log(JSON.stringify({diagnostic:'che168_change_rejection',reason,
+     idMatches:String(row?.inner_id)===String(data?.inner_id),hasUrl:typeof data.url==='string',
+     hasMake:typeof data.mark==='string'&&!!data.mark,hasModel:typeof data.model==='string'&&!!data.model,
+     hasYear:Number.isFinite(Number(data.year)),hasPositivePrice:Number(data.price)>0}));
+    throw Error('auto_api_diagnostic_rejection');}},onRemoval:async()=>{removals++;},
    onProgress:async progress=>console.log(JSON.stringify({diagnostic:'che168_change_progress',changes:progress.changes,cursor:progress.cursor}))});
   console.log(JSON.stringify({diagnosticComplete:true,mode:'changes',mismatch:false,offerChecks,removals,productionWrites:false}));
  } catch(error) {
+  if(error?.message==='auto_api_diagnostic_rejection' && rejection){
+   console.log(JSON.stringify({diagnosticComplete:true,mode:'changes',rejection,offerChecks,removals,productionWrites:false}));
+   process.exit(0);
+  }
   if(error?.message!=='auto_api_detail_identity_mismatch' || !mismatch)throw error;
   let cursor=diagnosticCursor,pages=0,eventCount=0,latestType=null;
   const scanPages=Math.max(0,Math.min(1000,Number(process.env.CHE168_DIAGNOSE_SCAN_PAGES ?? 1000)));
