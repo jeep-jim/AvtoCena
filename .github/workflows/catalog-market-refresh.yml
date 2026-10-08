@@ -205,10 +205,16 @@ jobs:
         with:
           pattern: catalog-intake-${{ matrix.market }}
           path: catalog-intake-input
+      - name: Check reserve before durable Che168 recovery
+        if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
+        env:
+          CATALOG_REBUILD_INPUT_DIR: catalog-intake-input
+        run: node scripts/run-transient-retry.mjs node --import tsx scripts/catalog-storage-preflight.mjs
       - name: Validate and recover completed legacy paid snapshot
         if: needs.plan.outputs.recover_paid_snapshot == 'true' && matrix.market == 'china'
         env:
           AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          CHE168_RECOVERY_ARTIFACT_RUN_ID: ${{ needs.plan.outputs.reuse_run_id }}
         run: node --import tsx scripts/catalog-auto-api-che168-recover.mjs
       - run: node --import tsx scripts/catalog-intake-to-publication.mjs
       - name: Check bucket reserve without deleting objects
