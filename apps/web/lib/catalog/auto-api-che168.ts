@@ -27,6 +27,12 @@ export function autoApiChe168RejectionReason(row: any): string | null {
   return null;
 }
 
+/** Confirmed bounded provider defects that may isolate only that revision.
+ * Identity, URL, make and price failures still block the whole batch. */
+export function isAutoApiChe168QuarantineReason(reason: string | null): boolean {
+  return reason === "missing_model" || reason === "invalid_year";
+}
+
 export function normalizeAutoApiChe168(row: any, observedAt = new Date().toISOString()): VehicleOffer | null {
   if (autoApiChe168RejectionReason(row)) return null;
   const d = row.data, id = text(row.inner_id), url = new URL(text(d.url));

@@ -3,7 +3,7 @@ import path from 'node:path';
 import {readCheckpointJsonl} from './read-checkpoint-jsonl.mjs';
 import {observationShardWriter} from './catalog-intake-checkpoint.mjs';
 import {collectAutoApiChe168} from './auto-api-che168-client.mjs';
-import {normalizeAutoApiChe168,autoApiChe168RejectionReason,AUTO_API_CHE168_SOURCE as sourceId} from '../../apps/web/lib/catalog/auto-api-che168.ts';
+import {normalizeAutoApiChe168,autoApiChe168RejectionReason,isAutoApiChe168QuarantineReason,AUTO_API_CHE168_SOURCE as sourceId} from '../../apps/web/lib/catalog/auto-api-che168.ts';
 import {stableOfferId} from '../../apps/web/lib/catalog/storage.ts';
 import {isAllowedCatalogSourceUrl} from '../../apps/web/lib/catalog/required-catalog-sources.ts';
 
@@ -85,7 +85,7 @@ export async function recoverLegacyChe168Snapshot({directory,request,now=()=>new
    resume:{cursor:start.change_id,snapshotStartedAt:original.startedAt},now,
    onOffer:async(row,at)=>{
     const offer=normalizeAutoApiChe168(row,at);
-    if(!offer){const reason=autoApiChe168RejectionReason(row);if(reason!=='missing_model')throw Error('auto_api_recovery_identity_review_required');
+    if(!offer){const reason=autoApiChe168RejectionReason(row);if(!isAutoApiChe168QuarantineReason(reason))throw Error('auto_api_recovery_identity_review_required');
      quarantine.push({innerId:String(row.inner_id),reason,observedAt:at});return;}
     await write({stage:'detail',observedAt:at,offer});seen.add(offer.id);observations++;
    },
@@ -99,6 +99,8 @@ export async function recoverLegacyChe168Snapshot({directory,request,now=()=>new
   for(let i=0;i<additions.length;i++)await fs.copyFile(path.join(temporary,additions[i]),path.join(directory,`${sourceId}-${String(lastPart+i+1).padStart(6,'0')}.jsonl`),fs.constants.COPYFILE_EXCL);
   await fs.writeFile(path.join(directory,'report.before-recovery.json'),JSON.stringify(original));
   await fs.writeFile(path.join(directory,'quarantine.ndjson'),[...originalQuarantine,...quarantine].map(row=>JSON.stringify(row)).join('\n'));
+  const rejectionReasons={legacy_unclassified:originalRejected};
+  for(const row of [...originalQuarantine,...quarantine])rejectionReasons[row.reason]=(rejectionReasons[row.reason]||0)+1;
   const report={...original,completed:true,completedAt:completed.completedAt,failure:undefined,
    recovery:{kind:recoveryKind,legacyPostCompletionGuard:recoveryKind==='legacy_post_completion_guard',interruptedChangeReplay:recoveryKind==='interrupted_change_replay',
     originalRejected,originalQuarantined:originalQuarantine.length,
@@ -106,7 +108,7 @@ export async function recoverLegacyChe168Snapshot({directory,request,now=()=>new
     allRejectedRowsRemainUnpublished:true,originalObservationsVerified:source.observations},
    sources:[{...source,...completed,provider:'auto_api_che168',syncMode:'snapshot',mode:'snapshot',stopReason:'source_finished',
     snapshotStartedAt:original.startedAt,observations,uniqueOffers:seen.size,rejectedIdentity:0,quarantined,
-    rejectionReasons:{legacy_unclassified:originalRejected,missing_model:originalQuarantine.length+quarantine.length}},...original.sources.filter(row=>row.sourceId!==sourceId)],
+    rejectionReasons},...original.sources.filter(row=>row.sourceId!==sourceId)],
    confirmedWithdrawals:[...withdrawals.values()]};
   await fs.writeFile(path.join(directory,'report.tmp'),JSON.stringify(report));await fs.rename(path.join(directory,'report.tmp'),path.join(directory,'report.json'));
   return report;

@@ -194,11 +194,13 @@ test('published paid checkpoint preserves bootstrap time and fails closed on inc
 });
 
 test('missing model is classified separately from invalid source identity and remains unpublished',async()=>{
- const {autoApiChe168RejectionReason}=await import('../apps/web/lib/catalog/auto-api-che168');
+ const {autoApiChe168RejectionReason,isAutoApiChe168QuarantineReason}=await import('../apps/web/lib/catalog/auto-api-che168');
  const row=fixture();row.data.model='';
- assert.equal(autoApiChe168RejectionReason(row),'missing_model');assert.equal(normalizeAutoApiChe168(row),null);
+ assert.equal(autoApiChe168RejectionReason(row),'missing_model');assert.equal(isAutoApiChe168QuarantineReason('missing_model'),true);assert.equal(normalizeAutoApiChe168(row),null);
+ row.data.model='1 Series';row.data.year='0';assert.equal(autoApiChe168RejectionReason(row),'invalid_year');assert.equal(isAutoApiChe168QuarantineReason('invalid_year'),true);assert.equal(normalizeAutoApiChe168(row),null);
  row.data.url='https://www.che168.com/dealer/451591/9.html';
  assert.equal(autoApiChe168RejectionReason(row),'url_identity_mismatch');
+ assert.equal(isAutoApiChe168QuarantineReason('url_identity_mismatch'),false);
 });
 
 test('legacy recovery requires a completed full scan proof; truncation and transport failures cannot publish',async()=>{
@@ -231,18 +233,20 @@ test('verified full snapshot interrupted by flat detail replay recovers without 
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'che168-replay-recovery-'));const calls:string[]=[];
  try{
   const write=observationShardWriter(dir,AUTO_API_CHE168_SOURCE);
-  for(let i=0;i<200;i++){const row=fixture();row.inner_id=String(50837332+i);row.data.inner_id=row.inner_id;row.data.url=`https://www.che168.com/dealer/451591/${row.inner_id}.html`;await write({observedAt,offer:normalizeAutoApiChe168(row,observedAt)});}
+  for(let i=0;i<400;i++){const row=fixture();row.inner_id=String(50837332+i);row.data.inner_id=row.inner_id;row.data.url=`https://www.che168.com/dealer/451591/${row.inner_id}.html`;await write({observedAt,offer:normalizeAutoApiChe168(row,observedAt)});}
   const quarantine={innerId:'50837399',reason:'missing_model',observedAt};await fs.writeFile(path.join(dir,'quarantine.ndjson'),JSON.stringify(quarantine)+'\n');
-  const source={sourceId:AUTO_API_CHE168_SOURCE,pages:10,rows:201,changes:0,cursor:20,phase:'snapshot',observations:200,uniqueOffers:200,rejectedIdentity:0,quarantined:1,rejectionReasons:{missing_model:1}};
+  const source={sourceId:AUTO_API_CHE168_SOURCE,pages:20,rows:401,changes:0,cursor:20,phase:'snapshot',observations:400,uniqueOffers:400,rejectedIdentity:0,quarantined:1,rejectionReasons:{missing_model:1}};
   const original={version:1,provider:'auto_api_che168',market:'china',completed:false,startedAt:observedAt,failure:'auto_api_detail_identity_mismatch',sources:[source],confirmedWithdrawals:[]};
   validateInterruptedChe168ReplayRecovery(original);await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(original));
   const request=async(endpoint:string,params:any)=>{calls.push(endpoint);assert.notEqual(endpoint,'offers');assert.notEqual(endpoint,'change_id');
-   if(endpoint==='offer'){const row=fixture();return {...row.data,price:'80000'};}
-   return {result:params.change_id===20?[{id:20,inner_id:'50837332',change_type:'changed',created_at:observedAt}]:[],meta:{cur_change_id:params.change_id,next_change_id:21}};};
+   if(endpoint==='offer'){const row=fixture();row.data.inner_id=String(params.inner_id);row.data.url=`https://www.che168.com/dealer/451591/${params.inner_id}.html`;if(String(params.inner_id)==='50837333')row.data.year='0';return {...row.data,price:'80000'};}
+   const result=params.change_id===20?[{id:20,inner_id:'50837333',change_type:'changed',created_at:observedAt}]
+    :params.change_id===21?[{id:21,inner_id:'50837332',change_type:'changed',created_at:observedAt}]:[];
+   return {result,meta:{cur_change_id:params.change_id,next_change_id:params.change_id+1}};};
   const report=await recoverLegacyChe168Snapshot({directory:dir,request,now:()=>observedAt});
   assert.equal(report.completed,true);assert.equal(report.recovery.interruptedChangeReplay,true);assert.equal(report.recovery.originalQuarantined,1);
-  assert.equal(report.sources[0].cursor,21);assert.equal(report.sources[0].observations,201);assert.equal(report.sources[0].quarantined,1);
-  assert.deepEqual((await fs.readFile(path.join(dir,'quarantine.ndjson'),'utf8')).trim(),JSON.stringify(quarantine));
+  assert.equal(report.sources[0].cursor,22);assert.equal(report.sources[0].observations,401);assert.equal(report.sources[0].quarantined,2);
+  assert.deepEqual((await fs.readFile(path.join(dir,'quarantine.ndjson'),'utf8')).trim().split('\n').map(line=>JSON.parse(line).reason),['missing_model','invalid_year']);
   assert.ok(calls.every(x=>['changes','offer'].includes(x)));
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
