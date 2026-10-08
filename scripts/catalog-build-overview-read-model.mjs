@@ -11,6 +11,9 @@ async function readManifestGeneration() {
 }
 
 const generationBefore = await readManifestGeneration();
+// Record the day before filtering; a build crossing midnight must not claim
+// that yesterday's age filtering was performed today.
+const policyDate = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
 if (!generationBefore) throw new Error("catalog_overview_manifest_missing");
 
 const [facets, marketEntries] = await Promise.all([
@@ -52,7 +55,7 @@ for (const [market, result] of marketEntries) {
   };
 }
 
-const payload = buildCatalogOverviewPayload(generationBefore, facets, markets);
+const payload = buildCatalogOverviewPayload(generationBefore, facets, markets, policyDate);
 await getJsonStorage().writeJson(catalogOverviewGenerationPath(generationBefore), payload);
 await getJsonStorage().writeJson(CATALOG_OVERVIEW_PATH, payload);
 

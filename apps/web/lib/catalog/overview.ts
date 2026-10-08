@@ -16,6 +16,7 @@ export type CatalogOverview = {
   publicPolicyVersion: 2;
   generationId: string;
   builtAt: string;
+  policyDate?: string;
   facets: CatalogFacets;
   markets: Record<string, CatalogOverviewMarket>;
 };
@@ -55,6 +56,7 @@ export function buildCatalogOverviewPayload(
   generationId: string,
   facets: CatalogFacets,
   markets: Record<string, CatalogOverviewMarket>,
+  policyDate = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10),
 ): CatalogOverview {
   if (!generationId || facets.generationId !== generationId) {
     throw new Error(`catalog_overview_generation_mismatch:${generationId}:${facets.generationId}`);
@@ -64,6 +66,7 @@ export function buildCatalogOverviewPayload(
     publicPolicyVersion: 2,
     generationId,
     builtAt: new Date().toISOString(),
+    policyDate,
     facets,
     markets,
   };

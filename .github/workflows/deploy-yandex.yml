@@ -74,8 +74,8 @@ jobs:
           container-name: avtocena-web
           revision-service-account-id: ajekvv7ulcilmppf8qj3
           revision-image-url: ${{ env.IMAGE }}
-          revision-cores: 1
-          revision-memory: 2Gb
+          revision-cores: 2
+          revision-memory: 4Gb
           revision-core-fraction: 100
           revision-concurrency: 4
           revision-provisioned: 1

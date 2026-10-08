@@ -47,12 +47,16 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const [catalog, green] = await Promise.all([
+  const [catalog, green, dealerData] = await Promise.all([
     readHomeCatalogSnapshot(10).catch((error) => {
       console.error("home_initial_catalog_failed", error);
       return { items: [], marketCounts: {}, total: 0 };
     }),
     readGreenCorner().catch(() => null),
+    readShowcase("dealer_topavto").then(async dealer => ({
+      dealer,
+      specialRail: await homeSpecialRail(fromQuery || fromCookie, dealer),
+    })),
   ]);
   const [greenItems, pricedItems] = await Promise.all([
     applyActiveBusinessPricingBatch((green?.items || []).slice(0,10).map(publicGreenOffer)),
@@ -62,9 +66,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
       return catalog.items;
     }),
   ]);
-  const storedDealer = await readShowcase("dealer_topavto");
-  const dealer = storedDealer;
-  const specialRail = await homeSpecialRail(fromQuery||fromCookie,dealer);
+  const {dealer, specialRail} = dealerData;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(WEBSITE_SCHEMA)}}/>
     <DealerCitySync/>

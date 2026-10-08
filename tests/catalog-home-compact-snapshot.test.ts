@@ -1,17 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { getJsonStorage } from '../apps/web/lib/data';
-import { catalogOverviewMarketComplete } from '../apps/web/lib/catalog/overview';
+import { buildCatalogOverviewPayload, catalogOverviewMarketComplete } from '../apps/web/lib/catalog/overview';
 import { readHomeCatalogSnapshot, resetCatalogReadCachesForTests } from '../apps/web/lib/catalog/storage';
 
 test('homepage uses a complete compact snapshot when policy hides a few records', async () => {
   const storage = getJsonStorage(), original = storage.readJsonWithMeta;
   const markets = ['korea', 'china', 'japan', 'uae', 'europe', 'georgia'];
   const manifest = {generationId: 'home-filtered', markets: Object.fromEntries(markets.map(m => [m, {count: 10}]))};
-  const overview = {version: 1, publicPolicyVersion: 2, generationId: manifest.generationId,
-    facets: {generationId: manifest.generationId},
-    markets: Object.fromEntries(markets.map(m => [m, {sourceTotal: 10, total: 8,
-      items: Array.from({length: 6}, (_, i) => ({id: `${m}-${i}`, market: m}))}]))};
+  const overview = buildCatalogOverviewPayload(manifest.generationId,
+    {generationId: manifest.generationId} as any,
+    Object.fromEntries(markets.map(m => [m, {sourceTotal: 10, total: 8,
+      items: Array.from({length: 6}, (_, i) => ({id: `${m}-${i}`, market: m}))}])) as any);
   storage.readJsonWithMeta = async <T>(key: string, fallback: T) => {
     assert.ok(['catalog/manifest.json', 'catalog/public/overview.json', `catalog/generations/${manifest.generationId}/indexes/overview.json`].includes(key), `must not load large files: ${key}`);
     return {found: true, value: (key.endsWith('manifest.json') ? manifest : overview) as T};

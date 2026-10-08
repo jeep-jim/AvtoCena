@@ -2,6 +2,9 @@ name: Catalog read model · compact overview
 run-name: Build compact catalog overview · ${{ github.sha }}
 
 on:
+  schedule:
+    # Refresh the date-sensitive age filter after midnight in Krasnoyarsk.
+    - cron: '5 17 * * *'
   workflow_dispatch:
   push:
     branches:
@@ -42,7 +45,7 @@ env:
 
 jobs:
   build:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
