@@ -20,4 +20,7 @@ jobs:
       - name: Inspect bounded API sample without production writes
         env:
           AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          # Reproduce the failed post-snapshot replay without downloading /offers.
+          CHE168_DIAGNOSE_CHANGE_ID: '11938035'
+          CHE168_DIAGNOSE_SNAPSHOT_AT: '2026-10-08T20:26:33.000Z'
         run: node --import tsx scripts/catalog-auto-api-che168-diagnose.mjs
