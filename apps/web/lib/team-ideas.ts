@@ -1,3 +1,5 @@
+import {hasCrmPermission} from './crm-permissions';
+import {maintainIdeas,ideaExpiresAt} from './team-ideas-retention';
 import {defaultManagerAvatar} from './default-avatars';
 import {randomUUID} from 'node:crypto';
 import type {AuthUser} from './auth';
@@ -5,7 +7,7 @@ import {isPlatformTeam,isPlatformOwner} from './platform-access';
 import {readDataJson,mutateDataJson} from './data';
 
 export type IdeaComment={id:string;authorId:string;authorName:string;authorAvatarUrl?:string;text:string;createdAt:string;screenshots:string[]};
-export type TeamIdea={comments?:IdeaComment[];id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
+export type TeamIdea={lastActorId?:string;completedAt?:string;deletedAt?:string;pendingMedia?:string[];comments?:IdeaComment[];id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
 export const IDEAS_PATH='crm/team-ideas/items.json';
 export function requireIdeaTeam(user:AuthUser|null|undefined):asserts user is AuthUser {if(!isPlatformTeam(user))throw Error('ideas_forbidden');}
 export function ideaInput(input:{title:unknown;description:unknown}) {
@@ -21,12 +23,14 @@ export function changeIdea(row:TeamIdea,user:AuthUser,action:unknown,value:unkno
   if(choice!==null&&choice!=='for'&&choice!=='against')throw Error('Некорректный голос.');
   const votes=row.votes.filter(id=>id!==user.id),downvotes=(row.downvotes||[]).filter(id=>id!==user.id);
   if(choice==='for')votes.push(user.id);if(choice==='against')downvotes.push(user.id);
-  return {...row,votes:[...new Set(votes)],downvotes:[...new Set(downvotes)]};
+  if(JSON.stringify(votes)===JSON.stringify(row.votes)&&JSON.stringify(downvotes)===JSON.stringify(row.downvotes||[]))return row;
+  return {...row,lastActorId:user.id,updatedAt:new Date().toISOString(),votes:[...new Set(votes)],downvotes:[...new Set(downvotes)]};
  }
  if(action==='progress'){
   if(!isPlatformOwner(user))throw Error('ideas_forbidden');
   if(typeof value!=='number'||!Number.isInteger(value)||value<0||value>100)throw Error('Готовность — от 0 до 100%.');
-  return {...row,progress:value,updatedAt:new Date().toISOString()};
+  const at=new Date().toISOString();
+  return {...row,lastActorId:user.id,progress:value,completedAt:value===100?(row.progress===100?row.completedAt||at:at):undefined,updatedAt:at};
  }
  throw Error('Неизвестное действие.');
 }
@@ -36,7 +40,7 @@ export function numberIdeas(rows:TeamIdea[]):TeamIdea[]{
  const assigned=new Map(missing.map(r=>[r.id,++max]));
  return rows.map(r=>assigned.has(r.id)?{...r,number:assigned.get(r.id)}:r);
 }
-export async function listIdeas(user:AuthUser){requireIdeaTeam(user);const rows=await readDataJson<TeamIdea[]>(IDEAS_PATH,[]);return rows.some(r=>!Number.isSafeInteger(r.number)||(r.number??0)<1)?mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],numberIdeas):rows;}
+export async function listIdeas(user:AuthUser){requireIdeaTeam(user);await maintainIdeas();const rows=await readDataJson<TeamIdea[]>(IDEAS_PATH,[]);const numbered=rows.some(r=>!Number.isSafeInteger(r.number)||(r.number??0)<1)?await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],numberIdeas):rows;return numbered.filter(r=>!r.deletedAt);}
 export async function createIdea(user:AuthUser,input:{title:unknown;description:unknown},screenshots:string[],id:string=randomUUID()){
  requireIdeaTeam(user);const fields=ideaInput(input);
  if(screenshots.length>5||screenshots.some(s=>!validIdeaScreenshot(id,s)))throw Error('Некорректные скриншоты.');
@@ -45,12 +49,12 @@ export async function createIdea(user:AuthUser,input:{title:unknown;description:
 }
 export async function updateIdea(user:AuthUser,id:string,action:unknown,value:unknown){
  requireIdeaTeam(user);
- await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{if(!rows.some(r=>r.id===id))throw Error('ideas_missing');return rows.map(row=>row.id===id?changeIdea(row,user,action,value):row);});
+ await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{if(!rows.some(r=>r.id===id&&!r.deletedAt))throw Error('ideas_missing');return rows.map(row=>row.id===id&&!row.deletedAt?changeIdea(row,user,action,value):row);});
 }
 export function publicIdea(row:TeamIdea,user:AuthUser,users:AuthUser[]=[]){
  const person=(id:string,name='Сотрудник',avatar?:string)=>{const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
  const votes=[...new Set(row.votes)],downvotes=[...new Set(row.downvotes||[])].filter(id=>!votes.includes(id));
- return {...row,comments:(row.comments||[]).map(c=>({...c,author:person(c.authorId,c.authorName,c.authorAvatarUrl)})),canEdit:canEditIdea(row,user),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
+ return {...row,comments:(row.comments||[]).map(c=>({...c,author:person(c.authorId,c.authorName,c.authorAvatarUrl)})),canEdit:canEditIdea(row,user),canDelete:canDeleteIdea(user),expiresAt:ideaExpiresAt(row),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
 }
 
 export function canEditIdea(row:TeamIdea,user:AuthUser){return isPlatformTeam(user)&&(isPlatformOwner(user)||row.authorId===user.id);}
@@ -58,10 +62,10 @@ export function validIdeaScreenshot(id:string,key:string){return key.startsWith(
 export async function editIdea(user:AuthUser,id:string,input:{title:unknown;description:unknown},retain:string[],added:string[],revision:number){
  requireIdeaTeam(user);const fields=ideaInput(input);
  await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{
-  const row=rows.find(r=>r.id===id);if(!row)throw Error('ideas_missing');if(!canEditIdea(row,user))throw Error('ideas_forbidden');
+  const row=rows.find(r=>r.id===id&&!r.deletedAt);if(!row)throw Error('ideas_missing');if(!canEditIdea(row,user))throw Error('ideas_forbidden');
   if(!Number.isInteger(revision)||revision!==(row.revision||0))throw Error('ideas_conflict');
   if(retain.length+added.length>5||retain.some(key=>!row.screenshots.includes(key))||added.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
-  const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,screenshots:[...new Set([...retain,...added])],revision:revision+1,editedAt:at,updatedAt:at}:r);
+  const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,lastActorId:user.id,screenshots:[...new Set([...retain,...added])],revision:revision+1,editedAt:at,updatedAt:at}:r);
  });
 }
 
@@ -75,7 +79,9 @@ export async function addIdeaComment(user:AuthUser,id:string,value:unknown,scree
  if(screenshots.length>5||screenshots.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
  const comment:IdeaComment={id:randomUUID(),authorId:user.id,authorName:user.displayName||'Сотрудник',authorAvatarUrl:user.avatarUrl,text,createdAt:new Date().toISOString(),screenshots};
  await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{
-  if(!rows.some(r=>r.id===id))throw Error('ideas_missing');
+  if(!rows.some(r=>r.id===id&&!r.deletedAt))throw Error('ideas_missing');
   return rows.map(r=>r.id===id?{...r,comments:[...(r.comments||[]),comment]}:r);
  });
 }
+
+export function canDeleteIdea(user:AuthUser|null|undefined){return isPlatformTeam(user)&&hasCrmPermission(user,'deleteIdeas');}

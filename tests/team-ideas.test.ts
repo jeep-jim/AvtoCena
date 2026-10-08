@@ -75,6 +75,24 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
   (globalThis as any).__ideaActor=owner;const removal=editForm(1);removal.delete('retain');assert.equal((await modules.api.POST(post(removal))).status,200);assert.equal((await modules.media.GET(new Request('https://avtocena.com'),context)).status,404);
   assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,200);
 
+  // Deletion requires both current permission and an explicit confirmation.
+  (globalThis as any).__ideaActor=manager;
+  assert.equal((await modules.api.POST(post({id:item.id,action:'delete',confirm:true}))).status,403);
+  (globalThis as any).__ideaActor={...owner,role:'admin'};
+  assert.equal((await modules.api.POST(post({id:item.id,action:'delete',confirm:true}))).status,403);
+  (globalThis as any).__ideaActor={...manager,permissions:{deleteIdeas:true}};
+  assert.equal((await modules.api.POST(post({id:item.id,action:'delete'}))).status,400);
+  assert.equal((await modules.api.GET(new Request('https://avtocena.com/api/crm/ideas?number=1'))).status,200);
+  assert.equal((await modules.api.POST(post({id:item.id,action:'delete',confirm:true}))).status,200);
+  assert.equal((await modules.api.GET(new Request('https://avtocena.com/api/crm/ideas?number=1'))).status,404);
+  assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,404);
+  const stored=JSON.parse(fs.readFileSync(path.join(tmp,'data/crm/team-ideas/items.json'),'utf8'));
+  const deleted=stored.find((r:any)=>r.id===item.id);assert.equal(deleted.description,'');assert.equal(deleted.comments,undefined);assert.deepEqual(deleted.pendingMedia,[]);
+  assert.equal(fs.existsSync(path.join(tmp,'data/crm/team-ideas/media',commented.comments[0].screenshots[0])),false);
+  const f=new FormData();f.set('title','После удаления');f.set('description','Номер не переиспользуется');
+  assert.equal((await modules.api.POST(post(f))).status,200);
+  result=await (await modules.api.GET()).json();assert.equal(result.ideas[0].number,4);
+
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;delete (globalThis as any).__ideaActor;fs.rmSync(tmp,{recursive:true,force:true});}
 });
 test('formatted text escapes HTML and only makes HTTP(S) URLs clickable',async()=>{
@@ -97,4 +115,14 @@ test('migration assigns chronological permanent numbers and never renumbers exis
  const rows=numberIdeas([recent,old]);assert.equal(rows[0].number,2);assert.equal(rows[1].number,1);
  assert.deepEqual(numberIdeas([...rows].reverse()).map(r=>r.number),[1,2]);
  assert.equal(numberIdeas([{...row,id:'new'},...rows])[0].number,3);
+});
+
+
+test('completion starts 30 days once, reopening cancels it, permissions are opt-in',()=>{
+ const completed=changeIdea(row,owner,'progress',100);assert.ok(completed.completedAt);
+ const again=changeIdea(completed,owner,'progress',100);assert.equal(again.completedAt,completed.completedAt);
+ const reopened=changeIdea(completed,owner,'progress',99);assert.equal(reopened.completedAt,undefined);
+ assert.equal(publicIdea(row,{...owner,role:'admin'} as AuthUser).canDelete,false);
+ assert.equal(publicIdea(row,{...manager,permissions:{deleteIdeas:true}}).canDelete,true);
+ assert.equal(publicIdea(row,{...manager,companyId:'external',permissions:{deleteIdeas:true}}).canDelete,false);
 });

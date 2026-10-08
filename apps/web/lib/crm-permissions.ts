@@ -1,6 +1,7 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
  replyReviews:{label:'Ответы на отзывы',description:'Ответ компании на отзывы и изменение ответа. Для дилера — только своя компания.'},
+ deleteIdeas:{label:'Удаление идей',description:'Полное удаление идей, комментариев и скриншотов с подтверждением. Это право выдаёт только владелец.'},
  deleteReviews:{label:'Удаление отзывов',description:'Удаление опубликованных отзывов с подтверждением. Это право выдаёт только владелец ресурса.'},
  chat:{label:'Чат',description:'Личные и общие переписки, комнаты команды, переписка по доступным заявкам.'},
  analytics:{label:'Аналитика сайта',description:'Посещаемость, источники переходов и показатели сайта в обзоре. Доступ к ленте команды настраивается отдельно.'},
@@ -30,15 +31,15 @@ export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission)
  if(user.role==='owner')return true;
  if(user.role==='manager'&&isAdministrativeCrmPermission(key))return false;
  if(key==='analytics'&&user.permissions?.analytics===undefined)return hasCrmPermission(user,'activityAll');
- if(key==='deleteReviews')return user.permissions?.deleteReviews===true;
+ if(key==='deleteReviews'||key==='deleteIdeas')return user.permissions?.[key]===true;
  if(key==='site')return user.permissions?.site===true;
  return user.permissions?.[key] ?? (user.role==='admin'||managerDefaults.has(key));
 }
-export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||(role==='admin'&&k!=='site'&&k!=='deleteReviews')||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
+export function permissionDefaults(role:string){return Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(k=>[k,role==='owner'||(role==='admin'&&k!=='site'&&k!=='deleteReviews'&&k!=='deleteIdeas')||managerDefaults.has(k)])) as Record<CrmPermission,boolean>;}
 export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, вся клиентская база и лента. Управление владельцами, сотрудниками, ключами, тарифами, дилерами и общими шаблонами договоров. Полный доступ владельца не отключается.',admin:'По умолчанию — вся база, общая лента, назначения, документы, расчёты, команда, тарифы и дилеры. Не может изменять владельцев или общие шаблоны договоров. Права можно ограничить переключателями. Чат и игра включены; управление сайтом разрешается отдельно.',manager:'По умолчанию — созданные и назначенные ему клиенты и заявки, их документы и договоры, расчёты. Общие напоминания и рабочий график доступны всей команде; смены редактируются с подтверждением. Нет доступа к управлению командой, тарифами и дилерами. Чат и игра включены. Дополнительный обзор, аналитика и назначения включаются отдельно.'};
 
 export const CRM_PERMISSION_GROUPS:{label:string;keys:CrmPermission[]}[]=[
  {label:'Разделы и общение',keys:['chat','analytics','game']},
  {label:'Клиенты, заявки и документы',keys:['viewAll','editClients','editLeads','assign','documents','calculations','deleteRecords','activityAll']},
- {label:'Управление',keys:['staff','settings','site','dealers','replyReviews','deleteReviews']},
+ {label:'Управление',keys:['staff','settings','site','dealers','replyReviews','deleteReviews','deleteIdeas']},
 ];

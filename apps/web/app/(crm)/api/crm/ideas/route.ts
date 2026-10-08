@@ -1,3 +1,5 @@
+import {removeIdea} from '@/lib/team-ideas-retention';
+import {canDeleteIdea} from '@/lib/team-ideas';
 import {readCrmUsers} from '@/lib/crm-users';
 import {randomUUID} from 'node:crypto';
 import {getCurrentUser} from '@/lib/auth';
@@ -11,12 +13,12 @@ export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
 const denied=()=>Response.json({error:'Нет доступа'},{status:403,headers});
-export async function GET(){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();const [rows,users]=await Promise.all([listIdeas(user),readCrmUsers()]);return Response.json({ideas:rows.map(r=>publicIdea(r,user,users)),owner:isPlatformOwner(user)},{headers});}
+export async function GET(req?:Request){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();const [rows,users]=await Promise.all([listIdeas(user),readCrmUsers()]);const number=req?new URL(req.url).searchParams.get('number'):null;const selected=number?rows.filter(r=>String(r.number)===number):rows;if(number&&!selected.length)return Response.json({error:'Идея не найдена.'},{status:404,headers});return Response.json({ideas:selected.map(r=>publicIdea(r,user,users)),owner:isPlatformOwner(user)},{headers});}
 export async function POST(req:Request){
  const user=await getCurrentUser();if(!user||!isPlatformTeam(user)||!isCalculationOriginAllowed(req))return denied();
  try{
   if(req.headers.get('content-type')?.startsWith('application/json')){
-   const b=await readAccountJson(req);await updateIdea(user,String(b.id||''),b.action,b.value);
+   const b=await readAccountJson(req);if(b.action==='delete'){if(!canDeleteIdea(user))throw Error('ideas_forbidden');if(b.confirm!==true)throw Error('Подтвердите удаление.');await removeIdea(String(b.id||''));}else await updateIdea(user,String(b.id||''),b.action,b.value);
   }else{
    const form=await readAccountUpload(req,26*1024*1024,'Суммарный размер скриншотов — до 25 МБ.');
    const commenting=form.get('action')==='comment';

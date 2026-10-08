@@ -26,6 +26,10 @@ test('staff writes enforce capability, owner boundary and prevent granting absen
  response=await save({userId:'new-staff',offerCopyPresent:'1'});assert.match(response.headers.get('location'),/state=error/);assert.equal(state.users[0].offerCopyEnabled,true,'admin cannot disable the button');
  state.actor={...state.actor,role:'owner'};
  response=await save({userId:'new-staff',offerCopyPresent:'1'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].offerCopyEnabled,false);
+ response=await save({userId:'new-staff',permission_deleteIdeas:'on'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].permissions.deleteIdeas,true);
+ state.actor={...state.actor,role:'admin',permissions:{deleteIdeas:true}};
+ response=await save({userId:'new-staff'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].permissions.deleteIdeas,true);
+ response=await save({userId:'new-staff',permission_deleteIdeas:'on'});assert.match(response.headers.get('location'),/state=error/);
  state.actor={...state.actor,role:'admin'};
  state.actor={...state.actor,permissions:{staff:false}};response=await save({telegramUsername:'another'});assert.match(response.headers.get('location'),/auth_required/);assert.equal(state.users.length,3);}finally{delete (globalThis as any).__staffPermissions;}
 });

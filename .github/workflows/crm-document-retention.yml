@@ -31,3 +31,4 @@ jobs:
         run: |
           node --import tsx scripts/crm-document-retention.ts
           node --import tsx scripts/customer-portal-maintenance.ts --apply
+          node --import tsx scripts/team-ideas-retention.ts

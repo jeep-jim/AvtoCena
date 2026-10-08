@@ -1,3 +1,4 @@
+import {recordCrmActivity} from '@/lib/crm-activity';
 import {hasCrmPermission} from '@/lib/crm-permissions';
 import {isPlatformTeam} from "@/lib/platform-access";
 import { NextResponse } from "next/server";
@@ -12,7 +13,9 @@ export async function PUT(req: Request) {
   )
     return NextResponse.json({ error: "Доступ запрещён" }, { status: 403 });
   try {
-    return NextResponse.json(await savePublicFeatures(await req.json()));
+    const saved=await savePublicFeatures(await req.json());
+    await recordCrmActivity(user,{type:'site_updated',title:'Изменены страницы и блоки сайта',visibility:'management',entityType:'site',entityId:'public-features',href:'/crm/site'});
+    return NextResponse.json(saved);
   } catch (e) {
     return NextResponse.json(
       { error: e instanceof Error ? e.message : "Не удалось сохранить" },
