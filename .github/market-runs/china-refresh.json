@@ -1,9 +1,9 @@
 {
-  "operation": "paid-che168-launch-20261008",
+  "operation": "paid-che168-launch-20261008-trim-secret",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
   "resetCursors": true,
-  "reason": "Owner purchased Che168 and added AUTO_API_CHE168_KEY. Start full paid snapshot and changes; retain existing admission, calculation and publication guards."
+  "reason": "Retry owner-authorized paid feed after trimming surrounding whitespace in the configured secret."
 }

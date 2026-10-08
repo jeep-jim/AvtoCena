@@ -82,6 +82,13 @@ test('transient failures retry fixed origin without redirects',async()=>{
  }});
  assert.deepEqual(await request('offers'),{ok:true});assert.equal(calls,2);
 });
+test('secret entry permits surrounding whitespace but rejects internal whitespace',async()=>{
+ const request=autoApiChe168Client({apiKey:'  private-test-key\n',fetchImpl:async(url:any)=>{
+  assert.equal(url.searchParams.get('api_key'),'private-test-key');return Response.json({ok:true});
+ }});
+ assert.deepEqual(await request('offers'),{ok:true});
+ assert.throws(()=>autoApiChe168Client({apiKey:'private test key'}),/missing_or_invalid/);
+});
 test('pagination fails closed on a loop or unexpected metadata',()=>{
  assert.throws(()=>autoApiPage({result:[],meta:{page:1,next_page:1}},1));
  assert.throws(()=>autoApiPage({result:[],meta:{page:1}},1));

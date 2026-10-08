@@ -3,6 +3,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /** Fixed origin, no redirects, and no upstream bodies/URLs in errors or logs. */
 export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity}) {
+  apiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (!apiKey || /\s/.test(apiKey)) throw Error('auto_api_key_missing_or_invalid');
   return async (endpoint, params = {}) => {
     if (!['offers', 'offer', 'changes', 'change_id'].includes(endpoint)) throw Error('auto_api_invalid_endpoint');
