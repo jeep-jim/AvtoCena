@@ -6,6 +6,10 @@
  overflow: visible;
 }
 .tile:has(> .editor[open]) { z-index: 90; }
+
+/* A sticky column is its own stacking context. Raise that ancestor while an
+   editor is open so later recommendation cards cannot cover the popup. */
+:global([data-sticky-offer-column]):has(.editor[open]) { z-index: 80; }
 .editor { position: static !important; overflow: visible !important; }
 .editor > summary { position: relative; border-radius: 1rem; }
 .editor[open] { border-radius: 1rem 1rem 0 0; box-shadow: none !important; }

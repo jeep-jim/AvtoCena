@@ -17,7 +17,7 @@ if(!live){
  const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
  const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
  const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
- const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ const css=await postcss([tailwindcss({content:['apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/attached-parameters-fixture.tsx','apps/web/components/catalog/StickyOfferColumn.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
  fs.writeFileSync(`${out}/app.css`,css.css);
  const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
  server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
@@ -57,6 +57,31 @@ async function geometry(page,trigger,panel,grid){
  return {width:b.width,height:b.height,anchorGap:b.y-t.y-t.height,tileGap:b.y-spacing.tileBottom,rowGap:spacing.rowGap};
 }
 try{
+ if(!live){
+  const page=await browser.newPage();const overlapResults=[];
+  for(const width of [1280,1536])for(const theme of ['light','dark']){
+   await page.setViewportSize({width,height:1000});
+   await page.goto(`${origin}/?kind=n1-overlap&theme=${theme}`);
+   const trigger=page.locator('summary[aria-label^="Категория и масса"]');
+   await trigger.click();
+   const panel=page.locator('[data-parameter-editor][open] > [data-parameter-panel]');
+   await panel.waitFor({state:'visible'});
+   assert.equal(await page.locator('[data-sticky-offer-column]').evaluate(el=>getComputedStyle(el).position),'sticky');
+   const hit=await panel.evaluate(el=>{
+    const p=el.getBoundingClientRect(),r=document.querySelector('[data-recommendations]').getBoundingClientRect();
+    const x=p.x+p.width/2,y=Math.max(p.top,r.top)+20;
+    return {overlaps:y<p.bottom&&y<r.bottom,above:el.contains(document.elementFromPoint(x,y))};
+   });
+   assert.ok(hit.overlaps,'fixture must reproduce overlap with following cards');
+   assert.ok(hit.above,'open category/mass panel must receive clicks above recommendations');
+   await page.getByLabel('Полная разрешённая масса, кг',{exact:true}).fill('3200');
+   await page.keyboard.press('Escape');
+   assert.equal(await page.locator('[data-sticky-offer-column]').evaluate(el=>getComputedStyle(el).zIndex),'auto','closed column restores its ordinary layer');
+   overlapResults.push({width,theme,aboveRecommendations:true});
+   fs.writeFileSync(`${out}/overlap-results.json`,JSON.stringify(overlapResults,null,2));
+  }
+  await page.close();
+ }
  for(const [kind,url] of pages){
   const context=await browser.newContext({viewport:{width:390,height:900},serviceWorkers:'block'});
   const page=await context.newPage();const errors=[],requests=[];
