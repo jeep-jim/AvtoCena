@@ -1,11 +1,8 @@
 {
-  "operation": "paid-che168-durable-confirmed-removal-20261009",
+  "operation": "che168-complete-csv-20261009",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reuseRunId": "37835596394",
-  "refreshMarkets": [],
-  "recoverPaidSnapshot": true,
-  "reason": "Reuse the verified full snapshot with durable replay journal, paced requests and bounded explicit same-ID removal resolution for historical /offer 404. Never infer removal from an HTTP error, skip intervening changes, advance published cursor early or repeat /offers."
+  "reason": "Import supplier CSV dated 2026-10-09, archive privately, then replay changes from aligned cursor 11989266. Subsequent runs use the committed local replica."
 }
