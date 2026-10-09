@@ -86,7 +86,7 @@ export function autoApiChe168Resume(saved, {yearFrom, now=Date.now(), forceSnaps
   return {cursor:row.cursor,snapshotStartedAt:row.snapshotStartedAt};
 }
 
-function verifiedChangePage(payload, cursor) {
+function verifiedChangePage(payload, cursor, includeData=false) {
   if (!Array.isArray(payload?.result) || !payload.meta || payload.meta.cur_change_id !== cursor) throw Error('auto_api_invalid_changes');
   if (!payload.result.length) return {items:[],next:null};
   const next=payload.meta.next_change_id;
@@ -96,13 +96,13 @@ function verifiedChangePage(payload, cursor) {
       || !Number.isSafeInteger(change.id) || change.id<cursor || change.id>next
       || !Number.isFinite(Date.parse(change.created_at))) throw Error('auto_api_invalid_change');
     // Full detail is fetched separately; keep bounded lookahead metadata only.
-    return {id:change.id,inner_id:change.inner_id,change_type:change.change_type,created_at:change.created_at};
+    return {id:change.id,inner_id:change.inner_id,change_type:change.change_type,created_at:change.created_at,...(includeData?{data:change.data}:{})};
   });
   return {items,next};
 }
 
 /** Full bootstrap or delta replay. Only the caller can commit after publication. */
-export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
+export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, useChangeData=false, onPriceChange=async()=>false, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
   const startedAt = now();
   const mode=resume?'delta':'snapshot';
   const snapshotStartedAt=resume?.snapshotStartedAt || startedAt;
@@ -112,7 +112,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
   if (!Number.isFinite(Date.parse(snapshotStartedAt))) throw Error('auto_api_invalid_saved_cursor');
   const initialCursor=cursor;
   const futurePages=new Map();
-  const readChanges=async at=>futurePages.get(at) || verifiedChangePage(await request('changes',{change_id:at}),at);
+  const readChanges=async at=>futurePages.get(at) || verifiedChangePage(await request('changes',{change_id:at}),at,useChangeData);
   const confirmedLaterRemoval=async(change,at)=>{
     for(let pages=0;pages<1000;pages++){
       const page=await readChanges(at);
@@ -148,11 +148,17 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
       const previous = latest.get(String(change.inner_id));
       if (!previous || previous.id < change.id) latest.set(String(change.inner_id), change);
     }
-    for (const change of latest.values()) {
+    for (const change of (useChangeData ? [...page.items].sort((a,b)=>a.id-b.id) : latest.values())) {
       if (change.change_type === 'removed') {
         // Original event time protects a more recently observed active listing.
         await onRemoval(change, startedAt);
       } else {
+        if (useChangeData && change.data?.inner_id && change.data?.url) {
+          const row=autoApiChe168Detail({inner_id:change.inner_id,data:change.data},change.inner_id);
+          await onOffer(row,change.created_at,change); continue;
+        }
+        if (useChangeData && change.change_type==='changed' && change.data && Object.keys(change.data).length===1
+          && Object.hasOwn(change.data,'new_price') && await onPriceChange(change)) continue;
         let response;
         try { response=await request('offer', {inner_id: change.inner_id}); }
         catch(error){
@@ -163,7 +169,7 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
           continue;
         }
         const row = autoApiChe168Detail(response,change.inner_id);
-        await onOffer(row, now());
+        await onOffer(row, now(), change);
       }
     }
     changes += page.items.length; cursor = next;

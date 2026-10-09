@@ -36,7 +36,7 @@ jobs:
           const market = process.env.TARGET_MARKET;
           const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
           const paused = Boolean(policy.pausedMarkets?.[market]);
-          const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue()));
+          const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && (market === 'china' || catalogRefreshDue())));
           if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets[market]}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
@@ -97,6 +97,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Preserve the complete Che168 file in private storage
+        if: matrix.market == 'china'
+        run: node --import tsx scripts/catalog-che168-snapshot-archive.mjs
       - name: Verify paid Che168 access before collection
         if: matrix.market == 'china'
         run: |
@@ -114,9 +117,9 @@ jobs:
           CATALOG_INTAKE_SOURCE_IDS: ${{ matrix.market == 'china' && 'autohome_new_china_open' || '' }}
           CATALOG_INTAKE_TIME_MS: ${{ matrix.market == 'china' && '1800000' || matrix.market == 'korea' && '18000000' || '12600000' }}
         run: node --import tsx scripts/catalog-source-intake.mjs
-      - name: Sync paid Che168 from published cursor or bootstrap snapshot
+      - name: Sync Che168 from the complete CSV and then only committed changes
         if: matrix.market == 'china'
-        run: node --import tsx scripts/catalog-auto-api-che168-intake.mjs
+        run: node --import tsx scripts/catalog-auto-api-che168-bulk-intake.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

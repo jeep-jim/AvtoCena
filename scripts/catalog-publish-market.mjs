@@ -334,6 +334,13 @@ if (sellerInventory && !generation.offers.length && !generation.payloads.some(pa
   throw new Error(`catalog_no_fresh_source_offers:${market}`);
 }
 const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
+const completeChe168Inventory = generation.payloads.some(payload => {
+  const report=payload.report,source=report?.sources?.find(row=>row.sourceId==='autohome_used_china_open');
+  return market==='china' && report?.provider==='auto_api_che168' && report.completed===true && !report.failure
+    && source?.completeInventory===true && source.rejectedIdentity===0 && source.observations>0
+    && /^[a-f0-9]{64}$/.test(source.snapshotBinding) && source.replica?.binding===source.snapshotBinding
+    && source.replica?.cursor===source.cursor && source.stopReason==='source_finished';
+});
 const confirmedWithdrawals = catalogConfirmedWithdrawalIndex(generation.payloads, market);
 const freshOfferMetaById = new Map();
 let freshOfferMissingIdObservations = 0;
@@ -372,6 +379,9 @@ const existingInventory = new Map(reserveRows.map(row => [row.id,row]));
 for (const row of currentMarketRows) existingInventory.set(row.id,row);
 const retentionDecisions = new Map();
 let currentRetainedRows = [...existingInventory.values()].filter((row) => {
+  // The verified local replica is a complete active set, including explicit
+  // removals and quarantine. Do not resurrect an older retained revision.
+  if (completeChe168Inventory && row.sourceId==='autohome_used_china_open' && !freshOfferMetaById.has(String(row.id))) return false;
   if (row?.status !== "active" || catalogOfferWithdrawnByReport(row, confirmedWithdrawals)) return false;
   const decision = catalogRetentionDecision({
     offer: row,

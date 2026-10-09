@@ -40,10 +40,14 @@ export function publishedIntakeCheckpoint(intake, publication) {
   if (!intake.completedAt || !Array.isArray(intake.sources)) throw Error('intake_incomplete_report');
   if (intake.provider==='auto_api_che168' && (intake.completed!==true || intake.failure
     || intake.sources.some(row=>row.provider==='auto_api_che168' && (row.rejectedIdentity!==0 || !Number.isSafeInteger(row.cursor) || row.cursor<0)))) throw Error('auto_api_incomplete_cursor_not_committable');
+  if(intake.sources.some(row=>row.snapshotBinding && (!/^[a-f0-9]{64}$/.test(row.snapshotBinding)
+    ||row.completeInventory!==true||row.replica?.binding!==row.snapshotBinding||row.replica?.cursor!==row.cursor
+    ||!/^catalog\/provider-replicas\/che168\/[a-f0-9-]{36}$/.test(row.replica?.key)||!/^[a-f0-9]{64}$/.test(row.replica?.sha256))))throw Error('auto_api_replica_cursor_not_committable');
   return { version: 1, market: intake.market, updatedAt: intake.completedAt,
     generationId: publication.generationId,
     sources: intake.sources.map(row => ({ sourceId: row.sourceId,
-      ...(row.provider==='auto_api_che168'?{provider:row.provider,snapshotStartedAt:row.snapshotStartedAt,yearFrom:row.yearFrom}:{}),
+      ...(row.provider==='auto_api_che168'?{provider:row.provider,snapshotStartedAt:row.snapshotStartedAt,yearFrom:row.yearFrom,
+        ...(row.snapshotBinding?{snapshotBinding:row.snapshotBinding,replica:row.replica}:{} )}:{}),
       cursor: row.cursor ?? null, stopReason: row.stopReason,
       retryableTransportFailure: row.stopReason === "list_failed" && !!row.errors?.length && row.errors.every(error=>error.stage === "list" && sourceTransportFailure(error.message)) })) };
 }
