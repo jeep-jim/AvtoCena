@@ -53,3 +53,14 @@ test('clear prevents an older pending read from replacing the new value', async 
   release('old'); await old;
   assert.equal(await cache.get('key', async () => 'unexpected'), 'new');
 });
+
+
+test('optional cache sizing does not turn a successful oversized read into failure', async () => {
+  const cache = new DetailReadCache<object>({maxEntries:1,maxBytes:100,ttlMs:100,concurrency:1});
+  const value={toJSON(){throw new RangeError('Invalid string length');}};
+  let calls=0;
+  assert.equal(await cache.get('big',async()=>{calls++;return value;}),value);
+  assert.equal(await cache.get('big',async()=>{calls++;return value;}),value);
+  assert.equal(calls,2,'oversized values are returned but never cached');
+  assert.deepEqual(await cache.get('small',async()=>({ok:true})),{ok:true});
+});

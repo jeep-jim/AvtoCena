@@ -52,7 +52,14 @@ export class DetailReadCache<T> {
         if (epoch !== this.epoch) return value;
         // Serialized bytes are a storage budget, not an exact JS heap measure.
         // Leave substantial heap headroom for parsed objects and request work.
-        const bytes = Buffer.byteLength(JSON.stringify(value), 'utf8');
+        let bytes: number;
+        try { bytes = Buffer.byteLength(JSON.stringify(value), 'utf8'); }
+        catch (error) {
+          // A successful read must not fail just because an oversized value
+          // cannot be serialized again to measure an optional cache entry.
+          if (error instanceof RangeError && error.message === 'Invalid string length') return value;
+          throw error;
+        }
         if (bytes <= this.options.maxBytes) {
           while (this.entries.size >= this.options.maxEntries || this.bytes + bytes > this.options.maxBytes) {
             const oldest = this.entries.keys().next().value;

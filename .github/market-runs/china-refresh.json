@@ -1,9 +1,10 @@
 {
-  "operation": "che168-heavy-scope-reuse-envelope-20261009",
+  "operation": "che168-publication-size-recovery-20261009",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reason": "Publish suitable paid feed with preserved truck/bus body identity and gross-weight exclusion. Reuse verified same-day Autohome artifact to avoid repeating its independent 30-minute collection.",
-  "autohomeReuseRunId": "37907216966"
+  "reuseRunId": "37922693305",
+  "refreshMarkets": [],
+  "reason": "Retry publication from the completed preserved intake after serialization and grouping fixes; do not request suppliers again."
 }

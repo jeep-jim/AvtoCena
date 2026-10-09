@@ -15,6 +15,15 @@ export type StorageObject = { key: string; lastModified?: string; size?: number 
 export type StorageObjectVersion = StorageObject & { versionId: string; isLatest: boolean; deleteMarker: boolean };
 export type StorageMultipartUpload = { key: string; uploadId: string; initiated?: string; parts: number; bytes: number };
 
+// Catalog JSON is machine-read. Pretty printing multiplies large projections
+// and can exceed V8's single-string limit before an object-store request starts.
+export function serializeStorageJson(relativePath: string, value: unknown) {
+  try { return JSON.stringify(value, null, relativePath.startsWith("catalog/") ? undefined : 2); }
+  catch (error) {
+    throw new Error(`storage_json_serialize_failed:path=${relativePath}:${error instanceof Error ? error.message : String(error)}`, {cause:error});
+  }
+}
+
 export class StorageConflictError extends Error { constructor() { super("storage_conflict"); this.name = "StorageConflictError"; } }
 
 export interface JsonStorage {
@@ -63,7 +72,7 @@ export class LocalJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "local";
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const p = localPath(relativePath); try { if (!fs.existsSync(p)) return { value: fallback, found: false }; return { value: safeParse(await fs.promises.readFile(p, "utf-8"), fallback), etag: localEtag(p), found: true }; } catch { return { value: fallback, found: false }; } }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); const tmp = `${p}.${process.pid}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, JSON.stringify(value, null, 2), "utf-8"); await fs.promises.rename(tmp, p); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); const tmp = `${p}.${process.pid}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, serializeStorageJson(relativePath, value), "utf-8"); await fs.promises.rename(tmp, p); }
   async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); await fs.promises.writeFile(p, data); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; }
@@ -215,7 +224,7 @@ export class ObjectJsonStorage implements JsonStorage {
   private async bucketRequest(params: Record<string, string>) { return this.signedBucketRequest("GET", params); }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: JSON.parse(objectStorageResponseText(res)) as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, serializeStorageJson(relativePath, value), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async head(relativePath: string) { const res = await this.request("HEAD", relativePath); if (res.status === 404) return false; if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_head_${res.status}`); return true; }
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
