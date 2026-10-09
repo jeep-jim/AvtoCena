@@ -12,6 +12,7 @@ export function publicRail(s: DealerShowcase, city = "") {
             dealer: {id:s.dealerId,href:dealerProfilePath(s),name:publicDealerText(s.name),logoLight:s.logoLight,logoDark:s.logoDark},
             availability: offerAvailability(o),
             condition: o.condition,
+            year: o.year,
             address: offerAvailability(o)==="stock" ? s.offices.find(office=>office.id===o.officeId)?.address : undefined,
             heading: offerSectionHeading(s,offerAvailability(o)),
             subtitle: offerSectionSubtitle(s,offerAvailability(o)),
