@@ -87,7 +87,7 @@ export function SpecialRail({
               loading="lazy"
               className="h-24 w-full object-cover sm:h-40 md:h-auto md:aspect-[16/10]"
             />
-            <div className="ac-special-card-body space-y-1 p-3">
+            <div className="ac-special-card-body p-3">
               <p className="ac-special-card-status text-xs font-bold text-emerald-600">{kind==="stock" ? `${o.year ? `${o.year} · ` : ""}В наличии` : `${o.condition==="used"?"С пробегом":"Новый"}${o.daysFrom?` от ${o.daysFrom} дней`:" · Под заказ"}`}</p>
               <h3 className="line-clamp-2 break-words text-sm font-black">{o.title}</h3>
               <p className="ac-price ac-price--down text-base font-black">

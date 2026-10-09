@@ -16,7 +16,6 @@ import {SpecialRail,type SpecialRailItem} from './SpecialRail';
 import {BuyerGallery} from '@/components/home/BuyerGallery';
 import {DealerMap} from './DealerMap';
 import {dealerProfileStyles} from './DealerProfileStyles';
-import {yandexOfficeUrls} from '@/lib/dealers/yandex-map';
 export type DealerProfileTab='cars'|'specials'|'about'|'photos'|'reviews';
 type Tab=DealerProfileTab;
 function Icon({name}:{name:string}){
@@ -92,7 +91,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   <dialog ref={dialog} className="dealer-info-dialog" onClick={e=>{if(e.target===dialog.current)dialog.current.close();}}>
    <div className="dealer-dialog-content"><div className="dealer-dialog-handle"/><header><div><p className="dealer-eyebrow">Информация о компании</p><h2>{s.name}</h2></div><button type="button" className="dealer-info-button" aria-label="Закрыть информацию" onClick={()=>dialog.current?.close()}><Icon name="close"/></button></header>
    <div className="dealer-avatar dealer-about-logo">{s.logoLight||s.logoDark?<><img src={s.logoLight||s.logoDark} alt={`Логотип ${s.name}`} className="dealer-logo-light"/><img src={s.logoDark||s.logoLight} alt="" className="dealer-logo-dark"/></>:<img className="dealer-default-logo" src="/logo/avtocena-mark-dark.svg" alt="АвтоЦена"/>}</div><p className="dealer-about-text">{s.description}</p>
-   {s.offices.length>0?<><div className="dealer-office-select"><Icon name="pin"/><label>Адрес офиса<select aria-label="Адрес офиса" value={office?.id} onChange={e=>setOfficeId(e.target.value)}>{s.offices.map(o=><option key={o.id} value={o.id}>{o.city}, {o.address}</option>)}</select></label></div>{office?.hours&&<div className="dealer-office-hours"><Icon name="clock"/><span><small>Режим работы</small>{office.hours}</span></div>}<DealerMap compact offices={s.offices} selectedId={office?.id} onSelect={setOfficeId}/>{office&&<a className="dealer-primary dealer-route-button" href={yandexOfficeUrls(office).full} target="_blank" rel="noreferrer">Построить маршрут <ArrowUpRight size={18}/></a>}</>:<p className="dealer-about-text">Компания пока не добавила адреса офисов.</p>}
+   {s.offices.length>0?<><div className="dealer-office-select"><Icon name="pin"/><label>Адрес офиса<select aria-label="Адрес офиса" value={office?.id} onChange={e=>setOfficeId(e.target.value)}>{s.offices.map(o=><option key={o.id} value={o.id}>{o.city}, {o.address}</option>)}</select></label></div>{office?.hours&&<div className="dealer-office-hours"><Icon name="clock"/><span><small>Режим работы</small>{office.hours}</span></div>}<DealerMap compact offices={s.offices} selectedId={office?.id} onSelect={setOfficeId}/></>:<p className="dealer-about-text">Компания пока не добавила адреса офисов.</p>}
    <DealerRequisites value={s.requisites}/><p className="dealer-dialog-note">Для подбора автомобиля оставьте заявку через АвтоЦену.</p><button type="button" className="dealer-dialog-request" onClick={()=>{dialog.current?.close();setLeadOpen(true);}}>Оставить заявку <ArrowRight size={18}/></button></div>
   </dialog>
   <dialog ref={logoDialog} className="dealer-logo-dialog" aria-label={`Логотип ${s.name}`} onClick={e=>{if(e.target===logoDialog.current)logoDialog.current.close();}}>
