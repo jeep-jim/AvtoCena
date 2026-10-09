@@ -16,7 +16,7 @@ const pdfAssets=path.join(out,'pdfjs',pdfVersion);fs.mkdirSync(pdfAssets,{recurs
 fs.copyFileSync(path.join(pdfRoot,'legacy/build/pdf.worker.min.mjs'),path.join(pdfAssets,'pdf.worker.min.mjs'));
 for(const dir of ['cmaps','standard_fonts','wasm'])fs.cpSync(path.join(pdfRoot,dir),path.join(pdfAssets,dir),{recursive:true});
 const mock=path.resolve('tests/browser/crm-mobile-mocks.ts');
-await build({entryPoints:['tests/browser/crm-mobile-fixture.tsx'],bundle:true,format:'iife',platform:'browser',target:'es2022',jsx:'automatic',outfile:out+'/fixture.js',loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'test-services',setup(b){
+await build({entryPoints:['tests/browser/crm-mobile-fixture.tsx'],bundle:true,format:'iife',platform:'browser',target:'es2022',jsx:'automatic',outfile:out+'/fixture.js',loader:{'.module.css':'local-css'},external:['/map-preview.svg'],define:{'process.env.NODE_ENV':'"production"'},plugins:[{name:'test-services',setup(b){
  b.onResolve({filter:/^@\/lib\/(auth|data|crm-users|business-settings|avtocena|effective-market-settings|crm-notifications|crm-team|crm-read-state|catalog\/customs-pricing|catalog\/estimated-market-config)$/},()=>({path:mock}));
  b.onResolve({filter:/^@\/lib\/account\/portal$/},()=>({path:'account-portal',namespace:'account-test'}));
  b.onLoad({filter:/.*/,namespace:'account-test'},()=>({contents:`import {readChunkedDataJson} from ${JSON.stringify(mock)};export const customerLeads=async(company,id)=>(await readChunkedDataJson('leads/leads.json',[])).filter(l=>l.clientId===id&&!l.archivedAt);`,loader:'js',resolveDir:process.cwd()}));
