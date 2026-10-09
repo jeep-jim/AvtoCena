@@ -16,6 +16,24 @@ const generationBefore = await readManifestGeneration();
 const policyDate = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
 if (!generationBefore) throw new Error("catalog_overview_manifest_missing");
 
+// Diagnose the midnight fast-path miss before rebuilding; metadata only.
+const storage = getJsonStorage();
+const [previousOverview, publicationLock] = await Promise.all([
+  storage.readJson(catalogOverviewGenerationPath(generationBefore), null),
+  storage.readJson("catalog/import-lock.json", null),
+]);
+console.log("OVERVIEW_REFRESH", JSON.stringify({
+  generationId: generationBefore, expectedPolicyDate: policyDate,
+  previousGeneration: previousOverview?.generationId || null,
+  previousPolicyDate: previousOverview?.policyDate || null,
+  previousBuiltAt: previousOverview?.builtAt || null,
+  publicationActive: Date.parse(publicationLock?.lockedUntil || "") > Date.now(),
+}));
+if (Date.parse(publicationLock?.lockedUntil || "") > Date.now()) {
+  throw new Error("catalog_overview_publication_in_progress");
+}
+
+
 const [facets, marketEntries] = await Promise.all([
   readCatalogFacets(),
   Promise.all(PUBLIC_CATALOG_MARKETS.map(async (market) => {
@@ -69,6 +87,7 @@ console.log(JSON.stringify({
   generationId: generationBefore,
   path: CATALOG_OVERVIEW_PATH,
   candidatesPerMarket,
+  policyDate,
   total: Object.values(markets).reduce((sum, entry) => sum + Number(entry.total || 0), 0),
   markets: Object.fromEntries(Object.entries(markets).map(([market, entry]) => [market, { total: entry.total, candidates: entry.items.length }])),
 }, null, 2));
