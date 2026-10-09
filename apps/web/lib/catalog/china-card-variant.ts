@@ -6,7 +6,15 @@ export function isChinaModelSpecification(offer:any){
 export function chinaCardVariant(offer:any){
  if(offer?.market!=='china'||!offer.trim)return '';
  let value=String(offer.trim).normalize('NFKC').replace(/^\s*(?:19|20)\d{2}\s*(?:款|Model\s*)?/i,'');
+ const seats=(n:string)=>`${n} ${Number(n)%10===1&&Number(n)%100!==11?"место":[2,3,4].includes(Number(n)%10)&&![12,13,14].includes(Number(n)%100)?"места":"мест"} `;
  const phrases:Array<[RegExp,string]>=[
+  [/\bComfort(?:\s+(?:Type|Edition))?\b/gi,'Комфорт '],
+  [/\bLuxury(?:\s+(?:Type|Edition))?\b/gi,'Люкс '],
+  [/\bPremium(?:\s+(?:Type|Edition))?\b/gi,'Премиум '],
+  [/\bFlagship(?:\s+(?:Type|Edition))?\b/gi,'Флагман '],
+  [/\bElite(?:\s+(?:Type|Edition))?\b/gi,'Элит '],
+  [/\bDelight Edition\b/gi,'Делайт '],
+  [/\bIntelligent Drive Edition\b/gi,'Интеллектуальное вождение '],
   [/高级营运/g,'Коммерческая, высший класс '],[/中级营运/g,'Коммерческая, средний класс '],
   [/增程版/g,'Гибрид REEV '],[/纯电版/g,'Электро '],[/柴油/g,'дизель '],[/汽油/g,'бензин '],
   [/劲享[型版]?/g,'Jinxiang '],[/劲尚[型版]?/g,'Jinshang '],[/劲锐[型版]?/g,'Jinrui '],
@@ -18,7 +26,7 @@ export function chinaCardVariant(offer:any){
   [/四驱/g,'4WD '],[/两驱/g,'2WD '],[/前驱/g,'передний привод '],[/后驱/g,'задний привод '],
   [/手动/g,'МКПП '],[/自动/g,'АКПП '],[/厢车/g,'фургон '],
  ];
- value=value.replace(/(\d+)座/g,(_,n)=>`${n} ${Number(n)%10===1&&Number(n)%100!==11?"место":[2,3,4].includes(Number(n)%10)&&![12,13,14].includes(Number(n)%100)?"места":"мест"} `);
+ value=value.replace(/(\d+)座/g,(_,n)=>seats(n)).replace(/\b(\d+)[ -]seaters?\b/gi,(_,n)=>seats(n));
  for(const [pattern,text] of phrases)value=value.replace(pattern,text);
  return translateCatalogText(value).replace(/\s+/g,' ').trim();
 }
