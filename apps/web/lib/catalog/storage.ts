@@ -1,5 +1,5 @@
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
-import {compareCatalogDisplayOrder} from './display-order';
+import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
 import {isReviewedSourceDuplicate, REVIEWED_DUPLICATE_POLICY} from './reviewed-source-duplicates';
 import {isChinaModelSpecification} from './china-card-variant';
@@ -561,6 +561,7 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  budgetSelectionOrder=new WeakMap();
   marketLandingCache.clear();
   filteredSearchCache.clear();
   catalogCountCache.clear();
@@ -761,14 +762,17 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
 export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
+  const displayOrder=catalogDisplayOrderComparator();
+  const dates=new WeakMap<CatalogSearchProjection,number>();
+  const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const price = (row: CatalogSearchProjection, missing: number) => { const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub); return !hasModificationSelection(row) && rub>0 ? rub : missing; };
   return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
     : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
         : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
       : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
-        : compareCatalogDisplayOrder(a,b) || Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
-          || projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+        : displayOrder(a,b) || Number(Number(b.totalRub) > 0) - Number(Number(a.totalRub) > 0)
+          || freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
 }
 export function catalogSearchProjectionBalanceSources(rows: CatalogSearchProjection[]) {
   const groups = new Map<string, CatalogSearchProjection[]>();
@@ -793,7 +797,7 @@ function sortCatalogSearchRows(rows: CatalogSearchProjection[], params: CatalogS
   catalogSearchProjectionSort(rows, sort, params.city);
   if (sort === "updatedAt") {
     if(params.market && params.market !== "any") catalogSearchProjectionBalanceSources(rows);
-    rows.sort(compareCatalogDisplayOrder);
+    rows.sort(catalogDisplayOrderComparator());
   }
 }
 async function projectionModelKeys(params: CatalogSearchParams) {
@@ -1905,11 +1909,20 @@ async function readBudgetSelection(params:CatalogSearchParams){
   return {generationId:manifest.generationId,cardVersion,rows:candidates.filter(row=>matched.has(row[5].id))};
  });
 }
+// Selection rows already expire after 30s and are keyed by generation/day/filters.
+// Their identity changes on refresh. Reuse only the order across pagination,
+// without extending the price freshness window or retaining old selections.
+type OrderedBudgetRow=CatalogSearchProjection & {block:number};
+let budgetSelectionOrder=new WeakMap<BudgetCountIndex['rows'],OrderedBudgetRow[]>();
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
  if(params.sort&&params.sort!=="updatedAt")return null;
  const selected=await readBudgetSelection(params);if(!selected)return null;
- const rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}}));
- sortCatalogSearchRows(rows,params);
+ let rows=budgetSelectionOrder.get(selected.rows);
+ if(!rows){
+  rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}})) as OrderedBudgetRow[];
+  sortCatalogSearchRows(rows,params);
+  budgetSelectionOrder.set(selected.rows,rows);
+ }
  const page=Math.max(1,Number(params.page||1));
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
  const visible=rows.slice((page-1)*pageSize,page*pageSize);

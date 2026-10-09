@@ -22,18 +22,23 @@ function eligible(offer:Partial<VehicleOffer>){return offer.market==='china' && 
 export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers:T[],options:{readOnly?:boolean}={}):Promise<T[]> {
  const candidates=offers.filter(eligible);if(!candidates.length)return offers;
  let index=await cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
+ let transient:Index['entries']={};
  const missing=candidates.filter(offer=>!index.entries[key(offer)]);
  if(missing.length){
   const [usd,cny]=await Promise.all([convertToRub(1,'USD'),convertToRub(1,'CNY')]);
   const added:Index['entries']={};
   for(const offer of missing){const conversion=chinaCnyConversion(Number(offer.sourcePrice),usd,cny);if(conversion)added[key(offer)]=conversion;}
   if(Object.keys(added).length){
-   if(options.readOnly)index={version:1,entries:{...added,...index.entries}};
+   // Search replays small batches against a large shared index. Keep only the
+   // new batch entries rather than copying every saved price for every batch.
+   // Persisted anchors still win; the shared snapshot is never mutated.
+   if(options.readOnly)transient=added;
    else {index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));cache.clear();}
   }
  }
  return offers.map(offer=>{
-  const conversion=eligible(offer)?index.entries[key(offer)]:undefined;
+  const priceKey=eligible(offer)?key(offer):undefined;
+  const conversion=priceKey ? index.entries[priceKey] || transient[priceKey] : undefined;
   return conversion?{...offer,sourceCurrency:'CNY',sourcePrice:conversion.sourcePriceCny,chinaPriceConversion:conversion}:offer;
  });
 }
