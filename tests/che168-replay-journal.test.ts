@@ -63,7 +63,7 @@ test('fresh runner resumes completed pages, preserves quarantine/removals and re
   };
   const options={request,now:()=>at,journalStorage:storage,artifactRunId:'123',checkpointEvery:10};
   await fs.cp(base,first,{recursive:true});
-  await assert.rejects(()=>recoverLegacyChe168Snapshot({...options,directory:first}),/auto_api_http_404/);
+  await assert.rejects(()=>recoverLegacyChe168Snapshot({...options,directory:first}),/auto_api_detail_404_unresolved/);
   assert.equal(JSON.parse(await fs.readFile(path.join(first,'report.json'),'utf8')).completed,false);
   const head=[...storage.data.values()].find(v=>v.value.chunks)?.value;assert.equal(head.cursor,23);
   assert.throws(()=>publishedIntakeCheckpoint(report,{market:'china',published:true,generationId:'test'}),/incomplete/);

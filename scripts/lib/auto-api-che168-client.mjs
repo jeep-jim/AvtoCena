@@ -2,15 +2,21 @@ const BASE = 'https://api1.auto-api.com/api/v2/che168/';
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 /** Fixed origin, no redirects, and no upstream bodies/URLs in errors or logs. */
-export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity}) {
+export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, deadline = Infinity, requestDelayMs = 0}) {
   apiKey = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (!apiKey || /\s/.test(apiKey)) throw Error('auto_api_key_missing_or_invalid');
+  if (!Number.isSafeInteger(requestDelayMs) || requestDelayMs < 0 || requestDelayMs > 60000) throw Error('auto_api_invalid_request_delay');
+  const pause = async ms => {
+    if (Date.now() + ms >= deadline) throw Error('auto_api_time_budget');
+    if (ms > 0) await sleep(ms);
+  };
   return async (endpoint, params = {}) => {
     if (!['offers', 'offer', 'changes', 'change_id'].includes(endpoint)) throw Error('auto_api_invalid_endpoint');
     const url = new URL(endpoint, BASE);
     for (const [key, value] of Object.entries(params)) url.searchParams.set(key, String(value));
     url.searchParams.set('api_key', apiKey);
     for (let attempt = 0; attempt < 4; attempt++) {
+      await pause(requestDelayMs);
       if (Date.now() >= deadline) throw Error('auto_api_time_budget');
       let response;
       try {
@@ -31,9 +37,13 @@ export function autoApiChe168Client({apiKey, fetchImpl = fetch, sleep = delay, d
       }
       // A refusal is final. Do not retry with alternate identities or routes.
       if ((response.status === 429 || response.status >= 500) && attempt < 3) {
-        const seconds = Number(response.headers.get('retry-after'));
+        const header = response.headers.get('retry-after');
+        const seconds = header && /^\d+(?:\.\d+)?$/.test(header) ? Number(header) : NaN;
+        const retryAfter = Number.isFinite(seconds) ? seconds * 1000 : header ? Date.parse(header) - Date.now() : 0;
         await response.body?.cancel();
-        await sleep(Math.min(30000, Math.max(1000 * 2 ** attempt, Number.isFinite(seconds) ? seconds * 1000 : 0)));
+        // Respect the provider's full Retry-After instead of retrying early at
+        // 30 seconds. Without a hint, allow a rate limit time to cool down.
+        await pause(Math.max((response.status === 429 ? 30000 : 1000) * 2 ** attempt, Number.isFinite(retryAfter) ? retryAfter : 0));
         continue;
       }
       await response.body?.cancel();
@@ -76,6 +86,21 @@ export function autoApiChe168Resume(saved, {yearFrom, now=Date.now(), forceSnaps
   return {cursor:row.cursor,snapshotStartedAt:row.snapshotStartedAt};
 }
 
+function verifiedChangePage(payload, cursor) {
+  if (!Array.isArray(payload?.result) || !payload.meta || payload.meta.cur_change_id !== cursor) throw Error('auto_api_invalid_changes');
+  if (!payload.result.length) return {items:[],next:null};
+  const next=payload.meta.next_change_id;
+  if (!Number.isSafeInteger(next) || next<=cursor) throw Error('auto_api_stalled_changes');
+  const items=payload.result.map(change=>{
+    if (!/^\d+$/.test(String(change?.inner_id || '')) || !['added','changed','removed'].includes(change?.change_type)
+      || !Number.isSafeInteger(change.id) || change.id<cursor || change.id>next
+      || !Number.isFinite(Date.parse(change.created_at))) throw Error('auto_api_invalid_change');
+    // Full detail is fetched separately; keep bounded lookahead metadata only.
+    return {id:change.id,inner_id:change.inner_id,change_type:change.change_type,created_at:change.created_at};
+  });
+  return {items,next};
+}
+
 /** Full bootstrap or delta replay. Only the caller can commit after publication. */
 export async function collectAutoApiChe168({request, yearFrom, resume=null, onOffer, onRemoval, onProgress = async()=>{}, now = ()=>new Date().toISOString()}) {
   const startedAt = now();
@@ -86,6 +111,24 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
   if (!Number.isSafeInteger(cursor) || cursor < 0) throw Error('auto_api_invalid_change_id');
   if (!Number.isFinite(Date.parse(snapshotStartedAt))) throw Error('auto_api_invalid_saved_cursor');
   const initialCursor=cursor;
+  const futurePages=new Map();
+  const readChanges=async at=>futurePages.get(at) || verifiedChangePage(await request('changes',{change_id:at}),at);
+  const confirmedLaterRemoval=async(change,at)=>{
+    for(let pages=0;pages<1000;pages++){
+      const page=await readChanges(at);
+      // No progress or cursor is committed for this speculative read. The
+      // normal loop must still process every intervening event in order.
+      if(futurePages.size>=1000&&!futurePages.has(at))throw Error('auto_api_detail_404_unresolved');
+      futurePages.set(at,page);
+      if((pages+1)%50===0)console.log(JSON.stringify({detail404RemovalLookup:true,pages:pages+1,workingCursor:cursor,lookupCursor:at}));
+      const removal=page.items.find(e=>String(e.inner_id)===String(change.inner_id) && e.change_type==='removed'
+        && e.id>change.id && Date.parse(e.created_at)>=Date.parse(change.created_at));
+      if(removal)return removal;
+      if(page.next===null)break;
+      at=page.next;
+    }
+    throw Error('auto_api_detail_404_unresolved');
+  };
   let pages = 0, rows = 0, changes = 0, page = resume ? null : 1;
   while (page !== null) {
     const parsed = autoApiPage(await request('offers', {page, year_from: yearFrom}), page);
@@ -96,16 +139,12 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
   // Replay from the captured date cursor to include writes during pagination.
   // /offer gives the current full listing, never promote a price-only delta.
   while (true) {
-    const payload = await request('changes', {change_id: cursor});
-    if (!Array.isArray(payload?.result) || !payload.meta || payload.meta.cur_change_id !== cursor) throw Error('auto_api_invalid_changes');
-    if (!payload.result.length) break;
-    const next = payload.meta.next_change_id;
-    if (!Number.isSafeInteger(next) || next <= cursor) throw Error('auto_api_stalled_changes');
+    const page=await readChanges(cursor);
+    futurePages.delete(cursor);
+    if (!page.items.length) break;
+    const next=page.next;
     const latest = new Map();
-    for (const change of payload.result) {
-      if (!/^\d+$/.test(String(change?.inner_id || '')) || !['added','changed','removed'].includes(change?.change_type)
-        || !Number.isSafeInteger(change.id) || change.id < cursor || change.id > next
-        || !Number.isFinite(Date.parse(change.created_at))) throw Error('auto_api_invalid_change');
+    for (const change of page.items) {
       const previous = latest.get(String(change.inner_id));
       if (!previous || previous.id < change.id) latest.set(String(change.inner_id), change);
     }
@@ -114,12 +153,20 @@ export async function collectAutoApiChe168({request, yearFrom, resume=null, onOf
         // Original event time protects a more recently observed active listing.
         await onRemoval(change, startedAt);
       } else {
-        const response = await request('offer', {inner_id: change.inner_id});
+        let response;
+        try { response=await request('offer', {inner_id: change.inner_id}); }
+        catch(error){
+          if(error?.message!=='auto_api_http_404')throw error;
+          const removal=await confirmedLaterRemoval(change,next);
+          await onRemoval(removal,startedAt);
+          console.log(JSON.stringify({detail404ResolvedByExplicitRemoval:true}));
+          continue;
+        }
         const row = autoApiChe168Detail(response,change.inner_id);
         await onOffer(row, now());
       }
     }
-    changes += payload.result.length; cursor = next;
+    changes += page.items.length; cursor = next;
     await onProgress({pages, rows, changes, cursor, phase:'changes'});
   }
   return {startedAt, completedAt: now(), pages, rows, changes, cursor, initialCursor, mode, snapshotStartedAt, yearFrom};

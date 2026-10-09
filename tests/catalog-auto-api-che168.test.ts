@@ -89,6 +89,18 @@ test('secret entry permits surrounding whitespace but rejects internal whitespac
  assert.deepEqual(await request('offers'),{ok:true});
  assert.throws(()=>autoApiChe168Client({apiKey:'private test key'}),/missing_or_invalid/);
 });
+test('paced recovery honors long Retry-After and never retries beyond its deadline',async()=>{
+ const waits:number[]=[];let calls=0;
+ const request=autoApiChe168Client({apiKey:'test-key',requestDelayMs:350,sleep:async(ms:number)=>{waits.push(ms);},fetchImpl:async()=>{
+  calls++;return calls===1?new Response('',{status:429,headers:{'Retry-After':'90'}}):Response.json({ok:true});
+ }});
+ assert.deepEqual(await request('changes',{change_id:10}),{ok:true});assert.deepEqual(waits,[350,90000,350]);
+ let boundedCalls=0;
+ const bounded=autoApiChe168Client({apiKey:'test-key',deadline:Date.now()+60000,sleep:async()=>{throw Error('must not sleep past deadline');},fetchImpl:async()=>{
+  boundedCalls++;return new Response('',{status:429,headers:{'Retry-After':'90'}});
+ }});
+ await assert.rejects(()=>bounded('changes'),{message:'auto_api_time_budget'});assert.equal(boundedCalls,1);
+});
 test('invalid JSON retries the same page without duplicate offers or skipping records',async()=>{
  const calls:string[]=[];const ids:string[]=[];const waits:number[]=[];let pageAttempts=0;
  const request=autoApiChe168Client({apiKey:'private-test-key',sleep:async(ms:number)=>{waits.push(ms);},fetchImpl:async(url:URL)=>{
@@ -162,6 +174,33 @@ test('price-only detail and non-advancing changes abort the snapshot',async()=>{
    if(endpoint==='changes')return {result:[{id:1,inner_id:'8',change_type:'changed',created_at:observedAt}],meta:{cur_change_id:1,next_change_id:invalidDetail?2:1}};
    return {new_price:123};
   }}),new RegExp(invalidDetail?'detail_identity_mismatch':'stalled_changes'));
+ }
+});
+
+test('404 resolves only through a later explicit same-ID removal without skipping intervening pages',async()=>{
+ const pages:number[]=[],progress:number[]=[],withdrawals:any[]=[],offers:any[]=[];
+ const event=(id:number,inner:string,type='changed')=>({id,inner_id:inner,change_type:type,created_at:observedAt});
+ const result=await collectAutoApiChe168({yearFrom:2020,resume:{cursor:10,snapshotStartedAt:observedAt},now:()=>observedAt,
+  request:async(endpoint:string,params:any)=>{
+   if(endpoint==='offer'){if(params.inner_id==='42')throw Error('auto_api_http_404');return fixture();}
+   assert.equal(endpoint,'changes');pages.push(params.change_id);
+   if(params.change_id===12)assert.deepEqual(progress,[],'lookahead never commits an unprocessed page');
+   return {result:params.change_id===10?[event(10,'42')]:params.change_id===11?[event(11,'50837332')]:params.change_id===12?[event(12,'42','removed')]:[],meta:{cur_change_id:params.change_id,next_change_id:params.change_id+1}};
+  },onOffer:async(row:any)=>{offers.push(row);},onRemoval:async(row:any)=>{withdrawals.push(row);},onProgress:async(p:any)=>{progress.push(p.cursor);}});
+ assert.deepEqual(pages,[10,11,12,13]);assert.deepEqual(progress,[11,12,13]);
+ assert.equal(offers.length,1);assert.equal(result.changes,3);assert.equal(result.cursor,13);
+ assert.equal(withdrawals.length,2);assert.ok(withdrawals.every(e=>e.inner_id==='42'&&e.id===12&&e.created_at===observedAt));
+});
+test('unexplained 404, foreign removal, invalid future metadata and lookahead bound fail closed',async()=>{
+ for(const mode of ['end','foreign','malformed','bound']){
+  let reads=0,commits=0,removals=0;
+  await assert.rejects(()=>collectAutoApiChe168({yearFrom:2020,resume:{cursor:10,snapshotStartedAt:observedAt},now:()=>observedAt,
+   request:async(endpoint:string,params:any)=>{
+    if(endpoint==='offer')throw Error('auto_api_http_404');
+    reads++;const c=params.change_id;
+    return {result:c===10?[{id:c,inner_id:'42',change_type:'changed',created_at:observedAt}]:mode==='bound'||mode==='foreign'&&c===11?[{id:c,inner_id:'99',change_type:'removed',created_at:observedAt}]:[],meta:{cur_change_id:mode==='malformed'&&c===11?0:c,next_change_id:c+1}};
+   },onOffer:async()=>{assert.fail();},onRemoval:async()=>{removals++;},onProgress:async()=>{commits++;}}),new RegExp(mode==='malformed'?'auto_api_invalid_changes':'auto_api_detail_404_unresolved'));
+  assert.equal(commits,0);assert.equal(removals,0);if(mode==='bound')assert.equal(reads,1001);
  }
 });
 

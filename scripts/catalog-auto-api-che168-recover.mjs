@@ -5,6 +5,6 @@ import {getJsonStorage} from '../apps/web/lib/data.ts';
 const journalStorage=getJsonStorage();
 if(journalStorage.driver!=='object')throw Error('auto_api_durable_storage_required');
 if(!/^\d+$/.test(process.env.CHE168_RECOVERY_ARTIFACT_RUN_ID||''))throw Error('auto_api_recovery_artifact_required');
-const request=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+120*60000});
+const request=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+120*60000,requestDelayMs:350});
 const report=await recoverLegacyChe168Snapshot({directory:path.join(process.env.CATALOG_INTAKE_INPUT_DIR||'catalog-intake-input','catalog-intake-china'),request,journalStorage,artifactRunId:process.env.CHE168_RECOVERY_ARTIFACT_RUN_ID});
-console.log(JSON.stringify({recovered:true,productionWrites:false,source:report.sources[0],recovery:report.recovery}));
+console.log(JSON.stringify({recovered:true,catalogPublished:false,durableReplay:true,source:report.sources[0],recovery:report.recovery}));
