@@ -4,6 +4,11 @@ import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {countCatalogOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
 import { readDataJson } from '../apps/web/lib/data.ts';
 import { readHomeCatalogSnapshot } from '../apps/web/lib/catalog/storage.ts';
+import {catalogPublicationStatus} from './lib/catalog-publication-status.mjs';
+const publicationStatus=await catalogPublicationStatus(getJsonStorage());
+console.log('PUBLICATION_STATUS',JSON.stringify(publicationStatus));
+// Avoid expensive full-catalog benchmarks while a publisher owns the lease.
+if(publicationStatus.writer.active)process.exit(0);
 // Aggregate-only diagnostics for ordinary filters; no listing payloads or credentials.
 const memory=()=>Object.fromEntries(Object.entries(process.memoryUsage()).map(([k,v])=>[k,Math.round(v/1048576)]));
 const probeStorage=getJsonStorage(),probeRead=probeStorage.readJsonWithMeta.bind(probeStorage);
