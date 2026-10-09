@@ -20,6 +20,7 @@ jobs:
       publish_matrix: ${{ steps.policy.outputs.publish_matrix }}
       reset_cursors: ${{ steps.policy.outputs.reset_cursors }}
       recover_paid_snapshot: ${{ steps.policy.outputs.recover_paid_snapshot }}
+      autohome_reuse_run_id: ${{ steps.policy.outputs.autohome_reuse_run_id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,6 +42,9 @@ jobs:
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = marker.reuseRunId || '';
+          const autohomeReuse = marker.autohomeReuseRunId || '';
+          if (autohomeReuse && (market !== 'china' || String(autohomeReuse) !== '37907216966' || reuse)) throw Error('invalid_autohome_reuse');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`autohome_reuse_run_id=${autohomeReuse}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`reset_cursors=${marker.resetCursors === true}\n`);
           if (reuse && !/^\d+$/.test(String(reuse))) throw Error('invalid_reuse_run_id');
           if (marker.recoverPaidSnapshot && (!reuse || market !== 'china')) throw Error('invalid_paid_snapshot_recovery');
@@ -110,7 +114,19 @@ jobs:
           if (!page.items.length) throw Error('auto_api_empty_preflight');
           console.log(JSON.stringify({provider:'auto_api_che168',access:'ok',sampleRows:page.items.length}));
           JS
+      - name: Restore the verified same-day Autohome collection
+        if: matrix.market == 'china' && needs.plan.outputs.autohome_reuse_run_id != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-intake-china
+          path: autohome-saved-intake
+          run-id: ${{ needs.plan.outputs.autohome_reuse_run_id }}
+          github-token: ${{ github.token }}
+      - name: Validate only saved Autohome observations before reuse
+        if: matrix.market == 'china' && needs.plan.outputs.autohome_reuse_run_id != ''
+        run: node --import tsx scripts/catalog-restore-autohome-intake.mjs
       - name: Collect listing, exact detail and technical tables
+        if: matrix.market != 'china' || needs.plan.outputs.autohome_reuse_run_id == ''
         env:
           # Domestic used cars now come from the paid feed. Continue collecting
           # the independent new-car source instead of silently retiring it.
