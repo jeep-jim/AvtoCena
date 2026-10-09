@@ -416,7 +416,7 @@ export function DealerEditor({
         {active&&<section className="dealer-editor-panel space-y-3" aria-label="Предпросмотр спецпредложения">
          <h2 className="font-bold">Так выглядит карточка</h2>
          {active.photos[0]?<img src={active.photos[0].url} alt={specialTitle(active)} className="aspect-[4/3] w-full rounded-xl object-cover"/>:<div className="dealer-offer-empty rounded-xl">Добавьте фото автомобиля</div>}
-         <span className="dw-badge">{offerMode==='stock'?`В наличии · ${active.condition==='used'?'С пробегом':'Новый'}`:`${active.condition==='used'?'С пробегом':'Новый'}${quote?.daysFrom?` от ${quote.daysFrom} дней`:' · Под заказ'}`}</span>
+         <span className="dw-badge">{offerMode==='stock'?`${active.year?`${active.year} · `:''}В наличии`:`${active.condition==='used'?'С пробегом':'Новый'}${quote?.daysFrom?` от ${quote.daysFrom} дней`:' · Под заказ'}`}</span>
          <h3 className="line-clamp-2 break-words text-xl font-black">{specialTitle(active)||'Название автомобиля'}</h3>
          <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,quote?.city].filter(Boolean).join(' · ')}</p>
          <p className="ac-price ac-price--down text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Цена не заполнена'}</p>
