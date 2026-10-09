@@ -1,12 +1,16 @@
 name: Prepare shared budget prices
 on:
   workflow_dispatch:
+  schedule:
+    # The calculation fingerprint changes at UTC midnight.
+    - cron: '11 0 * * *'
   push:
-    branches: [main, fix/shared-budget-prices-20261009]
-    paths: [apps/web/lib/catalog/shared-budget-prices.ts, apps/web/lib/catalog/budget-market-index.ts, scripts/catalog-budget-shared-warmup.mjs, .github/workflows/catalog-budget-shared-warmup.yml]
+    branches: [main, perf/feed-budget-preparation-20261010]
+    paths: [apps/web/lib/catalog/shared-budget-prices.ts, apps/web/lib/catalog/budget-market-index.ts, scripts/catalog-budget-shared-warmup.mjs, scripts/catalog-budget-runtime.mjs, .github/workflows/catalog-budget-shared-warmup.yml]
   workflow_run:
-    workflows: [Deploy to Yandex Cloud]
+    workflows: [Deploy to Yandex Cloud, Verify committed Che168 publication, Catalog refresh korea, Catalog refresh uae, Catalog refresh europe, Catalog refresh georgia, ProAuctions collect and publish, Catalog refresh green]
     types: [completed]
+    branches: [main]
 permissions:
   contents: read
 concurrency:
@@ -14,11 +18,12 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    # A deploy may fail in a postcheck after the release has gone live. Health,
+    # not the triggering commit or job conclusion, selects the calculator below.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' || (github.event.workflow_run.name == 'Deploy to Yandex Cloud' && github.event.workflow_run.conclusion == 'failure')
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     env:
-      AVTOCENA_RELEASE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
       YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
@@ -26,24 +31,44 @@ jobs:
       YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      NODE_OPTIONS: --max-old-space-size=12288
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          path: automation
       - uses: actions/setup-node@v4
-        with: {node-version: 24, cache: npm}
+        with:
+          node-version: 24
+      - name: Resolve the actual deployed calculator version
+        id: live
+        run: node automation/scripts/catalog-budget-runtime.mjs --resolve
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.live.outputs.release }}
+          path: runtime
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: runtime/package-lock.json
       - run: npm ci
-      - run: npm run typecheck
-      - name: Test invalidation, identity and budget boundaries
-        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-shared-budget-prices.test.ts tests/catalog-live-budget-replay.test.ts tests/catalog-budget-combined.test.ts
+        working-directory: runtime
+      - name: Test context guards and existing budget contracts offline
+        working-directory: runtime
+        run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test ../automation/tests/catalog-budget-runtime.test.ts tests/catalog-shared-budget-prices.test.ts tests/catalog-live-budget-replay.test.ts tests/catalog-budget-combined.test.ts
         env:
           JSON_STORAGE_DRIVER: local
           CATALOG_LIVE_RATE_DISABLED: 'true'
-      - name: Prepare selectors and validate cold-instance reuse without collecting sources
-        run: node --import tsx scripts/catalog-budget-shared-warmup.mjs
+      - name: Prepare shared prices on GitHub and verify cold-instance reuse
+        working-directory: runtime
+        env:
+          AVTOCENA_RELEASE_SHA: ${{ steps.live.outputs.release }}
+        run: node --import tsx ../automation/scripts/catalog-budget-runtime.mjs .
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-budget-shared-report
-          path: catalog-budget-shared-report.json
+          path: |
+            runtime/catalog-budget-shared-report.json
+            runtime/catalog-budget-runtime-report.json
           retention-days: 7
