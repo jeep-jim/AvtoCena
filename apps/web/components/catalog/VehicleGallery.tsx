@@ -4,7 +4,7 @@ import {offerImages} from '@/lib/catalog/offer-images';
 import { PhotoBrowser } from "./PhotoBrowser";
 import type { FavoriteSnapshot } from "./FavoriteToggle";
 import { retryProtectedPhoto } from "./protected-photo-retry";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { AuctionSheetHelp } from "./AuctionSheetHelp";
 import styles from "./VehicleGallery.module.css";
@@ -14,7 +14,7 @@ function dominantWheelDelta(event: WheelEvent) {
   return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
 }
 
-export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot }: { images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
+export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, snapshot, editor }: { editor?: ReactNode; images: string[]; title: string; auctionSheetUrls?: string[]; offerId?: string; snapshot?: FavoriteSnapshot }) {
   const cleanImages = offerImages(images);
   const [activeIndex, setActiveIndex] = useState(0);
   const [browserOpen, setBrowserOpen] = useState(false);
@@ -282,6 +282,7 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
     <>
       <div className="min-w-0 max-w-full overflow-hidden">
         <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3 xl:block" : ""}`}>
+          <div className="relative min-w-0">
           <button
             ref={mainImageButton}
             type="button"
@@ -299,6 +300,8 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
               {activeIndex + 1} / {cleanImages.length}
             </div>
           </button>
+          {editor}
+          </div>
 
           {cleanImages.length > 1 ? (
             <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex xl:hidden">

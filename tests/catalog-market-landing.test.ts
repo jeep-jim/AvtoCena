@@ -11,6 +11,7 @@ const rows=Array.from({length:220},(_,i)=>({id:`car-${i}`,market:'korea',make:i%
 function fixture(t:any,landing:any) {
  const reads:string[]=[];
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog-editorial/current.json')return {found:false,value:{revision:'0',entries:{}}};
   reads.push(file);
   if(file==='markets/markets.json')return {found:true,value:[]};
   if(file==='catalog/manifest.json')return {found:true,value:{generationId:'test',markets:{korea:{count:rows.length}}}};

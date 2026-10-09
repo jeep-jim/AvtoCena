@@ -24,14 +24,14 @@ function DesktopScrollableRail({children,expanded=false}:{children:ReactNode;exp
   }
   return <div className="ac-special-rail-frame relative mt-4">
     <div ref={rail} className={expanded?"grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-3 [&>a]:w-full":"ac-special-rail-track ac-hide-scrollbar -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 pb-3 md:mr-0 md:flex md:gap-4 md:pr-0"}>{children}</div>
-    {!expanded && ([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-red-500 shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-500 lg:flex ${direction===-1?"left-0":"right-0"}`}>
+    {!expanded && ([-1,1] as const).map(direction=>(direction===-1?edges.left:edges.right)&&<button key={direction} type="button" onClick={()=>move(direction)} aria-label={direction===-1?"Предыдущие объявления":"Следующие объявления"} className={`absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)] text-[var(--ac-text)] shadow-md hover:bg-[var(--ac-surface-2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-current lg:flex ${direction===-1?"left-0":"right-0"}`}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={direction===-1?"m14 5-7 7 7 7":"m10 5 7 7-7 7"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
     </button>)}
   </div>;
 }
 export type SpecialRailItem = {
   id: string;
-  dealer?: {id:string;name:string;logoLight?:string;logoDark?:string};
+  dealer?: {id:string;name:string;href?:string;logoLight?:string;logoDark?:string};
   href: string;
   image: string;
   title: string;
@@ -78,7 +78,7 @@ export function SpecialRail({
           <Link
             key={o.href}
             href={o.href}
-            className="w-full min-w-0 shrink-0 overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] md:w-56"
+            className="ac-special-card w-full min-w-0 shrink-0 overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] md:w-56"
           >
             <img
               src={o.image}
@@ -86,8 +86,8 @@ export function SpecialRail({
               loading="lazy"
               className="h-24 w-full object-cover sm:h-40 md:h-auto md:aspect-[16/10]"
             />
-            <div className="space-y-1 p-3">
-              <p className="text-xs font-bold text-emerald-600">{kind==="stock" ? `В наличии · ${o.condition==="used"?"С пробегом":"Новый"}` : `${o.condition==="used"?"С пробегом":"Новый"}${o.daysFrom?` от ${o.daysFrom} дней`:" · Под заказ"}`}</p>
+            <div className="ac-special-card-body space-y-1 p-3">
+              <p className="ac-special-card-status text-xs font-bold text-emerald-600">{kind==="stock" ? `В наличии · ${o.condition==="used"?"С пробегом":"Новый"}` : `${o.condition==="used"?"С пробегом":"Новый"}${o.daysFrom?` от ${o.daysFrom} дней`:" · Под заказ"}`}</p>
               <h3 className="line-clamp-2 break-words text-sm font-black">{o.title}</h3>
               <p className="ac-price ac-price--down text-base font-black">
                 {o.price === null
@@ -99,6 +99,6 @@ export function SpecialRail({
           </Link>
         ))}
       </DesktopScrollableRail>
-    </section>:null;})}</div>{allKind&&<PublicSheet title={sheetName} headerContent={<span className="flex min-w-0 items-center gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--ac-surface-2)] [&_img]:h-full [&_img]:w-full [&_img]:object-contain"><DealerLogo logoLight={singleDealer?dealer.logoLight:undefined} logoDark={singleDealer?dealer.logoDark:undefined} name={sheetName}/></span><span className="truncate">{sheetName}</span></span>} onClose={()=>setAllKind(null)} maxWidth={1100}><div className="px-5 pb-5"><SpecialRail heading={heading} items={items} kinds={[allKind]} expanded/></div></PublicSheet>}</>
+    </section>:null;})}</div>{allKind&&<PublicSheet title={sheetName} headerContent={<Link href={singleDealer?(dealer.href || `/dealers/${encodeURIComponent(dealer.id)}`):"/dealers"} className="flex w-full min-w-0 items-center gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--ac-surface-2)] [&_img]:h-full [&_img]:w-full [&_img]:object-contain"><DealerLogo logoLight={singleDealer?dealer.logoLight:undefined} logoDark={singleDealer?dealer.logoDark:undefined} name={sheetName}/></span><span className="truncate">{sheetName}</span></Link>} onClose={()=>setAllKind(null)} maxWidth={1100} className="ac-special-offers-sheet"><div className="px-5 pb-5"><SpecialRail heading={heading} items={items} kinds={[allKind]} expanded/></div></PublicSheet>}</>
   );
 }

@@ -108,7 +108,8 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
 
   return <>
     <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
-      {variant === "desktop" || showHeading ? <div className={variant === "desktop" ? "mb-3 flex items-baseline gap-3" : "mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"}><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в Рублях</span></div> : null}
+      {variant === "desktop" || showHeading ? <div className={variant === "desktop" ? "mb-3 flex items-baseline gap-3" : "mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"}><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в рублях</span></div> : null}
+      {variant === "desktop" && <p className="mb-3 text-sm text-[var(--ac-muted)]">Пересчитываем по актуальному курсу валют и переводим цену продавца в рубли.</p>}
       <div
         className={rail}
         style={{ WebkitOverflowScrolling: "touch" }}

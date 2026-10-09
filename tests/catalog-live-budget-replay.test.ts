@@ -22,6 +22,7 @@ test('live budget moves offers across both bounds after FX changes and shares ex
   else if(key.endsWith('/budget-count-v3.json'))value=index;
   else if(key.includes('/budget-prices-v3/'))value=chunks.get(key.split('/indexes/')[1]);
   else if(key.includes('/budget-cards-v3/'))value={generationId,items:rows};
+  else if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
   else assert.fail('unexpected storage read: '+key);
   return {found:true,value:value as T};
  };

@@ -559,6 +559,7 @@ function collapseAdjacentRepeatedPhrases(value: string) {
 }
 
 export function catalogOfferTitle(offer: any) {
+  if(typeof offer?.editorialTitle === "string" && offer.editorialTitle.trim())return offer.editorialTitle.trim().slice(0,200);
   const china = isChinaOffer(offer);
   const market = safeCatalogText(offer?.market).toLowerCase();
   const make = china ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market);

@@ -41,11 +41,11 @@ test("similar offers stream after the primary offer instead of blocking it", () 
 
 test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /unstable_cache\(/);
-  assert.match(data, /catalog-offer-page-v2/);
+  assert.match(data, /catalog-offer-page-unedited-v3/);
   assert.match(data, /revalidate: 60/);
   assert.match(data, /async function resilientOfferLookup/);
-  assert.match(data, /return getOffer\(id\)/);
-  assert.match(data, /cache\(\(id: string\) => resilientOfferLookup\(id\)\)/);
+  assert.match(data, /return getOfferWithoutEditorial\(id\)/);
+  assert.match(data, /cache\(async \(id: string\) => \{[\s\S]*resilientOfferLookup\(id\),readCatalogEditorial\(\)/);
   assert.match(data, /getOfferForPage\(id\)/);
   assert.match(layout, /getOfferForPage\(id\)/);
 });
@@ -159,7 +159,7 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /return offer \? \(isConfirmedSourceWithdrawn\(offer\) \? null : offer\) : readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
   assert.match(page, /decodeURIComponent\(routeId\)/);
-  assert.match(data, /catalog-offer-page-v2/);
+  assert.match(data, /catalog-offer-page-unedited-v3/);
 });
 
 test("offer actions render in stable page slots without hydration portals", () => {

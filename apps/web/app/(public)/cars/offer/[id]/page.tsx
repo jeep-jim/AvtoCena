@@ -1,3 +1,7 @@
+import {getOfferFromCurrentShard as getEditorialSourceOffer} from "@/lib/catalog/storage";
+import {CatalogEditorialEditor} from "@/components/catalog/CatalogEditorialEditor";
+import {canEditCatalog} from "@/lib/catalog/editorial-access";
+import {readCatalogEditorial,applyCatalogEditorial} from "@/lib/catalog/editorial";
 import {commercialParameters} from "@/lib/catalog/commercial-parameters";
 import {decodeShareDraft} from '@/lib/catalog/offer-share';
 import {SpecTile,type SpecItem} from "@/components/catalog/OfferSpecTile";
@@ -215,7 +219,7 @@ function OfferPriceBreakdown({ offer, powerInfo }: { offer: any; powerInfo: Recy
   </details>;
 }
 
-async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string }> }) {
+async function OfferPageContent({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string; modificationId?: string; direct?: string; calculation?:string;estimate?:string;preview?:string;dealer?:string;edit?:string }> }) {
   const { id: routeId } = await params;
   if (parseSpecialId(offerRouteId(routeId))) return <SpecialOfferPage id={offerRouteId(routeId)} initialCity={(await searchParams)?.estimate ? decodeShareDraft((await searchParams)!.estimate!)?.deliveryCity || "" : undefined} previewRequested={(await searchParams)?.preview === "1"}/>;
   let id = offerRouteId(routeId);
@@ -233,7 +237,12 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
   // markets keep the immutable detail record first because it retains exact
   // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
   // which can be absent from a compact current shard.
-  const storedOffer = await getOfferDetailRecord(id);
+  let storedOffer = await getOfferDetailRecord(id);
+  const editorialPreview = query.edit === "1" && canEditCatalog(await getCurrentUser());
+  if(!storedOffer && editorialPreview){
+    const source=await getEditorialSourceOffer(id);
+    if(source)storedOffer=applyCatalogEditorial(source,await readCatalogEditorial());
+  }
   const sourceHybridDraft = storedOffer ? proAuctionsHybridDraft(storedOffer) : {};
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
@@ -374,7 +383,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
             <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black normal-case tracking-normal text-[var(--ac-muted)] md:text-xs"><Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}</nav>
             <div className="relative mt-2 min-w-0"><h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1></div>
           </header>
-          <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
+          <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery editor={canEditCatalog(currentUser)?<CatalogEditorialEditor offerId={o.id} originalTitle={o.title} initial={(await readCatalogEditorial()).entries[o.id]||null}/>:undefined} images={o.images} title={o.title} offerId={o.id} snapshot={snapshot} auctionSheetUrls={catalogAuctionSheetUrls(storedOffer)} /></div>
           <OfferSpecificationsDisclosure groups={specificationGroups} title={o.title} mode="desktop" sourceUrl={sourceUrl} headerAside={auctionStatus || updatedStatus} />
           <OfferDesktopActions position="below" offerId={o.id} snapshot={snapshot} />
           {!selectionRequired && !sellerPricing ? <OfferCreditCalculator /> : null}
@@ -383,6 +392,7 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
 
         <StickyOfferColumn>
           {auctionStatus ? <div className="mb-3 xl:hidden">{auctionStatus}</div> : null}
+          <div id="offer-parameters" className="scroll-mt-24"/>
           <InlineOfferParameters initialCurrencyRate={raw.calculationSnapshot?.currencyRate} localCitySelection={Boolean(currentUser)} initialScenario={directScenario} copyOffer={canCopyOffer(currentUser) ? {title:o.title,mileageKm:o.mileageKm} : undefined} priceIdentity={{id:offer.id,sourceId:offer.sourceId,offerType:offer.offerType,market:offer.market,auctionGrade:offer.auctionGrade}} afterPrice={<OfferMobileActions offerId={o.id} snapshot={snapshot} />} originalBreakdown={!selectionRequired && visibleRub > 0 ? <div className="ac-original-calculation mt-4"><OfferPriceBreakdown offer={o} powerInfo={recyclingPowerInfo(raw)} /></div> : null} canSave={isCrmRole(currentUser?.role)} savedCalculation={savedCalculation ? {version:savedCalculation.version,draft:savedCalculation.draft,calculation:savedCalculation.calculation,savedAt:isCrmRole(currentUser?.role) ? savedCalculation.savedAt : undefined,savedByName} : null} deliveryMarket={offer.market} exportWarning={japanRestrictionDescription(o.japanExportRestriction)} sourcePriceOnly={sellerPricing || (selectionRequired && !selectedModification)} autoCalculate={sellerPricing || (selectionRequired && !selectedModification)} isPickup={commercialParameters(offer).isPickup} researchContext={[offer.make,offer.model,offer.trim,offer.market].filter(Boolean).join(" ")} showCommercial={commercialParameters(offer).showCommercial} key={offer.id} offerId={offer.id} reportedVolume={proAuctionsReportedVolume(offer)} initial={offerParameterDraft(offer,raw)} price={sellerPricing ? <SellerPrice hideJapanBadges offer={{...offer, japanExportRestriction:o.japanExportRestriction}} /> : selectionRequired
             ? <div className="ac-offer-price-panel rounded-[1.35rem] bg-[var(--ac-surface-2)] p-5"><p className="text-xs font-bold normal-case">Цена продавца</p><p className={`ac-price mt-2 text-3xl font-black ${electrified ? "ac-price--electrified" : ""}`}>{Number(offer.sourcePrice).toLocaleString("ru-RU")} {offer.sourceCurrency}</p><p className="mt-2 text-xs text-[var(--ac-muted)]">Без доставки и платежей. Уточните параметры ниже для расчёта.</p></div>
             : japanAuction
