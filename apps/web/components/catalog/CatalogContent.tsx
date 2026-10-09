@@ -154,7 +154,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
   const hasCatalogContext = Boolean(selectedMarket || selectedMake || selectedModel);
   const breadcrumbItems: Array<{ label: string; href: string }> = [
     { label: "Главная", href: "/" },
-    { label: hasCatalogContext ? "Каталог" : "Каталог автомобилей", href: "/cars" },
+    { label: hasCatalogContext ? "Каталог" : embedded ? "Авто под заказ" : "Каталог автомобилей", href: "/cars" },
   ];
   if (selectedMarket) breadcrumbItems.push({ label: selectedMarketLabel, href: catalogBreadcrumbHref({ market: selectedMarket }) });
   if (selectedMake) breadcrumbItems.push({ label: selectedMake, href: catalogBreadcrumbHref({ market: selectedMarket, make: selectedMake }) });
@@ -183,7 +183,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
             {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
           </span>)}
         </nav>
-        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : "Каталог автомобилей"}</h1>
+        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>
       <p className="ac-catalog-result-count mt-3 flex items-center gap-2 text-sm text-[var(--ac-muted)]" role="status" aria-live="polite" aria-atomic="true" data-catalog-result-count={total}>
