@@ -10,3 +10,14 @@ export function compareCatalogDisplayOrder(a:any,b:any){
  if(catalogDisplayGroup(a)===2)return catalogDisplayPrice(a)-catalogDisplayPrice(b);
  return Number(catalogPowerBand(b)==='low')-Number(catalogPowerBand(a)==='low');
 }
+
+/** One sort only: rows may be repriced between sorts; never retain keys globally. */
+export function catalogDisplayOrderComparator(){
+ const keys=new WeakMap<object,{price:number;group:number;low:number}>();
+ const key=(row:any)=>{
+  let value=keys.get(row);
+  if(!value){const price=catalogDisplayPrice(row);value={price,group:price>CATALOG_PREFERRED_PRICE_RUB?2:price>0?0:1,low:Number(catalogPowerBand(row)==='low')};keys.set(row,value);}
+  return value;
+ };
+ return (a:any,b:any)=>{const left=key(a),right=key(b);return left.group-right.group || (left.group===2?left.price-right.price:right.low-left.low);};
+}
