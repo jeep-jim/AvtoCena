@@ -1,8 +1,9 @@
 {
-  "operation": "che168-publish-suitable-inventory-20261009",
+  "operation": "che168-heavy-scope-publication-20261009",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reason": "Owner approved per-row exclusion of invalid model/year. Resume archived CSV and durable change journal; publish eligible China inventory through existing age, gross-weight, translation and calculation rules."
+  "reason": "Publish suitable paid feed with preserved truck/bus body identity and gross-weight exclusion. Reuse verified same-day Autohome artifact to avoid repeating its independent 30-minute collection.",
+  "autohomeReuseRunId": "37907216966"
 }

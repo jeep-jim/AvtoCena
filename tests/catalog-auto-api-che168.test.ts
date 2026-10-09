@@ -289,3 +289,23 @@ test('verified full snapshot interrupted by flat detail replay recovers without 
   assert.ok(calls.every(x=>['changes','offer'].includes(x)));
  }finally{await fs.rm(dir,{recursive:true,force:true});}
 });
+
+
+test('paid truck and bus body labels survive normalization and enforce 3500kg gross boundary',()=>{
+ for(const body of ['грузовик','truck','货车','轻卡','автобус','bus','客车']){
+  const r=fixture();r.data.body_type=body;
+  const mass={name:'最大允许总质量(kg)',value:'3501'};
+  r.data.extra.configuration.paramtypeitems.push({name:'基本参数',paramitems:[mass]});
+  assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),true,body);
+  mass.value='3500';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),false,body);
+  mass.name='整备质量(kg)';mass.value='4000';assert.equal(catalogHeavyVehicleExcluded(normalizeAutoApiChe168(r)),false,body);
+ }
+});
+
+test('legacy replay uses only bound named body fields for heavy-vehicle exclusion',()=>{
+ const r=fixture();
+ r.data.extra.configuration.paramtypeitems.push({name:'基本参数',paramitems:[{name:'级别',value:'轻卡'},{name:'最大允许总质量(kg)',value:'7500'}]});
+ const o=normalizeAutoApiChe168(r)!;
+ assert.equal(o.bodyType,undefined);assert.equal(catalogHeavyVehicleExcluded(o),true);
+ o.operational!.sourceSpecifications!.sourceOfferId='foreign';assert.equal(catalogHeavyVehicleExcluded(o),false);
+});

@@ -285,6 +285,8 @@ const bodyNames: Record<string, string> = {
   minivan: "Минивэн",
   mpv: "Минивэн",
   van: "Фургон",
+  truck: "Грузовик",
+  bus: "Автобус",
   pickup: "Пикап",
 };
 

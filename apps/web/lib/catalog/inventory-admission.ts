@@ -40,10 +40,17 @@ export function catalogGrossVehicleWeightKg(offer:any):number|undefined {
 }
 /** GVWR is the permitted loaded mass; curb weight is never a substitute. */
 export function catalogHeavyVehicleExcluded(offer:any){
- const text=[offer.make,offer.model,offer.trim,offer.bodyType].join(' ');
+ const snapshot=offer.operational?.sourceSpecifications;
+ // Legacy paid replay rows may predate body normalization. Only use named,
+ // listing-bound body/class fields, never menus or unrelated raw prose.
+ const boundBody=snapshot&&snapshot.sourceId===offer.sourceId&&snapshot.sourceOfferId===offer.sourceOfferId
+  ?(snapshot.groups||[]).flatMap((group:any)=>(group.items||[])
+    .filter((item:any)=>/^(?:级别|车身结构|车辆类型|тип кузова|класс автомобиля|body type|vehicle type)$/i.test(String(item.name||'').trim()))
+    .map((item:any)=>String(item.value||''))).join(' '):'';
+ const text=[offer.make,offer.model,offer.trim,offer.bodyType,boundBody].join(' ');
  if(/forklift|excavator|bulldozer|tractor|machinery|погрузчик|экскаватор|трактор|工程机械/i.test(text))return true;
  const category=String(offer.vehicleCategory||'').toUpperCase();
- const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia|pick[ -]?up)\b|пикап|皮卡|грузов|автобус|货车|卡车|客车|巴士/i.test(text)||/^N[123]|^M[23]/.test(category);
+ const commercial=/\b(?:truck|lorry|bus|minibus|coach|canter|fighter|dutro|forward|giga|elf|profia|pick[ -]?up)\b|пикап|皮卡|грузов|автобус|货车|卡车|轻卡|微卡|客车|巴士|轻客/i.test(text)||/^N[123]|^M[23]/.test(category);
  const mass=Number(catalogGrossVehicleWeightKg(offer));
  if(/^(?:N[23]|M3)G?$/.test(category))return true;
  return commercial&&Number.isFinite(mass)&&mass>3500;

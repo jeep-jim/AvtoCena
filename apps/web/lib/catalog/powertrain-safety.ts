@@ -53,6 +53,8 @@ function drive(value: unknown) {
 function body(value: unknown) {
   const v=text(value); if(!v) return undefined;
   if (/pickup|pick-up|пикап|皮卡/.test(v)) return "pickup";
+  if (/\b(?:truck|lorry)\b|грузов|货车|卡车|轻卡|微卡/.test(v)) return "truck";
+  if (/\b(?:bus|minibus|coach)\b|автобус|客车|巴士|轻客/.test(v)) return "bus";
   if (/minivan|\bmpv\b|минивэн|미니밴/.test(v)) return "minivan";
   if (/panel van|cargo van|commercial van|^van$|фургон/.test(v)) return "van";
   if (/convertible|cabrio|roadster|кабриолет/.test(v)) return "convertible";
