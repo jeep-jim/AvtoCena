@@ -33,8 +33,11 @@ jobs:
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           import { catalogRefreshDue } from './scripts/lib/catalog-refresh-schedule.mjs';
-          const run = ['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue());
           const market = process.env.TARGET_MARKET;
+          const policy = JSON.parse(fs.readFileSync('data/catalog/refresh-policy-v1.json','utf8'));
+          const paused = Boolean(policy.pausedMarkets?.[market]);
+          const run = !paused && (['push','workflow_dispatch'].includes(process.env.EVENT_NAME) || (process.env.EVENT_NAME === 'schedule' && catalogRefreshDue()));
+          if (paused) console.log(`Market refresh paused: ${market}: ${policy.pausedMarkets[market]}`);
           const marker = process.env.EVENT_NAME === 'push' ? JSON.parse(fs.readFileSync(`.github/market-runs/${market}-refresh.json`,'utf8')) : {};
           if (!['china','korea','uae','georgia','europe'].includes(market)) throw Error('invalid_market');
           const reuse = marker.reuseRunId || '';

@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-29",
+  "updatedAt": "2026-10-09",
+  "pausedMarkets": { "china": "Ожидаем обещанный поставщиком полный файл; не запускать сбор и восстановление до проверки выгрузки." },
   "nonJapan": { "retentionDays": 14, "refreshIntervalDays": 3, "cleanupIntervalDays": 7 },
   "japan": { "retentionDays": 30, "refreshIntervalDays": 14, "cleanupIntervalDays": 30 },
   "activeListingExpiryBasis": "last_confirmed_source_observation",
