@@ -14,7 +14,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  // collection is partial. Resume only its committed budget cursor, never
  // rerun the failed publication or advance past observations not published.
  const budgetStops=new Set(['budget','time_budget','budget_mid_page','disk_budget']);
- const sourceRows=journal?.sources||[];
+ const sourceRows=(journal?.sources||[]).filter(source=>source.required!==false);
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
  // The intake checkpoint is written only after the public manifest commit.
@@ -86,7 +86,7 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
   const decision=proAuctionsSchedule(japan,now,japanRefreshIntervalDays);
   return {action:decision.due?'dispatch':'none',reason:decision.reason};
  }
- const failedSources=(journal?.sources||[]).filter(s=>['list_failed','blocked','blocked_detail','adapter_missing','cursor_loop','repeated_page'].includes(s.stopReason));
+ const failedSources=sourceRows.filter(s=>['list_failed','blocked','blocked_detail','adapter_missing','cursor_loop','repeated_page'].includes(s.stopReason));
  if(failedSources.length){
   const retryable=failedSources.every(s=>s.stopReason==='list_failed'&&(s.errors||[]).some(e=>transientOperationFailure(e.message)));
   if(!retryable)return {action:'none',reason:'source_failure_requires_attention',sources:failedSources.map(s=>s.sourceId)};

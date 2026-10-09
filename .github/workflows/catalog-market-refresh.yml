@@ -126,7 +126,7 @@ jobs:
         if: matrix.market == 'china' && needs.plan.outputs.autohome_reuse_run_id != ''
         run: node --import tsx scripts/catalog-restore-autohome-intake.mjs
       - name: Collect listing, exact detail and technical tables
-        if: matrix.market != 'china' || needs.plan.outputs.autohome_reuse_run_id == ''
+        if: matrix.market != 'china'
         env:
           # Domestic used cars now come from the paid feed. Continue collecting
           # the independent new-car source instead of silently retiring it.

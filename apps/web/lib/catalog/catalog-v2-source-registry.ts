@@ -85,8 +85,9 @@ function assertExactAllowedSources() {
         continue;
       }
       if (source.canonicalUrl !== required.canonicalUrl) failures.push(`${market}:${required.sourceId}:url_changed`);
-      if (!source.required || !source.anchor) failures.push(`${market}:${required.sourceId}:not_required`);
-      if (!sourceIsCollectible(source)) failures.push(`${market}:${required.sourceId}:excluded_from_collection`);
+      if (required.required && (!source.required || !source.anchor)) failures.push(`${market}:${required.sourceId}:not_required`);
+      if (required.required && !sourceIsCollectible(source)) failures.push(`${market}:${required.sourceId}:excluded_from_collection`);
+      if (!required.required && sourceIsCollectible(source)) failures.push(`${market}:${required.sourceId}:legacy_source_collected`);
     }
   }
 

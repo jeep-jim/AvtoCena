@@ -71,8 +71,9 @@ test("every approved source is required, anchored and included in collection", (
   }
 });
 
-test("Autohome stays enabled while retired JP Center cannot reenter Japan", () => {
-  assert.ok(catalogV2SourceIds("china").includes("autohome_new_china_open"));
+test("Autohome remains allowed for retained rows but paid Che168 is the only required China collector", () => {
+  assert.deepEqual(catalogV2SourceIds("china"), ["autohome_used_china_open"]);
+  assert.equal(isAllowedCatalogSourceId("china", "autohome_new_china_open"), true);
   assert.deepEqual(catalogV2SourceIds("japan"), []);
   assert.notEqual(
     CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.sourceId === "autohome_new_china_open")?.role,
