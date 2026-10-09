@@ -10,8 +10,15 @@ test('AutoHome model configurations retain seats, engine, fuel and trim in disti
  const b=chinaCardVariant({...offer,trim:'2026款 1.6L 舒适型 5座厢车'});
  assert.equal(a,'1.6L Комфорт 2 места фургон');assert.equal(b,'1.6L Комфорт 5 мест фургон');assert.notEqual(a,b);
  assert.match(chinaCardVariant({...offer,trim:'2026款 1.6L CNG 豪华型 5座厢车'}),/CNG Люкс 5 мест/);
- assert.equal(chinaCardVariant({market:'china',trim:'2026 1.5L CVT Luxury'}),'1.5L CVT Luxury');
+ assert.equal(chinaCardVariant({market:'china',trim:'2026 1.5L CVT Luxury'}),'1.5L CVT Люкс');
  assert.equal(chinaCardVariant({market:'japan',trim:'2026 something'}),'');
+});
+
+test('paid China English trim labels translate without changing engine and model codes',()=>{
+ assert.equal(chinaCardVariant({market:'china',trim:'2024 1.5T DCT Comfort Type 5-seater'}),'1.5T DCT Комфорт 5 мест');
+ assert.equal(chinaCardVariant({market:'china',trim:'2021 1.6L XL CVT Delight Edition'}),'1.6L XL CVT Делайт');
+ assert.equal(chinaCardVariant({market:'china',trim:'2023 1.6L CVT Intelligent Drive Edition'}),'1.6L CVT Интеллектуальное вождение');
+ assert.equal(chinaCardVariant({market:'china',trim:'2025 2.0T Comfortline GT 7-seater'}),'2.0T Comfortline GT 7 мест');
 });
 
 test('JAC branded trims and BAW commercial equipment grades stay distinct',()=>{
