@@ -1,3 +1,5 @@
+import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
+import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
 import {compareCatalogDisplayOrder,catalogDisplayOrderComparator} from './display-order';
 import {currentDepositCosts} from "./deposit-cost-projection";
@@ -561,10 +563,12 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  resetSharedBudgetPriceCache();
   budgetSelectionOrder=new WeakMap();
   marketLandingCache.clear();
   filteredSearchCache.clear();
   catalogCountCache.clear();
+  budgetMarketDirectoryCache.clear();
   budgetIndexCache.clear();
   liveBudgetBlockCache.clear();
   liveBudgetReplayCache.clear();
@@ -1786,6 +1790,8 @@ async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProj
  // Versioned paths are append-only: never silently reuse an older immutable schema.
  // Readiness is published last. Missing/incomplete generations keep the original exact search.
  await writeJsonAtomic(generationPath(generationId,"indexes/budget-count-v3.json"),index);
+ const committed=await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null);
+ if(committed?.generationId===generationId)await writeBudgetMarketSelectors(committed);
  return index;
 }
 // Price selection must replay the same FX, customs anniversaries and business
@@ -1812,7 +1818,8 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
 }
 const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
 async function currentBudgetReplay(index:BudgetCountIndex,market:string){
- return liveBudgetReplayCache.get(`${index.generationId}:${market}`,async()=>{
+ const fingerprint=await budgetPricingFingerprint(market);
+ const load=async()=>{
   const source=index.rows.filter(row=>row[0]===market);
   const originals=new Map(source.map(row=>[row[5].id,row]));
   const paths=index.pricingChunks?.[market];
@@ -1838,7 +1845,15 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string){
    }
   }
   return refreshed;
- });
+ };
+ if(fingerprint){
+  try{return await sharedBudgetPrices(index,market,fingerprint,load);}
+  catch(error){
+   if(!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
+   return load(); // Do not retain a retry under a version already known to have changed.
+  }
+ }
+ return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}`,load);
 }
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
@@ -1850,7 +1865,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
  return filteredBudgetSelectionCache.get(key,async()=>{
-  const index=await budgetIndexCache.get(manifest.generationId,async()=>await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(manifest.generationId,"budget-count-v1.json",null)).catch(()=>null);
+  const index=await readBudgetCountIndex(manifest.generationId,params.market).catch(()=>null);
   if(!index || index.inventoryPolicyVersion!==1 || ![1,2,3].includes(index.version)||index.generationId!==manifest.generationId || (!hasBudget && !Array.isArray(index.otherRows)))return null;
   const cardVersion=index.version;
   const {japanSearchQuotes,attachJapanSearchValues}=await import("./japan-delivered-preview");
@@ -1936,7 +1951,51 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:1,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:7,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:2});
+const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+async function readBudgetCountIndex(generationId:string,market?:string){
+ if(market && MARKETS.includes(market as CatalogMarket)){
+  const directory=await budgetMarketDirectoryCache.get(generationId,()=>readIndex<BudgetMarketDirectory|null>(generationId,'budget-markets-v1/ready.json',null)).catch(()=>null);
+  if(directory?.version===1 && directory.generationId===generationId && directory.markets?.[market]){
+   const part=await budgetIndexCache.get(`${generationId}:${market}`,async()=>{
+    const candidate=await readIndex<BudgetCountIndex|null>(generationId,`budget-markets-v1/${market}.json`,null);
+    return validBudgetMarketIndex(directory,market,candidate)?candidate:null;
+   }).catch(()=>null);
+   if(part)return part;
+  }
+ }
+ return budgetIndexCache.get(generationId,async()=>await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v1.json",null));
+}
+async function writeBudgetMarketSelectors(index:BudgetCountIndex){
+ const {directory,parts}=splitBudgetMarketIndex(index);
+ for(const [market,part] of parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v1/${market}.json`),part);
+ await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v1/ready.json'),directory);
+ return directory;
+}
+/** Append disposable selectors to the existing generation, never rewrite cards or manifest. */
+export async function backfillBudgetMarketSelectors(){
+ const manifest=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ const index=await readIndex<BudgetCountIndex|null>(manifest.generationId,'budget-count-v3.json',null);
+ if(!index || index.generationId!==manifest.generationId)throw Error('catalog_budget_market_source_missing');
+ const directory=await writeBudgetMarketSelectors(index);
+ for(const market of Object.keys(directory.markets)){
+  const part=await readIndex<BudgetCountIndex|null>(manifest.generationId,`budget-markets-v1/${market}.json`,null);
+  if(!validBudgetMarketIndex(directory,market,part))throw Error('catalog_budget_market_verification_failed');
+ }
+ resetCatalogReadCachesForTests();
+ return directory;
+}
+/** Background warmup shares the same dependency checks and exact calculator as requests. */
+export async function warmBudgetPriceCaches(){
+ const manifest=await readManifest(),results=[];
+ for(const market of MARKETS.filter(market=>market!=='japan')){
+  const index=await readBudgetCountIndex(manifest.generationId,market);
+  if(!index || index.version!==3 || index.generationId!==manifest.generationId)continue;
+  const start=performance.now(),rows=await currentBudgetReplay(index,market);
+  results.push({market,rows:rows.length,ms:Math.round(performance.now()-start)});
+ }
+ return {generationId:manifest.generationId,results};
+}
 /** Derived immutable index only; generation data and current aliases are untouched. */
 export async function backfillCatalogBudgetCountIndex(){
  const {generationId,rows}=await currentProjectionRows({});

@@ -46,6 +46,16 @@ const FALLBACK_ENV: Record<string, string> = {
   SGD: "CATALOG_FALLBACK_RATE_SGD_RUB",
 };
 
+/** Actual conversion authority, including freshness transitions, without fetch timestamps. */
+export async function catalogRateFingerprintInputs() {
+  return Promise.all([...Object.keys(FALLBACK_ENV), 'RUB'].map(async currency => {
+    const rate = await convertToRub(1, currency).catch(() => null);
+    if (!rate) return [currency, null];
+    const {fetchedAt: _fetchedAt, ...value} = rate;
+    return [currency, value, Math.abs(Date.now() - Date.parse(rate.rateDate)) <= 4 * 86400000];
+  }));
+}
+
 type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string };
 let liveCbrRatesPromise: Promise<Map<string, LiveRate>> | null = null;
 let storedRatesPromise: Promise<any> | null = null;

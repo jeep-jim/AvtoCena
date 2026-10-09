@@ -11,6 +11,13 @@ const key=`catalog/intake-working/che168-v1/${artifactRunId}/head.json`;
 const meta=await storage.readJsonWithMeta(key,null);
 const events={observation:0,quarantine:0,withdrawal:0};
 let summary={at:new Date().toISOString(),artifactRunId,durableCheckpointFound:meta.found,publicationNotChecked:true};
+// Report the actual catalog separately from processed replay events. A changed
+// manifest alone does not attest publication of this particular paid snapshot.
+const manifest=await storage.readJson('catalog/manifest.json',null);
+if(manifest?.version===2 && Number.isSafeInteger(manifest.markets?.china?.count)){
+  summary={...summary,catalogSnapshot:{generationId:manifest.generationId,
+    chinaCount:manifest.markets.china.count,chinaUpdatedAt:manifest.markets.china.updatedAt}};
+}
 if(meta.found){
   // Pin the committed head seen at the start. Later commits may safely happen
   // concurrently because the referenced chunks are immutable.
