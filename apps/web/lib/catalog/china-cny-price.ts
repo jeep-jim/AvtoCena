@@ -8,6 +8,14 @@ export type ChinaPriceConversion={sourceCurrency:'USD';sourcePrice:number;source
 type Index={version:1;entries:Record<string,ChinaPriceConversion>};
 const path='catalog/china-cny-prices/current.json';
 const cache=new DetailReadCache<Index>({maxEntries:1,maxBytes:16*1024*1024,ttlMs:60000,concurrency:1});
+const fingerprints=new WeakMap<Index,string>();
+/** Same immutable anchor snapshot and expiry as the actual repricer. */
+export async function chinaCnyPriceFingerprint(){
+ const index=await cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
+ let fingerprint=fingerprints.get(index);
+ if(!fingerprint){fingerprint=createHash('sha256').update(JSON.stringify(index)).digest('hex');fingerprints.set(index,fingerprint);}
+ return fingerprint;
+}
 const fresh=(rate:CurrencyRateSnapshot|null)=>rate && ['cbr','cbr_live'].includes(rate.rateSource) && rate.effectiveRate>0 && Math.abs(Date.now()-Date.parse(rate.rateDate))<=4*86400000;
 export function chinaCnyConversion(price:number,usd:CurrencyRateSnapshot|null,cny:CurrencyRateSnapshot|null):ChinaPriceConversion|null {
  if(!Number.isFinite(price)||price<=0||!fresh(usd)||!fresh(cny)||usd!.rateDate!==cny!.rateDate)return null;
