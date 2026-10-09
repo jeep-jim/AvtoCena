@@ -1,4 +1,5 @@
 import { readDataJson } from "../data";
+import { protectCatalogCardPhotos } from "./photo-proxy-policy";
 import type { PublicVehicleOffer } from "./types";
 import type { CatalogFacets } from "./storage";
 
@@ -88,7 +89,10 @@ export async function readCatalogOverview(knownGenerationId?: string): Promise<C
     return catalogOverviewMatchesGeneration(overview, generationId) ? overview : null;
   })().then(value => {
     if (!value && overviewCache === entry) overviewCache = null;
-    return value;
+    // Publication workers need not have AUTH_SECRET. Sign stored card URLs in
+    // the web process for both the homepage and the unfiltered catalog landing.
+    return value ? {...value, markets: Object.fromEntries(Object.entries(value.markets).map(([market, summary]) =>
+      [market, {...summary, items: summary.items.map(protectCatalogCardPhotos)}]))} : null;
   }, error => {
     if (overviewCache === entry) overviewCache = null;
     throw error;

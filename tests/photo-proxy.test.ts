@@ -1,7 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {PhotoMemoryCache} from '../apps/web/lib/catalog/photo-memory-cache';
-import {protectedPhotoUrl,photoProxyEligible,validPhotoSignature,supportedPhotoContentType} from '../apps/web/lib/catalog/photo-proxy-policy';
+import {protectCatalogCardPhotos,protectedPhotoUrl,photoProxyEligible,validPhotoSignature,supportedPhotoContentType} from '../apps/web/lib/catalog/photo-proxy-policy';
+test('stored homepage overview signs both selected cover and gallery at delivery, without mutating persisted cards',()=>{
+ const old=process.env.AUTH_SECRET;process.env.AUTH_SECRET='runtime-web-secret';
+ try {
+  const raw='https://2sc2.autoimg.cn/escimg/auto/car.jpg.webp';
+  const card={id:'china-car',market:'china',cardImageUrl:raw,images:[{url:raw,id:'cover',width:1024}],totalRub:1234567};
+  const result=protectCatalogCardPhotos(card);
+  assert.ok(result.cardImageUrl.startsWith('/api/catalog/photo/'));
+  assert.equal(result.images[0].url,result.cardImageUrl);
+  assert.equal(result.images[0].width,1024);assert.equal(result.totalRub,card.totalRub);
+  assert.equal(card.cardImageUrl,raw);assert.equal(card.images[0].url,raw);
+  assert.deepEqual(protectCatalogCardPhotos(result),result);
+  assert.equal(protectCatalogCardPhotos({...card,market:'japan'}).cardImageUrl,raw);
+ }finally{if(old===undefined)delete process.env.AUTH_SECRET;else process.env.AUTH_SECRET=old;}
+});
 test('photo signatures bind market and exact URL; Japan, credentials, arbitrary hosts stay excluded',()=>{
  const old=process.env.AUTH_SECRET;process.env.AUTH_SECRET='test-photo-secret';
  try {

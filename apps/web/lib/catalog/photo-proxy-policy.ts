@@ -13,6 +13,14 @@ export function protectedPhotoUrl(url: string, market: string) {
   const sig = signature(url, market);
   return sig ? `/api/catalog/photo/${sig}?${new URLSearchParams({url, market})}` : url;
 }
+/** Stored overview cards may have been built without the web signing secret. */
+export function protectCatalogCardPhotos<T extends {market: string; cardImageUrl?: string; images?: Array<{url: string}>}>(offer: T): T {
+  return {
+    ...offer,
+    ...(offer.cardImageUrl ? {cardImageUrl: protectedPhotoUrl(offer.cardImageUrl, offer.market)} : {}),
+    ...(offer.images ? {images: offer.images.map(image => ({...image, url: protectedPhotoUrl(image.url, offer.market)}))} : {}),
+  };
+}
 export function validPhotoSignature(url: string, market: string, sig: string) {
   const expected = signature(url, market);
   return Boolean(expected && /^[A-Za-z0-9_-]{43}$/.test(sig) && sig.length === expected.length && crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected)));
