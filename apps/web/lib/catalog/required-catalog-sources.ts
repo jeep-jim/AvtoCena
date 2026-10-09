@@ -5,8 +5,8 @@ export type RequiredCatalogSource = {
   label: string;
   canonicalUrl: string;
   role: "primary" | "auction_history";
-  required: true;
-  anchor: true;
+  required: boolean;
+  anchor: boolean;
 };
 
 /**
@@ -14,8 +14,8 @@ export type RequiredCatalogSource = {
  *
  * Это единственный разрешённый production-набор каждого рынка:
  * - никакие дополнительные площадки не допускаются в сбор, retention или публикацию;
- * - каждый перечисленный источник проверяется и парсится отдельно;
- * - рынок не считается готовым, пока не подтверждён каждый источник из этого списка;
+ * - обязательные источники обновляются отдельно; необязательные сохраняют разрешённую историю;
+ * - рынок не считается готовым, пока не подтверждён каждый обязательный источник;
  * - sourceId и кликабельный sourceUrl обязаны принадлежать этому allowlist.
  */
 export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCatalogSource[]> = {
@@ -38,7 +38,8 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
   ],
   china: [
     { sourceId: "autohome_used_china_open", label: "Che168", canonicalUrl: "https://global.che168.com/", role: "primary", required: true, anchor: true },
-    { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
+    // 09.10.2026: China refresh uses the paid feed only; keep approved legacy rows under retention.
+    { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: false, anchor: false },
   ],
   // Owner decision 2026-09-18: Legacy source retired. Japan is collected by the
   // standalone ProAuctions workflow, using APPROVED_SAVED_CATALOG_SOURCES.
@@ -64,7 +65,7 @@ function sourcesForMarket(market: CatalogMarket) {
 }
 
 export function requiredCatalogSourceIds(market: CatalogMarket) {
-  return sourcesForMarket(market).map((source) => source.sourceId);
+  return sourcesForMarket(market).filter(source => source.required).map((source) => source.sourceId);
 }
 
 export function isAllowedCatalogSourceId(market: CatalogMarket, sourceId: unknown) {
@@ -104,5 +105,5 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
 }
 
 export function requiredCatalogSourceUrls(market: CatalogMarket) {
-  return sourcesForMarket(market).map((source) => source.canonicalUrl);
+  return sourcesForMarket(market).filter(source => source.required).map((source) => source.canonicalUrl);
 }
