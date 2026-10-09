@@ -381,3 +381,22 @@
  .account-cabinet-page .ac-public-header button[aria-label="Назад"]{width:28px;min-width:28px;padding:0;flex:none;justify-content:center}
  .account-cabinet-page .ac-public-header>div>div:first-child{gap:4px}
 }
+
+/* Homepage desktop dealer rails: three cards in each half, independent scrolling. */
+@media (min-width: 1024px) {
+  .ac-special-rails--split { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+  .ac-special-rails--split > section { display: flex; flex-direction: column; }
+  .ac-special-rails--split > section:only-child { grid-column: 1 / -1; }
+  .ac-special-rails--split .ac-special-rail-heading { justify-content: flex-start; align-items: center; }
+  .ac-special-rails--split .ac-special-rail-frame { margin-top: auto; padding-top: 16px; }
+  .ac-special-rails--split .ac-special-rail-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; }
+  .ac-special-rails--split .ac-special-rail-track > a { width: 100%; display: flex; flex-direction: column; }
+  .ac-special-rails--split .ac-special-rail-track > a > div { display: flex; flex: 1; flex-direction: column; }
+  .ac-special-rails--split .ac-special-rail-track > a > div > p:first-child { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 16px; }
+  .ac-special-rails--split h3 { min-height: 40px; line-height: 20px; }
+  .ac-special-rails--split .ac-price { margin-top: auto; padding-top: 4px; }
+  .ac-special-rails--split [data-site-block="stock"] .ac-special-rail-track > a > div > p { color: #fb923c !important; }
+  html[data-theme="light"] .ac-special-rails--split [data-site-block="stock"] .ac-special-rail-track > a > div > p { color: #c4510a !important; }
+  html[data-finance-hidden="true"] .ac-home-services { display: none !important; }
+  .ac-home-desktop-bottom-rates .ac-currency-rates-grid { grid-template-columns: repeat(10,minmax(0,1fr)); }
+}
