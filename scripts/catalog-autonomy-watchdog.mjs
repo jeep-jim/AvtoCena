@@ -14,6 +14,7 @@ async function api(path,method='GET',body){
 }
 for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
  try{
+ if(policy.pausedMarkets?.[market]){report.markets[market]={action:'none',reason:'market_paused',detail:policy.pausedMarkets[market]};continue;}
  const [data,journal,japan,dispatch,intakeCheckpoint]=await Promise.all([
   api(`actions/workflows/${workflow}/runs?branch=main&per_page=10`),
   storage.readJson(`catalog/operations/markets/${market}.json`,null),
