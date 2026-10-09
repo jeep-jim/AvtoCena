@@ -1,8 +1,8 @@
 {
-  "operation": "che168-complete-csv-20261009",
+  "operation": "che168-publish-suitable-inventory-20261009",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reason": "Import supplier CSV dated 2026-10-09, archive privately, then replay changes from aligned cursor 11989266. Subsequent runs use the committed local replica."
+  "reason": "Owner approved per-row exclusion of invalid model/year. Resume archived CSV and durable change journal; publish eligible China inventory through existing age, gross-weight, translation and calculation rules."
 }
