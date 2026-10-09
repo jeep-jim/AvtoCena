@@ -7,6 +7,7 @@ const baseRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,de
 const diagnosticCursor=Number(process.env.CHE168_DIAGNOSE_CHANGE_ID || '');
 if(process.env.CHE168_DIAGNOSE_404==='1'){
  if(!Number.isSafeInteger(diagnosticCursor)||diagnosticCursor<0)throw Error('invalid_diagnostic_cursor');
+ console.log(JSON.stringify({diagnosticStart:true,mode:'detail_404',paced:true,productionWrites:false}));
  console.log(JSON.stringify(await diagnoseChe168404({request:baseRequest,cursor:diagnosticCursor})));
  process.exit(0);
 }
