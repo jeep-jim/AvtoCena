@@ -4,7 +4,7 @@ import {transientOperationFailure} from './transient-operation.mjs';
 export const MARKET_WORKFLOWS=Object.fromEntries(['china','korea','uae','georgia','europe'].map(m=>[m,`catalog-refresh-${m}.yml`]));
 MARKET_WORKFLOWS.green='catalog-refresh-green.yml';
 MARKET_WORKFLOWS.japan='proauctions-collect-publish.yml';
-export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery,japanRefreshIntervalDays=14}) {
+export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,activeMarket,now=Date.now(),lastDispatchAt,recovery,japanRefreshIntervalDays=14,requiredSourceIds}) {
  if(!MARKET_WORKFLOWS[market])throw Error('invalid_recovery_market');
  if(runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)))return {action:'none',reason:'already_running'};
  if(recovery?.action!=='cleanup_dispatched'&&now-Date.parse(lastDispatchAt||'')<2*3600000)return {action:'none',reason:'dispatch_cooldown'};
@@ -14,7 +14,10 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  // collection is partial. Resume only its committed budget cursor, never
  // rerun the failed publication or advance past observations not published.
  const budgetStops=new Set(['budget','time_budget','budget_mid_page','disk_budget']);
- const sourceRows=(journal?.sources||[]).filter(source=>source.required!==false);
+ // Old running publishers can still write journals without required flags.
+ // Use the current source policy when supplied, before resuming legacy cursors.
+ const sourceRows=(journal?.sources||[]).filter(source=>requiredSourceIds
+  ? requiredSourceIds.includes(source.sourceId) : source.required!==false);
  const budgetRows=sourceRows.filter(s=>budgetStops.has(s.stopReason));
  const checkpointAge=now-Date.parse(intakeCheckpoint?.updatedAt||'');
  // The intake checkpoint is written only after the public manifest commit.

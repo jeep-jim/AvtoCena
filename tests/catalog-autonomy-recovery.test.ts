@@ -3,6 +3,20 @@ import assert from 'node:assert/strict';
 import {recoveryDecision,transientOperationFailure} from '../scripts/lib/catalog-recovery-policy.mjs';
 const now=Date.parse('2026-09-22T12:00:00Z');
 const input={market:'korea',now,runs:[],journal:{lastCollectionSuccess:'2026-09-22T09:00:00Z'}};
+test('current paid-feed policy prevents a legacy unflagged Autohome journal from dispatching another collection',()=>{
+ const sources=[{sourceId:'autohome_used_china_open',cursor:11991886,initialCursor:11989266,stopReason:'source_finished'},
+  {sourceId:'autohome_new_china_open',cursor:'39',stopReason:'budget_mid_page'}];
+ const args={...input,market:'china',runs:[{id:42,status:'completed',conclusion:'failure',updated_at:new Date(now).toISOString()}],
+  journal:{publicationStatus:'published',generationId:'g',runId:42,collectionComplete:false,sources},
+  intakeCheckpoint:{version:1,market:'china',generationId:'g',updatedAt:new Date(now).toISOString(),sources}};
+ assert.equal(recoveryDecision(args).reason,'continue_published_budget_slice');
+ const requiredSourceIds=['autohome_used_china_open'];
+ assert.equal(recoveryDecision({...args,requiredSourceIds}).reason,'failure_cooldown');
+ const verified={...args,journal:{...args.journal,collectionComplete:true,lastCollectionSuccess:new Date(now).toISOString()},runs:[]};
+ assert.equal(recoveryDecision({...verified,requiredSourceIds}).reason,'current');
+ const blocked={...verified,journal:{...verified.journal,sources:[{...sources[0],stopReason:'blocked'},sources[1]]}};
+ assert.equal(recoveryDecision({...blocked,requiredSourceIds}).reason,'source_failure_requires_attention');
+});
 test('recovery isolates active markets and enforces cooldown and retry limits',()=>{
  assert.equal(recoveryDecision({...input,runs:[{status:'in_progress'}]}).reason,'already_running');
  const failed={id:42,status:'completed',conclusion:'failure',run_attempt:1,updated_at:'2026-09-22T11:00:00Z'};
