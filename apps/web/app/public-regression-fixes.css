@@ -403,10 +403,10 @@
 
 /* Consistent card baselines in rails and expanded dealer sheets, on every device. */
 .ac-special-card { display:flex; flex-direction:column; }
-.ac-special-card-body { display:flex; flex:1; flex-direction:column; }
-.ac-special-card-status { min-height:32px; line-height:16px; }
-.ac-special-card h3 { min-height:40px; line-height:20px; }
-.ac-special-card .ac-price { margin-top:auto; padding-top:4px; }
+.ac-special-card-body { display:flex; flex:1; flex-direction:column; gap:4px; }
+.ac-special-card-status { line-height:16px; }
+.ac-special-card h3 { line-height:20px; }
+.ac-special-card .ac-price { margin-top:auto; }
 [data-site-block="stock"] .ac-special-card .ac-special-card-status,
 [data-site-block="stock"] .ac-special-card .ac-price { color:#fb923c!important; }
 html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-special-card-status,

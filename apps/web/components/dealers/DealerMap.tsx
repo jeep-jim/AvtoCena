@@ -1,17 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
+import {MapPin,ChevronUp} from 'lucide-react';
 import type { DealerOffice } from "@/lib/dealers/showcase-model";
 import { yandexOfficeUrls } from "@/lib/dealers/yandex-map";
 
-export function DealerMap({ offices, selectedId, onSelect, compact=false, autoLoad=false }: { offices: Omit<DealerOffice, "phone">[]; compact?:boolean; autoLoad?:boolean; selectedId?:string; onSelect?:(id:string)=>void }) {
-  const [enabled, setEnabled] = useState(autoLoad);
+export function DealerMap({ offices, selectedId, onSelect, compact=false }: { offices: Omit<DealerOffice, "phone">[]; compact?:boolean; selectedId?:string; onSelect?:(id:string)=>void }) {
+  const [enabled, setEnabled] = useState(false);
+  const mapId=useId();
   const [selected, setSelected] = useState('');
   const available = offices.filter(o => o.address.trim() || (o.lat !== null && o.lon !== null));
   const office = available.find(o => o.id === (selectedId || selected)) || available[0];
   if (!office) return null;
   const urls = yandexOfficeUrls(office);
   return (
-    <section className="mt-6" aria-label="Офисы на Яндекс Картах">
+    <section className={compact?"mt-3":"mt-6"} aria-label="Офисы на Яндекс Картах">
       {!compact&&<h2 className="mb-3 text-base font-bold">Офисы на карте</h2>}
       {!compact && available.length > 1 && (
         <label className="mb-3 grid gap-2 text-sm">
@@ -21,14 +23,14 @@ export function DealerMap({ offices, selectedId, onSelect, compact=false, autoLo
           </select>
         </label>
       )}
-      {enabled ? (
+      <button type="button" aria-expanded={enabled} aria-controls={mapId} className="dealer-map-toggle" onClick={() => setEnabled(value=>!value)}><MapPin size={20}/>{enabled?'Скрыть карту':'Показать на карте'}{enabled&&<ChevronUp size={16}/>}</button>
+      <div id={mapId} hidden={!enabled}>
+      {enabled && (
         <iframe key={urls.widget} src={urls.widget} title={`Яндекс Карты: ${office.city}, ${office.address}`} loading="lazy" allowFullScreen className="relative z-0 h-60 w-full rounded-2xl border-0" />
-      ) : (
-        <button type="button" className="w-full rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-4 py-6 text-sm font-bold" onClick={() => setEnabled(true)}>
-          Показать Яндекс Карту
-        </button>
       )}
-      {!compact&&<a className="mt-2 inline-block text-sm text-red-500 underline" href={urls.full} target="_blank" rel="noreferrer">Открыть в Яндекс Картах ↗</a>}
+      {enabled&&<a className="mt-2 inline-block text-sm underline" href={urls.full} target="_blank" rel="noreferrer">Открыть в Яндекс Картах ↗</a>}
+      </div>
+      <style>{`.dealer-map-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:46px;padding:10px 16px;border:1px solid #b9c6bb;border-radius:14px;background:linear-gradient(#ffffff65,#ffffff65),url('/map-preview.svg') center/cover;color:#183c50;font-size:14px;font-weight:750}.dealer-map-toggle:focus-visible{outline:3px solid var(--ac-accent);outline-offset:3px}.dealer-map-toggle[aria-expanded=true]{margin-bottom:12px}`}</style>
     </section>
   );
 }

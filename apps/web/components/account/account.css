@@ -74,3 +74,24 @@ html[data-theme=light] .account-cabinet-page{background:#edf1f6;--ac-surface:#f8
 .account-registration-close:focus-visible{outline:2px solid var(--ac-accent);outline-offset:2px;}
 #account-recovery-contacts{scroll-margin-top:100px;}
 @media(max-width:600px){.account-registration-welcome{padding:20px 48px 20px 18px;gap:10px;}.account-registration-icon{display:none;}.account-registration-welcome .account-primary{width:100%;}}
+
+.account-profile-layout,.account-profile-security{min-width:0}
+.account-profile-save-desktop{display:none}
+.account-profile-city{display:flex;align-items:center;gap:16px;border-top:1px solid var(--ac-border);margin-top:24px;padding-top:24px}
+.account-profile-city>div{min-width:0}.account-profile-city p{font-size:14px;line-height:1.5;margin-top:6px}
+.account-profile-city-art{width:72px;height:72px;flex:none;border-radius:50%;background:#eaf0df url('/map-preview.svg') center/cover}
+.account-profile-city-heading{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:23px;font-weight:750;line-height:1.3}
+.account-profile-city-heading button{padding:0!important;min-height:0!important;background:transparent!important;border:0!important;color:#389d49!important;text-decoration:underline;font:inherit!important}
+@media(min-width:1024px){
+.customer-portal{max-width:1280px}
+.account-profile-layout{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(320px,1fr);gap:30px;align-items:stretch}
+.customer-portal .account-profile-layout .portal-panel{margin:0}
+.account-profile-security{display:flex;flex-direction:column;gap:18px}
+.account-profile-layout .customer-profile{display:flex;flex-direction:column}
+.account-profile-save-desktop{display:flex}.account-profile-actions{display:none}
+.account-profile-city{margin-top:auto;padding-top:30px;padding-bottom:24px}
+.customer-profile form{margin-bottom:24px}
+.account-profile-security .account-primary{width:100%}
+}
+@media(max-width:600px){.account-profile-city-art{width:48px;height:48px}.account-profile-city-heading{font-size:19px}.account-profile-city{gap:12px}}
+.account-profile-city-heading button svg{display:none}

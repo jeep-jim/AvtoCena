@@ -36,7 +36,7 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.locator('.dealer-info-dialog[open]').waitFor();
  await page.screenshot({path:`${out}/office-${theme}-${width}.png`});
  assert.equal(await page.locator('.dealer-info-dialog iframe').count(),0);
- await page.locator('.dealer-info-dialog').getByRole('button',{name:'Показать Яндекс Карту',exact:true}).click();
+ await page.locator('.dealer-info-dialog').getByRole('button',{name:'Показать на карте',exact:true}).click();
  let url=new URL(await page.locator('.dealer-info-dialog iframe').getAttribute('src'));assert.equal(url.searchParams.get('text'),'Новокузнецк, ТРК Планета');
  await page.getByRole('combobox',{name:'Адрес офиса',exact:true}).selectOption('point');url=new URL(await page.locator('.dealer-info-dialog iframe').getAttribute('src'));assert.equal(url.searchParams.get('pt'),'37.61,55.75,pm2rdm');
  await page.getByRole('button',{name:'Закрыть информацию'}).click();await page.getByRole('button',{name:'Закрыть адреса'}).click();
