@@ -1,0 +1,19 @@
+/* Scoped to the editor: the sheet is portalled outside public/CRM wrappers. */
+html .ac-catalog-editor-trigger.ac-catalog-editor-trigger { color:#fff!important; -webkit-text-fill-color:#fff!important; background:#20242c!important; }
+html .ac-catalog-editor-sheet { --editor-text:#edf0f5; --editor-muted:#b5bdcb; --editor-surface:#181d27; --editor-field:#252c39; color:var(--editor-text)!important; background:var(--editor-surface)!important; color-scheme:dark; }
+html[data-theme="light"] .ac-catalog-editor-sheet { --editor-text:#171b23; --editor-muted:#526074; --editor-surface:#f8f9fc; --editor-field:#e6eaf1; color-scheme:light; }
+html .ac-catalog-editor-sheet :is(header,.ac-catalog-editor-actions) { background:var(--editor-surface)!important; }
+html .ac-catalog-editor-sheet :is(h2,label,button,a,select,option,input,textarea) { color:var(--editor-text)!important; -webkit-text-fill-color:var(--editor-text)!important; }
+html .ac-catalog-editor-sheet :is(input,select,textarea,option) { background:var(--editor-field)!important; }
+html .ac-catalog-editor-sheet :is(input,textarea)::placeholder { color:var(--editor-muted)!important; -webkit-text-fill-color:var(--editor-muted)!important; opacity:1; }
+html .ac-catalog-editor-sheet p { color:var(--editor-muted); }
+html .ac-catalog-editor-sheet [role="alert"] { color:#ff9595!important; -webkit-text-fill-color:#ff9595!important; }
+html[data-theme="light"] .ac-catalog-editor-sheet [role="alert"] { color:#b42318!important; -webkit-text-fill-color:#b42318!important; }
+html .ac-catalog-editor-sheet .ac-editor-cover { color:#fff!important; -webkit-text-fill-color:#fff!important; background:#20242c; }
+html .ac-catalog-editor-sheet .ac-catalog-editor-actions > button:first-child { color:#171b23!important; -webkit-text-fill-color:#171b23!important; background:#ff7a00!important; }
+html .ac-catalog-editor-sheet .ac-catalog-editor-actions { position:sticky; bottom:-20px; padding:12px 0 max(12px,env(safe-area-inset-bottom)); }
+html .ac-catalog-editor-sheet :is(button,a,input,select,textarea):focus-visible { outline:2px solid #ed7800; outline-offset:3px; }
+.ac-public-sheet-wrap:has(.ac-catalog-editor-closing) { animation:acEditorOut .18s ease-in forwards!important; pointer-events:none; }
+@keyframes acEditorOut { to { translate:0 28px; opacity:0; } }
+@media(max-width:767px) { .ac-public-sheet-wrap:has(.ac-catalog-editor-sheet) { animation:acEditorUp .2s ease-out; } @keyframes acEditorUp { from { translate:0 100%; } to { translate:0 0; } } @keyframes acEditorOut { to { translate:0 100%; opacity:0; } } }
+@media(prefers-reduced-motion:reduce) { .ac-public-sheet-wrap:has(.ac-catalog-editor-sheet) { animation:none!important; } }

@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 test('editorial API rejects unauthorized writes, foreign origins, missing photos and restoration of withdrawn inventory',async()=>{
- const state:any={actor:{id:'owner',role:'owner',companyId:'dealer_topavto',displayName:'Owner'},offer:{id:'one',market:'korea',sourceId:'s',sourceOfferId:'1',make:'Hyundai',model:'Avante',images:[]},index:{revision:'0',entries:{}},writes:0};
+ const state:any={actor:{id:'owner',role:'owner',companyId:'dealer_topavto',displayName:'Owner'},offer:{id:'one',market:'korea',sourceId:'s',sourceOfferId:'1',make:'Hyundai',model:'Avante',images:[{url:'https://example.com/car-a.jpg'},{url:'https://example.com/car-b.jpg'}]},index:{revision:'0',entries:{}},writes:0};
  (globalThis as any).__catalogEditorialRoute=state;
  const sources:Record<string,string>={
   '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__catalogEditorialRoute.actor;`,
@@ -21,11 +21,12 @@ test('editorial API rejects unauthorized writes, foreign origins, missing photos
   for(const actor of [null,{...owner,companyId:'other'},{...owner,role:'manager',permissions:{catalog:true}},{...owner,status:'disabled'}]){state.actor=actor;assert.equal((await save()).status,403);}
   state.actor=owner;assert.equal(state.writes,0);
   assert.equal((await save({photos:['/api/site-media/'+'a'.repeat(64)]})).status,400);assert.equal(state.writes,0);
-  const response=await save();assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
-  const saved=(await response.json()).entry;assert.equal(state.index.entries.one.status,'hidden');
+  assert.equal((await save({photos:['https://evil.example/foreign.jpg']})).status,400);
+  const response=await save({photos:['https://example.com/car-b.jpg','https://example.com/car-a.jpg']});assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+  const saved=(await response.json()).entry;assert.equal(state.index.entries.one.status,'hidden');assert.deepEqual(saved.photos,['https://example.com/car-b.jpg','https://example.com/car-a.jpg']);
   assert.equal((await save()).status,409,'stale editor cannot overwrite');
   state.offer=null;
   assert.equal((await save({version:saved.version,status:'visible'})).status,409,'withdrawn source is not resurrected');
-  assert.equal((await save({version:saved.version,status:'archived'})).status,200,'withdrawn record remains manageable in archive');
+  assert.equal((await save({version:saved.version,status:'archived',photos:saved.photos})).status,200,'withdrawn record remains manageable in archive');
  }finally{delete (globalThis as any).__catalogEditorialRoute;}
 });
