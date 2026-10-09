@@ -532,6 +532,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         .ac-mobile-filter-sheet .ac-range-fields-shell{background:transparent;border:0;border-radius:0;padding:0}
         .ac-mobile-filter-sheet .ac-range-card{background:var(--ac-surface)}
       }
+      html[data-theme="light"] .ac-mobile-filter-sheet {color:var(--ac-text)!important}
       html[data-theme="light"] .ac-mobile-filter-sheet [class*="border-white/"]{border-color:rgba(30,36,48,.09)!important}
     `}</style>
   </>;
