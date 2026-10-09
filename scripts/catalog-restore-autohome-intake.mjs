@@ -10,7 +10,9 @@ const files=(await fs.readdir(root)).filter(name=>/^autohome_new_china_open-\d+\
 if(!files.length)throw Error('autohome_saved_intake_empty');
 const ids=new Set();let latest=0,rows=0;
 for(const file of files)for await(const row of readCheckpointJsonl(path.join(root,file))){
- const o=row.offer,at=Date.parse(row.observedAt);
+ // sourceListingSnapshot stores the observation time on offer.updatedAt;
+ // paid-feed JSONL additionally supports the outer observedAt envelope.
+ const o=row.offer,at=Date.parse(row.observedAt??o?.updatedAt);
  if(o?.sourceId!==sourceId||o.market!=='china'||o.id!==stableOfferId(sourceId,String(o.sourceOfferId))
    ||!Number.isFinite(at)||at>Date.now()+60000||Date.now()-at>48*3600000)throw Error('autohome_saved_intake_identity_or_age');
  ids.add(o.id);rows++;latest=Math.max(latest,at);
