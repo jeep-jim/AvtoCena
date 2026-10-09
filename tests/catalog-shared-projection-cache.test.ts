@@ -18,6 +18,7 @@ test('a market detail fallback reuses the full projection and still checks cutov
     else if (key === 'catalog/public/sitemap-projection.json') value = null;
     else if (key === 'catalog/public/projection/all.json') value = {generationId: 'one', items: [row]};
     else if (key === 'catalog/public/projection/japan.json') value = {generationId: manifestGeneration, items: [row]};
+    else if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
     else assert.fail(`unexpected storage read: ${key}`);
     return {found: true, value: value as T};
   };

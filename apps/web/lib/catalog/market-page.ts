@@ -1,3 +1,4 @@
+import {readCatalogEditorial} from "./editorial";
 import { searchOffers } from "./storage";
 import type { CatalogSearchParams } from "./types";
 import { applyActiveBusinessPricingBatch } from "./live-business-pricing";
@@ -117,9 +118,9 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
 
 
 const pages = new DetailReadCache<any>({maxEntries: 32, maxBytes: 12 * 1024 * 1024, ttlMs: 60_000, concurrency: 4});
-export function readCatalogMarketPage(query: CatalogSearchParams) {
+export async function readCatalogMarketPage(query: CatalogSearchParams) {
   const normalized = {...query, page: Math.max(1, Math.floor(Number(query.page) || 1)), pageSize: MARKET_PAGE_SIZE};
-  const key = JSON.stringify(Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b)));
+  const key = JSON.stringify([(await readCatalogEditorial()).revision,Object.entries(normalized).sort(([a],[b])=>a.localeCompare(b))]);
   return pages.get(key, async () => {
     const {market, page, pageSize, sort, ...filters} = normalized;
     const hasFilters = Object.values(filters).some(Boolean);

@@ -13,7 +13,8 @@ test('homepage uses a complete compact snapshot when policy hides a few records'
     Object.fromEntries(markets.map(m => [m, {sourceTotal: 10, total: 8,
       items: Array.from({length: 6}, (_, i) => ({id: `${m}-${i}`, market: m}))}])) as any);
   storage.readJsonWithMeta = async <T>(key: string, fallback: T) => {
-    assert.ok(['catalog/manifest.json', 'catalog/public/overview.json', `catalog/generations/${manifest.generationId}/indexes/overview.json`].includes(key), `must not load large files: ${key}`);
+    if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
+  assert.ok(['catalog/manifest.json', 'catalog/public/overview.json', `catalog/generations/${manifest.generationId}/indexes/overview.json`].includes(key), `must not load large files: ${key}`);
     return {found: true, value: (key.endsWith('manifest.json') ? manifest : overview) as T};
   };
   try {

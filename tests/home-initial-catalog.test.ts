@@ -17,7 +17,7 @@ test("home page supplies a bounded server snapshot and recovers from storage err
 
 test("home API reads shared indexes once instead of seven complete searches", () => {
   const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
-  const start = storage.indexOf("export async function readHomeCatalogSnapshot");
+  const start = storage.indexOf("async function readHomeCatalogSnapshotOriginal");
   const end = storage.indexOf("\nfunction isPrivateHost", start);
   const implementation = storage.slice(start, end);
   assert.match(homeRoute, /readHomeCatalogSnapshot\(10\)/);
@@ -25,6 +25,7 @@ test("home API reads shared indexes once instead of seven complete searches", ()
   assert.match(implementation, /order-updatedAt\.json/);
   assert.match(implementation, /market\/\$\{cleanShard\(market\)\}\.json/);
   assert.doesNotMatch(implementation, /searchOffers\(/);
+  assert.match(storage, /if\(!editorialHasHidden\(market\)\)continue/);
 });
 
 test("home client renders a stable skeleton and loads one catalog snapshot in the background", () => {

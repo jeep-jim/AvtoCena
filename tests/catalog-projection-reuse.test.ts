@@ -33,6 +33,7 @@ test('parallel facets and market searches download one shared catalog snapshot',
  resetCatalogReadCachesForTests();
  const reads:string[]=[];const input={...row(),bodyType:'sedan'};
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog-editorial/current.json')return {found:false,value:{revision:'0',entries:{}}};
   reads.push(file);await new Promise(resolve=>setImmediate(resolve));
   if(file==='catalog/public/facets.json')return {found:false,value:{generationId:''}};
   if(file==='catalog/manifest.json')return {found:true,value:{generationId:'shared-test',markets:{korea:{count:1}}}};
@@ -52,6 +53,7 @@ test('unchanged projections survive minute boundaries but follow the next publis
  let now=Date.now(),generationId='first';let projectionReads=0;
  t.mock.method(Date,'now',()=>now);
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog-editorial/current.json')return {found:false,value:{revision:'0',entries:{}}};
   if(file==='catalog/public/facets.json')return {found:false,value:{generationId:''}};
   if(file==='catalog/manifest.json')return {found:true,value:{generationId,markets:{korea:{count:1}}}};
   if(file==='catalog/public/projection/korea.json'){

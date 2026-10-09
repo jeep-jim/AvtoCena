@@ -1,5 +1,6 @@
 import type {AuthUser} from './auth';
 export const CRM_PERMISSIONS = {
+ catalog:{label:"Редактирование каталога",description:"Для администратора: названия, фотографии, скрытие и восстановление объявлений."},
  replyReviews:{label:'Ответы на отзывы',description:'Ответ компании на отзывы и изменение ответа. Для дилера — только своя компания.'},
  deleteIdeas:{label:'Удаление идей',description:'Полное удаление идей, комментариев и скриншотов с подтверждением. Это право выдаёт только владелец.'},
  deleteReviews:{label:'Удаление отзывов',description:'Удаление опубликованных отзывов с подтверждением. Это право выдаёт только владелец ресурса.'},
@@ -22,7 +23,7 @@ export const CRM_PERMISSIONS = {
 export type CrmPermission=keyof typeof CRM_PERMISSIONS;
 export type CrmPermissions=Partial<Record<CrmPermission,boolean>>;
 const managerDefaults=new Set<CrmPermission>(['editClients','editLeads','documents','calculations','chat','game']);
-const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords','site']);
+const administrative=new Set<CrmPermission>(['staff','settings','dealers','deleteRecords','site','catalog']);
 export function isAdministrativeCrmPermission(key:CrmPermission){return administrative.has(key);}
 export function hasCrmPermission(user:AuthUser|null|undefined,key:CrmPermission):boolean {
  if(!user||user.status==='disabled')return false;
@@ -41,5 +42,5 @@ export const ROLE_DETAILS:Record<string,string>={owner:'Все разделы, �
 export const CRM_PERMISSION_GROUPS:{label:string;keys:CrmPermission[]}[]=[
  {label:'Разделы и общение',keys:['chat','analytics','game']},
  {label:'Клиенты, заявки и документы',keys:['viewAll','editClients','editLeads','assign','documents','calculations','deleteRecords','activityAll']},
- {label:'Управление',keys:['staff','settings','site','dealers','replyReviews','deleteReviews','deleteIdeas']},
+ {label:'Управление',keys:['staff','settings','site','catalog','dealers','replyReviews','deleteReviews','deleteIdeas']},
 ];

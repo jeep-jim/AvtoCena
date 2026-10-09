@@ -1,6 +1,7 @@
+import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./editorial";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
-import { getOffer, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId } from "./storage";
+import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJapanCatalogOfferId } from "./storage";
 
 // The offer id is stable across catalog generations. Keep a short shared cache
 // so a route prefetch warms the actual offer for the following click, including
@@ -9,8 +10,8 @@ import { getOffer, getOfferFromCurrentShard, getOfferFromCurrentProjection, isJa
 // visible quickly after a catalog publication while navigation avoids repeating
 // manifest + location-index + offer-chunk reads.
 const getOfferAcrossRequests = unstable_cache(
-  async (id: string) => getOffer(id),
-  ["catalog-offer-page-v2"],
+  async (id: string) => getOfferWithoutEditorial(id),
+  ["catalog-offer-page-unedited-v3"],
   { revalidate: 60 },
 );
 
@@ -25,11 +26,14 @@ async function resilientOfferLookup(id: string) {
   } catch {
     // Fall through to the authoritative retry below.
   }
-  return getOffer(id);
+  return getOfferWithoutEditorial(id);
 }
 
 // Metadata and the page render also share the lookup inside one request.
-export const getOfferForPage = cache((id: string) => resilientOfferLookup(id));
+export const getOfferForPage = cache(async (id: string) => {
+ const [offer,index]=await Promise.all([resilientOfferLookup(id),readCatalogEditorial()]);
+ return offer&&!editorialHidden(offer,index)?applyCatalogEditorial(offer,index):null;
+});
 
 // The same authoritative record feeds the page and its share preview.
 export const getOfferDetailRecord = cache(async (id:string)=>{
@@ -38,5 +42,6 @@ export const getOfferDetailRecord = cache(async (id:string)=>{
     : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
   // New auction IDs are hashes, so their market cannot be inferred from the ID.
   if (storedOffer?.market === "japan" && !isJapanCatalogOfferId(id)) storedOffer = await getOfferFromCurrentShard(id) || storedOffer;
-  return storedOffer;
+  const editorial=await readCatalogEditorial();
+  return storedOffer&&!editorialHidden(storedOffer,editorial)?applyCatalogEditorial(storedOffer,editorial):null;
 });

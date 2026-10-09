@@ -400,3 +400,18 @@
   html[data-finance-hidden="true"] .ac-home-services { display: none !important; }
   .ac-home-desktop-bottom-rates .ac-currency-rates-grid { grid-template-columns: repeat(10,minmax(0,1fr)); }
 }
+
+/* Consistent card baselines in rails and expanded dealer sheets, on every device. */
+.ac-special-card { display:flex; flex-direction:column; }
+.ac-special-card-body { display:flex; flex:1; flex-direction:column; }
+.ac-special-card-status { min-height:32px; line-height:16px; }
+.ac-special-card h3 { min-height:40px; line-height:20px; }
+.ac-special-card .ac-price { margin-top:auto; padding-top:4px; }
+[data-site-block="stock"] .ac-special-card .ac-special-card-status,
+[data-site-block="stock"] .ac-special-card .ac-price { color:#fb923c!important; }
+html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-special-card-status,
+html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { color:#c4510a!important; }
+.ac-special-offers-sheet > header > h2 { flex:1; align-self:stretch; display:flex; }
+@media(min-width:1024px) { .ac-special-rails--split .ac-special-card-status { min-height:16px; } }
+.ac-catalog-editor-trigger { color:#fff!important; background:rgba(0,0,0,.82)!important; }
+.ac-catalog-editor-form .ac-catalog-editor-actions { position:sticky; bottom:-16px; padding:12px 0; background:var(--ac-surface); }

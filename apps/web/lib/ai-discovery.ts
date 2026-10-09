@@ -1,3 +1,4 @@
+import {readCatalogEditorial,editorialHidden,applyCatalogEditorial} from "./catalog/editorial";
 import {offerPath, type OfferUrlData} from "./catalog/offer-url";
 import { gzipSync } from "node:zlib";
 import { getJsonStorage, readDataJson, type JsonStorage } from "./data";
@@ -40,10 +41,11 @@ export async function readAiCatalogProjection(): Promise<AiCatalogProjection> {
     items: [],
   });
 
+  const editorial=await readCatalogEditorial();
   return {
     generationId: String(projection.generationId || ""),
     items: Array.isArray(projection.items)
-      ? projection.items.filter((item) => Boolean(item?.id && item?.make && item?.model && item?.year))
+      ? projection.items.filter((item) => Boolean(item?.id && item?.make && item?.model && item?.year)&&!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))
       : [],
   };
 }
@@ -77,7 +79,9 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
     if (error instanceof Error && error.message === 'ai_sitemap_generation_changed') return null;
     throw error;
   });
-  return projection;
+  if(!projection)return null;
+  const editorial=await readCatalogEditorial();
+  return {...projection,items:projection.items.filter(item=>!editorialHidden(item,editorial)).map(item=>applyCatalogEditorial(item,editorial))};
 }
 
 export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSitemapProjection {

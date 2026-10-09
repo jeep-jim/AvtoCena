@@ -24,6 +24,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   else if(key.endsWith('/budget-count-v3.json'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v2.json'))value=index;
   else if(key.includes('/budget-cards-v2/')){const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:[rows[block]]};}
+  else if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
   else assert.fail('unexpected large or unrelated storage read: '+key);
   return {found:true,value:value as T};
  };

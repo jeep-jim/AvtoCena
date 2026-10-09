@@ -8,6 +8,7 @@ test("city-only counts use the compact summary without downloading or sorting ca
  const manifest={generationId:"count-compact",markets:{korea:{count:123}}};
  const summary={generationId:manifest.generationId,brands:{hyundai:{make:"Hyundai",count:123,marketCounts:{korea:123},models:[]}}};
  storage.readJsonWithMeta=async <T>(key:string,fallback:T)=>{
+  if(key==='catalog-editorial/current.json')return {found:false,value:fallback};
   assert.ok(["catalog/manifest.json","catalog/public/brand-summary.json"].includes(key), `unexpected expensive read: ${key}`);
   return {found:true,value:(key.endsWith("manifest.json")?manifest:summary) as T};
  };
