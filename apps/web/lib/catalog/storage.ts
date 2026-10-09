@@ -1226,7 +1226,12 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
   // contract without re-filtering an untouched market during another market's
   // atomic publication.
   const retained = offers.filter((offer) => offer.market === "japan");
-  const contentHash = crypto.createHash("sha256").update(JSON.stringify(retained)).digest("hex");
+  const archiveHash = crypto.createHash("sha256").update("[");
+  for (let index = 0; index < retained.length; index++) {
+    if (index) archiveHash.update(",");
+    archiveHash.update(JSON.stringify(retained[index]));
+  }
+  const contentHash = archiveHash.update("]").digest("hex");
   const current = await storage.readJsonWithMeta<JapanAuctionArchiveManifest | null>(JAPAN_ARCHIVE_MANIFEST_PATH, null);
   if (current.value?.version === 1 && current.value.contentHash === contentHash) return current.value;
 
@@ -1282,7 +1287,10 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
     throw new Error(`catalog_current_projection_not_ready:${all.generationId}:${Number(all.items?.length || 0)}:${generationId}:${offers.length}`);
   }
   const byMarket = new Map<string, VehicleOffer[]>();
-  for (const offer of offers) byMarket.set(String(offer.market || ""), [...(byMarket.get(String(offer.market || "")) || []), offer]);
+  for (const offer of offers) {
+    const key = String(offer.market || ""), rows = byMarket.get(key) || [];
+    rows.push(offer); byMarket.set(key, rows);
+  }
   for (const [market, rows] of byMarket) {
     const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
       currentProjectionPath(market),
@@ -1424,6 +1432,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // written, so a preservation mismatch cannot switch or partially stage a new
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
+  progress("persist_normalized", { count: publicOffers.length });
   const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds, options.retainedPowerMixIds, options.retainedPowerMixMinimumByMarket);
   const publishedOffers = options.modificationRecovery
     ? limitModificationInventory(canonicalPublic.offers, catalogOfferVisibleRub)
@@ -1448,7 +1457,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   );
   progress("internal_manifest_written");
   const byMarket = new Map<string, VehicleOffer[]>();
-  for (const offer of publishedOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
+  for (const offer of publishedOffers) {
+    const rows = byMarket.get(offer.market) || [];
+    rows.push(offer); byMarket.set(offer.market, rows);
+  }
   const markets: CatalogManifest["markets"] = {};
   const byId: Record<string, OfferLocation> = {};
   const imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {};
@@ -1460,6 +1472,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       const slice = offers.slice(i, i + CATALOG_CHUNK_SIZE);
       slice.forEach((o) => { byId[o.id] = { market: o.market, chunk: name }; o.images.forEach((img) => { imagesById[img.id] = { objectKey: img.objectKey, mimeType: img.mimeType, checksum: img.checksum, size: img.size }; }); });
       await writeJsonAtomic(offerPath(generationId, market, name), slice.map(compactPublicStorageOffer));
+      if (chunks.length % 50 === 0) progress("market_chunk_progress", {market, written: Math.min(i + CATALOG_CHUNK_SIZE, offers.length), total: offers.length});
     }
     markets[market] = { count: offers.length, chunks, updatedAt: Object.prototype.hasOwnProperty.call(preservedPublicOffersByMarket, market) ? (baselineManifest?.markets?.[market]?.updatedAt || now) : now };
     progress("market_chunks_written", { market, count: offers.length, chunks: chunks.length });
@@ -1514,7 +1527,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     if (make) makes.set(cleanShard(make), make);
     if (make && model) models.set(`${cleanShard(make)}:${cleanShard(model)}`, { make, model });
     const pairs = { market: o.market };
-    for (const [name, key] of Object.entries(pairs)) { const map = maps[name]; const shard = cleanShard(key); map.set(shard, [...(map.get(shard) || []), o.id]); }
+    for (const [name, key] of Object.entries(pairs)) { const map = maps[name]; const shard = cleanShard(key); const ids = map.get(shard) || []; ids.push(o.id); map.set(shard, ids); }
   }
   await writeJsonAtomic(generationPath(generationId, "indexes/offers-by-id.json"), { generationId, byId });
   await writeJsonAtomic(generationPath(generationId, "indexes/images-by-id.json"), { generationId, imagesById });

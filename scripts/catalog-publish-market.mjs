@@ -795,6 +795,7 @@ if (regressionBlocked) {
     });
   } catch (error) {
     publicationError = String(error?.message || error);
+    console.error(error?.stack || publicationError);
   }
 } else {
   await loadPreservedMarkets();

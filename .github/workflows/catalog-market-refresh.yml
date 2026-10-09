@@ -169,6 +169,7 @@ jobs:
       CATALOG_SELLER_INVENTORY: '1'
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
       CATALOG_PUBLICATION_DRY_RUN: '0'
+      CATALOG_PUBLICATION_PROGRESS: '1'
       CATALOG_REBUILD_INPUT_DIR: catalog-intake-publish
       CATALOG_INTAKE_INPUT_DIR: catalog-intake-input
       # Zero removes count quotas in publication; intake remains bounded per slice.
