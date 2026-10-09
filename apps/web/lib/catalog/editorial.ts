@@ -46,12 +46,12 @@ export function applyCatalogEditorial<T extends Identity>(offer:T,index=context.
 }
 export class EditorialConflict extends Error {constructor(){super('Объявление уже изменено другим сотрудником. Обновите страницу перед сохранением.');}}
 export class EditorialInputError extends Error {}
-export function cleanEditorialInput(input:Record<string,unknown>){
+export function cleanEditorialInput(input:Record<string,unknown>,allowedPhotos:ReadonlySet<string>=new Set()){
  if(!['visible','hidden','archived'].includes(String(input.status)))throw new EditorialInputError('Выберите статус объявления.');
  if(typeof input.title!=='string'||input.title.length>200||typeof input.reason!=='string'||input.reason.length>500)throw new EditorialInputError('Название — до 200 символов, комментарий — до 500.');
  const title=input.title.trim().replace(/[\u0000-\u001f\u007f]/g,'');
  const photos=input.photos;
- if(photos!==null&&(!Array.isArray(photos)||photos.length<1||photos.length>30||photos.some(p=>typeof p!=='string'||!/^\/api\/site-media\/[a-f0-9]{64}$/.test(p))))throw new EditorialInputError('Загрузите от 1 до 30 фотографий.');
+ if(photos!==null&&(!Array.isArray(photos)||photos.length<1||photos.length>30||photos.some(p=>typeof p!=='string'||(!/^\/api\/site-media\/[a-f0-9]{64}$/.test(p)&&!allowedPhotos.has(p)))))throw new EditorialInputError('Загрузите от 1 до 30 фотографий.');
  if(input.version!==null&&(typeof input.version!=='string'||input.version.length>100))throw new EditorialInputError('Обновите страницу перед сохранением.');
  return {title,reason:input.reason.trim(),status:input.status as EditorialStatus,photos:photos as string[]|null,version:input.version as string|null};
 }
