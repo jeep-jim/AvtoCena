@@ -77,6 +77,22 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  }
  if(budgetRows.length)return {action:'none',reason:'budget_continuation_blocked',blockers:[...new Set(budgetContinuationBlockers)]};
  if(latest&&['failure','timed_out'].includes(latest.conclusion)){
+  // A legacy workflow summary can fail after the catalog and cursor commit.
+  // Only the separate successful verification/audit may resolve that failure.
+  const verifiedPaidPublication=market==='china' && String(latest.id)===String(journal?.runId)
+   && journal?.publicationStatus==='published' && journal.collectionComplete===true && !journal.publicationError
+   && /^\d+$/.test(String(journal.verificationRunId||''))
+   && Date.parse(journal.verifiedAt)>=Date.parse(journal.lastPublicationSuccess) && Date.parse(journal.verifiedAt)<=now
+   && Number(journal.publishedCount)>0 && journal.publishedCount===activeMarket?.count
+   && intakeCheckpoint?.version===1 && intakeCheckpoint.market==='china' && intakeCheckpoint.generationId===journal.generationId
+   && checkpointAge>=0 && checkpointAge<4*86400000 && sourceRows.length>0
+   && sourceRows.every(source=>source.provider==='auto_api_che168' && source.stopReason==='source_finished'
+    && Number.isSafeInteger(source.cursor) && source.cursor>=0 && /^[a-f0-9]{64}$/.test(source.snapshotBinding||'')
+    && source.replica?.cursor===source.cursor && /^[a-f0-9]{64}$/.test(source.replica?.sha256||'')
+    && intakeCheckpoint.sources?.some(saved=>saved.sourceId===source.sourceId && saved.provider===source.provider
+     && saved.cursor===source.cursor && saved.stopReason===source.stopReason && saved.snapshotBinding===source.snapshotBinding
+     && JSON.stringify(saved.replica)===JSON.stringify(source.replica)));
+  if(verifiedPaidPublication)return {action:'none',reason:'published_run_independently_verified'};
   if((latest.run_attempt||1)>=3)return {action:'none',reason:'retry_limit_reached'};
   if(now-Date.parse(latest.updated_at)<15*60000)return {action:'none',reason:'failure_cooldown'};
   if(now-Date.parse(latest.updated_at)>24*3600000)return {action:'none',reason:'old_failed_run_requires_new_schedule'};

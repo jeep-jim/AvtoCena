@@ -25,6 +25,20 @@ test('recovery isolates active markets and enforces cooldown and retry limits',(
  assert.equal(recoveryDecision({...input,runs:[failed],lastDispatchAt:'2026-09-22T11:00:00Z'}).action,'none');
  assert.equal(recoveryDecision({...input,runs:[{...failed,conclusion:'cancelled'}]}).reason,'respect_cancellation');
 });
+test('independent verified publication resolves an old failed summary only for the exact committed inventory and cursor',()=>{
+ const source={sourceId:'autohome_used_china_open',provider:'auto_api_che168',stopReason:'source_finished',cursor:11991886,snapshotBinding:'a'.repeat(64),replica:{cursor:11991886,sha256:'b'.repeat(64)}};
+ const journal={runId:'42',publicationStatus:'published',collectionComplete:true,generationId:'g',publishedCount:139999,
+  lastPublicationSuccess:new Date(now-120000).toISOString(),verifiedAt:new Date(now-60000).toISOString(),verificationRunId:'43',sources:[source]};
+ const checkpoint={version:1,market:'china',generationId:'g',updatedAt:new Date(now-180000).toISOString(),sources:[source]};
+ const args={...input,market:'china',runs:[{id:42,conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}],journal,intakeCheckpoint:checkpoint,activeMarket:{count:139999}};
+ assert.equal(recoveryDecision(args).reason,'published_run_independently_verified');
+ for(const patch of [{journal:{...journal,verificationRunId:null}},{journal:{...journal,collectionComplete:false}},
+  {journal:{...journal,verifiedAt:new Date(now-240000).toISOString()}},{activeMarket:{count:1}},
+  {intakeCheckpoint:{...checkpoint,generationId:'other'}},{intakeCheckpoint:{...checkpoint,sources:[{...source,cursor:11991887}]}},
+  {runs:[{id:44,conclusion:'failure',updated_at:new Date(now-3600000).toISOString()}]}]){
+  assert.notEqual(recoveryDecision({...args,...patch}).reason,'published_run_independently_verified');
+ }
+});
 test('stale source observations trigger recovery even when publication timestamps are fresh',()=>{
  assert.equal(recoveryDecision(input).action,'none');
  assert.equal(recoveryDecision({...input,journal:{lastCollectionSuccess:'2026-09-15T00:00:00Z',lastPublicationSuccess:'2026-09-22T11:00:00Z'}}).action,'dispatch');
