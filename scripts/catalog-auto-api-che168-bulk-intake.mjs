@@ -116,10 +116,19 @@ try {
       },
     });
     await save();
-  }catch(error){await save();throw error;}
+    source.cursor=lastCursor;source.changes=totalChanges;
+  }catch(error){await save();source.cursor=lastCursor;source.changes=totalChanges;throw error;}
   const count=Number(db.prepare('SELECT COUNT(*) AS n FROM inventory').get().n);
   if(!count)throw Error('auto_api_empty_inventory');
-  if(quarantine.size>1000||quarantine.size>10&&quarantine.size/(count+quarantine.size)>0.005)throw Error('auto_api_quarantine_review_required');
+  // Owner instruction 09.10.2026: exclude unsuitable rows individually;
+  // known missing-model/invalid-year rows must not block suitable inventory.
+  // They have already been removed from SQLite by apply(). Identity failures,
+  // corrupt archives, incomplete streams and empty inventory still fail closed.
+  source.quarantined=quarantine.size;
+  source.quarantineReasons=Object.fromEntries(['missing_model','invalid_year'].map(reason=>
+    [reason,[...quarantine.values()].filter(value=>value===reason).length]));
+  source.quarantinePolicy='exclude_invalid_rows_20261009';
+  await checkpoint();
   const write=observationShardWriter(directory,sourceId);
   // The complete, gap-free event stream confirms which baseline rows remain
   // active. Preserve their actual detail date; record this distinct evidence.

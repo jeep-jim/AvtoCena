@@ -21,3 +21,5 @@
 - Append every completed task and operational launch to roadmap.md during the session, not only at the end of the day. Preserve history and record unfinished runs explicitly.
 
 - Owner exception 07.10.2026: Europe has a hard published inventory ceiling of 50,000 cars. Maintain freshness, prices and confirmed withdrawals; do not pursue Europe inventory growth beyond this cap. Other markets keep the no-count-cap policy. Source failures are not evidence of sale; retain publication safety guards.
+
+- Owner instruction 09.10.2026: publish suitable Che168 inventory; exclude missing-model/invalid-year rows individually instead of blocking the entire feed by their count/share. Preserve identity, archive integrity, complete change-stream and nonempty-inventory guards, age policy, Russian display, pricing evidence and truck/bus permitted gross mass limit above3500kg.
