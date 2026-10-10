@@ -8,6 +8,7 @@ import {DealerLink as Link} from "@/components/dealers/DealerBrowsingContext";
 import type {DealerBrowsingContext} from "@/lib/dealers/browsing-context";
 import { redirect } from "next/navigation";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { readGroupedCatalogFacets } from "@/lib/catalog/market-facets";
 import { readCatalogOverview } from "@/lib/catalog/overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
@@ -105,7 +106,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     }));
   } else {
     [facets, groupedMarkets] = await Promise.all([
-      readCatalogFacets({ ...common, market: selectedMarket || undefined }),
+      selectedMarket ? readCatalogFacets({ ...common, market: selectedMarket }) : readGroupedCatalogFacets(common, markets.map(market=>market.id)),
       Promise.all(markets.map(async (market) => {
         const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
         const page = selectedMarket ? requestedPage : 1;
