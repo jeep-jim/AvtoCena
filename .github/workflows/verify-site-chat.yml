@@ -5,6 +5,7 @@ on:
       - 'apps/web/**'
       - 'tests/site-chat*'
       - 'tests/browser/site-chat*'
+      - 'tests/browser/customer-chat*'
       - '.github/workflows/verify-site-chat.yml'
   workflow_dispatch:
 permissions:
@@ -22,6 +23,12 @@ jobs:
       - run: npm ci
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/crm-new-section-access.test.ts tests/crm-staff-permissions-route.test.ts tests/crm-permissions-activity.test.ts tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/chat-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check customer chat and color
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
+        run: |
+          node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/customer-conversation.test.ts
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/customer-chat.mjs
       - name: Check desktop and mobile
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
@@ -37,5 +44,6 @@ jobs:
           path: |
             artifacts/collection-controls/*.png
             artifacts/site-chat/*.png
+            artifacts/customer-chat/*.png
             artifacts/site-chat-rooms/*.png
             artifacts/account-entrance/*.png

@@ -1,3 +1,5 @@
+import {registeredClientAccount} from '@/lib/account/crm-registration';
+import {canConnectCustomer,connectRegisteredClient} from '@/lib/account/connect-client';
 import {requireSpec} from '@/lib/dealers/billing/store';
 import {dealerClientReady} from '@/lib/dealers/client-workflow';
 import {after} from 'next/server';
@@ -13,9 +15,10 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
 async function context(id:string){const user=await getCurrentUser();if(!user||!await canUseDocuments(user))throw Error('Нет доступа.');const path=workspaceClientsPath(user),company=documentCompany(user)||'dealer_topavto';const client=(await readChunkedDataJson<any>(path,[])).find(c=>c.id===id);if(!client||!canAccessDocumentClient(user,client)||!await dealerClientReady(user,client))throw Error('Нет доступа.');return {user,path,company,client};}
-export async function GET(request:Request){try{const {client,company}=await context(new URL(request.url).searchParams.get('clientId')||'');return Response.json({linked:!!client.portalAccountId,messages:(await readRecentChunkedDataJson<any>(threadPath(company,client.id),100)).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))},{headers});}catch{return new Response(null,{status:403});}}
+export async function GET(request:Request){try{const {client,company,user}=await context(new URL(request.url).searchParams.get('clientId')||'');const account=!client.portalAccountId?await registeredClientAccount(client):null;return Response.json({connection:account&&canConnectCustomer(user,client,account,company)?{accountId:account.id,name:account.name,phone:account.phone}:null,linked:!!client.portalAccountId,messages:(await readRecentChunkedDataJson<any>(threadPath(company,client.id),100)).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))},{headers});}catch{return new Response(null,{status:403});}}
 export async function POST(request:Request){if(!isCalculationOriginAllowed(request))return new Response(null,{status:403});try{const b=await readAccountJson(request);const {user,path,company,client}=await context(b.clientId);let result:any={ok:true};
- if(b.action==='invite'){const token=randomBytes(24).toString('hex');await updateChunkedDataJson<any>(path,client.id,c=>{if(!canAccessDocumentClient(user,c))throw Error('Нет доступа.');return {...c,portalInvite:{hash:hash(token),expiresAt:new Date(Date.now()+86400000).toISOString(),createdBy:user.id}};});result.url=`https://avtocena.com/account?invite=${company}.${client.id}.${token}`;}
+ if(b.action==='connect'){await connectRegisteredClient(user,company,client.id,b);}
+ else if(b.action==='invite'){const token=randomBytes(24).toString('hex');await updateChunkedDataJson<any>(path,client.id,c=>{if(!canAccessDocumentClient(user,c))throw Error('Нет доступа.');return {...c,portalInvite:{hash:hash(token),expiresAt:new Date(Date.now()+86400000).toISOString(),createdBy:user.id}};});result.url=`https://avtocena.com/account?invite=${company}.${client.id}.${token}`;}
  else if(b.action==='message'){if(!client.portalAccountId)throw Error('Клиент ещё не подключил кабинет.');await sendPortalMessage(company,client.id,b.text,user.displayName,undefined,user.id);}
  else if(b.action==='share'){await updateChunkedDataJson<any>(path,client.id,c=>{if(!canAccessDocumentClient(user,c))throw Error('Нет доступа.');if(!c.documents?.some((d:any)=>d.id===b.documentId&&!d.deletedAt))throw Error('Документ не найден.');return {...c,documents:c.documents.map((d:any)=>d.id===b.documentId?{...d,customerVisible:b.visible===true}:d)};});}
  else if(b.action==='confirm_contract'){

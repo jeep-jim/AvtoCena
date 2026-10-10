@@ -1,3 +1,4 @@
+import {customerConversation} from './conversation-events';
 import {accountCanAccessClient,sharedCustomerDocuments,confirmedCustomerContract} from './access';
 import {readDataJson,mutateDataJson,readChunkedDataJson,readRecentChunkedDataJson,appendChunkedDataJson} from '../data';
 import type {CustomerAccount} from './auth';
@@ -20,14 +21,14 @@ export async function portalData(a:CustomerAccount){const [links,users,allLeads]
  const [allReviews,thread,showcase]=await Promise.all([readChunkedDataJson<any>(`dealers/${link.companyId}/reviews.json`,[]),readRecentChunkedDataJson<any>(threadPath(link.companyId,client.id),100),readShowcase(link.companyId)]);
  const reviews=allReviews.filter(r=>r.userId===a.id&&leads.some(l=>l.id===r.leadId));
  const manager=users.find(u=>u.id===(client.assignedManagerId||leads.find(l=>l.assignedManagerId)?.assignedManagerId)&&u.status!=='disabled');
- const messages=thread.sort((a,b)=>a.createdAt.localeCompare(b.createdAt));
+ const messages=customerConversation(thread,client,leads,users);
  const avatar=(user:any,messageId?:string)=>user?.avatarUrl?.startsWith('/api/crm/users/')?`/api/account/manager-avatar?client=${key}${messageId?'&message='+encodeURIComponent(messageId):''}&v=${encodeURIComponent(user.avatarUrl.split('?')[1]||'')}`:user?.avatarUrl||defaultManagerAvatar(user?.id||'manager');
  result.push({key,name:client.fio||a.name,companyId:link.companyId,dealer:{name:showcase?.name||'Ваша компания',logo:showcase?.logoLight},reviewSummary:dealerReviewSummary(allReviews,link.companyId),manager:manager?{name:manager.displayName,avatar:avatar(manager)}:null,
  leads:leads.map(l=>({id:l.id,title:l.offerTitle||l.car||'Подбор автомобиля',status:leadStatusLabel(l.status),updatedAt:l.updatedAt||l.createdAt,reviewAvailableAt:confirmedCustomerContract(client,l.id)?.confirmedAt,canReview:!!confirmedCustomerContract(client,l.id)&&!client.portalReviews?.[l.id]&&!reviews.some(r=>r.leadId===l.id)})),
  pendingContracts: Object.entries(client.portalContracts||{}).filter(([leadId,c]:[string,any])=>leads.some(l=>l.id===leadId)&&c.requiresCustomerConfirmation&&!c.customerConfirmedAt&&!c.revokedAt&&sharedCustomerDocuments(client).some((d:any)=>d.id===c.documentId)).map(([leadId,c]:[string,any])=>({leadId,documentId:c.documentId})),
  documents:sharedCustomerDocuments(client).map((d:any)=>({id:d.id,name:d.name,size:d.size,createdAt:d.createdAt})),
  reviews:reviews.map(r=>({id:r.id,rating:r.rating,text:r.text,status:r.status,reply:r.reply?{text:r.reply.text,createdAt:r.reply.createdAt}:null})),
- messages:messages.map(m=>({id:m.id,text:m.text,author:m.author,createdAt:m.createdAt,mine:m.accountId===a.id,avatar:m.accountId?undefined:avatar(users.find(u=>u.status!=='disabled'&&(m.staffId?u.id===m.staffId:u.id===manager?.id&&u.displayName===m.author)),m.id)}))});
+ messages:messages.map(m=>({id:m.id,text:m.text,author:m.author,createdAt:m.createdAt,system:m.system,leadId:m.leadId,eventKind:m.eventKind,documentId:m.documentId,mine:m.accountId===a.id,avatar:m.accountId?undefined:avatar(users.find(u=>u.status!=='disabled'&&(m.staffId?u.id===m.staffId:u.id===manager?.id&&u.displayName===m.author)),m.id)}))});
  }return result;
 }
 export async function sendPortalMessage(company:string,client:string,text:unknown,author:string,accountId?:string,staffId?:string,messageId?:string,replyToId?:string){const value=String(text||'').trim();if(!value||value.length>4000)throw Error('Введите сообщение до 4000 символов.');const saved=await appendChunkedDataJson(threadPath(company,client),{id:messageId||crypto.randomUUID(),text:value,author,accountId,staffId,replyToId,createdAt:new Date().toISOString()},50);if(saved.text!==value||saved.accountId!==accountId||saved.staffId!==staffId||saved.replyToId!==replyToId)throw Error('message_conflict');return saved;}

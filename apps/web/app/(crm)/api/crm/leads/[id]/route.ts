@@ -199,6 +199,6 @@ export async function PATCH(
     }
   }
 
-  if(statusChanged||managerChanged)after(async()=>{if(managerChanged)await flushCrmPush(5).catch(()=>undefined);await notifyCustomerForLead(updatedLead).catch(()=>{});});
+  if(statusChanged||managerChanged||archiveChanged)after(async()=>{if(managerChanged)await flushCrmPush(5).catch(()=>undefined);await notifyCustomerForLead(updatedLead,existingLead).catch(()=>{});});
   return NextResponse.json({ ok: true, lead: updatedLead });
 }
