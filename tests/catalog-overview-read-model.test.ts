@@ -42,7 +42,9 @@ test("overview workflow remains a guarded backstop and refreshes after publisher
   assert.match(workflow, /Catalog quality · enforce global model cap/);
   assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(workflow, /branches:\s*\n\s*- main/);
-  assert.match(workflow, /"\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.doesNotMatch(workflow, /"\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.match(workflow, /cron: '5 17 \* \* \*'/);
+  assert.doesNotMatch(workflow, /cron: '23 \* \* \* \*'/);
   assert.match(workflow, /"scripts\/catalog-build-overview-read-model\.mjs"/);
   assert.match(workflow, /"scripts\/catalog-publish-current-read-models\.mjs"/);
   assert.match(workflow, /github\.event_name == 'push'/);
