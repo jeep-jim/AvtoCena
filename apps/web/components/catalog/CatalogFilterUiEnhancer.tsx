@@ -257,25 +257,16 @@ function makeClearButton(className: string) {
   return button;
 }
 
-function mobileHasSelectedParameter(sheet: HTMLElement) {
-  return Array.from(sheet.querySelectorAll<HTMLInputElement>("input[name]")).some((input) => {
-    if (input.type === "checkbox") return input.checked;
-    return Boolean(String(input.value || "").trim());
-  });
-}
-
 function updateMobileCloseAction(sheet: HTMLElement) {
   const header = sheet.querySelector<HTMLElement>(":scope > div:first-child > div:nth-child(2)");
   if (!header) return;
   const close = header.querySelector<HTMLButtonElement>('button[data-ac-mobile-close="1"], button[aria-label="Закрыть"]');
   if (!close) return;
   close.dataset.acMobileClose = "1";
-  const apply = mobileHasSelectedParameter(sheet);
-  close.classList.toggle("ac-mobile-apply", apply);
-  const caption = apply ? "✓" : "×";
-  if (close.textContent !== caption) close.textContent = caption;
-  close.setAttribute("aria-label", apply ? "Применить и закрыть" : "Закрыть");
-  close.setAttribute("title", apply ? "Применить" : "Закрыть");
+  close.classList.remove("ac-mobile-apply");
+  if (close.textContent !== "×") close.textContent = "×";
+  close.setAttribute("aria-label", "Закрыть");
+  close.setAttribute("title", "Закрыть");
 }
 
 function ensureClearControls() {

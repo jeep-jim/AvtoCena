@@ -78,7 +78,7 @@ try{
    }
    for(const name of ['bodyType','transmission','fuel','drive']){
     current={theme,width,name};const root=row.locator(`input[name="${name}"]`).locator('..');if(!await root.count()){assert.ok(live,'all fixture categories required');continue;}
-    await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
+    await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();if(name==='bodyType'){assert.equal(await menu.getByRole('button',{name:'Седан',exact:true}).isVisible(),true);assert.equal(await menu.getByRole('button',{name:'Универсал',exact:true}).isVisible(),true);}const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
     assert.deepEqual(await positions(sheet),before,'dropdown cannot push any closed filter or range row');
     assert.equal(await sheet.locator('.ac-filter-dropdown').count(),1);
     assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
@@ -91,9 +91,9 @@ try{
    for(const card of await sheet.locator('.ac-range-card').all())for(const box of await card.locator('.ac-range-input-box--menu').all()){
     current={theme,width,name:'range'};const toggle=box.locator('.ac-range-value-toggle');await toggle.scrollIntoViewIfNeeded();await page.waitForTimeout(150);await toggle.click();const menu=box.locator('.ac-range-value-menu.is-open');await menu.waitFor();assert.equal(await menu.evaluate(el=>getComputedStyle(el).position),'absolute');assert.deepEqual(await positions(sheet),before,'range menu cannot grow a row');const b=await menu.boundingBox();assert.ok(b.x>=0&&b.x+b.width<=width+1);await toggle.click();
    }
-   // Selection stays a draft until the sheet closes; no data-changing requests.
+   // Mobile selection applies while the sheet stays open.
    const body=row.locator('input[name="bodyType"]').locator('..');await body.locator(':scope > button').click();const options=body.locator('.ac-filter-option:not(.ac-facet-incompatible)');const option=options.filter({hasText:'Кроссовер'});if(await option.count()){
-    const previousUrl=page.url();await option.click();assert.equal(await body.locator('input[name="bodyType"]').inputValue(),'suv');assert.equal(page.url(),previousUrl);assert.equal(await body.locator('.ac-filter-dropdown').count(),0);
+    const previousUrl=page.url();await option.click();assert.equal(await body.locator('input[name="bodyType"]').inputValue(),'suv');await page.waitForURL(/bodyType=suv/,{timeout:30000});assert.equal(await sheet.isVisible(),true);assert.equal(await body.locator('.ac-filter-dropdown').count(),0);
     await sheet.locator(':scope > div:first-child button[aria-label="Закрыть"],:scope > div:first-child button[data-ac-mobile-close="1"]').click();await page.waitForURL(/bodyType=suv/,{timeout:30000});if(!live)assert.equal(await page.locator('.ac-notice-stack').isVisible(),true,'city notice returns after closing the filter sheet');
    }
    if(!live)assert.deepEqual(errors,[]);results.push({theme,width,menus:checks,noLayoutShift:true,rangeOverlays:true,selection:true,pageErrors:errors});save();

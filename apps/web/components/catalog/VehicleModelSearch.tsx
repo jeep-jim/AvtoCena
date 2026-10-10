@@ -12,14 +12,6 @@ type ModelSuggestion = {
 };
 
 type ModelSelection = { make: string; model: string };
-type ContextFacets = {
-  makes?: string[];
-  bodyTypes?: string[];
-  fuels?: string[];
-  transmissions?: string[];
-  drives?: string[];
-};
-
 let catalogFilterDependentUiMounted = false;
 
 const CONTEXT_KEYS = [
@@ -27,15 +19,6 @@ const CONTEXT_KEYS = [
   "yearFrom", "yearTo", "budgetFrom", "budgetTo", "mileageFrom", "mileageTo",
   "engineFrom", "engineTo", "powerFrom", "powerTo",
 ] as const;
-
-const BODY_LABELS: Record<string, string> = {
-  suv: "Кроссовер", offroad: "Внедорожник", sedan: "Седан", hatchback: "Хэтчбек",
-  wagon: "Универсал", minivan: "Минивэн", coupe: "Купе", convertible: "Кабриолет",
-  pickup: "Пикап", van: "Фургон",
-};
-const FUEL_LABELS: Record<string, string> = { petrol: "Бензин", diesel: "Дизель", hybrid: "Гибрид", electric: "Электро", lpg: "Газ" };
-const TRANSMISSION_LABELS: Record<string, string> = { automatic: "Автомат", manual: "Механика", cvt: "Вариатор", dct: "Робот" };
-const DRIVE_LABELS: Record<string, string> = { fwd: "Передний", rwd: "Задний", awd: "Полный" };
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -58,58 +41,12 @@ function currentCatalogContext(includeModel = true) {
   return result;
 }
 
-function hasContext(params: URLSearchParams) {
-  return CONTEXT_KEYS.some((key) => Boolean(params.get(key)));
-}
-
-function labelSet(values: string[] | undefined, labels?: Record<string, string>) {
-  return new Set((values || []).map((value) => labels?.[clean(value)] || clean(value)).filter(Boolean));
-}
-
-function allowedFacetLabels(name: string, facets: ContextFacets) {
-  if (name === "make") return labelSet(facets.makes);
-  if (name === "bodyType") return labelSet(facets.bodyTypes, BODY_LABELS);
-  if (name === "transmission") return labelSet(facets.transmissions, TRANSMISSION_LABELS);
-  if (name === "fuel") return labelSet(facets.fuels, FUEL_LABELS);
-  if (name === "drive") return labelSet(facets.drives, DRIVE_LABELS);
-  return new Set<string>();
-}
-
-function selectedFacetLabel(name: string, value: string) {
-  if (name === "bodyType") return BODY_LABELS[value] || value;
-  if (name === "transmission") return TRANSMISSION_LABELS[value] || value;
-  if (name === "fuel") return FUEL_LABELS[value] || value;
-  if (name === "drive") return DRIVE_LABELS[value] || value;
-  return value;
-}
-
-function applyDependentFacetOptions(facets: ContextFacets | null) {
-  const names = new Set(["bodyType", "transmission", "fuel", "drive"]);
-  document.querySelectorAll<HTMLInputElement>('.ac-catalog-filter-panel input[type="hidden"][name], .ac-mobile-filter-sheet input[type="hidden"][name]').forEach((hidden) => {
-    if (!names.has(hidden.name)) return;
-    const root = hidden.parentElement;
-    const dropdown = root?.querySelector<HTMLElement>(":scope > .ac-filter-dropdown");
-    if (!dropdown) return;
-    const allowed = facets ? allowedFacetLabels(hidden.name, facets) : null;
-    const selected = hidden.name === "make"
-      ? new Set(clean(hidden.value).split(",").map(clean).filter(Boolean))
-      : new Set([selectedFacetLabel(hidden.name, clean(hidden.value))].filter(Boolean));
-    dropdown.querySelectorAll<HTMLButtonElement>(".ac-filter-option").forEach((option, index) => {
-      const text = clean(option.dataset.facetValue || option.querySelector(":scope > span")?.textContent || option.textContent).replace(/✓$/, "").trim();
-      const keep = !allowed || index === 0 || !text || allowed.has(text) || selected.has(text);
-      option.classList.toggle("ac-facet-incompatible", !keep);
-      option.setAttribute("aria-hidden", keep ? "false" : "true");
-    });
-  });
-}
-
 function ensureCatalogFilterLayoutPolish() {
   const styleId = "ac-catalog-filter-layout-dependent-polish";
   if (!document.getElementById(styleId)) {
     const style = document.createElement("style");
     style.id = styleId;
     style.textContent = `
-      .ac-facet-incompatible{display:none!important}
       @media(min-width:1024px){
         .ac-catalog-filter-panel input.ac-filter-control[name="model"]{height:52px!important;min-height:52px!important;border-radius:15px!important}
         .ac-catalog-filter-panel .ac-primary-lower-grid{grid-template-columns:calc((100% - 20px)/3) calc((100% - 20px)/3) minmax(0,1fr) minmax(180px,.58fr)!important;gap:10px!important}
@@ -174,48 +111,9 @@ function useCatalogFilterDependentUi(enabled = true) {
     if (!enabled || catalogFilterDependentUiMounted) return;
     catalogFilterDependentUiMounted = true;
     let frame = 0;
-    let facetSignature = "";
-    let facets: ContextFacets | null = null;
-    let facetController: AbortController | null = null;
-
-    const loadFacets = () => {
-      const params = currentCatalogContext(true);
-      const signature = params.toString();
-      if (signature === facetSignature) {
-        applyDependentFacetOptions(facets);
-        return;
-      }
-      facetSignature = signature;
-      facetController?.abort();
-      if (!hasContext(params)) {
-        facets = null;
-        applyDependentFacetOptions(null);
-        return;
-      }
-      const controller = new AbortController();
-      facetController = controller;
-      const request = new URLSearchParams(params);
-      request.set("scope", "facets");
-      fetch(`/api/catalog/models?${request.toString()}`, { cache: "no-store", signal: controller.signal })
-        .then((response) => response.ok ? response.json() : Promise.reject(new Error(`facets_http_${response.status}`)))
-        .then((payload) => {
-          if (controller.signal.aborted) return;
-          facets = payload?.facets || null;
-          applyDependentFacetOptions(facets);
-        })
-        .catch(() => {
-          if (!controller.signal.aborted) {
-            facets = null;
-            applyDependentFacetOptions(null);
-          }
-        });
-    };
-
     const refresh = () => {
       frame = 0;
       ensureCatalogFilterLayoutPolish();
-      applyDependentFacetOptions(facets);
-      loadFacets();
     };
     const requestRefresh = () => {
       if (frame) return;
@@ -246,7 +144,6 @@ function useCatalogFilterDependentUi(enabled = true) {
     return () => {
       catalogFilterDependentUiMounted = false;
       window.clearTimeout(delay);
-      facetController?.abort();
       observer.disconnect();
       document.removeEventListener("input", delayedRefresh, true);
       document.removeEventListener("change", delayedRefresh, true);
@@ -356,6 +253,8 @@ export function VehicleModelSearch({
       onValueChange?.((selectedModels.includes(item.model) ? selectedModels.filter(model => model !== item.model) : [...selectedModels, item.model]).join("|"));
       if (!make) onMakeChange?.(item.make);
       setQuery("");
+      setOpen(false);
+      input.current?.blur();
       return root.current?.closest("form") || null;
     }
     setQuery(item.model);
@@ -422,6 +321,7 @@ export function VehicleModelSearch({
         {canSearch && !loading && items.length ? items.map((item) => <button
           key={item.id || `${item.make}:${item.model}`}
           type="button"
+          onPointerDown={(event) => event.preventDefault()}
           onClick={() => choose(item)}
           aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
@@ -431,7 +331,6 @@ export function VehicleModelSearch({
         </button>) : null}
         {canSearch && !loading && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Совпадений в каталоге нет</div> : null}
       </div>
-      {multiple && <button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => setOpen(false)}>Готово</button>}
     </div> : null}
   </div>;
 }

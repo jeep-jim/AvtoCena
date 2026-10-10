@@ -1,15 +1,21 @@
 name: Verify mobile catalog filter overlays
 on:
   push:
-    branches: [fix/catalog-filter-continuity-20260921, fix/staff-inbox-ui-20260920, fix/mobile-catalog-overlay-menus-20260913, fix/catalog-filter-readiness, fix/spec-labels-filter-ready-20260920, fix/mobile-filter-notice-20260920, fix/catalog-projection-reuse-20260920, main]
+    branches: [fix/idea5-search-performance, fix/catalog-filter-continuity-20260921, fix/staff-inbox-ui-20260920, fix/mobile-catalog-overlay-menus-20260913, fix/catalog-filter-readiness, fix/spec-labels-filter-ready-20260920, fix/mobile-filter-notice-20260920, fix/catalog-projection-reuse-20260920, main]
     paths:
       - 'apps/web/components/catalog/CatalogFilters.tsx'
+      - 'apps/web/components/catalog/CatalogBrandMultiSelect.tsx'
+      - 'apps/web/components/catalog/VehicleModelSearch.tsx'
+      - 'apps/web/components/layout/OverlayBackHistory.tsx'
       - 'apps/web/lib/catalog/storage.ts'
       - 'apps/web/components/catalog/CatalogFilterUiEnhancer.tsx'
       - 'apps/web/app/(public)/layout.tsx'
       - 'apps/web/components/catalog/MobileCatalogDropdowns.css'
       - 'tests/browser/mobile-filter-*'
       - '.github/workflows/verify-mobile-filter-overlays.yml'
+concurrency:
+  group: mobile-filters-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 permissions:
   contents: write
 jobs:

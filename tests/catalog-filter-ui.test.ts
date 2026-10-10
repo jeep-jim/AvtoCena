@@ -27,7 +27,7 @@ test("catalog filters apply automatically and show the active query", () => {
   assert.doesNotMatch(source, /type="submit"/);
   assert.match(source, /aria-label="Выбранные параметры"/);
   assert.doesNotMatch(source, /key=\{`desktop-\$\{formKey\}`\}/, "a completed response must not remount the active input");
-  assert.match(source, /key=\{`mobile-\$\{formKey\}`\}/);
+  assert.doesNotMatch(source, /key=\{`mobile-\$\{formKey\}`\}/, "server responses must not remount the open mobile sheet");
 });
 
 test("catalog filters use direct range inputs, quick presets and a real mobile bottom sheet", () => {

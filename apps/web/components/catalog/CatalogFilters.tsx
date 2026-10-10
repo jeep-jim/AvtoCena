@@ -320,7 +320,6 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const electricOnly = isElectrifiedFilter(draft.fuel);
 
   useEffect(() => {
-    if (mobileOpen) return;
     const incomingSort=initialSort(initial.sort || "");
     const incoming=catalogQuery(draftFromInitial(initial),incomingSort.key,incomingSort.direction);
     const currentQuery = catalogQuery(draft, sortKey, sortDirection);
@@ -336,7 +335,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [formKey]);
 
   useEffect(() => {
-    if (mobileOpen) return; // Apply the complete mobile selection once the sheet closes.
+    // Apply the current selection without a second confirmation on mobile.
     const nextInitial = draftFromInitial(initial);
     const initialSorting = initialSort(initial.sort || "");
     const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
@@ -395,7 +394,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     return catalogQuery(contextDraft, "", "asc");
   }, [draft]);
-  const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, draft.bodyType), [activeFacets, draft.bodyType]);
+  const bodyOptions = useMemo(() => catalogFilterOptions(bodies, bodies.slice(1).map(option => option.value), draft.bodyType), [activeFacets, draft.bodyType]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
   const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
@@ -443,7 +442,6 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   };
   const changeCity = (city: string) => {
     persistCity(city);
-    if (mobileOpen) return;
     // A city selection can supersede an in-flight Next navigation. Re-submit
     // the full current draft instead of letting the old URL win that race.
     const nextQuery = catalogQuery(draft, sortKey, sortDirection);
@@ -484,7 +482,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
     <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
-    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
+    {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
