@@ -52,8 +52,9 @@ test("current read-model republisher preserves every immutable public row", () =
   assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, storedOffers, true\)/);
 });
 
-test("post-deploy gate checks all six live markets instead of treating Korea as the catalog smoke test", () => {
-  assert.match(postDeployWorkflow, /workflows:\s*\n\s*- "Deploy to Yandex Cloud"/);
+test("manual parity audit checks all six live markets without an automatic deployment trigger", () => {
+  assert.match(postDeployWorkflow, /^  workflow_dispatch:/m);
+  assert.doesNotMatch(postDeployWorkflow, /^  (workflow_run|schedule|push):/m);
   assert.match(postDeployWorkflow, /for market in korea china japan uae europe georgia/);
   assert.doesNotMatch(postDeployWorkflow, /kyrgyzstan/);
   assert.match(postDeployWorkflow, /api\/catalog\/search\?market=\$market&pageSize=\$sample_size/);
@@ -72,7 +73,7 @@ test("post-deploy gate fails when one-hop read models diverge from the immutable
   assert.match(parityAudit, /projectionGenerationId !== generationId/);
   assert.match(parityAudit, /items\.length !== expected/);
   assert.match(postDeployWorkflow, /catalog-audit-current-readmodel-parity\.mjs/);
-  assert.match(postDeployWorkflow, /catalog-current-readmodel-parity-\$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
+  assert.match(postDeployWorkflow, /catalog-current-readmodel-parity-\$\{\{ github\.event\.workflow_run\.head_sha \|\| github\.sha \}\}/);
 });
 
 const homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/home/route.ts", import.meta.url), "utf8");

@@ -1,12 +1,7 @@
 name: Catalog visible calculation coverage
 
 on:
-  workflow_run:
-    workflows:
-      - Deploy to Yandex Cloud
-      - Catalog · refresh current read models
-    types:
-      - completed
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
 
 permissions:

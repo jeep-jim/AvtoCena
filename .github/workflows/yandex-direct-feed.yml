@@ -2,11 +2,10 @@ name: Publish Yandex Direct feed
 on:
   workflow_dispatch:
   schedule:
-    - cron: '23 */3 * * *'
+    - cron: '23 1 * * *'
   push:
     branches: [main]
     paths:
-      - '.github/workflows/yandex-direct-feed.yml'
       - 'scripts/publish-yandex-direct-feed.mjs'
       - 'apps/web/lib/catalog/yandex-direct-*.ts'
   workflow_run:
@@ -22,7 +21,7 @@ jobs:
     # A market can commit a valid new catalog and then fail its full-coverage
     # audit. Rebuild from the committed manifest even in that case, so ads do
     # not keep links from the previous generation until the next 3-hour cron.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion != 'cancelled'
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:

@@ -32,3 +32,10 @@
 - Any new collector, recovery or source detail path must honor owner market/source switches. The feed and legacy Che168 parser have separate control IDs despite sharing an inventory sourceId. Never publish commercial feed files or control records into the public repository.
 
 - Deployment trigger: changes only to GitHub workflows or documentation do not rebuild/restart the website. If changing only deploy-yandex.yml and needing its runtime/resource settings applied immediately, explicitly run that workflow (workflow_dispatch). App/runtime changes still trigger the usual deployment; do not touch app files just to force a deploy.
+
+# Owner background-cost policy — 10.10.2026
+
+- Automatic recovery/watchdog, exploratory full audits, performance probes and knowledge accumulation are manual-only until the owner explicitly re-enables them. Do not restore their schedule, workflow_run or push triggers as a side effect of another fix.
+- Keep scheduled required market collectors and the paid China feed. China HTML reserves remain owner-controlled and off by default. No automatic retry loop may restart collection after failure.
+- Preserve functional cache/index preparation on source/release changes and daily date rollover, essential CRM delivery/rates, and bounded retention cleanup. Do not move expensive preparation back into visitor requests by disabling those dependencies. Hourly cache-readiness polling is disabled.
+- Never enable paid Smart Web Security without explicit owner approval. Existing application authentication, publication guards and request validation remain required.

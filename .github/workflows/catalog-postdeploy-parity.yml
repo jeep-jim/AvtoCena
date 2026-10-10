@@ -1,18 +1,15 @@
 name: Catalog · post-deploy six-market parity
-run-name: Catalog post-deploy parity · ${{ github.event.workflow_run.head_sha }}
+run-name: Catalog post-deploy parity · ${{ github.event.workflow_run.head_sha || github.sha }}
 
 on:
-  workflow_run:
-    workflows:
-      - "Deploy to Yandex Cloud"
-    types: [completed]
-
+  # Owner cost-control policy: run only on explicit manual request.
+  workflow_dispatch:
 permissions:
   contents: read
   statuses: write
 
 concurrency:
-  group: catalog-postdeploy-parity-${{ github.event.workflow_run.head_sha }}
+  group: catalog-postdeploy-parity-${{ github.event.workflow_run.head_sha || github.sha }}
   cancel-in-progress: true
 
 env:
@@ -27,13 +24,12 @@ env:
 
 jobs:
   parity:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -73,7 +69,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: catalog-current-readmodel-parity-${{ github.event.workflow_run.head_sha }}
+          name: catalog-current-readmodel-parity-${{ github.event.workflow_run.head_sha || github.sha }}
           path: |
             catalog-current-readmodel-parity.json
             catalog-public-quotes.json
@@ -81,10 +77,10 @@ jobs:
           retention-days: 7
 
       - name: Keep Yandex deploy status green only after six-market parity
-        if: success()
+        if: success() && github.event_name == 'workflow_run'
         env:
           GH_TOKEN: ${{ github.token }}
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         shell: bash
         run: |
           run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
@@ -92,10 +88,10 @@ jobs:
           curl -fsS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${{ github.repository }}/statuses/$DEPLOY_SHA" -d "$payload" >/dev/null
 
       - name: Mark Yandex deploy status failed on catalog parity error
-        if: failure()
+        if: failure() && github.event_name == 'workflow_run'
         env:
           GH_TOKEN: ${{ github.token }}
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         shell: bash
         run: |
           run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
