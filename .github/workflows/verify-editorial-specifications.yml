@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'apps/web/lib/catalog/editorial*'
+      - 'apps/web/app/api/crm/catalog/photos/route.ts'
       - 'apps/web/components/catalog/CatalogEditorialEditor.tsx'
       - 'tests/browser/editorial-specifications*'
       - '.github/workflows/verify-editorial-specifications.yml'
@@ -23,7 +24,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial.test.ts tests/catalog-editorial-route.test.ts tests/catalog-full-specifications.test.ts tests/catalog-compressed-selector-read.test.ts tests/green-corner-page-budget.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial.test.ts tests/catalog-editorial-route.test.ts tests/catalog-editorial-photo-url.test.ts tests/catalog-full-specifications.test.ts tests/catalog-compressed-selector-read.test.ts tests/green-corner-page-budget.test.ts
       - run: npx tsc -p apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/editorial-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - name: Verify mobile and desktop editor in both themes

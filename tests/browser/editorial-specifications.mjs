@@ -20,12 +20,15 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.route('**/api/catalog/offer/fixture/editorial',async route=>{payload=route.request().postDataJSON();await route.fulfill({status:fail?409:200,json:fail?{error:'Объявление уже изменено другим сотрудником.'}:{entry:{...payload,version:'saved'}}});});
  await page.goto(`http://127.0.0.1:${server.address().port}`);await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();
+ await page.route('**/api/crm/catalog/photos',async route=>{assert.equal(route.request().postDataJSON().url,'https://example.com/car.jpg');await route.fulfill({json:{id:'a'.repeat(64),url:'/api/site-media/'+'a'.repeat(64)}});});
  const form=page.getByRole('form',{name:'Редактирование объявления',exact:true});
  await form.getByLabel('Кузов',{exact:true}).selectOption('suv');await form.getByLabel('Привод',{exact:true}).selectOption('awd');await form.getByLabel('Коробка передач',{exact:true}).selectOption('cvt');await form.getByLabel('Цвет',{exact:true}).fill('Синий');
+ assert.equal(await form.getByRole('button',{name:'Изменить параметры',exact:true}).count(),0);
+ await form.getByRole('button',{name:'Добавить по ссылке',exact:true}).click();await form.getByLabel('Ссылка на фотографию',{exact:true}).fill('https://example.com/car.jpg');await form.getByRole('button',{name:'Добавить фото',exact:true}).click();await form.getByRole('button',{name:'Сделать фото 1 обложкой',exact:true}).waitFor();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:`${out}/${width}-${theme}.png`});
  await form.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.waitFor({state:'hidden'});
- assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
+ assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});assert.deepEqual(payload.photos,['/api/site-media/'+'a'.repeat(64)]);assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
  await form.getByLabel('Кузов',{exact:true}).selectOption('');await form.getByLabel('Цвет',{exact:true}).fill('');fail=true;
  await form.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
