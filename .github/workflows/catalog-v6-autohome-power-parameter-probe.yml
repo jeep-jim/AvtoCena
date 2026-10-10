@@ -2,11 +2,7 @@ name: Catalog V6 · Autohome power parameter probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-autohome-power-parameter-probe.yml"
-      - "scripts/autohome-config-power-parameter-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

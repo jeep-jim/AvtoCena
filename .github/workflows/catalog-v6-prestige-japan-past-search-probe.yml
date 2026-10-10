@@ -2,11 +2,7 @@ name: Catalog V6 · Prestige past search probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-prestige-japan-past-search-probe.yml"
-      - "scripts/prestige-japan-past-search-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

@@ -2,11 +2,7 @@ name: Catalog V6 · JP Center loader contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-jpcenter-loader-contract-probe.yml"
-      - "scripts/jpcenter-loader-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 

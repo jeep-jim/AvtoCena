@@ -3,13 +3,7 @@ run-name: Japan power diagnostic · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-japan-power-diagnostic.yml"
-      - "scripts/prestige-japan-power-diagnostic.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   actions: read
   contents: read

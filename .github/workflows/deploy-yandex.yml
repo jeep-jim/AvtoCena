@@ -5,6 +5,10 @@ on:
     branches:
       - main
     paths-ignore:
+      # Automation/docs-only changes do not rebuild and restart the web service.
+      # Use workflow_dispatch to apply a deployment-workflow-only change.
+      - .github/workflows/**
+      - AGENTS.md
       - scripts/**
       - tests/**
       - docs/**

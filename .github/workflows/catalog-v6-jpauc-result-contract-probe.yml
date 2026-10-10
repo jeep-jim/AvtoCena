@@ -2,11 +2,7 @@ name: Catalog V6 · JPAuc result contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-jpauc-result-contract-probe.yml"
-      - "scripts/jpauc-result-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

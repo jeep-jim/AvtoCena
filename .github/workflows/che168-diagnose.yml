@@ -1,9 +1,7 @@
 name: Diagnose Che168 rejected rows
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['scripts/catalog-auto-api-che168-diagnose.mjs']
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 jobs:

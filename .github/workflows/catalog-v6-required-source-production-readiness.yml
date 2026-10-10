@@ -3,10 +3,7 @@ name: Catalog V6 · required source production readiness
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-required-source-production-readiness.yml"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

@@ -2,11 +2,7 @@ name: Catalog V6 · Prestige Japan contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-prestige-japan-contract-probe.yml"
-      - "scripts/prestige-japan-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

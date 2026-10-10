@@ -2,12 +2,7 @@ name: Catalog V6 · Japan China source structure probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-source-structure-probe.yml"
-      - "scripts/catalog-source-structure-probe.mjs"
-      - "scripts/encar-power-field-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

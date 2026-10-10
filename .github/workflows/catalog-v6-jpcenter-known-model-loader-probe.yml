@@ -2,11 +2,7 @@ name: Catalog V6 · JP Center known model loader probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-jpcenter-known-model-loader-probe.yml"
-      - "scripts/jpcenter-known-model-loader-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 
