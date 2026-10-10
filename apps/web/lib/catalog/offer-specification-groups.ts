@@ -3,7 +3,7 @@ import type { VehicleOffer } from "./types";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
 import { classifySpecificationEvidence } from "./specification-evidence-audit";
 import { auctionGradeLabel, assessJapanExportRestriction, japanRestrictionDescription } from "./japan-export-restriction";
-import { catalogBodyName } from "./presentation";
+import { catalogBodyName, catalogDriveName, catalogTransmissionName } from "./presentation";
 import { catalogPowerSanity } from "./power-sanity";
 
 export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLabel?: string }): SourceSpecificationSnapshot["groups"] {
@@ -17,6 +17,9 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
   if (typeof offer.mileageKm === "number" && offer.mileageKm >= 0) add(basic, "Пробег, км", offer.mileageKm);
   const bodyLabel = display?.bodyLabel ?? catalogBodyName(offer.bodyType, offer);
   if (bodyLabel && bodyLabel !== "уточняется") add(basic, "Кузов", bodyLabel);
+  if(offer.editorialSpecifications?.drive)add(basic,"Привод",catalogDriveName(offer.drive));
+  if(offer.editorialSpecifications?.transmission)add(basic,"Коробка передач",catalogTransmissionName(offer.transmission));
+  if(offer.color)add(basic,"Цвет",offer.color);
   if (basic.length) groups.push({ name: "Об автомобиле", items: basic });
   const verified: typeof basic = [];
   if (classifySpecificationEvidence(offer, "engineCc").state === "exact") add(verified, "Рабочий объём, см³", offer.engineCc);
@@ -47,5 +50,13 @@ export function offerSpecificationGroups(offer: VehicleOffer, display?: { bodyLa
     groups.push(...snapshot.groups.map(group => ({ ...group, items: group.items.filter(item => !privateIdentifier.test(item.name)
       && !(rejectedPower && powerField.test(item.name))) })).filter(group => group.items.length));
   }
-  return displaySpecificationGroups(groups);
+  const displayed=displaySpecificationGroups(groups);
+  // The first group carries the corrected values; avoid contradictory source rows.
+  const corrected=offer.editorialSpecifications;
+  if(!corrected)return displayed;
+  return displayed.map((group,index)=>index===0?group:{...group,items:group.items.filter(item=>
+   !(corrected.bodyType&&/^(кузов|тип кузова)$/i.test(item.name.trim()))&&
+   !(corrected.drive&&/^(привод|тип привода)$/i.test(item.name.trim()))&&
+   !(corrected.transmission&&/^(коробка передач|трансмиссия|кпп)$/i.test(item.name.trim()))&&
+   !(corrected.color&&/^(цвет|цвет кузова)$/i.test(item.name.trim())))}).filter(group=>group.items.length);
 }

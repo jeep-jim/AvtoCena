@@ -16,6 +16,8 @@ test('catalog editing is tenant-scoped, rejects invalid input and never accepts 
  for(const user of [null,{...owner,role:'manager',permissions:{catalog:true}},{...owner,companyId:'other'},{...owner,status:'disabled'},{...owner,role:'dealer',permissions:{catalog:true}},{...owner,role:'admin',permissions:{catalog:false}}])assert.equal(canEditCatalog(user),false);
  for(const changes of [{title:'a'.repeat(201)},{status:'deleted'},{photos:[]},{photos:['http://127.0.0.1/private']},{photos:['//example.com/x']},{photos:['javascript:alert(1)']},{photos:Array(31).fill(photo)},{version:7}])assert.throws(()=>input(changes));
  assert.deepEqual(input({photos:[photo]}).photos,[photo]);
+ for(const specifications of [{year:'2020'},{powerHp:'999'},{bodyType:'broken'},{drive:'4WD'},{transmission:9},{color:'a'.repeat(61)},null,[]])assert.throws(()=>input({specifications}));
+ assert.deepEqual(input({specifications:{bodyType:'suv',drive:'awd',transmission:'cvt',color:' Синий '}}).specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});
 });
 
 test('manual edits survive publication, hide before pagination and keep counts, facets, homepage and restore consistent',async()=>{
@@ -63,6 +65,22 @@ test('manual edits survive publication, hide before pagination and keep counts, 
   const visible=restored.items.find(r=>r.id===victim.id)!;
   assert.equal(catalogOfferTitle(visible),'Проверенный автомобиль');assert.equal(visible.images[0].url,photo);assert.equal(visible.totalRub,base.totalRub);
   await withCatalogEditorial(async()=>{assert.equal(editorialHidden(victim),false);assert.equal(applyCatalogEditorial({...victim,sourceOfferId:'different'}).cardImageUrl,base.cardImageUrl);});
+  saved=await saveCatalogEditorial(victim,input({status:'visible',version:saved.version,specifications:{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'}}),actor,'Original');
+  for(const params of [{market:'korea',bodyType:'suv'},{market:'korea',drive:'awd',budgetTo:2000000},{market:'korea',make:'Hyundai',transmission:'cvt'}]){
+   const result=await searchOffers(params);assert.equal(result.total,1);assert.equal(result.items[0].id,victim.id);
+   assert.equal(result.items[0].bodyType,'suv');assert.equal(result.items[0].drive,'awd');assert.equal(result.items[0].totalRub,base.totalRub);
+   assert.equal((await countCatalogOffers(params)).total,1);
+   assert.deepEqual((await readCatalogFacets(params)).bodyTypes,['suv']);
+  }
+  assert.equal((await searchOffers({market:'korea',bodyType:'sedan'})).total,2);
+  // Old clients changing photos/status must not erase newly supported fields.
+  saved=await saveCatalogEditorial(victim,input({status:'visible',version:saved.version}),actor,'Original');
+  assert.equal(saved.specifications?.bodyType,'suv');
+  generationId='editorial-c';resetCatalogReadCachesForTests();resetCatalogEditorialCache();
+  assert.equal((await searchOffers({market:'korea',bodyType:'suv'})).total,1);
+  saved=await saveCatalogEditorial(victim,input({status:'visible',version:saved.version,specifications:{}}),actor,'Original');
+  assert.equal((await searchOffers({market:'korea',bodyType:'suv'})).total,0);
+  assert.equal((await searchOffers({market:'korea',bodyType:'sedan'})).total,3);
   // Concurrent changes to the same record cannot silently overwrite each other.
   const attempts=await Promise.allSettled([saveCatalogEditorial(victim,input({version:saved.version}),actor,'Original'),saveCatalogEditorial(victim,input({version:saved.version,status:'archived'}),actor,'Original')]);
   assert.equal(attempts.filter(r=>r.status==='fulfilled').length,1);assert.equal(attempts.filter(r=>r.status==='rejected'&&r.reason instanceof EditorialConflict).length,1);
