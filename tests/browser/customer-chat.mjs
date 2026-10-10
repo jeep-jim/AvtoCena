@@ -8,7 +8,7 @@ const server=http.createServer((req,res)=>{if(req.url==='/fixture.js'){res.setHe
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox']});
 try{for(const width of [390,1440]){
  const page=await browser.newPage({viewport:{width,height:844}});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${server.address().port}`);
- const composer=page.getByRole('textbox',{name:'Сообщение менеджеру'});await composer.waitFor();
+ const composer=page.getByRole('textbox',{name:'Сообщение менеджеру'});await composer.waitFor();await page.waitForFunction(()=>document.getAnimations().every(a=>a.playState!=='running'));
  const dimensions=await page.locator('.customer-account-chat').evaluate(root=>{const list=root.querySelector('.ac-chat-messages'),form=root.querySelector('form');return {scroll:list.scrollHeight-list.scrollTop-list.clientHeight,bottom:form.getBoundingClientRect().bottom,height:innerHeight,overflow:root.scrollHeight-root.clientHeight};});
  assert.ok(dimensions.scroll<5,JSON.stringify(dimensions));assert.ok(dimensions.bottom<=dimensions.height+1,JSON.stringify(dimensions));assert.ok(dimensions.overflow<5,JSON.stringify(dimensions));
  await composer.fill('Черновик проверки');

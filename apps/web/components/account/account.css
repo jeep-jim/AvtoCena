@@ -113,3 +113,7 @@ html[data-theme=light] .account-cabinet-page{background:#edf1f6;--ac-surface:#f8
 .customer-chat-reopen small{font-size:11px;color:var(--ac-muted)}
 .customer-chat-row.is-system .ac-chat-message{opacity:.9}
 @media(max-width:767px){.customer-chat-sheet .customer-account-chat.ac-chat{height:92dvh;min-height:0;border-radius:0}.customer-chat-sheet .ac-chat-toolbar{padding:8px 12px}.customer-chat-sheet .ac-chat-messages{padding:12px}.customer-chat-sheet .portal-person-avatar{width:32px;height:32px;flex:none}.customer-chat-sheet .ac-chat-compose textarea{padding:12px;background:var(--ac-surface);border:1px solid var(--ac-border);border-radius:12px}}
+
+.customer-account-chat .ac-chat-messages{display:flex;flex-direction:column}
+.customer-account-chat .ac-chat-messages>div{flex-shrink:0}
+.customer-account-chat .ac-chat-messages>div:first-child{margin-top:auto}
