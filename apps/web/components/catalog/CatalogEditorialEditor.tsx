@@ -3,6 +3,8 @@ import {useEffect,useId,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
 import './catalog-editorial-editor.css';
+import {DealerColorField} from '@/components/dealers/DealerColorField';
+import {namedVehicleColor} from '@/lib/catalog/vehicle-colors';
 import {PublicSheet} from '@/components/ui/PublicSheet';
 import {preparePhotoUpload,readPhotoUploadResponse} from '@/lib/dealers/photo-upload';
 import type {CatalogEditorialEntry,EditorialStatus} from '@/lib/catalog/editorial';
@@ -68,7 +70,7 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
    <p className="mt-1 text-xs text-[var(--ac-muted)]">Пустое поле — название продавца.</p>
    <fieldset className="mt-4" disabled={busy}><legend className="text-sm font-bold">Характеристики объявления</legend>
     <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">{(['bodyType','drive','transmission'] as const).map(key=><label key={key} className="block text-sm font-bold">{{bodyType:'Кузов',drive:'Привод',transmission:'Коробка передач'}[key]}<select aria-label={{bodyType:'Кузов',drive:'Привод',transmission:'Коробка передач'}[key]} value={specifications[key]||''} onChange={e=>setSpecifications(current=>({...current,[key]:e.target.value}))} className="mt-1 block w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal"><option value="">Данные продавца{sourceSpecifications[key]?` · ${editorialSpecificationOptions[key].find(option=>option[0]===sourceSpecifications[key])?.[1]||sourceSpecifications[key]}`:''}</option>{editorialSpecificationOptions[key].map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>)}
-    <label className="block text-sm font-bold">Цвет<input value={specifications.color||''} maxLength={60} placeholder={sourceSpecifications.color||'Данные продавца'} onChange={e=>setSpecifications(current=>({...current,color:e.target.value}))} className="mt-1 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal"/></label></div>
+    <DealerColorField value={specifications.color||''} maxLength={60} placeholder={`Данные продавца${sourceSpecifications.color?` · ${namedVehicleColor(sourceSpecifications.color)?.[0]||sourceSpecifications.color}`:''}`} resetLabel="Вернуть цвет продавца" onChange={color=>setSpecifications(current=>({...current,color}))}/></div>
     <p className="mt-2 text-xs text-[var(--ac-muted)]">Чтобы отменить правку, выберите «Данные продавца» или очистите цвет.</p>
    </fieldset>
    <div className="mt-3 flex flex-wrap gap-2"><button type="button" className={button} disabled={busy} onClick={()=>file.current?.click()}>Заменить фото</button><button type="button" className={button} disabled={busy} aria-expanded={urlOpen} onClick={()=>setUrlOpen(value=>!value)}>Добавить по ссылке</button><button type="button" className={button} disabled={busy||!photos} onClick={()=>setPhotos(null)}>Вернуть фото продавца</button><Link className={button} href="/crm/catalog">Перейти в архив</Link></div>

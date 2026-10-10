@@ -10,7 +10,7 @@ await build({entryPoints:['tests/browser/editorial-specifications-fixture.tsx'],
  b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path.endsWith('navigation')?'export const useRouter=()=>({refresh(){},push(){}});':`import React from 'react';export default function Link(props){return React.createElement('a',props);}`,resolveDir:process.cwd()}));
 }}]});
-const css=await postcss([tailwindcss({content:['apps/web/components/catalog/CatalogEditorialEditor.tsx','apps/web/components/ui/PublicSheet.tsx','tests/browser/editorial-specifications-fixture.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});
+const css=await postcss([tailwindcss({content:['apps/web/components/dealers/DealerColorField.tsx','apps/web/components/catalog/CatalogEditorialEditor.tsx','apps/web/components/ui/PublicSheet.tsx','tests/browser/editorial-specifications-fixture.tsx']})]).process('@tailwind base;@tailwind components;@tailwind utilities;',{from:undefined});
 fs.appendFileSync(`${out}/app.css`,css.css);
 const server=http.createServer((req,res)=>{if(req.url==='/app.js'||req.url==='/app.css'){res.setHeader('Content-Type',req.url.endsWith('.js')?'application/javascript':'text/css');res.end(fs.readFileSync(out+req.url));return;}res.setHeader('Content-Type','text/html; charset=utf-8');res.end('<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script src="/app.js"></script></body></html>');});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
@@ -22,7 +22,16 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();
  await page.route('**/api/crm/catalog/photos',async route=>{assert.equal(route.request().postDataJSON().url,'https://example.com/car.jpg');await route.fulfill({json:{id:'a'.repeat(64),url:'/api/site-media/'+'a'.repeat(64)}});});
  const form=page.getByRole('form',{name:'Редактирование объявления',exact:true});
- await form.getByLabel('Кузов',{exact:true}).selectOption('suv');await form.getByLabel('Привод',{exact:true}).selectOption('awd');await form.getByLabel('Коробка передач',{exact:true}).selectOption('cvt');await form.getByLabel('Цвет',{exact:true}).fill('Синий');
+ await form.getByLabel('Кузов',{exact:true}).selectOption('suv');await form.getByLabel('Привод',{exact:true}).selectOption('awd');await form.getByLabel('Коробка передач',{exact:true}).selectOption('cvt');await form.getByRole('button',{name:'Цвет',exact:true}).click();
+ const colors=page.getByRole('dialog',{name:'Цвет автомобиля',exact:true});
+ await colors.getByRole('button',{name:'Синий',exact:true}).click();
+ await form.getByRole('button',{name:'Цвет',exact:true}).click();await colors.getByRole('button',{name:'Вся палитра',exact:true}).click();
+ await colors.getByRole('slider',{name:'Насыщенность и яркость'}).click({position:{x:50,y:50}});
+ await colors.getByLabel('HEX',{exact:true}).fill('#123456');await colors.getByLabel('Свой оттенок или заводское название',{exact:true}).fill('Мой синий');
+ await colors.getByLabel('HEX',{exact:true}).scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/${width}-${theme}-spectrum.png`});
+ await colors.getByRole('button',{name:'Готово',exact:true}).click();
+ assert.match(await form.getByRole('button',{name:'Цвет',exact:true}).innerText(),/Мой синий \(#123456\)/);
+ await form.getByRole('button',{name:'Цвет',exact:true}).click();await colors.getByRole('button',{name:'Вся палитра',exact:true}).click();assert.equal(await colors.getByLabel('HEX',{exact:true}).inputValue(),'#123456');await colors.getByRole('button',{name:'Готово',exact:true}).click();
  assert.equal(await form.getByRole('button',{name:'Изменить параметры',exact:true}).count(),0);
  assert.equal(await page.getByRole('button',{name:'Отмена',exact:true}).count(),0);
  assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),1);
@@ -31,9 +40,9 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:`${out}/${width}-${theme}.png`});
  await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.waitFor({state:'hidden'});
- assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});assert.deepEqual(payload.photos,['/api/site-media/'+'a'.repeat(64)]);assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
+ assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Мой синий (#123456)'});assert.deepEqual(payload.photos,['/api/site-media/'+'a'.repeat(64)]);assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
- await form.getByLabel('Кузов',{exact:true}).selectOption('');await form.getByLabel('Цвет',{exact:true}).fill('');fail=true;
+ await form.getByLabel('Кузов',{exact:true}).selectOption('');await form.getByRole('button',{name:'Цвет',exact:true}).click();await colors.getByRole('button',{name:'Вернуть цвет продавца',exact:true}).click();fail=true;
  await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
  await page.getByRole('button',{name:'Закрыть редактирование объявления',exact:true}).click();await form.waitFor({state:'hidden'});await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
  console.log(JSON.stringify({width,theme,saved:true,conflictRetainsForm:true,closeDiscardsUnsaved:true,saveInHeader:true}));await context.close();
