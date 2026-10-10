@@ -1,15 +1,7 @@
 name: Accumulate compact vehicle knowledge
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/knowledge-memory.yml', 'apps/web/lib/catalog/knowledge-memory.ts']
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
-  schedule:
-    - cron: '20 18 * * *'
-  workflow_run:
-    workflows: ['Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish', 'Catalog refresh green']
-    types: [completed]
-    branches: [main]
 permissions:
   contents: read
 concurrency:

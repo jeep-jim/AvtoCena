@@ -1,19 +1,6 @@
 name: Verify offer header actions
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'apps/web/components/catalog/OfferContactActions.tsx'
-      - 'apps/web/components/dealers/DealerOfferView.tsx'
-      - 'tests/browser/offer-header.mjs'
-      - 'apps/web/lib/account/**'
-      - 'apps/web/app/api/account/**'
-      - 'apps/web/components/account/**'
-      - '.github/workflows/verify-offer-header.yml'
-  workflow_run:
-    workflows: ["Deploy to Yandex Cloud"]
-    types: [completed]
-    branches: [main]
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
 permissions:
   contents: read

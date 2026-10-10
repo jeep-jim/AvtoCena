@@ -1,15 +1,7 @@
 name: Catalog operations freshness
 on:
-  push:
-    branches: [main, fix/catalog-operations-20260919, fix/catalog-readiness-20260925, fix/footer-and-market-recovery-20260929]
-    paths: ['.github/workflows/catalog-operations-health.yml', '.github/market-runs/operations-health.json']
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish', 'Catalog refresh green']
-    types: [completed]
-    branches: [main]
-  schedule:
-    - cron: "0 10 * * *"
 permissions:
   contents: read
 concurrency:

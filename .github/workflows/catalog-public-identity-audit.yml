@@ -2,12 +2,8 @@ name: Catalog · public identity and price audit
 run-name: Full China names, routes and prices · ${{ github.sha }}
 
 on:
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - "Catalog · refresh current read models"
-    types: [completed]
-
 permissions:
   contents: read
 

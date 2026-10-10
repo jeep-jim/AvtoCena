@@ -1,11 +1,7 @@
 name: Catalog V6 · Prestige repair failed chunks
 
 on:
-  workflow_run:
-    workflows:
-      - "Catalog V6 · Prestige exact sold up-to-30k"
-    types:
-      - completed
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
     inputs:
       source_run_id:

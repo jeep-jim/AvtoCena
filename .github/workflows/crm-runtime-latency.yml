@@ -1,12 +1,6 @@
 name: CRM read-only runtime latency
 on:
-  push:
-    branches: [feat/crm-activity-reminders-20260926]
-    paths: ['scripts/crm-runtime-latency.mjs', '.github/workflows/crm-runtime-latency.yml']
-  workflow_run:
-    workflows: [Deploy to Yandex Cloud]
-    types: [completed]
-    branches: [main]
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
     inputs:
       check_new_endpoints:

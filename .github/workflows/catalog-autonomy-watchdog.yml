@@ -1,12 +1,7 @@
 name: Catalog bounded automatic recovery
 on:
+  # Owner cost-control policy: run only on explicit manual request.
   workflow_dispatch:
-  schedule:
-    - cron: '43 */2 * * *'
-  workflow_run:
-    workflows: ['Catalog refresh china', 'Catalog refresh korea', 'Catalog refresh uae', 'Catalog refresh georgia', 'Catalog refresh europe', 'ProAuctions collect and publish', 'Catalog refresh green', 'Catalog Object Storage cleanup']
-    types: [completed]
-    branches: [main]
 permissions:
   contents: read
   actions: write

@@ -5,14 +5,11 @@ on:
   schedule:
     # Refresh the date-sensitive age filter after midnight in Krasnoyarsk.
     - cron: '5 17 * * *'
-    # Recover from a delayed schedule or an active publisher; ready days are metadata-only.
-    - cron: '23 * * * *'
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/catalog-overview-read-model.yml"
       - "scripts/catalog-build-overview-read-model.mjs"
       - "scripts/catalog-publish-current-read-models.mjs"
       - "apps/web/lib/catalog/storage.ts"

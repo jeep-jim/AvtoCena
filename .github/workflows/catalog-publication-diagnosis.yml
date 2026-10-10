@@ -1,11 +1,7 @@
 name: Catalog publication diagnosis
 on:
-  workflow_run:
-    workflows: ["Catalog · Six-market quality rebuild"]
-    types: [completed]
-  push:
-    branches: [fix/catalog-complete-specifications-20260909]
-    paths: ['.github/workflows/catalog-publication-diagnosis.yml']
+  # Owner cost-control policy: run only on explicit manual request.
+  workflow_dispatch:
 permissions:
   contents: read
   actions: read
