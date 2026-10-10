@@ -87,7 +87,7 @@ test('seller prices sort by current visible currency values without becoming del
   reads.push(key);let value:unknown;
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
   else if(key==='fees/exchange-rates.json')value={rates:[{currency:'USD',cbrRate:85,nominal:1,effectiveRate:85,rateDate:new Date().toISOString().slice(0,10),rateSource:'cbr'}]};
-  else if(key.startsWith('catalog/runtime-sort-prices-v1/'))return {found:false,value:fallback};
+  else if(key.startsWith('catalog/runtime-sort-prices-v2/'))return {found:false,value:fallback};
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
   else if(key.endsWith('/budget-count-v3.json'))value=index;
   else if(key.includes('/budget-cards-v3/')){active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,2));active--;const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:rows.slice(block*10,block*10+10)};}

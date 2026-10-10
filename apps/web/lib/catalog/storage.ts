@@ -2163,6 +2163,17 @@ async function writeBudgetMarketSelectors(index:BudgetCountIndex){
 /** Append disposable selectors to the existing generation, never rewrite cards or manifest. */
 export async function backfillBudgetMarketSelectors(){
  const manifest=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
+ // Price/rate/UI changes do not change a generation's immutable selector.
+ // Validate and reuse each compact partition before considering a full rebuild.
+ const existing=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,'budget-markets-v3/ready.json',null);
+ if(existing?.version===3 && existing.generationId===manifest.generationId && MARKETS.every(market=>existing.markets?.[market])){
+  let complete=true;
+  for(const market of MARKETS){
+   const part=await budgetIndexCache.get(`${manifest.generationId}:compressed:${market}`,async()=>verifiedCompressedBudgetSelector(existing,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,`budget-markets-v3/${market}.json`,null)));
+   if(!part){complete=false;break;}
+  }
+  if(complete)return existing;
+ }
  const index=await readIndex<BudgetCountIndex|null>(manifest.generationId,'budget-count-v3.json',null);
  if(!index || index.generationId!==manifest.generationId)throw Error('catalog_budget_market_source_missing');
  const directory=await writeBudgetMarketSelectors(index);

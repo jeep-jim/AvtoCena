@@ -30,6 +30,7 @@ export interface JsonStorage {
   driver: JsonStorageDriver;
   readJson<T>(relativePath: string, fallback: T): Promise<T>;
   readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>>;
+  readObjectMetadata?(relativePath: string): Promise<{found: boolean; etag?: string}>;
   writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition): Promise<void>;
   deleteJson?(relativePath: string): Promise<void>;
   exists?(relativePath: string): Promise<boolean>;
@@ -223,6 +224,12 @@ export class ObjectJsonStorage implements JsonStorage {
   private async signedBucketRequest(method: string, params: Record<string, string>, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest(method, url, body, extraHeaders, query); }
   private async bucketRequest(params: Record<string, string>) { return this.signedBucketRequest("GET", params); }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: JSON.parse(objectStorageResponseText(res)) as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
+  async readObjectMetadata(relativePath: string) {
+    const res = await this.request("HEAD", relativePath);
+    if (res.status === 404) return {found: false};
+    if (!res.ok) throw new Error(`object_storage_metadata_${res.status}`);
+    return {found: true, etag: cleanEtag(res.headers.get("etag"))};
+  }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
   async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, serializeStorageJson(relativePath, value), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async head(relativePath: string) { const res = await this.request("HEAD", relativePath); if (res.status === 404) return false; if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_head_${res.status}`); return true; }
