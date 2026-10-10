@@ -9,7 +9,7 @@ import {readChunkedDataJson,readDataJson,updateChunkedDataJson,mutateDataJson} f
 export function canConnectCustomer(user:AuthUser,client:any,account:CustomerAccount|null,company:string){
  if(!user||user.status==='disabled'||!account||account.disabled||!client||client.deletedAt||!canAccessDocumentClient(user,client))return false;
  if(user.role==='dealer'){if(user.companyId!==company||user.dealerApproved!==true)return false;}
- else if(!isPlatformTeam(user)||company!=='dealer_topavto'||!hasCrmPermission(user,'editLeads'))return false;
+ else if(!isPlatformTeam(user)||company!=='dealer_topavto'||(!hasCrmPermission(user,'editLeads')||!hasCrmPermission(user,'documents')))return false;
  if(client.portalAccountId&&client.portalAccountId!==account.id)return false;
  try{return normalizeAccountPhone(client.phone)===normalizeAccountPhone(account.phone);}catch{return false;}
 }

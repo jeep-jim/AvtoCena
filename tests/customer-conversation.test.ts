@@ -34,6 +34,7 @@ test('existing registration requires explicit authorized link; repeat repairs in
  assert.equal(canConnectCustomer(owner,client,{...account,disabled:true},'dealer_topavto'),false);
  assert.equal(canConnectCustomer({...owner,companyId:'dealer_foreign'},client,account,'dealer_topavto'),false);
  assert.equal(canConnectCustomer(owner,client,account,'dealer_foreign'),false);
+ assert.equal(canConnectCustomer({...users[1],permissions:{documents:false,editLeads:true}},client,account,'dealer_topavto'),false);
  await connectRegisteredClient(owner,'dealer_topavto',client.id,{accountId:id,confirmed:true});await connectRegisteredClient(owner,'dealer_topavto',client.id,{accountId:id,confirmed:true});
  assert.equal((await readDataJson<any[]>(linksPath(id),[])).length,1);
  const portal=await portalData(account);assert.equal(portal.length,1);assert.equal(portal[0].manager?.name,'Тестовый менеджер');assert.ok(portal[0].messages.some(m=>m.text.includes('Тестовый менеджер')));
