@@ -257,7 +257,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           color: #ffffff !important;
         }
 
-        html[data-theme][data-theme][data-theme] body .ac-public-header,
+        html[data-theme][data-theme][data-theme] body :is(.ac-public-header,.ac-catalog-sticky),
         html[data-theme][data-theme][data-theme] body .ac-public-header *,
         html[data-theme][data-theme][data-theme] body main.ac-page-copy,
         html[data-theme][data-theme][data-theme] body main.ac-page-copy *,
