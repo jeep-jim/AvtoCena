@@ -1,0 +1,18 @@
+.ac-catalog-sticky-sentinel{height:1px;pointer-events:none}
+.ac-catalog-sticky{position:fixed;left:0;right:0;z-index:49;background:var(--ac-surface,#181d27);color:var(--ac-text,#edf0f5);border-bottom:1px solid var(--ac-border,#353b46);box-shadow:0 8px 22px #00000014}
+.ac-catalog-sticky-inner{max-width:1600px;margin:0 auto;padding:10px 28px;display:flex;align-items:center;gap:10px;min-width:0}
+.ac-catalog-sticky-chips{display:flex;align-items:center;gap:8px;min-width:0;flex:1;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:2px}
+.ac-catalog-sticky-chips::-webkit-scrollbar{display:none}
+.ac-catalog-sticky-chip{display:inline-flex;align-items:center;gap:9px;flex:none;min-height:36px;padding:7px 13px;border-radius:999px;border:1px solid var(--ac-border,#353b46);background:var(--ac-surface-2,#252c39);color:var(--ac-text,#edf0f5);font-size:12px;font-weight:750;white-space:nowrap}
+.ac-catalog-sticky-chip>span:last-child{font-size:17px;opacity:.6}
+.ac-catalog-sticky-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex:none;border:1px solid var(--ac-border,#353b46);border-radius:12px;background:var(--ac-surface-2,#252c39);color:var(--ac-text,#edf0f5)}
+.ac-catalog-sticky-icon.is-active{color:#ff353d;border-color:#ff353d66}
+.ac-catalog-sticky-sort{position:relative;flex:none}
+.ac-catalog-sticky-menu{position:absolute;right:0;top:calc(100% + 12px);width:240px;max-width:calc(100vw - 72px);padding:6px;border:1px solid var(--ac-border,#353b46);border-radius:16px;background:var(--ac-surface,#181d27);box-shadow:0 12px 36px #0003}
+.ac-catalog-sticky-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:9px 12px;border:0;border-radius:10px;background:transparent;color:inherit;text-align:left;font-size:13px;font-weight:700}
+.ac-catalog-sticky-menu button[aria-pressed=true]{background:var(--ac-surface-2,#252c39);color:#ff353d}
+.ac-catalog-sticky-empty{font-size:13px;font-weight:700;color:var(--ac-muted,#aeb5c2)}
+.ac-catalog-sticky :is(button,div[tabindex]):focus-visible{outline:2px solid #ff353d;outline-offset:2px}
+@media(max-width:1023px){.ac-catalog-sticky-inner{padding:7px 12px;gap:6px}.ac-catalog-sticky-chips{gap:6px}.ac-catalog-sticky-chip{padding:7px 10px;font-size:11px}.ac-catalog-sticky-icon{width:38px;height:38px}}
+
+html[data-theme="light"] .ac-catalog-sticky{--ac-surface:#f8f9fc;--ac-surface-2:#e6eaf1;--ac-text:#171b23;--ac-muted:#526074;--ac-border:#cdd2dc}
