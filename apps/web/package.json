@@ -6,8 +6,8 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
-    "predev": "node ../../scripts/prepare-web-assets.mjs",
-    "prebuild": "node ../../scripts/prepare-web-assets.mjs && node --import tsx ../../scripts/build-knowledge-read-model.mjs"
+    "predev": "node ../../scripts/prepare-web-assets.mjs && node --import tsx ../../scripts/build-model-search-index.mjs",
+    "prebuild": "node ../../scripts/prepare-web-assets.mjs && node --import tsx ../../scripts/build-knowledge-read-model.mjs && node --import tsx ../../scripts/build-model-search-index.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

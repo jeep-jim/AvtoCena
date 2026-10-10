@@ -1,0 +1,38 @@
+name: Verify local model suggestions
+on:
+  pull_request:
+    paths:
+      - 'apps/web/components/catalog/VehicleModelSearch.tsx'
+      - 'apps/web/lib/catalog/model-suggestion-search.ts'
+      - 'apps/web/lib/catalog/model-search-asset.json'
+      - 'scripts/build-model-search-index.mjs'
+      - 'tests/model-suggestion-search.test.ts'
+      - 'tests/browser/model-suggestions*'
+      - '.github/workflows/verify-model-suggestions.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs scripts/build-model-search-index.mjs
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/model-suggestion-search.test.ts tests/catalog-filter-search.test.ts tests/autocalc-model-suggestions.test.ts
+      - run: npx tsc -p apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/model-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify local suggestions without per-keystroke API requests
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/model-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/model-suggestions.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-suggestions
+          path: artifacts/model-suggestions/*.png
