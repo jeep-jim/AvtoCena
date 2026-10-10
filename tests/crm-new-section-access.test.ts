@@ -21,7 +21,7 @@ test('new section APIs deny revoked capabilities and Metrika is platform-owner o
  const mock:any={
  '@/lib/account/auth':`export const currentAccount=async()=>null;`,
  '@/lib/auth':`export const getCurrentUser=async()=>globalThis.__newAccess.user;export const isCrmRole=r=>['owner','admin','manager'].includes(r);export const isAdminRole=r=>['owner','admin'].includes(r);`,
- '@/lib/crm-chat':`const call=async()=>{globalThis.__newAccess.calls++;return {ok:true}};export const chatList=call,chatDetail=call,createDirectChat=call,sendChatMessage=call,createChatRoom=call,updateChatRoom=call,reactToChatMessage=call,changeChatMessage=call,forwardChatMessage=call;`,
+ '@/lib/crm-chat':`const call=async()=>{globalThis.__newAccess.calls++;return {ok:true}};export const connectChatCustomer=call,chatList=call,chatDetail=call,createDirectChat=call,sendChatMessage=call,createChatRoom=call,updateChatRoom=call,reactToChatMessage=call,changeChatMessage=call,forwardChatMessage=call;`,
  '@/lib/dealers/showcase-store':`export const savePublicFeatures=async()=>{globalThis.__newAccess.calls++;return {ok:true}};`,
  '@/lib/metrika-crm':`export const metrikaStatus=async()=>({connected:false});export const connectMetrika=async()=>{globalThis.__newAccess.calls++};export const disableMetrika=connectMetrika;`,
  '@/lib/crm-activity':`export const recordCrmActivity=async()=>{};`,
@@ -33,7 +33,7 @@ test('new section APIs deny revoked capabilities and Metrika is platform-owner o
  const req=(route:string,method='POST',body={})=>new Request(`https://avtocena.com/api/crm/${route}`,{method,headers:{origin:'https://avtocena.com','content-type':'application/json'},...(method==='GET'?{}:{body:JSON.stringify(body)})});
  try{
   const chat=await load('chat');state.user={...manager,permissions:{chat:false}};
-  assert.equal((await chat.GET(req('chat','GET'))).status,403);assert.equal((await chat.POST(req('chat'))).status,403);assert.equal(state.calls,0);
+  assert.equal((await chat.GET(req('chat','GET'))).status,403);assert.equal((await chat.POST(req('chat'))).status,403);assert.equal((await chat.POST(req('chat','POST',{action:'connect-customer',thread:'lead:test',accountId:'test',confirmed:true}))).status,403);assert.equal(state.calls,0);
   state.user=manager;assert.equal((await chat.GET(req('chat','GET'))).status,200);
   const site=await load('public-features');state.user={...manager,role:'admin'};
   assert.equal((await site.PUT(req('public-features','PUT'))).status,403);
