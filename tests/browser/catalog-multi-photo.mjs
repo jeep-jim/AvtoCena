@@ -43,7 +43,7 @@ try {
   const market=scope.locator('input[name=market]').locator('..');
   await market.getByRole('button',{name:'Все рынки',exact:true}).click();await market.getByRole('button',{name:'Китай',exact:true}).click();assert.equal(await scope.locator('input[name=market]').inputValue(),'china');
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
-  await scope.locator('[data-facet-value="Toyota"]').click();await scope.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await scope.locator('[data-facet-value="Kia"]').click();
+  await scope.getByPlaceholder('Найти марку').fill('Toyota');assert.equal(await scope.getByPlaceholder('Найти марку').evaluate(el=>el===document.activeElement),true);await scope.locator('[data-facet-value="Toyota"]').click();await scope.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await scope.locator('[data-facet-value="Kia"]').click();
   assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
   await scope.getByRole('searchbox',{name:'Модель автомобиля'}).fill('Yaris');
   await scope.getByRole('button',{name:/Yaris L/}).click();

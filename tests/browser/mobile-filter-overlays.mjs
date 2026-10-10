@@ -78,7 +78,7 @@ try{
    }
    for(const name of ['bodyType','transmission','fuel','drive']){
     current={theme,width,name};const root=row.locator(`input[name="${name}"]`).locator('..');if(!await root.count()){assert.ok(live,'all fixture categories required');continue;}
-    await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
+    await root.locator(':scope > button').click();const menu=root.locator(':scope > .ac-filter-dropdown');await menu.waitFor();if(name==='bodyType'){assert.equal(await menu.getByRole('button',{name:'Седан',exact:true}).isVisible(),true);assert.equal(await menu.getByRole('button',{name:'Универсал',exact:true}).isVisible(),true);}const metric=await menuGeometry(page,root,menu,(await row.boundingBox()).width);
     assert.deepEqual(await positions(sheet),before,'dropdown cannot push any closed filter or range row');
     assert.equal(await sheet.locator('.ac-filter-dropdown').count(),1);
     assert.equal(await menu.locator(':scope > .ac-hide-scrollbar').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);

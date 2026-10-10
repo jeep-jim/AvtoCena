@@ -320,7 +320,6 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const electricOnly = isElectrifiedFilter(draft.fuel);
 
   useEffect(() => {
-    if (mobileOpen) return;
     const incomingSort=initialSort(initial.sort || "");
     const incoming=catalogQuery(draftFromInitial(initial),incomingSort.key,incomingSort.direction);
     const currentQuery = catalogQuery(draft, sortKey, sortDirection);
