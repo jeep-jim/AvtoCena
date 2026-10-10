@@ -39,10 +39,17 @@ try{
   await page.locator('button[aria-label="Открыть фильтры"]').waitFor({state:'attached'});
   if(width<1024)await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
+  if(width<1024){
+   const heading=scope.locator('.ac-mobile-filter-header');
+   assert.ok((await heading.boundingBox()).height<=66,'compact mobile header');
+   assert.match(await heading.innerText(),/Найдено: 37\s?718/);
+   assert.equal(await heading.getByRole('button',{name:'Применить фильтры',exact:true}).innerText(),'ОК');
+   await page.screenshot({path:`${out}/sheet-${width}-${theme}.png`});
+  }
   const market=scope.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();await market.getByRole('button',{name:'Зелёный угол',exact:true}).click();
   await page.waitForFunction(()=>location.pathname==='/cars/green');
   const query=new URL(page.url()).searchParams;assert.equal(query.get('market'),'japan');assert.equal(query.get('stock'),'green');assert.equal(query.get('model'),'Corolla Cross');assert.equal(query.get('yearFrom'),'2024');assert.equal(query.get('mileageTo'),'9000');
-  if(width<1024)await scope.getByRole('button',{name:'Закрыть',exact:true}).click();
+  if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();
   await page.evaluate(()=>scrollTo(0,1100));const bar=page.getByRole('navigation',{name:'Выбранные фильтры и сортировка',exact:true});await bar.waitFor();
   assert.equal(await bar.getByRole('button',{name:'Очистить',exact:true}).count(),0);assert.ok(await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).isVisible());
   const styles=await page.evaluate(()=>{
@@ -62,6 +69,16 @@ try{
   await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).click();await page.waitForFunction(()=>!new URLSearchParams(location.search).has('model'));
   await bar.getByRole('button',{name:'Наверх к фильтрам',exact:true}).click();await page.waitForFunction(()=>scrollY<2);await bar.waitFor({state:'hidden'});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  if(width<1024){
+   await page.goto(`${origin}/cars?theme=${theme}&empty=1`);
+   await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
+   const emptySheet=page.locator('.ac-mobile-filter-sheet');
+   assert.equal(await emptySheet.getByRole('button',{name:'Закрыть',exact:true}).innerText(),'×');
+   await emptySheet.getByRole('button',{name:'Цена',exact:true}).click();
+   await emptySheet.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+   await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRub');
+   assert.equal(await page.locator('.ac-mobile-filter-sheet').count(),0);
+  }
   console.log(JSON.stringify({width,theme,greenPreservesFilters:true,stickyChips:true,sortPreservesFilters:true,backToTop:true}));await context.close();
  }
 }finally{await browser.close();server?.close();}

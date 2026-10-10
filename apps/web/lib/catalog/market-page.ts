@@ -1,3 +1,5 @@
+import {hasModificationSelection} from "./modification-contract";
+import {priceCardForCity} from "./card-city-delivery";
 import {readCatalogEditorial} from "./editorial";
 import { searchOffers } from "./storage";
 import type { CatalogSearchParams } from "./types";
@@ -50,16 +52,18 @@ export function businessOrder(left: any, right: any) {
     || offerFreshness(right) - offerFreshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
-export function sortCatalogRows(rows: any[], sort: string) {
+export function sortCatalogRows(rows: any[], sort: string, city?: string) {
   const sorted = [...rows];
+  const values=new Map<any,number>();
+  const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,hasModificationSelection(row)?0:Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub)||0);}return values.get(row)!;};
   if (sort === "totalRub") return sorted.sort((left, right) => {
-    const a = offerRubValue(left) || Number.POSITIVE_INFINITY;
-    const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
+    const a = price(left) || Number.POSITIVE_INFINITY;
+    const b = price(right) || Number.POSITIVE_INFINITY;
     return a - b || businessOrder(left, right);
   });
   if (sort === "totalRubDesc") return sorted.sort((left, right) => {
-    const a = offerRubValue(left);
-    const b = offerRubValue(right);
+    const a = price(left);
+    const b = price(right);
     return (b || Number.NEGATIVE_INFINITY) - (a || Number.NEGATIVE_INFINITY) || businessOrder(left, right);
   });
   if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
@@ -129,7 +133,7 @@ export async function readCatalogMarketPage(query: CatalogSearchParams) {
       ? await readDiverseDefaultMarketPage(String(market), page)
       : await searchOffers(normalized);
     const visible = await applyActiveBusinessPricingBatch(result.items);
-    const items = customSort ? sortCatalogRows(visible, String(sort)) : filters.model ? visible.sort(businessOrder) : balanceBusinessRows(visible);
+    const items = customSort ? sortCatalogRows(visible, String(sort),filters.city) : filters.model ? visible.sort(businessOrder) : balanceBusinessRows(visible);
     return {...result, items};
   });
 }

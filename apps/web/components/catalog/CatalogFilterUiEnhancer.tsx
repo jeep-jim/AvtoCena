@@ -261,7 +261,7 @@ function updateMobileCloseAction(sheet: HTMLElement) {
   const header = sheet.querySelector<HTMLElement>(":scope > div:first-child > div:nth-child(2)");
   if (!header) return;
   const close = header.querySelector<HTMLButtonElement>('button[data-ac-mobile-close="1"], button[aria-label="Закрыть"]');
-  if (!close) return;
+  if (!close || close.dataset.acReactClose === "1") return;
   close.dataset.acMobileClose = "1";
   close.classList.remove("ac-mobile-apply");
   if (close.textContent !== "×") close.textContent = "×";

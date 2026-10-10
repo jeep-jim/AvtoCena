@@ -568,7 +568,7 @@ const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALO
 export function resetCatalogReadCachesForTests() {
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
-  budgetSelectionOrder=new WeakMap();
+  budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();
   marketLandingCache.clear();
   editorialLandingCache.clear();
   editorialSummaryCache.clear();
@@ -778,7 +778,8 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
   const displayOrder=catalogDisplayOrderComparator();
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
-  const price = (row: CatalogSearchProjection, missing: number) => { const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub); return !hasModificationSelection(row) && rub>0 ? rub : missing; };
+  const priceKeys=new WeakMap<CatalogSearchProjection,number>();
+  const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
     : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
@@ -1918,9 +1919,10 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string){
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
- const metadataFields=['yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive'];
- const metadataQuery=(hasBudget || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
- if(params.make || params.model || (!hasBudget && !metadataQuery))return null;
+ const metadataFields=['make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo'];
+ const metadataQuery=(hasBudget || Boolean(params.sort && params.sort!=="updatedAt") || metadataFields.some(key=>Boolean((params as any)[key]))) && Object.entries(params).every(([key,value])=>value===undefined || value==='' || [...metadataFields,'market','city','budgetFrom','budgetTo','sort','page','pageSize'].includes(key));
+ if((params.make || params.model) && (!params.sort || params.sort==="updatedAt"))return null;
+ if(!hasBudget && !metadataQuery)return null;
  const manifest=await readManifest();
  const {page:_page,pageSize:_pageSize,sort:_sort,...filters}=params;
  const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,Object.entries(filters).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
@@ -1943,7 +1945,9 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   const editedRow=(row:BudgetCountIndex['rows'][number])=>{const metadata=applyCatalogEditorialSpecifications(row[5]);if(metadata===row[5])return row;const edited:typeof row=[...row];edited[5]=metadata;return edited;};
+  const compactModelKeys=params.model?await projectionModelKeys(params):null;
   let candidates=sourceRows.map(editedRow).filter(row=>
+   ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
    !editorialHidden({id:row[5].id,market:row[0]}) &&
    catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
@@ -1968,7 +1972,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
   }
 
   candidates=candidates.map(editedRow);
-  if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,rows:candidates};
+  if(metadataQuery && !params.powerFrom && !params.powerTo && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];
   const modelKeys=await projectionModelKeys(params);
@@ -1992,9 +1996,63 @@ async function readBudgetSelection(params:CatalogSearchParams){
 // without extending the price freshness window or retaining old selections.
 type OrderedBudgetRow=CatalogSearchProjection & {block:number};
 let budgetSelectionOrder=new WeakMap<BudgetCountIndex['rows'],OrderedBudgetRow[]>();
+// Sort compact identities, not full card payloads. A direction toggle shares the
+// same price pass. Weak ownership cannot outlive the existing bounded selection cache.
+type CompactSelection={generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']};
+let compactSortCache=new WeakMap<BudgetCountIndex['rows'],{prices?:Promise<Float64Array|null>;orders:Map<string,Uint32Array>}>();
+async function searchSortedBudgetSelection(selected:CompactSelection,params:CatalogSearchParams,internalPageLimit:number){
+ const mode=params.sort||"year";
+ if(!["year","yearAsc","totalRub","totalRubDesc","mileage"].includes(mode))return null;
+ let cache=compactSortCache.get(selected.rows);
+ if(!cache){cache={orders:new Map()};compactSortCache.set(selected.rows,cache);}
+ let order=cache.orders.get(mode);
+ if(!order){
+  let keys:Float64Array;
+  if(mode.startsWith("totalRub")){
+   if(!cache.prices)cache.prices=(async()=>{
+    const values=new Float64Array(selected.rows.length);values.fill(NaN);
+    const positions=new Map(selected.rows.map((row,index)=>[row[5].id,index]));
+    const blocks=[...new Set(selected.rows.map(row=>row[5].block))];let incomplete=false;let seen=0;
+    await mapWithConcurrency(blocks,2,async block=>{
+     const part=await budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+     if(part.generationId!==selected.generationId){incomplete=true;return;}
+     const candidates=part.items.filter(row=>positions.has(row.id));seen+=candidates.length;
+     const priced=await currentSearchPrices(prepareCatalogProjectionRows(candidates),selected.generationId);
+     for(const row of priced){
+      const position=positions.get(row.id)!;
+      const offer=params.city?priceCardForCity(row,params.city).offer:row;
+      const rub=Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub);
+      if(!hasModificationSelection(row)&&rub>0)values[position]=rub;
+     }
+    });
+    return incomplete||seen!==selected.rows.length?null:values;
+   })().catch(error=>{cache!.prices=undefined;throw error;});
+   const prices=await cache.prices;if(!prices)return null;keys=prices;
+  }else keys=Float64Array.from(selected.rows,row=>Number(mode==='mileage'?row[5].mileageKm:row[5].year)||NaN);
+  const descending=mode==='year'||mode==='totalRubDesc';
+  order=Uint32Array.from(selected.rows,(_,index)=>index);
+  order.sort((a,b)=>{
+   const x=keys[a],y=keys[b];
+   if(!Number.isFinite(x))return Number.isFinite(y)?1:a-b;
+   if(!Number.isFinite(y))return -1;
+   return (descending?y-x:x-y)||a-b;
+  });
+  cache.orders.set(mode,order);
+ }
+ const page=Math.max(1,Number(params.page||1));
+ const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
+ const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
+ const blocks=[...new Set(visible.map(row=>row.block))];
+ const parts=await mapWithConcurrency(blocks,2,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ if(parts.some(part=>part.generationId!==selected.generationId))return null;
+ const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
+ if(visible.some(row=>!byId.has(row.id)))return null;
+ const cards=await currentSearchPrices(visible.map(row=>byId.get(row.id)!),selected.generationId);
+ return {generationId:selected.generationId,total:selected.rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
+}
 async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:number){
- if(params.sort&&params.sort!=="updatedAt")return null;
  const selected=await readBudgetSelection(params);if(!selected)return null;
+ if(params.sort && params.sort!=="updatedAt")return searchSortedBudgetSelection(selected,params,internalPageLimit);
  let rows=budgetSelectionOrder.get(selected.rows);
  if(!rows){
   rows=selected.rows.map(([market,totalRub,basis,japan,seller,metadata])=>({...metadata,market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis}})) as OrderedBudgetRow[];
@@ -2117,7 +2175,7 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
     return {generationId, total};
   });
 }
-const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:8});
+const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
 async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48) {
   const manifest=await readManifest();
   const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
