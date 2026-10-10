@@ -5,6 +5,7 @@ on:
       - 'apps/web/lib/catalog/editorial*'
       - 'apps/web/app/api/crm/catalog/photos/route.ts'
       - 'apps/web/components/catalog/CatalogEditorialEditor.tsx'
+      - 'apps/web/components/catalog/catalog-editorial-editor.css'
       - 'tests/browser/editorial-specifications*'
       - '.github/workflows/verify-editorial-specifications.yml'
   workflow_dispatch:

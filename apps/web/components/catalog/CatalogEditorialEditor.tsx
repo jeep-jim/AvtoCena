@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
 import './catalog-editorial-editor.css';
@@ -9,6 +9,7 @@ import type {CatalogEditorialEntry,EditorialStatus} from '@/lib/catalog/editoria
 import {editorialSpecificationOptions,type EditorialSpecifications} from '@/lib/catalog/editorial-specifications';
 
 export function CatalogEditorialEditor({offerId,originalTitle,initial=null,available=true,sourcePhotos=[],sourceSpecifications={}}:{offerId:string;originalTitle:string;sourcePhotos?:string[];sourceSpecifications?:EditorialSpecifications;initial?:CatalogEditorialEntry|null;available?:boolean}){
+ const formId=useId();
  const router=useRouter(),file=useRef<HTMLInputElement>(null),trigger=useRef<HTMLButtonElement>(null);
  const [entry,setEntry]=useState(initial),[open,setOpen]=useState(false),[title,setTitle]=useState(initial?.title||''),[photos,setPhotos]=useState<string[]|null>(initial?.photos||null),[status,setStatus]=useState<EditorialStatus>(initial?.status||'visible'),[reason,setReason]=useState(initial?.reason||''),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [closing,setClosing]=useState(false),timer=useRef<ReturnType<typeof setTimeout>|null>(null),drag=useRef<number|null>(null);
@@ -60,8 +61,8 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
  const button='rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-bold disabled:opacity-50';
  return <div className="absolute inset-0 z-20 pointer-events-none">
   {<button ref={trigger} type="button" onClick={begin} className="ac-catalog-editor-trigger pointer-events-auto absolute right-3 top-3 rounded-xl bg-black/80 px-3 py-2 text-sm font-bold text-white">Редактировать объявление</button>}
-  {open&&<PublicSheet title="Редактирование объявления" onClose={()=>close()} maxWidth={800} className={`ac-catalog-editor-sheet pointer-events-auto ${closing?'ac-catalog-editor-closing':''}`}>
-  <form aria-label="Редактирование объявления" onSubmit={e=>{e.preventDefault();void save();}} className="ac-catalog-editor-form p-5">
+  {open&&<PublicSheet title="Редактирование объявления" headerContent={<button type="submit" form={formId} disabled={busy} className="ac-catalog-editor-save rounded-xl bg-orange-500 px-4 py-2 text-sm font-black text-black disabled:opacity-50">{busy?'Сохраняем…':'Сохранить изменения'}</button>} onClose={()=>close()} maxWidth={800} className={`ac-catalog-editor-sheet pointer-events-auto ${closing?'ac-catalog-editor-closing':''}`}>
+  <form id={formId} aria-label="Редактирование объявления" onSubmit={e=>{e.preventDefault();void save();}} className="ac-catalog-editor-form p-5">
    <p className="mt-2 text-xs text-[var(--ac-muted)]">Правки будут видны всем и сохранятся при обновлении объявлений. Год, объём, мощность и топливо меняются в блоке параметров автомобиля.</p>
    <label className="mt-3 block text-sm font-bold">Название<input value={title} maxLength={200} placeholder={originalTitle} onChange={e=>setTitle(e.target.value)} disabled={busy} className="mt-1 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal"/></label>
    <p className="mt-1 text-xs text-[var(--ac-muted)]">Пустое поле — название продавца.</p>
@@ -81,7 +82,6 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
    {!available&&<p className="mt-1 text-xs">Объявление уже недоступно у продавца. Вернуть его на сайт пока нельзя.</p>}
    <label className="mt-3 block text-sm font-bold">Комментарий для команды<textarea value={reason} maxLength={500} disabled={busy} onChange={e=>setReason(e.target.value)} placeholder="Например: на фото другой автомобиль" className="mt-1 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal" rows={2}/></label>
    {error&&<p role="alert" className="mt-2 text-sm text-red-500">{error}</p>}
-   <div className="ac-catalog-editor-actions mt-3 flex flex-wrap gap-2"><button disabled={busy} className="rounded-xl bg-orange-500 px-4 py-2 text-sm font-black text-black disabled:opacity-50">{busy?'Сохраняем…':'Сохранить изменения'}</button><button type="button" disabled={busy} onClick={()=>close()} className={button}>Отмена</button></div>
   </form></PublicSheet>}
  </div>;
 }

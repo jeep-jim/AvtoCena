@@ -24,13 +24,17 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  const form=page.getByRole('form',{name:'Редактирование объявления',exact:true});
  await form.getByLabel('Кузов',{exact:true}).selectOption('suv');await form.getByLabel('Привод',{exact:true}).selectOption('awd');await form.getByLabel('Коробка передач',{exact:true}).selectOption('cvt');await form.getByLabel('Цвет',{exact:true}).fill('Синий');
  assert.equal(await form.getByRole('button',{name:'Изменить параметры',exact:true}).count(),0);
+ assert.equal(await page.getByRole('button',{name:'Отмена',exact:true}).count(),0);
+ assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),1);
+ assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).evaluate(el=>Boolean(el.closest('header'))),true);
  await form.getByRole('button',{name:'Добавить по ссылке',exact:true}).click();await form.getByLabel('Ссылка на фотографию',{exact:true}).fill('https://example.com/car.jpg');await form.getByRole('button',{name:'Добавить фото',exact:true}).click();await form.getByRole('button',{name:'Сделать фото 1 обложкой',exact:true}).waitFor();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.screenshot({path:`${out}/${width}-${theme}.png`});
- await form.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.waitFor({state:'hidden'});
+ await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.waitFor({state:'hidden'});
  assert.deepEqual(payload.specifications,{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'});assert.deepEqual(payload.photos,['/api/site-media/'+'a'.repeat(64)]);assert.equal(payload.year,undefined);assert.equal(payload.powerHp,undefined);
  await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
  await form.getByLabel('Кузов',{exact:true}).selectOption('');await form.getByLabel('Цвет',{exact:true}).fill('');fail=true;
- await form.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
- console.log(JSON.stringify({width,theme,saved:true,conflictRetainsForm:true}));await context.close();
+ await page.getByRole('button',{name:'Сохранить изменения',exact:true}).click();await form.getByRole('alert').waitFor();assert.equal(await form.isVisible(),true);assert.equal(payload.version,'saved');assert.equal(payload.specifications.bodyType,'');
+ await page.getByRole('button',{name:'Закрыть редактирование объявления',exact:true}).click();await form.waitFor({state:'hidden'});await page.getByRole('button',{name:'Редактировать объявление',exact:true}).click();assert.equal(await form.getByLabel('Кузов',{exact:true}).inputValue(),'suv');
+ console.log(JSON.stringify({width,theme,saved:true,conflictRetainsForm:true,closeDiscardsUnsaved:true,saveInHeader:true}));await context.close();
 }}finally{await browser.close();server.close();}
