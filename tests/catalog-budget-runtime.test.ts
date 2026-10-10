@@ -1,15 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {liveBudgetRelease,budgetPreparationDecision,verifyBudgetContext,budgetReadyKey,budgetAlreadyReady} from '../scripts/catalog-budget-runtime.mjs';
+import {liveBudgetRelease,budgetPreparationDecision,verifyBudgetContext,budgetReadyKey,budgetAlreadyReady,verifyLiveCalculationVersion} from '../scripts/catalog-budget-runtime.mjs';
 const release='a'.repeat(40),generationId='gen_1791555837022_9a2cec74';
+test('preparation requires the source calculator fingerprint to match the running deployment',async()=>{
+ const version='b'.repeat(64);
+ await verifyLiveCalculationVersion(version,async()=>Response.json({ok:true,calculationVersion:version}));
+ for(const body of [{ok:true},{ok:false,calculationVersion:version},{ok:true,calculationVersion:'c'.repeat(64)}]){
+  await assert.rejects(verifyLiveCalculationVersion(version,async()=>Response.json(body)),/version_mismatch/);
+ }
+ await assert.rejects(verifyLiveCalculationVersion(version,async()=>new Response('',{status:503})),/health_http_503/);
+});
 test('preparation permits derived selector versions but cannot write inventory or publication state',()=>{
  const source=fs.readFileSync(new URL('../scripts/catalog-budget-shared-warmup.mjs',import.meta.url),'utf8');
  const pattern=source.match(/if\(!(.+)\.test\(path\)\)throw Error\('unexpected_write:'/);
  assert.ok(pattern);
  const allows=new Function('path',`return ${pattern[1]}.test(path)`);
  for(const version of [1,2,3])for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${version}/${market}.json`),true);
- for(const kind of ['budget','sort'])for(const market of ['china','korea','europe','uae','georgia'])assert.equal(allows(`catalog/runtime-${kind}-prices-v1/${market}.json`),true);
+ for(const version of [1,2])for(const kind of ['budget','sort'])for(const market of ['china','korea','europe','uae','georgia'])assert.equal(allows(`catalog/runtime-${kind}-prices-v${version}/${market}.json`),true);
  for(const path of ['catalog/manifest.json','catalog/operations/collection-controls-v1.json','catalog/generations/test/offers/china.json','catalog/generations/test/indexes/budget-markets-v4/china.json'])assert.equal(allows(path),false);
 });
 test('runtime warmup uses only a healthy exact production release, not a docs or feed commit',async()=>{

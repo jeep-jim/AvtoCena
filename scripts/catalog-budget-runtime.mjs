@@ -33,6 +33,12 @@ export function budgetReadyKey(release,generationId,fingerprints,selectorVersion
 export function budgetAlreadyReady(saved,key,now=Date.now()){
   return saved?.version===1 && saved.verified===true && saved.key===key && Number.isFinite(saved.at) && saved.at<=now && now-saved.at<20*3600000;
 }
+export async function verifyLiveCalculationVersion(expected,fetchImpl=fetch){
+ const response=await fetchImpl('https://avtocena.com/api/health',{headers:{'cache-control':'no-cache'},redirect:'error',signal:AbortSignal.timeout(20000)});
+ if(!response.ok)throw Error('budget_calculator_health_http_'+response.status);
+ const health=await response.json();
+ if(health.ok!==true || health.calculationVersion!==expected)throw Error('budget_calculation_version_mismatch');
+}
 async function main(){
   if(process.argv[2]==='--resolve'){
     const release=await liveBudgetRelease();
@@ -55,11 +61,21 @@ async function main(){
     if(decision.skip){report.reason='publication_in_progress';throw Error('budget_preparation_deferred_active_publisher');}
     const context={release,generationId:decision.generationId,readState,readRelease:liveBudgetRelease};
     await verifyBudgetContext(context);
-    const {budgetPricingFingerprint}=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/shared-budget-prices.ts')).href);
+    const pricing=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/shared-budget-prices.ts')).href);
+    const {budgetPricingFingerprint}=pricing;
+    // Import the versioner from the exact deployed checkout, not the newest
+    // orchestration branch. Old releases keep their original release key.
+    if(pricing.VERSIONED_CALCULATION_CACHE){
+      const {calculationVersion}=await import(pathToFileURL(path.join(root,'scripts/catalog-calculation-version.mjs')).href);
+      process.env.AVTOCENA_CALCULATION_VERSION=calculationVersion(root);
+      await verifyLiveCalculationVersion(process.env.AVTOCENA_CALCULATION_VERSION);
+    }
+    const calculationKey=pricing.calculationCacheVersion?.()||release;
     const selectorVersion=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/budget-selector-codec.ts')).href).then(module=>module.BUDGET_SELECTOR_STORAGE_VERSION||2).catch(()=>1);
     const fingerprint=async()=>Object.fromEntries(await Promise.all(['china','korea','uae','europe','georgia'].map(async market=>[market,await budgetPricingFingerprint(market)])));
-    const expected=await fingerprint(),readyKey=budgetReadyKey(release,decision.generationId,expected,selectorVersion),readyPath='catalog/operations/budget-preparation-v1.json';
+    const expected=await fingerprint(),readyKey=budgetReadyKey(calculationKey,decision.generationId,expected,selectorVersion),readyPath='catalog/operations/budget-preparation-v1.json';
     if(budgetAlreadyReady(await storage.readJson(readyPath,null),readyKey)){
+      await verifyBudgetContext(context);
       report.skipped=true;report.verified=true;report.reason='already_prepared_for_current_context';return;
     }
     // Run the exact deployed calculator and its existing independent cold-process
@@ -71,7 +87,7 @@ async function main(){
     await verifyBudgetContext(context);
     const result=JSON.parse(await fs.readFile(path.join(root,'catalog-budget-shared-report.json'),'utf8'));
     if(result.release!==release || result.warmed?.generationId!==decision.generationId)throw Error('budget_warmup_report_mismatch');
-    if(budgetReadyKey(release,decision.generationId,await fingerprint(),selectorVersion)!==readyKey)throw Error('budget_context_changed_after_warmup');
+    if(budgetReadyKey(calculationKey,decision.generationId,await fingerprint(),selectorVersion)!==readyKey)throw Error('budget_context_changed_after_warmup');
     await storage.writeJson(readyPath,{version:1,verified:true,key:readyKey,at:Date.now(),release,generationId:decision.generationId,selectorVersion});
     report.verified=true;
   }catch(error){report.error=String(error.message);throw error;}

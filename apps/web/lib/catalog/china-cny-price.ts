@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {mutateDataJson,readDataJson} from '../data';
+import {getJsonStorage,mutateDataJson,readDataJson} from '../data';
 import {convertToRub,type CurrencyRateSnapshot} from './rates';
 import {DetailReadCache} from './detail-read-cache';
 import type {VehicleOffer} from './types';
@@ -9,9 +9,33 @@ type Index={version:1;entries:Record<string,ChinaPriceConversion>};
 const path='catalog/china-cny-prices/current.json';
 const cache=new DetailReadCache<Index>({maxEntries:1,maxBytes:16*1024*1024,ttlMs:60000,concurrency:1});
 const fingerprints=new WeakMap<Index,string>();
+const metadataCache=new DetailReadCache<{found:boolean;etag?:string}>({maxEntries:1,maxBytes:1024,ttlMs:60000,concurrency:1});
+export function resetChinaCnyPriceCache(){cache.clear();metadataCache.clear();}
+async function anchorMetadata(){
+ const storage=getJsonStorage();
+ return storage.readObjectMetadata ? metadataCache.get('current',()=>storage.readObjectMetadata!(path)) : null;
+}
+async function anchorIndex(retry=true):Promise<Index>{
+ const metadata=await anchorMetadata();
+ if(!metadata?.found || !metadata.etag)return cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
+ try{return await cache.get(metadata.etag,async()=>{
+  const result=await getJsonStorage().readJsonWithMeta<Index>(path,{version:1,entries:{}});
+  // A concurrent writer must not make a newer anchor set reusable under an old
+  // price fingerprint. Retry through the existing exact-calculation path.
+  if(!result.found || result.etag!==metadata.etag){resetChinaCnyPriceCache();throw Error('catalog_budget_context_changed');}
+  return result.value;
+ });}catch(error){
+  if(retry && (error as Error).message==='catalog_budget_context_changed')return anchorIndex(false);
+  throw error;
+ }
+}
 /** Same immutable anchor snapshot and expiry as the actual repricer. */
 export async function chinaCnyPriceFingerprint(){
- const index=await cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
+ const metadata=await anchorMetadata();
+ // S3's opaque object ETag identifies the stored bytes, not a guessed timestamp.
+ // A complete reusable price snapshot needs the version, not the anchor body.
+ if(metadata?.found && metadata.etag)return `object-etag:${metadata.etag}`;
+ const index=await anchorIndex();
  let fingerprint=fingerprints.get(index);
  if(!fingerprint){fingerprint=createHash('sha256').update(JSON.stringify(index)).digest('hex');fingerprints.set(index,fingerprint);}
  return fingerprint;
@@ -29,7 +53,7 @@ function eligible(offer:Partial<VehicleOffer>){return offer.market==='china' && 
  */
 export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers:T[],options:{readOnly?:boolean}={}):Promise<T[]> {
  const candidates=offers.filter(eligible);if(!candidates.length)return offers;
- let index=await cache.get('current',()=>readDataJson<Index>(path,{version:1,entries:{}}));
+ let index=await anchorIndex();
  let transient:Index['entries']={};
  const missing=candidates.filter(offer=>!index.entries[key(offer)]);
  if(missing.length){
@@ -41,7 +65,7 @@ export async function withChinaCnyPrices<T extends Partial<VehicleOffer>>(offers
    // new batch entries rather than copying every saved price for every batch.
    // Persisted anchors still win; the shared snapshot is never mutated.
    if(options.readOnly)transient=added;
-   else {index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));cache.clear();}
+   else {index=await mutateDataJson<Index>(path,{version:1,entries:{}},current=>({version:1,entries:{...added,...current.entries}}));resetChinaCnyPriceCache();}
   }
  }
  return offers.map(offer=>{
