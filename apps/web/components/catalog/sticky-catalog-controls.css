@@ -14,3 +14,5 @@
 .ac-catalog-sticky-empty{font-size:13px;font-weight:700;color:var(--ac-muted,#aeb5c2)}
 .ac-catalog-sticky :is(button,div[tabindex]):focus-visible{outline:2px solid #ff353d;outline-offset:2px}
 @media(max-width:1023px){.ac-catalog-sticky-inner{padding:7px 12px;gap:6px}.ac-catalog-sticky-chips{gap:6px}.ac-catalog-sticky-chip{padding:7px 10px;font-size:11px}.ac-catalog-sticky-icon{width:38px;height:38px}}
+
+html[data-theme="light"] .ac-catalog-sticky{--ac-surface:#f8f9fc;--ac-surface-2:#e6eaf1;--ac-text:#171b23;--ac-muted:#526074;--ac-border:#cdd2dc}

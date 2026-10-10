@@ -36,7 +36,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:900},hasTouch:width<1024}),page=await context.newPage();
   await context.route('**/api/catalog/**',r=>r.fulfill({json:{counts:{Toyota:10},modelCounts:{Toyota:4},facets,items:[]}}));
   await page.goto(`${origin}/cars?theme=${theme}&dealer=1`);
-  await page.getByRole('button',{name:'Открыть фильтры',exact:true}).waitFor({state:'attached'});
+  await page.locator('button[aria-label="Открыть фильтры"]').waitFor({state:'attached'});
   if(width<1024)await page.getByRole('button',{name:'Открыть фильтры',exact:true}).click();
   const scope=page.locator(width<1024?'.ac-mobile-filter-sheet':'.ac-catalog-filter-panel');
   const market=scope.locator('input[name="market"]').locator('..');await market.locator(':scope > button').click();await market.getByRole('button',{name:'Зелёный угол',exact:true}).click();
