@@ -45,6 +45,16 @@ try{
   if(width<1024)await scope.getByRole('button',{name:'Закрыть',exact:true}).click();
   await page.evaluate(()=>scrollTo(0,1100));const bar=page.getByRole('navigation',{name:'Выбранные фильтры и сортировка',exact:true});await bar.waitFor();
   assert.equal(await bar.getByRole('button',{name:'Очистить',exact:true}).count(),0);assert.ok(await bar.getByRole('button',{name:'Убрать Corolla Cross',exact:true}).isVisible());
+  const styles=await page.evaluate(()=>{
+   const pick=(el,props)=>Object.fromEntries(props.map(p=>[p,getComputedStyle(el)[p]]));
+   const surface=['backgroundColor','backdropFilter','borderBottomColor','boxShadow'];
+   const chip=['backgroundColor','color','borderRadius','fontSize','fontWeight','paddingLeft','paddingRight','minHeight'];
+   return {header:pick(document.querySelector('.ac-public-header'),surface),bar:pick(document.querySelector('.ac-catalog-sticky'),surface),original:pick(document.querySelector('.ac-catalog-filter-panel .ac-filter-chip'),chip),sticky:pick(document.querySelector('.ac-catalog-sticky .ac-filter-chip'),chip)};
+  });
+  const bounds=await page.evaluate(()=>({content:document.querySelector('.ac-catalog-sticky-sentinel').getBoundingClientRect().left,chips:document.querySelector('.ac-catalog-sticky-chips').getBoundingClientRect().left}));
+  assert.ok(bounds.chips>=bounds.content,'Chips stay inside the catalog left edge');
+  assert.deepEqual(styles.bar,styles.header,'Pinned surface must match the header');
+  assert.deepEqual(styles.sticky,styles.original,'Pinned chips must match existing selected chips');
   const rect=await bar.boundingBox(),header=await page.locator('.ac-public-header').boundingBox();assert.ok(Math.abs(rect.y-(header.y+header.height))<2);assert.ok(rect.width<=width);
   await bar.getByRole('button',{name:'Сортировка автомобилей',exact:true}).click();await bar.getByRole('button',{name:'Сначала дороже',exact:true}).click();await page.waitForFunction(()=>new URLSearchParams(location.search).get('sort')==='totalRubDesc');
   assert.equal(new URL(page.url()).searchParams.get('stock'),'green');

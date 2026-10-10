@@ -95,7 +95,7 @@ html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page,
 html:not([data-theme="light"]):not([data-theme="light"]) body .crm-root{background:#1a2029!important;background-color:#1a2029!important;background-image:none!important}
 
 /* Шапка остаётся отдельным тёмным стеклом. */
-html:not([data-theme="light"]):not([data-theme="light"]) body .ac-public-header{background:rgba(20,27,37,.72)!important;background-color:rgba(20,27,37,.72)!important;background-image:none!important;border-bottom:1px solid rgba(255,255,255,.055)!important;-webkit-backdrop-filter:blur(18px) saturate(130%)!important;backdrop-filter:blur(18px) saturate(130%)!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body :is(.ac-public-header,.ac-catalog-sticky){background:rgba(20,27,37,.72)!important;background-color:rgba(20,27,37,.72)!important;background-image:none!important;border-bottom:1px solid rgba(255,255,255,.055)!important;-webkit-backdrop-filter:blur(18px) saturate(130%)!important;backdrop-filter:blur(18px) saturate(130%)!important}
 
 /* Панели на главной/каталоге — тот же оттенок, что у верхнего фильтра. */
 html:not([data-theme="light"]):not([data-theme="light"]) body .ac-filter-panel,

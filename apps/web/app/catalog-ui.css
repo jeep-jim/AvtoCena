@@ -34,7 +34,7 @@ select option {
   display: none;
 }
 
-.ac-public-header {
+:is(.ac-public-header,.ac-catalog-sticky) {
   border-bottom: 0 !important;
   box-shadow: 0 12px 42px rgba(0, 0, 0, 0.16);
 }
@@ -222,7 +222,7 @@ html[data-theme="light"] select option {
   color: #171a21;
 }
 
-html[data-theme="light"] .ac-public-header {
+html[data-theme="light"] :is(.ac-public-header,.ac-catalog-sticky) {
   background: rgba(228, 232, 239, 0.94) !important;
   box-shadow: 0 10px 34px rgba(31, 35, 48, 0.13);
 }
