@@ -225,7 +225,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           background-image: none !important;
         }
 
-        html:not([data-theme="light"]) body .ac-public-header {
+        html:not([data-theme="light"]) body :is(.ac-public-header,.ac-catalog-sticky) {
           background: rgba(15,23,42,.68) !important;
           border-bottom: 1px solid rgba(255,255,255,.055) !important;
           -webkit-backdrop-filter: blur(18px) saturate(145%) !important;

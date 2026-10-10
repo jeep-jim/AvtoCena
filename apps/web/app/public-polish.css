@@ -226,7 +226,7 @@ html[data-theme="light"] .ac-catalog-card [class*="text-red-"]:not(.ac-price):no
 html[data-theme="light"] .ac-offer-panel [class*="text-red-"]:not(.ac-price):not(.ac-favorite-button) { color: #626c7b !important; }
 html[data-theme="light"] .ac-favorite-button { color: #d92534 !important; }
 
-html[data-theme="light"] .ac-public-header {
+html[data-theme="light"] :is(.ac-public-header,.ac-catalog-sticky) {
   background: rgba(248,249,251,.95) !important;
   border-bottom: 1px solid rgba(30,36,48,.1) !important;
   box-shadow: 0 6px 20px rgba(31,35,48,.08) !important;

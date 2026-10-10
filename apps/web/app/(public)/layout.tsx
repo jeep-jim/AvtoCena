@@ -27,7 +27,7 @@ const publicPageFixes = `
 html:not([data-theme="light"]) body,
 html:not([data-theme="light"]) body main.ac-page-copy,
 html:not([data-theme="light"]) body .ac-page-copy,
-html:not([data-theme="light"]) body .ac-public-header {
+html:not([data-theme="light"]) body :is(.ac-public-header,.ac-catalog-sticky) {
   background: #0f172a !important;
   background-color: #0f172a !important;
   background-image: none !important;
