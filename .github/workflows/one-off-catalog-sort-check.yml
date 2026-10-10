@@ -1,0 +1,44 @@
+name: One-off catalog response diagnostic
+on:
+  push:
+    branches: [diagnostics/catalog-sort-20261010]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check both price directions from a separate network
+        run: |
+          python - <<'PY'
+          import urllib.request,urllib.parse,time,re,json
+          from html.parser import HTMLParser
+          class Cards(HTMLParser):
+           def __init__(self):super().__init__();self.inside=False;self.rows=[]
+           def handle_starttag(self,t,a):
+            if t=='article':self.inside=True;self.rows.append('')
+           def handle_endtag(self,t):
+            if t=='article':self.inside=False
+           def handle_data(self,d):
+            if self.inside:self.rows[-1]+=' '+d
+          print('health',urllib.request.urlopen('https://avtocena.com/api/health',timeout=15).read().decode(),flush=True)
+          all_groups=[]
+          for mode,desc in [('totalRub',False),('totalRubDesc',True)]:
+           url='https://avtocena.com/cars?'+urllib.parse.urlencode({'fuel':'electrified','sort':mode,'city':'Новосибирск'})
+           start=time.monotonic()
+           try:
+            r=urllib.request.urlopen(url,timeout=40);body=r.read().decode();print(mode,r.status,round(time.monotonic()-start,2),len(body),flush=True)
+            p=Cards();p.feed(body);assert len(p.rows)==60,len(p.rows)
+            groups=[]
+            for offset in range(0,len(p.rows),10):
+             prices=[]
+             for text in p.rows[offset:offset+10]:
+              m=re.search(r'([\d\s\xa0]+)₽',text)
+              if m:prices.append(int(re.sub(r'\D','',m[1])))
+             print(offset//10,prices,flush=True);assert prices==sorted(prices,reverse=desc),(mode,offset,prices);groups.append(prices)
+            all_groups.append(groups)
+           except Exception as e:print('ERROR',type(e).__name__,str(e),round(time.monotonic()-start,2),flush=True);raise
+          for low,high in zip(*all_groups):assert max(low)<=min(high) and low!=high,(low,high)
+          print('GLOBAL_PRICE_RANGES_VERIFIED',flush=True)
+          PY
