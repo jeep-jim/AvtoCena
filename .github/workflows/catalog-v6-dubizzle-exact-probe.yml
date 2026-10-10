@@ -2,10 +2,7 @@ name: Catalog V6 · Dubizzle exact probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-dubizzle-exact-probe.yml"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

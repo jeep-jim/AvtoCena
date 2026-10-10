@@ -2,11 +2,7 @@ name: Catalog V6 · Auction Data Search auth contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-auctiondatasearch-auth-probe.yml"
-      - "scripts/auctiondatasearch-auth-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 

@@ -2,11 +2,7 @@ name: Catalog V6 · JP Center detail contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-jpcenter-detail-contract-probe.yml"
-      - "scripts/jpcenter-detail-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 

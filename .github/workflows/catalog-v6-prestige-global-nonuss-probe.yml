@@ -2,11 +2,7 @@ name: Catalog V6 · Prestige global non-USS probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-prestige-global-nonuss-probe.yml"
-      - "scripts/prestige-japan-global-nonuss-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

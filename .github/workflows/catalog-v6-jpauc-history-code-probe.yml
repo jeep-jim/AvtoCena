@@ -2,11 +2,7 @@ name: Catalog V6 · JPAuc history code probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-jpauc-history-code-probe.yml"
-      - "scripts/jpauc-history-code-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

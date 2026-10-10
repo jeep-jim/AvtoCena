@@ -2,11 +2,7 @@ name: Catalog V6 · Autohome new-car structure probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-autohome-new-structure-probe.yml"
-      - "scripts/autohome-new-structure-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 

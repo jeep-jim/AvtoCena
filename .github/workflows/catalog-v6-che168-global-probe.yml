@@ -2,11 +2,7 @@ name: Catalog V6 · Che168 Global exact probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-che168-global-probe.yml"
-      - "scripts/che168-global-exact-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: write
 

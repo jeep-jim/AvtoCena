@@ -2,11 +2,7 @@ name: Catalog V6 · Prestige sold detail anatomy
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-prestige-detail-anatomy-probe.yml"
-      - "scripts/prestige-japan-detail-anatomy-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

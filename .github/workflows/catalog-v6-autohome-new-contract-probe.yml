@@ -2,11 +2,7 @@ name: Catalog V6 · Autohome exact contract probe
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-autohome-new-contract-probe.yml"
-      - "scripts/autohome-new-contract-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 

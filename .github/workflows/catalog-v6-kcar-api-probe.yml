@@ -2,12 +2,7 @@ name: Catalog V6 · K Car encrypted API probe
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-v6-kcar-api-probe.yml"
-      - "scripts/kcar-api-probe.mjs"
-
+  # Live source diagnostics require an explicit manual run.
 permissions:
   contents: read
 
