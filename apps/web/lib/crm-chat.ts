@@ -1,3 +1,7 @@
+import {registeredClientAccount} from './account/crm-registration';
+import {canConnectCustomer,connectRegisteredClient} from './account/connect-client';
+import {customerConversation} from './account/conversation-events';
+import {sendCustomerPush} from './account/push';
 import {clientsPath,threadPath,sendPortalMessage} from './account/portal';
 import type {NotificationReplyTarget} from './notification-reply';
 import {GENERAL_CHAT_ID,CHAT_EMOJI} from './chat-emoji';
@@ -76,12 +80,15 @@ export async function chatDetail(user:AuthUser,id:string){
   const company=leadDealerId(lead);
   const client=lead.clientId?(await readChunkedDataJson<any>(clientsPath(company),[])).find(c=>c.id===lead.clientId&&!c.deletedAt&&canSeeLead(user,c)):null;
   const portal=!!client?.portalAccountId;
-  const portalMessages=client?await readRecentChunkedDataJson<any>(threadPath(company,client.id),200):[];
+  const registered=client&&!portal?await registeredClientAccount(client):null;
+  const connection=registered&&canConnectCustomer(user,client,registered,company)?{accountId:registered.id,name:registered.name,phone:registered.phone}:undefined;
+  const users=await readCrmUsers();
+  const portalMessages=client?customerConversation(await readRecentChunkedDataJson<any>(threadPath(company,client.id),200),client,[lead],users):[];
   messages.push(...portalMessages.map(m=>({...m,direction:m.accountId?'in':'out',managerName:m.author,channel:'portal'})));
   const canSend=ours&&!lead.archivedAt&&portal&&hasCrmPermission(user,'editLeads');
   const offers=lead.selectedOffers?.length?lead.selectedOffers:lead.offerSnapshot?[lead.offerSnapshot]:[];
   const media=offers.filter((o:any)=>typeof o.image==='string'&&(/^(https?:\/\/|\/(?!\/))/.test(o.image))).map((o:any)=>({url:o.image,title:o.title||'Автомобиль'}));
-  return {id,kind:'lead',title:lead.name||lead.telegramDisplayName||'Клиент',leadId:lead.id,canDiscuss:hasCrmPermission(user,'editLeads'),canSend,messages:await withReactions(user,id,messages.sort((a,b)=>String(a.createdAt).localeCompare(String(b.createdAt))).map(m=>({id:m.id,text:m.text,createdAt:m.createdAt,author:m.direction==='in'?'Клиент':m.managerName||'Менеджер',mine:m.direction==='out',replyTo:m.replyToId?(()=>{const original=messages.find(x=>x.id===m.replyToId);return {id:m.replyToId,text:original?.text?.slice(0,300)||'Сообщение недоступно',author:original?.direction==='in'?'Клиент':original?.managerName||'Менеджер'};})():undefined,status:m.direction==='out'?(queue.find(q=>q.id===m.id)?.status||'saved'):undefined})),await readCrmUsers()),info:[lead.phone,lead.telegram,lead.city,lead.car,lead.requestedDealerName].filter(Boolean).join('\n'),media,href:`/crm/leads?id=${encodeURIComponent(lead.id)}`,reason:canSend?'':!ours?'Переписку с этим клиентом ведёт дилер.':lead.archivedAt?'Заявка в архиве.':!portal?'Откройте карточку клиента и создайте приглашение в его кабинет.':'Нет права отправлять сообщения клиенту.'};
+  return {id,kind:'lead',connection,title:lead.name||lead.telegramDisplayName||'Клиент',leadId:lead.id,canDiscuss:hasCrmPermission(user,'editLeads'),canSend,messages:await withReactions(user,id,messages.sort((a,b)=>String(a.createdAt).localeCompare(String(b.createdAt))).map(m=>({id:m.id,text:m.text,createdAt:m.createdAt,author:m.direction==='in'?'Клиент':m.managerName||'Менеджер',mine:m.direction==='out'&&!m.system,href:m.documentId?`/api/crm/clients/${encodeURIComponent(client.id)}/documents/${encodeURIComponent(m.documentId)}`:undefined,replyTo:m.replyToId?(()=>{const original=messages.find(x=>x.id===m.replyToId);return {id:m.replyToId,text:original?.text?.slice(0,300)||'Сообщение недоступно',author:original?.direction==='in'?'Клиент':original?.managerName||'Менеджер'};})():undefined,status:m.direction==='out'?(queue.find(q=>q.id===m.id)?.status||'saved'):undefined})),users),info:[lead.phone,lead.telegram,lead.city,lead.car,lead.requestedDealerName].filter(Boolean).join('\n'),media,href:`/crm/leads?id=${encodeURIComponent(lead.id)}`,reason:canSend?'':!ours?'Переписку с этим клиентом ведёт дилер.':lead.archivedAt?'Заявка в архиве.':!portal?registered?'Клиент зарегистрирован. Подтвердите подключение его кабинета к этой карточке.':'Откройте карточку клиента и создайте приглашение в его кабинет.':'Нет права отправлять сообщения клиенту.'};
  }
  const {row,users}=await teamFor(user,id),other=users.find(u=>u.id!==user.id&&row.participants.includes(u.id));
  const messages=await readRecentChunkedDataJson<any>(messageFile(id),200);
@@ -104,6 +111,7 @@ export async function sendChatMessage(user:AuthUser,id:string,input:any){
   const original=input.replyToId?(await chatDetail(user,id)).messages.find(m=>m.id===input.replyToId):undefined;
   if(input.replyToId&&!original)throw Error('invalid_reply');
   await sendPortalMessage(company,client.id,original?`В ответ на: ${original.text.slice(0,300)}\n\n${text}`:text,user.displayName,undefined,user.id,messageId,input.replyToId||undefined);
+  await sendCustomerPush(client.portalAccountId,'/account?tab=chat').catch(()=>{});
  }else{
   const {row,users}=await teamFor(user,id);
   if(input.replyToId){const original=(await readRecentChunkedDataJson<any>(messageFile(id),200)).find(m=>m.id===input.replyToId&&!m.deletedAt);if(!original)throw Error('invalid_reply');}
@@ -136,3 +144,5 @@ export async function forwardChatMessage(user:AuthUser,id:string,input:any){
  if(!message||message.deleted||source.kind==='system')throw Error('chat_forbidden');
  return sendChatMessage(user,id,{text:message.text,operationId:input.operationId,forwardFrom:{thread:source.id,messageId:message.id}});
 }
+
+export async function connectChatCustomer(user:AuthUser,id:string,input:any){allowed(user);const lead=await leadFor(user,id);if(lead.archivedAt||!lead.clientId||leadDealerId(lead)!=='dealer_topavto')throw Error('chat_forbidden');await connectRegisteredClient(user,leadDealerId(lead),lead.clientId,input);return chatDetail(user,id);}

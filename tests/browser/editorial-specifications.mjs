@@ -30,8 +30,8 @@ try{for(const width of [390,1440])for(const theme of ['light','dark']){
  await colors.getByLabel('HEX',{exact:true}).fill('#123456');await colors.getByLabel('Свой оттенок или заводское название',{exact:true}).fill('Мой синий');
  await colors.getByLabel('HEX',{exact:true}).scrollIntoViewIfNeeded();await page.screenshot({path:`${out}/${width}-${theme}-spectrum.png`});
  await colors.getByRole('button',{name:'Готово',exact:true}).click();
- assert.match(await form.getByRole('button',{name:'Цвет',exact:true}).innerText(),/Мой синий \(#123456\)/);
- await form.getByRole('button',{name:'Цвет',exact:true}).click();await colors.getByRole('button',{name:'Вся палитра',exact:true}).click();assert.equal(await colors.getByLabel('HEX',{exact:true}).inputValue(),'#123456');await colors.getByRole('button',{name:'Готово',exact:true}).click();
+ assert.equal((await form.getByRole('button',{name:'Цвет',exact:true}).innerText()).trim(),'Мой синий');
+ await form.getByRole('button',{name:'Цвет',exact:true}).click();assert.equal(await colors.getByLabel('Свой оттенок или заводское название',{exact:true}).inputValue(),'Мой синий');assert.equal(await colors.getByLabel('HEX',{exact:true}).inputValue(),'#123456');await colors.getByRole('button',{name:'Готово',exact:true}).click();
  assert.equal(await form.getByRole('button',{name:'Изменить параметры',exact:true}).count(),0);
  assert.equal(await page.getByRole('button',{name:'Отмена',exact:true}).count(),0);
  assert.equal(await page.getByRole('button',{name:'Сохранить изменения',exact:true}).count(),1);
