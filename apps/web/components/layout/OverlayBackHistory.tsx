@@ -11,7 +11,15 @@ export function OverlayBackHistory(){
   const originalPush=history.pushState,originalReplace=history.replaceState;
   let position=Number(history.state?.acBackPosition)||0;
   originalReplace.call(history,{...history.state,acBackPosition:position},'',location.href);
-  const push:History['pushState']=(data,unused,url)=>{position++;originalPush.call(history,{...data,acBackPosition:position},unused,url);};
+  const push:History['pushState']=(data,unused,url)=>{
+   const previous=location.href;
+   position++;originalPush.call(history,{...data,acBackPosition:position},unused,url);
+   // Applied filters can push a new query while nested pickers are still open.
+   // Never restore an older replacement URL when their history entries close.
+   if(steps.length&&previous!==location.href&&new URL(previous).pathname===location.pathname){
+    replacementUrl=location.href;steps.forEach(step=>step.url=location.href);
+   }
+  };
   const replace:History['replaceState']=(data,unused,url)=>{const before=location.pathname;originalReplace.call(history,{...data,acBackPosition:position},unused,url);if(steps.length&&before===location.pathname&&history.state?.acOverlayStep===steps.at(-1)?.token){replacementUrl=location.href;steps.forEach(step=>step.url=location.href);}};
   history.pushState=push;history.replaceState=replace;
   let travelling=false,disposed=false,closing:HTMLElement|null=null;
