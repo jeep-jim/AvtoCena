@@ -13,10 +13,11 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
  const [entry,setEntry]=useState(initial),[open,setOpen]=useState(false),[title,setTitle]=useState(initial?.title||''),[photos,setPhotos]=useState<string[]|null>(initial?.photos||null),[status,setStatus]=useState<EditorialStatus>(initial?.status||'visible'),[reason,setReason]=useState(initial?.reason||''),[busy,setBusy]=useState(false),[error,setError]=useState('');
  const [closing,setClosing]=useState(false),timer=useRef<ReturnType<typeof setTimeout>|null>(null),drag=useRef<number|null>(null);
  const [specifications,setSpecifications]=useState<EditorialSpecifications>(initial?.specifications||{});
+ const [photoUrl,setPhotoUrl]=useState(''),[urlOpen,setUrlOpen]=useState(false);
  useEffect(()=>()=>{if(timer.current)clearTimeout(timer.current);},[]);
  const gallery=photos??sourcePhotos.slice(0,30);
  function move(from:number,to:number){if(busy||from===to||to<0||to>=gallery.length)return;const next=[...gallery];next.splice(to,0,next.splice(from,1)[0]);setPhotos(next);}
- function begin(){setTitle(entry?.title||'');setPhotos(entry?.photos||null);setStatus(entry?.status||'visible');setReason(entry?.reason||'');setSpecifications(entry?.specifications||{});setError('');setOpen(true);}
+ function begin(){setTitle(entry?.title||'');setPhotos(entry?.photos||null);setStatus(entry?.status||'visible');setReason(entry?.reason||'');setSpecifications(entry?.specifications||{});setPhotoUrl('');setUrlOpen(false);setError('');setOpen(true);}
  function close(force=false){if((busy&&!force)||closing)return;setClosing(true);timer.current=setTimeout(()=>{setOpen(false);setClosing(false);trigger.current?.focus();},180);}
  async function upload(files:FileList|null){
   if(!files?.length)return;
@@ -44,6 +45,18 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
   }catch(e){setError(e instanceof Error?e.message:'Не удалось подтвердить сохранение. Обновите страницу.');}
   finally{setBusy(false);}
  }
+ async function addPhotoUrl(){
+  if(busy||!photoUrl.trim())return;
+  setBusy(true);setError('');
+  try{
+   if(gallery.length>=30)throw Error('В объявлении может быть до 30 фотографий.');
+   let url:URL;try{url=new URL(photoUrl.trim());}catch{throw Error('Вставьте прямую HTTPS-ссылку на фотографию.');}
+   if(url.protocol!=='https:'||url.username||url.password)throw Error('Вставьте прямую HTTPS-ссылку на фотографию.');
+   const result=await readPhotoUploadResponse(await fetch('/api/crm/catalog/photos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url.href})}));
+   setPhotos([...new Set([...gallery,result.url])]);setPhotoUrl('');setUrlOpen(false);
+  }catch(e){setError(e instanceof Error?e.message:'Не удалось загрузить фотографию по ссылке.');}
+  finally{setBusy(false);}
+ }
  const button='rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-bold disabled:opacity-50';
  return <div className="absolute inset-0 z-20 pointer-events-none">
   {<button ref={trigger} type="button" onClick={begin} className="ac-catalog-editor-trigger pointer-events-auto absolute right-3 top-3 rounded-xl bg-black/80 px-3 py-2 text-sm font-bold text-white">Редактировать объявление</button>}
@@ -57,7 +70,8 @@ export function CatalogEditorialEditor({offerId,originalTitle,initial=null,avail
     <label className="block text-sm font-bold">Цвет<input value={specifications.color||''} maxLength={60} placeholder={sourceSpecifications.color||'Данные продавца'} onChange={e=>setSpecifications(current=>({...current,color:e.target.value}))} className="mt-1 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal"/></label></div>
     <p className="mt-2 text-xs text-[var(--ac-muted)]">Чтобы отменить правку, выберите «Данные продавца» или очистите цвет.</p>
    </fieldset>
-   <div className="mt-3 flex flex-wrap gap-2">{typeof document!=="undefined"&&document.getElementById("offer-parameters")&&<button type="button" className={button} disabled={busy} onClick={()=>{close();setTimeout(()=>document.getElementById("offer-parameters")?.scrollIntoView({behavior:"smooth",block:"start"}),190);}}>Изменить параметры</button>}<button type="button" className={button} disabled={busy} onClick={()=>file.current?.click()}>Заменить фото</button><button type="button" className={button} disabled={busy||!photos} onClick={()=>setPhotos(null)}>Вернуть фото продавца</button><Link className={button} href="/crm/catalog">Перейти в архив</Link></div>
+   <div className="mt-3 flex flex-wrap gap-2"><button type="button" className={button} disabled={busy} onClick={()=>file.current?.click()}>Заменить фото</button><button type="button" className={button} disabled={busy} aria-expanded={urlOpen} onClick={()=>setUrlOpen(value=>!value)}>Добавить по ссылке</button><button type="button" className={button} disabled={busy||!photos} onClick={()=>setPhotos(null)}>Вернуть фото продавца</button><Link className={button} href="/crm/catalog">Перейти в архив</Link></div>
+   {urlOpen&&<div className="mt-3 rounded-xl border border-[var(--ac-border)] p-3"><label className="block text-sm font-bold">Ссылка на фотографию<input type="url" inputMode="url" value={photoUrl} maxLength={2048} disabled={busy} placeholder="https://…" onChange={e=>setPhotoUrl(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();void addPhotoUrl();}}} className="mt-1 w-full rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-2 font-normal"/></label><p className="my-2 text-xs text-[var(--ac-muted)]">Прямая ссылка на JPG, PNG или WebP до 8 МБ. Фото добавится к остальным; после этого сохраните изменения.</p><button type="button" className={button} disabled={busy||!photoUrl.trim()} onClick={()=>void addPhotoUrl()}>{busy?'Загружаем…':'Добавить фото'}</button></div>}
    <input hidden ref={file} type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={e=>void upload(e.target.files)}/>
    {gallery.length>0&&<><p className="mt-4 text-sm font-bold">Фотографии · {gallery.length}</p><p className="mt-1 text-xs text-[var(--ac-muted)]">Выберите обложку галочкой. Меняйте порядок стрелками или перетаскиванием.</p><div className="ac-editor-photos mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">{gallery.map((url,i)=><div key={url+i} draggable={!busy} onDragStart={()=>{drag.current=i;}} onDragEnd={()=>{drag.current=null;}} onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();if(drag.current!==null)move(drag.current,i);drag.current=null;}} className={`min-w-0 overflow-hidden rounded-xl border-2 ${i===0?'border-orange-500':'border-[var(--ac-border)]'}`}>
     <button type="button" disabled={busy} aria-pressed={i===0} aria-label={`Сделать фото ${i+1} обложкой`} onClick={()=>move(i,0)} className="relative block w-full"><img draggable={false} src={url} alt={`Фото ${i+1}`} className="aspect-[4/3] w-full object-cover"/><span className="ac-editor-cover absolute bottom-1 left-1 rounded-lg px-2 py-1 text-xs font-bold">{i===0?'✓ Обложка':'○ Обложка'}</span></button>
