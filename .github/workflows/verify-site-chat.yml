@@ -23,6 +23,12 @@ jobs:
       - run: npm ci
       - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/crm-new-section-access.test.ts tests/crm-staff-permissions-route.test.ts tests/crm-permissions-activity.test.ts tests/site-chat-dealer-routing.test.ts tests/dealer-showcase.test.ts tests/crm-relay.test.ts tests/crm-relay-worker.test.ts
       - run: npm install --prefix "$RUNNER_TEMP/chat-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Check games and CRM mobile sheet
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
+        run: |
+          node --import tsx --test tests/pognali-runtime.test.ts tests/crm-game.test.ts tests/pognali-access.test.ts
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/games-crm.mjs
       - name: Check customer chat and color
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
@@ -45,5 +51,6 @@ jobs:
             artifacts/collection-controls/*.png
             artifacts/site-chat/*.png
             artifacts/customer-chat/*.png
+            artifacts/games-crm/*.png
             artifacts/site-chat-rooms/*.png
             artifacts/account-entrance/*.png

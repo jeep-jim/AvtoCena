@@ -1,4 +1,5 @@
 "use client";
+import {GameButtons} from '../games/GamesHub';
 import {BookOpen} from "lucide-react";
 
 import {enablePageAnalytics,setAnalyticsChoice} from "@/lib/privacy-consent";
@@ -101,7 +102,7 @@ export function PublicLegalFooter({partnersEnabled=false,knowledgeEnabled=false}
               {knowledgeEnabled?<Link href="/knowledge" className="ac-footer-dealer-knowledge"><BookOpen size={18}/>База знаний</Link>:<button type="button" disabled className="ac-footer-dealer-knowledge" title="База знаний скоро появится"><BookOpen size={18}/>База знаний</button>}
             </div>
 
-            <div className="ac-public-footer-affiliates mt-4 grid gap-2">
+            <GameButtons/><div className="ac-public-footer-affiliates mt-4 grid gap-2">
               <a
                 href={AUTOCREDIT_AFFILIATE_URL}
                 target="_blank"

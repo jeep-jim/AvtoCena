@@ -4,8 +4,11 @@ import {MessageCircle,Send,X} from 'lucide-react';
 import {discussionAnchor,type DiscussionMessage,type DiscussionType} from '../../lib/crm-discussion';
 import {defaultManagerAvatar} from '../../lib/default-avatars';
 import {crmDateTime} from '../../lib/crm-time';
-export function TeamDiscussion({type,entityId,label,initialMessages=[],userId,canReply}:{type:DiscussionType;entityId:string;label:string;initialMessages?:DiscussionMessage[];userId:string;canReply:boolean}){
- const [messages,setMessages]=useState(initialMessages),[text,setText]=useState(''),[replyTo,setReplyTo]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[highlight,setHighlight]=useState('');
+export function TeamDiscussion({type,entityId,label,initialMessages=[],userId,canReply,draft,onDraftChange}:{type:DiscussionType;entityId:string;label:string;initialMessages?:DiscussionMessage[];userId:string;canReply:boolean;draft?:{text:string;replyTo:string};onDraftChange?:(draft:{text:string;replyTo:string})=>void}){
+ const [messages,setMessages]=useState(initialMessages),[localText,setLocalText]=useState(''),[localReply,setLocalReply]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[highlight,setHighlight]=useState('');
+ const text=draft?.text??localText,replyTo=draft?.replyTo??localReply;
+ const setText=(value:string)=>{setLocalText(value);onDraftChange?.({text:value,replyTo});};
+ const setReplyTo=(value:string)=>{setLocalReply(value);onDraftChange?.({text,replyTo:value});};
  const root=useRef<HTMLElement>(null),list=useRef<HTMLDivElement>(null),input=useRef<HTMLTextAreaElement>(null),scrolled=useRef(false),operation=useRef(''),readIds=useRef(new Set<string>()),followBottom=useRef(true);
  const anchor=discussionAnchor(type,entityId);
  const [editing,setEditing]=useState<{id:string;original:string;text:string}|null>(null);
@@ -23,7 +26,7 @@ export function TeamDiscussion({type,entityId,label,initialMessages=[],userId,ca
  },[type,entityId,anchor]);
  useEffect(()=>{if(!highlight&&followBottom.current&&list.current)list.current.scrollTop=list.current.scrollHeight;},[messages,highlight]);
  useEffect(()=>{if(highlight){const target=list.current?.querySelector(`[data-message-id="${CSS.escape(highlight)}"]`) as HTMLElement|null;if(target&&list.current)list.current.scrollTop=target.offsetTop-list.current.offsetTop;}},[highlight]);
- async function send(){if(busy||!text.trim())return;setBusy(true);setError('');if(!operation.current)operation.current=crypto.randomUUID();try{const r=await fetch('/api/crm/discussion',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type,id:entityId,text,replyTo,operationId:operation.current})});const d=await r.json();if(!r.ok)throw Error(d.error);setMessages(d.messages||[]);setText('');setReplyTo('');operation.current='';window.dispatchEvent(new Event('avtocena:crm-change'));requestAnimationFrame(()=>{if(list.current)list.current.scrollTop=list.current.scrollHeight;input.current?.focus();});}catch(e){setError((e as Error).message||'Не удалось отправить сообщение.');}finally{setBusy(false);}}
+ async function send(){if(busy||!text.trim())return;setBusy(true);setError('');if(!operation.current)operation.current=crypto.randomUUID();try{const r=await fetch('/api/crm/discussion',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type,id:entityId,text,replyTo,operationId:operation.current})});const d=await r.json();if(!r.ok)throw Error(d.error);setMessages(d.messages||[]);setLocalText('');setLocalReply('');onDraftChange?.({text:'',replyTo:''});operation.current='';window.dispatchEvent(new Event('avtocena:crm-change'));requestAnimationFrame(()=>{if(list.current)list.current.scrollTop=list.current.scrollHeight;input.current?.focus();});}catch(e){setError((e as Error).message||'Не удалось отправить сообщение.');}finally{setBusy(false);}}
  const reply=messages.find(n=>n.id===replyTo);
  return <section id={anchor} ref={root} className="crm-discussion" aria-label={`Обсуждение команды · ${label}`}>
   <header><h2><MessageCircle size={20}/>Обсуждение команды</h2><p>{label}</p><small>Сообщения сотрудникам с доступом к карточке. Клиент их не получает.</small></header>

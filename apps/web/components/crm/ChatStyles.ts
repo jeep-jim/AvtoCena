@@ -4,4 +4,5 @@ export const crmChatStyles = `.ac-chat-dialog{position:fixed;inset:0;margin:auto
 .ac-chat-discussion .crm-discussion-messages{flex:1;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain}
 .ac-chat-discussion .crm-discussion>header,.ac-chat-discussion .crm-discussion-compose{flex-shrink:0}
 .ac-chat-list{overflow:hidden}.ac-chat-toolbar,.ac-chat-modes,.ac-chat-compose{flex-shrink:0}
+.crm-chat-sheet{overflow:hidden!important;padding:0!important}.crm-chat-mobile.ac-chat{display:block;min-height:0;max-height:100%;border:0;border-radius:0;overflow:hidden}.crm-chat-mobile .ac-chat-conversation,.crm-chat-mobile .ac-chat-info{height:100%;min-height:0}.crm-chat-mobile .ac-chat-messages{display:flex;flex-direction:column}.crm-chat-mobile .ac-chat-messages>.ac-chat-message:first-child{margin-top:auto}.crm-chat-mobile .ac-chat-message{flex-shrink:0}.crm-chat-mobile .ac-chat-compose{padding-bottom:max(12px,env(safe-area-inset-bottom))}
 `;

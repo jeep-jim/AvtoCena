@@ -97,3 +97,20 @@ test('a released car levels its body promptly while airborne',()=>{
  for(let i=0;i<60;i++)stepCarPhysics(p,false,false,1/120);
  assert.ok(Math.abs(p.angle)<.3,`angle=${p.angle}`);assert.equal(p.alive,true);
 });
+
+for(let car=0;car<5;car++)test(`car ${car}: continuous throttle drives forward without overturning`,()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'drive'});
+ const {state,stepCarPhysics,CARS,terrainY}=h.engine,p=state.player;
+ Object.assign(p,{cfg:CARS[car],x:200,y:terrainY(200)-CARS[car].wheelY-CARS[car].wheelR-2});
+ let maxTilt=0;
+ for(let i=0;i<120*15;i++){stepCarPhysics(p,true,false,1/120);maxTilt=Math.max(maxTilt,Math.abs(Math.atan2(Math.sin(p.angle),Math.cos(p.angle))));}
+ assert.ok(p.x>3200,`forward distance ${p.x-200}`);assert.ok(maxTilt<1.4,`tilt ${maxTilt}`);assert.equal(p.alive,true);
+});
+test('finish completes stage once and next run starts the next stage',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'stage1'});
+ const {state,step}=h.engine;state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);
+ assert.equal(state.screen,'result');assert.match(h.element('#rTitle').textContent,/Этап 1 пройден/);
+ assert.equal(h.messages.filter(m=>m.type==='finish').length,1);h.bridge({type:'saved',score:800});h.element('#btnAgain').fire('click');h.bridge({type:'started',id:'stage2'});
+ state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);assert.equal(state.screen,'play');
+ state.player.maxX=10201;state.player.x=10201;step(1/120);assert.match(h.element('#rTitle').textContent,/Этап 2 пройден/);
+});

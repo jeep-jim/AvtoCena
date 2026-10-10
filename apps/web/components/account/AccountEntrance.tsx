@@ -1,5 +1,6 @@
 'use client';
 
+import {useEffect} from 'react';
 import {phoneNational} from '@/lib/ru-phone';
 import {accountPhoneError} from '@/lib/account/phone';
 import {EntranceMediaPreview} from './EntranceMediaPreview';
@@ -56,6 +57,7 @@ export function AccountEntrance({nextPath, errorCode, initialRole, appearance = 
   },[role,scrollRequest]);
   const RoleIcon = {customer: UserRound, dealer: Building2, blogger: Megaphone, supplier: Globe2}[role];
   const [mode, setMode] = useState<Mode>('login');
+  useEffect(()=>{if(new URLSearchParams(window.location.search).get('mode')==='register')setMode('register');},[]);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');

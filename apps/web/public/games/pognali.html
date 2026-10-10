@@ -214,6 +214,7 @@ h1 span{color:#ff4757}
 @media(max-height:500px){#scrMenu>.panel{padding:10px 16px}#scrMenu h1{font-size:22px}#scrMenu>.panel>.sub{margin-bottom:6px;font-size:11px}.compactMenu{gap:6px 14px}.compactMenu label,.modeChoice{font-size:11px;gap:3px}.compactMenu select,.compactMenu input:not([type=checkbox]),.compactMenu .btn{height:32px;min-height:32px;padding-top:4px;padding-bottom:4px}.menuLaunch{margin-top:7px;padding-top:7px}.menuLaunch .btn{min-height:36px;padding:7px}#rivalRadar{top:76px;right:120px}#rivalRadar span{font-size:10px;padding:4px}.hudTop>.chip:nth-child(3),.hudTop>.chip:nth-child(6),.hudTop>.chip:nth-child(7){display:none}}
 
 @media(max-height:500px){#scrResult .panel{padding:10px 16px}#scrResult .big{font-size:28px}#scrResult .stat3{grid-template-columns:repeat(4,minmax(0,1fr));margin:8px 0}#scrResult .stat{padding:5px}#scrResult .stat .v{font-size:18px}#scrResult .resultActions{margin:7px 0}#scrResult .resultActions .btn{padding:9px}#scrResult .lbl,#rBoard{display:none}#scrResult .row:last-child{margin-top:8px!important}#scrResult .sub{font-size:12px}}
+.race-track{position:absolute;top:8px;left:18%;width:64%;display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;text-shadow:0 1px 3px #000}.race-track progress{flex:1;min-width:30px;height:10px;accent-color:#4ade80}.hudTop{top:36px!important}@media(max-width:600px){.race-track{left:10px;width:calc(100% - 65px);font-size:10px}.hudTop{top:32px!important}}
 </style>
 </head>
 <body>
@@ -223,7 +224,7 @@ h1 span{color:#ff4757}
   <img id="playerAvatar" class="playerAvatar hidden" alt="">
 
   <div id="hud">
-    <div class="hudTop">
+    <div class="race-track"><span id="stageLabel">Этап 1 · 0 / 800 м</span><progress id="stageProgress" max="100" value="0" aria-label="Прогресс до финиша"></progress><span>🏁</span></div><div class="hudTop">
       <div class="chip"><div class="k">Дистанция</div><div class="v" id="hDist">0 м</div></div>
       <div class="chip gold"><div class="k">Монеты</div><div class="v" id="hCoins">0</div></div>
       <div class="chip"><div class="k">Скорость</div><div class="v" id="hSpeed">0</div></div>
@@ -260,12 +261,12 @@ h1 span{color:#ff4757}
 
     <div class="ctrls">
       <div class="ctrlLeft">
-        <button type="button" class="pbtn" id="btnBrake">◀<span class="plabel">Назад / ↷</span></button>
+        <button type="button" class="pbtn" id="btnBrake">◀<span class="plabel">Тормоз / назад</span></button>
         <button type="button" class="pbtn jump" id="btnJump">↑<span class="plabel">Прыжок</span></button>
       </div>
       <div class="ctrlRight">
         <button type="button" class="pbtn fire" id="btnFire">🔥<span class="plabel">Огонь</span></button>
-        <button type="button" class="pbtn" id="btnGas">▶<span class="plabel">Газ / ↶</span></button>
+        <button type="button" class="pbtn" id="btnGas">▶<span class="plabel">Газ</span></button>
       </div>
     </div>
     <button class="quit" id="btnQuit">Финиш</button><button class="pause" id="btnPause">Пауза</button><button class="sound" id="btnSound">Звук выкл.</button>
@@ -627,16 +628,15 @@ function stepCarPhysics(c, gas, brake, dt){
     if (Math.abs(friction) > maxFr) friction = Math.sign(friction)*maxFr;
     const Ft = drive + friction;
     fx += tx*Ft; fy += ty*Ft;
-    torque += rx*(ty*Ft) - ry*(tx*Ft);
+    // Apply traction through the centre of mass: throttle must not tip the chassis.
+    torque += (rx*(ty*Ft) - ry*(tx*Ft))*.08;
     c.wheelSpin += (vt/cfg.wheelR)*dt;
   }
 
   c.onGround = grounded > 0;
 
   if (grounded === 0 && c.alive){
-    if (gas)   torque -= cfg.airTorque*9;
-    if (brake) torque += cfg.airTorque*9;
-    if (!gas && !brake && (c.recoveryTimer>0 || (!c.chassisGrounded && c.y<terrainY(c.x)-cfg.bodyH))) {
+    if (c.recoveryTimer>0 || (!c.chassisGrounded && c.y<terrainY(c.x)-cfg.bodyH)) {
       const angle = Math.atan2(Math.sin(c.angle), Math.cos(c.angle));
       const targetSpin = clamp(-angle*9, -7, 7);
       torque += (targetSpin-c.angularVelocity)*INERTIA*12;
@@ -646,6 +646,11 @@ function stepCarPhysics(c, gas, brake, dt){
     c.airTime = 0;
   }
 
+  if(grounded && !c.chassisGrounded){
+    const target=Math.atan(terrainSlope(c.x));
+    const error=Math.atan2(Math.sin(target-c.angle),Math.cos(target-c.angle));
+    if(Math.abs(error)<1.4)torque+=(error*22-c.angularVelocity*7)*INERTIA;
+  }
   const slowMul = c.slowTimer > 0 ? 0.45 : 1;
   if (c.slowTimer > 0) c.slowTimer -= dt;
 
@@ -727,11 +732,13 @@ function killCar(c, reason){
   addChat('sys', null, '', `💀 ${c.name} уничтожен!`);
 }
 
+let raceStage=1,stageWon=false;
+const stageDistance=()=>800+(raceStage-1)*200;
 /* ---------- BOTS ---------- */
 function makeBot(name){
   const cfg = CARS[rndi(0, CARS.length-1)];
   const b = createCar(cfg, COLORS[rndi(0, COLORS.length-1)], name, true);
-  b.baseV = rnd(220, 400);
+  b.baseV = rnd(170, 260);
   b.wob = Math.random()*10;
   if (Math.random() < 0.6){
     const wkeys = Object.keys(WEAPONS).filter(k=>k!=='none');
@@ -751,8 +758,9 @@ function reviveCar(c,dt){
 function stepBot(b,dt){
  if(!b.alive)return;
  b.fireCd=Math.max(0,b.fireCd-dt);b.invuln=Math.max(0,b.invuln-dt);
- const p=state.player,gap=p.x+b.slot-b.x;
- const pace=clamp(Math.max(b.baseV,Math.abs(p.vx))+gap*.6,90,state.superLevel?1000:900);
+ const p=state.player;
+ // Rivals have their own pace; overtaking does not accelerate them.
+ const pace=b.baseV*(1+Math.sin(state.time*.6+b.wob)*.08);
  b.vx+=(pace-b.vx)*Math.min(1,2*dt);b.x+=b.vx*dt;
  b.y=terrainY(b.x)-b.cfg.wheelY-b.cfg.wheelR;b.angle=Math.atan(terrainSlope(b.x));
  b.wheelSpin+=(b.vx*dt)/b.cfg.wheelR;b.maxX=Math.max(b.maxX,b.x);
@@ -1064,7 +1072,7 @@ function beginLocalRun(){
   state.flying = generateFlying();
   state.decos  = generateDecos(theme);
   state.particles = [];
-  state.time = 0;
+  state.time = 0;stageWon=false;
   state.chat = [];
   state.jumpPressed = false;
   projectiles.length = 0;
@@ -1117,6 +1125,7 @@ function endRun(reason){
     dist, coins: p.coins, car: p.cfg.name,
     mode: state.mode, theme: state.theme, kills: p.kills
   });
+  $('#btnAgain').textContent=stageWon?(raceStage>=5?'Пройти снова':'Следующий этап'):'Ещё заезд';
   $('#rTitle').textContent  = reason || 'Заезд завершён';
   $('#rTitle').title='Результат сохраняется в общем рейтинге';
   $('#rDist').textContent   = dist + ' м';
@@ -1319,6 +1328,7 @@ function step(dt){
 
   if(!p.alive){if(p.lives>0)reviveCar(p,dt);else {p.deadTimer+=dt;if(p.deadTimer>=1)endRun('Жизни закончились — новый заезд с начала');}}
   else if (p.fuel <= 0 && Math.abs(p.vx) < 15 && state.time > 2) endRun('⛽ Бензин кончился!');
+  else if ((p.maxX-START_X)/10>=stageDistance()){stageWon=true;endRun('🏁 Этап '+raceStage+' пройден!');}
   else if (state.time > 240) endRun('⏱ Время вышло!');
   else if (state.mode === 'battle' && state.bots.every(b=>!b.alive&&b.lives===0) && state.bots.length > 0){
     endRun('🏆 Все противники уничтожены!');
@@ -2027,6 +2037,8 @@ function updateHUD(){
   const p = state.player;
   const dist = Math.max(0, Math.floor((p.maxX - START_X)/10));
   $('#hDist').textContent  = dist + ' м';
+  $('#stageLabel').textContent='Этап '+raceStage+' · '+Math.min(dist,stageDistance())+' / '+stageDistance()+' м';
+  $('#stageProgress').value=Math.min(100,dist/stageDistance()*100);
   $('#hCoins').textContent = p.coins;
   $('#hSpeed').textContent = Math.abs(Math.round(p.vx/6));
   $('#hHp').textContent    = '♥'.repeat(p.lives);
@@ -2171,9 +2183,9 @@ window.addEventListener('message',event=>{
  if(event.source!==parent||event.data?.game!=='pognali-v1')return;
  const data=event.data;
  if(data.type==='user')setUser({...data.user,isLogged:true});
- if(data.type==='started'&&starting){runId=data.id;starting=false;paused=false;resetKeys();beginLocalRun();}
+ if(data.type==='started'&&starting){runId=data.id;starting=false;paused=false;if(stageWon)raceStage=raceStage>=5?1:raceStage+1;resetKeys();beginLocalRun();}
  if(data.type==='start-error'){starting=false;$('#btnAgain').disabled=false;$('#resultNotice').textContent=data.message;notify(data.message);}
- if(data.type==='saved'){$('#btnAgain').disabled=false;$('#btnRetrySave').hidden=true;$('#resultNotice').textContent='В рейтинг: '+data.score+' очков';notify('В рейтинг: '+data.score+' очков','gold');}
+ if(data.type==='saved'){$('#btnAgain').disabled=false;$('#btnRetrySave').hidden=true;$('#resultNotice').textContent=(data.guest?'Результат заезда: ':'В рейтинг: ')+data.score+' очков';notify((data.guest?'Результат: ':'В рейтинг: ')+data.score+' очков','gold');}
  if(data.type==='save-error'){$('#btnAgain').disabled=!!data.canRetry;$('#btnRetrySave').hidden=!data.canRetry;$('#resultNotice').textContent=data.message||'Не удалось сохранить результат';}
 });
 function pauseGame(){
