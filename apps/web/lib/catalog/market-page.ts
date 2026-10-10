@@ -55,7 +55,7 @@ export function businessOrder(left: any, right: any) {
 export function sortCatalogRows(rows: any[], sort: string, city?: string) {
   const sorted = [...rows];
   const values=new Map<any,number>();
-  const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,hasModificationSelection(row)?0:Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub)||0);}return values.get(row)!;};
+  const price=(row:any)=>{if(!values.has(row)){const offer=city?priceCardForCity(row,city).offer:row;values.set(row,hasModificationSelection(row)?0:Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub||(offer.catalogPricingMode==="seller"?offer.sellerPriceRub:0))||0);}return values.get(row)!;};
   if (sort === "totalRub") return sorted.sort((left, right) => {
     const a = price(left) || Number.POSITIVE_INFINITY;
     const b = price(right) || Number.POSITIVE_INFINITY;

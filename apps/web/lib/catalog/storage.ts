@@ -779,7 +779,7 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
   const dates=new WeakMap<CatalogSearchProjection,number>();
   const freshness=(row:CatalogSearchProjection)=>{let value=dates.get(row);if(value===undefined){value=projectionFreshness(row);dates.set(row,value);}return value;};
   const priceKeys=new WeakMap<CatalogSearchProjection,number>();
-  const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
+  const price = (row: CatalogSearchProjection, missing: number) => { if(priceKeys.has(row))return priceKeys.get(row)!||missing; const priced=city ? priceCardForCity(row,city).offer : row; const rub=Number(priced.japanDeliveredPreview?.totalRub || priced.totalRub || (priced.catalogPricingMode==="seller"?priced.sellerPriceRub:0)); const value=!hasModificationSelection(row) && rub>0 ? rub : 0;priceKeys.set(row,value);return value||missing; };
   return rows.sort((a, b) => sort === "totalRub" ? price(a, Infinity) - price(b, Infinity)
     : sort === "totalRubDesc" ? price(b, -Infinity) - price(a, -Infinity)
       : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
@@ -1878,7 +1878,8 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
  });
 }
 const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
-async function currentBudgetReplay(index:BudgetCountIndex,market:string){
+async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false){
+ const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
  const load=async()=>{
   const source=index.rows.filter(row=>row[0]===market);
@@ -1893,28 +1894,28 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string){
     if(!chunk || chunk.generationId!==index.generationId || chunk.market!==market || !Array.isArray(chunk.entries) || chunk.entries.length>500)throw Error('catalog_budget_replay_invalid');
     const input=chunk.entries.map(([id,replay])=>{const row=originals.get(id);if(!row||seen.has(id))throw Error('catalog_budget_replay_identity');seen.add(id);return budgetReplayOffer([...row.slice(0,7),replay] as any);});
     const priced=await currentSearchPrices(input,index.generationId);
-    return buildBudgetCountIndex(index.generationId,priced,new Map(input.map(row=>[row.id,originals.get(row.id)![5].block]))).rows;
+    return buildBudgetCountIndex(index.generationId,displayRows(priced),new Map(input.map(row=>[row.id,originals.get(row.id)![5].block]))).rows;
    });
    if(seen.size!==source.length)throw Error('catalog_budget_replay_incomplete');
    for(const row of parts.flat()){row[5]=originals.get(row[5].id)![5];refreshed.push(row);}
   } else {
    for(let start=0;start<source.length;start+=128){
-    const chunk=source.slice(start,start+128),replay=chunk.filter(row=>row[7]);
-    const priced=await currentSearchPrices(replay.map(budgetReplayOffer),index.generationId);
-    const rebuilt=buildBudgetCountIndex(index.generationId,priced,new Map(replay.map(row=>[row[5].id,row[5].block])));
-    refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7]));
+    const chunk=source.slice(start,start+128),replay=chunk.filter(row=>row[7] || displayPrices&&row[3]);
+    const priced=await currentSearchPrices(replay.map(row=>({...budgetReplayOffer(row),...(displayPrices&&row[3]?{sourcePrice:row[3].sourcePrice,sourceCurrency:row[3].sourceCurrency}: {})})),index.generationId);
+    const rebuilt=buildBudgetCountIndex(index.generationId,displayRows(priced),new Map(replay.map(row=>[row[5].id,row[5].block])));
+    refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7] && !(displayPrices&&row[3])));
    }
   }
   return refreshed;
  };
  if(fingerprint){
-  try{return await sharedBudgetPrices(index,market,fingerprint,load);}
+  try{return await sharedBudgetPrices(index,market,fingerprint,load,undefined,displayPrices);}
   catch(error){
    if(!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
    return load(); // Do not retain a retry under a version already known to have changed.
   }
  }
- return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}`,load);
+ return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}`,load);
 }
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
@@ -2020,7 +2021,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
      if(supported){
       const {japanSearchQuotes}=await import("./japan-delivered-preview");
       const quotes=markets.includes("japan")?await japanSearchQuotes(selected.generationId):{};
-      const current=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(index,market));
+      const current=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(index,market,true));
       const prices=new Map(current.flat().map(row=>[row[5].id,row]));
       for(let position=0;position<selected.rows.length;position++){
        const row=prices.get(selected.rows[position][5].id);if(!row)continue;
@@ -2045,7 +2046,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
      for(const row of priced){
       const position=positions.get(row.id)!;
       const offer=params.city?priceCardForCity(row,params.city).offer:row;
-      const rub=Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub);
+      const rub=Number(offer.japanDeliveredPreview?.totalRub||offer.totalRub||(offer.catalogPricingMode==="seller"?offer.sellerPriceRub:0));
       if(!hasModificationSelection(row)&&rub>0)values[position]=rub;
      }
     });
