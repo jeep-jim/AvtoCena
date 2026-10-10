@@ -56,7 +56,7 @@ async function main(){
     const context={release,generationId:decision.generationId,readState,readRelease:liveBudgetRelease};
     await verifyBudgetContext(context);
     const {budgetPricingFingerprint}=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/shared-budget-prices.ts')).href);
-    const selectorVersion=await fs.access(path.join(root,'apps/web/lib/catalog/budget-selector-codec.ts')).then(()=>2,()=>1);
+    const selectorVersion=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/budget-selector-codec.ts')).href).then(module=>module.BUDGET_SELECTOR_STORAGE_VERSION||2).catch(()=>1);
     const fingerprint=async()=>Object.fromEntries(await Promise.all(['china','korea','uae','europe','georgia'].map(async market=>[market,await budgetPricingFingerprint(market)])));
     const expected=await fingerprint(),readyKey=budgetReadyKey(release,decision.generationId,expected,selectorVersion),readyPath='catalog/operations/budget-preparation-v1.json';
     if(budgetAlreadyReady(await storage.readJson(readyPath,null),readyKey)){
