@@ -301,7 +301,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 }
 
 
-export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
+export function CatalogFilters({ initial, facets, resultCount }: { initial: Record<string, string>; facets?: Facets; resultCount?: number }) {
   const dealer=useDealerBrowsing();
   const router = useRouter();
   const [pending,startTransition]=useTransition();
@@ -320,6 +320,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const [interactive, setInteractive] = useState(false);
   useEffect(() => setInteractive(true), []);
   const electricOnly = isElectrifiedFilter(draft.fuel);
+  const updating = pending || catalogQuery(draft,sortKey,sortDirection) !== catalogQuery(draftFromInitial(initial),initialSortState.key,initialSortState.direction);
 
   useEffect(() => {
     const incomingSort=initialSort(initial.sort || "");
@@ -487,7 +488,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     <StickyCatalogControls chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
     {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
-      <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
+      <div className="ac-mobile-filter-header shrink-0 px-4 pt-1"><div className="mx-auto h-1 w-10 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-2 py-2"><div className="min-w-0 flex items-center gap-2" role="status" aria-live="polite" aria-busy={updating}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><span className="text-sm font-black tabular-nums">{updating ? "Обновляем…" : typeof resultCount === "number" ? `Найдено: ${resultCount.toLocaleString("ru-RU")}` : "Каталог"}</span></div><button type="button" data-ac-react-close="1" data-ac-mobile-close="1" onClick={() => setMobileOpen(false)} className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl ${chips.length || sortKey ? "ac-mobile-apply" : ""}`} aria-label={chips.length || sortKey ? "Применить фильтры" : "Закрыть"}>{chips.length || sortKey ? "ОК" : "×"}</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
