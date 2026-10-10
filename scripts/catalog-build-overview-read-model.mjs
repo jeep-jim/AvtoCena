@@ -1,10 +1,11 @@
 const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts");
-const { readCatalogFacets, searchOffers, readCurrentCatalogProjectionSnapshot } = await import("../apps/web/lib/catalog/storage.ts");
+const { readCatalogFacets, searchOffers, readCurrentCatalogProjectionSnapshot, backfillCatalogMarketLandings } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_OVERVIEW_PATH, buildCatalogOverviewPayload, catalogOverviewGenerationPath } = await import("../apps/web/lib/catalog/overview.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const candidatesPerMarket = Math.min(48, Math.max(6, Number(process.env.CATALOG_OVERVIEW_CANDIDATES_PER_MARKET || 24)));
 
+async function main() {
 async function readManifestGeneration() {
   const manifest = await readDataJson("catalog/manifest.json", { generationId: "" });
   return String(manifest?.generationId || "");
@@ -32,7 +33,19 @@ console.log("OVERVIEW_REFRESH", JSON.stringify({
 if (Date.parse(publicationLock?.lockedUntil || "") > Date.now()) {
   throw new Error("catalog_overview_publication_in_progress");
 }
+if (publicationLock?.lockedUntil && !Number.isFinite(Date.parse(publicationLock.lockedUntil))) throw new Error("catalog_overview_publication_lock_invalid");
 
+// Hourly recovery checks only metadata when this generation/day is already ready.
+// Normal publication imports do not opt in: they still rebuild their overview.
+if (process.env.CATALOG_OVERVIEW_SKIP_READY === "true"
+  && previousOverview?.generationId === generationBefore && previousOverview?.policyDate === policyDate
+  && previousOverview?.dailyLandingsVersion === 1 && previousOverview?.facets?.generationId === generationBefore) {
+  console.log("OVERVIEW_REFRESH", JSON.stringify({generationId:generationBefore,policyDate,alreadyPrepared:true}));
+  return;
+}
+const landings = await backfillCatalogMarketLandings({refreshDateSensitive:true});
+if (landings.generationId !== generationBefore) throw new Error("catalog_overview_landings_generation_mismatch");
+console.log("DAILY_MARKET_LANDINGS", JSON.stringify(landings));
 
 const [facets, marketEntries] = await Promise.all([
   readCatalogFacets(),
@@ -74,6 +87,10 @@ for (const [market, result] of marketEntries) {
 }
 
 const payload = buildCatalogOverviewPayload(generationBefore, facets, markets, policyDate);
+if (new Date(Date.now()+7*3600000).toISOString().slice(0,10) !== policyDate) throw new Error("catalog_overview_date_changed_retry");
+const finalLock = await storage.readJson("catalog/import-lock.json", null);
+if (finalLock?.lockedUntil && (!Number.isFinite(Date.parse(finalLock.lockedUntil)) || Date.parse(finalLock.lockedUntil)>Date.now())) throw new Error("catalog_overview_publication_in_progress");
+payload.dailyLandingsVersion = 1;
 await getJsonStorage().writeJson(catalogOverviewGenerationPath(generationBefore), payload);
 await getJsonStorage().writeJson(CATALOG_OVERVIEW_PATH, payload);
 
@@ -90,4 +107,7 @@ console.log(JSON.stringify({
   policyDate,
   total: Object.values(markets).reduce((sum, entry) => sum + Number(entry.total || 0), 0),
   markets: Object.fromEntries(Object.entries(markets).map(([market, entry]) => [market, { total: entry.total, candidates: entry.items.length }])),
+  searchPaths: Object.fromEntries(marketEntries.map(([market,result])=>[market,result.usedIndexShards])),
 }, null, 2));
+}
+await main();

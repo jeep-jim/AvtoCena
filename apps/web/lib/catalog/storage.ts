@@ -1111,24 +1111,46 @@ async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLan
   } catch { return null; } // Existing full search remains the authoritative fallback.
 }
 /** Append only derived indexes; never change catalog pointers, prices or inventory. */
-export async function backfillCatalogMarketLandings() {
+export async function backfillCatalogMarketLandings(options: {refreshDateSensitive?: boolean} = {}) {
   const manifest = await readDataJson<CatalogManifest>("catalog/manifest.json", {generationId: "", markets: {}} as CatalogManifest);
   if (!manifest.generationId) throw new Error("catalog_market_landing_no_generation");
+  const storage = getJsonStorage();
+  const policyDate = new Date(Date.now()+7*3600000).toISOString().slice(0,10);
+  const assertRefreshContext = async () => {
+    if (!options.refreshDateSensitive) return;
+    const [current, lock] = await Promise.all([
+      storage.readJson<{generationId:string}>("catalog/manifest.json", {generationId:""}),
+      storage.readJson<{lockedUntil?:string}|null>("catalog/import-lock.json", null),
+    ]);
+    if (current.generationId !== manifest.generationId) throw Error("catalog_market_landing_generation_changed_retry");
+    if (new Date(Date.now()+7*3600000).toISOString().slice(0,10) !== policyDate) throw Error("catalog_market_landing_date_changed_retry");
+    if (lock?.lockedUntil && (!Number.isFinite(Date.parse(lock.lockedUntil)) || Date.parse(lock.lockedUntil)>Date.now())) throw Error("catalog_market_landing_publication_in_progress");
+  };
+  await assertRefreshContext();
   const results = [];
   for (const market of MARKETS) {
     const count = Number(manifest.markets?.[market]?.count || 0);
     if (!count) continue;
+    const landingPath = catalogMarketLandingPath(manifest.generationId, market);
+    const previous = options.refreshDateSensitive ? await storage.readJsonWithMeta<MarketLanding|null>(landingPath, null) : null;
+    if (previous?.found && !previous.etag) throw Error("catalog_market_landing_etag_required");
     const projection = await readDataJson<{generationId: string; items: CatalogSearchProjection[]} | null>(
       generationPath(manifest.generationId, `indexes/projection/${cleanShard(market)}.json`), null);
     if (projection?.generationId !== manifest.generationId || !Array.isArray(projection.items) || projection.items.length !== count) {
       throw new Error(`catalog_market_landing_incomplete:${market}`);
     }
     const landing = await buildCatalogMarketLanding(manifest.generationId, market, projection.items);
-    await writeJsonAtomic(catalogMarketLandingPath(manifest.generationId, market), landing);
+    if (options.refreshDateSensitive) {
+      await assertRefreshContext();
+      // Daily age eligibility changes even when the feed generation does not.
+      // Replace only the derivative, conditionally; never overwrite a concurrent refresh.
+      await storage.writeJson(landingPath, landing, previous?.found ? {ifMatch:previous.etag!} : {ifNoneMatch:"*"});
+    } else await writeJsonAtomic(landingPath, landing);
     results.push({market, total: landing.total, samples: landing.items.length, bytes: Buffer.byteLength(JSON.stringify(landing))});
   }
   const current = await readDataJson<{generationId: string}>("catalog/manifest.json", {generationId: ""});
   if (current.generationId !== manifest.generationId) throw new Error("catalog_market_landing_generation_changed_retry");
+  await assertRefreshContext();
   return {generationId: manifest.generationId, results};
 }
 async function readCatalogFacetsEditorial(params: CatalogSearchParams = {}): Promise<CatalogFacets> {

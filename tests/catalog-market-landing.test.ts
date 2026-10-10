@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildCatalogMarketLanding,catalogMarketLandingPath,backfillCatalogMarketLandings,readCatalogFacets,searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
-import {getJsonStorage} from '../apps/web/lib/data';
+import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
 const rows=Array.from({length:220},(_,i)=>({id:`car-${i}`,market:'korea',make:i%2?'Hyundai':'Kia',model:'K5',year:2023,
  cardProjectionVersion:3,cardImageUrl:'https://example.test/car.jpg',fuel:'petrol',powertrainKind:'combustion',bodyType:'sedan',
  engineCc:1999,powerHp:160,powerKw:117.68,icePowerKw:117.68,utilizationPowerKw:117.68,
@@ -67,4 +67,45 @@ test('backfill only appends derived immutable objects with conditional writes',a
  assert.equal(writes.length,1);assert.equal(writes[0][0],catalogMarketLandingPath('test','korea'));
  assert.deepEqual(writes[0][2],{ifNoneMatch:'*'});
  t.mock.restoreAll();resetCatalogReadCachesForTests();
+});
+
+test('daily refresh replaces yesterday with compare-and-swap and restores compact search parity',async(t)=>{
+ const storage=getJsonStorage();
+ let stored={...await buildCatalogMarketLanding('test','korea',rows),policyDate:'2000-01-01'};
+ fixture(t,null);const base=storage.readJsonWithMeta.bind(storage),writes:string[]=[];
+ const reads:string[]=[];
+ t.mock.method(storage,'readJsonWithMeta',async(file:string,fallback:any)=>{
+  reads.push(file);
+  if(file==='catalog/import-lock.json')return {found:false,value:null};
+  if(file===catalogMarketLandingPath('test','korea'))return {found:true,etag:'yesterday',value:stored};
+  return base(file,fallback);
+ });
+ t.mock.method(storage,'writeJson',async(file:string,value:any,condition:any)=>{
+  assert.equal(file,catalogMarketLandingPath('test','korea'));
+  assert.deepEqual(condition,{ifMatch:'yesterday'});writes.push(file);stored=value;
+ });
+ resetCatalogReadCachesForTests();
+ const expected=await searchOffers({market:'korea',pageSize:3});
+ assert.ok(reads.some(file=>file.includes('/projection/')),'yesterday must not bypass age checks');
+ await backfillCatalogMarketLandings({refreshDateSensitive:true});
+ assert.equal(writes.length,1);
+ resetCatalogReadCachesForTests();reads.length=0;
+ const actual=await searchOffers({market:'korea',pageSize:3});
+ assert.equal(actual.total,expected.total);assert.deepEqual(actual.items,expected.items);
+ assert.equal(reads.some(file=>file.includes('/projection/')),false,'fresh first page must not read the full market');
+ t.mock.restoreAll();resetCatalogReadCachesForTests();
+});
+
+test('daily refresh refuses active publisher and never hides a competing write',async(t)=>{
+ for(const locked of [true,false]){
+  fixture(t,null);const storage=getJsonStorage(),base=storage.readJsonWithMeta.bind(storage);let writes=0;
+  t.mock.method(storage,'readJsonWithMeta',async(file:string,fallback:any)=>{
+   if(file==='catalog/import-lock.json')return {found:true,value:locked?{lockedUntil:new Date(Date.now()+60000).toISOString()}:null};
+   return base(file,fallback);
+  });
+  t.mock.method(storage,'writeJson',async()=>{writes++;throw new StorageConflictError();});
+  if(locked){await assert.rejects(backfillCatalogMarketLandings({refreshDateSensitive:true}),/publication_in_progress/);assert.equal(writes,0);}
+  else {await assert.rejects(backfillCatalogMarketLandings({refreshDateSensitive:true}),StorageConflictError);assert.equal(writes,1);}
+  t.mock.restoreAll();resetCatalogReadCachesForTests();
+ }
 });
