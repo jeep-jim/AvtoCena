@@ -65,7 +65,10 @@ jobs:
         working-directory: runtime
         env:
           AVTOCENA_RELEASE_SHA: ${{ steps.live.outputs.release }}
-        run: node --import tsx ../automation/scripts/catalog-budget-runtime.mjs .
+        run: |
+          # Use current orchestration while importing the exact live calculator.
+          cp ../automation/scripts/catalog-budget-shared-warmup.mjs scripts/catalog-budget-shared-warmup.mjs
+          node --import tsx ../automation/scripts/catalog-budget-runtime.mjs .
       - uses: actions/upload-artifact@v4
         if: always()
         with:
