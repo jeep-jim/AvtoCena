@@ -1882,7 +1882,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
  const load=async()=>{
-  const source=index.rows.filter(row=>row[0]===market);
+  const source=(displayPrices?[...index.rows,...(index.otherRows||[])]:index.rows).filter(row=>row[0]===market);
   const originals=new Map(source.map(row=>[row[5].id,row]));
   const paths=index.pricingChunks?.[market];
   const refreshed:BudgetCountIndex['rows']=[];
@@ -1896,7 +1896,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
     const priced=await currentSearchPrices(input,index.generationId);
     return buildBudgetCountIndex(index.generationId,displayRows(priced),new Map(input.map(row=>[row.id,originals.get(row.id)![5].block]))).rows;
    });
-   if(seen.size!==source.length)throw Error('catalog_budget_replay_incomplete');
+   if(seen.size!==index.rows.filter(row=>row[0]===market).length)throw Error('catalog_budget_replay_incomplete');
    for(const row of parts.flat()){row[5]=originals.get(row[5].id)![5];refreshed.push(row);}
   } else {
    for(let start=0;start<source.length;start+=128){
@@ -1905,6 +1905,27 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
     const rebuilt=buildBudgetCountIndex(index.generationId,displayRows(priced),new Map(replay.map(row=>[row[5].id,row[5].block])));
     refreshed.push(...rebuilt.rows.map(row=>{row[5]=originals.get(row[5].id)![5];return row;}),...chunk.filter(row=>!row[7] && !(displayPrices&&row[3])));
    }
+  }
+  if(displayPrices){
+   // Older selectors placed labelled seller prices in otherRows and omitted
+   // their currency inputs. Recover those keys once, with bounded block reads;
+   // the shared numeric snapshot prevents repetition on later requests/instances.
+   const missing=(index.otherRows||[]).filter(row=>row[0]===market);
+   const ids=new Set(missing.map(row=>row[5].id));
+   const blockById=new Map(missing.map(row=>[row[5].id,row[5].block]));
+   const recoveredIds=new Set<string>();
+   const blocks=[...new Set(missing.map(row=>row[5].block))];
+   const recovered=await mapWithConcurrency(blocks,2,async block=>{
+    const part=await budgetCardCache.get(`${index.generationId}:v${index.version}:${block}`,()=>readIndex(index.generationId,`budget-cards-v${index.version}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]}));
+    if(part.generationId!==index.generationId)throw Error('catalog_display_price_block_missing');
+    const candidates=part.items.filter(row=>ids.has(row.id));for(const row of candidates)recoveredIds.add(row.id);
+    const priced=await currentSearchPrices(prepareCatalogProjectionRows(candidates),index.generationId);
+    return buildBudgetCountIndex(index.generationId,displayRows(priced),blockById).rows;
+   });
+   if(recoveredIds.size!==ids.size)throw Error("catalog_display_price_rows_missing");
+   const merged=new Map(refreshed.map(row=>[row[5].id,row]));
+   for(const row of recovered.flat()){row[5]=originals.get(row[5].id)![5];merged.set(row[5].id,row);}
+   return [...merged.values()].filter(row=>row[1]>0);
   }
   return refreshed;
  };

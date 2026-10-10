@@ -9,6 +9,7 @@ test('preparation permits derived selector versions but cannot write inventory o
  assert.ok(pattern);
  const allows=new Function('path',`return ${pattern[1]}.test(path)`);
  for(const version of [1,2,3])for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${version}/${market}.json`),true);
+ for(const kind of ['budget','sort'])for(const market of ['china','korea','europe','uae','georgia'])assert.equal(allows(`catalog/runtime-${kind}-prices-v1/${market}.json`),true);
  for(const path of ['catalog/manifest.json','catalog/operations/collection-controls-v1.json','catalog/generations/test/offers/china.json','catalog/generations/test/indexes/budget-markets-v4/china.json'])assert.equal(allows(path),false);
 });
 test('runtime warmup uses only a healthy exact production release, not a docs or feed commit',async()=>{

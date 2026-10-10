@@ -40,7 +40,7 @@ test('compact sorting keeps exact order, shares direction price reads and bounds
  }finally{storage.readJsonWithMeta=original;resetCatalogReadCachesForTests();}
 });
 
-test('v3 sorting reads full cards only for the visible page',async()=>{
+test('v3 sorting reuses compact keys and recovers only missing legacy prices',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
  const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
@@ -65,10 +65,10 @@ test('v3 sorting reads full cards only for the visible page',async()=>{
   resetCatalogReadCachesForTests();reads.length=0;peak=0;
   const ascending=await searchOffers({fuel:'petrol',sort:'totalRub',pageSize:8});
   assert.deepEqual(ascending.items.map(x=>x.id),Array.from({length:8},(_,i)=>`car-${i}`));
-  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,1,'price ordering reads only the first visible block');
+  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,2,'one legacy unknown block plus visible page');
   const descending=await searchOffers({fuel:'petrol',sort:'totalRubDesc',pageSize:8});
   assert.deepEqual(descending.items.map(x=>x.id),Array.from({length:8},(_,i)=>`car-${59-i}`));
-  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,2,'reverse order reads only its visible block');
+  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,3,'reverse order adds only its visible block');
   assert.ok(peak<=2,`at most two blocks in flight, got ${peak}`);
   for(const sort of ['totalRub','totalRubDesc'] as const){const last=await searchOffers({fuel:'petrol',sort,page:8,pageSize:8});assert.equal(last.items.at(-1)?.id,'unknown');}
  }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();}
@@ -79,6 +79,7 @@ test('seller prices sort by current visible currency values without becoming del
  const rows=Array.from({length:60},(_,i)=>({...base,id:`car-${i}`,sourceCurrency:'USD',sourcePrice:(60-i)*1000,year:2020+i%7,totalRub:1_000_000+i*10_000,publicVisibleRub:1_000_000+i*10_000}));
  rows.push({...base,id:'unknown',year:2024,totalRub:null,publicVisibleRub:undefined} as any);
  const generationId='compact-sort',index=buildBudgetCountIndex(generationId,rows,new Map(rows.map((r,i)=>[r.id,Math.floor(i/10)])),3);
+ const legacy=index.rows.splice(30);for(const row of legacy){row[1]=0;row[7]=undefined;}index.otherRows!.push(...legacy);
  const storage=getJsonStorage(),original=storage.readJsonWithMeta,originalRead=storage.readJson,originalWrite=storage.writeJson,reads:string[]=[];let active=0,peak=0;
  storage.readJson=async<T>(key:string,fallback:T)=>(await storage.readJsonWithMeta(key,fallback)).value;
  storage.writeJson=async()=>{};
@@ -101,10 +102,10 @@ test('seller prices sort by current visible currency values without becoming del
   const ascending=await searchOffers({fuel:'petrol',sort:'totalRub',pageSize:8});
   assert.deepEqual(ascending.items.map(x=>x.id),Array.from({length:8},(_,i)=>`car-${59-i}`));
   assert.ok(ascending.items.every(x=>x.totalRub==null && x.catalogPricingMode==='seller' && Number(x.sellerPriceRub)>0));
-  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,1,'price ordering reads only the first visible block');
+  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,4,'legacy missing price inputs recovered once in bounded blocks');
   const descending=await searchOffers({fuel:'petrol',sort:'totalRubDesc',pageSize:8});
   assert.deepEqual(descending.items.map(x=>x.id),Array.from({length:8},(_,i)=>`car-${i}`));
-  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,2,'reverse order reads only its visible block');
+  assert.equal(reads.filter(x=>x.includes('/budget-cards-')).length,5,'reverse direction reuses recovered keys and reads only its visible block');
   assert.ok(peak<=2,`at most two blocks in flight, got ${peak}`);
   for(const sort of ['totalRub','totalRubDesc'] as const){const last=await searchOffers({fuel:'petrol',sort,page:8,pageSize:8});assert.equal(last.items.at(-1)?.id,'unknown');}
  }finally{storage.readJsonWithMeta=original;storage.readJson=originalRead;storage.writeJson=originalWrite;resetCatalogReadCachesForTests();resetCatalogRateCache();invalidateEffectiveMarketsCache();}
