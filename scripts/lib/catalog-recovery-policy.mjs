@@ -130,3 +130,11 @@ export function recoveryDecision({market,runs,journal,japan,intakeCheckpoint,act
  return {action:'none',reason:'current'};
 }
 export {transientOperationFailure};
+
+/** Fresh-main dispatches have run_attempt=1; bound retries across distinct runs. */
+export function failedWorkflowRetryBudget(recovery,now=Date.now()){
+ const elapsed=now-Date.parse(recovery?.failureWindowStartedAt||'');
+ const active=Number.isFinite(elapsed)&&elapsed>=0&&elapsed<86400000;
+ const attempts=active?Math.max(0,Number(recovery?.failureAttempts)||0):0;
+ return {allowed:attempts<3,failureAttempts:attempts+1,failureWindowStartedAt:active?recovery.failureWindowStartedAt:new Date(now).toISOString()};
+}

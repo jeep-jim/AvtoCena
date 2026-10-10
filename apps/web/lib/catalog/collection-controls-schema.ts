@@ -42,3 +42,7 @@ export function collectionMarketEnabled(controls:CollectionControls,market:strin
 }
 
 export const COLLECTION_WORKFLOWS:Record<string,string>={china:'catalog-refresh-china.yml',korea:'catalog-refresh-korea.yml',uae:'catalog-refresh-uae.yml',europe:'catalog-refresh-europe.yml',georgia:'catalog-refresh-georgia.yml',japan:'proauctions-collect-publish.yml'};
+
+export function collectionWorkflowEnabled(controls:CollectionControls,market:string){
+  return market==='green'?collectionEnabled(controls,'akebono_green'):market==='japan'?collectionEnabled(controls,'proauctions_japan_stat'):collectionMarketEnabled(controls,market);
+}

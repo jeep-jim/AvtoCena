@@ -5,10 +5,25 @@ import {getJsonStorage,StorageConflictError,type JsonStorage} from '../apps/web/
 import {defaultCollectionControls,collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
 import {COLLECTION_CONTROLS_KEY,saveCollectionSwitch,readCollectionControls,validateCollectionControls,clearCollectionControlsCache,CollectionControlsConflict,CollectionControlsInputError} from '../apps/web/lib/catalog/collection-controls';
 import {guardCollectionAdapter} from '../apps/web/lib/catalog/collection-adapter-guard';
+import {collectionWorkflowEnabled} from '../apps/web/lib/catalog/collection-controls-schema';
+import {failedWorkflowRetryBudget} from '../scripts/lib/catalog-recovery-policy.mjs';
 function memory(){
  let saved:unknown=null,etag=0;
  return {driver:'local',readJsonWithMeta:async()=>({value:structuredClone(saved),found:saved!==null,etag:saved===null?undefined:String(etag)}),writeJson:async (_:string,value:unknown,c:any)=>{if((c.ifNoneMatch==='*'&&saved!==null)||(c.ifMatch!==undefined&&c.ifMatch!==String(etag)))throw new StorageConflictError();saved=structuredClone(value);etag++;}} as unknown as JsonStorage;
 }
+test('green recovery obeys its Japan parent and fresh-main retries remain bounded across run IDs',()=>{
+ const controls=defaultCollectionControls();
+ assert.equal(collectionWorkflowEnabled(controls,'green'),true);
+ controls.sources.proauctions_japan_stat.enabled=false;
+ assert.equal(collectionWorkflowEnabled(controls,'japan'),false);assert.equal(collectionWorkflowEnabled(controls,'green'),true);
+ controls.markets.japan.enabled=false;assert.equal(collectionWorkflowEnabled(controls,'green'),false);
+ const now=Date.now();let recovery:any={};
+ for(let i=0;i<3;i++){const {allowed,...state}=failedWorkflowRetryBudget(recovery,now+i*7200000);assert.equal(allowed,true);recovery={...state,runId:String(i)};}
+ assert.equal(failedWorkflowRetryBudget(recovery,now+6*3600000).allowed,false);
+ assert.equal(failedWorkflowRetryBudget(recovery,now+25*3600000).allowed,true);
+ const watchdog=readFileSync('scripts/catalog-autonomy-watchdog.mjs','utf8');
+ assert.equal((watchdog.match(/api\(`actions\/workflows\/\$\{workflow\}\/dispatches`/g)||[]).length,1,'one POST for each recovery decision');
+});
 test('China feed is on, both reserves off, market off preserves source selections',async()=>{
  const s=memory();let c=await readCollectionControls(s);
  assert.equal(collectionEnabled(c,'che168_feed'),true);assert.equal(collectionEnabled(c,'autohome_used_china_open'),false);assert.equal(collectionEnabled(c,'autohome_new_china_open'),false);
