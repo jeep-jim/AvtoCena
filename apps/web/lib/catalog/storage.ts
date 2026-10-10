@@ -14,7 +14,7 @@ import { getGreenCornerOffer } from "./green-corner";
 import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
 import { matchesFuelFilter } from "./fuel-filter";
-import { buildJapanPreviewInputIndex, japanPreviewInputPath } from "./japan-preview-inputs";
+import { buildJapanPreviewInputIndex, japanPreviewInputPath, matchesJapanPreviewInput } from "./japan-preview-inputs";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
@@ -2011,6 +2011,30 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
   if(mode.startsWith("totalRub")){
    if(!cache.prices)cache.prices=(async()=>{
     const values=new Float64Array(selected.rows.length);values.fill(NaN);
+    // V3 already has bounded price-only replay and a validated shared snapshot.
+    // Sorting must not fetch every full card (including images and ledgers).
+    const index=selected.cardVersion===3?await readBudgetCountIndex(selected.generationId,params.market):null;
+    if(index?.version===3 && index.generationId===selected.generationId){
+     const markets=[...new Set(selected.rows.map(row=>row[0]))];
+     const supported=markets.every(market=>market==="japan" || index.pricingChunks?.[market] || index.rows.filter(row=>row[0]===market).every(row=>row[7]));
+     if(supported){
+      const {japanSearchQuotes}=await import("./japan-delivered-preview");
+      const quotes=markets.includes("japan")?await japanSearchQuotes(selected.generationId):{};
+      const current=await mapWithConcurrency(markets,2,market=>currentBudgetReplay(index,market));
+      const prices=new Map(current.flat().map(row=>[row[5].id,row]));
+      for(let position=0;position<selected.rows.length;position++){
+       const row=prices.get(selected.rows[position][5].id);if(!row)continue;
+       const [market,totalRub,basis,japan,seller]=row;
+       const candidate=japan?quotes[japan.id]:undefined;
+       const preview=candidate&&japan&&matchesJapanPreviewInput(candidate,japan)?candidate:undefined;
+       const offer={market,totalRub,catalogPricingMode:seller?"seller" as const:undefined,calculationSnapshot:{deliveryPricingBasis:basis},japanDeliveredPreview:preview};
+       const priced=params.city?priceCardForCity(offer,params.city).offer:offer;
+       const rub=Number(priced.japanDeliveredPreview?.totalRub||priced.totalRub);
+       if(rub>0)values[position]=rub;
+      }
+      return values;
+     }
+    }
     const positions=new Map(selected.rows.map((row,index)=>[row[5].id,index]));
     const blocks=[...new Set(selected.rows.map(row=>row[5].block))];let incomplete=false;let seen=0;
     await mapWithConcurrency(blocks,2,async block=>{

@@ -69,7 +69,7 @@ try {
   await page.waitForTimeout(250); // Let the sheet's scroll-close handler settle before opening.
   await volume.locator('.ac-range-value-toggle').first().click();
   await volume.getByRole('button',{name:'1,5 л',exact:true}).waitFor();
-  if(width<1024)await scope.getByRole('button',{name:'Закрыть',exact:true}).click();
+  if(width<1024)await scope.getByRole('button',{name:'Применить фильтры',exact:true}).click();
   await page.waitForFunction(()=>{const q=new URLSearchParams(location.search);return q.get('budgetFrom')==='1100000'&&q.get('budget')==='1200000';});
   const url=new URL(page.url());assert.equal(url.pathname,'/cars/green');assert.equal(url.searchParams.has('fobFrom'),false);assert.equal(url.searchParams.has('fobTo'),false);
   await page.screenshot({path:`${out}/green-${width}.png`,fullPage:true});
