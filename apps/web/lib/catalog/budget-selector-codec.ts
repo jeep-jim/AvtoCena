@@ -1,3 +1,4 @@
+import {gzipSync,gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import type {BudgetCountIndex,BudgetCountRow} from './budget-count-index';
 import {splitBudgetMarketIndex} from './budget-market-index';
@@ -42,6 +43,46 @@ export function verifiedPackedBudgetSelector(directory:PackedBudgetDirectory,mar
   const expected=directory.markets?.[market];
   if(directory.version!==2||!expected||!packed||digest(packed)!==expected.checksum)return null;
   const index=unpackBudgetSelector(packed);
+  return index.generationId===directory.generationId&&index.rows.length===expected.rows&&index.otherRows?.length===expected.otherRows&&[...index.rows,...index.otherRows].every(row=>row[0]===market)?index:null;
+ }catch{return null;}
+}
+
+
+export const BUDGET_SELECTOR_STORAGE_VERSION = 3;
+export type CompressedBudgetSelector = {encoding:'gzip-base64';payload:string};
+export type CompressedBudgetDirectory = Omit<PackedBudgetDirectory,'version'> & {version:3};
+// Derived, immutable selectors only. Bound inflation even if an object is corrupt.
+const MAX_SELECTOR_BYTES = 128 * 1024 * 1024;
+export function compressBudgetSelector(packed:PackedBudgetSelector):CompressedBudgetSelector {
+ const json=Buffer.from(JSON.stringify(packed));
+ if(json.length>MAX_SELECTOR_BYTES)throw Error('catalog_compressed_selector_too_large');
+ return {encoding:'gzip-base64',payload:gzipSync(json,{level:6}).toString('base64')};
+}
+export function decompressBudgetSelector(value:CompressedBudgetSelector):PackedBudgetSelector {
+ if(value?.encoding!=='gzip-base64'||typeof value.payload!=='string'||value.payload.length>MAX_SELECTOR_BYTES*2)throw Error('catalog_compressed_selector_invalid');
+ const bytes=Buffer.from(value.payload,'base64');
+ if(bytes.toString('base64')!==value.payload)throw Error('catalog_compressed_selector_invalid');
+ return JSON.parse(gunzipSync(bytes,{maxOutputLength:MAX_SELECTOR_BYTES}).toString('utf8'));
+}
+export function compressedBudgetSelectors(packed:ReturnType<typeof splitPackedBudgetSelectors>){
+ const parts=new Map<string,CompressedBudgetSelector>();
+ const directory:CompressedBudgetDirectory={version:3,generationId:packed.directory.generationId,markets:{}};
+ for(const [market,part] of packed.parts){
+  let value:CompressedBudgetSelector;
+  try{value=compressBudgetSelector(part);}catch(error){
+   if((error as Error).message==='catalog_compressed_selector_too_large')continue;
+   throw error;
+  }
+  parts.set(market,value);
+  directory.markets[market]={...packed.directory.markets[market],checksum:digest(value)};
+ }
+ return {directory,parts};
+}
+export function verifiedCompressedBudgetSelector(directory:CompressedBudgetDirectory,market:string,value:CompressedBudgetSelector|null):BudgetCountIndex|null {
+ try{
+  const expected=directory.markets?.[market];
+  if(directory.version!==3||!expected||!value||digest(value)!==expected.checksum)return null;
+  const index=unpackBudgetSelector(decompressBudgetSelector(value));
   return index.generationId===directory.generationId&&index.rows.length===expected.rows&&index.otherRows?.length===expected.otherRows&&[...index.rows,...index.otherRows].every(row=>row[0]===market)?index:null;
  }catch{return null;}
 }
