@@ -1,4 +1,5 @@
 "use client";
+import {StickyCatalogControls} from "./StickyCatalogControls";
 import {createPortal} from "react-dom";
 import {CatalogMarketFlag} from "./CatalogMarketFlag";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
@@ -119,7 +120,7 @@ function AuctionGradeSelect({value, onChange}: {value: string; onChange: (value:
   </div>;
 }
 
-const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
+const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.flatMap((value) => [{ value, label: CATALOG_MARKET_LABELS[value] },...(value==="japan"?[{value:"green",label:"Зелёный угол"}]:[])])];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
 const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "electrified", label: "Электромобили и гибриды" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
@@ -285,8 +286,8 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
 
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
-    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
-    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <AuctionGradeSelect value={draft.auctionGrade} onChange={(value) => setField("auctionGrade", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="stock" value={draft.stock || "auction"} placeholder="Раздел Японии" options={[{value:"all",label:"Все"},{value:"auction",label:"Аукционы"},{value:"green",label:"В наличии"}]} onChange={value=>{setField("stock",value);if(value==="green")setField("auctionGrade","");}} /> : null}</div>
+    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch multiple contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market==="japan"&&draft.stock==="green"?"green":draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
+    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}{draft.market === "japan" ? <AuctionGradeSelect value={draft.auctionGrade} onChange={(value) => setField("auctionGrade", value)} /> : null}{draft.market === "japan" ? <SimpleSelect name="stock" value={draft.stock || "auction"} placeholder="Раздел Японии" options={[{value:"all",label:"Все"},{value:"auction",label:"Аукционы"},{value:"green",label:"Зелёный угол"}]} onChange={value=>{setField("stock",value);if(value==="green")setField("auctionGrade","");}} /> : null}</div>
     <div className="ac-range-fields-shell mt-2.5">
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
@@ -389,7 +390,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
-  const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes(m.value as any)) : markets;
+  const marketOptions = dealer ? markets.filter(m=>!m.value||dealer.markets.includes((m.value==="green"?"japan":m.value) as any)) : markets;
   const brandStatsContext = useMemo(() => {
     const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
     return catalogQuery(contextDraft, "", "asc");
@@ -399,7 +400,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const transmissionOptions = useMemo(() => catalogFilterOptions(draft.stock === "green" ? [transmissions[0], ...(activeFacets?.transmissions||[]).map(value=>({value,label:`КПП: ${value}`}))] : transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission, draft.stock]);
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
-  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value, ...(key === "market" && value !== "japan" ? {auctionGrade: "",stock:""} : {}) }));
+  const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => key==="market"?{...current,market:value==="green"?"japan":value,stock:value==="green"?"green":"",auctionGrade:""}:{...current,[key]:value});
   useEffect(() => {
     if (!draft.make) return;
     const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
@@ -414,7 +415,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (draft.market === "japan") auctionGradeSelections(draft.auctionGrade).forEach(grade => rows.push({key: `auctionGrade:${grade}`, label: `Оценка ${grade}`, grade}));
     if (draft.market === "japan" && draft.stock === "green") rows.push({key:"stock",label:"В наличии · Зелёный угол"});
     draft.model.split("|").filter(Boolean).forEach(model => rows.push({key:`model:${model}`,label:model}));
-    if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
+    if (draft.market && draft.stock!=="green") rows.push({ key: "market", label: optionLabel(markets, draft.market) });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
     if (draft.transmission) rows.push({ key: "transmission", label: optionLabel(transmissions, draft.transmission) });
     if (draft.fuel) rows.push({ key: "fuel", label: optionLabel(fuels, draft.fuel) });
@@ -468,7 +469,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       <div className="grid grid-cols-3 gap-2.5">
         <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch multiple contextQuery={brandStatsContext} value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
-        <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
+        <SimpleSelect name="market" value={draft.market==="japan"&&draft.stock==="green"?"green":draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
       <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
         <PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
@@ -481,6 +482,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     </form>
 
     <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
+
+    <StickyCatalogControls chips={chips} onRemove={removeFilter} sort={sortParam(sortKey,sortDirection)} onSort={value=>{const next=initialSort(value);setSortKey(next.key);setSortDirection(next.direction);}} hidden={mobileOpen}/>
 
     {mobileOpen ? createPortal(<div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black normal-case tracking-normal text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
