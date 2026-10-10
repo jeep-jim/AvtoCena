@@ -1,7 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {liveBudgetRelease,budgetPreparationDecision,verifyBudgetContext,budgetReadyKey,budgetAlreadyReady} from '../scripts/catalog-budget-runtime.mjs';
 const release='a'.repeat(40),generationId='gen_1791555837022_9a2cec74';
+test('preparation permits derived selector versions but cannot write inventory or publication state',()=>{
+ const source=fs.readFileSync(new URL('../scripts/catalog-budget-shared-warmup.mjs',import.meta.url),'utf8');
+ const pattern=source.match(/if\(!(.+)\.test\(path\)\)throw Error\('unexpected_write:'/);
+ assert.ok(pattern);
+ const allows=new Function('path',`return ${pattern[1]}.test(path)`);
+ for(const version of [1,2,3])for(const market of ['ready','china','korea','japan','europe','uae','georgia'])assert.equal(allows(`catalog/generations/test/indexes/budget-markets-v${version}/${market}.json`),true);
+ for(const path of ['catalog/manifest.json','catalog/operations/collection-controls-v1.json','catalog/generations/test/offers/china.json','catalog/generations/test/indexes/budget-markets-v4/china.json'])assert.equal(allows(path),false);
+});
 test('runtime warmup uses only a healthy exact production release, not a docs or feed commit',async()=>{
   let requested='';
   assert.equal(await liveBudgetRelease(async(url,options)=>{requested=url;assert.equal(options.redirect,'error');return Response.json({ok:true,releaseSha:release});}),release);
