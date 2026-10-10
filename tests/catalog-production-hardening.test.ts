@@ -256,7 +256,7 @@ test("single recovery publisher preserves full maintenance state and enforces ta
   assert.match(singleRecoveryPublisher, /recovery_duplicate_id_in_full_state/);
 });
 
-test("scheduled cleanup keeps a bounded six-hour grace while preserving both live manifests", () => {
+test("daily cleanup keeps a bounded six-hour grace while preserving both live manifests", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""/);
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""\]\s*\.filter\(Boolean\)\.join\("\/"\)/);
@@ -298,7 +298,7 @@ test("scheduled cleanup keeps a bounded six-hour grace while preserving both liv
   assert.match(cleanupWorkflow, /^\s*schedule:\s*$/m);
   assert.doesNotMatch(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /catalog-storage-maintenance\.mjs/);
-  assert.match(cleanupWorkflow, /cron: "0 \*\/6 \* \* \*"/);
+  assert.match(cleanupWorkflow, /cron: "0 4 \* \* \*"/);
   assert.match(cleanup, /version: 5/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
