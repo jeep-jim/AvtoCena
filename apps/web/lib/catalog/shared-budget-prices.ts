@@ -54,13 +54,13 @@ export function restoreBudgetPrices(value:any,key:string,source:BudgetCountRow[]
  * A failed/mismatched cache always executes the existing exact calculation.
  */
 export async function sharedBudgetPrices(index:BudgetCountIndex,market:string,fingerprint:string,
- load:()=>Promise<BudgetCountRow[]>,fingerprintNow=()=>budgetPricingFingerprint(market)) {
+ load:()=>Promise<BudgetCountRow[]>,fingerprintNow=()=>budgetPricingFingerprint(market),displayPrices=false) {
  const source=index.rows.filter(row=>row[0]===market);
  const sourceIds=hash(source.map(row=>row[5].id));
- const key=hash([index.generationId,market,fingerprint,sourceIds]);
+ const key=hash([index.generationId,market,fingerprint,sourceIds,...(displayPrices?["display-price-v1"]:[])]);
  return cache.get(key,async()=>{
   const storage=getJsonStorage();
-  const path=`catalog/runtime-budget-prices-v1/${market}.json`;
+  const path=`catalog/${displayPrices?"runtime-sort-prices-v1":"runtime-budget-prices-v1"}/${market}.json`;
   const stored=await storage.readJson<Snapshot|null>(path,null).catch(()=>null);
   const restored=restoreBudgetPrices(stored,key,source);
   if(restored)return restored;
