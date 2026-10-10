@@ -1085,7 +1085,7 @@ function beginLocalRun(){
     state.bots.push(b);
   });
 
-  state.cam.x = state.player.x + 200;
+  state.cam.x = state.player.x + 200*Math.min(1,W/760);
   state.cam.y = state.player.y;
 
   $('#hud').classList.add('on');
@@ -1320,7 +1320,7 @@ function step(dt){
   }
 
   if (p.alive){
-    const tx = p.x + clamp(p.vx*0.28, -80, 220) + 120;
+    const tx = p.x + (clamp(p.vx*0.28, -80, 220) + 120)*Math.min(1,W/760);
     const ty = p.y - 40;
     state.cam.x += (tx - state.cam.x) * Math.min(1, 6*dt);
     state.cam.y += (ty - state.cam.y) * Math.min(1, 4*dt);
