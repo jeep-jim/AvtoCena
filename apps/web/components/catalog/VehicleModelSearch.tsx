@@ -2,23 +2,25 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import {prepareModelSuggestionSearch,type createModelSuggestionSearch,type ModelSearchData} from "@/lib/catalog/model-suggestion-search";
+import modelSearchAsset from "@/lib/catalog/model-search-asset.json";
+let directoryRequest:Promise<ReturnType<typeof createModelSuggestionSearch>>|null=null;
+function loadSuggestionDirectory(){
+ if(!directoryRequest)directoryRequest=fetch(modelSearchAsset.asset,{cache:"force-cache"}).then(async response=>{if(!response.ok)throw Error("directory_unavailable");const data=await response.json() as ModelSearchData;if(data.version!==1||!Array.isArray(data.models)||!data.models.length)throw Error("invalid_directory");return prepareModelSuggestionSearch(data);}).catch(error=>{directoryRequest=null;throw error;});
+ return directoryRequest;
+}
 
 type ModelSuggestion = {
   id?: string;
   make: string;
   model: string;
   aliases?: string[];
-  label: string;
+  label?: string;
+  related?: boolean;
 };
 
 type ModelSelection = { make: string; model: string };
 let catalogFilterDependentUiMounted = false;
-
-const CONTEXT_KEYS = [
-  "market", "make", "model", "bodyType", "transmission", "fuel", "drive",
-  "yearFrom", "yearTo", "budgetFrom", "budgetTo", "mileageFrom", "mileageTo",
-  "engineFrom", "engineTo", "powerFrom", "powerTo",
-] as const;
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -26,19 +28,6 @@ function clean(value: unknown) {
 
 function compact(value: unknown) {
   return clean(value).toLocaleLowerCase("ru-RU").replace(/ё/g, "е").replace(/[^\p{L}\p{N}]+/gu, "");
-}
-
-function currentCatalogContext(includeModel = true) {
-  const result = new URLSearchParams();
-  if (typeof window === "undefined") return result;
-  const current = new URLSearchParams(window.location.search);
-  for (const key of CONTEXT_KEYS) {
-    if (!includeModel && key === "model") continue;
-    let value = clean(current.get(key));
-    if (key === "budgetTo" && !value) value = clean(current.get("budget"));
-    if (value) result.set(key, value);
-  }
-  return result;
 }
 
 function ensureCatalogFilterLayoutPolish() {
@@ -183,7 +172,10 @@ export function VehicleModelSearch({
   contextQuery?: string;
 }) {
   const [query, setQuery] = useState(multiple ? "" : value || "");
-  const [items, setItems] = useState<ModelSuggestion[]>([]);
+  const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
+  const [directory,setDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
+  const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
+  const items=useMemo(()=>contextual?(directory?.(query,make)||[]):remoteItems,[contextual,directory,query,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -211,9 +203,17 @@ export function VehicleModelSearch({
     };
   }, [open]);
 
+  useEffect(()=>{
+    if(!contextual||!open||directory)return;
+    let cancelled=false;setLoading(true);setDirectoryError(false);
+    loadSuggestionDirectory().then(search=>{if(!cancelled)setDirectory(()=>search);}).catch(()=>{if(!cancelled)setDirectoryError(true);}).finally(()=>{if(!cancelled)setLoading(false);});
+    return()=>{cancelled=true;};
+  },[contextual,open,directory,retry]);
+
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
   const canSearch = Boolean(clean(make) || compact(query).length >= 2);
   useEffect(() => {
+    if(contextual)return;
     if (!open || !canSearch) {
       setItems([]);
       setLoading(false);
@@ -225,9 +225,6 @@ export function VehicleModelSearch({
       try {
         const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
         if (!contextual) params.set("scope", "autocalc");
-        if (contextual) (contextQuery !== undefined ? new URLSearchParams(contextQuery) : currentCatalogContext(false)).forEach((contextValue, key) => {
-          if (key !== "make" && key !== "model" && contextValue && !params.has(key)) params.set(key, contextValue);
-        });
         const response = await fetch(`/api/catalog/models?${params.toString()}`, { cache: "no-store", signal: controller.signal });
         const payload = response.ok ? await response.json() : { items: [] };
         if (!controller.signal.aborted) setItems(Array.isArray(payload?.items) ? payload.items : []);
@@ -241,7 +238,7 @@ export function VehicleModelSearch({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [canSearch, make, open, query, contextual, contextQuery]);
+  }, [canSearch, make, open, query, contextual]);
 
   const exact = useMemo(() => {
     const requested = compact(query);
@@ -326,10 +323,11 @@ export function VehicleModelSearch({
           aria-pressed={multiple ? selectedModels.includes(item.model) : undefined}
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
         >
-          <span className="min-w-0"><span className="block truncate">{item.model}</span>{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
+          <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
           <span className="shrink-0 opacity-70">{multiple ? selectedModels.includes(item.model) ? "☑" : "☐" : "↵"}</span>
         </button>) : null}
-        {canSearch && !loading && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Совпадений в каталоге нет</div> : null}
+        {contextual&&directoryError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить модели. Повторить</button>:null}
+        {canSearch && !loading && !directoryError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
       </div>
     </div> : null}
   </div>;
