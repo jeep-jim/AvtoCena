@@ -1,4 +1,5 @@
 "use client";
+import {LeadSuccessGames} from '../games/GamesHub';
 import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
 import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
@@ -310,7 +311,7 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
             <button type="button" disabled={status === "sending"} onClick={onClose} className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>
           </header>
 
-          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
+          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p><LeadSuccessGames/></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <><label className="grid gap-2 text-sm font-bold">Кому отправить заявку<select aria-label="Дилер для заявки" value={selectedDealer} onChange={event=>{setSelectedDealer(event.target.value);setSelectedIds([]);setStatus('idle');setMessage('');}} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4"><option value="" disabled>Выберите дилера</option>{dealers.map(d=><option key={d.id} value={d.id}>{d.name}</option>)}</select></label><p className="text-xs leading-5 text-[var(--ac-muted)]">Одна заявка — одному дилеру. Для автомобилей другой компании создайте отдельную заявку.</p>{selectedDealer&&<FavoriteSelector items={dealerFavorites} selectedIds={selectedIds} onToggle={toggleFavorite} />}</> : null}
             <div className="grid gap-3 md:grid-cols-2"><div className="block min-w-0"><FieldLabel required>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div><label className="block min-w-0"><FieldLabel required>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 

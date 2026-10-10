@@ -16,7 +16,7 @@ function harness(){
  const parent={postMessage:(message:any)=>messages.push(message)};
  const window={parent,devicePixelRatio:1,addEventListener:(type:string,fn:Function)=>(events[type]??=[]).push(fn),focus(){}};
  const sandbox={document,window,parent,console,Math,Date,Path2D:class {constructor(){return context;}},setTimeout:()=>0,clearTimeout(){},requestAnimationFrame:(fn:Function)=>(callback=fn,1),cancelAnimationFrame:()=>{callback=undefined;}};
- vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)![1].replace('/* ---------- INIT ---------- */','window.testEngine={state,terrainY,stepCarPhysics,step,tryJump,CARS,damageCar,stepFlying,reviveCar,generateTrackFeatures};'),sandbox,{timeout:2000});
+ vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)![1].replace('/* ---------- INIT ---------- */','window.testEngine={state,terrainY,stepCarPhysics,step,tryJump,CARS,damageCar,stepFlying,reviveCar,generateTrackFeatures,stepBot};'),sandbox,{timeout:2000});
  const bridge=(data:any)=>events.message.forEach(fn=>fn({source:parent,data:{game:'pognali-v1',...data}}));
  bridge({type:'user',user:{name:'<test>'}});
  return {element,messages,modeElements,bridge,events,engine:(window as any).testEngine,advance(seconds:number){for(let i=0;i<seconds*60;i++){const next=callback;callback=undefined;next?.(1000+i*1000/60);}},pending:()=>Boolean(callback)};
@@ -96,4 +96,28 @@ test('a released car levels its body promptly while airborne',()=>{
  const {state,terrainY,stepCarPhysics}=h.engine,p=state.player;Object.assign(p,{x:200,y:terrainY(200)-250,vy:-120,angle:1.2,angularVelocity:0,chassisGrounded:false});
  for(let i=0;i<60;i++)stepCarPhysics(p,false,false,1/120);
  assert.ok(Math.abs(p.angle)<.3,`angle=${p.angle}`);assert.equal(p.alive,true);
+});
+
+for(let car=0;car<5;car++)test(`car ${car}: continuous throttle drives forward without overturning`,()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'drive'});
+ const {state,stepCarPhysics,CARS,terrainY}=h.engine,p=state.player;
+ Object.assign(p,{cfg:CARS[car],x:200,y:terrainY(200)-CARS[car].wheelY-CARS[car].wheelR-2});
+ let maxTilt=0;
+ for(let i=0;i<120*15;i++){stepCarPhysics(p,true,false,1/120);maxTilt=Math.max(maxTilt,Math.abs(Math.atan2(Math.sin(p.angle),Math.cos(p.angle))));}
+ assert.ok(p.x>3200,`forward distance ${p.x-200}`);assert.ok(maxTilt<1.4,`tilt ${maxTilt}`);assert.equal(p.alive,true);
+});
+test('finish completes stage once and next run starts the next stage',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'stage1'});
+ const {state,step}=h.engine;state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);
+ assert.equal(state.screen,'result');assert.match(h.element('#rTitle').textContent,/Этап 1 пройден/);
+ assert.equal(h.messages.filter(m=>m.type==='finish').length,1);h.bridge({type:'saved',score:800});h.element('#btnAgain').fire('click');h.bridge({type:'started',id:'stage2'});
+ state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);assert.equal(state.screen,'play');
+ state.player.maxX=10201;state.player.x=10201;step(1/120);assert.match(h.element('#rTitle').textContent,/Этап 2 пройден/);
+});
+
+test('rivals can be overtaken under continuous throttle',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'overtake'});
+ const {state,stepCarPhysics,stepBot}=h.engine,p=state.player;
+ for(let i=0;i<120*15;i++){state.time+=1/120;stepCarPhysics(p,true,false,1/120);for(const b of state.bots)stepBot(b,1/120);}
+ assert.ok(state.bots.some((b:any)=>b.x<p.x),`player ${p.x}, bots ${state.bots.map((b:any)=>b.x)}`);
 });

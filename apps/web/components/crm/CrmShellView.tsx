@@ -1,3 +1,4 @@
+import {Gamepad2} from 'lucide-react';
 import {CrmNavigation} from './CrmNavigation';
 import {hasCrmPermission,type CrmPermissions} from '@/lib/crm-permissions';
 import type {AuthUser} from '@/lib/auth';
@@ -11,7 +12,7 @@ export function CrmShellView({title,subtitle,activeHref,user,links,avatar,childr
    <div className="crm-header-inner">
     <div className="crm-topbar">
      <Link href="/" className="crm-brand"><img src="/logo/avtocena-mark-dark.svg" className="crm-brand-mark" width={36} height={36} alt="" /><span>CRM</span></Link>
-     <div className="crm-header-actions">{hasCrmPermission(user as AuthUser,"game")?<Link href="/crm/game" prefetch={false} className="crm-game-link" aria-label="Погнали — гонки команды"><span aria-hidden="true" className="crm-game-emoji">💨</span><span className="crm-game-label">Погнали</span><span aria-hidden="true" className="crm-game-emoji">🚗</span></Link>:null}<CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm avatar={avatar}/></div>
+     <div className="crm-header-actions">{hasCrmPermission(user as AuthUser,"game")?<Link href="/crm/game" prefetch={false} className="crm-game-link" aria-label="Старт — игры"><Gamepad2 size={20} aria-hidden="true"/><span className="crm-game-label">Старт</span></Link>:null}<CrmThemeToggle/><CrmLiveAlerts userId={user.id} role={user.role} displayName={user.displayName} crm avatar={avatar}/></div>
     </div>
     <CrmNavigation links={links} activeHref={activeHref} userId={user.id}/>
    </div>

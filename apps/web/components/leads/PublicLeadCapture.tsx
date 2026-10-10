@@ -1,4 +1,5 @@
 "use client";
+import {LeadSuccessGames} from '../games/GamesHub';
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
 import {ConsentLinks,ConsentMark} from "@/components/legal/ConsentCheckbox";
 import {offerRouteId} from "@/lib/catalog/offer-url";
@@ -332,7 +333,7 @@ function LeadDialog({
           <div className="mt-7 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-xl font-black text-white">✓</div>
             <h3 className="mt-4 text-2xl font-black">Спасибо, заявку получили</h3>
-            <p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p>
+            <p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p><LeadSuccessGames/>
             <button type="button" onClick={onClose} className="mt-5 min-h-12 rounded-2xl bg-[var(--ac-surface-2)] px-6 font-black">Закрыть</button>
           </div>
         ) : (

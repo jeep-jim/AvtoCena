@@ -1,4 +1,5 @@
 "use client";
+import {LeadSuccessGames} from '../games/GamesHub';
 import {ConsentCheckbox} from "@/components/legal/ConsentCheckbox";
 import {leadFetch} from "@/lib/lead-submit-client";
 import {PhoneInput} from "@/components/leads/PhoneInput";
@@ -32,7 +33,7 @@ export function OfferLeadForm({ offerId }: Props) {
     } catch (error:any) { setStatus("error"); setMessage(error?.message || "Ошибка сети. Повторная отправка не создаст дубль."); }
   }
   async function shareLink() { setCopyStatus("idle"); try { setCopyStatus(await copyCurrentUrl() ? "success" : "error"); } catch { setCopyStatus("error"); } }
-  if (status === "success") return <div className="mt-6 rounded-2xl bg-emerald-500/10 p-4 text-emerald-100"><div className="text-xs font-black normal-case tracking-normal text-emerald-300">Готово</div><p className="mt-2 text-sm font-bold leading-6">{message}</p></div>;
+  if (status === "success") return <div className="mt-6 rounded-2xl bg-emerald-500/10 p-4 text-emerald-100"><div className="text-xs font-black normal-case tracking-normal text-emerald-300">Готово</div><p className="mt-2 text-sm font-bold leading-6">{message}</p><LeadSuccessGames/></div>;
   return <form onSubmit={submit} className="mt-6 grid gap-3 md:grid-cols-2">
     <div className="mb-1 md:col-span-2"><div className="text-xs font-black normal-case tracking-normal text-red-500">Запросить точный расчёт</div><p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p></div>
     <label className="block min-w-0"><span className="mb-1.5 block text-[11px] font-black normal-case tracking-normal text-white/55">Имя</span><input value={name} onChange={(e)=>setName(e.target.value)} name="name" placeholder="Как к вам обращаться" className="soft-input w-full rounded-2xl px-4 py-3.5" /></label>
