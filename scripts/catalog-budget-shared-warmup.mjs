@@ -11,7 +11,7 @@ if(storage.driver!=='object')throw Error('object_storage_required');
 // price caches. No collection, provider request, manifest/cursor/offer write.
 const writes=storage.writeJson.bind(storage),read=storage.readJsonWithMeta.bind(storage);
 storage.writeJson=async(path,value,condition)=>{
- if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v[123]\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-budget-prices-v1\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
+ if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v[123]\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-(?:budget|sort)-prices-v1\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
  return writes(path,value,condition);
 };
 let trace=[];
@@ -36,12 +36,20 @@ if(process.argv[2]==='--probe'){
 }else{
 const selectors=await backfillBudgetMarketSelectors();
 const warmed=await warmBudgetPriceCaches();
+// Reuse the existing off-server preparation cadence for displayed-price sorting.
+// One market at a time; only one visible card is read, no inventory writes.
+const sorted=[];
+for(const market of ["china","korea","europe","uae","georgia"]){
+ const start=performance.now();const result=await searchOffers({market,sort:"totalRub",pageSize:1});
+ sorted.push({market,total:result.total,ms:Math.round(performance.now()-start)});
+}
+
 const reports=[];
 for(const params of [{market:'china',budgetTo:3000000,pageSize:12},{market:'china',budgetFrom:1500000,budgetTo:2500000,city:'Новокузнецк',yearFrom:2022,pageSize:12},{market:'korea',budgetTo:3000000,pageSize:12}]){
  const {stdout}=await promisify(execFile)(process.execPath,['--import','tsx',process.argv[1],'--probe',JSON.stringify(params)],{maxBuffer:4*1024*1024});
  reports.push(JSON.parse(stdout.trim().split('\n').at(-1)));
 }
-const report={at:new Date().toISOString(),release:process.env.AVTOCENA_RELEASE_SHA,selectors,warmed,reports};
+const report={at:new Date().toISOString(),release:process.env.AVTOCENA_RELEASE_SHA,selectors,warmed,sorted,reports};
 await fs.writeFile('catalog-budget-shared-report.json',JSON.stringify(report,null,2));
 console.log(JSON.stringify(report));
 
