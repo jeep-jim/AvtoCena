@@ -36,10 +36,9 @@ test("local and production Prestige traffic stays direct", () => {
   }
 });
 
-test("Prestige egress route is fixed-domain and exposes no arbitrary upstream URL", () => {
+test("retired Prestige egress cannot initiate provider traffic", () => {
   const source = fs.readFileSync("apps/web/app/api/internal/prestige-egress-c1e8b2/route.ts", "utf8");
-  assert.match(source, /const BASE = "https:\/\/prestigemotorsport\.com\.au"/);
-  assert.match(source, /search_model_car/);
-  assert.match(source, /search_results_car_dev/);
-  assert.doesNotMatch(source, /searchParams\.get\(["']url["']\)/);
+  assert.match(source, /catalog_source_not_approved/);
+  assert.match(source, /status: 410/);
+  assert.doesNotMatch(source, /fetch\(|requestPrestige/);
 });

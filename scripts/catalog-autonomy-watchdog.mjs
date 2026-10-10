@@ -1,3 +1,5 @@
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {collectionMarketEnabled,collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
 import {storageBlockedInputBytes,storagePressureRecovery} from './lib/catalog-storage-recovery.mjs';
 import fs from 'node:fs/promises';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
@@ -7,6 +9,7 @@ const token=process.env.GH_TOKEN,repo=process.env.GITHUB_REPOSITORY;
 if(!token||!/^[-\w]+\/[-\w]+$/.test(repo||''))throw Error('missing_github_context');
 const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
 const storage=getJsonStorage(),report={checkedAt:new Date().toISOString(),markets:{}};
+const controls=await readCollectionControls();
 const manifest=await storage.readJson('catalog/manifest.json',null);
 async function api(path,method='GET',body){
  const response=await fetch(`https://api.github.com/repos/${repo}/${path}`,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(60000)});
@@ -15,6 +18,7 @@ async function api(path,method='GET',body){
 }
 for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
  try{
+ if(!collectionMarketEnabled(controls,market)||(market==='japan'&&!collectionEnabled(controls,'proauctions_japan_stat'))){report.markets[market]={action:'none',reason:'disabled_by_owner'};continue;}
  if(policy.pausedMarkets?.[market]){report.markets[market]={action:'none',reason:'market_paused',detail:policy.pausedMarkets[market]};continue;}
  const [data,journal,japan,dispatch,intakeCheckpoint]=await Promise.all([
   api(`actions/workflows/${workflow}/runs?branch=main&per_page=10`),
@@ -24,7 +28,7 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
   RESUMABLE_INTAKE_MARKETS.includes(market)?storage.readJson(`catalog/intake-cursors/v1/${market}.json`,null):null,
  ]);
  const decision=recoveryDecision({market,runs:data.workflow_runs,journal,japan,intakeCheckpoint,activeMarket:manifest?.markets?.[market],lastDispatchAt:dispatch?.at,recovery:dispatch,japanRefreshIntervalDays:policy.japan.refreshIntervalDays,
-  ...(market==='china'?{requiredSourceIds:requiredCatalogSourceIds('china')}:{})});
+  requiredSourceIds:requiredCatalogSourceIds(market).filter(id=>collectionEnabled(controls,market==='china'&&id==='autohome_used_china_open'&&controls.sources.che168_feed.enabled?'che168_feed':id))});
  if(decision.action==='inspect_failure'){
   const jobs=await api(`actions/runs/${decision.runId}/jobs?per_page=100`);
   const failures=jobs.jobs.filter(j=>['failure','timed_out'].includes(j.conclusion));
@@ -41,11 +45,11 @@ for(const [market,workflow] of Object.entries(MARKET_WORKFLOWS)){
    const [objects,cleanupRuns]=await Promise.all([storage.listBucketObjects(''),api('actions/workflows/catalog-storage-cleanup.yml/runs?branch=main&per_page=5')]);
    const pressure=storagePressureRecovery({currentBytes:objects.reduce((n,row)=>n+Math.max(0,Number(row.size)||0),0),inputBytes:storageInputBytes,cleanupRunning:cleanupRuns.workflow_runs.some(r=>['queued','in_progress','waiting','pending','requested'].includes(r.status)),recovery:dispatch});
    Object.assign(decision,pressure);
-   if(pressure.action==='retry'){await api(`actions/runs/${decision.runId}/rerun-failed-jobs`,'POST');decision.action='rerun_failed';}
+   if(pressure.action==='retry'){await api(`actions/workflows/${workflow}/dispatches`,'POST',{ref:'main'});decision.action='dispatch';}
    else if(pressure.action==='cleanup'){await api('actions/workflows/catalog-storage-cleanup.yml/dispatches','POST',{ref:'main'});decision.action='cleanup_dispatched';}
    else decision.action='none';
   }
-  else if(retryable){await api(`actions/runs/${decision.runId}/rerun-failed-jobs`,'POST');decision.action='rerun_failed';}
+  else if(retryable){await api(`actions/workflows/${workflow}/dispatches`,'POST',{ref:'main'});decision.action='dispatch';}
   else {decision.action='none';decision.reason='deterministic_or_unclassified_failure';}
  }
  if(decision.action==='dispatch')await api(`actions/workflows/${workflow}/dispatches`,'POST',{ref:'main'});

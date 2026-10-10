@@ -1,3 +1,4 @@
+import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
 import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache} from './shared-budget-prices';
@@ -573,6 +574,7 @@ export function resetCatalogReadCachesForTests() {
   filteredSearchCache.clear();
   catalogCountCache.clear();
   budgetMarketDirectoryCache.clear();
+  packedBudgetDirectoryCache.clear();
   budgetIndexCache.clear();
   liveBudgetBlockCache.clear();
   liveBudgetReplayCache.clear();
@@ -2005,8 +2007,14 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
 }
 const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:7,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:2});
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 async function readBudgetCountIndex(generationId:string,market?:string){
  if(market && MARKETS.includes(market as CatalogMarket)){
+  const packedDirectory=await packedBudgetDirectoryCache.get(generationId,()=>readIndex<PackedBudgetDirectory|null>(generationId,'budget-markets-v2/ready.json',null)).catch(()=>null);
+  if(packedDirectory?.generationId===generationId && packedDirectory.markets?.[market]){
+   const packed=await budgetIndexCache.get(`${generationId}:packed:${market}`,async()=>verifiedPackedBudgetSelector(packedDirectory,market,await readIndex<PackedBudgetSelector|null>(generationId,`budget-markets-v2/${market}.json`,null))).catch(()=>null);
+   if(packed)return packed;
+  }
   const directory=await budgetMarketDirectoryCache.get(generationId,()=>readIndex<BudgetMarketDirectory|null>(generationId,'budget-markets-v1/ready.json',null)).catch(()=>null);
   if(directory?.version===1 && directory.generationId===generationId && directory.markets?.[market]){
    const part=await budgetIndexCache.get(`${generationId}:${market}`,async()=>{
@@ -2019,6 +2027,11 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  return budgetIndexCache.get(generationId,async()=>await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v3.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v2.json",null) ?? await readIndex<BudgetCountIndex|null>(generationId,"budget-count-v1.json",null));
 }
 async function writeBudgetMarketSelectors(index:BudgetCountIndex){
+ const packed=splitPackedBudgetSelectors(index);
+ for(const [market,part] of packed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v2/${market}.json`),part);
+ for(const market of packed.parts.keys())if(!verifiedPackedBudgetSelector(packed.directory,market,await readIndex<PackedBudgetSelector|null>(index.generationId,`budget-markets-v2/${market}.json`,null)))throw Error('catalog_packed_selector_verification_failed');
+ await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v2/ready.json'),packed.directory);
+ // Keep v1 for a still-running previous web release and rollback.
  const {directory,parts}=splitBudgetMarketIndex(index);
  for(const [market,part] of parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v1/${market}.json`),part);
  await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v1/ready.json'),directory);

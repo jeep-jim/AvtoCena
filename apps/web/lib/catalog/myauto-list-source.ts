@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
@@ -198,6 +199,7 @@ async function fetchMyAutoProductSnapshot(id: string, expectedPhoto?: string) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
   try {
+    await assertCollectionEnabled('myauto_georgia_list');
     const response = await fetch(`${MYAUTO_PRODUCT_API}/${id}`, {
       headers: HEADERS,
       redirect: "follow",
@@ -340,7 +342,8 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
       try {
-        const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+        await assertCollectionEnabled('myauto_georgia_list');
+    const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
         const markup = await response.text();
         assertSourceAccess(response.status, markup, "myauto");
         attempts.push(`${new URL(url).host}${new URL(url).pathname}${new URL(url).search}:${response.status}:${markup.length}`);

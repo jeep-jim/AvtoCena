@@ -1,3 +1,5 @@
+import {enableChinaParserFixtures} from './helpers/china-parser-controls';
+enableChinaParserFixtures();
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DomesticChe168Adapter } from '../apps/web/lib/catalog/che168-dealer-source';

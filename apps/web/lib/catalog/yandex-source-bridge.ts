@@ -1,3 +1,4 @@
+import {sourceBridgeHeaders} from './source-bridge-auth';
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, SourceRunHealth, VehicleOffer } from "./types";
 
 const DEFAULT_ORIGIN = "https://avtocena.com";
@@ -74,6 +75,7 @@ function asVehicleOffer(value: unknown, sourceId: string): VehicleOffer | null {
 async function fetchPayload(kind: BridgeKind, page: number): Promise<{ response: Response; payload: BridgePayload }> {
   const response = await fetch(bridgeUrl(kind, page), {
     headers: {
+      ...sourceBridgeHeaders(bridgeUrl(kind,page)),
       accept: "application/json",
       "accept-language": "en-US,en;q=0.9",
       "user-agent": "AvtoCena-Catalog-Collector/1.0",

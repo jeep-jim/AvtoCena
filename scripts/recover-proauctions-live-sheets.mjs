@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('proauctions_japan_stat');
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
@@ -23,6 +25,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 let lastRequest=0,consecutiveErrors=0;
 async function bytes(url,max){
  await new Promise(r=>setTimeout(r,Math.max(0,lastRequest+600-Date.now())));lastRequest=Date.now();
+ await assertCollectionEnabled('proauctions_japan_stat');
  const response=await fetch(url,{redirect:'error',headers:{'user-agent':'AvtoCena source import/1.0'},signal:AbortSignal.timeout(25000)});
  if(!response.ok)throw Object.assign(Error('source_http_'+response.status),{blocked:[401,403,429].includes(response.status)});
  const parts=[];let size=0;for await(const b of response.body){size+=b.length;if(size>max)throw Error('response_too_large');parts.push(b);}return Buffer.concat(parts);

@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { captureSourceTable } from "./source-table-capture";
 import { AUTOHOME_NEW_MIN_YEAR } from "./source-inventory-scope";
 import type { SourceSpecificationSnapshot } from "./source-specifications";
@@ -210,7 +211,8 @@ function decodeAutohome(bytes: Uint8Array) {
   catch { return new TextDecoder("gb18030").decode(bytes); }
 }
 async function fetchDecoded(url: string, referer: string) {
-  const response = await fetch(url, {
+  await assertCollectionEnabled('autohome_new_china_open');
+    const response = await fetch(url, {
     headers: { ...HEADERS, referer },
     redirect: "follow",
     signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),

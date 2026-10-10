@@ -11,7 +11,7 @@ if(storage.driver!=='object')throw Error('object_storage_required');
 // price caches. No collection, provider request, manifest/cursor/offer write.
 const writes=storage.writeJson.bind(storage),read=storage.readJsonWithMeta.bind(storage);
 storage.writeJson=async(path,value,condition)=>{
- if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v1\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-budget-prices-v1\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
+ if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v[12]\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-budget-prices-v1\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
  return writes(path,value,condition);
 };
 let trace=[];

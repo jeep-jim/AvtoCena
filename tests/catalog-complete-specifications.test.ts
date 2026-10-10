@@ -1,3 +1,5 @@
+import {enableChinaParserFixtures} from './helpers/china-parser-controls';
+enableChinaParserFixtures();
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {parseAutohomeSpecificationGroups} from '../apps/web/lib/catalog/autohome-new-exact-source';

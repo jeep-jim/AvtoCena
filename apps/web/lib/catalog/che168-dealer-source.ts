@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 // Dormant domestic adapter keeps its transport boundary independently of the
 // owner-selected production registry (currently Global).
@@ -101,6 +102,7 @@ async function fetchMarkup(url: string, referer?: string) {
   const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
   try {
     if (!isAllowedCatalogSourceUrl("china", "autohome_used_china_open", url)) throw new Error("che168_non_domestic_url");
+    await assertCollectionEnabled('autohome_used_china_open');
     const response = await fetch(url, { headers: { ...HEADERS, referer: referer || "https://www.che168.com/" }, redirect: "error", signal: controller.signal });
     const bytes = await response.arrayBuffer();
     return { response, markup: decode(bytes, response.headers.get("content-type") || "") };

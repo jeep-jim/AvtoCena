@@ -1,3 +1,6 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+const guardedRequest=async (...args)=>{await assertCollectionEnabled('akebono_green');return fetch(...args);};
+await assertCollectionEnabled('akebono_green');
 import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from '../apps/web/lib/catalog/inventory-admission.ts';
 import {collectGreenCorner,assertGreenPublication,collectGreenInvoiceTerms} from './lib/akebono-green-source.mjs';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
@@ -8,8 +11,8 @@ const storage=getJsonStorage(),key='catalog/green-corner/current.json';
 // Read the baseline BEFORE collection; an older run may never overwrite a newer publication.
 const baseline=await storage.readJsonWithMeta(key,null);
 if(baseline.found&&!baseline.etag)throw Error('green_missing_conditional_write_etag');
-const terms=await collectGreenInvoiceTerms();
-const source=await collectGreenCorner();
+const terms=await collectGreenInvoiceTerms(guardedRequest);
+const source=await collectGreenCorner({request:guardedRequest});
 const rate=await convertToRub(1,'JPY');
 const now=new Date().toISOString();
 const previousById=new Map((baseline.value?.items||[]).map(row=>[row.id,row]));

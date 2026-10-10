@@ -1,3 +1,9 @@
+import {sourceBridgeHeaders} from '../apps/web/lib/catalog/source-bridge-auth';
+import {before,after} from 'node:test';
+const priorBridgeKey=process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;
+before(()=>{process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY='offline-bridge-key';});
+after(()=>{if(priorBridgeKey===undefined)delete process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;else process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY=priorBridgeKey;});
+const bridgeRequest=(url:string)=>new Request(url,{headers:sourceBridgeHeaders(url)});
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {GET} from '../apps/web/app/api/internal/georgia-recovery-e2f913/route';
@@ -6,7 +12,7 @@ test('Georgia bridge preserves a source refusal as JSON and does not retry it',a
  const original=globalThis.fetch;let requests=0;
  globalThis.fetch=(async()=>{requests++;return new Response('Access denied',{status:403});}) as typeof fetch;
  try{
-  const response=await GET(new Request('https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=1'));
+  const response=await GET(bridgeRequest('https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=1'));
   const body=await response.json();
   assert.equal(response.status,503);assert.equal(body.blocked,true);
   assert.equal(body.causeCode,'georgia_source_access_refused');

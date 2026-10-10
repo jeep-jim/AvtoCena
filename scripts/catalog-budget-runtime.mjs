@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {spawn} from 'node:child_process';
@@ -26,6 +27,12 @@ export async function verifyBudgetContext({release,generationId,readState,readRe
   if(decision.skip || decision.generationId!==generationId)throw Error('budget_publication_changed');
 }
 
+export function budgetReadyKey(release,generationId,fingerprints,selectorVersion){
+  return createHash('sha256').update(JSON.stringify({release,generationId,fingerprints,selectorVersion})).digest('hex');
+}
+export function budgetAlreadyReady(saved,key,now=Date.now()){
+  return saved?.version===1 && saved.verified===true && saved.key===key && Number.isFinite(saved.at) && saved.at<=now && now-saved.at<20*3600000;
+}
 async function main(){
   if(process.argv[2]==='--resolve'){
     const release=await liveBudgetRelease();
@@ -45,9 +52,16 @@ async function main(){
   const {manifest,lock}=await readState(),decision=budgetPreparationDecision(manifest,lock);
   const report={at:new Date().toISOString(),release,generationId:decision.generationId,skipped:decision.skip,verified:false};
   try{
-    if(decision.skip){report.reason='publication_in_progress';return;}
+    if(decision.skip){report.reason='publication_in_progress';throw Error('budget_preparation_deferred_active_publisher');}
     const context={release,generationId:decision.generationId,readState,readRelease:liveBudgetRelease};
     await verifyBudgetContext(context);
+    const {budgetPricingFingerprint}=await import(pathToFileURL(path.join(root,'apps/web/lib/catalog/shared-budget-prices.ts')).href);
+    const selectorVersion=await fs.access(path.join(root,'apps/web/lib/catalog/budget-selector-codec.ts')).then(()=>2,()=>1);
+    const fingerprint=async()=>Object.fromEntries(await Promise.all(['china','korea','uae','europe','georgia'].map(async market=>[market,await budgetPricingFingerprint(market)])));
+    const expected=await fingerprint(),readyKey=budgetReadyKey(release,decision.generationId,expected,selectorVersion),readyPath='catalog/operations/budget-preparation-v1.json';
+    if(budgetAlreadyReady(await storage.readJson(readyPath,null),readyKey)){
+      report.skipped=true;report.verified=true;report.reason='already_prepared_for_current_context';return;
+    }
     // Run the exact deployed calculator and its existing independent cold-process
     // parity probes. That script permits only disposable cache/selector writes.
     await new Promise((resolve,reject)=>{
@@ -57,6 +71,8 @@ async function main(){
     await verifyBudgetContext(context);
     const result=JSON.parse(await fs.readFile(path.join(root,'catalog-budget-shared-report.json'),'utf8'));
     if(result.release!==release || result.warmed?.generationId!==decision.generationId)throw Error('budget_warmup_report_mismatch');
+    if(budgetReadyKey(release,decision.generationId,await fingerprint(),selectorVersion)!==readyKey)throw Error('budget_context_changed_after_warmup');
+    await storage.writeJson(readyPath,{version:1,verified:true,key:readyKey,at:Date.now(),release,generationId:decision.generationId,selectorVersion});
     report.verified=true;
   }catch(error){report.error=String(error.message);throw error;}
   finally{

@@ -26,6 +26,7 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/chat-browser/node_modules/playwright/index.mjs
         run: |
+          CHROME_BIN=$(command -v google-chrome) node --import tsx tests/browser/collection-controls.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/site-chat-rooms.mjs
           CHROME_BIN=$(command -v google-chrome) node tests/browser/account-entrance.mjs
@@ -34,6 +35,7 @@ jobs:
         with:
           name: site-chat-screenshots
           path: |
+            artifacts/collection-controls/*.png
             artifacts/site-chat/*.png
             artifacts/site-chat-rooms/*.png
             artifacts/account-entrance/*.png

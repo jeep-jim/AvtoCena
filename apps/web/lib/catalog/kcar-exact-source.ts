@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { kcarRegistryEvidence } from "./kcar-registry-evidence";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
@@ -198,7 +199,8 @@ async function requestJson(url: string, init: RequestInit = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
     try {
-      const response = await fetch(url, {
+      await assertCollectionEnabled('kcar_korea_open');
+    const response = await fetch(url, {
         ...init,
         headers: { ...HEADERS, ...(init.headers || {}) },
         redirect: "follow",

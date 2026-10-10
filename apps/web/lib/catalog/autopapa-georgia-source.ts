@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
@@ -361,6 +362,7 @@ async function request(url: string) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 20_000));
   try {
+    await assertCollectionEnabled('autopapa_georgia_open');
     const response = await fetch(url, { headers: HEADERS, redirect: "follow", cache: "no-store", signal: controller.signal });
     const markup = await response.text();
     assertSourceAccess(response.status, markup, "autopapa");

@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { canonicalSourceFuel } from "./powertrain-safety";
 import { isCatalogYearAllowed } from "./offer-quality";
 import { stableOfferId } from "./storage";
@@ -271,7 +272,8 @@ async function request(url: string, referer = LIST_URL) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
+      await assertCollectionEnabled('carswitch_uae_open');
+    const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
       const markup = await response.text();
       lastStatus = response.status;
       lastBytes = markup.length;

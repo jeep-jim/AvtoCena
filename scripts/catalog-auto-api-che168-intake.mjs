@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('che168_feed');
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {autoApiChe168Client, collectAutoApiChe168, autoApiChe168Resume} from './lib/auto-api-che168-client.mjs';
@@ -19,7 +21,7 @@ if (files.length) {
 }
 const write = observationShardWriter(directory, sourceId);
 const deadline = Date.now() + Math.min(300*60000, Number(process.env.CATALOG_INTAKE_TIME_MS || 210*60000));
-const request = autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY, deadline});
+const request = autoApiChe168Client({fetchImpl:async (...args)=>{await assertCollectionEnabled('che168_feed');return fetch(...args);},apiKey:process.env.AUTO_API_CHE168_KEY, deadline});
 const yearFrom=new Date(Date.now()+7*3600000).getUTCFullYear()-6;
 const {getJsonStorage}=await import('../apps/web/lib/data.ts');
 const saved=await getJsonStorage().readJson('catalog/intake-cursors/v1/china.json',null);

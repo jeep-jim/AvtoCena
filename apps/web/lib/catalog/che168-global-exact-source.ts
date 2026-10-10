@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { che168BoundPageParameters, che168BoundApiParameters, che168BrowserChallenge } from "./che168-bound-page-parameters";
 import crypto from "node:crypto";
 import { chinaSourceProductionDate } from "./china-owner-policy";
@@ -272,6 +273,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
   }
 
   private async getJson<T>(url: string, referer = `${SITE_BASE}/en/used-cars`) {
+    await assertCollectionEnabled('autohome_used_china_open');
     const response = await fetch(url, {
       headers: { ...HEADERS, referer },
       redirect: "error",
@@ -490,7 +492,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     }
     // Public page carries a table bound to both this listing and this spec ID.
     if (!pageParameters && Number(detail.specid) > 0 && !this.parameterPageBlocked && !this.specificationApiBlocked) {
-      const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
+      await assertCollectionEnabled('autohome_used_china_open');
+    const response = await fetch(sourceUrl(id), { headers: { ...HEADERS, accept: "text/html" }, redirect: "error", signal: AbortSignal.timeout(20_000) }).catch(() => null);
       parameterStatus = response ? `http_${response.status}` : "request_failed";
       if (response && [401, 403, 429].includes(response.status)) this.parameterPageBlocked = `http_${response.status}`;
       if (response?.ok) {

@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -13,6 +14,7 @@ import {saveChe168Replica,restoreChe168Replica} from './lib/che168-replica.mjs';
 import {openChe168ReplayJournal} from './lib/che168-replay-journal.mjs';
 import {observationShardWriter} from './lib/catalog-intake-checkpoint.mjs';
 
+await assertCollectionEnabled('che168_feed');
 const directory=process.env.AUTO_API_INTAKE_DIR||'catalog-intake-china';
 const config=JSON.parse(await fs.readFile(process.env.CHE168_SNAPSHOT_CONFIG||'data/catalog/che168-snapshot-v1.json','utf8'));
 const binding=snapshotBinding(config),storage=getJsonStorage();
@@ -97,7 +99,8 @@ try {
   const save=async()=>{
     if(lastCursor!==journal.cursor){await journal.commit({cursor:lastCursor,changes:totalChanges,events:pending});pending=[];pendingBytes=0;lastSave=Date.now();}
   };
-  const request=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200});
+  const request=async (...args)=>{await assertCollectionEnabled('che168_feed');return rawRequest(...args);};
+  const rawRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+Math.min(240*60000,Number(process.env.CATALOG_INTAKE_TIME_MS||210*60000)),requestDelayMs:200});
   let completed;
   try{
     completed=await collectAutoApiChe168({request,yearFrom,resume:{cursor:journal.cursor,snapshotStartedAt:config.modifiedAt},useChangeData:true,

@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {COLLECTION_MARKETS,COLLECTION_SOURCES,collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
+const market=process.env.CATALOG_INTAKE_MARKET;
+if(!COLLECTION_MARKETS.some(m=>m.id===market))throw Error('invalid_market');
+const controls=await readCollectionControls();
+if(!collectionMarketEnabled(controls,market))throw Error('collection_disabled_by_owner:'+market);
+const feed=market==='china'&&collectionEnabled(controls,'che168_feed');
+const parsers=COLLECTION_SOURCES.filter(s=>s.market===market&&s.kind==='parser'&&collectionEnabled(controls,s.id)).map(s=>s.id).join(',');
+if(process.env.GITHUB_OUTPUT)await fs.appendFile(process.env.GITHUB_OUTPUT,`feed=${feed}\nparsers=${parsers}\n`);
+console.log(JSON.stringify({market,feed,parsers,controlsRevision:controls.revision}));

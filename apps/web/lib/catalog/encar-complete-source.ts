@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -266,7 +267,8 @@ async function fetchDetail(sourceOfferId: string) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
     try {
-      const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
+      await assertCollectionEnabled('encar_direct');
+    const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
         headers: ENCAR_HEADERS,
         signal: controller.signal,
       });
@@ -367,7 +369,8 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const url = `https://www.encar.com/md/sl/mdsl_regcar.do?method=inspectionViewNew&carid=${offer.sourceOfferId}`;
     try {
       await pacedDetail(async () => {
-        const response = await fetch(url, {headers: {...ENCAR_HEADERS, accept: 'text/html'}, redirect: 'error', signal: AbortSignal.timeout(20_000)});
+        await assertCollectionEnabled('encar_direct');
+    const response = await fetch(url, {headers: {...ENCAR_HEADERS, accept: 'text/html'}, redirect: 'error', signal: AbortSignal.timeout(20_000)});
         if ([401,403,429].includes(response.status)) this.inspectionBlocked = true;
         if (!response.ok) return;
         const html = new TextDecoder(/(?:euc-kr|cp949)/i.test(response.headers.get('content-type') || '') ? 'euc-kr' : 'utf-8').decode(await response.arrayBuffer());

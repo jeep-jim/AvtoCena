@@ -1,3 +1,5 @@
+import {sourceBridgeAuthorized} from '../../../../lib/catalog/source-bridge-auth';
+import {guardCollectionAdapter} from '../../../../lib/catalog/collection-adapter-guard';
 import { NextResponse } from "next/server";
 import { EncarCompleteAdapter } from "../../../../lib/catalog/encar-complete-source";
 import type { VehicleOffer } from "../../../../lib/catalog/types";
@@ -6,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const PAGE_SIZE = 20;
-const source = new EncarCompleteAdapter(PAGE_SIZE);
+const source = guardCollectionAdapter(new EncarCompleteAdapter(PAGE_SIZE));
 
 function boundedPage(value: unknown) {
   const page = Math.floor(Number(value));
@@ -48,6 +50,7 @@ async function pool<T, R>(rows: T[], limit: number, worker: (row: T) => Promise<
 }
 
 export async function GET(request: Request) {
+  if(!sourceBridgeAuthorized(request))return NextResponse.json({error:"Forbidden"},{status:403,headers:{"cache-control":"no-store"}});
   const requestUrl = new URL(request.url);
   const page = boundedPage(requestUrl.searchParams.get("page"));
   const startedAt = Date.now();

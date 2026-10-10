@@ -1,3 +1,5 @@
+import {enableChinaParserFixtures} from './helpers/china-parser-controls';
+enableChinaParserFixtures();
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { che168BoundPageParameters } from '../apps/web/lib/catalog/che168-bound-page-parameters';

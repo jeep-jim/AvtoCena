@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { captureSourceTable } from "./source-table-capture";
 import { stableOfferId } from "./storage";
 import { canonicalSourceFuel } from "./powertrain-safety";
@@ -414,6 +415,7 @@ async function request(url: string, referer = BASE_URL) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
   try {
+    await assertCollectionEnabled('dubizzle_uae_open');
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
     if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 8_000))) {
@@ -434,7 +436,8 @@ async function requestAlgolia(page: number) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
     try {
-      const response = await fetch(`${host}/1/indexes/${encodeURIComponent(ALGOLIA_INDEX)}/query`, {
+      await assertCollectionEnabled('dubizzle_uae_open');
+    const response = await fetch(`${host}/1/indexes/${encodeURIComponent(ALGOLIA_INDEX)}/query`, {
         method: "POST",
         headers: {
           accept: "application/json",

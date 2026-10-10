@@ -1,3 +1,5 @@
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
 import fs from 'node:fs/promises';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
 import {proAuctionsSchedule} from './lib/proauctions-schedule.mjs';
@@ -5,7 +7,8 @@ import {restoreProAuctionsState,proAuctionsStateKey} from './lib/proauctions-dur
 const policy=JSON.parse(await fs.readFile('data/catalog/refresh-policy-v1.json','utf8'));
 const state=await getJsonStorage().readJson(proAuctionsStateKey,null);
 const marker=process.env.GITHUB_EVENT_NAME==='push'?JSON.parse(await fs.readFile('.github/market-runs/proauctions.json','utf8')):{};
-const decision=marker.resetCursors===true?{due:true,resume:false,reason:'owner_requested_fresh_policy_scan'}:proAuctionsSchedule(state,Date.now(),policy.japan.refreshIntervalDays, ['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME));
+const enabled=collectionEnabled(await readCollectionControls(),'proauctions_japan_stat');
+const decision=!enabled?{due:false,resume:false,reason:'disabled_by_owner'}:marker.resetCursors===true?{due:true,resume:false,reason:'owner_requested_fresh_policy_scan'}:proAuctionsSchedule(state,Date.now(),policy.japan.refreshIntervalDays, ['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME));
 if(decision.resume)await restoreProAuctionsState('proauctions-collection',state);
 if(process.env.GITHUB_OUTPUT)await fs.appendFile(process.env.GITHUB_OUTPUT,`due=${decision.due}\n`);
 console.log(JSON.stringify({decision,state:state?{startedAt:state.startedAt,complete:state.complete,details:state.details,savedAt:state.savedAt}:null}));

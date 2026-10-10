@@ -10,7 +10,7 @@ const publication=await optionalJson(process.env.CATALOG_REBUILD_PUBLISH_REPORT|
 const intake=market==='japan'?null:await optionalJson(path.join(process.env.CATALOG_INTAKE_INPUT_DIR||'catalog-intake-input',`catalog-intake-${market}`,'report.json'));
 const storage=getJsonStorage(),key=`catalog/operations/markets/${market}.json`;
 const previous=await storage.readJson(key,{});
-const report=refreshOutcome({market,previous,intake,publication,requiredSourceIds:market==='japan'?undefined:requiredCatalogSourceIds(market),now:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID||null});
+const report=refreshOutcome({market,previous,intake,publication,requiredSourceIds:market==='japan'?undefined:(intake?.requiredSourceIds||requiredCatalogSourceIds(market)),now:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID||null});
 await storage.writeJson(key,report);
 await fs.writeFile(`catalog-refresh-outcome-${market}.json`,JSON.stringify(report,null,2));
 console.log(JSON.stringify({market,publicationStatus:report.publicationStatus,collectionComplete:report.collectionComplete,partialSources:report.partialSources}));

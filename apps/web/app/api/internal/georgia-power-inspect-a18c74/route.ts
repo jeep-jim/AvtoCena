@@ -1,3 +1,5 @@
+import {sourceBridgeAuthorized} from '../../../../lib/catalog/source-bridge-auth';
+import {assertCollectionEnabled} from '../../../../lib/catalog/collection-controls';
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -88,7 +90,9 @@ async function decodeVpic(vin: string) {
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  if(!sourceBridgeAuthorized(request))return NextResponse.json({error:"Forbidden"},{status:403,headers:{"cache-control":"no-store"}});
+  await assertCollectionEnabled('autopapa_georgia_open');
   const results = [];
   for (const [id, url, expected] of TARGETS) {
     try {

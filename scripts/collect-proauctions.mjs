@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('proauctions_japan_stat');
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -19,7 +21,9 @@ try{state=JSON.parse(await fs.readFile(path.join(root,'checkpoint.json'),'utf8')
 const done=new Set(state.done), lastRequest=new Map(), refusedHosts=new Set();
 let witnessBlocked=false;
 async function get(url,limit=3000000){
+  await assertCollectionEnabled('proauctions_japan_stat');
   const u=new URL(url);
+  if(u.hostname==='jptrade.ru')await assertCollectionEnabled('jptrade_japan_stat');
   if(u.protocol!=='https:' || !/^(demo\.pro-auctions\.ru|jptrade\.ru|jp\d+\.pa-server\.ru)$/.test(u.hostname) || u.port || u.username || u.password)throw Error('unexpected_host');
   if(refusedHosts.has(u.hostname))throw Object.assign(Error("source_host_already_refused"),{access:true});
   const start=Math.max(Date.now(),(lastRequest.get(u.hostname)||0)+400);lastRequest.set(u.hostname,start);await pause(start-Date.now());

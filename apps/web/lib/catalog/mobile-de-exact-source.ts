@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { captureSourceTable, namedTechnicalGroups } from "./source-table-capture";
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 import { canonicalSourceModelIdentity } from "./open-source-normalizer";
@@ -310,7 +311,8 @@ function classicSearchUrl(shard: SearchShard, page: number) {
   return url.toString();
 }
 async function getJson(url: string) {
-  const response = await fetch(url, {
+  await assertCollectionEnabled('mobile_de_open');
+    const response = await fetch(url, {
     headers: HEADERS,
     redirect: "follow",
     signal: AbortSignal.timeout(
