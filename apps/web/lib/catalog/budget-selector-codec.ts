@@ -18,11 +18,14 @@ export function packBudgetSelector(input:BudgetCountIndex):PackedBudgetSelector 
 }
 export function unpackBudgetSelector(packed:PackedBudgetSelector):BudgetCountIndex {
  if(packed?.encoding!==1 || !Array.isArray(packed.columns) || packed.columns.length>50 || new Set(packed.columns).size!==packed.columns.length || packed.columns.some(k=>typeof k!=='string'||['__proto__','prototype','constructor'].includes(k)) || packed.index?.version!==3 || !Array.isArray(packed.rows)||!Array.isArray(packed.otherRows))throw Error('budget_selector_invalid');
+ const columns=packed.columns, width=columns.length, limit=2**width;
+ const bits=columns.map((_,i)=>2**i);
  const decode=(row:unknown[]):BudgetCountRow=>{
   const data=row[5] as unknown[];
-  if(!Array.isArray(data)||data.length!==packed.columns.length+1||!Number.isSafeInteger(data[0])||Number(data[0])<0||Number(data[0])>=2**packed.columns.length)throw Error('budget_selector_row_invalid');
+  if(!Array.isArray(data)||data.length!==width+1||!Number.isSafeInteger(data[0])||Number(data[0])<0||Number(data[0])>=limit)throw Error('budget_selector_row_invalid');
   const metadata:Record<string,unknown>={};
-  for(let i=0;i<packed.columns.length;i++)if(Math.floor(Number(data[0])/2**i)%2===1)metadata[packed.columns[i]]=data[i+1];
+  const mask=Number(data[0]);
+  for(let i=0;i<width;i++)if(Math.floor(mask/bits[i])%2===1)metadata[columns[i]]=data[i+1];
   if(typeof metadata.id!=='string'||!Number.isSafeInteger(metadata.block)||Number(metadata.block)<0)throw Error('budget_selector_identity_invalid');
   return [...row.slice(0,5),metadata,...row.slice(6)] as BudgetCountRow;
  };

@@ -43,16 +43,14 @@ try {
   const market=scope.locator('input[name=market]').locator('..');
   await market.getByRole('button',{name:'Все рынки',exact:true}).click();await market.getByRole('button',{name:'Китай',exact:true}).click();assert.equal(await scope.locator('input[name=market]').inputValue(),'china');
   await scope.getByRole('button',{name:'Выбрать марки автомобилей',exact:true}).click();
-  await scope.locator('[data-facet-value="Toyota"]').click();await scope.locator('[data-facet-value="Kia"]').click();
+  await scope.locator('[data-facet-value="Toyota"]').click();await scope.getByRole('button',{name:'Выбрать марки автомобилей'}).click();await scope.locator('[data-facet-value="Kia"]').click();
   assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
-  await scope.getByRole('button',{name:'Готово',exact:true}).click();
   await scope.getByRole('searchbox',{name:'Модель автомобиля'}).fill('Yaris');
   await scope.getByRole('button',{name:/Yaris L/}).click();
   if(width===1440)await page.waitForTimeout(250); // The first model request has been submitted.
   await scope.getByRole('searchbox',{name:'Модель автомобиля'}).fill('KX1');await scope.getByRole('button',{name:/KX1/}).click();
   if(width===1440){await page.evaluate(()=>window.dispatchEvent(new CustomEvent('fixture-server',{detail:'/cars?make=Toyota,Kia&model=Yaris%20L'})));await page.waitForTimeout(30);}
   assert.equal(await scope.locator('input[name="model"]').inputValue(),'Yaris L|KX1');assert.equal(await scope.locator('input[name="make"]').inputValue(),'Toyota,Kia');
-  await scope.getByRole('button',{name:'Готово',exact:true}).click();
   const city=width<1024?scope:page;
   await city.getByRole('button',{name:/Выбрать город. Сейчас/}).click();await page.getByRole('button',{name:'Новосибирск',exact:true}).click();
   assert.equal(await page.evaluate(()=>localStorage.getItem('avtocena_city')),'Новосибирск');

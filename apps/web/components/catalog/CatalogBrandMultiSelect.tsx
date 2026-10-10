@@ -79,12 +79,13 @@ export function CatalogBrandMultiSelect({
   const selectedKey = selected.length === 1 ? selected[0].toLocaleLowerCase("ru-RU") : "";
 
   useEffect(() => {
+    if (!open) return;
     let cancelled = false;
     loadBrandStats(contextQuery)
       .then((next) => { if (!cancelled) setStats(next); })
       .catch(() => { if (!cancelled) setStats(EMPTY_STATS); });
     return () => { cancelled = true; };
-  }, [contextQuery]);
+  }, [contextQuery, open]);
 
   useEffect(() => {
     if (!open) return;
@@ -111,7 +112,7 @@ export function CatalogBrandMultiSelect({
   const brands = useMemo(() => {
     const optionLabels = new Map(options.filter((option) => option.value).map((option) => [option.value.toLocaleLowerCase("ru-RU"), option.label]));
     const liveMakes = Object.keys(stats.counts).filter((make) => Number(stats.counts[make] || 0) > 0);
-    const source = liveMakes.length ? [...liveMakes, ...selected] : [...options.map((option) => option.value), ...selected];
+    const source = [...liveMakes, ...options.map((option) => option.value), ...selected];
     const seen = new Map<string, Option>();
     for (const make of source.map(clean).filter(Boolean)) {
       const key = make.toLocaleLowerCase("ru-RU");
@@ -124,6 +125,8 @@ export function CatalogBrandMultiSelect({
   }, [options, query, selected, stats.counts]);
 
   const choose = (make: string) => {
+    setOpen(false);
+    setQuery("");
     onChange(!make ? "" : (selected.includes(make) ? selected.filter(item => item !== make) : [...selected, make]).join(","));
   };
 
@@ -144,11 +147,11 @@ export function CatalogBrandMultiSelect({
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти марку" className="ac-filter-search h-10 w-full rounded-xl px-3 text-sm font-bold outline-none" />
       </div>
       <div className="ac-brand-options ac-hide-scrollbar max-h-72 space-y-1 overflow-y-auto">
-        {selected.length ? <button type="button" onClick={() => choose("")} className="ac-filter-option mb-1 flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black"><span>Любая марка</span><span className="text-[var(--ac-muted)]">×</span></button> : null}
+        {selected.length ? <button type="button" onPointerDown={(event) => event.preventDefault()} onClick={() => choose("")} className="ac-filter-option mb-1 flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black"><span>Любая марка</span><span className="text-[var(--ac-muted)]">×</span></button> : null}
         {brands.map((option) => {
           const active = selected.some(make => make.toLocaleLowerCase("ru-RU") === option.value.toLocaleLowerCase("ru-RU"));
           const modelCount = Number(stats.modelCounts[option.value] || 0);
-          return <button key={option.value} type="button" data-facet-value={option.value} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-active" : ""}`} aria-pressed={active}>
+          return <button key={option.value} type="button" data-facet-value={option.value} onPointerDown={(event) => event.preventDefault()} onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-12 w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-left ${active ? "is-active" : ""}`} aria-pressed={active}>
             <BrandLogoVisual brand={option.value} className="h-8 w-12 shrink-0" />
             <span className="min-w-0 flex-1 truncate text-sm font-black">{option.label}<span className="ml-1.5 text-[11px] font-bold text-[var(--ac-muted)]">· {modelCount ? modelCountLabel(modelCount) : "…"}</span></span>
             <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition ${active ? "bg-red-500 text-white" : "border border-[var(--ac-border)] text-transparent"}`}>✓</span>
@@ -156,7 +159,6 @@ export function CatalogBrandMultiSelect({
         })}
         {!brands.length ? <div className="px-3 py-5 text-center text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
-      <button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => setOpen(false)}>Готово</button>
     </div> : null}
   </div>;
 }
