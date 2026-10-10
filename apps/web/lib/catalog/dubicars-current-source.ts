@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { assertSourceAccess, optionalSourceDetailFailure } from "./source-access-refusal";
 import { CATALOG_BRANDS } from "./brands";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
@@ -89,6 +90,7 @@ async function request(url: string, referer = "https://www.dubicars.com/uae/used
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
   try {
+    await assertCollectionEnabled('dubicars_uae_exact');
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
     assertSourceAccess(response.status, markup, "dubicars");

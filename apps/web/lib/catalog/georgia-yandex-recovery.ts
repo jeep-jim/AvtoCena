@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { autoPapaExactDetailFacts, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
 import { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
@@ -56,6 +57,7 @@ function imageRecord(url: string): CatalogImage {
 }
 
 async function fetchJson(url: string) {
+  await assertCollectionEnabled(new URL(url).hostname.includes('myauto')?'myauto_georgia_list':'autopapa_georgia_open');
   const response = await fetch(url, {
     headers: REQUEST_HEADERS,
     redirect: "follow",
@@ -67,6 +69,7 @@ async function fetchJson(url: string) {
 }
 
 async function fetchMarkup(url: string) {
+  await assertCollectionEnabled(new URL(url).hostname.includes('myauto')?'myauto_georgia_list':'autopapa_georgia_open');
   const response = await fetch(url, {
     headers: REQUEST_HEADERS,
     redirect: "follow",

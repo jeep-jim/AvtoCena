@@ -1,3 +1,9 @@
+import {sourceBridgeHeaders} from '../apps/web/lib/catalog/source-bridge-auth';
+import {before,after} from 'node:test';
+const priorBridgeKey=process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;
+before(()=>{process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY='offline-bridge-key';});
+after(()=>{if(priorBridgeKey===undefined)delete process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY;else process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY=priorBridgeKey;});
+const bridgeRequest=(url:string)=>new Request(url,{headers:sourceBridgeHeaders(url)});
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {EncarCompleteAdapter} from '../apps/web/lib/catalog/encar-complete-source';
@@ -11,11 +17,11 @@ test('Encar rejects old years before details, exposes source count and propagate
   proto.fetchPage=async()=>({items:[{id:'old',year:year-7},{id:'eligible',year:year-6}],count:250000,nextCursor:'next',finished:false});
   proto.normalizeOffer=(raw:any)=>({...raw,images:[]}) as any;
   proto.fetchImages=async()=>{detailCalls++;return Array.from({length:5},()=>({url:'https://example.com/car.jpg'})) as any;};
-  const result=await GET(new Request('https://avtocena.com/api/internal/encar-egress-71b8e4?page=1'));
+  const result=await GET(bridgeRequest('https://avtocena.com/api/internal/encar-egress-71b8e4?page=1'));
   const data=await result.json();
   assert.equal(detailCalls,1);assert.equal(data.outsideAge,1);assert.equal(data.sourceReportedCount,250000);assert.equal(data.offers.length,1);assert.equal(data.finished,false);
   proto.fetchImages=async()=>{throw Error('http_403');};
-  const refused=await GET(new Request('https://avtocena.com/api/internal/encar-egress-71b8e4?page=1'));
+  const refused=await GET(bridgeRequest('https://avtocena.com/api/internal/encar-egress-71b8e4?page=1'));
   assert.equal(refused.status,502);assert.equal((await refused.json()).blocked,true);
  } finally {
   for(const [key,descriptor] of Object.entries(descriptors)) {

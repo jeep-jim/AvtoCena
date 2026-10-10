@@ -4,11 +4,13 @@ on:
   schedule:
     # The calculation fingerprint changes at UTC midnight.
     - cron: '11 0 * * *'
+    # Cheap context check; retry after publisher lock and skip ready contexts.
+    - cron: '41 * * * *'
   push:
     branches: [main, perf/feed-budget-preparation-20261010]
-    paths: [apps/web/lib/catalog/shared-budget-prices.ts, apps/web/lib/catalog/budget-market-index.ts, scripts/catalog-budget-shared-warmup.mjs, scripts/catalog-budget-runtime.mjs, .github/workflows/catalog-budget-shared-warmup.yml]
+    paths: [apps/web/lib/catalog/shared-budget-prices.ts, apps/web/lib/catalog/budget-market-index.ts, apps/web/lib/catalog/budget-selector-codec.ts, scripts/catalog-budget-shared-warmup.mjs, scripts/catalog-budget-runtime.mjs, .github/workflows/catalog-budget-shared-warmup.yml]
   workflow_run:
-    workflows: [Deploy to Yandex Cloud, Verify committed Che168 publication, Catalog refresh korea, Catalog refresh uae, Catalog refresh europe, Catalog refresh georgia, ProAuctions collect and publish, Catalog refresh green]
+    workflows: [Deploy to Yandex Cloud, Verify committed Che168 publication, Catalog refresh china, Catalog refresh korea, Catalog refresh uae, Catalog refresh europe, Catalog refresh georgia, ProAuctions collect and publish, Catalog refresh green]
     types: [completed]
     branches: [main]
 permissions:

@@ -1,9 +1,11 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('che168_feed');
 import {autoApiChe168Client, autoApiPage, autoApiChe168Detail, collectAutoApiChe168} from './lib/auto-api-che168-client.mjs';
 import {autoApiChe168RejectionReason} from '../apps/web/lib/catalog/auto-api-che168.ts';
 import {diagnoseChe168404} from './lib/che168-diagnose-404.mjs';
 
 // Read-only bounded inspection. Never log the response body, contacts or credentials.
-const baseRequest=autoApiChe168Client({apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+12*60000});
+const baseRequest=autoApiChe168Client({fetchImpl:async (...args)=>{await assertCollectionEnabled('che168_feed');return fetch(...args);},apiKey:process.env.AUTO_API_CHE168_KEY,deadline:Date.now()+12*60000});
 const diagnosticCursor=Number(process.env.CHE168_DIAGNOSE_CHANGE_ID || '');
 if(process.env.CHE168_DIAGNOSE_404==='1'){
  if(!Number.isSafeInteger(diagnosticCursor)||diagnosticCursor<0)throw Error('invalid_diagnostic_cursor');

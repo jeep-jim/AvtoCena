@@ -2,13 +2,7 @@ name: Catalog V6 · CarVector exact evidence readiness
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-carvector-exact-readiness.yml"
-      - "apps/web/lib/catalog/carvector-current-source.ts"
-      - "apps/web/lib/catalog/importer.ts"
-      - "scripts/carvector-exact-readiness.ts"
-      - "tests/catalog-carvector-exact-evidence.test.ts"
+  # Live exploratory collection is manual only; production uses owner controls.
 
 permissions:
   contents: read

@@ -1,3 +1,6 @@
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {collectionMarketEnabled,collectionEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
+const controls=await readCollectionControls();
 import fs from 'node:fs/promises';
 import {readDataJson} from '../apps/web/lib/data.ts';
 const [manifest,maintenance,japan]=await Promise.all([
@@ -25,7 +28,7 @@ for(const market of ['japan','china','korea','europe','georgia','uae','green']){
  // Price/power are ordering preferences, not an inventory completeness quota.
  const publishedAt=market==='japan'?japan?.publishedAt:journal?.lastPublicationSuccess;
  const observedAt=market==='japan'?japan?.savedAt:journal?.lastCollectionSuccess;
- markets[market]={count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,lastAttemptAt:journal?.lastAttemptAt||null,lastCollectionAttempt:journal?.lastCollectionAttempt||null,publicationStatus:journal?.publicationStatus||null,publicationError:journal?.publicationError||null,sources:(journal?.sources||[]).map(s=>({sourceId:s.sourceId,stopReason:s.stopReason,initialCursor:s.initialCursor||null,cursor:s.cursor||null,observations:s.observations,pages:s.pages,errors:s.errors})),powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
+ markets[market]={collectionEnabled:market==='green'?collectionEnabled(controls,'akebono_green'):collectionMarketEnabled(controls,market),count:record?.count||0,publishedAt:publishedAt||null,sourceObservedAt:observedAt||null,qualityStatus:journal?.qualityStatus||null,lastAttemptAt:journal?.lastAttemptAt||null,lastCollectionAttempt:journal?.lastCollectionAttempt||null,publicationStatus:journal?.publicationStatus||null,publicationError:journal?.publicationError||null,sources:(journal?.sources||[]).map(s=>({sourceId:s.sourceId,stopReason:s.stopReason,initialCursor:s.initialCursor||null,cursor:s.cursor||null,observations:s.observations,pages:s.pages,errors:s.errors})),powerMix:journal?.powerMix||null,sourceShare:journal?.sourceShare||null};
  if(!Number.isFinite(ageDays(publishedAt)) || ageDays(publishedAt)>(market==='japan'?japanMaxAgeDays:4))problems.push(`${market}_publication_missing_or_stale`);
  if(!record?.count || !Number.isFinite(ageDays(observedAt)) || ageDays(observedAt)>(market==='japan'?japanMaxAgeDays:4))problems.push(`${market}_collection_missing_or_stale`);
 }

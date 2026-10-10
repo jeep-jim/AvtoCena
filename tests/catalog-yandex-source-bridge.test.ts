@@ -28,16 +28,12 @@ test("removed source endpoint is permanently inert", () => {
   assert.doesNotMatch(removedSourceRoute, /fetch\(|fetchPage|GoonetExactAdapter/);
 });
 
-test("Guazi Yandex endpoint is fixed-source only and preserves exact listing gallery verification", () => {
-  assert.match(guaziRoute, /guaziChinaExactSource\.fetchPage\(String\(page\)\)/);
-  assert.match(guaziRoute, /guaziChinaExactSource\.normalizeOffer\(raw\)/);
-  assert.match(guaziRoute, /guaziChinaExactSource\.fetchImages\(offer\)/);
-  assert.match(guaziRoute, /Math\.min\(10_000, page\)/);
-  assert.match(guaziRoute, /guazi_source_blocked_bot_challenge/);
-  assert.match(guaziRoute, /status: blocked \? 503 : 502/);
-  assert.match(bridge, /payload\.blocked === true/);
-  assert.doesNotMatch(guaziRoute, /searchParams\.get\(["']url["']\)/);
-  assert.doesNotMatch(guaziRoute, /YC_OBJECT_STORAGE|JSON_STORAGE_DRIVER|SECRET_ACCESS_KEY/);
+test("unapproved Guazi endpoint is inert and approved bridges require worker signatures", () => {
+  assert.match(guaziRoute, /catalog_source_not_approved/);
+  assert.match(guaziRoute, /status: 410/);
+  assert.doesNotMatch(guaziRoute, /fetchPage|fetchImages/);
+  assert.match(bridge, /sourceBridgeHeaders/);
+  assert.match(georgiaRoute, /sourceBridgeAuthorized/);
 });
 
 test("Georgia bridge reuses the existing bounded Yandex canonical recovery endpoint", () => {

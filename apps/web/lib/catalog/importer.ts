@@ -1,3 +1,4 @@
+import {guardCollectionAdapter} from './collection-adapter-guard';
 /*
  * Compatibility markers for source-level catalog safety tests:
  * const refreshLock = () => mutateDataJson
@@ -172,6 +173,8 @@ for (let index = 0; index < catalogImportSources.length; index++) {
   if (!mustBeStrict || dedicatedDetailSourceIds.has(source.sourceId)) continue;
   catalogImportSources[index] = strictSourceDetail(source);
 }
+
+for(let i=0;i<catalogImportSources.length;i++) catalogImportSources[i]=guardCollectionAdapter(catalogImportSources[i]);
 
 const registeredAdapterIds = new Set(catalogImportSources.map((source) => source.sourceId));
 const missingRequiredAdapters = [...requiredSourceIds].filter((sourceId) => !registeredAdapterIds.has(sourceId));

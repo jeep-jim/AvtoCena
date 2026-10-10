@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../../../../lib/catalog/collection-controls';
+import {sourceBridgeAuthorized} from '../../../../lib/catalog/source-bridge-auth';
 import { NextResponse } from "next/server";
 import { DubizzleUaeExactAdapter } from "../../../../lib/catalog/dubizzle-exact-source";
 import type { VehicleOffer } from "../../../../lib/catalog/types";
@@ -37,10 +39,12 @@ function prepare(raw: unknown) {
 }
 
 export async function GET(request: Request) {
+  if(!sourceBridgeAuthorized(request))return NextResponse.json({error:"Forbidden"},{status:403,headers:{"cache-control":"no-store"}});
   const requestUrl = new URL(request.url);
   const page = boundedPage(requestUrl.searchParams.get("page"));
   const startedAt = Date.now();
   try {
+    await assertCollectionEnabled('dubizzle_uae_open');
     const result = await source.fetchPage(String(page));
     const offers = (result.items || [])
       .map(prepare)

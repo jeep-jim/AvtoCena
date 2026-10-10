@@ -1,3 +1,4 @@
+import {assertCollectionEnabled} from './collection-controls';
 import { carswitchUaeExactSource } from "./carswitch-exact-source";
 import { dubicarsUaeCurrentSource } from "./dubicars-current-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
@@ -33,6 +34,7 @@ const RECOVERED_FIELDS: Readonly<Record<SavedDetailNeed, readonly (keyof Vehicle
 export async function recoverSavedDetailCandidate(offer: VehicleOffer, requestedNeeds: readonly SavedDetailNeed[]) {
   const adapter = DIRECT_FIXED_ID_ADAPTERS[offer.sourceId];
   if (!adapter || adapter.market !== offer.market) throw new Error(`targeted_detail_direct_handler_missing:${offer.sourceId}`);
+  await assertCollectionEnabled(offer.sourceId);
   const raw = await adapter.refreshOffer(structuredClone(offer));
   const projected = structuredClone(offer);
   for (const field of new Set(requestedNeeds.flatMap((need) => RECOVERED_FIELDS[need] || []))) {

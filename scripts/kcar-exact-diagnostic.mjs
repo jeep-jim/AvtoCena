@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('kcar_korea_open');
 import crypto from 'node:crypto';
 
 const API_BASE = 'https://api.kcar.com';

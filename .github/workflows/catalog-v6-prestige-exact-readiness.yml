@@ -2,12 +2,7 @@ name: Catalog V6 · Prestige exact sold readiness
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/catalog-v6-prestige-exact-readiness.yml"
-      - "apps/web/lib/catalog/prestige-japan-exact-source.ts"
-      - "apps/web/lib/catalog/importer.ts"
-      - "scripts/prestige-japan-exact-parser-smoke.ts"
+  # Live exploratory collection is manual only; production uses owner controls.
 
 permissions:
   contents: read

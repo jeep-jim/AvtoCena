@@ -1,3 +1,5 @@
+import {assertCollectionEnabled} from '../apps/web/lib/catalog/collection-controls.ts';
+await assertCollectionEnabled('proauctions_japan_stat');
 import fs from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
@@ -13,7 +15,8 @@ async function decode(url){
  for(let attempt=0;attempt<3;attempt++){
   const start=Math.max(Date.now(),(hosts.get(u.hostname)||0)+400);hosts.set(u.hostname,start);await new Promise(r=>setTimeout(r,Math.max(0,start-Date.now())));
   try{
-   const r=await fetch(url,{signal:AbortSignal.timeout(25000),redirect:'error'});
+   await assertCollectionEnabled('proauctions_japan_stat');
+ const r=await fetch(url,{signal:AbortSignal.timeout(25000),redirect:'error'});
    if(!r.ok)throw Object.assign(Error(`sheet_http_${r.status}`),{access:[401,403,429].includes(r.status)});
    const chunks=[];let size=0;for await(const b of r.body){size+=b.length;if(size>12000000)throw Error('sheet_too_large');chunks.push(b);}
    const decoded=await sharp(Buffer.concat(chunks),{limitInputPixels:40000000}).rotate().raw().toBuffer({resolveWithObject:true});

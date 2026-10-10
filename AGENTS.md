@@ -23,3 +23,10 @@
 - Owner exception 07.10.2026: Europe has a hard published inventory ceiling of 50,000 cars. Maintain freshness, prices and confirmed withdrawals; do not pursue Europe inventory growth beyond this cap. Other markets keep the no-count-cap policy. Source failures are not evidence of sale; retain publication safety guards.
 
 - Owner instruction 09.10.2026: publish suitable Che168 inventory; exclude missing-model/invalid-year rows individually instead of blocking the entire feed by their count/share. Preserve identity, archive integrity, complete change-stream and nonempty-inventory guards, age policy, Russian display, pricing evidence and truck/bus permitted gross mass limit above3500kg.
+
+# Owner collection and repository policy — 10.10.2026
+
+- Keep jeep-jim/AvtoCena public. Do not change repository visibility, add a second repository or introduce paid GitHub execution without a new explicit owner instruction.
+- China uses the paid Che168 feed. Chinese HTML parsers are disabled by default and are extreme manual reserves only. Never enable them automatically in response to feed, storage or publisher failure. Only explicit owner action (including the owner-only CRM switch) may enable them.
+- Collection controls in catalog/operations/collection-controls-v1.json govern market/source collection, not catalog visibility or provenance allowlists. Preserve existing publication, retention, identity, pricing and cursor safeguards. A network failure is not evidence of sale.
+- Any new collector, recovery or source detail path must honor owner market/source switches. The feed and legacy Che168 parser have separate control IDs despite sharing an inventory sourceId. Never publish commercial feed files or control records into the public repository.

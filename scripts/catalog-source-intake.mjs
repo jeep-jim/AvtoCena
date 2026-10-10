@@ -1,3 +1,5 @@
+import {readCollectionControls} from '../apps/web/lib/catalog/collection-controls.ts';
+import {collectionEnabled,collectionMarketEnabled} from '../apps/web/lib/catalog/collection-controls-schema.ts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {execFile} from 'node:child_process';
@@ -6,6 +8,8 @@ import { observationShardWriter, restoreIntakeCursor } from './lib/catalog-intak
 import { collectSourceStates, intakeState, intakeReportEvidence } from './lib/catalog-source-intake.mjs';
 const market=process.env.CATALOG_INTAKE_MARKET;
 if (!['japan','china','korea','uae','europe','georgia'].includes(market)) throw Error('Invalid market');
+const ownerControls=await readCollectionControls();
+if(!collectionMarketEnabled(ownerControls,market))throw Error('collection_disabled_by_owner:'+market);
 process.env.CATALOG_REBUILD_MARKET=market;
 process.env.CATALOG_IMAGE_STORAGE_MODE='source_urls_only';
 process.env.CATALOG_SOURCE_MIN_YEAR=String(market==='japan'?2010:new Date().getUTCFullYear()-6);
@@ -28,7 +32,8 @@ await fs.mkdir(directory,{recursive:true});
 if ((await fs.readdir(directory)).some(name=>name.endsWith('.jsonl'))) throw Error('intake_output_not_empty');
 const selectedSourceIds=(process.env.CATALOG_INTAKE_SOURCE_IDS||'').split(',').filter(Boolean);
 if(selectedSourceIds.some(id=>!REQUIRED_CATALOG_SOURCES[market].some(source=>source.sourceId===id)))throw Error('intake_source_not_approved');
-const selectedSources=REQUIRED_CATALOG_SOURCES[market].filter(source=>!selectedSourceIds.length||selectedSourceIds.includes(source.sourceId));
+const selectedSources=REQUIRED_CATALOG_SOURCES[market].filter(source=>collectionEnabled(ownerControls,source.sourceId)&&(!selectedSourceIds.length||selectedSourceIds.includes(source.sourceId)));
+if(!selectedSources.length)throw Error('collection_disabled_by_owner:no_enabled_parsers');
 const states=selectedSources.map(required=>intakeState(catalogImportSources.find(s=>s.sourceId===required.sourceId),required));
 if (process.env.CATALOG_INTAKE_RESUME === '1') {
   const {getJsonStorage}=await import('../apps/web/lib/data.ts');
@@ -39,7 +44,7 @@ const writers=new Map(states.map(state=>[state.sourceId,observationShardWriter(d
 const startedAt=new Date().toISOString();
 const deadline=Date.now()+Math.min((market==='korea'?300:210)*60000,Math.max(60000,Number(process.env.CATALOG_INTAKE_TIME_MS || 40*60000)));
 const maxRowsPerSource=Math.min(100000,Math.max(1,Number(process.env.CATALOG_INTAKE_MAX_ROWS_PER_SOURCE || 100000)));
-const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',
+const report={version:1,market,startedAt,productionWrites:false,mode:'source_observations',controlsRevision:ownerControls.revision,requiredSourceIds:selectedSources.map(s=>s.sourceId),
   note:'JSONL contains listing and detail revisions. Count unique sourceId + offer.id, not lines. Auction history is not active inventory.'};
 let checkpointQueue = Promise.resolve();
 let lastProgressAt = 0;
