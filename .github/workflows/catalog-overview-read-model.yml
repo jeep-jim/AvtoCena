@@ -5,6 +5,8 @@ on:
   schedule:
     # Refresh the date-sensitive age filter after midnight in Krasnoyarsk.
     - cron: '5 17 * * *'
+    # Recover from a delayed schedule or an active publisher; ready days are metadata-only.
+    - cron: '23 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -13,6 +15,7 @@ on:
       - ".github/workflows/catalog-overview-read-model.yml"
       - "scripts/catalog-build-overview-read-model.mjs"
       - "scripts/catalog-publish-current-read-models.mjs"
+      - "apps/web/lib/catalog/storage.ts"
   workflow_run:
     workflows:
       - "Catalog quality · enforce global model cap"
@@ -42,6 +45,7 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_OVERVIEW_CANDIDATES_PER_MARKET: "24"
+  CATALOG_OVERVIEW_SKIP_READY: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
 
 jobs:
   build:
