@@ -1,6 +1,6 @@
 import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,type CompressedBudgetDirectory,type CompressedBudgetSelector} from './budget-selector-codec';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
-import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial} from "./editorial";
+import {withCatalogEditorial,resetCatalogEditorialCache,editorialRevision,editorialEntries,editorialHasHidden,editorialHidden,applyCatalogEditorial,applyCatalogEditorialSpecifications} from "./editorial";
 import {splitBudgetMarketIndex,validBudgetMarketIndex,type BudgetMarketDirectory} from './budget-market-index';
 import {budgetPricingFingerprint,sharedBudgetPrices,resetSharedBudgetPriceCache} from './shared-budget-prices';
 import {catalogInventoryAgeDecision,catalogInventoryDate,catalogHeavyVehicleExcluded,catalogGrossVehicleWeightKg} from './inventory-admission';
@@ -470,7 +470,7 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
       if (valid) preparedProjectionRows.set(valid, valid);
     }
     const row = preparedProjectionRows.get(input);
-    if (row && !editorialHidden(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row)) visible.push(row);
+    if (row && !editorialHidden(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row)) visible.push(applyCatalogEditorialSpecifications(row));
   }
   return visible;
 }
@@ -729,7 +729,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   if(editorialHidden(row))return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
-  row = preparedProjectionRows.get(row) || safePublicPricing(row);
+  row = applyCatalogEditorialSpecifications(preparedProjectionRows.get(row) || safePublicPricing(row));
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
   if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
@@ -1157,6 +1157,11 @@ export async function backfillCatalogMarketLandings(options: {refreshDateSensiti
   await assertRefreshContext();
   return {generationId: manifest.generationId, results};
 }
+function withEditorialFacetOptions(facets:CatalogFacets,market?:string):CatalogFacets {
+ const entries=editorialEntries().filter(entry=>entry.status==='visible'&&(!market||market==='any'||entry.market===market));
+ const values=(field:'bodyType'|'drive'|'transmission',existing:string[])=>uniqueText([...existing,...entries.map(entry=>entry.specifications?.[field])]).sort();
+ return {...facets,bodyTypes:values('bodyType',facets.bodyTypes),drives:values('drive',facets.drives),transmissions:values('transmission',facets.transmissions)};
+}
 async function readCatalogFacetsEditorial(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
   const budget=await readBudgetSelection(params);
   if(budget){
@@ -1166,7 +1171,7 @@ async function readCatalogFacetsEditorial(params: CatalogSearchParams = {}): Pro
     return {generationId:budget.generationId,makes:values("make"),models,markets:[...PUBLIC_CATALOG_MARKETS],bodyTypes:values("bodyType"),fuels:values("fuel"),transmissions:values("transmission"),drives:values("drive")};
   }
   const landing = await readMarketLanding(params);
-  if (landing) return landing.facets;
+  if (landing) return withEditorialFacetOptions(landing.facets,params.market);
   if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
     const manifest = await readManifest();
     return { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
@@ -1178,9 +1183,9 @@ async function readCatalogFacetsEditorial(params: CatalogSearchParams = {}): Pro
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
   if (!hasFilters && !editorialHasHidden() && (!params.market || params.market === "any")) {
     const [manifest, facets] = await Promise.all([readManifest(), readCurrentFacets()]);
-    if (facets.generationId === manifest.generationId) return facets;
+    if (facets.generationId === manifest.generationId) return withEditorialFacetOptions(facets);
     const stored = await readIndex<CatalogFacets | null>(manifest.generationId, "facets.json", null);
-    if (stored?.generationId === manifest.generationId) return stored;
+    if (stored?.generationId === manifest.generationId) return withEditorialFacetOptions(stored);
   }
   const { generationId, rows } = await currentProjectionRows(params);
   return facetsFromProjection(generationId, rows, params, hasFilters);
@@ -1937,7 +1942,8 @@ async function readBudgetSelection(params:CatalogSearchParams){
   // move it into budget. Non-price metadata can still narrow block reads first.
   const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
-  let candidates=sourceRows.filter(row=>
+  const editedRow=(row:BudgetCountIndex['rows'][number])=>{const metadata=applyCatalogEditorialSpecifications(row[5]);if(metadata===row[5])return row;const edited:typeof row=[...row];edited[5]=metadata;return edited;};
+  let candidates=sourceRows.map(editedRow).filter(row=>
    !editorialHidden({id:row[5].id,market:row[0]}) &&
    catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
@@ -1961,6 +1967,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    candidates=matchingBudgetIndex({...index,rows:liveRows},params,quotes);
   }
 
+  candidates=candidates.map(editedRow);
   if(metadataQuery && (index.filterVersion===1 || !(params.mileageFrom || params.mileageTo)))return {generationId:manifest.generationId,cardVersion,rows:candidates};
   const ids=new Set(candidates.map(row=>row[5].id));
   const blocks=[...new Set(candidates.map(row=>row[5].block))];

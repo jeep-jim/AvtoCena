@@ -5,6 +5,16 @@ import { vehicleResearchUrl } from '../apps/web/lib/catalog/vehicle-research-lin
 import { offerSpecificationGroups } from '../apps/web/lib/catalog/offer-specification-groups';
 import { catalogBodyName } from '../apps/web/lib/catalog/presentation';
 
+test('editorial characteristics replace conflicting display rows without modifying source evidence',()=>{
+ const offer:any={market:'japan',make:'Toyota',model:'Corolla Cross',bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий',editorialSpecifications:{bodyType:'suv',drive:'awd',transmission:'cvt',color:'Синий'},sourceId:'source',sourceOfferId:'1',operational:{sourceSpecifications:{sourceId:'source',sourceOfferId:'1',groups:[{name:'Источник',items:[{name:'Тип кузова',value:'Седан'},{name:'Привод',value:'Передний'},{name:'Цвет',value:'Красный'}]}]}}};
+ const source=structuredClone(offer.operational);
+ const items=offerSpecificationGroups(offer).flatMap(group=>group.items);
+ assert.ok(items.some(item=>item.name==='Кузов'&&item.value==='Кроссовер'));
+ assert.ok(items.some(item=>item.name==='Цвет'&&item.value==='Синий'));
+ assert.ok(!items.some(item=>['Седан','Передний','Красный'].includes(item.value)));
+ assert.deepEqual(offer.operational,source);
+});
+
 test('short and full body labels agree without overwriting original source rows', () => {
   const offer: any = {market:'korea', make:'Renault',model:'QM6',bodyType:'suv',sourceId:'kcar',sourceOfferId:'123', operational:{sourceSpecifications:{sourceId:'kcar',sourceOfferId:'123',groups:[{name:'Источник',items:[{name:'Body',value:'SUV'}]}]}}};
   const before = structuredClone(offer);

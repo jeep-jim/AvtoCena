@@ -1,3 +1,4 @@
+import {withCatalogEditorial,applyCatalogEditorial,editorialHidden} from './editorial';
 import { createHash } from "node:crypto";
 import { DetailReadCache } from "./detail-read-cache";
 import { withGreenCornerFuel } from "./green-corner-fuel";
@@ -22,8 +23,11 @@ export async function getGreenCornerOffer(id:string){
 export function publicGreenOffer(offer:VehicleOffer){const {operational,vin,frameNumber,...row}=offer;return row;}
 
 export async function readGreenCornerPage(items:VehicleOffer[],params:GreenFilters,clampPage=true) {
- const current=greenCornerNeedsFullPricing(params)?items:await applyEncyclopediaDisplayIdentityBatch(items);
- return greenCornerPageSelection(current,params,currentGreenCornerPrices,clampPage);
+ return withCatalogEditorial(async()=>{
+  const visible=items.filter(item=>!editorialHidden(item)).map(item=>applyCatalogEditorial(item));
+  const current=greenCornerNeedsFullPricing(params)?visible:await applyEncyclopediaDisplayIdentityBatch(visible);
+  return greenCornerPageSelection(current.map(item=>applyCatalogEditorial(item)),params,async rows=>(await currentGreenCornerPrices(rows)).map(item=>applyCatalogEditorial(item)),clampPage);
+ });
 }
 
 const pricedStock = new DetailReadCache<VehicleOffer[]>({maxEntries:2,maxBytes:16*1024*1024,ttlMs:60_000,concurrency:1});

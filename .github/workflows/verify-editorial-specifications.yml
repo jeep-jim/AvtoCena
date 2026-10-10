@@ -1,0 +1,37 @@
+name: Verify editorial specifications
+on:
+  pull_request:
+    paths:
+      - 'apps/web/lib/catalog/editorial*'
+      - 'apps/web/components/catalog/CatalogEditorialEditor.tsx'
+      - 'tests/browser/editorial-specifications*'
+      - '.github/workflows/verify-editorial-specifications.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: editorial-specifications-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/catalog-editorial.test.ts tests/catalog-editorial-route.test.ts tests/catalog-full-specifications.test.ts tests/catalog-compressed-selector-read.test.ts tests/green-corner-page-budget.test.ts
+      - run: npx tsc -p apps/web/tsconfig.json --noEmit --incremental false
+      - run: npm install --prefix "$RUNNER_TEMP/editorial-browser" --no-package-lock --ignore-scripts playwright@1.55.0
+      - name: Verify mobile and desktop editor in both themes
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/editorial-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/editorial-specifications.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: editorial-specifications
+          path: artifacts/editorial-specifications/*.png

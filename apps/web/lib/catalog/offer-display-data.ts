@@ -1,3 +1,4 @@
+import {applyCatalogEditorial,readCatalogEditorial} from './editorial';
 import {cache} from 'react';
 import {safePublicPricing} from './safe-public-pricing';
 import {enrichOfferWithSourceTableParameters} from './source-table-displacement';
@@ -16,6 +17,7 @@ import type {VehicleOffer} from './types';
 
 // One request-local calculation feeds the visible page and link metadata.
 export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeRequestedPowerHp=0,modificationId='')=>{
+  const editorial=await readCatalogEditorial();
   const safeOffer = safePublicPricing(enrichOfferWithSourceTableParameters(restoreProAuctionsPower(storedOffer)));
   const offer = safeOffer.catalogPricingMode === 'seller' || safeOffer.market === 'china' ? await applyActiveBusinessPricing(safeOffer) : safeOffer;
 
@@ -28,7 +30,7 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
   // publicOffer deliberately removes operational fields; running it first used
   // to erase resolver-backed variants such as UX250h before powertrain safety
   // could correct the stale combustion classification.
-  const normalizedEnrichedOffer: any = selectionRequired || sellerPricing ? enrichedOffer : normalizeVehicleOfferSpecs(enrichedOffer);
+  const normalizedEnrichedOffer: any = applyCatalogEditorial(selectionRequired || sellerPricing ? enrichedOffer : normalizeVehicleOfferSpecs(enrichedOffer),editorial);
   const initialPublic: any = publicOffer(normalizedEnrichedOffer);
   const initialVisibleRub = catalogOfferVisibleRub(initialPublic);
   const pricedOffer = sellerPricing ? normalizedEnrichedOffer : selectionRequired ? selectedModification || withoutDeliveredPrice(offer) : safeRequestedPowerHp
@@ -36,7 +38,7 @@ export const resolveOfferDisplay = cache(async (storedOffer:VehicleOffer,safeReq
     : initialVisibleRub > 0
       ? normalizedEnrichedOffer
       : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
-  const raw: any = selectionRequired || sellerPricing ? publicOffer(pricedOffer) : normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
+  const raw: any = applyCatalogEditorial(selectionRequired || sellerPricing ? publicOffer(pricedOffer) : normalizeVehicleOfferSpecs(publicOffer(pricedOffer)),editorial);
   const powerScenario = readCatalogPowerScenario(raw);
   const customerScenarioRub = safeRequestedPowerHp
     && !selectionRequired

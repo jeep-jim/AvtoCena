@@ -3,11 +3,13 @@ import {randomUUID} from 'node:crypto';
 import {mutateDataJson,readDataJson} from '../data';
 import {DetailReadCache} from './detail-read-cache';
 import type {VehicleOffer} from './types';
+import {editorialSpecificationOptions,type EditorialSpecifications} from './editorial-specifications';
 
 export type EditorialStatus='visible'|'hidden'|'archived';
 export type CatalogEditorialEntry={
  id:string; market:VehicleOffer["market"]; sourceId:string; sourceOfferId:string; make:string; model:string;
  title:string; photos:string[]|null; status:EditorialStatus; reason:string;
+ specifications?:EditorialSpecifications;
  version:string; updatedAt:string; updatedBy:string; updatedByName:string;
  originalTitle:string; originalPhoto:string;
 };
@@ -40,9 +42,13 @@ export function editorialHidden(offer:Identity,index=context.getStore()){
 export function editorialHasHidden(market?:string){return editorialEntries().some(e=>e.status!=='visible'&&(!market||market==='any'||e.market===market));}
 export function applyCatalogEditorial<T extends Identity>(offer:T,index=context.getStore()):T{
  const entry=matchingEditorial(offer,index);if(!entry)return offer;
- return {...offer,...(entry.title?{editorialTitle:entry.title}:{}),...(entry.photos?{
+ return {...applyCatalogEditorialSpecifications(offer,index),...(entry.title?{editorialTitle:entry.title}:{}),...(entry.photos?{
   cardImageUrl:entry.photos[0],images:entry.photos.map((url,i)=>({id:`editorial-${i}`,url,mimeType:'image/webp',size:0})),
  }: {})};
+}
+export function applyCatalogEditorialSpecifications<T extends Identity>(offer:T,index=context.getStore()):T{
+ const specifications=matchingEditorial(offer,index)?.specifications;
+ return specifications&&Object.keys(specifications).length?{...offer,...specifications,editorialSpecifications:specifications}:offer;
 }
 export class EditorialConflict extends Error {constructor(){super('Объявление уже изменено другим сотрудником. Обновите страницу перед сохранением.');}}
 export class EditorialInputError extends Error {}
@@ -53,7 +59,19 @@ export function cleanEditorialInput(input:Record<string,unknown>,allowedPhotos:R
  const photos=input.photos;
  if(photos!==null&&(!Array.isArray(photos)||photos.length<1||photos.length>30||photos.some(p=>typeof p!=='string'||(!/^\/api\/site-media\/[a-f0-9]{64}$/.test(p)&&!allowedPhotos.has(p)))))throw new EditorialInputError('Загрузите от 1 до 30 фотографий.');
  if(input.version!==null&&(typeof input.version!=='string'||input.version.length>100))throw new EditorialInputError('Обновите страницу перед сохранением.');
- return {title,reason:input.reason.trim(),status:input.status as EditorialStatus,photos:photos as string[]|null,version:input.version as string|null};
+ let specifications:EditorialSpecifications|undefined;
+ if(input.specifications!==undefined){
+  if(!input.specifications||typeof input.specifications!=='object'||Array.isArray(input.specifications))throw new EditorialInputError('Проверьте характеристики автомобиля.');
+  specifications={};
+  for(const [key,value] of Object.entries(input.specifications)){
+   if(!['bodyType','drive','transmission','color'].includes(key)||typeof value!=='string')throw new EditorialInputError('Проверьте характеристики автомобиля.');
+   const clean=value.trim().replace(/[\u0000-\u001f\u007f]/g,'');
+   if(!clean)continue;
+   if(key==='color' ? clean.length>60 : !editorialSpecificationOptions[key as keyof typeof editorialSpecificationOptions].some(option=>option[0]===clean))throw new EditorialInputError('Выберите характеристику из списка. Цвет — до 60 символов.');
+   specifications[key as keyof EditorialSpecifications]=clean;
+  }
+ }
+ return {title,reason:input.reason.trim(),status:input.status as EditorialStatus,photos:photos as string[]|null,version:input.version as string|null,specifications};
 }
 export async function saveCatalogEditorial(offer:Pick<VehicleOffer,"id"|"market"|"sourceId"|"sourceOfferId"|"make"|"model">&{images:{url:string}[]},input:ReturnType<typeof cleanEditorialInput>,actor:{id:string;displayName:string},originalTitle:string){
  const next:CatalogEditorialEntry={id:offer.id,market:offer.market,sourceId:offer.sourceId,sourceOfferId:offer.sourceOfferId,
@@ -64,6 +82,7 @@ export async function saveCatalogEditorial(offer:Pick<VehicleOffer,"id"|"market"
   const previous=Object.hasOwn(current.entries,offer.id)?current.entries[offer.id]:undefined;
   if((previous?.version||null)!==input.version)throw new EditorialConflict();
   if(previous&&!matchingEditorial(offer,current))throw new EditorialConflict();
+  next.specifications=input.specifications??previous?.specifications;
   const result={revision:next.version,entries:{...current.entries,[offer.id]:next}};
   if(Buffer.byteLength(JSON.stringify(result))>8*1024*1024)throw new Error('catalog_editorial_capacity');
   return result;
