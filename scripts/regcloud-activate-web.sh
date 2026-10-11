@@ -25,7 +25,7 @@ nginx -t
 systemctl reload nginx
 for domain in avtocena.com www.avtocena.com; do
   test "$(curl -fsS --max-time 15 -H "Host: $domain" http://127.0.0.1/.well-known/acme-challenge/avtocena-routing-check)" = avtocena-regcloud-ready
-  test "$(curl -fsS --max-time 20 "http://$domain/.well-known/acme-challenge/avtocena-routing-check")" = avtocena-regcloud-ready
+  test "$(curl -fsS --max-time 20 --resolve "$domain:80:151.248.113.177" "http://$domain/.well-known/acme-challenge/avtocena-routing-check")" = avtocena-regcloud-ready
   echo "HTTP certificate challenge route verified: $domain"
 done
 rm -f "$probe"

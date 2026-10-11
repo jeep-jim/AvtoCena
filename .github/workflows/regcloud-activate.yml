@@ -36,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           for host in avtocena.com www.avtocena.com; do
-            answer=$(dig +time=5 +tries=1 +short @1.1.1.1 "$host" A)
+            answer=$(dig +time=5 +tries=1 +short @ns1.reg.ru "$host" A)
             echo "$host A: $answer"
             test "$answer" = 151.248.113.177
           done
