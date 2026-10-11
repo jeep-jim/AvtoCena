@@ -225,6 +225,14 @@
     #comicCanvas{height:100px;}
     #hint{display:none;}
   }
+  /* Touch controls must remain clear in portrait and landscape. */
+  @media (max-width: 720px), (pointer: coarse) {
+    #storyPanel, #hint, .overlay .keys{display:none;}
+    #mobileCtrl{display:flex;bottom:calc(12px + env(safe-area-inset-bottom));
+      padding-left:max(12px,env(safe-area-inset-left));
+      padding-right:max(12px,env(safe-area-inset-right));}
+    #mobileCtrl button{flex-shrink:1;}
+  }
 </style>
 </head>
 <body class="theme-dark">
