@@ -1,0 +1,50 @@
+name: Regcloud — verify live production
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-live-check.json']
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify running service without restart
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
+          docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          systemctl is-active nginx
+          systemctl is-active certbot.timer
+          openssl x509 -in /etc/letsencrypt/live/avtocena.com/cert.pem -noout -dates -issuer -ext subjectAltName
+          curl --fail --silent --show-error --max-time 20 --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health
+          printf '\n'
+          REMOTE
+      - name: Check public routes from independent runner
+        run: |
+          set -euo pipefail
+          for host in avtocena.com www.avtocena.com; do
+            dig +short "$host" A
+            curl --fail --silent --show-error --max-time 30 "https://$host/api/health" | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["ok"] and d["releaseSha"]=="dd63dc40f51ee97d33c12a86654ad60d3714053f"; print("Public release correct")'
+          done
+          for path in / /cars /login; do
+            curl --fail --silent --show-error --max-time 90 "https://avtocena.com$path" -o /dev/null
+            echo "Public $path: success"
+          done
