@@ -105,7 +105,7 @@ def quarantine_extra(target, row):
     """Preserve and verify an obsolete staging object before removing its active key."""
     key = row['Key']
     require(key.startswith(TARGET_PREFIX), 'Quarantine outside staging refused')
-    require(not os.path.exists('/opt/avtocena/PRODUCTION_ACTIVE'), 'Production marker present')
+    require(not any(os.path.exists(p) for p in ['/opt/avtocena/PRODUCTION_ACTIVE', '/opt/avtocena/STAGING_APP_ACTIVE']), 'Production marker present')
     response = target.get_object(Bucket=TARGET_BUCKET, Key=key, IfMatch=row['ETag'])
     headers = {name: response[name] for name in HEADERS if name in response}
     headers['Metadata'] = dict(response.get('Metadata', {}))
@@ -129,7 +129,7 @@ def quarantine_extra(target, row):
         journal.write(json.dumps({'original': key, 'quarantine': destination, 'sha256': digest, 'bytes': size}) + '\n')
         journal.flush()
         os.fsync(journal.fileno())
-    require(not os.path.exists('/opt/avtocena/PRODUCTION_ACTIVE'), 'Production marker present')
+    require(not any(os.path.exists(p) for p in ['/opt/avtocena/PRODUCTION_ACTIVE', '/opt/avtocena/STAGING_APP_ACTIVE']), 'Production marker present')
     target.delete_object(Bucket=TARGET_BUCKET, Key=key)
     return size
 
@@ -140,7 +140,7 @@ def transfer_config():
 def main(config_path):
     import boto3
     from botocore.config import Config
-    require(not os.path.exists('/opt/avtocena/PRODUCTION_ACTIVE'), 'Production marker present; initial migration disabled')
+    require(not any(os.path.exists(p) for p in ['/opt/avtocena/PRODUCTION_ACTIVE', '/opt/avtocena/STAGING_APP_ACTIVE']), 'Production marker present; initial migration disabled')
     with open(config_path) as source_file:
         cfg = json.load(source_file)
     endpoint = cfg.get('source_endpoint') or 'https://storage.yandexcloud.net'
