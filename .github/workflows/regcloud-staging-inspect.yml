@@ -29,10 +29,10 @@ jobs:
           trap 'rm -f "$key_file" "$hosts_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          # Initial trust-on-first-use only. Record this host fingerprint and pin it
-          # before later deployment runs; never disable host-key verification.
+          # Pin the host observed in the owner-triggered first connection.
+          printf '%s\n' '151.248.113.177 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAwiP6mOUcqHc5+Xvih7YY0Ikc7TyNsIoLoFTVx1JcSV' > "$hosts_file"
           ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 \
-            -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$hosts_file" \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts_file" \
             root@151.248.113.177 \
             'id; uname -sr; cat /etc/os-release; df -h /; free -m; command -v docker || true'
           echo 'Initial server host key (public):'
