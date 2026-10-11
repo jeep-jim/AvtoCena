@@ -1,3 +1,10 @@
+## 11.10.2026, 21:14 Красноярск — приложение запущено на REG
+
+- Run 38146023947 success: образ dd63dc40f51ee97d33c12a86654ad60d3714053f установлен, avtocena-staging работает на 127.0.0.1:3000. Health/exact release, главная, /cars и непустая выдача по всем 6 рынкам HTTP 200. Замеры первых запросов: Japan1.03s, China0.06s, Korea0.07s, UAE1.04s, Europe6.94s, Georgia0.79s. Это локальные smoke-замеры, не публичный SLA и не проверка всех карточек/заявок.
+- Run 38146368704 success: root-only production.env сохранён в /opt/avtocena/production-prepared/38146368704-1/production.env, пока не активирован. Auth/Telegram/captcha/dispatch ключи присутствуют; SMTP и платёжные настройки отсутствуют. Почта уже не была подключена прежним deploy; не считать её исправленной.
+- DNS11.10 14:14UTC: NS josh.ns.cloudflare.com/nia.ns.cloudflare.com, A158.160.171.31, www CNAME d5d4tne6a7djd0o5ip14.nkhmighe.apigw.yandexcloud.net. Домен ещё ведёт на Яндекс. Панель Cloudflare в текущем браузере требует входа.
+- Подготовлена установка nginx/certbot: публичный HTTP только ACME, остальное503; приложение проксируется лишь на loopback8080. Проверяются proxy health и запрет анонимного CRM. Выпуск сертификата, production activation и DNS не выполнены этим шагом. Запуск этого нового workflow ещё ожидается.
+
 ## 11.10.2026 — подготовка рабочих настроек после успешной копии
 
 - Опубликован dd63dc40f51ee97d33c12a86654ad60d3714053f, запущен build/start run 38146023947. При проверке выполняется Docker build; старт приложения ещё не подтверждён.
