@@ -167,6 +167,13 @@ export class ObjectJsonStorage implements JsonStorage {
   private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
   private async signedRequest(method: string, url: URL, body?: string | Buffer, extraHeaders: Record<string, string> = {}, query = "") {
     const cfg = objectConfig();
+    // REG S3 returns quoted ETags but requires bare If-Match values on PUT.
+    // Keep the condition and sign its actual wire representation; never retry
+    // a rejected conditional write as an unconditional write.
+    if (method === "PUT" && new URL(cfg.endpoint).hostname === "s3.regru.cloud" &&
+        extraHeaders["if-match"]?.startsWith('"') && extraHeaders["if-match"].endsWith('"')) {
+      extraHeaders = { ...extraHeaders, "if-match": extraHeaders["if-match"].slice(1, -1) };
+    }
     const payloadHash = sha256(body ?? "");
     const attempts = Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
     const timeoutMs = objectStorageRequestTimeoutMs(Buffer.byteLength(body ?? ""));
