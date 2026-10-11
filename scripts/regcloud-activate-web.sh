@@ -12,10 +12,21 @@ r=json.load(open('/opt/avtocena/staging/runtime-smoke.json'))
 assert r['release']=='dd63dc40f51ee97d33c12a86654ad60d3714053f'
 assert len(r['checks'])==8 and all(x['ok'] for x in r['checks'])
 PY
+# Challenge directories/files are public by design; private keys retain Certbot's own permissions.
+chmod 755 /var/www/avtocena-acme /var/www/avtocena-acme/.well-known /var/www/avtocena-acme/.well-known/acme-challenge
+probe=/var/www/avtocena-acme/.well-known/acme-challenge/avtocena-routing-check
+printf 'avtocena-regcloud-ready' > "$probe"
+chmod 644 "$probe"
+for domain in avtocena.com www.avtocena.com; do
+  test "$(curl -fsS --max-time 15 -H "Host: $domain" http://127.0.0.1/.well-known/acme-challenge/avtocena-routing-check)" = avtocena-regcloud-ready
+  test "$(curl -fsS --max-time 20 "http://$domain/.well-known/acme-challenge/avtocena-routing-check")" = avtocena-regcloud-ready
+  echo "HTTP certificate challenge route verified: $domain"
+done
+rm -f "$probe"
 # Public HTTP still only serves certificate challenges until certificate success.
-certbot certonly --non-interactive --agree-tos --register-unsafely-without-email \
+(umask 022; certbot certonly --non-interactive --agree-tos --register-unsafely-without-email \
   --webroot -w /var/www/avtocena-acme --cert-name avtocena.com \
-  -d avtocena.com -d www.avtocena.com --keep-until-expiring
+  -d avtocena.com -d www.avtocena.com --keep-until-expiring)
 # Keep the tested staging container for immediate runtime rollback.
 if ! docker container inspect avtocena-production >/dev/null 2>&1; then
   test "$(docker inspect --format '{{ index .Config.Labels "avtocena.role" }}' avtocena-staging)" = isolated-staging
