@@ -36,3 +36,15 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
         run: node --experimental-strip-types scripts/regcloud-s3-smoke.mjs
+      - name: Diagnose conditional writes after a failed compatibility check
+        if: failure()
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: ${{ inputs.signing_region }}
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/compatibility/
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: '3'
+        run: node --experimental-strip-types scripts/regcloud-s3-diagnose.mjs
