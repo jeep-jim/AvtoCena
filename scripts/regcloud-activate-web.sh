@@ -13,10 +13,16 @@ assert r['release']=='dd63dc40f51ee97d33c12a86654ad60d3714053f'
 assert len(r['checks'])==8 and all(x['ok'] for x in r['checks'])
 PY
 # Challenge directories/files are public by design; private keys retain Certbot's own permissions.
-chmod 755 /var/www/avtocena-acme /var/www/avtocena-acme/.well-known /var/www/avtocena-acme/.well-known/acme-challenge
+chmod 755 /var/www /var/www/avtocena-acme /var/www/avtocena-acme/.well-known /var/www/avtocena-acme/.well-known/acme-challenge
 probe=/var/www/avtocena-acme/.well-known/acme-challenge/avtocena-routing-check
 printf 'avtocena-regcloud-ready' > "$probe"
 chmod 644 "$probe"
+echo 'ACME path permissions'
+namei -l "$probe"
+if runuser -u www-data -- test -r "$probe"; then echo 'nginx worker can read challenge'; else echo 'nginx worker cannot read challenge'; exit 1; fi
+cat /etc/nginx/conf.d/avtocena-prepare.conf
+nginx -t
+systemctl reload nginx
 for domain in avtocena.com www.avtocena.com; do
   test "$(curl -fsS --max-time 15 -H "Host: $domain" http://127.0.0.1/.well-known/acme-challenge/avtocena-routing-check)" = avtocena-regcloud-ready
   test "$(curl -fsS --max-time 20 "http://$domain/.well-known/acme-challenge/avtocena-routing-check")" = avtocena-regcloud-ready
