@@ -98,6 +98,41 @@ def copy_one(source, target, source_bucket, source_prefix, row, existing):
     require(got == digest and actual_size == length, 'Destination checksum mismatch')
     return 'copied', length
 
+
+QUARANTINE_PREFIX = 'migration-staging/quarantine-20261011/'
+
+def quarantine_extra(target, row):
+    """Preserve and verify an obsolete staging object before removing its active key."""
+    key = row['Key']
+    require(key.startswith(TARGET_PREFIX), 'Quarantine outside staging refused')
+    require(not os.path.exists('/opt/avtocena/PRODUCTION_ACTIVE'), 'Production marker present')
+    response = target.get_object(Bucket=TARGET_BUCKET, Key=key, IfMatch=row['ETag'])
+    headers = {name: response[name] for name in HEADERS if name in response}
+    headers['Metadata'] = dict(response.get('Metadata', {}))
+    with tempfile.NamedTemporaryFile(prefix='avtocena-quarantine-', dir='/opt/avtocena/staging/migration') as spool:
+        digest, size = checksum_stream(response['Body'], spool)
+        require(size == row['Size'], 'Quarantine source size changed')
+        spool.flush()
+        destination = QUARANTINE_PREFIX + hashlib.sha256(key.encode()).hexdigest() + '/' + digest
+        target.upload_file(spool.name, TARGET_BUCKET, destination, ExtraArgs=headers, Config=transfer_config())
+    saved = target.get_object(Bucket=TARGET_BUCKET, Key=destination)
+    require(saved.get('Metadata', {}) == headers['Metadata'], 'Quarantine metadata mismatch')
+    for name in HEADERS:
+        if name in headers:
+            require(saved.get(name) == headers[name], 'Quarantine header mismatch')
+    got, actual = checksum_stream(saved['Body'])
+    require(got == digest and actual == size, 'Quarantine checksum mismatch')
+    current = target.head_object(Bucket=TARGET_BUCKET, Key=key)
+    require(current.get('ETag') == row['ETag'] and current['ContentLength'] == size, 'Staging object changed before quarantine')
+    # Root-only, fsynced recovery mapping. Never print object keys in public logs.
+    with open('/opt/avtocena/staging/migration/quarantine-recovery.jsonl', 'a') as journal:
+        journal.write(json.dumps({'original': key, 'quarantine': destination, 'sha256': digest, 'bytes': size}) + '\n')
+        journal.flush()
+        os.fsync(journal.fileno())
+    require(not os.path.exists('/opt/avtocena/PRODUCTION_ACTIVE'), 'Production marker present')
+    target.delete_object(Bucket=TARGET_BUCKET, Key=key)
+    return size
+
 def transfer_config():
     from boto3.s3.transfer import TransferConfig
     return TransferConfig(multipart_threshold=64 * 1024 * 1024, multipart_chunksize=16 * 1024 * 1024, max_concurrency=2)
@@ -120,6 +155,9 @@ def main(config_path):
     target = boto3.client('s3', endpoint_url='https://s3.regru.cloud', region_name='us-east-1', aws_access_key_id=cfg['target_access'], aws_secret_access_key=cfg['target_secret'], config=common)
     before = inventory(source, cfg['source_bucket'], prefix)
     require(bool(before), 'Empty source; stopped')
+    if os.environ.get('REGCLOUD_RECONCILE') == '1':
+        time.sleep(10)
+        require(same_inventory(before, inventory(source, cfg['source_bucket'], prefix)), 'Source still changing after workflow pause; external writers must stop')
     target_before = inventory(target, TARGET_BUCKET)
     total = sum(row['Size'] for row in before.values())
     outside = sum(row['Size'] for key, row in target_before.items() if not key.startswith(TARGET_PREFIX))
@@ -152,6 +190,19 @@ def main(config_path):
         for _ in pool.map(worker, rows[1:]):
             pass
     after = inventory(source, cfg['source_bucket'], prefix)
+    if os.environ.get('REGCLOUD_RECONCILE') == '1':
+        # Never reconcile a moving source. No source mutation is performed.
+        require(same_inventory(before, after), 'Source changed during copy; final sync still required')
+        expected_keys = {TARGET_PREFIX + key[len(prefix):] for key in before}
+        current_target = inventory(target, TARGET_BUCKET, TARGET_PREFIX)
+        extras = [row for key, row in current_target.items() if key not in expected_keys]
+        print(json.dumps({'phase': 'quarantine', 'extraObjects': len(extras), 'extraBytes': sum(r['Size'] for r in extras)}), flush=True)
+        require(sum(r['Size'] for r in inventory(target, TARGET_BUCKET).values()) + max([r['Size'] for r in extras] or [0]) < 90_000_000_000, 'Insufficient quarantine safety budget')
+        for index, row in enumerate(extras):
+            quarantine_extra(target, row)
+            if (index + 1) % 100 == 0:
+                print(json.dumps({'quarantined': index + 1}), flush=True)
+        after = inventory(source, cfg['source_bucket'], prefix)
     target_after = inventory(target, TARGET_BUCKET, TARGET_PREFIX)
     expected = {TARGET_PREFIX + key[len(prefix):]: row['Size'] for key, row in before.items()}
     actual = {key: row['Size'] for key, row in target_after.items()}

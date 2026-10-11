@@ -1,8 +1,12 @@
-name: Regcloud migration — copy data
+name: Regcloud migration — reconcile preserved copy
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-reconcile.json']
 permissions:
   contents: read
+  actions: write
 concurrency:
   group: regcloud-staging
   cancel-in-progress: false
@@ -16,7 +20,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Copy through REG server and verify every object
+      - name: Pause legacy storage workflows for migration
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/regcloud-pause-writers.py
+      - name: Preserve workflow states for selective restoration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regcloud-paused-workflows-${{ github.run_id }}-${{ github.run_attempt }}
+          path: regcloud-paused-workflows.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Reconcile preserved copy and verify every current object
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
@@ -60,6 +76,7 @@ jobs:
             apt-get -o DPkg::Lock::Timeout=120 install -y --no-install-recommends python3-boto3
           fi
           # Use provider-compatible checksum behaviour; TLS validation stays enabled.
+          export REGCLOUD_RECONCILE=1
           export AWS_REQUEST_CHECKSUM_CALCULATION=when_required
           export AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
           timeout --signal=TERM --kill-after=30s 165m /usr/bin/python3 -u "$work_dir/regcloud-copy-s3.py" "$work_dir/config.json"

@@ -61,4 +61,47 @@ class CopyTests(unittest.TestCase):
             def list_objects_v2(self, **kwargs): return {'IsTruncated': True}
         with self.assertRaisesRegex(RuntimeError, 'Incomplete pagination'): m.inventory(BadList(), 'source')
 
+class QuarantineTests(unittest.TestCase):
+    def test_verified_backup_precedes_delete(self):
+        self.run_quarantine(False)
+    def test_corrupt_backup_never_deletes_original(self):
+        self.run_quarantine(True)
+    def run_quarantine(self, corrupt):
+        import builtins
+        key = m.TARGET_PREFIX + 'obsolete'
+        data = b'private document'
+        class Store:
+            deleted = False
+            uploaded = None
+            def get_object(self, **args):
+                payload = data if args['Key'] == key or not corrupt else b'corrupt'
+                return {'Body': io.BytesIO(payload), 'Metadata': {'private': 'yes'}, 'ContentType': 'text/plain'}
+            def upload_file(self, filename, bucket, destination, **args):
+                self.uploaded = (destination, Path(filename).read_bytes(), args['ExtraArgs'])
+            def head_object(self, **args):
+                return {'ETag': '"old"', 'ContentLength': len(data)}
+            def delete_object(self, **args):
+                assert self.uploaded and self.uploaded[1] == data
+                self.deleted = True
+        target = Store()
+        original = tempfile.NamedTemporaryFile
+        with tempfile.TemporaryDirectory() as directory:
+            real_open = builtins.open
+            def journal_open(path, mode):
+                return real_open(Path(directory) / 'recovery.jsonl', mode)
+            with patch.object(m.tempfile, 'NamedTemporaryFile', side_effect=lambda **kw: original(dir=directory)), patch.object(m, 'transfer_config', return_value=None), patch('builtins.open', side_effect=journal_open):
+                if corrupt:
+                    with self.assertRaisesRegex(RuntimeError, 'Quarantine checksum mismatch'):
+                        m.quarantine_extra(target, {'Key': key, 'Size': len(data), 'ETag': '"old"'})
+                    self.assertFalse(target.deleted)
+                else:
+                    self.assertEqual(m.quarantine_extra(target, {'Key': key, 'Size': len(data), 'ETag': '"old"'}), len(data))
+                    self.assertTrue(target.deleted)
+                    self.assertEqual(target.uploaded[2]['Metadata'], {'private': 'yes'})
+                    import json
+                    self.assertEqual(json.loads((Path(directory) / 'recovery.jsonl').read_text())['original'], key)
+    def test_scope_guard(self):
+        with self.assertRaisesRegex(RuntimeError, 'outside staging'):
+            m.quarantine_extra(None, {'Key': 'production/private'})
+
 if __name__ == '__main__': unittest.main()
