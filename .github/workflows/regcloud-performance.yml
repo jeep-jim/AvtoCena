@@ -101,3 +101,15 @@ jobs:
           print('PUBLIC_GATE',json.dumps({'thresholdSeconds':1,'failures':failures}),flush=True)
           if failures:raise SystemExit(1)
           PYTHON
+
+      - name: Exercise published catalog on mobile and desktop
+        if: always()
+        run: |
+          npm install --prefix "$RUNNER_TEMP/catalog-live" --no-package-lock --ignore-scripts playwright@1.55.0
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/catalog-live/node_modules/playwright/index.mjs" CHROME_BIN="$(command -v google-chrome)" node tests/browser/catalog-live-journey.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-final-performance-journey
+          path: artifacts/catalog-live
+          retention-days: 7
