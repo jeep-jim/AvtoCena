@@ -87,7 +87,9 @@ jobs:
           AVTOCENA_RELEASE_SHA: ${{ github.sha }}
         run: |
           node --import tsx --input-type=module <<'WAIT'
-          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const data=await import('./apps/web/lib/data.ts');
+          const getJsonStorage=data.getJsonStorage||data.default?.getJsonStorage;
+          if(typeof getJsonStorage!=='function')throw Error('storage_module_unavailable');
           const storage=getJsonStorage(),deadline=Date.now()+40*60_000;
           for (;;) {
             const lock=await storage.readJson('catalog/import-lock.json',null);
