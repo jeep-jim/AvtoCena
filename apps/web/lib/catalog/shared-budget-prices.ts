@@ -46,7 +46,7 @@ function decodeBudgetSnapshot(value:any):any{
   return JSON.parse(gunzipSync(bytes,{maxOutputLength:MAX_SNAPSHOT_BYTES}).toString('utf8'));
  }catch{return null;}
 }
-const cache=new DetailReadCache<BudgetCountRow[]>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:86400000,concurrency:2});
+const cache=new DetailReadCache<BudgetCountRow[]>({maxEntries:16,maxBytes:128*1024*1024,ttlMs:86400000,concurrency:2});
 export function resetSharedBudgetPriceCache(){cache.clear();}
 
 function validBasis(value:any):boolean {

@@ -557,7 +557,7 @@ const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; 
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
-  maxEntries: 8, maxBytes: 32 * 1024 * 1024,
+  maxEntries: 256, maxBytes: 128 * 1024 * 1024,
   ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
 });
 let projectionCacheGeneration = "";
@@ -1833,7 +1833,7 @@ export async function getOfferWithoutEditorial(id: string) {
   return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
-const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({maxEntries:24,maxBytes:16*1024*1024,ttlMs:300_000,concurrency:6});
+const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
 async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProjection[]){
  // Card blocks retain the existing pricing replay inputs; the small selector never carries photos or ledgers.
  const ordered=[...rows];
@@ -2118,7 +2118,7 @@ async function searchBudgetIndex(params:CatalogSearchParams,internalPageLimit:nu
  const cards=params.budgetFrom || params.budgetTo ? await attachJapanSearchValues(visibleCards,selected.generationId) : visibleCards;
  return {generationId:selected.generationId,total:rows.length,page,pageSize,items:cards.map(publicOfferFromProjection),usedIndexShards:blocks.map(block=>`budget-cards-v${selected.cardVersion}/${block}.json`)};
 }
-const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:7,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:2});
+const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:7,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:2});
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});

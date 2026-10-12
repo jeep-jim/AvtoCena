@@ -258,13 +258,13 @@ async function OfferPageContent({ params, searchParams }: { params: Promise<{ id
     }
     permanentRedirect(canonicalPath + (preserved.size ? `?${preserved}` : ''));
   }
-  const [savedCalculation,clientScenario,currentUser] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser()]);
+  const [savedCalculation,clientScenario,currentUser,display] = await Promise.all([getSavedOfferCalculation(storedOffer),query.calculation ? getSavedOfferCalculation(storedOffer,query.calculation) : Promise.resolve(null),getCurrentUser(),resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '')]);
   const sharedScenario = query.estimate ? await sharedOfferScenario(storedOffer,query.estimate) : null;
   const directScenario = sharedScenario || (clientScenario ? {draft:clientScenario.draft,calculation:clientScenario.calculation} : (query.direct === "novokuznetsk" ? await directOfferScenario(storedOffer) : null));
   const savedByName = isCrmRole(currentUser?.role) && savedCalculation
     ? savedCalculation.savedByName || (await readCrmUsers()).find(user=>user.id===savedCalculation.savedBy)?.displayName || "Сотрудник"
     : undefined;
-  const {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw} = await resolveOfferDisplay(storedOffer,safeRequestedPowerHp,query.modificationId || '');
+  const {offer,sellerPricing,selectionRequired,selectedModification,enrichedOffer,normalizedEnrichedOffer,initialPublic,pricedOffer,raw} = display;
   const sourceUrl = enrichedOffer.market === "japan" && !isGreenCornerOffer(enrichedOffer)
     ? undefined
     : safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
