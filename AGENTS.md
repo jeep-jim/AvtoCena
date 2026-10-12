@@ -39,3 +39,8 @@
 - Keep scheduled required market collectors and the paid China feed. China HTML reserves remain owner-controlled and off by default. No automatic retry loop may restart collection after failure.
 - Preserve functional cache/index preparation on source/release changes and daily date rollover, essential CRM delivery/rates, and bounded retention cleanup. Do not move expensive preparation back into visitor requests by disabling those dependencies. Hourly cache-readiness polling is disabled.
 - Never enable paid Smart Web Security without explicit owner approval. Existing application authentication, publication guards and request validation remain required.
+
+# Owner-authorized GPT completion comments — 12.10.2026
+- When implementing an identified CRM idea at the owner's request, include `ideaReports: [{number, text}]` in that release's `.github/market-runs/regcloud-deploy.json`. Keep the Russian comment brief: what was wrong, what changed, any remaining limitation. No credentials or customer data in this public marker.
+- The production deployment publishes these comments only after its successful activation checks, using the display-only GPT service profile. It does not grant login credentials or CRM permissions. Do not impersonate an employee.
+- Report only verified scope; never mark the whole idea complete when part remains unimplemented. Do not automatically start work on other ideas. Do not reuse a prior release's reports in a new marker.

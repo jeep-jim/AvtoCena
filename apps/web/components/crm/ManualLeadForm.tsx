@@ -4,7 +4,7 @@ import {PhoneInput} from "@/components/leads/PhoneInput";
 import {normalizeRuPhone} from "@/lib/ru-phone";
 
 import { useRouter } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 function offerIdFromInput(value: string) {
   const clean = value.trim();
@@ -14,13 +14,14 @@ function offerIdFromInput(value: string) {
   return clean.replace(/^offer:/i, "").trim();
 }
 
-export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
+export function ManualLeadForm({ headerAside, offices=[] }: { headerAside?: ReactNode; offices?:string[] }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [form, setForm] = useState({
+    office: offices.length===1?offices[0]:"",
     name: "",
     phone: "+7",
     telegram: "", max: "",
@@ -31,6 +32,10 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
     comment: "",
     contactPreference: "call",
   });
+
+  const [existing,setExisting]=useState<{leads:any[];clients:any[]}>({leads:[],clients:[]});
+  const [lookupBusy,setLookupBusy]=useState(false);
+  useEffect(()=>{const phone=normalizeRuPhone(form.phone);setExisting({leads:[],clients:[]});if(!open||!phone){setLookupBusy(false);return;}const abort=new AbortController();setLookupBusy(true);const timer=setTimeout(async()=>{try{const r=await fetch(`/api/crm/leads/lookup?phone=${encodeURIComponent(phone)}`,{signal:abort.signal,cache:'no-store'});if(!r.ok)throw Error();setExisting(await r.json());}catch(e){if(!abort.signal.aborted)setError('Не удалось проверить клиента. При сохранении проверим повторно.');}finally{if(!abort.signal.aborted)setLookupBusy(false);}},300);return()=>{clearTimeout(timer);abort.abort();};},[form.phone,open]);
 
   function field(name: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [name]: value }));
@@ -58,6 +63,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           source: "manual_crm",
+          office: form.office,
           name: form.name.trim(),
           phone: normalizeRuPhone(form.phone) || undefined,
           telegram: form.telegram.trim() || undefined,
@@ -75,9 +81,11 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result?.ok) throw new Error(result?.error || "create_failed");
 
+      if(result.leadId){router.push(`/crm/leads?id=${encodeURIComponent(result.leadId)}&layout=list`);router.refresh();}
       setSuccess(result?.duplicate ? "Такая заявка уже была создана." : "Заявка создана.");
       setForm({
-        name: "",
+        office: offices.length===1?offices[0]:"",
+    name: "",
         phone: "+7",
         telegram: "", max: "",
         city: "",
@@ -91,7 +99,7 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
     } catch (submitError) {
       setError(submitError instanceof Error && submitError.message === "phone_required"
         ? "Для звонка нужен телефон."
-        : "Не удалось создать заявку. Проверьте контакты и ссылку на автомобиль.");
+        : submitError instanceof Error && submitError.message === "existing_lead_restricted" ? "Клиент уже обращался. Попросите руководителя открыть доступ к существующей заявке." : "Не удалось создать заявку. Проверьте контакты и ссылку на автомобиль.");
     } finally {
       setLoading(false);
     }
@@ -119,6 +127,10 @@ export function ManualLeadForm({ headerAside }: { headerAside?: ReactNode }) {
             <div className="mt-1 text-sm font-bold text-white/45">Можно вставить ссылку на карточку АвтоЦены — машина и расчёт подтянутся с сервера автоматически.</div>
           </div>
 
+          {lookupBusy&&<p role="status" className="mb-3">Проверяем клиента…</p>}
+          {!!existing.leads.length&&<div className="mb-4 rounded-xl border border-red-500 p-3"><strong>Клиент уже обращался — продолжите существующую заявку</strong><p>Первое обращение: {new Date(existing.leads[0].createdAt).toLocaleString('ru-RU',{timeZone:'Asia/Novokuznetsk'})} · {existing.leads[0].office||'офис не указан'}</p>{existing.leads.map(l=><a key={l.id} className="mt-2 block underline" href={`/crm/leads?id=${encodeURIComponent(l.id)}&layout=list`}>{l.name||'Клиент'} · {l.car||'Подбор автомобиля'} → Открыть заявку</a>)}</div>}
+          {!existing.leads.length&&!!existing.clients.length&&<p className="mb-3">Клиент уже есть в базе. Новая заявка будет связана с его карточкой.</p>}
+          <label className="mb-3 block">Офис обращения<input list="crm-lead-offices" value={form.office} onChange={e=>field('office',e.target.value)} maxLength={200} placeholder="Например: Планета или Лесная" className="soft-input mt-1 w-full rounded-xl p-3"/><datalist id="crm-lead-offices">{offices.map(o=><option key={o} value={o}/>)}</datalist></label>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             <input value={form.name} onChange={(e) => field("name", e.target.value)} placeholder="Имя клиента *" className="soft-input rounded-xl px-3 py-3 text-sm font-bold" />
             <div className="crm-contact-row md:col-span-2 lg:col-span-3"><PhoneInput value={form.phone} onChange={value => field("phone", value)} />

@@ -1,3 +1,4 @@
+import {GPT_PROFILE} from './crm-gpt-profile';
 import {hasCrmPermission} from './crm-permissions';
 import {maintainIdeas,ideaExpiresAt} from './team-ideas-retention';
 import {defaultManagerAvatar} from './default-avatars';
@@ -52,7 +53,7 @@ export async function updateIdea(user:AuthUser,id:string,action:unknown,value:un
  await mutateDataJson<TeamIdea[]>(IDEAS_PATH,[],rows=>{if(!rows.some(r=>r.id===id&&!r.deletedAt))throw Error('ideas_missing');return rows.map(row=>row.id===id&&!row.deletedAt?changeIdea(row,user,action,value):row);});
 }
 export function publicIdea(row:TeamIdea,user:AuthUser,users:AuthUser[]=[]){
- const person=(id:string,name='Сотрудник',avatar?:string)=>{const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
+ const person=(id:string,name='Сотрудник',avatar?:string)=>{if(id===GPT_PROFILE.id)return {id,name:GPT_PROFILE.displayName,avatar:GPT_PROFILE.avatarUrl};const found=users.find(u=>u.id===id&&u.companyId==='dealer_topavto')||(id===user.id?user:undefined);return {id,name:found?.displayName||name,avatar:found?.avatarUrl||avatar||defaultManagerAvatar(id)};};
  const votes=[...new Set(row.votes)],downvotes=[...new Set(row.downvotes||[])].filter(id=>!votes.includes(id));
  return {...row,comments:(row.comments||[]).map(c=>({...c,author:person(c.authorId,c.authorName,c.authorAvatarUrl)})),canEdit:canEditIdea(row,user),canDelete:canDeleteIdea(user),expiresAt:ideaExpiresAt(row),votes:undefined,downvotes:undefined,author:person(row.authorId,row.authorName,row.authorAvatarUrl),supporters:votes.map(id=>person(id)),opponents:downvotes.map(id=>person(id)),voteCount:votes.length,againstCount:downvotes.length,voted:votes.includes(user.id),choice:votes.includes(user.id)?'for':downvotes.includes(user.id)?'against':null};
 }

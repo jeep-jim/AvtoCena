@@ -116,3 +116,18 @@ test('different cars share one client even on concurrent first submissions',asyn
   assert.equal((await readChunkedDataJson<any>('leads/leads.json',[])).length,2);
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
 });
+
+test('manual phone lookup reuses first application, preserves office and blocks inaccessible duplicates',async()=>{
+ const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,temp=fs.mkdtempSync(path.join(os.tmpdir(),'manual-leads-'));
+ fs.mkdirSync(path.join(temp,'data'));process.chdir(temp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();
+ try{
+  const user:any={id:'manager-first',role:'manager',displayName:'Fixture',companyId:'dealer_topavto'};
+  const submit=async(phone:string,office:string,who=user)=>createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({source:'manual_crm',requestMode:'generic',phone,name:'Fixture',car:'Test car',office,contactPreference:'call'})}),who);
+  const a=await (await submit('+79991112233','Первый офис')).json();assert.equal(a.ok,true);
+  const b=await (await submit('89991112233','Второй офис')).json();assert.equal(b.leadId,a.leadId);assert.equal(b.duplicate,true);
+  assert.equal((await readChunkedDataJson<any>('leads/leads.json',[]))[0].createdOffice,'Первый офис');
+  const denied=await submit('+79991112233','Другой офис',{...user,id:'other'});assert.equal(denied.status,409);assert.equal((await denied.json()).leadId,undefined);
+  const [x,y]=await Promise.all([submit('+79992223344','Офис'),submit('+79992223344','Офис')]);assert.equal((await x.json()).leadId,(await y.json()).leadId);
+  assert.equal((await readChunkedDataJson<any>('leads/leads.json',[])).length,2);assert.equal((await readChunkedDataJson<any>('clients/clients.json',[])).length,2);
+ }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
+});

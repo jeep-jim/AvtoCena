@@ -1,3 +1,5 @@
+import {canSeeLead} from "./crm-visibility";
+import {leadDealerId} from "./dealers/lead-routing";
 import {crmCustomerKey} from "./crm-customer-group";
 import {linksPath,clientsPath,type ClientLink} from './account/portal';
 import type {CustomerAccount} from './account/auth';
@@ -343,6 +345,11 @@ export async function createLead(
     [],
   );
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
+  if(crmUser && normalizeRuPhone(phone)) {
+    const prior=existingLeads.filter(l=>leadDealerId(l)===leadDealerId(requestedDealer)&&normalizeRuPhone(l.phone||'')===normalizeRuPhone(phone)).sort((a,b)=>String(a.createdAt).localeCompare(String(b.createdAt)))[0];
+    if(prior){if(!canSeeLead(crmUser,prior))return NextResponse.json({ok:false,error:"existing_lead_restricted"},{status:409});return NextResponse.json({ok:true,duplicate:true,leadId:prior.id,clientId:prior.clientId});}
+    leadId=`lead_manual_${crypto.createHash("sha256").update(`${leadDealerId(requestedDealer)}:${normalizeRuPhone(phone)}`).digest("hex")}`;
+  }
   const token = clean(body.submissionThreadToken, 100);
   const identity = customerAccount ? `customer:${customerAccount.id}` : currentUser && !crmUser ? `user:${currentUser.id}` : /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(token) ? `browser:${token}` : "";
   const threadKey = !crmUser && !trustedTelegramId && identity && primaryOfferId && selectedOfferIds.length === 1
@@ -360,7 +367,7 @@ export async function createLead(
       )
     : null;
   const customerKey = crmCustomerKey({...requestedDealer, phone, ...(customerAccount ? {portalAccountId:customerAccount.id} : {})});
-  const matchingClient = existingClients.filter(client => crmCustomerKey(client) === customerKey)
+  const matchingClient = existingClients.filter(client => crmCustomerKey(client) === customerKey || Boolean(crmUser && normalizeRuPhone(phone) && leadDealerId(client)===leadDealerId(requestedDealer) && normalizeRuPhone(client.phone||"")===normalizeRuPhone(phone)))
     .sort((a,b) => String(a.createdAt).localeCompare(String(b.createdAt)))[0];
   // Stable identity also prevents two concurrent submissions for different cars creating clients.
   if (existingClients.some(client => client.id === clientId)) { /* Keep the existing thread when its contact changes. */ }
@@ -422,6 +429,7 @@ export async function createLead(
     submissionChannel,
     partnerRef: attribution.partnerRef,
     attribution,
+    createdOffice: crmUser ? clean(body.office,200) : undefined,
     createdByManagerId,
     assignedManagerId,
     selectedOfferIds: selectedOfferSnapshots.map((item) => item.id),
@@ -532,6 +540,7 @@ export async function createLead(
       referrer,
       offerId: primaryOfferId,
     },
+    createdOffice: crmUser ? clean(body.office,200) : undefined,
     createdByManagerId,
     assignedManagerId,
     configVersion: businessSettingsSnapshot?.configVersion || "",
@@ -549,6 +558,7 @@ export async function createLead(
     telegramDeliveryStatus: "",
   };
   let lead: any = duplicate || (await appendChunkedDataJson("leads/leads.json", leadPayload));
+  if(crmUser && lead.operationId!==operationId){if(!canSeeLead(crmUser,lead))return NextResponse.json({ok:false,error:"existing_lead_restricted"},{status:409});return NextResponse.json({ok:true,duplicate:true,leadId:lead.id,clientId:lead.clientId});}
   const followup = Boolean(threadKey && lead.operationId !== operationId);
   if (followup && !duplicate) {
     lead = await updateChunkedDataJson<any>("leads/leads.json", lead.id, stored => {

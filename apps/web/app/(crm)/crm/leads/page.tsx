@@ -1,3 +1,5 @@
+import {LeadBoard} from "@/components/crm/LeadBoard";
+import {LeadNotes} from "@/components/crm/LeadNotes";
 import {groupCrmLeads} from "@/lib/crm-customer-group";
 import {clientRegistrationAvatars} from "@/lib/account/crm-registration";
 import {leadDealerId} from '@/lib/dealers/lead-routing';
@@ -120,6 +122,8 @@ export default async function CrmLeadsPage({
   const visibleGroups = id
     ? groupCrmLeads(stored.filter(lead => lead.id === id && canSeeLead(user,lead)), clients)
     : groups.slice(0, 100);
+  const board = !id && first(params.layout) !== "list" && view !== "archive";
+  const layoutHref=(layout:string)=>`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),layout})}`;
   const visible = visibleGroups.flat();
   const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
   const registrationAvatars=await clientRegistrationAvatars(clients.filter(client=>visibleClientIds.has(client.id)&&canSeeLead(user,client)));
@@ -153,6 +157,7 @@ export default async function CrmLeadsPage({
       </div>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
+        <input type="hidden" name="layout" value={board?"board":"list"} />
         {view==='dealers'&&<select name="dealer" aria-label="Фильтр дилера" defaultValue={dealerFilter} className="soft-input rounded-xl p-3"><option value="">Все дилеры</option>{Array.from(new Map(stored.filter(l=>canSeeLead(user,l)&&leadDealerId(l)!=='dealer_topavto').map(l=>[leadDealerId(l),l.requestedDealerName||leadDealerId(l)])).entries()).map(([id,name])=><option key={id} value={id}>{String(name)}</option>)}</select>}
         <input type="hidden" name="date" value={first(params.date)} />
         <input
@@ -202,7 +207,8 @@ export default async function CrmLeadsPage({
           Сбросить фильтры
         </Link>
       </div>
-      <ManualLeadForm headerAside={
+      <div className="mb-4 flex gap-2" aria-label="Вид заявок">{[["board","По этапам"],["list","Списком"]].map(([key,label])=><Link key={key} href={layoutHref(key)} className={`rounded-xl px-4 py-2 font-bold ${(board?"board":"list")===key?"bg-red-500 text-white":"border border-[var(--ac-border)]"}`}>{label}</Link>)}</div>
+      <ManualLeadForm offices={user.workAddresses||[]} headerAside={
         <div className="crm-lead-toolbar-aside">
           <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
             <strong>Статусы для Метрики</strong><LeadStatusHelp />
@@ -210,7 +216,8 @@ export default async function CrmLeadsPage({
       <LeadDateFilter date={first(params.date)} filters={Object.fromEntries(["view","q","status","manager","dealer"].map(key=>[key,first(params[key])]))} />
         </div>
       } />
-      <div className="mt-4 space-y-3">
+      {board&&<><p className="mb-3 text-sm text-[var(--ac-muted)]">Клиенты сгруппированы по этапу последней заявки. Все автомобили и их статусы видны в карточке.</p><LeadBoard groups={visibleGroups} managers={managers}/></>}
+      <div className={`mt-4 space-y-3${board?" hidden":""}`}>
         {visibleGroups.map(group => <section key={group[0].id} aria-label="Заявки клиента" className={group.length > 1 ? "overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]" : ""}>
           {group.length > 1 && <div className="flex flex-wrap items-center justify-between gap-3 p-4">
             <div className="min-w-0"><strong>{group[0].name || group[0].telegramDisplayName || "Клиент"}</strong><div className="mt-1 text-sm text-[var(--ac-muted)]"><LeadContact lead={group[0]} /></div></div>
@@ -299,6 +306,8 @@ export default async function CrmLeadsPage({
                   <section className="crm-lead-detail-info">
                     <LeadReadStatus leadId={lead.id} userId={user.id} eventKey={leadReadState(lead,user.id).eventKey} initialReceipts={lead.readReceipts||[]} />
                     <h2 className="mb-3 font-black">Автомобиль и контакты</h2>
+                    <p className="mb-3 text-sm">Офис первого обращения: {lead.createdOffice||"не указан"}</p>
+                    <LeadNotes leadId={lead.id} clientNotes={lead.clientNotes||""} vehicleNotes={lead.vehicleNotes||""} canEdit={hasCrmPermission(user,"editLeads")}/>
                     <div className="grid gap-3">
                       {cars.map((offer: any, index: number) => (
                         <div

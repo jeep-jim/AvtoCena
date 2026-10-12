@@ -29,6 +29,7 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
   if (["owner", "admin", "manager"].includes(user.role)) links.push(["/crm/documents", "Документы"]);
   if (hasCrmPermission(user,"site")) links.push(["/crm/site", "Сайт"]);
   if (hasCrmPermission(user,"catalog")) links.push(["/crm/catalog", "Каталог и архив"]);
+  links.push(["/crm/tasks", "Задачи"]);
   links.push(["/crm/reviews", "Отзывы"]);
   links.push(["/crm/ideas", "Идеи"]);
   const gates:Record<string,CrmPermission>={"/crm/catalog":"catalog","/crm/chat":"chat","/crm/game":"game","/crm/site":"site","/crm/settings":"settings","/crm/dealers":"dealers","/crm/telegram":"settings","/crm/documents":"documents","/crm/partners":"settings"};
