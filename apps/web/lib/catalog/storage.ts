@@ -559,7 +559,7 @@ const searchProjectionCache = new DetailReadCache<{ generationId: string; items:
 });
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
 const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
-const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 // A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
 // Keys include the verified generation, so immutable brand rows can outlive a minute.
 const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
@@ -629,20 +629,21 @@ async function readCurrentSearchProjection(market: string) {
   for (const [id, entry] of currentProjectionCache) {
     if (entry.expiresAt <= now || entry.generationId !== generationId) currentProjectionCache.delete(id);
   }
+  const current = currentProjectionCache.get(key);
+  if (current) return current.promise;
   // Once the full projection is loaded, markets share its records instead of
   // downloading and retaining a second complete copy of the same catalog.
   if (key !== CURRENT_ALL_MARKETS_PROJECTION) {
     const all = currentProjectionCache.get(CURRENT_ALL_MARKETS_PROJECTION);
-    if (all) {
-      const projection = await all.promise.catch(() => null);
-      if (projection?.generationId) return {
+    // A pending all-market download must not hold up an independent market.
+    if (all?.value) {
+      const projection = all.value;
+      if (projection.generationId === generationId) return {
         generationId: projection.generationId,
         items: (projection.items || []).filter(item => item.market === market),
       };
     }
   }
-  const current = currentProjectionCache.get(key);
-  if (current) return current.promise;
   const promise = (async () => {
     // Facets are staged before large aliases. Avoid downloading another generation
     // only to discard it and download every active market as well.
@@ -652,6 +653,7 @@ async function readCurrentSearchProjection(market: string) {
   })().then(value => {
       const entry = currentProjectionCache.get(key);
       if (entry?.promise === promise) {
+        entry.value = value;
         entry.expiresAt = Date.now() + CURRENT_PROJECTION_CACHE_MS;
         if (value.generationId !== generationId) currentProjectionCache.delete(key);
         if (key === CURRENT_ALL_MARKETS_PROJECTION && value.generationId) {
