@@ -69,7 +69,14 @@ PY
 switched=1
 nginx -t
 systemctl reload nginx
-curl -fsS --max-time 10 --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health | python3 -c 'import json,sys; assert json.load(sys.stdin)["ok"]'
+# Nginx reload is asynchronous. Confirm the new upstream through fresh connections.
+ready=0
+for attempt in 1 2 3; do
+ if curl -fsS --max-time 15 -H 'Connection: close' --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health | python3 -c 'import json,sys; assert json.load(sys.stdin)["ok"]'; then ready=1; break; fi
+ curl -sS --max-time 15 -o /dev/null -w 'Candidate direct health after reload: %{http_code} %{time_total}\n' http://127.0.0.1:3001/api/health || true
+ sleep 1
+done
+test "$ready" = 1
 docker stop --time 30 "$old" >/dev/null
 docker rename "$old" "$backup"
 docker rename "$candidate" "$old"
