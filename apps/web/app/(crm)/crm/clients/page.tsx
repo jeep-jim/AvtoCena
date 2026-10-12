@@ -1,3 +1,4 @@
+import {crmCustomerKey} from "@/lib/crm-customer-group";
 import {canReadRegisteredCustomers} from '@/lib/account/crm-accounts';
 import {clientRegistrationAvatars} from "@/lib/account/crm-registration";
 import {hasCrmPermission} from "@/lib/crm-permissions";
@@ -25,11 +26,13 @@ export default async function CrmClientsPage({searchParams}: {searchParams?: Pro
   const managerId = String(Array.isArray(params.manager) ? params.manager[0] : params.manager || "");
   const query = q.toLocaleLowerCase("ru");
   const [stored, managers] = await Promise.all([readChunkedDataJson<any>("clients/clients.json", []), readCrmUsers()]);
-  const clients = stored.filter(client => canSeeLead(user,client)).filter(client => !managerId || clientManagerId(client) === managerId).filter(client => {
+  const matchingClients = stored.filter(client => canSeeLead(user,client)).filter(client => !managerId || clientManagerId(client) === managerId).filter(client => {
     const text = [client.fio,client.phone,client.telegram,client.max,client.city,client.comment].filter(Boolean).join(" ").toLocaleLowerCase("ru");
     const phoneQuery = q.replace(/\D/g, "");
     return !query || text.includes(query) || (/^[+\d\s()-]+$/.test(q) && phoneQuery.length >= 3 && String(client.phone||"").replace(/\D/g, "").includes(phoneQuery));
   }).sort((a,b) => String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+  const clients = [...new Map([...matchingClients].reverse().map(client => [crmCustomerKey(client), client])).values()]
+    .sort((a,b) => String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
   const registrationAvatars=await clientRegistrationAvatars(clients);
   return <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Клиентская база, контакты, документы и история обращений.">
     {canReadRegisteredCustomers(user)&&<nav className="mb-5 flex flex-wrap gap-3"><Link href="/crm/clients" aria-current="page" className="avto-button rounded-xl px-4 py-2">Клиентская база</Link><Link href="/crm/clients/registered" className="rounded-xl border border-[var(--ac-border)] px-4 py-2">Зарегистрированные</Link><Link href="/crm/clients/recovery" className="rounded-xl border border-[var(--ac-border)] px-4 py-2">Восстановление доступа</Link></nav>}

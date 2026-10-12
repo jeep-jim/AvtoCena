@@ -101,3 +101,18 @@ test('customer sessions isolate same-phone submissions and link only their own n
   await assert.rejects(linkedClient(a,pb[0].key));
  }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
 });
+
+test('different cars share one client even on concurrent first submissions',async()=>{
+ const cwd=process.cwd(),driver=process.env.JSON_STORAGE_DRIVER,temp=fs.mkdtempSync(path.join(os.tmpdir(),'customer-cars-'));
+ fs.mkdirSync(path.join(temp,'data'));process.chdir(temp);process.env.JSON_STORAGE_DRIVER='local';resetJsonStorageForTests();
+ try {
+  const submit=async(offerId:string)=>{
+   const response=await createLead(new Request('https://avtocena.com/api/leads',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({requestMode:'offer',offerId,operationId:offerId,phone:'+79991112233',name:'Fixture',personalDataConsent:true,personalDataConsentVersion:'lead-consent-2026-10-03-v2'})}));
+   assert.equal(response.status,200);return response.json();
+  };
+  const [a,b]=await Promise.all([submit('fixture-a'),submit('fixture-b')]);
+  assert.equal(a.clientId,b.clientId);assert.notEqual(a.leadId,b.leadId);
+  assert.equal((await readChunkedDataJson<any>('clients/clients.json',[])).length,1);
+  assert.equal((await readChunkedDataJson<any>('leads/leads.json',[])).length,2);
+ }finally{process.chdir(cwd);if(driver===undefined)delete process.env.JSON_STORAGE_DRIVER;else process.env.JSON_STORAGE_DRIVER=driver;resetJsonStorageForTests();fs.rmSync(temp,{recursive:true,force:true});}
+});

@@ -1,3 +1,4 @@
+import {groupCrmLeads} from "@/lib/crm-customer-group";
 import {clientRegistrationAvatars} from "@/lib/account/crm-registration";
 import {leadDealerId} from '@/lib/dealers/lead-routing';
 import {isPlatformOwner} from '@/lib/platform-access';
@@ -115,9 +116,11 @@ export default async function CrmLeadsPage({
     date: first(params.date),
   }).filter(lead=>view==='dealers'?leadDealerId(lead)!=='dealer_topavto'&&(!dealerFilter||leadDealerId(lead)===dealerFilter):view==='archive'||leadDealerId(lead)==='dealer_topavto').sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const id = first(params.id);
-  const visible = id
-    ? stored.filter((lead) => lead.id === id && canSeeLead(user,lead))
-    : leads.slice(0, 100);
+  const groups = groupCrmLeads(leads, clients);
+  const visibleGroups = id
+    ? groupCrmLeads(stored.filter(lead => lead.id === id && canSeeLead(user,lead)), clients)
+    : groups.slice(0, 100);
+  const visible = visibleGroups.flat();
   const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
   const registrationAvatars=await clientRegistrationAvatars(clients.filter(client=>visibleClientIds.has(client.id)&&canSeeLead(user,client)));
   const trashClients=view==="archive"?(await readChunkedDataJson<any>("clients/clients.json",[])).filter(client=>canSeeLead(user,client)):[];
@@ -192,8 +195,8 @@ export default async function CrmLeadsPage({
       </form>
       <div className="mb-4 flex items-center justify-between gap-3">
         <span className="text-sm text-[var(--ac-muted)]">
-          Найдено: {leads.length}
-          {leads.length > 100 ? " · показаны первые 100, уточните поиск" : ""}
+          Клиентов: {groups.length} · Заявок: {leads.length}
+          {groups.length > 100 ? " · показаны первые 100, уточните поиск" : ""}
         </span>
         <Link href={`/crm/leads?view=${view}`} className="text-sm underline">
           Сбросить фильтры
@@ -208,7 +211,13 @@ export default async function CrmLeadsPage({
         </div>
       } />
       <div className="mt-4 space-y-3">
-        {visible.map((lead) => {
+        {visibleGroups.map(group => <details key={group[0].id} open={Boolean(id)} className="overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]">
+          <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-3 p-4">
+            <div className="min-w-0"><strong>{group[0].name || group[0].telegramDisplayName || "Клиент"}</strong><div className="mt-1 text-sm text-[var(--ac-muted)]"><LeadContact lead={group[0]} /></div></div>
+            <div className="min-w-0 flex-1 px-3 text-sm">{Array.from(new Set(group.map(lead => offers(lead)[0]?.title || lead.car || "Подбор автомобиля"))).join(" · ")}</div>
+            <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block text-red-500">Заявок: {group.length} · Открыть ↓</strong></div>
+          </summary>
+          <div className="space-y-3 border-t border-[var(--ac-border)] p-3">{group.map((lead) => {
           const priorClient = previousManualClient(lead);
           const cars = offers(lead);
           const car = cars[0];
@@ -427,7 +436,7 @@ export default async function CrmLeadsPage({
               </div>
             </details>
           );
-        })}
+        })}</div></details>)}
         {!visible.length && (
           <div className="rounded-2xl border border-[var(--ac-border)] p-8 text-center text-[var(--ac-muted)]">
             Заявок по этим условиям нет.

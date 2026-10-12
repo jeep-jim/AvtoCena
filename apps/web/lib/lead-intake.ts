@@ -1,3 +1,4 @@
+import {crmCustomerKey} from "./crm-customer-group";
 import {linksPath,clientsPath,type ClientLink} from './account/portal';
 import type {CustomerAccount} from './account/auth';
 import {mutateDataJson as mutateAccountLinks} from './data';
@@ -358,6 +359,13 @@ export async function createLead(
         (lead) => lead.operationId === operationId || lead.followups?.some((entry: any) => entry.operationId === operationId),
       )
     : null;
+  const customerKey = crmCustomerKey({...requestedDealer, phone, ...(customerAccount ? {portalAccountId:customerAccount.id} : {})});
+  const matchingClient = existingClients.filter(client => crmCustomerKey(client) === customerKey)
+    .sort((a,b) => String(a.createdAt).localeCompare(String(b.createdAt)))[0];
+  // Stable identity also prevents two concurrent submissions for different cars creating clients.
+  if (existingClients.some(client => client.id === clientId)) { /* Keep the existing thread when its contact changes. */ }
+  else if (matchingClient) clientId = matchingClient.id;
+  else if (customerAccount || normalizeRuPhone(phone)) clientId = `client_person_${crypto.createHash("sha256").update(customerKey).digest("hex")}`;
   const existingClient = operationId
     ? existingClients.find(
         (client) =>
