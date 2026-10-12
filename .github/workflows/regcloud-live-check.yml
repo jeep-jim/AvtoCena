@@ -29,8 +29,15 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
+          uptime
+          free -m
+          df -h /
+          docker top avtocena-production -eo pid,pcpu,pmem,rss,comm
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          for path in /api/health /login / /cars; do
+            curl --silent --show-error --max-time 60 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" "http://127.0.0.1:3000$path" || true
+          done
           systemctl is-active nginx
           systemctl is-active certbot.timer
           openssl x509 -in /etc/letsencrypt/live/avtocena.com/cert.pem -noout -dates -issuer -ext subjectAltName
