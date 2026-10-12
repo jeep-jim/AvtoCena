@@ -86,6 +86,19 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=6144
           AVTOCENA_RELEASE_SHA: ${{ github.sha }}
         run: |
+          node --import tsx --input-type=module <<'WAIT'
+          import {getJsonStorage} from './apps/web/lib/data.ts';
+          const storage=getJsonStorage(),deadline=Date.now()+40*60_000;
+          for (;;) {
+            const lock=await storage.readJson('catalog/import-lock.json',null);
+            const until=lock?.lockedUntil?Date.parse(lock.lockedUntil):0;
+            if (!Number.isFinite(until)) throw Error('publication_lock_invalid');
+            if (until<=Date.now()) break;
+            console.log('WAIT_FOR_PUBLICATION',JSON.stringify({operationType:lock.operationType,lockedUntil:lock.lockedUntil}));
+            if (Date.now()>=deadline) throw Error('publication_wait_deadline');
+            await new Promise(resolve=>setTimeout(resolve,30_000));
+          }
+          WAIT
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
           npx tsx scripts/regcloud-prepare-prices.mjs
       - name: Deploy with rollback and resource measurements
