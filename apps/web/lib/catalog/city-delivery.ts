@@ -61,7 +61,7 @@ export function normalizeDeliveryCity(value: unknown): string {
 export function quoteCityDelivery(value: unknown, market?: string) {
  const city = normalizeDeliveryCity(value);
  const entry = market && Object.hasOwn(origins,market) ? origins[market] : undefined;
- const base = {version:DELIVERY_TARIFF_VERSION,origin:entry?.city || "Владивосток",city,amountRub:0,distanceKm:null as number|null,estimated:true};
+ const base = {version:DELIVERY_TARIFF_VERSION,origin:market === "china" ? "Уссурийск" : entry?.city || "Владивосток",city,amountRub:0,distanceKm:null as number|null,estimated:true};
  if (!city) return {...base,status:"not_selected" as const};
  if (market && !["japan","china","korea","georgia","uae","europe"].includes(market)) return {...base,status:"needs_quote" as const};
  const key = city.toLocaleLowerCase("ru-RU").replace(/ё/g,"е");

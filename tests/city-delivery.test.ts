@@ -39,10 +39,10 @@ test('API parameters retain city but cannot inject a delivery amount',()=>{
  assert.equal((result as any).cityDeliveryRub,undefined);
 });
 
-test('Ussuriysk delivery from Vladivostok reaches the calculation and clears without doubling',()=>{
+test('Ussuriysk delivery preserves tariffs with market-specific origin labels',()=>{
  for(const market of ['korea','china','japan']) {
   const quote=quoteCityDelivery(' г. Уссурийск ',market);
-  assert.equal(quote.status,'estimated');assert.equal(quote.origin,'Владивосток');
+  assert.equal(quote.status,'estimated');assert.equal(quote.origin,market === 'china' ? 'Уссурийск' : 'Владивосток');
   assert.equal(quote.amountRub,15000);assert.match(deliveryDescription(quote),/15\s000/);
  }
  const config=resolveCatalogMarketConfig('korea',{percentExpenses:[]}).config;
@@ -87,7 +87,7 @@ test('each western market starts at its own entry city and retains the same tari
 
 
 test('Gorno-Altaysk uses the existing kilometre formula for all six markets',()=>{
- for(const [market,origin,distance,amount] of [['japan','Владивосток',6100,130000],['china','Владивосток',6100,130000],['korea','Владивосток',6100,130000],['georgia','Минеральные Воды',4300,95000],['uae','Астрахань',4100,90000],['europe','Санкт-Петербург',4400,95000]] as const){
+ for(const [market,origin,distance,amount] of [['japan','Владивосток',6100,130000],['china','Уссурийск',6100,130000],['korea','Владивосток',6100,130000],['georgia','Минеральные Воды',4300,95000],['uae','Астрахань',4100,90000],['europe','Санкт-Петербург',4400,95000]] as const){
   const q=quoteCityDelivery(' г. Горно-Алтайск ',market);
   assert.equal(q.status,'estimated');assert.equal(q.origin,origin);assert.equal(q.distanceKm,distance);assert.equal(q.amountRub,amount);
   const config=resolveCatalogMarketConfig(market,{percentExpenses:[]}).config;
