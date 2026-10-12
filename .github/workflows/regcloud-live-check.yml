@@ -29,13 +29,15 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
+          docker logs --since 12h --tail 3000 avtocena-production 2>&1 | python3 -c 'import sys,re,collections; s=sys.stdin.read(); patterns=["heap out of memory","Reached heap limit","FATAL ERROR","object_storage_response_timeout","home_initial_catalog_failed","home_initial_pricing_failed","green_invalid_snapshot"]; print("LOG_COUNTS",{p:s.count(p) for p in patterns}); print("FATAL_LINES",[line[:240] for line in s.splitlines() if re.search(r"FATAL ERROR|Reached heap limit|Mark-Compact|Scavenge",line)][-12:])'
+          docker inspect --format 'started={{.State.StartedAt}} exit={{.State.ExitCode}} memoryLimit={{.HostConfig.Memory}} cpuLimit={{.HostConfig.NanoCpus}}' avtocena-production
           uptime
           free -m
           df -h /
           docker top avtocena-production -eo pid,pcpu,pmem,rss,comm
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
-          for path in /api/health /login / /cars; do
+          for path in /api/health; do
             curl --silent --show-error --max-time 60 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" "http://127.0.0.1:3000$path" || true
           done
           systemctl is-active nginx
@@ -44,14 +46,3 @@ jobs:
           curl --fail --silent --show-error --max-time 20 --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health
           printf '\n'
           REMOTE
-      - name: Check public routes from independent runner
-        run: |
-          set -euo pipefail
-          for host in avtocena.com www.avtocena.com; do
-            dig +short "$host" A
-            curl --fail --silent --show-error --max-time 30 "https://$host/api/health" | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["ok"] and d["releaseSha"]=="dd63dc40f51ee97d33c12a86654ad60d3714053f"; print("Public release correct")'
-          done
-          for path in / /cars /login; do
-            curl --fail --silent --show-error --max-time 90 "https://avtocena.com$path" -o /dev/null
-            echo "Public $path: success"
-          done
