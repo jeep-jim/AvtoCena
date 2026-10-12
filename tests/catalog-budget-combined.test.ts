@@ -56,6 +56,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
    const [count,facets,brands]=await Promise.all([countCatalogOffers(params),readCatalogFacets(params),readCatalogBrandCounts(params)]);
    assert.deepEqual(brands.counts,rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length?{Hyundai:rows.map(row=>applyDepositToProjection(row,110000)).filter(row=>catalogSearchProjectionMatches(row,params)).length}:{});
    assert.equal(count.total,expected.length);assert.deepEqual(facets.makes,expected.length?['Hyundai']:[]);
+   assert.deepEqual(await readCatalogFacets({...params,sort:'totalRubDesc',page:3,pageSize:1}),facets,'sort and page cannot alter filter choices');
    assert.equal(reads.some(key=>key.includes('budget-cards-v2')),false,'ordinary filter counts never load card blocks');
    const result=await searchOffers(params);
    assert.deepEqual(result.items.map(row=>row.id).sort(),expected);

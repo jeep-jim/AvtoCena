@@ -1183,13 +1183,21 @@ function withEditorialFacetOptions(facets:CatalogFacets,market?:string):CatalogF
  const values=(field:'bodyType'|'drive'|'transmission',existing:string[])=>uniqueText([...existing,...entries.map(entry=>entry.specifications?.[field])]).sort();
  return {...facets,bodyTypes:values('bodyType',facets.bodyTypes),drives:values('drive',facets.drives),transmissions:values('transmission',facets.transmissions)};
 }
-async function readCatalogFacetsEditorial(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
+let budgetFacetCache=new WeakMap<BudgetCountIndex["rows"],CatalogFacets>();
+async function readCatalogFacetsEditorial(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  // Ordering and pagination cannot change available filter values. In particular,
+  // a sort-only request should reuse the prepared market facets.
+  const {sort:_sort,page:_page,pageSize:_pageSize,...params}=input;
   const budget=await readBudgetSelection(params);
   if(budget){
+    const cached=budgetFacetCache.get(budget.rows);
+    if(cached)return cached;
     const rows=budget.rows.map(row=>row[5]);
     const values=(key:keyof typeof rows[number])=>uniqueText(rows.map(row=>row[key])).sort((a,b)=>a.localeCompare(b,"ru"));
     const models=[...new Map(rows.map(row=>[`${cleanFacet(row.make)}:${cleanFacet(row.model)}`,{make:cleanFacet(row.make),model:cleanFacet(row.model)}])).values()].filter(row=>row.make&&row.model).sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,"ru"));
-    return {generationId:budget.generationId,makes:values("make"),models,markets:[...PUBLIC_CATALOG_MARKETS],bodyTypes:values("bodyType"),fuels:values("fuel"),transmissions:values("transmission"),drives:values("drive")};
+    const facets={generationId:budget.generationId,makes:values("make"),models,markets:[...PUBLIC_CATALOG_MARKETS],bodyTypes:values("bodyType"),fuels:values("fuel"),transmissions:values("transmission"),drives:values("drive")};
+    budgetFacetCache.set(budget.rows,facets);
+    return facets;
   }
   const landing = await readMarketLanding(params);
   if (landing) return withEditorialFacetOptions(landing.facets,params.market);
@@ -1968,7 +1976,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  }
  return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}`,load);
 }
-const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:32*1024*1024,ttlMs:30_000,concurrency:4});
+const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
  const metadataFields=['make','model','yearFrom','yearTo','mileageFrom','mileageTo','fuel','bodyType','transmission','drive','powerFrom','powerTo','engineFrom','engineTo'];
@@ -2130,7 +2138,7 @@ async function searchSortedBudgetSelection(selected:CompactSelection,params:Cata
  const pageSize=Math.min(Math.max(1,Math.min(384,internalPageLimit)),Math.max(1,Number(params.pageSize||24)));
  const visible=Array.from(order.slice((page-1)*pageSize,page*pageSize),position=>selected.rows[position][5]);
  const blocks=[...new Set(visible.map(row=>row.block))];
- const parts=await mapWithConcurrency(blocks,2,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
+ const parts=await mapWithConcurrency(blocks,6,block=>budgetCardCache.get(`${selected.generationId}:v${selected.cardVersion}:${block}`,()=>readIndex(selected.generationId,`budget-cards-v${selected.cardVersion}/${block}.json`,{generationId:"",items:[] as CatalogSearchProjection[]})));
  if(parts.some(part=>part.generationId!==selected.generationId))return null;
  const byId=new Map(parts.flatMap(part=>part.items).map(row=>[row.id,row]));
  if(visible.some(row=>!byId.has(row.id)))return null;
