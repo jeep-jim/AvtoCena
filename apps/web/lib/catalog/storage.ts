@@ -610,6 +610,7 @@ export function resetCatalogReadCachesForTests() {
   searchProjectionCache.clear();
   currentProjectionCache.clear();
   currentBrandProjectionCache.clear();
+  sharedProjectionBrands = new WeakMap();
   currentFacetsCache = null;
   currentBrandSummaryCache = null;
   currentOfferShardCache.clear();
@@ -681,7 +682,25 @@ async function readCurrentSearchProjection(market: string) {
   }
   return promise;
 }
+let sharedProjectionBrands = new WeakMap<object, Map<string, CatalogSearchProjection[]>>();
 async function readCurrentBrandProjection(make: string, generationId: string) {
+  // Reuse a complete, fresh snapshot already resident in this process. Do not
+  // await a pending all-market read or reuse rows across a publication cutover.
+  const all = currentProjectionCache.get(CURRENT_ALL_MARKETS_PROJECTION);
+  if (all?.value?.generationId === generationId && all.expiresAt > Date.now()) {
+    let brands = sharedProjectionBrands.get(all.value);
+    if (!brands) {
+      brands = new Map();
+      for (const row of all.value.items || []) {
+        const brand = catalogBrandReadModelKey(row.make);
+        const rows = brands.get(brand);
+        if (rows) rows.push(row);
+        else brands.set(brand, [row]);
+      }
+      sharedProjectionBrands.set(all.value, brands);
+    }
+    return {generationId, items: brands.get(catalogBrandReadModelKey(make)) || []};
+  }
   const key = currentBrandProjectionPath(make);
   return currentBrandProjectionCache.get(`${generationId}:${key}`, async () => {
     // Read the manifest-pinned object first. A staged public alias may already

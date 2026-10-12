@@ -145,19 +145,24 @@ export async function readObjectStorageResponseBody(
     }, Math.max(1, timeoutMs));
   });
   try {
-    const chunks: Uint8Array[] = [];
-    let total = 0;
-    while (true) {
-      const { done, value } = await Promise.race([reader.read(), deadline]);
-      if (done) {
-        if (timedOut) throw new Error("object_storage_response_timeout");
-        break;
+    // Race the entire transfer once. Racing the same pending deadline for every
+    // chunk retained one reaction per chunk until completion of a large object.
+    const consume = async () => {
+      const chunks: Uint8Array[] = [];
+      let total = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          if (timedOut) throw new Error("object_storage_response_timeout");
+          break;
+        }
+        if (!value?.byteLength) continue;
+        chunks.push(value);
+        total += value.byteLength;
       }
-      if (!value?.byteLength) continue;
-      chunks.push(value);
-      total += value.byteLength;
-    }
-    return Buffer.concat(chunks, total);
+      return Buffer.concat(chunks, total);
+    };
+    return await Promise.race([consume(), deadline]);
   } finally {
     if (timeout) clearTimeout(timeout);
     reader.releaseLock();

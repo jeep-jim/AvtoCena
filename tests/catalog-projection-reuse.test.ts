@@ -93,3 +93,31 @@ test('cached admission is rechecked after Krasnoyarsk midnight',t=>{
  t.mock.timers.tick(2000);
  assert.equal(prepareCatalogProjectionRows([input]).length,0);
 });
+
+
+test('brand searches reuse a warm full snapshot without downloading duplicate brand files',async(t)=>{
+ resetCatalogReadCachesForTests();
+ let generationId='shared-brands';let now=Date.now();const brandReads:string[]=[];
+ t.mock.method(Date,'now',()=>now);
+ t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string)=>{
+  if(file==='catalog-editorial/current.json')return {found:false,value:{revision:'0',entries:{}}};
+  if(file==='catalog/manifest.json')return {found:true,value:{generationId,markets:{korea:{count:1}}}};
+  if(file==='catalog/public/facets.json')return {found:false,value:{generationId:''}};
+  if(file==='catalog/public/projection/all.json')return {found:true,value:{generationId,items:[{...row(),bodyType:'sedan'}]}};
+  if(file.includes('/projection-brand/')) {
+   brandReads.push(file);
+   return {found:true,value:{generationId,items:[{...row(),id:'updated',bodyType:'sedan'}]}};
+  }
+  throw Error(`Unexpected read: ${file}`);
+ });
+ try {
+  await readCatalogFacets({bodyType:'sedan'});
+  const result=await searchOffers({make:'Kia',bodyType:'sedan'});
+  assert.equal(result.total,1);assert.equal(result.items[0].id,'projection-reuse');
+  assert.equal((await searchOffers({make:'Unknown',bodyType:'sedan'})).total,0);
+  assert.deepEqual(brandReads,[]);
+  generationId='next';now+=61000;
+  const changed=await searchOffers({make:'Kia',bodyType:'sedan'});
+  assert.equal(changed.items[0].id,'updated');assert.equal(brandReads.length,1);
+ } finally {t.mock.restoreAll();resetCatalogReadCachesForTests();}
+});

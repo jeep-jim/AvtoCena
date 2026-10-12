@@ -204,3 +204,19 @@ test('safeStoragePath rejects traversal storage keys', async () => {
   assert.throws(() => normalizeStorageKey('contracts/uploads/../secret.png'), /invalid_storage_key/);
   assert.throws(() => safeStoragePath('../../secret.png'), /invalid_storage_key/);
 });
+
+
+test('object response reader preserves many chunks and propagates interrupted transfers', async () => {
+  let next = 0;
+  const body = new ReadableStream<Uint8Array>({pull(controller) {
+    if (next === 10000) { controller.close(); return; }
+    controller.enqueue(new Uint8Array([next++ % 251]));
+  }});
+  const result = await readObjectStorageResponseBody(new Response(body), 5000);
+  assert.equal(result.length, 10000);
+  for (let i = 0; i < result.length; i++) assert.equal(result[i], i % 251);
+  const broken = new ReadableStream<Uint8Array>({start(controller) {
+    controller.enqueue(new Uint8Array([1]));controller.error(new Error('interrupted_transfer'));
+  }});
+  await assert.rejects(readObjectStorageResponseBody(new Response(broken), 5000), /interrupted_transfer/);
+});
