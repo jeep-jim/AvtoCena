@@ -4,7 +4,7 @@ import {createPortal} from 'react-dom';
 import './sticky-catalog-controls.css';
 import {SelectedFilterChip, type SelectedFilter} from "./SelectedFilterChip";
 type Chip=SelectedFilter;
-const sorts=[['totalRub','Дешевле'],['totalRubDesc','Дороже'],['year','Новые'],['yearAsc','Старые']] as const;
+const sorts=[['','Любые'],['totalRub','Дешевле'],['totalRubDesc','Дороже'],['year','Новые'],['yearAsc','Ранее выпущенные']] as const;
 export function StickyCatalogControls({chips,onRemove,sort,onSort,hidden=false}:{chips:Chip[];onRemove:(key:string)=>void;sort:string;onSort:(value:string)=>void;hidden?:boolean}){
  const sentinel=useRef<HTMLDivElement>(null),menu=useRef<HTMLDivElement>(null);
  const [visible,setVisible]=useState(false),[top,setTop]=useState(64),[open,setOpen]=useState(false),[leftPadding,setLeftPadding]=useState(28);

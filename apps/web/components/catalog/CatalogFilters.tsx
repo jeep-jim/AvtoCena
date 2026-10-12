@@ -200,7 +200,7 @@ function PowerLimitCheckbox({ checked, onChange, sourcePower=false }: { sourcePo
 }
 
 function SortControl({ sortKey, direction, onChange }: { sortKey: SortKey; direction: SortDir; onChange: (key: SortKey, direction: SortDir) => void }) {
-  const options = [["totalRub", "asc", "Дешевле"], ["totalRub", "desc", "Дороже"], ["year", "desc", "Новые"], ["year", "asc", "Старые"]] as const;
+  const options = [["totalRub", "asc", "Дешевле"], ["totalRub", "desc", "Дороже"], ["year", "desc", "Новые"], ["year", "asc", "Ранние"]] as const;
   return <div className="min-w-0">
     <input type="hidden" name="sort" value={sortParam(sortKey, direction)} />
     <div className="ac-sort-control grid min-h-13 grid-cols-4 overflow-hidden rounded-[15px]" role="group" aria-label="Сортировка автомобилей">
