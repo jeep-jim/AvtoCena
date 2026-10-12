@@ -53,7 +53,10 @@ SERVICE
 install -d -m 755 /opt/avtocena/metrics
 systemctl daemon-reload
 systemctl enable --now avtocena-resources.service
-! docker inspect "$candidate" >/dev/null 2>&1
+if docker inspect "$candidate" >/dev/null 2>&1; then
+ test "$(docker inspect --format '{{.State.Running}}' "$candidate")" = false
+ docker rename "$candidate" "$candidate-failed-$(date +%s)"
+fi
 ! docker inspect "$backup" >/dev/null 2>&1
 docker run -d --name "$candidate" --label avtocena.role=production --restart unless-stopped \
  --memory 10g --cpus 6 --pids-limit 512 --log-opt max-size=10m --log-opt max-file=3 \
@@ -86,7 +89,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Admin resource data must never leak anonymously.
 try:urllib.request.urlopen(base+'/api/crm/server-resources',timeout=15);raise AssertionError('metrics exposed')
-except urllib.error.HTTPError as e:assert e.code==403
+except urllib.error.HTTPError as e:assert e.code in [401,403]
 PY
 python3 - "$config" "$old_port" "$port" <<'PY'
 import pathlib,sys
