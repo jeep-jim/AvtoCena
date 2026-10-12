@@ -74,6 +74,14 @@ test("all catalog filters use the projection when optional categorical shards ar
     resetCatalogReadCachesForTests();
     const storage = getJsonStorage() as any;
     const originalRead = storage.readJsonWithMeta.bind(storage);
+    storage.readJsonWithMeta=async(relativePath:string,fallback:unknown)=>{
+      assert.ok(!relativePath.includes('/budget-cards-') && !relativePath.includes('/projection/'), 'engine/power count reads only compact selectors');
+      return originalRead(relativePath,fallback);
+    };
+    try {
+      assert.equal((await countCatalogOffers({market:'korea',engineTo:1600,powerTo:160})).total,1);
+      assert.equal((await countCatalogOffers({market:'korea',engineTo:1500,powerTo:160})).total,0);
+    } finally {storage.readJsonWithMeta=originalRead;resetCatalogReadCachesForTests();}
     let projectionReads = 0;
     let brandProjectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {

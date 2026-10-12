@@ -3,7 +3,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import assert from 'node:assert/strict';
 import {getJsonStorage} from '../apps/web/lib/data.ts';
-import {backfillBudgetMarketSelectors,warmBudgetPriceCaches,searchOffers,searchOffersWithoutBudgetIndexForTests,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
+import {backfillBudgetSpecificationSelectors,backfillBudgetMarketSelectors,warmBudgetPriceCaches,searchOffers,searchOffersWithoutBudgetIndexForTests,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage.ts';
 
 const storage=getJsonStorage();
 if(storage.driver!=='object')throw Error('object_storage_required');
@@ -11,7 +11,7 @@ if(storage.driver!=='object')throw Error('object_storage_required');
 // price caches. No collection, provider request, manifest/cursor/offer write.
 const writes=storage.writeJson.bind(storage),read=storage.readJsonWithMeta.bind(storage);
 storage.writeJson=async(path,value,condition)=>{
- if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v[123]\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-(?:budget|sort)-prices-v[12]\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
+ if(!/^catalog\/(?:generations\/[^/]+\/indexes\/budget-markets-v[1234]\/(?:ready|china|korea|japan|europe|uae|georgia)\.json|runtime-(?:budget|sort)-prices-v[12]\/(?:china|korea|europe|uae|georgia)\.json)$/.test(path))throw Error('unexpected_write:'+path);
  return writes(path,value,condition);
 };
 let trace=[];
@@ -35,6 +35,7 @@ if(process.argv[2]==='--probe'){
  console.log(JSON.stringify({params,total:first.total,ids:first.items.map(row=>row.id),ms:Math.round(elapsed),cpuMs:Math.round((cpuUsed.user+cpuUsed.system)/1000),readBytes:reads.reduce((sum,row)=>sum+row.bytes,0),reads}));
 }else{
 const selectors=await backfillBudgetMarketSelectors();
+await backfillBudgetSpecificationSelectors();
 const warmed=await warmBudgetPriceCaches();
 // Reuse the existing off-server preparation cadence for displayed-price sorting.
 // One market at a time; only one visible card is read, no inventory writes.
