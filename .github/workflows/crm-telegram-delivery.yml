@@ -4,7 +4,7 @@ on:
     # Avoid the busiest round-minute slots. GitHub still does not guarantee timing.
     - cron: "2-59/5 * * * *"
   workflow_run:
-    workflows: ["Deploy to Yandex Cloud"]
+    workflows: ["Regcloud — deploy production"]
     types: [completed]
     branches: [main]
   workflow_dispatch:
@@ -21,6 +21,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deliver:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -34,12 +36,12 @@ jobs:
         env:
           JSON_STORAGE_DRIVER: object
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
-          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
-          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
           AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_WEBHOOK_SECRET: ${{ secrets.TELEGRAM_WEBHOOK_SECRET }}
@@ -77,7 +79,8 @@ jobs:
           fi
 
   metrika:
-    if: ${{ inputs.operation != 'recover' }}
+    if: inputs.operation != 'recover' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    environment: regcloud-staging
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -90,10 +93,10 @@ jobs:
         env:
           JSON_STORAGE_DRIVER: object
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
-          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
-          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
-          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+          YC_OBJECT_STORAGE_REGION: us-east-1
+          YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
         run: node --import tsx scripts/crm-metrika-delivery.ts
