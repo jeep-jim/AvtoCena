@@ -14,7 +14,7 @@ function offerIdFromInput(value: string) {
   return clean.replace(/^offer:/i, "").trim();
 }
 
-export function ManualLeadForm({ headerAside, offices=[] }: { headerAside?: ReactNode; offices?:string[] }) {
+export function ManualLeadForm({ headerAside, headerBefore, offices=[] }: { headerAside?: ReactNode; headerBefore?: ReactNode; offices?:string[] }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -108,6 +108,7 @@ export function ManualLeadForm({ headerAside, offices=[] }: { headerAside?: Reac
   return (
     <div className="mb-5">
       <div className="crm-lead-create-toolbar">
+      {headerBefore}
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
@@ -115,7 +116,7 @@ export function ManualLeadForm({ headerAside, offices=[] }: { headerAside?: Reac
         disabled={loading}
         className={`crm-manual-toggle rounded-full px-4 py-2 text-sm font-black transition ${open ? "crm-manual-close" : "bg-red-500 text-white hover:bg-red-400"}`}
       >
-        {open ? <><span aria-hidden="true">×</span> Закрыть форму</> : "+ Создать заявку"}
+        {open ? <><span aria-hidden="true">×</span> Закрыть форму</> : "+ Создать"}
       </button>
       {headerAside}
       </div>

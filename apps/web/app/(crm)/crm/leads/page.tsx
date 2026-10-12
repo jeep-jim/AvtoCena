@@ -27,6 +27,7 @@ import {followupText} from "@/lib/crm-notifications";
 import { redirect } from "next/navigation";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { LeadActions } from "@/components/crm/LeadActions";
+import { LeadClientGroup } from "@/components/crm/LeadClientGroup";
 import { ManualLeadForm } from "@/components/crm/ManualLeadForm";
 import { readChunkedDataJson } from "@/lib/data";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
@@ -124,7 +125,7 @@ export default async function CrmLeadsPage({
     ? groupCrmLeads(stored.filter(lead => lead.id === id && canSeeLead(user,lead)), clients)
     : groups.slice(0, 100);
   const board = !id && first(params.layout) === "board" && view !== "archive";
-  const layoutHref=(layout:string)=>`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),layout})}`;
+  const layoutHref=(layout:string)=>`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).filter(([k])=>k!=="id").map(([k,v])=>[k,first(v)])),layout})}`;
   const visible = visibleGroups.flat();
   const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
   const registrationAvatars=await clientRegistrationAvatars(clients.filter(client=>visibleClientIds.has(client.id)&&canSeeLead(user,client)));
@@ -141,7 +142,6 @@ export default async function CrmLeadsPage({
           ["all", "Активные"],
           ["my", "Мои заявки"],
           ["archive", "Архив"],
-          ...(isPlatformOwner(user)?[["dealers","Дилеры"]]:[]),
         ].map(([key, label]) => (
           <Link
             key={key}
@@ -153,8 +153,7 @@ export default async function CrmLeadsPage({
         ))}
 
       </div>
-      <div className="crm-lead-view-toolbar">
-      <div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>
+      <ManualLeadForm offices={user.workAddresses||[]} headerBefore={<div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>} headerAside={
       <LeadFilters key={JSON.stringify(params)} count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
@@ -201,17 +200,14 @@ export default async function CrmLeadsPage({
       </form>
       <Link href={`/crm/leads?${new URLSearchParams({view,layout:board?"board":"list"})}`} className="crm-filter-reset">Сбросить фильтры</Link>
       <div className="crm-filter-help"><LeadStatusHelp /></div>
-      </LeadFilters></div>
-      <div className="crm-lead-count">Клиентов: {groups.length} · Заявок: {leads.length}{groups.length > 100 ? " · показаны первые 100" : ""}</div>
-      <ManualLeadForm offices={user.workAddresses||[]} />
+      </LeadFilters>} />
       {board&&<LeadBoard groups={visibleGroups} managers={managers} avatars={Object.fromEntries(registrationAvatars)}/>}
       <div className={`mt-4 space-y-3${board?" hidden":""}`}>
-        {visibleGroups.map(group => <section key={group[0].id} aria-label="Заявки клиента" className={group.length > 1 ? "crm-lead-client-group overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]" : ""}>
-          {group.length > 1 && <div className="crm-lead-group-heading flex flex-wrap items-center justify-between gap-3 p-4">
+        {visibleGroups.map(group => <LeadClientGroup key={group[0].id} grouped={group.length > 1} heading={<>
             <div className="min-w-0"><strong>{group[0].name || group[0].telegramDisplayName || "Клиент"}</strong><div className="mt-1 text-sm text-[var(--ac-muted)]"><LeadContact lead={group[0]} /></div></div>
             <div className="min-w-0 flex-1 px-3 text-sm">{Array.from(new Set(group.map(lead => offers(lead)[0]?.title || lead.car || "Подбор автомобиля"))).join(" · ")}</div>
             <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block">Заявок: {group.length}</strong></div>
-          </div>}
+          </>}>
           <div className={group.length > 1 ? "space-y-3 border-t border-[var(--ac-border)] p-3" : ""}>{group.map((lead) => {
           const priorClient = previousManualClient(lead);
           const cars = offers(lead);
@@ -436,7 +432,7 @@ export default async function CrmLeadsPage({
               </div>
             </details>
           );
-        })}</div></section>)}
+        })}</div></LeadClientGroup>)}
         {!visible.length && (
           <div className="rounded-2xl border border-[var(--ac-border)] p-8 text-center text-[var(--ac-muted)]">
             Заявок по этим условиям нет.
