@@ -43,4 +43,12 @@ jobs:
           port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
           curl -sS --max-time 8 -o /dev/null -w 'HEALTH %{http_code} %{time_total}\n' "http://127.0.0.1:$port/api/health" || true
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          docker logs --since 20m --tail 10000 avtocena-production 2>&1 | python3 -c 'import sys,json,collections;rows=[];errors=collections.Counter()
+          for line in sys.stdin:
+              if "catalog_storage_read " in line:
+                  try:rows.append(json.loads(line.split("catalog_storage_read ",1)[1]))
+                  except:pass
+              for code in ["object_storage_response_timeout","fetch failed","TimeoutError","FATAL ERROR","heap out of memory"]:
+                  if code in line:errors[code]+=1
+          print("MARKET_SLOW_READS",json.dumps(sorted(rows,key=lambda x:x["ms"],reverse=True)[:30]));print("ERROR_COUNTS",json.dumps(errors))'
           REMOTE
