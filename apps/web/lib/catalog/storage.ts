@@ -17,6 +17,7 @@ import { priceCardForCity } from "./card-city-delivery";
 import { protectedPhotoUrl } from "./photo-proxy-policy";
 import { matchesFuelFilter } from "./fuel-filter";
 import { buildJapanPreviewInputIndex, japanPreviewInputPath, matchesJapanPreviewInput } from "./japan-preview-inputs";
+import {UnavailableReadCache} from "./unavailable-read-cache";
 import { mergeUnavailableOffers, unavailableOfferRecord, type UnavailableOffer } from "./offer-availability";
 import { compactPricingSnapshot } from "./compact-pricing-snapshot";
 import { readCatalogOverview, catalogOverviewMarketComplete, buildCatalogOverviewPayload, catalogOverviewGenerationPath, CATALOG_OVERVIEW_PATH, resetCatalogOverviewCache } from "./overview";
@@ -558,6 +559,9 @@ const currentProjectionCache = new Map<string, { generationId: string; expiresAt
 const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
   maxEntries: 64, maxBytes: 256 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
+const unavailableReadCache=new UnavailableReadCache();
+const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
+const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
@@ -571,6 +575,9 @@ let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<strin
 const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
 const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
+  unavailableReadCache.clear();
+  previousLocationCache.clear();
+  previousOfferChunkCache.clear();
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
   budgetEligibility.clear();
@@ -2722,15 +2729,15 @@ export async function getUnavailableOffer(id: string): Promise<UnavailableOffer 
   const confirmed = confirmedSourceWithdrawalById(id);
   if (confirmed) return confirmed;
   const manifest = await readManifest();
-  const rows = manifest?.generationId ? await readIndex<UnavailableOffer[]>(manifest.generationId, "unavailable.json", []) : [];
-  const row = mergeUnavailableOffers(rows, [], new Set()).find(item => item.id === id);
+  const row = manifest?.generationId ? await unavailableReadCache.get(manifest.generationId,id,()=>readIndex<UnavailableOffer[]>(manifest.generationId,"unavailable.json",[])) : null;
   if (row) return row;
   const previous = await readDataJson<CatalogManifest | null>("catalog/previous-manifest.json", null);
   if (!previous?.generationId || previous.generationId === manifest?.generationId) return null;
-  const index = await readIndex<{byId: Record<string, OfferLocation>}>(previous.generationId, "offers-by-id.json", {byId:{}});
+  const index = await previousLocationCache.get(previous.generationId,()=>readIndex<{byId: Record<string, OfferLocation>}>(previous.generationId, "offers-by-id.json", {byId:{}}));
   const location = index.byId[id];
   if (!location || location.market === "japan") return null;
-  const offers = await readDataJson<VehicleOffer[]>(offerPath(previous.generationId, location.market, location.chunk), []);
+  const path=offerPath(previous.generationId, location.market, location.chunk);
+  const offers = await previousOfferChunkCache.get(path,()=>readDataJson<VehicleOffer[]>(path, []));
   const offer = offers.find(item => item.id === id);
   return offer ? unavailableOfferRecord(offer) : null;
 }

@@ -1,10 +1,4 @@
 {
-  "reason": "Compact collapsible lead groups and toolbar from owner screenshots",
-  "at": "2026-10-12T09:58:00.616786+00:00",
-  "ideaReports": [
-    {
-      "number": 12,
-      "text": "Группы заявок клиента теперь сворачиваются целиком и по умолчанию закрыты; верхняя плашка закрепляется при прокрутке. Создать перенесено рядом с видом списка, на телефоне фильтр — одна иконка, карточки компактнее. Заявки дилеров доступны из раздела Дилеры. — GPT"
-    }
-  ]
+  "reason": "Reduce duplicate missing-card storage reads after confirmed 504 incident",
+  "at": "2026-10-12T10:08:57.723264+00:00"
 }
