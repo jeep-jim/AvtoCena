@@ -38,7 +38,7 @@ function ensureCatalogFilterLayoutPolish() {
     style.textContent = `
       @media(min-width:1024px){
         .ac-catalog-filter-panel input.ac-filter-control[name="model"]{height:52px!important;min-height:52px!important;border-radius:15px!important}
-        .ac-catalog-filter-panel .ac-primary-lower-grid{grid-template-columns:calc((100% - 20px)/3) calc((100% - 20px)/3) minmax(0,1fr) minmax(180px,.58fr)!important;gap:10px!important}
+        .ac-catalog-filter-panel .ac-primary-lower-grid{grid-template-columns:minmax(0,1fr) minmax(0,.7fr) minmax(260px,1fr) minmax(130px,.55fr)!important;gap:10px!important}
       }
       @media(max-width:1023px){
         .ac-mobile-filter-sheet input.ac-filter-control[name="model"]{height:46px!important;min-height:46px!important;border-radius:13px!important}
@@ -186,6 +186,9 @@ export function VehicleModelSearch({
   useCatalogFilterDependentUi(contextual);
   useLayoutEffect(() => { submitRef.current = onSubmit; }, [onSubmit]);
   useEffect(() => { if (!multiple) setQuery(value || ""); }, [value, multiple]);
+  useEffect(() => {
+    if (multiple && document.activeElement !== input.current) setQuery(value.split("|").filter(Boolean).join(", "));
+  }, [value, multiple]);
   const selectedModels = value.split("|").map(clean).filter(Boolean);
 
   useEffect(() => {

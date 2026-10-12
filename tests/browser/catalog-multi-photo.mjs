@@ -58,6 +58,7 @@ try {
   for(const [label,value] of [['Дешевле','totalRub'],['Дороже','totalRubDesc'],['Новые','year'],['Старые','yearAsc']]) {
    const button=scope.getByRole('button',{name:label,exact:true});await button.click();
    assert.equal(await button.getAttribute('aria-pressed'),'true');
+   assert.equal(await button.evaluate(el=>el.scrollWidth<=el.clientWidth),true,'sort label fits its button');
    assert.equal(await scope.locator('input[name="sort"]').inputValue(),value);
    assert.equal(await button.evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 53, 61)');
    assert.equal(await scope.locator('.ac-sort-control button[aria-pressed="true"]').count(),1);
