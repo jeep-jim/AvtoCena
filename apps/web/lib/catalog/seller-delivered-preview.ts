@@ -4,11 +4,13 @@ import {validateCustomerParameters} from "./customer-parameters";
 import {calculateOfferWithCustomerParametersDetailed} from "./customs-pricing";
 import type {VehicleOffer} from "./types";
 
-const quotes=new DetailReadCache<any>({maxEntries:256,maxBytes:2*1024*1024,ttlMs:60_000,concurrency:2});
+// Six bounded workers overlap independent detail reads on the dedicated server.
+// The shared detail loader separately limits decoded blocks to four in flight.
+const quotes=new DetailReadCache<any>({maxEntries:256,maxBytes:2*1024*1024,ttlMs:60_000,concurrency:6});
 /** Only visible cards, shared bounded work; never invent missing specifications. */
 export async function attachSellerDeliveredPreviews<T extends Partial<VehicleOffer>>(offers:T[],configuration:unknown):Promise<T[]> {
  const result=[...offers];let cursor=0;
- await Promise.all(Array.from({length:Math.min(2,offers.length)},async()=>{
+ await Promise.all(Array.from({length:Math.min(6,offers.length)},async()=>{
   while(cursor<offers.length){
    const i=cursor++,offer=offers[i] as T & {savedCalculationPreview?:unknown};
    if(!offer.id||offer.market==="japan"||offer.catalogPricingMode!=="seller"||offer.savedCalculationPreview)continue;

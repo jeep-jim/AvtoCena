@@ -551,8 +551,10 @@ const searchProjectionCache = new DetailReadCache<{ generationId: string; items:
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
 const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
 const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+// A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
+// Keys include the verified generation, so immutable brand rows can outlive a minute.
 const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
-  maxEntries: 8, maxBytes: 32 * 1024 * 1024, ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 2,
+  maxEntries: 64, maxBytes: 256 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
@@ -560,6 +562,7 @@ const currentOfferShardCache = new DetailReadCache<{ generationId: string } & De
   maxEntries: 256, maxBytes: 128 * 1024 * 1024,
   ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
 });
+const immutableOfferShardCache = new DetailReadCache<{generationId:string} & DetailShard<VehicleOffer>>({maxEntries:1024,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:4});
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
 let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<string, OfferLocation> }> | null = null;
@@ -591,6 +594,7 @@ export function resetCatalogReadCachesForTests() {
   currentFacetsCache = null;
   currentBrandSummaryCache = null;
   currentOfferShardCache.clear();
+  immutableOfferShardCache.clear();
   projectionCacheGeneration = "";
   offerLookupCacheGeneration = "";
   offerLocationIndexCache = null;
@@ -654,10 +658,12 @@ async function readCurrentSearchProjection(market: string) {
 async function readCurrentBrandProjection(make: string, generationId: string) {
   const key = currentBrandProjectionPath(make);
   return currentBrandProjectionCache.get(`${generationId}:${key}`, async () => {
-    const current = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(key, {generationId:"",items:[]});
-    if (current.generationId === generationId) return current;
+    // Read the manifest-pinned object first. A staged public alias may already
+    // belong to a future, unpublished generation and can be tens of MB large.
     const stored = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(generationBrandProjectionPath(generationId,make), {generationId:"",items:[]});
     if (stored.generationId === generationId) return stored;
+    const current = await readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(key, {generationId:"",items:[]});
+    if (current.generationId === generationId) return current;
     const summary = await readCurrentBrandSummary();
     return summary.generationId === generationId && !summary.brands[catalogBrandReadModelKey(make)] ? {generationId,items:[]} : stored;
   });
@@ -687,14 +693,25 @@ async function readCurrentBrandSummary() {
   return promise;
 }
 async function readDetailShardObject(key: string, file: string) {
-  return currentOfferShardCache.get(key, () =>
+  const cache=file.startsWith("catalog/generations/")?immutableOfferShardCache:currentOfferShardCache;
+  return cache.get(key, () =>
     readDataJson<{generationId:string} & DetailShard<VehicleOffer>>(file, { generationId: "", items: [] }));
 }
 async function readCurrentOfferShard(id: string) {
   const hash=detailHash(id);
   let depth=2;
-  let shard=await readDetailShardObject(hash.slice(0,depth),currentOfferShardPath(id));
-  const generationId=shard.generationId;
+  const [root,manifest]=await Promise.all([readDetailShardObject(hash.slice(0,depth),currentOfferShardPath(id)),readManifest()]);
+  const generationId=manifest.generationId;
+  let shard=root;
+  if(root.generationId!==generationId){
+    // The public root may have been staged by an unfinished publication. Never
+    // descend into that generation. A split active tree has an immutable child
+    // at depth three; older unsplit generations retain the existing ID/chunk fallback.
+    depth=3;
+    const prefix=hash.slice(0,depth);
+    shard=await readDetailShardObject(`${generationId}:${prefix}`,detailShardPath(generationId,prefix));
+    if(shard.generationId!==generationId)return {generationId:'',items:[]};
+  }
   while(shard.children) {
     if (++depth > 64 || !generationId) throw Error('invalid_detail_shard_tree');
     const prefix=hash.slice(0,depth);

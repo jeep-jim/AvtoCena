@@ -28,7 +28,7 @@ test('confirmed missing IDs avoid whole-catalog reads while incomplete indexes r
 
     await storage.writeJson('catalog/manifest.json',{version:2,generationId:'next',markets:{}});
     await storage.writeJson('catalog/generations/next/indexes/offers-by-id.json',{generationId:'next',byId:{missing:{market:'china',chunk:'chunk-0001'}}});
-    await storage.writeJson('catalog/generations/next/offers/china/chunk-0001.json',[{id:'missing',market:'china'}]);
+    await storage.writeJson('catalog/generations/next/offers/china/chunk-0001.json',[{id:'missing',market:'china',year:new Date().getUTCFullYear()}]);
     resetCatalogReadCachesForTests();
     assert.equal((await getOffer('missing'))?.id,'missing','a later publication may introduce the previously absent ID');
   } finally {
