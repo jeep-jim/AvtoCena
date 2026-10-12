@@ -1,10 +1,9 @@
 {
-  "operation": "che168-publication-size-recovery-20261009",
+  "operation": "che168-regcloud-resume-20261012",
   "market": "china",
   "publishMarkets": [
     "china"
   ],
-  "reuseRunId": "37922693305",
-  "refreshMarkets": [],
-  "reason": "Retry publication from the completed preserved intake after serialization and grouping fixes; do not request suppliers again."
+  "resetCursors": false,
+  "reason": "Owner-authorized fresh changes from the preserved published replica in REG; retain all admission and publication guards."
 }
