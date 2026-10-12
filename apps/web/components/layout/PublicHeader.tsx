@@ -161,7 +161,12 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             {dealer ? <Link href={dealer.href} className="flex min-w-0 items-center gap-2.5" aria-label={`Страница ${dealer.name}`}>
               {(dealer.headerIcon||dealer.logoLight||dealer.logoDark)?<img src={dealer.headerIcon||(theme==='light'?(dealer.logoLight||dealer.logoDark):(dealer.logoDark||dealer.logoLight))} alt="" className="h-10 w-10 shrink-0 rounded-xl object-contain"/>:<BrandMark className="h-10 w-10 shrink-0"/>}
               <span className="hidden truncate text-lg font-black md:block md:text-xl">{dealer.name}</span>
-            </Link> : (            <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            </Link> : (            <Link href="/" onClick={(event) => {
+              if (pathname === '/' && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) {
+                event.preventDefault();
+                window.location.reload();
+              }
+            }} className="flex min-w-0 items-center gap-2.5">
               <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
               <div className="min-w-0">
                 <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></div>

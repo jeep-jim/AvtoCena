@@ -31,7 +31,7 @@ try{
   assert.ok(await frame.locator('#btnStart').evaluate(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight;}));
   for(const id of ['themeList','carList','weaponList','colorList'])assert.ok(await frame.locator('#'+id).evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}));
   await page.screenshot({path:out+'/menu-'+width+'.png'});
-  await frame.getByRole('button',{name:'🚀 Бой',exact:true}).click();await frame.locator('#btnStart').click();await frame.locator('#hud.on').waitFor();await frame.locator('#btnGas').dispatchEvent('pointerdown',{pointerId:1});await page.waitForTimeout(2500);await frame.locator('#btnGas').dispatchEvent('pointerup',{pointerId:1});
+  await frame.getByRole('button',{name:'🚀 Бой',exact:true}).click();await frame.locator('#btnStart').click();await frame.locator('#hud.on').waitFor();await frame.locator('#btnGas').dispatchEvent('pointerdown',{pointerId:1});await page.waitForTimeout(4500);await frame.locator('#btnGas').dispatchEvent('pointerup',{pointerId:1});
   assert.equal(await frame.locator('#rivalRadar span').count(),4);await page.screenshot({path:out+'/race-'+width+'.png'});
   await frame.locator('#btnPause').click();await frame.locator('#pauseOverlay').waitFor();await frame.locator('#btnResume').click();await frame.locator('#btnQuit').click();await frame.locator('#resultNotice').filter({hasText:'В рейтинг'}).waitFor();
   await page.screenshot({path:out+'/result-'+width+'.png'});await frame.locator('#btnExit').click();await page.getByRole('button',{name:'Погнали!',exact:true}).waitFor();assert.deepEqual(errors,[]);await context.close();

@@ -8,7 +8,7 @@ function harness(){
  const html=fs.readFileSync('apps/web/public/games/pognali.html','utf8');
  const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
  const events:Record<string,Function[]>={},docEvents:Record<string,Function[]>={},elements=new Map<string,any>(),messages:any[]=[];
- let callback:Function|undefined;
+ let callback:Function|undefined,clock=1000;
  const context=new Proxy({createLinearGradient:()=>({addColorStop(){}}),createRadialGradient:()=>({addColorStop(){}}),measureText:()=>({width:20})},{get:(target:any,key)=>key in target?target[key]:()=>{},set:(target,key,value)=>(target[key]=value,true)});
  function element(key:string):any{if(/^#[\w-]+$/.test(key)&&!ids.has(key.slice(1)))return null;if(elements.has(key))return elements.get(key);const classes=new Set<string>();if(key.startsWith('#')){const tag=html.match(new RegExp('<[^>]*id="'+key.slice(1)+'"[^>]*>'))?.[0]||'';for(const c of tag.match(/class="([^"]*)"/)?.[1]?.split(' ')||[])classes.add(c);}const listeners:Record<string,Function[]>={};const el:any={style:{},dataset:{},value:'',checked:false,hidden:false,clientWidth:1000,clientHeight:720,classList:{add:(c:string)=>classes.add(c),remove:(c:string)=>classes.delete(c),contains:(c:string)=>classes.has(c),toggle:(c:string,on:boolean)=>on?classes.add(c):classes.delete(c)},getContext:()=>context,addEventListener:(type:string,fn:Function)=>(listeners[type]??=[]).push(fn),fire:(type:string,event:any={})=>{for(const fn of listeners[type]||[])fn({preventDefault(){},stopPropagation(){},target:el,...event});el['on'+type]?.(event);},setPointerCapture(){},querySelector:(s:string)=>element(key+' '+s),closest:()=>element('.panel'),appendChild(){},matches:()=>false,focus(){}};elements.set(key,el);return el;}
  const modeElements=['solo','battle'].map(mode=>{const el=element('[mode='+mode+']');el.dataset.mode=mode;return el;});
@@ -19,12 +19,12 @@ function harness(){
  vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)![1].replace('/* ---------- INIT ---------- */','window.testEngine={state,terrainY,stepCarPhysics,step,tryJump,CARS,damageCar,stepFlying,reviveCar,generateTrackFeatures,stepBot};'),sandbox,{timeout:2000});
  const bridge=(data:any)=>events.message.forEach(fn=>fn({source:parent,data:{game:'pognali-v1',...data}}));
  bridge({type:'user',user:{name:'<test>'}});
- return {element,messages,modeElements,bridge,events,engine:(window as any).testEngine,advance(seconds:number){for(let i=0;i<seconds*60;i++){const next=callback;callback=undefined;next?.(1000+i*1000/60);}},pending:()=>Boolean(callback)};
+ return {element,messages,modeElements,bridge,events,engine:(window as any).testEngine,advance(seconds:number){for(let i=0;i<seconds*60;i++){const next=callback;callback=undefined;next?.(clock);clock+=1000/60;}},pending:()=>Boolean(callback)};
 }
 for(const mode of ['solo','battle'])test(`shipped engine runs, pauses and reports ${mode}`,()=>{
  const h=harness();assert.equal(h.messages[0].type,'ready');assert.equal(h.pending(),false);
  h.modeElements.find(el=>el.dataset.mode===mode)!.fire('click');h.element('#btnStart').fire('click');assert.equal(h.messages.at(-1).type,'start');
- h.bridge({type:'started',id:'test'});h.element('#btnGas').fire('pointerdown',{pointerId:1});h.advance(3);
+ h.bridge({type:'started',id:'test'});h.element('#btnGas').fire('pointerdown',{pointerId:1});h.advance(6);
  h.element('#btnPause').fire('click');assert.equal(h.pending(),false);h.element('#btnResume').fire('click');assert.equal(h.pending(),true);
  h.element('#btnQuit').fire('click');h.advance(1);
  const result=h.messages.find(m=>m.type==='finish');assert.ok(result);assert.ok(result.duration>1);assert.ok(result.distance>0);assert.equal(h.pending(),false);
@@ -108,11 +108,11 @@ for(let car=0;car<5;car++)test(`car ${car}: continuous throttle drives forward w
 });
 test('finish completes stage once and next run starts the next stage',()=>{
  const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'stage1'});
- const {state,step}=h.engine;state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);
+ const {state,step}=h.engine;state.time=30;state.player.maxX=18201;state.player.x=18201;step(1/120);for(let i=0;i<193;i++)step(1/120);
  assert.equal(state.screen,'result');assert.match(h.element('#rTitle').textContent,/Этап 1 пройден/);
  assert.equal(h.messages.filter(m=>m.type==='finish').length,1);h.bridge({type:'saved',score:800});h.element('#btnAgain').fire('click');h.bridge({type:'started',id:'stage2'});
  state.time=30;state.player.maxX=8201;state.player.x=8201;step(1/120);assert.equal(state.screen,'play');
- state.player.maxX=10201;state.player.x=10201;step(1/120);assert.match(h.element('#rTitle').textContent,/Этап 2 пройден/);
+ state.player.maxX=22201;state.player.x=22201;step(1/120);for(let i=0;i<193;i++)step(1/120);assert.match(h.element('#rTitle').textContent,/Этап 2 пройден/);
 });
 
 test('rivals can be overtaken under continuous throttle',()=>{
@@ -120,4 +120,27 @@ test('rivals can be overtaken under continuous throttle',()=>{
  const {state,stepCarPhysics,stepBot}=h.engine,p=state.player;
  for(let i=0;i<120*15;i++){state.time+=1/120;stepCarPhysics(p,true,false,1/120);for(const b of state.bots)stepBot(b,1/120);}
  assert.ok(state.bots.some((b:any)=>b.x<p.x),`player ${p.x}, bots ${state.bots.map((b:any)=>b.x)}`);
+});
+
+test('countdown freezes cars, fuel and score time, then releases the race',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'countdown'});
+ const {state}=h.engine,p=state.player,b=state.bots[0],x=b.x,fuel=p.fuel;
+ h.element('#btnGas').fire('pointerdown',{pointerId:1});h.advance(2);
+ assert.equal(p.x,200);assert.equal(b.x,x);assert.equal(p.fuel,fuel);assert.equal(state.time,0);
+ h.element('#btnPause').fire('click');const remaining=state.countdown;h.advance(2);assert.equal(state.countdown,remaining);
+ h.element('#btnResume').fire('click');h.element('#btnGas').fire('pointerdown',{pointerId:1});h.advance(3);
+ assert.equal(state.countdown,0);assert.ok(p.x>200);assert.ok(state.time>0);
+});
+test('a distant rival catches up smoothly without teleportation',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'catch-up'});
+ const {state,stepBot}=h.engine,p=state.player,b=state.bots[0];p.x=5000;p.vx=500;b.x=2000;b.vx=200;
+ const gap=p.x-b.x;
+ for(let i=0;i<120*20;i++){p.x+=500/120;const before=b.x;stepBot(b,1/120);assert.ok(b.x-before<8);}
+ assert.ok(p.x-b.x<gap/2);assert.ok(b.x<p.x+1000);
+});
+test('new runs rotate scenery and terrain from the selected location',()=>{
+ const h=harness();h.element('#btnStart').fire('click');h.bridge({type:'started',id:'location1'});
+ const {state,terrainY}=h.engine,first=state.runTheme,height=terrainY(4000);
+ h.element('#btnQuit').fire('click');h.element('#btnAgain').fire('click');h.bridge({type:'started',id:'location2'});
+ assert.notEqual(state.runTheme,first);assert.notEqual(terrainY(4000),height);
 });

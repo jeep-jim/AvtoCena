@@ -225,7 +225,7 @@ h1 span{color:#ff4757}
   <img id="playerAvatar" class="playerAvatar hidden" alt="">
 
   <div id="hud">
-    <div class="race-track"><span id="stageLabel">Этап 1 · 0 / 800 м</span><progress id="stageProgress" max="100" value="0" aria-label="Прогресс до финиша"></progress><span>🏁</span></div><div class="hudTop">
+    <div class="race-track"><span id="stageLabel">Этап 1 · 0 / 1800 м</span><progress id="stageProgress" max="100" value="0" aria-label="Прогресс до финиша"></progress><span>🏁</span></div><div class="hudTop">
       <div class="chip"><div class="k">Дистанция</div><div class="v" id="hDist">0 м</div></div>
       <div class="chip gold"><div class="k">Монеты</div><div class="v" id="hCoins">0</div></div>
       <div class="chip"><div class="k">Скорость</div><div class="v" id="hSpeed">0</div></div>
@@ -733,8 +733,9 @@ function killCar(c, reason){
   addChat('sys', null, '', `💀 ${c.name} уничтожен!`);
 }
 
-let raceStage=1,stageWon=false;
-const stageDistance=()=>800+(raceStage-1)*200;
+let raceStage=1,stageWon=false,runSequence=0;
+const stageDistance=()=>1800+(raceStage-1)*400;
+const finishX=()=>START_X+stageDistance()*10;
 /* ---------- BOTS ---------- */
 function makeBot(name){
   const cfg = CARS[rndi(0, CARS.length-1)];
@@ -760,8 +761,10 @@ function stepBot(b,dt){
  if(!b.alive)return;
  b.fireCd=Math.max(0,b.fireCd-dt);b.invuln=Math.max(0,b.invuln-dt);
  const p=state.player;
- // Rivals have their own pace; overtaking does not accelerate them.
- const pace=b.baseV*(1+Math.sin(state.time*.6+b.wob)*.08);
+ // Smooth catch-up keeps rivals competitive without moving them instantly.
+ const gap=p.x-b.x;
+ const cruise=Math.max(b.baseV,Math.max(0,p.vx)*(.94+Math.sin(state.time*.6+b.wob)*.06));
+ const pace=clamp(cruise+clamp((gap-b.slot)*.22,-180,230),100,p.cfg.maxSpeed*1.15);
  b.vx+=(pace-b.vx)*Math.min(1,2*dt);b.x+=b.vx*dt;
  b.y=terrainY(b.x)-b.cfg.wheelY-b.cfg.wheelR;b.angle=Math.atan(terrainSlope(b.x));
  b.wheelSpin+=(b.vx*dt)/b.cfg.wheelR;b.maxX=Math.max(b.maxX,b.x);
@@ -1052,10 +1055,13 @@ function beginLocalRun(){
   initAudio();
   if (AC && AC.state === 'suspended') AC.resume().catch(()=>{});
 
-  SEED = 28;
+  SEED = 28 + runSequence*17;
+  const locations=Object.keys(THEMES);
+  state.runTheme=locations[(Math.max(0,locations.indexOf(state.theme))+runSequence)%locations.length];
+  runSequence++;
   state.superLevel = $('#superLevel').checked;
   const cfg = CARS.find(c=>c.id===state.carId) || CARS[0];
-  const theme = THEMES[state.theme] || THEMES.forest;
+  const theme = THEMES[state.runTheme || state.theme] || THEMES.forest;
   terrainType = state.superLevel ? 'canyon' : theme.terrainType;
 
   trackFeatures=generateTrackFeatures();
@@ -1073,7 +1079,7 @@ function beginLocalRun(){
   state.flying = generateFlying();
   state.decos  = generateDecos(theme);
   state.particles = [];
-  state.time = 0;stageWon=false;
+  state.time = 0;stageWon=false;state.countdown=3;state.goTime=0;state.finishTime=0;
   state.chat = [];
   state.jumpPressed = false;
   projectiles.length = 0;
@@ -1124,7 +1130,7 @@ function endRun(reason){
   saveHist({
     d: new Date().toISOString().slice(0,10),
     dist, coins: p.coins, car: p.cfg.name,
-    mode: state.mode, theme: state.theme, kills: p.kills
+    mode: state.mode, theme: state.runTheme, kills: p.kills
   });
   $('#btnAgain').textContent=stageWon?(raceStage>=5?'Пройти снова':'Следующий этап'):'Ещё заезд';
   $('#rTitle').textContent  = reason || 'Заезд завершён';
@@ -1178,6 +1184,11 @@ function spawnParticles(x, y, color, n, speed){
 
 /* ---------- STEP ---------- */
 function step(dt){
+  if(stageWon){
+    state.finishTime+=dt;
+    if(state.finishTime>=1.6)endRun('🏁 Этап '+raceStage+' пройден!');
+    return;
+  }
   state.time += dt;
   const p = state.player;
   if (!p) return;
@@ -1329,7 +1340,7 @@ function step(dt){
 
   if(!p.alive){if(p.lives>0)reviveCar(p,dt);else {p.deadTimer+=dt;if(p.deadTimer>=1)endRun('Жизни закончились — новый заезд с начала');}}
   else if (p.fuel <= 0 && Math.abs(p.vx) < 15 && state.time > 2) endRun('⛽ Бензин кончился!');
-  else if ((p.maxX-START_X)/10>=stageDistance()){stageWon=true;endRun('🏁 Этап '+raceStage+' пройден!');}
+  else if (p.x>=finishX()){stageWon=true;state.finishTime=0;resetKeys();setEngine(false,0);blip(880,.3,.08);}
   else if (state.time > 240) endRun('⏱ Время вышло!');
   else if (state.mode === 'battle' && state.bots.every(b=>!b.alive&&b.lives===0) && state.bots.length > 0){
     endRun('🏆 Все противники уничтожены!');
@@ -1985,8 +1996,19 @@ function drawCar(c){
   ctx.fillText(c.name, c.x, c.y - c.cfg.bodyH - 26);
   ctx.restore();
 }
+function drawFinish(){
+  if(!state.player)return;
+  const x=finishX(),y=terrainY(x);
+  if(Math.abs(x-state.cam.x)>W/state.zoom+300)return;
+  ctx.save();ctx.fillStyle='#e2e8f0';ctx.fillRect(x-100,y-205,8,230);ctx.fillRect(x+92,y-205,8,230);
+  for(let row=0;row<3;row++)for(let col=0;col<10;col++){
+    ctx.fillStyle=(row+col)%2?'#111827':'#fff';ctx.fillRect(x-100+col*20,y-205+row*16,20,16);
+  }
+  ctx.fillStyle='#111827';ctx.fillRect(x-74,y-154,148,32);ctx.fillStyle='#fff';ctx.font='900 22px sans-serif';ctx.textAlign='center';ctx.fillText('ФИНИШ',x,y-130);
+  ctx.strokeStyle='#fff';ctx.lineWidth=5;ctx.setLineDash([8,8]);ctx.beginPath();ctx.moveTo(x,y-100);ctx.lineTo(x,y+15);ctx.stroke();ctx.restore();
+}
 function render(){
-  const theme = THEMES[state.theme] || THEMES.forest;
+  const theme = THEMES[state.runTheme || state.theme] || THEMES.forest;
   drawSky(theme);
   drawFarHills(theme);
   const z = clamp(W/980, 0.55, 1.05);
@@ -2021,12 +2043,20 @@ function render(){
     else if (d.type === 'rock') drawRock(d.x, y, d.scale, theme.rocks);
     else if (d.type === 'house') drawHouse(d.x, y, d.scale, theme.night);
   }
+  drawFinish();
   drawFlying();
   drawProjectiles();
   drawParticles();
   for (const b of state.bots) drawCar(b);
   if (state.player) drawCar(state.player);
   ctx.restore();
+  if(state.screen==='play'&&(state.countdown>0||state.goTime>0||stageWon)){
+    const label=stageWon?'Финиш!':state.countdown>0?String(Math.ceil(state.countdown)):'Погнали!';
+    ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='900 '+Math.min(72,W*.14)+'px sans-serif';ctx.lineWidth=8;ctx.strokeStyle='#111827';
+    ctx.strokeText(label,W/2,H*.32);ctx.fillStyle=stageWon?'#ffb703':state.countdown>0?'#fff':'#4ade80';ctx.fillText(label,W/2,H*.32);
+    ctx.font='700 16px sans-serif';ctx.fillStyle='#fff';ctx.fillText(THEMES[state.runTheme].name+' · '+stageDistance()+' м',W/2,H*.32+58);ctx.restore();
+  }
   updateHUD();
 }
 
@@ -2038,7 +2068,7 @@ function updateHUD(){
   const p = state.player;
   const dist = Math.max(0, Math.floor((p.maxX - START_X)/10));
   $('#hDist').textContent  = dist + ' м';
-  $('#stageLabel').textContent='Этап '+raceStage+' · '+Math.min(dist,stageDistance())+' / '+stageDistance()+' м';
+  $('#stageLabel').textContent=THEMES[state.runTheme || state.theme].name+' · '+Math.min(dist,stageDistance())+' / '+stageDistance()+' м';
   $('#stageProgress').value=Math.min(100,dist/stageDistance()*100);
   $('#hCoins').textContent = p.coins;
   $('#hSpeed').textContent = Math.abs(Math.round(p.vx/6));
@@ -2206,6 +2236,13 @@ function loop(t){
  if(t-lastT>0 && t-lastT<1000/60-.1){wake();return;}
  const dt=Math.min((t-lastT)/1000,.05);lastT=t;
  if(state.screen==='play'){
+  if(state.countdown>0){
+    const previous=Math.ceil(state.countdown);state.countdown=Math.max(0,state.countdown-dt);
+    if(Math.ceil(state.countdown)!==previous)blip(state.countdown>0?440:880,.12,.05);
+    if(state.countdown===0){state.goTime=1;state.jumpPressed=false;}
+    acc=0;render();wake();return;
+  }
+  state.goTime=Math.max(0,state.goTime-dt);
   acc+=dt;let n=0;while(acc>=FIXED_DT&&n<8&&state.screen==='play'){step(FIXED_DT);acc-=FIXED_DT;n++;}
   render();if(state.screen==='play')wake();
  }else{acc=0;render();setEngine(false,0);}
