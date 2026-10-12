@@ -9,7 +9,10 @@ backup=avtocena-before-memory-20261012
 runtime=/opt/avtocena/runtime-memory-20261012
 config=/etc/nginx/conf.d/avtocena-prepare.conf
 test -e /opt/avtocena/PRODUCTION_ACTIVE
-! docker inspect "$candidate" >/dev/null 2>&1
+if docker inspect "$candidate" >/dev/null 2>&1; then
+ test "$(docker inspect --format '{{.State.Running}}' "$candidate")" = false
+ docker rename "$candidate" "$candidate-failed-$(date +%s)"
+fi
 ! docker inspect "$backup" >/dev/null 2>&1
 install -d -m 700 "$runtime"
 docker inspect "$old" > "$runtime/before.json"
