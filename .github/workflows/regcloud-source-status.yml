@@ -1,0 +1,44 @@
+name: Regcloud — verify collection state
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/regcloud-source-status.json']
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: regcloud-source-status
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: https://s3.regru.cloud
+  YC_OBJECT_STORAGE_REGION: us-east-1
+  YC_OBJECT_STORAGE_BUCKET: avtocena-staging-8120751
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.REGCLOUD_S3_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.REGCLOUD_S3_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: migration-staging/full-20261011/
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_OVERVIEW_CANDIDATES_PER_MARKET: "24"
+  CATALOG_OVERVIEW_SKIP_READY: "true"
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    environment: regcloud-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check saved cursors, source controls and paid feed access
+        env:
+          AUTO_API_CHE168_KEY: ${{ secrets.AUTO_API_CHE168_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: npx tsx scripts/regcloud-source-status.mjs
