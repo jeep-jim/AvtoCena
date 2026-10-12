@@ -22,7 +22,7 @@ export function ActivityFeed({compact=false}:{compact?:boolean}){
  {!loaded&&!error?<p className="text-sm text-[var(--ac-muted)]">Загружаем события…</p>:null}
  {groupCrmActivity(events.filter(e=>!mine||e.actor?.id===userId)).map(group=>group.events.length===1
   ? <ActivityEvent key={group.id} e={group.events[0]}/>
-  : <details key={group.id} className="crm-event crm-event-group">
+  : <details key={group.id} open className="crm-event crm-event-group">
     <summary><div className="crm-event-people">{group.clientName ? <span className="font-black">{group.clientName}</span> : <Person person={group.events[0].actor}/>}</div><span className="crm-event-meta"><time dateTime={group.events[0].createdAt}>{crmDateTime(group.events[0].createdAt)}</time></span><strong>{group.section}</strong><span className="crm-event-count" aria-label={`Действий внутри: ${group.events.length}`}>{group.events.length}</span><ChevronDown size={16} className="crm-event-chevron"/></summary>
     <div className="crm-event-children">{group.events.map(e=><ActivityEvent key={e.id} e={e}/>)}</div>
    </details>)}

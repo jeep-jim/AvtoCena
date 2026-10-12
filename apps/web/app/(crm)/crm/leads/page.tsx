@@ -211,13 +211,13 @@ export default async function CrmLeadsPage({
         </div>
       } />
       <div className="mt-4 space-y-3">
-        {visibleGroups.map(group => <details key={group[0].id} open={Boolean(id)} className="overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]">
-          <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-3 p-4">
+        {visibleGroups.map(group => <section key={group[0].id} aria-label="Заявки клиента" className={group.length > 1 ? "overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]" : ""}>
+          {group.length > 1 && <div className="flex flex-wrap items-center justify-between gap-3 p-4">
             <div className="min-w-0"><strong>{group[0].name || group[0].telegramDisplayName || "Клиент"}</strong><div className="mt-1 text-sm text-[var(--ac-muted)]"><LeadContact lead={group[0]} /></div></div>
             <div className="min-w-0 flex-1 px-3 text-sm">{Array.from(new Set(group.map(lead => offers(lead)[0]?.title || lead.car || "Подбор автомобиля"))).join(" · ")}</div>
-            <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block text-red-500">Заявок: {group.length} · Открыть ↓</strong></div>
-          </summary>
-          <div className="space-y-3 border-t border-[var(--ac-border)] p-3">{group.map((lead) => {
+            <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block text-red-500">Заявок: {group.length}</strong></div>
+          </div>}
+          <div className={group.length > 1 ? "space-y-3 border-t border-[var(--ac-border)] p-3" : ""}>{group.map((lead) => {
           const priorClient = previousManualClient(lead);
           const cars = offers(lead);
           const car = cars[0];
@@ -436,7 +436,7 @@ export default async function CrmLeadsPage({
               </div>
             </details>
           );
-        })}</div></details>)}
+        })}</div></section>)}
         {!visible.length && (
           <div className="rounded-2xl border border-[var(--ac-border)] p-8 text-center text-[var(--ac-muted)]">
             Заявок по этим условиям нет.
