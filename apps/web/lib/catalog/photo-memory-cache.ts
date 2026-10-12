@@ -5,14 +5,15 @@ export class PhotoMemoryCache {
   private pending = new Map<string, Promise<{data: Buffer; type: string}>>();
   private active = 0;
   private hosts = new Map<string, {next: number; blocked: number; active: number}>();
-  constructor(private maxBytes = 64 * 1024 * 1024, private ttl = 6 * 3600_000) {}
+  constructor(private maxBytes = 256 * 1024 * 1024, private ttl = 6 * 3600_000) {}
   get size() { return this.bytes; }
   prune(now = Date.now()) { for (const [key, value] of this.entries) if (now - value.at >= this.ttl) { this.entries.delete(key); this.bytes -= value.data.length; } }
-  async read(url: string, fetcher: () => Promise<{data: Buffer; type: string}>) {
+  async read(url: string, fetcher: () => Promise<{data: Buffer; type: string}>, variant = "full") {
+    const key = JSON.stringify([url, variant]);
     this.prune();
-    const cached = this.entries.get(url);
-    if (cached) { this.entries.delete(url); this.entries.set(url, cached); return cached; }
-    const existing = this.pending.get(url); if (existing) return existing;
+    const cached = this.entries.get(key);
+    if (cached) { this.entries.delete(key); this.entries.set(key, cached); return cached; }
+    const existing = this.pending.get(key); if (existing) return existing;
     const host = new URL(url).hostname;
     const state = this.hosts.get(host) || {next: 0, blocked: 0, active: 0};
     this.hosts.set(host, state);
@@ -32,13 +33,13 @@ export class PhotoMemoryCache {
         while (this.bytes + result.data.length > this.maxBytes && this.entries.size) {
           const first = this.entries.keys().next().value!; this.bytes -= this.entries.get(first)!.data.length; this.entries.delete(first);
         }
-        this.entries.set(url, {...result, at: Date.now()}); this.bytes += result.data.length;
+        this.entries.set(key, {...result, at: Date.now()}); this.bytes += result.data.length;
         return result;
       } catch (error) {
         if (!(error instanceof Error && error.message === "photo_busy")) state.blocked = Date.now() + (error instanceof Error && error.message === "photo_blocked" ? 30 * 60_000 : 10_000);
         throw error;
-      } finally { if (acquired) { state.active--; this.active--; } this.pending.delete(url); }
+      } finally { if (acquired) { state.active--; this.active--; } this.pending.delete(key); }
     })();
-    this.pending.set(url, task); return task;
+    this.pending.set(key, task); return task;
   }
 }

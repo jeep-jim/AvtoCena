@@ -50,4 +50,19 @@ try{for(const width of [390,1440]){
  }catch(e){console.log('FAIL',JSON.stringify({width,errors,error:String(e)}));await page.screenshot({path:`artifacts/catalog-live/failure-${width}.png`});throw e;}finally{await context.close();}
 }
 console.log('LIVE_JOURNEY',JSON.stringify(results));
+const photosContext=await browser.newContext({viewport:{width:1440,height:900}});
+try{
+ const page=await photosContext.newPage(),statuses=[];
+ page.on('response',response=>{if(new URL(response.url()).pathname.startsWith('/api/catalog/photo/'))statuses.push(response.status());});
+ const start=Date.now();
+ await page.goto(`${origin}/cars?market=korea`,{waitUntil:'domcontentloaded',timeout:90000});
+ await page.waitForFunction(()=>{
+  const images=[...document.querySelectorAll('[data-catalog-batch="1"] article img[width="400"]')].slice(0,4);
+  return images.length===4&&images.every(image=>image.complete&&image.naturalWidth>0);
+ },null,{timeout:30000});
+ const visiblePhotosMs=Date.now()-start;
+ const images=await page.locator('[data-catalog-batch="1"] article img[width="400"]').evaluateAll(nodes=>nodes.slice(0,4).map(image=>({width:image.naturalWidth,card:new URL(image.src).searchParams.get('view')==='card'})));
+ assert.ok(images.every(image=>image.card&&image.width<=800),'catalog covers must use bounded card renditions');
+ console.log('LIVE_PHOTOS',JSON.stringify({visiblePhotosMs,images,statuses}));
+}finally{await photosContext.close();}
 }finally{fs.writeFileSync('artifacts/catalog-live/results.json',JSON.stringify(results,null,2));await browser.close();}

@@ -8,7 +8,7 @@ export function CatalogCover({src, alt, eager}: {src:string; alt:string; eager:b
   const thumbnail = catalogCoverThumbnail(src);
   const imageRef = useRef<HTMLImageElement>(null);
   const handleFailure = (image: HTMLImageElement) => {
-    if (!retryProtectedPhotoImage(image)) setFailure({src,stage:stage === 0 && thumbnail !== src ? 1 : 2});
+    if (!retryProtectedPhotoImage(image)) setFailure({src,stage:stage === 0 && thumbnail !== src && !src.startsWith('/api/catalog/photo/') ? 1 : 2});
   };
   useEffect(() => {
     const image = imageRef.current;

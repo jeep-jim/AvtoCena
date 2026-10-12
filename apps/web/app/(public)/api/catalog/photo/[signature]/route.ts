@@ -1,6 +1,6 @@
 import { photoProxyEligible, validPhotoSignature, supportedPhotoContentType } from "@/lib/catalog/photo-proxy-policy";
 import { PhotoMemoryCache } from "@/lib/catalog/photo-memory-cache";
-import sharp from "sharp";
+import { renderCatalogPhoto } from "@/lib/catalog/photo-rendition";
 import crypto from "node:crypto";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,6 +9,7 @@ const timer = setInterval(() => cache.prune(), 60_000); timer.unref?.();
 export async function GET(request: Request, {params: routeParams}: {params: Promise<{signature: string}>}) {
   const params = new URL(request.url).searchParams;
   const url = params.get("url") || "", market = params.get("market") || "", sig = (await routeParams).signature;
+  const card = params.get("view") === "card";
   if (url.length > 2048 || !photoProxyEligible(url, market) || !validPhotoSignature(url, market, sig)) return new Response(null, {status: 403});
   try {
     const image = await cache.read(url, async () => {
@@ -18,9 +19,9 @@ export async function GET(request: Request, {params: routeParams}: {params: Prom
       const reader = response.body?.getReader(); if (!reader) throw new Error("photo_empty");
       const chunks: Buffer[] = []; let total = 0;
       try { while (true) { const {done, value} = await reader.read(); if (done) break; total += value.length; if (total > 8 * 1024 * 1024) throw new Error("photo_size"); chunks.push(Buffer.from(value)); } } finally { await reader.cancel().catch(()=>{}); }
-      const data = await sharp(Buffer.concat(chunks), {limitInputPixels: 32_000_000}).rotate().resize({width: 1800, height: 1800, fit: "inside", withoutEnlargement: true}).webp({quality: 82}).toBuffer();
+      const data = await renderCatalogPhoto(Buffer.concat(chunks), card);
       return {data, type: "image/webp"};
-    });
+    }, card ? "card" : "full");
     const etag = `"${crypto.createHash("sha256").update(image.data).digest("hex")}"`;
     const headers = {"content-type": image.type, "cache-control": "public, max-age=86400", etag, "x-content-type-options": "nosniff"};
     if (request.headers.get("if-none-match") === etag) return new Response(null, {status: 304, headers});
