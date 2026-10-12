@@ -145,6 +145,22 @@ jobs:
           if failures:raise SystemExit(1)
           PYTHON
 
+      - name: Verify crawler budget and retry guidance
+        if: always()
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,urllib.error,concurrent.futures,json
+          def request(_):
+              req=urllib.request.Request('https://avtocena.com/cars?market=korea',method='HEAD',headers={'User-Agent':'AvtoCenaPerformanceBot/1.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as r:return {'status':r.status,'retryAfter':r.headers.get('Retry-After')}
+              except urllib.error.HTTPError as e:return {'status':e.code,'retryAfter':e.headers.get('Retry-After')}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:results=list(pool.map(request,range(6)))
+          print('CRAWLER_BUDGET',json.dumps(results))
+          assert all(r['status'] in (200,429) for r in results)
+          assert any(r['status']==429 and r['retryAfter']=='5' for r in results)
+          PYTHON
+
       - name: Exercise published catalog on mobile and desktop
         if: always()
         run: |
