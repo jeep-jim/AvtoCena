@@ -77,8 +77,9 @@ test("all catalog filters use the projection when optional categorical shards ar
     let projectionReads = 0;
     let brandProjectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
-      if (relativePath === "catalog/public/projection/korea.json") projectionReads++;
-      if (relativePath.startsWith("catalog/public/projection-brand/hyundai-")) brandProjectionReads++;
+      if (relativePath === "catalog/public/projection/korea.json" || relativePath === `catalog/generations/${manifest.generationId}/indexes/projection/korea.json`) projectionReads++;
+      if (relativePath.startsWith(`catalog/generations/${manifest.generationId}/indexes/projection-brand/hyundai-`)) brandProjectionReads++;
+      assert.ok(!relativePath.startsWith("catalog/public/projection-brand/"), "published generation avoids mutable brand aliases");
       return originalRead(relativePath, fallback);
     };
     try {
@@ -94,8 +95,9 @@ test("all catalog filters use the projection when optional categorical shards ar
     brandProjectionReads = 0;
     let manifestReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
-      if (relativePath === "catalog/public/projection/all.json") allProjectionReads++;
-      if (relativePath.startsWith("catalog/public/projection-brand/hyundai-")) brandProjectionReads++;
+      if (relativePath === "catalog/public/projection/all.json" || relativePath === `catalog/generations/${manifest.generationId}/indexes/projection/all.json`) allProjectionReads++;
+      if (relativePath.startsWith(`catalog/generations/${manifest.generationId}/indexes/projection-brand/hyundai-`)) brandProjectionReads++;
+      assert.ok(!relativePath.startsWith("catalog/public/projection-brand/"), "published generation avoids mutable brand aliases");
       if (relativePath === "catalog/manifest.json") manifestReads++;
       return originalRead(relativePath, fallback);
     };

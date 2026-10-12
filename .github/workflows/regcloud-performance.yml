@@ -35,7 +35,7 @@ jobs:
           import urllib.request,time,json,sys
           base='http://127.0.0.1:'+sys.argv[1]
           with urllib.request.urlopen(base+'/api/health',timeout=15) as r:print('HEALTH',r.read().decode(),flush=True)
-          paths=['/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/cars?sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24','/api/catalog/search?market=korea&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&sort=totalRubDesc','/api/catalog/search?market=china&pageSize=24&sort=totalRub','/api/catalog/search?market=europe&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&budgetTo=3000000','/cars/offer/kia-k5-iii-benzin-2-0-prestige-2021--a877bac6f6ecedcd6101bca2','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb','/api/catalog/search?market=korea&pageSize=24&sort=totalRub']
+          paths=['/cars?sort=totalRub&city=%D0%A3%D1%81%D1%81%D1%83%D1%80%D0%B8%D0%B9%D1%81%D0%BA','/cars','/cars?sort=totalRubDesc','/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/cars?sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24','/api/catalog/search?market=korea&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&sort=totalRubDesc','/api/catalog/search?market=china&pageSize=24&sort=totalRub','/api/catalog/search?market=europe&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&pageSize=24&budgetTo=3000000','/cars/offer/kia-k5-iii-benzin-2-0-prestige-2021--a877bac6f6ecedcd6101bca2','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb','/api/catalog/search?market=korea&pageSize=24&sort=totalRub']
           failures=[]
           for path in paths:
               start=time.monotonic()
@@ -43,12 +43,24 @@ jobs:
                   with urllib.request.urlopen(base+path,timeout=60) as r:
                       body=r.read(); result={'path':path,'seconds':round(time.monotonic()-start,3),'status':r.status,'bytes':len(body),'timing':r.headers.get('Server-Timing')}
                       if path.startswith('/api/'):
-                          value=json.loads(body);result.update(total=value.get('total'),items=len(value.get('items',[])),prices=[{'id':x['id'],'rub':x.get('totalRub'),'seller':x.get('sellerPriceRub'),'preview':(x.get('japanDeliveredPreview') or {}).get('totalRub')} for x in value.get('items',[])])
+                          value=json.loads(body);assert value.get('total',0)>0 and value.get('items');result.update(total=value.get('total'),items=len(value.get('items',[])),prices=[{'id':x['id'],'rub':x.get('totalRub'),'seller':x.get('sellerPriceRub'),'preview':(x.get('japanDeliveredPreview') or {}).get('totalRub')} for x in value.get('items',[])])
+                      else:assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
                       print('MEASURE',json.dumps(result),flush=True)
                       if result['seconds']>3:failures.append({'path':path,'seconds':result['seconds']})
               except Exception as error:
                   failures.append({'path':path,'error':str(error)})
                   print('MEASURE',json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'error':str(error)}),flush=True)
+          import gzip
+          for path in ['/cars?sort=totalRub','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
+              start=time.monotonic()
+              try:
+                  req=urllib.request.Request('https://avtocena.com'+path,headers={'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=60) as r:
+                      wire=r.read();body=gzip.decompress(wire) if r.headers.get('Content-Encoding')=='gzip' else wire
+                      assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      print('EXTERNAL',json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'wireBytes':len(wire),'htmlBytes':len(body),'encoding':r.headers.get('Content-Encoding')}),flush=True)
+              except Exception as error:
+                  failures.append({'external':path,'error':str(error)})
           print('PERFORMANCE_GATE',json.dumps({'thresholdSeconds':3,'failures':failures}),flush=True)
           if failures:raise SystemExit(1)
           PERF
