@@ -4,7 +4,8 @@ import { assessJapanExportRestriction } from "./japan-export-restriction";
 import { unstable_cache } from "next/cache";
 import { japanPreviewParameters } from "./japan-preview-parameters";
 import { calculateOfferWithCustomerParametersDetailed } from "./customs-pricing";
-import { readDataJson } from "../data";
+import { getJsonStorage } from "../data";
+import { RevalidatedJson } from "./revalidated-json";
 import { catalogGenerationId } from "./storage";
 import { DetailReadCache } from "./detail-read-cache";
 import { japanPreviewInputPath, matchesJapanPreviewInput, type JapanPreviewInputIndex } from "./japan-preview-inputs";
@@ -14,9 +15,10 @@ import {catalogRateFingerprintInputs} from "./rates";
 import {calculationCacheVersion} from "./shared-budget-prices";
 
 const inputs = new DetailReadCache<JapanPreviewInputIndex | null>({maxEntries:2,maxBytes:16*1024*1024,ttlMs:60_000,concurrency:1});
+const revalidatedInputs = new RevalidatedJson<JapanPreviewInputIndex|null>(16*1024*1024);
 export async function readJapanPreviewInputs() {
   const generationId = await catalogGenerationId();
-  return inputs.get(generationId, () => readDataJson<JapanPreviewInputIndex | null>(japanPreviewInputPath(generationId),null));
+  return inputs.get(generationId, () => revalidatedInputs.read(getJsonStorage(),japanPreviewInputPath(generationId),null));
 }
 const preview = unstable_cache(async (id: string, _revision: string, generationId: string, updatedAt: string, sourcePrice: number | null, sourceCurrency: string | null) => {
   const index = await readJapanPreviewInputs().catch(()=>null);
