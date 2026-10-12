@@ -83,6 +83,22 @@ jobs:
           cat /opt/avtocena/metrics/resources.json
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
+          docker stats --no-stream --format 'container={{.Name}} memory={{.MemUsage}} cpu={{.CPUPerc}}'
+          ps -eo comm,pcpu,rss --sort=-pcpu | python3 -c 'import sys;print("".join(sys.stdin.readlines()[:12]))'
+          python3 - <<'ACCESS'
+          import pathlib,collections,re,json
+          counts=collections.Counter()
+          log=pathlib.Path('/var/log/nginx/access.log')
+          if log.exists():
+              with log.open(errors='replace') as stream: lines=collections.deque(stream,maxlen=5000)
+              for line in lines:
+                  match=re.search(r'"(?:GET|POST|HEAD) ([^ ]+) HTTP/[^"]+" (\d+)',line)
+                  if not match:continue
+                  path=match[1].split('?')[0]
+                  category=next((name for name,prefix in [('market-counts','/api/catalog/market-counts'),('sitemap','/sitemap'),('offer','/cars/offer/'),('catalog-api','/api/catalog/'),('catalog','/cars'),('health','/api/health'),('ai-feed','/ai/') ] if path.startswith(prefix)),'other')
+                  counts[(category,match[2])]+=1
+              print('RECENT_ACCESS_COUNTS',json.dumps([{'route':route,'status':status,'requests':count} for (route,status),count in counts.most_common()]))
+          ACCESS
           exit "$perf_status"
           REMOTE
 
