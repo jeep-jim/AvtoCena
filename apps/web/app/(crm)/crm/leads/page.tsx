@@ -155,7 +155,7 @@ export default async function CrmLeadsPage({
       </div>
       <div className="crm-lead-view-toolbar">
       <div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>
-      <LeadFilters count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
+      <LeadFilters key={JSON.stringify(params)} count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
         <input type="hidden" name="layout" value={board?"board":"list"} />
