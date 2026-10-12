@@ -1,5 +1,6 @@
-// Conservative decimal-byte budget below the approved 100 GiB bucket quota.
-export const CATALOG_STORAGE_LIMIT_BYTES = 100_000_000_000;
+// Owner raised the REG object-storage quota to 1000 GB on 12.10.2026.
+// Decimal bytes are conservative relative to a 1000 GiB provider quota.
+export const CATALOG_STORAGE_LIMIT_BYTES = 1_000_000_000_000;
 export const CATALOG_STORAGE_HEADROOM_BYTES = 5_000_000_000;
 export function catalogStorageBudget(currentBytes,inputBytes) {
  if (![currentBytes,inputBytes].every(n=>Number.isSafeInteger(n)&&n>=0))throw Error('Invalid storage inventory size');
