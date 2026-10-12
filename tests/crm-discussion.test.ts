@@ -15,6 +15,24 @@ test('chat preserves assignment/status, appends replies once and notifies only p
  assert.equal(edited.messages[1].text,'Corrected answer');assert.ok(edited.messages[1].editedAt);assert.equal(edited.messages[1].replyTo,'old');assert.equal(state.leads[0].status,'contacted');assert.equal(state.leads[0].assignedManagerId,'m');assert.equal(state.leads[0].internalNotes.length,2);assert.equal(state.notices.length,1);assert.equal(state.events.length,2);
  await api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'Corrected answer',expectedText:'Answer'});assert.equal(state.events.length,2);
  await assert.rejects(api.editDiscussionMessage(user,'lead','l',{messageId:noteId,text:'Stale edit',expectedText:'Answer'}),/edit_conflict/);
- await api.addDiscussionMessage(user,'client','c',{text:'Client note',operationId:'operation-client'});assert.equal(state.clients[0].internalNotes[0].text,'Client note');state.leads[0].assignedManagerId='other';await assert.rejects(api.addDiscussionMessage(user,'lead','l',{text:'No access',operationId:'operation-denied'}),/forbidden/);
+
+ await api.reactDiscussionMessage(user,'lead','l',{messageId:noteId,emoji:'👍',active:true});
+ await api.reactDiscussionMessage(user,'lead','l',{messageId:noteId,emoji:'👍',active:true});
+ assert.deepEqual(state.leads[0].internalNotes[1].reactions['👍'],['m']);
+ await api.reactDiscussionMessage(state.users[0],'lead','l',{messageId:noteId,emoji:'👍',active:true});
+ await api.reactDiscussionMessage(user,'lead','l',{messageId:noteId,emoji:'👍',active:false});
+ assert.deepEqual(state.leads[0].internalNotes[1].reactions['👍'],['owner']);
+ await assert.rejects(api.reactDiscussionMessage(state.users[2],'lead','l',{messageId:noteId,emoji:'👍',active:true}),/forbidden/);
+ await assert.rejects(api.reactDiscussionMessage(user,'lead','l',{messageId:noteId,emoji:'bad',active:true}),/invalid_message/);
+ const targets=await api.discussionTargets(user);assert.equal(targets.length,2);
+ const forwarded=await api.addDiscussionMessage(user,'client','c',{text:'Forged',operationId:'forward-op-123',forwardFrom:{type:'lead',id:'l',messageId:noteId}});
+ assert.equal(forwarded.messages[0].text,'Corrected answer');assert.equal(forwarded.messages[0].forwarded.author,'Manager');
+ await assert.rejects(api.addDiscussionMessage(state.users[2],'client','c',{operationId:'forward-denied',forwardFrom:{type:'lead',id:'l',messageId:noteId}}),/forbidden/);
+ const withFile=await api.addDiscussionMessage(user,'lead','l',{text:'file',operationId:'attachment-123'},{id:'private-file',name:'quote.pdf',mime:'application/pdf',size:50});
+ assert.equal(withFile.messages.at(-1).attachment.id,'private-file');
+ const forged=await api.addDiscussionMessage(user,'lead','l',{text:'test',operationId:'forged-file-123',attachment:{id:'unowned-file'}});
+ assert.equal(forged.messages.at(-1).attachment,undefined);
+ await assert.rejects(api.addDiscussionMessage(user,'client','c',{operationId:'forward-file',forwardFrom:{type:'lead',id:'l',messageId:withFile.messages.at(-1).id}}),/invalid_message/);
+ await api.addDiscussionMessage(user,'client','c',{text:'Client note',operationId:'operation-client'});assert.equal(state.clients[0].internalNotes.at(-1).text,'Client note');state.leads[0].assignedManagerId='other';await assert.rejects(api.addDiscussionMessage(user,'lead','l',{text:'No access',operationId:'operation-denied'}),/forbidden/);
  }finally{delete (globalThis as any).__chat;}
 });

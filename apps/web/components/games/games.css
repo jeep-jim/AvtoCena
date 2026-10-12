@@ -4,3 +4,4 @@
   .is-util .ac-game-stage{top:calc(56px + env(safe-area-inset-top))}
   .is-util .ac-game-close{top:-48px;bottom:auto}
 }
+.ac-lead-games{margin-top:20px;padding-top:16px;border-top:1px solid var(--ac-border)}.ac-lead-games .ac-game-account{background:#ffd439!important;color:#191919!important;border-color:#ffd439!important;font-weight:800}.ac-lead-games .ac-game-buttons{margin:12px 0}.ac-lead-games .ac-game-button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px}

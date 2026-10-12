@@ -1,21 +1,21 @@
 import Link from 'next/link';
+import {CarFront,UserRound} from 'lucide-react';
 import {LEAD_COLUMNS,leadColumn} from '@/lib/crm-lead-board';
-import {leadStatusLabel} from '@/lib/crm';
+import {leadStatusLabel,leadMetrikaStage} from '@/lib/crm';
 import {crmDateTime} from '@/lib/crm-time';
-export function LeadBoard({groups,managers}:{groups:any[][];managers:{id:string;displayName:string}[]}){
- return <div className="flex gap-4 overflow-x-auto pb-5" aria-label="Заявки по этапам">{LEAD_COLUMNS.map(column=>{
+function image(lead:any){const value=lead.selectedOffers?.[0]?.image||lead.offerSnapshot?.image||lead.offerImageUrl;return typeof value==='string'&&(/^(https?:\/\/|\/[^/])/.test(value))?value:undefined;}
+export function LeadBoard({groups,managers,avatars={}}:{groups:any[][];managers:{id:string;displayName:string}[];avatars?:Record<string,string>}){
+ return <div className="crm-lead-board" aria-label="Заявки по этапам">{LEAD_COLUMNS.map(column=>{
  const selected=groups.filter(group=>leadColumn(group[0].status)===column.id);
- return <section key={column.id} className="w-[320px] max-w-[85vw] shrink-0 rounded-2xl bg-[var(--ac-surface-2)] p-3" aria-label={column.title}>
- <h2 className="mb-3 flex justify-between border-b-2 border-red-500 pb-3 font-bold">{column.title}<span>{selected.length}</span></h2>
- <div className="space-y-3">{selected.map(group=><article key={group[0].id} className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-3">
- <strong className="block break-words">{group[0].name||'Клиент'}</strong><p className="text-sm text-[var(--ac-muted)]">{group[0].phone||group[0].telegram||'Контакт в заявке'}</p>
- {group.map(lead=><Link key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}&layout=list`} className="mt-3 block rounded-lg border border-[var(--ac-border)] p-2 hover:border-red-500">
- <span className="block font-semibold">{lead.selectedOffers?.map((o:any)=>o.title).filter(Boolean).join(' · ')||lead.offerTitle||lead.car||'Подбор автомобиля'}</span>
- <span className="my-1 block text-sm text-red-500">{leadStatusLabel(lead.status)}</span>
- <span className="block text-xs">{managers.find(m=>m.id===lead.assignedManagerId)?.displayName||'Без ответственного'}</span>
- <time className="block text-xs text-[var(--ac-muted)]">{crmDateTime(lead.createdAt)}</time>
- {lead.createdOffice&&<span className="block text-xs">Первое обращение: {lead.createdOffice}</span>}
+ return <section key={column.id} className="crm-board-column" data-stage={column.id} aria-label={column.title}>
+ <h2>{column.title}<span>{selected.length}</span></h2>
+ <div className="space-y-3">{selected.map(group=><article key={group[0].id} className="crm-board-client">
+ <header>{avatars[group[0].clientId]?<img src={avatars[group[0].clientId]} alt="" width={32} height={32}/>:<UserRound size={25}/>}<div><strong>{group[0].name||'Клиент'}</strong><p>{group[0].phone||group[0].telegram||'Контакт в заявке'}</p></div></header>
+ {group.map(lead=><Link key={lead.id} href={`/crm/leads?id=${encodeURIComponent(lead.id)}&layout=list`} className="crm-board-car">
+ <div className="crm-board-car-heading">{image(lead)?<img src={image(lead)} alt="" width={72} height={56} loading="lazy" referrerPolicy="no-referrer"/>:<span className="crm-board-car-placeholder"><CarFront size={26}/></span>}<strong>{lead.selectedOffers?.map((o:any)=>o.title).filter(Boolean).join(' · ')||lead.offerTitle||lead.car||'Подбор автомобиля'}</strong></div>
+ <span className="crm-stage-badge" data-metrika-stage={leadMetrikaStage(lead.status)?.tone} data-stage={leadColumn(lead.status)}>{leadStatusLabel(lead.status)}</span>
+ <footer><span>{managers.find(m=>m.id===lead.assignedManagerId)?.displayName||'Без ответственного'}</span><time>{crmDateTime(lead.createdAt)}</time></footer>
  </Link>)}
- </article>)}{!selected.length&&<p className="py-4 text-sm text-[var(--ac-muted)]">Пока нет заявок</p>}</div></section>;
+ </article>)}{!selected.length&&<p className="crm-board-empty">Пока нет заявок</p>}</div></section>;
  })}</div>;
 }

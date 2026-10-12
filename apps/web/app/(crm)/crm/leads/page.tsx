@@ -1,3 +1,5 @@
+import {LeadFilters,CollapseLead} from "@/components/crm/LeadFilters";
+import {leadColumn} from "@/lib/crm-lead-board";
 import {LeadBoard} from "@/components/crm/LeadBoard";
 import {LeadNotes} from "@/components/crm/LeadNotes";
 import {groupCrmLeads} from "@/lib/crm-customer-group";
@@ -13,7 +15,6 @@ import {hasCrmPermission} from "@/lib/crm-permissions";
 import {ManualClientOrigin} from "@/components/crm/ManualClientOrigin";
 import {manualClientIndex} from "@/lib/crm-client-origin";
 import {ContactIcon} from "@/components/crm/ContactIcon";
-import {LeadDateFilter} from "@/components/crm/LeadDateFilter";
 import { LeadStatusHelp } from "@/components/crm/LeadStatusHelp";
 import { LeadReadStatus } from "@/components/crm/LeadReadStatus";
 import { leadReadState } from "@/lib/crm-read-state";
@@ -122,7 +123,7 @@ export default async function CrmLeadsPage({
   const visibleGroups = id
     ? groupCrmLeads(stored.filter(lead => lead.id === id && canSeeLead(user,lead)), clients)
     : groups.slice(0, 100);
-  const board = !id && first(params.layout) !== "list" && view !== "archive";
+  const board = !id && first(params.layout) === "board" && view !== "archive";
   const layoutHref=(layout:string)=>`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),layout})}`;
   const visible = visibleGroups.flat();
   const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
@@ -152,14 +153,14 @@ export default async function CrmLeadsPage({
         ))}
 
       </div>
-      <div className="crm-metrika-legend crm-metrika-legend-mobile" aria-label="Статусы для Метрики">
-        <strong>Статусы для Метрики</strong><LeadStatusHelp />
-      </div>
+      <div className="crm-lead-view-toolbar">
+      <div className="crm-lead-layout" aria-label="Вид заявок">{[["list","Список"],["board","По этапам"]].map(([key,label])=><Link key={key} href={layoutHref(key)} aria-current={(board?"board":"list")===key?"page":undefined}>{label}</Link>)}</div>
+      <LeadFilters count={["q","status","manager","date","dealer"].filter(key=>first(params[key])).length}>
       <form className="crm-lead-filters mb-4 grid gap-2 rounded-2xl bg-[var(--ac-surface-2)] p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
         <input type="hidden" name="view" value={view} />
         <input type="hidden" name="layout" value={board?"board":"list"} />
         {view==='dealers'&&<select name="dealer" aria-label="Фильтр дилера" defaultValue={dealerFilter} className="soft-input rounded-xl p-3"><option value="">Все дилеры</option>{Array.from(new Map(stored.filter(l=>canSeeLead(user,l)&&leadDealerId(l)!=='dealer_topavto').map(l=>[leadDealerId(l),l.requestedDealerName||leadDealerId(l)])).entries()).map(([id,name])=><option key={id} value={id}>{String(name)}</option>)}</select>}
-        <input type="hidden" name="date" value={first(params.date)} />
+        <label className="crm-filter-date">Дата заявки<input className="soft-input rounded-xl p-3" type="date" name="date" defaultValue={first(params.date)} /></label>
         <input
           name="q"
           aria-label="Поиск заявок"
@@ -198,31 +199,18 @@ export default async function CrmLeadsPage({
           Найти
         </button>
       </form>
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <span className="text-sm text-[var(--ac-muted)]">
-          Клиентов: {groups.length} · Заявок: {leads.length}
-          {groups.length > 100 ? " · показаны первые 100, уточните поиск" : ""}
-        </span>
-        <Link href={`/crm/leads?view=${view}`} className="text-sm underline">
-          Сбросить фильтры
-        </Link>
-      </div>
-      <div className="mb-4 flex gap-2" aria-label="Вид заявок">{[["board","По этапам"],["list","Списком"]].map(([key,label])=><Link key={key} href={layoutHref(key)} className={`rounded-xl px-4 py-2 font-bold ${(board?"board":"list")===key?"bg-red-500 text-white":"border border-[var(--ac-border)]"}`}>{label}</Link>)}</div>
-      <ManualLeadForm offices={user.workAddresses||[]} headerAside={
-        <div className="crm-lead-toolbar-aside">
-          <div className="crm-metrika-legend crm-metrika-legend-desktop" aria-label="Статусы для Метрики">
-            <strong>Статусы для Метрики</strong><LeadStatusHelp />
-          </div>
-      <LeadDateFilter date={first(params.date)} filters={Object.fromEntries(["view","q","status","manager","dealer"].map(key=>[key,first(params[key])]))} />
-        </div>
-      } />
-      {board&&<><p className="mb-3 text-sm text-[var(--ac-muted)]">Клиенты сгруппированы по этапу последней заявки. Все автомобили и их статусы видны в карточке.</p><LeadBoard groups={visibleGroups} managers={managers}/></>}
+      <Link href={`/crm/leads?${new URLSearchParams({view,layout:board?"board":"list"})}`} className="crm-filter-reset">Сбросить фильтры</Link>
+      <div className="crm-filter-help"><LeadStatusHelp /></div>
+      </LeadFilters></div>
+      <div className="crm-lead-count">Клиентов: {groups.length} · Заявок: {leads.length}{groups.length > 100 ? " · показаны первые 100" : ""}</div>
+      <ManualLeadForm offices={user.workAddresses||[]} />
+      {board&&<LeadBoard groups={visibleGroups} managers={managers} avatars={Object.fromEntries(registrationAvatars)}/>}
       <div className={`mt-4 space-y-3${board?" hidden":""}`}>
-        {visibleGroups.map(group => <section key={group[0].id} aria-label="Заявки клиента" className={group.length > 1 ? "overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]" : ""}>
-          {group.length > 1 && <div className="flex flex-wrap items-center justify-between gap-3 p-4">
+        {visibleGroups.map(group => <section key={group[0].id} aria-label="Заявки клиента" className={group.length > 1 ? "crm-lead-client-group overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)]" : ""}>
+          {group.length > 1 && <div className="crm-lead-group-heading flex flex-wrap items-center justify-between gap-3 p-4">
             <div className="min-w-0"><strong>{group[0].name || group[0].telegramDisplayName || "Клиент"}</strong><div className="mt-1 text-sm text-[var(--ac-muted)]"><LeadContact lead={group[0]} /></div></div>
             <div className="min-w-0 flex-1 px-3 text-sm">{Array.from(new Set(group.map(lead => offers(lead)[0]?.title || lead.car || "Подбор автомобиля"))).join(" · ")}</div>
-            <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block text-red-500">Заявок: {group.length}</strong></div>
+            <div className="text-right text-xs text-[var(--ac-muted)]"><div>{date(group[0].createdAt)}</div><strong className="mt-2 block">Заявок: {group.length}</strong></div>
           </div>}
           <div className={group.length > 1 ? "space-y-3 border-t border-[var(--ac-border)] p-3" : ""}>{group.map((lead) => {
           const priorClient = previousManualClient(lead);
@@ -285,7 +273,8 @@ export default async function CrmLeadsPage({
                   <span
                     data-metrika-stage={leadMetrikaStage(lead.status)?.tone}
                     title={leadMetrikaStage(lead.status) ? `Цель Метрики: ${leadMetrikaStage(lead.status)?.name}` : undefined}
-                    className={`inline-block rounded-lg px-2 py-1 font-bold ${lead.status === "new" ? "bg-red-500 text-white" : "bg-[var(--ac-surface)]"}`}
+                    data-stage={leadColumn(lead.status)}
+                    className="crm-stage-badge inline-block rounded-lg px-2 py-1 font-bold"
                   >
                     {leadMetrikaStage(lead.status)?.marker} {leadStatusLabel(lead.status)}
                   </span>
@@ -297,11 +286,12 @@ export default async function CrmLeadsPage({
                   {date(lead.createdAt)}
                   <div className="mt-2 flex items-center justify-end gap-2 font-bold">
                     {lead.followups?.length ? <span className="crm-followup-count" aria-label={`Дополнений: ${lead.followups.length}`} title={`Дополнений: ${lead.followups.length}`}>{lead.followups.length}</span> : null}
-                    <span>Открыть ↓</span>
+                    <span className="crm-lead-open-label">Открыть ↓</span><span className="crm-lead-close-label">Свернуть ↑</span>
                   </div>
                 </div>
               </summary>
               <div className="border-t border-[var(--ac-border)] p-4 md:p-5">
+                <CollapseLead/>
                 <div className="crm-lead-detail-grid">
                   <section className="crm-lead-detail-info">
                     <LeadReadStatus leadId={lead.id} userId={user.id} eventKey={leadReadState(lead,user.id).eventKey} initialReceipts={lead.readReceipts||[]} />
@@ -442,6 +432,7 @@ export default async function CrmLeadsPage({
                     canArchive={isAdminRole(user.role)} archived={Boolean(lead.archivedAt)}
                   />:null}
                 </div>
+                <CollapseLead/>
               </div>
             </details>
           );

@@ -1,4 +1,5 @@
 "use client";
+import {readSelectedCity} from "../../lib/location/selected-city";
 import {LeadSuccessGames} from '../games/GamesHub';
 import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
 import {LEAD_CONSENT_VERSION} from "@/lib/privacy-documents";
@@ -74,8 +75,7 @@ function initialCity() {
   try {
     const query = new URLSearchParams(window.location.search).get("city");
     if (cleanText(query)) return cleanText(query);
-    const cookie = document.cookie.split(";").map((part) => part.trim()).find((part) => part.startsWith("avtocena_city="));
-    if (cookie) return decodeURIComponent(cookie.slice("avtocena_city=".length));
+    return readSelectedCity();
   } catch { /* storage may be unavailable */ }
   return "";
 }
@@ -174,6 +174,22 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
   const ownerDocument=portalDocument||document;
   const panelRef = useRef<HTMLElement>(null);
   const [form, setForm] = useState<LeadFormState>(() => ({ city: (()=>{if(request.mode==="offer"){try{const data=JSON.parse(ownerDocument.querySelector<HTMLElement>("main[data-offer-preview]")?.dataset.offerPreview||"null");if(data?.id===request.offerId&&typeof data.deliveryCity==="string")return data.deliveryCity;}catch{}}return initialCity();})(), name: "", phone: "+7", car: request.mode === "offer" || request.mode === "generic" ? cleanText(request.car) : "", budget: "", comment: request.mode === "generic" ? request.comment || "" : "" }));
+  const editedFields = useRef(new Set<keyof LeadFormState>());
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/account/auth', {cache: 'no-store', signal: controller.signal})
+      .then(response => response.ok ? response.json() : null)
+      .then(data => {
+        const account = data?.account;
+        if (!account || controller.signal.aborted) return;
+        setForm(current => ({...current,
+          name: editedFields.current.has('name') || current.name ? current.name : account.profileConfigured || !['Покупатель','Пользователь'].includes(account.name) ? cleanText(account.name) : '',
+          phone: editedFields.current.has('phone') || current.phone.replace(/\D/g,'').length > 1 ? current.phone : normalizeRuPhone(account.phone) || current.phone,
+          city: editedFields.current.has('city') || current.city ? current.city : initialCity(),
+        }));
+      }).catch(() => {});
+    return () => controller.abort();
+  }, []);
   const [contactPreference, setContactPreference] = useState<ContactPreference>("call");
   const [messenger, setMessenger] = useState<MessengerKind>("telegram");
   const [messengerContact, setMessengerContact] = useState("+7");
@@ -225,7 +241,7 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
     if (status === "success") panelRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   }, [status]);
 
-  const setField = (key: keyof LeadFormState, value: string) => setForm((current) => ({ ...current, [key]: value }));
+  const setField = (key: keyof LeadFormState, value: string) => { editedFields.current.add(key); setForm((current) => ({ ...current, [key]: value })); };
   const toggleFavorite = (id: string) => setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : current.length < 5 && favoriteDealer(favorites.find(item=>item.id===id)!).id===selectedDealer ? [...current, id] : current);
 
   function validate() {
@@ -291,7 +307,7 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
       if (!response.ok || !json?.ok) throw new Error(json?.error || "Не удалось отправить заявку");
       clearOperationId(operation.key);
       setStatus("success");
-      setMessage(`Заявка принята. Менеджер ${contactPreference === "message" ? "напишет вам в выбранный мессенджер" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
+      setMessage(`Менеджер ${contactPreference === "message" ? "напишет вам в выбранный мессенджер" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
     } catch (error) {
       setStatus("error");
       setMessage((error as Error)?.message || "Ошибка сети. Повторная отправка не создаст дубль заявки.");
@@ -307,11 +323,11 @@ export function LeadDialog({ request, favorites, onClose, preview=false, portalD
         <button type="button" onClick={onClose} disabled={status === "sending"} className="ac-lead-sheet-handle absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 items-center justify-center lg:hidden" aria-label="Свернуть форму"><span className="block h-1.5 w-12 rounded-full bg-white/60 shadow-[0_1px_5px_rgba(0,0,0,.28)]" /></button>
         <section ref={panelRef} className="ac-lead-dialog ac-hide-scrollbar max-h-[94dvh] w-full overflow-y-auto rounded-t-[28px] bg-[var(--ac-surface)] px-4 pb-[calc(20px+env(safe-area-inset-bottom))] pt-7 text-[var(--ac-text)] lg:max-h-[90vh] lg:rounded-[28px] lg:p-7">
           <header className="relative block min-w-0">
-            {status === "success" ? <div className="flex min-w-0 items-center gap-3 pr-14"><div className="ac-success-check flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-xl font-black text-white">✓</div><h2 id="ac-lead-dialog-title" className="text-3xl font-black tracking-[-.03em]">Готово!</h2></div> : <div className="min-w-0 w-full"><h2 id="ac-lead-dialog-title" className="pr-14 text-2xl font-black tracking-[-.03em] md:text-3xl">{title}</h2><p className="mt-2 w-full max-w-none text-sm font-medium leading-6 text-[var(--ac-muted)]">{intro}</p></div>}
+            {status === "success" ? <div className="flex min-w-0 items-center gap-3 pr-14"><div className="ac-success-check flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-xl font-black text-white">✓</div><h2 id="ac-lead-dialog-title" className="text-3xl font-black tracking-[-.03em]">Заявка отправлена</h2></div> : <div className="min-w-0 w-full"><h2 id="ac-lead-dialog-title" className="pr-14 text-2xl font-black tracking-[-.03em] md:text-3xl">{title}</h2><p className="mt-2 w-full max-w-none text-sm font-medium leading-6 text-[var(--ac-muted)]">{intro}</p></div>}
             <button type="button" disabled={status === "sending"} onClick={onClose} className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>
           </header>
 
-          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p><LeadSuccessGames/></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
+          {status === "success" ? <div className="mt-4"><p className="text-sm leading-6 text-[var(--ac-muted)] md:text-base">{message}</p><LeadSuccessGames/></div> : <form data-private="true" onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <><label className="grid gap-2 text-sm font-bold">Кому отправить заявку<select aria-label="Дилер для заявки" value={selectedDealer} onChange={event=>{setSelectedDealer(event.target.value);setSelectedIds([]);setStatus('idle');setMessage('');}} className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4"><option value="" disabled>Выберите дилера</option>{dealers.map(d=><option key={d.id} value={d.id}>{d.name}</option>)}</select></label><p className="text-xs leading-5 text-[var(--ac-muted)]">Одна заявка — одному дилеру. Для автомобилей другой компании создайте отдельную заявку.</p>{selectedDealer&&<FavoriteSelector items={dealerFavorites} selectedIds={selectedIds} onToggle={toggleFavorite} />}</> : null}
             <div className="grid gap-3 md:grid-cols-2"><div className="block min-w-0"><FieldLabel required>Ваш город</FieldLabel><LeadCityField value={form.city} onChange={city => setField("city", city)} /></div><label className="block min-w-0"><FieldLabel required>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 

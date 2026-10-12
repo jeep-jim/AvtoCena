@@ -6,7 +6,7 @@ import {readCrmUsers} from './crm-users';
 import {readChunkedDataJson,updateChunkedDataJson} from './data';
 import {recordCrmActivity} from './crm-activity';
 import {notifyTeam} from './crm-notification-store';
-import {discussionMessages,discussionLabel,discussionHref,type DiscussionType,type DiscussionMessage} from './crm-discussion';
+import {discussionMessages,discussionLabel,discussionHref,type DiscussionType,type DiscussionMessage,type DiscussionAttachment,DISCUSSION_REACTIONS} from './crm-discussion';
 const file=(type:DiscussionType)=>type==='lead'?'leads/leads.json':'clients/clients.json';
 export async function discussionEntity(user:AuthUser,type:DiscussionType,id:string){
  if(!isCrmRole(user.role)||user.status==='disabled'||!['lead','client'].includes(type)||typeof id!=='string'||!id||id.length>180)throw Error('discussion_forbidden');
@@ -22,17 +22,20 @@ export async function readDiscussion(user:AuthUser,type:DiscussionType,id:string
  const entity=await discussionEntity(user,type,id),users=await readCrmUsers();
  return {label:discussionLabel(type,entity),canReply:hasCrmPermission(user,type==='lead'?'editLeads':'editClients'),userId:user.id,messages:discussionMessages(entity).map(n=>({...n,avatarUrl:users.find(u=>u.id===n.createdByUserId)?.avatarUrl})),noticeIds:discussionMessages(entity).filter(n=>n.createdByUserId!==user.id).map(n=>`comment_${type}_${id}_${n.id}`)};
 }
-export async function addDiscussionMessage(user:AuthUser,type:DiscussionType,id:string,input:any){
+export async function addDiscussionMessage(user:AuthUser,type:DiscussionType,id:string,input:any,attachment?:DiscussionAttachment){
  await discussionEntity(user,type,id);
  if(!hasCrmPermission(user,type==='lead'?'editLeads':'editClients'))throw Error('discussion_forbidden');
- const text=typeof input.text==='string'?input.text.trim():'';
+ let text=typeof input.text==='string'?input.text.trim():'';
+ let forwarded:DiscussionMessage['forwarded'];
+ if(input.forwardFrom){const source=await discussionEntity(user,input.forwardFrom.type,input.forwardFrom.id);const original=discussionMessages(source).find(n=>n.id===input.forwardFrom.messageId);if(!original||original.attachment)throw Error('invalid_message');text=original.text;forwarded={author:original.createdByName||'Сотрудник',label:discussionLabel(input.forwardFrom.type,source)};}
  if(!text||text.length>2000||typeof input.operationId!=='string'||!/^[a-zA-Z0-9_-]{8,100}$/.test(input.operationId))throw Error('invalid_message');
- const note:DiscussionMessage={id:`message-${user.id}-${input.operationId}`,text,createdAt:new Date().toISOString(),createdByUserId:user.id,createdByName:user.displayName};
+ const note:DiscussionMessage={id:`message-${user.id}-${input.operationId}`,text,createdAt:new Date().toISOString(),createdByUserId:user.id,createdByName:user.displayName,...(attachment?{attachment}:{}),...(forwarded?{forwarded}: {})};
  let added=false;
  const entity=await updateChunkedDataJson<any>(file(type),id,current=>{
   added=false;if(!canSeeLead(user,current))throw Error('discussion_forbidden');
   const messages=discussionMessages(current),existing=messages.find(n=>n.id===note.id);
   if(existing){if(existing.text!==text||existing.replyTo!==(input.replyTo||undefined))throw Error('message_conflict');return current;}
+  if(attachment&&messages.filter(n=>n.attachment).length>=100)throw Error('limit');
   if(input.replyTo){if(typeof input.replyTo!=='string'||!messages.some(n=>n.id===input.replyTo))throw Error('invalid_reply');note.replyTo=input.replyTo;}
   added=true;return {...current,updatedAt:note.createdAt,internalNotes:[...(current.internalNotes||[]),note]};
  });
@@ -62,4 +65,29 @@ export async function editDiscussionMessage(user:AuthUser,type:DiscussionType,id
  if(!entity)throw Error('discussion_forbidden');
  if(changed)await recordCrmActivity(user,{type:type==='lead'?'lead_note_edited':'client_note_edited',title:'Исправлено сообщение в обсуждении команды',entityType:type,entityId:id,entityLabel:discussionLabel(type,entity),leadId:type==='lead'?id:undefined,clientId:type==='client'?id:entity.clientId,commentId:input.messageId,text,changes:[{label:'Сообщение',before:previous,after:text}],href:discussionHref(type,id,input.messageId)});
  return readDiscussion(user,type,id);
+}
+
+export async function reactDiscussionMessage(user:AuthUser,type:DiscussionType,id:string,input:any){
+ await discussionEntity(user,type,id);
+ if(!hasCrmPermission(user,type==='lead'?'editLeads':'editClients'))throw Error('discussion_forbidden');
+ if(!DISCUSSION_REACTIONS.includes(input.emoji)||typeof input.active!=='boolean'||typeof input.messageId!=='string')throw Error('invalid_message');
+ const entity=await updateChunkedDataJson<any>(file(type),id,current=>{
+  if(!canSeeLead(user,current))throw Error('discussion_forbidden');
+  const messages=discussionMessages(current),position=messages.findIndex(n=>n.id===input.messageId);
+  if(position<0)throw Error('invalid_message');
+  const originals=Array.isArray(current.internalNotes)?current.internalNotes:[];
+  const target=originals.filter((n:any)=>typeof n.text==='string')[position];
+  const reactions={...messages[position].reactions};
+  const people=(reactions[input.emoji]||[]).filter((id:string)=>id!==user.id);
+  if(input.active)people.push(user.id);
+  if(people.length)reactions[input.emoji]=people;else delete reactions[input.emoji];
+  return {...current,internalNotes:originals.map((n:any)=>n===target?{...n,id:messages[position].id,reactions}:n)};
+ });
+ if(!entity)throw Error('discussion_forbidden');
+ return readDiscussion(user,type,id);
+}
+export async function discussionTargets(user:AuthUser){
+ if(!isCrmRole(user.role)||user.status==='disabled')throw Error('discussion_forbidden');
+ const rows=await Promise.all((['lead','client'] as const).map(async type=>!hasCrmPermission(user,type==='lead'?'editLeads':'editClients')?[]:(await readChunkedDataJson<any>(file(type),[])).filter(e=>!e.archivedAt&&canSeeLead(user,e)).slice(-200).map(e=>({type,id:e.id,label:discussionLabel(type,e)}))));
+ return rows.flat();
 }
