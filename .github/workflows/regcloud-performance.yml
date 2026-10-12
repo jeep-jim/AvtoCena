@@ -56,9 +56,11 @@ jobs:
               try:
                   req=urllib.request.Request('https://avtocena.com'+path,headers={'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
                   with urllib.request.urlopen(req,timeout=60) as r:
-                      wire=r.read();body=gzip.decompress(wire) if r.headers.get('Content-Encoding')=='gzip' else wire
+                      headers_seconds=round(time.monotonic()-start,3);wire=r.read();body=gzip.decompress(wire) if r.headers.get('Content-Encoding')=='gzip' else wire
                       assert b'</html>' in body and b'$RX(' not in body and len(body)>50000
-                      print('EXTERNAL',json.dumps({'path':path,'seconds':round(time.monotonic()-start,3),'wireBytes':len(wire),'htmlBytes':len(body),'encoding':r.headers.get('Content-Encoding')}),flush=True)
+                      seconds=round(time.monotonic()-start,3)
+                      if seconds>3:failures.append({'domain':path,'seconds':seconds})
+                      print('DOMAIN',json.dumps({'path':path,'seconds':seconds,'headersSeconds':headers_seconds,'wireBytes':len(wire),'htmlBytes':len(body),'encoding':r.headers.get('Content-Encoding')}),flush=True)
               except Exception as error:
                   failures.append({'external':path,'error':str(error)})
           print('PERFORMANCE_GATE',json.dumps({'thresholdSeconds':3,'failures':failures}),flush=True)
@@ -76,3 +78,25 @@ jobs:
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
           exit "$perf_status"
           REMOTE
+
+      - name: Check complete public pages from outside the server
+        if: always()
+        run: |
+          python3 - <<'PYTHON'
+          import urllib.request,time,json,gzip
+          failures=[]
+          for path in ['/cars?sort=totalRub','/cars?sort=totalRubDesc','/cars/offer/kia-k5-iii-2-0-prestige-2023--c92ac81215cbc82107b7e6fb']:
+              start=time.monotonic()
+              try:
+                  req=urllib.request.Request('https://avtocena.com'+path,headers={'Accept-Encoding':'gzip','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=60) as response:
+                      headers_seconds=round(time.monotonic()-start,3)
+                      wire=response.read();body=gzip.decompress(wire) if response.headers.get('Content-Encoding')=='gzip' else wire
+                      seconds=round(time.monotonic()-start,3)
+                      assert response.status==200 and b'</html>' in body and b'$RX(' not in body and len(body)>50000
+                      print('PUBLIC_RUNNER',json.dumps({'path':path,'seconds':seconds,'headersSeconds':headers_seconds,'wireBytes':len(wire),'htmlBytes':len(body)}),flush=True)
+                      if seconds>3:failures.append({'path':path,'seconds':seconds})
+              except Exception as error:failures.append({'path':path,'error':str(error)})
+          print('PUBLIC_GATE',json.dumps({'thresholdSeconds':3,'failures':failures}),flush=True)
+          if failures:raise SystemExit(1)
+          PYTHON
