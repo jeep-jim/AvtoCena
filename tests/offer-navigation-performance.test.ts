@@ -56,9 +56,13 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(card, /<IntentPrefetchLink href=\{href\}/);
   assert.match(intentLink, /prefetch=\{false\}/);
   assert.match(intentLink, /router\.prefetch\(href\)/);
-  assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
+  assert.match(intentLink, /onPointerEnter=\{hover\}/);
+  assert.match(intentLink, /onPointerLeave=\{cancel\}/);
+  assert.match(intentLink, /data-intent-prefetch="true"/);
+  assert.match(preloader, /anchor.dataset.intentPrefetch==="true"/);
   assert.match(intentLink, /onPointerDown=\{prefetch\}/);
-  assert.doesNotMatch(intentLink, /EAGER_PREFETCH_DELAY_MS|setTimeout/);
+  assert.doesNotMatch(intentLink, /EAGER_PREFETCH_DELAY_MS/);
+  assert.match(intentLink, /setTimeout\(prefetch, 180\)/);
   assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);

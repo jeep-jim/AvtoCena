@@ -89,7 +89,7 @@ for path in ['/api/health','/','/cars','/']:
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
-for path in ['/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
+for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?market=china&engineTo=2000&budgetTo=3000000&pageSize=24','/cars?sort=totalRub','/cars?sort=totalRubDesc','/api/catalog/search?market=japan&pageSize=24&sort=totalRub','/api/catalog/search?market=korea&budgetTo=3000000&yearFrom=2021&powerTo=160&pageSize=24']:
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
@@ -103,7 +103,19 @@ PY
 python3 - "$config" "$old_port" "$port" <<'PY'
 import pathlib,sys
 p=pathlib.Path(sys.argv[1]);s=p.read_text();old='127.0.0.1:'+sys.argv[2];assert s.count(old)==1
-p.write_text(s.replace(old,'127.0.0.1:'+sys.argv[3]))
+s=s.replace(old,'127.0.0.1:'+sys.argv[3])
+if '# AvtoCena bounded crawler rendering' not in s:
+    # Empty keys bypass both limits: ordinary browser traffic and photos/API
+    # keep their existing behavior. This is load shaping, not authentication.
+    maps = '# AvtoCena bounded crawler rendering\nmap $http_user_agent $ac_catalog_robot {\n  default 0;\n  ~*(bot|crawler|spider) 1;\n}\nmap "$ac_catalog_robot:$request_method:$uri" $ac_catalog_robot_budget {\n  default "";\n  ~^1:(GET|HEAD):/cars(?:/|$) catalog;\n}\nlimit_req_zone $ac_catalog_robot_budget zone=avtocena_catalog_robots:1m rate=30r/m;\nlimit_conn_zone $ac_catalog_robot_budget zone=avtocena_catalog_robot_connections:1m;\n'
+    anchor='  location / {\n    proxy_pass'
+    assert s.count(anchor)==1
+    s=s.replace(anchor,'  location / {\n    limit_req zone=avtocena_catalog_robots burst=4 nodelay;\n    limit_conn avtocena_catalog_robot_connections 2;\n    limit_req_status 429;\n    limit_conn_status 429;\n    error_page 429 = @avtocena_crawler_wait;\n    proxy_pass')
+    ending='    proxy_send_timeout 120s;\n  }\n}'
+    assert s.count(ending)==1
+    s=s.replace(ending,'    proxy_send_timeout 120s;\n  }\n  location @avtocena_crawler_wait {\n    add_header Retry-After 5 always;\n    add_header Cache-Control no-store always;\n    return 429;\n  }\n}')
+    s=maps+s
+p.write_text(s)
 PY
 switched=1
 nginx -t

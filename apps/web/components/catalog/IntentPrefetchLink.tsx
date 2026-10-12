@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useRef, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, type ReactNode } from "react";
 
 // Prefetch only on interaction; background detail requests compete with photos.
 
@@ -13,19 +13,33 @@ export function IntentPrefetchLink({ href, className, children, eager = false }:
   eager?: boolean;
 }) {
   const router = useRouter();
-  const prefetched = useRef(false);
-
+  const prefetched = useRef<string | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancel = useCallback(() => {
+    if (timer.current !== null) clearTimeout(timer.current);
+    timer.current = null;
+  }, []);
+  useEffect(() => cancel, [href, cancel]);
   const prefetch = useCallback(() => {
-    if (prefetched.current) return;
-    prefetched.current = true;
+    cancel();
+    if (prefetched.current === href) return;
+    prefetched.current = href;
     router.prefetch(href);
-  }, [href, router]);
+  }, [href, router, cancel]);
+  const hover = useCallback((event: {pointerType: string}) => {
+    cancel();
+    if (event.pointerType !== "mouse" || prefetched.current === href) return;
+    timer.current = setTimeout(prefetch, 180);
+  }, [href, prefetch, cancel]);
 
   return <Link
     href={href}
     prefetch={false}
     className={className}
-    onPointerEnter={prefetch}
+    data-intent-prefetch="true"
+    onPointerEnter={hover}
+    onPointerLeave={cancel}
+    onBlur={cancel}
     onFocus={prefetch}
 
     onPointerDown={prefetch}

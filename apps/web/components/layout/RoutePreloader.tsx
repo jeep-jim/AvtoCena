@@ -295,9 +295,24 @@ function RoutePreloaderInner(){
    show();
   };
   const handleSubmit=(event:SubmitEvent)=>{const form=event.target as HTMLFormElement|null;if(!form||form.dataset.noRouteLoader==="true"||form.target==="_blank")return;show()};
-  const warm=(event:Event)=>{const anchor=(event.target as Element|null)?.closest("a[href]") as HTMLAnchorElement|null;if(!anchor||anchor.dataset.noRouteLoader==="true")return;const url=new URL(anchor.href,window.location.href);if(url.origin!==window.location.origin||sameDocumentHashNavigation(anchor,url))return;const route=`${url.pathname}${url.search}`;if(warmedRoutesRef.current.has(route))return;warmedRoutesRef.current.add(route);router.prefetch(route)};
-  window.addEventListener(START_EVENT,handleStart);document.addEventListener("click",handleClick,true);document.addEventListener("submit",handleSubmit,true);document.addEventListener("pointerover",warm,true);document.addEventListener("focusin",warm,true);
-  return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
+  let warmTimer:ReturnType<typeof setTimeout>|null=null;let warmingRoute="";
+  const cancelWarm=()=>{if(warmTimer!==null)clearTimeout(warmTimer);warmTimer=null;warmingRoute="";};
+  const anchorFor=(event:Event)=>event.target instanceof Element?event.target.closest<HTMLAnchorElement>("a[href]"):null;
+  const warm=(event:Event)=>{
+   const anchor=anchorFor(event);
+   if(!anchor||anchor.dataset.noRouteLoader==="true"||anchor.dataset.intentPrefetch==="true"||anchor.target==="_blank"||anchor.hasAttribute("download"))return;
+   const url=new URL(anchor.href,window.location.href);
+   if(url.origin!==window.location.origin||sameDocumentHashNavigation(anchor,url))return;
+   const route=`${url.pathname}${url.search}`;
+   if(route===`${window.location.pathname}${window.location.search}`||warmedRoutesRef.current.has(route))return;
+   const run=()=>{cancelWarm();warmedRoutesRef.current.add(route);if(warmedRoutesRef.current.size>64)warmedRoutesRef.current.delete(warmedRoutesRef.current.values().next().value!);router.prefetch(route);};
+   if(event.type!=="pointerover"){run();return;}
+   if((event as PointerEvent).pointerType!=="mouse"||warmingRoute===route)return;
+   cancelWarm();warmingRoute=route;warmTimer=setTimeout(run,180);
+  };
+  const leave=(event:PointerEvent)=>{const anchor=anchorFor(event);if(anchor&&event.relatedTarget instanceof Node&&anchor.contains(event.relatedTarget))return;cancelWarm();};
+  window.addEventListener(START_EVENT,handleStart);document.addEventListener("click",handleClick,true);document.addEventListener("submit",handleSubmit,true);document.addEventListener("pointerover",warm,true);document.addEventListener("pointerout",leave,true);document.addEventListener("pointerdown",warm,true);document.addEventListener("focusin",warm,true);
+  return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("pointerout",leave,true);document.removeEventListener("pointerdown",warm,true);cancelWarm();document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
  useEffect(()=>setMounted(true),[]);
  useLayoutEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;hide()},[routeKey]);
