@@ -5,7 +5,7 @@ import type {CatalogSearchParams} from './types';
 // instead of downloading the much larger all-market selector again for options.
 export async function readGroupedCatalogFacets(params:CatalogSearchParams,markets:string[],read=readCatalogFacets):Promise<CatalogFacets>{
  const parts:CatalogFacets[]=[];let cursor=0;
- await Promise.all(Array.from({length:Math.min(2,markets.length)},async()=>{
+ await Promise.all(Array.from({length:Math.min(6,markets.length)},async()=>{
   while(cursor<markets.length){const index=cursor++;parts[index]=await read({...params,market:markets[index]});}
  }));
  const values=(key:'makes'|'markets'|'bodyTypes'|'fuels'|'transmissions'|'drives')=>[...new Set(parts.flatMap(part=>part[key]))].sort((a,b)=>a.localeCompare(b,'ru'));

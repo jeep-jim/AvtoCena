@@ -9,5 +9,5 @@ test('grouped options use only bounded market reads with the same filters and me
   seen.push(params.market!);active++;peak=Math.max(peak,active);await new Promise(r=>setTimeout(r,2));active--;
   return {generationId:'g',makes:['Toyota',params.market!],models:[{make:'Toyota',model:'Corolla'}],markets:[params.market!],bodyTypes:['sedan'],fuels:['hybrid'],transmissions:['automatic'],drives:['fwd']};
  });
- assert.deepEqual(seen,['china','korea','japan']);assert.equal(peak,2);assert.equal(result.makes.length,4);assert.equal(result.models.length,1);assert.deepEqual(result.bodyTypes,['sedan']);
+ assert.deepEqual(seen,['china','korea','japan']);assert.equal(peak,3);assert.equal(result.makes.length,4);assert.equal(result.models.length,1);assert.deepEqual(result.bodyTypes,['sedan']);
 });

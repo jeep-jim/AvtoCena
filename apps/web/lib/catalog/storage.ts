@@ -2314,7 +2314,9 @@ async function countCatalogOffersEditorial(params: CatalogSearchParams) {
     return {generationId, total};
   });
 }
-const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
+// Let six country groups progress together; underlying detail and card reads
+// remain bounded by their separate queues.
+const filteredSearchCache = new DetailReadCache<Awaited<ReturnType<typeof searchOffersUncached>>>({maxEntries:48,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:6});
 async function searchOffersEditorial(params: CatalogSearchParams, internalPageLimit = 48) {
   const manifest=await readManifest();
   const key=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10),manifest.generationId,internalPageLimit,Object.entries(params).filter(([,v])=>v!==undefined).sort(([a],[b])=>a.localeCompare(b))]);
