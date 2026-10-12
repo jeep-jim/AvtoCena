@@ -36,6 +36,7 @@ test('compact first eight pages and facets match full search without reading the
   assert.deepEqual(actual.items,expected[i].items);assert.equal(actual.total,expected[i].total);
  }
  assert.deepEqual(await readCatalogFacets({market:'korea'}),facets);
+ assert.deepEqual(await readCatalogFacets({market:'korea',city:'Уссурийск',sort:'totalRub'}),facets,'city without price bounds must retain prepared facets');
  assert.equal(reads.filter(p=>p.includes('/projection/')).length,0);
  assert.equal(reads.filter(p=>p.includes('/market-landing-')).length,1);
  assert.equal(JSON.stringify(rows),snapshot,'building indexes must preserve source evidence');

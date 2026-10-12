@@ -1189,7 +1189,12 @@ let budgetFacetCache=new WeakMap<BudgetCountIndex["rows"],CatalogFacets>();
 async function readCatalogFacetsEditorial(input: CatalogSearchParams = {}): Promise<CatalogFacets> {
   // Ordering and pagination cannot change available filter values. In particular,
   // a sort-only request should reuse the prepared market facets.
-  const {sort:_sort,page:_page,pageSize:_pageSize,...params}=input;
+  const {sort:_sort,page:_page,pageSize:_pageSize,...filters}=input;
+  // Delivery city affects price-bound membership, not the available brands or
+  // specifications otherwise. Keeping it on an unbounded request bypassed the
+  // prepared market facets and loaded every full country projection.
+  const params:CatalogSearchParams=filters.budgetFrom||filters.budgetTo||filters.hasPrice
+    ? filters : {...filters,city:undefined};
   const budget=await readBudgetSelection(params);
   if(budget){
     const cached=budgetFacetCache.get(budget.rows);

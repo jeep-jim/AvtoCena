@@ -61,5 +61,10 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
    const result=await searchOffers(params);
    assert.deepEqual(result.items.map(row=>row.id).sort(),expected);
   }
+  rows[0]={...rows[0],id:'city-budget-fixture',cardProjectionVersion:2,transmission:'manual',calculationSnapshot:{breakdown:[{id:"car",amountRub:1500000,amountType:"fixed"}],deliveryPricingBasis:{subtotalRub:1500000,deliveryRub:0,percents:[]}}} as any;
+  Object.assign(index,buildBudgetCountIndex(generationId,rows,new Map(rows.map((row,i)=>[row.id,i]))));
+  resetCatalogReadCachesForTests();
+  assert.deepEqual((await readCatalogFacets({budgetTo:1620000,transmission:'manual'})).transmissions,['manual']);
+  assert.deepEqual((await readCatalogFacets({budgetTo:1620000,transmission:'manual',city:'Уссурийск'})).transmissions,[],'city delivery must still affect price-bound facet membership');
  }finally{storage.readJsonWithMeta=original;resetCatalogReadCachesForTests();}
 });
