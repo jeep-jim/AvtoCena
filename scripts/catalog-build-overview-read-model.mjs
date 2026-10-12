@@ -1,5 +1,6 @@
+import {validateOverviewSourceShard} from "./lib/catalog-overview-source-validation.mjs";
 const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts");
-const { readCatalogFacets, searchOffers, readCurrentCatalogProjectionSnapshot, backfillCatalogMarketLandings } = await import("../apps/web/lib/catalog/storage.ts");
+const { readCatalogFacets, searchOffers, backfillCatalogMarketLandings } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_OVERVIEW_PATH, buildCatalogOverviewPayload, catalogOverviewGenerationPath } = await import("../apps/web/lib/catalog/overview.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -63,15 +64,17 @@ if (facets.generationId !== generationBefore) {
   throw new Error(`catalog_overview_facets_stale:${generationBefore}:${facets.generationId}`);
 }
 
-const [sourceManifest, sourceProjection] = await Promise.all([
-  readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
-  readCurrentCatalogProjectionSnapshot(),
-]);
-if (sourceManifest.generationId !== generationBefore || sourceProjection.generationId !== generationBefore) {
-  throw new Error("catalog_overview_source_generation_mismatch");
-}
+const sourceManifest = await readDataJson("catalog/manifest.json", { generationId: "", markets: {} });
+if (sourceManifest.generationId !== generationBefore) throw new Error("catalog_overview_source_generation_mismatch");
 const sourceCounts = new Map();
-for (const row of sourceProjection.items) sourceCounts.set(row.market, (sourceCounts.get(row.market) || 0) + 1);
+// Current aliases can be replaced independently. Validate each immutable shard
+// against the active manifest, retaining only counts rather than a second full catalog.
+for (const market of PUBLIC_CATALOG_MARKETS) {
+  const count = Number(sourceManifest.markets?.[market]?.count || 0);
+  if (!count) { sourceCounts.set(market, 0); continue; }
+  const projection = await storage.readJson(`catalog/generations/${generationBefore}/indexes/projection/${market}.json`, null);
+  sourceCounts.set(market, validateOverviewSourceShard(projection, generationBefore, market, count));
+}
 const markets = {};
 for (const [market, result] of marketEntries) {
   if (String(result?.generationId || "") !== generationBefore) {
