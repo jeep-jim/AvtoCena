@@ -10,12 +10,29 @@ jobs:
   verify:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     environment: regcloud-staging
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Wait for the explicitly requested release
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'WAIT'
+          import json,time,urllib.request
+          expected=json.load(open('.github/market-runs/regcloud-performance.json')).get('release')
+          assert expected and len(expected)==40
+          deadline=time.monotonic()+45*60
+          while True:
+              try:
+                  with urllib.request.urlopen('https://avtocena.com/api/health',timeout=10) as response: health=json.load(response)
+                  if health.get('ok') and health.get('releaseSha')==expected:break
+                  print('WAITING_FOR_RELEASE',health.get('releaseSha'),flush=True)
+              except Exception as error:print('WAITING_FOR_HEALTH',str(error),flush=True)
+              if time.monotonic()>=deadline:raise RuntimeError('requested_release_not_active')
+              time.sleep(30)
+          WAIT
       - name: Verify running service without restart
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
