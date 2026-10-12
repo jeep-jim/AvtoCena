@@ -40,12 +40,4 @@ html[data-theme] .team-ideas tr[data-complete=true] .ideas-title summary,html[da
 @media(min-width:768px){.team-ideas th:nth-child(4){width:21%}.team-ideas th:nth-child(5){width:23%}.ideas-progress-line{flex-wrap:nowrap;gap:6px}}
 @media(max-width:767px){.ideas-number-search{grid-column:1/-1}.team-ideas tr[data-complete=true]:not([data-expanded=true])>td.ideas-progress-cell{display:block}.team-ideas tr[data-complete=true]:not([data-expanded=true])>td.ideas-progress-cell::before{display:none}.ideas-progress-line .ideas-delete{width:44px;min-height:44px}.ideas-progress-line .ideas-countdown{width:38px}}
 
-/* New activity stays visible until this person acknowledges the displayed version. */
-.team-ideas tr[data-unread=true]{box-shadow:inset 4px 0 #eab308;background:color-mix(in srgb,#eab308 12%,transparent)!important}
-.ideas-change-labels{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;white-space:normal;font-size:12px;line-height:1.4}
-.ideas-change-labels:empty{display:none}
-.ideas-change-labels>span,.ideas-change-caption{background:#fef08a;color:#713f12;border-radius:6px;padding:3px 7px;font-weight:650}
-.ideas-change-caption{display:table;margin-bottom:8px;font-size:12px;white-space:normal}
-.team-ideas .ideas-comment[data-changed=true],.team-ideas .ideas-description[data-changed=true]{background:color-mix(in srgb,#eab308 12%,transparent);border-left:3px solid #eab308;padding:12px;border-radius:8px;margin-top:10px}
-.team-ideas .ideas-read-button{margin:12px 0;min-height:44px}
-.team-ideas tr[data-unread=true]:not([data-expanded=true]) .ideas-title summary{white-space:normal}
+.ideas-update-dot{display:inline-block;width:8px;height:8px;margin-right:8px;flex:0 0 8px;border-radius:50%;background:#e34252;vertical-align:middle}
