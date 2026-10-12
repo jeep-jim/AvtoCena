@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {changeIdea,ideaInput,requireIdeaTeam,publicIdea,numberIdeas,type TeamIdea} from '../apps/web/lib/team-ideas';
+import {ideaChanges,changeIdea,ideaInput,requireIdeaTeam,publicIdea,numberIdeas,type TeamIdea} from '../apps/web/lib/team-ideas';
 import type {AuthUser} from '../apps/web/lib/auth';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -68,6 +68,17 @@ test('HTTP: private media, persisted screenshot, idempotent concurrent votes, ow
   const comment=new FormData();comment.set('id',item.id);comment.set('action','comment');comment.set('text','Обоснование https://example.com');comment.append('screenshots',new Blob([png],{type:'image/png'}),'comment.png');
   assert.equal((await modules.api.POST(post(comment))).status,200);
   result=await (await modules.api.GET()).json();const commented=result.ideas.find((r:any)=>r.id===item.id);assert.equal(commented.comments.length,1);assert.equal(commented.comments[0].author.id,'other');assert.equal(commented.revision,1);assert.equal(commented.voteCount,1);
+  // Opening a list does not acknowledge changes; receipts belong to one user.
+  (globalThis as any).__ideaActor=owner;
+  const beforeRead=await (await modules.api.GET()).json();
+  assert.deepEqual(beforeRead.ideas.find((r:any)=>r.id===item.id).changes.commentIds,[commented.comments[0].id]);
+  assert.equal((await modules.api.POST(post({id:item.id,action:'read',through:new Date(Date.now()+60000).toISOString()}))).status,400);
+  assert.equal((await modules.api.POST(post({id:item.id,action:'read',through:beforeRead.through}))).status,200);
+  const afterRead=await (await modules.api.GET()).json();
+  assert.deepEqual(afterRead.ideas.find((r:any)=>r.id===item.id).changes.commentIds,[]);
+  (globalThis as any).__ideaActor=manager;
+  assert.deepEqual((await (await modules.api.GET()).json()).ideas.find((r:any)=>r.id===item.id).changes.commentIds,[commented.comments[0].id]);
+  (globalThis as any).__ideaActor={...manager,id:'other'};
   const commentContext={params:Promise.resolve({ideaId:item.id,file:commented.comments[0].screenshots[0].split('/')[1]})};
   assert.equal((await modules.media.GET(new Request('https://avtocena.com'),commentContext)).status,200);
   const empty=new FormData();empty.set('id',item.id);empty.set('action','comment');empty.set('text',' ');assert.equal((await modules.api.POST(post(empty))).status,400);
@@ -125,4 +136,13 @@ test('completion starts 30 days once, reopening cancels it, permissions are opt-
  assert.equal(publicIdea(row,{...owner,role:'admin'} as AuthUser).canDelete,false);
  assert.equal(publicIdea(row,{...manager,permissions:{deleteIdeas:true}}).canDelete,true);
  assert.equal(publicIdea(row,{...manager,companyId:'external',permissions:{deleteIdeas:true}}).canDelete,false);
+});
+
+test('idea highlights retain comments arriving after displayed version and exclude own activity',()=>{
+ const at='2026-10-12T10:00:00.000Z';
+ const idea={...row,editorId:owner.id,editedAt:'2026-10-12T10:01:00.000Z',comments:[{id:'new',authorId:'other',authorName:'Other',text:'New',screenshots:[],createdAt:'2026-10-12T10:02:00.000Z'},{id:'own',authorId:owner.id,authorName:'Owner',text:'Own',screenshots:[],createdAt:'2026-10-12T10:03:00.000Z'}]};
+ assert.deepEqual(ideaChanges(idea,owner,at).commentIds,['new']);
+ assert.equal(ideaChanges(idea,owner,at).textChanged,false);
+ assert.equal(ideaChanges(idea,manager,at).textChanged,true);
+ assert.deepEqual(ideaChanges(idea,owner,'2026-10-12T10:02:00.000Z').commentIds,[]);
 });

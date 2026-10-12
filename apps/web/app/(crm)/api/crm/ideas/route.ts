@@ -8,17 +8,17 @@ import {isCalculationOriginAllowed} from '@/lib/catalog/calculation-request-orig
 import {readAccountJson,readAccountUpload} from '@/lib/account/request';
 import {prepareDealerImage} from '@/lib/dealers/media';
 import {getJsonStorage} from '@/lib/data';
-import {addIdeaComment,commentText,createIdea,ideaInput,listIdeas,publicIdea,updateIdea,canEditIdea,editIdea} from '@/lib/team-ideas';
+import {ideaReceipts,ideaChanges,markIdeaRead,addIdeaComment,commentText,createIdea,ideaInput,listIdeas,publicIdea,updateIdea,canEditIdea,editIdea} from '@/lib/team-ideas';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'private, no-store'};
 const denied=()=>Response.json({error:'Нет доступа'},{status:403,headers});
-export async function GET(req?:Request){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();const [rows,users]=await Promise.all([listIdeas(user),readCrmUsers()]);const number=req?new URL(req.url).searchParams.get('number'):null;const selected=number?rows.filter(r=>String(r.number)===number):rows;if(number&&!selected.length)return Response.json({error:'Идея не найдена.'},{status:404,headers});return Response.json({ideas:selected.map(r=>publicIdea(r,user,users)),owner:isPlatformOwner(user)},{headers});}
+export async function GET(req?:Request){const user=await getCurrentUser();if(!user||!isPlatformTeam(user))return denied();const through=new Date().toISOString();const [rows,users,seen]=await Promise.all([listIdeas(user),readCrmUsers(),ideaReceipts(user)]);const number=req?new URL(req.url).searchParams.get('number'):null;const selected=number?rows.filter(r=>String(r.number)===number):rows;if(number&&!selected.length)return Response.json({error:'Идея не найдена.'},{status:404,headers});return Response.json({through,ideas:selected.map(r=>({...publicIdea(r,user,users),changes:ideaChanges(r,user,seen[r.id])})),owner:isPlatformOwner(user)},{headers});}
 export async function POST(req:Request){
  const user=await getCurrentUser();if(!user||!isPlatformTeam(user)||!isCalculationOriginAllowed(req))return denied();
  try{
   if(req.headers.get('content-type')?.startsWith('application/json')){
-   const b=await readAccountJson(req);if(b.action==='delete'){if(!canDeleteIdea(user))throw Error('ideas_forbidden');if(b.confirm!==true)throw Error('Подтвердите удаление.');await removeIdea(String(b.id||''));}else await updateIdea(user,String(b.id||''),b.action,b.value);
+   const b=await readAccountJson(req);if(b.action==='read'){await markIdeaRead(user,String(b.id||''),b.through);}else if(b.action==='delete'){if(!canDeleteIdea(user))throw Error('ideas_forbidden');if(b.confirm!==true)throw Error('Подтвердите удаление.');await removeIdea(String(b.id||''));}else await updateIdea(user,String(b.id||''),b.action,b.value);
   }else{
    const form=await readAccountUpload(req,26*1024*1024,'Суммарный размер скриншотов — до 25 МБ.');
    const commenting=form.get('action')==='comment';

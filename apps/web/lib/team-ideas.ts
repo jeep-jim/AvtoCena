@@ -2,13 +2,13 @@ import {GPT_PROFILE} from './crm-gpt-profile';
 import {hasCrmPermission} from './crm-permissions';
 import {maintainIdeas,ideaExpiresAt} from './team-ideas-retention';
 import {defaultManagerAvatar} from './default-avatars';
-import {randomUUID} from 'node:crypto';
+import {createHash,randomUUID} from 'node:crypto';
 import type {AuthUser} from './auth';
 import {isPlatformTeam,isPlatformOwner} from './platform-access';
 import {readDataJson,mutateDataJson} from './data';
 
 export type IdeaComment={id:string;authorId:string;authorName:string;authorAvatarUrl?:string;text:string;createdAt:string;screenshots:string[]};
-export type TeamIdea={lastActorId?:string;completedAt?:string;deletedAt?:string;pendingMedia?:string[];comments?:IdeaComment[];id:string;revision?:number;editedAt?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
+export type TeamIdea={lastActorId?:string;completedAt?:string;deletedAt?:string;pendingMedia?:string[];comments?:IdeaComment[];id:string;revision?:number;editedAt?:string;editorId?:string;number?:number;authorAvatarUrl?:string;downvotes?:string[];title:string;description:string;authorId:string;authorName:string;createdAt:string;updatedAt:string;progress:number;votes:string[];screenshots:string[]};
 export const IDEAS_PATH='crm/team-ideas/items.json';
 export function requireIdeaTeam(user:AuthUser|null|undefined):asserts user is AuthUser {if(!isPlatformTeam(user))throw Error('ideas_forbidden');}
 export function ideaInput(input:{title:unknown;description:unknown}) {
@@ -66,7 +66,7 @@ export async function editIdea(user:AuthUser,id:string,input:{title:unknown;desc
   const row=rows.find(r=>r.id===id&&!r.deletedAt);if(!row)throw Error('ideas_missing');if(!canEditIdea(row,user))throw Error('ideas_forbidden');
   if(!Number.isInteger(revision)||revision!==(row.revision||0))throw Error('ideas_conflict');
   if(retain.length+added.length>5||retain.some(key=>!row.screenshots.includes(key))||added.some(key=>!validIdeaScreenshot(id,key)))throw Error('Некорректные скриншоты.');
-  const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,lastActorId:user.id,screenshots:[...new Set([...retain,...added])],revision:revision+1,editedAt:at,updatedAt:at}:r);
+  const at=new Date().toISOString();return rows.map(r=>r.id===id?{...r,...fields,lastActorId:user.id,screenshots:[...new Set([...retain,...added])],revision:revision+1,editorId:user.id,editedAt:at,updatedAt:at}:r);
  });
 }
 
@@ -86,3 +86,17 @@ export async function addIdeaComment(user:AuthUser,id:string,value:unknown,scree
 }
 
 export function canDeleteIdea(user:AuthUser|null|undefined){return isPlatformTeam(user)&&hasCrmPermission(user,'deleteIdeas');}
+
+export const ideaReadKey=(userId:string)=>`crm/team-ideas/read/${createHash('sha256').update(userId).digest('hex')}.json`;
+export async function ideaReceipts(user:AuthUser){requireIdeaTeam(user);return readDataJson<Record<string,string>>(ideaReadKey(user.id),{});}
+export function ideaChanges(row:TeamIdea,user:AuthUser,seen?:string,now=Date.now()){
+ const after=seen||new Date(now-30*86400000).toISOString();
+ return {activityChanged:row.updatedAt!==row.createdAt&&row.updatedAt!==row.editedAt&&row.updatedAt>after&&row.lastActorId!==user.id,isNew:row.authorId!==user.id&&row.createdAt>after,textChanged:!!row.editedAt&&row.editedAt>after&&row.editorId!==user.id,commentIds:(row.comments||[]).filter(c=>c.authorId!==user.id&&c.createdAt>after).map(c=>c.id)};
+}
+export async function markIdeaRead(user:AuthUser,id:string,through:unknown){
+ requireIdeaTeam(user);const at=typeof through==='string'?Date.parse(through):NaN;
+ if(!Number.isFinite(at)||at>Date.now()||at<Date.now()-86400000)throw Error('invalid_date');
+ if(!(await listIdeas(user)).some(r=>r.id===id))throw Error('ideas_missing');
+ const value=new Date(at).toISOString();
+ await mutateDataJson<Record<string,string>>(ideaReadKey(user.id),{},rows=>({...rows,[id]:rows[id]>value?rows[id]:value}));
+}

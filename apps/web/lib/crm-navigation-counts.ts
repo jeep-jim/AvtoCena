@@ -4,7 +4,7 @@ import {hasCrmPermission,type CrmPermission} from './crm-permissions';
 import {isPlatformTeam} from './platform-access';
 import {readCrmActivity,type CrmActivity} from './crm-activity';
 import {readNotifications} from './crm-unified-notifications';
-import {listIdeas} from './team-ideas';
+import {listIdeas,ideaReceipts,ideaChanges} from './team-ideas';
 import {readDataJson,mutateDataJson} from './data';
 
 export const CRM_SECTIONS=['/crm','/crm/chat','/crm/leads','/crm/clients','/crm/managers','/crm/settings','/crm/dealers','/crm/documents','/crm/site','/crm/reviews','/crm/ideas'] as const;
@@ -35,16 +35,15 @@ export async function navigationCounts(user:AuthUser){
   if(cache.size>100)cache.clear();entry={until:Date.now()+45000,promise:sources(user)};cache.set(key,entry);
   entry.promise.catch(()=>{if(cache.get(key)===entry)cache.delete(key);});
  }
- const [data,seen]=await Promise.all([entry.promise,readDataJson<Record<string,string>>(receiptKey(user.id),{})]);
+ const [data,seen,ideasSeen]=await Promise.all([entry.promise,readDataJson<Record<string,string>>(receiptKey(user.id),{}),ideaReceipts(user)]);
  const counts:Record<string,number>={};for(const section of CRM_SECTIONS)if(!gates[section]||hasCrmPermission(user,gates[section]))counts[section]=0;
  const baseline=new Date(Date.now()-30*86400000).toISOString();
  const add=(section:string,at:string)=>{if(section in counts&&at>(seen[section]||baseline)&&at<=data.through)counts[section]++;};
  for(const event of data.events){if(event.actor?.id===user.id)continue;const section=navigationSection(event);add(section,event.createdAt);if(section!=='/crm')add('/crm',event.createdAt);}
  for(const notice of data.notifications)if(notice.unread&&navigationSection({type:'',href:notice.href})==='/crm/chat')add('/crm/chat',notice.createdAt);
  for(const idea of data.ideas){
-  if(idea.authorId!==user.id)add('/crm/ideas',idea.createdAt);
-  if(idea.updatedAt!==idea.createdAt&&idea.lastActorId!==user.id)add('/crm/ideas',idea.updatedAt);
-  for(const comment of idea.comments||[])if(comment.authorId!==user.id)add('/crm/ideas',comment.createdAt);
+  const changes=ideaChanges(idea,user,ideasSeen[idea.id]);
+  counts['/crm/ideas']+=Number(changes.activityChanged)+Number(changes.isNew)+Number(changes.textChanged)+changes.commentIds.length;
  }
  return {counts,through:data.through};
 }
