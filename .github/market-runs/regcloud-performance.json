@@ -1,1 +1,5 @@
-{"release":"75b0e4c69ec56441764e31fa90af2bb0fbb06980","reason":"Verify exact CPU and unavailable-read fixes after activation","at":"2026-10-12T10:16:06.228Z"}
+{
+  "release": "2e77193e48b498e1b9d84c0a918bf6f062e9c0a3",
+  "reason": "Recheck after completed activation; guard diagnostic port selection against release switch",
+  "at": "2026-10-12T10:32:49.492269+00:00"
+}

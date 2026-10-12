@@ -46,6 +46,10 @@ jobs:
           ssh_opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
           ssh "${ssh_opts[@]}" root@151.248.113.177 'bash -s' <<'REMOTE'
           set -euo pipefail
+          # The public health can switch before the old container is retired.
+          # Wait for activation to finish before selecting the running port.
+          exec 9>/run/lock/avtocena-runtime-change.lock
+          flock -w 300 9
           port=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "3000/tcp") 0).HostPort}}' avtocena-production)
           perf_status=0
           python3 - "$port" <<'PERF' || perf_status=$?
