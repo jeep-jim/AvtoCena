@@ -1,6 +1,6 @@
 import type { CrmActivity } from './crm-activity';
 
-export type ActivityGroup = { id: string; section: string; events: CrmActivity[] };
+export type ActivityGroup = { id: string; section: string; clientName?: string; events: CrmActivity[] };
 const dayFormat = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Novokuznetsk', year: 'numeric', month: '2-digit', day: '2-digit' });
 const sections: Record<string, string> = { leads: 'Заявки', clients: 'Клиенты', documents: 'Документы', contracts: 'Договоры', managers: 'Команда', team: 'Команда', markets: 'Рынки', offers: 'Автомобили', dealers: 'Дилеры' };
 
@@ -19,11 +19,12 @@ export function groupCrmActivity(events: CrmActivity[]): ActivityGroup[] {
     const actor = event.actor?.id || event.managerId;
     const date = new Date(event.createdAt);
     // Website events and malformed timestamps must not swallow unrelated leads.
-    const key = actor && Number.isFinite(date.getTime())
+    const customer = event.clientGroupKey || event.clientId;
+    const key = customer ? `client:${customer}` : actor && Number.isFinite(date.getTime())
       ? JSON.stringify([actor, section, dayFormat.format(date)]) : event.id;
     const group = groups.get(key);
     if (group) group.events.push(event);
-    else groups.set(key, { id: key, section, events: [event] });
+    else groups.set(key, { id: key, section: customer ? "История клиента" : section, clientName: customer ? event.clientName || "Клиент" : undefined, events: [event] });
   }
   return [...groups.values()];
 }

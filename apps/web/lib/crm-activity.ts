@@ -1,3 +1,5 @@
+import {createHash} from "node:crypto";
+import {crmCustomerKey} from "./crm-customer-group";
 import {canReadRegisteredCustomers} from './account/crm-accounts';
 import {isPlatformTeam} from './platform-access';
 import {readReviewActivity} from './dealers/review-activity';
@@ -12,7 +14,7 @@ import {readCrmUsers} from './crm-users';
 import {leadStatusLabel} from './crm';
 export type ActivityPerson={id:string;name:string;avatarUrl?:string};
 export type ActivityChange={label:string;before?:string;after?:string};
-export type CrmActivity={id:string;commentId?:string;createdAt:string;type:string;title:string;actor?:ActivityPerson;target?:ActivityPerson;entityType?:string;entityId?:string;entityLabel?:string;href?:string;clientId?:string;leadId?:string;changes?:ActivityChange[];text?:string;managerId?:string;managerName?:string;assignedManagerId?:string;status?:string;visibility?:'team'|'management';image?:string;currentStatus?:string;currentStatusCode?:string;summary?:string;};
+export type CrmActivity={id:string;clientGroupKey?:string;clientName?:string;commentId?:string;createdAt:string;type:string;title:string;actor?:ActivityPerson;target?:ActivityPerson;entityType?:string;entityId?:string;entityLabel?:string;href?:string;clientId?:string;leadId?:string;changes?:ActivityChange[];text?:string;managerId?:string;managerName?:string;assignedManagerId?:string;status?:string;visibility?:'team'|'management';image?:string;currentStatus?:string;currentStatusCode?:string;summary?:string;};
 export const activityPerson=(u:Pick<AuthUser,'id'|'displayName'|'avatarUrl'>):ActivityPerson=>({id:u.id,name:u.displayName,avatarUrl:u.avatarUrl});
 export async function recordCrmActivity(actor:AuthUser|null,event:Omit<CrmActivity,'id'|'createdAt'|'actor'>&Partial<Pick<CrmActivity,'id'|'createdAt'>>) {
  const recorded=await appendChunkedDataJson<CrmActivity>(documentCompany(actor)?`dealers/${encodeURIComponent(documentCompany(actor)!)}/activity.json`:'activity/feed.json',{...event,id:event.id||generateId('activity'),createdAt:event.createdAt||new Date().toISOString(),...(actor?{actor:activityPerson(actor)}:{})});
@@ -33,6 +35,10 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   const author=users.find(u=>u.id===(e.actor?.id||e.managerId)),targetUser=users.find(u=>u.id===(e.target?.id||e.assignedManagerId));
   const actor=author?activityPerson(author):e.actor||(e.managerId?{id:e.managerId,name:e.managerName||'Сотрудник'}:undefined);
   const lead=leads.find(l=>l.id===(e.leadId||(e.entityType==='lead'?e.entityId:''))),client=clients.find(c=>c.id===(e.clientId||(e.entityType==='client'?e.entityId:'')));
+  const relatedClient = client || clients.find(c=>c.id===lead?.clientId);
+  const customer = lead || relatedClient;
+  const clientGroupKey = customer ? createHash('sha256').update(crmCustomerKey(customer, relatedClient)).digest('hex') : undefined;
+  const clientName = relatedClient?.fio || lead?.name || lead?.telegramDisplayName || 'Клиент';
   let changes=e.changes||[],title=e.title;
   const statusEvent=/status/.test(e.type)||/статус заявки/i.test(e.title),assignment=/assign/.test(e.type)||/назначен менеджер/i.test(e.title);
   if(statusEvent&&!changes.some(c=>c.label==='Статус')){
@@ -58,6 +64,6 @@ export async function readCrmActivity(user:AuthUser,limit=30,before='') {
   if(e.type==='lead_deleted')href='/crm/leads';
   const car=lead?.selectedOffers?.[0];
   const image=e.type==='lead_created'?String(car?.image||lead?.image||lead?.offerImage||''):undefined;
-  return {...e,title,actor,target,changes,href,entityLabel:discussionEvent&&(lead||client)?discussionLabel(lead?"lead":"client",lead||client):e.entityLabel||[lead?.name,car?.title||lead?.car].filter(Boolean).join(' · ')||client?.fio,image:image&&/^(https?:\/\/|\/(?!\/))/.test(image)?image:undefined,currentStatus:lead?leadStatusLabel(lead.status):undefined,currentStatusCode:lead?.status,text:e.status&&e.text===e.status?leadStatusLabel(e.status):e.text};
+  return {...e,clientGroupKey,clientName:clientGroupKey?clientName:undefined,title,actor,target,changes,href,entityLabel:discussionEvent&&(lead||client)?discussionLabel(lead?"lead":"client",lead||client):e.entityLabel||[lead?.name,car?.title||lead?.car].filter(Boolean).join(' · ')||client?.fio,image:image&&/^(https?:\/\/|\/(?!\/))/.test(image)?image:undefined,currentStatus:lead?leadStatusLabel(lead.status):undefined,currentStatusCode:lead?.status,text:e.status&&e.text===e.status?leadStatusLabel(e.status):e.text};
  });
 }

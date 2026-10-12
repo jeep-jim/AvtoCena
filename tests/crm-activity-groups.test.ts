@@ -12,3 +12,15 @@ test('local midnight and anonymous website events stay separate',()=>{
  const groups=groupCrmActivity([event('before',{createdAt:'2026-09-28T16:59:00Z'}),event('after',{createdAt:'2026-09-28T17:01:00Z'}),event('site-1',{actor:undefined}),event('site-2',{actor:undefined})]);
  assert.equal(groups.length,4);assert.equal(groups[0].events[0].id,'after');
 });
+
+test('one customer combines different cars, staff discussions and dates',()=>{
+ const a=event('a',{clientGroupKey:'customer-a',clientName:'Клиент А',clientId:'legacy-a',entityType:'lead',createdAt:'2026-10-12T05:00:00Z',actor:undefined});
+ const b=event('b',{clientGroupKey:'customer-a',clientName:'Клиент А',clientId:'legacy-b',entityType:'lead',type:'lead_note_added',createdAt:'2026-10-11T05:00:00Z',actor:{id:'other-manager',name:'Другой'}});
+ const other=event('other',{clientGroupKey:'customer-b',clientName:'Клиент Б'});
+ const groups=groupCrmActivity([b,other,a]);
+ assert.equal(groups.length,2);assert.equal(groups[0].clientName,'Клиент А');assert.deepEqual(groups[0].events,[a,b]);
+});
+test('known client ids group while unrelated website events stay separate',()=>{
+ const groups=groupCrmActivity([event('a',{clientId:'client-a',actor:undefined}),event('b',{clientId:'client-a'}),event('c',{clientId:'client-b'}),event('d',{actor:undefined})]);
+ assert.equal(groups.length,3);assert.deepEqual(groups[0].events.map(e=>e.id),['a','b']);
+});
