@@ -171,11 +171,12 @@ export function VehicleModelSearch({
   multiple?: boolean;
   contextQuery?: string;
 }) {
-  const [query, setQuery] = useState(multiple ? "" : value || "");
+  const [query, setQuery] = useState(multiple ? value.split("|").filter(Boolean).join(", ") : value || "");
   const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
   const [directory,setDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
-  const items=useMemo(()=>contextual?(directory?.(query,make)||[]):remoteItems,[contextual,directory,query,make,remoteItems]);
+  const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
+  const items=useMemo(()=>contextual?(directory?.(searchQuery,make)||[]):remoteItems,[contextual,directory,searchQuery,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -211,7 +212,7 @@ export function VehicleModelSearch({
   },[contextual,open,directory,retry]);
 
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
-  const canSearch = Boolean(clean(make) || compact(query).length >= 2);
+  const canSearch = Boolean(clean(make) || compact(searchQuery).length >= 2);
   useEffect(() => {
     if(contextual)return;
     if (!open || !canSearch) {
@@ -223,7 +224,7 @@ export function VehicleModelSearch({
     const timer = window.setTimeout(async () => {
       setLoading(true);
       try {
-        const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
+        const params = new URLSearchParams({ q: clean(searchQuery), make: clean(make), limit: "50" });
         if (!contextual) params.set("scope", "autocalc");
         const response = await fetch(`/api/catalog/models?${params.toString()}`, { cache: "no-store", signal: controller.signal });
         const payload = response.ok ? await response.json() : { items: [] };
@@ -238,20 +239,21 @@ export function VehicleModelSearch({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [canSearch, make, open, query, contextual]);
+  }, [canSearch, make, open, searchQuery, contextual]);
 
   const exact = useMemo(() => {
-    const requested = compact(query);
+    const requested = compact(searchQuery);
     return items.find((item) => compact(item.model) === requested || (item.aliases || []).some((alias) => compact(alias) === requested));
-  }, [items, query]);
+  }, [items, searchQuery]);
 
   const applySelection = (item: ModelSuggestion) => {
     if (multiple) {
-      onValueChange?.((selectedModels.includes(item.model) ? selectedModels.filter(model => model !== item.model) : [...selectedModels, item.model]).join("|"));
+      const next = selectedModels.includes(item.model) ? selectedModels.filter(model => model !== item.model) : [...selectedModels, item.model];
+      onValueChange?.(next.join("|"));
       if (!make) onMakeChange?.(item.make);
-      setQuery("");
-      setOpen(false);
-      input.current?.blur();
+      setQuery(next.length ? `${next.join(", ")}, ` : "");
+      setOpen(true);
+      input.current?.focus();
       return root.current?.closest("form") || null;
     }
     setQuery(item.model);
@@ -288,7 +290,7 @@ export function VehicleModelSearch({
       type="search"
       name={multiple ? undefined : "model"}
       value={query}
-      placeholder={multiple && selectedModels.length ? selectedModels.join(", ") : placeholder}
+      placeholder={placeholder}
       autoComplete="off"
       spellCheck={false}
       onFocus={() => setOpen(true)}
@@ -311,7 +313,7 @@ export function VehicleModelSearch({
       aria-autocomplete="list"
     />
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
-      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Можно выбрать несколько моделей</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => onValueChange?.("")}>Любая модель</button></>}
+      {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Добавляйте модели через запятую. Выбранные остаются в чипсах</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
       <div className="ac-hide-scrollbar max-h-72 overflow-y-auto">
         {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
         {canSearch && loading ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
@@ -324,7 +326,7 @@ export function VehicleModelSearch({
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
         >
           <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
-          <span className="shrink-0 opacity-70">{multiple ? selectedModels.includes(item.model) ? "☑" : "☐" : "↵"}</span>
+          {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
         </button>) : null}
         {contextual&&directoryError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить модели. Повторить</button>:null}
         {canSearch && !loading && !directoryError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}

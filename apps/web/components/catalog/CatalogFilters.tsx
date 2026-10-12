@@ -57,7 +57,7 @@ function joinMakeValues(values: string[]) { return [...new Set(values.map(clean)
 function label(value: string) { return clean(value).replace(/\[object Object\]/gi, "") || "Без названия"; }
 function Chevron({ open = false }: { open?: boolean }) { return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 function SlidersIcon() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>; }
-function SortDirectionIcon({ direction, active }: { direction: SortDir; active: boolean }) { return <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 16V3M6 3L3.5 5.5M6 3L8.5 5.5" stroke={active && direction === "asc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "asc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M14 4V17M14 17L11.5 14.5M14 17L16.5 14.5" stroke={active && direction === "desc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "desc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
+
 
 function useDropdown(open: boolean, root: React.RefObject<HTMLDivElement | null>, close: () => void) {
   useEffect(() => {
@@ -199,17 +199,16 @@ function PowerLimitCheckbox({ checked, onChange, sourcePower=false }: { sourcePo
   return <div ref={root} className={`relative ${infoOpen ? "z-[250]" : "z-0"}`}><label className="ac-filter-control ac-power-limit flex min-h-13 cursor-pointer items-center gap-3 rounded-[15px] px-4 pr-12 text-sm font-black"><input type="checkbox" name="powerTo" value="160" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" /><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm transition" style={{ background: checked ? "#ff353d" : "var(--ac-surface-3)", border: checked ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: checked ? "#ffffff" : "transparent" }}>✓</span><span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5"><span>До 160 л.с.</span><span className="text-[10px] font-black text-red-500">{sourcePower ? "по данным продавца" : "свыше — полный утильсбор"}</span></span></label><button type="button" onClick={() => setInfoOpen((current) => !current)} className="absolute right-2.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-black" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Почему есть фильтр до 160 лошадиных сил" aria-expanded={infoOpen}>?</button>{infoOpen ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+8px)] rounded-2xl p-4 text-sm font-bold leading-6"><div className="font-black">Почему до 160 л.с.?</div><p className="mt-2 text-[var(--ac-muted)]">Мощность влияет на коэффициент утилизационного сбора. Для электромобилей и гибридов применяется расчётная мощность по документам.</p><p className="mt-2 font-black text-red-500">Свыше 160 л.с. итоговые платежи могут быть значительно выше.</p></div> : null}</div>;
 }
 
-function SortControl({ sortKey, direction, onKeyChange, onDirectionChange, mobile = false }: { sortKey: SortKey; direction: SortDir; onKeyChange: (key: SortKey) => void; onDirectionChange: (direction: SortDir) => void; mobile?: boolean }) {
-  const caption = sortKey === "totalRub" ? (direction === "asc" ? "сначала дешевле" : "сначала дороже") : sortKey === "year" ? (direction === "desc" ? "сначала новые" : "сначала старше") : "актуальные сначала";
+function SortControl({ sortKey, direction, onChange }: { sortKey: SortKey; direction: SortDir; onChange: (key: SortKey, direction: SortDir) => void }) {
+  const options = [["totalRub", "asc", "Дешевле"], ["totalRub", "desc", "Дороже"], ["year", "desc", "Новые"], ["year", "asc", "Старые"]] as const;
   return <div className="min-w-0">
     <input type="hidden" name="sort" value={sortParam(sortKey, direction)} />
-    <div className="ac-sort-control grid min-h-13 grid-cols-[1.08fr_.72fr_.72fr_48px] overflow-hidden rounded-[15px]">
-      <button type="button" onClick={() => onKeyChange("")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "" ? "is-active" : ""}`}><span className="hidden 2xl:inline">По умолчанию</span><span className="2xl:hidden">По умолч.</span></button>
-      <button type="button" onClick={() => onKeyChange("totalRub")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "totalRub" ? "is-active" : ""}`}>Цена</button>
-      <button type="button" onClick={() => onKeyChange("year")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "year" ? "is-active" : ""}`}>Год</button>
-      <button type="button" disabled={!sortKey} onClick={() => onDirectionChange(direction === "asc" ? "desc" : "asc")} className="ac-sort-direction flex items-center justify-center" aria-label={sortKey ? `Изменить порядок: ${caption}` : "Выберите сортировку по цене или году"} title={caption}><SortDirectionIcon direction={direction} active={Boolean(sortKey)} /></button>
+    <div className="ac-sort-control grid min-h-13 grid-cols-4 overflow-hidden rounded-[15px]" role="group" aria-label="Сортировка автомобилей">
+      {options.map(([key, dir, label]) => {
+        const active = sortKey === key && direction === dir;
+        return <button key={label} type="button" aria-pressed={active} onClick={() => onChange(active ? "" : key, dir)} className={`min-w-0 px-2 text-xs font-black ${active ? "is-active" : ""}`}>{label}</button>;
+      })}
     </div>
-    {mobile ? <div className="mt-1.5 px-1 text-[11px] font-bold text-[var(--ac-muted)]">{caption}</div> : null}
   </div>;
 }
 
@@ -459,10 +458,9 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
     startTransition(() => router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), {scroll:false}));
   };
   const setElectric = (value: string) => { setField("fuel", value); setElectricFacets(null); };
-  const chooseSort = (key: SortKey) => {
+  const chooseSort = (key: SortKey, direction: SortDir) => {
     setSortKey(key);
-    if (key === "totalRub") setSortDirection("asc");
-    if (key === "year") setSortDirection("desc");
+    setSortDirection(direction);
   };
 
   return <><CatalogFilterUiEnhancer /><span role="status" className="sr-only">{pending ? "Обновляем результаты" : ""}</span>
@@ -476,7 +474,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       <div className="ac-filter-quick-row mt-2.5 grid grid-cols-4 items-center gap-2.5">
         <PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox value={draft.fuel} onChange={setElectric} />
-        <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
+        <SortControl sortKey={sortKey} direction={sortDirection} onChange={chooseSort} />
         <button type="button" disabled={!interactive} aria-busy={!interactive} onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
       {expanded ? <section className="ac-advanced-fields mt-3"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel={!electricOnly} /></section> : null}
@@ -492,7 +490,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black normal-case tracking-normal text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><CatalogCityFilter onChange={changeCity} /></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onChange={chooseSort} /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox value={draft.fuel} onChange={setElectric} /><PowerLimitCheckbox sourcePower={draft.stock === "green"} checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
       </div>
@@ -502,7 +500,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       .ac-sort-control,.ac-filter-settings,.ac-filter-reset,.ac-range-card,.ac-filter-chip{background:var(--ac-surface-2);color:var(--ac-text);border:1px solid var(--ac-border)}
       .ac-sort-control>button+button{border-left:1px solid var(--ac-border)}
       .ac-sort-control button{color:var(--ac-muted);transition:background-color .16s ease,color .16s ease}
-      .ac-sort-control button.is-active{background:var(--ac-surface-3);color:var(--ac-text)}
+      .ac-sort-control button.is-active{background:#ff353d;color:#fff}
       .ac-sort-direction:disabled{opacity:.35;cursor:not-allowed}
       .ac-filter-settings{transition:background-color .16s ease,color .16s ease,transform .16s ease}
       .ac-filter-settings:hover,.ac-filter-settings.is-active{background:var(--ac-surface-3);color:#ff353d}
