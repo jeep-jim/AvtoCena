@@ -34,7 +34,7 @@ import { prepareModificationRecovery } from "./modification-recovery";
 import { catalogOfferWithinRetention } from "./refresh-policy";
 import crypto from "node:crypto";
 import sharp from "sharp";
-import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
+import { getJsonStorage, readDataJson, StorageConflictError, jsonReadByteLength, type JsonReadResult } from "../data";
 import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasAllowedCatalogSourceProvenance, hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
@@ -554,27 +554,27 @@ export async function getOfferFromCurrentProjection(id: string) {
   return row && !isConfirmedSourceWithdrawn(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row) ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
-const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
+const searchProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
   maxEntries: SEARCH_PROJECTION_CACHE_MAX, maxBytes: 96 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
 const CURRENT_PROJECTION_CACHE_MS = 5 * 60_000;
-const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+const currentProjectionCache = new Map<string, { generationId: string; expiresAt: number; value?: { generationId: string; items: CatalogSearchProjection[] }; meta?: JsonReadResult<{ generationId: string; items: CatalogSearchProjection[] }>; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 // A single Volkswagen projection is 66 MB; a 32 MB budget never retained it.
 // Keys include the verified generation, so immutable brand rows can outlive a minute.
-const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({
-  maxEntries: 64, maxBytes: 256 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
+const currentBrandProjectionCache = new DetailReadCache<{ generationId: string; items: CatalogSearchProjection[] }>({sizeOf:jsonReadByteLength,
+  maxEntries: 64, maxBytes: 384 * 1024 * 1024, ttlMs: 3600_000, concurrency: 2,
 });
 const unavailableReadCache=new UnavailableReadCache();
-const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
-const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
+const previousLocationCache=new DetailReadCache<{byId:Record<string,OfferLocation>}>({sizeOf:jsonReadByteLength, maxEntries:2,maxBytes:64*1024*1024,ttlMs:300_000,concurrency:1});
+const previousOfferChunkCache=new DetailReadCache<VehicleOffer[]>({sizeOf:jsonReadByteLength, maxEntries:4,maxBytes:32*1024*1024,ttlMs:60_000,concurrency:1});
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { generationId: string; expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
-const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({
+const currentOfferShardCache = new DetailReadCache<{ generationId: string } & DetailShard<VehicleOffer>>({sizeOf:jsonReadByteLength,
   maxEntries: 256, maxBytes: 128 * 1024 * 1024,
   ttlMs: CURRENT_READ_MODEL_CACHE_MS, concurrency: 4,
 });
-const immutableOfferShardCache = new DetailReadCache<{generationId:string} & DetailShard<VehicleOffer>>({maxEntries:1024,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:4});
+const immutableOfferShardCache = new DetailReadCache<{generationId:string} & DetailShard<VehicleOffer>>({sizeOf:jsonReadByteLength, maxEntries:1024,maxBytes:192*1024*1024,ttlMs:3600_000,concurrency:4});
 let projectionCacheGeneration = "";
 let offerLookupCacheGeneration = "";
 let offerLocationIndexCache: Promise<{ generationId?: string; byId: Record<string, OfferLocation> }> | null = null;
@@ -627,16 +627,16 @@ async function readCurrentSearchProjection(market: string) {
   const key = cleanShard(market);
   const now = Date.now();
   for (const [id, entry] of currentProjectionCache) {
-    if (entry.expiresAt <= now || entry.generationId !== generationId) currentProjectionCache.delete(id);
+    if (entry.generationId !== generationId) currentProjectionCache.delete(id);
   }
   const current = currentProjectionCache.get(key);
-  if (current) return current.promise;
+  if (current && current.expiresAt > now) return current.promise;
   // Once the full projection is loaded, markets share its records instead of
   // downloading and retaining a second complete copy of the same catalog.
   if (key !== CURRENT_ALL_MARKETS_PROJECTION) {
     const all = currentProjectionCache.get(CURRENT_ALL_MARKETS_PROJECTION);
     // A pending all-market download must not hold up an independent market.
-    if (all?.value) {
+    if (all?.value && all.expiresAt > now) {
       const projection = all.value;
       if (projection.generationId === generationId) return {
         generationId: projection.generationId,
@@ -644,16 +644,21 @@ async function readCurrentSearchProjection(market: string) {
       };
     }
   }
+  let meta: JsonReadResult<{generationId:string;items:CatalogSearchProjection[]}> | undefined;
   const promise = (async () => {
     // Facets are staged before large aliases. Avoid downloading another generation
     // only to discard it and download every active market as well.
     const facets = await readCurrentFacets();
     if (facets.generationId && facets.generationId !== generationId) return {generationId,items:await readProjectionRows(manifest,market===CURRENT_ALL_MARKETS_PROJECTION?{}:{market})};
-    return readDataJson<{generationId:string;items:CatalogSearchProjection[]}>(currentProjectionPath(market),{generationId:"",items:[]});
+    // Revalidate at the same freshness deadline. An unchanged large object is
+    // reused on 304 instead of downloading and parsing it again every five minutes.
+    meta = await getJsonStorage().readJsonWithMeta(currentProjectionPath(market), {generationId:"",items:[] as CatalogSearchProjection[]}, current?.meta);
+    return meta.value;
   })().then(value => {
       const entry = currentProjectionCache.get(key);
       if (entry?.promise === promise) {
         entry.value = value;
+        entry.meta = meta;
         entry.expiresAt = Date.now() + CURRENT_PROJECTION_CACHE_MS;
         if (value.generationId !== generationId) currentProjectionCache.delete(key);
         if (key === CURRENT_ALL_MARKETS_PROJECTION && value.generationId) {
@@ -1904,7 +1909,7 @@ export async function getOfferWithoutEditorial(id: string) {
   return offer ? (isConfirmedSourceWithdrawn(offer) || !catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer) ? null : offer) : readProjectionFallback();
 }
 const BUDGET_CARD_BLOCK_SIZE=256;
-const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
+const budgetCardCache=new DetailReadCache<{generationId:string;items:CatalogSearchProjection[]}>({sizeOf:jsonReadByteLength, maxEntries:512,maxBytes:128*1024*1024,ttlMs:3600_000,concurrency:6});
 async function writeBudgetSearchIndex(generationId:string,rows:CatalogSearchProjection[]){
  // Card blocks retain the existing pricing replay inputs; the small selector never carries photos or ledgers.
  const ordered=[...rows];

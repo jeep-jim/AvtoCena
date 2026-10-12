@@ -102,6 +102,7 @@ jobs:
           }
           WAIT
           export AVTOCENA_CALCULATION_VERSION=$(node scripts/catalog-calculation-version.mjs)
+          npx tsx scripts/regcloud-verify-conditional-read.ts
           npx tsx scripts/regcloud-prepare-prices.mjs
       - name: Deploy with rollback and resource measurements
         env:

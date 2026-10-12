@@ -127,9 +127,19 @@ export default async function CrmLeadsPage({
   const board = !id && first(params.layout) === "board" && view !== "archive";
   const layoutHref=(layout:string)=>`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).filter(([k])=>k!=="id").map(([k,v])=>[k,first(v)])),layout})}`;
   const visible = visibleGroups.flat();
+  const visibleLeadIds=new Set(visible.map(lead=>lead.id));
+  const messagesByLead=new Map<string,any[]>(),deliveriesByLead=new Map<string,any[]>();
+  for(const message of messages)if(visibleLeadIds.has(message.leadId)){
+    const rows=messagesByLead.get(message.leadId)||[];rows.push(message);messagesByLead.set(message.leadId,rows);
+  }
+  for(const rows of messagesByLead.values())rows.sort((a,b)=>String(a.createdAt).localeCompare(String(b.createdAt)));
+  for(const item of deliveries)if(visibleLeadIds.has(item.leadId)){
+    const rows=deliveriesByLead.get(item.leadId)||[];rows.push(item);deliveriesByLead.set(item.leadId,rows);
+  }
+  const usersById=new Map(users.map(user=>[user.id,user]));
   const visibleClientIds=new Set(visible.map(lead=>lead.clientId).filter(Boolean));
   const registrationAvatars=await clientRegistrationAvatars(clients.filter(client=>visibleClientIds.has(client.id)&&canSeeLead(user,client)));
-  const trashClients=view==="archive"?(await readChunkedDataJson<any>("clients/clients.json",[])).filter(client=>canSeeLead(user,client)):[];
+  const trashClients=view==="archive"?clients.filter(client=>canSeeLead(user,client)):[];
   const trashEntries=trashClients.flatMap(client=>(client.documents||[]).filter((doc:any)=>doc.deletedAt).map((document:any)=>({clientId:client.id,clientName:client.fio||"Клиент",document})));
   return (
     <CrmShell
@@ -212,17 +222,9 @@ export default async function CrmLeadsPage({
           const priorClient = previousManualClient(lead);
           const cars = offers(lead);
           const car = cars[0];
-          const leadMessages = messages
-            .filter((message) => message.leadId === lead.id)
-            .sort((a, b) =>
-              String(a.createdAt).localeCompare(String(b.createdAt)),
-            );
-          const notifications = deliveries.filter(
-            (item) => item.leadId === lead.id,
-          );
-          const manager = users.find(
-            (user) => user.id === lead.assignedManagerId,
-          );
+          const leadMessages = messagesByLead.get(lead.id)||[];
+          const notifications = deliveriesByLead.get(lead.id)||[];
+          const manager = usersById.get(lead.assignedManagerId);
           return (
             <details
               key={lead.id}

@@ -28,3 +28,23 @@ for(const warm of [false,true])test(`pending global projection does not block ${
   assert.equal(reads.filter(p=>p==='catalog/public/projection/japan.json').length,1);
  }finally{clearTimeout(timer);release();t.mock.restoreAll();resetCatalogReadCachesForTests();}
 });
+
+test('expired projection revalidates its ETag; changed generation never reuses it',async(t)=>{
+ resetCatalogReadCachesForTests();let now=Date.now(),generation='one',conditional=0,reads=0;
+ t.mock.method(Date,'now',()=>now);
+ t.mock.method(getJsonStorage(),'readJsonWithMeta',async(path:string,fallback:any,previous:any)=>{
+  if(path==='catalog/manifest.json')return {found:true,value:{generationId:generation,markets:{}}};
+  if(path==='catalog/public/projection/all.json'){
+   reads++;
+   if(previous){assert.equal(previous.etag,'"one"');assert.equal(generation,'one');conditional++;return previous;}
+   return {found:true,etag:`"${generation}"`,value:{generationId:generation,items:[]}};
+  }
+  return {found:false,value:fallback};
+ });
+ try{
+  const first=await readCurrentCatalogProjectionSnapshot();now+=301000;
+  assert.equal(await readCurrentCatalogProjectionSnapshot(),first);assert.equal(conditional,1);
+  generation='two';now+=301000;
+  assert.equal((await readCurrentCatalogProjectionSnapshot()).generationId,'two');assert.equal(reads,3);assert.equal(conditional,1);
+ }finally{resetCatalogReadCachesForTests();}
+});

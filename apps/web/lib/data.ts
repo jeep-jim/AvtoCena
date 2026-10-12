@@ -10,6 +10,16 @@ type ChunkDescriptor = { file: string; count: number; createdAt: string; updated
 type ChunkIndex = { version: 1; collection: string; maxRecordsPerChunk: number; total: number; updatedAt: string; chunks: ChunkDescriptor[] };
 export type JsonStorageDriver = "local" | "object";
 export type JsonReadResult<T> = { value: T; etag?: string; found: boolean };
+// Weak ownership retains no payloads; used only by caches of unchanged read objects.
+const jsonReadBytes = new WeakMap<object, number>();
+export function jsonReadByteLength(value: unknown): number | undefined {
+  return value !== null && typeof value === 'object' ? jsonReadBytes.get(value) : undefined;
+}
+function parseStorageJson<T>(body: Buffer): T {
+  const value = JSON.parse(body.toString('utf8')) as T;
+  if (value !== null && typeof value === 'object') jsonReadBytes.set(value, body.length);
+  return value;
+}
 export type JsonWriteCondition = { ifMatch?: string; ifNoneMatch?: "*" };
 export type StorageObject = { key: string; lastModified?: string; size?: number };
 export type StorageObjectVersion = StorageObject & { versionId: string; isLatest: boolean; deleteMarker: boolean };
@@ -29,7 +39,7 @@ export class StorageConflictError extends Error { constructor() { super("storage
 export interface JsonStorage {
   driver: JsonStorageDriver;
   readJson<T>(relativePath: string, fallback: T): Promise<T>;
-  readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>>;
+  readJsonWithMeta<T>(relativePath: string, fallback: T, previous?: JsonReadResult<T>): Promise<JsonReadResult<T>>;
   readObjectMetadata?(relativePath: string): Promise<{found: boolean; etag?: string}>;
   writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition): Promise<void>;
   deleteJson?(relativePath: string): Promise<void>;
@@ -203,7 +213,7 @@ export class ObjectJsonStorage implements JsonStorage {
       }
       catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.min(5_000, 250 * 2 ** attempt)); continue; }
       finally { clearTimeout(headerTimeout); }
-      if (response.ok || response.status === 404 || response.status === 412 || response.status === 409) return response;
+      if (response.ok || response.status === 304 || response.status === 404 || response.status === 412 || response.status === 409) return response;
       if (!TRANSIENT_STATUS.has(response.status)) {
       const responseText = objectStorageResponseText(response);
       const code = responseText.match(/<Code>([^<]+)<\/Code>/)?.[1] || "unknown";
@@ -230,7 +240,14 @@ export class ObjectJsonStorage implements JsonStorage {
 }
   private async signedBucketRequest(method: string, params: Record<string, string>, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest(method, url, body, extraHeaders, query); }
   private async bucketRequest(params: Record<string, string>) { return this.signedBucketRequest("GET", params); }
-  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: JSON.parse(objectStorageResponseText(res)) as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
+  async readJsonWithMeta<T>(relativePath: string, fallback: T, previous?: JsonReadResult<T>): Promise<JsonReadResult<T>> {
+    const conditional = previous?.found && previous.etag ? previous : undefined;
+    const res = await this.request("GET", relativePath, undefined, conditional ? {'if-none-match': conditional.etag!} : {});
+    if (res.status === 304 && conditional) return conditional;
+    if (res.status === 404) return {value: fallback, found: false};
+    if (!res.ok) throw new Error(`object_storage_read_${res.status}`);
+    return {value: parseStorageJson<T>(objectStorageResponseBody(res)), etag: cleanEtag(res.headers.get("etag")), found: true};
+  }
   async readObjectMetadata(relativePath: string) {
     const res = await this.request("HEAD", relativePath);
     if (res.status === 404) return {found: false};

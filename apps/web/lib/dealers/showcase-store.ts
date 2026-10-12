@@ -1,3 +1,4 @@
+import {DetailReadCache} from "../catalog/detail-read-cache";
 import {normalizeSiteControls,type SiteControls} from '../site-controls';
 import {normalizeAccountAppearance, withAccountMediaDefaults, type AccountAppearance} from '../account-appearance';
 import {mergeShowcaseChanges} from './showcase-merge';
@@ -64,11 +65,12 @@ export async function saveShowcase(id:string,raw:any){
  return saved;
 }
 export type PublicFeatures = { accountAppearance?:AccountAppearance; siteControls?:SiteControls; version: number; affiliatesEnabled: boolean; knowledgeEnabled?:boolean; partnersEnabled?:boolean };
+const publicFeaturesCache = new DetailReadCache<PublicFeatures>({maxEntries:1,maxBytes:256*1024,ttlMs:2000,concurrency:2});
 export async function readPublicFeatures() {
-  const features=await readDataJson<PublicFeatures>("settings/public-features.json", {
+  const features=await publicFeaturesCache.get("features",()=>readDataJson<PublicFeatures>("settings/public-features.json", {
     version: 0,
     affiliatesEnabled: true, knowledgeEnabled:false, partnersEnabled:false,
-  });
+  }));
   return {...features,accountAppearance:withAccountMediaDefaults(features.accountAppearance)};
 }
 export async function savePublicFeatures(raw: PublicFeatures) {
@@ -87,7 +89,8 @@ export async function savePublicFeatures(raw: PublicFeatures) {
         knowledgeEnabled:raw.knowledgeEnabled === undefined ? current.knowledgeEnabled===true : raw.knowledgeEnabled===true,
         partnersEnabled:raw.partnersEnabled === undefined ? current.partnersEnabled===true : raw.partnersEnabled===true,
       };
-      return saved;
+      publicFeaturesCache.clear();
+  return saved;
     },
   );
   return saved;

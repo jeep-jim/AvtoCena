@@ -10,6 +10,7 @@ export class DetailReadCache<T> {
   constructor(private readonly options: {
     maxEntries: number; maxBytes: number; ttlMs: number; concurrency: number;
     now?: () => number;
+    sizeOf?: (value: T) => number | undefined;
   }) {}
 
   clear() {
@@ -53,7 +54,11 @@ export class DetailReadCache<T> {
         // Serialized bytes are a storage budget, not an exact JS heap measure.
         // Leave substantial heap headroom for parsed objects and request work.
         let bytes: number;
-        try { bytes = Buffer.byteLength(JSON.stringify(value), 'utf8'); }
+        try {
+          const measured = this.options.sizeOf?.(value);
+          bytes = measured !== undefined && Number.isFinite(measured) && measured >= 0
+            ? measured : Buffer.byteLength(JSON.stringify(value), 'utf8');
+        }
         catch (error) {
           // A successful read must not fail just because an oversized value
           // cannot be serialized again to measure an optional cache entry.

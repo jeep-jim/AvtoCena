@@ -64,3 +64,11 @@ test('optional cache sizing does not turn a successful oversized read into failu
   assert.equal(calls,2,'oversized values are returned but never cached');
   assert.deepEqual(await cache.get('small',async()=>({ok:true})),{ok:true});
 });
+
+test('known wire size avoids another serialization while preserving byte eviction',async()=>{
+ const cache=new DetailReadCache<object>({maxEntries:5,maxBytes:10,ttlMs:10000,concurrency:1,sizeOf:()=>6});
+ const value={toJSON(){throw Error('must not serialize');}};let calls=0;
+ const read=(key:string)=>cache.get(key,async()=>{calls++;return value;});
+ await read('a');await read('a');assert.equal(calls,1);
+ await read('b');await read('a');assert.equal(calls,3);
+});
