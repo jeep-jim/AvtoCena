@@ -4,7 +4,7 @@ import {modificationBinding} from '../apps/web/lib/catalog/modification-contract
 import assert from 'node:assert/strict';
 import {getJsonStorage} from '../apps/web/lib/data';
 import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
-import {searchOffers,countCatalogOffers,readCatalogFacets,readCatalogBrandCounts,resetCatalogReadCachesForTests,catalogSearchProjectionMatches,prepareCatalogProjectionRows} from '../apps/web/lib/catalog/storage';
+import {searchOffers,readPublicCatalogMarketCounts,countCatalogOffers,readCatalogFacets,readCatalogBrandCounts,resetCatalogReadCachesForTests,catalogSearchProjectionMatches,prepareCatalogProjectionRows} from '../apps/web/lib/catalog/storage';
 
 test('budget with year and mileage uses only candidate blocks and keeps exact results/counts/facets',async()=>{
  const base:any={market:'korea',make:'Hyundai',model:'Avante',year:2024,totalRub:1500000,mileageKm:40000,engineCc:1598,powerHp:123,fuel:'petrol',powertrainKind:'combustion',transmission:'automatic',drive:'fwd',bodyType:'sedan',cardImageUrl:'https://example.com/car.jpg',cardProjectionVersion:3,publicVisibleRub:1500000,publicSpecificationVerified:true,calculationStatus:'ready',updatedAt:'2026-10-04T00:00:00Z'};
@@ -21,6 +21,7 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   if(key==='markets/markets.json')value=[{id:'korea',versions:[{id:'fixture',status:'active',securityDepositRub:110000}]}];
   else if(key==='fees/exchange-rates.json')value={};
   else if(key==='catalog/manifest.json')value={generationId,markets:{korea:{count:rows.length}}};
+  else if(key.includes('/market-landing-'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v3.json'))return {found:false,value:fallback};
   else if(key.endsWith('/budget-count-v2.json'))value=index;
   else if(key.includes('/budget-cards-v2/')){const block=Number(key.split('/').at(-1)!.replace('.json',''));value={generationId,items:[rows[block]]};}
@@ -29,6 +30,11 @@ test('budget with year and mileage uses only candidate blocks and keeps exact re
   return {found:true,value:value as T};
  };
  try{
+  resetCatalogReadCachesForTests();
+  const publicCounts=await readPublicCatalogMarketCounts();
+  assert.equal(publicCounts.total,prepareCatalogProjectionRows(rows).length);
+  assert.equal(publicCounts.markets.korea,publicCounts.total);
+  assert.equal(reads.some(key=>key.includes('/projection/')||key.includes('/budget-cards-')),false,'missing landings use compact eligibility without card downloads');
   for(const filterVersion of [1,undefined] as const){
    index.filterVersion=filterVersion;
    for(const params of [{budgetTo:1710000,yearFrom:2022},{budgetTo:1710000,yearFrom:2022,mileageTo:50000},{budgetTo:1710000,yearFrom:2022,mileageTo:50000,fuel:'petrol'},{budgetTo:100000,yearFrom:2022,mileageTo:50000}]){

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildCatalogMarketLanding,catalogMarketLandingPath,backfillCatalogMarketLandings,readCatalogFacets,searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
+import {buildCatalogMarketLanding,catalogMarketLandingPath,backfillCatalogMarketLandings,readCatalogFacets,readPublicCatalogMarketCounts,searchOffers,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
 const rows=Array.from({length:220},(_,i)=>({id:`car-${i}`,market:'korea',make:i%2?'Hyundai':'Kia',model:'K5',year:2023,
  cardProjectionVersion:3,cardImageUrl:'https://example.test/car.jpg',fuel:'petrol',powertrainKind:'combustion',bodyType:'sedan',
@@ -41,6 +41,20 @@ test('compact first eight pages and facets match full search without reading the
  assert.equal(reads.filter(p=>p.includes('/market-landing-')).length,1);
  assert.equal(JSON.stringify(rows),snapshot,'building indexes must preserve source evidence');
  t.mock.restoreAll();resetCatalogReadCachesForTests();
+});
+test('public market counts use validated landings and preserve exact fallback totals',async(t)=>{
+ const landing=await buildCatalogMarketLanding('test','korea',rows);
+ for(const prepared of [landing,{...landing,generationId:'old'},null]){
+  resetCatalogReadCachesForTests();const reads=fixture(t,prepared);
+  const counts=await readPublicCatalogMarketCounts();
+  assert.equal(counts.generationId,'test');assert.equal(counts.total,landing.total);
+  assert.equal(counts.markets.korea,landing.total);
+  assert.ok(Object.entries(counts.markets).every(([market,count])=>market==='korea'||count===0));
+  if(prepared===landing)assert.equal(reads.some(path=>path.includes('/projection/')),false);
+  else assert.ok(reads.some(path=>path.includes('/projection/')));
+  t.mock.restoreAll();
+ }
+ resetCatalogReadCachesForTests();
 });
 test('later pages, filters, custom sorting and city requests retain full-search behavior',async(t)=>{
  const landing=await buildCatalogMarketLanding('test','korea',rows);

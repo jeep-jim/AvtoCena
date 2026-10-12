@@ -902,13 +902,22 @@ async function readCurrentPublicCatalogProjectionEditorial() {
 }
 
 async function readPublicCatalogMarketCountsEditorial() {
-  const [manifest, projection] = await Promise.all([readManifest(), currentProjectionRows({})]);
-  const markets = Object.fromEntries(MARKETS.map((market) => [
-    market,
-    projection.rows.filter((row) => row.market === market).length,
-  ]));
+  const manifest = await readManifest();
+  const counts = await mapWithConcurrency(MARKETS, 2, async market => {
+    if (!Number(manifest.markets?.[market]?.count || 0)) return [market, 0] as const;
+    // Counts must not download every full market projection. Prepared landings
+    // already validate generation, completeness and today's inventory policy.
+    // Editorial changes use compact eligibility instead of rebuilding a landing.
+    const landing = editorialHasHidden(market) ? null : await readMarketLanding({market});
+    const compact = landing ? null : await readBudgetSelection({market, sort: "year"});
+    const projection = landing || compact ? null : await currentProjectionRows({market});
+    const generationId = landing?.generationId ?? compact?.generationId ?? projection?.generationId;
+    if (generationId !== manifest.generationId) throw Error("catalog_market_counts_generation_changed");
+    return [market, landing?.total ?? compact?.rows.length ?? projection!.rows.filter(row => row.market === market).length] as const;
+  });
+  const markets = Object.fromEntries(counts);
   return {
-    generationId: projection.generationId,
+    generationId: manifest.generationId,
     updatedAt: manifest.updatedAt,
     markets,
     total: Object.values(markets).reduce((sum, count) => sum + count, 0),
