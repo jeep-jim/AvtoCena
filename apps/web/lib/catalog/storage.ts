@@ -1,3 +1,4 @@
+import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,type CompressedBudgetDirectory,type CompressedBudgetSelector} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
 import {splitPackedBudgetSelectors,verifiedPackedBudgetSelector,type PackedBudgetDirectory,type PackedBudgetSelector} from './budget-selector-codec';
@@ -572,6 +573,7 @@ const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALO
 export function resetCatalogReadCachesForTests() {
   resetCatalogEditorialCache();
   resetSharedBudgetPriceCache();
+  budgetEligibility.clear();
   budgetSelectionOrder=new WeakMap();compactSortCache=new WeakMap();
   marketLandingCache.clear();
   editorialLandingCache.clear();
@@ -1976,6 +1978,7 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
  }
  return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}`,load);
 }
+const budgetEligibility=new BudgetEligibilityCache();
 const filteredBudgetSelectionCache = new DetailReadCache<{generationId:string;cardVersion:1|2|3;rows:BudgetCountIndex['rows']}|null>({maxEntries:32,maxBytes:256*1024*1024,ttlMs:30_000,concurrency:4});
 async function readBudgetSelection(params:CatalogSearchParams){
  const hasBudget=Boolean(params.budgetFrom || params.budgetTo);
@@ -2005,11 +2008,15 @@ async function readBudgetSelection(params:CatalogSearchParams){
   const sourceRows=hasBudget?[...pricedIndex.rows,...(index.otherRows||[])]:[...index.rows,...index.otherRows!];
   const same=(a:unknown,b:unknown)=>cleanFacet(a).toLocaleLowerCase('ru-RU')===cleanFacet(b).toLocaleLowerCase('ru-RU');
   const editedRow=(row:BudgetCountIndex['rows'][number])=>{const metadata=applyCatalogEditorialSpecifications(row[5]);if(metadata===row[5])return row;const edited:typeof row=[...row];edited[5]=metadata;return edited;};
+  const eligibilityContext=JSON.stringify([editorialRevision(),new Date(Date.now()+7*3600000).toISOString().slice(0,10)]);
+  const eligible=budgetEligibility.get(index,eligibilityContext,original=>{
+   const row=editedRow(original);
+   return !editorialHidden({id:row[5].id,market:row[0]}) && catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]);
+  });
   const compactModelKeys=params.model?await projectionModelKeys(params):null;
   let candidates=sourceRows.map(editedRow).filter(row=>
    ((!params.make && !params.model) || catalogSearchProjectionMatches({...row[5],market:row[0]} as CatalogSearchProjection,{make:params.make,model:params.model},compactModelKeys)) &&
-   !editorialHidden({id:row[5].id,market:row[0]}) &&
-   catalogInventoryAgeDecision({...row[5],market:row[0]}).eligible && !catalogHeavyVehicleExcluded(row[5]) &&
+   eligible.has(row[5].id) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
    && (!params.bodyType || same(row[5].bodyType,params.bodyType))
