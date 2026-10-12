@@ -1,5 +1,8 @@
 name: Regcloud — prepare current catalog pages
 on:
+  schedule:
+    # Refresh date-sensitive derived pages after Krasnoyarsk midnight.
+    - cron: '5 17 * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -36,6 +39,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Check immutable source validation
+        run: node --test tests/catalog-overview-source-validation.test.mjs
       - name: Validate overview builder syntax
         run: node --check scripts/catalog-build-overview-read-model.mjs
       - name: Build compact current overview read model

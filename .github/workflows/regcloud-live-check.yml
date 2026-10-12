@@ -37,8 +37,8 @@ jobs:
           docker top avtocena-production -eo pid,pcpu,pmem,rss,comm
           docker inspect --format 'running={{.State.Running}} oomKilled={{.State.OOMKilled}} restarts={{.RestartCount}}' avtocena-production
           docker stats --no-stream --format 'memory={{.MemUsage}} cpu={{.CPUPerc}}' avtocena-production
-          for path in /api/health; do
-            curl --silent --show-error --max-time 60 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" "http://127.0.0.1:3000$path" || true
+          for path in /api/health / /cars /login; do
+            curl --fail --silent --show-error --max-time 30 -o /dev/null -w "LOCAL $path code=%{http_code} first=%{time_starttransfer} total=%{time_total} bytes=%{size_download}\n" --resolve avtocena.com:443:127.0.0.1 "https://avtocena.com$path"
           done
           systemctl is-active nginx
           systemctl is-active certbot.timer
@@ -46,3 +46,21 @@ jobs:
           curl --fail --silent --show-error --max-time 20 --resolve avtocena.com:443:127.0.0.1 https://avtocena.com/api/health
           printf '\n'
           REMOTE
+      - name: Check complete public pages and six market responses
+        run: |
+          python3 - <<'PYCODE'
+          import urllib.request,urllib.error,time,json
+          for path in ['/api/health','/','/cars','/login']+[f'/api/catalog/search?market={m}&pageSize=1' for m in ['japan','china','korea','uae','europe','georgia']]:
+              started=time.monotonic()
+              with urllib.request.urlopen('https://avtocena.com'+path,timeout=40) as response:
+                  data=response.read(); assert response.status==200
+              duration=time.monotonic()-started
+              if path.startswith('/api/'):
+                  value=json.loads(data); assert value['ok']
+                  if 'search?' in path: assert value['items'] and value['total']>0
+              else: assert b'</html>' in data and b'$RX(' not in data and len(data)>50000
+              print(json.dumps({'path':path,'seconds':round(duration,3),'bytes':len(data)}),flush=True)
+          try: urllib.request.urlopen('https://avtocena.com/api/crm/leads',timeout=15); raise AssertionError('CRM not protected')
+          except urllib.error.HTTPError as error: assert error.code==401
+          print('Anonymous CRM access rejected')
+          PYCODE
