@@ -1,4 +1,12 @@
 import {internationalModel} from './international-model';
+const wordCache=new Map<string,string[]>();
+function modelWords(make:unknown,input:unknown){
+ const key=JSON.stringify([String(make??''),String(input??'')]);
+ const cached=wordCache.get(key);if(cached)return cached;
+ const words=internationalModel(make,input).normalize('NFKC').toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean);
+ if(key.length<=1024){if(wordCache.size>=4096)wordCache.delete(wordCache.keys().next().value!);wordCache.set(key,words);}
+ return words;
+}
 /** Public discovery matches a base model plus any trailing version/trim.
  * Keep token boundaries: A2 must not select A20, nor X5 select X50.
  * This does not change the exact identity used for technical specifications.
@@ -6,12 +14,10 @@ import {internationalModel} from './international-model';
 export function matchesCatalogModel(value: unknown, query: unknown, make?:unknown): boolean {
   const selections = String(query ?? "").split("|").map(value => value.trim()).filter(Boolean);
   if (selections.length > 1) return selections.some(selection => matchesCatalogModel(value, selection, make));
-  const words = (input: unknown) => String(input ?? '').normalize('NFKC')
-    .toLocaleLowerCase('ru-RU').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/).filter(Boolean);
-  const requested = words(internationalModel(make,query)).join('');
+  const requested = modelWords(make,query).join('');
   if (!requested) return false;
   let prefix = '';
-  for (const word of words(internationalModel(make,value))) {
+  for (const word of modelWords(make,value)) {
     prefix += word;
     if (prefix === requested) return true;
     // Markets also attach letter badges without a separator: A4L, Q2L, X5M.

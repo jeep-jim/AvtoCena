@@ -463,8 +463,10 @@ export function projectionCanRenderCard(row: CatalogSearchProjection) {
 // Facets and six market searches share those objects: validate each once rather
 // than rerunning the full specification audit for every consumer of a page.
 let preparedProjectionRows = new WeakMap<CatalogSearchProjection, CatalogSearchProjection | null>();
+let projectionAdmissionCache=new WeakMap<CatalogSearchProjection,{day:string;eligible:boolean}>();
 export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
   const visible: CatalogSearchProjection[] = [];
+  const now=new Date(),day=new Date(now.getTime()+7*3600000).toISOString().slice(0,10);
   for (const input of rows) {
     if (!preparedProjectionRows.has(input)) {
       const normalized = safePublicPricing(input);
@@ -473,7 +475,11 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
       if (valid) preparedProjectionRows.set(valid, valid);
     }
     const row = preparedProjectionRows.get(input);
-    if (row && !editorialHidden(row) && catalogInventoryAgeDecision(row).eligible && !catalogHeavyVehicleExcluded(row)) visible.push(applyCatalogEditorialSpecifications(row));
+    if(row){
+      let admission=projectionAdmissionCache.get(row);
+      if(!admission||admission.day!==day){admission={day,eligible:catalogInventoryAgeDecision(row,now).eligible&&!catalogHeavyVehicleExcluded(row)};projectionAdmissionCache.set(row,admission);}
+      if(admission.eligible&&!editorialHidden(row))visible.push(applyCatalogEditorialSpecifications(row));
+    }
   }
   return visible;
 }
@@ -598,6 +604,7 @@ export function resetCatalogReadCachesForTests() {
   budgetCardCache.clear();
   filteredBudgetSelectionCache.clear();
   preparedProjectionRows = new WeakMap();
+  projectionAdmissionCache = new WeakMap();
   resetCatalogOverviewCache();
   manifestCache = null;
   searchProjectionCache.clear();
@@ -801,6 +808,17 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.auctionDateFrom && (!row.auctionDate || String(row.auctionDate) < params.auctionDateFrom)) return false;
   if (params.auctionDateTo && (!row.auctionDate || String(row.auctionDate) > params.auctionDateTo)) return false;
   return true;
+}
+/** Yield during large recommendation scans so unrelated requests can progress. */
+export async function filterCatalogProjectionRows(rows:CatalogSearchProjection[],params:CatalogSearchParams,modelKeys:Set<string>|null=null){
+ const selected:CatalogSearchProjection[]=[];
+ const market=params.market&&params.market!=='any'?cleanFacet(params.market).toLocaleLowerCase('ru-RU'):'';
+ for(let offset=0;offset<rows.length;offset+=256){
+  const batch=rows.slice(offset,offset+256).filter(row=>!market||cleanFacet(row.market).toLocaleLowerCase('ru-RU')===market);
+  for(const row of prepareCatalogProjectionRows(batch))if(catalogSearchProjectionMatches(row,params,modelKeys))selected.push(row);
+  if(offset+256<rows.length)await new Promise<void>(resolve=>setImmediate(resolve));
+ }
+ return selected;
 }
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
 export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt", city?: string) {
@@ -2398,8 +2416,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
     }));
     if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {
       const modelKeys = await projectionModelKeys(params);
-      const rows = prepareCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []))
-        .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+      const rows = await filterCatalogProjectionRows(parts.flatMap(({ projection }) => projection.items || []),params,modelKeys);
       if (needsProjection) sortCatalogSearchRows(rows, params);
       else sortCatalogSearchRows(rows,params);
       const total = rows.length;
@@ -2419,8 +2436,7 @@ async function searchOffersStored(params: CatalogSearchParams, internalPageLimit
   ]);
   if (current.generationId === manifest.generationId) {
     const modelKeys = await projectionModelKeys(params);
-    const rows = prepareCatalogProjectionRows(current.items || [])
-      .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+    const rows = await filterCatalogProjectionRows(current.items || [],params,modelKeys);
     if (needsProjection) sortCatalogSearchRows(rows, params);
     else sortCatalogSearchRows(rows,params);
     const total = rows.length;

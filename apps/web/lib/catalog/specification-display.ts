@@ -285,8 +285,18 @@ const exact: Record<string,string> = {
   petrol:"Бензин", gasoline:"Бензин", diesel:"Дизель", electric:"Электромобиль", hybrid:"Гибрид", automatic:"Автоматическая", manual:"Механическая",
   "无":"Нет", "有":"Есть", true:"Есть", false:"Нет", "●":"Стандартное оснащение", "○":"Опция", "-":"—",
 };
-const ordered=Object.entries(phrases).sort((a,b)=>b[0].length-a[0].length);
+const ordered=Object.entries(phrases).sort((a,b)=>b[0].length-a[0].length).map(([source,target])=>{
+ const escaped=source.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ return {source,target,pattern:/\p{Script=Hangul}/u.test(source)?new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`,'gu'):null};
+});
+const translatedTextCache=new Map<string,string>();
 export function translateSpecificationText(value:string) {
+ const cached=translatedTextCache.get(value);if(cached!==undefined)return cached;
+ const result=translateSpecificationTextUncached(value);
+ if(value.length<=2048&&result.length<=4096){if(translatedTextCache.size>=2048)translatedTextCache.delete(translatedTextCache.keys().next().value!);translatedTextCache.set(value,result);}
+ return result;
+}
+function translateSpecificationTextUncached(value:string) {
   const text=translateKnownSpecification(translateKoreanSpecification(value.normalize("NFKC").replace(/\s+/g," ").trim()));
   if (Object.hasOwn(exact,text)) return exact[text];
   let result=text
@@ -295,13 +305,8 @@ export function translateSpecificationText(value:string) {
     .replace(/(\d+)挡(?:手动|Механическая)/g,"$1-ступенчатая МКПП")
     .replace(/(\d+)挡(?:自动|Автоматическая)/g,"$1-ступенчатая АКПП")
     .replace(/\(个\)/g,", шт.").replace(/\(人\)/g,", чел.");
-  for(const [source,target] of ordered) {
-    // Short Korean words such as 자동 must not corrupt a longer company name
-    // 자동차. Chinese source phrases retain their existing matching rules.
-    if(/\p{Script=Hangul}/u.test(source)) {
-      const escaped=source.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-      result=result.replace(new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`,'gu'),target);
-    } else result=result.split(source).join(target);
+  for(const {source,target,pattern} of ordered) {
+    result=pattern?result.replace(pattern,target):result.split(source).join(target);
   }
   if (Object.hasOwn(exact,result)) return exact[result];
   return result.replace(/等(?=\))/g," и аналоги").replace(/后(?=[●○—-])/g,"сзади ").replace(/前(?=[●○—-])/g,"спереди ").replace(/^通\s+Дисковые$/,"Дисковые (уточнение источника неполное)");

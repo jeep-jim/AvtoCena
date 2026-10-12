@@ -13,13 +13,13 @@ const words: Record<string,string> = {
  '은회색':'Серебристо-серый','은Серый':'Серебристо-серый','쥐색':'Тёмно-серый','청색':'Синий','진주색':'Перламутровый','빨간색':'Красный','녹색':'Зелёный',
  'LPG(일반인 구입)':'LPG (разрешена покупка частным лицом)',
 };
-const ordered=Object.entries(words).sort((a,b)=>b[0].length-a[0].length);
+const ordered=Object.entries(words).sort((a,b)=>b[0].length-a[0].length).map(([source,target])=>{
+ const escaped=source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+ return [new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`, 'gu'),target] as const;
+});
 export function translateKoreanSpecification(value:string) {
  if(Object.hasOwn(koreanSpecificationNotes,value))return koreanSpecificationNotes[value];
  let result=value.replace(/(\d+)세대/g,'$1-е поколение').replace(/(\d+)인승/g,'$1 мест').replace(/(\d+)도어/g,'$1 дв.');
- for(const [source,target] of ordered) {
-  const escaped=source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  result=result.replace(new RegExp(`(?<![\\p{Script=Hangul}])${escaped}(?![\\p{Script=Hangul}])`, 'gu'), target);
- }
+ for(const [pattern,target] of ordered) result=result.replace(pattern,target);
  return result;
 }

@@ -1,4 +1,4 @@
 {
-  "reason": "Reduce duplicate missing-card storage reads after confirmed 504 incident",
-  "at": "2026-10-12T10:08:57.723264+00:00"
+  "reason": "Fix measured CPU hotspots in recommendation scans and specification translation; yield between scan batches",
+  "at": "2026-10-12T10:15:13.896331+00:00"
 }

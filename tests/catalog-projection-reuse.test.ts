@@ -72,3 +72,24 @@ test('unchanged projections survive minute boundaries but follow the next publis
   assert.equal(projectionReads,2,'new manifest must invalidate the previous snapshot immediately');
  } finally {t.mock.restoreAll();resetCatalogReadCachesForTests();}
 });
+
+test('large recommendation scans preserve results and yield to other requests',async()=>{
+ const {filterCatalogProjectionRows,catalogSearchProjectionMatches}=await import('../apps/web/lib/catalog/storage');
+ resetCatalogReadCachesForTests();
+ const rows=Array.from({length:2048},(_,index)=>({...row(),id:`scan-${index}`,market:index%2?'china':'korea',model:index%3?'K5':'K50'}));
+ const params={market:'korea',make:'Kia',model:'K5'};
+ const expected=prepareCatalogProjectionRows(rows).filter(r=>catalogSearchProjectionMatches(r,params)).map(r=>r.id);
+ let progressed=false;const pending=filterCatalogProjectionRows(rows,params);
+ setImmediate(()=>{progressed=true;});
+ const actual=await pending;
+ assert.equal(progressed,true,'a large scan must not monopolize the event loop');
+ assert.deepEqual(actual.map(r=>r.id),expected);
+});
+test('cached admission is rechecked after Krasnoyarsk midnight',t=>{
+ resetCatalogReadCachesForTests();
+ t.mock.timers.enable({apis:['Date'],now:new Date('2026-10-12T16:59:59Z')});
+ const input={...row(),year:2020,inventorySourceDate:'2020-10-12'};
+ assert.equal(prepareCatalogProjectionRows([input]).length,1);
+ t.mock.timers.tick(2000);
+ assert.equal(prepareCatalogProjectionRows([input]).length,0);
+});
