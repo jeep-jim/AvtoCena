@@ -583,6 +583,7 @@ export function resetCatalogReadCachesForTests() {
   budgetIndexCache.clear();
   liveBudgetBlockCache.clear();
   liveBudgetReplayCache.clear();
+  japanBudgetReplayCache.clear();
   budgetCardCache.clear();
   filteredBudgetSelectionCache.clear();
   preparedProjectionRows = new WeakMap();
@@ -1895,6 +1896,7 @@ async function currentBudgetBlock(generationId:string,version:1|2|3,block:number
  });
 }
 const liveBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:6,maxBytes:48*1024*1024,ttlMs:60_000,concurrency:2});
+const japanBudgetReplayCache=new DetailReadCache<BudgetCountIndex['rows']>({maxEntries:4,maxBytes:48*1024*1024,ttlMs:86400_000,concurrency:2});
 async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayPrices=false){
  const displayRows=(rows:CatalogSearchProjection[])=>displayPrices?rows.map(row=>row.catalogPricingMode==="seller"?{...row,totalRub:Number(row.japanDeliveredPreview?.totalRub||row.sellerPriceRub)||null}:row):rows;
  const fingerprint=await budgetPricingFingerprint(market);
@@ -1952,6 +1954,15 @@ async function currentBudgetReplay(index:BudgetCountIndex,market:string,displayP
    if(!['catalog_budget_context_changed','catalog_budget_snapshot_invalid'].includes((error as Error).message))throw error;
    return load(); // Do not retain a retry under a version already known to have changed.
   }
+ }
+ if(market==='japan'){
+  const {japanSearchContext}=await import('./japan-delivered-preview');
+  const context=await japanSearchContext(index.generationId);
+  if(context)return japanBudgetReplayCache.get(`${index.generationId}:${context.key}:${displayPrices}`,async()=>{
+   const rows=await load();
+   if((await japanSearchContext(index.generationId))?.key!==context.key)throw Error('japan_quote_context_changed');
+   return rows;
+  });
  }
  return liveBudgetReplayCache.get(`${index.generationId}:${market}:${fingerprint||"legacy"}:${displayPrices}`,load);
 }

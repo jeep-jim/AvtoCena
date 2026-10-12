@@ -88,6 +88,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
 function BrandTile({ brand, href, onClick }: { brand: string; href: string; onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return <Link
     href={href}
+    prefetch={false}
     onClick={onClick}
     className="flex h-[78px] min-w-[94px] shrink-0 touch-manipulation select-none flex-col items-center justify-center gap-1.5 px-1.5 transition md:hover:-translate-y-0.5"
     title={`Автомобили ${brand} под заказ`}

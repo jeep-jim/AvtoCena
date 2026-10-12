@@ -9,6 +9,9 @@ import { catalogGenerationId } from "./storage";
 import { DetailReadCache } from "./detail-read-cache";
 import { japanPreviewInputPath, matchesJapanPreviewInput, type JapanPreviewInputIndex } from "./japan-preview-inputs";
 import type { VehicleOffer } from "./types";
+import {createHash} from "node:crypto";
+import {catalogRateFingerprintInputs} from "./rates";
+import {calculationCacheVersion} from "./shared-budget-prices";
 
 const inputs = new DetailReadCache<JapanPreviewInputIndex | null>({maxEntries:2,maxBytes:16*1024*1024,ttlMs:60_000,concurrency:1});
 export async function readJapanPreviewInputs() {
@@ -74,14 +77,26 @@ export async function attachJapanDeliveredPreviews<T extends Partial<VehicleOffe
 
 // One bounded derived lookup per generation/configuration, shared by filters and cards.
 // Never fetch thousands of detail shards on a public search request.
-const searchQuotes = new DetailReadCache<Record<string, any>>({maxEntries:2,maxBytes:12*1024*1024,ttlMs:300_000,concurrency:1});
-export async function japanSearchQuotes(generationId: string) {
+const searchQuotes = new DetailReadCache<Record<string, any>>({maxEntries:2,maxBytes:24*1024*1024,ttlMs:86400_000,concurrency:1});
+const inputHashes=new WeakMap<JapanPreviewInputIndex,string>();
+export function japanQuoteCacheKey(index:JapanPreviewInputIndex,configuration:unknown,rates:unknown,version:string,day:string){
+  let inputHash=inputHashes.get(index);
+  if(!inputHash){inputHash=createHash('sha256').update(JSON.stringify(index)).digest('hex');inputHashes.set(index,inputHash);}
+  return createHash('sha256').update(JSON.stringify([inputHash,configuration,rates,version,day])).digest('hex');
+}
+export async function japanSearchContext(generationId:string){
   const { getEffectiveMarketVersion } = await import("../effective-market-settings");
-  const configuration = await getEffectiveMarketVersion("japan");
-  const key=JSON.stringify([generationId,configuration,new Date().toISOString().slice(0,10)]);
+  // Inputs remain independently refreshable every minute. Only exact unchanged
+  // input/rate/settings/day/calculator combinations retain expensive quotes.
+  const [index,configuration,rates]=await Promise.all([readJapanPreviewInputs(),getEffectiveMarketVersion("japan"),catalogRateFingerprintInputs()]);
+  if(index?.version!==1 || index.generationId!==generationId)return null;
+  return {index,key:japanQuoteCacheKey(index,configuration,rates,calculationCacheVersion(),new Date().toISOString().slice(0,10))};
+}
+export async function japanSearchQuotes(generationId: string) {
+  const context=await japanSearchContext(generationId);
+  if(!context)return {};
+  const {index,key}=context;
   return searchQuotes.get(key,async()=>{
-    const index=await readJapanPreviewInputs();
-    if(index?.version!==1 || index.generationId!==generationId) return {};
     const quotes:Record<string,any>={};
     const entries=Object.entries(index.entries);
     for(let start=0;start<entries.length;start+=64){
@@ -95,6 +110,7 @@ export async function japanSearchQuotes(generationId: string) {
       }));
       await new Promise(resolve=>setTimeout(resolve,0));
     }
+    if((await japanSearchContext(generationId))?.key!==key)throw new Error('japan_quote_context_changed');
     return quotes;
   });
 }
