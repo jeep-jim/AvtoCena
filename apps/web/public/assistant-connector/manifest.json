@@ -1,12 +1,36 @@
 {
- "manifest_version":3,"name":"ИИ Бро — соединение с ChatGPT","version":"1.0.0",
- "description":"Соединяет ИИ Бро в АвтоЦене с отдельной вкладкой ChatGPT в вашем браузере.",
- "minimum_chrome_version":"120",
- "permissions":["storage"],
- "host_permissions":["https://chatgpt.com/*"],
- "background":{"service_worker":"background.js"},
- "content_scripts":[
-  {"matches":["https://avtocena.com/*","https://www.avtocena.com/*"],"js":["site.js"]},
-  {"matches":["https://chatgpt.com/*"],"js":["chatgpt.js"]}
- ]
+  "manifest_version": 3,
+  "name": "ИИ Бро — соединение с ChatGPT",
+  "version": "1.0.1",
+  "description": "Соединяет ИИ Бро в АвтоЦене с отдельной вкладкой ChatGPT в вашем браузере.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://avtocena.com/*",
+        "https://www.avtocena.com/*"
+      ],
+      "js": [
+        "site.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*"
+      ],
+      "js": [
+        "chatgpt.js"
+      ]
+    }
+  ]
 }

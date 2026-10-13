@@ -41,7 +41,7 @@ export function TeamAssistant(){
  useEffect(()=>{if(opened)end.current?.scrollIntoView({block:'nearest'});},[status?.messages.length,busy,opened]);
  async function connect(){
   if(connecting||busy)return;setConnecting(true);setError('');setInstallHelp(false);
-  try{await connector('ping');await connector('connect',{userId:userId.current});setBrowserConnected(true);setNotice('ChatGPT подключён в этом браузере.');}
+  try{const extension=await connector('ping');if(extension.version==='1.0.0')throw Error('Обновите расширение ИИ Бро до версии 1.0.1: в прежней версии есть ошибка повторного подключения.');await connector('connect',{userId:userId.current});setBrowserConnected(true);setNotice('ChatGPT подключён в этом браузере.');}
   catch(e){setBrowserConnected(false);setError(e instanceof Error?e.message:'Не удалось подключиться.');setInstallHelp(true);}
   finally{setConnecting(false);}
  }

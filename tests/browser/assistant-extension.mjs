@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const ext=path.resolve(process.env.ASSISTANT_EXTENSION_DIR||'apps/web/public/assistant-connector'),profile=fs.mkdtempSync(path.join(os.tmpdir(),'bro-extension-'));
+const browser=await chromium.launchPersistentContext(profile,{headless:true,executablePath:process.env.EXTENSION_CHROME_BIN||chromium.executablePath(),ignoreDefaultArgs:['--disable-extensions'],args:['--no-sandbox',`--disable-extensions-except=${ext}`,`--load-extension=${ext}`]});
+let loading=false;
+const composer=`<main><div contenteditable="true" role="textbox" style="width:500px;height:90px;border:1px solid"></div><button data-testid="send-button">Отправить</button></main><script>document.querySelector('button').onclick=()=>{const input=document.querySelector('[contenteditable]'),u=document.createElement('div');u.dataset.messageAuthorRole='user';u.textContent=input.innerText;document.querySelector('main').append(u);input.innerText='';const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent=JSON.stringify({reply:'Ответ нового запроса'});document.querySelector('main').append(a);};</script>`;
+try{
+ await browser.route('https://avtocena.com/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><title>Test CRM</title><body>CRM fixture</body>'}));
+ await browser.route('https://chatgpt.com/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><title>Test ChatGPT</title><body>'+(loading?'Загрузка…':composer)+'</body>'}));
+ await (browser.serviceWorkers()[0]||browser.waitForEvent('serviceworker',{timeout:10000}));
+ const gpt=await browser.newPage();await gpt.goto('https://chatgpt.com/');
+ const site=await browser.newPage();await site.goto('https://avtocena.com/crm');
+ await site.evaluate(()=>{window.rpc=m=>new Promise((resolve,reject)=>{const id=crypto.randomUUID(),timeout=setTimeout(()=>reject(Error('RPC timeout')),40000);const listener=e=>{if(e.data?.source==='avtocena-assistant-v1-reply'&&e.data.id===id){clearTimeout(timeout);window.removeEventListener('message',listener);resolve(e.data);}};window.addEventListener('message',listener);window.postMessage({source:'avtocena-assistant-v1',id,userId:'test-owner',...m},location.origin);});});
+ const rpc=m=>site.evaluate(m=>window.rpc(m),m),tabs=()=>browser.pages().filter(p=>p.url().startsWith('https://chatgpt.com/'));
+ assert.equal((await rpc({op:'ping'})).version,'1.0.1');
+ const result=await rpc({op:'connect'});assert.equal(result.ok,true,JSON.stringify(result));assert.equal(tabs().length,1,'reuse existing empty tab');
+ const answer=await rpc({op:'send',requestId:crypto.randomUUID(),input:[{role:'user',content:'Проверка'}]});assert.equal(answer.text,'{"reply":"Ответ нового запроса"}',JSON.stringify(answer));
+ assert.equal((await rpc({op:'connect'})).ok,true,'reconnect to same bound conversation');assert.equal(tabs().length,1);
+ console.log('actual extension: ping, fallback editor, existing-tab reuse, send and reconnect passed');
+ await rpc({op:'disconnect'});loading=true;
+ const failed=await rpc({op:'connect'});assert.equal(failed.ok,false);assert.equal(tabs().length,2,'one new tab for delayed load');
+ const delayed=tabs().find(p=>p!==gpt);loading=false;await delayed.reload();
+ const retried=await rpc({op:'connect'});assert.equal(retried.ok,true,JSON.stringify(retried));assert.equal(tabs().length,2,'retry must reuse reserved tab');
+ const both=await Promise.all([rpc({op:'connect'}),rpc({op:'connect'})]);assert.ok(both.every(r=>r.ok));assert.equal(tabs().length,2,'concurrent retries cannot create tabs');
+ console.log('actual extension: timeout, retry and concurrent retry passed without extra tabs');
+ await delayed.goto('https://chatgpt.com/c/unrelated');await delayed.evaluate(()=>{const old=document.createElement('div');old.dataset.messageAuthorRole='assistant';old.textContent='PRIVATE OLD CHAT';document.querySelector('main').append(old);});
+ const changed=await rpc({op:'connect'});assert.equal(changed.ok,false);assert.match(changed.error,/другой диалог/);assert.equal(tabs().length,2,'changed route must not create another tab');
+ console.log('actual extension: unrelated conversation rejected without creating a tab');
+}finally{await browser.close();fs.rmSync(profile,{recursive:true,force:true});}
