@@ -440,3 +440,5 @@ html[data-theme] .crm-root .crm-permission input[role="switch"]:disabled{opacity
 .crm-topbar:has(.crm-assistant-launch){flex-wrap:wrap}
 .crm-header-actions:has(.crm-assistant-launch){margin-left:auto}
 @media(max-width:767px){.crm-assistant-launch{font-size:13px}.crm-header-game{display:none}}
+
+html[data-theme] .crm-root .crm-assistant-permission input[role="switch"]:checked{background:#059669!important;border-color:#047857!important}

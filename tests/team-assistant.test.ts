@@ -19,7 +19,7 @@ test('only internal team; code rights default to owner and explicit grants are r
  const p=await load('apps/web/lib/team-assistant/policy.ts',{});
  for(const role of ['manager','admin','owner']){assert.equal(p.assistantAllowed(member({role})),true);assert.equal(p.assistantCodeAllowed(member({role})),role==='owner');}
  assert.equal(p.assistantCodeAllowed(member({permissions:{assistantCode:true}})),true);
- for(const u of [null,member({role:'dealer'}),member({companyId:'other',role:'owner'}),member({status:'disabled',role:'owner'}),member({permissions:{assistant:false}})])assert.equal(p.assistantAllowed(u),false);
+ for(const u of [null,member({role:'dealer'}),member({companyId:'other',role:'owner'}),member({status:'disabled',role:'owner'}),member({permissions:{assistant:false}}),member({role:'owner',permissions:{assistant:false}})])assert.equal(p.assistantAllowed(u),false);
  assert.equal(p.canFillPath(member(),'/crm/clients/123'),true);
  assert.equal(p.canFillPath(member({permissions:{editClients:false}}),'/crm/clients/123'),false);
  for(const path of ['/crm/managers/123','/crm/settings','/crm/documents','/api/crm/users'])assert.equal(p.canFillPath(member({role:'owner'}),path),false);
