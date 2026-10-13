@@ -41,8 +41,8 @@ try {
    assert.equal(await panel.evaluate(e=>getComputedStyle(e,'::backdrop').backdropFilter),'blur(12px)');
    assert.equal(await page.evaluate(()=>document.activeElement?.tagName==='TEXTAREA'),false,'no forced keyboard on opening');
    await page.locator('.ta-header h2').click();assert.equal(await panel.count(),1,'inside tap keeps sheet open');
-   await page.mouse.click(20,Math.max(4,p.y-45));await panel.waitFor({state:'detached'});
-   await fab.click();await panel.waitFor();const grip=await page.locator('.ta-handle').boundingBox();await page.mouse.move(grip.x+grip.width/2,grip.y+16);await page.mouse.down();await page.mouse.move(grip.x+grip.width/2,grip.y+100);await page.mouse.up();await panel.waitFor({state:'detached'});
+   await page.mouse.click(20,Math.max(4,p.y-45));assert.equal(await panel.count(),1,'outside tap keeps internal chat open');
+   const grip=await page.locator('.ta-handle').boundingBox();await page.mouse.move(grip.x+grip.width/2,grip.y+16);await page.mouse.down();await page.mouse.move(grip.x+grip.width/2,grip.y+100);await page.mouse.up();await panel.waitFor({state:'detached'});
    assert.equal(await page.evaluate(()=>document.documentElement.style.overflow),'');await fab.click();await panel.waitFor();
   }
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`${out}/${width}-${theme}-${crm?'crm':'public'}.png`});
@@ -54,7 +54,7 @@ try {
   const page=await browser.newPage({viewport:{width:390,height:900}});
   await page.addInitScript(()=>{
    window.SpeechRecognition=class {start(){window.recognition=this;}stop(){this.onresult({results:[[{transcript:'Найди автомобиль'}]]});this.onend();}abort(){this.onend?.();}};
-   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,version:'1.0.4',connected:m.op==='connect'},location.origin);});
+   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,version:'1.0.5',connected:m.op==='connect'},location.origin);});
   });
   await page.route('**/api/**',r=>r.fulfill({json:r.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner'}}:{userId:'owner',messages:[],revision:0,connected:false,owner:true}}));
   await page.goto(origin);await page.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();
@@ -68,6 +68,14 @@ try {
   await page.getByRole('button',{name:'Вложения и контекст',exact:true}).click();await page.getByRole('textbox',{name:'Сообщение помощнику'}).fill('Длинное сообщение\n'.repeat(30));assert.equal((await form.boundingBox()).height,height);
   await page.getByRole('textbox',{name:'Сообщение помощнику'}).fill('Найди автомобиль');
   assert.equal(await page.getByRole('textbox',{name:'Сообщение помощнику'}).inputValue(),'Найди автомобиль');assert.equal(await mic.getAttribute('aria-pressed'),'false');
+  const transfer=await page.evaluateHandle(()=>{const canvas=document.createElement('canvas');canvas.width=2;canvas.height=2;const bytes=Uint8Array.from(atob(canvas.toDataURL('image/png').split(',')[1]),c=>c.charCodeAt(0));const dt=new DataTransfer();dt.items.add(new File([bytes],'dragged-photo.png',{type:'image/png'}));return dt;});
+  await page.locator('.ta-panel').dispatchEvent('dragover',{dataTransfer:transfer});await page.getByText('Отпустите фото, чтобы прикрепить его',{exact:true}).waitFor();
+  await page.locator('.ta-panel').dispatchEvent('drop',{dataTransfer:transfer});await page.locator('.ta-attachments img').waitFor();assert.equal(await page.locator('.ta-attachments img').getAttribute('alt'),'dragged-photo.png');assert.equal((await form.boundingBox()).height,height);assert.equal(await page.locator('.ta-drop-hint').count(),0);await transfer.dispose();
+  const png=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=2;c.height=2;return c.toDataURL('image/png').split(',')[1];});
+  await page.route('**/test-drag-photo.png',r=>r.fulfill({contentType:'image/png',body:Buffer.from(png,'base64')}));
+  await page.evaluate(()=>{const img=document.createElement('img');img.id='drag-source';img.src='/test-drag-photo.png';img.alt='Фото автомобиля со страницы';document.body.append(img);});
+  const pageTransfer=await page.evaluateHandle(()=>new DataTransfer());await page.locator('#drag-source').dispatchEvent('dragstart',{dataTransfer:pageTransfer});await page.locator('.ta-panel').dispatchEvent('drop',{dataTransfer:pageTransfer});await pageTransfer.dispose();await page.waitForFunction(()=>document.querySelectorAll('.ta-attachments img').length===2,null,{timeout:5000}).catch(async e=>{console.log('DROP ERROR',await page.locator('.ta-error').allTextContents());throw e;});assert.equal(await page.locator('.ta-attachments img').nth(1).getAttribute('alt'),'Фото автомобиля со страницы');assert.equal((await form.boundingBox()).height,height);
+
   await page.screenshot({path:out+'/voice-connected-mobile.png'});await page.close();console.log('connection and voice hold/release passed');
  }
  {

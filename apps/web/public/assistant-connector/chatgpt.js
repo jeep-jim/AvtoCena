@@ -1,5 +1,5 @@
 (() => {
- if(globalThis.__avtocenaConnector104)return;globalThis.__avtocenaConnector104=true;
+ if(globalThis.__avtocenaConnector105)return;globalThis.__avtocenaConnector105=true;
  let binding='',path='',busy=false,activeRequest=null;
  const provider=location.hostname==='chat.deepseek.com'?'deepseek':location.hostname==='alice.yandex.ru'?'alice':/^(www\.)?google\.com$/.test(location.hostname)?'googleai':'gpt';
  const label={deepseek:'DeepSeek',gpt:'ChatGPT',alice:'Алиса',googleai:'Google'}[provider];
@@ -82,7 +82,7 @@
  chrome.runtime.onMessage.addListener((m,sender,reply)=>{
   if(sender.id!==chrome.runtime.id||sender.tab)return;
   if(m.op==='cancel'){if(m.binding===binding&&activeRequest?.id===m.requestId)activeRequest.controller.abort();reply({ok:true});return;}
-  if(m.op==='inspect'){reply(readiness());return;}
+  if(m.op==='inspect'){const state=readiness();reply({ready:state.ready,diagnostic:{document:document.readyState,visibility:document.visibilityState,composer:state.ready,empty:state.empty,route:initialPath(location.pathname)?'start':conversationPath(location.pathname)?'conversation':'other',draft:!!(composer()?.value||textOf(composer())).trim(),busy:busy||stop(),fileInputs:all('input[type=file]').length}});return;}
   if(m.op==='bind'){
    const state=readiness(),input=composer();
    if(busy||stop()){reply({ok:false,reason:'busy',error:'Дождитесь текущего ответа в ChatGPT.'});return;}

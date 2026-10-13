@@ -51,3 +51,6 @@ html[data-theme=light] .ta-panel{--ta-bg:#fff;--ta-surface:#f1f4f7;--ta-border:#
 .ta-compose>p[role=status]{position:absolute;bottom:100%;background:var(--ta-bg);padding:4px 8px;border-radius:8px}
 
 .ta-compose form textarea::placeholder{color:var(--ta-muted);opacity:1}
+
+.ta-drop-hint{position:absolute;inset:8px;z-index:10;display:grid;place-items:center;padding:24px;border:2px dashed #0aa384;border-radius:18px;background:var(--ta-bg);color:var(--ta-text);font-weight:650;text-align:center;pointer-events:none}
+.ta-diagnostic{flex-basis:100%;min-width:0;font-size:12px}.ta-diagnostic pre{max-height:180px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--ta-surface);padding:10px;border-radius:8px}

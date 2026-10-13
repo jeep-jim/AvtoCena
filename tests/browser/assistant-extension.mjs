@@ -39,7 +39,8 @@ try{
  // Navigate its test page explicitly so it receives the same deterministic fixture.
  let fixtureUrl='https://chatgpt.com/';browser.on('page',p=>{void p.goto(fixtureUrl).catch(()=>{});});
  const rpc=m=>site.evaluate(m=>window.rpc(m),m),tabs=()=>browser.pages().filter(p=>p.url().startsWith('https://chatgpt.com/'));
- assert.equal((await rpc({op:'ping'})).version,'1.0.4');
+ assert.equal((await rpc({op:'ping'})).version,'1.0.5');
+ const beforeConnect=await rpc({op:'diagnose'});assert.equal(beforeConnect.ok,true);assert.ok(beforeConnect.diagnostic);assert.ok(!JSON.stringify(beforeConnect).includes('PRIVATE'));
  await site.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();await site.getByRole('button',{name:'Подключить ChatGPT',exact:true}).click();await site.getByText('ChatGPT подключён. Пишите здесь — ответ появится в этом чате.',{exact:true}).waitFor().catch(async e=>{console.log('CONNECT DIAGNOSTIC',await site.locator('body').innerText(),await Promise.all(browser.pages().map(p=>p.evaluate(()=>({url:location.href,title:document.title,text:document.body.innerText.slice(0,700),hidden:document.hidden,editors:[...document.querySelectorAll('[contenteditable]')].map(e=>({html:e.outerHTML,editable:e.isContentEditable,rect:e.getBoundingClientRect().toJSON(),display:getComputedStyle(e).display,visibility:getComputedStyle(e).visibility}))})))),await browser.serviceWorkers()[0].evaluate(()=>chrome.storage.session.get(null)));throw e;});assert.equal(tabs().length,2,'create dedicated tab, never reuse ordinary chat');const service=tabs().find(p=>p!==gpt);const worker=browser.serviceWorkers()[0];await worker.evaluate(async()=>{const all=await chrome.storage.session.get(null),b=Object.values(all).find(x=>x.managed===3);await chrome.scripting.executeScript({target:{tabId:b.tabId},func:()=>{const original=setTimeout;globalThis.setTimeout=(fn,ms,...args)=>original(fn,Math.max(ms,60000),...args);}});});
  await site.getByRole('textbox',{name:'Сообщение помощнику'}).fill('Проверка возврата');await site.getByRole('button',{name:'Отправить сообщение',exact:true}).click();
  await site.locator('.ta-assistant .ta-text').filter({hasText:'Ответ нового запроса'}).waitFor({timeout:12000});
@@ -47,6 +48,7 @@ try{
  await site.getByRole('textbox',{name:'Сообщение помощнику'}).fill('Второе сообщение');await site.getByRole('button',{name:'Отправить сообщение',exact:true}).click();
  await site.waitForFunction(()=>document.querySelectorAll('.ta-assistant').length===2,{timeout:12000});
  assert.equal(await gpt.locator('[data-message-author-role]').count(),0,'ordinary chat untouched');
+ const diagnosis=await rpc({op:'diagnose'});assert.equal(diagnosis.diagnostic.composer,true);assert.equal(diagnosis.diagnostic.route,'conversation');assert.ok(!JSON.stringify(diagnosis).includes('/c/'));
  assert.equal((await rpc({op:'connect'})).ok,true,'reconnect to same bound conversation');assert.equal(tabs().length,2);
  // All providers share the internal timeline, each with its own service binding.
  for(const [provider,name,url] of [['alice','Алиса','https://alice.yandex.ru/'],['googleai','Google','https://www.google.com/ai'],['deepseek','DeepSeek','https://chat.deepseek.com/']]){
