@@ -76,3 +76,25 @@ test('completed stream required; HTTP 200 with failed, interrupted or incomplete
   mock([{type:'response.completed',response:{status:'completed',output:[{type:'message',content:[{type:'output_text',text:'Ответ'}]}]}}]);assert.equal((await p.modelReply([],new AbortController().signal)).text,'Ответ');
  }finally{globalThis.fetch=original;delete process.env.TEAM_ASSISTANT_RESPONSES_URL;delete process.env.TEAM_ASSISTANT_ACCESS_TOKEN;delete process.env.TEAM_ASSISTANT_MODEL;}
 });
+
+test('browser channel is private, single-use, encrypted and preserves the assistant tool pipeline',async()=>{
+ const state:any={actor:member(),files:new Map(),events:[]};
+ const store=await load('apps/web/lib/team-assistant/store.ts',state);
+ const bridge=await load('apps/web/lib/team-assistant/browser.ts',state);
+ const route=await load('apps/web/app/(crm)/api/crm/assistant/browser/route.ts',state);
+ const channel='11111111-1111-4111-8111-111111111111',other='22222222-2222-4222-8222-222222222222';
+ const lease=await store.lockHistory('manager',0);
+ const task=bridge.browserReply('manager',channel,lease)([{role:'user',content:'private prompt'}],AbortSignal.timeout(5000));
+ await new Promise(r=>setTimeout(r,20));
+ const get=(c:string)=>route.GET(new Request('https://avtocena.com/api/crm/assistant/browser?channel='+c));
+ assert.equal((await (await get(other)).json()).turn,null);
+ const turn=(await (await get(channel)).json()).turn;assert.equal(turn.input[0].content,'private prompt');
+ assert.ok(!JSON.stringify([...state.files.values()]).includes('private prompt'));
+ const post=(origin:string,id=turn.id)=>route.POST(new Request('https://avtocena.com/api/crm/assistant/browser',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({channel,id,text:'new answer',error:''})}));
+ assert.equal((await post('https://evil.test')).status,403);
+ assert.equal((await post('https://avtocena.com',other)).status,409);
+ assert.equal((await post('https://avtocena.com')).status,200);
+ assert.equal((await post('https://avtocena.com')).status,409);
+ assert.equal((await task).text,'new answer');assert.equal((await (await get(channel)).json()).turn,null);
+ state.actor=member({companyId:'other'});assert.equal((await get(channel)).status,403);
+});
