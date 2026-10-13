@@ -1,5 +1,7 @@
 "use client";
 import {NotificationReply} from './NotificationReply';
+import {BirthdayCelebration} from './BirthdayCelebration';
+import type {BirthdayCelebration as Birthday} from '../../lib/crm-birthday-celebrations';
 import {ReminderRows} from "./Reminders";
 import type {CrmReminder} from "../../lib/crm-reminders";
 import type {CrmNotice} from "../../lib/crm-unified-notifications";
@@ -40,7 +42,8 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const [recent,setRecent]=useState<InboxLead[]>([]),[leadsOpen,setLeadsOpen]=useState(false);
   const [notifications,setNotifications]=useState<CrmNotice[]>([]),[reminders,setReminders]=useState<CrmReminder[]>([]),[notificationsOpen,setNotificationsOpen]=useState(false);
   const unreadNotices=notifications.filter(n=>n.unread);
-  async function refreshNotices(){try{const r=await fetch('/api/crm/notifications',{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);}}catch{}}
+  const [birthdays,setBirthdays]=useState<Birthday[]>([]);
+  async function refreshNotices(){try{const r=await fetch('/api/crm/notifications',{cache:'no-store'});if(r.ok){const d=await r.json();setNotifications(d.notifications||[]);setReminders(d.reminders||[]);if(crm)setBirthdays(d.birthdayCelebrations||[]);}}catch{}}
   useEffect(()=>{let busy=false;const poll=async()=>{if(busy||document.visibilityState!=='visible')return;busy=true;try{await refreshNotices();}finally{busy=false;}};void poll();const timer=setInterval(poll,20000);window.addEventListener('avtocena:reminders',poll);window.addEventListener('avtocena:crm-change',poll);document.addEventListener('visibilitychange',poll);return()=>{clearInterval(timer);window.removeEventListener('avtocena:reminders',poll);window.removeEventListener('avtocena:crm-change',poll);document.removeEventListener('visibilitychange',poll);};},[userId]);
   async function readNotices(ids:string[]){if(!ids.length)return;try{const r=await fetch('/api/crm/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({ids})});if(!r.ok)throw Error();setNotifications(rows=>rows.map(n=>ids.includes(n.id)?{...n,unread:false}:n));}catch{setAckError('Не удалось отметить уведомления прочитанными.');}}
   const dismissKey=`avtocena_crm_dismissed_${userId}`;
@@ -166,6 +169,7 @@ export function CrmLiveAlerts({userId, role="manager", displayName="Кабине
   const badge=pending.length>0?<span className="ac-staff-badge">{pending.length}</span>:null;
   const assignedCount=pending.filter(lead=>lead.assignmentUnread).length;
   return <div ref={root} className={`ac-staff-tools ${header?"ac-staff-tools--header":""} ${crm?"ac-staff-tools--crm":""}`}>
+    {crm?<BirthdayCelebration key={userId} birthdays={birthdays}/>:null}
     <StaffHeartbeat/>
     <button type="button" className="ac-staff-account" aria-label={`Уведомления: ${pending.length+unreadNotices.length}`} aria-expanded={notificationsOpen} onClick={()=>{setNotificationsOpen(!notificationsOpen);setMenuOpen(false);}}><Bell size={19}/>{pending.length+unreadNotices.length>0?<span className="ac-unified-badge ac-staff-badge">{pending.length+unreadNotices.length}</span>:null}</button>
     {notificationsOpen?<section className="ac-unified-notifications" aria-label="Все уведомления"><div className="ac-notifications-heading"><strong>Уведомления</strong><button type="button" aria-label="Закрыть уведомления" onClick={()=>setNotificationsOpen(false)}><X size={20}/></button></div>
