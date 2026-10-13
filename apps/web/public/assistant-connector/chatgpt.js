@@ -6,7 +6,7 @@
  const initialPath=p=>({deepseek:/^\/$/,gpt:/^\/$/,alice:/^\/(?:chat)?\/?$/,googleai:/^\/ai\/?$/})[provider].test(p);
  const conversationPath=p=>({deepseek:/^\/a\/chat\/s\/[^/]+\/?$/,gpt:/^\/c\/[^/]+\/?$/,alice:/^\/chat\/[^/]+\/?$/,googleai:/^\/search\/?$/})[provider].test(p);
  function all(selector){const out=[],roots=[document];while(roots.length){const root=roots.shift();out.push(...root.querySelectorAll(selector));for(const el of root.querySelectorAll('*'))if(el.shadowRoot)roots.push(el.shadowRoot);}return [...new Set(out)];}
- const answerSelector=provider==='deepseek'?'.ds-markdown,[class*="ds-markdown"]':provider==='gpt'?'[data-message-author-role="assistant"],[data-turn="assistant"]':provider==='alice'?'[data-message-author-role="assistant"],[data-testid*="assistant"],[class*="AssistantMessage"],[class*="assistant-message"],[class*="assistantMessage"],[class*="MessageContent"],[class*="message-content"],[class*="markdown"]':'[data-message-author-role="assistant"],[data-attrid="wa:/description"],[data-attrid^="wa:"],[data-container-id],[data-content-feature],[data-snhf],[role="article"],article,[class*="response"],[class*="answer"],[class*="markdown"],[class*="prose"]';
+ const answerSelector=provider==='deepseek'?'.ds-markdown,[class*="ds-markdown"]':provider==='gpt'?'[data-message-author-role="assistant"],[data-turn="assistant"],[data-testid*="assistant"],[data-testid^="conversation-turn-"],[class*="markdown"],[class*="prose"]':provider==='alice'?'[data-message-author-role="assistant"],[data-testid*="assistant"],[class*="AssistantMessage"],[class*="assistant-message"],[class*="assistantMessage"],[class*="MessageContent"],[class*="message-content"],[class*="markdown"]':'[data-message-author-role="assistant"],[data-attrid="wa:/description"],[data-attrid^="wa:"],[data-container-id],[data-content-feature],[data-snhf],[role="article"],article,[class*="response"],[class*="answer"],[class*="markdown"],[class*="prose"]';
  const answers=()=>all(answerSelector).filter(x=>!x.closest('[contenteditable]')&&!x.querySelector('textarea,input,[contenteditable]'));
 
  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -16,6 +16,7 @@
  const stop=()=>all('[data-testid="stop-button"],button[aria-label*="Stop" i],button[aria-label*="Останов" i],[aria-busy="true"]').some(visible);
  const sendButton=()=>all('[data-testid="send-button"],button[aria-label*="Send" i],button[aria-label*="Отправ" i],button[aria-label*="Submit" i],button[aria-label*="Ask" i],button[aria-label*="Search" i],button[class*="send" i],[role="button"][aria-label*="Send" i],[role="button"][aria-label*="Отправ" i],button[type="submit"]').find(x=>visible(x)&&!x.disabled&&x.getAttribute('aria-disabled')!=='true');
  const textOf=el=>(el?.innerText||el?.textContent||'').replace(/[\u200b-\u200d\ufeff]/g,'').trim();
+ const structured=value=>{try{const p=JSON.parse(value.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));return !!p&&(typeof p.reply==='string'||typeof p.tool==='string');}catch{return false;}};
  const hasMarker=(el,marker)=>[el.innerText,el.textContent].some(t=>String(t||'').replace(/[\u200b-\u200d\ufeff]/g,'').includes(marker));
  function ownPrompt(marker){
   // The current ChatGPT shell can render its conversation outside <main>.
@@ -69,11 +70,11 @@
     if(users.some(x=>x!==anchor&&!x.contains(anchor)&&(anchor.compareDocumentPosition(x)&Node.DOCUMENT_POSITION_FOLLOWING)))throw Error('В ChatGPT отправлено другое сообщение. Ответ не перенесён.');
     const candidates=answers().filter(x=>!x.contains(anchor)&&!anchor.contains(x)&&!hasMarker(x,marker)&&(!before.has(x)||before.get(x)!==textOf(x))&&(anchor.compareDocumentPosition(x)&Node.DOCUMENT_POSITION_FOLLOWING));
     // Prefer the complete response container to a nested code block.
-    const answer=candidates.filter(x=>!candidates.some(y=>y!==x&&y.contains(x))).at(-1);
+    const qualified=provider==='gpt'?candidates.filter(x=>x.matches('[data-message-author-role="assistant"],[data-turn="assistant"]')||structured(textOf(x))):candidates;
+    const answer=qualified.filter(x=>!qualified.some(y=>y!==x&&y.contains(x))).at(-1);
     const value=textOf(answer);if(!value)continue;
     if(value!==last){last=value;stable=Date.now();}
-    let structured=false;try{const parsed=JSON.parse(value.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));structured=!!parsed&&(typeof parsed.reply==='string'||typeof parsed.tool==='string');}catch{}
-    if(!stop()&&(structured||Date.now()-stable>1800))return {ok:true,text:value.slice(0,100000),path};
+    if(!stop()&&(structured(value)||Date.now()-stable>1800))return {ok:true,text:value.slice(0,100000),path};
    }
    throw Error(echoSeen?'ChatGPT ещё не завершил ответ. Откройте служебный ChatGPT и проверьте его. Повторной отправки не было.':'Не удалось подтвердить отправку сообщения. Откройте служебный ChatGPT и проверьте, появился ли запрос. Повторной отправки не было.');
   }finally{observer.disconnect();if(activeRequest?.id===m.requestId){activeRequest=null;busy=false;}}
