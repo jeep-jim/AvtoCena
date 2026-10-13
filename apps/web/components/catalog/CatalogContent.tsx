@@ -141,7 +141,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
     const models=new Map([...(facets.models||[]),...stockFacets.models].map(row=>[`${row.make}:${row.model}`,row]));
     facets.models=[...models.values()];
   }
-  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
+  const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0 || (market.id === "japan" && overviewEligible && greenMatched.length > 0));
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0) + (japanAll ? greenMatched.length : 0);
 
   const initialKeys = ["stock", "auctionGrade", "advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];

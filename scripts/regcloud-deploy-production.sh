@@ -85,7 +85,9 @@ for path in ['/api/health','/','/cars','/']:
  with urllib.request.urlopen(base+path,timeout=90) as r:b=r.read();assert r.status==200
  elapsed=time.monotonic()-t
  if path=='/api/health':assert json.loads(b)['releaseSha']==sys.argv[2]
- else:assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
+ else:
+  assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
+  if path=='/cars':assert b'data-green-corner="true"' in b
  print(json.dumps({'path':path,'seconds':round(elapsed,3),'bytes':len(b)}),flush=True)
 # Prepare expensive first requests on the candidate, before visitors can reach it.
 # No background polling: this runs once per authorized release.
