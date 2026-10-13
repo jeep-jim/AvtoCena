@@ -16,7 +16,7 @@ export function TeamAssistant(){
  const [status,setStatus]=useState<AssistantStatus|null>(null),[opened,setOpened]=useState(false),[text,setText]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[settings,setSettings]=useState(false),[withPage,setWithPage]=useState(true),[width,setWidth]=useState(420),[phrase,setPhrase]=useState(''),[newPhrase,setNewPhrase]=useState(''),[codeAction,setCodeAction]=useState('');
  const [images,setImages]=useState<AssistantImage[]>([]),[mediaBusy,setMediaBusy]=useState(false),[pagePhotos,setPagePhotos]=useState<AssistantPhoto[]>([]);
  const fileInput=useRef<HTMLInputElement>(null),mediaLock=useRef(false);
- const dialog=useRef<HTMLDialogElement>(null),input=useRef<HTMLTextAreaElement>(null),end=useRef<HTMLDivElement>(null),controller=useRef<AbortController|null>(null),fieldMaps=useRef(new Map<string,ReturnType<typeof collectPageContext>['elements']>()),opener=useRef<HTMLElement|null>(null),dragY=useRef<number|null>(null),userId=useRef('');
+ const dialog=useRef<HTMLDialogElement>(null),input=useRef<HTMLTextAreaElement>(null),end=useRef<HTMLDivElement>(null),controller=useRef<AbortController|null>(null),fieldMaps=useRef(new Map<string,ReturnType<typeof collectPageContext>['elements']>()),opener=useRef<HTMLElement|null>(null),dragY=useRef<number|null>(null),userId=useRef(''),backdropDown=useRef(false);
  async function refresh(){const r=await fetch(endpoint+'?path='+encodeURIComponent(currentPath()),{cache:'no-store'});if(r.status===401||r.status===403){setStatus(null);setOpened(false);return;}const d=await r.json();if(!r.ok)throw Error(d.error||'Не удалось открыть помощника.');if(d.userId===userId.current)setStatus(d);}
  useEffect(()=>{
   let alive=true;
@@ -28,10 +28,10 @@ export function TeamAssistant(){
  },[]);
  useEffect(()=>{
   const d=dialog.current;if(!opened||!status||!d)return;
-  const media=matchMedia('(max-width: 899px)'),oldOverflow=document.body.style.overflow;
-  const sync=()=>{d.close();if(media.matches){d.showModal();document.body.style.overflow='hidden';delete document.documentElement.dataset.teamAssistantOpen;}else{d.show();document.body.style.overflow=oldOverflow;document.documentElement.dataset.teamAssistantOpen='true';}};
-  sync();media.addEventListener('change',sync);const t=setTimeout(()=>input.current?.focus(),100);
-  return()=>{clearTimeout(t);media.removeEventListener('change',sync);d.close();delete document.documentElement.dataset.teamAssistantOpen;document.body.style.overflow=oldOverflow;opener.current?.focus();};
+  const media=matchMedia('(max-width: 899px)'),oldOverflow=document.body.style.overflow,oldRootOverflow=document.documentElement.style.overflow;
+  const sync=()=>{d.close();if(media.matches){d.showModal();document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';delete document.documentElement.dataset.teamAssistantOpen;}else{d.show();document.body.style.overflow=oldOverflow;document.documentElement.style.overflow=oldRootOverflow;document.documentElement.dataset.teamAssistantOpen='true';}};
+  sync();media.addEventListener('change',sync);const t=setTimeout(()=>{if(!media.matches)input.current?.focus({preventScroll:true});},100);
+  return()=>{clearTimeout(t);media.removeEventListener('change',sync);d.close();delete document.documentElement.dataset.teamAssistantOpen;document.body.style.overflow=oldOverflow;document.documentElement.style.overflow=oldRootOverflow;opener.current?.focus({preventScroll:true});};
  },[opened,Boolean(status)]);
  useEffect(()=>{document.documentElement.style.setProperty('--team-assistant-width',width+'px');try{localStorage.setItem('ac-assistant-width',String(width));}catch{}},[width]);
  useEffect(()=>{if(opened)end.current?.scrollIntoView({block:'nearest'});},[status?.messages.length,busy,opened]);
@@ -83,9 +83,9 @@ export function TeamAssistant(){
  </div>;
  return <>
   {!opened&&<button type="button" data-team-assistant className="ta-fab" aria-label="Открыть ИИ-помощника" onClick={e=>{opener.current=e.currentTarget;setOpened(true);void refresh().catch(e=>setError(e.message));}}><MessageCircle size={21}/><span>Помощник</span></button>}
-  {opened&&createPortal(<dialog ref={dialog} data-team-assistant className="ta-panel" aria-labelledby="ta-title" onCancel={e=>{e.preventDefault();close();}}>
+  {opened&&createPortal(<dialog ref={dialog} data-team-assistant className="ta-panel" aria-labelledby="ta-title" onPointerDown={e=>{const r=e.currentTarget.getBoundingClientRect();backdropDown.current=e.target===e.currentTarget&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom);}} onClick={e=>{const r=e.currentTarget.getBoundingClientRect();if(backdropDown.current&&e.target===e.currentTarget&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))close();backdropDown.current=false;}} onCancel={e=>{e.preventDefault();close();}}>
    <div className="ta-resize" role="separator" tabIndex={0} aria-label="Ширина помощника" aria-orientation="vertical" aria-valuemin={340} aria-valuemax={640} aria-valuenow={width} onPointerDown={resize} onKeyDown={e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();setWidth(w=>Math.max(340,Math.min(640,w+(e.key==='ArrowLeft'?20:-20))));}}}/>
-   <button type="button" className="ta-handle" aria-label="Свернуть помощника вниз" onClick={close} onPointerDown={e=>{dragY.current=e.clientY;e.currentTarget.setPointerCapture(e.pointerId);}} onPointerUp={e=>{if(dragY.current!==null&&e.clientY-dragY.current>65)close();dragY.current=null;}}><span/></button>
+   <button type="button" className="ta-handle" aria-label="Свернуть помощника вниз" onClick={close} onPointerDown={e=>{dragY.current=e.clientY;e.currentTarget.setPointerCapture(e.pointerId);}} onPointerUp={e=>{if(dragY.current!==null&&e.clientY-dragY.current>65)close();dragY.current=null;}} onPointerCancel={()=>{dragY.current=null;}}><span/></button>
    <header className="ta-header"><img src="/avatars/gpt-assistant.svg" alt="" width={34} height={34}/><div><h2 id="ta-title">ИИ Бро</h2><span>Топ Авто · личный чат</span></div><div className="ta-toolbar"><button aria-label="Настройки помощника" title="Настройки" onClick={()=>setSettings(v=>!v)}><Settings2 size={18}/></button><button aria-label="Свернуть помощника" title="Свернуть" onClick={close}><Minus size={19}/></button><button aria-label="Закрыть помощника" title="Закрыть" onClick={close}><X size={19}/></button></div></header>
    <div className="ta-contextbar"><span>{status.connected?'ChatGPT · чат команды':'Ожидает подключения ChatGPT'}</span><button title="Новая переписка" aria-label="Начать новую переписку" disabled={busy||!status.messages.length} onClick={async()=>{if(!confirm('Очистить вашу переписку с помощником?'))return;try{await request({op:'reset'});fieldMaps.current.clear();setImages([]);setPagePhotos([]);}catch(e){setError(e instanceof Error?e.message:'Не удалось очистить.');}}}><Plus size={18}/></button></div>
    <div className="ta-messages" role="log" aria-label="Переписка с помощником" aria-live="polite">
