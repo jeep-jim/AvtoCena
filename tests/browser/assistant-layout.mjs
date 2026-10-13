@@ -75,11 +75,11 @@ try {
  // The real extension content script must ignore old answers and reject a changed conversation.
  {
   const page=await browser.newPage();await page.goto(origin);
-  await page.setContent('<main><div data-message-author-role="assistant">OLD PRIVATE ANSWER</div><textarea id="prompt-textarea"></textarea><button data-testid="send-button">Send</button></main>');
+  await page.setContent('<main><textarea id="prompt-textarea"></textarea><button data-testid="send-button">Send</button></main>');
   await page.evaluate(()=>{window.chrome={runtime:{id:'test-extension',onMessage:{addListener(fn){window.bridgeListener=fn;}}}};document.querySelector('button').onclick=()=>{const u=document.createElement('div');u.dataset.messageAuthorRole='user';u.textContent=document.querySelector('textarea').value;document.querySelector('main').append(u);const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent='{"reply":"Только новый ответ"}';document.querySelector('main').append(a);};});
   await page.addScriptTag({content:fs.readFileSync('apps/web/public/assistant-connector/chatgpt.js','utf8')});
   const rpc=m=>page.evaluate(m=>new Promise(resolve=>window.bridgeListener(m,{id:'test-extension'},resolve)),m);
-  assert.equal((await rpc({op:'bind',binding:'one'})).ok,true);
+  assert.equal((await rpc({op:'bind',binding:'one'})).ok,true);await page.evaluate(()=>{const old=document.createElement('div');old.dataset.messageAuthorRole='assistant';old.textContent='OLD PRIVATE ANSWER';document.querySelector('main').prepend(old);});
   const response=await rpc({op:'send',binding:'one',requestId:'unique-request',input:[{role:'user',content:'hello'}]});assert.equal(response.text,'{"reply":"Только новый ответ"}');
   await page.evaluate(()=>history.pushState({},'','/c/another'));assert.equal((await rpc({op:'send',binding:'one',requestId:'next',input:[]})).ok,false);
   await page.close();console.log('extension new-answer isolation and changed-route guard passed');
