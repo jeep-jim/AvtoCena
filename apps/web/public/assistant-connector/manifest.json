@@ -1,15 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "ИИ Бро — соединение с ChatGPT",
-  "version": "1.0.3",
-  "description": "Соединяет ИИ Бро в АвтоЦене с отдельной вкладкой ChatGPT в вашем браузере.",
+  "name": "ИИ Бро — чат с помощниками",
+  "version": "1.0.4",
+  "description": "Соединяет внутренний чат АвтоЦены с вашими аккаунтами ChatGPT, Алисы, Google и DeepSeek без API-ключей.",
   "minimum_chrome_version": "120",
   "permissions": [
     "storage",
     "scripting"
   ],
   "host_permissions": [
-    "https://chatgpt.com/*"
+    "https://chatgpt.com/*",
+    "https://alice.yandex.ru/*",
+    "https://www.google.com/*",
+    "https://google.com/*",
+    "https://chat.deepseek.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -26,7 +30,11 @@
     },
     {
       "matches": [
-        "https://chatgpt.com/*"
+        "https://chatgpt.com/*",
+        "https://alice.yandex.ru/*",
+        "https://www.google.com/*",
+        "https://google.com/*",
+        "https://chat.deepseek.com/*"
       ],
       "js": [
         "chatgpt.js"
