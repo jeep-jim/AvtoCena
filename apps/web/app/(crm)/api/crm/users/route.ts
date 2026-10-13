@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     const telegramUsername = normalizeTelegramUsername(clean(form.get("telegramUsername"), 160));
     const requestedRole = clean(form.get("role"), 40) as UserRole;
     const role: UserRole = ["owner", "admin", "manager", "dealer"].includes(requestedRole) ? requestedRole : "manager";
-    const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"?true:role==="manager"&&isAdministrativeCrmPermission(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
+    const permissions:CrmPermissions|undefined=form.get("permissionsPresent")==="1"?Object.fromEntries((Object.keys(CRM_PERMISSIONS) as CrmPermission[]).map(key=>[key,role==="owner"&&key!=="assistant"?true:role==="manager"&&isAdministrativeCrmPermission(key)?false:form.get(`permission_${key}`)==="on"])):undefined;
     if(permissions&&actor.role!=="owner"&&Object.entries(permissions).some(([key,value])=>value&&!hasCrmPermission(actor,key as CrmPermission)))throw Error("Нельзя выдать права, которых у вас нет");
     if(actor.role!=="owner"&&form.has("permission_deleteIdeas"))throw Error("Право удаления идей выдаёт только владелец");
     if(actor.role!=="owner"&&permissions)delete permissions.deleteIdeas;

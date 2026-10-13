@@ -30,6 +30,9 @@ test('staff writes enforce capability, owner boundary and prevent granting absen
  state.actor={...state.actor,role:'admin',permissions:{deleteIdeas:true}};
  response=await save({userId:'new-staff'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users[0].permissions.deleteIdeas,true);
  response=await save({userId:'new-staff',permission_deleteIdeas:'on'});assert.match(response.headers.get('location'),/state=error/);
+ state.actor={...state.actor,role:'owner'};
+ response=await save({userId:'o',telegramUsername:'owner',role:'owner'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users.find(u=>u.id==='o').permissions.assistant,false,'owner can hide assistant');assert.equal(state.users.find(u=>u.id==='o').permissions.staff,true,'owner administrative rights remain enabled');
+ response=await save({userId:'o',telegramUsername:'owner',role:'owner',permission_assistant:'on'});assert.match(response.headers.get('location'),/state=saved/);assert.equal(state.users.find(u=>u.id==='o').permissions.assistant,true);
  state.actor={...state.actor,role:'admin'};
  state.actor={...state.actor,permissions:{staff:false}};response=await save({telegramUsername:'another'});assert.match(response.headers.get('location'),/auth_required/);assert.equal(state.users.length,3);}finally{delete (globalThis as any).__staffPermissions;}
 });
