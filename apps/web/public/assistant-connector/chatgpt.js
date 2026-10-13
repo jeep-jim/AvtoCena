@@ -1,9 +1,9 @@
 (() => {
- if(globalThis.__avtocenaConnector104)return;globalThis.__avtocenaConnector104=true;
+ if(globalThis.__avtocenaConnector105)return;globalThis.__avtocenaConnector105=true;
  let binding='',path='',busy=false,activeRequest=null;
  const provider=location.hostname==='chat.deepseek.com'?'deepseek':location.hostname==='alice.yandex.ru'?'alice':/^(www\.)?google\.com$/.test(location.hostname)?'googleai':'gpt';
  const label={deepseek:'DeepSeek',gpt:'ChatGPT',alice:'Алиса',googleai:'Google'}[provider];
- const initialPath=p=>({deepseek:/^\/$/,gpt:/^\/$/,alice:/^\/(?:chat)?\/?$/,googleai:/^\/ai\/?$/})[provider].test(p);
+ const initialPath=p=>(provider==='googleai'&&/^\/search\/?$/.test(p)&&new URLSearchParams(location.search).get('udm')==='50'&&!new URLSearchParams(location.search).has('q'))||({deepseek:/^\/$/,gpt:/^\/$/,alice:/^\/(?:chat)?\/?$/,googleai:/^\/ai\/?$/})[provider].test(p);
  const conversationPath=p=>({deepseek:/^\/a\/chat\/s\/[^/]+\/?$/,gpt:/^\/c\/[^/]+\/?$/,alice:/^\/chat\/[^/]+\/?$/,googleai:/^\/search\/?$/})[provider].test(p);
  function all(selector){const out=[],roots=[document];while(roots.length){const root=roots.shift();out.push(...root.querySelectorAll(selector));for(const el of root.querySelectorAll('*'))if(el.shadowRoot)roots.push(el.shadowRoot);}return [...new Set(out)];}
  const answerSelector=provider==='deepseek'?'.ds-markdown,[class*="ds-markdown"]':provider==='gpt'?'[data-message-author-role="assistant"],[data-turn="assistant"],[data-testid*="assistant"],[data-testid^="conversation-turn-"],[class*="markdown"],[class*="prose"]':provider==='alice'?'[data-message-author-role="assistant"],[data-testid*="assistant"],[class*="AssistantMessage"],[class*="assistant-message"],[class*="assistantMessage"],[class*="MessageContent"],[class*="message-content"],[class*="markdown"]':'[data-message-author-role="assistant"],[data-attrid="wa:/description"],[data-attrid^="wa:"],[data-container-id],[data-content-feature],[data-snhf],[role="article"],article,[class*="response"],[class*="answer"],[class*="markdown"],[class*="prose"]';
@@ -82,7 +82,7 @@
  chrome.runtime.onMessage.addListener((m,sender,reply)=>{
   if(sender.id!==chrome.runtime.id||sender.tab)return;
   if(m.op==='cancel'){if(m.binding===binding&&activeRequest?.id===m.requestId)activeRequest.controller.abort();reply({ok:true});return;}
-  if(m.op==='inspect'){reply(readiness());return;}
+  if(m.op==='inspect'){const state=readiness();reply({ready:state.ready,diagnostic:{document:document.readyState,visibility:document.visibilityState,composer:state.ready,empty:state.empty,route:initialPath(location.pathname)?'start':conversationPath(location.pathname)?'conversation':'other',draft:!!(composer()?.value||textOf(composer())).trim(),busy:busy||stop(),fileInputs:all('input[type=file]').length}});return;}
   if(m.op==='bind'){
    const state=readiness(),input=composer();
    if(busy||stop()){reply({ok:false,reason:'busy',error:'Дождитесь текущего ответа в ChatGPT.'});return;}

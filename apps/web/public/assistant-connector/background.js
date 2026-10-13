@@ -2,10 +2,13 @@ const providers={deepseek:{url:'https://chat.deepseek.com/',name:'DeepSeek'},gpt
 const origins=new Set(['https://avtocena.com','https://www.avtocena.com']);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const pending=new Map(),connecting=new Map();
+async function bounded(task,ms=2500){
+ let timer;try{return await Promise.race([task,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Вкладка не ответила на проверку.')),ms);})]);}finally{clearTimeout(timer);}
+}
 async function probe(binding,op='bind'){
- try{return await chrome.tabs.sendMessage(binding.tabId,{op,binding:binding.token,expectedPath:binding.path||'',provider:binding.provider});}
+ try{return await bounded(chrome.tabs.sendMessage(binding.tabId,{op,binding:binding.token,expectedPath:binding.path||'',provider:binding.provider}));}
  catch{
-  try{await chrome.scripting.executeScript({target:{tabId:binding.tabId},files:['chatgpt.js']});return await chrome.tabs.sendMessage(binding.tabId,{op,binding:binding.token,expectedPath:binding.path||'',provider:binding.provider});}
+  try{await bounded(chrome.scripting.executeScript({target:{tabId:binding.tabId},files:['chatgpt.js']}));return await bounded(chrome.tabs.sendMessage(binding.tabId,{op,binding:binding.token,expectedPath:binding.path||'',provider:binding.provider}));}
   catch{return {ok:false,error:'Нет связи с вкладкой ChatGPT. Дождитесь её загрузки. Проверьте в настройках расширения разрешение доступа к chatgpt.com.'};}
  }
 }
@@ -22,8 +25,8 @@ async function connect(key,stored,m,sender){
   await chrome.windows.update(binding.windowId,{state:'minimized',focused:false}).catch(()=>{});
  }
  if(tab.windowId!==binding.windowId)throw Error('Служебная вкладка перемещена. Отключите ИИ Бро и подключите заново.');
- let result;
- for(let n=0;n<50;n++){
+ let result;const deadline=Date.now()+25000;
+ while(Date.now()<deadline){
   result=await probe(binding);
   if(result.ok){binding.path=result.path;await chrome.storage.session.set({[key]:binding});await chrome.windows.update(binding.windowId,{state:'minimized',focused:false}).catch(()=>{});return {ok:true,connected:true};}
   if(result.reason==='conversation'||result.reason==='draft'||result.reason==='busy')break;
@@ -51,10 +54,19 @@ async function exchange(binding,m,key){
 }
 async function handle(m,sender){
  if(sender.frameId!==0||!sender.tab||!origins.has(new URL(sender.url).origin))throw Error('Нет доступа к соединению.');
- if(m.op==='ping')return {ok:true,version:'1.0.4'};
+ if(m.op==='ping')return {ok:true,version:'1.0.5'};
  if(typeof m.userId!=='string'||!m.userId||m.userId.length>120)throw Error('Войдите в аккаунт команды.');
  m={...m,provider:m.provider||'gpt'};if(!Object.hasOwn(providers,m.provider))throw Error('Выберите помощника.');
  const key='binding:'+sender.tab.id+':'+m.provider,stored=(await chrome.storage.session.get(key))[key],binding=stored?.userId===m.userId&&stored.managed===3&&stored.provider===m.provider?stored:null;
+ if(m.op==='diagnose'){
+  const diagnostic={version:'1.0.5',provider:m.provider,serviceTab:!!binding};
+  if(!binding)return {ok:true,diagnostic:{...diagnostic,stage:'not-connected'}};
+  let tab;try{tab=await bounded(chrome.tabs.get(binding.tabId));}catch{return {ok:true,diagnostic:{...diagnostic,stage:'tab-closed'}};}
+  diagnostic.load=tab.status;diagnostic.discarded=!!tab.discarded;
+  // Do not export URLs with conversation IDs, page text, prompts or account details.
+  const result=await probe(binding,'inspect');
+  return {ok:true,diagnostic:{...diagnostic,stage:result.ready?'composer-found':'not-ready',...(result.diagnostic||{}),...(result.error?{error:result.error}:{})}};
+ }
  if(m.op==='open'){if(!binding)throw Error('Сначала нажмите «Подключить».');await chrome.windows.update(binding.windowId,{state:'normal',focused:true});await chrome.tabs.update(binding.tabId,{active:true});return {ok:true};}
  if(m.op==='cancel'){if(binding&&pending.get(key)===m.requestId){await chrome.tabs.sendMessage(binding.tabId,{op:'cancel',binding:binding.token,requestId:m.requestId}).catch(()=>{});pending.delete(key);}return {ok:true};}
  if(m.op==='disconnect'){await chrome.storage.session.remove(key);return {ok:true};}
