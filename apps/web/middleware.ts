@@ -110,6 +110,18 @@ function allowWithDocsCookie(request: NextRequest) {
 async function routeRequest(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Redirect before React streams the old auction section. This keeps the
+  // response an actual HTTP redirect for browsers, crawlers and release checks.
+  if ((request.method === "GET" || request.method === "HEAD") &&
+      (pathname === "/cars/japan" || (pathname === "/cars" && request.nextUrl.searchParams.get("market")?.toLowerCase() === "japan"))) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/cars/green";
+    for (const key of ["stock", "auctionGrade", "auctionDateFrom", "auctionDateTo", "page"]) url.searchParams.delete(key);
+    url.searchParams.set("market", "japan");
+    url.searchParams.set("stock", "green");
+    return NextResponse.redirect(url, 307);
+  }
+
   const legacyOffer=pathname.match(/^\/cars\/offer\/([^/]+)$/);
   if ((request.method === 'GET' || request.method === 'HEAD') && legacyOffer && !legacyOffer[1].includes('--') && !legacyOffer[1].startsWith('special_')) {
     const url=request.nextUrl.clone();
