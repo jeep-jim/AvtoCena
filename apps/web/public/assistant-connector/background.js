@@ -31,7 +31,7 @@ async function connect(key,stored,m,sender){
 }
 async function handle(m,sender){
  if(sender.frameId!==0||!sender.tab||!origins.has(new URL(sender.url).origin))throw Error('Нет доступа к соединению.');
- if(m.op==='ping')return {ok:true,version:'1.0.2'};
+ if(m.op==='ping')return {ok:true,version:'1.0.3'};
  if(typeof m.userId!=='string'||!m.userId||m.userId.length>120)throw Error('Войдите в аккаунт команды.');
  const key='binding:'+sender.tab.id,stored=(await chrome.storage.session.get(key))[key],binding=stored?.userId===m.userId&&stored.managed===2?stored:null;
  if(m.op==='open'){if(!binding)throw Error('Сначала нажмите «Подключить».');await chrome.windows.update(binding.windowId,{state:'normal',focused:true});await chrome.tabs.update(binding.tabId,{active:true});return {ok:true};}
@@ -49,7 +49,7 @@ async function handle(m,sender){
  if(!Array.isArray(m.input)||JSON.stringify(m.input).length>4300000||typeof m.requestId!=='string')throw Error('Запрос слишком большой.');
  const target=await chrome.tabs.get(binding.tabId);if(target.windowId!==binding.windowId)throw Error('Служебная вкладка перемещена. Подключитесь заново.');
  pending.set(key,m.requestId);let timer;
- try{const result=await Promise.race([chrome.tabs.sendMessage(binding.tabId,{op:'send',binding:binding.token,input:m.input,requestId:m.requestId}),new Promise((_,reject)=>{timer=setTimeout(()=>{void chrome.tabs.sendMessage(binding.tabId,{op:'cancel',binding:binding.token,requestId:m.requestId}).catch(()=>{});reject(Error('Ответ не получен вовремя.'));},95000);})]);if(result?.ok&&result.path){binding.path=result.path;await chrome.storage.session.set({[key]:binding});}return result;}
+ try{const result=await Promise.race([chrome.tabs.sendMessage(binding.tabId,{op:'send',binding:binding.token,input:m.input,requestId:m.requestId}),new Promise((_,reject)=>{timer=setTimeout(()=>{void chrome.tabs.sendMessage(binding.tabId,{op:'cancel',binding:binding.token,requestId:m.requestId}).catch(()=>{});reject(Error('Ответ не получен вовремя.'));},95000);})]);if(result?.path){binding.path=result.path;await chrome.storage.session.set({[key]:binding});}return result;}
  catch{throw Error('Связь с вкладкой ChatGPT прервана. Нажмите «Подключить»: повторно будет проверена та же вкладка.');}
  finally{clearTimeout(timer);if(pending.get(key)===m.requestId)pending.delete(key);}
 }

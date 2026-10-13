@@ -54,7 +54,7 @@ try {
   const page=await browser.newPage({viewport:{width:390,height:900}});
   await page.addInitScript(()=>{
    window.SpeechRecognition=class {start(){window.recognition=this;}stop(){this.onresult({results:[[{transcript:'Найди автомобиль'}]]});this.onend();}abort(){this.onend?.();}};
-   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,version:'1.0.2',connected:m.op==='connect'},location.origin);});
+   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,version:'1.0.3',connected:m.op==='connect'},location.origin);});
   });
   await page.route('**/api/**',r=>r.fulfill({json:r.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner'}}:{userId:'owner',messages:[],revision:0,connected:false,owner:true}}));
   await page.goto(origin);await page.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();
