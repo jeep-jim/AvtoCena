@@ -41,3 +41,5 @@ html[data-theme] .team-ideas tr[data-complete=true] .ideas-title summary,html[da
 @media(max-width:767px){.ideas-number-search{grid-column:1/-1}.team-ideas tr[data-complete=true]:not([data-expanded=true])>td.ideas-progress-cell{display:block}.team-ideas tr[data-complete=true]:not([data-expanded=true])>td.ideas-progress-cell::before{display:none}.ideas-progress-line .ideas-delete{width:44px;min-height:44px}.ideas-progress-line .ideas-countdown{width:38px}}
 
 .ideas-update-dot{display:inline-block;width:8px;height:8px;margin-right:8px;flex:0 0 8px;border-radius:50%;background:#e34252;vertical-align:middle}
+
+@media(max-width:767px){.ideas-actions>.ideas-number-search{display:none}}

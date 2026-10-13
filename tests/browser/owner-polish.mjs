@@ -35,7 +35,7 @@ try {
   const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   await page.route('**/api/**',route=>{
    const url=route.request().url();
-   const json=url.includes('/auth/me')?{user:staff?{id:'owner',role:'owner',displayName:'Owner',avatarUrl:'/logo/avtocena-mark-light.svg'}:null}:url.includes('brand-counts')?{counts:{Abarth:1,Acura:1},modelCounts:{Abarth:1,Acura:1}}:{ok:true,leads:[],pending:[],recent:[]};
+   const json=url.includes('/api/crm/navigation')?{counts:{},through:new Date().toISOString()}:url.includes('/auth/me')?{user:staff?{id:'owner',role:'owner',displayName:'Owner',avatarUrl:'/logo/avtocena-mark-light.svg'}:null}:url.includes('brand-counts')?{counts:{Abarth:1,Acura:1},modelCounts:{Abarth:1,Acura:1}}:{ok:true,leads:[],pending:[],recent:[]};
    return route.fulfill({json});
   });
   try {

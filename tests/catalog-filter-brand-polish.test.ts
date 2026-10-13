@@ -8,10 +8,11 @@ const brandSelect = fs.readFileSync(new URL("../apps/web/components/catalog/Cata
 const rail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 
-test("sort direction highlights only the active arrow", () => {
-  assert.match(filters, /direction === "asc" \? "#ff353d"/);
-  assert.match(filters, /direction === "desc" \? "#ff353d"/);
-  assert.match(filters, /active=\{Boolean\(sortKey\)\}/);
+test("sort selection highlights only the matching key and direction and can be cleared", () => {
+  assert.match(filters, /const active = sortKey === key && direction === dir/);
+  assert.match(filters, /aria-pressed=\{active\}/);
+  assert.match(filters, /onChange\(active \? "" : key, dir\)/);
+  for (const label of ["Дешевле", "Дороже", "Новые", "Ранние"]) assert.ok(filters.includes(label));
 });
 
 test("catalog brand picker is a multiselect with logos and live compatible model counts", () => {
