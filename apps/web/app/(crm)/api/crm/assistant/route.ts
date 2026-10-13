@@ -1,3 +1,4 @@
+import {cleanImages,readAssistantBody} from '@/lib/team-assistant/media';
 import {randomUUID} from 'node:crypto';
 import {getCurrentUser} from '@/lib/auth';
 import {isPlatformOwner} from '@/lib/platform-access';
@@ -24,7 +25,7 @@ export async function POST(request:Request){
  let lease='';
  try{
   if(!request.headers.get('content-type')?.startsWith('application/json'))return json({error:'Неверный формат запроса.'},400);
-  const raw=await request.text();if(raw.length>120000)throw Error('Сообщение слишком большое.');const body=JSON.parse(raw);
+  const body=await readAssistantBody(request);
   if(!Number.isInteger(body.revision)||body.revision<0)throw Error('Откройте переписку заново.');
   if(body.op==='message'&&!providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
   lease=await lockHistory(user.id,body.revision);
@@ -57,9 +58,9 @@ export async function POST(request:Request){
   }
   if(body.op!=='message')throw Error('Неизвестное действие.');
   const text=String(body.text||'').trim();if(!text||text.length>6000)throw Error('Напишите сообщение до 6000 символов.');
-  const context=cleanContext(body.context),previous=await readHistory(user.id);
-  const answer=await runAssistant(user,text,context,previous.messages,AbortSignal.any([request.signal,AbortSignal.timeout(110000)]));
-  const s=await mutateHistory(user.id,s=>{if(s.lease!==lease)throw Error('Переписка обновилась. Откройте её заново.');return {...s,revision:s.revision+1,messages:[...s.messages,{id:randomUUID(),role:'user' as const,text,at:new Date().toISOString()},answer].slice(-40)};});
+  const images=cleanImages(body.images),context=cleanContext(body.context),previous=await readHistory(user.id);
+  const answer=await runAssistant(user,text,context,previous.messages,AbortSignal.any([request.signal,AbortSignal.timeout(110000)]),images);
+  const s=await mutateHistory(user.id,s=>{if(s.lease!==lease)throw Error('Переписка обновилась. Откройте её заново.');return {...s,revision:s.revision+1,messages:[...s.messages,{id:randomUUID(),role:'user' as const,text,at:new Date().toISOString(),...(images.length?{imageNames:images.map(i=>i.name)}:{})},answer].slice(-40)};});
   return json({messages:s.messages,revision:s.revision});
  }catch(error){const message=error instanceof Error?error.message:'';return json({error:/^[А-ЯЁ]/.test(message)?message.slice(0,240):'Не удалось завершить запрос. Попробуйте снова.'},400);}
  finally{if(lease)await unlockHistory(user.id,lease).catch(()=>{});}

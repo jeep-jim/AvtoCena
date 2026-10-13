@@ -1,3 +1,4 @@
+import {cleanPhotos} from '../../../lib/team-assistant/media';
 import {privateField,safePath} from '../../../lib/team-assistant/policy';
 import type {AssistantContext,AssistantAction} from '../../../lib/team-assistant/types';
 type Field=HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement;
@@ -15,7 +16,8 @@ export function collectPageContext(enabled:boolean):{context:AssistantContext;el
  const main=document.querySelector('.crm-content')||document.querySelector('main');
  // Exclude controls, credentials/settings panels, hidden regions and the assistant itself.
  const text=enabled&&main?Array.from(main.querySelectorAll<HTMLElement>('h1,h2,h3,p,td,dt,dd,[data-assistant-context]')).filter(e=>visible(e)&&!e.closest('form,[data-assistant-private]')&&!privateField(e.textContent||'')).map(e=>e.innerText).join('\n').slice(0,14000):'';
- return {context:{path,title:document.title.slice(0,200),text,fields},elements};
+ const photos=enabled&&main?cleanPhotos(Array.from(main.querySelectorAll<HTMLImageElement>('img')).filter(e=>visible(e)&&e.naturalWidth>=150&&e.naturalHeight>=100).map(e=>({url:e.currentSrc||e.src,name:e.alt||'Фото со страницы'}))):[];
+ return {context:{path,title:document.title.slice(0,200),text,fields,photos},elements};
 }
 export function validateFormAction(action:AssistantAction,elements:Map<string,Field>){
  if(action.kind!=='fill'||action.path!==location.pathname+location.search)throw Error('Вернитесь к исходной форме и повторите запрос.');
