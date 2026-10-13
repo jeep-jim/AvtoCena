@@ -4,7 +4,7 @@ on:
     # Refresh date-sensitive derived pages after Krasnoyarsk midnight.
     - cron: '5 17 * * *'
   workflow_run:
-    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh europe, Catalog refresh uae, Catalog refresh georgia, Catalog refresh green, ProAuctions collect and publish]
+    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh europe, Catalog refresh uae, Catalog refresh georgia, Catalog refresh green]
     types: [completed]
     branches: [main]
   workflow_dispatch:

@@ -19,7 +19,7 @@ async function readCatalogImage(imageId: string) {
   const indexPath = `catalog/generations/${manifest.generationId}/indexes/images-by-id.json`;
   const index = await readDataJson<CatalogImageIndex>(indexPath, { imagesById: {} });
   const meta = index.imagesById[imageId];
-  if (!meta) return null;
+  if (!meta || /^catalog\/images\/japan\//.test(meta.objectKey)) return null;
   const binary = await getJsonStorage().getBinary?.(meta.objectKey);
   return binary
     ? {

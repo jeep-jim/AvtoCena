@@ -14,7 +14,7 @@ function memory(){
 test('green recovery obeys its Japan parent and fresh-main retries remain bounded across run IDs',()=>{
  const controls=defaultCollectionControls();
  assert.equal(collectionWorkflowEnabled(controls,'green'),true);
- controls.sources.proauctions_japan_stat.enabled=false;
+ assert.equal(collectionEnabled(controls,'proauctions_japan_stat'),false);
  assert.equal(collectionWorkflowEnabled(controls,'japan'),false);assert.equal(collectionWorkflowEnabled(controls,'green'),true);
  controls.markets.japan.enabled=false;assert.equal(collectionWorkflowEnabled(controls,'green'),false);
  const now=Date.now();let recovery:any={};

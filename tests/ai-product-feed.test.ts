@@ -12,12 +12,12 @@ test('sitemap requests share one full read, keep only URL fields, and retry a ge
     if (key === AI_SITEMAP_PROJECTION_PATH) return null;
     fullReads++;
     await new Promise(resolve => setTimeout(resolve, 1));
-    return {generationId: projectionGeneration, items: [{id: 'one', make: 'Toyota', model: 'Camry', year: 2026,
+    return {generationId: projectionGeneration, items: [{id: 'one', market: 'korea', make: 'Toyota', model: 'Camry', year: 2026,
       updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {unusedLargeData: 'x'.repeat(1000)}}]};
   }} as unknown as JsonStorage;
   const results = await Promise.all([readAiSitemapProjection(storage), readAiSitemapProjection(storage)]);
   assert.equal(fullReads, 1);
-  assert.deepEqual(results[0]?.items, [{id: 'one', updatedAt: '2026-09-18', cardImageUrl: '/car.jpg',make:'Toyota',model:'Camry',trim:undefined,year:2026}]);
+  assert.deepEqual(results[0]?.items, [{id: 'one', market: 'korea', updatedAt: '2026-09-18', cardImageUrl: '/car.jpg',make:'Toyota',model:'Camry',trim:undefined,year:2026}]);
   generationId = 'sitemap-test-two';
   assert.equal(await readAiSitemapProjection(storage), null);
   projectionGeneration = generationId;
@@ -28,7 +28,7 @@ test('sitemap requests share one full read, keep only URL fields, and retry a ge
 test('published feed lookup reads small metadata only and rejects stale or missing objects', async () => {
   let generationId = 'active', exists = true;
   const reads: string[] = [];
-  const metadata = {version: 1, generationId: 'active', objectPath: AI_PRODUCT_FEED_PATH, format: 'google-compatible-csv-gzip'};
+  const metadata = {publicationPolicy: '2026-10-13', version: 1, generationId: 'active', objectPath: AI_PRODUCT_FEED_PATH, format: 'google-compatible-csv-gzip'};
   const storage = {
     async readJson(key: string) {
       reads.push(key);
@@ -117,9 +117,9 @@ test("Object Storage download URL is a bounded SigV4 presigned GET", async () =>
 
 test('prebuilt sitemap reads no full catalog projection on a cold request', async () => {
   const compact = buildAiSitemapProjection({generationId: 'compact-only-test', items: [
-    {id: 'car', make: 'Toyota', model: 'Camry', year: 2026, updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {large: 'discard'}} as any,
+    {id: 'car', market: 'korea', make: 'Toyota', model: 'Camry', year: 2026, updatedAt: '2026-09-18', cardImageUrl: '/car.jpg', calculationSnapshot: {large: 'discard'}} as any,
   ]});
-  assert.deepEqual(Object.keys(compact.items[0]).sort(), ['id', 'updatedAt', 'cardImageUrl','make','model','trim','year'].sort());
+  assert.deepEqual(Object.keys(compact.items[0]).sort(), ['id', 'market', 'updatedAt', 'cardImageUrl','make','model','trim','year'].sort());
   const reads: string[] = [];
   const storage = {async readJson(key: string) {
     reads.push(key);

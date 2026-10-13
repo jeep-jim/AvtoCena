@@ -51,6 +51,8 @@ import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priori
 import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 import { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } from "./public-identity-policy";
 
+import {publicationWithdrawn, withoutJapanAuctionCounts, retiredSourceUrl} from "./publication-policy";
+
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 // Owner-requested emergency freeze. Production catalog generations must remain
 // immutable while source extraction, identity matching and specification
@@ -64,7 +66,7 @@ export const CATALOG_PRODUCTION_WRITES_PAUSED = true;
 // protects runs using this revision; it cannot cancel a run on an older commit.
 export const CATALOG_PRODUCTION_REFRESH_MARKETS: readonly CatalogMarket[] = [];
 function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
-  return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
+  return String(value || "").toLowerCase() !== "japan" && MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
 }
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
 const IMAGE_MAX_WIDTH = Math.max(640, Number(process.env.CATALOG_IMAGE_MAX_WIDTH || 1600));
@@ -451,6 +453,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
   };
 }
 export function projectionCanRenderCard(row: CatalogSearchProjection) {
+  if(publicationWithdrawn(row))return false;
   if(!catalogInventoryAgeDecision(row).eligible || catalogHeavyVehicleExcluded(row)) return false;
   if (isConfirmedSourceWithdrawn(row) || isReviewedSourceDuplicate(row)) return false;
   row = safePublicPricing(row);
@@ -484,6 +487,7 @@ export function prepareCatalogProjectionRows(rows: CatalogSearchProjection[]) {
   return visible;
 }
 function publishedOfferCanRenderUnderCurrentPolicy(offer: VehicleOffer) {
+  if(publicationWithdrawn(offer))return false;
   if(!catalogInventoryAgeDecision(offer).eligible || catalogHeavyVehicleExcluded(offer))return false;
   if (isConfirmedSourceWithdrawn(offer) || isReviewedSourceDuplicate(offer)) return false;
   offer = safePublicPricing(offer);
@@ -955,6 +959,7 @@ async function readCurrentPublicCatalogProjectionEditorial() {
 async function readPublicCatalogMarketCountsEditorial() {
   const manifest = await readManifest();
   const counts = await mapWithConcurrency(MARKETS, 2, async market => {
+    if(market === "japan")return [market,0] as const;
     if (!Number(manifest.markets?.[market]?.count || 0)) return [market, 0] as const;
     // Counts must not download every full market projection. Prepared landings
     // already validate generation, completeness and today's inventory policy.
@@ -1167,7 +1172,7 @@ export async function buildCatalogMarketLanding(generationId: string, market: st
     items: rows.slice(0, MARKET_LANDING_LIMIT), facets: await facetsFromProjection(generationId, rows, {}, false)};
 }
 async function readMarketLanding(params: CatalogSearchParams): Promise<MarketLanding | null> {
-  if (!canUseMarketLanding(params)) return null;
+  if (!canUseMarketLanding(params) || params.market === "japan") return null;
   const manifest = await readManifest();
   const market = String(params.market);
   const path = catalogMarketLandingPath(manifest.generationId, market);
@@ -2395,6 +2400,7 @@ async function searchOffersEditorial(params: CatalogSearchParams, internalPageLi
   return filteredSearchCache.get(key,()=>searchOffersUncached(params,internalPageLimit));
 }
 async function searchOffersUncached(params: CatalogSearchParams, internalPageLimit = 48) {
+  if(params.market === "japan")return {generationId:await catalogGenerationId(),total:0,page:Math.max(1,Number(params.page||1)),pageSize:Math.min(internalPageLimit,Number(params.pageSize||24)),items:[],usedIndexShards:[]};
   const budgetResult=await searchBudgetIndex(params,internalPageLimit);
   if(budgetResult)return budgetResult;
   return searchOffersWithoutBudgetIndexForTests(params,internalPageLimit);
@@ -2579,6 +2585,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket = 6) {
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const overview = await readCatalogOverview(manifest.generationId).catch(() => null);
   if ((overview as any)?.policyDate===new Date(Date.now()+7*3600000).toISOString().slice(0,10) && overview?.generationId === manifest.generationId && MARKETS.every(market => {
+    if(market === "japan")return true;
     const count = Number(manifest.markets?.[market]?.count || 0);
     const summary = overview.markets[market];
     return catalogOverviewMarketComplete(summary, count, limit);
@@ -2690,6 +2697,7 @@ async function readHomeCatalogSnapshotOriginal(perMarket = 6) {
 
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
 export function assertSafeImageUrl(rawUrl: string) {
+  if(retiredSourceUrl(rawUrl))throw new Error("image_source_withdrawn");
   const parsed = new URL(rawUrl);
   if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked");
   if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked");
@@ -2769,10 +2777,10 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
  * No source request, full-catalog scan or access-error-to-sold inference. */
 export async function getUnavailableOffer(id: string): Promise<UnavailableOffer | null> {
   const confirmed = confirmedSourceWithdrawalById(id);
-  if (confirmed) return confirmed;
+  if (confirmed) return publicationWithdrawn(confirmed) ? null : confirmed;
   const manifest = await readManifest();
   const row = manifest?.generationId ? await unavailableReadCache.get(manifest.generationId,id,()=>readIndex<UnavailableOffer[]>(manifest.generationId,"unavailable.json",[])) : null;
-  if (row) return row;
+  if (row) return publicationWithdrawn(row) ? null : row;
   const previous = await readDataJson<CatalogManifest | null>("catalog/previous-manifest.json", null);
   if (!previous?.generationId || previous.generationId === manifest?.generationId) return null;
   const index = await previousLocationCache.get(previous.generationId,()=>readIndex<{byId: Record<string, OfferLocation>}>(previous.generationId, "offers-by-id.json", {byId:{}}));
@@ -2804,7 +2812,8 @@ export async function readPublicCatalogMarketCounts(){return withCatalogEditoria
 
 const editorialSummaryCache=new DetailReadCache<CatalogBrandSummary>({maxEntries:4,maxBytes:8*1024*1024,ttlMs:30_000,concurrency:2});
 async function readEditorialBrandSummary(){
- const summary=await readCurrentBrandSummary();
+ const stored=await readCurrentBrandSummary();
+ const summary={...stored,brands:Object.fromEntries(Object.entries(stored.brands).map(([key,brand])=>[key,{...withoutJapanAuctionCounts(brand),models:brand.models.map(withoutJapanAuctionCounts).filter(model=>model.count>0)}]).filter(([,brand])=>(brand as CatalogBrandSummary["brands"][string]).count>0))} as CatalogBrandSummary;
  if(!editorialHasHidden())return summary;
  return editorialSummaryCache.get(`${summary.generationId}:${editorialRevision()}`,async()=>{
   const brands={...summary.brands};

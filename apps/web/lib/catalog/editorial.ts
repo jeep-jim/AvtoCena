@@ -1,3 +1,4 @@
+import {publicationWithdrawn} from './publication-policy';
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {randomUUID} from 'node:crypto';
 import {mutateDataJson,readDataJson} from '../data';
@@ -37,6 +38,7 @@ export function matchingEditorial(offer:Identity,index=context.getStore()):Catal
  return entry;
 }
 export function editorialHidden(offer:Identity,index=context.getStore()){
+ if(publicationWithdrawn(offer))return true;
  const entry=matchingEditorial(offer,index);return !!entry&&entry.status!=='visible';
 }
 export function editorialHasHidden(market?:string){return editorialEntries().some(e=>e.status!=='visible'&&(!market||market==='any'||e.market===market));}
