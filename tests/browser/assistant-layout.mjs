@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import http from 'node:http';
+import {build} from 'esbuild';
+import postcss from 'postcss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const out='artifacts/assistant-layout';fs.mkdirSync(out,{recursive:true});
+let server,origin;
+{
+ await build({stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {PublicHeader} from './apps/web/components/layout/PublicHeader';import {CrmShellView} from './apps/web/components/crm/CrmShellView';import {TeamAssistant} from './apps/web/components/crm/assistant/TeamAssistant';const content=<div style={{height:1800}}>Контекст страницы</div>;createRoot(document.getElementById('root')).render(<>{location.search.includes('crm=1')?<CrmShellView title='CRM' subtitle='' activeHref='/crm' user={{id:'owner',role:'owner',displayName:'Owner'}} links={[]} avatar=''>{content}</CrmShellView>:<main className='ac-page-copy'><PublicHeader/>{content}</main>}<TeamAssistant/></>);`,loader:'tsx',resolveDir:process.cwd()},bundle:true,format:'iife',platform:'browser',jsx:'automatic',plugins:[{name:'next-fixture',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},args=>({path:args.path,namespace:'next-fixture'}));b.onLoad({filter:/.*/,namespace:'next-fixture'},args=>({contents:args.path.endsWith('navigation')?`export const useSearchParams=()=>new URLSearchParams(location.search);export const usePathname=()=>'/cars';export const useRouter=()=>({back(){},replace(){},refresh(){}});`:`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{href,...props},children);}`,loader:'jsx',resolveDir:process.cwd()}));}}],outfile:`${out}/fixture.js`,loader:{'.module.css':'local-css'},define:{'process.env.NODE_ENV':'"production"'}});
+ const layouts=['apps/web/app/layout.tsx','apps/web/app/(public)/layout.tsx','apps/web/app/(crm)/layout.tsx'];
+ const sources=layouts.map(p=>({file:p,text:fs.readFileSync(p,'utf8')}));
+ const imports=sources.flatMap(({file,text})=>[...text.matchAll(/import\s+["'](\.[^"']+\.css)["']/g)].map(m=>path.resolve(path.dirname(file),m[1])));
+ const inline=sources.flatMap(({text})=>[...text.matchAll(/const (?:publicUiCorrections|publicPageFixes) = `([\s\S]*?)`;/g)].map(m=>m[1])).join('\n');
+ const css=await postcss([tailwindcss({content:['apps/web/components/crm/assistant/*.tsx','apps/web/components/crm/CrmShellView.tsx','apps/web/components/home/CitySelector.tsx','apps/web/components/catalog/FavoriteToggle.tsx','apps/web/components/catalog/CatalogBrandMultiSelect.tsx','apps/web/components/catalog/OfferUpdatedStatus.tsx','apps/web/components/catalog/OfferContactActions.tsx','apps/web/components/catalog/ShareLinkButton.tsx','apps/web/components/crm/CrmPushControl.tsx','apps/web/components/catalog/InlineOfferParameters.tsx','apps/web/components/catalog/RecyclingPower.tsx','tests/browser/owner-polish-fixture.tsx','apps/web/components/crm/CrmLiveAlerts.tsx','apps/web/components/layout/PublicHeader.tsx','apps/web/components/catalog/OfferSpecificationsDisclosure.tsx']}),autoprefixer]).process(imports.map(p=>fs.readFileSync(p,'utf8')).join('\n')+'\n'+inline,{from:'apps/web/app/globals.css'});
+ fs.writeFileSync(`${out}/app.css`,css.css);
+ const html=`<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'dark'</script><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script src="/fixture.js"></script></body></html>`;
+ server=http.createServer((req,res)=>{const name=(req.url||'/').split('?')[0];if(name==='/'){res.setHeader('Content-Type','text/html');res.end(html);return;}let file=path.join(out,path.basename(name));if(!fs.existsSync(file)){const root=path.resolve('apps/web/public');file=path.resolve(root,'.'+name);if(!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}}if(fs.existsSync(file)&&fs.statSync(file).isFile()){res.setHeader('Content-Type',name.endsWith('.css')?'text/css':name.endsWith('.js')?'text/javascript':name.endsWith('.woff2')?'font/woff2':name.endsWith('.svg')?'image/svg+xml':'application/octet-stream');res.end(fs.readFileSync(file));}else{res.statusCode=404;res.end();}});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));origin=`http://127.0.0.1:${server.address().port}`;
+}
+const browser=await chromium.launch({executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});
+
+try {
+ for(const width of [390,899,900,1440]) for(const theme of ['light','dark']) for(const crm of [false,true]) {
+  const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/api/**',route=>route.fulfill({json:route.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner'}}:route.request().url().includes('/crm/assistant')?{userId:'owner',messages:[],revision:0,connected:false,owner:true}:{counts:{},through:new Date().toISOString(),ok:true,pending:[],recent:[]}}));
+  await page.goto(origin+'/?theme='+theme+'&crm='+(crm?'1':'0'));
+  const fab=page.getByRole('button',{name:'Открыть ИИ-помощника',exact:true});await fab.waitFor();
+  if(width<900){const f=await fab.boundingBox();assert.ok(Math.abs(900-f.y-f.height-12)<2,'launcher hugs bottom');}
+  await fab.click();const panel=page.locator('dialog[open]');await panel.waitFor();
+  if(width>=900){
+   for(const target of [340,640]){
+    const grip=page.getByRole('separator');const b=await grip.boundingBox();await page.mouse.move(b.x+b.width/2,200);await page.mouse.down();await page.mouse.move(width-target,200);await page.mouse.up();
+    const p=await panel.boundingBox(),h=await page.locator(crm?'.crm-header':'.ac-public-header').boundingBox();assert.ok(h.x+h.width<=p.x+1,'header does not overlap resized assistant');
+   }
+  }else{
+   const p=await panel.boundingBox(),h=await page.locator('.ta-handle').boundingBox();assert.ok(Math.abs(p.y+p.height-900)<2,'sheet hugs bottom');assert.ok(h.y+h.height<=p.y+1,'handle outside sheet');
+   assert.equal(await panel.evaluate(e=>getComputedStyle(e,'::backdrop').backdropFilter),'blur(12px)');
+   assert.equal(await page.evaluate(()=>document.activeElement?.tagName==='TEXTAREA'),false,'no forced keyboard on opening');
+   await page.locator('.ta-header h2').click();assert.equal(await panel.count(),1,'inside tap keeps sheet open');
+   await page.mouse.click(20,Math.max(4,p.y-45));await panel.waitFor({state:'detached'});
+   await fab.click();await panel.waitFor();const grip=await page.locator('.ta-handle').boundingBox();await page.mouse.move(grip.x+grip.width/2,grip.y+16);await page.mouse.down();await page.mouse.move(grip.x+grip.width/2,grip.y+100);await page.mouse.up();await panel.waitFor({state:'detached'});
+   assert.equal(await page.evaluate(()=>document.documentElement.style.overflow),'');await fab.click();await panel.waitFor();
+  }
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`${out}/${width}-${theme}-${crm?'crm':'public'}.png`});
+  await page.getByRole('button',{name:'Закрыть помощника',exact:true}).click();assert.equal(await page.evaluate(()=>document.documentElement.dataset.teamAssistantOpen||''),'');assert.deepEqual(errors,[]);await page.close();console.log(JSON.stringify({width,theme,crm,passed:true}));
+ }
+}finally{await browser.close();await new Promise(r=>server.close(r));}

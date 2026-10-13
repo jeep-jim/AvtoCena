@@ -4,6 +4,7 @@ on:
     paths:
       - 'apps/web/components/**'
       - 'tests/browser/owner-polish*'
+      - 'tests/browser/assistant-layout.mjs'
       - '.github/workflows/verify-owner-polish.yml'
 permissions:
   contents: read
@@ -22,10 +23,14 @@ jobs:
       - name: Test guest and employee controls at 320, 390 and 1440 pixels
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/owner-browser/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-polish.mjs
+        run: |
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/owner-polish.mjs
+          CHROME_BIN=$(command -v google-chrome) node tests/browser/assistant-layout.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: owner-polish
-          path: artifacts/owner-polish
+          path: |
+            artifacts/owner-polish
+            artifacts/assistant-layout
           retention-days: 7
