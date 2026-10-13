@@ -8,8 +8,8 @@ const browser=await chromium.launchPersistentContext(profile,{headless:true,exec
 let loading=false;
 const composer=`<main><div contenteditable="true" role="textbox" style="width:500px;height:90px;border:1px solid"></div><button data-testid="send-button">Отправить</button></main><script>document.querySelector('button').onclick=()=>{const input=document.querySelector('[contenteditable]'),u=document.createElement('div');u.dataset.messageAuthorRole='user';u.textContent=input.innerText;document.querySelector('main').append(u);input.innerText='';const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent=JSON.stringify({reply:'Ответ нового запроса'});document.querySelector('main').append(a);};</script>`;
 try{
- await browser.route('https://avtocena.com/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><title>Test CRM</title><body>CRM fixture</body>'}));
- await browser.route('https://chatgpt.com/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><title>Test ChatGPT</title><body>'+(loading?'Загрузка…':composer)+'</body>'}));
+ await browser.route('https://avtocena.com/**',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><title>Test CRM</title><body>CRM fixture</body>'}));
+ await browser.route('https://chatgpt.com/**',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><title>Test ChatGPT</title><body>'+(loading?'Загрузка…':composer)+'</body>'}));
  await (browser.serviceWorkers()[0]||browser.waitForEvent('serviceworker',{timeout:10000}));
  const gpt=await browser.newPage();await gpt.goto('https://chatgpt.com/');
  const site=await browser.newPage();await site.goto('https://avtocena.com/crm');
