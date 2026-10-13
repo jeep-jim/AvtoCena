@@ -11,6 +11,7 @@ export type FavoriteSnapshot = {
   title?: string;
   price?: number | null;
   imageUrl?: string;
+  imageUrls?: string[];
   year?: number;
   mileageKm?: number;
   market?: string;

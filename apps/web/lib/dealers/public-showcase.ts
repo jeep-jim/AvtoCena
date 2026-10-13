@@ -36,6 +36,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
     title: specialTitle(o),
     href: `https://avtocena.com${specialPath(s.dealerId, o.id)}`,
     image: o.photos[0]?.url || "",
+    images: o.photos.slice(0,5).map(photo=>photo.url),
     market: "dealer",
     marketLabel: `${offerAvailabilityLabel(o)} · ${s.name}`,
     dealerId: s.dealerId,

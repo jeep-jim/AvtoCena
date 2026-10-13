@@ -16,7 +16,11 @@ export function priceCardForCity(offer: any, city: string) {
  const delivered=!offer.savedCalculationPreview && offer.deliveredCalculationPreview;
  if(delivered && Number(delivered.totalRub)>0)offer={...offer,totalRub:delivered.totalRub,catalogPricingMode:undefined,previousTotalRub:null,priceDeltaRub:null,calculationSnapshot:{currencyRate:delivered.currencyRate,deliveryPricingBasis:delivered.deliveryPricingBasis}};
  const quote = quoteCityDelivery(city, offer.market);
- const preview = Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
+ const preview = !offer.savedCalculationPreview && Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
+ // Auction previews use the same quote and exchange-rate evidence as detail.
+ // Never compare a delivered quote with an older seller-only amount.
+ if (preview) offer = {...offer,totalRub:preview.totalRub,previousTotalRub:null,priceDeltaRub:null,
+  calculationSnapshot:{...offer.calculationSnapshot,currencyRate:preview.currencyRate || offer.calculationSnapshot?.currencyRate}};
  const totalRub = Number(preview?.totalRub ?? offer.totalRub);
  const basis = preview?.deliveryPricingBasis || deliveryPricingBasis(offer.calculationSnapshot);
  if (!(totalRub > 0) || (!preview && !offer.savedCalculationPreview && offer.catalogPricingMode === "seller")) return {offer,quote,included:false};

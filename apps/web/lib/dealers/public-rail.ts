@@ -18,6 +18,7 @@ export function publicRail(s: DealerShowcase, city = "") {
             subtitle: offerSectionSubtitle(s,offerAvailability(o)),
             href: specialPath(s.dealerId, o.id),
             image: o.photos[0]?.url || "",
+            images: o.photos.slice(0,5).map(photo=>photo.url),
             title: specialTitle(o),
             price: c.totalRub,
             calculation: offerAvailability(o)==="order" ? {

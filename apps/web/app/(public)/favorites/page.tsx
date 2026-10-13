@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import {favoriteDealer} from "@/lib/dealers/favorite-dealer";
+import { CatalogPreviewMedia } from "@/components/catalog/CatalogPreviewMedia";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 import { useSavedCalculationPreview } from "@/components/catalog/useSavedCalculationPreview";
 import { offerWithSavedPreview } from "@/lib/catalog/saved-calculation-preview";
@@ -25,6 +26,7 @@ type Favorite = {
   sourcePrice?: number | null;
   calculationSnapshot?: any;
   imageUrl?: string;
+  imageUrls?: string[];
   year?: number;
   mileageKm?: number;
   market?: string;
@@ -80,8 +82,8 @@ export default function FavoritesPage() {
       {items.length ? <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => {
           return <article key={item.id} className="ac-favorites-card relative overflow-hidden rounded-[1.5rem] bg-white/[0.045]">
-            <Link href={item.href || `/cars/offer/${item.id}`}>
-              <div className="h-52 bg-white/[0.04]">{item.imageUrl ? <img src={item.imageUrl} alt={item.title || "Автомобиль"} className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center text-sm font-bold text-white/35">Фото загружается</div>}</div>
+            <Link href={item.href || `/cars/offer/${item.id}`} prefetch={false}>
+              <CatalogPreviewMedia key={`${item.id}:${item.imageUrl}`} offerId={item.market === "dealer" ? "" : item.id} src={item.imageUrl || ""} images={item.imageUrls || []} alt={item.title || "Автомобиль"} className="relative h-52 overflow-hidden bg-white/[0.04]" />
               <div className="p-4">
                 <div className="text-xs font-black normal-case tracking-normal text-red-300">{item.marketLabel || "Каталог"}</div>
                 <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Дилер: {favoriteDealer(item).name}</p>

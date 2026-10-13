@@ -22,3 +22,12 @@
 .helpBody { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 4px calc(16px + env(safe-area-inset-bottom)); }
 .helpBody section { padding: 16px; }
 .helpBody dl { font-size: 14px; line-height: 1.5; }
+
+.photoArrow { display: none; }
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+ .photoArrow { display: flex; position: absolute; top: 50%; transform: translateY(-50%); align-items: center; justify-content: center; width: 44px; height: 56px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #fff; mix-blend-mode: difference; cursor: pointer; }
+ .photoPrevious { left: 8px; }
+ .photoNext { right: 8px; }
+ .photoArrow:focus-visible { outline: none; }
+ .photoArrow:focus-visible svg, .photoArrow:hover svg { transform: scale(1.15); }
+}
