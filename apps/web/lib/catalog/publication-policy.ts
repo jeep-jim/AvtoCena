@@ -4,6 +4,7 @@
  */
 type Identity = {id?: unknown; market?: unknown; sourceId?: unknown; sourceGroup?: unknown; marketLabel?: unknown; imageUrl?: unknown};
 export function retiredSourceUrl(value: unknown): boolean {
+  if(typeof value !== "string" || !value) return false;
   try { return /(^|\.)(pro-auctions\.ru|pa-server\.ru|jptrade\.ru)$/i.test(new URL(String(value)).hostname); }
   catch { return false; }
 }
