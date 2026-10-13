@@ -54,11 +54,11 @@ try {
   const page=await browser.newPage({viewport:{width:390,height:900}});
   await page.addInitScript(()=>{
    window.SpeechRecognition=class {start(){window.recognition=this;}stop(){this.onresult({results:[[{transcript:'Найди автомобиль'}]]});this.onend();}abort(){this.onend?.();}};
-   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,connected:m.op==='connect'},location.origin);});
+   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,version:'1.0.2',connected:m.op==='connect'},location.origin);});
   });
   await page.route('**/api/**',r=>r.fulfill({json:r.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner'}}:{userId:'owner',messages:[],revision:0,connected:false,owner:true}}));
   await page.goto(origin);await page.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();
-  await page.getByRole('button',{name:'Подключить ChatGPT',exact:true}).click();await page.getByText('ChatGPT подключён в этом браузере.',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'Подключить ChatGPT',exact:true}).click();await page.getByText('ИИ Бро подключён к отдельному служебному окну ChatGPT.',{exact:true}).waitFor();
   const mic=page.getByRole('button',{name:'Удерживайте для голосового ввода'}),b=await mic.boundingBox(),send=await page.getByRole('button',{name:'Отправить сообщение',exact:true}).boundingBox();assert.equal((await mic.innerText()).trim(),'');assert.ok(Math.abs(b.y-send.y)<2&&b.x<send.x,'icon beside send');
   await page.mouse.move(b.x+20,b.y+15);await page.mouse.down();assert.equal(await mic.getAttribute('aria-pressed'),'true');await page.mouse.up();
   assert.equal(await page.getByRole('textbox',{name:'Сообщение помощнику'}).inputValue(),'Найди автомобиль');assert.equal(await mic.getAttribute('aria-pressed'),'false');

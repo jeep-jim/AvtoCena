@@ -3,9 +3,10 @@ export async function connector(op:string,payload:Record<string,unknown>={},sign
  return new Promise((resolve,reject)=>{
   const id=crypto.randomUUID();let timer:ReturnType<typeof setTimeout>;
   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('message',receive);signal?.removeEventListener('abort',abort);};
-  const abort=()=>{cleanup();reject(new DOMException('Остановлено','AbortError'));};
+  const cancel=()=>{if(op==='send')window.postMessage({source,id:crypto.randomUUID(),op:'cancel',userId:payload.userId,requestId:payload.requestId},location.origin);};
+  const abort=()=>{cancel();cleanup();reject(new DOMException('Остановлено','AbortError'));};
   const receive=(e:MessageEvent)=>{if(e.source!==window||e.origin!==location.origin||e.data?.source!==source+'-reply'||e.data.id!==id)return;cleanup();e.data.ok?resolve(e.data):reject(Error(e.data.error||'Не удалось соединиться с ChatGPT.'));};
-  timer=setTimeout(()=>{cleanup();reject(Error(op==='ping'?'Для подключения установите расширение ИИ Бро.':'Вкладка ChatGPT не ответила. Откройте её и повторите подключение.'));},op==='send'?100000:op==='connect'?40000:1500);
+  timer=setTimeout(()=>{cancel();cleanup();reject(Error(op==='ping'?'Для подключения установите расширение ИИ Бро.':'Вкладка ChatGPT не ответила. Откройте её и повторите подключение.'));},op==='send'?100000:op==='connect'?40000:1500);
   window.addEventListener('message',receive);signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted){abort();return;}
   window.postMessage({source,id,op,...payload},location.origin);
  });
