@@ -292,6 +292,7 @@ html[data-theme="light"] .ac-public-legal-link:hover { color: #c91e2a; }
 }
 `;
 
+import {TeamAssistant} from '@/components/crm/assistant/TeamAssistant';
 export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -314,6 +315,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PublicUiEnhancer />
         <CurrencyChartEnhancer />
         <RoutePreloader />
+        <TeamAssistant />
       </body>
     </html>
   );
