@@ -1,3 +1,4 @@
+import {isAssistantProvider} from '@/lib/team-assistant/providers';
 import {browserReply,validChannel} from '@/lib/team-assistant/browser';
 import {cleanImages,readAssistantBody} from '@/lib/team-assistant/media';
 import {randomUUID} from 'node:crypto';
@@ -58,10 +59,12 @@ export async function POST(request:Request){
    return json({action:{...pending.action,status:'done',url},messages:s.messages,revision:s.revision});
   }
   if(body.op!=='message')throw Error('Неизвестное действие.');
+  const provider=body.provider??'gpt';if(!isAssistantProvider(provider))throw Error('Выберите помощника.');
+  if(provider!=='gpt'&&!validChannel(body.browserChannel))throw Error('Подключите выбранного помощника.');
   const text=String(body.text||'').trim();if(!text||text.length>6000)throw Error('Напишите сообщение до 6000 символов.');
   const images=cleanImages(body.images),context=cleanContext(body.context),previous=await readHistory(user.id);
   const answer=await runAssistant(user,text,context,previous.messages,AbortSignal.any([request.signal,AbortSignal.timeout(110000)]),images,validChannel(body.browserChannel)?browserReply(user.id,body.browserChannel,lease):undefined);
-  const s=await mutateHistory(user.id,s=>{if(s.lease!==lease)throw Error('Переписка обновилась. Откройте её заново.');return {...s,revision:s.revision+1,messages:[...s.messages,{id:randomUUID(),role:'user' as const,text,at:new Date().toISOString(),...(images.length?{imageNames:images.map(i=>i.name)}:{})},answer].slice(-40)};});
+  const s=await mutateHistory(user.id,s=>{if(s.lease!==lease)throw Error('Переписка обновилась. Откройте её заново.');return {...s,revision:s.revision+1,messages:[...s.messages,{id:randomUUID(),role:'user' as const,provider,text,at:new Date().toISOString(),...(images.length?{imageNames:images.map(i=>i.name)}:{})},{...answer,provider}].slice(-40)};});
   return json({messages:s.messages,revision:s.revision});
  }catch(error){const message=error instanceof Error?error.message:'';return json({error:/^[А-ЯЁ]/.test(message)?message.slice(0,240):'Не удалось завершить запрос. Попробуйте снова.'},400);}
  finally{if(lease)await unlockHistory(user.id,lease).catch(()=>{});}

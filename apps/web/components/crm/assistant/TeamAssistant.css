@@ -23,3 +23,31 @@ html[data-theme=light] .ta-panel{--ta-bg:#fff;--ta-surface:#f1f4f7;--ta-border:#
 .ta-connection{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0}.ta-connection>button{background:#009775;color:white;border:0;border-radius:10px;padding:10px 14px;font-weight:650;cursor:pointer}.ta-connection>button:disabled{opacity:.6;cursor:wait}.ta-connection p{flex-basis:100%;font-size:12px;line-height:1.5;margin:0}.ta-connection a{text-decoration:underline}
 
 .ta-voice{position:relative;flex:none}.ta-compose form .ta-voice button{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;padding:0;background:transparent;color:var(--ta-muted)}.ta-compose form .ta-voice button.is-recording{background:#bc243d;color:white}.ta-voice span{position:absolute;right:0;bottom:44px;width:min(260px,65vw);padding:8px 10px;border-radius:10px;background:var(--ta-bg);border:1px solid var(--ta-border);font-size:12px;color:var(--ta-text);max-height:80px;overflow:auto;box-shadow:0 4px 16px #0003}
+
+.ta-providers{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid var(--ta-border);flex-shrink:0}
+.ta-providers button{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;min-width:0;padding:8px 5px;border:1px solid transparent;border-radius:12px;background:transparent;color:inherit;font:inherit;font-size:12px;cursor:pointer}
+.ta-providers button[aria-pressed="true"]{border-color:#0aa384;background:rgba(10,163,132,.10)}
+.ta-providers button:disabled{opacity:.55;cursor:wait}
+.ta-provider-icon{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;font-size:24px;font-weight:700;line-height:1}
+.ta-provider-icon img{width:30px;height:30px}
+.ta-provider-alice{color:white;background:#8055fa;border-radius:48% 48% 40% 40%;font-size:20px}
+.ta-provider-googleai{color:#4285f4;font-family:Arial,sans-serif}
+
+.ta-providers{gap:4px;padding:10px 12px}
+.ta-providers button{flex-direction:column;gap:4px;padding:6px 3px;font-size:11px}
+.ta-provider-alice{background:transparent}
+.ta-provider-deepseek{color:#4d6bfe;font-size:28px}
+.ta-compose{position:relative}
+.ta-compose form{height:54px;align-items:center;gap:2px;padding:7px;border-radius:17px}
+.ta-compose form textarea{height:36px;min-height:36px;max-height:36px;padding:7px 4px;line-height:22px;overflow-y:auto}
+.ta-compose form .ta-compose-tool{width:28px;min-width:28px;background:transparent;color:var(--ta-muted);padding:0}
+.ta-compose-popover{position:absolute;z-index:5;bottom:calc(100% + 6px);left:14px;width:min(280px,calc(100% - 28px));padding:10px;border:1px solid var(--ta-border);border-radius:15px;background:var(--ta-bg);box-shadow:0 8px 24px #0003}
+.ta-compose-popover>button{display:flex;width:100%;justify-content:flex-start;padding:8px;font-size:13px}
+.ta-compose-popover>button:hover{background:var(--ta-surface)}
+.ta-compose-popover .ta-share{padding:10px 8px 4px;margin:0;border-top:1px solid var(--ta-border)}
+.ta-emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.ta-emoji-grid button{font-size:22px;padding:0}
+.ta-compose .ta-attachments{position:absolute;bottom:calc(100% + 6px);left:14px;right:14px;padding:8px;background:var(--ta-bg);border:1px solid var(--ta-border);border-radius:12px;margin:0}
+.ta-compose>p[role=status]{position:absolute;bottom:100%;background:var(--ta-bg);padding:4px 8px;border-radius:8px}
+
+.ta-compose form textarea::placeholder{color:var(--ta-muted);opacity:1}
