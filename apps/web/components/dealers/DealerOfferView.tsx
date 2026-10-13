@@ -46,6 +46,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
     title,
     price: c.totalRub,
     imageUrl: o.photos[0]?.url,
+    imageUrls: o.photos.slice(0,5).map(photo=>photo.url),
     year: o.year,
     mileageKm: o.mileageKm,
     market: "dealer",

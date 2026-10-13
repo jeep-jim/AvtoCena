@@ -6,14 +6,14 @@ import {offerPath} from "@/lib/catalog/offer-url";
 import {useSavedCalculationPreview} from "./useSavedCalculationPreview";
 import {offerWithSavedPreview,savedCalculationPreviewRub} from "../../lib/catalog/saved-calculation-preview";
 import { isGreenCornerOffer } from "../../lib/catalog/green-corner-contract";
-import { CatalogCover } from "./CatalogCover";
+import { CatalogPreviewMedia } from "./CatalogPreviewMedia";
 import { recyclingPowerInfo } from "../../lib/catalog/recycling-power";
 import { RecyclingPowerLabel } from "./RecyclingPower";
 import powerStyles from "./RecyclingPower.module.css";
 import { ElectricMotorIcon } from "./ElectricMotorIcon";
 import { hasModificationSelection } from "@/lib/catalog/modification-contract";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
-import { catalogImageDeliveryUrl, rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
+import { catalogImageDeliveryUrl, rankedCatalogImageUrls, catalogAuctionSheetUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
@@ -53,7 +53,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const sellerPricing = !savedPreview && isSellerPricedOffer(offer);
   const normalizedOffer = savedPreview ? offerWithSavedPreview(offer) : selectionRequired || sellerPricing ? offer : normalizeVehicleOfferSpecs(offer);
   const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
-  const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
+  const sheets = new Set(catalogAuctionSheetUrls(normalizedOffer));
+  const rankedImages = rankedCatalogImageUrls(normalizedOffer).filter(url => !sheets.has(url));
+  if (projectedCover && rankedImages[0] !== projectedCover) rankedImages.unshift(projectedCover);
   const presented = presentCatalogOffer(normalizedOffer);
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
@@ -102,15 +104,14 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
 
   return (
     <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
-      <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
-        <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
-          {imageUrl ? <CatalogCover src={imageUrl} alt={o.title} eager={eagerPrefetch} /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
+      <IntentPrefetchLink href={href} eager={eagerPrefetch} prefetchOnHover={false} className="block overflow-hidden rounded-[1.35rem]">
+        <CatalogPreviewMedia key={`${o.id}:${imageUrl}`} offerId={o.id} src={imageUrl} images={rankedImages} alt={o.title} eager={eagerPrefetch} className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
           <div className={`ac-on-image absolute font-black normal-case tracking-normal text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}><span className="md:hidden">{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span><span className="hidden items-center gap-2 md:inline-flex"><CatalogMarketFlag market={normalizedOffer.market} className="h-4 w-6" /><span>{isGreenCornerOffer(offer) ? "Зелёный угол" : o.marketLabel}</span></span></div>
           <div className="ac-on-image absolute bottom-2 left-2 right-2 text-white sm:bottom-3 sm:left-3 sm:right-3">
             <div className={`line-clamp-2 min-w-0 font-black leading-[1.04] tracking-[-0.03em] text-white drop-shadow-[0_2px_15px_rgba(0,0,0,.7)] ${dense ? "text-[12px] sm:text-[17px] sm:leading-[1.08]" : "text-[16px] leading-[1.08]"}`}>{o.title}</div>
           </div>
-        </div>
+        </CatalogPreviewMedia>
         <div className={`ac-catalog-card-body ${dense ? "p-2.5 sm:p-3.5" : "p-3.5"}`}>
           {variantLabel ? <div className="mb-2" data-china-variant>
             <p title={variantLabel} className="truncate text-[11px] font-semibold leading-snug text-white/80 sm:text-xs">{variantLabel}</p>

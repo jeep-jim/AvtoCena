@@ -1,4 +1,5 @@
 "use client";
+import {CatalogPreviewMedia} from "@/components/catalog/CatalogPreviewMedia";
 import {DealerLogo} from "./DealerLogo";
 import {useSelectedCity} from "@/lib/location/selected-city";
 import {calculateSpecial} from "@/lib/dealers/showcase-model";
@@ -34,6 +35,7 @@ export type SpecialRailItem = {
   dealer?: {id:string;name:string;href?:string;logoLight?:string;logoDark?:string};
   href: string;
   image: string;
+  images?: string[];
   title: string;
   year?: number;
   price: number | null;
@@ -79,14 +81,10 @@ export function SpecialRail({
           <Link
             key={o.href}
             href={o.href}
+            prefetch={false}
             className="ac-special-card w-full min-w-0 shrink-0 overflow-hidden rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] md:w-56"
           >
-            <img
-              src={o.image}
-              alt={o.title}
-              loading="lazy"
-              className="h-24 w-full object-cover sm:h-40 md:h-auto md:aspect-[16/10]"
-            />
+            <CatalogPreviewMedia offerId="" src={o.image} images={o.images || []} alt={o.title} className="relative h-24 w-full overflow-hidden sm:h-40 md:h-auto md:aspect-[16/10]" />
             <div className="ac-special-card-body p-3">
               <p className="ac-special-card-status text-xs font-bold text-emerald-600">{kind==="stock" ? `${o.year ? `${o.year} · ` : ""}В наличии` : `${o.condition==="used"?"С пробегом":"Новый"}${o.daysFrom?` от ${o.daysFrom} дней`:" · Под заказ"}`}</p>
               <h3 className="line-clamp-2 break-words text-sm font-black">{o.title}</h3>

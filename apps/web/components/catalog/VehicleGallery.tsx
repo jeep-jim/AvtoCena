@@ -300,6 +300,14 @@ export function VehicleGallery({ images, title, auctionSheetUrls = [], offerId, 
               {activeIndex + 1} / {cleanImages.length}
             </div>
           </button>
+          {cleanImages.length > 1 ? <>
+            <button type="button" className={`${styles.photoArrow} ${styles.photoPrevious}`} onClick={previous} aria-label="Предыдущее фото">
+              <svg viewBox="0 0 24 32" width="20" height="28" fill="none" aria-hidden="true"><path d="M17 5 6 16l11 11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+            <button type="button" className={`${styles.photoArrow} ${styles.photoNext}`} onClick={next} aria-label="Следующее фото">
+              <svg viewBox="0 0 24 32" width="20" height="28" fill="none" aria-hidden="true"><path d="m7 5 11 11L7 27" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+          </> : null}
           {editor}
           </div>
 

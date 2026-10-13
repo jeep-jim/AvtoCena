@@ -6,11 +6,12 @@ import { useCallback, useEffect, useRef, type ReactNode } from "react";
 
 // Prefetch only on interaction; background detail requests compete with photos.
 
-export function IntentPrefetchLink({ href, className, children, eager = false }: {
+export function IntentPrefetchLink({ href, className, children, eager = false, prefetchOnHover = true }: {
   href: string;
   className?: string;
   children: ReactNode;
   eager?: boolean;
+  prefetchOnHover?: boolean;
 }) {
   const router = useRouter();
   const prefetched = useRef<string | null>(null);
@@ -28,9 +29,9 @@ export function IntentPrefetchLink({ href, className, children, eager = false }:
   }, [href, router, cancel]);
   const hover = useCallback((event: {pointerType: string}) => {
     cancel();
-    if (event.pointerType !== "mouse" || prefetched.current === href) return;
+    if (!prefetchOnHover || event.pointerType !== "mouse" || prefetched.current === href) return;
     timer.current = setTimeout(prefetch, 180);
-  }, [href, prefetch, cancel]);
+  }, [href, prefetch, cancel, prefetchOnHover]);
 
   return <Link
     href={href}

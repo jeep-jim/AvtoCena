@@ -4,7 +4,6 @@ import { isElectrifiedPrice } from "../../lib/catalog/electrified-price";
 import { useSelectedCity } from "../../lib/location/selected-city";
 import { priceCardForCity } from "../../lib/catalog/card-city-delivery";
 import { isSellerPricedOffer } from "@/lib/catalog/seller-price-contract";
-import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { isCatalogPowerScenario } from "@/lib/catalog/power-scenario";
@@ -23,7 +22,7 @@ function CatalogPriceContent({
   priceClassName?: string;
   deliveryCity?: string;
 }) {
-  if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview && !(offer.market === "japan" && !isGreenCornerOffer(offer))) return <PriceTrend offer={offer} label={label} statusLabel="Расчёт под ключ" dense={dense} priceClassName={priceClassName} />;
+  if (offer.deliveredCalculationPreview && !offer.savedCalculationPreview) return <PriceTrend offer={offer} label={label} statusLabel="Расчёт под ключ" dense={dense} priceClassName={priceClassName} />;
   if (isGreenCornerOffer(offer)) {
     const preview = !offer.savedCalculationPreview && Number(offer.japanDeliveredPreview?.totalRub) > 0 ? offer.japanDeliveredPreview : null;
     if (preview || offer.savedCalculationPreview || !isSellerPricedOffer(offer) && Number(offer.totalRub) > 0) {
@@ -31,10 +30,8 @@ function CatalogPriceContent({
       return <PriceTrend offer={stock} label={label} statusLabel="В наличии" dense={dense} priceClassName={priceClassName} />;
     }
   }
-  if (offer.savedCalculationPreview) return offer.market === "japan" && !isGreenCornerOffer(offer)
-    ? <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />
-    : <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><AuctionCardPrice offer={{...offer, totalRub: offer.japanDeliveredPreview.totalRub}} label={label} dense={dense} priceClassName={priceClassName} /></div>;
+  if (offer.savedCalculationPreview) return <PriceTrend offer={offer} label={label} statusLabel={offer.market === "japan" ? "Лот продан" : undefined} dense={dense} priceClassName={priceClassName} />;
+  if (offer.market === "japan" && !isGreenCornerOffer(offer) && Number(offer.japanDeliveredPreview?.totalRub) > 0) return <div title="Предварительная стоимость под ключ по данным аукциона"><PriceTrend offer={offer} label={label} statusLabel="Лот продан" dense={dense} priceClassName={priceClassName} /></div>;
   if (isSellerPricedOffer(offer)) return <SellerPrice deliveryCity={deliveryCity} offer={offer} panel={false} dense={dense} label={label} priceClassName={priceClassName} />;
   const totalRub = Number(offer?.totalRub || 0);
   const japanAuction = !isGreenCornerOffer(offer) && (String(offer?.market || "").toLowerCase() === "japan"
@@ -42,7 +39,7 @@ function CatalogPriceContent({
   const highlightElectrified = isElectrifiedPrice(offer);
 
   if (totalRub > 0) {
-    if (japanAuction) return <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    if (japanAuction) return <PriceTrend offer={offer} label={label} statusLabel="Лот продан" dense={dense} priceClassName={priceClassName} />;
     const preliminary = isCatalogPowerScenario(offer)
       || String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
