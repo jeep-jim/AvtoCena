@@ -22,7 +22,7 @@ if(collectionEnabled(controls,'che168_feed')){
 }
 const repo='jeep-jim/AvtoCena';
 async function api(path){const r=await fetch(`https://api.github.com/repos/${repo}${path}`,{headers:{authorization:`Bearer ${process.env.GH_TOKEN}`,accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('github_status_'+r.status);return r.json();}
-for(const name of ['catalog-refresh-china','catalog-refresh-korea','catalog-refresh-europe','catalog-refresh-uae','catalog-refresh-georgia','catalog-refresh-green','proauctions-collect-publish']){
+for(const name of ['catalog-refresh-china','catalog-refresh-korea','catalog-refresh-europe','catalog-refresh-uae','catalog-refresh-georgia','catalog-refresh-green']){
  const w=await api(`/actions/workflows/${name}.yml`),runs=await api(`/actions/workflows/${w.id}/runs?per_page=1`);
  const r=runs.workflow_runs[0];console.log(JSON.stringify({workflow:name,state:w.state,lastRun:r&&{id:r.id,at:r.created_at,status:r.status,conclusion:r.conclusion}}));
 }

@@ -1,3 +1,4 @@
+import {retiredSourceUrl} from '../catalog/publication-policy';
 import {sourceImages} from './source-images';
 import { lookup } from 'node:dns/promises';
 import { request } from 'node:https';
@@ -11,6 +12,7 @@ export function publicIPv4(ip: string) {
 export function sourceUrl(value: unknown) {
   const url = new URL(String(value || '').trim());
   if (url.protocol !== 'https:' || url.username || url.password || (url.port && url.port !== '443') || isIP(url.hostname) || !url.hostname.includes('.') || /(^|\.)(localhost|local|internal|test|invalid)$/.test(url.hostname)) throw Error('Вставьте HTTPS-ссылку на публичное объявление');
+  if(retiredSourceUrl(url.href))throw Error('Этот источник больше не поддерживается. Введите характеристики вручную.');
   url.hash='';
   if (url.href.length>2048) throw Error('Ссылка слишком длинная');
   return url;
@@ -60,7 +62,7 @@ export function extractSource(html:string,url:string) {
   const meta=(key:string)=>{for(const m of html.matchAll(/<meta\b[^>]*>/gi)){const attrs=Object.fromEntries([...m[0].matchAll(/([\w:-]+)\s*=\s*["']([^"']*)["']/g)].map(x=>[x[1].toLowerCase(),x[2]]));if(attrs.property===key||attrs.name===key)return attrs.content || '';}return '';};
   const title=text(car.name || meta('og:title') || meta('twitter:title') || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]);
   const photos=sourceImages(html,url,[...[car.image].flat().filter(Boolean).map(resolve),meta('og:image'),meta('twitter:image')]).flatMap(x=>{try{return [sourceUrl(x).href];}catch{return [];}});
-  const host=new URL(url).hostname;const hosts:Record<string,string>={'che168.com':'china','autohome.com.cn':'china','dongchedi.com':'china','guazi.com':'china','encar.com':'korea','kcar.com':'korea','mobile.de':'europe','autoscout24.com':'europe','dubizzle.com':'uae','dubicars.com':'uae','myauto.ge':'georgia','pro-auctions.ru':'japan','sferacar.ru':'japan','akebono.world':'japan'};
+  const host=new URL(url).hostname;const hosts:Record<string,string>={'che168.com':'china','autohome.com.cn':'china','dongchedi.com':'china','guazi.com':'china','encar.com':'korea','kcar.com':'korea','mobile.de':'europe','autoscout24.com':'europe','dubizzle.com':'uae','dubicars.com':'uae','myauto.ge':'georgia','sferacar.ru':'japan','akebono.world':'japan'};
   const market=Object.entries(hosts).find(([h])=>host===h||host.endsWith('.'+h))?.[1] || '';
   const draft:Record<string,string>={};
   const put=(k:string,v:any)=>{if(v!==undefined && v!=='')draft[k]=String(v);};

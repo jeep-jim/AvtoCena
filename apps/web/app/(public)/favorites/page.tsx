@@ -1,5 +1,6 @@
 "use client";
 
+import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
 import {SubscribedDealers} from "@/components/dealers/DealerSubscription";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -38,7 +39,7 @@ type Favorite = {
 function readFavorites(): Favorite[] {
   try {
     const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? parsed.filter(item=>!publicationWithdrawn(item)) : [];
   } catch {
     return [];
   }

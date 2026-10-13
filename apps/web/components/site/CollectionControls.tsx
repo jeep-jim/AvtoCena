@@ -31,7 +31,7 @@ export function CollectionControls(){
           <details className="mt-2 text-sm"><summary className="cursor-pointer underline">Источник, частота и настройки</summary><div className="mt-2 space-y-2"><p>{s.description}</p><a className="break-all underline" href={s.url} target="_blank" rel="noreferrer">{s.url}</a><p>{s.frequency}. Плановое время может сдвигаться.</p><p>{s.settings}</p>{dates(data.sources[s.id])}<p className="text-xs text-[var(--ac-muted)]">Ограничения безопасности, проверки цены и сроки актуальности сохраняются при включении.</p></div></details>
         </div>)}</div>
       </section>)}</div>}
-      {data&&<details className="text-sm"><summary className="cursor-pointer underline">История переключений · последние 200</summary><ul className="mt-2 space-y-2">{data.history.length?data.history.map(h=><li key={h.revision}>{date(h.at)} · {(h.scope==='market'?COLLECTION_MARKETS:COLLECTION_SOURCES).find(s=>s.id===h.id)?.label||h.id} · {h.enabled?'включено':'выключено'}</li>):<li>Ручных переключений ещё не было.</li>}</ul></details>}
+      {data&&<details className="text-sm"><summary className="cursor-pointer underline">История переключений · последние 200</summary><ul className="mt-2 space-y-2">{data.history.length?data.history.filter(h=>h.scope!=="source"||COLLECTION_SOURCES.some(source=>source.id===h.id)).map(h=><li key={h.revision}>{date(h.at)} · {(h.scope==='market'?COLLECTION_MARKETS:COLLECTION_SOURCES).find(s=>s.id===h.id)?.label||h.id} · {h.enabled?'включено':'выключено'}</li>):<li>Ручных переключений ещё не было.</li>}</ul></details>}
     </div>
   </details>;
 }

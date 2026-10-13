@@ -41,17 +41,11 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     // 09.10.2026: China refresh uses the paid feed only; keep approved legacy rows under retention.
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: false, anchor: false },
   ],
-  // Owner decision 2026-09-18: Legacy source retired. Japan is collected by the
-  // standalone ProAuctions workflow, using APPROVED_SAVED_CATALOG_SOURCES.
-  // No legacy generic Japan adapter may collect or restore legacy inventory.
+  // Auction inventory is withdrawn. Green Corner is a separate stock catalog.
   japan: [],
 };
 
-// Owner-requested saved auction imports; no claim of an automated live adapter.
-export const APPROVED_SAVED_CATALOG_SOURCES = [
-  { market: "japan", sourceId: "jptrade_japan_stat", canonicalUrl: "https://jptrade.ru/stat/" },
-  { market: "japan", sourceId: "proauctions_japan_stat", canonicalUrl: "https://demo.pro-auctions.ru/statistika/" },
-] as const;
+export const APPROVED_SAVED_CATALOG_SOURCES: readonly {market: CatalogMarket; sourceId: string; canonicalUrl: string}[] = [];
 export function allowedCatalogSourceIds(market: CatalogMarket) {
   return [...sourcesForMarket(market).map(source => source.sourceId),
     ...APPROVED_SAVED_CATALOG_SOURCES.filter(source => source.market === market).map(source => source.sourceId)];
@@ -89,8 +83,6 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
   try {
     const actual = new URL(String(urlValue || ""));
     const canonical = new URL(allowed.canonicalUrl);
-    if (id === "proauctions_japan_stat") return actual.origin === "https://demo.pro-auctions.ru" && /^\/statistika\/[^/]+\/[^/]+\/\d+\.html$/.test(actual.pathname) && !actual.search && !actual.hash && !actual.username && !actual.password;
-    if (id === "jptrade_japan_stat") return actual.origin === "https://jptrade.ru" && /^\/stat\/\d+$/.test(actual.pathname) && !actual.search && !actual.hash;
     // Owner purchased the domestic Che168 feed on 08.10.2026. Retain Global
     // provenance for existing rows; admit only exact domestic dealer listings.
     if (market === "china" && id === "autohome_used_china_open") {

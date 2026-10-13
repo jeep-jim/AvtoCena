@@ -11,7 +11,7 @@ import { getOfferWithoutEditorial, getOfferFromCurrentShard, getOfferFromCurrent
 // manifest + location-index + offer-chunk reads.
 const getOfferAcrossRequests = unstable_cache(
   async (id: string) => getOfferWithoutEditorial(id),
-  ["catalog-offer-page-unedited-v3"],
+  ["catalog-offer-page-publication-20261013"],
   { revalidate: 60 },
 );
 

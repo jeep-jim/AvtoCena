@@ -16,7 +16,6 @@ on:
   workflow_run:
     workflows:
       - "Catalog quality · enforce global model cap"
-      - "ProAuctions collect and publish"
       - "Catalog · Five-market full rebuild"
       - "Encar official engine specification recovery"
       - "K Car bound registry recovery"

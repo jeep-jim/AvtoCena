@@ -1,3 +1,4 @@
+import {publicationWithdrawn} from "./publication-policy";
 import { readDataJson } from "../data";
 import { protectCatalogCardPhotos } from "./photo-proxy-policy";
 import type { PublicVehicleOffer } from "./types";
@@ -92,7 +93,7 @@ export async function readCatalogOverview(knownGenerationId?: string): Promise<C
     // Publication workers need not have AUTH_SECRET. Sign stored card URLs in
     // the web process for both the homepage and the unfiltered catalog landing.
     return value ? {...value, markets: Object.fromEntries(Object.entries(value.markets).map(([market, summary]) =>
-      [market, {...summary, items: summary.items.map(protectCatalogCardPhotos)}]))} : null;
+      [market, market === "japan" ? {...summary,total:0,items:[]} : {...summary, items: summary.items.filter(item=>!publicationWithdrawn(item)).map(protectCatalogCardPhotos)}]))} : null;
   }, error => {
     if (overviewCache === entry) overviewCache = null;
     throw error;

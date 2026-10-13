@@ -1,3 +1,4 @@
+import {publicationWithdrawn} from "./publication-policy";
 import {catalogInventoryAgeDecision,catalogHeavyVehicleExcluded} from './inventory-admission';
 import { isSellerPricedOffer } from "./seller-price-contract";
 import { hasModificationSelection } from "./modification-contract";
@@ -309,6 +310,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
  * quality checks against a compact card row.
  */
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
+  if(publicationWithdrawn(offer))return false;
   if (reviewedCatalogGalleryHold(offer)) return false;
   if (isSellerPricedOffer(offer)) return Number(offer.cardProjectionVersion || 0) >= 3 || isCrediblePublicOffer(offer);
   if (hasModificationSelection(offer)) return offer?.recoveryQualification?.status === "selection_required";

@@ -93,7 +93,9 @@ for path in ['/cars?market=korea','/cars?market=japan','/api/catalog/search?mark
  t=time.monotonic()
  with urllib.request.urlopen(base+path,timeout=120) as r:b=r.read();assert r.status==200
  if path.startswith('/api/'):
-  value=json.loads(b);assert value.get('total',0)>0 and len(value.get('items',[]))>0
+  value=json.loads(b)
+  if 'market=japan' in path:assert value.get('total')==0 and value.get('items')==[]
+  else:assert value.get('total',0)>0 and len(value.get('items',[]))>0
  else:assert b'</html>' in b and b'$RX(' not in b and len(b)>50000
  print(json.dumps({'prepared':path,'seconds':round(time.monotonic()-t,3),'bytes':len(b)}),flush=True)
 # Admin resource data must never leak anonymously.

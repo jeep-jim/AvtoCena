@@ -1,4 +1,5 @@
 "use client";
+import {publicationWithdrawn} from "@/lib/catalog/publication-policy";
 import {chinaCardVariant} from "@/lib/catalog/china-card-variant";
 import {useDealerBrowsing} from "@/components/dealers/DealerBrowsingContext";
 import {dealerBrowsingHref} from "@/lib/dealers/browsing-context";
@@ -100,6 +101,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const previewEngineCc = o.engineCc || offer.japanDeliveredPreview?.engineCc;
   const engineLabel = previewEngineCc ? `${previewEngineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 
+  if(publicationWithdrawn(offer))return null;
   return (
     <article data-green-corner={isGreenCornerOffer(offer) ? "true" : undefined} className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045]">
       <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">

@@ -1,7 +1,7 @@
 name: Prepare compact budget counts
 on:
   workflow_run:
-    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh georgia, Catalog refresh uae, Catalog refresh europe, ProAuctions collect and publish]
+    workflows: [Catalog refresh china, Catalog refresh korea, Catalog refresh georgia, Catalog refresh uae, Catalog refresh europe]
     types: [completed]
   push:
     branches: [main, feature/autocalc-identity-20260927]

@@ -9,9 +9,9 @@ def api(path,method='GET'):
     with urllib.request.urlopen(req,timeout=30) as r:
         data=r.read()
         return json.loads(data) if data else None
-names=['catalog-refresh-china','catalog-refresh-korea','catalog-refresh-europe','catalog-refresh-uae','catalog-refresh-georgia','catalog-refresh-green','proauctions-collect-publish','catalog-market-refresh']
+names=['catalog-refresh-china','catalog-refresh-korea','catalog-refresh-europe','catalog-refresh-uae','catalog-refresh-georgia','catalog-refresh-green','catalog-market-refresh']
 paths={'.github/workflows/'+name+'.yml' for name in names}
-for name in ['catalog-market-refresh','catalog-refresh-green','proauctions-collect-publish']:
+for name in ['catalog-market-refresh','catalog-refresh-green']:
     text=Path('.github/workflows/'+name+'.yml').read_text()
     assert 'secrets.YC_OBJECT_STORAGE' not in text
     for line in ['https://s3.regru.cloud','avtocena-staging-8120751','migration-staging/full-20261011/','environment: regcloud-staging','secrets.REGCLOUD_S3_ACCESS_KEY_ID','secrets.REGCLOUD_S3_SECRET_ACCESS_KEY']:

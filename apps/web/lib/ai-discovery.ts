@@ -57,7 +57,7 @@ export async function readAiCatalogManifest(): Promise<AiCatalogManifest> {
   });
 }
 
-export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'updatedAt' | 'cardImageUrl' | 'make' | 'model' | 'trim' | 'year'>> };
+export type AiSitemapProjection = { generationId: string; items: Array<Pick<CatalogSearchProjection, 'id' | 'market' | 'updatedAt' | 'cardImageUrl' | 'make' | 'model' | 'trim' | 'year'>> };
 const sitemapProjectionCache = new DetailReadCache<AiSitemapProjection>({
   maxEntries: 1, maxBytes: 32 * 1024 * 1024, ttlMs: 300_000, concurrency: 1,
 });
@@ -68,7 +68,7 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
   if (!manifest.generationId) return null;
   const projection = await sitemapProjectionCache.get(manifest.generationId, async () => {
     const compact = await backend.readJson<AiSitemapProjection | null>(AI_SITEMAP_PROJECTION_PATH, null);
-    if (compact?.generationId === manifest.generationId && Array.isArray(compact.items) && compact.items.every(item=>item.make && item.model)) return compact;
+    if (compact?.generationId === manifest.generationId && Array.isArray(compact.items) && compact.items.every(item=>item.make && item.model && item.market)) return compact;
     const full = storage
       ? await storage.readJson<AiCatalogProjection>(AI_CATALOG_PROJECTION_PATH, { generationId: '', items: [] })
       : await (await import('./catalog/storage')).readCurrentCatalogProjectionSnapshot();
@@ -87,13 +87,13 @@ export async function readAiSitemapProjection(storage?: JsonStorage): Promise<Ai
 export function buildAiSitemapProjection(projection: AiCatalogProjection): AiSitemapProjection {
   return {
     generationId: projection.generationId,
-    items: (projection.items || []).filter(item => item?.id && item?.make && item?.model && item?.year)
-      .map(({id, updatedAt, cardImageUrl, make, model, trim, year}) => ({id, updatedAt, cardImageUrl, make, model, trim, year})),
+    items: (projection.items || []).filter(item => item?.id && item?.make && item?.model && item?.year && !editorialHidden(item))
+      .map(({id, market, updatedAt, cardImageUrl, make, model, trim, year}) => ({id, market, updatedAt, cardImageUrl, make, model, trim, year})),
   };
 }
 
 export function aiCatalogManifestCount(manifest: AiCatalogManifest) {
-  return Object.values(manifest.markets || {}).reduce((sum, market) => sum + Math.max(0, Number(market?.count || 0)), 0);
+  return Object.entries(manifest.markets || {}).filter(([market])=>market!=="japan").map(([,summary])=>summary).reduce((sum, market) => sum + Math.max(0, Number(market?.count || 0)), 0);
 }
 
 export function absoluteAvtocenaUrl(value: unknown) {
@@ -132,6 +132,7 @@ export function aiCatalogDescription(item: CatalogSearchProjection) {
 
 
 export type AiProductFeedMetadata = {
+  publicationPolicy?: "2026-10-13";
   version: 1;
   generationId: string;
   updatedAt: string;
@@ -148,7 +149,7 @@ function csvCell(value: unknown) {
 
 export function buildAiProductFeed(projection: AiCatalogProjection) {
   const rows = projection.items
-    .filter((item) => Number(item.totalRub || item.publicVisibleRub || 0) > 0 && Boolean(item.cardImageUrl))
+    .filter((item) => !editorialHidden(item) && Number(item.totalRub || item.publicVisibleRub || 0) > 0 && Boolean(item.cardImageUrl))
     .map((item) => {
       const priceRub = Math.round(Number(item.totalRub || item.publicVisibleRub || 0));
       return [
@@ -178,6 +179,7 @@ export async function publishAiProductFeed(projection: AiCatalogProjection): Pro
   const built = buildAiProductFeed(projection);
   const stored = await storage.putBinary(AI_PRODUCT_FEED_PATH, built.data, "application/gzip");
   const metadata: AiProductFeedMetadata = {
+    publicationPolicy: "2026-10-13",
     version: 1,
     generationId: projection.generationId,
     updatedAt: new Date().toISOString(),
@@ -197,7 +199,7 @@ export async function ensureAiProductFeed(projection: AiCatalogProjection): Prom
   const current = await storage.readJson<AiProductFeedMetadata | null>(AI_PRODUCT_FEED_METADATA_PATH, null);
   const currentObjectExists = current?.objectPath === AI_PRODUCT_FEED_PATH
     && Boolean(await storage.binaryExists?.(AI_PRODUCT_FEED_PATH).catch(() => false));
-  if (current?.version === 1 && current.generationId === projection.generationId && currentObjectExists) return current;
+  if (current?.publicationPolicy === "2026-10-13" && current.version === 1 && current.generationId === projection.generationId && currentObjectExists) return current;
   return publishAiProductFeed(projection);
 }
 
@@ -208,7 +210,7 @@ export async function readPublishedAiProductFeed(storage: JsonStorage = getJsonS
     storage.readJson<{ generationId: string }>('catalog/manifest.json', { generationId: '' }),
     storage.readJson<AiProductFeedMetadata | null>(AI_PRODUCT_FEED_METADATA_PATH, null),
   ]);
-  if (!manifest.generationId || metadata?.version !== 1
+  if (!manifest.generationId || metadata?.publicationPolicy !== "2026-10-13" || metadata?.version !== 1
     || metadata.generationId !== manifest.generationId
     || metadata.objectPath !== AI_PRODUCT_FEED_PATH
     || metadata.format !== 'google-compatible-csv-gzip') return null;

@@ -48,11 +48,7 @@ export async function extractKnownSource(html:string,url:string):Promise<SourceD
    if(v.firstRegistrationDate)data.notes!.push(`Первая регистрация: ${v.firstRegistrationDate}. Уточните год и месяц выпуска — это не всегда одна дата.`);return data;
   }
  }
- if(identity?.ids[0]==='proauctions_japan_stat'){
-  const {parseProAuctionsDetailEvidence}=await import('../catalog/proauctions-detail-evidence');const row=parseProAuctionsDetailEvidence(html,url);const s=row.specifications;
-  const data=fromRow({title:row.identity.name,year:row.identity.year,price:row.price.saleConfirmed?row.price.amountJpy:undefined,currency:'JPY',fuel:s.powertrain==='hybrid'?'hybrid':s.fuel,powerHp:s.powertrain==='combustion'?s.reportedCombustionPowerHp:undefined,images:row.imageUrls,mileageKm:s.mileageKm,transmission:s.transmission},url,'japan');
-  if(s.reportedEngineCc)data.notes!.push(`Объём по аукциону: ${s.reportedEngineCc} см³; возможное округление. Уточните по документам.`);return data;
- }
+
  return base;
 }
 async function savedSource(url:string):Promise<SourceDraft|null>{
