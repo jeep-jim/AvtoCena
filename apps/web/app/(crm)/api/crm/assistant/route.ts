@@ -1,3 +1,4 @@
+import {browserReply,validChannel} from '@/lib/team-assistant/browser';
 import {cleanImages,readAssistantBody} from '@/lib/team-assistant/media';
 import {randomUUID} from 'node:crypto';
 import {getCurrentUser} from '@/lib/auth';
@@ -27,7 +28,7 @@ export async function POST(request:Request){
   if(!request.headers.get('content-type')?.startsWith('application/json'))return json({error:'Неверный формат запроса.'},400);
   const body=await readAssistantBody(request);
   if(!Number.isInteger(body.revision)||body.revision<0)throw Error('Откройте переписку заново.');
-  if(body.op==='message'&&!providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
+  if(body.op==='message'&&!validChannel(body.browserChannel)&&!providerStatus())return json({error:'Подключение ChatGPT ещё не завершено. Владелец сможет включить ответы после авторизации.'},503);
   lease=await lockHistory(user.id,body.revision);
   if(body.op==='reset'){
    const state=await mutateHistory(user.id,s=>({...s,messages:[],revision:s.revision+1}));return json({messages:[],revision:state.revision});
@@ -59,7 +60,7 @@ export async function POST(request:Request){
   if(body.op!=='message')throw Error('Неизвестное действие.');
   const text=String(body.text||'').trim();if(!text||text.length>6000)throw Error('Напишите сообщение до 6000 символов.');
   const images=cleanImages(body.images),context=cleanContext(body.context),previous=await readHistory(user.id);
-  const answer=await runAssistant(user,text,context,previous.messages,AbortSignal.any([request.signal,AbortSignal.timeout(110000)]),images);
+  const answer=await runAssistant(user,text,context,previous.messages,AbortSignal.any([request.signal,AbortSignal.timeout(110000)]),images,validChannel(body.browserChannel)?browserReply(user.id,body.browserChannel,lease):undefined);
   const s=await mutateHistory(user.id,s=>{if(s.lease!==lease)throw Error('Переписка обновилась. Откройте её заново.');return {...s,revision:s.revision+1,messages:[...s.messages,{id:randomUUID(),role:'user' as const,text,at:new Date().toISOString(),...(images.length?{imageNames:images.map(i=>i.name)}:{})},answer].slice(-40)};});
   return json({messages:s.messages,revision:s.revision});
  }catch(error){const message=error instanceof Error?error.message:'';return json({error:/^[А-ЯЁ]/.test(message)?message.slice(0,240):'Не удалось завершить запрос. Попробуйте снова.'},400);}

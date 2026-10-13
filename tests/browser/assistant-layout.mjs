@@ -48,4 +48,32 @@ try {
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`${out}/${width}-${theme}-${crm?'crm':'public'}.png`});
   await page.getByRole('button',{name:'Закрыть помощника',exact:true}).click();assert.equal(await page.evaluate(()=>document.documentElement.dataset.teamAssistantOpen||''),'');assert.deepEqual(errors,[]);await page.close();console.log(JSON.stringify({width,theme,crm,passed:true}));
  }
+
+ // Exercise connection controls and press-to-talk with a deterministic browser speech service.
+ {
+  const page=await browser.newPage({viewport:{width:390,height:900}});
+  await page.addInitScript(()=>{
+   window.SpeechRecognition=class {start(){window.recognition=this;}stop(){this.onresult({results:[[{transcript:'Найди автомобиль'}]]});this.onend();}abort(){this.onend?.();}};
+   window.addEventListener('message',e=>{if(e.data?.source!=='avtocena-assistant-v1')return;const m=e.data;window.postMessage({source:'avtocena-assistant-v1-reply',id:m.id,ok:true,connected:m.op==='connect'},location.origin);});
+  });
+  await page.route('**/api/**',r=>r.fulfill({json:r.request().url().includes('/auth/me')?{user:{id:'owner',role:'owner'}}:{userId:'owner',messages:[],revision:0,connected:false,owner:true}}));
+  await page.goto(origin);await page.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();
+  await page.getByRole('button',{name:'Подключить ChatGPT',exact:true}).click();await page.getByText('ChatGPT подключён в этом браузере.',{exact:true}).waitFor();
+  const mic=page.getByRole('button',{name:'Удерживайте для голосового ввода'}),b=await mic.boundingBox();
+  await page.mouse.move(b.x+20,b.y+15);await page.mouse.down();assert.equal(await mic.getAttribute('aria-pressed'),'true');await page.mouse.up();
+  assert.equal(await page.getByRole('textbox',{name:'Сообщение помощнику'}).inputValue(),'Найди автомобиль');assert.equal(await mic.getAttribute('aria-pressed'),'false');
+  await page.screenshot({path:out+'/voice-connected-mobile.png'});await page.close();console.log('connection and voice hold/release passed');
+ }
+ // The real extension content script must ignore old answers and reject a changed conversation.
+ {
+  const page=await browser.newPage();await page.goto(origin);
+  await page.setContent('<main><div data-message-author-role="assistant">OLD PRIVATE ANSWER</div><textarea id="prompt-textarea"></textarea><button data-testid="send-button">Send</button></main>');
+  await page.evaluate(()=>{window.chrome={runtime:{id:'test-extension',onMessage:{addListener(fn){window.bridgeListener=fn;}}}};document.querySelector('button').onclick=()=>{const u=document.createElement('div');u.dataset.messageAuthorRole='user';u.textContent=document.querySelector('textarea').value;document.querySelector('main').append(u);const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent='{"reply":"Только новый ответ"}';document.querySelector('main').append(a);};});
+  await page.addScriptTag({content:fs.readFileSync('apps/web/public/assistant-connector/chatgpt.js','utf8')});
+  const rpc=m=>page.evaluate(m=>new Promise(resolve=>window.bridgeListener(m,{id:'test-extension'},resolve)),m);
+  assert.equal((await rpc({op:'bind',binding:'one'})).ok,true);
+  const response=await rpc({op:'send',binding:'one',requestId:'unique-request',input:[{role:'user',content:'hello'}]});assert.equal(response.text,'{"reply":"Только новый ответ"}');
+  await page.evaluate(()=>history.pushState({},'','/c/another'));assert.equal((await rpc({op:'send',binding:'one',requestId:'next',input:[]})).ok,false);
+  await page.close();console.log('extension new-answer isolation and changed-route guard passed');
+ }
 }finally{await browser.close();await new Promise(r=>server.close(r));}
