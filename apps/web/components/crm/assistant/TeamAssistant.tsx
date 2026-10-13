@@ -41,11 +41,11 @@ export function TeamAssistant(){
  useEffect(()=>{if(opened)end.current?.scrollIntoView({block:'nearest'});},[status?.messages.length,busy,opened]);
  async function connect(){
   if(connecting||busy)return;setConnecting(true);setError('');setInstallHelp(false);
-  try{const extension=await connector('ping');if(extension.version!=='1.0.2')throw Error('Обновите расширение ИИ Бро до версии 1.0.2: она использует отдельное служебное окно и исправляет возврат ответа.');await connector('connect',{userId:userId.current});setBrowserConnected(true);setNotice('ИИ Бро подключён к отдельному служебному окну ChatGPT.');}
+  try{const extension=await connector('ping');if(extension.version!=='1.0.3')throw Error('Обновите расширение ИИ Бро до версии 1.0.3: она использует отдельное служебное окно и исправляет возврат ответа.');await connector('connect',{userId:userId.current});setBrowserConnected(true);setNotice('ИИ Бро подключён к отдельному служебному окну ChatGPT.');}
   catch(e){setBrowserConnected(false);setError(e instanceof Error?e.message:'Не удалось подключиться.');setInstallHelp(true);}
   finally{setConnecting(false);}
  }
- useEffect(()=>{if(!status?.userId)return;let alive=true;void connector('ping').then(p=>p.version==='1.0.2'?connector('status',{userId:status.userId}):{connected:false}).then(r=>{if(alive)setBrowserConnected(Boolean(r.connected));}).catch(()=>{});return()=>{alive=false;};},[status?.userId]);
+ useEffect(()=>{if(!status?.userId)return;let alive=true;void connector('ping').then(p=>p.version==='1.0.3'?connector('status',{userId:status.userId}):{connected:false}).then(r=>{if(alive)setBrowserConnected(Boolean(r.connected));}).catch(()=>{});return()=>{alive=false;};},[status?.userId]);
  function connectionControl(){return <div className="ta-connection">{browserConnected?<><span>ChatGPT подключён</span><button type="button" disabled={busy} onClick={()=>{void connector('disconnect',{userId:userId.current}).catch(()=>{});setBrowserConnected(false);}}>Отключить</button></>:<button type="button" disabled={connecting||busy} onClick={()=>void connect()}>{connecting?'Соединяем…':'Подключить ChatGPT'}</button>}{(browserConnected||installHelp)&&<button type="button" onClick={()=>void connector('open',{userId:userId.current}).catch(e=>setError(e.message))}>Открыть служебный ChatGPT</button>}{installHelp&&<p>Для связи с вкладкой нужно расширение ИИ Бро. <a href="/assistant-connect" target="_blank" rel="noopener noreferrer">Установить расширение</a>. После установки обновите эту страницу и нажмите «Подключить ChatGPT».</p>}</div>;}
  async function attach(files:File[]){
   if(mediaLock.current||busy)return;const account=userId.current;mediaLock.current=true;setMediaBusy(true);setError('');

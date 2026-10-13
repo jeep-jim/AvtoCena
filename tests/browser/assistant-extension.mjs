@@ -9,7 +9,8 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const ext=path.resolve(process.env.ASSISTANT_EXTENSION_DIR||'apps/web/public/assistant-connector'),profile=fs.mkdtempSync(path.join(os.tmpdir(),'bro-extension-'));
 const browser=await chromium.launchPersistentContext(profile,{headless:true,executablePath:process.env.EXTENSION_CHROME_BIN||chromium.executablePath(),ignoreDefaultArgs:['--disable-extensions'],args:['--no-sandbox',`--disable-extensions-except=${ext}`,`--load-extension=${ext}`]});
 let loading=false,turn=null,posted=null;
-const composer=`<main><div contenteditable="true" role="textbox" style="width:500px;height:90px;border:1px solid"></div><button data-testid="stop-button" style="display:none">Stop</button><button data-testid="send-button">Отправить</button></main><script>document.querySelector('[data-testid=send-button]').onclick=()=>{const input=document.querySelector('[contenteditable]'),u=document.createElement('div');u.dataset.messageAuthorRole='user';u.textContent=input.innerText;document.querySelector('main').append(u);input.innerText='';if(window.noAnswer)return;history.replaceState({},'','/c/fixture-chat');const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent=JSON.stringify({reply:'Ответ нового запроса'});document.querySelector('main').append(a);};</script>`;
+const composer=`<main><div contenteditable="true" role="textbox" style="width:500px;height:90px;border:1px solid"></div><button data-testid="stop-button" style="display:none">Stop</button><button data-testid="send-button">Отправить</button></main><script>document.querySelector('[data-testid=send-button]').onclick=()=>{const input=document.querySelector('[contenteditable]'),prompt=input.innerText;input.innerText='';const u=document.createElement('div');u.setAttribute('data-own-test-user','true');if(window.noAnswer){u.dataset.messageAuthorRole='user';u.textContent=prompt;document.querySelector('main').append(u);return;}history.replaceState({},'','/c/fixture_chat/');setTimeout(()=>{u.textContent=prompt;document.querySelector('main').append(u);const a=document.createElement('div');a.dataset.messageAuthorRole='assistant';a.textContent=JSON.stringify({reply:'Ответ нового запроса'});document.querySelector('main').append(a);},6500);};</script>`;
+
 try{
  await browser.route('https://avtocena.com/**',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><title>Test CRM</title><body><style>'+css+'</style><div id="root"></div><script>'+client+'</script></body>'}));
  let messages=[],revision=0;
@@ -33,7 +34,7 @@ try{
  // Navigate its test page explicitly so it receives the same deterministic fixture.
  browser.on('page',p=>{void p.goto('https://chatgpt.com/').catch(()=>{});});
  const rpc=m=>site.evaluate(m=>window.rpc(m),m),tabs=()=>browser.pages().filter(p=>p.url().startsWith('https://chatgpt.com/'));
- assert.equal((await rpc({op:'ping'})).version,'1.0.2');
+ assert.equal((await rpc({op:'ping'})).version,'1.0.3');
  await site.getByRole('button',{name:'Открыть ИИ-помощника',exact:true}).click();await site.getByRole('button',{name:'Подключить ChatGPT',exact:true}).click();await site.getByText('ИИ Бро подключён к отдельному служебному окну ChatGPT.',{exact:true}).waitFor().catch(async e=>{console.log('CONNECT DIAGNOSTIC',await site.locator('body').innerText(),await Promise.all(browser.pages().map(p=>p.evaluate(()=>({url:location.href,title:document.title,text:document.body.innerText.slice(0,700),hidden:document.hidden,editors:[...document.querySelectorAll('[contenteditable]')].map(e=>({html:e.outerHTML,editable:e.isContentEditable,rect:e.getBoundingClientRect().toJSON(),display:getComputedStyle(e).display,visibility:getComputedStyle(e).visibility}))})))),await browser.serviceWorkers()[0].evaluate(()=>chrome.storage.session.get(null)));throw e;});assert.equal(tabs().length,2,'create dedicated tab, never reuse ordinary chat');const service=tabs().find(p=>p!==gpt);const worker=browser.serviceWorkers()[0];await worker.evaluate(async()=>{const all=await chrome.storage.session.get(null),b=Object.values(all).find(x=>x.managed===2);await chrome.scripting.executeScript({target:{tabId:b.tabId},func:()=>{const original=setTimeout;globalThis.setTimeout=(fn,ms,...args)=>original(fn,Math.max(ms,60000),...args);}});});
  await site.getByRole('textbox',{name:'Сообщение помощнику'}).fill('Проверка возврата');await site.getByRole('button',{name:'Отправить сообщение',exact:true}).click();
  await site.locator('.ta-assistant .ta-text').filter({hasText:'Ответ нового запроса'}).waitFor({timeout:12000});
@@ -48,9 +49,9 @@ try{
  const fresh=tabs().find(p=>p!==gpt&&p!==service);await fresh.evaluate(()=>window.noAnswer=true);
  const cancelledId=crypto.randomUUID(),sending=rpc({op:'send',requestId:cancelledId,input:[{role:'user',content:'cancel test'}]});
  await fresh.locator('[data-message-author-role="user"]').waitFor();await rpc({op:'cancel',requestId:cancelledId});assert.equal((await sending).ok,false);
- await fresh.evaluate(()=>window.noAnswer=false);
+ await fresh.reload();await rpc({op:'connect'});await fresh.evaluate(()=>window.noAnswer=false);
  const next=await rpc({op:'send',requestId:crypto.randomUUID(),input:[{role:'user',content:'after cancel'}]});assert.equal(next.text,'{"reply":"Ответ нового запроса"}',JSON.stringify(next));
- console.log('actual extension: dedicated window, legacy migration, untouched user chat, throttled timers, hidden stop, SPA route, React panel answer return, second message and cancellation passed');
+ console.log('actual extension: dedicated window, legacy migration, untouched user chat, throttled timers, hidden stop, delayed echo after route change, missing user wrapper, opaque route ID, React panel answer return, second message and cancellation passed');
  await rpc({op:'disconnect'});loading=true;
  const failed=await rpc({op:'connect'});assert.equal(failed.ok,false);assert.equal(tabs().length,4,'one new tab for delayed load');
  const delayed=tabs().find(p=>p!==gpt&&p!==service&&p!==fresh);loading=false;await delayed.reload();
