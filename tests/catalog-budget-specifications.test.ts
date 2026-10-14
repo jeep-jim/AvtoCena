@@ -27,3 +27,27 @@ test('backfilled specifications preserve identities, unknowns and exact engine/c
  await assert.rejects(enrichBudgetSpecifications(source,async()=>({generationId:'gen_spec',items:offers.slice(1)})),/incomplete/);
  await assert.rejects(enrichBudgetSpecifications(source,async()=>({generationId:'gen_spec',items:[...offers,offers[0]]})),/identity/);
 });
+
+
+test('specification backfill accepts empty markets but rejects a missing populated market',async()=>{
+ const {getJsonStorage}=await import('../apps/web/lib/data');
+ const {backfillBudgetSpecificationSelectors,resetCatalogReadCachesForTests}=await import('../apps/web/lib/catalog/storage');
+ const generationId='empty-market-specs';
+ const offers:any[]=[{id:'china-one',market:'china',make:'Haval',model:'M6',engineCc:1497,totalRub:2000000}];
+ const source=buildBudgetCountIndex(generationId,offers,new Map([['china-one',0]]),3);
+ const manifest:any={generationId,markets:{china:{count:1},japan:{count:0}}};
+ const values=new Map<string,any>([['catalog/manifest.json',manifest],[`catalog/generations/${generationId}/indexes/budget-count-v3.json`,source],[`catalog/generations/${generationId}/indexes/budget-cards-v3/0.json`,{generationId,items:offers}]]);
+ const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
+ storage.readJson=async <T>(key:string,fallback:T)=>values.has(key)?values.get(key):fallback;
+ storage.readJsonWithMeta=async <T>(key:string,fallback:T)=>({found:values.has(key),value:values.has(key)?values.get(key):fallback});
+ storage.writeJson=async(key,value)=>{values.set(key,value);};
+ try{
+  resetCatalogReadCachesForTests();
+  const ready=await backfillBudgetSpecificationSelectors();
+  assert.deepEqual(Object.keys(ready.markets),['china']);
+  assert.equal(ready.markets.china.rows+ready.markets.china.otherRows,1);
+  assert.equal([...values.keys()].some(key=>key.endsWith('/budget-markets-v4/japan.json')),false);
+  manifest.markets.japan.count=1;resetCatalogReadCachesForTests();
+  await assert.rejects(backfillBudgetSpecificationSelectors(),/budget_specification_nonempty_market_missing/);
+ }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetCatalogReadCachesForTests();}
+});

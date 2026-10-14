@@ -2330,6 +2330,11 @@ export async function backfillBudgetSpecificationSelectors(){
   if(existing?.specificationFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
+  const hasMarketRows=[...source.rows,...(source.otherRows||[])].some(row=>row[0]===market);
+  if(!hasMarketRows){
+   if(Number(manifest.markets?.[market]?.count||0)>0)throw Error('budget_specification_nonempty_market_missing');
+   continue; // Empty markets have no partition; never synthesize inventory.
+  }
   const rich=await enrichBudgetSpecifications(source,block=>readIndex(manifest.generationId,`budget-cards-v${source.version}/${block}.json`,{generationId:'',items:[] as CatalogSearchProjection[]}));
   const compressed=compressedBudgetSelectors(splitPackedBudgetSelectors(rich)),part=compressed.parts.get(market);
   if(!part)throw Error('budget_specification_partition_missing');
