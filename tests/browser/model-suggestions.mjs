@@ -17,10 +17,10 @@ try{for(const width of [390,1440]){
  await page.goto(`http://127.0.0.1:${server.address().port}`);const input=page.getByRole('searchbox',{name:'Модель автомобиля'});
  await input.fill('Corolla Z');const cross=page.getByRole('button').filter({has:page.getByText('Corolla Cross',{exact:true})});await cross.waitFor();assert.ok(await cross.isVisible());assert.match(await cross.textContent(),/Похожая модель/);
  await input.fill('Королла Z');await cross.waitFor();await page.screenshot({path:`${out}/${width}.png`});await cross.click();assert.match(await page.getByLabel('Выбрано').textContent(),/Toyota \/ Corolla Cross/);
- await input.press('Escape');await page.getByRole('button',{name:'Сбросить',exact:true}).click();await input.fill('Corolla Cross');await page.getByRole('button').filter({has:page.getByText('Corolla Cross',{exact:true})}).waitFor();
+ await page.getByRole('heading',{name:'Поиск модели'}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();await input.fill('Corolla Cross');await page.getByRole('button').filter({has:page.getByText('Corolla Cross',{exact:true})}).waitFor();
  const timings=[];for(const q of ['Cor','Corolla Z','Королла Кросс','Corolla']){const at=performance.now();await input.fill(q);await page.getByRole('button',{name:/Corolla Cross/}).first().waitFor();timings.push(performance.now()-at);}
  assert.equal(directoryRequests,1);assert.equal(apiRequests,1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
- await input.press('Escape');await page.getByRole('button',{name:'Сбросить',exact:true}).click();
+ await page.getByRole('heading',{name:'Поиск модели'}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();
  for(const q of ['M6','Haval M6','Poer','RE-MAX']){
   await input.fill(q);const model=q.includes('M6')?'M6':q==='Poer'?'Poer':'RE-MAX Ruimai';
   await page.getByRole('button').filter({has:page.getByText(model,{exact:true})}).waitFor();
