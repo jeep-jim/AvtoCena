@@ -22,10 +22,10 @@ try{for(const width of [390,1440]){
  assert.equal(directoryRequests,1);assert.equal(apiRequests,1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
  await page.getByRole('heading',{name:'Поиск модели'}).click();await page.getByRole('button',{name:'Сбросить',exact:true}).click();
  for(const q of ['M6','Haval M6','Poer','RE-MAX']){
-  await input.fill(q);const model=q.includes('M6')?'M6':q==='Poer'?'Poer':'RE-MAX Ruimai';
-  await page.getByRole('button').filter({has:page.getByText(model,{exact:true})}).waitFor();
+  await input.fill(q);const model=q.includes('M6')?'M6 Haval':q==='Poer'?'Poer Great Wall':'RE-MAX Ruimai Isuzu';
+  await page.getByRole('button',{name:model,exact:true}).waitFor();
  }
- await input.fill('Haval M6');await page.getByRole('button').filter({has:page.getByText('M6',{exact:true})}).click();
+ await input.fill('Haval M6');await page.getByRole('button',{name:'M6 Haval',exact:true}).click();
  assert.match(await page.getByLabel('Выбрано').textContent(),/Haval \/ M6/);
  await page.getByText('Ищем модель…',{exact:true}).waitFor({state:'hidden'});
  assert.equal(apiRequests,1,'typing and reopening share the inventory download');
