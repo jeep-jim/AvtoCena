@@ -15,3 +15,17 @@ test('brand scope, short identities and numeric model names stay distinct',()=>{
  assert.equal(search('2008')[0].model,'2008');assert.equal(search('208')[0].model,'208');
  assert.ok(search('Тойота').every(m=>m.make==='Toyota'));assert.ok(search('','Toyota').length>0);assert.equal(search('').length,0);
 });
+
+test('current feed identities extend the dictionary without duplicates or cross-brand leakage',async()=>{
+ const {mergeModelSuggestions}=await import('../apps/web/lib/catalog/model-suggestion-search');
+ const inventory=createModelSuggestionSearch({version:1,brands:[],models:[['Haval','M6',[],1],['Haval','F7',[],1],['Great Wall','Poer',[],1],['Isuzu','RE-MAX Ruimai',[],1]]});
+ for(const [query,make,model] of [['m6','Haval','M6'],['Poer','Great Wall','Poer'],['RE-MAX','Isuzu','RE-MAX Ruimai']]){
+  assert.equal(mergeModelSuggestions(inventory(query,make),search(query,make),query)[0].model,model);
+ }
+ assert.equal(inventory('M6','Toyota').length,0);
+ assert.equal(inventory('Haval M6')[0].model,'M6');
+ assert.equal(inventory('Great Wall Poer')[0].model,'Poer');
+ const item={make:'Haval',model:'M6',aliases:[]};
+ assert.equal(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6').length,1);
+ assert.deepEqual(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6')[0].aliases,['М6']);
+});

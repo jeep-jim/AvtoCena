@@ -2,13 +2,8 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import {prepareModelSuggestionSearch,type createModelSuggestionSearch,type ModelSearchData} from "@/lib/catalog/model-suggestion-search";
-import modelSearchAsset from "@/lib/catalog/model-search-asset.json";
-let directoryRequest:Promise<ReturnType<typeof createModelSuggestionSearch>>|null=null;
-function loadSuggestionDirectory(){
- if(!directoryRequest)directoryRequest=fetch(modelSearchAsset.asset,{cache:"force-cache"}).then(async response=>{if(!response.ok)throw Error("directory_unavailable");const data=await response.json() as ModelSearchData;if(data.version!==1||!Array.isArray(data.models)||!data.models.length)throw Error("invalid_directory");return prepareModelSuggestionSearch(data);}).catch(error=>{directoryRequest=null;throw error;});
- return directoryRequest;
-}
+import {createModelSuggestionSearch, mergeModelSuggestions} from "@/lib/catalog/model-suggestion-search";
+import {loadModelSuggestions} from "@/lib/catalog/model-suggestion-loader";
 
 type ModelSuggestion = {
   id?: string;
@@ -174,9 +169,12 @@ export function VehicleModelSearch({
   const [query, setQuery] = useState(multiple ? value.split("|").filter(Boolean).join(", ") : value || "");
   const [remoteItems, setItems] = useState<ModelSuggestion[]>([]);
   const [directory,setDirectory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
+  const [inventory,setInventory]=useState<ReturnType<typeof createModelSuggestionSearch>|null>(null);
+  const [inventoryError,setInventoryError]=useState(false);
+  const [inventoryLoading,setInventoryLoading]=useState(false);
   const [directoryError,setDirectoryError]=useState(false),[retry,setRetry]=useState(0);
   const searchQuery = multiple ? query.split(",").at(-1)?.trim() || "" : query;
-  const items=useMemo(()=>contextual?(directory?.(searchQuery,make)||[]):remoteItems,[contextual,directory,searchQuery,make,remoteItems]);
+  const items=useMemo(()=>contextual?mergeModelSuggestions(inventory?.(searchQuery,make)||[],directory?.(searchQuery,make)||[],searchQuery):remoteItems,[contextual,inventory,directory,searchQuery,make,remoteItems]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -210,9 +208,20 @@ export function VehicleModelSearch({
   useEffect(()=>{
     if(!contextual||!open||directory)return;
     let cancelled=false;setLoading(true);setDirectoryError(false);
-    loadSuggestionDirectory().then(search=>{if(!cancelled)setDirectory(()=>search);}).catch(()=>{if(!cancelled)setDirectoryError(true);}).finally(()=>{if(!cancelled)setLoading(false);});
+    loadModelSuggestions().then(search=>{if(!cancelled){setLoading(false);setDirectory(()=>search);}}).catch(()=>{if(!cancelled)setDirectoryError(true);}).finally(()=>{if(!cancelled)setLoading(false);});
     return()=>{cancelled=true;};
   },[contextual,open,directory,retry]);
+
+  useEffect(()=>{
+    if(!contextual||!open)return;
+    let cancelled=false;setInventoryLoading(true);setInventoryError(false);
+    loadModelSuggestions(true).then(search=>{if(!cancelled){setInventoryLoading(false);setInventory(()=>search);}})
+      .catch(()=>{if(!cancelled)setInventoryError(true);})
+      .finally(()=>{if(!cancelled)setInventoryLoading(false);});
+    return()=>{cancelled=true;};
+  },[contextual,open,retry]);
+  const searching = loading || (contextual && inventoryLoading);
+  const suggestionError = directoryError || inventoryError;
 
   const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
   const canSearch = Boolean(clean(make) || compact(searchQuery).length >= 2);
@@ -319,8 +328,8 @@ export function VehicleModelSearch({
       {multiple && <><p className="px-3 py-2 text-xs text-[var(--ac-muted)]">Добавляйте модели через запятую. Выбранные остаются в чипсах</p><button type="button" className="ac-filter-option min-h-11 w-full rounded-xl text-sm font-bold" onClick={() => { onValueChange?.(""); setQuery(""); }}>Любая модель</button></>}
       <div className="ac-hide-scrollbar max-h-72 overflow-y-auto">
         {!canSearch ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Введите минимум 2 символа модели</div> : null}
-        {canSearch && loading ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
-        {canSearch && !loading && items.length ? items.map((item) => <button
+        {canSearch && searching && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем модель…</div> : null}
+        {canSearch && items.length ? items.map((item) => <button
           key={item.id || `${item.make}:${item.model}`}
           type="button"
           onPointerDown={(event) => event.preventDefault()}
@@ -331,8 +340,8 @@ export function VehicleModelSearch({
           <span className="min-w-0"><span className="block truncate">{item.model}</span>{item.related&&<span className="block text-[11px] font-semibold opacity-70">Похожая модель</span>}{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
           {multiple ? <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm" style={{ background: selectedModels.includes(item.model) ? "#ff353d" : "var(--ac-surface-3)", border: selectedModels.includes(item.model) ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: selectedModels.includes(item.model) ? "#fff" : "transparent" }}>✓</span> : <span className="shrink-0 opacity-70">↵</span>}
         </button>) : null}
-        {contextual&&directoryError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить модели. Повторить</button>:null}
-        {canSearch && !loading && !directoryError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
+        {contextual&&suggestionError?<button type="button" className="px-3 py-4 text-sm font-bold" onClick={()=>setRetry(value=>value+1)}>Не удалось загрузить все модели. Повторить</button>:null}
+        {canSearch && !searching && !suggestionError && !items.length ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Модель не найдена. Попробуйте часть названия</div> : null}
       </div>
     </div> : null}
   </div>;

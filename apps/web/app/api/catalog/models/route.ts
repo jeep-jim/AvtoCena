@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readCatalogFacets } from "@/lib/catalog/storage";
+import { readCatalogFacets, readCatalogDirectoryCountRows } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
 import { effectiveCatalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
 import { resolveConfiguredCatalogSearchParams } from "@/lib/catalog/encyclopedia-identity-query";
@@ -71,6 +71,14 @@ function hasInventoryContext(filters: Record<string, unknown>) {
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
+  // Names only from the current published summary, never raw offers or prices.
+  // This supplements the build-time dictionary after any market feed refresh.
+  if (url.searchParams.get("scope") === "inventory") {
+    const rows = await readCatalogDirectoryCountRows();
+    const models = [...new Map(rows.filter(row => row.count > 0 && row.make && row.model)
+      .map(row => [`${compact(row.make)}:${compact(row.model)}`, [row.make, row.model, [], 1]])).values()];
+    return NextResponse.json({version: 1, models, brands: []}, {headers: {"Cache-Control": "no-store"}});
+  }
   const rawQuery = clean(url.searchParams.get("q"));
   const rawMake = clean(url.searchParams.get("make"));
   // Manual calculation searches the same model directory as knowledge suggestions,
