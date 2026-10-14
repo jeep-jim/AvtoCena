@@ -5,6 +5,7 @@ const letters:Record<string,string>={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',�
 export function suggestionKey(value:string){return value.normalize('NFKC').toLowerCase().replace(/[а-яё]/g,c=>letters[c]).replace(/y/g,'i').replace(/c(?=[aourl])/g,'k').replace(/([lrs])\1+/g,'$1').replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
 function* compileSearch(data:ModelSearchData){
  const brandAliases=new Map<string,string>();
+ for(const [make] of data.models)brandAliases.set(suggestionKey(make),suggestionKey(make));
  for(const [make,aliases] of data.brands)for(const alias of [make,...aliases])brandAliases.set(suggestionKey(alias),suggestionKey(make));
  const prefixRows=new Map<string,number[]>(),makeRows=new Map<string,number[]>();
  const rows:{make:string;model:string;aliases:string[];canonical:number;brand:string;names:string[]}[]=[];

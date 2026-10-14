@@ -23,6 +23,8 @@ test('current feed identities extend the dictionary without duplicates or cross-
   assert.equal(mergeModelSuggestions(inventory(query,make),search(query,make),query)[0].model,model);
  }
  assert.equal(inventory('M6','Toyota').length,0);
+ assert.equal(inventory('Haval M6')[0].model,'M6');
+ assert.equal(inventory('Great Wall Poer')[0].model,'Poer');
  const item={make:'Haval',model:'M6',aliases:[]};
  assert.equal(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6').length,1);
  assert.deepEqual(mergeModelSuggestions([item],[{...item,aliases:['М6']}],'M6')[0].aliases,['М6']);
