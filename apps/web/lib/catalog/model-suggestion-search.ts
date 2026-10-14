@@ -52,3 +52,16 @@ function* compileSearch(data:ModelSearchData){
 
 export function createModelSuggestionSearch(data:ModelSearchData){const compiler=compileSearch(data);let step=compiler.next();while(!step.done)step=compiler.next();return step.value;}
 export async function prepareModelSuggestionSearch(data:ModelSearchData){const compiler=compileSearch(data);let step=compiler.next();while(!step.done){await new Promise<void>(resolve=>setTimeout(resolve,0));step=compiler.next();}return step.value;}
+
+/** Exact live inventory names must remain selectable even when absent from knowledge. */
+export function mergeModelSuggestions(inventory:ModelSuggestion[], directory:ModelSuggestion[], query:string):ModelSuggestion[]{
+ const merged=new Map<string,ModelSuggestion>();
+ for(const row of [...directory,...inventory]){
+  const key=`${suggestionKey(row.make)}:${suggestionKey(row.model)}`;
+  const previous=merged.get(key);
+  merged.set(key,{...row,aliases:[...new Set([...(previous?.aliases||[]),...row.aliases])]});
+ }
+ const q=suggestionKey(query);
+ const rank=(row:ModelSuggestion)=>[row.model,...row.aliases].some(name=>suggestionKey(name)===q)?0:row.related?2:1;
+ return [...merged.values()].sort((a,b)=>rank(a)-rank(b)||a.model.length-b.model.length||a.model.localeCompare(b.model,'ru')).slice(0,50);
+}

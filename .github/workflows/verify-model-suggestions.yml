@@ -4,6 +4,8 @@ on:
     paths:
       - 'apps/web/components/catalog/VehicleModelSearch.tsx'
       - 'apps/web/lib/catalog/model-suggestion-search.ts'
+      - 'apps/web/lib/catalog/model-suggestion-loader.ts'
+      - 'apps/web/app/api/catalog/models/route.ts'
       - 'apps/web/lib/catalog/model-search-asset.json'
       - 'scripts/build-model-search-index.mjs'
       - 'tests/model-suggestion-search.test.ts'
