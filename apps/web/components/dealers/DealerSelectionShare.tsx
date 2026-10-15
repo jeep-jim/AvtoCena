@@ -12,7 +12,7 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
  useEffect(()=>{setStatus('');},[key]);
  const active=selectionQuery(new URLSearchParams(selection.query),false).size>0&&dismissed!==key;
  async function share(){
-  if(inFlight.current||selection.pending)return;inFlight.current=true;setBusy(true);const current=key;
+  if(inFlight.current)return;inFlight.current=true;setBusy(true);const current=key;
   try{
    let url=prepared.current?.key===current?prepared.current.url:'';
    if(!url){setStatus('Готовим ссылку…');const response=await fetch('/api/share',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:current,mini:false}),signal:AbortSignal.timeout(12000)});const result=await response.json();if(!response.ok||!/^\/s\/[A-Za-z0-9_-]{16}$/.test(result.path))throw Error(result.error||'Не удалось подготовить ссылку');url=new URL(result.path,location.origin).toString();prepared.current={key:current,url};}
@@ -26,7 +26,7 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
  return <><nav className="dealer-selection-dock" data-selection-dock hidden={selection.filtersOpen} aria-label="Поделиться подборкой">
   <button type="button" className="dealer-selection-close" aria-label="Скрыть панель подборки" onClick={()=>setDismissed(key)}><X size={23}/></button>
   <button type="button" className="dealer-selection-filters" aria-label="Изменить фильтры подборки" onClick={()=>window.dispatchEvent(new CustomEvent(OPEN_SELECTION_FILTERS,{detail:{dealerId}}))}><SlidersHorizontal size={25}/></button>
-  <button type="button" className="dealer-selection-send" onClick={()=>void share()} disabled={busy||selection.pending}><Share2 size={19}/><span>{busy?'Готовим ссылку…':'Поделиться подборкой'}</span></button>
+  <button type="button" className="dealer-selection-send" onClick={()=>void share()} disabled={busy}><Share2 size={19}/><span>{busy?'Готовим ссылку…':'Поделиться подборкой'}</span></button>
   {status&&<p role="status">{status}</p>}
  </nav><style>{`
  .dealer-profile:has([data-selection-dock])>.dealer-dock{display:none!important}
