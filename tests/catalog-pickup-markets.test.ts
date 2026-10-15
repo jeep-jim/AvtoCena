@@ -1,3 +1,4 @@
+import {compressedBudgetSelectors,splitPackedBudgetSelectors} from '../apps/web/lib/catalog/budget-selector-codec';
 import {publicationWithdrawn} from '../apps/web/lib/catalog/publication-policy';
 import {filterGreenCorner} from '../apps/web/lib/catalog/green-corner-search';
 import test from 'node:test';
@@ -6,9 +7,9 @@ import {catalogBodyType} from '../apps/web/lib/catalog/pickup-body';
 import {commercialParameters} from '../apps/web/lib/catalog/commercial-parameters';
 import {offerParameterDraft} from '../apps/web/lib/catalog/offer-parameter-draft';
 import {catalogBodyName} from '../apps/web/lib/catalog/presentation';
-import {catalogSearchProjectionMatches,backfillBudgetSpecificationSelectors,searchOffers,countCatalogOffers,readCatalogFacets,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
+import {catalogSearchProjectionMatches,backfillBudgetMarketSelectors,backfillBudgetSpecificationSelectors,searchOffers,countCatalogOffers,readCatalogFacets,resetCatalogReadCachesForTests} from '../apps/web/lib/catalog/storage';
 import {buildBudgetCountIndex} from '../apps/web/lib/catalog/budget-count-index';
-import {getJsonStorage} from '../apps/web/lib/data';
+import {getJsonStorage,StorageConflictError} from '../apps/web/lib/data';
 import {customsVehicleIdentityEvidence} from '../apps/web/lib/catalog/customs-pricing';
 import {normalizedCategory} from '../packages/engine/src/calculation/russiaCustomsV2';
 
@@ -58,12 +59,18 @@ test('existing compact indexes are upgraded for counts, facets and pages includi
   [`catalog/generations/${generationId}/indexes/budget-count-v3.json`,source],
   [`catalog/generations/${generationId}/indexes/budget-cards-v3/0.json`,{generationId,items:rows}],
  ]);
+ const old=compressedBudgetSelectors(splitPackedBudgetSelectors(source));
+ for(const [market,part] of old.parts)values.set(`catalog/generations/${generationId}/indexes/budget-markets-v4/${market}.json`,part);
+ values.set(`catalog/generations/${generationId}/indexes/budget-markets-v4/ready.json`,old.directory);
+ const oldObjects=JSON.stringify([...values].filter(([key])=>key.includes('/budget-markets-v4/')));
  const storage=getJsonStorage(),read=storage.readJson,meta=storage.readJsonWithMeta,write=storage.writeJson;
  storage.readJson=async <T>(key:string,fallback:T)=>values.has(key)?values.get(key):fallback;
  storage.readJsonWithMeta=async <T>(key:string,fallback:T)=>({found:values.has(key),value:values.has(key)?values.get(key):fallback});
- storage.writeJson=async(key,value)=>{values.set(key,value);};
+ storage.writeJson=async(key,value,condition)=>{if(condition?.ifNoneMatch && values.has(key))throw new StorageConflictError();values.set(key,value);};
  try{
-  resetCatalogReadCachesForTests();await backfillBudgetSpecificationSelectors();
+  resetCatalogReadCachesForTests();await backfillBudgetMarketSelectors();await backfillBudgetSpecificationSelectors();
+  await backfillBudgetSpecificationSelectors(); // Re-running preparation is safe.
+  assert.equal(JSON.stringify([...values].filter(([key])=>key.includes('/budget-markets-v4/'))),oldObjects,'previous release selectors stay immutable');
   for(const market of [undefined,...samples.map(s=>s.market)]){
    const query={bodyType:'pickup',market};
    const [result,count,facets]=await Promise.all([searchOffers(query),countCatalogOffers(query),readCatalogFacets(query)]);

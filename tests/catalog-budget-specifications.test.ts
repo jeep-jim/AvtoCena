@@ -46,7 +46,7 @@ test('specification backfill accepts empty markets but rejects a missing populat
   const ready=await backfillBudgetSpecificationSelectors();
   assert.deepEqual(Object.keys(ready.markets),['china']);
   assert.equal(ready.markets.china.rows+ready.markets.china.otherRows,1);
-  assert.equal([...values.keys()].some(key=>key.endsWith('/budget-markets-v4/japan.json')),false);
+  assert.equal([...values.keys()].some(key=>key.endsWith('/budget-markets-v5/japan.json')),false);
   manifest.markets.japan.count=1;resetCatalogReadCachesForTests();
   await assert.rejects(backfillBudgetSpecificationSelectors(),/budget_specification_nonempty_market_missing/);
  }finally{storage.readJson=read;storage.readJsonWithMeta=meta;storage.writeJson=write;resetCatalogReadCachesForTests();}
