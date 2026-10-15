@@ -67,7 +67,8 @@ try{for(const width of [390,1440]){
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='3000000');assert.equal(new URL(page.url()).pathname,'/test/dealer');
  if(width===390){await page.keyboard.press('Escape');await send.waitFor({state:'visible'});assert.ok(await page.evaluate(()=>window.scrollY)>500);}
  await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('budget'),'3000000');await page.evaluate(()=>window.calls.pop());
- await page.screenshot({path:`${out}/${width}.png`,fullPage:true});
+ const dockBox=await page.locator('[data-selection-dock]').boundingBox();assert.ok(dockBox&&dockBox.y>=0&&dockBox.y+dockBox.height<=901&&dockBox.x>=-1&&dockBox.x+dockBox.width<=width+1,JSON.stringify(dockBox));
+ await page.screenshot({path:`${out}/${width}.png`});
  await page.getByRole('button',{name:'Скрыть панель подборки'}).click();assert.equal(await send.count(),0);if(width===390)assert.equal(await page.locator('.dealer-dock').isVisible(),true);
  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&city=Казань',pending:false,filtersOpen:false}})));await send.waitFor();await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.match(shares.at(-1).path,/make=Honda/);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('city'),'Казань');
  // Changing the selection during preparation must never send the old selection.
