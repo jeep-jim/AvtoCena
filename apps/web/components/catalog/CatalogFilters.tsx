@@ -123,7 +123,7 @@ function AuctionGradeSelect({value, onChange}: {value: string; onChange: (value:
   </div>;
 }
 
-const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.flatMap((value) => value==="japan"?[{value:"green",label:"Япония · Зелёный угол"}]:[{ value, label: CATALOG_MARKET_LABELS[value] }])];
+const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.flatMap((value) => value==="japan"?[{value:"japan",label:"Япония · Аукционы"},{value:"green",label:"Япония · Зелёный угол"}]:[{ value, label: CATALOG_MARKET_LABELS[value] }])];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
 const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "electrified", label: "Электромобили и гибриды" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];

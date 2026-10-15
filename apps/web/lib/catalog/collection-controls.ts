@@ -13,6 +13,8 @@ export function validateCollectionControls(value:unknown):CollectionControls {
     if(!v[scope] || typeof v[scope]!=='object')throw Error('invalid_collection_controls');
     for(const id of Object.keys(defaults[scope])){
       const row=v[scope][id];
+      // One explicit backwards-compatible addition; missing existing switches remain invalid.
+      if(scope==='sources'&&id==='ajes_japan_feed'&&!Object.prototype.hasOwnProperty.call(v[scope],id))continue;
       if(!row || (typeof row.enabled!=='boolean' || [row.enabledAt,row.disabledAt].some(t=>t!==null&&!Number.isFinite(Date.parse(t)))))throw Error('invalid_collection_controls');
     }
   }

@@ -1,4 +1,5 @@
 'use client';
+import {ajesImageUrl} from '@/lib/catalog/ajes-query';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { ShareLinkButton } from './ShareLinkButton';
@@ -50,7 +51,7 @@ export function PhotoBrowser({images,title,initialIndex=0,offerId,snapshot,onClo
   </div>
   {selected!==null?<>
    <div ref={viewport} data-back-layer className={styles.viewport} onDragStart={e=>e.preventDefault()} onContextMenu={e=>e.preventDefault()} onPointerDown={begin} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onDoubleClick={()=>zoom(scale===1?2:1)}>
-    <img data-zoom-image src={images[selected]} alt={`${title}, фото ${selected+1}`} style={{transform:`translate(${pan.x}px,${pan.y}px) scale(${scale})`}} draggable={false} onError={retryProtectedPhoto}/>
+    <img data-zoom-image src={ajesImageUrl(images[selected],'original')||images[selected]} alt={`${title}, фото ${selected+1}`} style={{transform:`translate(${pan.x}px,${pan.y}px) scale(${scale})`}} draggable={false} onError={retryProtectedPhoto}/>
    </div>
    <div className={styles.zoom}>
     <button type="button" className={styles.control} onClick={()=>open((selected+images.length-1)%images.length)} aria-label="Предыдущее фото">←</button>
