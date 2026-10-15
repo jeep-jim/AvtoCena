@@ -4,7 +4,7 @@ import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
+type Dependencies={password:()=>string|undefined|Promise<string|undefined>; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
@@ -12,7 +12,7 @@ export function createAjesClient(deps:Dependencies) {
       const query=ajesQuery(input);
       if(!isIP(clientIp)) throw new AjesUnavailable('client_ip_missing');
       await deps.assertEnabled(); // Also applies to cache hits after an owner disables the source.
-      const password=deps.password();
+      const password=await deps.password();
       if(!password)throw new AjesUnavailable('not_configured');
       return cache.get(query.sql,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.

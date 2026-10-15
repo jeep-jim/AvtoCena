@@ -1,4 +1,4 @@
-import {DealerGreenCatalog} from "./DealerGreenCatalog";
+import {AjesCatalog} from './AjesCatalog';
 import { JapanSectionTabs } from "@/components/catalog/JapanSectionTabs";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 import { filterGreenCorner, greenCornerFacets } from "@/lib/catalog/green-corner-search";
@@ -59,8 +59,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 export async function CatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;
   if(dealer&&!allowedMarkets.length)return <p className="py-10 text-[var(--ac-muted)]">Компания пока не указала направления доставки.</p>;
-  if(embedded&&dealer?.markets.includes("japan")&&first(params.market)==="japan")return <DealerGreenCatalog params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))}/>;
-  if ((!dealer||dealer.markets.includes("japan")) && first(params.market) === "japan") redirect(`/cars/green?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),...(dealer?{dealer:dealer.id,...(dealer.preview?{preview:"1"}:{})}:{})})}`);
+  if ((!dealer||dealer.markets.includes("japan")) && first(params.market) === "japan") return <AjesCatalog params={params} embedded={embedded}/>;
   const requestedMarket = first(params.market).toLowerCase();
   if (requestedMarket && !PUBLIC_CATALOG_MARKET_SET.has(requestedMarket as CatalogMarket)) redirect(dealer?.href || "/cars");
   const selectedMarket = dealer&&!dealer.markets.includes(requestedMarket as any)?"":requestedMarket;
@@ -186,6 +185,7 @@ export async function CatalogContent({params={},dealer=null,embedded=false}:{par
             {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
           </span>)}
         </nav>
+        {!selectedMarket&&(!dealer||dealer.markets.includes('japan'))&&<p className="mb-4"><Link href="/cars?market=japan" className="text-sm underline">Аукционы Японии · результаты торгов →</Link></p>}
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : embedded ? "Авто под заказ" : "Каталог автомобилей"}</h1>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>

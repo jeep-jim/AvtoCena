@@ -1,3 +1,4 @@
+import {ajesImageUrl} from './ajes-query';
 import { reviewedCatalogImageExclusion } from "./source-gallery-review";
 
 type CatalogImageLike = {
@@ -113,6 +114,7 @@ function hasImageEvidence(image: CatalogImageLike) {
 
   // Stored binaries were already decoded/validated by the importer.
   if (id && objectKey) return true;
+  if (ajesImageUrl(url)) return true;
   if (/^image\/(?:jpe?g|png|webp|avif|gif)$/i.test(mime)) return true;
   if (/\.(?:jpe?g|png|webp|avif|gif)(?:[?#]|$)/i.test(url)) return true;
   if (width >= 420 && height >= 260) return true;
@@ -170,6 +172,7 @@ export function isLikelyVehicleImage(image: CatalogImageLike) {
  * vehicle-image sequence, but the counter is global and is NOT always _1.
  */
 function isPublishedAuctionSheet(offer: any, image: CatalogImageLike) {
+  if (/^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(String(offer?.id)) && offer?.market === 'japan') return image.role === 'auction_sheet';
   if (offer?.market !== "japan" || offer?.sourceId !== "proauctions_japan_stat") return false;
   const identity = (value: unknown) => text(value).match(/^https:\/\/jp\d+\.pa-server\.ru(\/auc_auto\/\d{4}_\d{2}_\d{2}\/\d+\/)[^/?#]+_(\d+)\.(?:webp|jpe?g|png)$/i);
   const match = identity(image.url);

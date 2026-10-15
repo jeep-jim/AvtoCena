@@ -85,3 +85,25 @@ test('legacy controls gain only new disabled feed; corruption and old source rev
   controls.markets.japan.enabled=false;assert.equal(collectionEnabled(controls,'ajes_japan_feed'),false);
   delete legacy.sources.che168_feed;assert.throws(()=>validateCollectionControls(legacy));
 });
+
+import {ajesOffer,ajesOfferId} from '../apps/web/lib/catalog/ajes-offer';
+import {isSellerPricedOffer} from '../apps/web/lib/catalog/seller-price-contract';
+import {publicationWithdrawn} from '../apps/web/lib/catalog/publication-policy';
+import {rankedCatalogImageUrls,catalogAuctionSheetUrls} from '../apps/web/lib/catalog/image-quality';
+test('paid Japanese sold record has only auction price and honest editable specifications',()=>{
+ const lot=ajesLot({...row,PW:'52,64',IMAGES:row.IMAGES+'#https://7.tru.ru/imgs/carABC'},'stats',true)!;
+ const offer=ajesOffer(lot,{currency:'JPY',cbrRate:53,nominal:100,effectiveRate:.53,rateDate:'2026-10-15',rateSource:'cbr',sourcePrice:935000,sourcePriceRub:495550},'2026-10-15T10:00:00Z');
+ assert.equal(isSellerPricedOffer(offer),true);assert.equal(offer.totalRub,null);assert.equal(offer.sellerPriceRub,495550);
+ for(const key of ['powerHp','fuel','drive','transmission'])assert.equal((offer as any)[key],undefined);
+ assert.equal(publicationWithdrawn(offer),false);assert.equal(ajesOfferId(offer.id),true);
+ assert.equal(publicationWithdrawn({...offer,sourceId:'jptrade_japan_stat'}),true);
+ assert.equal(publicationWithdrawn({...offer,id:'japan-old'}),true);
+ assert.equal(publicationWithdrawn({...offer,id:'green-123'}),false);
+ assert.deepEqual(catalogAuctionSheetUrls(offer),['https://7.tru.ru/imgs/testABC']);
+ assert.equal(rankedCatalogImageUrls(offer)[0],'https://7.tru.ru/imgs/carABC&w=320');
+ assert.throws(()=>ajesOffer(lot,{currency:'USD'} as any,'now'));
+});
+test('encrypted runtime credentials can be read asynchronously without leaking into responses',async()=>{
+ const client=createAjesClient({password:async()=> 'private-test-value',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{assert.equal(new URL(String(url)).searchParams.get('code'),'private-test-value');return new Response(JSON.stringify([row]));}});
+ const result=await client.read({},'127.0.0.1');assert.equal(result.items.length,1);assert.ok(!JSON.stringify(result).includes('private-test-value'));
+});

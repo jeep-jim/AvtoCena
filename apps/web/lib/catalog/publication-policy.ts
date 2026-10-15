@@ -15,7 +15,8 @@ export function publicationWithdrawn(offer: Identity): boolean {
   const japan = String(offer.market || '').toLowerCase() === 'japan'
     || /япони/i.test(String(offer.marketLabel || ''))
     || /^(?:proauctions|jptrade|japan|sferacar|auctiondatasearch|jpcenter)[_-]/i.test(id);
-  return japan && !/^green-\d+$/.test(id);
+  const paidJapan = /^ajes-stats-[A-Za-z0-9_-]{1,64}$/.test(id) && (!source || source === 'ajes_japan_feed');
+  return japan && !/^green-\d+$/.test(id) && !paidJapan;
 }
 export function withoutJapanAuctionCounts<T extends {count:number;marketCounts:Record<string,number>}>(row:T):T {
   const {japan = 0, ...marketCounts} = row.marketCounts;
