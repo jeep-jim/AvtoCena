@@ -1,4 +1,5 @@
 'use client';
+import {quoteCityDelivery} from '@/lib/catalog/city-delivery';
 import {videoReviews,withoutVideoLinks} from '@/lib/dealers/video-review';
 import {VideoReviews} from './VideoReviews';
 import {useSelectedCity} from '@/lib/location/selected-city';
@@ -138,7 +139,7 @@ export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verif
             </details>:!c.complete?<p className="mt-4 text-sm text-[var(--ac-muted)]">Уточним актуальную стоимость и доставку при обращении.</p>:null}
             <OfferMobileActions offerId={id} snapshot={snapshot}/>
             <OfferDesktopActions offerId={id} snapshot={snapshot}/>
-            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!privateCity} syncStored={false} description={city&&c.complete?`Доставка: ${o.availability==='market'?'Страна покупки':s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
+            {!stock&&<DeliveryCityPanel value={city} onChange={setQuoteCity} persistSelection={!privateCity} syncStored={false} description={city&&c.complete?`Доставка: ${o.availability==='market'?quoteCityDelivery(city,o.market,o.deliveryOriginCity).origin:s.pricing.originCity||'Бишкек'} → ${city}: около ${(c.lines.find(l=>l.id==='delivery')?.amountRub||0).toLocaleString('ru-RU')} ₽. Предварительный тариф, подтвердим перед заказом.`:'Выберите город, чтобы рассчитать доставку до вас.'}/>}
             <div className="mt-3 xl:hidden">{updatedStatus}</div>
             <section className="dealer-offer-identity relative mt-4 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-4" aria-label="Дилер объявления">
               {s.profileEnabled&&<Link href={dealerProfilePath(s)} className="absolute inset-0 z-10 rounded-[1.35rem]" aria-label={`Профиль дилера ${s.name}`}/>}

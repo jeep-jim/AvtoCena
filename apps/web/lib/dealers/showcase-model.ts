@@ -36,6 +36,7 @@ export type SpecialOffer = {
   currency?: string;
   invoice?: number;
   purchaseTotal?: number;
+  deliveryOriginCity?: string;
   marketQuote?: MarketQuote;
   position?: number;
   servicesOverride?: OfferServices | null;
@@ -193,7 +194,7 @@ export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) 
 export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled"|"marketEnabled"|"marketHomeEnabled">, o: SpecialOffer) => offerAvailability(o) === "market" ? !!(s.marketEnabled || s.marketHomeEnabled) : offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
 export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => kind === "market" ? "" : (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
 export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "market" ? "✨ Новые авто под заказ" : kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
-export type SpecialCalculationOffer = Pick<SpecialOffer, "market" | "currency" | "invoice" | "purchaseTotal" | "marketQuote" | "servicesOverride" | "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
+export type SpecialCalculationOffer = Pick<SpecialOffer, "deliveryOriginCity" | "market" | "currency" | "invoice" | "purchaseTotal" | "marketQuote" | "servicesOverride" | "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
 export function calculateSpecial(
   s: Pick<DealerShowcase,"pricing"|"offices"|"dealerId">,
   o: SpecialCalculationOffer,
@@ -471,6 +472,7 @@ export function normalizeShowcase(
       currency: ['JPY','CNY','KRW','USD','EUR','AED','GEL'].includes(o.currency) ? o.currency : undefined,
       invoice: number(o.invoice ?? 0,0,1e12),
       purchaseTotal: number(o.purchaseTotal ?? 0,0,1e12),
+      deliveryOriginCity: text(o.deliveryOriginCity,100) || undefined,
       servicesOverride: o.servicesOverride == null ? null : {
         deliveryMarkupRub: number(o.servicesOverride.deliveryMarkupRub, 0, 1e7),
         commissionRub: number(o.servicesOverride.commissionRub, 0, 1e7),

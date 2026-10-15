@@ -58,7 +58,7 @@ export async function specialLeadSnapshot(id: string, city = "") {
     sourceCurrency: o.availability==="market"?o.currency:offerAvailability(o)==="stock" ? "RUB" : "USD",
     deliveryQuote: offerAvailability(o)==="stock" ? undefined : {
       version: "dealer-special-v1",
-      origin: o.availability==="market" ? quoteCityDelivery(city,o.market).origin : s.pricing.originCity || "Бишкек",
+      origin: o.availability==="market" ? quoteCityDelivery(c.city,o.market,o.deliveryOriginCity).origin : s.pricing.originCity || "Бишкек",
       city: c.city,
       amountRub: c.complete
         ? c.lines.find((l) => l.id === "delivery")?.amountRub || 0

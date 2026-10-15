@@ -432,6 +432,7 @@ export function DealerEditor({
          <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,quote?.city].filter(Boolean).join(' · ')}</p>
          <p className="ac-price ac-price--down text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Цена не заполнена'}</p>
          {offerMode==='stock'&&<p className="text-sm text-[var(--ac-muted)]">{s.offices.find(o=>o.id===active.officeId)?.address||'Выберите адрес автомобиля'}</p>}
+         {quote?.complete&&offerMode!=='stock'&&<h4 className="font-bold">Структура цены</h4>}
          {quote?.complete?(offerMode!=='stock'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
          {specialPublicationFields(active).length>0&&<p className="text-xs text-[var(--ac-muted)]">Для публикации: {specialPublicationFields(active).join(', ')}.</p>}
         </section>}
