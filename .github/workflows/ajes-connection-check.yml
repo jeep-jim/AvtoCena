@@ -1,0 +1,40 @@
+name: AJ System — owner connection check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/market-runs/ajes-connection-check.json']
+permissions:
+  contents: read
+concurrency:
+  group: ajes-owner-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: regcloud-staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Bundle limited diagnostic without secrets
+        run: |
+          node --input-type=module <<'JS'
+          import {build} from 'esbuild';
+          await build({entryPoints:['scripts/ajes-connection-check.ts'],outfile:'/tmp/ajes-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(build){build.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));build.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          JS
+      - name: Check inside existing production environment
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key_file=$(mktemp)
+          trap 'rm -f "$key_file"' EXIT
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
+          unset SSH_PRIVATE_KEY
+          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'docker exec -i avtocena-production node' < /tmp/ajes-check.cjs
