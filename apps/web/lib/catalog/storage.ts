@@ -2249,18 +2249,22 @@ const budgetIndexCache=new DetailReadCache<BudgetCountIndex|null>({maxEntries:14
 const budgetMarketDirectoryCache=new DetailReadCache<BudgetMarketDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
+const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<BudgetCountIndex|null>>();
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 async function readBudgetCountIndex(generationId:string,market?:string){
  if(!market || market==='any'){
   const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v4/ready.json',null)).catch(()=>null);
   if(directory?.generationId===generationId && Object.keys(directory.markets).length){
-   const merged=await (async()=>{
+   let pending=aggregateBudgetIndexes.get(directory);
+   if(!pending){pending=(async()=>{
     const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
     if(parts.some(part=>!part || part.bodyFilterVersion!==1))return null;
     const valid=parts as BudgetCountIndex[];
     return {...valid[0],sourceRows:valid.reduce((n,part)=>n+part.sourceRows,0),rows:valid.flatMap(part=>part.rows),otherRows:valid.flatMap(part=>part.otherRows||[]),pricingChunks:Object.assign({},...valid.map(part=>part.pricingChunks||{}))};
-   })().catch(()=>null);
+   })().catch(()=>null);aggregateBudgetIndexes.set(directory,pending);}
+   const merged=await pending;
    if(merged)return merged;
+   aggregateBudgetIndexes.delete(directory);
   }
  }
 
