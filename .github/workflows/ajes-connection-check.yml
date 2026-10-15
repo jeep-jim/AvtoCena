@@ -25,7 +25,7 @@ jobs:
         run: |
           node --input-type=module <<'JS'
           import {build} from 'esbuild';
-          await build({entryPoints:['scripts/ajes-connection-check.ts'],outfile:'/tmp/ajes-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(build){build.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));build.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
+          await build({entryPoints:['scripts/ajes-connection-check.ts'],outfile:'/tmp/ajes-check.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(build){build.onResolve({filter:/^next\/headers$/},()=>({path:'headers',namespace:'headers'}));build.onLoad({filter:/.*/,namespace:'headers'},()=>({contents:"export async function headers(){return new Map([['x-real-ip','8.1.1.1']])}"}));build.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));build.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
       - name: Check inside existing production environment
         env:
