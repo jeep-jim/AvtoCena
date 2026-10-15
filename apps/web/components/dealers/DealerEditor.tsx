@@ -53,6 +53,16 @@ export function DealerEditor({
   useEffect(()=>{if(demo)return;const controller=new AbortController();fetch(`/api/crm/reviews?dealerId=${encodeURIComponent(initial.dealerId)}`,{signal:controller.signal,cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d)setReviewCount(d.total);}).catch(()=>{});return()=>controller.abort();},[initial.dealerId,demo]);
   const [offerMode,setOfferMode]=useState<OfferAvailability>('order');
   const [activeId,setActiveId]=useState(initial.offers[0]?.id||'');
+  useEffect(()=>{
+    if(demo)return;
+    const requested=new URLSearchParams(window.location.search).get('offer');
+    if(!requested)return;
+    const offer=initial.offers.find(item=>item.id===requested);
+    setTab('offers');
+    if(offer){setOfferMode(offerAvailability(offer));setActiveId(offer.id);}
+    else setMessage('Автомобиль не найден. Возможно, он был удалён.');
+  },[initial.dealerId,demo]);
+
   const [conflict,setConflict]=useState<{current:DealerShowcase;proposed:DealerShowcase}|null>(null);
   const base=useRef(s);
   const latest=useRef(s);
