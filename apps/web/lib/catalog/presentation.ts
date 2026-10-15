@@ -1,3 +1,4 @@
+import {catalogBodyType} from './pickup-body';
 import {internationalModel} from './international-model';
 import { CATALOG_MARKET_LABELS } from "./runtime-config";
 import { CATALOG_BRANDS } from "./brands";
@@ -480,7 +481,7 @@ function inferBodyFromOffer(offer: any) {
 }
 
 export function catalogBodyName(value: unknown, offer?: any) {
-  const raw = safeCatalogText(value);
+  const raw = safeCatalogText(catalogBodyType({...offer,bodyType:value}));
   const key = raw.toLowerCase().replace(/[^a-z]/g, "");
   if (bodyNames[key]) return bodyNames[key];
 

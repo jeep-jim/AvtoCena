@@ -44,6 +44,8 @@ export function customsVehicleIdentityEvidence(input: Partial<VehicleOffer>, nor
     input.sourceTitle,
     input.make,
     input.model,
+    input.trim,
+    normalized.trim,
     input.bodyType,
   ]
     .map((value) => String(value || "").replace(/\s+/g, " ").trim())
