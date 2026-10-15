@@ -2253,7 +2253,7 @@ const aggregateBudgetIndexes=new WeakMap<CompressedBudgetDirectory,Promise<Budge
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 async function readBudgetCountIndex(generationId:string,market?:string){
  if(!market || market==='any'){
-  const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v4/ready.json',null)).catch(()=>null);
+  const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v5/ready.json',null)).catch(()=>null);
   if(directory?.generationId===generationId && Object.keys(directory.markets).length){
    let pending=aggregateBudgetIndexes.get(directory);
    if(!pending){pending=(async()=>{
@@ -2269,9 +2269,9 @@ async function readBudgetCountIndex(generationId:string,market?:string){
  }
 
  if(market && MARKETS.includes(market as CatalogMarket)){
-  const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v4/ready.json',null)).catch(()=>null);
+  const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v5/ready.json',null)).catch(()=>null);
   if(specificationDirectory?.generationId===generationId && specificationDirectory.markets?.[market]){
-   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>verifiedCompressedBudgetSelector(specificationDirectory,market,await readIndex<CompressedBudgetSelector|null>(generationId,`budget-markets-v4/${market}.json`,null))).catch(()=>null);
+   const rich=await budgetIndexCache.get(`${generationId}:specifications:${market}`,async()=>verifiedCompressedBudgetSelector(specificationDirectory,market,await readIndex<CompressedBudgetSelector|null>(generationId,`budget-markets-v5/${market}.json`,null))).catch(()=>null);
    if(rich?.specificationFilterVersion===1)return rich;
   }
   const compressedDirectory=await compressedBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v3/ready.json',null)).catch(()=>null);
@@ -2304,9 +2304,9 @@ async function writeBudgetMarketSelectors(index:BudgetCountIndex){
  for(const [market,part] of compressed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v3/${market}.json`),part);
  for(const market of compressed.parts.keys())if(!verifiedCompressedBudgetSelector(compressed.directory,market,await readIndex<CompressedBudgetSelector|null>(index.generationId,`budget-markets-v3/${market}.json`,null)))throw Error('catalog_compressed_selector_verification_failed');
  await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v3/ready.json'),compressed.directory);
- if(index.specificationFilterVersion===1){
-  for(const [market,part] of compressed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v4/${market}.json`),part);
-  await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v4/ready.json'),compressed.directory);
+ if(index.specificationFilterVersion===1 && index.bodyFilterVersion===1){
+  for(const [market,part] of compressed.parts)await writeJsonAtomic(generationPath(index.generationId,`indexes/budget-markets-v5/${market}.json`),part);
+  await writeJsonAtomic(generationPath(index.generationId,'indexes/budget-markets-v5/ready.json'),compressed.directory);
  }
  // Keep v1 for a still-running previous web release and rollback.
  const {directory,parts}=splitBudgetMarketIndex(index);
@@ -2341,10 +2341,10 @@ export async function backfillBudgetMarketSelectors(){
 /** Backfill compact specifications without changing inventory or older selectors. */
 export async function backfillBudgetSpecificationSelectors(){
  const manifest=await readManifest();
- const old=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,'budget-markets-v4/ready.json',null);
+ const old=await readIndex<CompressedBudgetDirectory|null>(manifest.generationId,'budget-markets-v5/ready.json',null);
  const directory:CompressedBudgetDirectory={version:3,generationId:manifest.generationId,markets:{}};
  for(const market of MARKETS){
-  const existing=old&&verifiedCompressedBudgetSelector(old,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,`budget-markets-v4/${market}.json`,null));
+  const existing=old&&verifiedCompressedBudgetSelector(old,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,`budget-markets-v5/${market}.json`,null));
   if(existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
@@ -2356,14 +2356,14 @@ export async function backfillBudgetSpecificationSelectors(){
   const rich=await enrichBudgetSpecifications(source,block=>readIndex(manifest.generationId,`budget-cards-v${source.version}/${block}.json`,{generationId:'',items:[] as CatalogSearchProjection[]}));
   const compressed=compressedBudgetSelectors(splitPackedBudgetSelectors(rich)),part=compressed.parts.get(market);
   if(!part)throw Error('budget_specification_partition_missing');
-  const path=`budget-markets-v4/${market}.json`;
+  const path=`budget-markets-v5/${market}.json`;
   await writeJsonAtomic(generationPath(manifest.generationId,`indexes/${path}`),part);
   if(!verifiedCompressedBudgetSelector(compressed.directory,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,path,null)))throw Error('budget_specification_verification_failed');
   directory.markets[market]=compressed.directory.markets[market];
  }
  const current=await getJsonStorage().readJson<CatalogManifest>('catalog/manifest.json',{} as CatalogManifest);
  if(current.generationId!==manifest.generationId)throw Error('budget_specification_publication_changed');
- await writeJsonAtomic(generationPath(manifest.generationId,'indexes/budget-markets-v4/ready.json'),directory);
+ await writeJsonAtomic(generationPath(manifest.generationId,'indexes/budget-markets-v5/ready.json'),directory);
  resetCatalogReadCachesForTests();return directory;
 }
 /** Background warmup shares the same dependency checks and exact calculator as requests. */
