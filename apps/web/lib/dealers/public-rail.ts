@@ -22,7 +22,7 @@ export function publicRail(s: DealerShowcase, city = "") {
             price: c.totalRub,
             calculation: offerAvailability(o)==="order" ? {
               showcase: {dealerId:s.dealerId, pricing:s.pricing, offices:[]},
-              offer: (({availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
+              offer: (({servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
             } : undefined,
             city: c.city,
             daysFrom: c.daysFrom,

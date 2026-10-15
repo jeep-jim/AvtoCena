@@ -362,3 +362,36 @@ test("public rail uses selected city and exposes only calculation fields", () =>
  assert.deepEqual(moscow.calculation.showcase.offices,[]);
  assert.equal(publicRail(s,"Несуществующий город")[0].price,null);
 });
+
+test('per-car services survive normalization and isolate all three amounts', () => {
+  const s=fixture();
+  const baseline=calculateSpecial(s,s.offers[0]);
+  assert.equal(baseline.complete,true);
+  s.offers.push({...structuredClone(s.offers[0]),id:'other-car'});
+  s.offers[0].servicesOverride={commissionRub:0,documentsRub:12000,deliveryMarkupRub:10000};
+  const saved=normalizeShowcase(JSON.parse(JSON.stringify(s)),s.dealerId,1);
+  assert.deepEqual(saved.offers[0].servicesOverride,s.offers[0].servicesOverride);
+  const custom=calculateSpecial(saved,saved.offers[0]);
+  saved.specialsEnabled=true;
+  const rail=publicRail(saved,custom.city)[0];
+  assert.equal(calculateSpecial(rail.calculation!.showcase,rail.calculation!.offer,custom.city).totalRub,custom.totalRub);
+  assert.equal(custom.lines.find(l=>l.id==='commission')?.amountRub,0);
+  assert.equal(custom.lines.find(l=>l.id==='documents')?.amountRub,12000);
+  const difference=10000-s.pricing.deliveryMarkupRub-s.pricing.commissionRub+12000-s.pricing.documentsRub;
+  assert.equal(custom.totalRub,baseline.totalRub!+difference);
+  assert.equal(calculateSpecial(saved,saved.offers[1]).totalRub,baseline.totalRub);
+  saved.pricing.commissionRub+=10000;
+  assert.equal(calculateSpecial(saved,saved.offers[0]).totalRub,custom.totalRub);
+  assert.equal(calculateSpecial(saved,saved.offers[1]).totalRub,baseline.totalRub!+10000);
+  saved.offers[0].servicesOverride=null;
+  const reset=normalizeShowcase(JSON.parse(JSON.stringify(saved)),s.dealerId,2);
+  assert.equal(calculateSpecial(reset,reset.offers[0]).totalRub,baseline.totalRub!+10000);
+});
+
+test('per-car service values obey the same validation limits as company services',()=>{
+  for(const bad of [-1,10000001,'not-a-price']) {
+    const s=fixture();
+    s.offers[0].servicesOverride={commissionRub:bad as number,deliveryMarkupRub:0,documentsRub:0};
+    assert.throws(()=>normalizeShowcase(s,s.dealerId,1));
+  }
+});

@@ -29,7 +29,9 @@ export type DeliveryTariff = {
   daysFrom: number;
   daysTo: number;
 };
+export type OfferServices = { deliveryMarkupRub: number; commissionRub: number; documentsRub: number };
 export type SpecialOffer = {
+  servicesOverride?: OfferServices | null;
   availability?: "order" | "stock";
   condition?: "new" | "used";
   priceRub?: number;
@@ -182,7 +184,7 @@ export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) 
 export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled">, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
 export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
 export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
-export type SpecialCalculationOffer = Pick<SpecialOffer, "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
+export type SpecialCalculationOffer = Pick<SpecialOffer, "servicesOverride" | "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
 export function calculateSpecial(
   s: Pick<DealerShowcase,"pricing"|"offices"|"dealerId">,
   o: SpecialCalculationOffer,
@@ -198,7 +200,7 @@ export function calculateSpecial(
     return {complete:errors.length===0,errors,rate:0,city:office?.city||"",daysFrom:undefined as number|undefined,daysTo:undefined as number|undefined,
       lines:[{id:"vehicle",title:"Цена автомобиля",amountRub:o.priceRub||0}],totalRub:errors.length?null:o.priceRub!};
   }
-  const p = s.pricing,
+  const p = {...s.pricing, ...o.servicesOverride},
     tariff = estimateDealerDelivery(p.originCity||'Бишкек',city,p.tariffs,true);
   const errors: string[] = [];
   const calibrationError=deliveryCalibrationError(p.originCity||"Бишкек",p.tariffs);
@@ -452,6 +454,11 @@ export function normalizeShowcase(
       throw Error("Неверный идентификатор автомобиля");
     return {
       id: o.id,
+      servicesOverride: o.servicesOverride == null ? null : {
+        deliveryMarkupRub: number(o.servicesOverride.deliveryMarkupRub, 0, 1e7),
+        commissionRub: number(o.servicesOverride.commissionRub, 0, 1e7),
+        documentsRub: number(o.servicesOverride.documentsRub, 0, 1e7),
+      },
       availability: o.availability === "stock" ? "stock" : "order",
       condition: o.availability === "stock" && o.condition === "used" ? "used" : "new",
       priceRub: number(o.priceRub ?? 0,0,1e9),

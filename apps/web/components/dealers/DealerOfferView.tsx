@@ -32,7 +32,7 @@ import {OfferPdfButton} from "@/components/catalog/OfferPdfButton";
 import { OfferCopyButton } from "@/components/catalog/OfferCopyButton";
 import type {DealerShowcase,SpecialOffer} from '@/lib/dealers/showcase-model';
 export type PublicOfferShowcase=Pick<DealerShowcase,"dealerId"|"citySlug"|"slug"|"name"|"logoLight"|"logoDark"|"profileEnabled"|"specialsEnabled"|"stockEnabled"|"pricing"|"offices"|"updatedAt">;
-export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false,canCopy=false,localCitySelection=false,canPdf=false,items=[],markets}:{id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;localCitySelection?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
+export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verified=false,canCopy=false,localCitySelection=false,canPdf=false,items=[],markets}:{editHref?:string;id:string;initialCity?:string;s:PublicOfferShowcase;o:SpecialOffer;preview?:boolean;verified?:boolean;canCopy?:boolean;localCitySelection?:boolean;canPdf?:boolean;items?:SpecialRailItem[];markets?:ReactNode}) {
   const globalCity=useSelectedCity();
   const privateCity=localCitySelection||initialCity!==undefined;
   const [quoteCity,setQuoteCity]=useState<string|null>(initialCity??null);
@@ -104,6 +104,7 @@ export function DealerOfferView({id,s,o,initialCity,preview=false,verified=false
             <header><p className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{offerAvailabilityLabel(o)} · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
             <div className="mt-5 min-w-0 overflow-hidden">
             <VehicleGallery
+              editor={editHref?<a href={editHref} className="ac-catalog-editor-trigger pointer-events-auto absolute right-3 top-3 rounded-xl bg-black/80 px-3 py-2 text-sm font-bold text-white">Редактировать объявление</a>:undefined}
               images={o.photos.map((p) => p.url)}
               title={title}
               offerId={id}
