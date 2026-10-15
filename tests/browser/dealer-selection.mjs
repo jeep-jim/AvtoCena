@@ -44,7 +44,7 @@ const css=await postcss([tailwindcss({content:['apps/web/components/**/*.tsx']})
 let shares=[];let delay=0;
 const server=http.createServer(async(req,res)=>{
  if(req.url==='/app.css'){res.setHeader('Content-Type','text/css');res.end(css.css);return;}
- if(req.url.startsWith('/fixture')){res.setHeader('Content-Type',req.url.endsWith('.css')?'text/css':'text/javascript');res.end(fs.readFileSync(path.join(out,req.url.slice(1))));return;}
+ if(/^\/[a-zA-Z0-9_-]+\.(?:js|css)$/.test(req.url)&&fs.existsSync(path.join(out,req.url.slice(1)))){res.setHeader('Content-Type',req.url.endsWith('.css')?'text/css':'text/javascript');res.end(fs.readFileSync(path.join(out,req.url.slice(1))));return;}
  if(req.url==='/api/share'){let body='';for await(const c of req)body+=c;shares.push(JSON.parse(body));await new Promise(r=>setTimeout(r,delay));res.setHeader('Content-Type','application/json');res.end(JSON.stringify({path:'/s/'+String(shares.length).padStart(16,'0')}));return;}
  if(req.url.startsWith('/api/')){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({count:0,rating:null,items:[]}));return;}
  res.setHeader('Content-Type','text/html');res.end('<html data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/app.css"><link rel="stylesheet" href="/fixture.css"></head><body><div id="root"></div><script type="module" src="/fixture.js"></script></body></html>');
