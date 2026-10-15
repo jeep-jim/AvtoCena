@@ -1,4 +1,6 @@
 "use client";
+import {DealerSelectionShare} from "./DealerSelectionShare";
+import {CITY_CHANGED_EVENT} from "@/lib/location/selected-city";
 import {DealerReviewCard} from './DealerReviewCard';
 import {PublicSheet} from '@/components/ui/PublicSheet';
 import {DealerSubscriptionButton} from './DealerSubscription';
@@ -24,7 +26,7 @@ function Icon({name}:{name:string}){
 }
 function RatingIcon(){return <svg className="dealer-rating-icon" width="24" height="24" viewBox="0 0 28 28" aria-hidden="true"><path d="m13 5 2.8 6 6.5.9-4.7 4.6 1.1 6.5-5.7-3-5.8 3 1.1-6.5L3.6 12l6.5-.9Z" fill="#f7bf27"/><path d="m23 0 1.2 3.6L28 5l-3.8 1.3L23 10l-1.3-3.7L18 5l3.7-1.4Z" fill="#4f9fee"/><path d="m4 20 1.1 2.8L8 24l-2.9 1.1L4 28l-1.1-2.9L0 24l2.9-1.2Z" fill="#26b87b"/></svg>;}
 function OfferIcon(){return <svg className="dealer-offer-icon" width="28" height="24" viewBox="0 0 32 26" aria-hidden="true"><path d="m5 12 4-7h13l5 7 3 2v7H2v-7Z" fill="#ee424d"/><path d="m10 7-3 6h17l-4-6Z" fill="#e5eef5"/><path d="M16 7v6" stroke="#ee424d" strokeWidth="2"/><path d="M4 16h4m17 0h3" stroke="#fff" strokeWidth="2"/><circle cx="8" cy="21" r="4" fill="#20242b"/><circle cx="24" cy="21" r="4" fill="#20242b"/><circle cx="8" cy="21" r="1.5" fill="#aab4c0"/><circle cx="24" cy="21" r="1.5" fill="#aab4c0"/></svg>;}
-export function DealerProfileContent({s,preview=false,items=[],catalog,verified=false,editorSection}:{s:PublicDealerProfile;preview?:boolean;items?:SpecialRailItem[];catalog?:React.ReactNode;verified?:boolean;editorSection?:string}){
+export function DealerProfileContent({s,preview=false,items=[],catalog,verified=false,editorSection,canShareSelection=false,initialSelectionQuery=''}:{s:PublicDealerProfile;preview?:boolean;items?:SpecialRailItem[];catalog?:React.ReactNode;verified?:boolean;editorSection?:string;canShareSelection?:boolean;initialSelectionQuery?:string}){
  const [tab,setTab]=useState<Tab>('cars'),[shareStatus,setShareStatus]=useState('');
  const [leadOpen,setLeadOpen]=useState(false);
  const [canModerateReviews,setCanModerateReviews]=useState(false),[canReplyReviews,setCanReplyReviews]=useState(false);
@@ -41,7 +43,7 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
  useEffect(()=>{
   if(editorSection)return;
   const navigate=(scroll:boolean)=>{const hash=location.hash;const value=hash==='#offices'?'about':hash.slice(1);if(['','cars','photos','about','specials','reviews'].includes(value)){setTab((value==='specials'?'cars':value||'cars') as Tab);if(scroll&&value==='specials')requestAnimationFrame(()=>specialSection.current?.scrollIntoView({block:'start'}));}};
-  navigate(false);const initial=requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'instant'}));
+  navigate(false);window.dispatchEvent(new Event(CITY_CHANGED_EVENT));const initial=requestAnimationFrame(()=>{if(location.hash==='#catalog')document.getElementById('catalog')?.scrollIntoView({block:'start'});else window.scrollTo({top:0,behavior:'instant'});});
   const changed=()=>navigate(true);window.addEventListener('hashchange',changed);return()=>{cancelAnimationFrame(initial);window.removeEventListener('hashchange',changed);};
  },[s.dealerId,editorSection]);
  useEffect(()=>{const el=top.current;if(!el)return;const header=el.ownerDocument.querySelector('.ac-public-header');if(!header)return;const measure=()=>el.style.setProperty('--dealer-header-height',`${header.getBoundingClientRect().height}px`);measure();const observer=new ResizeObserver(measure);observer.observe(header);return()=>observer.disconnect();},[]);
@@ -74,12 +76,13 @@ export function DealerProfileContent({s,preview=false,items=[],catalog,verified=
   <div className="dealer-profile-body"><section ref={body} className="dealer-tab-content" aria-label={tab==='cars'?'Каталог АвтоЦены':tab==='specials'?'Предложения дилера':tab==='photos'?'Фотографии компании':tab==='reviews'?'Отзывы о дилере':'Контакты компании'}>
    <div>
     {photos.length>0&&<div className="dealer-stories"><BuyerGallery title="Наши фото и Автовыдачи" dealerName={s.name} images={photos.map(p=>p.url)} autoScroll={false}/></div>}
-    <div ref={specialSection} className="dealer-main-offers"><SpecialRail heading={s.specialHeading} items={items}/></div>{s.catalogMarkets.length>0&&catalog}
+    <div ref={specialSection} className="dealer-main-offers"><SpecialRail heading={s.specialHeading} items={items}/></div>{s.catalogMarkets.length>0&&<div id="catalog" style={{scrollMarginTop:'90px'}}>{catalog}</div>}
    </div>
 
   </section></div>
   <footer className="dealer-profile-footer"><DealerRequisites value={s.requisites}/></footer>
   </div>
+  {canShareSelection&&!preview&&!editorSection&&<DealerSelectionShare dealerId={s.dealerId} initialQuery={initialSelectionQuery}/>}
   <nav className="dealer-dock" aria-label="Быстрое меню дилера"><button type="button" aria-pressed={tab==='cars'||tab==='specials'} onClick={()=>section('cars')}><Icon name="cars"/><span>Каталог</span></button><button type="button" aria-pressed={tab==='photos'} onClick={()=>section('photos')}><Icon name="photos"/><span>Медиа</span></button><button type="button" aria-pressed={tab==='about'} onClick={()=>section('about')}><Icon name="pin"/><span>Адреса</span></button><button type="button" aria-pressed={tab==='reviews'} onClick={()=>section('reviews')}><Star size={22}/><span>Отзывы</span></button><button type="button" className="dealer-dock-request" onClick={()=>setLeadOpen(true)}><Icon name="message"/><span>Заявка</span></button></nav>
   {['photos','about','reviews'].includes(tab)&&<PublicSheet title={tab==='photos'?'Медиа':tab==='about'?'Адреса':'Отзывы'} onClose={()=>setTab('cars')} ownerDocument={top.current?.ownerDocument}><div className="dealer-profile dealer-drawer-content">   {tab==='reviews'&&<section className="dealer-reviews-panel"><header><div><p className="dealer-eyebrow">Рейтинг компании</p><h2>Отзывы о {s.name}</h2></div><div className="dealer-rating-summary"><RatingIcon/><strong>{reviews.rating??'—'}</strong><span>{reviews.count?`Отзывов: ${reviews.count}`:"Оценок пока нет"}</span></div></header><article className="dealer-welcome-review"><div className="dealer-welcome-heading"><span className="dealer-welcome-logo">{logo}</span><div><strong>{s.name}</strong><span>Сообщение компании</span></div>{verified&&<BadgeCheck size={22}/>}</div><h3>Здравствуйте!</h3><p>Спасибо, что выбираете нас! Нам важно ваше мнение. Расскажите о своём опыте — ваш отзыв поможет другим клиентам выбрать компанию, а нам — улучшить работу.</p></article><div>{reviews.items.map(r=><DealerReviewCard key={r.id} review={r} dealerId={s.dealerId} dealerName={s.name} canReply={canReplyReviews} canDelete={canModerateReviews} onChanged={()=>{fetch(`/api/dealers/${encodeURIComponent(s.dealerId)}/reviews`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(setReviews).catch(()=>{});}}/>)}</div><div className="dealer-review-eligibility"><div aria-hidden="true">{[1,2,3,4,5].map(n=><Star key={n}/>)}</div><p>Оценку и отзыв можно оставить после подтверждения подписанного договора.</p><a href="/account">Перейти в личный кабинет →</a></div></section>}
    {tab==='about'&&<section className="dealer-sheet dealer-contact-sheet">
