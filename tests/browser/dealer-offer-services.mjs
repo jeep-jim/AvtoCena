@@ -123,7 +123,7 @@ try {
     const {base,...value}=route.request().postDataJSON();saved={...value,version:value.version+1};console.log('SAVE',JSON.stringify(saved.offers?.map(o=>({id:o.id,servicesOverride:o.servicesOverride}))),saved.pricing?.commissionRub);
     return route.fulfill({json:saved});
    }
-   return route.fulfill({json:{total:0,items:[]}});
+   return route.fulfill({json:{total:0,items:[],models:[],choices:[]}});
   });
   await page.goto(origin);
   await page.evaluate(()=>{
