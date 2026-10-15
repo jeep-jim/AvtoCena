@@ -68,7 +68,7 @@ try{for(const width of [390,1440]){
  }}
  await page.evaluate(()=>window.scrollTo(0,900));await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
  const filterForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
- await filterForm.waitFor({state:'visible'});if(width===390)assert.equal(await send.isVisible(),false);
+ await filterForm.waitFor({state:'visible'});if(width===390){await send.waitFor({state:'hidden'});assert.equal(await send.isVisible(),false);}
  const budget=filterForm.getByRole('textbox',{name:'Цена: до',exact:true});await budget.fill('3000000');await budget.press('Tab');
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='3000000');assert.equal(new URL(page.url()).pathname,'/test/dealer');
  if(width===390){await page.keyboard.press('Escape');await send.waitFor({state:'visible'});assert.ok(await page.evaluate(()=>window.scrollY)>500);}
