@@ -110,9 +110,9 @@ function allowWithDocsCookie(request: NextRequest) {
 async function routeRequest(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Redirect before React streams the old auction section. This keeps the
-  // response an actual HTTP redirect for browsers, crawlers and release checks.
-  if ((request.method === "GET" || request.method === "HEAD") &&
+  // Only explicit stock requests redirect to Green Corner. Paid auctions use
+  // their own live section and must not inherit the retired-source redirect.
+  if ((request.method === "GET" || request.method === "HEAD") && request.nextUrl.searchParams.get("stock") === "green" &&
       (pathname === "/cars/japan" || (pathname === "/cars" && request.nextUrl.searchParams.get("market")?.toLowerCase() === "japan"))) {
     const url = request.nextUrl.clone();
     url.pathname = "/cars/green";
