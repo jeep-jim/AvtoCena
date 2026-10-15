@@ -1,3 +1,4 @@
+import {catalogBodyType} from './pickup-body';
 import {BudgetEligibilityCache} from "./budget-eligibility-cache";
 import {compressedBudgetSelectors,verifiedCompressedBudgetSelector,type CompressedBudgetDirectory,type CompressedBudgetSelector} from './budget-selector-codec';
 import {enrichBudgetSpecifications} from './budget-specification-index';
@@ -203,7 +204,7 @@ export type CatalogSearchProjection = {
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: VehicleOffer["calculationSnapshot"]; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; sourceGroup?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { offer=applyCatalogEditorial(offer); const { operational, vin, frameNumber, sourceId, ...dto } = safePublicPricing(offer) as any; return { ...dto, bodyType:catalogBodyType(offer), catalogEntryKind:isChinaModelSpecification(offer)?"model_variant":undefined, cardImageUrl: dto.cardImageUrl ? protectedPhotoUrl(dto.cardImageUrl, offer.market) : undefined, japanExportRestriction: assessJapanExportRestriction(offer), images: offer.images.map((img) => ({ id: img.id, url: protectedPhotoUrl(img.url, offer.market), width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // Source adapters may retain complete HTML/JSON responses in operational.raw
   // for diagnostics. Public generations are immutable and were duplicating that
@@ -430,7 +431,7 @@ export function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchPro
     inventorySourceDate:catalogInventoryDate(offer),grossVehicleWeightKg:catalogGrossVehicleWeightKg(offer),vehicleCategory:offer.vehicleCategory,
     catalogPricingMode: offer.catalogPricingMode, sellerPriceRub: offer.sellerPriceRub, catalogKind: offer.catalogKind,
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
-    totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
+    totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: catalogBodyType(offer),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), japanExportRestriction: assessJapanExportRestriction(offer), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
@@ -499,7 +500,7 @@ function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleO
   const { sourceGroup: _sourceGroup, ...publicRow } = row;
   const imageUrl = protectedPhotoUrl(String(row.cardImageUrl || ""), row.market);
   return {
-    ...publicRow, catalogEntryKind:isChinaModelSpecification(row)?"model_variant":undefined, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
+    ...publicRow, bodyType:catalogBodyType(row), catalogEntryKind:isChinaModelSpecification(row)?"model_variant":undefined, cardImageUrl: imageUrl, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
     sourcePrice: row.sourcePrice ?? null, sourceCurrency: row.sourceCurrency ?? null,
     images: imageUrl ? [{ id: "", url: imageUrl, width: undefined, height: undefined, size: 0, mimeType: "image/jpeg" }] : [],
     firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",
@@ -831,7 +832,7 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
     if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
   }
   if (!matchesFuelFilter(row.fuel, params.fuel)) return false;
-  if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
+  if (params.bodyType && lower(catalogBodyType(row)) !== lower(params.bodyType)) return false;
   if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
   if (params.drive && lower(row.drive) !== lower(params.drive)) return false;
   if (!matchesAuctionGrades(row.auctionGrade, params.auctionGrade)) return false;
@@ -2089,7 +2090,7 @@ async function readBudgetSelection(params:CatalogSearchParams){
    eligible.has(row[5].id) &&
    (!params.market || params.market==='any' || same(row[0],params.market))
    && matchesFuelFilter(row[5].fuel,params.fuel)
-   && (!params.bodyType || same(row[5].bodyType,params.bodyType))
+   && (!params.bodyType || same(catalogBodyType(row[5]),params.bodyType))
    && (!params.transmission || same(row[5].transmission,params.transmission))
    && (!params.drive || same(row[5].drive,params.drive)) &&
    (!params.yearFrom || Number(row[5].year||0)>=params.yearFrom) && (!params.yearTo || Number(row[5].year||0)<=params.yearTo)
@@ -2250,6 +2251,19 @@ const packedBudgetDirectoryCache=new DetailReadCache<PackedBudgetDirectory|null>
 const compressedBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 const specificationBudgetDirectoryCache=new DetailReadCache<CompressedBudgetDirectory|null>({maxEntries:1,maxBytes:8192,ttlMs:300_000,concurrency:1});
 async function readBudgetCountIndex(generationId:string,market?:string){
+ if(!market || market==='any'){
+  const directory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v4/ready.json',null)).catch(()=>null);
+  if(directory?.generationId===generationId && Object.keys(directory.markets).length){
+   const merged=await (async()=>{
+    const parts=await mapWithConcurrency(Object.keys(directory.markets),2,name=>readBudgetCountIndex(generationId,name));
+    if(parts.some(part=>!part || part.bodyFilterVersion!==1))return null;
+    const valid=parts as BudgetCountIndex[];
+    return {...valid[0],sourceRows:valid.reduce((n,part)=>n+part.sourceRows,0),rows:valid.flatMap(part=>part.rows),otherRows:valid.flatMap(part=>part.otherRows||[]),pricingChunks:Object.assign({},...valid.map(part=>part.pricingChunks||{}))};
+   })().catch(()=>null);
+   if(merged)return merged;
+  }
+ }
+
  if(market && MARKETS.includes(market as CatalogMarket)){
   const specificationDirectory=await specificationBudgetDirectoryCache.get(generationId,()=>readIndex<CompressedBudgetDirectory|null>(generationId,'budget-markets-v4/ready.json',null)).catch(()=>null);
   if(specificationDirectory?.generationId===generationId && specificationDirectory.markets?.[market]){
@@ -2327,7 +2341,7 @@ export async function backfillBudgetSpecificationSelectors(){
  const directory:CompressedBudgetDirectory={version:3,generationId:manifest.generationId,markets:{}};
  for(const market of MARKETS){
   const existing=old&&verifiedCompressedBudgetSelector(old,market,await readIndex<CompressedBudgetSelector|null>(manifest.generationId,`budget-markets-v4/${market}.json`,null));
-  if(existing?.specificationFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
+  if(existing?.specificationFilterVersion===1 && existing.bodyFilterVersion===1){directory.markets[market]=old!.markets[market];continue;}
   const source=await readBudgetCountIndex(manifest.generationId,market);
   if(!source||source.generationId!==manifest.generationId||source.version!==3)throw Error('budget_specification_source_missing');
   const hasMarketRows=[...source.rows,...(source.otherRows||[])].some(row=>row[0]===market);
