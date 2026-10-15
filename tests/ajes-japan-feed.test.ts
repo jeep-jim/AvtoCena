@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {gzipSync} from 'node:zlib';
 import {ajesQuery,ajesLot,ajesImageUrl} from '../apps/web/lib/catalog/ajes-query';
 import {createAjesClient} from '../apps/web/lib/catalog/ajes-client';
 import {reserveAjesRequest} from '../apps/web/lib/catalog/ajes-quota';
@@ -13,6 +14,9 @@ test('query grammar rejects SQL/unknown fields and bounds pages, ages and table'
   const q=ajesQuery({make:'Toyota',model:'C-HR',page:2,pageSize:24});
   assert.match(q.sql,/status='Sold' and finish>0/);assert.match(q.sql,/auction_type!=1/);assert.match(q.sql,/limit 24,24$/);assert.match(q.sql,/marka_name='TOYOTA'/);
   assert.equal(ajesQuery({id:'abc',table:'stats'}).sql,"select * from stats where id='abc'");
+  const extended=ajesQuery({lotNumber:'001234',chassis:'LA250S',engineFrom:600,engineTo:1500,mileageFrom:0,mileageTo:50000});
+  assert.match(extended.sql,/lot='001234'/);assert.match(extended.sql,/kuzov='LA250S'/);assert.match(extended.sql,/eng_v>=600 and eng_v<=1500/);
+  for(const q of [{lotNumber:"1'"},{lotNumber:123},{engineFrom:2000,engineTo:1000},{mileageFrom:100,mileageTo:0}])assert.throws(()=>ajesQuery(q));
 });
 test('sold price is FINISH only; USS, old, unsold and missing prices never become offers',()=>{
   for(const change of [{AUCTION_TYPE:'1'},{YEAR:'2009'},{STATUS:'Not sold'},{FINISH:'0',AVG_PRICE:'1000000'},{FINISH:'garbage'},{ID:"x'"}])assert.equal(ajesLot({...row,...change},'stats',false),null);
@@ -43,6 +47,25 @@ test('wrong detail identity, oversized response and invalid JSON fail closed',as
     const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>response});
     await assert.rejects(client.read({id:'test123'},'127.0.0.1'),/ajes_(identity_mismatch|invalid_response|response_too_large)/);
   }
+});
+test('gzip wrapper and already decoded fetch responses both work with bounded decompression',async()=>{
+  for(const body of [gzipSync(JSON.stringify([row])),Buffer.from(JSON.stringify([row]))]){
+    const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async(url)=>{assert.equal(new URL(String(url)).pathname,'/gzip/');return new Response(body);}});
+    assert.equal((await client.read({id:'test123'},'127.0.0.1')).items.length,1);
+  }
+  const bomb=gzipSync(' '.repeat(3*1024*1024));
+  const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async()=>new Response(bomb)});
+  await assert.rejects(client.read({},'127.0.0.1'),/invalid_response/);
+});
+test('only opened valid details persist; fresh saved detail survives process restart; disabled source cannot read it',async()=>{
+  let saved:any=null,calls=0,writes=0,enabled=true;
+  const deps={password:()=> 'test',assertEnabled:async()=>{if(!enabled)throw Error('disabled');},reserve:async()=>{},readDetail:async()=>saved,saveDetail:async(_t:any,_id:any,value:any)=>{saved=value;writes++;},fetcher:async()=>{calls++;return new Response(JSON.stringify([row]));}};
+  await createAjesClient(deps).read({},'127.0.0.1');assert.equal(writes,0);
+  await createAjesClient(deps).read({id:'test123'},'127.0.0.1');assert.equal(writes,1);
+  await createAjesClient(deps).read({id:'test123'},'127.0.0.1');assert.equal(calls,2);
+  saved.observedAt=new Date(Date.now()-31*60000).toISOString();
+  await createAjesClient(deps).read({id:'test123'},'127.0.0.1');assert.equal(calls,3);
+  enabled=false;await assert.rejects(createAjesClient(deps).read({id:'test123'},'127.0.0.1'),/disabled/);assert.equal(calls,3);
 });
 function storage(){
  const objects=new Map<string,{value:any;etag:number}>();

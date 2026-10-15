@@ -1,8 +1,8 @@
 /** Supplier SQL is generated here only; callers cannot supply SQL or column names. */
 export type AjesTable = 'stats' | 'main';
 export class AjesInputError extends Error { constructor() { super('ajes_invalid_query'); } }
-export type AjesQuery = {table?: AjesTable; id?: string; make?: string; model?: string; yearFrom?: number; yearTo?: number; mileageTo?: number; page?: number; pageSize?: number};
-const keys = new Set(['table','id','make','model','yearFrom','yearTo','mileageTo','page','pageSize']);
+export type AjesQuery = {table?: AjesTable; id?: string; make?: string; model?: string; chassis?:string; lotNumber?:string; yearFrom?: number; yearTo?: number; mileageFrom?:number; mileageTo?: number; engineFrom?:number; engineTo?:number; page?: number; pageSize?: number};
+const keys = new Set(['table','id','make','model','chassis','lotNumber','yearFrom','yearTo','mileageFrom','mileageTo','engineFrom','engineTo','page','pageSize']);
 function integer(value: unknown, fallback: number, min: number, max: number) {
   if (value === undefined) return fallback;
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < min || value > max) throw new AjesInputError();
@@ -31,7 +31,14 @@ export function ajesQuery(input: unknown) {
   if (table==='stats') where.push("status='Sold'",'finish>0');
   if (make) where.push(`marka_name='${make}'`);
   if (model) where.push(`model_name='${model}'`);
-  if (q.mileageTo!==undefined) where.push(`mileage<=${integer(q.mileageTo,0,0,2000000)}`);
+  if(q.chassis!==undefined)where.push(`kuzov='${name(q.chassis)}'`);
+  if(q.lotNumber!==undefined){if(typeof q.lotNumber!=='string'||!/^\d{1,10}$/.test(q.lotNumber))throw new AjesInputError();where.push(`lot='${q.lotNumber}'`);}
+  for(const [from,to,column,max] of [['mileageFrom','mileageTo','mileage',2000000],['engineFrom','engineTo','eng_v',20000]] as const){
+    const low=integer(q[from],0,0,max),high=integer(q[to],max,0,max);
+    if(low>high)throw new AjesInputError();
+    if(q[from]!==undefined)where.push(`${column}>=${low}`);
+    if(q[to]!==undefined)where.push(`${column}<=${high}`);
+  }
   return {table,kind:'list' as const,sql:`select * from ${table} where ${where.join(' and ')} order by auction_date desc, id asc limit ${(page-1)*pageSize},${pageSize}`,page,pageSize};
 }
 

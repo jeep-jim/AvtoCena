@@ -8,4 +8,6 @@ export const ajesClient=createAjesClient({
   password:()=>process.env.AJES_API_PASSWORD,
   assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),
   reserve:table=>reserveAjesRequest(getJsonStorage(),table),
+  readDetail:(table,id)=>getJsonStorage().readJson(`catalog/partner-cache/ajes/${table}/${id}.json`,null),
+  saveDetail:(table,id,value)=>getJsonStorage().writeJson(`catalog/partner-cache/ajes/${table}/${id}.json`,value),
 });

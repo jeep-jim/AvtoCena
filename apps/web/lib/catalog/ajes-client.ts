@@ -1,9 +1,10 @@
 import {isIP} from 'node:net';
+import {gunzipSync} from 'node:zlib';
 import {DetailReadCache} from './detail-read-cache';
 import {ajesQuery,ajesLot,type AjesTable} from './ajes-query';
 
 export class AjesUnavailable extends Error {constructor(public reason:string){super(`ajes_${reason}`);}}
-type Dependencies={password:()=>string|undefined; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch};
+type Dependencies={password:()=>string|undefined; assertEnabled:()=>Promise<void>; reserve:(table:AjesTable)=>Promise<void>; fetcher?:typeof fetch; readDetail?:(table:AjesTable,id:string)=>Promise<any|null>; saveDetail?:(table:AjesTable,id:string,value:any)=>Promise<void>};
 export function createAjesClient(deps:Dependencies) {
   const cache=new DetailReadCache<any>({maxEntries:300,maxBytes:16*1024*1024,ttlMs:30*60*1000,concurrency:2});
   return {
@@ -15,8 +16,13 @@ export function createAjesClient(deps:Dependencies) {
       if(!password)throw new AjesUnavailable('not_configured');
       return cache.get(query.sql,async()=>{
         await deps.assertEnabled(); // Recheck after waiting for concurrency slot.
+        if(query.kind==='detail'&&deps.readDetail){
+          const saved=await deps.readDetail(query.table,query.id!);
+          const age=Date.now()-Date.parse(saved?.observedAt||'');
+          if(age>=0&&age<30*60*1000&&saved?.items?.length===1&&saved.items[0].id===query.id&&saved.items[0].table===query.table)return saved;
+        }
         await deps.reserve(query.table);
-        const url=new URL('http://87.242.72.57/api/');
+        const url=new URL('http://87.242.72.57/gzip/');
         url.search=new URLSearchParams({ip:clientIp,json:'',code:password,sql:query.sql}).toString();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
         try {
@@ -28,12 +34,21 @@ export function createAjesClient(deps:Dependencies) {
           const chunks:Uint8Array[]=[];let bytes=0;
           while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>2*1024*1024){await reader.cancel();throw new AjesUnavailable('response_too_large');}chunks.push(value);}
           let rows:unknown;
-          try{rows=JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw new AjesUnavailable('invalid_response');}
+          try{
+            const body=Buffer.concat(chunks);
+            // Node fetch usually decompresses Content-Encoding automatically. The
+            // provider can also return a gzip body without that header: inspect magic.
+            const decoded=body[0]===0x1f&&body[1]===0x8b?gunzipSync(body,{maxOutputLength:2*1024*1024}):body;
+            rows=JSON.parse(decoded.toString('utf8'));
+          }catch{throw new AjesUnavailable('invalid_response');}
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
-          return {items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
+          const result={items,page:query.page,pageSize:query.pageSize,received:rows.length,rejected:rows.length-items.length,observedAt:new Date().toISOString(),
             quota:{counter:quotaNumber(response.headers.get('api-counter')),limit:quotaNumber(response.headers.get('api-limit')),remaining:quotaNumber(response.headers.get('api-rest'))}};
+          // Only explicitly opened, accepted details; list responses never populate a database.
+          if(query.kind==='detail'&&items.length===1&&deps.saveDetail)await deps.saveDetail(query.table,query.id!,result);
+          return result;
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
           if(error instanceof AjesUnavailable)throw error;
