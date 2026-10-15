@@ -21,20 +21,43 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Bundle read-only publication lock check
+      - name: Bundle bounded supplier response check
         run: |
           node --input-type=module <<'JS'
           import {build} from 'esbuild';
-          await build({stdin:{contents:"import {getJsonStorage} from './apps/web/lib/data'; async function main(){const x=await getJsonStorage().readJson('catalog/import-lock.json',null);console.log('PUBLICATION_LOCK',JSON.stringify({locked:Boolean(x&&Date.parse(x.lockedUntil)>Date.now()),until:x?.lockedUntil,operation:/^[a-zA-Z0-9_-]+$/.test(x?.operationType||'')?x.operationType:'other'}));} main().catch(()=>console.log('PUBLICATION_LOCK unavailable'));",resolveDir:process.cwd()},outfile:'/tmp/publication-lock.cjs',bundle:true,platform:'node',format:'cjs'});
+          await build({stdin:{contents:`import {ajesPassword} from './apps/web/lib/catalog/ajes-settings'; import {createAjesClient} from './apps/web/lib/catalog/ajes-client'; import {assertCollectionEnabled} from './apps/web/lib/catalog/collection-controls'; import {reserveAjesRequest} from './apps/web/lib/catalog/ajes-quota'; import {getJsonStorage} from './apps/web/lib/data'; import {gunzipSync} from 'node:zlib'; async function main(){ const client=createAjesClient({password:ajesPassword,assertEnabled:()=>assertCollectionEnabled('ajes_japan_feed'),reserve:t=>reserveAjesRequest(getJsonStorage(),t),fetcher:async(...args)=>{const r=await fetch(...args); let b=Buffer.from(await r.clone().arrayBuffer());if(b[0]===31&&b[1]===139)b=gunzipSync(b);let d;try{d=JSON.parse(b.toString())}catch{}const e=String(d?.error||d?.ERROR||d?.message||'').toLowerCase();console.log('SUPPLIER_SHAPE',JSON.stringify({status:r.status,array:Array.isArray(d),rows:Array.isArray(d)?d.length:null,error:Boolean(e),ip:/ip|address/.test(e),password:/code|password/.test(e),sql:/sql|query|select/.test(e),limit:/limit|quota/.test(e),denied:/denied|access|allow|block/.test(e),country:/country|region/.test(e)}));return r;}});const r=await client.read({table:'stats',make:'HONDA',pageSize:24},process.env.AJES_DIAG_IP||'');console.log('SUPPLIER_ACCEPTED',r.items.length)}main().catch(()=>console.log('SUPPLIER_CHECK failed'));`,resolveDir:process.cwd()},outfile:'/tmp/ajes-probe.cjs',bundle:true,platform:'node',format:'cjs',plugins:[{name:'server-only',setup(b){b.onResolve({filter:/^server-only$/},()=>({path:'empty',namespace:'empty'}));b.onLoad({filter:/.*/,namespace:'empty'},()=>({contents:''}));}}]});
           JS
-      - name: Read only sanitized Japan failure codes
+      - name: Check actual visitor address without retaining it
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REGCLOUD_SSH_KEY }}
         run: |
           set -euo pipefail
           umask 077
           key_file=$(mktemp)
-          trap 'rm -f "$key_file"' EXIT
           printf '%s\n' "$SSH_PRIVATE_KEY" > "$key_file"
           unset SSH_PRIVATE_KEY
-          ssh -i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts" root@151.248.113.177 'nginx -T 2>/dev/null | grep -E "real_ip|proxy_protocol|listen"; docker exec -i avtocena-production node; stat --printf="DEPLOY_UPLOAD_BYTES %s\n" /opt/avtocena/staging/incoming/38757025874-1/avtocena-image.tar.gz; ps -C docker -o etimes=,comm=; docker logs --since 10m avtocena-production 2>&1 | grep -Eo "^AJES_PUBLIC_FAILURE [a-z_]+$" | tail -20; true' < /tmp/publication-lock.cjs
+          opts=(-i "$key_file" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$GITHUB_WORKSPACE/docs/operations/regcloud-staging-known-hosts")
+          cat > /tmp/ajes-location.py <<'PYCODE'
+          import pathlib,sys,subprocess
+          p=pathlib.Path('/etc/nginx/conf.d/avtocena-prepare.conf')
+          block='  location = /__ajes_probe_93bc2cd6169b { add_header X-Ajes-Diagnostic-IP $remote_addr always; return 204; }\n'
+          before=p.read_text()
+          if sys.argv[1]=='add':
+              anchor='  location / {\n    limit_req zone='
+              assert before.count(anchor)==1 and block not in before
+              after=before.replace(anchor,block+anchor)
+          else:after=before.replace(block,'')
+          p.write_text(after)
+          try:subprocess.run(['nginx','-t'],check=True,capture_output=True)
+          except:
+              p.write_text(before)
+              raise
+          subprocess.run(['systemctl','reload','nginx'],check=True)
+          PYCODE
+          cleanup(){ ssh "${opts[@]}" root@151.248.113.177 'python3 - remove' < /tmp/ajes-location.py; rm -f "$key_file" /tmp/ajes-headers; }
+          trap cleanup EXIT
+          ssh "${opts[@]}" root@151.248.113.177 'python3 - add' < /tmp/ajes-location.py
+          curl --fail --silent --show-error --max-time 20 -D /tmp/ajes-headers -o /dev/null https://avtocena.com/__ajes_probe_93bc2cd6169b
+          client_ip=$(python3 -c 'import pathlib,re; s=pathlib.Path("/tmp/ajes-headers").read_text();m=re.search(r"(?im)^x-ajes-diagnostic-ip: ([0-9.]+)$",s);assert m;print(m[1])')
+          ssh "${opts[@]}" root@151.248.113.177 'python3 - remove' < /tmp/ajes-location.py
+          ssh "${opts[@]}" root@151.248.113.177 "docker exec -i -e AJES_DIAG_IP=$client_ip avtocena-production node" < /tmp/ajes-probe.cjs
