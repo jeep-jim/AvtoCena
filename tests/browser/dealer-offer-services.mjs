@@ -149,9 +149,11 @@ try {
   await toggle.scrollIntoViewIfNeeded();
   await page.screenshot({path:`${out}/${width}-services.png`});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  const resetSaved=page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().offers[1].servicesOverride===null);
   await toggle.click();
+  await resetSaved;
+  assert.equal(await toggle.getAttribute('aria-checked'),'false');
   assert.equal((await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue()).replace(/\s/g,''),'140000');
-  await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().offers[1].servicesOverride===null);
   await page.goto(origin+'?offer=stock');
   await page.getByLabel('Модель',{exact:true}).waitFor();
   assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'stock');
