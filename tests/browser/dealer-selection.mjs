@@ -60,6 +60,12 @@ try{for(const width of [390,1440]){
  await page.waitForFunction(()=>Math.abs(document.getElementById('catalog').getBoundingClientRect().top-90)<10);
  await send.click();await page.waitForFunction(()=>window.calls.length===1);const calls=await page.evaluate(()=>window.calls);const msg=typeof calls[0]==='string'?calls[0]:calls[0].text;assert.match(msg,/^Подборка вариантов по вашему запросу\nhttp:\/\/127\.0\.0\.1:\d+\/s\/[\w-]{16}$/);if(typeof calls[0]!=='string')assert.equal(calls[0].url,undefined);
  const target=new URL(shares.at(-1).path,origin);assert.equal(target.hash,'#catalog');assert.equal(target.searchParams.get('city'),'Новокузнецк');assert.equal(target.searchParams.get('budget'),'2500000');
+ if(width===390){for(const method of ['button','back']){
+  const beforeClose=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});return window.scrollY;});assert.ok(beforeClose>500);await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor();
+  await page.waitForFunction(()=>Boolean(history.state?.acOverlayStep));
+  if(method==='button')await page.getByRole('button',{name:'Применить фильтры',exact:true}).click();else await page.goBack();
+  await page.getByRole('dialog',{name:'Фильтры каталога'}).waitFor({state:'hidden'});await page.waitForFunction(y=>Math.abs(scrollY-y)<3,beforeClose);console.log(`close ${method}: restored ${beforeClose}px`);
+ }}
  await page.evaluate(()=>window.scrollTo(0,900));await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
  const filterForm=width===390?page.getByRole('dialog',{name:'Фильтры каталога'}):page.locator('.ac-catalog-filter-panel');
  await filterForm.waitFor({state:'visible'});if(width===390)assert.equal(await send.isVisible(),false);
@@ -70,9 +76,9 @@ try{for(const width of [390,1440]){
  const dockBox=await page.locator('[data-selection-dock]').boundingBox();assert.ok(dockBox&&dockBox.y>=0&&dockBox.y+dockBox.height<=901&&dockBox.x>=-1&&dockBox.x+dockBox.width<=width+1,JSON.stringify(dockBox));
  await page.screenshot({path:`${out}/${width}.png`});
  await page.getByRole('button',{name:'Скрыть панель подборки'}).click();assert.equal(await send.count(),0);if(width===390)assert.equal(await page.locator('.dealer-dock').isVisible(),true);
- await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&city=Казань',pending:false,filtersOpen:false}})));await send.waitFor();await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.match(shares.at(-1).path,/make=Honda/);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('city'),'Казань');
+ await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&city=Казань',pending:true,filtersOpen:false}})));await send.waitFor();await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.match(shares.at(-1).path,/make=Honda/);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('city'),'Казань');
  // Changing the selection during preparation must never send the old selection.
  delay=400;await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Honda&yearFrom=2024',pending:false,filtersOpen:false}})));await send.click();await page.evaluate(()=>window.dispatchEvent(new CustomEvent('avtocena:dealer-selection',{detail:{dealerId:'external',query:'make=Audi&yearFrom=2025',pending:false,filtersOpen:false}})));await page.getByText('Параметры изменились — поделитесь новой подборкой').waitFor();assert.equal(await page.evaluate(()=>window.calls.length),2);delay=0;
  await page.goto(origin+'/test/dealer?visitor=1&make=Audi&city=Новокузнецк&selection=1#catalog');await page.locator('#catalog').waitFor();assert.equal(await send.count(),0);assert.equal(await page.locator('[data-city]').textContent(),'Новокузнецк');assert.ok((await page.evaluate(()=>document.cookie)).includes(encodeURIComponent('Москва')));assert.deepEqual(errors,[]);console.log(`${width}: share, filters, city, anchor, dismissal, stale request and visitor visibility OK`);
- }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error((await page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}
+ }catch(error){await page.screenshot({path:`${out}/failure-${width}.png`,fullPage:true});console.error(await page.evaluate(()=>({scrollY,scrollHeight:document.documentElement.scrollHeight,viewport:innerHeight,body:document.body.style.cssText,restoration:history.scrollRestoration})));console.error((await page.locator('body').innerText()).slice(-3000));throw error;}finally{await page.close();}
 }}finally{await browser.close();server.close();}

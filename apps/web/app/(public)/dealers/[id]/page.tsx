@@ -2,7 +2,7 @@ import {selectionQuery} from '@/lib/dealers/selection-share';
 import {availableShowcase} from '@/lib/dealers/program-store';
 import {CatalogContent} from "@/components/catalog/CatalogContent";
 import {DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
-import {resolveDealerBrowsingContext} from "@/lib/dealers/resolve-browsing-context";
+import {browsingContextFromShowcase} from "@/lib/dealers/resolve-browsing-context";
 import {canManageDealer} from "@/lib/dealers/access";
 import {publicDealerProfile} from "@/lib/dealers/public-profile";
 import {publicRail} from "@/lib/dealers/public-showcase";
@@ -40,8 +40,9 @@ export default async function Page({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
-  let s = await readShowcase((await params).id);
-  const canShareSelection=await canManageDealer(await getCurrentUser(),(await params).id);
+  const id=(await params).id;
+  const [stored,canShareSelection]=await Promise.all([readShowcase(id),getCurrentUser().then(user=>canManageDealer(user,id))]);
+  let s=stored;
   const preview =
     (await searchParams).preview === "1" &&
     canShareSelection;
@@ -49,7 +50,7 @@ export default async function Page({
   if(!preview)s=await availableShowcase(s);
   if(!s.profileEnabled&&!preview)notFound();
   if(s.specialsEnabled||s.marketEnabled)s=await withDealerRate(s);
-  const dealer=await resolveDealerBrowsingContext(s.dealerId,preview);
+  const dealer=browsingContextFromShowcase(s,preview);
   const catalog=s.catalogMarkets.length&&dealer?<CatalogContent params={await searchParams} dealer={dealer} embedded/>:null;
   return (
     <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">

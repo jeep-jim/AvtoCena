@@ -16,7 +16,7 @@ async function calculate(o:SpecialOffer,city=''):Promise<MarketQuote>{
  }catch(e){return {...base,error:e instanceof Error?e.message:'Не удалось рассчитать автомобиль'};}
 }
 export async function withMarketQuotes(s:DealerShowcase){
- const offers=[];
- for(const o of s.offers)offers.push(o.availability==='market'?{...o,marketQuote:await quoteMarketOffer(o,o.defaultCity||s.pricing.baseCity)}:o);
+ // quoteMarketOffer already bounds calculation concurrency to four.
+ const offers=await Promise.all(s.offers.map(async o=>o.availability==='market'?{...o,marketQuote:await quoteMarketOffer(o,o.defaultCity||s.pricing.baseCity)}:o));
  return {...s,offers};
 }

@@ -1,3 +1,4 @@
+import {OverlayBackHistory} from '../../apps/web/components/layout/OverlayBackHistory';
 import React,{useEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {DealerProfileContent} from '../../apps/web/components/dealers/DealerProfileContent';
@@ -10,6 +11,6 @@ function Fixture(){
  const [initial,setInitial]=useState(()=>Object.fromEntries(new URLSearchParams(location.search)));const city=useSelectedCity();
  useEffect(()=>{const update=()=>setInitial(Object.fromEntries(new URLSearchParams(location.search)));window.addEventListener('fixture:navigate',update);return()=>window.removeEventListener('fixture:navigate',update);},[]);
  const staff=new URLSearchParams(location.search).get('visitor')!=='1';
- return <DealerBrowsingProvider dealer={dealer} profile><DealerProfileContent s={profile} canShareSelection={staff} initialSelectionQuery={new URLSearchParams(initial).toString()} catalog={<div className="dealer-shared-catalog"><CatalogFilters initial={initial} resultCount={12} facets={{makes:['Audi','Honda'],models:[{make:'Audi',model:'Q5'},{make:'Honda',model:'Fit'}],markets:['china','japan'],bodyTypes:[],transmissions:[],fuels:[],drives:[]}}/><p data-city>{city}</p><div style={{height:1400}}>Каталог: Audi Q5 — тестовое предложение</div></div>}/></DealerBrowsingProvider>;
+ return <DealerBrowsingProvider dealer={dealer} profile><OverlayBackHistory/><DealerProfileContent s={profile} canShareSelection={staff} initialSelectionQuery={new URLSearchParams(initial).toString()} catalog={<div className="dealer-shared-catalog"><CatalogFilters initial={initial} resultCount={12} facets={{makes:['Audi','Honda'],models:[{make:'Audi',model:'Q5'},{make:'Honda',model:'Fit'}],markets:['china','japan'],bodyTypes:[],transmissions:[],fuels:[],drives:[]}}/><p data-city>{city}</p><div style={{height:1400}}>Каталог: Audi Q5 — тестовое предложение</div></div>}/></DealerBrowsingProvider>;
 }
 createRoot(document.getElementById('root')!).render(<Fixture/>);
