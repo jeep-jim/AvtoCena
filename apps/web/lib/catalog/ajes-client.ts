@@ -52,7 +52,9 @@ export function createAjesClient(deps:Dependencies) {
         }catch(error){
           // Never propagate URLs, provider bodies, credentials or nested fetch causes to logs.
           if(error instanceof AjesUnavailable)throw error;
-          throw new AjesUnavailable('request_failed');
+          const code=(error as any)?.cause?.code;
+          const reason=controller.signal.aborted?'request_timeout':code==='UND_ERR_CONNECT_TIMEOUT'?'connect_timeout':'request_failed';
+          throw new AjesUnavailable(reason);
         }finally{clearTimeout(timer);}
       });
     },
