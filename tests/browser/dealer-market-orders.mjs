@@ -138,6 +138,8 @@ try {
   const toggled=page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().marketHomeEnabled===true);
   await page.getByRole('switch',{name:'Показывать на главной',exact:true}).click();await toggled;
   assert.equal(saved.marketEnabled,true);
+  await page.getByLabel('Цена продавца (инвойс)',{exact:true}).scrollIntoViewIfNeeded();
+  await page.screenshot({path:`${out}/${width}-price-fields.png`});
   await page.getByRole('tab',{name:'Новые все страны',exact:true}).scrollIntoViewIfNeeded();
   await page.screenshot({path:`${out}/${width}-market-form.png`});
   for(const [kind,label] of [['market','Новые все страны'],['order','Новые одна страна'],['stock','В наличии']]){
@@ -158,7 +160,7 @@ try {
   assert.equal(await rail.locator('h2').innerText(),'✨ Новые авто под заказ');
   assert.match(await rail.locator('h3').first().innerText(),/market2/);
   assert.equal(await page.locator('[data-site-block="specials"]').count(),1);assert.equal(await page.locator('[data-site-block="stock"]').count(),1);
-  if(width>1000){const a=await rail.boundingBox(),b=await page.locator('[data-site-block="stock"]').boundingBox();assert.ok(a.y>b.y);}
+  if(width>1000){const a=await rail.boundingBox(),b=await page.locator('[data-site-block="stock"]').boundingBox();assert.ok(a.y>b.y);const newCard=await rail.locator('a.ac-special-card').first().boundingBox(),oldCard=await page.locator('[data-site-block="stock"] a.ac-special-card').first().boundingBox();assert.ok(Math.abs(newCard.width-oldCard.width)<4);}
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.screenshot({path:`${out}/${width}-three-rails.png`});
   assert.deepEqual(errors,[]);await page.close();console.log(width,'market fields, independent visibility, three-mode ordering, reload, third rail OK');
