@@ -1,4 +1,5 @@
 "use client";
+import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
 import {SelectedFilterChip} from "./SelectedFilterChip";
 import {StickyCatalogControls} from "./StickyCatalogControls";
 import {createPortal} from "react-dom";
@@ -302,6 +303,7 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
 
 export function CatalogFilters({ initial, facets, resultCount }: { initial: Record<string, string>; facets?: Facets; resultCount?: number }) {
   const dealer=useDealerBrowsing();
+  const selectedCity=useSelectedCity();
   const router = useRouter();
   const [pending,startTransition]=useTransition();
   const submitted=useRef<string|null>(null);
@@ -347,7 +349,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       if(submitted.current===nextQuery)return;
       submitted.current=nextQuery;
       const query=new URLSearchParams(nextQuery);
-      const current=new URLSearchParams(window.location.search);
+      const current=new URLSearchParams(window.location.search);if(current.get("selection")==="1")query.set("selection","1");
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
@@ -387,6 +389,16 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       window.removeEventListener("keydown", escape);
     };
   }, [mobileOpen]);
+
+  useEffect(()=>{
+    if(!dealer)return;
+    const query=new URLSearchParams(catalogQuery(draft,sortKey,sortDirection));if(selectedCity)query.set('city',selectedCity);
+    window.dispatchEvent(new CustomEvent(SELECTION_EVENT,{detail:{dealerId:dealer.id,query:query.toString(),pending:updating,filtersOpen:mobileOpen}}));
+  },[dealer?.id,draft,sortKey,sortDirection,selectedCity,updating,mobileOpen]);
+  useEffect(()=>{
+    const open=(event:Event)=>{if(!dealer||(event as CustomEvent).detail?.dealerId!==dealer.id)return;if(window.matchMedia('(max-width:1023px)').matches)setMobileOpen(true);else{setExpanded(true);document.querySelector('.dealer-shared-catalog .ac-catalog-filter-panel')?.scrollIntoView({block:'center',behavior:'smooth'});}};
+    window.addEventListener(OPEN_SELECTION_FILTERS,open);return()=>window.removeEventListener(OPEN_SELECTION_FILTERS,open);
+  },[dealer?.id]);
 
   const activeFacets = electricOnly && draft.stock !== "green" ? electricFacets || facets : facets;
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
@@ -450,7 +462,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
     submitted.current = nextQuery;
     const query = new URLSearchParams(nextQuery);
     if (city) query.set("city", city);
-    const current = new URLSearchParams(window.location.search);
+    const current = new URLSearchParams(window.location.search);if(current.get("selection")==="1")query.set("selection","1");
     for (const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) {
       const value = current.get(key); if (value) query.set(key,value);
     }

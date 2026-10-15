@@ -5,6 +5,8 @@ export const CITY_CHANGED_EVENT = "avtocena:city-changed";
 export function readSelectedCity() {
  if (typeof window === "undefined") return "";
  try {
+  const query=new URLSearchParams(window.location.search);
+  if(query.get('selection')==='1'&&query.has('city'))return query.get('city')!.trim();
   const cookie = document.cookie.split(";").map(v=>v.trim()).find(v=>v.startsWith("avtocena_city="));
   if (cookie) return decodeURIComponent(cookie.slice("avtocena_city=".length)).trim();
   const stored=localStorage.getItem("avtocena_city");

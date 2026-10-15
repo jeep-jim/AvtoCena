@@ -12,7 +12,7 @@ const browser=await (device==='iphone'?webkit:chromium).launch(device==='iphone'
 try{
  for(const mode of ['native','clipboard','mini','estimate','default','cancel','native-failure']){
   const page=await browser.newPage(device==='iphone'?devices['iPhone 13']:device==='android'?devices['Pixel 5']:{});await page.addInitScript(mode=>{window.calls=[];Object.defineProperty(navigator,'share',{configurable:true,value:['native','estimate','default','cancel','native-failure'].includes(mode)?async x=>{if(mode==='cancel')throw new DOMException('cancel','AbortError');if(mode==='native-failure')throw Error('unsupported');window.calls.push(x)}:undefined});Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async x=>window.calls.push(x)}});},mode);
-  await page.goto(origin+'/cars/offer/old--car?utm_source=test');if(mode==='mini')await page.evaluate(()=>document.documentElement.dataset.miniapp='true');
+  await page.goto(origin+'/cars/offer/old--car?utm_source=test');await page.locator('[data-offer-id]').waitFor();if(mode==='mini')await page.evaluate(()=>document.documentElement.dataset.miniapp='true');
   if(mode==='default')await page.evaluate(()=>delete document.querySelector('[data-offer-id]').dataset.offerSavedVersion);
   if(mode==='estimate')await page.evaluate(()=>{delete document.querySelector('[data-offer-id]').dataset.offerSavedVersion;document.querySelector('.ac-inline-parameters').dataset.shareEstimate='eyJ5ZWFyIjoiMjAyMyJ9';});
   await page.getByRole('button',{name:'Поделиться ссылкой',exact:true}).click();

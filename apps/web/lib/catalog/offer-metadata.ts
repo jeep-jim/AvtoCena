@@ -1,3 +1,4 @@
+import {socialImageUrl} from './social-image';
 import {offerParameterDraft} from './offer-parameter-draft';
 import {sharedOfferScenario} from './shared-offer-scenario';
 import {encodeShareDraft,decodeShareDraft} from './offer-share';
@@ -17,6 +18,7 @@ import {getSpecialOffer} from '../dealers/public-showcase';
 
 type Query={calculation?:string;direct?:string;powerHp?:string;modificationId?:string;preview?:string;estimate?:string;share?:string;dealer?:string};
 function metadata(title:string,description:string,url:string,images:string[],index=true):Metadata {
+ images=images.map(socialImageUrl);
  return {title,description,alternates:{canonical:url},openGraph:{type:'website',title,description,url,images:images.map(url=>({url,alt:title}))},twitter:{card:'summary_large_image',title,description,images},robots:{index,follow:index,'max-image-preview':'large'}};
 }
 export async function generateOfferMetadata({params,searchParams}:{params:Promise<{id:string}>;searchParams?:Promise<Query>}):Promise<Metadata>{

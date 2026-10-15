@@ -1,3 +1,6 @@
+import {renderSocialPhoto} from "@/lib/catalog/photo-rendition";
+import {PhotoMemoryCache} from "@/lib/catalog/photo-memory-cache";
+const socialCache=new PhotoMemoryCache(32*1024*1024);
 import { getJsonStorage } from "@/lib/data";
 import { validDealerId } from "@/lib/dealers/showcase-store";
 export const runtime = "nodejs";
@@ -13,9 +16,11 @@ export async function GET(
       `dealers/showcase-media/${id}/${mediaId}.webp`,
     );
     if (!file) return new Response(null, { status: 404 });
-    return new Response(new Uint8Array(file.data), {
+    const social=new URL(_req.url).searchParams.get('format')==='jpeg';
+    const image=social?await socialCache.read(`https://avtocena.com/api/dealers/${id}/media/${mediaId}`,async()=>({data:await renderSocialPhoto(Buffer.from(file.data)),type:'image/jpeg'}),'social-jpeg'):null;
+    return new Response(new Uint8Array(image?.data||file.data), {
       headers: {
-        "Content-Type": "image/webp",
+        "Content-Type": social?"image/jpeg":"image/webp",
         "Cache-Control": "public,max-age=31536000,immutable",
         "X-Content-Type-Options": "nosniff",
       },

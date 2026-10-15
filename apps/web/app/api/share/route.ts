@@ -17,6 +17,12 @@ export async function POST(request:Request){
   let target;
   try{const data=JSON.parse(body);target=cleanShareTarget(data.path,data.mini);}
   catch{return NextResponse.json({error:'Не удалось подготовить ссылку'},{status:400,headers});}
+  if(target.version===2){
+    const [{getCurrentUser},{canManageDealer},{readShowcase},{availableShowcase}]=await Promise.all([import('@/lib/auth'),import('@/lib/dealers/access'),import('@/lib/dealers/showcase-store'),import('@/lib/dealers/program-store')]);
+    if(!await canManageDealer(await getCurrentUser(),target.dealerId))return NextResponse.json({error:'Подборкой может поделиться команда компании'},{status:403,headers});
+    const stored=await readShowcase(target.dealerId);
+    if(!stored||(await availableShowcase(stored)).profileEnabled!==true)return NextResponse.json({error:'Сначала опубликуйте профиль компании'},{status:404,headers});
+  }
   try{return NextResponse.json({path:await createShortShare(target)},{headers});}
   catch{return NextResponse.json({error:'Не удалось сократить ссылку. Попробуйте ещё раз.'},{status:503,headers});}
 }

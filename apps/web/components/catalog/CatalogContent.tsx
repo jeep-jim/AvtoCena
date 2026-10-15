@@ -1,3 +1,4 @@
+import {DealerGreenCatalog} from "./DealerGreenCatalog";
 import { JapanSectionTabs } from "@/components/catalog/JapanSectionTabs";
 import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 import { filterGreenCorner, greenCornerFacets } from "@/lib/catalog/green-corner-search";
@@ -58,6 +59,7 @@ function pageHref(params: Record<string, string | string[] | undefined>, page: n
 export async function CatalogContent({params={},dealer=null,embedded=false}:{params?:Record<string,string|string[]|undefined>;dealer?:DealerBrowsingContext|null;embedded?:boolean}) {
   const allowedMarkets=dealer?marketOrder.filter(m=>dealer.markets.includes(m.id)):marketOrder;
   if(dealer&&!allowedMarkets.length)return <p className="py-10 text-[var(--ac-muted)]">Компания пока не указала направления доставки.</p>;
+  if(embedded&&dealer?.markets.includes("japan")&&first(params.market)==="japan")return <DealerGreenCatalog params={Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)]))}/>;
   if ((!dealer||dealer.markets.includes("japan")) && first(params.market) === "japan") redirect(`/cars/green?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,first(v)])),...(dealer?{dealer:dealer.id,...(dealer.preview?{preview:"1"}:{})}:{})})}`);
   const requestedMarket = first(params.market).toLowerCase();
   if (requestedMarket && !PUBLIC_CATALOG_MARKET_SET.has(requestedMarket as CatalogMarket)) redirect(dealer?.href || "/cars");

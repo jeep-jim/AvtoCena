@@ -1,3 +1,4 @@
+import {selectionQuery} from '@/lib/dealers/selection-share';
 import {availableShowcase} from '@/lib/dealers/program-store';
 import {CatalogContent} from "@/components/catalog/CatalogContent";
 import {DealerBrowsingProvider} from "@/components/dealers/DealerBrowsingContext";
@@ -40,9 +41,10 @@ export default async function Page({
   searchParams: Promise<Record<string,string|string[]|undefined>>;
 }) {
   let s = await readShowcase((await params).id);
+  const canShareSelection=await canManageDealer(await getCurrentUser(),(await params).id);
   const preview =
     (await searchParams).preview === "1" &&
-    await canManageDealer(await getCurrentUser(),(await params).id);
+    canShareSelection;
   if (!s || (!s.profileEnabled && !preview)) notFound();
   if(!preview)s=await availableShowcase(s);
   if(!s.profileEnabled&&!preview)notFound();
@@ -52,7 +54,7 @@ export default async function Page({
   return (
     <DealerBrowsingProvider dealer={dealer} profile><main className="ac-page-copy min-h-screen bg-[var(--ac-bg)] text-[var(--ac-text)]">
       <PublicHeader backHref="/" backLabel="На главную" />
-      <DealerProfileContent s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} verified={(await findDealer(s.dealerId))?.status==='verified'} />
+      <DealerProfileContent canShareSelection={canShareSelection} initialSelectionQuery={selectionQuery(new URLSearchParams(Object.entries(await searchParams).flatMap(([k,v])=>v?[[k,Array.isArray(v)?v[0]:v]]:[])),false).toString()} s={publicDealerProfile(s)} preview={preview} items={publicRail(s)} catalog={catalog} verified={(await findDealer(s.dealerId))?.status==='verified'} />
     </main></DealerBrowsingProvider>
   );
 }
