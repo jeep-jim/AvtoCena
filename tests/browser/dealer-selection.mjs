@@ -32,7 +32,7 @@ await build({
           contents:
             args.path === "next/dynamic" ? `export default function dynamic(){return ()=>null;}` : args.path === "next/link"
               ? `import React from 'react';export default function Link(props){return React.createElement('a',props)}`
-              : `const navigate=(url)=>{const u=new URL(url,location.origin);if(new URLSearchParams(location.search).has("visitor"))u.searchParams.set("visitor","1");history.pushState({},"",u);window.dispatchEvent(new Event("fixture:navigate"));};const router={push:navigate,replace:navigate,prefetch:()=>{},back:()=>{}};export const usePathname=()=>window.location.pathname;export const useSearchParams=()=>new URLSearchParams(window.location.search);export const useRouter=()=>router;`,
+              : `const navigate=(url)=>{const u=new URL(url,location.origin);if(new URLSearchParams(location.search).has("visitor"))u.searchParams.set("visitor","1");const commit=()=>{history.pushState({},"",u);window.dispatchEvent(new Event("fixture:navigate"));if(window.fixtureDelay)window.scrollTo({top:0,behavior:"instant"});};if(window.fixtureDelay)setTimeout(commit,window.fixtureDelay);else commit();};const router={push:navigate,replace:navigate,prefetch:()=>{},back:()=>{}};export const usePathname=()=>window.location.pathname;export const useSearchParams=()=>new URLSearchParams(window.location.search);export const useRouter=()=>router;`,
           loader: "jsx",
           resolveDir: process.cwd(),
         }));
@@ -73,6 +73,17 @@ try{for(const width of [390,1440]){
  await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='3000000');assert.equal(new URL(page.url()).pathname,'/test/dealer');
  if(width===390){await page.keyboard.press('Escape');await send.waitFor({state:'visible'});assert.ok(await page.evaluate(()=>window.scrollY)>500);}
  await send.click();await page.waitForFunction(()=>window.calls.length===2);assert.equal(new URL(shares.at(-1).path,origin).searchParams.get('budget'),'3000000');await page.evaluate(()=>window.calls.pop());
+ if(width===390){
+  const y=await page.evaluate(()=>{window.scrollTo({top:900,behavior:'instant'});window.fixtureDelay=800;return scrollY;});
+  await page.getByRole('button',{name:'Изменить фильтры подборки'}).click();
+  const sheet=page.getByRole('dialog',{name:'Фильтры каталога'});await sheet.waitFor();
+  await sheet.getByRole('textbox',{name:'Цена: до',exact:true}).fill('3100000');await sheet.getByRole('textbox',{name:'Цена: до',exact:true}).press('Tab');
+  await page.waitForTimeout(250);await sheet.getByRole('button',{name:'Применить фильтры',exact:true}).click();
+  await page.waitForFunction(()=>new URLSearchParams(location.search).get('budget')==='3100000');
+  await page.waitForFunction(y=>Math.abs(scrollY-y)<3,y);console.log(`delayed response after close: restored ${y}px`);
+  await page.evaluate(()=>window.fixtureDelay=0);
+ }
+
  const dockBox=await page.locator('[data-selection-dock]').boundingBox();assert.ok(dockBox&&dockBox.y>=0&&dockBox.y+dockBox.height<=901&&dockBox.x>=-1&&dockBox.x+dockBox.width<=width+1,JSON.stringify(dockBox));
  await page.screenshot({path:`${out}/${width}.png`});
  await page.getByRole('button',{name:'Скрыть панель подборки'}).click();assert.equal(await send.count(),0);if(width===390)assert.equal(await page.locator('.dealer-dock').isVisible(),true);
