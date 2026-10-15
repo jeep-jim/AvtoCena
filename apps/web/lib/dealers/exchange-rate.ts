@@ -1,3 +1,4 @@
+import {withMarketQuotes} from './market-offer-server';
 import {readDataJson,mutateDataJson} from '../data';
 import type {DealerShowcase} from './showcase-model';
 export const DEALER_RATE_SOURCE='https://www.profinance.ru/chart/usdrub/';
@@ -54,6 +55,7 @@ export async function getDealerRate(force=false){
  return state;
 }
 export async function withDealerRate(s:DealerShowcase,refresh=false){
+ if(!refresh)s=await withMarketQuotes(s);
  if(s.pricing.rateMode==='manual'||(refresh&&s.offers.length>0&&s.offers.every(o=>o.availability==='stock')))return s;
  // Public pages read the saved quote immediately. Refresh happens in the editor
  // and scheduled job, so a slow provider cannot delay a visitor's page.

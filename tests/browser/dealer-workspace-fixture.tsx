@@ -30,6 +30,7 @@ if(kind==='preview-hydration'){
  const container=document.getElementById('root')!;
  container.innerHTML=renderToString(preview);
  window.addEventListener('fixture-hydrate',()=>hydrateRoot(container,preview),{once:true});
+}else if(kind==='market-rail'){root.render(<main className="p-4"><SpecialRail heading={s.specialHeading} items={publicRail(s,'Новосибирск','home')} desktopSplit/></main>);
 }else if(kind==='offer'){
  s.name='ТопАвто';
  const stock=q.get('stock')==='1';

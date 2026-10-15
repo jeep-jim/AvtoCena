@@ -39,7 +39,7 @@ export type SpecialRailItem = {
   price: number | null;
   city: string;
   calculation?: {showcase: Parameters<typeof calculateSpecial>[0]; offer: Parameters<typeof calculateSpecial>[1]};
-  availability?: "order" | "stock";
+  availability?: "order" | "stock" | "market";
   condition?: "new" | "used";
   address?: string;
   heading?: string;
@@ -52,16 +52,16 @@ export function SpecialRail({
   items,
   expanded=false,
   desktopSplit=false,
-  kinds=["order","stock"],
+  kinds=["order","stock","market"],
 }: {
   heading: string;
   expanded?: boolean;
   desktopSplit?: boolean;
   items: SpecialRailItem[];
-  kinds?: readonly ("order"|"stock")[];
+  kinds?: readonly ("order"|"stock"|"market")[];
 }) {
   const city=useSelectedCity();
-  const [allKind,setAllKind]=useState<"order"|"stock"|null>(null);
+  const [allKind,setAllKind]=useState<"order"|"stock"|"market"|null>(null);
   items=items.map(item=>{if(!item.calculation)return item;const c=calculateSpecial(item.calculation.showcase,item.calculation.offer,city);return {...item,price:c.totalRub,city:c.city,daysFrom:c.daysFrom,daysTo:c.daysTo};});
   if (!items.length) return null;
   const selected=items.filter(o=>(o.availability||"order")===allKind);
@@ -69,9 +69,9 @@ export function SpecialRail({
   const singleDealer=dealer && selected.every(o=>o.dealer?.id===dealer.id);
   const sheetName=singleDealer?dealer.name:"Предложения дилеров";
   return (
-    <><div className={desktopSplit&&!expanded?"ac-special-rails--split":"contents"}>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section data-site-block={kind==='stock'?'stock':'specials'} key={kind} className="my-5 min-w-0">
+    <><div className={desktopSplit&&!expanded?"ac-special-rails--split":"contents"}>{kinds.map(kind=>{const visible=items.filter(o=>(o.availability||"order")===kind);return visible.length ? <section data-site-block={kind==='market'?'market-orders':kind==='stock'?'stock':'specials'} key={kind} className={`my-5 min-w-0 ${kind==='market'?'col-span-full':''}`}>
       <div className="ac-special-rail-heading flex items-end justify-between gap-3"><h2 className="text-lg font-black leading-tight md:text-2xl">
-        {kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
+        {kind==="market" ? "✨ Новые авто под заказ" : kind==="stock" ? visible[0].heading || "Автомобили в наличии" : heading}
       </h2>{!expanded&&<button type="button" onClick={()=>setAllKind(kind)} className="ac-market-all-link shrink-0 text-sm font-black" aria-label={kind==="stock"?"Все автомобили в наличии":"Все спецпредложения"}>Все →</button>}</div>
       {visible[0].subtitle && visible.every(o=>o.subtitle===visible[0].subtitle&&o.heading===visible[0].heading)&&<p className="mt-1 break-words text-sm leading-relaxed text-[var(--ac-muted)]">{visible[0].subtitle}</p>}
       <DesktopScrollableRail expanded={expanded}>

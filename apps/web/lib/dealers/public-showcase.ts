@@ -53,8 +53,8 @@ export async function specialLeadSnapshot(id: string, city = "") {
     drive: o.drive,
     bodyType: o.body,
     totalRub: c.totalRub,
-    sourcePrice: offerAvailability(o)==="stock" ? o.priceRub : o.priceUsd,
-    sourceCurrency: offerAvailability(o)==="stock" ? "RUB" : "USD",
+    sourcePrice: o.availability==="market"?o.invoice:offerAvailability(o)==="stock" ? o.priceRub : o.priceUsd,
+    sourceCurrency: o.availability==="market"?o.currency:offerAvailability(o)==="stock" ? "RUB" : "USD",
     deliveryQuote: offerAvailability(o)==="stock" ? undefined : {
       version: "dealer-special-v1",
       origin: s.pricing.originCity || "Бишкек",
@@ -90,6 +90,6 @@ export async function homeSpecialRail(city:string,pilot:DealerShowcase|null){
  }));
  const showcases=[...(pilot?[pilot]:[]),...others.filter((s):s is DealerShowcase=>!!s)];
  const selected=selectCityShowcases(showcases,city);
- const priced=await Promise.all(selected.map(s=>(s.specialsEnabled?withDealerRate(s):Promise.resolve(s))));
- return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s,city))};
+ const priced=await Promise.all(selected.map(s=>((s.specialsEnabled||s.marketHomeEnabled)?withDealerRate(s):Promise.resolve(s))));
+ return {heading:priced.length===1?priced[0].specialHeading:'Предложения дилеров',items:priced.flatMap(s=>publicRail(s,city,"home"))};
 }
