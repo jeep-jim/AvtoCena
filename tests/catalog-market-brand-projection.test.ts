@@ -9,7 +9,9 @@ const rows=Array.from({length:260},(_,i)=>({id:`brand-${i}`,market:i%2?'korea':'
  sourceGroup:i%5?'source-a':'source-b',updatedAt:new Date(Date.UTC(2026,8,1,0,i)).toISOString(),
  calculationSnapshot:{currencyRate:{currency:'KRW',sourcePrice:30000000,effectiveRate:.06,rateSource:'cbr',rateDate:'2026-09-19'}}}));
 const queries=[{market:'korea',make:'Nissan',page:2},{market:'china',make:'Nissan',sort:'totalRub'},
- {market:'korea',make:'Nissan',yearFrom:2023},{market:'korea',make:'Nissan',model:'K5'}] as any[];
+ {market:'korea',make:'Nissan',yearFrom:2023},{market:'korea',make:'Nissan',model:'K5'},
+ {market:'korea',make:'Nissan',budgetTo:4000000,city:'Новокузнецк'},
+ {market:'china',make:'Nissan',budgetTo:4000000,city:'Москва'}] as any[];
 function fixture(t:any,available:boolean,generation=()=> 'one') {
  const reads:string[]=[];
  t.mock.method(getJsonStorage(),'readJsonWithMeta',async(file:string,fallback:any)=>{
@@ -43,4 +45,23 @@ test('brand cache is generation-scoped immediately after the shared manifest ref
  assert.equal(reads.filter(p=>p.includes('/projection-brand/')).length,2);
  assert.equal(reads.filter(p=>p.includes('/projection/')).length,0);
  t.mock.restoreAll();resetCatalogReadCachesForTests();
+});
+
+// Exercise the actual projection boundary with deterministic I/O. Pricing is
+// downstream: grouped searches must receive disjoint country inputs there.
+test('six country searches prepare each brand row once, not six times',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const source=readFileSync(new URL('../apps/web/lib/catalog/storage.ts',import.meta.url),'utf8');
+ const start=source.indexOf('async function currentProjectionRows('),end=source.indexOf('/** Small publication summary',start);
+ const implementation=source.slice(start,end).replace('params: CatalogSearchParams = {}','params = {}');
+ const markets=['china','korea','japan','uae','europe','georgia'];
+ const input=markets.flatMap(market=>Array.from({length:5},(_,i)=>({id:market+i,market,make:'Audi'})));
+ let prepared=0;
+ const read=new Function('catalogMakeFilterValues','readManifest','readCurrentBrandProjection','prepareCatalogProjectionRows',implementation+';return currentProjectionRows;')(
+  ()=>['Audi'],async()=>({generationId:'test'}),async()=>({generationId:'test',items:input}), (rows:any[])=>{prepared+=rows.length;return rows;});
+ const results=await Promise.all(markets.map(market=>read({make:'Audi',market,budgetTo:3000000})));
+ assert.equal(prepared,input.length);assert.equal(new Set(results.flatMap(r=>r.rows.map((row:any)=>row.id))).size,input.length);
+ results.forEach((r,i)=>assert.deepEqual(r.rows,input.filter(row=>row.market===markets[i])));
+ assert.deepEqual((await read({make:'Audi'})).rows,input);
+ assert.deepEqual((await read({make:'Audi',market:'any'})).rows,input);
 });

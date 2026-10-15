@@ -933,7 +933,13 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
   if (makes.length) {
     const manifest = await readManifest();
     const parts = await Promise.all(makes.map(make => readCurrentBrandProjection(make, manifest.generationId)));
-    if (parts.every(part=>part.generationId===manifest.generationId)) return {generationId:manifest.generationId,rows:prepareCatalogProjectionRows(parts.flatMap(part=>part.items))};
+    if (parts.every(part=>part.generationId===manifest.generationId)) {
+      // A brand projection spans all countries. Scope it before price replay:
+      // each grouped market must not calculate every other country's cars.
+      const rows=parts.flatMap(part=>part.items);
+      const scoped=params.market && params.market!=="any" ? rows.filter(row=>row.market===params.market) : rows;
+      return {generationId:manifest.generationId,rows:prepareCatalogProjectionRows(scoped)};
+    }
   }
 
   const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;

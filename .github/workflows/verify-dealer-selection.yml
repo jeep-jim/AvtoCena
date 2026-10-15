@@ -31,7 +31,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/dealer-selection-performance.test.ts tests/photo-proxy.test.ts tests/dealer-market-settings.test.ts
+      - run: node --import tsx --import ./tests/helpers/offline-fetch.mjs --test tests/offer-share.test.ts tests/short-share.test.ts tests/dealer-selection-share.test.ts tests/dealer-selection-performance.test.ts tests/catalog-market-brand-projection.test.ts tests/catalog-projection-reuse.test.ts tests/photo-proxy.test.ts tests/dealer-market-settings.test.ts
       - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
