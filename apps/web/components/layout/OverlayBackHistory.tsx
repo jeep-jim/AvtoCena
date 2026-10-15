@@ -85,10 +85,15 @@ export function OverlayBackHistory(){
     queueMicrotask(sync);
    }
   };
+  const navigating=(event:Event)=>{
+   const href=(event as CustomEvent<{href:string}>).detail?.href;
+   if(steps.length&&href&&new URL(href,location.origin).pathname===location.pathname)replacementUrl=location.href;
+  };
+  window.addEventListener('avtocena:catalog-navigation',navigating);
   const observer=new MutationObserver(sync);
   observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['open','hidden','aria-modal','data-back-layer','class','style']});
   window.addEventListener('popstate',pop);sync();
-  return()=>{disposed=true;cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);history.scrollRestoration=originalRestoration;observer.disconnect();window.removeEventListener('popstate',pop);if(history.pushState===push)history.pushState=originalPush;if(history.replaceState===replace)history.replaceState=originalReplace;};
+  return()=>{disposed=true;window.removeEventListener('avtocena:catalog-navigation',navigating);cancelAnimationFrame(restoreFrame);cancelAnimationFrame(restoreSecond);history.scrollRestoration=originalRestoration;observer.disconnect();window.removeEventListener('popstate',pop);if(history.pushState===push)history.pushState=originalPush;if(history.replaceState===replace)history.replaceState=originalReplace;};
  },[]);
  return null;
 }

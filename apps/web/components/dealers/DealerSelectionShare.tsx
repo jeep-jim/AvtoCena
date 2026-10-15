@@ -15,12 +15,12 @@ export function DealerSelectionShare({dealerId,initialQuery=''}:{dealerId:string
   if(inFlight.current)return;inFlight.current=true;setBusy(true);const current=key;
   try{
    let url=prepared.current?.key===current?prepared.current.url:'';
-   if(!url){setStatus('Готовим ссылку…');const response=await fetch('/api/share',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:current,mini:false}),signal:AbortSignal.timeout(12000)});const result=await response.json();if(!response.ok||!/^\/s\/[A-Za-z0-9_-]{16}$/.test(result.path))throw Error(result.error||'Не удалось подготовить ссылку');url=new URL(result.path,location.origin).toString();prepared.current={key:current,url};}
+   if(!url){setStatus('Готовим ссылку…');const response=await fetch('/api/share',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path:current,mini:false}),signal:AbortSignal.timeout(45000)});const result=await response.json();if(!response.ok||!/^\/s\/[A-Za-z0-9_-]{16}$/.test(result.path))throw Error(result.error||'Не удалось подготовить ссылку');url=new URL(result.path,location.origin).toString();prepared.current={key:current,url};}
    if(latest.current!==current){setStatus('Параметры изменились — поделитесь новой подборкой');return;}
    const text=`${SELECTION_TITLE}\n${url}`;
    if(!window.matchMedia('(hover: hover) and (pointer: fine)').matches&&navigator.share){try{await navigator.share({title:SELECTION_TITLE,text});setStatus('');return;}catch(e){if((e as Error).name==='AbortError'){setStatus('');return;}if((e as Error).name==='NotAllowedError'){setStatus('Ссылка готова — нажмите ещё раз');return;}}}
    await navigator.clipboard.writeText(text);setStatus('Ссылка скопирована');
-  }catch(e){setStatus(e instanceof Error?e.message:'Не удалось поделиться подборкой');}finally{inFlight.current=false;setBusy(false);}
+  }catch(e){setStatus(e instanceof Error&&['TimeoutError','AbortError'].includes(e.name)?'Подготовка заняла слишком много времени. Нажмите ещё раз.':e instanceof Error?e.message:'Не удалось поделиться подборкой');}finally{inFlight.current=false;setBusy(false);}
  }
  if(!active)return null;
  return <><nav className="dealer-selection-dock" data-selection-dock hidden={selection.filtersOpen} aria-label="Поделиться подборкой">

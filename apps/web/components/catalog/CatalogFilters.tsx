@@ -1,4 +1,5 @@
 "use client";
+import {rememberFilterScroll,restoreFilterScroll} from "@/lib/catalog/filter-scroll";
 import {SELECTION_EVENT,OPEN_SELECTION_FILTERS} from "@/lib/dealers/selection-share";
 import {SelectedFilterChip} from "./SelectedFilterChip";
 import {StickyCatalogControls} from "./StickyCatalogControls";
@@ -16,7 +17,7 @@ import { CatalogFilterUiEnhancer } from "./CatalogFilterUiEnhancer";
 
 import "./MobileCatalogDropdowns.css";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
 import { CatalogBrandMultiSelect } from "@/components/catalog/CatalogBrandMultiSelect";
@@ -317,6 +318,7 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
   const acknowledgedQuery = useRef(catalogQuery(draftFromInitial(initial), initialSortState.key, initialSortState.direction));
+  useLayoutEffect(()=>restoreFilterScroll(),[initial]);
   // Server HTML can be visible before this component has its event handlers.
   const [interactive, setInteractive] = useState(false);
   useEffect(() => setInteractive(true), []);
@@ -353,7 +355,9 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       const city=readSelectedCity();if(city)query.set("city",city);
       for(const key of ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","yclid"]) { const value=current.get(key); if(value)query.set(key,value); }
       const basePath=draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-      startTransition(()=>router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), { scroll: false }));
+      const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
+      rememberFilterScroll(href);
+      startTransition(()=>router.push(href, { scroll: false }));
     }, 180);
     return () => window.clearTimeout(timer);
   }, [draft, sortKey, sortDirection, formKey, initial, router, mobileOpen]);
@@ -467,7 +471,9 @@ export function CatalogFilters({ initial, facets, resultCount }: { initial: Reco
       const value = current.get(key); if (value) query.set(key,value);
     }
     const basePath = draft.market === "japan" && draft.stock === "green" ? "/cars/green" : "/cars";
-    startTransition(() => router.push(dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer), {scroll:false}));
+    const href=dealerBrowsingHref(query.size ? `${basePath}?${query}` : basePath,dealer);
+    rememberFilterScroll(href);
+    startTransition(() => router.push(href, {scroll:false}));
   };
   const setElectric = (value: string) => { setField("fuel", value); setElectricFacets(null); };
   const chooseSort = (key: SortKey, direction: SortDir) => {
