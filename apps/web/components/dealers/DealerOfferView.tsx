@@ -104,7 +104,7 @@ export function DealerOfferView({editHref,id,s,o,initialCity,preview=false,verif
             <header><p className="text-xs font-black normal-case tracking-normal text-[var(--ac-muted)]">{offerAvailabilityLabel(o)} · {s.name}</p><h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-.04em] md:text-5xl">{title}</h1></header>
             <div className="mt-5 min-w-0 overflow-hidden">
             <VehicleGallery
-              editor={editHref?<a href={editHref} className="ac-catalog-editor-trigger pointer-events-auto absolute right-3 top-3 rounded-xl bg-black/80 px-3 py-2 text-sm font-bold text-white">Редактировать объявление</a>:undefined}
+              editor={editHref?<a href={editHref} style={{color:"#fff"}} className="ac-catalog-editor-trigger pointer-events-auto absolute right-3 top-3 rounded-xl bg-black/80 px-3 py-2 text-sm font-bold">Редактировать объявление</a>:undefined}
               images={o.photos.map((p) => p.url)}
               title={title}
               offerId={id}

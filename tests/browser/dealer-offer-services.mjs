@@ -161,6 +161,7 @@ try {
   for(const stock of ['0','1']){
    await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?stock='+stock+'&staff=1');
    const edit=page.getByRole('link',{name:'Редактировать объявление',exact:true});await edit.waitFor();
+   assert.equal(await edit.evaluate(el=>getComputedStyle(el).color),'rgb(255, 255, 255)');
    await page.screenshot({path:`${out}/${width}-card-${stock}.png`});
    assert.equal(await edit.getAttribute('href'),'/?offer=vehicle');
    await edit.click();await page.getByLabel('Модель',{exact:true}).waitFor();
