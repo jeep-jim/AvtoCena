@@ -35,14 +35,14 @@ jobs:
       - run: node node_modules/typescript/bin/tsc --project apps/web/tsconfig.json --noEmit --incremental false
       - run: npm install --prefix "$RUNNER_TEMP/share-browser" --no-package-lock --ignore-scripts playwright@1.55.0
       - run: node "$RUNNER_TEMP/share-browser/node_modules/playwright/cli.js" install --with-deps webkit
-      - name: Check native sharing, clipboard and mini-app
-        env:
-          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
-        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs
       - name: Check dealer selection on phone and desktop
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
         run: CHROME_BIN=$(command -v google-chrome) node tests/browser/dealer-selection.mjs
+      - name: Check native sharing, clipboard and mini-app
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/share-browser/node_modules/playwright/index.mjs
+        run: CHROME_BIN=$(command -v google-chrome) node tests/browser/offer-share.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
