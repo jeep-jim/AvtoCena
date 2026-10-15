@@ -1,3 +1,4 @@
+import {resolveCatalogMarketConfig} from '../apps/web/lib/catalog/estimated-market-config';
 import test,{mock} from 'node:test';
 import assert from 'node:assert/strict';
 import {defaultShowcase,normalizeShowcase,calculateSpecial,type SpecialOffer} from '../apps/web/lib/dealers/showcase-model';
@@ -48,4 +49,20 @@ test('positions preserve legacy order and survive normalization and concurrent u
  const remote={...s,offers:s.offers.map(o=>o.id==='three'?{...o,color:'Чёрный'}:o)};
  const merged=mergeShowcaseChanges(s,local,remote);assert.deepEqual(merged.conflicts,[]);
  const saved=normalizeShowcase(merged.value,s.dealerId,1);assert.deepEqual(orderedOffers(saved.offers).map(o=>o.id),['two','one','three']);assert.equal(saved.offers[2].color,'Чёрный');
+});
+
+test('departure city survives saving and public rail; only domestic delivery changes',()=>{
+ const s=defaultShowcase('dealer_topavto');s.marketEnabled=true;
+ const o={...car,deliveryOriginCity:'Астрахань'};
+ o.marketQuote={key:marketOfferKey(o),at:new Date().toISOString(),rate:12,input:{marketId:'china',marketConfig:resolveCatalogMarketConfig('china',{percentExpenses:[]}).config,sourcePriceRub:1200000,customsRub:200000,utilizationFeeRub:3400}};
+ s.offers=[o];
+ assert.equal(normalizeShowcase(s,s.dealerId,1).offers[0].deliveryOriginCity,'Астрахань');
+ const first=calculateSpecial(s,o,'Москва'),second=calculateSpecial(s,{...o,deliveryOriginCity:'Санкт-Петербург'},'Москва');
+ assert.ok(first.complete);assert.ok(second.complete);
+ assert.notEqual(first.totalRub,second.totalRub);
+ assert.deepEqual(first.lines.filter(l=>l.id!=='delivery'),second.lines.filter(l=>l.id!=='delivery'));
+ assert.equal(first.lines.reduce((sum,l)=>sum+l.amountRub,0),first.totalRub);
+ const rail=publicRail(s,'Москва')[0];assert.equal(rail.calculation?.offer.deliveryOriginCity,'Астрахань');
+ assert.equal(calculateSpecial(s,{...o,deliveryOriginCity:'Неизвестный город'},'Москва').totalRub,null);
+ const local=calculateSpecial(s,o,'Астрахань');assert.equal(local.lines.find(l=>l.id==='delivery')?.amountRub||0,0);
 });

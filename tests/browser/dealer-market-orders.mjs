@@ -117,6 +117,10 @@ try {
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:1000}});let saved;const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/api/**',async route=>{
+   if(route.request().url().endsWith('/market-quote')){
+    const {offer:o}=route.request().postDataJSON();
+    return route.fulfill({json:{key:JSON.stringify([o.market,o.currency,o.invoice,o.purchaseTotal,o.year,o.productionMonth,o.engineCc,o.powerHp,o.power30MinKw,o.fuel]),at:new Date().toISOString(),rate:85,input:{marketId:o.market,marketConfig:{logisticsRub:100000,topAvtoCommissionRub:90000,securityDepositRub:110000,percentExpenses:[]},sourcePriceRub:o.purchaseTotal*85,customsRub:200000,utilizationFeeRub:3400}}});
+   }
    if(route.request().method()==='PUT'){const {base,...v}=route.request().postDataJSON();saved={...v,version:v.version+1};return route.fulfill({json:saved});}
    return route.fulfill({json:{total:0,items:[],models:[],choices:[]}});
   });
@@ -135,6 +139,10 @@ try {
   await page.getByLabel('Инвойс + расходы в стране покупки',{exact:true}).fill('23000');await priceSaved;
   assert.equal(saved.offers.find(o=>o.id==='market2').invoice,20000);
   assert.equal(saved.offers.find(o=>o.id==='market2').currency,'USD');
+  await page.getByRole('heading',{name:'Структура цены',exact:true}).waitFor();
+  const departureSaved=page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().offers.find(o=>o.id==='market2').deliveryOriginCity==='Астрахань');
+  await page.getByLabel('Город отправки по России',{exact:true}).selectOption('Астрахань');await departureSaved;
+  await page.getByText('Доставка: Астрахань → Новосибирск',{exact:true}).waitFor();
   const toggled=page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().marketHomeEnabled===true);
   await page.getByRole('switch',{name:'Показывать на главной',exact:true}).click();await toggled;
   assert.equal(saved.marketEnabled,true);
@@ -152,6 +160,7 @@ try {
   await page.evaluate(v=>sessionStorage.setItem('fixture-server',JSON.stringify(v)),saved);
   await page.goto(origin+'?offer=market2');
   assert.equal((await page.getByLabel('Инвойс + расходы в стране покупки',{exact:true}).inputValue()).replace(/\s/g,''),'23000');
+  assert.equal(await page.getByLabel('Город отправки по России',{exact:true}).inputValue(),'Астрахань');
   assert.equal(await page.getByRole('button',{name:'Выше',exact:true}).isDisabled(),true);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.evaluate(()=>{const s=JSON.parse(sessionStorage.getItem('fixture-server'));s.offers=s.offers.map(o=>({...o,status:'published'}));sessionStorage.setItem('fixture-server',JSON.stringify(s));});

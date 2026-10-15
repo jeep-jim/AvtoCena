@@ -23,7 +23,7 @@ export function publicRail(s: DealerShowcase, city = "", surface: "profile"|"hom
             price: c.totalRub,
             calculation: offerAvailability(o)!=="stock" ? {
               showcase: {dealerId:s.dealerId, pricing:s.pricing, offices:[]},
-              offer: (({market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
+              offer: (({deliveryOriginCity,market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({deliveryOriginCity,market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
             } : undefined,
             city: c.city,
             daysFrom: c.daysFrom,

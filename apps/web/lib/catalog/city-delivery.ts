@@ -58,7 +58,21 @@ routes["астрахань"] = ["Астрахань", 9700];
 export function normalizeDeliveryCity(value: unknown): string {
  return typeof value === "string" ? value.trim().replace(/^г(?:\.\s*|\s+)/i, "").replace(/\s+/g," ").slice(0,100) : "";
 }
-export function quoteCityDelivery(value: unknown, market?: string) {
+export const DELIVERY_ORIGIN_CITIES = ["Владивосток", "Уссурийск", "Минеральные Воды", "Астрахань", "Санкт-Петербург"] as const;
+export function quoteCityDelivery(value: unknown, market?: string, originCity?: string) {
+ if(originCity){
+  const source = normalizeDeliveryCity(originCity);
+  const originMarket: Record<string,string> = {"Владивосток":"japan","Уссурийск":"china","Минеральные Воды":"georgia","Астрахань":"uae","Санкт-Петербург":"europe"};
+  if(!Object.hasOwn(originMarket,source))return {...quoteCityDelivery(value,market),origin:source,amountRub:0,distanceKm:null,status:"needs_quote" as const};
+  const quote=quoteCityDelivery(value,originMarket[source]);
+  if(source===quote.city)return {...quote,origin:source,amountRub:0,distanceKm:0,status:"estimated" as const};
+  if(source==='Уссурийск'&&quote.distanceKm!==null){
+   const distanceKm=Math.abs(quote.distanceKm-100);
+   const anchor=['Новосибирск','Новокузнецк'].includes(quote.city);
+   return {...quote,origin:source,distanceKm,amountRub:anchor?quote.amountRub:Math.max(15000,Math.round((130000*distanceKm/6000)/5000)*5000)};
+  }
+  return {...quote,origin:source};
+ }
  const city = normalizeDeliveryCity(value);
  const entry = market && Object.hasOwn(origins,market) ? origins[market] : undefined;
  const base = {version:DELIVERY_TARIFF_VERSION,origin:market === "china" ? "Уссурийск" : entry?.city || "Владивосток",city,amountRub:0,distanceKm:null as number|null,estimated:true};
