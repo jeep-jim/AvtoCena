@@ -157,7 +157,7 @@ try {
   await page.goto(origin+'?offer=stock');
   await page.getByLabel('Модель',{exact:true}).waitFor();
   assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'stock');
-  assert.equal(await page.getByRole('tab',{name:'Автомобили в наличии',exact:true}).getAttribute('aria-selected'),'true');
+  assert.equal(await page.getByRole('tab',{name:'В наличии',exact:true}).getAttribute('aria-selected'),'true');
   for(const stock of ['0','1']){
    await page.goto(origin+'/cars/offer/special_dealer_topavto__vehicle?stock='+stock+'&staff=1');
    const edit=page.getByRole('link',{name:'Редактировать объявление',exact:true});await edit.waitFor();

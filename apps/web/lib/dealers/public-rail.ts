@@ -1,10 +1,11 @@
+import {orderedOffers} from './market-offer';
 import {dealerProfilePath} from "./profile-url";
 import {publicDealerText} from './public-profile';
 import {calculateSpecial,offerAvailability,offerSectionEnabled,offerSectionHeading,offerSectionSubtitle,specialPath,specialTitle,type DealerShowcase} from './showcase-model';
-export function publicRail(s: DealerShowcase, city = "") {
-  return (s.specialsEnabled || s.stockEnabled)
-    ? s.offers
-        .filter((o) => o.status === "published" && offerSectionEnabled(s,o))
+export function publicRail(s: DealerShowcase, city = "", surface: "profile"|"home" = "profile") {
+  return (s.specialsEnabled || s.stockEnabled || s.marketEnabled || s.marketHomeEnabled)
+    ? orderedOffers(s.offers)
+        .filter((o) => o.status === "published" && offerSectionEnabled(s,o) && (o.availability!=="market" || (surface==="home" ? s.marketHomeEnabled : s.marketEnabled)))
         .map((o) => {
           const c = calculateSpecial(s, o, city);
           return {
@@ -20,9 +21,9 @@ export function publicRail(s: DealerShowcase, city = "") {
             image: o.photos[0]?.url || "",
             title: specialTitle(o),
             price: c.totalRub,
-            calculation: offerAvailability(o)==="order" ? {
+            calculation: offerAvailability(o)!=="stock" ? {
               showcase: {dealerId:s.dealerId, pricing:s.pricing, offices:[]},
-              offer: (({servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
+              offer: (({market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity})=>({market,currency,invoice,purchaseTotal,marketQuote,servicesOverride,availability,officeId,year,productionMonth,priceRub,priceUsd,customsIncluded,customsExtraRub,fuel,powerHp,power30MinKw,engineCc,personalUseEligible,defaultCity}))(o),
             } : undefined,
             city: c.city,
             daysFrom: c.daysFrom,

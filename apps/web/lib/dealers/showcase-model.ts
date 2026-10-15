@@ -1,3 +1,4 @@
+import {calculateMarketOffer,type MarketQuote} from './market-offer';
 import {MAX_MANUAL_OFFER_PHOTOS} from './photo-limits';
 import {videoReview} from './video-review';
 import {TOPAVTO_DEALER} from '../topavto-dealer';
@@ -31,8 +32,14 @@ export type DeliveryTariff = {
 };
 export type OfferServices = { deliveryMarkupRub: number; commissionRub: number; documentsRub: number };
 export type SpecialOffer = {
+  market?: DealerMarket;
+  currency?: string;
+  invoice?: number;
+  purchaseTotal?: number;
+  marketQuote?: MarketQuote;
+  position?: number;
   servicesOverride?: OfferServices | null;
-  availability?: "order" | "stock";
+  availability?: "order" | "stock" | "market";
   condition?: "new" | "used";
   priceRub?: number;
   officeId?: string;
@@ -75,6 +82,8 @@ export type DealerShowcase = {
   servicePricing?: DealerServicePricing;
   buyersEnabled: boolean;
   specialsEnabled: boolean;
+  marketEnabled?: boolean;
+  marketHomeEnabled?: boolean;
   stockEnabled?: boolean;
   stockHeading?: string;
   stockSubtitleEnabled?: boolean;
@@ -178,19 +187,20 @@ export function parseSpecialId(value: string) {
 export function specialPath(dealerId: string, id: string) {
   return `/cars/offer/${specialOfferId(dealerId, id)}`;
 }
-export type OfferAvailability = "order" | "stock";
-export const offerAvailability = (o: Pick<SpecialOffer,"availability">): OfferAvailability => o.availability === "stock" ? "stock" : "order";
+export type OfferAvailability = "order" | "stock" | "market";
+export const offerAvailability = (o: Pick<SpecialOffer,"availability">): OfferAvailability => o.availability === "stock" ? "stock" : o.availability === "market" ? "market" : "order";
 export const offerAvailabilityLabel = (o: SpecialOffer) => offerAvailability(o) === "stock" ? "В наличии" : "Под заказ";
-export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled">, o: SpecialOffer) => offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
-export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
-export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
-export type SpecialCalculationOffer = Pick<SpecialOffer, "servicesOverride" | "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
+export const offerSectionEnabled = (s: Pick<DealerShowcase,"stockEnabled"|"specialsEnabled"|"marketEnabled"|"marketHomeEnabled">, o: SpecialOffer) => offerAvailability(o) === "market" ? !!(s.marketEnabled || s.marketHomeEnabled) : offerAvailability(o) === "stock" ? s.stockEnabled === true : s.specialsEnabled;
+export const offerSectionSubtitle = (s: DealerShowcase, kind: OfferAvailability) => kind === "market" ? "" : (kind === "stock" ? s.stockSubtitleEnabled === true ? s.stockSubtitle : "" : s.specialSubtitleEnabled === true ? s.specialSubtitle : "") || "";
+export const offerSectionHeading = (s: DealerShowcase, kind: OfferAvailability) => kind === "market" ? "✨ Новые авто под заказ" : kind === "stock" ? s.stockHeading || "Автомобили в наличии" : s.specialHeading;
+export type SpecialCalculationOffer = Pick<SpecialOffer, "market" | "currency" | "invoice" | "purchaseTotal" | "marketQuote" | "servicesOverride" | "availability" | "officeId" | "year" | "productionMonth" | "priceRub" | "priceUsd" | "customsIncluded" | "customsExtraRub" | "fuel" | "powerHp" | "power30MinKw" | "engineCc" | "personalUseEligible" | "defaultCity">;
 export function calculateSpecial(
   s: Pick<DealerShowcase,"pricing"|"offices"|"dealerId">,
   o: SpecialCalculationOffer,
   city = (s.pricing.distancePricing?o.defaultCity:"") || s.pricing.baseCity || (s.dealerId===PILOT_DEALER_ID?"Новосибирск":o.defaultCity),
   now = new Date(),
 ) {
+  if (offerAvailability(o) === "market") return calculateMarketOffer(o,city,now);
   if (offerAvailability(o) === "stock") {
     const office=s.offices.find(item=>item.id===o.officeId);
     const errors:string[]=[];
@@ -379,6 +389,8 @@ export function normalizeShowcase(
     buyersEnabled: raw.buyersEnabled === true,
     specialsEnabled: raw.specialsEnabled === true,
     stockEnabled: raw.stockEnabled === true,
+    marketEnabled: raw.marketEnabled === true,
+    marketHomeEnabled: raw.marketHomeEnabled === true,
     stockSubtitleEnabled: raw.stockSubtitleEnabled === true,
     stockSubtitle: text(raw.stockSubtitle,70),
     specialSubtitleEnabled: raw.specialSubtitleEnabled === true,
@@ -454,12 +466,17 @@ export function normalizeShowcase(
       throw Error("Неверный идентификатор автомобиля");
     return {
       id: o.id,
+      position: number(o.position ?? 0,0,1000000),
+      market: DEALER_MARKETS.find(m=>m.id===o.market)?.id,
+      currency: ['JPY','CNY','KRW','USD','EUR','AED','GEL'].includes(o.currency) ? o.currency : undefined,
+      invoice: number(o.invoice ?? 0,0,1e12),
+      purchaseTotal: number(o.purchaseTotal ?? 0,0,1e12),
       servicesOverride: o.servicesOverride == null ? null : {
         deliveryMarkupRub: number(o.servicesOverride.deliveryMarkupRub, 0, 1e7),
         commissionRub: number(o.servicesOverride.commissionRub, 0, 1e7),
         documentsRub: number(o.servicesOverride.documentsRub, 0, 1e7),
       },
-      availability: o.availability === "stock" ? "stock" : "order",
+      availability: o.availability === "stock" ? "stock" : o.availability === "market" ? "market" : "order",
       condition: o.availability === "stock" && o.condition === "used" ? "used" : "new",
       priceRub: number(o.priceRub ?? 0,0,1e9),
       officeId: text(o.officeId,80),
@@ -506,7 +523,7 @@ export function normalizeShowcase(
     const missing=specialPublicationFields(o);
     if(missing.length)throw Error(`Заполните характеристики и фото: ${specialTitle(o)||"новый автомобиль"}. Не хватает: ${missing.join(", ")}`);
     const c = calculateSpecial(s, o);
-    if (offerSectionEnabled(s,o) && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
+    if (offerAvailability(o)!=="market" && offerSectionEnabled(s,o) && !c.complete) throw Error(`${specialTitle(o)}: ${c.errors.join(". ")}`);
   }
   if(new Set(s.extraBanners?.map(b=>b.id)).size!==s.extraBanners?.length)throw Error("Баннеры не должны повторяться");
   return s;
@@ -514,5 +531,5 @@ export function normalizeShowcase(
 
 /** Shared completeness checklist; pricing rules remain in calculateSpecial. */
 export function specialPublicationFields(o:SpecialOffer):string[]{
- return [!o.make&&'марка',!o.model&&'модель',!o.photos.length&&'фотографии',!o.year&&'год выпуска',(offerAvailability(o)==='order'&&!o.productionMonth)&&'месяц производства',!o.transmission&&'коробка передач',!o.drive&&'привод',!o.body&&'кузов',!o.color&&'цвет',(!o.engineCc&&o.fuel!=='electric')&&'объём двигателя',!o.powerHp&&'мощность'].filter(Boolean) as string[];
+ return [!o.make&&'марка',!o.model&&'модель',!o.photos.length&&'фотографии',!o.year&&'год выпуска',(offerAvailability(o)!=='stock'&&!o.productionMonth)&&'месяц производства',!o.transmission&&'коробка передач',!o.drive&&'привод',!o.body&&'кузов',!o.color&&'цвет',(!o.engineCc&&o.fuel!=='electric')&&'объём двигателя',!o.powerHp&&'мощность'].filter(Boolean) as string[];
 }

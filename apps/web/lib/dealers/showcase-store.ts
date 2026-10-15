@@ -1,3 +1,4 @@
+import {withMarketQuotes} from './market-offer-server';
 import {DetailReadCache} from "../catalog/detail-read-cache";
 import {normalizeSiteControls,type SiteControls} from '../site-controls';
 import {normalizeAccountAppearance, withAccountMediaDefaults, type AccountAppearance} from '../account-appearance';
@@ -53,7 +54,8 @@ export async function saveShowcase(id:string,raw:any){
    if(merged.conflicts.length)throw new ShowcaseConflict(current,merged.value);
    candidate=merged.value;
   }
-  saved=normalizeShowcase(candidate,id,current.version+1);
+  saved=await withMarketQuotes(normalizeShowcase(candidate,id,current.version+1));
+  for(const o of saved.offers)if(o.availability==='market'&&o.status==='published'&&o.marketQuote?.error)throw Error(o.marketQuote.error);
   const url=dealerProfilePath(saved);
   if(!url.startsWith('/dealers/'))await mutateDataJson<Record<string,string>>('dealers/profile-links.json',{},index=>{
    if(index[url]&&index[url]!==id)throw Error("Эта ссылка уже занята другим дилером");

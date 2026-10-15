@@ -46,7 +46,7 @@ export default async function Page({
   if (!s || (!s.profileEnabled && !preview)) notFound();
   if(!preview)s=await availableShowcase(s);
   if(!s.profileEnabled&&!preview)notFound();
-  if(s.specialsEnabled)s=await withDealerRate(s);
+  if(s.specialsEnabled||s.marketEnabled)s=await withDealerRate(s);
   const dealer=await resolveDealerBrowsingContext(s.dealerId,preview);
   const catalog=s.catalogMarkets.length&&dealer?<CatalogContent params={await searchParams} dealer={dealer} embedded/>:null;
   return (

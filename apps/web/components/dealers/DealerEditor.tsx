@@ -1,4 +1,5 @@
 "use client";
+import {orderedOffers} from '@/lib/dealers/market-offer';
 import {OfficeAddress} from "./OfficeAddress";
 import {DealerReviewsManager} from "./DealerReviewsManager";
 import {DealerTelegramSettings} from './DealerTelegramSettings';
@@ -108,7 +109,7 @@ export function DealerEditor({
     window.addEventListener('beforeunload',warn);
     return()=>window.removeEventListener('beforeunload',warn);
   },[demo,dirty]);
-  const modeOffers=s.offers.filter(o=>offerAvailability(o)===offerMode);
+  const modeOffers=orderedOffers(s.offers.filter(o=>offerAvailability(o)===offerMode));
   const active=modeOffers.find(o=>o.id===activeId)||modeOffers[0];
   const quote=active?calculateSpecial(s,active):null;
 
@@ -431,7 +432,7 @@ export function DealerEditor({
          <p className="text-sm text-[var(--ac-muted)]">{[active.year&&`${active.year} г.`,active.engineCc&&`${active.engineCc} см³`,active.powerHp&&`${active.powerHp} л.с.`,quote?.city].filter(Boolean).join(' · ')}</p>
          <p className="ac-price ac-price--down text-2xl font-black">{quote?.totalRub?`${quote.totalRub.toLocaleString('ru-RU')} ₽`:'Цена не заполнена'}</p>
          {offerMode==='stock'&&<p className="text-sm text-[var(--ac-muted)]">{s.offices.find(o=>o.id===active.officeId)?.address||'Выберите адрес автомобиля'}</p>}
-         {quote?.complete?(offerMode==='order'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
+         {quote?.complete?(offerMode!=='stock'&&quote.lines.map(line=><div key={line.id} className="flex justify-between gap-3 text-xs"><span>{line.title}</span><strong className="whitespace-nowrap">{line.amountRub.toLocaleString('ru-RU')} ₽</strong></div>)):<ul className="list-inside list-disc space-y-1 text-xs text-[var(--ac-muted)]">{quote?.errors.map(error=><li key={error}>{error}</li>)}</ul>}
          {specialPublicationFields(active).length>0&&<p className="text-xs text-[var(--ac-muted)]">Для публикации: {specialPublicationFields(active).join(', ')}.</p>}
         </section>}
 

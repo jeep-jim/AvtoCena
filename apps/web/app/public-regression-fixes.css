@@ -415,3 +415,5 @@ html[data-theme="light"] [data-site-block="stock"] .ac-special-card .ac-price { 
 @media(min-width:1024px) { .ac-special-rails--split .ac-special-card-status { min-height:16px; } }
 .ac-catalog-editor-trigger { color:#fff!important; background:rgba(0,0,0,.82)!important; }
 .ac-catalog-editor-form .ac-catalog-editor-actions { position:sticky; bottom:-16px; padding:12px 0; background:var(--ac-surface); }
+
+@media(min-width:1024px) { .ac-special-rails--split [data-site-block="market-orders"] .ac-special-rail-track { grid-auto-columns:calc((100% - 80px) / 6); } }

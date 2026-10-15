@@ -178,7 +178,7 @@ async function routeRequest(request: NextRequest) {
     return denyOrRedirect(request);
   }
 
-  if (session?.role === "dealer" && /^\/api\/crm\/dealers\/[a-zA-Z0-9_-]+\/(showcase|media)$/.test(pathname)) return NextResponse.next();
+  if (session?.role === "dealer" && /^\/api\/crm\/dealers\/[a-zA-Z0-9_-]+\/(showcase|media|market-quote)$/.test(pathname)) return NextResponse.next();
   // The handler verifies dealer approval, workspace and client ownership.
   if (session?.role === "dealer" && pathname === "/api/crm/customer-access") return NextResponse.next();
   if (pathname === "/crm" || pathname.startsWith("/crm/") || pathname.startsWith("/api/crm")) {
