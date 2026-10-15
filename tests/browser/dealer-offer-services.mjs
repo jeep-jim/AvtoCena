@@ -117,9 +117,10 @@ try {
  for(const width of [390,1440]) {
   const page=await browser.newPage({viewport:{width,height:1000}});
   let saved;
+  page.on('pageerror',e=>console.log('PAGE_ERROR',e.message));
   await page.route('**/api/**',async route=>{
    if(route.request().method()==='PUT') {
-    const {base,...value}=route.request().postDataJSON();saved={...value,version:value.version+1};
+    const {base,...value}=route.request().postDataJSON();saved={...value,version:value.version+1};console.log('SAVE',JSON.stringify(saved.offers?.map(o=>({id:o.id,servicesOverride:o.servicesOverride}))),saved.pricing?.commissionRub);
     return route.fulfill({json:saved});
    }
    return route.fulfill({json:{total:0,items:[]}});
@@ -134,21 +135,25 @@ try {
   assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'vehicle');
   const toggle=page.getByRole('switch',{name:'Применить только к этому авто',exact:true});
   await toggle.click();
+  const customSaved=page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON()?.offers?.find(o=>o.id==='vehicle')?.servicesOverride?.commissionRub===12345);
   await page.getByLabel('Комиссия, ₽',{exact:true}).fill('12345');
-  await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().offers[1].servicesOverride?.commissionRub===12345);
+  await page.screenshot({path:`${out}/${width}-before-save.png`});
+  console.log('FORM',await toggle.getAttribute('aria-checked'),await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue());
+  await customSaved;
   assert.equal(saved.pricing.commissionRub,140000);
   assert.equal(saved.offers[0].servicesOverride,undefined);
   await page.evaluate(value=>sessionStorage.setItem('fixture-server',JSON.stringify(value)),saved);
   await page.reload();
   await toggle.waitFor();assert.equal(await toggle.getAttribute('aria-checked'),'true');
-  assert.equal(await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue(),'12345');
+  assert.equal((await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue()).replace(/\s/g,''),'12345');
   await toggle.scrollIntoViewIfNeeded();
   await page.screenshot({path:`${out}/${width}-services.png`});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await toggle.click();
-  assert.equal(await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue(),'140000');
+  assert.equal((await page.getByLabel('Комиссия, ₽',{exact:true}).inputValue()).replace(/\s/g,''),'140000');
   await page.waitForResponse(r=>r.request().method()==='PUT'&&r.request().postDataJSON().offers[1].servicesOverride===null);
   await page.goto(origin+'?offer=stock');
+  await page.getByLabel('Модель',{exact:true}).waitFor();
   assert.equal(await page.getByLabel('Модель',{exact:true}).inputValue(),'stock');
   assert.equal(await page.getByRole('tab',{name:'Автомобили в наличии',exact:true}).getAttribute('aria-selected'),'true');
   for(const stock of ['0','1']){
