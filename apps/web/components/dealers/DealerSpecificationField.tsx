@@ -1,6 +1,9 @@
 'use client';
 
-import {Field, input} from './DealerEditorFields';
+import {useRef, useState} from 'react';
+import {ChevronDown} from 'lucide-react';
+import {input} from './DealerEditorFields';
+import {DealerNumericInput} from './DealerNumericInput';
 
 export const specificationChoices = {
   drive: ['Передний', 'Задний', 'Полный'],
@@ -17,14 +20,40 @@ export function DealerSpecificationField({name, label, value, invalid, onChange}
   invalid?: boolean;
   onChange: (value: string | number) => void;
 }) {
-  return <div className="grid content-start gap-1">
-    <Field label={label} value={value} type={name === 'engineCc' ? 'number' : 'text'} invalid={invalid} onChange={onChange}/>
-    <select className={`${input} min-h-11`} aria-label={`Выбрать вариант: ${label}`} value="" onChange={event => {
-      if (event.target.value) onChange(name === 'engineCc' ? Number(event.target.value) : event.target.value);
+  const [manual, setManual] = useState(false);
+  const select = useRef<HTMLSelectElement>(null);
+  const selected = name === 'engineCc' && !Number(value) ? '' : String(value);
+  const choices: readonly string[] = specificationChoices[name];
+  const custom = selected !== '' && !choices.includes(selected);
+  const showChoices = () => {
+    setManual(false);
+    requestAnimationFrame(() => select.current?.focus());
+  };
+  return <label className="grid content-start gap-1 text-sm" onBlur={event => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setManual(false);
+  }}>
+    {label}
+    {manual ? <span className="relative block" onKeyDown={event => {
+      if (event.key === 'Enter' || event.key === 'Escape') {
+        event.preventDefault();
+        showChoices();
+      }
     }}>
-      <option value="" disabled>Выбрать вариант</option>
-      {specificationChoices[name].map(choice => <option key={choice} value={choice}>{choice}{name === 'engineCc' ? ' см³' : ''}</option>)}
-    </select>
-    <span className="text-xs text-[var(--ac-muted)]">Можно вписать своё значение в поле выше.</span>
-  </div>;
+      {name === 'engineCc'
+        ? <DealerNumericInput autoFocus aria-invalid={invalid || undefined} className={`${input} pr-11`} value={value} onValueChange={onChange}/>
+        : <input autoFocus aria-invalid={invalid || undefined} className={`${input} pr-11`} value={value} onChange={event => onChange(event.target.value)}/>}
+      <button type="button" className="absolute inset-y-0 right-0 flex w-11 items-center justify-center rounded-r-xl" aria-label={`Выбрать из списка: ${label}`} onMouseDown={event => event.preventDefault()} onClick={showChoices}>
+        <ChevronDown size={16} aria-hidden="true"/>
+      </button>
+    </span> : <select ref={select} className={input} aria-invalid={invalid || undefined} value={selected} onChange={event => {
+      const next = event.target.value;
+      if (next === '__manual__') { setManual(true); return; }
+      onChange(name === 'engineCc' ? Number(next) : next);
+    }}>
+      <option value="">Не указан{ name === 'transmission' ? 'а' : ''}</option>
+      {custom && <option value={selected}>{selected}{name === 'engineCc' ? ' см³' : ''}</option>}
+      {choices.map(choice => <option key={choice} value={choice}>{choice}{name === 'engineCc' ? ' см³' : ''}</option>)}
+      <option value="__manual__">Другое…</option>
+    </select>}
+  </label>;
 }
