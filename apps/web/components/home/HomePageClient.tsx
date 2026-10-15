@@ -5,7 +5,7 @@ import { GreenCornerRail } from "@/components/catalog/GreenCornerRail";
 import { formatCatalogCount } from "@/lib/catalog/count-format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 const StableCatalogCard = memo(CatalogCard);
@@ -29,6 +29,7 @@ type Item = { raw: any; id: string; make: string; model: string; market: string;
 type Props = {
   dealerGallery?: string[];
   specialRail?: {heading:string;items:SpecialRailItem[]};
+  japanAuctions?: ReactNode;
   initialGreen?: {items:any[];total:number};
   initialCity?: string;
   initialOffers?: any[];
@@ -220,7 +221,7 @@ function CatalogLoadingSkeleton() {
   </div>;
 }
 
-export default function HomePageClient({ dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
+export default function HomePageClient({ japanAuctions, dealerGallery = buyers, specialRail, initialGreen = {items:[],total:0}, initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
@@ -357,6 +358,7 @@ export default function HomePageClient({ dealerGallery = buyers, specialRail, in
         </section>
       </div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black normal-case tracking-normal text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl">Авто под заказ</h2></div></div>
+        {(!catalogMarket || catalogMarket === "japan") && !catalogMake && !electricOnly && japanAuctions && <div className="mt-7">{japanAuctions}</div>}
         {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { if(group.id === "japan")return !catalogMake && !electricOnly ? <GreenCornerRail key="green" {...initialGreen} /> : null; const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <div key={group.id}><section><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {formatCatalogCount(electricOnly ? group.total : marketCounts[group.id] || group.total)}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-5 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className="min-w-0"><StableCatalogCard offer={item.raw} dense /></div>)}</div></section></div>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>

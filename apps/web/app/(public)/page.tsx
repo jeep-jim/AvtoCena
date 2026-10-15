@@ -1,3 +1,5 @@
+import {Suspense} from 'react';
+import {AjesRail} from '@/components/catalog/AjesRail';
 import {WEBSITE_SCHEMA} from '@/lib/catalog/search-metadata';
 import {DealerCitySync} from "@/components/dealers/DealerCitySync";
 import {readShowcase} from "@/lib/dealers/showcase-store";
@@ -72,6 +74,7 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
     <DealerCitySync/>
     <div className={styles.scope}>
       <HomePageClient
+        japanAuctions={<Suspense fallback={null}><AjesRail/></Suspense>}
         dealerGallery={dealer ? (dealer.buyersEnabled ? dealer.buyerPhotos.map(p=>p.url) : []) : undefined}
         specialRail={specialRail}
         initialGreen={{items:greenItems,total:green?.items.length || 0}}
