@@ -48,6 +48,15 @@ test('wrong detail identity, oversized response and invalid JSON fail closed',as
     await assert.rejects(client.read({id:'test123'},'127.0.0.1'),/ajes_(identity_mismatch|invalid_response|response_too_large)/);
   }
 });
+test('supplier bot refusal never exposes echoed credentials or substitutes visitor IP',async()=>{
+  let calls=0;
+  const client=createAjesClient({password:()=> 'test-secret',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async url=>{
+    calls++;assert.equal(new URL(String(url)).searchParams.get('ip'),'203.0.113.9');
+    return new Response('bot2 us'+'test-secret');
+  }});
+  await assert.rejects(client.read({},'203.0.113.9'),e=>String(e)==='Error: ajes_visitor_restricted');
+  assert.equal(calls,1);
+});
 test('gzip wrapper and already decoded fetch responses both work with bounded decompression',async()=>{
   for(const body of [gzipSync(JSON.stringify([row])),Buffer.from(JSON.stringify([row]))]){
     const client=createAjesClient({password:()=> 'test',assertEnabled:async()=>{},reserve:async()=>{},fetcher:async(url)=>{assert.equal(new URL(String(url)).pathname,'/gzip/');return new Response(body);}});

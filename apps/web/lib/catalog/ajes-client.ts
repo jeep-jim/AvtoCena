@@ -39,8 +39,12 @@ export function createAjesClient(deps:Dependencies) {
             // Node fetch usually decompresses Content-Encoding automatically. The
             // provider can also return a gzip body without that header: inspect magic.
             const decoded=body[0]===0x1f&&body[1]===0x8b?gunzipSync(body,{maxOutputLength:2*1024*1024}):body;
+            // The provider returns a short plaintext bot refusal containing the
+            // API password for some visitor addresses. Classify it without ever
+            // retaining/logging its contents or replacing the visitor address.
+            if(decoded.length<=256&&/^bot\d*\s/i.test(decoded.toString('utf8')))throw new AjesUnavailable('visitor_restricted');
             rows=JSON.parse(decoded.toString('utf8'));
-          }catch{throw new AjesUnavailable('invalid_response');}
+          }catch(error){if(error instanceof AjesUnavailable)throw error;throw new AjesUnavailable('invalid_response');}
           if(!Array.isArray(rows)||rows.length>query.pageSize||rows.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new AjesUnavailable('invalid_response');
           if(query.kind==='detail'&&rows.some(r=>r.ID!==query.id))throw new AjesUnavailable('identity_mismatch');
           const items=rows.map(r=>ajesLot(r,query.table,query.kind==='detail')).filter(Boolean);
